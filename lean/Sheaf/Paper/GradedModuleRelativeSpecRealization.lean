@@ -11,11 +11,12 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
-import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.Paper.GradedModuleQuasicoherentRealization
+import Sheaf.Paper.GradedModuleRealizationFiniteType
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
+import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Relative-spectrum realization of a finite-type graded module
 
@@ -29,6 +30,21 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
+
+private theorem finitePresentation_of_quasicoherent_finiteType
+    (Y : Scheme.{u}) [IsLocallyNoetherian Y] (F : Y.Modules)
+    (hq : F.IsQuasicoherent) (ht : F.IsFiniteType) : F.IsFinitePresentation := by
+  have hc := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y F).mpr
+    ⟨hq, ht⟩
+  have hfp (U : Y.affineOpens) : (F.over U.1).IsFinitePresentation := by
+    have := IsLocallyNoetherian.component_noetherian U
+    have := Scheme.Modules.coherent_affine_sections_finite Y F hc U.1 U.2
+    have hp := Module.finitePresentation_of_finite Γ(Y, U.1) Γ(F, U.1)
+    exact (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} Y).2 F hq).1 U.1 U.2).2.mpr hp
+  exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _ F
+    Y.affineOpens (fun U ↦ U.1) (by
+      rw [Opens.coversTop_iff]
+      exact iSup_affineOpens_eq_top Y) hfp
 
 /-- Realize a finite-type graded module on the base-changed scheme, before taking cohomology.
 
@@ -102,6 +118,16 @@ theorem gradedModule_relativeSpec_realization
             mu m k b ≫ iota (m + k) = iota m ≫
               (Scheme.Modules.pushforward pi).map
                 (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val)) := by
-  sorry
+  dsimp only
+  obtain ⟨F, hF, iota, hcol, hcompat⟩ := gradedModule_quasicoherent_realization
+    graded hgrading hunit hmul hscalar f G hG mu hmu_add hmu_mul hmu_scalar
+  have ht := gradedModule_realization_isFiniteType graded f G mu hfinite
+    F hF iota hcol hcompat
+  have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing A B
+  have : IsLocallyNoetherian (pullback f
+      (Spec.map (CommRingCat.ofHom (algebraMap A B)))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd f _)
+  exact ⟨F, hF, finitePresentation_of_quasicoherent_finiteType _ F hF ht,
+    iota, hcol, hcompat⟩
 
 end AlgebraicGeometry

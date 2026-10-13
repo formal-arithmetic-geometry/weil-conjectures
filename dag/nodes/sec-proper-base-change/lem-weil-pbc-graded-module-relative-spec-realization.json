@@ -18,50 +18,58 @@
  ],
  "proof": [
   {
-   "text": "On an affine open Spec C of X, extend the homogeneous action by finite sums to sum_m G_m(U) over C tensor_A B. The internal grading makes the extension unique. hmu_add, hmu_mul and hmu_scalar give additivity, multiplication and unit. Quasi-coherence and localization of direct sums make restrictions compatible, giving a quasi-coherent module over the pulled-back algebra sheaf.",
+   "text": "Apply gradedModule_quasicoherent_realization to the internal grading, quasi-coherent summands and the three action laws. It gives F, quasi-coherence, the homogeneous inclusions, the coproduct condition and the multiplication compatibility, without using finite type.",
    "uses": [
-    "pqf-def-coherent",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-graded-module-quasicoherent-realization"
    ],
    "elementary": false
   },
   {
-   "text": "Relative-spec base change identifies the relative spectrum of the pulled-back algebra sheaf with Y. The affine module correspondence realizes the constructed algebra module as pi_*F. The homogeneous coproduct inclusions iota have the coproduct universal property after restriction of scalars. Multiplication by fB^sharp(b) on F restricts on the degree-m inclusion to mu m k b, proving the displayed square.",
+   "text": "Apply gradedModule_realization_isFiniteType to the same G, mu and hfinite and the obtained F/iota/coproduct/compatibility. This proves finite type of this particular F rather than choosing a different realization.",
    "uses": [
-    "lem-weil-pbc-relative-spec-base-change",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-affine-module-correspondence"
+    "lem-weil-pbc-graded-module-realization-finite-type"
    ],
    "elementary": false
   },
   {
-   "text": "The local generators in hfinite generate the algebra module: homogeneous sections are locally in their span and a section of a sheaf coproduct is locally a finite sum of homogeneous sections. The affine finite-type correspondence makes F finite type. B is Noetherian and Y locally Noetherian by proper base change and finite type. Quasi-coherent finite-type modules on a locally Noetherian scheme are coherent, hence finitely presented: on affine opens finite modules over Noetherian rings have finitely generated relation modules, and these finite presentations cover Y.",
+   "text": "Finite type of B over Noetherian A makes B Noetherian. Proper base change gives properness, hence locally finite type, of fB. Apply LocallyOfFiniteType.isLocallyNoetherian to fB over Spec B, obtaining local Noetherianness of Y.",
    "uses": [
-    "lem-weil-pbc-affine-module-finite-type",
-    "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "pqf-lem-coherent-ft-locnoeth"
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private helper finitePresentation_of_quasicoherent_finiteType first obtains coherence from quasi-coherence and finite type. Coherent affine sections are finite. Each affine coordinate ring is Noetherian, so Module.finitePresentation_of_finite makes those sections finitely presented. The affine finite-presentation criterion supplies finite presentation of F.over U on every affine open, and SheafOfModules.IsFinitePresentation.of_coversTop glues these over iSup_affineOpens_eq_top. Assemble F, its original homogeneous inclusions and the three already obtained properties into the unchanged conclusion.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-weil-pbc-module-finite-type-presentation",
+    "pqf-def-locnoeth"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-relative-spec-base-change",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-affine-module-correspondence",
-  "lem-weil-pbc-affine-module-finite-type",
-  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-graded-module-quasicoherent-realization",
+  "lem-weil-pbc-graded-module-realization-finite-type",
   "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-lem-coherent-ft-locnoeth"
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "def-weil-pbc-module-finite-type-presentation",
+  "pqf-def-locnoeth"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0897, lemma-graded-finiteness, relative-spectrum construction and finite-type paragraph, lines 5267--5292; pinned Stacks commit a04446e57ec1fbc252a871afcec7752fb2807b14"
+  "place": "Tag 0897: quasi-coherent realization and finite generation split off; local Noetherianness and finite presentation proved in Lean using Tag 01XZ and the affine criterion."
  },
  "mathlib_searches": [
   {
@@ -159,12 +167,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T232142-L-1993482",
+  "landing": "20261013T011937-L-2766910",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

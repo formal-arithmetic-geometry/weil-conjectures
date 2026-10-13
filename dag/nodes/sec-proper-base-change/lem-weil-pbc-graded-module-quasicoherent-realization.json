@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-graded-module-quasicoherent-realization",
+ "kind": "statement",
+ "title": "Quasi-coherent geometric realization of a graded action without finiteness assumptions",
+ "statement": "Let $A$ be a commutative ring and $B=\\bigoplus_{k\\ge0}B_k$ a commutative graded $A$-algebra (the $B_k$ are $A$-submodules with $B_kB_l\\subseteq B_{k+l}$ and $1\\in B_0$, the structure map $A\\to B$ landing in $B_0$). Let $f:X\\to\\operatorname{Spec}A$ be any morphism of schemes [def-pc-scheme], and write $f^\\sharp(a)\\in\\Gamma(X,\\mathcal O_X)$ for the image of $a\\in A$. Let $(\\mathcal G_m)_{m\\ge0}$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], and for all $k,m\\ge0$ and $b\\in B_k$ let $\\mu^{(m)}_b:\\mathcal G_m\\to\\mathcal G_{m+k}$ be an $\\mathcal O_X$-linear map [def-weil-sheaf-of-modules-category], such that: (i) $\\mu^{(m)}_{b+b'}=\\mu^{(m)}_b+\\mu^{(m)}_{b'}$ for $b,b'\\in B_k$; (ii) $\\mu^{(m+l)}_b\\circ\\mu^{(m)}_{b'}=\\mu^{(m)}_{bb'}$ for $b\\in B_k$, $b'\\in B_l$; (iii) for $a\\in A$ with image $a\\cdot1\\in B_0$, $\\mu^{(m)}_{a\\cdot1}$ is multiplication by $f^\\sharp(a)$ on $\\mathcal G_m$. Put $g=\\operatorname{Spec}(A\\to B)$, $Y=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$, $\\pi:Y\\to X$ and $f_B:Y\\to\\operatorname{Spec}B$. Then there exists a quasi-coherent $\\mathcal O_Y$-module $F$ and maps $\\iota_m:G_m\\to\\pi_*F$ exhibiting $\\pi_*F$ as their coproduct in $\\mathcal O_X$-modules [def-weil-pbc-category-colimit], with $\\mu^{(m)}_b$ followed by $\\iota_{m+k}$ equal to $\\iota_m$ followed by the pushforward of multiplication by $f_B^\\sharp(b)$ on $F$, for every $k,m$ and $b\\in B_k$. There is no finite-type or finite-presentation conclusion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0897, lemma-graded-finiteness, relative-spectrum construction and finite-type paragraph, lines 5267--5292; pinned Stacks commit a04446e57ec1fbc252a871afcec7752fb2807b14"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Form the sheaf coproduct of the G_m; it is quasi-coherent by coproduct closure. On an affine U = Spec C, the tilde equivalence and its preservation of coproducts identify its section module with the algebraic direct sum of G_m(U). For b = sum_k b_k and t = sum_m t_m define b t = sum_(k,m) mu^(m)_(b_k)(t_m). Both sums have finite support. The internal grading makes the b_k unique. Additivity gives additivity in b and t. The multiplication law identifies the (k,l,m) terms in b(b't) and (bb')t after reindexing. The scalar law with a = 1 gives 1t = t, and with general a gives the balancing relation between the A-actions. O_X-linearity of each mu makes the B-action commute with C. Thus the action extends to C tensor_A B.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a basic open in U, quasi-coherence identifies the summands with their localized C-modules. Tensor localization commutes with coproducts by its left-adjoint universal property. Naturality of mu identifies each localized homogeneous action with the restricted action. Hence the C tensor_A B module structures commute with restriction. Refine the intersections of affine opens by basic affine opens; the restriction identities and the sheaf gluing axiom give a sheaf module over the pulled-back algebra. Its underlying O_X-module is the original quasi-coherent coproduct.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Relative-spec base change identifies the pulled-back algebra with pi_* O_Y and Y with its relative spectrum. Use the affine module correspondence for pi to realize the algebra module as pi_*F, with F quasi-coherent. Transport the homogeneous inclusions through this algebra-linear isomorphism. Restriction of scalars recovers the coproduct universal property. On each affine U the transported image of the m-th summand multiplied by fB^sharp(b) is exactly the transported image of mu m k b, by the defining action formula. Equality of sheaf maps is tested on this cover, giving the global compatibility equation.",
+   "uses": [
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-module-correspondence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-module-correspondence",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Explication of Tag 0897 relative-spectrum construction and finite-type paragraph; source read online at https://stacks.math.columbia.edu/tag/0897; original pinned .tex is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent graded sheaf module is the pushforward of a quasi coherent module on the base change by the graded algebra",
+   "results": "SheafOfModules.QuasicoherentData.I; SheafOfModules.QuasicoherentData; SheafOfModules.isQuasicoherent; SheafOfModules.IsQuasicoherent; SheafOfModules.QuasicoherentData.X; ModuleCat.tilde; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.over",
+   "date": "2026-10-12",
+   "digest": "6cce4e17d9d765fe",
+   "verdict": "No matching theorem; returned declarations concern general sheaf infrastructure or different scheme constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*sheaf|sheaf.*graded|relative.*spec",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-12",
+   "digest": "fd10ad5bc31366d3",
+   "verdict": "No matching theorem; returned declarations concern general sheaf infrastructure or different scheme constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent graded module with a homogeneous algebra action is realized on the base change of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GradedModuleRelativeSpecRealization",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0897(1) relative-spectrum argument: realize the finite-type graded module before taking cohomology; steps 1--3 of lem-weil-pbc-graded-cohomology-module-finite; realization before cohomology, with no finiteness hypotheses",
+   "via": [
+    "lem-weil-pbc-graded-module-relative-spec-realization",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GradedModuleQuasicoherentRealization",
+  "file": "lean/Sheaf/Paper/GradedModuleQuasicoherentRealization.lean",
+  "declaration": "AlgebraicGeometry.gradedModule_quasicoherent_realization",
+  "statement": "theorem gradedModule_quasicoherent_realization\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    (graded : ℕ → Submodule A B)\n    (hgrading : DirectSum.IsInternal graded)\n    (hunit : (1 : B) ∈ graded 0)\n    (hmul : ∀ (k l : ℕ) {x y : B}, x ∈ graded k → y ∈ graded l → x * y ∈ graded (k + l))\n    (hscalar : ∀ (a : A), algebraMap A B a ∈ graded 0)\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A))\n    (G : ℕ → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (hG : ∀ m : ℕ, (G m).IsQuasicoherent)\n    (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)))\n    (hmu_add : ∀ (m k : ℕ) (b b' : graded k),\n      mu m k (b + b') = mu m k b + mu m k b')\n    (hmu_mul : ∀ (m k l : ℕ) (b : graded k) (b' : graded l),\n      HEq (mu m l b' ≫ mu (m + l) k b)\n        (mu m (k + l) ⟨b.val * b'.val, hmul k l b.property b'.property⟩))\n    (hmu_scalar : ∀ (m : ℕ) (a : A) (U : X.Opens)\n      (t : (G m).val.obj (op U)),\n      HEq ((mu m 0 ⟨algebraMap A B a, hscalar a⟩).val.app (op U) t)\n        ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n          (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t))\n    :\n    let g := Spec.map (CommRingCat.ofHom (algebraMap A B))\n    let Y := pullback f g\n    let pi : Y ⟶ X := pullback.fst f g\n    let fB : Y ⟶ Spec (.of B) := pullback.snd f g\n    ∃ (F : Y.Modules), F.IsQuasicoherent ∧\n      ∃ (iota : ∀ m : ℕ, G m ⟶ (Scheme.Modules.pushforward pi).obj F),\n        Nonempty (IsColimit (Cofan.mk ((Scheme.Modules.pushforward pi).obj F) iota)) ∧\n          ∀ (k m : ℕ) (b : graded k),\n            mu m k b ≫ iota (m + k) = iota m ≫\n              (Scheme.Modules.pushforward pi).map\n                (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T011937-L-2766910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T011937-L-2766910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
