@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
+import Sheaf.RepresentationTheory.LocallyConstantCochainsStructure
+import Sheaf.RepresentationTheory.LocallyConstantCochainsDegreewiseExact
 
 
 /-!
@@ -70,6 +72,22 @@ theorem exists_locallyConstantCochains_exact
           letI := a
           ∀ (S : ShortComplex A), S.ShortExact → ∀ n : ℕ,
             ((S.map C).map (HomologicalComplex.eval
-              AddCommGrpCat.{max u s} (ComplexShape.up ℕ) n)).ShortExact := by sorry
+              AddCommGrpCat.{max u s} (ComplexShape.up ℕ) n)).ShortExact := by
+  obtain ⟨C, e, hm, hd⟩ := exists_locallyConstantCochains_structure G A E
+  have : E.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have ha : C.Additive := by
+    constructor
+    intro M N f h
+    ext n x
+    apply (e N n).injective
+    ext g
+    change e N n (((C.map (f + h)).f n) x) g =
+      e N n (((C.map f).f n) x + ((C.map h).f n) x) g
+    simp only [map_add, LocallyConstant.add_apply]
+    rw [hm, hm, hm]
+    rw [Functor.map_add]
+    rfl
+  let := ha
+  exact ⟨C, e, hm, hd, ha, locallyConstantCochains_degreewise_exact G A E C e hm⟩
 
 end Rep

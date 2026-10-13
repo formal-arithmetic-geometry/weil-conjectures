@@ -13,20 +13,33 @@
  ],
  "proof": [
   {
-   "text": "Give LC(G^n,E(M)) its pointwise additive group structure. Precomposition by\nprojections and adjacent multiplication preserves local constancy. For the action face,\na locally constant cochain has finitely many values since G^n is compact. Intersect the\nopen stabilizers of these values: on each fiber and a sufficiently small coset the action\nface is constant. Thus the displayed sum is a locally constant additive differential.\nThe face identities pair each summand in d squared with its negative, so d squared is\nzero, including n=0. Equivariant coefficient maps commute with the action and the other\nfaces, hence give chain maps; identity, composition and addition hold pointwise.\nUse these actual terms and differentials to construct C and take identity coordinate\nmaps, transporting along E. Equivalences preserve short exact sequences. Kernels and\ncokernels of discrete representations are the underlying module kernels and cokernels:\nsubmodules inherit open stabilizers and quotient stabilizers contain those of lifts.\nA locally constant cochain on compact G^n has finite image and clopen fibers. Choose a\nlift of each image value through a coefficient surjection and use it on that fiber.\nThis is a locally constant lift. The kernel equation is pointwise, proving exactness\nand monicity of the first map in every degree. No finiteness of the ring is used.",
+   "text": "Obtain the functor and additive coordinates with the coefficient-map and differential formulas from [lem-sc-locally-constant-cochains-structure].",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "lem-sc-locally-constant-cochains-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence E preserves binary products and zero morphisms, hence is additive by Functor.additive_of_preserves_binary_products. To show C is additive, compare C(f+h) and C(f)+C(h) degreewise on each x. Apply the injective coordinate equivalence e and evaluate at each tuple g. Its additivity and the coefficient-map formula reduce the equation to additivity of E on f and h. This is the extensionality proof in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "With the proved additive instance, apply [lem-sc-locally-constant-cochains-degreewise-exact] to these coordinates and the coefficient-map equation. Combine the construction formulas, additivity and degreewise exactness into the required existential statement.",
+   "uses": [
+    "lem-sc-locally-constant-cochains-degreewise-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category"
+  "lem-sc-locally-constant-cochains-structure",
+  "lem-sc-locally-constant-cochains-degreewise-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG and the parent node proof, specialized to integer coefficients."
+  "place": "Tag 0DVG; F4 stage-3 decomposition of construction and pointwise exactness, with additivity proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -101,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T011925-L-2762594",
+  "landing": "20261013T022413-L-3213047",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

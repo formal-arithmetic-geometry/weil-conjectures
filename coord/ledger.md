@@ -10656,3 +10656,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/F2/Sheaf.CategoryTheory.FiniteCoconeWeakMaps (stage 3; reviewer PASS; first push; landing 20261013T022412-L-3212499 (interface); batch 20261013T022404; modules 3; new nodes 2)
 - 02:24 L: merged deliver/F2/Sheaf.RingTheory.FlatAssociatedPrimeDVR (stage 3; reviewer PASS; first push; landing 20261013T022412-L-3212729 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/F4/Sheaf.AlgebraicGeometry.CoherentHomsOverOpen (stage 3; reviewer PASS; first push; landing 20261013T022413-L-3212910 (proof); batch 20261013T022404; modules 1; new nodes 0)
+- 02:24 L: merged deliver/F4/Sheaf.RepresentationTheory.LocallyConstantCochainsExact (stage 3; reviewer PASS; first push; landing 20261013T022413-L-3213047 (interface); batch 20261013T022404; modules 3; new nodes 2)

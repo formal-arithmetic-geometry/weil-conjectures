@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-locally-constant-cochains-structure",
+ "kind": "statement",
+ "title": "Construction of locally constant integer cochains",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group in universe $u$, $\\mathcal A$ an abelian category [def-sp-abelian], and $E:\\mathcal A\\simeq\\operatorname{DiscreteContinuousRep}_{\\mathbb Z}(G)$ [def-exc-discrete-modules-category] with carrier universe $\\max(u,s)$. There exist a functor $C:\\mathcal A\\to\\operatorname{CochainComplex}(\\operatorname{Ab}_{\\max(u,s)},\\mathbb N)$ and additive equivalences $e_{M,n}:C(M)^n\\simeq\\operatorname{LC}(G^n,E(M))$. Under these coordinates $C(f)^n$ is postcomposition with $E(f)$, and $d^nc(g)=g_0c(g_1,\\ldots,g_n)+\\sum_{k=0}^n(-1)^{k+1}c(\\operatorname{contract}_k(g))$, where contract multiplies adjacent entries for $k<n$ and drops the last entry for $k=n$. Here LC denotes locally constant functions. This statement makes no assertion of additivity of C or preservation of short exact sequences.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and paragraph on short exact sequences of discrete modules; https://stacks.math.columbia.edu/tag/0DVG read directly."
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Take degree n to be the additive group of locally constant functions\nfrom G^n to the carrier of E(M). Define the differential by the formula below.\nThe non-action faces preserve local constancy by continuous precomposition\nwith the projections and adjacent multiplication maps. For the action face,\nfix a point (g_0,t). The cochain is constant with value m near t. On the open\ncoset g_0 Stab(m), the action on m is constant, so this face is locally constant.\nAll faces are additive in the coefficient, and so is their signed sum.\nNumber the action face 0, the multiplication faces 1 through n, and the final\nomission face n+1. The usual face relation pairs compositions of faces in the\nsquare of the differential, with the two signs differing by a minus sign.\nFor two internal faces the relation is associativity or commutation of\nmerges of disjoint pairs; at the first face it is the action law; at the\nlast face it is the compatibility of omission with the other faces.\nThese exhaust the pairs, so the square vanishes. At n=0 this also follows\nby expanding d(g acting on m minus m) and applying the action law.\nThese additive maps and their square-zero relation define the complex.\nPostcompose cochains with E(f). Equivariance gives commutation with the\naction face, and additivity gives commutation with the signed sum, hence\nthese are complex morphisms. Identity and composition hold pointwise.\nThis defines the functor C on A; take identity additive coordinates e.\nThe two required equations are then the definitions of the maps and\nof the differential. This construction does not assert exactness.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG; the pointwise verification is supplied by F4 from the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*[Cc]ochain|[Cc]ochain.*[Ll]ocallyConstant",
+   "results": "No matching declarations.",
+   "date": "2026-10-13",
+   "verdict": "No exact statement: the group-cohomology hit allows arbitrary functions and the topological-cohomology hits use a different category. LocallyConstant.map is useful for pointwise lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant cochains on a compact topological group form an additive degreewise exact cochain complex functor",
+   "results": "Actual hits: ContinuousCohomology.homogeneousCochains, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, ContinuousCohomology.MultiInd.complex, groupCohomology.map_cochainsFunctor_shortExact, continuousCohomology, Profinite.NobelingProof.succ_exact, ContinuousCohomology.MultiInd.d, groupCohomology.mapShortComplex₁_exact",
+   "date": "2026-10-13",
+   "verdict": "No exact statement: the group-cohomology hit allows arbitrary functions and the topological-cohomology hits use a different category. LocallyConstant.map is useful for pointwise lifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant",
+   "results": "Actual hits: LocallyConstant, LocallyConstant.const, LocallyConstant.toFun, LocallyConstant.Simps.apply, LocallyConstant.instFunLike, LocallyConstant.instInhabited, LocallyConstant.flip, LocallyConstant.map",
+   "date": "2026-10-13",
+   "verdict": "No exact statement: the group-cohomology hit allows arbitrary functions and the topological-cohomology hits use a different category. LocallyConstant.map is useful for pointwise lifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant cochains preserve short exact sequences of discrete representations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.LocallyConstantCochainsExact",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-locally-constant-cochains-exact",
+   "place": "Construction and differential part of its sole proof step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsStructure",
+  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsStructure.lean",
+  "declaration": "Rep.exists_locallyConstantCochains_structure",
+  "statement": "theorem exists_locallyConstantCochains_structure (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Category.{w} A] [Abelian A] (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G) : ∃ C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ, ∃ e : ∀ (M : A) (n : ℕ), (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V, (∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G), e N n (((C.map f).f n) x) g = (E.functor.map f).hom.hom (e M n x g)) ∧ (∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G), e M (n + 1) (((C.obj M).d n (n + 1)) x) g = (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T022413-L-3213047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T022413-L-3213047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
