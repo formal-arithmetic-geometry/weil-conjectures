@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnderivedModel
+import Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelFactorization
 
 /-! # Invertibility of the affine unit mate on K-flat tilde models
 
@@ -79,6 +79,27 @@ theorem affineExtensionSections_model_mate_isIso
     IsIso (((affineDerivedExtensionAdjunction g).homEquiv _ _).symm
       ((affineDerivedGlobalSections (𝟙 (Spec R))).map
           ((canonicalPullbackAdjunction g).unit.app Q) ≫
-        r.hom.app ((derivedPullback g).obj Q))) := by sorry
+        r.hom.app ((derivedPullback g).obj Q))) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  classical
+  have hT : (@id (ModuleCat.{u} R ⥤
+      SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
+        (tilde.functor R)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have hE : (ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).left_adjoint_additive
+  have hP : (@id (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
+        (Scheme.Modules.tensorPullback g)).Additive :=
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).left_adjoint_additive
+  obtain ⟨c, hc⟩ := exists_affineExtensionSections_underived_model g v hv
+  obtain ⟨a, b, hab⟩ := @exists_affineExtensionSections_model_factorization _ _ R B g v r hr
+    c.hom hc hT hE hP M hM
+  have : IsIso ((c.hom.mapHomologicalComplex (.up ℤ)).app M) := by
+    change IsIso (((NatIso.mapHomologicalComplex c (.up ℤ)).app M).hom)
+    infer_instance
+  have : IsIso (DerivedCategory.Q.map ((c.hom.mapHomologicalComplex (.up ℤ)).app M)) := by
+    infer_instance
+  exact IsIso.of_isIso_fac_right hab
 
 end AlgebraicGeometry

@@ -1,0 +1,127 @@
+{
+ "id": "new-affine-extension-sections-underived-model",
+ "kind": "statement",
+ "title": "Ordinary affine extension and sections comparison with normalized unit",
+ "statement": "Let R and B be commutative rings, g:Spec B to Spec R an affine scheme morphism, and v:g_* Gamma_R ≅ Gamma_B restrictScalars(rho), with rho the canonical coordinate ring map and v the identity on sections [def-pc-affine-global-hom-base-change-map]. Write T_R,T_B for associated sheaf and P for the tensor pullback [lem-weil-pbc-affine-tilde-gamma-adjunction, lem-pc-module-pullback-adjunction]. There is a natural isomorphism c:T_R Gamma_R extendScalars(rho) ≅ T_R P Gamma_B whose transpose at every R-module N is Gamma_R of the fixed tensor-pullback unit at T_R(N), followed by v. The complete unit equation is in lean.statement. No derived category, complex, boundedness or flatness hypothesis is used in the assertion.",
+ "stmt_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I9, affine pullback/associated-module formula, via the tilde adjunction; Mathlib CategoryTheory/Adjunction/Unique.lean, unit_leftAdjointUniq_hom_app"
+ },
+ "proof": [
+  {
+   "text": "Let br:T_R ⊣ Gamma_R and bb:T_B ⊣ Gamma_B be the tilde adjunctions. Their units are invertible because associated sheaf is fully faithful. Compose br with the fixed tensor pullback adjunction p and transport its right adjoint by v to obtain a1:T_R P ⊣ Gamma_B S. Compose extension/restriction e with bb to obtain a2:E T_B ⊣ Gamma_B S.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib Adjunction.leftAdjointUniq to form theta:a2.left ≅ a1.left. Define c_N to be E of the inverse of br.unit_N, followed by bb.unit at E(N), followed by Gamma_B(theta_N). Whiskering these natural isomorphisms gives the natural isomorphism c. The equation unit_leftAdjointUniq_hom_app says eta_E(N) S(eta_B(E(N))) S Gamma_B(theta_N)=eta_R(N) Gamma_R(eta_P(T_R(N))) v. Naturality of eta_E for inverse eta_R(N) identifies the transpose of c_N with inverse eta_R(N) followed by this equation; cancel inverse eta_R(N) eta_R(N). This proves exactly the claimed unit equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I9, affine pullback/associated-module formula, via the tilde adjunction; Mathlib CategoryTheory/Adjunction/Unique.lean, unit_leftAdjointUniq_hom_app; explicit categorical unit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ordinary affine tilde and sections comparison with scalar extension respects the tensor pullback adjunction units",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme pullback associated sheaf scalar extension global sections compatible adjunction units",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.pullbackSpecIso_hom_base; AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; AlgebraicGeometry.pullbackSpecIso_hom_fst'; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc; AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact affine normalized model comparison; generic tools used in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-13",
+   "verdict": "No exact affine normalized model comparison; generic tools used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq|derivedη_fac_app|derivedε_fac_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact affine normalized model comparison; generic tools used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelMate",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 affine extension and sections unit argument: Ordinary affine extension and sections comparison with normalized unit",
+   "via": [
+    "lem-pc-affine-extension-sections-model-mate",
+    "lem-pc-affine-extension-sections-unit",
+    "lem-pc-affine-sections-base-change-mate",
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnderivedModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineExtensionSectionsUnderivedModel.lean",
+  "declaration": "AlgebraicGeometry.exists_affineExtensionSections_underived_model",
+  "statement": "theorem exists_affineExtensionSections_underived_model\n    {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)\n    (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙\n        affineGlobalSections (𝟙 (Spec R)) ≅\n      affineGlobalSections (𝟙 (Spec B)) ⋙\n        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))\n    (_hv : ∀ (N : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))\n      (x : (affineGlobalSections (𝟙 (Spec B))).obj N), (v.hom.app N) x = x) :\n    ∃ c : (@id (ModuleCat.{u} R ⥤\n        SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n        (tilde.functor R)) ⋙ affineGlobalSections (𝟙 (Spec R)) ⋙\n        ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g) ≅\n      (@id (ModuleCat.{u} R ⥤\n        SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n        (tilde.functor R)) ⋙ (@id (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))\n        (Scheme.Modules.tensorPullback g)) ⋙\n        affineGlobalSections (𝟙 (Spec B)),\n      ∀ N : ModuleCat.{u} R,\n        (ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).unit.app\n            ((affineGlobalSections (𝟙 (Spec R))).obj ((tilde.functor R).obj N)) ≫\n          (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).map (c.hom.app N) =\n        (affineGlobalSections (𝟙 (Spec R))).map\n            ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app\n              ((tilde.functor R).obj N)) ≫\n          v.hom.app ((Scheme.Modules.tensorPullback g).obj ((tilde.functor R).obj N))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T130348-L-3951920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T130348-L-3951920",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

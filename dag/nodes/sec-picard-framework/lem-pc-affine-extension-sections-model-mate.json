@@ -15,37 +15,35 @@
  },
  "proof": [
   {
-   "text": "Tilde of the given K-flat module complex is K-flat. The affine pullback formula identifies Lg*Q(tilde M) with Q(tilde(B tensor_R M)), naturally on K-flat models.",
+   "text": "Use the fixed extension/restriction and tensor-pullback adjunctions to supply additivity. Construct the natural ordinary affine model isomorphism c with its extension/pullback unit equation.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Applying derived sections over B recovers the module scalar-extension complex by the affine derived equivalence. On complexes, the extension/restriction unit corresponds under tilde and sections to the tensor pullback/direct-image unit. Descend this equality through localization, using the fixed derived units and counits.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
+    "new-affine-extension-sections-underived-model",
     "def-pc-affine-global-hom-base-change-map"
    ],
    "elementary": false
   },
   {
-   "text": "The identity on sections for v identifies the ordinary comparison. The normalization hr identifies r with its derived lift by the right-derived universal property. Uniqueness of left adjoints to the fixed derived restriction functor identifies the fixed extension adjunction; its unit-compatible isomorphism is invertible. Therefore the transpose is the comparison isomorphism on the K-flat models.",
+   "text": "Apply the derived model factorization to c.hom and its unit equation, obtaining isomorphisms a,b and n b=a Q(c_M).",
    "uses": [
-    "def-pc-affine-global-hom-base-change-map"
+    "new-affine-extension-sections-model-factorization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Since c is a natural isomorphism, its termwise complex map and its localization Q(c_M) are invertible. The right side a Q(c_M) is invertible. Cancel the invertible b on the right using IsIso.of_isIso_fac_right to prove that n is invertible.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-affine-qcoh-derived-equivalence",
+  "new-affine-extension-sections-underived-model",
+  "new-affine-extension-sections-model-factorization",
   "def-pc-affine-global-hom-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 06Z0, 08DV, 08DW and 0AA7: affine model computation and extension/restriction adjunct; explicit formal specialization and localization argument"
+  "place": "Tags 06Z0, 08DW and 0AA7; ordinary unit comparison followed by the K-flat derived factorization and cancellation"
  },
  "blueprint": {
   "is": null,
@@ -118,9 +116,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T113352-L-3187179",
-  "kind": "interface"
+  "landing": "20261013T130348-L-3951920",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
