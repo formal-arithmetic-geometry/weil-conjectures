@@ -16,26 +16,26 @@
  ],
  "proof": [
   {
-   "text": "Take the upper tail J above i₀ and its full inclusion F. A common upper bound of i₀ and any original index proves finality; nonemptiness and directedness follow directly.",
+   "text": "Take J = {i : I // i₀ ≤ i} with its induced preorder and let F be the monotone inclusion. A common upper bound proves directedness and gives a morphism from each original object to an object of J. Functor.final_of_exists_of_isFiltered proves finality; the parallel-arrow condition is immediate because a preorder category is thin.",
    "uses": [
     "lem-weil-pbc-colimit-initial-full-subcategory"
    ],
    "elementary": false
   },
   {
-   "text": "For j in J let A_j be the entrywise image of A₀ under the transition ring map and Q_j = B(Fj)^n / range(A_j.toLin'). Ring maps induce additive semilinear coordinate maps and preserve the relation submodules, giving quotient transition maps. The map f after entrywise κ kills all relations by hA and exactness, giving the cocone ν. Identity, composition and naturality follow on quotient representatives.",
+   "text": "For j in J let A_j be the entrywise transition image of A₀ and Q_j = B(Fj)^n / range(A_j.toLin'). The private coordinates_matrix lemma shows that the semilinear coordinate map intertwines the matrix maps. The private presentationLift definition uses Submodule.liftQ to descend f composed with coordinate change; exactness kills the relations. Apply it to the quotient projections to define transitions and to the given presentation to define the cocone legs. Ring-functor composition and cocone naturality imply equality of these maps on coordinate representatives; surjectivity of quotient projection then proves functor and cocone laws. Semilinearity proves both scalar compatibility clauses.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The classes of the standard coordinate vectors generate Q_j. A finite-type integer algebra is countable, as a quotient of a polynomial ring in finitely many variables over ℤ. Its finite powers and their quotients are countable and hence small in Type v. Transport Q_j and all maps and module actions through actual Shrink equivalences. This constructs small stage objects rather than choosing arbitrary witnesses of unproved existence.",
+   "text": "Finite powers and their quotients are finite modules. Algebra.FiniteType.small over ℤ directly proves that every B(Fj) is Small in universe v. Module.Finite.small proves Q_j is Small in v. Let D_j = Shrink.{v} Q_j and transport transitions and legs using the actual linear equivalences E_j : D_j ≃ₗ Q_j. The maps p_j = E_j.symm composed with quotient projection are surjective; their representative formulas establish all transported identities. The Module.Finite instance on Shrink proves finiteness.",
    "uses": [
     "def-weil-finitely-generated-module"
    ],
    "elementary": true
   },
   {
-   "text": "Tensor the presentations with B(Fj) or S. Tensor right exactness and the finite-product tensor equivalence identify them with the transported matrices. Over a later stage the resulting quotient is Q_j; over S exactness of g,f identifies it with M. The induced linear equivalences have the required pure-tensor formula, which is preserved by the small-model transports.",
+   "text": "The private presentation_baseChange lemma applies IsBaseChange.of_right_exact to the source quotient presentation and a target finite free presentation. The vertical free-module coordinate maps are base changes by IsBaseChange.linearMap and IsBaseChange.finitePow; coordinates_matrix establishes the matrix square, and the quotient representative formula establishes the quotient square. Tensor right exactness therefore proves the induced quotient map is base change. Apply this first to p_j and its matrix presentation for each transition, and then to f,g over S for each cocone leg. IsBaseChange.comp_equiv transports the source through E_i or E_j. IsBaseChange.equiv and equiv_tmul provide precisely the required linear equivalences and pure-tensor formulas.",
    "uses": [
     "lem-weil-pbc-tensor-right-exact",
     "lem-weil-pbc-tensor-finite-product"
@@ -142,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T100010-L-2464147",
-  "kind": "interface",
+  "landing": "20261013T111944-L-3070511",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
