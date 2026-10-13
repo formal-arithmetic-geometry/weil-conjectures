@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-open-restricted-counit-compatibility",
+ "kind": "statement",
+ "title": "Open restricted composition respects the specified derived pullback counit",
+ "statement": "For any scheme map g′:X′→X, open U⊂X, complex P and derived categories on all schemes, let p,q be the projections of T=X′×X U, Q=restrict(U.ι)(P), and Pg=tensorPullback(g′)(P) [def-pc-scheme, def-pc-base-change]. Let eQ=openRestrictionRepresentativeIso(U.ι,P) [def-pc-open-derived-stalk-iso], beta=openRestrictedCompositionMap(g′,U,DQ(P)) [def-pc-open-restricted-composition-map], d=openRestrictedTensorDerivedIso(g′,U,P) [def-pc-open-restricted-tensor-complex-iso] and epsilon_g,epsilon_q the specified counits [def-pc-single-complex-base-change-stalk-condition]. Then Lq*(eQ.hom);beta;Lp*(epsilon_g(P)) = epsilon_q(Q);d.inv. This is an equation of derived morphisms, with no stalk or cohomology, no base-change square to S and no K-flatness or invertibility assumption.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-open-derived-stalk-iso",
+  "def-pc-open-restricted-composition-map",
+  "def-pc-open-restricted-tensor-complex-iso",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S, composition of derived pullbacks; Tag 0D5U, exact restriction. Strict counit part, before stalks and cohomology."
+ },
+ "proof": [
+  {
+   "text": "Evaluate the defining leftDerivedLift factorization equations for the specified composition comparisons for (q,U.ι) and (p,g′), and identify the direct pullback by pullback.condition.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-open-restricted-composition-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the leftDerivedUnique factorization for exact open restriction and counit naturality to replace the tensor pullbacks along U.ι and p with the literal restrictions and their constructed representative factors. The remaining termwise tensor-composition factors are exactly the constructed d. Cancel isomorphisms to obtain the equation.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso",
+    "def-pc-open-restricted-tensor-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-open-restricted-composition-map",
+  "def-pc-open-derived-stalk-iso",
+  "def-pc-open-restricted-tensor-complex-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S, composition of derived pullbacks; Tag 0D5U, exact restriction. Strict counit part, before stalks and cohomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal derived pullback counit is compatible with exact restriction to an open subspace and composition of pullbacks",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition comparison for left derived functors respects universal counits and exact restriction",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac; ",
+   "date": "2026-10-14",
+   "verdict": "Partial matches used for construction; no matching open restricted comparison equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived_fac\"",
+   "results": "4 hits: CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc; ",
+   "date": "2026-10-14",
+   "verdict": "Partial matches used for construction; no matching open restricted comparison equation."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|tensorPullbackCompositionIso|leftDerived_fac_app",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; ",
+   "date": "2026-10-14",
+   "verdict": "Partial matches used for construction; no matching open restricted comparison equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedCanonicalSquare",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-canonical-square",
+   "place": "Tag 0D5S, composition of derived pullbacks; Tag 0D5U, exact restriction. Strict counit part, before stalks and cohomology.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedCounitCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedCounitCompatibility.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openRestricted_counit_compatibility",
+  "statement": "theorem openRestricted_counit_compatibility\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let Q := ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n    (derivedPullback (pullback.snd g' U.ι)).map (openRestrictionRepresentativeIso U.ι P).hom ≫\n        openRestrictedCompositionMap g' U (DerivedCategory.Q.obj P) ≫\n        (derivedPullback (pullback.fst g' U.ι)).map\n          ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =\n      (counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫\n        (openRestrictedTensorDerivedIso g' U P).inv",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T201749-L-3969378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T201749-L-3969378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
