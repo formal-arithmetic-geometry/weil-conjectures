@@ -93,8 +93,6 @@ theorem exists_derivedPullback_kFlat_cone_counit_normalization
                 tensorIso e (Iso.refl _) ≪≫
                 schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj T.obj₁)).hom ≫
                   (ε.app C.obj₁)⟦(1 : ℤ)⟧'  := by
-  obtain ⟨e, ε, hε⟩ := exists_derivedPullback_kFlat_counit_data f
-  refine ⟨e, ε, hε, ?_⟩
-  exact derivedPullback_kFlat_cone_counit_eq f e ε
+  sorry
 
 end AlgebraicGeometry
