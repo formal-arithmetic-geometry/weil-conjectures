@@ -1,0 +1,152 @@
+{
+ "id": "lem-sbc-stalk-normalization-split-formal-test",
+ "kind": "statement",
+ "title": "The local normalization splits on a power-series test through the section",
+ "statement": "Let $S$ be a normal integral Noetherian quasi-separated scheme, $c:C\\to S$ a quasi-compact quasi-separated smooth morphism with geometrically connected fibres, $\\sigma:S\\to C$ a section, and $G$ a finite group [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms]. Let $q:C_\\eta\\to\\operatorname{Spec}k(S)$ and $j:C_\\eta\\to C$ exhibit the generic fibre [def-pc-fibre-product], with a section $s_\\eta$ satisfying $q s_\\eta=1$ and $j s_\\eta=\\sigma a_\\eta$. Let $Z\\to C_\\eta$ be a finite etale $G$-torsor with a rational point above $s_\\eta$. Let $U\\subset S$ contain $\\eta$, let $P\\to C_U$ be finite etale, and let $j_U:C_\\eta\\to C_U$ and $\\psi:Z\\to P$ exhibit its generic restriction, with $i_Uj_U=j$. Let $s\\notin U$ be such that every $t\\notin U$ specializing to $s$ equals $s$. Put $a:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$, $l:L\\to C$, and let $N\\to C$ be the concrete relative normalization of $P\\to C_U\\to C$. Let $\\tau=(a\\sigma,1):\\operatorname{Spec}\\mathcal O_{S,s}\\to L$ be the induced section. Assume $\\operatorname{depth}(\\mathcal O_{S,s})\\geq 2$ [def-weil-pbc-depth] and that $n:N\\times_C L\\to L$ is finite. There exist an integer $d\\geq0$, a flat morphism $t:T=\\operatorname{Spec}(\\mathcal O_{S,s}[[X_1,\\ldots,X_d]])\\to L$, and an isomorphism $e:(N\\times_C L)\\times_L T\\cong\\coprod_{g\\in G}T$ over $T$. If $o\\in T$ is the image of the closed point of $\\operatorname{Spec}\\mathcal O_{S,s}$ under evaluation of all variables at zero, then $t(o)=\\tau(\\mathfrak m_{S,s})$. No neighbourhood on L or descended flatness on L is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, last three paragraphs, the split completed normalization; Tags 05D5, 00MB, 0EY9 and 0EY6(2),(a),(b)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put A=O(S,s), L=C times_S Spec A and V the inverse image of U in L. Minimality makes the local base open punctured. The local normalization is normal and agrees with PA on V. Its boundary source stalks have depth at least two: going down for finite integral extensions of the normal target domains preserves the lower bound on prime heights, and smooth flat local maps give boundary target stalks dimension at least two; apply normal Serre S2. It is therefore the unique finite depth-two extension, as in Tag 0EY6(2).",
+   "uses": [
+    "lem-sbc-stalk-normalization-normal-dense",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-sbc-depth-two-finite-extension-uniqueness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the generic G-action to the finite etale cover on C_U by generic-fibre full faithfulness. The rational point and its G-translates give G disjoint copies of the generic section. Extend this isomorphism and its inverse over the normal punctured base by normal generic full faithfulness. Thus the punctured section cover is split with exactly G summands.",
+   "uses": [
+    "lem-sbc-generic-fibre-action-extension",
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a smooth affine chart around the closed section point. The local section lies wholly in it, since an open of a local spectrum containing its closed point is all of the spectrum. Complete the chart algebra in its augmentation ideal. Tags 05D5 and 00MB give a flat test t from the finite-variable power-series spectrum with the stated origin equality (the smooth section power-series chart).",
+   "uses": [
+    "lem-sbc-smooth-section-power-series-chart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the punctured-base open of the test, Tag 0EY9 extends the section splitting and its inverse to an isomorphism with G copies of that open. When d=0 the slice is already the whole open. Tags 0EY6(a),(b) identify the completed normalization with its finite depth-two extension; equivalently apply uniqueness after flat base change, which preserves boundary depth by the flat local depth formula. Each copy of the test has boundary depth at least two. Uniqueness extends the splitting over the whole test, producing e with its equation over T. These are the final splitting paragraphs of Tag 0EYJ; they are the unresolved formal calculation isolated by this theorem, not a use of flatness descent or a flat locus theorem.",
+   "uses": [
+    "lem-sbc-depth-two-finite-extension-uniqueness",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-power-series-punctured-section-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-finite-extension-uniqueness",
+  "lem-sbc-generic-fibre-action-extension",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-sbc-smooth-section-power-series-chart",
+  "lem-sbc-stalk-normalization-normal-dense",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-sbc-power-series-punctured-section-fully-faithful"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E4",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, completion and splitting paragraphs before descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The section ideal completion of a smooth scheme is a power series ring and a finite normalization with split generic section fibre becomes a split cover after completion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite relative normalization flat near a smooth section with split punctured section fibre",
+   "results": "8 hits, including Algebra.Smooth.flat and smooth affine chart lemmas; no split normalization completion theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Flat, Scheme",
+   "results": "unknown identifier Flat; no hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*flat|flat.*normalization; 0EY9; section completion splitting",
+   "results": "No existing split formal test statement. SmoothSectionPowerSeriesChart provides the chart, not the splitting; PowerSeriesFiniteEtaleExtension needs an open meeting the closed-fibre generic point, unlike the punctured-base open here. Existing generic action and generic hom-full declarations provide only the splitting on the section.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit sk-prop-input-spreading, Extension in depth >=2 and the local computation: the sentence asserting that the completed normalization is split, before the descent to the local total space",
+   "via": [
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormalTest",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationSplitFormalTest.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_stalk_normalization_split_formal_test",
+  "statement": "theorem GaloisCover.exists_stalk_normalization_split_formal_test {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c] (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (G : Type (u + 1)) [Group G] [Finite G] {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C) (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _) (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ) (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) (U : S.Opens) (hηU : genericPoint S ∈ U) (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j) (hψ : IsPullback ψ Z.π PA.obj.hom jU) (s : S) (hs : s ∉ U) (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := S.presheaf.stalk s) (S.presheaf.stalk s)) : letI : IsFinite PA.obj.hom := PA.property letI : QuasiCompact (c ⁻¹ᵁ U).ι := MorphismProperty.of_isPullback (isPullback_morphismRestrict c U) (inferInstance : QuasiCompact U.ι) let a := S.fromSpecStalk s let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a := pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ]) IsFinite n → ∃ (d : ℕ) (t : Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) ⟶ pullback c a), Flat t ∧ (∃ e : pullback n t ≅ ∐ (fun _ : G ↦ Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))), e.hom ≫ Sigma.desc (fun _ : G ↦ 𝟙 _) = pullback.snd n t) ∧ t ((Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d)))) (IsLocalRing.closedPoint (S.presheaf.stalk s))) = τ (IsLocalRing.closedPoint (S.presheaf.stalk s))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-537cb",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T113340-L-3182609",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-537cb",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T113340-L-3182609",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and holes to nodes, change record and Stacks sources; verified all four compiles, axioms, unchanged caller signature, direct-importer compile and original caller failure."
+ }
+}

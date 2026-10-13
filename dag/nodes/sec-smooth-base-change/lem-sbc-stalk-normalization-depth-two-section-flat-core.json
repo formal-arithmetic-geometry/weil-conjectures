@@ -2,35 +2,37 @@
  "id": "lem-sbc-stalk-normalization-depth-two-section-flat-core",
  "kind": "statement",
  "title": "Formal-neighbourhood flatness at a depth-two section",
- "statement": "Let S be a Noetherian integral quasi-separated scheme, c:C→S a quasi-compact quasi-separated smooth morphism, σ:S→C a section, U an open containing the generic point, and PA a finite etale cover of C_U. If s∉U is minimal among points outside U under specialization and the stalk depth at s is at least two, then the relative normalization pulled back to Spec O_{S,s} is flat on a neighbourhood of the section closed point, whenever that pullback morphism is finite.",
+ "statement": "For schemes E, L and T with L locally Noetherian [def-weil-pbc-scheme-conventions], let p:E→L be finite and t:T→L flat. Suppose the base change E×_L T→T is flat. If b is a point of T mapping to x in L, there is an open W of L containing x such that the restriction of p over W is flat.",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 0EYJ, formal-neighbourhood calculation in the proof of Tag 0EYJ"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-depth"
+  "def-weil-pbc-scheme-conventions"
  ],
  "proof": [
   {
-   "text": "Complete a smooth affine chart at the section. The punctured finite etale algebra is split by the rational section and its translates; the depth-two extension and normality identify it with the completed normalization. Faithfully flat descent gives flatness at every point over the section closed point. The finite flat locus is open and the image of its closed complement is closed, so deleting that image gives the required neighbourhood.",
+   "text": "For every z over x, lift the pair (z,b) to the pullback. The projection stalk map is flat and local, hence faithfully flat. The composite stalk map is flat by the pullback identity. Flatness preserves tensor injectivity and faithful flatness reflects it, so the stalk map of p at z is flat. The full tensor argument is written inline, with no duplicated helper declarations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The finite flat target locus theorem makes F={y | every source stalk over y is flat} open. The first step puts x in F. Take W=F; stalk isomorphisms for restriction and the stalk criterion imply Flat (p restricted to W).",
    "uses": [
-    "lem-weil-pbc-flat-local-depth-formula",
-    "lem-weil-pbc-normal-local-depth-two"
+    "lem-sbc-finite-flat-target-locus"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-normal-local-depth-two"
+  "lem-sbc-finite-flat-target-locus"
  ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "T2",
+  "kind": "written-by-agent",
+  "by": "E4",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ, formal-neighbourhood calculation"
+  "place": "Tag 0EYJ, flatness descent and finite flat target locus",
+  "note": "Generalized in place to finite morphisms with a flat test; formal splitting is invoked only by the unchanged caller theorem."
  },
  "mathlib_searches": [
   {
@@ -92,9 +94,9 @@
   "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationDepthTwoSectionFlatCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core",
-  "statement": "theorem stalk_normalization_depth_two_section_flat_core {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S] (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (U : S.Opens) (hηU : genericPoint S ∈ U) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (s : S) (hs : s ∉ U) (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := S.presheaf.stalk s) (S.presheaf.stalk s)) : letI : IsFinite PA.obj.hom := PA.property letI : QuasiCompact (c ⁻¹ᵁ U).ι := MorphismProperty.of_isPullback (isPullback_morphismRestrict c U) (inferInstance : QuasiCompact U.ι) let a := S.fromSpecStalk s let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a := pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ]) IsFinite n → ∃ W : (pullback c a).Opens, τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W)",
+  "statement": "theorem stalk_normalization_depth_two_section_flat_core\n    {L E T : Scheme.{u}} [IsLocallyNoetherian L]\n    (p : E ⟶ L) [IsFinite p] (t : T ⟶ L)\n    [Flat t] [Flat (pullback.snd p t)] (x : L) (b : T) (hb : t b = x) :\n    ∃ W : L.Opens, x ∈ W ∧ Flat (p ∣_ W)",
   "branch": "sheaf-dag",
-  "by": "T2",
+  "by": "E4",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -110,17 +112,47 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-270e1",
-  "group": "N2",
+  "reviewer": "X-537cb",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T022420-L-3215982",
-  "kind": "proof",
-  "note": "independent Codex review: Matched the unchanged Lean declaration to its node, verified the counterexample against Mathlib's relative normalization, and confirmed clean compilation and the reported axioms; this delivery only records a dispute, with no new holes or proof claim.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core"
+  "landing": "20261013T113340-L-3182609",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and holes to nodes, change record and Stacks sources; verified all four compiles, axioms, unchanged caller signature, direct-importer compile and original caller failure."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "E4 stage 2",
+  "old_statement": "Let S be a Noetherian integral quasi-separated scheme, c:C→S a quasi-compact quasi-separated smooth morphism, σ:S→C a section, U an open containing the generic point, and PA a finite etale cover of C_U. If s∉U is minimal among points outside U under specialization and the stalk depth at s is at least two, then the relative normalization pulled back to Spec O_{S,s} is flat on a neighbourhood of the section closed point, whenever that pullback morphism is finite.",
+  "what": "The original core is false without section-splitting data. The returned corrected core duplicated its caller. Generalize in place to the true descent-and-openness step for an arbitrary finite morphism with a flat test meeting the chosen target point. The unchanged caller obtains that flat test from the strictly intermediate formal splitting theorem. No target or caller signature changes.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 0EYJ, rational generic-section point assumption and final formal-neighbourhood calculation"
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-stalk-normalization-depth-two-section-flat",
+    "holds": true,
+    "note": "Statement unchanged. Its forced proof adaptation obtains the split formal test, deduces pullback flatness, and applies the generalized core."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core"
+  "old_stmt_deps": [
+   "def-weil-pbc-scheme-conventions",
+   "def-sbc-smooth-morphisms",
+   "def-weil-pbc-depth"
+  ],
+  "old_proof": [
+   {
+    "text": "Complete a smooth affine chart at the section. The punctured finite etale algebra is split by the rational section and its translates; the depth-two extension and normality identify it with the completed normalization. Faithfully flat descent gives flatness at every point over the section closed point. The finite flat locus is open and the image of its closed complement is closed, so deleting that image gives the required neighbourhood.",
+    "uses": [
+     "lem-weil-pbc-flat-local-depth-formula",
+     "lem-weil-pbc-normal-local-depth-two"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-flat-local-depth-formula",
+   "lem-weil-pbc-normal-local-depth-two"
   ]
  }
 }

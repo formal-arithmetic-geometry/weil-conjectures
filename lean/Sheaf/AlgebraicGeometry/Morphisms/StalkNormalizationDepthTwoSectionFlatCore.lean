@@ -1,59 +1,93 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group E4
+-/
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-public import Mathlib.AlgebraicGeometry.Normalization
-public import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.NormalLocalDepthTwo
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
+import Mathlib.RingTheory.RingHom.FaithfullyFlat
+
+/-!
+# Flatness near a point from a flat test
+
+Source: Stacks Project, Tag 0EYJ, flatness descent and openness.
+-/
 
 @[expose] public section
 universe u
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/- STATEMENT-DISPUTED: The cover need not split over the section. Take c and sigma
-both the identity of Spec A, where A = Q[x^2,xy,y^2], and U the complement of the
-vertex m = (x^2,xy,y^2). The restriction of Spec Q[x,y] to U is finite etale.
-A_m has depth two, but its relative normalization B = Q[x,y] localized over A_m
-is not flat: its generic rank is two and B/mB has basis 1,x,y, hence dimension
-three. Thus no flat neighbourhood of the section closed point exists.
-Tag 0EYJ uses the omitted rational-point hypothesis to split the section cover.
-See report.md, Second reading by N2, for verification of every hypothesis. -/
+/-- A finite morphism is flat over a neighbourhood of x if a flat test through x
+makes its pullback flat. This isolates descent and openness from the formal
+splitting calculation.
 
-/-- The formal-neighbourhood flatness calculation for a finite etale model over a
-smooth family.  This is the local algebraic core of the depth-two section argument.
-
-Source: Stacks Project, Tag 0EYJ, formal-neighbourhood calculation.
+Source: Stacks Project, Tag 0EYJ, final flatness descent and neighbourhood argument.
 (blueprint: lem-sbc-stalk-normalization-depth-two-section-flat-core)
 
-The proof uses the completion of a smooth local chart at the section, the split
-finite-etale algebra on the punctured completion, and faithfully-flat descent.
-The resulting flatness locus is open; finiteness makes the image of its complement
-closed, producing the displayed neighbourhood. -/
-theorem stalk_normalization_depth_two_section_flat_core {S C : Scheme.{u}}
-    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
-    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
-    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
-    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
-    (s : S) (hs : s ∉ U)
-    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
-    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
-      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :
-    letI : IsFinite PA.obj.hom := PA.property
-    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=
-      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
-        (inferInstance : QuasiCompact U.ι)
-    let a := S.fromSpecStalk s
-    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
-    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=
-      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])
-    IsFinite n → ∃ W : (pullback c a).Opens,
-      τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W) := by
-  sorry
+Proof: Lift every source point over x to the pullback using the specified test
+point. The local map of the projection is flat and local, hence faithfully flat.
+The composite stalk map is flat. Faithful flatness reflects tensor injectivity,
+so the original stalk map is flat. The finite flat target locus is open and
+contains x; restrict the morphism to that open and apply the stalk criterion. -/
+theorem stalk_normalization_depth_two_section_flat_core
+    {L E T : Scheme.{u}} [IsLocallyNoetherian L]
+    (p : E ⟶ L) [IsFinite p] (t : T ⟶ L)
+    [Flat t] [Flat (pullback.snd p t)] (x : L) (b : T) (hb : t b = x) :
+    ∃ W : L.Opens, x ∈ W ∧ Flat (p ∣_ W) := by
+  classical
+  let F : Set L := {y | ∀ z, p z = y → (p.stalkMap z).hom.Flat}
+  let W : L.Opens := ⟨F, isOpen_setOf_finite_flat_stalks p⟩
+  refine ⟨W, ?_, ?_⟩
+  · intro z hz
+    obtain ⟨w, hw, _⟩ :=
+      Pullback.exists_preimage_pullback (f := p) (g := t) z b (hz.trans hb.symm)
+    let g := Limits.pullback.fst p t
+    have hcomp : ((g ≫ p).stalkMap w).hom.Flat := by
+      rw [Limits.pullback.condition, Hom.stalkMap_comp, CommRingCat.hom_comp]
+      exact (Flat.stalkMap t _).comp (Flat.stalkMap (Limits.pullback.snd p t) w)
+    rw [Hom.stalkMap_comp, CommRingCat.hom_comp] at hcomp
+    have hg : (g.stalkMap w).hom.FaithfullyFlat := by
+      algebraize [(g.stalkMap w).hom]
+      have : Module.Flat _ _ := Flat.stalkMap g w
+      have : IsLocalHom (algebraMap (E.presheaf.stalk (g w))
+          ((Limits.pullback p t).presheaf.stalk w)) :=
+        inferInstanceAs (IsLocalHom (g.stalkMap w).hom)
+      exact Module.FaithfullyFlat.of_flat_of_isLocalHom
+    have hp : (p.stalkMap (g w)).hom.Flat := by
+      let R := L.presheaf.stalk (p (g w))
+      let A := E.presheaf.stalk (g w)
+      let B := (pullback p t).presheaf.stalk w
+      let f : R →+* A := (p.stalkMap (g w)).hom
+      let g : A →+* B := (g.stalkMap w).hom
+      have hfg : (g.comp f).Flat := hcomp
+      have hg : g.FaithfullyFlat := hg
+      algebraize [f, g, g.comp f]
+      change Module.Flat R A
+      rw [Module.Flat.iff_lTensor_preserves_injective_linearMap]
+      intro N P _ _ _ _ l hl
+      apply (Module.FaithfullyFlat.lTensor_injective_iff_injective A B
+        (AlgebraTensorModule.lTensor A A l)).mp
+      have h : Function.Injective (LinearMap.lTensor B l) :=
+        Module.Flat.lTensor_preserves_injective_linearMap l hl
+      have heq := AlgebraTensorModule.lTensor_comp_cancelBaseChange R A A (M := B) l
+      have hh : Function.Injective ((AlgebraTensorModule.lTensor A B l).comp
+          (AlgebraTensorModule.cancelBaseChange R A A B N).toLinearMap) :=
+        h.comp (AlgebraTensorModule.cancelBaseChange R A A B N).injective
+      rw [heq] at hh
+      intro a b hab
+      apply hh
+      exact congrArg (AlgebraTensorModule.cancelBaseChange R A A B P) hab
+    change g w = z at hw
+    rw [hw] at hp
+    exact hp
+  · apply Flat.of_stalkMap
+    intro z
+    exact (RingHom.Flat.respectsIso.arrow_mk_iso_iff
+      (morphismRestrictStalkMap p W z)).mpr (z.2 z.1 rfl)
 
 end AlgebraicGeometry.Scheme

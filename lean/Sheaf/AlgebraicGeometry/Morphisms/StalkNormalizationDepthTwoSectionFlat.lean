@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
 import Sheaf.RingTheory.NormalLocalDepthTwo
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormalTest
 
 /-!
 # Flatness of the normalization near a split section
@@ -106,15 +107,28 @@ theorem GaloisCover.stalk_normalization_depth_two_section_flat {S C : Scheme.{u}
       pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])
     IsFinite n → ∃ W : (pullback c a).Opens,
       τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W) := by
-  dsimp
+  classical
+  dsimp only
   intro hn
-  have _hS := hS
-  have _hCη := hCη
-  have _hsq := hsq
-  have _hsj := hsj
-  have _hZ := hZ
-  have _hjU := hjU
-  have _hψ := hψ
-  exact stalk_normalization_depth_two_section_flat_core c σ hσ U hηU PA s hs hmin hdepth hn
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let a := S.fromSpecStalk s
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
+  let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=
+    pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])
+  let : IsFinite n := hn
+  obtain ⟨d, t, ht, ⟨e, he⟩, hpoint⟩ :=
+    GaloisCover.exists_stalk_normalization_split_formal_test
+      hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+      s hs hmin hdepth hn
+  let : Flat t := ht
+  have : Flat (pullback.snd n t) := by
+    rw [← he]
+    infer_instance
+  have : IsLocallyNoetherian (pullback c a) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd c a)
+  exact stalk_normalization_depth_two_section_flat_core n t _ _ hpoint
 
 end AlgebraicGeometry.Scheme
