@@ -18,16 +18,19 @@
  ],
  "proof": [
   {
-   "text": "The generic point belongs to U. Restriction of pi_* L to U is pushforward along the isomorphism pi restricted to U, hence is an invertible module. A local trivialization identifies its generic stalk linearly with O_{W,eta}.",
+   "text": "The generic point eta lies in the dense open U. Use the existing pushforward_restrict_square from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections, specialized to the canonical restriction pullback square, to identify the restriction of pi_* L with pushforward of restricted L. Transport invertibility along the inverse isomorphism and trivialize on a neighbourhood V of eta inside U. The restriction-adjunction units become isomorphisms on that neighbourhood. Factor the neighbourhood open immersion through its open image. The restriction-composition natural isomorphism transports the restricted isomorphism to that image. Apply the existing source-library bijective_stalk_of_isIso_restrict to obtain bijectivity at eta; no stalk-conjugation proof is repeated. Apply this to the trivialized module and to the structure module. Their stalk maps are linear over the ambient local ring, so composing one with the inverse of the other gives a linear equivalence. Reuse AlgebraicGeometry.Scheme.unit_stalk_iso from IdealModuleProductStalk to identify the structure-module stalk with the ring stalk. Both private comparisons are accessed by proof-only import all; neither is reproved.",
    "uses": [
     "def-sc-invertible-module",
     "def-pc-module-pullback",
-    "def-sc-generic-point"
+    "def-sc-generic-point",
+    "lem-pc-sections-open-base-change",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-module-restriction-iso-stalk-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "The generic local ring of integral W is a field, so its residue quotient is an isomorphism. The closed pushforward stalk equivalence identifies the stalk of G at xi with that of pi_* L at eta, with scalars induced by i.stalkMap eta.",
+   "text": "Use the proved closedImmersion_pushforward_stalks comparison to obtain an additive equivalence from the stalk of i_* pi_* L at i(eta) to the stalk of pi_* L at eta, with its displayed stalkMap scalar rule. The generic local ring is a field by the Mathlib Scheme.functionField field instance for integral W. Its residue homomorphism is injective as a field homomorphism and surjective as a quotient map, hence is a ring equivalence.",
    "uses": [
     "def-sc-function-field",
     "lem-weil-pbc-closed-pushforward-stalks"
@@ -35,7 +38,7 @@
    "elementary": false
   },
   {
-   "text": "The surjective local stalk map of a closed immersion identifies the residue fields at eta and xi. Compose the preceding additive equivalences with the inverse residue-field map. Naturality of residue maps identifies the original scalar action with multiplication by residue(a).",
+   "text": "The closed immersion stalk map is surjective. To lift an element of kappa(eta) through residueFieldMap, first lift it to the local ring of W using residue_surjective, then to the local ring of X using stalkMap_surjective, and apply the residue map of X. The residue_residueFieldMap identity proves that this is a lift. The residue-field map is injective as a field homomorphism, giving a ring equivalence. Compose the closed-stalk additive equivalence, the line-stalk linear equivalence, the generic residue ring equivalence, and the inverse residue-field equivalence. The closed-stalk scalar rule, linearity, multiplication preservation, and residue_residueFieldMap prove the displayed scalar identity.",
    "uses": [
     "def-weil-closed-immersion",
     "def-weil-residue-field"
@@ -50,13 +53,16 @@
   "def-sc-function-field",
   "lem-weil-pbc-closed-pushforward-stalks",
   "def-weil-closed-immersion",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "lem-pc-sections-open-base-change",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-module-restriction-iso-stalk-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, coherent.tex",
   "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs",
-  "note": "Q2 expanded the cited Chow-construction argument to the displayed interface."
+  "note": "Q2 repaired the returned duplicate comparisons by reusing the existing private unit_stalk_iso and the more general pushforward_restrict_square through proof-only import all. The direct PushforwardRankOnOpen import would close a cycle and is not used. Three local stalk helpers remain fully proved; no new theorem with sorry is introduced. The independent second reader also replaced the local stalk-conjugation proof by the source-library bijective_stalk_of_isIso_restrict applied on the open image."
  },
  "mathlib_searches": [
   {
@@ -176,8 +182,8 @@
   "reviewer": "COMPILER",
   "group": "Q2",
   "result": "pass",
-  "landing": "20261013T040756-L-3951330",
-  "kind": "interface",
+  "landing": "20261013T054233-L-447956",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
