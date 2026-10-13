@@ -44,6 +44,12 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
+-- STATEMENT-DISPUTED: hc selects an arbitrary natural module isomorphism from Nonempty.
+-- It supplies no compatibility with the canonical tensor-pullback adjunction units.
+-- Such compatibility is essential for transporting the units in the proof below.
+-- Negating a composition comparison preserves natural invertibility, but can make
+-- compatible module maps alternate in sign; these cannot all be unital algebra maps.
+-- See report.md for the Lean-checked obstruction and the precise scope of this dispute.
 /-- Lift multiplication and unit and produce the compatible adjoint algebra maps.
 Source: Stacks Project, Tag 09ZT, multiplication paragraph, expanded using 088E,
 088F and 0CYS. This is the algebra-operations part only; it makes no assertion
