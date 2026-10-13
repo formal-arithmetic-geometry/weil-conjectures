@@ -19,7 +19,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "At each point choose a member of the open cover containing it. A finite local generating presentation on that member is also a presentation on a neighbourhood in X because the member is open.",
+   "text": "Coherence implies finite type by Definition 01BV. Apply Mathlib SheafOfModules.IsFiniteType.exists_localGeneratorsData to each restricted module to obtain finite local generating families on opens of each cover member.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each such open V of U i, its image in X is an open and V.toScheme is canonically isomorphic to that image scheme. Compose Mathlib Scheme.Modules.overEquiv with restriction along this isomorphism. The resulting equivalence identifies the restricted module with F.over of the image and identifies the structure modules. Use GeneratingSections.map and ofEpi to transport the generating family; its index set, hence its finiteness, is preserved.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Index the image opens and their transported generators by the dependent pairs of a cover member and one of its generating neighbourhoods. At a point choose a cover member using hU, then a generating neighbourhood using its CoversTop property. The point lies in its image. Intersect that image with an arbitrary test open to verify the covering sieve. Assemble this cover and the finite generators into F.LocalGeneratorsData and apply IsFiniteType.mk.",
    "uses": [],
    "elementary": true
   }
@@ -28,7 +38,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Definitions 01BV and 01B5 and Lemma 01B6"
+  "place": "Definitions 01BV and 01B5; direct locality argument formalized by M2 using Mathlib open-site equivalences and finite generating families (official tag pages verified)."
  },
  "lean": {
   "existing": false,
@@ -84,13 +94,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "X-b67a0",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T234220-L-2125469",
+  "landing": "20261013T015601-L-3022978",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and proof with the node, Stacks definitions, DAG record, import exports, axiom checks, and clean compilation of the delivery and CoherentModuleFiniteTypeLocalCore."
  }
 }
