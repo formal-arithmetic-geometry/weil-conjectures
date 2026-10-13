@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-frobenius-tower-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Frobenius-equivariant square and Weil tower",
@@ -14,14 +14,46 @@
  },
  "stmt_deps": [
   "def-weil-pbc-level-map-arrows",
-  "def-weil-pbc-level-map-corners"
+  "def-weil-pbc-level-map-corners",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-cartesian-square"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant datum with automorphisms of a Cartesian square, exact equivalences, exchange isomorphisms, and compatible tower isomorphisms",
+   "results": "8 hits; WittVector.IsocrystalEquiv.frob_equivariant, FiniteField.frobeniusAlgEquiv, frobeniusEquiv_apply, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, frobeniusEquiv, WittVector.IsocrystalEquiv, WittVector.IsocrystalHom.frob_equivariant; none states the datum",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory equivalence, Frobenius pullback, IsIso, CartesianSquare",
+   "results": "0 hits; Unknown identifier CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobeniusPullback|Cartesian Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariant tower datum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +79,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-frobenius-tower-datum",
+  "worker": "stage1",
+  "summary": "Reviewed the imported Frobenius-equivariant tower definition against its master blueprint source and searched the source checkout for an exact declaration. No finished Lean declaration or Mathlib statement gives this full datum, so the definition remains a statement-only split with its existing level-map dependencies; no additional node is needed.",
+  "blueprint": "Realizes the complete imported node: the witness and Frobenius automorphism clauses, commuting square/cube conditions, pullback and proper exchange comparisons, tower Weil structures and compatibility, and coefficient normalizations."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-5af20863f",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-5af20863f (reviewer sub-agent of L); spot-checked: The definition matches the master source and passes mathematical, coefficient-category, base-change, and edge-case checks. The original stmt_deps omitted direct dependencies for the étale-origin witness, coefficient quotient tower, and Cartesian square (delivery-errors B3/C4). Corrected JSON is in fixes/dag/nodes/sec-proper-base-change/def-weil-pbc-frobenius-tower-datum.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ }
 }
