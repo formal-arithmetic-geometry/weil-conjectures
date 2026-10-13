@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-graded-realization-local-generators-epi",
+ "kind": "statement",
+ "title": "Local homogeneous generators give an explicit algebra-module epimorphism",
+ "statement": "Let A,B be commutative rings with B an A-algebra and let B_k be any A-submodules of B. Let pi:Y -> X and f_B:Y -> Spec B be scheme morphisms [def-pc-scheme], and G_m sheaves of O_X-modules with O_X-linear maps mu_m,k(b):G_m -> G_(m+k) for b in B_k [def-weil-sheaf-of-modules-category]. Fix an open U of X, r >= 0, degrees d_i and sections s_i in G_(d_i)(U), indexed by Fin r. Suppose that for every m, open V contained in U, section t of G_m on V and point y in V, there is W containing y and contained in V where t restricts to the O_X(W)-span of mu_(d_i,m-d_i)(b)(s_i|W), for d_i <= m and b in B_(m-d_i), identifying G_(d_i+(m-d_i)) with G_m. Let F be any O_Y-module. Suppose maps iota_m:G_m -> pi_*F exhibit the latter as their coproduct [def-weil-pbc-category-colimit] and satisfy iota_(m+k) composed with mu_m,k(b) = multiplication by f_B^sharp(b) composed with iota_m. Set Acal=pi_*O_Y and let M=pi_*F with its sectionwise Acal-action. Then the map from the free Acal|U-module with basis ULift(Fin r) to M|U, sending basis i to iota_(d_i)(s_i) and restricting this section to every smaller open, is an epimorphism [def-weil-pbc-module-finite-type-presentation]. No affineness or quasi-coherence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0897, lemma-graded-finiteness, finite-type paragraph, local homogeneous generation; its sectionwise scalar calculation, with Modules on Sites Tag 03DA and Modules Tag 01B4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For algebra-linear maps p,q out of M|U agreeing after the finite free map, the free-Hom equivalence shows equality on every restriction of each iota_(d_i)(s_i). Mathlib SheafOfModules.freeHomEquiv_comp_apply computes these images.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the slice over U is a left adjoint in Mathlib (SheafOfModules.isLeftAdjoint_pushforward_of_isIso, specialized to Over.forget). Hence isColimitOfPreserves transports the given coproduct to U. Restrict scalars from the direct-image algebra to O_X and use coproduct hom_ext to reduce equality of p,q to each G_m.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For t on V contained in U and y in V, choose W by the local spanning hypothesis. Induct using Submodule.span_induction. In the generator case d_i+(m-d_i)=m resolves the HEq. Compatibility and Scheme.Modules.smulHom_app_apply identify its image with multiplication by the restriction of fB^sharp(b). Algebra-linearity of p,q and equality on the basis section prove equality on this multiple; O_X-linearity handles scalar multiples, addition, and zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The equalizer sieve of the two images of t is covering: for every y the preceding W belongs to it. Mathlib GrothendieckTopology.mem_over_iff and Sieve.overEquiv_iff identify this covering on the slice site. Sheaf separatedness gives equality on V. Coproduct uniqueness then gives equality after scalar restriction, and equality of the underlying component functions gives p=q. Empty families and empty opens satisfy the same proof without additional hypotheses.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-category-colimit",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0897 finite-type paragraph, proved by coproduct uniqueness instead of local representatives in sheafification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally homogeneous generating family gives an epimorphism from the free sheaf onto the direct image module over the direct image algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Agreement on homogeneous generators implies equality of algebra-linear maps from a coproduct of sheaf modules",
+   "results": "SheafOfModules.freeHomEquiv; SheafOfModules.freeCofan_inj; PresheafOfModules.free_hom_ext; SheafOfModules.GeneratingSections.pi; graded tensor product hom_ext. None states the local generator result.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv.*epi|epi.*freeHomEquiv",
+   "results": "Sheaf/Generators.lean:49,80: generating sections package the epi assumption, but do not prove it from the graded spanning hypothesis. Blueprint search homogeneous generators returned no match.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GradedModuleRealizationFiniteType",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0897(1) relative-spectrum finite-type paragraph: the explicit finite free algebra-module map is epi on each fixed generating neighbourhood",
+   "via": [
+    "lem-weil-pbc-graded-module-realization-finite-type",
+    "lem-weil-pbc-graded-module-relative-spec-realization",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GradedRealizationLocalGeneratorsEpi",
+  "file": "lean/Sheaf/Paper/GradedRealizationLocalGeneratorsEpi.lean",
+  "declaration": "AlgebraicGeometry.gradedRealization_local_generators_epi",
+  "statement": "theorem gradedRealization_local_generators_epi\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    (graded : ℕ → Submodule A B)\n    {X Y : Scheme.{u}} (pi : Y ⟶ X) (fB : Y ⟶ Spec (.of B))\n    (G : ℕ → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)))\n    (U : X.Opens) (r : ℕ) (d : Fin r → ℕ)\n    (s : ∀ i : Fin r, (G (d i)).val.obj (op U))\n    (hgen : ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V))\n      (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n        (G m).val.map (homOfLE hWV).op t ∈\n          Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W))\n            {z | ∃ (i : Fin r), d i ≤ m ∧\n              ∃ b : graded (m - d i),\n                HEq z ((mu (d i) (m - d i) b).val.app (op W)\n                  ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})\n    (F : Y.Modules)\n    (iota : ∀ m : ℕ, G m ⟶ (Scheme.Modules.pushforward pi).obj F)\n    (hcoprod : Nonempty (IsColimit\n      (Cofan.mk ((Scheme.Modules.pushforward pi).obj F) iota)))\n    (hcompat : ∀ (k m : ℕ) (b : graded k),\n      mu m k b ≫ iota (m + k) = iota m ≫\n        (Scheme.Modules.pushforward pi).map\n          (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val))) :\n    let AR := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj\n      ((TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj Y.sheaf)\n    let M := (SheafOfModules.pushforward.{u} (F := TopologicalSpace.Opens.map pi.base)\n      (S := AR) (R := Y.ringCatSheaf) (𝟙 AR)).obj F\n    let a : ULift.{u} (Fin r) → (M.over U).sections := fun i ↦\n      PresheafOfModules.sectionsMk\n        (fun V ↦ M.val.presheaf.map V.unop.hom.op ((iota (d i.down)).val.app (op U) (s i.down)))\n        (fun V W v ↦ by\n          change M.val.presheaf.map v.unop.left.op _ = _\n          rw [← Functor.map_comp_apply]\n          rfl)\n    Epi ((M.over U).freeHomEquiv.symm a)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T033001-L-3675998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T033001-L-3675998",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
