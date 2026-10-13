@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-affine-compatible-denominator-data",
+ "kind": "statement",
+ "title": "Compatible affine numerators with a common positive denominator",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a quasi-coherent finite-type $\\mathcal O_X$-module [pqf-def-coherent], and $\\iota:I\\hookrightarrow\\mathcal O_X$ a monomorphism [def-weil-sheaf-of-modules-category]. Let $U$ be an open such that $x\\in U$ iff $\\iota_x$ is surjective [def-pc-module-stalk-functor]. Let $F$ be quasi-coherent, $V$ affine, and $s\\in F(U)$. There are $t\\geq0$, $k>0$, $g:\\operatorname{Fin}(t)\\to R=\\mathcal O_X(V)$, and $x_i\\in F(V)$ such that $\\operatorname{im}(\\iota(V))=(g_i\\mid i<t)$, $U\\cap V=\\bigcup_{i<t}D_V(g_i)$, and $g_j^k x_i=g_i^k x_j$ for all $i,j<t$. Moreover, on every open $W\\subseteq U\\cap V\\cap D_V(g_i)$, one has $(g_i|_W)^k(s|_W)=x_i|_W$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof, denominator construction; Lemma 01PQ (lemma-sections-over-quasi-compact-open), affine reduction. Read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-generator cover. For each i, express the restriction of s to D(g_i) as a localized section with numerator m_i and exponent e_i. Take l=max_i(e_i)+1 and multiply m_i by g_i^(l-e_i) to obtain y_i. Restriction and the equality l-e_i+e_i=l show g_i^l*s=y_i on all smaller opens.",
+   "uses": [
+    "lem-weil-pbc-affine-ideal-generator-cover",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On D(g_i*g_j), the difference g_j^l*y_i-g_i^l*y_j restricts to zero, by substituting the fraction identities and commuting scalars. Localization gives a power a_ij of g_i*g_j killing that difference. Set d=max_ij(a_ij). Then k=l+d and x_i=g_i^d*y_i give exact cross relations in F(V); the same restriction calculation preserves the fraction identities. Finite maxima of empty families are zero, so t=0 and an empty chart are included.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-ideal-generator-cover",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof, denominator construction; Lemma 01PQ (lemma-sections-over-quasi-compact-open), affine reduction. Read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible fractions of module sections on principal opens admit common numerators and denominator exponent",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "section of a quasi coherent sheaf on complement of finite type ideal gives linear map from ideal power to quotient by annihilator",
+   "date": "2026-10-13",
+   "results": "localCohomology.ringModIdeals, ModuleCat.Tilde.exists_const, Ideal.quotientToQuotientRangePowQuotSucc, Ideal.powQuotSuccInclusion, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, ModuleCat.Tilde.sectionsSubmodule, ModuleCat.Tilde.toOpen, localCohomology",
+   "verdict": "No exact match; related ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_map_eq_pow_smul|pow.*span|span.*pow",
+   "date": "2026-10-13",
+   "results": "Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/Algebra/Algebra/Subalgebra/Operations.lean",
+   "verdict": "No exact match; related ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'It is injective by Properties, Lemma 01PQ' and 'Hence by Properties, Lemma 01PQ we deduce that the top horizontal arrow ... is a bijection' (first part of the proof of 01YB); decomposition of 01PQ: Finite affine lifting and eventual vanishing for annihilator quotients; single-affine lifting calculation (steps 1 and 2); steps 1 and 2 of lem-weil-pbc-ideal-power-quotient-affine-lifting-section: affine denominator map before quotient descent. Refined here: Compatible affine numerators with a common positive denominator.",
+   "via": [
+    "lem-weil-pbc-ideal-power-affine-denominator-map",
+    "lem-weil-pbc-ideal-power-quotient-affine-lifting-section",
+    "lem-weil-pbc-ideal-power-quotient-local-lifting-section",
+    "lem-weil-pbc-ideal-power-quotient-local-lifting",
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCompatibleDenominatorData",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCompatibleDenominatorData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_compatible_denominator_data",
+  "statement": "theorem affine_compatible_denominator_data\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType]\n    (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens)\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (V : X.affineOpens) (s : Γ(F, U)) :\n    ∃ (t k : ℕ) (g : Fin t → Γ(X, V.1)) (x : Fin t → Γ(F, V.1)),\n      0 < k ∧\n      (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) =\n        Ideal.span (Set.range g) ∧\n      U ⊓ V.1 = ⨆ i, X.basicOpen (g i) ∧\n      (∀ i j, g j ^ k • x i = g i ^ k • x j) ∧\n      ∀ (i : Fin t) (W : X.Opens) (hWU : W ≤ U) (hWV : W ≤ V.1),\n        W ≤ X.basicOpen (g i) →\n        X.presheaf.map (homOfLE hWV).op (g i ^ k) •\n          F.presheaf.map (homOfLE hWU).op s =\n            F.presheaf.map (homOfLE hWV).op (x i)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T125016-L-3839055",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T125016-L-3839055",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

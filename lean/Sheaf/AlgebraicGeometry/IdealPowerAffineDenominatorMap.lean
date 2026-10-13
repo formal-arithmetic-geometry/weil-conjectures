@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.AlgebraicGeometry.AffineCompatibleDenominatorData
+import Sheaf.AlgebraicGeometry.IdealPowerNumeratorPresentation
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Mathlib.LinearAlgebra.Isomorphisms
+import Mathlib.Algebra.GroupWithZero.Action.Units
 
 /-! # Affine denominator maps before annihilator quotient descent
 
@@ -22,6 +27,56 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem annihilates_on_affine_subopens
+    {X : Scheme.{u}} {P : X.Modules}
+    (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) [P.IsQuasicoherent]
+    (F : X.Modules) (V : X.affineOpens) (m : Γ(F, V.1))
+    (hm : ∀ b : Γ(P, V.1), (show Γ(X, V.1) from j.app V.1 b) • m = 0)
+    (W : X.Opens) (hWV : W ≤ V.1) (b : Γ(P, W)) :
+    (show Γ(X, W) from j.app W b) • F.presheaf.map (homOfLE hWV).op m = 0 := by
+  classical
+  choose f hf hx using fun y : W ↦ V.2.exists_basicOpen_le y (hWV y.2)
+  let B (y : W) := X.basicOpen (f y)
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨F.presheaf, F.isSheaf⟩ B W
+    (fun y ↦ homOfLE (hf y)) ?_ _ 0 ?_
+  · intro y hy
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨y, hy⟩, hx ⟨y, hy⟩⟩
+  · intro y
+    rw [map_zero, F.map_smul]
+    obtain ⟨e, c, hc⟩ := Modules.exists_map_eq_pow_smul_of_isAffineOpen P V.2 (f y)
+      (P.presheaf.map (homOfLE (hf y)).op b)
+    have hkill := congrArg
+      (F.presheaf.map (homOfLE (X.basicOpen_le (f y))).op) (hm c)
+    rw [map_zero, F.map_smul] at hkill
+    have hj := (ConcreteCategory.congr_hom
+      (j.mapPresheaf.naturality (homOfLE (X.basicOpen_le (f y))).op) c).symm
+    change X.presheaf.map (homOfLE (X.basicOpen_le (f y))).op (j.app V.1 c) =
+      j.app (B y) (P.presheaf.map (homOfLE (X.basicOpen_le (f y))).op c) at hj
+    rw [hj, hc, Modules.Hom.app_smul] at hkill
+    change (X.presheaf.map (homOfLE (X.basicOpen_le (f y))).op (f y) ^ e *
+      (show Γ(X, B y) from j.app (B y)
+        (P.presheaf.map (homOfLE (hf y)).op b))) •
+        F.presheaf.map (homOfLE (X.basicOpen_le (f y))).op m = 0 at hkill
+    rw [mul_smul] at hkill
+    have hu : IsUnit (X.presheaf.map
+        (homOfLE (X.basicOpen_le (f y))).op (f y) ^ e) :=
+      (X.toRingedSpace.isUnit_res_basicOpen (f y)).pow e
+    have hz := hu.smul_eq_zero.mp hkill
+    have hn := (ConcreteCategory.congr_hom
+      (j.mapPresheaf.naturality (homOfLE (hf y)).op) b).symm
+    change X.presheaf.map (homOfLE (hf y)).op (j.app W b) =
+      j.app (B y) (P.presheaf.map (homOfLE (hf y)).op b) at hn
+    rw [hn]
+    have heq : F.presheaf.map (homOfLE (hf y)).op
+        (F.presheaf.map (homOfLE hWV).op m) =
+          F.presheaf.map (homOfLE (X.basicOpen_le (f y))).op m := by
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+      rfl
+    rw [heq]
+    exact hz
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The denominator construction gives an affine linear map modulo a submodule
 of the specified annihilator, with the multiplication formula on affine sections.
 
@@ -29,26 +84,26 @@ Source: Stacks Project, Properties, Lemma 01PM, last four paragraphs; Lemma 01PQ
 first two paragraphs of the proof.
 (blueprint: lem-weil-pbc-ideal-power-affine-denominator-map).
 
-Proof: Put R = O_X(V), M = F(V), and identify the ideal with a finitely generated
-ideal J of R. Its complement in V is U intersect V. Finite generation identifies
-the sections of A_n on V with Ann_M(J^n): localization commutes with this
-annihilator by clearing a denominator for each of finitely many generators.
-The affine cokernel theorem identifies Q_n(V) with M/Ann_M(J^n).
-The ideal powers are quasi-coherent by induction: the unit and I are
-quasi-coherent, and tensor products and images preserve quasi-coherence.
-Choose generators f_1,...,f_t. Express the section on D(f_i) as x_i/f_i^k,
-with k positive. Equality on overlaps gives a common e killing all cross
-relations after multiplication by (f_i f_j)^e. Replace x_i by f_i^e x_i and
-k by k+e, so f_j^k x_i = f_i^k x_j. Put d=t(k-1)+1 and
-K={x : f_i^k x=0 for every i}. Every degree-d monomial contains f_i^k.
-Send it to the product with that factor removed, times x_i, modulo K.
-Multiplication of the proposed image of any relation by each f_j^k is the
-original relation times x_j, hence zero. The same calculation handles different
-choices of index. This defines J^d -> M/K. The monomial bound shows
-K <= Ann_M(J^d), hence hK. Its localization on D(f_i) is multiplication by
-x_i/f_i^k. Thus the stated scalar identity holds first on these opens and
-then on every W by sheaf separation. For J=0 use n=1, K=M, and the zero
-map; U intersect V is empty. For J=R take n=0 and the section map. -/
+Proof: On V choose finite ideal generators g_i whose basic opens cover U
+intersect V. Localization and clearing the finitely many overlap denominators
+give a positive exponent k and numerators y_i with g_j^k*y_i=g_i^k*y_j, and
+with g_i^k*s=y_i on each basic open. Put n=t*k+1. The ideal-power section
+formula and an elementary ideal-power bound show that the image of j_n(V)
+lies in the ideal generated by the g_i^k. A compatible-pair submodule E of
+P_n(V) times F(V) has projections p and q, with p surjective and
+ g_i^k*q(z)=j_n(p(z))*y_i. Define K as the common kernel of multiplication
+by all g_i^k. The image of j_n(V) kills K by span induction. Localizing P_n
+on a basic-open cover of every smaller open and cancelling unit denominators
+extends this annihilation to all local sections. The hypothesis hann therefore
+gives K contained in the image of a_n(V). The displayed identities imply
+q(ker p) is contained in K, so the quotient of q descends through the first
+isomorphism theorem to f:P_n(V)->F(V)/K. Any representative x of f(b)
+satisfies g_i^k*x=j_n(b)*y_i. Restriction to W intersect D(g_i), substitution
+of the fraction identity, and cancellation of the unit g_i^k give
+x restricted to W = j_n(b restricted to W)*s restricted to W by sheaf
+separation. Applying the cokernel projection yields the requested identity.
+No affine model of A_n or Q_n is needed. Empty families and the zero ring
+are included without separate cases; n=t*k+1 is deliberately nonminimal. -/
 theorem ideal_power_affine_denominator_map
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -79,6 +134,109 @@ theorem ideal_power_affine_denominator_map
           (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWV).op x) =
             ((cokernel (a n)).smul (U := W) ((idealSheafPower ι n).2.val.app (op W)
               (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op b))).hom
-              ((cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s)) := by sorry
+              ((cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s)) := by
+  classical
+  have _ := hmono
+  have _ := hqc
+  have _ := hquot
+  obtain ⟨t, k, g, y, hk, hg, hcover, hcross, hfrac⟩ :=
+    affine_compatible_denominator_data ι F U hU V s
+  let n := t * k + 1
+  obtain ⟨hP, hrange, E, p, q, hp, hq⟩ :=
+    ideal_power_numerator_presentation ι F V t k g y hg hcross
+  let : ((idealSheafPower ι n).1).IsQuasicoherent := hP
+  let j := (idealSheafPower ι n).2
+  let K : Submodule Γ(X, V.1) Γ(F, V.1) :=
+    ⨅ i : Fin t, LinearMap.ker ((g i ^ k) •
+      (LinearMap.id : Γ(F, V.1) →ₗ[Γ(X, V.1)] Γ(F, V.1)))
+  have memK (m : Γ(F, V.1)) : m ∈ K ↔ ∀ i, g i ^ k • m = 0 := by
+    simp [K]
+  have hK : K ≤ LinearMap.range ((a n).val.app (op V.1)).hom := by
+    intro m hm
+    apply (hann n V.1 m).mpr
+    apply annihilates_on_affine_subopens j F V m
+    intro b
+    let L : Ideal Γ(X, V.1) :=
+      LinearMap.ker (LinearMap.toSpanSingleton Γ(X, V.1) Γ(F, V.1) m)
+    have hL : Ideal.span (Set.range (fun i ↦ g i ^ k)) ≤ L := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      exact (memK m).mp hm i
+    exact hL (hrange ⟨b, rfl⟩)
+  have hker : LinearMap.ker p ≤ LinearMap.ker (K.mkQ.comp q) := by
+    intro z hz
+    apply (Submodule.Quotient.mk_eq_zero K).mpr
+    apply (memK (q z)).mpr
+    intro i
+    rw [hq, show p z = 0 from hz, map_zero, zero_smul]
+  let e := p.quotKerEquivOfSurjective hp
+  let f := ((LinearMap.ker p).liftQ (K.mkQ.comp q) hker).comp e.symm.toLinearMap
+  have hfp (z : E) : f (p z) = K.mkQ (q z) := by
+    simp [f, e, LinearMap.quotKerEquivOfSurjective_symm_apply]
+  refine ⟨n, K, hP, hK, f, ?_⟩
+  intro W hWU hWV b x hfx
+  obtain ⟨z, rfl⟩ := hp b
+  have heq : K.mkQ (q z) = K.mkQ x := (hfp z).symm.trans hfx
+  have hdiff : q z - x ∈ K := (Submodule.Quotient.eq K).mp heq
+  have hscalar (i : Fin t) : g i ^ k • x =
+      (show Γ(X, V.1) from j.app V.1 (p z)) • y i := by
+    have hh := (memK (q z - x)).mp hdiff i
+    rw [smul_sub, sub_eq_zero] at hh
+    exact hh.symm.trans (hq i z)
+  have hx : F.presheaf.map (homOfLE hWV).op x =
+      (show Γ(X, W) from j.app W
+        (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op (p z))) •
+          F.presheaf.map (homOfLE hWU).op s := by
+    let B (i : Fin t) := W ⊓ X.basicOpen (g i)
+    refine TopCat.Sheaf.eq_of_locally_eq' ⟨F.presheaf, F.isSheaf⟩ B W
+      (fun i ↦ homOfLE inf_le_left) ?_ _ _ ?_
+    · intro w hw
+      have hwUV : w ∈ U ⊓ V.1 := ⟨hWU hw, hWV hw⟩
+      rw [hcover] at hwUV
+      obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hwUV
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hw, hi⟩
+    · intro i
+      let hBV : B i ≤ V.1 := inf_le_left.trans hWV
+      let hBU : B i ≤ U := inf_le_left.trans hWU
+      have hi := hfrac i (B i) hBU hBV inf_le_right
+      have hh := congrArg (F.presheaf.map (homOfLE hBV).op) (hscalar i)
+      rw [F.map_smul, F.map_smul, ← hi] at hh
+      have hj := (ConcreteCategory.congr_hom
+        (j.mapPresheaf.naturality (homOfLE hBV).op) (p z)).symm
+      change X.presheaf.map (homOfLE hBV).op (j.app V.1 (p z)) =
+        j.app (B i) (((idealSheafPower ι n).1).presheaf.map
+          (homOfLE hBV).op (p z)) at hj
+      rw [hj, smul_comm] at hh
+      have hu : IsUnit (X.presheaf.map (homOfLE hBV).op (g i ^ k)) := by
+        have hu0 : IsUnit (X.presheaf.map
+            (homOfLE (X.basicOpen_le (g i))).op (g i ^ k)) := by
+          rw [map_pow]
+          exact (X.toRingedSpace.isUnit_res_basicOpen (g i)).pow k
+        have hu' := hu0.map (X.presheaf.map
+          (homOfLE (show B i ≤ X.basicOpen (g i) from inf_le_right)).op).hom
+        change IsUnit (X.presheaf.map (homOfLE inf_le_right : B i ⟶
+          X.basicOpen (g i)).op (X.presheaf.map
+            (homOfLE (X.basicOpen_le (g i))).op (g i ^ k))) at hu'
+        rw [← ConcreteCategory.comp_apply, ← Functor.map_comp] at hu'
+        exact hu' 
+      have hh' := hu.smul_left_cancel.mp hh
+      rw [F.map_smul]
+      have hjW := (ConcreteCategory.congr_hom
+        (j.mapPresheaf.naturality (homOfLE
+          (show B i ≤ W from inf_le_left)).op)
+            (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op (p z))).symm
+      change X.presheaf.map (homOfLE inf_le_left : B i ⟶ W).op
+          (j.app W (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op (p z))) =
+        j.app (B i) (((idealSheafPower ι n).1).presheaf.map
+          (homOfLE inf_le_left : B i ⟶ W).op
+            (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op (p z))) at hjW
+      rw [hjW]
+      convert hh' using 1 <;>
+        simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp] <;> rfl
+  change (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWV).op x) =
+    (show Γ(X, W) from j.app W
+      (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op (p z))) •
+        (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s)
+  rw [hx, Modules.Hom.app_smul]
 
 end AlgebraicGeometry.Scheme
