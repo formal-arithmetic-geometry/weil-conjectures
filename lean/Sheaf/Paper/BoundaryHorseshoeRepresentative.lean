@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
-import Mathlib.Algebra.Homology.ConcreteCategory
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Sheaf.Paper.BoundaryHorseshoeGlobalLift
+import Sheaf.Paper.BoundaryHorseshoeBoundaryIdentification
 
 /-! # A global representative for a horseshoe boundary
 
@@ -68,6 +67,8 @@ theorem boundary_horseshoe_representative (X : Scheme.{u})
         (RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
           ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ q)) =
         (RingedSpace.globalSectionsComplex IA).homologyπ 1 a := by
-  sorry
+  obtain ⟨b, a, hb, ha⟩ := boundary_horseshoe_global_lift X S IA IB IC α β hαβ hιA hιB hrows hS q
+  exact ⟨b, a, hb, ha,
+    boundary_horseshoe_boundary_identification X S IA IB IC α β hαβ hιA hιB hrows hS q b a hb ha⟩
 
 end AlgebraicGeometry.Scheme.Modules
