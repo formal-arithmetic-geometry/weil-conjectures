@@ -12,42 +12,43 @@
  ],
  "proof": [
   {
-   "text": "Put T=sigma_{>=k+1}Q and S=Q^k[-k]. Since Q vanishes below k, the inclusion T -> Q and the projection Q -> S form a degreewise split short exact sequence. Its connecting map S -> T[1] is d^k with the shift sign. Tensoring with B preserves the split term sequences and gives the corresponding distinguished triangle [lem-weil-pbc-complex-ses-triangle].",
+   "text": "Use ModuleCat.hasFunctorialFlatResolution and the source KFlat instance cochainComplex_kFlat_isLeftDerivabilityStructure to choose a K-flat resolution g:L -> B[0], and similarly a K-flat resolution a:E -> X when testing an outer vertex. These source instances are fully proved; no Sheaf resolution theorem is imported. K-flatness [def-pc-module-kflat-complex] makes a tensor L and E tensor g quasi-isomorphisms. The exchange equation (E tensor g) followed by (a tensor B[0]) equals (a tensor L) followed by (X tensor g); two-of-three identifies the quasi-isomorphism assertions for a tensor B[0] and X tensor g. The natural one-term tensor isomorphism identifies a tensor B[0] with the termwise map in each hypothesis. Apply [lem-pur-quasi-iso-cone-acyclic] and [lem-pc-tensor-mapping-cone-iso] to obtain that X tensor Cone(g) is acyclic for each outer vertex. Lean helpers tensor_exchange_quasiIso_iff, tensor_single_quasiIso_iff, and tensor_cone_acyclic_iff prove these steps completely.",
    "uses": [
-    "lem-weil-pbc-complex-ses-triangle"
+    "def-pc-module-kflat-complex",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-tensor-mapping-cone-iso"
    ],
    "elementary": false
   },
   {
-   "text": "On K(R), termwise tensor followed by localization is triangulated. K-flat objects form a resolving class: use the functorial flat resolutions of ordinary ModuleCat in the source KFlat library. Quasi-isomorphisms between them remain invertible after tensoring by [lem-pc-mixed-tensor-kflat-quasi-iso] for the identity ring map and B[0]. Apply the generic [lem-pur-left-derived-from-kflat-class] to obtain the exact derived tensor and its comparison counit, computed on every K-flat resolution. Shifts of resolutions and the termwise tensor-shift identifications make this counit shift-compatible. Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to obtain a morphism from the derived-tensor triangle of T,Q,S to the ordinary-tensor triangle of the same split sequence.",
+   "text": "The proved helper exists_stupid_tail_triangle constructs T -> Q -> S with T the stupid tail and S the one-term bottom complex. Projection to S is a chain map because every possible incoming differential has zero source. In degree k the tail vanishes and the projection is an isomorphism; in degrees above k the inclusion is an isomorphism and S vanishes; below k all three terms vanish. These give degreewise splittings. The homotopy-category triangle is distinguished by the first clause of [lem-weil-pbc-degreewise-split-derived-triangle]. Apply the triangulated total-tensor bifunctor with Cone(g), using the proved source instance HomotopyCategory tensor IsTriangulated in BifunctorTriangulated. The two outer vertices are acyclic by step 1, so [lem-pc-acyclic-triangle-two-out-of-three] makes Q tensor Cone(g) acyclic.",
    "uses": [
-    "lem-pc-mixed-tensor-kflat-quasi-iso",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-pc-acyclic-triangle-two-out-of-three"
    ],
    "elementary": false
   },
   {
-   "text": "The hypotheses give isomorphisms for all cohomology maps on T and S. The triangle morphism gives a cohomology ladder [lem-weil-pbc-derived-cohomology-ladder]. In each five-term segment the four outer vertical maps are isomorphisms; [lem-weil-pbc-five-lemma] gives the middle isomorphism. Model independence identifies the middle comparison with the image of the specified f tensor B, so it is a quasi-isomorphism.",
+   "text": "Use the cone and exchange equivalences from step 1, now for the specified K-flat P and quasi-isomorphism f:P -> Q. Acyclicity of Q tensor Cone(g) gives the quasi-isomorphism of f tensor B[0], and the natural one-term tensor isomorphism gives exactly the termwise tensor map in the conclusion.",
    "uses": [
-    "lem-weil-pbc-derived-cohomology-ladder",
-    "lem-weil-pbc-five-lemma"
+    "def-pc-module-kflat-complex",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-tensor-mapping-cone-iso"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-pc-mixed-tensor-kflat-quasi-iso",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-weil-pbc-five-lemma"
+  "def-pc-module-kflat-complex",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-pc-acyclic-triangle-two-out-of-three"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/06XY",
-  "place": "Section 15.60, Lemmas 15.60.7, 15.60.9, 15.60.12 and Definition 15.60.13; parent Tag 08IB final affine calculation; detailed module-specialized expansion of the parent proof"
+  "place": "Lemmas 15.60.9, 15.60.12 and Definition 15.60.13; mapping-cone realization using source K-flat and triangulated tensor APIs; fully proved source ordinary-module resolution instances, tensor exchange, tensor-cone isomorphism and triangulated total-tensor functor (Y3). No abstract derived functor or derived counit is constructed."
  },
  "mathlib_searches": [
   {
@@ -119,10 +120,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T082328-L-1629957",
-  "kind": "interface",
+  "landing": "20261013T100228-L-2505419",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
