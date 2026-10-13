@@ -10,42 +10,22 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The zero term in degree minus one stays zero after scalar extension. Thus zeroth homology is the kernel of the first differential, both globally and after every scalar extension. No boundedness or conditions on terms outside degrees zero and one are required.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Localize at a prime p. The two finite projective terms become finite free over the local ring A = R_p. The residue-algebra test makes the residue kernel one-dimensional. If the source rank is n, the matrix has residue rank n-1; in particular n is at least one. Choose an invertible minor of size n-1 and perform invertible row and column operations. This gives an identity block and a remaining map A to a finite free module. This is the same unit-minor elimination used in Stacks Tag 00O0; the empty minor when n=1 gives an empty identity block. The identity block contributes no kernel. This adapts the unit-minor calculation in the proof of Tag 00O0; it does not apply the residue-injectivity theorem to the original differential, whose residue kernel has dimension one.",
+   "text": "Apply universalH0_split_factorization with the unchanged hypotheses, obtaining d=e p, r e=id_I and p q=id_I. Set s=q r. Then d s d=e(p q)(r e)p=e p=d, by associativity and the two splitting equations.",
    "uses": [
-    "lem-weil-pbc-finite-projective-prime-local-free"
+    "new-universal-h0-split-factorization"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The A-algebra test identifies the kernel of the remaining map with A. Its inclusion into A is an injective A-linear endomorphism, hence multiplication by a non-zero-divisor c. All entries of the remaining map are killed by c because this inclusion lands in the kernel. Injectivity of multiplication by c forces every entry to vanish. The localized original matrix is therefore an identity block plus a zero block, and its cokernel is finite free.",
-   "uses": [],
    "elementary": true
-  },
-  {
-   "text": "The global cokernel is finitely presented: its target is finitely presented by finite projectivity, and its relation submodule is the image of the finitely generated source. Freeness at every prime gives flatness by the local criterion for flatness. A finitely presented flat module is projective (Tag 00NX). The quotient onto this cokernel splits, making the image of the first differential a projective direct summand of the target. The surjection from the source onto this image then splits. Compose the target projection onto the image with that section to obtain s; the equality d s d = d follows by applying projection and section to d(x). If R is the zero ring take s=0.",
-   "uses": [
-    "lem-weil-pbc-finite-projective-finitely-presented",
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-projective-finitely-presented",
-  "lem-weil-pbc-finite-projective-prime-local-free",
-  "lem-weil-pbc-finitely-presented-flat-module-projective"
+  "new-universal-h0-split-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F4",
-  "date": "2026-10-13",
+  "group": "N3",
+  "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 00O0 and 00NX; local matrix argument written by F4"
+  "place": "Tags 00O0 and 00NX, factorization algebra after the local matrix argument"
  },
  "mathlib_searches": [
   {
@@ -147,15 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-45180",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T161728-L-1460130",
+  "landing": "20261013T165646-L-1809612",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CochainComplex.universalH0_split_differential"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered Lean matches the corrected nodes and change record; all modules and direct importers compile cleanly; original caller fails as reported and the one-line adaptation is necessary; axioms match the named remaining sorry."
  }
 }

@@ -71,5 +71,5 @@ theorem universalH0_split_differential
     _ = e ≫ (p ≫ q) ≫ r ≫ e ≫ p := by simp only [Category.assoc]
     _ = e ≫ r ≫ e ≫ p := by simp only [hpq, Category.id_comp]
     _ = P.d 0 1 := by
-      rw [← Category.assoc, her, Category.id_comp, hfac]
+      rw [← Category.assoc r e p, her, Category.id_comp, ← hfac]
 end CochainComplex

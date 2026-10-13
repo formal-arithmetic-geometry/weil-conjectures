@@ -1,0 +1,137 @@
+{
+ "id": "new-universal-h0-cokernel-local-free",
+ "kind": "statement",
+ "title": "Universal rank-one H0 gives a locally free first cokernel",
+ "statement": "Let R be a commutative ring and P a cochain complex of R-modules. Suppose P^(-1)=0 and P^0 and P^1 are finitely generated projective R-modules. Suppose that for every commutative R-algebra B, the degree-zero homology of P tensor_R B is isomorphic to B as a B-module. Then for every prime ideal p of R, the localization at p of the R-module P^1 / im(d^0) is a free R_p-module.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00O0 and 00NX; rank-(n-1) unit-minor adaptation of 00O0, with the local-ring and residue-field H0 tests"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Since P^(-1)=0, after scalar extension H^0 identifies with the kernel of d^0. At a prime p, finite projectivity makes source and target finite free over A=R_p. The residue-field test gives source rank n at least one and matrix rank n-1. Choose a unit (n-1)-minor and eliminate its rows and columns, obtaining diag(id_(n-1),g) where g:A -> A^m. The same row and column operations preserve kernels. This is the unit-minor argument of Tag 00O0 applied to the maximal nonzero residue block, not an application of its injectivity assertion to d.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The A-algebra test gives ker(g) isomorphic to A. Compose an isomorphism A -> ker(g) with the inclusion ker(g) -> A: this is multiplication by c and is injective. For each entry b of g one has bc=0, hence cb=0, hence b=0 by injectivity. Thus g=0. The cokernel of diag(id,g) is A^m and is free. Exactness of localization identifies this cokernel with the localization of P^1/im(d^0). The n=1 case uses the empty minor; there are no primes for the zero ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 00O0 and 00NX; rank-(n-1) unit-minor adaptation of 00O0, with the local-ring and residue-field H0 tests"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map of finite projective modules with universally rank one kernel has projective cokernel",
+   "results": "{\"t\": \"2026-10-13T16:19:43Z\", \"tool\": \"leanfinder\", \"query\": \"A map of finite projective modules with universally rank one kernel has projective cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_projective\", \"Module.finitePresentation_of_projective_of_exact\", \"Module.projective_of_localization_maximal\", \"ModuleCat.enoughProjectives\", \"Module.Projective.of_lifting_property\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Projective.of_lifting_property'\", \"Module.Finite.exists_comp_eq_id_of_projective\"], \"digest\": \"a229bbb469c02491\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only; no exact theorem with the universal H0 hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective.of_split",
+   "results": "{\"t\": \"2026-10-13T16:19:48Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective.of_split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.Projective.of_split\"], \"digest\": \"f41b221e93f3446f\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only; no exact theorem with the universal H0 hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "ker_mkQ|rangeRestrict_surjective|projective.*cokernel",
+   "results": "{\"t\": \"2026-10-13T16:19:48Z\", \"tool\": \"grep\", \"query\": \"ker_mkQ|rangeRestrict_surjective|projective.*cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Galois/Abelian.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Basic.lean\", \"Mathlib/LinearAlgebra/FixedSubmodule.lean\", \"Mathlib/Algebra/Exact/Basic.lean\", \"Mathlib/Algebra/Exact/Basic.lean\", \"Mathlib/Algebra/Exact/Basic.lean\", \"Mathlib/Algebra/Ring/Subring/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Generation.lean\"], \"digest\": \"a3fb684fd6a5a3e7\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only; no exact theorem with the universal H0 hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of finite projective modules with universally rank one kernel has projective cokernel",
+   "results": "{\"t\": \"2026-10-13T16:21:23Z\", \"tool\": \"leansearch\", \"query\": \"A map of finite projective modules with universally rank one kernel has projective cokernel\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UniversalH0SplitFactorization",
+  "date": "2026-10-14",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2: cancel projective terms globally to normalize the fixed affine target; the local unit-minor part of splitting the degree-zero differential",
+   "via": [
+    "new-universal-h0-split-factorization",
+    "lem-sc-universal-h0-split-differential",
+    "lem-sc-connective-universal-h0-zero-differential",
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.UniversalH0CokernelLocalFree",
+  "file": "lean/Sheaf/Algebra/Homology/UniversalH0CokernelLocalFree.lean",
+  "declaration": "CochainComplex.universalH0_cokernel_local_free",
+  "statement": "theorem universalH0_cokernel_local_free (R : Type v) [CommRing R] (P : CochainComplex (ModuleCat.{v} R) ℤ) (hf0 : Module.Finite R (P.X 0)) (hf1 : Module.Finite R (P.X 1)) (hp0 : Module.Projective R (P.X 0)) (hp1 : Module.Projective R (P.X 1)) (hneg : IsZero (P.X (-1))) (hzero : ∀ (B : Type v) [CommRing B] (φ : R →+* B), let PB := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P Nonempty (PB.homology 0 ≅ ModuleCat.of B B)) : ∀ (𝔭 : Ideal R) [𝔭.IsPrime], Module.Free (Localization.AtPrime 𝔭) (LocalizedModule 𝔭.primeCompl (P.X 1 ⧸ LinearMap.range (P.d 0 1).hom))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-45180",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T165646-L-1809612",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-45180",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T165646-L-1809612",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the corrected nodes and change record; all modules and direct importers compile cleanly; original caller fails as reported and the one-line adaptation is necessary; axioms match the named remaining sorry."
+ }
+}
