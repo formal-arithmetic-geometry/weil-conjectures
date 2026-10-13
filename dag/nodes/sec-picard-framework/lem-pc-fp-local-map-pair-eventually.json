@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-fp-local-map-pair-eventually",
+ "kind": "statement",
+ "title": "Persistent eventual overlap equation for one pair of recovered local maps",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a diagram, and $c$ a limiting cone of $R^{\\mathrm{op}}$ followed by Spec with affine vertex [def-pc-local-overlap-transitions]. Fix $i\\le k$, a quasi-separated morphism $f:X_i\\to\\operatorname{Spec}(R_i)$ [def-pc-scheme, def-pc-morphism-conventions], and finitely presented quasi-coherent modules $F,G$ on $X_k=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_k)$ [def-pc-base-change, pqf-def-coherent]. Let $U$ be an open cover of $X_k$ and fix indices $a,b$ whose cover members are affine. Write $p:X_c\\to X_k$ for the limit map [def-pc-local-overlap-transitions]. Let $\\delta:p^*F\\to p^*G$ and local maps $r_x:F|_{U_x}\\to G|_{U_x}$ whose limit pullbacks, conjugated by the canonical restriction comparisons [def-pc-open-cover-tensor-pullback-comparison], equal the restrictions of $\\delta$. Then there is $l\\ge k$ such that for every $m\\ge l$ with $k\\le m$, the family $s_x=e_x(F)^{-1}\\circ q_x^*(r_x)\\circ e_x(G)$ on the pullback cover along $q:X_m\\to X_k$ satisfies the descent-morphism square for the fixed pair $a,b$ on every test scheme mapping to both cover members. Here $e_x$ is the canonical tensor restriction comparison for $q$, and the transitions in the square are the ordinary restriction descent data of $q^*F$ and $q^*G$. No finite-cover assumption, simultaneous bound for all pairs, or composition with other global maps is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-local-overlap-transitions",
+  "def-pc-local-map-pair-compatibility"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof by Zariski gluing"
+ },
+ "proof": [
+  {
+   "text": "On the fibre product W of the two affine cover members subtract the two composites in the descent-morphism square. W is quasi-compact by quasi-separatedness. The source and target are pullbacks of F and G, hence finitely presented and quasi-coherent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull this defect to the limit. Naturality of the ordinary pullback composition comparisons and the tensor restriction comparisons identifies the transported component maps with restrictions of the same global map δ by the recovery equations. Its descent-morphism square commutes, so the limit defect is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply finitePresentation_test_map_zero_eventually to W, its map to X_k, and the defect. The structural map W to Spec(R_k) is quasi-compact, since W is quasi-compact and Spec(R_k) is affine. This supplies a stage l at which the pullback of the defect is zero.",
+   "uses": [
+    "lem-pc-fp-test-map-zero-eventually"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any m at least l and any test scheme mapping to the two pulled-back cover members at m, the universal property gives a map to W and then to W times_{X_k} X_l. Pull back the zero defect along this map. Naturality of the ordinary pullback composition comparisons and the tensor restriction comparisons gives the stated compatibility equation for the specified pair.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-test-map-zero-eventually"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof by Zariski gluing; single-pair defect calculation written by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local morphisms of finitely presented quasicoherent modules agreeing in a limit agree at a finite stage on one pairwise intersection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of local morphisms of finitely presented quasicoherent sheaves recovering a global map at an inverse limit eventually agree on overlaps",
+   "results": "SheafOfModules.Presentation.map_π_eq, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "No exact eventual single-pair compatibility theorem; the hits provide the generic finite-presentation and descent-data APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toDescentData\"",
+   "results": "CategoryTheory.Pseudofunctor.toDescentData, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.toDescentData_obj, CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff, CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.Pseudofunctor.toDescentData_map_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact eventual single-pair compatibility theorem; the hits provide the generic finite-presentation and descent-data APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "toDescentData|mapComp.*naturality",
+   "results": "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact eventual single-pair compatibility theorem; the hits provide the generic finite-presentation and descent-data APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "First proof: agreement of the two local map lifts on a fixed pairwise intersection before taking the finite common bound",
+   "via": [
+    "lem-pc-fp-local-map-overlap-equations",
+    "lem-pc-fp-module-map-descent",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-local-map-overlap-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapPairEventually.lean",
+  "declaration": "AlgebraicGeometry.finitePresentation_local_map_pair_eventually",
+  "statement": "theorem finitePresentation_local_map_pair_eventually\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [QuasiSeparated f]\n    (k : I) (hik : i ≤ k)\n    (F G : (pullback f (Spec.map (R.map (homOfLE hik)))).Modules)\n    (hF : F.IsFinitePresentation) (hFq : F.IsQuasicoherent)\n    (hG : G.IsFinitePresentation) (hGq : G.IsQuasicoherent)\n    (U₀ : (pullback f (Spec.map (R.map (homOfLE hik)))).OpenCover.{u})\n    (a b : U₀.I₀) [IsAffine (U₀.X a)] [IsAffine (U₀.X b)]\n    (δ : (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj F ⟶\n      (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj G)\n    (r₀ : ∀ x, (Scheme.Modules.pullback (U₀.f x)).obj F ⟶\n      (Scheme.Modules.pullback (U₀.f x)).obj G)\n    (hr : ∀ x,\n      let p := overlapLimitMap R c f hik\n      let e := Scheme.Modules.openCoverTensorPullbackComparison p U₀ x\n      e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom p x)).map (r₀ x) ≫\n        e.hom.app G = (Scheme.Modules.pullback ((U₀.pullback₁ p).f x)).map δ) :\n    ∃ (l : I) (hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →\n      let q := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hik))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hik.trans hkm)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hkm)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let U := U₀.pullback₁ q\n      let Q := modulesPseudofunctor.toDescentData U.f\n      let C := Scheme.Modules.tensorPullback q\n      let r : ∀ x, (Q.obj (C.obj F)).obj x ⟶ (Q.obj (C.obj G)).obj x := fun x ↦\n        let e := Scheme.Modules.openCoverTensorPullbackComparison q U₀ x\n        e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom q x)).map (r₀ x) ≫\n          e.hom.app G\n      Pseudofunctor.DescentData.PairCompatibility r a b",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e2580",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T215603-L-897579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e2580",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T215603-L-897579",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and nodes match the recorded statements; extended compilation succeeds, axioms are permitted, direct importer compiles, and no interface or mechanical violations found."
+ }
+}

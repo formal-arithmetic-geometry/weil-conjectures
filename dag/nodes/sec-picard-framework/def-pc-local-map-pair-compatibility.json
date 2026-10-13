@@ -1,0 +1,121 @@
+{
+ "id": "def-pc-local-map-pair-compatibility",
+ "kind": "definition",
+ "title": "The universal-test compatibility square for one pair of components",
+ "statement": "For a pseudofunctor P to categories, descent data D1 and D2 along a family f of maps, a component family r from D1 to D2, and indices a,b, PairCompatibility r a b is the proposition that every test object mapping to the a and b charts over the base satisfies the descent-morphism square: P(g1)(r_a) followed by the transition of D2 equals the transition of D1 followed by P(g2)(r_b). This is exactly the (a,b) component of the comm field of a descent morphism. If it holds for every pair, homOfPairCompatibility is the real descent morphism with component family r. Its component equation is reflexivity.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof by Zariski gluing"
+ },
+ "proof": [
+  {
+   "text": "Define PairCompatibility as a Prop structure whose sole field is the universal-test commutativity square of Mathlib Pseudofunctor.DescentData.Hom at the fixed pair. The definition contains no choice or postponed data.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct homOfPairCompatibility with hom field r and comm field the comm projection of the supplied pair proof. Its component equation is reflexivity. All constructions and the equation are proved in Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR (3), first proof by Zariski gluing; categorical compatibility API constructed and proved by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"toDescentData\"",
+   "results": "CategoryTheory.Pseudofunctor.toDescentData, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.toDescentData_obj, CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff, CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.Pseudofunctor.toDescentData_map_hom",
+   "date": "2026-10-13",
+   "verdict": "Use the existing DescentData.Hom constructor and its comm field. PairCompatibility isolates one pair of that field without unfolding concrete pullback constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of quasicoherent sheaves that is zero after base change to a filtered limit vanishes at some finite stage",
+   "results": "Finite presentation and quasicoherence definitions, no pairwise component compatibility wrapper.",
+   "date": "2026-10-14",
+   "verdict": "No existing pair predicate; construct it from the existing comm field."
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*(comm|compatib)|pair.*eventually|overlap.*zero",
+   "results": "No matching descent square wrapper; independent repository search finds related overlap diagonal and triple equations, with different statements.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate pairwise component predicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pairwise compatibility squares of a descent morphism for a pseudofunctor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "First proof: agreement of the two local map lifts on a fixed pairwise intersection before taking the finite common bound",
+   "via": [
+    "lem-pc-fp-local-map-overlap-equations",
+    "lem-pc-fp-module-map-descent",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-local-map-overlap-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalMapPairCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalMapPairCompatibility.lean",
+  "declaration": "CategoryTheory.Pseudofunctor.DescentData.PairCompatibility",
+  "statement": "structure PairCompatibility (r : ∀ a, D₁.obj a ⟶ D₂.obj a) (a b : ι) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e2580",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T215603-L-897579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e2580",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T215603-L-897579",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and nodes match the recorded statements; extended compilation succeeds, axioms are permitted, direct importer compiles, and no interface or mechanical violations found."
+ }
+}

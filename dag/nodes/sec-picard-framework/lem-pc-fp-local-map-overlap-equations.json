@@ -19,20 +19,40 @@
  },
  "proof": [
   {
-   "text": "First substitute the equality identifying A₀ with module base change.\nAt stage k take the difference of the two restrictions of r₀ on each pairwise\nintersection of cover members. Their pullbacks to the limit agree, since both recover\nthe restriction of the same global map δ. Pullback composition identifies the two\nrestrictions, so their difference pulls back to zero. Quasi-separatedness makes each\nintersection quasi-compact. Restricted tensor pullbacks of Fj and Gj remain finitely\npresented and quasi-coherent. Apply finitePresentation_zero_map_descent to this\nintersection over Spec R_k, using the pullback universal properties to identify its\nidentity-stage and later base changes. There are finitely many pairs. Directedness\ngives one common later stage, and functors preserve zero maps, so all defects vanish\nthere. Every test scheme mapping to two cover members factors through their\nintersection. Pullback of its equality is the universal-test compatibility equation\nfor the displayed family of pulled-back maps. Assemble its descent morphism with\nthose components. The transition q is affine, as a base change of a map between\naffine schemes; hence the inverse images of the affine cover members are affine.\nFor arbitrary F', G', κ and ρ in the conclusion, compose this descent morphism on\nthe left with Q.map κ and on the right with Q.map ρ. The components of Q.map are\nordinary restriction of the maps; functoriality and associativity give exactly the\nfive displayed factors defining r. This uses no inverse or property of κ and ρ.\nThe component identities follow from the construction. Empty covers impose no\ncompatibility equations and use k itself. Empty intersections, zero modules and\nidentity transitions cause no exceptions. No new-stage recovery is asserted.",
+   "text": "Substitute the prescribed module base-change functor. Transfer finite presentation and quasi-coherence of its two images through the tensor/native pullback natural isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each ordered pair of affine cover members apply finitePresentation_local_map_pair_eventually to the two stage-k modules, the recovered global map, and the prescribed local family. Each equation holds at every stage above its supplied bound.",
    "uses": [
-    "lem-pc-fp-zero-map-descent"
+    "lem-pc-fp-local-map-pair-eventually"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take an upper bound of k and the image of the finite set of ordered pairs under the supplied stage function. At this stage every universal-test pair equation holds. Construct the descent morphism with components the identity-composed canonical pullbacks of r₀. The cover members are affine because the transition is an affine base change.",
+   "uses": [
+    "def-pc-local-map-pair-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary F′, G′, κ and ρ compose that descent morphism with Q.map κ on the left and Q.map ρ on the right. The component formula for composition and the restriction functor, followed by functoriality of identities and associativity, is exactly localMapPullbackFamily.",
+   "uses": [
+    "def-pc-local-map-pair-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-zero-map-descent"
+  "lem-pc-fp-local-map-pair-eventually",
+  "def-pc-local-map-pair-compatibility"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR, first proof, agreement of local lifts on overlaps"
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof by Zariski gluing; finite-pair upper bound and descent-morphism assembly formalized by F2"
  },
  "mathlib_searches": [
   {
@@ -118,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-ef5d4",
-  "group": "F3",
+  "reviewer": "X-e2580",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T190139-L-3216022",
+  "landing": "20261013T215603-L-897579",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean signatures with their nodes and the refactored formulas with the originals; all five modules and the sole direct importer compile cleanly; axioms are permitted, with sorryAx from the two documented obligations."
+  "note": "independent Codex review: Delivered modules and nodes match the recorded statements; extended compilation succeeds, axioms are permitted, direct importer compiles, and no interface or mechanical violations found."
  }
 }
