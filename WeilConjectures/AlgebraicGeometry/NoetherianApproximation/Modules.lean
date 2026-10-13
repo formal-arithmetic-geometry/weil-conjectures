@@ -321,6 +321,42 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
             (hr₃₃ := resTo_p₃' U (c.π.app k₁.left) (c.w k₁.hom)), hA]
         exact hcocL q.1 q.2.1 q.2.2)
   choose kC tC htC using h₅'
+  -- Step 6: a common stage `k₂` below the `kS a` and the `kC q`, over `k₁`, where the identity
+  -- and cocycle conditions hold.
+  obtain ⟨k₂, v₂, w₂, hw₂⟩ := IsCofiltered.wideCospan (I := s ⊕ (s × s × s))
+    (j := Sum.elim kS kC) (fun x ↦ match x with
+      | .inl a => tS a
+      | .inr q => tC q)
+  let g₂ := D.map k₂.hom
+  have hv₂ : D.map v₂.left ≫ g₁ = g₂ := by rw [← D.map_comp, Over.w v₂]
+  let μ₂ (a : s) : (g₂ ⁻¹ᵁ U a).toScheme ⟶ W a :=
+    resTo (D.map (v₂ ≫ v₁ ≫ t a).left) (by rw [← D.map_comp, Over.w (v₂ ≫ v₁ ≫ t a)])
+      (le_refl (U a))
+  have hμ₂₁ (a : s) : resTo (D.map v₂.left) hv₂ (le_refl (U a)) ≫ μ₁ a = μ₂ a :=
+    resTo_resTo _ _ _ _ (by rw [← D.map_comp, ← Over.comp_left]) _ _ _ _
+  let H₂ := DescentData'.pullGlue (H := H₁) (sq' := preimageChosenPullback U g₂)
+    (fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b))) (resTo_p₁ U _ hv₂)
+    (resTo_p₂ U _ hv₂) hμ₂₁
+  have hself₂ : DescentData'.GlueSelf (H := H₂) (preimageDiag U g₂) (preimageDiag_p₁ U g₂)
+      (preimageDiag_p₂ U g₂) := fun a ↦ by
+    rw [← DescentData'.pullHom_glueSelfLHS (H := H₁) (sq' := preimageChosenPullback U g₂)
+      (d := preimageDiag U g₁) (hd₁ := preimageDiag_p₁ U g₁) (hd₂ := preimageDiag_p₂ U g₁)
+      (fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b))) (resTo_p₁ U _ hv₂)
+      (resTo_p₂ U _ hv₂) hμ₂₁ (preimageDiag U g₂) (preimageDiag_p₁ U g₂) (preimageDiag_p₂ U g₂)
+      (preimageDiag_resTo U (D.map v₂.left) hv₂)]
+    have hres : resTo (D.map v₂.left) hv₂ (le_refl (U a)) =
+        resTo (D.map (w₂ (.inl a)).left)
+          (by rw [← D.map_comp, Over.w (w₂ (.inl a))]) (le_refl (U a)) ≫
+        (opensDiagram D i₀ (U a)).map (tS a) := by
+      rw [opensDiagram_map_eq_resTo]
+      exact (resTo_resTo _ _ _ _ (by rw [← D.map_comp, ← Over.comp_left, ← hw₂ (.inl a)])
+        _ _ _ _).symm
+    rw [pullHom_congr_left _ hres, ← pullHom_pullHom (g := (opensDiagram D i₀ (U a)).map (tS a))
+      (gf₁ := (opensDiagram D i₀ (U a)).map (tS a) ≫ μ₁ a)
+      (gf₂ := (opensDiagram D i₀ (U a)).map (tS a) ≫ μ₁ a) (hgf₁ := rfl) (hgf₂ := rfl)
+      (g'f₁ := μ₂ a) (g'f₂ := μ₂ a) (hg'f₁ := by rw [← Category.assoc, ← hres, hμ₂₁])
+      (hg'f₂ := by rw [← Category.assoc, ← hres, hμ₂₁]), htS a,
+      pullHom_pullHom, pullHom_id_eq_id]
   sorry
 
 end AlgebraicGeometry
