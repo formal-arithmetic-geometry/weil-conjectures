@@ -130,11 +130,11 @@ there the constant sheaf at the finitely generated module `Hom_Λ(P, Q)`. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
     (L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsFiniteLocallyConstantSheaf L] [IsFiniteLocallyConstantSheaf M] :
-    IsFiniteLocallyConstantSheaf ((ihom L).obj M) := by
+    IsFiniteLocallyConstantSheaf ((CategoryTheory.ihom L).obj M) := by
   obtain ⟨𝒰₀, h𝒰₀⟩ := IsLocallyConstantSheaf.exists_cover₂ L M
   let 𝒰 := 𝒰₀.nonemptyMembers
   have key (i : 𝒰.I₀) : ∃ H : ModuleCat.{u + 1} Λ, Module.Finite Λ H ∧
-      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj ((ihom L).obj M) ≅
+      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj ((CategoryTheory.ihom L).obj M) ≅
         (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj H) := by
     set Y := 𝒰.X i
     set g := 𝒰.f i
@@ -158,21 +158,22 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
     have : Module.FinitePresentation Λ P := Module.finitePresentation_of_finite Λ P
     have := Etale.isIso_ihomComparison_constantSheaf_app (X := Y) P Q
     have := Etale.isIso_ihomComparison_upperStar (ModuleCat.{u + 1} Λ) g L
-    refine ⟨(MonoidalCategory.ihom P).obj Q, ?_, ⟨?_⟩⟩
+    refine ⟨(CategoryTheory.ihom P).obj Q, ?_, ⟨?_⟩⟩
     · have : Module.Finite Λ (P →ₗ[Λ] Q) := Module.Finite.linearMap_of_isNoetherianRing
       exact Module.Finite.equiv ModuleCat.homLinearEquiv.symm
     · exact asIso ((ihomComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) g) L).natTrans.app M) ≪≫
-        (MonoidalCategory.ihom _).mapIso eM.symm ≪≫
+        (CategoryTheory.ihom _).mapIso eM.symm ≪≫
         asIso ((MonoidalClosed.pre eL.hom).app _) ≪≫
         (asIso ((ihomComparison (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) P).natTrans.app
           Q)).symm
   choose H hH e using key
   have hc (i : 𝒰.I₀) : ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
-      ((ihom L).obj M)).IsConstant (𝒰.X i).smallEtaleTopology :=
+      ((CategoryTheory.ihom L).obj M)).IsConstant (𝒰.X i).smallEtaleTopology :=
     Sheaf.isConstant_of_iso _ (e i).some
   have (i : 𝒰.I₀) : IsFiniteSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
-      ((ihom L).obj M)) :=
+      ((CategoryTheory.ihom L).obj M)) :=
     have := hH i
+    have := Scheme.isFiniteSheaf_constantSheaf (X := 𝒰.X i) (H i)
     IsFiniteSheaf.of_iso (e i).some.symm
   exact
     { toIsLocallyConstantSheaf := ⟨⟨⟨𝒰, fun i ↦ (isConstant_over_iff_upperStar _ _ _).2 (hc i)⟩⟩⟩
