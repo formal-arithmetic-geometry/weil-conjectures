@@ -12526,3 +12526,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:50 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffinePerfectHomPresentation (stage 3; reviewer PASS; first push; landing 20261013T125015-L-3838845 (interface); batch 20261013T125004; modules 2; new nodes 1)
 - 12:50 L: merged deliver/X3/Sheaf.AlgebraicGeometry.AffineSheafificationScalar (stage 3; reviewer PASS; first push; landing 20261013T125016-L-3838954 (proof); batch 20261013T125004; modules 1; new nodes 0)
 - 12:50 L: merged deliver/X3/Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap (stage 3; reviewer PASS; first push; landing 20261013T125016-L-3839055 (interface); batch 20261013T125004; modules 5; new nodes 4)
+- 12:50 L: merged deliver/Y3/Sheaf.Paper.CechHorseshoeLiftClass (stage 3; reviewer PASS; first push; landing 20261013T125017-L-3839209 (interface); batch 20261013T125004; modules 2; new nodes 1)

@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-cech-horseshoe-correction-cochain",
+ "kind": "statement",
+ "title": "Local horseshoe correction cochain and its two differentials",
+ "statement": "For a scheme X and any compatible horseshoe of injective resolutions IA, IB, IC of a short complex S with short exact rows, let U be any family of opens, q a global section of S.X3, and x_i sections of S.X2 lifting q. Suppose b is a global section of IB^0 with beta(b)=aug_C(q), a is a global degree-one cycle of IA with alpha(a)=d b, and z is an S.X1-valued Cech degree-one cycle whose image under S.f has components x_i1-x_i0. Then there exists t in C^0(U, IA^0) such that its resolution differential is minus the restriction zero cochain of the underlying global cycle a, and its Cech differential is the Cech cochain obtained by applying aug_A to the underlying cycle z. The conclusion concerns two cochain equations, not total homology.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EQ, double-complex comparison proof; Tag 0B8S, local-lift computation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For each index i, the section aug_B(x_i) minus b restricted to U_i lies in the kernel of beta^0, by the second augmentation square, hx and hb. The short exact degree-zero row identifies alpha^0 with this kernel. Evaluation on an open preserves kernels, so take its unique preimage t_i. Assemble the restrictions of t_i to the categorical onefold intersections into a Cech zero cochain t using the product isomorphism. This construction also works for an empty index type.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply alpha^0 to the Cech differential of t, commute restrictions past alpha and the augmentation, and use hz and the first augmentation square. The restrictions of b agree on each pairwise intersection and cancel. Cancel the sectionwise monic alpha^0 to get d_C t = aug_A(z). Apply alpha^1 to the resolution differential of t. The chain map identity gives d_B alpha^0(t); the differential kills aug_B(x_i), and ha identifies the remaining term with minus alpha^1(a restricted to U_i). Cancel alpha^1 to get d_I t = -a restricted to U_i. Use the product projections to obtain the displayed cochain equations. Empty opens are covered by the same sectionwise arguments.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "note": "Steps 1 and 2 of the original node, fully proved in Lean. Evaluation of the degree-zero short exact row constructs the correction, and monicity of alpha in degrees zero and one verifies both differential equations. Private helpers implement the Cech product projection, monicity, and restriction identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two cycles in a module cochain complex differ by a coboundary and have equal homology classes",
+   "results": "Hom-complex cohomology-class lemmas found; no sectionwise horseshoe correction construction.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "Found homologyπ_naturality and toCycles_comp_homologyπ; they close the final homology step but do not construct the local correction.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "toCycles_comp_homologyπ|cyclesMap_i; moduleCechBeta|moduleCechAlpha|horseshoe_lift",
+   "results": "ModuleCechComparison has the augmentations and their differentials; BoundaryCechInjectiveMiddle has a private local-lift-cocycle construction, but imports the target and cannot be used as a dependency. No existing declaration gives the required correction cochain.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local lifts in a short exact sequence of sheaves yield a correction zero cochain in a Cech injective resolution bicomplex",
+   "results": "Unavailable: Internal Server Error. No verdict from this unavailable service. Other search services and local source searches were used.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechHorseshoeLiftClass",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-horseshoe-lift-class",
+   "place": "Proof steps 1 and 2: local correction cochain and its resolution and Cech differentials"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechHorseshoeCorrectionCochain",
+  "file": "lean/Sheaf/Paper/CechHorseshoeCorrectionCochain.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cech_horseshoe_correction_cochain",
+  "statement": "theorem cech_horseshoe_correction_cochain (X : Scheme.{u})\n    (S : ShortComplex X.Modules)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hιA : IA.ι ≫ α = (CochainComplex.single₀ X.Modules).map S.f ≫ IB.ι)\n    (hιB : IB.ι ≫ β = (CochainComplex.single₀ X.Modules).map S.g ≫ IC.ι)\n    (hrows : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval X.Modules (ComplexShape.up ℕ) k)).ShortExact)\n    {ι : Type u} (U : ι → X.Opens)\n    (q : S.X₃.val.obj (op ⊤)) (x : ∀ i : ι, S.X₂.val.obj (op (U i)))\n    (hx : ∀ i : ι, S.g.val.app (op (U i)) (x i) =\n      S.X₃.val.presheaf.map (homOfLE (le_top : U i ≤ ⊤)).op q)\n    (b : (IB.cocomplex.X 0).val.obj (op ⊤))\n    (a : (RingedSpace.globalSectionsComplex IA).cycles 1)\n    (hb : (β.f 0).val.app (op ⊤) b = (IC.ι.f 0).val.app (op ⊤) q)\n    (ha : (α.f 1).val.app (op ⊤)\n      ((RingedSpace.globalSectionsComplex IA).iCycles 1 a) =\n        (IB.cocomplex.d 0 1).val.app (op ⊤) b)\n    (z : ((cechComplexFunctor U).obj S.X₁.presheafModuleCat).cycles 1)\n    (hz : ∀ y : Fin 2 → ι,\n      S.f.val.app (op (∏ᶜ fun k : Fin 2 ↦ U (y k)))\n        ((Pi.π (fun w : Fin 2 → ι ↦\n          S.X₁.presheafModuleCat.obj (op (∏ᶜ fun k : Fin 2 ↦ U (w k)))) y)\n          (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z)) =\n        S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (x (y 1)) -\n          S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (x (y 0))) :\n    ∃ t : ((moduleCechDouble U IA).X 0).X 0,\n      (((moduleCechDouble U IA).d 0 1).f 0) t =\n        -(moduleCechZero U (IA.cocomplex.X 1))\n          ((RingedSpace.globalSectionsComplex IA).iCycles 1 a) ∧\n      (((moduleCechDouble U IA).X 0).d 0 1) t =\n        ((cechComplexFunctor U).map\n          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (IA.ι.f 0).val)).f 1\n          (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T125017-L-3839209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T125017-L-3839209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

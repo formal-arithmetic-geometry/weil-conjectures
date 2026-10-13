@@ -6,6 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+import Sheaf.Paper.CechHorseshoeCorrectionCochain
 
 /-! # The local correction in a horseshoe Cech double complex
 
@@ -73,6 +74,61 @@ theorem cech_horseshoe_lift_class (X : Scheme.{u})
       (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).homologyπ 1 z) =
         HomologicalComplex.homologyMap (moduleCechAlpha U IA) 1
           ((RingedSpace.globalSectionsComplex IA).homologyπ 1 a) := by
-  sorry
+  obtain ⟨c, hc₁, hc₂⟩ := cech_horseshoe_correction_cochain X S IA IB IC α β hαβ hιA hιB
+    hrows U q x hx b a hb ha z hz
+  let D := moduleCechDouble U IA
+  let T := D.total (ComplexShape.up ℕ)
+  let t := D.ιTotal (ComplexShape.up ℕ) 0 0 0 (by simp) c
+  have ht : T.d 0 1 t = (moduleCechBeta U IA).f 1
+      (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z) -
+      (moduleCechAlpha U IA).f 1
+        ((RingedSpace.globalSectionsComplex IA).iCycles 1 a) := by
+    have hd : D.ιTotal (ComplexShape.up ℕ) 0 0 0 (by simp) ≫ T.d 0 1 =
+        ((D.d 0 1).f 0 ≫ D.ιTotal (ComplexShape.up ℕ) 1 0 1 (by simp)) +
+        ((D.X 0).d 0 1 ≫ D.ιTotal (ComplexShape.up ℕ) 0 1 1 (by simp)) := by
+      rw [HomologicalComplex₂.total_d, Preadditive.comp_add,
+        HomologicalComplex₂.ι_D₁, HomologicalComplex₂.ι_D₂,
+        HomologicalComplex₂.d₁_eq _ _ (by simp : (ComplexShape.up ℕ).Rel 0 1)
+          0 1 (by simp),
+        HomologicalComplex₂.d₂_eq _ _ 0 (by simp : (ComplexShape.up ℕ).Rel 0 1)
+          1 (by simp)]
+      simp
+    have hd' := ConcreteCategory.congr_hom hd c
+    change T.d 0 1 t =
+      D.ιTotal (ComplexShape.up ℕ) 1 0 1 (by simp) (((D.d 0 1).f 0) c) +
+      D.ιTotal (ComplexShape.up ℕ) 0 1 1 (by simp) (((D.X 0).d 0 1) c) at hd'
+    rw [hc₁, hc₂, map_neg] at hd'
+    change T.d 0 1 t =
+      D.ιTotal (ComplexShape.up ℕ) 0 1 1 (by simp)
+        (((cechComplexFunctor U).map
+          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+            (IA.ι.f 0).val)).f 1
+          (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z)) -
+      D.ιTotal (ComplexShape.up ℕ) 1 0 1 (by simp)
+        (moduleCechZero U (IA.cocomplex.X 1)
+          ((RingedSpace.globalSectionsComplex IA).iCycles 1 a))
+    exact hd'.trans ((add_comm _ _).trans (sub_eq_add_neg _ _).symm)
+  let cz := HomologicalComplex.cyclesMap (moduleCechBeta U IA) 1 z
+  let ca := HomologicalComplex.cyclesMap (moduleCechAlpha U IA) 1 a
+  have hc : cz - ca = T.toCycles 0 1 t := by
+    apply (ModuleCat.mono_iff_injective (T.iCycles 1)).mp inferInstance
+    simp only [map_sub]
+    rw [show T.iCycles 1 cz = (moduleCechBeta U IA).f 1
+      (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z) from
+      ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i (moduleCechBeta U IA) 1) z]
+    rw [show T.iCycles 1 ca = (moduleCechAlpha U IA).f 1
+      ((RingedSpace.globalSectionsComplex IA).iCycles 1 a) from
+      ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i (moduleCechAlpha U IA) 1) a]
+    rw [show T.iCycles 1 (T.toCycles 0 1 t) = T.d 0 1 t from
+      ConcreteCategory.congr_hom (T.toCycles_i 0 1) t]
+    exact ht.symm
+  have hπ : T.homologyπ 1 cz = T.homologyπ 1 ca := by
+    apply sub_eq_zero.mp
+    rw [← map_sub, hc]
+    exact ConcreteCategory.congr_hom (T.toCycles_comp_homologyπ 0 1) t
+  exact (ConcreteCategory.congr_hom
+    (HomologicalComplex.homologyπ_naturality (moduleCechBeta U IA) 1) z).trans
+      (hπ.trans (ConcreteCategory.congr_hom
+        (HomologicalComplex.homologyπ_naturality (moduleCechAlpha U IA) 1) a).symm)
 
 end AlgebraicGeometry.Scheme.Modules
