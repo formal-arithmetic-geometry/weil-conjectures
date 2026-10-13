@@ -1,0 +1,113 @@
+{
+ "id": "new-lem-sbc-etale-triples-prime-localization-cocone-restriction",
+ "kind": "statement",
+ "title": "Unique restriction of a local cocone across prime localization",
+ "statement": "Let R, p, A = R_p [def-weil-pbc-localization-at-prime], K, χ : κ_R(p) → K, q and ψ : κ_A(q) → K [def-weil-residue-field] satisfy the parent hypotheses: the evaluation through ψ is the specified A-algebra map into K, and its restriction to R is evaluation through χ. Use pointed étale triples [def-weil-pbc-etale-residue-triples] and the compatible-leg relation [new-def-sbc-etale-triples-prime-localization-cocone-relation]. For every ring V and every local cocone θ, there exists a unique global cocone η satisfying this relation.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 04GW, 00CR, 01ZM and 07RP"
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-pbc-localization-at-prime",
+  "new-def-sbc-etale-triples-prime-localization-cocone-relation"
+ ],
+ "proof": [
+  {
+   "text": "Base change each global etale algebra B to R_p, equivalently localize B at the images of R outside p. Denominators are nonzero in K, so its pointing extends uniquely. Take the prime kernel and factor through its residue field; the compatible base map gives inverse image q.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the local cocone leg to B. Global-triple morphisms extend uniquely to these localized triples, giving naturality. Each pointed R-map from B into a local triple extends uniquely to the base-change algebra as a pointed A-map, so local-cocone naturality proves the compatible-leg relation. The canonical map from B to its localized triple forces the restriction leg, proving uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 04GW and 00CR; base change and universal property of localization",
+  "group": "W2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique extension of cocones on pointed etale rings across prime localization",
+   "date": "2026-10-14",
+   "results": "8 hits: etale-locus and standard-etale presentation lemmas; no pointed-cocone localization extension.",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.ofBijective",
+   "date": "2026-10-14",
+   "results": "Equiv.ofBijective and its apply lemmas construct an equivalence from a bijection; used in the parent proof.",
+   "verdict": "generic assembly only; no descent statement"
+  },
+  {
+   "tool": "grep",
+   "query": "coconesEquiv and primeLocalization_cocone in Mathlib, WeilConjectures and Sheaf",
+   "date": "2026-10-14",
+   "results": "Mathlib.CategoryTheory.Limits.Final.coconesEquiv concerns final functors. Only the parent and its existing consumer implement this pointed-etale localization interface.",
+   "verdict": "no direct extension or restriction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique extension of cocones of pointed etale algebras after base localization",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeEquiv",
+  "date": "2026-10-14",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sbc-etale-triples-prime-localization-cocone-equiv",
+   "place": "Compatible legs and the two directions of cocone descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestriction",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationCoconeRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_cocone_restriction",
+  "statement": "theorem etaleResidueTriples_primeLocalization_cocone_restriction (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K] (χ : (Spec R).residueField p ⟶ CommRingCat.of K) (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))) (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶ CommRingCat.of K) [Algebra (Localization.AtPrime p.asIdeal) K] (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫ (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ = CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K)) (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) = (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ) (V : CommRingCat.{u}) (θ : etaleResidueTriplesRingDiagram (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ ⟶ (Functor.const _).obj V) : ∃! η : etaleResidueTriplesRingDiagram R p K χ ⟶ (Functor.const _).obj V, etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T211122-L-397995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T211122-L-397995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

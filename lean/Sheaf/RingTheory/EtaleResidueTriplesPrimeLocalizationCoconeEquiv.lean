@@ -2,8 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Paper.EtaleFiniteDataDescent
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeExtension
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestriction
 
 @[expose] public section
 universe u
@@ -62,6 +62,57 @@ theorem etaleResidueTriples_primeLocalization_coconeEquiv
           (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)
           (r : R),
         (t.α ≫ (E V η).app t).hom (algebraMap R (Localization.AtPrime p.asIdeal) r) =
-          (η.app ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩).hom r := by sorry
+          (η.app ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩).hom r := by
+  classical
+  let F := fun V η ↦
+    (etaleResidueTriples_primeLocalization_cocone_extension R p K χ q ψ hψ hK V η).choose
+  have hF : ∀ V η,
+      etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η (F V η) :=
+    fun V η ↦
+      (etaleResidueTriples_primeLocalization_cocone_extension
+        R p K χ q ψ hψ hK V η).choose_spec.1
+  have uniqueF : ∀ V η θ,
+      etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ →
+      θ = F V η :=
+    fun V η θ h ↦
+      (etaleResidueTriples_primeLocalization_cocone_extension
+        R p K χ q ψ hψ hK V η).choose_spec.2 θ h
+  have bijectiveF : ∀ V, Function.Bijective (F V) := by
+    intro V
+    constructor
+    · intro η η' he
+      obtain ⟨η₀, hη₀, hu⟩ :=
+        etaleResidueTriples_primeLocalization_cocone_restriction
+          R p K χ q ψ hψ hK V (F V η)
+      have hη' := hF V η'
+      rw [← he] at hη'
+      exact (hu η (hF V η)).trans (hu η' hη').symm
+    · intro θ
+      obtain ⟨η, hη, _⟩ :=
+        etaleResidueTriples_primeLocalization_cocone_restriction R p K χ q ψ hψ hK V θ
+      exact ⟨η, (uniqueF V η θ hη).symm⟩
+  let E := fun V ↦ Equiv.ofBijective (F V) (bijectiveF V)
+  refine ⟨E, ?_, ?_⟩
+  · intro V W η f
+    change F W (η ≫ (Functor.const _).map f) = F V η ≫ (Functor.const _).map f
+    symm
+    apply uniqueF
+    intro s t β hb hp
+    change β ≫ (F V η).app t ≫ f = η.app s ≫ f
+    rw [← Category.assoc, hF V η s t β hb hp]
+  · intro V η t r
+    let s : EtaleResidueTriples R p K χ :=
+      ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩
+    let β := CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α
+    have hb : s.α ≫ β =
+        CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α := by
+      simp [s, β]
+    have hp : β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
+        (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ := by
+      dsimp [β, s]
+      rw [Category.assoc, t.compatible, hψ, hK]
+    have h := ConcreteCategory.congr_hom (hF V η s t β hb hp) r
+    exact h
+
 
 end AlgebraicGeometry.Scheme

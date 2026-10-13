@@ -13609,3 +13609,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:11 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SelfTorPushforwardHomology (stage 3; reviewer PASS; first push; landing 20261013T211120-L-397334 (interface); batch 20261013T211049; modules 2; new nodes 1)
 - 21:11 L: merged deliver/V2/Sheaf.RingTheory.SelfTorConormalComparisonExistence (stage 3; reviewer PASS; first push; landing 20261013T211120-L-397505 (interface); batch 20261013T211049; modules 4; new nodes 3)
 - 21:11 L: merged deliver/W2/Sheaf.AlgebraicGeometry.PerfectHomOpenStagePresentation (stage 3; reviewer PASS; first push; landing 20261013T211121-L-397718 (interface); batch 20261013T211049; modules 3; new nodes 2)
+- 21:11 L: merged deliver/W2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeEquiv (stage 3; reviewer PASS; first push; landing 20261013T211122-L-397995 (interface); batch 20261013T211049; modules 4; new nodes 3)
