@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-localized-hom-complex-cycle-lift",
+ "kind": "statement",
+ "title": "Lifting localized chain maps to Hom-complex cycles",
+ "statement": "Let C be a category with Grothendieck topology J, R a sheaf of commutative rings, U an object of C, and L,I arbitrary integer-indexed cochain complexes of sheaves of R-modules. Assume slice restriction to C/U preserves zero morphisms. Let S be section evaluation at U of the Hom complex [def-pur-hom-complex], with its chosen projections pi, and let res be termwise slice restriction. Every chain map g: res(L) → res(I) admits a cycle z in S.cycles 0 whose included degree-p internal-Hom projection, evaluated on every object W of (C/U)^op, is exactly the component g^p at W. No uniqueness is asserted.",
+ "stmt_deps": [
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)"
+ },
+ "proof": [
+  {
+   "text": "evaluation at U preserves the degree-zero product cone in homComplex_exists.\nEach component of g is an internal-Hom section over U, so this product cone supplies\nan element x of the evaluated degree-zero term with those projections. Compose the\ndifferential of x with each degree-one projection. The differential formula at n = 0\nis postcomposition by d_I minus precomposition by d_L. The chain-map identity of g\nmakes this difference zero on every slice object. Evaluation also preserves the\ndegree-one product, whose projections jointly detect zero, so d x = 0. The kernel\nuniversal property of the cycle inclusion supplies z mapping to x. Its projections\nare the prescribed components. This uses all integer degrees without boundedness.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X before Equation 0A8Y; the surjectivity construction in the parent bijectivity argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "every chain map of restricted sheaf complexes lifts to degree zero cycle of internal Hom complex",
+   "results": "Eight related sheaf cohomology, Mayer-Vietoris and locally bijective presheaf results; no sectionwise Hom-complex lifting theorem.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Fan, CategoryTheory.Limits.IsLimit",
+   "results": "Fan.IsLimit.lift, Fan.IsLimit.fac, Fan.isLimitMapConeEquiv, Fan.IsLimit.hom_ext and other generic fan lemmas; these supply product tools but not the differential/kernel comparison.",
+   "date": "2026-10-13",
+   "verdict": "Tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*cycles|localizedHomComplex|abCyclesIso_inv_apply_iCycles",
+   "results": "Mathlib HomComplexCohomology.lean and ShortComplex/Ab.lean:89 provide ordinary Hom complex and kernel tools; no sheaf cycle lift. Local repository search found parent cycles, forward, bijective, boundaries and homology modules only.",
+   "date": "2026-10-13",
+   "verdict": "No independent duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every chain map on a localized ringed site lifts to a degree zero cycle in the sheaf Hom complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of product sheaf internal Hom kernel differential chain map",
+   "results": "Second reader: Cocycle.isKernel concerns the ordinary Hom complex, not the evaluated product of sheaf internal Homs; other hits concern Mayer-Vietoris and sheaf cohomology. No independent cycle lift.",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no shorter complete route."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.liftCycles",
+   "results": "Second reader: liftCycles and liftCycles_i provide the final kernel lift once a morphism with zero differential is constructed. They do not assemble the section or establish its zero differential.",
+   "date": "2026-10-13",
+   "verdict": "Kernel tools only, not a duplicate of the split statement."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*cycle|cycle.*internalHom|Cocycle.isKernel|homObjSectionsEquiv",
+   "results": "Second reader: Mathlib ordinary HomComplexCohomology uses Cocycle.isKernel. Direct rg of local Hom-complex modules found the parent comparison and its dependents only; upstream internal Hom sections equivalence concerns global sections of individual terms.",
+   "date": "2026-10-13",
+   "verdict": "No independent localized cycle-lifting declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Finite level derived internal Hom construction: the sheaf-valued Hom complex; surjectivity of the localized degree-zero cycle comparison.",
+   "via": [
+    "def-pur-hom-complex",
+    "lem-pur-localized-hom-complex-cycles-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedHomComplexCycleLift",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexCycleLift.lean",
+  "declaration": "CategoryTheory.localizedHomComplex_cycle_lift",
+  "statement": "theorem localizedHomComplex_cycle_lift\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    letI := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    ∀ g : (res.obj L ⟶ res.obj I), ∃ z : S.cycles 0,\n      ∀ (p : ℤ) (W : (Over U)ᵒᵖ),\n        (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W =\n          (g.f p).val.app W",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T082353-L-1638864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T082353-L-1638864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
