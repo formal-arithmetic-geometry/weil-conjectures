@@ -11518,3 +11518,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatDiscriminantBranchSupport (stage 3; reviewer PASS; first push; landing 20261013T072346-L-1118181 (interface); batch 20261013T072335; modules 3; new nodes 2)
 - 07:23 L: merged deliver/F3/Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor (stage 3; reviewer PASS; first push; landing 20261013T072347-L-1118310 (interface); batch 20261013T072335; modules 4; new nodes 3)
 - 07:23 L: merged deliver/F4/Sheaf.AlgebraicGeometry.ProjectionComparisonExact (stage 3; reviewer PASS; first push; landing 20261013T072347-L-1118452 (interface); batch 20261013T072335; modules 2; new nodes 1)
+- 07:23 L: merged deliver/F4/Sheaf.RingTheory.ProjectiveSymmetricCoefficientIntersection (stage 3; reviewer PASS; first push; landing 20261013T072347-L-1118687 (proof); batch 20261013T072335; modules 1; new nodes 0)
