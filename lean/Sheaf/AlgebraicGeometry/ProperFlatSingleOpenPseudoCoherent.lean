@@ -10,11 +10,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+import Sheaf.AlgebraicGeometry.ProperFlatSingleOpenNoetherianComparison
+import Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
+import Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent
 import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
@@ -70,6 +74,42 @@ theorem properFlat_single_open_isPseudoCoherent
       (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :
     U.toScheme.IsPseudoCoherent ((schemeOpenRestriction S U).mapDerivedCategory.obj
       ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) := by sorry
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) := by
+  intro x
+  obtain ⟨V, hx, T, Y, W, hT, hW, hnoeth, dT, dW, dY, dO,
+    p, hproper, A, hAb, hAc, g, L, ⟨eL⟩, hL, hcompare⟩ :=
+    properFlat_single_open_noetherian_comparison f F hF U x
+  let := hT
+  let := hnoeth
+  let := dT
+  let := dW
+  let := dY
+  let := dO
+  let := hproper
+  let := hL
+  obtain ⟨hb, hc⟩ := Scheme.noetherian_proper_directImage_bounded_coherent p A hAb hAc
+  have hpc := Scheme.isPseudoCoherent_of_bounded_coherent W.toScheme
+    ((schemeDerivedDirectImage p).obj A) hb hc
+  obtain ⟨P, hPb, hPf, hPe⟩ := Scheme.exists_boundedAbove_finiteFree_lift T W hW
+    ((schemeDerivedDirectImage p).obj A) hpc
+  let K := (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P
+  refine ⟨V, hx, K, ?_, ?_, hcompare P hPb hPf hPe⟩
+  · obtain ⟨N, hN⟩ := hPb
+    exact ⟨N, fun i hi ↦ L.map_isZero (hN i hi)⟩
+  · intro i
+    obtain ⟨r, ⟨e⟩⟩ := hPf i
+    let q := g ≫ W.ι
+    obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction q
+    let : (Scheme.Modules.tensorPullback q).IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
+    have : IsIso (Scheme.Modules.tensorPullbackObjUnitToUnit q) :=
+      (Scheme.Modules.tensorPullbackObjUnitToUnit_isIso q).1
+    let eunit := asIso (Scheme.Modules.tensorPullbackObjUnitToUnit q)
+    let eV := Scheme.Modules.overEquiv V
+    let eFree := (SheafOfModules.mapFreeIso (Scheme.Modules.tensorPullback q)
+      (ULift.{u} (Fin r)) eunit.symm).symm
+    let eOver := (SheafOfModules.mapFreeIso eV.inverse (ULift.{u} (Fin r))
+      (V.sheafOfModulesEquivOverInverseUnit
+        (moduleRings U.toScheme.toRingedSpace)).symm).symm
+    exact ⟨r, ⟨L.mapIso e ≪≫ eL.app _ ≪≫ eV.inverse.mapIso eFree ≪≫ eOver⟩⟩
 
 end AlgebraicGeometry

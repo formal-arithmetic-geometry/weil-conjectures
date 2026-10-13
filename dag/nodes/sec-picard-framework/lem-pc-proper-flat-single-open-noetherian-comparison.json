@@ -1,0 +1,169 @@
+{
+ "id": "lem-pc-proper-flat-single-open-noetherian-comparison",
+ "kind": "statement",
+ "title": "Noetherian source data and termwise comparison for a proper flat single image",
+ "statement": "Let f:X→S be proper, locally of finite presentation and quasi-compact, and let F be a finitely presented O_X-module flat over f [def-pc-scheme, def-pc-morphism-conventions, def-pc-scheme-module-flat-over]. Supply the independent derived localizations on X, S, an open U of S, and the localized sites of U [def-pc-derived-category, def-pc-derived-open-restriction-maps]. For each x∈U there is a neighbourhood V in U, an affine scheme T, a compact open W of T with W Noetherian, a scheme Y and a proper map p:Y→W. With auxiliary derived localizations in universe u+1, there is A∈D(O_Y) with bounded coherent cohomology [pqf-def-coherent]. There is a map g:V→W and an additive functor L from O_T-modules to modules on the localized site of V, isomorphic to ordinary tensor pullback along g followed by W→T, then the inverse localized-site equivalence [def-pc-module-pullback]. For every bounded-above finite-free complex P on T whose exact restriction to W is isomorphic to Rp_*A [def-pc-derived-direct-image], the exact localized restriction to V of (Rf_*F[0])|U is isomorphic to Q(L(P)), where L acts termwise. This statement supplies no finite-free representative of Rp_*A and asserts no pseudo-coherence of either direct image.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0A1H, Lemma 36.30.1, affine reduction and Noetherian approximation paragraphs; Tags 08E7, 08E5, 06YD and 08FE for representatives, K-flat pullback and open base change; Tag 081F for descent of properness"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-module-pullback",
+  "def-pc-morphism-conventions",
+  "def-pc-scheme",
+  "def-pc-scheme-module-flat-over",
+  "def-pur-pseudo-coherent-complex",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of x in U. Restrict the tensor data E=O_X and G=F[0] to its inverse image. Properness makes the support of F proper over the base. Write the affine ring as the filtered colimit of finitely generated Z-subalgebras and use noetherian_approximation_data to descend the morphism, the perfect unit and the bounded flat proper-support complex. Enlarge the stage further using eventual properness to make the descended morphism proper. Use standard derived localizations in universe u+1 on all auxiliary schemes and localized sites. Set T=Spec of the stage ring and W=top, with the canonical total-open identification. The descended morphism p:Y→W is finitely presented; W is Noetherian and T affine, and W is compact.",
+   "uses": [
+    "lem-pc-proper-support-affine-tensor-restriction",
+    "lem-pc-noetherian-approximation-data",
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let A be the descended perfect tensor bounded-complex object on Y. Finite presentation and quasi-compactness over the Noetherian W make Y Noetherian. Finitely presented terms are coherent. Apply perfect_tensor_bounded_coherent to obtain bounded coherent source cohomology. Package these two source hypotheses on A, and the properness of p already obtained in the approximation step, without asserting any property of Rp_*A.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-perfect-tensor-bounded-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let g:V→W be the comparison and L=tensorPullback(g≫W.ι) followed by the inverse localized-site equivalence. The tensor-pullback adjunction gives additivity; the equivalence is exact and additive. Given any bounded-above finite-free P on T with its restriction representing Rp_*A, its terms are flat and P is K-flat. Compute derived pullback termwise. Relatively flat derived base change applied to the descended tensor data and the descended object/complex identifications gives the original image on V. Compose with open direct-image restriction. Localization uniqueness identifies Q-images under the independent supplied localizations: both right-derived images are computed from the same K-injective resolution, and exact site equivalences descend along Q. This constructs the comparison for every such P, without constructing or postulating a P. Empty U has no x; zero F descends zero tensor data.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-rf-base-change-complex",
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-noetherian-approximation-data",
+  "lem-pc-perfect-tensor-bounded-coherent",
+  "lem-pc-proper-support-affine-tensor-restriction",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-rf-base-change-complex",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0A1H, approximation paragraph specialized to E=O_X and G=F[0]; typed source/termwise comparison decomposition by R2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation of a proper finitely presented morphism with a relatively flat finitely presented module and derived base change comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of a proper finitely presented morphism with a relatively flat finitely presented module and derived base change comparison",
+   "results": "8 hits: Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, AdicCompletion.flat_of_isNoetherian, AlgHom.FinitePresentation.of_finiteType, RingHom.FinitePresentation.of_finiteType, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian; no geometric derived comparison model theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsProper, LocallyOfFinitePresentation",
+   "results": "loogle: unknown identifier 'IsProper'",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "noetherian.*approximation|approximation.*noetherian|derived.*base.?change",
+   "results": "0 hits: ; no geometric derived comparison model theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatSingleOpenPseudoCoherent",
+  "group": "R2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), Noetherian approximation over an affine open: descend tensor data and compare termwise pullbacks before choosing a finite-free representative",
+   "via": [
+    "lem-pc-proper-flat-single-open-pseudo-coherent",
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-pc-finite-affine-cech-model-perfect",
+    "lem-pc-proper-flat-affine-cech-perfect-model",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatSingleOpenNoetherianComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSingleOpenNoetherianComparison.lean",
+  "declaration": "AlgebraicGeometry.properFlat_single_open_noetherian_comparison",
+  "statement": "theorem properFlat_single_open_noetherian_comparison {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (F : X.Modules) [F.IsFinitePresentation] (hF : F.IsFlatOver f) (U : S.Opens) [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{wS} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (x : U.toScheme) : ∃ V : U.toScheme.Opens, x ∈ V ∧ ∃ (T Y : Scheme.{u}) (W : T.Opens), IsAffine T ∧ IsCompact (W : Set T) ∧ IsNoetherian W.toScheme ∧ ∃ (dT : HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings T.toRingedSpace))) (dW : HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))) (dY : HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))) (dO : ∀ B : W.toScheme.Opens, HasDerivedCategory.{u + 1} (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over B))), letI := dT letI := dW letI := dY letI := dO ∃ p : Y ⟶ W.toScheme, IsProper p ∧ ∃ A : schemeDerivedCategory Y, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj A)) ∧ (∀ i : ℤ, RingedSpace.IsCoherent Y.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj A)) ∧ ∃ (g : V.toScheme ⟶ W.toScheme) (L : T.Modules ⥤ SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V)), Nonempty (L ≅ Scheme.Modules.tensorPullback (g ≫ W.ι) ⋙ (Scheme.Modules.overEquiv V).inverse) ∧ ∃ hL : L.Additive, letI := hL (∀ P : CochainComplex T.Modules ℤ, (∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P.X i)) → (∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free (R := moduleRings T.toRingedSpace) (ULift.{u} (Fin r)))) → Nonempty ((schemeOpenRestriction T W).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ≅ (schemeDerivedDirectImage p).obj A) → Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.obj ((schemeOpenRestriction S U).mapDerivedCategory.obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) ≅ DerivedCategory.Q.obj ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T100111-L-2482090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T100111-L-2482090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

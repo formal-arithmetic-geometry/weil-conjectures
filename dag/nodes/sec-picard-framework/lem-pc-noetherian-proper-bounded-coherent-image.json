@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-noetherian-proper-bounded-coherent-image",
+ "kind": "statement",
+ "title": "Bounded coherent image for proper morphisms over a Noetherian base",
+ "statement": "Let T be a Noetherian scheme and p:Y→T proper [def-pc-scheme, def-pc-morphism-conventions]. Supply independent derived localizations on Y and T [def-pc-derived-category]. If A∈D(O_Y) has bounded coherent cohomology [pqf-def-coherent], then Rp_*A [def-pc-derived-direct-image] has bounded coherent cohomology on T. No relative flatness, finite Tor dimension, finite-free representative or pseudo-coherence conclusion is assumed or asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 08E2, Lemma 36.11.3, specialized to proper p; Tag 02O5 for proper coherence and Tag 08D5 for the uniform upper bound"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Properness and the Noetherian base make Y Noetherian. Use the bounded-below hypercohomology spectral sequence for the left exact pushforward functor and the supplied bounded source. Its E2 terms are the higher direct images of coherent cohomology sheaves of A, hence coherent by proper coherence. Each total degree has a finite filtration of subquotients of these terms. On a Noetherian scheme coherence is closed under subquotients and finite extensions, so every image cohomology sheaf is coherent. The lower bound is inherited from the lower bound of A and left exactness.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-pc-coherent-hi",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Properness makes p quasi-compact and quasi-separated, and the Noetherian T is quasi-compact. Source coherent cohomology is quasi-coherent. Choose an upper bound b for source cohomology; A[b] has no positive cohomology. The uniform derived-direct-image truncation bound gives N with image cohomology of A[b] zero in degrees at least N. Derived image commutes with shifts, so image cohomology of A vanishes in degrees at least b+N. Combine with the lower bound of step 1. Empty Y and zero A give zero image. No arbitrary-base approximation, flatness, Tor bound or pseudo-coherent representative occurs.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "lem-pc-coherent-hi",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "pqf-lem-coherent-ft-locnoeth",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08E2, spectral sequence and upper-bound argument; proper Noetherian specialization isolated by R2 because DirectImageBoundedCoherent has a current import cycle"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper morphism over a Noetherian scheme preserves bounded coherent derived complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism over a Noetherian scheme preserves bounded coherent derived complexes",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, DerivedCategory.isLE_Q_obj_iff, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, DerivedCategory.isGE_iff; no matching geometric bounded-coherent proper-image result",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*directImage|directImage.*coherent|proper.*cohomology",
+   "results": "0 hits: ; no matching geometric bounded-coherent proper-image result",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatSingleOpenPseudoCoherent",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), Noetherian stage: bounded coherent proper image before a finite-free resolution and arbitrary-base pullback",
+   "via": [
+    "lem-pc-proper-flat-single-open-pseudo-coherent",
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-pc-finite-affine-cech-model-perfect",
+    "lem-pc-proper-flat-affine-cech-perfect-model",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NoetherianProperBoundedCoherentImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianProperBoundedCoherentImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.noetherian_proper_directImage_bounded_coherent",
+  "statement": "theorem noetherian_proper_directImage_bounded_coherent {Y T : Scheme.{u}} [IsNoetherian T] (p : Y ⟶ T) [IsProper p] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wT} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (A : schemeDerivedCategory Y) (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj A)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent Y.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj A)) : (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj ((schemeDerivedDirectImage p).obj A))) ∧ (∀ i : ℤ, RingedSpace.IsCoherent T.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj ((schemeDerivedDirectImage p).obj A)))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T100111-L-2482090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T100111-L-2482090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
