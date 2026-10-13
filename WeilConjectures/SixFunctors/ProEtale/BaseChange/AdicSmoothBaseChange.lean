@@ -281,7 +281,8 @@ An object of `D_comp(T, ℚ̄_ℓ)` represented at a finite stage is an object `
 `D_comp(T, E)` for a finite subextension `E` of `ℚ̄_ℓ = PadicAlgCl l` over `ℚ_ℓ`, and the
 `ℚ̄_ℓ`-coefficient exchange map is the one of the stage. For every such stage and every
 integral lattice of `K_E`, the finite-stage exchange map is an isomorphism in `D_comp(X, E)`;
-this is `AlgebraicGeometry.ProEtale.isIso_fromIntegral_map_of_e_coefficient_smooth_base_change` applied
+this is
+`AlgebraicGeometry.ProEtale.isIso_fromIntegral_map_of_e_coefficient_smooth_base_change` applied
 to the stage `E`, whose hypotheses hold at every finite stage. -/
 theorem isIso_fromIntegral_map_of_qlbar_coefficient_smooth_base_change [Smooth p]
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p) (hlS : IsUnit (l : Γ(S, ⊤)))
