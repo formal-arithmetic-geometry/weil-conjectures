@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-local-stalk-factorization-germ-comparison",
+ "kind": "statement",
+ "title": "Germ comparison for an already descended local factorization",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\mathcal F,\\mathcal G$ module sheaves [def-weil-sheaf-of-modules-category], $x\\in W\\subseteq V\\subseteq U\\subseteq X$ open neighborhoods, and $A$ a module sheaf on $U$ [def-pur-localized-ringed-site]. Let $b:A\\to\\mathcal F|_U$ be an epimorphism. Suppose $\\psi:A|_V\\to\\mathcal G|_V$ has germ action $\\psi_Z(t)_x=\\chi(b_Z(t)_x)$ for all $x\\in Z\\subseteq V$ and $t\\in A(Z)$, where $\\chi:\\mathcal F_x\\to\\mathcal G_x$ is a linear map [def-weil-pbc-module-stalk], [def-pc-module-stalk-functor]. Suppose a morphism $\\theta:(\\mathcal F|_U)|_V|_W\\to(\\mathcal G|_V)|_W$ is already given with $b|_W$ followed by $\\theta$ equal to $\\psi|_W$. Then there is $\\varphi\\in\\mathcal Hom(\\mathcal F,\\mathcal G)(W)$ [def-pur-sheaf-hom] such that for every $x\\in Z\\subseteq W$ and $s\\in\\mathcal F(Z)$, $\\varphi_Z(s)_x=\\chi(s_x)$. No finite-generation or finite-presentation hypothesis is imposed; the lift psi and descent theta are hypotheses, not conclusions.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom, third paragraph; finite-coordinate construction and its finite-type vanishing argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct eF by mapping overFunctorMap R i along restriction to W and composing with overFunctorMap R j; let eG be overFunctorMap R j. The presheaf morphism underlying eF.inv composed with theta composed with eG.hom is the required internal-Hom section phi.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a section s over Z inside W containing x, apply local module epi germ lifting to b to obtain a section t over a smaller Z' whose image has the same germ as s. The stalk internal-Hom evaluation formula respects that equality.",
+   "uses": [
+    "lem-weil-pbc-local-module-epi-germ-lift",
+    "lem-weil-pbc-stalk-internal-hom-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply congrArg to htheta at the smaller neighborhood and its lifted section t. The canonical restriction isomorphisms act by identities on section carriers, so this gives phi(b(t)) = psi(t). Rewrite via the stalk evaluation formula and the equality of source germs; apply the assumed formula hpsi. This is the complete Lean proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-local-module-epi-germ-lift",
+  "lem-weil-pbc-stalk-internal-hom-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom; read at https://stacks.math.columbia.edu/tag/01CP",
+  "note": "Second reader R3 closed this theorem using SheafOfModules.overFunctorMap, exists_local_module_epi_germ_lift, exists_stalk_internalHom_linearMap, and componentwise evaluation of htheta. Axiom probe shows only propext, Classical.choice and Quot.sound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A factorization of a local morphism through an epimorphism induces the prescribed stalk map if it agrees after the epimorphism",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two morphisms agree on stalk germs after an epimorphism of sheaves of modules, they agree on all section germs",
+   "results": "stalk_hom_ext, germ_ext, germ_eq and GeneratingSections.ofEpi_s; no iterated local module factorization formula.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSieve_mem|overEquiv_iff|freeHomEquiv|germ_eq",
+   "results": "Existing germ representation/equality, free sheaf universal properties and covering sieve APIs; no combined finite free local lifting or shrinking statement.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Finite-presentation coordinate kernel on module stalks in the proof of 01CP; refinement: Tag 01CP, proof, third paragraph: finite-coordinate kernel lifting, expanded using representatives and the presentation cokernel.; refinement: final comparison of an already descended map using the source epimorphism.",
+   "via": [
+    "lem-weil-pbc-stalk-linear-map-local-lift-finite-presentation",
+    "lem-weil-pbc-finite-presentation-stalk-kernel",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalStalkFactorizationGermComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalStalkFactorizationGermComparison.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_internalHom_of_local_stalk_factorization",
+  "statement": "theorem exists_internalHom_of_local_stalk_factorization\n    (X : RingedSpace.{u}) (F G : Modules X) (x : X)\n    (U V W : Opens X) (hxW : x ∈ W) (i : V ⟶ U) (j : W ⟶ V)\n    (A : SheafOfModules.{u} (((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf).over U))\n    (b : A ⟶ F.over U) [Epi b]\n    (ψ : (SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) i).obj A ⟶ G.over V)\n    (χ : (moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x]\n      (moduleStalkFunctor X x).obj G)\n    (hψ : ∀ (Z : Opens X) (k : Z ⟶ V) (hxZ : x ∈ Z)\n      (t : A.val.obj (op (Over.mk (k ≫ i)))),\n      TopCat.Presheaf.germ G.val.presheaf Z x hxZ\n        (ψ.val.app (op (Over.mk k)) t) =\n      χ (TopCat.Presheaf.germ F.val.presheaf Z x hxZ\n        (b.val.app (op (Over.mk (k ≫ i))) t)))\n    (θ : (SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) j).obj\n        ((SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) i).obj (F.over U)) ⟶\n      (SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) j).obj (G.over V))\n    (hθ : (SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) j).map\n        ((SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) i).map b) ≫ θ =\n      (SheafOfModules.overMap.{u} ((sheafCompose (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) j).map ψ) :\n    ∃ (φ : (F.homObj G).val.obj (op W)),\n      ∀ (Z : Opens X) (k : Z ⟶ W) (hxZ : x ∈ Z) (s : F.val.obj (op Z)),\n        TopCat.Presheaf.germ G.val.presheaf Z x hxZ (φ.app (op (Over.mk k)) s) =\n          χ (TopCat.Presheaf.germ F.val.presheaf Z x hxZ s)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100114-L-2482925",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100114-L-2482925",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,48 +15,43 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite free presentation of F near x. Represent the images under chi of its finitely many generator germs by sections of G on a common smaller neighborhood. The universal property of the free generator sheaf turns these sections into a module morphism to G.",
+   "text": "Choose a finite local presentation using IsFinitePresentation.exists_quasicoherentData and Opens.coversTop_iff. Its generators and relations give a,b with a composed with b zero and P.isColimit. Lift chi after b on a smaller open by finite free local stalk map lifting.",
    "uses": [
     "def-weil-pbc-module-finite-type-presentation",
-    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-finite-free-local-stalk-map-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The germ formula for the lifted map applied to a relation is chi of the germ of b(a(t)); a composed with b is zero, so all these germs vanish. Apply finite free local hom zero to shrink and kill the relation morphism. Restriction preserves the presentation cokernel. Descend the generator map using CokernelCofork.IsColimit.desc'.",
+   "uses": [
+    "lem-weil-pbc-finite-free-local-hom-zero",
     "def-pur-localized-ringed-site"
    ],
    "elementary": false
   },
   {
-   "text": "Compose with the free relation map. Its stalk is zero: its value on each relation is chi of the corresponding relation in F_x, which vanishes. Each of the finitely many relation basis images therefore has zero germ. Shrink for each such image and intersect the resulting neighborhoods. The composite then vanishes on every relation basis section and hence is zero as a sheaf morphism.",
+   "text": "Apply local stalk factorization germ comparison to the epimorphism b, its lifted map psi, the already constructed descent theta and its cokernel factorization equation. This gives the internal-Hom section and its formula on every subneighborhood.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Descend the free-generator map through the cokernel presentation, obtaining a local morphism phi from F to G. Its stalk map agrees with chi on the generator germs, hence everywhere because the generator stalk map is surjective. Naturality of germs gives the displayed formula on all subneighborhoods. Cofinality identifies restricted stalks with original stalks. Empty generator or relation families require no representatives or shrinking, so the same argument applies.",
-   "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
-    "def-pur-sheaf-hom",
-    "def-weil-pbc-module-stalk",
-    "def-pc-module-stalk-functor",
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-module-stalk-exact"
+    "lem-weil-pbc-local-stalk-factorization-germ-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-module-finite-type-presentation",
-  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-finite-free-local-stalk-map-lift",
+  "lem-weil-pbc-finite-free-local-hom-zero",
   "def-pur-localized-ringed-site",
-  "lem-weil-pbc-module-stalk-exact",
-  "def-pur-sheaf-hom",
-  "def-pc-module-stalk-functor"
+  "lem-weil-pbc-local-stalk-factorization-germ-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "R3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Tag 01CP, proof, third paragraph: finite-coordinate kernel lifting, expanded using representatives and the presentation cokernel. Read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13; categorical expansion by R4."
+  "place": "Tag 01CP, lemma-stalk-internal-hom, third paragraph; read at https://stacks.math.columbia.edu/tag/01CP",
+  "note": "Finite-coordinate lifting split into two finite free steps. The local epimorphism germ lift and comparison of the constructed factorization are proved without sorry. The item proves finite-presentation selection, relation germ vanishing, restriction of the cokernel and descent; only the two finite free statements remain open."
  },
  "mathlib_searches": [
   {
@@ -150,9 +145,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T082410-L-1646636",
+  "landing": "20261013T100114-L-2482925",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

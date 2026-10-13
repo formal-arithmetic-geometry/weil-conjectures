@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-finite-free-local-stalk-map-lift",
+ "kind": "statement",
+ "title": "FiniteFreeLocalStalkMapLift",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\mathcal F,\\mathcal G$ module sheaves [def-weil-sheaf-of-modules-category], $x\\in U\\subseteq X$ with $U$ open, $I$ a finite set, $A=\\mathcal O_U^{\\oplus I}$ and $f:A\\to\\mathcal F|_U$ a module morphism [def-pur-localized-ringed-site]. Given an $\\mathcal O_{X,x}$-linear map $\\chi:\\mathcal F_x\\to\\mathcal G_x$ [def-weil-pbc-module-stalk], [def-pc-module-stalk-functor], there are an open $x\\in V\\subseteq U$ and $\\psi:A|_V\\to\\mathcal G|_V$ such that for every $x\\in W\\subseteq V$ and $s\\in A(W)$, $\\psi_W(s)_x=\\chi(f_W(s)_x)$. No relation-annihilation or quotient descent is asserted.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom, third paragraph; finite-coordinate construction and its finite-type vanishing argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose representatives in G of the images under chi of the finitely many germs of the sections f(e_i) at x. Intersect their neighborhoods with U.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-stalk-functor",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use preservation of free coproducts by restriction and freeHomEquiv to construct psi from these image sections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Finite coproducts of module sheaves are computed sectionwise, so every germ of a local free section is a finite linear combination of the basis germs. Linearity and naturality give the asserted formula; the empty index set gives the zero map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom; read at https://stacks.math.columbia.edu/tag/01CP",
+  "note": "Categorical expansion of the finite-coordinate argument by R3; full proof in declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear map on stalks composed with a finite free sheaf morphism lifts locally; an epimorphism of module sheaves lifts section germs",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from the stalk of a finitely presented module sheaf lifts to a morphism on an open neighborhood",
+   "results": "Eight affine Tilde stalk/localization lemmas; no ringed-space local free lifting theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSieve_mem|overEquiv_iff|freeHomEquiv|germ_eq",
+   "results": "Existing germ representation/equality, free sheaf universal properties and covering sieve APIs; no combined finite free local lifting or shrinking statement.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Finite-presentation coordinate kernel on module stalks in the proof of 01CP; refinement: Tag 01CP, proof, third paragraph: finite-coordinate kernel lifting, expanded using representatives and the presentation cokernel.; refinement: FiniteFreeLocalStalkMapLift in the finite-generator/finite-relation construction for Tag 01CP.",
+   "via": [
+    "lem-weil-pbc-stalk-linear-map-local-lift-finite-presentation",
+    "lem-weil-pbc-finite-presentation-stalk-kernel",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeLocalStalkMapLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeLocalStalkMapLift.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_finiteFree_local_stalkMap_lift",
+  "statement": "theorem exists_finiteFree_local_stalkMap_lift\n    (X : RingedSpace.{u}) (F G : Modules X) (x : X)\n    (U : Opens X) (hxU : x ∈ U) (I : Type u) [Finite I]\n    (f : SheafOfModules.free (R := ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf).over U) I ⟶ F.over U)\n    (χ : (moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x]\n      (moduleStalkFunctor X x).obj G) :\n    ∃ (V : Opens X) (hxV : x ∈ V) (i : V ⟶ U)\n      (ψ : (SheafOfModules.overMap ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) i).obj\n        (SheafOfModules.free (R := ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf).over U) I) ⟶ G.over V),\n      ∀ (W : Opens X) (j : W ⟶ V) (hxW : x ∈ W)\n        (s : (SheafOfModules.free (R := ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf).over U) I).val.obj\n          (op (Over.mk (j ≫ i)))),\n        TopCat.Presheaf.germ G.val.presheaf W x hxW\n          (ψ.val.app (op (Over.mk j)) s) =\n        χ (TopCat.Presheaf.germ F.val.presheaf W x hxW\n          (f.val.app (op (Over.mk (j ≫ i))) s))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100114-L-2482925",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100114-L-2482925",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
