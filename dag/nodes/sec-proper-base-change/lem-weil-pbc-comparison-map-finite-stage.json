@@ -13,21 +13,21 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the upper tail of i₀. Construct the B and C tensor diagrams. Surjectivity and eventual vanishing of the canonical maps give the corresponding ring colimits: define universal maps on representatives, check independence by eventual equality and check sums and products at common upper bounds.",
+   "text": "Apply the proved coefficient-structure descent theorem to obtain a stage j and its P-linear canonical map to B.",
    "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+    "lem-weil-pbc-tensor-algebra-structure-finite-stage"
    ],
    "elementary": false
   },
   {
-   "text": "Apply finite-presentation factorization over Z to P → B. Transport the descended P-structure to the upper tail of the factorization stage. The C stages receive P-structures through the base change of φ₀. The restriction of g to Q is P-linear because its restriction to B is the limit φ map. Factor Q → C as a P-algebra map into a C stage on this tail.",
+   "text": "Restrict g to Q through the right tensor inclusion. The left compatibility he and the tensor balancing identity show that this map respects P. Apply the proved relative right-factor descent theorem, obtaining i, aPi, μB and q : Q → Cᵢ with scalar and factorization identities.",
    "uses": [
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+    "lem-weil-pbc-tensor-right-factor-finite-stage"
    ],
    "elementary": false
   },
   {
-   "text": "Use the tensor universal property to combine Bᵢ → Cᵢ with the descended Q → Cᵢ, obtaining ψ. The left inclusion identity follows from its definition. The coprojection Bᵢ → B is P-linear by the descended P-structure. The limit identity holds on Bᵢ by the given compatibility and on Q by factorization; tensor extensionality gives equality.",
+   "text": "Equip Cᵢ with the P-structure induced by φᵢ and aPi, and view φᵢ and q as P-algebra maps. Define ψ by Algebra.TensorProduct.productMap. Its left restriction is φᵢ. For the limit equality apply ringHom_ext: on Bᵢ use he, the canonical identity for μB, and tensor induction proving the base-change square; on Q use the factorization identity for q and preservation of one.",
    "uses": [
     "lem-weil-pbc-algebra-tensor-pushout-universal-property"
    ],
@@ -35,15 +35,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+  "lem-weil-pbc-tensor-algebra-structure-finite-stage",
+  "lem-weil-pbc-tensor-right-factor-finite-stage",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "K1",
-  "date": "2026-10-13",
-  "place": "Explicit subargument of the original comparison-system proof; follows the cited Stacks construction."
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), construction of Ψ; finite-generator and finite-relation descent of Tag 00QO, (1) implies (2); tensor representatives as in Tag 00DD. Lean proof by E3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -124,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T062526-L-734064",
+  "landing": "20261013T082340-L-1633865",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

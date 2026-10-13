@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.RingTheory.TensorAlgebraStructureFiniteStage
+import Sheaf.RingTheory.TensorRightFactorFiniteStage
 
 /-! # Finite-stage descent of a compatible tensor comparison
 
@@ -86,6 +88,71 @@ theorem exists_comparison_map_finite_stage
               (Algebra.TensorProduct.map (Algebra.ofId (F.obj i) (F.obj i)) φ₀).toRingHom ∧
             (Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) C₀)).toRingHom.comp ψ =
               g.comp (Algebra.TensorProduct.map μB (AlgHom.id P Q)).toRingHom
-    := by sorry
+    := by
+  let := (colimit.ι F i₀).hom.toAlgebra
+  let := aP
+  let f := g.comp (Algebra.TensorProduct.includeRight (R := P)
+    (A := ↥(colimit F) ⊗[F.obj i₀] B₀) (B := Q)).toRingHom
+  have hf : f.comp (algebraMap P Q) =
+      (Algebra.TensorProduct.map (Algebra.ofId ↥(colimit F) ↥(colimit F)) φ₀).toRingHom.comp
+        (algebraMap P (↥(colimit F) ⊗[F.obj i₀] B₀)) := by
+    apply RingHom.ext
+    intro r
+    change g (1 ⊗ₜ[P] algebraMap P Q r) =
+      (Algebra.TensorProduct.map (Algebra.ofId ↥(colimit F) ↥(colimit F)) φ₀)
+        (algebraMap P (↥(colimit F) ⊗[F.obj i₀] B₀) r)
+    trans g (algebraMap P (↥(colimit F) ⊗[F.obj i₀] B₀) r ⊗ₜ[P] 1)
+    · congr 1
+      exact (Algebra.TensorProduct.tmul_one_eq_one_tmul r).symm
+    · exact RingHom.congr_fun he _
+  obtain ⟨j, hj, aPj, μBj, hμBj⟩ :=
+    exists_tensor_algebra_structure_finite_stage F i₀ B₀ P aP
+  obtain ⟨i, hi, aPi, μB, hμB, q, hq, hqf⟩ :=
+    exists_tensor_right_factor_finite_stage F i₀ B₀ C₀ φ₀ P Q aP
+      j hj aPj μBj hμBj f hf
+  let := (F.map (homOfLE hi)).hom.toAlgebra
+  let := aPi
+  let αi : F.obj i →ₐ[F.obj i₀] ↥(colimit F) :=
+    { (colimit.ι F i).hom with
+      commutes' := fun s ↦
+        congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s) (colimit.w F (homOfLE hi)) }
+  let φi := Algebra.TensorProduct.map (Algebra.ofId (F.obj i) (F.obj i)) φ₀
+  let μC := Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) C₀)
+  let := (φi.toRingHom.comp (algebraMap P (↥(F.obj i) ⊗[F.obj i₀] B₀))).toAlgebra
+  let φiP : (↥(F.obj i) ⊗[F.obj i₀] B₀) →ₐ[P]
+      (↥(F.obj i) ⊗[F.obj i₀] C₀) :=
+    { φi.toRingHom with commutes' := fun _ ↦ rfl }
+  let qP : Q →ₐ[P] (↥(F.obj i) ⊗[F.obj i₀] C₀) :=
+    { q with commutes' := fun r ↦ RingHom.congr_fun hq r }
+  let ψ := (Algebra.TensorProduct.productMap φiP qP).toRingHom
+  refine ⟨i, hi, aPi, μB, hμB, ψ, ?_, ?_⟩
+  · apply RingHom.ext
+    intro b
+    exact Algebra.TensorProduct.productMap_left_apply φiP qP b
+  · apply Algebra.TensorProduct.ringHom_ext
+    · apply RingHom.ext
+      intro b
+      change μC (ψ (b ⊗ₜ[P] 1)) = g (μB b ⊗ₜ[P] 1)
+      simp only [ψ, AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom,
+        Algebra.TensorProduct.productMap_left_apply]
+      have hleft := RingHom.congr_fun he (μB b)
+      simp only [RingHom.comp_apply, Algebra.TensorProduct.includeLeftRingHom_apply] at hleft
+      rw [hleft]
+      rw [show μB b = Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) B₀) b from
+        RingHom.congr_fun hμB b]
+      clear hleft
+      induction b using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a b => simp [μC, φiP, φi, Algebra.TensorProduct.map_tmul]
+      | add b c hb hc => simpa only [map_add] using congrArg₂ (· + ·) hb hc
+    · apply RingHom.ext
+      intro r
+      change μC (ψ (1 ⊗ₜ[P] r)) =
+        g (Algebra.TensorProduct.map μB (AlgHom.id P Q) (1 ⊗ₜ[P] r))
+      simp only [Algebra.TensorProduct.map_tmul, map_one, AlgHom.id_apply]
+      change μC (Algebra.TensorProduct.productMap φiP qP (1 ⊗ₜ[P] r)) =
+        g (1 ⊗ₜ[P] r)
+      rw [Algebra.TensorProduct.productMap_right_apply]
+      exact RingHom.congr_fun hqf r
 
 end RingHom
