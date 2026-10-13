@@ -10,13 +10,8 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
+import Sheaf.RingTheory.PopescuCoefficientRescaling
+import Sheaf.RingTheory.PolynomialParameterQuotientChart
 
 /-!
 # Rescaling data before polynomial coefficient base change
@@ -204,6 +199,92 @@ theorem exists_popescu_rescaling_data
               (MvPolynomial.map (algebraMap B D') (e (Ideal.Quotient.mk I₀ z))) =
               Ideal.Quotient.mk K (algebraMap Λ L (algebraMap R Λ z))) ∧
             (∀ x, g (f₀ x) = Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧
-            (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by sorry
+            (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by
+  classical
+  obtain ⟨m, hRΛ, hkRΛ, hSR, hkSR, hSΛ, hSRΛ, hkSΛ, ell, rho,
+    hrho, hrel, hmem, hkerR, hkerΛ, E, uP, tΛ, huP, hparameters, ht,
+    hErho, hC, hX, D, hD, hlocalD, hartD, hkD, hBD, hkBD, hsmooth,
+    f₀, g, δ, coeff, hlocal, hlocalg, hflatg, hgC, hgX, hgf, hgcoeff⟩ :=
+    exists_popescu_coefficient_rescaling p hp α q hreg N hN hpower d hd s a ha c hc
+      r f hf m₀ φ₀ ψ₀ hψ₀ hideal₀ hflat₀ D₀ g₀ hsmooth₀ hgflat₀ hfactor₀ hinc₀
+  let R := MvPolynomial (Fin m) k
+  let P := MvPolynomial (Fin m₀) k
+  let p₀ := q.asIdeal.comap φ₀.toRingHom
+  let n := N + d * (8 * c)
+  let B := P ⧸ p₀ ^ n
+  let S := MvPolynomial (Fin d) k
+  let L := Localization.AtPrime q.asIdeal
+  let K := IsLocalRing.maximalIdeal L ^ n
+  let : Algebra R Λ := hRΛ
+  have : IsScalarTower k R Λ := hkRΛ
+  let : Algebra S R := hSR
+  have : IsScalarTower k S R := hkSR
+  let : Algebra S Λ := hSΛ
+  have : IsScalarTower S R Λ := hSRΛ
+  have : IsScalarTower k S Λ := hkSΛ
+  let : CommRing D := hD
+  have : IsLocalRing D := hlocalD
+  have : IsArtinianRing D := hartD
+  let : Algebra k D := hkD
+  let : Algebra B D := hBD
+  have : IsScalarTower k B D := hkBD
+  obtain ⟨H, e, hHQ, hHL, heC, heX⟩ :=
+    exists_polynomial_parameter_quotient_chart m₀ m d n φ₀ q E uP tΛ
+      hparameters hideal₀ ht hC hX
+  have hrhoE (i : Fin d) : rho i = E.symm (MvPolynomial.C (uP i) * MvPolynomial.X i) :=
+    E.injective (by simpa only [AlgEquiv.apply_symm_apply] using hErho i)
+  have hHQ' : H.map (algebraMap R (Localization.AtPrime (q.asIdeal.under R))) =
+      Ideal.span (Set.range (fun i ↦
+        algebraMap R (Localization.AtPrime (q.asIdeal.under R)) (rho i))) := by
+    simpa only [hrhoE] using hHQ
+  let u₀ : Fin d → D := fun i ↦ algebraMap B D (Ideal.Quotient.mk (p₀ ^ n) (uP i))
+  have hpoly (i : Fin d) :
+      MvPolynomial.map (algebraMap B D)
+        (e (Ideal.Quotient.mk (H ^ n) (algebraMap S R (MvPolynomial.X i)))) =
+      MvPolynomial.C (u₀ i) * MvPolynomial.X i := by
+    have hi : algebraMap S R (MvPolynomial.X i) = rho i := congrFun hrho i |>.symm
+    rw [hi, hrhoE i, map_mul, map_mul, map_mul, heC, heX, map_mul]
+    change MvPolynomial.map (algebraMap B D)
+      (MvPolynomial.C (Ideal.Quotient.mk (p₀ ^ n) (uP i))) *
+        MvPolynomial.map (algebraMap B D) (MvPolynomial.X i) = _
+    rw [MvPolynomial.map_C, MvPolynomial.map_X]
+  let ev : MvPolynomial (Fin d) D →+* L ⧸ K :=
+    MvPolynomial.eval₂Hom g (fun i ↦ g (δ i : D))
+  let red : R →+* MvPolynomial (Fin d) D :=
+    (MvPolynomial.map (algebraMap B D)).comp
+      (e.toRingHom.comp (Ideal.Quotient.mk (H ^ n)))
+  let target : R →+* L ⧸ K :=
+    (Ideal.Quotient.mk K).comp ((algebraMap Λ L).comp (algebraMap R Λ))
+  have heval : ev.comp (red.comp E.symm.toRingHom) = target.comp E.symm.toRingHom := by
+    apply MvPolynomial.ringHom_ext
+    · intro z
+      change ev (MvPolynomial.map (algebraMap B D)
+        (e (Ideal.Quotient.mk (H ^ n) (E.symm (MvPolynomial.C z))))) =
+        Ideal.Quotient.mk K (algebraMap Λ L (algebraMap R Λ (E.symm (MvPolynomial.C z))))
+      rw [heC, MvPolynomial.map_C, hC]
+      simp only [ev, MvPolynomial.eval₂Hom_C]
+      exact hgC z
+    · intro i
+      change ev (MvPolynomial.map (algebraMap B D)
+        (e (Ideal.Quotient.mk (H ^ n) (E.symm (MvPolynomial.X i))))) =
+        Ideal.Quotient.mk K (algebraMap Λ L (algebraMap R Λ (E.symm (MvPolynomial.X i))))
+      rw [heX, MvPolynomial.map_X, hX]
+      simp only [ev, MvPolynomial.eval₂Hom_X']
+      exact hgX i
+  have heval' (z : R) :
+      MvPolynomial.eval₂Hom g (fun i ↦ g (δ i : D))
+        (MvPolynomial.map (algebraMap B D) (e (Ideal.Quotient.mk (H ^ n) z))) =
+      Ideal.Quotient.mk K (algebraMap Λ L (algebraMap R Λ z)) := by
+    have hz := RingHom.congr_fun heval (E z)
+    change ev (red (E.symm (E z))) = target (E.symm (E z)) at hz
+    rw [AlgEquiv.symm_apply_apply] at hz
+    dsimp only [ev, red, target] at hz
+    simp only [RingHom.comp_apply] at hz
+    exact hz
+  exact ⟨m, hRΛ, hkRΛ, hSR, hkSR, hSΛ, hSRΛ, hkSΛ, ell, rho,
+    hrho, hrel, hmem, hkerR, hkerΛ, H, hHQ', hHL, B, inferInstance, inferInstance,
+    D, hD, hlocalD, hartD, hkD, hBD, hkBD, e, hsmooth,
+    f₀, g, u₀, δ, coeff, hlocal, hlocalg, hflatg, hpoly, heval', hgf, hgcoeff⟩
+
 
 end Algebra
