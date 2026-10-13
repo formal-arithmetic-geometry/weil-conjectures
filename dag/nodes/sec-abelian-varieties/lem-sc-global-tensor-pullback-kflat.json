@@ -15,27 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Evaluation at the unique nonempty open commutes with the sheaf tensor and its coproduct totalization. The isomorphism he therefore identifies e with the canonical exact monoidal evaluation equivalence. Its inverse preserves acyclicity and K-flatness: test the tensor against an acyclic complex, move it through the equivalence, and use the inverse unit/counit. This also identifies the generic quasi-isomorphism-preservation definition of K-flatness with the acyclic-tensor definition used for sheaves.",
+   "text": "Represent the homotopy objects by cochain complexes using surjectivity of the quotient. The quotient K-flat criterion gives ordinary cochain K-flatness. Apply pointInverseEvaluation_isKFlat to obtain sheaf IsKFlatness of the inverse-evaluated complex.",
    "uses": [
-    "lem-pc-point-module-evaluation-equivalence",
-    "def-pc-global-derived-rhom",
+    "lem-sc-point-inverse-evaluation-kflat",
     "def-pc-kflat-complex",
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use h degreewise as eqToIso to identify P applied termwise with concrete tensorPullbackComplex of the inverse-evaluated complex. The formula hm proves compatibility with every differential. Apply isKFlat_pullback and transport acyclic tensors through the resulting complex isomorphism. Convert sheaf IsKFlatness back to generic K-flatness using kFlat_iff_preserves_acyclic and the tensor braiding, and then pass to the homotopy quotient.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation",
     "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   },
   {
-   "text": "The formulas h and hm identify termwise P, including its differentials, with inverse evaluation followed by the concrete ringed-space tensor pullback. The inverse-image/tensor-pullback comparison and the identity-ring-map case of K-flat pullback preservation show that exact inverse image preserves K-flatness. Applying K-flat pullback preservation to toGlobalSectionsPoint X gives the first assertion after passing to the homotopy quotient.",
-   "uses": [
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pc-inverse-image-tensor-pullback-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Lift a homotopy morphism between K-flat complexes to a cochain morphism using fullness of the quotient. Exact inverse evaluation and exact module inverse image preserve its quasi-isomorphism. Change of rings preserves the resulting quasi-isomorphism between K-flat inverse-image complexes. Transport by h and hm and use the quotient quasi-isomorphism criterion; Qh inverts the resulting morphism, proving the second assertion.",
+   "text": "For the morphism assertion lift the homotopy map to a cochain map using quotient fullness. Inverse evaluation is an exact equivalence, so preserves this quasi-isomorphism. Apply exact module inverse image. Its K-flat preservation follows from isKFlat_pullback with the adjunction-unit structure map, transported by exists_inverseImage_tensorPullback_iso. Construct the actual change-of-rings functor sectionwise and sheafify; apply changeOfRings_kFlat_quasiIso. The equalities h and hm form a natural isomorphism from the three-fold composite to P, so transport the quasi-isomorphism to P and use the quotient criterion and localization inversion.",
    "uses": [
     "lem-pc-inverse-image-module-functor-exact",
+    "lem-pc-inverse-image-tensor-pullback-comparison",
+    "lem-pc-kflat-pullback-preservation",
     "lem-pur-change-of-rings-kflat-quasi-iso"
    ],
    "elementary": false
@@ -48,14 +49,14 @@
   "lem-pc-inverse-image-module-functor-exact",
   "lem-pc-inverse-image-tensor-pullback-comparison",
   "lem-pc-kflat-pullback-preservation",
-  "lem-pc-point-module-evaluation-equivalence",
-  "lem-pur-change-of-rings-kflat-quasi-iso"
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-sc-point-inverse-evaluation-kflat"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "D4",
-  "document": "Stacks Project, Tags 06YC and 06YJ",
-  "place": "Point-evaluation transport of the K-flat pullback argument"
+  "group": "P2",
+  "document": "Stacks Project, Tags 06YC and 06YT",
+  "place": "Co-chain comparison proof; point-evaluation step isolated as lem-sc-point-inverse-evaluation-kflat"
  },
  "mathlib_searches": [
   {
@@ -132,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T181054-L-2598598",
+  "landing": "20261013T190150-L-3219598",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

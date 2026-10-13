@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.Topology.PointModuleEvaluationEquivalence
+import Sheaf.Paper.PointInverseEvaluationKFlat
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison
 
@@ -53,6 +53,8 @@ local instance globalKFlatDataPreadditive :
 local instance globalKFlatDataClosed :
     MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
+set_option maxHeartbeats 800000 in
+-- The sheaf equality transports and iterated termwise functors need extra elaboration.
 /-- Global tensor pullback sends K-flat complexes to K-flat complexes and inverts
 quasi-isomorphisms between K-flat objects after localization.
 Source: Stacks Project, Tags 06YC, 06YJ, 079U and 06XN.
@@ -105,7 +107,143 @@ theorem globalTensorPullback_kflat
         (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat M →
         HomotopyCategory.quasiIso _ (ComplexShape.up ℤ) a →
         IsIso ((P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).map a)) := by
-  sorry
+  let A := ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))
+  let B := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let Y := globalSectionsPoint X
+  have : Unique (globalSectionsPoint X) := inferInstanceAs (Unique PUnit.{u + 1})
+  have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  let I := TopCat.Sheaf.inverseImageModuleFunctor (toGlobalSectionsPoint X).hom.base Y.sheaf
+  let φ := CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base
+    X.toRingedSpace.sheaf Y.sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩
+  have inverse_isKFlat (K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ)
+      (hK : K.IsKFlat) : CochainComplex.IsKFlat ((I.mapHomologicalComplex (.up ℤ)).obj K) := by
+    obtain ⟨c⟩ := TopCat.Sheaf.exists_inverseImage_tensorPullback_iso
+      (toGlobalSectionsPoint X).hom.base Y.sheaf K
+    have ht := CochainComplex.isKFlat_pullback (toGlobalSectionsPoint X).hom.base
+      (TopCat.Sheaf.inverseImageRing (toGlobalSectionsPoint X).hom.base Y.sheaf) Y.sheaf
+      ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map (toGlobalSectionsPoint X).hom.base) CommRingCat.{u} _ _).unit.app Y.sheaf)
+      K hK
+    let := SheafOfModules.monoidalCategory
+      (TopCat.Sheaf.inverseImageRing (toGlobalSectionsPoint X).hom.base Y.sheaf)
+    intro F hF i
+    exact (ht F hF i).of_iso
+      (((curriedTensor _).map₂CochainComplex.obj F).mapIso c)
+  have hp (K : CochainComplex A ℤ)
+      (hK : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat K) :
+      CochainComplex.IsKFlat (R := X.toRingedSpace.sheaf)
+        ((P.mapHomologicalComplex (.up ℤ)).obj K) := by
+    let K' : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ :=
+      (e.inverse.mapHomologicalComplex (.up ℤ)).obj K
+    have hK' : K'.IsKFlat := RingedSpace.pointInverseEvaluation_isKFlat Y e he K hK
+    let c : (P.mapHomologicalComplex (.up ℤ)).obj K ≅
+        CochainComplex.tensorPullbackComplex (toGlobalSectionsPoint X).hom.base
+          X.toRingedSpace.sheaf Y.sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩ K' :=
+      HomologicalComplex.Hom.isoOfComponents (fun i ↦ eqToIso (h (K.X i))) (by
+        intro i j hij
+        change eqToHom (h (K.X i)) ≫ _ = P.map (K.d i j) ≫ eqToHom (h (K.X j))
+        rw [hm]
+        simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
+        rfl)
+    have ht := CochainComplex.isKFlat_pullback (toGlobalSectionsPoint X).hom.base
+      X.toRingedSpace.sheaf Y.sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩ K' hK'
+    intro F hF i
+    exact (ht F hF i).of_iso
+      (((curriedTensor _).map₂CochainComplex.obj F).mapIso c.symm)
+  have hk (K : CochainComplex A ℤ)
+      (hK : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat K) :
+      (HomologicalComplex.quasiIso B (.up ℤ)).kFlat
+        ((P.mapHomologicalComplex (.up ℤ)).obj K) := by
+    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+      HomotopyCategory.kFlat_iff_preserves_acyclic]
+    intro N hN
+    obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+    have hr : HomotopyCategory.subcategoryAcyclic B
+        ((HomotopyCategory.quotient B (.up ℤ)).obj N ⊗
+          (HomotopyCategory.quotient B (.up ℤ)).obj
+            ((P.mapHomologicalComplex (.up ℤ)).obj K)) :=
+      (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 (hp K hK N hN)
+    exact ⟨(HomotopyCategory.subcategoryAcyclic B).prop_of_iso (β_ _ _) hr, hr⟩
+  let E₀ : SheafOfModules.{u}
+      ((sheafCompose (Opens.grothendieckTopology X)
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj
+          (TopCat.Sheaf.inverseImageRing (toGlobalSectionsPoint X).hom.base Y.sheaf)) ⥤
+      _root_.PresheafOfModules.{u} (moduleRings X.toRingedSpace).obj :=
+    { obj := SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ
+      map := fun a ↦
+        { app := fun U ↦ (ModuleCat.extendScalars (φ.hom.app U).hom).map (a.val.app U)
+          naturality := SheafOfModules.changeOfRingsHom_naturality.{u, u, u} φ _ a }
+      map_id := by
+        intro M
+        apply PresheafOfModules.hom_ext
+        intro U
+        simp
+        rfl
+      map_comp := by
+        intro M N T a b
+        apply PresheafOfModules.hom_ext
+        intro U
+        simp }
+  let E := E₀ ⋙ PresheafOfModules.sheafification (𝟙 (moduleRings X.toRingedSpace).obj)
+  have hscalar (U) : (ModuleCat.extendScalars (φ.hom.app U).hom).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj (φ.hom.app U).hom).left_adjoint_additive
+  have hsheaf :
+      (PresheafOfModules.sheafification (𝟙 (moduleRings X.toRingedSpace).obj)).Additive :=
+    (PresheafOfModules.sheafificationAdjunction (𝟙 _)).left_adjoint_additive
+  have : E₀.Additive := by
+    constructor
+    intro M N a b
+    apply PresheafOfModules.hom_ext
+    intro U
+    simpa only [E₀, SheafOfModules.add_val, PresheafOfModules.add_app] using
+      (ModuleCat.extendScalars (φ.hom.app U).hom).map_add (f := a.val.app U) (g := b.val.app U)
+  have : E.Additive := inferInstance
+  have hE (M) : E.obj M = SheafOfModules.changeOfRings.{u, u, u} φ M := rfl
+  have hEmap {M N} (a : M ⟶ N) : E.map a = eqToHom (hE M) ≫
+      SheafOfModules.changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (hE N).symm := by
+    simp [E, E₀, SheafOfModules.changeOfRingsHom]
+  have hobj (M) : (e.inverse ⋙ I ⋙ E).obj M = P.obj M :=
+    (hE (I.obj (e.inverse.obj M))).trans (h M).symm
+  let c : e.inverse ⋙ I ⋙ E ≅ P :=
+    NatIso.ofComponents (fun M ↦ eqToIso (hobj M)) (by
+      intro M N a
+      dsimp
+      rw [hEmap, hm]
+      simp only [Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
+      dsimp [hobj, I, TopCat.Sheaf.inverseImageModuleFunctor])
+  have hq {K M : CochainComplex A ℤ} (a : K ⟶ M)
+      (hK : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat K)
+      (hM : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat M) (ha : QuasiIso a) :
+      QuasiIso ((P.mapHomologicalComplex (.up ℤ)).map a) := by
+    have : QuasiIso a := ha
+    let a' := (e.inverse.mapHomologicalComplex (.up ℤ)).map a
+    have hK' := RingedSpace.pointInverseEvaluation_isKFlat Y e he K hK
+    have hM' := RingedSpace.pointInverseEvaluation_isKFlat Y e he M hM
+    have ht := SheafOfModules.changeOfRings_kFlat_quasiIso φ E hE hEmap
+      ((I.mapHomologicalComplex (.up ℤ)).map a')
+      (inverse_isKFlat _ hK') (inverse_isKFlat _ hM') inferInstance
+    let ec := Functor.mapHomologicalComplexCompIso c (.up ℤ)
+    exact (quasiIso_iff_of_arrow_mk_iso _ _
+      (Arrow.isoMk (ec.app K) (ec.app M) (ec.hom.naturality a).symm)).mp ht
+  constructor
+  · intro K hK
+    obtain ⟨K, rfl⟩ := K.quotient_obj_surjective
+    rw [HomotopyCategory.kFlat_quotient_obj_iff] at hK
+    exact (HomotopyCategory.kFlat_quotient_obj_iff _).2 (hk K hK)
+  · intro K M a hK hM ha
+    obtain ⟨K, rfl⟩ := K.quotient_obj_surjective
+    obtain ⟨M, rfl⟩ := M.quotient_obj_surjective
+    rw [HomotopyCategory.kFlat_quotient_obj_iff] at hK hM
+    obtain ⟨a, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective a
+    rw [HomotopyCategory.quotient_map_mem_quasiIso_iff,
+      HomologicalComplex.mem_quasiIso_iff] at ha
+    have ht := hq a hK hM ha
+    change IsIso (DerivedCategory.Qh.map ((P.mapHomotopyCategory (.up ℤ)).map
+      ((HomotopyCategory.quotient A (.up ℤ)).map a)))
+    rw [P.mapHomotopyCategory_map]
+    exact Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso B (.up ℤ)) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 ht)
 
 end
 end AlgebraicGeometry.Scheme.Modules

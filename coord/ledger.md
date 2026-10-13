@@ -13390,3 +13390,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/N2/Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermTransport (stage 3; reviewer PASS; first push; landing 20261013T190149-L-3219181 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:01 L: merged deliver/N2/Sheaf.AlgebraicGeometry.RelativeMVOpenSquareCoefficientCoherence (stage 3; reviewer PASS; first push; landing 20261013T190149-L-3219297 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/P1/Sheaf.Paper.ModuleCupGodementTensorStalkPairingExists (stage 3; reviewer PASS; first push; landing 20261013T190150-L-3219407 (proof); batch 20261013T190131; modules 1; new nodes 0)
+- 19:01 L: merged deliver/P2/Sheaf.Paper.GlobalTensorPullbackKFlat (stage 3; reviewer PASS; first push; landing 20261013T190150-L-3219598 (interface); batch 20261013T190131; modules 2; new nodes 1)
