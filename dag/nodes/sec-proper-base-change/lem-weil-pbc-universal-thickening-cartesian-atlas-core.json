@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-universal-thickening-cartesian-atlas-core",
+ "kind": "statement",
+ "title": "Compatible open chart gluing of local universal thickenings",
+ "statement": "Let $h:Z\\to X$ be a morphism of schemes [def-weil-pbc-scheme-conventions], $C$ a universe-small open cover of $Z$, and $i_k:C_k\\to Z'_k$, $h'_k:Z'_k\\to X$ universal first order thickenings of $C.f_k$ followed by $h$ [def-weil-pbc-universal-first-order-thickening]. There exist a scheme $W$ and open immersions $e_k:Z'_k\\to W$ [def-weil-open-immersion] whose images cover $W$, such that (1) the maps $h'_k$ agree on the categorical pullbacks of $e_k$ and $e_l$; (2) the maps $e_k\\circ i_k$ agree on the categorical pullbacks of $C.f_k$ and $C.f_l$; and (3) for every $k,l$ and point $z\\in C_l$, $e_l(i_l(z))$ lies in the image of $e_k$ if and only if $C.f_l(z)$ lies in the image of $C.f_k$. No global morphism from $Z$, global morphism to $X$, or cartesian square is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3, proof: the two paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3"
+ },
+ "proof": [
+  {
+   "text": "Take the pullback intersections of source charts. Each first order thickening is a homeomorphism: its closed image is the support of its kernel, which equals the support of its square-zero power and hence is all of the target. The open-pieces theorem supplies the unique corresponding open in each thickened chart and universality of its restriction over the whole base X.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the two sources of each restricted thickening with the source intersection. Universal uniqueness gives the transition isomorphism over X fixing this intersection. On triple intersections uniqueness identifies the composite transition with the direct transition. Repeated indices and reversed pairs similarly give the identity and inverse transitions.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-universal-thickening-open-pieces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scheme gluing to these overlap opens and transitions. Its canonical open chart maps e_k cover the glued scheme W, and the gluing pullback description identifies their pairwise intersections with the prescribed overlap opens. The transitions are over X, so the h prime maps agree on these pullbacks. They fix source intersections, so i_k followed by e_k agree on the source pullbacks. By construction the inverse image of the overlap open under i_l is the inverse image of the range of C.f_k under C.f_l; the gluing intersection description gives precisely the last pointwise equivalence. Empty covers give the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-universal-thickening-open-pieces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Stacks Tag 04F3, the overlap and cocycle construction; its omitted cocycle verification expanded by universal uniqueness, and its gluing intersection description made pointwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme gluing open cover cartesian thickening",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "none"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme gluing open cover",
+   "results": "generic Scheme.GlueData; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "digest": "none"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback IsOpenImmersion",
+   "results": "generic pullback API; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "digest": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian atlas thickening",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "digest": "none"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue compatible scheme morphisms on open charts and identify inverse images of chart ranges",
+   "results": "Second reader: Scheme.Cover.ι_glueMorphisms and Scheme.GlueData.glue_condition/openCover_f/Rel. These glue supplied compatible morphisms and supplied overlap data; none constructs thickened overlaps from local universal thickenings. Used in the target proof or in this remaining construction plan.",
+   "date": "2026-10-13",
+   "verdict": "no exact construction match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion.isPullback\"",
+   "results": "Second reader: IsOpenImmersion.isPullback directly discharges the target cartesian squares from the glued morphism equation and equality of inverse-image opens. Removed the split-off pullback statement.",
+   "date": "2026-10-13",
+   "verdict": "match for final step only"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*thicken|thicken.*universal; rg on lean/Sheaf and lean/WeilConjectures",
+   "results": "msearch: zero Mathlib hits. Library rg: open-pieces and uniqueness are available; UniversalFirstOrderThickeningGluedAtlas depends on the assigned theorem and cannot supply the construction acyclically. No duplicate of this compatible chart construction.",
+   "date": "2026-10-13",
+   "verdict": "no independent construction match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalThickeningCartesianAtlas",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-universal-thickening-cartesian-atlas",
+   "place": "strict decomposition of assigned proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "proof_deps": [
+  "lem-weil-pbc-universal-thickening-open-pieces",
+  "def-weil-pbc-universal-first-order-thickening",
+  "lem-weil-pbc-glue-schemes"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningCartesianAtlasCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningCartesianAtlasCore.lean",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_cartesianAtlas_core",
+  "statement": "theorem universalFirstOrderThickening_cartesianAtlas_core\n    {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})\n    (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)\n    (h' : ∀ k, Z' k ⟶ X)\n    (H : ∀ k, IsUniversalFirstOrderThickening (C.f k ≫ h) (i k) (h' k)) :\n    ∃ (W : Scheme.{u}) (e : ∀ k, Z' k ⟶ W),\n      (∀ k, IsOpenImmersion (e k)) ∧ (∀ w : W, ∃ k z, e k z = w) ∧\n      (∀ k l, pullback.fst (e k) (e l) ≫ h' k = pullback.snd _ _ ≫ h' l) ∧\n      (∀ k l, pullback.fst (C.f k) (C.f l) ≫ (i k ≫ e k) =\n        pullback.snd _ _ ≫ (i l ≫ e l)) ∧\n      ∀ k l (z : C.X l),\n        e l (i l z) ∈ Set.range (e k) ↔ C.f l z ∈ Set.range (C.f k)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T054242-L-450912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T054242-L-450912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

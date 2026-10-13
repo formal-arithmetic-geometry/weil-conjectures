@@ -6,6 +6,8 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.UniversalThickeningCartesianAtlasCore
+import Mathlib.AlgebraicGeometry.Gluing
 
 /-!
 # Cartesian charts for glued local universal thickenings
@@ -59,6 +61,34 @@ theorem universalFirstOrderThickening_cartesianAtlas
     ∃ (W : Scheme.{u}) (j : Z ⟶ W) (p : W ⟶ X) (e : ∀ k, Z' k ⟶ W),
       (∀ k, IsOpenImmersion (e k)) ∧ (∀ w : W, ∃ k z, e k z = w) ∧
       j ≫ p = h ∧ (∀ k, e k ≫ p = h' k) ∧
-      ∀ k, IsPullback (i k) (C.f k) (e k) j := by sorry
+      ∀ k, IsPullback (i k) (C.f k) (e k) j := by
+  obtain ⟨W, e, he, hc, hh, hi, ho⟩ :=
+    universalFirstOrderThickening_cartesianAtlas_core h C Z' i h' H
+  let : ∀ k, IsOpenImmersion (e k) := he
+  let D : W.OpenCover.{u} :=
+    { I₀ := C.I₀
+      X := Z'
+      f := e
+      mem₀ := by
+        rw [Scheme.presieve₀_mem_precoverage_iff]
+        exact ⟨hc, he⟩ }
+  let p : W ⟶ X := D.glueMorphisms h' hh
+  let j : Z ⟶ W := C.glueMorphisms (fun k ↦ i k ≫ e k) hi
+  have hep (k) : e k ≫ p = h' k := D.ι_glueMorphisms h' hh k
+  have hij (k) : C.f k ≫ j = i k ≫ e k :=
+    C.ι_glueMorphisms (fun k ↦ i k ≫ e k) hi k
+  refine ⟨W, j, p, e, he, hc, ?_, hep, ?_⟩
+  · apply C.hom_ext
+    intro k
+    rw [← Category.assoc, hij, Category.assoc, hep, (H k).2.1]
+  · intro k
+    apply IsOpenImmersion.isPullback (i k) (C.f k) (e k) j (hij k)
+    ext z
+    obtain ⟨l, z, rfl⟩ := C.exists_eq z
+    have hjz : j (C.f l z) = e l (i l z) := by
+      exact congrArg (fun f : C.X l ⟶ W ↦ f z) (hij l)
+    change j (C.f l z) ∈ Set.range (e k) ↔ C.f l z ∈ Set.range (C.f k)
+    rw [hjz]
+    exact ho k l z
 
 end AlgebraicGeometry

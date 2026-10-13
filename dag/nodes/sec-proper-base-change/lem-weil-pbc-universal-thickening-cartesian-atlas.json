@@ -14,42 +14,32 @@
  },
  "proof": [
   {
-   "text": "For each pair of open charts of C, restrict the two supplied universal thickenings to their intersection. The unique corresponding open exists because a first order thickening is a homeomorphism. The restricted thickenings remain universal over X by the open-pieces theorem, taking the whole base open.",
+   "text": "Use the compatible-chart construction to obtain W and a jointly surjective family of open immersions e_k, compatibility of h prime and i_k followed by e_k on their respective pullbacks, and the pointwise chart-overlap equivalence.",
    "uses": [
-    "lem-weil-pbc-universal-thickening-open-pieces",
+    "lem-weil-pbc-universal-thickening-cartesian-atlas-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Make the e_k into an open cover D of W. Glue the compatible h prime maps over D to p and the compatible i_k followed by e_k over C to j using Scheme.Cover.glueMorphisms. Its restriction formula proves e_k followed by p equals h prime_k and C.f_k followed by j equals i_k followed by e_k. Apply C.hom_ext and the local universal-thickening commuting equations to show j followed by p equals h.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
     "def-weil-pbc-universal-first-order-thickening"
    ],
    "elementary": false
   },
   {
-   "text": "The uniqueness theorem for universal thickenings identifies the two restricted thickenings by the unique isomorphism over X fixing the intersection. On a triple intersection the direct transition and the composite transition are morphisms between the same universal thickenings extending the same identity, so uniqueness makes them equal. Repeated indices give the identity. These are exactly the overlap and cocycle identities for scheme gluing.",
+   "text": "For each k apply Mathlib IsOpenImmersion.isPullback to C.f_k and e_k. The commuting equation is the restriction formula for j. Test equality of the inverse-image open of e_k with the range of C.f_k at a point of Z; write it as C.f_l(z) using C.exists_eq, replace j(C.f_l(z)) by e_l(i_l(z)), and apply the core construction overlap equivalence. This establishes the categorical pullback, including its structure sheaf.",
    "uses": [
-    "def-weil-pbc-universal-first-order-thickening",
-    "lem-weil-pbc-universal-thickening-open-pieces"
+    "lem-weil-pbc-universal-thickening-cartesian-atlas-core"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use the overlap opens, transition isomorphisms and their cocycle equations to form scheme glue data. Let W be its glued scheme and e_k its canonical open immersions. They cover W, and each thickened overlap is the pullback of the corresponding e_k and e_l. Glue the compatible structure maps h_k prime to p. Glue i_k followed by e_k on C to j; checking on C proves j followed by p equals h.",
-   "uses": [
-    "lem-weil-pbc-glue-schemes",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Fix k and test the inverse image of the image of e_k in any source chart C_l. The gluing pullback property identifies membership there with membership in the prescribed thickened overlap in Z_l prime. Its inverse image under i_l is precisely the source intersection of C_k and C_l, by the construction of the corresponding open. Thus the inverse image of the image of e_k under j equals the image of C.f_k. The equality i_k followed by e_k equals C.f_k followed by j comes from the gluing equation. Since both C.f_k and e_k are open immersions, the range equality identifies C_k with the inverse-image open subscheme, and the commutative square is cartesian. This identification is an isomorphism of open subschemes with their structure sheaves, not just a bijection of points.",
-   "uses": [
-    "lem-weil-pbc-glue-schemes",
-    "lem-weil-pbc-universal-thickening-open-pieces"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 04F3 (lemma-universal-thickening), proof, fourth and fifth paragraphs; read at https://stacks.math.columbia.edu/tag/04F3; cartesian identification expanded using the pullback description of glued overlaps"
+  "by": "worker",
+  "document": "Stacks Project Tag 04F3 and Mathlib.AlgebraicGeometry.Gluing/OpenImmersion",
+  "place": "Second reader: reduce only the overlap construction; glue both global morphisms and verify their equations and cartesian squares in Lean."
  },
  "mathlib_searches": [
   {
@@ -132,10 +122,9 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "proof_deps": [
-  "lem-weil-pbc-universal-thickening-open-pieces",
-  "def-weil-pbc-universal-first-order-thickening",
-  "lem-weil-pbc-glue-schemes",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-weil-pbc-universal-thickening-cartesian-atlas-core",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-pbc-universal-first-order-thickening"
  ],
  "lean": {
   "existing": false,
@@ -161,9 +150,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T040804-L-3954036",
+  "landing": "20261013T054242-L-450912",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
