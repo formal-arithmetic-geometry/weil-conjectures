@@ -15,27 +15,30 @@
  ],
  "proof": [
   {
-   "text": "Choose an upper bound l of i and j and transport both chain maps to l. The canonical associativity of scalar extension identifies their further extensions to A with the maps in the hypothesis. Extension of scalars preserves finite presentation, so all source and target terms at l are finitely presented. Apply the equality clause of finite-presentation descent to each component in the finite source interval. For a preorder, pass to the equivalent partial-order category obtained by quotienting mutual comparability, use inverse ring isomorphisms for representative changes, and transport back. The same coefficient proof works directly by the filtered-ring elementwise criterion without antisymmetry.",
+   "text": "Choose a stage l above i and j. Transport f and g to l with scalarExtensionHom. Mathlib ModuleCat.extendScalars_assoc, naturality of extendScalarsComp, and equality induction on the ring-map comparison witnesses show that iterated transport agrees with direct transport, both to the colimit and to any later stage. Thus the transported maps agree after extension to the colimit. Cancel the componentwise comparison isomorphisms to obtain equality of the extended component maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Scalar extension preserves finite presentation by the tensor-product finite-presentation instance. For each degree n in the finite interval [a,b], apply lem-pc-preorder-module-map-equality-descent to the two component maps at l. This gives a later stage where these component maps agree. That theorem supplies exactly the directed-preorder equality clause, including the antisymmetrization reduction.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-preorder-module-map-equality-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Choose one upper stage for the finitely many detected component equalities. Extension of scalars preserves them. Outside the finite source interval both maps have zero source, so their components agree there as well. Extensionality of complex morphisms gives equality. Scalar-extension associativity identifies these maps with the two displayed scalarExtensionHom expressions, including the equality witnesses by proof irrelevance.",
+   "text": "Induct on the finite set of degrees. For the empty set take l. For an inserted degree choose a directed common upper bound of its detected stage and the stage for the previous finite set. Naturality of extendScalarsComp carries both equalities to this common stage. Conjugate the equal component maps by the scalar-extension comparisons. Outside [a,b], scalar extension preserves the zero source, so both components are equal. HomologicalComplex.hom_ext gives equality of the transported chain maps. The associativity calculation in the first step identifies them with direct transports of f and g to the final stage.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine",
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-pc-preorder-module-map-equality-descent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
+  "place": "Tags 09RE, affine case (1), and 05N7 (3); explicit Lean scalar-extension coherence and finite-set induction by T1, using the existing preorder equality theorem."
  },
  "mathlib_searches": [
   {
@@ -105,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c12a9",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T100154-L-2494996",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proof with all three nodes, finite-presentation dependency, Stacks Tags 09RE/05N7, unchanged existing signature, and clean compilation of delivery plus AffinePerfectHomColimit."
+  "landing": "20261013T111924-L-3063513",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
