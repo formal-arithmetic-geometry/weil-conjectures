@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-perfect-hom-open-stage-presentation",
+ "kind": "statement",
+ "title": "Stage and apex presentations for a shifted single-open Hom system",
+ "statement": "Let $I$ be a preorder, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a cocone and $i\\in I$. Let $s_0:X\\to\\operatorname{Spec}(R_i)$ be locally finitely presented and qcqs, and let $t:Y\\to X$ be an open immersion. Suppose $s:Y\\to\\operatorname{Spec}(R_i)$ is locally finitely presented and qcqs with $s=t\\mathbin{\\gg}s_0$. Fix derived categories in universe $w$ for modules on every scheme and on every localized open module site of $Y$ [def-pc-derived-category]. Let $W$ be a compact open of $X$ lying in the image of $t$. Let $P,Q\\in D(\\mathcal O_Y)$ be perfect [def-pc-perfect-complex], $F:I_{\\ge i}\\to D(\\mathcal O_Y)$ a diagram, $d$ a cocone, and $h$ representing push-pull data natural in every testing object, with the specified stage and limit transport equations [lem-pc-perfect-hom-push-pull-cocone]. For any integer $n$, set $B=t^{-1}W$ and $H=R(B\\hookrightarrow Y)_*\\circ\\mathrm{res}_B$ [def-pc-derived-mayer-vietoris-canonical-data]. There exist a scheme $Z$, an open immersion $k:Z\\to X$ with image $W$, a locally finitely presented qcqs map $s'=k\\mathbin{\\gg}s_0$, derived categories on the localized open module sites of $Z$, and perfect $P',Q'\\in D(\\mathcal O_Z)$, with equivalences $e_j:\\operatorname{Hom}(P,H(F_j)[n])\\simeq\\operatorname{Hom}(L\\pi_j'^*P',L\\pi_j'^*Q')$ for every $j\\ge i$, and $b:\\operatorname{Hom}(P,H(d.\\mathrm{pt})[n])\\simeq\\operatorname{Hom}(L\\pi_\\infty'^*P',L\\pi_\\infty'^*Q')$. Here $\\pi_j'$ and $\\pi_\\infty'$ are the pullback projections defined by $s'$ and the ring maps $R_i\\to R_j$ and $c_i$. For every $j\\le l$ and $f:P\\to H(F_j)[n]$, $e_l(f\\mathbin{\\gg}H(F_{jl})[n])=\\mathrm{perfectStageMap}(e_j(f))$, and $b(f\\mathbin{\\gg}H(d_j)[n])=\\mathrm{perfectLimitMap}(e_j(f))$ for the canonical maps of [lem-pc-perfect-hom-transport]. This is a statement about the stage and apex Hom systems, without colimits or a Mayer--Vietoris family.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, open-local Hom comparison in the Mayer–Vietoris induction; cohomology.tex Tags 079W, 08FE and 0D5S (online sources read 2026-10-14)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Set B = t inverse-image W, Z = B.toScheme, k = B.ι composed with t and s′ = B.ι composed with s. The image equation follows since W lies in the image of t. Compactness of Y and quasi-separatedness of X make t quasi-compact, hence B compact; its inclusion and s′ are locally finitely presented and qcqs. Transport the localized derived categories through the open-site equivalences. These are the standard scheme/open instances and open-site equivalences already used by the canonical restriction construction.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put L = derived restriction to B, P′ = L(P)[-n] and Q′ = L(Q). Restrict the bounded finite-free retract models witnessing perfectness to smaller opens. Restriction preserves units, finite sums, zero terms and the retract equations, and shifting translates the bounds. Thus P′ and Q′ are perfect.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived adjunction and Yoneda identify every F_j and the apex with the derived direct images representing h.stageEquiv and h.limitEquiv. Evaluate h.stageMap and h.limitMap at identities to pin the representing arrows. Their naturality equations then determine the action on every testing Hom set. Restrict these identifications using the canonical direct-image/open-restriction comparison. The restricted projection is the base-change projection for s′. Apply open adjunction and the shift comparison to Hom(P,R(B.ι)_*L(F_j)[n]), then apply the restricted projection adjunction to obtain e_j; do the same at the apex for b.",
+   "uses": [
+    "lem-pc-perfect-hom-push-pull-cocone",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the open adjunction and shift/restriction comparisons transports the stage and apex equations. The underived restriction/direct-image square is the sectionwise identity. Its right-derived unit equation pins the comparison, and the counit-pinned pullback composition comparisons give precisely perfectStageMap and perfectLimitMap. This proves the displayed compatibility equalities. An empty open uses the same functors and zero Hom groups.",
+   "uses": [
+    "lem-pc-perfect-hom-transport",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F3",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, explicit single-open stage presentation using Tags 079W, 08FE and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural stage and limit Hom equivalences for restriction to an open and derived direct image, compatible with shifts and pullback",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural stage and limit Hom equivalences for restriction to an open and derived direct image, compatible with shifts and pullback",
+   "results": "Found Scheme.Modules.restrictFunctorComp and restrictFunctorIsoPullback and related underived restriction declarations; none gives the derived stage/apex presentation and its pinned transport equations.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback in Mathlib.AlgebraicGeometry.Modules.Sheaf: underived restriction is naturally isomorphic to pullback; not the required derived Hom transport presentation.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*stage.*presentation|PerfectHomLocalComparison|isCompact_inter",
+   "results": "Seven Mathlib hits for compact-intersection lemmas; the repository search found local-comparison definitions and no single-open stage presentation.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumnsOdd",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris induction: identify single-open shifted Hom stages and apex before taking the odd-column colimits",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenStagePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenStagePresentation.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_stage_presentation",
+  "statement": "theorem perfect_hom_open_stage_presentation\n    {I : Type u} [Preorder I]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (W : X.Opens) (hW : IsCompact (W : Set X))\n    (Y : Scheme.{u}) (t : Y ⟶ X) [IsOpenImmersion t]\n    (ht : W ≤ t.opensRange)\n    (s : Y ⟶ Spec (R.obj i)) (hs : s = t ≫ s₀)\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ B : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over B))]\n    (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q)\n    (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F)\n    (h : PerfectHomPushPullData R c s Q F d) (n : ℤ) :\n    let H := schemeMVDerivedRestriction Y (t ⁻¹ᵁ W) ⋙\n      schemeDerivedDirectImage (t ⁻¹ᵁ W).ι\n    ∃ (Z : Scheme.{u}) (k : Z ⟶ X) (_ : IsOpenImmersion k),\n      k.opensRange = W ∧\n    ∃ (s' : Z ⟶ Spec (R.obj i)), s' = k ≫ s₀ ∧\n    ∃ (_ : LocallyOfFinitePresentation s') (_ : QuasiCompact s') (_ : QuasiSeparated s')\n      (_ : ∀ T : Z.Opens,\n        HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over T)))\n      (P' Q' : schemeDerivedCategory Z), Z.IsPerfect P' ∧ Z.IsPerfect Q' ∧\n    ∃ (e : ∀ j : Set.Ici i, (P ⟶ (H.obj (F.obj j))⟦n⟧) ≃\n        ((derivedPullback (pullback.fst s' (Spec.map (R.map (homOfLE j.property))))).obj P' ⟶\n         (derivedPullback (pullback.fst s' (Spec.map (R.map (homOfLE j.property))))).obj Q'))\n      (b : (P ⟶ (H.obj d.pt)⟦n⟧) ≃\n        ((derivedPullback (pullback.fst s' (Spec.map (c.ι.app i)))).obj P' ⟶\n         (derivedPullback (pullback.fst s' (Spec.map (c.ι.app i)))).obj Q')),\n      (∀ (j l : Set.Ici i) (hjl : j ≤ l) (f : P ⟶ (H.obj (F.obj j))⟦n⟧),\n        e l (f ≫ (H.map (F.map (homOfLE hjl)))⟦n⟧') =\n          perfectStageMap R s' j.property hjl (e j f)) ∧\n      (∀ (j : Set.Ici i) (f : P ⟶ (H.obj (F.obj j))⟦n⟧),\n        b (f ≫ (H.map (d.ι.app j))⟦n⟧') =\n          perfectLimitMap R c s' j.property (e j f))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T201748-L-3968871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T201748-L-3968871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
