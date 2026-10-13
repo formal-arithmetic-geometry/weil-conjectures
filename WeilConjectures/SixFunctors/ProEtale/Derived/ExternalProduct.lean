@@ -52,7 +52,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
              s
 ```
 
-(blueprint: `sk-d-six`). -/
+(blueprint: `sk-d-six`, `def-trf-external-product`). -/
 noncomputable def externalProduct {s X Y : Scheme.{u}} (aX : X ⟶ s) (aY : Y ⟶ s)
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
