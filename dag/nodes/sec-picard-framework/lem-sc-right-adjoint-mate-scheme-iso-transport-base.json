@@ -19,48 +19,43 @@
  ],
  "proof": [
   {
-   "text": "The projection equations make r the base change of e.hom, with inverse induced by e.inv. The pullback composition and identity comparisons make pullback along e and r equivalences of derived categories; preservation of quasi-coherent cohomology restricts these equivalences to D_QCoh.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-pullback"
-   ],
-   "elementary": false
+   "text": "Construct the inverse of r by pullback.lift with components pullback.fst(f,g) followed by e.inv and pullback.snd(f,g). The commutativity follows from he and the original pullback condition. Pullback hom ext and the two projection equations show both composites are identities. This gives the explicit isomorphism er with hom r.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Direct-image composition along e and r identifies the vertical direct-image functors after this transport. Transport the specified adjunctions, and apply right-adjoint uniqueness with its unit and counit identities to obtain comparisons for a,b and d,b′.",
+   "text": "For E in D_QCoh(P), set N to derivedPullback(e.hom)(E). Apply the first conjunct of [lem-pc-derived-pullback-tensor-qcoh] to equip N with its quasi-coherent-cohomology property. Construct z:L(pullback.fst(fprime,g))(N) isomorphic to Lr L(pullback.fst(f,g))(E) from the selected composition comparisons, equality transport along hr1 inverse, and the inverse composition comparison.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "lem-cat-right-adjoint-composition",
-    "lem-pc-qcqs-derived-direct-image-right-adjoint"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose ordinary base change under the selected pullback/direct-image adjunction. The two projection equations and pullback associativity identify the transposes. Injectivity of the Hom equivalence gives the commutative comparison square. Its vertical maps are isomorphisms; the equivalence on objects and the assumed invertibility for f′ therefore imply invertibility for f.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-derived-base-change-pasting",
+    "lem-pc-derived-pullback-tensor-qcoh",
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-derived-base-change-source-iso] to the original fibre-product square, source isomorphisms e and er, identity coefficient arrow on L(pullback.fst(f,g))(E), identity alpha and beta, and coefficient arrow z.hom. Its coefficient equation follows by functor map_id and associativity. It gives endpoint isomorphisms a0 and b0 and an equality between the old base-change map followed by b0.hom and a0.hom followed by the transported base-change map and the direct image of z.hom.",
+   "uses": [
+    "lem-pc-derived-base-change-source-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use he and hr2 to identify the transported comparison with the assumed invertible comparison hbeta at N; eliminate these equalities before applying hbeta to avoid dependent rewriting of the square proof. The image of z.hom and a0.hom are isomorphisms, so the comparison equation implies the original map followed by b0.hom is an isomorphism. Cancel b0.hom using isIso_comp_right_iff and cancel the direct image of the identity coefficient arrow using map_id.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-derived-pullback",
-  "lem-cat-right-adjoint-composition",
-  "lem-pc-derived-base-change-pasting",
-  "lem-pc-qcqs-derived-direct-image-right-adjoint",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-derived-base-change-source-iso",
+  "lem-pc-derived-pullback-tensor-qcoh",
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K1",
+  "group": "F2",
   "date": "2026-10-13",
-  "document": "Stacks Project, Duality for Schemes",
-  "place": "Tag 0ATR, composite adjunction and conjugate comparison calculation; Tag 0E9S, identification with the cartesian restriction model, isolated from the successive-square pasting step",
-  "note": "Categorical specialization of the cited proof, retaining invertibility only of ordinary base change; Tor independence in the source supplies that premise and is not used otherwise."
+  "document": "Stacks Project, Cohomology and Duality for Schemes",
+  "place": "Tags 08HY and 0D5S (source-coordinate comparison); Tag 0ATR (source scheme identification)",
+  "note": "Lean specialization of existing source-coordinate naturality, with explicit pullback inverse, QCoh preservation, and cancellation. The adjunction parameters in the unchanged statement are not used by this ordinary-base-change conclusion."
  },
  "mathlib_searches": [
   {
@@ -136,10 +131,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T123543-L-3710992",
-  "kind": "interface",
+  "landing": "20261013T140816-L-312676",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

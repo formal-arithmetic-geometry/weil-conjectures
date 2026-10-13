@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeSourceIso
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Transport of a right-adjoint mate across a scheme isomorphism
 
@@ -20,6 +20,14 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem map_id_coefficient
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (F : A ⥤ B) (G : C ⥤ B) (X : A) (Y : C)
+    (v : F.obj X ⟶ G.obj Y) :
+    F.map (𝟙 X) ≫ v = v ≫ G.map (𝟙 Y) ≫ 𝟙 (G.obj Y) := by
+  rw [F.map_id, G.map_id]
+  simp only [Category.id_comp, Category.comp_id]
 
 /-- Transport both ordinary base change and its right-adjoint mate when the source
 scheme of the vertical morphism is replaced by an isomorphic scheme.
@@ -85,6 +93,77 @@ theorem rightAdjoint_mate_scheme_iso_transport_base
     (∀ E : schemeDerivedQCohCategory P,
       IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
         (pullback.fst f g) pullback.condition E.obj)) := by
-  sorry
+  classical
+  have _ := adja
+  have _ := adjb
+  have _ := adjd
+  have _ := adjb'
+  have _ := K
+  let ri : pullback f g ⟶ pullback f' g := pullback.lift
+    (pullback.fst f g ≫ e.inv) (pullback.snd f g) (by
+      rw [Category.assoc, ← he]
+      simp only [← Category.assoc, e.inv_hom_id, Category.id_comp, pullback.condition])
+  have hi : r ≫ ri = 𝟙 _ := by
+    apply pullback.hom_ext
+    · simp only [ri, pullback.lift_fst, Category.assoc, Category.id_comp]
+      rw [← Category.assoc, hr₁]
+      simp
+    · simp only [ri, pullback.lift_snd, Category.assoc, Category.id_comp, hr₂]
+  have hj : ri ≫ r = 𝟙 _ := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hr₁, ← Category.assoc]
+      simp [ri]
+    · rw [Category.assoc, hr₂]
+      simp [ri]
+  let er : pullback f' g ≅ pullback f g := ⟨r, ri, hi, hj⟩
+  intro E
+  let N : schemeDerivedQCohCategory U := ⟨(derivedPullback e.hom).obj E.obj,
+    (derivedPullback_tensor_preserve_QCoh e.hom).1 E.obj E.property⟩
+  let c : ∀ {A B C : Scheme.{u}} (v : A ⟶ B) (v' : B ⟶ C),
+      derivedPullback v' ⋙ derivedPullback v ≅ derivedPullback (v ≫ v') :=
+    @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition)))
+  let z : (derivedPullback (pullback.fst f' g)).obj N.obj ≅
+      (derivedPullback r).obj ((derivedPullback (pullback.fst f g)).obj E.obj) :=
+    (c (pullback.fst f' g) e.hom).app E.obj ≪≫
+      eqToIso (congrArg (fun s ↦ (derivedPullback s).obj E.obj) hr₁.symm) ≪≫
+      ((c r (pullback.fst f g)).app E.obj).symm
+  have ht : pullback.fst f' g ≫ e.hom = er.hom ≫ pullback.fst f g := hr₁.symm
+  have h0 : pullback.fst f' g ≫ (e.hom ≫ f) =
+      (er.hom ≫ pullback.snd f g) ≫ g := by
+    change pullback.fst f' g ≫ (e.hom ≫ f) = (r ≫ pullback.snd f g) ≫ g
+    rw [he, hr₂, pullback.condition]
+  obtain ⟨a₀, b₀, hh⟩ := exists_derivedBaseChange_source_iso f
+    (pullback.snd f g) g (pullback.fst f g) pullback.condition e er
+    (pullback.fst f' g) ht h0 E.obj ((derivedPullback (pullback.fst f g)).obj E.obj)
+    N.obj ((derivedPullback r).obj ((derivedPullback (pullback.fst f g)).obj E.obj))
+    (𝟙 _) z.hom (Iso.refl _) (Iso.refl _) (by
+      simpa only [Iso.refl_hom, z, Iso.trans_hom, Iso.app_hom, Iso.app_inv,
+        Iso.symm_hom, eqToIso.hom, Category.assoc] using
+        map_id_coefficient (derivedPullback (pullback.fst f' g)) (derivedPullback r)
+          N.obj ((derivedPullback (pullback.fst f g)).obj E.obj) z.hom)
+  have hz : IsIso z.hom := inferInstance
+  have hβN := hβ N
+  have hb : IsIso (schemeDerivedBaseChangeMap (e.hom ≫ f)
+      (r ≫ pullback.snd f g) g (pullback.fst f' g) h0 N.obj) := by
+    have h : ∀ (l : U ⟶ S) (q : pullback f' g ⟶ T)
+        (hl : l = f') (hq : q = pullback.snd f' g)
+        (hc : pullback.fst f' g ≫ l = q ≫ g),
+        IsIso (schemeDerivedBaseChangeMap l q g (pullback.fst f' g) hc N.obj) := by
+      intro l q hl hq hc
+      subst l
+      subst q
+      exact hβN
+    exact h _ _ he hr₂ h0
+  have hc : IsIso (a₀.hom ≫ (schemeDerivedBaseChangeMap (e.hom ≫ f)
+      (r ≫ pullback.snd f g) g (pullback.fst f' g) h0 N.obj ≫
+      (schemeDerivedDirectImage (r ≫ pullback.snd f g)).map z.hom)) := inferInstance
+  change IsIso (a₀.hom ≫ (schemeDerivedBaseChangeMap (e.hom ≫ f)
+    (er.hom ≫ pullback.snd f g) g (pullback.fst f' g) h0 N.obj ≫
+    (schemeDerivedDirectImage (er.hom ≫ pullback.snd f g)).map z.hom)) at hc
+  rw [← hh] at hc
+  have hm := (isIso_comp_right_iff _ b₀.hom).mp hc
+  rw [(schemeDerivedDirectImage (pullback.snd f g)).map_id, Category.comp_id] at hm
+  exact hm
 
 end AlgebraicGeometry
