@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-affine-spectrum-composition-unit-square",
+ "kind": "statement",
+ "title": "Comparison square for the original composition units",
+ "statement": "For affine schemes X and X′, g′:X′→X and K in the derived category of X, let c and i be the selected comparisons of lem-pc-ringed-spaces-derived-pullback-composition. Let a_Y be the hom of c(Y.isoSpec.hom,Y.isoSpec.inv), transport along Y.isoSpec.hom_inv_id and i Y. The forward comparison at (derivedPullback X.isoSpec.inv).obj K, followed by derivedPullback X′.toSpecΓ applied to the inverse-spectrum comparison at K and then a_X′ at (derivedPullback g′).obj K, equals (derivedPullback g′).map(a_X at K). This statement uses the original composition units, without an equivalence or adjointification.",
+ "stmt_deps": [
+  "def-pc-affine-spectrum-direct-image-coordinates",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Lemma on composition of derived pullbacks; Second step of the parent proof: apply composition associativity and the two unit laws to the spectrum square"
+ },
+ "proof": [
+  {
+   "text": "Proof: write h,h' for the two spectrum maps, v,v' for their inverses, and q\nfor Spec.map g'.appTop. Expand the forward comparison as c(g',h), transport\nalong g';h = h';q, and inverse c(h',q). Expand the inverse comparison as\nc(q,v), transport along q;v = v';g', and inverse c(v',g'). Apply the\nassociativity law to h',q,v: the inverse c(h',q) followed by h'* applied to\nc(q,v) becomes c(h',q;v) followed by inverse c(h';q,v), with the associativity\ntransport. Transport q;v to v';g' and h';q to g';h by the two naturality\nidentities. Apply associativity to h',v',g' to combine the inverse c(v',g')\nwith c(h',v') at g'* K. Apply associativity to g',h,v to combine c(g',h)\nwith the remaining inverse c(g';h,v). The resulting expression consists of\nc(g',h;v), transported using h;v=id, followed by the identity comparison,\nand the corresponding path using h';v'=id. The two unit laws for c identify\nthese with g'* applied to c(h,v) followed by i X. Naturality of i moves\nits component through the remaining comparison. All transport maps are\ninduced by equalities of the same composite scheme morphism, so proof\nirrelevance identifies them. Evaluating at K gives the displayed equality.",
+   "uses": [
+    "def-pc-affine-spectrum-direct-image-coordinates",
+    "def-pc-affine-spectrum-derived-coordinates",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-spectrum-direct-image-coordinates",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Coherence consequence spelled out in the original cancellation proof; not a separate assertion quoted from Stacks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent contravariant composition isomorphism transports inverse isomorphism unit naturality",
+   "results": "CategoryTheory.Iso.isoCompInverse_hom_app; CategoryTheory.Iso.compInverseIso_inv_app; CategoryTheory.Iso.compInverseIso_hom_app; CategoryTheory.Iso.isoCompInverse_inv_app; CategoryTheory.NatIso.naturality_1'; CategoryTheory.NatIso.cancel_natIso_inv_right_assoc; CategoryTheory.NatIso.naturality_2'; CategoryTheory.Iso.inv_hom_id_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.adjointifyη",
+   "results": "CategoryTheory.Equivalence.adjointifyη; CategoryTheory.Equivalence.adjointify_η_ε_assoc; CategoryTheory.Equivalence.adjointify_η_ε",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "grep",
+   "query": "adjointifyη|unitIso.*symm|isoSpec.*unit",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/AlgebraicTopology/SimplicialObject/Op.lean",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback composition unit triangle identity of inverse scheme isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation",
+  "date": "2026-10-14",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-spectrum-comparison-cancellation",
+   "place": "Second step of the parent proof: apply composition associativity and the two unit laws to the spectrum square"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumCompositionUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.affineSpectrum_composition_unit_square",
+  "statement": "theorem affineSpectrum_composition_unit_square\n    {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']\n    (g' : X' ⟶ X) (K : schemeDerivedCategory X) :\n  let c : ∀ {P Q Z : Scheme.{u}} (k : P ⟶ Q) (l : Q ⟶ Z),\n      derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=\n    fun k l ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) k l\n  let i : ∀ Y : Scheme.{u}, derivedPullback (𝟙 Y) ≅ 𝟭 _ :=\n    Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))).2\n  (affineSpectrumForwardPullbackIso g').hom.app ((derivedPullback X.isoSpec.inv).obj K) ≫\n      (derivedPullback X'.toSpecΓ).map\n        ((affineSpectrumDerivedPullbackIso g').hom.app K) ≫\n      (c X'.isoSpec.hom X'.isoSpec.inv ≪≫\n      eqToIso (congrArg (fun k : X' ⟶ X' ↦ derivedPullback k) X'.isoSpec.hom_inv_id) ≪≫\n      i X').hom.app ((derivedPullback g').obj K) =\n    (derivedPullback g').map\n      ((c X.isoSpec.hom X.isoSpec.inv ≪≫\n      eqToIso (congrArg (fun k : X ⟶ X ↦ derivedPullback k) X.isoSpec.hom_inv_id) ≪≫\n      i X).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T181107-L-2602702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T181107-L-2602702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-affine-spectrum-unit-normalization",
+ "kind": "statement",
+ "title": "Normalization of the affine spectrum equivalence unit",
+ "statement": "For an affine scheme X and the family of derived categories of def-pc-affine-spectrum-direct-image-coordinates, let c and i be the composition and identity comparisons selected by lem-pc-ringed-spaces-derived-pullback-composition. The inverse unit natural transformation of affineSpectrumInversePullbackEquivalence X equals the hom of c(X.isoSpec.hom,X.isoSpec.inv), followed by transport along X.isoSpec.hom_inv_id and i X.",
+ "stmt_deps": [
+  "def-pc-affine-spectrum-direct-image-coordinates",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Lemma on composition of derived pullbacks; First step of the parent proof: identify the adjointified unit with the original composition unit"
+ },
+ "proof": [
+  {
+   "text": "Proof: write h = isoSpec.hom and v = isoSpec.inv, and let a and b be the\ncomposition/identity comparisons for h;v and v;h respectively. Apply the\nassociativity law for c to v,h,v. Transport h;v and v;h along the two inverse\nidentities. The right unit law at v identifies c(v,id) with pullback of i X;\nthe left unit law at v identifies c(id,v) with i(Spec Γ(X,⊤)) at v* K.\nAfter cancelling the common composition comparison, the resulting equation\nis v*.map(a.app K) = b.app(v*.obj K). Invert this equation to obtain the\ntriangle law for a.symm and b. The equivalence constructed by Equivalence.mk\nhas the same counit b and a faithful forward functor v*. Its inverse unit\nalso maps to b at v*.obj K, by Equivalence.counit_app_functor. Faithfulness\ntherefore identifies its inverse unit with a, component by component.",
+   "uses": [
+    "def-pc-affine-spectrum-direct-image-coordinates",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-spectrum-direct-image-coordinates",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Coherence consequence spelled out in the original cancellation proof; not a separate assertion quoted from Stacks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent contravariant composition isomorphism transports inverse isomorphism unit naturality",
+   "results": "CategoryTheory.Iso.isoCompInverse_hom_app; CategoryTheory.Iso.compInverseIso_inv_app; CategoryTheory.Iso.compInverseIso_hom_app; CategoryTheory.Iso.isoCompInverse_inv_app; CategoryTheory.NatIso.naturality_1'; CategoryTheory.NatIso.cancel_natIso_inv_right_assoc; CategoryTheory.NatIso.naturality_2'; CategoryTheory.Iso.inv_hom_id_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.adjointifyη",
+   "results": "CategoryTheory.Equivalence.adjointifyη; CategoryTheory.Equivalence.adjointify_η_ε_assoc; CategoryTheory.Equivalence.adjointify_η_ε",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "grep",
+   "query": "adjointifyη|unitIso.*symm|isoSpec.*unit",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/AlgebraicTopology/SimplicialObject/Op.lean",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback composition unit triangle identity of inverse scheme isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation",
+  "date": "2026-10-14",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-spectrum-comparison-cancellation",
+   "place": "First step of the parent proof: identify the adjointified unit with the original composition unit"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.affineSpectrum_unit_normalization",
+  "statement": "theorem affineSpectrum_unit_normalization (X : Scheme.{u}) [IsAffine X] :\n  let c : ∀ {P Q Z : Scheme.{u}} (k : P ⟶ Q) (l : Q ⟶ Z),\n      derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=\n    fun k l ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) k l\n  let i : ∀ Y : Scheme.{u}, derivedPullback (𝟙 Y) ≅ 𝟭 _ :=\n    Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))).2\n  (affineSpectrumInversePullbackEquivalence X).unitIso.inv =\n    (c X.isoSpec.hom X.isoSpec.inv ≪≫\n      eqToIso (congrArg (fun k : X ⟶ X ↦ derivedPullback k) X.isoSpec.hom_inv_id) ≪≫\n      i X).hom",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T181107-L-2602702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T181107-L-2602702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

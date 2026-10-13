@@ -6,6 +6,8 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
+import Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization
+import Sheaf.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare
 
 /-! # AffineSpectrumComparisonCancellation
 
@@ -59,6 +61,8 @@ theorem affineSpectrum_comparison_cancellation
         ((affineSpectrumDerivedPullbackIso g').hom.app K) ≫
       affineSpectrumUnitInv X' ((derivedPullback g').obj K) =
     (derivedPullback g').map
-      (affineSpectrumUnitInv X K) := by sorry
+      (affineSpectrumUnitInv X K) := by
+  simp only [affineSpectrumUnitInv, affineSpectrum_unit_normalization]
+  exact affineSpectrum_composition_unit_square g' K
 
 end AlgebraicGeometry
