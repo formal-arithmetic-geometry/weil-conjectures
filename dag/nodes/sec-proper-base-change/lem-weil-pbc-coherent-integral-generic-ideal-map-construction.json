@@ -26,38 +26,36 @@
  ],
  "proof": [
   {
-   "text": "The generic local ring of an integral scheme is a field and the generic stalk of a coherent module is finite dimensional. Choose a basis and extend the induced free-module map to a neighbourhood of the generic point using coherent_stalk_map_extends, then shrink so it is an isomorphism by coherent_local_isomorphism.",
+   "text": "Choose r, U, hx and φ by the finite generic-basis neighbourhood theorem.",
    "uses": [
-    "lem-weil-pbc-coherent-stalk-map-extends",
-    "lem-weil-pbc-coherent-local-isomorphism",
-    "pqf-lem-coherent-ft-locnoeth"
+    "lem-weil-pbc-coherent-integral-generic-free-neighbourhood"
    ],
    "elementary": false
   },
   {
-   "text": "Give the closed complement of that neighbourhood its reduced induced structure. The extension-over-an-open lemma supplies a power of its ideal and a map from a finite coproduct of copies of that ideal which agrees with the free-module map on the neighbourhood. The ideal and coproduct are coherent by local Noetherianity, and the generic stalk map is an isomorphism.",
+   "text": "Extend that specific φ from a coherent ideal lattice, retaining r, to obtain I and χ with invertible generic stalk.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-coherent-homs-over-open",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+    "lem-weil-pbc-coherent-integral-generic-lattice-extension"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the proved finite-coproduct coherence theorem to I and r and assemble the existential witnesses and conjunctions.",
+   "uses": [
+    "lem-weil-pbc-coherent-integral-generic-ideal-sigma-coherent"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-homs-over-open",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-coherent-local-isomorphism",
-  "lem-weil-pbc-coherent-stalk-map-extends",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "pqf-lem-coherent-ft-locnoeth"
+  "lem-weil-pbc-coherent-integral-generic-free-neighbourhood",
+  "lem-weil-pbc-coherent-integral-generic-lattice-extension",
+  "lem-weil-pbc-coherent-integral-generic-ideal-sigma-coherent"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01YE"
+  "place": "Tag 01YE, integral case; X2 reduction into generic basis, ideal extension, and proved finite-sum coherence"
  },
  "mathlib_searches": [
   {
@@ -113,12 +111,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T225312-L-1806437",
+  "landing": "20261013T025312-L-3426198",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

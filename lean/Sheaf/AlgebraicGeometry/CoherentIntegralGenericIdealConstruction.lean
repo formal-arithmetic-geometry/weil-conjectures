@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group X2
+-/
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
@@ -5,17 +10,11 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
-import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
-import Sheaf.AlgebraicGeometry.CoherentHomsOverOpen
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericLatticeExtension
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealSigma
+
+/-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
 
 @[expose] public section
 universe w
@@ -27,15 +26,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 Source: Stacks Project, Tag 01YE, first two paragraphs of the integral-case proof.
 (blueprint: lem-weil-pbc-coherent-integral-generic-ideal-map-construction).
 
-Proof sketch: the generic local ring of an integral scheme is a field.  The generic
-stalk of a coherent module is therefore finite dimensional; choose a basis and extend
-the resulting map from a finite free module to a neighbourhood of the generic point.
-After shrinking, the map is an isomorphism there.  Give the closed complement its
-reduced induced structure and apply the extension-over-an-open lemma to a power of
-its ideal.  This produces a map from a finite coproduct of copies of one ideal
-sheaf, still an isomorphism at the generic stalk.  The ideal and its finite coproduct
-are coherent by local Noetherianity.  The formal proof is left as this named theorem
-for the next stage worker. -/
+Extend a finite generic basis to an open neighbourhood. Extend that specific map
+from a coherent ideal lattice of the same rank. Its finite coproduct is coherent
+by the finite local generator argument, giving all the required witnesses. -/
 theorem coherent_integral_generic_ideal_construction (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G) :
     ∃ (r : ℕ) (I : Z.IdealSheafData),
@@ -43,6 +36,8 @@ theorem coherent_integral_generic_ideal_construction (Z : Scheme.{w}) [IsNoether
       RingedSpace.IsCoherent Z.toRingedSpace (∐ fun _ : Fin r => I.toModules) ∧
       ∃ (χ : (∐ fun _ : Fin r => I.toModules) ⟶ G),
         IsIso ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).map χ) := by
-  sorry
+  obtain ⟨r, U, hx, φ, hφ⟩ := exists_generic_free_neighbourhood Z G hG
+  obtain ⟨I, hI, χ, hχ⟩ := exists_generic_ideal_extension Z G hG r U hx φ hφ
+  exact ⟨r, I, hI, coherent_sigma_of_coherent_ideal Z r I hI, χ, hχ⟩
 
 end AlgebraicGeometry.Scheme.Modules

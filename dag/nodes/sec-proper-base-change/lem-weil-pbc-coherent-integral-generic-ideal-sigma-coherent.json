@@ -1,0 +1,159 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project Tag 01YE, finite coherent sum in the integral case; Tag 01XZ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-coherent-integral-generic-ideal-sigma-coherent",
+ "title": "Coherence of finite coproducts of a coherent ideal",
+ "statement": "Let Z be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], I an ideal sheaf whose module is coherent [pqf-def-coherent], and r ≥ 0. The coproduct of r copies of I.toModules is coherent [def-weil-sheaf-of-modules-category].",
+ "proof": [
+  {
+   "text": "The locally Noetherian criterion makes I.toModules quasi-coherent and of finite type. Arbitrary coproduct closure gives quasi-coherence for the coproduct indexed by ULift (Fin r); Sigma.reindex Equiv.ulift transports it to the Fin r coproduct.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite local generating data q for I. On each q.X i, GeneratingSections.sigma combines r copies of the finite generating family. The union has index type the finite sum of finite types, hence is finite. Transfer this family along preservation of coproducts by overFunctor and the reindexing isomorphism. This gives finite local generators for the Fin r coproduct, including the empty family for r = 0.",
+   "uses": [
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the locally Noetherian criterion to the resulting quasi-coherent finite-type coproduct.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-generating-sections",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project Tag 01YE, finite coherent sum in the integral case; Tag 01XZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isCoherent.*sigma|coherent.*generic|generic.*ideal",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-13",
+   "verdict": "Related finite-type APIs only; no exact generic-basis or ideal-extension result."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.IsFiniteType.mk; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "Related finite-type APIs only; no exact generic-basis or ideal-extension result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite basis of the generic stalk of a coherent sheaf extends to a map from a finite free sheaf on an open neighbourhood",
+   "results": "SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.LocalGeneratorsData.generators; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.QuasicoherentData.localGeneratorsData_generators; SheafOfModules.LocalGeneratorsData.I",
+   "date": "2026-10-13",
+   "verdict": "Related finite-type APIs only; no exact generic-basis or ideal-extension result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite basis of the generic stalk of a coherent sheaf extends to a finite free map on an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical absence claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a morphism of quasi coherent sheaves from an open subset by clearing denominators with a power of its complement ideal",
+   "results": "ModuleCat.Tilde.exists_const; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_eq_of_qcqs; ModuleCat.Tilde.sectionsSubmodule; ModuleCat.Tilde.isLocallyFraction; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-13",
+   "verdict": "Second reader: basis, local fraction, and free-sheaf APIs only; no theorem with the required sheaf-level conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional generic fiber of a finite type module sheaf is free near the generic point",
+   "results": "Module.isLocallyConstant_rankAtStalk_freeLocus; Module.mem_freeLocus; Module.rankAtStalk_eq_finrank_of_free; Module.isLocallyConstant_rankAtStalk; Module.mem_freeLocus_of_isLocalization; Module.freeLocus; SheafOfModules.IsFiniteType.exists_localGeneratorsData; Module.isOpen_freeLocus",
+   "date": "2026-10-13",
+   "verdict": "Second reader: basis, local fraction, and free-sheaf APIs only; no theorem with the required sheaf-level conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "SheafOfModules.free; SheafOfModules.freeSection; SheafOfModules.freeFunctor_obj; SheafOfModules.ιFree; SheafOfModules.freeMap; SheafOfModules.freeHomEquiv; SheafOfModules.sectionMap_freeMap_freeSection; SheafOfModules.freeFunctor_map",
+   "date": "2026-10-13",
+   "verdict": "Second reader: basis, local fraction, and free-sheaf APIs only; no theorem with the required sheaf-level conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoint.*IsIso|IsIso.*genericPoint",
+   "results": "none",
+   "date": "2026-10-13",
+   "verdict": "Second reader: basis, local fraction, and free-sheaf APIs only; no theorem with the required sheaf-level conclusion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealConstruction",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-integral-generic-ideal-map-construction",
+   "place": "decomposition of proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealSigma",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIntegralGenericIdealSigma.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_sigma_of_coherent_ideal",
+  "statement": "theorem coherent_sigma_of_coherent_ideal (Z : Scheme.{w}) [IsNoetherian Z]\n    (r : ℕ) (I : Z.IdealSheafData)\n    (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules) :\n    RingedSpace.IsCoherent Z.toRingedSpace (∐ fun _ : Fin r => I.toModules)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T025312-L-3426198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T025312-L-3426198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
