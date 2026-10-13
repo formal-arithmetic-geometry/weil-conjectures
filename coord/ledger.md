@@ -12486,3 +12486,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/N3/Sheaf.AlgebraicGeometry.KoszulOpenStructureEvaluation (stage 3; reviewer PASS; first push; landing 20261013T124312-L-3777034 (interface); batch 20261013T124305; modules 4; new nodes 3)
 - 12:43 L: merged deliver/N4/Sheaf.AlgebraicGeometry.AffineBoundedAboveFiberBettiComparison (stage 3; reviewer PASS; first push; landing 20261013T124313-L-3777151 (interface); batch 20261013T124305; modules 2; new nodes 1)
 - 12:43 L: merged deliver/N4/Sheaf.AlgebraicGeometry.CoefficientComparisonMorphismFaces (stage 3; reviewer PASS; first push; landing 20261013T124313-L-3777266 (proof); batch 20261013T124305; modules 1; new nodes 0)
+- 12:43 L: merged deliver/N4/Sheaf.AlgebraicGeometry.KoszulOpenAugmentedIdentityClass (stage 3; reviewer PASS; first push; landing 20261013T124314-L-3777460 (proof); batch 20261013T124305; modules 1; new nodes 0)

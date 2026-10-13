@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives
 import all Sheaf.AlgebraicGeometry.KoszulOpenSystem
+import Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 
 /-! # The augmented Koszul identity class is independent of the exponent
 
@@ -170,6 +171,7 @@ private theorem augmentation_transition
     exact (HomologicalComplex.isZero_single_obj_X (ComplexShape.down ℕ) 0
       (ModuleCat.of A A) (n + 1) (by omega)).eq_of_tgt _ _
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Augmentation sends every explicit identity class to the same structure section.
 Source: Stacks Project, Tag 08D1 (Koszul-to-Cech cocone); Tag 08DC, equation 36.9.4.1.
 (blueprint: lem-sc-koszul-open-augmented-identity-class).
@@ -204,6 +206,51 @@ theorem koszulOpen_augmented_identity_class
               (koszulOpenSheafComplex A r f e))) e))
           (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))
     ∀ e : ℕ, H.map (G.map (koszulOpenUnit A r f e)) (c e) =
-      H.map (G.map (koszulOpenUnit A r f 0)) (c 0)  := by sorry
+      H.map (G.map (koszulOpenUnit A r f 0)) (c 0)  := by
+  dsimp only
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
+  let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
+  let T := ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ))
+  let O := T.obj
+    (((ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A)).extend
+      ComplexShape.embeddingDownNat)
+  let t (e : ℕ) := T.map
+    (HomologicalComplex.extendMap (koszulOpenAugmentation A r f e)
+      ComplexShape.embeddingDownNat)
+  let D := koszulCechHomDiagram A r f
+    (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj O)
+  intro e
+  have hn (a : ℕ) := koszulOpenHom_chain_class_naturality A r f
+    (koszulOpenSheafComplex A r f a) O a (𝟙 _) (t a)
+  simp only [Category.id_comp] at hn
+  have he := hn e
+  have h0 := hn 0
+  dsimp only [koszulOpenUnit, koszulOpenObject, koszulOpenStructure]
+  change H.map (G.map (DerivedCategory.Q.map (t e))) _ =
+    H.map (G.map (DerivedCategory.Q.map (t 0))) _
+  calc
+    _ = H.map (koszulCechDerivedComparison A r f O)
+        (H.map (DerivedCategory.Q.map (colimit.ι D e))
+          (koszulOpenHomStageClass A r f O e (t e))) := by
+      exact he
+    _ = H.map (koszulCechDerivedComparison A r f O)
+        (H.map (DerivedCategory.Q.map (colimit.ι D 0))
+          (koszulOpenHomStageClass A r f O 0 (t 0))) := by
+      apply congrArg (H.map (koszulCechDerivedComparison A r f O))
+      have ht : (T.map
+          (HomologicalComplex.extendMap (koszulOpenTransition A r f 0 e (Nat.zero_le e))
+            ComplexShape.embeddingDownNat)) ≫ t 0 = t e := by
+        dsimp only [t]
+        rw [← Functor.map_comp, ← HomologicalComplex.extendMap_comp,
+          augmentation_transition]
+      have hc := stageClass_transition A r f O 0 e (Nat.zero_le e) (t 0)
+      dsimp only at hc
+      rw [ht] at hc
+      rw [← hc]
+      change (H.map (DerivedCategory.Q.map (D.map (homOfLE (Nat.zero_le e)))) ≫
+        H.map (DerivedCategory.Q.map (colimit.ι D e)))
+          (koszulOpenHomStageClass A r f O 0 (t 0)) = _
+      rw [← Functor.map_comp, ← Functor.map_comp, colimit.w]
+    _ = _ := by exact h0.symm
 
 end AlgebraicGeometry
