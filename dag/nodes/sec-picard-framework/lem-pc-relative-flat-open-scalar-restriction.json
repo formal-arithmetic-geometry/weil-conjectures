@@ -16,38 +16,34 @@
  },
  "proof": [
   {
-   "text": "At a point x in U apply relative_flat_module_stalk to G. This gives flatness over the base local ring. The commutative-ring inverse-image stalk isomorphism identifies that ring with the inverse-image structure ring stalk. Its germ formula and the adjunction defining tensorPullbackRingMap show that the structure map on this stalk is f.stalkMap x: check on germs using the adjunction unit equation. Thus the scalar action is exactly the action in the relative stalk theorem. For the open site, neighborhoods of x contained in U are cofinal among all neighborhoods of x, since intersection with U refines any neighborhood; reindexing the stalk diagram preserves the ring and module actions.",
+   "text": "Apply isFlat_open_scalarRestriction_of_stalks to the inverse-image ring and tensorPullbackRingMap. At x in U use exists_inverseImageStructure_stalk_iso to obtain a base-to-inverse-image stalk ring isomorphism compatible with the structure map.",
    "uses": [
-    "lem-pc-relative-flat-module-stalk",
-    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-pc-open-scalar-restriction-stalk-criterion",
+    "lem-pc-inverse-image-structure-stalk-iso",
     "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the stalk of a tensor with the tensor of stalks. Every exact short complex remains exact after tensoring by these flat stalks; stalks detect exactness. The additive right tensor functor therefore preserves homology and hence finite limits and finite colimits. On an empty open the stalk test is vacuous.",
+   "text": "Apply relative_flat_module_stalk with the algebra defined by f.stalkMap x. Restrict the inverse-image ring action via the inverse of the stalk isomorphism. The compatibility equation proves the scalar-tower law. A bijective ring map is flat; transitivity of module flatness then proves the stalk hypothesis of the open-site criterion.",
    "uses": [
-    "lem-weil-pbc-module-stalk-tensor",
-    "lem-weil-pbc-module-stalk-exact",
-    "def-pc-flat-sheaf-modules"
+    "lem-pc-relative-flat-module-stalk"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-relative-flat-module-stalk",
-  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-pc-open-scalar-restriction-stalk-criterion",
+  "lem-pc-inverse-image-structure-stalk-iso",
   "def-pc-module-pullback",
-  "lem-weil-pbc-module-stalk-tensor",
-  "lem-weil-pbc-module-stalk-exact",
-  "def-pc-flat-sheaf-modules"
+  "lem-pc-relative-flat-module-stalk"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "D4",
+  "by": "worker",
+  "group": "C3",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 01U2 (section-flat), 05NE (stalk criterion) and 0098 (stalks of pullbacks); open-site restriction of the relative_flat_module_stalk calculation"
+  "place": "Tags 01U2, 05NE and 0098; explicit inverse-image stalk scalar-tower reduction"
  },
  "mathlib_searches": [
   {
@@ -125,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T124308-L-3775538",
+  "landing": "20261013T133743-L-43763",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
