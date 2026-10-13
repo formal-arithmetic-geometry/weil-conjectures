@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-koszul-open-cone-comparison",
+ "kind": "statement",
+ "title": "The negative Koszul tail augmentation has the full Koszul complex as its cone",
+ "statement": "Let A be a commutative ring, r a natural number, f:Fin(r)->A and e a natural number. Use the tail I with terms wedge^(n+1) A^r and negative Koszul differential on the powers f_i^(e+1), its augmentation I->A[0], and the inclusion A[0]->K from [def-sc-koszul-open-system]. Extend all chain complexes by zero to integer cochain degree -n. Let u be the extended augmentation. Then there exists an isomorphism of cochain complexes Cone(u) -> K(f_i^(e+1)) [def-weil-pbc-koszul-complex] whose composite with the right cone inclusion equals the extended inclusion A[0]->K. No derived-category localization or quasi-coherent object is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.9 (Tag 08CX), opening construction of I and its Koszul triangle; read at https://stacks.math.columbia.edu/tag/08CX because the local TeX source is absent."
+ },
+ "stmt_deps": [
+  "def-sc-koszul-open-system",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Let u be the extended tail augmentation from [def-sc-koszul-open-system]. At cochain degree n the cone has terms I^(n+1) plus A[0]^n. If n<0 its second summand is zero and its first is K^n; if n=0 its first summand is zero and its second is A, identified with K^0 by the inverse of exteriorPower.zeroEquiv. If n>0 both summands vanish. Use the appropriate biproduct projection for the forward map and inclusion for the inverse, obtaining degreewise inverse maps to the full Koszul complex [def-weil-pbc-koszul-complex].",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The mapping-cone differential on the tail summand is the negative of the tail differential, cancelling the negative sign in I. The only off-diagonal nonzero term is from degree -1 to degree zero: it is u, whose degree-zero component is koszulBoundary followed by exteriorPower.zeroEquiv. The degree-zero identification cancels that equivalence, giving the full Koszul differential. This verifies every chain-map square, so the degreewise inverses give an isomorphism of cochain complexes.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The right cone inclusion is zero in every degree other than zero. At degree zero the constructed isomorphism sends A to K^0 by the inverse of exteriorPower.zeroEquiv, exactly koszulOpenKoszulInclusion. Equality of all components gives the required morphism equality. When r=0 the tail is zero and the cone is A[0]; for the zero ring all terms are zero.",
+   "uses": [
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-open-system",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.9 (Tag 08CX), opening construction of I and its Koszul triangle; read at https://stacks.math.columbia.edu/tag/08CX because the local TeX source is absent. Explicit degreewise cone identification filling in the source construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of the augmentation of the negative Koszul tail is isomorphic to the full Koszul complex.",
+   "results": "Service unavailable: Internal Server Error. No verdict can be inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mapping cone of augmentation of negative truncated Koszul complex is isomorphic to full Koszul complex",
+   "results": "Generic augmentTruncate and mappingConeHomOfDegreewiseSplitIso results, and mappingCone.mapHomologicalComplexIso. The latter is used to transport the module-level cone comparison to sheaves; none gives the Koszul-tail comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, Iso",
+   "results": "Rejected query: unknown identifier Iso. Direct source inspection supplied the generic cone transport lemmas.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(cone|triangle)|mappingCone.*(augment|truncate)",
+   "results": "No Mathlib hits. Repository search found KoszulCoordinateConeIso, which compares a scalar map on a shorter Koszul complex and does not identify the tail augmentation cone. No exact blueprint match (blueprint_refs.py search Koszul cone).",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-perfect-open-represent-cohomology",
+   "place": "structural Koszul triangle I_e -> O_X -> K_e, reduced to the module-level cone identification before localization",
+   "via": [
+    "lem-sc-affine-perfect-open-represent-cohomology-core",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenConeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenConeComparison.lean",
+  "declaration": "AlgebraicGeometry.koszulOpen_module_cone_comparison",
+  "statement": "theorem koszulOpen_module_cone_comparison (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ) : let u := HomologicalComplex.extendMap (koszulOpenAugmentation A r f e) ComplexShape.embeddingDownNat ∃ c : CochainComplex.mappingCone u ≅ (ExteriorAlgebra.koszulComplex A r (fun i ↦ f i ^ (e + 1))).extend ComplexShape.embeddingDownNat, CochainComplex.mappingCone.inr u ≫ c.hom = HomologicalComplex.extendMap (koszulOpenKoszulInclusion A r f e) ComplexShape.embeddingDownNat",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T015557-L-3021685",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T015557-L-3021685",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
