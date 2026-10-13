@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Mathlib.Algebra.Homology.Factorizations.CM5a
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Bounded-below injective resolutions on a small ringed site
@@ -31,17 +33,19 @@ namespace SheafOfModules
 into a bounded-below complex with injective terms which is also K-injective.
 
 Source: Stacks Project, Tags 07A5 and 079P, with the bounded-below replacement furnished by
-`CochainComplex.Plus.exists_quasiIso_injective`
+`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`
 (blueprint: lem-sc-bounded-below-injective-resolution).
 
 Proof:
 1. The category of module sheaves on a small ringed site is Grothendieck abelian by the
-first clause of `prop-pur-kinjective-resolutions-exist`. By
-`lem-sp-grothendieck-enough-injectives` it has enough injectives.
-2. Choose a lower bound for `G`. Apply `lem-sc-bounded-below-injective-resolution-existence`
-(`CochainComplex.Plus.exists_quasiIso_injective`) in this abelian category. Forgetting the
-packaging in the category of injective objects gives a complex `I`, bounded below, with
-injective terms and a quasi-isomorphism `G ⟶ I`.
+Grothendieck assertion of `lem-pur-ringed-site-grothendieck-abelian`, supplied directly
+by the proved upstream `SheafOfModules.isGrothendieckAbelian`. Mathlib's
+`CategoryTheory.IsGrothendieckAbelian.enoughInjectives` then supplies enough injectives.
+2. Choose a lower bound for `G`. Apply the unbundled Mathlib theorem
+`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`, the construction
+underlying `lem-sc-bounded-below-injective-resolution-existence`. This gives a complex
+`I`, strictly supported above the same lower bound, with injective terms and a
+quasi-isomorphism `G ⟶ I`, without packaging it in the category of injective objects.
 3. Apply `lem-weil-pbc-bounded-below-injectives-kinjective`
 (`CochainComplex.isKInjective_of_injective`) to conclude that `I` is K-injective. -/
 theorem exists_boundedBelow_injective_resolution
@@ -55,6 +59,14 @@ theorem exists_boundedBelow_injective_resolution
       (i : G ⟶ I),
       QuasiIso i ∧ (∃ n : ℤ, I.IsStrictlyGE n) ∧
         (∀ n : ℤ, Injective (I.X n)) ∧ I.IsKInjective := by
-  sorry
+  have := isGrothendieckAbelian
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  obtain ⟨n, hn⟩ := hG
+  have : G.IsStrictlyGE n := hn
+  obtain ⟨I, i, hi, hI, hIn⟩ :=
+    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective G n
+  have : I.IsStrictlyGE n := hIn
+  have : ∀ q : ℤ, Injective (I.X q) := hI
+  exact ⟨I, i, hi, ⟨n, hIn⟩, hI, CochainComplex.isKInjective_of_injective I n⟩
 
 end SheafOfModules

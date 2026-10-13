@@ -24,9 +24,9 @@
  ],
  "proof": [
   {
-   "text": "The category $\\Mod(\\mathcal O_U)$ of sheaves of $\\mathcal O_U$-modules on the small ringed site $(U,\\mathcal O_U)$ is a Grothendieck abelian category by [prop-pur-kinjective-resolutions-exist] (its first clause), hence it is abelian and has enough injectives by [lem-sp-grothendieck-enough-injectives].",
+   "text": "The Grothendieck-abelian assertion of [lem-pur-ringed-site-grothendieck-abelian] is supplied directly by the proved upstream SheafOfModules.isGrothendieckAbelian applied to the underlying ring sheaf. The additional localized-generator assertion is not used. Mathlib's CategoryTheory.IsGrothendieckAbelian.enoughInjectives [lem-sp-grothendieck-enough-injectives] supplies enough injectives.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-ringed-site-grothendieck-abelian",
     "lem-sp-grothendieck-enough-injectives"
    ],
    "elementary": false,
@@ -36,14 +36,14 @@
    }
   },
   {
-   "text": "Apply [lem-sc-bounded-below-injective-resolution-existence] to the bounded-below complex $\\mathcal G^\\bullet$ in this abelian category. It yields a quasi-isomorphism $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ with $\\mathcal I^\\bullet$ bounded below and every $\\mathcal I^n$ injective.",
+   "text": "Choose n with G.IsStrictlyGE n. Apply CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective, the unbundled construction used in the proof of the Mathlib leaf [lem-sc-bounded-below-injective-resolution-existence]. It supplies I, i : G ⟶ I, QuasiIso i, injectivity of every I.X q, and I.IsStrictlyGE n. Use this unbundled version to avoid introducing a complex in InjectiveObject and then forgetting it.",
    "uses": [
     "lem-sc-bounded-below-injective-resolution-existence"
    ],
    "elementary": false,
    "source": {
-    "document": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
-    "place": "CochainComplex.Plus.exists_quasiIso_injective, lines 61-69"
+    "document": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+    "place": "CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective, lines 668-693; the construction used by CochainComplex.Plus.exists_quasiIso_injective, line 66"
    }
   },
   {
@@ -59,15 +59,15 @@
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-sp-grothendieck-enough-injectives",
   "lem-sc-bounded-below-injective-resolution-existence",
   "lem-weil-pbc-bounded-below-injectives-kinjective"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/injectives.tex",
-  "place": "Tag 07A5 using Tag 079P, with the bounded-below replacement supplied by Mathlib"
+  "document": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+  "place": "Unbundled exists_quasiIso_injective; isKInjective_of_injective; isGrothendieckAbelian applied to the underlying ring sheaf. Lean assembly and second reading by R4, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -182,5 +182,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T010619-L-2672701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
