@@ -29,64 +29,28 @@
  ],
  "proof": [
   {
-   "text": "A morphism of schemes is in particular a morphism of ringed spaces. Applying [lem-pc-ringed-spaces-derived-adjoint-general] to the structure-sheaf morphism induced by g gives the derived adjunction Lg^* ⊣ Rg_* and its derived counit Lg^*Rg_*E → E.",
+   "text": "Apply the fixed counit-composite theorem to obtain componentwise invertibility and naturality. Turn each explicit component into an isomorphism with asIso and assemble NatIso.ofComponents.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-pc-global-hom-pullback-counit-isomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W, cohomology-lemma-adjoint"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pc-derived-internal-hom-pullback-adjunction] to g, M and E: the composite of the canonical map R\\mathcal Hom_{\\mathcal O_S}(M,Rg_*E)\\to Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,Lg^*Rg_*E) (adjoint to the map of Tag 08I3) with Rg_*R\\mathcal Hom(Lg^*M,\\varepsilon_E) is an isomorphism R\\mathcal Hom_{\\mathcal O_S}(M,Rg_*E)\\cong Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E) in D(\\mathcal O_S), natural in M and E.",
+   "text": "Apply the independent H^0 computation for the same explicit composite. Supply the fixed adjunction, the two additive identifications and the assembled natural isomorphism. Its component formula unfolds definitionally to the required pullback-counit factorization, and the H^0 equation is exactly the second lemma.",
    "uses": [
-    "lem-pc-derived-internal-hom-pullback-adjunction"
+    "lem-pc-global-hom-pullback-counit-hzero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark 08I3 and Tag 079W"
-   }
-  },
-  {
-   "text": "Apply the derived global sections R\\Gamma(S,-)=Rp_{S,*} of [def-pc-global-derived-rhom] to this isomorphism. The left side is R\\operatorname{Hom}_S(M,Rg_*E) by definition. For the right side, p_S\\circ g:T\\to(\\{pt\\},\\Gamma(S,\\mathcal O_S)) equals q\\circ p_T with q:(\\{pt\\},\\Gamma(T,\\mathcal O_T))\\to(\\{pt\\},\\Gamma(S,\\mathcal O_S)) given by g^\\sharp; [lem-pc-ringed-spaces-derived-direct-image-composition] twice gives Rp_{S,*}Rg_*\\cong R(p_S\\circ g)_*=R(q\\circ p_T)_*\\cong Rq_*Rp_{T,*}, and Rq_*=q_* is restriction of scalars since q_* is exact. Hence R\\Gamma(S,Rg_*R\\mathcal Hom(Lg^*M,E))\\cong R\\operatorname{Hom}_T(Lg^*M,E) in D(\\Gamma(S,\\mathcal O_S)), naturally, giving the asserted isomorphism. Under the same identification (applied with Lg^*Rg_*E in place of E) the first factor of step 2 becomes the map R\\operatorname{Hom}_S(M,Rg_*E)\\to R\\operatorname{Hom}_T(Lg^*M,Lg^*Rg_*E) induced by derived pullback (global sections of the map of Tag 08I3, Section global-RHom), and the second becomes postcomposition with \\varepsilon_E.",
-   "uses": [
-    "def-pc-global-derived-rhom",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section global-RHom (Tag 0B6A); Tag 0D5T"
-   }
-  },
-  {
-   "text": "On H^0, [lem-pur-rhom-global-sections] (on S and on T, using H^0(S,Rg_*K)=H^0(T,K) from step 3) identifies the two sides with \\operatorname{Hom}(M,Rg_*E) and \\operatorname{Hom}(Lg^*M,E); by the H^0 clause of [lem-pc-derived-internal-hom-pullback-adjunction] the induced map is \\varphi\\mapsto\\varepsilon_E\\circ Lg^*\\varphi, which is the Hom-set bijection of the adjunction of step 1 expressed through its counit (elementary category theory).",
-   "uses": [
-    "lem-pur-rhom-global-sections",
-    "lem-pc-derived-internal-hom-pullback-adjunction",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section global-RHom (H^0(RHom_X(K,L))=Hom_{D(O_X)}(K,L)), Tag 079W"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-pc-derived-internal-hom-pullback-adjunction",
-  "def-pc-global-derived-rhom",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pur-rhom-global-sections"
+  "lem-pc-global-hom-pullback-counit-isomorphism",
+  "lem-pc-global-hom-pullback-counit-hzero"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079W and Section global-RHom"
+  "place": "Tag 079W (lemma-adjoint), Remark 08I3, Section global-RHom (Tag 0B6A); component assembly and independent H^0 calculation (V3)"
  },
  "mathlib_searches": [
   {
@@ -210,5 +174,15 @@
   "group": "C1",
   "result": "pass",
   "note": "independent Codex review: Matched arbitrary schemes and morphism, derived pullback/direct image, scalar-restricted global RHom isomorphism, canonical pullback-counit factorization, and H⁰ adjunction formula; packet compile is clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T045615-L-139941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

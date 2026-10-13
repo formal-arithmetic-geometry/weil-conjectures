@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-global-hom-pullback-counit-hzero",
+ "kind": "statement",
+ "title": "Zeroth cohomology action of the fixed global pullback-counit map",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes [def-pc-scheme], with unbounded derived categories $D(S),D(T)$ [def-pc-derived-category], derived pullback $F=Lg^*$ [def-pc-derived-pullback], and direct image $R=Rg_*$ [def-pc-derived-direct-image]. Write $H_X(P,Q)=R\\operatorname{Hom}_X(P,Q)$ [def-pc-global-derived-rhom] and $r_g$ for exact scalar restriction along $\\Gamma(S,\\mathcal O_S)\\to\\Gamma(T,\\mathcal O_T)$. Fix the adjunction $a_g$ and Leray comparison used in [lem-pc-global-hom-adjunction]. Let $p_g(P,Q):H_S(P,Q)\\to r_g H_T(FP,FQ)$ be the pinned pullback comparison [def-pc-global-hom-pullback-comparison], and define $c_g(M,E)=p_g(M,RE);r_g H_T(1,\\varepsilon_E)$, with $\\varepsilon$ the counit of $a_g$. There exist additive identifications $h_S(P,Q):H^0 H_S(P,Q)\\simeq\\operatorname{Hom}_{D(S)}(P,Q)$ for all P,Q on S and $h_T(P,Q):H^0 r_g H_T(P,Q)\\simeq\\operatorname{Hom}_{D(T)}(P,Q)$ for all P,Q on T, such that for every $M\\in D(S)$, $E\\in D(T)$ and $\\varphi:M\\to RE$, one has $h_T(FM,E)(H^0(c_g(M,E))(h_S(M,RE)^{-1}(\\varphi)))=F(\\varphi);\\varepsilon_E$. No invertibility or natural-isomorphism conclusion is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W (lemma-adjoint), Remark 08I3, Section global-RHom (Tag 0B6A)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-global-derived-rhom",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-pc-global-hom-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use the K-flat/K-injective Hom-complex computation of H^0(RΓ RHom)=Hom on S and T. This supplies additive identifications for every pair of inputs. Exact restriction of scalars commutes with homology and retains the underlying additive group, yielding the displayed scalar-restricted identification on T.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W (lemma-adjoint), Remark 08I3, Section global-RHom (Tag 0B6A)"
+   }
+  },
+  {
+   "text": "The canonical tensor-Hom evaluation on representatives takes each zero cocycle to the represented chain map. The mate defining pullback takes that chain map to its derived pullback, and the canonical Leray map comes from the identity on sections. Postcomposition with the fixed derived counit therefore takes φ to Lg*(φ) followed by ε. These equalities descend through homotopy and localization, and common resolutions prove independence of representatives. This gives the equation for the fixed c, without any claim for arbitrary additive identifications.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-global-hom-pullback-comparison",
+    "lem-pc-global-hom-adjunction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079W (lemma-adjoint), Remark 08I3, Section global-RHom (Tag 0B6A)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-global-derived-rhom",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-pc-global-hom-adjunction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W (lemma-adjoint), Remark 08I3, Section global-RHom (Tag 0B6A)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rhom.*global|global.*[Hh]om.*adjunction",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global Hom pullback direct image adjunction counit natural isomorphism",
+   "results": "SheafOfModules.pullbackIso; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; PresheafOfModules.pullbackComp; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global Hom pullback direct image adjunction counit natural isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "CategoryTheory.NatIso.ofComponents; CategoryTheory.NatIso.ofComponents.app; CategoryTheory.NatIso.ofComponents_hom_app; CategoryTheory.NatIso.ofComponents_inv_app; CategoryTheory.opOpEquivalence_counitIso; CategoryTheory.opOpEquivalence_unitIso; CategoryTheory.Functor.opUnopEquiv_unitIso; CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-13",
+   "verdict": "generic categorical tool only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 case (1), final compatibility: identification (M, g'_*a'(g^*K))_X = ((g')^*M, a'(g^*K))_{X'} and the map mu",
+   "via": [
+    "lem-pc-global-hom-pullback-adjunction",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-flat-precompose-pus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalHomPullbackCounitHZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomPullbackCounitHZero.lean",
+  "declaration": "AlgebraicGeometry.schemeGlobalHomPullbackCounitMap_hzero",
+  "statement": "theorem schemeGlobalHomPullbackCounitMap_hzero {T S : Scheme.{u}} (g : T ⟶ S) : ∃ (hS : ∀ M N : schemeDerivedCategory S, ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) 0).obj ((schemeGlobalDerivedHom S).obj (op M, N))) ≃+ (M ⟶ N)) (hT : ∀ M N : schemeDerivedCategory T, ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) 0).obj (((ModuleCat.restrictScalars.{u} (R := (moduleRings S.toRingedSpace).obj.obj (op ⊤)) (S := (moduleRings T.toRingedSpace).obj.obj (op ⊤)) g.appTop.hom).mapDerivedCategory).obj ((schemeGlobalDerivedHom T).obj (op M, N)))) ≃+ (M ⟶ N)), (∀ (M : schemeDerivedCategory S) (E : schemeDerivedCategory T) (φ : M ⟶ (schemeDerivedDirectImage g).obj E), hT ((derivedPullback g).obj M) E ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) 0).map (schemeGlobalHomPullbackCounitMap g M E) ((hS M ((schemeDerivedDirectImage g).obj E)).symm φ)) = (derivedPullback g).map φ ≫ (schemeHomPullbackAdjunction g).counit.app E)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T045615-L-139941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T045615-L-139941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

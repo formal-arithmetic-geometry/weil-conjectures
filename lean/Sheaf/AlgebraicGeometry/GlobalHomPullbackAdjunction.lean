@@ -7,10 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.GlobalHomPullbackCounitHZero
 
 /-!
 # Global derived Hom and pullback/direct-image adjunction
@@ -106,6 +103,22 @@ theorem schemeGlobalDerivedHom_pullback_adjunction
               (i.hom.app (op M, E))
                 ((hS M ((schemeDerivedDirectImage g).obj E)).symm φ)) =
           (derivedPullback g).map φ ≫ adj.counit.app E) := by
-  sorry
+  classical
+  obtain ⟨hiso, hnat⟩ := schemeGlobalHomPullbackCounitMap_isIso_natural g
+  obtain ⟨hS, hT, hzero⟩ := schemeGlobalHomPullbackCounitMap_hzero g
+  let i : (𝟭 (schemeDerivedCategory S)).op.prod (schemeDerivedDirectImage g) ⋙
+      schemeGlobalDerivedHom S ≅
+    (derivedPullback g).op.prod (𝟭 (schemeDerivedCategory T)) ⋙
+      schemeGlobalDerivedHom T ⋙ schemeGlobalScalarRestriction g :=
+    NatIso.ofComponents
+      (fun P ↦ by
+        haveI := hiso P.1.unop P.2
+        exact asIso (schemeGlobalHomPullbackCounitMap g P.1.unop P.2))
+      (fun f ↦ hnat _ _ f)
+  refine ⟨schemeHomPullbackAdjunction g, hS, hT, i, ?_, ?_⟩
+  · intro M E
+    rfl
+  · intro M E φ
+    exact hzero M E φ
 
 end AlgebraicGeometry
