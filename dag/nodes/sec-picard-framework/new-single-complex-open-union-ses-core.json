@@ -14,20 +14,52 @@
  },
  "proof": [
   {
-   "text": "Choose K-injective resolutions with injective terms, form the degreewise restriction sequence on the compact-open union and its two members, and lift the coefficient morphism functorially. The resulting strict square and functorial cone comparisons give the six displayed isomorphisms.",
+   "text": "Choose the functorial K-injective replacement I of a complex representing K. The quasi-isomorphism to I gives Q(I) ≅ K, and every term of I is injective. Form the concrete restriction/direct-image complexes J_W for W = U ∪ V, U, V, U ∩ V. Apply schemeOpenUnionImageComplex_shortExact to obtain the short exact row J_(U∪V) → J_U ⊞ J_V → J_(U∩V). The constructed open-image comparison identifies Q(J_W) with Rj_W* of exact restriction of K. Repeat for K′ on X′ and the inverse-image opens.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-pc-open-union-image-complex-exact",
+    "def-pc-open-image-complex-comparison-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the short-exact-sequence triangle construction to each row, then apply Rf* followed by Lg* to the first and Rf′* to the second. Derived direct image is triangulated. Equip Lg* with the shift structure adjoint to the right-derived shifts; Mathlib Adjunction.isTriangulated_leftAdjoint makes it triangulated. By DerivedCategory.mem_distTriang_iff, each image triangle is isomorphic to a localized mapping-cone triangle. Project the inverse triangle isomorphism at its three vertices and use the additive biproduct comparison. This gives two independent chain maps t and t′ and the three vertex isomorphisms for each.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify exact open restriction with derived pullback by left-adjoint uniqueness and compose direct images by the right-adjoint mate of the pullback composition comparison. For the target row, identify the inverse-image open with the chosen fibre product via pullbackRestrictIsoRestrict. Pullback along this scheme isomorphism is an equivalence: the pullback composition and identity isomorphisms give its fully faithful structure, so its adjunction unit is invertible. Apply Rj to that unit and use right-adjoint uniqueness for the resulting composite to transport the localized object to the fibre-product object. Apply Rf′ and its composition comparison. Inverse image preserves union and intersection. These constructions give exactly the six required object isomorphisms.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set α = 0 and β = 0. The zero-composition laws give t ≫ β = α ≫ t′. Package the two cone models and six object isomorphisms with True.intro. No equation relating α, β or the cone map to the original comparison morphisms is requested by this statement; neither compactness nor quasi-coherence is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pc-open-union-image-complex-exact",
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-open-preimage-fibre-product"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
-  "place": "Chain-level decomposition of the union SES presentation."
+  "document": "literature/stacks-project/cohomology.tex; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+  "place": "Tag 08BV applied on an arbitrary union; mem_distTriang_iff; Adjunction.isTriangulated_leftAdjoint. Object-only route written and compiled by Q4."
  },
  "mathlib_searches": [
   {
@@ -96,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T231544-L-1820751",
-  "kind": "interface",
+  "landing": "20261013T234518-L-2165566",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
