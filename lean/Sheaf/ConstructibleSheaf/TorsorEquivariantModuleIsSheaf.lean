@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N1
+Authors: SHEAF group B2
 -/
 module
 
@@ -11,18 +11,27 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Sites.Subsheaf
 
 /-!
-# Gluing equivariant module sections
+# Equivariant locally constant sections are a sheaf
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-equivariant-module-is-sheaf)
+Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
+(blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
 -/
 
 @[expose] public section
-
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory Limits Opposite
-namespace AlgebraicGeometry.Scheme.GaloisCover
+namespace AlgebraicGeometry
+
+private theorem restriction_action
+    {V : Scheme.{u}} {P : Type u} [Group P] [Finite P]
+    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
+    {W W' : V.Etale} (f : W ⟶ W') (g : P) :
+    c.sectionAction W g ≫ c.sectionRestriction f =
+      c.sectionRestriction f ≫ c.sectionAction W' g := by
+  apply pullback.hom_ext <;> simp [Scheme.GaloisCover.sectionAction,
+    Scheme.GaloisCover.sectionRestriction]
 
 private noncomputable abbrev functionPresheaf
     {V : Scheme.{u}} {P : Type u} [Group P] [Finite P]
@@ -31,6 +40,20 @@ private noncomputable abbrev functionPresheaf
     V.Etaleᵒᵖ ⥤ Type (u + 1) :=
   (MorphismProperty.Over.pullback @Etale ⊤ c.π).op ⋙
     (Scheme.Etale.continuousMapSheaf c.P M).obj ⋙ CategoryTheory.forget AddCommGrpCat.{u + 1}
+
+private theorem functionPresheaf_isSheaf
+    {V : Scheme.{u}} {P : Type u} [Group P] [Finite P]
+    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
+    (M : Type (u + 1)) [AddCommGroup M] [TopologicalSpace M] [IsTopologicalAddGroup M] :
+    Presieve.IsSheaf V.smallEtaleTopology (functionPresheaf c M) := by
+  let : (MorphismProperty.Over.pullback @Etale ⊤ c.π).IsContinuous
+      V.smallEtaleTopology c.P.smallEtaleTopology :=
+    Etale.isContinuous_overPullback c.π
+  rw [← isSheaf_iff_isSheaf_of_type]
+  apply (MorphismProperty.Over.pullback @Etale ⊤ c.π).op_comp_isSheaf_of_isSheaf
+    V.smallEtaleTopology c.P.smallEtaleTopology
+  exact ((sheafCompose c.P.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+    (Scheme.Etale.continuousMapSheaf c.P M)).property
 
 private noncomputable def equivarianceSubfunctor
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
@@ -45,40 +68,65 @@ private noncomputable def equivarianceSubfunctor
     intro g x
     change s (c.sectionRestriction f.unop (c.sectionAction W'.unop g x)) =
       N.ρ g (s (c.sectionRestriction f.unop x))
-    have h : c.sectionAction W'.unop g ≫ c.sectionRestriction f.unop =
-        c.sectionRestriction f.unop ≫ c.sectionAction W.unop g := by
-      apply pullback.hom_ext <;>
-        simp [Scheme.GaloisCover.sectionAction, Scheme.GaloisCover.sectionRestriction]
-    rw [← Scheme.Hom.comp_apply, h, Scheme.Hom.comp_apply]
+    rw [← Scheme.Hom.comp_apply, restriction_action c,
+      Scheme.Hom.comp_apply]
     exact hs g _
 
-/-- Equivariant locally constant module sections satisfy etale descent.
-Source: Stacks Project, sites.tex Tags 04TR and 04TS; etale-cohomology.tex Tag 0DV5 (3).
-(blueprint: lem-weil-pbc-torsor-equivariant-module-is-sheaf)
-
-Proof: Let a matching family of equivariant sections be given on an etale cover
-of an etale object W. Base change this cover along the torsor to obtain an etale
-surjective cover of W times_V c.P. Etale maps are open, so matching locally
-constant functions on this cover glue uniquely to a locally constant function:
-define its value at a point using any lift, with independence given by matching
-on the fibre products. Surjectivity of the maps from the fibre products to the
-corresponding products of geometric fibres gives independence for arbitrary
-scheme points too. Openness gives local constancy of the glued function.
-Apply the same uniqueness to the pullback by each group action and the function
-obtained by applying the representation action. They agree on the cover by
-local equivariance, hence agree globally. Gluing is linear since addition and
-scalar multiplication are pointwise. Thus every matching family in the module
-presheaf has a unique amalgamation, proving the module-valued sheaf condition. -/
-theorem equivariantModulePresheaf_isSheaf
+private theorem equivarianceSubfunctor_isSheaf
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
-    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
-    (N : Rep.{u + 1} (ZMod ℓ) P) :
-    Presheaf.IsSheaf V.smallEtaleTopology (c.equivariantModulePresheaf ℓ N) := by
+    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) (N : Rep.{u + 1} (ZMod ℓ) P)
+    [TopologicalSpace N.V] [DiscreteTopology N.V] :
+    Presieve.IsSheaf V.smallEtaleTopology (equivarianceSubfunctor ℓ c N).toFunctor := by
+  let H := functionPresheaf c N.V
+  have hH := functionPresheaf_isSheaf c N.V
+  apply (Subfunctor.isSheaf_iff (equivarianceSubfunctor ℓ c N) hH).2
+  intro W s₀ hs
+  let s : C(c.sectionSpace W.unop, N.V) := s₀
+  intro g x
+  let a : H.obj W := s.comp ⟨c.sectionAction W.unop g,
+    (c.sectionAction W.unop g).continuous⟩
+  let b : H.obj W := ⟨fun y ↦ N.ρ g (s y), (continuous_of_discreteTopology).comp s.continuous⟩
+  have hab : a = b := (hH.isSeparated _ hs).ext fun T f hf ↦ by
+    apply ContinuousMap.ext
+    intro y
+    change s (c.sectionAction W.unop g (c.sectionRestriction f y)) =
+      N.ρ g (s (c.sectionRestriction f y))
+    rw [← Scheme.Hom.comp_apply, ← restriction_action c, Scheme.Hom.comp_apply]
+    exact hf g y
+  exact ContinuousMap.congr_fun hab x
+
+/-- Equivariant locally constant functions satisfy etale sheaf gluing before
+sheafification, including after transport of the coefficient ring.
+Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
+(blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
+
+Proof:
+Let an etale covering family of W and a compatible family of equivariant locally
+constant functions on its pullbacks of the torsor be given. Base change gives an
+etale surjective covering family of W times_V Y. A compatible locally constant
+function glues uniquely on an etale cover: choose its value at a lift of each point.
+Two lifts have a common lift on the fiber product after a residue field extension,
+so compatibility makes the value independent of this choice. The etale covering
+maps are open, hence the glued function is locally constant. The equivariance
+identity holds after restriction to the covering family, and therefore holds
+pointwise for the glued function. Thus gluing lands in the equivariant submodule.
+Uniqueness also follows on that cover. Addition and scalar multiplication glue
+pointwise, proving the module-valued sheaf condition. Restricting scalars along
+ULift.ringEquiv preserves this condition since its underlying sets and maps are
+unchanged. Empty covering objects and the zero module satisfy the same argument.
+-/
+theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
+    {V : Scheme.{u}} (ℓ : ℕ) (P : Type u) [Group P] [Finite P]
+    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) (N : Rep.{u + 1} (ZMod ℓ) P) :
+    Presheaf.IsSheaf V.smallEtaleTopology
+      (c.equivariantModulePresheaf ℓ N ⋙ ModuleCat.restrictScalars
+        (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)) := by
   let : TopologicalSpace N.V := ⊥
   let : DiscreteTopology N.V := ⟨rfl⟩
-  let Q := c.equivariantModulePresheaf ℓ N
+  let Q := c.equivariantModulePresheaf ℓ N ⋙ ModuleCat.restrictScalars
+    (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)
   let G := equivarianceSubfunctor ℓ c N
-  let e : Q ⋙ CategoryTheory.forget (ModuleCat.{u + 1} (ZMod ℓ)) ≅ G.toFunctor :=
+  let e : Q ⋙ CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) ≅ G.toFunctor :=
     NatIso.ofComponents (fun W ↦ equivEquivIso
       { toFun := fun s ↦ ⟨s.val.toContinuousMap, s.property⟩
         invFun := fun t ↦
@@ -100,51 +148,17 @@ theorem equivariantModulePresheaf_isSheaf
       rw [hmap]
       rfl)
   let : PreservesLimitsOfSize.{u, u + 1}
-      (CategoryTheory.forget (ModuleCat.{u + 1} (ZMod ℓ))) :=
+      (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) :=
     preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
   let : HasLimitsOfSize.{u, u + 1}
-      (ModuleCat.{u + 1} (ZMod ℓ)) :=
-    ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, 0}
+      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) :=
+    ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
   let : ReflectsLimitsOfSize.{u, u + 1}
-      (CategoryTheory.forget (ModuleCat.{u + 1} (ZMod ℓ))) :=
+      (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) :=
     reflectsLimits_of_reflectsIsomorphisms
   apply Presheaf.isSheaf_of_isSheaf_comp _ Q
-    (CategoryTheory.forget (ModuleCat.{u + 1} (ZMod ℓ)))
+    (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
   rw [Presheaf.isSheaf_of_iso_iff e, isSheaf_iff_isSheaf_of_type]
-  have hG : Presieve.IsSheaf V.smallEtaleTopology (equivarianceSubfunctor ℓ c N).toFunctor := by
-    let H := functionPresheaf c N.V
-    have hact : ∀ {W W' : V.Etale} (f : W ⟶ W') (g : P),
-        c.sectionAction W g ≫ c.sectionRestriction f =
-          c.sectionRestriction f ≫ c.sectionAction W' g := by
-      intro W W' f g
-      apply pullback.hom_ext <;>
-        simp [Scheme.GaloisCover.sectionAction, Scheme.GaloisCover.sectionRestriction]
-    have hH : Presieve.IsSheaf V.smallEtaleTopology H := by
-      let : (MorphismProperty.Over.pullback @Etale ⊤ c.π).IsContinuous
-          V.smallEtaleTopology c.P.smallEtaleTopology :=
-        Etale.isContinuous_overPullback c.π
-      rw [← isSheaf_iff_isSheaf_of_type]
-      apply (MorphismProperty.Over.pullback @Etale ⊤ c.π).op_comp_isSheaf_of_isSheaf
-        V.smallEtaleTopology c.P.smallEtaleTopology
-      exact ((sheafCompose c.P.smallEtaleTopology
-        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
-        (Scheme.Etale.continuousMapSheaf c.P N.V)).property
-    apply (Subfunctor.isSheaf_iff (equivarianceSubfunctor ℓ c N) hH).2
-    intro W s₀ hs
-    let s : C(c.sectionSpace W.unop, N.V) := s₀
-    intro g x
-    let a : H.obj W := s.comp ⟨c.sectionAction W.unop g,
-      (c.sectionAction W.unop g).continuous⟩
-    let b : H.obj W := ⟨fun y ↦ N.ρ g (s y),
-      (continuous_of_discreteTopology).comp s.continuous⟩
-    have hab : a = b := (hH.isSeparated _ hs).ext fun T f hf ↦ by
-      apply ContinuousMap.ext
-      intro y
-      change s (c.sectionAction W.unop g (c.sectionRestriction f y)) =
-        N.ρ g (s (c.sectionRestriction f y))
-      rw [← Scheme.Hom.comp_apply, ← hact f g, Scheme.Hom.comp_apply]
-      exact hf g y
-    exact ContinuousMap.congr_fun hab x
-  exact hG
+  exact equivarianceSubfunctor_isSheaf ℓ c N
 
-end AlgebraicGeometry.Scheme.GaloisCover
+end AlgebraicGeometry

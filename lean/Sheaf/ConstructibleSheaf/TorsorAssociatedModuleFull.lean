@@ -92,8 +92,7 @@ theorem Scheme.GaloisCover.associatedModuleFunctor_full
   let := hF
   have hsheaf : ∀ N, Presheaf.IsSheaf V.smallEtaleTopology (F.obj N) := by
     intro N
-    exact GrothendieckTopology.HasSheafCompose.isSheaf (J := V.smallEtaleTopology)
-      (F := R) _ (c.equivariantModulePresheaf_isSheaf ℓ N)
+    exact c.equivariantModulePresheaf_isSheaf ℓ P N
   constructor
   intro N N' η
   let i := isoSheafify V.smallEtaleTopology (hsheaf N)

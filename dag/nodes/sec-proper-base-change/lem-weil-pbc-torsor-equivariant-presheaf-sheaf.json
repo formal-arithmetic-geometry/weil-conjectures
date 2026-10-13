@@ -12,36 +12,21 @@
  ],
  "proof": [
   {
-   "text": "Give N the discrete topology. The existing small-etale continuous function sheaf on Y, precomposed with the continuous base-change functor along c, gives the sheaf H(W)=C(W times_V Y,N). Forgetting abelian groups preserves the sheaf property. This is functionPresheaf_isSheaf, using Scheme.Etale.continuousMapSheaf and Etale.isContinuous_overPullback.",
+   "text": "The retained restricted-scalars theorem equivariantModulePresheaf_isSheaf directly supplies the sheaf condition; no scalar transport from an unrestricted theorem is needed.",
    "uses": [
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Define the subfunctor G of H by equivariance. Restriction commutes with the deck action by pullback.hom_ext. To show that equivariance is local, compare the two continuous functions s composed with a deck action and rho(g) composed with s. They agree on a covering sieve on which s is equivariant; separatedness of H gives their equality globally. Mathlib Subfunctor.isSheaf_iff now proves G is a sheaf.",
-   "uses": [
-    "def-weil-pbc-torsor-associated-module"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For discrete N, locally constant functions and continuous functions are inverse pointwise constructions. They identify the underlying presheaf of the scalar-restricted equivariant module presheaf with G. Naturality follows by comparing the pullback restriction maps with pullback.hom_ext. Transport the sheaf property through this natural isomorphism and reflect it through the forgetful functor from modules, with explicit universe-shrunk limit instances.",
-   "uses": [
-    "def-weil-pbc-torsor-associated-module"
+    "lem-weil-pbc-torsor-equivariant-module-is-sheaf"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-torsor-associated-module"
+  "lem-weil-pbc-torsor-equivariant-module-is-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument",
-  "note": "Fixed-torsor proof step extracted from the parent; sources read in the available local Stacks mirror."
+  "note": "The explicitly claimed companion now publicly imports the single retained restricted-scalars theorem; there is no second gluing implementation."
  },
  "mathlib_searches": [
   {
@@ -107,8 +92,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf",
-  "file": "lean/Sheaf/ConstructibleSheaf/TorsorEquivariantPresheafSheaf.lean",
+  "module": "Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorEquivariantModuleIsSheaf.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf",
   "statement": "theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf\n    {V : Scheme.{u}} (ℓ : ℕ) (P : Type u) [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) (N : Rep.{u + 1} (ZMod ℓ) P) :\n    Presheaf.IsSheaf V.smallEtaleTopology\n      (c.equivariantModulePresheaf ℓ N ⋙ ModuleCat.restrictScalars\n        (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ))",
   "branch": "sheaf-dag",
@@ -126,13 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-7bac7",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261012T135236-L-1666481",
+  "landing": "20261013T222412-L-1226410",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match their recorded nodes and change record; all three modules and both direct importers compile, and the original fullness module reproduces the documented forced-adaptation failure."
  }
 }
