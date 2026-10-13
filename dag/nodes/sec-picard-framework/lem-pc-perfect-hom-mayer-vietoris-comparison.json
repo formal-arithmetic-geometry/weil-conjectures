@@ -1,0 +1,194 @@
+{
+ "id": "lem-pc-perfect-hom-mayer-vietoris-comparison",
+ "kind": "statement",
+ "title": "Pinned exact five-term comparison for perfect Hom on a two-open cover",
+ "statement": "Let I be a directed preordered set, R:I→CommRing a diagram, c a colimit cocone, i∈I, and s₀:X→Spec(R_i) a quasi-compact, quasi-separated, locally finitely presented scheme morphism [def-pc-scheme]. Let U,V be opens of X, with U compact and V affine. Assume PerfectHomContinuityOn [def-pc-perfect-hom-continuity-on] for U,V,U∩V. Fix an open immersion t:Y→X with range U∪V, its structure map s=t≫s₀ with the same morphism properties, and perfect complexes P,Q on Y [def-pc-perfect-complex]. All scheme-derived categories exist [def-pc-derived-category], as do the localized module-site derived categories on Y. There exist a functor H from the tail above i to sets in universe max u w, a colimit cocone d, and equivalences ident_j identifying H(j) with the stage derived Hom sets. These equivalences identify H transitions with perfectStageMap [lem-pc-perfect-hom-transport]. There are exact five-term rows A,B of abelian groups, a morphism φ:A→B, equivalences a:d.pt≃A₂ and b:B₂≃Hom(P_limit,Q_limit), and isomorphism components φ₀,φ₁,φ₃,φ₄. For every stage representative f, b(φ₂(a(d.ι_j(f))))=perfectLimitMap(ident_j(f)). The theorem does not assert invertibility of φ₂ or continuity on the union.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "def-pc-perfect-hom-continuity-on"
+ ],
+ "proof": [
+  {
+   "text": "Pull the cover U,V back to the presenting scheme Y and all its ring stages. Restrict the local strictly perfect models using the localized derived pullback comparison, so restrictions remain perfect; shifts remain perfect by thick closure. Perfect Q has quasi-coherent cohomology. The preimages of the two compact opens are compact and their intersection is compact by quasi-separatedness.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-localized-pullback-perfect-model",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-perfect-thick-closure",
+    "lem-sc-perfect-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "Use the derived Mayer--Vietoris triangle at each stage and at the limit. Apply Hom(P,-), including the preceding shift. Derived open adjunction identifies the five terms as the product on U,V in degree -1, the intersection in degree -1, the global Hom, the product on U,V in degree zero, and the intersection in degree zero. They are exact rows of abelian groups.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "For a transition h apply the direct-image Mayer--Vietoris comparison to Lh*Q and then its naturality to the adjunction unit Q -> Rh*Lh*Q. Applying Hom(P,-) and derived adjunction gives all four commuting squares, including the connecting morphism. Identify the local comparisons through open restriction. At the central term cancellation of the counit-pinned composition comparisons gives exactly perfectStageMap and perfectLimitMap.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "Construct the central Hom functor H on the directed tail, using ULift to universe max u w if needed. Derived pullback unit and associativity coherence give its functor laws and the stated transition equations. Take the filtered abelian-group colimit of the stage rows; exactness is preserved. Its underlying set colimit gives d, its IsColimit witness, and a. The limit Hom group gives b; the comparison morphism is induced from step 3, giving the central pinning equation.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "Apply the three open-local continuity hypotheses to the restricted perfect pairs and to the degree -1 shift. The representative clause gives surjectivity of each local colimit comparison, and the eventual equality clause gives injectivity by the filtered set colimit criterion. Products give the two U,V comparisons. Thus components 0,1,3,4 are isomorphisms; do not apply the five lemma or assert the central isomorphism. Empty opens have zero local Hom groups and satisfy the same construction.",
+   "uses": [
+    "def-pc-perfect-hom-continuity-on",
+    "lem-pc-perfect-thick-closure",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-perfect-hom-continuity-on",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-localized-pullback-perfect-model",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-perfect-thick-closure",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-qcoherent",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13",
+  "note": "Expanded the geometric comparison construction from parent steps 1-2 and exactness part of step 3; the five lemma and eventual-stage argument stay in the parent Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris comparison diagram for filtered Hom groups of perfect complexes",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom of perfect complexes commutes with filtered colimits of rings by Mayer Vietoris",
+   "results": "DerivedCategory fraction lemmas, HomologicalComplex.ab5OfSize and local cohomology diagrams; none constructs the pinned scheme-derived Hom comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.*Mayer|mayerVietoris.*[Hh]om|isIso_of_epi_of_isIso_of_isIso_of_mono",
+   "results": "Mathlib five lemma and sheaf-cohomology connecting homomorphism, but no pinned filtered perfect-Hom comparison; searched library and DAG for PerfectHomContinuityOn and comparison diagrams.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomContinuityUnion",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE full-faithfulness: construct the Mayer--Vietoris Hom comparison diagram before applying the five lemma",
+   "via": [
+    "lem-pc-perfect-hom-continuity-union",
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomMayerVietorisComparison.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_mayerVietoris_comparison",
+  "statement": "theorem perfect_hom_mayerVietoris_comparison\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V)\n    (hcontU : PerfectHomContinuityOn R c i X s₀ U)\n    (hcontV : PerfectHomContinuityOn R c i X s₀ V)\n    (hcontUV : PerfectHomContinuityOn R c i X s₀ (U ⊓ V))\n    (Y : Scheme.{u}) (t : Y ⟶ X) [IsOpenImmersion t]\n    (ht : t.opensRange = U ⊔ V)\n    (s : Y ⟶ Spec (R.obj i)) (hs : s = t ≫ s₀)\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ W : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))]\n    (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q) :\n    ∃ (H : Set.Ici i ⥤ Type (max u w)) (d : Cocone H),\n      Nonempty (IsColimit d) ∧\n      ∃ (ident : ∀ j : Set.Ici i, H.obj j ≃\n          ((derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj P ⟶\n           (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q)),\n        (∀ (j k : Set.Ici i) (hjk : j ≤ k) (f : H.obj j),\n          ident k (H.map (homOfLE hjk) f) =\n            perfectStageMap R s j.property hjk (ident j f)) ∧\n        ∃ (A B : ComposableArrows AddCommGrpCat.{max u w} 4) (φ : A ⟶ B)\n          (a : d.pt ≃ A.obj' 2)\n          (b : B.obj' 2 ≃\n            ((derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj P ⟶\n             (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Q)),\n          A.Exact ∧ B.Exact ∧\n          IsIso (ComposableArrows.app' φ 0) ∧ IsIso (ComposableArrows.app' φ 1) ∧\n          IsIso (ComposableArrows.app' φ 3) ∧ IsIso (ComposableArrows.app' φ 4) ∧\n          ∀ (j : Set.Ici i) (f : H.obj j),\n            b ((ComposableArrows.app' φ 2) (a (d.ι.app j f))) =\n              perfectLimitMap R c s j.property (ident j f)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T115025-L-3324359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T115025-L-3324359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
