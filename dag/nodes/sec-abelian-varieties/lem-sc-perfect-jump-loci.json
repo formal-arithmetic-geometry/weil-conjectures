@@ -28,50 +28,37 @@
  ],
  "proof": [
   {
-   "text": "Fix a point $x\\in X$ and choose an affine neighbourhood $U=\\operatorname{Spec}(A)$ of $x$. By the local bounded-above finite-free characterization in [def-pur-pseudo-coherent-complex], represent $E|_U$ by a bounded-above complex $F^\\bullet$ of finite free $A$-modules. Replace $F^\\bullet$ by the stupid truncation $K=\\sigma_{\\ge i-1}F^\\bullet$; it is bounded and finite free, and for every $y\\in U$ the complexes $K\\otimes_A\\kappa(y)$ and $F^\\bullet\\otimes_A\\kappa(y)$ have the same degree-$i$ cohomology. By [lem-pc-flat-complex-derived-pullback], termwise pullback computes the derived fibre, so $\\beta_i(y)=\\dim_{\\kappa(y)}H^i(K\\otimes_A\\kappa(y))$.",
+   "text": "For each x, apply the local one-degree finite free model theorem. Apply finiteFreeComplex_homology_upperSemicontinuous to its bounded finite free algebraic complex K. The model equality identifies beta_i on U with the returned function beta pulled back along the chart homeomorphism. Pulling back the strict sublevel opens gives local upper semicontinuity.",
    "uses": [
-    "def-pur-pseudo-coherent-complex",
-    "lem-pc-flat-complex-derived-pullback"
+    "lem-sc-pseudo-coherent-fiber-finite-free-model",
+    "lem-sc-finite-free-complex-homology-upper-semicontinuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI, affine reduction and truncation"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-finite-free-complex-homology-upper-semicontinuous] to $K$ in degree $i$. It gives upper semicontinuity on $U$; since such affine neighbourhoods cover $X$, $\\beta_i$ is upper semicontinuous on $X$.",
+   "text": "For each natural r on the chart, express {beta = r} as {beta < r+1} minus {beta < r}, using integer thresholds. The two strict sublevel sets are compact opens by the finite-free homology theorem; Mathlib IsCompact.isConstructible on the spectral prime spectrum and IsConstructible.sdiff make their difference constructible. Pull it back along the open embedding of the homeomorphism. The open charts are neighbourhoods, so this gives IsLocallyConstructible on X. For upper semicontinuity on X, at each point of a strict sublevel set take the image of the corresponding local strict sublevel open under the open subtype inclusion. This open image is contained in the global strict sublevel and contains the point.",
    "uses": [
     "lem-sc-finite-free-complex-homology-upper-semicontinuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
-   }
+   "elementary": false
   },
   {
-   "text": "For any morphism $g:Y\\to X$ and $y\\in Y$ over $x=g(y)\\in U$, pulling the same model back computes $Lg^*E$ on $g^{-1}U$ and then $Li_y^*Lg^*E$ termwise by [lem-pc-flat-complex-derived-pullback], giving $K\\otimes_A\\kappa(y)=(K\\otimes_A\\kappa(x))\\otimes_{\\kappa(x)}\\kappa(y)$; since $\\kappa(y)$ is flat over the field $\\kappa(x)$, its degree-$i$ cohomology has $\\kappa(y)$-dimension $\\beta_i(x)$, so the fibre dimensions of $Lg^*E$ are $\\beta_i\\circ g$ and formation commutes with base change. Finally, on $U$ each level set is $\\{y: \\beta_i(y)<r+1\\}\\setminus\\{y: \\beta_i(y)<r\\}$; by [lem-sc-finite-free-complex-homology-upper-semicontinuous] both sets are quasi-compact opens of the affine $U$, hence retrocompact in $U$ (Stacks Tag 054D), so their difference is constructible in $U$ by the definition of constructible sets (Stacks Tag 005G); as such $U$ cover $X$, the level sets are locally constructible.",
+   "text": "For arbitrary g and y obtain the derived-fibre scalar extension isomorphism. Its associated linear equivalence preserves finrank. Give kappa(y) its algebra structure from g.residueFieldMap y and apply Mathlib Module.finrank_baseChange, which applies to every vector space over the field kappa(g y), finite-dimensional or otherwise. Package this equality, global upper semicontinuity, and local constructibility.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+    "lem-sc-derived-fiber-cohomology-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-pseudo-coherent-complex",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+  "lem-sc-pseudo-coherent-fiber-finite-free-model",
+  "lem-sc-finite-free-complex-homology-upper-semicontinuous",
+  "lem-sc-derived-fiber-cohomology-base-change"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI; U4 Lean assembly of local model, finite-free homology, and fibre base change"
  },
  "mathlib_searches": [
   {
@@ -166,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T082418-L-1649844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

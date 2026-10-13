@@ -10,7 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Semicontinuity.Basic
 import Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.PseudoCoherentFiberFiniteFreeModel
+import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyBaseChange
+import Mathlib.LinearAlgebra.Dimension.Constructions
 
 /-! # Jump loci of pseudo-coherent complexes
 
@@ -59,6 +61,52 @@ theorem pseudoCoherent_jump_loci (X : Scheme.{uX})
         derivedFiberBetti Y ((derivedPullback g).obj E) i y = derivedFiberBetti X E i (g y)) ∧
       UpperSemicontinuous (derivedFiberBetti X E i) ∧
       ∀ r : ℕ, Topology.IsLocallyConstructible {x : X | derivedFiberBetti X E i x = r} := by
-  sorry
+  have hlocal (x : X) : ∃ U : X.Opens, x ∈ U ∧
+      (∀ r : ℕ, IsOpen {z : U | derivedFiberBetti X E i z < r}) ∧
+      ∀ r : ℕ, Topology.IsConstructible {z : U | derivedFiberBetti X E i z = r} := by
+    obtain ⟨U, hx, A, hA, e, K, hbounded, hfree, hmodel⟩ :=
+      exists_pseudoCoherent_fiber_finiteFree_model X E hE i x
+    obtain ⟨β, hβ, hupper, _, hcompact⟩ :=
+      ModuleCat.finiteFreeComplex_homology_upperSemicontinuous A K hbounded hfree i
+    have heq (z : U) : derivedFiberBetti X E i z = β (e z) :=
+      (hmodel z).trans (hβ (e z)).symm
+    refine ⟨U, hx, ?_, ?_⟩
+    · intro r
+      convert! (hupper.isOpen_preimage r).preimage e.continuous using 1
+      ext z
+      simp only [Set.mem_ofPred_eq, Set.mem_preimage, Set.mem_Iio, heq]
+    · intro r
+      have hlevel : Topology.IsConstructible {p : PrimeSpectrum A | β p = r} := by
+        have hset : {p : PrimeSpectrum A | β p = r} =
+            {p : PrimeSpectrum A | (β p : ℤ) < (r : ℤ) + 1} \
+              {p : PrimeSpectrum A | (β p : ℤ) < (r : ℤ)} := by
+          ext p
+          simp only [Set.mem_ofPred_eq, Set.mem_sdiff]
+          omega
+        rw [hset]
+        exact ((hcompact ((r : ℤ) + 1)).2.isConstructible
+          (hcompact ((r : ℤ) + 1)).1).sdiff
+            ((hcompact r).2.isConstructible (hcompact r).1)
+      convert! hlevel.preimage_of_isOpenEmbedding e.isOpenEmbedding using 1
+      ext z
+      simp only [Set.mem_ofPred_eq, Set.mem_preimage, heq]
+  refine ⟨?_, ?_, ?_⟩
+  · intro Y _ _ g y
+    obtain ⟨e⟩ := derivedFiberCohomology_baseChange_iso X Y E g i y
+    let := (g.residueFieldMap y).hom.toAlgebra
+    exact e.toLinearEquiv.finrank_eq.trans Module.finrank_baseChange
+  · rw [upperSemicontinuous_iff_isOpen_preimage]
+    intro r
+    rw [isOpen_iff_forall_mem_open]
+    intro x hx
+    obtain ⟨U, hxU, hopen, _⟩ := hlocal x
+    refine ⟨Subtype.val '' {z : U | derivedFiberBetti X E i z < r}, ?_,
+      U.isOpen.isOpenMap_subtype_val _ (hopen r), ?_⟩
+    · rintro _ ⟨z, hz, rfl⟩
+      exact hz
+    · exact ⟨⟨x, hxU⟩, hx, rfl⟩
+  · intro r x
+    obtain ⟨U, hxU, _, hlevels⟩ := hlocal x
+    exact ⟨U, U.isOpen.mem_nhds hxU, U.isOpen, hlevels r⟩
 
 end AlgebraicGeometry.Scheme

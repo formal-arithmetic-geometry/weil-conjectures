@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-derived-fiber-cohomology-base-change",
+ "kind": "statement",
+ "title": "Scalar extension of derived-fibre cohomology under arbitrary pullback",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], $i\\in\\mathbb Z$, and $y\\in Y$. Put $x=g(y)$, $k=\\kappa(x)$ and $l=\\kappa(y)$, with the canonical field homomorphism $k\\to l$ induced by $g$. There exists an isomorphism of $l$-vector spaces $H^i(Li_y^*Lg^*E)\\simeq l\\otimes_k H^i(Li_x^*E)$, where derived pullback is [def-pc-derived-pullback] and fibre cohomology means the globally evaluated and scalar-transported vector space of [def-sc-derived-fiber-betti]. No boundedness or pseudo-coherence hypothesis is required.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, first paragraph of proof; Tag 06YJ; https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "The residue-field square commutes. Represent E by a K-flat resolution, using essential surjectivity of Q followed by exists_isKFlatResolution. Pullback preserves K-flatness, and the recorded derived-pullback counits compute both successive pullbacks termwise. Apply the ordinary tensor-pullback composition isomorphism on the two sides of the residue-field square. This identifies the fibre over y with termwise pullback of the fibre over x along Spec kappa(y) -> Spec kappa(g y), using only the derived-category instances in the statement. No global family of derived-category instances is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since k is a field, l is flat over k, and extension of scalars is exact. It commutes with kernels, images and their quotient, hence with cohomology in every degree even for an unbounded complex. The spectra of k and l have one point; global evaluation and scalar transport along GammaSpecIso identify the sheaf pullback with ModuleCat.extendScalars for the specified residue-field map. Combining this identification with the derived comparison gives the asserted ModuleCat isomorphism. This holds for zero and infinite-dimensional cohomology as well.",
+   "uses": [
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-module-pullback-identity-composition",
+  "def-pc-derived-pullback",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, first paragraph of proof; Tag 06YJ; https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived residue field fibre cohomology vector space of pullback is scalar extension of original fibre",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor, Ideal.fiberIsoOfBijectiveResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, PrimeSpectrum.preimageEquivFiber_apply_asIdeal, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal, Ideal.comap_fiberIsoOfBijectiveResidueField_apply; no theorem with the required conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (_ ≅ _), ModuleCat.extendScalars",
+   "results": "0 hits: ; no theorem with the required conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedFiberCohomology|derivedPullbackComp|derivedPullback_comp",
+   "results": "0 hits: ; no theorem with the required conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived residue field fibre cohomology vector space of pullback is scalar extension of original fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact extension of scalars along a field homomorphism commutes with homological complex homology",
+   "results": "Shape-embedding homology results, no derived fibre comparison. Repository KFlatStalkResidueCohomology computes one fibre of a given K-flat representative; Mathlib ShortComplex.mapHomologyIso handles the exact scalar-extension step but not the geometric square.",
+   "date": "2026-10-13",
+   "verdict": "components only"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*(baseChange|extendScalars)|mapHomologicalComplex.*homology|finrank_baseChange",
+   "results": "Module.finrank_baseChange and general homology functor results; no full derived fibre isomorphism. Mathlib ShortComplex.mapHomologyIso is the exact-functor comparison.",
+   "date": "2026-10-13",
+   "verdict": "components only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectJumpLoci",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; Tag 0BDI, first paragraph of proof; Tag 06YJ; https://stacks.math.columbia.edu/tag/0BDI",
+   "via": [
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedFiberCohomologyBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedFiberCohomologyBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedFiberCohomology_baseChange_iso",
+  "statement": "theorem derivedFiberCohomology_baseChange_iso (X Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    [∀ y : Y, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (Y.residueField y)).toRingedSpace))]\n    (E : schemeDerivedCategory X) (g : Y ⟶ X) (i : ℤ) (y : Y) :\n    Nonempty (derivedFiberCohomology Y ((derivedPullback g).obj E) i y ≅\n      (ModuleCat.extendScalars (g.residueFieldMap y).hom).obj\n        (derivedFiberCohomology X E i (g y)))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T082418-L-1649844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T082418-L-1649844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
