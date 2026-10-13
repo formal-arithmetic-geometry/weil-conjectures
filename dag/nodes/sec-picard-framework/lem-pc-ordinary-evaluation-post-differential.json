@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-ordinary-evaluation-post-differential",
+ "kind": "statement",
+ "title": "Ordinary evaluation and the postcomposition differential",
+ "statement": "Let $X$ be a scheme and $U$ an open, and let $P,F$ be arbitrary cochain complexes of $\\mathcal O_U$-modules. Let $D=\\mathcal Hom^\\bullet(P,\\mathcal O_U[0])$ and let $C_{p,q,n,r}$ be the projected ordinary evaluation component of [lem-pc-bounded-ordinary-evaluation-assembly]. For integers $p,q,n,m,r$ with $p+q=n$ and $n+1=m$, $C_{p,q,n,r}$ followed by postcomposition with $d_F^{r+n,r+m}$ equals $(d_F^{p,p+1}\\otimes 1)C_{p+1,q,m,r}$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, ordinary complex comparison; Section 20.41, Hom-complex differential"
+ },
+ "stmt_deps": [
+  "lem-pc-bounded-ordinary-evaluation-assembly",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "If r+q is nonzero, both evaluation components vanish. Otherwise p=r+n\nand p+1=r+m. Expand the component definition, and move d_F across the\nright unitor, the associator and the braidings by naturality. Naturality of\nthe tensor-Hom equivalence in its output identifies postcomposition by d_F\nwith the whiskered differential on F. Degree transports agree by proof\nirrelevance. This uses no boundedness and also holds for zero modules.",
+   "uses": [
+    "lem-pc-bounded-ordinary-evaluation-assembly",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-ordinary-evaluation-assembly",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, ordinary evaluation; Tag 0A8X, section-hom-complexes",
+  "description": "Separated the output and input differential calculations in the recorded summand proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation from tensor with the Hom dual complex to Hom commutes with differential",
+   "results": "unit_tensor_d₁, tensor_unit_d₂ and module-level contraction lemmas; no exact sheaf Hom-complex evaluation identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ι_D₁",
+   "results": "No hits; local Mathlib source provides mapBifunctor.ι_D₁ and ι_D₂.",
+   "date": "2026-10-13",
+   "verdict": "partial tensor expansion only"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHomEquiv.*natur|homComplex.*differential",
+   "results": "No exact differential compatibility result; source tensorHomEquiv naturality provides the postcomposition proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary evaluation is natural in the two arguments and compatible with differentials",
+   "results": "UNAVAILABLE: Internal Server Error. Other search kinds and local source search completed.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferentialSummand",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordinary-evaluation-differential",
+   "place": "projected summand calculation: postcomposition term",
+   "via": [
+    "lem-pc-ordinary-evaluation-differential-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationPostDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationPostDifferential.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_post_differential",
+  "statement": "theorem ordinaryEvaluation_post_differential (X : Scheme.{u}) (U : X.Opens)\n    (P F : CochainComplex (localEvaluationModules X U) ℤ)\n    (n m p q r : ℤ) (hnm : n + 1 = m) (hpq : p + q = n) :\n    localEvaluationComponent X U P F p q n r hpq ≫\n        SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r)) (F.d (r + n) (r + m)) =\n      (F.d p (p + 1) ▷ (localEvaluationDual X U P).X q) ≫\n        localEvaluationComponent X U P F (p + 1) q m r (by omega) ",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T095928-L-2450805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T095928-L-2450805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
