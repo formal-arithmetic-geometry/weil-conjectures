@@ -1,0 +1,187 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "id": "lem-sbc-raw-module-restricted-abelian-natural-iso",
+ "kind": "statement",
+ "title": "Natural scalar-forgetting comparison for raw derived Hom",
+ "statement": "Let Λ be a commutative ring, k:W→S a morphism, G a Λ-module etale sheaf on W, q an integer and U→S any etale object. For every A in Over W the fixed raw group Hom((A.hom≫k)^*Λ[U][0],A.hom^*G[q]) is additively isomorphic to H^q(U×_S A,pr_A^*A.hom^*G_ab[0]). These isomorphisms intertwine, for every morphism f:A→B over W, the five-factor higherDirectImageRawOverPullbackHom with restrictedOverCohomologyMap on G_ab. No limit, affineness or qcqs assumption is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03FD and 03Q8; Tag 09Z1 canonical comparison maps"
+ },
+ "stmt_deps": [
+  "def-sbc-higher-image-raw-diagram",
+  "def-sbc-etale-complex-cohomology-presentation",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "For each A, resolve A.hom^*G by injective module sheaves. The free module\nsheaf/sections adjunction on U identifies the raw derived-Hom complex with sections\non U times_S A. Restriction to this etale object preserves injectives: its left\nadjoint, extension by zero, is exact. After forgetting scalars the resolution\ncomputes abelian sections cohomology, because injective module sheaves are acyclic\non every etale object by 03FD; the section complexes and their differentials\nare unchanged. Forgetting scalars commutes with inverse image, so its coefficient\nsheaf is the pullback of the underlying abelian G. The fully faithful inclusion\nof the bounded-below derived category into the derived category and its single\nand shift comparisons identify these complexes with restrictedOverCohomology.\nAll comparisons preserve addition, giving isomorphisms in AddCommGrpCat. For f,\nexpand the sections adjunction unit and the two pullback-composition comparisons.\nNaturality of the unit moves a class through f^*, and the adjunction triangle\nidentity cancels the counit. The source comparison is the first factor of the\nraw pullback, the single-complex comparison is its second, the map on the class\nis its third, shift compatibility is its fourth, and the canonical coefficient\nidentification is its fifth. On the restricted scheme side these are exactly\nrawAffineComplexPullback and rawAffineRestrictedCoefficient. Thus the displayed\nsquare holds for every f. For negative q both groups vanish, and the unique\nisomorphism has the same naturality. This comparison uses no continuity theorem\nand makes no assertion about a cohomology colimit.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-inverse-image-composition",
+    "sbc-lem-higher-image-raw-over-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-weil-pbc-inverse-image-composition",
+  "sbc-lem-higher-image-raw-over-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Explicit Lean interface for the cited tags, W2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from the free module sheaf agrees naturally with cohomology of the underlying abelian sheaf on an etale fibre product",
+   "date": "2026-10-13",
+   "results": "Hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.HasDifferentials.exists_universal_derivation, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, SheafOfModules.unitHomEquiv, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, DerivedCategory",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeSheaf.*cohomology|cohomology.*freeSheaf|mapCochainComplexSingleFunctor",
+   "date": "2026-10-13",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf of modules agrees naturally with cohomology of its underlying abelian sheaf",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofiltered inverse system of schemes base changed to an affine etale object admits bounded below abelian single complexes and a constant coefficient colimit",
+   "date": "2026-10-13",
+   "results": "Hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_map_eq_top",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of an inverse scheme limit and coherent pullbacks of a fixed sheaf gives a system of degree zero complexes",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*mapCone|isColimitConstCocone|upperStarComp",
+   "date": "2026-10-13",
+   "results": "Hits: Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/MorphismProperty/Ind.lean",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting module coefficients preserves sheaf cohomology computed by injective resolutions and is natural under inverse image",
+   "date": "2026-10-13",
+   "results": "Second-reader search: 8 hits; CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, CategoryTheory.Sheaf.H, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "verdict": "No complete match; basic colimit and sheaf-comparison building blocks only."
+  },
+  {
+   "tool": "grep",
+   "query": "forget₂.*rightDerived|rightDerived.*forget₂|IsConnected.*IsColimit|isColimit.*const",
+   "date": "2026-10-13",
+   "results": "Second-reader search: 25 hits; Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/CategoryTheory/Limits/Preserves/SigmaConst.lean",
+   "verdict": "No complete match; basic colimit and sheaf-comparison building blocks only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cocone, CategoryTheory.Limits.IsColimit",
+   "date": "2026-10-13",
+   "results": "Second-reader search: 12 hits; CategoryTheory.Limits.IsColimit, CategoryTheory.Limits.IsColimit.subsingleton, CategoryTheory.Limits.IsColimit.corepresentableBy, CategoryTheory.Limits.IsColimit.desc, CategoryTheory.Limits.IsColimit.ofIsoColimit, CategoryTheory.Limits.IsColimit.uniqueUpToIso, CategoryTheory.Limits.IsColimit.equivIsoColimit, CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso",
+   "verdict": "No complete match; basic colimit and sheaf-comparison building blocks only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent inverse images of a fixed abelian sheaf on a scheme limit form a constant colimit cocone of single complexes",
+   "date": "2026-10-13",
+   "results": "Second-reader search: 8 hits; LightCondensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf_desc_apply, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+   "verdict": "No complete match; basic colimit and sheaf-comparison building blocks only."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|isColimitConstCocone|forget.*[Cc]ohomology",
+   "date": "2026-10-13",
+   "results": "Fresh W2 second reading: 23 hits; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "Supporting adjunction, comparison, and constant-colimit lemmas only; no complete match for either split statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the derived sections comparison between module sheaves and abelian sheaves on an etale slice",
+   "date": "2026-10-13",
+   "results": "Fresh W2 second reading: 8 hits; SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.unitHomEquiv_comp_apply; CategoryTheory.Sheaf.ΓObjEquivSections_naturality; SheafOfModules.Presentation.map_π_eq; CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; CategoryTheory.Sheaf.ΓObjEquivHom_naturality",
+   "verdict": "Supporting adjunction, comparison, and constant-colimit lemmas only; no complete match for either split statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.const, CategoryTheory.Limits.IsColimit",
+   "date": "2026-10-13",
+   "results": "Fresh W2 second reading: 12 hits; CategoryTheory.Limits.IsColimit.homEquiv; CategoryTheory.Limits.IsColimit.homIso; CategoryTheory.Limits.IsColimit.fac; CategoryTheory.Limits.IsColimit.comp_coconePointUniqueUpToIso_hom; CategoryTheory.Limits.IsColimit.comp_coconePointUniqueUpToIso_inv; CategoryTheory.Limits.IsColimit.existsUnique; CategoryTheory.Limits.IsColimit.ofExistsUnique; CategoryTheory.Limits.IsColimit.hom_ext",
+   "verdict": "Supporting adjunction, comparison, and constant-colimit lemmas only; no complete match for either split statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-higher-image-raw-complex-presentation",
+   "place": "Scalar-forgetting natural comparison"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNaturalIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleRestrictedAbelianNaturalIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_rawModule_restrictedAbelian_natural_iso",
+  "statement": "theorem exists_rawModule_restrictedAbelian_natural_iso\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale) :\n    ∃ e : ∀ A : Over W,\n      (higherDirectImageRawOverFunctor Λ k G q U).obj (op A) ≅\n        restrictedOverCohomology k\n          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)\n          q A U,\n      ∀ (A B : Over W) (f : A ⟶ B),\n        (higherDirectImageRawOverFunctor Λ k G q U).map f.op ≫ (e A).hom =\n          (e B).hom ≫ restrictedOverCohomologyMap k\n            ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)\n            q f U",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8c362",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100212-L-2500516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8c362",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100212-L-2500516",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean with its nodes, sources, change record and report; witness fields and existing theorem signatures are unchanged. All four modules and all three direct importers compile cleanly. Axioms are standard, with sorryAx only from open proofs; accepted as a decomposition."
+ }
+}
