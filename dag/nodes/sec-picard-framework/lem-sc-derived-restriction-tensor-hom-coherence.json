@@ -17,50 +17,37 @@
  },
  "proof": [
   {
-   "text": "Construct the natural tensor restriction comparison from K-flat representatives. Restriction preserves K-flatness and total tensor; use localization factorization and descend naturality on complexes through roofs to all derived maps. For an open immersion ordinary restriction is exact and computes derived pullback; Tag 079U gives the bifunctorial comparison. Common K-flat resolutions identify different representatives, and naturality for inverse quasi-isomorphisms gives naturality for roofs.",
+   "text": "Obtain the bifunctorially natural tensor comparison by transporting the existing derived-pullback monoidal model through the natural isomorphism identifying open pullback with exact restriction.",
    "uses": [
-    "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-open-restriction-kflat-model",
-    "lem-pc-open-restriction-total-tensor",
-    "lem-pc-kflat-derived-tensor-comparison"
+    "lem-sc-derived-restriction-tensor-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Construct the internal Hom comparison by restricting a K-injective representative of the second argument and using the termwise Hom complex comparison, transported through the canonical over-site equivalence to U.toScheme.",
+   "text": "Define m(L,E) explicitly by currying the composite of inverse tensor comparison with restriction of evaluation at identity of H(L,E). The evaluation-mate invertibility theorem gives IsIso m; let h=asIso m.",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-k-injective-restrict-open",
-    "lem-sc-hom-complex-restrict-open"
+    "lem-sc-derived-restriction-evaluation-mate-is-iso",
+    "def-pc-canonical-derived-tensor-hom-bijection"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Choose both comparisons from the same local restriction maps. Restriction of uncurrying on each total tensor summand equals uncurrying after restriction. Hom from a K-flat complex into a K-injective is K-injective, so arbitrary derived maps into it have chain representatives modulo homotopy. Uncurrying respects homotopy; the defining representative equation and uniqueness of the canonical tensor-Hom family give the evaluation equality. Zero objects and the empty open require no exceptions.",
+   "text": "Uncurry R(xi);m by first-variable naturality of the canonical equivalence on U. Substitute the definition of m and cancel Equiv.apply_symm_apply. Use tensor naturality for (xi,identity L), cancel t.hom;t.inv, combine the functor maps of a composite, and use first-variable tensor-Hom naturality on X to get R(eX(xi)).",
    "uses": [
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-sc-hom-complex-restrict-open",
-    "lem-sc-derived-k-injective-restrict-open",
-    "lem-pur-hom-kflat-into-kinjective"
+    "def-pc-canonical-derived-tensor-hom-bijection"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-tensor-open-restriction-universes",
-  "lem-pc-open-restriction-kflat-model",
-  "lem-pc-open-restriction-total-tensor",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-sc-hom-complex-restrict-open",
-  "def-pc-canonical-derived-tensor-hom-bijection",
-  "lem-pur-hom-kflat-into-kinjective"
+  "lem-sc-derived-restriction-tensor-naturality",
+  "lem-sc-derived-restriction-evaluation-mate-is-iso",
+  "def-pc-canonical-derived-tensor-hom-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 079U, 08DL and 08DJ; evaluation after exact open restriction"
+  "place": "Tags 079U, 08DJ and 08DL; explicit evaluation mate and naturality, H2"
  },
  "mathlib_searches": [
   {
@@ -143,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T131949-L-4087634",
+  "landing": "20261013T140817-L-313024",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

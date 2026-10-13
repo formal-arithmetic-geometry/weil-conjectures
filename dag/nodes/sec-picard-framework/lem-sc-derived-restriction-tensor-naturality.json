@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-derived-restriction-tensor-naturality",
+ "kind": "statement",
+ "title": "Bifunctorial derived tensor comparison for exact open restriction",
+ "statement": "Let X be a scheme [def-pc-scheme] and U any open. Give module sheaves on X, every over-site of X, and U derived categories [def-pc-derived-category] in a common localization universe. Let R be the derived functor of exact over-site restriction followed by the canonical over equivalence [lem-weil-pbc-module-restriction-open-immersion-colimits], and use the shared derived tensor [def-pc-scheme-derived-tensor-structure]. There exists a family of isomorphisms t(K,L): R(K tensor L) ≅ R(K) tensor R(L), natural simultaneously in both derived inputs: R(a tensor b); t(Kprime,Lprime) = t(K,L); (R(a) tensor R(b)). There are no boundedness or quasi-coherence assumptions.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079U, 08DJ and 08DL; exact open restriction"
+ },
+ "proof": [
+  {
+   "text": "Identify module tensor pullback for the open inclusion with restriction, using uniqueness of module pullback adjunctions and Modules.overFunctorEquiv. Exactness transfers across this natural isomorphism. The localization factorization exhibits the exact mapDerivedCategory as a left derived functor; uniqueness of left derived functors identifies it with recorded derivedPullback. Derive the module natural isomorphism to identify the latter with R.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the stated canonical monoidal model of derived pullback and transport its monoidal structure to R. Its inverse tensorators give t; the oplax tensorator naturality theorem gives the displayed square for all a and b.",
+   "uses": [
+    "def-pc-derived-pullback-monoidal-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-derived-pullback-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Detailed categorical specialization of Tags 079U and 08DL; H2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to an open subset commutes naturally with the derived tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation mate for derived internal Hom and restriction to an open subset is an isomorphism",
+   "results": "Hits: AlgebraicGeometry.Scheme.restrictFunctorΓ, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_symm_apply, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*mate|mate.*evaluation|restriction.*tensor.*natural",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "step 1 of derived restriction coherence: bifunctorial tensor comparison; proof of supported tensor restriction comparisons",
+   "via": [
+    "lem-sc-derived-restriction-tensor-hom-coherence",
+    "lem-sc-tensor-model-restriction-comparisons",
+    "lem-sc-tensor-model-restriction-adjunction",
+    "lem-sc-tensor-roof-transposition",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-affine-perfect-tensor-roof"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedRestrictionTensorNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedRestrictionTensorNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_derivedRestriction_tensor_natural",
+  "statement": "theorem exists_derivedRestriction_tensor_natural (X : Scheme.{uX}) (U : X.Opens) [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))] : let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory ∃ t : ∀ K L : schemeDerivedCategory X, R.obj (K ⊗ L) ≅ R.obj K ⊗ R.obj L, ∀ K K' L L' (a : K ⟶ K') (b : L ⟶ L'), R.map (a ⊗ₘ b) ≫ (t K' L').hom = (t K L).hom ≫ (R.map a ⊗ₘ R.map b)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T140817-L-313024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T140817-L-313024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
