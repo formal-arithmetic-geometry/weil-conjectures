@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-punctured-root-limit-presentation",
+ "kind": "statement",
+ "title": "Pointed etale inverse-limit presentation of punctured root charts",
+ "statement": "Let R be a commutative ring, f an element of R, n a natural number, and barY:Spec Omega -> Spec R a geometric point [def-weil-geometric-point] whose image is the point y. Let H be its canonical strict henselization ring [def-weil-pbc-strict-henselization-limit] and b:R -> H the ring map whose spectrum is the structural map [def-weil-pbc-strict-henselization-structural-map]. For any R-algebra S with structure map a, put A_S=S[T]/(T^n-a(f)), V_S=D(a(f)) inside Spec A_S, and k_S:V_S -> Spec R the composite of the open inclusion, the quotient-algebra structural map, and Spec(a) [def-weil-affine-spectrum]. There exist a small cofiltered category I [def-weil-pbc-category-colimit], a diagram D:I -> Scheme, a limiting cone c, and a natural transformation t:D -> const(Spec R), with every D(j) affine, and an isomorphism e:V_H -> c.pt such that e;pi_j;t_j=k_H for every j. For every j there exist an etale map a:R -> S [def-weil-etale-morphism], a point z of Spec S with Spec(a)(z)=y, and an isomorphism d:V_S -> D(j) satisfying d;t_j=k_S. This is asserted for arbitrary f and n, including n=0 and empty punctures.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BSK (strict henselization construction) and 05N9 (finite-presentation colimits); the root-chart limit construction in the descent paragraph of Tag 0EYG"
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Take the small cofiltered category of affine pointed etale neighbourhoods of barY defining H. Each object supplies an etale R-algebra S and a lift of barY, whose closed point gives z over y by hy. The structural maps a are compatible, and their colimit structural map is b by hb and faithfulness of Spec.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the compatible ring diagram S[T]/(T^n-a(f))[1/a(f)]. Its colimit is H[T]/(T^n-b(f))[1/b(f)]: maps from either ring to a ring B are exactly compatible families of maps from S to B, a chosen element t of B satisfying t^n=a(f), and an inverse of a(f). This is a universal-property calculation, and works also for n=0 and zero localized rings.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Spec to the colimit cocone to obtain the limiting diagram D of affine schemes. Identify localized spectra with the basic opens V_S and V_H. These universal-property isomorphisms preserve structural maps, giving e, d, and both displayed equations. All transitions are affine, since their sources and targets are affine.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "document": "Stacks Project",
+  "place": "Tags 0BSK and 05N9; extracted root-chart limit construction, without any cover or section descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The punctured root chart of a strict henselization is the inverse limit of the punctured root charts of pointed affine etale neighborhoods",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The punctured polynomial root algebra of a strict henselization is a limit of punctured polynomial root algebras of pointed etale neighborhoods",
+   "date": "2026-10-13",
+   "results": "8 hits: IsAdicComplete.henselianRing, HenselianLocalRing, HenselianLocalRing.TFAE, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, HenselianLocalRing.is_henselian, HenselianRing.is_henselian, HenselianRing, StandardEtalePair.instFormallyEtaleRing",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsColimit",
+   "date": "2026-10-13",
+   "results": "0 hits: ; loogle: unknown identifier 'IsColimit'",
+   "verdict": "query identifier not indexed; no result"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*colimit|colimit.*AdjoinRoot|localization.*colimit",
+   "date": "2026-10-13",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootSectionEtaleDescent",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: finite-presentation descent from the strictly henselian root calculation to an affine pointed etale neighbourhood (0EYG descent paragraph), specifically the root-chart inverse limit.",
+   "via": [
+    "lem-sbc-punctured-root-section-etale-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootLimitPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_root_limit_presentation",
+  "statement": "theorem punctured_root_limit_presentation\n    (R : CommRingCat.{u}) (f : R) (n : ℕ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    let H := strictHenselizationRing barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∃ (I : Type u) (cat : Category.{u} I), letI := cat\n      ∃ (_ : IsCofiltered I) (D : I ⥤ Scheme.{u}) (c : Cone D)\n        (t : D ⟶ (Functor.const I).obj (Spec R)),\n        Nonempty (IsLimit c) ∧ (∀ j, IsAffine (D.obj j)) ∧\n        ∃ e : V.toScheme ≅ c.pt,\n          (∀ j, e.hom ≫ c.π.app j ≫ t.app j = V.ι ≫ q ≫ Spec.map b) ∧\n          ∀ j, ∃ (S : CommRingCat.{u}) (a : R ⟶ S) (z : Spec S),\n            Etale (Spec.map a) ∧ (Spec.map a) z = y ∧\n            let g := a.hom f\n            let A := AdjoinRoot ((Polynomial.X : Polynomial S) ^ n - Polynomial.C g)\n            let N := Spec (CommRingCat.of A)\n            let q := Spec.map (CommRingCat.ofHom (algebraMap S A))\n            let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)\n            ∃ d : V.toScheme ≅ D.obj j,\n              d.hom ≫ t.app j = V.ι ≫ q ≫ Spec.map a",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T132435-L-4127827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T132435-L-4127827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
