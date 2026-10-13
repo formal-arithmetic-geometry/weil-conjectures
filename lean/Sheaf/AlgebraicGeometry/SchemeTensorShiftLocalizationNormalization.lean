@@ -139,13 +139,27 @@ theorem schemeTensorShift_targetComparison_isIso
   dsimp only [schemeTensorShiftTargetComparison]
   infer_instance
 
-/-- First route normalization component.  Expand `c` and `v`, then use lax
-monoidal associativity for `DerivedCategory.Q`.  Naturality of the shift
-commutation isomorphism moves the inner tensorator through the shift, and the
-localization shift square for `P` identifies the result with the shifted
-complex associator.  Functoriality of `Q` gives exactly the displayed equality.
-Source: Stacks Project, Tag 06YH, first localization normalization calculation.
-(blueprint: aux-sc-target-comparison-first) -/
+/-- Expanded first normalization coherence intermediate.
+The proof unfolds all local abbreviations in the localization calculation.
+(blueprint: aux-sc-target-comparison-first-core). -/
+theorem schemeTensorShift_first_normalization_core
+    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    letI := schemeCanonicalTensorShift X
+    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
+      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
+    ((α_ (DerivedCategory.Q.obj P⟦(1 : ℤ)⟧) (DerivedCategory.Q.obj T)
+      (DerivedCategory.Q.obj U)).hom ≫
+      ((tensorRight (DerivedCategory.Q.obj T ⊗ DerivedCategory.Q.obj U)).commShiftIso
+        (1 : ℤ)).hom.app (DerivedCategory.Q.obj P)) ≫
+      schemeTensorShiftTargetComparison X P T U =
+      schemeTensorShiftSourceComparison X P T U ≫
+      DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫
+        (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by sorry
+
 theorem schemeTensorShift_first_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
@@ -163,7 +177,8 @@ theorem schemeTensorShift_first_normalization
         ((tensorRight (K ⊗ M)).commShiftIso (1 : ℤ)).hom.app A) ≫ c =
       v ≫ DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫
         (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)
-          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by sorry
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by
+  simpa using schemeTensorShift_first_normalization_core X P T U hP hT hU
 
 /-- Second route normalization component.  Apply the localization shift square
 first to `P,T` and then to `P ⊗ T,U`; K-flatness is preserved by tensoring.
