@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumDirectImageCoordinates
 public import Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation
 public import Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation
+import Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateCounit
 
 /-! # AffineSpectrumCounitCompatibility
 
@@ -18,11 +19,13 @@ Source: Stacks Project, Tags 0D5S and 08HY.
 @[expose] public section
 
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
+
+attribute [local irreducible] derivedPullback
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -52,6 +55,31 @@ theorem affineSpectrum_counit_compatibility
         ((canonicalSchemeDerivedAdjunction (Spec.map f.appTop)).counit.app
           ((derivedPullback X.isoSpec.inv).obj K)) ≫
       affineSpectrumUnitInv X K =
-    (canonicalSchemeDerivedAdjunction f).counit.app K := by sorry
+    (canonicalSchemeDerivedAdjunction f).counit.app K := by
+  exact coordinate_counit_compatibility
+    (derivedPullback f) (schemeDerivedDirectImage f)
+    (derivedPullback (Spec.map f.appTop)) (schemeDerivedDirectImage (Spec.map f.appTop))
+    (derivedPullback X.isoSpec.inv) (derivedPullback X.toSpecΓ)
+    (derivedPullback S.isoSpec.inv) (derivedPullback S.toSpecΓ)
+    (canonicalSchemeDerivedAdjunction f)
+    (canonicalSchemeDerivedAdjunction (Spec.map f.appTop))
+    (affineSpectrumInversePullbackEquivalence X).toAdjunction
+    (affineSpectrumInversePullbackEquivalence S).toAdjunction
+    (affineSpectrumInversePullbackEquivalence X).unitIso
+    (affineSpectrumInversePullbackEquivalence S).unitIso
+    rfl rfl (affineSpectrumDerivedPullbackIso f) (affineSpectrumForwardPullbackIso f)
+    (affineSpectrumUnitInv X) (affineSpectrumUnitInv S)
+    (fun _ ↦ rfl) (fun _ ↦ rfl)
+    (affineSpectrum_comparison_cancellation f)
+    (affineSpectrumDerivedDirectImageIso f) (by
+      intro L
+      dsimp only [affineSpectrumDerivedDirectImageIso]
+      set_option backward.isDefEq.respectTransparency false in
+      simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+        Functor.leftUnitor_inv_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+        Functor.associator_hom_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+        Category.id_comp]
+      delta canonicalSchemeDerivedAdjunction
+      rfl) K
 
 end AlgebraicGeometry

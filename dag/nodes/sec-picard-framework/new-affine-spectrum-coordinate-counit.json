@@ -1,0 +1,102 @@
+{
+ "id": "new-affine-spectrum-coordinate-counit",
+ "kind": "statement",
+ "title": "Generic coordinate counit compatibility",
+ "statement": "Let A, B, A0, B0 be categories, F:B→A and R:A→B with adjunction adj, and F0:B0→A0 and R0:A0→B0 with adjunction adj0. Let U:A→A0, V:A0→A, W:B→B0, T:B0→B have adjunctions adju:U⊣V and adjt:W⊣T with invertible units u:Id_A≅U⋙V and s:Id_B≅W⋙T. Suppose a:W⋙F0≅F⋙U and v:T⋙F≅F0⋙V, and let e(K)=u.inv(K), t(M)=s.inv(M). Assume v(W M);V(a(M));e(F M)=F(t(M)) for every M:B. Let b:R≅U⋙R0⋙T satisfy b(K)=R(u.hom(K));d(U K), where d is the conjugate of a under adj.comp adju and adjt.comp adj0. Then F(b(K));v(R0(U K));V(adj0.counit(U K));e(K)=adj.counit(K) for every K:A.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "conjugateEquiv_counit, with adjunction naturality and triangle identities; Stacks Tag 08HY, Remark 20.28.3"
+ },
+ "proof": [
+  {
+   "text": "Expand the composite conjugate-counit equation for d. Naturality of the two invertible units and of v, followed by the two right triangle identities, reduces the composite beginning with F(d) to adj.counit(V(U K)) followed by u.inv(K). Use the comparison cancellation at R(V(U K)) to cancel the source unit. Insert the defining component of b and use counit naturality and u.hom_inv_id to obtain the assertion. The Lean proof carries out these identities explicitly.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "Explicit conjugateEquiv_counit calculation with equivalence units"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit compatibility for conjugate adjunctions transported through equivalences of categories",
+   "results": "Eight hits including conjugateEquiv_counit and conjugateEquiv_counit_symm. They give the conjugation equation used in the proof, but not cancellation in equivalence coordinates.",
+   "date": "2026-10-14",
+   "verdict": "building blocks"
+  },
+  {
+   "tool": "grep",
+   "query": "unitInv_naturality|conjugateEquiv_counit",
+   "results": "Nine matches in Adjunction.Mates, Equivalence and Monoidal.Closed.Basic, including the conjugate counit identity and unit inverse naturality.",
+   "date": "2026-10-14",
+   "verdict": "building blocks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit compatibility for conjugate adjunctions transported through equivalences of categories",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit",
+   "results": "Independent second-reader search: the uniqueness counit identity is available, but applies to the canonical rightAdjointUniq isomorphism, not directly to the pinned conjugate b between two equivalence coordinate systems. The existing conjugateEquiv_counit calculation identifies this pinned comparison without introducing a new choice.",
+   "date": "2026-10-14",
+   "verdict": "building block, not a replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumCounitCompatibility",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-spectrum-counit-compatibility",
+   "place": "generic conjugation step"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumCoordinateCounit.lean",
+  "declaration": "coordinate_counit_compatibility",
+  "statement": "theorem coordinate_counit_compatibility\n    {A B A0 B0 : Type*} [Category A] [Category B] [Category A0] [Category B0]\n    (F : B ⥤ A) (R : A ⥤ B) (F0 : B0 ⥤ A0) (R0 : A0 ⥤ B0)\n    (U : A ⥤ A0) (V : A0 ⥤ A) (W : B ⥤ B0) (T : B0 ⥤ B)\n    (adj : F ⊣ R) (adj0 : F0 ⊣ R0) (adju : U ⊣ V) (adjt : W ⊣ T)\n    (u : 𝟭 A ≅ U ⋙ V) (s : 𝟭 B ≅ W ⋙ T)\n    (hu : adju.unit = u.hom) (hs : adjt.unit = s.hom)\n    (a : W ⋙ F0 ≅ F ⋙ U)\n    (v : T ⋙ F ≅ F0 ⋙ V)\n    (e : ∀ K : A, V.obj (U.obj K) ⟶ K)\n    (t : ∀ M : B, T.obj (W.obj M) ⟶ M)\n    (he : ∀ K : A, e K = u.inv.app K)\n    (ht : ∀ M : B, t M = s.inv.app M)\n    (hc : ∀ M : B, v.hom.app (W.obj M) ≫\n      V.map (a.hom.app M) ≫ e (F.obj M) = F.map (t M))\n    (b : R ≅ U ⋙ R0 ⋙ T)\n    (hb : ∀ K : A, b.hom.app K = R.map (u.hom.app K) ≫\n      (conjugateIsoEquiv (adj.comp adju)\n        (adjt.comp adj0) a).hom.app (U.obj K))\n    (K : A) :\n    F.map (b.hom.app K) ≫\n      v.hom.app (R0.obj (U.obj K)) ≫\n      V.map (adj0.counit.app (U.obj K)) ≫ e K =\n      adj.counit.app K",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2c2b4",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T201802-L-3974095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2c2b4",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T201802-L-3974095",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, node statements, proofs, change record, report, and direct importer match the stage-3 brief; all compile cleanly."
+ }
+}
