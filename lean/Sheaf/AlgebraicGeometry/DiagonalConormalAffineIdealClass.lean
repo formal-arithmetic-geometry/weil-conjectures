@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.RingTheory.Kaehler.Basic
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
 
 /-! # The affine diagonal ideal class map
 
@@ -67,6 +69,16 @@ theorem diagonalConormal_affine_ideal_class (f : X ⟶ S)
             (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
               (pullback.diagonal f))).unit.app
                 (kernel (SheafOfModules.unitToPushforwardObjUnit
-                  (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s) := by sorry
+                  (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s) := by
+  let : Algebra Γ(S, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra
+  obtain ⟨r, hr₂, hr₁, hlift⟩ := diagonalConormal_affine_ideal_class_core f U V hUV
+  obtain ⟨e, he⟩ := diagonalConormal_affine_ideal_class_q f U V hUV r hr₂ hr₁
+  let q := e.toLinearMap.comp
+    ((KaehlerDifferential.fromIdeal Γ(S, V.1) Γ(X, U.1)).restrictScalars Γ(X, U.1))
+  refine ⟨r, q, e.surjective.comp
+    (KaehlerDifferential.fromIdeal_surjective Γ(S, V.1) Γ(X, U.1)), hr₂, hr₁, ?_⟩
+  intro hδ j
+  obtain ⟨s, hs⟩ := hlift j
+  exact ⟨s, hs, he hδ j s hs⟩
 
 end AlgebraicGeometry

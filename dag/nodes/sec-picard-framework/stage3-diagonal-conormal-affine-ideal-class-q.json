@@ -1,0 +1,128 @@
+{
+ "id": "stage3-diagonal-conormal-affine-ideal-class-q",
+ "kind": "lemma",
+ "title": "Affine diagonal ideal quotient class map",
+ "statement": "Let f:X → S be a morphism of schemes [def-pc-scheme], U and V affine opens with U ⊆ f⁻¹V. Set A=Γ(X,U), R=Γ(S,V) using f, B=A⊗[R]A, W=p₁⁻¹U∩p₂⁻¹U and J=ker μ. For every ring equivalence r:B≃Γ(X×_S X,W) with those two projection formulas, there is an A-linear equivalence e:Ω[A/R]≃Γ(U,diagonalConormal f). For every j∈J, every actual kernel section s whose inclusion is r(j), and every inclusion h:U⊆Δ⁻¹W, e([j]) is the restriction along h of the tensor-pullback adjunction unit on s. The conormal and unit are [def-sc-diagonal-conormal] and [lem-pc-module-pullback-adjunction].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "Put A = Γ(X,U), R = Γ(S,V), B = A ⊗[R] A and J = ker μ.\nThe two projection formulas determine r on pure tensors, hence on B. They identify\nthe restricted diagonal U → W with Spec μ, a closed immersion since μ is onto.\nRestriction to W preserves the actual module-sheaf kernel, and identifies it with\nthe closed immersion ideal module J. Inverse image of sheaves commutes with open\nrestriction, as does extension of scalars: both are the same inverse-image sheaf\nfollowed by sheafification of the sectionwise tensor product. Their canonical units\nrestrict compatibly, since inverse-image unit followed by 1 ⊗ s is unchanged by\nrestriction and its sheafification unit is natural. Apply\nScheme.Modules.affine_conormal_sections_existence to this restricted closed\nimmersion. It gives an equivalence J/J² with the conormal sections, sending the\nclass of j to the restricted unit of any section s whose inclusion is r(j).\nThe B-action on J/J² factors through B/J, because every product of two\nelements of J vanishes in J/J². Multiplication identifies B/J with A and sends\na ⊗ 1 to a. Thus the transported equivalence is A-linear for the first-factor action.\nMathlib's KaehlerDifferential R A is exactly J.Cotangent = J/J².\nThis yields e with the displayed formula. Any proof hδ gives the same restriction\nmap by proof irrelevance. The zero-ring chart obeys the same quotient calculation.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections-existence",
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-diagonal-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-conormal-sections-existence",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-diagonal-conormal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of diagonal conormal on affine open are cotangent quotient of multiplication ideal with adjunction unit formula",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine tensor product coordinates for the ring of sections of the fibre product of two affine opens and its diagonal conormal quotient",
+   "results": "diagonal_Spec_map and diagonal_SpecMap identify the affine diagonal; other hits concern residue field pullback points. No exact section/unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.fromIdeal",
+   "results": "fromIdeal and fromIdeal_surjective provide the algebraic quotient map, but no geometric chart comparison. Used in parent proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]ections|[Ss]ections.*[Tt]ensor",
+   "results": "Seven unrelated tensoriality and site hits; no affine conormal unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClass",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineIdealClassQ.lean",
+  "declaration": "AlgebraicGeometry.diagonalConormal_affine_ideal_class_q",
+  "statement": "theorem diagonalConormal_affine_ideal_class_q (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)\n    : letI : Algebra Γ(S, V.1) Γ(X, U.1) :=\n        (f.appLE V.1 U.1 hUV).hom.toAlgebra\n      let W := (pullback.fst f f) ⁻¹ᵁ U.1 ⊓ (pullback.snd f f) ⁻¹ᵁ U.1\n      ∀ (r : (Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1)) ≃+* Γ(pullback f f, W)),\n        (∀ a : Γ(X, U.1), r ((1 : Γ(X, U.1)) ⊗ₜ[Γ(S, V.1)] a) =\n          (pullback.snd f f).appLE U.1 W inf_le_right a) →\n        (∀ a : Γ(X, U.1), r (a ⊗ₜ[Γ(S, V.1)] (1 : Γ(X, U.1))) =\n          (pullback.fst f f).appLE U.1 W inf_le_left a) →\n        ∃ e : KaehlerDifferential Γ(S, V.1) Γ(X, U.1) ≃ₗ[Γ(X, U.1)]\n            Γ(diagonalConormal f, U.1),\n          ∀ (hδ : U.1 ≤ (pullback.diagonal f) ⁻¹ᵁ W)\n            (j : KaehlerDifferential.ideal Γ(S, V.1) Γ(X, U.1))\n            (s : Γ(kernel (SheafOfModules.unitToPushforwardObjUnit\n              (pullback.diagonal f).toRingCatSheafHom), W)),\n            (kernel.ι (SheafOfModules.unitToPushforwardObjUnit\n              (pullback.diagonal f).toRingCatSheafHom)).val.app (op W) s = r j →\n            e (KaehlerDifferential.fromIdeal Γ(S, V.1) Γ(X, U.1) j) =\n              (diagonalConormal f).presheaf.map (homOfLE hδ).op\n                (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n                  (pullback.diagonal f))).unit.app\n                    (kernel (SheafOfModules.unitToPushforwardObjUnit\n                      (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-diagonal-conormal",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine diagonal calculation: cotangent quotient and canonical restricted unit",
+   "via": [
+    "lem-sc-diagonal-conormal-affine-ideal-class",
+    "stage3-diagonal-conormal-affine-derivation-span",
+    "stage3-diagonal-conormal-chosen",
+    "lem-sc-diagonal-conormal-affine-sections-base",
+    "lem-sc-diagonal-conormal-affine-sections",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T054241-L-450654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T054241-L-450654",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

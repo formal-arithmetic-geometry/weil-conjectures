@@ -1,0 +1,126 @@
+{
+ "id": "stage3-diagonal-conormal-affine-ideal-class-core",
+ "kind": "lemma",
+ "title": "Affine tensor chart ring coordinates",
+ "statement": "Let f:X → S be a morphism of schemes [def-pc-scheme], U and V affine opens with U ⊆ f⁻¹V. Set A=Γ(X,U), R=Γ(S,V) using f, B=A⊗[R]A, W=p₁⁻¹U∩p₂⁻¹U and J=ker μ. There exists a ring equivalence r:B≃Γ(X×_S X,W), sending 1⊗a to p₂*(a) and a⊗1 to p₁*(a). Every j∈J lifts to a section of the actual module-sheaf kernel of O→Δ_*O whose inclusion is r(j). The fibre product and kernel conormal are those of [def-pc-fibre-product] and [def-sc-diagonal-conormal].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "Put A = Γ(X,U), R = Γ(S,V), B = A ⊗[R] A, and J = ker μ.\nThe restricted morphism U → V has affine source and target. Its self-fibre product\nembeds as W = p₁⁻¹U ∩ p₂⁻¹U, because equality over S of two points mapping into V\nis equality over V. The affine fibre-product construction is Spec B; the two ring\nmaps are a ↦ a ⊗ 1 and a ↦ 1 ⊗ a. Applying affine global sections gives r and\nboth projection formulas. The diagonal pulls W back to U and is induced by μ.\nThe actual kernel sheaf restricts to the kernel of O_W → δ_*O_U: open restriction\npreserves kernels and pushforward along δ is computed on inverse images of opens.\nOn the affine chart this morphism on sections is μ in the coordinates r, so its\nsectionwise kernel contains r(j) for every j ∈ J. The universal property of the\nmodule-sheaf kernel supplies the required section s. Empty U gives the zero ring\nand zero section modules, and the construction still applies.",
+   "uses": [
+    "lem-weil-pbc-diagonal-immersion",
+    "def-sc-diagonal-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagonal-immersion",
+  "def-sc-diagonal-conormal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of diagonal conormal on affine open are cotangent quotient of multiplication ideal with adjunction unit formula",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine tensor product coordinates for the ring of sections of the fibre product of two affine opens and its diagonal conormal quotient",
+   "results": "diagonal_Spec_map and diagonal_SpecMap identify the affine diagonal; other hits concern residue field pullback points. No exact section/unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.fromIdeal",
+   "results": "fromIdeal and fromIdeal_surjective provide the algebraic quotient map, but no geometric chart comparison. Used in parent proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]ections|[Ss]ections.*[Tt]ensor",
+   "results": "Seven unrelated tensoriality and site hits; no affine conormal unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClass",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineIdealClassCore.lean",
+  "declaration": "AlgebraicGeometry.diagonalConormal_affine_ideal_class_core",
+  "statement": "theorem diagonalConormal_affine_ideal_class_core (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :\n    letI : Algebra Γ(S, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra\n    let W := (pullback.fst f f) ⁻¹ᵁ U.1 ⊓ (pullback.snd f f) ⁻¹ᵁ U.1\n    ∃ r : (Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1)) ≃+* Γ(pullback f f, W),\n      (∀ a : Γ(X, U.1), r ((1 : Γ(X, U.1)) ⊗ₜ[Γ(S, V.1)] a) =\n        (pullback.snd f f).appLE U.1 W inf_le_right a) ∧\n      (∀ a : Γ(X, U.1), r (a ⊗ₜ[Γ(S, V.1)] (1 : Γ(X, U.1))) =\n        (pullback.fst f f).appLE U.1 W inf_le_left a) ∧\n      ∀ j : KaehlerDifferential.ideal Γ(S, V.1) Γ(X, U.1),\n        ∃ s : Γ(kernel (SheafOfModules.unitToPushforwardObjUnit\n            (pullback.diagonal f).toRingCatSheafHom), W),\n          (kernel.ι (SheafOfModules.unitToPushforwardObjUnit\n            (pullback.diagonal f).toRingCatSheafHom)).val.app (op W) s = r j",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-diagonal-conormal",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine diagonal calculation: tensor chart and ideal section lift",
+   "via": [
+    "lem-sc-diagonal-conormal-affine-ideal-class",
+    "stage3-diagonal-conormal-affine-derivation-span",
+    "stage3-diagonal-conormal-chosen",
+    "lem-sc-diagonal-conormal-affine-sections-base",
+    "lem-sc-diagonal-conormal-affine-sections",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T054241-L-450654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T054241-L-450654",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
