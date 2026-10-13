@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-pullback-chart-tensor-sections",
+ "kind": "statement",
+ "title": "Tensor sections of one inverse-image affine chart",
+ "statement": "Let $A,T$ be commutative rings, $X,Y$ schemes [def-pc-scheme], $f:X\\to\\operatorname{Spec}A$, $M$ a quasi-coherent module [pqf-def-coherent], and $U$ an affine open of $X$. Let $q:A\\to T$, $p:Y\\to\\operatorname{Spec}A$, and $e:Y\\simeq\\operatorname{Spec}T$ satisfy $\\operatorname{Spec}(q)\\circ e=p$. Put $Z=X\\times_{\\operatorname{Spec}A}Y$ and $G=\\operatorname{tensorPullback}(\\operatorname{pr}_X)M$ [def-pc-module-pullback]. There exists an affine open $W$ of $Z$, whose underlying open is exactly $\\operatorname{pr}_X^{-1}(U)$, and a $T$-linear equivalence $T\\otimes_A\\Gamma(U,M)\\simeq\\Gamma(W,G)$. On $\\Gamma(U,M)$ the $A$-action comes from $f$. On $\\Gamma(W,G)$ the $T$-action comes from the composite $T\\simeq\\Gamma(\\operatorname{Spec}T,\\mathcal O)\\to\\Gamma(Y,\\mathcal O)\\to\\Gamma(W,\\mathcal O)$ induced by $e$ and the second projection. No flatness, covering, or finiteness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01IA",
+  "place": "Schemes, lemma-quasi-coherent-affine, with Tag 01HV (lemma-compare-constructions) and Tag 01I4 (lemma-fibre-product-affine-schemes)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct W as the inverse-image open of U. Since Y and Spec A are affine, p is affine; its base change, the first projection, is affine. Hence W is affine. Put B=O(U), C=O(W). The affine cartesian sections formula is a pushout square of rings. Transport the upper corners by the canonical spectrum-sections isomorphism and by e.hom.appTop to obtain the pushout A -> B, A -> T, B -> C, T -> C. The equation he and naturality of GammaSpecIso verify the base map. This is the affine-spectrum fibre-product formula on sections.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_tensorPullback_affine_sections to the first projection, U, and the constructed W. Its bijective B-linear comparison c:N tensor_B C -> G(W) is also C-linear for the transported right-factor action. Swap tensor factors and use that C-linearity to make a bijective C-linear map C tensor_B N -> G(W).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Interpret the ring pushout as Algebra.IsPushout. Its cancellation equivalence identifies C tensor_B N with T tensor_A N as T-modules. Compose its inverse with the previous C-linear equivalence restricted to T. The scalar towers are induced by the section maps and the pushout equality, so the resulting equivalence uses precisely the displayed T-action.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/01IA",
+  "place": "Schemes, lemma-quasi-coherent-affine, with Tag 01HV (lemma-compare-constructions) and Tag 01I4 (lemma-fibre-product-affine-schemes)",
+  "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|IsLocalization.of_le_isUnit_of_bijective|tensorPullback",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact quasi-coherent module chart comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of the pullback of a quasi-coherent module on an affine base-change chart are linearly isomorphic to T tensor_A Gamma(M,U)",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.pullbackSpecIso",
+   "results": "12 hits: AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact quasi-coherent module chart comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePullbackChartTensorFlatStalks",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 05LY affine-local reduction below lem-pc-rf-perfect-base-change: scalar extension of sections on the inverse-image affine chart, the section-comparison part preceding the relative flatness test.",
+   "via": [
+    "lem-pc-affine-pullback-chart-tensor-flat-stalks",
+    "lem-pc-affine-cover-module-tensor-flat-criterion",
+    "lem-pc-flat-module-descent-affine-charts",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePullbackChartTensorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePullbackChartTensorSections.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_pullback_chart_tensor_sections",
+  "statement": "theorem exists_affine_pullback_chart_tensor_sections\n    (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A)\n    (M : X.Modules) [M.IsQuasicoherent] (U : X.affineOpens)\n    (q : A ⟶ T) (p : Y ⟶ Spec A) (e : Y ≅ Spec T)\n    (he : e.hom ≫ Spec.map q = p) :\n    ∃ W : (pullback f p : Scheme.{u}).affineOpens,\n      W.1 = (pullback.fst f p) ⁻¹ᵁ U.1 ∧\n      (letI : Module (A : Type u) Γ(M, U.1) :=\n        Module.compHom _ (((Scheme.ΓSpecIso A).inv ≫\n          f.appLE ⊤ U.1 (by simp)).hom)\n       letI : Algebra (A : Type u) (T : Type u) := q.hom.toAlgebra\n       letI : Module (T : Type u)\n           Γ((Scheme.Modules.tensorPullback (pullback.fst f p)).obj M, W.1) :=\n         Module.compHom _ (((Scheme.ΓSpecIso T).inv ≫ e.hom.appTop ≫\n           (pullback.snd f p).appLE ⊤ W.1 (by simp)).hom)\n       Nonempty (((T : Type u) ⊗[(A : Type u)] Γ(M, U.1)) ≃ₗ[(T : Type u)]\n         Γ((Scheme.Modules.tensorPullback (pullback.fst f p)).obj M, W.1)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087533",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
