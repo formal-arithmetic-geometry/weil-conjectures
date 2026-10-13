@@ -14,35 +14,28 @@
  },
  "proof": [
   {
-   "text": "Fix an injective resolution. Using the supplied quasi-isomorphism hypothesis define the comparison as H(beta), inverse H(alpha), and inverse of the canonical Ext-to-section-complex identification. The constant-sheaf adjunction evaluated on 1 defines that identification termwise; extMk represents every Ext class.",
+   "text": "Apply the single-degree quotient existence theorem in each natural degree, under the supplied hα, and use classical choice to assemble a family c together with its IsAbelianCechComparison proofs hc. This chooses witnesses only in a theorem proving existence; no definition or arbitrary chosen data is introduced.",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction"
+    "new-abelian-cech-comparison-core"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compare with another injective resolution by lifting the identity. The alpha/beta squares and Ext cocycle computation commute with the lift. Its section map and total map induce homology isomorphisms. Cancel the total map to prove the augmentation quotient characterization for every resolution.",
+   "text": "Apply the degree-zero normalization theorem to c 0 and hc 0, with the given open-cover equality. Pair this equality with hc and the family c to conclude the unchanged existential statement.",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction"
+    "new-abelian-cech-comparison-normalization"
    ],
-   "elementary": false
-  },
-  {
-   "text": "In degree zero alpha and beta send sections to the same restriction family in the (0,0) summand. Cancel their canonical cohomology identifications to obtain the normalized gluing formula.",
-   "uses": [
-    "lem-pc-topological-cech-zero-gluing-iso"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-abelian-cech-comparison-construction",
-  "lem-pc-topological-cech-zero-gluing-iso"
+  "new-abelian-cech-comparison-core",
+  "new-abelian-cech-comparison-normalization"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Lemma 20.11.2, construction of H(beta) H(alpha) inverse and independence of the resolution"
+  "place": "Lemma 20.11.2; J4 reduction to independent single-degree quotient construction and degree-zero normalization"
  },
  "mathlib_searches": [
   {
@@ -114,12 +107,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T234221-L-2125679",
+  "landing": "20261013T010615-L-2671111",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

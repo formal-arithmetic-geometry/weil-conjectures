@@ -6,6 +6,8 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonCore
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonNormalization
 
 /-! # Objectwise canonical abelian Čech comparisons
 
@@ -53,5 +55,9 @@ theorem exists_abelianCechComparison_maps
       (∀ q, IsAbelianCechComparison U F q (c q)) ∧
       c 0 = (TopCat.Sheaf.cechCohomologyZeroIso U hcover).inv.app F ≫
         (Sheaf.functorHZeroIso (Opens.grothendieckTopology X) isTerminalTop).inv.app F := by
-  sorry
+  classical
+  have hq := exists_abelianCechComparison_core U F hα
+  choose c hc using hq
+  refine ⟨c, hc, ?_⟩
+  exact abelianCechComparison_zero_normalization U hcover F (c 0) (hc 0)
 end AlgebraicGeometry.Scheme.Modules

@@ -10407,3 +10407,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:06 L: merged deliver/E4/Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit (stage 3; reviewer PASS; first push; landing 20261013T010614-L-2670697 (interface); batch 20261013T010609; modules 2; new nodes 1)
 - 01:06 L: returned deliver/X2/Sheaf.Paper.ZariskiEtaleResolutionCocycleCompatibility (reviewer RETURN: (reviewer X-7c603, head 7c603cd6a) A3 (unnecessary forced adaptation): lean/Sheaf/Paper/ZariskiEtaleResolutionCocycleHom)
 - 01:06 L: merged deliver/H2/Sheaf.AlgebraicGeometry.ConstructibleModuleClosedEffacement (stage 3; reviewer PASS; first push; landing 20261013T010615-L-2670976 (interface); batch 20261013T010609; modules 2; new nodes 1)
+- 01:06 L: merged deliver/J4/Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonMaps (stage 3; reviewer PASS; first push; landing 20261013T010615-L-2671111 (interface); batch 20261013T010609; modules 3; new nodes 2)

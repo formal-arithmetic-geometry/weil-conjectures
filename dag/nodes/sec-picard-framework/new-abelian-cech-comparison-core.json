@@ -1,0 +1,154 @@
+{
+ "id": "new-abelian-cech-comparison-core",
+ "kind": "statement",
+ "title": "Existence of the abelian Čech augmentation quotient in one degree",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\iota$ a type, $U_i$ any family of open subsets of $X$, $F$ an abelian sheaf [def-sc-topological-abelian-cohomology], and $q\\in\\mathbb N$. Suppose that for every injective resolution $I$ of $F$, the map $\\alpha_I$ of [def-pc-abelian-cech-comparison-construction] is a quasi-isomorphism. There exists an additive map $c:\\check H^q(U,F)\\to H^q(X,F)$ satisfying IsAbelianCechComparison on every injective resolution, with the predicate defined in [def-pc-abelian-cech-comparison-construction]. This assertion has no normalization conclusion and does not require that the opens cover $X$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-topological-abelian-cohomology",
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, construction of H(beta) H(alpha) inverse and independence of the resolution"
+ },
+ "proof": [
+  {
+   "text": "Fix an injective resolution I. The constant integer sheaf adjunction evaluated at 1 identifies its Hom complex with the global section complex, including the differentials. Pass to cocycles modulo coboundaries and use InjectiveResolution.extAddEquivCohomologyClass to get an additive isomorphism e from Ext to section-complex homology. Its cocycle formula is extEquivCohomologyClass_extMk; monicity of iCycles identifies the specified cycle z uniquely.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define c as homologyMap(beta), inverse homologyMap(alpha), and inverse e. The supplied quasi-isomorphism hypothesis ensures that homologyMap(alpha) is invertible. The cocycle formula for e proves the quotient equation on I.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For another resolution J lift the identity of F to I -> J. Naturality of restrictions and the augmentation identity give commuting alpha and beta squares. InjectiveResolution.extMk_comp_mk₀ with the identity gives compatibility of e with the section homology map, so that map is invertible. The alpha square then makes the total homology map invertible. Transport the equation on I and cancel the total map to get the equation on J for all x, a, ha and z. No cover assumption or finiteness enters this argument.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsAbelianCechComparison|cechCohomologyZeroIso",
+   "results": "{\"t\": \"2026-10-13T00:16:49Z\", \"tool\": \"grep\", \"query\": \"IsAbelianCechComparison|cechCohomologyZeroIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact augmentation quotient or normalization theorem; Ext cocycle tools are available."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology comparison to sheaf cohomology constructed from injective resolutions and normalized in degree zero",
+   "results": "{\"t\": \"2026-10-13T00:16:50Z\", \"tool\": \"leanfinder\", \"query\": \"Cech cohomology comparison to sheaf cohomology constructed from injective resolutions and normalized in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"groupCohomologyIso\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"groupCohomology.inhomogeneousCochainsIso\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\"], \"digest\": \"97f12e54a92876a6\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact augmentation quotient or normalization theorem; Ext cocycle tools are available."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extMk",
+   "results": "{\"t\": \"2026-10-13T00:16:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution.extMk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extMk_zero\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.mk₀_comp_extMk\", \"CategoryTheory.InjectiveResolution.extMk_comp_mk₀\", \"CategoryTheory.InjectiveResolution.extMk_eq_zero_iff\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CategoryTheory.InjectiveResolution.neg_extMk\", \"CategoryTheory.InjectiveResolution.sub_extMk\"], \"digest\": \"4f30b3b5a6b0b095\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact augmentation quotient or normalization theorem; Ext cocycle tools are available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology comparison constructed using injective resolutions",
+   "results": "{\"t\": \"2026-10-13T00:27:13Z\", \"tool\": \"leansearch\", \"query\": \"Cech cohomology comparison constructed using injective resolutions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of global sections of an injective resolution is Ext from the constant integer sheaf",
+   "results": "{\"t\": \"2026-10-13T00:40:06Z\", \"tool\": \"leanfinder\", \"query\": \"homology of global sections of an injective resolution is Ext from the constant integer sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extMk_hom\"], \"digest\": \"d363c79828cdd2bf\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no exact comparison or normalization statement; LeanFinder returns the Ext cocycle API, Loogle does not index the source-library zero isomorphism, and grep returns unrelated augmentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.functorHZeroIso",
+   "results": "{\"t\": \"2026-10-13T00:40:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.functorHZeroIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Sheaf.functorHZeroIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no exact comparison or normalization statement; LeanFinder returns the Ext cocycle API, Loogle does not index the source-library zero isomorphism, and grep returns unrelated augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*augmentation|augmentation.*homology|comparison.*zero",
+   "results": "{\"t\": \"2026-10-13T00:44:21Z\", \"tool\": \"grep\", \"query\": \"homology.*augmentation|augmentation.*homology|comparison.*zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean\", \"Mathlib/Tactic/ApplyWith.lean\", \"Mathlib/Tactic/Linarith/Preprocessing.lean\", \"Mathlib/Tactic/Linarith/Datatypes.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/CategoryTheory/Triangulated/Basic.lean\"], \"digest\": \"00f637ab4b3f73fa\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no exact comparison or normalization statement; LeanFinder returns the Ext cocycle API, Loogle does not index the source-library zero isomorphism, and grep returns unrelated augmentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonMaps",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-abelian-cech-comparison-maps",
+   "place": "Proof steps 1–2: quotient construction in a single degree and independence of resolution",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_abelianCechComparison_core",
+  "statement": "theorem exists_abelianCechComparison_core\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (hα : ∀ I : InjectiveResolution F, QuasiIso (abelianCechAlpha U I)) (q : ℕ) :\n    ∃ c : (TopCat.Sheaf.cechCohomologyFunctor U q).obj F ⟶\n      (Sheaf.functorH (Opens.grothendieckTopology X) q).obj F,\n      IsAbelianCechComparison U F q c",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T010615-L-2671111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T010615-L-2671111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
