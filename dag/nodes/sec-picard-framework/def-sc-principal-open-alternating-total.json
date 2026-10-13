@@ -27,6 +27,11 @@
    "elementary": true
   },
   {
+   "text": "principalCechDifferential_square is proved. Split the displayed total value into private vertical and horizontal functions. Vertical square-zero follows from coefficient d_comp_d, functoriality of affineOpenSections and linearity. For horizontal square-zero, expand both deletion sums and use Finset.sum_involution on the off-diagonal of the target subset, swapping the deletion order. Erasure commutes, two restriction maps and degree transports compose by presheaf functoriality and equality induction, and the two signs are negatives because deleting the smaller index shifts the position of the larger index by one. Conditional branches with empty deleted subsets contribute zero. For the mixed terms, distribute the coefficient differential across each finite restriction sum, commute restriction with the coefficient differential by naturality, and identify the degree transports by equality induction. The two vertical exponents differ by one when the erased subset is nonempty, so every mixed pair cancels. Finally use linearity of principalCechDifferential to expand its square into four terms, substitute both square-zero identities, and apply the mixed cancellation. No cover, quasi-coherence, or boundedness hypothesis is used; singleton and empty-cover cases have no surviving horizontal pairs. These are elementary coordinate calculations inside the existing definition node, with all private helpers fully proved and no new dependencies.",
+   "uses": [],
+   "elementary": true
+  },
+  {
    "text": "principalCechFunctor_exists constructs its object function as principalCechTotal and its morphisms as componentwise section maps of coefficient chain maps. Vertical compatibility follows by applying the sections functor to g.comm. For horizontal compatibility, equality transports commute with g by equality induction, and restriction commutes with g by naturality of modulesSpecToSheaf.map; compare each summand, including the zero branch. Identities, composition and addition hold componentwise. Proof irrelevance reduces the displayed object equality transports to reflexivity. The complex objects still use the original unproved principalCechDifferential_square; this step is a proved reduction, not a proof of square-zero.",
    "uses": [],
    "elementary": true
@@ -46,7 +51,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Partial Lean realization of Tags 08D1, 08D2 and 08C2. X3 proves the derived-comparison existence obligation, using the augmentation construction now present on the delivery base. Square-zero and the K-injective augmentation quasi-isomorphism remain the two original named theorem holes; no complete proof of them is claimed."
+  "place": "Partial Lean realization of Tags 08D1, 08D2 and 08C2. V3 proves the total differential square-zero by vertical square-zero, the swap involution for horizontal double deletions, and mixed-term cancellation. All new helpers are private and proved. The previous augmentation and derived-comparison constructions remain unchanged. Only principalCechAugmentation_quasiIso remains as the original named theorem hole."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -171,9 +176,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T100221-L-2503096",
+  "landing": "20261013T111937-L-3068253",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
