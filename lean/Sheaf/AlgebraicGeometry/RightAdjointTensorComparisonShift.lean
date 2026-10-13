@@ -10,12 +10,32 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.RightAdjointTensorCompatibleExactStructures
+import all Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonTriangle
 
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+
+private theorem exists_shift_square_generic
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    (F G : C ⥤ D) [F.CommShift ℤ] [G.CommShift ℤ]
+    (τ : F ⟶ G) [NatTrans.CommShift τ ℤ]
+    (A B : C) (n : ℤ) (h : Nonempty (B ≅ A⟦n⟧)) :
+    ∃ (eF : F.obj B ≅ (F.obj A)⟦n⟧) (eG : G.obj B ≅ (G.obj A)⟦n⟧),
+      (τ.app B) ≫ eG.hom = eF.hom ≫ (τ.app A)⟦n⟧' := by
+  obtain ⟨i⟩ := h
+  let eF : F.obj B ≅ (F.obj A)⟦n⟧ :=
+    F.mapIso i ≪≫ (F.commShiftIso n).app A
+  let eG : G.obj B ≅ (G.obj A)⟦n⟧ :=
+    G.mapIso i ≪≫ (G.commShiftIso n).app A
+  refine ⟨eF, eG, ?_⟩
+  dsimp [eF, eG]
+  rw [← τ.naturality_assoc]
+  rw [← NatTrans.shift_app_comm τ n A]
+  simp only [Category.assoc]
 
 /-- Shift square for the pinned right-adjoint tensor comparison.
 Source: Stacks Project, Tag 0A9U, triangulated-subcategory argument, and
@@ -86,6 +106,24 @@ theorem rightAdjointTensorComparison_shift
           (((derivedPullback f).obj A.obj ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj)⟦n⟧))
         (ec : (c.obj B).obj ≅ (c.obj A).obj⟦n⟧),
         (τ.app B).hom ≫ ec.hom =
-          eF.hom ≫ (shiftFunctor (schemeDerivedCategory Z) n).map (τ.app A).hom) := by sorry
+          eF.hom ≫ (shiftFunctor (schemeDerivedCategory Z) n).map (τ.app A).hom) := by
+  classical
+  let : (schemeDerivedQCohProperty Y).IsStableUnderShift ℤ := qc_stable Y
+  let F := (schemeDerivedQCohProperty Z).lift
+    ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙
+      tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+    (fun K ↦ hTensor K (c.obj ⟨𝟙_ _, hO⟩)) ⋙ (schemeDerivedQCohProperty Z).ι
+  let G := c ⋙ (schemeDerivedQCohProperty Z).ι
+  let t : F ⟶ G := Functor.whiskerRight τ (schemeDerivedQCohProperty Z).ι
+  obtain ⟨sF, sG, ht, _⟩ :=
+    rightAdjointTensor_compatibleExactStructures f hRf hO hTensor a c adj τ hτ
+  let := sF
+  let := sG
+  let : NatTrans.CommShift t ℤ := ht
+  intro A n B ⟨e⟩
+  let I := (schemeDerivedQCohProperty Y).ι
+  let i : B ≅ A⟦n⟧ := ObjectProperty.isoMk (schemeDerivedQCohProperty Y)
+    (e ≪≫ ((I.commShiftIso n).app A).symm)
+  exact exists_shift_square_generic F G t A B n ⟨i⟩
 
 end AlgebraicGeometry
