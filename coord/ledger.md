@@ -10481,3 +10481,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/S4/Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassEquiv (stage 3; reviewer PASS; first push; landing 20261013T011934-L-2765733 (interface); batch 20261013T011921; modules 2; new nodes 1)
 - 01:19 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PushforwardFinSumSuccIso (stage 3; reviewer PASS; first push; landing 20261013T011935-L-2765834 (proof); batch 20261013T011921; modules 1; new nodes 0)
 - 01:19 L: merged deliver/S4/Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverEpi (stage 3; reviewer PASS; first push; landing 20261013T011935-L-2765978 (interface); batch 20261013T011921; modules 2; new nodes 1)
+- 01:19 L: merged deliver/T1/Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeftKernel (stage 3; reviewer PASS; after a return; landing 20261013T011935-L-2766129 (interface); batch 20261013T011921; modules 2; new nodes 1)

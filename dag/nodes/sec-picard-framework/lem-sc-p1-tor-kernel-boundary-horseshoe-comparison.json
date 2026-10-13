@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-p1-tor-kernel-boundary-horseshoe-comparison",
+ "kind": "statement",
+ "title": "Signed comparison of the horseshoe and explicit Tor kernel boundaries",
+ "statement": "Let R be a commutative ring, M,F,N be R-modules, and q:F → N a surjective linear map. Write K=ker(q). Let A,B,C be projective resolutions of K,F,N, with complex maps a:A → B and b:B → C satisfying ab=0, compatible with the kernel inclusion and q on augmentations. Assume each degree sequence admits a splitting, and let hS be a proof that the tensored sequence is short exact. The composite of the Tor1(N,M)-to-H1(C tensor M) isomorphism, the homology connecting map of this tensored sequence, the degree-zero homology-to-opcycles inclusion for A tensor M, and the augmentation-induced map A.fromLeftDerivedZero' equals the negative of the constructed torKernelBoundary. The boundary is the fixed real construction of [def-sc-p1-tor-kernel-boundary-construction]; the connecting morphism is that of [lem-weil-pbc-complex-ses-homology-long-exact].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/homology.tex",
+  "place": "Algebra Tags 00M0 and 00LZ; Homology Tag 0111 (snake construction of the homology connecting map); explicit sign comparison fills the computation in the original exact-left-kernel proof plan."
+ },
+ "stmt_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof": [
+  {
+   "text": "Let P be the chosen resolution of N and c:P → C a comparison lifting the identity. In degrees zero and one compose c with the sections of b to define l0,l1. Set v=l1 dB-dP l0 and t=v r0, where r0 is the retraction of a0. The chain identity gives v b0=0, and the splitting identity gives t a0=v. Let e0=l0 epsilonB. The augmentation identities give e0 q=epsilonP and t epsilonA i=-dP e0.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The difference between the chosen augmentation lift e and e0 factors through K; define k by codomain restriction. The preceding identity implies D+t epsilonA=dP k, where D is torKernelDifferential. Tensoring and composing with the cycle inclusion kills dP k. Thus on tensor cycles, t followed by epsilonA is the negative of D. All these maps are constructed from the given splitting data and the proved surjection; no unproved existence theorem chooses data.",
+   "uses": [
+    "def-sc-p1-tor-kernel-boundary-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a cycle z of P tensor M, set x3=(c1 tensor 1)z, x2=(l1 tensor 1)z and x1=(t tensor 1)z. The chain identity says x3 is a cycle, b1 x2=x3, and a0 x1=dB x2. Mathlib ShortExact.δ_apply gives that the connecting map sends [x3] to [x1]. Composing the homology projection in degree zero with the homology-to-opcycles map and A.fromLeftDerivedZero' equals cycle inclusion followed by the tensored augmentation, by homology_π_ι and pOpcycles_comp_fromLeftDerivedZero'. The cycle equality of the previous step therefore gives the signed boundary equality. Cancel the epic homology projection and the Tor-to-homology isomorphism, using resolution comparison naturality for the identity.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-sc-p1-tor-kernel-boundary-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-tor-map-via-resolution-lift"
+ ],
+ "proof_origin": {
+  "by": "worker T1",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/homology.tex",
+  "place": "Tags 00M0, 00LZ and 0111",
+  "note": "Agent-written explicit lift/sign calculation from the parent node proof plan, completed in Lean using Mathlib ShortExact.δ_apply."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The snake connecting map on tensor product resolutions equals the negative of the boundary given by a lifted augmentation",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error recorded by msearch.py; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the Tor connecting homomorphism is the image of the map on Tor induced by a surjection",
+   "date": "2026-10-13",
+   "results": "ShortComplex.ShortExact.δ_apply' and SnakeLemma.δ_eq provide generic snake formulas, but do not compare to torKernelBoundary.",
+   "verdict": "No direct match; use δ_apply for the generic cycle formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"δ\"",
+   "date": "2026-10-13",
+   "results": "Homology connecting maps and their naturality, but no equality with torKernelBoundary.",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "torKernelBoundary in lean/Sheaf and lean/WeilConjectures; δ_apply and homology_exact₃ in Mathlib/Algebra/Homology; isoLeftDerivedObj_hom_naturality in Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+   "date": "2026-10-13",
+   "results": "The project constructs the fixed boundary and proves naturality; the exact-left-kernel node is its remaining kernel inclusion. Mathlib δ_apply computes the snake map; isoLeftDerivedObj_hom_naturality transports the identity comparison. No existing signed comparison declaration.",
+   "verdict": "Needs this comparison theorem, now fully proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeftKernel",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-tor-kernel-boundary-construction-exact-left-kernel",
+   "place": "Step 2: signed identification of the transported homology connecting map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorKernelBoundaryHorseshoeComparison",
+  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryHorseshoeComparison.lean",
+  "declaration": "CategoryTheory.tor_kernel_boundary_horseshoe_comparison",
+  "statement": "theorem tor_kernel_boundary_horseshoe_comparison\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q)\n    (A : ProjectiveResolution (ModuleCat.of R (LinearMap.ker q)))\n    (B : ProjectiveResolution F) (C : ProjectiveResolution N)\n    (a : A.complex ⟶ B.complex) (b : B.complex ⟶ C.complex) (w : a ≫ b = 0)\n    (ha : a.f 0 ≫ B.π.f 0 = A.π.f 0 ≫ ModuleCat.ofHom (LinearMap.ker q).subtype)\n    (hb : b.f 0 ≫ C.π.f 0 = B.π.f 0 ≫ ModuleCat.ofHom q)\n    (hs : ∀ n, Nonempty ((ShortComplex.mk a b w).map\n      (HomologicalComplex.eval (ModuleCat R) (ComplexShape.down ℕ) n)).Splitting)\n    (hS : ((ShortComplex.mk a b w).map\n      (((MonoidalCategory.tensoringRight (ModuleCat R)).obj M).mapHomologicalComplex\n        (ComplexShape.down ℕ))).ShortExact) :\n    (C.isoLeftDerivedObj ((MonoidalCategory.tensoringRight (ModuleCat R)).obj M) 1).hom ≫\n      hS.δ 1 0 (by simp) ≫\n      (ChainComplex.isoHomologyι₀ _).hom ≫\n      A.fromLeftDerivedZero' ((MonoidalCategory.tensoringRight (ModuleCat R)).obj M) =\n        -ModuleCat.ofHom (torKernelBoundary M F N q hq)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T011935-L-2766129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T011935-L-2766129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
