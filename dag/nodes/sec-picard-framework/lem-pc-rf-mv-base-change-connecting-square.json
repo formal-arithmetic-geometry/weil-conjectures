@@ -17,65 +17,28 @@
  ],
  "proof": [
   {
-   "text": "1. An affine-to-affine morphism g is affine, and so is g'. The base changes\n   f' and g' are qcqs. The qcqs sources X and X' and the inverse-image cover\n   satisfy the compactness hypotheses, including the overlap. Transpose ψ\n   under the pinned Lg'^* / Rg'_* adjunction; Rg'_*K' has quasi-coherent\n   cohomology by schemeDerivedDirectImage_preserves_QCoh.",
+   "text": "Use the boundary-data construction [lem-pc-rf-mv-base-change-connecting-square-data] to obtain canonical boundaries, shift structures, and distinguished cover triangles with distinguished images.",
    "uses": [
-    "lem-weil-pbc-morphism-affine-schemes-affine",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-pc-derived-direct-image-preserves-qcoh",
-    "def-pc-derived-base-change-map"
+    "lem-pc-rf-mv-base-change-connecting-square-data"
    ],
    "elementary": false
   },
   {
-   "text": "2. Choose K-injective representatives with injective terms for K and K'. Use\n   schemeKInjective_mayerVietoris_presentation with the explicit adjunctions\n   mvOpenRestrictionAdjunction. For each W, the resulting complex is the\n   direct image of the restriction of the representative. Its two maps are\n   exactly the units and the difference of adjoint restrictions in this\n   statement. Apply triangleOfSES to obtain δ and δ' and distinguishedness.",
+   "text": "Apply the naturality and adjunction-mate calculation for these canonical boundaries [lem-pc-rf-mv-base-change-connecting-square-equation] to obtain the displayed connecting-square equality, and combine all supplied conjuncts.",
    "uses": [
-    "lem-pc-kinjective-mayer-vietoris-presentation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "3. Represent the transposed ψ by a chain map into a K-injective representative\n   of g'_* of the second representative. Restrict this one chain map to U,\n   V and their overlap. Together with the resolution comparison it gives a\n   morphism of short exact Mayer--Vietoris sequences. The connecting maps\n   commute by naturality of triangleOfSES. This uses a morphism of sequences,\n   rather than inferring a connecting square from two squares in a triangulated\n   category. The degreewise split presentation of the direct-image sequence\n   identifies its boundary with Rg'_*δ', as in the direct-image part of\n   schemeDerived_mayerVietoris_directImage.",
-   "uses": [
-    "lem-pc-derived-mayer-vietoris-functorial"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "4. Identify all direct-image compositions by the right-adjoint mates of the\n   pinned pullback composition comparisons, not by independently selected\n   bare isomorphisms. The unit/counit equations of mvOpenPullbackIso and\n   associativity of those comparisons identify the restricted chain maps\n   with the transposes of mvBaseChangeOpenMap. Apply Rf_* and transpose the\n   full connecting equation under Lg^* / Rg_*. Naturality of the Hom equivalence\n   and its shift compatibility give precisely the final displayed equation.",
-   "uses": [
-    "lem-pc-derived-direct-image-composition",
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "5. Derived pullback admits a triangulated shift structure by\n   exists_derivedPullback. Derived direct image is a triangulated right derived\n   functor. Compose these structures to obtain csF and csG; their mapTriangle\n   functors send the two distinguished triangles to distinguished triangles.\n   Empty opens, the zero object and redundant covers use the same sequences.",
-   "uses": [
-    "lem-pc-right-derived-functor-triangulated",
-    "def-pc-derived-pullback"
+    "lem-pc-rf-mv-base-change-connecting-square-equation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-morphism-affine-schemes-affine",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-qcqs-over-affine",
-  "lem-pc-derived-direct-image-preserves-qcoh",
-  "def-pc-derived-base-change-map",
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "lem-pc-derived-mayer-vietoris-functorial",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-right-derived-functor-triangulated",
-  "def-pc-derived-pullback"
+  "lem-pc-rf-mv-base-change-connecting-square-data",
+  "lem-pc-rf-mv-base-change-connecting-square-equation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ9 induction step; expanded with canonical mate calculations from Tags 08HY and 0D5S and short exact sequence naturality from Tags 08BV and 08HZ"
+  "place": "Tags 08BV, 08HY and 0DJ9; reduction to canonical boundary data and its compatibility equation"
  },
  "mathlib_searches": [
   {
@@ -155,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-a65fd",
-  "group": "C4",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T142853-L-496277",
+  "landing": "20261013T155937-L-1303796",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, canonical constructions and assembly with the four node records, change records and Stacks sources; compilation and axiom probes passed; direct importers: none."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

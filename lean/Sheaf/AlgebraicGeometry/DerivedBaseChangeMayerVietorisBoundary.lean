@@ -6,6 +6,7 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
@@ -113,6 +114,10 @@ theorem derivedBaseChange_mayerVietoris_connectingSquare
         (schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫ G.map ψ)⟦(1 : ℤ)⟧' =
       mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫
         G.map δ' ≫ (letI := csG; G.commShiftIso (1 : ℤ)).hom.app K'
- := by sorry
+ := by
+  obtain ⟨δ, δ', csF, csG, hT, hT', hF, hG⟩ :=
+    mvBoundary_data f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
+  refine ⟨δ, δ', csF, csG, hT, hT', hF, hG, ?_⟩
+  exact mvBoundary_equation f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ δ δ' csF csG hT hT'
 
 end AlgebraicGeometry

@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-rf-mv-base-change-connecting-square-equation",
+ "kind": "lemma",
+ "title": "Compatibility equation for canonical Mayer--Vietoris boundaries",
+ "statement": "Under the hypotheses of [lem-pc-rf-mv-base-change-connecting-square], for the canonical boundaries, shift structures, and distinguished cover triangles supplied by [lem-pc-rf-mv-base-change-connecting-square-data], the derived base-change map intertwines the two connecting morphisms after the shift commutation isomorphisms: the composite from the source overlap boundary through base change and the target morphism equals the target overlap comparison followed by the target boundary and shift isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08BV, 08HY and 0DJ9; naturality of connecting morphisms and adjunction-mate calculation"
+ },
+ "stmt_deps": [
+  "lem-pc-rf-mv-base-change-connecting-square",
+  "lem-pc-rf-mv-base-change-connecting-square-data"
+ ],
+ "proof": [
+  {
+   "text": "Represent the canonical Mayer--Vietoris boundaries by the short-exact K-injective presentations and apply naturality of the connecting morphism under the restricted chain map, using [lem-pc-derived-mayer-vietoris-functorial].",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the direct-image compositions and overlap comparison with the pinned adjunction mates, using [lem-pc-derived-direct-image-composition] and [lem-pc-ringed-spaces-derived-pullback-composition]; the resulting equality is the displayed compatibility equation.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08BV, 08HY and 0DJ9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "connecting morphism naturality Mayer Vietoris derived base change",
+   "results": "No exact Mathlib theorem; project functoriality declarations used",
+   "date": "2026-10-13",
+   "verdict": "use stated project lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans connecting morphism triangle",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "use stated project lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Mayer Vietoris connecting square",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "use stated project lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris connecting morphism derived category",
+   "results": "No exact match; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "use project declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundary",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pc-rf-mv-base-change-connecting-square"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisBoundaryData.lean",
+  "declaration": "AlgebraicGeometry.mvBoundary_equation",
+  "statement": "theorem mvBoundary_equation {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K') (ψ : (derivedPullback g').obj K ⟶ K') (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧) (δ' : (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).obj ((schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj K') ⟶ K'⟦(1 : ℤ)⟧) (csF : (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ) (csG : (schemeDerivedDirectImage f').CommShift ℤ) (hT : mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left) (homOfLE inf_le_right) (mvOpenRestrictionAdjunction X U) (mvOpenRestrictionAdjunction X V) (mvOpenRestrictionAdjunction X (U ⊓ V)) K δ ∈ distTriang (schemeDerivedCategory X)) (hT' : mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U))) ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V))) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U)) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V)) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V))) K' δ' ∈ distTriang (schemeDerivedCategory X')) : (schemeDerivedDirectImage f ⋙ derivedPullback g).map δ ≫ (letI := csF; (schemeDerivedDirectImage f ⋙ derivedPullback g).commShiftIso (1 : ℤ)).hom.app K ≫ (schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫ (schemeDerivedDirectImage f').map ψ)⟦(1 : ℤ)⟧' = mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫ (schemeDerivedDirectImage f').map δ' ≫ (letI := csG; (schemeDerivedDirectImage f').commShiftIso (1 : ℤ)).hom.app K'",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T155937-L-1303796",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T155937-L-1303796",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
