@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-formal-completion-affine-sections",
+ "kind": "statement",
+ "title": "Affine sections identify a quasi-coherent module completion with its adic completion",
+ "statement": "Let $Y$ be a scheme, $J$ quasi-coherent ideal sheaf data, and $H$ a quasi-coherent module [def-weil-pbc-coherent-formal-module, pqf-def-coherent]. Let $U$ be affine and put $R=\\Gamma(Y,U)$, $I=J(U)$, and $M=\\Gamma(U,H)$. Write $S_n=H/J^{n+1}H$ with its canonical reductions, and let $E$ be evaluation on $U$. There exist $R$-module isomorphisms $q_n:M/I^{n+1}M\\cong E(S_n)$ such that $q_n\\circ\\mathrm{mkQ}=E(\\pi_n)$, and an isomorphism $e:\\widehat M\\cong E(\\lim S)$ [def-weil-pbc-adic-completion] such that $E(\\mathrm{pr}_n)\\circ e=q_n\\circ\\operatorname{eval}_{n+1}$. No Noetherian or finiteness hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-pbc-adic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Schemes, Tags 01I8 and 01IC (schemes.tex); Lemma 088B, affine calculation; Theorem 02OC, quotient inverse-limit argument"
+ },
+ "proof": [
+  {
+   "text": "The powered ideal inclusion is quasi-coherent and has affine range I^(n+1). Apply the proved multiplication_range and product_qc helpers of the ideal-times module through import all to identify the range of its product inclusion as I^(n+1)M.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply quasiCoherent_cokernel_image to this product inclusion: the actual quotient projection is surjective and has kernel I^(n+1)M. Submodule.quotEquivOfEq followed by quotKerEquivOfSurjective gives q_n, with the quotient projection equation by evaluation on representatives.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel-desc equation for formalModuleQuotientMap makes rho_n compatible with transitions. Cancel mkQ to prove transition compatibility of theta_n=q_n. Each theta_n is injective, so ker rho_n is contained in I^(n+1)M; each rho_n is surjective, so its range is all of E(S_n), equal to the range of the identity transition for c=0.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply adicCompletion_iso_of_stable_ranges with c=0 to obtain an isomorphism from the completion to limit(S composed with E). Compose with the inverse of preservesLimitIso E S; preservesLimitIso_inv_pi and the supplied projection equations give exactly the asserted e equations.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-stable-ranges"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-adic-completion-stable-ranges"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Schemes, Tags 01I8 and 01IC (schemes.tex); Lemma 088B, affine calculation; Theorem 02OC, quotient inverse-limit argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine sections of a quasi coherent module completion identify canonically with its adic completion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine sections of the inverse limit of coherent module quotients by ideal powers are the adic completion",
+   "results": "8 hits: AdicCompletion.of_apply, AdicCompletion, AdicCompletion.eval_of, Hausdorffification, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_apply_coe, Hausdorffification.of, AdicCompletion.of; inspected relevant signatures, no exact affine-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.eval",
+   "results": "12 hits: AdicCompletion.eval, AdicCompletion.eval_comp_of, AdicCompletion.eval_surjective, AdicCompletion.pow_smul_top_le_ker_eval, AdicCompletion.transitionMap_comp_eval, AdicCompletion.range_eval, AdicCompletion.eval_of, AdicCompletion.eval_lift; inspected relevant signatures, no exact affine-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalCompletion|formalFunctions|formalModuleQuotient",
+   "results": "0 hits: ; inspected relevant signatures, no exact affine-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalCompletionPushforwardLimitAppBijective",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 088B, affine section calculation in the first half of its proof: Affine sections identify a quasi-coherent module completion with its adic completion",
+   "via": [
+    "lem-weil-pbc-formal-completion-pushforward-limit-app-bijective",
+    "lem-weil-pbc-formal-completion-pushforward-limit-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalCompletionAffineSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionAffineSections.lean",
+  "declaration": "AlgebraicGeometry.formalCompletion_affine_sections",
+  "statement": "theorem formalCompletion_affine_sections {Y : Scheme.{u}} (J : Y.IdealSheafData) (H : Y.Modules) [H.IsQuasicoherent] (U : Y.Opens) (hU : IsAffineOpen U) : let R := Γ(Y, U) let I := J.ideal ⟨U, hU⟩ let M := Γ(H, U) let S := formalCompletionSystem J H let E := SheafOfModules.evaluation Y.ringCatSheaf (op U) ∃ q : ∀ n : ℕ, ModuleCat.of R (M ⧸ (I ^ (n + 1) • (⊤ : Submodule R M))) ≅ E.obj (S.obj (op n)), (∀ n : ℕ, ModuleCat.ofHom (Submodule.mkQ (I ^ (n + 1) • (⊤ : Submodule R M))) ≫ (q n).hom = E.map (formalModuleQuotientπ J (n + 1) H)) ∧ ∃ e : ModuleCat.of R (AdicCompletion I M) ≅ E.obj (limit S), ∀ n : ℕ, e.hom ≫ E.map (limit.π S (op n)) = ModuleCat.ofHom (AdicCompletion.eval I M (n + 1)) ≫ (q n).hom",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T062531-L-735837",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T062531-L-735837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

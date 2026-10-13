@@ -9,8 +9,9 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
-import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.FormalCompletionAffineSections
+import Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 @[expose] public section
 
@@ -20,6 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine section comparison is bijective by the formal functions theorem.
 Source: Stacks Project, Theorem 02OC and Lemma 088B.
 (blueprint: lem-weil-pbc-formal-completion-pushforward-limit-app-bijective)
@@ -56,6 +59,42 @@ theorem formalCompletion_pushforward_limit_app_bijective {X Y : Scheme.{u}} [IsN
         κ.app (op n) = (Scheme.Modules.pushforward f).map
           (formalModuleQuotientπ (J.comap f) (n + 1) F.obj))
     (U : Y.Opens) (hU : IsAffineOpen U) :
-    Function.Bijective ((lim.map κ).app U) := by sorry
+    Function.Bijective ((lim.map κ).app U) := by
+  let H := (Scheme.Modules.pushforward f).obj F.obj
+  let R := Γ(Y, U)
+  let I := J.ideal ⟨U, hU⟩
+  let M := Γ(H, U)
+  let S := formalCompletionSystem J H
+  let T := formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f
+  let E := SheafOfModules.evaluation Y.ringCatSheaf (op U)
+  have : H.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y H).mp h).1
+  obtain ⟨q, hq, eS, heS⟩ := formalCompletion_affine_sections J H U hU
+  obtain ⟨θ, hθ, eT, heT⟩ := formalFunctions_affine_pushforward_sections J f F U hU
+  have hlevel (n : ℕ) : (q n).hom ≫ E.map (κ.app (op n)) = ModuleCat.ofHom (θ n) := by
+    let π := ModuleCat.ofHom (I ^ (n + 1) • (⊤ : Submodule R M)).mkQ
+    have : Epi π := (ModuleCat.epi_iff_surjective π).mpr
+      (I ^ (n + 1) • (⊤ : Submodule R M)).mkQ_surjective
+    apply (cancel_epi π).1
+    change (ModuleCat.ofHom (I ^ (n + 1) • (⊤ : Submodule R M)).mkQ) ≫
+      (q n).hom ≫ E.map (κ.app (op n)) = _
+    rw [← Category.assoc, hq, ← E.map_comp, hκ, ← hθ]
+    rfl
+  have hcomparison : eS.hom ≫ E.map (lim.map κ) = eT.hom := by
+    apply (isLimitOfPreserves E (limit.isLimit T)).hom_ext
+    intro n
+    obtain ⟨n⟩ := n
+    change (eS.hom ≫ E.map (lim.map κ)) ≫ E.map (limit.π T (op n)) =
+      eT.hom ≫ E.map (limit.π T (op n))
+    have hw : lim.map κ ≫ limit.π T (op n) =
+        limit.π S (op n) ≫ κ.app (op n) := limMap_π κ (op n)
+    rw [Category.assoc, ← E.map_comp, hw, E.map_comp,
+      ← Category.assoc, heS, Category.assoc, hlevel, heT]
+    rfl
+  have hmap : E.map (lim.map κ) = eS.inv ≫ eT.hom := by
+    rw [← hcomparison, Iso.inv_hom_id_assoc]
+  change Function.Bijective (E.map (lim.map κ))
+  rw [hmap]
+  exact (eT.toLinearEquiv.bijective).comp (eS.symm.toLinearEquiv.bijective)
 
 end AlgebraicGeometry

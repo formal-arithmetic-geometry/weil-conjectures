@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-formal-functions-affine-restriction-dictionary",
+ "kind": "statement",
+ "title": "Finite-level affine restriction dictionary for the formal-functions input",
+ "statement": "Let $Y$ be Noetherian, $J$ quasi-coherent ideal sheaf data, $f:X\\to Y$ proper, $F$ coherent, and $U$ affine [def-weil-proper-morphism, def-weil-pbc-coherent-formal-module, pqf-def-coherent]. Put $R=\\Gamma(Y,U)$, $I=J(U)$, $V=f^{-1}U$, $Z=V$ as an open subscheme, $g=(f|_U):Z\\to U\\cong\\operatorname{Spec}R$, $K=(J\\mathcal O_X)|_V$ and $P=F|_V$ [lem-weil-pbc-module-restriction-open-immersion-colimits]. Let $G$ take global sections of modules on $Z$, restricted to scalars $R$ along $g$, and let $E$ evaluate modules on $Y$ over $U$. Then $g$ is proper, $P$ is coherent, $K$ is the comap along $g$ of the ideal sheaf associated with $I$, and there are isomorphisms $a:E(f_*F)\\cong G(P)$ and $b:(P/K^{n+1}P)_n\\mathbin\\circ G\\cong(f_*(F/(J\\mathcal O_X)^{n+1}F))_n\\mathbin\\circ E$ such that $b_n\\circ G(\\pi_n)\\circ a$ equals the original pushforward quotient projection on $U$. This asserts only identifications before taking inverse limits, and no completion or formal-functions conclusion.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 088B, affine reduction before applying Theorem 02OC; Schemes, Tags 01I8 and 01IC; Modules, Tags 01AJ and 01BG"
+ },
+ "proof": [
+  {
+   "text": "The restriction square is cartesian and the affine chart is an isomorphism, so g is proper by stability of properness under base change and composition. Restriction preserves coherence by its local definition, or by quasi-coherence and finite type on the locally Noetherian restricted scheme.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On the affine scheme U.toScheme, compare ideals on the top open using Scheme.IdealSheafData.ext_of_isAffine. The formula ideal_comap_of_isOpenImmersion computes the top ideal of J.comap U.ι as J(U) transported by the restriction ring isomorphism; ofIdealTop_ideal computes the top ideal of the spectrum ideal as I.map (ΓSpecIso R).inv.hom. The isoSpec appTop identity identifies these ring transports. Finally comap_comp and the restriction-square equation V.ι ≫ f = (f ∣_ U) ≫ U.ι identify the two comaps on Z. This is the affine ideal correspondence of Tags 01I8 and 01IC specialized to the given chart; no ideal-product assertion is used here.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pushforward over U evaluates F on f^(-1)U. The restriction top isomorphism identifies these sections with global sections of P. The formula for the affine chart appTop identifies the g-induced R-action, giving a. This uses only the section formula for restriction, not formal functions.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every exponent, use the proved restrictionQuotientIso and restrictionQuotientIso_pi helpers in TorsionControlledFormalRestriction through import all: restriction preserves ideal products, powers and cokernels, and the cokernel comparison is characterized by its quotient projection. Taking sections gives b_n and its displayed equation. The proved restrictionCompletionIso assembles these maps into b; alternatively cancel each quotient epimorphism to prove the transition squares.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-formal-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-torsion-controlled-formal-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 088B, affine reduction before applying Theorem 02OC; Schemes, Tags 01I8 and 01IC; Modules, Tags 01AJ and 01BG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict coherent module ideal power quotient systems to an affine open of a proper morphism base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a proper morphism and its coherent module to an affine open of the base, identifying global sections and the ideal power quotient system before taking inverse limits",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal', AlgebraicGeometry.Scheme.IdealSheafData.map_ideal, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app; inspected relevant signatures, no exact affine-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.isoSpec",
+   "results": "12 hits: AlgebraicGeometry.IsAffineOpen.isoSpec, AlgebraicGeometry.IsAffineOpen.isoSpec_hom, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_fromSpec, AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι, AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_fromSpec_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι_assoc; inspected relevant signatures, no exact affine-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionCompletionIso|restrict.*formal|formal.*restrict",
+   "results": "25 hits: Mathlib/Topology/Maps/Proper/Basic.lean, Mathlib/LinearAlgebra/RootSystem/Base.lean, Mathlib/Analysis/Complex/Conformal.lean, Mathlib/Analysis/Complex/Conformal.lean, Mathlib/Analysis/Complex/Conformal.lean, Mathlib/Analysis/SpecialFunctions/Complex/Analytic.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; inspected relevant signatures, no exact affine-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalCompletionPushforwardLimitAppBijective",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 088B, affine section calculation in the first half of its proof: Finite-level affine restriction dictionary for the formal-functions input",
+   "via": [
+    "lem-weil-pbc-formal-completion-pushforward-limit-app-bijective",
+    "lem-weil-pbc-formal-completion-pushforward-limit-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsAffineRestrictionDictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsAffineRestrictionDictionary.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_affine_restriction_dictionary",
+  "statement": "theorem formalFunctions_affine_restriction_dictionary {X Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (F : CoherentModules X) (U : Y.Opens) (hU : IsAffineOpen U) : let R := Γ(Y, U) let I := J.ideal ⟨U, hU⟩ let V := f ⁻¹ᵁ U let Z := V.toScheme let g := (f ∣_ U) ≫ hU.isoSpec.hom let K := (J.comap f).comap V.ι let P := (Scheme.Modules.restrictFunctor V.ι).obj F.obj let G := RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso R).inv ≫ g.appTop).hom let H := (Scheme.Modules.pushforward f).obj F.obj let T := formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f let E := SheafOfModules.evaluation Y.ringCatSheaf (op U) IsProper g ∧ RingedSpace.IsCoherent Z.toRingedSpace P ∧ K = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso R).inv.hom)).comap g ∧ ∃ a : E.obj H ≅ G.obj P, ∃ b : formalCompletionSystem K P ⋙ G ≅ T ⋙ E, ∀ n : ℕ, a.hom ≫ G.map (formalModuleQuotientπ K (n + 1) P) ≫ b.hom.app (op n) = E.map ((Scheme.Modules.pushforward f).map (formalModuleQuotientπ (J.comap f) (n + 1) F.obj))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T062531-L-735837",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T062531-L-735837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
