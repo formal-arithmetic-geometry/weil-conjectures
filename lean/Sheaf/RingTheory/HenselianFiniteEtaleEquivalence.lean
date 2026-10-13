@@ -7,11 +7,10 @@ module
 
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.Finite
-import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
-import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
-import Sheaf.RingTheory.HenselianEtaleRetraction
-import Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition
-import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
+import Mathlib.RingTheory.Etale.Field
+import Mathlib.RingTheory.TensorProduct.Pi
+import Sheaf.RingTheory.HenselianFiniteEtaleMapBijective
+import Sheaf.RingTheory.HenselianFiniteEtaleFieldLift
 
 /-!
 # Finite étale algebras over a henselian local ring
@@ -71,7 +70,33 @@ theorem isEquivalence_baseChange_residueField_of_henselianLocalRing
     (baseChange.{max u v} R (IsLocalRing.ResidueField R)).IsEquivalence ∧
       ∀ Sbar : CommAlgCat.FiniteEtale.{max u v} (IsLocalRing.ResidueField R),
         ∃ S : CommAlgCat.FiniteEtale.{max u v} R,
-          Nonempty ((baseChange.{max u v} R (IsLocalRing.ResidueField R)).obj S ≅ Sbar) :=
-  sorry
+          Nonempty ((baseChange.{max u v} R (IsLocalRing.ResidueField R)).obj S ≅ Sbar) := by
+  classical
+  let κ := IsLocalRing.ResidueField R
+  let F := baseChange.{max u v} R κ
+  have hsurj : ∀ Sbar : CommAlgCat.FiniteEtale.{max u v} κ,
+      ∃ S : CommAlgCat.FiniteEtale.{max u v} R, Nonempty (F.obj S ≅ Sbar) := by
+    intro Sbar
+    obtain ⟨I, hI, L, hfield, halg, e, hprop⟩ :=
+      (Algebra.Etale.iff_exists_algEquiv_prod (K := κ) (A := Sbar)).mp inferInstance
+    let := hI
+    let := hfield
+    let := halg
+    let : Fintype I := Fintype.ofFinite I
+    have (i : I) : Module.Finite κ (L i) := (hprop i).1
+    have (i : I) : Algebra.IsSeparable κ (L i) := (hprop i).2
+    have hlift (i : I) := exists_finiteEtale_residueField_equiv_of_finite_separable R (L i)
+    choose S hS using hlift
+    let eS (i : I) := (hS i).some
+    refine ⟨.of R (∀ i, S i), ⟨isoMk ?_⟩⟩
+    exact (Algebra.TensorProduct.piRight R κ κ (fun i ↦ S i)).trans
+      ((AlgEquiv.piCongrRight eS).trans e.symm)
+  have : F.Full := ⟨fun {S T} ↦
+    (bijective_baseChange_residueField_map_of_henselianLocalRing R S T).2⟩
+  have : F.Faithful := ⟨fun {S T} ↦
+    (bijective_baseChange_residueField_map_of_henselianLocalRing R S T).1⟩
+  have : F.EssSurj := ⟨hsurj⟩
+  have hequiv : F.IsEquivalence := {}
+  exact ⟨hequiv, hsurj⟩
 
 end CommAlgCat.FiniteEtale

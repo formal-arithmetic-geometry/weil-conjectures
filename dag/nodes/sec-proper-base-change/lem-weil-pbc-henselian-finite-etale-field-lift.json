@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-henselian-finite-etale-field-lift",
+ "kind": "statement",
+ "title": "Lifting one finite separable residue extension",
+ "statement": "Let R be a henselian local ring [def-weil-pbc-henselian-terminology] with residue field kappa, and let L be a finite separable field extension of kappa [def-pc-field-extension], [def-weil-pbc-separable-algebraic-extension]. There exists a finite etale R-algebra S [def-weil-etale-morphism] and a kappa-algebra isomorphism $\\kappa\\otimes_R S\\cong L$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GK, field-lifting paragraph (DAG step 8); https://stacks.math.columbia.edu/tag/04GK"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-etale-morphism",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "For a local finite etale R-algebra A, its maximal ideal n contracts to m by [lem-weil-pbc-finite-algebra-local-radical]. Since localization of A at n is A itself, [lem-weil-pbc-etale-prime-generates-maximal] gives mA = n. Thus its reduction is its residue field. This observation applies to the finite local factor selected in the next step; no preliminary decomposition of arbitrary finite etale algebras is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-etale-prime-generates-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GK, using Tag 00U4 for a finite local etale factor"
+   }
+  },
+  {
+   "text": "(Lifting one finite separable extension.) Let $\\kappa'/\\kappa$ be a finite separable field extension. Since $R$ is local, $\\kappa(\\mathfrak m)=R_{\\mathfrak m}/\\mathfrak mR_{\\mathfrak m}=R/\\mathfrak m=\\kappa$. By Stacks 00UD [lem-weil-pbc-etale-ring-map-prescribed-residue-field] there are $R\\to S$ with $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ etale, a prime $\\mathfrak q$ of $S$ over $\\mathfrak m$ and a $\\kappa$-isomorphism $\\kappa(\\mathfrak q)\\cong\\kappa'$. $S$ is of finite type over $R$ [lem-weil-pbc-etale-algebra-finite-presentation-localization] (1), so by Stacks 04GJ [lem-weil-pbc-henselian-finite-type-product-decomposition] $S\\cong A_1\\times\\cdots\\times A_n\\times B$ with $A_i$ local and finite over $R$ and $R\\to B$ not quasi-finite at any prime of $B$ over $\\mathfrak m$. Each factor is a localization of $S$ at an idempotent, hence etale over $R$ [lem-weil-pbc-etale-algebra-finite-presentation-localization] (2); in particular $R\\to B$ is quasi-finite at every prime of $B$ [lem-weil-pbc-etale-ring-map-quasi-finite] ('since $R\\to S$ is quasi-finite'), so $B$ has no prime over $\\mathfrak m$. The primes of a finite product are those of the factors, so $\\mathfrak q$ comes from a prime of some $A_i$ over $\\mathfrak m$, which by the preceding local-factor observation is its maximal ideal $\\mathfrak n_i=\\mathfrak mA_i$; thus $S_{\\mathfrak q}=A_i$. So $A_i$ is a finite etale $R$-algebra with $F(A_i)=A_i/\\mathfrak mA_i=\\kappa(\\mathfrak q)\\cong\\kappa'$ as $\\kappa$-algebras.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-prescribed-residue-field",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-etale-ring-map-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42492-42503 (Lemma 00UD, 'by part (1)' = Lemma 04GJ, Lemma 00U5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-ring-map-prescribed-residue-field",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-etale-ring-map-quasi-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04GK (lemma-henselian-cat-finite-etale, line 42450) and its proof (lines 42457-42505)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite separable residue extensions lift to finite etale algebras",
+   "results": "HTTP service returned Internal Server Error; unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite separable extension of residue field lifts to finite etale algebra",
+   "results": "HenselianLocalRing.TFAE and residue separability instances; no theorem with the required conclusion. Algebra.exists_etale_residueField_equiv is the existing prescribed-residue theorem, but does not assert module finiteness.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg henselian / etale in Mathlib/RingTheory/Etale and project RingTheory modules",
+   "results": "No morphism lifting or finite-etale field lifting statement found. Existing retraction and finite-type decomposition signatures read; neither states this result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselianFiniteEtaleEquivalence",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+   "place": "step 8",
+   "via": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianFiniteEtaleFieldLift",
+  "file": "lean/Sheaf/RingTheory/HenselianFiniteEtaleFieldLift.lean",
+  "declaration": "CommAlgCat.FiniteEtale.exists_finiteEtale_residueField_equiv_of_finite_separable",
+  "statement": "theorem exists_finiteEtale_residueField_equiv_of_finite_separable (R : Type u) [CommRing R] [HenselianLocalRing R] (L : Type (max u v)) [Field L] [Algebra (IsLocalRing.ResidueField R) L] [Module.Finite (IsLocalRing.ResidueField R) L] [Algebra.IsSeparable (IsLocalRing.ResidueField R) L] : ∃ S : CommAlgCat.FiniteEtale.{max u v} R, Nonempty ((IsLocalRing.ResidueField R ⊗[R] S) ≃ₐ[IsLocalRing.ResidueField R] L)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T033012-L-3679782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T033012-L-3679782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "id": "lem-weil-pbc-henselian-finite-etale-map-bijective",
+ "kind": "statement",
+ "title": "Reduction is bijective on morphisms of finite etale algebras",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a henselian local ring [def-weil-pbc-henselian-terminology] and S,T finite etale R-algebras [def-weil-etale-morphism]. Reduction gives a bijection from R-algebra homomorphisms S to T to kappa-algebra homomorphisms $\\kappa\\otimes_R S$ to $\\kappa\\otimes_R T$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GK, full-faithfulness paragraphs (DAG steps 1-7)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "(The functor.) Write $\\mathcal C$ for the category of finite etale $R$-algebras and $\\mathcal D$ for that of finite etale $\\kappa$-algebras, $F:\\mathcal C\\to\\mathcal D$, $F(S)=S/\\mathfrak mS$, $F(\\varphi)=\\overline\\varphi=\\varphi\\bmod\\mathfrak m$. $F$ is well defined: $S/\\mathfrak mS$ is generated as a $\\kappa$-vector space by the images of $R$-module generators of $S$, so it is finite over $\\kappa=R/\\mathfrak m$, and $\\operatorname{Spec}(S/\\mathfrak mS)\\to\\operatorname{Spec}(R/\\mathfrak m)$ is etale by [lem-weil-pbc-etale-quotient-base-change] (with $I=\\mathfrak m$). $F$ preserves finite products: $(S_1\\times\\cdots\\times S_r)/\\mathfrak m(S_1\\times\\cdots\\times S_r)=\\prod_jS_j/\\mathfrak mS_j$.",
+   "uses": [
+    "lem-weil-pbc-etale-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), the functor of the statement (line 42458)"
+   }
+  },
+  {
+   "text": "(Objects of $\\mathcal C$ split into local pieces with field reductions.) Let $S$ be a finite etale $R$-algebra. By [lem-weil-pbc-henselian-etale-retraction] (Stacks 04GG (1)$\\Rightarrow$(8)) $R$ satisfies the hypothesis of [lem-weil-pbc-etale-retraction-finite-product-local] (04GG (8)$\\Rightarrow$(10)), so $S\\cong A_1\\times\\cdots\\times A_n$ ($n\\ge0$) with $A_i$ local; this is the decomposition the source takes from 04GG (10) (or 04GJ). Each $A_i\\cong S_{e_i}$ for the idempotent $e_i$ of the $i$-th factor, so $A_i$ is a finitely generated $R$-module (a quotient of $S$) and $\\operatorname{Spec}A_i\\to\\operatorname{Spec}R$ is etale [lem-weil-pbc-etale-algebra-finite-presentation-localization] (2). Let $\\mathfrak n_i$ be the maximal ideal of $A_i$. Since $A_i$ is finite over the local ring $R$, $\\mathfrak n_i\\cap R=\\mathfrak m$ [lem-weil-pbc-finite-algebra-local-radical]. By Stacks 00U4 (1) [lem-weil-pbc-etale-prime-generates-maximal], $\\mathfrak m(A_i)_{\\mathfrak n_i}=\\mathfrak n_i(A_i)_{\\mathfrak n_i}$; as $A_i$ is local, $(A_i)_{\\mathfrak n_i}=A_i$, so $\\mathfrak mA_i=\\mathfrak n_i$ and $A_i/\\mathfrak mA_i=\\kappa(\\mathfrak n_i)$ is a field, finite separable over $\\kappa$ by 00U4 (2) [lem-weil-pbc-etale-algebra-residue-field-separable]. Hence $F(S)\\cong\\prod_iA_i/\\mathfrak mA_i$ is the decomposition of $F(S)$ into fields, and the only prime of $A_i$ containing $\\mathfrak mA_i$ is $\\mathfrak n_i$. (The source says '$A_i$ local and finite etale over $S$'; it means over $R$.)",
+   "uses": [
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-etale-retraction-finite-product-local",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42460-42469 (Lemma 04GG part (10), Lemma 00U4)"
+   }
+  },
+  {
+   "text": "(Objects of $\\mathcal D$; the canonical decomposition.) A finite etale $\\kappa$-algebra is isomorphic to a finite product of fields, each a finite separable extension of $\\kappa$ [lem-weil-pbc-etale-algebra-over-field-product]. A local ring and a field have no idempotents other than $0,1$. For a ring $T\\neq0$ whose only idempotents are $0,1$ and a finite product $P=P_1\\times\\cdots\\times P_n$, every ring map $P\\to T$ factors through exactly one projection $P\\to P_i$: the images of the standard idempotents $\\epsilon_1,\\dots,\\epsilon_n$ are orthogonal idempotents of $T$ with sum $1$, so exactly one of them is $1$ and the others are $0$. Consequently the factors of such a decomposition are indexed by the primitive idempotents, with unique factor isomorphisms compatible with the projections (abstract factors may have nontrivial automorphisms), and $\\operatorname{Hom}(\\prod_iP_i,\\prod_jT_j)=\\prod_j\\coprod_i\\operatorname{Hom}(P_i,T_j)$ for rings $T_j\\ne0$ without nontrivial idempotents, both for $R$-algebras and for $\\kappa$-algebras. By step 2 these decompositions of $S$ and of $F(S)$ correspond under $F$, and by step 1 $F$ is compatible with the identification of Hom sets. So $F$ is fully faithful as soon as $\\operatorname{Hom}_R(S_1,S_2)\\to\\operatorname{Hom}_\\kappa(\\kappa_1,\\kappa_2)$, $\\varphi\\mapsto\\overline\\varphi$, is bijective for finite etale $S_1,S_2$ with $\\kappa_i=S_i/\\mathfrak mS_i$ fields (equivalently, by step 2, $S_1,S_2$ local).",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42470-42472 ('every object of C and D decomposes canonically into irreducible pieces which correspond via the given functor'); the reduction is written out here"
+   }
+  },
+  {
+   "text": "(The tensor product.) Let $S_1,S_2$ be finite etale over $R$ with $\\kappa_1,\\kappa_2$ fields. $T=S_1\\otimes_RS_2$ is a finitely generated $R$-module (generated by the $x\\otimes y$ for generators $x$, $y$ of $S_1$, $S_2$); $\\operatorname{Spec}T\\to\\operatorname{Spec}S_2$ is etale by base change [lem-weil-pbc-etale-ring-base-change], hence $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ is etale as a composite [lem-weil-pbc-etale-composition-cancellation] (2). By step 2, $T=A_1\\times\\cdots\\times A_n$ with $A_i$ local finite etale over $R$ and $\\overline A_i=A_i/\\mathfrak mA_i$ fields, and $T/\\mathfrak mT=(S_1\\otimes_RS_2)\\otimes_R\\kappa\\cong\\kappa_1\\otimes_\\kappa\\kappa_2\\cong\\prod_i\\overline A_i$. Write $p_i:T\\to A_i$ for the projections and $j_i:S_2\\to A_i$, $s\\mapsto p_i(1\\otimes s)$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42473-42480"
+   }
+  },
+  {
+   "text": "($\\operatorname{Hom}_R(S_1,S_2)$ is the set $I=\\{i: j_i\\text{ is an isomorphism}\\}$.) For an $R$-algebra map $\\varphi:S_1\\to S_2$ let $\\mu_\\varphi:T\\to S_2$, $x\\otimes y\\mapsto\\varphi(x)y$ ('$\\varphi\\times1$'); it is surjective ($\\mu_\\varphi(1\\otimes y)=y$), and $S_2$ is local, so by step 3 $\\mu_\\varphi=\\pi\\circ p_i$ for exactly one $i=i(\\varphi)$ and a surjection $\\pi:A_i\\to S_2$ with $\\pi\\circ j_i=\\mathrm{id}_{S_2}$. Then $A_i=j_i(S_2)\\oplus K$ as $S_2$-modules, $K=\\ker\\pi$, and $K$ is a finitely generated $R$-module (a direct summand of $A_i$). Reducing modulo $\\mathfrak m$, $\\overline A_i=\\kappa_2\\oplus K/\\mathfrak mK$ and $\\overline\\pi:\\overline A_i\\to\\kappa_2$ is a surjective ring map of fields, hence injective, so $K/\\mathfrak mK=0$, i.e. $K=\\mathfrak mK$, and $K=0$ by Nakayama [lem-weil-pbc-nakayama-jacobson] ($\\mathfrak m$ is the Jacobson radical of $R$). So $\\pi$ is an isomorphism, $j_i=\\pi^{-1}$ and $i(\\varphi)\\in I$. Conversely for $i\\in I$ put $\\varphi_i=j_i^{-1}\\circ p_i\\circ(x\\mapsto x\\otimes1)$. Then $\\varphi=\\varphi_{i(\\varphi)}$ (since $\\mu_\\varphi=j_{i}^{-1}\\circ p_i$ and $\\varphi(x)=\\mu_\\varphi(x\\otimes1)$), and $i(\\varphi_i)=i$ (the $R$-algebra maps $\\mu_{\\varphi_i}$ and $j_i^{-1}\\circ p_i$ agree on all $x\\otimes1$ and $1\\otimes y$, hence are equal, and the latter factors through $p_i$). So $\\varphi\\mapsto i(\\varphi)$ is a bijection $\\operatorname{Hom}_R(S_1,S_2)\\to I$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42480-42486 ('the map phi x 1 : S_1 (x)_R S_2 -> S_2 is surjective, and hence is equal to projection onto one of the factors A_i'; why that projection is an isomorphism is written out here)"
+   }
+  },
+  {
+   "text": "(The same over $\\kappa$.) In exactly the same way, with $T/\\mathfrak mT=\\kappa_1\\otimes_\\kappa\\kappa_2=\\prod_i\\overline A_i$, projections $\\overline p_i$ and $\\overline j_i:\\kappa_2\\to\\overline A_i$, a $\\kappa$-algebra map $\\psi:\\kappa_1\\to\\kappa_2$ gives the surjection $\\mu_\\psi:T/\\mathfrak mT\\to\\kappa_2$, which factors through exactly one $\\overline p_i$ (step 3) by a surjection of fields $\\overline A_i\\to\\kappa_2$, automatically an isomorphism inverse to $\\overline j_i$; and $\\psi\\mapsto i(\\psi)$ is a bijection $\\operatorname{Hom}_\\kappa(\\kappa_1,\\kappa_2)\\to I'=\\{i:\\overline j_i\\text{ is an isomorphism}\\}$, with inverse $i\\mapsto\\overline j_i^{-1}\\circ\\overline p_i\\circ(x\\mapsto x\\otimes1)$. Moreover $\\mu_{\\overline\\varphi}=\\mu_\\varphi\\bmod\\mathfrak m$, so $i(\\overline\\varphi)=i(\\varphi)$ for every $\\varphi\\in\\operatorname{Hom}_R(S_1,S_2)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42486-42489 ('in exactly the same way')"
+   }
+  },
+  {
+   "text": "($I=I'$, hence full faithfulness.) If $j_i$ is an isomorphism so is $\\overline j_i=j_i\\bmod\\mathfrak m$. Conversely let $\\overline j_i$ be an isomorphism. $A_i$ is a finitely generated $R$-module and $A_i=j_i(S_2)+\\mathfrak mA_i$, so $j_i$ is surjective by Nakayama [lem-weil-pbc-nakayama-jacobson] (applied to $A_i/j_i(S_2)$). $A_i$ is flat over $R$ [lem-weil-pbc-etale-algebra-flat] and finitely generated, hence free [lem-weil-pbc-finite-flat-local-free], so $j_i$ splits $R$-linearly: $S_2\\cong A_i\\oplus K'$ with $K'=\\ker j_i$ finitely generated; modulo $\\mathfrak m$, $\\kappa_2\\cong\\overline A_i\\oplus K'/\\mathfrak mK'$ with $\\overline j_i$ bijective, so $K'/\\mathfrak mK'=0$ and $K'=0$ by Nakayama. So $I=I'$, and by steps 5 and 6 the map $\\varphi\\mapsto\\overline\\varphi$ is the composite of bijections $\\operatorname{Hom}_R(S_1,S_2)\\to I=I'\\to\\operatorname{Hom}_\\kappa(\\kappa_1,\\kappa_2)$. With step 3, $F$ is fully faithful.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 04GK (lemma-henselian-cat-finite-etale, lines 42457-42505), lines 42489-42491 ('By the discussion above these sets of indices match'; the matching is written out here)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-quotient-base-change",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-retraction-finite-product-local",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-finite-flat-local-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04GK (lemma-henselian-cat-finite-etale, line 42450) and its proof (lines 42457-42505)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field base change on finite etale algebras over henselian local rings is fully faithful",
+   "results": "HTTP service returned Internal Server Error; unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale algebras over a henselian local ring equivalent to algebras over its residue field",
+   "results": "HenselianLocalRing.TFAE and residue separability instances; no theorem with the required conclusion. Algebra.exists_etale_residueField_equiv is the existing prescribed-residue theorem, but does not assert module finiteness.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg henselian / etale in Mathlib/RingTheory/Etale and project RingTheory modules",
+   "results": "No morphism lifting or finite-etale field lifting statement found. Existing retraction and finite-type decomposition signatures read; neither states this result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselianFiniteEtaleEquivalence",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+   "place": "steps 1-7",
+   "via": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianFiniteEtaleMapBijective",
+  "file": "lean/Sheaf/RingTheory/HenselianFiniteEtaleMapBijective.lean",
+  "declaration": "CommAlgCat.FiniteEtale.bijective_baseChange_residueField_map_of_henselianLocalRing",
+  "statement": "theorem bijective_baseChange_residueField_map_of_henselianLocalRing (R : Type u) [CommRing R] [HenselianLocalRing R] (S T : CommAlgCat.FiniteEtale.{max u v} R) : Function.Bijective ((baseChange.{max u v} R (IsLocalRing.ResidueField R)).map : (S ⟶ T) → ((baseChange.{max u v} R (IsLocalRing.ResidueField R)).obj S ⟶ (baseChange.{max u v} R (IsLocalRing.ResidueField R)).obj T))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T033012-L-3679782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T033012-L-3679782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
