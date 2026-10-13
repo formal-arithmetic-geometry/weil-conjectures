@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionIso
+public import WeilConjectures.SixFunctors.ProEtale.Derived.TensorSheaf
 
 /-!
 # Derived extension of scalars as a tensor product
@@ -60,23 +61,6 @@ local notation "𝓡" =>
 
 /-- The sheaf `S_X` of `R`-modules underlying the unit sheaf of `S`-modules. -/
 local notation "𝓢" => sheafRestrictScalarsUnit R S X
-
-/-- Tensoring with a fixed pro-étale sheaf sends quasi-isomorphisms between K-flat complexes to
-quasi-isomorphisms. -/
-instance preservesKFlatQuasiIso_tensorRight
-    (c : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
-    (tensorRight c).PreservesKFlatQuasiIso where
-  quasiIso_map {K L} hK hL f _ := by
-    have : MorphismProperty.localizerMorphismKFlat
-        (quasiIso (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) (.up ℤ)) |>.HasLeftResolutions :=
-      fun Y ↦ by
-        obtain ⟨P, π, hπ, -, hP⟩ := CochainComplex.exists_quasiIso_flat_kFlat Y
-        exact ⟨{ X₁ := ⟨P, hP⟩, w := π, hw := (mem_quasiIso_iff _).2 hπ }⟩
-    have h₁ : quasiIso _ (.up ℤ) (f ▷ (single _ (.up ℤ) 0).obj c) :=
-      (quasiIso _ (.up ℤ)).whiskerRight_of_kFlat f ((mem_quasiIso_iff _).2 inferInstance) hK hL _
-    exact (mem_quasiIso_iff _).1 (((quasiIso _ (.up ℤ)).arrow_mk_iso_iff
-      (Arrow.isoOfNatIso (CochainComplex.map₂HomologicalComplexFlipObjSingleIso
-        (curriedTensor _) c) f)).1 h₁)
 
 /-- Extension followed by restriction of scalars sends quasi-isomorphisms between K-flat
 complexes to quasi-isomorphisms. -/

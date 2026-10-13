@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Projection
+public import WeilConjectures.SixFunctors.ProEtale.Derived.TensorSheaf
 
 /-!
 # The derived projection map and the derived pullback
@@ -56,15 +57,11 @@ variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 /-- The comparison `g^*(P ⊗ S_Y) ⟶ g^* P ⊗ S_Z` of pro-étale sheaves: the comonoidal structure
 of the pullback followed by the identification `g^* S_Y ≅ S_Z` of
 `AlgebraicGeometry.ProEtale.upperStarSheafRestrictScalarsUnitMap`. -/
-noncomputable def tensorRestrictScalarsUnitUpperStarMap :
+noncomputable abbrev tensorRestrictScalarsUnitUpperStarMap :
     tensorRight (sheafRestrictScalarsUnit R S Y) ⋙ ProEtale.upperStar (ModuleCat.{u + 1} R) g ⟶
       ProEtale.upperStar (ModuleCat.{u + 1} R) g ⋙
-        tensorRight (sheafRestrictScalarsUnit R S Z) where
-  app P := δ (ProEtale.upperStar (ModuleCat.{u + 1} R) g) P (sheafRestrictScalarsUnit R S Y) ≫
-    (_ ◁ upperStarSheafRestrictScalarsUnitMap R S g)
-  naturality P Q f := by
-    dsimp
-    rw [← δ_natural_left_assoc, Category.assoc, whisker_exchange]
+        tensorRight (sheafRestrictScalarsUnit R S Z) :=
+  tensorRightUpperStarMap g (upperStarSheafRestrictScalarsUnitMap R S g)
 
 /-- The transposes `S ⊗_R (P ⊗ S_Y) ⟶ S ⊗_R P` of the projection maps are compatible with the
 pullback: the square
@@ -94,7 +91,7 @@ lemma sheafExtendScalarsProjectionTranspose_upperStar
         (sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
           ((sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P) := by
     rw [sheafExtendScalarsProjection_upperStar]
-    simp [tensorRestrictScalarsUnitUpperStarMap]
+    simp [tensorRightUpperStarMap]
   have hU : (sheafExtendScalars (algebraMap R S) Z).map
         ((upperStarRestrictScalarsMap R S g).app ((sheafExtendScalars (algebraMap R S) Y).obj P)) ≫
       (sheafExtendScalarsAdjunction (algebraMap R S) Z).counit.app _ =
@@ -119,93 +116,21 @@ section Derived
 
 variable [IsNoetherianRing R]
 
-/-- The counit of `L(- ⊗ S_Y) ⋙ Lg^*`: the counit of `L(- ⊗ S_Y)` followed by the counit of
-`Lg^*`. -/
-noncomputable def leftDerivedTensorRestrictScalarsUnitUpperStarCounit :
-    DerivedCategory.Qh ⋙ L(tensorRight (sheafRestrictScalarsUnit R S Y)) ⋙
-        L((g)^*[ModuleCat.{u + 1} R]) ⟶
-      (tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ) ⋙
-        (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
-  Functor.whiskerRight (tensorRight (sheafRestrictScalarsUnit R S Y)).leftDerivedFunctorCounit
-      L((g)^*[ModuleCat.{u + 1} R]) ≫
-    Functor.whiskerLeft
-      ((tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ))
-      (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit
-
-/-- The counit of `Lg^* ⋙ L(- ⊗ S_Z)`: the counit of `Lg^*` followed by the counit of
-`L(- ⊗ S_Z)`. -/
-noncomputable def leftDerivedUpperStarTensorRestrictScalarsUnitCounit :
-    DerivedCategory.Qh ⋙ L((g)^*[ModuleCat.{u + 1} R]) ⋙
-        L(tensorRight (sheafRestrictScalarsUnit R S Z)) ⟶
-      (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ) ⋙
-        (tensorRight (sheafRestrictScalarsUnit R S Z)).mapHomotopyCategory (.up ℤ) ⋙
-          DerivedCategory.Qh :=
-  Functor.whiskerRight (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit
-      L(tensorRight (sheafRestrictScalarsUnit R S Z)) ≫
-    Functor.whiskerLeft ((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ))
-      (tensorRight (sheafRestrictScalarsUnit R S Z)).leftDerivedFunctorCounit
-
-omit [IsNoetherianRing R] in
-/-- On a complex whose pullback by `g` is K-flat, the counit of `L(- ⊗ S_Z)` at the pullback is
-an isomorphism. -/
-lemma isIso_leftDerivedFunctorCounit_tensorRight_app_mapHomotopyCategory_obj
-    (K : CochainComplex (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R)) ℤ)
-    (hK : kFlatUpperStar (ModuleCat.{u + 1} R) g ((HomotopyCategory.quotient _ _).obj K)) :
-    IsIso ((tensorRight (sheafRestrictScalarsUnit R S Z)).leftDerivedFunctorCounit.app
-      (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ _).obj K))) := by
-  have hK₀ := kFlat_mapHomologicalComplex_obj_of_kFlatUpperStar _ g hK
-  have := (tensorRight (sheafRestrictScalarsUnit R S Z)).isIso_leftDerivedFunctorCounit_app_of_kFlat
-    _ hK₀
-  exact (NatTrans.isIso_app_iff_of_iso _
-    (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategoryFactors (.up ℤ)).app K)).2 this
-
-instance isLeftDerivedFunctor_leftDerivedUpperStarTensorRestrictScalarsUnit :
-    (L((g)^*[ModuleCat.{u + 1} R]) ⋙
-      L(tensorRight (sheafRestrictScalarsUnit R S Z))).IsLeftDerivedFunctor
-      (leftDerivedUpperStarTensorRestrictScalarsUnitCounit R S g)
-      (HomotopyCategory.quasiIso _ (.up ℤ)) := by
-  refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
-    (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar (ModuleCat.{u + 1} R) g)) _
-    (fun K ↦ ?_)
-  have := isIso_leftDerivedFunctorCounit_tensorRight_app_mapHomotopyCategory_obj R S g K.obj.as
-    K.property
-  simp only [leftDerivedUpperStarTensorRestrictScalarsUnitCounit, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  exact IsIso.comp_isIso' inferInstance this
-
 /-- The comparison `g^*(P ⊗ S_Y) ⟶ g^* P ⊗ S_Z` on homotopy categories. -/
-noncomputable def mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap :
+noncomputable abbrev mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap :
     (tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ) ⋙
         (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ) ⟶
       (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ) ⋙
         (tensorRight (sheafRestrictScalarsUnit R S Z)).mapHomotopyCategory (.up ℤ) :=
-  (Functor.mapHomotopyCategoryCompIso (Iso.refl _) _).hom ≫
-    NatTrans.mapHomotopyCategory (tensorRestrictScalarsUnitUpperStarMap R S g) (.up ℤ) ≫
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl _) _).inv
+  mapHomotopyCategoryTensorRightUpperStarMap g (upperStarSheafRestrictScalarsUnitMap R S g)
 
 /-- The comparison `Lg^* (K ⊗ᴸ S_Y) ⟶ Lg^* K ⊗ᴸ S_Z` induced by the comparison
 `g^*(P ⊗ S_Y) ⟶ g^* P ⊗ S_Z` of sheaves, where `- ⊗ᴸ S_Y` is the left derived functor of
-`- ⊗ S_Y`. -/
-noncomputable def leftDerivedTensorRestrictScalarsUnitUpperStarMap :
+`- ⊗ S_Y` (`AlgebraicGeometry.ProEtale.leftDerivedTensorRightUpperStarMap`). -/
+noncomputable abbrev leftDerivedTensorRestrictScalarsUnitUpperStarMap :
     L(tensorRight (sheafRestrictScalarsUnit R S Y)) ⋙ L((g)^*[ModuleCat.{u + 1} R]) ⟶
       L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(tensorRight (sheafRestrictScalarsUnit R S Z)) :=
-  Functor.leftDerivedNatTrans _ _ (leftDerivedTensorRestrictScalarsUnitUpperStarCounit R S g)
-    (leftDerivedUpperStarTensorRestrictScalarsUnitCounit R S g)
-    (HomotopyCategory.quasiIso _ (.up ℤ))
-    (Functor.whiskerRight (mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g)
-      DerivedCategory.Qh)
-
-/-- The defining property of `leftDerivedTensorRestrictScalarsUnitUpperStarMap`. -/
-@[reassoc]
-lemma leftDerivedTensorRestrictScalarsUnitUpperStarMap_app_comp_counit
-    (K : HomotopyCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R)) (.up ℤ)) :
-    (leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g).app (DerivedCategory.Qh.obj K) ≫
-        (leftDerivedUpperStarTensorRestrictScalarsUnitCounit R S g).app K =
-      (leftDerivedTensorRestrictScalarsUnitUpperStarCounit R S g).app K ≫
-        DerivedCategory.Qh.map
-          ((mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g).app K) :=
-  Functor.leftDerivedNatTrans_app _ _ _ _ _ _ K
+  leftDerivedTensorRightUpperStarMap g (upperStarSheafRestrictScalarsUnitMap R S g)
 
 omit [IsNoetherianRing R] in
 /-- The isomorphism `Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))` has identity inverse
@@ -241,7 +166,7 @@ lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar
         (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K) := by
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [mapHomotopyCategorySheafExtendScalarsCompUpperStarIso,
-    mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap, Iso.trans_hom, Iso.symm_hom,
+    mapHomotopyCategoryTensorRightUpperStarMap, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
     mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp, Category.comp_id,
     NatTrans.mapHomotopyCategory, HomotopyCategory.quotient_obj_as,
@@ -294,7 +219,7 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
   have hZ := leftDerivedSheafExtendScalarsProjection_transpose R S Z
     (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K)
   have ha := congrArg (Ψ[Z]).map
-    (leftDerivedTensorRestrictScalarsUnitUpperStarMap_app_comp_counit R S g K)
+    (leftDerivedTensorRightUpperStarMap_app_comp_counit g (upperStarSheafRestrictScalarsUnitMap R S g) K)
   have hS := (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit.naturality
     ((Functor.mapHomotopyCategoryCompIso
         (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
@@ -309,8 +234,8 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
   have hH := congrArg DerivedCategory.Qh.map
     (mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar R S g K)
   simp only [leftDerivedSheafExtendScalarsUpperStarCounit,
-    leftDerivedUpperStarSheafExtendScalarsCounit, leftDerivedTensorRestrictScalarsUnitUpperStarCounit,
-    leftDerivedUpperStarTensorRestrictScalarsUnitCounit, NatTrans.comp_app,
+    leftDerivedUpperStarSheafExtendScalarsCounit, leftDerivedTensorRightUpperStarCounit,
+    leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Functor.comp_map,
     Functor.comp_obj, Category.assoc] at hα₁ hα₂ hY hZ ha hS hϑ hΨ hn hH ⊢
   rw [hα₁, reassoc_of% hY, reassoc_of% hS, hH]
