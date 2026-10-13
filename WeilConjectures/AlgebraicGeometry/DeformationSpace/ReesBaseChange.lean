@@ -14,7 +14,18 @@ public import Mathlib.RingTheory.RingHom.Flat
 /-!
 # Base change of extended Rees algebras of regular ideals
 
-scratch
+Let `ψ : C[X₁, …, X_d] ⟶ A` be flat and `I = (ψ(X₁), …, ψ(X_d))`, so that `I` is the ideal of a
+section in étale coordinates. For a ring map `a : A ⟶ A'` compatible with a flat
+`ψ' : C'[X₁, …, X_d] ⟶ A'` over some `C ⟶ C'`, the extended Rees algebra commutes with base
+change: `A'[t, (I A') t⁻¹] = A' ⊗_A A[t, I t⁻¹]`, although `a` need not be flat. This is the
+ring-theoretic input of blueprint `sk-lem-geometry` (5). The proof pastes flat base change of
+extended Rees algebras with the base change of the origin chart `C[X][t, (X) t⁻¹] ≅ C[t][U]`.
+
+## Main statements
+
+- `Ideal.isPushout_extendedReesAlgebraMap_mvPolynomialOrigin`
+- `Ideal.isPushout_extendedReesAlgebraMap_map_mvPolynomialOrigin`
+- `Ideal.isPushout_extendedReesAlgebraMap_top`
 -/
 
 @[expose] public section
@@ -83,7 +94,8 @@ theorem isPushout_extendedReesAlgebraMap_mvPolynomialOrigin :
     exact CommRingCat.isPushout_of_isPushout C C' (MvPolynomial σ C) (MvPolynomial σ C')
   -- `C' ⊗_C C[t][U_i] = C'[t][U_i]`
   have q₁ : IsPushout (CommRingCat.ofHom κ) (CommRingCat.ofHom (Polynomial.C (R := C)))
-      (CommRingCat.ofHom (Polynomial.C (R := C'))) (CommRingCat.ofHom (Polynomial.mapRingHom κ)) := by
+      (CommRingCat.ofHom (Polynomial.C (R := C')))
+      (CommRingCat.ofHom (Polynomial.mapRingHom κ)) := by
     let := Polynomial.algebra (R := C) (A := C')
     exact CommRingCat.isPushout_of_isPushout C C' C[X] C'[X]
   have q₂ : IsPushout (CommRingCat.ofHom (Polynomial.mapRingHom κ))
@@ -191,7 +203,8 @@ theorem isPushout_extendedReesAlgebraMap_map_mvPolynomialOrigin (hψ : ψ.Flat) 
   ext1
   rw [CommRingCat.hom_comp, CommRingCat.hom_comp, CommRingCat.hom_ofHom, CommRingCat.hom_ofHom,
     CommRingCat.hom_ofHom, CommRingCat.hom_ofHom]
-  exact RingHom.ext fun x ↦ (extendedReesAlgebraMap_algebraMap _ _ (map_map_mvPolynomialOrigin κ ψ ψ' a h).le x).symm
+  exact RingHom.ext fun x ↦
+    (extendedReesAlgebraMap_algebraMap _ _ (map_map_mvPolynomialOrigin κ ψ ψ' a h).le x).symm
 
 /-- The extended Rees algebra of the unit ideal, `A[t, A t⁻¹] = A[t, t⁻¹]`, commutes with
 arbitrary base change. -/
