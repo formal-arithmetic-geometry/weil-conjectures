@@ -1,0 +1,142 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90)"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An internal Hom from a tensor product of complexes is the iterated internal Hom degreewise",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.tensorHom",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasTensorOfHasTensorX",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.monoidalCategoryStruct",
+     "HomologicalComplex.HasGoodTensor₂₃"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact degreewise comparison; generic monoidal closed and tensor constructions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.MonoidalClosed",
+     "CategoryTheory.MonoidalClosed.closed",
+     "CategoryTheory.MonoidalClosed.mk",
+     "CategoryTheory.MonoidalClosed.internalHom",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+     "CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom",
+     "CategoryTheory.MonoidalClosed.ofEquiv",
+     "CategoryTheory.MonoidalClosed.internalHom_obj"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact degreewise comparison; generic monoidal closed and tensor constructions only."
+  },
+  {
+   "tool": "grep",
+   "query": "homTensorDegreewise|HomTensorCurryCondition|tensorHomEquiv",
+   "results": {
+    "hits": 17,
+    "top": [
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/Trace.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Associator.lean",
+     "Mathlib/LinearAlgebra/Contraction.lean",
+     "Mathlib/LinearAlgebra/Contraction.lean"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact degreewise comparison; generic monoidal closed and tensor constructions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from a total tensor of cochain complexes has a unique degreewise currying morphism and an inverse",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDegreewise",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Transpose tensor maps through the derived tensor-internal-Hom comparison: degreewise construction part of Tag 0A90",
+   "via": [
+    "lem-sc-hom-tensor-degreewise",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-sc-derived-internal-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "def-sc-hom-tensor-degreewise-equation",
+ "kind": "definition",
+ "title": "Localized pure-tensor degreewise currying equation",
+ "statement": "For a ringed site and cochain complexes K,L,M of sheaf modules, define the degreewise curry equation on a morphism a from homComplex K (homComplex L M) in degree n to homComplex Tot(K tensor L) M in degree n by requiring that on every localized site and every pair of pure-tensor inputs x in K^p and y in L^q, the (p+q)-projection of a(s) evaluated on the total-tensor inclusion of x tensor y equals the q-projection of the p-projection of s evaluated first on x and then on y. The projections are those selected with homComplex_exists and the map from the presheaf tensor is the sheafification unit followed by the tensor comparison inverse. This extracts verbatim the existing HomTensorCurryCondition construction, with its two auxiliary maps, into a module that contains no existence theorem.",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorDegreewiseEquation",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorDegreewiseEquation.lean",
+  "declaration": "CategoryTheory.HomTensorDegreewiseEquation",
+  "declarations": [
+   "CategoryTheory.HomTensorDegreewiseEquation",
+   "CategoryTheory.homTensorCurryProjection",
+   "CategoryTheory.homTensorCurrySectionMap"
+  ],
+  "statement": "def HomTensorDegreewiseEquation (K L M : CochainComplex Mod ℤ) (n : ℤ) :\n    letI := SheafOfModules.monoidalCategory R\n    ((homComplex (R := R) K (homComplex (R := R) L M)).X n ⟶\n      (homComplex (R := R)\n        (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M).X n) → Prop",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c9684",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T100227-L-2505217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c9684",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T100227-L-2505217",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the Lean declarations and proof with their DAG nodes, original definitions, change record, and Stacks 0A90/03EO; all four delivered modules and ten direct importers compile cleanly, and axioms match the two reported lower obligations."
+ }
+}
