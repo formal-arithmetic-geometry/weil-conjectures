@@ -7,10 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
 public import Sheaf.AlgebraicGeometry.StageCohomologyComparison
+import Sheaf.AlgebraicGeometry.EtaleLimitOpenRestrictedSystem
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Adjunction.Limits
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Geometric certificate for the canonical open comparison
 
@@ -23,6 +23,23 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+private theorem tailOpenCohomologyMap_eq
+    {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
+    {X : Scheme.{u}} {i₀ : I} (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
+    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
+    (φ : ∀ {i j : I} (f : i ⟶ j),
+      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)
+    {j k : Set.Ici i₀} (f : j ⟶ k) :
+    tailOpenCohomologyMap D g₀ W F φ f =
+      AddCommGrpCat.ofHom (cohomologyMap ((tailOpenDiagram D g₀ W).map f.op)
+        (tailOpenSheaf D g₀ W F j) 0) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map (tailOpenCoefficient D g₀ W F φ f) 0) := by
+  rfl
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
+set_option maxHeartbeats 150000 in
+-- Dependent scheme-indexed sheaf categories require the full restricted-system check.
 /-- The canonical cocone on inverse-image opens has a stage-comparison certificate.
 
 Source: Stacks Project, Tag 09YQ, coherent-system construction; the open-limit
@@ -90,6 +107,94 @@ theorem etale_limit_open_comparison_certificate
     (hι : ∀ j, ι.app j =
       (eK j).hom ≫ tailOpenCohomologyLeg D c (e.hom ≫ O.ι) W F G eG L j) :
     StageCohomologyComparison allowed (colimit.desc K (Cocone.mk _ ι)) := by
-  sorry
+  classical
+  let J := Set.Ici i₀
+  let o : J := ⟨i₀, le_rfl⟩
+  let : Nonempty J := ⟨o⟩
+  let : IsDirected J (· ≤ ·) := ⟨fun i j ↦ by
+    obtain ⟨k, hik, hjk⟩ := exists_ge_ge i.val j.val
+    exact ⟨⟨k, i.property.trans hik⟩, hik, hjk⟩⟩
+  let g₀ := e.hom ≫ O.ι
+  let U := g₀ ⁻¹ᵁ W
+  let E := tailOpenDiagram D g₀ W
+  let cE := tailOpenCone D c g₀ W
+  let Q := tailOpenIndexFunctor i₀
+  let : Q.Initial := Functor.initial_of_exists_of_isCofiltered Q
+    (fun i ↦ ⟨op ⟨i.left.unop, leOfHom i.hom.unop⟩,
+      ⟨Over.homMk (𝟙 _) (Subsingleton.elim _ _)⟩⟩)
+    (fun {_ _} f g ↦ ⟨_, 𝟙 _, by
+      apply Over.OverMorphism.ext
+      apply Subsingleton.elim⟩)
+  have hE : IsLimit cE := (Functor.Initial.isLimitWhiskerEquiv Q _).symm
+    (isLimitOpensCone D c hc (op i₀) U)
+  let q : U.toScheme ≅ W.toScheme :=
+    e.hom.preimageIso (O.ι ⁻¹ᵁ W) ≪≫ Scheme.Opens.isoOfLE hWO
+  have hU : IsCompact (U : Set (D.obj (op i₀))) := by
+    let : CompactSpace W.toScheme := isCompact_iff_compactSpace.mp hW
+    have hCU : CompactSpace U.toScheme :=
+      (TopCat.homeoOfIso (asIso q.hom.base)).symm.compactSpace
+    exact isCompact_iff_compactSpace.mpr hCU
+  let hcompact (j : Jᵒᵖ) : CompactSpace (E.obj j) := isCompact_iff_compactSpace.mp
+    ((D.map (homOfLE j.unop.property).op).isCompact_preimage hU)
+  let hqs (j : Jᵒᵖ) : QuasiSeparatedSpace (E.obj j) :=
+    (isQuasiSeparated_iff_quasiSeparatedSpace _
+      (D.map (homOfLE j.unop.property).op ⁻¹ᵁ U).2).mp (.of_quasiSeparatedSpace _)
+  let haffine (j k : Jᵒᵖ) (f : j ⟶ k) : IsAffineHom (E.map f) :=
+    inferInstanceAs (IsAffineHom ((opensDiagram D (op i₀) U).map (Q.map f)))
+  have h₀ : D.map (homOfLE (show i₀ ≤ i₀ from le_rfl)).op ⁻¹ᵁ U = U := by
+    have ht : (homOfLE (show i₀ ≤ i₀ from le_rfl)).op = 𝟙 (op i₀) :=
+      Subsingleton.elim _ _
+    rw [ht, D.map_id]
+    rfl
+  let e₀ : E.obj (op o) ≅ W.toScheme := (D.obj (op i₀)).isoOfEq h₀ ≪≫ q
+  let T := tailOpenInclusion i₀
+  let : T.Final := by
+    apply Functor.final_of_exists_of_isFiltered T
+    · intro i
+      obtain ⟨k, hik, h₀k⟩ := exists_ge_ge i i₀
+      exact ⟨⟨k, h₀k⟩, ⟨homOfLE hik⟩⟩
+    · intro i j f g
+      exact ⟨j, 𝟙 j, Subsingleton.elim _ _⟩
+  let R := upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι
+  let G' := (T ⋙ G) ⋙ R
+  let L' : Cocone G' := R.mapCocone (L.whisker T)
+  have hL' : IsColimit L' := isColimitOfPreserves R
+    ((Functor.Final.isColimitWhiskerEquiv T L).symm hL)
+  have hcoh :=
+    tailOpenRestrictedSystem_coherence D c F φ hidentity hcomposition G eG hG i₀ (e.hom ≫ O.ι) W
+  obtain ⟨hidentity', hcomposition', hG', hleg⟩ := hcoh
+  let B : Cocone K := Cocone.mk (AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
+    ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ W).ι).obj L.pt) 0)) ι
+  let eB := Iso.refl B.pt
+  have hH : ∀ (j k : (Set.Ici i₀)) (f : j ⟶ k), K.map f =
+      (eK j).hom ≫ AddCommGrpCat.ofHom (cohomologyMap ((tailOpenDiagram D (e.hom ≫ O.ι) W).map
+        f.op) ((tailOpenSheaf D (e.hom ≫ O.ι) W F) j) 0) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map ((@tailOpenCoefficient _ _ D _ _ (e.hom ≫ O.ι) W F φ)
+          f) 0) ≫ (eK k).inv := by
+    intro j k f
+    rw [hK j k f, tailOpenCohomologyMap_eq]
+    simp only [Category.assoc]
+  have hB : ∀ j : (Set.Ici i₀), B.ι.app j ≫ eB.hom =
+      (eK j).hom ≫ AddCommGrpCat.ofHom (cohomologyMap ((tailOpenCone D c (e.hom ≫ O.ι) W).π.app
+        (op j)) ((tailOpenSheaf D (e.hom ≫ O.ι) W F) j) 0) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map (((tailOpenLimitIso D c (e.hom ≫ O.ι) W F G eG) j).inv
+          ≫ ((upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ
+            W).ι).mapCocone (L.whisker (tailOpenInclusion i₀))).ι.app j) 0) := by
+    intro j
+    change ι.app j ≫ 𝟙 _ = _
+    rw [Category.comp_id, hι j, hleg L j]
+    simp only [Functor.mapCocone_ι_app, Cocone.whisker,
+      Functor.whiskerLeft_app, tailOpenInclusion]
+  let := hcompact
+  let := hqs
+  let := haffine
+  exact StageCohomologyComparison.system (I := Set.Ici i₀) (tailOpenDiagram D (e.hom ≫ O.ι) W)
+      (tailOpenCone D c (e.hom ≫ O.ι) W) hE (tailOpenSheaf D (e.hom ≫ O.ι) W F)
+        (@tailOpenCoefficient _ _ D _ _ (e.hom ≫ O.ι) W F φ)
+    hidentity' hcomposition' ((tailOpenInclusion i₀ ⋙ G) ⋙ (upperStar AddCommGrpCat.{u + 1}
+      ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ W).ι)) (tailOpenLimitIso D c (e.hom ≫ O.ι) W F G
+        eG) hG' ((upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ
+          W).ι).mapCocone (L.whisker (tailOpenInclusion i₀))) hL' 0 K eK hH B eB hB
+    W.toScheme hallowed o e₀
 
 end AlgebraicGeometry.Etale
