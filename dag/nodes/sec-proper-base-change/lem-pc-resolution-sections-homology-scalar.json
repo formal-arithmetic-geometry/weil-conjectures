@@ -14,11 +14,16 @@
  ],
  "proof": [
   {
-   "text": "Proof: Put U = f inverse V. The ring map displayed here is pullback of sections\nalong f: the canonical chart V.toSpecΓ cancels ΓSpecIso, and restriction to the\nwhole of U is the identity. In every degree, R.components expresses R.sections\nas a module morphism on U followed by the restriction comparison and restriction\nalong the equality U.ι_image_top. Each of these maps preserves multiplication\nby the pulled-back section. Hence the section complex comparison is semilinear\nfor Γ(S,V) to Γ(U,O_U). Restrict scalars on the global section complex along\nthis ring map. The comparison is then a map of complexes of Γ(S,V)-modules;\nits map on homology is linear. Exact forgetful evaluation and its homology\ncomparison identify that map with the three arrows T below. Thus T(b*y)=a*T(y).\nThis uses neither the augmentation nor resolution naturality: it is a statement\nabout the pinned degreewise section comparison. It also holds for p=0, empty\nopens, and zero modules, since the same module maps and homology comparisons\nare used in those cases.",
+   "text": "Put U = f inverse V. Scheme.Opens.toSpecΓ_appTop cancels ΓSpecIso in the displayed ring map. Scheme.Hom.resLE_app_top and the topIso inverse identities then identify this ring map, followed by U.topIso.hom, with f.app V. Use R.components from the restricted-resolution identification, Hom.app_smul, smul_restrictAppIso_hom_apply and PresheafOfModules.map_smul to show in every degree that R.sections.hom sends b times z to a times its image. The identity is valid for empty opens, zero modules and degree zero as well.",
    "uses": [
     "def-weil-pbc-flat-base-change-open-choices"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For fixed a and b, let τ be the natural transformation of additive evaluation at V whose component on M is multiplication by a on M(V). Linearity of module-presheaf morphisms proves its naturality. The preceding degreewise identity says that the short-complex map induced by R.sections.hom intertwines ModuleCat.smulNatTrans b and τ. Apply ShortComplex.homologyMap to this equality. Expand homologyMap_comp and homologyMap_mapNatTrans, precompose with the source comparison inverse and postcompose with the target comparison. The inverse identities cancel, giving multiplication by b before the specified T equal to multiplication by a afterwards. Evaluating at y proves the required equation. This is implemented by the proved private helper homology_scalar_transport.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -27,7 +32,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Tags 01E4 and 01E5",
-  "place": "Explicit scalar endomorphism argument for the normalized section comparison"
+  "place": "E3: degreewise scalar compatibility of the pinned restriction comparison and natural-transformation homology transport, using Mathlib ShortComplex.homologyMap_mapNatTrans."
  },
  "mathlib_searches": [
   {
@@ -145,10 +150,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T100104-L-2479909",
-  "kind": "interface",
+  "landing": "20261013T111843-L-3049480",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
