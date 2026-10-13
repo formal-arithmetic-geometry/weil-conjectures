@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-etale-regular-divisor-base-change",
+ "kind": "statement",
+ "title": "Regular divisor under etale base change",
+ "statement": "Let φ:R→S be a ring homomorphism whose map of affine schemes is etale. Suppose R is regular, multiplication by g on R is injective, and R/(g) is regular. Then S is regular, multiplication by φ(g) on S is injective, and S/(φ(g)) is regular.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 07NF, 00TA, 02GO and 039P"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "An etale ring map is flat, so tensoring the injective multiplication map by g\npreserves injectivity; this gives regular multiplication by its image. Regularity\nascends under etale ring maps. The quotient S/(φ(g)) is the base change of S along\nR to R/(g); it is etale over that regular quotient, so it too is regular. This applies\nalso when g is a unit, in which case both quotients are the zero ring.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-smooth-ascent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-ring-smooth-ascent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "07NF and flat etale base change; tensor quotient argument from TraitGenericPuncturedRootChart"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular ring etale nonzerodivisor quotient",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale map preserves a regular ring, a nonzerodivisor, and its regular quotient",
+   "results": "RingHom.Etale.toAlgebra and RingHom.etale_algebraMap; no assembled theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing",
+   "results": "Definitions, localization and ring equivalence regularity; no cyclic cover statement or etale regular divisor theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularRing|IsSMulRegular|root_split_cover in library and Mathlib",
+   "results": "RegularRingSmoothAscent supplies regularity ascent; TraitGenericPuncturedRootChart supplies the tensor quotient argument. No cyclic chart model is already proved.",
+   "date": "2026-10-13",
+   "verdict": "reuse smooth ascent for regular divisor helper"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale algebra trivialized by Kummer torsor intermediate subcovers",
+   "results": "Eight hits including etale field product decomposition and noetherian descent; none classifies scheme covers over a regular divisor.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no duplicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSMulRegular",
+   "results": "Twelve hits on scalar regularity, no assembled etale regular divisor theorem.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no duplicate"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclic.*(cover|descent)|intermediate.*root|root_split_cover in lean/Sheaf and lean/WeilConjectures; quotIdealMapEquivQuotTensor in Mathlib",
+   "results": "Prescribed cyclic charts is still sorry and assumes g belongs to the point ideal. Existing quotient equivalence is reused by the proved helper. No shorter proved chart classification found.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: retain decomposition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicCharts",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-cover-cyclic-charts",
+   "place": "Preservation of regular base, equation and quotient",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/EtaleRegularDivisorBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_regular_divisor_base_change",
+  "statement": "theorem etale_regular_divisor_base_change\n    (R S : CommRingCat.{u}) (φ : R →+* S)\n    [IsRegularRing R] (g : R) (hg : IsSMulRegular R g)\n    [IsRegularRing (R ⧸ Ideal.span {g})]\n    (hφ : Etale (Spec.map (CommRingCat.ofHom φ))) :\n    IsRegularRing S ∧ IsSMulRegular S (φ g) ∧\n      IsRegularRing (S ⧸ Ideal.span {φ g})",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125011-L-3837291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125011-L-3837291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

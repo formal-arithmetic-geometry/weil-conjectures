@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicChartModel
+import Sheaf.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
 
 /-!
 # Cyclic orbit charts for a cover split by a root extension
@@ -89,6 +91,13 @@ theorem root_split_cover_cyclic_charts
           (algebraMap S (∀ k : Fin m,
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)) h)
         ∃ γ : pullback p ψ ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd p ψ := by sorry
+          γ.hom ≫ V.ι ≫ q = pullback.snd p ψ := by
+  dsimp
+  intro δ hδ
+  obtain ⟨S, φ, z, hφ, hz, m, e, he, γ, hγ⟩ :=
+    root_split_cover_cyclic_chart_model R g n hn hg p hj d y δ hδ
+  obtain ⟨hreg, hsmul, hquot⟩ := etale_regular_divisor_base_change R S φ g hg hφ
+  exact ⟨S, Spec.map (CommRingCat.ofHom φ), z, hφ, hz,
+    m, φ g, e, he, hreg, hsmul, hquot, γ, hγ⟩
 
 end AlgebraicGeometry.Scheme
