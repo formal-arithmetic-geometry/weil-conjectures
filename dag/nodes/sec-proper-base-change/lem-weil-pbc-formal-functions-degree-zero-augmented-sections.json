@@ -15,51 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Choose resolutions I of F and J of the tensor pullback F′. Restrict each termwise to U=f inverse V and W=i_n inverse U. Exactness and preservation of injectives give the restricted resolutions. Use restrictAppIso and inclusion-image-top to identify their sections. Restrict the tensor-adjunction unit and transpose under the open restriction adjunction to define psi. The adjunction identity, followed by the canonical pushforward composition isomorphisms, gives the unit_square of FlatBaseChangeOpenChoices. This construction is the one in FlatBaseChangeOpenChoicesExist with its unused flatness hypotheses omitted; it uses no preservation of injectives by i_n pushforward.",
+   "text": "Construct termwise restricted injective resolutions using module_open_restriction_injectives and the explicit restrictAppIso section comparisons. Transpose the tensor unit under the restriction adjunction to construct compatible open choices, without flatness.",
    "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
     "lem-weil-pbc-module-open-restriction-injectives",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
     "def-weil-pbc-flat-base-change-open-choices",
     "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Let xi be the degree-zero global-sections augmentation of the restriction of t to U. Expand toRightDerivedZero by InjectiveResolution.toRightDerivedZero_eq. The augmentation equation and pinned section components of the restricted resolution identify its zero-cycle with the original resolution augmentation of t on U. The sectionCohomologyTheta map is adjoint to the sheafification comparison, so counit naturality identifies the corresponding resolutionSectionClass with this cycle’s class in the cohomology sheaf. Composing with the inverse resolution comparison gives the direct-image augmentation of t on V. Naturality of the stalk functor and germ maps gives exactly alpha(germ_V(t)).",
+   "text": "Apply resolutionSectionClass_zero_augmentation to the section corresponding to t; cancel restrictAppIso and the equality transports. Germ naturality identifies its germ with the stalk of the canonical direct-image augmentation applied to germ(t).",
    "uses": [
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-weil-pbc-resolution-section-class-zero-augmentation",
     "def-weil-pbc-module-stalk"
    ],
    "elementary": false
   },
   {
-   "text": "Apply IsFormalFunctionsTheta to I,J,V,hy,D,xi. The zero-augmentation square for moduleCohomologyFMap applied to psi identifies its right side with the augmentation of psi on restricted sections. Evaluate D.unit_square on t; all composition and restriction identifications are pinned, so this is the augmentation of the restriction of the original tensor-unit image eta_n(t). The containment gives W=top. The section restriction to W is then an isomorphism, and both canonical degree-zero augmentations are isomorphisms by left exactness. Their square makes cohomology restriction injective. Cancel that restriction to obtain the formula.",
+   "text": "Apply IsFormalFunctionsTheta to this augmented section. tensorUnit_open_degree_zero identifies its image with the restriction of the desired augmented tensor-unit section. The restriction is injective: W=top, its section map is an isomorphism, and moduleCohomologyFMap_basic_degree_zero conjugates the cohomology map by section comparison isomorphisms. Cancel it.",
    "uses": [
     "def-weil-pbc-formal-fibre-cohomology",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-weil-pbc-module-cohomology-fmap-zero-augmentation",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+    "lem-weil-pbc-tensor-unit-open-degree-zero",
+    "lem-weil-pbc-module-cohomology-fmap-basic-degree-zero"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-scheme-modules-enough-injectives",
   "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
   "def-weil-pbc-flat-base-change-open-choices",
   "def-pc-module-pullback",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-resolution-section-class-zero-augmentation",
   "def-weil-pbc-module-stalk",
   "def-weil-pbc-formal-fibre-cohomology",
-  "lem-weil-pbc-module-cohomology-fmap-zero-augmentation"
+  "lem-weil-pbc-tensor-unit-open-degree-zero",
+  "lem-weil-pbc-module-cohomology-fmap-basic-degree-zero"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Degree-zero specialization of Tags 01E4 and 01FB, with restricted resolutions from 01E1; explicit proof in the Lean docstring. Online tag pages read because the local checkout contains only literature lists."
+  "place": "Tags 01E4 and 01FB. Original three-step route instantiated in Lean; two strictly smaller section comparison identities split off by D2."
  },
  "mathlib_searches": [
   {
@@ -154,11 +151,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-35e1f",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T054242-L-450807",
+  "landing": "20261013T095938-L-2453885",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs matched with node records, cited constructions and Stacks sources; both modules and the sole direct importer compiled cleanly, and axiom checks found only permitted axioms plus sorryAx from the documented remaining theorem."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

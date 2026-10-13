@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-tensor-unit-open-degree-zero",
+ "kind": "statement",
+ "title": "TensorUnitOpenDegreeZero",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $y\\in Y$, $n\\in\\mathbf N$, and $F$ an $\\mathcal O_X$-module. Let $P=X_n$ be the formal fibre and $h=i_n:P\\to X$ of [def-weil-pbc-formal-fibre-cohomology]; put $F'=i_n^*F$ using the fixed tensor pullback [def-pc-module-pullback]. Let $I$ be an injective resolution of $F$, $J$ a resolution of $F'$, $V\\subseteq Y$ open, $U=f^{-1}V$ and $W=i_n^{-1}U$, and let $D$ be FlatBaseChangeOpenChoices for $f$, the formal-fibre base map, $F,I,J,V$ of [def-weil-pbc-flat-base-change-open-choices]. Suppose $P\\subseteq W$, so $W=P$. For each $t\\in F(U)$ let $s\\in\\Gamma(U,F|_U)$ correspond to $t$ by restrictAppIso and inclusion-image-top, and let $z\\in\\Gamma(P,F')$ be the restriction to top of the fixed tensor-adjunction unit image of $t$. The cohomology h-map [def-weil-pbc-module-cohomology-fmap] of $D.\\mathrm{psi}$ sends the canonical degree-zero augmentation of $s$ to the restriction-adjunction cohomology map along $W\\hookrightarrow P$ applied to the canonical augmentation of $z$. No flatness or properness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark Tag 01FB (remark-explain-arrow), equation-choice"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-formal-fibre-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical degree-zero augmentation square to D.psi and to the restriction-adjunction unit on P. This reduces the equality to equality of their resulting sections of F restricted to W.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-zero-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate D.unit_square on U and t. Pushforward composition and congruence are the canonical section identifications; the restriction unit acts by restriction. Identify the source section with s by restrictAppIso and inclusion-image-top. Since W=P, restrictions between W and top cancel. Naturality of the tensor unit identifies the other section with the restriction unit applied to z. Apply the common augmentation.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-cohomology-fmap-zero-augmentation",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Explicit degree-zero calculation from the cited source; online tag page read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology degree zero augmentation restricted injective resolution canonical section class",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical degree zero sheaf cohomology augmentation restriction section class germ",
+   "date": "2026-10-13",
+   "results": "TopCat.Presheaf.Γgerm_res_apply; TopCat.Presheaf.germ_res_apply'; TopCat.Presheaf.map_germ_eq_Γgerm; CategoryTheory.Sheaf.ΓRes; ModuleCat.Tilde.toOpen_germ_apply; TopCat.Presheaf.germ_res_apply; ModuleCat.Tilde.toOpen_germ; TopCat.Presheaf.germ_eq",
+   "verdict": "Ingredients only; no exact canonical section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit_app_app|sectionCohomologyTheta|toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "Ingredients only; no exact canonical section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyπ_naturality|homEquiv_unit|toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "results": "Independent second reading: 25 hits; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Category/ReflQuiv.lean",
+   "verdict": "General homology and adjunction ingredients only; no fixed restricted augmentation identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "results": "Independent second reading: 1 hits; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "verdict": "General homology and adjunction ingredients only; no fixed restricted augmentation identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology sheafification comparison sends zeroth cocycles to canonical derived functor unit",
+   "date": "2026-10-13",
+   "results": "Independent second reading: 8 hits; CochainComplex.HomComplex.leftHomologyData'_H_coe, CochainComplex.HomComplex.leftHomologyData_i_hom_apply, CochainComplex.HomComplex.leftHomologyData_π_hom_apply, CochainComplex.HomComplex.leftHomologyData_H_coe, groupCohomology.cocyclesIso₀_inv_comp_iCocycles, groupCohomology.cocyclesIso₀_hom_comp_f_apply, groupCohomology.cocyclesIso₀_hom_comp_f, CochainComplex.HomComplex.leftHomologyData'",
+   "verdict": "General homology and adjunction ingredients only; no fixed restricted augmentation identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroAugmentedSections",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 3: restricted tensor-unit augmentation square",
+   "via": [
+    "lem-weil-pbc-formal-functions-degree-zero-augmented-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorUnitOpenDegreeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorUnitOpenDegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorUnit_open_degree_zero",
+  "statement": "theorem tensorUnit_open_degree_zero {X S : Scheme.{u}} (f : X ⟶ S) (y : S) (n : ℕ)\n    (F : X.Modules) (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (formalFibreι f y n)).obj F))\n    (V : S.Opens) (D : FlatBaseChangeOpenChoices f (formalFibreBaseMap S y n) F I J V)\n    (hV : (⊤ : (formalFibre f y n).Opens) ≤ (formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V))\n    (t : F.presheaf.obj (op (f ⁻¹ᵁ V))) :\n    moduleCohomologyFMap ((formalFibreι f y n).resLE (f ⁻¹ᵁ V)\n      ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi 0\n        (((RingedSpace.globalSectionsFunctor\n          (f ⁻¹ᵁ V).toScheme.toRingedSpace).toRightDerivedZero.app\n            ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).hom\n            ((F.restrictAppIso (f ⁻¹ᵁ V).ι ⊤).inv\n              (F.presheaf.map (eqToHom (f ⁻¹ᵁ V).ι_image_top).op t))) =\n    moduleCohomologyFMap ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι\n      ((restrictAdjunction ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app\n        ((tensorPullback (formalFibreι f y n)).obj F)) 0\n          (((RingedSpace.globalSectionsFunctor\n            (formalFibre f y n).toRingedSpace).toRightDerivedZero.app\n              ((tensorPullback (formalFibreι f y n)).obj F)).hom\n              (((tensorPullback (formalFibreι f y n)).obj F).presheaf.map\n                (homOfLE hV).op\n                  ((((Classical.choose (exists_tensorPullbackAdjunction\n                    (formalFibreι f y n))).unit.app F).val.app (op (f ⁻¹ᵁ V))).hom t)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T095938-L-2453885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T095938-L-2453885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
