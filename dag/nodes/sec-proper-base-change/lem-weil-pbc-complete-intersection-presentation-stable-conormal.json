@@ -18,58 +18,45 @@
  ],
  "proof": [
   {
-   "text": "Extend q to the prime p=qS_g and identify (S_g)_p with S_q using [lem-weil-pbc-localization-prime-residue-field-iso]. Pull p back through e and the quotient Q → Q/J to p′. Since p exists, S_g and Q/J are nonzero. The spectrum homeomorphism induced by e transfers the dimension identity to Q/J; t ≤ m makes it the additive dimension identity dim Spec(Q/J)+t=m.",
+   "text": "Compose the quotient presentation e with the localization-away lift into S_q. This map proves Q/J nontrivial. The homeomorphism of spectra induced by e and [lem-weil-pbc-homeomorphism-krull-dimension] transfer hdim to Q/J. Nat.sub_add_cancel htm makes the dimension identity additive.",
    "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "def-weil-affine-spectrum",
-    "def-kun-topological-krull-dimension"
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-global-complete-intersection-local-regular-sequence] at every prime of Q containing J. List.map_ofFn identifies the sequence with the family of localized equations.",
+   "uses": [
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use [lem-weil-pbc-regular-sequence-conormal-free] at each maximal ideal containing J. Mapping a relation whose sum is in J² to its localized ideal, its conormal basis detects every coefficient modulo the extended ideal. At maximal ideals not containing J the extended ideal is top. Ideal.mem_of_localization_maximal implies each coefficient belongs to J globally. Lift coefficients from Q/J to Q to obtain linear independence of the equation classes in J/J². Span induction gives their spanning property. Module.Basis.mk gives a global basis indexed by Fin t. The complete Lean proof is in the private helpers span_conormal_generators, conormal_sum, coefficients_mem_of_conormal_basis, coefficients_mem_of_locally_regular and basis_of_locally_regular.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-global-complete-intersection-local-regular-sequence] to f at p′, which contains J. Apply [lem-weil-pbc-regular-sequence-conormal-free] to these images in Q_p′ to obtain a basis of length t for JQ_p′/(JQ_p′)² over Q_p′/JQ_p′.",
+   "text": "Apply [lem-weil-pbc-principal-localization-conormal-at-prime-base-change] to obtain N × S_q^m ≃ (S_q tensor_(Q/J) J.Cotangent) × S_q^n. Base change the basis from step 3 using LinearEquiv.baseChange and TensorProduct.piScalarRight. Compose with the comparison, and combine the two free factors by sumArrowLequivProdArrow and piCongrLeft along finSumFinEquiv.",
    "uses": [
-    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
-    "lem-weil-pbc-regular-sequence-conormal-free",
-    "def-weil-pbc-regular-sequence"
+    "lem-weil-pbc-principal-localization-conormal-at-prime-base-change"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Localize the quotient sequence 0 → J² → J → J/J² → 0 at Q∖p′ and use [lem-weil-pbc-localization-module-exact]. Localization commutes with products of ideals, so J²Q_p′=(JQ_p′)². Localizing 0 → J → Q → Q/J → 0 identifies the scalar quotient with (Q/J) at the corresponding prime, hence through e with (S_g)_p and through step 1 with S_q. The quotient actions agree since all identifications send the class of rx to the scalar r times the class of x. Therefore the localized J/J² is S_q-linearly isomorphic to S_q^t.",
-   "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-conormal-module-principal-localization] to the quotient map α : k[x] → S and β : Q → Q/J → S_g. The kernels identify with I and J, compatibly with their quotient scalar actions. Localize the resulting equivalence at p; localization preserves finite products and linear equivalences. The iterated localization of I/I² identifies with its localization at q: (x/g^a)/(s/g^b) maps to g^b x/(g^a s), and its vanishing says that some g^c s outside q annihilates the numerator. These fraction maps are inverse and respect the scalar isomorphism of step 1. Substitute the equivalence with S_q^t of step 3 and combine S_q^t × S_q^n via Fin(t+n) ≃ Fin t ⊕ Fin n. This gives N × S_q^m ≃ S_q^(t+n).",
-   "uses": [
-    "lem-weil-pbc-conormal-module-principal-localization",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "def-weil-affine-spectrum",
-  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
   "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
   "lem-weil-pbc-regular-sequence-conormal-free",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-localization-module-exact",
-  "def-weil-pbc-module-localization",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-conormal-module-principal-localization",
-  "def-weil-pbc-module-localization-away"
+  "lem-weil-pbc-principal-localization-conormal-at-prime-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma 00SC, last paragraph, through Lemma 00S6; explicit exactness and fraction identifications as in steps 3–5 of the parent node"
+  "place": "Algebra, Tag 00S6 (lemma-conormal-module-localize), base changed to the local ring in the last paragraph of Tag 00SC (lemma-lci). Sources read at https://stacks.math.columbia.edu/tag/00S6 and https://stacks.math.columbia.edu/tag/00SC on 2026-10-13.",
+  "note": "Use global coefficient detection from the local conormal bases (Tag 00SV (3)) before base changing the stable comparison. This avoids explicit prime correspondence and localization exactness."
  },
  "mathlib_searches": [
   {
@@ -142,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T234216-L-2124258",
+  "landing": "20261013T100040-L-2472580",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
