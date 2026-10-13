@@ -12474,3 +12474,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/B3/Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality (stage 3; reviewer PASS; first push; landing 20261013T124307-L-3775034 (interface); batch 20261013T124305; modules 3; new nodes 2)
 - 12:43 L: merged deliver/C1/Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial (stage 3; reviewer PASS; first push; landing 20261013T124307-L-3775191 (proof); batch 20261013T124305; modules 1; new nodes 0)
 - 12:43 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AlternatingCechSheafSingletonContraction (stage 3; reviewer PASS; first push; landing 20261013T124308-L-3775348 (interface); batch 20261013T124305; modules 3; new nodes 2)
+- 12:43 L: merged deliver/D4/Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat (stage 3; reviewer PASS; first push; landing 20261013T124308-L-3775538 (interface); batch 20261013T124305; modules 3; new nodes 2)

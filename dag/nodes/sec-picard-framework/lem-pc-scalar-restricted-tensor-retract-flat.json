@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-scalar-restricted-tensor-retract-flat",
+ "kind": "statement",
+ "title": "Finite free retract tensors preserve base flatness",
+ "statement": "Let $C$ be a small site, $R,A$ sheaves of commutative rings and $\\alpha:R\\to A$ a ring-sheaf map. Let $P,N$ be sheaves of $A$-modules [def-weil-sheaf-of-modules-category]. Suppose $m\\in\\mathbb N$ and $\\iota:P\\to A^{\\oplus m}$, $\\pi:A^{\\oplus m}\\to P$ satisfy $\\iota\\pi=1_P$. If $N$, restricted along $\\alpha$, is a flat $R$-module sheaf [def-pc-flat-sheaf-modules], then the ordinary tensor $P\\otimes_A N$ [def-pur-sheaf-tensor-product], restricted along $\\alpha$, is a flat $R$-module sheaf. No flatness of $A$ over $R$ is assumed. This includes rank zero and the empty site.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03EU (direct sums), 00HD (mono criterion, hence retract stability), and the finite-free tensor calculation in 0DJQ; source-library ObjectProperty.flat_of_retract"
+ },
+ "proof": [
+  {
+   "text": "Scalar restriction leaves the abelian sheaf unchanged. The forgetful functor to abelian sheaves preserves and reflects colimits, so scalar restriction preserves coproducts. Right tensoring preserves coproducts by the tensor-Hom adjunction. The tensor of a free module with N is therefore the coproduct of m copies of N, using the tensor unit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After scalar restriction the preceding isomorphism identifies the ambient free tensor with a finite coproduct of flat modules. Apply isFlat_coproduct and transport flatness through this isomorphism. In the closed symmetric category the right-tensor exactness predicate implies ObjectProperty.flat by the braiding.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply right tensoring and scalar restriction to the given inclusion and retraction. Functor.map_comp and map_id preserve their identity composite. ObjectProperty.flat_of_retract transfers flatness to the restricted P tensor N; take its right-tensor exactness component. This step uses the already proved source-library retract theorem, whose proof follows the mono criterion of flatness.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-coproduct-flat",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 03EU (direct sums), 00HD (mono criterion, hence retract stability), and the finite-free tensor calculation in 0DJQ; source-library ObjectProperty.flat_of_retract"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isFlat|flat.*tensor|restrictScalars.*preserves",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact sheaf-level statement among the checked results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar restriction of a sheaf relatively flat over a scheme morphism is flat on each open site; tensoring it with a finite free retract preserves base flatness",
+   "results": "8 hits: Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instResLE, Algebra.FormallyUnramified.flat_of_restrictScalars, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_of_affine_subset",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact sheaf-level statement among the checked results"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact sheaf-level statement among the checked results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively flat module restricted to an open site is flat over the inverse image ring, and tensoring it with a finite free retract preserves that flatness",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Local relative Tor calculation: flatness over the inverse-image base ring of tensors with finite free local perfect terms.",
+   "via": [
+    "lem-pc-strict-perfect-relative-tensor-model",
+    "lem-pc-strict-perfect-relative-tensor-terms-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarRestrictedTensorRetractFlat",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarRestrictedTensorRetractFlat.lean",
+  "declaration": "SheafOfModules.isFlat_scalarRestricted_tensor_retract",
+  "statement": "theorem isFlat_scalarRestricted_tensor_retract\n    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}\n    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]\n    {R A : Sheaf J CommRingCat.{u}} (α : R ⟶ A)\n    (P N : SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A))\n    (m : ℕ)\n    (ι : P ⟶ free (R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)\n      (ULift.{u} (Fin m)))\n    (π : free (R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)\n      (ULift.{u} (Fin m)) ⟶ P)\n    (h : ι ≫ π = 𝟙 P)\n    (hN : IsFlat ((restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map α)).obj N)) :\n    letI := monoidalCategory A\n    IsFlat ((restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map α)).obj (P ⊗ N))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T124308-L-3775538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T124308-L-3775538",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

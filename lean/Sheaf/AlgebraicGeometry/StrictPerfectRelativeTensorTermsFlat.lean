@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorComplex
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.RelativeFlatOpenScalarRestriction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarRestrictedTensorRetractFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Relative flatness of local tensor terms
 
@@ -30,6 +34,26 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem restrictScalars_preservesColimits
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R A : Sheaf J RingCat.{u}} (α : R ⟶ A)
+    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] :
+    PreservesColimitsOfSize.{u, u} (SheafOfModules.restrictScalars.{u} α) := by
+  have h (B : Sheaf J RingCat.{u}) :
+      PreservesColimitsOfSize.{u, u} (SheafOfModules.toSheaf.{u} B) := by
+    constructor
+    intro K _
+    exact ((moduleSheaves_colimits_forgetful B).2.2.2.2.2 K).2.1
+  have := h R
+  have := h A
+  have : ReflectsColimitsOfSize.{u, u} (SheafOfModules.toSheaf.{u} R) :=
+    reflectsColimits_of_reflectsIsomorphisms
+  have : PreservesColimitsOfSize.{u, u}
+      (SheafOfModules.restrictScalars.{u} α ⋙ SheafOfModules.toSheaf.{u} R) :=
+    inferInstanceAs (PreservesColimitsOfSize.{u, u} (SheafOfModules.toSheaf.{u} A))
+  exact preservesColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf.{u} R)
+
 
 /-- Each term of the explicitly scalar-restricted local total tensor is flat over
 f inverse-image O_S on the open site. Source: Stacks Project, Tags 0DJQ and 08CI,
@@ -54,6 +78,51 @@ theorem strictPerfect_relativeTensor_terms_flat
     (hL : IsStrictlyPerfect X U L)
     (hGflat : ∀ n : ℤ, Modules.IsFlatOver (G.X n) f) :
     ∀ n : ℤ, SheafOfModules.IsFlat
-      ((strictPerfectRelativeTensorComplex f U L G).X n) := by sorry
+      ((strictPerfectRelativeTensorComplex f U L G).X n) := by
+  let : MonoidalCategory
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+    SheafOfModules.monoidalCategory (X.sheaf.over U)
+  let : (curriedTensor
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))).PreservesZeroMorphisms :=
+    SheafOfModules.preservesZeroMorphisms_curriedTensor (X.sheaf.over U)
+  let (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :
+      ((curriedTensor _).obj M).PreservesZeroMorphisms :=
+    SheafOfModules.preservesZeroMorphisms_curriedTensor_obj (X.sheaf.over U) M
+  let GU := ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapHomologicalComplex
+     (.up ℤ)).obj G
+  let α := ((Opens.grothendieckTopology X).overPullback CommRingCat.{u} U).map
+    (Modules.tensorPullbackRingMap f)
+  let B := (sheafCompose ((Opens.grothendieckTopology X).over U)
+    (forget₂ CommRingCat.{u} RingCat.{u})).map α
+  let F := SheafOfModules.restrictScalars B
+  have hF : PreservesColimitsOfSize.{u, u} F := restrictScalars_preservesColimits B
+  have hGU (q : ℤ) : SheafOfModules.IsFlat (F.obj (GU.X q)) :=
+    relativeFlat_open_scalarRestriction f U (G.X q) (hGflat q)
+  let : MonoidalCategory (SheafOfModules.{u}
+      ((sheafCompose ((Opens.grothendieckTopology X).over U)
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj (X.sheaf.over U))) :=
+    SheafOfModules.monoidalCategory (X.sheaf.over U)
+  have hPQ (p q : ℤ) : SheafOfModules.IsFlat (F.obj (L.X p ⊗ GU.X q)) := by
+    obtain ⟨m, ι, π, h⟩ := hL.2 p
+    exact SheafOfModules.isFlat_scalarRestricted_tensor_retract α
+      (L.X p) (GU.X q) m ι π h (hGU q)
+  let D := ((Functor.mapBifunctorHomologicalComplex (curriedTensor _) (.up ℤ) (.up ℤ)).obj
+    L).obj GU
+  let R := (TopCat.Sheaf.inverseImageRing f.base S.sheaf).over U
+  intro n
+  let M := D.toGradedObject.mapObjFun
+    (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ)) n
+  have hM : ∀ j, SheafOfModules.IsFlat (F.obj (M j)) := by
+    intro j
+    exact hPQ j.1.1 j.1.2
+  let I := (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ)) ⁻¹' {n}
+  let M' := fun j : ULift.{u} I ↦ M j.down
+  have hf := SheafOfModules.isFlat_coproduct R
+    (fun j : ULift.{u} I ↦ F.obj (M' j)) (fun j ↦ hM j.down)
+  let e := (PreservesCoproduct.iso F M').symm ≪≫
+    F.mapIso (Sigma.whiskerEquiv Equiv.ulift (fun _ ↦ Iso.refl _))
+  let := SheafOfModules.monoidalCategory R
+  exact (exactFunctor _ _).prop_of_iso ((tensoringRight _).mapIso e) hf
+
 
 end AlgebraicGeometry.Scheme

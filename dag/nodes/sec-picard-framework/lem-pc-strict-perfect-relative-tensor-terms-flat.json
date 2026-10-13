@@ -16,17 +16,27 @@
  ],
  "proof": [
   {
-   "text": "Apply relative_flat_module_stalk to each G term at each x in U. It identifies its scalar-restricted stalk as flat over the base stalk without quasi-coherence. The inverse-image ring stalk is canonically the same base stalk. Restriction to the open site does not change these stalks.",
+   "text": "Restrict each G term to the open site and restrict scalars along the canonical inverse-image structure ring map. relativeFlat_open_scalarRestriction supplies base-flatness for each restricted term, without quasi-coherence.",
    "uses": [
-    "lem-pc-relative-flat-module-stalk",
+    "lem-pc-relative-flat-open-scalar-restriction",
     "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "The finite-free retracts of L remain finite-free retracts on stalks. Tensoring G with each retract yields a retract of a finite sum of flat base modules. Stalks commute with sheaf tensor and direct sums, so each total tensor term has flat base stalks. Flatness of a sheaf means exactness of tensor; stalkwise tensor comparison and detection of exactness imply this exactness on the localized open site. Empty opens and zero terms satisfy the same criterion.",
+   "text": "Extract the finite free inclusion and retraction for every L term from IsStrictlyPerfect. Apply isFlat_scalarRestricted_tensor_retract to it and each restricted G term. Every scalar-restricted tensor summand is flat. The boundedness clause is unnecessary for termwise flatness.",
    "uses": [
     "def-pc-perfect-complex",
+    "lem-pc-scalar-restricted-tensor-retract-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the explicit construction, total degree n is the coproduct of summands indexed by integer pairs with sum n. Scalar restriction preserves these coproducts, proved by reflection through the forgetful functor to abelian sheaves. Lift the index type to the module universe, apply isFlat_coproduct, reindex by Equiv.ulift, and transport right-tensor exactness across the resulting canonical coproduct isomorphism. This proves every term flat, including empty and zero cases.",
+   "uses": [
+    "def-pc-strict-perfect-relative-tensor-complex",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sites-modules-coproduct-flat",
     "def-pc-tensor-complex-sheaves",
     "def-pc-flat-sheaf-modules"
    ],
@@ -34,18 +44,22 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-relative-flat-module-stalk",
+  "lem-pc-relative-flat-open-scalar-restriction",
   "def-pc-module-pullback",
   "def-pc-perfect-complex",
+  "lem-pc-scalar-restricted-tensor-retract-flat",
+  "def-pc-strict-perfect-relative-tensor-complex",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-sites-modules-coproduct-flat",
   "def-pc-tensor-complex-sheaves",
   "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "W4",
+  "group": "D4",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 0DJQ, local relative Tor calculation; Tag 08CI (2) to (1); original proof step 3; explicit stage-3 reduction of lem-pc-strict-perfect-relative-tensor-model; Tag 05NE, stalkwise flatness criterion"
+  "place": "Tags 0DJQ and 08CI; direct-sum and retract calculation formalized using 03EU and the source library, with only open-site relative flatness deferred"
  },
  "mathlib_searches": [
   {
@@ -133,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d5efe",
-  "group": "W4",
+  "reviewer": "COMPILER",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T115034-L-3327719",
+  "landing": "20261013T124308-L-3775538",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and delivered Lean declarations with their DAG nodes; checked the construction, support proof, two named deferred lemmas, change record and report; all four modules and the sole direct importer StrictPerfectTensorRelativeTorBound compile, with expected axioms only."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
