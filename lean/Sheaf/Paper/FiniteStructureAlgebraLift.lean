@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -42,9 +42,6 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
--- STATEMENT-DISPUTED: hc still selects a bare Nonempty composition comparison.
--- The normalized operations-lifting theorem now requires the explicit adjunction mate.
--- This caller needs the same normalization repair, propagated through its callers.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
@@ -91,9 +88,11 @@ theorem finite_structure_algebra_lift
       (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅
       Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1)))))))
-    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +
-      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))
+    (hc : ∀ n : ℕ, c n = (Scheme.Modules.tensorPullbackCompositionIso (i n)
+      (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))
+      (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1)))))) (hi n)).symm)
     (Yn : ℕ → Scheme.{u})
     (fnY : ∀ n, Yn n ⟶ pullback f
       (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))
@@ -135,6 +134,29 @@ theorem finite_structure_algebra_lift
               ((fnY n ≫ pullback.fst f
                 (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U)
               (by rw [← Scheme.Hom.comp_preimage, hw n]) =
-            (b n).right.hom.app (op U)) := by sorry
+            (b n).right.hom.app (op U)) := by
+  classical
+  obtain ⟨B, e, b, hb, hcomp⟩ := finite_structure_algebra_operations_lift
+    A I X f i hi hp c Yn fnY gn hcart hw G hG hproper ψ hψ hc
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  have hGqc :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mp hG |>.1
+  have : B.toModule.IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e.symm hGqc
+  refine ⟨B, ⟨e⟩, b, ?_, hcomp⟩
+  intro n U hU
+  have : IsClosedImmersion (Spec.map (CommRingCat.ofHom
+      (Ideal.Quotient.mk (I ^ (n + 1))))) :=
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  let α := (Scheme.Modules.tensorPullback (pullback.fst f
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).mapIso e ≪≫ ψ n
+  obtain ⟨hs, hk⟩ := closedImmersion_algebra_sections_exact
+    (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))
+    (fnY n) B α (b n) (hb n) U hU
+  refine ⟨(Ideal.quotEquivOfEq hk.symm).trans
+    (RingHom.quotientKerEquivOfSurjective hs), ?_⟩
+  intro x
+  simp only [RingEquiv.trans_apply, Ideal.quotEquivOfEq_mk]
+  exact RingHom.quotientKerEquivOfSurjective_apply_mk hs x
 
 end AlgebraicGeometry

@@ -15,7 +15,8 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import Sheaf.Paper.FiniteStructureAlgebraLift
 import Sheaf.Paper.FiniteStructureProperSupport
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+import all Sheaf.AlgebraicGeometry.SupportedThickeningDictionary
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 import Sheaf.AlgebraicGeometry.GrothendieckExistence
@@ -37,7 +38,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option autoImplicit false
-
 
 set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
@@ -139,8 +139,7 @@ theorem algebraize_finite_structure_algebra
     simp [i]
   let c (n : ℕ) : Scheme.Modules.tensorPullback (j (n + 1)) ⋙
       Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (j n) :=
-    (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (j (n + 1)))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n))
+    (Scheme.Modules.tensorPullbackCompositionIso (i n) (j (n + 1)) (j n) (hi n)).symm
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
   have hXn (n : ℕ) : IsLocallyNoetherian (Xn n) :=
     LocallyOfFiniteType.isLocallyNoetherian (pullback.snd f
@@ -175,8 +174,37 @@ theorem algebraize_finite_structure_algebra
   have hproper0 : Scheme.Modules.HasSupportProperOver
       (pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
       (F 0) := Scheme.Modules.finite_structure_proper_support (fnY 0) _
-  obtain ⟨G, hG, hpG, ψ, hψ⟩ :=
-    (grothendieck_existence A I f i hi hp c (fun _ ↦ rfl)).2 F φ hF hproper0
+  -- Normalize the system before using existence with its legacy comparison.
+  let c₀ (n : ℕ) : Scheme.Modules.tensorPullback (j (n + 1)) ⋙
+      Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (j n) :=
+    (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
+      (j (n + 1)))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n))
+  have hnormalize (n : ℕ) : ∃ s : 𝟭 (Xn n).Modules ≅ 𝟭 (Xn n).Modules,
+      ∀ (G : X.Modules) (H : (Xn n).Modules)
+        (ψ : (Scheme.Modules.tensorPullback (j n)).obj G ≅ H),
+        ψ.hom ≫ s.inv.app H = ((c₀ n).symm ≪≫ c n).inv.app G ≫ ψ.hom := by
+    have : IsClosedImmersion (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1))))) :=
+      IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+    have : IsClosedImmersion (j n) := inferInstanceAs (IsClosedImmersion (pullback.fst _ _))
+    exact extend_pullback_automorphism
+      (Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction (j n)))
+      (closedImmersion_pushforward_fullyFaithful (j n)).1 ((c₀ n).symm ≪≫ c n)
+  choose s hs using hnormalize
+  let φ₀ n := φ n ≪≫ ((s n).app (F n)).symm
+  obtain ⟨G, hG, hpG, ψ, hψ₀⟩ :=
+    (grothendieck_existence A I f i hi hp c₀ (fun _ ↦ rfl)).2 F φ₀ hF hproper0
+  have hψ (n : ℕ) : (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
+      (φ n).hom = (c n).hom.app G ≫ (ψ n).hom := by
+    apply (cancel_mono ((s n).inv.app (F n))).1
+    have hn := hs n G (F n) (ψ n)
+    have he := hψ₀ n
+    change (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫
+      (φ n).hom ≫ (s n).inv.app (F n) = (c₀ n).hom.app G ≫ (ψ n).hom at he
+    simp only [Category.assoc]
+    rw [hn]
+    simpa only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc,
+      Iso.hom_inv_id_app_assoc] using he
   obtain ⟨B, ⟨eG⟩, b, hquot, hcomp⟩ :=
     finite_structure_algebra_lift A I X f i hi hp c (fun _ ↦ rfl)
       Yn fnY gn hcart hw G hG hpG ψ hψ
