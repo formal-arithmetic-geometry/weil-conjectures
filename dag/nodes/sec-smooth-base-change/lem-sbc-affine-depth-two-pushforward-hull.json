@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-affine-depth-two-pushforward-hull",
+ "kind": "statement",
+ "title": "Affine depth-two hull of the actual finite etale pushforward",
+ "statement": "theorem affine_depth_two_pushforward_hull\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f]\n    (V : L.Opens) (hV : IsAffineOpen V) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    let N := Modules.restrict B.toModule hV.fromSpec\n    N.IsQuasicoherent ∧\n      Module.Finite (L.presheaf.obj (op V)) Γ(N, ⊤) ∧\n      (∀ x : Spec (L.presheaf.obj (op V)), hV.fromSpec x ∉ U →\n        ∃ hfinite : Module.Finite ((Spec (L.presheaf.obj (op V))).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) N.val.presheaf x),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth\n            (R := (Spec (L.presheaf.obj (op V))).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) N.val.presheaf x))",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY6 proof of (1); Tag 0G41(2); Tag 0E9I; double-dual kernel calculation expanding the depth argument of 0EBI without integrality"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "On the affine chart Spec A, pull back f to the quasi-compact open preimage of U. Finite and etale are stable under this base change. Finite etale implies flat and locally finitely presented, so [lem-pc-finite-flat-pushforward-locally-free] applied to the unit module makes its direct image finite locally free. Apply [lem-weil-pbc-module-finite-presentation-extension] with ambient module zero and zero map to extend this module to a finitely presented module on Spec A, hence to a finite A-module M.",
+   "uses": [
+    "lem-pc-finite-flat-pushforward-locally-free",
+    "lem-weil-pbc-module-finite-presentation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the genuine finite A-module N = Hom_A(Hom_A(M,A),A), and its associated module sheaf. Hom of finitely presented modules commutes with localization; finite locally free modules equal their double duals. Therefore its restriction to the open preimage of U is the original finite locally free module. No choice of a witness of a mere existence theorem is used to define the final global module: M is only an existential witness inside this proof.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "A finite free presentation of Hom_A(M,A), after dualization, realizes N as the kernel of a map d between finite free A-modules. At a boundary stalk the base has depth at least two, transported across the open-immersion local-ring isomorphism. Choose a regular pair x,y there. If y*n=x*n' in N, regularity of y modulo x in the free source gives n=x*m. Since x*d(m)=0 and x acts injectively in the free target, d(m)=0. Thus m lies in N, proving injectivity of y on N/xN. Nakayama supplies properness when N is nonzero; a zero stalk has infinite depth. Finiteness follows from Noetherianity.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The associated sheaf has quasi-coherence and finite sections. Apply [lem-sbc-depth-two-hartogs-algebra-comparison] on the affine scheme to identify it with the actual composite direct image of the restricted finite etale cover. Restriction of a direct image to an open chart is the direct image of the base-changed cover, by the formula on sections. This identifies the module with the displayed N = B.toModule restricted along fromSpec. Transport the local properties across that isomorphism, including the scalar actions on sections and stalks.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-algebra-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-sbc-depth-two-hartogs-algebra-comparison",
+  "lem-weil-pbc-module-finite-presentation-extension"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "V1",
+  "document": "Stacks Project",
+  "place": "0EY6, 0G41 and 0E9I; the nonintegral kernel calculation is spelled out by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coherent extension double dual depth at least two on affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend finite locally free sheaf across a closed subset of depth at least two using double dual",
+   "results": "Eight results on finite-type generators and tilde sections; none constructs a depth-two hull. Loogle Module.Dual gives definitions and algebraic dual lemmas, no sheaf extension result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*(dual|kernel)|dual.*depth|hartogs",
+   "results": "msearch grep: zero hits. Source-tree searches find finite locally free pushforward and invertible double dual; no finite etale depth-two affine hull. Blueprint double dual search finds coefficient/duality nodes only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoCoherentModuleExtension",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Proof: affine Noetherian opens, finite extension and double dual, depth-two calculation, and Hartogs identification before global gluing.",
+   "via": [
+    "lem-sbc-depth-two-coherent-module-extension",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoPushforwardHull",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDepthTwoPushforwardHull.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_depth_two_pushforward_hull",
+  "statement": "theorem affine_depth_two_pushforward_hull\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f]\n    (V : L.Opens) (hV : IsAffineOpen V) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    let N := Modules.restrict B.toModule hV.fromSpec\n    N.IsQuasicoherent ∧\n      Module.Finite (L.presheaf.obj (op V)) Γ(N, ⊤) ∧\n      (∀ x : Spec (L.presheaf.obj (op V)), hV.fromSpec x ∉ U →\n        ∃ hfinite : Module.Finite ((Spec (L.presheaf.obj (op V))).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) N.val.presheaf x),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth\n            (R := (Spec (L.presheaf.obj (op V))).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) N.val.presheaf x))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072410-L-1126285",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072410-L-1126285",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
