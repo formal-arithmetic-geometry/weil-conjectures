@@ -1,0 +1,118 @@
+{
+ "id": "affine-open-etale-map-factorization",
+ "kind": "statement",
+ "title": "Étale morphism factorization from the affine limit",
+ "statement": "Let X be a scheme [def-pc-scheme], J a small cofiltered category [def-weil-pbc-category-colimit], and D : J → X_et a diagram [def-weil-pbc-etale-site] with affine terms [def-weil-pbc-scheme-conventions] open over X [def-weil-open-immersion]. Let c be a limit cone and p : c.pt → X satisfy c_j ≫ D(j).hom = p. For every étale X-object U and q : c.pt → U.left with q ≫ U.hom = p, there exist j and g : D(j).left → U.left with g ≫ U.hom = D(j).hom and c_j ≫ g = q.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZM",
+  "place": "Morphism descent; Mathlib Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Form the underlying scheme diagram E and its structure natural transformation to constant X. Affine terms are compact and quasi-separated, and all transition maps are affine.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The étale target is locally of finite presentation. Apply the existing Mathlib factorization theorem to q and the natural-transformation equation obtained from hp and hq. Reorder the two equations in its conclusion.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-map-limit-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZM",
+  "place": "Morphism descent; Mathlib Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_π_app_comp_eq_of_locallyOfFinitePresentation",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-13",
+   "verdict": "exact Mathlib factorization match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any map from a cofiltered inverse limit of affine schemes to a scheme locally of finite presentation factors through a stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any map from a cofiltered inverse limit of affine schemes to a scheme locally of finite presentation factors through a stage",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.isAffineHom_π_app; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOpenSectionsDescent",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Strictly henselian local-ring comparison in the Tag 09AX effacement argument: degree-zero continuity on affine Zariski neighbourhoods, Descent of affine-limit sections; Étale morphism factorization from the affine limit",
+   "via": [
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+    "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+    "new-local-stalk-sections-cocone-colimit",
+    "new-local-stalk-sections-canonical-colimit",
+    "affine-open-sections-canonical-colimit-core",
+    "affine-open-sections-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOpenEtaleMapFactorization",
+  "file": "lean/Sheaf/Paper/AffineOpenEtaleMapFactorization.lean",
+  "declaration": "affineOpenSections_etale_map_factorization",
+  "statement": "theorem affineOpenSections_etale_map_factorization\n    {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]\n    (D : J ⥤ X.Etale)\n    [∀ j, IsAffine (D.obj j).left] [∀ j, IsOpenImmersion (D.obj j).hom]\n    (c : Cone (D ⋙ Scheme.Etale.forget X ⋙ Over.forget X))\n    (p : c.pt ⟶ X) (hp : ∀ j, c.π.app j ≫ (D.obj j).hom = p)\n    (hc : IsLimit c)\n    (U : X.Etale) (q : c.pt ⟶ U.left) (hq : q ≫ U.hom = p) :\n    ∃ (j : J) (g : (D.obj j).left ⟶ U.left),\n      g ≫ U.hom = (D.obj j).hom ∧ c.π.app j ≫ g = q",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T100128-L-2487512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T100128-L-2487512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

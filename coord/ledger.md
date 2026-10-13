@@ -11978,3 +11978,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/S3/Sheaf.RingTheory.PopescuRescalingData (stage 3; reviewer PASS; first push; landing 20261013T100126-L-2487062 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/S3/Sheaf.RingTheory.TateRootClosureQuotientFinite (stage 3; reviewer PASS; first push; landing 20261013T100126-L-2487203 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/S4/Sheaf.AlgebraicGeometry.ScalarCohomologyPullbackComposition (stage 3; reviewer PASS; first push; landing 20261013T100127-L-2487381 (interface); batch 20261013T095923; modules 2; new nodes 1)
+- 10:01 L: merged deliver/S4/Sheaf.Paper.AffineOpenSectionsDescent (stage 3; reviewer PASS; first push; landing 20261013T100128-L-2487512 (interface); batch 20261013T095923; modules 3; new nodes 2)
