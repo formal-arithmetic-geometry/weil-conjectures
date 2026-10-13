@@ -15,22 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Put A = R_p and write f_s : B_s to K for the pointing of a global triple s.\nIts kernel is s.q because its residue-field map is injective. By compatibility\nand hK, f_s sends the image of every element of R outside p to a nonzero element\nof K. Construct C_s by localizing B_s at these images, with canonical map i_s.\nIt is the base change A tensor_R B_s, hence etale over A. Extend f_s by sending\nb/d to f_s(b)/f_s(d). Its kernel defines a prime r_s of C_s; the induced embedding\nof the fraction field of C_s/r_s into K gives its residue-field pointing.\nThe composite A to C_s to K is the specified algebra map: the two maps agree on\nR by hK, hence on A by localization uniqueness. By hψ and injectivity of ψ its\nkernel on A is q. Thus this construction gives a local triple t_s, and i_s\nsatisfies both equations in the compatible-leg relation.",
-   "uses": [],
+   "text": "Work first with any ring map ℓ : R → A and compatible pointings into the field K. For a global triple s, construct P_s as the ring pushout of s.α and ℓ, with maps ι_s : s.B → P_s and α_s : A → P_s. Compatibility of the two maps to K gives b_s : P_s → K by pushout.desc. The affine pushout square is a scheme pullback (Mathlib isPullback_SpecMap_pushout), so α_s is étale by stability under base change [lem-weil-pbc-etale-ring-base-change]. The Mathlib equivalence SpecToEquivOfField identifies Spec.map b_s with a prime r_s and residue-field map φ_s; applying the inverse equivalence and Spec.map_injective proves evaluation followed by φ_s equals b_s. Precompose with α_s to obtain the base-pointing compatibility. Apply Spec.map to that equality and evaluate at the closed point of Spec K to prove r_s lies over q. Thus P_s defines a local triple t_s, with s.α ≫ ι_s = ℓ ≫ t_s.α and ι_s followed by its pointing equal to the pointing of s.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
    "elementary": false
   },
   {
-   "text": "Define the leg at s to be i_s followed by θ.app t_s. Each global-triple morphism\nextends uniquely to an A-map of these localized rings; its commutation with K\nfollows by uniqueness of the extension to K, so it is a local-triple morphism.\nNaturality of θ then proves naturality of the proposed global legs. Finally,\nfor any β : B_s to B_t occurring in the relation, all denominators become units\nin B_t because they already are units in A. Extend β to C_s to B_t. This map is\nA-linear by agreement on R and localization uniqueness, and commutes with the\npointings by agreement on B_s. It is therefore a local-triple morphism.\nNaturality of θ for it gives β followed by θ.app t = i_s followed by θ.app t_s,\nwhich is exactly the required relation.",
+   "text": "For a compatible pointed ring map β : s.B → t.B into any local triple t, let δ : P_s → t.B be pushout.desc β t.α, using the structural-map compatibility. The pushout equations give α_s ≫ δ = t.α and ι_s ≫ δ = β. The equality of δ followed by the pointing of t with b_s follows by pushout.hom_ext: on s.B it is the pointing compatibility of β, and on A it is the compatibility of t. Hence δ defines a morphism t_s → t of local triples in the induced under-over category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define η.app s = ι_s ≫ θ.app t_s. For a global morphism f : s → s′, extract its structural-map and pointing equations from Under.w and Over.w. The preceding pushout construction applied to the composite s.B → s′.B → P_s′ gives a local morphism a : t_s → t_s′ with ι_s ≫ D.map a = D_global.map f ≫ ι_s′. Naturality of θ for a, together with associativity, proves naturality of η. For each β in the compatible-leg relation, the preceding δ gives a : t_s → t with ι_s ≫ D.map a = β. Naturality of θ for a proves β ≫ θ.app t = η.app s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize A to Localization.AtPrime p.asIdeal and ℓ to the canonical localization map. Rewrite the local base pointing using hψ; hK gives the required equality of pointings on R. Apply the proved generic pushout construction and cocone restriction to obtain exactly the stated existential and compatible-leg relation.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-ring-base-change"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "S4",
+  "group": "U3",
   "document": "Stacks Project",
-  "place": "Explicit consequence of pointed triples, localization universal property and etale base change; written by the second reader."
+  "place": "Agent-written categorical consequence of Tag 04GW and Tag 00U2 (3); implemented using Mathlib ring pushouts, affine pullbacks, the field-point/residue-field equivalence, and cocone naturality."
  },
  "mathlib_searches": [
   {
@@ -106,10 +120,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T215612-L-901311",
-  "kind": "interface",
+  "landing": "20261013T222420-L-1229003",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
