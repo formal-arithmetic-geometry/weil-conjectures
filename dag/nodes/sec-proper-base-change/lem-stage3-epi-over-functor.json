@@ -10,7 +10,27 @@
  },
  "proof": [
   {
-   "text": "An epimorphism of sheaves is locally surjective. Every object of the over-site is a map to U, and pulling back the local covering and local lifts along that map gives local lifts there. The locally-surjective characterization of epimorphisms under WEqualsLocallyBijective therefore proves the restricted morphism epi.",
+   "text": "For an abelian presheaf P in universe u, sheafify its universe lift in max(u,v). Mathlib gives sheafification in this larger universe. Obtain WEqualsLocallyBijective by transporting from an essentially small model in max(u,v); this handles distinct site and value universes without an additional hypothesis.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "On each over-site C/U, compare the restriction of the large sheafification with the universe lift of the given small sheafification. Both units are locally bijective: the first by cocontinuity of Over.forget U, the second by the unchanged image and equalizer sieves under universe lift. The universal property of the first unit constructs a comparison; cancellation for locally bijective maps makes it locally bijective, hence an isomorphism. Evaluating at Over.mk (identity U) proves the large sheafification value is u-small. This is the local-description argument of Stacks 00WK.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Shrink the values of the large abelian sheafification with Shrink and conjugate its restriction maps by the additive equivalences. The resulting lifted presheaf is naturally isomorphic to the large sheafification; the fully faithful universe-lift functor reflects the sheaf condition. Transport the unit explicitly and verify local injectivity and surjectivity from its equalizer and image sieves. Apply Mathlib PresheafOfModules.sheafify and toSheafify to give it the module action, as in Stacks 03CX. All these steps are proved as private helpers in the item.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Let P be the presheaf cokernel of e and p its projection. Compose p with the locally injective module-sheaf realization eta to obtain q:B to Q. Since e followed by q is zero and e is epi, q is zero. Local injectivity of eta implies p(s) is locally zero for every section s of B. Pointwise exactness of the presheaf cokernel sequence (ShortComplex.exact_of_g_is_cokernel and moduleCat_exact_iff) then supplies local preimages of s under e. Thus e is locally surjective; this is the cokernel argument of Stacks 03D9.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use Presheaf.isLocallySurjective_whisker for the cocontinuous functor Over.forget U. The restricted map is locally surjective on underlying abelian sheaves, hence epi there. The faithful functor SheafOfModules.toSheaf reflects epimorphisms, proving the required epimorphism.",
    "uses": [],
    "elementary": false
   }
@@ -18,8 +38,8 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BY, local lifting criterion"
+  "document": "Stacks Project and Mathlib",
+  "place": "Sites 00WK; Modules on Sites 03CX and 03D9; explicit universe comparison and presheaf-cokernel proof, S1 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -91,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-15c5c",
-  "group": "B4",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T010611-L-2669366",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules and DAG records match the packet statements; all delivered modules and the direct importer compile, with only permitted sorryAx from epi_overFunctor_map."
+  "landing": "20261013T045559-L-136613",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
