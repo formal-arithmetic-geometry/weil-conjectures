@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-quasi-finite-polynomial-chart-dimension",
+ "kind": "statement",
+ "title": "Finite fibre dimension is represented by a natural number",
+ "statement": "For affine schemes X and T and a locally finitely presented morphism f : X ⟶ T, every point y : X admits a natural number n equal to the topological Krull dimension at f.asFiber y.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite",
+  "def-nagata-relative-affine-space",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "source": {
+  "document": "Stacks Project, Tag 00QE",
+  "place": "Tag 00QE, affine translation"
+ },
+ "proof": [
+  {
+   "text": "Apply upstream topologicalKrullDim_ne_top_of_compactSpace to the affine finite-type fibre. Local dimension is at most global dimension and nonnegative because each neighbourhood contains the point; extract a natural number from WithBot ENat.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C4",
+  "date": "2026-10-13",
+  "note": "Upstream finite-type dimension bound and the definition of local dimension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite dimension at a point of the fibre of a finite type scheme morphism",
+   "date": "2026-10-13",
+   "results": "8 hits, principally finite fibres and finite-type fibre instances; no exact match",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDimAt",
+   "date": "2026-10-13",
+   "results": "Unknown identifier in service",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*polynomial|exists.*quasiFinite|topologicalKrullDimAt",
+   "date": "2026-10-13",
+   "results": "Mathlib quasi-finiteness and Zariski main theorem hits; local rg found Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra.exists_quasiFinite_over_polynomial_algebra and upstream finite type dimension bound. Neither is the scheme-level chart statement. Dimension theorem proved using the latter.",
+   "verdict": "use existing ring theorem in chart proof plan; prove dimension step"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi-finite morphism from an affine neighbourhood to affine space of dimension equal to fibre dimension",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-quasi-finite-polynomial-chart",
+   "place": "split of chart theorem",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFinitePolynomialChart/Dimension.lean",
+  "declaration": "AlgebraicGeometry.exists_fiber_dimension_nat",
+  "statement": "theorem exists_fiber_dimension_nat\n    {X T : Scheme.{u}} [IsAffine X] [IsAffine T]\n    (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) :\n    ∃ n : ℕ, topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T154356-L-1162748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T154356-L-1162748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

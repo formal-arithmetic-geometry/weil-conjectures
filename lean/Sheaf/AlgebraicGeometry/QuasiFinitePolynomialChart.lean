@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Dimension
+import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Chart
 
 /-! # Quasi-finite polynomial charts at a fibre point
 
@@ -22,6 +24,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- A finitely presented affine morphism has a quasi-finite polynomial chart near any point,
 with the number of variables equal to the dimension of the fibre at that point.
 
@@ -49,6 +52,10 @@ theorem exists_quasiFinite_polynomial_chart
       (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T),
       LocallyOfFinitePresentation e ∧ LocallyQuasiFinite e ∧
       e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f ∧
-      topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞) := by sorry
+      topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞) := by
+  obtain ⟨n, hn⟩ := exists_fiber_dimension_nat f y
+  obtain ⟨U, hU, hy, e, he₁, he₂, he₃⟩ :=
+    exists_quasiFinite_polynomial_chart_data f y n hn
+  exact ⟨U, hU, hy, n, e, he₁, he₂, he₃, hn⟩
 
 end AlgebraicGeometry
