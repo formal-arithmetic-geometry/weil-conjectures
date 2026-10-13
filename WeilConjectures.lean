@@ -2032,6 +2032,7 @@ public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.Integral.BaseChange
 public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.SixFunctors.Integral.StalkInjective
+public import WeilConjectures.SixFunctors.Integral.StalkOpen
 public import WeilConjectures.SixFunctors.Integral.StalkPatch
 public import WeilConjectures.SixFunctors.Integral.StalkRestrict
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
