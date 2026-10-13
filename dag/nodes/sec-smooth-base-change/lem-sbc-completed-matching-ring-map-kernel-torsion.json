@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-completed-matching-ring-map-kernel-torsion",
+ "kind": "statement",
+ "title": "CompletedMatchingRingMapKernelTorsion",
+ "statement": "Let A be a Noetherian commutative local ring [def-weil-pbc-noetherian-ring], m its maximal ideal, C its m-adic completion, U the complement of the closed point in Spec A, q:Y to U finite, s:E to Spec C finite [def-weil-finite-integral-morphism], and D a completion overlap identification [def-sbc-punctured-completion-matching-sections]. Let P be the ring pushout of the matching ring and C over A, and let psi:P to Gamma(E) be [def-sbc-completed-matching-ring-map]. Write i:A to P for the structural map through the matching ring. For every x in P with psi(x)=0, there exists n in the natural numbers such that i(a)*x=0 for every a in m^n.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 05ER, 05EC and 0BLH, kernel argument"
+ },
+ "stmt_deps": [
+  "def-sbc-completed-matching-ring-map",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Proof: put m = maximalIdeal A, C = its completion, and B = D.matchingRing.\nChoose finitely many generators f_i of m. The opens D(f_i) cover U by hU.\nThe inverse images of these opens in Y are affine, since q is finite; write\nB_i for their section rings and B' for the section ring of the affine scheme E.\nThe overlap isomorphism gives B'_f_i = C tensor_A B_i, compatibly on double\nintersections. Sheaf gluing on this finite cover identifies B with the module\nof compatible families H0 for these formal-gluing data. The ring-pushout\nuniversal property identifies the source with C tensor_A B, and the comparison\nwith c tensor b maps to c times the completed coordinate of b.\nCompletion is flat. The H0 localization theorem (05EP and 05EQ, as used in\n05ER) identifies B_f_i with B_i, respecting the coordinate projections.\nConsequently the localization of the comparison at each f_i is an isomorphism.\nA kernel element x therefore satisfies f_i^e_i * x = 0 for some e_i for each i.\nTake N = 1 + sum_i e_i. Every degree-N monomial in the generators contains\nsome f_i^e_i, so every element of m^N kills x. Multiplication by a in A here\nis precisely multiplication by (D.baseMap followed by pushout.inl)(a).\nFor an empty generator family m = 0 and m^1 kills every element. If U is\nempty with a nonempty family, all the localized chart rings are zero, so the\nsame localization and monomial argument applies. Zero component rings cause\nno exception.",
+   "uses": [
+    "def-sbc-completed-matching-ring-map",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-formal-glueing-H0-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-completed-matching-ring-map",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-formal-glueing-H0-localization"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "Q2",
+  "document": "Stacks Project",
+  "place": "Tags 05ER and 05EC as applied in 0BLH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a formal gluing comparison is ideal power torsion and injective on torsion sections",
+   "results": "Eight hits; ideal-sheaf kernels and AdicCompletion.map_injective have different statements.",
+   "date": "2026-10-14",
+   "verdict": "No matching-sections torsion comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.primaryComponent",
+   "results": "Ideal.primaryComponent_mem gives the ideal-power annihilation formulation.",
+   "date": "2026-10-14",
+   "verdict": "Useful generic torsion API; no scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completedRingMap|kernel_torsion|torsion_kernel_zero",
+   "results": "msearch has no hits. Local source search finds private prime_kernel_torsion in FormalGlueingInjectiveApproximation and the generic torsion-submodule base-change theorem.",
+   "date": "2026-10-14",
+   "verdict": "Scheme-to-formal-gluing interface is not present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of the formal gluing comparison is torsion for powers of an ideal",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of sections glued along an open immersion has kernel supported on the closed complement",
+   "results": "Eight ideal-sheaf results; no matching-ring comparison.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate; second reading Q2."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Function.Injective",
+   "results": "Six completion injectivity results, requiring separatedness or finite module maps; none identifies this matching comparison.",
+   "date": "2026-10-14",
+   "verdict": "No direct replacement; second reading Q2."
+  },
+  {
+   "tool": "grep",
+   "query": "primaryComponent|torsionSubmodule|H0_localization|injective_approximation",
+   "results": "Mathlib torsion membership API; local library has proved primaryComponent_baseChange_bijective and exists_unique_bijective_h0_localization. Generic injective approximation does not specify its existential H as h0 or its prime map as this comparison.",
+   "date": "2026-10-14",
+   "verdict": "Relevant ingredients, no duplicate scheme-level theorem; second reading Q2."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapInjective",
+  "date": "2026-10-14",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-completed-matching-ring-map-injective",
+   "place": "Kernel torsion calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapKernelTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CompletedMatchingRingMapKernelTorsion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.completedRingMap_kernel_torsion",
+  "statement": "theorem completedRingMap_kernel_torsion\n    {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) :\n    ∀ x, D.completedRingMap x = 0 → ∃ n : ℕ,\n      ∀ a ∈ IsLocalRing.maximalIdeal A ^ n,\n        (D.baseMap ≫ pushout.inl _ _).hom a * x = 0",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T165647-L-1810040",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T165647-L-1810040",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

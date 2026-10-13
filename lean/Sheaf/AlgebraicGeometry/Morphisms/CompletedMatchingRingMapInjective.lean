@@ -6,6 +6,8 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapKernelTorsion
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapTorsionKernel
 
 /-! # Injectiveity of completed matching sections
 
@@ -46,6 +48,10 @@ theorem completedRingMap_injective
     {E : Scheme.{u}} {s : E ⟶ Spec
       (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]
     (D : CompletionGluingData A U q E s) :
-    Function.Injective D.completedRingMap := by sorry
+    Function.Injective D.completedRingMap := by
+  apply (injective_iff_map_eq_zero D.completedRingMap.hom).mpr
+  intro x hx
+  obtain ⟨n, hn⟩ := D.completedRingMap_kernel_torsion hU x hx
+  exact D.completedRingMap_torsion_kernel_zero hU x n hn hx
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
