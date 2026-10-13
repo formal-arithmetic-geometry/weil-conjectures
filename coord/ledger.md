@@ -12387,3 +12387,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:15 L: merged deliver/N2/Sheaf.AlgebraicGeometry.TensorModelRestrictionAdjunction (stage 3; reviewer PASS; first push; landing 20261013T121511-L-3529514 (interface); batch 20261013T121507; modules 2; new nodes 1)
 - 12:15 L: merged deliver/U2/Sheaf.RingTheory.FormalGlueingMapToAlgebraization (stage 3; reviewer PASS; after a return; landing 20261013T121511-L-3529706 (interface); batch 20261013T121507; modules 3; new nodes 2)
 - 12:18 L: merged deliver/B2/Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechNormalizedCoface (stage 3; reviewer PASS; first push; landing 20261013T121839-L-3557958 (interface); batch 20261013T121838; modules 3; new nodes 2)
+- 12:18 L: merged deliver/C2/Sheaf.AlgebraicGeometry.RestrictedAffineSingleConeNaturality (stage 3; reviewer PASS; first push; landing 20261013T121839-L-3558068 (proof); batch 20261013T121838; modules 1; new nodes 0)
