@@ -42,6 +42,8 @@ closed domains then so is `R_p`.
 
 @[expose] public section
 
+set_option backward.isDefEq.respectTransparency.types false
+
 universe u
 
 open CategoryTheory Limits Polynomial
@@ -88,7 +90,7 @@ variable {J : Type u} [SmallCategory J] [IsFiltered J] {F : J ⥤ CommRingCat.{u
 omit [IsFiltered J] in
 lemma ι_app_map_apply (c : Cocone F) {i j : J} (f : i ⟶ j) (x : F.obj i) :
     c.ι.app j (F.map f x) = c.ι.app i x := by
-  rw [← CommRingCat.comp_apply, c.w f]
+  rw [← c.w f]; rfl
 
 include c in
 lemma exists_eq_ι_app (hc : IsColimit c) (x : c.pt) : ∃ (j : J) (y : F.obj j), c.ι.app j y = x :=
@@ -113,7 +115,8 @@ lemma isDomain_of_isColimit (hc : IsColimit c) [∀ j, IsDomain (F.obj j)] : IsD
   obtain ⟨i, a, rfl⟩ := exists_eq_ι_app hc a
   obtain ⟨j, b, rfl⟩ := exists_eq_ι_app hc b
   rw [← ι_app_map_apply c (IsFiltered.leftToMax i j),
-    ← ι_app_map_apply c (IsFiltered.rightToMax i j), ← map_mul] at hab
+    ← ι_app_map_apply c (IsFiltered.rightToMax i j),
+    ← (ConcreteCategory.hom (c.ι.app (IsFiltered.max i j))).map_mul] at hab
   obtain ⟨k, f, hf⟩ := exists_map_eq_zero hc _ hab
   rw [map_mul] at hf
   rcases mul_eq_zero.mp hf with h | h
@@ -144,9 +147,11 @@ theorem isDomain_and_isIntegrallyClosed_of_isColimit (hc : IsColimit c)
     · exact hj _ (by simp [Finset.mem_image_of_mem P.coeff hn])
     · exact ⟨0, by rw [map_zero, notMem_support_iff.mp hn]⟩
   obtain ⟨Q, hQ, -, hQm⟩ := lifts_and_natDegree_eq_and_monic hlift hP
+  have h1 : (c.ι.app j).hom Q.leadingCoeff ≠ 0 := by
+    rw [hQm.leadingCoeff]
+    exact fun h ↦ hb (by rw [← mul_one b, ← (c.ι.app j).hom.map_one, h, mul_zero])
   have hι : c.ι.app j ((Q.scaleRoots b').eval a') = 0 := by
-    rw [← eval₂_at_apply, ← eval_map, map_scaleRoots _ _ _ (by simp [hQm.leadingCoeff]), hQ,
-      ha', hb']
+    rw [← eval₂_at_apply, ← eval_map, map_scaleRoots _ _ _ h1, hQ, ha', hb']
     exact he
   obtain ⟨k, f, hf⟩ := exists_map_eq_zero hc _ hι
   have hm : (Q.map (F.map f).hom).Monic := hQm.map _
@@ -205,7 +210,8 @@ noncomputable def localizationAtPrimeCocone : Cocone (localizationAtPrimeDiagram
         refine IsLocalization.ringHom_ext (M := (p.comap (c.ι.app i).hom).primeCompl)
           (S := Localization.AtPrime (p.comap (c.ι.app i).hom)) ?_
         ext x
-        simp [localizationAtPrimeDiagram, Localization.localRingHom_to_map] }
+        simpa [localizationAtPrimeDiagram, Localization.localRingHom_to_map] using
+          congrArg (algebraMap c.pt (Localization.AtPrime p)) (ι_app_map_apply c f x) }
 
 lemma localizationAtPrimeCocone_ι_app_mk' (j : J) (x : F.obj j)
     (s : (p.comap (c.ι.app j).hom).primeCompl) :
@@ -254,7 +260,7 @@ noncomputable def isColimitLocalizationAtPrimeCocone (hc : IsColimit c) :
     rw [localizationAtPrimeCocone_ι_app_mk']
     congr 1
     · rw [ι_app_map_apply, hx]
-    · exact Subtype.ext (by simp only [ι_app_map_apply, hs])
+    · exact Subtype.ext (by rw [← hs]; exact (ι_app_map_apply c (IsFiltered.rightToMax i j) s).symm)
   · change Localization.AtPrime (p.comap (c.ι.app i).hom) at w w'
     obtain ⟨⟨x, s⟩, rfl⟩ := IsLocalization.mk'_surjective (p.comap (c.ι.app i).hom).primeCompl w
     obtain ⟨⟨y, t⟩, rfl⟩ := IsLocalization.mk'_surjective (p.comap (c.ι.app i).hom).primeCompl w'
