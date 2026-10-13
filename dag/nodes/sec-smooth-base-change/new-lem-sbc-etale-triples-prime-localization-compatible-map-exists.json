@@ -1,0 +1,136 @@
+{
+ "id": "new-lem-sbc-etale-triples-prime-localization-compatible-map-exists",
+ "kind": "statement",
+ "title": "Compatible map into a prime-localized pointed triple",
+ "statement": "Let R be a commutative ring, p a prime, A = R_p [def-weil-pbc-localization-at-prime], K a field, chi : kappa_R(p) -> K, q a prime of A and psi : kappa_A(q) -> K [def-weil-residue-field]. Assume an A-algebra structure on K such that evaluation at q followed by psi equals its algebra map, whose restriction to R equals evaluation at p followed by chi. For each pointed etale R-triple s [def-weil-pbc-etale-residue-triples], there are a pointed etale A-triple t and a ring map beta : B_s -> B_t such that beta composed with alpha_s equals alpha_t composed with R -> A, and evaluation at t.q followed by t.phi composed with beta equals evaluation at s.q followed by s.phi.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 04GW (pointed triples), 00CP (localization universal property), 00U2 (3) (etale base change). Agent-written construction, not a verbatim theorem."
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Construct C by localizing B_s at the image of R minus p; the localization universal property gives A -> C and identifies C with A tensor_R B_s. Etale base change gives etaleness over A.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map f : B_s -> K has kernel s.q, and its restriction to R has kernel p by compatibility and injectivity of chi. Thus all denominators map to units. Extend f to g : C -> K by localization. By hK the composite A -> C -> K agrees with the specified algebra map on R, hence on A by localization uniqueness.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take Q = ker g and factor g through the fraction field of C/Q, giving the residue-field embedding at Q. The contraction of Q to A is ker(A -> K), which is q by hpsi and injectivity of psi. The resulting triple has the specified pointing, and the two requested equations are the localization extension equations.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "document": "Stacks Project",
+  "place": "Tags 04GW (pointed triples), 00CP (localization universal property), 00U2 (3) (etale base change). Agent-written construction, not a verbatim theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "residueField.*(lift|map)|exists.*(residue|localiz)",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/RingHom.lean, Mathlib/RingTheory/Spectrum/Prime/RingHom.lean, Mathlib/RingTheory/Spectrum/Prime/RingHom.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "verdict": "No complete pointed-triple construction found; generic localization, etale base change and residue-field facts supply the ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Localization",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No complete pointed-triple construction found; generic localization, etale base change and residue-field facts supply the ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change pointed etale algebra to localization and extend map to field",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.FormallyEtale.localization_map, Algebra.IsEtaleAt.comp, RingHom.etale_algebraMap, Algebra.FormallyEtale.localization_base, RingHom.Etale.ofLocalizationSpanTarget, Algebra.IsStandardEtale.of_isLocalizationAway, Algebra.Etale.of_isLocalization_Away, RingHom.Etale.ofLocalizationSpan",
+   "verdict": "No complete pointed-triple construction found; generic localization, etale base change and residue-field facts supply the ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a homomorphism from an etale algebra to a field across localization of its base ring",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  }
+ ],
+ "status": "split",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCompatibleMapExists",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationCompatibleMapExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_compatible_map_exists",
+  "statement": "theorem etaleResidueTriples_primeLocalization_compatible_map_exists\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (s : EtaleResidueTriples R p K χ) :\n    ∃ (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ)\n      (β : s.B ⟶ t.B),\n      s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧\n      β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n        (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestrictionUnique",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Localization construction for the canonical maps used in uniqueness of compatible restriction legs",
+   "via": [
+    "lem-sbc-etale-triples-localized-strict-henselization",
+    "new-lem-sbc-etale-triples-localized-core",
+    "new-lem-sbc-etale-triples-prime-localization-comparison",
+    "new-lem-sbc-etale-triples-prime-localization-cocone-equiv",
+    "new-lem-sbc-etale-triples-prime-localization-cocone-restriction",
+    "new-lem-sbc-etale-triples-prime-localization-cocone-restriction-unique"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T222419-L-1228546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T222419-L-1228546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

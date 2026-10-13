@@ -13743,3 +13743,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:24 L: merged deliver/T4/Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise (stage 3; reviewer PASS; first push; landing 20261013T222417-L-1228078 (proof); batch 20261013T222357; modules 1; new nodes 1)
 - 22:24 L: merged deliver/U1/Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechCofaceEvaluation (stage 3; reviewer PASS; first push; landing 20261013T222418-L-1228233 (proof); batch 20261013T222357; modules 1; new nodes 0)
 - 22:24 L: merged deliver/U2/Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso (stage 3; reviewer PASS; first push; landing 20261013T222418-L-1228349 (interface); batch 20261013T222357; modules 2; new nodes 1)
+- 22:24 L: merged deliver/U2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestrictionUnique (stage 3; reviewer PASS; first push; landing 20261013T222419-L-1228546 (interface); batch 20261013T222357; modules 2; new nodes 1)

@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRelation
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCompatibleMapExists
 
 @[expose] public section
 
@@ -45,6 +46,14 @@ theorem etaleResidueTriples_primeLocalization_cocone_restriction_unique
     (η η' : etaleResidueTriplesRingDiagram R p K χ ⟶ (Functor.const _).obj V)
     (hη : etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ)
     (hη' : etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η' θ) :
-    η = η' := by sorry
+    η = η' := by
+  apply NatTrans.ext
+  funext s
+  obtain ⟨t, β, hα, hφ⟩ :=
+    etaleResidueTriples_primeLocalization_compatible_map_exists
+      R p K χ q ψ hψ hK s
+  have eη := hη s t β hα hφ
+  have eη' := hη' s t β hα hφ
+  rw [← eη, ← eη']
 
 end AlgebraicGeometry.Scheme
