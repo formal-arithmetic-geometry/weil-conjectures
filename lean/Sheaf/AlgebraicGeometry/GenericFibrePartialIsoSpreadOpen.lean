@@ -6,6 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Birational.Birational
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.GenericFibreAffineOpenLift
+import Sheaf.AlgebraicGeometry.GenericFibreIsoSpreadBaseOpen
 
 /-! # Spreading a partial isomorphism of generic fibres to a common open
 
@@ -26,36 +28,23 @@ families spreads to a common open over the original integral affine base.
 
 Source: Stacks Project, Tag 0559, first proof, the common-open paragraph; Tag 0552;
 Tag 01ZM, morphism descent and eventual equality.
-Proof: Write the families as Spec B and Spec C over S = Spec A, and identify the
-generic residue field with Frac(A). The supplied partial isomorphism identifies
-dense opens of Spec(B tensor_A Frac(A)) and Spec(C tensor_A Frac(A)). Its source
-open is nonempty by density and the nonempty generic source. Choose a point in
-it and principal affine neighbourhoods U and T on the source and target sides,
-contained in the supplied opens. Under the partial isomorphism, restrict U and
-T to their common intersection. This intersection is affine: both U and the
-inverse image of T are affine opens in the separated affine generic source.
-Its target image is affine as well. These are quasi-compact opens of the generic
-fibres, hence are finite unions of principal opens in the ambient affines.
-Lift their finitely many defining functions to B and C after a nonzero base
-localization. The resulting quasi-compact opens are of finite presentation over
-the localized base, since the ambient affine families are finitely presented.
-Their generic restrictions are exactly the two isomorphic affine opens chosen
-above. Apply morphism descent and eventual equality (Tag 01ZM) to descend the
-two inverse maps, their inverse identities, and their equations over the base.
-In algebraic terms, finite presentations give finitely many generator images
-and relations, and only finitely many equalities must be imposed.
-Thus, after inverting one common nonzero element a of A, all these maps and
-identities hold over A[1/a]. Generic equalities are killed by nonzero base
-elements, and only finitely many equalities have to be imposed.
-This gives isomorphic opens in
-the restrictions of X and Y over D(a). These restrictions and their opens are
-open subschemes of the original X and Y. Take their source open V and compose
-the isomorphism with the target inclusion to get i. The maps are over S by the
-same generator relations. The descended source still has the chosen nonempty
-generic open, so eta is in the image of V -> S. Vertical components and
-nilpotents in the special fibres cause no problem: generic equalities involving
-them are killed by the same base localization. The empty generic fibre is
-explicitly excluded by the nonempty hypothesis.
+Proof: Density and nonemptiness give a point in the source of the partial
+isomorphism. Choose an affine neighbourhood A inside that source. Its images
+U and T under the source inclusion and the partial isomorphism followed by
+the target inclusion are affine, since both maps are open immersions. The
+canonical image isomorphisms identify U and T over the generic residue field.
+Lift U and T to affine opens V of X and W of Y, with compatible generic-fibre
+isomorphisms, using exists_affine_open_lift_of_generic_fibre. Transport the
+isomorphism U -> T to V_eta -> W_eta. The opens V and W are still locally
+finitely presented over S. Apply exists_base_open_iso_of_generic_fibre_iso
+to descend this isomorphism to their restrictions above a base neighbourhood
+B of eta. The preimage Z of B in V has an open image O in X. Compose the
+canonical image isomorphism O -> Z with the descended isomorphism and the
+target open inclusions to obtain an open immersion i:O -> Y over S. Transport
+the original point of U to V_eta; its fibre-inclusion image maps to eta,
+and therefore belongs to Z since eta lies in B. Its image in O proves eta
+lies in the range of O -> S. This argument allows arbitrary vertical
+components and nilpotents in the special fibres.
 
 (blueprint: lem-sbc-generic-fibre-partial-iso-spread-open) -/
 theorem exists_open_of_generic_fibre_partial_iso
@@ -66,6 +55,60 @@ theorem exists_open_of_generic_fibre_partial_iso
     (p : (f.fiber η).PartialIso (g.fiber η))
     (hp : p.IsOver (f.fiberToSpecResidueField η) (g.fiberToSpecResidueField η)) :
     ∃ V : X.Opens, η ∈ Set.range (V.ι ≫ f) ∧
-      ∃ i : V.toScheme ⟶ Y, IsOpenImmersion i ∧ i ≫ g = V.ι ≫ f := by sorry
+      ∃ i : V.toScheme ⟶ Y, IsOpenImmersion i ∧ i ≫ g = V.ι ≫ f := by
+  obtain ⟨x, hx⟩ := p.dense_source.nonempty
+  obtain ⟨A, hA, hxA, _⟩ := exists_isAffineOpen_mem_and_subset
+    (X := p.source.toScheme) (x := ⟨x, hx⟩) (U := ⊤) (by trivial)
+  let U := p.source.ι ''ᵁ A
+  let j := p.iso.hom ≫ p.target.ι
+  let T := j ''ᵁ A
+  have hU : IsAffineOpen U := hA.image_of_isOpenImmersion p.source.ι
+  have hT : IsAffineOpen T := hA.image_of_isOpenImmersion j
+  let e : U.toScheme ≅ T.toScheme :=
+    (p.source.ι.isoImage A).symm ≪≫ j.isoImage A
+  have he : e.hom ≫ T.ι ≫ g.fiberToSpecResidueField η =
+      U.ι ≫ f.fiberToSpecResidueField η := by
+    dsimp [e, T, j, U]
+    simp only [Category.assoc, Scheme.Hom.isoImage_hom_ι_assoc]
+    rw [hp]
+    exact Scheme.Hom.isoImage_inv_ι_assoc _ _ _
+  obtain ⟨V, hV, a, _, ha⟩ := exists_affine_open_lift_of_generic_fibre f η hη U hU
+  obtain ⟨W, hW, b, _, hb⟩ := exists_affine_open_lift_of_generic_fibre g η hη T hT
+  have : IsAffine V.toScheme := hV
+  have : IsAffine W.toScheme := hW
+  let e' : (V.ι ≫ f).fiber η ≅ (W.ι ≫ g).fiber η := a ≪≫ e ≪≫ b.symm
+  have he' : e'.hom ≫ (W.ι ≫ g).fiberToSpecResidueField η =
+      (V.ι ≫ f).fiberToSpecResidueField η := by
+    change (a.hom ≫ e.hom ≫ b.inv) ≫ _ = _
+    simp only [Category.assoc]
+    rw [← hb]
+    simp only [Iso.inv_hom_id_assoc]
+    rw [he, ha]
+  obtain ⟨B, hηB, c, hc⟩ :=
+    exists_base_open_iso_of_generic_fibre_iso (V.ι ≫ f) (W.ι ≫ g) η hη e' he'
+  let Z := (V.ι ≫ f) ⁻¹ᵁ B
+  let Z' := (W.ι ≫ g) ⁻¹ᵁ B
+  let O := V.ι ''ᵁ Z
+  let i : O.toScheme ⟶ Y :=
+    (V.ι.isoImage Z).inv ≫ c.hom ≫ Z'.ι ≫ W.ι
+  refine ⟨O, ?_, i, inferInstance, ?_⟩
+  · have hxU : x ∈ U := ⟨⟨x, hx⟩, hxA, rfl⟩
+    let z := a.inv ⟨x, hxU⟩
+    let v := (V.ι ≫ f).fiberι η z
+    have hv : (V.ι ≫ f) v = η := by
+      have hv' : v ∈ Set.range ((V.ι ≫ f).fiberι η) := ⟨z, rfl⟩
+      rw [Scheme.Hom.range_fiberι] at hv'
+      exact hv'
+    have hvZ : v ∈ Z := by
+      change (V.ι ≫ f) v ∈ B
+      rwa [hv]
+    refine ⟨⟨V.ι v, ⟨v, hvZ, rfl⟩⟩, ?_⟩
+    change f (V.ι v) = η
+    exact hv
+  · dsimp [i]
+    simp only [Category.assoc]
+    have hc' : c.hom ≫ Z'.ι ≫ W.ι ≫ g = Z.ι ≫ V.ι ≫ f := hc
+    rw [hc']
+    exact Scheme.Hom.isoImage_inv_ι_assoc _ _ _
 
 end AlgebraicGeometry
