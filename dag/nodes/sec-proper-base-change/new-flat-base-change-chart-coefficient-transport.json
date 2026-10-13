@@ -1,0 +1,162 @@
+{
+ "id": "new-flat-base-change-chart-coefficient-transport",
+ "kind": "statement",
+ "title": "Affine base-change chart coefficient h-map transport before cohomology",
+ "statement": "Let f:X -> S and g:S prime -> S be arbitrary scheme morphisms, F a module on X, I its injective resolution, J a resolution of G=tensorPullback(g prime)F, V and W affine opens of S and S prime, W <= g inverse V, and D the flat base-change open choices. Assume the supplied Gamma(S,V)-algebra structure on Gamma(S prime,W) has algebraMap equal to g.appLE. Put h=(f restricted over V) followed by V.toSpecGamma, N the ordinary pullback of F to f inverse V, T=baseChangedScheme(h), A=baseChangedModule(h,N), U=g prime inverse(f inverse V), L=f prime inverse W, M=G restricted to L, and k=(f prime restricted over W) followed by W.toSpecGamma. This statement is independent of any cohomology degree. Put j:L -> U the open inclusion, c the canonical restriction composition isomorphism, r the restriction adjunction unit followed by pushforward(c), q:U -> f inverse V the restricted g prime, and alpha the restriction/pullback comparison. There is a scheme isomorphism sigma:L -> T and adjoint coefficient maps phi:A -> sigma_* M and psi:M -> sigma_inverse_* A. Their composites, transported along the pushforward composition and inverse-identity comparisons, are the identity coefficient maps. Phi intertwines the scalar endomorphisms from the displayed structure maps to Spec Gamma(W). The composite sigma followed by baseChangeFst equals j followed by q. Along this equality, alpha followed by the baseChangeUnit and the pushforward of phi equals D.psi followed by the pushforward of r, with the pushforward composition comparisons. These are identities of sheaves of modules, without any cohomology assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "02KH first paragraph affine-local chart dictionary; 0096 pullback adjunction; 0097 composition; coefficient unit square from FlatBaseChangeOpenChoices."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the fibre-product universal property and affine chart isomorphisms to identify T with L. The equality of algebraMap with g.appLE ensures the two affine-base maps agree. Construct inverses by projection and check their composites by pullback.hom_ext.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the two pulled-back coefficients by pullback composition and the adjunction-compatible tensor/ordinary pullback comparison. Transpose the identification and its inverse. Adjunction triangles and inverse scheme identities give the two coefficient identities. The equality of the projection to Spec Gamma(W) gives the scalar square by multiplication naturality. Transpose the final unit square; composite-unit identities reduce it to D.unit_square restricted to L, with precisely the restriction composition iso c. This is independent of any cohomology degree and works on empty opens and zero coefficients.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "U1 following document",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Geometric chart and coefficient steps of the existing proof, expanded with Stacks 0096 and 0097; sources read 2026-10-14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of sheaves of modules transported along a scheme isomorphism is bijective and natural in coefficient maps",
+   "results": "Eight hits: section isomorphisms, pushforwardCongr and Hom.isIso_iff_isIso_app; none gives the chart coefficient/unit square.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleCohomology\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomology.*(iso|bijective)|smulHom_naturality",
+   "results": "msearch no hits; local rg finds the existing cohomology naturality/composition lemmas, and Mathlib pullbackComp and restrictFunctorIsoPullback, but no chart coefficient transport.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical identification of sheaf module pullbacks under affine chart isomorphism compatible with adjunction units",
+   "results": "UNAVAILABLE: Internal Server Error; no absence conclusion is inferred. Other search kinds and local source search were used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of cartesian scheme square to affine open identifies pullback coefficients compatibly with adjunction units",
+   "results": "Eight hits, including Scheme.Opens.toSpecΓ_SpecMap_appLE and IsAffineOpen.SpecMap_appLE_fromSpec. These establish chart compatibility, not the coefficient inverse identities and unit square together.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "Ten hits including pullbackComp and conjugateEquiv_pullbackComp_inv. These supply the composition comparison but not the affine chart or the D.psi unit square.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIsoPushforwardInv|leftAdjointUniq|restrictFunctorComp",
+   "results": "25 hits including Adjunction.leftAdjointUniq, its unit identities, restrictFunctorIsoPullback and restrictFunctorComp. Local source search additionally found ModuleSectionsPullbackIsoTransport, which transports global sections only and does not state the chart coefficient/unit square.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport",
+  "date": "2026-10-14",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Geometric and coefficient steps of new-flat-base-change-chart-cohomology-transport",
+   "via": [
+    "new-flat-base-change-chart-cohomology-transport",
+    "new-flat-base-change-module-leray-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeChartCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_chart_coefficient_transport",
+  "statement": "theorem exists_flatBaseChange_chart_coefficient_transport\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (F : X.Modules) (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (V : S.Opens) (W : S'.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V) (D : FlatBaseChangeOpenChoices f g F I J V)\n    [Algebra Γ(S, V) Γ(S', W)]\n    (hAlgebra : algebraMap Γ(S, V) Γ(S', W) = (g.appLE V W eVW).hom) :\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let N := (pullback (f ⁻¹ᵁ V).ι).obj F\n    let T := baseChangedScheme (S := Γ(S', W)) h\n    let A := baseChangedModule (S := Γ(S', W)) h N\n    let G := (tensorPullback (pullback.snd g f)).obj F\n    let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n    let L := (pullback.fst g f) ⁻¹ᵁ W\n    let e : L ≤ U := by\n      change (pullback.fst g f) ⁻¹ᵁ W ≤ (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n      rw [flatBaseChangeOpenEquality f g V]\n      exact (pullback.fst g f).preimage_mono eVW\n    let M := (restrictFunctor L.ι).obj G\n    let k := (pullback.fst g f).resLE W L le_rfl ≫ W.toSpecΓ\n    let j := (Limits.pullback g f).homOfLE e\n    let c := (restrictFunctorComp j U.ι).symm.app G ≪≫\n      (restrictFunctorCongr ((Limits.pullback g f).homOfLE_ι e)).app G\n    let r := (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj G) ≫\n      (pushforward j).map c.hom\n    let q := (pullback.snd g f).resLE (f ⁻¹ᵁ V) U le_rfl\n    let α := ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom\n    ∃ (σ : L.toScheme ≅ T)\n      (φ : A ⟶ (pushforward σ.hom).obj M)\n      (ψ : M ⟶ (pushforward σ.inv).obj A),\n      (φ ≫ (pushforward σ.hom).map ψ ≫ (pushforwardComp σ.inv σ.hom).hom.app A ≫\n        (pushforwardCongr σ.inv_hom_id).hom.app A = (pushforwardId T).inv.app A) ∧\n      (ψ ≫ (pushforward σ.inv).map φ ≫ (pushforwardComp σ.hom σ.inv).hom.app M ≫\n        (pushforwardCongr σ.hom_inv_id).hom.app M =\n          (pushforwardId L.toScheme).inv.app M) ∧\n      (∀ a : Γ(S', W),\n        A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫\n          (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a) ≫ φ =\n        φ ≫ (pushforward σ.hom).map\n          (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom a))) ∧\n      ∃ ef : σ.hom ≫ baseChangeFst (S := Γ(S', W)) h = j ≫ q,\n        α ≫ baseChangeUnit (S := Γ(S', W)) h N ≫\n          (pushforward (baseChangeFst (S := Γ(S', W)) h)).map φ ≫\n          (pushforwardComp σ.hom (baseChangeFst (S := Γ(S', W)) h)).hom.app M ≫\n          (pushforwardCongr ef).hom.app M =\n        D.psi ≫ (pushforward q).map r ≫ (pushforwardComp j q).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e5e5",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T190158-L-3222629",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e5e5",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T190158-L-3222629",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their packet, node statements, unchanged theorem signature, and clean compilation (including the direct importer)."
+ }
+}

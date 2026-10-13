@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.FlatBaseChangeChartCoefficientTransport
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 
 /-! # Cohomology transport from the affine scalar-extension chart
 
@@ -22,7 +25,47 @@ open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
+attribute [local irreducible] moduleCohomologyFMap cohomologyOpenRestriction
+  pushforwardComp pushforwardCongr pushforwardId
 
+private theorem chart_fmap_congr {Y Z : Scheme.{u}}
+    {h k : Y ⟶ Z} (e : h = k) {A : Z.Modules} {B : Y.Modules}
+    (φ : A ⟶ (pushforward h).obj B) (p : ℕ) :
+    moduleCohomologyFMap h φ p =
+      moduleCohomologyFMap k (φ ≫ (pushforwardCongr e).hom.app B) p := by
+  subst k
+  have hc : (pushforwardCongr (rfl : h = h)).hom.app B = 𝟙 _ := by
+    ext U
+    simp
+  rw [hc, Category.comp_id]
+
+private theorem chart_fmap_identity (Y : Scheme.{u}) (A : Y.Modules) (p : ℕ) :
+    moduleCohomologyFMap (𝟙 Y) ((pushforwardId Y).inv.app A) p = 𝟙 _ := by
+  have he : (pushforwardId Y).inv.app A = 𝟙 A := by
+    ext U
+    simp
+  rw [he]
+  refine ((moduleCohomologyFMap_basic_properties (𝟙 Y) (𝟙 A) p).2.2.1
+    Y A A (𝟙 A)).trans ?_
+  ext x
+  simp
+
+private theorem chart_fmap_inverse {Y Z : Scheme.{u}} (σ : Y ≅ Z)
+    {A : Z.Modules} {B : Y.Modules}
+    (φ : A ⟶ (pushforward σ.hom).obj B)
+    (ψ : B ⟶ (pushforward σ.inv).obj A)
+    (hc : φ ≫ (pushforward σ.hom).map ψ ≫
+      (pushforwardComp σ.inv σ.hom).hom.app A ≫
+      (pushforwardCongr σ.inv_hom_id).hom.app A = (pushforwardId Z).inv.app A)
+    (p : ℕ) :
+    moduleCohomologyFMap σ.hom φ p ≫ moduleCohomologyFMap σ.inv ψ p = 𝟙 _ := by
+  rw [← moduleCohomologyFMap_comp, chart_fmap_congr σ.inv_hom_id]
+  simp only [Category.assoc] at hc ⊢
+  rw [hc]
+  exact chart_fmap_identity Z A p
+
+set_option maxHeartbeats 800000 in
+-- Elaborating the coefficient comparisons uses several module functors.
 /-- Transport along the affine chart identifies its unit map with open restriction
 of the specified coefficient h-map. No Leray edge or higher image is involved.
 Source: Stacks Project, Tag 02KH, first paragraph of the proof; Tag 01FB,
@@ -86,6 +129,54 @@ theorem exists_flatBaseChange_chart_cohomology_transport
             ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom).hom x)) =
         cohomologyOpenRestriction G U L e p
           (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V) U le_rfl)
-            D.psi p x)) := by sorry
+            D.psi p x)) := by
+  classical
+  intro h N T A C G U L e M C' k
+  obtain ⟨σ, φ, ψ, hφψ, hψφ, hscalar, ef, hunit⟩ :=
+    exists_flatBaseChange_chart_coefficient_transport f g F I J V W hV hW eVW D hAlgebra
+  let a := moduleCohomologyFMap σ.hom φ p
+  let b := moduleCohomologyFMap σ.inv ψ p
+  have hab : a ≫ b = 𝟙 _ := chart_fmap_inverse σ φ ψ hφψ p
+  have hba : b ≫ a = 𝟙 _ := chart_fmap_inverse σ.symm ψ φ hψφ p
+  let t : C.obj A ≃+ C'.obj M :=
+    { toFun := a.hom
+      invFun := b.hom
+      left_inv := fun x ↦ ConcreteCategory.congr_hom hab x
+      right_inv := fun x ↦ ConcreteCategory.congr_hom hba x
+      map_add' := a.hom.map_add }
+  refine ⟨t, ?_, ?_⟩
+  · intro s y
+    have hs := moduleCohomologyFMap_source_naturality σ.hom
+      (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫
+        (baseChangeSnd (S := Γ(S', W)) h).appTop).hom s)) φ p
+    have ht := moduleCohomologyFMap_target_naturality σ.hom
+      (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom s)) φ p
+    rw [hscalar s] at hs
+    exact ConcreteCategory.congr_hom (hs.trans ht.symm) y
+  · let j := (Limits.pullback g f).homOfLE e
+    let c := (restrictFunctorComp j U.ι).symm.app G ≪≫
+      (restrictFunctorCongr ((Limits.pullback g f).homOfLE_ι e)).app G
+    let r := (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj G) ≫
+      (pushforward j).map c.hom
+    let q := (pullback.snd g f).resLE (f ⁻¹ᵁ V) U le_rfl
+    let α := ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom
+    have hu : (forget₂ _ AddCommGrpCat.{u}).map
+        ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map α) ≫
+        moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)
+          (baseChangeUnit (S := Γ(S', W)) h N) p ≫ a =
+        moduleCohomologyFMap q D.psi p ≫ moduleCohomologyFMap j r p := by
+      dsimp only [a]
+      rw [← moduleCohomologyFMap_comp,
+        moduleCohomologyFMap_source_naturality,
+        chart_fmap_congr ef]
+      simp only [Category.assoc] at hunit ⊢
+      rw [hunit, moduleCohomologyFMap_comp]
+    intro x
+    unfold cohomologyOpenRestriction
+    dsimp only [t]
+    have hx := congrArg (fun z ↦ z.hom x) hu
+    simp only [AddCommGrpCat.hom_comp, ModuleCat.forget₂_map,
+      AddCommGrpCat.hom_ofHom, AddMonoidHom.comp_apply] at hx
+    exact hx
 
 end AlgebraicGeometry.Scheme.Modules
