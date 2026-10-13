@@ -11009,3 +11009,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitCharts (stage 3; reviewer PASS; first push; landing 20261013T040748-L-3948948 (interface); batch 20261013T040738; modules 3; new nodes 2)
 - 04:07 L: merged deliver/K1/Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso (stage 3; reviewer PASS; after a return; landing 20261013T040749-L-3949137 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/K3/Sheaf.Algebra.Homology.SingleDegreeExactTermHomQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T040749-L-3949270 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:07 L: merged deliver/K4/Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect (stage 3; reviewer PASS; first push; landing 20261013T040750-L-3949368 (interface); batch 20261013T040738; modules 2; new nodes 1)

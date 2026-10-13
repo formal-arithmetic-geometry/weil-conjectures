@@ -1,0 +1,198 @@
+{
+ "id": "lem-pc-affine-global-hom-base-change-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1): identify affine global Hom base change with global sections of sheaf base change, refining steps 3 and 4 of lem-pc-affine-morphism-hom-out-of-perfect",
+   "via": [
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine global Hom comparison as sections of sheaf base change",
+ "statement": "Let R and B be commutative rings, X a quasi-compact quasi-separated scheme [def-pc-scheme], f:X\\to S=\\operatorname{Spec}(R) and g:S′=\\operatorname{Spec}(B)\\to S. Form X′=X\\times_S S′ with projections f′ and g_X [def-pc-fibre-product]. Let M\\in D(\\mathcal O_X) be perfect [def-pc-perfect-complex] and K\\in D_{\\mathrm{QCoh}}(X) [def-pc-derived-category], and put H=R\\mathcal Hom_X(M,K) [def-pur-derived-internal-hom]. Write E_g for the fixed derived extension of scalars and α for the canonical affine global Hom comparison [def-pc-affine-global-hom-base-change-map]; global Hom is [def-pc-global-derived-rhom]. There are isomorphisms a:E_g(R\\operatorname{Hom}_X(M,K))\\xrightarrow{\\sim}R\\Gamma(S′,Lg^*Rf_*H) and b:R\\Gamma(S′,Rf′_*Lg_X^*H)\\xrightarrow{\\sim}R\\operatorname{Hom}_{X′}(Lg_X^*M,Lg_X^*K) such that α=a\\,;\\,R\\Gamma(S′,\\mathrm{BC}_H)\\,;\\,b, where BC_H is the fixed derived sheaf base-change map [def-pc-derived-base-change-map], with pullback and direct image as in [def-pc-derived-pullback, def-pc-derived-direct-image]. Derived sections on S′ carry their canonical B-action through ΓSpecIso, equivalently affineDerivedGlobalSections of the identity of S′. No Tor independence is assumed, and no invertibility of BC_H or α is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-global-derived-rhom",
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put H = R𝓗om_X(M,K). Internal Hom from a perfect complex preserves quasi-coherence, so H is in D_QCoh(X). Since f is qcqs, Rf_*H is in D_QCoh(S).",
+   "uses": [
+    "lem-sc-rhom-supported-qcoherent-perfect-part",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
+   }
+  },
+  {
+   "text": "Derived direct-image composition gives the restricted-sections identification RΓ_X(H) = RΓ_S(Rf_*H), with the R-action from f. Use the isomorphism commuting with the right-derived units and the underived identity on sections.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-global-derived-rhom",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
+   }
+  },
+  {
+   "text": "On the affine bases the quasi-coherent derived equivalence and the tilde/pullback comparison identify Lg^* with derived extension of scalars, by computing on K-flat module representatives. The extension/restriction adjunction descends from these representatives. Compare it with the fixed affineDerivedExtensionAdjunction by uniqueness of left adjoints to the same restriction functor; this preserves the unit. Combine with the preceding sections comparison to construct a.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
+   }
+  },
+  {
+   "text": "The perfect tensor-Hom comparison supplies the dual, evaluation and coevaluation exact pairing, and the perfect-dual pullback comparison. Strong monoidal pullback transports the exact pairing. Consequently the evaluation-mate map Lg_X^*H → R𝓗om_X′(Lg_X^*M,Lg_X^*K) is invertible: under the tensor-Hom adjunction its evaluation is the inverse tensor-pullback comparison followed by pullback of evaluation. Apply Rf′_* and RΓ_S′ and the unit-compatible direct-image composition isomorphism to construct b.",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
+   }
+  },
+  {
+   "text": "Transpose a.hom followed by RΓ_S′ of the fixed sheaf base-change map and b.hom under the derived extension/restriction adjunction. Source-unit compatibility, naturality and the triangle identities identify this transpose with restricted RΓ_X of the evaluation-mate map, followed by the sections/pushforward comparison on X′. Its evaluation and right-derived-unit equations identify it with globalHomPullbackComparison. Injectivity of the Hom equivalence gives the displayed equality. No Tor-independence assumption or invertibility of sheaf base change has been used.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-rhom-supported-qcoherent-perfect-part",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-global-derived-rhom",
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AA7, lemma-affine-morphism-and-hom-out-of-perfect, case (1); refinement of the parent proof steps 3 and 4, retaining the fixed adjunctions and right-derived units"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived global Hom base change map factors as global sections of sheaf derived base change map using affine tensor pullback and perfect internal Hom pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived global Hom base change map factors as global sections of sheaf derived base change map using affine tensor pullback and perfect internal Hom pullback",
+   "results": "8 hits: underived pullbackPushforwardAdjunction, pullbackObjUnitToUnit and its Hom-equivalence equations, pseudofunctor_map_adj, conjugateEquiv_pullbackComp_inv and related underived adjunctions; none states the derived global Hom factorization.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.affineGlobalHomBaseChangeMap",
+   "results": "0 hits; unknown identifier in Mathlib. The project map is defined only in AffineGlobalHomBaseChangeMap.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "global.*Hom.*base|base.*global.*Hom",
+   "results": "0 hits in Mathlib. Project/DAG searches found the parent theorem and the map definition, no independent affine sections factorization. Blueprint search found 0 matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGlobalHomBaseChangeFactorization.lean",
+  "declaration": "AlgebraicGeometry.affineGlobalHomBaseChange_factorization",
+  "statement": "theorem affineGlobalHomBaseChange_factorization\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    {R B : CommRingCat.{u}} {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)\n    (hK : schemeDerivedQCohProperty X K) :\n    let H := (derivedInternalHom (Opens.grothendieckTopology X)\n      X.toRingedSpace.sheaf).obj (op M, K)\n    let Γ := affineDerivedGlobalSections (𝟙 (Spec B))\n    ∃ a : (affineDerivedExtension g).obj ((schemeGlobalDerivedHomOver f).obj (op M, K)) ≅\n        Γ.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj H)),\n      ∃ b : Γ.obj ((schemeDerivedDirectImage (pullback.snd f g)).obj\n          ((derivedPullback (pullback.fst f g)).obj H)) ≅\n          (schemeGlobalDerivedHomOver (pullback.snd f g)).obj\n            (op ((derivedPullback (pullback.fst f g)).obj M),\n              (derivedPullback (pullback.fst f g)).obj K),\n        affineGlobalHomBaseChangeMap f g M K hM hK =\n          a.hom ≫ Γ.map (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n            (pullback.fst f g) pullback.condition H) ≫ b.hom",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T040750-L-3949368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T040750-L-3949368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

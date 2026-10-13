@@ -30,73 +30,50 @@
  ],
  "proof": [
   {
-   "text": "Put M^\\vee=R\\mathcal Hom_X(M,\\mathcal O_X). The perfect tensor-Hom comparison [lem-pc-perfect-rhom-tensor-comparison] identifies M^\\vee\\otimes^L K with R\\mathcal Hom_X(M,K), naturally in K; M^\\vee is perfect, hence in D_{\\mathrm{QCoh}}(X), so M^\\vee\\otimes^L K\\in D_{\\mathrm{QCoh}}(X) by [lem-pc-derived-pullback-tensor-qcoh], and Rf_*(M^\\vee\\otimes^L K)\\in D_{\\mathrm{QCoh}}(S) by [lem-pc-derived-direct-image-preserves-qcoh] since f is qcqs. By [def-pc-global-derived-rhom], R\\operatorname{Hom}_X(M,K)=R\\Gamma(X,R\\mathcal Hom_X(M,K)) with R\\Gamma(X,-)=Rp_* for p:X\\to(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X)); viewed in D(R) by restriction along R\\to\\Gamma(X,\\mathcal O_X), p factors as X\\xrightarrow{f}S\\to(\\{\\mathrm{pt}\\},R), so [lem-pc-ringed-spaces-derived-direct-image-composition] gives R\\operatorname{Hom}_X(M,K)\\cong R\\Gamma(S,Rf_*(M^\\vee\\otimes^L K)) in D(R), and by the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence] Rf_*(M^\\vee\\otimes^L K)\\cong\\widetilde{R\\operatorname{Hom}_X(M,K)}. The same holds on X' over S'=\\operatorname{Spec}(R') for Lg_X^*M, Lg_X^*K.",
+   "text": "Perfect M has quasi-coherent cohomology. Use the derived tensor/internal-Hom adjunction and its symmetric form in perfect_rhom_tensor_comparison. It supplies a quasi-coherent perfect dual D and an invertible comparison K tensor D → R𝓗om(M,K). Tensor symmetry gives an isomorphism e:D tensor K ≅ R𝓗om(M,K).",
    "uses": [
-    "lem-pc-perfect-rhom-tensor-comparison",
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-derived-direct-image-preserves-qcoh",
-    "def-pc-global-derived-rhom",
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "lem-pc-affine-qcoh-derived-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW proof, rewrite Hom from a perfect complex using its dual"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-tor-independent-perfect-tensor-base-change] with P=M^\\vee and the given K. Its Tor-independence hypotheses are exactly those in the present square, and M^\\vee is perfect by the cited perfect tensor-Hom comparison. We obtain an isomorphism from the pullback of Rf_*(M^\\vee\\otimes^L K) to Rf'_* (Lg_X^*M^\\vee\\otimes^L Lg_X^*K).",
-   "uses": [
-    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-sc-perfect-qcoherent",
+    "lem-sc-derived-internal-hom-adjunction",
     "lem-pc-perfect-rhom-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW proof, Tor-independent base-change case"
-   }
+   "elementary": false
   },
   {
-   "text": "The base-change isomorphism for the perfect dual [lem-pc-perfect-rhom-tensor-comparison] gives Lg_X^*M^\\vee\\cong R\\mathcal Hom_{X'}(Lg_X^*M,\\mathcal O_{X'}). Applying the same tensor-Hom comparison on X' identifies Lg_X^*M^\\vee\\otimes^L Lg_X^*K with R\\mathcal Hom_{X'}(Lg_X^*M,Lg_X^*K). Thus the isomorphism of Step 2 is the canonical comparison after the Hom identifications of Step 1.",
+   "text": "Apply torIndependent_perfect_tensor_baseChange to D and K, using the given Tor independence. Quasi-compactness and quasi-separatedness of f follow from X being qcqs and the base being affine.",
    "uses": [
-    "lem-pc-perfect-rhom-tensor-comparison"
+    "lem-pc-tor-independent-perfect-tensor-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW proof, compatibility of the dual with pullback"
-   }
+   "elementary": false
   },
   {
-   "text": "Because S and S' are affine, Step 1 writes Rf_*(M^\\vee\\otimes^L K)\\cong\\widetilde{R\\operatorname{Hom}_X(M,K)} on S and Rf'_*(Lg_X^*M^\\vee\\otimes^L Lg_X^*K)\\cong\\widetilde{R\\operatorname{Hom}_{X'}(Lg_X^*M,Lg_X^*K)} on S' [lem-pc-affine-qcoh-derived-equivalence]. For g:\\operatorname{Spec}(R')\\to\\operatorname{Spec}(R), clause (2) of [lem-pc-affine-derived-pullback-tensor-tilde] gives Lg^*\\widetilde{N}\\cong\\widetilde{N\\otimes_R^{\\mathbf L}R'} for complexes N of R-modules. Applying R\\Gamma(S',-) (the quasi-inverse) to the isomorphism of Steps 2 and 3, the isomorphism obtained is precisely the displayed map R\\operatorname{Hom}_X(M,K)\\otimes_R^L R'\\to R\\operatorname{Hom}_{X'}(Lg_X^*M,Lg_X^*K) in D(R').",
+   "text": "Prove naturality of schemeDerivedBaseChangeMap from its actual mate definition: paste the two pullback composition comparisons, the equality of the composites in the square and the direct-image counit to make a natural transformation before transposition; naturality of Adjunction.homEquiv transposes its square. Apply this square to e.hom. Since functors preserve isomorphisms, the base-change map on R𝓗om(M,K) is invertible.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-pc-derived-pullback"
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW proof, affine bases and final comparison"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use affineGlobalHomBaseChange_factorization, which assumes no Tor independence, to express the global Hom map as the sections functor applied to this sheaf base-change map, preceded and followed by isomorphisms. A functor maps an invertible arrow to an invertible arrow; composing with the two isomorphisms proves the claim.",
+   "uses": [
+    "lem-pc-affine-global-hom-base-change-factorization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-perfect-qcoherent",
+  "lem-sc-derived-internal-hom-adjunction",
   "lem-pc-perfect-rhom-tensor-comparison",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-derived-direct-image-preserves-qcoh",
-  "def-pc-global-derived-rhom",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-affine-qcoh-derived-equivalence",
   "lem-pc-tor-independent-perfect-tensor-base-change",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "def-pc-derived-pullback"
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-global-hom-base-change-factorization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof"
+  "place": "Tag 0AA7 case (1), perfect-dual tensor route; K4 formal mate-naturality argument and final affine comparison split. The original source field incorrectly identifies the lemma as Tag 0AVW; see report."
  },
  "mathlib_searches": [
   {
@@ -185,5 +162,15 @@
   "group": "C1",
   "result": "pass",
   "note": "independent Codex review: Matched qcqs schemes, affine bases, pullback projections, stalkwise Tor independence, perfect M, unbounded QCoh K, and the canonical comparison in D(B); all earlier normalization repairs are present, and both modules compile together cleanly in 25.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T040750-L-3949368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,14 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
 
 /-!
@@ -30,6 +25,54 @@ set_option autoImplicit false
 universe uAH wAH
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 1200000 in
+-- Elaborating the fixed derived-adjunction choices requires additional heartbeats.
+private theorem baseChangeMap_naturality
+    [∀ Y : Scheme.{uAH},
+      HasDerivedCategory.{wAH} (SheafOfModules.{uAH} (moduleRings Y.toRingedSpace))]
+    {X S X' S' : Scheme.{uAH}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (h : g' ≫ f = f' ≫ g) {E F : schemeDerivedCategory X} (φ : E ⟶ F) :
+    (derivedPullback g).map ((schemeDerivedDirectImage f).map φ) ≫
+        schemeDerivedBaseChangeMap f f' g g' h F =
+      schemeDerivedBaseChangeMap f f' g g' h E ≫
+        (schemeDerivedDirectImage f').map ((derivedPullback g').map φ) := by
+  let adj (k : X' ⟶ S') := Classical.choose (exists_schemeDerivedAdjunction k
+    (hAdd := (Classical.choose exists_derivedPullbackComposition) k)
+    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) k)
+    ((Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition))) k))
+  let adjf := Classical.choose (exists_schemeDerivedAdjunction f
+    (hAdd := (Classical.choose exists_derivedPullbackComposition) f)
+    ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f)
+    ((Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition))) f))
+  let comp : ∀ {Y Z W : Scheme.{uAH}} (k : Y ⟶ Z) (l : Z ⟶ W),
+      derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=
+    fun k l ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition)))) k l
+  let t : derivedPullback g ⋙ derivedPullback f' ⟶
+      derivedPullback f ⋙ derivedPullback g' :=
+    (comp f' g).hom ≫
+      (eqToIso (congrArg (fun k ↦ derivedPullback k) h.symm)).hom ≫ (comp g' f).inv
+  let q : schemeDerivedDirectImage f ⋙ derivedPullback g ⋙ derivedPullback f' ⟶
+      𝟭 (schemeDerivedCategory X) ⋙ derivedPullback g' :=
+    Functor.whiskerLeft (schemeDerivedDirectImage f) t ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight adjf.counit (derivedPullback g')
+  have hq := q.naturality φ
+  dsimp only [Functor.comp_map, Functor.id_map] at hq
+  unfold schemeDerivedBaseChangeMap
+  change _ ≫ (adj f').homEquiv _ _ _ = (adj f').homEquiv _ _ _ ≫ _
+  rw [← (adj f').homEquiv_naturality_left,
+    ← (adj f').homEquiv_naturality_right]
+  apply congrArg ((adj f').homEquiv _ _)
+  dsimp only [q, t, eqToIso, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_inv_app, Functor.leftUnitor_hom_app] at hq
+  simpa only [Category.id_comp, Category.comp_id, Category.assoc, eqToHom_app] using hq
 
 /-- Over affine bases, global derived Hom out of a perfect complex commutes with
 Tor-independent base change in D(R'). The comparison is the extension/restriction adjoint of
@@ -68,7 +111,40 @@ theorem affineMorphism_hom_out_of_perfect
     (hTor : PullbackStalkTensor.IsTorIndependent f g)
     (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)
     (hK : schemeDerivedQCohProperty X K) :
-    IsIso (affineGlobalHomBaseChangeMap f g M K hM hK) := by
-  sorry
+    IsIso (affineGlobalHomBaseChangeMap f g M K hM hK) :=
+    open Opposite TopologicalSpace in by
+  classical
+  obtain ⟨adj, s, adj', hadj, _, _, hadj'⟩ :=
+    scheme_derivedInternalHom_adjunction X
+  let N : schemeDerivedQCohCategory X := ⟨K, hK⟩
+  obtain ⟨D, _, _, _, hDperfect, comparison, _, hcompN, _, _⟩ :=
+    perfect_rhom_tensor_comparison X
+      ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩ N hM adj hadj adj' hadj'
+  have : IsIso (comparison N) := hcompN
+  let e : MonoidalCategory.tensorObj D.obj K ≅
+      (derivedInternalHom (Opens.grothendieckTopology X)
+        X.toRingedSpace.sheaf).obj (op M, K) :=
+    s D.obj K ≪≫ asIso (comparison N)
+  have hbc := torIndependent_perfect_tensor_baseChange f g hTor D.obj K hDperfect hK
+  have hnatural := baseChangeMap_naturality f (pullback.snd f g) g (pullback.fst f g)
+    pullback.condition e.hom
+  have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+      pullback.condition (MonoidalCategory.tensorObj D.obj K)) := hbc
+  have hhom : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
+      (pullback.fst f g) pullback.condition
+      ((derivedInternalHom (Opens.grothendieckTopology X)
+        X.toRingedSpace.sheaf).obj (op M, K))) := by
+    have : IsIso ((derivedPullback g).map ((schemeDerivedDirectImage f).map e.hom) ≫
+        schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+          pullback.condition
+          ((derivedInternalHom (Opens.grothendieckTopology X)
+            X.toRingedSpace.sheaf).obj (op M, K))) := by
+      rw [hnatural]
+      infer_instance
+    exact IsIso.of_isIso_comp_left
+      ((derivedPullback g).map ((schemeDerivedDirectImage f).map e.hom)) _
+  obtain ⟨a, b, hab⟩ := affineGlobalHomBaseChange_factorization f g M K hM hK
+  rw [hab]
+  infer_instance
 
 end AlgebraicGeometry
