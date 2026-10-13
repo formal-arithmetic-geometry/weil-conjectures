@@ -1,0 +1,155 @@
+{
+ "id": "lem-pbc-etale-additive-cech-beta-homology",
+ "kind": "statement",
+ "title": "Additive cycle lift and bijective homology map for beta",
+ "statement": "Let $X$ be a quasi-compact separated scheme, $U_i$ a finite open covering whose positive-length tuple intersections are affine, $I$ an injective resolution of the lifted additive structure sheaf, and $n\\geq0$. Write $C$ for the ordinary unit module Cech complex and $T$ for the additive resolution total, as in [def-pbc-etale-additive-cech-normalization]. There exist additive homomorphisms $c:Z^n(C)\\to Z^n(T)$ and $b:H^n(C)\\to H^n(T)$ such that $b$ is bijective, $i_T(c(z))=\\beta^n(i_C(z))$ for every cycle $z$, and $b(\\pi_C(z))=\\pi_T(c(z))$ for every cycle $z$. Here $i$ denotes cycle inclusion, $\\pi$ the homology quotient and $\\beta$ the explicit coefficient augmentation of that definition node.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, augmented double-complex diagram; Tag 03P2, Theorem 59.22.4, separated affine-cover argument."
+ },
+ "stmt_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Identify the lifted unit-module section coordinates with additive structural functions, compatibly with all restrictions. The resolution augmentation defines beta as a chain map into the total; its vertical differential vanishes. Forgetting scalars, lifting finite products and identity scalar restriction provide the source complex comparison.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each tuple intersection is affine. Specialize the lifted finite Cech comparison to the singleton top cover of each affine intersection: the singleton Cech complex has zero positive homology (its differential alternates between zero and identity), hence the lifted structural sheaf has zero positive cohomology there. Degree zero is identified with structural sections by sheaf gluing. The section complex of the restricted injective resolution therefore has its coefficient augmentation as a quasi-isomorphism. Apply the first-quadrant augmentation criterion to the flipped double complex and compose with the signed flip-total isomorphism; the augmentation lands in resolution degree zero so its components remain beta. This retains the actual chain map rather than choosing the bare equivalence. Empty intersections and an empty covering yield zero groups.",
+   "uses": [
+    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chain map sends cycles to cycles and boundaries to boundaries. Descending along the homology quotient yields the additive map b and the representative formula. Exact ULift and forgetting preserve homology, so the comparison shows b bijective. The cycle lift c is additive since inclusion of total cycles is injective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+  "lem-sc-etale-tensor-unit-sections-natural",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "N1 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Explicit augmentation specialization of Tags 01FD, 03AW and 03P2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-isomorphism of complexes of abelian groups induces an additive equivalence on homology with the cycle class formula",
+   "results": "Hits: quasiIsoAt_iff, isoOfQuasiIsoAt_hom_inv_id_assoc, isoOfQuasiIsoAt_hom, isoOfQuasiIsoAt, quasiIsoAt_iff', isoOfQuasiIsoAt_inv_hom_id_assoc, ChainComplex.quasiIsoAt₀_iff, QuasiIsoAt.quasiIso",
+   "date": "2026-10-13",
+   "verdict": "Generic homology tools found; no explicit alpha/beta augmentation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ_naturality\"",
+   "results": "Hits: CategoryTheory.ShortComplex.leftHomologyπ_naturality, CategoryTheory.ShortComplex.leftHomologyπ_naturality', CategoryTheory.ShortComplex.leftHomologyπ_naturality'_assoc, CategoryTheory.ShortComplex.leftHomologyπ_naturality_assoc, CategoryTheory.ShortComplex.homologyπ_naturality, CategoryTheory.ShortComplex.homologyπ_naturality_assoc, HomologicalComplex.homologyπ_naturality, HomologicalComplex.homologyπ_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic homology tools found; no explicit alpha/beta augmentation statement."
+  },
+  {
+   "tool": "grep",
+   "query": "additiveCechAlpha|additiveCechBeta|isoOfQuasiIsoAt",
+   "results": "Hits: Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology tools found; no explicit alpha/beta augmentation statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction augmentation Cech injective sheaf quasi isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(augmentation|quasiIso)|(augmentation|quasiIso).*cech",
+   "results": "Hits: ",
+   "date": "2026-10-13",
+   "verdict": "Generic homology tools found; no explicit alpha/beta augmentation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient augmentation from the Cech complex of a quasicoherent sheaf into the total Cech complex of an injective resolution is a quasi-isomorphism on an affine covering",
+   "results": "Hits: CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.InjectiveResolution.quasiIso, CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self, CategoryTheory.instIsIsoToRightDerivedZero', CochainComplex.isKInjective_iff_of_iso, CochainComplex.isKInjective_of_iso, CochainComplex.cm5b",
+   "date": "2026-10-13",
+   "verdict": "Generic homology tools found; no explicit alpha/beta augmentation statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationHomology",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Existence of augmentation-normalized additive etale Cech edges. Explicit augmentation homology. Beta coefficient augmentation.",
+   "via": [
+    "lem-pbc-etale-additive-cech-augmentation-homology",
+    "lem-pbc-etale-additive-cech-normalized-existence",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechBetaHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_additiveCechBeta_homology",
+  "statement": "theorem exists_additiveCechBeta_homology\n    (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hcover : iSup U = ⊤)\n    (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :\n    ∃ c : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n →+\n      (additiveCechTotal U I).cycles n,\n    ∃ b : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homology n →+\n      (additiveCechTotal U I).homology n,\n      Function.Bijective b ∧\n      (∀ z, (additiveCechTotal U I).iCycles n (c z) = additiveCechBeta U I n\n        ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z)) ∧\n      (∀ z, b ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z) =\n        (additiveCechTotal U I).homologyπ n (c z))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T134402-L-96412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T134402-L-96412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

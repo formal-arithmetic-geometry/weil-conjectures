@@ -5,10 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
-import Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
-import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
-import Sheaf.AlgebraicGeometry.EtaleQcoherentULiftFiniteCechComparison
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaQuasiIso
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaHomology
 
 /-! # Homology equivalences of the two additive Čech augmentations
 Source: Stacks Project, Tags 03P2 and 01FD.
@@ -75,6 +73,33 @@ theorem exists_additiveCech_augmentation_homology
         (additiveCechTotal U I).iCycles n t = additiveCechBeta U I n
           ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z) →
         q ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z) =
-          (additiveCechTotal U I).homologyπ n t) := by sorry
+          (additiveCechTotal U I).homologyπ n t) := by
+  classical
+  obtain ⟨f, hf, hfi⟩ := etaleAdditiveCech_alpha_quasiIso U hcover I
+  let : QuasiIso f := hfi
+  obtain ⟨c, b, hb, hc, hbc⟩ := exists_additiveCechBeta_homology X U hU hcover I n
+  let p := (isoOfQuasiIsoAt f n).addCommGroupIsoToAddEquiv
+  let q := AddEquiv.ofBijective b hb
+  have hi : Function.Injective ((additiveCechTotal U I).iCycles n) :=
+    (AddCommGrpCat.mono_iff_injective _).mp inferInstance
+  refine ⟨p, q, ?_, ?_, ?_, ?_⟩
+  · intro s
+    refine ⟨HomologicalComplex.cyclesMap f n s, ?_⟩
+    change (HomologicalComplex.cyclesMap f n ≫ (additiveCechTotal U I).iCycles n) s = _
+    rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply, hf]
+  · intro z
+    exact ⟨c z, hc z⟩
+  · intro s t ht
+    have he : HomologicalComplex.cyclesMap f n s = t := by
+      apply hi
+      change (HomologicalComplex.cyclesMap f n ≫ (additiveCechTotal U I).iCycles n) s = _
+      rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply, hf, ← ht]
+    change HomologicalComplex.homologyMap f n ((additiveCechGlobal I).homologyπ n s) = _
+    rw [← ConcreteCategory.comp_apply, HomologicalComplex.homologyπ_naturality,
+      ConcreteCategory.comp_apply, he]
+  · intro z t ht
+    have he : c z = t := hi ((hc z).trans ht.symm)
+    change b ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z) = _
+    rw [hbc, he]
 
 end AlgebraicGeometry.Scheme.Modules
