@@ -16,28 +16,45 @@
  ],
  "proof": [
   {
-   "text": "Put p = pr_W and M = pr_X^*L. Invertibility makes L finitely presented\nand intrinsically flat; flatness of f makes M flat over W. Properness and finite\npresentation persist under base change. Identify the square used in\npicardDirectImageSectionMap with the chosen pullback square by its universal\nproperty. Apply perfect_derivedDirectImage_baseChange to M. Its canonical\ncomparison is the base-change mate followed by the single pullback comparison;\ntransporting its target by the fixed coefficient isomorphism preserves invertibility.\nThe source structure-sheaf comparison is invertible. Under canonical derived\nadjunction, morphisms from the degree-zero structure sheaf into Rp_*N[0] are\nmorphisms from the pulled-back structure sheaf into N[0]. Pullback preserves the\nstructure sheaf and the single functor is fully faithful. Thus these morphisms\nare precisely ordinary module morphisms O to N. Their identification with H^0 of\nRp_*N[0] is the canonicalDirectImageH0Iso computation of the right-derived unit,\nso evaluating the displayed map at 1 is exactly the section equivalence.\nEvaluation at 1 and restriction of the pushforward from inverse-top to top are\nbijective. The same argument applies to zero modules on empty schemes.",
+   "text": "Set q=pr_W, p=pr_T and M=pr_X^*L as in the section-map definition. Identify tensor pullback with ordinary pullback by the unique left-adjoint comparison. Ordinary pullback preserves scheme-module invertibility; IsInvertible.sheafOfModules_isInvertible and transport by this comparison give sheaf-level invertibility of M. The iterated-pullback square is cartesian by IsPullback.of_right and the two chosen pullback squares. Properness supplies quasi-compactness and separatedness after base change, and flatness is stable under base change.",
    "uses": [
     "def-sc-picard-direct-image-section-map",
-    "lem-pc-rf-perfect-base-change",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-invertible-sheaf-instance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isIso_derivedBaseChange_of_flat_invertible to q, t, the iterated-pullback map and p. Compose with Rp_* of canonicalSinglePullbackMap at M and the fixed coefficient isomorphism d. All factors are invertible. canonicalSinglePullbackMap at the structure sheaf and pullbackObjUnitToUnit also give the source isomorphism e. Iso.homCongr e (asIso B) is exactly xi -> e.inv >> xi >> B, so it is bijective.",
+   "uses": [
+    "lem-pc-flat-invertible-canonical-derived-base-change",
     "lem-pc-canonical-single-pullback-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Rp_*(N[0]) is nonnegative by the proved source-library Functor.isGE_rightDerivedFunctor_obj_singleFunctor. The structure sheaf in degree zero is nonpositive. Apply the proved source-library DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE at zero. Conjugate the resulting homology morphisms by the single-homology source isomorphism z and canonicalDirectImageH0Iso p N. Iso.homCongr and composition of bijections give the displayed module-morphism comparison.",
+   "uses": [
+    "lem-pc-canonical-degree-zero-mate-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved Modules.unitHomAddEquiv to the pushforward of N, then restrict from inverse-image top to top. This restriction is invertible: the open morphism has inverse homOfLE p.preimage_top.le, with the two inverse identities following from subsingleton homs. Its presheaf image therefore gives a bijection. Compose these bijections. Functor.map_comp and associativity identify their composite definitionally with the fixed section map. No point or nonemptiness is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-picard-direct-image-section-map",
-  "lem-pc-rf-perfect-base-change",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-canonical-degree-zero-mate-square",
-  "lem-pc-canonical-single-pullback-comparison"
+  "lem-pc-invertible-sheaf-instance",
+  "lem-pc-flat-invertible-canonical-derived-base-change",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-canonical-degree-zero-mate-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
-  "place": "Tags 0B91 clause (2), 08HY, 0D5S; parent proof step 1: base change, derived adjunction and evaluation give the additive equivalences"
+  "place": "Tags 0B91 (2), 08HY and 079W; Q4 implements the canonical comparison using existing flat-invertible base change, the source-library degree-zero homology bijection, and evaluation at one."
  },
  "mathlib_searches": [
   {
@@ -116,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T133226-L-4193401",
-  "kind": "interface",
+  "landing": "20261013T141532-L-380732",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
