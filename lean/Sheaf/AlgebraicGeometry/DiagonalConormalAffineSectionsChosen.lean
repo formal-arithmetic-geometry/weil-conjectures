@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineLiftInjective
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineDerivationSpan
 
 @[expose] public section
 
@@ -30,7 +32,30 @@ theorem exists_affine_sections_for_chosen_derivation (f : X ⟶ S)
     ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)]
           Γ(diagonalConormal f, U.1),
         ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =
-          D.d (X := op U.1) a := by sorry
+          D.d (X := op U.1) a := by
+  let D := Classical.choose (exists_diagonalConormalDerivation f)
+  have hD : IsDiagonalConormalDerivation f D :=
+    Classical.choose_spec (exists_diagonalConormalDerivation f)
+  let d : ((diagonalConormal f).val.obj (op U.1)).Derivation
+      (f.appLE V.1 U.1 hUV) :=
+    ModuleCat.Derivation.mk (fun a ↦ D.d (X := op U.1) a)
+      (fun a b ↦ map_add _ a b) (fun a b ↦ D.d_mul a b)
+      (fun a ↦ by
+        rw [Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
+        exact PresheafOfModules.Derivation'.d_app D _)
+  let e := d.desc.hom
+  have he (a : Γ(X, U.1)) : e (CommRingCat.KaehlerDifferential.d a) =
+      D.d (X := op U.1) a := d.desc_d a
+  have hi : Function.Injective e :=
+    diagonalConormal_affine_lift_injective f U V hUV D hD e he
+  have hs : Function.Surjective e := by
+    rw [← LinearMap.range_eq_top]
+    apply top_unique
+    rw [← diagonalConormal_affine_derivation_span f U V hUV D hD]
+    apply Submodule.span_le.mpr
+    rintro _ ⟨a, rfl⟩
+    exact ⟨CommRingCat.KaehlerDifferential.d a, he a⟩
+  exact ⟨LinearEquiv.ofBijective e ⟨hi, hs⟩, he⟩
 
 /-- Normalization by the kernel class map determines a diagonal conormal derivation.
 This is the uniqueness part of the difference-derivation construction in Tag 08S2.

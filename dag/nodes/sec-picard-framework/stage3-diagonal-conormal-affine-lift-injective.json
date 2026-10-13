@@ -1,0 +1,141 @@
+{
+ "id": "stage3-diagonal-conormal-affine-lift-injective",
+ "kind": "lemma",
+ "title": "Injectivity of a normalized affine conormal lift",
+ "statement": "Let $f:X\\to S$ be a scheme morphism [def-pc-scheme], and let $U\\subset X$ and $V\\subset S$ be affine opens with $U\\subset f^{-1}V$. Set $A=\\Gamma(X,U)$ and $R=\\Gamma(S,V)$, with ring map induced by $f$. Let $C$ be the actual diagonal conormal [def-sc-diagonal-conormal], and let $D:\\mathcal O_X\\to C$ satisfy the normalization of [lem-sc-diagonal-conormal-derivation-exists]. For every $A$-linear map $e:\\Omega_{A/R}\\to\\Gamma(U,C)$ [def-weil-pbc-kahler-differentials] such that $e(\\mathrm da)=D_U(a)$ for all $a\\in A$, the map $e$ is injective. No surjectivity is asserted.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), final affine calculation; Tags 01R3 (lemma-affine-conormal), 01KJ and 00RW; read online 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-diagonal-conormal",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof": [
+  {
+   "text": "Put A = Γ(X,U), R = Γ(S,V), B = A ⊗_R A and J = ker(μ:B → A). Restrict the diagonal to the affine open U ×_V U, where it is the closed immersion Spec A → Spec B. Restriction of the actual module-sheaf kernel is the ideal module of J. Compare tensor pullback with restriction through its adjunction, then apply affine conormal sections existence to this closed immersion. This identifies actual conormal sections on U with J/J² and identifies the tensor-pullback unit with the quotient class map. The generic closed-immersion conormal statement applies to the restricted ideal module, not directly to the global diagonal kernel; proving the restriction/adjunction comparison is part of this step.",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "lem-weil-pbc-diagonal-immersion",
+    "lem-weil-pbc-affine-conormal-sections-existence",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise kernel property supplies the ideal section representing 1 ⊗ a - a ⊗ 1. Apply the normalization IsDiagonalConormalDerivation to the two projections on U ×_V U. Under the unit-compatible quotient coordinates from step 1 this says D(a) is the class of that difference.",
+   "uses": [
+    "lem-sc-diagonal-conormal-derivation-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib defines Ω[A/R] as J.Cotangent and gives da = [1 ⊗ a - a ⊗ 1]. The differentials span Ω[A/R], so after the section identification the map e is the identity by linear-map extensionality on the generating differentials. Equality e(x)=e(y) thus implies x=y. This only uses injectivity of the affine section identification; no generation or surjectivity assertion about the actual conormal lift is assumed.",
+   "uses": [
+    "lem-sc-kahler-differentials-diagonal-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-diagonal-conormal",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-diagonal-conormal-derivation-exists",
+  "lem-sc-kahler-differentials-diagonal-ideal",
+  "lem-weil-pbc-affine-conormal-sections-existence",
+  "lem-weil-pbc-diagonal-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), final affine calculation; Tags 01R3 (lemma-affine-conormal), 01KJ and 00RW; read online 2026-10-13; injectivity/generation decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On an affine chart the normalized diagonal conormal derivation generates the conormal module and its Kahler lift is injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The values of the difference derivation span affine sections of the conormal sheaf of the diagonal",
+   "results": "KaehlerDifferential.span_range_derivation; Derivation.liftKaehlerDifferential_apply; KaehlerDifferential.D_apply. These are ring statements, not the asserted scheme conormal-section statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalConormal.*(span|injective)|conormal.*(span|injective)",
+   "results": "No hits from msearch. Additional rg over lean/Sheaf, lean/WeilConjectures and Mathlib found the generic affine closed-immersion conormal theorem and the existing diagonal comparison, which depends on this item and cannot be imported.",
+   "date": "2026-10-13",
+   "verdict": "no exact usable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, diagonal conormal identification, affine calculation of Ω[A/R] = J/J²; Injectivity of a normalized affine conormal lift",
+   "via": [
+    "stage3-diagonal-conormal-chosen",
+    "lem-sc-diagonal-conormal-affine-sections-base",
+    "lem-sc-diagonal-conormal-affine-sections",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineLiftInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineLiftInjective.lean",
+  "declaration": "AlgebraicGeometry.diagonalConormal_affine_lift_injective",
+  "statement": "theorem diagonalConormal_affine_lift_injective (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)\n    (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)\n    (hD : IsDiagonalConormalDerivation f D)\n    (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]\n      Γ(diagonalConormal f, U.1))\n    (he : ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =\n      D.d (X := op U.1) a) : Function.Injective e",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T022420-L-3216137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T022420-L-3216137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
