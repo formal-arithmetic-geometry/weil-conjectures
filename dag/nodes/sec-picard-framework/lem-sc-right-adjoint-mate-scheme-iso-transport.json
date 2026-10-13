@@ -19,57 +19,31 @@
  ],
  "proof": [
   {
-   "text": "The projection equations make r the base change of e.hom, with inverse induced by e.inv. The pullback composition and identity comparisons make pullback along e and r equivalences of derived categories; preservation of quasi-coherent cohomology restricts these equivalences to D_QCoh.",
+   "text": "Apply the ordinary base-change transport theorem to obtain the first conjunct, the invertibility family for f.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-pullback"
+    "lem-sc-right-adjoint-mate-scheme-iso-transport-base"
    ],
    "elementary": false
   },
   {
-   "text": "Direct-image composition along e and r identifies the vertical direct-image functors after this transport. Transport the specified adjunctions, and apply right-adjoint uniqueness with its unit and counit identities to obtain comparisons for a,b and d,b′.",
+   "text": "For each supplied invertibility family for f, apply the mate transport theorem to obtain the second conjunct. Pair the two conclusions.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "lem-cat-right-adjoint-composition",
-    "lem-pc-qcqs-derived-direct-image-right-adjoint"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose ordinary base change under the selected pullback/direct-image adjunction. The two projection equations and pullback associativity identify the transposes. Injectivity of the Hom equivalence gives the commutative comparison square. Its vertical maps are isomorphisms; the equivalence on objects and the assumed invertibility for f′ therefore imply invertibility for f.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-derived-base-change-pasting",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Expand the fixed second-mate formula. Move its units and counits across the comparisons using the transported adjunction identities; conjugation respects the ordinary comparison and its inverse. The resulting commutative square has the preceding endpoint isomorphisms, so Arrow.isoMk gives the arrow isomorphism. This never inverts a second mate.",
-   "uses": [
-    "def-sc-duality-equation-base-change-map",
-    "lem-cat-right-adjoint-composition"
+    "lem-sc-right-adjoint-mate-scheme-iso-transport-mate"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-derived-pullback",
-  "def-sc-duality-equation-base-change-map",
-  "lem-cat-right-adjoint-composition",
-  "lem-pc-derived-base-change-pasting",
-  "lem-pc-qcqs-derived-direct-image-right-adjoint",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-sc-right-adjoint-mate-scheme-iso-transport-base",
+  "lem-sc-right-adjoint-mate-scheme-iso-transport-mate"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "K1",
+  "by": "worker",
+  "group": "F1",
   "date": "2026-10-13",
   "document": "Stacks Project, Duality for Schemes",
-  "place": "Tag 0ATR, composite adjunction and conjugate comparison calculation; Tag 0E9S, identification with the cartesian restriction model, isolated from the successive-square pasting step",
-  "note": "Categorical specialization of the cited proof, retaining invertibility only of ordinary base change; Tor independence in the source supplies that premise and is not used otherwise."
+  "place": "Tags 0ATR and 0E9S",
+  "note": "Decomposition into ordinary base-change transport and conditional arrow-mate transport; the Lean proof pairs the conclusions."
  },
  "mathlib_searches": [
   {
@@ -145,9 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T113346-L-3185269",
-  "kind": "interface"
+  "landing": "20261013T123543-L-3710992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

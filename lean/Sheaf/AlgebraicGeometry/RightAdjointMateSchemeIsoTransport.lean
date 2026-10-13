@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RightAdjointMateSchemeIsoTransportBase
+import Sheaf.AlgebraicGeometry.RightAdjointMateSchemeIsoTransportMate
 
 /-! # Transport of a right-adjoint mate across a scheme isomorphism
 
@@ -92,6 +92,13 @@ theorem rightAdjoint_mate_scheme_iso_transport
         ((schemeDerivedQCohProperty (pullback f g)).ι.map
       (dualityEquationBaseChangeMap f g a d adja adjd hβf K))) ≅
         Arrow.mk ((schemeDerivedQCohProperty (pullback f' g)).ι.map
-      (dualityEquationBaseChangeMap f' g b b' adjb adjb' hβ K)))) := by sorry
+      (dualityEquationBaseChangeMap f' g b b' adjb adjb' hβ K)))) := by
+  have hbase :=
+    rightAdjoint_mate_scheme_iso_transport_base f f' e he g a b d b'
+      adja adjb adjd adjb' hβ K r hr₁ hr₂
+  refine ⟨hbase, ?_⟩
+  exact
+    rightAdjoint_mate_scheme_iso_transport_mate f f' e he g a b d b'
+      adja adjb adjd adjb' hβ K r hr₁ hr₂
 
 end AlgebraicGeometry
