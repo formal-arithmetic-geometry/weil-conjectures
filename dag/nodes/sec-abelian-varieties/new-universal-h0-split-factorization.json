@@ -1,0 +1,113 @@
+{
+ "id": "new-universal-h0-split-factorization",
+ "kind": "statement",
+ "title": "Universal H0 splitting factorization data",
+ "statement": "Under the hypotheses of lem-sc-universal-h0-split-differential, there are a module I and maps e:P.X 0 -> I, p:I -> P.X 1, r:I -> P.X 0, q:P.X 1 -> I such that d=e p, e r=id, and p q=id.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00O0 and 00NX, local matrix splitting and projective cokernel"
+ },
+ "stmt_deps": [
+  "lem-sc-universal-h0-split-differential"
+ ],
+ "proof": [
+  {
+   "text": "Localize at primes, perform the unit-minor reduction, and identify the cokernel as finite projective. The resulting image and quotient splittings give the displayed factorization and retractions.",
+   "uses": [
+    "lem-sc-universal-h0-split-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-universal-h0-split-differential"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 00O0 and 00NX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generalized inverse factorization of a morphism in ModuleCat",
+   "results": "No exact declaration; only generic splitting and projectivity lemmas.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective split surjection ModuleCat",
+   "results": "Generic projectivity and lifting results; no theorem with the stated universal H0 hypotheses.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective module map identity block zero block cokernel projective",
+   "results": "Generic Module.Projective and finite-presentation declarations only; no exact factorization theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UniversalH0SplitDifferential",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-universal-h0-split-differential",
+   "place": "algebraic splitting step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.UniversalH0SplitFactorization",
+  "file": "lean/Sheaf/Algebra/Homology/UniversalH0SplitFactorization.lean",
+  "declaration": "CochainComplex.universalH0_split_factorization",
+  "statement": "theorem universalH0_split_factorization\n    (R : Type v) [CommRing R]\n    (P : CochainComplex (ModuleCat.{v} R) ℤ)\n    (hf0 : Module.Finite R (P.X 0))\n    (hf1 : Module.Finite R (P.X 1))\n    (hp0 : Module.Projective R (P.X 0))\n    (hp1 : Module.Projective R (P.X 1))\n    (hneg : IsZero (P.X (-1)))\n    (hzero : ∀ (B : Type v) [CommRing B] (φ : R →+* B),\n      let PB := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P\n      Nonempty (PB.homology 0 ≅ ModuleCat.of B B)) :\n    ∃ (I : ModuleCat.{v} R) (e : P.X 0 ⟶ I) (p : I ⟶ P.X 1)\n      (r : I ⟶ P.X 0) (q : P.X 1 ⟶ I),\n      P.d 0 1 = e ≫ p ∧ e ≫ r = 𝟙 (P.X 0) ∧ p ≫ q = 𝟙 I",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T161728-L-1460130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T161728-L-1460130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

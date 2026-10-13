@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.Algebra.Homology.UniversalH0SplitFactorization
 
 /-! # A generalized inverse for the first differential
 
@@ -61,6 +62,14 @@ theorem universalH0_split_differential
     (hzero : ∀ (B : Type v) [CommRing B] (φ : R →+* B),
       let PB := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P
       Nonempty (PB.homology 0 ≅ ModuleCat.of B B)) :
-    ∃ s : P.X 1 ⟶ P.X 0, P.d 0 1 ≫ s ≫ P.d 0 1 = P.d 0 1 := by sorry
-
+    ∃ s : P.X 1 ⟶ P.X 0, P.d 0 1 ≫ s ≫ P.d 0 1 = P.d 0 1 := by
+  obtain ⟨I, e, p, r, q, hfac, her, hpq⟩ :=
+    universalH0_split_factorization R P hf0 hf1 hp0 hp1 hneg hzero
+  refine ⟨q ≫ r, ?_⟩
+  calc
+    P.d 0 1 ≫ (q ≫ r) ≫ P.d 0 1 = (e ≫ p) ≫ (q ≫ r) ≫ e ≫ p := by rw [hfac]
+    _ = e ≫ (p ≫ q) ≫ r ≫ e ≫ p := by simp only [Category.assoc]
+    _ = e ≫ r ≫ e ≫ p := by simp only [hpq, Category.id_comp]
+    _ = P.d 0 1 := by
+      rw [← Category.assoc, her, Category.id_comp, hfac]
 end CochainComplex
