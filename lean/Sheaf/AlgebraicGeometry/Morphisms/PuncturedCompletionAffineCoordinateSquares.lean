@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 public import Sheaf.RingTheory.FormalGlueingData
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartCoherence
 
 /-! # Affine localization coordinates and their restriction squares
 
@@ -19,38 +20,53 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
+private theorem chart_scalar
+    {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A))
+    (V : Y.Opens) (f : A) (M : ModuleCat.{u} A)
+    (c : M ≃+ Γ(Y, V))
+    (b : FormalGlueing.localize f M ≃+ Γ(Y, V ⊓ V))
+    (hb : ∀ m, b (LocalizedModule.mk m 1) =
+      Y.presheaf.map (homOfLE (inf_le_right : V ⊓ V ≤ V)).op (c m))
+    (hscalar : ∀ (a : A) m, b (a • m) =
+      ((ΓSpecIso (.of A)).inv ≫ h.appTop ≫
+        Y.presheaf.map (homOfLE (le_top : V ⊓ V ≤ ⊤)).op).hom a * b m)
+    (a : A) (m : M) :
+    c (a • m) = ((ΓSpecIso (.of A)).inv ≫ h.appTop ≫
+      Y.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op).hom a * c m := by
+  have hinj : Function.Injective
+      (Y.presheaf.map (homOfLE (inf_le_right : V ⊓ V ≤ V)).op).hom := by
+    have : IsIso (homOfLE (inf_le_right : V ⊓ V ≤ V)) :=
+      homOfLE_isIso_of_eq _ (inf_idem V)
+    exact (ConcreteCategory.bijective_of_isIso _).injective
+  apply hinj
+  rw [← hb, ← LocalizedModule.smul'_mk, hscalar]
+  rw [map_mul, ← hb]
+  congr 1
+  rw [← CommRingCat.comp_apply]
+  apply congrArg (fun k : CommRingCat.of A ⟶ Γ(Y, V ⊓ V) ↦ k.hom a)
+  rw [Category.assoc, Category.assoc, ← Functor.map_comp]
+  rfl
+
 /-- Affine localization gives coordinates on chart intersections and completed charts,
 with all four maps from the original section modules commuting with restriction.
 
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
 
-Proof: by hcharts, each D(g_j) lies in U.
-The restriction of q to this affine open is finite, hence its source V_j is affine.
-The finite morphism s also makes E affine. Use Gamma(E) as the C-module M' and
-Gamma(Y,V_j) as M_j, with its structural A[1/g_j]-action. The action exists since
-g_j is invertible on V_j. Take e and d to be the identity section identifications,
-with restriction of scalars through the displayed structural A-actions.
-Principal-open localization identifies (M_j) localized at g_i with
-Gamma(Y,V_i intersect V_j); use this identification as c_ij. The affine fibre
-product formula identifies C tensor_A M_j with Gamma(O,p inverse image V_j);
-use this identification as b_j. The given overlap isomorphism identifies
-M' localized at g_j with that same section ring. Define alpha_j by composing
-this latter identification with b_j inverse, and alpha_overlap_ij by the two
-principal-open identifications (using the symmetry of the intersection).
-These maps are isomorphisms. Since the overlap isomorphism is over Spec C,
-alpha_j is C-linear. On (m/g_j^a)/g_k^b both cocycle routes restrict m to the triple chart and
-then divide by g_j^a g_k^b. On (m'/g_i^a)/g_j^b both square routes restrict the
-E-section to the completed double chart and divide by g_i^a g_j^b. The swap
-maps exchange denominators; compare sends (c tensor m)/g_j^b to
-c tensor (m/g_j^b). Fraction generation and additive generation by pure tensors
-extend these identities to the complete maps. Thus these maps define FormalGlueing.Data.
-The four asserted equations are the numerator formulas for these localization
-and tensor identifications: completed restriction, chart pullback, and the two
-restrictions to an intersection, respectively. No H0 or matching-ring assertion
-is used. Empty charts have zero section rings, so the identifications and all
-four equations still hold for zero, nilpotent, or redundant generators. When
-t = 0 the chart families and their equations are empty; the construction of
-M' is unchanged.
+Proof: the finite morphisms make E and each chart V_j affine. Apply
+exists_affine_chart_transitions to obtain T and affine_chart_transition_coherence
+to supply the square and cocycle fields of X, keeping the modules and transition
+maps of T.F. Recover A-linearity of T.c_j by restricting to V_j intersect V_j:
+that restriction is an isomorphism, and T.b_right and T.b_scalar identify its
+value on a scalar multiple with the structural scalar times the restricted
+section. Functoriality of the structure presheaf identifies the two structural
+scalar maps. Upgrade T.c_j to the A-linear equivalence d_j without changing
+its function. Similarly, C-linearity of T.e and naturality of GammaSpecIso
+along A to C identify the restricted A-action with the displayed aE action;
+this gives e. Take the underlying equivalences of T.d_j and T.b_ij for b_j
+and c_ij. The four equations are T.d_prime, T.d_chart, T.b_left and T.b_right.
+All existential witnesses are eliminated in this proposition; no definition
+chooses arbitrary data. No cover or H0 assertion is needed. The same argument
+includes t=0, zero or nilpotent generators, and empty principal opens.
 (blueprint: lem-sbc-punctured-completion-affine-coordinate-squares) -/
 theorem exists_affine_coordinate_squares
     {A : Type u} [CommRing A] [IsLocalRing A]
@@ -86,6 +102,61 @@ theorem exists_affine_coordinate_squares
       (∀ i j m, c i j (X.alpha_overlap i j (LocalizedModule.mk m 1)) =
         Y.presheaf.map (homOfLE (inf_le_left : V i ⊓ V j ≤ V i)).op (d i m)) ∧
       (∀ i j m, c i j (LocalizedModule.mk m 1) =
-        Y.presheaf.map (homOfLE (inf_le_right : V i ⊓ V j ≤ V j)).op (d j m)) := by sorry
+        Y.presheaf.map (homOfLE (inf_le_right : V i ⊓ V j ≤ V j)).op (d j m)) := by
+  let C := AdicCompletion (IsLocalRing.maximalIdeal A) A
+  let φ := algebraMap A C
+  let V : Fin t → Y.Opens := fun j ↦ (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (g j)
+  let aY := ((ΓSpecIso (.of A)).inv ≫ (q ≫ U.ι).appTop).hom
+  let aE := ((ΓSpecIso (.of A)).inv ≫ (s ≫ completionSpecMap A).appTop).hom
+  let : Algebra A Γ(Y, ⊤) := aY.toAlgebra
+  let : Algebra A Γ(E, ⊤) := aE.toAlgebra
+  let : ∀ j, Algebra A Γ(Y, V j) := fun j ↦
+    ((Y.presheaf.map (homOfLE (le_top : V j ≤ ⊤)).op).hom.comp aY).toAlgebra
+  let : Algebra A C := φ.toAlgebra
+  let : IsAffine E := isAffine_of_isAffineHom s
+  have hV : ∀ j, IsAffineOpen (V j) := by
+    intro j
+    change IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (g j))
+    rw [Scheme.Hom.comp_preimage]
+    have hbase : IsAffineOpen (X := Spec (.of A)) (PrimeSpectrum.basicOpen (g j)) :=
+      IsAffineOpen.Spec_basicOpen (R := .of A) (g j)
+    have hsub : PrimeSpectrum.basicOpen (g j) ≤ U.ι.opensRange := by
+      rw [Scheme.Opens.opensRange_ι]
+      exact hcharts j
+    exact (hbase.preimage_of_isOpenImmersion U.ι hsub).preimage q
+  obtain ⟨T⟩ := exists_affine_chart_transitions D t g hcharts hV
+  obtain ⟨hsquare, hcocycle⟩ := affine_chart_transition_coherence D t g hcharts hV T
+  let X : FormalGlueing.Data.{u, u, u} φ g :=
+    { M' := T.F.M'
+      M := T.F.M
+      alpha := T.F.alpha
+      alpha_smul := T.F.alpha_smul
+      alpha_overlap := T.F.alpha_overlap
+      square := hsquare
+      cocycle := hcocycle }
+  have hc : ∀ j (a : A) m, T.c j (a • m) = a • T.c j m := by
+    intro j a m
+    exact chart_scalar (q ≫ U.ι) (V j) (g j)
+      (FormalGlueing.piece (g j) (T.F.M j)) (T.c j) (T.b j j)
+      (T.b_right j j) (T.b_scalar j j) a m
+  let d : ∀ j, FormalGlueing.piece (g j) (X.M j) ≃ₗ[A] Γ(Y, V j) := fun j ↦
+    { T.c j with map_smul' := hc j }
+  let : Module C Γ(E, ⊤) := completedChartModule s
+  have he : ∀ (a : A) (m : FormalGlueing.restrict φ X.M'),
+      T.e (a • m) = a • T.e m := by
+    intro a m
+    change T.e ((φ a) • (m : T.F.M')) = aE a * T.e m
+    rw [T.e.map_smul]
+    change (((ΓSpecIso (.of C)).inv ≫ s.appTop).hom (φ a)) * T.e m = _
+    have hmap : (CommRingCat.ofHom φ) ≫ (ΓSpecIso (.of C)).inv ≫ s.appTop =
+        (ΓSpecIso (.of A)).inv ≫ (s ≫ completionSpecMap A).appTop := by
+      rw [Hom.comp_appTop, ΓSpecIso_inv_naturality_assoc]
+    exact congrArg (fun z ↦ z * T.e m)
+      (congrArg (fun h : CommRingCat.of A ⟶ Γ(E, ⊤) ↦ h.hom a) hmap)
+  let e : FormalGlueing.restrict φ X.M' ≃ₗ[A] Γ(E, ⊤) :=
+    { T.e.toAddEquiv with map_smul' := he }
+  refine ⟨X, e, d, (fun j ↦ (T.d j).toEquiv),
+    (fun i j ↦ (T.b i j).toEquiv), ?_⟩
+  exact ⟨T.d_prime, T.d_chart, T.b_left, T.b_right⟩
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

@@ -16,41 +16,36 @@
  ],
  "proof": [
   {
-   "text": "Since each D(g_j) is contained in U, its inverse image V_j is a finite scheme over an affine scheme, hence is affine. E is affine for the same reason. Set M prime to Gamma(E) with its structural C action and M_j to Gamma(Y,V_j) with the A[1/g_j] action: the image of g_j is invertible on that principal open, so the localization universal property extends the structural A action uniquely. The identity coordinate maps e and d_j are A-linear for precisely the structural actions displayed in the Lean statement.",
+   "text": "Each basic open D(g_j) is affine and lies in U. Pull it back along the open immersion U to Spec A and then the finite morphism q to obtain affineness of V_j. The finite morphism s to the affine completed spectrum makes E affine. Apply exists_affine_chart_transitions to obtain T, retaining all section equivalences and their scalar and numerator equations.",
    "uses": [
     "lem-weil-pbc-finite-morphism-permanence",
-    "def-sbc-punctured-completion-matching-sections",
+    "def-pc-scheme",
+    "lem-sbc-punctured-completion-affine-chart-transitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine_chart_transition_coherence to this same T. Use its two equations as the square and cocycle fields of a FormalGlueing.Data object X; all other fields are exactly those of T.F.",
+   "uses": [
+    "lem-sbc-punctured-completion-affine-chart-coherence",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Recover A-linearity of T.c_j from T.b_right on the diagonal and T.b_scalar. The restriction from V_j to V_j intersect V_j is an isomorphism. Apply this injective restriction to the desired scalar identity, replace each restricted chart numerator by T.b_jj(m/1), move the scalar inside the localized numerator, and use T.b_scalar. Functoriality of the presheaf identifies the restricted structural scalar with the structural scalar on the intersection. Thus the additive chart equivalence upgrades to the required A-linear d_j. For e, T.e is C-linear for the structural C-action. Naturality of GammaSpecIso along phi identifies its restricted A-action with exactly the displayed aE action, giving the required A-linear e.",
+   "uses": [
+    "lem-sbc-punctured-completion-affine-chart-transitions",
     "def-weil-pbc-module-localization-away",
     "def-pc-scheme"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The double chart V_i intersect V_j is the principal open of the image of g_i in V_j. Mathlib IsAffineOpen.isLocalization_basicOpen and the module-localization universal property identify its section ring with localize(g_i,M_j); use the underlying equivalence as c_ij. The completed chart is the affine base change of V_j to Spec C. Apply the affine fibre-product tensor formula, including its projection equations, to obtain b_j from C tensor_A M_j to its section ring. The supplied overlapIso, its over equation, and overlap_base identify this same chart with the principal open of g_j in E. Its sections are therefore the localization of M prime at g_j.",
+   "text": "Take b_j and c_ij to be the underlying equivalences of T.d_j and T.b_ij. The four desired equations are respectively T.d_prime, T.d_chart, T.b_left and T.b_right, since upgrading e and d changes no underlying function. No choices of geometric data from an existence theorem are made in any definition; the existential T is eliminated only within this proposition. The construction works unchanged for t=0 and empty principal opens.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-punctured-completion-affine-chart-transitions",
     "def-sbc-punctured-completion-matching-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Define alpha_j by the E-side principal-localization identification followed by b_j inverse. Define alpha_overlap_ij by the two identifications with sections of V_i intersect V_j. These maps preserve the structural scalar actions; alpha_j preserves C-scalars because overlapIso is over the completed base. On (m/g_j^a)/g_k^b, both cocycle routes restrict m to the triple chart and divide by g_j^a g_k^b. On (m prime/g_i^a)/g_j^b, both square routes restrict the E-section to the completed double chart and divide by g_i^a g_j^b. Swap exchanges these denominators; compare sends (c tensor m)/g_j^b to c tensor (m/g_j^b). Localization uniqueness and additive generation by pure tensors extend the formulas to all inputs. This yields a Data object X.",
-   "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization-away",
-    "def-sbc-punctured-completion-matching-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On a numerator m prime/1 the E-side identification is restriction through D.toCompleted, giving the first equation. The affine tensor projection formula identifies 1 tensor m with p pullback of d_j(m), giving the second. The two localization numerator formulas identify alpha_overlap_ij(m/1) with the left restriction of d_i(m), and n/1 with the right restriction of d_j(n), giving the last two equations. Empty charts have zero sections and zero localizations, so all maps and equations remain valid. For t=0 only the prime module and e remain. No cover assertion, kernel calculation, or H0 characterization is part of this lemma.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-pbc-module-localization-away",
-    "def-sbc-punctured-completion-matching-sections",
-    "def-weil-pbc-formal-glueing-data"
    ],
    "elementary": true
   }
@@ -60,14 +55,15 @@
   "def-sbc-punctured-completion-matching-sections",
   "def-weil-pbc-formal-glueing-data",
   "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sbc-punctured-completion-affine-chart-coherence",
+  "lem-sbc-punctured-completion-affine-chart-transitions",
   "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "G3",
+  "by": "C1",
   "document": "Stacks Project",
-  "place": "Tags 0BLH and 05EL; affine localization construction, with structural A-linearity and numerator squares made explicit."
+  "place": "Tags 0BLH and 05EL, item (1), through existing affine chart transition/coherence theorems; structural A-linearity recovered from diagonal restriction and GammaSpecIso naturality."
  },
  "mathlib_searches": [
   {
@@ -151,10 +147,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T211102-L-391499",
-  "kind": "interface",
+  "landing": "20261013T222359-L-1221162",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
