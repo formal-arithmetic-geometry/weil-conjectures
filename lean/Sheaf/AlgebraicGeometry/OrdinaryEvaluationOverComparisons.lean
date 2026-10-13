@@ -6,8 +6,8 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
-import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
-import Sheaf.AlgebraicGeometry.TotalTensorOverEquivIso
+import Sheaf.AlgebraicGeometry.HomComplexOverEquivProjections
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTensorFormula
 
 /-! # Compatible ordinary evaluation comparisons on the open scheme
 
@@ -30,11 +30,17 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
+-- The public existential dual witness is intentionally independent of the tensor witness.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency true in
+set_option maxHeartbeats 100000 in
+-- Compare the chosen Hom bifunctors without unfolding their existence proofs.
 /-- Compatible comparisons for ordinary Hom, its dual and ordinary evaluation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ; Mathlib `Modules.overEquiv`.
 (blueprint: lem-pc-ordinary-evaluation-over-comparisons).
 
-Proof: apply `internalHom_overEquiv` to each pair of terms of P and M. Take the
+Proof: choose the natural termwise internal-Hom comparison together with its
+evaluation compatibility. Take the
 product comparison in each Hom degree, using the specified projections of
 `homComplex_projections_exists`. The naturality equation for internal Hom and
 additivity identify the differential d_M phi - (-1)^n phi d_P on both sides.
@@ -80,6 +86,43 @@ theorem exists_ordinaryEvaluation_over_comparisons (X : Scheme.{u}) (U : X.Opens
             ∀ f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F,
               IsLocalOrdinaryEvaluation X U P F f →
                 IsSchemeOrdinaryEvaluation U.toScheme P' (T.obj F)
-                  (t.inv ≫ T.map f ≫ (b F).hom) := by sorry
+                  (t.inv ≫ T.map f ≫ (b F).hom) := by
+  classical
+  let : MonoidalPreadditive
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed U.toScheme.sheaf).1
+  dsimp only
+  let L := Equivalence.functor
+      (C := localEvaluationModules X U)
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)
+  let T := L.mapHomologicalComplex (.up ℤ)
+  have hTensor := exists_ordinaryEvaluation_over_tensor_formula X U P
+  let e := Classical.choose hTensor
+  have he := (Classical.choose_spec hTensor).1
+  have hEval := (Classical.choose_spec hTensor).2
+  have h := exists_homComplex_overEquiv_projections X U P e he
+  let b := Classical.choose h
+  have hb := (Classical.choose_spec h).1
+  have hπ := (Classical.choose_spec h).2
+  refine ⟨b, hb, ?_⟩
+  let O' := (HomologicalComplex.single _ (.up ℤ) 0).obj
+    (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))
+  let a : T.obj (localEvaluationUnit X U) ≅ O' :=
+    (HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).app _ ≪≫
+      (HomologicalComplex.single _ (.up ℤ) 0).mapIso
+        (Scheme.Modules.overEquivFunctorObjUnitIso U).symm
+  let d : T.obj (localEvaluationDual X U P) ≅
+      homComplex (R := U.toScheme.sheaf) (T.obj P) O' :=
+    b (localEvaluationUnit X U) ≪≫
+      ((homComplexFunctor (R := U.toScheme.sheaf)).obj (op (T.obj P))).mapIso a
+  refine ⟨d, ?_⟩
+  intro F
+  have hF := hEval b hπ F
+  let c := Classical.choose hF
+  have hc := Classical.choose_spec hF
+  let tensor := ((curriedTensor (SheafOfModules.{u}
+    (moduleRings U.toScheme.toRingedSpace))).map₂CochainComplex).obj (T.obj F)
+  exact ⟨c ≪≫ tensor.mapIso d, hc⟩
 
 end AlgebraicGeometry

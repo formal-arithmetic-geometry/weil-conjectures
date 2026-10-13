@@ -16,37 +16,32 @@
  },
  "proof": [
   {
-   "text": "Use internalHom_overEquiv on every pair of terms and extend across the Hom product projections. Pre- and postcomposition naturality and additivity identify d_M phi minus (-1)^n phi d_P; this gives b(M) and its naturality. At the single unit compose b with Hom(Pprime,-) of the transported-unit chain isomorphism to get d.",
+   "text": "Choose the natural termwise internal-Hom comparison e together with the tensor evaluation compatibility from exists_ordinaryEvaluation_over_tensor_formula. Apply exists_homComplex_overEquiv_projections to e and its naturality to obtain b with its specified product projection equations.",
    "uses": [
-    "lem-sc-internal-hom-over-equiv",
-    "lem-sc-hom-complex-projections"
+    "lem-pc-ordinary-evaluation-over-tensor-formula",
+    "lem-pc-hom-complex-over-equiv-projections"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the total tensor comparison then tensor with d to get t for each F. Precompose with each tensor summand inclusion and postcompose with each Hom projection. If r+q=0, both formulas curry (y,phi,x) mapped to y*phi(x); reindexing commutes with composition, symmetries, associators, the transported single unit and its unit action. Otherwise both sides are zero. Degree-equality isomorphisms are natural. Product and coproduct universal properties prove the component equation for every f, also for zero complexes and the empty open.",
+   "text": "Construct a by singleMapHomologicalComplex followed by the single complex of overEquivFunctorObjUnitIso inverse. Construct d as b at the local single unit followed by Hom(TP,-) of a. Apply the evaluation compatibility chosen in the first step to b and its projection equations, obtaining c. Define t as c followed by total tensor with d. The supplied component formula is exactly the required conclusion.",
    "uses": [
-    "lem-pc-total-tensor-over-equiv-iso",
-    "def-pc-ordinary-evaluation-data",
-    "def-pc-scheme-ordinary-evaluation-formula"
+    "lem-pc-ordinary-evaluation-over-tensor-formula"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-ordinary-evaluation-data",
-  "def-pc-scheme-ordinary-evaluation-formula",
-  "lem-pc-total-tensor-over-equiv-iso",
-  "lem-sc-hom-complex-projections",
-  "lem-sc-internal-hom-over-equiv"
+  "lem-pc-hom-complex-over-equiv-projections",
+  "lem-pc-ordinary-evaluation-over-tensor-formula"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "U4",
+  "by": "worker",
+  "group": "M2",
   "date": "2026-10-14",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08DL, 08DJ and 08DQ; ordinary complex constructions",
-  "description": "Explicit ordinary-complex part of the parent proof, retaining its route. Official Stacks Tags 08DL, 08DJ, 08DQ and 06YN read online."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, ordinary product terms and differential; cohomology.tex Tags 08DL and 08DQ for restriction and evaluation",
+  "description": "Constructed the canonical single-unit and dual comparisons. Reduced the product/differential/naturality comparison and the compatible tensor summand evaluation calculation to two strictly smaller statements. The unchanged parent is assembled from these parts with a complete Lean proof."
  },
  "mathlib_searches": [
   {
@@ -135,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T181125-L-2608184",
+  "landing": "20261013T201801-L-3973494",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

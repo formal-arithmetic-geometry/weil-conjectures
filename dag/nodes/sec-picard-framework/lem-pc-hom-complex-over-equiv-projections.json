@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-hom-complex-over-equiv-projections",
+ "kind": "statement",
+ "title": "Hom complex comparison with its specified product projections",
+ "statement": "Let $X$ be a scheme and $U$ an open [def-pc-scheme]. Write $L$ for the equivalence from module sheaves on the over-$U$ site to module sheaves on $U$, and $T$ for its degreewise functor on integer cochain complexes. Let $P$ be a complex on the over-site. Given isomorphisms $e(A,B):L\\mathcal{H}om(A,B)\\cong\\mathcal{H}om(LA,LB)$ natural for precomposition in $A$ and postcomposition in $B$, there are isomorphisms $b(M):T\\mathcal{H}om^\\bullet(P,M)\\cong\\mathcal{H}om^\\bullet(TP,TM)$ [def-pur-hom-complex], natural in every chain map $M\\to N$. For the specified product projections [lem-sc-hom-complex-projections], $b(M)^n;\\pi_{TP,TM,n,r,s}=L(\\pi_{P,M,n,r,s});e(P^r,M^s)$ for every $r+n=s$. The source projection is [def-pc-ordinary-evaluation-data]. No boundedness or homological hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-hom-complex",
+  "def-pc-ordinary-evaluation-data",
+  "lem-sc-hom-complex-projections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, ordinary product terms and differential; cohomology.tex Tags 08DL and 08DQ for restriction and evaluation"
+ },
+ "proof": [
+  {
+   "text": "Preserve the specified product fan under the equivalence. The forward map to the target product is the lift of the mapped source projections followed by e; the inverse uses the inverse e. Product extensionality and cancellation prove that the two maps are inverse.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the chain-map equation with each target product projection. Substitute the differential formulas. Apply naturality of e to each composition term and additivity of L to the difference and its integer sign. Assemble the degree isomorphisms with HomologicalComplex.Hom.isoOfComponents.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For naturality in M, postcompose in each degree with each target product projection, substitute the Hom bifunctor map formula, and use the given naturality of e. Joint monicity of product projections proves the equality. The same construction retains the projection equation.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, ordinary product terms and differential; cohomology.tex Tags 08DL and 08DQ for restriction and evaluation",
+  "description": "Ordinary-complex part of the parent proof. Stacks Tags 0A8X, 08DL, 08DM, 08DJ and 08DQ read online; no derived or perfectness assertion is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules on an open subscheme preserves the internal Hom cochain complex naturally and commutes with evaluation",
+   "date": "2026-10-14",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, SheafOfModules.pushforwardSections_unitHomEquiv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right. No exact comparison of the specified sheaf-valued Hom complex and open-site evaluation was found.",
+   "verdict": "Use the existing product, chain-complex, internal-Hom and tensor constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.Equivalence",
+   "date": "2026-10-14",
+   "results": "10 hits: CategoryTheory.Equivalence.mapHomologicalComplex, CategoryTheory.Equivalence.mapHomologicalComplex_functor, CategoryTheory.Equivalence.mapHomologicalComplex_inverse, CategoryTheory.Equivalence.mapHomologicalComplex_counitIso, CategoryTheory.Equivalence.mapHomologicalComplex_unitIso, HomologicalComplex.opEquivalence, HomologicalComplex.unopEquivalence, HomologicalComplex₂.flipEquivalence. No exact comparison of the specified sheaf-valued Hom complex and open-site evaluation was found.",
+   "verdict": "Use the existing product, chain-complex, internal-Hom and tensor constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(map|iso|equiv)|map.*homComplex",
+   "date": "2026-10-14",
+   "results": "5 hits: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean. No exact comparison of the specified sheaf-valued Hom complex and open-site evaluation was found.",
+   "verdict": "Use the existing product, chain-complex, internal-Hom and tensor constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence preserving products transports a Hom complex naturally with its projections",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of internal Hom evaluation under a monoidal equivalence and preservation of total tensor summand inclusions",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three, CategoryTheory.ihom.coev_naturality, CategoryTheory.ihom.coev_naturality_assoc. No exact comparison of the specified sheaf-valued Hom complex and open-site evaluation was found.",
+   "verdict": "Use the existing product, chain-complex, internal-Hom and tensor constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComparisons",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "## Proof, final paragraph: local tensor-Hom identification; ordinary Hom and evaluation compatibility with the open identifications",
+   "via": [
+    "lem-pc-ordinary-evaluation-over-comparisons",
+    "lem-pc-ordinary-evaluation-over-transport",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexOverEquivProjections",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexOverEquivProjections.lean",
+  "declaration": "AlgebraicGeometry.exists_homComplex_overEquiv_projections",
+  "statement": "theorem exists_homComplex_overEquiv_projections (X : Scheme.{u}) (U : X.Opens)\n    (P : CochainComplex (localEvaluationModules X U) ℤ) :\n    let L := Equivalence.functor\n      (C := localEvaluationModules X U)\n      (D := SheafOfModules.{u} U.toScheme.ringCatSheaf)\n      (Scheme.Modules.overEquiv U)\n    let T := L.mapHomologicalComplex (.up ℤ)\n    ∀ (e : ∀ A B : localEvaluationModules X U,\n        L.obj (SheafOfModules.homObj (R := X.sheaf.over U) A B) ≅\n          SheafOfModules.homObj (R := U.toScheme.sheaf) (L.obj A) (L.obj B)),\n      (∀ (A A' B B' : localEvaluationModules X U) (f : A' ⟶ A) (g : B ⟶ B'),\n        L.map (SheafOfModules.homObjMap (R := X.sheaf.over U) f g) ≫\n            (e A' B').hom =\n          (e A B).hom ≫ SheafOfModules.homObjMap (R := U.toScheme.sheaf)\n            (L.map f) (L.map g)) →\n      ∃ b : ∀ M : CochainComplex (localEvaluationModules X U) ℤ,\n          T.obj (homComplex (R := X.sheaf.over U) P M) ≅\n            homComplex (R := U.toScheme.sheaf) (T.obj P) (T.obj M),\n        (∀ (M N : CochainComplex (localEvaluationModules X U) ℤ) (a : M ⟶ N),\n          T.map (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map a) ≫\n              (b N).hom =\n            (b M).hom ≫ ((homComplexFunctor (R := U.toScheme.sheaf)).obj\n              (op (T.obj P))).map (T.map a)) ∧\n        (∀ (M : CochainComplex (localEvaluationModules X U) ℤ)\n            (n r s : ℤ) (h : r + n = s),\n          (b M).hom.f n ≫\n              (Classical.choose (homComplex_projections_exists.{u, u, u, u}\n                (R := U.toScheme.sheaf)))\n                (T.obj P) (T.obj M) n r s h =\n            L.map (localEvaluationProjection X U P M n r s h) ≫\n              (e (P.X r) (M.X s)).hom)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T201801-L-3973494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T201801-L-3973494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
