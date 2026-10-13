@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.AlgebraicGeometry.CartesianFlatSingleLocalizedBaseChange
+import Sheaf.AlgebraicGeometry.LocalizedMixedPullbackFiniteFreeModel
 
 /-! # Termwise comparison for a cartesian relatively flat single sheaf
 
@@ -86,6 +88,11 @@ theorem cartesian_flat_single_termwise_comparison
         ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) ≅
       DerivedCategory.Q.obj ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) :=
-  by sorry
+  by
+    classical
+    obtain ⟨b⟩ := cartesian_flat_single_localized_baseChange f F U V W p M hM g q sq eM
+    obtain ⟨c⟩ := localizedMixedDerivedPullback_finiteFree_model U V W g L eL P hP hfree
+    let H := localizedMixedDerivedPullback U V W g
+    exact ⟨b ≪≫ H.mapIso (Classical.choice eP).symm ≪≫ c⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,181 @@
+{
+ "id": "lem-pc-cartesian-flat-single-localized-base-change",
+ "kind": "statement",
+ "title": "Localized cartesian base change for a relatively flat single sheaf",
+ "statement": "Under the geometric hypotheses of lem-pc-cartesian-flat-single-termwise-comparison (quasi-compact quasi-separated f:X->S and p:Y->W, quasi-coherent M flat over p, nested opens U and V, a cartesian square q:X times_S V -> Y over g:V->W, and q^*M isomorphic to the restriction of F), the localized restriction over V of the restriction over U of Rf_*F[0] is isomorphic to localizedMixedDerivedPullback(U,V,W,g) applied to Rp_*M[0]. All source, target, auxiliary and localized-site derived-category universes are independently supplied as in the Lean signature. This has no complex P, representative isomorphism, or termwise functor L in its hypotheses or conclusion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-scheme-module-flat-over",
+  "pqf-def-coherent",
+  "def-pc-localized-mixed-derived-pullback"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0A1D and 08FE",
+  "url": "https://stacks.math.columbia.edu/tag/0A1D"
+ },
+ "proof": [
+  {
+   "text": "Use open derived direct-image restriction for the nested opens and identify the restricted coefficient sheaf with q^*M using the supplied sheaf isomorphism. Transport to the cartesian pullback scheme.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 0A1D and 08FE"
+   }
+  },
+  {
+   "text": "Apply relatively flat complex tensor base change to p with perfect unit O_Y[0] and G=M[0]. Tensor unit comparisons remove the unit, producing Lg^*Rp_*M[0]. Identify the given cartesian square with the canonical pullback square.",
+   "uses": [
+    "lem-pc-rf-base-change-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 0A1D and 08FE"
+   }
+  },
+  {
+   "text": "Use canonical localization equivalences to compare independently supplied universes. Compute right-derived images using a common K-injective resolution. Apply the exact inverse overEquiv V to obtain precisely the explicit localized mixed pullback.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-localized-mixed-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 0A1D and 08FE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-localized-mixed-derived-pullback",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-rf-base-change-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0A1D and 08FE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of direct image of relatively flat sheaf under cartesian base change computed termwise on a bounded above finite free complex",
+   "results": "Eight ordinary module-pullback API hits, including SheafOfModules.pullbackComp and freeFunctorCompPullbackIso; no matching mixed-universe geometric or termwise derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.compUniqFunctor",
+   "results": "CategoryTheory.Localization.compUniqFunctor identifies Qh followed by the canonical localization equivalence with the other Qh; used in the explicit mixed-universe construction. No matching geometric base-change theorem.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor pullback of a relatively flat single sheaf under cartesian base change with independent derived category localizations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*flat.*single|localizedMixedDerivedPullback|nonempty_tensorPullbackComp",
+   "results": "Search service returned no hits. Local rg found the assigned sorry, its caller, and the ordinary tensor composition theorem. The existing relativelyFlat_derivedBaseChange_complex requires common universes and canonical pullbacks; no exact bridge matching this signature.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complex exact restriction derived tensor inverse image localization equivalence",
+   "results": "Second reader: eight ordinary module flatness/exactness hits, no exact mixed localization comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.uniq",
+   "results": "Second reader: service reported unknown identifier. Inspected Mathlib CategoryTheory/Localization/Predicate.lean directly: uniq is a constructed equivalence and compUniqFunctor is its localization factorization.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|mapDerivedCategoryFactors|flatComplexDerivedPullback",
+   "results": "Second reader: service found Mathlib exact-functor Q factorization components. Local rg/read found relativelyFlat_derivedBaseChange_complex and flatComplexDerivedPullback; these have common-universe signatures, and the separated single-sheaf theorem has an extra separatedness hypothesis. No exact mixed-universe comparison exists.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianFlatSingleTermwiseComparison",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "termwise comparison step in the Noetherian approximation argument",
+   "via": [
+    "lem-pc-cartesian-flat-single-termwise-comparison",
+    "lem-pc-proper-flat-single-open-noetherian-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianFlatSingleLocalizedBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianFlatSingleLocalizedBaseChange.lean",
+  "declaration": "AlgebraicGeometry.cartesian_flat_single_localized_baseChange",
+  "statement": "theorem cartesian_flat_single_localized_baseChange {X S T Y : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (F : X.Modules) (U : S.Opens) [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{wS} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (V : U.toScheme.Opens) (W : T.Opens) [HasDerivedCategory.{wW} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] (p : Y ⟶ W.toScheme) [QuasiCompact p] [QuasiSeparated p] (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : V.toScheme ⟶ W.toScheme) (q : pullback f (V.ι ≫ U.ι) ⟶ Y) (sq : IsPullback q (pullback.snd f (V.ι ≫ U.ι)) p g) (eM : Nonempty (Scheme.Modules.tensorPullbackObj q M ≅ Scheme.Modules.tensorPullbackObj (pullback.fst f (V.ι ≫ U.ι)) F)) : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.obj ((schemeOpenRestriction S U).mapDerivedCategory.obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) ≅ (localizedMixedDerivedPullback U V W g).obj ((schemeDerivedDirectImage p).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T124310-L-3775843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T124310-L-3775843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

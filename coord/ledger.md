@@ -12477,3 +12477,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/D4/Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat (stage 3; reviewer PASS; first push; landing 20261013T124308-L-3775538 (interface); batch 20261013T124305; modules 3; new nodes 2)
 - 12:43 L: merged deliver/F1/Sheaf.AlgebraicGeometry.OrdinaryEvaluationPreDifferential (stage 3; reviewer PASS; first push; landing 20261013T124309-L-3775644 (interface); batch 20261013T124305; modules 3; new nodes 2)
 - 12:43 L: merged deliver/H1/Sheaf.AlgebraicGeometry.SingleComplexOpenStalkConjugacy (stage 3; reviewer PASS; first push; landing 20261013T124309-L-3775743 (interface); batch 20261013T124305; modules 2; new nodes 1)
+- 12:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.CartesianFlatSingleTermwiseComparison (stage 3; reviewer PASS; first push; landing 20261013T124310-L-3775843 (interface); batch 20261013T124305; modules 4; new nodes 3)
