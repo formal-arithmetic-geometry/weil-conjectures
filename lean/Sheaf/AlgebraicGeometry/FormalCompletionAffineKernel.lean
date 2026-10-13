@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.FormalCompletionAffineComparison
+import Mathlib.RingTheory.AdicCompletion.Exactness
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The affine kernel fork of a completed short exact sequence
 
@@ -34,29 +37,24 @@ and equivalence 087W; Algebra, Lemma 00MB (2).
 (blueprint: lem-weil-pbc-formal-completion-affine-kernel).
 
 Proof:
-1. Restrict the coherent short exact sequence to U. Its underlying module sequence is
-short exact because the coherent full inclusion and open restriction preserve kernels
-and cokernels. Affine sections give an exact sequence of finite modules over the
-Noetherian ring A = Gamma(U, O_X): kernels are sectionwise, quasi-coherent cokernels
-have surjective affine sections, and coherence implies finite affine sections.
-2. Restriction identifies the quotient by I^(n+1) with the quotient by the restricted
-ideal power. The affine ideal-product and quotient formulas identify its sections,
-including the induced maps, with M/I^(n+1)M. The specified equality for rho identifies
-its objects, transitions and arrows with these restricted quotient systems.
-3. Under the equivalence of Lemma 087W with finite modules over the completed ring,
-the three systems and their arrows are the adic completions of the finite A-modules
-and the induced linear maps. This identification follows from the natural limit cones
-in the equivalence and the quotient formulas of step 2.
-4. Algebra, Lemma 00MB (2) gives injectivity of the first completed map and middle
-exactness. Thus the first completed map is a kernel of the second in modules over
-the completed ring. This ring is Noetherian, the completed modules are finite, and
-the full finite-module inclusion creates kernels, so the same fork is limiting in
-the finite-module category.
-5. Transport this limiting fork through the affine equivalence. Its naturality identifies
-it with the fork of the restricted completed arrows. Isomorphic forks have the same
-kernel universal property, which gives the stated Nonempty IsLimit.
-The argument includes the zero module, the empty affine open, I = 0, and I = O_X;
-no injectivity of individual quotient-level first arrows is asserted.
+1. Apply formalCompletion_affine_comparison. It supplies a Noetherian ring A, an ideal J,
+a short exact module complex M with finite middle term, a zero-preserving functor F
+reflecting parallel-pair limits, and linear equivalences identifying the two mapped
+arrows with AdicCompletion.map on the arrows of M. This is the affine identification
+of Lemma 0881, using Lemma 087W and the positive-power quotient formulas.
+2. Apply Mathlib's AdicCompletion.map_injective and AdicCompletion.map_exact, using
+injectivity, exactness and surjectivity of the original module sequence. These results
+use finiteness only of its middle term.
+3. Transfer injectivity through the first two equivalences. For middle exactness,
+map a killed element through the second equivalence; the third equivalence and the
+arrow equation show it is killed by the second completion map. Lift it by completion
+exactness and pull the lift back through the first equivalence. The first arrow equation
+proves its image is the original element. The reverse inclusion follows from V.zero.
+4. Injectivity gives a monomorphism and middle exactness gives categorical exactness
+in ModuleCat A. Exact.fIsKernel makes its first arrow a limiting kernel fork. Convert
+this fork to the mapped cone and reflect its limit through F to obtain the conclusion.
+No abelian structure on finite completed modules is needed in this argument. The zero
+module, empty affine open, I = 0 and I = O_X require no exceptional cases.
 -/
 theorem formalCompletion_affine_kernel (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) (h : (completion X I).Additive)
@@ -71,6 +69,44 @@ theorem formalCompletion_affine_kernel (X : Scheme.{u}) [IsNoetherian X]
     let T := @ShortComplex.map _ _ _ _ _ _ S (completion X I)
       (@Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ (completion X I) h)
     let V := @ShortComplex.map _ _ _ _ _ _ T ρ hz
-    Nonempty (IsLimit (KernelFork.ofι V.f V.zero)) := by sorry
+    Nonempty (IsLimit (KernelFork.ofι V.f V.zero)) := by
+  classical
+  let T := @ShortComplex.map _ _ _ _ _ _ S (completion X I)
+    (@Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ (completion X I) h)
+  let V := @ShortComplex.map _ _ _ _ _ _ T ρ hz
+  obtain ⟨A, hA, hN, J, M, hfinite, hM, F, hFzero, hFreflect,
+      e₁, e₂, e₃, hf, hg⟩ := formalCompletion_affine_comparison X I h U hU ρ hz hρ S hS
+  have : Module.Finite A M.X₂ := hfinite
+  have : F.PreservesZeroMorphisms := hFzero
+  have : ReflectsLimitsOfShape WalkingParallelPair F := hFreflect
+  let W := @ShortComplex.map _ _ _ _ _ _ V F hFzero
+  have hf : ∀ x : W.X₁, e₂ (W.f x) = AdicCompletion.map J M.f.hom (e₁ x) := hf
+  have hg : ∀ x : W.X₂, e₃ (W.g x) = AdicCompletion.map J M.g.hom (e₂ x) := hg
+  have hfinj := AdicCompletion.map_injective J hM.moduleCat_injective_f
+  have hexact := AdicCompletion.map_exact hM.moduleCat_injective_f
+    ((ShortComplex.ShortExact.moduleCat_exact_iff_function_exact M).mp hM.exact)
+    hM.moduleCat_surjective_g (I := J)
+  have hinj : Function.Injective W.f := by
+    intro x y hxy
+    apply e₁.injective
+    apply hfinj
+    rw [← hf x, ← hf y, hxy]
+  have he : Function.Exact W.f W.g := by
+    intro y
+    constructor
+    · intro hy
+      have hy' : AdicCompletion.map J M.g.hom (e₂ y) = 0 := by
+        rw [← hg y, hy, map_zero]
+      obtain ⟨x, hx⟩ := (hexact (e₂ y)).mp hy'
+      refine ⟨e₁.symm x, ?_⟩
+      apply e₂.injective
+      rw [hf, e₁.apply_symm_apply, hx]
+    · rintro ⟨x, rfl⟩
+      exact W.moduleCat_zero_apply x
+  have : Mono W.f := (ModuleCat.mono_iff_injective W.f).mpr hinj
+  have hW : W.Exact :=
+    (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact W).mpr he
+  exact ⟨isLimitOfReflects F
+    (((KernelFork.ofι V.f V.zero).isLimitMapConeEquiv F).symm hW.fIsKernel)⟩
 
 end AlgebraicGeometry
