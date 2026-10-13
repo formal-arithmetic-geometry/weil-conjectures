@@ -15,58 +15,54 @@
  ],
  "proof": [
   {
-   "text": "Put A = Γ(Y,U), B = Γ(X,V), R = A[t₁,...,tₙ]. Surjectivity and ker(g) ⊆ p identify p with the inverse image of a prime q of B. The affine correspondence for V gives a point x in V with prime q. Let r be its image prime in A. The localization of B as an R-module at p is canonically B_q: denominators outside p map outside q, and every B denominator outside q has a lift outside p by surjectivity.",
+   "text": "Use the supported-localization comparison to obtain x in V and an A-module isomorphism to the source stalk restricted through the composite of the base germ and the actual stalk map. No Noetherian or finite type hypothesis is required for this comparison.",
    "uses": [
-    "def-pc-scheme",
-    "pqf-def-locnoeth",
-    "def-pc-perfect-morphism",
-    "def-weil-pbc-tor-modules"
+    "lem-pc-affine-polynomial-supported-localization-stalk"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1): supported affine localization and stalk Tor bound; source read online"
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
    }
   },
   {
-   "text": "Affine germ maps identify B_q with O_{X,x} and A_r with O_{Y,f(x)}. The equation g.comp C = f.appLE makes the section-to-germ square commute, so the A-action on the localized module is scalar restriction of the actual stalkMap. Apply HasStalkwiseFiniteTorDimension at x to obtain a natural bound d over A_r.",
+   "text": "Install the base section-to-stalk algebra structure. IsAffineOpen.isLocalization_stalk and IsLocalization.flat make the target stalk a flat A-algebra. Apply HasStalkwiseFiniteTorDimension at x to choose d valid for every module over the target stalk.",
    "uses": [
     "def-pc-scheme",
-    "pqf-def-locnoeth",
-    "def-pc-perfect-morphism",
-    "def-weil-pbc-tor-modules"
+    "lem-weil-pbc-localization-flat",
+    "def-pc-perfect-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1): supported affine localization and stalk Tor bound; source read online"
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
    }
   },
   {
-   "text": "Localization A → A_r is flat. Finite Tor dimension gives an A_r-flat resolution of the source stalk of length d, by dimension shifting and the Tor criterion for flatness. After scalar restriction this is an A-flat resolution, since A_r is A-flat. For any A-module N, tensoring that resolution over A agrees with tensoring it over A_r with A_r ⊗_A N. Its homology vanishes above d. The flat-resolution computation of Tor and the compatible affine localization/stalk isomorphism give precisely the stated Tor objects over A. No uniform bound in p is used.",
+   "text": "For an arbitrary A-module N, extend N to the target stalk and apply its bound. Apply the flat-base restriction theorem, compose the affine comparison with restrictScalarsComp'App, and map this isomorphism through Tor' in its first argument. Transfer IsZero to obtain the bound for the original supported localized module.",
    "uses": [
-    "def-pc-scheme",
-    "pqf-def-locnoeth",
-    "def-pc-perfect-morphism",
+    "lem-pc-tor-vanishing-restriction-flat-base",
     "def-weil-pbc-tor-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1): supported affine localization and stalk Tor bound; source read online"
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
    }
   }
  ],
  "proof_deps": [
+  "lem-pc-affine-polynomial-supported-localization-stalk",
   "def-pc-scheme",
-  "pqf-def-locnoeth",
+  "lem-weil-pbc-localization-flat",
   "def-pc-perfect-morphism",
+  "lem-pc-tor-vanishing-restriction-flat-base",
   "def-weil-pbc-tor-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1): supported affine localization and stalk Tor bound; source read online; argument expanded by Y3"
+  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online); P4: direct localization universal-property comparison and projective-resolution base change, instead of constructing bounded flat resolutions"
  },
  "mathlib_searches": [
   {
@@ -165,11 +161,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "X-b3c2d",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T123213-L-3679861",
+  "landing": "20261013T131327-L-4034618",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean declarations with their node statements and proof records; delivered modules and sole direct importer compile cleanly; all three proofs use only propext, Classical.choice and Quot.sound."
  }
 }

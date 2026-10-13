@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-tor-vanishing-restriction-flat-base",
+ "kind": "statement",
+ "title": "Tor vanishing under restriction along a flat base map",
+ "statement": "Let $A\\to B$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map], let $L$ be a $B$-module, $N$ an $A$-module, and $j\\in\\mathbb N$. If $\\operatorname{Tor}^B_j(L,B\\otimes_A N)=0$ [def-weil-pbc-tor-modules], then $\\operatorname{Tor}^A_j(\\operatorname{Res}_A L,N)=0$. Every scalar action is induced by the given map $A\\to B$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Let E and R be extension and restriction of scalars. Extension preserves projective objects by the adjunction because R preserves epimorphisms. Flatness gives finite-limit preservation of E followed by R (tensorLeft with B), so E preserves finite limits since R reflects them. Extension is a left adjoint and preserves finite colimits. It therefore maps a projective resolution P of N to a projective resolution Q of E(N).",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+   }
+  },
+  {
+   "text": "Construct E followed by tensorRight L followed by R naturally isomorphic to tensorRight R(L). Commute the B tensor factors, use AlgebraTensorModule.cancelBaseChange, restrict to A, and commute the A tensor factors. Naturality follows by tensor induction, with definitional equality on pure tensors. Lift this natural isomorphism to chain complexes and use exactness of R to commute it with homology. This identifies R(Tor over B at E(N), L) with Tor over A at N, R(L).",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+   }
+  },
+  {
+   "text": "Apply Tor symmetry over B to the zero object in the hypothesis. R maps it to a zero object; transfer across the homology comparison, and apply Tor symmetry over A to reach the required first-variable Tor object.",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online); P4 expanded the comparison into Mathlib universal properties and derived-functor computations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor vanishing under restriction of scalars along a flat ring map",
+   "results": "UNAVAILABLE: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor vanishing descends under restriction of scalars along a flat localization map",
+   "results": "Module.flat_iff_of_isLocalization; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact. No Tor change-of-base statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, ModuleCat",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*restrictScalars|restrictScalars.*Tor|Tor.*[Ff]lat in Mathlib and lean/Sheaf/RingTheory",
+   "results": "Mathlib Flat.CategoryTheory TODO relates flatness to Tor. Sheaf.RingTheory.TorVanishingLocalizedBase proves the reverse direction. No matching restriction transfer found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedTorOfStalkwise",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Pointwise perfection and gluing in the relative finite Tor step descending from lem-sc-finite-duality; Pointwise finite projective dimension of an affine polynomial presentation; Affine localized Tor bound from the supported stalk; Tor vanishing under restriction along a flat base map",
+   "via": [
+    "lem-pc-affine-polynomial-localized-tor-of-stalkwise",
+    "lem-pc-affine-polynomial-localized-finite-projective-dimension",
+    "lem-pc-affine-polynomial-resolution-of-stalkwise",
+    "lem-pc-affine-sections-finite-tor-of-stalkwise",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorVanishingRestrictionFlatBase",
+  "file": "lean/Sheaf/RingTheory/TorVanishingRestrictionFlatBase.lean",
+  "declaration": "ModuleCat.isZero_tor_restrictScalars_of_flat",
+  "statement": "theorem isZero_tor_restrictScalars_of_flat\n    (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] [Module.Flat A B]\n    (L : ModuleCat.{u} B) (N : ModuleCat.{u} A) (j : ℕ)\n    (h : IsZero (((Tor' (ModuleCat.{u} B) j).obj L).obj\n      ((extendScalars (algebraMap A B)).obj N))) :\n    IsZero (((Tor' (ModuleCat.{u} A) j).obj\n      ((restrictScalars (algebraMap A B)).obj L)).obj N)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3c2d",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131327-L-4034618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3c2d",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131327-L-4034618",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean declarations with their node statements and proof records; delivered modules and sole direct importer compile cleanly; all three proofs use only propext, Classical.choice and Quot.sound."
+ }
+}

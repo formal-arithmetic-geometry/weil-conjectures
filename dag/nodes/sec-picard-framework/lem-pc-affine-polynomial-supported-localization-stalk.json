@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-affine-polynomial-supported-localization-stalk",
+ "kind": "statement",
+ "title": "Supported polynomial localization as an affine base module stalk",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $U\\subseteq Y$ an open, $V\\subseteq X$ an affine open contained in $f^{-1}U$, and $n\\in\\mathbb N$. Write $A=\\Gamma(Y,U)$, $B=\\Gamma(X,V)$, $R=A[t_1,\\ldots,t_n]$. Let $g:R\\to B$ be surjective and restrict on $A$ to the section map of $f$. For a prime $p$ of $R$ with $\\ker g\\subseteq p$, there exist $x\\in V$ and an isomorphism of $A$-modules from the localization of the $R$-module $B$ at $p$ [def-weil-pbc-module-localization], restricted through $A\\to R\\to R_p$, to $\\mathcal O_{X,x}$ with action through the germ $A\\to\\mathcal O_{Y,f(x)}$ followed by the actual stalk homomorphism of $f$. There are no Tor, finite type, or Noetherian assumptions.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Form q = p.map g. Ideal.map_isPrime_of_surjective gives primality; Ideal.comap_map_of_surjective and the kernel inclusion give g inverse image of q equal to p. Set x to the inverse image of q under hV.isoSpec. Its associated prime is q by the iso inverse identity. The lemma Ideal.map_primeCompl_comap_of_surjective identifies the image under g of the prime complement of p with the prime complement of q.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+   }
+  },
+  {
+   "text": "The affine germ B to the source stalk is localization at q by IsAffineOpen.isLocalization_stalk. Give B its R-algebra structure via g and the stalk the composite algebra structure. The equality of prime complements and isLocalizedModule_iff_isLocalization show that the R-linear germ is a module localization at p. Compare it with ModuleCat.localizedModuleMkLinearMap using IsLocalizedModule.linearEquiv.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+   }
+  },
+  {
+   "text": "Restrict this R-linear equivalence to the displayed A action. IsScalarTower.algebraMap_smul compares localization-ring and R scalar multiplication. Germ naturality and the compatibility g.comp C = f.appLE show that the resulting action equals the base germ followed by f.stalkMap, giving precisely the stated module isomorphism.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1), affine polynomial presentation; https://stacks.math.columbia.edu/tag/069C (read online); P4 expanded the comparison into Mathlib universal properties and derived-functor computations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of an affine coordinate module at a supported prime of a polynomial presentation is isomorphic to a stalk",
+   "results": "UNAVAILABLE: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a module along a surjective ring homomorphism at a prime containing its kernel is isomorphic to localization of the quotient at the corresponding prime",
+   "results": "RingHom.toKerIsLocalization_isLocalizedModule; IsLocalizedModule.AtPrime; IsLocalization.of_surjective. Useful algebraic ingredients, no scheme stalk statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.linearEquiv",
+   "results": "IsLocalizedModule.linearEquiv and its naturality/application lemmas. Gives the final equivalence once the stalk localization instance is established.",
+   "date": "2026-10-13",
+   "verdict": "ingredient match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*localizedModule|localizedModule.*stalk; primeIdealOf|isLocalization_stalk in AffineScheme.lean",
+   "results": "No direct localizedModule-to-stalk comparison. IsAffineOpen.isLocalization_stalk, primeIdealOf and isoSpec provide the point correspondence and germ localization.",
+   "date": "2026-10-13",
+   "verdict": "ingredient match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedTorOfStalkwise",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Pointwise perfection and gluing in the relative finite Tor step descending from lem-sc-finite-duality; Pointwise finite projective dimension of an affine polynomial presentation; Affine localized Tor bound from the supported stalk; Supported polynomial localization as an affine base module stalk",
+   "via": [
+    "lem-pc-affine-polynomial-localized-tor-of-stalkwise",
+    "lem-pc-affine-polynomial-localized-finite-projective-dimension",
+    "lem-pc-affine-polynomial-resolution-of-stalkwise",
+    "lem-pc-affine-sections-finite-tor-of-stalkwise",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePolynomialSupportedLocalizationStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePolynomialSupportedLocalizationStalk.lean",
+  "declaration": "AlgebraicGeometry.affinePolynomial_supportedLocalization_stalk",
+  "statement": "theorem affinePolynomial_supportedLocalization_stalk\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (U : Y.Opens) (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)\n    (n : ℕ) (g : MvPolynomial (Fin n) Γ(Y, U) →+* Γ(X, V))\n    (hg : Function.Surjective g)\n    (hcomp : g.comp MvPolynomial.C = (f.appLE U V e).hom)\n    (p : PrimeSpectrum (MvPolynomial (Fin n) Γ(Y, U)))\n    (hker : RingHom.ker g ≤ p.asIdeal) :\n    ∃ (x : X) (hx : x ∈ V), Nonempty\n      (((ModuleCat.restrictScalars\n          ((algebraMap (MvPolynomial (Fin n) Γ(Y, U))\n            (Localization p.asIdeal.primeCompl)).comp MvPolynomial.C)).obj\n          (((ModuleCat.restrictScalars g).obj\n            (ModuleCat.of Γ(X, V) Γ(X, V))).localizedModule p.asIdeal.primeCompl)) ≅\n        (ModuleCat.restrictScalars ((f.stalkMap x).hom.comp\n          (Y.presheaf.germ U (f x) (e hx)).hom)).obj\n            (ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x)))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3c2d",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131327-L-4034618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3c2d",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131327-L-4034618",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean declarations with their node statements and proof records; delivered modules and sole direct importer compile cleanly; all three proofs use only propext, Classical.choice and Quot.sound."
+ }
+}
