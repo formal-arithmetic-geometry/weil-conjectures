@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-projective-class-reduced-splitting",
+ "kind": "statement",
+ "title": "Lifting a reduced split right-exact sequence in a projective class",
+ "statement": "Let R be a commutative ring and I an ideal. Let P be a class of projective R-modules, closed under binary sums and summands, meaning that for every isomorphism P12 ≅ P1 × P2, (P1 belongs to P and P12 belongs to P) if and only if (P1 belongs to P and P2 belongs to P), and suppose maps between class members which are surjective after extension of scalars to R/I are surjective. Let S = (P1 -> P2 -> M) be a right-exact sequence with P1 and P2 in P. Suppose extension of scalars of S to R/I admits a splitting and M/IM is isomorphic to T/IT for some T in P. Then S is short exact and M belongs to P.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project, Tag 0BCA, final split-injectivity paragraph (step 5)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Lift the reduced projection P2/IP2 -> T/IT to a map g : P2 -> T by projectivity of P2. The class-surjectivity hypothesis makes g surjective. Split g by projectivity of T. Its kernel U belongs to the class by the summand condition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The composite P1 -> P2 -> U is invertible modulo I. It is surjective by the class-surjectivity hypothesis and splits because U is projective. Its kernel V belongs to the class, and reduction of the split sequence shows V/IV = 0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Zero belongs to the class as a summand of P1. Apply the surjectivity condition to zero -> V to get V = 0. The composite P1 -> U is therefore invertible, giving a retraction of P1 -> P2. Thus the given right-exact sequence is short exact and split. Its last object belongs to the class by the summand condition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCA, final split-injectivity paragraph (step 5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right exact sequence of projective modules whose reduction modulo ideal is split exact is split exact if reduction detects surjections",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right exact sequence of projective modules whose reduction modulo ideal is split exact is split exact if reduction detects surjections",
+   "results": "ShortExact.splittingOfProjective and Function.Exact split equivalences exist but assume injectivity or projectivity of the last term",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Splitting; CochainComplex.IsKProjective.Qh_map_bijective",
+   "results": "Splitting API and K-projective comparison API exist, but neither lifting result is stated.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*complex|complex.*lift; extendScalars.*[Pp]rojective; split.*reduc in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "AcyclicLift is the existing acyclic lifting input. No reduced splitting or cone-enlargement declaration found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComplexLiftClassProjective",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "final split-injectivity paragraph (step 5)",
+   "via": [
+    "lem-sc-complex-lift-class-projective",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveClassReducedSplitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveClassReducedSplitting.lean",
+  "declaration": "AlgebraicGeometry.projective_class_reduced_splitting",
+  "statement": "theorem projective_class_reduced_splitting\n    (R : Type u) [CommRing R] (I : Ideal R)\n    (Pclass : Set (ModuleCat.{max u v} R))\n    (hproj : ∀ P : ModuleCat.{max u v} R, P ∈ Pclass → Projective P)\n    (hclosed : ∀ P₁ P₂ P₁₂ : ModuleCat.{max u v} R,\n      Nonempty (P₁₂ ≅ ModuleCat.of R (P₁ × P₂)) →\n      (P₁ ∈ Pclass ∧ P₁₂ ∈ Pclass ↔ P₁ ∈ Pclass ∧ P₂ ∈ Pclass))\n    (hsurj : ∀ (P₁ P₂ : ModuleCat.{max u v} R) (f : P₁ ⟶ P₂),\n      P₁ ∈ Pclass → P₂ ∈ Pclass →\n      Function.Surjective ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map f) →\n      Function.Surjective f)\n    (S : ShortComplex (ModuleCat.{max u v} R))\n    (hexact : S.Exact) (hepi : Epi S.g)\n    (hfirst : S.X₁ ∈ Pclass) (hmiddle : S.X₂ ∈ Pclass)\n    (hsplit : Nonempty ((S.map (ModuleCat.extendScalars (Ideal.Quotient.mk I))).Splitting))\n    (hlast : ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧\n      Nonempty ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj S.X₃ ≅\n        (ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P)) :\n    S.ShortExact ∧ S.X₃ ∈ Pclass",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082407-L-1645659",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082407-L-1645659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

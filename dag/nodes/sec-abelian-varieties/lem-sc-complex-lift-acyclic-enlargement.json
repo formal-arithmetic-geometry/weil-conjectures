@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-complex-lift-acyclic-enlargement",
+ "kind": "statement",
+ "title": "Acyclic cone and cokernel diagram from a lifted cone",
+ "statement": "Let R be a commutative ring, I an ideal, and P a class of R-modules consisting of projectives and closed under sums and summands, meaning that for every isomorphism P12 ≅ P1 × P2, (P1 belongs to P and P12 belongs to P) if and only if (P1 belongs to P and P2 belongs to P). Let K0 be a bounded-above complex with terms in P and let E be a bounded-above R/I-complex with terms isomorphic to reductions of members of P. Assume the reductions of K0 and E are isomorphic in the derived category [def-weil-abstract-derived-category]. There exists a bounded-above acyclic R/I-complex C with terms reducing members of P, such that every bounded-above acyclic class complex A with reduction isomorphic to C yields a right-exact sequence K0 -> A' -> B of R-complexes, with A' acyclic and with terms in P, B bounded above, reduction of B isomorphic to E[1], and the reduced sequence split exact in every degree. The Lean sequence records its first object as equal to K0 and does not require injectivity before reduction.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project, Tag 0BCA, cone construction and dotted-arrow paragraphs (steps 1, 2, 4, and the right-exact part of step 6)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a quasi-isomorphism E -> reduction(K0) using bounded-above projectivity and the bijection from homotopy to derived morphisms. Its cone C is bounded above and acyclic. Cone terms are sums of reductions of class members, hence are reductions of class members.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any supplied A lifting C, restriction of scalars makes A -> C a termwise surjective quasi-isomorphism of R-complexes. Use K-projectivity of K0 to lift its canonical map to C up to homotopy. Lift the correcting homotopy termwise and subtract its boundary to make the square commute strictly.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the cokernel complex B of the strict map K0 -> A. The sequence is right exact and B is bounded above. Extension of scalars preserves this cokernel. Its reduced first arrow is the cone inclusion, so its cokernel is E[1]; the cone sequence splits in each degree. This gives the claimed diagram, without asserting injectivity over R.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCA, cone construction and dotted-arrow paragraphs (steps 1, 2, 4, and the right-exact part of step 6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "acyclic cone of quasi-isomorphism bounded projective complexes and lifting through a surjective quasi-isomorphism",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "acyclic cone of quasi-isomorphism bounded projective complexes and lifting through a surjective quasi-isomorphism",
+   "results": "KProjective.Qh_map_bijective and projective resolutions found; no lifting diagram theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Splitting; CochainComplex.IsKProjective.Qh_map_bijective",
+   "results": "Splitting API and K-projective comparison API exist, but neither lifting result is stated.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*complex|complex.*lift; extendScalars.*[Pp]rojective; split.*reduc in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "AcyclicLift is the existing acyclic lifting input. No reduced splitting or cone-enlargement declaration found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComplexLiftClassProjective",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "cone construction and dotted-arrow paragraphs (steps 1, 2, 4, and the right-exact part of step 6)",
+   "via": [
+    "lem-sc-complex-lift-class-projective",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComplexLiftAcyclicEnlargement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplexLiftAcyclicEnlargement.lean",
+  "declaration": "AlgebraicGeometry.exists_complex_lift_acyclic_enlargement",
+  "statement": "theorem exists_complex_lift_acyclic_enlargement\n    (R : Type u) [CommRing R] (I : Ideal R)\n    (Pclass : Set (ModuleCat.{max u v} R))\n    [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]\n    [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))]\n    (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ)\n    (hproj : ∀ P : ModuleCat.{max u v} R, P ∈ Pclass → Projective P)\n    (hclosed : ∀ P₁ P₂ P₁₂ : ModuleCat.{max u v} R,\n      Nonempty (P₁₂ ≅ ModuleCat.of R (P₁ × P₂)) →\n      (P₁ ∈ Pclass ∧ P₁₂ ∈ Pclass ↔ P₁ ∈ Pclass ∧ P₂ ∈ Pclass))\n    (K₀ : CochainComplex (ModuleCat.{max u v} R) ℤ)\n    (hKbound : ∃ b : ℤ, K₀.IsStrictlyLE b)\n    (hKterms : ∀ i : ℤ, K₀.X i ∈ Pclass)\n    (hEbound : ∃ b : ℤ, E.IsStrictlyLE b)\n    (hEterms : ∀ i : ℤ, ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧\n      Nonempty (E.X i ≅ (ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P))\n    (hderived : Nonempty (DerivedCategory.Q.obj\n      (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj K₀) ≅ DerivedCategory.Q.obj E)) :\n    ∃ C : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ,\n      (∃ b : ℤ, C.IsStrictlyLE b) ∧ C.Acyclic ∧\n      (∀ i : ℤ, ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧\n        Nonempty ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P ≅ C.X i)) ∧\n      ∀ A : CochainComplex (ModuleCat.{max u v} R) ℤ,\n        (∃ b : ℤ, A.IsStrictlyLE b) → A.Acyclic →\n        (∀ i : ℤ, A.X i ∈ Pclass) →\n        Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj A ≅ C) →\n        ∃ S : ShortComplex (CochainComplex (ModuleCat.{max u v} R) ℤ),\n          S.X₁ = K₀ ∧ S.Exact ∧ Epi S.g ∧ S.X₂.Acyclic ∧\n          (∀ i : ℤ, S.X₂.X i ∈ Pclass) ∧ (∃ b : ℤ, S.X₃.IsStrictlyLE b) ∧\n          Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj S.X₃ ≅ E⟦(1 : ℤ)⟧) ∧\n          ∀ i : ℤ, Nonempty\n            (((S.map (HomologicalComplex.eval (ModuleCat.{max u v} R)\n              (ComplexShape.up ℤ) i)).map\n                (ModuleCat.extendScalars (Ideal.Quotient.mk I))).Splitting)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082407-L-1645659",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082407-L-1645659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

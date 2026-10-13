@@ -23,78 +23,41 @@
  ],
  "proof": [
   {
-   "text": "By (5) choose a bounded-above complex $K^\\bullet$ with terms in $\\mathcal P$ representing $K$. Its terms are projective by (1), hence flat, so $K^\\bullet$ is K-flat by [lem-pc-module-bounded-flat-kflat]; therefore $K\\otimes_R^{\\mathbf L}R/I$ is represented in $D(R/I)$ by the termwise quotient $K^\\bullet/IK^\\bullet=K^\\bullet\\otimes_R R/I$ by [lem-pur-derived-change-of-rings] (one-point site, $\\mathcal O=R$, $\\mathcal O'=R/I$). Each $E^i\\cong P/IP$ with $P$ projective is a projective $R/I$-module, so $E^\\bullet$ is a bounded-above complex of projective $R/I$-modules; the isomorphism $E^\\bullet\\cong K^\\bullet/IK^\\bullet$ in $D(R/I)$ is therefore represented by a chain map $\\delta:E^\\bullet\\to K^\\bullet/IK^\\bullet$ by [lem-pc-ring-derived-map-representative], and $\\delta$ is a quasi-isomorphism.",
+   "text": "Choose K0 and its supplied derived reduction isomorphism from hK. Construct an acyclic cone C and the continuation producing a right-exact cokernel diagram from any acyclic lift.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-ring-derived-map-representative"
+    "lem-sc-complex-lift-acyclic-enlargement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.75.2 proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $C^\\bullet$ be the cone of $\\delta$. Then $C^i=(K^i/IK^i)\\oplus E^{i+1}$, which is of the form $P/IP$ with $P\\in\\mathcal P$ since $\\mathcal P$ is closed under direct sums by (2); $C^\\bullet$ is bounded above, and it is acyclic because $\\delta$ is a quasi-isomorphism. The map $q:K^\\bullet\\to K^\\bullet/IK^\\bullet\\to C^\\bullet$ (reduction followed by the cone inclusion) is a chain map.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.75.2 proof, cone paragraph"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-complex-lift-acyclic-projective] (its hypotheses are (1), the 'only if' half of (2), and (3)) to obtain a bounded-above acyclic complex $A^\\bullet$ with terms in $\\mathcal P$ and an isomorphism $A^\\bullet/IA^\\bullet\\cong C^\\bullet$; let $\\pi:A^\\bullet\\to C^\\bullet$ be the resulting termwise surjective chain map. As $A^\\bullet$ and $C^\\bullet$ are both acyclic, $\\pi$ is a quasi-isomorphism.",
+   "text": "Derive closure under summands from the iff class condition. Apply the existing acyclic lifting theorem to C, and feed the resulting A and its reduction isomorphism into the cone continuation.",
    "uses": [
     "lem-sc-complex-lift-acyclic-projective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.75.2 proof, application of Lemma 15.75.1"
-   }
+   "elementary": false
   },
   {
-   "text": "We find a chain map $h:K^\\bullet\\to A^\\bullet$ with $\\pi\\circ h=q$ exactly (the dotted arrow). Since $Q(\\pi)$ is invertible in $D(R)$, the morphism $Q(\\pi)^{-1}Q(q):K^\\bullet\\to A^\\bullet$ is represented by a chain map $h_0$ by [lem-pc-ring-derived-map-representative] ($K^\\bullet$ is a bounded-above complex of projectives). Then $Q(\\pi h_0)=Q(q)$, so by the injectivity in the same statement (target $C^\\bullet$) $\\pi h_0-q=ds+sd$ for maps $s^i:K^i\\to C^{i-1}$. As $K^i$ is projective and $\\pi$ is termwise surjective, lift $s^i$ to $\\tilde s^i:K^i\\to A^{i-1}$, and put $h=h_0-(d\\tilde s+\\tilde sd)$; this is a chain map with $\\pi h=q$. Thus the reduction of $h^i$ modulo $I$ is the cone inclusion $K^i/IK^i\\to C^i=K^i/IK^i\\oplus E^{i+1}$, a split injection whose cokernel $E^{i+1}$ is of the form $P/IP$ with $P\\in\\mathcal P$ by (4).",
+   "text": "In each degree use the reduced cokernel identification with E[1] and its class lift to apply the reduced splitting theorem. This gives a short exact sequence of complexes and class membership for every cokernel term.",
    "uses": [
-    "lem-pc-ring-derived-map-representative"
+    "lem-sc-projective-class-reduced-splitting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.75.2 proof, dotted arrow (Derived Categories, Tag 0649)"
-   }
+   "elementary": false
   },
   {
-   "text": "Claim: if $f:P_1\\to P_2$ with $P_1,P_2\\in\\mathcal P$ reduces modulo $I$ to a split injection with cokernel $P_3/IP_3$, $P_3\\in\\mathcal P$, then $f$ is split injective with cokernel isomorphic to $P_3$. Indeed, since $P_2$ is projective (1), lift the projection $P_2/IP_2\\to P_3/IP_3$ to $g:P_2\\to P_3$. By (3) $g$ is surjective, hence split by (1), so $P_2=P'_1\\oplus P_3$ with $P'_1=\\ker g\\in\\mathcal P$ by (2). The composite $P_1\\to P_2\\to P'_1$ is an isomorphism modulo $I$, hence surjective by (3) and split by (1): $P_1=T\\oplus P'_1$ with $T\\in\\mathcal P$ by (2). Then $T/IT=0$; since $0\\in\\mathcal P$ (a summand of any member, by (2)), the map $0\\to T$ is surjective modulo $I$, so $T=0$ by (3). Hence $P_1\\to P'_1$ is an isomorphism, $f$ is split injective, and $\\operatorname{coker} f\\cong P_3$.",
+   "text": "The acyclic middle complex is zero in the derived category, since zero -> A is a quasi-isomorphism. The connecting arrow of the short-exact-sequence triangle is therefore invertible. Shift the cokernel by -1, use commutation of Q with shifts and cancellation of shifts to identify its image with K. Its bound shifts by one and its terms remain in the class. Apply commutation of scalar extension with shifts and cancel E[1][-1] to obtain the required complex isomorphism.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.75.2 proof, split-injectivity argument"
-   }
-  },
-  {
-   "text": "By the previous two steps each $h^i:K^i\\to A^i$ is split injective with cokernel $Q^i\\cong$ a member of $\\mathcal P$, so $0\\to K^\\bullet\\to A^\\bullet\\to Q^\\bullet\\to0$ is a termwise split short exact sequence of complexes with $Q^\\bullet$ bounded above. Put $P^\\bullet=Q^\\bullet[-1]$, a bounded-above complex with terms in $\\mathcal P$. Since $A^\\bullet$ is acyclic, the associated distinguished triangle gives $K^\\bullet\\cong Q^\\bullet[-1]=P^\\bullet$ in $D(R)$, so $P^\\bullet$ represents $K$. Reducing the termwise split sequence modulo $I$ stays exact, and by the previous step the reduction of $h$ is the cone inclusion $K^\\bullet/IK^\\bullet\\to C^\\bullet$, whose cokernel complex is $E^\\bullet[1]$; hence $Q^\\bullet/IQ^\\bullet\\cong E^\\bullet[1]$ and $P^\\bullet/IP^\\bullet\\cong E^\\bullet$ as complexes.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.75.2 proof, cokernel conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-ring-derived-map-representative",
-  "lem-sc-complex-lift-acyclic-projective"
+  "lem-sc-complex-lift-acyclic-enlargement",
+  "lem-sc-complex-lift-acyclic-projective",
+  "lem-sc-projective-class-reduced-splitting"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.75.2, Tag 0BCA"
+  "place": "Tag 0BCA; Q4 formal reduction via acyclic lifting, degreewise splitting and Mathlib triangleOfSES, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -205,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082407-L-1645659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
