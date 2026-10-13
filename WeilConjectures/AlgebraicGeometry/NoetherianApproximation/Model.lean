@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOve
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Flat
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Modules
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Proper
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Noetherian models of proper flat families
@@ -45,10 +46,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 open Scheme.NoetherianApproximation
-
-lemma Scheme.isSeparated_of_isSeparated_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f]
-    [Y.IsSeparated] : X.IsSeparated :=
-  ⟨by rw [← terminal.comp_from f]; infer_instance⟩
 
 namespace Scheme.Modules
 
