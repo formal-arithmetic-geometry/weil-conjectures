@@ -1,0 +1,169 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and the short exact coefficient diagram immediately after it; read online at https://stacks.math.columbia.edu/tag/0BED."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-picard-external-cup-left-cech-exact",
+ "title": "Exactness of the concrete left-coefficient Cech sequences",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ morphisms of quasi-compact schemes [def-pc-scheme] with affine diagonals. Let $S=(F_1\\to F_2\\to F_3)$ be a short exact sequence [def-weil-pbc-exact-sequence] of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent] and let $G$ be a quasi-coherent $\\mathcal O_Y$-module. Choose the actual finite subcovers of the library affine covers, with open families $U$ on $X$ and $V$ on $Y$, and let $W_{ij}=\\operatorname{pr}_1^{-1}U_i\\cap\\operatorname{pr}_2^{-1}V_j$ on $X\\times_kY$. For a coefficient $F$, define $T(F)=\\operatorname{Tot}(\\check C(U,F)_k^{\\mathrm{ext}}\\otimes_k\\check C(V,G)_k^{\\mathrm{ext}})$, where scalar restriction is along the structure map and superscript ext means extension from natural to integer degrees by zero. Define $P(F)=\\check C(W,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)_k^{\\mathrm{ext}}$, with the external coefficient convention of [lem-sc-picard-external-cup-cochain]. Both constructions are functors in $F$, using coefficient maps on sections, signed tensor total maps, pullback and tensor maps. The two short complexes $T(S)$ and $P(S)$ are short exact. This asserts neither a cup comparison nor a cohomology isomorphism.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "pqf-def-coherent",
+  "lem-sc-picard-external-cup-cochain"
+ ],
+ "proof": [
+  {
+   "text": "The library finite subcovers are finite affine covers. Affine diagonal makes all nonempty finite intersections affine. On each intersection apply the sectionwise kernel property and the affine quasi-coherent cokernel formula to S. Restriction of scalars preserves the resulting short exact module sequence.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor each section sequence with the section spaces of G over the field. It stays short exact. Finite tuple products preserve this exactness; in each natural total degree there are finitely many nonzero factor degrees. Direct sums of these sequences are exact, so the tensor total sequence is degreewise short exact.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On intersections of W, use the affine product spectrum, affine pullback section isomorphisms and tensor section formula. These identify the product-coefficient sequence with the factor section sequence tensored with sections of G. Quasi-coherence of pullbacks, identified with tensorPullback by the adjunction, and tensor-product quasi-coherence justify all the section comparisons.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Products over tuples and extension by zero preserve the degreewise short exact sequences; in a category of cochain complexes degreewise exactness, monicity and epicity give short exactness. The actual functor constructions preserve zero: scalar Cech by product projections, tensor total by summand inclusions, pullback by its additive adjunction, and tensor by the tensor-Hom adjunction. Empty covers give zero terms. These are direct applications of the corresponding Mathlib constructions.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and the short exact coefficient diagram immediately after it; read online at https://stacks.math.columbia.edu/tag/0BED."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED short exact coefficient diagram beneath the quasi-coherent Kunneth argument used by thm-sc-theorem-of-cube: separate its termwise exactness from cup comparison.",
+   "via": [
+    "lem-sc-picard-external-cup-left-comparison-complexes",
+    "lem-sc-picard-external-cup-left-homology-ladder",
+    "lem-sc-picard-external-cup-shift-left",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive Cech complex functor and exactness of finite affine Cech cochain sequences of quasi coherent modules",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequences of Cech complexes of quasi coherent sheaves on finite affine covers and tensor total complexes over a field",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, shortComplex_shortExact, shortComplex, shortComplex_X2, shortComplex_X3, shortComplex_X1, shortComplex_f, shortComplex_g; none constructs these coefficient Cech sequences",
+   "date": "2026-10-13",
+   "verdict": "no matching statement"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*shortExact|mapBifunctor.*exact|scalarCech",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no matching statement"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupLeftCechExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_exact",
+  "statement": "theorem picardExternalCup_left_cech_exact (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (S : ShortComplex X.Modules) (hS : S.ShortExact) [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent] : (S.map (picardLeftTensorCechFunctor f g G)).ShortExact ∧ (S.map (picardLeftProductCechFunctor f g G)).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardFiniteAffineOpens",
+   "AlgebraicGeometry.Scheme.Modules.picardScalarCechFunctor",
+   "AlgebraicGeometry.Scheme.Modules.picardCechTensorRight",
+   "AlgebraicGeometry.Scheme.Modules.picardLeftTensorCechFunctor",
+   "AlgebraicGeometry.Scheme.Modules.picardProductAffineOpens",
+   "AlgebraicGeometry.Scheme.Modules.picardLeftProductCechFunctor",
+   "AlgebraicGeometry.Scheme.Modules.picardLeftTensorCechFunctor_zero",
+   "AlgebraicGeometry.Scheme.Modules.picardLeftProductCechFunctor_zero",
+   "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_exact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100149-L-2493559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100149-L-2493559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
