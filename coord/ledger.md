@@ -11535,3 +11535,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/J2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential (stage 3; reviewer PASS; first push; landing 20261013T072353-L-1120999 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/J3/Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientComposition (stage 3; reviewer PASS; first push; landing 20261013T072353-L-1121128 (interface); batch 20261013T072335; modules 2; new nodes 1)
 - 07:23 L: merged deliver/J3/Sheaf.RingTheory.FormalGlueingData (stage 3; reviewer PASS; first push; landing 20261013T072354-L-1121293 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:23 L: merged deliver/K2/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic (stage 3; reviewer PASS; first push; landing 20261013T072354-L-1121467 (interface); batch 20261013T072335; modules 2; new nodes 1)
