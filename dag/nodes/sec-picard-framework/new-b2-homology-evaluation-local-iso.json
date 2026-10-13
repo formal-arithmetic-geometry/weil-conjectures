@@ -1,0 +1,128 @@
+{
+ "id": "new-b2-homology-evaluation-local-iso",
+ "kind": "statement",
+ "title": "Local perfection of cycle evaluation",
+ "statement": "Let X be a scheme [def-pc-scheme], T,J integer cochain complexes of O_X-modules [def-pc-cochain-complex-modules], and n an integer. Suppose H^k(J)=0 for k != 0. Let e:H^n(Hom(T,J)) -> Hom(H^(-n)(T),H^0(J)) satisfy the cycle formula of [new-b2-homology-evaluation-definitions]. For an open V of X and an open W of V, write F for the termwise restriction functor of [new-b2-homology-evaluation-definitions]. If F(J) is K-injective [def-pur-kinjective-complex] and F(T) admits the finite-free zero-differential quasi-isomorphism roof defined in [new-b2-homology-evaluation-definitions], then restriction of e to V and then to W is an isomorphism.",
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+ },
+ "proof": [
+  {
+   "text": "Termwise open restriction is exact and commutes with the Hom complex,\ninternal Hom, cycles and homology. Hence the restricted cycle formula describes\nthe evaluation map for F(T), F(J), and F(J) still has no homology outside zero.\nChoose the specified roof L -> F(T), L -> E. Since F(J) is K-injective, applying\nHom(-,F(J)) to either arrow gives a quasi-isomorphism. The product-component\nnaturality formula makes cycle evaluation commute with both precomposition\nmaps; on homology this is a commutative square whose horizontal comparison maps\nare isomorphisms. Internal Hom of the induced homology isomorphisms also gives\nisomorphisms. Thus invertibility of evaluation can be checked on E.\nFor E with zero differential, group the finitely many nonzero factors of Hom(E,F(J))\nby their source degree p. Its differential on each factor is the differential\nof Hom(E^p,F(J)), shifted by -p. A finite-free E^p of rank r makes this factor\nthe finite product of r copies of F(J). Finite products in modules are exact,\nso its homology is Hom(E^p,H^(p+n)(F(J))). Concentration in degree zero removes\nall factors except p=-n. Since E has zero differential, H^(-n)(E)=E^(-n).\nUnder these identifications evaluation is the identity on\nHom(E^(-n),H^0(F(J))), so it is invertible. Transport around the two squares\nproves the conclusion for F(T). If -n is outside the support, both sides are\nzero; rank zero, zero rings and empty opens obey the identical calculation.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-complex-projections",
+    "lem-sc-hom-complex-restrict-open",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-complex-restrict-open",
+  "lem-pur-rhom-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0A8X",
+   "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom complex evaluation on cohomology sheaves",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from homology of the internal Hom complex to internal Hom of homology is defined by evaluating cocycles on cycles",
+   "results": "Eight additive-group Hom-complex cohomology declarations, including CochainComplex.HomComplex.homologyAddEquiv; none constructs this sheaf-valued evaluation or proves its local perfection.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "Twelve declarations, including homologyIsCokernel and instEpiHomologyπ. Useful universal properties, but no bilinear internal-Hom evaluation theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ee]valuation|[Ee]valuation.*homology",
+   "results": "One Mathlib/Algebra/Homology/Functor.lean match concerning evaluation of a diagram of complexes; no internal-Hom evaluation theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluation",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation; homology evaluation subargument: Steps 3 and 4: restriction, quasi-isomorphism roof comparison and finite-free calculation.",
+   "via": [
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationLocalIso",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationLocalIso.lean",
+  "declaration": "CategoryTheory.homologyEvaluation_local_iso_of_cycle",
+  "statement": "theorem homologyEvaluation_local_iso_of_cycle (X : AlgebraicGeometry.Scheme.{u}) (T J : CochainComplex X.Modules ℤ) (n : ℤ) (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k)) (e : (homComplex (R := X.sheaf) T J).homology n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0)) (he : IsHomologyEvaluation X T J n e) (V : X.Opens) (W : V.toScheme.Opens) (hI : CochainComplex.IsKInjective ((moduleOpenOverComplexFunctor X V W).obj J)) (hT : HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) ((moduleOpenOverComplexFunctor X V W).obj T)) : IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e5ea7",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e5ea7",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097516",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, declarations, DAG nodes, change record, report, and required direct importers match the review rules and compile cleanly."
+ }
+}

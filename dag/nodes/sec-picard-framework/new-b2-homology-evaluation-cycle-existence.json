@@ -1,0 +1,122 @@
+{
+ "id": "new-b2-homology-evaluation-cycle-existence",
+ "kind": "statement",
+ "title": "Cycle evaluation descends to homology",
+ "statement": "Let X be a scheme [def-pc-scheme], T and J integer cochain complexes of O_X-modules [def-pc-cochain-complex-modules], and n an integer. With the projection and cycle-evaluation predicate defined in [new-b2-homology-evaluation-definitions], there exists e:H^n(Hom(T,J)) -> Hom(H^(-n)(T),H^0(J)) satisfying the cycle formula, with no concentration, K-injectivity or finite-free hypothesis.",
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+ },
+ "proof": [
+  {
+   "text": "Write P = Hom(T,J). Its product projection defines the bilinear pairing\nfrom P-cycles in degree n and T-cycles in degree -n to J in degree zero. For a\nHom cocycle phi and T-cycle z, the component differential equation gives\n d_J(phi(z)) = (-1)^n phi(d_T(z)) = 0.\nThus this pairing factors through J-cycles by their kernel universal property.\nIf phi = d_Hom(psi), with psi of degree n-1, evaluation on z is d_J(psi(z)),\nsince d_T(z)=0. If z=d_T(y), the cocycle equation in degree -n-1 gives\n phi(z)=(-1)^n d_J(phi(y)). Both values vanish after projecting to H^0(J).\nThe resulting bilinear pairing into H^0(J) therefore annihilates both boundary\nsubsheaves. Descend successively through the two cokernels defining homology.\nThese constructions commute with restriction because the product projections,\ndifferentials and universal-property factorizations do. Curry the pairing by\ninternal Hom to obtain e. Its value on representatives is exactly the asserted\ncycle formula. No cohomology concentration or finite-free hypothesis is needed.\nFor rank zero, zero complexes, or an empty open, the same universal properties\nproduce the zero pairing and the formula still holds.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0A8X",
+   "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom complex evaluation on cohomology sheaves",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from homology of the internal Hom complex to internal Hom of homology is defined by evaluating cocycles on cycles",
+   "results": "Eight additive-group Hom-complex cohomology declarations, including CochainComplex.HomComplex.homologyAddEquiv; none constructs this sheaf-valued evaluation or proves its local perfection.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "Twelve declarations, including homologyIsCokernel and instEpiHomologyπ. Useful universal properties, but no bilinear internal-Hom evaluation theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ee]valuation|[Ee]valuation.*homology",
+   "results": "One Mathlib/Algebra/Homology/Functor.lean match concerning evaluation of a diagram of complexes; no internal-Hom evaluation theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluation",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation; homology evaluation subargument: Steps 1 and 2: descending the cycle pairing through homology cokernels.",
+   "via": [
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationCycleExistence",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationCycleExistence.lean",
+  "declaration": "CategoryTheory.exists_homologyEvaluation_cycle",
+  "statement": "theorem exists_homologyEvaluation_cycle (X : AlgebraicGeometry.Scheme.{u}) (T J : CochainComplex X.Modules ℤ) (n : ℤ) : ∃ e : (homComplex (R := X.sheaf) T J).homology n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0), IsHomologyEvaluation X T J n e",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e5ea7",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e5ea7",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097516",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, declarations, DAG nodes, change record, report, and required direct importers match the review rules and compile cleanly."
+ }
+}

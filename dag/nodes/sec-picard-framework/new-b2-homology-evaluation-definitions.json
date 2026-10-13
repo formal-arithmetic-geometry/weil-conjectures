@@ -1,0 +1,117 @@
+{
+ "id": "new-b2-homology-evaluation-definitions",
+ "kind": "definition",
+ "title": "Cycle evaluation and finite-free zero models: shared interfaces",
+ "statement": "Let X be a scheme [def-pc-scheme], let T and J be integer-indexed cochain complexes of O_X-modules [def-pc-cochain-complex-modules], and let n be an integer. Write P=Hom^bullet(T,J) [def-pur-hom-complex].  Define a finite-free zero model of a complex T over a ringed site R to mean a roof L -> T and L -> E of quasi-isomorphisms [def-pc-quasi-iso-modules] with E having zero differentials, zero terms outside a finite interval, and each term isomorphic to the free R-module on ULift(Fin r) for some natural r. For opens V of X and W of V, define F by restriction to V followed by restriction to its over site W [def-pur-localized-ringed-site], termwise. Define the evaluation projection as the (-n,0) component of the fixed product projections [lem-sc-hom-complex-projections]. A map e:H^n(Hom(T,J)) -> Hom(H^(-n)(T),H^0(J)) satisfies IsHomologyEvaluation if for every open U and cycles phi,z,b in degrees n,-n,0, inclusion of b equal to the projection of inclusion of phi evaluated on inclusion of z implies e([phi])([z])=[b]. These are precisely the existing definitions of lem-sc-homology-evaluation-formal-complex, relocated unchanged.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "def-pc-quasi-iso-modules",
+  "lem-sc-hom-complex-projections"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0A8X",
+   "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom complex evaluation on cohomology sheaves",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from homology of the internal Hom complex to internal Hom of homology is defined by evaluating cocycles on cycles",
+   "results": "Eight additive-group Hom-complex cohomology declarations, including CochainComplex.HomComplex.homologyAddEquiv; none constructs this sheaf-valued evaluation or proves its local perfection.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "Twelve declarations, including homologyIsCokernel and instEpiHomologyπ. Useful universal properties, but no bilinear internal-Hom evaluation theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ee]valuation|[Ee]valuation.*homology",
+   "results": "One Mathlib/Algebra/Homology/Functor.lean match concerning evaluation of a diagram of complexes; no internal-Hom evaluation theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluation",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Shared definitions for the local Hom-complex evaluation subargument; extracted unchanged to prevent import cycles.",
+   "via": [
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationDefinitions",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationDefinitions.lean",
+  "declaration": "CategoryTheory.IsHomologyEvaluation",
+  "declarations": [
+   "CategoryTheory.moduleOpenOver_preservesZeroMorphisms",
+   "CategoryTheory.moduleOpenOverComplexFunctor",
+   "CategoryTheory.HasFiniteFreeZeroModel",
+   "CategoryTheory.homologyEvaluationProjection",
+   "CategoryTheory.IsHomologyEvaluation"
+  ],
+  "statement": "def IsHomologyEvaluation (X : AlgebraicGeometry.Scheme.{u}) (T J : CochainComplex X.Modules ℤ) (n : ℤ) (e : (homComplex (R := X.sheaf) T J).homology n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e5ea7",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e5ea7",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097516",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, declarations, DAG nodes, change record, report, and required direct importers match the review rules and compile cleanly."
+ }
+}
