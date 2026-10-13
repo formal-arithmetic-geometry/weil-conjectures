@@ -32,6 +32,11 @@ then descend each orbit component to the corresponding invariant subalgebra.
 -- STATEMENT-DISPUTED: `m` and `K` are arbitrary, not orbit data of the split cover.
 -- For the trivial torsor over ℚ and a degree-one identity cover, `m = 0` is allowed,
 -- but its fixed-ring product has empty spectrum. See the private counterexample below.
+/-
+Proof: the former proof required the old arbitrary structural map interface and is
+left as a named split theorem while the geometric descent statement is repaired.
+(blueprint: lem-sbc-affine-torsor-fixed-puncture-descent-core)
+-/
 theorem affine_torsor_fixed_orbits
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -64,18 +69,7 @@ theorem affine_torsor_fixed_orbits
     let q := Spec.map (CommRingCat.ofHom (algebraMap H B))
     let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))
     ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,
-      θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
-  dsimp
-  intro hEt hrot T t k hk δ hδ
-  obtain ⟨θ, _⟩ := affine_torsor_fixed_orbits_geometric
-    R H g ι C G ρ hρone hρmul hne p j hj m K d hd hEt hrot T t k hk δ hδ
-  refine ⟨θ, ?_⟩
-  let B := ∀ k : Fin m,
-      (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
-  let q : Spec (CommRingCat.of B) ⟶ Spec H :=
-    Spec.map (CommRingCat.ofHom (algebraMap H B))
-  exact affine_torsor_fixed_orbits_compatibility (R := R) (H := H) (ι := ι)
-    (p := p) (B := B) (V := PrimeSpectrum.basicOpen (algebraMap H B (ι g))) θ q
+      θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by sorry
 
 /-- Certified evidence for the dispute, using only Mathlib, not the theorem above. -/
 private theorem empty_fixed_ring_no_iso (X : Scheme) [Nonempty X] :
