@@ -26,14 +26,12 @@ The Frobenius square `e_X ≫ f = f ≫ e_Y` is cartesian, its horizontal maps b
 (`ProEtale.CondensedRing.weilFrobeniusSquare`). Write `c' = c.baseChange sq` for the base change
 of `c` along it, a compactification of `f` again.
 
-* **Lower shriek.** The compact-support base-change morphism
-  `Ex_!^c : Rf_!^c ⋙ Φ_Y ⟶ Φ_X ⋙ Rf_!^{c'}` of the Frobenius square
-  (`boundedConstructibleLowerShriekBaseChange`) is an isomorphism by the compactly supported
-  base change theorem (`isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl`). Composed
-  with the identification `Rf_!^{c'} ≅ Rf_!^c` of the lower shrieks of the base-changed and the
-  original compactification (`boundedConstructibleLowerShriekBaseChangeCompactificationIso`), it
-  gives the comparison `b_! : Rf_!^c ⋙ Φ_Y ≅ Φ_X ⋙ Rf_!^c`
-  (`ProEtale.CondensedRing.weilLowerShriekComparison`).
+* **Lower shriek.** The comparison `b_! : Rf_!^c ⋙ Φ_Y ≅ Φ_X ⋙ Rf_!^c`
+  (`ProEtale.CondensedRing.weilLowerShriekComparison`) is the compact-support base-change
+  morphism of the Frobenius square with the compactification `c` on both sides
+  (`boundedConstructibleLowerShriekBaseChangeSelf`, which goes through the identification of the
+  base-changed compactification `c'` with `c`). It is an isomorphism by the compactly supported
+  base change theorem (`isIso_boundedConstructibleLowerShriekBaseChangeSelf_padicAlgCl`).
 * **Upper shriek.** The comparison `b^! : Rf^!(c) ⋙ Φ_X ⟶ Φ_Y ⋙ Rf^!(c)` is the mate of the
   inverse of `b_!` for the adjunction `Rf_!^c ⊣ Rf^!(c)` on both sides
   (`ProEtale.CondensedRing.weilUpperShriekComparison`).
@@ -92,29 +90,24 @@ theorem weilFrobeniusSquare : IsPullback eX.hom f f eY.hom :=
 section LowerShriek
 
 /-- The Frobenius comparison `b_! : Rf_!^c ⋙ Le_Y^* ≅ Le_X^* ⋙ Rf_!^c` of the lower shriek
-attached to a compactification `c` of `f`: the compact-support base-change isomorphism
-`Rf_!^c ⋙ Φ_Y ≅ Φ_X ⋙ Rf_!^{c'}` of the Frobenius square, followed by the identification
-`Rf_!^{c'} ≅ Rf_!^c` of the base-changed compactification `c' = c.baseChange sq` with `c`. -/
+attached to a compactification `c` of `f`: the compact-support base-change morphism
+`boundedConstructibleLowerShriekBaseChangeSelf` of the Frobenius square, with the same
+compactification `c` on both sides, which is an isomorphism by the compactly supported base
+change theorem. -/
 noncomputable def weilLowerShriekComparison :
     boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c ⋙
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k eY.hom ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k eX.hom ⋙
         boundedConstructibleLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) ℓ k c :=
-  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ k c
+  have := isIso_boundedConstructibleLowerShriekBaseChangeSelf_padicAlgCl ℓ k c
     (weilFrobeniusSquare eX eY hf)
-  asIso (boundedConstructibleLowerShriekBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k c
-      (weilFrobeniusSquare eX eY hf)) ≪≫
-    Functor.isoWhiskerLeft _
-      (boundedConstructibleLowerShriekBaseChangeCompactificationIso
-        (Profinite.padicAlgClRingObj ℓ) ℓ k c (weilFrobeniusSquare eX eY hf))
+  asIso (boundedConstructibleLowerShriekBaseChangeSelf (Profinite.padicAlgClRingObj ℓ) ℓ k c
+    (weilFrobeniusSquare eX eY hf))
 
 lemma weilLowerShriekComparison_hom :
     (weilLowerShriekComparison ℓ k eX eY hf c).hom =
-      boundedConstructibleLowerShriekBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k c
-          (weilFrobeniusSquare eX eY hf) ≫
-        Functor.whiskerLeft _
-          (boundedConstructibleLowerShriekBaseChangeCompactificationIso
-            (Profinite.padicAlgClRingObj ℓ) ℓ k c (weilFrobeniusSquare eX eY hf)).hom :=
+      boundedConstructibleLowerShriekBaseChangeSelf (Profinite.padicAlgClRingObj ℓ) ℓ k c
+        (weilFrobeniusSquare eX eY hf) :=
   rfl
 
 /-- The lower shriek `Rf_!^c` of Weil objects along a compactification `c` of `f`: a Weil object
