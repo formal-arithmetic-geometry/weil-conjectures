@@ -6,6 +6,11 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
+import Sheaf.AlgebraicGeometry.SingletonCechAugmentationIso
+import Sheaf.AlgebraicGeometry.PrincipalOpenSectionsRestrictionComparison
+import Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Sections of a quasi-coherent resolution on a basic open
 
@@ -52,6 +57,67 @@ theorem principalOpenSections_resolution_quasiIso
     [J.IsKInjective] (i : F ⟶ J) [QuasiIso i] :
     QuasiIso (((affineOpenSections A (PrimeSpectrum.basicOpen g)).mapHomologicalComplex
       (ComplexShape.up ℤ)).map i) := by
-  sorry
+  let X := Spec (.of A)
+  let U : X.Opens := PrimeSpectrum.basicOpen g
+  let Y := U.toScheme
+  let r := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  let e := Equivalence.functor
+    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+    (D := SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+    (Scheme.Modules.overEquiv U)
+  have : r.Additive := Functor.additive_of_preserves_binary_products r
+  have : e.Additive := Functor.additive_of_preserves_binary_products e
+  let Fr := (r.mapHomologicalComplex (ComplexShape.up ℤ)).obj F
+  let Jr := (r.mapHomologicalComplex (ComplexShape.up ℤ)).obj J
+  let F' := (e.mapHomologicalComplex (ComplexShape.up ℤ)).obj Fr
+  let J' := (e.mapHomologicalComplex (ComplexShape.up ℤ)).obj Jr
+  let i' := (e.mapHomologicalComplex (ComplexShape.up ℤ)).map
+    ((r.mapHomologicalComplex (ComplexShape.up ℤ)).map i)
+  have : CochainComplex.IsKInjective Jr := kInjective_of_restrict_open X.toRingedSpace U J
+  have : CochainComplex.IsKInjective J' := inferInstance
+  have : QuasiIso i' := inferInstance
+  have hF' (n : ℤ) : (F'.X n).IsQuasicoherent := by
+    have := hF n
+    let c := (Scheme.Modules.overFunctorEquiv U).app (F.X n)
+    have hq : ((Scheme.Modules.restrictFunctor U.ι).obj (F.X n)).IsQuasicoherent :=
+      Scheme.Modules.isQuasicoherent_restrictFunctor U.ι (F.X n)
+    exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso
+      c.symm hq
+  have : IsAffine Y := IsAffineOpen.Spec_basicOpen (R := .of A) g
+  let : HasDerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory
+      (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (Opposite.op ⊤))) :=
+    HasDerivedCategory.standard _
+  let V : Fin 1 → Y.Opens := fun _ ↦ ⊤
+  have hV : iSup V = ⊤ := by simp [V]
+  have hAffine (p : ℕ) (t : Fin (p + 1) → Fin 1) :
+      IsAffineOpen (⨅ k, V (t k)) := by
+    simpa [V] using isAffineOpen_top Y
+  obtain ⟨⟨β, hβ⟩, hβIso, _⟩ :=
+    qcoh_complex_alternating_cech_derived_sections Y 1 V hV hAffine F' hF'
+  have : IsIso β := hβIso β hβ
+  let S := RingedSpace.globalSectionsFunctor Y.toRingedSpace
+  have hα (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
+      IsIso ((alternatingCechAugmentation V).app K) :=
+    singletonCechAugmentation_isIso Y K
+  have := hα J'
+  have htotal : IsIso (DerivedCategory.Q.map ((alternatingCechTotalFunctor V).map i')) := by
+    rw [← hβ J' i']
+    infer_instance
+  have := hα F'
+  have hsections : IsIso (DerivedCategory.Q.map
+      ((S.mapHomologicalComplex (ComplexShape.up ℤ)).map i')) := by
+    have hn := congrArg DerivedCategory.Q.map ((alternatingCechAugmentation V).naturality i')
+    simp only [Functor.map_comp] at hn
+    have : IsIso (DerivedCategory.Q.map ((S.mapHomologicalComplex
+        (ComplexShape.up ℤ)).map i') ≫
+          DerivedCategory.Q.map ((alternatingCechAugmentation V).app J')) := by
+      rw [hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      (DerivedCategory.Q.map ((alternatingCechAugmentation V).app J'))
+  apply (principalOpenSections_restriction_quasiIso_iff A g F J i).mpr
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp hsections
 
 end AlgebraicGeometry

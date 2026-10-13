@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-principal-open-sections-restriction-comparison",
+ "kind": "statement",
+ "title": "Basic-open sections detect quasi-isomorphisms after open-subscheme restriction",
+ "statement": "Let $A$ be a commutative ring, $g\\in A$, $X=\\operatorname{Spec}A$, $U=D(g)$, and $i:F\\to J$ a morphism of integer-indexed complexes of module sheaves [def-pc-derived-category]. Let $R$ be restriction to the localized site over $U$ followed by the canonical equivalence with $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then the $A$-linear map of section complexes $\\operatorname{affineOpenSections}(A,U)(i)$ of [def-sc-principal-open-alternating-total] is a quasi-isomorphism if and only if $\\Gamma(U,Ri)$ is a quasi-isomorphism over $\\Gamma(U,\\mathcal O_U)$, using global sections of [def-sc-ringed-space-module-cohomology]. Neither complex is assumed quasi-coherent, K-injective, or bounded.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D2, A-linear sections on principal opens; Tag 08BS for the open-subspace restriction convention. Explicit restriction-of-scalars identification for the definitions used here."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-principal-open-alternating-total",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put U=D(g). The overFunctor restricts the sheaf to the localized open site. The overEquiv functor identifies that site with the opens of the open subscheme. Global sections of the resulting module identify naturally with the original module sections on U, with their O(U)-action. Applying the ring map A to O(U), obtained from GammaSpecIso followed by restriction, gives exactly the A-action in modulesSpecToSheaf and affineOpenSections. Naturality identifies the induced section maps, and degreewise compatibility with differentials identifies the complexes.",
+   "uses": [
+    "def-sc-principal-open-alternating-total",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of scalars is exact and reflects isomorphisms: kernels, images and quotients have unchanged underlying additive groups. Its homology comparison is therefore invertible, and a homology map is invertible precisely when its scalar restriction is. Apply this in every integer degree, and transport across the natural identification from step 1. This gives both directions for any i. If U is empty, section modules are zero, so the same argument still applies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-open-alternating-total",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D2, A-linear sections on principal opens; Tag 08BS for the open-subspace restriction convention. Explicit restriction-of-scalars identification for the definitions used here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Singleton alternating Cech augmentation and sections after open subscheme restriction",
+   "results": "msearch.py queried each statement separately; both returned Internal Server Error. No absence conclusion is drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "singleton alternating Cech total augmentation isomorphism and restriction of scalars reflects quasi isomorphisms",
+   "results": "msearch.py returned generic alternating-face-map and representation-resolution results; none identifies this scheme-module augmentation or open-subscheme section functors. Loogle ModuleCat.restrictScalars found exactness and reflection tools, not the natural identification of these two section complexes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCechAugmentation|overEquiv|restrictScalars.*[Hh]omology",
+   "results": "msearch.py found Scheme.Modules.overEquiv and generic scalar restriction APIs. Local rg across both library roots found the alternating total definitions and unrelated etale singleton tensor results, but no duplicate of either statement. Blueprint searches singleton Cech, Cech augmentation, sections open and restriction scalars sections returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenSectionsResolutionQuasiIso",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent resolution comparison: Basic-open sections detect quasi-isomorphisms after open-subscheme restriction",
+   "via": [
+    "lem-sc-principal-open-sections-resolution-quasi-iso",
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenSectionsRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenSectionsRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.principalOpenSections_restriction_quasiIso_iff",
+  "statement": "theorem principalOpenSections_restriction_quasiIso_iff (A : Type u) [CommRing A] (g : A) (F J : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (i : F ⟶ J) : let U : (Spec (.of A)).Opens := PrimeSpectrum.basicOpen g let R := SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U) QuasiIso (((affineOpenSections A U).mapHomologicalComplex (ComplexShape.up ℤ)).map i) ↔ QuasiIso (((RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace).mapHomologicalComplex (ComplexShape.up ℤ)).map ((R.mapHomologicalComplex (ComplexShape.up ℤ)).map i))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T054216-L-442498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T054216-L-442498",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

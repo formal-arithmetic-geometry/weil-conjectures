@@ -14,51 +14,49 @@
  ],
  "proof": [
   {
-   "text": "Restrict i to the affine basic open D(g). Restriction is exact and preserves K-injective complexes, so it is still a quasi-isomorphism into a K-injective complex.",
+   "text": "Restrict F,J,i to D(g) with overFunctor and then the module equivalence overEquiv. Restriction and equivalence are exact, hence preserve the quasi-isomorphism; open restriction preserves K-injectivity, and the equivalence preserves it by the exact-adjoint criterion. Transport quasi-coherence through overFunctorEquiv and the quasi-coherent object property. D(g) is affine, including the empty case.",
    "uses": [
-    "lem-sc-derived-k-injective-restrict-open"
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false
   },
   {
-   "text": "Use the basis of all affine opens of D(g). Restriction preserves quasi-coherence. Kernels, images and cokernels of differentials of F are quasi-coherent, so the terms, differential cokernels and cohomology sheaves have vanishing positive cohomology on every member of this basis. All three acyclicity conditions and the basis-covering condition of Tag 08C2 hold.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-pc-affine-vanishing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the unbounded alternating Cech derived-section comparison on the restricted affine scheme with its one-element cover by itself. The total on this cover is the ordinary section complex. Its invertible comparison to derived sections is the map obtained by applying sections to a K-injective resolution. Initially compute with an injective-term K-injective resolution, then compare it with the given one by a homotopy equivalence. Additive sections preserve this homotopy equivalence, so the displayed map is a quasi-isomorphism for the given i.",
+   "text": "Apply qcoh_complex_alternating_cech_derived_sections to the singleton cover by top on the restricted affine scheme. Obtain an invertible comparison beta, and apply its defining equation to the actual restricted resolution i. The derived image of i and the K-injective computation isomorphism are invertible. The singleton augmentation at J is invertible by the singleton lemma. Thus the equation proves that Q of the Cech total map is invertible.",
    "uses": [
     "lem-sc-qcoh-complex-alternating-cech-derived-sections",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pc-ringed-spaces-derived-direct-image"
+    "lem-sc-singleton-cech-augmentation-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction of scalars from O(D(g)) to A leaves the underlying cohomology groups and their maps unchanged. Therefore this is exactly the quasi-isomorphism of A-module complexes given by affineOpenSections. If D(g) is empty both complexes are zero.",
-   "uses": [],
+   "text": "Apply naturality of the singleton augmentation to i. Both its F and J components are isomorphisms; the preceding step makes Q of the total map an isomorphism. Cancel the augmentation at J to deduce that Q of the global-section map is an isomorphism, hence that the global-section map is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-singleton-cech-augmentation-iso"
+   ],
    "elementary": true
+  },
+  {
+   "text": "Use the restriction comparison equivalence to reflect the quasi-isomorphism of restricted global sections to the affineOpenSections A-module map in the unchanged conclusion.",
+   "uses": [
+    "lem-sc-principal-open-sections-restriction-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-derived-k-injective-restrict-open",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-pc-affine-vanishing",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-sc-qcoh-complex-alternating-cech-derived-sections",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-pc-ringed-spaces-derived-direct-image"
+  "lem-sc-singleton-cech-augmentation-iso",
+  "lem-sc-principal-open-sections-restriction-comparison"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08C2 (lemma-alternating-cech-complex-complex-computes-cohomology), one-element affine cover; Tags 08BS and 08D2. Read at https://stacks.math.columbia.edu/tag/08C2 and /08D2; local TeX absent.; W3 explicit reconstruction of the comparison for the library maps"
+  "place": "Tags 08C2 and 08BS, with Perfect Tag 08D2; implementation by the existing canonical comparison equation, explicit singleton augmentation isomorphism, and scalar-restriction comparison."
  },
  "mathlib_searches": [
   {
@@ -139,9 +137,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T031557-L-3576943",
+  "landing": "20261013T054216-L-442498",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

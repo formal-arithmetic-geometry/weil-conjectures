@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-singleton-cech-augmentation-iso",
+ "kind": "statement",
+ "title": "The singleton alternating Cech augmentation is an isomorphism",
+ "statement": "Let $X$ be any scheme and $F$ any integer-indexed complex of $\\mathcal O_X$-modules. For the family $U:\\operatorname{Fin}(1)\\to X.\\mathrm{Opens}$ constantly equal to $X$, let $\\alpha_F:\\Gamma(X,F)\\to T_U(F)$ be the explicit alternating Cech augmentation of [def-sc-alternating-cech-total-complex]. Then $\\alpha_F$ is an isomorphism of complexes. No acyclicity, quasi-coherence, boundedness or nonemptiness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08C1 and 08C2, equation-global-sections-to-alternating-cech; explicit singleton specialization of the alternating total. Read online at https://stacks.math.columbia.edu/tag/08C2."
+ },
+ "stmt_deps": [
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof": [
+  {
+   "text": "In degree zero, the increasing tuples Fin 1 into Fin 1 form a singleton. Evaluation at its identity tuple is a bijective linear projection. The restriction from the whole space to its intersection is invertible because the intersection is top. This proves alternatingCechZero is an isomorphism, including the scalar identity and extension-by-zero identifications in its definition.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For positive natural degree k, an injection Fin(k+1) into Fin 1 is impossible by finite cardinalities. The dependent product is zero. For negative integer degree the extension-by-zero theorem gives zero. Consequently every nonzero Cech column except column zero vanishes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the inverse to the inclusion of the zero column in total degree n using totalDesc: it is the identity, with index transport, on column zero and zero on all other columns. The inclusion followed by this map is identity by the totalDesc equation. The other composite is identity by total.hom_ext, since each other source is zero. Each augmentation component is the composite of two isomorphisms. The augmentation is already a cochain map, so the component criterion proves it is an isomorphism of complexes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08C1 and 08C2, equation-global-sections-to-alternating-cech; explicit singleton specialization of the alternating total. Read online at https://stacks.math.columbia.edu/tag/08C2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Singleton alternating Cech augmentation and sections after open subscheme restriction",
+   "results": "msearch.py queried each statement separately; both returned Internal Server Error. No absence conclusion is drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "singleton alternating Cech total augmentation isomorphism and restriction of scalars reflects quasi isomorphisms",
+   "results": "msearch.py returned generic alternating-face-map and representation-resolution results; none identifies this scheme-module augmentation or open-subscheme section functors. Loogle ModuleCat.restrictScalars found exactness and reflection tools, not the natural identification of these two section complexes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCechAugmentation|overEquiv|restrictScalars.*[Hh]omology",
+   "results": "msearch.py found Scheme.Modules.overEquiv and generic scalar restriction APIs. Local rg across both library roots found the alternating total definitions and unrelated etale singleton tensor results, but no duplicate of either statement. Blueprint searches singleton Cech, Cech augmentation, sections open and restriction scalars sections returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenSectionsResolutionQuasiIso",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent resolution comparison: The singleton alternating Cech augmentation is an isomorphism",
+   "via": [
+    "lem-sc-principal-open-sections-resolution-quasi-iso",
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingletonCechAugmentationIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingletonCechAugmentationIso.lean",
+  "declaration": "AlgebraicGeometry.singletonCechAugmentation_isIso",
+  "statement": "theorem singletonCechAugmentation_isIso (X : Scheme.{u}) (F : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : IsIso ((alternatingCechAugmentation (fun _ : Fin 1 ↦ (⊤ : X.Opens))).app F)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T054216-L-442498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T054216-L-442498",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
