@@ -18,24 +18,24 @@
  },
  "proof": [
   {
-   "text": "Apply the exact over equivalence to hrep, cancelling the inverse over equivalence in affinePerfectSheafification. Derived direct image commutes with restriction to U. Identify the restriction of X times_S W to U with X times_S U by its pullback universal property, and use tensor-pullback composition to carry M to the supplied trivialization. Transport along U isomorphic to Spec R. This identifies Q(tilde P) with the derived structure direct image over Spec R.",
+   "text": "Apply the proved picard_affine_structure_model_transport to hrep and htrivial. This identifies Q(tilde P) with the structure direct image over Spec R, without needing flatness or K-flatness for this step.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-affine-localized-site-derived-transport",
-    "def-pc-tensor-pullback-composition-iso"
+    "lem-sc-picard-affine-structure-model-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Base change the quasi-compact separated flat morphism X times_S U to U along Spec B to Spec R to U. Its structure sheaf is invertible. Apply isIso_derivedBaseChange_of_flat_invertible to that structure module. Derived pullback of the structure sheaf is its ordinary pullback, and the tensor-unit isomorphism identifies it with the structure sheaf of the new fibre product. The canonical iterated pullback isomorphism identifies the resulting direct image with R(pullback.snd f g)_*O. No perfectness conclusion or finite presentation hypothesis is needed.",
+   "text": "For a:Spec B to Spec R, the pullback universal property and IsPullback.of_right give the cartesian square with upper-left X times_S Spec B and upper-right X times_S Spec R. Apply isIso_derivedBaseChange_of_flat_invertible to the structure module of the base-changed flat qc separated family. The proved canonicalSinglePullbackMap comparison and the tensor-pullback adjunction comparison identify derived pullback of this degree-zero structure module with the target structure module. Take asIso of base change and apply direct image to the coefficient isomorphism.",
    "uses": [
     "lem-pc-flat-invertible-canonical-derived-base-change",
-    "lem-pc-flat-module-canonical-derived-pullback"
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine K-flat pullback formula derivedPullback_tilde_kFlat_natIso to the supplied K-flat complex P and ring map phi. It identifies the derived pullback of Q(tilde P) with Q(tilde PB), where PB is ordinary termwise scalar extension. Compose this isomorphism with the pullback of the identification in step 1 and the base-change isomorphism of step 2. This gives the displayed derived isomorphism without any structure-unit hypothesis or cohomological assertion.",
+   "text": "Convert the given one-sided acyclicity condition to the library K-flat predicate via the homotopy-category acyclicity criterion; braiding supplies the other side. Evaluate derivedPullback_tilde_kFlat_natIso on P. Compose its inverse with derived pullback of the affine representation comparison and the structure-image base-change comparison of step 2.",
    "uses": [
     "lem-pc-affine-derived-pullback-tensor-tilde"
    ],
@@ -43,19 +43,19 @@
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-pullback-composition-iso",
   "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-affine-localized-site-derived-transport",
+  "lem-pc-canonical-single-pullback-comparison",
   "lem-pc-flat-invertible-canonical-derived-base-change",
-  "lem-pc-flat-module-canonical-derived-pullback",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-affine-structure-model-transport",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K2",
-  "date": "2026-10-13",
+  "group": "J3",
+  "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 0A1D, 08DW(2), 08FE and 06Z0; exact open-site transport and canonical flat-invertible base change, without perfectness"
+  "place": "Tags 08FE, 06Z0, 0096, 0A1D and 08DW(2); exact restriction, affine chart cancellation and canonical base change"
  },
  "mathlib_searches": [
   {
@@ -134,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T155936-L-1303520",
+  "landing": "20261013T164048-L-1668155",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
