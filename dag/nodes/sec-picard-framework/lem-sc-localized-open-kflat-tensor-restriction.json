@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-localized-open-kflat-tensor-restriction",
+ "kind": "statement",
+ "title": "K-flat tensor models on the localized open site",
+ "statement": "Let X be a scheme [def-pc-scheme], U an open, and P,N complexes of O_X-modules which are K-flat [def-pc-kflat-complex]. Suppose both the global module category and the localized module category over U have derived categories [def-pc-derived-category]. Write R for exact over-site restriction [lem-weil-pbc-module-restriction-open-immersion-colimits], and P′,N′ for its termwise restrictions. Then P′ and N′ are K-flat for the localized sheaf tensor, and R(Q(Tot(P tensor N))) is isomorphic to Q(Tot(P′ tensor N′)) [def-pc-tensor-complex-sheaves]. This assertion involves no prescribed local models or input isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YC K-flat pullback and Tag 08DX local tensor computation; sheaf tensor restriction is Modules Tag 01CD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-kflat-complex",
+  "def-pc-derived-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Identify the localized module category over U with the modules on U.toScheme using Scheme.Modules.overEquiv. Its sheaf tensor comparison is obtained on local pure tensors and commutes with sheafification, arbitrary sums and differentials. Under this exact equivalence, the termwise overFunctor becomes canonical open restriction. Apply openRestriction_isKFlat to P and N, and transport the acyclic-tensor criteria back through the exact tensor-compatible equivalence. This gives both K-flat clauses. The empty-open case is vacuous on stalks.",
+   "uses": [
+    "lem-pc-open-restriction-kflat-model",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply openRestriction_totalTensor_iso for P and N. The same equivalence commutes with tensor totalization, by summing its natural pure-tensor comparisons in each degree; the two differentials and their signs commute with those maps. Thus the complex comparison transports back to the localized site. Apply Q to this isomorphism and compose with overFunctor.mapDerivedCategoryFactors. No perfectness or specified local model enters this step.",
+   "uses": [
+    "lem-pc-open-restriction-total-tensor",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-restriction-kflat-model",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-pc-open-restriction-total-tensor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent P1",
+  "document": "https://stacks.math.columbia.edu/tag/06YC",
+  "place": "K-flat preservation combined with total tensor locality from Tags 01CD and 08DX; explicit localization carrier transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact open restriction preserves K-flat complexes and commutes with total tensor products on the localized site",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products of K-flat complexes with isomorphic derived images are isomorphic in the derived category",
+   "results": "Tor and exact-functor quotient comparison hits; no localized open tensor-model theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "overFunctor, overFunctorMap and Scheme.Modules.overFunctorEquiv; no tensor or K-flat comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|over.*tensor in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/AlgebraicGeometry/Modules; OpenRestrictionKFlatModel and OpenRestrictionTotalTensor in project",
+   "results": "The project proves both components after composition with overEquiv, not on the localized carrier; no theorem supplying the displayed localized triple.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-perfect-derived-tensor-perfect",
+   "place": "Local strictly perfect tensor comparison, step 1: restrict the global tensor and its K-flat models to the localized site",
+   "via": [
+    "lem-sc-strict-perfect-tensor-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedOpenKFlatTensorRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedOpenKFlatTensorRestriction.lean",
+  "declaration": "AlgebraicGeometry.localizedOpen_kFlat_tensor_restriction",
+  "statement": "theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hN : CochainComplex.IsKFlat (R := X.sheaf) N) :\n    let R := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U\n    let P' := (R.mapHomologicalComplex (.up ℤ)).obj P\n    let N' := (R.mapHomologicalComplex (.up ℤ)).obj N\n    CochainComplex.IsKFlat (R := X.sheaf.over U) P' ∧\n      CochainComplex.IsKFlat (R := X.sheaf.over U) N' ∧\n      Nonempty (R.mapDerivedCategory.obj\n        (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N\n          (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≅\n        DerivedCategory.Q.obj (CochainComplex.mapBifunctor P' N'\n          (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U)))))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T120501-L-3445346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T120501-L-3445346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

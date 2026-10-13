@@ -16,43 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Let R be exact open restriction followed by the equivalence from the localized site to modules on U.toScheme. The comparison between termwise and derived restriction identifies R(Q(P)) and R(Q(N)) with Q of the restricted complexes. Open restriction preserves K-flatness by lem-pc-open-restriction-kflat-model. By lem-pc-open-restriction-total-tensor, restriction of the total tensor equals the total tensor of the restricted complexes. The same equivalence transports the tensor comparison back to the localized site over U.",
+   "text": "Apply localizedOpen_kFlat_tensor_restriction to P,N. This yields K-flat termwise restrictions P′,N′ and an isomorphism from the derived restriction of the global total tensor to Q(Tot(P′ tensor N′)).",
    "uses": [
-    "lem-pc-open-restriction-kflat-model",
-    "lem-pc-open-restriction-total-tensor",
-    "def-weil-abstract-derived-category"
+    "lem-sc-localized-open-kflat-tensor-restriction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The strictly perfect hypotheses def-pc-perfect-complex bound A and B above and split their terms off finite free sheaves. Finite free sheaves are flat and a retract of a flat object is flat, so bounded-above flat K-flatness lem-pc-bounded-above-flat-kflat applies after transporting to the open subscheme. Hence the prescribed A and B are K-flat for the localized sheaf tensor as well.",
+   "text": "Prove strictPerfect_isKFlat_local directly on the localized category. The two bounds give IsStrictlyGE and IsStrictlyLE. Each finite free term is flat by flat_coproduct and flatness of the unit, and each term of A is flat by flat_of_retract. Apply the proved upstream CochainComplex.kFlat_of_bounded_of_flat, then HomotopyCategory.kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic to recover the recorded one-sided sheaf IsKFlat criterion. No ringed-space transport is needed.",
    "uses": [
     "def-pc-perfect-complex",
-    "lem-pc-bounded-above-flat-kflat"
+    "def-pc-kflat-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Use lem-pc-kflat-derived-tensor-comparison on the restricted global representatives and the strictly perfect representatives. Tensor the prescribed input isomorphisms in the derived category between the two comparisons. Compose with exact restriction and totalization comparisons of step 1, and transport through the exact over equivalence to recover the displayed isomorphism on the localized site. This proves only the comparison, not boundedness or finite-free retracts of the output.",
+   "text": "For the private local_kFlat_tensor_invariance helper, K-flatness of the fixed second factor N′ makes tensoring quasi-isomorphisms in the first variable quasi-isomorphisms: apply the cone criterion, the definition of IsKFlat, and mapBifunctorMappingCone₁Iso. For fixed first factor A, apply the same cone criterion after the signed symmetry of total tensor; construct this symmetry from the termwise sheaf braiding and mapBifunctorFlipIso. Then mapBifunctorMappingCone₂Iso gives quasi-isomorphism preservation in the second variable. Localize these two fixed-factor functors followed by Q with Localization.lift and Localization.fac. Applying the lifted functors to the two prescribed input isomorphisms gives Q(Tot(P′ tensor N′)) ≅ Q(Tot(A tensor B)). This uses no derived monoidal structure or choice of flat resolutions.",
    "uses": [
-    "lem-pc-kflat-derived-tensor-comparison",
-    "def-weil-abstract-derived-category"
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose each inverse overFunctor.mapDerivedCategoryFactors component with eA or eB to obtain the input isomorphisms for the local invariance helper. Compose its output with the restriction isomorphism from the first step. All types and universes match the original conclusion. The strict-perfect hypothesis on B stays in the unchanged interface, although the fixed-factor argument already needs only strict perfectness of A and K-flatness of the restricted N.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-open-restriction-kflat-model",
-  "lem-pc-open-restriction-total-tensor",
-  "def-weil-abstract-derived-category",
+  "lem-sc-localized-open-kflat-tensor-restriction",
   "def-pc-perfect-complex",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-kflat-derived-tensor-comparison"
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic"
  ],
  "proof_origin": {
-  "by": "agent R1",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 09J5 and 06YH, prescribed local K-flat models; online primary source read because the local literature snapshot is absent"
+  "by": "agent P1",
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "K-flat representative independence; direct two fixed-factor localizations via tensor cones, combined with the localized open restriction step from Tags 06YC, 01CD and 08DX"
  },
  "mathlib_searches": [
   {
@@ -125,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T100108-L-2481206",
+  "landing": "20261013T120501-L-3445346",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
