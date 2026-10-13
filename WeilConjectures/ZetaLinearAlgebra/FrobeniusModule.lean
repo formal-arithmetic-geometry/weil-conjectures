@@ -84,6 +84,21 @@ structure Equiv (M N : FrobeniusModule.{u, v} K) where
   map_frobenius (x : M.carrier) :
     toLinearEquiv (M.frobenius x) = N.frobenius (toLinearEquiv x)
 
+/-- The inverse of an isomorphism of Frobenius modules. -/
+@[simps toLinearEquiv]
+def Equiv.symm {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) : N.Equiv M where
+  toLinearEquiv := e.toLinearEquiv.symm
+  map_frobenius y := e.toLinearEquiv.injective (by
+    rw [e.map_frobenius, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply])
+
+/-- The composite of two isomorphisms of Frobenius modules. -/
+@[simps toLinearEquiv]
+def Equiv.trans {M N P : FrobeniusModule.{u, v} K} (e : M.Equiv N) (e' : N.Equiv P) :
+    M.Equiv P where
+  toLinearEquiv := e.toLinearEquiv.trans e'.toLinearEquiv
+  map_frobenius x := by
+    rw [LinearEquiv.trans_apply, LinearEquiv.trans_apply, e.map_frobenius, e'.map_frobenius]
+
 /-- `M` is *`ι`-pure of weight `w` relative to `q`* if every eigenvalue `α` of its geometric
 Frobenius satisfies `|ι α| = q ^ (w / 2)`. -/
 def IsPureOfWeight (ι : K →+* ℂ) (q : ℕ) (M : FrobeniusModule.{u, v} K) (w : ℝ) : Prop :=
