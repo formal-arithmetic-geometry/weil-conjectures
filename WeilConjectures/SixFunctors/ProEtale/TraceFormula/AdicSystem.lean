@@ -85,7 +85,16 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ'
 of finite Tor amplitude to derived base changes: for `η : K ⟶ Res K'` exhibiting `K'` as
 `K ⊗ᴸ_Λ Λ'`, the map `Φ K ⟶ Φ (Res K') ≅ Res (Φ' K')` exhibits `Φ' K'` as `Φ K ⊗ᴸ_Λ Λ'`. This is
 the statement that the coefficient comparison `(Φ K) ⊗ᴸ_Λ Λ' ⟶ Φ' (K ⊗ᴸ_Λ Λ')` is an
-isomorphism. -/
+isomorphism. In a diagram, `α` fills the square
+```
+  D(X_proét, Λ') ──Φ'──▶ D(Λ')
+        │                  │
+       Res       ⇓ α      Res
+        ▼                  ▼
+  D(X_proét, Λ)  ──Φ──▶  D(Λ)
+```
+and the condition is that the composite `Φ K ──Φ η──▶ Φ (Res K') ──α──▶ Res (Φ' K')` is again a
+base-change map whenever `η : K ⟶ Res K'` is one. -/
 def IsCoefficientChange
     (Φ : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (ModuleCat.{u + 1} Λ))

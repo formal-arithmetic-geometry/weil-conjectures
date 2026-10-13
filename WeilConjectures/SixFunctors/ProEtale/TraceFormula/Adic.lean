@@ -301,7 +301,12 @@ At the integral stage `RΓ_c(X, -)` is the compact-support functor of
 derived limit `R lim_n RΓ_c(X, K_{𝒪_E} ⊗ᴸ R/Iⁿ)`, the point of a homotopy limit cone `d` of the
 tower `n ↦ Ra_{X!}(K_{𝒪_E} ⊗ᴸ R/Iⁿ)`. The statement is that this point is the derived limit of
 the `RΓ_c(X, K_n)` (the point of a homotopy limit cone `d'`), compatibly with the levelwise
-identifications `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n` of `exists_derivedCompletionDiagram_iso`. -/
+identifications `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n` of `exists_derivedCompletionDiagram_iso`.
+
+The cones here are towers of `Ra_{X!}` over `R` applied to `K_{𝒪_E} ⊗ᴸ R/Iⁿ`, not of the
+levelwise functors `Res_n ∘ Rf_{!,n}`, so as stated this is (i) together with
+`IsHomotopyLimit.exists_iso_of_iso`. The levelwise content of (ii) is
+`AlgebraicGeometry.ProEtale.AdicSystem.compactSupportTower_realization`. -/
 theorem exists_iso_rightDerivedLowerShriek_realization (aX : X ⟶ s) [HasCompactification aX]
     {d : Cone (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ⋙
       rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)} (hd : IsHomotopyLimit d)
