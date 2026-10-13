@@ -12,12 +12,12 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import Sheaf.RingTheory.KoszulProjectiveResolution
+import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural
+import Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates
 /-! # Affine sheaf model of the Koszul Ext coefficient morphism
 
 Source: Stacks Project, Tag 0BQZ, affine computation of regular immersion Ext. -/
@@ -32,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Matching the natural coefficient functors unfolds both derived Hom coefficient objects.
 /-- On the affine chart, the two Ext sheaves and their coefficient map are the
 sheafifications of the dual Koszul cohomology modules and their reduction map.
 Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext.
@@ -90,6 +92,53 @@ theorem koszulExtCoefficient_affine_model
       (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m
     ∃ (eF : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj P)
       (eG : (Scheme.Modules.restrictFunctor U.1.ι).obj G ≅ T.obj Q),
-      (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map q := by sorry
+      (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map q := by
+  obtain ⟨P₀, hP₀⟩ := ExteriorAlgebra.exists_koszul_projective_resolution
+    (Γ(Y, U.1) : Type u) (i.ker.ideal U) n f hreg hf
+  let ε₀ := eqToHom hP₀.symm ≫ P₀.π
+  have : QuasiIso ε₀ := by dsimp [ε₀]; infer_instance
+  let ε := HomologicalComplex.extendMap ε₀ ComplexShape.embeddingDownNat ≫
+    (HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat
+      (ModuleCat.of (Γ(Y, U.1) : Type u)
+        ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U)) 0 (0 : ℤ) rfl).hom
+  have : QuasiIso ε := by dsimp [ε]; infer_instance
+  obtain ⟨hbounded, hfree, b, hb⟩ := affine_koszul_finite_free_resolution i U n f ε
+  let := hb
+  let A := (Γ(Y, U.1) : Type u)
+  let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
+  let K := ExteriorAlgebra.koszulComplex A n f
+  let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+    (K.extend ComplexShape.embeddingDownNat)
+  have hbelow : ∃ M : ℤ, ∀ p : ℤ, p < M → IsZero (E.X p) := by
+    classical
+    refine ⟨-(n : ℤ), ?_⟩
+    intro p hp
+    obtain ⟨k, rfl⟩ := Int.exists_eq_neg_ofNat (show p ≤ 0 by omega)
+    have hnk : n < k := by omega
+    let b := (Finsupp.basisSingleOne : Module.Basis (Fin n) A
+      (Fin n →₀ A)).exteriorPower k
+    have : IsEmpty (Set.powersetCard (Fin n) k) := ⟨fun s ↦ by
+      have h := Finset.card_le_univ s.val
+      have hs : s.val.card = k := s.property
+      simp only [Fintype.card_fin, hs] at h
+      omega⟩
+    have : Subsingleton (⋀[A]^k (Fin n →₀ A)) := b.repr.injective.subsingleton
+    have hz : IsZero (ModuleCat.of A (⋀[A]^k (Fin n →₀ A))) :=
+      ModuleCat.isZero_of_subsingleton _
+    exact (T.map_isZero hz).of_iso
+      (T.mapIso (K.extendXIso ComplexShape.embeddingDownNat rfl))
+  obtain ⟨e⟩ := local_finite_free_homology_natural U.1
+    ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))
+    E hbounded hbelow hfree b (m : ℤ)
+  obtain ⟨eF, eG, hsquare⟩ := affine_koszul_coefficient_hom_coordinates i U n m f a ha
+  refine ⟨e.app (SheafOfModules.unit Y.ringCatSheaf) ≪≫ eF,
+    e.app ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)) ≪≫ eG,
+    ?_⟩
+  have hn := congrArg (fun t ↦ t ≫ eG.hom) (e.hom.naturality a)
+  simp only [Category.assoc] at hn
+  have hs := congrArg (fun t ↦ e.hom.app (SheafOfModules.unit Y.ringCatSheaf) ≫ t)
+    hsquare
+  simpa only [Functor.comp_map, Functor.curry_obj_obj_map, Prod.mkHom,
+    Iso.trans_hom, Iso.app_hom, Category.assoc] using hn.trans hs
 
 end AlgebraicGeometry

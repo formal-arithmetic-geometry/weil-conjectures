@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-local-finite-free-homology-natural",
+ "kind": "statement",
+ "title": "Natural local Hom cohomology from a bounded finite free resolution",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an open, B an O_Y-module [def-weil-sheaf-of-modules-category], and E an integer cochain complex of O_U-modules [def-pur-hom-complex], bounded above AND below with finite free terms. Let epsilon:E -> (B|U)[0] be a quasi-isomorphism. Fix any integer q and any supplied ambient derived category [def-pc-derived-category]. The functor C -> H^q(RHom_Y(B,C))|U [def-pur-derived-internal-hom] is naturally isomorphic to C -> H^q(Hom_U(E,(C|U)[0])). The conclusion is a natural isomorphism on the whole category of coefficient sheaves, with no closed immersion, affine chart, Koszul sequence, or quotient coefficient specified. No derived category on U in the supplied universe is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DM",
+  "place": "Lemma 20.46.9, finite locally free Hom comparison, with Tag 08DL for restriction"
+ },
+ "proof": [
+  {
+   "text": "Represent coefficient single complexes by functorial K-injective resolutions. The localization comparison for derived internal Hom is natural in the coefficient. Restriction is exact and preserves K-injectives; the ordinary Hom product construction commutes naturally with restriction and the over-site equivalence.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition by epsilon is a quasi-isomorphism on Hom into the restricted K-injective resolutions. Since E is bounded with finite free terms, Hom out of E preserves acyclic complexes: finite free internal Hom is exact, only finitely many columns contribute, and the finite column filtration proves total acyclicity. Consequently postcomposition by the coefficient resolution is also a quasi-isomorphism. These are natural comparisons, refining the finite free model.",
+   "uses": [
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take homology of the natural quasi-isomorphisms, invert the resulting natural isomorphisms, and compose with the exact restriction homology comparison. All objects being compared are homology sheaves of complexes, so the open needs no localization in the ambient derived universe. Empty opens and zero complexes are included.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "def-pur-hom-complex",
+  "lem-sc-derived-hom-finite-free-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1",
+  "group": "E1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08DM",
+  "place": "Lemma 20.46.9, finite locally free Hom comparison, with Tag 08DL for restriction",
+  "note": "Stage-3 decomposition into a generic natural derived comparison and a purely underived coordinate computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of finite free sheaves computes Ext naturally in the coefficient sheaf after restriction to an open",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a finite free resolution is natural in coefficients and commutes with sheafification on an affine scheme",
+   "results": "8 hits: unitHomEquiv_comp_apply, freeHomEquiv_comp_apply, freeHomEquiv_symm_comp, map_ιFree_mapFree_hom, unitHomEquiv_symm_comp, LightCondensed.ihom_map_val_app, Sheaf.ΓHomEquiv_naturality_right, unitHomEquiv_symm_freeHomEquiv_apply. No local derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match. LocalFiniteFreeScalarHomology and DerivedHomFiniteFreeModel give only objectwise comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*single|mapHomologicalComplexHomologyIso",
+   "results": "Mathlib injective/projective Ext imports HomComplexSingle; local HomComplexRestrictOpen and DerivedInternalHomRestrictOpen give objectwise Nonempty isomorphisms, not a coefficient natural isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "Component APIs only. Blueprint search for finite free Hom coefficients found no match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "Finite free derived Hom computation and naturality in the coefficient variable in the proof of the affine coefficient square",
+   "via": [
+    "new-k1-koszul-ext-coefficient-affine-model",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalFiniteFreeHomologyNatural.lean",
+  "declaration": "AlgebraicGeometry.local_finite_free_homology_natural",
+  "statement": "theorem local_finite_free_homology_natural\n    {Y : Scheme.{u}}\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (U : Y.Opens) (B : Y.Modules)\n    (E : CochainComplex U.toScheme.Modules ℤ)\n    (hbounded : ∃ N : ℤ, ∀ p : ℤ, N < p → IsZero (E.X p))\n    (hbelow : ∃ M : ℤ, ∀ p : ℤ, p < M → IsZero (E.X p))\n    (hfree : ∀ p : ℤ, ∃ r : ℕ, Nonempty (E.X p ≅\n      SheafOfModules.free (R := moduleRings U.toScheme.toRingedSpace)\n        (ULift.{u} (Fin r))))\n    (ε : E ⟶ (CochainComplex.singleFunctor U.toScheme.Modules 0).obj\n      ((Scheme.Modules.restrictFunctor U.ι).obj B)) [QuasiIso ε] (q : ℤ) :\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    Nonempty (S ⋙ (Functor.curry.obj H).obj (op (S.obj B)) ⋙\n        DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q ⋙\n        Scheme.Modules.restrictFunctor U.ι ≅\n      Scheme.Modules.restrictFunctor U.ι ⋙\n        CochainComplex.singleFunctor U.toScheme.Modules 0 ⋙\n        (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj (op E) ⋙\n        HomologicalComplex.homologyFunctor U.toScheme.Modules (ComplexShape.up ℤ) q)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130750-L-3986173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130750-L-3986173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
