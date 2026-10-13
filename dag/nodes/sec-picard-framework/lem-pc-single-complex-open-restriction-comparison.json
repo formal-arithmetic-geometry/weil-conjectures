@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-single-complex-open-restriction-comparison",
+ "kind": "statement",
+ "title": "Canonical restriction of the single-complex coefficient and base-change arrow",
+ "statement": "Let f:X to S, f':X' to S', g:S' to S, and g':X' to X form a cartesian square of schemes [def-pc-scheme, def-pc-base-change], with derived categories [def-pc-derived-category]. Let K in D(O_X), K' in D(O_X'), and phi: L(g')*K to K' satisfy the single-complex stalk condition [def-pc-single-complex-base-change-stalk-condition]. Choose opens V of S and V' of S' with V' contained in g inverse-image V. Put U=f inverse-image V and U'=f' inverse-image V'. Let j:U' to U commute with the open inclusions and g', and suppose the restricted square with sides j,f' restricted to V', f restricted to V, and g restricted from V' to V is cartesian. Set K0=K|U and K0'=K'|U' by exact restriction [def-pc-derived-open-restriction-maps]. Construct phi0 by the pinned derived pullback composition comparisons [lem-pc-ringed-spaces-derived-pullback-composition] and the exact open-pullback comparison constructed by leftDerivedUnique from the pinned tensor-pullback adjunction. Then phi0 satisfies the stalk condition for the restricted square. Moreover there are isomorphisms a from the restriction of Lg*Rf*K to L(g|V')*R(f|V)*K0 and b from the restriction of Rf'*K' to R(f'|V')*K0' such that the restriction of the original base-change composite equals a.hom followed by the restricted base-change composite followed by b.inv [def-pc-derived-base-change-map]. No affineness, quasi-coherence, quasi-compactness, quasi-separatedness or invertibility of either composite is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "The constructions singleComplexOpenPullbackIso and singleComplexRestrictedCoefficient are complete Lean definitions. The first transports exact restriction through the ordinary tensor-pullback adjunction and uses leftDerivedUnique with the same counit family as schemeDerivedBaseChangeMap. The second composes its inverse, the pinned composition comparison for j followed by the open inclusion, the equality hj, the inverse composition comparison for the other path, exact open pullback, and restriction of phi. All coefficient objects are exact restrictions of K,K'.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose coordinates for phi using SingleComplexBaseChange.nonempty_coordinates. Restrict their K-flat complex P to U and their K-injective complex N to U'. Restriction preserves these properties. The canonical pullback-open comparison and its counit equation identify the restricted representing chain map with the constructed phi0. This supplies coordinates for phi0. At z in U', open-immersion stalk isomorphisms identify the four local rings R,A,B,C with the original four local rings at the same points. The tensorMap and tensorStalkIso then identify the restricted stalk comparison with the original one, conjugated by these isomorphisms. This is the termwise tensor-and-stalk calculation, not a use of the affine-base criterion.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original stalk condition makes the comparison in those restricted coordinates invertible. Apply isIso_stalkComparison_iff_coordinates to these coordinates and any prescribed coordinates for phi0. This proves the universal quantifier in the restricted StalkCondition, separately for every z and degree.",
+   "uses": [
+    "lem-pc-stalk-comparison-coordinate-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical pullback-open comparison for g and direct-image-open comparison for f to obtain the source isomorphism a, and the direct-image-open comparison for f' to obtain b. The direct-image comparison identifies the adjoint restriction counit with the counit of f restricted to V: on a restricted K-injective model it is the identity on sections of inverse-image opens. Apply the hom equivalence of the compatible derived adjunction for f' restricted to V'. The defining base-change arrow is the transpose of pullback of the counit; substitute this description on both sides. Naturality of the composition comparisons identifies the two pullback paths by sq.w and sq0.w. Their open-pullback factors are exactly those in singleComplexRestrictedCoefficient. Naturality of b with respect to phi supplies the final direct-image factor. After reassociation and cancellation of inverse comparison factors this is the displayed equality. Empty opens and arbitrary unbounded complexes are covered by the same computations.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-stalk-comparison-coordinate-invariance",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, target locality sentence; expanded via the counit definition of Tag 08HY and open restriction of Tag 08FE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism commutes with restriction to affine open subschemes",
+   "results": "8 hits, including IsAffineOpen.Spec_map_appLE_fromSpec and SpecMap_appLE_fromSpec, affine section and Spec map compatibility. No derived base-change arrow or single-complex stalk-condition restriction result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.resLE",
+   "results": "12 hits. Scheme.Hom.isPullback_resLE gives the restricted square and is used in the parent proof. Remaining hits concern ordinary restriction, sections and preimages; none gives the derived arrow or stalk comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplex.*targetLocal|baseChange.*openRestriction",
+   "results": "0 Mathlib hits. Additional rg searches of both project roots found functor restriction comparisons, source-open induction, coordinate invariance, and underived/etale base-change restriction, but no statement comparing the present derived composite over target opens.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived base change morphism is compatible with restriction to open subschemes of the base",
+   "results": "Service unavailable: Internal Server Error. No mathematical absence conclusion inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexTargetLocality",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 first paragraph, locality on the target; canonical restriction compatibility in lem-pc-single-complex-target-locality",
+   "via": [
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-single-complex-target-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.singleComplexBaseChange_openRestrictionComparison",
+  "declarations": [
+   "AlgebraicGeometry.singleComplexOpenPullbackIso",
+   "AlgebraicGeometry.singleComplexRestrictedCoefficient",
+   "AlgebraicGeometry.singleComplexBaseChange_openRestrictionComparison"
+  ],
+  "statement": "theorem singleComplexBaseChange_openRestrictionComparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ)\n    (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V)\n    (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme)\n    (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g')\n    (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV')) :\n    let K₀ := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K\n    let K₀' := (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.obj K'\n    let R := (schemeOpenRestriction S' V').mapDerivedCategory\n    let φ₀ := singleComplexRestrictedCoefficient g' K K' φ\n      (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj\n    SingleComplexBaseChange.StalkCondition\n        (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ K₀ K₀' φ₀ ∧\n      ∃ (a : R.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj K)) ≅\n          (derivedPullback (g.resLE V V' hV')).obj\n            ((schemeDerivedDirectImage (f ∣_ V)).obj K₀))\n        (b : R.obj ((schemeDerivedDirectImage f').obj K') ≅\n          (schemeDerivedDirectImage (f' ∣_ V')).obj K₀'),\n        R.map (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫\n          (schemeDerivedDirectImage f').map φ) =\n        a.hom ≫ (schemeDerivedBaseChangeMap\n          (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀.w K₀ ≫\n            (schemeDerivedDirectImage (f' ∣_ V')).map φ₀) ≫ b.inv",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100026-L-2468322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100026-L-2468322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

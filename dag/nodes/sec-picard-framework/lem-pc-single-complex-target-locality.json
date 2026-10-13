@@ -17,24 +17,43 @@
  ],
  "proof": [
   {
-   "text": "For a point of S' choose an affine neighbourhood V of its image in S, and an\naffine neighbourhood V' of the point contained in g inverse-image V. Restrict f to\nf inverse-image V and f' to f' inverse-image V'. Together with g restricted V' → V\nand the restriction of g' these form a cartesian square with affine bases. Quasi-\ncompactness and quasi-separatedness survive this restriction. Restrict K, K' and\nphi, using the canonical derived pullback composition comparison; quasi-coherent\ncohomology and the stalk condition survive since local rings on opens agree with\nthe original local rings. Apply the supplied affine-base criterion. Derived direct\nimage commutes with restriction to inverse-image opens, as does derived pullback.\nTheir canonical comparisons identify the restricted composite with the local\nbase-change composite: this follows from naturality of the derived counits in the\nadjoint description of the map. Thus the original arrow is invertible on V'.\nApply schemeDerived_isIso_of_openRestriction, since such V' cover S'. Empty bases\nare covered by the vacuous locality criterion. No global compactness of S is used.",
+   "text": "For x in S' choose an affine open V of S containing g(x), then an affine open V' of S' containing x and contained in g inverse-image V, using Mathlib exists_isAffineOpen_mem_and_subset. Construct j as the restriction of g' from f' inverse-image V' to f inverse-image V. The original commutativity proves the required containment. Scheme.Hom.isPullback_resLE constructs the restricted cartesian square; the restricted f is quasi-compact and quasi-separated by the Mathlib restriction instances.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define K0 and K0' by exact open restriction. Apply schemeDerivedQCoh_openRestriction_iff to each; in each cohomological degree use SheafOfModules.isQuasicoherent_over to restrict the original quasi-coherent cohomology sheaf. Construct phi0 by singleComplexRestrictedCoefficient. No object or coefficient map is selected from a mere existence theorem.",
    "uses": [
-    "lem-sc-derived-open-restriction-detects-iso",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply singleComplexBaseChange_openRestrictionComparison to the constructed square. It gives the stalk condition for the explicitly constructed phi0 and source and target isomorphisms identifying its base-change composite with the restricted original composite. Apply h_affine to the affine bases V,V', the restricted f, the two explicitly restricted quasi-coherent objects, and phi0. Rewrite the comparison equality; composition with the source and target isomorphisms shows the restricted original composite is an isomorphism.",
+   "uses": [
+    "lem-pc-single-complex-open-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every point x has the resulting neighbourhood V'. Apply schemeDerived_isIso_of_openRestriction to the original composite. On an empty S' the pointwise premise is vacuous, as required.",
+   "uses": [
+    "lem-sc-derived-open-restriction-detects-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-open-restriction-detects-iso",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-affine-derived-pullback-tensor-tilde"
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-single-complex-open-restriction-comparison",
+  "lem-sc-derived-open-restriction-detects-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ9, first paragraph, reduction to affine bases; canonical transport details expanded by B4"
+  "place": "Tag 0DJ9, first paragraph. Affine neighbourhoods, restriction geometry, quasi-coherence, affine-premise application and isomorphism transport are now Lean proofs; the open-arrow compatibility and stalk transport are isolated."
  },
  "mathlib_searches": [
   {
@@ -126,9 +145,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T082332-L-1631244",
+  "landing": "20261013T100026-L-2468322",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionComparison
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Target locality of the single-complex criterion
 
@@ -26,6 +26,19 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem qcoh_openRestriction (Y : Scheme.{u}) (U : Y.Opens)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) :
+    schemeDerivedQCohProperty U.toScheme
+      ((schemeOpenRestriction Y U).mapDerivedCategory.obj E) := by
+  apply (schemeDerivedQCoh_openRestriction_iff Y U E).mpr
+  intro n
+  have := hE n
+  exact SheafOfModules.isQuasicoherent_over
+    ((DerivedCategory.homologyFunctor _ n).obj E) U
+
+set_option linter.unusedVariables false in
 /-- The single-complex criterion for affine bases suffices for arbitrary bases.
 The extra premise supplies only the affine-base case, to be proved separately by
 source-open induction; it does not assume the original conclusion.
@@ -68,6 +81,41 @@ theorem singleComplexBaseChange_targetLocal
     (φ : (derivedPullback g').obj K ⟶ K')
     (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ) :
     IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫
-      (schemeDerivedDirectImage f').map φ) := by sorry
+      (schemeDerivedDirectImage f').map φ) := by
+  apply schemeDerived_isIso_of_openRestriction
+  intro x
+  obtain ⟨V, hV, hxV, _⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := S) (x := g x) (U := ⊤) (by trivial)
+  obtain ⟨V', hV', hxV', hVV'⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := S') (x := x) (U := g ⁻¹ᵁ V) hxV
+  have : IsAffine V.toScheme := hV
+  have : IsAffine V'.toScheme := hV'
+  have hU : f' ⁻¹ᵁ V' ≤ g' ⁻¹ᵁ (f ⁻¹ᵁ V) := by
+    calc
+      f' ⁻¹ᵁ V' ≤ f' ⁻¹ᵁ (g ⁻¹ᵁ V) := f'.preimage_mono hVV'
+      _ = g' ⁻¹ᵁ (f ⁻¹ᵁ V) := by
+        rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, sq.w]
+  let j := g'.resLE (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') hU
+  have sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hVV') := by
+    have hUY : f' ⁻¹ᵁ V' = g' ⁻¹ᵁ (f ⁻¹ᵁ V) ⊓ f' ⁻¹ᵁ V' :=
+      (inf_eq_right.mpr hU).symm
+    simpa only [Scheme.Hom.resLE_eq_morphismRestrict] using
+      Scheme.Hom.isPullback_resLE sq hVV' le_rfl hUY
+  let K₀ := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K
+  let K₀' := (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.obj K'
+  have hK₀ : schemeDerivedQCohProperty (f ⁻¹ᵁ V).toScheme K₀ :=
+    qcoh_openRestriction X (f ⁻¹ᵁ V) K hK
+  have hK₀' : schemeDerivedQCohProperty (f' ⁻¹ᵁ V').toScheme K₀' :=
+    qcoh_openRestriction X' (f' ⁻¹ᵁ V') K' hK'
+  let φ₀ := singleComplexRestrictedCoefficient g' K K' φ
+    (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j (Scheme.Hom.resLE_comp_ι g' hU)
+  obtain ⟨hstalk₀, a, b, hab⟩ :=
+    singleComplexBaseChange_openRestrictionComparison f f' g g' sq K K' φ h_stalk
+      V V' hVV' j (Scheme.Hom.resLE_comp_ι g' hU) sq₀
+  have := h_affine (f ∣_ V) (f' ∣_ V') (g.resLE V V' hVV') j sq₀
+    K₀ hK₀ K₀' hK₀' φ₀ hstalk₀
+  refine ⟨V', hxV', ?_⟩
+  rw [hab]
+  infer_instance
 
 end AlgebraicGeometry
