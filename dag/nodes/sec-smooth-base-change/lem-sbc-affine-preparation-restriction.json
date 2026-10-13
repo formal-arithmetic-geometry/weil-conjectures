@@ -1,0 +1,123 @@
+{
+ "id": "lem-sbc-affine-preparation-restriction",
+ "kind": "statement",
+ "title": "Affine restriction of a reduced preparation",
+ "statement": "Let f:X → T be any scheme morphism, V an open of T, S an integral affine scheme [def-pc-integral-scheme], Z a reduced affine scheme [def-pc-reduced-scheme], q:S → V and h:Z → X ×_T S [def-pc-fibre-product] universal homeomorphisms [def-weil-universal-homeomorphism]. Write g:Z → S for the composite with the projection and S → T for q followed by V → T. Let W be an open of S on which the restricted g is flat [def-weil-flat-morphism] and locally finitely presented [def-sbc-locally-finite-presentation]. Given a point η₀ in W and its image η in T, there exist an affine open U of T containing η, integral affine S′, reduced affine Z′, and universal homeomorphisms q′:S′ → U and h′:Z′ → X ×_T S′ such that the composite Z′ → S′ is flat and locally finitely presented. No finite type condition on f or generic-point condition is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0559, second proof, generic-flat shrinking; Tag 01IT"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "The image of W under the homeomorphism q and the open inclusion V → T is open and contains η. Choose an affine open U contained in that image. Put A = (S → T) inverse U. Since q is affine, A is affine, and since it contains η₀ it is a nonempty open of integral S, hence integral. Restrict Z to g inverse A; this is reduced and affine because g is a map between affine schemes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The restricted q is a base change of q along U → V. Pullback pasting identifies the target of the restricted h with X ×_T A, making the new h a base change of h. Universal homeomorphisms are stable under base change. Since A is contained in W, further restriction of the flat and locally finitely presented g over W supplies the two properties; the restriction-of-restriction isomorphism identifies this map with g restricted to A.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0559, second proof",
+  "note": "Concrete construction and restriction argument, including pullback comparisons; generic flatness is applied separately in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restrict an affine morphism along an affine open subset of the base to get an affine source, preserving flatness and finite presentation",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T12:51:25Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict an affine morphism along an affine open subset of the base to get an affine source, preserving flatness and finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.restrict\", \"AlgebraicGeometry.sourceAffineLocally_morphismRestrict\", \"AlgebraicGeometry.affineLocally_iff_affineOpens_le\", \"AlgebraicGeometry.isAffineHom_iff\", \"AlgebraicGeometry.affineOpensRestrict_apply_coe_coe\", \"AlgebraicGeometry.targetAffineLocally\", \"AlgebraicGeometry.affinePreimage\", \"AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen\"], \"digest\": \"020788062246b73e\"}",
+   "digest": "020788062246b73e",
+   "verdict": "Component lemmas found, but no matching preparation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\", \"preimage\"",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T12:51:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAffineOpen\\\", \\\"preimage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.preimage_of_isIso\", \"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"AlgebraicGeometry.IsAffineOpen.ι_basicOpen_preimage\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_zeroLocus\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_self\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen'\", \"AlgebraicGeometry.IsAffineOpen.preimage\"], \"digest\": \"2f48dee299f63f86\"}",
+   "digest": "2f48dee299f63f86",
+   "verdict": "Component lemmas found, but no matching preparation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "isAffine.*(preimage|restrict)|restrict.*(Flat|LocallyOfFinitePresentation)|isBasis_affineOpens",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T12:51:24Z\", \"tool\": \"grep\", \"query\": \"isAffine.*(preimage|restrict)|restrict.*(Flat|LocallyOfFinitePresentation)|isBasis_affineOpens\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"fbf1d3535a3317d9\"}",
+   "digest": "fbf1d3535a3317d9",
+   "verdict": "Component lemmas found, but no matching preparation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced affine preparation over a universal homeomorphism can be restricted to an affine neighbourhood inside a given flat finitely presented open locus",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:18:40Z\", \"tool\": \"leansearch\", \"query\": \"A reduced affine preparation over a universal homeomorphism can be restricted to an affine neighbourhood inside a given flat finitely presented open locus\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "availability": "unavailable",
+   "note": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ReducedFlatAffinePreparation",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-reduced-flat-affine-preparation",
+   "place": "Tag 0559, second proof",
+   "via": [
+    "lem-sbc-reduced-flat-affine-preparation"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePreparationRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePreparationRestriction.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_preparation_restriction",
+  "statement": "theorem exists_affine_preparation_restriction\n    {X T S Z : Scheme.{u}} (f : X ⟶ T)\n    (V : T.Opens) (q : S ⟶ V.toScheme)\n    (h : Z ⟶ pullback f (q ≫ V.ι))\n    [IsAffine S] [IsIntegral S] [IsAffine Z] [IsReduced Z]\n    [IsUniversalHomeomorphism q] [IsUniversalHomeomorphism h]\n    (W : S.Opens) (hflat : Flat ((h ≫ pullback.snd f (q ≫ V.ι)) ∣_ W))\n    (hfp : LocallyOfFinitePresentation ((h ≫ pullback.snd f (q ≫ V.ι)) ∣_ W))\n    (η₀ : S) (hη₀W : η₀ ∈ W) (η : T) (he : (q ≫ V.ι) η₀ = η) :\n    ∃ (U : T.Opens), η ∈ U ∧ IsAffineOpen U ∧\n      ∃ (S' Z' : Scheme.{u}) (q' : S' ⟶ U.toScheme)\n        (h' : Z' ⟶ pullback f (q' ≫ U.ι)),\n        IsAffine S' ∧ IsIntegral S' ∧ IsAffine Z' ∧ IsReduced Z' ∧\n        IsUniversalHomeomorphism q' ∧ IsUniversalHomeomorphism h' ∧\n        Flat (h' ≫ pullback.snd f (q' ≫ U.ι)) ∧\n        LocallyOfFinitePresentation (h' ≫ pullback.snd f (q' ≫ U.ι))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T132436-L-4128287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T132436-L-4128287",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
