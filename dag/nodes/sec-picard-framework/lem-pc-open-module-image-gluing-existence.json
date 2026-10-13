@@ -1,0 +1,128 @@
+{
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EB (lemma-mayer-vietoris), first sentence of proof; Tag 08BV (lemma-exact-sequence-j-star), sectionwise sequence"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenModuleImageGluing",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Derived Mayer-Vietoris gluing over two opens: sheaf gluing gives the kernel of the degreewise restriction/difference sequence",
+   "via": [
+    "lem-pc-open-module-image-gluing",
+    "lem-pc-kinjective-mayer-vietoris-degreewise",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleImageAmalgamation",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleImageAmalgamation.lean",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13",
+  "declaration": "AlgebraicGeometry.schemeOpenModuleImage_pullback_exists",
+  "statement": "theorem schemeOpenModuleImage_pullback_exists\n    (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)\n    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    {Z : SheafOfModules.{u} (moduleRings X.toRingedSpace)}\n    (b : Z ⟶ (schemeOpenModuleImage X U).obj M)\n    (c : Z ⟶ (schemeOpenModuleImage X V).obj M)\n    (hbc : b ≫ (schemeOpenModuleImageRestriction X\n      (homOfLE (inf_le_left : U ⊓ V ≤ U))).app M =\n      c ≫ (schemeOpenModuleImageRestriction X\n        (homOfLE (inf_le_right : U ⊓ V ≤ V))).app M) :\n    ∃ l : Z ⟶ M,\n      l ≫ (schemeOpenModuleAdjunction X U).unit.app M = b ∧\n      l ≫ (schemeOpenModuleAdjunction X V).unit.app M = c"
+ },
+ "id": "lem-pc-open-module-image-gluing-existence",
+ "kind": "statement",
+ "title": "Existence of an amalgamation for compatible open restrictions",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $U,V$ be open subsets with $U\\cup V=X$, and let $M,Z$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For an open $A$, let $M_A=j_{A*}r_A M$ and $\\eta_A:M\\to M_A$ be the transported restriction/direct-image unit of [def-pc-kinjective-mayer-vietoris-data]. Let $\\rho_{A,W}:M_A\\to M_W$ be the nested-open restriction of [def-pc-kinjective-mayer-vietoris-data]. If $b:Z\\to M_U$ and $c:Z\\to M_V$ satisfy $\\rho_{U,U\\cap V}\\circ b=\\rho_{V,U\\cap V}\\circ c$, then there exists $l:Z\\to M$ with $\\eta_U\\circ l=b$ and $\\eta_V\\circ l=c$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof": [
+  {
+   "text": "Proof: At each test open T and each section z of Z(T), identify the two image\nobjects' sections with M(T ∩ U) and M(T ∩ V) via overFunctorEquiv. The ordinary\nrestriction unit is the restriction map by restrictAdjunction_unit_app_app.\nIn the overlap mate the inverse composition comparison, restricted counit, and\nforward comparison cancel repeated restriction and give restriction to T ∩ U ∩ V.\nThe compatibility hypothesis therefore says b(z) and c(z) agree there. Since\n(T ∩ U) ∪ (T ∩ V) = T, the sheaf axiom gives an amalgamation in M(T).\nUniqueness of section amalgamation proves compatibility with restriction in T:\nboth restrictions have the same images on the two covering opens. It also proves\nadditivity and linearity, since the sum or scalar multiple of amalgamations has\nthe prescribed restrictions. These sectionwise linear maps assemble to a module\nsheaf morphism l, and the two gluing equations give the required composites.\nThe empty scheme, empty covering member, and repeated opens use the same axiom.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV and 01EB"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf on a two open cover unique compatible section amalgamation",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction direct image units form a pullback for a sheaf of modules on a two open cover",
+   "results": "interUnionPullbackConeLift_left and right; commutative-ring sheaf section comparison. No transported module-image theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isLimitPullbackCone\"",
+   "results": "TopCat.Sheaf.isLimitPullbackCone and generic limit preservation/reflection.",
+   "date": "2026-10-13",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitPullbackCone|schemeOpenModuleImage|overFunctorEquiv",
+   "results": "Mathlib sectionwise pullback and overFunctorEquiv; no image-gluing specialization.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T024031-L-3333354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T024031-L-3333354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10725,3 +10725,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:40 L: returned deliver/K4/Sheaf.Paper.NormalLocusAssociatedPrime (reviewer RETURN: (the landing tools, head c8484bfe4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 02:40 L: returned deliver/Q2/Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness (reviewer RETURN: (the landing tools, head dd18cfc1b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 02:40 L: merged deliver/C2/Sheaf.Paper.ShiftedKoszulAugmentation (stage 3; reviewer PASS; first push; landing 20261013T024030-L-3333253 (proof); batch 20261013T024029; modules 1; new nodes 0)
+- 02:40 L: merged deliver/C3/Sheaf.AlgebraicGeometry.OpenModuleImageGluing (stage 3; reviewer PASS; first push; landing 20261013T024031-L-3333354 (interface); batch 20261013T024029; modules 3; new nodes 2)

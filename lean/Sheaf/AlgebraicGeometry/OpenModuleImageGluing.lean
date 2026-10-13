@@ -6,6 +6,8 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+import Sheaf.AlgebraicGeometry.OpenModuleImageAmalgamation
+import Sheaf.AlgebraicGeometry.OpenModuleImageSeparated
 
 /-! # Gluing the concrete open restriction/direct-image units
 
@@ -54,6 +56,38 @@ theorem schemeOpenModuleImage_isPullback
       ((schemeOpenModuleAdjunction X V).unit.app M)
       ((schemeOpenModuleImageRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U))).app M)
       ((schemeOpenModuleImageRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V))).app M) := by
-  sorry
+  have comm :
+      (schemeOpenModuleAdjunction X U).unit.app M ≫
+          (schemeOpenModuleImageRestriction X
+            (homOfLE (inf_le_left : U ⊓ V ≤ U))).app M =
+        (schemeOpenModuleAdjunction X V).unit.app M ≫
+          (schemeOpenModuleImageRestriction X
+            (homOfLE (inf_le_right : U ⊓ V ≤ V))).app M := by
+    rw [schemeOpenModuleImage_unit_restriction X
+      (homOfLE (inf_le_left : U ⊓ V ≤ U)) M]
+    rw [schemeOpenModuleImage_unit_restriction X
+      (homOfLE (inf_le_right : U ⊓ V ≤ V)) M]
+  refine IsPullback.of_isLimit' ⟨comm⟩ ?_
+  let lift : ∀ s : PullbackCone
+      ((schemeOpenModuleImageRestriction X
+        (homOfLE (inf_le_left : U ⊓ V ≤ U))).app M)
+      ((schemeOpenModuleImageRestriction X
+        (homOfLE (inf_le_right : U ⊓ V ≤ V))).app M),
+      s.pt ⟶ M := fun s ↦
+    (schemeOpenModuleImage_pullback_exists X U V hcover M s.fst s.snd
+      s.condition).choose
+  apply PullbackCone.IsLimit.mk comm lift
+  · intro s
+    exact (schemeOpenModuleImage_pullback_exists X U V hcover M s.fst s.snd
+      s.condition).choose_spec.1
+  · intro s
+    exact (schemeOpenModuleImage_pullback_exists X U V hcover M s.fst s.snd
+      s.condition).choose_spec.2
+  · intro s m hm₁ hm₂
+    apply schemeOpenModuleImage_pullback_unique X U V hcover M
+      (hm₁.trans ((schemeOpenModuleImage_pullback_exists X U V hcover M s.fst s.snd
+        s.condition).choose_spec.1).symm)
+      (hm₂.trans ((schemeOpenModuleImage_pullback_exists X U V hcover M s.fst s.snd
+        s.condition).choose_spec.2).symm)
 
 end AlgebraicGeometry
