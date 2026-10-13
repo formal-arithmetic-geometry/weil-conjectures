@@ -12,48 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Sheafify the sectionwise bilinear pairings by the tensor universal property. Leibniz supplies a map from the signed total tensor of the two resolution complexes to the target complex. Precompose with the canonical map from derived tensor to naive tensor and identify the three resolution complexes using their augmentations. For either D or E this gives a derived sheaf map F tensor-derived G to F tensor G.",
+   "text": "Apply moduleCup_resolution_realization independently to D and E. This gives actual cochain realizations tD,tE and equality of each transported derived map on H-zero to the same explicitly specified canonical comparison.",
    "uses": [
-    "def-sc-module-cup-resolution-data",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
+    "lem-sc-module-cup-resolution-realization"
    ],
    "elementary": false
   },
   {
-   "text": "The derived tensor of degree-zero F and G lies in nonpositive degrees by moduleCup_derived_tensor_connectivity. Apply the upstream proved DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE at n=0, with the source IsLE 0 and the degree-zero target IsGE 0: it identifies these derived morphisms with their H-zero maps directly, without a new truncation theorem. Use moduleCup_canonical_hzero_identification: the canonical derived-to-ordinary map, explicitly transported through any nonpositive K-flat model by the localized p tensor identity, its flat-model isomorphism and Q of the tensor augmentation, is invertible on H-zero. The model calculation is moduleCup_hzero_identification. Under this fixed canonical comparison augmentation_pair forces both D and E to induce the identity on the ordinary tensor. Their derived maps therefore agree.",
+   "text": "The derived tensor source is IsLE 0 by moduleCup_derived_tensor_connectivity; change rewrites the connectivity fact to Q of the single complexes, definitionally the same source; the degree-zero target is IsGE 0 by instance synthesis. Apply the injective part of the proved upstream DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE at n=0 to hD0.trans hE0.symm. This proves equality of the two actual derived morphisms.",
    "uses": [
-    "def-sc-module-cup-resolution-data",
-    "lem-sc-module-cup-derived-tensor-connectivity",
-    "lem-sc-module-cup-hzero-identification",
-    "lem-sc-module-cup-canonical-hzero-identification"
+    "lem-sc-module-cup-derived-tensor-connectivity"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply derived global sections and the naive/derived tensor compatibility diagram of Stacks Lemma 20.31.3 for the map to the one-point ringed space. Its maps on the three computing complexes agree with the canonical class maps because all comparisons extend the augmentations. Taking cohomology shows that the class of the paired cocycle depends only on the two transported input classes, proving the claimed equality even across D and E.",
+   "text": "Obtain the common evaluation family from moduleCup_realization_evaluation. Its formula rewrites each target class as evaluation at the corresponding derived morphism and the two input classes. Rewrite using the equality of derived morphisms and the two assumed input-class equalities, then use the other evaluation formula. This is the complete calc proof in Lean.",
    "uses": [
-    "def-sc-module-cup-resolution-data",
-    "def-sc-ringed-space-module-cohomology",
-    "lem-sc-module-cup-naive-derived-compatibility"
+    "lem-sc-module-cup-realization-evaluation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-sc-module-cup-resolution-data",
-  "def-sc-ringed-space-module-cohomology",
-  "lem-sc-module-cup-canonical-hzero-identification",
   "lem-sc-module-cup-derived-tensor-connectivity",
-  "lem-sc-module-cup-hzero-identification",
-  "lem-sc-module-cup-naive-derived-compatibility"
+  "lem-sc-module-cup-realization-evaluation",
+  "lem-sc-module-cup-resolution-realization"
  ],
  "proof_origin": {
-  "by": "P3 stage-3 worker",
+  "by": "F4 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/0FKU",
-  "place": "Proof of the acyclic-resolution characterization, extracted from the item docstring and Section 20.31"
+  "place": "Explicit resolution realization, H-zero injectivity, and global evaluation; Lean proof composes these three steps"
  },
  "mathlib_searches": [
   {
@@ -142,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-02feb",
-  "group": "P3",
+  "reviewer": "COMPILER",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T100051-L-2475276",
+  "landing": "20261013T121840-L-3558440",
   "kind": "interface",
-  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

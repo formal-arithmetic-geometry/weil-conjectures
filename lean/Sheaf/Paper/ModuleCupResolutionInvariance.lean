@@ -7,10 +7,9 @@ module
 
 public import Sheaf.Paper.ModuleCupResolutionData
 import Sheaf.Paper.ModuleCupDerivedTensorConnectivity
-import Sheaf.Paper.ModuleCupHZeroIdentification
+import Sheaf.Paper.ModuleCupResolutionRealization
+import Sheaf.Paper.ModuleCupRealizationEvaluation
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Paper.ModuleCupNaiveDerivedCompatibility
-import Sheaf.Paper.ModuleCupCanonicalHZeroIdentification
 
 /-! # Independence of resolution pairings on cohomology
 
@@ -68,7 +67,46 @@ theorem moduleCup_resolution_invariance {X : Scheme.{uM}} {F G : X.Modules}
     (hb : D.right.class q b = E.right.class q b')
     (hc : c.val = D.pair p q ⊤ a.val b.val)
     (hc' : c'.val = E.pair p q ⊤ a'.val b'.val) :
-    D.target.class (p + q) c = E.target.class (p + q) c' := by sorry
+    D.target.class (p + q) c = E.target.class (p + q) c' := by
+  let : MonoidalCategory (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.monoidalCategory X.sheaf
+  let : SymmetricCategory (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.symmetricCategory X.sheaf
+  let : HasColimitsOfSize.{0, 0} (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    hasColimitsOfSizeShrink.{0, 0, uM} _
+  let : MonoidalPreadditive (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  let : IsGrothendieckAbelian.{uM}
+      (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  let : HasDerivedCategory.{uM} (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  let : Abelian.HasFunctorialFlatResolution
+      (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) :=
+    schemeModule_hasFunctorialFlatResolution X
+  obtain ⟨evaluation, hevaluation⟩ := moduleCup_realization_evaluation F G p q
+  obtain ⟨tD, hD, hD₀⟩ := moduleCup_resolution_realization D
+  obtain ⟨tE, hE, hE₀⟩ := moduleCup_resolution_realization E
+  have hLE := DerivedCategory.moduleCup_derived_tensor_connectivity
+    (C := SheafOfModules.{uM} (moduleRings X.toRingedSpace)) F G
+  change (DerivedCategory.Q.obj ((CochainComplex.singleFunctor
+      (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) 0).obj F) ⊗
+    DerivedCategory.Q.obj ((CochainComplex.singleFunctor
+      (SheafOfModules.{uM} (moduleRings X.toRingedSpace)) 0).obj G)).IsLE 0 at hLE
+  let := hLE
+  have hmaps : D.derivedMap tD = E.derivedMap tE :=
+    (DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE 0).1
+      (hD₀.trans hE₀.symm)
+  calc
+    D.target.class (p + q) c =
+        evaluation (D.derivedMap tD) (D.left.class p a) (D.right.class q b) :=
+      (hevaluation D tD hD a b c hc).symm
+    _ = evaluation (E.derivedMap tE) (E.left.class p a') (E.right.class q b') := by
+      rw [hmaps, ha, hb]
+    _ = E.target.class (p + q) c' := hevaluation E tE hE a' b' c' hc'
+
 
 end
 end AlgebraicGeometry.Scheme.Modules

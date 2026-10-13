@@ -12389,3 +12389,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:18 L: merged deliver/B2/Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechNormalizedCoface (stage 3; reviewer PASS; first push; landing 20261013T121839-L-3557958 (interface); batch 20261013T121838; modules 3; new nodes 2)
 - 12:18 L: merged deliver/C2/Sheaf.AlgebraicGeometry.RestrictedAffineSingleConeNaturality (stage 3; reviewer PASS; first push; landing 20261013T121839-L-3558068 (proof); batch 20261013T121838; modules 1; new nodes 0)
 - 12:18 L: merged deliver/F2/Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison (stage 3; reviewer PASS; first push; landing 20261013T121840-L-3558238 (interface); batch 20261013T121838; modules 4; new nodes 3)
+- 12:18 L: merged deliver/F4/Sheaf.Paper.ModuleCupResolutionInvariance (stage 3; reviewer PASS; first push; landing 20261013T121840-L-3558440 (interface); batch 20261013T121838; modules 3; new nodes 2)
