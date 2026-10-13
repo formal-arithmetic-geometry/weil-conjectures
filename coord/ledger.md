@@ -10640,3 +10640,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: returned deliver/U4/Sheaf.AlgebraicGeometry.CoherentArtinRees (reviewer RETURN: (the landing tools, head 2a22e760b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 02:24 L: merged deliver/A2/Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFinitePurity (stage 3; reviewer PASS; first push; landing 20261013T022405-L-3210092 (interface); batch 20261013T022404; modules 3; new nodes 2)
 - 02:24 L: merged deliver/A3/Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions (stage 3; reviewer PASS; after a return; landing 20261013T022406-L-3210226 (interface); batch 20261013T022404; modules 4; new nodes 3)
+- 02:24 L: merged deliver/A4/Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight (stage 3; reviewer PASS; first push; landing 20261013T022406-L-3210444 (proof); batch 20261013T022404; modules 1; new nodes 0)
