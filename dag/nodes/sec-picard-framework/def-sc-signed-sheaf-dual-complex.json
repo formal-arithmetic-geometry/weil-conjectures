@@ -1,0 +1,122 @@
+{
+ "id": "def-sc-signed-sheaf-dual-complex",
+ "kind": "definition",
+ "title": "Signed internal sheaf dual complex",
+ "statement": "Let C be a category with objects and morphisms in universe u, J a Grothendieck topology, and R a sheaf of commutative rings in universe u with the ring-forgetting sheaf composition instance. Let L be an integer cochain complex of sheaves of R-modules [def-weil-sheaf-of-modules-category, def-weil-pbc-module-chain-complex-homology], and N a sheaf of R-modules. Define D(L,N)^k = internal Hom(L^(-k),N), with differential from k to k+1 equal to -(-1)^k times precomposition by d_L^(-k-1). This is a cochain complex; two consecutive differentials compose to zero.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, section-hom-complexes, product Hom differential; https://stacks.math.columbia.edu/tag/0A8X"
+ },
+ "proof": [
+  {
+   "text": "Construct the terms using SheafOfModules.homObj and define successive differentials by signed precomposition. Composition of internal Hom maps reverses the source composition; the complex identity of L makes the resulting composite zero. CochainComplex.of supplies the zero off-shape maps. The Lean construction and its square-zero proof are complete.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S4",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Section 0A8X, section-hom-complexes, product Hom differential; https://stacks.math.columbia.edu/tag/0A8X"
+  },
+  "note": "Stage-3 construction and reduction of the finite free affine Koszul Hom comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom complex into a complex concentrated in degree zero is the signed dual complex",
+   "results": "Eight hits. Cochain.toSingleEquiv handles ordinary morphism groups, not internal sheaf Hom. No matching internal sheaf complex theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isoOfComponents",
+   "results": "Four hits, including HomologicalComplex.Hom.isoOfComponents. Used to assemble degreewise isomorphisms, not an exact statement match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "signedDual|signedSheafDual|homComplex_to_single",
+   "results": "Zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal sheaf Hom complex into a sheaf in degree zero is the signed dual and sheafification commutes with duals of finite free chain complexes",
+   "results": "Service unavailable: Internal Server Error; zero hits. The other services and local sources were used.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulHomComplexIso",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local finite free Hom complex calculation, via lem-sc-affine-koszul-hom-complex-iso.",
+   "via": [
+    "lem-sc-affine-koszul-hom-complex-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexToSingle",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexToSingle.lean",
+  "declaration": "CategoryTheory.signedSheafDualComplex",
+  "statement": "def signedSheafDualComplex (L : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.signedSheafDual_d_comp_d"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T123211-L-3678761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T123211-L-3678761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

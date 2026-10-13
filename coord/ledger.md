@@ -12441,3 +12441,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/M4/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting (stage 3; reviewer PASS; first push; landing 20261013T123210-L-3678298 (proof); batch 20261013T123200; modules 1; new nodes 0)
 - 12:32 L: merged deliver/N3/Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateTransport (stage 3; reviewer PASS; first push; landing 20261013T123210-L-3678506 (interface); batch 20261013T123200; modules 2; new nodes 1)
 - 12:32 L: merged deliver/S4/Sheaf.AlgebraicGeometry.AffineFreeKernelRankLocus (stage 3; reviewer PASS; first push; landing 20261013T123210-L-3678617 (interface); batch 20261013T123200; modules 3; new nodes 2)
+- 12:32 L: merged deliver/S4/Sheaf.AlgebraicGeometry.AffineKoszulHomComplexIso (stage 3; reviewer PASS; first push; landing 20261013T123211-L-3678761 (interface); batch 20261013T123200; modules 4; new nodes 4)

@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeDualComplexComparison
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Complex comparison in finite free affine Koszul coordinates
 
@@ -53,6 +55,23 @@ theorem affine_koszul_hom_complex_iso
         (SheafOfModules.unit U.1.toScheme.ringCatSheaf)) ≅
       (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
         (ExteriorAlgebra.koszulDualCochainComplex
-          (Γ(Y, U.1) : Type u) n f)) := by sorry
+          (Γ(Y, U.1) : Type u) n f)) := by
+  classical
+  let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
+  let K := ExteriorAlgebra.koszulComplex (Γ(Y, U.1) : Type u) n f
+  have hfree (q : ℕ) : Module.Free Γ(Y, U.1) (K.X q) := by
+    exact Module.Free.of_basis
+      ((Finsupp.basisSingleOne : Module.Basis (Fin n) Γ(Y, U.1)
+        (Fin n →₀ Γ(Y, U.1))).exteriorPower q)
+  have hfinite (q : ℕ) : Module.Finite Γ(Y, U.1) (K.X q) := by
+    exact Module.Finite.of_basis
+      ((Finsupp.basisSingleOne : Module.Basis (Fin n) Γ(Y, U.1)
+        (Fin n →₀ Γ(Y, U.1))).exteriorPower q)
+  obtain ⟨a⟩ := homComplex_to_single_iso (R := U.1.toScheme.toRingedSpace.sheaf)
+    ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+        (K.extend ComplexShape.embeddingDownNat))
+    (SheafOfModules.unit U.1.toScheme.ringCatSheaf)
+  obtain ⟨b⟩ := affine_finite_free_dual_complex_comparison U K hfree hfinite
+  exact ⟨a ≪≫ b⟩
 
 end AlgebraicGeometry
