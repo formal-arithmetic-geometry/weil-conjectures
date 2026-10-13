@@ -3,6 +3,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.MvPolynomial.Basic
+import WeilConjectures.RingTheory.BertiniNoether
 
 /-! # Specializing an absolutely irreducible polynomial
 
@@ -54,6 +55,20 @@ theorem exists_nonzero_irreducible_specializations
     (hι : Function.Injective ι)
     (hP : Irreducible (map ((algebraMap K (AlgebraicClosure K)).comp ι) P)) :
     ∃ a : A, a ≠ 0 ∧ ∀ (L : Type u) [Field L] (φ : A →+* L),
-      φ a ≠ 0 → Irreducible (map φ P) := by sorry
+      φ a ≠ 0 → Irreducible (map φ P) := by
+  let j : A →+* AlgebraicClosure K := (algebraMap K (AlgebraicClosure K)).comp ι
+  have hj : Function.Injective j := (algebraMap K (AlgebraicClosure K)).injective.comp hι
+  let f : FractionRing A →+* AlgebraicClosure K := IsFractionRing.lift hj
+  let : Algebra (FractionRing A) (AlgebraicClosure K) := f.toAlgebra
+  have hf : (algebraMap (FractionRing A) (AlgebraicClosure K)).comp
+      (algebraMap A (FractionRing A)) = j := by
+    ext x
+    exact IsFractionRing.lift_algebraMap (K := FractionRing A) hj x
+  have hP' : Irreducible (map ((algebraMap (FractionRing A) (AlgebraicClosure K)).comp
+      (algebraMap A (FractionRing A))) P) := by
+    rw [hf]
+    exact hP
+  obtain ⟨a, ha, hs⟩ := bertini_noether P (FractionRing A) (AlgebraicClosure K) hP'
+  exact ⟨a, ha, fun L _ φ hφ ↦ (hs φ hφ).1⟩
 
 end MvPolynomial
