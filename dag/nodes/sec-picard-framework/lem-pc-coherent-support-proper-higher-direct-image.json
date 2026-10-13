@@ -27,8 +27,10 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-module-support-proper-over-base] to F. Since its support is proper over S, it supplies a closed subscheme i:Z\\to X such that Z\\to S is proper and F\\cong i_*G for a finite type quasi-coherent O_Z-module G. Put g=f\\circ i. The proper morphism Z\\to S supplied by the support factorization is this composite g, so g is proper.",
+   "text": "Local finite type over the locally Noetherian base makes X locally Noetherian by [pqf-lem-locnoeth-lft]. Apply [pqf-lem-coherent-ft-locnoeth] to F to obtain quasi-coherence and finite type. Then [lem-weil-pbc-module-support-proper-over-base] gives a closed immersion i:Z→X, a finite type quasi-coherent module G, an isomorphism F≅i_*G, and properness of i≫f.",
    "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-module-support-proper-over-base"
    ],
    "elementary": false,
@@ -38,12 +40,11 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-closed-immersion-integral-separated-uc] (b) the closed immersion i:Z\\to X is affine, and G is quasi-coherent, so [lem-pc-affine-morphism-hi] gives R^q i_*G=0 for q>0; hence Ri_*G\\cong i_*G\\cong F in D(O_X). The composition isomorphism [lem-pc-derived-direct-image-composition] for Z\\xrightarrow{i}X\\xrightarrow{f}S, g=f\\circ i, gives Rg_*G\\cong Rf_*(Ri_*G)\\cong Rf_*F. Taking the p-th cohomology sheaf gives R^p f_*F\\cong R^p g_*G.",
+   "text": "A closed immersion is affine by [lem-weil-pbc-closed-immersion-integral-separated-uc]. The single object G[0] has quasi-coherent cohomology (zero away from degree zero). Apply [lem-sc-affine-derived-cohomology] in every degree: Ri_*(G[0]) has cohomology only in degree zero, where it is i_*G. The Mathlib standard-heart characterization gives Ri_*(G[0])≅V[0]; applying H^0 and the single-functor homology isomorphism identifies V with F. Apply [lem-pc-derived-direct-image-composition] to obtain R(i≫f)_*(G[0])≅Rf_*(F[0]). These constructions use the given derived-category instances on X and S and the standard instance on Z.",
    "uses": [
     "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-pc-affine-morphism-hi",
-    "lem-pc-derived-direct-image-composition",
-    "lem-weil-pbc-module-support-proper-over-base"
+    "lem-sc-affine-derived-cohomology",
+    "lem-pc-derived-direct-image-composition"
    ],
    "elementary": false,
    "source": {
@@ -52,12 +53,14 @@
    }
   },
   {
-   "text": "The base S is locally Noetherian and g:Z\\to S is proper, hence of finite type [def-weil-proper-morphism], in particular locally of finite type; so Z is locally Noetherian by [pqf-lem-locnoeth-lft]. G is quasi-coherent of finite type on the locally Noetherian scheme Z, hence coherent by [pqf-lem-coherent-ft-locnoeth]. Thus [lem-pc-coherent-hi] applies to the proper morphism g and the coherent module G, making R^p g_*G coherent for every p\\ge0. Via the isomorphism of Step 2, R^p f_*F is coherent for every p\\ge0.",
+   "text": "Properness of i≫f makes Z locally Noetherian by [pqf-lem-locnoeth-lft]. By [pqf-lem-coherent-ft-locnoeth], G is coherent. The finite affine sections theorem [lem-weil-pbc-coherent-affine-sections-finite], Noetherian finite-module finite presentation, and [lem-weil-pbc-quasi-coherent-finite-type-affine] show G finitely presented: obtain finite presentations of G.over U on the affine open cover and use locality of finite presentation. The base is locally Noetherian, so i≫f is locally of finite presentation. Apply [lem-pc-coherent-hi] to obtain finite presentation of its classical higher direct image in natural degree n. Write p=n using hp. The single-object comparison from [src-right-derived-functor-plus-compatibility] identifies this classical higher direct image with H^n(R(i≫f)_*(G[0])). Compose with the cohomology of the isomorphism in Step 2, transport finite presentation, and conclude coherence on S by [pqf-lem-coherent-ft-locnoeth].",
    "uses": [
     "pqf-lem-locnoeth-lft",
     "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
     "lem-pc-coherent-hi",
-    "lem-weil-pbc-module-support-proper-over-base"
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false,
    "source": {
@@ -67,18 +70,21 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-support-proper-over-base",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-pc-affine-morphism-hi",
-  "lem-pc-derived-direct-image-composition",
   "pqf-lem-locnoeth-lft",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-coherent-hi"
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-sc-affine-derived-cohomology",
+  "lem-pc-derived-direct-image-composition",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-coherent-hi",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 30.11.3 (Tag 08DS), proof via Lemma 0CYS and Proposition 30.19.1 (Tag 02O5)"
+  "place": "Tag 08DS proof via Tag 0CYS and Tag 02O5; implemented by T4 using the affine unbounded cohomology comparison (Tag 0AVW) and the classical/unbounded single-object comparison"
  },
  "mathlib_searches": [
   {
@@ -209,5 +215,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T111929-L-3065151",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
