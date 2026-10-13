@@ -17,24 +17,48 @@
  ],
  "proof": [
   {
-   "text": "Expand the restrictions into section units, normalized composition maps, and triangle transports. Unit naturality moves the pullback of the open-restriction comparison past the section unit. Normalized composition associativity for g.left, v.hom, j moves the inverse v,j comparison past the composition map. Naturality of the composition comparison in the module moves the remaining open-restriction comparison across it. Triangle transports coincide by g.w and scheme associativity. Evaluate the resulting module equations at the whole source scheme.",
+   "text": "Apply Mathlib Adjunction.leftAdjointCompIso_assoc to any family of left adjoints of scheme pushforwards. The required pushforward coherence is proved by extensionality: every component on every open and section is the identity. Specialize to the adjunctions chosen by exists_tensorPullbackAdjunction and evaluate the hom at F. This gives c(a,b) at j*F followed by c(a b,j) equal to a* of c(b,j) followed by c(a,b j).",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel a* of the isomorphism c(b,j) and then c(a b,j) in that equation. Obtain c(a,b j) followed by c(a b,j) inverse equal to a* of c(b,j) inverse followed by c(a,b) at j*F. Evaluate naturality of the adjunction unit at the top open to obtain section-unit naturality; the preimage-top presheaf transport is the identity.",
    "uses": [
     "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a triangle a followed by b equals c, substitute c. Both equality transports in the section restriction become identities. Evaluate the inverse associativity equation at the whole source scheme, and use section-unit naturality for c(b,j) inverse. This proves that the inverse composition comparison intertwines restrictions before changing the coefficient module.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a=g.left, b=v.hom, c=w.hom and the triangle equation g.w. Expand the prescribed section component into the inverse composition comparison followed by pullback of the tensor-to-open-restriction comparison lambda_F. Apply the triangle compatibility just proved. Apply coefficient-module naturality of section restrictions to lambda_F, then reassociate. This proves the original public equation with its prescribed components and without quasi-coherence.",
+   "uses": [
+    "lem-sc-etale-tensor-sections-map-naturality",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-qcoherent-presheaf-functorial",
   "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-tensor-sections-map-naturality",
   "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "03DR equation-quasi-coherent-presheaf, functoriality under successive pullback; 03DU item 4; normalized composition and unit naturality give the displayed square"
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "equation descent-equation-quasi-coherent-presheaf and Tag 03DU item 4; M3 proved the normalized-composition and section-unit calculations in Lean, then used coefficient-module naturality"
  },
  "mathlib_searches": [
   {
@@ -116,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-10f1e",
-  "group": "P3",
+  "reviewer": "X-2e99a",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T004026-L-2491763",
+  "landing": "20261013T024039-L-3336170",
   "kind": "interface",
-  "note": "independent Codex review: Delivered packet, Lean modules, DAG records, report, and direct importers matched the stage-3 requirements; all compiled cleanly."
+  "note": "independent Codex review: Matched the unchanged public signatures and component definition to the node; proof steps and dependencies agree with Lean. Delivery and sole direct importer compile cleanly; all checked declarations use only propext, Classical.choice, and Quot.sound."
  }
 }
