@@ -13242,3 +13242,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: merged deliver/X2/Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality (stage 3; reviewer PASS; first push; landing 20261013T171520-L-1984152 (interface); batch 20261013T171508; modules 3; new nodes 2; change records: coord/changes/affineBasisDualIso.md, coord/changes/affineBasisSheafIso.md)
 
 - 01:23 L: batch 20261013T171508 dependency take-out
+- 17:25 L: returned deliver/U1/Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem (reviewer RETURN: (reviewer X-dba85, head dba856f32) E2: `restricted_affine_stage_naturality` is false as stated. Take a two-element direc)
