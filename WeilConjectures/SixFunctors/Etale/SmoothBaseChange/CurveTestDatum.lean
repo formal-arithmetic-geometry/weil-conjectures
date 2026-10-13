@@ -8,6 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.ConstantCoefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 
 /-!
@@ -194,8 +195,21 @@ theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} 
     [QuasiSeparated h] (n : ℕ) (hn : n ≠ 0) (hΛ : (n : Λ) = 0) (q : ℤ)
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ¬ IsZero ((Etale.baseChangeTargetFunctor Λ e h q).obj F)) :
-    ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) :=
-  sorry
+    ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
+  have hF0 : n • 𝟙 F = 0 := by
+    refine (sheafToPresheaf _ _).map_injective ?_
+    rw [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id, Functor.map_zero]
+    ext U x
+    simp [← Nat.cast_smul_eq_nsmul Λ, hΛ]
+  -- dévissage to a sheaf killed by a prime `r ∣ n`
+  obtain ⟨r, hr, hrn, G, hG, hGne⟩ := exists_prime_dvd_not_isZero_map_of_nsmul_id_eq_zero
+    (Etale.baseChangeTargetFunctor Λ e h q)
+    (fun S hS ↦ Etale.exact_baseChangeTargetFunctor_map_of_shortExact Λ e h q hS)
+    n (Nat.pos_of_ne_zero hn) F hF0 hF
+  have : Fact r.Prime := ⟨hr⟩
+  obtain ⟨M, hM, hMne⟩ := Etale.exists_smul_eq_zero_not_isZero_of_isSepClosed Λ e h q r G hG hGne
+  exact ⟨r, hrn, Etale.not_isZero_higherDirectImage_constantModSheaf_of_smul_eq_zero Λ h q r M hM
+    hMne⟩
 
 /-- Blueprint `sbc-lem-bc-universal-test`: Universal curve-test datum for a failure.
 

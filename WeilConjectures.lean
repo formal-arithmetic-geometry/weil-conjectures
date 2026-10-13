@@ -1959,6 +1959,7 @@ public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Perverse.Operations
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.ConstantCoefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
