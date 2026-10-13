@@ -14,28 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Proof: The unit condition htheta determines each theta uniquely by the sheaf\nadjunction hom-equivalence. Consequently theta preserves identity and composition,\nwith the object transports supplied by F and the triangles in Under i.\n\nFor one p, evaluate the outer presheaf colimit at Y = V_t(X_p). Evaluation\npreserves colimits and Under i is filtered, so equality of its two representatives\nholds in B_k(Y) after one transition t -> k. By hbeta-map these are beta_k images\nof theta-transported r_p and s_p, with the cocone object transport to Y.\nThe pointwise left Kan formula presents B_k(Y) by triples (W, a, x), with\nW in F(k.right), a : Y -> V_k(W), and x a section at W. Equality is a finite\nzigzag of relations identifying (W, a, restriction along h of x') with\n(W', a followed by V_k(h), x'), for h : W -> W'.\n\nLift all the finitely many arrows a to a stage receiving k, using surjectivity\nof the arrow cocone. Use eventual equality in the object cocone to align their\nsources with the forward image of X_p and their targets with the forward images\nof W. Refine again so eventual equality in the arrow cocone enforces each\nrelation triangle and identifies both endpoint arrows with the identity of\nthe forward image of X_p. Filteredness equalizes the competing stage maps,\nincluding the maps from i, so this is one transition in Under i.\nSend each triple to the section obtained by theta-transporting x and restricting\nalong its lifted arrow. Naturality of theta and the lifted triangles make the\ntwo sides of each generating relation equal. Thus the zigzag endpoints agree;\nthe identity endpoint arrows and composition of theta identify them with the\noriginal r_p and s_p transported through the composite transition from t.\n\nRepeat this construction for each p. Since K is finite, filteredness supplies a\ncommon receiving stage and equalizes the finitely many maps from t. Transport\nof an equality remains an equality, and composition of theta gives every\nrequired equation for that single transition. If K is empty, take the identity\nof t. This argument uses no covering family, pullback, or gluing.",
+   "text": "Use injectivity of the sheaf adjunction hom-equivalence and the unit equations htheta to prove composition of theta, including the equality transport induced by F.map_comp. This is the composition calculation in ColimitSiteRawSectionDiagram, repeated locally as a proved helper.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-categories",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each p evaluate the presheaf colimit at V_t(X_p). Evaluation preserves colimits, and Types.FilteredColimit.isColimit_eq_iff' gives a single arrow b:t->k on which the beta images agree. The Arrow equality hbeta-map preserves equality of inputs, so the beta_k images of theta_b(r_p) and theta_b(s_p) agree. Apply raw_section_kan_unit_relations at k and at the arbitrary object F(b.right)(X_p). Composition of theta identifies the resulting equality with equality along the composite arrow from t.",
+   "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-arrows-functor",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-colimit-site-kan-unit-relations"
    ],
    "elementary": false
+  },
+  {
+   "text": "Choose the resulting k_p and b_p for each p. Mathlib IsFiltered.wideSpan gives a single receiving object k, arrows c_p:k_p->k and an arrow b:t->k with b_p followed by c_p equal to b. Apply theta_(c_p) to each equality and then the proved composition equation and its equality transport to obtain the required equality for b. wideSpan also covers the empty finite family.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-colimit-site-kan-unit-relations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Expansion of the omitted finite Kan-relation lifting in Tag 0A35, checked against https://stacks.math.columbia.edu/tag/0A35"
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit); reduction through the existing Kan unit relation theorem, outer filtered-set equality, and IsFiltered.wideSpan."
  },
  "mathlib_searches": [
   {
@@ -115,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T031550-L-3573646",
-  "kind": "interface",
+  "landing": "20261013T054214-L-442097",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

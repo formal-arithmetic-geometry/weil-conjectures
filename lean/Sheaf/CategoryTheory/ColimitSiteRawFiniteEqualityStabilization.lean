@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.CategoryTheory.ColimitSiteKanUnitRelations
 
 /-! # Finite raw section equality stabilization
 
@@ -26,6 +28,23 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
+
+private theorem arrow_postcomp {C : Type u} [Category C]
+    {S T : C ⥤ Type u} (δ : S ⟶ T) {A : Type u} {Y Z : C}
+    (e : Y = Z) (f : A ⟶ S.obj Y) (g : A ⟶ S.obj Z)
+    (h : Arrow.mk f = Arrow.mk g) :
+    Arrow.mk (f ≫ δ.app Y) = Arrow.mk (g ≫ δ.app Z) := by
+  subst Z
+  rw [Arrow.mk_injective _ _ h]
+
+private theorem arrow_eq_preserves_equality {S T U : Type u}
+    (f : S ⟶ T) (g : S ⟶ U) (h : Arrow.mk f = Arrow.mk g)
+    (x y : S) (hxy : f x = f y) : g x = g y := by
+  have e := congrArg Arrow.right h
+  change T = U at e
+  subst U
+  rw [← Arrow.mk_injective _ _ h]
+  exact hxy
 
 /-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
 finite overlap equalities in the filtered-colimit calculation.
@@ -113,6 +132,77 @@ theorem colimit_site_raw_finite_equality_stabilization
           ((β t).app (op (X p)) (s p))) :
     ∃ (t' : Under i) (b : t ⟶ t'), ∀ p,
       (θ t t' b).hom.app (op (X p)) (r p) =
-        (θ t t' b).hom.app (op (X p)) (s p) := by sorry
+        (θ t t' b).hom.app (op (X p)) (s p) := by
+  classical
+  let A (t : Under i) := (sheafPullback (F.map t.hom).toFunctor (Type u)
+    (P i).toGrothendieck (P t.right).toGrothendieck).obj G
+  let f {t t' : Under i} (b : t ⟶ t') := (F.map b.right).toFunctor
+  have ef {t t' : Under i} (b : t ⟶ t') :
+      (F.map t.hom).toFunctor ⋙ f b = (F.map t'.hom).toFunctor :=
+    congrArg Cat.Hom.toFunctor
+      ((F.map_comp t.hom b.right).symm.trans (congrArg F.map (Under.w b)))
+  have ecomp {t t' t'' : Under i} (b : t ⟶ t') (c : t' ⟶ t'') :
+      f b ⋙ f c = f (b ≫ c) :=
+    congrArg Cat.Hom.toFunctor (F.map_comp b.right c.right).symm
+  have hcomp {t t' t'' : Under i} (b : t ⟶ t') (c : t' ⟶ t'') :
+      (θ t t' b).hom ≫ Functor.whiskerLeft (f b).op (θ t' t'' c).hom ≫
+        eqToHom (congrArg (fun g ↦ g.op ⋙ (A t'').obj) (ecomp b c)) =
+      (θ t t'' (b ≫ c)).hom := by
+    let k : A t ⟶ ((f (b ≫ c)).sheafPushforwardContinuous (Type u)
+        (P t.right).toGrothendieck (P t''.right).toGrothendieck).obj (A t'') :=
+      ⟨(θ t t' b).hom ≫ Functor.whiskerLeft (f b).op (θ t' t'' c).hom ≫
+        eqToHom (congrArg (fun g ↦ g.op ⋙ (A t'').obj) (ecomp b c))⟩
+    suffices hk : k = θ t t'' (b ≫ c) from congrArg (fun a ↦ a.hom) hk
+    apply ((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)
+      (P i).toGrothendieck (P t.right).toGrothendieck).homEquiv G _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext X
+    apply Arrow.mk_injective _ _
+    have he : op ((f b).obj ((F.map t.hom).toFunctor.obj X.unop)) =
+        op ((F.map t'.hom).toFunctor.obj X.unop) :=
+      congrArg (fun g ↦ op (g.obj X.unop)) (ef b)
+    have ht := arrow_postcomp (θ t' t'' c).hom he _ _ (hθ t t' b X.unop)
+    simpa [k, NatTrans.comp_app, Functor.whiskerLeft_app, eqToHom_app, ← Category.assoc]
+      using ht.trans ((hθ t' t'' c X.unop).trans (hθ t t'' (b ≫ c) X.unop).symm)
+  have hone (p : K) : ∃ (t' : Under i) (b : t ⟶ t'),
+      (θ t t' b).hom.app (op (X p)) (r p) =
+        (θ t t' b).hom.app (op (X p)) (s p) := by
+    let Y := (V.ι.app t.right).toFunctor.obj (X p)
+    let ev := (evaluation V.ptᵒᵖ (Type u)).obj (op Y)
+    have hc := isColimitOfPreserves ev (colimit.isColimit B)
+    have hh : (ev.mapCocone (colimit.cocone B)).ι.app t
+        ((β t).app (op (X p)) (r p)) =
+        (ev.mapCocone (colimit.cocone B)).ι.app t
+          ((β t).app (op (X p)) (s p)) := hrs p
+    obtain ⟨k, b, hb⟩ := (Types.FilteredColimit.isColimit_eq_iff' hc _ _).mp hh
+    have hβk : (β k).app (op ((f b).obj (X p)))
+        ((θ t k b).hom.app (op (X p)) (r p)) =
+        (β k).app (op ((f b).obj (X p)))
+          ((θ t k b).hom.app (op (X p)) (s p)) :=
+      arrow_eq_preserves_equality _ _ (hβmap t k b (X p)) (r p) (s p) hb
+    obtain ⟨k', c, hc'⟩ := raw_section_kan_unit_relations J F V hobjects harrows i k
+      (fun a ↦ (A a).obj) (fun a c ↦ (θ k a c).hom) (B.obj k) (β k) (hβ k)
+      ((f b).obj (X p)) _ _ hβk
+    refine ⟨k', b ≫ c, ?_⟩
+    have h := NatTrans.congr_app (hcomp b c) (op (X p))
+    have hr := ConcreteCategory.congr_hom h (r p)
+    have hs := ConcreteCategory.congr_hom h (s p)
+    exact hr.symm.trans ((congrArg
+      ((eqToHom (congrArg (fun g ↦ g.op ⋙ (A k').obj) (ecomp b c))).app (op (X p)))
+      hc').trans hs)
+  choose k b hb using hone
+  obtain ⟨k', b', c, hc⟩ := IsFiltered.wideSpan b
+  refine ⟨k', b', fun p ↦ ?_⟩
+  have h := NatTrans.congr_app (hcomp (b p) (c p)) (op (X p))
+  have hr := ConcreteCategory.congr_hom h (r p)
+  have hs := ConcreteCategory.congr_hom h (s p)
+  rw [← hc p]
+  exact hr.symm.trans ((congrArg
+    ((eqToHom (congrArg (fun g ↦ g.op ⋙ (A k').obj) (ecomp (b p) (c p)))).app
+      (op (X p)))
+    (congrArg ((θ (k p) k' (c p)).hom.app (op ((f (b p)).obj (X p)))) (hb p))).trans hs)
+
 
 end CategoryTheory
