@@ -11,6 +11,11 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Preadditive.LeftExact
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsLocalSurjectivity
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsCokernelExact
 
 /-! # Right exactness of sheafified tensor sections
 
@@ -111,7 +116,32 @@ colimits. The additive universe lift preserves this construction. The argument u
 quasi-coherence, affine hypothesis, nonemptiness, or flatness: tensor pullback is
 right exact for every scheme morphism. -/
 theorem preservesCokernels_etaleTensorSectionsFunctor (X : Scheme.{u}) :
-    PreservesColimitsOfShape WalkingParallelPair (etaleTensorSectionsFunctor X) := by sorry
+    PreservesColimitsOfShape WalkingParallelPair (etaleTensorSectionsFunctor X) := by
+  let T := etaleTensorSectionsFunctor X
+  have : T.Additive := by
+    dsimp [T, etaleTensorSectionsFunctor]
+    infer_instance
+  have hpres : ∀ {F G : X.Modules} (φ : F ⟶ G),
+      PreservesColimit (parallelPair φ 0) T := by
+    intro F G φ
+    let S := ShortComplex.mk φ (cokernel.π φ) (cokernel.condition φ)
+    have hlocal := etaleTensorSections_locallySurjective (cokernel.π φ)
+      (etaleTensorSectionsMap (cokernel.π φ)) (fun _ ↦ rfl)
+    have hsheaf : Sheaf.IsLocallySurjective (T.map (cokernel.π φ)) :=
+      (Presheaf.isLocallySurjective_presheafToSheaf_map_iff
+        X.smallEtaleTopology _).2 hlocal
+    have : Epi (S.map T).g := by
+      change Epi (T.map (cokernel.π φ))
+      exact Sheaf.epi_of_isLocallySurjective _
+    have hexact : (S.map T).Exact :=
+      etaleTensorSections_cokernel_exact φ (etaleTensorSectionsMap φ)
+        (etaleTensorSectionsMap (cokernel.π φ)) (fun _ ↦ rfl) (fun _ ↦ rfl)
+        (S.map T).zero
+    refine preservesColimit_of_preserves_colimit_cocone (cokernelIsCokernel φ) ?_
+    exact (CokernelCofork.isColimitMapCoconeEquiv _ T).2 hexact.gIsCokernel
+  let : ∀ {F G : X.Modules} (φ : F ⟶ G),
+      PreservesColimit (parallelPair φ 0) T := @hpres
+  exact Functor.preservesCoequalizers_of_preservesCokernels T
 
 end
 end AlgebraicGeometry.Scheme.Modules

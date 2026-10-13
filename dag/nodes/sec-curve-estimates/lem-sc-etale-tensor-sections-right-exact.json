@@ -16,23 +16,25 @@
  ],
  "proof": [
   {
-   "text": "Construct the module-variable functor using componentwise tensor-pullback maps; the named naturality theorem supplies its natural-transformation proof. Its identity, composition, and additive laws follow from those of tensor pullback, and its coefficients are lifted before sheafification.",
+   "text": "Construct the module-variable functor using componentwise tensor-pullback maps; the named naturality theorem supplies its natural-transformation proof. Its identity, composition, and additive laws follow from those of tensor pullback, and its coefficients are lifted before sheafification. The additive law uses the tensor-pullback adjunction [lem-pc-module-pullback-adjunction]. The unchanged quasi-coherent object comparison uses the specified tensor sheaf [def-sc-etale-qcoherent-module] and the sheafification isomorphism.",
    "uses": [
     "lem-sc-etale-tensor-sections-map-naturality",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-etale-qcoherent-module"
    ],
    "elementary": true
   },
   {
-   "text": "Tensor pullback preserves cokernels because it is left adjoint. On each etale object, sections of the resulting module cokernel locally lift to the middle module on a Zariski cover; sections mapping to zero locally come from the source module. These covers are etale covers, so sheafification gives the cokernel on the etale site. Equivalently apply the ringed-site pullback description of Stacks 070S(2), which is right exact, and then forget to abelian sheaves.",
+   "text": "For each module morphism phi form its cokernel short complex S. The local-surjectivity theorem applied to its cokernel projection, followed by Mathlib Presheaf.isLocallySurjective_presheafToSheaf_map_iff and Sheaf.epi_of_isLocallySurjective, gives an epimorphism (T.map S.g). The middle-exactness theorem gives (S.map T).Exact. Mathlib ShortComplex.Exact.gIsCokernel constructs the mapped cokernel cofork, and CokernelCofork.isColimitMapCoconeEquiv and preservesColimit_of_preserves_colimit_cocone give preservation of this cokernel.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-sc-etale-qcoherent-module"
+    "lem-sc-etale-tensor-sections-local-surjectivity",
+    "lem-sc-etale-tensor-sections-cokernel-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The functor is additive, so a coequalizer of two maps is the cokernel of their difference. Thus preservation of cokernels implies preservation of all parallel-pair colimits. The additive universe lift preserves colimits.",
+   "text": "Infer additivity of the composite from the existing additive tensor-section presheaf functor, the additive ULift functor and additive sheafification. Install the just-proved preservation of each cokernel locally, then apply Mathlib Functor.preservesCoequalizers_of_preservesCokernels.",
    "uses": [],
    "elementary": true
   }
@@ -41,12 +43,14 @@
   "lem-sc-etale-tensor-sections-map-naturality",
   "lem-sc-etale-qcoherent-presheaf-functorial",
   "lem-pc-module-pullback-adjunction",
-  "def-sc-etale-qcoherent-module"
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-tensor-sections-local-surjectivity",
+  "lem-sc-etale-tensor-sections-cokernel-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/070S",
-  "place": "Lemma 35.8.5 (2); see also Tag 03FH (1), and the original additive comparison Step 2"
+  "place": "Lemma 35.8.5(2) and Tag 03FH(1); implemented using local surjectivity and middle exactness, then the Mathlib cokernel and coequalizer APIs"
  },
  "mathlib_searches": [
   {
@@ -127,12 +131,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T232144-L-1994028",
+  "landing": "20261013T045526-L-127932",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

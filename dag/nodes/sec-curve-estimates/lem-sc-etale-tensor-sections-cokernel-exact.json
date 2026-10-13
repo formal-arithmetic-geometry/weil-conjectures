@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/070S",
+  "place": "Lemma 35.8.5(2), local lifting and exactness of sheafified module pullback sections"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/070S",
+  "place": "Lemma 35.8.5(2), local lifting and exactness"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-additive-ideal-image-tensor-comparison",
+   "place": "Step 2",
+   "via": [
+    "lem-sc-etale-tensor-sections-right-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-etale-tensor-sections-cokernel-exact",
+ "title": "Exactness of tensor sections at a module cokernel",
+ "statement": "For a module morphism φ : F ⟶ G and its cokernel projection, the sheafified ULift tensor-section sequence is exact at the middle term. The module category is [def-weil-sheaf-of-modules-category], X is [def-pc-scheme], and the normalized tensor-section presheaves are [lem-sc-etale-qcoherent-presheaf-functorial]. The given natural transformations are required to have exactly the tensor-pullback maps as components; they are not arbitrary morphisms. The equation w states that the induced consecutive sheaf maps compose to zero. The conclusion asserts only exactness, with no epimorphism assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Tensor pullback is a left adjoint, so it carries the module cokernel sequence to a cokernel sequence. Sectionwise kernels of the quotient are locally images, by the sheafified cokernel local-image theorem; normalized restrictions transport these local lifts to the étale tensor-section presheaves. Sheafification preserves this local kernel-image equality, and universe lifting preserves exactness. Apply [lem-weil-pbc-ringed-space-module-exactness-local-lifting] on each etale object after the pullback adjunction [lem-pc-module-pullback-adjunction]; use [lem-sc-etale-qcoherent-presheaf-functorial] for the unit-normalized restrictions.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsCokernelExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsCokernelExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorSections_cokernel_exact",
+  "statement": "theorem etaleTensorSections_cokernel_exact {X : Scheme.{u}} {F G : X.Modules}\n    (φ : F ⟶ G)\n    (α : etaleTensorSectionsPresheaf F ⟶ etaleTensorSectionsPresheaf G)\n    (β : etaleTensorSectionsPresheaf G ⟶ etaleTensorSectionsPresheaf (cokernel φ))\n    (hα : ∀ U : X.Etaleᵒᵖ, α.app U = ((tensorPullback U.unop.hom).map φ).app ⊤)\n    (hβ : ∀ U : X.Etaleᵒᵖ,\n      β.app U = ((tensorPullback U.unop.hom).map (cokernel.π φ)).app ⊤)\n    (w : ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map\n        (Functor.whiskerRight α AddCommGrpCat.uliftFunctor.{u + 1, u})) ≫\n      ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map\n        (Functor.whiskerRight β AddCommGrpCat.uliftFunctor.{u + 1, u})) = 0) :\n    (ShortComplex.mk\n      ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map\n        (Functor.whiskerRight α AddCommGrpCat.uliftFunctor.{u + 1, u}))\n      ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map\n        (Functor.whiskerRight β AddCommGrpCat.uliftFunctor.{u + 1, u})) w).Exact",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of tensor sections of a module cokernel is exact in the middle",
+   "results": "SheafOfModules.instAbelian and relationsOfIsCokernelFree. No kernel-image equality for the specified tensor-section maps.",
+   "verdict": "No exact match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+   "results": "ShortComplex.Exact.gIsCokernel constructs a cokernel from exactness and an epimorphism; it cannot supply the local middle-exactness assertion.",
+   "verdict": "Generic tool only.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSections.*(exact|surject)|etaleTensorSections.*(exact|surject)",
+   "results": "msearch returned zero matches. Direct rg found RingedSpace.module_exactness_local_lifting and sheafified_cokernel_local_image; neither addresses the normalized etale restrictions.",
+   "verdict": "No exact match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafification of tensor sections of a module cokernel is exact in the middle",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive sheafification functor sends a locally exact presheaf sequence to an exact sequence of sheaves",
+   "results": "Generic sheaf abelian and exactness results only; no theorem for the normalized tensor-section restrictions. Independently checked by the second reader.",
+   "verdict": "No direct match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "results": "Type-valued sheaf local-surjectivity criterion; no construction of local tensor-section lifts.",
+   "verdict": "Generic tool only.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T045526-L-127932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T045526-L-127932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
