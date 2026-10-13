@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-weil-pbc-finite-stage-pair-category",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-stage pair category",
- "statement": "Let $\\mathsf{FinExt}_\\ell$ be the poset of finite intermediate fields\n$\\Ql\\subset E\\subset\\Qlb$; it is filtered because the compositum of two\nfinite fields is finite. Put\n$$\n \\mathcal C_E(T)=\\Dbc(T,E),\n \\qquad T_{F/E}=F\\otimes_E^L-:\\mathcal C_E(T)\\to\\mathcal C_F(T),\n$$\nthe categories $\\Dbc(T,E)$ being those of\n[def-weil-pbc-rational-category]. The normalized units\n$T_{E/E}=\\operatorname{id}$, the associators $a_{G,F,E}$, and the shift\ncomparisons $\\sigma_{F/E}$ used below are the data constructed in\n[prop-weil-pbc-scalar-extension].\n\nDefine an object of $\\mathcal P_T$ to be a pair $(E,K)$ with\n$K\\in\\mathcal C_E(T)$. A morphism representative\n$(M,u):(E,K)\\to(F,L)$ consists of a finite field $M\\supset E,F$ and a map\n$$\n u:T_{M/E}K\\longrightarrow T_{M/F}L\n \\quad\\text{in }\\mathcal C_M(T).\n$$\nFor $M\\subset N$, transport it to\n$$\n u_N=\n a_{N,M,F,L}\\circ T_{N/M}(u)\\circ a_{N,M,E,K}^{-1}.\n$$\nRepresentatives $(M,u)$ and $(N,v)$ are equivalent if $u_P=v_P$ in\n$\\mathcal C_P(T)$ for some finite $P\\supset M,N$. Define\n$$\n \\Hom_{\\mathcal P_T}((E,K),(F,L))\n =\\varinjlim_{M\\supset E,F}\n \\Hom_{\\mathcal C_M(T)}(T_{M/E}K,T_{M/F}L)\n$$\nas the resulting equivalence classes. Addition, identities, negatives, and\ncomposition are computed after transporting all representatives to one\ncommon finite overfield.",
+ "statement": "Fix a prime $\\ell$, write $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], and fix an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure]. Let $T$ be a noetherian scheme of finite dimension on which $\\ell$ is invertible, as required for the integral categories of [def-weil-pbc-bounded-constructible-complete]. Let $\\mathsf{FinExt}_\\ell$ be the directed poset of finite intermediate extensions $\\Ql\\subseteq E\\subseteq\\Qlb$ of [def-weil-finite-subextension-directed-set], ordered by inclusion. Here finite means finite-dimensional over $\\Ql$, not finite as a set. It contains $\\Ql$, and the compositum gives a common upper bound. For $E\\subseteq F$ in $\\mathsf{FinExt}_\\ell$, put\n$$\n \\mathcal C_E(T)=\\Dbc(T,E),\n \\qquad T_{F/E}=F\\otimes_E^L-:\\mathcal C_E(T)\\to\\mathcal C_F(T),\n$$\nthe categories $\\Dbc(T,E)$ being those of\n[def-weil-pbc-rational-category]. The normalized units\n$T_{E/E}=\\operatorname{id}$, the associators $a_{G,F,E}$, and the shift\ncomparisons $\\sigma_{F/E}$ used below are the data constructed in\n[prop-weil-pbc-scalar-extension].\n\nDefine an object of $\\mathcal P_T$ to be a pair $(E,K)$ with\n$K\\in\\mathcal C_E(T)$. A morphism representative\n$(M,u):(E,K)\\to(F,L)$ consists of a finite field $M\\supseteq E,F$ and a map\n$$\n u:T_{M/E}K\\longrightarrow T_{M/F}L\n \\quad\\text{in }\\mathcal C_M(T).\n$$\nHere $a_{N,M,E,K}$ denotes the component at $K$ of the natural isomorphism $a_{N,M,E}$. For $M\\subseteq N$, transport it to\n$$\n u_N=\n a_{N,M,F,L}\\circ T_{N/M}(u)\\circ a_{N,M,E,K}^{-1}.\n$$\nRepresentatives $(M,u)$ and $(N,v)$ are equivalent if $u_P=v_P$ in\n$\\mathcal C_P(T)$ for some finite $P\\supseteq M,N$. Define\n$$\n \\Hom_{\\mathcal P_T}((E,K),(F,L))\n =\\varinjlim_{M\\supseteq E,F}\n \\Hom_{\\mathcal C_M(T)}(T_{M/E}K,T_{M/F}L)\n$$\nas the resulting equivalence classes, or equivalently the directed colimit of abelian groups [def-weil-directed-colimit-abelian-groups]. The indexing poset consists of the finite overfields of $E$ and $F$; it is nonempty and directed since it contains $EF$ and is closed under taking composita.\n\nWrite a class as $[M,u]$. For two classes with the same source and target, choose a finite $P\\supseteq M,N$ and prescribe\n$$\n [M,u]+[N,v]=[P,u_P+v_P],\\qquad\n -[M,u]=[M,-u],\\qquad 0=[M,0]\n$$\nwith the zero represented at any common stage. The identity of $(E,K)$ is $[E,\\operatorname{id}_K]$, using the literal normalization $T_{E/E}=\\operatorname{id}$. If $[M,u]:(E,K)\\to(F,L)$ and $[N,v]:(F,L)\\to(G,R)$, choose a finite $P\\supseteq M,N$ and prescribe\n$$\n [N,v]\\circ[M,u]=[P,v_P\\circ u_P].\n$$\nAll scalar-extension functors and associators in these formulas are those specified above.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-finite-stage-pair-category.md",
   "place": "node def-weil-pbc-finite-stage-pair-category, order 1308",
@@ -34,16 +34,70 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-finite-subextension-directed-set",
   "def-weil-pbc-rational-category",
   "prop-weil-pbc-scalar-extension",
-  "def-weil-pbc-bounded-constructible-complete"
+  "def-weil-directed-colimit-abelian-groups"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FilteredColimit|filtered.colimit.*categor|PairCategory|FinExt",
+   "results": "25 hits: filtered-colimit preservation and elementwise equality for diagrams in fixed categories (Presentable, Types, etc.); no pair category. (directory: Mathlib/CategoryTheory)",
+   "date": "2026-10-13",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit category of categories with morphisms represented at a common stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of pairs consisting of a finite coefficient field and a constructible derived object with morphisms identified after scalar extension to a common finite overfield",
+   "results": "Condensed.finFree, FGAlgCat, FGAlgCatSkeleton, FGModuleRepr.instCategory/embed, instEssentiallySmallFGAlgCat, FGAlgCat.uliftFunctor, Condensed.profiniteSolid: finite-type algebra/module constructions, not this category.",
+   "date": "2026-10-13",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "CategoryTheory.Pseudofunctor and its constructors/composition in Mathlib.CategoryTheory.Bicategory.Functor.Pseudofunctor; source read at lines 50-94. This is transition data, not a common-stage quotient category.",
+   "date": "2026-10-13",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered two colimit of a directed system of additive categories constructed using eventual equality of morphisms",
+   "results": "AddCommGroup.DirectLimit; AddMonCat.FilteredColimits.colimit, colimitCocone, M, colimitCoconeIsColimit; DirectLimit.instAdd; AddCommMonCat.FilteredColimits.colimitCocone/M. DirectLimit source read at Module.lean:280-335: covers the Hom-group colimit, not objects and composition of this pair category.",
+   "date": "2026-10-13",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "Pseudocolimit|TwoColimit|2-colimit|Grothendieck|Filtered.*Category",
+   "results": "No hits in the queried CategoryTheory/Grothendieck directory. Separately read CategoryTheory/Grothendieck.lean: morphisms use a base arrow, not a common overfield quotient. (directory: Mathlib/CategoryTheory/Grothendieck)",
+   "date": "2026-10-13",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the Grothendieck construction of a directed diagram of categories by transition morphisms, with Hom represented at a common upper bound",
+   "results": "Eight hits: locally directed Type-valued functors, filteredness of Grothendieck constructions, and generic category localization functors. Read Grothendieck.lean:65-91 and Localization/Construction.lean:90-117. None states the common-upper-stage Hom quotient for this coherent diagram; a comparison with localization would require a theorem, not a one-line specialization.",
+   "date": "2026-10-13",
+   "verdict": "no match for the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -76,5 +130,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-finite-stage-pair-category",
+  "worker": "stage1",
+  "summary": "Definition-only split: named the existing finite-subextension index and directed abelian-group colimit; made inherited scheme/coefficient binders and all common-stage operations explicit. Retained the raw rational categories and coherent normalized scalar extension of the source. No new nodes. Equivalence and representative-independence are the existing downstream prop-weil-pbc-common-stage-calculus, not a cyclic input. Project source and Mathlib searches found no exact attachment or one-line Mathlib realization of the whole category. Repair of the mechanical return: rechecked against the current side tip, kept blueprint.from null as required for an imported node, corrected search dates to their actual receipts, and made non-strict common-stage inclusions explicit throughout.",
+  "blueprint": "Master definition order 1308: opening index and finite-stage data, morphism representative and transport displays, eventual equality and Hom colimit display, final common-stage operations sentence. Slopmaster2 note 42, def:finext, def:pair-objects, def:morphism-representative, def:representative-equality, def:pair-hom, def:pair-addition, def:pair-composition supplies expanded formulas only; its Karoubi finite stages are not substituted for master raw rational stages."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-133f7086d",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-133f7086d (reviewer sub-agent of L); spot-checked: Definition and source checks pass, including transport types, raw rational coefficient category, common-stage operations, cited nodes, Stacks locations, route, and edge cases. One repairable DAG hygiene fault: the item introduced Q_l and Qbar_l without citing def-weil-l-adic-numbers and def-weil-algebraic-closure. Corrected whole node is in fixes/dag/nodes/sec-proper-base-change/def-weil-pbc-finite-stage-pair-category.json; no mathematical clause changed.; 1 file(s) fixed by the reviewer"
+ }
 }
