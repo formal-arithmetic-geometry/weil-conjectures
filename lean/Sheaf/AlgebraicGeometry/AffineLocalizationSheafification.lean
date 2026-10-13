@@ -8,8 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Module.LocalizedModule.Away
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Topology.SheafOnBasisExtends
+import Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification
 
 /-! # Affine values of a presheaf satisfying principal localization
 
@@ -52,6 +51,11 @@ theorem affineLocalization_sheafification_unit_isIso (T : Scheme.{u})
       IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom)
     (W : T.Opens) (hW : IsAffineOpen W) :
     IsIso (((PresheafOfModules.sheafificationAdjunction
-      (𝟙 T.ringCatSheaf.obj)).unit.app P).app (op W)) := by sorry
+      (𝟙 T.ringCatSheaf.obj)).unit.app P).app (op W)) := by
+  apply isIso_sheafificationUnit_app_of_affine_localizing T P ?_ W hW
+  intro U hU a
+  let : Module Γ(T, U) (P.obj (op (T.basicOpen a))) :=
+    Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom
+  exact hlocal U hU a
 
 end AlgebraicGeometry.Scheme.Modules

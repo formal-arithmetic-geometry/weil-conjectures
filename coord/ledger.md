@@ -11290,3 +11290,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.LocalClosedIdealMapExtension (stage 3; reviewer PASS; first push; landing 20261013T054232-L-447637 (interface); batch 20261013T054206; modules 3; new nodes 2)
 - 05:42 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.RightAdjointTensorCompatibleExactStructures (stage 3; reviewer PASS; first push; landing 20261013T054233-L-447816 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.BirationalLinePushforwardGenericStalk (stage 3; reviewer PASS; after a return; landing 20261013T054233-L-447956 (proof); batch 20261013T054206; modules 1; new nodes 0)
+- 05:42 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.AffineLocalizationSheafification (stage 3; reviewer PASS; first push; landing 20261013T054233-L-448081 (proof); batch 20261013T054206; modules 1; new nodes 0)
