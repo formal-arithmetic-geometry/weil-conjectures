@@ -12,7 +12,16 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.SupportedOpenTensorDirectImageComparisons
+import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
+import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Mathlib.Data.Int.Interval
+import Sheaf.AlgebraicGeometry.OpenDerivedCategorySmall
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
@@ -32,6 +41,86 @@ universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem zero_stalk (X : Scheme.{u})
+    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hM : IsZero M) (x : X) :
+    Subsingleton (↑(TopCat.Presheaf.stalk M.val.presheaf x)) := by
+  exact ModuleCat.subsingleton_of_isZero
+    ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map_isZero hM)
+
+private theorem compact_open_support
+    {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsNoetherian S]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (E : schemeDerivedCategory X)
+    (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n →
+      IsZero ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E))
+    (hs : ∀ n : ℤ, Modules.HasSupportProperOver f
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E)) :
+    ∃ (T : TopologicalSpace.Closeds X) (U : X.Opens),
+      IsCompact (U : Set X) ∧ (T : Set X) ⊆ (U : Set X) ∧
+      ∀ (n : ℤ) (x : X), x ∉ (T : Set X) →
+        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E).val.presheaf x)) := by
+  classical
+  obtain ⟨a, b, hab⟩ := hb
+  choose Z hZ hp using hs
+  let I := {n : ℤ // n ∈ Finset.Icc a b}
+  let e := (Fintype.equivFin I).symm
+  let W : Fin (Fintype.card I) → TopologicalSpace.Closeds X := fun i ↦ Z (e i).val
+  let T : TopologicalSpace.Closeds X := ⨆ i, W i
+  have hT : IsClosedSubsetProperOver f T :=
+    (isClosedSubsetProperOver_union_preimage f).1 _ W (fun i ↦ hp (e i).val)
+  let j := (IdealSheafData.vanishingIdeal T).subschemeι
+  have : IsProper (j ≫ f) := hT
+  have : CompactSpace (IdealSheafData.vanishingIdeal T).subscheme :=
+    QuasiCompact.compactSpace_of_compactSpace (j ≫ f)
+  obtain ⟨U, g, hU, _, hg⟩ := j.exists_isCompact_isClosedImmersion
+  have hTU : (T : Set X) ⊆ (U : Set X) := by
+    have hj : Set.range j = (T : Set X) := by simp [j]
+    intro x hx
+    obtain ⟨z, rfl⟩ := hj.symm ▸ hx
+    rw [← hg]
+    exact (g z).property
+  refine ⟨T, U, hU, hTU, ?_⟩
+  intro n x hx
+  by_cases hn : n ∈ Finset.Icc a b
+  · by_contra hnonzero
+    have hxZ : x ∈ Z n := by
+      change x ∈ (Z n : Set X)
+      rw [hZ n]
+      exact hnonzero
+    have hle : Z n ≤ T := by
+      have he : (e ((Fintype.equivFin I) ⟨n, hn⟩)).val = n := by simp [e]
+      rw [← he]
+      exact le_iSup W ((Fintype.equivFin I) ⟨n, hn⟩)
+    exact hx (hle hxZ)
+  · apply zero_stalk X _ (hab n ?_) x
+    simp only [Finset.mem_Icc, not_and_or, not_le] at hn
+    exact hn
+
+private theorem qc_single (S : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    (F : SheafOfModules.{u} (moduleRings S.toRingedSpace)) (hF : F.IsQuasicoherent) :
+    schemeDerivedQCohProperty S ((DerivedCategory.singleFunctor _ 0).obj F) := by
+  have hzero : IsZero
+      (SheafOfModules.free (R := moduleRings S.toRingedSpace) PEmpty.{u + 1}) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (SheafOfModules.freeHomEquiv _).injective
+    funext i
+    exact PEmpty.elim i
+  have : (SheafOfModules.isQuasicoherent (moduleRings S.toRingedSpace)).ContainsZero :=
+    ⟨⟨_, hzero, SheafOfModules.isQuasicoherent_free PEmpty.{u + 1}⟩⟩
+  intro n
+  by_cases hn : n = 0
+  · subst n
+    exact (SheafOfModules.isQuasicoherent (moduleRings S.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F).symm hF
+  · apply (SheafOfModules.isQuasicoherent (moduleRings S.toRingedSpace)).prop_of_isZero
+    rcases lt_or_gt_of_ne hn with hn | hn
+    · exact DerivedCategory.isZero_of_isGE _ 0 n hn
+    · exact DerivedCategory.isZero_of_isLE _ 0 n hn
 
 /-- Proper support permits the derived projection formula without assuming f quasi-compact.
 Source: Stacks Project, Tag 08EV, proof, support reduction and first displayed equality;
@@ -74,6 +163,28 @@ theorem nonempty_properSupport_derivedProjection_iso
     Nonempty (((schemeDerivedDirectImage f).obj E) ⊗
         (DerivedCategory.singleFunctor _ 0).obj F ≅
       (schemeDerivedDirectImage f).obj
-        (E ⊗ (derivedPullback f).obj ((DerivedCategory.singleFunctor _ 0).obj F))) := by sorry
+        (E ⊗ (derivedPullback f).obj ((DerivedCategory.singleFunctor _ 0).obj F))) := by
+  classical
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  obtain ⟨T, U, hU, hTU, hET⟩ := compact_open_support f E hbounded hsupport
+  let K := (DerivedCategory.singleFunctor _ 0).obj F
+  obtain ⟨hDU⟩ := nonempty_openHasDerivedCategory X U
+  let := hDU
+  obtain ⟨⟨eE⟩, ⟨eTensor⟩⟩ :=
+    supportedOpen_tensor_directImage_comparisons f U T T.isClosed hTU E hET K
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  have : QuasiCompact (U.ι ≫ f) := inferInstance
+  have : QuasiSeparated (U.ι ≫ f) := inferInstance
+  have hEU : schemeDerivedQCohProperty U.toScheme
+      ((schemeOpenRestriction X U).mapDerivedCategory.obj E) := by
+    apply (schemeDerivedQCoh_openRestriction_iff X U E).mpr
+    intro n
+    have hq := ((Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+      (hcoherent n)).1
+    have := hq
+    exact SheafOfModules.isQuasicoherent_over _ U
+  obtain ⟨eProjection⟩ := nonempty_qcqs_derivedProjection_iso_universes
+    (U.ι ≫ f) _ hEU K (qc_single S F hF)
+  exact ⟨tensorIso eE (Iso.refl K) ≪≫ eProjection ≪≫ eTensor.symm⟩
 
 end AlgebraicGeometry.Scheme

@@ -16,36 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Boundedness leaves finitely many cohomological supports. Their proper union T is quasi-compact, and a quasi-compact open U contains T. The restricted map U -> S is qcqs; restriction preserves the coherent cohomology and supported-open direct-image comparison identifies Rf*E with the direct image from U. Auxiliary localizations on U are transported by localization equivalences to the fixed localizations on X and S.",
+   "text": "Boundedness leaves the integer interval [a,b]. Choose the closed proper support in each degree of that interval, enumerate it by Fin, and apply finite proper-support union. Its reduced closed subscheme is compact over the Noetherian base. Shrink its closed immersion to a compact open U containing the union; outside the interval all stalks vanish by functorial zero preservation.",
    "uses": [
-    "lem-pc-direct-image-qc-support-reduction"
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lemma-nagata-immersion-shrink-to-closed-exists"
    ],
    "elementary": false
   },
   {
-   "text": "Coherence on the locally Noetherian source implies quasi-coherence. Apply the quasi-coherent projection formula Tag 08EU on U. The restricted tensor input is still supported on T since E restricts to zero away from T, and restriction commutes with tensor and pullback. The supported-open comparison for that tensor input and composition comparison transport the resulting isomorphism from U to X.",
+   "text": "Construct a localization on U with morphisms in the ambient universe: its standard derived direct image is fully faithful, so its hom sets are small because D(X) has small hom sets. Shrink the standard localization using Mathlib hasLocalizationOfLocallySmall. Apply the supported-open tensor direct-image comparisons for E and K=F[0].",
+   "uses": [
+    "lem-pc-open-derived-category-small",
+    "lem-pc-supported-open-tensor-direct-image-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Local finite type over the Noetherian base makes X locally Noetherian. Coherent cohomology is quasi-coherent; exact restriction preserves this property. The degree-zero single object F[0] is quasi-coherent by its homology computation and zero homology in other degrees.",
    "uses": [
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-pc-projection-formula",
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-supported-open-pushforward",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compact open U is locally Noetherian, hence quasi-separated. Its map to S is qcqs. Apply the qcqs projection isomorphism on U, tensor the E comparison with the identity of F[0], and compose with the inverse tensor-input comparison.",
+   "uses": [
+    "lem-pc-qcqs-derived-projection-iso-universes"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-direct-image-qc-support-reduction",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "lem-pc-open-derived-category-small",
+  "lem-pc-supported-open-tensor-direct-image-comparisons",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-projection-formula",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-supported-open-pushforward",
-  "lem-pc-ringed-spaces-derived-direct-image-composition"
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-qcqs-derived-projection-iso-universes"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EV, support reduction and first displayed equality; Tag 08EU"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EV",
+  "place": "Support reduction and first displayed equality; Tag 08EU; U3 implements compact-support geometry and final isomorphism composition."
  },
  "mathlib_searches": [
   {
@@ -138,9 +152,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T082350-L-1637831",
+  "landing": "20261013T100151-L-2494144",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

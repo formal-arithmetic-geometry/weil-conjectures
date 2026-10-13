@@ -1,0 +1,174 @@
+{
+ "id": "lem-pc-qcqs-derived-projection-iso-universes",
+ "kind": "statement",
+ "title": "Objectwise qcqs derived projection isomorphism",
+ "statement": "Let f:X\\to Y be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme]. Choose derived categories with common localization universe w [def-pc-derived-category]. For E in D_QCoh(O_X) and K in D_QCoh(O_Y), there is an isomorphism Rf_*E\\otimes^L K \\cong Rf_*(E\\otimes^L Lf^*K) using the fixed tensor, pullback and direct image [def-pc-scheme-derived-tensor-structure, def-pc-derived-pullback, def-pc-derived-direct-image]. No global quasi-compactness, Noetherianity, coherence, boundedness or support condition on X, Y, E or K is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU, Lemma 36.22.1, applied to the fixed derived functors"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Form the canonical projection map using derived adjunction and the K-flat tensor comparison. Restriction of this canonical map is the canonical map for the restricted morphism. Detect its invertibility on an affine cover of Y.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-projection-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On Y=Spec A, identify D_QCoh(Y) with D(A). For fixed E the class of K making the map invertible is closed under coproducts because pullback and tensor preserve coproducts and qcqs direct image preserves quasi-coherent coproducts. The tensor input remains quasi-coherent. Exactness and the canonical shift compatibility make this class closed under distinguished triangles.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-derived-tensor-right-coproducts",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map is invertible for every shift of the structure sheaf by the adjunction triangle identity and tensor unit comparison. Generation of D(A) by shifts of A proves invertibility for all K. On an affine cover use the preceding detection and take asIso of the canonical map.",
+   "uses": [
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The entire construction uses the supplied localizations; alternatively carry out the K-flat and K-injective computations in standard localizations and transport by Localization.uniq. Their derived universal properties identify pullback and direct image, while K-flat tensor models identify tensor. This gives precisely the displayed objects.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-pc-derived-pullback-monoidal-model",
+  "lem-pc-projection-locality",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-derived-module-free-generation",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08EU, Lemma 36.22.1, applied to the fixed derived functors",
+  "note": "U3: comparison packaging of the cited source proof for fixed derived localizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for a bounded coherent complex with proper support and a quasi coherent module",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived comparison; reuse generic tensorIso and zero preservation in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorIso",
+   "results": "12 hits: CategoryTheory.MonoidalCategory.tensorIso, CategoryTheory.MonoidalCategory.tensorIso_def, CategoryTheory.MonoidalCategory.tensorIso_def', CategoryTheory.MonoidalCategory.tensorIso_hom, CategoryTheory.MonoidalCategory.tensorIso_inv, CategoryTheory.rightDistributor_assoc, CategoryTheory.leftDistributor_assoc, CategoryTheory.leftDistributor_rightDistributor_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived comparison; reuse generic tensorIso and zero preservation in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]rojection|[Pp]rojection.*derived",
+   "results": "2 hits: Mathlib/CategoryTheory/Monad/Algebra.lean, Mathlib/CategoryTheory/Monad/Algebra.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived comparison; reuse generic tensorIso and zero preservation in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image along an open immersion of a complex with closed support inside the open agrees with its restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Functor.obj",
+   "results": "12 hits: CategoryTheory.Functor.isZero, CategoryTheory.Limits.IsZero.obj, CategoryTheory.Functor.isZero_iff, CategoryTheory.Limits.IsZero.of_full_of_faithful_of_isZero, CategoryTheory.Functor.zero_obj, CategoryTheory.Limits.IsZero.map, CategoryTheory.Functor.map_isZero, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived comparison; reuse generic tensorIso and zero preservation in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|supported.*open.*derived",
+   "results": "3 hits: Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived comparison; reuse generic tensorIso and zero preservation in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportDerivedProjectionFormula",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EU, Lemma 36.22.1, applied to the fixed derived functors",
+   "via": [
+    "lem-pc-proper-support-derived-projection-formula",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCqsDerivedProjectionIsoUniverses.lean",
+  "declaration": "AlgebraicGeometry.nonempty_qcqs_derivedProjection_iso_universes",
+  "statement": "theorem nonempty_qcqs_derivedProjection_iso_universes\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)\n    (K : schemeDerivedCategory Y) (hK : schemeDerivedQCohProperty Y K) :\n    Nonempty (((schemeDerivedDirectImage f).obj E) ⊗ K ≅\n      (schemeDerivedDirectImage f).obj (E ⊗ (derivedPullback f).obj K))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100151-L-2494144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100151-L-2494144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
