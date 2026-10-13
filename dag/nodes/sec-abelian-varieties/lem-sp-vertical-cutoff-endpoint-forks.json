@@ -1,0 +1,250 @@
+{
+ "id": "lem-sp-vertical-cutoff-endpoint-forks",
+ "kind": "statement",
+ "title": "Endpoint kernel and cokernel forks for the strict vertical cutoff comparison",
+ "statement": "Let $C$ be abelian, $L$ a cochain complex indexed by $\\mathbb N$, and $0<a<b$ integers. Define $T_c$ by [lem-sp-double-complex-vertical-tower-maps] and $W[a,b)$ by [def-sp-double-complex-vertical-window]. Let $g:T_a(L)\\to T_b(L)$ satisfy $g\\iota_b=\\iota_a$. Put $m=a.\\mathrm{toNat}-1$, $n=a.\\mathrm{toNat}$, $B=T_b(L)$, $E=L$ extended by zero to $\\mathbb Z$, and $r:T_b(L)\\to W[a,b)(L)$ equal to the restriction of $\\tau_{\\le b-1}(E\\to\\tau_{\\ge a}E)$. Then $g^m$ exhibits $T_a(L)^m$ as the kernel of $d_B^{m,n}$, and $r^n$ exhibits $W[a,b)(L)^n$ as the cokernel of $d_B^{m,n}$. In particular both required zero-composite equations hold. No assertion about $\\ker q$ is assumed or included.",
+ "stmt_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0118",
+  "place": "homology-section-truncations, cochain canonical truncations (3) and (4), specialized to the boundary of the upper cutoff."
+ },
+ "proof": [
+  {
+   "text": "Use the cochain truncation formulas of Tag 0118. Write E for L extended by zero and B for its upper cutoff at b-1. In degree a-1, the inclusion B -> E is invertible because a-1 < b-1; in degree a it is monomorphic. The lower cutoff at a-1 identifies its boundary object with cycles of E at a-1, hence with the kernel of E.d(a-1,a). The factorization equation hg identifies g with that cycles inclusion into B. Transport the cycles kernel fork through the degree-(a-1) isomorphism; postcomposition of B.d with the monomorphic inclusion at a detects its zero composites, giving the first kernel fork.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If a < b-1, both B and E agree at a. The lower projection at a is E.pOpcycles a, which is the cokernel of E.d(a-1,a). Upper truncation does not change this coordinate, so transport E.opcyclesIsCokernel along the truncation coordinate isomorphisms. If a=b-1, B at a is E.cycles a. In this case the window coordinate is E.homology a: taking cycles of the lower truncation at a computes cycles modulo the preceding image. The map is E.homologyπ a, which is the cokernel of E.toCycles(a-1,a). The differential of B into its cycles boundary is exactly that toCycles map after the invertible degree-(a-1) inclusion. Transport E.homologyIsCokernel to obtain the second fork.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The component zero-composite equations follow from the two forks, or from the chain-map identities and the zero degree-a term of the lower cutoff and zero degree-(a-1) term of the window. Since a>0, restriction keeps both integer boundary degrees, which become a.toNat-1 and a.toNat. This includes a=1, adjacent endpoints b=a+1, the zero complex, and zero differentials.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0118",
+  "place": "homology-section-truncations, cochain canonical truncations (3) and (4), specialized to the boundary of the upper cutoff."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-13T04:01:15Z",
+   "tool": "leansearch",
+   "query": "Smart upper truncation boundary inclusion is a kernel and the lower truncation boundary projection is a cokernel",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-13T04:01:16Z",
+   "tool": "loogle",
+   "query": "\"cyclesIsKernel\"",
+   "sub": "",
+   "ok": true,
+   "n_hits": 2,
+   "note": "",
+   "top": [
+    "CategoryTheory.ShortComplex.cyclesIsKernel",
+    "HomologicalComplex.cyclesIsKernel"
+   ],
+   "digest": "7e88a797ad62f7bc",
+   "date": "2026-10-13",
+   "results": [
+    "CategoryTheory.ShortComplex.cyclesIsKernel",
+    "HomologicalComplex.cyclesIsKernel"
+   ],
+   "verdict": "No exact cutoff endpoint theorem; cyclesIsKernel, opcyclesIsCokernel and homologyIsCokernel give the universal properties to transport."
+  },
+  {
+   "t": "2026-10-13T04:01:16Z",
+   "tool": "grep",
+   "query": "cyclesIsKernel|opcyclesIsCokernel|homologyIsCokernel",
+   "sub": "Algebra/Homology",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/HomologySequence.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean"
+   ],
+   "digest": "6e32ccdc09f0ab58",
+   "date": "2026-10-13",
+   "results": [
+    "Mathlib/Algebra/Homology/HomologySequence.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean"
+   ],
+   "verdict": "No exact cutoff endpoint theorem; cyclesIsKernel, opcyclesIsCokernel and homologyIsCokernel give the universal properties to transport."
+  },
+  {
+   "t": "2026-10-13T04:10:47Z",
+   "tool": "leanfinder",
+   "query": "Universal properties of smart truncation at its boundary: kernel of outgoing differential, cokernel of incoming differential, adjacent upper and lower truncations",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex.shortComplexTruncLE",
+    "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+    "ChainComplex.truncateTo",
+    "HomologicalComplex.truncGE'",
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+    "HomologicalComplex.πTruncGE",
+    "HomologicalComplex.shortComplexTruncLE_f",
+    "HomologicalComplex.shortComplexTruncLE_X₁"
+   ],
+   "digest": "7a9d629a2f5cf12a",
+   "date": "2026-10-13",
+   "results": [
+    "HomologicalComplex.shortComplexTruncLE",
+    "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+    "ChainComplex.truncateTo",
+    "HomologicalComplex.truncGE'",
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+    "HomologicalComplex.πTruncGE",
+    "HomologicalComplex.shortComplexTruncLE_f",
+    "HomologicalComplex.shortComplexTruncLE_X₁"
+   ],
+   "verdict": "Second reading: no exact endpoint theorem or shorter complete proof found; these are truncation and complementary-truncation APIs requiring coordinate transport."
+  },
+  {
+   "t": "2026-10-13T04:11:07Z",
+   "tool": "loogle",
+   "query": "\"truncLE\", \"IsLimit\"",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": [],
+   "verdict": "Second reading: no exact endpoint theorem or shorter complete proof found; these are truncation and complementary-truncation APIs requiring coordinate transport."
+  },
+  {
+   "t": "2026-10-13T04:11:07Z",
+   "tool": "grep",
+   "query": "truncLE.*[Kk]ernel|truncGE.*[Cc]okernel|[Kk]ernel.*truncLE|[Cc]okernel.*truncGE",
+   "sub": "",
+   "ok": true,
+   "n_hits": 11,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean",
+    "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean"
+   ],
+   "digest": "a3e4404d5ed7f763",
+   "date": "2026-10-13",
+   "results": [
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean",
+    "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean"
+   ],
+   "verdict": "Second reading: no exact endpoint theorem or shorter complete proof found; these are truncation and complementary-truncation APIs requiring coordinate transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.VerticalCutoffComparisonKernelTwoTerm",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-double-complex-spectral-sequences",
+   "place": "Proof steps 1 and 2: boundary coordinates of the strict smart-cutoff quotient comparison.",
+   "via": [
+    "lem-sp-vertical-cutoff-comparison-kernel-two-term",
+    "lem-sp-vertical-cutoff-quotient-comparison",
+    "lem-sp-vertical-cutoff-column-quasiiso",
+    "lem-sp-vertical-cutoff-column-quasiiso-strict",
+    "lem-sp-vertical-cutoff-column-quasiiso-strict-positive"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.VerticalCutoffEndpointForks",
+  "file": "lean/Sheaf/Algebra/Homology/VerticalCutoffEndpointForks.lean",
+  "declaration": "HomologicalComplex₂.verticalCutoff_endpoint_forks",
+  "statement": "theorem verticalCutoff_endpoint_forks\n    (L : CochainComplex C ℕ) (a b : ℤ) (hab : a < b) (ha : 0 < a)\n    (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)\n    (hg : g ≫ (verticalCutoffι b).app L = (verticalCutoffι a).app L) :\n    (∃ h : g.f (a.toNat - 1) ≫\n        ((verticalCutoff b).obj L).d (a.toNat - 1) a.toNat = 0,\n      Nonempty (IsLimit (KernelFork.ofι (g.f (a.toNat - 1)) h))) ∧\n    (∃ h : ((verticalCutoff b).obj L).d (a.toNat - 1) a.toNat ≫\n        (HomologicalComplex.restrictionMap\n          (CochainComplex.truncLEMap\n            (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n          ComplexShape.embeddingUpNat).f a.toNat = 0,\n      Nonempty (IsColimit (CokernelCofork.ofπ\n        ((HomologicalComplex.restrictionMap\n          (CochainComplex.truncLEMap\n            (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n          ComplexShape.embeddingUpNat).f a.toNat) h)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T054241-L-450556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T054241-L-450556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

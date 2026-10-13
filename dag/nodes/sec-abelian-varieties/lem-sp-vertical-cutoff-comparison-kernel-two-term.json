@@ -13,24 +13,20 @@
  },
  "proof": [
   {
-   "text": "Put E=L extended by zero and I=image(E.d(a-1,a)). Monicity of the upper cutoff inclusion and compatibility determine g as the canonical nested inclusion. Evaluate its cokernel. It is zero below a-1, is I in degree a-1, and agrees with the upper cutoff in degree a and above. Evaluation preserves cokernels in the abelian category of complexes.",
+   "text": "Prove vanishing outside the endpoints directly. Below a-1, the two cutoff inclusions into the reextended column are invertible, so hg makes g degreewise invertible and its cokernel is zero. Above a, the lower cutoff source is zero, hence the cokernel projection is invertible. The canonical comparison is invertible there: below the upper boundary use inclusion naturality and the invertible lower projection, at the upper boundary use the cycles map of an invertible middle component and monomorphic next component, and beyond it both objects are zero. Thus q is invertible and its evaluated kernel is zero. Evaluation preserves kernels and cokernels. Reuse the proved private inclusion_f_isIso from VerticalCutoffComparisonEpi, pi_f_above from LowerTruncationTransitionKernel, and truncLEXIsoCycles_naturality from UpperTruncationStepSES through proof-only import all; the latter reuses truncLEXIsoCycles_comp_iCycles.",
    "uses": [
     "def-sp-double-complex-vertical-window",
-    "lem-sp-double-complex-vertical-tower-maps"
+    "lem-sp-double-complex-vertical-tower-maps",
+    "lem-sp-vertical-cutoff-comparison-epi",
+    "lem-pc-lower-truncation-transition-kernel",
+    "lem-weil-pbc-truncation-step-ses"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate the projection equation. At a-1, q maps to zero, so its kernel is I. At a it is the opcycles quotient if a<b-1, or the cycles-to-homology quotient if a=b-1, each with kernel I. Above a the comparison is invertible until the upper cutoff, and afterwards its source and target are zero. Evaluation preserves kernels; thus all other kernel terms vanish.",
+   "text": "Apply the boundary kernel and cokernel forks. The degree-a source of g and degree-(a-1) target of q vanish by strict support. Thus the cokernel projection at a and kernel inclusion at a-1 are invertible. Transport the degree-(a-1) cokernel of g to the coimage of the upper cutoff differential, and the degree-a kernel of q to its image, using the two forks. The chain-map equations for the cokernel projection and kernel inclusion identify the remaining kernel differential with the coimage-to-image comparison. That comparison is invertible in an abelian category; cancel the conjugating isomorphisms. Combine this with the already proved vanishing statement.",
    "uses": [
-    "def-sp-double-complex-vertical-window",
-    "lem-sp-double-complex-vertical-tower-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The chain map identities of the cokernel projection and kernel inclusion identify the remaining kernel differential with the identity on I under the two image identifications. In an abelian category coimage-to-image is invertible. Since a>0, both integer degrees survive restriction and equal a.toNat-1 and a.toNat; this also handles a=1, b=a+1 and I=0.",
-   "uses": [
+    "lem-sp-vertical-cutoff-endpoint-forks",
     "def-sp-double-complex-vertical-window",
     "lem-sp-double-complex-vertical-tower-maps"
    ],
@@ -39,12 +35,16 @@
  ],
  "proof_deps": [
   "def-sp-double-complex-vertical-window",
-  "lem-sp-double-complex-vertical-tower-maps"
+  "lem-sp-double-complex-vertical-tower-maps",
+  "lem-sp-vertical-cutoff-endpoint-forks",
+  "lem-sp-vertical-cutoff-comparison-epi",
+  "lem-pc-lower-truncation-transition-kernel",
+  "lem-weil-pbc-truncation-step-ses"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0118",
-  "place": "Canonical truncations; C2 formal epimorphy proof and two-term kernel specialization of the existing plan."
+  "place": "Canonical truncations of Tag 0118; U3 proof of off-boundary vanishing and abstract coimage/image endpoint argument, reduced only to the boundary forks. Repair: reuse existing truncation coordinate lemmas by import all instead of duplicate local proofs."
  },
  "mathlib_searches": [
   {
@@ -170,9 +170,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T025258-L-3421714",
+  "landing": "20261013T054241-L-450556",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
