@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Ideal.Cotangent
+import Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 
 /-! # Normalized affine coordinates for conormal sections
 
@@ -36,26 +39,18 @@ Lemma 01JU (1); Morphisms, Lemma 01R3 (2).
 (blueprint: lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates).
 
 Proof:
-1. Write A = Gamma(X', U'), B = Gamma(X, U), J = i'.ker.ideal U'. The preimages
-V' = i' inverse image U' and V = i inverse image U are affine, because both immersions
-are affine. Their section maps from A and B are surjective. The canonical isomorphism
-from the given limit cone to the chosen pullback, kernel invariance under isomorphism,
-and ker_fst_of_isClosedImmersion give i.ker = i'.ker.comap g. The affine ideal-comap
-formula identifies i.ker.ideal U with JB. The first isomorphism theorem identifies
-the chart rings with A/J and B/JB; the square equality makes these identifications
-compatible with f and g. No restriction of a fibre-product square is needed.
-2. Affine conormal sections identify the conormal on V' with J/J^2 as an A/J-module.
-The normalized equivalence sends a mod J^2 to the adjunction unit of any ideal section
-representing a. Affine pullback sections for f identify the source on V with
-(B/JB) tensor over A/J with J/J^2, sending a pure tensor to the restricted f-unit,
-multiplied by the scalar in B/JB.
-3. J annihilates J/J^2. The tensor-over-quotient equivalence, followed by tensor
-cancellation and a tensor swap, identifies this source with B tensor over A with J/J^2.
-Its inverse sends b tensor class(a) to the restriction of the successive units of a,
-multiplied by the image of b under i.app. The pushforward composition isomorphism
-identifies successive units with the composite adjunction unit. Transport along the
-square equality h supplies pushforwardCongr h.symm. Naturality under restriction gives
-exactly the displayed normalization. All maps are additive isomorphisms. -/
+1. The tensor-coordinate lemma identifies the ambient tensor B tensor_A J/J² with
+   the tensor of conormal sections over the affine source chart rings. Its formula
+   sends b tensor class(a) to unit(s') tensor i.app(b).
+2. The conormal is quasi-coherent by affine_conormal_sections. Apply the affine
+   pullback section comparison to f on V' = i' inverse image U' and V = i inverse
+   image U, and turn its bijective linear map into an additive equivalence d.
+   Compose the tensor-coordinate equivalence with d and invert to obtain eS.
+3. The pure-tensor formulas of both equivalences give the successive units and
+   scalar i.app(b). Expand the pushforward composition and equality-transport
+   components. The restriction followed by equality transport equals the direct
+   restriction: use the presheaf composition law and uniqueness of arrows in the
+   opposite category of opens. This proves the displayed normalization. -/
 theorem closedImmersion_conormal_affine_source_coordinates
     {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']
@@ -76,6 +71,38 @@ theorem closedImmersion_conormal_affine_source_coordinates
                 (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app
                   ((tensorPullback i').obj i'.ker.toModules))) ≫
               (pushforwardComp f i').hom.app S ≫
-              (pushforwardCongr h.symm).hom.app S).app U'.1 s')) := by sorry
+              (pushforwardCongr h.symm).hom.app S).app U'.1 s')) := by
+  classical
+  dsimp only
+  let : Algebra Γ(X', U'.1) Γ(X, U.1) := (g.appLE U'.1 U.1 H).hom.toAlgebra
+  let V' : Z'.affineOpens := ⟨i' ⁻¹ᵁ U'.1, U'.2.preimage i'⟩
+  let V : Z.affineOpens := ⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩
+  have K : V.1 ≤ f ⁻¹ᵁ V'.1 := by
+    change i ⁻¹ᵁ U.1 ≤ f ⁻¹ᵁ i' ⁻¹ᵁ U'.1
+    rw [← Scheme.Hom.comp_preimage, ← h, Scheme.Hom.comp_preimage]
+    exact i.preimage_mono H
+  let : Algebra Γ(Z', V'.1) Γ(Z, V.1) := (f.appLE V'.1 V.1 K).hom.toAlgebra
+  let : ∀ G : Z'.Modules, Module Γ(Z', V'.1) Γ((tensorPullback f).obj G, V.1) :=
+    fun G ↦ Module.compHom _ (f.appLE V'.1 V.1 K).hom
+  let T := (tensorPullback i').obj i'.ker.toModules
+  let S := (tensorPullback f).obj T
+  obtain ⟨e, he⟩ := closedImmersion_conormal_affine_tensor_coordinates
+    i i' g f h hc U U' H
+  obtain ⟨c, hc, _, hp, _⟩ := exists_tensorPullback_affine_sections f V' V K
+  let d := (LinearEquiv.ofBijective (c T (affine_conormal_sections.{u, u} i').1)
+    (hc T (affine_conormal_sections.{u, u} i').1)).toAddEquiv
+  refine ⟨(e.trans d).symm, ?_⟩
+  intro b a s' hs'
+  change d (e (b ⊗ₜ[Γ(X', U'.1)] (i'.ker.ideal U').toCotangent a)) = _
+  rw [he b a s' hs']
+  rw [show d _ = _ from hp T (affine_conormal_sections.{u, u} i').1 _ _]
+  congr 1
+  simp only [Hom.comp_app, pushforward_map_app, pushforwardComp_hom_app_app,
+    pushforwardCongr_hom_app_app, ConcreteCategory.comp_apply]
+  change S.val.map (homOfLE K).op _ =
+    S.val.map (homOfLE (i.preimage_mono H)).op (S.val.map _ _)
+  rw [← PresheafOfModules.map_comp_apply]
+  apply congrArg (fun k ↦ S.val.map k _)
+  exact Subsingleton.elim _ _
 
 end AlgebraicGeometry.Scheme.Modules

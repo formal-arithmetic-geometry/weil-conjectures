@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-conormal-affine-tensor-coordinates",
+ "kind": "statement",
+ "title": "Ambient tensor coordinates before the second conormal pullback",
+ "statement": "Let i:Z→X and i':Z'→X' be closed immersions [def-sbc-closed-immersion-ideal-sheaf] in a cartesian square [def-pc-fibre-product] with maps g:X→X' and f:Z→Z' and equality h:i≫g=f≫i'. Fix affine opens U⊆X and U'⊆X' with U⊆g⁻¹U'. Put A=Γ(X',U'), B=Γ(X,U), J=i'.ker.ideal U', V'=i'⁻¹U', V=i⁻¹U, C=Γ(Z',V'), D=Γ(Z,V), and N=Γ((tensorPullback i').obj i'.ker.toModules,V') [def-pc-module-pullback]. The algebra structures are induced by g.appLE and f.appLE; the inclusion V⊆f⁻¹V' follows from h. There exists an additive equivalence e:B⊗_A J.Cotangent ≃ N⊗_C D. For b∈B, a∈J and an ideal section s' over U' with i'.ker.toModulesι(s')=a, it sends b⊗class(a) to η_i'(s')⊗i.app(U)(b), where η_i' is the chosen normalized tensor-pullback adjunction unit. This equivalence concerns only tensor modules, not sections of the second pullback f* N.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0473 (affine tensor source), 01R3 (2) (conormal sections), 01JU (1) (base-change ideal). Read the cited Stacks web pages on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put A=Gamma(X',U'), B=Gamma(X,U), J=i'.ker.ideal U'. The inverse-image opens V' and V are affine and the immersion section maps are surjective, by [lem-weil-pbc-closed-immersion-affine-cover-criterion]. The given cartesian cone is isomorphic to the chosen pullback. Kernel invariance under that isomorphism and Mathlib IdealSheafData.ker_fst_of_isClosedImmersion identify i.ker with i'.ker.comap g. Apply [lem-pc-ideal-sheaf-comap-affine-extension] to get i.ker.ideal U=JB. The first isomorphism theorem identifies the section rings C=Gamma(Z',V') and D=Gamma(Z,V) with A/J and B/JB; commutativity supplies the compatible induced ring map C to D.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-pc-ideal-sheaf-comap-affine-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine_conormal_sections to i', U', R=A and r=id. The ideal J is ker(i'.app U'), so it gives an A-linear equivalence J.Cotangent≃N, normalized on ideal representatives. Both modules carry the quotient C=A/J action: the action on N restricts along i'.app and J annihilates J.Cotangent. Surjectivity of A→C upgrades the equivalence to C-linearity. The square equality makes C→D compatible with A→B→D.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the quotient scalar ring C=A/J to identify N⊗_C D with N⊗_A D, using annihilation of J on N. Transport the conormal equivalence and swap factors to identify this with D⊗_A J.Cotangent. Since D=B/JB, base-change tensor cancellation and the quotient tensor equivalence identify the latter with (B⊗_A J.Cotangent)/(JB•⊤). The denominator is zero: for a∈J, g(a)•(b⊗m)=b⊗(a•m)=0; tensor induction extends this to all tensors, and ideal-map generation extends it to JB. Remove the zero quotient and invert the composite to get e.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Trace the canonical pure-tensor formulas of scalar cancellation, quotient tensor equivalence and tensor swap. They send b⊗class(a) to class(a)⊗i.app(b). The normalized conormal equivalence sends class(a) to the i' adjunction unit on s', giving exactly the required equation. No unit for f or second sheaf pullback is used here. For J=0 the two tensor modules vanish; for J=A the source chart ring C and conormal vanish. Zero rings give the same zero-module calculation, and no flatness was used.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "E4 stage 3 worker, expanding the algebra in the cited affine reductions",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0473 (affine tensor source), 01R3 (2) (conormal sections), 01JU (1) (base-change ideal). Read the cited Stacks web pages on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of a quotient algebra with an ideal is the base change of the cotangent quotient in a cartesian closed immersion square",
+   "results": "Algebra.Extension.tensorCotangent, Algebra.Extension.tensorCotangentInvFun, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.contangentEquiv_tmul, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.cotangentComplexBaseChange",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized scheme tensor-coordinate theorem; algebra ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.quotTensorEquivQuotSMul",
+   "results": "TensorProduct.quotTensorEquivQuotSMul, TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, TensorProduct.quotTensorEquivQuotSMul_mk_tmul, TensorProduct.quotTensorEquivQuotSMul_symm_mk, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized scheme tensor-coordinate theorem; algebra ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|quotTensorEquivQuotSMul",
+   "results": "Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/Finiteness/NilpotentKer.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Ideal/Pure.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized scheme tensor-coordinate theorem; algebra ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of closed immersions the ambient tensor of I modulo I squared identifies with the tensor of conormal sections over affine source rings",
+   "results": "Algebra.Extension.tensorCotangent, KaehlerDifferential.D_tensorProductTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, Algebra.Extension.contangentEquiv_tmul, KaehlerDifferential.kerCotangentToTensor_toCotangent, Algebra.Extension.tensorCotangentInvFun, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized scheme tensor-coordinate theorem; algebra ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.quotTensorEquivQuotSMul",
+   "results": "TensorProduct.quotTensorEquivQuotSMul, TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul, TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, TensorProduct.quotTensorEquivQuotSMul_mk_tmul, TensorProduct.quotTensorEquivQuotSMul_symm_mk, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized scheme tensor-coordinate theorem; algebra ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|quotTensorEquivQuotSMul",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized scheme tensor-coordinate theorem; algebra ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor coordinates of conormal sections on a cartesian square of affine closed immersions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineSourceCoordinates",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine tensor source identification inside the conormal comparison supporting finite-etale lifting; original source-coordinate proof steps 1 and 3 and the conormal portion of step 2.",
+   "via": [
+    "lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates",
+    "lem-weil-pbc-closed-immersion-conormal-affine-base-change-comparison",
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "lem-weil-pbc-universal-thickening-flat-base-change",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionConormalAffineTensorCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_affine_tensor_coordinates",
+  "statement": "theorem closedImmersion_conormal_affine_tensor_coordinates\n    {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')\n    [IsClosedImmersion i] [IsClosedImmersion i']\n    (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')\n    (hc : IsLimit (PullbackCone.mk i f h))\n    (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1) :\n    letI : Algebra Γ(X', U'.1) Γ(X, U.1) := (g.appLE U'.1 U.1 H).hom.toAlgebra\n    let V' : Z'.affineOpens := ⟨i' ⁻¹ᵁ U'.1, U'.2.preimage i'⟩\n    let V : Z.affineOpens := ⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩\n    let K : V.1 ≤ f ⁻¹ᵁ V'.1 := by\n      change i ⁻¹ᵁ U.1 ≤ f ⁻¹ᵁ i' ⁻¹ᵁ U'.1\n      rw [← Scheme.Hom.comp_preimage, ← h, Scheme.Hom.comp_preimage]\n      exact i.preimage_mono H\n    letI : Algebra Γ(Z', V'.1) Γ(Z, V.1) := (f.appLE V'.1 V.1 K).hom.toAlgebra\n    ∃ e : (Γ(X, U.1) ⊗[Γ(X', U'.1)] (i'.ker.ideal U').Cotangent) ≃+\n        (Γ((tensorPullback i').obj i'.ker.toModules, V'.1) ⊗[Γ(Z', V'.1)] Γ(Z, V.1)),\n      ∀ (b : Γ(X, U.1)) (a : i'.ker.ideal U') (s' : Γ(i'.ker.toModules, U'.1)),\n        i'.ker.toModulesι.app U'.1 s' = (a : Γ(X', U'.1)) →\n        e (b ⊗ₜ[Γ(X', U'.1)] (i'.ker.ideal U').toCotangent a) =\n          (show Γ((tensorPullback i').obj i'.ker.toModules, V'.1) from\n            ((Classical.choose (exists_tensorPullbackAdjunction i')).unit.app\n              i'.ker.toModules).app U'.1 s') ⊗ₜ[Γ(Z', V'.1)] i.app U.1 b",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-affine-conormal-sections",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T072346-L-1117949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T072346-L-1117949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
