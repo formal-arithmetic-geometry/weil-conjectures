@@ -11,18 +11,91 @@
  },
  "kind": "statement",
  "title": "Projection-formula coherence for a square of ringed topoi",
- "statement": "Let $(\\mathcal X,\\mathcal O_X)$, $(\\mathcal Y,\\mathcal O_Y)$, $(\\mathcal X',\\mathcal O_{X'})$, and $(\\mathcal Y',\\mathcal O_{Y'})$ be ringed topoi, with morphisms $f:\\mathcal X\\to\\mathcal Y$, $f':\\mathcal X'\\to\\mathcal Y'$, $g:\\mathcal Y'\\to\\mathcal Y$, $g':\\mathcal X'\\to\\mathcal X$ and a specified commutation isomorphism $f g'\\cong g f'$. Use derived module pullback, direct image, tensor, and their adjunctions as in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [def-weil-pbc-projection-formula-map]. For $E\\in D(\\mathcal O_X)$ and $Q\\in D(\\mathcal O_Y)$, let $\\pi_f$ be the projection-formula map (the mate of counit tensor identity), and let $\\operatorname{Ex}$ be the exchange map (the mate of the commutation isomorphism). The two composites\n$$\nLg^*(Rf_*E\\otimes^L Q)\\xrightarrow{Lg^*\\pi_f} Lg^*Rf_*(E\\otimes^L Lf^*Q)\\xrightarrow{\\operatorname{Ex}} Rf'_*L(g')^*(E\\otimes^L Lf^*Q)\n$$\nand\n$$\nLg^*(Rf_*E\\otimes^L Q)\\cong Lg^*Rf_*E\\otimes^L Lg^*Q\\xrightarrow{\\operatorname{Ex}\\otimes1} Rf'_*L(g')^*E\\otimes^L Lg^*Q\\xrightarrow{\\pi_{f'}}Rf'_*(L(g')^*E\\otimes^L L(f')^*Lg^*Q)\n$$\nare equal after the canonical derived pullback tensor and composition identifications of the targets. This holds without a cartesianness assumption on the square and is natural in $E,Q$.",
+ "statement": "Let $(\\mathcal X,\\mathcal O_X)$, $(\\mathcal Y,\\mathcal O_Y)$, $(\\mathcal X',\\mathcal O_{X'})$, and $(\\mathcal Y',\\mathcal O_{Y'})$ be ringed topoi, with morphisms $f:\\mathcal X\\to\\mathcal Y$, $f':\\mathcal X'\\to\\mathcal Y'$, $g:\\mathcal Y'\\to\\mathcal Y$, $g':\\mathcal X'\\to\\mathcal X$ and a specified commutation isomorphism $f g'\\cong g f'$ of ringed-topos morphisms (compatible with the structure-ring maps). Use sites small in the chosen universe, their unbounded derived categories of module sheaves, the canonical derived module pullback and tensor of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and derived direct images with their canonical adjunctions $Lu^*\\dashv Ru_*$ for the four edges. Let $\\theta: L(f')^*Lg^*\\xrightarrow{\\sim}L(g')^*Lf^*$ be the pullback comparison induced by this ringed commutation isomorphism. Define $\\pi_u$ to be the adjunct of $(\\varepsilon_{u,E}\\otimes1)\\circ t_u$, where $t_u:Lu^*(V\\otimes^L W)\\xrightarrow{\\sim}Lu^*V\\otimes^LLu^*W$ is the canonical tensor comparison; define $\\operatorname{Ex}$ to be the mate [def-weil-pbc-adjunction-mate] of $\\theta$. For $E\\in D(\\mathcal O_X)$ and $Q\\in D(\\mathcal O_Y)$, let $\\pi_f$ be the projection-formula map (the mate of counit tensor identity), and let $\\operatorname{Ex}$ be the exchange map (the mate of the commutation isomorphism). The two composites\n$$\nLg^*(Rf_*E\\otimes^L Q)\\xrightarrow{Lg^*\\pi_f} Lg^*Rf_*(E\\otimes^L Lf^*Q)\\xrightarrow{\\operatorname{Ex}} Rf'_*L(g')^*(E\\otimes^L Lf^*Q)\n$$\nand\n$$\nLg^*(Rf_*E\\otimes^L Q)\\cong Lg^*Rf_*E\\otimes^L Lg^*Q\\xrightarrow{\\operatorname{Ex}\\otimes1} Rf'_*L(g')^*E\\otimes^L Lg^*Q\\xrightarrow{\\pi_{f'}}Rf'_*(L(g')^*E\\otimes^L L(f')^*Lg^*Q)\n$$\nare equal after the canonical derived pullback tensor and composition identifications of the targets. This holds without a cartesianness assumption on the square and is natural in $E,Q$.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0E48, remark-compatible-with-diagram, with Tag 07A4, lemma-pullback-tensor-product"
  },
  "stmt_deps": [
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-projection-formula-map"
+  "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=Lf^*$, $R=Rf_*$, $B=Lg^*$, $C=L(f')^*$, $S=Rf'_*$, and $H=L(g')^*$. Write $t_U:U(V\\otimes W)\\to UV\\otimes UW$ for the canonical comparisons; all tensors in this proof are derived. Construct the natural isomorphism $\\theta:CB\\to HF$ on K-flat representatives with flat terms: choose such a representative by [lem-pc-kflat-resolution]; successive ordinary module pullbacks compute successive derived pullbacks by [lem-weil-pbc-ringed-topoi-derived-pullback] and remain K-flat with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Ordinary composition is scalar-extension associativity: $S_2\\otimes_{u^{-1}S_1}u^{-1}(S_1\\otimes_{v^{-1}R}v^{-1}P)\\cong S_2\\otimes_{(vu)^{-1}R}(vu)^{-1}P$, sending $s\\otimes(a\\otimes p)$ to $s\\,u^{-1}(a)\\otimes p$, with inverse $s\\otimes p\\mapsto s\\otimes(1\\otimes p)$. Apply this to the two composites and the given ringed commutation isomorphism. The resulting complex isomorphisms are natural, preserve degrees and commute with differentials. Localization on the resolving subcategory is equivalent to the derived category by [lem-weil-pbc-site-derived-tensor-descent], so these isomorphisms define $\\theta$ for every derived object, independently of the chosen representative. This is the explicit representative construction of Tag 0D6D; it requires no coefficient-ring isomorphism on the individual edges.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D, lemma-derived-pullback-composition; 07A4, lemma-pullback-tensor-product; 0G7E, lemma-pullback-K-flat"
+   }
+  },
+  {
+   "text": "The comparison $\\theta$ respects tensor in the following precise form, for $V,W\\in D(\\mathcal O_Y)$:\n$$t_H\\,H(t_F)\\,\\theta_{V\\otimes W}=(\\theta_V\\otimes\\theta_W)\\,t_C\\,C(t_B).$$\nTo check this, use flat K-flat representatives for $V,W$. The canonical module comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] is the balanced map $s\\otimes(v\\otimes w)\\mapsto(s\\otimes v)\\otimes(1\\otimes w)$; its inverse multiplies the two scalars. The composition comparison of Step 1 multiplies nested scalars. Thus splitting a tensor before or after composing pullbacks gives the same map: each outer scalar goes to the first factor, each second-factor scalar is moved across the balanced tensor relation, and both routes multiply the same scalar images. The ringed commutation isomorphism identifies those scalar images, and its inverse-image comparison sends a pair of sections to the pair of their images. Hence both routes agree on pure tensors and, by additivity and the balanced relations, on module sheaves. In the total tensor complexes they preserve the bidegrees, so no permutation or extra sign occurs. The derived comparison is the class of precisely these module comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; natural transformations extend uniquely in the two K-flat variables by [lem-weil-pbc-site-derived-tensor-descent]. This proves the displayed equality on arbitrary $V,W$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, lemma-pullback-tensor-product (termwise comparison); 0D6D, lemma-derived-pullback-composition; 0E48 omitted verification"
+   }
+  },
+  {
+   "text": "Let $\\varepsilon:FR\\to1$ and $\\varepsilon':CS\\to1$ be the counits of the given adjunctions. By the definition of mate [def-weil-pbc-adjunction-mate], for $E\\in D(\\mathcal O_X)$ the transpose of $\\operatorname{Ex}_E:BRE\\to SHE$ is\n$$\\delta_E:=\\varepsilon'_{HE}\\,C(\\operatorname{Ex}_E)=H(\\varepsilon_E)\\,\\theta_{RE}:CBRE\\to HE.$$\nBy the definition of the projection map in the statement,\n$$\\varepsilon_{E\\otimes FQ}\\,F(\\pi_{f,E,Q})=(\\varepsilon_E\\otimes1)\\,t_F.$$\nThese identities follow from the adjunction triangle identity: for any $a:LA\\to D$, its adjunct is $R(a)\\eta_A$, and $\\varepsilon_D L(R(a)\\eta_A)=a\\varepsilon_{LA}L\\eta_A=a$. Thus equality of the desired maps can be tested by their transposes under $C\\dashv S$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram (verification omitted); Tags 07A4, lemma-pullback-tensor-product, and 07A7, remark-base-change"
+   }
+  },
+  {
+   "text": "Write $U=RE$ and $N=E\\otimes FQ$. Identify the final object on $X'$ with $HE\\otimes CBQ$ using $t_H$ and $1\\otimes\\theta_Q^{-1}$. The transpose of the first composite is\n$$a=(1\\otimes\\theta_Q^{-1})\\,t_H\\,H(\\varepsilon_N)\\,\\theta_{RN}\\,CB(\\pi_{f,E,Q}).$$\nNaturality of $\\theta$ for $\\pi_{f,E,Q}:U\\otimes Q\\to RN$ replaces the last two factors by $HF(\\pi_{f,E,Q})\\theta_{U\\otimes Q}$. The projection transpose identity of Step 3 and naturality of $t_H$ then give\n$$a=(H\\varepsilon_E\\otimes\\theta_Q^{-1})\\,t_H\\,H(t_F)\\,\\theta_{U\\otimes Q}.$$\nEvery factor here has source $CB(U\\otimes Q)$ and final target $HE\\otimes CBQ$; no projection-formula isomorphism is assumed.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram (verification omitted); Tags 07A4, lemma-pullback-tensor-product, and 07A7, remark-base-change"
+   }
+  },
+  {
+   "text": "The transpose of the second composite is, by the defining projection transpose at $f'$ and the naturality of $t_C$,\n$$b=(\\varepsilon'_{HE}\\otimes1)\\,t_C\\,C(\\operatorname{Ex}_E\\otimes1)\\,C(t_B)\n=(\\delta_E\\otimes1)\\,t_C\\,C(t_B).$$\nInsert Step 2 with $(V,W)=(U,Q)$ in the expression for $a$. Functoriality of tensor and $\\theta_Q^{-1}\\theta_Q=1$ yield\n$$a=(H\\varepsilon_E\\,\\theta_U\\otimes1)\\,t_C\\,C(t_B)\n=(\\delta_E\\otimes1)\\,t_C\\,C(t_B)=b.$$\nSince transposition is bijective (Step 3), the two original composites are equal. Their naturality in $E,Q$ follows directly from naturality of $t$, $\\theta$, counits and adjuncts; alternatively the same transpose identities for morphisms in each variable prove the naturality squares. Only the ringed commutation isomorphism has been used, so no cartesianness, flatness, properness, boundedness, or perfectness hypothesis enters.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram (verification omitted); Tags 07A4, lemma-pullback-tensor-product, and 07A7, remark-base-change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit verification of Tag 0E48, whose source says \"We omit the verification\"; representative constructions follow Tags 0D6D and 07A4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,15 +131,81 @@
    "results": "; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula commutes with the base change mate of a monoidal natural isomorphism between pullback functors",
+   "results": "CategoryTheory.Over.μ_pullback_left_snd'; CategoryTheory.Over.μ_pullback_left_snd; CategoryTheory.Over.μ_pullback_left_fst_snd'; CategoryTheory.Over.μ_pullback_left_fst_fst'; CategoryTheory.Over.μ_pullback_left_fst_snd; CategoryTheory.Over.μ_pullback_left_fst_fst; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.Over.ε_pullback_left",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern ordinary pullback composition, cartesian monoidal categories, module scalar base change or general mate identities; none states this derived ringed-topos tensor exchange diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived pullback composition isomorphisms with tensor products on ringed topoi",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullback_assoc; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; PresheafOfModules.pullbackComp",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern ordinary pullback composition, cartesian monoidal categories, module scalar base change or general mate identities; none states this derived ringed-topos tensor exchange diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "Lean.AuxParentProjectionInfo; Lean.ProjectionFunctionInfo; Lean.instInhabitedAuxParentProjectionInfo; Lean.instInhabitedProjectionFunctionInfo; Lean.instReprAuxParentProjectionInfo; Lean.instReprProjectionFunctionInfo; Lean.projectionFnInfoExt; Lean.AuxParentProjectionInfo.fromClass",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern ordinary pullback composition, cartesian monoidal categories, module scalar base change or general mate identities; none states this derived ringed-topos tensor exchange diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|baseChange.*tensor",
+   "results": "Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/Adjoin/FGBaseChange.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern ordinary pullback composition, cartesian monoidal categories, module scalar base change or general mate identities; none states this derived ringed-topos tensor exchange diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula compatible with base change for ringed topoi",
+   "results": "; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the projection formula with respect to monoidal commutative squares of left adjoints",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right_square_assoc; CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc; CategoryTheory.Adjunction.homEquiv_naturality_right_square; CategoryTheory.Adjunction.homEquiv_naturality_left_square; CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff; CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff; CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected hits concern ordinary pullback composition, cartesian monoidal categories, module scalar base change or general mate identities; none states this derived ringed-topos tensor exchange diagram"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-weil-pbc-amplification-proper",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "worker": "stage1",
+  "summary": "Wrote the omitted verification as equality of explicit adjunction transposes. Made ringed compatibility and the projection/exchange definitions explicit instead of applying pro-etale-only definition nodes outside their scope. Derived composition and its tensor coherence are proved on K-flat representatives using existing generic nodes, so no new elementary or duplicate nodes are needed.",
+  "blueprint": "thm-weil-pbc-amplification-proper proof (b): coefficient normalization commutes with the etale-to-proetale comparison; supplies the tensor/exchange rectangle for the comparison square of ringed topoi.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat K-flat resolutions for unbounded module-sheaf complexes; the proper-base-change unit has no resolution theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-8bdb4900d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-8bdb4900d (reviewer sub-agent of L); spot-checked: Full source and mathematics audit passes: Tags 0B56, 0D6D, 07A4, 0G7E, and 0E48 match the statement and five proof steps; ringed coefficient categories, base-change orientation, hypotheses, edge cases, and duplicates were checked. Corrected JSON records the off-unit K-flat-resolution tool use and marks substantive Steps 2–5 non-elementary. Review: review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
