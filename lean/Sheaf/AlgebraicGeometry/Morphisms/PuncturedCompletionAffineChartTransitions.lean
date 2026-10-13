@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 public import Sheaf.RingTheory.FormalGlueingData
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartOverlapLocalizations
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizations
 
 /-!
 # Affine chart transitions before the square and cocycle checks
@@ -161,7 +163,8 @@ the same universal properties apply. For t=0 only M' and e are needed.
 (blueprint: lem-sbc-punctured-completion-affine-chart-transitions-succ)
 
 Proof: construct the affine section modules, localization and tensor-product equivalences,
-and scalar and restriction identities for the positive finite chart family as in Tags 0BLH and 05EL.
+and scalar and restriction identities for the positive finite chart family as in Tags
+0BLH and 05EL.
 -/
 theorem exists_affine_chart_transitions_succ
     {A : Type u} [CommRing A] [IsLocalRing A]
@@ -172,7 +175,32 @@ theorem exists_affine_chart_transitions_succ
     (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin (t + 1) → A)
     (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U)
     (hV : ∀ i, IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i))) :
-    Nonempty (AffineChartTransitions D (t + 1) f) := by sorry
+    Nonempty (AffineChartTransitions D (t + 1) f) := by
+  let : Module (AdicCompletion (IsLocalRing.maximalIdeal A) A) Γ(E, ⊤) :=
+    completedChartModule s
+  obtain ⟨alpha_overlap, b, hbl, hbr, hbs⟩ :=
+    exists_chart_overlap_localizations (q ≫ U.ι) (t + 1) f hV
+  obtain ⟨alpha, d, has, hdp, hdc, hds⟩ :=
+    exists_chart_completed_localizations D (t + 1) f hf hV
+  let F : FormalGlueing.Transitions (algebraMap A
+      (AdicCompletion (IsLocalRing.maximalIdeal A) A)) f :=
+    { M' := completedSectionModule s
+      M := fun i ↦ chartSectionModule (q ≫ U.ι) (f i)
+      alpha := alpha
+      alpha_smul := has
+      alpha_overlap := alpha_overlap }
+  exact ⟨{
+    F := F
+    e := LinearEquiv.refl (AdicCompletion (IsLocalRing.maximalIdeal A) A) Γ(E, ⊤)
+    c := fun i ↦ AddEquiv.refl _
+    b := b
+    d := d
+    b_left := hbl
+    b_right := hbr
+    d_prime := hdp
+    d_chart := hdc
+    b_scalar := hbs
+    d_scalar := hds }⟩
 
 private theorem empty_chart_transitions
     {A : Type u} [CommRing A] [IsLocalRing A]

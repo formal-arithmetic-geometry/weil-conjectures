@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-punctured-completion-chart-completed-localizations",
+ "kind": "statement",
+ "title": "Completed localization of actual chart sections",
+ "statement": "Let A be a commutative local ring, C its maximal-ideal adic completion, U open in Spec A, q:Y → U, s:E → Spec C, E affine, and D the supplied overlap identification [def-sbc-punctured-completion-matching-sections]. Let t ∈ ℕ and f:Fin t → A with D(f_i) contained in U and V_i=(q followed by U inclusion)⁻¹D(f_i) affine. Use the fixed completed and chart section modules [def-sbc-punctured-completion-chart-section-modules]. There exist A-linear alpha_i:(Γ(E,top))_(f_i) ≃ C tensor_A M_i and additive d_i:C tensor_A M_i ≃ Γ(O,p⁻¹V_i), where O=Y ×_U (Spec C restricted to U), p:O → Y. The alpha_i commute with the localized C-action. Their generator values satisfy d_i(alpha_i(m/1))=restriction of D.toCompleted^*(m), and d_i(1 tensor n)=p^*n. Also d_i(z x)=the structural C-section of z times d_i(x). The alpha_i and d_i are constructed together, not supplied arbitrarily.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1)."
+ },
+ "stmt_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "The affine base-change section formula constructs d_i, sending z tensor m to the product of the structural C-section z with the pullback of m. Since f_i is invertible on V_i, base change over U is the same as base change over Spec A on this chart. The equation D.over identifies p⁻¹V_i with the principal open defined by f_i in E. Affineness of E identifies its sections with localization of completed global sections. Compose this localization map with sections of the overlap isomorphism and d_i inverse to obtain alpha_i. On m/f_i^n this is d_i inverse of the restriction of D.toCompleted^*(m) divided by the structural section f_i^n. The pure-tensor and fraction formulas give d_chart and d_prime. Multiplication by structural C-sections gives alpha_smul and d_scalar. Empty principal opens have zero modules, so the constructions apply there too.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, affine chart section construction; Tag 05EL, item (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections on affine principal opens are localizations, and affine pullbacks have tensor product section rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The section ring over inverse image of a basic open has an algebra structure over localization away from the element",
+   "results": "Constituent APIs including IsAffineOpen.isLocalization_basicOpen, StructureSheaf.IsLocalization.to_basicOpen and Γ_restrict_isLocalization; no bundled chart transition construction.",
+   "date": "2026-10-14",
+   "verdict": "Use canonical section algebra and localization APIs; split remaining section identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule\", \"equiv\"",
+   "results": "IsLocalizedModule.linearEquiv, of_linearEquiv, mapEquiv and generator formulas.",
+   "date": "2026-10-14",
+   "verdict": "Universal localization comparison supports the overlap construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule.restrictScalars_powers|pullbackSpecIso|isLocalization_basicOpen",
+   "results": "IsAffineOpen.isLocalization_basicOpen in AffineScheme.lean:673; restrictScalars_powers used in Modules/Tilde.lean:564; pullbackSpecIso and projection formulas.",
+   "date": "2026-10-14",
+   "verdict": "Constituent tools, no bundled statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartTransitions",
+  "date": "2026-10-14",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completion-glueing comparison: construct affine chart modules and their localization and completed-pullback section identifications.",
+   "via": [
+    "lem-sbc-punctured-completion-affine-chart-transitions",
+    "lem-sbc-punctured-completion-affine-chart-transitions-succ"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartCompletedLocalizations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_chart_completed_localizations",
+  "statement": "theorem exists_chart_completed_localizations {A : Type u} [CommRing A] [IsLocalRing A] {U : (Spec (.of A)).Opens} {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} {E : Scheme.{u}} [IsAffine E] {s : E ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A) (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U) (hV : ∀ i, IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i))) : let C := AdicCompletion (IsLocalRing.maximalIdeal A) A let φ := algebraMap A C let M' := completedSectionModule s let M := fun i ↦ chartSectionModule (q ≫ U.ι) (f i) ∃ (alpha : ∀ i, FormalGlueing.localize (f i) (FormalGlueing.restrict φ M') ≃ₗ[A] FormalGlueing.restrict φ (FormalGlueing.extend φ (FormalGlueing.piece (f i) (M i)))) (d : ∀ i, FormalGlueing.extend φ (FormalGlueing.piece (f i) (M i)) ≃+ Γ(pullback q (completionSpecMap A ∣_ U), (pullback.fst q (completionSpecMap A ∣_ U)) ⁻¹ᵁ ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)))), (∀ i (z : C) (x : FormalGlueing.localize (f i) (FormalGlueing.restrict φ M')), alpha i ((FormalGlueing.localizedSModule φ (f i) M').smul z x) = z • (alpha i x : FormalGlueing.extend φ (FormalGlueing.piece (f i) (M i)))) ∧ (∀ i m, d i (alpha i (LocalizedModule.mk m 1)) = (pullback q (completionSpecMap A ∣_ U)).presheaf.map (homOfLE le_top).op (D.toCompleted.appTop m)) ∧ (∀ i m, d i (TensorProduct.tmul A (1 : C) m) = (pullback.fst q (completionSpecMap A ∣_ U)).app _ m) ∧ (∀ i (z : C) m, d i (z • m) = ((ΓSpecIso (.of C)).inv ≫ (pullback.snd q (completionSpecMap A ∣_ U) ≫ (completionSpecMap A ⁻¹ᵁ U).ι).appTop ≫ (pullback q (completionSpecMap A ∣_ U)).presheaf.map (homOfLE (le_top : (pullback.fst q (completionSpecMap A ∣_ U)) ⁻¹ᵁ ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ≤ ⊤)).op).hom z * d i m)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T224510-L-1471047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T224510-L-1471047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

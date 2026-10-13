@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-punctured-completion-chart-overlap-localizations",
+ "kind": "statement",
+ "title": "Localization of actual chart sections on overlaps",
+ "statement": "Let A be a commutative ring, h:Y → Spec A a scheme morphism, t ∈ ℕ and f:Fin t → A. Suppose each V_i=h⁻¹D(f_i) is affine. Use the fixed section modules M_i from [def-sbc-punctured-completion-chart-section-modules]. There exist A-linear equivalences alpha_ij:(M_i)_(f_j) ≃ (M_j)_(f_i) and additive equivalences b_ij:(M_j)_(f_i) ≃ Γ(Y,V_i ∩ V_j). They are constructed together, and satisfy b_ij(alpha_ij(m/1))=m restricted from V_i, b_ij(n/1)=n restricted from V_j, and b_ij(a x)=the structural section of a times b_ij(x). No preassigned transitions occur among the hypotheses.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1)."
+ },
+ "stmt_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof": [
+  {
+   "text": "For the fixed structural section modules, V_i intersect V_j is the basic open of the section f_i on V_j. Affineness and IsAffineOpen.isLocalization_basicOpen give its section ring as a localization. Restrict scalars to A and use the module localization universal property to construct b_ij, sending m/f_i^n to restriction of m divided by the structural section f_i^n. To construct alpha_ij, identify the localization of M_i at f_j with the same intersection, then compose with b_ij inverse. These definitions give the two restriction formulas, and multiplication by structural A-sections commutes with division, giving the scalar formula. Empty opens give zero modules and are covered by the same universal properties.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, affine chart section construction; Tag 05EL, item (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections on affine principal opens are localizations, and affine pullbacks have tensor product section rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The section ring over inverse image of a basic open has an algebra structure over localization away from the element",
+   "results": "Constituent APIs including IsAffineOpen.isLocalization_basicOpen, StructureSheaf.IsLocalization.to_basicOpen and Γ_restrict_isLocalization; no bundled chart transition construction.",
+   "date": "2026-10-14",
+   "verdict": "Use canonical section algebra and localization APIs; split remaining section identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule\", \"equiv\"",
+   "results": "IsLocalizedModule.linearEquiv, of_linearEquiv, mapEquiv and generator formulas.",
+   "date": "2026-10-14",
+   "verdict": "Universal localization comparison supports the overlap construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule.restrictScalars_powers|pullbackSpecIso|isLocalization_basicOpen",
+   "results": "IsAffineOpen.isLocalization_basicOpen in AffineScheme.lean:673; restrictScalars_powers used in Modules/Tilde.lean:564; pullbackSpecIso and projection formulas.",
+   "date": "2026-10-14",
+   "verdict": "Constituent tools, no bundled statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartTransitions",
+  "date": "2026-10-14",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completion-glueing comparison: construct affine chart modules and their localization and completed-pullback section identifications.",
+   "via": [
+    "lem-sbc-punctured-completion-affine-chart-transitions",
+    "lem-sbc-punctured-completion-affine-chart-transitions-succ"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartOverlapLocalizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartOverlapLocalizations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_chart_overlap_localizations",
+  "statement": "theorem exists_chart_overlap_localizations {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A)) (t : ℕ) (f : Fin t → A) (hV : ∀ i, IsAffineOpen (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i))) : let M := fun i ↦ chartSectionModule h (f i) ∃ (alpha_overlap : ∀ i j, FormalGlueing.localize (f j) (FormalGlueing.piece (f i) (M i)) ≃ₗ[A] FormalGlueing.localize (f i) (FormalGlueing.piece (f j) (M j))) (b : ∀ i j, FormalGlueing.localize (f i) (FormalGlueing.piece (f j) (M j)) ≃+ Γ(Y, (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓ (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j)))), (∀ i j m, b i j (alpha_overlap i j (LocalizedModule.mk m 1)) = Y.presheaf.map (homOfLE inf_le_left).op m) ∧ (∀ i j m, b i j (LocalizedModule.mk m 1) = Y.presheaf.map (homOfLE inf_le_right).op m) ∧ (∀ i j (a : A) m, b i j (a • m) = ((ΓSpecIso (.of A)).inv ≫ h.appTop ≫ Y.presheaf.map (homOfLE (le_top : (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓ (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j)) ≤ ⊤)).op).hom a * b i j m)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T224510-L-1471047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T224510-L-1471047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

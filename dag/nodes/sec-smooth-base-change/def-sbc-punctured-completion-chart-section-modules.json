@@ -1,0 +1,121 @@
+{
+ "id": "def-sbc-punctured-completion-chart-section-modules",
+ "kind": "definition",
+ "title": "Concrete structural section modules",
+ "statement": "Let A and C be commutative rings, h:Y → Spec A and s:E → Spec C scheme morphisms, and f ∈ A. Define the A_f-module with underlying additive group Γ(Y,h⁻¹D(f)) by composing the canonical localization isomorphism A_f → Γ(Spec A,D(f)) with h.app D(f). Define the C-module with underlying additive group Γ(E,top) by its structural section map. These constructions use no existence witnesses. Restricting the first action to A gives multiplication by the structural section of a for every a ∈ A.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1)."
+ },
+ "stmt_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose the canonical localization-to-basic-open section isomorphism with h.app D(f) and use Module.compHom. Use Module.compHom for completed global sections. The canonical localization isomorphism commutes with algebraMap; naturality of h.app identifies its restriction to A with the structural section map. This proves chartSectionModule_smul.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, affine chart section construction; Tag 05EL, item (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections on affine principal opens are localizations, and affine pullbacks have tensor product section rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The section ring over inverse image of a basic open has an algebra structure over localization away from the element",
+   "results": "Constituent APIs including IsAffineOpen.isLocalization_basicOpen, StructureSheaf.IsLocalization.to_basicOpen and Γ_restrict_isLocalization; no bundled chart transition construction.",
+   "date": "2026-10-14",
+   "verdict": "Use canonical section algebra and localization APIs; split remaining section identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule\", \"equiv\"",
+   "results": "IsLocalizedModule.linearEquiv, of_linearEquiv, mapEquiv and generator formulas.",
+   "date": "2026-10-14",
+   "verdict": "Universal localization comparison supports the overlap construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule.restrictScalars_powers|pullbackSpecIso|isLocalization_basicOpen",
+   "results": "IsAffineOpen.isLocalization_basicOpen in AffineScheme.lean:673; restrictScalars_powers used in Modules/Tilde.lean:564; pullbackSpecIso and projection formulas.",
+   "date": "2026-10-14",
+   "verdict": "Constituent tools, no bundled statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartTransitions",
+  "date": "2026-10-14",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completion-glueing comparison: construct affine chart modules and their localization and completed-pullback section identifications.",
+   "via": [
+    "lem-sbc-punctured-completion-affine-chart-transitions",
+    "lem-sbc-punctured-completion-affine-chart-transitions-succ"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartSectionModules.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.chartSectionModule",
+  "statement": "abbrev chartSectionModule {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A)) (f : A) : ModuleCat.{u} (Localization.Away f)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletionGluingData.chartSectionModule",
+   "AlgebraicGeometry.Scheme.CompletionGluingData.completedSectionModule",
+   "AlgebraicGeometry.Scheme.CompletionGluingData.chartSectionModule_smul"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T224510-L-1471047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T224510-L-1471047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
