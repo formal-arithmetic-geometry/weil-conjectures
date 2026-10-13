@@ -1,0 +1,158 @@
+{
+ "id": "lem-sc-proper-flat-direct-image-perfect-chart",
+ "kind": "statement",
+ "title": "Nonnegative perfect derived charts for a proper flat direct image",
+ "statement": "Choose derived categories of scheme module categories and their open over-sites in one universe [def-pc-derived-category]. Let f:X→S be flat, proper and locally finitely presented, and F finite locally free [def-amb-finite-locally-free-module]. For s∈U⊆S there are s∈V⊆U, K∈D(O_V), b∈Z such that K is perfect [def-pc-perfect-complex] and H^i(K tensor^L M)=0 for every module M if i<0 or b<i [def-pc-derived-tensor-cohomology-vanishes]. For every a:T→V there is an isomorphism H^0(L a* K) ≅ p_* q* F, with p:X×_S T→T and q:X×_S T→X and tensor pullback [def-pc-derived-pullback, def-pc-module-pullback]. There is no reference bundle or rank predicate.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Second and third proof paragraphs; Tag 0B91(2), using the nonnegative bounded affine Cech model."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-amb-finite-locally-free-module",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Reuse Modules.isFlatOver_of_isFiniteLocallyFree from PerfectCohomologyFromGeometric (import all exposes its private theorem) to make F flat relative to S. Choose an affine neighbourhood V of s inside U, and apply exists_proper_flat_affine_cech_perfect_model to obtain D bounded in [0,d], flat termwise over the identity, perfect Q(D), and its cohomology comparisons after arbitrary ordinary pullback. Take K=Q(D), b=d.",
+   "uses": [
+    "lem-pc-proper-flat-affine-cech-perfect-model",
+    "def-amb-finite-locally-free-module",
+    "lem-sc-valuation-proper-coherent-higher-direct-images-perfectness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isFlat_of_affineFlatOver_identity to every term and isKFlat_of_boundedAbove_flat_ringedSpace to D. For a module M, mapBifunctorSingle₂Iso identifies D tensor M[0] with the complex of termwise tensors. Terms outside [0,d] vanish since additive tensor functors preserve zero objects. Zero middle term implies zero homology; D with its identity representation witnesses the derived-tensor vanishing. The tensorClosed theorem supplies the monoidal preadditive instance.",
+   "uses": [
+    "lem-pc-affine-flat-module-tensor-flat",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-derived-tensor-cohomology-vanishes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a:T→V unpack exists_derivedPullback and identify its additive module functor with tensorPullback by functor extensionality. Its counit is invertible on the K-flat D. The quotientCompQhIso and mapHomotopyCategoryFactors isomorphisms give L a* Q(D) ≅ Q(a_tensor*D). Uniqueness of left adjoints identifies tensor pullback with ordinary pullback. Apply homologyFunctorFactors in degree zero, followed by the Cech comparison for the standard pullback square. The rightDerivedZeroIsoSelf of pushforward and the ordinary-to-tensor pullback isomorphism on F give the desired ordinary direct image.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-proper-flat-affine-cech-perfect-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "lem-pc-affine-flat-module-tensor-flat",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-proper-flat-affine-cech-perfect-model",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-valuation-proper-coherent-higher-direct-images-perfectness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Second and third proof paragraphs; Tag 0B91(2), using the nonnegative bounded affine Cech model.",
+  "note": "T1 stage-3 complete Lean proof from existing library declarations; no new sorry. Repair reuses the existing private relative-flatness theorem via import all instead of duplicating it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat finite locally free direct image perfect complex locally bounded nonnegative tor amplitude arbitrary derived pullback",
+   "results": "Internal Server Error; service unavailable. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat direct image finite locally free sheaf locally perfect complex nonnegative Tor amplitude arbitrary base change degree zero",
+   "results": "AlgebraicGeometry.Flat, flat_iff and flat_appLE in Mathlib/AlgebraicGeometry/Morphisms/Flat; none gives the derived chart. Loogle CochainComplex, CategoryTheory.Limits.IsZero finds isZero_of_isStrictlyGE and isZero_of_isStrictlyLE, used for its bounds.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*direct.image|direct.image.*perfect|IsPerfect, Mathlib/AlgebraicGeometry and Algebra/Homology/DerivedCategory; tor amplitude and perfect chart in both library roots",
+   "results": "No scheme perfect-direct-image chart in Mathlib. Library exists_proper_flat_affine_cech_perfect_model supplies a bounded flat complex with ordinary pullback cohomology comparisons, not the derived-tensor and derived-pullback signature. It is used to prove this derived corollary.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Second and third proof paragraphs; Tag 0B91(2), using the nonnegative bounded affine Cech model.",
+   "via": [
+    "lem-sc-picard-single-rank-perfect-chart",
+    "lem-sc-picard-universal-single-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatDirectImagePerfectChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatDirectImagePerfectChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_properFlatDirectImagePerfectChart",
+  "statement": "theorem exists_properFlatDirectImagePerfectChart\n    [∀ T : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    [∀ (T : Scheme.{u}) (U : T.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))]\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (F : X.Modules) [F.IsFiniteLocallyFree] (U : S.Opens) (s : S) (hs : s ∈ U) :\n    ∃ V : S.Opens, s ∈ V ∧ V ≤ U ∧\n      ∃ (K : schemeDerivedCategory V.toScheme) (b : ℤ),\n        IsPerfect V.toScheme K ∧\n        (∀ M : SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace),\n          ∀ i : ℤ, i < 0 ∨ b < i →\n            schemeDerivedTensorCohomologyVanishes V.toScheme K M i) ∧\n        ∀ (T : Scheme.{u}) (a : T ⟶ V.toScheme),\n          Nonempty (((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj\n              ((derivedPullback a).obj K)) ≅\n            ((Modules.pushforward (pullback.snd f (a ≫ V.ι))).obj\n              ((Modules.tensorPullback (pullback.fst f (a ≫ V.ι))).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100129-L-2487912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100129-L-2487912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

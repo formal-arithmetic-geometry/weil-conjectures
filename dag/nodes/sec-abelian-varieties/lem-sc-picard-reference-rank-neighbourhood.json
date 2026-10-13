@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-picard-reference-rank-neighbourhood",
+ "kind": "statement",
+ "title": "A reference bundle has fixed rank near each base point",
+ "statement": "Let f:X→S be flat, proper and locally finitely presented, with universally invertible structure-sheaf tensor-pullback adjunction unit [lem-pc-module-pullback-adjunction]. Let E be finite locally free [def-amb-finite-locally-free-module]. Then f is surjective. For every s∈S there are an open neighbourhood U and r∈N such that for every g:T→U, the tensor pullback of E to X×_S T is finite locally free of rank r [def-pc-module-pullback]. No direct image of a second bundle or derived category occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "First proof paragraph: connected fibres and the open-and-closed rank decomposition."
+ },
+ "stmt_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Import all Sheaf.AlgebraicGeometry.PicardFiberRankClopen as a proof-only dependency to reuse its private localRank definition, exists_localRank, localRank_isClopen and tensorPullback_rank_iff. These existing proved declarations identify the clopen local rank-r locus A_r on X and characterize rank-r tensor pullback by pointwise membership in A_r. No local-rank helper is restated or reproved.",
+   "uses": [
+    "lem-sc-picard-fiber-rank-clopen"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q:X_s to Spec kappa(s), compose the given adjunction unit with the pushforward of tensorPullbackObjUnitToUnit. This is the ordinary structure-sheaf module map and is invertible. Evaluate at the top open to see q.appTop is bijective. Compose its ring equivalence with GammaSpecIso to identify Gamma(X_s,O) with kappa(s). An empty X_s would force zero=one in kappa(s); thus the fibre is nonempty. Transport idempotents across that ring equivalence: every idempotent is zero or one, so connectedSpace_iff_isIdempotentElem gives connectedness. Nonempty fibres also give surjectivity of f by the pullback equation.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-pc-scheme-connected-iff-idempotents"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a point of X_s and a local rank r at its image in X. The preimage of A_r in X_s is clopen and nonempty, hence equals the entire connected fibre. The tensor-rank criterion gives rank r on E_s. By picardFiberRank_clopen the set U of base points with rank-r E_t is open and contains s.",
+   "uses": [
+    "lem-sc-picard-fiber-rank-clopen",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For g:T to U and z in X_T, let x be its image in X and t its image in S. Then t belongs to U. Pullback.range_fst and range_fromSpecResidueField supply z prime in X_t mapping to x. The rank-r condition on E_t and the tensor-rank criterion imply x in A_r. Apply that same criterion to X_T to obtain rank r after every base change. Empty test schemes are handled by the empty cover.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-sc-picard-fiber-rank-clopen",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "First proof paragraph: connected fibres and the open-and-closed rank decomposition.",
+  "note": "T1 stage-3 complete Lean proof from existing library declarations; no new sorry. Repair of duplicate-helper rejection: use a proof-only import all of PicardFiberRankClopen and remove all copied rank helpers, their localRank definition and restriction-pullback isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat morphism universal structure sheaf unit connected fibres finite locally free rank locally constant base",
+   "results": "Internal Server Error; service unavailable. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free bundle fixed rank on connected fibres proper flat morphism locally constant rank on base",
+   "results": "Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus (Mathlib/RingTheory/Spectrum/Prime/FreeLocus); these are algebraic rank functions, not the universal scheme neighbourhood conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*connected|connected.*rank|nonnegative.*perfect, Mathlib source and both library roots; DAG reference rank neighbourhood search",
+   "results": "Mathlib returned unrelated analytic and graph rank results. Library PicardFiberRankClopen proves clopenness but assumes no connectedness and gives no neighbourhood through each point. TensorPullbackStructureSheaf and connectedSpace_iff_isIdempotentElem supply the connectivity calculation. No duplicate neighbourhood theorem in the DAG.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "First proof paragraph: connected fibres and the open-and-closed rank decomposition.",
+   "via": [
+    "lem-sc-picard-single-rank-perfect-chart",
+    "lem-sc-picard-universal-single-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardReferenceRankNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardReferenceRankNeighbourhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_picardReferenceRankNeighbourhood",
+  "statement": "theorem exists_picardReferenceRankNeighbourhood\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (E : X.Modules) [E.IsFiniteLocallyFree] (s : S) :\n    Surjective f ∧ ∃ U : S.Opens, s ∈ U ∧ ∃ r : ℕ,\n      ∀ (T : Scheme.{u}) (g : T ⟶ U.toScheme),\n        SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n          ((Modules.tensorPullback (pullback.fst f (g ≫ U.ι))).obj E) r",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100129-L-2487912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100129-L-2487912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

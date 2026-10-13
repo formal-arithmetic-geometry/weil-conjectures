@@ -18,42 +18,45 @@
  ],
  "proof": [
   {
-   "text": "Apply the unit on residue-field base changes: global functions are the residue field. Fibres are nonempty and connected (a decomposition gives a nontrivial idempotent). The rank of E is constant on each fibre. Apply the clopen fixed-fibre-rank theorem and take the stratum through s. Tensor pullback preserves rank, so E has this same rank r after every further base change on this stratum.",
+   "text": "Apply exists_picardReferenceRankNeighbourhood to obtain surjectivity of f, U containing s, and r such that E has rank r on every base change over U. Apply exists_properFlatDirectImagePerfectChart to F with the prescribed U to obtain V contained in U, perfect K, bound b, tensor vanishing and H^0 comparisons. Transport the reference-rank condition from U to V by homOfLE_ι and associativity.",
    "uses": [
-    "lem-sc-picard-fiber-rank-clopen",
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-picard-reference-rank-neighbourhood",
+    "lem-sc-proper-flat-direct-image-perfect-chart"
    ],
    "elementary": false
   },
   {
-   "text": "Finite local freeness makes F finitely presented and flat relative to the stratum. Apply perfect derived direct image and arbitrary base change. Restrict to a neighbourhood of s with a finite Tor upper bound b. Every base change is the derived direct image of a sheaf in degree zero, so has no negative cohomology; by the local strictly perfect model and the fibre criterion, its Tor amplitude starts at zero. This gives K and the displayed all-module vanishing.",
-   "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "def-pc-perfect-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The derived base change comparison and degree-zero right-derived direct image identify H^0 of each derived pullback with the ordinary direct image of the tensor pullback of F. In a local witness for R_1, compare the rank of E on any nonempty fibre with the fixed r, so the witness rank equals r. Local rank-r witnesses on an open cover of each further test give global rank-r finite local freeness. Conversely, global rank-r freeness gives the local witness (the whole test scheme), and the reference E already has rank r. This proves both implications, including empty tests and r=0.",
+   "text": "For a test g:T→V unfold the single-rank predicate. At each t in a further T prime choose its local witness W,n. The reference E has both ranks n and r on X_W. Surjectivity of the base-changed morphism supplies a point over t in W; the stalk-finrank theorem gives n=r. Tensor pullback along W inclusion equals ordinary restriction by uniqueness of left adjoints. Glue these rank-r restrictions over their cover to obtain global rank-r direct image. Conversely restrict a global rank-r direct image to the top open; the reference E is already rank r there. The open-cover argument includes empty schemes.",
    "uses": [
     "def-sc-picard-universal-single-rank-match",
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "lem-pc-module-pullback-adjunction",
+    "def-amb-finite-locally-free-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "For every further h:T prime→T apply the chart comparison at h composed with g. Rewrite associativity to put its ordinary direct image in the exact shape of the fixed-rank equivalence. Transport finite local freeness of rank r along this isomorphism in both directions and retain K, b, r and the neighbourhood V.",
+   "uses": [
+    "lem-sc-proper-flat-direct-image-perfect-chart",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
+  "def-amb-finite-locally-free-module",
   "def-sc-picard-universal-single-rank-match",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-picard-fiber-rank-clopen"
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "lem-sc-picard-reference-rank-neighbourhood",
+  "lem-sc-proper-flat-direct-image-perfect-chart"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "first three proof paragraphs; perfect direct image and arbitrary base change, Tag 0B91(2)",
-  "note": "V2 spells out the corresponding local step of Tags 0BDP and 0BDL; the unit route is unchanged."
+  "place": "first three proof paragraphs, with the nonnegative affine Cech model from Tags 0B91(2) and 0A1D",
+  "note": "T1 complete Lean combination and both new auxiliary theorems are proved. The bounded flat Cech route replaces the direct appeal to perfect_derivedDirectImage_baseChange. No unit-level route is changed."
  },
  "mathlib_searches": [
   {
@@ -137,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T045613-L-139716",
+  "landing": "20261013T100129-L-2487912",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
