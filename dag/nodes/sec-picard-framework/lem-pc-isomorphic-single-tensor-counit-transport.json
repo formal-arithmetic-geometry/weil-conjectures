@@ -14,11 +14,25 @@
  },
  "proof": [
   {
-   "text": "Form inverse components as the selected derived adjunction unit at (p^*M)[0], followed by direct image of the pinned single tensor counit for e and the single image of the canonical underived tensor composition comparison (conjugate to pushforwardComp). Naturality gives a natural transformation. Since e is a scheme isomorphism, tensor pullback is an exact equivalence, so both the unit and pinned single comparison are invertible. Invert this natural isomorphism. The displayed inverse components determine t uniquely, including for empty schemes and zero modules.",
+   "text": "Tensor pullback along e is an equivalence: compose pullback along e.hom and e.inv using nonempty_tensorPullbackComp, the scheme inverse identities, and nonempty_tensorPullbackId. Its exactness gives mapDerivedCategory and its factorization through Qh. Thus termwise pullback followed by Qh inverts quasi-isomorphisms. Mathlib Functor.isIso_of_isLeftDerivedFunctor_of_inverts makes the composition-pinned counit invertible.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the recorded derived pullback to the exact functor mapDerivedCategory using Functor.leftDerivedUnique with the specified pinned counit. The upstream instance Functor.isEquivalence_mapDerivedCategory and Functor.isEquivalence_of_iso make the recorded derived pullback an equivalence. The specified adjunction then makes derived direct image an equivalence, hence its unit invertible.",
    "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-base-change-map",
-    "lem-pc-pinned-single-tensor-shifts"
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the pinned counit by the degree-zero homotopy single functor and compose with Qh applied to SingleFunctors.mappedHomotopySingleIso. Its component formula is pinnedSingleTensorCounit by mappedHomotopySingleIso_hom_app; both factors are invertible. Whisker the adjunction unit by p-pullback followed by single, then compose with direct image of this comparison and of the single image of the canonical underived comparison b.hom. This explicitly constructs an invertible natural transformation tau in the inverse direction. Take (asIso tau).symm, expand components and functor.map_comp, and use the counit component formula to obtain exactly the asserted inverse components.",
+   "uses": [
+    "lem-pc-pinned-single-tensor-shifts",
+    "def-pc-derived-base-change-map"
    ],
    "elementary": false
   }
@@ -30,8 +44,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/0D5S",
-  "place": "Canonical transport fixed by explicit inverse components and counit compatibility"
+  "group": "F4",
+  "date": "2026-10-14",
+  "document": "Stacks Project, Tags 08HY, 0096 and 0D5S; Mathlib derived universal property",
+  "place": "Explicit canonical natural transformation, exact-equivalence computation and inversion; repaired at second reading"
  },
  "mathlib_searches": [
   {
@@ -103,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d0cfe",
-  "group": "T2",
+  "reviewer": "COMPILER",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T190155-L-3221152",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, DAG nodes, report, and change record match the stated item; all modules and direct importer compile cleanly."
+  "landing": "20261013T201749-L-3969127",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
