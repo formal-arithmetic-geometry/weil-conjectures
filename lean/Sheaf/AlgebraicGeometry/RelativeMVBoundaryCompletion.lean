@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+import Sheaf.AlgebraicGeometry.RelativeMVSESPresentation
 
 /-! # Compatible relative Mayer--Vietoris boundaries
 
@@ -74,6 +74,34 @@ theorem relativeMV_boundary_completion
       Triangle.mk (relativeMVTargetFirst g' f' U V K')
         (relativeMVTargetSecond g' f' U V K') δ' ∈ distTriang (schemeDerivedCategory S') ∧
       δ ≫ aX.hom⟦(1 : ℤ)⟧' = (a (U ⊓ V)).hom ≫ δ' := by
-  sorry
+  classical
+  obtain ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', hf, hg, hf', hg', h₁, h₃⟩ :=
+    relativeMV_ses_presentation f f' g g' hpull K K' φ hK hK'
+      U V hUqc hVqc hUVqc hcover
+  let δ := e₃.inv ≫ DerivedCategory.triangleOfSESδ hP ≫ e₁.hom⟦(1 : ℤ)⟧'
+  let δ' := e₃'.inv ≫ DerivedCategory.triangleOfSESδ hP' ≫ e₁'.hom⟦(1 : ℤ)⟧'
+  refine ⟨δ, δ', ?_, ?_, ?_⟩
+  · apply isomorphic_distinguished _ (DerivedCategory.triangleOfSES_distinguished hP)
+    refine (Triangle.isoMk _ _ e₁ e₂ e₃ hf hg ?_).symm
+    change DerivedCategory.triangleOfSESδ hP ≫ e₁.hom⟦(1 : ℤ)⟧' = e₃.hom ≫ δ
+    simp only [δ, Iso.hom_inv_id_assoc]
+  · apply isomorphic_distinguished _ (DerivedCategory.triangleOfSES_distinguished hP')
+    refine (Triangle.isoMk _ _ e₁' e₂' e₃' hf' hg' ?_).symm
+    change DerivedCategory.triangleOfSESδ hP' ≫ e₁'.hom⟦(1 : ℤ)⟧' = e₃'.hom ≫ δ'
+    simp only [δ', Iso.hom_inv_id_assoc]
+  · have hn := DerivedCategory.triangleOfSESδ_naturality hP hP' m
+    have hshift := congrArg (fun t ↦ t⟦(1 : ℤ)⟧') h₁
+    simp only [Functor.map_comp] at hshift
+    have h₃inv : e₃.inv ≫ DerivedCategory.Q.map m.τ₃ =
+        (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).hom ≫ e₃'.inv := by
+      apply (cancel_mono e₃'.hom).mp
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rw [h₃]
+      simp only [Iso.inv_hom_id_assoc]
+    dsimp only [δ, δ']
+    simp only [Category.assoc]
+    rw [← hshift, ← Category.assoc (DerivedCategory.triangleOfSESδ hP), hn]
+    simp only [← Category.assoc]
+    rw [h₃inv]
 
 end AlgebraicGeometry
