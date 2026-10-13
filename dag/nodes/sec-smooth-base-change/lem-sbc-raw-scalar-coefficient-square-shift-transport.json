@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-raw-scalar-coefficient-square-shift-transport",
+ "kind": "lemma",
+ "title": "Shift transport for the coefficient square",
+ "statement": "The shifted coefficient square follows from the generic shift transport calculation for the four derived functors and the unshifted coefficient identity.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03D7 and 03Q8, shift transport after the unshifted coefficient identity"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-raw-scalar-source-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply the generic shift transport identity to the four derived functors and the unshifted coefficient square.",
+   "uses": [
+    "def-sbc-raw-module-scalar-pullback-comparison",
+    "lem-sbc-raw-scalar-source-square",
+    "lem-sbc-raw-scalar-coefficient-unshifted"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-sbc-raw-scalar-source-square",
+  "lem-sbc-raw-scalar-coefficient-unshifted"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S2",
+  "date": "2026-10-14",
+  "document": "Stacks Project; existing source-square proof and exact-derived-functor shift API",
+  "place": "Tags 03D7 and 03Q8; invert the source square at the identity coefficient map, then shift"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived scalar forgetting with inverse image and free represented sheaves",
+   "date": "2026-10-14",
+   "results": "Eight results, including SheafOfModules.map_ιFree_mapFree_hom and freeHomEquiv_freeMap, concern free sheaves in a different coefficient encoding. No match for either derived source or coefficient square.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-14",
+   "results": "Nine hits including generic naturality, which is used to combine the squares but does not identify their fixed comparison factors.",
+   "verdict": "generic middle step only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso.*comp|rawModuleAbelianHomMap_naturality",
+   "date": "2026-10-14",
+   "results": "msearch returned seven unrelated pullbackIso matches. Local rg located the exact derived single and composition APIs and EtalePullbackSingleComp, whose generic helpers are private; none supplies coherence for RawModuleScalarComparison.pullbackIso. ScalarInverseImageCompositionCoherence concerns Zariski module sheaves over a field, a different site and coefficients.",
+   "verdict": "no existing scalar etale square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and naturality of scalar forgetting on derived Hom with inverse image and shifted coefficients",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; msearch returned zero hits and instructed that no verdict be recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-coefficient-square",
+   "place": "shift transport step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarCoefficientSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_coefficient_square_of_unshifted",
+  "statement": "theorem rawModuleScalar_coefficient_square_of_unshifted\n    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    (A B : Over W) (f : A ⟶ B)\n    : \n  let VA := (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus\n  let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus\n  let FB := (upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G\n  let bA := scalarCoefficientFactor Λ A.hom G q\n  let bB := scalarCoefficientFactor Λ B.hom G q\n  let mT := moduleCoefficientFactor Λ G q A B f\n  let aT := abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G) q A B f\n  (RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app\n      (((DerivedCategory.Plus.singleFunctor _ 0).obj FB)⟦q⟧) ≫\n    VA.map mT ≫ bA = H.map bB ≫ aT",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rawModuleScalar_coefficient_square_of_unshifted"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T234521-L-2167018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T234521-L-2167018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

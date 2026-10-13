@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-raw-scalar-coefficient-square",
+ "kind": "statement",
+ "title": "The shifted coefficient factors of scalar forgetting commute with pullback",
+ "statement": "Let $\\Lambda$ be a commutative ring in $\\operatorname{Type}(u+1)$, $W$ a scheme in universe $u$, $G$ an etale $\\Lambda$-module sheaf on $W$, $q\\in\\mathbf Z$, $A,B\\in\\operatorname{Over}(W)$ and $f:A\\to B$. Let $M=D^+f^*_{\\Lambda}$, $H=D^+f^*_{\\mathbf{Ab}}$, $V_A=D^+V_{A.left}$, $V_B=D^+V_{B.left}$ and $\\epsilon:M\\gg V_A\\cong V_B\\gg H$ be the real derived scalar comparison of [lem-sbc-raw-scalar-source-square]. Put $F_i=i.hom^*_{\\Lambda}G$. Let $b_i$ be the shift comparison for $V_i$ on $F_i[0]$, followed by the shifted composite of its single comparison and singleFunctor of the inverse scalar coefficient comparison. Let $m_T$ be the shift comparison for $M$ on $F_B[0]$, followed by the shifted composite of the module inverse-image single comparison and singleFunctor of upperStarComp inverse for $(f.left,B.hom,A.hom)$ at $G$. Let $a_T$ be the corresponding abelian tail on $V_WG$ [lem-weil-pbc-inverse-image-composition]. Then $\\epsilon^{-1}_{F_B[0][q]}\\gg V_A(m_T)\\gg b_A=H(b_B)\\gg a_T$. This involves no base scheme, represented free source sheaf, or cohomology class.",
+ "source": {
+  "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
+  "place": "Tags 03D7 and 03Q8; shift and inverse coefficient comparison factors"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-raw-scalar-source-square"
+ ],
+ "proof": [
+  {
+   "text": "Specialize rawModuleScalar_source_square to S=W, Y=B.left, Y'=A.left, a=f.left, h=B.hom, h'=A.hom, w=Over.w f, L=G, E=V_W G, and t=id. All source factors are invertible. Apply IsIso.inv_eq_inv to the source-square equality and precompose both inverse composites by derivedPullbackIso.inv. Functor.map_inv, the inverse composition law, and cancellation of the derived comparison give coefficient_unshifted: epsilon.inv followed by V_A of the module coefficient tail and the scalar coefficient tail equals H of the scalar coefficient tail followed by the abelian coefficient tail.",
+   "uses": [
+    "lem-sbc-raw-scalar-source-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove privately that the bounded-below derived natural-isomorphism and composition comparisons commute with shifts. Whisker each comparison by the faithful inclusion D+ into D; the inclusion formulas identify it with a composite of shift-compatible restriction comparisons and the already proved unbounded derived comparisons. Apply NatTrans.CommShift.of_whiskerRight. The inverse derivedPullbackIso, being their composite, commutes with shifts. The private generic shift_square transports the unshifted coefficient square using NatTrans.shift_app_comm, naturality of each functor's commShiftIso, and functoriality of the shift functor. Instantiate it with the four exact derived functors and the four unshifted tails; unfolding the existing coefficient-factor definitions gives the required equation for every integer q. No restriction on shifts, coefficient sheaves, or scheme arrows is introduced.",
+   "uses": [
+    "def-sbc-raw-module-scalar-pullback-comparison",
+    "lem-sbc-raw-scalar-source-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-sbc-raw-scalar-source-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S2",
+  "date": "2026-10-14",
+  "document": "Stacks Project; existing source-square proof and exact-derived-functor shift API",
+  "place": "Tags 03D7 and 03Q8; invert the source square at the identity coefficient map, then shift"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived scalar forgetting with inverse image and free represented sheaves",
+   "date": "2026-10-14",
+   "results": "Eight results, including SheafOfModules.map_ιFree_mapFree_hom and freeHomEquiv_freeMap, concern free sheaves in a different coefficient encoding. No match for either derived source or coefficient square.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-14",
+   "results": "Nine hits including generic naturality, which is used to combine the squares but does not identify their fixed comparison factors.",
+   "verdict": "generic middle step only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso.*comp|rawModuleAbelianHomMap_naturality",
+   "date": "2026-10-14",
+   "results": "msearch returned seven unrelated pullbackIso matches. Local rg located the exact derived single and composition APIs and EtalePullbackSingleComp, whose generic helpers are private; none supplies coherence for RawModuleScalarComparison.pullbackIso. ScalarInverseImageCompositionCoherence concerns Zariski module sheaves over a field, a different site and coefficients.",
+   "verdict": "no existing scalar etale square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and naturality of scalar forgetting on derived Hom with inverse image and shifted coefficients",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; msearch returned zero hits and instructed that no verdict be recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-module-abelian-hom-map-naturality",
+   "place": "Tags 03D7 and 03Q8; shift and inverse coefficient comparison factors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarCoefficientSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_coefficient_square",
+  "statement": "theorem rawModuleScalar_coefficient_square\n    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    (A B : Over W) (f : A ⟶ B) :\n  let VA := (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus\n  let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus\n  let FB := (upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G\n  let bA := scalarCoefficientFactor Λ A.hom G q\n  let bB := scalarCoefficientFactor Λ B.hom G q\n  let mT := moduleCoefficientFactor Λ G q A B f\n  let aT := abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G) q A B f\n  (RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app\n      (((DerivedCategory.Plus.singleFunctor _ 0).obj FB)⟦q⟧) ≫\n    VA.map mT ≫ bA = H.map bB ≫ aT",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarCoefficientFactor",
+   "AlgebraicGeometry.Etale.moduleCoefficientFactor",
+   "AlgebraicGeometry.Etale.abelianCoefficientFactor",
+   "AlgebraicGeometry.Etale.rawModuleScalar_coefficient_square"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T234521-L-2167018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T234521-L-2167018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
