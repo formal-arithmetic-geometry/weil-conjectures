@@ -31,63 +31,61 @@
  ],
  "proof": [
   {
-   "text": "(The intermediate field and its constants.) Put $B=kK^p\\subseteq K$. Since $K$ has characteristic $p$, Frobenius $a\\mapsto a^p$ is a field homomorphism onto the subfield $K^p$: $(a+b)^p=a^p+b^p$ and $(a^{-1})^p=(a^p)^{-1}$ for $a\\ne0$. The $k$-derivation $\\mathrm d_{K/k}:K\\to\\Omega_{K/k}$ [def-weil-pbc-kahler-differentials] kills $k$ by definition and kills $K^p$, since $\\mathrm d(a^p)=p a^{p-1}\\mathrm da=0$. Its kernel is a subfield: additivity and Leibniz give closure under sums and products, and $0=\\mathrm d(1)=\\mathrm d(aa^{-1})=a\\mathrm d(a^{-1})+a^{-1}\\mathrm da$ gives $\\mathrm d(a^{-1})=-a^{-2}\\mathrm da$. Therefore $\\mathrm d_{K/k}$ kills every $b\\in B$.",
+   "text": "Put B = kK^p. Induction on the intermediate-field adjunction proves that the universal k-derivation kills B, using the p-th power rule, additivity, Leibniz and the inverse rule. Induction on finitely supported monomial exponents shows that every monomial differential lies in the K-span of the dt_i. Expand a in the given B-basis and differentiate the finite sum. Therefore every da lies in this span, which is all of Omega by span_range_derivation.",
    "uses": [
     "def-weil-pbc-kahler-differentials"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Definition Tag 07P1 (definition-p-basis), line 11344, and proof of Lemma Tag 07P2 (lemma-p-basis), lines 11383-11384 ('any k-derivation of K annihilates kK^p')"
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b): the presentation by X_i^p - x_i^p; expanded by finite-support reduction and descent of formal partial derivatives. Read at https://stacks.math.columbia.edu/tag/07P2 on 2026-10-13."
    }
   },
   {
-   "text": "(The presentation supplied by the $p$-basis.) Form $P=B[X_i:i\\in I]$ [def-weil-pbc-mv-polynomial-ring] and its evaluation map $e:P\\to K$, $X_i\\mapsto t_i$. Let $J=(X_i^p-t_i^p:i\\in I)\\subseteq P$; $t_i^p\\in K^p\\subseteq B$, so $J\\subseteq\\ker e$. Every polynomial involves only finitely many variables. In $P/J$ replace each factor $X_i^{q_ip+r_i}$, $0\\le r_i<p$, by $(t_i^p)^{q_i}X_i^{r_i}$; applying this to each monomial shows that the classes of $X^E=\\prod_iX_i^{e_i}$ for finitely supported $0\\le e_i<p$ span $P/J$ over $B$. Their images $t^E$ form a $B$-basis of $K$ by the hypothesis, so the induced $B$-linear map $P/J\\to K$ is surjective and injective: any relation among the spanning classes maps to a relation among the independent $t^E$, forcing all its coefficients to be zero. Hence $\\ker e=J$ and $K\\cong P/J$ as $B$-algebras, with the class of $X_i$ identified with $t_i$.",
+   "text": "Evaluation e:B[X_i] -> K is surjective: for a in K evaluate the polynomial sum_E b.repr(a)(E) X^E. The defining equation for b and linearCombination_repr identify its value with a.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07P2 (lemma-p-basis), lines 11395-11398: '$K\\cong kK^p[X_i]/(X_i^p-x_i^p)$'; the finite-support reduction and injectivity from the $p$-basis are made explicit"
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b): the presentation by X_i^p - x_i^p; expanded by finite-support reduction and descent of formal partial derivatives. Read at https://stacks.math.columbia.edu/tag/07P2 on 2026-10-13."
    }
   },
   {
-   "text": "(Differentials over $B$.) By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $\\Omega_{P/B}$ is free over $P$ on $(\\mathrm dX_i)_{i\\in I}$ and $K\\otimes_P\\Omega_{P/B}$ is free over $K$ on $(1\\otimes\\mathrm dX_i)_{i\\in I}$. Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $B\\to P\\to P/J\\cong K$: its exact sequence is $J/J^2\\xrightarrow{\\delta}K\\otimes_P\\Omega_{P/B}\\xrightarrow{w}\\Omega_{K/B}\\to0$, where $\\delta(f\\bmod J^2)=1\\otimes\\mathrm df$ and $w(1\\otimes\\mathrm dX_i)=\\mathrm dt_i$. For each generator $f_i=X_i^p-t_i^p$ of $J$, $\\mathrm df_i=pX_i^{p-1}\\mathrm dX_i-\\mathrm d_B(t_i^p)=0$, because $p=0$ in $B$ and $t_i^p$ is a constant of $P/B$. For $f=\\sum_{j=1}^nh_jf_{i_j}\\in J$ the Leibniz rule gives $1\\otimes\\mathrm df=\\sum_j e(h_j)\\otimes\\mathrm df_{i_j}+\\sum_j e(f_{i_j})\\otimes\\mathrm dh_j=0$. Thus $\\delta=0$, $w$ is an isomorphism, and $(\\mathrm d_{K/B}t_i)_{i\\in I}$ is a $K$-basis of $\\Omega_{K/B}$.",
+   "text": "The given monomial basis is linearly independent. Apply the partial-derivative evaluation-kernel lemma to each i. Derivation.liftOfSurjective descends the formal partial derivative along e; restrict scalars from B to k. The resulting k-derivation delta_i has delta_i(t_j) equal to the Kronecker delta, by the lift evaluation formula and pderiv_X.",
    "uses": [
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-p-independent-evaluation-kernel",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b): the presentation by X_i^p - x_i^p; expanded by finite-support reduction and descent of formal partial derivatives. Read at https://stacks.math.columbia.edu/tag/07P2 on 2026-10-13."
+   }
+  },
+  {
+   "text": "Lift each delta_i through the universal derivation to a K-linear functional on Omega. These functionals are dual to dt_i, so LinearIndependent.of_pairwise_dual_eq_zero_one proves independence. Module.Basis.mk combines independence with the span equality, and mk_apply gives the required basis values. All sums and monomials have finite support; the proof also works for empty I.",
+   "uses": [
     "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07P2 (lemma-p-basis), lines 11395-11398 ('Hence we see that dx_i forms a basis'), expanded using Algebra Lemmas Tag 00RX (lemma-differentials-polynomial-ring) and Tag 00RU (lemma-differential-seq)"
-   }
-  },
-  {
-   "text": "(Return to differentials over $k$.) Apply [lem-weil-pbc-kahler-differentials-first-exact-sequence] to $k\\to B\\to K$. It gives $K\\otimes_B\\Omega_{B/k}\\xrightarrow{u}\\Omega_{K/k}\\xrightarrow{v}\\Omega_{K/B}\\to0$, where $u(c\\otimes\\mathrm d_{B/k}b)=c\\,\\mathrm d_{K/k}b$ and $v(\\mathrm d_{K/k}a)=\\mathrm d_{K/B}a$. Step 1 shows $u=0$ on these generators, hence $u=0$. Exactness says $\\ker v=\\operatorname{im}u=0$ and $v$ is surjective, so $v$ is a $K$-linear isomorphism. It sends each $\\mathrm d_{K/k}t_i$ to $\\mathrm d_{K/B}t_i$, which is a basis by Step 3. Therefore $(\\mathrm d_{K/k}t_i)_{i\\in I}$ is a $K$-basis of $\\Omega_{K/k}$, including the case $I=\\emptyset$.",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-first-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07P2 (lemma-p-basis), lines 11395-11398, implication (a) implies (b); the comparison from $kK^p$ to $k$ uses Algebra Lemma Tag 00RS (lemma-exact-sequence-differentials)"
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b): the presentation by X_i^p - x_i^p; expanded by finite-support reduction and descent of formal partial derivatives. Read at https://stacks.math.columbia.edu/tag/07P2 on 2026-10-13."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-kahler-differentials",
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "lem-weil-pbc-kahler-differentials-first-exact-sequence"
+  "lem-weil-pbc-p-independent-evaluation-kernel",
+  "def-weil-pbc-polynomial-partial-derivative"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b), lines 11395-11398; presentation argument expanded through Algebra Lemmas Tag 00RX (lemma-differentials-polynomial-ring), Tag 00RU (lemma-differential-seq), and Tag 00RS (lemma-exact-sequence-differentials)"
+  "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (a) implies (b): the presentation by X_i^p - x_i^p; expanded by finite-support reduction and descent of formal partial derivatives. Read at https://stacks.math.columbia.edu/tag/07P2 on 2026-10-13. Formal proof by R1: use dual derivations instead of the polynomial differential basis and the two exact sequences."
  },
  "mathlib_searches": [
   {
@@ -185,5 +183,15 @@
   "group": "C1",
   "result": "pass",
   "note": "p prime [Fact p.Prime]+CharP k p (+CharP K p, node says both fields; not instance-derivable), K/k as Algebra, kK^p = IntermediateField.adjoin k (range x^p) concrete, p-basis = Module.Basis on {E : I →₀ ℕ // ∀ i, E i < p} with b E = monomial (same inline form as G1/H1 sibling deliveries), conclusion ∃ Basis I K Ω[K/k] with b i = D k K (t i); empty/infinite I fine; compiled in L"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024045-L-3338092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
