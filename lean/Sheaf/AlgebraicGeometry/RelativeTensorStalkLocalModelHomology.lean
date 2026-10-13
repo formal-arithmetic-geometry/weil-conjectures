@@ -14,6 +14,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.AlgebraicGeometry.RelativeTensorStalkGlobalHomology
+import Sheaf.AlgebraicGeometry.RelativeTensorGlobalLocalStalkDerivedIso
 
 /-! # Relative tensor homology compared with a local stalk model
 
@@ -97,6 +99,16 @@ theorem relativeTensor_stalk_localModel_homology_iso
                         (((openModuleStalkFunctor X V ⟨y, hy⟩).mapHomologicalComplex
                           (.up ℤ)).obj L)) ⊗
                     (DerivedCategory.singleFunctor
-                      (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj M))) := by sorry
+                      (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj M))) := by
+  intro F
+  obtain ⟨M, hM⟩ := relativeTensor_stalk_global_homology_iso f K y P hP q hq F
+  obtain ⟨e⟩ := relativeTensor_global_local_stalk_derived_iso f K V L eL y hy
+  refine ⟨M, fun i ↦ ?_⟩
+  obtain ⟨a⟩ := hM i
+  exact ⟨a ≪≫ (forget₂ (ModuleCat.{u} (Y.presheaf.stalk (f y)))
+    AddCommGrpCat.{u}).mapIso
+      ((DerivedCategory.homologyFunctor (ModuleCat.{u} (Y.presheaf.stalk (f y))) i).mapIso
+        (tensorIso e (Iso.refl ((DerivedCategory.singleFunctor
+          (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj M))))⟩
 
 end AlgebraicGeometry.Scheme

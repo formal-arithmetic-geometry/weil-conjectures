@@ -12269,3 +12269,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: merged deliver/J1/Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality (stage 3; reviewer PASS; first push; landing 20261013T113344-L-3184407 (proof); batch 20261013T113333; modules 1; new nodes 0)
 - 11:33 L: merged deliver/J3/Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkIso (stage 3; reviewer PASS; first push; landing 20261013T113344-L-3184606 (interface); batch 20261013T113333; modules 4; new nodes 3)
 - 11:33 L: merged deliver/J3/Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T113345-L-3184745 (interface); batch 20261013T113333; modules 2; new nodes 1)
+- 11:33 L: merged deliver/K1/Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology (stage 3; reviewer PASS; first push; landing 20261013T113345-L-3184885 (interface); batch 20261013T113333; modules 3; new nodes 2)

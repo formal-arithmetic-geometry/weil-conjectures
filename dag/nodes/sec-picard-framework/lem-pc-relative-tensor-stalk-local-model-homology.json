@@ -17,60 +17,31 @@
  ],
  "proof": [
   {
-   "text": "Use the inverse-image ring stalk isomorphism to transport F_y to the A-module M. Exact restriction to V and the open stalk functor send eL to a derived isomorphism between the global stalk of K and S_{V,y}L; cofinality of the neighbourhoods inside V and the open immersion stalk ring isomorphism identify these stalks. Scalar restriction along the actual f.stalkMap preserves homology and quasi-isomorphisms.",
+   "text": "Use the global stalk homology computation on the prescribed P,q and test sheaf F to obtain M and an abelian-group isomorphism in every degree with the derived tensor of the scalar-restricted global stalk of K.",
    "uses": [
-    "def-sc-open-module-stalk-functor",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-ringed-inverse-image-stalk-scalar-transport"
+    "lem-pc-relative-tensor-stalk-global-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the K-flat stalk criterion to the ringed space with ring sheaf f inverse image O_Y. Transport its K-flat stalk to A and take the stalk of q, a quasi-isomorphism onto the scalar-restricted stalk of K. Therefore its derived object is the scalar-restricted S_{V,y}L. Tensoring with M[0] preserves this derived isomorphism. A common K-flat resolution and invariance of tensor under quasi-isomorphisms between K-flat complexes compute the left tensor by the prescribed stalk complex.",
+   "text": "Apply the proved exact global/local stalk derived comparison to eL. Tensor this isomorphism with the identity of M[0] using tensorIso, apply degree-i derived homology and the forgetful functor, and compose with the global homology comparison. The same M works for every i.",
    "uses": [
-    "lem-pc-kflat-stalk-criterion",
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-tensor-quasi-iso"
+    "lem-pc-relative-tensor-global-local-stalk-derived-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
-   }
-  },
-  {
-   "text": "Stalks commute with total tensor and the degree-zero single complex. Exactness of stalks commutes with degree-i homology. Compose these identifications with the derived tensor comparison from the preceding step, and forget A-module structure. The resulting abelian-group isomorphism holds for every i with the same M. This includes acyclic or zero models and all negative degrees.",
-   "uses": [
-    "lem-pc-stalk-tensor-complex",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-open-module-stalk-functor",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-stalk-criterion",
-  "lem-pc-kflat-tensor-quasi-iso",
-  "lem-pc-ringed-inverse-image-stalk-scalar-transport",
-  "lem-pc-stalk-tensor-complex",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-pc-relative-tensor-stalk-global-homology",
+  "lem-pc-relative-tensor-global-local-stalk-derived-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online.",
-  "group": "H3",
+  "group": "K1",
   "date": "2026-10-13",
-  "note": "Complete source argument specialized and expanded by H3."
+  "note": "Original source argument separated into global tensor computation and a proved exact local stalk comparison."
  },
  "mathlib_searches": [
   {
@@ -172,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8d8c0",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T100005-L-2462550",
+  "landing": "20261013T113345-L-3184885",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures with their nodes, the reduction with its dependencies and sources, and the import change with its record; delivered modules and sole direct importer PerfectRelativeTensorLocallyBounded compile cleanly, with expected axioms. Accepted as a decomposition leaving two named lower holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
