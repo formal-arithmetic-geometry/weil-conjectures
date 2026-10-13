@@ -10650,3 +10650,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/D2/Sheaf.Algebra.Schanuel (stage 3; reviewer PASS; first push; landing 20261013T022409-L-3211520 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/D2/Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapPointwise (stage 3; reviewer PASS; after a return; landing 20261013T022410-L-3211644 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/D3/Sheaf.AlgebraicGeometry.AdjoinFiniteFractionSpec (stage 3; reviewer PASS; first push; landing 20261013T022410-L-3211779 (interface); batch 20261013T022404; modules 1; new nodes 0; change records: coord/changes/exists_adjoin_finite_fraction_spec.md)
+- 02:24 L: merged deliver/D4/Sheaf.RingTheory.KoszulConormalTopHomologyZero (stage 3; reviewer PASS; first push; landing 20261013T022410-L-3211909 (proof); batch 20261013T022404; modules 1; new nodes 0)
