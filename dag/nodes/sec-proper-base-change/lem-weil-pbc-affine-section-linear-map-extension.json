@@ -16,14 +16,15 @@
  ],
  "proof": [
   {
-   "text": "Identify V with Spec R and P|V with the tilde of P(V), using quasi-coherence. The tilde-Gamma adjunction sends f to a morphism from this tilde module to Q|V. Compose with the inverse of the quasi-coherent source counit. The adjunction applies to arbitrary Q.",
+   "text": "Restrict P and Q to the affine scheme V using Scheme.Modules.restrictFunctor; restriction preserves quasi-coherence. Push these modules along the isomorphism V.toSpecΓ. The pushforward of the source is quasi-coherent: it is isomorphic to restriction along the inverse isomorphism, by restrictFunctorId, restrictFunctorCongr, restrictFunctorComp and restrictFunctorAdjCounitIso. On Spec R, define the extension as inv P.fromTildeΓ followed by tilde.map of the section map followed by Q.fromTildeΓ. The source counit is invertible by Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent; no condition on Q is used. The identities toOpen_fromTildeΓ_app and tilde.toOpen_map_app prove the desired equality on global sections. The ΓSpecIso identity for toSpecΓ.appTop identifies the scalar actions.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Transport this morphism back along the affine-open isomorphism and the equivalence between modules on V and modules on opens below V. The unit identity of the adjunction gives phi_V(b)=f(b). Empty V and zero modules are covered by the same equivalences.",
+   "text": "Use Scheme.Modules.overEquiv and overFunctorEquiv to conjugate the restricted morphism and take the fully faithful functor preimage, obtaining P.over V to Q.over V. Apply map_preimage at the top open. Its component reduces to the original morphism at V.ι image top; transport along V.ι_image_top to get the asserted value f(b) at V. This is equality transport only and applies unchanged when V is empty or either module is zero.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
@@ -35,9 +36,9 @@
   "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Lemma 01I7 (lemma-compare-constructions), mapping property; Lemma 01IB (lemma-equivalence-quasi-coherent); applied to the sheaf-morphism construction in Properties, Lemma 01PM."
+  "place": "Mapping property of Lemma 01I7 and affine equivalence of Lemma 01IB, implemented using Mathlib.AlgebraicGeometry.Modules.Tilde and Modules.Sheaf; the Spec/global affine extension calculations adapt the proved source-library Modules.FaithfullyFlatDescent and Modules.AffineHom proofs without their unused target quasi-coherence assumptions."
  },
  "mathlib_searches": [
   {
@@ -128,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-8e773",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T113343-L-3184257",
+  "landing": "20261013T122232-L-3592247",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and counit proof with the node and its dependencies; delivered module and sole direct importer compile without warnings, and the axiom probe shows only the three permitted axioms."
  }
 }
