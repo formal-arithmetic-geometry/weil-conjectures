@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-affine-perfect-chain-map-equality-detection",
+ "kind": "statement",
+ "title": "Eventual equality of chain maps from two stages",
+ "statement": "Let I be a directed preorder and F a diagram of commutative rings with colimit A [def-weil-pbc-category-colimit]. Fix i₀ in I, and cochain complexes E₀ and K₀ of F(i₀)-modules [def-pc-cochain-complex-modules]. Assume E₀ is zero outside a finite interval and each term of E₀ and K₀ is finitely presented [def-sc-finitely-presented-module]. For i and j at least i₀, let f be a chain map Eᵢ to Kᵢ and g a chain map Eⱼ to Kⱼ, with these complexes the termwise scalar extensions of E₀ and K₀. If their scalar extensions to A are equal, then there exists k at least both i and j where their scalar extensions are equal as chain maps. All these maps are transported by [def-pc-complex-scalar-extension-hom]. No homotopy or graded family is constructed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-sc-finitely-presented-module",
+  "def-pc-complex-scalar-extension-hom"
+ ],
+ "proof": [
+  {
+   "text": "Choose an upper bound l of i and j and transport both chain maps to l. The canonical associativity of scalar extension identifies their further extensions to A with the maps in the hypothesis. Extension of scalars preserves finite presentation, so all source and target terms at l are finitely presented. Apply the equality clause of finite-presentation descent to each component in the finite source interval. For a preorder, pass to the equivalent partial-order category obtained by quotienting mutual comparability, use inverse ring isomorphisms for representative changes, and transport back. The same coefficient proof works directly by the filtered-ring elementwise criterion without antisymmetry.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose one upper stage for the finitely many detected component equalities. Extension of scalars preserves them. Outside the finite source interval both maps have zero source, so their components agree there as well. Extensionality of complex morphisms gives equality. Scalar-extension associativity identifies these maps with the two displayed scalarExtensionHom expressions, including the equality witnesses by proof irrelevance.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of maps between finite projective module complexes after scalar extension to a directed ring colimit holds at a common later stage",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality between two chain maps of bounded finite projective modules over different stages of a directed ring colimit is detected at a common later stage",
+   "date": "2026-10-13",
+   "results": "Module.DirectLimit.exists_eq_of_of_eq, ModuleCat.FilteredColimits.M.mk_eq, AlgebraicTopology.DoldKan.P_is_eventually_constant, Module.DirectLimit.exists_of₂, Module.DirectLimit.hom_ext_iff, Module.DirectLimit.congr_apply_of, DirectLimit.Module.hom_ext_iff, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero",
+   "verdict": "no exact match; listed constructions do not give varying-ring finite-presentation descent"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*colimit|directLimit.*(hom|eq)|nullHomotopicMap",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean",
+   "verdict": "no exact match; listed constructions do not give varying-ring finite-presentation descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePerfectHomotopyDescent",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine case (1), finite component data and finite equalities, refining lem-pc-affine-perfect-homotopy-descent proof step 2",
+   "via": [
+    "lem-pc-affine-perfect-homotopy-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePerfectChainMapEqualityDetection",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectChainMapEqualityDetection.lean",
+  "declaration": "CochainComplex.affine_perfect_chainMap_equality_detection",
+  "statement": "theorem affine_perfect_chainMap_equality_detection\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (E₀ K₀ : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n))\n    (hEfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (E₀.X n))\n    (hKfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (K₀.X n))\n    (i : Set.Ici i₀)\n    (j : Set.Ici i₀)\n    (f : ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj E₀ ⟶\n      ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj K₀)\n    (g :\n      ((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj E₀ ⟶\n          ((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj K₀)\n    (h : scalarExtensionHom (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom\n        (colimit.ι F i₀).hom\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm)\n        E₀ K₀ f =\n      scalarExtensionHom (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom\n        (colimit.ι F i₀).hom\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE j.property)).symm)\n        E₀ K₀ g) :\n    ∃ (k : Set.Ici i₀) (hik : i ≤ k) (hjk : j ≤ k),\n      scalarExtensionHom (F.map (homOfLE i.property)).hom (F.map (homOfLE hik)).hom\n        (F.map (homOfLE k.property)).hom\n        (congrArg CommRingCat.Hom.hom (F.map_comp\n          (homOfLE i.property) (homOfLE hik))) E₀ K₀ f =\n      scalarExtensionHom (F.map (homOfLE j.property)).hom (F.map (homOfLE hjk)).hom\n        (F.map (homOfLE k.property)).hom\n        (congrArg CommRingCat.Hom.hom (F.map_comp\n          (homOfLE j.property) (homOfLE hjk))) E₀ K₀ g",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c12a9",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T100154-L-2494996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c12a9",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T100154-L-2494996",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proof with all three nodes, finite-presentation dependency, Stacks Tags 09RE/05N7, unchanged existing signature, and clean compilation of delivery plus AffinePerfectHomColimit."
+ }
+}

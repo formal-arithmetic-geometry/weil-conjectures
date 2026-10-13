@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-affine-perfect-graded-hom-descent",
+ "kind": "statement",
+ "title": "Descent of degree-minus-one graded maps on bounded finitely presented complexes",
+ "statement": "Let I be a directed preorder and F a diagram of commutative rings with colimit A [def-weil-pbc-category-colimit]. Fix i₀ in I, and cochain complexes E₀ and K₀ of F(i₀)-modules [def-pc-cochain-complex-modules]. Assume E₀ is zero outside a finite interval and every term of E₀ and K₀ is finitely presented [def-sc-finitely-presented-module]. Write Eᵢ and Kᵢ for their termwise scalar extensions to a stage i at least i₀, and E and K for their extensions to A. Given such a stage i and a degree-minus-one graded family s, consisting of a map Eⁿ to Kⁿ⁻¹ for every integer n, there exist j at least i and a degree-minus-one family t between Eⱼ and Kⱼ whose scalar extension to A agrees componentwise with s. The scalar extension uses the same canonical associativity transport as [def-pc-complex-scalar-extension-hom]; its left and right comparison maps L and R are given explicitly in lean.statement. No chain-map or homotopy identity is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-sc-finitely-presented-module",
+  "def-pc-complex-scalar-extension-hom"
+ ],
+ "proof": [
+  {
+   "text": "For each degree m in a finite support interval of E₀, apply the maps clause of finite-presentation descent to E₀.X m and K₀.X (m-1). Choose a common upper stage also above i. For a preorder, quotient by mutual comparability and choose representatives. This is an equivalent indexing category; F sends equivalent indices to inverse ring isomorphisms. Use finite-presentation descent on that partial-order diagram and transport back, enlarging above the requested original i. Equivalently the coefficient-matrix proof uses the elementwise filtered-colimit criterion and only directedness.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport every descended component to the common stage by scalar-extension associativity. The comparison isomorphisms in the finite-presentation theorem send 1 tensor x to 1 tensor (1 tensor x). These are exactly the values of extendScalarsComp, so tensor generation identifies the comparisons with the displayed L and R, after the ring-homomorphism equality hc. Put zero outside the finite source interval; extension of scalars preserves these zero source terms. The up-shape relation n to m forces n=m-1, so this defines every required component and proves its equality to s after extension.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of degree minus one module maps between bounded finite projective complexes descends along a directed colimit of commutative rings",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degree minus one graded family between bounded complexes of finite projective modules over a directed colimit of rings descends to a stage",
+   "date": "2026-10-13",
+   "results": "CochainComplex.isKProjective_of_projective, localCohomology.ofDiagram, Module.DirectLimit.exists_of₂, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Module.DirectLimit.exists_of, Rep.standardComplex.x_projective, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt",
+   "verdict": "no exact match; listed constructions do not give varying-ring finite-presentation descent"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*colimit|directLimit.*(hom|eq)|nullHomotopicMap",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean",
+   "verdict": "no exact match; listed constructions do not give varying-ring finite-presentation descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePerfectHomotopyDescent",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine case (1), finite component data and finite equalities, refining lem-pc-affine-perfect-homotopy-descent proof step 1",
+   "via": [
+    "lem-pc-affine-perfect-homotopy-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePerfectGradedHomDescent",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectGradedHomDescent.lean",
+  "declaration": "CochainComplex.affine_perfect_gradedHom_descent",
+  "statement": "theorem affine_perfect_gradedHom_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (E₀ K₀ : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n))\n    (hEfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (E₀.X n))\n    (hKfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (K₀.X n))\n    (i : Set.Ici i₀)\n    (s : ∀ m n : ℤ, (ComplexShape.up ℤ).Rel n m →\n      ((((ModuleCat.extendScalars (colimit.ι F i₀).hom).mapHomologicalComplex\n      (.up ℤ)).obj E₀).X m ⟶ (((ModuleCat.extendScalars (colimit.ι F i₀).hom).mapHomologicalComplex\n      (.up ℤ)).obj K₀).X n)) :\n    ∃ (j : Set.Ici i₀) (hij : i ≤ j)\n      (t : ∀ m n : ℤ, (ComplexShape.up ℤ).Rel n m →\n        ((((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj E₀).X m ⟶\n          (((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj K₀).X n)),\n      let hc := congrArg CommRingCat.Hom.hom\n        (colimit.w F (homOfLE j.property)).symm\n      let L := eqToHom (congrArg (fun r ↦\n          ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀) hc) ≫\n        (NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp\n          (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom) (.up ℤ)).hom.app E₀\n      let R := (NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp\n          (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom) (.up ℤ)).inv.app K₀ ≫\n        eqToHom (congrArg (fun r ↦\n          ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀) hc.symm)\n      ∀ m n : ℤ, ∀ hmn : (ComplexShape.up ℤ).Rel n m,\n        L.f m ≫ (ModuleCat.extendScalars (colimit.ι F j.val).hom).map (t m n hmn) ≫\n          R.f n = s m n hmn",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c12a9",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T100154-L-2494996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c12a9",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T100154-L-2494996",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proof with all three nodes, finite-presentation dependency, Stacks Tags 09RE/05N7, unchanged existing signature, and clean compilation of delivery plus AffinePerfectHomColimit."
+ }
+}

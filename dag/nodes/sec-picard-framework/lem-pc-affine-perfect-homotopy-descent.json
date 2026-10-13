@@ -25,29 +25,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a homotopy over A. Its degree-minus-one components have source Eⁿ and target Kⁿ⁻¹ and only finitely many components can be nonzero. Finite projectivity implies finite presentation by Mathlib Module.finitePresentation_of_projective. Descend these components by [lem-pc-fp-module-map-descent-affine] and take a common upper stage above i. In a preorder the same finite-presentation proof applies, using the elementwise colimit criterion [lem-pc-filtered-colimit-commrings-elementwise]; no use of antisymmetry is made. To use the stated partial-order theorem literally, quotient I by mutual comparability and select representatives. The resulting partial-order category is equivalent to I; F sends mutually comparable indices to inverse isomorphisms, so transport F and its colimit across this equivalence, apply the partial-order theorem, and transport the finite-data result back. Directedness supplies an upper bound with the original requested index.",
+   "text": "Finite projectivity implies finite presentation termwise by Module.finitePresentation_of_projective. Extract the relevant degree-minus-one components s of the given homotopy. Mathlib nullHomotopicMap' and the homotopy comm identity show its boundary equals the scalar extension of f-g, component by component.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply graded-map descent to s at a stage above i. In Lean prove that scalarExtensionHom preserves the boundary operation by map_nullHomotopicMap', comp_nullHomotopicMap', and nullHomotopicMap'_comp. The component equalities of the descended family identify its extended boundary with the boundary of s.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-affine-perfect-graded-hom-descent"
    ],
    "elementary": false
   },
   {
-   "text": "At the stage where the components are defined, the homotopy equations fⁿ - gⁿ = d_K sⁿ + sⁿ⁺¹ d_E hold over A. Apply equality detection to each of the finitely many nontrivial equations, and take a common later upper bound j. Put zero components outside the support and away from the required degree-minus-one shape. The homotopy identities then hold in every degree. Canonical associativity transport identifies the two endpoint maps with scalarExtensionHom, giving the required Nonempty Homotopy at j.",
+   "text": "Apply eventual equality of chain maps to f-g at i and the descended boundary at j. Their extensions to the colimit are equal by the preceding calculations. Obtain k above both i and j where these chain maps are equal.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-affine-perfect-chain-map-equality-detection"
    ],
    "elementary": false
+  },
+  {
+   "text": "The descended boundary has the canonical nullHomotopy'. Map that homotopy by the scalar-extension functor and compose with the canonical comparison morphisms. Additivity of scalar extension, obtained from the extension-restriction adjunction, gives preservation of subtraction and zero. Rewrite with the detected equality and apply Homotopy.equivSubZero.symm to obtain the asserted homotopy between the scalar extensions of f and g.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine",
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-pc-affine-perfect-graded-hom-descent",
+  "lem-pc-affine-perfect-chain-map-equality-detection"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE affine calculation"
+  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
  },
  "mathlib_searches": [
   {
@@ -112,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-c12a9",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T031537-L-3570228",
+  "landing": "20261013T100154-L-2494996",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean statements and proof with all three nodes, finite-presentation dependency, Stacks Tags 09RE/05N7, unchanged existing signature, and clean compilation of delivery plus AffinePerfectHomColimit."
  }
 }
