@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-restricted-single-coefficient-composition",
+ "kind": "statement",
+ "title": "Composition of restricted single-complex coefficient maps",
+ "statement": "For a commutative ring Λ, a scheme W and a module sheaf G on W.Etale [def-weil-pbc-etale-sheaves], let f:A→B and g:B→C be arrows of Over W. Let vf and vg be the canonical derived single-functor comparisons followed by single of the inverse upperStarComp identifications f*B*G→A*G and g*C*G→B*G [lem-weil-pbc-inverse-image-composition]. The derived composition comparison at single(C*G), followed by D⁺(f*).map vg and vf, equals the corresponding canonical single-complex coefficient map for f≫g. This is an equality of unshifted coefficient morphisms; no class, test object, base S or degree is used.",
+ "source": {
+  "document": "Stacks Project, Tags 03CB and 09Z1; existing canonical comparison calculations",
+  "place": "The source, shift, or coefficient part of lem-sbc-higher-image-raw-pullback-composition-formula, step 2; instantiated proved exact-functor coherence tools."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Distribute the outer derived inverse image over the inner coefficient composition. Naturality of its single-functor comparison moves single of the inner coefficient identification to the right.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use upperStarComp_hom_app_map_upperStarComp_inv_app in BaseChange.Pasting with f.left,g.left,C.hom and the diagonal maps (f≫g).left,B.hom,A.hom. Cancel the invertible comparison components to identify f*.map(g,C)⁻¹ ≫ (f,B)⁻¹ with (f,g)⁻¹ ≫ (fg,C)⁻¹.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine and distribute the singleFunctor maps using the underived identity. Apply upperStarPlusComp_single to the two single comparisons and the inverse underived (f,g) comparison. Cancel the derived (f,g) hom and inv.",
+   "uses": [
+    "lem-sbc-pullback-single-comp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-pullback-single-comp"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 03CB and 09Z1; proved library comparison calculations",
+  "place": "D4: single-functor naturality, underived associativity and the already proved upperStarPlusComp_single; no postponed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of raw triangle pullback of derived cohomology classes and canonical degree zero coefficient comparison",
+   "date": "2026-10-13",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of pullback on morphisms in derived category with shifts and coefficient maps",
+   "date": "2026-10-13",
+   "results": "Shift and Ext lemmas found, but no complete raw triangle composition theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarPlusComp\"",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rawTriangleMap.*comp|mapDerivedCategoryPlusSingleFunctor.*comp|rawGeneralComp|sourceComp",
+   "date": "2026-10-13",
+   "results": "Found proved sourceComp in AbelianRawPullbackComposition and shift helpers in AbelianDerivedDirectImageTransitionShift; upperStarPlusComp_single in EtalePullbackSingleComp. Used these existing proofs.",
+   "verdict": "existing tools, no exact public theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackCompositionFormula",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-higher-image-raw-pullback-composition-formula",
+   "place": "Step 2 of the five-factor composition proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRestrictedCoefficientComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRestrictedCoefficientComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRestrictedCoefficient_comp",
+  "statement": "theorem higherDirectImageRestrictedCoefficient_comp\n    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    {A B C : Over W} (f : A ⟶ B) (g : B ⟶ C) :\n    (upperStarPlusComp (ModuleCat.{u + 1} Λ) f.left g.left).hom.app\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj\n          (((C.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) ≫\n      D+((f.left)^*[ModuleCat.{u + 1} Λ]).map\n        ((((g.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫\n          (DerivedCategory.Plus.singleFunctor _ 0).map\n            ((upperStarComp (ModuleCat.{u + 1} Λ) g.left C.hom B.hom\n              (Over.w g).symm).inv.app G)) ≫\n      (((f.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫\n      (DerivedCategory.Plus.singleFunctor _ 0).map\n        ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom\n          (Over.w f).symm).inv.app G) =\n    ((((f ≫ g).left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫\n      (DerivedCategory.Plus.singleFunctor _ 0).map\n        ((upperStarComp (ModuleCat.{u + 1} Λ) (f ≫ g).left C.hom A.hom\n          (Over.w (f ≫ g)).symm).inv.app G)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T150350-L-809111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T150350-L-809111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

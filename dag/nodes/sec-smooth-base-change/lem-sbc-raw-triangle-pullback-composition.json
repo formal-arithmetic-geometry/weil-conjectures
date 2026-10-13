@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-raw-triangle-pullback-composition",
+ "kind": "statement",
+ "title": "Raw triangle pullback composition with arbitrary derived coefficient maps",
+ "statement": "For a commutative ring Λ, schemes X,Y,Z,S, morphisms a:X→Y,b:Y→Z,h:Z→S,hy:Y→S,hx:X→S with b≫h=hy and a≫hy=hx, any integer q, bounded-below derived module sheaves K on Z,L on Y,M on X [def-weil-pbc-derived-categories], and arbitrary coefficient maps v:D⁺(b*)K→L and w:D⁺(a*)L→M, raw triangle pullback [sbc-lem-higher-image-raw-triangle-restriction] along a≫b with coefficient (upperStarPlusComp a b).hom.app K ≫ D⁺(a*).map v ≫ w agrees on every class z at every U in S.Etale with the successive raw triangle pullbacks along b with v and a with w. The composition comparison is canonical [lem-weil-pbc-inverse-image-composition]. This statement does not identify the restricted single-complex coefficient maps.",
+ "source": {
+  "document": "Stacks Project, Tags 03CB and 09Z1; existing canonical comparison calculations",
+  "place": "The source, shift, or coefficient part of lem-sbc-higher-image-raw-pullback-composition-formula, step 2; instantiated proved exact-functor coherence tools."
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Normalize hy=b≫h and hx=a≫b≫h using the triangle equations. Expand both triangle pullbacks as rawTriangleMap and distribute the outer derived pullback over the inner factors.",
+   "uses": [
+    "sbc-lem-higher-image-raw-triangle-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of the inverse single-functor comparison to move the inner source comparison to the left. Composition of the single comparisons and associativity of upperStarComp identify the two source factors with the composite source factor followed by upperStarPlusComp.hom. The already proved generic sourceComp calculation in AbelianRawPullbackComposition realizes this part over ModuleCat Λ.",
+   "uses": [
+    "lem-sbc-abelian-raw-pullback-composition",
+    "lem-sbc-pullback-single-comp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move upperStarPlusComp.hom through the arbitrary class by naturality. Its compatibility with shifts follows from the exact-functor derived natural-isomorphism and composition comparisons. The proved plusNatIso_commShift and plusCompIso_commShift helpers in AbelianDerivedDirectImageTransitionShift supply these compatibilities. Naturality of commShiftIso moves v through the outer shift factor; commShiftIso_comp_hom_app and NatTrans.shift_app_comm combine the shifts.",
+   "uses": [
+    "lem-sbc-abelian-derived-transition-shift",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functoriality of the shift functor combines the remaining factors into shift of upperStarPlusComp.hom.app K ≫ D⁺(a*).map v ≫ w. Reassociate to obtain exactly the composite triangle pullback. This uses no single-complex presentation or invertibility of K,L,M,v,w.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "lem-sbc-abelian-raw-pullback-composition",
+  "lem-sbc-pullback-single-comp",
+  "lem-sbc-abelian-derived-transition-shift",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 03CB and 09Z1; proved library comparison calculations",
+  "place": "D4: source and shift parts of the original five-factor plan, using proved comparison tools; the arbitrary-derived-coefficient triangle identity remains to formalize."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of raw triangle pullback of derived cohomology classes and canonical degree zero coefficient comparison",
+   "date": "2026-10-13",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of pullback on morphisms in derived category with shifts and coefficient maps",
+   "date": "2026-10-13",
+   "results": "Shift and Ext lemmas found, but no complete raw triangle composition theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarPlusComp\"",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rawTriangleMap.*comp|mapDerivedCategoryPlusSingleFunctor.*comp|rawGeneralComp|sourceComp",
+   "date": "2026-10-13",
+   "results": "Found proved sourceComp in AbelianRawPullbackComposition and shift helpers in AbelianDerivedDirectImageTransitionShift; upperStarPlusComp_single in EtalePullbackSingleComp. Used these existing proofs.",
+   "verdict": "existing tools, no exact public theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackCompositionFormula",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-higher-image-raw-pullback-composition-formula",
+   "place": "Step 2 of the five-factor composition proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawTrianglePullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawTrianglePullback_comp",
+  "statement": "theorem higherDirectImageRawTrianglePullback_comp\n    (Λ : Type (u + 1)) [CommRing Λ] {X Y Z S : Scheme.{u}}\n    (a : X ⟶ Y) (b : Y ⟶ Z) (h : Z ⟶ S) (hy : Y ⟶ S) (hx : X ⟶ S)\n    (wy : b ≫ h = hy) (wx : a ≫ hy = hx) (q : ℤ)\n    (K : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (v : D+((b)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ L)\n    (w : D+((a)^*[ModuleCat.{u + 1} Λ]).obj L ⟶ M)\n    (U : S.Etale) (z : (higherDirectImagePresheaf Λ h q K).obj (op U)) :\n    higherDirectImageRawTrianglePullback Λ (a ≫ b) h hx\n        (by rw [Category.assoc, wy, wx]) q K M\n        ((upperStarPlusComp (ModuleCat.{u + 1} Λ) a b).hom.app K ≫\n          D+((a)^*[ModuleCat.{u + 1} Λ]).map v ≫ w) U z =\n      higherDirectImageRawTrianglePullback Λ a hy hx wx q L M w U\n        (higherDirectImageRawTrianglePullback Λ b h hy wy q K L v U z)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T150350-L-809111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T150350-L-809111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
