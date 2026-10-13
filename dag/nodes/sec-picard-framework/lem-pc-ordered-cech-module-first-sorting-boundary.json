@@ -14,26 +14,49 @@
  },
  "proof": [
   {
-   "text": "Proof: On an open B of X', identify the full cochains of D with sections on the\nproducts of the W₀ using e. Apply the explicit junction sum cechFirstSortingHom:\nsum over the stable permutation, the junction position, and the partial sorting permutation, with\ncoefficient (-1)^a sign(tau).\nThe intersection arrows are the unique arrows of opens with the prescribed tuple\nprojections. Transport the output back through e inverse. Every summand is additive.\nNaturality of e and functoriality of restriction show naturality in B. For local\nlinearity, apply hlinear to each input coordinate; the two paths restricting a\nscalar to the output intersection agree in the poset of opens. Since e is bijective,\nthe output coordinates determine a locally linear section map. These maps define\nmorphisms of module sheaves in adjacent natural degrees. Push them forward along f'\nand conjugate by extendXIso in nonnegative degrees; put zero in all other degrees.\nApply cechFirstSortingIdentity on each open, using hd for the transported\ndifferential. The categorical products of opens identify with the intersections in\nSiteCechComplex, by their universal properties. The stable-sorting term is exactly\nthe displayed permutation sum, with prod.map giving the same unique restriction.\nThe resulting boundary is identity minus stable sorting.\nIn degree zero the incoming term vanishes in both natural and extended complexes.\nFor r=0 the products of section groups indexed by tuples are empty, hence zero;\nno nonempty or covering assumption is used. Repeated tuples are retained by stable sorting, including in degrees above r;\nthe junction formula still applies.",
+   "text": "Construct adjacent-degree maps explicitly: take the finite signed junction sum of full tuple projections and restriction natural transformations, assemble by Pi.lift, and compose with e inverse. Naturality follows from functoriality and uniqueness of arrows between opens. Apply hlinear coordinatewise, restriction semilinearity, and product-coordinate injectivity to prove local linearity; PresheafOfModules.homMk gives module-sheaf morphisms. The natural coordinate definition is used, not the degreewise projection existence theorem.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "lem-pc-ordered-cech-degreewise-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicit intersection site with opens infimum_k (W0(t k) meet B). Its canonical restriction to the chosen tuple product times B is an isomorphism. Evaluate hd at each tuple coordinate and use cechComplexFunctor_d_pi to identify the differential with the alternating face sum; all compared composites of open maps agree by thinness. The constructed adjacent maps become cechFirstSortingHom on this intersection model.",
    "uses": [
     "def-pc-ordered-cech-module-coordinates",
-    "lem-pc-ordered-cech-module-projection-lift",
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cechFirstSortingIdentity to these sectionwise cochains. Expand nullHomotopicMap in degree zero separately, where the incoming term vanishes, and in successor degrees as the two adjacent compositions. The preceding coordinate identities identify its boundary with identity minus signed stable sorting. This includes r=0, repeated tuples, and degrees above r without extra hypotheses.",
+   "uses": [
     "lem-pc-alternating-cech-first-sorting-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Push the constructed null homotopy forward and extend it using Mathlib mapHomotopy and Homotopy.extend. The homotopy comm equation identifies its boundary with extendMap of the pushed-forward natural boundary. Cancel extendXIso and use injectivity of the intersection restriction isomorphism to recover the exact orderedCechFullCoordinate formula on each inverse-image open.",
+   "uses": [
+    "lem-pc-ordered-cech-module-projection-lift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-ordered-cech-degreewise-projection",
   "def-pc-ordered-cech-module-coordinates",
-  "lem-pc-ordered-cech-module-projection-lift",
-  "lem-pc-alternating-cech-first-sorting-identity"
+  "lem-pc-alternating-cech-first-sorting-identity",
+  "lem-pc-ordered-cech-module-projection-lift"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "H2",
+  "agent": "D2",
   "document": "Stacks Project, Cohomology of Sheaves",
   "place": "Tag 01FM, equation 20.23.6.1",
-  "note": "Local module-sheaf assembly of the corresponding additive sorting identity."
+  "note": "Explicit module-sheaf assembly of the additive first sorting identity; second reading verifies construction, local scalar compatibility, degree-zero boundary, and pushforward/extension transport. DegreewiseProjection supplies only its real natural-coordinate definition."
  },
  "mathlib_searches": [
   {
@@ -122,10 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T100003-L-2461771",
-  "kind": "interface",
+  "landing": "20261013T111840-L-3048460",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
