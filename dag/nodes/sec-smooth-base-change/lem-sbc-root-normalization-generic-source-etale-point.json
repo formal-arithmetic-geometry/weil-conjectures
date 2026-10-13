@@ -12,18 +12,46 @@
  },
  "proof": [
   {
-   "text": "Analyze the finite tame DVR extension at the fixed point, apply Abhyankar's lemma to obtain index one and separable residue extension, and use openness of etaleness for finite presentation.",
-   "uses": [],
+   "text": "Apply root-normalization-generic-stalk-flat with H, g=b(f), n=|G|>0 and the actual pulled-back finite etale p. This gives flatness of every normalization stalk above j(eta).",
+   "uses": [
+    "lem-sbc-root-normalization-generic-stalk-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply root-normalization-generic-stalk-unramified to the original G-torsor, its compatible cartesian comparison, the invertible group order and the actual root extension. This gives formal unramifiedness at x.",
+   "uses": [
+    "lem-sbc-root-normalization-generic-stalk-unramified"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the open F on N consisting of points with all normalization stalks above them flat, by finite-flat-target-locus. The first step puts j(eta) in F. Restrict to F and use the stalk criterion for flatness, transporting stalk maps through morphismRestrictStalkMap.",
+   "uses": [
+    "lem-sbc-finite-flat-target-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use formally-unramified-stalk-neighbourhood to choose a source open B through x. Let E=B intersect the inverse image of F. Its map to N factors through the flat target restriction and is formally unramified as a restriction of B. Finiteness over the locally Noetherian base supplies local finite presentation; the flat plus formally-unramified criterion gives Etale (E.ι composed with a.fromNormalization). The equality a.fromNormalization(x)=j(eta) proves x lies in E.",
+   "uses": [
+    "lem-sbc-formally-unramified-stalk-neighbourhood"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-finite-flat-target-locus",
+  "lem-sbc-formally-unramified-stalk-neighbourhood",
+  "lem-sbc-root-normalization-generic-stalk-flat",
+  "lem-sbc-root-normalization-generic-stalk-unramified"
+ ],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "K2",
+  "group": "N1",
   "document": "Stacks Project",
-  "place": "Tags 09EB, 0BRM, and 0EYG."
+  "place": "Tags 09EB, 0BRM, 0EYG (local calculation), 00RC (flat locus) and 02GF (unramified locus)."
  },
  "mathlib_searches": [
   {
@@ -91,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T181109-L-2603378",
+  "landing": "20261013T190147-L-3218544",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
