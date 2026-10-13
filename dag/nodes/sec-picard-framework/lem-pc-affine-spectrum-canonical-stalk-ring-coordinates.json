@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); lemma-adjoint-pullback-pushforward-modules (Tag 0096); perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine reduction in the proof"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-affine-spectrum-canonical-stalk-ring-coordinates",
+ "title": "Compatibility of the actual affine-spectrum stalk ring maps",
+ "statement": "For a cartesian square of affine schemes [def-pc-scheme] and a cartesian square of their spectra of global sections, let z0 be a point of Spec Γ(X', top), z=X'.isoSpec.inv(z0), and R,A,B,D and R0,A0,B0,D0 the stalk rings with their structural maps [def-pc-single-complex-base-change-stalk-condition]. Define canonicalSpectrumStalkEquiv(Y,y,y0,h) by the ring isomorphism eqToIso(congrArg Y.presheaf.stalk h) followed by the stalk isomorphism of Y.isoSpec.inv, where h:y=Y.isoSpec.inv(y0). Fix eA to this map for Y=X, y=g'(z), y0=g0'(z0), h from isoSpec naturality, and fix eD to this map for Y=X', y=z, y0=z0, h=rfl. There exist eR:R≃+*R0 and eB:B≃+*B0 such that eA(algebraMap R A r)=algebraMap R0 A0 (eR r), eB(algebraMap R B r)=algebraMap R0 B0 (eR r), and eD(μ(a tensor b))=μ0(eA(a) tensor eB(b)) for every r,a,b. This assertion fixes eA and eD to the actual stalk maps and does not involve complexes or q.",
+ "proof": [
+  {
+   "text": "Construct eR and eB by the stalk isomorphisms of the isoSpec inverses after transporting their source points. Naturality of isoSpec, stalkMap_comp and stalkMap_congr_hom prove the two base-ring equations.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction equations of tensorMap express a pure tensor image as the product of the two projection stalk images. Apply naturality of both projection stalk maps and preservation of multiplication by eD.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); lemma-adjoint-pullback-pushforward-modules (Tag 0096); perfect.tex, lemma-single-complex-base-change-condition (Tag 0DJ8), affine reduction in the proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalkMap_comp|isoSpec_inv_naturality|germ_stalkMap_apply",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "date": "2026-10-14",
+   "verdict": "Component lemmas only; no theorem with the fixed tensorPullback and stalk coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the stalk ring isomorphisms induced by replacing affine schemes with spectra of global sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.isoSpec_hom_naturality, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq_fromSpecStalk, AlgebraicGeometry.Scheme.isoSpec_hom_naturality_assoc, AlgebraicGeometry.Scheme.isoSpec_inv_naturality, AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, AlgebraicGeometry.Scheme.Spec_fromSpecStalk, AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq",
+   "date": "2026-10-14",
+   "verdict": "Component lemmas only; no theorem with the fixed tensorPullback and stalk coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isoSpec_inv_naturality",
+   "results": "1 hits: AlgebraicGeometry.Scheme.isoSpec_inv_naturality",
+   "date": "2026-10-14",
+   "verdict": "Component lemmas only; no theorem with the fixed tensorPullback and stalk coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk ring maps under the affine spectrum isomorphism commute with scheme morphisms and products of tensor generators",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumTensorGeneratorCoordinates",
+  "date": "2026-10-14",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-spectrum-tensor-generator-coordinates",
+   "place": "Compatibility of the actual affine-spectrum stalk ring maps",
+   "via": [
+    "lem-pc-affine-spectrum-tensor-generator-coordinates"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumCanonicalStalkRingCoordinates.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_canonicalSpectrum_stalk_ring_coordinates",
+  "statement": "theorem exists_canonicalSpectrum_stalk_ring_coordinates\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (z0 : Spec Γ(X', ⊤)) :\n    let z := X'.isoSpec.inv z0\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))\n    letI := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0\n    letI := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop)\n      (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0\n    letI := (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop)\n      (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).toAlgebra\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} (R (Spec.map f.appTop) (Spec.map g'.appTop) z0))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (B (Spec.map f'.appTop) z0))\n    let R0 := R (Spec.map f.appTop) (Spec.map g'.appTop) z0\n    let A0 := A (Spec.map g'.appTop) z0\n    let B0 := B (Spec.map f'.appTop) z0\n    let D0 := C z0\n    let hA : g' z = X.isoSpec.inv ((Spec.map g'.appTop) z0) :=\n      (congrArg (fun k : Spec Γ(X', ⊤) ⟶ X ↦ k z0)\n        (Scheme.isoSpec_inv_naturality g')).symm\n    let eA := canonicalSpectrumStalkEquiv X (g' z) ((Spec.map g'.appTop) z0) hA\n    let eD := canonicalSpectrumStalkEquiv X' z z0 rfl\n    ∃ (eR : R f g' z ≃+* R0) (eB : B f' z ≃+* B0),\n      (∀ r : R f g' z,\n        eA (algebraMap (R f g' z) (A g' z) r) = algebraMap R0 A0 (eR r)) ∧\n      (∀ r : R f g' z,\n        eB (algebraMap (R f g' z) (B f' z) r) = algebraMap R0 B0 (eR r)) ∧\n      (∀ (a : A g' z) (b : B f' z),\n        eD (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z) (a ⊗ₜ[R f g' z] b)) =\n          algebraMap (A0 ⊗[R0] B0) D0 (eA a ⊗ₜ[R0] eB b))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.SingleComplexBaseChange.canonicalSpectrumStalkEquiv",
+   "AlgebraicGeometry.SingleComplexBaseChange.exists_canonicalSpectrum_stalk_ring_coordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T234508-L-2161957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T234508-L-2161957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
