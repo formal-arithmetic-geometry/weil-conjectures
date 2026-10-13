@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-strict-henselization-mod-power-free], T is the n-adic completion of the free A-module F=\\bigoplus_{x\\in X}A, the identification being the inverse limit of the A/n^r-isomorphisms F/n^rF\\cong A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r sending basis vectors to the images of X; under it the module action of \\hat A=\\varprojlim_r A/n^r on \\hat F is the action through the ring map \\hat A\\to T obtained as the limit of A/n^r\\to A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r. Since F is free, hence flat, and A is Noetherian, the completion-of-a-flat-module theorem [lem-weil-pbc-flat-module-completion-flat] makes T flat over \\hat A, i.e. the ring map \\hat A\\to T is flat; the ring map A\\to\\hat A is flat by [lem-weil-pbc-noetherian-completion-flat]. Their composite is the canonical map A\\to T, so it is flat by [lem-weil-pbc-flat-ring-map-comp].",
+   "text": "Apply [lem-sc-strict-henselization-mod-power-free] to obtain a set X and an A-linear equivalence E from the n-adic completion of F = X →₀ A to T. The module F is free and hence flat (Mathlib Module.Flat.finsupp). By [lem-weil-pbc-flat-module-completion-flat], its completion is flat over the completed base ring. The completed base ring is flat over A by [lem-weil-pbc-noetherian-completion-flat]. Restrict scalars using Module.Flat.trans, the module form of [lem-weil-pbc-flat-ring-map-comp], to conclude that the completion of F is flat over A. Transfer this flatness along E using Module.Flat.of_linearEquiv E.symm, and convert it into flatness of the canonical algebra map using RingHom.flat_algebraMap_iff. Only A-linearity of E is required: no completed-base action on T or completed-base linearity of E needs to be established.",
    "uses": [
     "lem-sc-strict-henselization-mod-power-free",
     "lem-weil-pbc-flat-module-completion-flat",
@@ -36,7 +36,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'; composition with Tag 00HC"
+    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
    }
   }
  ],
@@ -147,5 +147,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T152021-L-954798",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

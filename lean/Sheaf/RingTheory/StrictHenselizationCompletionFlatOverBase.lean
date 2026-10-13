@@ -9,6 +9,7 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
+import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Sheaf.RingTheory.FlatModuleCompletion
 import Sheaf.RingTheory.StrictHenselizationModPowerFree
 
@@ -46,6 +47,12 @@ theorem strictHenselization_completion_flat_over_base
     [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C) :
     (algebraMap A
       (AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) C)).Flat := by
-  sorry
+  obtain ⟨X, _, _, _, E, _⟩ := strictHenselization_mod_power_free A K C hC
+  let I := IsLocalRing.maximalIdeal A
+  have : Module.Flat (AdicCompletion I A) (AdicCompletion I (X →₀ A)) :=
+    Module.flat_adicCompletion A I (X →₀ A)
+  have : Module.Flat A (AdicCompletion I (X →₀ A)) :=
+    Module.Flat.trans A (AdicCompletion I A) (AdicCompletion I (X →₀ A))
+  exact RingHom.flat_algebraMap_iff.mpr (Module.Flat.of_linearEquiv E.symm)
 
 end Algebra
