@@ -13,34 +13,40 @@
  ],
  "proof": [
   {
-   "text": "The transition maps define a ring diagram with cocone (C,g). To verify its colimit property, define the map to any other compatible cocone on a representative g_j(a). Two representatives with the same image can be moved to a common stage; their difference vanishes in C, hence vanishes later by the zero assumption, so their images in the other cocone agree. Addition, multiplication, zero and one are preserved by choosing a common stage; uniqueness follows from the representative assumption. The same argument restricts to any upper tail. For a preorder use its poset reflection and choose one representative per class: mutually comparable transition maps are inverse by the system laws. Choose a common maximum universe and use ULift on the rings, indices and modules to fit the categorical interface; ULift equivalences transport the eventual conclusion back.",
+   "text": "Restrict to the upper tail K = {j | i ≤ j}, which is inhabited and directed even when J is only a preorder. Give A_j and C their A_i-algebra structures using f_ij and g_i. The composition and cocone laws make the transition maps and g_j A_i-linear. Move every coefficient representative above i and retain eventual zero on this tail. This is constructed explicitly in the Lean proof, without a poset reflection or universe lifts.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply the map-descent clause of finitePresentation_descent_directedColimit to the given equivalence and its inverse. Move both descended maps to a common stage. Their extensions agree with the original maps, because the canonical comparison isomorphisms satisfy the unit-tensor equations and these determine a scalar-extension map.",
+   "text": "In the proved private helper tensor_elementwise, lift the compatible maps A_j → C to q : Module.DirectLimit A_j → C. Surjectivity is the representative assumption. For injectivity, represent two classes at stages j,k, take a common l, and apply eventual zero to f_jl(a)-f_kl(b); their representatives then agree at a later stage. Thus q is a linear equivalence. Apply TensorProduct.directLimitLeft (the directed form of Tag 00DD) and tensor q with either fixed module. Check the comparison on pure tensors. Module.DirectLimit.exists_of and of.zero_exact give tensor representatives and eventual tensor zero. The ring, index, and module universes remain independent.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-weil-pbc-tensor-commutes-with-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "The stage modules remain finitely presented by base change. Each composite becomes the identity after scalar extension to C. Apply the equality clause of finitePresentation_descent_directedColimit to each composite and the appropriate identity. Take a common upper bound for these two eventual equalities. Base change preserves composition and identity, so the two maps there are inverse. Their linear equivalence is the required conclusion.",
-   "uses": [
-    "lem-pc-fp-module-base-change",
-    "lem-pc-fp-module-map-descent-affine"
-   ],
+   "text": "The proved private helper fp_lift implements Tag 05LI (3) on an arbitrary elementwise module system. Choose a finite free cover π of the finitely presented source and finite generators of ker π. Represent the images of its finitely many generators at a common stage. Their linear combination a₀ agrees with the limit map after π. Images of the finitely many kernel generators vanish at the limit, so move to a common later stage killing them. The transported a₀ kills ker π and therefore factors through the quotient and the proved quotient-to-source equivalence. Apply this helper to p ↦ e(1 tensor p) and n ↦ e⁻¹(1 tensor n), then move both maps to a common stage l. Scalar extension by liftBaseChange gives A_l-linear maps U,V. Their extensions agree with e,e⁻¹ by tensor induction, as proved in tensor_lift_limit.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Form A_i-linear error maps p ↦ V(a(p)) - 1 tensor p and n ↦ U(b(n)) - 1 tensor n in the two stage tensor modules. The compatibility from tensor_lift_limit and the inverse identities for e show both errors vanish over C. The proved helper eventually_zero_hom takes finite generators of the source, kills their error images at a common stage using eventual tensor zero, and extends equality from their span. Apply it to both errors and take a common upper stage m. The transition composition laws keep both errors zero at m.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport a and b to m and apply liftBaseChange to obtain Um,Vm. The proved tensor_lift_naturality identifies the transport of each composite error with the corresponding composite on unit tensors at m. Both composites fix every unit tensor. Scalar linearity then fixes every pure tensor, so AlgebraTensorModule.ext gives Vm∘Um=id and Um∘Vm=id. LinearEquiv.ofLinearMap builds the required equivalence at m. All helpers are proved with no sorry. Empty generating or relation sets, zero modules and rings use the inhabited tail rather than a chosen finite generator.",
+   "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-base-change",
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-weil-pbc-tensor-commutes-with-colimits"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 05N7 (2), (3); Tags 00D6 and 00DD"
+  "place": "Tags 05N7 (2),(3), 05LI (1),(3), 00D6, 00D7 and 00DD; direct elementwise implementation using proved private helpers, D3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -122,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T111935-L-3067800",
-  "kind": "interface",
+  "landing": "20261013T141524-L-378429",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
