@@ -17,36 +17,34 @@
  },
  "proof": [
   {
-   "text": "Identify the four stalk rings and structure maps by isoSpec naturality and stalkMap_comp, including the stalkCongr in rightAlgebra. Tensor the ring isomorphisms and their inverses; check the two inclusions to identify tensorMap. The pullback-stalk germ formula identifies the stalk complex of P0 with extension along the stalk ring isomorphism.",
+   "text": "Obtain compatible stalk ring equivalences and the input and ordinary tensor chain isomorphisms q and t from the affine spectrum tensor coordinates theorem.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-weil-pbc-module-stalk-pullback"
+    "lem-pc-affine-spectrum-tensor-coordinate-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction along the inverse ring maps gives inverse exact equivalences. Transport the universal left-derived scalar-extension functor and its counit through these equivalences. Apply homology and cohomologyIso_smul; tensor induction lifts the resulting B-linear isomorphism to the full tensor algebra. Extend along the compatible map to C and forget scalars, obtaining l.",
+   "text": "Apply the localized derived tensor naturality theorem under the four compatible ring isomorphisms. It supplies an additive source isomorphism l and the square with the localized comparison and inverse exact restriction homology map. The proved private categorical assembly lemma postcomposes with exact restriction homology and tensorStalkIso0, and cancels the inverse followed by the hom map.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-base-derived-tensor-ring-iso-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary tensor coordinate equation. The private ordinary_stalk_transport_eq follows by evaluating the localization lift at Q(Pg), unfolding the explicit ordinary stalk homology isomorphism and cancelling the exact coordinate pullback counit. Naturality of comparisonStalkHomologyIso for alpha.inv, followed by its inverse and the explicit comparisonIntoTensorPullback definition, yields the unchanged displayed square. The private homology_inverse_square and assemble_comparison_square lemmas contain the categorical cancellation, and functoriality rewrites the composite maps in comparisonIntoTensorPullback.",
+   "uses": [
+    "lem-pc-affine-spectrum-tensor-coordinate-transport",
+    "lem-pc-iso-pullback-stalk-cohomology",
+    "def-pc-tensor-pullback-composition-iso",
     "lem-pc-stalk-comparison-source-transport"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The model equations comparison_eq and localized_eq give compatibility with the localized comparisons. The tensorStalkIso germ formulas and the adjunction-mate composition formula identify the ordinary target transport with alpha.inv. The restriction-stalk construction of T followed by the exact iso-pullback counit is precisely this ordinary transport before Q(alpha.inv). These equations yield the displayed square without any inverse counit along gprime.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "def-pc-tensor-pullback-composition-iso",
-    "lem-pc-iso-pullback-stalk-cohomology",
-    "lem-weil-pbc-module-stalk-pullback"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "A4 extraction of the ordinary comparison part of the affine reduction; Tags 0098 and 0096"
+  "place": "G2 reduction: separate derived ring-isomorphism naturality from ordinary stalk tensor coordinates; prove the exact counit and homology-factor assembly in Lean"
  },
  "mathlib_searches": [
   {
@@ -124,12 +122,11 @@
   }
  },
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-single-complex-base-change-stalk-condition",
   "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-affine-spectrum-tensor-coordinate-transport",
+  "lem-pc-base-derived-tensor-ring-iso-naturality",
   "lem-pc-iso-pullback-stalk-cohomology",
-  "lem-pc-stalk-comparison-source-transport",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-pc-stalk-comparison-source-transport"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -145,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T160708-L-1370479",
+  "landing": "20261013T181057-L-2599440",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
