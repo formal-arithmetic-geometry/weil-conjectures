@@ -750,7 +750,10 @@ def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
         cp = repairs.claim_path(e['item'])
         current = repairs.read(cp)
         if current and current.get('who') not in (e['group'], job['group']):
-            raise recovery.Conflict('repair claim already held by ' + current['who'])
+            # another group already works on the item (2026-10-13 22:46: raising here withdrew a whole batch):
+            # no repair job, that group's work stands; the delivery is still taken out
+            repair_jobs.pop(key(e), None)
+            continue
         prepared[cp.relative_to(ROOT).as_posix()] = json.dumps(dict(
             who=job['group'], t=time.time(), since=ld.now(), repair=job['id'])).encode()
         rp, before, parts = md.return_entries(e['group'], e['item'])
