@@ -11652,3 +11652,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/H1/Sheaf.Algebra.Homology.DerivedTensorFlatSecondLocalization (stage 3; reviewer PASS; first push; landing 20261013T082348-L-1636883 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FormalFunctionsAffineRestrictionDictionary (stage 3; reviewer PASS; first push; landing 20261013T082348-L-1637046 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/H2/Sheaf.RingTheory.FormalGlueingIsogeny (stage 3; reviewer PASS; first push; landing 20261013T082349-L-1637238 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:23 L: merged deliver/H4/Sheaf.AlgebraicGeometry.Morphisms.FiniteStructureAlgebraDepth (stage 3; reviewer PASS; after a return; landing 20261013T082349-L-1637407 (proof); batch 20261013T082326; modules 1; new nodes 0)

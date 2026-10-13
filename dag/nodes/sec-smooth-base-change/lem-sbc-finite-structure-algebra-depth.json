@@ -16,27 +16,38 @@
  ],
  "proof": [
   {
-   "text": "At a boundary point y choose an affine Noetherian neighbourhood Spec R. Its inverse image is Spec S with S finite over R. For q corresponding to y, the stalk of p_* O_E is the localization of S at R minus q. The algebra isomorphism alpha identifies this finite R_q-module with A_y and respects the action of R_q.",
+   "text": "At y = p(z), apply the stalk functor to the supplied isomorphism of structure algebras. Under.w guarantees compatibility with the base stalk action. This gives an algebra equivalence from A_y to B = (p_* O_E)_y. Transport finite generation and depth across its underlying linear equivalence. The private linear-equivalence helper proves depth invariance for every ideal over an arbitrary commutative ring by transporting ideal multiples and regular sequences; specialize it to the base maximal ideal.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let g:B -> O_E,z be the canonical stalkPushforward homomorphism and q the inverse image of the maximal ideal of O_E,z. The localness of p.stalkMap shows that q contracts to the maximal ideal of O_L,y. Choose an affine open U around y; p is affine because it is finite. With S = Gamma(E,p^{-1}U), the affine pushforward stalk theorem identifies B as a localization of S at the image of functions not vanishing at y. The affine source stalk theorem identifies O_E,z as S localized at its point prime. The first denominator monoid is contained in the second because its elements become units in O_E,z. IsLocalization.isLocalization_of_submonoid_le therefore makes O_E,z a localization of B at the image of the second monoid. Enlarge this monoid to B minus q using IsLocalization.of_le; all its elements map to units by the definition of q. Uniqueness of localization gives B_q isomorphic to O_E,z.",
+   "uses": [
+    "lem-sc-affine-pushforward-stalk-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
    "elementary": false
   },
   {
-   "text": "Points z of E over y correspond exactly to the maximal ideals of that finite R_q-algebra: finite maps are integral, and a prime over a maximal ideal is maximal. The source local ring O_E,z is its localization at the corresponding maximal ideal.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Apply Tag 0AUK with N equal to the finite R_q-algebra itself. Its depth as an R_q-module is the minimum of the depths of the localizations at these maximal ideals. The supplied lower bound therefore holds for every such local ring. A zero algebra stalk has no points above it, so the conclusion there is vacuous.",
-   "uses": [],
+   "text": "For every B-regular sequence with scalars in the maximal ideal of O_L,y, change scalars along O_L,y -> B to obtain a weakly regular sequence in B contained in q. Localize using the Mathlib weakly-regular-sequence localization theorem to obtain a regular sequence of the same length in B_q, with all entries in its maximal ideal. The base maximal ideal does not generate B because its extension lies in the proper prime q. Taking suprema of sequence lengths proves depth over O_L,y of B <= depth of B_q (also for infinite depth). The private ring-equivalence helper transports depth for any proper ideal of an arbitrary commutative ring to its image ideal. Proper ideals do not generate the ring as a module over itself, and ring equivalences preserve properness, regular sequences and lengths. Specialize this inequality to the maximal ideal of B_q and use the Mathlib maximal-ideal transport theorem to pass across B_q isomorphic to O_E,z. Compose with the supplied depth >= 2 bound. Only this lower inequality from Tag 0AUK is needed, not the full minimum-depth formula or maximality of q.",
+   "uses": [
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-affine-pushforward-stalk-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "T3",
+  "by": "H4",
+  "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 0AUK, applied to the finite direct image algebra as in the proof of Tag 0EY6(2)"
+  "place": "Tag 0AUK, lower-bound direction, as used in Tag 0EY6(2)",
+  "note": "Complete Lean proof using the existing affine pushforward stalk localization theorem and Mathlib localization of weakly regular sequences. The full minimum-depth equality is unnecessary. Repair: generalized the three duplicate private helpers to arbitrary ideals and commutative rings; the public statement and dependency route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -115,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T025309-L-3425017",
-  "kind": "interface",
+  "landing": "20261013T082349-L-1637407",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
