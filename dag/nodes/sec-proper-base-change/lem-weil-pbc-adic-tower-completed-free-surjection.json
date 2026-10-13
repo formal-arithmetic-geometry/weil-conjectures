@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-adic-tower-completed-free-surjection",
+ "kind": "statement",
+ "title": "Surjective completed finite free presentation of an adic tower",
+ "statement": "Let A be a commutative ring, I an ideal, and T an inverse system of A-modules [def-weil-inverse-system], with level n meaning exponent n+1. Assume T_0 is finite [def-weil-finitely-generated-module], each T_n is annihilated by I^(n+1), and each successor map is surjective with kernel I^(n+1)T_(n+1). Let B be the I-adic completion [def-weil-pbc-adic-completion]. Let N be a B-module equipped with an A-linear isomorphism e to lim T satisfying the completed scalar residue equation [lem-weil-pbc-adic-tower-completed-scalar-limit]. Then there exist d in N and a surjective B-linear map q from the I-adic completion of A^d to N.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, proof: Surjective completed finite free presentation of an adic tower"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-inverse-system",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-adic-tower-completed-scalar-limit"
+ ],
+ "proof": [
+  {
+   "text": "Lift a finite generating family of T_0 through the surjective tower projections to N. Its level images define compatible maps from A^d/I^(n+1)A^d to T_n. Reduction modulo I is the chosen generating map, so nilpotent Nakayama in A/I^(n+1) makes each map surjective. The composite T_n → T_0 has kernel I T_n by induction: lift I-multiples through a surjective successor map, then absorb its kernel I^(n+1)T_(n+1) into I T_(n+1). Hence T_n/I T_n = T_0; the ideal I modulo I^(n+1) is nilpotent.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "lem-weil-pbc-nakayama-nilpotent",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a kernel vector from level n to level n+1 and correct its image using I^(n+1) times a vector in the free presentation. The transition kernel assumption permits this correction, proving surjectivity of the presentation kernel transitions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exactness of tower limits with surjective kernels. The inverse limit of the free quotients is the completion of A^d. The induced map to lim T is surjective. Compose with e inverse; the scalar residue equation and equality detected by all projections prove B-linearity, giving q.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, proof; explicit categorical and completed scalar glue by V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjective completed finite free presentation of inverse limit of adic module tower; inverse limit of presentation kernels maps surjectively to each presentation kernel",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence conclusion from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit of finite modules with adic transition kernels is finite over adic completion; lift kernel vector at finite level to kernel of map from completed free module",
+   "results": "IsAdicComplete, AdicCompletion, AdicCompletion.module, IsAdicComplete.of_lift, IsAdicComplete.mk_lift, IsAdicComplete.StrictMono.mk_lift, Hausdorffification.lift_of",
+   "date": "2026-10-13",
+   "verdict": "Completion constructors and lifts only; no arbitrary tower completed presentation or kernel correction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Function.Surjective",
+   "results": "AdicCompletion.eval_surjective, AdicCompletion.map_surjective_of_mkQ_comp_surjective, AdicCompletion.map_surjective, AdicCompletion.map_exact, AdicCompletion.of_surjective, AdicCompletion.kerProj_surjective",
+   "date": "2026-10-13",
+   "verdict": "Only maps of completions of already given modules; no compatible free presentations of arbitrary adic towers."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*[Ll]ift|[Ll]ift.*kernel|free.*[Ss]urject; rg on Mathlib/RingTheory/AdicCompletion and lean/Sheaf and lean/WeilConjectures for adicTower, completed free and presentation kernels",
+   "results": "Mathlib categorical kernel lifts, finitePresentation_of_free_of_surjective; Mathlib AdicCompletion.piEquivFin, eval_surjective, pow_smul_top_eq_ker_eval. Existing Sheaf.AdicTowerFiniteLimit is the parent; TowerLimitExactSurjectiveKernels supplies exactness. No matching independent theorem found.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; finite product, completion quotient and tower exactness tools supply ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit",
+  "group": "V1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 087W, proof: Surjective completed finite free presentation of an adic tower",
+   "via": [
+    "lem-weil-pbc-adic-tower-finite-limit",
+    "lem-weil-pbc-coherent-formal-modules-affine-limit",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.AdicTowerCompletedFreeSurjection",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/AdicTowerCompletedFreeSurjection.lean",
+  "declaration": "ModuleCat.adicTower_completedFreeSurjection",
+  "statement": "theorem adicTower_completedFreeSurjection (A : Type u) [CommRing A]\n    (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (hfinite : Module.Finite A (T.obj (op 0)))\n    (hzero : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥)\n    (htrans : ∀ n : ℕ,\n      Function.Surjective (T.map (homOfLE (Nat.le_succ n)).op) ∧\n      LinearMap.ker (T.map (homOfLE (Nat.le_succ n)).op).hom =\n        I ^ (n + 1) • (⊤ : Submodule A (T.obj (op (n + 1)))))\n    (N : ModuleCat.{u} (AdicCompletion I A))\n    (e : (restrictScalars (algebraMap A (AdicCompletion I A))).obj N ≅ limit T)\n    (hscalar : ∀ (n : ℕ) (r : AdicCompletion I A) (a : A) (x : N),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (e.hom ≫ limit.π T (op n)) (r • x) =\n        a • (e.hom ≫ limit.π T (op n)) x) :\n    ∃ (d : ℕ) (q : AdicCompletion I (Fin d → A) →ₗ[AdicCompletion I A] N),\n      Function.Surjective q",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T024051-L-3340131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T024051-L-3340131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,43 +16,45 @@
  ],
  "proof": [
   {
-   "text": "Surjective transitions give surjective limit projections. Lift generators of T_0 to N. At every level the associated finite free quotient presentation is surjective by nilpotent Nakayama: reduction modulo I is the given generating map onto T_0.",
+   "text": "Obtain a surjection q from the completed finite free module using only finiteness of T_0. Mathlib AdicCompletion.piEquivFin identifies the source with B^d, and Module.Finite.of_surjective then proves finiteness of N.",
    "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
-    "lem-weil-pbc-nakayama-nilpotent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The kernels of these presentations have surjective transitions: lift a vector in a lower kernel, then correct its next image by a vector in I^(n+1) times the free module. Exactness of tower limits with surjective kernels gives a surjection from a finite free B-module to N. The residue equation makes it B-linear, so N is finite.",
-   "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "lem-weil-pbc-adic-tower-completed-free-surjection",
     "def-weil-finitely-generated-module"
    ],
    "elementary": false
   },
   {
-   "text": "For an element with zero nth projection, choose a free completed lift. Lift its nth coordinate through the kernel tower and subtract this kernel lift. The difference has zero nth free coordinate, so lies in I^(n+1) times the completed free module by the completion quotient formula, since I is finitely generated. Its image gives membership in I^(n+1)N. The reverse inclusion follows from annihilation of T_n.",
+   "text": "Shift the natural-number tower to n+k. This shift is final, so its opposite preserves the limiting cone. Apply Mathlib Concrete.surjective_π_app_zero_of_surjective_map to get surjectivity of the nth projection, and compose with the isomorphism e.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x in the nth projection kernel, choose y with q(y)=x and correct y by a global presentation-kernel vector z with the same nth free residue. Then y-z has zero nth evaluation. Since A is Noetherian, I is finitely generated; AdicCompletion.pow_smul_top_eq_ker_eval gives y-z in I^(n+1) times the completed free module. Restrict q to an explicit A-linear map and use Submodule.smul_top_le_comap_smul_top to map this membership to x in I^(n+1)N.",
    "uses": [
+    "lem-weil-pbc-adic-tower-free-kernel-correction",
     "lem-weil-pbc-module-completion-complete",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false
+  },
+  {
+   "text": "The reverse kernel inclusion follows from A-linearity of the projection and annihilation of T_n: every scalar in I^(n+1) kills every projected vector. Use Submodule.smul_le and Submodule.smul_mem_smul.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
-  "lem-weil-pbc-nakayama-nilpotent",
+  "lem-weil-pbc-adic-tower-completed-free-surjection",
   "def-weil-finitely-generated-module",
+  "lem-weil-pbc-adic-tower-free-kernel-correction",
   "lem-weil-pbc-module-completion-complete",
   "def-weil-pbc-noetherian-ring"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R3",
+  "group": "V1",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W, proof, generator lifting through the final cokernel calculation; explicit categorical and scalar glue by R3, following the source argument"
+  "place": "Lemma 087W, proof; completed free surjection and kernel correction split as separate nodes; final finite-generation, shifted projection and completion quotient arguments formalized in Lean"
  },
  "mathlib_searches": [
   {
@@ -192,9 +194,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T002358-L-2376819",
+  "landing": "20261013T024051-L-3340131",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
