@@ -1,0 +1,215 @@
+{
+ "id": "lem-pc-u3-projective-finite-cohomology-presentation",
+ "kind": "statement",
+ "title": "Projective coherent presentation with finite cohomology source",
+ "statement": "Let $T$ be an affine scheme with $A=\\Gamma(T,\\mathcal O_T)$ Noetherian [def-pc-scheme], $N$ a finite coordinate type, and $P=\\mathbb P(N;T)$ [def-nagata-projective-space-base-change]. Let $j:Y\\hookrightarrow P$ be a closed immersion [def-weil-closed-immersion] and $F$ a quasi-coherent finitely presented module on $Y$ [def-weil-sheaf-of-modules-category], and $q\\in\\mathbb N$. There exist an $\\mathcal O_P$-module $E$ and an epimorphism $\\varphi:E\\to j_*F$ such that $\\ker\\varphi$ is quasi-coherent and finitely presented and $H^q(P,E)$ [pqf-def-cohomology] is a finite $A$-module, with scalar action restricted along the projective projection. This asserts no exact cohomology segment and no finiteness of cohomology of $F$ or of the kernel.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YS, proof of Lemma 30.14.1 (1) and (3); Tag 01XT, Lemma 30.8.1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The affine base is locally Noetherian via its isomorphism to Spec A, and projective space is locally Noetherian since its projection is locally of finite type. Closed pushforward G=j_*F is quasi-coherent and finitely presented: on affine charts its sections are the finite module on the inverse image, regarded over the Noetherian chart ring. No cohomology comparison or exact cohomology segment is used in this step.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, coherent.tex",
+    "place": "Tag 01Y6, Lemma 30.9.9"
+   }
+  },
+  {
+   "text": "Identify the affine base T with Spec A, A=Gamma(T,O), and transport G along the induced projective-space isomorphism. The twist-quotient theorem gives a finite sum E of negative twists and an epimorphism to G with quasi-coherent finitely presented kernel. Transport this epimorphism and its kernel back to projective space over T. If the coordinate type is empty, the projective space is empty and every module is zero; use the identity of G as the epimorphism.",
+   "uses": [
+    "lem-pc-projective-space-twist-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, coherent.tex",
+    "place": "Tag 01YS, proof of Lemma 30.14.1 (1) and (3); Tag 01XT, Lemma 30.8.1"
+   }
+  },
+  {
+   "text": "Over A the standard affine cover computes twist cohomology. The monomial calculation gives finite free cohomology for each twist in every degree, including a singleton coordinate type where projective space is Spec A and every twist is free of rank one. Cohomology is additive, hence carries the finite sum to the corresponding finite direct sum of finite A-modules. Transport the comparison along the affine-base isomorphism: naturality for multiplication by base sections makes it A-linear for the restriction along the projection. This gives Module.Finite of H^q(E) without any finiteness assertion about G or the kernel.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, coherent.tex",
+    "place": "Tag 01YS, proof of Lemma 30.14.1 (1) and (3); Tag 01XT, Lemma 30.8.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YS, proof of Lemma 30.14.1 (1) and (3); Tag 01XT, Lemma 30.8.1",
+  "note": "A scoped extraction of the twist-source portion of the cited proof, transported from a ring to an arbitrary affine base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on projective space over a Noetherian affine scheme is a quotient of a sheaf with finite cohomology and coherent kernel",
+   "results": {
+    "t": "2026-10-13T06:40:12Z",
+    "tool": "leanfinder",
+    "query": "A coherent sheaf on projective space over a Noetherian affine scheme is a quotient of a sheaf with finite cohomology and coherent kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.isFinitePresentation",
+     "SheafOfModules.IsFinitePresentation",
+     "SheafOfModules.GeneratingSections.IsFiniteType",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation"
+    ],
+    "digest": "89399b060d71eb04"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match: none supplies a projective coherent presentation with finite source cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel, CategoryTheory.Epi",
+   "results": {
+    "t": "2026-10-13T06:40:14Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Limits.kernel, CategoryTheory.Epi",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.eq_zero_of_epi_kernel",
+     "CategoryTheory.Limits.kernel_not_epi_of_nonzero",
+     "CategoryTheory.Limits.kernel.of_cokernel_of_epi",
+     "CategoryTheory.Abelian.epi_factorThruCoimage",
+     "CategoryTheory.NonPreadditiveAbelian.isIso_factorThruCoimage",
+     "CategoryTheory.Abelian.isIso_factorThruCoimage",
+     "CategoryTheory.Abelian.epiDesc",
+     "CategoryTheory.Abelian.isColimitMapCoconeOfCokernelCoforkOfπ"
+    ],
+    "digest": "1b34af7c5df43ff8"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match: none supplies a projective coherent presentation with finite source cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*finite|finite.*cohomology|twist.*cohomology",
+   "results": {
+    "t": "2026-10-13T06:40:14Z",
+    "tool": "grep",
+    "query": "cohomology.*finite|finite.*cohomology|twist.*cohomology",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match: none supplies a projective coherent presentation with finite source cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf on projective space over a Noetherian affine scheme has an epimorphism from a sheaf with finite cohomology and coherent kernel",
+   "results": {
+    "t": "2026-10-13T06:41:10Z",
+    "tool": "leansearch",
+    "query": "A coherent sheaf on projective space over a Noetherian affine scheme has an epimorphism from a sheaf with finite cohomology and coherent kernel",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveFiniteSourceCohomologySegment",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Proof of lem-pc-coherent-hi: projective-space case, choose a finite twist quotient and use finite cohomology of the twist source before descending induction.",
+   "via": [
+    "lem-pc-p2-projective-finite-source-cohomology-segment",
+    "lem-pc-m1-projective-affine-finite-cohomology-independent",
+    "lem-pc-q2-chow-twist-finite-cohomology",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveFiniteCohomologyPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_projective_finite_cohomology_presentation",
+  "statement": "theorem exists_projective_finite_cohomology_presentation\n    {Y T : Scheme.{u}} [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]\n    (N : Type u) [Finite N] (j : Y ⟶ ℙ(N; T)) [IsClosedImmersion j]\n    (F : Y.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation] (q : ℕ) :\n    ∃ (E : (ℙ(N; T)).Modules) (φ : E ⟶ (pushforward j).obj F) (_ : Epi φ),\n      (kernel φ).IsQuasicoherent ∧ (kernel φ).IsFinitePresentation ∧\n      (letI : Module Γ(T, ⊤) (E.H q) :=\n        Module.compHom _ (ℙ(N; T) ↘ T).appTop.hom\n       Module.Finite Γ(T, ⊤) (E.H q))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100151-L-2494023",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100151-L-2494023",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

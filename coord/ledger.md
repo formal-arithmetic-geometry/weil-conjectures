@@ -12015,3 +12015,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/U3/Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes (stage 3; reviewer PASS; first push; landing 20261013T100149-L-2493559 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/U3/Sheaf.AlgebraicGeometry.PicardSingleRankSourceLocal (stage 3; reviewer PASS; after a return; landing 20261013T100149-L-2493699 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/U3/Sheaf.AlgebraicGeometry.PinnedProjectionCounitExactShift (stage 3; reviewer PASS; first push; landing 20261013T100150-L-2493846 (interface); batch 20261013T095923; modules 2; new nodes 1)
+- 10:01 L: merged deliver/U3/Sheaf.AlgebraicGeometry.ProjectiveFiniteSourceCohomologySegment (stage 3; reviewer PASS; first push; landing 20261013T100151-L-2494023 (interface); batch 20261013T095923; modules 2; new nodes 1)
