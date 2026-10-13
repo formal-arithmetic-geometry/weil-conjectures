@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-object-resolution-cocycle-equivalence",
+ "kind": "statement",
+ "title": "Single-site object cohomology equivalence normalized on Ext cocycles",
+ "statement": "Let C be a category, J a Grothendieck topology on C admitting abelian sheafification, and suppose Ext exists for abelian sheaves [def-weil-pbc-sites-and-cohomology]. Let F be an abelian sheaf, I an injective resolution of F [def-sp-injective-resolutions], q a nonnegative integer, and V an object of C. Put P(V) equal to the sheafification of the free abelian presheaf on yoneda(V), and put K equal to the complex of sections of I over V. There exists an additive equivalence e from Ext^q(P(V),F) to H^q(K) such that for every a:P(V)→I^q satisfying a≫d=0, e(I.extMk(a)) is the homology projection of the cycle whose underlying section is a evaluated at the sheafified identity generator. The cycle and its class are explicitly constructed as sheafCocycleSection and sheafCocycleSectionClass; they are not arbitrary existential choices.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Section 01FT, equation-cohomology-object-site; Tag 06XR (1), lemma-compute-ext-resolutions. Source tex fetched and read in scratchpad."
+ },
+ "proof": [
+  {
+   "text": "Compose sheafification adjunction, the free abelian adjunction on presheaves, and Yoneda. Their composite is the additive equivalence Hom(P(V),A)≃A(V) evaluating the sheafified identity generator. Postcomposition naturality intertwines the differentials, so this gives a chain isomorphism of the Hom complex with the section complex.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute Ext with I using InjectiveResolution.extAddEquivCohomologyClass and its extMk formula [lem-weil-pbc-ext-via-injective-resolution]. Restrict the extension of I by zero from integer degrees to nonnegative degrees; homology is preserved, also at q=0 where the incoming term is zero. Compose the homology isomorphism of the termwise adjunction with this Ext computation. If the given HasExt universe differs, insert the canonical Ext universe equivalence, which preserves extMk. The composite is additive and invertible. Its value on extMk(a) is exactly the class of the evaluated section, by the formula on extMk and functoriality of the cycle projection.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Section 01FT, equation-cohomology-object-site; Tag 06XR (1), lemma-compute-ext-resolutions. Source tex fetched and read in scratchpad.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext from a free representable sheaf is cohomology of the section complex with cocycle formula",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext injective resolution cocycle evaluation at representable identity homology naturality",
+   "date": "2026-10-13",
+   "results": "8 hits including InjectiveResolution.extEquivCohomologyClass_extMk, extMk_surjective, extAddEquivCohomologyClass-related API; no single-site section comparison formula.",
+   "verdict": "partial match; Ext computation exists, section comparison must be constructed"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "date": "2026-10-13",
+   "results": "One hit: HomologicalComplex.homologyπ_naturality, Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex.",
+   "verdict": "naturality step available"
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_extMk|homologyπ_naturality|cyclesMap_i",
+   "date": "2026-10-13",
+   "results": "25 hits, including cyclesMap_i and homologyπ_naturality in the homology API. Local reading of FreeRepresentableHomotopyHomology and ObjectCohomologyPresheafResolution found existential comparisons without a formula on representative cocycles.",
+   "verdict": "no exact cocycle-normalized comparison statement found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiEtaleResolutionCocycleCompatibility",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-etale-resolution-cocycle-homology",
+   "place": "Construct cocycle-normalized equivalences from the termwise adjunction and injective-resolution Ext computation (proof steps 1 and 2).",
+   "via": [
+    "lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ObjectCohomologyResolutionCocycleEquivalence",
+  "file": "lean/Sheaf/Paper/ObjectCohomologyResolutionCocycleEquivalence.lean",
+  "declaration": "objectCohomology_resolution_cocycle_equivalence",
+  "statement": "theorem objectCohomology_resolution_cocycle_equivalence\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{v}]\n    [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]\n    (F : Sheaf J AddCommGrpCat.{v}) (I : InjectiveResolution F) (q : ℕ) (V : C) :\n    ∃ (e : Sheaf.H' F q V ≃+ (sheafSectionComplex J I.cocomplex V).homology q),\n      ∀ (a : (presheafToSheaf J AddCommGrpCat.{v}).obj\n        (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ I.cocomplex.X q)\n        (ha : a ≫ I.cocomplex.d q (q + 1) = 0),\n        e (I.extMk a (q + 1) rfl ha) =\n          sheafCocycleSectionClass J I.cocomplex q V a ha",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da1aa",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T022435-L-3223337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da1aa",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T022435-L-3223337",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes, change record, source comparisons, forced adaptation, and report; compilation and axiom checks pass."
+ }
+}

@@ -99,6 +99,19 @@ theorem zariski_etale_resolution_cocycle_homology
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
                (ComplexShape.up ℕ)).map b) q).hom (e₁ (R.extMk a (q + 1) rfl ha)) := by
-  obtain ⟨e₁, e₂, _⟩ := zariski_etale_resolution_cocycle_equivalences i hi F I R b q V
-  refine ⟨e₁, e₂, ?_⟩
-  exact zariski_etale_resolution_cocycle_compatibility i hi F I R b q V e₁ e₂
+  set_option backward.isDefEq.respectTransparency false in
+    obtain ⟨e₁, h₁⟩ := objectCohomology_resolution_cocycle_equivalence
+      (Opens.grothendieckTopology X.carrier) _ R q V
+    obtain ⟨e₂, h₂⟩ := objectCohomology_resolution_cocycle_equivalence
+      X.smallEtaleTopology F I q (i.obj V)
+    refine ⟨e₁, e₂, ?_⟩
+    intro a ha c hc h
+    erw [h₁ a ha, h₂ c hc]
+    exact (zariski_etale_resolution_cocycle_compatibility
+      (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
+        (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
+          (.up ℕ)).map b) q
+      (sheafCocycleSection _ R.cocomplex q V a)
+      (sheafCocycleSection_closed _ R.cocomplex q V a ha)
+      (sheafCocycleSection X.smallEtaleTopology I.cocomplex q (i.obj V) c)
+      (sheafCocycleSection_closed X.smallEtaleTopology I.cocomplex q (i.obj V) c hc) h).symm

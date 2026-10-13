@@ -1,75 +1,50 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group X2
+-/
 module
 
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.Continuous
-public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import Sheaf.Paper.ObjectCohomologyResolutionCocycleEquivalence
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+open CategoryTheory CategoryTheory.Limits Opposite
 
-/-- Intermediate cocycle-comparison component for the Zariski–étale resolution comparison.
+/-- Naturality of the class of a section cycle under a chain map.
 
-The existence of the displayed additive equivalences is the termwise sheafification,
-free-abelian, and Yoneda calculation from Stacks Project, Section 01FT.
+Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
+Tag 06XR (1), lemma-compute-ext-resolutions.
+(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility)
 
-STATEMENT-DISPUTED: the theorem quantifies over arbitrary additive equivalences e₁ and e₂;
-composing either with negation generally changes one side only, so the claimed equality is false
-without coherence hypotheses.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility) -/
+Proof: Injectivity of the inclusion of cycles and its naturality show that the
+cycles map takes the cycle of x to the cycle of y. Naturality of the homology
+projection then identifies their homology classes. This works for every chain
+map of abelian-group cochain complexes, with no site or resolution hypotheses. -/
 theorem zariski_etale_resolution_cocycle_compatibility
-    {X : Scheme.{u + 1}}
-    (i : X.Opens ⥤ X.Etale)
-    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)
-      X.smallEtaleTopology)
-    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]
-    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]
-    [HasExt
-      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})]
-    [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]
-    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (I : InjectiveResolution F)
-    (R : InjectiveResolution ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
-      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F))
-    (b : R.cocomplex ⟶
-      ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
-        (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex
-          (ComplexShape.up ℕ)).obj I.cocomplex)
-    (q : ℕ) (V : X.Opens) :
-    ∀ (e₁ : Sheaf.H' ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
-        (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F) q V ≃+
-        ↑(HomologicalComplex.homology
-          (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
-            (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).obj R.cocomplex) q))
-      (e₂ : Sheaf.H' F q (i.obj V) ≃+
-        ↑(HomologicalComplex.homology
-          (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
-            (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).obj
-                (((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
-                  (Opens.grothendieckTopology X.carrier)
-                    X.smallEtaleTopology).mapHomologicalComplex
-                       (ComplexShape.up ℕ)).obj I.cocomplex)) q)),
-      ∀ (a : (presheafToSheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}).obj
-        (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ R.cocomplex.X q)
-        (ha : a ≫ R.cocomplex.d q (q + 1) = 0)
-        (c : (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-        (yoneda.obj (i.obj V) ⋙ AddCommGrpCat.free) ⟶ I.cocomplex.X q)
-        (hc : c ≫ I.cocomplex.d q (q + 1) = 0),
-        (b.f q).hom.app (op V) ((a.hom.app (op V)).hom
-          (((toSheafify (Opens.grothendieckTopology X.carrier)
-            (yoneda.obj V ⋙ AddCommGrpCat.free)).app (op V)).hom
-              (FreeAbelianGroup.of (𝟙 V)))) =
-        ((c.hom.app (op (i.obj V))).hom
-          (((toSheafify X.smallEtaleTopology
-            (yoneda.obj (i.obj V) ⋙ AddCommGrpCat.free)).app (op (i.obj V))).hom
-              (FreeAbelianGroup.of (𝟙 (i.obj V))))) →
-        e₂ (I.extMk c (q + 1) rfl hc) =
-        (HomologicalComplex.homologyMap
-          (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
-            (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).map b) q).hom (e₁ (R.extMk a (q + 1) rfl ha))  := by sorry
+    {K L : CochainComplex AddCommGrpCat.{u + 1} ℕ} (f : K ⟶ L)
+    (q : ℕ) (x : K.X q) (hx : (K.d q (q + 1)).hom x = 0)
+    (y : L.X q) (hy : (L.d q (q + 1)).hom y = 0)
+    (h : (f.f q).hom x = y) :
+    (HomologicalComplex.homologyMap f q).hom (sectionCycleClass K q x hx) =
+      sectionCycleClass L q y hy := by
+  set_option backward.isDefEq.respectTransparency false in
+    let zx := (K.sc q).abCyclesIso.inv ⟨x, sectionCycle_mem_kernel K q x hx⟩
+    let zy := (L.sc q).abCyclesIso.inv ⟨y, sectionCycle_mem_kernel L q y hy⟩
+    have hz : (HomologicalComplex.cyclesMap f q).hom zx = zy := by
+      apply (AddCommGrpCat.mono_iff_injective (L.iCycles q)).mp inferInstance
+      change ((HomologicalComplex.cyclesMap f q) ≫ L.iCycles q) zx = (L.iCycles q) zy
+      rw [HomologicalComplex.cyclesMap_i]
+      change (f.f q) ((K.iCycles q) zx) = (L.iCycles q) zy
+      dsimp only [zx, zy, HomologicalComplex.iCycles]
+      erw [(K.sc q).abCyclesIso_inv_apply_iCycles,
+        (L.sc q).abCyclesIso_inv_apply_iCycles]
+      exact h
+    change ((K.homologyπ q) ≫ HomologicalComplex.homologyMap f q) zx =
+      (L.homologyπ q) zy
+    rw [HomologicalComplex.homologyπ_naturality]
+    change (L.homologyπ q) ((HomologicalComplex.cyclesMap f q) zx) = _
+    rw [hz]
+

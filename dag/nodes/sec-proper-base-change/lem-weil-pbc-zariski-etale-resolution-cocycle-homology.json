@@ -17,35 +17,28 @@
  },
  "proof": [
   {
-   "text": "Sheafification, the free abelian adjunction and Yoneda give additive Hom(P(W),A) = A(W), naturally in A. Apply these adjunctions termwise to R and I. The Hom-complex differentials become section differentials because evaluation commutes with composition.",
+   "text": "Apply the single-site normalized equivalence to R at V and to I at i(V), obtaining e₁ and e₂ and their formulas on all extMk cocycles. Evaluation of pushforward at V is definitionally evaluation at i(V).",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-object-resolution-cocycle-equivalence"
    ],
    "elementary": false
   },
   {
-   "text": "Compute Ext using the supplied injective resolutions with extAddEquivCohomologyClass and the Hom-complex homology isomorphism. Compose with the section chain isomorphisms. Transport from the extended integer complex to the nonnegative complex; the negative terms are zero, including the incoming term in degree zero. This constructs e1 and e2, using canonical universe transport if needed. Evaluating GI at V is evaluating I at i(V).",
+   "text": "Rewrite both Ext classes with the normalization formulas. The assumed equality of sections says that the evaluated chain map sends the first cycle to the second. Apply the generalized zariski_etale_resolution_cocycle_compatibility to these cycles and take the symmetry of its homology-class equality.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility"
    ],
    "elementary": false
-  },
-  {
-   "text": "The given equality of sections says the evaluated b sends the representative cycle of a to that of c. By the definition of the induced map on homology, it sends the class of a to the class of c. The equivalences constructed in the previous step identify these classes with the resolution extMk classes. This proves the equality simultaneously for all a and c. Empty opens, zero coefficients and q=0 require no change.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-sp-injective-resolutions"
+  "lem-weil-pbc-object-resolution-cocycle-equivalence",
+  "lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility"
  ],
  "proof_origin": {
-  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-  "place": "sites-cohomology.tex Section 01FT, equation-cohomology-object-site; derived.tex Tag 06XR (1), lemma-compute-ext-resolutions. The corresponding original .tex sections were fetched into the sandbox scratchpad and read.",
-  "note": "Cocycle-level specialization of the source comparison argument; the upper Lean proof constructs the transported cocycle by actual adjunction inversion."
+  "place": "Section 01FT, equation-cohomology-object-site; Tag 06XR (1), lemma-compute-ext-resolutions. Source tex fetched and read in scratchpad.",
+  "by": "agent"
  },
  "mathlib_searches": [
   {
@@ -144,17 +137,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
+  "reviewer": "X-da1aa",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T184326-L-4012997",
+  "landing": "20261013T022435-L-3223337",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "zariski_etale_resolution_cocycle_homology"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes, change record, source comparisons, forced adaptation, and report; compilation and axiom checks pass."
  }
 }
