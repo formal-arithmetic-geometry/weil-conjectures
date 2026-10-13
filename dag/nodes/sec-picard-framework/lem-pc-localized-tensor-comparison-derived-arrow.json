@@ -14,54 +14,56 @@
  },
  "proof": [
   {
-   "text": "Use functorial A-K-flat resolutions for tensor with Q. Restrict to R and apply derived extension to B. The degree-i cohomology has a canonical tensor-algebra action: multiplication by A on the input commutes with the B action, and both agree on R. On morphisms the derived maps commute with multiplication by A and B, hence tensor induction makes them E-linear. Extend this cohomology functor from E to C to obtain the source functor S on D(A). The affine tensor cohomology lift provides the coefficient-linear functors and comparison on complexes; localization gives their derived version.",
+   "text": "Use the canonical model m(U)=baseDerivedTensorCohomologyModel R A B (U tensor Q) C. Apply lem-pc-kflat-localized-tensor-comparison-natural to obtain S and eta:S to T on the category of K-flat A-complexes, source inversion, and its component realization for these canonical models.",
    "uses": [
-    "def-pc-ring-tensor-cohomology",
-    "lem-pc-affine-tensor-cohomology-lifts"
+    "lem-pc-kflat-localized-tensor-comparison-natural",
+    "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "For the target T on D(A), extend scalars to C on A-K-flat resolutions, tensor with N and take degree-i homology. Scalar extension preserves K-flatness. A quasi-isomorphism between the resulting C-K-flat complexes remains a quasi-isomorphism after tensor with arbitrary N. Thus these degree-i maps invert the K-flat resolution quasi-isomorphisms, including unbounded complexes and non-K-flat N. Homotopic maps induce the same homology map, so roofs give a well-defined functor T.",
+   "text": "Convert the acyclic-tensor and categorical K-flat predicates with the existing proved private CochainComplex.kFlat_of_acyclic_tensor, accessed by import all KFlatScalarExtensionDerivedIso. The local private acyclic_tensor_of_kFlat proves the reverse implication directly from the homotopy-category acyclic criterion. Scalar extension preserves K-flatness by lem-pc-kflat-extension-of-scalars and preserves quasi-isomorphisms between K-flat complexes by the existing proved private CochainComplex.scalarExtension_quasiIso_of_kFlat in the same imported module. Apply MorphismProperty.whiskerRight_of_kFlat over C to tensor the extended quasi-isomorphism with arbitrary N, then homology in degree i is invertible. This proves target inversion without any K-flat hypothesis on N.",
    "uses": [
     "lem-pc-kflat-extension-of-scalars",
-    "lem-pc-mixed-tensor-kflat-quasi-iso"
+    "lem-sc-kflat-scalar-extension-derived-iso"
    ],
    "elementary": false
   },
   {
-   "text": "The derived coefficient chain comparison gives a map from derived R-to-B tensor to derived A-to-C extension, restricted to B. Its naturality at multiplication by A gives E-linearity on homology. Transpose via E-to-C extension/restriction adjunction and compose with the scalar-extension monoidal comparison followed by identity tensor t. This defines a natural transformation S to T. For a chain map f between K-flat U and V, the tensorator identity delta_U followed by F(f) tensor identity equals F(f tensor identity) followed by delta_V, and the whisker-exchange identity moves t past F(f); these give the final comparison square. For roof denominators the source and target maps are invertible. Compose with their inverses to get the square on derived morphisms. Common refinements preserve the square, and functoriality of the derived coefficient map gives identity and composition compatibility. Regard the natural transformation as an arrow-valued functor H, with H.map(f) given by these two component maps.",
+   "text": "Construct G(U)=Arrow.mk(eta.app U), mapping a to Arrow.homMk(S.map a,T.map a,eta.naturality a). Arrow.hom_ext and the two functor laws prove its functor laws. Source and target inversion imply G inverts the restricted quasi-isomorphisms by Arrow.isIso_of_isIso_left_of_isIso_right.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the existing reduced functorial flat resolution for ModuleCat A. Its kFlatResolutionNatTrans is a quasi-isomorphism augmentation. The source-library isLocalizedEquivalence_of_functorial_left_resolutions proves the K-flat inclusion is a localized equivalence; LocalizerMorphism.IsLocalizedEquivalence.isLocalization identifies its composite L with DerivedCategory.Q as a localization. Exact integer-indexed colimits follow by the AsSmall equivalence, and tensor-right colimit preservation supplies the ambient resolution hypotheses. Localization.lift G hG L and Localization.fac give H on D(A) and L followed by H naturally isomorphic to G. This is actual Lean code, not a new holed descent statement.",
    "uses": [
-    "lem-pc-base-tensor-derived-chain-comparison",
-    "def-pc-localized-tensor-comparison-property"
+    "def-pc-module-kflat-complex"
    ],
    "elementary": false
   },
   {
-   "text": "For a K-flat U, tensor with the K-flat Q computes its derived tensor. For every model mU, uniqueness of its universal counit identifies its cohomology with the source functor. Naturality at A-multiplication and B-linearity make the identification E-linear; extend it to C to obtain an isomorphism e. The target K-flat computation gives an isomorphism d from H^i(F(U) tensor N) to T(Q(U)). The ordinaryIso and ordinaryToLocalized generator equations force the canonical coefficient maps. Substitute comparison_eq and localized_eq, and use adjunction naturality: they yield alpha_U followed by d.hom equals e.hom followed by the component of the derived comparison. The existing localized model independence and quasi-isomorphism comparison squares verify invariance under changes of model and resolution. Arrow.isoMk(e,d) is the claimed isomorphism. Neither alpha_U nor t is presumed invertible.",
+   "text": "For an arbitrary model mU of U tensor Q apply the proved localized model-independence theorem to mU and the canonical m(U). Its s satisfies s.hom followed by m(U).localizedComparison=mU.localizedComparison. Compose s with the canonical source realization e, and use the identity target isomorphism. Category.assoc, the component equation, and the independence equation give the Arrow.isoMk square. Compose this arrow isomorphism with the inverse component of Localization.fac to obtain the requested isomorphism with H(Q(U)). Every existing binder and conclusion is unchanged.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
-    "lem-pc-base-derived-tensor-model-quasiiso-comparison"
+    "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-localized-tensor-comparison-property",
-  "def-pc-ring-tensor-cohomology",
-  "lem-pc-affine-tensor-cohomology-lifts",
+  "def-pc-module-kflat-complex",
   "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
-  "lem-pc-base-derived-tensor-model-quasiiso-comparison",
-  "lem-pc-base-tensor-derived-chain-comparison",
   "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-mixed-tensor-kflat-quasi-iso"
+  "lem-pc-kflat-localized-tensor-comparison-natural",
+  "lem-sc-kflat-scalar-extension-derived-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 06Y6, 0BYJ and perfect.tex equation-bc (0DJ7); M1 makes explicit the naturality/model-realization step of retract closure"
+  "group": "Y3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 065Y, construction of equation-comparison-map (065Z); Tag 0BYJ, functorial associativity; perfect.tex equation-bc (0DJ7). Official Stacks pages read online because the remote clone omits these source files.",
+  "note": "Explicit Lean proof of target inversion, arrow functor construction, K-flat localization/descent, and arbitrary-model transport; only canonical coefficient naturality remains split off."
  },
  "mathlib_searches": [
   {
@@ -140,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T190144-L-3217550",
+  "landing": "20261013T201813-L-3978846",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

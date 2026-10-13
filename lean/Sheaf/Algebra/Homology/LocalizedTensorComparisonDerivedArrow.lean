@@ -8,12 +8,10 @@ module
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.AffineTensorCohomologyLifts
+import Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
-import Sheaf.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
-import Sheaf.Algebra.Homology.BaseTensorDerivedChainComparison
+import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
-import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
 
 /-! # Derived naturality of localized tensor comparisons
 
@@ -28,6 +26,18 @@ open CategoryTheory MonoidalCategory
 open scoped TensorProduct
 set_option autoImplicit false
 namespace ModuleCat
+
+private theorem acyclic_tensor_of_kFlat
+    {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P)
+    (L : CochainComplex (ModuleCat.{u} R) ℤ) (hL : L.Acyclic) :
+    (CochainComplex.mapBifunctor L P (curriedTensor _)).Acyclic := by
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+    HomotopyCategory.kFlat_iff_preserves_acyclic] at hP
+  have hL' := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic L).2 hL
+  exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic
+    (CochainComplex.mapBifunctor L P (curriedTensor _))).1 (hP _ hL').2
+
 variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
   [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]
   [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} A)]
@@ -83,6 +93,91 @@ theorem exists_localizedTensorComparison_derived_arrow
           (.up ℤ)
       Nonempty (Arrow.mk (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
         ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≅
-          H.obj (DerivedCategory.Q.obj U)) := by sorry
+          H.obj (DerivedCategory.Q.obj U)) := by
+  classical
+  let φ := (algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))
+  let F := (extendScalars.{u, u, u} φ).mapHomologicalComplex (.up ℤ)
+  let W := HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)
+  let WC := HomologicalComplex.quasiIso (ModuleCat.{u} C) (.up ℤ)
+  let L := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ DerivedCategory.Q
+  have (M : ModuleCat.{u} A) : CategoryTheory.Limits.PreservesColimitsOfShape ℤ
+      ((curriedTensor (ModuleCat.{u} A)).flip.obj M) :=
+    inferInstanceAs (CategoryTheory.Limits.PreservesColimitsOfShape ℤ (tensorRight M))
+  have : HasExactColimitsOfShape ℤ (ModuleCat.{u} A) :=
+    HasExactColimitsOfShape.of_domain_equivalence (ModuleCat.{u} A)
+      (AsSmall.equiv (C := ℤ)).symm
+  have (M : ModuleCat.{u} C) : CategoryTheory.Limits.PreservesColimitsOfShape ℤ
+      ((curriedTensor (ModuleCat.{u} C)).flip.obj M) :=
+    inferInstanceAs (CategoryTheory.Limits.PreservesColimitsOfShape ℤ (tensorRight M))
+  have : HasExactColimitsOfShape ℤ (ModuleCat.{u} C) :=
+    HasExactColimitsOfShape.of_domain_equivalence (ModuleCat.{u} C)
+      (AsSmall.equiv (C := ℤ)).symm
+  let Λ := (Classical.choice (inferInstance :
+    Abelian.HasFunctorialFlatResolution (ModuleCat.{u} A))).reduced
+  have : W.localizerMorphismKFlat.IsLocalizedEquivalence :=
+    W.localizerMorphismKFlat.isLocalizedEquivalence_of_functorial_left_resolutions
+      (Λ.kFlatResolutionNatTrans ObjectProperty.flat.essImage_ι_le)
+      (fun _ ↦ by change QuasiIso _; infer_instance) rfl
+  have : L.IsLocalization W.WKFlat :=
+    inferInstanceAs ((W.localizerMorphismKFlat.functor ⋙ DerivedCategory.Q).IsLocalization
+      W.WKFlat)
+  let m (U : CochainComplex.KFlat (ModuleCat.{u} A)) :=
+    baseDerivedTensorCohomologyModel R A B (U.obj ⊗ Q) C
+  let T := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ F ⋙ tensorRight N ⋙
+    HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) i
+  obtain ⟨S, η, hS, he⟩ :=
+    exists_kFlatLocalizedTensorComparison_natural R A B C Q N t hC hQ i
+  change S ⟶ T at η
+  have hT : W.WKFlat.IsInvertedBy T := by
+    intro U V a ha
+    have ha' : QuasiIso a.hom := ha
+    have hFU : WC.kFlat (F.obj U.obj) := CochainComplex.kFlat_of_acyclic_tensor _
+      (CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat φ U.obj
+        (acyclic_tensor_of_kFlat _ U.property))
+    have hFV : WC.kFlat (F.obj V.obj) := CochainComplex.kFlat_of_acyclic_tensor _
+      (CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat φ V.obj
+        (acyclic_tensor_of_kFlat _ V.property))
+    have hf : QuasiIso (F.map a.hom) :=
+      CochainComplex.scalarExtension_quasiIso_of_kFlat φ a.hom ha' U.property V.property
+    have ht : QuasiIso ((tensorRight N).map (F.map a.hom)) :=
+      WC.whiskerRight_of_kFlat (F.map a.hom) hf hFU hFV N
+    change IsIso (HomologicalComplex.homologyMap
+      ((tensorRight N).map (F.map a.hom)) i)
+    let := ht
+    infer_instance
+  let G : CochainComplex.KFlat (ModuleCat.{u} A) ⥤ Arrow (ModuleCat.{u} C) :=
+    { obj := fun U ↦ Arrow.mk (η.app U)
+      map := fun a ↦ Arrow.homMk (S.map a) (T.map a) (η.naturality a)
+      map_id := by
+        intro U
+        apply Arrow.hom_ext <;> simp
+      map_comp := by
+        intro U V Z a b
+        apply Arrow.hom_ext <;> simp }
+  have hG : W.WKFlat.IsInvertedBy G := by
+    intro U V a ha
+    have : IsIso (G.map a).left := by
+      change IsIso (S.map a)
+      exact hS a ha
+    have : IsIso (G.map a).right := by
+      change IsIso (T.map a)
+      exact hT a ha
+    exact Arrow.isIso_of_isIso_left_of_isIso_right (G.map a)
+  let H := Localization.lift G hG L
+  let eH : L ⋙ H ≅ G := Localization.fac G hG L
+  refine ⟨H, ?_⟩
+  intro U hU mU
+  let UK : CochainComplex.KFlat (ModuleCat.{u} A) :=
+    ⟨U, CochainComplex.kFlat_of_acyclic_tensor U hU⟩
+  obtain ⟨e, he'⟩ := he UK
+  obtain ⟨s, hs⟩ := baseDerivedTensorCohomologyModel_localized_independence
+    R A B C (U ⊗ Q) mU (m UK) i
+  let d : Arrow.mk (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
+      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≅ G.obj UK :=
+    Arrow.isoMk (s ≪≫ e) (Iso.refl _) (by
+      change (s.hom ≫ e.hom) ≫ η.app UK = _ ≫ 𝟙 _
+      rw [Category.assoc, he', ← Category.assoc, hs, Category.comp_id]
+      rfl)
+  exact ⟨d ≪≫ (eH.app UK).symm⟩
 
 end ModuleCat

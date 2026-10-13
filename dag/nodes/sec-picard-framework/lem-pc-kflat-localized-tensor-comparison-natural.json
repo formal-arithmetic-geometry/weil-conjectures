@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-kflat-localized-tensor-comparison-natural",
+ "kind": "statement",
+ "title": "Natural localized coefficient comparison on K-flat complexes",
+ "statement": "Let R,A,B,C be commutative rings in universe u, with R-algebra structures on A and B and an E=A tensor_R B algebra structure on C. Assume derived categories for R-, A-, and B-modules [def-weil-abstract-derived-category]. Let Q be an A-module cochain complex satisfying K-flatness [def-pc-module-kflat-complex], N any C-module cochain complex, and t:F(Q) to N a chain map, where F is termwise scalar extension along A to E to C. Assume C flat over E, and fix i in Z. Let K be the full category of K-flat A-complexes, W_K its morphisms which are quasi-isomorphisms, and m(U)=baseDerivedTensorCohomologyModel R A B (U tensor_A Q) C the canonical universal model [def-pc-base-derived-tensor-cohomology-model]. Define T:K to Mod(C) by T(U)=H^i(F(U) tensor_C N). There exist S:K to Mod(C), a natural transformation eta:S to T, and for each U an isomorphism e:C tensor_E m(U).cohomology(i) to S(U), such that S inverts W_K and e.hom followed by eta_U equals m(U).localizedComparison(i) followed by H^i(mu_F(U,Q) inverse followed by identity of F(U) tensor t), as in [def-pc-localized-tensor-comparison-property]. This assertion constructs a natural transformation only on K-flat complexes and for canonical models; it makes no target inversion or derived descent assertion.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 065Y, construction of equation-comparison-map (065Z); Tag 0BYJ, functorial associativity; perfect.tex equation-bc (0DJ7). Official Stacks pages read online because the remote clone omits these source files."
+ },
+ "proof": [
+  {
+   "text": "Choose one additive universal R-to-B derived extension pair with its base scalar identity from lem-pc-base-derived-extension-linear. On the K-flat input category compose tensorRight Q, restriction A-to-R, the homotopy quotient and localization, this derived extension, and degree-i homology. TensorRight Q is additive, and its map at scalar multiplication is scalar multiplication on the tensor product. Exact restriction and the derived scalar identity identify the two R-actions. Apply lem-pc-tensor-action-additive-functor to each object. Conjugate the B-linear functor maps by those object identifications; naturality of a times identity makes them A-equivariant. Tensor induction lifts them to E=A tensor_R B-linear maps. Faithful restriction verifies identities and composition. Extend the resulting E-linear functor to C to obtain S.",
+   "uses": [
+    "lem-pc-base-derived-extension-linear",
+    "lem-pc-tensor-action-additive-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A quasi-isomorphism between the K-flat input complexes remains one after tensor with Q: the acyclic-tensor hypothesis on Q is the categorical K-flat criterion and hence preserves quasi-isomorphisms in the other variable. Exact restriction preserves this quasi-isomorphism. Localization, the fixed derived extension, and homology send it to an isomorphism. Conjugation by the source identifications and extension E-to-C preserve isomorphisms, proving that S inverts WKFlat.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the universal derived counit by the restricted tensorRight Q and take B-homology. Use the homology factorization isomorphisms and compose with the ordinary coefficient natural transformation of lem-pc-base-tensor-coefficient-natural-map. Exact restriction identifies the resulting target with restriction of H^i(F(U tensor Q)). Naturality at A-multiplication, the source scalar equations, and B-linearity make this an E-linear natural transformation. Transpose it through the E-to-C extension/restriction adjunction. Compose with homology of the natural chain map F(U tensor Q) to F(U) tensor N, formed from the inverse monoidal tensorator followed by identity tensor t. Tensorator naturality and whisker exchange prove this chain map natural in U. This gives eta:S to T. Neither eta nor t is assumed invertible.",
+   "uses": [
+    "lem-pc-base-tensor-coefficient-natural-map",
+    "def-pc-localized-tensor-comparison-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each U compare the universal pair in its canonical model with the fixed pair by Functor.leftDerivedNatIso. Compose its homology with the model cohomologyIso and the source identification. Naturality at A-multiplication and cohomologyIso_smul make this B-linear isomorphism E-linear, including its inverse; tensor induction supplies the E-linear isomorphism and extension to C gives e. Counit compatibility and comparison_eq identify the comparison under this isomorphism. The ordinaryIso and ordinaryToLocalized generator equations identify the ordinary coefficient chain map on every pure tensor. Applying localized_eq and naturality of the extension/restriction adjunction proves e.hom followed by eta.app U equals the displayed localized comparison followed by the rebracketing/t chain homology map. Only the canonical models are realized here; arbitrary model transport and target inversion/descent are not part of this statement.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-module-kflat-complex",
+  "lem-pc-base-derived-extension-linear",
+  "lem-pc-base-tensor-coefficient-natural-map",
+  "lem-pc-tensor-action-additive-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 065Y, construction of equation-comparison-map (065Z); Tag 0BYJ, functorial associativity; perfect.tex equation-bc (0DJ7). Official Stacks pages read online because the remote clone omits these source files.",
+  "note": "Canonical-model naturality portion of the source argument; target inversion, K-flat localization, and all-model transport are proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The localized derived tensor coefficient comparison is a natural transformation on K-flat complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation from derived tensor cohomology extended to a coefficient algebra to homology of an extended K-flat complex tensor an arbitrary complex",
+   "results": "Eight Tor and Tor-prime naturality hits: Rep.Tor_map, Rep.torIso, CategoryTheory.Tor_map, Tor'_map_app, Tor'_obj_map, Tor', Tor'_obj_obj, and Rep.Tor. These are projective-resolution or representation-theoretic Tor statements, not the unbounded coefficient comparison.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|baseTensorDerivedChainComparison",
+   "results": "msearch returned zero Mathlib hits. Repository rg/read found affine lifts, derived chain comparison, ordinary coefficient naturality, and universal model comparisons, but no canonical-model natural transformation on the K-flat input category. Blueprint searches tensor comparison, coefficient comparison, and K-flat found no matching blueprint statement.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; use the named project declarations for the source construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The proof that the single-complex base-change condition is inherited by derived tensor products, before its localization/retract argument: naturality of the coefficient comparison on K-flat representatives.",
+   "via": [
+    "lem-pc-localized-tensor-comparison-derived-arrow",
+    "lem-pc-localized-tensor-comparison-closure-retracts-core",
+    "lem-pc-localized-tensor-comparison-closure-retracts",
+    "lem-pc-localized-tensor-comparison-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatLocalizedTensorComparisonNatural.lean",
+  "declaration": "ModuleCat.exists_kFlatLocalizedTensorComparison_natural",
+  "statement": "theorem exists_kFlatLocalizedTensorComparison_natural (hC : Module.Flat (A ⊗[R] B) C) (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic → (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) : let m := fun U : CochainComplex.KFlat (ModuleCat.{u} A) ↦ baseDerivedTensorCohomologyModel R A B (U.obj ⊗ Q) C let F := (extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ) let T := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ F ⋙ tensorRight N ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) i ∃ (S : CochainComplex.KFlat (ModuleCat.{u} A) ⥤ ModuleCat.{u} C) (η : S ⟶ T), (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).WKFlat.IsInvertedBy S ∧ ∀ U : CochainComplex.KFlat (ModuleCat.{u} A), ∃ e : (extendScalars (algebraMap (A ⊗[R] B) C)).obj ((m U).cohomology i) ≅ S.obj U, e.hom ≫ η.app U = (m U).localizedComparison i ≫ HomologicalComplex.homologyMap ((Functor.Monoidal.μIso F U.obj Q).inv ≫ (F.obj U.obj ◁ t)) i",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201813-L-3978846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201813-L-3978846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
