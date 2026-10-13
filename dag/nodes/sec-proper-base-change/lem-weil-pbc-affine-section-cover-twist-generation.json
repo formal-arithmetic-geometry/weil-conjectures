@@ -18,37 +18,42 @@
  ],
  "proof": [
   {
-   "text": "Put U_i = X minus the support of Z(s_i). Restrict G to these affine opens. Quasi-coherence and finite type restrict to opens: restrict the local finite free surjections. Apply lem-weil-pbc-affine-finite-type-generating-sections to U_i.toScheme to choose a finite family t_ij generating G|U_i. This is a choice inside a proposition, not a definition of data from a holed existence theorem.",
+   "text": "For each section open U_i prove Module.Finite of Gamma(U_i,G) directly. Take Mathlib finite-type local generators q, refine their cover inside U_i by basic opens D(g), and map each finite generating family along overEquiv and restriction to Spec Gamma(D(g),O_X). Quasi-coherence makes the tilde counit an isomorphism. The proved finite_sections_top_of_isIso_fromTildeΓ and finite_sections_of_finite_sections_restrict_fromSpec in QuasicoherentKernel give finite sections on D(g). These g span the unit ideal; isLocalizedModule_basicOpen and Module.Finite.of_localizationSpan' descend finiteness to U_i. This is the fully proved private finite_sections_of_finiteType helper (the forward finite-section argument of Stacks 01PB), adapted from the already proved private helper in QuasicoherentFiniteTypeAffine. Use Module.Finite.exists_fin to choose t_ij spanning Gamma(U_i,G). No finite-type restriction instance or full affine global-generation theorem is needed.",
    "uses": [
     "pqf-def-coherent",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-finite-type-generating-sections"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "lem-weil-pbc-module-finite-of-localization-span"
    ],
    "elementary": false
   },
   {
-   "text": "Use the terminal morphism X -> Spec Z. The separatedness and compactness assumptions satisfy lem-pc-section-clearing-denominators. For each local generator t_ij obtain a_ij >= 0 and a global section v_ij of G tensor M^a_ij restricting to t_ij tensor s_i^a_ij. Let K be the maximum of this finite family of exponents (K=0 if the family is empty).",
+   "text": "Install the sheaf-level invertibility instance using IsInvertible.sheafOfModules_isInvertible. Apply exists_tensorPowSection_eq_restrict over the terminal affine scheme to every t_ij. This gives exponents a_ij and lifts v_ij. The finite sigma index J is Sigma i, ULift (Fin (r i)). Let K = Finset.univ.sup a, which is zero if J is empty. Each a_ij is at most K. All choices are local to a proof of a proposition, with no new definition choosing data from a holed theorem.",
+   "uses": [
+    "lem-pc-invertible-sheaf-instance",
+    "lem-pc-section-clearing-denominators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For k >= K define w_ij by mulTensorPowSection (s_i) G a_ij (k-a_ij) applied to v_ij, followed by eqToHom for a_ij+(k-a_ij)=k. Naturality of Hom.app and the proved mulTensorPowSection_app_tmulSection show w_ij restricted to U_i equals t_ij tensor tensorPowSectionOne s_i k U_i. The private equality-transport lemma is proved by equality induction. These are only the existing ClearDenominators tensor-power identities, including k=0.",
    "uses": [
     "lem-pc-section-clearing-denominators",
-    "def-sc-invertible-module"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   },
   {
-   "text": "For each k >= K multiply v_ij by s_i^(k-a_ij), using the associator and the tensor-power addition isomorphism, to obtain u_ij(k) in Gamma(X,G tensor M^k). Naturality of tensor restriction and the identity a_ij+(k-a_ij)=k show that u_ij(k)|U_i = t_ij tensor s_i^k. On U_i the section s_i generates M: the proved isFreeGenerator_app_one_of_le in the clearing-denominators module establishes this directly from the zero-locus convention. Its k-th tensor power is a free generator, including k=0.",
+   "text": "Use restrictions of w_ij to form compatible global sections and their free-sheaf evaluation map phi. The proved isQuasicoherent_tensorObj and IsInvertible.tensorPow in ProjectionFormula give quasi-coherence of its target; these specialize local triviality of an invertible module and preserve all hypotheses. On each U_i, isFreeGenerator_app_one_of_le and isFreeGenerator_tensorPowSectionOne show that tensoring by s_i^k is bijective on sections. Express its preimage as a finite linear combination of t_ij. The same combination of the free basis sections maps to the given target section, by sectionsMap_freeHomEquiv_symm_freeSection, the restriction identity from Step 3, and linearity of tmulSection. Thus phi is surjective on sections on every U_i. Apply the already proved epi_of_surjective_app to the affine cover, then package phi and the finite index J as finite GeneratingSections. Finite sums over empty index types and Finset.sup require no exceptions.",
    "uses": [
-    "lem-pc-section-clearing-denominators",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-zero-scheme"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Tensoring with this free generator identifies G|U_i with (G tensor M^k)|U_i and carries each t_ij to u_ij(k)|U_i. Hence the latter family generates on U_i. Take the finite union over i,j and form its evaluation map from the free sheaf. Its restriction to U_i contains the surjection from the i-th generating family, so it is locally surjective on every U_i. As these opens cover X it is locally surjective everywhere and thus epi, by lem-weil-pbc-locally-surjective-iff-stalks. This gives finite GeneratingSections for each k>=K. If X is empty the empty evaluation map is epi; if G=0 an empty family suffices. No positive lower bound on k is needed.",
-   "uses": [
+    "def-sc-invertible-module",
+    "lem-pc-invertible-sheaf-instance",
     "def-weil-pbc-generating-sections",
     "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-locally-surjective-iff-stalks"
+    "def-pc-zero-scheme",
+    "lem-pc-section-clearing-denominators",
+    "lem-weil-pbc-quasicoherent-epi-affine-cover"
    ],
    "elementary": false
   }
@@ -56,18 +61,21 @@
  "proof_deps": [
   "pqf-def-coherent",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-module-finite-of-localization-span",
+  "lem-pc-invertible-sheaf-instance",
   "lem-pc-section-clearing-denominators",
-  "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product",
-  "def-pc-zero-scheme",
+  "def-sc-invertible-module",
   "def-weil-pbc-generating-sections",
-  "lem-weil-pbc-locally-surjective-iff-stalks"
+  "def-pc-zero-scheme",
+  "lem-weil-pbc-quasicoherent-epi-affine-cover"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-  "place": "Proposition 4.5.5, p. 85, last proof paragraph, from the finite affine X_fi cover through generation of F(km); specialize the already common tensor degree to one. Clearing denominators is Stacks Properties Lemma 01PW."
+  "place": "Proposition 4.5.5, p. 85, last proof paragraph, from the finite affine X_fi cover through generation of F(km); specialize the already common tensor degree to one. Clearing denominators is Stacks Properties Lemma 01PW.; affine finiteness glue follows Stacks 01PB and the proved private finite_sections_of_finiteType helper in Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine."
  },
  "mathlib_searches": [
   {
@@ -160,13 +168,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261012T225306-L-1803729",
-  "kind": "interface",
+  "landing": "20261013T004021-L-2490379",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
