@@ -26,38 +26,38 @@
  ],
  "proof": [
   {
-   "text": "The additive stalk functor on module sheaves is exact: forget to abelian sheaves and use exactness of filtered colimits of abelian groups. Apply it degreewise to complexes. It preserves quasi-isomorphisms and commutes with homology, giving the stalks of H^n(E) and H^n(K).",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
-   }
+   "text": "For T the given distinguished scalar triangle, Mathlib DerivedCategory.HomologySequence.exact₃ gives the exact short complex H^n(E) → H^n(K) → H^(n+1)(E). Apply clause (5) of module_stalk_exact [lem-weil-pbc-module-stalk-exact] to obtain its exact stalk short complex. This uses homology sheaves directly; no derived stalk functor or comparison with stalk complexes is constructed.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": true
   },
   {
-   "text": "The global scalar acts on this stalk complex by multiplication by the germ of its top section, since the family is compatible under restrictions. If x lies in the corresponding basic open, the germ is a unit in the local ring. Its inverse acts as an inverse chain map. The long exact homology sequence of the stalk triangle then makes all H^n(K)_x zero; equivalently the cone of an isomorphism is zero (Tag 05QR).",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
-   }
+   "text": "Prove in Lean that homology is linear over compatible global sections [def-sc-derived-global-scalar]. The short-complex functor is linear componentwise; compose it with Mathlib ShortComplex.homologyFunctor_linear and descend through DerivedCategory.Q using Localization.functor_linear_iff and homologyFunctorFactors. For a sheaf module, represent any stalk element by a germ on U. stalkFunctor_map_germ_apply and PresheafOfModules.germ_smul identify the stalk scalar action with the germ of g_U. The restriction equation for the compatible family and germ_res_apply identify this scalar germ with the germ of g_top.",
+   "uses": [
+    "def-sc-derived-global-scalar"
+   ],
+   "elementary": true
   },
   {
-   "text": "If instead all H^n(E)_x are zero, the terms on both sides of H^n(K)_x in the same long exact sequence vanish. Exactness makes H^n(K)_x zero as well. A zero additive group has a subsingleton carrier.",
+   "text": "In the basic-open case, Scheme.mem_basicOpen_top identifies the top-section germ as a unit. IsUnit.smul_bijective and ConcreteCategory.isIso_iff_bijective show the scalar maps on homology stalks in degrees n and n+1 are isomorphisms. Map the triangle zero composite and HomologySequence.δ_comp through the stalk functor; cancel the degree-n epimorphism and degree-(n+1) monomorphism to show both maps of the exact stalk complex are zero. ShortComplex.Exact.isZero_X₂ then makes its middle module zero.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
-   }
+   "elementary": true
+  },
+  {
+   "text": "In the input-acyclic case, ModuleCat.isZero_iff_subsingleton makes the degree-n and degree-(n+1) input stalk modules zero. IsZero.eq_of_src and IsZero.eq_of_tgt give zero incoming and outgoing maps. Apply ShortComplex.Exact.isZero_X₂ to the exact stalk short complex, then ModuleCat.subsingleton_of_isZero to finish both cases in every degree.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-exact",
+  "def-sc-derived-global-scalar"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT; explicit single-step formulation and glue"
+  "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT; V2: direct homology-sheaf stalk argument, with explicit scalar-linearity and germ calculations in Lean"
  },
  "mathlib_searches": [
   {
@@ -145,10 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T045550-L-134365",
-  "kind": "interface",
+  "landing": "20261013T082420-L-1650514",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
