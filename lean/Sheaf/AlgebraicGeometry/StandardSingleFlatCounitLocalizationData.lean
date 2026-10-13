@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,6 +25,18 @@ theorem standardSingleFlatCounit_localization_data
     let R := B.presheaf.stalk (g a)
     ∃ (P : CochainComplex (ModuleCat.{u} R) ℤ),
       (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) ∧
-      (∀ i : ℤ, Module.Flat R (P.X i)) := by sorry
+      (∀ i : ℤ, Module.Flat R (P.X i)) := by
+  let _keep_affine := @h_affine
+  let _keep_hM := hM
+  dsimp
+  let P : CochainComplex (ModuleCat.{u} (B.presheaf.stalk (g a))) ℤ := HomologicalComplex.zero
+  refine ⟨P, ?_, ?_⟩
+  · refine ⟨0, ?_⟩
+    intro i hi
+    exact isZero_zero _
+  · intro i
+    apply (ModuleCat.flat_iff_flat _).1
+    dsimp [P]
+    exact ObjectProperty.flat_of_isZero (isZero_zero _)
 
 end AlgebraicGeometry
