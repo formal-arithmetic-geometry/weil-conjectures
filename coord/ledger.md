@@ -12300,3 +12300,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: merged deliver/V4/Sheaf.AlgebraicGeometry.MixedAffineSectionsBaseChangeMate (stage 3; reviewer PASS; first push; landing 20261013T113357-L-3188895 (interface); batch 20261013T113333; modules 3; new nodes 2)
 - 11:33 L: merged deliver/V4/Sheaf.AlgebraicGeometry.MixedPerfectInternalHomPullbackIsIso (stage 3; reviewer PASS; first push; landing 20261013T113357-L-3189082 (proof); batch 20261013T113333; modules 1; new nodes 0)
 - 11:33 L: merged deliver/W4/Sheaf.Paper.BoundaryCechInjectiveMiddle (stage 3; reviewer PASS; first push; landing 20261013T113358-L-3189269 (interface); batch 20261013T113333; modules 3; new nodes 2)
+- 11:33 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitChartComparison (stage 3; reviewer PASS; first push; landing 20261013T113358-L-3189463 (proof); batch 20261013T113333; modules 1; new nodes 0)
