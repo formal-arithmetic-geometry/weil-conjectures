@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-normalized-homotopy-tensor-hom",
+ "kind": "theorem",
+ "title": "Component-normalized tensor-Hom equivalence on homotopy classes",
+ "statement": "Let $X$ be a scheme and $P,L,I$ arbitrary integer-indexed complexes of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules]. Write $q$ for the homotopy-category quotient and $T=\\operatorname{Tot}(P\\otimes L)$ [def-pc-tensor-complex-sheaves]. There is an equivalence $e:\\operatorname{Hom}(qP,q\\mathcal Hom^\\bullet(L,I))\\simeq\\operatorname{Hom}(qT,qI)$ [def-pur-hom-complex]. For every chain map $\\varphi:P\\to\\mathcal Hom^\\bullet(L,I)$ there exists a chain map $\\psi:T\\to I$ with $e(q\\varphi)=q\\psi$ and, for every $p+r=n$, the restriction of $\\psi^n$ to $P^p\\otimes L^r$ is the symmetry $P^p\\otimes L^r\\to L^r\\otimes P^p$ followed by the inverse sheaf tensor-Hom adjunction applied to $\\varphi^p$ followed by the Hom product projection $\\mathcal Hom^p(L,I)\\to\\mathcal Hom(L^r,I^{r+p})$ [lem-pc-sheaf-modules-tensor-closed]. No flatness or injectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, Lemma 21.34.1; passage to homotopy classes using Tag 0A8Z"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "The normalized degreewise maps are isomorphisms and commute with the Hom differential. Construct the global-cochain additive equivalences by the product projections and the internal-Hom sections equivalence, as in the proof of homComplex_global_cochains; retain their component formula. An arbitrary existential global-cochain equivalence is not enough for normalization. Compose the degreewise maps on global sections with these explicitly normalized comparisons. This gives mutually inverse cochain maps. They send degree-zero cocycles to cocycles and degree-minus-one boundaries to boundaries, hence induce an equivalence on chain maps modulo homotopy. For a representative phi the output cocycle is a chain map psi. Restrict to each total tensor summand and use the pure-tensor normalization. The inverse sheaf tensor-Hom adjunction preceded by symmetry gives precisely the displayed component equation; equality on pure tensors descends through sheafification. Zero inputs give singleton Hom sets, and arbitrary unbounded complexes use the available products and coproducts.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise",
+    "lem-sc-hom-tensor-differential",
+    "lem-pur-hom-complex-global-cochains",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-differential",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, with explicit normalization and quotient argument written by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf Hom tensor complex isomorphism gives equivalence on homotopy classes of chain maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor internal Hom adjunction bijective using K-flat K-injective representatives",
+   "results": "CochainComplex.IsKProjective.Qh_map_bijective; CategoryTheory.Tor; no component-normalized sheaf Hom comparison",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*tensor.*Hom|internalHomEquiv|homTensorDegreewiseMap",
+   "results": "No Mathlib hits. Source library internalHomEquiv uses a different complex construction; Sheaf HomTensorDegreewise and HomComplexGlobalCochains provide the lower comparisons, but no normalized homotopy-class equivalence.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomMapBijective",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The tensor-Hom component calculation and descent to homotopy classes in the proof of normalized derived tensor-Hom bijectivity",
+   "via": [
+    "lem-pc-canonical-derived-tensor-hom-map-bijective",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedHomotopyTensorHom.lean",
+  "declaration": "AlgebraicGeometry.exists_normalizedHomotopyTensorHom",
+  "statement": "theorem exists_normalizedHomotopyTensorHom (X : Scheme.{u}) (P L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : letI := SheafOfModules.monoidalCategory X.sheaf letI := SheafOfModules.symmetricCategory X.sheaf let q := HomotopyCategory.quotient (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ) ∃ e : (q.obj P ⟶ q.obj (homComplex (R := X.sheaf) L I)) ≃ (q.obj (pullbackTensorTotal X P L) ⟶ q.obj I), ∀ φ : P ⟶ homComplex (R := X.sheaf) L I, ∃ ψ : pullbackTensorTotal X P L ⟶ I, (∀ (p r n : ℤ) (h : p + r = n) (h' : r + p = n), HomologicalComplex.ιMapBifunctor P L (curriedTensor _) (.up ℤ) p r n h ≫ ψ.f n = (β_ (P.X p) (L.X r)).hom ≫ (SheafOfModules.tensorHomEquiv (L.X r) (P.X p) (I.X n)).symm (φ.f p ≫ homTensorProjection X.sheaf L I p r n h')) ∧ e (q.map φ) = q.map ψ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T054217-L-442972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T054217-L-442972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,36 +12,30 @@
  ],
  "proof": [
   {
-   "text": "Reuse `homTensorDegreewiseMap_spec`, `homTensorDegreewiseMap_comm`, and\n`homTensorDegreewiseMap_natural` for the normalized degreewise construction,\ndifferential compatibility and functoriality. The global-cochain comparison\n`homComplex_global_cochains` identifies chain maps with degree-zero cocycles and\nhomotopies with degree-minus-one boundaries; hence this comparison gives precisely\nthe stated map on homotopy classes. The pure-tensor condition in the degreewise\nspecification agrees with `schemeTensorHomUncurryComponent` by the sheaf tensor-Hom\nadjunction and symmetry. Thus these existing lemmas supply the component calculation,\nincluding its normalization, rather than an arbitrary existential isomorphism.\n\nFirst take K=QP and L=QLc with P,Lc K-flat, and M=QMc. The tensor model\ncomparison is an isomorphism, and QHom(Lc,I(Mc)) computes derived internal Hom.\nBoth I(Mc) and Hom(Lc,I(Mc)) are K-injective, so maps to them in the derived category\nare homotopy classes of chain maps. Componentwise currying is inverse to the\nuncurrying in the representative clause. The sheaf tensor-Hom inverse identities\non every tensor summand prove the two inverse identities for chain maps. The same\ncalculation for homotopies shows these inverse maps descend to homotopy classes.\nConsequently the map prescribed by that clause is injective and surjective on\nthese representatives. Every derived object has a K-flat representative, and every\ntarget has a complex representative. Naturality with respect to their isomorphisms\nconjugates t by bijections of Hom sets. Bijectivity is preserved by these\nconjugations, proving the result for arbitrary K,L,M.",
+   "text": "Use the component-normalized tensor-Hom equivalence on homotopy classes. For K-flat P and L, Hom(L,I(M)) and I(M) are K-injective. Qh is bijective on maps to them. Conjugate these bijections by quotientCompQhIso, the internal-Hom model comparison, the inverse resolution map and the localized tensor model map. The latter is invertible by the upstream derived-monoidal K-flat criterion. For each chain representative the defining normalization of t and that of the homotopy equivalence give identical chain maps: equality on every total-tensor summand proves this by the coproduct universal property. Hence t on representatives is a composition of bijections. Choose K-flat representatives of K,L and a complex representative of M; naturality conjugates the arbitrary component of t by Hom-set equivalences induced by their isomorphisms. Bijectivity follows.",
    "uses": [
+    "lem-pc-normalized-homotopy-tensor-hom",
     "lem-pc-kflat-resolution",
     "lem-pur-hom-kflat-into-kinjective",
     "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-sc-hom-tensor-degreewise",
-    "lem-sc-hom-tensor-differential",
-    "lem-sc-hom-tensor-naturality",
-    "lem-pur-hom-complex-global-cochains"
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-normalized-homotopy-tensor-hom",
   "lem-pc-kflat-resolution",
   "lem-pur-hom-kflat-into-kinjective",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-hom-tensor-degreewise",
-  "lem-sc-hom-tensor-differential",
-  "lem-sc-hom-tensor-naturality",
-  "lem-pur-hom-complex-global-cochains"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M4",
+  "group": "H1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DJ; explicit normalized uncurrying and inverse currying spelled out from the source argument"
+  "place": "Tag 08DJ; normalized homotopy-class calculation split off, localization and naturality proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -129,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-924e0",
-  "group": "M4",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T011931-L-2764584",
+  "landing": "20261013T054217-L-442972",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with DAG statements, unchanged extracted definitions, source arguments, change record and report; compiled four delivery modules and all six direct importers; checked axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
