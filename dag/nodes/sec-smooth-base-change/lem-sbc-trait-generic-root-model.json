@@ -16,31 +16,33 @@
  ],
  "proof": [
   {
-   "text": "The DVR is regular and Noetherian. Smoothness makes L regular and locally Noetherian. Flatness makes its closed fibre a regular effective Cartier divisor, cut out by a uniformizer, and identifies its complement with the generic fibre. At a generic point of the closed fibre the local ring is a DVR. For each connected generic torsor component use its stabilizer: ramification indices and inseparable residue degrees divide the stabilizer order by Tag 09EB and hence divide the invertible order of G. The residue characteristic cannot divide these indices or inseparable degrees. Thus the generic cover is tame in codimension one, as in the first paragraph of Tag 0EYJ.",
-   "uses": [],
+   "text": "Obtain R, phi, y, m, f, e, the regularity of R and R/(f), injectivity of multiplication by f, and the isomorphism onto the concrete basic open V from the punctured chart theorem.",
+   "uses": [
+    "lem-sbc-trait-generic-punctured-root-chart"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply Tag 0EYG at x to obtain an affine etale neighborhood Spec R with a point above x. On that neighborhood the generic cover is the finite disjoint union of punctured root covers with a common equation f and positive invertible exponents e_k. Enumerate the finite family by Fin m and write its disjoint union as the spectrum of the finite product. Off the closed fibre split the cover etale locally and take f=1 and e_k=1.",
-   "uses": [],
+   "text": "Apply normality of the full root model to these regular divisor data and the positive invertible exponents.",
+   "uses": [
+    "lem-sbc-regular-divisor-root-model-normal"
+   ],
    "elementary": false
   },
   {
-   "text": "Construct N as Spec of the product of the full monic root algebras. These are finite over the Noetherian R, so N is locally Noetherian. If x lies on the closed fibre, f is a nonzerodivisor and R/fR is regular. At primes containing the root coordinate, quotienting by that nonzerodivisor gives a localization of R/fR, which is regular, so the local ring of the root algebra is regular. At the remaining primes the coordinate and f are units; the derivative e_k*T^(e_k-1) is a unit, so the algebra is etale over the regular R and its local rings are regular. Regular local rings are integrally closed domains. These arguments also apply to f=1, where the root algebras with exponent one are copies of R. Stalks of a finite product belong to one factor, so N has the stated normal domain stalks. This is the local-ring verification in Tag 0EYH.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Take V to be the open in N on which f is invertible. The monic root algebras are free over R, so multiplication by f is injective; consequently V is dense in every factor and hence in N. The punctured-root isomorphism from the second step is exactly gamma: W pulled back to Spec R is isomorphic to V over Spec R. For m=0 the product ring is zero, N and V are empty, density is vacuous and gamma is the unique empty isomorphism. Nothing in this construction uses a relative normalization or chooses data for a definition.",
+   "text": "Each positive-degree monic root polynomial gives a free R-module. The finite product is flat, so multiplication by the image of f is injective. All its powers are nonzerodivisors; hence localization away from that image is injective. PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical and localization_away_comap_range show the concrete basic open V is dense. Retain the chart isomorphism and its compatibility over R. This argument includes the empty product without a separate branch.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-trait-generic-punctured-root-chart",
+  "lem-sbc-regular-divisor-root-model-normal"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0EYJ, 09EB, 0EYG and 0EYH; local normal model before normalization"
+  "place": "Tags 0EYJ, 09EB, 0EYG, 0EYH for the two component statements; density and assembly written in Lean by A3 using Mathlib localization and flatness"
  },
  "mathlib_searches": [
   {
@@ -149,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T060429-L-586115",
+  "landing": "20261013T065056-L-896098",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

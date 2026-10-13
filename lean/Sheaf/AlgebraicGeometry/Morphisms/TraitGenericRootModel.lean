@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.AdjoinRoot
 
+import Sheaf.AlgebraicGeometry.Morphisms.TraitGenericPuncturedRootChart
+import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
+
 /-!
 # Normal root models containing a generic trait torsor as a dense open
 
@@ -70,6 +73,39 @@ theorem GaloisCover.trait_generic_root_model
           IsIntegrallyClosed (N.presheaf.stalk z)) ∧
         ∃ V : N.Opens, Dense (V : Set N) ∧
           ∃ γ : pullback p φ ≅ V.toScheme,
-            γ.hom ≫ V.ι ≫ q = pullback.snd p φ := by sorry
+            γ.hom ≫ V.ι ≫ q = pullback.snd p φ := by
+  dsimp only
+  intro x
+  obtain ⟨R, φ, y, hφ, hy, m, f, e, he, hR, hf, hRf, γ, hγ⟩ :=
+    GaloisCover.trait_generic_punctured_root_chart A K d G hG W x
+  have : IsRegularRing R := hR
+  have : IsRegularRing (R ⧸ Ideal.span {f}) := hRf
+  refine ⟨R, φ, y, hφ, hy, m, f, e, he, ?_, ?_⟩
+  · exact regular_divisor_root_model_normal R m f hf e he
+  · let B := ∀ k : Fin m,
+      AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)
+    let V : (Spec (CommRingCat.of B)).Opens :=
+      PrimeSpectrum.basicOpen (algebraMap R B f)
+    refine ⟨V, ?_, γ, hγ⟩
+    have (k : Fin m) : Module.Free R
+        (AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)) :=
+      (Polynomial.monic_X_pow_sub_C f (he k).1.ne').free_adjoinRoot
+    have hfB : IsSMulRegular B (algebraMap R B f) := hf.of_flat
+    have hr : IsRegular (algebraMap R B f) :=
+      (Commute.isRegular_iff (fun b ↦ Commute.all _ b)).mpr
+        (isLeftRegular_iff.mpr hfB)
+    have hinj : Function.Injective
+        (algebraMap B (Localization.Away (algebraMap R B f))) :=
+      IsLocalization.injective (M := Submonoid.powers (algebraMap R B f))
+        (Localization.Away (algebraMap R B f)) (by
+        rintro a ⟨n, rfl⟩
+        exact (hr.pow n).mem_nonZeroDivisors)
+    change Dense (↑(PrimeSpectrum.basicOpen (algebraMap R B f)) : Set (PrimeSpectrum B))
+    rw [← PrimeSpectrum.localization_away_comap_range
+      (Localization.Away (algebraMap R B f)) (algebraMap R B f)]
+    apply (PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical _).mpr
+    rw [(RingHom.injective_iff_ker_eq_bot _).mp hinj]
+    exact bot_le
+
 
 end AlgebraicGeometry.Scheme

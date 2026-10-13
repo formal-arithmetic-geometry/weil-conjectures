@@ -1,0 +1,159 @@
+{
+ "id": "lem-sbc-regular-divisor-root-model-normal",
+ "kind": "statement",
+ "title": "Normal stalks of full root algebras along a regular divisor",
+ "statement": "Let $R$ be a commutative regular ring [def-weil-regular-scheme], let $f\\in R$ have injective multiplication, and assume $R/(f)$ is regular. Let $m\\geq0$ and let $e_k$ for $k\\in\\operatorname{Fin}m$ be positive integers invertible in $R$. Put $B=\\prod_kR[T]/(T^{e_k}-f)$ and $N=\\operatorname{Spec}B$ [def-weil-pbc-scheme-conventions]. For every point $z\\in N$, the stalk $\\mathcal O_{N,z}$ is an integrally closed domain [def-weil-pbc-normal-ring]. Empty products and zero rings are allowed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYH, localizations over (f) in the proof; Tag 0EYG, full root algebra in the strictly henselian calculation"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Each monic root algebra B_k=R[T]/(T^{e_k}-f) is finite free over Noetherian R, hence Noetherian. Freeness makes multiplication by f injective on B_k. For the root coordinate t, t^{e_k}=f; therefore multiplication by t is injective too.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "At a prime containing t, quotient the local ring by t. This is a localization of R/(f), hence a regular local ring. Lifting regularity across a nonzerodivisor gives regularity of the local ring itself. At a prime not containing t, both f and e_k*t^{e_k-1} are units, so the localized algebra is etale over the regular base and is regular. This is the local verification in Tag 0EYH.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Regular local rings are integrally closed domains. A prime of a finite product belongs to one factor with the same localization. The scheme stalk is that localization, giving both conclusions. For m=0 there are no points, so the assertion is vacuous. For unit f all primes fall in the etale case.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0EYH, localizations over (f) in the proof; Tag 0EYG, full root algebra in the strictly henselian calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "root algebra T power e minus f regular ring regular divisor normal dense open",
+   "results": "8 hits: StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree_le, Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree, Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero, Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top, Ideal.exists_coeff_ne_zero_mem_comap_of_non_zero_divisor_root_mem, Algebra.IsStandardEtale, spectrum.exists_mem_of_not_isUnit_aeval_prod; no exact chart/normal root-algebra theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing",
+   "results": "10 hits: IsRegularRing, instIsRegularRingOfIsDedekindDomain, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularRing.toIsNoetherian, IsRegularRing.of_ringEquiv, IsRegularRing.isRegularLocalRing_localization, isRegularRing_iff, IsRegularRing.mk; no exact chart/normal root-algebra theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot|IsRegularLocalRing|IsRegularRing",
+   "results": "10 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean; no exact chart/normal root-algebra theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normality of root algebra of regular divisor T power e minus f",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cyclic cover branched over a nonsingular hypersurface regular local ring",
+   "results": "Eight smooth/etale locus and standard etale presentation results; no regular-divisor root-algebra normality theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsRegularRing",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot|Abhyankar|Kummer|IsRegularRing in lean/Sheaf and lean/WeilConjectures/AlgebraicGeometry; regular-local-ring Mathlib sources",
+   "results": "Existing KummerTorsor constructs torsors from specified root algebras; it does not construct root charts from arbitrary torsors or prove regular-divisor root-algebra normality. Normalization comparison modules consume the original item. Mathlib RegularLocalRing has definitions and polynomial regularity, not either split-off theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraitGenericRootModel",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: Tag 0EYH, localizations over (f) in the proof; Tag 0EYG, full root algebra in the strictly henselian calculation",
+   "via": [
+    "lem-sbc-trait-generic-root-model",
+    "lem-sbc-trait-generic-normalization-charts",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularDivisorRootModelNormal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.regular_divisor_root_model_normal",
+  "statement": "theorem regular_divisor_root_model_normal (R : CommRingCat.{u}) [IsRegularRing R] (m : ℕ) (f : R) (hf : IsSMulRegular R f) [IsRegularRing (R ⧸ Ideal.span {f})] (e : Fin m → ℕ) (he : ∀ k, 0 < e k ∧ IsUnit (e k : R)) : let N := Spec (CommRingCat.of (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))) ∀ z : N, IsDomain (N.presheaf.stalk z) ∧ IsIntegrallyClosed (N.presheaf.stalk z)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T065056-L-896098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T065056-L-896098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
