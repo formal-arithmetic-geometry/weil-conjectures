@@ -11664,3 +11664,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/K2/Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective (stage 3; reviewer PASS; first push; landing 20261013T082353-L-1638864 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/K2/Sheaf.RingTheory.ClosedFiberDefectDerivationExtension (stage 3; reviewer PASS; first push; landing 20261013T082353-L-1638989 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/K3/Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift (stage 3; reviewer PASS; first push; landing 20261013T082354-L-1639186 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:23 L: merged deliver/K3/Sheaf.RingTheory.ConormalModulePrincipalLocalization (stage 3; reviewer PASS; first push; landing 20261013T082354-L-1639349 (proof); batch 20261013T082326; modules 1; new nodes 0)

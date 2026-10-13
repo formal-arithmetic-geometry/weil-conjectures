@@ -68,11 +68,11 @@
    }
   },
   {
-   "text": "($\\mathrm{NL}(\\beta')$ is homotopy equivalent to $\\mathrm{NL}(\\beta)$.) $\\beta':P[x]\\to S_g$ and $\\beta:Q\\to S_g$ are surjective homomorphisms of $R$-algebras from polynomial rings over $R$ (on $n+1$ and $m$ variables) onto the $R$-algebra $S_g$, with kernels $J'$ and $J$. By [lem-weil-pbc-nl-presentations-homotopy-equivalent] (algebra $S_g$, presentations $\\beta'$, $\\beta$) there are $S_g$-linear maps $\\varphi_i:\\mathrm{NL}(\\beta')_i\\to\\mathrm{NL}(\\beta)_i$, $\\psi_i:\\mathrm{NL}(\\beta)_i\\to\\mathrm{NL}(\\beta')_i$ ($i=0,1$), $h:\\mathrm{NL}(\\beta')_0\\to J'/J'^2$ and $h':\\mathrm{NL}(\\beta)_0\\to J/J^2$ with $\\mathrm d_\\beta\\varphi_1=\\varphi_0\\mathrm d_{\\beta'}$, $\\mathrm d_{\\beta'}\\psi_1=\\psi_0\\mathrm d_\\beta$, $\\mathrm{id}-\\psi_1\\varphi_1=h\\mathrm d_{\\beta'}$, $\\mathrm{id}-\\psi_0\\varphi_0=\\mathrm d_{\\beta'}h$, $\\mathrm{id}-\\varphi_1\\psi_1=h'\\mathrm d_\\beta$, $\\mathrm{id}-\\varphi_0\\psi_0=\\mathrm d_\\beta h'$.",
+   "text": "Let Q be the composite polynomial presentation of S_g constructed in step 2, and V the original presentation beta, both packaged as Generators. Mathlib's Generators.defaultHom gives lifts in both directions; Hom.toExtensionHom gives extension maps phi and psi. Their induced Cotangent.map and CotangentSpace.map commute with cotangentComplex by CotangentSpace.map_comp_cotangentComplex. Set h = (Hom.id Q.toExtension).sub (psi.comp phi) and h' = (Hom.id V.toExtension).sub (phi.comp psi). Apply Mathlib's Cotangent.map_sub_map and CotangentSpace.map_sub_map to these two pairs of maps, then simplify map_id and map_comp. This gives all four homotopy identities directly from the universal derivation [def-weil-pbc-kahler-differentials], without importing the separate presentation-homotopy statement.",
    "uses": [
-    "lem-weil-pbc-nl-presentations-homotopy-equivalent"
+    "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798 ('We know that NL(beta) and NL(beta') are homotopy equivalent by Lemma 00S1'); Lemma Tag 00S1 (lemma-NL-homotopy, line 35274)"
@@ -107,13 +107,14 @@
   "def-weil-ring-localization-away",
   "def-weil-pbc-mv-polynomial-ring",
   "lem-weil-pbc-principal-localization-naive-cotangent",
-  "lem-weil-pbc-nl-presentations-homotopy-equivalent",
   "lem-weil-pbc-two-term-homotopy-equivalence-direct-sum"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "K3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00S6 (lemma-conormal-module-localize, line 35776), proof lines 35787-35798, with Lemmas Tag 08JZ, 00S1, 00S3 (the content of 00S5's proof)"
+  "place": "Proof of Lemma 00S6 (lemma-conormal-module-localize), with the contractible summand of 08JZ, the Mathlib implementation of the 00S1 homotopy identities, and Lemma 00S3. All six steps implemented in Lean; step 4 uses proved Mathlib maps and Hom.sub directly."
  },
  "mathlib_searches": [
   {
@@ -217,5 +218,15 @@
   "group": "H1",
   "result": "pass",
   "note": "R,S CommRing+Algebra; g:S; S_g=Localization.Away g (R-algebra R->S->S_g, IsScalarTower checked); n,m:N incl 0; alpha,beta surjective AlgHoms from MvPolynomial (Fin n/m) R; I,J = (ofSurjective _).ker =rfl RingHom.ker; I/I^2,J/J^2 = Extension.Cotangent with S/S_g module (Cotangent.module); (I/I^2)_g = LocalizedModule.Away g with S_g-module; S_g^{+m},S_g^{+n} = Fin -> S_g; Nonempty S_g-linear equiv in node's order; docstring carries 6 proof steps"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T082354-L-1639349",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
