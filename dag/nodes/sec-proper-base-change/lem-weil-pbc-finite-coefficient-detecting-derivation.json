@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-detecting-derivation",
+ "kind": "statement",
+ "title": "Choose a detecting derivation killing a finite type coefficient subring",
+ "statement": "Let $p$ be prime, $B$ a domain of characteristic $p$, and $M$ its fraction field [def-weil-pbc-localization-at-prime]. Suppose $R_0$ is a Noetherian [def-weil-pbc-noetherian-ring] local ring complete for its maximal ideal [def-weil-pbc-adically-complete-ring], and $R_0\\to B$ is of finite type [def-weil-pbc-finite-type-algebra]. Let $f\\in B$ and let $D:M\\to M$ be an additive map satisfying $D(xy)=xD(y)+yD(x)$ with $D(f)\\ne0$. There exist a subring $A\\subset B$ over which $B$ is of finite type and an additive map $\\delta:M\\to M$ satisfying the Leibniz rule such that $\\delta(a)=0$ for every $a\\in A$ and $\\delta(f)\\ne0$; elements of $B$ are viewed in $M$ by the fraction field map.",
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PH (lemma-find-D), normalization and coefficient-subfield paragraphs before the final denominator-clearing paragraph"
+ },
+ "proof": [
+  {
+   "text": "The Leibniz power formula gives D(x^p)=0 in characteristic p, so the image of f is not a pth power in M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Replace the base R0 by its image R in B, using completeness of a proper quotient. The kernel is prime, so R is a complete Noetherian local domain of characteristic p. Cohen structure gives an embedded power series subring S=k[[x1,...,xn]] over a field k with R finite over S; the Cohen ring alternative is impossible in characteristic p. Thus B is finite type over S.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-complete-local-domain-finite-over-regular"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize over S to obtain an embedded polynomial ring C=S[y1,...,ym] and C inside B0 inside B, with B0 finite over C and (B0)_g=B_g for nonzero g in S. Hence Frac(B0)=M and M/Frac(C) is finite. B is still finite type over C because its finite S-algebra generators generate over every intermediate subring.",
+   "uses": [
+    "lem-weil-pbc-noether-normalization-over-domain",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a p-basis of k. Its finite subsets J give coefficient subrings C_J inside C with C finite over C_J, and fraction subfields K_J with directed intersection K^p, where K=Frac(C). In the finite extension M/K, the intersection of M^p K_J is M^p by the subfield intersection theorem. The image of f is outside M^p, so for some J it is outside M^p K_J. The differential kernel criterion identifies this latter field with the kernel of d:M to Omega_(M/K_J), so df is nonzero there.",
+   "uses": [
+    "lem-weil-pbc-p-basis-exists",
+    "lem-weil-pbc-power-series-ring-subfields",
+    "lem-weil-pbc-intersection-subfields-differentials",
+    "lem-weil-pbc-p-basis-differentials-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an M-linear form nonzero on df and compose it with the universal K_J-derivation. Restrict scalars to the integers to obtain delta; it vanishes on C_J and is nonzero on f. Let A be the embedded image of C_J in B. Since C is finite over C_J and B is finite type over C, B is finite type over A by transitivity. This proves coefficient preparation without constructing a B-valued derivation or clearing denominators.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-noether-normalization-over-domain",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-p-basis-exists",
+  "lem-weil-pbc-power-series-ring-subfields",
+  "lem-weil-pbc-intersection-subfields-differentials",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-weil-pbc-vector-space-dual-separates",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-finite-module-over-finite-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PH (lemma-find-D), with 07P4 applied to the fraction-field element f before clearing denominators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A characteristic p domain finite type over a complete noetherian local ring admits a fraction field derivation detecting a non-pth-power and killing a subring over which the domain is finite type",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, Algebra.FiniteType",
+   "results": "No results",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a characteristic p domain finite type over a complete noetherian local ring and a fraction field derivation nonzero on f, choose a detecting derivation killing a subring over which the domain is finite type",
+   "results": "Differential.differentialAlgebraFiniteDimensional; Differential.uniqueDifferentialAlgebraFiniteDimensional; Algebra.Etale; Differential.differentialFiniteDimensional; aeval_derivative_mem_differentIdeal; Differential.instDifferentialAlgebraAdjoinRoot; Algebra.IsEtaleAt; Algebra.IsStandardSmooth",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exist_integer_multiples|derivation.*finite.*type|finite.*type.*derivation",
+   "results": "Mathlib/RingTheory/FractionalIdeal/Operations.lean; Mathlib/RingTheory/FractionalIdeal/Operations.lean; Mathlib/RingTheory/Localization/Integer.lean; Mathlib/RingTheory/Localization/Integer.lean; Mathlib/RingTheory/Localization/Integer.lean; Mathlib/RingTheory/Localization/Integer.lean; Mathlib/RingTheory/Localization/Integer.lean; Mathlib/RingTheory/Localization/Module.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.Derivation.DetectNonPthPower",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07PH proof, coefficient-subfield and relative-differential preparation before multiplying denominator factors",
+   "via": [
+    "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+    "lem-weil-pbc-helper-g-ring-char-p",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.Derivation.FiniteCoefficientPreparation",
+  "file": "lean/Sheaf/RingTheory/Derivation/FiniteCoefficientPreparation.lean",
+  "declaration": "Derivation.exists_finite_coefficient_derivation",
+  "statement": "theorem exists_finite_coefficient_derivation\n    (p : ℕ) [Fact p.Prime]\n    (B : Type u) [CommRing B] [IsDomain B] [CharP B p]\n    (M : Type v) [Field M] [Algebra B M] [IsFractionRing B M]\n    (R₀ : Type w) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀]\n    [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀]\n    [Algebra R₀ B] [Algebra.FiniteType R₀ B]\n    (f : B) (D : Derivation ℤ M M) (hD : D (algebraMap B M f) ≠ 0) :\n    ∃ A : Subring B, Algebra.FiniteType A B ∧\n      ∃ δ : Derivation ℤ M M,\n        (∀ a : A, δ (algebraMap B M a) = 0) ∧ δ (algebraMap B M f) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T011930-L-2764419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T011930-L-2764419",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

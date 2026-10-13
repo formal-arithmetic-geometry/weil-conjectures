@@ -10,16 +10,30 @@
  },
  "proof": [
   {
-   "text": "This is the corresponding strictly smaller structural step in the proof of Lemma 07PH; the complete algebraic argument is recorded in the declaration docstring.",
+   "text": "Apply coefficient preparation to choose A and a detecting fraction-field derivation delta vanishing on A, with B finite type over A.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-detecting-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite A-algebra generators s for B. Mathlib IsLocalization.exist_integer_multiples gives a common nonzero denominator c for delta on s. Set Delta=c*delta. Algebra.adjoin_induction shows Delta(B) is contained in B: it vanishes on A, is integral on s, preserves sums, and the Leibniz rule preserves products. This is the proved private clear_denominators helper.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "For each x in B choose the unique integral value d(x) whose fraction-field image equals Delta(x). Fraction-field injectivity transfers addition, integer-linearity, the value at one, and the Leibniz rule to d, constructing D′:Derivation Z B B. Since the fraction-field image of c and delta(f) are both nonzero, their product is nonzero; hence D′(f) is nonzero.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coefficient-detecting-derivation"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma 07PH"
+  "place": "Tag 07PH, final common-denominator paragraph, using algebra generators and adjoin induction instead of module generators"
  },
  "mathlib_searches": [
   {
@@ -92,20 +106,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T225318-L-1809196",
+  "landing": "20261013T011930-L-2764419",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Derivation.exists_domain_derivation_of_fraction_derivation",
-   "Derivation.exists_fraction_field_derivation_of_not_pth_power"
-  ],
-  "sorry_after": [
-   "Derivation.exists_domain_derivation_of_fraction_derivation"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -15,7 +15,9 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
-import Sheaf.RingTheory.Derivation.NonzeroDifferentialToDerivation
+import Mathlib.LinearAlgebra.Dual.Lemmas
+import Sheaf.RingTheory.Derivation.FiniteCoefficientPreparation
+import Mathlib.RingTheory.Localization.Integer
 
 /-!
 # Detecting non-pth-powers by absolute derivations
@@ -59,8 +61,43 @@ theorem exists_fraction_field_derivation_of_not_pth_power
     rcases hp with ⟨x, hx⟩
     apply hf
     exact ⟨x, hx.symm⟩
-  exact exists_derivation_of_nonzero_kahler_differential p M
-    (algebraMap B M f) hdiff
+  obtain ⟨φ, hφ⟩ := Module.Projective.exists_dual_ne_zero M hdiff
+  exact ⟨(φ.compDer (KaehlerDifferential.D (ZMod p) M)).restrictScalars ℤ, hφ⟩
+
+private theorem clear_denominators
+    {B : Type u} [CommRing B] [IsDomain B]
+    {M : Type v} [Field M] [Algebra B M] [IsFractionRing B M]
+    (A : Subring B) (hfinite : Algebra.FiniteType A B)
+    (δ : Derivation ℤ M M) (hbase : ∀ a : A, δ (algebraMap B M a) = 0) :
+    ∃ c : B, c ≠ 0 ∧ ∀ x : B,
+      ∃ y : B, algebraMap B M y = algebraMap B M c * δ (algebraMap B M x) := by
+  classical
+  obtain ⟨s, hs⟩ := hfinite.out
+  obtain ⟨c, hc⟩ := IsLocalization.exist_integer_multiples (nonZeroDivisors B) s
+    (fun x : B ↦ δ (algebraMap B M x))
+  let Δ : Derivation ℤ M M := algebraMap B M (c : B) • δ
+  refine ⟨c, nonZeroDivisors.ne_zero c.property, ?_⟩
+  intro x
+  have hx : x ∈ Algebra.adjoin A (s : Set B) := by rw [hs]; trivial
+  change ∃ y : B, algebraMap B M y = Δ (algebraMap B M x)
+  induction hx using Algebra.adjoin_induction with
+  | mem x hx =>
+    obtain ⟨y, hy⟩ := hc x hx
+    exact ⟨y, by simpa only [Δ, Derivation.smul_apply, smul_eq_mul, Algebra.smul_def] using hy⟩
+  | algebraMap a =>
+    refine ⟨0, ?_⟩
+    rw [map_zero]
+    change 0 = algebraMap B M (c : B) * δ (algebraMap B M (a : B))
+    rw [hbase a, mul_zero]
+  | add x y _ _ hx hy =>
+    obtain ⟨x', hx'⟩ := hx
+    obtain ⟨y', hy'⟩ := hy
+    exact ⟨x' + y', by simp only [map_add, hx', hy']⟩
+  | mul x y _ _ hx hy =>
+    obtain ⟨x', hx'⟩ := hx
+    obtain ⟨y', hy'⟩ := hy
+    refine ⟨x * y' + y * x', ?_⟩
+    simp only [map_add, map_mul, hx', hy', Δ.leibniz, smul_eq_mul]
 
 /-- Denominator clearing for a finite type domain.
 (blueprint: lem-weil-pbc-domain-derivation-from-fraction)
@@ -75,7 +112,54 @@ theorem exists_domain_derivation_of_fraction_derivation
     [Algebra R₀ B] [Algebra.FiniteType R₀ B]
     (f : B) (D : Derivation ℤ M M) (hD : D (algebraMap B M f) ≠ 0) :
     ∃ D' : Derivation ℤ B B, D' f ≠ 0 := by
-  sorry
+  classical
+  obtain ⟨A, hfinite, δ, hbase, hδ⟩ :=
+    exists_finite_coefficient_derivation p B M R₀ f D hD
+  obtain ⟨c, hc, H⟩ := clear_denominators A hfinite δ hbase
+  let Δ : Derivation ℤ M M := algebraMap B M c • δ
+  choose d hd using H
+  have hdd (x : B) : algebraMap B M (d x) = Δ (algebraMap B M x) := hd x
+  let D' : Derivation ℤ B B :=
+    { toFun := d
+      map_add' := by
+        intro x y
+        apply IsFractionRing.injective B M
+        calc
+          algebraMap B M (d (x + y)) = Δ (algebraMap B M (x + y)) := hdd _
+          _ = Δ (algebraMap B M x + algebraMap B M y) := by rw [map_add]
+          _ = Δ (algebraMap B M x) + Δ (algebraMap B M y) := Δ.map_add _ _
+          _ = algebraMap B M (d x + d y) := by rw [← hdd, ← hdd, map_add]
+      map_smul' := by
+        intro z x
+        apply IsFractionRing.injective B M
+        calc
+          algebraMap B M (d (z • x)) = Δ (algebraMap B M (z • x)) := hdd _
+          _ = Δ ((algebraMap ℤ M) z * algebraMap B M x) := by
+            simp [Algebra.smul_def]
+          _ = (algebraMap ℤ M) z * Δ (algebraMap B M x) := by
+            convert Δ.map_smul z (algebraMap B M x) using 1 <;> simp [Algebra.smul_def]
+          _ = algebraMap B M (z • d x) := by simp [Algebra.smul_def, hdd]
+      map_one_eq_zero' := by
+        apply IsFractionRing.injective B M
+        change algebraMap B M (d 1) = algebraMap B M 0
+        rw [hdd, map_one, Δ.map_one_eq_zero, map_zero]
+      leibniz' := by
+        intro x y
+        apply IsFractionRing.injective B M
+        change algebraMap B M (d (x * y)) = algebraMap B M (x * d y + y * d x)
+        calc
+          algebraMap B M (d (x * y)) = Δ (algebraMap B M (x * y)) := hdd _
+          _ = Δ (algebraMap B M x * algebraMap B M y) := by rw [map_mul]
+          _ = algebraMap B M x * Δ (algebraMap B M y) +
+              algebraMap B M y * Δ (algebraMap B M x) := Δ.leibniz _ _
+          _ = algebraMap B M (x * d y + y * d x) := by simp [hdd, map_add, map_mul] }
+  refine ⟨D', ?_⟩
+  intro hz
+  have hd0 : d f = 0 := hz
+  have hΔ0 : Δ (algebraMap B M f) = 0 := by rw [← hdd, hd0, map_zero]
+  have hcM : algebraMap B M c ≠ 0 := fun h ↦ hc
+    ((IsFractionRing.injective B M) (h.trans (map_zero _).symm))
+  exact (mul_ne_zero hcM hδ) hΔ0
 
 /-- Stacks Project, More on Algebra, Lemma 07PH (`lemma-find-D`).
 (blueprint: lem-weil-pbc-derivation-nonzero-on-non-pth-power)

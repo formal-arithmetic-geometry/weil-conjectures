@@ -10468,3 +10468,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/K4/Sheaf.AlgebraicGeometry.GenericFlatness (stage 3; reviewer PASS; first push; landing 20261013T011929-L-2763998 (interface); batch 20261013T011921; modules 3; new nodes 2)
 - 01:19 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison (stage 3; reviewer PASS; first push; landing 20261013T011930-L-2764104 (interface); batch 20261013T011921; modules 4; new nodes 3)
 - 01:19 L: merged deliver/M1/Sheaf.Algebra.Homology.ModuleRestrictionStalkLinear (stage 3; reviewer PASS; first push; landing 20261013T011930-L-2764238 (interface); batch 20261013T011921; modules 3; new nodes 2)
+- 01:19 L: merged deliver/M3/Sheaf.RingTheory.Derivation.DetectNonPthPower (stage 3; reviewer PASS; first push; landing 20261013T011930-L-2764419 (interface); batch 20261013T011921; modules 2; new nodes 1)
