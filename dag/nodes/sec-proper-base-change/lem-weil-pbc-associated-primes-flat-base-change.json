@@ -31,122 +31,85 @@
  ],
  "proof": [
   {
-   "text": "Throughout, $\\varphi:R\\to S$ is the ring map, $M\\otimes_RN$ is an $S$-module through $N$, and every map $1_?\\otimes(\\cdot)$ or $(\\cdot)\\otimes1_N$ below is $S$-linear because $S$ acts on the factor $N$ only. Two remarks used repeatedly: an isomorphism of $T$-modules preserves annihilators of corresponding elements, hence associated primes; and every element of $S$ commutes with the $R$-action. *Inclusion $\\supseteq$.* Let $\\mathfrak p\\in\\operatorname{Ass}_R(M)$, say $\\operatorname{Ann}_R(z)=\\mathfrak p$ with $z\\in M$. The $R$-linear map $R/\\mathfrak p\\to M$, $\\bar r\\mapsto rz$, is well defined and injective (its kernel is $\\operatorname{Ann}_R(z)/\\mathfrak p=0$). Since $N$ is a flat $R$-module [def-weil-pbc-flat-ring-map] [lem-weil-pbc-flat-tensor-exact], $(R/\\mathfrak p)\\otimes_RN\\to M\\otimes_RN$ is injective, and it is $S$-linear. By [lem-weil-pbc-tensor-over-quotient-ring] (1) the map $(R/\\mathfrak p)\\otimes_RN\\to N/\\mathfrak pN$, $\\bar r\\otimes n\\mapsto rn\\bmod\\mathfrak pN$, is an isomorphism; it is $S$-linear since $s(rn)=r(sn)$. So $N/\\mathfrak pN$ is isomorphic to an $S$-submodule of $M\\otimes_RN$, and by [lem-weil-pbc-associated-primes-exact-sequence] (first inclusion, over the ring $S$) $\\operatorname{Ass}_S(N/\\mathfrak pN)\\subseteq\\operatorname{Ass}_S(M\\otimes_RN)$. Taking the union over $\\mathfrak p\\in\\operatorname{Ass}_R(M)$ gives the inclusion $\\supseteq$ of the statement, for every ring $R$.",
+   "text": "For p = Ann_R(z), form the injective R-linear map R/p → M by r̄ ↦ rz. Tensor on the left with the flat module N. Prove that restriction of scalars carries the S-submodule (p : Set R) • ⊤ to p • ⊤ as an R-submodule, by scalar-product induction. TensorProduct.tensorQuotEquivQuotSMul then constructs an S-linear equivalence N/pN ≃ N ⊗_R (R/p): its S-linearity is checked on quotient representatives. Compose with the tensor injection. Injective S-linear maps preserve the exact element annihilator, so Ass_S(N/pN) is contained in Ass_S(N ⊗_R M).",
    "uses": [
     "def-weil-pbc-flat-ring-map",
     "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-over-quotient-ring",
-    "lem-weil-pbc-associated-primes-exact-sequence"
+    "lem-weil-pbc-tensor-over-quotient-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, first paragraph"
+    "place": "Tag 0312, first proof paragraph; quotient/scalar compatibility written out by U1"
    }
   },
   {
-   "text": "*Associated primes of a directed union.* Let $T$ be a commutative ring, $P$ a $T$-module and $(P_\\lambda)_{\\lambda\\in\\Lambda}$ a family of submodules, directed (any two lie in a third) with $\\bigcup_\\lambda P_\\lambda=P$. Then $\\operatorname{Ass}_T(P)=\\bigcup_\\lambda\\operatorname{Ass}_T(P_\\lambda)$: the inclusion $\\supseteq$ is [lem-weil-pbc-associated-primes-exact-sequence] (first inclusion) for each inclusion $P_\\lambda\\subseteq P$; conversely if $\\mathfrak q=\\operatorname{Ann}_T(z)$ with $z\\in P$, then $z\\in P_\\lambda$ for some $\\lambda$, and the annihilator of $z$ as an element of $P_\\lambda$ is the same ideal $\\mathfrak q$.",
+   "text": "Every element of M ⊗_R N comes from L ⊗_R N for some finitely generated R-submodule L of M (Submodule.exists_fg_le_eq_rTensor_subtype). The subtype tensor map is injective by flatness. Therefore the element has the same annihilator in L ⊗_R N. Apply this argument both to associated_flat_tensor (over R) and to associated_tensor_prime_quotient (over S, after tensor commutation). This implements the directed-union reduction witness by witness, without a separate union theorem.",
    "uses": [
-    "lem-weil-pbc-associated-primes-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, second paragraph: 'By definition of associated primes we see that ...'"
-   }
-  },
-  {
-   "text": "*Reduction to $M$ finite.* Assume $R$ Noetherian [def-weil-pbc-noetherian-ring]; by Step 1 it remains to prove $\\subseteq$. Let $(M_\\lambda)$ be the family of finitely generated $R$-submodules of $M$ [def-weil-finitely-generated-module]; it is directed ($M_\\lambda+M_\\mu$ is finitely generated) and its union is $M$ ($m\\in Rm$). As $N$ is flat, each $M_\\lambda\\otimes_RN\\to M\\otimes_RN$ is injective [lem-weil-pbc-flat-tensor-exact] and $S$-linear; call its image $F_\\lambda$. The $F_\\lambda$ are directed ($M_\\lambda\\subseteq M_\\mu$ gives $F_\\lambda\\subseteq F_\\mu$, the maps being compatible) and their union is $M\\otimes_RN$ (an element $\\sum_{j=1}^km_j\\otimes n_j$ lies in $F_\\lambda$ as soon as $m_1,\\dots,m_k\\in M_\\lambda$). By Step 2, over $S$ and over $R$: $\\operatorname{Ass}_S(M\\otimes_RN)=\\bigcup_\\lambda\\operatorname{Ass}_S(M_\\lambda\\otimes_RN)$ and $\\operatorname{Ass}_R(M)=\\bigcup_\\lambda\\operatorname{Ass}_R(M_\\lambda)$. Hence if the inclusion $\\subseteq$ holds for every $M_\\lambda$, then $\\operatorname{Ass}_S(M\\otimes_RN)\\subseteq\\bigcup_\\lambda\\bigcup_{\\mathfrak p\\in\\operatorname{Ass}_R(M_\\lambda)}\\operatorname{Ass}_S(N/\\mathfrak pN)=\\bigcup_{\\mathfrak p\\in\\operatorname{Ass}_R(M)}\\operatorname{Ass}_S(N/\\mathfrak pN)$. So we may and do assume, in Steps 4-9, that $R$ is Noetherian and $M$ is a finite $R$-module.",
-   "uses": [
-    "def-weil-pbc-noetherian-ring",
     "def-weil-finitely-generated-module",
     "lem-weil-pbc-flat-tensor-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, second paragraph"
+    "place": "Tag 0312, second proof paragraph"
    }
   },
   {
-   "text": "*Claim C: if $R$ is Noetherian, $M$ a finite $R$-module and $\\mathfrak q\\in\\operatorname{Ass}_S(M\\otimes_RN)$, then $\\mathfrak p:=\\varphi^{-1}(\\mathfrak q)\\in\\operatorname{Ass}_R(M)$.* Steps 4-7 prove it. Put $P=M\\otimes_RN$; $\\mathfrak p$ is a prime ideal of $R$. By [lem-weil-pbc-associated-prime-localize-at-prime] (over the ring $S$, at $\\mathfrak q$) there is $w\\in P_{\\mathfrak q}$ with $\\operatorname{Ann}_{S_{\\mathfrak q}}(w)=\\mathfrak qS_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] [def-weil-pbc-module-localization]; $w\\ne0$ since $\\mathfrak qS_{\\mathfrak q}\\ne S_{\\mathfrak q}$.",
+   "text": "Over Noetherian R, first prove: if p ∈ Ass_R(M ⊗_R N), then p ∈ Ass_R(M). For finite M put A = R_p and L = M_p. The tensor localization map g : M ⊗_R N → L ⊗_R N is an IsLocalizedModule by the rTensor instance. Mathlib Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule puts the maximal ideal of A among associated primes of L ⊗_R N. This is the Noetherian specialization of associated-prime localization, using isAssociatedPrime_iff to remove radicals. If that maximal ideal were not associated to L, choose x in it acting injectively on L. Flatness of N preserves the injectivity of the R-linear map given by x, hence x acts injectively on L ⊗_R N. But the associated-prime witness is nonzero and killed by x, a contradiction. Descend association of the maximal ideal from L to M by the finitely-generated-comap localization lemma. A is Noetherian and L is finite by the localization instances.",
    "uses": [
-    "lem-weil-pbc-associated-prime-localize-at-prime",
+    "def-weil-pbc-noetherian-ring",
     "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, third paragraph: 'First we observe that qS_q ∈ Ass_{S_q}((M ⊗_R N)_q), see Lemma 0310. Let p be the corresponding prime of R.'"
-   }
-  },
-  {
-   "text": "*The identification $(M\\otimes_RN)_{\\mathfrak q}\\cong M_{\\mathfrak p}\\otimes_RN_{\\mathfrak q}$.* Put $U=R\\setminus\\mathfrak p$. Since $\\varphi(U)\\subseteq S\\setminus\\mathfrak q$, every $u\\in U$ acts invertibly on every $S_{\\mathfrak q}$-module, so $N_{\\mathfrak q}$, $P_{\\mathfrak q}$ and $M\\otimes_RN_{\\mathfrak q}$ (an $S_{\\mathfrak q}$-module through $N_{\\mathfrak q}$) are $R_{\\mathfrak p}$-modules. (a) By [lem-weil-pbc-localization-tensor-over-base] for $R\\to A=S$, $T=S\\setminus\\mathfrak q$, the $S$-module $N$ and the $R$-module $M$ (and $M\\otimes_RN\\cong N\\otimes_RM$), $P_{\\mathfrak q}\\cong M\\otimes_RN_{\\mathfrak q}$ as $S_{\\mathfrak q}$-modules, $(m\\otimes n)/t\\mapsto m\\otimes(n/t)$. (b) By [lem-weil-pbc-localization-tensor-over-base] for $R\\to A=R$ (identity), $T=U$, the $R$-module $M$ and the $R$-module $N_{\\mathfrak q}$: $U^{-1}(M\\otimes_RN_{\\mathfrak q})\\cong M_{\\mathfrak p}\\otimes_RN_{\\mathfrak q}$ [def-weil-pbc-module-localization]. (c) By [lem-weil-pbc-localization-module-over-localization], applied to the $R_{\\mathfrak p}$-module $M\\otimes_RN_{\\mathfrak q}$, $U^{-1}(M\\otimes_RN_{\\mathfrak q})\\cong M\\otimes_RN_{\\mathfrak q}$. All three isomorphisms are $R$-linear, so together $P_{\\mathfrak q}\\cong M_{\\mathfrak p}\\otimes_RN_{\\mathfrak q}$ compatibly with multiplication by each $a\\in R$, which on $P_{\\mathfrak q}$ is multiplication by $\\varphi(a)/1\\in S_{\\mathfrak q}$ and on $M_{\\mathfrak p}\\otimes_RN_{\\mathfrak q}$ is $(a\\cdot)\\otimes1$. (The source writes $M_{\\mathfrak p}\\otimes_{R_{\\mathfrak p}}N_{\\mathfrak q}$; tensoring over $R$ is the same module here and is what Step 7 needs.)",
-   "uses": [
+    "def-weil-pbc-module-localization",
     "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-localization-module-over-localization",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, third paragraph: 'Note that (M ⊗_R N)_q = M ⊗_R N_q = M_p ⊗_{R_p} N_q'"
-   }
-  },
-  {
-   "text": "*$N_{\\mathfrak q}$ is a flat $R$-module.* Let $f:Q'\\to Q$ be an injective $R$-linear map. Then $1_N\\otimes f:N\\otimes_RQ'\\to N\\otimes_RQ$ is injective because $N$ is $R$-flat [def-weil-pbc-flat-ring-map], and it is $S$-linear; localizing at $S\\setminus\\mathfrak q$ keeps it injective [lem-weil-pbc-localization-module-exact] (applied to the exact sequence $0\\to N\\otimes_RQ'\\to N\\otimes_RQ$). By the naturality clause of [lem-weil-pbc-localization-tensor-over-base] (for $A=S$, $T=S\\setminus\\mathfrak q$, the $S$-module $N$) this localized map is $1_{N_{\\mathfrak q}}\\otimes f:N_{\\mathfrak q}\\otimes_RQ'\\to N_{\\mathfrak q}\\otimes_RQ$, which is therefore injective. So $N_{\\mathfrak q}$ is $R$-flat. (The source uses that $N_{\\mathfrak q}$ is flat over $R_{\\mathfrak p}$; flatness over $R$ is what the form of Step 5 needs.)",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, third paragraph: 'Since N_q is flat over R_p'"
-   }
-  },
-  {
-   "text": "*$\\mathfrak p\\in\\operatorname{Ass}_R(M)$.* The ring $R_{\\mathfrak p}$ is Noetherian [lem-weil-pbc-localization-noetherian] and local with maximal ideal $\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], and $M_{\\mathfrak p}$ is a finite $R_{\\mathfrak p}$-module (if $m_1,\\dots,m_k$ generate $M$ then $m/u=\\sum(a_j/u)(m_j/1)$ for $m=\\sum a_jm_j$) [def-weil-finitely-generated-module]. Suppose $\\mathfrak pR_{\\mathfrak p}\\notin\\operatorname{Ass}_{R_{\\mathfrak p}}(M_{\\mathfrak p})$. By [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] there is $x\\in\\mathfrak pR_{\\mathfrak p}$ which is a nonzerodivisor on $M_{\\mathfrak p}$; write $x=a/u$ with $a\\in\\mathfrak p$, $u\\in U$. As $u$ acts bijectively on $M_{\\mathfrak p}$, multiplication by $a$ on $M_{\\mathfrak p}$ is injective. Since $N_{\\mathfrak q}$ is $R$-flat (Step 6) [def-weil-pbc-flat-ring-map], $(a\\cdot)\\otimes1$ on $M_{\\mathfrak p}\\otimes_RN_{\\mathfrak q}$ is injective, so by Step 5 multiplication by $\\varphi(a)/1$ on $P_{\\mathfrak q}$ is injective. But $a\\in\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ gives $\\varphi(a)/1\\in\\mathfrak qS_{\\mathfrak q}=\\operatorname{Ann}_{S_{\\mathfrak q}}(w)$, so $(\\varphi(a)/1)w=0$ with $w\\ne0$ (Step 4): a contradiction. Hence $\\mathfrak pR_{\\mathfrak p}\\in\\operatorname{Ass}_{R_{\\mathfrak p}}(M_{\\mathfrak p})$, and by [lem-weil-pbc-noetherian-associated-prime-from-localization] $\\mathfrak p\\in\\operatorname{Ass}_R(M)$. This proves Claim C.",
-   "uses": [
+    "lem-weil-pbc-associated-prime-localize-at-prime",
     "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
     "def-weil-finitely-generated-module",
     "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
-    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-tensor-exact",
     "lem-weil-pbc-noetherian-associated-prime-from-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, third paragraph: 'If pR_p ∉ Ass(M_p) then there exists x ∈ pR_p which is a nonzerodivisor in M_p (see Lemma 00LL) ... Hence we conclude that p is one of the associated primes of M.'"
+    "place": "Tag 0312, contraction paragraph; the equivalent argument localizing only over R is written by U1"
    }
   },
   {
-   "text": "*Filtration.* ($R$ Noetherian, $M$ finite.) By [lem-weil-pbc-noetherian-module-prime-filtration] there are $0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_n=M$ and primes $\\mathfrak p_1,\\dots,\\mathfrak p_n$ of $R$ with $M_i/M_{i-1}\\cong R/\\mathfrak p_i$. Tensoring $0\\to M_{i-1}\\to M_i\\to R/\\mathfrak p_i\\to0$ with the flat module $N$ gives an exact sequence of $S$-modules $0\\to M_{i-1}\\otimes_RN\\to M_i\\otimes_RN\\to(R/\\mathfrak p_i)\\otimes_RN\\to0$ (injectivity on the left and exactness in the middle by [lem-weil-pbc-flat-tensor-exact], surjectivity on the right by [lem-weil-pbc-tensor-right-exact]), and $(R/\\mathfrak p_i)\\otimes_RN\\cong N/\\mathfrak p_iN$ as $S$-modules [lem-weil-pbc-tensor-over-quotient-ring] (1). By [lem-weil-pbc-associated-primes-exact-sequence] (second inclusion, over $S$) $\\operatorname{Ass}_S(M_i\\otimes_RN)\\subseteq\\operatorname{Ass}_S(M_{i-1}\\otimes_RN)\\cup\\operatorname{Ass}_S(N/\\mathfrak p_iN)$, and by induction on $i$ (with $M_0\\otimes_RN=0$, which has no associated prime since $\\operatorname{Ann}(0)=S$ is not prime) $\\operatorname{Ass}_S(M\\otimes_RN)\\subseteq\\bigcup_{i=1}^n\\operatorname{Ass}_S(N/\\mathfrak p_iN)$.",
+   "text": "Given q ∈ Ass_S(N ⊗_R M), restrict its annihilator witness to R: the exact annihilator becomes q.comap (algebraMap R S), and this ideal is prime. R is Noetherian, so isAssociatedPrime_iff turns this witness into Mathlib association over R. Commute tensor factors and apply the preceding R-linear contraction result, then convert back to the exact-annihilator notion. The finite-submodule reduction in step 2 makes this valid for arbitrary M.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0312, contraction paragraph; scalar restriction variant written by U1"
+   }
+  },
+  {
+   "text": "For finite M, apply IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime, the induction principle derived from the prime filtration. In the subsingleton case the tensor has no exact associated prime because Ann(0) is the improper ideal. In the prime-quotient case tensor the supplied equivalence. For a short exact sequence tensor its maps with N: flatness gives injectivity and exactness, and right exactness gives surjectivity. Apply annihilatorAssociatedPrimes_of_shortExact over S and use the induction hypothesis in each outer module. This yields a prime p of R such that q ∈ Ass_S(N ⊗_R (R/p)). The finite-submodule reduction of step 2 removes the finiteness restriction.",
    "uses": [
     "lem-weil-pbc-noetherian-module-prime-filtration",
     "lem-weil-pbc-flat-tensor-exact",
     "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-tensor-over-quotient-ring",
-    "lem-weil-pbc-associated-primes-exact-sequence"
+    "lem-weil-pbc-associated-primes-exact-sequence",
+    "def-weil-finitely-generated-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, last paragraph: 'Continuing the argument we choose a filtration ... with subquotients isomorphic to N/p_iN'"
+    "place": "Tag 0312, last proof paragraph, using the prime-filtration induction principle"
    }
   },
   {
-   "text": "*Conclusion.* Let $\\mathfrak q\\in\\operatorname{Ass}_S(M\\otimes_RN)$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$; by Claim C (Steps 4-7) $\\mathfrak p\\in\\operatorname{Ass}_R(M)$, and by Step 8 $\\mathfrak q\\in\\operatorname{Ass}_S(N/\\mathfrak p_iN)$ for some $i$. Now $R/\\mathfrak p_i$ is a finite $R$-module (generated by $\\bar1$) and $N/\\mathfrak p_iN\\cong(R/\\mathfrak p_i)\\otimes_RN$ [lem-weil-pbc-tensor-over-quotient-ring], so Claim C applied to $R/\\mathfrak p_i$ gives $\\mathfrak p\\in\\operatorname{Ass}_R(R/\\mathfrak p_i)$. And $\\operatorname{Ass}_R(R/\\mathfrak p_i)=\\{\\mathfrak p_i\\}$: $\\operatorname{Ann}_R(\\bar0)=R$ is not prime, and for $r\\notin\\mathfrak p_i$, $\\operatorname{Ann}_R(\\bar r)=\\{a:ar\\in\\mathfrak p_i\\}=\\mathfrak p_i$ as $\\mathfrak p_i$ is prime. Hence $\\mathfrak p_i=\\mathfrak p$ and $\\mathfrak q\\in\\operatorname{Ass}_S(N/\\mathfrak pN)$ with $\\mathfrak p\\in\\operatorname{Ass}_R(M)$, i.e. $\\mathfrak q$ lies in the right hand side. With Steps 1 and 3 this proves equality for Noetherian $R$.",
+   "text": "If p is prime and q ∈ Ass_R(R/p), then q = p. Its annihilator witness is nonzero since q is proper. Write it as r̄ with r ∉ p; a kills r̄ exactly when ar ∈ p, which by primality is equivalent to a ∈ p. Now contract both the original q ∈ Ass_S(N ⊗_R M) and its occurrence in N ⊗_R (R/p) from step 5. Step 4 and this quotient calculation identify p with q ∩ R and show p ∈ Ass_R(M). Transfer q across the S-linear quotient/tensor equivalence to Ass_S(N/pN). This proves the reverse inclusion for Noetherian R. Combine with step 1 and transport the two sets along the S-linear tensor-commutation equivalence to the module action in the original statement.",
    "uses": [
     "lem-weil-pbc-tensor-over-quotient-ring"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 0312 (lemma-bourbaki), proof, last paragraph: 'If p_i ≠ p then q cannot be associated to the module N/p_iN by the result of the preceding paragraph (as Ass_R(R/p_i) = {p_i}). Hence ...'"
+    "place": "Tag 0312, last proof paragraph"
    }
   }
  ],
@@ -154,25 +117,25 @@
   "def-weil-pbc-flat-ring-map",
   "lem-weil-pbc-flat-tensor-exact",
   "lem-weil-pbc-tensor-over-quotient-ring",
-  "lem-weil-pbc-associated-primes-exact-sequence",
-  "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module",
-  "lem-weil-pbc-associated-prime-localize-at-prime",
+  "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization",
   "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-localization-module-over-localization",
-  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-associated-prime-localize-at-prime",
   "lem-weil-pbc-localization-noetherian",
   "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
   "lem-weil-pbc-noetherian-associated-prime-from-localization",
   "lem-weil-pbc-noetherian-module-prime-filtration",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-associated-primes-exact-sequence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "U1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0312 (lemma-bourbaki), proof, lines 15785-15851"
+  "place": "Algebra, Lemma Tag 0312 (lemma-bourbaki), proof; checked at https://stacks.math.columbia.edu/tag/0312. The contraction argument localizes only over R; the finite-submodule reduction is elementwise and the filtration is Mathlib induction."
  },
  "mathlib_searches": [
   {
@@ -252,5 +215,15 @@
   "group": "M1",
   "result": "fix",
   "note": "dropped duplicate new node(s) def-weil-pbc-annihilator-associated-primes (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/RingTheory/AnnihilatorAssociatedPrimes.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T045607-L-138389",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

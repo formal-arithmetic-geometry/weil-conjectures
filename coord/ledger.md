@@ -11177,3 +11177,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/T3/Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood (stage 3; reviewer PASS; after a return; landing 20261013T045606-L-137994 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:56 L: merged deliver/T3/Sheaf.AlgebraicGeometry.PerfectIntoSupportPowerTorsion (stage 3; reviewer PASS; first push; landing 20261013T045606-L-138144 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:56 L: merged deliver/T3/Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261013T045607-L-138264 (interface); batch 20261013T045507; modules 4; new nodes 3)
+- 04:56 L: merged deliver/U1/Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange (stage 3; reviewer PASS; first push; landing 20261013T045607-L-138389 (proof); batch 20261013T045507; modules 1; new nodes 0)
