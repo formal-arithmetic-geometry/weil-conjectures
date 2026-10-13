@@ -24,11 +24,122 @@
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-pur-localized-ringed-site",
+  "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representative of $N$ and a K-injective resolution $N^\\bullet\\to I^\\bullet$, using [prop-pur-kinjective-resolutions-exist]. By [def-pur-derived-internal-hom], $H^\\bullet=\\mathcal Hom^\\bullet(P^\\bullet,I^\\bullet)$ represents $R\\mathcal Hom(P,N)$. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], so $I|_U$ represents $N|_U$, and it is K-injective by [lem-pur-kinjective-restrict-localized]. For $V\\to U$, the slice defining the sheaf Hom over $V/U$ is $\\mathcal C/V$ by [def-pur-localized-ringed-site]. Thus the sheaf Hom formula [def-pur-sheaf-hom] identifies each restricted factor with the corresponding sheaf Hom of restricted modules. Products of sheaves are sectionwise, and the differential $d_I\\varphi-(-1)^n\\varphi d_P$ is unchanged [def-pur-hom-complex]. Hence $H|_U=\\mathcal Hom^\\bullet(P|_U,I|_U)$ as complexes, giving the first claimed canonical isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08FI (lemma-restrict-K-injective-to-open), Section 08J7"
+   }
+  },
+  {
+   "text": "On the original site or any slice, let $h$ be a global section of its ring sheaf $R$, and let $L_h(V)=R(V)[1/h]$ as a presheaf. For a monomorphism $M'\\to M$ of module sheaves, the maps $M'(V)\\otimes_{R(V)}L_h(V)\\to M(V)\\otimes_{R(V)}L_h(V)$ are injective by [lem-weil-pbc-localization-flat]. Sheafifying preserves this monomorphism by [lem-weil-pbc-ringed-site-module-sheafification-exact]; [lem-pc-sites-module-sheafification-tensor] identifies it with $M'\\otimes_R L_h^\\#\\to M\\otimes_R L_h^\\#$. Tensor with $L_h^\\#$ preserves cokernels because it is a left adjoint [lem-pc-sheaf-modules-tensor-closed]. Consequently it is exact, which is precisely flatness [def-pc-flat-sheaf-modules]. A finite direct sum of these sheaves is flat: its tensor functor is the finite direct sum of their exact tensor functors, and kernels and cokernels of finite direct sums are computed componentwise. This argument includes the empty direct sum.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0GMW (lemma-sheafification-tensor), 03EI (lemma-sheafification-exact), 03EO (lemma-internal-hom-adjoint-tensor); algebra.tex Tag 00HT (lemma-flat-localization)"
+   }
+  },
+  {
+   "text": "Restriction of a sheafified localization to $\\mathcal C/U$ is the sheafification of the restricted presheaf: over $V\\to U$ both are obtained by the same local sections, the same covering families and the same equality after a covering; use [def-pur-localized-ringed-site] and the sheafification universal property [lem-pc-sites-module-sheafification-interface]. Therefore step 2 applies to every term of $P|_U$. Since $P|_U$ is bounded, [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. The same lemma makes $S[0]$ K-flat for $S=\\mathcal O_U[1/f]$. In the derived-tensor construction in the statement, take the identity K-flat replacement of $P|_U$. Its total tensor with $S[0]$ has terms $S\\otimes P^n|_U$ and differential $1\\otimes d_P$ by [def-pc-tensor-complex-sheaves], so it is exactly $P_f^\\bullet$. Thus the ordinary complex in the statement represents the derived tensor.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); sites-modules.tex Tags 03CY (lemma-sheafification-presheaf-modules), 04IX (definition-localize-ringed-site)"
+   }
+  },
+  {
+   "text": "For any commutative ring $A$, the bilinear multiplication map gives $A[1/f]\\otimes_A A[1/g]\\to A[1/(fg)]$. Explicitly, for $k\\geq r,s$ it sends $(a/f^r)\\otimes(b/g^s)$ to $abf^{k-r}g^{k-s}/(fg)^k$. Its inverse sends $c/(fg)^n$ to $(1/f^n)\\otimes(c/g^n)$. The maps respect the fraction equivalence relations and are inverse: inserting the first expression into the second and moving $f^{k-r}$ and $g^{k-s}$ across the tensor sign gives the original pure tensor; the other composite is $c/(fg)^n$. These formulas commute with ring restriction maps. Sheafify this presheaf isomorphism and use [lem-pc-sites-module-sheafification-tensor] to obtain $\\mathcal O_U[1/f]\\otimes\\mathcal O_U[1/g]\\cong\\mathcal O_U[1/(fg)]$. Tensor distributes over the finite direct sums since it is a left adjoint [lem-pc-sheaf-modules-tensor-closed]. This proves the assertion about each summand, without requiring the differential of $P$ to preserve the displayed summands.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0996 (lemma-map-twice-localize), proof of (3); fraction calculation made explicit"
+   }
+  },
+  {
+   "text": "Work now on $\\mathcal C/U$ and put $J=I|_U$ and $Q=P|_U$. The complex $J$ is K-injective by step 1 and $Q$ is K-flat by step 3. Hence $\\mathcal Hom^\\bullet(Q,J)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. Applying [def-pur-derived-internal-hom] twice, the left side of the desired currying formula is represented by $\\mathcal Hom^\\bullet(S[0],\\mathcal Hom^\\bullet(Q,J))$. The right side is represented by $\\mathcal Hom^\\bullet(P_f,J)$. The natural chain isomorphism [lem-sc-derived-hom-tensor-total] with $\\mathcal K=S[0]$, $\\mathcal L=Q$, $\\mathcal M=J$ identifies these complexes, since its total tensor argument is $P_f$ by step 3. In degree $n$ the map sends $\\varphi$ to the maps $s\\otimes q\\mapsto\\varphi(s)^p(q)$ into $J^{p+n}$; its differential is $d_J\\varphi(s)^p(q)-(-1)^n\\varphi(s)^{p+1}(d_Qq)$ on both sides because $S$ has degree zero. Localizing this chain isomorphism gives precisely the second claimed canonical isomorphism.",
+   "uses": [
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-hom-tensor-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A90 (lemma-compose)"
+   }
+  },
+  {
+   "text": "The chain isomorphism in step 5 is natural in the three complexes by [lem-sc-derived-hom-tensor-total]. Choose the functorial K-injective resolutions of [prop-pur-kinjective-resolutions-exist]; their maps and chain maps of $P$ therefore give the required naturality squares. The definition [def-pur-derived-internal-hom] identifies other representatives and resolutions canonically; in particular it sends quasi-isomorphisms in each variable to isomorphisms, so the same naturality holds for morphisms of $N$ in the derived category. For $V\\to U$, apply the restriction computation of step 1 to $J$ and to $\\mathcal Hom^\\bullet(Q,J)$, both K-injective, using [lem-pur-kinjective-restrict-localized]. On a further object $W\\to V$, both iterated restrictions evaluate the map in step 5 by exactly $s\\otimes q\\mapsto\\varphi(s)(q)$, and evaluate the fraction maps of step 4 by the same fractions. The relocalization identity [def-pur-localized-ringed-site] makes these equality statements identities over $\\mathcal C/W$, so the entire comparison commutes with further slice restriction. No step uses a bound on $J$ or on $N$: boundedness was used only for $P$ in step 3.",
+   "uses": [
+    "lem-sc-derived-hom-tensor-total",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JB, functoriality and restriction of the construction; sites-modules.tex Definition 04IX and sites.tex Lemma 03EH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JB, with the chain models of 0A90 and 0A96; algebraization.tex Tag 0996(3) for localization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +182,59 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"60\", \"text\": \"noncomputable abbrev tensorHom {K₁ K₂ L₁ L₂ : HomologicalComplex C c}\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"194\", \"text\": \"    GradedObject.Monoidal.ι_tensorHom]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"196\", \"text\": \"  rw [tensorHom_id, ← comp_whiskerRight_assoc]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"245\", \"text\": \"    GradedObject.Monoidal.ι_tensorHom]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"247\", \"text\": \"  rw [id_tensorHom, ← whiskerLeft_comp_assoc]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"15\", \"text\": \"`c₂ : ComplexShape I₂`, we define a bifunctor `mapBifunctorHomologicalComplex F c₁ c₂`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"22\", \"text\": \"bicomplex `(((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂)`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"45\", \"text\": \"/-- Auxiliary definition for `mapBifunctorHomologicalComplex`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"47\", \"text\": \"def mapBifunctorHomologicalComplexObj (K₁ : HomologicalComplex C₁ c₁) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"84\", \"text\": \"def mapBifunctorHomologicalComplex :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"101\", \"text\": \"        (((F.mapBifunctorHomologicalComplex c₁ c₂).obj L₁).obj L₂).d₂ c i₁ i₂ j =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"102\", \"text\": \"    -(((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).d₂ c i₁' i₂ (c.next j) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"112\", \"text\": \"    Functor.mapBifunctorHomologicalComplex_obj_obj_X_d,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"113\", \"text\": \"    Functor.mapBifunctorHomologicalComplex_obj_obj_X_d,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"131\", \"text\": \"      Functor.mapBifunctorHomologicalComplex_obj_obj_toGradedObject, Preadditive.comp_add,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"50\", \"text\": \"/-- The condition that `((F.mapBifunctorHomologicalComplex _ _).obj K₁).obj K₂` has\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"79\", \"text\": \"def mapBifunctorHomologicalComplexShift₁Iso :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"80\", \"text\": \"    ((F.mapBifunctorHomologicalComplex _ _).obj (K₁⟦x⟧)).obj K₂ ≅\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"82\", \"text\": \"      (((F.mapBifunctorHomologicalComplex _ _).obj K₁).obj K₂) :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"91\", \"text\": \"  HomologicalComplex₂.hasTotal_of_iso (mapBifunctorHomologicalComplexShift₁Iso K₁ K₂ F x).symm _\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"40\", \"text\": \"  (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).flip_hasTotal_iff c\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"51\", \"text\": \"  (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).totalFlipIso c\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"59\", \"text\": \"    (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂) c i₁ i₂ j hj\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"67\", \"text\": \"    (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂) c i₁ i₂ j hj\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"72\", \"text\": \"  (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).flip_totalFlipIso c\"}",
    "date": "2026-10-14",
    "verdict": "no match: the local-cohomology implementation defines Ext colimits of ordinary modules, not derived localization Hom for module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedInternalHom|homObj.*[Oo]ver|[Oo]ver.*homObj",
+   "results": "{\"t\": \"2026-10-13T22:48:49Z\", \"tool\": \"grep\", \"query\": \"RHom|derivedInternalHom|homObj.*[Oo]ver|[Oo]ver.*homObj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\", \"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\", \"Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\"], \"digest\": \"aecf8f7411124871\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the ringed-site derived Hom, unbounded tensor and slice assertions of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of sheaves of modules commutes with localization to a slice site",
+   "results": "{\"t\": \"2026-10-13T22:48:49Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom of sheaves of modules commutes with localization to a slice site\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site derived internal Hom commutes with slice restriction and Hom from localization curries to Hom from the localized bounded complex",
+   "results": "{\"t\": \"2026-10-13T22:48:49Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site derived internal Hom commutes with slice restriction and Hom from localization curries to Hom from the localized bounded complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\"], \"digest\": \"51b0993ac73bf390\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the ringed-site derived Hom, unbounded tensor and slice assertions of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\" \"homObj\"",
+   "results": "{\"t\": \"2026-10-13T22:48:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\" \\\"homObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"SheafOfModules\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"homObj\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no usable query result: Loogle returned a parse error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor Hom adjunction for unbounded complexes of sheaves on an arbitrary ringed Grothendieck site",
+   "results": "{\"t\": \"2026-10-13T22:48:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor Hom adjunction for unbounded complexes of sheaves on an arbitrary ringed Grothendieck site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_map_app\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor_map\", \"LightCondensed.instMonoidalClosedLightCondMod\"], \"digest\": \"4bda6a022cb153e0\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the ringed-site derived Hom, unbounded tensor and slice assertions of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.homObj\"",
+   "results": "{\"t\": \"2026-10-13T22:48:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules.homObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the ringed-site derived Hom, unbounded tensor and slice assertions of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedInternalHom|homObj|overHom",
+   "results": "{\"t\": \"2026-10-13T22:48:58Z\", \"tool\": \"grep\", \"query\": \"RHom|derivedInternalHom|homObj|overHom\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Symmetric.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Symmetric.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\"], \"digest\": \"8b840423e68903e6\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations do not state the ringed-site derived Hom, unbounded tensor and slice assertions of this item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-koszul-completion-reflector",
   "by": "worker",
@@ -89,5 +249,64 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-localization-rhom-calculus",
+  "worker": "stage1",
+  "summary": "Split via K-injective models, exact sheafification and localization flatness, bounded-flat K-flatness, explicit fraction tensor maps, and Hom-complex currying. Reused all existing general ringed-site lemmas; no new nodes and no change to the statement. Checked unbounded N and further-slice compatibility on the actual chain maps.",
+  "blueprint": "Detailed form, final paragraph of def-weil-pbc-completed-pullback: ordinary derived pullback followed by completion; this calculation supplies the localization test for complete output via the reflector ancestor. Steps 1 and 6 give slice compatibility; steps 2–5 give the localized internal-Hom calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site homological algebra or module-sheaf construction used as a tool for the localization computation; the proper-base-change unit supplies no replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-derived-hom-tensor-total",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-1ad7f3620",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-1ad7f3620 (reviewer sub-agent of L); spot-checked: Review written to review.md. The item, six proof steps, cited DAG statements, Stacks sources, unit/chapter route, coefficient category, slice base-change maps, edge cases, DAG acyclicity, and tool uses were checked. No new nodes or repairs are required. A pre-existing 06YS/06YQ source-label defect is documented but lies outside this delivery’s ownership."
  }
 }
