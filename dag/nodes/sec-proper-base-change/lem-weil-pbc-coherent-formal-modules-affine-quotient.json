@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "For B=completion, finite generation of I gives B/I^(n+1)B=A/I^(n+1), with the canonical scalar map. If N is finite over B, reducing any finite generating family makes N/I^(n+1)N finite over A/I^(n+1), hence finite over A.",
+   "text": "Let B be the I-adic completion. Prove the local helper finite_of_completion_generators: an A-linear surjective map q from a finite B-module to P, satisfying q(a x)=0 for a in I^k, makes P finite over A. Choose finite B-generators s. Every b in B has the same image modulo I^k as of(a) for some a in A, by surjectivity of the quotient projection. AdicCompletion.pow_smul_top_eq_ker_eval puts b-of(a) in I^k B. Induction over ideal products shows q((b-of(a))x)=0. Induction on the B-span of s now places q(x) in the A-span of q(s), which is therefore all of P.",
    "uses": [
     "lem-weil-pbc-module-completion-complete",
     "def-weil-pbc-noetherian-ring",
@@ -26,22 +26,23 @@
    "elementary": false
   },
   {
-   "text": "The affine tilde/Gamma equivalence and ideal-product/cokernel formulas identify the nth component of the displayed sheaf completion with tilde of N/I^(n+1)N. It is quasi-coherent and finite type, hence coherent. Its ideal-power product is zero because the corresponding module product is zero.",
+   "text": "For the tilde sheaf F of N restricted to A, the ideal-times theorem makes every positive ideal power quasi-coherent. Reuse idealModuleProduct_quasicoherent from CoherentFormalModule (accessible by import all), and quasi-coherent cokernel closure, to make Q_n=F/J^(n+1)F quasi-coherent. The affine cokernel-image theorem makes its top quotient projection surjective. Compose this with tilde.isoTop to get an A-linear surjection q:N to Gamma(Q_n). The ideal-times theorem identifies the affine section range of the power inclusion with J(top)^(n+1). By hJ and ideal_top_ofIdealTop, this contains the image of each a in I^(n+1). Reuse idealModuleProduct_quotient_zero to show multiplication by the power on its quotient is zero. Evaluating multiplication on a pure tensor proves q(a x)=0. Apply step 1 to obtain finite top sections; extending scalars from A to Gamma(Spec A) preserves finiteness. The affine finite-type criterion on the one-open top cover and the locally Noetherian coherence criterion give coherence of every Q_n.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "lem-weil-pbc-spec-module-tilde-sections",
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth"
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   },
   {
-   "text": "Since I^(n+2)N is contained in I^(n+1)N, the quotient of N/I^(n+2)N by I^(n+1) is N/I^(n+1)N. Tilde and the cokernel comparison carry the canonical reduction to the transition map in formalCompletionFunctor. This supplies precisely the quotient isomorphism and its projection equation. The three object conditions prove membership in the full subcategory. ObjectProperty.lift then defines Q with unchanged quotient objects and maps.",
+   "text": "Reuse the existing idealModuleProduct_quotient_zero and formalModuleQuotient_iterated theorems from CoherentFormalModule, accessible by the proof-only import all. The first gives annihilation of each quotient by its defining ideal power. Specialize the second to upper exponent n+2 and lower exponent n+1; its projection equation is definitionally the formalCompletionSystem transition. Combine coherence from step 2, annihilation, and this quotient isomorphism to establish IsCoherentFormalModule. The unchanged ObjectProperty.lift definition then gives Q. No categorical helper is reproved.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   }
@@ -53,15 +54,17 @@
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "lem-weil-pbc-spec-module-tilde-sections",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "pqf-lem-coherent-ft-locnoeth",
   "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "D2",
+  "group": "J1",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W, reduction to compatible finite-module systems and the canonical quotient functor; original node steps 2 and 6; Algebra 05GG; categorical and scalar compatibility details written out by D2"
+  "place": "Lemma 087W, reduction to compatible finite-module systems and the canonical quotient functor; original node steps 2 and 6; Algebra 05GG; direct finite-generator descent formalized by J1, reusing the existing private quotient and quasi-coherence lemmas via import all (repair of the duplicate-proof return)"
  },
  "mathlib_searches": [
   {
@@ -145,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T204506-L-868375",
-  "kind": "interface",
+  "landing": "20261013T045533-L-129623",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
