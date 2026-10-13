@@ -18,30 +18,35 @@
  },
  "proof": [
   {
-   "text": "Identify the affine product P with the spectrum of the indexed tensor power. Apply affine pullback sections to P → U and U*F and normalize the composite pullback by its unit equation. Lift the comparison and invert evaluation of the singleton outer product. Check its pure-tensor formula.",
+   "text": "The product projections induce ring maps on global functions compatible with the base ring, by their Over commutative triangles. Lift these maps with PiTensorProduct.liftCommAlgHom; its pure tensor equation is the product of the images.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the additive section restriction and its semilinearity from lem-sc-etale-qcoherent-presheaf-functorial. TensorProduct.lift applied to the semilinear bilinear map (m,b) ↦ t(b) • restriction(m) gives an additive map from the coefficient tensor product, with its pure tensor equation.",
    "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the additive map by AddCommGrpCat.uliftFunctor and use Pi.lift to map into the outer product. Pi.lift_π and the two tensor pure-tensor equations give exactly the normalization predicate. Affineness and quasi-coherence are not needed for constructing this map; quasi-coherence remains in the unchanged signature because the codomain is defined as a sheaf Čech complex.",
+   "uses": [
+    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization",
     "def-sc-etale-qcoherent-module"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-pc-module-pullback-identity-composition",
   "lem-sc-etale-qcoherent-presheaf-functorial",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-module-pullback-affine-sections",
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization",
   "def-sc-etale-qcoherent-module"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 03P2, affine-case identification, expanded using Tags 01I9 and 01IA"
+  "place": "Tag 03P2 tensor calculation, with Tag 03DR equation (35.8.1); F1 universal-property construction for existence only"
  },
  "mathlib_searches": [
   {
@@ -111,13 +116,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-61f60",
-  "group": "A3",
+  "reviewer": "X-c1320",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T202229-L-700338",
+  "landing": "20261013T095947-L-2456525",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures and proofs with the delivered nodes, unchanged relocated definitions, change record, and affine source calculation; all four delivered modules and both direct importers compile cleanly, with only standard axioms and expected sorryAx from the two reported lower holes."
+  "note": "independent Codex review: Matched the unchanged Lean signature and normalization with the node, proof dependencies, change record and report; delivery and sole direct importer compile cleanly, and all 14 declarations use only standard axioms."
  }
 }
