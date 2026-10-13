@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "A fraction field is flat over its domain. Apply H.baseChange_bijective_of_isSeparated at q=0 to f and L. This gives the K-linear comparison isomorphism on Ext-based degree-zero cohomology.",
+   "text": "Install Module.Flat A K using Mathlib IsLocalization.flat K (nonZeroDivisors A). Apply H.baseChange_bijective_of_isSeparated f L 0 to obtain bijectivity of the specific K-linear comparison H.baseChange. LinearEquiv.ofBijective promotes this map to a K-linear equivalence; no arbitrary witness is chosen.",
    "uses": [
     "lem-pc-flat-cohomology-separated",
     "def-pc-flat-cohomology-comparison"
@@ -24,32 +24,28 @@
    "elementary": false
   },
   {
-   "text": "Identify degree-zero cohomology with sections using H.zeroLinearEquiv, restricting scalars through the displayed structure maps. Tensor the inverse identification on X and compose with the preceding comparison and the identification on X_K. This yields the asserted K-linear isomorphism.",
+   "text": "Use the already proved WeilConjectures.AlgebraicGeometry.Cohomology.Defs H.zeroLinearEquiv L and H.zeroLinearEquiv of the pulled-back module. Restrict their scalar laws along exactly the structure ring homomorphisms in the statement, giving an A-linear equivalence a and a K-linear equivalence b. Tensor a.symm using TensorProduct.AlgebraTensorModule.congr, and compose this with the preceding base-change equivalence and b. This gives the required K-linear equivalence with unchanged scalar actions.",
    "uses": [
-    "pqf-def-cohomology",
     "def-pc-flat-cohomology-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Track the degree-zero section augmentation through H.zeroLinearEquiv and the inverse-image coefficient adjunction defining H.baseChangeLinear. On 1 tensor s the comparison gives the adjunction-unit image of s. This is the normalization in the degree-zero Cech inverse-image comparison. The formula also holds on empty X.",
+   "text": "Prove zero_inverseImage directly from the definitions: express a degree-zero Ext class as Ext.mk₀ h using Ext.addEquiv₀. Inverse image sends it to Ext.mk₀ of constIso.inv followed by invImage.map h. Under the constant-sheaf adjunctions, the unit_leftAdjointUniq_hom_app law for their composite with the inverse-image adjunction identifies this morphism with the inverse-image unit applied to h; evaluate its adjunct at the lifted integer 1. For the composed equivalence on 1 tensor s, AlgebraTensorModule.congr_tmul and lift_tmul reduce the expression to H.baseChangeLinear applied to a.symm s. Naturality of Sheaf.H.equiv₀ followed by zero_inverseImage reduces it to the coefficient map applied to the abelian pullback unit. The homEquiv_apply and apply_symm_apply laws for the coefficient adjunction identify this composite with the underlying module adjunction unit. Cancel H.zeroLinearEquiv with its inverse. All normalization glue is proved by categorical identities, with no Cech comparison hypothesis or new sorry; it also applies to the empty scheme.",
    "uses": [
-    "lem-pc-cech-inverse-image-degree-zero",
     "def-pc-flat-cohomology-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-flat-cohomology-separated",
-  "def-pc-flat-cohomology-comparison",
-  "pqf-def-cohomology",
-  "lem-pc-cech-inverse-image-degree-zero"
+  "def-pc-flat-cohomology-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Cohomology of Schemes, Lemma lemma-flat-base-change-cohomology, degree zero and its canonical section comparison; used in Tag 0EX8 general-case proof; degree-zero comparison glue specified by Y2"
+  "place": "Degree-zero specialization of flat cohomology base change; N2 proves the normalization from the exact inverse-image and constant-sheaf adjunction definitions, using Mathlib adjunction uniqueness laws."
  },
  "mathlib_searches": [
   {
@@ -118,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T235559-L-2202947",
-  "kind": "interface",
+  "landing": "20261013T015604-L-3023855",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
