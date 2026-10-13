@@ -13803,3 +13803,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:45 L: merged deliver/U3/Sheaf.RingTheory.PointedEtaleQuotientFinal (stage 3; reviewer PASS; first push; landing 20261013T224522-L-1476732 (interface); batch 20261013T224504; modules 7; new nodes 6)
 - 22:45 L: merged deliver/U4/Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquare (stage 3; reviewer PASS; first push; landing 20261013T224523-L-1476909 (interface); batch 20261013T224504; modules 2; new nodes 1)
 - 22:45 L: merged deliver/U4/Sheaf.AlgebraicGeometry.SelfTorIdealWedgeCoordinates (stage 3; reviewer PASS; first push; landing 20261013T224523-L-1477062 (interface); batch 20261013T224504; modules 2; new nodes 1)
+- 22:49 L: returned deliver/P2/Sheaf.Paper.LimitTowerOverLocalSystem (reviewer RETURN: (reviewer X-2e8b2, head 2e8b2d72f) E2: `RingHom.exists_limit_module_module_data_core` is false because it accepts arbitr)
