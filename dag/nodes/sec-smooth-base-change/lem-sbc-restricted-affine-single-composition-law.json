@@ -1,0 +1,112 @@
+{
+ "id": "lem-sbc-restricted-affine-single-composition-law",
+ "kind": "statement",
+ "title": "Composition law for restricted single transitions",
+ "statement": "Under the original coefficient composition law, the explicit restricted transitions satisfy the canonical composition equation, transported by the concrete restricted diagram map_comp. No coefficient identity law is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, restriction to an affine etale object; Tag 0EZM coefficient complexes; Tag 03CB canonical inverse-image composition comparisons"
+ },
+ "stmt_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand all three transitions. Their pullback second-projection equations give\ntwo adjacent commuting squares and their outer rectangle. Substitute D.map_comp\nand hφcomp into the outer restricted coefficient. Horizontal pasting for\nsquareUpperStarIso expresses the outer inverse comparison as upperStarComp for\nthe restricted arrows followed by the pulled-back first inverse square comparison\nand the second inverse square comparison. Use naturality of the second comparison\nto move the first coefficient map past it. Cancel each comparison with its inverse;\nthe result is the coefficient composition law on the restricted sheaves, with the\ntransport along restrictedAffineDiagram.map_comp. Apply HomologicalComplex.hom_ext.\nIn degree zero, the evaluation isomorphisms singleObjXSelf and their naturality\nidentify the single-complex comparison maps with this sheaf calculation; cancel\nthe intervening evaluation isomorphisms. In every other degree the target single\ncomplex is zero. No directedness, cone, nonemptiness, affineness or nonzero sheaf\nassumption is used, so the empty and zero cases satisfy the same equation.",
+   "uses": [
+    "def-sbc-restricted-affine-single-maps",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "worker W2",
+  "document": "Stacks Project, Tags 09Z1 and 03CB",
+  "place": "Separate identity and composition components of the original restriction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaf composition coherence restricted to pullback and degree zero single complexes",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_assoc, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapCochainComplexSingleFunctor",
+   "results": "loogle: unknown identifier 'Functor.mapCochainComplexSingleFunctor'",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarComp_assoc|singleMapHomologicalComplex",
+   "results": "Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image sheaf composition coherence with degree zero single complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleTransitionLaws",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-restricted-affine-single-transition-laws",
+   "place": "Composition component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleCompositionLaw.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedAffineSingleTransition_composition_law",
+  "statement": "theorem restrictedAffineSingleTransition_composition_law {S : Scheme.{v}}\n    {I : Type v} [Preorder I]\n    (D : Iᵒᵖ ⥤ Over S)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (U : S.Etale) :\n    let D' := restrictedAffineDiagram D U\n    let K := restrictedAffineK D F U\n    let ψ := fun {i j : Iᵒᵖ} (f : j ⟶ i) ↦ restrictedAffineSingleTransition D F φ U f\n    ( ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)\n            (D'.map (g ≫ f)) (D'.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T132738-L-4152544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T132738-L-4152544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

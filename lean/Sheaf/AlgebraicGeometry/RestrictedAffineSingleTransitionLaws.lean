@@ -6,6 +6,8 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedAffineSingleMaps
+import Sheaf.AlgebraicGeometry.RestrictedAffineSingleIdentityLaw
+import Sheaf.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw
 
 /-! # Explicit maps for restricted degree-zero complexes
 
@@ -65,6 +67,8 @@ theorem restrictedAffineSingleTransition_laws {S : Scheme.{v}}
             (D'.map (g ≫ f)) (D'.map_comp g f))
           (ComplexShape.up ℤ)).hom.app (K i) ≫
         ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex
-          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g) := by sorry
+          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g) := by
+  exact ⟨restrictedAffineSingleTransition_identity_law D F φ hφid U,
+    restrictedAffineSingleTransition_composition_law D F φ hφcomp U⟩
 
 end AlgebraicGeometry.Etale
