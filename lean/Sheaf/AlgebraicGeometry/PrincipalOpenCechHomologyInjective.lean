@@ -9,6 +9,9 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveComparison
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveTerms
+
 /-! # injective on cohomology for the principal-open Čech augmentation
 
 Source: Stacks Project, Cohomology, Tag 08C1, finite augmented Čech argument.
@@ -32,12 +35,11 @@ Source: Stacks Project, Cohomology, Tag 08C1 (lemma-alternating-cech-complex-com
 
 Proof: Take a functorial K-injective resolution I of J with injective terms.
 The comparison J → I is a homotopy equivalence, since both complexes are K-injective.
-Sections carry its homotopies to homotopies. For the displayed total differential,
-apply the coefficient homotopy in the component of Čech degree p with sign (-1)^p.
-Restriction naturality cancels the horizontal terms, and the two vertical signs
-multiply to one. Thus totalization also carries this comparison to a homotopy
-equivalence. The augmentation commutes with the comparison by its singleton
-restriction formula and its zero formula on larger subsets.
+Sections carry its homotopies to homotopies, so the section comparison is a
+quasi-isomorphism. The coefficient comparison also gives a chain map on the
+displayed subset total: restriction naturality and the signed differential
+verify its chain-map equation. The augmentation commutes with these comparisons
+by its singleton restriction formula and its zero formula on larger subsets.
 For I, each augmented section row is exact: the sheaf axiom gives exactness and
 injectivity at the section term, and injective Čech acyclicity gives positive-degree
 exactness. Restriction to increasing tuples identifies these rows with the subset
@@ -51,7 +53,10 @@ differential. Repeat down through the finitely many columns. At degree zero, row
 exactness identifies the resulting cochain with an augmented section. The original
 closed section is its vertical differential because the row augmentation is
 injective. Hence a section class whose image vanishes was already zero.
-Transfer this injective assertion back along the two homotopy equivalences.
+Apply homology to the comparison square. The section comparison is invertible
+on homology, so its composite with the injective-term augmentation is monic.
+The other composite is the original augmentation followed by the total comparison;
+monicity of this composite implies monicity of the original augmentation.
 For r=0 the union is empty; sections and the total are zero, so the assertion holds.
 Repeated or empty principal opens do not affect row exactness or the argument. -/
 theorem principalOpenCech_homology_injective
@@ -97,6 +102,17 @@ theorem principalOpenCech_homology_injective
             ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app
               (op V) ((σ n).hom s)) else 0) →
       ∀ n : ℤ, Mono (HomologicalComplex.homologyMap α n) := by
-  sorry
+  dsimp only
+  intro K T σ τ α hle hls he hes hK hT hα n
+  obtain ⟨I, K₁, T₁, σ₁, τ₁, α₁, a, b, hI, hK₁, hT₁, hα₁, ha, hsquare⟩ :=
+    principalOpenCech_injective_comparison A r f J K T σ τ α hle hls he hes hK hT hα
+  let : QuasiIso a := ha
+  let : Mono (HomologicalComplex.homologyMap α₁ n) :=
+    principalOpenCech_homology_mono_of_injective_terms A r f I hI K₁ T₁ σ₁ τ₁ α₁
+      hle hls he hes hK₁ hT₁ hα₁ n
+  have hH : HomologicalComplex.homologyMap α n ≫ HomologicalComplex.homologyMap b n =
+      HomologicalComplex.homologyMap a n ≫ HomologicalComplex.homologyMap α₁ n := by
+    rw [← HomologicalComplex.homologyMap_comp, hsquare, HomologicalComplex.homologyMap_comp]
+  exact mono_of_mono_fac hH
 
 end AlgebraicGeometry

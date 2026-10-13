@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-principal-open-cech-injective-comparison",
+ "kind": "statement",
+ "title": "Comparison square from subset Cech coordinates to injective coefficient terms",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], $r\\geq0$, $f:\\operatorname{Fin}(r)\\to A$, $V=\\bigcup_iD(f_i)$ and $D_S=D(\\prod_{j\\in S}f_j)$. Let $J$ be an arbitrary unbounded K-injective cochain complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules, def-pur-kinjective-complex]. Let $K,T$ be complexes of $A$-modules, with degreewise $A$-linear isomorphisms $\\sigma_n:K^n\\cong\\Gamma(V,J^n)$ and $\\tau_n:T^n\\cong\\prod_{\\varnothing\\ne S\\subseteq\\operatorname{Fin}(r)}\\Gamma(D_S,J^{n+1-|S|})$. Assume $\\sigma$ identifies the differential of $K$ with the sectionwise differential of $J$, and $\\tau$ identifies the differential of $T$ with the signed total formula: at $S$ its vertical term is $(-1)^{|S|-1}d_J$ and its horizontal term is the sum over $j\\in S$ of restriction from $D_{S\\setminus\\{j\\}}$, multiplied by $(-1)^{|\\{i\\in S:i<j\\}|}$, with empty deletions zero. All coefficient degrees are transported by their displayed integer equalities. Let $\\alpha:K\\to T$ be a chain map which under these coordinates is restriction from $V$ on singleton coordinates and zero on all larger subsets. The open inclusion inequalities and degree equalities in the Lean signature specify only the transports in these formulas. There exist a complex $I$ of module sheaves with every $I^n$ injective [def-sp-injective-resolutions], complexes $K_1,T_1$ of $A$-modules, degree isomorphisms $\\sigma_1,\\tau_1$, and an augmentation $\\alpha_1:K_1\\to T_1$ satisfying the very same section, signed subset-total and singleton augmentation formulas with $I$ in place of $J$. There also exist chain maps $a:K\\to K_1$ and $b:T\\to T_1$ such that $a$ is a quasi-isomorphism and $\\alpha b=a\\alpha_1$. No assertion about the homology of either augmentation is part of this conclusion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, lemma-alternating-cech-complex-complex, finite augmented rows and K-injective comparison"
+ },
+ "proof": [
+  {
+   "text": "Choose a degreewise-injective K-injective resolution J → I from prop-pur-kinjective-resolutions-exist. The comparison is a homotopy equivalence by the quasi-isomorphism criterion between K-injectives. Evaluation on V preserves the inverse and both homotopies, so its section comparison is a homotopy equivalence.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct K₁ by section evaluation of I with A scalars, and T₁ by the finite subset product in each displayed degree. Use the signed differential of the statement. Pairs of horizontal deletions cancel; coefficient squares are zero; naturality cancels the horizontal-vertical cross terms. Singleton restrictions and zero on larger subsets define α₁. Naturality verifies its chain-map equation. Conjugate the section comparison by σ, and assemble coefficient comparison maps in the τ coordinates to obtain a and b. Restriction naturality proves the chain-map equations and the augmentation square. The source map a has the homotopy inverse supplied in Step 1 and hence is a quasi-isomorphism. These constructions also work when r=0, since sections on V=empty and all subset products are zero.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, lemma-alternating-cech-complex-complex, finite augmented rows and K-injective comparison"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A K-injective complex of sheaves has a homotopy equivalent complex with injective terms and a natural finite Cech comparison square",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation from sections of a K-injective complex to a finite alternating Cech total complex is injective on homology",
+   "results": "CochainComplex.cm5b.instInjectiveXIntI; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.InjectiveResolution.injective. These concern injective replacements, not this subset total comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; existing tuple-indexed library comparisons require a coordinate bridge"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "HomologicalComplex.homologyMap_comp; HomologicalComplex.mono_homologyMap_of_mono_of_not_rel. Neither provides the subset Cech row or comparison construction.",
+   "date": "2026-10-13",
+   "verdict": "generic homology functoriality used for final transfer only"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*homology|homology.*Cech in Mathlib; Cech.*[Ii]njective|[Ii]njective.*Cech|Cech.*homotop|homotop.*Cech in Mathlib/CategoryTheory/Sites and Mathlib/Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean. No subset-coordinate augmentation comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologyInjective",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Principal-open augmentation comparison: Comparison square from subset Cech coordinates to injective coefficient terms",
+   "via": [
+    "lem-sc-principal-open-cech-homology-injective",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechInjectiveComparison.lean",
+  "declaration": "AlgebraicGeometry.principalOpenCech_injective_comparison",
+  "statement": "theorem principalOpenCech_injective_comparison (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (J : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) [J.IsKInjective] : let V : (Spec (.of A)).Opens := ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) let D : Finset (Fin r) → (Spec (.of A)).Opens := fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j) ∀ (K T : CochainComplex (ModuleCat.{u} A) ℤ) (σ : ∀ n : ℤ, K.X n ≅ (modulesSpecToSheaf.obj (J.X n)).obj.obj (op V)) (τ : ∀ n : ℤ, T.X n ≅ ModuleCat.of A (∀ S : {S : Finset (Fin r) // S.Nonempty}, (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val)))) (α : K ⟶ T) (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j)) (hls : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → D S.val ≤ V) (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ, n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ)) (hes : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → ∀ n : ℤ, n = n + 1 - (S.val.card : ℤ)), (∀ (n : ℤ) (s : K.X n), (σ (n + 1)).hom (K.d n (n + 1) s) = (modulesSpecToSheaf.map (J.d n (n + 1))).hom.app (op V) ((σ n).hom s)) → (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}), (τ (n + 1)).hom (T.d n (n + 1) s) S = (-1 : A) ^ (S.val.card - 1) • (modulesSpecToSheaf.map (J.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app (op (D S.val)) ((τ n).hom s S) + ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) • (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hle S.val j.val)).op ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app (op (D (S.val.erase j.val))) ((τ n).hom s ⟨S.val.erase j.val, h⟩)) else 0) → (∀ (n : ℤ) (s : K.X n) (S : {S : Finset (Fin r) // S.Nonempty}), (τ n).hom (α.f n s) S = if h : S.val.card = 1 then (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hls S h)).op ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app (op V) ((σ n).hom s)) else 0) → ∃ (I : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (K₁ T₁ : CochainComplex (ModuleCat.{u} A) ℤ) (σ₁ : ∀ n : ℤ, K₁.X n ≅ (modulesSpecToSheaf.obj (I.X n)).obj.obj (op V)) (τ₁ : ∀ n : ℤ, T₁.X n ≅ ModuleCat.of A (∀ S : {S : Finset (Fin r) // S.Nonempty}, (modulesSpecToSheaf.obj (I.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val)))) (α₁ : K₁ ⟶ T₁) (a : K ⟶ K₁) (b : T ⟶ T₁), (∀ n : ℤ, Injective (I.X n)) ∧ (∀ (n : ℤ) (s : K₁.X n), (σ₁ (n + 1)).hom (K₁.d n (n + 1) s) = (modulesSpecToSheaf.map (I.d n (n + 1))).hom.app (op V) ((σ₁ n).hom s)) ∧ (∀ (n : ℤ) (s : T₁.X n) (S : {S : Finset (Fin r) // S.Nonempty}), (τ₁ (n + 1)).hom (T₁.d n (n + 1) s) S = (-1 : A) ^ (S.val.card - 1) • (modulesSpecToSheaf.map (I.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app (op (D S.val)) ((τ₁ n).hom s S) + ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) • (modulesSpecToSheaf.obj (I.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hle S.val j.val)).op ((modulesSpecToSheaf.map (eqToHom (congrArg I.X (he S.val j.val j.property n)))).hom.app (op (D (S.val.erase j.val))) ((τ₁ n).hom s ⟨S.val.erase j.val, h⟩)) else 0) ∧ (∀ (n : ℤ) (s : K₁.X n) (S : {S : Finset (Fin r) // S.Nonempty}), (τ₁ n).hom (α₁.f n s) S = if h : S.val.card = 1 then (modulesSpecToSheaf.obj (I.X (n + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hls S h)).op ((modulesSpecToSheaf.map (eqToHom (congrArg I.X (hes S h n)))).hom.app (op V) ((σ₁ n).hom s)) else 0) ∧ QuasiIso a ∧ α ≫ b = a ≫ α₁",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T131952-L-4088561",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T131952-L-4088561",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

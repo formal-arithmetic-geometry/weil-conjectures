@@ -14,44 +14,33 @@
  },
  "proof": [
   {
-   "text": "Replace J by a degreewise-injective functorial K-injective resolution I. The quasi-isomorphism between the two K-injectives is a homotopy equivalence. Its sectionwise maps induce homotopy equivalences on K and T: in Cech degree p apply the coefficient homotopy with sign (-1)^p. Naturality of restrictions cancels the horizontal terms and the vertical signs multiply to one. Augmentation naturality follows from the coordinate formulas. These statements use the same finite-total homotopy calculation as the tuple model, reindexed by the unique increasing enumeration of each subset.",
+   "text": "Apply lem-sc-principal-open-cech-injective-comparison to obtain I with injective terms, realizations K₁,T₁, augmentation α₁ and a commuting square α ≫ b = a ≫ α₁, where a is a quasi-isomorphism.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sc-alternating-cech-total-homotopy"
+    "lem-sc-principal-open-cech-injective-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Every augmented section row of I over the cover of V is exact. Injective modules are flasque, hence remain Cech-acyclic on any open; sheaf gluing identifies the degree-zero kernel with sections over V and gives injectivity of augmentation. Ordered-to-increasing Cech comparison gives alternating row exactness; identify increasing tuples with nonempty finite subsets, and their face positions with the subset deletion signs. The augmented columns run only from -1 through r-1.",
+   "text": "Apply lem-sc-principal-open-cech-injective-terms to the displayed coordinates for I to obtain Mono Hⁿ(α₁).",
    "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-pc-alternating-cech-computes"
+    "lem-sc-principal-open-cech-injective-terms"
    ],
    "elementary": false
   },
   {
-   "text": "For a closed section whose image is the differential of a total cochain, kill the highest Cech column of the cochain by subtracting a total boundary, using row exactness. Its differential is unchanged. Repeat down to column zero; exactness there expresses the remaining cochain as the augmentation of a section. The injectivity of the row augmentation shows the original closed section is the vertical differential of that section, so its class was zero. This finite staircase never requires boundedness in the coefficient degree. For r=0, V is empty and the sheaf axiom makes its section modules zero, while the target product has no indices.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Transfer injective of the homology map from I to J through the augmentation naturality square, whose other sides are homotopy equivalences and hence induce isomorphisms on cohomology. Degreewise coordinate isomorphisms identify these maps with the displayed alpha.",
+   "text": "Homology functoriality turns the square into Hⁿ(α) ≫ Hⁿ(b) = Hⁿ(a) ≫ Hⁿ(α₁). Since a is a quasi-isomorphism, Hⁿ(a) is an isomorphism, so the right-hand composite is monic. CategoryTheory.mono_of_mono_fac then proves Mono Hⁿ(α). This needs no invertibility or homotopy equivalence of b.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sc-alternating-cech-total-homotopy",
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "lem-pc-alternating-cech-computes"
+  "lem-sc-principal-open-cech-injective-comparison",
+  "lem-sc-principal-open-cech-injective-terms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08C1, finite augmented Cech staircase; injective half of the cohomology comparison"
+  "place": "Tag 08C1; one-sided homology transfer through the injective-term comparison square"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -133,9 +122,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T124316-L-3778142",
+  "landing": "20261013T131952-L-4088561",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
