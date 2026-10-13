@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-formal-functions-degree-zero-augmented-sections",
+ "kind": "statement",
+ "title": "Canonical degree-zero theta on augmented sections of any module",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $y\\in Y$, $\\mathcal F$ an $\\mathcal O_X$-module, and $n\\in\\mathbf N$. Use the formal fibre $i_n:X_n\\to X$, stalk $M=(R^0f_*\\mathcal F)_y$, cohomology $C_n=H^0(X_n,i_n^*\\mathcal F)$ over $\\mathcal O_{Y,y}$ and predicate IsFormalFunctionsTheta of [def-weil-pbc-formal-fibre-cohomology]. Tensor pullback and its fixed adjunction unit $\\eta_n:\\mathcal F\\to i_{n*}i_n^*\\mathcal F$ are those of [def-pc-module-pullback]. Write $\\alpha:(f_*\\mathcal F)_y\\to M$ for the stalk map of the canonical zeroth right-derived augmentation [def-weil-pbc-module-stalk], and $\\gamma_n:\\Gamma(X_n,i_n^*\\mathcal F)\\to C_n$ for the canonical global-sections augmentation [def-sc-ringed-space-module-cohomology]. For every $\\mathcal O_{Y,y}$-linear $\\theta:M\\to C_n$ satisfying IsFormalFunctionsTheta, every open $V\\subseteq Y$ containing $y$ with $X_n=i_n^{-1}(f^{-1}V)$, and every section $t\\in\\mathcal F(f^{-1}V)$, one has $\\theta(\\alpha(\\operatorname{germ}_V(t)))=\\gamma_n(\\operatorname{res}^{i_n^{-1}(f^{-1}V)}_{X_n}(\\eta_{n,f^{-1}V}(t)))$. The restriction is along the displayed containment, and the augmentations and unit are fixed, not chosen isomorphisms. No properness, flatness or coherence assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma Tag 01E4 (lemma-describe-higher-direct-images), canonical cocycle class formula in degree zero; Remark Tag 01FB (remark-explain-arrow), equation-choice; Lemma Tag 01E1 (lemma-cohomology-of-open) for the restricted resolutions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose resolutions I of F and J of the tensor pullback F′. Restrict each termwise to U=f inverse V and W=i_n inverse U. Exactness and preservation of injectives give the restricted resolutions. Use restrictAppIso and inclusion-image-top to identify their sections. Restrict the tensor-adjunction unit and transpose under the open restriction adjunction to define psi. The adjunction identity, followed by the canonical pushforward composition isomorphisms, gives the unit_square of FlatBaseChangeOpenChoices. This construction is the one in FlatBaseChangeOpenChoicesExist with its unused flatness hypotheses omitted; it uses no preservation of injectives by i_n pushforward.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let xi be the degree-zero global-sections augmentation of the restriction of t to U. Expand toRightDerivedZero by InjectiveResolution.toRightDerivedZero_eq. The augmentation equation and pinned section components of the restricted resolution identify its zero-cycle with the original resolution augmentation of t on U. The sectionCohomologyTheta map is adjoint to the sheafification comparison, so counit naturality identifies the corresponding resolutionSectionClass with this cycle’s class in the cohomology sheaf. Composing with the inverse resolution comparison gives the direct-image augmentation of t on V. Naturality of the stalk functor and germ maps gives exactly alpha(germ_V(t)).",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply IsFormalFunctionsTheta to I,J,V,hy,D,xi. The zero-augmentation square for moduleCohomologyFMap applied to psi identifies its right side with the augmentation of psi on restricted sections. Evaluate D.unit_square on t; all composition and restriction identifications are pinned, so this is the augmentation of the restriction of the original tensor-unit image eta_n(t). The containment gives W=top. The section restriction to W is then an isomorphism, and both canonical degree-zero augmentations are isomorphisms by left exactness. Their square makes cohomology restriction injective. Cancel that restriction to obtain the formula.",
+   "uses": [
+    "def-weil-pbc-formal-fibre-cohomology",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-weil-pbc-module-cohomology-fmap-zero-augmentation",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "lem-weil-pbc-module-cohomology-fmap-zero-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Degree-zero specialization of Tags 01E4 and 01FB, with restricted resolutions from 01E1; explicit proof in the Lean docstring. Online tag pages read because the local checkout contains only literature lists."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth module cohomology canonical augmentation inverse global sections natural pullback",
+   "date": "2026-10-13",
+   "results": "Eight groupCohomology low-degree cocycle/augmentation comparisons, including cocyclesIso₀_inv_comp_iCocycles_apply and cochainsMap_f_0_comp_cochainsIso₀.",
+   "verdict": "No match for formal-fibre theta or its fixed direct-image augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical zeroth derived augmentation cohomology pullback section class of injective resolution",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero",
+   "date": "2026-10-13",
+   "results": "No hits; service reports unknown identifier.",
+   "verdict": "Local source supplies InjectiveResolution.toRightDerivedZero_eq and toRightDerivedZero′, but no theta normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|rightDerivedZeroIsoSelf; formal-functions-degree-zero-augmented-sections|section-class.*augmentation",
+   "date": "2026-10-13",
+   "results": "Mathlib RightDerived.lean defines rightDerivedZeroIsoSelf. FlatBaseChangeOpenChoices.lean defines resolutionSectionClass; FormalFunctionsDegreeZeroSystemIso.lean proves the fibre-system isomorphism using private canonical components. No generic augmented-section theta formula found in either library root or DAG.",
+   "verdict": "New theorem states only the unresolved canonical germ/class normalization and cohomology pullback calculation for arbitrary modules, independently of the inverse-system construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero sheaf cohomology restriction natural augmentation section germ derived pushforward",
+   "date": "2026-10-13",
+   "results": "TopCat.Presheaf germ_res, germ_res_apply and map_germ_eq_Γgerm variants; ModuleCat.Tilde.toOpen_germ.",
+   "verdict": "Independent second reading: germ naturality only; no fixed augmented formal-fibre theta formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.map",
+   "date": "2026-10-13",
+   "results": "0 hits.",
+   "verdict": "Independent second reading: no matching natural augmentation/map formula."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation|sectionCohomologyTheta|resolutionSectionClass; formalFunctions degreeZero section; LocalDirectImageStalkNormalization",
+   "date": "2026-10-13",
+   "results": "FlatBaseChangeOpenChoices definitions, HigherDirectImagePresheaf, ModuleCohomologyFMapZeroAugmentation, FormalFunctionsDegreeZeroSystemIso and local-spectrum class-map/restriction/normalization modules.",
+   "verdict": "Independent second reading: these give ingredients or different local-spectrum comparisons, not the fixed direct-image augmentation equality on formal infinitesimal fibres."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroAugmentationCompatibility",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility",
+   "place": "Step 2: canonical theta on the fixed direct-image augmentation, before the structure-sheaf and system-isomorphism transports.",
+   "via": [
+    "lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroAugmentedSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsDegreeZeroAugmentedSections.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_degreeZero_augmented_sections",
+  "statement": "theorem formalFunctions_degreeZero_augmented_sections {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (y : Y) (F : X.Modules) (n : ℕ)\n    (θ : formalFunctionsStalk f y F 0 →ₗ[Y.presheaf.stalk y]\n      formalFibreCohomologyLocal f y F 0 n)\n    (hθ : IsFormalFunctionsTheta f y F 0 n θ)\n    (V : Y.Opens) (hy : y ∈ V)\n    (hV : (⊤ : (formalFibre f y n).Opens) ≤\n      (formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V))\n    (t : F.presheaf.obj (op (f ⁻¹ᵁ V))) :\n    θ (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map\n      ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).toRightDerivedZero.app F)).hom\n        (TopCat.Presheaf.germ ((Scheme.Modules.pushforward f).obj F).val.presheaf\n          V y hy t)) =\n    ((RingedSpace.globalSectionsFunctor (formalFibre f y n).toRingedSpace).toRightDerivedZero.app\n        ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F)).hom\n      (((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F).presheaf.map\n        (homOfLE hV).op\n          ((((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n            (formalFibreι f y n))).unit.app F).val.app (op (f ⁻¹ᵁ V))).hom t))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-35e1f",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T054242-L-450807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-35e1f",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T054242-L-450807",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched with node records, cited constructions and Stacks sources; both modules and the sole direct importer compiled cleanly, and axiom checks found only permitted axioms plus sorryAx from the documented remaining theorem."
+ }
+}

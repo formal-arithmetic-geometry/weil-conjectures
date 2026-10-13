@@ -15,33 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Construct each b_n using the inverse degree-zero global-sections augmentation followed by global sections of the tensor-pullback unit isomorphism. Restrict scalars to the completed local ring. Augmentation compatibility of cohomology h-maps and the tensor-unit equation identify the transitions, giving a natural isomorphism b.",
+   "text": "Import all FormalFunctionsDegreeZeroSystemIso and use its existing private zeroIso, levelIso and levelIso_naturality without redeclaring them. NatTrans.ofOpSequence assembles the canonical component homomorphisms using that transition theorem; componentwise IsIso gives asIso b. These components are actual constructions, not arbitrary witnesses selected from the existential systemIso theorem.",
    "uses": [
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-module-pullback-structure-sheaf",
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+    "lem-weil-pbc-formal-functions-degree-zero-system-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Augment t in the restricted resolution to obtain xi. The resolutionSectionClass formula followed by the inverse resolution comparison is the direct-image augmentation of t, so its germ equals α(germ(t)). Apply IsFormalFunctionsTheta to this class. Augmentation compatibility identifies the right side with pullback of t under b. The containment hypothesis identifies the restriction open with top, so its cohomology restriction is the identity; cancelling gives the displayed equation.",
+   "text": "Apply formalFunctions_degreeZero_augmented_sections with F the unit module. This identifies theta of the fixed augmented germ with the global-sections augmentation of the restricted tensor-unit image of t.",
    "uses": [
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-    "lem-weil-pbc-higher-direct-image-presheaf"
+    "lem-weil-pbc-formal-functions-degree-zero-augmented-sections"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The explicit b_n is global sections of tensorPullbackObjUnitToUnit after zeroIso, with restriction of scalars. Its zeroIso cancels the canonical augmentation by the inverse-hom identity. Naturality of tensorPullbackObjUnitToUnit moves it through the section restriction along hV. Evaluate its adjunction-unit characterization on t to obtain the structure-sheaf section map. By the definition of appLE, the remaining restriction is exactly i_n.appLE(f inverse V,top,hV)(t).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-formal-functions-degree-zero-augmented-sections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-  "lem-weil-pbc-higher-direct-image-presheaf"
+  "lem-weil-pbc-formal-functions-degree-zero-system-iso",
+  "lem-weil-pbc-formal-functions-degree-zero-augmented-sections",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Degree-zero specialization of the constructions in Tags 01E4 and 01FB; explicit argument in the Lean docstring"
+  "place": "Tags 01E4 and 01FB; canonical private component definitions and transition theorem imported with import all from the already proved FormalFunctionsDegreeZeroSystemIso module, generic augmented-section theta lemma for step 2, and explicit Lean transport/cancellation for the final equation. Repair of duplicate declarations returned at head 2a3e6f0cd."
  },
  "mathlib_searches": [
   {
@@ -114,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-0567b",
-  "group": "S2",
+  "reviewer": "X-35e1f",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T194139-L-464476",
+  "landing": "20261013T054242-L-450807",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, forced dictionary adaptation, DAG records, and report matched against packet and repository; all delivered modules and downstream importer compiled."
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched with node records, cited constructions and Stacks sources; both modules and the sole direct importer compiled cleanly, and axiom checks found only permitted axioms plus sorryAx from the documented remaining theorem."
  }
 }
