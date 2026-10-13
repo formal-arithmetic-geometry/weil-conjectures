@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 
+import Sheaf.RingTheory.FiniteRankDefectDerivation
+
 /-!
 # Finite-rank correction of a lifted coefficient section
 
@@ -79,6 +81,91 @@ theorem exists_finite_rank_coefficient_correction
       (∀ a : k, ∃ b : Λ,
         b ∈ Subring.closure ((t : Set Λ) ∪
           σ '' (IntermediateField.adjoin k (c0 : Set K) : Set K)) ∧
-        algebraMap k Λ a - b ∈ Submodule.span k (f : Set Λ)) := by sorry
+        algebraMap k Λ a - b ∈ Submodule.span k (f : Set Λ)) := by
+  classical
+  have hkill' : RingHom.ker r * I = ⊥ := by simpa [hker] using hkill
+  have hzero {x y : Λ} (hx : x ∈ RingHom.ker r) (hy : y ∈ I) : x * y = 0 := by
+    have hm := Ideal.mul_mem_mul hx hy
+    rw [hkill'] at hm
+    exact hm
+  let theta : k →+ Λ := (algebraMap k Λ).toAddMonoidHom - ψ.toAddMonoidHom
+  have htheta (a : k) : theta a ∈ I := by
+    change algebraMap k Λ a - ψ a ∈ I
+    apply Ideal.Quotient.eq.mp
+    exact (RingHom.congr_fun hψ a).symm
+  have htheta_one : theta 1 = 0 := by simp [theta]
+  have htheta_mul (a b : k) :
+      theta (a * b) = algebraMap k Λ a * theta b + algebraMap k Λ b * theta a := by
+    have hz := hzero (hI (htheta a)) (htheta b)
+    dsimp [theta] at hz ⊢
+    simp only [map_mul]
+    linear_combination -hz
+  obtain ⟨D, f, hD1, hDmul, hDI, hfI, herr⟩ := exists_finite_rank_defect_derivation
+    k K Λ r hcomm I hI hkill' σ0 hσ0 theta htheta htheta_one htheta_mul p hp hH
+  have hrσ (x : K) : r (σ0 x) = x := RingHom.congr_fun hσ0 x
+  have hrD (x : K) : r (D x) = 0 := RingHom.mem_ker.mp (hI (hDI x))
+  have hact (x y : Λ) : σ0 (r x) * D (r y) = x * D (r y) := by
+    have hx : σ0 (r x) - x ∈ RingHom.ker r := by
+      rw [RingHom.mem_ker, map_sub, hrσ, sub_self]
+    have hz := hzero hx (hDI (r y))
+    linear_combination hz
+  -- This ring endomorphism simultaneously adjusts every coefficient expression.
+  let β : Λ →+* Λ :=
+    { toFun := fun x ↦ x + D (r x)
+      map_one' := by simp [hD1]
+      map_zero' := by simp
+      map_add' := by intros; simp only [map_add]; abel
+      map_mul' := by
+        intro x y
+        have hz := hzero (hI (hDI (r x))) (hDI (r y))
+        simp only [map_mul, hDmul]
+        rw [hact x y, hact y x]
+        linear_combination -hz }
+  let σ := β.comp σ0
+  have hσ_apply (x : K) : σ x = σ0 x + D x := by
+    change σ0 x + D (r (σ0 x)) = _
+    rw [hrσ]
+  have hσ : r.comp σ = RingHom.id K := by
+    ext x
+    simp [hσ_apply, hrσ, hrD]
+  have hσq : (Ideal.Quotient.mk I).comp σ = (Ideal.Quotient.mk I).comp σ0 := by
+    ext x
+    simp only [RingHom.comp_apply, hσ_apply, map_add]
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr (hDI x), add_zero]
+  refine ⟨σ, f, hσ, hσq, hfI, ?_⟩
+  intro a
+  have hrψ (a : k) : r (ψ a) = algebraMap k K a := by
+    have hz := RingHom.mem_ker.mp (hI (htheta a))
+    change r (algebraMap k Λ a - ψ a) = 0 at hz
+    have hc := RingHom.congr_fun hcomm a
+    simp only [RingHom.comp_apply] at hc
+    rw [map_sub, hc, sub_eq_zero] at hz
+    exact hz.symm
+  let S := Subring.closure ((t : Set Λ) ∪
+    σ '' (IntermediateField.adjoin k (c0 : Set K) : Set K))
+  have hβmem {x : Λ}
+      (hx : x ∈ Subring.closure ((t : Set Λ) ∪
+        σ0 '' (IntermediateField.adjoin k (c0 : Set K) : Set K))) : β x ∈ S := by
+    change x ∈ S.comap β
+    apply (Subring.closure_le (t := S.comap β)).mpr ?_ hx
+    intro x hx
+    change β x ∈ S
+    rcases hx with hx | ⟨y, hy, rfl⟩
+    · have hxt : x ∈ RingHom.ker r := by
+        rw [hker, ← ht]
+        exact Ideal.subset_span hx
+      have hβx : β x = x := by
+        change x + D (r x) = x
+        simp [RingHom.mem_ker.mp hxt]
+      rw [hβx]
+      exact Subring.subset_closure (Or.inl hx)
+    · exact Subring.subset_closure (Or.inr ⟨y, hy, rfl⟩)
+  refine ⟨β (ψ a), hβmem (hψmem a), ?_⟩
+  have he := herr a
+  change algebraMap k Λ a - (ψ a + D (r (ψ a))) ∈ Submodule.span k (f : Set Λ)
+  rw [hrψ]
+  convert he using 1
+  dsimp [theta]
+  abel
 
 end Algebra
