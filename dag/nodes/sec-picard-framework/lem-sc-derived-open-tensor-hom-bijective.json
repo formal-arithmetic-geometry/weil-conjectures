@@ -15,16 +15,20 @@
  },
  "proof": [
   {
-   "text": "Use the exact extension/restriction adjunction and the extension/restriction isomorphism to obtain a derived adjunction J ⊣ R with invertible unit. Precomposition with the counit J(R(B)) → B identifies via adjunction with R.map on Hom(B,E), up to cancellation by the unit. The hypothesis therefore makes precomposition bijective for all E. Yoneda makes this counit invertible. Exactness and the exterior stalk formula imply that B has zero cohomology stalks outside U.",
+   "text": "For any adjunction J ⊣ R and object B, the right triangle identity identifies R.map on Hom(B,E) with the adjunction homEquiv after precomposition by the counit at B. Coyoneda therefore gives equivalence between bijectivity for every E and invertibility of the counit. Bijectivity is invariant under natural isomorphism of functors and postcomposition by a fully faithful functor. These are the proved private helpers hom_bijective_iff_counit and hom_bijective_natIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the open counit stalk formula: inside U the counit is an isomorphism on stalks; outside U its source is zero. Stalkwise detection of isomorphisms then identifies invertibility of the sheaf counit at F with zero stalks of F outside U. Exactness of extension and restriction identifies homology of the complex counit with the counit of each homology sheaf, by ShortComplex.homologyMap_mapNatTrans. Thus that complex counit is a quasi-isomorphism precisely when all cohomology stalks outside U vanish. Localize the termwise adjunction through DerivedCategory.Q using Adjunction.localization. Its counit on Q(P) is Q of the complex counit, conjugated by the factorization isomorphisms. Represent any B by a complex and transport its homology to obtain raw_derived_hom_support.",
    "uses": [
     "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-pc-open-extension-restriction-iso",
     "lem-sc-open-extension-counit-stalk"
    ],
    "elementary": false
   },
   {
-   "text": "Represent B by a complex P and L by a K-flat resolution Q. Apply stalk tensor vanishing outside U and identify the derived image of Tot(P tensor Q) with B tensor L, using the K-flat first-variable comparison and symmetry.",
+   "text": "Choose K-flat resolutions P of a representative of B and J of a representative of L. Their augmentations supply isomorphisms Q(P) ≅ B and Q(J) ≅ L. Evaluate the K-flat first-variable tensor comparison on constant singleton families, using P K-flat, to identify B tensor L with Q(Tot(P tensor J)). Apply derived_tensor_stalk_vanishing using J K-flat and the assumed vanishing of cohomology stalks of B; transport zero stalks along the tensor comparison. This proves the private tensor_stalk_vanishing helper without a braiding argument.",
    "uses": [
     "lem-pc-kflat-resolution",
     "lem-pc-kflat-derived-tensor-comparison",
@@ -33,26 +37,23 @@
    "elementary": false
   },
   {
-   "text": "For C with zero cohomology stalks outside U, the termwise counit of an arbitrary complex representative is invertible on stalks inside U. Outside U its source stalk complex is zero and its target is acyclic. It is thus a stalkwise quasi-isomorphism, hence a quasi-isomorphism of sheaf complexes, and J(R(C)) → C is invertible in the derived category. Apply this to B tensor L. Naturality of restriction and cancellation by the counit and unit turn the adjunction bijection into exactly R.map on Hom(C,E).",
-   "uses": [
-    "lem-sc-open-extension-counit-stalk"
-   ],
-   "elementary": false
+   "text": "Use mapDerivedCategoryCompIso for over restriction followed by Modules.overEquiv U. The derived functor of that equivalence is fully faithful, so its map on each Hom is bijective. Translate the hypothesis to raw over restriction, apply raw_derived_hom_support, then tensor_stalk_vanishing outside U, and apply raw_derived_hom_support in reverse for B tensor L. Finally transfer the resulting Hom bijection back through the derived equivalence. The empty and whole opens and zero factors require no additional assumptions.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-pc-open-extension-restriction-iso",
   "lem-sc-open-extension-counit-stalk",
   "lem-pc-kflat-resolution",
   "lem-pc-kflat-derived-tensor-comparison",
   "lem-sc-derived-tensor-stalk-vanishing"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "H1",
+  "by": "worker",
+  "group": "R4",
   "date": "2026-10-13",
-  "based_on": "Second reading: explicit reduction following Stacks 00A7 and 08BT, 06YB and 06YH"
+  "based_on": "Complete Lean proof following Stacks Tags 00A7, 08BT, 06YB and 06YH; exact homology of the counit and localization simplify the support criterion; resolve both tensor factors to avoid symmetry."
  },
  "mathlib_searches": [
   {
@@ -125,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T153221-L-1059513",
-  "kind": "interface",
+  "landing": "20261013T155939-L-1304631",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
