@@ -15,29 +15,52 @@
  ],
  "proof": [
   {
-   "text": "Proof: put m = maximalIdeal A, C = its completion, and B = D.matchingRing.\nThe ring-pushout universal property identifies the source with C tensor_A B;\nthe structural A-action in the hypothesis is its usual scalar action, and\ncompletedRingMap sends c tensor b to c times the second coordinate of b.\nCompletion is flat and A/m to C/mC is an isomorphism. Since m is finitely\ngenerated, 05EC (1), formalized by Ideal.primaryComponent_baseChange_bijective,\nwrites the given m-power torsion element x as 1 tensor b for an m-power\ntorsion b in B. The exponent killing b need not be the supplied exponent n.\nThe kernel hypothesis says the completed coordinate of b is zero.\nChoose generators f_i of m. The opens D(f_i) cover U; their inverse images\nin Y are affine because q is finite. Restrict the punctured coordinate of b\nto each such inverse image. Some power of f_i kills this restriction, while\nf_i is invertible there, so every restriction is zero. The sheaf's separatedness\non this cover makes the punctured coordinate zero. The ring pullback defining\nB has jointly injective projections, so b = 0 and hence x = 0.\nIf U is empty, Y is empty and its ring of sections is zero; only the completed\ncoordinate is needed. For n = 0 the hypothesis already gives x = 0 by a = 1.\nZero component rings obey the same calculations.",
+   "text": "Set m to the maximal ideal, C to its adic completion and B to D.matchingRing. Mathlib proves completion flatness, equality of its maximal ideal with mC and bijectivity on residue fields. Ideal.quotientMap_injective' and residue-field surjectivity prove that A/m to C/mC is bijective. The Noetherian hypothesis makes m finitely generated.",
    "uses": [
-    "def-sbc-completed-matching-ring-map",
-    "def-sbc-punctured-completion-matching-sections",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private pushout_torsion_descends helper transports Ideal.primaryComponent_baseChange_bijective through CommRingCat.isPushout_tensorProduct, respecting the structural A-action. It gives x = inl(b) for b in B annihilated by m^k, with k allowed to differ from n.",
+   "uses": [
     "lem-weil-pbc-torsion-submodule-flat-base-change-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "By the pushout inl-desc identity for completedRingMap, its value on inl(b) is the second matching projection of b. The kernel hypothesis therefore makes that projection zero.",
+   "uses": [
+    "def-sbc-completed-matching-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Project baseMap to the first matching coordinate. Its value is the structural map A to Gamma(Y). For every y of Y its image prime lies in U and differs from the unique maximal ideal. Choose a in m outside that prime, using containment of every proper ideal in the maximal ideal. By Scheme.preimage_basicOpen_top and basicOpen_eq_of_affine, y lies in the basic open of the structural image of a. Since a^k belongs to m^k, germ_eq_zero_of_pow_mul_eq_zero makes the germ of the first coordinate of b zero. TopCat.Presheaf.section_ext makes this coordinate zero. This argument needs neither finite q nor an affine cover.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The matching ring is the ring pullback. Concrete.isLimit_ext for pullbackIsPullback identifies elements whose two projections agree; the overlap projection agrees as a composite of the first projection. Thus b=0, and x=inl(b)=0. Empty Y, exponent zero and zero component rings are included without additional hypotheses.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-completed-matching-ring-map",
   "def-sbc-punctured-completion-matching-sections",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-finite-integral-morphism",
   "lem-weil-pbc-torsion-submodule-flat-base-change-iso"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "Q2",
+  "by": "N3",
   "document": "Stacks Project",
-  "place": "Tags 05ER and 05EC as applied in 0BLH"
+  "place": "Tags 05EC (1), 05ER and 0BLH; same torsion kernel route, with pointwise stalk vanishing in place of an affine basic-open cover"
  },
  "mathlib_searches": [
   {
@@ -132,10 +155,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T165647-L-1810040",
-  "kind": "interface",
+  "landing": "20261013T181115-L-2605164",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
