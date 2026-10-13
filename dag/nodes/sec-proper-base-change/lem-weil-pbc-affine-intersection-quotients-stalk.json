@@ -16,44 +16,44 @@
  ],
  "proof": [
   {
-   "text": "Let B=O_(X,x), the localization of A at the prime corresponding to x. Construct M=B tensor_A (L restricted to A). The affine tilde/global-sections adjunction identifies S_m restricted to U with tilde(Gamma(U,S_m)), naturally in m, and the tilde stalk is the localization. Localizing q_m therefore defines p_m. Germ naturality transports ht to the required stalk transition equation.",
+   "text": "Put A=Gamma(U,O_X), W=A minus the prime of x, and B=O_(X,x). The affine-open stalk localization theorem makes B a localization of A. Construct M=LocalizedModule W (L restricted to A), with its canonical B-module structure. For each m construct the actual section germ g_m, and use isLocalizedModule_affine_germ to prove it localizes the quasi-coherent section module. Define p_m by IsLocalizedModule.map followed by extendScalarsOfIsLocalization. Mathlib map_surjective proves surjectivity. Universal uniqueness for localized linear maps reduces the transition identity to numerators, where stalkFunctor_map_germ_apply and ht prove it.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-affine-module-germ-localization"
    ],
    "elementary": false
   },
   {
-   "text": "Localization preserves surjectivity (lift a numerator) and exactness. Apply exactness to D_m -> L -> Gamma(U,S_m), using the given section zero criterion, to identify ker(p_m). Define phi(Q) to be the localized image of the A-scalar restriction of Q in M; functoriality for inclusions makes this an order homomorphism. Thus ker(p_m)=phi(D_m).",
+   "text": "Define phi(Q)=(Q restricted to A).localized' B W f, for the canonical localization map f. The Galois insertion localized'gi proves monotonicity. The section zero criterion hk gives ker(q_m)=D_m restricted to A; localized'_ker_eq_ker_localizedMap proves ker(p_m)=phi(D_m). This uses the explicit Mathlib localized kernel formula, a consequence of localization exactness.",
    "uses": [
     "lem-weil-pbc-localization-module-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction of scalars identifies K^r L with I(U)^r L: expand products of extended ideal generators and absorb R coefficients into L. This is valid also for r=0. Localization preserves these products. The affine ideal section calculation and ideal-product stalk theorem, with the germ-compatible unit identification e, identify the localized ideal with J. Hence phi(K^r L)=J^r M.",
+   "text": "The ideal module is the kernel of the map from the unit to the closed-subscheme pushforward of its unit. Quasi-coherent pushforward for qcqs maps and quasi-coherent kernels prove it quasi-coherent. Apply affine germ localization to its sections. The affine ideal inclusion has range I(U), by range_toModulesι_app. Universal uniqueness of localized maps, germ naturality, and he show that its localized map is the ideal stalk inclusion followed by e. Mathlib localized'_range_eq_range_localizedMap and localized'_eq_span identify its B-linear range J with I(U).map(A -> B). Finally Ideal.map_pow, restrictScalars_map_smul_eq, localized'_smul and localized'_top prove phi(K^r L)=J^r M, including r=0.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-ideal-module-product-stalk"
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-sbc-affine-module-germ-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
   "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-lem-pushforward-qcoh"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J4",
+  "group": "P2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
-  "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01IC (lemma-kernel-cokernel-quasi-coherent), 01I8 (lemma-widetilde-constructions), and 00CS (proposition-localization-exact); read at the corresponding Stacks tag pages"
+  "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01IC (lemma-kernel-cokernel-quasi-coherent), 01I8 (lemma-widetilde-constructions), and 00CS (proposition-localization-exact); read at the corresponding Stacks tag pages",
+  "note": "Direct localization construction using proved affine germ localization and Mathlib submodule localization formulas; no tilde adjunction or sheaf ideal-product theorem is used."
  },
  "mathlib_searches": [
   {
@@ -138,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T123206-L-3677079",
-  "kind": "interface",
+  "landing": "20261013T130034-L-3923575",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
