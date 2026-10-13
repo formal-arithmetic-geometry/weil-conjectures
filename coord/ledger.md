@@ -12943,3 +12943,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:11 L: merged deliver/X2/Sheaf.RingTheory.LocalizedApproximationColimits (stage 3; reviewer PASS; first push; landing 20261013T151139-L-879098 (interface); batch 20261013T151129; modules 4; new nodes 3)
 - 15:15 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferential (reviewer RETURN: (reviewer X-c2e64, head c2e64a812) B9 / review point 4: In dag/nodes/sec-abelian-varieties/lem-sc-picard-external-cech-c)
 - 15:16 L: merged deliver/B3/Sheaf.Paper.ModuleCupResolutionAugmentation (stage 3; reviewer PASS; first push; landing 20261013T151659-L-923485 (proof); batch 20261013T151657; modules 1; new nodes 0)
+- 15:16 L: merged deliver/E1/Sheaf.AlgebraicGeometry.SchemeCanonicalShiftUnitAssociativity (stage 3; reviewer PASS; first push; landing 20261013T151659-L-923582 (interface); batch 20261013T151657; modules 2; new nodes 1)
