@@ -17,51 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Let p be the contraction of q to R. Contract q and p to each supplied stage, using the maps to the lifted limits followed by the canonical down equivalences. Cocone naturality and commutativity of the square identify the contractions along every transition. Localize the two ring diagrams. The localization-at-prime colimit theorem identifies their colimits with R_p and S_q, transporting the supplied colimit cocones through the lift equivalences. The transition and stage maps between these local rings are local because they contract the indicated maximal ideals.",
+   "text": "Use finite type over the Noetherian ring of integers to prove that every A_i is Noetherian. Equip B_i with the supplied A_i-algebra structure and use finite type once more to prove B_i Noetherian. This is proved explicitly in Lean.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+    "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the stage modules at their contracted top primes with the canonical fraction maps. Their scalar compatibility follows on fractions from the supplied semilinearity. Numerators and denominators lift to a common stage by the ring and group colimit representative criteria. Equal fractions are witnessed by a multiplier outside the contracted prime; lift that multiplier and descend its zero relation to a common later stage by the eventual-equality criterion. Thus the localized group colimit is M_q, compatibly with the localized limit top-ring action.",
+   "text": "Apply lem-weil-pbc-noetherian-approximation-localized-diagrams to the supplied three colimits, scalar compatibilities, the just-proved Noetherian stage hypotheses, module finiteness, and the two transition tensor equivalences. Obtain Noetherian local diagrams and their localization and module comparisons. This construction assumes no flatness and selects no flat stage.",
    "uses": [
-    "def-weil-directed-colimit-abelian-groups",
-    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+    "lem-weil-pbc-noetherian-approximation-localized-diagrams"
    ],
    "elementary": false
   },
   {
-   "text": "The stage base rings are Noetherian by finite type over the integers; the top stage rings are Noetherian by finite type over their bases. Their prime localizations are Noetherian local rings. The localized stage modules remain finite. Localize the supplied transition ring tensor equivalence: the localized later top ring is a further localization of the base change of the earlier local top ring. Tensor-localization compatibility similarly localizes the supplied transition module equivalence. These verify the ring-localization and module-base-change hypotheses of exists_flat_stage.",
-   "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The assumed R-flatness of M_q is equivalent to flatness over R_p. Transport it to the canonical localized colimit. Apply RingTheory.exists_flat_stage (Tag 00R6), using the localized Noetherian local diagrams and tensor comparisons just constructed. At the resulting stage, flatness over the localized stage base implies flatness over the unlocalized base by the localization-flatness equivalence. This is precisely the selected stage module localized at the contraction of q along its original top-ring map.",
+   "text": "Equip the localized module colimit with the R-action restricted along the displayed localization map. Transport the given R-flatness of M_q through the supplied R-linear equivalence, then apply Module.flat_iff_of_isLocalization to obtain flatness over the localized base colimit. Apply RingTheory.exists_flat_stage to the localized diagrams and all their compatibility and tensor comparisons.",
    "uses": [
     "lem-weil-pbc-flat-over-localization",
     "lem-weil-pbc-colimit-eventually-flat"
    ],
    "elementary": false
+  },
+  {
+   "text": "At the chosen stage restrict scalars through the supplied prime-localization map A_i to the localized base stage. Module.flat_iff_of_isLocalization yields A_i-flatness of the localized diagram module. Module.Flat.of_linearEquiv transports this to the original D_i localized at the contraction of q. Both transports and all scalar-tower instances are written in Lean.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "def-weil-directed-colimit-abelian-groups",
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-noetherian-approximation-localized-diagrams",
   "lem-weil-pbc-flat-over-localization",
   "lem-weil-pbc-colimit-eventually-flat"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Theorem Tag 00RC (theorem-openness-flatness), first reduction paragraph; lift and tensor comparison details made explicit by X3"
+  "place": "Tag 00RC (theorem-openness-flatness), first reduction paragraph; localized diagram construction separated from the explicit Lean Noetherian, flatness-transport and Tag 00R6 assembly by A3."
  },
  "mathlib_searches": [
   {
@@ -161,9 +155,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T111944-L-3070658",
+  "landing": "20261013T131322-L-4032588",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

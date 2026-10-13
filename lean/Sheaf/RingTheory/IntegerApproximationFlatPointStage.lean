@@ -13,7 +13,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.NoetherianApproximationLocalizedDiagrams
+import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.ColimitEventuallyFlat
 
 /-! # Descent of one flat point in a supplied integer approximation
@@ -31,6 +32,8 @@ open scoped TensorProduct
 
 namespace Algebra
 
+-- Preserve the named, nondependent forall binders of the existing signature.
+set_option linter.unusedVariables false in
 /-- A flat point of the limit of a supplied finite-type integer approximation occurs
 at a stage. This asserts only stage flatness, without constructing a model or an open locus.
 
@@ -116,6 +119,72 @@ theorem exists_flat_integer_approximation_stage_at_prime
       Module.Flat (A.obj i)
         (LocalizedModule
           (q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)).primeCompl
-          (D.obj i)) := by sorry
+          (D.obj i)) := by
+  classical
+  dsimp only
+  intro Λ _ _ _ A B η π κ D ν _ hmodel q hq
+  rcases hmodel with ⟨hcR, hcS, hcM, hcompat, hD, hν, hftA, hftB,
+    hfiniteOriginal, htB, htD⟩
+  have hnoetherianA : ∀ i, IsNoetherianRing (A.obj i) := by
+    intro i
+    have := hftA i
+    exact Algebra.FiniteType.isNoetherianRing ℤ (A.obj i)
+  have hnoetherianB : ∀ i, IsNoetherianRing (B.obj i) := by
+    intro i
+    let := (η.app i).hom.toAlgebra
+    have := hnoetherianA i
+    have := hftB i
+    exact Algebra.FiniteType.isNoetherianRing (A.obj i) (B.obj i)
+  obtain ⟨Aₗ, Bₗ, Dₗ, hcA, hcB, hcD, hlocalA, hlocalB, hnoethA, hnoethB,
+    hmodule, hfinite, hmoduleLimit, φ, ψ, hφ, hA, hB, hcomm, hscalar, hψ,
+    hlimitScalar, hloc, hbase, hlimit, hstage⟩ :=
+    exists_localized_noetherian_approximation R S M A B η π κ D ν
+      ⟨hcR, hcS, hcM, hcompat, hD, hν, hnoetherianA, hnoetherianB,
+        hfiniteOriginal, htB, htD⟩ q
+  let := hcA
+  let := hcB
+  let := hcD
+  let := hlocalA
+  let := hlocalB
+  let := hnoethA
+  let := hnoethB
+  let := hmodule
+  let := hfinite
+  let := hmoduleLimit
+  have hflat : let := Module.compHom (colimit Dₗ : AddCommGrpCat) ψ
+      Module.Flat (colimit Aₗ : CommRingCat) (colimit Dₗ : AddCommGrpCat) := by
+    obtain ⟨ρ, hρ, ⟨e⟩⟩ := hlimit
+    let := ρ.toAlgebra
+    let := Module.compHom (colimit Dₗ : AddCommGrpCat) ψ
+    let := Module.compHom (colimit Dₗ : AddCommGrpCat) ρ
+    have : IsScalarTower R (colimit Aₗ : CommRingCat) (colimit Dₗ : AddCommGrpCat) :=
+      IsScalarTower.of_compHom _ _ _
+    let := hρ
+    have : Module.Flat R (colimit Dₗ : AddCommGrpCat) :=
+      (Module.Flat.equiv_iff e).mp hq
+    exact (Module.flat_iff_of_isLocalization (colimit Aₗ : CommRingCat)
+      (q.asIdeal.comap (algebraMap R S)).primeCompl (colimit Dₗ : AddCommGrpCat)).mpr
+        inferInstance
+  obtain ⟨i, hi⟩ := RingTheory.exists_flat_stage Aₗ Bₗ Dₗ φ hφ hA hB hcomm
+    hscalar ψ hψ hlimitScalar hloc hbase hflat
+  refine ⟨i, ?_⟩
+  let : Algebra (A.obj i) (B.obj i) := (η.app i).hom.toAlgebra
+  let : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (η.app i).hom
+  have : IsScalarTower (A.obj i) (B.obj i) (D.obj i) :=
+    IsScalarTower.of_compHom _ _ _
+  obtain ⟨ρ, hρ, ⟨e⟩⟩ := hstage i
+  let := (φ i).toAlgebra
+  let := Module.compHom (Dₗ.obj i) (φ i)
+  let := ρ.toAlgebra
+  let := Module.compHom (Dₗ.obj i) ρ
+  have : IsScalarTower (A.obj i) (Aₗ.obj i) (Dₗ.obj i) :=
+    IsScalarTower.of_compHom _ _ _
+  let := hρ
+  have : Module.Flat (Aₗ.obj i) (Dₗ.obj i) := hi
+  have : Module.Flat (A.obj i) (Dₗ.obj i) :=
+    (Module.flat_iff_of_isLocalization (Aₗ.obj i)
+      (q.asIdeal.comap ((ULift.ringEquiv.toRingHom.comp (κ.app i).hom).comp
+        (η.app i).hom)).primeCompl (Dₗ.obj i)).mp inferInstance
+  exact Module.Flat.of_linearEquiv e
 
 end Algebra
