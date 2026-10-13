@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-pushforward-resolution-quasi-iso",
+ "kind": "statement",
+ "title": "Affine pushforward of a quasi-coherent K-injective resolution",
+ "statement": "Let X and Y be schemes [def-pc-scheme] and f : X → Y an affine morphism [pqf-def-affine-morphism]. Let F and J be unbounded integer-indexed complexes of structure-sheaf modules [def-pc-cochain-complex-modules], with every term of F quasi-coherent [pqf-def-coherent] and J K-injective [def-pur-kinjective-complex]. If s : F → J is a quasi-isomorphism, then termwise pushforward f_*(s) [def-pc-ringed-spaces-derived-direct-image] is a quasi-isomorphism. No boundedness or quasi-coherence of the terms of J is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-pc-cochain-complex-modules",
+  "pqf-def-coherent",
+  "def-pur-kinjective-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08C2; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "cohomology.tex, Tag 08C2, singleton-cover affine case and unbounded proof; perfect.tex, lemma-affine-morphism-equivalence, affine cohomology calculation."
+ },
+ "proof": [
+  {
+   "text": "For every affine open V of Y, its inverse image is affine. Apply affineOpenSections_resolution_quasiIso on that inverse image to s. Forget the global scalar action: the resulting map is definitionally the additive-group section map of f_*(s) on V.",
+   "uses": [
+    "lem-sc-affine-open-sections-resolution-quasi-iso",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take homology of the underlying additive presheaf complex map. Exact evaluation and the preceding sectionwise quasi-isomorphisms make its components invertible on all affine opens. The basis germ formulas prove that the induced stalk maps are bijective: injectivity is TopCat.Presheaf.stalkFunctor_map_injective_of_isBasis, and surjectivity lifts a basis germ using exists_mem_germ_eq_of_isBasis and componentwise surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Filtered colimits of abelian groups are exact, so the presheaf stalk functor preserves homology. The preceding stalk isomorphisms therefore make the stalk complex map a quasi-isomorphism. Exactness of module stalks identifies these with stalks of the sheaf homology map. The stalkwise bijectivity criterion isIso_of_bijective_stalkLinearMap makes the sheaf homology map invertible in every degree, proving the assertion.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-open-sections-resolution-quasi-iso",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08C2; https://stacks.math.columbia.edu/tag/0AVW",
+  "place": "Affine-open section calculation and stalkwise detection of the actual resolution comparison.",
+  "note": "Lean proof written from existing affine-section theorem; the remaining detection argument is fully proved from Mathlib stalk and homology APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor unit induces isomorphism on homology of complex of acyclic objects",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj, HomologicalComplexUpToQuasiIso.homologyFunctorFactors, HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh, DerivedCategory.homologyFunctorFactors, DerivedCategory.homologyFunctorFactorsh, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+   "date": "2026-10-14",
+   "verdict": "no exact match; generic homology or stalk infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnit.*[Ii]sIso|[Ii]sIso.*rightDerivedFunctorUnit",
+   "results": "No matching declarations.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; generic homology or stalk infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pushforward sends K-injective resolutions of termwise quasi-coherent unbounded complexes to quasi-isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkFunctor_map_injective_of_isBasis|exists_mem_germ_eq_of_isBasis",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match; generic homology or stalk infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3, invertibility of the affine ordinary-to-derived cohomology comparison.",
+   "via": [
+    "lem-pc-affine-pushforward-cohomology-edge-isIso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushforwardResolutionQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.affinePushforward_resolution_quasiIso",
+  "statement": "theorem affinePushforward_resolution_quasiIso\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]\n    (F J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent)\n    [J.IsKInjective] (s : F ⟶ J) [QuasiIso s] :\n    QuasiIso (((Scheme.Modules.pushforward f).mapHomologicalComplex (.up ℤ)).map s)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T222418-L-1228349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T222418-L-1228349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
