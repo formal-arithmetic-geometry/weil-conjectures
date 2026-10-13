@@ -9,9 +9,8 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Sheaf.RingTheory.ColimitEventuallyFlat
-import Sheaf.RingTheory.LimitModuleFinitePresentation
+import Sheaf.RingTheory.FlatPointNoetherianModel
+import Sheaf.RingTheory.FlatLocalizedModuleBaseChange
 import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 
 /-!
@@ -65,6 +64,19 @@ theorem isOpen_setOf_flat_localizedModule {R : Type u} {S : Type v} {M : Type w}
     [Module R M] [Module S M] [IsScalarTower R S M]
     [Algebra.FinitePresentation R S] [Module.FinitePresentation S M] :
     IsOpen {q : PrimeSpectrum S | Module.Flat R (LocalizedModule q.asIdeal.primeCompl M)} := by
-  sorry
+  rw [isOpen_iff_forall_mem_open]
+  intro q (hq : Module.Flat R _)
+  obtain ⟨A, B, N, hA, hB, hAB, hAR, hBS, hAS, hABS, hARS,
+    hN, hAN, hBN, hABN, hnoeth, hft, hfin, hpush, ⟨e⟩, hflat⟩ :=
+    exists_noetherian_model_flat_at_prime q hq
+  let p : Ideal B := q.asIdeal.comap (algebraMap B S)
+  have hp : p.IsPrime := Ideal.IsPrime.comap _
+  obtain ⟨g, hg, hneighborhood⟩ :=
+    Flat.exists_notMem_forall_flat_localizedModule (R := A) (M := N) p hflat
+  refine ⟨PrimeSpectrum.basicOpen (algebraMap B S g), ?_,
+    PrimeSpectrum.isOpen_basicOpen, hg⟩
+  intro r hr
+  exact Flat.localizedModule_of_isPushout e r
+    (hneighborhood (r.asIdeal.comap (algebraMap B S)) hr)
 
 end Module

@@ -34,85 +34,38 @@
  ],
  "proof": [
   {
-   "text": "Fix a prime $\\mathfrak q\\subset S$ at which $M_{\\mathfrak q}$ is flat over $R$, and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Apply [lem-weil-pbc-limit-module-finite-presentation] (Stacks 00R1) to obtain a directed system $(R_\\lambda\\to S_\\lambda,M_\\lambda)$ with the colimit and base-change isomorphisms in that node. Let $\\mathfrak q_\\lambda\\subset S_\\lambda$ and $\\mathfrak p_\\lambda\\subset R_\\lambda$ be the inverse images of $\\mathfrak q$ and $\\mathfrak p$. Every $R_\\lambda$ is Noetherian: $\\mathbf Z$ is Noetherian [def-weil-pbc-noetherian-ring], and $R_\\lambda$ is finite type over it, so [lem-weil-pbc-finite-type-algebra-noetherian] applies. Similarly $S_\\lambda$ is Noetherian, and its localization at $\\mathfrak q_\\lambda$ is a finitely generated module over itself; $(M_\\lambda)_{\\mathfrak q_\\lambda}$ is finitely generated over $(S_\\lambda)_{\\mathfrak q_\\lambda}$ because images of the finite generators of $M_\\lambda$ generate its fractions. The transition maps on the prime localizations are local homomorphisms, since the preimage of each later prime is the earlier one [lem-weil-pbc-filtered-colimit-localization-at-prime].",
+   "text": "At a flat prime q, obtain a Noetherian finite-type model A -> B, N, together with the pushout to R -> S, the S-linear module base-change equivalence, and flatness of N at the contracted prime p.",
    "uses": [
-    "lem-weil-pbc-limit-module-finite-presentation",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+    "lem-weil-pbc-flat-point-noetherian-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Theorem Tag 00RC (theorem-openness-flatness), proof, lines 33427-33441; Lemma Tag 00R1 (lemma-limit-module-finite-presentation)"
-   }
+   "elementary": false
   },
   {
-   "text": "The systems $A_\\lambda=(R_\\lambda)_{\\mathfrak p_\\lambda}$, $B_\\lambda=(S_\\lambda)_{\\mathfrak q_\\lambda}$ and $N_\\lambda=(M_\\lambda)_{\\mathfrak q_\\lambda}$ meet the hypotheses of [lem-weil-pbc-colimit-eventually-flat]. Their ring colimits are $R_{\\mathfrak p}$ and $S_{\\mathfrak q}$ by [lem-weil-pbc-filtered-colimit-localization-at-prime]. Their module colimit is $M_{\\mathfrak q}$: a fraction $m/s$ comes from a common stage containing a representative of $m$ and $s$ by the colimit clause of [lem-weil-pbc-limit-module-finite-presentation]; if $m/s=0$, a multiplier $t\\notin\\mathfrak q$ kills $m$, and the equality $tm=0$ holds at a later stage by the elementwise description in [def-weil-directed-colimit-abelian-groups] applied to the module system of 00R1, so the fraction dies there. Noetherianity and finite generation were checked in step 1, and the transition maps are local. For hypothesis (a), the ring $B_\\lambda\\otimes_{A_\\lambda}A_\\mu$ is the localization of $S_\\lambda\\otimes_{R_\\lambda}R_\\mu\\cong S_\\mu$ (the isomorphism in [lem-weil-pbc-limit-module-finite-presentation]) first at the images of $S_\\lambda\\setminus\\mathfrak q_\\lambda$ and $R_\\mu\\setminus\\mathfrak p_\\mu$ [lem-weil-pbc-localization-tensor-product], [lem-weil-pbc-localization-tensor-over-base]; localizing further at $S_\\mu\\setminus\\mathfrak q_\\mu$ gives $B_\\mu$, since each earlier denominator avoids $\\mathfrak q_\\mu$. For (b), localize the isomorphism $M_\\lambda\\otimes_{S_\\lambda}S_\\mu\\cong M_\\mu$ from [lem-weil-pbc-limit-module-finite-presentation] at $S_\\mu\\setminus\\mathfrak q_\\mu$ and use [lem-weil-pbc-localization-tensor-product] to identify the left side with $N_\\lambda\\otimes_{B_\\lambda}B_\\mu$. Finally $M_{\\mathfrak q}$ is flat over $R_{\\mathfrak p}$ by [lem-weil-pbc-flat-over-localization], since elements of $R\\setminus\\mathfrak p$ act invertibly on $M_{\\mathfrak q}$. Thus [lem-weil-pbc-colimit-eventually-flat] yields an index $\\lambda$ for which $N_\\lambda$ is flat over $A_\\lambda$, hence flat over $R_\\lambda$ by [lem-weil-pbc-flat-over-localization].",
+   "text": "Apply the existing Noetherian flat-locus neighborhood theorem to p. It produces g outside p with N localized at every prime avoiding g flat over A. The image of g in S avoids q by the definition of contraction.",
    "uses": [
-    "lem-weil-pbc-colimit-eventually-flat",
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-limit-module-finite-presentation",
-    "def-weil-directed-colimit-abelian-groups",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-flat-over-localization"
+    "lem-weil-pbc-noetherian-flat-locus-neighborhood"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Theorem Tag 00RC (theorem-openness-flatness), proof, lines 33432-33451, application of Lemmas 00QX (lemma-limit-module-essentially-finite-presentation) and 00R6 (lemma-colimit-eventually-flat), with the localization compatibility written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-noetherian-flat-locus-neighborhood] to $R_\\lambda\\to S_\\lambda$, the finite $S_\\lambda$-module $M_\\lambda$ and $\\mathfrak q_\\lambda$: $R_\\lambda$ is Noetherian, $S_\\lambda$ is finite type over it (step 1), and $(M_\\lambda)_{\\mathfrak q_\\lambda}$ is flat over $R_\\lambda$ (step 2). This gives $g_\\lambda\\in S_\\lambda\\setminus\\mathfrak q_\\lambda$ such that $(M_\\lambda)_{\\mathfrak r_\\lambda}$ is flat over $R_\\lambda$ for every prime $\\mathfrak r_\\lambda$ avoiding $g_\\lambda$. Let $g$ be the image of $g_\\lambda$ in $S$. Since $\\mathfrak q_\\lambda$ is the inverse image of $\\mathfrak q$, $g\\notin\\mathfrak q$.",
+   "text": "For every prime r of S avoiding the image of g, its contraction to B avoids g. Apply the pointwise base-change lemma to its model localization, obtaining R-flatness of M_r. Thus the basic open of the image of g lies in the flat locus and contains q. Apply isOpen_iff_forall_mem_open and openness of basic opens.",
    "uses": [
-    "lem-weil-pbc-noetherian-flat-locus-neighborhood",
-    "lem-weil-pbc-limit-module-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Theorem Tag 00RC (theorem-openness-flatness), proof, lines 33446-33457 and the Noetherian argument at lines 33459-33507"
-   }
-  },
-  {
-   "text": "Let $\\mathfrak r\\subset S$ avoid $g$ and put $\\mathfrak r_\\lambda$ for its inverse image in $S_\\lambda$; then $g_\\lambda\\notin\\mathfrak r_\\lambda$, so $(M_\\lambda)_{\\mathfrak r_\\lambda}$ is flat over $R_\\lambda$ by step 3. Its base change $P=(M_\\lambda)_{\\mathfrak r_\\lambda}\\otimes_{R_\\lambda}R$ is flat over $R$ by [lem-weil-pbc-flat-module-base-change]. By the base-change isomorphisms $S=S_\\lambda\\otimes_{R_\\lambda}R$ and $M=M_\\lambda\\otimes_{S_\\lambda}S$ in [lem-weil-pbc-limit-module-finite-presentation], [lem-weil-pbc-localization-tensor-over-base] identifies $M_{\\mathfrak r}$ with a further localization of $P$ at the image of $S\\setminus\\mathfrak r$; the elements of $S_\\lambda\\setminus\\mathfrak r_\\lambda$ already act invertibly on $P$. This further localization remains flat over $R$: for every injection $U\\hookrightarrow V$ of $R$-modules, $U\\otimes_RP\\hookrightarrow V\\otimes_RP$ is injective by flatness of $P$ [def-weil-pbc-flat-ring-map]; localizing this injection at the indicated multiplicative set preserves injectivity [lem-weil-pbc-localization-module-exact], and [lem-weil-pbc-localization-tensor-over-base] identifies the resulting map with $U\\otimes_RM_{\\mathfrak r}\\to V\\otimes_RM_{\\mathfrak r}$. Hence $M_{\\mathfrak r}$ is flat over $R$. We have proved $D(g)\\subseteq\\{\\mathfrak r:M_{\\mathfrak r}\\text{ flat over }R\\}$, and $D(g)$ is open by [def-weil-affine-spectrum]. Every prime in the flat locus can play the role of $\\mathfrak q$, so that locus is the union of these basic open neighborhoods and is open.",
-   "uses": [
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-weil-pbc-limit-module-finite-presentation",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-flat-localized-module-base-change",
     "def-weil-affine-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Theorem Tag 00RC (theorem-openness-flatness), proof, lines 33446-33457, descent of a flat neighborhood by Lemma 00HI (lemma-flat-base-change), and opening and last line of the theorem"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-module-finite-presentation",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "lem-weil-pbc-colimit-eventually-flat",
-  "def-weil-directed-colimit-abelian-groups",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-point-noetherian-model",
   "lem-weil-pbc-noetherian-flat-locus-neighborhood",
-  "lem-weil-pbc-flat-module-base-change",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-flat-localized-module-base-change",
   "def-weil-affine-spectrum"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Theorem Tag 00RC (theorem-openness-flatness), lines 33407-33507"
+  "place": "Theorem Tag 00RC, reduction to Noetherian models and base-change paragraph; Lean reduction by T3, 2026-10-13. The model descent is split off; pointwise base change and open-neighborhood assembly are proved."
  },
  "mathlib_searches": [
   {
@@ -211,5 +164,15 @@
   "group": "K1",
   "result": "pass",
   "note": "CommRing R,S; Algebra R S = phi; Algebra.FinitePresentation R S; Module.FinitePresentation S M (cokernel S^s->S^t); R-action on M and M_q restricted along phi (IsScalarTower; instance is OreLocalization.instModuleOfIsScalarTower, smul'_mk on numerator, checked); M_q = LocalizedModule q.asIdeal.primeCompl M (sibling FlatModulePowers / source exists_notMem_forall_flat_localizedModule form); Module.Flat R; set over PrimeSpectrum S, IsOpen Zariski; no hollow binders, no let, universes u v w independent and harmless"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T100139-L-2490531",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11996,3 +11996,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/T3/Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity (stage 3; reviewer PASS; after a return; landing 20261013T100137-L-2490094 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/T3/Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction (stage 3; reviewer PASS; after a return; landing 20261013T100137-L-2490261 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:01 L: merged deliver/T3/Sheaf.RingTheory.DirectSumExtensionAssembly (stage 3; reviewer PASS; first push; landing 20261013T100138-L-2490398 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:01 L: merged deliver/T3/Sheaf.RingTheory.OpenFlatLocus (stage 3; reviewer PASS; first push; landing 20261013T100139-L-2490531 (interface); batch 20261013T095923; modules 3; new nodes 2)
