@@ -17,49 +17,60 @@
  },
  "proof": [
   {
-   "text": "Test the universal unit at Spec kappa(w) mapping to S through k. If the fibre is empty, every module on it is zero, and pushforward has zero sections. An isomorphism from the nonzero residue-field structure module to that pushforward is impossible. Thus this fibre has a point.",
+   "text": "Identify tensorPullback with Modules.pullback by uniqueness of left adjoints to the same pushforward. The supplied descent isomorphism and preservation of invertibility by pullback make b^*N invertible, where b : X times_S W -> W is the second projection.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-weil-residue-field",
+    "def-pc-module-pullback",
     "def-sc-invertible-module"
    ],
    "elementary": true
   },
   {
-   "text": "Choose a finite free frame of N near w. Pull it to a point of the nonempty residue fibre. Tensor-pullback composition and the descent isomorphism identify its pullback with an invertible module. On Spec kappa(w), the field rank-one theorem trivializes the pullback of N; comparison of its finite free frame with this rank-one module forces its number of generators to be one. Therefore the frame of N near w has rank one.",
-   "uses": [
-    "def-amb-finite-locally-free-module",
-    "def-pc-module-pullback",
-    "lem-sc-field-pullback-rank-one-trivial"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For any U inside this frame neighbourhood, restrict the frame and pull it back along f_U. Compose with the base change of the descent isomorphism. The cartesian projection identities and composition of pullback identify the resulting bundle with M_U. Pullback of the structure module is the structure module, so M_U is trivial.",
+   "text": "Test hO at r followed by k, where r : Spec kappa(w) -> W is the residue-field map. If Y = X times_S Spec kappa(w) were empty, Modules.isZero_of_isEmpty and pushforward.map_isZero would make the target of its structure adjunction unit zero. The isomorphism would make the nonzero structure module of Spec kappa(w) zero, contradicting Modules.not_isZero_unit. Choose y in Y. The pullback lift q : Y -> X times_S W satisfies q followed by b = the second projection followed by r, hence b(q(y)) = w by fromSpecResidueField_apply.",
    "uses": [
     "def-pc-base-change",
-    "def-pc-module-pullback",
+    "def-weil-residue-field",
     "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Choose V containing w and a finite free frame N.over V isomorphic to free I using the proved source-library Modules.exists_mem_over_iso_free. overIsoFreeEquiv and restrictFunctorIsoPullback identify V^*N with free I. On D = b inverse-image V, pullbackComp, morphismRestrict_ι and pullbackFreeIso give a free-I frame of the invertible restriction of b^*N. Choose a further trivializing open H containing q(y), regarded as a point of D. Pullback of the free frame to H is still free I.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "H contains a point, so R = Gamma(H,O_H) is a nontrivial commutative ring by Scheme.component_nontrivial. appLinearEquivOfIso and freeSectionsEquiv identify the global sections of the same module with R^I and R. Module.finrank_fintype_fun_eq_card and Module.finrank_self give Fintype.card I = 1. Fintype.card_eq_one_iff gives Unique I; coproductUniqueIso turns the frame on V into V^*N isomorphic to O_V. These are all proved source-library or Mathlib declarations, and this calculation includes the putative rank-zero frame by excluding it.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For U <= V, use W.homOfLE hUV and homOfLE_ι to pull the V-trivialization to U. For t : X times_S U -> X times_S W constructed by pullback.lift, its projection equations are t followed by a = a_U and t followed by b = b_U followed by U.ι. Compose pullbackCongr, pullbackComp, the pullback of the original descent isomorphism, the U-trivialization, and pullbackObjUnitIso. Finally compare tensorPullback a_U with Modules.pullback a_U. This explicitly yields the required isomorphism for every U, including empty U.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
   "def-pc-base-change",
   "def-pc-module-pullback",
+  "def-sc-finite-locally-free-sheaf",
   "def-sc-invertible-module",
   "def-weil-residue-field",
-  "lem-pc-module-pullback-adjunction",
-  "lem-sc-field-pullback-rank-one-trivial"
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H1",
+  "group": "M4",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 0BF2, proof paragraph beginning with shrinking the base, and 0BF0, field rank calculation",
-  "note": "Detailed subargument of the existing 0BF2 proof, split from the common minimal model; no change to the unit route."
+  "place": "Tags 0BF2 and 0BF0, rank-one descent by a finite local frame",
+  "note": "Complete Lean proof. The local rank comparison is performed on a nonempty trivializing open above w, directly over its nonzero global-sections ring. The separate field-pullback rank-one lemma and residue-stalk comparison are unnecessary. The unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -136,10 +147,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T113343-L-3183946",
-  "kind": "interface",
+  "landing": "20261013T115027-L-3325436",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
