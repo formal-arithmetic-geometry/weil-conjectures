@@ -15,9 +15,9 @@ public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 Let `f : X ⟶ Y` be a morphism of schemes and `e_X : X ≅ X`, `e_Y : Y ≅ Y` automorphisms
 compatible with `f`, that is `e_X ≫ f = f ≫ e_Y` (`hf`). Write `Φ_X = Le_X^*` and
 `Φ_Y = Le_Y^*` for the Frobenius pullbacks on the bounded constructible derived categories
-`Dᵇc(-)⟦Λ⟧` (`WeilConjectures.WeilObject.BoundedConstructible.Defs`). For a functor `G` between
-these categories with a commutation isomorphism `b_G`, the Weil structure of `G K` is the
-composite
+`Dᵇc(-)⟦ℚ̲̄_ℓ⟧` of `ℚ̄_ℓ`-sheaves (`WeilConjectures.WeilObject.BoundedConstructible.Defs`). For a
+functor `G` between these categories with a commutation isomorphism `b_G`, the Weil structure of
+`G K` is the composite
 
 ```
 φ_{GK} : Φ (G K) --b_G(K)--> G (Φ K) --G(φ_K)--> G K,
@@ -46,15 +46,15 @@ the derived pullback and the derived pushforward.
   with inverses the pullbacks along `g⁻¹` and `g'⁻¹`, and the mate of an isomorphism between
   equivalences is an isomorphism. Making it precise needs the identity isomorphism
   `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on module objects, which is not yet available. For `f`
-  proper and the `ℓ`-adic coefficient rings, it is also a consequence of proper base change
-  (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`).
+  proper, it is also a consequence of proper base change
+  (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`).
 
 ## Main definitions
 
 - `ProEtale.CondensedRing.weilUpperStar`: the derived pullback
-  `WeilBoundedConstructible Λ ℓ k e_Y ⥤ WeilBoundedConstructible Λ ℓ k e_X` of Weil objects.
+  `WeilBoundedConstructible ℓ k e_Y ⥤ WeilBoundedConstructible ℓ k e_X` of Weil objects.
 - `ProEtale.CondensedRing.weilLowerStar`: the derived pushforward
-  `WeilBoundedConstructible Λ ℓ k e_X ⥤ WeilBoundedConstructible Λ ℓ k e_Y` of Weil objects.
+  `WeilBoundedConstructible ℓ k e_X ⥤ WeilBoundedConstructible ℓ k e_Y` of Weil objects.
 
 -/
 
@@ -70,8 +70,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
 
 section BaseChangeOfIsIso
 
@@ -88,14 +88,13 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
   [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-include ℓ k in
 /-- Base change along isomorphisms: for a commutative square `g' ≫ f = f' ≫ g` of schemes whose
 horizontal maps `g` and `g'` are isomorphisms, the base-change morphism
-`BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible complexes is an isomorphism. No
-properness of `f` is needed. See the module docstring for the argument. -/
+`BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` on bounded constructible `ℚ̄_ℓ`-sheaves is an isomorphism.
+No properness of `f` is needed. See the module docstring for the argument. -/
 theorem isIso_boundedConstructibleBaseChange_of_isIso [IsIso g] [IsIso g']
     (sq : CommSq g' f' f g) :
-    IsIso (boundedConstructibleBaseChange Λ ℓ k sq) :=
+    IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq) :=
   sorry
 
 end BaseChangeOfIsIso
@@ -115,34 +114,38 @@ section UpperStar
 is `Φ_X Lf^* ≅ Lf^* Φ_Y`: the pullback comparison of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilUpperStarComparison :
-    boundedConstructibleUpperStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k eX.hom ≅
-      boundedConstructibleUpperStar Λ ℓ k eY.hom ⋙ boundedConstructibleUpperStar Λ ℓ k f :=
-  (boundedConstructiblePullbackSquareComparison Λ ℓ k (CommSq.mk hf)).symm
+    boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k eX.hom ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k eY.hom ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f :=
+  (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ k
+    (CommSq.mk hf)).symm
 
 /-- The derived pullback `Lf^*` of Weil objects: a Weil object `(K, φ_K)` for `e_Y` is sent to
 `Lf^* K` with the structure isomorphism
 `Φ_X Lf^* K ≅ Lf^* Φ_Y K ≅ Lf^* K` given by `weilUpperStarComparison` and `Lf^* φ_K`. -/
 noncomputable def weilUpperStar :
-    WeilBoundedConstructible Λ ℓ k eY ⥤ WeilBoundedConstructible Λ ℓ k eX :=
-  IsoAlgebra.mapOfNatIso (weilUpperStarComparison Λ ℓ k eX eY f hf)
+    WeilBoundedConstructible ℓ k eY ⥤ WeilBoundedConstructible ℓ k eX :=
+  IsoAlgebra.mapOfNatIso (weilUpperStarComparison ℓ k eX eY f hf)
 
 @[simp]
-lemma weilUpperStar_obj_carrier (K : WeilBoundedConstructible Λ ℓ k eY) :
-    ((weilUpperStar Λ ℓ k eX eY f hf).obj K).carrier =
-      (boundedConstructibleUpperStar Λ ℓ k f).obj K.carrier :=
+lemma weilUpperStar_obj_carrier (K : WeilBoundedConstructible ℓ k eY) :
+    ((weilUpperStar ℓ k eX eY f hf).obj K).carrier =
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f).obj K.carrier :=
   rfl
 
-lemma weilUpperStar_obj_str (K : WeilBoundedConstructible Λ ℓ k eY) :
-    ((weilUpperStar Λ ℓ k eX eY f hf).obj K).str =
-      (weilUpperStarComparison Λ ℓ k eX eY f hf).app K.carrier ≪≫
-        (boundedConstructibleUpperStar Λ ℓ k f).mapIso K.str :=
+lemma weilUpperStar_obj_str (K : WeilBoundedConstructible ℓ k eY) :
+    ((weilUpperStar ℓ k eX eY f hf).obj K).str =
+      (weilUpperStarComparison ℓ k eX eY f hf).app K.carrier ≪≫
+        (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
-/-- The derived pullback of Weil objects lifts the derived pullback on `Dᵇc(-)⟦Λ⟧` along the
+/-- The derived pullback of Weil objects lifts the derived pullback on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the
 forgetful functors. -/
 lemma weilUpperStar_comp_forget :
-    weilUpperStar Λ ℓ k eX eY f hf ⋙ WeilBoundedConstructible.forget Λ ℓ k eX =
-      WeilBoundedConstructible.forget Λ ℓ k eY ⋙ boundedConstructibleUpperStar Λ ℓ k f :=
+    weilUpperStar ℓ k eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ k eX =
+      WeilBoundedConstructible.forget ℓ k eY ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f :=
   rfl
 
 end UpperStar
@@ -155,39 +158,42 @@ section LowerStar
 that is `Φ_Y Rf_* ⟶ Rf_* Φ_X`: the base-change morphism of the Frobenius square
 `e_X ≫ f = f ≫ e_Y`. -/
 noncomputable def weilLowerStarComparison :
-    boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k eY.hom ⟶
-      boundedConstructibleUpperStar Λ ℓ k eX.hom ⋙ boundedConstructibleLowerStar Λ ℓ k f :=
-  boundedConstructibleBaseChange Λ ℓ k (CommSq.mk hf)
+    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f ⋙
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k eY.hom ⟶
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k eX.hom ⋙
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f :=
+  boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k (CommSq.mk hf)
 
 /-- The Frobenius comparison of the derived pushforward is an isomorphism, the Frobenius
 automorphisms being isomorphisms. -/
-instance isIso_weilLowerStarComparison : IsIso (weilLowerStarComparison Λ ℓ k eX eY f hf) :=
-  isIso_boundedConstructibleBaseChange_of_isIso Λ ℓ k _
+instance isIso_weilLowerStarComparison : IsIso (weilLowerStarComparison ℓ k eX eY f hf) :=
+  isIso_boundedConstructibleBaseChange_of_isIso ℓ k _
 
 /-- The derived pushforward `Rf_*` of Weil objects: a Weil object `(K, φ_K)` for `e_X` is sent to
 `Rf_* K` with the structure isomorphism `Φ_Y Rf_* K ≅ Rf_* Φ_X K ≅ Rf_* K` given by the inverted
 `weilLowerStarComparison` and `Rf_* φ_K`. -/
 noncomputable def weilLowerStar :
-    WeilBoundedConstructible Λ ℓ k eX ⥤ WeilBoundedConstructible Λ ℓ k eY :=
-  IsoAlgebra.mapOfNatIso (asIso (weilLowerStarComparison Λ ℓ k eX eY f hf))
+    WeilBoundedConstructible ℓ k eX ⥤ WeilBoundedConstructible ℓ k eY :=
+  IsoAlgebra.mapOfNatIso (asIso (weilLowerStarComparison ℓ k eX eY f hf))
 
 @[simp]
-lemma weilLowerStar_obj_carrier (K : WeilBoundedConstructible Λ ℓ k eX) :
-    ((weilLowerStar Λ ℓ k eX eY f hf).obj K).carrier =
-      (boundedConstructibleLowerStar Λ ℓ k f).obj K.carrier :=
+lemma weilLowerStar_obj_carrier (K : WeilBoundedConstructible ℓ k eX) :
+    ((weilLowerStar ℓ k eX eY f hf).obj K).carrier =
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f).obj K.carrier :=
   rfl
 
-lemma weilLowerStar_obj_str (K : WeilBoundedConstructible Λ ℓ k eX) :
-    ((weilLowerStar Λ ℓ k eX eY f hf).obj K).str =
-      (asIso (weilLowerStarComparison Λ ℓ k eX eY f hf)).app K.carrier ≪≫
-        (boundedConstructibleLowerStar Λ ℓ k f).mapIso K.str :=
+lemma weilLowerStar_obj_str (K : WeilBoundedConstructible ℓ k eX) :
+    ((weilLowerStar ℓ k eX eY f hf).obj K).str =
+      (asIso (weilLowerStarComparison ℓ k eX eY f hf)).app K.carrier ≪≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f).mapIso K.str :=
   IsoAlgebra.mapOfNatIso_obj_str _ K
 
-/-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦Λ⟧` along
+/-- The derived pushforward of Weil objects lifts the derived pushforward on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along
 the forgetful functors. -/
 lemma weilLowerStar_comp_forget :
-    weilLowerStar Λ ℓ k eX eY f hf ⋙ WeilBoundedConstructible.forget Λ ℓ k eY =
-      WeilBoundedConstructible.forget Λ ℓ k eX ⋙ boundedConstructibleLowerStar Λ ℓ k f :=
+    weilLowerStar ℓ k eX eY f hf ⋙ WeilBoundedConstructible.forget ℓ k eY =
+      WeilBoundedConstructible.forget ℓ k eX ⋙
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f :=
   rfl
 
 end LowerStar
