@@ -2,6 +2,7 @@ module
 
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Mathlib.RingTheory.TensorProduct.Finite
 
 @[expose] public section
 
@@ -24,4 +25,24 @@ theorem finite_normal_sup (A : Type u) (K : Type v)
       IsIntegrallyClosed (Localization.AtPrime q)) :
     ∃ B : Subalgebra A K, B ≤ integralClosure A K ∧ Module.Finite A B ∧
       ∀ (q : Ideal B) [q.IsPrime], IsIntegrallyClosed (Localization.AtPrime q) := by
-  sorry
+  classical
+  refine ⟨S, ?_, ?_, hn⟩
+  · rw [hS]
+    exact Finset.sup_le fun C hC ↦ (hs C hC).1
+  · rw [hS]
+    have hfinite : ∀ t : Finset (Subalgebra A K),
+        (∀ C ∈ t, Module.Finite A C) → Module.Finite A (t.sup id : Subalgebra A K) := by
+      intro t
+      induction t using Finset.induction_on with
+      | empty =>
+          intro _
+          rw [Finset.sup_empty]
+          infer_instance
+      | @insert C t hC ih =>
+          intro ht
+          have : Module.Finite A C := ht C (Finset.mem_insert_self C t)
+          have : Module.Finite A (t.sup id : Subalgebra A K) :=
+            ih fun D hD ↦ ht D (Finset.mem_insert_of_mem hD)
+          rw [Finset.sup_insert]
+          exact Subalgebra.finite_sup C (t.sup id)
+    exact hfinite s fun C hC ↦ (hs C hC).2
