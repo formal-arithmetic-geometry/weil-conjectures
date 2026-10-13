@@ -14,30 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Set Y = W union V and pull W and V back along Y.ι to opens U and Z of Y. They cover Y. Their open subschemes, and their intersection, are canonically isomorphic to W, V and W intersect V. Supply any additional fixed-Hom-universe localizations by lem-pc-open-derived-localization-adjunction and its derived-open-localization prerequisite, and transport A, B and c along the exact module equivalences for these isomorphisms. The canonical overMapCompOverEquiv, overFunctorEquiv and restrictFunctorComp comparisons descend to derived categories; their naturality identifies the restrictions of L(E) with JW(E) and JV(E) and their further restrictions with the same overlap object. Unit/counit identities identify the transported compatibility equation with the equation involving sW and sV.",
+   "text": "Apply exists_ambient_open_gluing_object to A, B and c, obtaining G on X and jW, jV with the transition equation.",
    "uses": [
-    "lem-pc-derived-open-localization-universe",
-    "lem-pc-open-derived-localization-adjunction"
+    "lem-sc-ambient-open-gluing-object"
    ],
    "elementary": false
   },
   {
-   "text": "Apply lem-sc-derived-open-gluing on Y to these two covering opens, the transported local objects and overlap isomorphism, target L(E), and transported compatible maps. Obtain F, alpha and its two local identifications. Transport the identifications back along the derived equivalences, and compose the equations with kW and kV. Naturality gives the two displayed relative restriction equations. Empty opens and empty Y satisfy the same construction because the pulled-back opens still cover.",
+   "text": "Compose jW with a and jV with b. Functoriality expands SW(jW followed by a). Substitute the input compatibility equation, then postcompose the transition equation by SV(b) followed by sV(E). Associativity gives compatibility of these local maps between JW(G), JV(G) and JW(E), JV(E).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_open_union_hom to G, E and this compatible pair. Let F=L(G), and take iW=kW(G) followed by jW and iV=kV(G) followed by jV. The supplied restriction equations, reassociated, are precisely the two required equations.",
    "uses": [
-    "lem-sc-derived-open-gluing"
+    "lem-sc-open-union-hom-gluing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-open-localization-universe",
-  "lem-pc-open-derived-localization-adjunction",
-  "lem-sc-derived-open-gluing"
+  "lem-sc-ambient-open-gluing-object",
+  "lem-sc-open-union-hom-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DG",
-  "place": "cohomology.tex, lemma-glue; ambient relative functor transport written explicitly by A3"
+  "place": "Separate object extension and fixed-object Hom gluing on the union; J4 Lean proof explicitly combines their transition and compatibility equations"
  },
  "mathlib_searches": [
   {
@@ -118,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-757b3",
-  "group": "A3",
+  "reviewer": "COMPILER",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T065057-L-896205",
+  "landing": "20261013T100021-L-2467042",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with both node statements, proof records and Stacks 08DG/08CM; compiled both modules and SupportedMapAffineUnionGluing; verified axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

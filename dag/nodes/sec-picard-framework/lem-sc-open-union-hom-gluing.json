@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-open-union-hom-gluing",
+ "kind": "statement",
+ "title": "Glue local maps between fixed ambient objects on an open union",
+ "statement": "Let X be a scheme [def-pc-scheme], W and V opens of X, and fix derived categories of module sheaves [def-pc-derived-category] in common Hom universe w on X, W, V, W intersect V and W union V. All direct restrictions, relative restrictions, and composition isomorphisms below are the canonical ones of [def-pc-derived-open-restriction-maps]. Let G and E be fixed objects of D(O_X). Write L, JW and JV for direct restrictions from X to W union V, W and V. Write PW and PV for relative restriction from W union V to W and V, and SW and SV for relative restriction from W and V to W intersect V. The isomorphisms kW : L followed by PW isomorphic to JW, kV : L followed by PV isomorphic to JV, sW : JW followed by SW isomorphic to direct overlap restriction, and sV : JV followed by SV isomorphic to direct overlap restriction are canonical. Suppose a : JW(G) to JW(E) and b : JV(G) to JV(E) satisfy sW(G) inverse followed by SW(a) followed by sW(E) = sV(G) inverse followed by SV(b) followed by sV(E). Then there is alpha : L(G) to L(E) such that PW(alpha) followed by kW(E) = kW(G) followed by a and PV(alpha) followed by kV(E) = kV(G) followed by b. There is no assertion of uniqueness or of a map G to E on all of X.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08BW",
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom, exactness at the local Hom pair, applied on W union V"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Set Y = W union V and pull W and V back to covering opens of Y. Supply the derived localizations in Hom universe w using the existing localization lemmas. Transport a and b through the canonical open-scheme equivalences, with kW(G) followed by a followed by kW(E) inverse and the analogous V expression. The composition comparisons from Modules.overMapCompOverEquiv, overFunctorEquiv, restrictFunctorComp and restrictFunctorCongr, followed by mapDerivedCategoryNatIso and mapDerivedCategoryCompIso, identify their overlap compatibility with the displayed hypothesis.",
+   "uses": [
+    "lem-pc-derived-open-localization-universe",
+    "lem-pc-open-derived-localization-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scheme_derived_hom_gluing on Y to the fixed objects L(G), L(E) and the compatible transported pair. It gives alpha. Transport its restriction equations back and compose with kW(E) and kV(E); cancellation of the comparison inverses gives the stated equations. No new objects or local isomorphisms are constructed.",
+   "uses": [
+    "lem-sc-scheme-derived-hom-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-sc-scheme-derived-hom-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08BW",
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom, exactness at the local Hom pair, applied on W union V; canonical restriction transport separated by J4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible local morphisms between fixed derived sheaf objects glue to a morphism on the union of two opens",
+   "results": "8 hits: TopCat.Sheaf.existsUnique_gluing', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, TopCat.Sheaf.existsUnique_gluing, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, TopCat.Sheaf.interUnionPullbackConeLift, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue. No exact match for the stated derived gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overFunctorMap\"",
+   "results": "1 hits: SheafOfModules.overFunctorMap. No exact match for the stated derived gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedOpenHomRestriction|openHomRestriction",
+   "results": "0 hits: . No exact match for the stated derived gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local morphisms between fixed derived sheaf objects glue to a morphism on the union of two opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeOpenGluing",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing of supported perfect objects: underlying object extension and fixed-object local Hom gluing, via lem-sc-relative-open-gluing",
+   "via": [
+    "lem-sc-relative-open-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenUnionHomGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenUnionHomGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_union_hom",
+  "statement": "theorem exists_open_union_hom\n    (X : Scheme.{u}) (W V : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace))]\n    (G E : schemeDerivedCategory X) :\n    let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory\n    let JW := (schemeOpenRestriction X W).mapDerivedCategory\n    let JV := (schemeOpenRestriction X V).mapDerivedCategory\n    let SW := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory\n    let SV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory\n    let sW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)\n    let sV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)\n    let PW := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory\n    let PV := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory\n    let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)\n    let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)\n    ∀ (a : JW.obj G ⟶ JW.obj E) (b : JV.obj G ⟶ JV.obj E),\n      sW.inv.app G ≫ SW.map a ≫ sW.hom.app E =\n        sV.inv.app G ≫ SV.map b ≫ sV.hom.app E →\n      ∃ (α : L.obj G ⟶ L.obj E),\n        PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a ∧\n        PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100021-L-2467042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100021-L-2467042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

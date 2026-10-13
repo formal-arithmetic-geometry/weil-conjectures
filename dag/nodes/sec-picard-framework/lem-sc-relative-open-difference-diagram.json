@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "title": "Direct-image difference diagram for two arbitrary ambient opens",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $U,V$ be arbitrary opens of $X$, and put $W=U\\cap V$. Fix the four derived categories of module sheaves on $X,U,V,W$ in one morphism universe [def-pc-derived-category]. Let $r_U,r_V,r_W$ be the exact derived open restrictions, $s_U,s_V$ the exact overlap restrictions, and $e_U:r_U\\mathbin{\\star}s_U\\cong r_W$, $e_V:r_V\\mathbin{\\star}s_V\\cong r_W$ their canonical composition isomorphisms [def-pc-derived-open-restriction-maps], where $\\star$ means first the left functor and then the right functor. Given $A\\in D(\\mathcal O_U)$, $B\\in D(\\mathcal O_V)$ and $c:s_U(A)\\cong s_V(B)$, put $E=Rj_{U,*}A\\oplus Rj_{V,*}B$ and $D=Rj_{W,*}(s_VB)$ using the derived direct images [def-pc-derived-direct-image]. Then there exist $d:E\\to D$, $p_U:r_U(E)\\to A$, $p_V:r_V(E)\\to B$ and $k:r_W(D)\\to s_V(B)$ such that $(p_U,r_U(d)):r_U(E)\\to A\\oplus r_U(D)$ and $(p_V,r_V(d)):r_V(E)\\to B\\oplus r_V(D)$ are isomorphisms and $e_{U,E}^{-1};s_U(p_U);c-e_{V,E}^{-1};s_V(p_V)=r_W(d);k$, where the semicolon denotes composition in execution order. The two objects are these fixed direct-image constructions. This constructs only their difference diagram; it neither chooses a fiber of $d$ nor asserts an object restricting to $A$ and $B$. No covering hypothesis is imposed; no object of the fiber triangle is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "cohomology.tex, lemma-glue, difference arrow and its split restrictions; local computation using Tag 08FE, independent of a covering premise"
+ },
+ "proof": [
+  {
+   "text": "Construct the derived open adjunctions by deriving the exact restriction/direct-image adjunctions. For W=U∩V take E=RjU_*A⊕RjV_*B and D=RjW_*(sV B), using [def-pc-derived-direct-image]. Define pU and pV as the projection to the corresponding direct-image summand followed by its open counit. The adjoints of the overlap counits, followed by c on the U side and a minus sign on the V side, give d. Take k to be the W counit. The composition comparison of [def-pc-derived-open-restriction-maps] identifies the two iterated adjunctions; naturality and their triangle identities give the displayed difference equation.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG, difference arrow before completing a distinguished triangle; Tag 08FE, restrictions of its direct-image summands"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-restrict-derived-direct-image-open] to the open immersions of U,V,W. On U identify rU E with A⊕Rj_*(sV B) and rU D with Rj_*(sV B), where j:W→U. In these coordinates pU=(1,0) and rU d=(a,-1) for the adjoint of c. The matrix (pU,rU d) has inverse (x,y)↦(x,a x-y). On V reorder the summands: pV is projection to B and the other diagonal entry of rV d is the direct image of c, an isomorphism. The triangular matrix is again invertible. With W empty the second summands vanish; with an entire open the same counit/matrix argument applies. These cases require no extra hypotheses.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG, difference arrow before completing a distinguished triangle; Tag 08FE, restrictions of its direct-image summands"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "cohomology.tex, lemma-glue, difference arrow and its split restrictions; local computation using Tag 08FE, independent of a covering premise"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing of supported perfect objects: direct-image difference diagram used for ambient object extension via lem-sc-relative-open-gluing",
+   "via": [
+    "lem-sc-relative-open-gluing",
+    "lem-sc-ambient-open-gluing-object"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-relative-open-difference-diagram",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeOpenGluing",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived two-open direct-image difference arrow has split normal form on each open without any covering hypothesis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived two-open direct-image difference arrow has split normal form on each open without any covering hypothesis",
+   "results": "8 hits: Opens.mayerVietorisSquare, Opens.mayerVietorisSquare'_toSquare, Opens.mayerVietorisSquare_X₂, Opens.coe_mayerVietorisSquare_X₄, Opens.mayerVietorisSquare', TopCat.Presheaf.SheafCondition.instNonemptyStructuredArrowPairwiseOpensLeCoverPairwiseToOpensLeCover, Opens.mayerVietorisSquare_X₃, TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCoverMap. The triangle isomorphism lemma proves the later cone step, not the geometric difference diagram.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃",
+   "results": "1 hits: CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃. The triangle isomorphism lemma proves the later cone step, not the geometric difference diagram.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "difference.*diagram|diagram.*difference|derived.*difference",
+   "results": "0 hits: . The triangle isomorphism lemma proves the later cone step, not the geometric difference diagram.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeOpenDifferenceDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeOpenDifferenceDiagram.lean",
+  "declaration": "AlgebraicGeometry.relative_open_difference_diagram",
+  "statement": "theorem relative_open_difference_diagram\n    (X : Scheme.{u}) (U V : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))]\n    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)\n    (c : (schemeOpenOverlapRestriction X\n        (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory.obj A ≅\n      (schemeOpenOverlapRestriction X\n        (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory.obj B) :\n    let rU := (schemeOpenRestriction X U).mapDerivedCategory;\n    let rV := (schemeOpenRestriction X V).mapDerivedCategory;\n    let sU := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory;\n    let sV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory;\n    let rW := (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory;\n    let eU := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : U ⊓ V ⟶ U);\n    let eV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : U ⊓ V ⟶ V);\n    let E := (schemeDerivedDirectImage U.ι).obj A ⊞ (schemeDerivedDirectImage V.ι).obj B;\n    let D := (schemeDerivedDirectImage (U ⊓ V).ι).obj (sV.obj B);\n    ∃ (d : E ⟶ D)\n      (pU : rU.obj E ⟶ A) (pV : rV.obj E ⟶ B)\n      (k : rW.obj D ⟶ sV.obj B),\n      IsIso (biprod.lift pU (rU.map d)) ∧\n      IsIso (biprod.lift pV (rV.map d)) ∧\n      eU.inv.app E ≫ sU.map pU ≫ c.hom - eV.inv.app E ≫ sV.map pV = rW.map d ≫ k",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100021-L-2467042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100021-L-2467042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
