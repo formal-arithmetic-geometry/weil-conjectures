@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-conormal-complement-polynomial-lift",
+ "kind": "statement",
+ "title": "Unique polynomial lifts annihilating a conormal complement",
+ "statement": "Let R and S be commutative rings, S an R-algebra, and G a family of R-algebra generators of S indexed by a set T [def-weil-pbc-mv-polynomial-ring]. Put P=R[x_t:t in T], let p:P to S be the induced surjection, and let J=ker(p). Let K be an ideal of P contained in J. Write d:J/J^2 to S tensor_P Omega_{P/R} for the conormal differential, g mod J^2 maps to 1 tensor dg [def-weil-pbc-kahler-differentials]. Suppose every element of S tensor_P Omega_{P/R} is d(g mod J^2) for some g in K, and that g in K with d(g mod J^2)=0 implies g in J^2. For every commutative R-algebra A, square-zero ideal I of A and R-algebra map a:S to A/I, there is a unique R-algebra map beta:P to A such that q composed with beta equals a composed with p and beta(K)=0, where q:A to A/I is the quotient map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 04EB (lemma-universal-thickening), polynomial correction argument, from choosing beta to the final sentence. The same argument uses K/(K intersection J^2), so it does not need J^2 contained in K."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Choose a lift z_t in A of a(G.val t) for each variable using surjectivity of q. Let beta = MvPolynomial.aeval z. Polynomial extensionality proves q composed with beta equals a composed with p.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The reduction equation gives beta(J) contained in I. Taking ideal squares gives beta(J^2) contained in I^2 = 0. Equip A with its P-algebra structure via beta and form the P-linear obstruction b:K to I, g maps to beta(g). Let t:K to S tensor_P Omega_{P/R} send g to 1 tensor dg. The first hypothesis makes t surjective; the second, combined with beta(J^2)=0, makes b zero on ker t. Descend b through K/ker t and use Mathlib LinearMap.quotKerEquivOfSurjective to obtain l with l(t(g))=b(g).",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose -l with omega maps to 1 tensor omega and the universal R-derivation on P. This gives a derivation D:P to I with D(g)=-beta(g) for g in K. Mathlib liftOfDerivationToSquareZero gives betaPrime = D + beta, an R-algebra map since I^2=0. Its quotient reduction is unchanged and betaPrime(g)=0 for g in K.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two such lifts betaOne and betaTwo, let P act on A through betaTwo. Mathlib derivationToSquareZeroOfLift gives the difference derivation D:P to I. Since I^2=0, Module.IsTorsionBySet.module equips I with an A/I action and hence an S action through a; the common reduction equation verifies compatibility with the P action. Extend D.liftKaehlerDifferential to an S-linear map F:S tensor_P Omega_{P/R} to I. It takes 1 tensor dg to D(g). For every w choose g in K with t(g)=w. Both lifts vanish on g, so D(g)=0 and F(w)=0. Therefore D(x)=F(1 tensor dx)=0 for all x, and the lifts are equal.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 04EB, polynomial correction proof, with the explicit quotient-linear-map and square-zero derivation implementations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\"",
+   "results": "Candidates: Algebra.Extension.cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Extension.exact_hCotangentι_cotangentComplex, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.Cotangent.mk_C_mem_ker_cotangentComplex, Algebra.Extension.CotangentSpace.map_cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange_tmul. Used the relevant cotangent and square-zero derivation APIs in the proof; no theorem states the full correction result.",
+   "date": "2026-10-13",
+   "verdict": "no full match"
+  },
+  {
+   "tool": "grep",
+   "query": "conormalComplement|cotangentComplex|kerToTensor|addDerivation",
+   "results": "Candidates: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean. Used the relevant cotangent and square-zero derivation APIs in the proof; no theorem states the full correction result.",
+   "date": "2026-10-13",
+   "verdict": "no full match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Correct a lift of a polynomial algebra through a square zero ideal by a derivation to annihilate a conormal complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial algebra lifts into a square zero extension can be uniquely corrected to vanish on an ideal when its conormal differential is bijective modulo the square of the presentation kernel",
+   "results": "Candidates: Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.iff_split_injection, derivationToSquareZeroEquivLift, Algebra.Extension.formallySmooth_iff_split_injection, KaehlerDifferential.endEquivAuxEquiv, Algebra.Extension.infinitesimal, derivationToSquareZeroOfLift, Algebra.FormallyUnramified.lift_unique. Used the relevant cotangent and square-zero derivation APIs in the proof; no theorem states the full correction result.",
+   "date": "2026-10-13",
+   "verdict": "no full match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.UniversalFirstOrderThickeningCore",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); algebraic auxiliary argument: steps 1-6 of lem-weil-pbc-ring-universal-first-order-thickening (Stacks 04EB construction and lifting); steps 5 and 6 of lem-weil-pbc-ring-universal-first-order-thickening-core: correction and uniqueness of polynomial lifts",
+   "via": [
+    "lem-weil-pbc-ring-universal-first-order-thickening-core",
+    "lem-weil-pbc-ring-universal-first-order-thickening",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ConormalComplementPolynomialLift",
+  "file": "lean/Sheaf/RingTheory/ConormalComplementPolynomialLift.lean",
+  "declaration": "Algebra.conormalComplement_polynomial_lift",
+  "statement": "theorem conormalComplement_polynomial_lift\n    (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]\n    {ι : Type u} (G : Generators R S ι) (K : Ideal G.Ring)\n    (hK : K ≤ G.toExtension.ker)\n    (hsurj : ∀ w : G.toExtension.CotangentSpace,\n      ∃ x : G.toExtension.ker, x.val ∈ K ∧\n        G.toExtension.cotangentComplex (Extension.Cotangent.mk x) = w)\n    (hinj : ∀ x : G.toExtension.ker, x.val ∈ K →\n      G.toExtension.cotangentComplex (Extension.Cotangent.mk x) = 0 →\n        x.val ∈ G.toExtension.ker ^ 2)\n    (A : Type u) [CommRing A] [Algebra R A] (I : Ideal A) (hI : I ^ 2 = ⊥)\n    (a : S →ₐ[R] A ⧸ I) :\n    ∃! β : G.Ring →ₐ[R] A,\n      (Ideal.Quotient.mkₐ R I).comp β = a.comp (IsScalarTower.toAlgHom R G.Ring S) ∧\n        ∀ x : G.Ring, x ∈ K → β x = 0",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T015545-L-3017183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T015545-L-3017183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
