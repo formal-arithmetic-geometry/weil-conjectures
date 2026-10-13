@@ -15,10 +15,32 @@
  ],
  "proof": [
   {
-   "text": "the normalization equation of exists_schemeDerivedAdjunction identifies its Hom equivalence on localized representatives with the termwise tensor-pullback adjunction, the selected left-derived counit and the right-derived unit. The termwise adjunction commutes with shifts. On K-injective representatives the right-derived unit commutes with the shift structure transported from the K-injective equivalence. Combine this with the assumed shift equation for the selected left-derived counit to obtain the shifted Hom-equivalence equation. K-flat and K-injective resolutions represent every object, so naturality extends this equation to arbitrary derived objects. Apply it to identity morphisms to obtain the shift equations for the derived unit and counit, precisely the two fields of Adjunction.CommShift. This concerns one morphism, independently of any base-change square or pullback composition comparison.",
+   "text": "Prove canonicalRightDerivedUnitShift: the inverse of rightDerivedFunctorIsoKInjectives is the right-derived unit on the representative followed by the image of the K-injective equivalence counit. Express the restriction of the right-derived unit using this inverse and the equivalence unit. All factors commute with the recorded shifts. Every complex has a K-injective resolution, so NatTrans.CommShift.of_whiskerLeft extends compatibility to the whole homotopy category.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Hold the recorded right-derived shift structure fixed and give derivedPullback the leftAdjointCommShift structure induced by pinnedDerivedAdjunction. Mathlib commShift_of_rightAdjoint makes this adjunction shift compatible. The termwise homotopy adjunction is shift compatible by commShift_mapHomotopyCategory_unit and Adjunction.CommShift.mk'.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalizedCounitShift to the Hom-equivalence equation supplied by Classical.choose_spec exists_schemeDerivedAdjunction. Evaluating at the identity identifies pinnedPullbackCounit with the inverse mate of the canonical right-derived unit. The inverse-mate formula uses only shift-compatible units, counits and whiskerings, hence pinnedPullbackCounit commutes with the adjunction-induced left shifts.",
    "uses": [
     "def-pc-derived-base-change-map",
     "lem-pc-pinned-pullback-counit-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rightKanShiftUnique to the specified left-derived counit, which is a right Kan extension counit. Postcomposition with any integer shift preserves its universal property because shift is an equivalence. The two shift comparisons have the same composite with the shifted counit by their NatTrans.CommShift equations; Kan hom_ext identifies them. Thus the supplied s f equals the induced left shift structure. Transport commShift_of_rightAdjoint across this equality to obtain the claimed compatibility with the original s f and the recorded right-derived shifts.",
+   "uses": [
+    "lem-pc-pinned-pullback-counit-shifts",
+    "def-pc-derived-base-change-map"
    ],
    "elementary": false
   }
@@ -30,7 +52,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Constituent shift verification in the canonical mate construction."
+  "place": "Canonical derived adjunction normalization; K-injective transport, the inverse-mate formula and uniqueness of counit-compatible shifts under the left-derived universal property. Lean proof by Q3."
  },
  "mathlib_searches": [
   {
@@ -103,10 +125,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T145727-L-751682",
-  "kind": "interface",
+  "landing": "20261013T153501-L-1085565",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
