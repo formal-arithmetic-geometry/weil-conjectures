@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-positive-contraction",
+ "kind": "statement",
+ "title": "Positive-degree local alternating Čech contraction",
+ "statement": "Let X be a scheme, U a finite family of opens indexed by Fin r, G an O_X-module, and i in Fin r. Let C be the integer extension of the alternating Čech sheaf complex for U and G, restricted to U i. There exist morphisms h_k:C^{k+1}→C^k for all integer k such that d_k h_k + h_{k-1} d_{k-1}=id on C^k for every k>0, with the canonical equal-index transport in the second composite. No equation at degree zero is required.",
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU (cohomology-lemma-covering-resolution), with the increasing-tuple convention of Tag 01FM"
+ },
+ "proof": [
+  {
+   "text": "On a test open V contained in U i, for a tuple t not containing i,\ninsert i in its unique increasing position b. Project to that coordinate and\nmultiply by (-1)^b. The resulting intersection equals the old intersection\nsince V is contained in U i. For tuples containing i use zero. These linear maps\ncommute with restrictions. For a positive-degree tuple not containing i, deleting\nthe inserted i contributes the identity. Every other deletion in d h is paired\nwith insertion after deletion in h d; the two restrictions agree and their signs\nare opposite. For tuples containing i, only deletion of i contributes, with\nproduct of signs one. Sheafify these natural maps on the restricted site,\nusing the local sheafification identification with the restriction of the\nsheafified complex; additivity preserves the equation. Transport through\nextendXIso to integer degrees and put the maps equal to zero in negative degrees.\nFor empty test opens all modules vanish; r=0 has no i; degrees above the tuple\nlength have zero terms. This claim imposes no equation at degree zero.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU; local increasing-tuple adaptation by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*exact|cech.*homotopy|homotopy.*cech",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented alternating Cech complex restricted to one member of its cover is exact in degree zero and has a positive degree contracting homotopy",
+   "results": "8 hits: AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, ChainComplex.alternatingConst_exactAt, SimplicialObject.Splitting.nondegComplex, AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap, AlgebraicTopology.DoldKan.comp_P_eq_self_iff, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, AlgebraicTopology.DoldKan.QInfty_f_comp_PInfty_f, AlgebraicTopology.DoldKan.QInfty_comp_PInfty_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.KernelFork.IsLimit",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.KernelFork.IsLimit'",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.KernelFork.IsLimit.lift",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.KernelFork.IsLimit.lift'",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness at degree zero of the augmented Cech complex on an open contained in one member of the cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KernelFork\"",
+   "results": "12 generic kernel fork results including KernelFork.IsLimit.ofι'; no local Čech match",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafSingletonContraction",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local insertion contraction: nonnegative signed face cancellation before adjustment to an arbitrary retraction; Positive-degree local alternating Čech contraction",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-singleton-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafPositiveContraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafPositiveContraction.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheaf_restrict_positive_contraction",
+  "statement": "theorem alternatingCechSheaf_restrict_positive_contraction\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :\n    let F := Scheme.Modules.restrictFunctor (U i).ι\n    let C := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat)\n    ∃ h : ∀ k : ℤ, C.X (k + 1) ⟶ C.X k,\n      ∀ k : ℤ, 0 < k → C.d k (k + 1) ≫ h k +\n        (C.XIsoOfEq (show k = k - 1 + 1 by omega)).hom ≫\n          h (k - 1) ≫ C.d (k - 1) k = 𝟙 (C.X k)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T124308-L-3775348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T124308-L-3775348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
