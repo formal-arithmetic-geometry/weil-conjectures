@@ -32,64 +32,70 @@
  ],
  "proof": [
   {
-   "text": "Apply the stalk comparison [lem-pc-tor-independent-perfect-pullback-comparison] to P. The Tor-independence hypothesis gives, at every x' over x, the required stalkwise isomorphism for the canonical identity map Lg_X^*P\\to Lg_X^*P, so this map satisfies the stalkwise base-change condition of the single-complex criterion.",
+   "text": "Apply torIndependent_perfect_pullback_comparison to P. For any coordinates of the identity on its derived pullback, the represents equation shows Q(t) is invertible, hence t is a quasi-isomorphism. Exactness of module stalks makes the homology maps of its stalks invertible. The two tensor-to-stalk ring maps agree by their common restrictions to both tensor factors (tensorToStalk_unique). Thus the two cohomology models agree. Cancel the target-coordinate isomorphism in IsComparisonIso and compose with tensorStalkIso and the stalk of t. This proves the single-complex stalk condition for the identity.",
    "uses": [
-    "lem-pc-tor-independent-perfect-pullback-comparison"
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, lemma-compare-base-change proof: local affine reduction and Tor-independent comparison of derived tensors"
+    "place": "Tag 08IB and equation-bc before Tag 0DJ8; invariance under representative coordinates"
    }
   },
   {
-   "text": "Use tensor inheritance [lem-pc-rf-single-complex-inherited-tensor-condition] with K=P, K'=Lg_X^*P and the identity map Lg_X^*P\\to Lg_X^*P, and E=K (the given quasi-coherent derived object). It gives the stalkwise condition for the induced map Lg_X^*(K\\otimes^L P)\\to Lg_X^*K\\otimes^L Lg_X^*P.",
+   "text": "PerfectImpliesQCoh gives quasi-coherence of P, and derivedPullback_tensor_preserve_QCoh gives quasi-coherence of both pulled-back factors. Apply singleComplexInheritedTensorCondition to P, its pulled-back object, and the identity, with E=K. Use the monoidal pullback structure whose existence that theorem supplies. Its inverse tensorator, followed by tensoring with the identity, is an isomorphism and satisfies the inherited stalk condition for K tensor P.",
    "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-derived-pullback-tensor-qcoh",
     "lem-pc-rf-single-complex-inherited-tensor-condition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJA, part (1), tensor inheritance of the single-complex base-change condition"
+    "place": "Tags 08E5, 08DW and 0DJA(1)"
    }
   },
   {
-   "text": "Apply the qcqs single-complex base-change theorem [lem-pc-rf-single-complex-qcqs-induction] to the map from Step 2. Its objects lie in the quasi-coherent derived categories, as that theorem requires: P is perfect, hence has quasi-coherent cohomology (Stacks Tag 08DB), so P and K\\otimes^L P lie in D_{\\mathrm{QCoh}}(X), and Lg_X^*P and Lg_X^*K\\otimes^L Lg_X^*P lie in D_{\\mathrm{QCoh}}(X') [lem-pc-derived-pullback-tensor-qcoh]. Since f is quasi-compact and quasi-separated, it yields an isomorphism Lg^*Rf_*(K\\otimes^L P)\\to Rf'_*\\bigl(Lg_X^*K\\otimes^L Lg_X^*P\\bigr).",
+   "text": "Apply canonical_derivedTensor_preserve_QCoh to K,P and to their two pullbacks. Apply singleComplexBaseChangeQcqsInduction to the inherited comparison; quasi-compactness and quasi-separatedness are exactly its hypotheses. It makes the base-change map followed by Rf prime of the tensor comparison invertible. Since that comparison is an isomorphism, cancel its direct image to obtain invertibility of the canonical base-change map at K tensor P.",
    "uses": [
-    "lem-pc-rf-single-complex-qcqs-induction",
-    "lem-pc-derived-pullback-tensor-qcoh"
+    "lem-pc-canonical-derived-tensor-qcoh",
+    "lem-pc-rf-single-complex-qcqs-induction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, lemma-single-complex-base-change"
+    "place": "Tags 08DX and 0DJ9"
    }
   },
   {
-   "text": "The derived-pullback tensor-product comparison [lem-pc-derived-pullback-tensor-product] identifies Lg_X^*(K\\otimes^L P) with Lg_X^*K\\otimes^L Lg_X^*P. Transporting the isomorphism of Step 3 across this canonical identification and the symmetry of derived tensor gives exactly the displayed base-change morphism.",
+   "text": "Use the canonical derived braiding isomorphism P tensor K -> K tensor P (DerivedMonoidal.braiding for the recorded K-flat derived tensor). Prove naturality of schemeDerivedBaseChangeMap in its input by constructing the natural transformation before transposition from the composition comparisons and the adjunction counit, then apply homEquiv_naturality_left_square. Naturality identifies the base-change map at P tensor K, followed by the image of the braiding, with the image of the braiding followed by the invertible base-change map at K tensor P. Cancel the image of the braiding. This gives exactly the displayed morphism; a separate derivedPullback_tensorProduct invocation is unnecessary.",
    "uses": [
-    "lem-pc-derived-pullback-tensor-product",
     "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079U, lemma-pullback-tensor-product"
+    "place": "Tags 06YH, 079U and 08HY; naturality of the canonical derived base-change map"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-tor-independent-perfect-pullback-comparison",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-derived-pullback-tensor-qcoh",
   "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "lem-pc-canonical-derived-tensor-qcoh",
   "lem-pc-rf-single-complex-qcqs-induction",
-  "lem-pc-derived-pullback-tensor-product",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-derived-pullback-tensor-qcoh"
+  "def-pc-scheme-derived-tensor-structure"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof, case (1), via Tags 0DJA and 0DJ9"
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 08IB, 0DJA(1), 0DJ9, 08DX and 08HY; original four-step plan with explicit coordinate conversion and cancellation"
  },
  "mathlib_searches": [
   {
@@ -267,5 +273,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T045621-L-141619",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

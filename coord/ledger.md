@@ -11202,3 +11202,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/X3/Sheaf.Paper.BalancedActionDirectImageModule (stage 3; reviewer PASS; first push; landing 20261013T045620-L-141237 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:56 L: merged deliver/X3/Sheaf.Paper.CechRefinementCochainMap (stage 3; reviewer PASS; first push; landing 20261013T045620-L-141376 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound (stage 3; reviewer PASS; first push; landing 20261013T045621-L-141473 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:56 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange (stage 3; reviewer PASS; first push; landing 20261013T045621-L-141619 (proof); batch 20261013T045507; modules 1; new nodes 0)
