@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.CechCupResolutionComparisonData
 public import Mathlib.Topology.Sheaves.Flasque
+import Sheaf.Paper.CechFlasqueComparisonCore
+import Sheaf.Paper.CechFlasqueComparisonClasses
 
 /-! # Canonical Cech comparison for a flasque computing resolution
 
@@ -44,7 +46,21 @@ theorem cupCechFlasqueResolutionComparison {X : Scheme.{v}} {ι : Type v}
     (D : CupAcyclicResolution F)
     (hD : ∀ n : ℕ, TopCat.Sheaf.IsFlasque
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (D.K.X n))) :
-    Nonempty (CupCechResolutionComparison U D) := by sorry
+    Nonempty (CupCechResolutionComparison U D) := by
+  obtain ⟨alpha, beta, halpha, hbeta, hq⟩ :=
+    cechFlasqueComparisonCore U hU D hD
+  let : QuasiIso alpha := hq
+  obtain ⟨iso, halpha_class, hbeta_class⟩ :=
+    cechFlasqueComparisonClasses U D alpha beta halpha hbeta
+  exact ⟨{
+    alpha := alpha
+    beta := beta
+    alpha_f := halpha
+    beta_f := hbeta
+    alpha_quasiIso := inferInstance
+    iso := iso
+    alpha_class := halpha_class
+    beta_class := hbeta_class }⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

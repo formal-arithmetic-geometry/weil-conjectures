@@ -13833,3 +13833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/G4/Sheaf.AlgebraicGeometry.AffineModelHomTransportAssembly (stage 3; reviewer PASS; first push; landing 20261013T231534-L-1816971 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/H3/Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturality (stage 3; reviewer PASS; first push; landing 20261013T231535-L-1817170 (interface); batch 20261013T231527; modules 3; new nodes 2)
 - 23:15 L: merged deliver/H3/Sheaf.CategoryTheory.CompactDerivedSourceCore (stage 3; reviewer PASS; first push; landing 20261013T231535-L-1817276 (interface); batch 20261013T231527; modules 2; new nodes 1)
+- 23:15 L: merged deliver/H4/Sheaf.Paper.CechFlasqueResolutionComparison (stage 3; reviewer PASS; first push; landing 20261013T231535-L-1817473 (interface); batch 20261013T231527; modules 3; new nodes 2)

@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-cech-flasque-resolution-comparison-core",
+ "kind": "statement",
+ "title": "Core Cech maps for a flasque resolution",
+ "statement": "There exist canonical Cech comparison maps with the displayed component formulas.\n\ntheorem cechFlasqueComparisonCore {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) {F : X.Modules}\n    (D : CupAcyclicResolution F)\n    (hD : ∀ n : ℕ, TopCat.Sheaf.IsFlasque\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (D.K.X n))) :\n    ∃ alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ),\n      ∃ beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n        (cupCechDouble U D.K).total (ComplexShape.up ℕ),\n      (∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n        (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp)) ∧\n      (∀ n : ℕ, beta.f n =\n        ((cechComplexFunctor U).map\n          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.augmentation.f 0).val)).f n ≫\n        (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) ∧\n      QuasiIso alpha",
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data",
+  "def-sc-cech-cup-resolution-comparison-data",
+  "def-sc-module-cech-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Canonical comparison construction"
+ },
+ "proof": [
+  {
+   "text": "The construction and homological comparison are supplied as an intermediate theorem for subsequent workers.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Canonical comparison construction",
+  "group": "H4",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex quasi-isomorphism flasque sheaf resolution",
+   "results": "No exact theorem for this construction.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso HomologicalComplex Cech flasque",
+   "results": "No exact theorem for this construction.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque.*cech|cech.*flasque",
+   "results": "Repository search finds only lower-level flasque Cech exactness declarations; no theorem with this statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech flasque resolution quasi-isomorphism",
+   "results": "No exact result returned.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechFlasqueResolutionComparison",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-flasque-resolution-comparison",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechFlasqueComparisonCore",
+  "file": "lean/Sheaf/Paper/CechFlasqueComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechFlasqueComparisonCore",
+  "statement": "theorem cechFlasqueComparisonCore {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) {F : X.Modules}\n    (D : CupAcyclicResolution F)\n    (hD : ∀ n : ℕ, TopCat.Sheaf.IsFlasque\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (D.K.X n))) :\n    ∃ alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ),\n      ∃ beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n        (cupCechDouble U D.K).total (ComplexShape.up ℕ),\n      (∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n        (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp)) ∧\n      (∀ n : ℕ, beta.f n =\n        ((cechComplexFunctor U).map\n          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.augmentation.f 0).val)).f n ≫\n        (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) ∧\n      QuasiIso alpha",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T231535-L-1817473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T231535-L-1817473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
