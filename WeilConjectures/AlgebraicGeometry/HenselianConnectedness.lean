@@ -129,4 +129,33 @@ theorem Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter {A : Type u}
   exact ⟨{}, (PrimeSpectrum.isClosed_zeroLocus _).preimage p.continuous,
     fun C hC hC' ↦ p.isConnected_inter_preimage_zeroLocus I hC hC'⟩
 
+/-- **An open containing the closed fibre of a proper scheme over a complete base is
+everything.** Let `A` be `I`-adically complete, `f : Y ⟶ Spec A` and `g : X ⟶ Y` with
+`g ≫ f` proper. An open `W ⊆ X` containing the preimage under `g` of the image of the closed
+fibre `Y ×_A A/I ⟶ Y` is all of `X`: otherwise its closed complement would contain a point
+over a maximal ideal, which contains `I ⊆ jac(A)`.
+(blueprint: `lem-weil-pbc-etale-infinitesimal-restrictions-proper-open`) -/
+@[stacks 0GS2]
+theorem Scheme.Hom.eq_top_of_preimage_range_subset_of_isAdicComplete {A : Type u} [CommRing A]
+    (I : Ideal A) [IsAdicComplete I A] {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)
+    [IsProper (g ≫ f)] (W : X.Opens)
+    (hW : g ⁻¹' Set.range
+      (Limits.pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) ⊆ W) :
+    W = ⊤ := by
+  by_contra hne
+  have hne' : ((W : Set X)ᶜ).Nonempty := by
+    rw [Set.nonempty_compl]
+    exact fun h' ↦ hne (SetLike.coe_injective (h'.trans TopologicalSpace.Opens.coe_top.symm))
+  obtain ⟨x, hxW, hx⟩ := (g ≫ f).nonempty_inter_preimage_zeroLocus I
+    (IsAdicComplete.le_jacobson_bot I) W.isOpen.isClosed_compl hne'
+  refine hxW (hW ?_)
+  have hq : Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) =
+      PrimeSpectrum.zeroLocus (I : Set A) := by
+    have := range_comap_of_surjective (A ⧸ I) (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+    rw [Ideal.mk_ker] at this
+    exact this
+  change g x ∈ Set.range (Limits.pullback.fst f _)
+  rw [Scheme.Pullback.range_fst, hq]
+  exact hx
+
 end AlgebraicGeometry
