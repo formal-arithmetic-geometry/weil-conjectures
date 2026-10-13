@@ -4,6 +4,9 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.RingTheory.FiniteStability
+import Sheaf.RingTheory.FlatFinitePresentationModel
+import Sheaf.RingTheory.FinitePresentationModelStage
 
 /-! # Flatness at a stage of a directed colimit -/
 
@@ -14,6 +17,18 @@ open CategoryTheory CategoryTheory.Limits
 universe v w x
 
 namespace RingHom
+
+private theorem finitePresentation_lTensor
+    {R A B D : Type*} [CommRing R] [CommRing A] [CommRing B] [CommRing D]
+    [Algebra R A] [Algebra R B] [Algebra R D]
+    (f : B →ₐ[R] D) (hf : f.toRingHom.FinitePresentation) :
+    (Algebra.TensorProduct.lTensor (S := A) A f).toRingHom.FinitePresentation := by
+  algebraize [f.toRingHom, (Algebra.TensorProduct.lTensor (S := A) A f).toRingHom]
+  let : Algebra B (TensorProduct R A B) := Algebra.TensorProduct.rightAlgebra
+  let e : TensorProduct R A D ≃ₐ[TensorProduct R A B] TensorProduct B (TensorProduct R A B) D :=
+    { __ := (Algebra.IsPushout.cancelBaseChangeAlg _ _ _ _ _).symm,
+      commutes' x := congr($(Algebra.IsPushout.cancelBaseChange_symm_comp_lTensor R B D A) x) }
+  exact Algebra.FinitePresentation.equiv e.symm
 
 /-- Existence of a flat stage (blueprint: lem-weil-pbc-colimit-flat-ring-map-stage).
 
@@ -77,7 +92,30 @@ theorem exists_flat_stage_of_colimit_flat
         (A := ((F.obj i₁ : CommRingCat) : Type v)) (B := B₀)
         (C := ((F.obj i₁ : CommRingCat) : Type v)) (D := C₀)
         (Algebra.ofId (F.obj i₁) (F.obj i₁)) φ₀).toRingHom.Flat := by
-  sorry
+  let R := (F.obj i₀ : Type v)
+  let A := ((colimit F : CommRingCat) : Type v)
+  let : Algebra R A := (colimit.ι F i₀).hom.toAlgebra
+  let ψ : (TensorProduct R A B₀) →ₐ[A] (TensorProduct R A C₀) :=
+    Algebra.TensorProduct.map (Algebra.ofId A A) φ₀
+  have hψfp : ψ.toRingHom.FinitePresentation := finitePresentation_lTensor φ₀ hfp
+  obtain ⟨P, Q, cP, cQ, aPQ, aPB, hP, hQ, hPQ, e, he⟩ :=
+    exists_flat_finitePresentation_model ψ.toRingHom hψfp hflat
+  let : CommRing P := cP
+  let : CommRing Q := cQ
+  let : Algebra P Q := aPQ
+  let : Algebra.FinitePresentation ℤ P := hP
+  let : Algebra.FinitePresentation P Q := hQ
+  obtain ⟨i, hi, aPi, ei, hei⟩ :=
+    exists_finitePresentation_model_stage F i₀ B₀ C₀ φ₀ hfp P Q aPB e he
+  refine ⟨i, hi, ?_⟩
+  let : Algebra R (F.obj i) := (F.map (homOfLE hi)).hom.toAlgebra
+  let : Algebra P (TensorProduct R (F.obj i) B₀) := aPi
+  have : Module.Flat P Q := (RingHom.flat_algebraMap_iff).mp hPQ
+  have hbase : (algebraMap (TensorProduct R (F.obj i) B₀)
+      (TensorProduct P (TensorProduct R (F.obj i) B₀) Q)).Flat :=
+    (RingHom.flat_algebraMap_iff).mpr inferInstance
+  rw [← hei]
+  exact hbase.comp (Flat.of_bijective ei.bijective)
 
 /-- Intermediate persistence statement
 (blueprint: lem-weil-pbc-colimit-flat-ring-map-persistence).

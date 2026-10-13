@@ -1,0 +1,214 @@
+{
+ "id": "lem-weil-pbc-flat-finite-presentation-model",
+ "kind": "statement",
+ "title": "A flat finite presentation has a flat finitely presented integer model",
+ "statement": "Let R and S be commutative rings and f : R → S a finitely presented ring map [def-weil-pbc-finitely-presented-algebra] which is flat [def-weil-pbc-flat-ring-map]. There exist commutative rings P and Q, a P-algebra structure on Q and a P-algebra structure on R, such that P is finitely presented over Z, Q is finitely presented over P, P → Q is flat, and there is a ring isomorphism e : R ⊗_P Q ≅ S with e composed with the canonical map R → R ⊗_P Q equal to f. The universes of P and Q may be taken to be the maximum of those of R and S.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), with M=S"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-presentation approximation to write f : R → S as the directed colimit of Pλ → Qλ, with pushout transition and limit squares. Each Pλ is finite type over Z; Qλ is finite type over Pλ. Since Z is Noetherian, both rings are Noetherian and these algebras are finitely presented. If the universes differ, lift the presentations to their common maximum universe; this changes neither their algebraic properties nor their underlying ring maps.",
+   "uses": [
+    "lem-weil-pbc-limit-finite-presentation",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each λ define Uλ to be the primes q of Qλ where (Qλ)_q is flat over Pλ. Openness follows from the flat-locus theorem applied to the module Qλ, finitely presented over itself. For λ ≤ μ, the localization of Qμ at the image of Qλ minus q is the base change of (Qλ)_q along Pλ → Pμ. It is flat over Pμ by base change; localizing further at any prime above q preserves flatness. Thus the inverse image of Uλ is contained in Uμ.",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-limit-finite-presentation",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-flat-module-base-change",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), second paragraph ('By Theorem 00RC we get an open subset $U_\\lambda$'); the persistence 'for all $\\lambda\\ge\\lambda_{\\mathfrak q}$', asserted there, is the claim"
+   }
+  },
+  {
+   "text": "Fix q in Spec S and let p=f inverse(q). Contract these primes to Pλ and Qλ. Their localizations have colimits R_p and S_q and local transition maps. They are Noetherian local rings. Use Nλ=(Qλ)_{qλ}, a cyclic module over its top local ring. Ring transitions are localizations of the base-changed local rings, by the approximation pushout property and localization-tensor compatibility; module transitions are base change of the cyclic top module. Flatness of f implies S_q is flat over R_p. The Noetherian local eventual-flatness result yields some Nλ flat over (Pλ)_{pλ}. Flatness over a localization implies flatness over Pλ, so q lies over Uλ. Persistence then gives membership at every later index.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-limit-finite-presentation",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), first paragraph, which refers to the proof of Theorem Tag 00RC (theorem-openness-flatness, line 33407), Lemma Tag 00QX (lemma-limit-module-essentially-finite-presentation, line 32427) and Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723)"
+   }
+  },
+  {
+   "text": "Pull Uλ back to an open subset Vλ of Spec S. These opens are increasing and cover Spec S by the preceding steps. Quasi-compactness gives a finite subcover. Nonemptiness and directedness give a common upper index λ₀ whose Vλ₀ is all of Spec S, also when Spec S is empty.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), second paragraph ('Since Spec(S) is quasi-compact ...')"
+   }
+  },
+  {
+   "text": "Write Spec Qλ₀ minus Uλ₀ as V(J). Since its pullback is empty, the image of J generates the unit ideal of S. Express 1 as a finite sum of images of elements of J multiplied by coefficients in S. Represent the coefficients at a common later stage and descend the relation minus 1, which is zero in the colimit, to zero at a further stage. No prime at this stage can contain all these images of J. Every prime therefore contracts into Uλ₀ and lies in its own stage flat locus by persistence.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), third paragraph"
+   }
+  },
+  {
+   "text": "At the stage obtained above all localizations of Q at primes are flat over P. They are modules over the corresponding localizations of P, so the flatness-localization equivalence and the local criterion make P → Q flat. The approximation supplies an isomorphism R ⊗_P Q ≅ S compatible with f. The finite presentations of P over Z and Q over P were established in the first step.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-flat-map-local-criterion",
+    "lem-weil-pbc-limit-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), end ('This proves (1)'), with $M=S$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-limit-finite-presentation",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "place": "Stacks Project, Algebra, Tag 02JO; split of the existing stage-existence proof into a flat model and descent of its comparison isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat finitely presented ring homomorphism is the base change of a flat homomorphism between finitely presented integer algebras",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat finitely presented algebra over a directed colimit descends to a flat algebra at some stage",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit gives factorization only. RingHom.flat_algebraMap_iff, Module.Flat.of_flat_tensorProduct and smoothness flatness results do not provide a finite integer model.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*finite.*model|flat.*[Cc]olimit|[Cc]olimit.*flat|exists_comp_map_eq_of_isColimit",
+   "results": "Mathlib has the finite-presentation factorization and eventual equality lemmas in Algebra/Category/Ring/FinitePresentation.lean; matches for coflat functors are unrelated. Source-library flat approximation results concern a specified fibre, not a globally flat integer model. No exact match in Sheaf; NoetherianFlatClosedFiberModel is a local module comparison, LimitFinitePresentation does not give flat models.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a flat algebra of finite presentation has a flat model over a finitely generated subring of the base",
+   "results": "Independent second reading: Smooth.exists_finiteType requires smoothness, strictly stronger than flat finite presentation. Other hits give smoothness implies flatness and finite-presentation scalar restriction, not this model. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitFlatRingMap",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-flat-ring-map",
+   "place": "Stage-existence proof, steps 2–7 (flat Noetherian model)",
+   "via": [
+    "lem-weil-pbc-colimit-flat-ring-map-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FlatFinitePresentationModel",
+  "file": "lean/Sheaf/RingTheory/FlatFinitePresentationModel.lean",
+  "declaration": "RingHom.exists_flat_finitePresentation_model",
+  "statement": "theorem exists_flat_finitePresentation_model {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) (hfp : f.FinitePresentation) (hflat : f.Flat) : ∃ (P Q : Type (max u v)) (_ : CommRing P) (_ : CommRing Q) (_ : Algebra P Q) (_ : Algebra P R), Algebra.FinitePresentation ℤ P ∧ Algebra.FinitePresentation P Q ∧ (algebraMap P Q).Flat ∧ ∃ e : R ⊗[P] Q ≃+* S, e.toRingHom.comp (Algebra.TensorProduct.includeLeftRingHom) = f",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T024042-L-3336929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T024042-L-3336929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

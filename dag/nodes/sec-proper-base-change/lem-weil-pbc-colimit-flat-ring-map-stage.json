@@ -22,175 +22,41 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the systems $B_i$, $C_i$).* Work over the directed set $I'=\\{i\\in I:i\\ge0\\}$ and write $\\beta_i:B_i\\to B$, $\\gamma_i:C_i\\to C$ for the maps $\\alpha_i\\otimes\\mathrm{id}$ ($\\alpha_i:A_i\\to A$ the coprojections) and $\\beta_{ji},\\gamma_{ji}$ ($i\\le j$) for the transition maps; they are ring maps and $\\varphi\\circ\\beta_i=\\gamma_i\\circ\\varphi_i$, $\\varphi_j\\circ\\beta_{ji}=\\gamma_{ji}\\circ\\varphi_i$. By [lem-weil-pbc-directed-colimit-base-change-elementwise] (with $M_0=B_0$, resp. $C_0$) every element of $B$ is some $\\beta_i(t)$, and $\\beta_i(t)=0$ implies $\\beta_{ji}(t)=0$ for some $j\\ge i$; likewise for $C$. By [lem-weil-pbc-filtered-colimit-modules-criterion] ($I'$ as a filtered category, $\\mathbf Z$-modules) $B$ is the colimit of the abelian groups $B_i$; for a cocone of ring maps $g_i:B_i\\to T$ the induced additive $g:B\\to T$ is multiplicative and unital, because any two elements of $B$ come from one $B_i$ ($I'$ directed) where $g_i$ is a ring map. So $(B,(\\beta_i))$ is the colimit of the rings $B_i$ [def-weil-pbc-category-colimit], and $(C,(\\gamma_i))$ that of the $C_i$. Since $C_0$ is a $B_0$-algebra via $\\varphi_0$, associativity of $\\otimes$ gives isomorphisms of $B$-, resp. $B_i$-algebras $C=A\\otimes_{A_0}C_0\\cong B\\otimes_{B_0}C_0$ and $C_i\\cong B_i\\otimes_{B_0}C_0$, under which $\\varphi$, $\\varphi_i$ become $b\\mapsto b\\otimes1$; hence $\\varphi$ and every $\\varphi_i$ are of finite presentation by [lem-weil-pbc-finite-presentation-base-change-composition] (1) [def-weil-pbc-finitely-presented-algebra], and for $i\\le j$ (also with $B,C$ in place of $B_j,C_j$) $B_j\\otimes_{B_i}C_i\\cong B_j\\otimes_{B_0}C_0\\cong C_j$, $b\\otimes c\\mapsto\\varphi_j(b)\\gamma_{ji}(c)$, an isomorphism of $B_j$-algebras.",
+   "text": "Use tensor cancellation to identify the base-changed ring map with a base change of φ₀. Algebra.FinitePresentation.baseChange and Algebra.FinitePresentation.equiv give finite presentation of this map (the proved private helper finitePresentation_lTensor).",
    "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "def-weil-pbc-finitely-presented-algebra"
+    "lem-weil-pbc-finite-presentation-base-change-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), hypotheses (a)-(c) of part (3) for the system $(B_i\\to C_i,C_i)$"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (Noetherian approximation of $\\varphi$).* Apply [lem-weil-pbc-limit-finite-presentation] to $\\varphi:B\\to C$ (finitely presented by step 1): a nonempty directed set $\\Lambda$, ring maps $\\rho_\\lambda:P_\\lambda\\to Q_\\lambda$ (its $R_\\lambda\\to S_\\lambda$), coprojections $\\pi_\\lambda:P_\\lambda\\to B$, $\\kappa_\\lambda:Q_\\lambda\\to C$ with $\\varphi\\pi_\\lambda=\\kappa_\\lambda\\rho_\\lambda$, satisfying its (1)-(5). $\\mathbf Z$ is Noetherian (every ideal is principal) [def-weil-pbc-noetherian-ring]; so each $P_\\lambda$, a finite type $\\mathbf Z$-algebra [def-weil-pbc-finite-type-algebra], is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] and of finite presentation over $\\mathbf Z$ by [lem-weil-pbc-finite-type-noetherian-finite-presentation]; each $Q_\\lambda$ is of finite type over the Noetherian ring $P_\\lambda$, hence Noetherian and of finite presentation over $P_\\lambda$ by the same two nodes. (Stacks uses the system of Lemma 00R1 for $(R\\to S,M)$; here $M=S=C$ and the system of 00R0 with $M_\\lambda=Q_\\lambda$ serves.)",
+   "text": "Apply [lem-weil-pbc-flat-finite-presentation-model] to the flat finitely presented limit map to obtain P,Q and the compatible isomorphism. Apply [lem-weil-pbc-finite-presentation-model-stage] to descend its comparison isomorphism to some i ≥ i₀. The latter result uses no flatness assumption.",
    "uses": [
-    "lem-weil-pbc-limit-finite-presentation",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+    "lem-weil-pbc-flat-finite-presentation-model",
+    "lem-weil-pbc-finite-presentation-model-stage"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), first sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (the flat loci $U_\\lambda$; persistence).* For $\\lambda\\in\\Lambda$ let $U_\\lambda=\\{\\mathfrak q'\\in\\operatorname{Spec}Q_\\lambda:(Q_\\lambda)_{\\mathfrak q'}\\text{ is a flat }P_\\lambda\\text{-module}\\}$; it is open by [lem-weil-pbc-openness-of-flatness] ($P_\\lambda\\to Q_\\lambda$ of finite presentation by step 2, $M=Q_\\lambda=\\operatorname{coker}(0\\to Q_\\lambda)$). Claim: for $\\lambda\\le\\mu$ and $\\mathfrak q'\\in\\operatorname{Spec}Q_\\mu$ whose inverse image $\\mathfrak q''$ in $Q_\\lambda$ lies in $U_\\lambda$, $\\mathfrak q'\\in U_\\mu$. Proof: let $T=Q_\\lambda\\setminus\\mathfrak q''$. By [lem-weil-pbc-localization-tensor-over-base] ($A=M=Q_\\lambda$, $R=P_\\lambda$, $N=P_\\mu$) the localization of $Q_\\lambda\\otimes_{P_\\lambda}P_\\mu$ at $T$ is $(Q_\\lambda)_{\\mathfrak q''}\\otimes_{P_\\lambda}P_\\mu$, which is a flat $P_\\mu$-module by [lem-weil-pbc-flat-module-base-change]; by clause (4) of [lem-weil-pbc-limit-finite-presentation] $Q_\\lambda\\otimes_{P_\\lambda}P_\\mu\\cong Q_\\mu$, so $T^{-1}Q_\\mu$ (localization at the image of $T$) is a flat $P_\\mu$-algebra. The image of $T$ lies in $Q_\\mu\\setminus\\mathfrak q'$, so $(Q_\\mu)_{\\mathfrak q'}$ [def-weil-pbc-localization-at-prime] is the localization of $T^{-1}Q_\\mu$ at the image of $Q_\\mu\\setminus\\mathfrak q'$ (conditions (a)-(c) of a localization are checked directly), a flat ring map by [lem-weil-pbc-localization-flat]; so $P_\\mu\\to(Q_\\mu)_{\\mathfrak q'}$ is flat by [lem-weil-pbc-flat-ring-map-comp].",
+   "text": "The map Bᵢ → Bᵢ ⊗_P Q is flat by Module.Flat.baseChange applied to the flat model P → Q. Compose with the descended ring isomorphism eᵢ using RingHom.Flat.of_bijective and RingHom.Flat.comp. Rewrite with its compatibility equality to obtain flatness of the original stage map, and return this index.",
    "uses": [
-    "lem-weil-pbc-openness-of-flatness",
-    "lem-weil-pbc-limit-finite-presentation",
-    "lem-weil-pbc-localization-tensor-over-base",
     "lem-weil-pbc-flat-module-base-change",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-flat",
     "lem-weil-pbc-flat-ring-map-comp"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), second paragraph ('By Theorem 00RC we get an open subset $U_\\lambda$'); the persistence 'for all $\\lambda\\ge\\lambda_{\\mathfrak q}$', asserted there, is the claim"
-   }
-  },
-  {
-   "text": "*Step 4 (each prime of $C$ lies in the flat locus of some stage).* Let $\\mathfrak q\\subset C$ be prime, $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, $\\mathfrak q_\\lambda=\\kappa_\\lambda^{-1}(\\mathfrak q)$, $\\mathfrak p_\\lambda=\\pi_\\lambda^{-1}(\\mathfrak p)=\\rho_\\lambda^{-1}(\\mathfrak q_\\lambda)$. By [lem-weil-pbc-filtered-colimit-localization-at-prime] the localizations $(P_\\lambda)_{\\mathfrak p_\\lambda}$, $(Q_\\lambda)_{\\mathfrak q_\\lambda}$ form directed systems of rings with colimits $B_{\\mathfrak p}$, $C_{\\mathfrak q}$, and the transition maps are local (its clause (1)). Take in [lem-weil-pbc-colimit-eventually-flat] its $A_\\lambda=(P_\\lambda)_{\\mathfrak p_\\lambda}$, $B_\\lambda=N_\\lambda=(Q_\\lambda)_{\\mathfrak q_\\lambda}$. Its hypotheses: these are Noetherian [lem-weil-pbc-localization-noetherian] local rings [def-weil-pbc-localization-at-prime]; $(P_\\lambda)_{\\mathfrak p_\\lambda}\\to(Q_\\lambda)_{\\mathfrak q_\\lambda}$ is local as $\\rho_\\lambda(\\mathfrak p_\\lambda)\\subseteq\\mathfrak q_\\lambda$; $N_\\lambda$ is generated by $1$; (b) holds as $N_\\lambda\\otimes_{B_\\lambda}B_\\mu=B_\\mu$. For (a): by [lem-weil-pbc-localization-tensor-product] (identity maps, which are localizations at $P_\\lambda\\setminus\\mathfrak p_\\lambda$ since that set acts bijectively on both factors) $(Q_\\lambda)_{\\mathfrak q_\\lambda}\\otimes_{(P_\\lambda)_{\\mathfrak p_\\lambda}}(P_\\mu)_{\\mathfrak p_\\mu}=(Q_\\lambda)_{\\mathfrak q_\\lambda}\\otimes_{P_\\lambda}(P_\\mu)_{\\mathfrak p_\\mu}$, and by [lem-weil-pbc-localization-tensor-over-base], applied in each factor, this is the localization of $Q_\\lambda\\otimes_{P_\\lambda}P_\\mu\\cong Q_\\mu$ ([lem-weil-pbc-limit-finite-presentation] (4)) at the multiplicative set $W$ generated by the images of $Q_\\lambda\\setminus\\mathfrak q_\\lambda$ and $P_\\mu\\setminus\\mathfrak p_\\mu$; $W\\subseteq Q_\\mu\\setminus\\mathfrak q_\\mu$, so $(Q_\\mu)_{\\mathfrak q_\\mu}$ is the localization of $W^{-1}Q_\\mu$ at the image of $Q_\\mu\\setminus\\mathfrak q_\\mu$, and the composite is the map of (a), a localization of the tensor product. The colimit of the abelian groups $N_\\lambda$ is $C_{\\mathfrak q}$ [lem-weil-pbc-filtered-colimit-algebras-underlying-module] ($R=\\mathbf Z$), and $C_{\\mathfrak q}$ is a flat $B_{\\mathfrak p}$-module by [lem-weil-pbc-flat-local-ring-maps], $\\varphi$ being flat. So some $(Q_{\\lambda_{\\mathfrak q}})_{\\mathfrak q_{\\lambda_{\\mathfrak q}}}$ is flat over $(P_{\\lambda_{\\mathfrak q}})_{\\mathfrak p_{\\lambda_{\\mathfrak q}}}$, hence over $P_{\\lambda_{\\mathfrak q}}$ [lem-weil-pbc-flat-over-localization]: $\\mathfrak q_{\\lambda_{\\mathfrak q}}\\in U_{\\lambda_{\\mathfrak q}}$. As $\\mathfrak q_\\lambda$ is the inverse image of $\\mathfrak q_\\mu$ for $\\lambda\\le\\mu$, step 3 gives $\\mathfrak q_\\mu\\in U_\\mu$ for all $\\mu\\ge\\lambda_{\\mathfrak q}$.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-colimit-eventually-flat",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-limit-finite-presentation",
-    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
-    "lem-weil-pbc-flat-local-ring-maps",
-    "lem-weil-pbc-flat-over-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), first paragraph, which refers to the proof of Theorem Tag 00RC (theorem-openness-flatness, line 33407), Lemma Tag 00QX (lemma-limit-module-essentially-finite-presentation, line 32427) and Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723)"
-   }
-  },
-  {
-   "text": "*Step 5 (quasi-compactness: one stage covers $\\operatorname{Spec}C$).* For $\\lambda\\in\\Lambda$ let $V_\\lambda=\\{\\mathfrak q\\in\\operatorname{Spec}C:\\kappa_\\lambda^{-1}(\\mathfrak q)\\in U_\\lambda\\}$. It is open in the Zariski topology [def-weil-affine-spectrum]: a prime of $C$ contains $\\kappa_\\lambda(J)$ iff its inverse image contains $J$, so the preimage of a closed set $V(J)$ of $\\operatorname{Spec}Q_\\lambda$ is $V(\\kappa_\\lambda(J)C)$. For $\\lambda\\le\\mu$, $V_\\lambda\\subseteq V_\\mu$ by step 3 (the inverse image in $Q_\\lambda$ of $\\kappa_\\mu^{-1}(\\mathfrak q)$ is $\\kappa_\\lambda^{-1}(\\mathfrak q)$), and $\\bigcup_\\lambda V_\\lambda=\\operatorname{Spec}C$ by step 4. $\\operatorname{Spec}C$ is quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii), so finitely many $V_{\\lambda_1},\\dots,V_{\\lambda_r}$ cover it; $\\Lambda$ being nonempty and directed, there is $\\lambda_0\\ge\\lambda_1,\\dots,\\lambda_r$, and $V_{\\lambda_0}=\\operatorname{Spec}C$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), second paragraph ('Since Spec(S) is quasi-compact ...')"
-   }
-  },
-  {
-   "text": "*Step 6 (a stage where the flat locus is everything).* The complement of the open $U_{\\lambda_0}$ is $V(J)$ for an ideal $J\\subseteq Q_{\\lambda_0}$ [def-weil-affine-spectrum]. For a prime $\\mathfrak q$ of $C$, $\\kappa_{\\lambda_0}^{-1}(\\mathfrak q)\\in U_{\\lambda_0}$ (step 5) does not contain $J$, so $\\mathfrak q\\in D(\\kappa_{\\lambda_0}(f))$ for some $f\\in J$. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (i) the $\\kappa_{\\lambda_0}(f)$, $f\\in J$, generate the unit ideal: $1=\\sum_{k=1}^r\\kappa_{\\lambda_0}(f_k)c_k$ with $f_k\\in J$, $c_k\\in C$. By [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) ($R=\\mathbf Z$) and directedness there are $\\lambda_1\\ge\\lambda_0$ and $d_k\\in Q_{\\lambda_1}$ with $\\kappa_{\\lambda_1}(d_k)=c_k$; the element $\\sum_k\\bar f_kd_k-1$ of $Q_{\\lambda_1}$ maps to $0$ in $C$, so by [lem-weil-pbc-filtered-colimit-rings-zero] it maps to $0$ in some $Q_{\\lambda'}$, $\\lambda'\\ge\\lambda_1$: $\\sum_k\\bar f_k\\bar d_k=1$ in $Q_{\\lambda'}$. Let $\\mathfrak q'\\in\\operatorname{Spec}Q_{\\lambda'}$. Some $\\bar f_k\\notin\\mathfrak q'$, so the inverse image of $\\mathfrak q'$ in $Q_{\\lambda_0}$ does not contain $f_k\\in J$, i.e. lies in $U_{\\lambda_0}$; by step 3, $\\mathfrak q'\\in U_{\\lambda'}$. Hence $U_{\\lambda'}=\\operatorname{Spec}Q_{\\lambda'}$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), third paragraph"
-   }
-  },
-  {
-   "text": "*Step 7 (a flat Noetherian model).* Put $P'=P_{\\lambda'}$, $Q'=Q_{\\lambda'}$, $\\rho'=\\rho_{\\lambda'}$. For every prime $\\mathfrak q'$ of $Q'$, with $\\mathfrak p'=\\rho'^{-1}(\\mathfrak q')$, $(Q')_{\\mathfrak q'}$ is a flat $P'$-module (step 6), hence a flat $P'_{\\mathfrak p'}$-module by [lem-weil-pbc-flat-over-localization] (it is a $P'_{\\mathfrak p'}$-module, the elements of $P'\\setminus\\mathfrak p'$ mapping outside $\\mathfrak q'$). By [lem-weil-pbc-flat-map-local-criterion], $\\rho':P'\\to Q'$ is flat. Recall (step 2) $P'$ is of finite presentation over $\\mathbf Z$, $Q'$ of finite presentation over $P'$, and by clause (5) of [lem-weil-pbc-limit-finite-presentation] $\\theta:Q'\\otimes_{P'}B\\to C$, $q\\otimes b\\mapsto\\kappa_{\\lambda'}(q)\\varphi(b)$, is an isomorphism of $B$-algebras ($B$ a $P'$-algebra via $\\pi_{\\lambda'}$).",
-   "uses": [
-    "lem-weil-pbc-flat-over-localization",
-    "lem-weil-pbc-flat-map-local-criterion",
-    "lem-weil-pbc-limit-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (1), end ('This proves (1)'), with $M=S$"
-   }
-  },
-  {
-   "text": "*Step 8 (the model reaches the system $(B_i\\to C_i)$).* By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] (base ring $\\mathbf Z$, the system $(B_i)_{i\\in I'}$ with colimit $B$, step 1, and $\\pi_{\\lambda'}:P'\\to B$) there are $i_1\\ge0$ and a ring map $\\pi_1:P'\\to B_{i_1}$ with $\\beta_{i_1}\\pi_1=\\pi_{\\lambda'}$. For $i\\ge i_1$ make $B_i$ and $C_i$ $P'$-algebras via $\\beta_{ii_1}\\pi_1$ and $\\varphi_i\\beta_{ii_1}\\pi_1$; then $(C_i)_{i\\ge i_1}$ is a system of $P'$-algebras with colimit $C$ (step 1) whose coprojections $\\gamma_i$ are $P'$-algebra maps, since $\\gamma_i\\varphi_i\\beta_{ii_1}\\pi_1=\\varphi\\pi_{\\lambda'}=\\kappa_{\\lambda'}\\rho'$, and $\\kappa_{\\lambda'}:Q'\\to C$ is a $P'$-algebra map. Applying the same node over $P'$ ($Q'$ of finite presentation over $P'$) gives $i_2\\ge i_1$ and a $P'$-algebra map $\\kappa_2:Q'\\to C_{i_2}$ with $\\gamma_{i_2}\\kappa_2=\\kappa_{\\lambda'}$. Let $D=Q'\\otimes_{P'}B_{i_2}$, a finitely presented $B_{i_2}$-algebra [lem-weil-pbc-finite-presentation-base-change-composition] (1), and $\\Psi:D\\to C_{i_2}$, $q\\otimes b\\mapsto\\kappa_2(q)\\varphi_{i_2}(b)$, a map of $B_{i_2}$-algebras; $C_{i_2}$ is finitely presented over $B_{i_2}$ (step 1). After $-\\otimes_{B_{i_2}}B$, with $D\\otimes_{B_{i_2}}B=Q'\\otimes_{P'}B$ and $C_{i_2}\\otimes_{B_{i_2}}B\\cong C$ (step 1), $\\Psi\\otimes1_B$ is $q\\otimes b\\mapsto\\kappa_{\\lambda'}(q)\\varphi(b)$, i.e. $\\theta$, an isomorphism (step 7). By [lem-weil-pbc-colimit-category-fp-algebras] (2) (directed system $(B_i)_{i\\ge i_2}$, colimit $B$ [def-weil-pbc-category-colimit]) applied to $\\theta^{-1}$ there are $\\mu\\ge i_2$ and a $B_\\mu$-algebra map $\\chi:C_{i_2}\\otimes_{B_{i_2}}B_\\mu\\to D\\otimes_{B_{i_2}}B_\\mu$ with $\\chi\\otimes1_B=(\\Psi\\otimes1_B)^{-1}$; by its (3) (stage $\\mu$, applied to $\\chi\\circ(\\Psi\\otimes1_{B_\\mu})$ and the identity, and to $(\\Psi\\otimes1_{B_\\mu})\\circ\\chi$ and the identity, which agree after $\\otimes B$) there is $\\nu\\ge\\mu$ such that $\\Psi\\otimes1_{B_\\nu}$ is an isomorphism with inverse $\\chi\\otimes1_{B_\\nu}$. With $D\\otimes_{B_{i_2}}B_\\nu=Q'\\otimes_{P'}B_\\nu$ and $C_{i_2}\\otimes_{B_{i_2}}B_\\nu\\cong C_\\nu$ (step 1), $C_\\nu\\cong Q'\\otimes_{P'}B_\\nu$ as $B_\\nu$-algebras.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "lem-weil-pbc-colimit-category-fp-algebras",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (3), with $M=S$: the maps $R_0\\to R_{\\lambda_0}$, $S_0\\to S_{\\lambda_1}$ by Lemma Tag 00QO (lemma-characterize-finite-presentation, line 31886) and $\\Psi_\\lambda$ an isomorphism for large $\\lambda$ by Lemma Tag 05N9 (lemma-colimit-category-fp-algebras, line 32178)"
-   }
-  },
-  {
-   "text": "Tensor base change of the flat Noetherian model gives flatness of the stage map at the index obtained in step 8; this proves existence of a flat stage. No persistence assertion is needed here.",
-   "uses": [
-    "lem-weil-pbc-flat-module-base-change",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331), proof of (3), last sentence ('This implies (3) because $M_0$ is flat over $R_0$')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-criterion",
-  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-finite-presentation-base-change-composition",
-  "def-weil-pbc-finitely-presented-algebra",
-  "lem-weil-pbc-limit-finite-presentation",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-openness-of-flatness",
-  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-finite-presentation-model-stage",
+  "lem-weil-pbc-flat-finite-presentation-model",
   "lem-weil-pbc-flat-module-base-change",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-flat-ring-map-comp",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "lem-weil-pbc-colimit-eventually-flat",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
-  "lem-weil-pbc-flat-local-ring-maps",
-  "lem-weil-pbc-flat-over-localization",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-rings-zero",
-  "lem-weil-pbc-flat-map-local-criterion",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "lem-weil-pbc-colimit-category-fp-algebras",
-  "def-weil-pbc-flat-ring-map"
+  "lem-weil-pbc-flat-ring-map-comp"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331): proof of (1) (with the system of Lemma 00R0 in place of 00R1, M=S) followed by the proof of (3), M=S"
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "place": "Stacks Project, Algebra, Tag 02JO; split of the existing stage-existence proof into a flat model and descent of its comparison isomorphism."
  },
  "mathlib_searches": [
   {
@@ -250,10 +116,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T005055-L-2551420",
-  "kind": "proof",
+  "landing": "20261013T024042-L-3336929",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

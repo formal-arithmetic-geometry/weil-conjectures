@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-model-stage",
+ "kind": "statement",
+ "title": "A finite presentation model comparison isomorphism descends to a stage",
+ "statement": "Let I be a directed preorder, F : I → CommRing a diagram with colimit A [def-weil-pbc-category-colimit], and i₀ ∈ I. Put A₀ = F(i₀). Let B₀, C₀ be commutative A₀-algebras and φ₀ : B₀ → C₀ a finitely presented A₀-algebra map [def-weil-pbc-finitely-presented-algebra]. Let P, Q be commutative rings with P finitely presented over Z and Q finitely presented over P. Equip B = A ⊗_{A₀} B₀ with a P-algebra structure, and suppose there is a ring isomorphism e : B ⊗_P Q ≅ A ⊗_{A₀} C₀ whose composite with B → B ⊗_P Q is id_A ⊗ φ₀. Then for some i ≥ i₀ there is a P-algebra structure on Bᵢ = F(i) ⊗_{A₀} B₀ and a ring isomorphism eᵢ : Bᵢ ⊗_P Q ≅ F(i) ⊗_{A₀} C₀ whose composite with Bᵢ → Bᵢ ⊗_P Q is id_{F(i)} ⊗ φ₀. No flatness assumption is made on P → Q.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), proof of comparison-map descent; Tags 00QO and 05N9 (2), (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to indices above i₀. The base-changed ring systems Bᵢ and Cᵢ have colimits B and C: the elementwise base-change result gives representatives and eventual vanishing; the module colimit criterion and directedness give the ring universal property. Tensor cancellation makes every Cᵢ finitely presented over Bᵢ, and makes later stages the base changes of earlier ones.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor P → B through Bᵢ since P is finitely presented over Z. Over this factorization, factor the map Q → C induced by e through some Cⱼ since Q is finitely presented over P. Construct Ψ : Bⱼ ⊗_P Q → Cⱼ on pure tensors from these maps. Its base change to B is e. Both algebras are finitely presented over Bⱼ. Descend e inverse by the map-factorization clause, then descend both inverse identities by the eventual-equality clause. At a common upper bound Ψ is a ring isomorphism; its composition with the left inclusion is the stage map by construction.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "place": "Stacks Project, Algebra, Tag 02JO; split of the existing stage-existence proof into a flat model and descent of its comparison isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A comparison isomorphism of finitely presented algebras descends along a directed colimit of rings",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between finitely presented algebras over a filtered colimit of rings is an isomorphism at a sufficiently large stage",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit and exists_comp_map_eq_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda and CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit supply the individual factorization and equality operations. None packages the model comparison for the two base-changed algebra systems.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component lemmas found"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*finite.*model|flat.*[Cc]olimit|[Cc]olimit.*flat|exists_comp_map_eq_of_isColimit",
+   "results": "Mathlib has the finite-presentation factorization and eventual equality lemmas in Algebra/Category/Ring/FinitePresentation.lean; matches for coflat functors are unrelated. Source-library flat approximation results concern a specified fibre, not a globally flat integer model. No exact match in Sheaf; NoetherianFlatClosedFiberModel is a local module comparison, LimitFinitePresentation does not give flat models.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of finitely presented algebras spreads out to a finite stage of a directed colimit",
+   "results": "Independent second reading: EssFiniteType.exists_eq_comp_ι_app_of_isColimit and exists_comp_map_eq_of_isColimit provide factorization and equality separately. CommRingCat.isFinitelyPresentable_hom is categorical presentability, not the comparison construction of this statement. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitFlatRingMap",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-flat-ring-map",
+   "place": "Stage-existence proof, step 8 (descent of the model comparison isomorphism)",
+   "via": [
+    "lem-weil-pbc-colimit-flat-ring-map-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FinitePresentationModelStage",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationModelStage.lean",
+  "declaration": "RingHom.exists_finitePresentation_model_stage",
+  "statement": "theorem exists_finitePresentation_model_stage {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{v}) [HasColimit F] (i₀ : I) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hfp : φ₀.toRingHom.FinitePresentation) (P Q : Type y) [CommRing P] [CommRing Q] [Algebra P Q] [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q] (aP : letI := (colimit.ι F i₀).hom.toAlgebra Algebra P (↥(colimit F) ⊗[F.obj i₀] B₀)) (e : letI := (colimit.ι F i₀).hom.toAlgebra letI := aP (↥(colimit F) ⊗[F.obj i₀] B₀) ⊗[P] Q ≃+* (↥(colimit F) ⊗[F.obj i₀] C₀)) (he : letI := (colimit.ι F i₀).hom.toAlgebra letI := aP e.toRingHom.comp (Algebra.TensorProduct.includeLeftRingHom (R := P) (A := ↥(colimit F) ⊗[F.obj i₀] B₀) (B := Q)) = (Algebra.TensorProduct.map (Algebra.ofId ↥(colimit F) ↥(colimit F)) φ₀).toRingHom) : ∃ (i : I) (hi : i₀ ≤ i), letI := (F.map (homOfLE hi)).hom.toAlgebra ∃ (aPi : Algebra P (↥(F.obj i) ⊗[F.obj i₀] B₀)), letI := aPi ∃ eᵢ : (↥(F.obj i) ⊗[F.obj i₀] B₀) ⊗[P] Q ≃+* (↥(F.obj i) ⊗[F.obj i₀] C₀), eᵢ.toRingHom.comp (Algebra.TensorProduct.includeLeftRingHom (R := P) (A := ↥(F.obj i) ⊗[F.obj i₀] B₀) (B := Q)) = (Algebra.TensorProduct.map (Algebra.ofId (F.obj i) (F.obj i)) φ₀).toRingHom",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T024042-L-3336929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T024042-L-3336929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
