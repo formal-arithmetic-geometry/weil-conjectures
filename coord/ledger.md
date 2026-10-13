@@ -11283,3 +11283,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/N3/Sheaf.RingTheory.RegularQuotientIdealIntersection (stage 3; reviewer PASS; first push; landing 20261013T054229-L-446690 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/N3/Sheaf.RingTheory.StablyFreeComplexLift (stage 3; reviewer PASS; first push; landing 20261013T054230-L-446804 (interface); batch 20261013T054206; modules 4; new nodes 3)
 - 05:42 L: merged deliver/P2/Sheaf.AlgebraicGeometry.KoszulOpenHomRestrictionEventuallyZero (stage 3; reviewer PASS; first push; landing 20261013T054230-L-446928 (interface); batch 20261013T054206; modules 3; new nodes 2)
+- 05:42 L: merged deliver/P3/Sheaf.RingTheory.KoszulComplementaryEquivalences (stage 3; reviewer PASS; first push; landing 20261013T054231-L-447048 (proof); batch 20261013T054206; modules 1; new nodes 0)
