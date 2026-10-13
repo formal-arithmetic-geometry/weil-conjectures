@@ -1,0 +1,158 @@
+{
+ "id": "lem-pc-affine-spectrum-comparison-source-transport",
+ "kind": "statement",
+ "title": "Affine spectrum transport of the comparison into derived pullback",
+ "statement": "Let f:X→S, fprime:Xprime→Sprime, g:Sprime→S and gprime:Xprime→X form a cartesian square of affine schemes [def-pc-scheme], and let their spectrum global-section maps form a cartesian square. Fix chosen derived categories [def-pc-derived-category], z0 in Spec Gamma(Xprime,O_Xprime), z=Xprime.isoSpec.inv(z0), and i in Z. Write H and H0 for degree-i derived stalk cohomology at z and z0, followed by forgetting scalars to abelian groups [lem-pc-stalk-comparison-source-transport]. There exists a natural isomorphism T:H ≅ L(Xprime.isoSpec.inv)* followed by H0. For every K in D(O_X), K-flat complexes P on X and Q on Spec Gamma(X,O_X) [def-pc-kflat-complex], invertible recorded pullback counits on P and Q [def-pc-single-complex-base-change-stalk-condition], and representative isomorphisms, writing Qloc for the canonical localization of complexes in the derived category, e:Qloc(P)≅K and e0:Qloc(Q)≅affineSpectrumDerivedObject X K [def-pc-affine-spectrum-derived-coordinates], assume Q is termwise tensor pullback of P along X.isoSpec.inv. Then there is an additive isomorphism l between the sources of the two comparisonIntoPullback maps [lem-pc-stalk-comparison-pullback-naturality]. Write a=H(Lgprime*(e)) after the original comparisonIntoPullback and b=H0(LSpec(gprime.appTop)*(e0)) after the spectrum comparisonIntoPullback. It satisfies l;b=a;T(Lgprime*K);H0(affineSpectrumDerivedPullbackIso(gprime).inv at K). No coefficient morphism, target representative, boundedness, quasi-coherence, flatness over the base stalk, or invertibility of the comparison is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-comparison-pullback-naturality"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, affine spectrum reduction; Tag 0D5S, lemma-pullback-composition; Tag 0098, lemma-stalk-pullback"
+ },
+ "proof": [
+  {
+   "text": "The stalk maps of the inverse spectrum isomorphisms are ring isomorphisms. Tensor-pullback stalks identify a pulled-back germ with 1 tensor that germ. Extension along a ring isomorphism is an exact equivalence: its inverse is scalar restriction and its unit and counit are the multiplication identifications. Consequently pullback along the inverse spectrum isomorphism is exact. Its universal left-derived counit and the exact-stalk localization factors lift this natural stalk identification to derived categories. Apply degree-i homology and forget scalars to obtain T, naturally in all objects of D(O_Xprime).",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isoSpec naturality and stalkMap_comp to identify the four stalk rings and their structural ring homomorphisms. TensorMap is determined by its restrictions to A and B; tensor universality intertwines the two tensorMap maps. The equality of Q with termwise pullback of P and the germ formula identify the derived stalk inputs. Compose with the derived ratios of e and e0 to account for arbitrary choices of representative isomorphisms.",
+   "uses": [
+    "def-pc-affine-spectrum-derived-coordinates",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Universal left-derived scalar extensions are carried to each other by the exact equivalences of scalar categories induced by these ring isomorphisms. Their counit-compatible natural isomorphism carries the corrected derived input to the spectrum input. Apply homology. Naturality with A-multiplication and cohomologyIso_smul supply the full tensor-algebra action. Extend to C and forget scalars; the inverse scalar transports give the inverse of l.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The model equations comparison_eq and localized_eq identify the localized comparisons with the scalar-extension counits. The natural tensorStalkIso identifies the ordinary extension maps. The derived stalk extension comparison expresses comparisonIntoPullback by these counits. Uniqueness of the leftDerivedLift and the defining equation of affineSpectrumDerivedPullbackIso identify the composition comparison with the specified inverse in the displayed equation. Postcompose with e and e0; functoriality gives the stated commuting square before any coefficient morphism.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-stalk-derived-extension-comparison",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-affine-spectrum-derived-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-spectrum-derived-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-derived-extension-comparison",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Explicit source-only expansion of the affine reduction, using Tags 0098 and 0D5S; all three pages read online because literature is not materialized in this clone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ii]so|[Ii]so.*stalk",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean. No exact match for affine spectrum transport of comparisonIntoPullback.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isoMk",
+   "results": "5 hits: CategoryTheory.Arrow.isoMk, CategoryTheory.Arrow.isoMk_hom_left, CategoryTheory.Arrow.isoMk_hom_right, CategoryTheory.Arrow.isoMk_inv_left, CategoryTheory.Arrow.isoMk_inv_right. No exact match for affine spectrum transport of comparisonIntoPullback.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived stalk cohomology commutes with pullback along an isomorphism of schemes and derived tensor base change comparison is natural under affine spectrum identification",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc, AlgebraicGeometry.Scheme.ΓSpecIso_naturality, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc. No exact match for affine spectrum transport of comparisonIntoPullback.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localized derived tensor comparison into derived pullback is compatible with replacing an affine scheme by the spectrum of its global sections, with a natural isomorphism on additive derived stalk cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumStalkConjugacy",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "lemma-single-complex-base-change-condition, affine reduction: identify the tensor cohomology comparison before postcomposition with the coefficient morphism",
+   "via": [
+    "lem-pc-affine-spectrum-stalk-conjugacy",
+    "lem-pc-affine-spectrum-stalk-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumComparisonSourceTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumComparisonSourceTransport.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_affineSpectrum_comparisonIntoPullback_transport",
+  "statement": "theorem exists_affineSpectrum_comparisonIntoPullback_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (z0 : Spec Γ(X', ⊤)) (i : ℤ) :\n    let z := X'.isoSpec.inv z0\n    let H := comparisonStalkCohomology X' z i\n    let H0 := comparisonStalkCohomology (Spec Γ(X', ⊤)) z0 i\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u}\n    let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))\n      AddCommGrpCat.{u}\n    ∃ T : H ⋙ F ≅ derivedPullback X'.isoSpec.inv ⋙ H0 ⋙ F0,\n      ∀ (K : schemeDerivedCategory X)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) ℤ)\n        (hP : P.IsKFlat) (hQ : Q.IsKFlat)\n        (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n        (hcQ : IsIso ((counit (Spec.map g'.appTop)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n        (e : DerivedCategory.Q.obj P ≅ K)\n        (e0 : DerivedCategory.Q.obj Q ≅ affineSpectrumDerivedObject X K)\n        (hQ0 : Q = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n          (.up ℤ)).obj P),\n      ∃ l : F.obj (Arrow.mk (comparisonIntoPullback f f' g g' sq z P hcP i)).left ≅\n          F0.obj (Arrow.mk\n            (comparisonIntoPullback (Spec.map f.appTop) (Spec.map f'.appTop)\n              (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 Q hcQ i)).left,\n        l.hom ≫ F0.map\n          (comparisonIntoPullback (Spec.map f.appTop) (Spec.map f'.appTop)\n            (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 Q hcQ i ≫\n              H0.map ((derivedPullback (Spec.map g'.appTop)).map e0.hom)) =\n        F.map (comparisonIntoPullback f f' g g' sq z P hcP i ≫\n          H.map ((derivedPullback g').map e.hom)) ≫\n            T.hom.app ((derivedPullback g').obj K) ≫\n              F0.map (H0.map ((affineSpectrumDerivedPullbackIso g').inv.app K))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T130751-L-3986576",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T130751-L-3986576",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
