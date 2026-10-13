@@ -12969,3 +12969,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:24 L: merged deliver/F1/Sheaf.Paper.ModuleCupGodementPairingForModels (stage 3; reviewer PASS; first push; landing 20261013T152438-L-991657 (interface); batch 20261013T152436; modules 2; new nodes 2)
 - 15:24 L: merged deliver/G1/Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts (stage 3; reviewer PASS; first push; landing 20261013T152438-L-991829 (proof); batch 20261013T152436; modules 1; new nodes 0)
 - 15:24 L: merged deliver/G3/Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare (stage 3; reviewer PASS; first push; landing 20261013T152439-L-991979 (interface); batch 20261013T152436; modules 4; new nodes 3)
+- 15:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FinitePresentationOverlapChartEquations (stage 3; reviewer PASS; first push; landing 20261013T152439-L-992233 (interface); batch 20261013T152436; modules 3; new nodes 2)
