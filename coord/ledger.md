@@ -10620,3 +10620,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/X3/Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit (stage 3; reviewer PASS; first push; landing 20261013T015624-L-3030345 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/Y3/Sheaf.CategoryTheory.FilteredComplexSingleDifferentialDescent (stage 3; reviewer PASS; after a return; landing 20261013T015625-L-3030491 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:58 L: returned deliver/A2/Sheaf.Algebra.Homology.HomTensorDegreewise (reviewer RETURN: (reviewer X-f6f02, head f6f028cba) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Hom)
+- 02:11 L: returned deliver/W4/Sheaf.AlgebraicGeometry.GeometricGenericCoverModel (reviewer RETURN: (reviewer X-c640f, head c640f97a9) E2 — False remaining statement: GeometricGenericCoverModel.lean:113–136, refine_geome)
