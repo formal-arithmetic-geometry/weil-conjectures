@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-single-complex-qcqs-homology-mono",
+ "kind": "statement",
+ "title": "Degreewise monomorphism from the qcqs single-complex stalk criterion",
+ "statement": "In a cartesian square of schemes [def-pc-base-change], f:X→S is quasi-compact and quasi-separated. Let K and K' have quasi-coherent cohomology [def-pc-derived-category], and let φ:L(g')*K→K'. If φ satisfies the canonical localized tensor stalk condition [def-pc-single-complex-base-change-stalk-condition], then for every integer n the degree-n cohomology map of the canonical mate followed by Rf'*(φ) [def-pc-derived-base-change-map, def-pc-derived-direct-image] is a monomorphism. This does not assert invertibility of the derived composite.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJ9, lemma-single-complex-base-change, monomorphism part"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-base-change",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the target-locality reduction with an affine-base criterion still to prove. This uses exact open restriction and compatibility of the canonical map, and introduces no global compactness assumption on S.",
+   "uses": [
+    "lem-pc-single-complex-target-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the resulting square with affine bases, infer CompactSpace X from QuasiCompact f and QuasiSeparatedSpace X from QuasiSeparated f. Define P(U) to be IsIso of the explicit canonical source-open comparison. Its affine base case is the source-open affine comparison theorem.",
+   "uses": [
+    "def-pc-single-complex-open-comparison",
+    "lem-pc-single-complex-open-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For quasi-compact U and affine V, V is compact and U intersection V is compact by Mathlib QuasiSeparatedSpace.inter_isCompact. The source-open union theorem then combines P(U), P(V), P(U intersection V) into P(U union V). Apply quasiCompactOpen_induction to obtain P(top).",
+   "uses": [
+    "lem-pc-single-complex-open-union",
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the top-open comparison to the original global comparison. This completes the affine-base criterion supplied to the target-locality reduction.",
+   "uses": [
+    "lem-pc-single-complex-open-top"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the degree-n homology functor to the resulting invertible comparison and retain only its monomorphism property.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-single-complex-target-locality",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-single-complex-open-affine",
+  "lem-pc-single-complex-open-union",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-single-complex-open-top"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 0DJ9; extracted the degreewise monomorphism part; the existing qcqs implementation cannot be imported here because it reaches the parent item"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "singleComplexBaseChange|baseChange.*homology.*mono",
+   "results": "[]",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived base change is injective when a single complex satisfies the localized stalk tensor comparison condition on a quasi compact quasi separated scheme",
+   "results": "['AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective', 'AlgebraicGeometry.Scheme.Hom.toImage_app_injective', 'CategoryTheory.Sheaf.isLocallyInjective_iff_injective', 'CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.cm5b.instInjectiveXIntI', 'AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf', 'PresheafOfModules.instIsLocallyInjectiveToSheafify', 'AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective']",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Mono\"",
+   "results": "['DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff', 'DerivedCategory.HomologySequence.mono_homologyMap_mor₂_iff']",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for qcqs morphisms from an invertible localized tensor stalk comparison implies a monomorphism in cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardFlatSingleBaseChangeMono",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "qcqs single-complex comparison in the relatively flat degree-zero base-change argument",
+   "via": [
+    "lem-pc-standard-flat-single-base-change-mono",
+    "lem-pc-standard-flat-single-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexQcqsHomologyMono.lean",
+  "declaration": "AlgebraicGeometry.singleComplexBaseChange_homology_mono",
+  "statement": "theorem singleComplexBaseChange_homology_mono\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ) (n : ℤ) :\n    Mono ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) n).map\n        (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫\n          (schemeDerivedDirectImage f').map φ))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-85dbd",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T201801-L-3973939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-85dbd",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T201801-L-3973939",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, DAG nodes, proof dependencies, report, and direct importer matched the stated item and compiled cleanly in the isolated dependency-complete build."
+ }
+}
