@@ -15,28 +15,22 @@
  ],
  "proof": [
   {
-   "text": "Represent a raw section-complex homology class on V by a cycle. Its image under the termwise unit is a cycle on g inverse V by naturality for the differential. Naturality for the cycle inclusion identifies this with the image under the unit on the cycle sheaf.",
+   "text": "Apply the flat-unit raw section compatibility to K = f_*I. This supplies the cycle and homology quotient calculation before any target map.",
    "uses": [
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Exactness of A identifies its image of the cycle sheaf with the cycle sheaf of AK and its image of the homology quotient with the quotient for AK. Naturality of the unit for the quotient identifies the image of the source cycle class with the target cycle class under the inverse comparison.",
-   "uses": [
-    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+    "lem-weil-pbc-flat-unit-raw-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The map theta is the sheafification unit on cycle classes, with the exact homology comparison for sheafification followed by the counit. On cycles its composite with the homology quotient equals the quotient into the homology sheaf. Apply exact evaluation to this identity on source and target. The two unit images from the preceding steps agree on all cycles, and the raw homology quotient is epimorphic, proving equality of morphisms. No inverse for theta is required, and the same calculation covers p=0 and empty opens.",
+   "text": "Import all HigherDirectImageResolutionNaturality and use its existing private sectionCohomologyTheta_naturality theorem for c. Evaluate and combine with Mathlib evaluation homology-comparison naturality to obtain rawSectionClass naturality; do not restate the generic adjoint homology or theta naturality lemmas.",
    "uses": [
+    "lem-pc-higher-direct-image-resolution-naturality",
     "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": true
   },
   {
-   "text": "Compose the unit case with the termwise adjoint c of q. Naturality of theta for c follows from the exact homology comparison and sheafification counit naturality. The unit followed by pushforward of c equals q by the complex adjunction. Functoriality of homology gives the raw section identity. No resolution-section or derived-image isomorphisms are used.",
+   "text": "The homology adjoint of inverseComparison followed by H(c) factors by adjunction right naturality. Compose the unit case with rawSectionClass naturality. The complex adjunction identity eta followed by B(c) equals q; sections of B(c) are definitionally sections of c on the inverse-image open. Homology functoriality gives the desired equality.",
    "uses": [
     "def-weil-pbc-flat-base-change-resolution-construction",
     "lem-pc-module-pullback-adjunction"
@@ -45,16 +39,17 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-  "lem-pc-module-pullback-adjunction",
   "def-weil-pbc-flat-base-change-open-choices",
-  "def-weil-pbc-flat-base-change-resolution-construction"
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-pc-higher-direct-image-resolution-naturality",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-flat-unit-raw-sections"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "G4",
+  "by": "worker",
+  "agent": "N2",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 02N7 and 01E4; raw cycle calculation before resolution transports"
+  "place": "Tags 02N7 and 01E4; unit cycle reduction, existing private theta naturality reused through import all, and Lean adjunction composition"
  },
  "mathlib_searches": [
   {
@@ -150,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b2166",
-  "group": "G4",
+  "reviewer": "X-8664c",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T141527-L-379131",
+  "landing": "20261013T165645-L-1809450",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules, node statements, proof dependencies, report, and interface changes match the packet; both modules and the direct importer compile successfully."
+  "note": "independent Codex review: Delivered files, node statements and proof metadata matched against the packet and repository; both modules and the direct importer compiled successfully."
  }
 }
