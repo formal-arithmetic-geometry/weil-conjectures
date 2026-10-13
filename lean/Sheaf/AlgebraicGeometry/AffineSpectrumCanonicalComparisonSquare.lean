@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
+import Sheaf.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare
+import Sheaf.AlgebraicGeometry.AffineSpectrumCounitSquare
 
 /-! # The affine spectrum counit square on the canonical representative
 
@@ -25,6 +27,23 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
+private theorem comparisonIntoPullback_eq
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X X' S S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (sq : IsPullback g' f' f g) (z : X')
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hc : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
+    (i : ℤ) :
+    comparisonIntoPullback f f' g g' sq z P hc i =
+      comparisonIntoTensorPullback f f' g g' sq z P i ≫
+        (comparisonStalkCohomology X' z i).map
+          (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
+  simp only [comparisonIntoPullback, comparisonIntoTensorPullback, Category.assoc]
+
+set_option maxHeartbeats 1600000 in
+-- The comparison expands several nested stalk and localization functors.
 /-- The comparison square for the termwise spectrum pullback with its canonical counit.
 
 Proof: isoSpec naturality and stalkMap_comp identify the four stalk rings and
@@ -89,6 +108,44 @@ theorem exists_affineSpectrum_canonicalComparison_square
             (isoPullbackStalkCohomologyIso X'.isoSpec.inv z0 i).hom.app
               ((derivedPullback g').obj (DerivedCategory.Q.obj P)) ≫
               F0.map (H0.map ((affineSpectrumDerivedPullbackIso g').inv.app
-                (DerivedCategory.Q.obj P))) := by sorry
+                (DerivedCategory.Q.obj P))) := by
+  subst Q
+  dsimp only
+  let := hcP
+  let := hcQ
+  let z := X'.isoSpec.inv z0
+  let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
+  let H0 := comparisonStalkCohomology (Spec Γ(X', ⊤)) z0 i
+  let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u}
+  let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))
+    AddCommGrpCat.{u}
+  let T := isoPullbackStalkCohomologyIso X'.isoSpec.inv z0 i
+  obtain ⟨l, hl⟩ := exists_affineSpectrum_ordinaryComparison_square
+    f f' g g' sq sq0 z0 i P
+  refine ⟨l, ?_⟩
+  have hn := T.hom.naturality
+    (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
+  have hc := affineSpectrum_counit_square g' P hP hcP hcQ
+  have hcH := congrArg (fun k ↦ F0.map (H0.map k)) hc
+  simp only [Functor.map_comp] at hcH
+  simp only [Functor.comp_map] at hn
+  let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+    (.up ℤ)).obj P
+  let c0 := F0.map (H0.map (inv ((counit (Spec.map g'.appTop)).app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P0))))
+  let d0 := F0.map (H0.map ((derivedPullback (Spec.map g'.appTop)).map
+    ((isoPullbackComplexCounitIso X.isoSpec.inv).inv.app P)))
+  let b := F.map (comparisonIntoTensorPullback f f' g g' sq z P i)
+  let a0 := F0.map (H0.map ((affineSpectrumDerivedPullbackIso g').inv.app
+    (DerivedCategory.Q.obj P)))
+  have hL := congrArg (fun k ↦ k ≫ c0 ≫ d0) hl
+  have hC := congrArg (fun k ↦ b ≫ T.hom.app (DerivedCategory.Q.obj Pg) ≫ k) hcH
+  have hN := congrArg (fun k ↦ b ≫ k ≫ a0) hn
+  simp only [Functor.map_comp, Category.assoc] at hL hC hN
+  have hh := hL.trans (hC.symm.trans hN.symm)
+  simp only [comparisonIntoPullback_eq, Functor.map_comp, Category.assoc,
+    eqToIso_refl, Iso.trans_hom, Iso.refl_hom, Iso.app_hom, Iso.symm_hom,
+    Category.id_comp, c0, d0, b, a0, P0, T, F, F0, H0, z] at hh ⊢
+  convert hh using 1 <;> rfl
 
 end AlgebraicGeometry.SingleComplexBaseChange

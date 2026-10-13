@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-affine-spectrum-ordinary-comparison-square",
+ "kind": "statement",
+ "title": "Affine spectrum ordinary stalk comparison square",
+ "statement": "Let $f:X\\to S$, $f\\prime:X\\prime\\to S\\prime$, $g:S\\prime\\to S$, and $g\\prime:X\\prime\\to X$ be a cartesian square of affine schemes [def-pc-scheme], whose spectrum maps on global sections also form a cartesian square. Fix derived categories [def-pc-derived-category], a complex $P$ of modules on $X$, a point $z_0\\in\\operatorname{Spec}\\Gamma(X\\prime,\\top)$, and $i\\in\\mathbf Z$. Put $j=X.\\mathrm{isoSpec}^{-1}$, $j\\prime=X\\prime.\\mathrm{isoSpec}^{-1}$, $z=j\\prime(z_0)$, $P_0=j^*P$ and $P_g=(g\\prime)^*P$, all pullbacks termwise. Let $\\alpha:(g_0\\prime)^*P_0\\cong(j\\prime)^*P_g$ be the canonical adjunction-mate composition isomorphism [def-pc-tensor-pullback-composition-iso], using isoSpec naturality. Let $b$ and $b_0$ be the respective localized base-derived tensor cohomology comparisons [def-pc-base-derived-tensor-cohomology-model, def-pc-single-complex-base-change-stalk-condition], followed by tensorStalkIso and comparisonStalkHomologyIso.inv, but without the inverse pullback counit along $g\\prime$ or $g_0\\prime$. Write $H_0$ for spectrum stalk cohomology, $F,F_0$ for scalar forgetting, $T$ for isoPullbackStalkCohomologyIso [lem-pc-iso-pullback-stalk-cohomology], and $\\epsilon_{j\\prime}$ for isoPullbackComplexCounitIso. There exists an additive isomorphism $l:F(\\mathrm{source}(b))\\cong F_0(\\mathrm{source}(b_0))$ such that $l;F_0(b_0)=F(b);T_{Q(P_g)};F_0H_0(\\epsilon_{j\\prime,P_g};Q(\\alpha^{-1}))$. No K-flatness or invertibility of either comparison is assumed. In particular this is an ordinary pullback comparison square, with no composition comparison for derived pullback along $g\\prime$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "equation-bc and affine reduction; Tag 0098 lemma-stalk-pullback-modules; Tag 0096 pullback adjunction"
+ },
+ "proof": [
+  {
+   "text": "Identify the four stalk rings and structure maps by isoSpec naturality and stalkMap_comp, including the stalkCongr in rightAlgebra. Tensor the ring isomorphisms and their inverses; check the two inclusions to identify tensorMap. The pullback-stalk germ formula identifies the stalk complex of P0 with extension along the stalk ring isomorphism.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along the inverse ring maps gives inverse exact equivalences. Transport the universal left-derived scalar-extension functor and its counit through these equivalences. Apply homology and cohomologyIso_smul; tensor induction lifts the resulting B-linear isomorphism to the full tensor algebra. Extend along the compatible map to C and forget scalars, obtaining l.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The model equations comparison_eq and localized_eq give compatibility with the localized comparisons. The tensorStalkIso germ formulas and the adjunction-mate composition formula identify the ordinary target transport with alpha.inv. The restriction-stalk construction of T followed by the exact iso-pullback counit is precisely this ordinary transport before Q(alpha.inv). These equations yield the displayed square without any inverse counit along gprime.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-pc-iso-pullback-stalk-cohomology",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "A4 extraction of the ordinary comparison part of the affine reduction; Tags 0098 and 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor comparison is natural under isomorphisms of ringed spaces and affine spectrum coordinates",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc, AlgebraicGeometry.Scheme.ΓSpecIso_naturality, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc, AlgebraicGeometry.Spec_Γ_naturality, AlgebraicGeometry.Scheme.isoSpec_inv_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact affine spectrum ordinary comparison square; component lemmas only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedLift\"",
+   "results": "2 hits: CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+   "date": "2026-10-13",
+   "verdict": "No exact affine spectrum ordinary comparison square; component lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*[Cc]omp|leftDerivedLift.*comp",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact affine spectrum ordinary comparison square; component lemmas only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback composition commutes with the ordinary tensor pullback counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalComparisonSquare",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8 affine reduction: transport the stalk tensor comparison through the canonical affine spectrum isomorphisms before the inverse pullback counits",
+   "via": [
+    "lem-pc-affine-spectrum-canonical-comparison-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumOrdinaryComparisonSquare.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_affineSpectrum_ordinaryComparison_square",
+  "declarations": [
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonIntoTensorPullback",
+   "AlgebraicGeometry.SingleComplexBaseChange.affineSpectrumTensorComplexIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.exists_affineSpectrum_ordinaryComparison_square"
+  ],
+  "statement": "theorem exists_affineSpectrum_ordinaryComparison_square\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (z0 : Spec Γ(X', ⊤)) (i : ℤ)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let z := X'.isoSpec.inv z0\n    let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n      (.up ℤ)).obj P\n    let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P\n    let H0 := comparisonStalkCohomology (Spec Γ(X', ⊤)) z0 i\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u}\n    let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))\n      AddCommGrpCat.{u}\n    ∃ l : F.obj (Arrow.mk (comparisonIntoTensorPullback f f' g g' sq z P i)).left ≅\n        F0.obj (Arrow.mk\n          (comparisonIntoTensorPullback (Spec.map f.appTop) (Spec.map f'.appTop)\n            (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0 i)).left,\n      l.hom ≫ F0.map\n        (comparisonIntoTensorPullback (Spec.map f.appTop) (Spec.map f'.appTop)\n          (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0 i) =\n      F.map (comparisonIntoTensorPullback f f' g g' sq z P i) ≫\n        (isoPullbackStalkCohomologyIso X'.isoSpec.inv z0 i).hom.app\n          (DerivedCategory.Q.obj Pg) ≫\n        F0.map (H0.map ((isoPullbackComplexCounitIso X'.isoSpec.inv).hom.app Pg ≫\n          DerivedCategory.Q.map (affineSpectrumTensorComplexIso g' P).inv))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T160708-L-1370479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T160708-L-1370479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

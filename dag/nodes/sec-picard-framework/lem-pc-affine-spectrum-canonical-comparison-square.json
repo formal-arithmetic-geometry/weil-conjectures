@@ -19,50 +19,39 @@
  },
  "proof": [
   {
-   "text": "Identify the four stalk rings and ring maps using isoSpec naturality and stalkMap_comp. Check tensorMap on the two tensor inclusions. The germ formula for tensorPullback_stalk_iso identifies the input stalk complex of Q with scalar extension of P along the stalk ring isomorphism.",
+   "text": "Substitute hQ0 so Q is the actual termwise pullback of P. Factor each comparisonIntoPullback into comparisonIntoTensorPullback followed by the inverse recorded counit. Apply the ordinary affine spectrum comparison square to obtain l and its equality before these inverse counits.",
    "uses": [
-    "def-pc-affine-spectrum-derived-coordinates",
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-weil-pbc-module-stalk-pullback"
+    "lem-pc-affine-spectrum-ordinary-comparison-square",
+    "lem-pc-stalk-comparison-pullback-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Transport the universal left-derived R-to-B scalar extension along the ring isomorphisms and their inverse restriction equivalences. Apply homology and use cohomologyIso_smul to obtain the full tensor-algebra action, then extend to C and forget scalars to get l and its inverse.",
+   "text": "Apply affineSpectrum_counit_square to P with its two invertible counits. This equation is independent of the base-change square and its stalk comparisons, and identifies the derived affine-coordinate composition with the ordinary chain comparison and the specified inverse counits.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-stalk-comparison-source-transport"
+    "lem-pc-affine-spectrum-counit-square"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The model equations comparison_eq and localized_eq give the counit square. The tensorStalkIso germ formula and isoPullbackStalkCohomologyIso identify ordinary and exact derived stalk factors. The leftDerivedLift defining equation fixes the composition comparison as affineSpectrumDerivedPullbackIso.inv. Combine these equations with the canonical counit d.",
+   "text": "Apply spectrum stalk cohomology and forget scalars to the counit equation. Naturality of isoPullbackStalkCohomologyIso for the inverse gprime counit moves the ordinary target transport past that counit. Postcompose the ordinary square by the spectrum inverse counit and pullback of d; combine the three equalities by associativity. Equality transport along hQ0 becomes reflexive after substitution.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-stalk-derived-extension-comparison",
-    "lem-pc-stalk-comparison-pullback-naturality",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-iso-pullback-stalk-cohomology",
-    "def-pc-affine-spectrum-derived-coordinates"
+    "lem-pc-affine-spectrum-ordinary-comparison-square",
+    "lem-pc-iso-pullback-stalk-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-spectrum-derived-coordinates",
-  "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-affine-spectrum-counit-square",
+  "lem-pc-affine-spectrum-ordinary-comparison-square",
   "lem-pc-iso-pullback-stalk-cohomology",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-stalk-comparison-pullback-naturality",
-  "lem-pc-stalk-comparison-source-transport",
-  "lem-pc-stalk-derived-extension-comparison",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-pc-stalk-comparison-pullback-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "V1 explicit affine spectrum coordinate transport; Tags 0098 and 0D5S read online"
+  "place": "A4 Lean reduction: ordinary tensor comparison square plus the existing canonical representative-map equation, Tags 0098 and 0D5S"
  },
  "mathlib_searches": [
   {
@@ -178,9 +167,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T151138-L-878690",
+  "landing": "20261013T160708-L-1370479",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
