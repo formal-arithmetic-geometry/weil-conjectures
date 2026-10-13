@@ -15,44 +15,46 @@
  },
  "proof": [
   {
-   "text": "Finite-free retract terms on the affine open are quasi-coherent. The affine sheaf/module correspondence identifies the bounded complexes P and Q with bounded finite projective section complexes. The open stalk is their scalar extension to the localization at the prime of x.",
+   "text": "Apply the open stalk functor to the finite-free retractions of every term of P. Finite-free open stalks are projective by openModuleStalk_free_projective, so their retracts are projective. The upper support bound survives because the stalk functor preserves zero objects. CochainComplex.isKProjective_of_projective proves that the stalk complex of P is K-projective.",
    "uses": [
     "def-pc-perfect-complex",
     "def-sc-open-module-stalk-functor",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-sc-open-module-stalk-free-projective",
+    "lem-sc-bounded-above-projective-kprojective"
    ],
    "elementary": false
   },
   {
-   "text": "Present that localization as the filtered colimit of principal localizations outside the prime. Apply surjectivity of the affine perfect derived Hom comparison to the transported arrow. A colimit element is represented at a principal stage, giving a derived arrow over one principal localization.",
+   "text": "Apply the proved upstream CochainComplex.IsKProjective.exists_Q_map_eq from WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective to the K-projective stalk complex of P and t. It supplies a chain map f with Q.map f = t. This is the existing localization and homotopy-quotient surjectivity argument, not a new geometric result.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_affine_perfect_open_stalk_chainMap_lift to f and the unchanged hypotheses on X, U, x, P and Q. It gives an affine V inside U containing x, a natural chain comparison e, and a chain map g between the restrictions, with S.map g = e_P.hom followed by f followed by e_Q.inv.",
    "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-pc-affine-perfect-hom-colimit"
+    "lem-sc-perfect-open-stalk-chain-map-lift"
    ],
    "elementary": false
   },
   {
-   "text": "The corresponding basic open V is affine, contains x, and is contained in U. Transport the descended arrow through the affine derived equivalence to an arrow g between Q(P restricted to V) and Q(Q restricted to V). Open restriction preserves the stalk, giving cP and cQ. Naturality of the restriction and affine scalar-extension comparisons identifies the conjugated derived stalk image of g with cP.hom followed by t followed by cQ.inv, as stated.",
+   "text": "Take cP = Q.mapIso(e.app P), cQ = Q.mapIso(e.app Q), and the derived map Q.map g. Naturality of S.mapDerivedCategoryFactors.hom rewrites the derived image of Q.map g as Q.map(S.map g), after cancelling the factorization isomorphism. Substitute the lifted chain-map equality, distribute Q.map over composition, and use Q.map f = t. The resulting equality is precisely the required equation.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-open-restriction-stalk-extension-iso",
     "def-sc-open-module-stalk-functor"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
   "def-sc-open-module-stalk-functor",
-  "lem-pc-affine-perfect-hom-colimit",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-open-restriction-stalk-extension-iso",
-  "lem-weil-pbc-localization-colimit-principal-localizations"
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-open-module-stalk-free-projective",
+  "lem-sc-perfect-open-stalk-chain-map-lift"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE affine proof, specialized to a stalk localization with Tags 0BC7 (2), 00CR and 06Z0; transport on localized sites spelled out by M3"
+  "place": "Tag 09RE affine case (1), bounded-projective chain representatives and finite-component descent; Tag 0BC7 (2). J2 uses the existing open-stalk chain-map lift and Mathlib K-projective localization, without affine derived equivalences or a derived Hom colimit presentation."
  },
  "mathlib_searches": [
   {
@@ -143,10 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T100032-L-2469938",
-  "kind": "interface",
+  "landing": "20261013T111855-L-3053584",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
