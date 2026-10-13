@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-localized-pullback-perfect-counit",
+ "kind": "statement",
+ "title": "Natural termwise pullback counit on localized strictly perfect complexes",
+ "statement": "Let g:T -> S be a scheme morphism [def-pc-scheme], U an open of S and V its inverse image. On the localized module categories [def-pur-localized-ringed-site], write A and C for the open-site equivalences to modules on U.toScheme and V.toScheme. Write F for the ordinary localized pullback functor constructed in [lem-pc-localized-pullback-perfect-model], and L for the derived pullback [def-pc-derived-pullback] along V.toScheme -> U.toScheme. Choose localized derived categories with arbitrary independent universes w and wV, and scheme-open derived categories with a common universe wO [def-pc-derived-category]. There exists one natural transformation eta: Q followed by A.mapDerivedCategory followed by L -> F applied termwise followed by Q followed by C.mapDerivedCategory, on all complexes on the localized site over U. For every strictly perfect complex K [def-pc-perfect-complex], eta.app K is invertible. There are no bottom-degree or support hypotheses.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Tag 06YJ, natural derived counit on K-flat complexes; Tag 06YD, bounded-above flat K-flatness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-localized-ringed-site",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-localized-pullback-perfect-model"
+ ],
+ "proof": [
+  {
+   "text": "Read exists_derivedPullback for the restricted scheme morphism V.toScheme -> U.toScheme. Its recorded object and morphism equalities identify its ordinary functor with tensorPullback, and its canonical counit epsilon is natural on all homotopy complexes. Identify tensorPullback and ordinary module pullback by uniqueness of their left adjoints to the same pushforward.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker epsilon with the homotopy quotient and compose the canonical quotientCompQhIso and mapHomotopyCategoryFactors isomorphisms. Then compose the termwise adjoint-uniqueness isomorphism. This constructs a natural transformation from Q followed by the restricted derived pullback to ordinary termwise pullback followed by Q.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Whisker that transformation with the source open-site equivalence and its derived localization factorization. The target open-site equivalence counit, functor associators, mapHomologicalComplexCompIso and mapDerivedCategoryFactors give a natural isomorphism identifying its target with localizedPullback followed by Q and the derived target equivalence. Composing its inverse gives eta on all localized complexes.",
+   "uses": [
+    "lem-pc-localized-pullback-perfect-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a strictly perfect K, source open-site equivalence preserves boundedness, finite coproducts, unit objects, and explicit finite-free retract equations. The mapped finite-free terms are flat by flat_coproduct and flatness of the unit; flat_of_retract implies the transported K terms are flat. Install the tensorClosed structures and Grothendieck abelian module category to use these flat-object tools.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-flat-coproduct"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By bounded-above flat K-flatness, the transported K is K-flat. The K-flat clause of exists_derivedPullback makes epsilon at that complex invertible. Every other component used to construct eta is an isomorphism, so eta.app K is invertible. The same reasoning includes zero complexes, empty opens, and all independent localization universes in the statement.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-localized-pullback-perfect-model",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-flat-coproduct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Tags 06YJ and 06YD. Q2 implemented the canonical counit transport; this lemma is fully proved, not a new hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural homology comparison derived pullback strictly perfect complex restriction to open",
+   "results": "8 hits: HomologicalComplex.restriction.hasHomology, HomologicalComplex.homologyπ_restrictionHomologyIso_hom, HomologicalComplex.restrictionHomologyIso, HomologicalComplex.homologyπ_restrictionHomologyIso_inv, HomologicalComplex.restrictionHomologyIso_hom_homologyι, HomologicalComplex.restrictionOpcyclesIso, HomologicalComplex.restrictionHomologyIso_inv_homologyι, HomologicalComplex.pOpcycles_restrictionOpcyclesIso_hom",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools only; no local strictly-perfect natural counit theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedPullback|mapDerivedCategoryHomologyFunctorIso",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools only; no local strictly-perfect natural counit theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"NatTrans\"",
+   "results": "8 hits: CategoryTheory.NatTrans.mapHomologicalComplex, CategoryTheory.NatTrans.mapHomologicalComplex_app_f, CategoryTheory.NatTrans.mapHomologicalComplex_id, CategoryTheory.NatTrans.mapHomologicalComplex_comp, CategoryTheory.NatTrans.mapHomologicalComplex_naturality, CategoryTheory.NatTrans.mapHomologicalComplex_naturality_assoc, HomologicalComplex.natTransMapHomologicalComplex_app_single_obj, HomologicalComplex.natTransMapHomologicalComplex_app_single_obj_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools only; no local strictly-perfect natural counit theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural derived pullback counit computes strictly perfect complexes termwise",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BottomChainModelPullbackTransport",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Canonical pullback clause of the bottom chain model transport, step 2; the natural comparison for the supplied chain map.",
+   "via": [
+    "lem-sc-bottom-chain-model-pullback-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedPullbackPerfectCounit.lean",
+  "declaration": "AlgebraicGeometry.localizedPullback_perfectCounit",
+  "statement": "theorem localizedPullback_perfectCounit {T S : Scheme.{u}} (g : T ⟶ S)\n    (U : S.Opens)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [HasDerivedCategory.{wV}\n      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over (g ⁻¹ᵁ U)))]\n    [HasDerivedCategory.{wO}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{wO}\n      (SheafOfModules.{u} (moduleRings (g ⁻¹ᵁ U).toScheme.toRingedSpace))] :\n    let A : SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U) ⥤\n        SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=\n      (Scheme.Modules.overEquiv U).functor\n    let C : SheafOfModules.{u} ((moduleRings T.toRingedSpace).over (g ⁻¹ᵁ U)) ⥤\n        SheafOfModules.{u} (moduleRings (g ⁻¹ᵁ U).toScheme.toRingedSpace) :=\n      (Scheme.Modules.overEquiv (g ⁻¹ᵁ U)).functor\n    ∃ η : DerivedCategory.Q ⋙ A.mapDerivedCategory ⋙\n        derivedPullback (g.resLE U (g ⁻¹ᵁ U) le_rfl) ⟶\n      (Scheme.Modules.localizedPullback g U).mapHomologicalComplex (.up ℤ) ⋙\n        DerivedCategory.Q ⋙\n          C.mapDerivedCategory,\n      ∀ K : CochainComplex\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ,\n        Scheme.IsStrictlyPerfect S U K → IsIso (η.app K)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T111913-L-3059428",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T111913-L-3059428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
