@@ -1,0 +1,152 @@
+{
+ "id": "lem-sbc-constant-local-dimension-components",
+ "kind": "statement",
+ "title": "Pure component dimension from constant finite local dimension",
+ "statement": "Let Y be a locally noetherian scheme [def-pc-scheme; pqf-def-locnoeth], O an open of Y, and n∈ℕ. Assume that every x∈O has local topological dimension [def-kun-topological-dimension-at-point] n in Y. Then every irreducible component C of O [def-weil-irreducible-components] has topological Krull dimension [def-kun-topological-krull-dimension] n. Empty O is allowed, and no finite type or global quasi-compactness is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0055 (local dimension) and 0052 (2), (3); open-cover dimension bound in the source library"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Replace Y by the open subscheme O. Local dimension is preserved by the open inclusion. Since the local dimension n is finite, each point has an open neighbourhood of dimension at most n: the infimum defining local dimension is less than n+1, and dimensions below n+1 are at most n. Cover O by all such opens; the open-cover dimension bound gives dim O≤n. Each component embeds into O, hence also has dimension at most n.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-bound-open-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose any point of a component C, then an affine member of the canonical affine cover of O containing it. The affine member is noetherian, and its inverse image of C is an irreducible component by the open embedding component correspondence. In a noetherian space there are finitely many components. The complement of the other components is a nonempty open subset of the chosen component (0052 (3)). Its image E in O is open, nonempty, and contained in C. At a point of E, local dimension n≤dim E≤dim C. Combine this with the upper bound. Empty O has no component. This is fully proved in Lean, including the finite-infimum/open-cover argument.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-weil-irreducible-components",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-weil-pbc-dimension-bound-open-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0055 (local dimension) and 0052 (2), (3); open-cover dimension bound in the source library"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant local topological dimension implies irreducible components have the same dimension in a locally noetherian space",
+   "results": "Service unavailable: Internal Server Error, through msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally noetherian scheme with constant finite local topological dimension has all irreducible components of that dimension",
+   "results": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian and IsLocallyArtinian.of_topologicalKrullDim_le_zero. Neither gives the stated constant dimension result.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponents",
+   "results": "preimage_mem_irreducibleComponents, isClosed_of_mem_irreducibleComponents and finite-component topology results are usable parts, not the whole theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|constant.*dimension in Mathlib/Topology/KrullDimension.lean and AlgebraicGeometry/Noetherian.lean; source WeilConjectures/Mathlib/Topology/KrullDimension.lean; blueprint constant local dimension",
+   "results": "Source provides topologicalKrullDimAt, IsOpen.topologicalKrullDimAt_eq and the dimension bound for open covers. Mathlib provides noetherianSpace_of_isAffine, preimage_mem_irreducibleComponents and NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent. No existing whole theorem; no blueprint match.",
+   "verdict": "prove from existing parts",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EquidimensionalFibreOpenPartition",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: Pure component dimension from constant finite local dimension",
+   "via": [
+    "lem-sbc-cohen-macaulay-equidimensional-fibre-pieces",
+    "lem-sbc-cohen-macaulay-fibre-dimension-decomposition",
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantLocalDimensionComponents.lean",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_component_eq_of_constant_local_dimension",
+  "statement": "theorem topologicalKrullDim_component_eq_of_constant_local_dimension\n    {Y : Scheme.{u}} [IsLocallyNoetherian Y] (O : Y.Opens) (n : ℕ)\n    (hdim : ∀ x ∈ O, topologicalKrullDimAt x = (n : WithBot ℕ∞))\n    (C : Set O) (hC : C ∈ irreducibleComponents ↥O) :\n    topologicalKrullDim C = (n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T145730-L-752517",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T145730-L-752517",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
