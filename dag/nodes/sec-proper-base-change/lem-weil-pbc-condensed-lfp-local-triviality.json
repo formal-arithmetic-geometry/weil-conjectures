@@ -30,9 +30,127 @@
   "def-weil-l-adic-coefficient-extension",
   "def-constructible-stratification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the continuous-function presheaf is a ring sheaf. For an fpqc covering of a site object $V$, a compatible family of continuous functions to $E$ gives a unique set function on $|V|$: two points of covering members above the same base point have a common point in their fibre product, since the tensor product of their residue fields over the base residue field is nonzero. Compatibility thus makes their values equal. For every open subset $O\\subseteq E$, the inverse image of $O$ in each covering member is open, so [lem-weil-pbc-fpqc-detects-openness] makes its inverse image in $|V|$ open. The descended function is continuous. Pointwise addition and multiplication descend as well. Site coverings are fpqc by [def-weil-pbc-proetale-site].",
+   "uses": [
+    "lem-weil-pbc-fpqc-detects-openness",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, sheaf-property proof; Stacks openness tool is the statement of the cited node"
+   }
+  },
+  {
+   "text": "On a weakly contractible affine $U$, apply [lem-weil-pbc-condensed-point-basis-evaluation] to $F=C(-,E)$: $(E_X^c)(U)=C(\\pi_0(|U|),E)$. A continuous map $|U|\\to E$ is constant on each connected component, because $E$ is totally disconnected. It factors continuously through the quotient $\\pi_0(|U|)$; conversely any continuous function on that quotient composes to one on $|U|$. Thus the formula identifies the two rings, naturally under restrictions. Every site object is covered by these affines by [lem-weil-pbc-proetale-affine-wcontractible-covering-family]. Sheaf gluing extends the identification uniquely to all site objects: on overlaps restrict to such an affine cover and use naturality, then glue. This proves the canonical ring-sheaf isomorphism, with the coefficient ring exactly as in [def-weil-pbc-condensed-e-module-category].",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; restriction and basis-gluing argument written out"
+   }
+  },
+  {
+   "text": "Define $r(x)$ intrinsically, rather than from a chosen presentation. For a geometric point $\\bar x:\\operatorname{Spec}K\\to X$, pull back $P$ and then evaluate at $\\operatorname{Spec}K$. The abelian inverse image preserves cokernels by [lem-weil-pbc-site-pullback-abelian-exact]; the composition comparisons in [lem-weil-pbc-profinite-point-pullback] identify its coefficient ring with $E_{\\operatorname{Spec}K}^c$. By [lem-weil-pbc-geometric-field-proetale-evaluation], evaluation preserves cokernels and has coefficient ring $C(*,E)=E$. Base changing a presentation covering to $\\operatorname{Spec}K$ gives a covering there, and its section through one member lets one pull that finite presentation back to the final object. Consequently the evaluated module is a finite-dimensional $E$-vector space; set $r(x)$ equal to its dimension. Its value is independent of the algebraically closed representative: each such field contains an algebraic closure of $\\kappa(x)$, and the extension comparisons of the same cited node preserve evaluation. In particular, if $v\\in V_\\alpha$ lies above $x$ and $A_\\alpha$ is the $n_\\alpha$ by $m_\\alpha$ matrix of the presentation, then $r(x)=n_\\alpha-\\operatorname{rank}_E A_\\alpha(v)$. A module map between finite free ring sheaves is a matrix of global ring sections: its columns are the images of the unit basis sections, and linearity determines it. The coefficient identification of the preceding step turns these sections into continuous functions.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.2.11; agent rank construction using exact inverse image and split covers, not the lisse-heart theorem"
+   }
+  },
+  {
+   "text": "If $x$ is a generalization of $y$ in $X$, choose $v\\in V_\\alpha$ above $y$. The map $V_\\alpha\\to X$ is flat by [def-weil-pbc-proetale-site] and [def-weil-flat-morphism]. Apply [lem-sc-flat-going-down] to the flat local ring map $\\mathcal O_{X,y}\\to\\mathcal O_{V_\\alpha,v}$, lifting the prime corresponding to $x$ below the maximal ideal; it gives a generalization $v'$ of $v$ above $x$. Continuous maps to the Hausdorff field $E$ have equal values at two comparable points: continuity carries specialization to specialization and a Hausdorff space has only equality specializations. Hence every entry of $A_\\alpha(v')$ equals the corresponding entry of $A_\\alpha(v)$. The formula of the preceding step proves $r(x)=r(y)$. No openness of the weakly etale covering map is assumed.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-flat-morphism",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent rank descent; going-down source is Stacks Algebra Tag 00HS (lemma-flat-going-down), as recorded in the cited node"
+   }
+  },
+  {
+   "text": "The topologically noetherian hypothesis gives finitely many irreducible components $Z_i$ by [lem-sc-noetherian-finite-irreducible-components]. Each has a generic point $\\eta_i$ by [lem-sc-scheme-sober]. Every $x\\in Z_i$ specializes from $\\eta_i$, so the preceding step gives $r(x)=r(\\eta_i)$. Therefore each rank level is a union of some of the finitely many closed components. Its complement is also a finite union of closed components, so the level is clopen. These finitely many clopen levels cover $X$. Notice that algebraic noetherianity of coordinate rings was not used.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent topological rank argument; finite-components and sobriety tools are Stacks Tags 0052 and 01IS, respectively"
+   }
+  },
+  {
+   "text": "Restrict each presentation on $V_\\alpha$ to the inverse images of the clopen rank levels of $X$. These are open subschemes and cover $V_\\alpha$. Restriction preserves its cokernel by [lem-weil-pbc-site-pullback-abelian-exact], and [lem-weil-pbc-profinite-point-pullback] identifies the restricted coefficient with the corresponding coefficient ring sheaf. On one such piece $V$, write its matrix as $A$, of size $n$ by $m$, and write $r$ for the base rank. The evaluation formula from step 3 gives $\\operatorname{rank}_E A(v)=s:=n-r$ at every point $v\\in V$. In particular $0\\le s\\le\\min(m,n)$.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent argument: pull back the rank partition, retaining each original finite presentation"
+   }
+  },
+  {
+   "text": "For $s>0$, the nonvanishing loci of the $s$ by $s$ minors of $A$ are open and cover $V$; for $s=0$ use all of $V$. On a locus with invertible minor, permute rows and columns to write $A=\\left(\\begin{smallmatrix}B&C\\cr D&H\\end{smallmatrix}\\right)$ with $\\det B\\ne0$ everywhere. The entries of $B^{-1}=\\operatorname{adj}(B)/\\det B$ are continuous, so define ring sections on this locus. The invertible block operations give $\\left(\\begin{smallmatrix}B^{-1}&0\\cr -DB^{-1}&1\\end{smallmatrix}\\right)A\\left(\\begin{smallmatrix}1&-B^{-1}C\\cr 0&1\\end{smallmatrix}\\right)=\\left(\\begin{smallmatrix}1&0\\cr 0&H-DB^{-1}C\\end{smallmatrix}\\right)$. Pointwise rank $s$ implies every entry of the Schur complement vanishes at every point; since these sections are actual functions, it is the zero matrix of sections. The cokernel is thus the free coefficient sheaf of rank $n-s=r$. If $s=0$, every entry of $A$ vanishes pointwise and its cokernel is the free sheaf of rank $n$. This proves a sheaf isomorphism by explicit matrix operations, without using geometric-point conservativity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent Gaussian elimination step, explicit Schur complement calculation"
+   }
+  },
+  {
+   "text": "The opens in step 7 cover each piece in step 6, and those pieces cover the given presentation covering. Composing these coverings gives the required pro-etale covering of $X$ with $P$ finite free on every member. For a noetherian locally closed stratum in [def-constructible-stratification], apply the same result to that stratum and the finite presentations supplied by [def-weil-pbc-condensed-e-module-category]. Rank zero, zero rows or columns, and the empty scheme are included (on the empty scheme use the empty covering). All constructions used ordinary sheaf cokernels; no completeness condition entered.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-constructible-stratification",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent conclusion and application to strata; archived ProEtaleModule/Def.lean local finite presentation is unchanged"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fpqc-detects-openness",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "def-weil-proetale-inverse-image",
+  "def-weil-flat-morphism",
+  "lem-sc-flat-going-down",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-constructible-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 for coefficient realization; rank/descent and matrix proof supplied by ND, not quoted from Theorem 6.2"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,13 +200,77 @@
    "date": "2026-10-14",
    "results": "0 hits: ; ",
    "verdict": "no match: checked returned declarations; none states this pro-etale or derived ringed-site result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented sheaves over continuous p-adic field coefficients on a topologically noetherian scheme are locally free",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, Module.FinitePresentation.exists_free_localizedModule_powers; ",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; none gives the scheme pro-etale assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.IsFinitePresentation\"",
+   "results": "4 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation.mk; ",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; none gives the scheme pro-etale assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*locallyFree|continuous.*finitePresentation|condensedRingObj",
+   "results": "0 hits: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; none gives the scheme pro-etale assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation over continuous field coefficients on a noetherian scheme implies proetale local freeness",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation sheaf with topological field coefficients is locally finite free when scheme has finitely many irreducible components",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; ",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; none gives the scheme pro-etale assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-sheaf-ext-continuity",
   "by": "worker",
   "date": "2026-10-13"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-condensed-lfp-local-triviality",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and clause. Proved continuous coefficient realization on the w-contractible basis, defined intrinsic geometric fibre rank, descended specialization invariance by flat going-down, used topological noetherianity and scheme sobriety to make rank locally constant, and wrote Schur complement elimination. Two general statement-only inputs; no E-specific local-freeness clause moved to a new node.",
+  "blueprint": "thm-weil-pbc-qbar proof, first sentence about descent through the common-stage colimit: supplies the finite-presentation/local-freeness bridge required in derived Hom continuity. It realizes this lower-level bridge without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-detects-openness",
+    "why": "Generic topology descent for gluing continuous functions; no unit-local statement gives it."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of geometric inverse image used for presentations, not a replacement of the proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-detects-openness",
+  "lem-weil-pbc-site-pullback-abelian-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-c073dfbcd",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-c073dfbcd (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Both new nodes omit required created.by and created.date fields; corrected whole-node JSON files are in fixes/dag/nodes/sec-proper-base-change/. Review written to review.md.; 2 file(s) fixed by the reviewer"
  }
 }
