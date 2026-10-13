@@ -9,8 +9,9 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.QuasiIso
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Mathlib.Algebra.Module.LocalizedModule.Exact
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Mathlib.CategoryTheory.Abelian.Projective.Extend
+import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Sheafifying a prescribed finite free resolution
 
@@ -73,6 +74,136 @@ theorem finite_free_resolution_sheafification
         (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) 0).obj
           ((Scheme.Modules.overEquiv U).inverse.obj
             ((Scheme.Modules.restrictFunctor e.hom).obj (tilde (ModuleCat.of A M)))),
-        QuasiIso q := by sorry
+        QuasiIso q := by
+  classical
+  let V : ℕ → ModuleCat.{u} A := fun j ↦ ModuleCat.of A (Fin (n j) → A)
+  have sq (j : ℕ) : ModuleCat.ofHom (d (j + 1)) ≫ ModuleCat.ofHom (d j) = 0 := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change d j (d (j + 1) x) = 0
+    apply LinearMap.mem_ker.mp
+    rw [hd j]
+    exact LinearMap.mem_range.mpr ⟨x, rfl⟩
+  let K := ChainComplex.of V (fun j ↦ ModuleCat.ofHom (d j)) sq
+  have aug : K.d 1 0 ≫ ModuleCat.ofHom ε = 0 := by
+    change ModuleCat.ofHom (d 0) ≫ ModuleCat.ofHom ε = 0
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change ε (d 0 x) = 0
+    apply LinearMap.mem_ker.mp
+    rw [h₀]
+    exact LinearMap.mem_range.mpr ⟨x, rfl⟩
+  let π := (ChainComplex.toSingle₀Equiv K (ModuleCat.of A M)).symm
+    ⟨ModuleCat.ofHom ε, aug⟩
+  have hπ : QuasiIso π := by
+    constructor
+    intro j
+    cases j with
+    | zero =>
+      rw [ChainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros']
+      · change (ShortComplex.mk _ _ aug).Exact ∧ Epi (ModuleCat.ofHom ε)
+        constructor
+        · rw [ShortComplex.moduleCat_exact_iff_range_eq_ker]
+          simpa [K, ChainComplex.of.d] using h₀.symm
+        · exact (ModuleCat.epi_iff_surjective _).mpr hε
+      all_goals rfl
+    | succ j =>
+      rw [quasiIsoAt_iff_exactAt']
+      · rw [HomologicalComplex.exactAt_iff' K (j + 2) (j + 1) j (by simp) (by simp)]
+        rw [ShortComplex.moduleCat_exact_iff_range_eq_ker]
+        simpa [K, ChainComplex.of.d, HomologicalComplex.sc',
+          HomologicalComplex.shortComplexFunctor'] using
+          (hd j).symm
+      · apply ChainComplex.exactAt_succ_single_obj
+  let R : ProjectiveResolution (ModuleCat.of A M) :=
+    { complex := K
+      π := π
+      projective := fun j ↦ by dsimp [K, V]; infer_instance
+      quasiIso := hπ }
+  -- Use kernel preservation and the tilde adjunction for exactness, replacing
+  -- the stalk-localization argument described in the source proof.
+  let T := tilde.functor (CommRingCat.of A)
+  let F := Scheme.Modules.restrictFunctor e.hom
+  let G := (Scheme.Modules.overEquiv U).inverse
+  let : T.IsLeftAdjoint := (tilde.adjunction (R := CommRingCat.of A)).isLeftAdjoint
+  let := preservesBinaryBiproducts_of_preservesBinaryCoproducts T
+  let : T.Additive := Functor.additive_of_preservesBinaryBiproducts T
+  let : F.IsLeftAdjoint := (Scheme.Modules.restrictAdjunction e.hom).isLeftAdjoint
+  let : PreservesFiniteLimits F := by
+    dsimp [F]
+    infer_instance
+  let H := (T ⋙ F) ⋙ G
+  let tilde_preservesKernel : ∀ {P Q : ModuleCat.{u} A} (f : P ⟶ Q),
+      Limits.PreservesLimit (Limits.parallelPair f 0) (tilde.functor (.of A)) := by
+    intro P Q f
+    let T := tilde.functor (.of A)
+    let ff : T.FullyFaithful := tilde.fullyFaithfulFunctor (R := .of A)
+    let : T.Full := ff.full
+    let : T.Faithful := ff.faithful
+    let : T.IsLeftAdjoint := (tilde.adjunction (R := .of A)).isLeftAdjoint
+    let := Limits.preservesBinaryBiproducts_of_preservesBinaryCoproducts T
+    let : T.Additive := Functor.additive_of_preservesBinaryBiproducts T
+    have : (T.obj P).IsQuasicoherent := by
+      change (tilde.{u} (R := .of A) P).IsQuasicoherent
+      infer_instance
+    have : (T.obj Q).IsQuasicoherent := by
+      change (tilde.{u} (R := .of A) Q).IsQuasicoherent
+      infer_instance
+    let k := Limits.kernel (T.map f)
+    have hk : k.IsQuasicoherent := Scheme.Modules.isQuasicoherent_kernel (T.map f)
+    have : IsIso (Scheme.Modules.fromTildeΓ (R := .of A) k) :=
+      Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := .of A) k
+    let e : T.obj ((moduleSpecΓFunctor (R := .of A)).obj k) ≅ k :=
+      asIso (Scheme.Modules.fromTildeΓ (R := .of A) k)
+    let t := T.preimage (e.hom ≫ Limits.kernel.ι (T.map f))
+    have ht : t ≫ f = 0 := by
+      apply T.map_injective
+      simp only [Functor.map_comp, Functor.map_preimage, Functor.map_zero,
+        Category.assoc, Limits.kernel.condition, Limits.comp_zero, t]
+    let c := Limits.KernelFork.ofι t ht
+    have hc : Limits.IsLimit (c.map T) := by
+      apply Limits.IsLimit.ofIsoLimit (Limits.kernelIsKernel (T.map f))
+      exact Limits.Fork.ext e.symm (by simp [c, t, Limits.KernelFork.map])
+    have hc' : Limits.IsLimit c :=
+      Limits.isLimitOfReflects T ((c.isLimitMapConeEquiv T).symm hc)
+    exact Limits.preservesLimit_of_preserves_limit_cone hc'
+      ((c.isLimitMapConeEquiv T).symm hc)
+  let : ∀ {P Q : ModuleCat.{u} A} (f : P ⟶ Q),
+      PreservesLimit (parallelPair f 0) T := fun {_ _} f ↦ tilde_preservesKernel f
+  let : PreservesFiniteLimits T := Functor.preservesFiniteLimits_of_preservesKernels T
+  let : PreservesFiniteLimits (T ⋙ F) := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteLimits H := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits (T ⋙ F) := comp_preservesFiniteColimits _ _
+  let : PreservesFiniteColimits H := comp_preservesFiniteColimits _ _
+  let E := (H.mapHomologicalComplex (ComplexShape.up ℤ)).obj R.cochainComplex
+  refine ⟨E, ⟨0, ?_⟩, ?_, ?_⟩
+  · intro i hi
+    exact H.map_isZero (CochainComplex.isZero_of_isStrictlyLE R.cochainComplex 0 i)
+  · intro i
+    by_cases hi : i ≤ 0
+    · obtain ⟨j, rfl⟩ := Int.exists_eq_neg_ofNat hi
+      let b := (Pi.basisFun A (Fin (n j))).reindex Equiv.ulift.symm
+      let t := T.mapIso b.repr.toModuleIso ≪≫ tildeFinsupp (ULift.{u} (Fin (n j)))
+      let f := (SheafOfModules.mapFreeIso F (ULift.{u} (Fin (n j)))
+        (Scheme.Modules.restrictUnitIso e.hom).symm).symm
+      let g := (SheafOfModules.mapFreeIso G (ULift.{u} (Fin (n j)))
+        (U.sheafOfModulesEquivOverInverseUnit X.ringCatSheaf).symm).symm
+      exact ⟨n j, ⟨H.mapIso (R.cochainComplexXIso (-j) j) ≪≫
+        G.mapIso (F.mapIso t ≪≫ f) ≪≫ g⟩⟩
+    · have hz := H.map_isZero
+        (CochainComplex.isZero_of_isStrictlyLE R.cochainComplex 0 i)
+      have hzero : IsZero (SheafOfModules.free
+          (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin 0))) := by
+        apply (IsZero.iff_id_eq_zero _).2
+        apply Sigma.hom_ext
+        intro j
+        exact Fin.elim0 j.down
+      exact ⟨0, ⟨hz.iso hzero⟩⟩
+  · let q := (H.mapHomologicalComplex (ComplexShape.up ℤ)).map R.π' ≫
+      (HomologicalComplex.singleMapHomologicalComplex H (ComplexShape.up ℤ) 0).hom.app
+        (ModuleCat.of A M)
+    exact ⟨q, by dsimp [q]; infer_instance⟩
 
 end AlgebraicGeometry

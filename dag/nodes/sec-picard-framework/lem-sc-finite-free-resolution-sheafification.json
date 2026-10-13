@@ -15,21 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Define the cochain complex from the augmented exact resolution by placing the j-th free module in degree -j and zero above degree zero; kernel-range identities give d squared zero and the augmentation.",
+   "text": "Define K using ChainComplex.of on the finite function modules with differentials d. The supplied kernel-range identities imply square-zero and augmentation compatibility. The degree-zero quasi-isomorphism criterion is augmented exactness plus surjectivity of ε; at each positive chain degree it is exactly hd. Package K and its augmentation as a projective resolution, since each finite function module is free.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply tilde termwise; localization of tilde stalks and module stalk exactness imply the augmented sheaf complex is quasi-isomorphic to the degree-zero tilde module.",
+   "text": "Prove that tilde preserves kernels: the kernel of a map between tilde modules is quasi-coherent, so its tilde-global-sections counit is an isomorphism. Lift its kernel fork using full faithfulness of tilde, and reflect the limiting property. Tilde is an additive left adjoint, hence also preserves colimits. Therefore it preserves homology and quasi-isomorphisms.",
    "uses": [
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-module-stalk-exact"
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-spec-module-tilde-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the complex and augmentation across the affine chart and over-site equivalences; finite functions give finite free sheaf terms, including rank zero above the bound.",
+   "text": "Extend the projective resolution to integer cochain degrees by n ↦ -n. Apply tilde, restriction along e, and the inverse over-site equivalence termwise. These exact functors preserve the augmentation quasi-isomorphism. Compose with the canonical single-complex comparison. The bound is zero. In degree -j use the standard finite-function basis, reindex by ULift, tildeFinsupp, and mapFreeIso for both transports. In positive degrees identify the transported zero object with the free sheaf on ULift (Fin 0).",
    "uses": [
     "lem-weil-pbc-spec-module-tilde-sections"
    ],
@@ -37,15 +36,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
   "lem-weil-pbc-spec-module-tilde-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Tag 01HV, functorial exactness of tilde, applied to the resolution of Tag 00LP, with stalk detection from Tag 01AG"
+  "place": "Tags 01HV and 01IC: exactness of associated sheaves and quasi-coherent kernels. The kernel-fork argument uses full faithfulness and the tilde/global-sections counit; formalized by J4 with Mathlib projective-resolution extension and homology-preserving functors."
  },
  "mathlib_searches": [
   {
@@ -116,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T165513-L-2933591",
-  "kind": "interface",
+  "landing": "20261013T001614-L-2330405",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
