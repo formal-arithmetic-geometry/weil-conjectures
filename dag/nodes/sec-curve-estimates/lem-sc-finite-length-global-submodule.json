@@ -57,59 +57,49 @@
  "unit": "sk-thm-curveestimate",
  "proof": [
   {
-   "text": "If x is a unit, then xM=M and M/xM=0, which has finite length. Thus assume x is a nonunit.",
+   "text": "Let S be the maximal ideals containing x. It is finite by [lem-sc-finite-maximals-over-element]; no separate unit reduction is necessary.",
    "uses": [
-    "def-weil-pbc-module-length"
+    "lem-sc-finite-maximals-over-element"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 10.30.9 (Tag 00PF), opening reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "Let S be the finite set of maximal ideals containing x, supplied by [lem-sc-finite-maximals-over-element]. For each m in S, localization gives the Noetherian local domain R_m, preserves the fraction field K, and preserves the dimension-one prime-chain bound; M_m is an R_m-submodule of K^{\\oplus r}. The local finite-length theorem [lem-weil-pbc-dim-one-submodule-quotient-finite-length] therefore gives finite length of M_m/xM_m.",
+   "text": "Set Q=M/xM. The scalar x annihilates Q. If a maximal ideal m does not contain x, x is a denominator for localization at m, so every q in Q becomes zero in Q_m. Thus Q_m is zero outside S.",
    "uses": [
-    "lem-sc-finite-maximals-over-element",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For m in S, set A=R_m. Its height equals one: the nonzero x in m gives 0<m, while dim R=1 bounds the height above. Mathlib identifies dim A with this height. A is a Noetherian local domain. The localization lift A to K gives its fraction-field algebra structure. Localizing M inside K^r along the identity map produces an A-submodule L and its localization map f. The image of x remains nonzero. Apply [lem-weil-pbc-dim-one-submodule-quotient-finite-length] to L. Localization commutes with quotient, and the localized submodule xM is (image x)L by localized'_smul and localized'_span. The universal property gives an A-linear equivalence Q_m with L/(image x)L; transfer finite length along this equivalence.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-krull-dimension-ring",
     "lem-weil-pbc-dim-one-submodule-quotient-finite-length"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00PF (lemma-finite-length-global), algebra.tex lines 29275-29289"
-   }
+   "elementary": false
   },
   {
-   "text": "Put Q=M/xM. It is killed by x, so Q_m=0 for every maximal ideal m outside S. If N is a nonzero subquotient of Q, choose a nonzero element of N; its annihilator is proper and is contained in some maximal ideal m, and x in that maximal ideal, so m lies in S. Hence every strict inclusion in a chain of submodules of Q remains strict after localization at at least one m in S.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00PF (lemma-finite-length-global), algebra.tex lines 29289-29302"
-   }
-  },
-  {
-   "text": "For each m in S, localization sends a chain of submodules of Q to a chain in Q_m. Given a strict chain N_0 subsetneq ... subsetneq N_k in Q, step 3 chooses for each index i a maximal ideal m(i) in S where N_{i-1,m(i)} subsetneq N_{i,m(i)} remains strict. For a fixed m, the indices with m(i)=m form a strictly increasing subchain after localization, so their number is at most length_{R_m}(Q_m), finite by step 2. Summing over the finite set S bounds k by the sum of these local lengths. Hence every chain in Q has bounded finite length, so Q=M/xM has finite length.",
+   "text": "Apply [lem-sc-finite-length-finite-maximal-support] to Q and S. It transfers both chain conditions along the localization order embedding into the finite product of the local submodule lattices, and concludes finite global length [def-weil-pbc-module-length].",
    "uses": [
-    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "lem-sc-finite-length-finite-maximal-support",
     "def-weil-pbc-module-length"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00PF (lemma-finite-length-global), algebra.tex lines 29289-29302"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-length",
   "lem-sc-finite-maximals-over-element",
-  "lem-weil-pbc-dim-one-submodule-quotient-finite-length"
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+  "lem-sc-finite-length-finite-maximal-support",
+  "def-weil-pbc-module-length"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 10.30.9 (Tag 00PF), global localization argument reconstructed from the cited proof"
+  "place": "Tag 00PF; explicit localization and quotient equivalences, with its final local-to-global implication proved through both chain conditions. K4, 2026-10-13."
  },
  "split_report": {
   "date": "2026-10-11",
@@ -164,5 +154,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T033005-L-3677345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

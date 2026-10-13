@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-finite-length-finite-maximal-support",
+ "kind": "statement",
+ "title": "Finite length from finite maximal support",
+ "statement": "Let R be a commutative ring and Q an R-module. For a maximal ideal m let Q_m be its localization [def-weil-pbc-module-localization], regarded as an R_m-module. Suppose S is a finite set of maximal ideals, Q_m is zero for every maximal ideal outside S, and Q_m has finite length over R_m [def-weil-pbc-module-length] for every m in S. Then Q has finite length over R.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PF, final local-to-global implication; https://stacks.math.columbia.edu/tag/00PF. The lattice proof of the finite-support generalization is written by K4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "For every submodule N of Q take its localizations at the maximal ideals in S, defined by [def-weil-pbc-module-localization]. This defines a monotone map from Submodule R Q to the finite product of the local submodule lattices.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "This map reflects inclusion. If localized N is contained in localized P at every ideal in S, it is also contained at ideals outside S since those local modules are zero. Localization at all maximal ideals detects membership: for q not in P, the proper ideal {a : a q lies in P} is contained in a maximal ideal m, and q/1 cannot lie in P_m since clearing denominators would give an element outside m in that ideal. Apply this to every element of N. Mathlib Submodule.le_of_localization_maximal implements this test. Thus the map is an order embedding.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Each local submodule lattice has ascending and descending chain conditions because its module has finite length [def-weil-pbc-module-length], by Module.length_ne_top_iff and isFiniteLength_iff_isNoetherian_isArtinian. A finite pointwise product of such lattices has both chain conditions (Pi.wellFoundedLT, also applied to the dual lattices). Order embeddings inherit both chain conditions. Thus Q is Noetherian and Artinian, and Module.length_ne_top gives finite length. The empty product case is included.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-length"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PF, final local-to-global implication; https://stacks.math.columbia.edu/tag/00PF. The lattice proof of the finite-support generalization is written by K4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite length module finite support localizations maximal ideals",
+   "results": "Service returned Internal Server Error; unavailable. No verdict drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module has finite length if it has finitely many nonzero maximal localizations and all of them have finite length",
+   "results": "IsFiniteLength, Module.length_ne_top_iff and the Noetherian-Artinian equivalence; no local-to-global finite-support criterion. Loogle IsFiniteLength returned the same general equivalences.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length.*locali|locali.*length; finite maximal support in Mathlib and the library; blueprint searches finite length localization and 00PF",
+   "results": "Mathlib local-ring extension length formulas and ramification quotient identities only. LocalProperties.Submodule supplies inclusion detection; no finite-support length result. No matching imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteLengthGlobalSubmodule",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09IG proof: By Krull-Akizuki the ring B is Noetherian; the global finite-length step of 00PF, combining the finitely many maximal localizations.",
+   "via": [
+    "lem-sc-finite-length-global-submodule",
+    "lem-sc-krull-akizuki-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteLengthOfFiniteMaximalSupport",
+  "declaration": "Module.length_lt_top_of_finite_maximal_support",
+  "file": "lean/Sheaf/RingTheory/FiniteLengthOfFiniteMaximalSupport.lean",
+  "statement": "theorem length_lt_top_of_finite_maximal_support {R : Type u} [CommRing R] {Q : Type v} [AddCommGroup Q] [Module R Q] (S : Set (MaximalSpectrum R)) (hS : S.Finite) (hzero : ∀ m : MaximalSpectrum R, m ∉ S → Subsingleton (LocalizedModule m.asIdeal.primeCompl Q)) (hlength : ∀ m ∈ S, Module.length (Localization m.asIdeal.primeCompl) (LocalizedModule m.asIdeal.primeCompl Q) < ⊤) : Module.length R Q < ⊤",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T033005-L-3677345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T033005-L-3677345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
