@@ -5,6 +5,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
+import Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise
 import Sheaf.Topology.ClosedImmersionPushforwardExact
 
 @[expose] public section
@@ -36,6 +37,9 @@ theorem nonempty_selfTor_projection_homology
     Nonempty (((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (S.obj B ⊗ S.obj B)) ≅
       (Scheme.Modules.pushforward i).obj (Q.homology k)) := by
-  sorry
+  dsimp
+  obtain ⟨h⟩ := nonempty_selfTor_projection_homology_termwise i P a hP k
+  let eH := HomologicalComplex.homologyMapIso e k
+  exact ⟨h ≪≫ (Scheme.Modules.pushforward i).mapIso eH.symm⟩
 
 end AlgebraicGeometry
