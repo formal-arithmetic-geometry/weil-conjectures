@@ -15,22 +15,34 @@
  ],
  "proof": [
   {
-   "text": "On each affine open, quasi-coherence identifies N with the sheaf of its finite module of sections. The affine ring is Noetherian, so this module is finitely presented and N is coherent.",
-   "uses": [],
-   "elementary": false
+   "text": "Lower the boundary depth bound from two to one by transitivity. Apply the depth-one injectivity theorem to get injectivity of every unit component. Mathlib stalkFunctor_map_injective_of_app_injective gives injectivity on all stalks.",
+   "uses": [
+    "lem-sbc-depth-one-restriction-injective"
+   ],
+   "elementary": true
   },
   {
-   "text": "The restriction-adjunction unit is the map of Tag 0E9I: on an open V it restricts sections to V intersect U. Tag 0E9I makes this map an isomorphism under the assumed boundary depth. In its proof, the map is already an isomorphism on U; outside U the direct image has no associated points by Tags 0AVN and 05AM, and the depth-two comparison criterion of Tag 0AVM applies. Work on Noetherian affine opens, where the open immersion is quasi-compact, to see the direct image is quasi-coherent. No global quasi-compactness is needed. The zero module, U empty, U equal to L and L empty are included.",
+   "text": "At a point of U, the restricted unit is an isomorphism by the restriction adjunction triangle identity and its invertible counit. The proved source-library lemma bijective_stalk_of_isIso_restrict makes the original stalk map bijective there. At a boundary point use the boundary-surjectivity theorem and combine it with the preceding injectivity.",
+   "uses": [
+    "lem-sbc-depth-two-restriction-boundary-surjective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib app_bijective_of_stalkFunctor_map_bijective to the underlying sheaves of abelian groups. Every unit component is therefore bijective, hence invertible by ConcreteCategory.isIso_iff_bijective. Modules.Hom.isIso_iff_isIso_app makes the unit an isomorphism.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-depth-one-restriction-injective",
+  "lem-sbc-depth-two-restriction-boundary-surjective"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "M2",
+  "by": "D3",
   "document": "Stacks Project",
-  "place": "Tag 0E9I"
+  "place": "Tag 0E9I, split into uniqueness (0B3M/05AR) and boundary surjectivity (0AV8/0AVN)"
  },
  "mathlib_searches": [
   {
@@ -110,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f29dc",
-  "group": "M2",
+  "reviewer": "COMPILER",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T072357-L-1122340",
+  "landing": "20261013T082336-L-1632718",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures match both nodes; existing signature unchanged. Both delivered modules and the sole direct importer, DepthTwoPushforwardCoherence, compile cleanly. Axioms match the reported Hartogs dependency; the remaining lemma agrees with Stacks Tag 0E9I."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

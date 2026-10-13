@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-depth-one-restriction-injective",
+ "kind": "statement",
+ "title": "Uniqueness of restriction across a depth-positive boundary",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], $U$ an open subscheme, and $N$ a quasi-coherent module [pqf-def-coherent]. Suppose $N(V)$ is finite over $\\mathcal O_L(V)$ for every affine open $V$. Suppose for every $y\\notin U$ the stalk $N_y$ is finite and has depth at least one [def-weil-pbc-depth]. Then for every open $V$ the restriction map $N(V)\\to (j_*(N|_U))(V)$ is injective, where $j:U\\hookrightarrow L$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0B3M, 05AR and 00LL; injectivity step of Tag 0E9I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Work on a Noetherian affine open V. Its module N(V) is finite. Positive depth at a boundary point gives a nonzerodivisor in the maximal ideal, so that ideal cannot be associated to the stalk. Associated and weakly associated points coincide on locally Noetherian schemes (05AR). Hence all weakly associated points lie in U.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "A section vanishing on V intersect U has cyclic image subsheaf supported outside U. Its weakly associated points are among those of N, and also in its support. There are none. A module with no weakly associated points is zero. This is the argument of 0B3M and proves injectivity on V.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary V cover V by affine opens. Two sections with the same restriction to V intersect U agree on each affine member by the preceding argument, so separatedness makes them equal. The unit component is restriction by Mathlib restrictAdjunction_unit_app_app.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "D3",
+  "document": "Stacks Project",
+  "place": "Tags 0B3M, 05AR and 00LL; injectivity step of Tag 0E9I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf has injective restriction to an open subset when its depth is positive at every point of the complement",
+   "results": "8 hits; general stalk injectivity/surjectivity and sheaf criteria, but no depth-boundary restriction theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaf restriction to an open subset is injective if all boundary stalks have depth at least one",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs|depth.*restriction|restriction.*depth",
+   "results": "0 hits in Mathlib. Also searched the project sheaves and source library: no existing theorem with these hypotheses and conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth >=2 extension paragraph: Uniqueness of restriction across a depth-positive boundary.",
+   "via": [
+    "lem-sbc-depth-two-hartogs-restriction",
+    "lem-sbc-depth-two-hartogs-algebra-comparison",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthOneRestrictionInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthOneRestrictionInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.injective_restrictAdjunction_unit_app_of_depth_one",
+  "statement": "theorem injective_restrictAdjunction_unit_app_of_depth_one\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (N : L.Modules)\n    (hqc : N.IsQuasicoherent)\n    (hsections : ∀ V : L.Opens, IsAffineOpen V →\n      Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V)))\n    (hdepth : ∀ y : L, y ∉ U →\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n        letI := hfinite\n        (1 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y))  :\n    ∀ V : L.Opens,\n      Function.Injective (((Modules.restrictAdjunction U.ι).unit.app N).app V)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T082336-L-1632718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T082336-L-1632718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

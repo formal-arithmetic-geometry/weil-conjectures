@@ -12,6 +12,10 @@ public import Sheaf.RingTheory.Depth
 
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 
+import Sheaf.AlgebraicGeometry.Morphisms.DepthOneRestrictionInjective
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoRestrictionBoundarySurjective
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+
 /-! # Restriction and direct image of a depth-two module
 
 Source: Stacks Project, Tag 0E9I.
@@ -56,6 +60,32 @@ theorem isIso_restrictAdjunction_unit_of_depth_two
         letI := hfinite
         (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)
           (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) :
-    IsIso ((Modules.restrictAdjunction U.ι).unit.app N) := by sorry
+    IsIso ((Modules.restrictAdjunction U.ι).unit.app N)  := by
+  classical
+  let η := (Modules.restrictAdjunction U.ι).unit.app N
+  have hdepth₁ : ∀ y : L, y ∉ U →
+      ∃ hfinite : Module.Finite (L.presheaf.stalk y)
+          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),
+        letI := hfinite
+        (1 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)
+          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y) := by
+    intro y hy
+    obtain ⟨hf, hd⟩ := hdepth y hy
+    exact ⟨hf, le_trans (by norm_num) hd⟩
+  have hinj := injective_restrictAdjunction_unit_app_of_depth_one U N hqc hsections hdepth₁
+  have hstalk (y : L) : Function.Bijective
+      ((stalkFunctor Ab.{u} y).map ((Modules.toPresheaf L).map η)) := by
+    by_cases hy : y ∈ U
+    · exact Modules.bijective_stalk_of_isIso_restrict η y hy
+    · refine ⟨?_, surjective_restrictAdjunction_unit_stalk_of_depth_two
+        U N hqc hsections hdepth hinj y hy⟩
+      exact stalkFunctor_map_injective_of_app_injective (fun V ↦ hinj V) y
+  rw [Modules.Hom.isIso_iff_isIso_app]
+  intro V
+  rw [ConcreteCategory.isIso_iff_bijective]
+  exact app_bijective_of_stalkFunctor_map_bijective
+    (F := ⟨N.presheaf, N.isSheaf⟩)
+    (G := ⟨_, ((Modules.pushforward U.ι).obj (N.restrict U.ι)).isSheaf⟩)
+    ⟨(Modules.toPresheaf L).map η⟩ V (fun y _ ↦ hstalk y)
 
 end AlgebraicGeometry.Scheme
