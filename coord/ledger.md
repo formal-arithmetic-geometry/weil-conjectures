@@ -13410,3 +13410,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechCofaceEvaluation (stage 3; reviewer PASS; first push; landing 20261013T190158-L-3222793 (proof); batch 20261013T190131; modules 1; new nodes 2)
 - 19:01 L: merged deliver/U2/Sheaf.Paper.EtaleRowIntegerSections (stage 3; reviewer PASS; first push; landing 20261013T190159-L-3222964 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:02 L: merged deliver/U4/Sheaf.Algebra.Homology.ResidueKernelLocalizedCokernel (stage 3; reviewer PASS; first push; landing 20261013T190159-L-3223230 (interface); batch 20261013T190131; modules 2; new nodes 1)
+- 19:02 L: merged deliver/U4/Sheaf.Algebra.Homology.ResidueKernelUnitMinorKernel (stage 3; reviewer PASS; first push; landing 20261013T190200-L-3223476 (interface); batch 20261013T190131; modules 3; new nodes 2)

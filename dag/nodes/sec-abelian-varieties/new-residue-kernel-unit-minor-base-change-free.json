@@ -1,0 +1,116 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 fixed-affine normalization: the residue-field rank-(n-1) unit-minor step, before the local-ring kernel test eliminates the remaining differential. Component: Diagonal matrix normal form for a residue rank-one kernel.",
+   "via": [
+    "new-residue-kernel-unit-minor",
+    "new-universal-h0-cokernel-local-free",
+    "new-universal-h0-split-factorization",
+    "lem-sc-universal-h0-split-differential",
+    "lem-sc-connective-universal-h0-zero-differential",
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "new-residue-kernel-unit-minor-base-change-free",
+ "kind": "statement",
+ "title": "Finite projective modules become free after localization at a prime.",
+ "statement": "For a commutative ring R, finite projective R-modules X and Y, and a prime ideal 𝔭, the scalar extensions of X and Y to Localization.AtPrime 𝔭 are free modules over that localization.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00NX and 00O0"
+ },
+ "proof": [
+  {
+   "text": "Use finite projectivity to obtain finite flatness, transport flatness across localization, and apply the theorem that finite flat modules over a local ring are free to each scalar extension.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "U4",
+  "group": "U4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 00NX and 00O0",
+  "note": "Stage-3 decomposition; the remaining proof is the standard finite-flat-over-local-ring argument from Stacks Tags 00NX and 00O0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite projective localization at prime free module",
+   "results": "No direct theorem found in imported library.",
+   "date": "2026-10-14",
+   "verdict": "none"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module.Free Localization.AtPrime Module.Projective Module.Finite",
+   "results": "No direct theorem found in imported library.",
+   "date": "2026-10-14",
+   "verdict": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Free (Localization.AtPrime _)",
+   "results": "No matching theorem found.",
+   "date": "2026-10-14",
+   "verdict": "none"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ResidueKernelUnitMinorKernel",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ResidueKernelUnitMinorBaseChangeFree",
+  "file": "lean/Sheaf/Algebra/Homology/ResidueKernelUnitMinorBaseChangeFree.lean",
+  "declaration": "ModuleCat.residue_kernel_unit_minor_base_change_free",
+  "statement": "theorem residue_kernel_unit_minor_base_change_free (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (hfX : Module.Finite R X) (hfY : Module.Finite R Y) (hpX : Module.Projective R X) (hpY : Module.Projective R Y) (𝔭 : Ideal R) [𝔭.IsPrime] : Module.Free (Localization.AtPrime 𝔭) ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj X) ∧ Module.Free (Localization.AtPrime 𝔭) ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj Y)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T190200-L-3223476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T190200-L-3223476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

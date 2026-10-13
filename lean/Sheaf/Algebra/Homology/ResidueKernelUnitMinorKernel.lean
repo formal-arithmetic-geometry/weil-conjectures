@@ -4,6 +4,8 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+import Sheaf.Algebra.Homology.ResidueKernelUnitMinorMatrixCore
+import Sheaf.Algebra.Homology.ResidueKernelUnitMinorBaseChangeFree
 @[expose] public section
 set_option autoImplicit false
 universe v
@@ -44,5 +46,8 @@ theorem residue_kernel_unit_minor_normal_form
         (eY : ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj Y)
           ≃ₗ[Localization.AtPrime 𝔭] (U × C)),
         ∀ x, eY (((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).map f).hom
-          x) = ((eX x).1, g (eX x).2) := by sorry
+          x) = ((eX x).1, g (eX x).2) := by
+  let A := Localization.AtPrime 𝔭
+  have hfree := residue_kernel_unit_minor_base_change_free R X Y hfX hfY hpX hpY 𝔭
+  exact residue_kernel_unit_minor_matrix_core R A X Y f hfree.1 hfree.2 𝔭 hres
 end ModuleCat
