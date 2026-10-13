@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-free-sheaf-dual-transpose",
+ "kind": "statement",
+ "title": "Canonical finite free sheaf duality transposes matrix components",
+ "statement": "Let X be a scheme, I,J finite types, and phi:O_X^(J) -> O_X^(I) a sheaf morphism. For i in I and j in J the (j,i) component of homObjFreeUnitIso(I)^-1 followed by precomposition with phi followed by homObjFreeUnitIso(J) equals the (i,j) component of phi, as endomorphisms of O_X. Coordinate inclusions are the coproduct inclusions and coordinate projections are identity on the chosen summand and zero on the others. This includes empty types and the zero ring.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV(4)-(5) and functoriality; finite free evaluation calculation in duality.tex, Tag 0BQZ. Explicit matrix-component calculation written by X2 from the definitions."
+ },
+ "proof": [
+  {
+   "text": "Expand homObjFreeIso into the opposite-functor biproduct comparison and the unit-Hom comparison. The coproduct-to-biproduct comparison identifies the chosen inclusions and projections. The defining projection and injection identities of opMapBiproductIso turn the component of the dual map into the unit dual comparison conjugating precomposition with the original matrix component.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A unit endomorphism is determined on every open by its value at 1. The inverse unit-Hom comparison sends 1 to the identity functional; precomposition and evaluation send it to the same value at 1 as the original endomorphism. Unit sections restrict 1 to 1. Thus the conjugated component is the original component. Empty index types are vacuous and no nonzero scalar is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "X2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/schemes.tex",
+   "place": "Tag 01HV(4)-(5) and functoriality; finite free evaluation calculation in duality.tex, Tag 0BQZ. Explicit matrix-component calculation written by X2 from the definitions."
+  },
+  "note": "Matrix component step of the explicit affine finite free dual calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal dual of a free sheaf transposes matrix components; sheafification preserves dual-basis matrix entries",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The matrix of a dual linear map is the transpose in dual bases; internal dual of a free sheaf is natural",
+   "results": "LinearMap.toMatrix_transpose states the algebraic calculation; freeHomEquiv and generator identities exist, but no sheafified dual matrix component identity was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.toMatrix, Module.Dual.transpose; Basis.dualBasis_repr",
+   "results": "LinearMap.toMatrix_transpose found; Basis.dualBasis_repr not indexed. No sheaf matrix identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObjFreeUnitIso|tildeFinsupp|dual.*toMatrix|toMatrix.*dual; blueprint_refs.py search dual transpose / basis sheaf",
+   "results": "Read tildeFinsupp, restrictFreeIso, homObjFreeUnitIso, and dualBasis_repr. Zero blueprint matches for both searches. No matching component theorem in the existing DAG or library.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite free local Hom computation: evaluation of each matrix component.",
+   "via": [
+    "lem-sc-affine-finite-free-dual-naturality",
+    "lem-sc-affine-finite-free-dual-complex-comparison",
+    "lem-sc-affine-koszul-hom-complex-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FreeSheafDualTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeSheafDualTranspose.lean",
+  "declaration": "AlgebraicGeometry.freeSheafDualTranspose_component",
+  "statement": "theorem freeSheafDualTranspose_component {X : Scheme.{u}} {I J : Type u}\n    [Fintype I] [Fintype J] [DecidableEq I] [DecidableEq J]\n    (phi : SheafOfModules.free (R := X.ringCatSheaf) J ⟶ SheafOfModules.free I)\n    (i : I) (j : J) :\n    SheafOfModules.ιFree i ≫ (SheafOfModules.homObjFreeUnitIso I).inv ≫\n      SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) phi\n        (𝟙 (SheafOfModules.unit X.ringCatSheaf)) ≫\n      (SheafOfModules.homObjFreeUnitIso J).hom ≫ Scheme.Modules.freeπ j =\n    SheafOfModules.ιFree j ≫ phi ≫ Scheme.Modules.freeπ i",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f8053",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T171520-L-1984152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f8053",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T171520-L-1984152",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statements, constructions and proof route with their DAG nodes, change records and report; verified compilation and the direct importer."
+ }
+}

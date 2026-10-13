@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-affine-basis-dual-matrix",
+ "kind": "statement",
+ "title": "Affine sheafification preserves transposed dual-basis components",
+ "statement": "Let Y be a scheme, U an affine open, A=Gamma(Y,U), and T the associated sheaf functor followed by restriction along U.isoSpec. Let M,N be A-modules with finite bases bM:I and bN:J, f:N -> M, i:I, j:J. Write eM,eN for the comparisons T(M),T(N) with the free sheaves using basis representations, tildeFinsupp, and restrictFreeIso. Write dM,dN for the comparisons T(Hom(M,A)),T(Hom(N,A)) with the same free sheaves using homLinearEquiv followed by the dual-basis representations. Then the (j,i) component of dM^-1 T(precompose f) dN equals the (i,j) component of eN^-1 T(f) eM as unit-sheaf endomorphisms. These are two maps between free sheaves; no internal sheaf Hom occurs in the assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV(4)-(5) and functoriality; finite free evaluation calculation in duality.tex, Tag 0BQZ. Explicit matrix-component calculation written by X2 from the definitions."
+ },
+ "proof": [
+  {
+   "text": "Put a_ij=bM.repr(f(bN(j)))(i). dualBasis_repr and dualBasis_apply show that the j-coordinate of bM.dualBasis(i) precomposed with f is a_ij. Hence the two scalar algebraic components coincide.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The defining colimit comparison tildeFinsupp takes the image of each Finsupp single injection to the corresponding free generator, by coconePointUniqueUpToIso compatibility. The projections follow by finite coproduct extensionality. restrictFreeIso is the restriction-to-pullback natural isomorphism followed by pullbackFreeIso; mapFreeIso generator identities show the analogous inclusion identity and naturality handles each scalar endomorphism. Apply sheafification and restriction to the equal algebraic components and use functoriality of composition. This gives exactly the displayed equality. Empty indices are vacuous; the zero-ring case uses the same calculation.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "X2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/schemes.tex",
+   "place": "Tag 01HV(4)-(5) and functoriality; finite free evaluation calculation in duality.tex, Tag 0BQZ. Explicit matrix-component calculation written by X2 from the definitions."
+  },
+  "note": "The coordinate isomorphisms are shared named definitions in the underlying sheaf category. The dual coordinate definition uses a fixed classical decidable equality internally. The assertion is the algebraic dual matrix-component step, and uses no internal sheaf Hom. The final naturality theorem combines it with the separately proved free internal-dual component calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal dual of a free sheaf transposes matrix components; sheafification preserves dual-basis matrix entries",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The matrix of a dual linear map is the transpose in dual bases; internal dual of a free sheaf is natural",
+   "results": "LinearMap.toMatrix_transpose states the algebraic calculation; freeHomEquiv and generator identities exist, but no sheafified dual matrix component identity was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.toMatrix, Module.Dual.transpose; Basis.dualBasis_repr",
+   "results": "LinearMap.toMatrix_transpose found; Basis.dualBasis_repr not indexed. No sheaf matrix identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObjFreeUnitIso|tildeFinsupp|dual.*toMatrix|toMatrix.*dual; blueprint_refs.py search dual transpose / basis sheaf",
+   "results": "Read tildeFinsupp, restrictFreeIso, homObjFreeUnitIso, and dualBasis_repr. Zero blueprint matches for both searches. No matching component theorem in the existing DAG or library.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite free local Hom computation: evaluation of each matrix component.",
+   "via": [
+    "lem-sc-affine-finite-free-dual-naturality",
+    "lem-sc-affine-finite-free-dual-complex-comparison",
+    "lem-sc-affine-koszul-hom-complex-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBasisDualMatrix",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisDualMatrix.lean",
+  "declaration": "AlgebraicGeometry.affineBasisDualMatrix_component",
+  "statement": "theorem affineBasisDualMatrix_component {Y : Scheme.{u}} (U : Y.affineOpens)\n    (M N : ModuleCat.{u} Γ(Y, U.1)) {I J : Type u} [Finite I] [Finite J]\n    [DecidableEq I] [DecidableEq J]\n    (bM : Basis I Γ(Y, U.1) M) (bN : Basis J Γ(Y, U.1) N) (f : N ⟶ M)\n    (i : I) (j : J) :\n    let S := Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let T := tilde.functor Γ(Y, U.1) ⋙ S\n    let eM := affineBasisCoordinatesIso U M bM\n    let eN := affineBasisCoordinatesIso U N bN\n    let dM := affineDualBasisCoordinatesIso U M bM\n    let dN := affineDualBasisCoordinatesIso U N bN\n    SheafOfModules.ιFree i ≫ dM.inv ≫\n        T.map (ModuleCat.ofHom (Linear.leftComp Γ(Y, U.1)\n          (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) f)) ≫ dN.hom ≫ Scheme.Modules.freeπ j =\n      SheafOfModules.ιFree j ≫ eN.inv ≫ T.map f ≫ eM.hom ≫ Scheme.Modules.freeπ i",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f8053",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T171520-L-1984152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f8053",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T171520-L-1984152",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statements, constructions and proof route with their DAG nodes, change records and report; verified compilation and the direct importer."
+ }
+}
