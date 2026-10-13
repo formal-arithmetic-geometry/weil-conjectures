@@ -1,0 +1,121 @@
+{
+ "id": "new-determinant-lift-wedge-kernel",
+ "kind": "statement",
+ "title": "Lift wedge annihilates the exterior quotient kernel",
+ "statement": "Let S be a short exact sequence A→B→C of sheaves of modules on a scheme X, with A finite locally free of rank r1 [def-amb-finite-locally-free-module], and let r2=r1+r3. Using exterior sheaves [def-sc-sheaf-exterior-power], suppose q:(∧^r1 A)⊗(∧^r3 B)→(∧^r1 A)⊗(∧^r3 C) sends tensors of wedges to tensors with each second factor mapped under S.g. There exists w:(∧^r1 A)⊗(∧^r3 B)→∧^r2 B, sending each tensor of wedges to the concatenated wedge of the S.f images and the second tuple, and satisfying kernel.ι(q)≫w=0.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-sheaf-exterior-power",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "For each open, multiply exterior-algebra elements after applying the exterior map of S.f to the first factor. This product has degree r1+r3, reindexed by hr to degree r2. It is linear on the tensor of the two exterior powers and sends pure tensors of wedges to the concatenated wedge. On pure wedges, naturality is the formula for exterior restrictions and naturality of S.f; pure wedges span, so naturality holds everywhere. Sheafification and its monoidal comparison give w with the displayed formula.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The displayed formula characterizes q uniquely: apply exteriorTensor_lift_hom_ext with the identity epi of S.X2. Therefore q is the tensor of the identity with the exterior map of S.g. Trivialize S.X1 locally. Exactness identifies ker(S.g) with im(S.f). The kernel of the exterior quotient is generated locally by wedges with one factor in im(S.f): for ordinary modules, the exterior power of a quotient is the quotient of the exterior power by precisely these relations; sheafification transfers this description, using local lifts for finite tuples. Tensor right exactness gives the same generators for ker(q).",
+   "uses": [
+    "lem-sc-exterior-tensor-lift-hom-ext",
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After wedging any of these kernel generators with r1 first-term factors, its image under w contains r1+1 factors from S.X1. Expand in a local basis of size r1. Every monomial repeats a basis vector and is zero by alternation; the free exterior-power basis theorem gives this vanishing above rank. Hence kernel.ι q composed with w vanishes locally, and the separatedness of the target sheaf gives global zero. For r3=0, the quotient exterior map is identity and its kernel is zero. For r1=0, S.X1=0 locally and S.g is an isomorphism. The argument also covers the zero ring and the empty open.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power",
+  "lem-sc-exterior-tensor-lift-hom-ext",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "R4 stage3",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph; agent-written descent decomposition of the existing recorded wedge proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Epimorphism induces epimorphism on exterior powers of sheaves of modules and tensor products",
+   "results": "Service unavailable: HTTP 500 Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue morphisms of sheaves of modules from compatible sectionwise linear maps",
+   "results": "SheafOfModules.Hom and sheaf amalgamation APIs; no exterior quotient or lift-wedge kernel statement. Loogle SheafOfModules.Hom also returned Hom.mk, Hom.val and extensionality. Loogle query Abelian.epiDesc returned unknown identifier; epiDesc was found and its signature read directly in Mathlib CategoryTheory/Abelian/Basic.lean.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exteriorTensor_quotient wedgeMorphism kernel epiDesc; blueprint_refs.py search exterior tensor quotient and wedge kernel",
+   "results": "Existing ExteriorTensorLiftHomExt proves the generator extensionality needed for epimorphy; Abelian.epiDesc and comp_epiDesc provide descent. No existing exterior tensor quotient or prequotient wedge-kernel construction.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismGlue",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-determinant-wedge-morphism-local-data",
+   "place": "Determinant paragraph: exterior quotient, wedge of lifts and independence of lifts",
+   "via": [
+    "new-wedge-glue-family"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantLiftWedgeKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantLiftWedgeKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_liftWedge_kernel_exists",
+  "statement": "theorem determinant_liftWedge_kernel_exists {X : Scheme.{v}} (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁] (q : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶ exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃) (hq : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)), q.val.app (op U) (tmulSection (exteriorSheafSection S.X₁ r₁ U a) (exteriorSheafSection S.X₂ r₃ U c)) = tmulSection (M := exteriorSheaf S.X₁ r₁) (N := exteriorSheaf S.X₃ r₃) (exteriorSheafSection S.X₁ r₁ U a) (exteriorSheafSection S.X₃ r₃ U (fun i ↦ S.g.val.app (op U) (c i)))) : ∃ w : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶ exteriorSheaf S.X₂ r₂, kernel.ι q ≫ w = 0 ∧ ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)), w.val.app (op U) (tmulSection (exteriorSheafSection S.X₁ r₁ U a) (exteriorSheafSection S.X₂ r₃ U c)) = exteriorSheafSection S.X₂ r₂ U (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "new-exterior-tensor-quotient",
+ "kind": "statement",
+ "title": "Exterior tensor quotient is epimorphic",
+ "statement": "Let A, B, C be sheaves of modules on a scheme X, and let g:B→C be an epimorphism. Using exterior sheaves and wedge sections [def-sc-sheaf-exterior-power], for any natural numbers r,s there exists an epimorphism q:(∧^r A)⊗(∧^s B)→(∧^r A)⊗(∧^s C), taking (∧a_i)⊗(∧c_j) to (∧a_i)⊗(∧g(c_j)) on every open.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Construct a presheaf morphism by exteriorPower.map applied to each component of g. Check naturality on pure wedges using exteriorSheafRestriction_existsUnique, map_apply_ιMulti and naturality_apply. Sheafify the presheaf morphism; naturality of the adjunction unit computes its value on wedge sections. Tensor it with the identity on exteriorSheaf A r, obtaining q and its displayed formula via tensorHom_app_tmulSection.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To prove q epi, let phi and psi have equal composites with q. Evaluating this equality on a tensor of wedges of sections of A and B, and using the formula for q, proves equality on all lifted wedge generators. Apply exteriorTensor_lift_hom_ext to the epi g to get phi = psi. This is exactly the left-cancellation property defining Epi q.",
+   "uses": [
+    "lem-sc-exterior-tensor-lift-hom-ext"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power",
+  "lem-sc-exterior-tensor-lift-hom-ext"
+ ],
+ "proof_origin": {
+  "by": "R4 stage3",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph; agent-written descent decomposition of the existing recorded wedge proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Epimorphism induces epimorphism on exterior powers of sheaves of modules and tensor products",
+   "results": "Service unavailable: HTTP 500 Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue morphisms of sheaves of modules from compatible sectionwise linear maps",
+   "results": "SheafOfModules.Hom and sheaf amalgamation APIs; no exterior quotient or lift-wedge kernel statement. Loogle SheafOfModules.Hom also returned Hom.mk, Hom.val and extensionality. Loogle query Abelian.epiDesc returned unknown identifier; epiDesc was found and its signature read directly in Mathlib CategoryTheory/Abelian/Basic.lean.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exteriorTensor_quotient wedgeMorphism kernel epiDesc; blueprint_refs.py search exterior tensor quotient and wedge kernel",
+   "results": "Existing ExteriorTensorLiftHomExt proves the generator extensionality needed for epimorphy; Abelian.epiDesc and comp_epiDesc provide descent. No existing exterior tensor quotient or prequotient wedge-kernel construction.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismGlue",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-determinant-wedge-morphism-local-data",
+   "place": "Determinant paragraph: exterior quotient, wedge of lifts and independence of lifts",
+   "via": [
+    "new-wedge-glue-family"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorTensorQuotient.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorTensor_quotient_exists",
+  "statement": "theorem exteriorTensor_quotient_exists {X : Scheme.{v}} (A B C : X.Modules) (g : B ⟶ C) [Epi g] (r s : ℕ) : ∃ q : exteriorSheaf A r ⊗ exteriorSheaf B s ⟶ exteriorSheaf A r ⊗ exteriorSheaf C s, Epi q ∧ ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (c : Fin s → B.val.obj (op U)), q.val.app (op U) (tmulSection (exteriorSheafSection A r U a) (exteriorSheafSection B s U c)) = tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf C s) (exteriorSheafSection A r U a) (exteriorSheafSection C s U (fun i ↦ g.val.app (op U) (c i)))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
