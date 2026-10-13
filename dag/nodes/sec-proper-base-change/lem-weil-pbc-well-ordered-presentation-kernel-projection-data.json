@@ -15,50 +15,44 @@
  ],
  "proof": [
   {
-   "text": "For each nonzero Q_e lift the given augmentation P(e)_0 → Q_e across F_e → Q_e by categorical projectivity. Use zero summands for zero Q_e. Define the map from the external direct sum B to M as the finite sum of those lifts and stage inclusions. Induction on e shows the partial sum through e surjects onto F_e: subtract a lift of the quotient class and lift the remainder from the predecessor union. The predecessor supremum is the union of its directed nonempty chain; at a least stage it is zero.",
+   "text": "Obtain the projective middle module B, linear map b, exhaustive monotone H, stage-image equalities and component maps from the component-data construction. The covering hypothesis and b(H_e)=F_e imply that b is surjective. Use Mathlib LinearMap.shortComplexKer and shortExact_shortComplexKer to construct S with S.X3 definitionally M.",
    "uses": [
-    "def-weil-pbc-finite-global-dimension",
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each active index choose an element of F_e outside U_e. Such elements at different indices differ: the element at the smaller index is in the predecessor supremum at the larger index. Thus active indices inject into M and are small in universe v. Shrink these indices and form the direct sum B of their degree-zero projectives in universe v. A map out of B lifts across any epimorphism by choosing lifts on the individual projective summands and summing them; this verifies categorical projectivity directly, without converting it to unrestricted module projectivity.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use S as the kernel complex of the constructed surjection, with H_e the partial direct sum through e in the middle object. These H_e are monotone and exhaustive by finite support; an index for empty support exists by hcover at zero. Pullback along S.f gives K_e.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules",
+    "lem-weil-pbc-well-ordered-presentation-component-data",
     "def-weil-pbc-exact-sequence"
    ],
    "elementary": false
   },
   {
-   "text": "At each active e, restrict the component projection to K_e and transport its linear augmentation-kernel codomain to the categorical kernel. Lift the image of any augmentation-kernel vector from the predecessor partial sum and subtract it to prove surjectivity. The projection kernel is the predecessor supremum of K_i by finite support. At an inactive e no summand is added, so that predecessor submodule is top. Stop before taking the quotient isomorphism.",
+   "text": "For any injective linear map, pulling back a predecessor supremum in a linearly ordered family equals the supremum of the pullbacks. If predecessors exist, use Submodule.mem_iSup_of_directed and monotonicity; otherwise both sides are bottom by injectivity. Apply this to the inclusion of ker b. At an inactive stage, H_e is its predecessor supremum, so the asserted submodule of K_e is top.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At an active stage restrict p_e to K_e. Its image is killed by the supplied augmentation, by the two commuting identities. This gives qlin into the linear augmentation kernel. For a vector y in that kernel, choose x in H_e with p_e(x)=y. The commuting identity makes a_e(x) lie in the predecessor supremum of F. The image under b of the predecessor supremum of H equals that supremum by map_iSup and the stage-image equalities. Choose z in the predecessor supremum with b(z)=b(x). Then x-z belongs to K_e, p_e(z)=0 by the prescribed kernel of p_e, and qlin(x-z)=y. This proves surjectivity.",
    "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module",
+    "lem-weil-pbc-well-ordered-presentation-component-data",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel of qlin consists precisely of elements whose image in H_e lies in ker p_e, hence in the predecessor supremum of H. The pullback identity already proved identifies it with the predecessor supremum of K, pulled back to K_e. Transport qlin through ModuleCat.kernelIsoKer.symm.toLinearEquiv to the categorical augmentation kernel. Surjectivity and the kernel equality are preserved by this equivalence.",
+   "uses": [
+    "lem-weil-pbc-well-ordered-presentation-component-data",
     "def-weil-pbc-exact-sequence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-sum-modules",
   "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-finite-global-dimension",
-  "def-weil-pbc-quotient-module"
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-well-ordered-presentation-component-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 0D1U (lemma-colimit-projective-dimension), successor proof: projective presentation, kernel intersections, and exact sequence of successive quotients; adaptation to supplied categorical projectives and partial-sum projection maps, before the first isomorphism theorem"
+  "place": "Algebra, Lemma 0D1U, kernel-intersection argument; component construction separated as lem-weil-pbc-well-ordered-presentation-component-data. Remaining short-exact packaging and kernel diagram chase proved in Lean by E3."
  },
  "mathlib_searches": [
   {
@@ -158,9 +152,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T054218-L-443337",
+  "landing": "20261013T065100-L-897024",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

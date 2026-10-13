@@ -11436,3 +11436,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:50 L: merged deliver/D3/Sheaf.Paper.AffinePerfectKoszulPrincipalUnitPerfect (stage 3; reviewer PASS; first push; landing 20261013T065058-L-896555 (proof); batch 20261013T065054; modules 1; new nodes 0)
 - 06:50 L: merged deliver/E1/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative (stage 3; reviewer PASS; first push; landing 20261013T065059-L-896668 (interface); batch 20261013T065054; modules 2; new nodes 1)
 - 06:50 L: merged deliver/E2/Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft (stage 3; reviewer PASS; first push; landing 20261013T065059-L-896881 (interface); batch 20261013T065054; modules 2; new nodes 1)
+- 06:51 L: merged deliver/E3/Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData (stage 3; reviewer PASS; first push; landing 20261013T065100-L-897024 (interface); batch 20261013T065054; modules 2; new nodes 1)

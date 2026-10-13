@@ -1,0 +1,162 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-well-ordered-presentation-component-data",
+ "title": "Filtered projective middle module and component maps before taking kernels",
+ "statement": "Let $R$ be a commutative ring, $M\\in\\mathrm{ModuleCat}^{v}(R)$, and $E$ a linearly ordered type with well-founded strict order, with arbitrary universe. Let $F:E\\to\\mathrm{Submodule}_R(M)$ be monotone and exhaustive. For each $e$ let $P(e)$ be a supplied projective resolution [def-weil-pbc-finite-global-dimension] of $Q_e=F_e/((\\sup_{i<e}F_i)\\cap F_e)$ [def-weil-pbc-quotient-module]. There exist a categorically projective $B\\in\\mathrm{ModuleCat}^{v}(R)$, an $R$-linear map $b:B\\to M$, and monotone exhaustive submodules $H_e\\subseteq B$ such that $b(H_e)=F_e$. For every $e$, either $H_e=\\sup_{i<e}H_i$, or there are a surjective linear map $p_e:H_e\\to P(e)_0$ with kernel $(\\sup_{i<e}H_i)\\cap H_e$ and a linear map $a_e:H_e\\to F_e$ such that $F_e\\hookrightarrow M$ composed with $a_e$ equals $b|_{H_e}$, and the augmentation composed with $p_e$ equals the quotient map composed with $a_e$. The construction uses the direct sum [def-weil-pbc-direct-sum-modules] over active indices. No assertion about the kernel of $b$ is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0D1U (lemma-colimit-projective-dimension), direct-sum presentation construction; adaptation to supplied degree-zero projectives and active-index universe reduction from the parent node. Source also read at https://stacks.math.columbia.edu/tag/0D1U."
+ },
+ "proof": [
+  {
+   "text": "Call e active when Q_e is nonzero. Choose x_e in F_e outside its predecessor supremum. For e<f, x_e belongs to the predecessor supremum at f whereas x_f does not. Thus active indices inject into M and can be shrunk to universe v. Lift each active degree-zero augmentation through the quotient epimorphism by categorical projectivity.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form B as the direct sum in universe v of these degree-zero projectives. Define b by summing the lifts followed by stage inclusions. Lift a map out of B through an epimorphism independently on each summand and sum the lifts, proving categorical projectivity of B. Let H_e consist of vectors supported on active indices at most e. Monotonicity is immediate. Finite support has a maximum when nonempty; covering zero supplies an index for empty support, proving exhaustion.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove b(H_e)=F_e by well-founded induction. The forward inclusion uses monotonicity. At an active stage lift the quotient class using surjectivity of the augmentation and subtract the corresponding summand image. The remainder is in the predecessor supremum; for a nonempty predecessor chain this is its union, and induction gives a lift in an earlier partial sum. At a least stage the remainder is zero. At an inactive stage F_e is its predecessor supremum, so only the induction argument is needed.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At an inactive e no summand is added, so H_e equals its predecessor supremum. At an active e use the component projection p_e; summand inclusion proves surjectivity. Its kernel consists of vectors supported strictly before e. Finite support identifies this with the predecessor supremum pulled back to H_e, including the empty-support and least-index cases. Restrict b to H_e with codomain F_e to obtain a_e. All earlier summands vanish after quotienting, while the e summand gives the augmentation; this proves the two commuting identities.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0D1U (lemma-colimit-projective-dimension), direct-sum presentation construction; adaptation to supplied degree-zero projectives and active-index universe reduction from the parent node. Source also read at https://stacks.math.columbia.edu/tag/0D1U."
+ },
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-quotient-module"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered projective module mapping onto a well ordered union of submodules with component projections onto projective presentations of the successive quotients",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective presentation of a module with well ordered filtration and projective resolutions of successive quotients",
+   "date": "2026-10-13",
+   "results": "Eight hits, including ModuleCat.projectiveResolution and CategoryTheory.ProjectiveResolution.of, ofComplex, instProjectiveXNatOfComplex, instHasProjectiveResolutions. These supply resolution infrastructure, not the filtered direct-sum construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.comap, iSup",
+   "date": "2026-10-13",
+   "results": "Six hits concerning map/comap lattice identities, including Submodule.comap_iSup_map_of_injective and Submodule.biSup_comap_subtype_eq_top. None constructs the filtered presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "partialSum|kernel_projection|wellOrdered.*presentation",
+   "date": "2026-10-13",
+   "results": "Mathlib hits for partialSum are unrelated. Local rg on lean/Sheaf/RingTheory and lean/WeilConjectures finds only the parent projection theorem and its consumers; the consumers depend on the parent and cannot be used."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Direct-sum component construction separated from the proved kernel diagram chase.",
+   "via": [
+    "lem-weil-pbc-well-ordered-presentation-kernel-projection-data",
+    "lem-weil-pbc-well-ordered-presentation-kernel-filtration",
+    "lem-weil-pbc-well-ordered-union-succ-data",
+    "lem-weil-pbc-well-ordered-union-succ-step",
+    "lem-weil-pbc-well-ordered-union-projective-dimension",
+    "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WellOrderedPresentationComponentData",
+  "file": "lean/Sheaf/RingTheory/WellOrderedPresentationComponentData.lean",
+  "declaration": "ModuleCat.exists_projective_presentation_component_data",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13",
+  "statement": "theorem exists_projective_presentation_component_data\n    {R : Type u} [CommRing R] (M : ModuleCat.{v} R)\n    {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]\n    (F : E → Submodule R M) (hF : Monotone F)\n    (hcover : ∀ x : M, ∃ e : E, x ∈ F e)\n    (P : ∀ e : E, ProjectiveResolution\n      (ModuleCat.of R ((F e) ⧸\n        ((⨆ i : {j : E // j < e}, F i.val).comap (F e).subtype)))) :\n    ∃ (B : ModuleCat.{v} R) (_ : Projective B) (b : B →ₗ[R] M)\n      (H : E → Submodule R B),\n      Monotone H ∧ (∀ x : B, ∃ e : E, x ∈ H e) ∧\n      (∀ e : E, (H e).map b = F e) ∧\n      ∀ e : E,\n        H e = ⨆ i : {j : E // j < e}, H i.val ∨\n        ∃ p : H e →ₗ[R] (P e).complex.X 0,\n          Function.Surjective p ∧\n          p.ker = (⨆ i : {j : E // j < e}, H i.val).comap (H e).subtype ∧\n          ∃ a : H e →ₗ[R] F e,\n            (F e).subtype.comp a = b.comp (H e).subtype ∧\n            ((P e).π.f 0).hom.comp p =\n              ((⨆ i : {j : E // j < e}, F i.val).comap (F e).subtype).mkQ.comp a"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T065100-L-897024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T065100-L-897024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
