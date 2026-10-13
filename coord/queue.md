@@ -1,6 +1,6 @@
 # Work queue
 
-378 items; claim with `tools/claim.py next <group> [--stage N]`.
+379 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (23)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (347)
+## Stage 3: modules to prove (348)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -175,6 +175,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.TameRootProductResidueSeparable` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjChartRestrictionIsLocalized` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons` | 19 | 1 | proof |
+| `Sheaf.Algebra.Homology.HomTensorDifferentialSummand` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineAlgebraUpperTruncationEdge` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound` | 20 | 1 | proof |
