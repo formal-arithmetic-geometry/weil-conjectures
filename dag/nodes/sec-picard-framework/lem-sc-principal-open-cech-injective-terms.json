@@ -14,27 +14,38 @@
  },
  "proof": [
   {
-   "text": "Injective module sheaves are Cech-acyclic on any open by lem-weil-pbc-module-injective-open-cover-cech-acyclic. Sheaf separation and gluing give injectivity and exactness at the initial section term. The alternating comparison identifies these augmented rows with increasing tuples, and their unique increasing enumerations identify them with subsets; face positions equal the filter cardinalities in the signed formula. Thus the augmented subset rows are exact and supported in columns -1 to r-1.",
-   "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-pc-alternating-cech-computes"
-   ],
-   "elementary": false
+   "text": "Sheaf separatedness proves the augmentation injective in each degree, by evaluating on singletons and transporting the degree equality back via naturality. This also handles the empty cover.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Suppose a closed section maps to d(t). At the highest Cech column of t, the horizontal differential is zero, because d(t) has no positive Cech components. Exactness supplies a horizontal preimage in the previous column. Subtract its total boundary from t: d(t) is unchanged and the highest component disappears, changing only the preceding column. Iterate over the finite r columns. Exactness at column zero expresses the remaining primitive as the augmentation of a section. The chain-map identity and injectivity of the row augmentation force the original section to be its vertical boundary. Thus each homology map has zero kernel and is a monomorphism. If r=0, V is empty and source sections and target subset products vanish. Empty or repeated opens do not change row exactness.",
+   "text": "Induct on the number of possible positive columns. Apply the single-column cancellation at each successor step; subtracting a total boundary preserves the differential because d squared is zero. Every subset has cardinality at most r, so this induction reduces any primitive whose differential has no positive Cech coordinates to a singleton-supported primitive with the same differential.",
+   "uses": [
+    "lem-sc-principal-open-cech-column-step"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The singleton-supported primitive glues to an augmented section. The chain-map identity and degreewise injectivity identify the differential of that section with the original source element.",
+   "uses": [
+    "lem-sc-principal-open-cech-singleton-gluing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift a homology element to cycles using the surjectivity of homology projection. If its image is zero, the opcycles quotient criterion supplies a total primitive. Apply the elementwise boundary lift just proved; the source opcycles class is zero, hence its homology class is zero by injectivity of homology inclusion. This proves monicity of the homology map.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "lem-pc-alternating-cech-computes"
+  "lem-sc-principal-open-cech-column-step",
+  "lem-sc-principal-open-cech-singleton-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08C1, lemma-alternating-cech-complex-complex, finite augmented rows and K-injective comparison"
+  "place": "Tag 08C1, finite-row argument; Lean finite induction and explicit cycles/opcycles calculation by H2"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -124,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T131952-L-4088561",
+  "landing": "20261013T141528-L-379489",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

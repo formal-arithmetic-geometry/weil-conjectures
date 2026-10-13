@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-principal-open-cech-singleton-gluing",
+ "kind": "statement",
+ "title": "Sheaf gluing of singleton-supported principal-open Cech cochains",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], $r\\in\\mathbf N$, $f:\\operatorname{Fin}(r)\\to A$, $V=\\bigcup_iD(f_i)$ and $D_S=D(\\prod_{j\\in S}f_j)$. Let $J$ be an unbounded cochain complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules]. Let $T$ be a complex of $A$-modules, with degreewise linear isomorphisms $\\tau_n:T^n\\cong\\prod_{\\varnothing\\ne S\\subseteq\\operatorname{Fin}(r)}\\Gamma(D_S,J^{n+1-|S|})$. Under $\\tau$, assume its differential at $S$ is $(-1)^{|S|-1}d_J$ plus the signed sum over $j\\in S$ of restriction from $D_{S\\setminus\\{j\\}}$, with sign $(-1)^{|\\{i\\in S:i<j\\}|}$; empty deletions contribute zero. Inclusions $D_S\\subseteq D_{S\\setminus\\{j\\}}$ and equalities $n+1-|S\\setminus\\{j\\}|=n+2-|S|$ specify the transports in this formula. Let $K$ be another complex of $A$-modules, $\\sigma_n:K^n\\cong\\Gamma(V,J^n)$ linear isomorphisms, and $\\alpha:K\\to T$ a chain map. Assume $\\alpha$ is restriction from $V$ in singleton coordinates and zero in all larger coordinates, with $D_S\\subseteq V$ for singleton $S$ and $n=n+1-|S|$ specifying its degree transports. If $t\\in T^n$ and both $t$ and $d_Tt$ vanish in all coordinates with $|S|>1$, then $t=\\alpha_n(s)$ for some $s\\in K^n$. No injectivity condition on the sheaves $J^q$ and no coordinate formula for the differential of $K$ are assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, lemma-alternating-cech-complex-complex, first paragraph; finite augmented row calculation"
+ },
+ "proof": [
+  {
+   "text": "Transport each singleton coordinate of t to J.X n using hes, and\nidentify D({i}) with D(f i). On a two-element subset, the vertical term\nis zero because t has no such component. The only horizontal terms are\nthe two singleton restrictions, with opposite signs. Since this component\nof d(t) is zero, the singleton sections agree on D(f i) intersect D(f j).\nFor equal indices compatibility is reflexive; for indices in reverse order\nreverse the equality. The sheaf gluing axiom on the union V supplies a\nsection s0. Set s to sigma_n inverse applied to s0. The stated augmentation\nformula agrees with t at singleton coordinates by gluing, and both sides\nvanish at larger coordinates. Injectivity of tau_n gives alpha_n(s)=t.\nFor r=0 the union is empty; the empty-family sheaf axiom supplies its unique\nsection, and the product of nonempty-subset coordinates is the zero module.\nNo injectivity hypothesis on the coefficient sheaves is used. In Lean this is proved directly: compute the two-element sum by enumerating its subtype, transport coefficient degrees using naturality, transport the product basic open to the intersection, apply existsUnique_gluing, and verify the augmentation after applying the inverse coefficient transport and the open isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, explicit subset-coordinate expansion of the finite augmented row argument"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Cech row injective sheaf exactness horizontal primitive",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "eliminate highest column total complex exact horizontal rows",
+   "results": "HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.IsSupported.exactAt, HomologicalComplex.exactAt_iff', HomologicalComplex.exactAt_of_isSupported, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact, HomologicalComplex.exactAt_iff, HomologicalComplex.ExactAt",
+   "date": "2026-10-13",
+   "verdict": "no exact subset-coordinate statement; generic homology and gluing tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.existsUnique_gluing",
+   "results": "TopCat.Sheaf.existsUnique_gluing",
+   "date": "2026-10-13",
+   "verdict": "no exact subset-coordinate statement; generic homology and gluing tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_gluing|finite.*strip|column.*augmentation",
+   "results": "Mathlib/Geometry/RingedSpace/Basic.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact subset-coordinate statement; generic homology and gluing tools only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveTerms",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Principal-open Cech comparison: finite augmented row argument; exactness at singleton coordinates by sheaf gluing",
+   "via": [
+    "lem-sc-principal-open-cech-injective-terms",
+    "lem-sc-principal-open-cech-homology-injective",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSingletonGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSingletonGluing.lean",
+  "declaration": "AlgebraicGeometry.principalOpenCech_singleton_gluing",
+  "statement": "theorem principalOpenCech_singleton_gluing\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    :\n    let V : (Spec (.of A)).Opens := ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀ (K T : CochainComplex (ModuleCat.{u} A) ℤ)\n      (σ : ∀ n : ℤ, K.X n ≅ (modulesSpecToSheaf.obj (J.X n)).obj.obj (op V))\n      (τ : ∀ n : ℤ, T.X n ≅ ModuleCat.of A\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val))))\n      (α : K ⟶ T)\n      (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (hls : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → D S.val ≤ V)\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (hes : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → ∀ n : ℤ,\n        n = n + 1 - (S.val.card : ℤ)),\n      (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ (n + 1)).hom (T.d n (n + 1) s) S =\n          (-1 : A) ^ (S.val.card - 1) •\n            (modulesSpecToSheaf.map\n              (J.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app\n                (op (D S.val)) ((τ n).hom s S) +\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) ((τ n).hom s ⟨S.val.erase j.val, h⟩))\n          else 0) →\n      (∀ (n : ℤ) (s : K.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ n).hom (α.f n s) S = if h : S.val.card = 1 then\n          (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map\n            (homOfLE (hls S h)).op\n            ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app\n              (op V) ((σ n).hom s)) else 0) →\n      ∀ (n : ℤ) (t : T.X n),\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          1 < S.val.card → (τ n).hom t S = 0) →\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          1 < S.val.card → (τ (n + 1)).hom (T.d n (n + 1) t) S = 0) →\n        ∃ s : K.X n, α.f n s = t",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T141528-L-379489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T141528-L-379489",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
