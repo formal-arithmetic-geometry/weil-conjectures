@@ -10,17 +10,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "A finite module over A is finitely presented. On each basic affine open D(f) contained in W, localization of Hom identifies the localized module dual with Hom over A_f of M_f into A_f. The tilde equivalence identifies these Hom modules with morphisms of the associated sheaves on D(f). The formula sends a functional to its action on localized sections, and therefore commutes with restriction from D(f) to smaller basic opens. These opens form a basis of W. The compatible local comparisons and their inverses glue to the claimed internal-Hom isomorphism. Empty W and M = 0 are included.",
-   "uses": [],
+   "text": "Use the fully faithful tilde functor and tildeSelf to send an A-linear functional M → A to a sheaf morphism tilde M → O_Spec A. The internal-Hom sections equivalence, followed by evaluation at the top open, gives a bijection with the global sections of H = Hom(tilde M,O). Construct its linear map explicitly. Additivity follows from tilde.map_add. For scalar linearity factor r times a functional as that functional followed by multiplication by r on A; tilde_scalar_section_action identifies the latter map on every open with scalar multiplication. Evaluation at the top is an equivalence: restrict a top section to each open, and use compatibility to prove the two inverse identities.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pur-sheaf-hom",
+    "lem-sc-tilde-scalar-section-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The global sections of tilde M are the finite A-module M via tilde.isoTop. Modules.isFinitePresentation_of_finite in the proved source library therefore gives finite presentation of tilde M. The structure sheaf is quasi-coherent via tildeSelf. Apply isQuasicoherent_homObj_of_isFinitePresentation to conclude that H is quasi-coherent. The linear bijection of the preceding step is an isomorphism in ModuleCat A. Apply tilde to it and compose with the affine tilde-Gamma counit, which is an isomorphism for H by quasi-coherence. This proves tilde(Dual A M) ≅ H without constructing or gluing local inverses.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the affine isomorphism to W. Use the proved overHomObjIso to identify H.over W with the internal Hom of the over-restrictions. Apply internalHom_overEquiv to carry this internal Hom through Modules.overEquiv W. The components of overFunctorEquiv identify the two transported modules with scheme restriction, and restrictUnitIso identifies the restricted structure sheaf with O_W. Apply homFunctor contravariantly to the source-module isomorphism and covariantly to the target-module isomorphism; compose these isomorphisms to get the stated result. All the equivalences and constructions apply to empty W and zero M.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sc-internal-hom-over-equiv"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sc-internal-hom-over-equiv",
+  "lem-sc-tilde-scalar-section-action",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "U4",
+  "by": "V3",
   "document": "Stacks Project",
-  "place": "Tag 0583; affine-sheaf assembly as in Tag 0EY6 proof (1)"
+  "place": "Tags 0583, 01LA(10), 01IB and 0E8H; affine dual followed by open-subscheme restriction"
  },
  "mathlib_searches": [
   {
@@ -97,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T141534-L-381617",
-  "kind": "interface",
+  "landing": "20261013T145730-L-752888",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
