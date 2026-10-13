@@ -15,42 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Identify extended A[0] with the integer single complex using extendSingleIso. Tilde commutes with singles by singleMapHomologicalComplex; tildeSelf identifies tilde(A) with the structure module. Over-restriction and the over-equivalence carry the structure module to that on U, giving the explicit isomorphism i. This entire step is now implemented by the real definition openStructureRestrictionIso and compiles without sorry; only c and its unit compatibility remain.",
+   "text": "Construct openStructureRestrictionIso by extendSingleIso, termwise tilde, exact derived restriction, its single-functor comparison and sheafOfModulesEquivOverUnit. This existing construction remains unchanged and has no hole.",
    "uses": [
     "def-sc-koszul-open-system"
    ],
    "elementary": false
   },
   {
-   "text": "Open restriction preserves K-injectives by its exact left adjoint extension by zero [lem-sc-derived-open-restriction-adjunction-exact]. The over-equivalence does likewise. Restrict an ambient K-injective resolution to U. Its global sections, after exact scalar restriction along A to Gamma(U,O_U), are exactly the affineOpenSections complex. Comparing the localization and derived-functor units gives H(G(E)) in the specified universe. Evaluation and all these comparisons commute with postcomposition by maps of K-injective representatives, which descend to every derived arrow. Compose the K-injective units, the sections identification, exact scalar-restriction homology comparison and homologyFunctorFactors to construct c. This contains no evaluation of Hom sets.",
+   "text": "Use the normalized model isomorphism e. Define c_E as Equiv.ofBijective of its hom component. Applying CategoryTheory.congr_fun to e naturality gives the required elementwise naturality.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "def-sc-principal-open-alternating-total"
+    "lem-sc-open-sections-cohomology-model-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The structure identity evaluates to 1 before resolution. The ordinary class of its restriction is the explicitly constructed openStructureUnitClass: extendHomologyIso and singleObjHomologySelfIso identify the class of 1, and tilde.toOpen restricts it. Naturality of the derived-functor unit with the resolution sends this class to derivedOpenStructureUnit, proving the displayed equality for c at the structure object. Empty U has zero section and Hom groups; the zero ring and all universes use the same comparison isos. This normalization is established from the cycle construction, not inferred from an arbitrary existential equivalence. Here the source global class is derivedStructureGlobalOne from [lem-sc-derived-structure-evaluation-one-bijective]; its definition is a real construction independent of that node's bijectivity theorem.",
+   "text": "The restricted structure-class calculation identifies F(i inverse) of derivedStructureGlobalOne with alpha_C of the specified ordinary tilde class. Apply e to this equality, then apply the ordinary-unit square to that same class. The ambient map unfolds to the exact displayed beta and homologyFunctorFactors expression.",
    "uses": [
-    "def-sc-koszul-open-system",
-    "def-sc-principal-open-alternating-total",
-    "lem-sc-derived-structure-evaluation-one-bijective"
+    "lem-sc-open-sections-structure-class",
+    "lem-sc-open-sections-cohomology-model-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-koszul-open-system",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-sc-principal-open-alternating-total",
-  "lem-sc-derived-structure-evaluation-one-bijective"
+  "lem-sc-open-sections-cohomology-model-comparison",
+  "lem-sc-open-sections-structure-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
+  "group": "H1",
   "document": "https://stacks.math.columbia.edu/tag/08BS",
-  "place": "Restriction preserves K-injectives; Tags 079V and 06Z0 for sections and tilde",
-  "note": "Canonical cycle construction from the cited source; Lean glue by A4."
+  "place": "Lemma 20.32.1; Tags 079V and 06Z0 for ordinary section units",
+  "note": "Two independent computations combined by Lean naturality and equality transport; original signature unchanged."
  },
  "mathlib_searches": [
   {
@@ -146,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T134359-L-95446",
+  "landing": "20261013T145726-L-751157",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

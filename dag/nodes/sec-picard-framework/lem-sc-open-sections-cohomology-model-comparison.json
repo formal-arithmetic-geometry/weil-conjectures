@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-open-sections-cohomology-model-comparison",
+ "kind": "statement",
+ "title": "Natural open-sections cohomology comparison normalized on ordinary complexes",
+ "statement": "Let A be a commutative ring, U any open of Spec A, with chosen derived categories [def-pc-derived-category]. T is over-restriction followed by the over-equivalence. F is H^0 of derived global sections on U, using the standard derived category of modules over Gamma(U,O_U), with scalars forgotten. G is H^0 of derived affineOpenSections [def-sc-principal-open-alternating-total] with A-scalars forgotten. For an ordinary ambient complex K, alpha_K is the inverse ordinary sections/homology comparison followed by the ordinary-to-derived global-sections unit on T(K) and inverse exact restriction factorization. beta_K is homologyFunctorFactors inverse followed by the ambient ordinary-to-derived sections unit. There is a natural isomorphism e:T.mapDerivedCategory composed with F isomorphic to G with alpha_K followed by e at Q(K) equal to beta_K for every K. No structure class or Hom-set evaluation is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08BS",
+  "place": "Lemma 20.32.1; Tag 079V for right-derived sections"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof": [
+  {
+   "text": "The top open in the over-site corresponds to U. The presheaf image of this equality identifies restricted global sections with ambient open sections. Presheaf naturality proves naturality. Exact scalar forgetting commutes with homology by ShortComplex.mapHomologyIso. These comparisons are implemented without holes.",
+   "uses": [
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extension by zero is an exact left adjoint of over-restriction. The exact-adjoint K-injective criterion shows that over-restriction preserves K-injectives. The over-equivalence also preserves K-injectives, so their composite T does.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-injective J both ordinary-to-derived units are isomorphisms. Conjugate the ordinary cohomology comparison by these units and the exact restriction factorization. Naturality for homotopy maps and full faithfulness of localization on K-injectives descend this to a natural isomorphism on the chosen derived category. For any K, take a quasi-isomorphism K to J. Naturality of the two units proves the square after mapping to J; cancel the derived isomorphism to get the square on K. No quasi-coherence or boundedness is needed.",
+   "uses": [
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-open-alternating-total",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "document": "https://stacks.math.columbia.edu/tag/08BS",
+  "place": "Lemma 20.32.1; Tag 079V for right-derived sections",
+  "note": "Explicit comparison maps extracted from the cited section and K-injective constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction preserves K-injectives and derived open sections agrees with global sections of the restriction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism of derived global sections on an open subset and derived evaluation sections on the ambient ringed space",
+   "results": "Scheme.restrictFunctorΓ; sheafSectionsNatIsoEvaluation; Scheme.Opens.topIso; IsOpenImmersion.ΓIsoTop.",
+   "date": "2026-10-13",
+   "verdict": "Ordinary comparisons only; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"mapDerivedCategory\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|isRightDerivedFunctor.*comp|rightDerivedNatTrans in Mathlib and lean/WeilConjectures",
+   "results": "Mathlib rightDerivedUnique and rightDerivedNatTrans_app; WeilConjectures.RightDerivedFunctor.Comp has exact-adjoint K-injective preservation and composition.",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients; no normalized open-sections comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along an open immersion computes unbounded derived sections on the open via restriction and has compatibility with the resolution unit",
+   "results": "{\"t\": \"2026-10-13T14:39:33Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image along an open immersion computes unbounded derived sections on the open via restriction and has compatibility with the resolution unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp\", \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply\"], \"digest\": \"bb85371a7e7047ac\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: ordinary restriction/homology ingredients, no exact normalized derived comparison or structure-class formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\", \"singleObjHomologySelfIso\"",
+   "results": "{\"t\": \"2026-10-13T14:39:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"homologyπ\\\", \\\"singleObjHomologySelfIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom\", \"HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom_assoc\"], \"digest\": \"5f589fae6b1fe792\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: ordinary restriction/homology ingredients, no exact normalized derived comparison or structure-class formula."
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Hh]omology|[Hh]omology.*restrict|rightDerivedUnique",
+   "results": "{\"t\": \"2026-10-13T14:40:03Z\", \"tool\": \"grep\", \"query\": \"restrict.*[Hh]omology|[Hh]omology.*restrict|rightDerivedUnique\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/CochainComplexOpposite.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean\", \"Mathlib/Algebra/Homology/Embedding/Connect.lean\"], \"digest\": \"3beeb67cd52f8ef2\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: ordinary restriction/homology ingredients, no exact normalized derived comparison or structure-class formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenSectionsCohomologyComparison",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-duality localization compatibility: Natural open-sections cohomology comparison normalized on ordinary complexes",
+   "via": [
+    "lem-sc-open-sections-cohomology-unit-comparison",
+    "lem-sc-derived-open-structure-sections-unit",
+    "lem-sc-koszul-open-structure-evaluation",
+    "lem-sc-koszul-open-hom-identity-evaluation",
+    "lem-sc-koszul-open-hom-chain-evaluation",
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSectionsCohomologyModel.lean",
+  "declaration": "AlgebraicGeometry.exists_openComparison_cohomology_model_iso",
+  "statement": "theorem exists_openComparison_cohomology_model_iso :\n    ∃ e : (openComparisonRestriction A U).mapDerivedCategory ⋙\n        openComparisonGlobalCohomology A U ≅ openComparisonAmbientCohomology A U,\n      ∀ (K : CochainComplex\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ),\n        openComparisonRestrictedUnit A U K ≫ e.hom.app (DerivedCategory.Q.obj K) =\n          openComparisonAmbientUnit A U K",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T145726-L-751157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T145726-L-751157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,167 @@
+{
+ "id": "lem-sc-open-sections-structure-class",
+ "kind": "statement",
+ "title": "Restricted structure class from the ordinary tilde unit",
+ "statement": "Let A be a commutative ring, U any open of Spec A, with chosen derived categories [def-pc-derived-category]. Put K=A[0] as a natural-index chain complex, L its integer cochain extension, and C its termwise tilde [def-sc-koszul-open-system]. Let j:H^0(L) isomorphic to A be extendHomologyIso followed by singleObjHomologySelfIso. eta:L to affineOpenSections(C) is termwise tilde.toOpen [def-sc-principal-open-alternating-total]. Let i:T.mapDerivedCategory(koszulOpenStructure A) isomorphic to O_U[0] be the explicit extension-single, tilde-single, derived restriction-single and over-unit comparisons. F(i inverse) applied to derivedStructureGlobalOne [lem-sc-derived-structure-evaluation-one-bijective] equals alpha_C applied to H^0(eta)(j inverse(1)), with alpha_C the explicit restricted ordinary-to-derived map [lem-sc-open-sections-cohomology-model-comparison]. There is no unknown comparison equivalence and no derived ambient sections on either side.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "The tilde/sections unit; Tag 079V for the ordinary-to-derived class"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-sc-principal-open-alternating-total",
+  "lem-sc-derived-structure-evaluation-one-bijective",
+  "lem-sc-open-sections-cohomology-model-comparison"
+ ],
+ "proof": [
+  {
+   "text": "ExtendSingleIso and singleMapHomologicalComplex construct openComparisonStructureComplexIso. Exact derived restriction, its single-functor comparison and sheafOfModulesEquivOverUnit give i.",
+   "uses": [
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The extension and single-homology comparisons take the class of 1 to 1. The over-unit isomorphism takes the restricted section 1 to 1 on U. The ordinary sections comparison therefore identifies its inverse image with tilde.toOpen(1). Its homology class is H^0(eta)(j inverse(1)). Exact forgetting identifies this class through openComparisonOrdinaryIso.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-open-sections-cohomology-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "derivedStructureGlobalOne is defined by the ordinary-to-derived global-sections unit before resolution. Naturality of that unit with the explicit complex isomorphism and of homologyFunctorFactors gives the displayed equality. Bijectivity of evaluation at one is not used. Empty U and the zero ring give zero classes throughout.",
+   "uses": [
+    "lem-sc-derived-structure-evaluation-one-bijective",
+    "lem-sc-open-sections-cohomology-model-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-open-system",
+  "def-sc-principal-open-alternating-total",
+  "lem-sc-open-sections-cohomology-model-comparison",
+  "lem-sc-derived-structure-evaluation-one-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "The tilde/sections unit; Tag 079V for the ordinary-to-derived class",
+  "note": "Explicit comparison maps extracted from the cited section and K-injective constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction preserves K-injectives and derived open sections agrees with global sections of the restriction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The class of one in the structure sheaf after restriction to an open equals the restriction of the tilde sections unit",
+   "results": "StructureSheaf.const_one; toOpen_eq_const; to_global_factors_apply; ModuleCat.Tilde.res_const.",
+   "date": "2026-10-13",
+   "verdict": "Ordinary identities only; no exact derived formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleObjHomologySelfIso\", \"extendHomologyIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "toOpen.*one|singleObjHomologySelfIso|extendHomologyIso in Mathlib",
+   "results": "singleObjHomologySelfIso and homologyπ_singleObjHomologySelfIso_hom in SingleHomology; extendHomologyIso and homologyπ_extendHomologyIso_hom in Embedding.ExtendHomology.",
+   "date": "2026-10-13",
+   "verdict": "Computational ingredients; no restricted structure-class formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along an open immersion computes unbounded derived sections on the open via restriction and has compatibility with the resolution unit",
+   "results": "{\"t\": \"2026-10-13T14:39:33Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image along an open immersion computes unbounded derived sections on the open via restriction and has compatibility with the resolution unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp\", \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply\"], \"digest\": \"bb85371a7e7047ac\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: ordinary restriction/homology ingredients, no exact normalized derived comparison or structure-class formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\", \"singleObjHomologySelfIso\"",
+   "results": "{\"t\": \"2026-10-13T14:39:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"homologyπ\\\", \\\"singleObjHomologySelfIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom\", \"HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom_assoc\"], \"digest\": \"5f589fae6b1fe792\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: ordinary restriction/homology ingredients, no exact normalized derived comparison or structure-class formula."
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Hh]omology|[Hh]omology.*restrict|rightDerivedUnique",
+   "results": "{\"t\": \"2026-10-13T14:40:03Z\", \"tool\": \"grep\", \"query\": \"restrict.*[Hh]omology|[Hh]omology.*restrict|rightDerivedUnique\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/CochainComplexOpposite.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean\", \"Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean\", \"Mathlib/Algebra/Homology/Embedding/Connect.lean\"], \"digest\": \"3beeb67cd52f8ef2\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: ordinary restriction/homology ingredients, no exact normalized derived comparison or structure-class formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenSectionsCohomologyComparison",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-duality localization compatibility: Restricted structure class from the ordinary tilde unit",
+   "via": [
+    "lem-sc-open-sections-cohomology-unit-comparison",
+    "lem-sc-derived-open-structure-sections-unit",
+    "lem-sc-koszul-open-structure-evaluation",
+    "lem-sc-koszul-open-hom-identity-evaluation",
+    "lem-sc-koszul-open-hom-chain-evaluation",
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSectionsStructureClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSectionsStructureClass.lean",
+  "declaration": "AlgebraicGeometry.openComparison_structure_class",
+  "statement": "theorem openComparison_structure_class (A : Type u) [CommRing A]\n    (U : (Spec (.of A)).Opens)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)] :\n    let T := openComparisonRestriction A U\n    let F := openComparisonGlobalCohomology A U\n    let O := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj\n        (SheafOfModules.unit (moduleRings U.toScheme.toRingedSpace))\n    let K := (ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A)\n    let L := K.extend ComplexShape.embeddingDownNat\n    let C := ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).obj L\n    let η₀ : 𝟭 (ModuleCat.{u} A) ⟶ koszulOpenTilde A ⋙ affineOpenSections A U :=\n      { app := fun M ↦ tilde.toOpen M U\n        naturality := fun _ _ g ↦ (tilde.toOpen_map_app g U).symm }\n    let η := (NatTrans.mapHomologicalComplex η₀ (.up ℤ)).app L\n    let j : L.homology 0 ≅ ModuleCat.of A A :=\n      K.extendHomologyIso ComplexShape.embeddingDownNat (j := 0) rfl ≪≫\n        HomologicalComplex.singleObjHomologySelfIso (.down ℕ) 0 (ModuleCat.of A A)\n    let i : T.mapDerivedCategory.obj (koszulOpenStructure A) ≅ O :=\n      T.mapDerivedCategory.mapIso (DerivedCategory.Q.mapIso\n        (openComparisonStructureComplexIso A)) ≪≫\n      (T.mapDerivedCategorySingleFunctor 0).app _ ≪≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).mapIso\n          (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U _)\n    F.map i.inv (derivedStructureGlobalOne U.toScheme) =\n      openComparisonRestrictedUnit A U C\n        ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T145726-L-751157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T145726-L-751157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

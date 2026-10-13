@@ -9,7 +9,8 @@ public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import Sheaf.AlgebraicGeometry.DerivedStructureEvaluationOne
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
+import Sheaf.AlgebraicGeometry.OpenSectionsStructureClass
 
 /-! # Comparing derived sections on an open with ambient open sections
 
@@ -79,6 +80,8 @@ def openStructureRestrictionIso
       (DerivedCategory.singleFunctor C' 0).mapIso f
 
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction and exact scalar restriction compare the two sections computations,
 including their canonical classes of one. This statement compares cohomology only;
 it contains no equivalence of derived Hom sets.
@@ -161,7 +164,26 @@ theorem openSections_cohomology_unit_comparison
         c (koszulOpenStructure A) (F.map i.inv (derivedStructureGlobalOne U.toScheme)) =
           H.map (β.app C)
             (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app S).inv
-              ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A)))) := by sorry
+              ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A)))) := by
+  intro R H G F O K L C S η₀ η j Sh β i
+  obtain ⟨e, he⟩ := exists_openComparison_cohomology_model_iso A U
+  let c (E : schemeDerivedCategory (Spec (.of A))) :=
+    Equiv.ofBijective (e.hom.app E) (ConcreteCategory.bijective_of_isIso (e.hom.app E))
+  refine ⟨c, ?_, ?_⟩
+  · intro E E' g z
+    exact CategoryTheory.congr_fun (e.hom.naturality g) z
+  · let x : openComparisonOrdinaryCohomology A U C :=
+      (HomologicalComplex.homologyMap η 0) (j.inv (1 : A))
+    have hclass : F.map i.inv (derivedStructureGlobalOne U.toScheme) =
+        openComparisonRestrictedUnit A U C x := openComparison_structure_class A U
+    have hmodel := CategoryTheory.congr_fun (he C) x
+    have hambient : openComparisonAmbientUnit A U C x =
+        H.map (β.app C)
+          (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app S).inv x) := rfl
+    change (e.hom.app (koszulOpenStructure A)) _ = _
+    exact (congrArg (fun z ↦ e.hom.app (koszulOpenStructure A) z) hclass).trans
+      (hmodel.trans hambient)
+
 
 end
 end AlgebraicGeometry
