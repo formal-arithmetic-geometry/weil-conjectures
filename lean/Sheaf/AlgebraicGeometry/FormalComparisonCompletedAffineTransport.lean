@@ -12,6 +12,11 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
+import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineData
+import Sheaf.AlgebraicGeometry.FormalSystemCompletedAffineSections
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+
 /-! # Flat transport of the comparison to the completed affine base
 
 Source: Stacks Project, Tag 088B, restriction, flat base-change and uniqueness paragraphs.
@@ -23,6 +28,33 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+private theorem limit_square_restrict
+    {B R : Type u} [CommRing B] [CommRing R] (r : B →+* R)
+    (A C : ℕᵒᵖ ⥤ ModuleCat.{u} B) (A₀ C₀ : ℕᵒᵖ ⥤ ModuleCat.{u} R)
+    (a : A ⟶ C) (b : A₀ ⟶ C₀)
+    (iA : A ≅ A₀ ⋙ ModuleCat.restrictScalars r)
+    (iC : C ≅ C₀ ⋙ ModuleCat.restrictScalars r)
+    (hi : a ≫ iC.hom = iA.hom ≫ Functor.whiskerRight b (ModuleCat.restrictScalars r)) :
+    ∃ eA : limit A ≅ (ModuleCat.restrictScalars r).obj (limit A₀),
+    ∃ eC : limit C ≅ (ModuleCat.restrictScalars r).obj (limit C₀),
+      lim.map a ≫ eC.hom = eA.hom ≫ (ModuleCat.restrictScalars r).map (lim.map b) := by
+  let L := ModuleCat.restrictScalars.{u} r
+  let eA := lim.mapIso iA ≪≫ (preservesLimitIso L A₀).symm
+  let eC := lim.mapIso iC ≪≫ (preservesLimitIso L C₀).symm
+  refine ⟨eA, eC, ?_⟩
+  apply (cancel_mono (preservesLimitIso L C₀).hom).1
+  simp only [eA, eC, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  have hn := (preservesLimitNatIso L).hom.naturality b
+  change L.map (lim.map b) ≫ (preservesLimitIso L C₀).hom =
+    (preservesLimitIso L A₀).hom ≫ lim.map (Functor.whiskerRight b L) at hn
+  rw [hn]
+  simp only [Iso.inv_hom_id_assoc]
+  rw [← lim.map_comp, ← lim.map_comp, hi]
+
+set_option maxHeartbeats 800000 in
+-- The comparison composes four diagram functors and dependent pullback equalities.
+set_option backward.isDefEq.respectTransparency false in
 /-- Restriction and flat completion base change transport the formal comparison and
 its section inverse limit. This step neither algebraizes the source nor lifts beta.
 
@@ -116,6 +148,54 @@ theorem formalComparison_completed_affine_transport
         eG.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map
           (lim.map (Functor.whiskerRight α₀.hom
             (moduleSpecΓFunctor (R := CommRingCat.of R)))) := by
-  sorry
+  classical
+  dsimp only
+  let B := Γ(Y, U.1)
+  let R := AdicCompletion (J.ideal U) B
+  let S := Spec (CommRingCat.of R)
+  let I := (J.ideal U).map (algebraMap B R)
+  let J₀ := Scheme.IdealSheafData.ofIdealTop
+    (I.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)
+  let g : S ⟶ Y := Spec.map (CommRingCat.ofHom (algebraMap B R)) ≫
+    U.2.isoSpec.inv ≫ U.1.ι
+  let p := pullback.snd f g
+  let T := Scheme.Modules.tensorPullback g
+  let E := moduleSpecΓFunctor (R := CommRingCat.of R)
+  let L := ModuleCat.restrictScalars.{u} (algebraMap B R)
+  let D := (completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩
+  have hd := formalComparison_completed_affine_data J f adj G F β h κ α hκ hα U
+  dsimp only at hd
+  obtain ⟨adjR, G₀, F₀, β₀, hD, κ₀, α₀, hG, hF, hκ₀, hα₀, δ, hδ⟩ := hd
+  let D₀ := (completion S J₀).obj ⟨(Scheme.Modules.pushforward p).obj F₀.obj, hD⟩
+  have hs := formalSystem_completed_affine_sections J U
+  dsimp only at hs
+  obtain ⟨e, he⟩ := hs
+  let tG := Functor.isoWhiskerRight (eqToIso hG) E
+  let tD := Functor.isoWhiskerRight δ E
+  let iG := e G ≪≫ (Functor.isoWhiskerRight tG L).symm
+  let iD := e D ≪≫ (Functor.isoWhiskerRight tD L).symm
+  have ht : Functor.whiskerRight (Functor.whiskerRight α₀.hom E) L ≫
+        (Functor.isoWhiskerRight tD L).hom =
+      (Functor.isoWhiskerRight tG L).hom ≫ Functor.whiskerRight
+        (Functor.whiskerRight (Functor.whiskerRight α.hom T) E) L := by
+    simpa only [Functor.whiskerRight_comp, tD, tG, Functor.isoWhiskerRight_hom,
+      eqToIso.hom] using
+      congrArg (fun a ↦ Functor.whiskerRight (Functor.whiskerRight a E) L) hδ
+  have hi : Functor.whiskerRight α.hom
+        (SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≫ iD.hom =
+      iG.hom ≫ Functor.whiskerRight (Functor.whiskerRight α₀.hom E) L := by
+    apply (cancel_mono (Functor.isoWhiskerRight tD L).hom).1
+    simp only [iD, iG, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+      Iso.inv_hom_id, Category.comp_id]
+    rw [ht]
+    simp only [Iso.inv_hom_id_assoc]
+    exact he G D α
+  have hl := limit_square_restrict (algebraMap B R)
+    _ _ (G₀.obj ⋙ E) (D₀.obj ⋙ E)
+    (Functor.whiskerRight α.hom (SheafOfModules.evaluation Y.ringCatSheaf (op U.1)))
+    (Functor.whiskerRight α₀.hom E) iG iD hi
+  dsimp only at hl
+  obtain ⟨eG, eD, heGD⟩ := hl
+  exact ⟨adjR, G₀, F₀, β₀, hD, κ₀, α₀, hG, hF, hκ₀, hα₀, eG, eD, heGD⟩
 
 end AlgebraicGeometry
