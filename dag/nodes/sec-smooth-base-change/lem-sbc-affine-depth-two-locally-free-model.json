@@ -1,0 +1,171 @@
+{
+ "id": "lem-sbc-affine-depth-two-locally-free-model",
+ "kind": "statement",
+ "title": "Coherent depth-two model of a finite locally free module on an affine open",
+ "statement": "theorem exists_affine_depth_two_locally_free_model\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (hboundary : ∀ x : Spec A, x ∉ W →\n      (2 : ℕ∞) ≤ IsLocalRing.depth\n        (R := (Spec A).presheaf.stalk x) ((Spec A).presheaf.stalk x))\n    (P : W.toScheme.Modules) [P.IsFiniteLocallyFree] :\n    ∃ H : (Spec A).Modules,\n      H.IsQuasicoherent ∧\n      (∀ V : (Spec A).Opens, IsAffineOpen V →\n        Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) ∧\n      (∀ x : Spec A, x ∉ W →\n        ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x)) ∧\n      Nonempty (Modules.restrict H W.ι ≅ P)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0G41(2), 0EY6 proof of (1); explicit nonintegral double-dual kernel calculation in the parent node, proof steps 2 and 3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-depth",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Extend the finitely presented module P across the quasi-compact open W by applying [lem-weil-pbc-module-finite-presentation-extension] to the zero ambient module and zero map. The affine scheme is qcqs, and Noetherianity makes W quasi-compact. Identify the resulting finitely presented sheaf with the tilde of its finite A-module M of global sections.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form D = Hom_A(Hom_A(M,A),A) and H = tilde D. Noetherianity makes both duals finite. Localization commutes with Hom of finite presentations, so H restricted to W is the double dual of P, hence P because P is finite locally free. These are existential proof witnesses, never chosen as data of a definition.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Dualize a finite free presentation of the first dual to realize D as a kernel between finite free modules. At a boundary stalk choose a regular pair x,y in the base ring. Multiplication by x is injective on the kernel. If y*n=x*nprime, regularity in the free source gives n=x*m; cancellation of x in the free target gives d(m)=0. Thus y is injective on the kernel modulo x. Nakayama gives properness for nonzero finite stalks; zero stalks have infinite depth. This proves the asserted depth bound and Noetherianity gives finite sections on affine opens and finite stalks. Empty W uses the zero model; W=top has no boundary conditions.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-finite-presentation-extension"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tags 0G41(2), 0EY6 proof of (1); explicit nonintegral double-dual kernel calculation in the parent node, proof steps 2 and 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf extends by double dual to coherent depth two module on affine Noetherian scheme",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual",
+   "results": "Module.Dual; Module.Dual.instInhabited; Dual.apply_one_mul_eq; Module.instIsReflexiveDual; Module.Dual.instIsReflecive; Submodule.dualAnnihilator; Submodule.dualCoannihilator; Submodule.dualAnnihilator_dualCoannihilator_dualAnnihilator",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*dual|dual.*depth|restrict.*pushforward",
+   "results": "Mathlib/MeasureTheory/Measure/Restrict.lean; Mathlib/CategoryTheory/Sites/InducedTopology.lean; Mathlib/CategoryTheory/Sites/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of pushforward sheaf along an open immersion commutes with open base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open base change direct image structure sheaf module isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict_map; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally free module on open subset Noetherian affine scheme coherent extension double dual depth two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|double.?dual|baseChange.*pushforward|pushforward.*baseChange",
+   "results": "No hits in AlgebraicGeometry.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no affine coherent depth-two extension theorem; reflexivity algebra alone does not construct the model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a vector bundle on a quasi compact open extends to a coherent reflexive sheaf over a noetherian affine scheme",
+   "results": "SheafOfModules.IsFiniteType; AlgebraicGeometry.Scheme.Modules.isSheaf; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no affine coherent depth-two extension theorem; reflexivity algebra alone does not construct the model."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive",
+   "results": "Module.IsReflexive; Module.IsReflexive.to_isTorsionFree; MulOpposite.instModuleIsReflexive; Module.equiv; Module.IsReflexive.of_split; Module.instIsReflexiveDual; Module.Dual.instIsReflecive; Module.evalEquiv",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no affine coherent depth-two extension theorem; reflexivity algebra alone does not construct the model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoPushforwardHull",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Affine depth-two hull proof: Coherent depth-two model of a finite locally free module on an affine open",
+   "via": [
+    "lem-sbc-affine-depth-two-pushforward-hull",
+    "lem-sbc-depth-two-coherent-module-extension",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDepthTwoLocallyFreeModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_depth_two_locally_free_model",
+  "statement": "theorem exists_affine_depth_two_locally_free_model\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (hboundary : ∀ x : Spec A, x ∉ W →\n      (2 : ℕ∞) ≤ IsLocalRing.depth\n        (R := (Spec A).presheaf.stalk x) ((Spec A).presheaf.stalk x))\n    (P : W.toScheme.Modules) [P.IsFiniteLocallyFree] :\n    ∃ H : (Spec A).Modules,\n      H.IsQuasicoherent ∧\n      (∀ V : (Spec A).Opens, IsAffineOpen V →\n        Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) ∧\n      (∀ x : Spec A, x ∉ W →\n        ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x)) ∧\n      Nonempty (Modules.restrict H W.ι ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2469241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2469241",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

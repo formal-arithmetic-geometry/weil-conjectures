@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-open-base-change-structure-module",
+ "kind": "statement",
+ "title": "Open base change of a composite structure-module direct image",
+ "statement": "theorem nonempty_open_base_change_structure_module_iso\n    {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]\n    (U : L.Opens) {X : Scheme.{u}} (f : X ⟶ U.toScheme) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    let t := j ∣_ U\n    let Z := CategoryTheory.Limits.pullback f t\n    let p := pullback.snd f t ≫ (j ⁻¹ᵁ U).ι\n    let C : Y.CommAlgebraSheaf := Under.mk\n      (⟨p.c⟩ : Y.sheaf ⟶\n        (TopCat.Sheaf.pushforward CommRingCat.{u} p.base).obj Z.sheaf)\n    Nonempty (restrict B.toModule j ≅ C.toModule)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 008C and 0094; open-base-change section calculation in Tag 0EY6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Pull back f along t=j restricted to U. Paste that cartesian square with the square defining t, obtaining IsPullback i p (f followed by U inclusion) j, where i is the first projection and p the second projection followed by W inclusion. Because t is an open immersion, i is an open immersion. The square gives i image (p inverse-image T)=g inverse-image (j image T).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each open T use the structure presheaf isomorphism along this equality followed by i.appIso to compare sections. Apply the square commutation identity to appLE maps to identify the scalar actions. Multiplicativity of the ring section maps gives linearity. The appIso_hom_naturality identity, together with presheaf functoriality and uniqueness of maps between opens, gives naturality. ModuleCat.isoMk, PresheafOfModules.isoMk and fullyFaithfulForget give the sheaf module isomorphism. No finite, etale, depth or Noetherian hypothesis is used, and empty opens are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tags 008C and 0094; open-base-change section calculation in Tag 0EY6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf extends by double dual to coherent depth two module on affine Noetherian scheme",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual",
+   "results": "Module.Dual; Module.Dual.instInhabited; Dual.apply_one_mul_eq; Module.instIsReflexiveDual; Module.Dual.instIsReflecive; Submodule.dualAnnihilator; Submodule.dualCoannihilator; Submodule.dualAnnihilator_dualCoannihilator_dualAnnihilator",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*dual|dual.*depth|restrict.*pushforward",
+   "results": "Mathlib/MeasureTheory/Measure/Restrict.lean; Mathlib/CategoryTheory/Sites/InducedTopology.lean; Mathlib/CategoryTheory/Sites/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of pushforward sheaf along an open immersion commutes with open base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open base change direct image structure sheaf module isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict_map; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally free module on open subset Noetherian affine scheme coherent extension double dual depth two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoPushforwardHull",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Affine depth-two hull proof: Open base change of a composite structure-module direct image",
+   "via": [
+    "lem-sbc-affine-depth-two-pushforward-hull",
+    "lem-sbc-depth-two-coherent-module-extension",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/OpenBaseChangeStructureModule.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_open_base_change_structure_module_iso",
+  "statement": "theorem nonempty_open_base_change_structure_module_iso\n    {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]\n    (U : L.Opens) {X : Scheme.{u}} (f : X ⟶ U.toScheme) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    let t := j ∣_ U\n    let Z := CategoryTheory.Limits.pullback f t\n    let p := pullback.snd f t ≫ (j ⁻¹ᵁ U).ι\n    let C : Y.CommAlgebraSheaf := Under.mk\n      (⟨p.c⟩ : Y.sheaf ⟶\n        (TopCat.Sheaf.pushforward CommRingCat.{u} p.base).obj Z.sheaf)\n    Nonempty (restrict B.toModule j ≅ C.toModule)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2469241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2469241",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

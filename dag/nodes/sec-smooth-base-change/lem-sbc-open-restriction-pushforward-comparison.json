@@ -1,0 +1,139 @@
+{
+ "id": "lem-sbc-open-restriction-pushforward-comparison",
+ "kind": "statement",
+ "title": "Open restriction and open direct image commute",
+ "statement": "theorem nonempty_restrict_pushforward_open_iso\n    {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]\n    (U : L.Opens) (P : U.toScheme.Modules) :\n    Nonempty (restrict ((pushforward U.ι).obj P) j ≅\n      (pushforward (j ⁻¹ᵁ U).ι).obj (restrict P (j ∣_ U)))",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 008C (direct image on opens) and 0094 (module maps on ringed spaces)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Set W=j inverse-image U and t=j restricted to U. The cartesian open square gives t image (W inverse-image T)=U inverse-image (j image T) for each open T of Y. Apply P.presheaf.mapIso to this equality for the component maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The square identity t followed by U inclusion=W inclusion followed by j gives equality of the scalar actions via appLE_comp_appLE and the inverse open-immersion structure-sheaf map. Presheaf.map_smul gives linearity. Presheaf functoriality and uniqueness of maps between opens give naturality. PresheafOfModules.isoMk and fullyFaithfulForget lift the component isomorphisms to sheaf modules. All opens, including empty ones, use the same calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tags 008C (direct image on opens) and 0094 (module maps on ringed spaces)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf extends by double dual to coherent depth two module on affine Noetherian scheme",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual",
+   "results": "Module.Dual; Module.Dual.instInhabited; Dual.apply_one_mul_eq; Module.instIsReflexiveDual; Module.Dual.instIsReflecive; Submodule.dualAnnihilator; Submodule.dualCoannihilator; Submodule.dualAnnihilator_dualCoannihilator_dualAnnihilator",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*dual|dual.*depth|restrict.*pushforward",
+   "results": "Mathlib/MeasureTheory/Measure/Restrict.lean; Mathlib/CategoryTheory/Sites/InducedTopology.lean; Mathlib/CategoryTheory/Sites/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of pushforward sheaf along an open immersion commutes with open base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open base change direct image structure sheaf module isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict_map; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas used in the proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally free module on open subset Noetherian affine scheme coherent extension double dual depth two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoPushforwardHull",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Affine depth-two hull proof: Open restriction and open direct image commute",
+   "via": [
+    "lem-sbc-affine-depth-two-pushforward-hull",
+    "lem-sbc-depth-two-coherent-module-extension",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/OpenRestrictionPushforwardComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_restrict_pushforward_open_iso",
+  "statement": "theorem nonempty_restrict_pushforward_open_iso\n    {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]\n    (U : L.Opens) (P : U.toScheme.Modules) :\n    Nonempty (restrict ((pushforward U.ι).obj P) j ≅\n      (pushforward (j ⁻¹ᵁ U).ι).obj (restrict P (j ∣_ U)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2469241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2469241",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
