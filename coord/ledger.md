@@ -13350,3 +13350,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:40 L: returned deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (reviewer RETURN: (reviewer X-a8638, head a863818d4) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Aff)
 
 - 02:41 L: batch 20261013T181050 dependency take-out
+- 18:43 L: returned deliver/D3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureCompatibility (reviewer RETURN: (reviewer X-77e71, head 77e71f69b) E2: The theorem left as sorry is false. In lean/Sheaf/AlgebraicGeometry/Morphisms/Aff)
