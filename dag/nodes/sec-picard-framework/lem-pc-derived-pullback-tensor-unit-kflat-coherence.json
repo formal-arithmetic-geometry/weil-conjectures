@@ -19,29 +19,31 @@
  },
  "proof": [
   {
-   "text": "The unit complex U_X is K-flat since it is a bounded-above complex of flat terms. The supplied counit on K-flat complexes is invertible by comparison of left-derived functors with the recorded pullback computation. Tensor localization maps are invertible on K-flat pairs and when one factor is the flat unit.",
+   "text": "The tensor-unit complex U_X is K-flat directly: for any acyclic N the right unitor identifies Tot(N tensor U_X) with N, so exactness in every degree transports across this isomorphism. Identify F with tensorPullback using hF and hmap. The recorded K-flat counit and uniqueness of left-derived functors show that the supplied counit at P is invertible. The localization unit maps are invertible; lax unitality then makes the target localization tensorator with its actual unit invertible. No bounded-above-flat theorem or arbitrary K-flat tensorator invertibility is needed.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat",
     "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure"
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false
   },
   {
-   "text": "For the left law substitute U_X,P into hmu and postcompose the desired equality with the invertible counit and localization maps. Expand the specified eta. Its epsilon_U inverse cancels the unit counit and its source/target localization comparisons cancel their corresponding maps. On the total-tensor summand (p,q) in degree n, p unequal to zero gives a zero unit term, so both maps vanish; on (0,n), hphi identifies the resulting map with the underived left unit law of mF at P.X n. Extensionality on coproduct inclusions proves the complex equality. Localize and cancel to obtain the left law at Q(P).",
+   "text": "Prove the inverse complex left-unit identity degreewise. The inverse left unitor is the (0,n) total-tensor inclusion preceded by the module inverse left unitor and the inverse single-term comparison. Apply F, use hphi on this inclusion, and expand the inverse of the explicitly constructed single-image unit map. Naturality of the underived inverse tensorator cancels the single-term comparison; oplax left unitality of mF proves the complex identity. Expand eta inverse and identify the Q and Qh localization unit maps. Rewrite hmu at U_X,P into its inverse-tensorator form. Postcompose the derived inverse-unit identity with the invertible counit at P, the target localization unit, and its tensorator. Lax unitality, naturality of mu inverse and of epsilon, the compatibility at U_X,P, and the complex identity make the composites equal. Cancel, and invert the resulting isomorphism equality to obtain the stated left law.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-derived-pullback-tensor-unit-counit"
+    "lem-pc-derived-pullback-tensor-unit-counit",
+    "lem-pc-derived-pullback-tensor-unit-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "For the right law substitute P,U_X into hmu. Expand the same eta and cancel the same comparison maps. Summands with q unequal to zero vanish; the summand (n,0) is the right unit law of mF at P.X n by hphi. Coproduct extensionality and localization give the required right law after cancellation. Neither associativity nor any symmetry condition on mu is used.",
+   "text": "Use the inverse right unitor formula, whose only total-tensor summand is (n,0). Apply hphi at P,U_X, expand the same inverse single-image unit, and cancel by naturality of the underived inverse tensorator and oplax right unitality. Repeat the categorical cancellation with target localization tensorator at its actual right unit and the compatibility hmu at P,U_X. Invert the resulting isomorphism equality to give the stated right law. All arguments work for zero complexes and empty schemes; no associativity or braiding condition on mu is used.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-derived-pullback-tensor-unit-counit"
+    "lem-pc-derived-pullback-tensor-unit-counit",
+    "lem-pc-derived-pullback-tensor-unit-normalization"
    ],
    "elementary": false
   }
@@ -50,14 +52,14 @@
   "def-pc-derived-pullback",
   "def-pc-scheme-derived-tensor-structure",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-derived-pullback-tensor-unit-counit"
+  "lem-pc-derived-pullback-tensor-unit-counit",
+  "lem-pc-derived-pullback-tensor-unit-normalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079U, lemma-pullback-tensor-product; parent unit proof, step 2, using the unit computation of step 1",
-  "note": "H4 refinement of parent unit proof; see the Lean for the explicit comparison and transport."
+  "note": "M3 Lean proof: inverse unit formulas on the single nonzero summand and componentwise lax-square cancellation; K-flatness of the unit follows directly from the right unitor. All public statements and unit-level routes preserved. The explicit unit-normalization step is split to lem-pc-derived-pullback-tensor-unit-normalization."
  },
  "mathlib_searches": [
   {
@@ -134,13 +136,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-447ca",
-  "group": "H4",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T232858-L-2041709",
+  "landing": "20261013T165645-L-1809284",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, DAG statements, compiler results, and direct importer all matched successfully"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
