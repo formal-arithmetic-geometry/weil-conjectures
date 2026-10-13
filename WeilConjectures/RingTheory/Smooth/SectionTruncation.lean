@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.Module
 public import Mathlib.RingTheory.OrzechProperty
@@ -38,24 +39,26 @@ variable {R' : Type*} [CommRing R']
 /-- If `J ⊆ R'` is a nilpotent ideal generated modulo `J²` by elements of a subring `S`, and
 `R' = S + J`, then `S = R'`. -/
 lemma mem_of_isNilpotent {S : Subring R'} {J : Ideal R'} {n : ℕ} (hJn : J ^ n = ⊥)
-    {ι : Type*} [Fintype ι] (y : ι → R') (hyS : ∀ i, y i ∈ S) (hyJ : ∀ i, y i ∈ J)
+    {ι : Type*} [Finite ι] (y : ι → R') (hyS : ∀ i, y i ∈ S) (hyJ : ∀ i, y i ∈ J)
     (hJ : J ≤ Ideal.span (Set.range y) ⊔ J ^ 2) (hS : ∀ z, ∃ s ∈ S, z - s ∈ J) (z : R') :
     z ∈ S := by
+  have := Fintype.ofFinite ι
   set J' := Ideal.span (Set.range y)
   have hJ'J : J' ≤ J := Ideal.span_le.2 (Set.range_subset_iff.2 hyJ)
   -- `J = J'`
   have hk : ∀ k, J ≤ J' ⊔ J ^ (k + 1) := by
     intro k
     induction k with
-    | zero => simpa using le_sup_right
+    | zero => simp
     | succ k ih =>
       calc J ≤ J' ⊔ J ^ 2 := hJ
         _ = J' ⊔ J * J := by rw [pow_two]
         _ ≤ J' ⊔ J * (J' ⊔ J ^ (k + 1)) := sup_le_sup_left (Ideal.mul_mono_right ih) _
         _ ≤ J' ⊔ J ^ (k + 1 + 1) := by
           rw [Ideal.mul_sup]
-          refine sup_le le_sup_left (sup_le (le_sup_of_le_left Ideal.mul_le_left) ?_)
+          refine sup_le le_sup_left (sup_le (le_sup_of_le_left Ideal.mul_le_right) ?_)
           rw [← pow_succ']
+          exact le_sup_right
   have hJJ' : J = J' := by
     refine le_antisymm ?_ hJ'J
     have := hk n
@@ -72,7 +75,7 @@ lemma mem_of_isNilpotent {S : Subring R'} {J : Ideal R'} {n : ℕ} (hJn : J ^ n 
     | succ k ih =>
       intro w hw
       rw [pow_succ'] at hw
-      induction hw using Submodule.mul_induction_on with
+      induction hw using Submodule.mul_induction_on' with
       | mem_mul_mem x hx w hw =>
         obtain ⟨r, rfl⟩ := (Submodule.mem_span_range_iff_exists_fun R').1 hx
         -- `x * w = ∑ yᵢ (rᵢ w)`
@@ -91,7 +94,7 @@ lemma mem_of_isNilpotent {S : Subring R'} {J : Ideal R'} {n : ℕ} (hJn : J ^ n 
           exact Finset.sum_congr rfl fun i _ ↦ by rw [smul_eq_mul]; ring
         rw [this, ← Finset.sum_sub_distrib]
         exact Ideal.sum_mem _ fun i _ ↦ hws i
-      | add w₁ w₂ _ _ h₁ h₂ =>
+      | add w₁ _ w₂ _ h₁ h₂ =>
         obtain ⟨s₁, hs₁, hsk₁, hw₁⟩ := h₁
         obtain ⟨s₂, hs₂, hsk₂, hw₂⟩ := h₂
         refine ⟨s₁ + s₂, S.add_mem hs₁ hs₂, add_mem hsk₁ hsk₂, ?_⟩
@@ -123,39 +126,40 @@ lemma free_finite_truncPoly (d n : ℕ) :
   rcases n with _ | m
   · have : Subsingleton (TruncPoly A d 0) :=
       Ideal.Quotient.subsingleton_iff.2 (by simp)
-    exact ⟨Module.Free.of_subsingleton' _ _, inferInstance⟩
-  set p : Submodule A (MvPolynomial (Fin d) A) := (idealOfVars (Fin d) A ^ (m + 1)).restrictScalars A
-  set q := restrictTotalDegree (Fin d) A m
+    exact ⟨inferInstance, inferInstance⟩
+  set p : Submodule A (MvPolynomial (Fin d) A) :=
+    (idealOfVars (Fin d) A ^ (m + 1)).restrictScalars A
+  set q : Submodule A (MvPolynomial (Fin d) A) :=
+    restrictSupport A {x : Fin d →₀ ℕ | x.degree ≤ m}
   have hp : p = restrictSupport A {x | m + 1 ≤ x.degree} := by
-    rw [← restrictScalars_restrictSupportIdeal ((isUpperSet_Ici (m + 1)).preimage
-      Finsupp.degree_mono), ← pow_idealOfVars]
+    simp only [p, pow_idealOfVars]
     rfl
-  have hdeg (x : Fin d →₀ ℕ) : x.degree = x.sum fun _ e ↦ e := rfl
   have hcompl : IsCompl p q := by
     constructor
     · rw [Submodule.disjoint_def]
       intro r hrp hrq
       rw [hp, mem_restrictSupport_iff] at hrp
-      rw [restrictTotalDegree, mem_restrictSupport_iff] at hrq
+      simp only [q, mem_restrictSupport_iff] at hrq
       by_contra hr
       obtain ⟨x, hx⟩ := MvPolynomial.support_nonempty.2 hr
       have h1 : m + 1 ≤ x.degree := hrp hx
-      have h2 : (x.sum fun _ e ↦ e) ≤ m := hrq hx
-      rw [hdeg] at h1
+      have h2 : x.degree ≤ m := hrq hx
       omega
-    · have hst : {x : Fin d →₀ ℕ | m + 1 ≤ x.degree} ∪ {x | (x.sum fun _ e ↦ e) ≤ m} =
-          Set.univ := by
+    · have hst : {x : Fin d →₀ ℕ | m + 1 ≤ x.degree} ∪ {x | x.degree ≤ m} = Set.univ := by
         ext x
-        simp only [Set.mem_union, Set.mem_setOf_eq, Set.mem_univ, iff_true]
-        rw [hdeg]
+        simp only [Set.mem_union, Set.mem_ofPred_eq, Set.mem_univ, iff_true]
         omega
-      rw [codisjoint_iff, hp, restrictTotalDegree, restrictSupport_eq_span,
-        restrictSupport_eq_span, ← Submodule.span_union, ← Set.image_union, hst,
-        ← restrictSupport_eq_span, restrictSupport_univ]
+      simp only [q]
+      rw [codisjoint_iff, hp, restrictSupport_eq_span, restrictSupport_eq_span,
+        ← Submodule.span_union, ← Set.image_union, hst, ← restrictSupport_eq_span,
+        restrictSupport_univ]
   let e : TruncPoly A d (m + 1) ≃ₗ[A] q :=
     (Submodule.Quotient.restrictScalarsEquiv A (idealOfVars (Fin d) A ^ (m + 1))).symm ≪≫ₗ
       Submodule.quotientEquivOfIsCompl p q hcompl
   have : Module.Free A q := .of_basis (basisRestrictSupport A _)
+  have : Module.Finite A q := by
+    have : Finite {x : Fin d →₀ ℕ | x.degree ≤ m} := (Finsupp.finite_of_degree_le m).to_subtype
+    exact .of_basis (basisRestrictSupport A _)
   exact ⟨.of_equiv e.symm, .equiv e.symm⟩
 
 end TruncPoly
@@ -185,10 +189,10 @@ theorem projective_cotangent_ker [FormallySmooth A R] :
 
 lemma smul_cotangent_ker (r : R) (x : (RingHom.ker (algebraMap R A)).Cotangent) :
     r • x = algebraMap R A r • x := by
-  set I := RingHom.ker (algebraMap R A)
-  calc r • x = (Ideal.Quotient.mk I r) • x := by
+  calc r • x = (Ideal.Quotient.mk (RingHom.ker (algebraMap R A)) r) • x := by
         rw [← Ideal.Quotient.algebraMap_eq, algebraMap_smul]
-    _ = (Ideal.Quotient.mk I (algebraMap A R (algebraMap R A r))) • x := by
+    _ = (Ideal.Quotient.mk (RingHom.ker (algebraMap R A))
+          (algebraMap A R (algebraMap R A r))) • x := by
         rw [Ideal.Quotient.eq.2 (sub_algebraMap_mem_ker r)]
     _ = algebraMap A R (algebraMap R A r) • x := by
         rw [← Ideal.Quotient.algebraMap_eq, algebraMap_smul]
@@ -199,7 +203,7 @@ variable (A R) in
 theorem finite_cotangent_ker [IsNoetherianRing R] :
     Module.Finite A (RingHom.ker (algebraMap R A)).Cotangent := by
   obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := R) (M := (RingHom.ker (algebraMap R A)).Cotangent)
-  refine ⟨⟨s, eq_top_iff.2 fun x _ ↦ ?_⟩⟩
+  refine ⟨⟨s, Submodule.eq_top_iff'.2 fun x ↦ ?_⟩⟩
   have hx : x ∈ Submodule.span R (s : Set _) := hs ▸ Submodule.mem_top
   induction hx using Submodule.span_induction with
   | mem y hy => exact Submodule.subset_span hy
@@ -219,12 +223,13 @@ lemma exists_eq_single_of_degree_eq_one {d : ℕ} (y : Fin d →₀ ℕ) (hy : y
   refine ⟨k, Finsupp.ext fun i ↦ ?_⟩
   by_cases hik : i = k
   · subst hik; simp [hyk]
-  · rw [Finsupp.single_eq_of_ne (Ne.symm hik)]
+  · rw [Finsupp.single_eq_of_ne hik]
     by_contra hne
     have hi : i ∈ y.support := Finsupp.mem_support_iff.2 hne
     have : y i + y k ≤ y.degree := by
       rw [Finsupp.degree, ← Finset.sum_pair hik]
-      exact Finset.sum_le_sum_of_subset (Finset.insert_subset hi (Finset.singleton_subset_iff.2 hk))
+      exact Finset.sum_le_sum_of_subset
+        (Finset.insert_subset hi (Finset.singleton_subset_iff.2 hk))
     omega
 
 /-- The linear part of a polynomial: `p ≡ p(0) + ∑ ∂ⱼp(0) Xⱼ` modulo `(X)²`. -/
@@ -235,7 +240,7 @@ lemma sub_linearPart_mem_pow_two {d : ℕ} (p : MvPolynomial (Fin d) A) :
   rw [mem_pow_idealOfVars_iff']
   intro y hy
   rw [coeff_sub, coeff_add, coeff_sum, coeff_C]
-  simp only [coeff_C_mul_X']
+  simp only [coeff_C_mul, coeff_X, mul_ite, mul_one, mul_zero]
   rcases Nat.lt_succ_iff_lt_or_eq.1 hy with h0 | h1
   · have hy0 : y = 0 := by
       rw [Nat.lt_one_iff, Finsupp.degree_eq_zero_iff] at h0
@@ -243,7 +248,9 @@ lemma sub_linearPart_mem_pow_two {d : ℕ} (p : MvPolynomial (Fin d) A) :
     subst hy0
     simp
   · obtain ⟨k, rfl⟩ := exists_eq_single_of_degree_eq_one y h1
-    simp [Finsupp.single_eq_zero, Finset.sum_ite_eq', Finsupp.single_left_inj]
+    have h0 : (0 : Fin d →₀ ℕ) ≠ Finsupp.single k 1 :=
+      (Finsupp.single_ne_zero.2 one_ne_zero).symm
+    simp [h0, Finset.sum_ite_eq', Finsupp.single_left_inj]
 
 /-- The constant term: `p ≡ p(0)` modulo `(X)`. -/
 lemma sub_C_coeff_zero_mem {d : ℕ} (p : MvPolynomial (Fin d) A) :
@@ -282,9 +289,10 @@ theorem exists_algEquiv_truncPoly :
     set c := v.repr (I.toCotangent ⟨i, hi⟩)
     let y : I := ⟨i, hi⟩ - ∑ j, algebraMap A R (c j) • x j
     have hy : (y : R) = i - ∑ j, algebraMap A R (c j) * x j := by
-      simp [y, Submodule.coe_sum, smul_eq_mul]
+      simp [y, Algebra.smul_def]
     rw [← hy, ← I.toCotangent_eq_zero]
-    simp only [y, map_sub, map_sum, map_smul, hx, algebraMap_smul]
+    simp only [y, map_sub, map_sum, map_smul, hx]
+    simp only [algebraMap_smul]
     rw [sub_eq_zero]
     exact (v.sum_repr _).symm
   -- the map `ψₙ : A[X]/(X)ⁿ → R/Iⁿ`, `Xⱼ ↦ xⱼ`
@@ -303,14 +311,17 @@ theorem exists_algEquiv_truncPoly :
     rwa [← Ideal.map_pow, Ideal.map_quotient_self, Ideal.mem_bot] at h3
   let ψ (n : ℕ) : TruncPoly A d n →ₐ[A] R ⧸ I ^ n := Ideal.Quotient.liftₐ _ (F n) (hF n)
   have hψmk (n : ℕ) (p) : ψ n (Ideal.Quotient.mk _ p) = F n p := rfl
-  have hψX (n : ℕ) (j) : ψ n (Ideal.Quotient.mk _ (X j)) = Ideal.Quotient.mk _ (x j) := by
+  have hψX (n : ℕ) (j) :
+      ψ n (Ideal.Quotient.mk _ (X j)) = Ideal.Quotient.mk (I ^ n) (x j : R) := by
     rw [hψmk]; simp [F]
   have hψlin (n : ℕ) (i : R) (hi : i ∈ I) :
       Ideal.Quotient.mk (I ^ n) (∑ j, algebraMap A R (v.repr (I.toCotangent ⟨i, hi⟩) j) * x j) =
         ψ n (Ideal.Quotient.mk _
           (∑ j, C (v.repr (I.toCotangent ⟨i, hi⟩) j) * X j)) := by
     rw [hψmk]
-    simp [F, map_sum, Ideal.Quotient.mk_algebraMap, Algebra.smul_def]
+    simp only [F, map_sum, map_mul, aeval_X, Ideal.Quotient.mk_algebraMap]
+    refine Finset.sum_congr rfl fun j _ ↦ ?_
+    rw [MvPolynomial.aeval_C]
   -- `ψₙ` is surjective
   have hψsurj (n : ℕ) : Function.Surjective (ψ n) := by
     intro z
@@ -355,7 +366,7 @@ theorem exists_algEquiv_truncPoly :
         Ideal.Quotient.mk (I ^ 2) (algebraMap A R c0 + ∑ j, algebraMap A R (c j) * x j) := by
       rw [show (Ideal.Quotient.mk (idealOfVars (Fin d) A ^ 2) p) =
         Ideal.Quotient.mk _ (C c0 + ∑ j, C (c j) * X j) from Ideal.Quotient.eq.2 hp, hψmk]
-      simp [F, map_sum, Ideal.Quotient.mk_algebraMap, Algebra.smul_def, c0, c]
+      simp [F, map_sum, Ideal.Quotient.mk_algebraMap, c0, c]
     rw [hval, Ideal.Quotient.eq_zero_iff_mem] at hq
     have hc0 : c0 = 0 := by
       have := Ideal.pow_le_self two_ne_zero hq
@@ -365,24 +376,28 @@ theorem exists_algEquiv_truncPoly :
     have hc : ∀ j, c j = 0 := by
       have h1 : I.toCotangent (∑ j, algebraMap A R (c j) • x j) = 0 := by
         rw [I.toCotangent_eq_zero]
-        simpa [Submodule.coe_sum, smul_eq_mul] using hq
-      simp only [map_sum, map_smul, hx, algebraMap_smul] at h1
+        simpa [Submodule.coe_sum, Algebra.smul_def] using hq
+      simp only [map_sum, map_smul, hx] at h1
+      simp only [algebraMap_smul] at h1
       exact Fintype.linearIndependent_iff.1 v.linearIndependent c h1
     rw [Ideal.Quotient.eq_zero_iff_mem]
-    simpa [hc0, show c = 0 from funext hc] using hp
+    have e1 : coeff 0 p = 0 := hc0
+    have e2 : ∀ j, coeff (Finsupp.single j 1) p = 0 := hc
+    simpa [e1, e2] using hp
   -- the inverse `φ₂ : R → A[X]/(X)²`
   let e2 : TruncPoly A d 2 ≃ₐ[A] R ⧸ I ^ 2 := AlgEquiv.ofBijective (ψ 2) ⟨hψ2inj, hψsurj 2⟩
   let φ2 : R →ₐ[A] TruncPoly A d 2 := e2.symm.toAlgHom.comp (Ideal.Quotient.mkₐ A (I ^ 2))
   have hφ2x (j : Fin d) : φ2 (x j) = Ideal.Quotient.mk _ (X j) := by
     apply e2.injective
-    simp only [φ2, AlgHom.comp_apply, AlgEquiv.toAlgHom_eq_coe, AlgHom.coe_coe,
-      AlgEquiv.apply_symm_apply, Ideal.Quotient.mkₐ_eq_mk]
+    change e2 (e2.symm _) = _
+    rw [e2.apply_symm_apply]
     exact (hψX 2 j).symm
   have hφ2I (i : R) (hi : i ∈ I) : φ2 i = Ideal.Quotient.mk _
       (∑ j, C (v.repr (I.toCotangent ⟨i, hi⟩) j) * X j) := by
     apply e2.injective
-    simp only [φ2, AlgHom.comp_apply, AlgEquiv.toAlgHom_eq_coe, AlgHom.coe_coe,
-      AlgEquiv.apply_symm_apply, Ideal.Quotient.mkₐ_eq_mk]
+    change e2 (e2.symm _) = e2 _
+    rw [e2.apply_symm_apply]
+    simp only [e2, AlgEquiv.ofBijective_apply]
     rw [← hψlin 2 i hi]
     exact Ideal.Quotient.eq.2 (hdec i hi)
   refine ⟨d, fun n hn ↦ ?_⟩
@@ -397,10 +412,10 @@ theorem exists_algEquiv_truncPoly :
   have hkerJ : RingHom.ker red = J ^ 2 := by rw [hker, Ideal.map_pow]
   have hnil : IsNilpotent (RingHom.ker red) := by
     refine ⟨n, ?_⟩
-    rw [hkerJ, ← pow_mul, eq_bot_iff, ← hJn]
+    rw [hkerJ, ← pow_mul, Ideal.zero_eq_bot, eq_bot_iff, ← hJn]
     exact Ideal.pow_le_pow_right (by omega)
   let φ : R →ₐ[A] TruncPoly A d n := FormallySmooth.liftOfSurjective φ2 red
-    (Ideal.Quotient.factor_surjective _) hnil
+    (Ideal.Quotient.factor_surjective (Ideal.pow_le_pow_right hn)) hnil
   have hredφ (r : R) : red (φ r) = φ2 r := FormallySmooth.liftOfSurjective_apply _ _ _ _ r
   have hφI (i : R) (hi : i ∈ I) : φ i ∈ J := by
     have h1 : φ i - Ideal.Quotient.mk _ (∑ j, C (v.repr (I.toCotangent ⟨i, hi⟩) j) * X j) ∈
@@ -433,7 +448,8 @@ theorem exists_algEquiv_truncPoly :
       refine mem_of_isNilpotent (S := g.range.toSubring) (J := J) hJn
         (fun j ↦ g (Ideal.Quotient.mk _ (X j))) (fun j ↦ ⟨_, rfl⟩)
         (fun j ↦ by rw [hgX]; exact hφI _ (x j).2) ?_ ?_ z
-      · rw [Ideal.map_span, Ideal.span_le]
+      · change Ideal.map (Ideal.Quotient.mk _) (idealOfVars (Fin d) A) ≤ _
+        rw [Ideal.map_span, Ideal.span_le]
         rintro _ ⟨_, ⟨j, rfl⟩, rfl⟩
         have hj : Ideal.Quotient.mk (idealOfVars (Fin d) A ^ n) (X j) -
             g (Ideal.Quotient.mk _ (X j)) ∈ J ^ 2 := by

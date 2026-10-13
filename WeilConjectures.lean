@@ -1786,6 +1786,8 @@ public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
@@ -1803,6 +1805,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecke
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Stabilizer
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
+public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
 public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
@@ -1840,6 +1843,7 @@ public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.RelativeComponentFlatApprox
 public import WeilConjectures.RingTheory.RelativeComponentGeneralization
+public import WeilConjectures.RingTheory.Smooth.SectionTruncation
 public import WeilConjectures.RingTheory.Spectrum.Prime.Colimit
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.StrictlyHenselianNormal

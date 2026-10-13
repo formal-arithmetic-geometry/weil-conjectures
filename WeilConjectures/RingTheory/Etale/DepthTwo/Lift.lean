@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import WeilConjectures.RingTheory.Regular.Hartogs

@@ -32,7 +32,7 @@ open scoped Pointwise
 
 namespace IsIntegrallyClosed
 
-variable {A : Type*} [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]
+variable {A : Type*} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
 
 /-- In a Noetherian local ring of dimension at least two the maximal ideal is not principal. -/
 lemma not_isPrincipal_maximalIdeal (h : 2 ≤ ringKrullDim A) :
@@ -46,7 +46,7 @@ lemma not_isPrincipal_maximalIdeal (h : 2 ≤ ringKrullDim A) :
   have := h.trans h3
   norm_num at this
 
-variable [IsIntegrallyClosed A]
+variable [IsDomain A] [IsIntegrallyClosed A]
 
 /-- In a Noetherian integrally closed local domain of dimension at least two, if `a ≠ 0` divides
 `y x` for every `y` in the maximal ideal, then `a` divides `x`. -/
@@ -66,11 +66,13 @@ lemma dvd_of_forall_dvd_mul (h : 2 ≤ ringKrullDim A) {a x : A} (ha : a ≠ 0)
       have : algebraMap A K y ∈ N := Submodule.mem_map_of_mem hy
       rw [hN, Submodule.mem_bot, map_eq_zero_iff _ (IsFractionRing.injective A K)] at this
       exact hy0 this
-    have hfy (y : A) (hy : y ∈ maximalIdeal A) : f * algebraMap A K y = algebraMap A K (w y hy) := by
+    have hfy (y : A) (hy : y ∈ maximalIdeal A) :
+        f * algebraMap A K y = algebraMap A K (w y hy) := by
       rw [div_mul_eq_mul_div, div_eq_iff ha', ← map_mul, ← map_mul, mul_comm x, hw y hy,
         mul_comm]
     have hint' : IsIntegral A f := by
-      refine isIntegral_of_smul_mem_submodule N hN ((maximalIdeal A).fg_of_isNoetherianRing.map _)
+      refine isIntegral_of_smul_mem_submodule N hN
+        ((IsNoetherian.noetherian (maximalIdeal A)).map (Algebra.linearMap A K))
         f fun n hn ↦ ?_
       obtain ⟨y, hy, rfl⟩ := Submodule.mem_map.1 hn
       rw [smul_eq_mul, Algebra.linearMap_apply, hfy y hy]
@@ -78,7 +80,7 @@ lemma dvd_of_forall_dvd_mul (h : 2 ≤ ringKrullDim A) {a x : A} (ha : a ≠ 0)
     obtain ⟨z, hz⟩ := IsIntegrallyClosed.isIntegral_iff.1 hint'
     refine ⟨z, IsFractionRing.injective A K ?_⟩
     rw [map_mul, hz, mul_div_cancel₀ _ ha']
-  · push_neg at hint
+  · push Not at hint
     obtain ⟨y, hy, hwy⟩ := hint
     have hu : IsUnit (w y hy) := by
       simpa [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff] using hwy
@@ -140,9 +142,9 @@ theorem exists_isWeaklyRegular_pair (h : 2 ≤ ringKrullDim A) :
   obtain ⟨b, hb, hbnot⟩ := havoid
   have hQ : Nontrivial Q := by
     refine Submodule.Quotient.nontrivial_iff.2 fun htop ↦ ?_
-    have h1 : (1 : A) ∈ a • (⊤ : Submodule A A) := htop ▸ Submodule.mem_top
+    have h1 : (1 : A) ∈ a • (⊤ : Submodule A A) := by rw [htop]; exact Submodule.mem_top
     obtain ⟨z, -, hz⟩ := Submodule.mem_smul_pointwise_iff_exists _ _ _ |>.1 h1
-    exact (IsLocalRing.mem_maximalIdeal _).1 ha (isUnit_of_mul_eq_one a z (by
+    exact (IsLocalRing.mem_maximalIdeal _).1 ha (IsUnit.of_mul_eq_one (b := z) (by
       rw [← hz, smul_eq_mul]))
   have hbreg : IsSMulRegular Q b := by
     intro q₁ q₂ hq
@@ -157,7 +159,8 @@ theorem exists_isWeaklyRegular_pair (h : 2 ≤ ringKrullDim A) :
     obtain ⟨q, hq⟩ := exists_ne (0 : Q)
     exact hq (hbreg (by simp))
   refine ⟨a, ha, b, hb, ha0, hb0, ?_⟩
-  rw [RingTheory.Sequence.isWeaklyRegular_cons_iff, RingTheory.Sequence.isWeaklyRegular_singleton_iff]
+  rw [RingTheory.Sequence.isWeaklyRegular_cons_iff,
+    RingTheory.Sequence.isWeaklyRegular_singleton_iff]
   exact ⟨fun x y hxy ↦ mul_left_cancel₀ ha0 hxy, hbreg⟩
 
 end IsIntegrallyClosed
