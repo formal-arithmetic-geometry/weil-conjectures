@@ -18,23 +18,31 @@
  ],
  "proof": [
   {
-   "text": "Identify the pullbacks of the standard free sheaves with standard free sheaves on the stalk spectrum using pullbackFreeIso. Express each f_q as a finite matrix by freeMatrix, and identify its coefficient ring with the stalk ring via GammaSpecIso. The index type and each rank are finite, so the disjoint union of all coefficient positions is finite.",
+   "text": "Use pullbackFreeIso to normalize each given map to a map between standard free sheaves on Spec O_{Y,y}. Read its entries with freeMatrix and ΓSpecIso. The dependent sum over q of the finite row and column positions is finite. Free matrices are constructed explicitly by Sigma.desc of the finite sums of scalarHom followed by the free inclusions. The identities ιFree_freeπ and sum_freeπ_ιFree prove realization and injectivity of freeMatrix; scalarHom is constructed from unitHomEquiv and the restrictions of a global section. These are the proved private helpers matrixHom, freeMatrix_matrixHom, and freeMatrix_injective in the delivered module.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-spec-tilde-free-module"
+    "def-weil-pbc-free-module"
    ],
    "elementary": false
   },
   {
-   "text": "For each coefficient use its germ representative on an open containing y and contained in V, and intersect these finitely many opens. Restrict all representatives to the intersection U. Use freeHomEquiv, or finite sums of the free inclusions and coordinate projections with multiplication by the represented functions, to construct the corresponding morphisms of standard free sheaves on U. Conjugate by restrictFreeIso to obtain g_q between the restricted sheaves in the statement. For empty coefficient lists take U=V.",
+   "text": "Apply TopCat.Presheaf.exists_le_germ_eq to every coefficient with the prescribed upper open V. Let U be V intersected with the finite infimum of the representative opens. Restrict every representative to U and apply germ_res_apply. This proves the private helper finite_scalar_lift, including the empty family, where the infimum is top and U is V. The equality fromSpecStalkOfMem_toSpecΓ on global sections, together with ΓSpecIso_naturality and U.topIso, identifies the resulting germs with the appTop images of the coefficients on U (private helper stalk_appTop_eq_germ).",
    "uses": [
     "def-weil-pbc-module-stalk"
    ],
    "elementary": false
   },
   {
-   "text": "Construct e by whiskering restrictFunctorIsoPullback with S, applying pullbackComp, and applying pullbackCongr to the equality U.fromSpecStalkOfMem composed with Y.homOfLE equals V.fromSpecStalkOfMem. Prove this equality by cancellation of the open immersion V.ι and fromSpecStalkOfMem_ι. The free inclusions and coordinate projections commute with pullbackFreeIso by pullback_map_ιFree_pullbackFreeIso_hom and pullbackFreeIso_hom_freeπ; pullback composition gives compatibility of their unit factors with e. Then freeMatrix_pullback and the chosen germ equalities give the component matrices of S(g_q)=e(F_q).hom composed with f_q composed with e(G_q).inv. Morphisms of finite free sheaves are determined by their matrix entries, proving the equation.",
+   "text": "Realize the lifted coefficient matrices by the explicit matrixHom construction and conjugate by restrictFreeIso to obtain g_q. The theorem freeMatrix_pullback and the germ equalities identify the standard matrix of the stalk pullback of g_q with the normalized given matrix. Apply freeMatrix_injective to obtain equality of normalized maps.",
    "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the specified stalkRestrictionWithinIso e. Normalize e using the free isomorphisms on both its functors. Naturality on ιFree shows its normalized component on every free sheaf acts on each summand by the same endomorphism of the unit sheaf. The endomorphisms of the unit commute: evaluate on 1, use unit_hom_app_top, and use commutativity of global functions. By the free inclusions and coordinate projections, the common scalar therefore commutes with every finite matrix (private helpers scalar_naturality and free_conjugate_comparison). Compatibility of restrictFreeIso with inclusions follows immediately from naturality of restrictFunctorIsoPullback and pullback_map_ιFree_pullbackFreeIso_hom. Thus comparison_normalized identifies conjugation by e with the standard normalization of f. Combine it with the preceding normalized equality and cancel the free isomorphisms. No explicit coherence formula for pullback composition and no tilde/free-module comparison is required.",
+   "uses": [
+    "def-pc-stalk-restriction-within-iso",
     "lem-weil-pbc-open-immersion-module-pullback-restriction",
     "def-weil-pbc-free-module"
    ],
@@ -43,14 +51,14 @@
  ],
  "proof_deps": [
   "def-weil-pbc-free-module",
-  "lem-weil-pbc-spec-tilde-free-module",
   "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-pc-stalk-restriction-within-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof, first two paragraphs: extension of the finite calculation near a point; lem-pc-finite-free-reverse-components-lift, steps 2--3, finite matrix coefficients before change of bases and reverse-degree assembly"
+  "place": "Proof, first two paragraphs: extension of the finite calculation near a point; lem-pc-finite-free-reverse-components-lift, steps 2--3, finite matrix coefficients before change of bases and reverse-degree assembly; Y2 fully checked finite-coefficient proof, simplifying comparison coherence by naturality and centrality of unit endomorphisms"
  },
  "mathlib_searches": [
   {
@@ -130,13 +138,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T230805-L-1911780",
-  "kind": "interface",
+  "landing": "20261013T005055-L-2551622",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
