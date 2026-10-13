@@ -18,69 +18,28 @@
  ],
  "proof": [
   {
-   "text": "Let b = Spec(A → B), Y = X ×_Spec(A) Spec(B), and pi = Y → X. Morphisms between affine schemes are affine and affineness is stable under base change. On an affine open U = Spec(R) of X, pi inverse U is Spec(R tensor_A B). The associated-module and tensor-pullback descriptions, equivalently relative Spec base change, identify pi_*O_Y with f^*B~.",
+   "text": "Construct a quasi-coherent finite-type module N over C = pi_*O_Y, whose restriction to O_X is the coproduct of the G_m, using the homogeneous action and local generators. This is precisely the algebra-module construction in original steps 1-3.",
+   "uses": [
+    "lem-weil-pbc-graded-module-affine-base-change-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Spec(A -> B) is affine, and the pullback first projection pi is affine by base change. Destructure affine_module_correspondence to obtain its quasi-inverse H and the algebra-linear isomorphism beta(N): N -> pi_*H(N), with H(N) quasi-coherent. Apply affine_module_finite_type to the inverse of this isomorphism and N.IsFiniteType. Restrict this same algebra-linear isomorphism along O_X -> C and compose with the coproduct isomorphism to give the required ordinary pushforward isomorphism. All witnesses occur inside a theorem.",
    "uses": [
     "lem-weil-pbc-morphism-affine-schemes-affine",
     "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-pbc-associated-module",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-relative-spec-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
-   }
-  },
-  {
-   "text": "Let M be the sheaf coproduct of G_m; it is quasi-coherent. Define the action of a homogeneous b in B_k on G_m by mu m k b followed by the coproduct inclusion of G_(m+k). Extend over the internal direct sum decomposition of B and the coproduct universal property of M. hmu_add gives additivity in b, hmu_mul gives associativity, and hmu_scalar identifies the A-action with the structural A-action and gives the unit law at a=1. These actions commute with O_X-scalars because each mu is a module-sheaf morphism. On affine U = Spec(R), the resulting B-action extends to an R tensor_A B-action. This description commutes with restriction and localization, so glues to a module N over pi_*O_Y with underlying O_X-module M. The first clause of affine_module_correspondence implies N is quasi-coherent as a pi_*O_Y-module.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
-    "lem-weil-pbc-affine-module-correspondence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
-   }
-  },
-  {
-   "text": "Near each x choose U, r, d_i and s_i from hfinite. Regard s_i as sections of M via the coproduct inclusions. A section of the sheaf coproduct is locally represented by a finite sum of homogeneous sections: the coproduct is the sheafification of the presheaf direct sum. At any point, apply hfinite to these finitely many sections and intersect the resulting open neighbourhoods. Each restricted homogeneous section lies in the stated span of mu_b(s_i). A span element is a finite sum of O_X-coefficient multiples of these expressions; these are pi_*O_Y-coefficients times s_i by the algebra action constructed above. Thus the s_i generate N locally as a pi_*O_Y-module; the evaluation map from the finite free algebra module is locally surjective, hence epi. This is N.IsFiniteType.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-module-finite-type-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
-   }
-  },
-  {
-   "text": "Apply the inverse in affine_module_correspondence to N to get a quasi-coherent O_Y-module F and an algebra-linear pushforward isomorphism. Apply affine_module_finite_type to N, F and that isomorphism to obtain F.IsFiniteType. Restrict the algebra-linear isomorphism to O_X to get (pushforward pi).obj F ≅ M. This yields the existential conclusion. These are witnesses in a theorem, not arbitrary data selected in a definition.",
-   "uses": [
     "lem-weil-pbc-affine-module-correspondence",
     "lem-weil-pbc-affine-module-finite-type"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-graded-module-affine-base-change-algebra",
   "lem-weil-pbc-morphism-affine-schemes-affine",
   "lem-weil-pbc-affine-morphism-permanence",
-  "def-weil-pbc-associated-module",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-relative-spec-base-change",
-  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
   "lem-weil-pbc-affine-module-correspondence",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-module-finite-type-presentation",
   "lem-weil-pbc-affine-module-finite-type"
  ],
  "proof_origin": {
@@ -167,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T001227-L-2305647",
+  "landing": "20261013T015622-L-3029665",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

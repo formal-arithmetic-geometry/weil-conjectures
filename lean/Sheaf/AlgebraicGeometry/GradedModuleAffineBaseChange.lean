@@ -10,11 +10,7 @@ public import Mathlib.Algebra.DirectSum.Module
 public import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.AssociatedModule
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChangeAlgebra
 
 /-! # Realizing a finite graded module on the affine base change
 
@@ -99,6 +95,29 @@ theorem exists_finiteType_graded_module_affine_baseChange
     let b : Spec (.of B) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (algebraMap A B))
     ∃ F : (pullback f b).Modules, F.IsQuasicoherent ∧ F.IsFiniteType ∧
       Nonempty ((Scheme.Modules.pushforward (pullback.fst f b)).obj F ≅ ∐ G) := by
-  sorry
+  let b : Spec (.of B) ⟶ Spec (.of A) :=
+    Spec.map (CommRingCat.ofHom (algebraMap A B))
+  let pi := pullback.fst f b
+  let C := (TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj (pullback f b).sheaf
+  let CR := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj C
+  let rho : X.sheaf ⟶ C := ⟨pi.c⟩
+  let S := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map rho)
+  let R := SheafOfModules.pushforward.{u} (F := TopologicalSpace.Opens.map pi.base)
+    (S := CR) (R := (pullback f b).ringCatSheaf) (𝟙 CR)
+  have : IsAffineHom b := inferInstance
+  have : IsAffineHom pi := MorphismProperty.pullback_fst _ _ ‹IsAffineHom b›
+  obtain ⟨N, hN, hNfinite, ⟨e⟩⟩ := exists_finiteType_graded_algebra_module
+    graded hgrading hunit hmul hscalar f G hG mu hmu_add hmu_mul hmu_scalar hfinite
+  obtain ⟨_, _, B', b', t, eps, _, _, _, P, pobj, kappa, _, _, H, hobj,
+    gamma, _, _, hH, alpha, beta, _, _, _, hbeta, E, _, _⟩ :=
+      Scheme.Modules.affine_module_correspondence pi
+  have : IsIso (beta.app N) := hbeta N hN
+  let ea : R.obj (H.obj N) ≅ N := (asIso (beta.app N)).symm
+  have hF := hH N hN
+  have hFfinite := (Scheme.Modules.affine_module_finite_type pi N hN (H.obj N) hF ea).mp
+    hNfinite
+  refine ⟨H.obj N, hF, hFfinite, ⟨?_⟩⟩
+  exact S.mapIso ea ≪≫ e
 
 end AlgebraicGeometry
