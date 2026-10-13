@@ -11945,3 +11945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare (stage 3; reviewer PASS; first push; landing 20261013T100104-L-2479691 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap (stage 3; reviewer PASS; first push; landing 20261013T100104-L-2479909 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/Q3/Sheaf.CategoryTheory.Abelian.SplitSESBoundaryComparison (stage 3; reviewer PASS; first push; landing 20261013T100105-L-2480153 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:01 L: merged deliver/Q3/Sheaf.CategoryTheory.Abelian.SplitSESCocycleBoundary (stage 3; reviewer PASS; first push; landing 20261013T100106-L-2480373 (proof); batch 20261013T095923; modules 1; new nodes 0)
