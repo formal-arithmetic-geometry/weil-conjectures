@@ -94,7 +94,7 @@ theorem affinePolynomial_boundedResolution_of_stalkwise
   have : HasProjectiveDimensionLE M d := hd
   let := HasExt.standard (ModuleCat.{u} R)
   obtain ⟨P, hP⟩ := (ModuleCat.projective_resolution_ext_degree.{u, u} (R := R) M d).mpr
-    (fun N ↦ HasProjectiveDimensionLT.subsingleton M (d + 1) (d + 1) le_rfl N)
+    hd
   exact ⟨d, P, hP⟩
 
 end AlgebraicGeometry
