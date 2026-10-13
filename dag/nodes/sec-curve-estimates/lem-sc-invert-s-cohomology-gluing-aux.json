@@ -26,24 +26,27 @@
  ],
  "proof": [
   {
-   "text": "On each W intersected with S, multiplication by s^n is an isomorphism because s trivializes L. The fraction formula hc therefore determines c on every fraction. Fractions generate the quotient of the direct sum, so the formula determines the additive homomorphism uniquely. Apply the localized Mayer–Vietoris diagram theorem, identify its nonvanishing open with S by equality of underlying sets, and identify its comparison family with c by uniqueness. This transfers all exactness and commuting squares to c. The former arbitrary-c signature was false: on Spec k for a nonzero field with U = V = S = top, L = F = O, s = 1 and c W p = 0, its premises held but its degree-zero conclusion failed. The added hc excludes that historical counterexample.",
+   "text": "Apply exists_cohomologySection_division to the given nonvanishing open S to obtain injectivity of multiplication by every tensor power of s on every restricted cohomology group. Cancel multiplication in the formulas for c and any other comparison. Equality on every fraction implies equality of additive homomorphisms: precompose with the quotient map, use DirectSum.addHom_ext, and use surjectivity of the quotient map. Apply localizedCohomology_mayerVietoris, identify its open with S by SetLike.coe_injective, and identify its comparison family with c by this uniqueness.",
    "uses": [
+    "lem-sc-cohomology-section-division",
     "lem-sc-invert-s-cohomology-mayer-vietoris-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Use the same uniqueness on fractions to identify c on U, V and U intersect V with the equivalences in h_locU, h_locV and the restored h_locUV fraction formula. The local and product comparison maps are bijective in all degrees.",
+   "text": "Identify the three local equivalences with c U p, c V p and c (U intersect V) p by the same uniqueness. Their bijectivity gives bijectivity of the intersection and product comparisons; the latter is proved componentwise using the local injections and surjections. Bundle the lower restriction pair, difference, and connecting maps as additive homomorphisms. Transport lower exactness and the initial injection along the intersection and union equalities. Restriction along an identity is an identity by NatTrans.rightDerived_id; hence this transport does not change the maps. The three supplied pointwise squares give equalities of composites by AddMonoidHom.ext.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "In degree zero both union-to-product maps are injective. A kernel element of the union comparison maps to zero in the upper product by injectivity of the product comparison, hence is zero. To lift a lower union element, lift its image in the product through the product comparison. Commutativity and injectivity of the intersection comparison put the lift in the upper kernel; upper exactness lifts it to the union, and lower injectivity identifies its image with the original element.",
-   "uses": [],
-   "elementary": true
+   "text": "In degree zero apply Mathlib AddMonoidHom.bijective_of_bijective_of_injective_of_left_exact to the union-product-intersection rows. The two rows are exact at the product, both initial maps are injective, the product comparison is bijective, and the intersection comparison is injective. These are precisely the hypotheses of this degree-zero five-lemma variant.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false
   },
   {
-   "text": "For p = q + 1 take the five consecutive terms: product in degree q, intersection in degree q, union in degree q + 1, product in degree q + 1, intersection in degree q + 1. The exact rows and commuting squares, with all four outside comparisons bijective, give the middle bijection by the additive five lemma. Together with degree zero this proves the conclusion for every p. This is the full intended proof of the corrected interface; its Lean proof remains sorry.",
+   "text": "For p = q + 1 apply Mathlib AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective to the five terms product in degree q, intersection in degree q, union in degree q+1, product in degree q+1, intersection in degree q+1. Use the upper and reindexed lower exactness at the three interior terms, the four commuting squares, and the local comparison bijections. The middle comparison is c (U union V) (q+1). The zero and successor cases prove the conclusion for all p.",
    "uses": [
     "lem-weil-pbc-five-lemma"
    ],
@@ -51,13 +54,15 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-cohomology-section-division",
   "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
   "lem-weil-pbc-five-lemma"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "five-lemma argument"
+  "place": "five-lemma argument",
+  "implementation": "H4, 2026-10-13: complete Lean proof using cancellation on fraction generators, reindexed Mayer--Vietoris rows, and the additive five lemma including degree zero."
  },
  "mathlib_searches": [
   {
@@ -113,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-cf64b",
-  "group": "P4",
+  "reviewer": "COMPILER",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T024043-L-3337456",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the corrected Lean signature byte-for-byte with the node, the canonical comparison with its source and dependencies, and the minimal forced adaptation with independent compilation and axiom checks."
+  "landing": "20261013T033001-L-3676158",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
