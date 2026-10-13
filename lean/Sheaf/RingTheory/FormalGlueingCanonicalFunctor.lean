@@ -6,7 +6,8 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.RingTheory.FormalGlueingData
-import Sheaf.Paper.FormalGlueingCanonicalMaps
+import Sheaf.RingTheory.FormalGlueingCanonicalFunctorObjects
+import Sheaf.RingTheory.FormalGlueingCanonicalFunctorMaps
 
 /-!
 # Construction of the canonical formal glueing functor
@@ -54,6 +55,17 @@ theorem exists_canonical_functor {R : Type u} {S : Type v}
       (∀ (M N : ModuleCat.{max u v w} R) (h : M ⟶ N),
         HEq (Can.map h).prime (extendMap φ h.hom) ∧
         ∀ i : Fin t, HEq ((Can.map h).chart i) (localMap (f i) h.hom)) := by
-  sorry
+  classical
+  let obj := fun M : ModuleCat.{max u v w} R ↦
+    (exists_canonical_functor_objects φ t f M).choose
+  have hobj := fun M : ModuleCat.{max u v w} R ↦
+    (exists_canonical_functor_objects φ t f M).choose_spec
+  obtain ⟨map, hid, hcomp, hmap⟩ := canonical_functor_maps φ t f obj hobj
+  let Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f :=
+    { obj := obj
+      map := map
+      map_id := hid
+      map_comp := hcomp }
+  exact ⟨Can, hobj, hmap⟩
 
 end FormalGlueing

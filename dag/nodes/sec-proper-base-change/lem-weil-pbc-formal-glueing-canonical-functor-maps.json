@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-canonical-functor-maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-glueing-canonical-functor",
+   "place": "decomposition of construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical morphism assignment for prescribed glueing objects",
+ "statement": "Let R, S, φ, t and f be as in the canonical functor construction. Suppose obj assigns to every R-module M a formal glueing object with prime module S tensor_R M, charts M_(f i), and the actual canonical comparison and swap maps, as bundled-module equalities and heterogeneous map equalities in [def-weil-pbc-formal-glueing-data]. Then there exists a morphism assignment map, from every h : M → N to a Hom from obj M to obj N, preserving identities and composition, whose prime component is extendMap φ h and whose chart components are localMap (f i) h (by heterogeneous equality). No existence of obj is asserted, and no claim about an arbitrary pre-existing functor is made.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Remark 05EL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport extendMap and localMap along the supplied object module equalities. For prime compatibility, both paths send (s tensor m)/f_i^a to s tensor (h(m)/f_i^a); tensor and localization induction prove equality. For chart compatibility, both paths send (m/f_i^a)/f_j^b to (h(m)/f_j^b)/f_i^a. Thus these components construct Hom values.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "LinearMap.baseChange_id and baseChange_comp, and LocalizedModule.away_map_functorial, imply identity and composition preservation on prime and chart components. The remaining Hom fields are propositions, so proof irrelevance gives equality of the Hom structures. Transport along the fixed object equalities preserves the same laws.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-glueing-canonical-maps",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 05EL, https://stacks.math.columbia.edu/tag/05EL; second reader repaired decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a module over a commutative ring, localization and tensor scalar extension define compatible formal glueing data and compatible maps",
+   "results": "UNAVAILABLE: service Internal Server Error; not evidence of absence. LeanFinder, Loogle, and grep used instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct functor from object assignment compatible morphisms identity composition",
+   "results": "CategoryTheory.Functor.of and Functorial package an already supplied morphism assignment and laws; no canonical formal glueing construction.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor",
+   "results": "Functor, Functor.obj, Functor.map, identity and composition constructors. These do not establish the glueing object or morphism compatibility identities.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "FormalGlueing|glueing|gluing; baseChange_id|baseChange_comp; canonical_functor_maps|exists_canonical",
+   "results": "Mathlib has sheaf/topological glueing, not this formal glueing construction. Sheaf.Paper.FormalGlueingCanonicalMaps supplies fraction formulas, bijectivity and localized map laws. FormalGlueingData supplies the category and definitions. LinearMap.baseChange_id and baseChange_comp are in Mathlib.LinearAlgebra.TensorProduct.Tower. No duplicate of either intermediate theorem in lean/Sheaf or lean/WeilConjectures.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingCanonicalFunctor",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingCanonicalFunctorMaps",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingCanonicalFunctorMaps.lean",
+  "declaration": "FormalGlueing.canonical_functor_maps",
+  "statement": "theorem canonical_functor_maps {R : Type u} {S : Type v}\n    [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)\n    (obj : ModuleCat.{max u v w} R → Data.{u, v, max u v w} φ f)\n    (hobj : ∀ M : ModuleCat.{max u v w} R,\n      (obj M).M' = extend φ M ∧\n      (∀ i : Fin t, (obj M).M i =\n        ModuleCat.of (Localization.Away (f i)) (LocalizedModule.Away (f i) M)) ∧\n      (∀ i : Fin t, HEq ((obj M).alpha i).toLinearMap (compare φ (f i) M)) ∧\n      (∀ i j : Fin t,\n        HEq ((obj M).alpha_overlap i j).toLinearMap (swap (f i) (f j) M))) :\n    ∃ map : ∀ {M N : ModuleCat.{max u v w} R}, (M ⟶ N) → (obj M ⟶ obj N),\n      (∀ M, map (𝟙 M) = 𝟙 (obj M)) ∧\n      (∀ {M N P} (h : M ⟶ N) (k : N ⟶ P), map (h ≫ k) = map h ≫ map k) ∧\n      (∀ (M N : ModuleCat.{max u v w} R) (h : M ⟶ N),\n        HEq (map h).prime (extendMap φ h.hom) ∧\n        ∀ i : Fin t, HEq ((map h).chart i) (localMap (f i) h.hom))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T111919-L-3061569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T111919-L-3061569",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

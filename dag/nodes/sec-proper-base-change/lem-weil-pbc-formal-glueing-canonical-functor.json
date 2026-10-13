@@ -33,46 +33,30 @@
  ],
  "proof": [
   {
-   "text": "(Part (1): $c$, $\\sigma$ and the object $\\mathrm{Can}(M)$.) For every $R$-module $P$ and $f,g\\in R$, $\\sigma^P_{f,g}$ is an isomorphism with inverse $\\sigma^P_{g,f}$, given by $(p/f^a)/g^b\\mapsto(p/g^b)/f^a$, and $c^P_f$ is an $S$-linear isomorphism given by $(p\\otimes s)/f^e\\mapsto(p/f^e)\\otimes s$ [lem-weil-pbc-formal-glueing-canonical-maps] (2), (3). Let $M$ be an $R$-module. $M\\otimes_RS$ is an $S$-module [def-weil-module-base-change] and $M_{f_i}$ an $R_{f_i}$-module [def-weil-pbc-module-localization-away], so $\\mathrm{Can}(M)=(M\\otimes_RS,(M_{f_i}),(c^M_{f_i}),(\\sigma^M_{f_i,f_j}))$ has the data required in [def-weil-pbc-formal-glueing-data]. Condition (a) for it reads $(\\sigma^M_{f_i,f_j}\\otimes_RS)\\circ c^{M_{f_i}}_{f_j}\\circ(c^M_{f_i})_{f_j}=c^{M_{f_j}}_{f_i}\\circ(c^M_{f_j})_{f_i}\\circ\\sigma^{M\\otimes S}_{f_i,f_j}$. By the formulas just quoted and the formula $h_f(x/f^e)=h(x)/f^e$ for the localization of a map [def-weil-pbc-module-localization], both sides send $((m\\otimes s)/f_i^a)/f_j^b$ to $((m/f_j^b)/f_i^a)\\otimes s$: the left side via $((m/f_i^a)\\otimes s)/f_j^b$ and $((m/f_i^a)/f_j^b)\\otimes s$, the right side via $((m\\otimes s)/f_j^b)/f_i^a$ and $((m/f_j^b)\\otimes s)/f_i^a$. Every element of $((M\\otimes_RS)_{f_i})_{f_j}$ is a finite sum of such elements ($x/f^e$ with $x$ a sum of pure tensors, and $(\\sum x_k)/f^e=\\sum x_k/f^e$), and both sides are additive, so (a) holds. Condition (b) reads $(\\sigma^M_{f_j,f_k})_{f_i}\\circ\\sigma^{M_{f_j}}_{f_i,f_k}\\circ(\\sigma^M_{f_i,f_j})_{f_k}=\\sigma^{M_{f_k}}_{f_i,f_j}\\circ(\\sigma^M_{f_i,f_k})_{f_j}\\circ\\sigma^{M_{f_i}}_{f_j,f_k}$; every element of $((M_{f_i})_{f_j})_{f_k}$ is $((m/f_i^a)/f_j^b)/f_k^c$, and both sides send it to $((m/f_k^c)/f_j^b)/f_i^a$ (left: via $((m/f_j^b)/f_i^a)/f_k^c$, $((m/f_j^b)/f_k^c)/f_i^a$; right: via $((m/f_i^a)/f_k^c)/f_j^b$, $((m/f_k^c)/f_i^a)/f_j^b$). So $\\mathrm{Can}(M)$ is an object of $\\mathrm{Glue}$.",
+   "text": "Apply exists_canonical_functor_objects separately to each module. Choose these objects; the bundled module equalities and heterogeneous equalities fix all data fields (linear equivalences are determined by their forward maps), while the remaining fields are proofs. This gives an object assignment with its required properties.",
    "uses": [
-    "lem-weil-pbc-formal-glueing-canonical-maps",
-    "def-weil-module-base-change",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization"
+    "lem-weil-pbc-formal-glueing-canonical-functor-objects"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Remark 05EL (remark-glueing-data, line 24641): the functor Can; the canonical isomorphisms can_i, can_ij"
-   }
+   "elementary": false
   },
   {
-   "text": "(Part (1): $\\mathrm{Can}$ on maps; functoriality.) Let $u:M\\to N$ be $R$-linear. Then $u\\otimes_RS$ is $S$-linear [def-weil-module-base-change] and $u_{f_i}$ is $R$-linear [def-weil-pbc-module-localization]. The two conditions for $\\mathrm{Can}(u)=(u\\otimes_RS,(u_{f_i}))$ to be a morphism [def-weil-pbc-formal-glueing-data] are $c^N_{f_i}\\circ(u\\otimes_RS)_{f_i}=(u_{f_i}\\otimes_RS)\\circ c^M_{f_i}$ and $\\sigma^N_{f_i,f_j}\\circ(u_{f_i})_{f_j}=(u_{f_j})_{f_i}\\circ\\sigma^M_{f_i,f_j}$. By the formulas of [lem-weil-pbc-formal-glueing-canonical-maps] both sides of the first send $(m\\otimes s)/f_i^e$ to $(u(m)/f_i^e)\\otimes s$, and both sides of the second send $(m/f_i^a)/f_j^b$ to $(u(m)/f_j^b)/f_i^a$; these elements generate the sources additively (step 1), so both hold. Since $(v\\circ u)\\otimes_RS=(v\\otimes_RS)\\circ(u\\otimes_RS)$, $\\mathrm{id}\\otimes_RS=\\mathrm{id}$ [def-weil-module-base-change], $(v\\circ u)_f=v_f\\circ u_f$ and $(\\mathrm{id})_f=\\mathrm{id}$ [lem-weil-pbc-formal-glueing-canonical-maps] (1), and composition and identities in $\\mathrm{Glue}$ are componentwise [def-weil-pbc-formal-glueing-data], $\\mathrm{Can}$ is a functor $\\mathrm{Mod}_R\\to\\mathrm{Glue}$. This proves (1). For later use: for an $R$-linear $u$, $\\mathrm{Can}(u)$ being a morphism is the naturality $c^N_{f}\\circ(u\\otimes_RS)_{f}=(u_{f}\\otimes_RS)\\circ c^M_{f}$, $\\sigma^N_{f,g}\\circ(u_{f})_{g}=(u_{g})_{f}\\circ\\sigma^M_{f,g}$.",
+   "text": "Apply canonical_functor_maps to this object assignment. Package the supplied morphism assignment, identity law and composition law as a CategoryTheory.Functor into Data. The object and map specifications are precisely the original conclusion.",
    "uses": [
-    "def-weil-module-base-change",
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-formal-glueing-data",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "lem-weil-pbc-formal-glueing-canonical-functor-maps",
+    "def-weil-pbc-formal-glueing-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Remark 05EL (remark-glueing-data, line 24641): the functor Can"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-formal-glueing-canonical-maps",
-  "def-weil-module-base-change",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-pbc-formal-glueing-data",
-  "def-weil-pbc-module-localization"
+  "lem-weil-pbc-formal-glueing-canonical-functor-objects",
+  "lem-weil-pbc-formal-glueing-canonical-functor-maps",
+  "def-weil-pbc-formal-glueing-data"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Remark 05EL, construction of Can; steps 1–2 of prop-weil-pbc-formal-glueing-equivalence."
+  "place": "Remark 05EL, construction of Can, separate object and morphism steps; repaired by second reader R3"
  },
  "mathlib_searches": [
   {
@@ -139,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T100018-L-2466240",
+  "landing": "20261013T111919-L-3061569",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
