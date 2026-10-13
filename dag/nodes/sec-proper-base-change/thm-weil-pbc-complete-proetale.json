@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-pbc-complete-proetale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Complete pro-etale proper base change",
@@ -33,36 +33,130 @@
   "def-weil-pbc-etale-origin-witness",
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-completed-base-change-map"
  ],
  "proof": [
   {
-   "text": "By the finite-level theorem [thm-weil-pbc-finite-level-proetale], each\nfinite-level exchange map $\\Ex_{\\square,K_n}$ is an isomorphism. By\n[lemma-weil-pbc-completed-map-reduction], the evaluations of the tower\nmorphism $V'$ are exactly these isomorphisms, so the levelwise-isomorphism\ncriterion for cones makes $V'$, and hence the composite defining\n$\\Ex^{\\mathrm{comp}}_{\\square,K}$ in\n[def-weil-pbc-completed-base-change-map], an isomorphism; the\ndirect-image/limit commutation used there is the direct-image-limits\nproposition. Naturality and coherence are\n[lemma-weil-pbc-completed-exchange-coherence].",
+   "text": "The adic datum [def-weil-pbc-adic-coefficient-datum] requires each $P_n=A/I^n$ to be finite and perfect. For each $n$ the given witness has $L_n\\in D^+(X_{\\Et},P_n)$ and $\\nu_X^*L_n\\simeq K_n$. Apply [thm-weil-pbc-finite-level-proetale] with $\\Lambda=P_n$ and this witness. Since $f$ is proper, every finite exchange $v'_n=\\Ex_{\\square,K_n}$ is an isomorphism.",
    "uses": [
-    "thm-weil-pbc-finite-level-proetale",
-    "lemma-weil-pbc-completed-map-reduction",
+    "def-weil-pbc-adic-coefficient-datum",
+    "thm-weil-pbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-complete-proetale.md",
+    "place": "## Proof; Stacks Tag 09C9, proetale-theorem-proper-base-change"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-four-arrows], $v'_n:B_n\\to D_n$ is exactly the finite-level pro-etale exchange for $K_n$ with its specified witness, hence is invertible by step 1. By [lem-weil-pbc-tower-compatibility], these arrows assemble into a morphism $v'_\\bullet$ in $D(\\operatorname{Tow}_A(Y'))$ whose evaluation at $n$ is $v'_n$. All hypotheses of the four-corner construction hold: the square is cartesian, $f$ is proper and $K$ is derived complete. Apply [lem-weil-pbc-levelwise-isomorphism-cones] to obtain that $v'_\\bullet$ and $\\Rlim(v'_\\bullet)$ are isomorphisms. By [def-weil-pbc-completed-base-change-map], the latter is the middle arrow of the specified ordered composite.",
+   "uses": [
+    "def-weil-pbc-four-arrows",
+    "lem-weil-pbc-tower-compatibility",
+    "lem-weil-pbc-levelwise-isomorphism-cones",
+    "def-weil-pbc-completed-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-complete-proetale.md",
+    "place": "## Proof; Stacks Tag 09C9, proetale-theorem-proper-base-change"
+   }
+  },
+  {
+   "text": "The outer arrows of [def-weil-pbc-completed-base-change-map] are the specified reconstruction/projection-formula isomorphism and the inverse direct-image/derived-limit comparison. [prop-weil-pbc-direct-image-limits] states that the latter comparison is an isomorphism. Hence the three arrows are invertible. Compose their inverses in reverse order; cancellation proves both inverse identities for the specified completed exchange. [lemma-weil-pbc-completed-map-reduction] also identifies reductions of this very map with the finite exchange maps; this is a statement about the completed map, not an identification of tower evaluations.",
+   "uses": [
     "def-weil-pbc-completed-base-change-map",
+    "prop-weil-pbc-direct-image-limits",
+    "lemma-weil-pbc-completed-map-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-complete-proetale.md",
+    "place": "## Proof; Stacks Tag 09C9, proetale-theorem-proper-base-change"
+   }
+  },
+  {
+   "text": "The supplementary naturality, identity-square and horizontal and vertical pasting assertions in the final sentence of the blueprint proof follow from [lemma-weil-pbc-completed-exchange-coherence].",
+   "uses": [
     "lemma-weil-pbc-completed-exchange-coherence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-complete-proetale.md",
+    "place": "## Proof; Stacks Tag 09C9, proetale-theorem-proper-base-change"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
   "thm-weil-pbc-finite-level-proetale",
-  "lemma-weil-pbc-completed-map-reduction",
-  "def-weil-pbc-completed-base-change-map",
-  "lemma-weil-pbc-completed-exchange-coherence",
+  "def-weil-pbc-four-arrows",
+  "lem-weil-pbc-tower-compatibility",
   "lem-weil-pbc-levelwise-isomorphism-cones",
-  "prop-weil-pbc-direct-image-limits"
+  "def-weil-pbc-completed-base-change-map",
+  "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-completed-map-reduction",
+  "lemma-weil-pbc-completed-exchange-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-complete-proetale.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "complete pro-etale proper base change isomorphism",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.of_comp; RingHom.Etale.isStableUnderBaseChange (general etale/base-change results, not the target).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso base change proper derived complete",
+   "results": "none; loogle reported Unknown identifier IsIso",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.*change [Mathlib]",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived complete pro-etale proper base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed pullback exchange map is an isomorphism",
+   "results": "CategoryTheory.Limits.pullbackSymmetry and related pullback isomorphisms (not the target).",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "results": "CategoryTheory.IsIso and basic isomorphism declarations; no proper base-change theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*proper [Mathlib]",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -107,5 +201,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-complete-proetale",
+  "worker": "stage1",
+  "summary": "Split the paragraph into finite-level application, inverse-limit isomorphism, ordered-composite cancellation, and supplementary coherence. Checked quotient finiteness in the adic datum. Corrected the inference treating completed-map reductions as tower evaluations. No new nodes needed. Second reader cited the existing four-arrow definition and tower-compatibility statement for the evaluation identification.",
+  "blueprint": "Realizes the blueprint proof paragraph under “## Proof”: finite-level exchange isomorphisms, their identification with evaluations of the completed tower map, the levelwise-isomorphism criterion and direct-image/limit comparison, and coherence/naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-7cef1d0f3",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-7cef1d0f3 (reviewer sub-agent of L); spot-checked: Read the mathematics and sources in full; review.md records checks for all four steps, cited statements, hypotheses, edge cases, and duplicate candidates. Tower-compatibility correctly supplies the evaluation identification; the ordered composite is invertible. No new nodes or repairs. This integral adic split does not certify the seeded condensed-coefficient target comparisons."
+ }
 }

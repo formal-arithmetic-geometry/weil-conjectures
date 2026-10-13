@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-comparison-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Comparison inverse image commutes with scheme pullback",
@@ -14,38 +14,142 @@
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
-   "text": "On a representable etale sheaf $h_W$, both inverse-image composites give the\npro-etale sheaf represented by $W\\times_VU$. To check the comparison inverse\nimage in this assertion, work on affine charts and write a basis object as a\nlimit of affine etale schemes. Maps from this limit into an affine etale\nscheme of finite presentation descend to a stage, so the formula of\n[lem-weil-pbc-comparison-sections] is exactly the representable sheaf of the\nbase change. General etale $W$ follows by its affine covering and sheaf\ngluing. Scheme inverse image on a representable is its base change by the\ndefining base-change functor on sites.",
+   "text": "Write $b_u^{\\Et}(W)=W\\times_VU$, $b_u^{\\Proet}(W)=W\\times_VU$, and $i_T:T_{\\Et}\\to T_{\\Proet}$ for the inclusion. The two functors $b_u^{\\Proet}i_V$ and $i_Ub_u^{\\Et}$ have canonically identical objects and arrows: their fibre products have the same projections. The etale base-change continuity statement and the pro-etale inverse-image definition ensure that their restrictions carry sheaves to sheaves. By the continuous-functor sheaf adjunction, $\\nu_{T,*}$ is restriction along $i_T$. Therefore, for a pro-etale sheaf $G$ on $U$ and an etale object $W/V$, both $(\\nu_{V,*}u_{\\Proet,*}G)(W)$ and $(u_{\\Et,*}\\nu_{U,*}G)(W)$ are $G(W\\times_VU)$, and on a morphism $a:W_1\\to W_2$ both restrictions are $G(a\\times_V\\mathrm{id}_U)$. This constructs a natural isomorphism $\\delta_u:\\nu_{V,*}u_{\\Proet,*}\\xrightarrow{\\sim}u_{\\Et,*}\\nu_{U,*}$. For abelian sheaves the general sheaf adjunction identifies comparison direct image as the same restriction. For module sheaves take the finite discrete ring $\\Lambda$ of [def-weil-pbc-site-comparison-morphism]. By [def-weil-pbc-direct-image] and [def-weil-proetale-inverse-image], the direct-image coefficient action is induced by sending $a\\in\\Lambda$ to its constant section on the base-changed object. Both composites send $a$ to that same section on $W\\times_VU$, so $\\delta_u$ and its inverse are $\\Lambda$-linear.",
    "uses": [
-    "lem-weil-pbc-comparison-sections"
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-pc-fibre-product",
+    "def-weil-pbc-direct-image"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098T, lemma-morphism-big-small (2), and the comparison inclusion preceding lemma-describe-pullback-from-etale; direct-image computation"
+   }
   },
   {
-   "text": "Every sheaf is a colimit of representable sheaves over its sections.\nExplicitly, the coproduct of these representables maps epimorphically to the\nsheaf, and the two projections from its relation sheaf give a coequalizer\npresentation. In module sheaves use free modules on those representables and\na cokernel presentation instead. Inverse images preserve these colimits. Thus\nthe just specified identifications extend uniquely to an isomorphism on every\nsheaf for the morphism of [def-weil-pbc-site-comparison-morphism]. On\nrepresentables the identity and composition equations are the identity and\nassociativity of scheme base change, including the chosen cartesian\nidentification in [def-weil-pbc-cartesian-square]. The colimit presentations\nextend these equations to all sheaves. Exactness gives the same coherent\nisomorphisms on complexes.",
+   "text": "Let $L_1=\\nu_U^*u_{\\Et}^{-1}$, $R_1=u_{\\Et,*}\\nu_{U,*}$ and $L_2=u_{\\Proet}^{-1}\\nu_V^*$, $R_2=\\nu_{V,*}u_{\\Proet,*}$. The inverse-image and comparison adjunctions, composed by [def-weil-pbc-composite-adjunction], give $L_1\\dashv R_1$ and $L_2\\dashv R_2$. For sheaves of sets use the etale base-change continuity and [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] to obtain the etale inverse-image adjunction; for abelian and fixed module sheaves use [def-weil-pbc-inverse-image]. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to these adjunctions and $\\delta_u$ from step 1. It gives the natural isomorphism $c_u:L_1\\xrightarrow{\\sim}L_2$, uniquely normalized by $R_1(c_{u,F})\\eta_{1,F}=\\delta_{u,L_2F}\\eta_{2,F}$. Equivalently, for every $F,G$ the induced bijection $\\operatorname{Hom}(L_2F,G)\\to\\operatorname{Hom}(L_1F,G)$ is the chain $\\operatorname{Hom}(L_2F,G)\\cong\\operatorname{Hom}(F,R_2G)\\xrightarrow{\\delta_u}\\operatorname{Hom}(F,R_1G)\\cong\\operatorname{Hom}(L_1F,G)$. This proves the displayed isomorphism, with its specified normalization rather than an arbitrary choice of isomorphism.",
    "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-proetale-inverse-image",
     "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-cartesian-square"
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits), 0B65 (lemma-transformation-between-functors-and-adjoints), with the unit-normalized conjugation argument"
+   }
+  },
+  {
+   "text": "For $u=\\mathrm{id}_V$, the right-image comparison is the identity on $G(W)$ after $W\\times_VV\\cong W$. Its Hom-set chain in step 2 is the identity chain, so the uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] gives the identity comparison after the usual identity inverse-image identifications. For $v:Z\\to U$, compare the path $\\nu_Z^*v_{\\Et}^{-1}u_{\\Et}^{-1}\\xrightarrow{c_v}v_{\\Proet}^{-1}\\nu_U^*u_{\\Et}^{-1}\\xrightarrow{v_{\\Proet}^{-1}c_u}v_{\\Proet}^{-1}u_{\\Proet}^{-1}\\nu_V^*$ with $c_{u\\circ v}$, using the inverse-image composition identifications adjoint to the fibre-product associativity maps. These composition identifications are obtained from the composite adjunction and the unit-normalized conjugation lemma on either site. Under the composite Hom bijections, both paths act by the same map $\\operatorname{Hom}(F,\\nu_{V,*}u_{\\Proet,*}v_{\\Proet,*}G)\\to\\operatorname{Hom}(F,u_{\\Et,*}v_{\\Et,*}\\nu_{Z,*}G)$: first use $\\delta_u$ at $v_{\\Proet,*}G$ and then $u_{\\Et,*}\\delta_v$ at $G$. This follows by inserting the Hom-chain of step 2 for each comparison into the composite Hom bijection; naturality of each bijection moves the whiskered comparison through the other adjunction. Indeed, on $W/V$ this is the restriction along $(W\\times_VU)\\times_UZ\\cong W\\times_VZ$; the direct comparison for $u\\circ v$ is restriction along this same isomorphism. The scheme maps agree because they have the same projections to $W$ and $Z$. Composition of the Hom bijections is precisely that of [def-weil-pbc-composite-adjunction], so this calculation identifies the two maps under a bijection; hence the two natural transformations are equal.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits), 0B65 (lemma-transformation-between-functors-and-adjoints); identity and composition checked through their Hom bijections"
+   }
+  },
+  {
+   "text": "Let $\\square=(f,f',g,g',\\alpha)$ be the chosen square of [def-weil-pbc-cartesian-square], and put $F\\in\\Sh(Y_{\\Et})$. The required compatibility says that the two paths from $\\nu_{X'}^*f'_{\\Et}{}^{-1}g_{\\Et}^{-1}F$ to $g'_{\\Proet}{}^{-1}f_{\\Proet}^{-1}\\nu_Y^*F$ agree: first use $c_{f'}$, then $f'_{\\Proet}{}^{-1}c_g$, then $\\theta_{\\square}^{\\Proet}$; or first use $\\nu_{X'}^*\\theta_{\\square}^{\\Et}$, then $c_{g'}$, then $g'_{\\Proet}{}^{-1}c_f$. To spell out the specified square identification, write $k_{a,b}:(ba)^{-1}\\xrightarrow{\\sim}a^{-1}b^{-1}$ for the composition identification constructed in step 3. Then $\\theta_\\square=k_{g',f}\\circ k_{f',g}^{-1}$, with the middle inverse-image functors identified by $fg'=gf'$. This is the cartesian identification of [def-weil-pbc-cartesian-square]; on the pro-etale site use the same formula with its composition identifications. Thus each occurrence of $\\theta$ in the two paths reduces to the composition comparisons already checked in step 3. Apply the Hom bijections of step 2 and the composite adjunction to both paths. On an etale object $W/Y$, their right-image maps compare the sections over $(W\\times_YY')\\times_{Y'}X'$ and $(W\\times_YX)\\times_XX'$. Both schemes identify with $W\\times_YX'$ by the maps with projections to $W$ and $X'$. The map between them is uniquely characterized by preserving these projections; the condition $fg'=gf'$ supplied by $\\alpha$ gives exactly that map for both paths, whether the inclusion into the pro-etale site is made before or after the base changes. Thus their section maps, their restriction maps in $W$, and therefore their maps on $\\operatorname{Hom}(F,-)$ are equal. Injectivity of the adjunction bijections proves equality of the two left-image paths. This retains the specified $\\alpha$ and proves the cartesian compatibility, in each of the coefficient categories already treated.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-pc-fibre-product",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits), 0B65 (lemma-transformation-between-functors-and-adjoints); explicit application to the chosen cartesian square"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-proetale-inverse-image",
   "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
   "def-weil-pbc-cartesian-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-pullback.md",
-  "place": "## Proof"
+  "place": "## Proof: replacement below the unit level using restriction of direct images and unit-normalized adjunctions (Stacks 098T, 0DV0, 0B65)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|conjugateIsoEquiv|comparisonUpperStar",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: general adjunction, scheme-module, or over-site results do not themselves identify the etale/pro-etale comparison or prove all its coherence clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two left adjoints to the same functor are naturally isomorphic by a unique isomorphism respecting the adjunction units",
+   "results": "none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image from the etale to the proetale site commutes with pullback along every scheme morphism, compatibly with composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app, CategoryTheory.GrothendieckTopology.overMapPullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, TopCat.Sheaf.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: general adjunction, scheme-module, or over-site results do not themselves identify the etale/pro-etale comparison or prove all its coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq",
+   "results": "none; loogle: unknown identifier 'Adjunction.leftAdjointUniq'",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: general adjunction, scheme-module, or over-site results do not themselves identify the etale/pro-etale comparison or prove all its coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of etale schemes into weakly etale schemes commutes with base change, and their sheaf inverse images commute",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.comp, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: general adjunction, scheme-module, or over-site results do not themselves identify the etale/pro-etale comparison or prove all its coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv, CategoryTheory.Bicategory.conjugateIsoEquiv, CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom, CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv",
+   "date": "2026-10-14",
+   "verdict": "generalization used through existing lem-weil-pbc-conjugate-iso-unit-equation; not a one-line match for the scheme comparison item"
+  },
+  {
+   "tool": "grep",
+   "query": "toProEt|proEtTopology|comparisonUpperStar",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: general adjunction, scheme-module, or over-site results do not themselves identify the etale/pro-etale comparison or prove all its coherence clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -73,5 +177,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-comparison-pullback",
+  "worker": "stage1",
+  "summary": "Kept every clause of the statement. Replaced the imported representable-generation argument, whose density/colimit assertions had no cited nodes, by the elementary commutation of restriction and base-change direct images followed by the existing Mathlib conjugation leaf. Wrote identity, composite, and chosen-cartesian compatibility as explicit Hom-bijection and fibre-product calculations; no new nodes. The source Lean supplies the abelian comparison iso but does not state all coherence clauses.",
+  "blueprint": "First proof paragraph: the two base-change site functors give the same object, now used on direct images. Second paragraph: extension from representables replaced by the adjunction argument, and the identity/composition/cartesian equations written explicitly. The unit proper-base-change proof route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-e4e07f29e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-e4e07f29e (reviewer sub-agent of L); spot-checked: Read the item, all ten cited statements, sources and unit/chapter route in full. Verified adjunction orientation, coefficient actions, identity/composition coherence and the specified square isomorphism; edge cases pass. No new nodes or repairs. Acceptance covers fixed finite discrete coefficients, not a seeded comparison with condensed target categories. Detailed checks are in review.md."
+ }
 }

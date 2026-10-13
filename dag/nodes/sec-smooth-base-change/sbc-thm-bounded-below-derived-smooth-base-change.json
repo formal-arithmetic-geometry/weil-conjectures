@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-thm-bounded-below-derived-smooth-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded-below derived smooth base change",
- "statement": "In the square of\n[sbc-thm-smooth-base-change] with $f$ smooth, $g$ quasi-compact\nand quasi-separated, and $\\mathcal P$ the set of primes invertible on\n$S$: for $K\\in D^+_{\\mathcal P\\text{-tor}}(T_{\\Et})$,\n\n$$\n{\\operatorname{BC}}_{f,g}(K):Lf^*Rg_*K\\xrightarrow{\\ \\sim\\ }Rh_*Le^*K\n$$\n\nin $D^+_{\\mathcal P\\text{-tor}}(S_{\\Et})$.",
+ "statement": "In the square of\n[sbc-thm-smooth-base-change] with $f$ smooth, $g$ quasi-compact\nand quasi-separated, and $\\mathcal P$ the set of primes invertible on\n$S$: for $K\\in D^+_{\\mathcal P\\text{-tor}}(T_{\\Et})$,\n\n$$\n{\\operatorname{BC}}_{f,g}(K):Lf^*Rg_*K\\xrightarrow{\\ \\sim\\ }Rh_*Le^*K\n$$\n\nin $D^+_{\\mathcal P\\text{-tor}}(X_{\\Et})$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
   "place": "node sbc-thm-bounded-below-derived-smooth-base-change, order 1440"
@@ -20,30 +20,160 @@
  ],
  "proof": [
   {
-   "text": "For each $n$ apply [sbc-thm-bounded-allowable-torsion] to\n$\\tau_{\\leq n}K$ (bounded, allowable torsion) and use\n[sbc-lem-bounded-below-truncation-criterion] to identify the\nabutments; detection on cohomology sheaves\n([lem-weil-pbc-derived-stalk-conservative], [lemma-weil-pbc-geometric-stalk-conservative]) gives the statement.",
+   "text": "Choose $a\\in\\mathbf Z$ with $H^q(K)=0$ for $q<a$. For each integer $n$, put $K_n=\\tau_{\\le n}K$ and let $i_n:K_n\\to K$ be the canonical map. The explicit standard truncation has $H^q(K_n)=H^q(K)$ for $q\\le n$ and zero otherwise. Thus $K_n$ is bounded (zero if $n<a$) and its cohomology stalks have only prime divisors in $\\mathcal P$. In particular $K_n\\in D^b_{\\mathcal P\\text{-tor}}(T_{\\Et})$.",
    "uses": [
-    "sbc-thm-bounded-allowable-torsion",
-    "sbc-lem-bounded-below-truncation-criterion",
-    "lem-weil-pbc-derived-stalk-conservative",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "sbc-def-derived-categories-with-allowable-torsion",
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "## Proof: truncation argument"
+   }
+  },
+  {
+   "text": "Apply [sbc-thm-bounded-allowable-torsion] to $K_n$. The smoothness of $f$, the quasi-compactness and quasi-separatedness of $g$, and the same set $\\mathcal P$ are exactly its hypotheses. Its unconditional ambient-derived-category conclusion gives that $\\operatorname{BC}_{f,g}(K_n)$ is an isomorphism; no upper bound on the cohomology of its images is assumed.",
+   "uses": [
+    "sbc-thm-bounded-allowable-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "## Proof: truncation argument"
+   }
+  },
+  {
+   "text": "Write $A=Lf^*Rg_*$ and $B=Rh_*Le^*$. By [sbc-lem-bounded-below-truncation-criterion], $H^n(A(i_n))$ and $H^n(B(i_n))$ are isomorphisms. Naturality of the exchange map at $i_n$ gives $H^n(B(i_n))\\,H^n(\\operatorname{BC}(K_n))=H^n(\\operatorname{BC}(K))\\,H^n(A(i_n))$. Therefore $H^n(\\operatorname{BC}(K))=H^n(B(i_n))\\,H^n(\\operatorname{BC}(K_n))\\,H^n(A(i_n))^{-1}$ is an isomorphism, for every integer $n$, including $n<a$.",
+   "uses": [
+    "sbc-lem-bounded-below-truncation-criterion",
+    "sbc-lem-bc-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "## Proof: truncation argument"
+   }
+  },
+  {
+   "text": "The functors $Rg_*$ and $Rh_*$ act on bounded-below categories by [def-weil-pbc-direct-image], and the derived inverse images do so by [def-weil-pbc-derived-inverse-image]. Thus $A(K)$ and $B(K)$ are in $D^+(X_{\\Et})$. Step 3 gives isomorphisms on all cohomology sheaves, hence on all their geometric stalks. Apply [lem-weil-pbc-derived-stalk-conservative] on $X$ to obtain the isomorphism in $D^+(X_{\\Et})$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "## Proof: truncation argument"
+   }
+  },
+  {
+   "text": "We check the allowable-torsion typing separately. For any abelian sheaf $F$ on $T_{\\Et}$ with $\\mathcal P$-torsion stalks, let $M$ be the divisibility poset of positive integers having only prime factors in $\\mathcal P$ (including $1$), and put $F[m]=\\ker(m:F\\to F)$. This poset is filtered, since $mm^{\\prime}$ is a common upper bound. The stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact] and preserves colimits: by [lem-weil-pbc-geometric-point-pullback-stalk] it is inverse image to the geometric point followed by an equivalence, and inverse image is a left adjoint by [def-weil-pbc-inverse-image]. Hence on every stalk the canonical map $\\varinjlim_{m\\in M}F[m]\\to F$ is the union of the kernels of multiplication by $m$, which is all of the stalk by hypothesis. Conservativity of geometric stalks gives $F=\\varinjlim_{m\\in M}F[m]$. Since $g$ is qcqs, [lemma-weil-pbc-direct-image-filtered-colimit] now gives $R^pg_*F=\\varinjlim_{m\\in M}R^pg_*F[m]$ for $p\\ge0$. Each term is killed by $m$: the additive derived functor sends the equality $m\\operatorname{id}_{F[m]}=0$ to $m\\operatorname{id}_{Rg_*F[m]}=0$, and then take $H^p$. Every element of every stalk of the displayed colimit thus is killed by some $m\\in M$. Consequently $R^pg_*F$ has $\\mathcal P$-torsion stalks.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-inverse-image",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Typing omitted by blueprint proof; allowable-prime refinement of Stacks 0DDC (lemma-torsion-cohomology) and 0DDD (lemma-torsion-direct-image)"
+   }
+  },
+  {
+   "text": "Apply the first hypercohomology filtration of [def-weil-pbc-hypercohomology-filtrations] to the given Cartesian square, relabelling its $(X,Y,X^{\\prime},Y^{\\prime})$ as $(T,S,Y,X)$ and its $(f,g,f^{\\prime},g^{\\prime})$ as $(g,f,h,e)$, and to $K$ on $T$. Its $E_2^{p,q}=R^pg_*H^q(K)$ has $\\mathcal P$-torsion stalks by step 5. Its finite filtration of $H^n(Rg_*K)$ involves only $a\\le q\\le n$. All later-page terms are subquotients of earlier terms. Exactness of geometric stalks therefore makes each graded stalk a subquotient of a $\\mathcal P$-torsion group. Subgroups and quotients preserve the property. It also survives extensions: if the image of $x$ in the quotient is killed by $m\\in M$ and $mx$ in the subobject is killed by $m^{\\prime}\\in M$, then $mm^{\\prime}x=0$. Induct along the finite filtration. Thus every cohomology sheaf of $Rg_*K$ has $\\mathcal P$-torsion stalks.",
+   "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Typing omitted by blueprint proof; Stacks 0DDC, proof of (2)"
+   }
+  },
+  {
+   "text": "Inverse image $f^{-1}$ is exact by [prop-weil-pbc-inverse-image-exact], so [lem-weil-pbc-exact-functor-bounded-below] identifies $H^n(A(K))$ with $f^{-1}H^n(Rg_*K)$. For a geometric point $\\bar x:P\\to X$, [lem-weil-pbc-geometric-point-pullback-stalk] identifies its stalk with $\\Gamma(P,\\bar x^{-1}f^{-1}H^n(Rg_*K))=\\Gamma(P,(f\\bar x)^{-1}H^n(Rg_*K))$, and hence with $H^n(Rg_*K)_{f\\bar x}$. The middle identification is clause (2) of [lem-weil-pbc-inverse-image-composition], applied with $u=f:X\\to S$ and $v=\\bar x:P\\to X$. Step 6 makes this a $\\mathcal P$-torsion group. Thus $A(K)$ lies in $D^+_{\\mathcal P\\text{-tor}}(X_{\\Et})$; its isomorphic object $B(K)$ does also, because the isomorphism induces isomorphisms on all cohomology stalks. This is a full subcategory by [sbc-def-derived-categories-with-allowable-torsion], so the ambient isomorphism and its inverse are morphisms in it, proving the claim with the corrected target site $X_{\\Et}$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "sbc-def-derived-categories-with-allowable-torsion",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "## Proof: truncation argument"
+   }
   }
  ],
  "proof_deps": [
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "def-sbc-standard-tstructure-derived-category",
   "sbc-thm-bounded-allowable-torsion",
   "sbc-lem-bounded-below-truncation-criterion",
+  "sbc-lem-bc-naturality",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-inverse-image",
   "lem-weil-pbc-derived-stalk-conservative",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-inverse-image",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded with explicit naturality square and allowable-torsion typing; Stacks 0DDC and 0DDD for the torsion argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smooth.*base.change|base.change.*smooth",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Etale/Descent.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness, etale morphisms, or pullback functor composition, not derived smooth base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived smooth base change for bounded below etale torsion complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for bounded below complexes of etale sheaves with torsion cohomology invertible on the base",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.baseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness, etale morphisms, or pullback functor composition, not derived smooth base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"smooth\"",
+   "results": "11 hits: Algebra.Smooth.baseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.IsStandardSmooth.baseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness, etale morphisms, or pullback functor composition, not derived smooth base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of derived pushforward commutes with smooth base change for torsion sheaves",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern algebraic smoothness, etale morphisms, or pullback functor composition, not derived smooth base change"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -77,5 +207,49 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-thm-bounded-below-derived-smooth-base-change",
+  "worker": "stage1",
+  "summary": "Expanded truncation proof into seven steps, with explicit naturality and separate bounded-below/allowable-torsion typing. Corrected the ill-typed conclusion site S_Et to X_Et. The tagged Lean theorem gives only the ambient isomorphism and does not assert the output torsion clause, so is not an exact attachment. No new nodes.",
+  "blueprint": "Steps 1-2 realize apply bounded theorem to tau_le_n K; step 3 realizes use truncation criterion, explicitly via naturality; step 4 realizes detection on cohomology stalks; steps 5-7 supply the omitted allowable-torsion typing.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-bc-naturality",
+    "why": "Generic tool for naturality, conservativity, exact inverse images, finite hypercohomology filtration, or torsion preservation; sk-rem-rest has no corresponding general tool and its bounded-to-bounded-below route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic tool for naturality, conservativity, exact inverse images, finite hypercohomology filtration, or torsion preservation; sk-rem-rest has no corresponding general tool and its bounded-to-bounded-below route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic tool for naturality, conservativity, exact inverse images, finite hypercohomology filtration, or torsion preservation; sk-rem-rest has no corresponding general tool and its bounded-to-bounded-below route is unchanged."
+   },
+   {
+    "node": "lemma-weil-pbc-direct-image-filtered-colimit",
+    "why": "Generic tool for naturality, conservativity, exact inverse images, finite hypercohomology filtration, or torsion preservation; sk-rem-rest has no corresponding general tool and its bounded-to-bounded-below route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic tool for naturality, conservativity, exact inverse images, finite hypercohomology filtration, or torsion preservation; sk-rem-rest has no corresponding general tool and its bounded-to-bounded-below route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-097f0d2e1",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-097f0d2e1 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, report, route and source passages in full. All seven steps check; the S-to-X output correction is justified. No new nodes or repairs. Accepted generic tool uses are recorded in review.md. Separate master target coefficient/morphism comparisons remain uncertified."
+ },
+ "tool_uses": [
+  "sbc-lem-bc-naturality",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "prop-weil-pbc-inverse-image-exact"
+ ]
 }

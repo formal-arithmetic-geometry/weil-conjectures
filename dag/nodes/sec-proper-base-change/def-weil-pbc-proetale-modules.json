@@ -3,26 +3,100 @@
  "blueprint": {
   "is": "def-weil-pbc-proetale-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite coefficients on the pro-etale site",
- "statement": "For a finite discrete ring $\\Lambda$, let $\\Lambda_{T,\\Proet}$ be the\nsheafification of\n\n$$\n U\\longmapsto\\operatorname{Cont}(\\pi_0(|U|),\\Lambda)\n$$\n\non the small pro-etale site [def-weil-pbc-proetale-site]. Let\n$\\Mod(T_{\\Proet},\\Lambda)$ be its abelian category of module sheaves and\ndefine\n\n$$\n D(T_{\\Proet},\\Lambda)=\n \\mathsf{Cpx}(\\Mod(T_{\\Proet},\\Lambda))\n [\\{\\text{quasi-isomorphisms}\\}^{-1}].\n$$\n\nThe subcategories $\\Dplus(T_{\\Proet},\\Lambda)$ and\n$\\Dbc(T_{\\Proet},\\Lambda)$ are defined by lower boundedness and by pullback\nof the bounded constructible etale objects of\n[def-weil-pbc-constructible-complexes], respectively.",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite ring with the discrete topology. Work in the universes and the small skeleton of the small pro-etale site $T_{\\Proet}$ of [def-weil-pbc-proetale-site]. Modules mean left modules. For an object $U\\to T$, let $\\pi_0(|U|)$ be the set of connected components of the underlying topological space $|U|$, with the quotient topology: a subset is open precisely when its inverse image in $|U|$ is open. Write $\\operatorname{Cont}(\\pi_0(|U|),\\Lambda)$ for the ring of continuous functions, with pointwise operations. A morphism $V\\to U$ induces a map $\\pi_0(|V|)\\to\\pi_0(|U|)$, and restriction of functions is precomposition with that map. Define the coefficient sheaf of rings by sheafification [def-weil-pbc-sheafification] of this presheaf:\n\n$$\n \\Lambda_{T,\\Proet}=\\bigl(U\\longmapsto\\operatorname{Cont}(\\pi_0(|U|),\\Lambda)\\bigr)^\\#.\n$$\n\nLet $\\Mod(T_{\\Proet},\\Lambda)=\\Mod(\\Lambda_{T,\\Proet})$ be the abelian category of sheaves of modules over this ring sheaf [def-weil-sheaf-of-modules-category]. Its morphisms are morphisms of abelian sheaves that are $\\Lambda_{T,\\Proet}(U)$-linear on each object $U$. Define its derived category using [def-weil-abstract-derived-category]:\n\n$$\n D(T_{\\Proet},\\Lambda)=\\mathsf{Cpx}(\\Mod(T_{\\Proet},\\Lambda))\n [\\{\\text{quasi-isomorphisms}\\}^{-1}],\n$$\n\nwhere $\\mathsf{Cpx}$ means cochain complexes indexed by $\\mathbf Z$, and a quasi-isomorphism induces an isomorphism on every cohomology sheaf $\\mathcal H^i=\\ker d^i/\\operatorname{im}d^{i-1}$ in this abelian category. The full subcategory $\\Dplus(T_{\\Proet},\\Lambda)$ consists of the objects $K$ for which some $a\\in\\mathbf Z$ satisfies $\\mathcal H^i(K)=0$ for all $i<a$ [def-weil-pbc-bounded-derived-subcategories].\n\nLet $T_{\\Et}$ be the small etale site [def-weil-pbc-etale-site] and let $\\Lambda_{T,\\Et}$ be the sheafification of the constant presheaf of rings $\\Lambda$ [def-weil-pbc-constant-sheaf]. Set $D(T_{\\Et},\\Lambda)=D(\\Mod(\\Lambda_{T,\\Et}))$ by the same abstract derived-category construction; for commutative $\\Lambda$ this is exactly [def-weil-pbc-derived-categories]. The comparison geometric morphism $\\nu_T:T_{\\Proet}\\to T_{\\Et}$ and its inverse image on $\\Lambda$-module sheaves are those of [def-weil-pbc-site-comparison-morphism]. Write $\\nu_T^*:D(T_{\\Et},\\Lambda)\\to D(T_{\\Proet},\\Lambda)$ for the functor induced by applying that exact module inverse image termwise to complexes [lem-sf-exact-functor-derived-triangulated].\n\nDefine $\\Dbc(T_{\\Proet},\\Lambda)$ to be the strictly full subcategory consisting of objects $K$ admitting an etale complex $L$ and an isomorphism\n\n$$\n \\nu_T^*L\\xrightarrow{\\sim}K,\n$$\n\nwhere $L$ is bounded constructible: there are integers $a\\le b$ with $\\mathcal H^i(L)=0$ outside $[a,b]$, and for each $i$ there is a finite stratification of $T$ by locally closed subschemes [def-constructible-stratification] whose images are constructible subsets [def-weil-constructible-subset], on each of which the restriction of $\\mathcal H^i(L)$ is etale locally isomorphic to a constant sheaf associated to a finite left $\\Lambda$-module. For commutative $\\Lambda$, this is precisely the bounded constructible etale criterion of [def-weil-pbc-constructible-complexes]; the same explicitly stated criterion defines the notation for a noncommutative finite ring. Morphisms in both full subcategories are all the morphisms between their objects in $D(T_{\\Proet},\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-proetale-modules.md",
   "place": "node def-weil-pbc-proetale-modules, order 1233"
  },
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite discrete coefficient ring sheaf on the small pro-etale site and bounded constructible derived category of module sheaves",
+   "results": "8 hits; SheafOfModules.IsFiniteType, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.finFree, LightCondMod.ofSheafLightProfinite, SheafOfModules.isFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt, DerivedCategory",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt|proetale|pro.etale",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite coefficients pro-etale sheaves bounded constructible derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant ring sheaf of continuous functions on connected components of a scheme and derived category of sheaves on a Grothendieck site",
+   "results": "8 hits; CompHausLike.LocallyConstantModule.functor, LightCondensed.underlying_obj, CategoryTheory.HasGlobalSectionsFunctor, CategoryTheory.Sheaf.H, Condensed.underlying_obj, LightCondensed.underlying, CategoryTheory.Sheaf.isConstant_of_forget, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|ConnectedComponents|def presheafToSheaf",
+   "results": "13 hits; Mathlib/CategoryTheory/Category/Cat/Adjunction.lean, Mathlib/CategoryTheory/Category/Cat/Adjunction.lean, Mathlib/CategoryTheory/Category/Cat/Adjunction.lean, Mathlib/CategoryTheory/Category/Cat/Adjunction.lean, Mathlib/CategoryTheory/Category/Cat/Adjunction.lean, Mathlib/CategoryTheory/ConnectedComponents.lean, Mathlib/CategoryTheory/ConnectedComponents.lean, Mathlib/CategoryTheory/ConnectedComponents.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "grep",
+   "query": "def SheafOfModules|structure SheafOfModules|instance.*Abelian|def homologyFunctor",
+   "results": "1 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapDerivedCategory|IsTriangulated|mapDerivedCategoryFactors",
+   "results": "5 hits; 36, 41, 47, 48, 49",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete definition: general sheafification, module-sheaf and derived-functor constructions are available, but not this coefficient sheaf together with the two full subcategories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -48,5 +122,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-proetale-modules",
+  "worker": "stage1",
+  "summary": "Definition split using existing notions only: made the quotient topology, ring presheaf restrictions, left module sheaves, localization, cohomological lower bound and strictly full essential image under comparison explicit. Kept the finite-ring scope: the referenced constructible-complexes node is restricted to commutative rings, so its finite-stratification criterion is stated explicitly for left modules and only identified with that node in the commutative case. No intrinsic pro-etale constructibility theorem or equivalence with condensed module objects is asserted. No new nodes or theorem proof steps.",
+  "blueprint": "All clauses of def-weil-pbc-proetale-modules.md: the coefficient presheaf and its sheafification; Mod; the displayed localization defining D; the last paragraph defining D+ and Dbc by lower boundedness and etale pullback."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-76cc4a337",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-76cc4a337 (reviewer sub-agent of L); spot-checked: Read the full item, report, required instructions, chapter/unit route, all cited DAG nodes, blueprint source, Stacks locations, and archived master target declarations. The definition’s hypotheses and clauses are correct; edge cases and noncommutative coefficients were checked. No new nodes, attachments, tool uses, duplicate, cycle, or repair are present. The condensed coefficient categories and boundedConstructibleBaseChange morphisms in the exact master targets are distinct, and this delivery makes no false identification. Review written to review.md."
+ }
 }

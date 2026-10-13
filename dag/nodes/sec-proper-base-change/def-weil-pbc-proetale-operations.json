@@ -3,26 +3,77 @@
  "blueprint": {
   "is": "def-weil-pbc-proetale-operations",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived operations on ringed pro-etale topoi",
- "statement": "Let $u:U\\to V$ be a morphism and let $R_V$ be a coefficient sheaf whose\ninverse image is identified with $R_U$. The module inverse image is\n\n$$\n u^*F=u^{-1}F\\otimes_{u^{-1}R_V}R_U.\n$$\n\nUsing a functorial K-flat and K-injective resolution\n[def-weil-pbc-kinjective-resolutions] defines ordinary triangulated functors\n\n$$\n Lu^*:D(V_{\\Proet},R_V)\\longrightarrow D(U_{\\Proet},R_U),\n \\qquad\n Ru_*:D(U_{\\Proet},R_U)\\longrightarrow D(V_{\\Proet},R_V),\n$$\n\nwith $Lu^*\\dashv Ru_*$.",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme]. Use the small pro-etale sites and their size convention [def-weil-pbc-proetale-site] and the induced inverse image and direct image [def-weil-proetale-inverse-image]. Let $R_V$ be a sheaf of commutative rings on $V_{\\mathrm{proet}}$ and fix an identification $c:u^{-1}R_V\\xrightarrow{\\sim}R_U$. For $T=U,V$ set $D(T_{\\mathrm{proet}},R_T)=D(\\operatorname{Mod}(R_T))$, using [def-weil-sheaf-of-modules-category] and localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. The module inverse image and direct image are\n$$u^*F=u^{-1}F\\otimes_{u^{-1}R_V,c}R_U,\\qquad (u_*G)(W)=G(U\\times_V W),$$\nwhere the action on the latter is through the ring map $R_V\\to u_*R_U$ adjoint to $c$, and tensor product is the sheaf tensor product [def-pur-sheaf-tensor-product]. Here is the elementary module construction (the module-adjunction calculation in sites-modules.tex, label lemma-adjoint-push-pull-modules). Write $L=u^{-1}$, $R=u_*$ on sheaves of sets, with unit $\\eta$, and use their induced abelian and ring functors [lem-weil-pbc-sheaf-algebraic-structures-objects, lem-weil-pbc-adjunction-lifts-group-ring-objects]. Both preserve finite products. For $A=R_V$ and an $A$-module $F$, the action on $LF$ is $L\\mu_F$ under $L(A\\times F)\\cong LA\\times LF$; for an $LA$-module $N$, the $A$-action on $RN$ is $R\\mu_N\\circ(\\eta_A\\times1)$ under $R(LA\\times N)\\cong RLA\\times RN$. The module axioms and linearity of maps follow by applying $L$ or $R$ to their defining equalities; restriction along the ring map $\\eta_A$ gives the stated $A$-action. For an abelian map $\\alpha:LF\\to N$ with adjunct $\\beta=R\\alpha\\circ\\eta_F$, the adjuncts of $\\alpha\\circ L\\mu_F$ and $\\mu_N\\circ(1\\times\\alpha)$ are respectively $\\beta\\circ\\mu_F$ and $R\\mu_N\\circ(\\eta_A\\times\\beta)$: use naturality $RL\\mu_F\\circ\\eta_{A\\times F}=\\eta_F\\circ\\mu_F$ and $\\eta_{A\\times F}=\\eta_A\\times\\eta_F$ under the product identifications. Injectivity of the set-sheaf adjunction on maps from $L(A\\times F)$ shows that $\\alpha$ is $LA$-linear if and only if $\\beta$ is $A$-linear; its naturality restricts to give the module adjunction. Finally change scalars along $c$: the natural isomorphism from $LF\\otimes_{LA,c}R_U$ to $LF$ with action $r\\cdot m=c^{-1}(r)m$ is $m\\otimes r\\mapsto c^{-1}(r)m$, with inverse $m\\mapsto m\\otimes1$. Their composites are identities by the tensor balancing relation, and their section maps commute with restrictions, so they give inverse sheaf maps. This identifies the displayed module pullback and direct-image actions with the preceding adjoint pair. The inverse image is exact: forgetting its module action gives the exact inverse image on abelian sheaves [lem-weil-pbc-site-pullback-abelian-exact], and kernels and cokernels of module sheaves have the corresponding underlying abelian sheaves [def-weil-sheaf-of-modules-category]. Extension along the ring isomorphism $c$ just transports the action.\n\nDefine $Lu^*$ to be the triangulated functor induced by this exact functor applied termwise [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-exact-functor-derived-functor]. In particular, for any K-flat resolution $P\\to K$ [def-pc-kflat-complex, lem-pc-kflat-resolution], $Lu^*K$ is represented by $u^*P$; the map $u^*P\\to u^*K$ is a quasi-isomorphism by exactness. No functorial choice of K-flat resolutions is needed in this identified-coefficient case.\n\nChoose functorial K-injective resolutions $K\\to I(K)$ [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist] in the category of all $R_U$-module sheaves and define $Ru_*K=Q(u_*I(K))$, and $Ru_*(Qh)=Q(u_*I(h))$, with $Q$ the localization. This factors through $D(U_{\\mathrm{proet}},R_U)$: a quasi-isomorphism $h$ induces a quasi-isomorphism $I(h)$ between K-injectives, hence a homotopy equivalence [lem-weil-pbc-kinjective-hom-derived]; the additive termwise functor $u_*$ preserves its homotopy inverse, so $Q(u_*I(h))$ is invertible. The resolution construction is triangulated [lem-pc-right-derived-functor-triangulated]. These are the ordinary, uncompleted unbounded derived operations\n$$Lu^*:D(V_{\\mathrm{proet}},R_V)\\longrightarrow D(U_{\\mathrm{proet}},R_U),\\qquad Ru_*:D(U_{\\mathrm{proet}},R_U)\\longrightarrow D(V_{\\mathrm{proet}},R_V),$$\nwith $Lu^*\\dashv Ru_*$: apply [lem-pc-pre-derived-adjoint-functors-general] to $\\mathcal A=\\operatorname{Mod}(R_U)$, $\\mathcal B=\\operatorname{Mod}(R_V)$, $F=u_*$ and $G=u^*$. Both total derived functors are everywhere defined by the preceding constructions, so its canonical bijection $\\operatorname{Hom}_{D(V_{\\mathrm{proet}},R_V)}(M,Ru_*K)\\cong\\operatorname{Hom}_{D(U_{\\mathrm{proet}},R_U)}(Lu^*M,K)$, functorial in $M$ and $K$, gives the adjunction.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-proetale-operations.md",
   "place": "node def-weil-pbc-proetale-operations, order 1234"
  },
  "stmt_deps": [
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-proetale-site"
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-pre-derived-adjoint-functors-general"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and derived pushforward of modules on a ringed site form an adjunction on unbounded derived categories",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsLeftAdjointPullback; PresheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.sheafificationCompPullback; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous (8 hits; inspected the relevant candidates)",
+   "date": "2026-10-14",
+   "verdict": "candidate only: underived sheaf pullback is defined as an abstract left adjoint; no theorem identifies the inverse-image action construction for arbitrary topoi, nor the full unbounded derived operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image and direct image of sheaves of modules on ringed sites",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"adjunction\"",
+   "results": "CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc (12 hits; inspected the relevant candidates)",
+   "date": "2026-10-14",
+   "verdict": "candidate only: underived sheaf pullback is defined as an abstract left adjoint; no theorem identifies the inverse-image action construction for arbitrary topoi, nor the full unbounded derived operations"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(pullback|pushforward)|ringed.*site",
+   "results": "Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean (1 hits; inspected the relevant candidates)",
+   "date": "2026-10-14",
+   "verdict": "candidate only: underived sheaf pullback is defined as an abstract left adjoint; no theorem identifies the inverse-image action construction for arbitrary topoi, nor the full unbounded derived operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded total derived functor of an exact inverse image of ringed topoi and K injective direct image adjunction",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Abelian.Ext.mapExactFunctor (8 hits; inspected the relevant candidates)",
+   "date": "2026-10-14",
+   "verdict": "candidate only: underived sheaf pullback is defined as an abstract left adjoint; no theorem identifies the inverse-image action construction for arbitrary topoi, nor the full unbounded derived operations"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -49,5 +100,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-proetale-operations",
+  "worker": "stage1",
+  "summary": "Made all module and derived-category notions explicit. Replaced the etale-only K-injective dependency by the existing general ringed-site resolution definitions and existence theorem; cited existing exact localization, K-injective comparison, triangulated right derivation and abstract derived adjunction. Wrote the underived module actions and both directions of linearity directly using the existing finite-product adjunction theorem; no new node is needed. The coefficient identification makes pullback exact, so termwise descent defines the same K-flat-computed functor without a functorial K-flat choice. All original derived functor types and the adjunction are retained. No completion or condensed coefficient identification is made. Maintainer citation repair: use the correctly typed canonical bifunctorial bijection of lem-pc-pre-derived-adjoint-functors-general in the final clause.",
+  "blueprint": "First displayed formula: module action and scalar transport; 'Using a functorial K-flat and K-injective resolution': explicit exact pullback descent and K-injective direct image construction; second displayed formula and final adjunction: types and existing triangulated/adjunction results."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-a8bb0138a",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-a8bb0138a (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. Replaced the ill-typed derived-adjunction citation with the existing correctly typed general lemma; corrected JSON and review.md are written. No new nodes. Master condensed coefficients and base-change orientation checked; no comparison theorem assumed. Inherited DAG cycles are documented separately.; 1 file(s) fixed by the reviewer"
+ }
 }

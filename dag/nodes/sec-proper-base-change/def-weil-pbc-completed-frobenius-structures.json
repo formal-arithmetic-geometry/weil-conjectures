@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-completed-frobenius-structures",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Weil structures on the completed source and target",
@@ -13,14 +13,64 @@
   "place": "node def-weil-pbc-completed-frobenius-structures, order 1339"
  },
  "stmt_deps": [
-  "def-weil-pbc-completed-base-change-map"
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-frobenius-tower-datum",
+  "def-weil-pbc-level-map-corners",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-adic-derived-inverse-limit",
+  "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-frobenius-product-cone-limit",
+  "lemma-weil-pbc-level-map-derived-limit"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a Weil structure on a derived complete complex across the pullback tensor comparison and direct image inverse limit comparison in proper base change",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackComp, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', RingHom.IsStableUnderBaseChange.pullback_fst_appTop, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-14",
+   "verdict": "no match for the completed construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Iso.trans",
+   "results": "CategoryTheory.Functor.mapIso_trans, CategoryTheory.eqToIso_map_trans, CategoryTheory.Monoidal.transportStruct_rightUnitor, CategoryTheory.Monoidal.transportStruct_leftUnitor, CategoryTheory.Monoidal.transportStruct_associator, CategoryTheory.CartesianMonoidalCategory.preservesTerminalIso_comp, CategoryTheory.CartesianMonoidalCategory.prodComparisonIso_comp, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq",
+   "date": "2026-10-14",
+   "verdict": "generic isomorphism transport only; does not supply the completed objects, comparisons or ordered base-change map"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|completedBaseChange|completed.*[Ff]robenius",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match for the completed construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport Frobenius isomorphisms on derived complete complexes in proper base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "def (mapIso|trans|symm)|mapIso_trans",
+   "results": "Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Equivalence/Symmetry.lean, Mathlib/CategoryTheory/Equivalence/Symmetry.lean, Mathlib/CategoryTheory/Equivalence/Symmetry.lean, Mathlib/CategoryTheory/Join/Basic.lean, Mathlib/CategoryTheory/Join/Basic.lean, Mathlib/CategoryTheory/Endomorphism.lean",
+   "date": "2026-10-14",
+   "verdict": "generic isomorphism transport only; does not supply the completed objects, comparisons or ordered base-change map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an endofunctor F and isomorphism s from S to A transport an isomorphism F A to A as s inverse composed with theta composed with F s",
+   "results": "CategoryTheory.Functor.mapIso, CategoryTheory.Functor.map_isoCongr, CategoryTheory.Functor.map_homCongr, CategoryTheory.Functor.isoCopyObj_hom_app, CategoryTheory.Functor.copyObj, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.isoCopyObj, CategoryTheory.Functor.map_conj",
+   "date": "2026-10-14",
+   "verdict": "generic isomorphism transport only; does not supply the completed objects, comparisons or ordered base-change map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +94,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-completed-frobenius-structures",
+  "worker": "stage1",
+  "summary": "Kept the source formulas unchanged and completed the statement dependencies for the Frobenius datum, finite corners, completed pullback, derived limit, canonical direct-image comparison, and limit Weil structures/common map. The definition is explicit isomorphism transport; no new nodes or theorem proof steps are needed. Mathlib contains the generic transport operations but not the completed base-change construction.",
+  "blueprint": "The two object definitions, the sentence defining s and t, the two displayed transport formulas, and the final ordered-composite display of the imported definition (order 1339)."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-7a8f10a03",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-7a8f10a03 (reviewer sub-agent of L); spot-checked: Read the item, dependencies, blueprint route, Stacks sources, and exact master proper-base-change targets. Repaired one B3/C4 citation gap by adding the existing lemma defining H,V,H′,V′ as limits of the finite arrows. Transport formulas and comparison directions check out. Corrected JSON and review.md are written; no target or statement changed.; 1 file(s) fixed by the reviewer"
+ }
 }

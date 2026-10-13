@@ -3,48 +3,149 @@
  "blueprint": {
   "is": "sbc-thm-bounded-allowable-torsion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded allowable-torsion derived theorem",
- "statement": "In the square of\n[sbc-thm-smooth-base-change] with $f$ smooth, $g$ quasi-compact\nand quasi-separated, and $\\mathcal P$ the set of primes invertible on\n$S$: for every $K\\in D^b_{\\mathcal P\\text{-tor}}(T_{\\Et})$, the\nexchange map ${\\operatorname{BC}}_{f,g}(K)$ of [sbc-def-base-change-map] is an\nisomorphism in $D^b_{\\mathcal P\\text{-tor}}(S_{\\Et})$ whenever both\nsides are bounded, and is always an isomorphism in the ambient derived\ncategory of abelian sheaves.",
+ "statement": "Let $f:X\\to S$ be smooth and $g:T\\to S$ quasi-compact and quasi-separated, and let $Y=X\\times_ST$ with projections $h:Y\\to X$ and $e:Y\\to T$ be the base-change square of [sbc-def-base-change-square]. Let $\\mathcal P$ be the set of primes invertible on $S$. For every $K\\in D^b_{\\mathcal P\\text{-tor}}(T_{\\Et})$ [sbc-def-derived-categories-with-allowable-torsion], the exchange map of [sbc-def-base-change-map], with abelian-sheaf coefficients,\n$$\\operatorname{BC}_{f,g}(K):f^{-1}Rg_*K\\longrightarrow Rh_*e^{-1}K,$$\nis an isomorphism in the ambient derived category of abelian sheaves on $X_{\\Et}$ [def-weil-pbc-derived-categories]. If both its source and target are bounded, they belong to $D^b_{\\mathcal P\\text{-tor}}(X_{\\Et})$, and this map is an isomorphism in that full subcategory as well.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
   "place": "node sbc-thm-bounded-allowable-torsion, order 1438"
  },
  "stmt_deps": [
+  "sbc-def-base-change-square",
   "sbc-thm-smooth-base-change",
   "sbc-def-base-change-map",
-  "sbc-def-base-change-square"
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "def-weil-pbc-derived-categories"
  ],
  "proof": [
   {
-   "text": "Each $H^q(K)$ has geometric stalks that are torsion with prime divisors\nin $\\mathcal P$ ([sbc-def-derived-categories-with-allowable-torsion]);\n[sbc-thm-smooth-base-change] applied to $H^q(K)$ makes the\ncomparison an isomorphism on every $E_2^{p,q}$ of\n[def-weil-pbc-hypercohomology-filtrations]; $K$ is bounded, so\n[sbc-lem-finite-range-comparison] transfers these isomorphisms to\nthe abutments; if both sides are bounded, this is the isomorphism in\n$D^b_{\\mathcal P\\text{-tor}}(S_{\\Et})$, and in general the detection on\ncohomology sheaves of [lemma-weil-pbc-geometric-stalk-conservative]\ngives the isomorphism in the ambient category.",
+   "text": "Choose integers $a\\leq b$ such that $\\mathcal H^q(K)=0$ outside $[a,b]$, as allowed by [sbc-def-derived-categories-with-allowable-torsion]. Apply [def-weil-pbc-hypercohomology-filtrations] to the square with its notation $(f,f',g,g')$ replaced by our $(g,h,f,e)$: the source scheme is $T$, the base is $S$, the changed base is $X$, and the changed source is $Y$. This gives convergent spectral sequences on $X$ with finite filtrations on each abutment,\n$$E_{2,A}^{p,q}=f^{-1}R^pg_*\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(f^{-1}Rg_*K),\\qquad E_{2,B}^{p,q}=R^ph_*e^{-1}\\mathcal H^q(K)\\Longrightarrow\\mathcal H^{p+q}(Rh_*e^{-1}K).$$\nOnly $p\\geq0$ and $a\\leq q\\leq b$ can contribute. The exchange morphism is the one in [sbc-def-base-change-map]. The assertion (2) of [lem-weil-pbc-truncation-couple-morphism] gives a morphism of exact couples, hence the comparison of these sequences; assertion (3) identifies its $E_2^{p,q}$ map with the degree-$p$ base-change map on $\\mathcal H^q(K)$. Thus the comparison is induced by the specified map, rather than an arbitrary isomorphism between the abutments.",
    "uses": [
     "sbc-def-derived-categories-with-allowable-torsion",
-    "sbc-thm-smooth-base-change",
     "def-weil-pbc-hypercohomology-filtrations",
-    "sbc-lem-finite-range-comparison",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "sbc-def-base-change-map",
+    "lem-weil-pbc-truncation-couple-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
+    "place": "Proof, hypercohomology comparison; exact-couple compatibility made explicit"
+   }
+  },
+  {
+   "text": "For each $q$, the stalk condition in [sbc-def-derived-categories-with-allowable-torsion] says that every element of every geometric stalk of $\\mathcal H^q(K)$ is killed by a positive integer all of whose prime divisors lie in $\\mathcal P$. Each of these primes is invertible on $S$, so that integer, being a product of powers of invertible primes, is invertible on $S$. The hypotheses of [sbc-thm-smooth-base-change] therefore hold for $\\mathcal H^q(K)$: $f$ is smooth and $g$ is qcqs. It makes each comparison $f^{-1}R^pg_*\\mathcal H^q(K)\\to R^ph_*e^{-1}\\mathcal H^q(K)$ an isomorphism for $p\\geq0$; the terms for $p<0$ are both zero. Hence every $E_2$ comparison of step 1 is an isomorphism.",
+   "uses": [
+    "sbc-def-derived-categories-with-allowable-torsion",
+    "sbc-thm-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
+    "place": "Proof, apply smooth base change to each cohomology sheaf"
+   }
+  },
+  {
+   "text": "The vanishing outside $[a,b]$ and the $E_2$ isomorphisms of step 2 are exactly the hypotheses of [sbc-lem-finite-range-comparison]. It gives isomorphisms on all the abutments and, in particular, says that $\\operatorname{BC}_{f,g}(K)$ itself is an isomorphism. Because step 1 identifies the comparison with this exchange map, this proves the ambient derived-category assertion. No boundedness of the two outputs is required: the finite interval is the interval of cohomology of $K$, not a cohomological-dimension bound for $g$ or $h$.",
+   "uses": [
+    "sbc-lem-finite-range-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
+    "place": "Proof, finite-range comparison and ambient conclusion"
+   }
+  },
+  {
+   "text": "We verify the allowable-torsion condition on the outputs, which boundedness alone does not imply. Apply [lem-sbc-qcqs-higher-images-prime-torsion] to $g:T\\to S$ and to each $\\mathcal H^q(K)$, using the input condition of [sbc-def-derived-categories-with-allowable-torsion]. Thus all $R^pg_*\\mathcal H^q(K)$ have $\\mathcal P$-torsion stalks. By [lemma-openclosed-stalk-upperstar], pulling these sheaves back along $f$ preserves this condition. The first spectral sequence of step 1 therefore has $\\mathcal P$-torsion stalks on $E_2$. Each successive page is a kernel modulo an image, so all its stalks, and those of $E_\\infty$, have the same condition: subgroups and quotient groups inherit annihilators. By [def-weil-pbc-hypercohomology-filtrations] the abutment in each degree has a finite filtration with these $E_\\infty$ terms as successive quotients. Apply the exact stalk functor of [prop-weil-pbc-geometric-stalks-exact] to this filtration. For an extension $0\\to A\\to B\\to C\\to0$ of such groups and $x\\in B$, choose an allowed integer $n$ killing its image in $C$ and an allowed integer $m$ killing $nx\\in A$; then $mnx=0$, and the prime divisors of $mn$ still lie in $\\mathcal P$. Induction through the finite filtration shows that every $\\mathcal H^n(f^{-1}Rg_*K)$ has $\\mathcal P$-torsion stalks. The isomorphism of step 3 transfers this condition to $\\mathcal H^n(Rh_*e^{-1}K)$ as well.",
+   "uses": [
+    "lem-sbc-qcqs-higher-images-prime-torsion",
+    "sbc-def-derived-categories-with-allowable-torsion",
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-hypercohomology-filtrations",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
+    "place": "Proof, bounded allowable-torsion conclusion; the omitted torsion verification"
+   }
+  },
+  {
+   "text": "If both outputs are bounded, step 4 and the definition in [sbc-def-derived-categories-with-allowable-torsion] put both in $D^b_{\\mathcal P\\text{-tor}}(X_{\\Et})$. This is a full subcategory of the ambient derived category, so the exchange map and its inverse from step 3 are morphisms in this subcategory, with the same inverse identities. This proves the bounded-category assertion.",
+   "uses": [
+    "sbc-def-derived-categories-with-allowable-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
+    "place": "Proof, restriction of the ambient isomorphism to the full bounded subcategory"
+   }
   }
  ],
  "proof_deps": [
   "sbc-def-derived-categories-with-allowable-torsion",
-  "sbc-thm-smooth-base-change",
   "def-weil-pbc-hypercohomology-filtrations",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-truncation-couple-morphism",
+  "sbc-thm-smooth-base-change",
   "sbc-lem-finite-range-comparison",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-allowable-torsion.md",
-  "place": "## Proof"
+  "place": "Proof, corrected target site and expanded exact-couple and allowable-torsion arguments; uses Stacks 0EYU, 015J, and the fixed-prime refinement of 0DDD/0DDC."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smooth.*base.?change|base.?change.*smooth",
+   "results": "7 hits; Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, structure sheaf sections, elliptic curves, or site coverings; none states this etale cohomology assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth base change derived etale torsion sheaves",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for bounded complexes of torsion etale sheaves with invertible orders",
+   "results": "8 hits; KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.baseChange, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.comp",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, structure sheaf sections, elliptic curves, or site coverings; none states this etale cohomology assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
+   "results": "1 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, structure sheaf sections, elliptic curves, or site coverings; none states this etale cohomology assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change",
+   "results": "25 hits; Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Coverage.lean, Mathlib/CategoryTheory/Sites/Coverage.lean, Mathlib/CategoryTheory/Sites/Coverage.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, structure sheaf sections, elliptic curves, or site coverings; none states this etale cohomology assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exchange morphism from inverse image of derived direct image to derived direct image of inverse image is an isomorphism for etale sheaves under smooth base change",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.respectsIso, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.FormallyEtale.iff_of_equiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.of_equiv",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, structure sheaf sections, elliptic curves, or site coverings; none states this etale cohomology assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,5 +176,39 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-thm-bounded-allowable-torsion",
+  "worker": "stage1",
+  "summary": "Corrected S_et to X_et, the actual target of the exchange map, and stated allowable output membership explicitly. Expanded the imported paragraph into five steps. Reused the existing hypercohomology, finite-range comparison, and truncation-couple compatibility nodes; replaced the inapplicable sheaf-only stalk-conservativity citation. One new statement-only fixed-prime torsion preservation lemma supplies the omitted allowable output condition. Lean proves only the ambient bounded-below comparison, not all clauses of the original statement.",
+  "blueprint": "Realizes the entire imported Proof: coefficient condition, E_2 smooth comparison, finite-range passage to abutments, ambient derived conclusion, bounded full-subcategory conclusion. Step 4 supplies the missing allowable-output verification.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "Degreewise smooth base change is the intended sheaf-level input to this derived corollary; sk-rem-rest has no local substitute."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-couple-morphism",
+    "why": "Generic compatibility of the derived exchange with truncation exact couples, identifying its E_2 map; the unit contains no compatibility theorem."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of geometric stalk functors is used to read finite sheaf filtrations as group extensions; it is a general tool, not a different base-change proof."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-0ed63691f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-0ed63691f (reviewer sub-agent of L); spot-checked: Mathematics, routes, hypotheses, citations, source locations, edge cases, and duplicate checks pass. Repaired the new node’s incomplete created record by adding required by/ item/ date fields in fixes/dag/nodes/sec-smooth-base-change/lem-sbc-qcqs-higher-images-prime-torsion.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "tool_uses": [
+  "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-truncation-couple-morphism",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ]
 }

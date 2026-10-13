@@ -3,24 +3,63 @@
  "blueprint": {
   "is": "sbc-def-derived-categories-with-allowable-torsion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived categories with allowable torsion",
- "statement": "Let $\\mathcal P$ be a set of primes. Write\n\n$$\nD^b_{\\mathcal P\\text{-tor}}(T_{\\Et}),\\qquad\nD^+_{\\mathcal P\\text{-tor}}(T_{\\Et})\n$$\n\nfor the full triangulated subcategories of the derived category of\nabelian etale sheaves on $T$ consisting respectively of bounded and\nbounded-below complexes $K$ such that every geometric stalk of every\n$H^q(K)$ is a torsion group whose prime divisors belong to $\\mathcal P$.",
+ "statement": "Let $\\mathcal P$ be a set of primes and let $T$ be a scheme. Using the derived categories and cohomology sheaves of abelian etale sheaves from [def-weil-pbc-derived-categories], write\n\n$$\nD^b_{\\mathcal P\\text{-tor}}(T_{\\Et}),\\qquad\nD^+_{\\mathcal P\\text{-tor}}(T_{\\Et})\n$$\n\nfor the full triangulated subcategories of $D^b(T_{\\Et})$ and $D^+(T_{\\Et})$, respectively, consisting of objects $K$ such that every geometric stalk of every cohomology sheaf $H^q(K)$ [def-weil-pbc-geometric-stalks] is a torsion group whose prime divisors belong to $\\mathcal P$. Explicitly, for every integer $q$, every geometric point $\\bar t$ of $T$, and every $x\\in H^q(K)_{\\bar t}$, there exists a positive integer $n$ with $n x=0$ and with all prime divisors of $n$ in $\\mathcal P$. The inherited triangulated structures are supplied by [lem-sbc-cohomology-in-weak-serre-subcategory], applied to the allowable-torsion sheaves using the exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-def-derived-categories-with-allowable-torsion.md",
   "place": "node sbc-def-derived-categories-with-allowable-torsion, order 1435"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-geometric-stalks",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf whose geometric stalks are torsion with prime divisors in a set",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory derived category complexes torsion cohomology",
+   "results": "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-13",
+   "verdict": "no match for the complete allowable-torsion category definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "torsion abelian group elements annihilated integers prime factors set",
+   "results": "IsAddTorsion.exponentExists; ExponentExists.is_add_torsion; AddSubgroup.torsionBy.nsmul; AddSubgroup.torsionBy; AddCircle.finite_torsion_of_isSMulRegular_int; AddCircle.finite_torsion_of_isSMulRegular; AddCommMonoid.addTorsion.isTorsion; AddSubgroup.torsionBy.nsmul_iff",
+   "date": "2026-10-13",
+   "verdict": "no match for the complete allowable-torsion category definition"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*prime|prime.*torsion|IsTorsionSheaf",
+   "results": "Mathlib/NumberTheory/NumberField/Units/Basic.lean; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean; Mathlib/NumberTheory/NumberField/Ideal/Basic.lean; Mathlib/Algebra/Module/DedekindDomain.lean; Mathlib/Algebra/Module/DedekindDomain.lean",
+   "date": "2026-10-13",
+   "verdict": "no match for the complete allowable-torsion category definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTorsion\"",
+   "results": "Module.IsTorsionFree; instIsTorsionFree; instIsTorsionFreeMulOpposite; HasUniqueDiv.to_isTorsionFree_nat; IsAddTorsionFree.to_isTorsionFree_nat; Module.isTorsionFree_nat_iff_hasUniqueDiv; Module.isTorsionFree_nat_iff_isAddTorsionFree; Subsingleton.to_moduleIsTorsionFree",
+   "date": "2026-10-13",
+   "verdict": "no match for the complete allowable-torsion category definition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +83,21 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-def-derived-categories-with-allowable-torsion",
+  "worker": "stage1",
+  "summary": "Definition split using the existing derived-category and geometric-stalk definitions. The allowable-prime condition is written explicitly in the item, so no additional clause-restating node is necessary. The abelian coefficient case is the blueprint definition; source module-sheaf predicates were read as corroborating definitions, not as completed proofs of this complete definition. Maintainer repair: record the actual logged Mathlib searches and cite the generic cohomology-in-weak-Serre-class theorem and the existing exactness-of-stalks leaf for the claimed triangulated structures.",
+  "blueprint": "The sole definition clause of the blueprint is realized: bounded and bounded-below full subcategories with the positive-annihilator allowable-prime condition on every cohomology stalk. Whole-blueprint search for torsion, geometric stalks, and derived categories found no other node defining both these subcategories.",
+  "well_definedness": "Let B be the full class of abelian etale sheaves satisfying the displayed stalk condition. It contains zero (annihilator 1) and is invariant under isomorphism. Subgroups and quotients of allowable-torsion groups inherit positive allowable annihilators. For 0 -> A -> E -> C -> 0 and e in E, kill its image in C by an allowable n; then n e comes from A and is killed by an allowable m, so mn kills e and has only allowable prime factors. Thus the group class is closed under extensions. Exactness of geometric stalks (prop-weil-pbc-geometric-stalks-exact) makes B closed under kernels, cokernels, and extensions. The cited generic lemma supplies the triangulated structure on all complexes with cohomology in B and on its bounded and bounded-below intersections. These are precisely the two full subcategories defined in the item."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-1d1a68e08",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-1d1a68e08 (reviewer sub-agent of L); spot-checked: Read the mathematics in full against the master blueprint, cited definitions, and master target sources. Repaired missing search records, triangulated well-definedness using a statement-only Stacks 06UQ lemma and exact stalks, and incorrect whole-unit realization. Edge cases and dependency cycles checked; targets unchanged. Review and corrected JSON files written.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

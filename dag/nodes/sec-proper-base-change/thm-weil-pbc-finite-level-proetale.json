@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-pbc-finite-level-proetale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-level pro-etale proper base change",
@@ -28,29 +28,86 @@
  ],
  "proof": [
   {
-   "text": "The bounded-below theorem of the proper-base-change chapter makes the etale\nexchange map for $L$ an isomorphism; the fully faithful comparison of\n[thm-weil-pbc-site-comparison] transports it to the pro-etale site, where\n[lem-weil-pbc-transport-identifies-exchange] identifies the transported map\nwith the pro-etale exchange map for $\\nu_X^*L$, which is $K$ under the\nwitness of [def-weil-pbc-etale-origin-witness]. Independence of the witness\nfollows from the functoriality of the transported map.",
+   "text": "Fix the cartesian square and compatible ringed pro-étale exchange datum of [def-weil-pbc-ambient-ringed-exchange], with $f$ proper as understood via [def-weil-pbc-scheme-conventions]. Under the chosen identifications of the coefficient sheaves on the four corners, the module pullback $Lu^*$ in [def-weil-pbc-ambient-ringed-exchange] is canonically the exact sheaf inverse image $u^{-1}$ (the tensor factor is along an isomorphism of coefficient rings); hence its derived pullback is represented by $u^{-1}$ and the ambient map has the displayed form. Because $\\Lambda$ is finite, the witness object $L\\in\\Dplus(X_{\\Et},\\Lambda)$ has torsion cohomology. Thus [thm-weil-pbc-bounded-below] makes the étale exchange map for $L$ an isomorphism. The fully faithful comparison [thm-weil-pbc-site-comparison] transports this isomorphism to the pro-étale site, and [lem-weil-pbc-transport-identifies-exchange] identifies the transported map with the pro-étale exchange transformation of [def-weil-pbc-ambient-ringed-exchange] for $\\nu_X^*L$. The witness [def-weil-pbc-etale-origin-witness] supplies $\\alpha:\\nu_X^*L\\simeq K$, so conjugating by $\\alpha$ gives the displayed exchange map for $K$ and proves it is an isomorphism. If the witness is replaced by an isomorphic witness, naturality of the transported exchange transformation makes the two resulting maps conjugate by that isomorphism, hence equal as the witness-independent map.",
    "uses": [
+    "thm-weil-pbc-bounded-below",
     "thm-weil-pbc-site-comparison",
     "lem-weil-pbc-transport-identifies-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
     "def-weil-pbc-etale-origin-witness"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
+    "place": "## Proof (the single proof paragraph; finite-level transport and witness-independence)"
+   }
   }
  ],
  "proof_deps": [
+  "thm-weil-pbc-bounded-below",
   "thm-weil-pbc-site-comparison",
   "lem-weil-pbc-transport-identifies-exchange",
-  "def-weil-pbc-etale-origin-witness",
-  "thm-weil-pbc-bounded-below"
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-etale-origin-witness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-level-proetale.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient pro-etale proper base change exchange map isomorphism",
+   "results": "StandardEtalePresentation.mapEquiv; RingHom.Etale.respectsIso; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange; StandardEtalePair.homEquiv; Algebra.Etale.of_equiv; Algebra.Etale.exists_subalgebra_fg; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "base change exchange map, IsIso, Proper",
+   "results": "0 hits; unknown identifier base",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*base.?change|bounded.*constructible.*base.?change [Mathlib/]",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper base change for finite coefficient pro-etale sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived exchange morphism for a cartesian square of ringed topoi is an isomorphism",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; TopCat.Sheaf.pullbackIso; SheafOfModules.pullbackIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso (g inverse R f star K map)",
+   "results": "0 hits; unknown identifier g",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProperBaseChange|proper_base_change|isIso.*baseChange [Mathlib/AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -89,5 +146,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-finite-level-proetale",
+  "worker": "stage1",
+  "summary": "No finished declaration exists in the source. I retained the imported statement and made its proof route explicit: finite coefficients give the torsion hypothesis for the bounded-below étale theorem; site comparison transports the isomorphism; the transport lemma identifies the transported map with the ambient pro-étale exchange; and the witness conjugates it to K. I added all cited nodes to proof_deps and recorded the required Mathlib searches.",
+  "blueprint": "Realizes the single proof paragraph of the blueprint node: apply thm-weil-pbc-bounded-below, transport through thm-weil-pbc-site-comparison, identify via lem-weil-pbc-transport-identifies-exchange, and use the etale-origin witness; witness independence is by naturality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-78a037caa",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-78a037caa (reviewer sub-agent of L); spot-checked: The proof is mathematically coherent after repair. The delivered step omitted its mandatory source location and did not justify identifying the ambient derived module pullbacks L u^* with the displayed inverse-image maps u^{-1}; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/thm-weil-pbc-finite-level-proetale.json. Stacks 09C8 and the archived master targets use different completed/constructible coefficient settings; this source mismatch is recorded in review.md without weakening the item.; 1 file(s) fixed by the reviewer"
+ }
 }
