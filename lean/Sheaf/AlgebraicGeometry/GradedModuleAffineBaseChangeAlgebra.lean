@@ -5,15 +5,13 @@ Authors: SHEAF group W2
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.DirectSum.Module
 public import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.AssociatedModule
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
+import Sheaf.Paper.GradedModuleQuasicoherentRealization
+import Sheaf.Paper.GradedModuleRealizationFiniteType
 /-! # The algebra-module part of graded affine realization
 
 Source: Stacks Project, Tag 0897, proof; Tags 01SB and 01PB.
@@ -94,6 +92,25 @@ theorem exists_finiteType_graded_algebra_module
       ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map rho)
     ∃ N : SheafOfModules.{u} CR, N.IsQuasicoherent ∧ N.IsFiniteType ∧
       Nonempty (S.obj N ≅ ∐ G) := by
-  sorry
+  classical
+  dsimp only
+  let b := Spec.map (CommRingCat.ofHom (algebraMap A B))
+  let pi := pullback.fst f b
+  let C := (TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj (pullback f b).sheaf
+  let CR := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj C
+  let R := SheafOfModules.pushforward.{u} (F := TopologicalSpace.Opens.map pi.base)
+    (S := CR) (R := (pullback f b).ringCatSheaf) (𝟙 CR)
+  have : IsAffineHom b := inferInstance
+  have : IsAffineHom pi := MorphismProperty.pullback_fst _ _ ‹IsAffineHom b›
+  obtain ⟨F, hF, iota, hcoprod, hcompat⟩ := gradedModule_quasicoherent_realization
+    graded hgrading hunit hmul hscalar f G hG mu hmu_add hmu_mul hmu_scalar
+  have hFfinite := gradedModule_realization_isFiniteType graded f G mu hfinite
+    F hF iota hcoprod hcompat
+  have hN := (Scheme.Modules.affine_module_correspondence pi).2.1 F hF
+  have hNfinite := (Scheme.Modules.affine_module_finite_type pi (R.obj F) hN F hF
+    (Iso.refl _)).mpr hFfinite
+  obtain ⟨hc⟩ := hcoprod
+  refine ⟨R.obj F, hN, hNfinite, ⟨?_⟩⟩
+  exact hc.coconePointUniqueUpToIso (coproductIsCoproduct G)
 
 end AlgebraicGeometry
