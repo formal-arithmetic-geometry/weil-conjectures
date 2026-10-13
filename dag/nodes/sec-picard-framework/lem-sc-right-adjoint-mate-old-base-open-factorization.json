@@ -19,44 +19,54 @@
  ],
  "proof": [
   {
-   "text": "The cartesian restriction square and its pullback along gV identify U times_V T with the iterated pullback of f first along V and then along T. The equations on s and t are their unique projection equations. Pullback composition supplies e0 on the source of the global mate and the source of the t-pulled open mate.",
+   "text": "Put P=pullback(f,V inclusion), Q=pullback(P→V,gV). Construct k:Q→pullback(f,g0) by pullback.lift. Construct r:pullback(f restricted V,gV)→Q by pullback.lift using the inverse of pullbackRestrictIsoRestrict. Verify all four projections. Pullback.hom_ext proves r followed by k=s and r followed by Q→P=t.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the qcqs lifted direct image Q→T and its IsLeftAdjoint instance to choose d with Adjunction.ofIsLeftAdjoint. Its adjunction determines d up to the isomorphism used downstream; no arbitrary geometric object is selected.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
    ],
    "elementary": false
   },
   {
-   "text": "Identify U with pullback(f,V inclusion) by pullbackRestrictIsoRestrict. Derived direct-image composition and right-adjoint uniqueness identify aV with b under this transport; pull this comparison to U times_V T to obtain e1. The isomorphism s to pullback(f,g0) similarly transports its direct image, giving e2 by right-adjoint uniqueness between c and b prime. These comparisons are tied to the supplied adjunctions, not arbitrary unrelated endpoint isomorphisms.",
+   "text": "Apply source-scheme-isomorphism transport to P→V, f restricted V, and (pullbackRestrictIsoRestrict f V).symm. Obtain ordinary inner-square invertibility and an arrow isomorphism from the r-pulled inner mate to L.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-sc-right-adjoint-mate-scheme-iso-transport",
+    "def-sc-duality-equation-base-change-map"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the fixed canonical mates using their units, inverse conjugates of ordinary base change, and counits. The scalar base-change upper-left transport is schemeDerivedBaseChange_pasting. For the two successive base squares, transpose under the composite adjunction: naturality and the triangle identities turn their pasted transpose into the transpose of the rectangle, by associativity of the selected derived-pullback comparisons. ConjugateEquiv respects composition and inverses. Naturality of the two units moves the conjugates through their units; naturality of the counits and the triangle identities cancel the middle unit/counit pair. The remaining four factors are e0, the t-pulled open mate, e1, and the local mate, followed on the other side by e2. This proves the displayed equality without inverting the open mate.",
+   "text": "Apply successive-base-change mate pasting to f,V inclusion,gV on Q. Map its three comparison isomorphisms and equality by derivedPullback r. Derived pullback composition and the two proved morphism equalities give arrow isomorphisms from G and O to these mapped arrows.",
    "uses": [
-    "def-sc-duality-equation-base-change-map",
-    "def-pc-derived-base-change-map",
-    "lem-pc-derived-base-change-pasting",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-sc-right-adjoint-mate-successive-base-change",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-sc-duality-equation-base-change-map"
    ],
    "elementary": false
+  },
+  {
+   "text": "The private categorical helper transport_arrow_factorization combines these arrow isomorphisms with the mapped equality. Its three endpoint isomorphisms are composites of the appropriate arrow projections. Arrow.w, Arrow.iso_w and associativity prove the final equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
   "def-sc-duality-equation-base-change-map",
-  "lem-pc-derived-base-change-pasting",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-right-adjoint-mate-scheme-iso-transport",
+  "lem-sc-right-adjoint-mate-successive-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H4",
+  "group": "K1",
   "date": "2026-10-13",
   "document": "Stacks Project, Duality for Schemes",
-  "place": "Tag 0ATR, Lemma 48.5.2, the composite mate formula; Tag 0E9S, one-open specialization",
-  "note": "Formal specialization of the cited argument to the canonical library mate; remaining step of a stage-3 decomposition."
+  "place": "Tag 0ATR, successive-square mate pasting; Tag 0E9S, cartesian restriction identification. K1 separates these two steps and proves all pullback-map and arrow-transport glue in Lean.",
+  "note": "Categorical specialization of the cited proof, retaining invertibility only of ordinary base change; Tor independence in the source supplies that premise and is not used otherwise."
  },
  "mathlib_searches": [
   {
@@ -138,9 +148,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T100008-L-2463498",
+  "landing": "20261013T111900-L-3055271",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

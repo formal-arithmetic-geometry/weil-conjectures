@@ -12142,3 +12142,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/J4/Sheaf.RingTheory.TorIdealConnectingFormula (stage 3; reviewer PASS; first push; landing 20261013T111859-L-3054895 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/K1/Sheaf.AlgebraicGeometry.PseudoCoherentFiberBoundedAboveModel (stage 3; reviewer PASS; first push; landing 20261013T111859-L-3055026 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/K1/Sheaf.AlgebraicGeometry.RightAdjointMateAffineOpenIsIso (stage 3; reviewer PASS; first push; landing 20261013T111859-L-3055128 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/K1/Sheaf.AlgebraicGeometry.RightAdjointMateOldBaseOpenFactorization (stage 3; reviewer PASS; first push; landing 20261013T111900-L-3055271 (interface); batch 20261013T111833; modules 3; new nodes 2)
