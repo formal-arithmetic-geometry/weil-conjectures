@@ -11520,3 +11520,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/F4/Sheaf.AlgebraicGeometry.ProjectionComparisonExact (stage 3; reviewer PASS; first push; landing 20261013T072347-L-1118452 (interface); batch 20261013T072335; modules 2; new nodes 1)
 - 07:23 L: merged deliver/F4/Sheaf.RingTheory.ProjectiveSymmetricCoefficientIntersection (stage 3; reviewer PASS; first push; landing 20261013T072347-L-1118687 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Morphisms.ClosedFiberPowerSeriesTest (stage 3; reviewer PASS; first push; landing 20261013T072348-L-1118824 (interface); batch 20261013T072335; modules 3; new nodes 2)
+- 07:23 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Morphisms.LocallyPrincipalSupportDimensionOne (stage 3; reviewer PASS; first push; landing 20261013T072348-L-1119016 (proof); batch 20261013T072335; modules 1; new nodes 0)
