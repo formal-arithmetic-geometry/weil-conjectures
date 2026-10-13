@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-base-derived-tensor-model-quasiiso-comparison",
+ "kind": "statement",
+ "title": "Localized counit comparison transport between derived tensor models",
+ "statement": "Let $R,A,B,D$ be commutative rings, let $A,B$ be $R$-algebras, put $E=A\\otimes_R B$, and let $D$ be an $E$-algebra [def-weil-module-base-change]. Choose derived categories of $R$- and $B$-modules [def-weil-abstract-derived-category]. Let $s:P\\to G$ be a quasi-isomorphism of cochain complexes of $A$-modules, and choose models $M_P,M_G$ of their base-derived tensor cohomology [def-pc-base-derived-tensor-cohomology-model]. For every $i\\in\\mathbf Z$ there is an $E$-linear isomorphism $e:T_{P,i}\\simeq T_{G,i}$ such that $c_{P,i}\\gg H^i(D\\otimes_A s)=(D\\otimes_E e)\\gg c_{G,i}$. Here $c$ is the localizedComparison field, and the $A\\to D$ map is $A\\to E\\to D$. No comparison map or ordinary tensor map is assumed invertible.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change, independence of choices; perfect.tex equation-bc before Tag 0DJ8, canonical comparison"
+ },
+ "proof": [
+  {
+   "text": "Apply the ordinary comparison transport theorem to obtain e and the square for comparison. No extension to D has been performed at this point.",
+   "uses": [
+    "lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the ordinaryToLocalized chain square directly. Use hom_ext and ExtendScalars.hom_ext to test on 1 tensor q. Its two routes both send this tensor to the image of 1 tensor s(q), by ordinaryToLocalized_tmul and ExtendScalars.map_tmul. Apply homology. ShortComplex.mapHomologyIso_hom_naturality transports this square through restriction of D-modules to E-modules.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use injectivity of the extension/restriction adjunction hom equivalence. Its left and right naturality laws turn the desired localized square into a square of transposes. Replace these transposes by localized_eq; the chain square of the preceding step and the ordinary comparison square, followed by reassociation, prove equality. The source isomorphism after extension to D is the functor image of e.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-module-base-change",
+  "lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 and perfect.tex equation-bc before Tag 0DJ8",
+  "note": "Fully formalized model-coordinate naturality argument using Mathlib universal left-derived functors, tensor induction, homology naturality and scalar adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|mapHomologyIso_hom_naturality",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic naturality and universal-property tools; no exact model comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-isomorphism of complexes induces a cohomology isomorphism of left derived extension of scalars commuting with the canonical comparison to ordinary tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of ordinary and localized tensor cohomology comparisons from universal left derived functors",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Tor'_obj_map, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "Generic naturality and universal-property tools; no exact model comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "base-change comparison step: canonical counit stalkwise condition, through lem-pc-rf-base-change-complex; original counit transport steps 1 and 2; Localized counit comparison transport between derived tensor models",
+   "via": [
+    "lem-pc-localized-comparison-quasiiso-square",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorModelQuasiIsoComparison.lean",
+  "declaration": "ModuleCat.exists_baseDerivedTensorModel_quasiIso_comparison",
+  "statement": "theorem exists_baseDerivedTensorModel_quasiIso_comparison {P G : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ G) (hs : QuasiIso s) (MP : BaseDerivedTensorCohomologyModel R A B P D) (MG : BaseDerivedTensorCohomologyModel R A B G D) (i : ℤ) : ∃ e : MP.cohomology i ≅ MG.cohomology i, MP.localizedComparison i ≫ HomologicalComplex.homologyMap (((extendScalars ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).map s) i = (extendScalars (algebraMap (A ⊗[R] B) D)).map e.hom ≫ MG.localizedComparison i",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100104-L-2479691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100104-L-2479691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

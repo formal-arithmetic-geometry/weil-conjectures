@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison",
+ "kind": "statement",
+ "title": "Ordinary counit comparison transport between derived tensor models",
+ "statement": "Let $R,A,B,D$ be commutative rings, let $A,B$ be $R$-algebras, put $E=A\\otimes_R B$, and let $D$ be an $E$-algebra [def-weil-module-base-change]. Choose derived categories of $R$- and $B$-modules [def-weil-abstract-derived-category]. Let $s:P\\to G$ be a quasi-isomorphism of cochain complexes of $A$-modules, and choose models $M_P,M_G$ of their base-derived tensor cohomology [def-pc-base-derived-tensor-cohomology-model]. For every $i\\in\\mathbf Z$ there is an $E$-linear isomorphism $e:T_{P,i}\\simeq T_{G,i}$ such that $\\beta_{P,i}\\gg H^i(E\\otimes_A s)=e\\gg\\beta_{G,i}$. The maps $\\beta$ are the ordinary comparison fields of the models; no ordinary tensor map is assumed invertible.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change, independence of choices; perfect.tex equation-bc before Tag 0DJ8, canonical comparison"
+ },
+ "proof": [
+  {
+   "text": "Restrict s to R. Mathlib exact restriction of scalars preserves homology, so DerivedCategory.Qh sends its homotopy class to an isomorphism. Install the universal fields of both models. Functor.leftDerivedUnique gives their counit-compatible natural isomorphism eta. Whisker eta with B-cohomology and compose the image of s, the two cohomologyIso maps and this natural isomorphism, giving a B-linear isomorphism eb.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-weil-module-base-change",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of eta and (a id_P) composed with s = s composed with (a id_G), followed by cohomologyIso_smul, give U.map((a tensor 1) id) composed with eb.hom = eb.hom composed with U.map((a tensor 1) id). On elements this says eb is compatible with a tensor 1. Its B-linearity handles 1 tensor b. Tensor induction extends compatibility to all scalars of E, using a tensor b = (a tensor 1)(1 tensor b), zero and addition. Bundle e0 as an E-linear map. Its underlying function equals eb.hom and is bijective, so ConcreteCategory.isIso_iff_bijective gives the E-linear isomorphism e.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinaryIso generator equation proves naturality under s degree by degree: test on 1 tensor q using ExtendScalars.hom_ext, then both composites are (1 tensor 1) tensor s(q). Apply homology. The equation leftDerivedNatTrans_app pins eta to the universal counits. Combine this equation with eta naturality and counit naturality for s, and apply B-cohomology. Naturality of homologyFunctorFactorsh, homologyFunctorFactors and the restriction homology isomorphism joins this square to the ordinaryIso square. Apply faithful restriction of scalars to the desired equality, replace the restriction of e by eb, cancel the restriction homology isomorphism, and substitute comparison_eq. The preceding naturality identities, composed and reassociated, give exactly the comparison square.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-weil-module-base-change",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 and perfect.tex equation-bc before Tag 0DJ8",
+  "note": "Fully formalized model-coordinate naturality argument using Mathlib universal left-derived functors, tensor induction, homology naturality and scalar adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|mapHomologyIso_hom_naturality",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic naturality and universal-property tools; no exact model comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-isomorphism of complexes induces a cohomology isomorphism of left derived extension of scalars commuting with the canonical comparison to ordinary tensor product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of ordinary and localized tensor cohomology comparisons from universal left derived functors",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Tor'_obj_map, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "Generic naturality and universal-property tools; no exact model comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "base-change comparison step: canonical counit stalkwise condition, through lem-pc-rf-base-change-complex; original counit transport steps 1 and 2; Ordinary counit comparison transport between derived tensor models",
+   "via": [
+    "lem-pc-localized-comparison-quasiiso-square",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorModelQuasiIsoOrdinaryComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorModelQuasiIsoOrdinaryComparison.lean",
+  "declaration": "ModuleCat.exists_baseDerivedTensorModel_quasiIso_ordinary_comparison",
+  "statement": "theorem exists_baseDerivedTensorModel_quasiIso_ordinary_comparison {P G : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ G) (hs : QuasiIso s) (MP : BaseDerivedTensorCohomologyModel R A B P D) (MG : BaseDerivedTensorCohomologyModel R A B G D) (i : ℤ) : ∃ e : MP.cohomology i ≅ MG.cohomology i, MP.comparison i ≫ HomologicalComplex.homologyMap (((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex (.up ℤ)).map s) i = e.hom ≫ MG.comparison i",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100104-L-2479691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100104-L-2479691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
