@@ -12112,3 +12112,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/F3/Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators (stage 3; reviewer PASS; first push; landing 20261013T111846-L-3050597 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/F4/Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting (stage 3; reviewer PASS; first push; landing 20261013T111847-L-3050839 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:18 L: merged deliver/G1/Sheaf.AlgebraicGeometry.CechH1Injective (stage 3; reviewer PASS; first push; landing 20261013T111847-L-3050947 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:18 L: merged deliver/G1/Sheaf.AlgebraicGeometry.DerivedLowerTruncationCycleFormula (stage 3; reviewer PASS; first push; landing 20261013T111847-L-3051090 (interface); batch 20261013T111833; modules 3; new nodes 2)

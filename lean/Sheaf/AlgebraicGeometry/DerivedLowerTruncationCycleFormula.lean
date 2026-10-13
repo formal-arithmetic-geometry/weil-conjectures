@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
+import Sheaf.AlgebraicGeometry.LeftExactTruncationCycleFormula
+import Sheaf.AlgebraicGeometry.DerivedLowerTruncationUnitBridge
+
 /-! # The cycle formula for the bottom derived comparison
 
 Source: Stacks Project, Tags 05TC (2), 0AVW and 08D4 (1).
@@ -69,6 +72,14 @@ theorem derived_lower_truncation_cycle_formula
         ((DerivedCategory.TStructure.t.truncGE n).obj (DerivedCategory.Q.obj I))) ≅
         F.obj (I.sc n).homologyData.left.H,
       c ≫ e.hom ≫ H.map U ≫ H.map q ≫ b.hom =
-        F.map (I.sc n).homologyData.left.π := by sorry
+        F.map (I.sc n).homologyData.left.π := by
+  dsimp only
+  obtain ⟨a, ha⟩ := leftExact_truncation_cycle_formula F I n
+  obtain ⟨d, hd⟩ := derived_lower_truncation_unit_bridge F I n
+  refine ⟨d.symm ≪≫ a, ?_⟩
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc] at hd
+  erw [reassoc_of% hd]
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc] using ha
 
 end AlgebraicGeometry

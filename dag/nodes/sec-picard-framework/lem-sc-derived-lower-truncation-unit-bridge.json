@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-derived-lower-truncation-unit-bridge",
+ "kind": "statement",
+ "title": "Bottom derived unit through good lower truncation",
+ "statement": "Let C,D be abelian categories with derived categories, and assume C has enough injectives and K-injective resolutions. Let F:C→D be additive and preserve finite limits, I an arbitrary integer-indexed cochain complex, and n∈ℤ. Put J=F(I), H=H^n on D(D), and let e:H^n(J)≅H(Q_h(PJ)) be the inverse homotopy and derived homology factor comparisons. Let U be the right-derived unit at PI and let q=RF(s_I p_I), where s_I:Q_h(PI)≅QI is the quotient factor isomorphism and p_I:QI→tauGE n QI is the truncation projection. There exists d:H^n(F(truncGE n I))≅H(RF(tauGE n QI)) such that e H(U) H(q)=H^n(F(I.πTruncGE n)) d. This is a derived-unit and localization compatibility, with no cycle map or homology quotient in its statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TC (2); Tags 015A, 05TH, 05TI; derived-unit naturality and truncation uniqueness, expanded from steps 1 and 2 of the parent."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-t-structure"
+ ],
+ "proof": [
+  {
+   "text": "The good truncation sequence gives Q(truncGE n I) as the canonical lower truncation of QI, with its projection commuting. Uniqueness of the truncation triangle supplies its isomorphism to tauGE n QI.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On K=truncGE n I, upper truncation at n and negative vanishing reduce invertibility of H^n of the derived unit to the complex H^n(K) placed in degree n. Shift to zero, apply the single-object comparison normalized on the injective-resolution augmentation, and use that F preserves the augmentation kernel. Transport via bounded-below/unbounded derived compatibility.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define d by the homology factor isomorphisms at F(K), H^n of the unit at K, and H^n of RF of the canonical localization/truncation isomorphism. Naturality of the unit at P(I→K) and the homology factors, together with the commuting projection, proves the displayed factorization. All factors defining d are invertible; zero and negative cutoff cases need no exception.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Canonical kernel and derived-unit calculation of the parent, expanding Tags 05TC and 08D4 (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bottom homology of a left exact functor after lower truncation and compatibility of the derived unit",
+   "results": "Eight hits: truncation quasi-isomorphisms and homologyFunctorFactors; none gives the normalized derived bridge. Underived kernel and homology-data interfaces give a complete proof of the underived part.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.LeftHomologyData.map",
+   "results": "0 hits; unknown identifier in the service index. Local source inspection found LeftHomologyData.map in ShortComplex.PreservesHomology.",
+   "date": "2026-10-13",
+   "verdict": "source API found"
+  },
+  {
+   "tool": "grep",
+   "query": "map.*liftCycles|liftCycles.*map; rightDerivedFunctorUnit; mapHomologyIso",
+   "results": "Found liftCycles_comp_cyclesMap, LeftHomologyData.homologyπ_comp_homologyIso_hom, preservesCokernel_zero', and homology-data map. DerivedSectionsLeftExactBottom only supplies an unnormalized isomorphism. PlusSingle supplies the normalized single-object computation but no general truncation bridge.",
+   "date": "2026-10-13",
+   "verdict": "parts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bottom derived unit for a left exact functor on a complex zero below n is invertible on cohomology in degree n",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-13); no mathematical verdict.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedLowerTruncationCycleFormula",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-lower-truncation-cycle-formula",
+   "place": "Derived-unit and truncation/localization part of parent steps 1 and 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedLowerTruncationUnitBridge",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedLowerTruncationUnitBridge.lean",
+  "declaration": "AlgebraicGeometry.derived_lower_truncation_unit_bridge",
+  "statement": "theorem derived_lower_truncation_unit_bridge\n    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]\n    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]\n    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n    (I : CochainComplex C ℤ) (n : ℤ) :\n    let J := (F.mapHomologicalComplex (.up ℤ)).obj I\n    let H := DerivedCategory.homologyFunctor D n\n    let e := ((HomotopyCategory.homologyFunctorFactors D (.up ℤ) n).app J).symm ≪≫\n      ((DerivedCategory.homologyFunctorFactorsh D n).app\n        ((HomotopyCategory.quotient D (.up ℤ)).obj J)).symm\n    let U := F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj I)\n    let q := F.rightDerivedFunctor.map\n      ((DerivedCategory.quotientCompQhIso C).hom.app I ≫\n        (DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj I))\n    ∃ d : ((F.mapHomologicalComplex (.up ℤ)).obj (I.truncGE n)).homology n ≅\n        H.obj (F.rightDerivedFunctor.obj\n          ((DerivedCategory.TStructure.t.truncGE n).obj (DerivedCategory.Q.obj I))),\n      e.hom ≫ H.map U ≫ H.map q =\n        HomologicalComplex.homologyMap\n          ((F.mapHomologicalComplex (.up ℤ)).map (I.πTruncGE n)) n ≫ d.hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T111847-L-3051090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T111847-L-3051090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
