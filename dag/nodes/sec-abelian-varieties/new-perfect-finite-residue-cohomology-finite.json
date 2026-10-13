@@ -15,20 +15,33 @@
  },
  "proof": [
   {
-   "text": "Proof: Choose V, P and the given derived isomorphism from hlocal. The residue-point\nmorphism factors through V, so restriction followed by derived pullback identifies the\nfibre of E with the derived pullback of Q(P). Each term of P is a finite-free retract,\nhence flat; its boundedness makes P K-flat. Consequently ordinary termwise pullback\ncomputes this derived pullback. The inverse image of V is the whole one-point spectrum\nof the residue field. Pullback carries the finite-free retract maps to splitting maps\nof the same rank. Evaluation on the whole spectrum is exact: sheaves of modules there\nare modules over its global ring. Transport along GammaSpecIso is also exact. Thus\nderivedFiberCohomology is isomorphic to homology of the resulting complex of\nresidue-field vector spaces. Every term is a retract of a finite-dimensional vector space, so is finite-dimensional.\nThe cycles in degree i form a subspace of that term and the boundaries form a subspace\nof the cycles. The quotient of cycles by boundaries is finite-dimensional; transfer\nthis property across the cohomology isomorphism. This works in every degree, including\nrank-zero terms and the zero complex.",
+   "text": "Choose a complex G representing E using essential surjectivity of DerivedCategory.Q. Apply exists_localStrictPerfect_stalk_projective_model to the given local strictly perfect representative. Obtain a bounded complex L over the stalk ring with finite-projective terms and a derived comparison with the termwise stalk of G.",
    "uses": [
-    "def-pc-perfect-complex"
+    "lem-sc-local-strict-perfect-stalk-projective-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "Finite projective modules over the local stalk ring are free (Mathlib Module.free_of_flat_of_isLocalRing). The upper bound makes L strictly bounded above. Apply nonempty_stalkFree_residueCohomology_linearEquiv to identify each derived residue cohomology vector space with the homology of the termwise residue extension of L.",
+   "uses": [
+    "lem-sc-stalk-free-residue-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module.Finite.base_change makes every residue tensor term finite-dimensional. For K equal to that residue extension, use (K.sc i).moduleCatHomologyIso to identify its homology with the quotient of the kernel of its outgoing differential by the image of its incoming differential into that kernel. The kernel is finite-dimensional as a subspace of K.X i, and its quotient is finite-dimensional by the Mathlib instances. Transfer finiteness first along moduleCatHomologyIso and then along the residue-cohomology linear equivalence using Module.Finite.equiv. No lower bound or rank positivity is needed in this calculation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex"
+  "lem-sc-local-strict-perfect-stalk-projective-model",
+  "lem-sc-stalk-free-residue-cohomology-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCD"
+  "place": "Tag 0BCD, fibre finiteness paragraph; B3 uses the existing stalk-model and residue-comparison interfaces, with Mathlib tensor and subquotient finiteness"
  },
  "mathlib_searches": [
   {
@@ -100,10 +113,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T015552-L-3019655",
-  "kind": "interface",
+  "landing": "20261013T054210-L-441041",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
