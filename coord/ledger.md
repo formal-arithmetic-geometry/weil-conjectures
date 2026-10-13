@@ -13586,9 +13586,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:11 L: merged deliver/H3/Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenRestrictionNormalization (stage 3; reviewer PASS; first push; landing 20261013T211106-L-392735 (interface); batch 20261013T211049; modules 1; new nodes 0; change records: coord/changes/restriction-unit-normalization.md)
 - 21:11 L: merged deliver/H3/Sheaf.AlgebraicGeometry.SelfTorNestedAffineCoordinates (stage 3; reviewer PASS; first push; landing 20261013T211106-L-393021 (interface); batch 20261013T211049; modules 2; new nodes 1)
 - 21:11 L: merged deliver/H4/Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoordinateData (stage 3; reviewer PASS; first push; landing 20261013T211107-L-393319 (interface); batch 20261013T211049; modules 2; new nodes 1)
-- 21:11 L: merged deliver/J4/Sheaf.Paper.CechCupResolutionTotalPairing (stage 3; reviewer PASS; after a return; landing 20261013T211108-L-393550 (interface); batch 20261013T211049; modules 2; new nodes 2; change records: coord/changes/CechCupResolutionTotalPairing-new-module.md)
 - 21:11 L: merged deliver/M1/Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare (stage 3; reviewer PASS; after a return; landing 20261013T211109-L-393708 (interface); batch 20261013T211049; modules 3; new nodes 2; change records: coord/changes/tensor-pullback-stalk-square.md)
-- 21:11 L: merged deliver/M2/Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality (stage 3; reviewer PASS; first push; landing 20261013T211109-L-393940 (interface); batch 20261013T211049; modules 5; new nodes 4)
 - 21:11 L: merged deliver/P2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; after a return; landing 20261013T211110-L-394062 (interface); batch 20261013T211049; modules 1; new nodes 0; change records: coord/changes/derivedCategory_towerLimit_cone.md)
 - 21:11 L: merged deliver/R1/Sheaf.AlgebraicGeometry.AffineChartOrdinaryMapDescent (stage 3; reviewer PASS; first push; landing 20261013T211111-L-394181 (interface); batch 20261013T211049; modules 2; new nodes 1)
 - 21:11 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono (stage 3; reviewer PASS; first push; landing 20261013T211111-L-394340 (interface); batch 20261013T211049; modules 2; new nodes 1)
@@ -13624,3 +13622,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:34 L: returned deliver/J4/Sheaf.AlgebraicGeometry.OpenPinnedTargetCounitTriangle (reviewer RETURN: (reviewer X-b30b4, head b30b4694e) H10: lean/Sheaf/AlgebraicGeometry/OpenPinnedTargetCounitTriangle.lean timed out after)
 - 21:38 L: returned deliver/M1/Sheaf.Topology.RingedModuleSkyscraper (reviewer RETURN: (reviewer X-17928, head 17928f3ec) A/G1 (review point 2): restore every unrecorded change in lean/Sheaf/Topology/RingedM)
 - 21:39 L: returned deliver/D2/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality (reviewer RETURN: (reviewer X-b71dc, head b71dce185) 1. E5/G1, brief §4: In lean/Sheaf/AlgebraicGeometry/DerivedPullbackKFlatCounitShiftDa)
+
+- 05:40 L: batch 20261013T211049 dependency take-out
