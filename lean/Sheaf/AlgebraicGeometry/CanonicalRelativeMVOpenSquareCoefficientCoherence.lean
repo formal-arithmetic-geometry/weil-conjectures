@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+import Sheaf.AlgebraicGeometry.CoefficientSquareCoordinateChange
 
 /-! Canonical coefficient coherence for a nested open square.
 Source: Stacks Project, Tag 0D5S.
@@ -15,6 +16,14 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem comparison_inv_map_id
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) (e : F ⋙ G ≅ H) (N : C) :
+    e.inv.app N ≫ G.map (𝟙 (F.obj N)) = e.inv.app N := by
+  rw [CategoryTheory.Functor.map_id]
+  exact CategoryTheory.Category.comp_id _
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical coefficient coherence with all comparison maps expanded.
 Source: Stacks Project, Tag 0D5S.
 (blueprint: new-canonical-relative-mv-open-square-coefficient-coherence)
@@ -51,6 +60,21 @@ theorem canonical_relativeMV_open_square_coefficient_coherence
         (pullback.fst g' U.ι) ≪≫
         eqToIso (congrArg (fun k ↦ derivedPullback k)
           (pullback.lift_fst _ _ _))).hom.app ((derivedPullback g').obj N) := by
-  sorry
+  classical
+  have h := coefficient_square_coordinate_change g' W.ι U.ι
+    (pullback.snd g' W.ι) (pullback.fst g' W.ι)
+    (pullback.snd g' U.ι) (pullback.fst g' U.ι)
+    (X.homOfLE i) (relativeMVOpenLift g' i)
+    (Scheme.homOfLE_ι X i) (pullback.lift_snd _ _ _) (pullback.lift_fst _ _ _)
+    (pullback.condition (f := g') (g := U.ι)).symm
+    (pullback.condition (f := g') (g := W.ι)).symm
+    N ((derivedPullback g').obj N) (𝟙 _)
+  generalize hc : @Classical.choose _ _ (Classical.choose_spec
+    (Classical.choose_spec (Classical.choose_spec
+      exists_derivedPullbackComposition))) = c at h
+  dsimp only at h
+  simp only [comparison_inv_map_id] at h
+  simpa only [relativeMVComp, hc, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    eqToIso.hom, eqToHom_app, CategoryTheory.Category.assoc] using h
 
 end AlgebraicGeometry
