@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-power-series-punctured-cover-sections-comparison",
+ "kind": "statement",
+ "title": "Sections of a finite étale cover of the punctured power-series open recover its formal sections",
+ "statement": "Let $A$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] of depth at least two [def-weil-pbc-depth], let $d>0$, and put $B=A[[x_1,\\ldots,x_d]]$ [def-weil-pbc-multivariate-power-series], $f:B\\to A$ the constant-coefficient map and $I=\\ker(f)$. Let $V\\subseteq\\operatorname{Spec}(B)$ be open such that the inverse image under $\\operatorname{Spec}(f)$ is $\\operatorname{Spec}(A)\\setminus\\{\\mathfrak m_A\\}$ [def-weil-pbc-scheme-conventions]. Let $P$ be a finite étale cover of $V$ [def-weil-pbc-finite-etale-category]. Put $P_n=P\\times_{\\operatorname{Spec}(B)}\\operatorname{Spec}(B/I^{n+1})$ with projections $p_n:P_n\\to P$ and transitions $t_n:P_n\\to P_{n+1}$. For every family $s_n\\in\\Gamma(P_n,\\mathcal O_{P_n})$ satisfying $t_n^\\sharp(s_{n+1})=s_n$, there is a unique $a\\in\\Gamma(P,\\mathcal O_P)$ with $p_n^\\sharp(a)=s_n$ for every $n$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, structure-sheaf comparison; Tag 0EKP, implication (1) to (3), applied to the finite locally free direct image of O_P."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "Set U = Spec(A) minus the closed point. Hartogs at depth two gives Gamma(U,O_U)=A. Quotients B/I^(n+1) are finite free over A on monomials of degree at most n. Pushing the structure sheaves of the thickenings to U therefore identifies their inverse limit of sections with B.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction Gamma(V,O_V) to the formal limit is injective: Krull intersection detects zero germs along U. The associated primes of B are pB with p associated in A, by the flat local depth formula. Positive depth excludes the maximal ideal of A. Each pB specializes to pB+I on U, so formal vanishing detects every associated point of V and thus the entire section. The composite B -> Gamma(V,O_V) -> B is the canonical isomorphism, so the structure-sheaf comparison is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let E be the finite locally free direct image of O_P on the Noetherian quasi-affine V. Finite global generators of its dual give a universally injective embedding E -> O^r with locally free cokernel. Embed the cokernel in O^s by the same construction. The resulting universally exact sequence 0 -> E -> O^r -> O^s remains exact on all thickenings. Sections and inverse limits preserve its kernel. The comparison for O therefore implies the comparison for E (Tag 0EKP). Finite affine base change identifies E on the n-th thickening with the direct image of O_(P_n). This gives existence and uniqueness of a section lifting each compatible family.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "S2",
+  "document": "Stacks Project",
+  "place": "Tags 0EY9 and 0EKP; the direct-image section comparison, without the internal-Hom or algebra-map step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a finite locally free sheaf on a quasi affine scheme equal the inverse limit on infinitesimal thickenings when the structure sheaf comparison is an isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion is fully faithful for finite locally free modules on punctured power series schemes and compatible formal morphisms algebraize",
+   "results": "8 hits: fully faithful forgetful functors for sheaves/presheaves, affine Spec, and formally smooth algebra lifts. No section comparison for infinitesimal thickenings.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.pushforward",
+   "results": "No completion comparison located.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Ss]ection|[Ss]ection.*completion|isPullback_toSpecΓ_toSpecΓ",
+   "results": "11 hits. Mathlib AlgebraicGeometry.QuasiAffine provides isPullback_toSpecΓ_toSpecΓ, used for geometric descent in the caller, but no section comparison. Searches of Sheaf and WeilConjectures for 0EKP and formal section comparisons found only the caller and its ancestors, not this object-level result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match for section comparison; caller descent uses Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalHomAlgebraization",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: Tag 0EY9 structure-sheaf comparison and Tag 0EKP finite locally free section comparison; step 1 of lem-sbc-power-series-punctured-formal-hom-algebraization",
+   "via": [
+    "lem-sbc-power-series-punctured-section-surjective",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedCoverSectionsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedCoverSectionsComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_powerSeries_punctured_cover_sections_comparison",
+  "statement": "theorem finiteEtale_powerSeries_punctured_cover_sections_comparison\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ) (hd : 0 < d)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (P : V.toScheme.FiniteEtale)\n    (s : ∀ n : ℕ, Γ(FiniteEtale.Adic.cover\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n, ⊤))\n    (hs : ∀ n, (FiniteEtale.Adic.coverTransition\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n).appTop\n        (s (n + 1)) = s n) :\n    ∃! a : Γ(P.obj.left, ⊤), ∀ n, (FiniteEtale.Adic.coverMap\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n).appTop a = s n",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T142903-L-500326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T142903-L-500326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
