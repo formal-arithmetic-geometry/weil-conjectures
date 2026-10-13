@@ -12,17 +12,27 @@
  ],
  "proof": [
   {
-   "text": "Proof: Identify the base stalk at q(w) with R localized at the contraction of w.\nTake f0 to be the image of f; its maximal-ideal membership follows from hf.\nThe polynomial ring over this base localization is the localization of R[T]\nat the constant polynomials coming from the complement of that contraction.\nLocalization commutes with the quotient by the principal ideal (T^d-f), giving\nthe concrete AdjoinRoot quotient over the base stalk. The prime w extends to a\nprime P of this quotient, whose contraction is the maximal ideal of the base.\nSince d is positive, the polynomial is monic and this quotient is integral over\nthe base. The prime P is therefore maximal. Transitivity of localization\nidentifies the localization at w of the original quotient with D_P. Compose\nwith the standard spectrum-stalk identification to get theta. Both quotient\nand localization identifications respect the coefficient maps, so theta\ncomposed with the structural stalk map is the displayed canonical map.\nThis construction uses no etale hypothesis, product decomposition or flat map.",
+   "text": "Set R0 equal to the actual base stalk and f0 equal to the image of f under its coefficient map. IsLocalization.AtPrime.to_map_mem_maximal_iff proves the required membership. The proved private helper adjoinRoot_isLocalization_map combines Polynomial.isLocalization with IsLocalization.of_surjective and the principal-ideal kernel of AdjoinRoot.mk. Thus D is the localization of H at the images of the complement of the contracted prime.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Construct P explicitly as the image of the prime w in D. Its disjointness from the coefficient denominators gives primality and contraction back to w by IsLocalization.isPrime_of_isPrime_disjoint and under_map_of_isPrime_disjoint. The injectivity of IsLocalization.orderEmbedding on the base localization identifies the contraction of P to R0 with its maximal ideal. The positive exponent makes the root polynomial monic; Polynomial.Monic.finite_adjoinRoot gives integrality. Ideal.isMaximal_of_isIntegral_of_isMaximal_comap then proves that P is maximal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply IsLocalization.isLocalization_isLocalization_atPrime_isLocalization to identify D_P as a localization of H at w. The spectrum stalk is the same localization, so IsLocalization.algEquiv constructs theta. Compare the coefficient maps using IsLocalization.ringHom_ext on the base localization. The proved private helper spec_stalkMap_toStalk is Mathlib stalkMap_toStalk_apply transported along hq; together with AlgEquiv.commutes and AdjoinRoot.map_of it gives the displayed structural-map equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "kind": "from-document",
-  "by": "A4",
+  "by": "N2",
   "document": "Stacks Project",
-  "place": "Tags 0EYH and 0EYI; localization argument written explicitly in the docstring, and Lean assembly by A4"
+  "place": "Tags 0EYH and 0EYI, root-chart localization argument; Lean assembly from Mathlib polynomial localization, quotient localization, prime correspondence, integrality, and affine stalk compatibility."
  },
  "mathlib_searches": [
   {
@@ -114,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T113335-L-3180897",
-  "kind": "interface",
+  "landing": "20261013T122728-L-3632897",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
