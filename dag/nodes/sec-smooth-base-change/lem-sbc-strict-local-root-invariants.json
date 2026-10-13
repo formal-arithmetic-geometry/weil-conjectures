@@ -13,27 +13,36 @@
  "proof": [
   {
    "text": "Hensel lift the simple residue roots of X^n-1. All n roots lie in H, have pairwise unit differences, and form a cyclic group of order n. For K of order r, its index e is positive and r*e=n; hence e divides n.",
-   "uses": [],
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity"
+   ],
    "elementary": false
   },
   {
    "text": "The monic power basis of C is 1,t,...,t^(n-1). A generator zeta of K multiplies t^i by zeta^i. For r not dividing i, zeta^i-1 has nonzero residue and is a unit. Comparison of coefficients shows that the fixed subalgebra has basis 1,t^r,...,t^((e-1)*r).",
-   "uses": [],
+   "uses": [
+    "lem-sbc-root-power-map-invariants"
+   ],
    "elementary": false
   },
   {
    "text": "Evaluation s at t^r is well-defined since (t^r)^e=h and its image is fixed. It maps the monic basis of H[s]/(s^e-h) bijectively onto the displayed invariant basis. Thus it is an H-algebra isomorphism; invert it to obtain the orientation asserted. For n=1, K is trivial and this is the identity on the degree-one root algebra.",
-   "uses": [],
+   "uses": [
+    "lem-sbc-root-power-map-invariants"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sbc-root-power-map-invariants"
+ ],
  "proof_origin": {
   "by": "agent",
   "group": "D4",
   "document": "Stacks Project",
   "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation",
-  "note": "Explicit specialization of the intermediate-root argument; details in the Lean docstring."
+  "note": "W2 proves Hensel lifting in a new lemma and assembles the equivalence from an explicit power map. Only the general monic-basis image calculation is left unproved."
  },
  "mathlib_searches": [
   {
@@ -107,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T152017-L-953546",
+  "landing": "20261013T155946-L-1307258",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, standard tame root covers: the sentence introducing the root-of-unity and coefficient calculations.",
+   "via": [
+    "lem-sbc-strict-local-root-invariants",
+    "lem-sbc-root-split-strict-local-orbits",
+    "lem-sbc-root-split-cover-ind-etale-charts",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model",
+    "lem-sbc-root-split-cover-cyclic-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "proof": [
+  {
+   "text": "Put $r=|K|$. Lagrange gives $re=n$ with $r,e>0$. The monic quotient relations give $H$-bases $t^i$ for $0\\le i<n$ and $s^j$ for $0\\le j<e$. The map takes $s^j$ to $t^{rj}$, with distinct exponents below $n$, so comparison of coefficients proves injectivity.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose a generator $\\zeta$ of $K$ of order $r$. It acts on $t^i$ by $\\zeta^i t^i$. For $r\\nmid i$, $\\zeta^i$ is nonidentity and $\\zeta^i-1$ is a unit; invariance forces the coefficient at $i$ to vanish. For $r\\mid i$, every element of $K$ fixes $t^i$, since its rth power is one.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The surviving exponents are exactly $rj$ for $j<e$. Every fixed element is the image of the sum of these coefficients times $s^j$, and every such image is fixed. This proves the image characterization.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation"
+ },
+ "mathlib_match": null,
+ "id": "lem-sbc-root-power-map-invariants",
+ "title": "Power-map image equals fixed elements in a root algebra",
+ "statement": "Let $H$ be a commutative ring, $h\\in H$, and $n>0$. Put $G=\\{\\zeta\\in H^\\times:\\zeta^n=1\\}$. Assume $G$ is finite cyclic of cardinality $n$, and $\\zeta-1$ is a unit for every nonidentity $\\zeta\\in G$. Let $K\\subseteq G$ be a subgroup and $e=[G:K]$. Put $C=H[t]/(t^n-h)$ and $D=H[s]/(s^e-h)$, with $t,s$ the quotient classes of the polynomial variables. Given $H$-algebra homomorphisms $\\rho_\\zeta:C\\to C$ for $\\zeta\\in G$ with $\\rho_\\zeta(t)=\\zeta t$, and an $H$-algebra homomorphism $\\phi:D\\to C$ with $\\phi(s)=t^{|K|}$, the map $\\phi$ is injective and, for each $x\\in C$, $x$ is fixed by every $\\rho_\\zeta$ for $\\zeta\\in K$ if and only if $x$ lies in the image of $\\phi$.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootPowerMapInvariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootPowerMapInvariants.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_power_map_invariants",
+  "statement": "theorem root_power_map_invariants\n    (H : Type u) [CommRing H] (h : H) (n : ℕ) (hn : 0 < n)\n    [Finite (rootsOfUnity n H)] [IsCyclic (rootsOfUnity n H)]\n    (hcard : Nat.card (rootsOfUnity n H) = n)\n    (hsep : ∀ ζ : rootsOfUnity n H, ζ ≠ 1 → IsUnit (((ζ : Hˣ) : H) - 1))\n    (K : Subgroup (rootsOfUnity n H))\n    (ρ : rootsOfUnity n H →\n      (AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h) →ₐ[H]\n        AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)))\n    (hρ : ∀ ζ, ρ ζ (AdjoinRoot.root\n      ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)) =\n        algebraMap H _ ((ζ : Hˣ) : H) * AdjoinRoot.root _)\n    (φ : AdjoinRoot ((Polynomial.X : Polynomial H) ^ K.index - Polynomial.C h) →ₐ[H]\n      AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h))\n    (hφ : φ (AdjoinRoot.root _) =\n      AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h) ^ Nat.card K) :\n    Function.Injective φ ∧ ∀ x, (∀ ζ : K, ρ ζ.val x = x) ↔ x ∈ Set.range φ",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Image of power map between monic root algebras equals fixed elements under cyclic root rotations",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Power basis invariant elements under rotations root algebra coefficients vanish",
+   "results": "PowerBasis.constr_pow_gen and related power-basis lemmas; no exact invariant theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftAlgHom_root|powerBasisAux|powerBasis.*Monic",
+   "results": "AdjoinRoot.liftAlgHom_root and monic power-basis declarations",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation",
+  "note": "Detailed monic-basis and Hensel calculation expanding the cited intermediate-field argument. The statement is not asserted verbatim in the source."
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T155946-L-1307258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T155946-L-1307258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

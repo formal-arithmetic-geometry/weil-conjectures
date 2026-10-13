@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, standard tame root covers: the sentence introducing the root-of-unity and coefficient calculations.",
+   "via": [
+    "lem-sbc-strict-local-root-invariants",
+    "lem-sbc-root-split-strict-local-orbits",
+    "lem-sbc-root-split-cover-ind-etale-charts",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model",
+    "lem-sbc-root-split-cover-cyclic-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "proof": [
+  {
+   "text": "Reduction to the residue field defines a homomorphism of root groups. A root reducing to 1 has a geometric sum with residue n, hence a unit. Multiply it by the difference from 1 to get zero, and cancel the unit; the kernel is trivial.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Lift each residue root by the simple-root condition HenselianLocalRing.TFAE, using the derivative n times the root to the (n-1)th power. The resulting element has nth power 1, so construct its inverse as the (n-1)th power. This proves surjectivity without choosing any algebra data.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the equivalence of root groups to transfer cardinality n from HasEnoughRootsOfUnity.natCard_rootsOfUnity. Transfer cyclicity along the injective homomorphism. For a nonidentity root, the injective reduction cannot be 1, so its difference from 1 has nonzero residue and is a unit.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation"
+ },
+ "mathlib_match": null,
+ "id": "lem-sbc-strict-local-roots-of-unity",
+ "title": "Roots of unity in a strict local ring",
+ "statement": "Let $H$ be a strictly henselian local commutative ring (henselian local in [def-weil-pbc-henselian-terminology] with separably closed residue field), and let $n>0$ have $n$ a unit in $H$. Put $\\mu_n(H)=\\{\\zeta\\in H^\\times:\\zeta^n=1\\}$. Then $\\mu_n(H)$ has cardinality $n$ and is cyclic. Moreover, for every nonidentity $\\zeta\\in\\mu_n(H)$ the element $\\zeta-1$ is a unit in $H$.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictLocalRootsOfUnity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strict_local_roots_of_unity",
+  "statement": "theorem strict_local_roots_of_unity\n    (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]\n    (n : ℕ) (hn : 0 < n ∧ IsUnit (n : H)) :\n    Nat.card (rootsOfUnity n H) = n ∧ IsCyclic (rootsOfUnity n H) ∧\n      ∀ ζ : rootsOfUnity n H, ζ ≠ 1 → IsUnit (((ζ : Hˣ) : H) - 1)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strictly henselian local ring roots of unity cyclic cardinality",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly henselian ring reduction roots of unity bijective cyclic finite",
+   "results": "rootsOfUnity.isCyclic and related roots results; no strict-henselian lifting theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "is_henselian|rootsOfUnity.isCyclic|card_rootsOfUnity",
+   "results": "Mathlib Henselian and RootsOfUnity declarations, no strict-henselian lifting theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation",
+  "note": "Detailed monic-basis and Hensel calculation expanding the cited intermediate-field argument. The statement is not asserted verbatim in the source."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T155946-L-1307258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T155946-L-1307258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
