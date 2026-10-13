@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.Algebra.Homology.HomComplexProjections
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Naturality of the single-source internal Hom comparison
 
@@ -19,7 +21,32 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
-set_option backward.isDefEq.respectTransparency true in
+private noncomputable def soleFactorIso {B : Type u} [Category B]
+    [CategoryTheory.Limits.HasZeroMorphisms B]
+    {f : ℤ → B} (c : CategoryTheory.Limits.Fan f) (hc : CategoryTheory.Limits.IsLimit c) (i : ℤ)
+    (hz : ∀ j, j ≠ i → CategoryTheory.Limits.IsZero (f j)) : c.pt ≅ f i where
+  hom := c.proj i
+  inv := hc.lift (CategoryTheory.Limits.Fan.mk (f i)
+    (fun j ↦ if h : j = i then eqToHom (congrArg f h.symm) else 0))
+  hom_inv_id := by
+    apply hc.hom_ext
+    rintro ⟨j⟩
+    rw [Category.assoc, hc.fac]
+    by_cases h : j = i
+    · subst j
+      simp
+      rfl
+    · exact (hz j h).eq_of_tgt _ _
+  inv_hom_id := by
+    change hc.lift (CategoryTheory.Limits.Fan.mk (f i)
+      (fun j ↦ if h : j = i then eqToHom (congrArg f h.symm) else 0)) ≫
+      c.π.app (Discrete.mk i) = 𝟙 (f i)
+    rw [hc.fac]
+    simp
+
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- The dependent product projections and sheaf functors need extra elaboration steps.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The single-source Hom comparison is natural in both the sheaf and the complex.
 
@@ -53,6 +80,71 @@ theorem homComplex_single_precomposition_iso (Y : Scheme.{u})
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op).app I ≫ bQ.hom.app I =
         bP.hom.app I ≫
           (NatTrans.mapHomologicalComplex
-            ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).map k.op) (.up ℤ)).app I := by sorry
+            ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).map k.op) (.up ℤ)).app I := by
+  classical
+  let F := homComplexFunctor.{u, u, u, u} (R := Y.sheaf)
+  let π := Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))
+  have hh := Classical.choose_spec (homComplex_projections_exists.{u, u, u, u} (R := Y.sheaf))
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let S := CochainComplex.singleFunctor A 0
+  let T (P : A) := (SheafOfModules.homFunctor Y.sheaf).obj (op P)
+  let proj (P : A) (K : CochainComplex A ℤ) (n : ℤ) :=
+    π (S.obj P) K n 0 n (zero_add n)
+  have hp (P : A) (K : CochainComplex A ℤ) (n : ℤ) : IsIso (proj P K n) := by
+    have hz (p : ℤ) (hp : p ≠ 0) :
+        CategoryTheory.Limits.IsZero (SheafOfModules.homObj (R := Y.sheaf)
+          ((S.obj P).X p) (K.X (p + n))) := by
+      exact ((SheafOfModules.homFunctor Y.sheaf).flip.obj (K.X (p + n))).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 P p hp).op
+    have hpi (q : ℤ) (hq : 0 + n = q) : IsIso (π (S.obj P) K n 0 q hq) := by
+      subst q
+      let c := CategoryTheory.Limits.Fan.mk (((F.obj (op (S.obj P))).obj K).X n)
+        (fun p : ℤ ↦ π (S.obj P) K n p (p + n) rfl)
+      have hc : CategoryTheory.Limits.IsLimit c := (hh.1 (S.obj P) K n).some
+      exact (soleFactorIso c hc 0 hz).isIso_hom
+    exact hpi n (zero_add n)
+  have hd (P : A) [(T P).Additive] (K : CochainComplex A ℤ)
+      (n m : ℤ) (hnm : n + 1 = m) :
+      proj P K n ≫ (T P).map (K.d n m) =
+        ((F.obj (op (S.obj P))).obj K).d n m ≫
+          proj P K m := by
+    have h := hh.2.1 (S.obj P) K n m 0 m n 1 hnm (zero_add m) (zero_add n)
+      ((add_comm 1 n).trans hnm)
+    have hz : SheafOfModules.homObjMap (R := Y.sheaf)
+        ((S.obj P).d 0 1) (𝟙 (K.X m)) = 0 := by
+      change ((SheafOfModules.homFunctor Y.sheaf).flip.obj (K.X m)).map
+        ((S.obj P).d 0 1).op = 0
+      rw [show (S.obj P).d 0 1 = 0 from rfl, CategoryTheory.Limits.op_zero]
+      exact Functor.map_zero _ _ _
+    simp only [hz, CategoryTheory.Limits.comp_zero, smul_zero, sub_zero] at h
+    exact h.symm
+  let ec (P : A) [(T P).Additive] (K : CochainComplex A ℤ) :
+      (F.obj (op (S.obj P))).obj K ≅
+        ((T P).mapHomologicalComplex (.up ℤ)).obj K :=
+    HomologicalComplex.Hom.isoOfComponents (fun n ↦ asIso (proj P K n)) (hd P K)
+  have hn (P : A) [(T P).Additive] {K L : CochainComplex A ℤ} (f : K ⟶ L) :
+      (F.obj (op (S.obj P))).map f ≫ (ec P L).hom =
+        (ec P K).hom ≫ ((T P).mapHomologicalComplex (.up ℤ)).map f := by
+    apply HomologicalComplex.hom_ext
+    intro n
+    have h := hh.2.2 (S.obj P) (S.obj P) K L (𝟙 _) f n 0 n (zero_add n)
+    change ((F.map (𝟙 (op (S.obj P)))).app K ≫
+      (F.obj (op (S.obj P))).map f).f n ≫ proj P L n =
+        proj P K n ≫ (T P).map (f.f n) at h
+    rw [F.map_id] at h
+    simp only [NatTrans.id_app, Category.id_comp] at h
+    exact h
+  let b (P : A) [(T P).Additive] := NatIso.ofComponents (ec P) (fun f ↦ hn P f)
+  refine ⟨b P, b Q, ?_⟩
+  intro I
+  apply HomologicalComplex.hom_ext
+  intro n
+  have h := hh.2.2 (S.obj P) (S.obj Q) I I (S.map k) (𝟙 I) n 0 n (zero_add n)
+  change ((F.map (S.map k).op).app I ≫ (F.obj (op (S.obj Q))).map (𝟙 I)).f n ≫
+    proj Q I n = proj P I n ≫ SheafOfModules.homObjMap (R := Y.sheaf)
+      ((S.map k).f 0) (𝟙 (I.X n)) at h
+  rw [(F.obj (op (S.obj Q))).map_id] at h
+  simp only [Category.comp_id] at h
+  exact h
 
 end AlgebraicGeometry

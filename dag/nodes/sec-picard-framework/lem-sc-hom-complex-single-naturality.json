@@ -14,20 +14,48 @@
  },
  "proof": [
   {
-   "text": "For each sheaf P and complex I, project the product defining Hom(P[0],I)\nto its degree-zero source factor. All other factors are zero, because P[0]^p\nis zero for p different from zero. The inverse is the product lift with this\ncomponent and zero elsewhere. The product universal property gives both inverse\nidentities. The differential formula reduces to postcomposition by d_I, as the\nsource differential vanishes. Naturality in I follows from the postcomposition\nformula for the product projections. For k:Q → P, the precomposition formula for\nthose same projections identifies Hom(k[0],I) with degreewise internal Hom(k,I).\nThese arguments apply to unbounded I, zero P or Q, and the empty scheme.",
+   "text": "Use homComplex_projections_exists to obtain the product-limit projections of the chosen Hom-complex bifunctor, together with its differential and map formulas. Fix the degree-zero projection for every sheaf P, coefficient complex K, and degree n.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-sc-hom-complex-projections"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For source degree p different from zero, the single complex has a zero object. The contravariant internal Hom functor preserves zero morphisms, so its image is zero. Construct the inverse to the degree-zero projection using the limit lift with identity in degree zero and zero elsewhere. The limit hom-ext principle and the zero-target uniqueness principle prove the two inverse identities. Thus every chosen degree-zero projection is an isomorphism.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the differential-projection formula to source index zero and adjacent coefficient degrees. The source differential is zero, and internal Hom maps its precomposition to zero, leaving postcomposition by the coefficient differential. The resulting degreewise isomorphisms therefore assemble using HomologicalComplex.Hom.isoOfComponents.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the map-projection formula to the identity source map and an arbitrary coefficient chain map. The bifunctor identity law removes the identity source action; the formula is exactly naturality of the assembled chain isomorphisms. Apply NatIso.ofComponents to obtain bP and bQ.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finally specialize the map-projection formula to the single-complex map of k and the identity coefficient map. The latter action disappears by the functor identity law. In source degree zero the single-complex map is k, so the formula is precisely compatibility with degreewise precomposition. HomologicalComplex.hom_ext proves the claimed chain-map equality. All constructions apply to unbounded coefficient complexes, zero sheaves, and the empty scheme.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex"
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 0A8X, Hom-complex product and functoriality formulas"
+  "place": "Section 0A8X, Hom-complex product and functoriality formulas; implemented by S4 using the specified projections and a sole-factor product isomorphism."
  },
  "mathlib_searches": [
   {
@@ -106,13 +134,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T225310-L-1805579",
-  "kind": "interface",
+  "landing": "20261013T072406-L-1125049",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
