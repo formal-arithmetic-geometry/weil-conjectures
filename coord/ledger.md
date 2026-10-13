@@ -13503,3 +13503,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:18 L: merged deliver/M4/Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison (stage 3; reviewer PASS; first push; landing 20261013T201802-L-3974390 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:18 L: merged deliver/M4/Sheaf.Paper.GlobalSectionsLaxMonoidalData (stage 3; reviewer PASS; first push; landing 20261013T201803-L-3974593 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:18 L: merged deliver/M4/Sheaf.Paper.GlobalTensorPullbackMatesIsIso (stage 3; reviewer PASS; first push; landing 20261013T201803-L-3974763 (interface); batch 20261013T201736; modules 2; new nodes 1)
+- 20:18 L: merged deliver/M4/Sheaf.Paper.PointInverseEvaluationKFlat (stage 3; reviewer PASS; first push; landing 20261013T201804-L-3974954 (proof); batch 20261013T201736; modules 1; new nodes 0)
