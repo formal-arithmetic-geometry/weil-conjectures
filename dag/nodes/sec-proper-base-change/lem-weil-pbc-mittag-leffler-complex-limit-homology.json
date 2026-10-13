@@ -31,27 +31,27 @@
  ],
  "proof": [
   {
-   "text": "Notation and the three short exact sequences of systems. For $j\\in\\{-2,-1,0\\}$ and $i\\ge1$ put $Z^j_i=\\ker(d^j_i)\\subseteq A^j_i$ and, for $j\\in\\{-1,0\\}$, $I^j_i=\\operatorname{im}(d^{j-1}_i)\\subseteq A^j_i$; since $d^jd^{j-1}=0$, $I^j_i\\subseteq Z^j_i$ and $H^j_i=Z^j_i/I^j_i$. The transition maps $A^j_{i+1}\\to A^j_i$ commute with the differentials, so they map $Z^j_{i+1}$ into $Z^j_i$ and $I^j_{i+1}$ into $I^j_i$; thus $(Z^j_i)_i$, $(I^j_i)_i$ are inverse systems [def-weil-inverse-system], the inclusions $(I^j_i)\\to(Z^j_i)\\to(A^j_i)$ and the maps $d^{j-1}_i:A^{j-1}_i\\to I^j_i$ (corestriction) and $Z^j_i\\to H^j_i$ are morphisms of inverse systems, and the induced transition maps of $(H^j_i)$ are those of the statement. Levelwise exactness gives the short exact sequences of inverse systems of abelian groups (exact at every $i$): (a) $0\\to(Z^{-2}_i)\\to(A^{-2}_i)\\xrightarrow{d^{-2}}(I^{-1}_i)\\to0$; (b) $0\\to(Z^{-1}_i)\\to(A^{-1}_i)\\xrightarrow{d^{-1}}(I^0_i)\\to0$; (c) $0\\to(I^{-1}_i)\\to(Z^{-1}_i)\\to(H^{-1}_i)\\to0$; (d) $0\\to(I^0_i)\\to(Z^0_i)\\to(H^0_i)\\to0$.",
+   "text": "For the tower $K$, put $A^j=K\\mathbin{\\circ}\\mathrm{eval}_j$, $Z^j=K\\mathbin{\\circ}\\mathrm{cycles}_j$ and $H^j=K\\mathbin{\\circ}\\mathrm{homology}_j$ (Lean indices $0,1,2,3$ represent degrees $-2,-1,0,1$). The natural transformation $p_j:Z^j\\to H^j$ is termwise epic. Construct $B^j=\\ker p_j$ in the functor category, with inclusion $b_j:B^j\\to Z^j$, and $q_j:A^{j-1}\\to B^j$ by lifting the differential-to-cycles map. At each index that differential-to-cycles map has cokernel $p_j$ by Mathlib homologyIsCokernel. Termwise exactness and injectivity of $b_j$ show $q_j$ is epic. Thus $B^j$ is the boundary system without choosing an arbitrary witness. The kernel sequence of $p_j$ is termwise short exact. Also $0\\to Z^{j-1}\\to A^{j-1}\\xrightarrow{q_j}B^j\\to0$ is termwise short exact: its kernel is the kernel of the differential because $q_jb_j$ followed by the cycles inclusion is that differential. These are cycleSequence, boundarySequence and their proved private helpers.",
    "uses": [
     "def-weil-inverse-system"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, lines 7827--7828 (definition of Z^j_i and I^j_i) and lines 7837--7861 (the exact sequences)"
+    "place": "Tag 070E, the definitions of cycles and images and the three displayed short exact sequences"
    }
   },
   {
-   "text": "Kernels commute with limits. In $A^0=\\varprojlim_iA^0_i$ the kernel of $d^0=\\varprojlim_id^0_i:A^0\\to A^1$, $(x_i)\\mapsto(d^0_i(x_i))$, is the set of compatible families $(x_i)$ with $d^0_i(x_i)=0$ for all $i$, i.e. $\\ker(d^0)=\\varprojlim_iZ^0_i$ (a compatible family of elements of the subgroups $Z^0_i$). Likewise $\\varprojlim_iI^0_i\\subseteq\\varprojlim_iZ^0_i\\subseteq A^0$ as subgroups (the maps on limits induced by the inclusions are injective, being inclusions of sets of families).",
+   "text": "Prove directly that cycles preserve the limit of $K$. Given a cone into the cycle tower, compose its legs with the cycles inclusions, lift it to the limit of the degree-$j$ terms, and use the degree-$(j+1)$ limit projections to prove that this lift is killed by the differential. Factor through cycles of the limit. Cancellation of the cycles inclusions and the universal property of the termwise limit prove factorization and uniqueness. Hence $z:\\mathrm{cycles}_j(\\lim K)\\to\\lim Z^j$ is an isomorphism (cycles_preservesLimit).",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, lines 7829--7830 ('taking kernels commutes with limits')"
+    "place": "Tag 070E, taking kernels commutes with limits"
    }
   },
   {
-   "text": "The image systems are ML. $(A^{-2}_i)$ and $(A^{-1}_i)$ are ML by hypothesis [def-weil-pbc-mittag-leffler-system]. Applying [lem-weil-pbc-mittag-leffler-limit-exact] (2) to the short exact sequences (a) and (b) of Step 1 (middle terms $(A^{-2}_i)$, $(A^{-1}_i)$), the quotient systems $(I^{-1}_i)$ and $(I^0_i)$ are ML.",
+   "text": "If $f:A\\to B$ is an epic morphism of towers and $A$ is ML, apply part (2) of [lem-weil-pbc-mittag-leffler-limit-exact] to the termwise short exact kernel sequence $0\\to\\ker f\\to A\\to B\\to0$. Thus $B$ is ML. Apply this to $q_{-1}$ and $q_0$: both boundary towers $B^{-1}$ and $B^0$ are ML by the two termwise ML hypotheses [def-weil-pbc-mittag-leffler-system]. This is the helper ml_of_epi.",
    "uses": [
     "lem-weil-pbc-mittag-leffler-limit-exact",
     "def-weil-pbc-mittag-leffler-system"
@@ -59,52 +59,50 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, lines 7831--7833 (Lemma 02N1 (2))"
+    "place": "Tag 070E, the image systems are ML as quotients, using Tag 02N1 (2)"
    }
   },
   {
-   "text": "$(Z^{-1}_i)$ is ML. In the short exact sequence (c) of Step 1, $(I^{-1}_i)$ is ML (Step 3) and $(H^{-1}_i)$ is essentially constant by hypothesis [def-weil-pbc-essentially-constant-system]. By [lem-weil-pbc-exact-sequence-ml] (the direction 'if the kernel system is ML then the middle system is ML'), $(Z^{-1}_i)$ is ML.",
+   "text": "Apply [lem-weil-pbc-exact-sequence-ml] to $0\\to B^{-1}\\to Z^{-1}\\xrightarrow{p_{-1}}H^{-1}\\to0$. Its kernel is ML by Step 3 and its quotient is essentially constant [def-weil-pbc-essentially-constant-system] by hypothesis. Therefore $Z^{-1}$ is ML (ml_middle_of_exact).",
    "uses": [
     "lem-weil-pbc-exact-sequence-ml",
-    "def-weil-pbc-essentially-constant-system",
-    "def-weil-pbc-mittag-leffler-system"
+    "def-weil-pbc-essentially-constant-system"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, lines 7834--7840 (Lemma 070D)"
+    "place": "Tag 070E, the first displayed sequence and application of Tag 070D"
    }
   },
   {
-   "text": "$\\operatorname{im}(d^{-1})=\\varprojlim_iI^0_i$. Apply [lem-weil-pbc-mittag-leffler-limit-exact] (3) to the short exact sequence (b) of Step 1, whose kernel system $(Z^{-1}_i)$ is ML (Step 4): the map $\\varprojlim_iA^{-1}_i\\to\\varprojlim_iI^0_i$, $(y_i)\\mapsto(d^{-1}_i(y_i))$, is surjective. Composed with the inclusion $\\varprojlim_iI^0_i\\subseteq A^0$ of Step 2 this map is $d^{-1}=\\varprojlim_id^{-1}_i:A^{-1}\\to A^0$. Hence the image of $d^{-1}$ in $A^0$ is exactly the subgroup $\\varprojlim_iI^0_i$.",
+   "text": "Apply part (3) of [lem-weil-pbc-mittag-leffler-limit-exact] to $0\\to Z^{-1}\\to A^{-1}\\xrightarrow{q_0}B^0\\to0$, whose first tower is ML by Step 4. Obtain an epic map $\\lim q_0:\\lim A^{-1}\\to\\lim B^0$. Since the degree-$-1$ evaluation also preserves limits, this is precisely the surjectivity needed to identify boundaries of the limit complex with $\\lim B^0$.",
    "uses": [
     "lem-weil-pbc-mittag-leffler-limit-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, lines 7841--7848 (Lemma 02N1 (3))"
+    "place": "Tag 070E, the second displayed sequence and surjectivity on limits"
    }
   },
   {
-   "text": "The limit of (d) is short exact. For the short exact sequence (d) of Step 1, the sequence $0\\to\\varprojlim_iI^0_i\\to\\varprojlim_iZ^0_i\\to\\varprojlim_iH^0_i$ is exact by [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b), first assertion (with $R=\\mathbf Z$: abelian groups are $\\mathbf Z$-modules and homomorphisms are $\\mathbf Z$-linear); since $(I^0_i)$ is ML (Step 3), $\\varprojlim_iZ^0_i\\to\\varprojlim_iH^0_i$ is surjective by [lem-weil-pbc-mittag-leffler-limit-exact] (3). So $0\\to\\varprojlim_iI^0_i\\to\\varprojlim_iZ^0_i\\xrightarrow{q}\\varprojlim_iH^0_i\\to0$ is exact, where $q((x_i)_i)=([x_i])_i$.",
+   "text": "Apply part (3) of [lem-weil-pbc-mittag-leffler-limit-exact] to $0\\to B^0\\to Z^0\\xrightarrow{p_0}H^0\\to0$, whose first tower is ML by Step 3. Its limit is short exact. The existing theorem already includes left exactness, so no module-category tower exactness or change of coefficients to $\\mathbf Z$ is needed.",
    "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
     "lem-weil-pbc-mittag-leffler-limit-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, lines 7849--7862 (Lemma 02N1 (1) and (3))"
+    "place": "Tag 070E, the third displayed sequence and exactness on limits"
    }
   },
   {
-   "text": "Conclusion. By definition $H^0=\\ker(d^0)/\\operatorname{im}(d^{-1})$, which by Steps 2 and 5 is $\\varprojlim_iZ^0_i/\\varprojlim_iI^0_i$. By Step 6, $q$ induces an isomorphism $\\varprojlim_iZ^0_i/\\varprojlim_iI^0_i\\to\\varprojlim_iH^0_i$, and this isomorphism sends the class of $(x_i)\\in\\ker(d^0)$ to $([x_i])_i$: it is the canonical map $H^0\\to\\varprojlim_iH^0_i$ of the statement. Hence that map is an isomorphism.",
+   "text": "Let $h$ be the asserted limit.post map, $z$ the cycles comparison of Step 2, and $a$ the evaluation comparison in degree $-1$. Projection identities give $\\pi h=z(\\lim p_0)$ and $d_{\\mathrm{cycles}}z=a(\\lim(q_0b_0))$. Since $z$ is invertible and $\\lim p_0$ is epic, the first identity proves $h$ is epic. For injectivity, represent a class killed by $h$ by a cycle $y$. Exactness in Step 6 gives $b\\in\\lim B^0$ mapping to $z(y)$. Surjectivity in Step 5 lifts $b$ to $v\\in\\lim A^{-1}$. The second identity and injectivity of $z$ identify $y$ with the boundary of $a^{-1}(v)$, so its class is zero. Thus $h$ is both mono and epi in abelian groups, hence is an isomorphism. All identities and element lifts are proved in homology_comparison_of_ml_cycles; instantiate at Lean indices $i=1,j=2$.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, proof of Lemma 070E, line 7863 ('Putting everything together we win')"
+    "place": "Tag 070E, putting everything together and identification of the canonical comparison"
    }
   }
  ],
@@ -113,13 +111,12 @@
   "lem-weil-pbc-mittag-leffler-limit-exact",
   "def-weil-pbc-mittag-leffler-system",
   "lem-weil-pbc-exact-sequence-ml",
-  "def-weil-pbc-essentially-constant-system",
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+  "def-weil-pbc-essentially-constant-system"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Homology, Lemma Tag 070E (lemma-apply-Mittag-Leffler-again, line 7810), proof lines 7826--7864"
+  "place": "Tag 070E, proof; formalized by Y3 using categorical kernels for boundary systems and the existing Tag 02N1 short-exact-limit theorem (2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -195,5 +192,15 @@
   "group": "K1",
   "result": "pass",
   "note": "K: ℕᵒᵖ ⥤ HomologicalComplex AddCommGrpCat c on Fin 4 (Rel i+1=j; checked prev 1=0, next 1=2, prev 2=1, next 2=3, no 3→0 or 0→2 arrow) = tower of A^{-2..1} complexes; ML on eval 0,1 ⋙ forget = A^{-2},A^{-1} ML (same form as landed 070D module); IsEssentiallyConstant on homology 1 = H^{-1}_i using recorded G1 def; limit.post K (homologyFunctor c 2) : H^0(lim K) ⟶ lim H^0_i, the canonical class map; no statement change; hypotheses not hollow; single universe u"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T153939-L-1124574",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
