@@ -16,30 +16,31 @@
  },
  "proof": [
   {
-   "text": "Substitute t = s;U.ι, s′ = i;s and t′ = i;t. The remaining factorization proof is associativity; proof irrelevance identifies it with that proof, retaining its eqToIso as the associativity transport. Put P = overEquiv(U)(K). Evaluate the defining leftDerivedLift factorization of the pinned composition comparison on the homotopy class of P. Whisker with the quotient of complexes and use quotientCompQhIso and mapHomotopyCategoryFactors to rewrite the resulting components as picardTermwiseCounit. The underived comparison on complexes is the inverse of picardTermwiseModelRestrictionIso. Cancel these comparison isomorphisms to obtain the inverse-composition counit equation.",
+   "text": "Substitute t′=i;t, s′=i;s, and t=s;U.ι using ht, hs, and hf. Proof irrelevance identifies the remaining factorization proof hf′ with Category.assoc. Take inverse components at E of the pinned derived-pullback associativity law for i,s,U.ι. Expand b and the functor maps. This replaces the two successive inverse comparisons on the right by the associativity transport, the comparison for i;s,U.ι, and c(i,s).inv at L(U.ι)E.",
    "uses": [
-    "def-sc-picard-termwise-models",
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the explicitly defined b. Naturality of the inverse composition comparison at e moves e past c(i,s).inv. Evaluate the associativity equation for c(i,s,U.ι) at E to identify the two inverse-composition paths, then substitute the counit equation from the first step and reassociate. No counit or e is canceled, so no invertibility assumption is used.",
+   "text": "Naturality of c(i,s).inv at e moves it after L(i;s)(e). Apply the counit equation on the complex P=overEquiv(U)(K) from lem-sc-picard-termwise-composite-counit-core to replace c(i,s).inv_(QP);Li*(η_s(P));η_i(P_s) by η_(i;s)(P);Q(w). Reassociate; the sides coincide. No counit or e is canceled.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "def-sc-picard-termwise-models",
+    "lem-sc-picard-termwise-composite-counit-core"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-picard-termwise-models",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-picard-termwise-composite-counit-core"
  ],
  "proof_origin": {
-  "by": "agent E2",
+  "by": "agent N4",
   "document": "Stacks Project",
   "place": "Tags 06YJ and 0D5S",
-  "description": "Explicit categorical calculation underlying step 3 of the target-coherence node; the quotient and counit details are expanded by the agent."
+  "description": "Reduction by a proved private coherence helper: equality induction, the existing triple-composition law, and naturality leave only the two-morphism counit factorization on a complex."
  },
  "mathlib_searches": [
   {
@@ -133,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-190ad",
-  "group": "E2",
+  "reviewer": "COMPILER",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T152728-L-1015127",
+  "landing": "20261013T163539-L-1621249",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged signatures and delivered Lean statements with their nodes, proof dependencies and pinned counit constructions; both modules and the sole direct importer compile cleanly with expected axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

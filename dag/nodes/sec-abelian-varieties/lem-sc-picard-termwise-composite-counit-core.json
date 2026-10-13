@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-picard-termwise-composite-counit-core",
+ "kind": "statement",
+ "title": "Composition of termwise tensor counits on a complex",
+ "statement": "Fix derived categories on all schemes [def-pc-derived-category]. Let W be a scheme [def-pc-scheme], U an open of W, K a complex of modules on U, and P = overEquiv(U)(K). Let i:T′→T and s:T→U be scheme morphisms. Write c(i,s) for the pinned derived composition comparison [lem-pc-ringed-spaces-derived-pullback-composition], η for picardTermwiseCounit, P_s for the termwise tensor pullback of P along s, and w:P_(i;s)≅i*(P_s) for picardTermwiseModelRestrictionIso [def-sc-picard-termwise-models]. Then c(i,s).inv_(QP);Li*(η_s(P));η_i(P_s) = η_(i;s)(P);Q(w.hom). No perfectness or invertibility assumption on K is imposed. Derived pullbacks are those of [def-pc-derived-pullback].",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-sc-picard-termwise-models",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S; the counit equation for composition, expanded through the homotopy quotient"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the defining leftDerivedLift equation of the pinned c(i,s) at the homotopy class of P. Whisker with the quotient of complexes. Naturality of quotientCompQhIso and mapHomotopyCategoryFactors identifies the three counits with picardTermwiseCounit. The underived composition comparison on complexes is the inverse of w. Precompose with c(i,s).inv and postcompose with Q(w.hom); cancellation of these comparison isomorphisms yields the stated equality. No counit is canceled.",
+   "uses": [
+    "def-sc-picard-termwise-models",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-termwise-models",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent N4",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S",
+  "description": "Only the two-morphism counit factorization on a complex; the original item separately proves naturality in e and triple-composition coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor counit compatibility with composition on homotopy categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor counit composition comparison evaluated on complexes",
+   "results": "8 hits, including Adjunction.derived_counit and Functor.mapDerivedCategoryFactorsh_hom_app. These concern adjunctions or exact functors; they do not identify the pinned arbitrary tensor counits with the termwise model comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac_app",
+   "results": "1 hit: CategoryTheory.Functor.leftDerived_fac_app. This gives the homotopy-level factorization; quotient transport and the ordinary tensor comparison still have to be identified.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "picardTermwiseCounit",
+   "results": "msearch: zero hits. Local rg on lean/ found the model definition, source and target coherence, and their composites. No existing declaration states the counit equation on a complex. Searches for counit composition and mapHomotopyCategoryCompIso found the homotopy-level leftDerived_fac calculation in DerivedPullbackCompositionAssocKFlat.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounit",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 degree-zero cycle lifting, composition compatibility of the termwise perfect target model; explicit counit calculation in target-coherence step 3",
+   "via": [
+    "lem-sc-picard-termwise-target-coherence",
+    "lem-sc-picard-termwise-model-comparison",
+    "lem-sc-picard-connective-model-comparison",
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounitCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTermwiseCompositeCounitCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_termwise_counit_composition",
+  "statement": "theorem picard_termwise_counit_composition\n    (W : Scheme.{v}) (U : W.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    {T T' : Scheme.{v}} (i : T' ⟶ T) (s : T ⟶ U.toScheme) :\n    let c : ∀ {X Y Z : Scheme.{v}} (f : X ⟶ Y) (g : Y ⟶ Z),\n        derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=\n      fun f g ↦ Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition))) f g\n    let P := ((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K\n    (c i s).inv.app (DerivedCategory.Q.obj P) ≫\n        (derivedPullback i).map ((picardTermwiseCounit s).app P) ≫\n          (picardTermwiseCounit i).app (picardTermwiseModel W U K s) =\n      (picardTermwiseCounit (i ≫ s)).app P ≫\n        DerivedCategory.Q.map\n          (picardTermwiseModelRestrictionIso W U K i s (i ≫ s) rfl).hom",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T163539-L-1621249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T163539-L-1621249",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
