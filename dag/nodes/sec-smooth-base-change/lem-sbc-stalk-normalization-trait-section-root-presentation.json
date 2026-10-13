@@ -15,27 +15,36 @@
  ],
  "proof": [
   {
-   "text": "The local inverse image of U is the punctured trait by minimality of s. Smoothness makes the closed fibre a regular effective Cartier divisor. At its generic points the ramification indices and inseparable residue degrees of each connected component divide the order of its stabilizer in G. The invertible group order thus gives tame ramification. The tame normal form of 0EYH, with normalization commuting with localization and etale base change, gives an etale affine neighborhood of the image of x and a product of root algebras with positive exponents and a common divisor equation f. Choose a point over x and its factor, and localize the base at its image to obtain R and f in m_R.",
-   "uses": [],
+   "text": "Use the localized geometric chart and its transverse generic factor. This supplies R, f in its maximal ideal, e positive, a maximal ideal P of D=R[T]/(T^e-f), the local flat map B to D_P, the ideal equality in D_P, and a generator varpi of the auxiliary DVR maximal ideal with its generic open factor.",
+   "uses": [
+    "lem-sbc-stalk-normalization-trait-section-localized-root-chart"
+   ],
    "elementary": false
   },
   {
-   "text": "The chosen root algebra over R is finite integral. Every maximal ideal lies over m_R. Its reduction is k(R)[T]/(T^e), with exactly one prime, so the entire root algebra D is local and equals the stalk at the chosen point. The map beta from B is induced by the etale chart; it is local and etale, hence flat. The etale local map from the base stalk extends its maximal ideal to m_R. Mapping both to D gives J.map beta = m_R.map i.",
+   "text": "Prove D local: the monic root polynomial makes D finite integral over R. Any maximal ideal M of D contracts to the unique maximal ideal of R. The relation t^e=f puts t in M. Decompose any polynomial q as its constant coefficient plus T times a polynomial. Membership of q(t) in M is thus equivalent to membership of q(0) in the base maximal ideal, independently of M. Therefore all maximal ideals equal P and D is local. Integrality also gives the contraction identity for its maximal ideal, hence the canonical map R to D is local.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Pull the etale neighborhood back to the section and localize over the closed trait point. This gives an unramified DVR A prime as in the proof of 0EYI. Transversality sends f to a uniformizer varpi. Let K be the fraction field and pi its nonzero image as a unit. The base change of the root chart is a disjoint union of K[T]/(T^e_i-pi); the chosen factor is open. The generic-normalization comparison identifies its inclusion with g in the generic section fibre of Z and preserves the projection to Spec K. A DVR uniformizer is irreducible. No splitting assumption or rational point is used.",
+   "text": "Since P is the maximal ideal of the local ring D, all elements outside P are units. The canonical localization map D to D_P is an isomorphism. Compose beta with its inverse. Ring isomorphisms are local and flat, so the new beta is local and flat. Map the ideal equality along the inverse and use composition of ideal maps and the inverse structural-map identity. This proves the required equality in the whole root algebra D.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "In the auxiliary DVR, a generator of its maximal ideal is irreducible by Mathlib IsDiscreteValuationRing.irreducible_iff_uniformizer. Preserve all generic-factor witnesses and their structural-map equality unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-stalk-normalization-trait-section-localized-root-chart"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "H3",
+  "by": "U1",
   "document": "Stacks Project",
-  "place": "Tags 0EYH and 0EYI, proof preceding parts (1) and (2)"
+  "place": "Tags 0EYH and 0EYI, with the whole-root-algebra identification proved by finite integral local algebra in Lean"
  },
  "mathlib_searches": [
   {
@@ -116,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T065106-L-898259",
+  "landing": "20261013T082416-L-1649049",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
