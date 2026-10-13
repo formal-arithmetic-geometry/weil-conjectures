@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.HorizontalDualityMateComparisons
 public import Mathlib.CategoryTheory.Comma.Arrow
 
+import Sheaf.AlgebraicGeometry.HorizontalRectangleInverseMateFixedTransport
+
 /-! # Equality of horizontal duality mates with fixed endpoint comparisons
 
 Source: Stacks Project, Tag 0ATR, proof of Lemma 48.5.2; Tag 0ATM.
@@ -114,6 +116,34 @@ theorem horizontal_duality_mate_commutativity
               (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
               f (h ≫ g) a c adjf adjc hβh K)))
     O.hom ≫ (horizontalMateTargetIso f g h c d adjc adjd K).hom =
-      (horizontalMateSourceIso f g h (a.obj K).obj).hom ≫ G.hom := by sorry
+      (horizontalMateSourceIso f g h (a.obj K).obj).hom ≫ G.hom := by
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  intro O G
+  let α := qcInverseBaseChange f g hβ
+  let δ := @qcInverseBaseChange _ (pullback f g) Y' Z _
+    (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+    (pullback.snd f g) _ _ h hβ₂
+  have paste := congrArg (fun σ ↦ σ.app K) (mateEquiv_vcomp adjf adjf' adjd α δ)
+  simp only [TwoSquare.vComp_app] at paste
+  have hS := dualityEquationBaseChangeMap_eq_inverseSquareMate
+    f g a a' adjf adjf' hβ K
+  have hI := @dualityEquationBaseChangeMap_eq_inverseSquareMate _ (pullback f g) Y' Z _
+    (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+    (pullback.snd f g) _ _ h a' d adjf' adjd hβ₂ ((qcPullback g).obj K)
+  rw [← hS, ← hI] at paste
+  have hp := (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.congr_map paste
+  simp only [Functor.map_comp] at hp
+  change _ = O.hom at hp
+  have ht := horizontal_rectangle_inverse_mate_fixed_transport
+    g f a adjf hβ K h c adjc hβh d adjd hβ₂
+  change G.hom ≫ (horizontalMateTargetIso f g h c d adjc adjd K).inv =
+    (horizontalMateSourceIso f g h (a.obj K).obj).inv ≫ _ at ht
+  rw [hp] at ht
+  apply (cancel_mono (horizontalMateTargetIso f g h c d adjc adjd K).inv).mp
+  simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id,
+    Iso.hom_inv_id_assoc] using
+      (congrArg (fun φ ↦ (horizontalMateSourceIso f g h (a.obj K).obj).hom ≫ φ) ht).symm
 
 end AlgebraicGeometry
