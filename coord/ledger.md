@@ -11594,3 +11594,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: returned deliver/K3/Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeMate (reviewer RETURN: (the landing tools, head ad775f720) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:23 L: returned deliver/Q2/Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities (reviewer RETURN: (the landing tools, head b4472e280) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:23 L: returned deliver/Q3/Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison (reviewer RETURN: (the landing tools, head 4dad7402a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 08:23 L: returned deliver/R1/Sheaf.CategoryTheory.CompactFactorThroughThick (reviewer RETURN: (the landing tools, head 507973954) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
