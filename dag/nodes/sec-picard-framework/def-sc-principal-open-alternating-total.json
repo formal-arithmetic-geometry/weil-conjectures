@@ -15,9 +15,29 @@
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Sections 20.25 and 20.40, Tag 08C2; Perfect, Tag 08D2"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Partial stage-3 realization: affineOpenSections_additive_proof holds definitionally on section maps. principalCechIntersection_erase_le follows from Finset.mul_prod_erase and PrimeSpectrum.basicOpen_mul_le_right when the index belongs to J, and erase_eq_of_notMem otherwise. principalCechIntersection_singleton_le follows from the singleton product and le_iSup. principalCech_erase_degree follows from card_erase_add_one in integer arithmetic; principalCech_singleton_degree follows from singleton cardinality. These proofs also cover the empty cover, where no singleton index exists.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "principalCechDifferential_exists constructs a linear map with exactly principalCechDifferentialValue as its function. Check addition and scalar multiplication on each nonempty subset: coefficient maps, degree transports, and restriction maps are linear, multiplication by each sign commutes with scalars over the commutative ring, and finite sums preserve these identities. This proves existence without selecting an unspecified witness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "principalCechFunctor_exists constructs its object function as principalCechTotal and its morphisms as componentwise section maps of coefficient chain maps. Vertical compatibility follows by applying the sections functor to g.comm. For horizontal compatibility, equality transports commute with g by equality induction, and restriction commutes with g by naturality of modulesSpecToSheaf.map; compare each summand, including the zero branch. Identities, composition and addition hold componentwise. Proof irrelevance reduces the displayed object equality transports to reflexivity. The complex objects still use the original unproved principalCechDifferential_square; this step is a proved reduction, not a proof of square-zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Partial Lean realization of the existing alternating totalization construction (Tags 08D1 and 08D2), E1 second reading 2026-10-13. The square-zero, augmentation, K-injective quasi-isomorphism and derived comparison obligations remain the four original named theorem holes, with their original docstring arguments; no complete proof of those obligations is claimed."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -136,5 +156,15 @@
   "group": "T1",
   "result": "pass",
   "note": "A CommRing, r:Nat incl 0, f, U=koszulOpen=sup D(f_i), F complex with all terms quasi-coherent, E in D_QCoh with e: Q F iso E; M=Gamma(X,F) with A-action; diagram e -> Hom_A(I_(e+1) tail, M) by precomposition with koszulOpenTransition; cocone pinned by (prod f_j)^(e+1) x image_J = (-1)^(pq+p(p-1)/2) z(e_J)|D_J, checked by hand to be a chain map for d_I=-d_K, delta of Mathlib and Cech total d_1+(-1)^p d_2; beta pinned by every K-injective resolution; conclusion IsIso in D(A); 3 new def nodes read against 0A8H, 08C2, 08D0-08D2, no existing def (grep of lean/Sheaf, upstream)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e6b65",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T054212-L-441651",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proofs and unchanged interfaces with the node, change record, report, axiom checks, and clean compilation of the module and all four direct importers."
  }
 }
