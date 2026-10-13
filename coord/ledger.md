@@ -12428,3 +12428,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffineSpectrumStalkCondition (stage 3; reviewer PASS; first push; landing 20261013T123204-L-3676208 (interface); batch 20261013T123200; modules 3; new nodes 2)
 - 12:32 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPuncturedRootChart (stage 3; reviewer PASS; first push; landing 20261013T123204-L-3676463 (interface); batch 20261013T123200; modules 2; new nodes 1)
 - 12:32 L: merged deliver/G4/Sheaf.AlgebraicGeometry.CoefficientTargetTensorInjective (stage 3; reviewer PASS; first push; landing 20261013T123205-L-3676586 (interface); batch 20261013T123200; modules 2; new nodes 1)
+- 12:32 L: merged deliver/H3/Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionLifting (stage 3; reviewer PASS; first push; landing 20261013T123205-L-3676734 (interface); batch 20261013T123200; modules 2; new nodes 1)
