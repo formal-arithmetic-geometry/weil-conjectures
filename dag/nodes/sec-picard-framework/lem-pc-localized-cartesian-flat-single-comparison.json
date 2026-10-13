@@ -20,54 +20,54 @@
  },
  "proof": [
   {
-   "text": "Apply relativelyFlat_tensor_baseChange_iso in the standard localization with E=O_Y[0] and G=M[0]. The single complex is bounded above and its terms are quasi-coherent and flat over p; zero terms satisfy both conditions.",
+   "text": "Apply standard_flat_single_baseChange to p, M and g in standard localizations. Stalkwise flat tensor comparison and qcqs single-complex induction supply this geometric comparison.",
    "uses": [
-    "lem-pc-relatively-flat-tensor-base-change-iso"
+    "lem-pc-standard-flat-single-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Compute pullback of the K-flat structure-sheaf single complex by the derived pullback counit and identify its ordinary tensor pullback with the structure sheaf. Cancel the derived tensor unit on both sides; ordinary pullback of a single complex is the single of its pulled module.",
-   "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the projection-preserving isomorphism of sq with the canonical pullback square and tensor pullback composition. Its inverse exact module functors identify the corresponding direct images.",
+   "text": "Use sq.isoPullback to identify the given source with the canonical pullback. Use SingleComplexBaseChange.tensorPullbackIsEquivalence from IsoPullbackStalkCohomology: ordinary pullback along this isomorphism is an exact equivalence, so left-derived uniqueness computes it termwise. Derived pullback composition and adjunction identify its pushforward as inverse. Derived direct-image composition and ordinary single-pullback comparisons transport the result to q and r.",
    "uses": [
     "def-pc-fibre-product",
+    "def-pc-module-pullback",
     "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-direct-image-composition"
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-pullback",
+    "lem-pc-iso-pullback-stalk-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "A common K-injective resolution of M[0] computes direct image in the supplied and standard localizations. Localization.compUniqFunctor identifies their Qh images and the single objects. Apply the inverse exact overEquiv V; the composite is definitionally the localizedMixedDerivedPullback functor.",
+   "text": "Use one functorial K-injective resolution of M[0] in supplied and standard localizations. Resolution computation and localization uniqueness identify the two direct images and their single objects. Apply the exact derived inverse overEquiv V to the cartesian comparison composed with derived pullback of the inverse localization comparison. The target is the mixed pullback by its definition.",
    "uses": [
     "def-pc-ringed-spaces-derived-direct-image",
-    "def-pc-localized-mixed-derived-pullback"
+    "def-pc-localized-mixed-derived-pullback",
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-derived-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
   "def-pc-derived-pullback",
   "def-pc-fibre-product",
   "def-pc-localized-mixed-derived-pullback",
   "def-pc-module-pullback",
   "def-pc-ringed-spaces-derived-direct-image",
-  "def-pc-scheme-derived-tensor-structure",
   "lem-pc-derived-direct-image-composition",
-  "lem-pc-relatively-flat-tensor-base-change-iso",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-standard-flat-single-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "U3",
   "document": "Stacks Project",
-  "place": "Tag 0A1D, lemma-base-change-tensor, with E equal to the structure-sheaf tensor unit and G=M[0]"
+  "place": "Tag 0A1D, standard localization comparison transported through canonical pullback and localization equivalences"
  },
  "mathlib_searches": [
   {
@@ -154,11 +154,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-28aa8",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T131951-L-4088458",
+  "landing": "20261013T160713-L-1372447",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and baseline signatures; both modules and the direct importer compiled cleanly."
  }
 }
