@@ -14,39 +14,35 @@
  },
  "proof": [
   {
-   "text": "Enumerate I by n coordinates. For 0 ≤ j ≤ n let F_j be the kernel of the restriction of p to the first j coordinate summands, and extend F_j constantly after n. The empty source gives IsZero F_0, and the enumeration induces F_n ≅ kernel p. Finite free modules and the structure sheaf are quasi-coherent; quasi-coherent kernel closure therefore gives quasi-coherence of F_j.",
+   "text": "Induct on finite index types using Finite.induction_empty_option. For a type equivalence, apply freeFunctor.mapIso to obtain an isomorphism of free modules, precompose p with it, and transport the terminal kernel isomorphism using kernelIsIsoComp.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   },
   {
-   "text": "For j < n project F_(j+1) onto its last coordinate. Its sectionwise kernel is F_j: a vector with last coordinate zero is precisely a vector in the first j coordinates killed by p. Its abelian image is quasi-coherent by quasiCoherent_cokernel_image. On each affine open U, the sections of the image form an ideal J(U) in Γ(X,U). Quasi-coherence identifies their restrictions to D(f) with localizations; since image sections inject into the structure sheaf, the localized ideal equals the image of J(U) in Γ(X,D(f)). Thus these section ideals define IdealSheafData J.",
+   "text": "For PEmpty the coproduct hom-ext principle proves the identity of the free module is zero. Its kernel is zero by IsZero.of_mono applied to kernel.ι p. Choose n=0 and the constant chain kernel p; there are no quotient steps.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "pqf-def-coherent"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   },
   {
-   "text": "The image module and J.toModules are isomorphic as subsheaves of O_X. To construct the comparison, their inclusions have the same ranges over each affine open: J.toModules has range J(U) by range_toModulesι_app and the image has range J(U) by construction. Since both inclusions are injective, these range equalities give mutually inverse linear section maps on affine opens. Uniqueness makes these maps commute with restrictions; sheaf gluing extends them to all opens. Transport quasi-coherence and the epimorphic image factorization along this isomorphism. The projection has kernel F_j, so its factorization onto its image gives the required short exact sequence. Nothing used Epi p; for I empty use n=0 and a constant zero chain.",
+   "text": "For Option I restrict p by freeMap some and apply the inductive hypothesis to q. The coordinate-step theorem gives a short exact kernel q → kernel p → J.toModules. If the previous chain ends at F(n) ≅ kernel q, define G(j)=F(j) for j≤n and G(j)=kernel p for j>n. Earlier quotient steps are unchanged. The last step is transported along F(n) ≅ kernel q by ShortComplex.isoMk and shortExact_of_iso. The new endpoint is kernel p itself, with its identity isomorphism. This produces n+1 steps without any cohomology or surjectivity hypothesis.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "pqf-def-coherent"
+    "lem-pqf-finite-free-kernel-coordinate-step"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-pqf-finite-free-kernel-coordinate-step"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01XF coordinate filtration; M2 spells out its ideal-data identification and the case of a non-surjective p."
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FiniteFreeKernelIdealFiltration.lean",
+  "place": "Finite.induction_empty_option implementation of the Stacks Tag 01XF coordinate filtration; empty case and isomorphism transports included."
  },
  "mathlib_searches": [
   {
@@ -122,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T235112-L-2171999",
+  "landing": "20261013T022427-L-3218130",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

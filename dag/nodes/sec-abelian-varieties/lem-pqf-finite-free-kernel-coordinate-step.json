@@ -1,0 +1,144 @@
+{
+ "id": "lem-pqf-finite-free-kernel-coordinate-step",
+ "kind": "statement",
+ "title": "Removing one coordinate gives a short exact kernel sequence with ideal quotient",
+ "statement": "Let X be a scheme [def-pc-scheme], I a finite type of indices, and p:O_X^(Option I) → O_X a sheaf-module morphism [def-weil-sheaf-of-modules-category]. Put q=freeMap(some) followed by p. There exist ideal sheaf data J with J.toModules quasi-coherent [pqf-def-coherent], and a short exact sequence kernel q → kernel p → J.toModules. No surjectivity of p is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering, paragraph constructing F_i as the intersection with the first i direct summands; https://stacks.math.columbia.edu/tag/01XF"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Let inc include the coordinates indexed by I, let r discard the none coordinate, let t project onto that coordinate, and let s include it. Construct r and t as coproduct descents. Coproduct extensionality proves inc followed by r is identity, inc followed by t is zero, and r followed by inc plus t followed by s is identity. In particular inc is mono. Let a:kernel q → kernel p be the induced kernel map and v:kernel p → O_X be the projection t after the kernel inclusion. Then a is mono and a followed by v is zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any k:T → kernel p killed by v, the splitting identity gives k followed by the kernel inclusion, r and inc equal to k followed by the kernel inclusion. Thus k followed by the kernel inclusion and r is killed by q; kernel.lift q provides its unique factorization through a. Cancellation of the mono kernel inclusion proves the factorization identity. This is the universal property of kernel v, formalized with KernelFork.IsLimit.ofι'.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The free source and unit module are quasi-coherent, so kernel p is quasi-coherent. Apply cokernel closure to v and kernel closure to its cokernel projection. Abelian.image v is by definition that kernel, so it is quasi-coherent. Apply quasiCoherent_submodule_ideal to the image inclusion to obtain J and an isomorphism from the image to J.toModules.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-pqf-quasi-coherent-submodule-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The factorization b0:kernel p → image v is epi. Since the image inclusion is mono, cancel it to prove a followed by b0 is zero, and use isKernelOfComp to retain the kernel universal property. ShortComplex.exact_of_f_is_kernel gives exactness; mono a and epi b0 give short exactness. Transport this sequence along the isomorphism image v ≅ J.toModules using ShortComplex.isoMk and shortExact_of_iso.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-pqf-quasi-coherent-submodule-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FiniteFreeKernelCoordinateStep.lean",
+  "place": "Lean implementation of the geometric coordinate argument in Stacks Tag 01XF; source read at https://stacks.math.columbia.edu/tag/01XF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of map on a finite free sheaf after removing one coordinate has ideal quotient",
+   "results": "Service returned Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of map on a finite free sheaf after removing one coordinate has ideal quotient",
+   "results": "Filtration.submodule_fg_iff_stable and cotangent finiteness results do not state the sheaf coordinate kernel sequence. Mathlib kernel/image universal properties and source quasi-coherence closures provide ingredients only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg finite_free_kernel|filtration.*ideal|ideal.*filtration|kernel.*coordinate in Mathlib and source modules; blueprint_refs.py search coordinate kernel",
+   "results": "Read IdealSheaf/Module, Sheaf/Free, QuasicoherentKernel, QuasicoherentCokernel, LocallyFreeAffine, and Mathlib modules. No existing theorem combining these into this statement. Blueprint search and DAG concept search found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeKernelIdealFiltration",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-serre-criterion",
+   "place": "Tag 01XF coordinate-filtration paragraph: Removing one coordinate gives a short exact kernel sequence with ideal quotient",
+   "via": [
+    "lem-pqf-finite-free-kernel-ideal-filtration",
+    "lem-pqf-finite-free-kernel-h1-vanishing",
+    "lem-pqf-h1-finite-basic-cover-unit-ideal",
+    "lem-pqf-quasicompact-h1-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeKernelCoordinateStep",
+  "file": "lean/Sheaf/Paper/FiniteFreeKernelCoordinateStep.lean",
+  "declaration": "AlgebraicGeometry.finite_free_kernel_coordinate_step",
+  "statement": "theorem finite_free_kernel_coordinate_step (X : Scheme.{u})\n    {I : Type u} [Finite I]\n    (p : SheafOfModules.free (R := X.ringCatSheaf) (Option I) ⟶\n      SheafOfModules.unit X.ringCatSheaf) :\n    ∃ J : X.IdealSheafData, J.toModules.IsQuasicoherent ∧\n      ∃ (a : kernel (SheafOfModules.freeMap (R := X.ringCatSheaf) some ≫ p) ⟶ kernel p)\n        (b : kernel p ⟶ J.toModules) (w : a ≫ b = 0),\n        (ShortComplex.mk a b w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T022427-L-3218130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T022427-L-3218130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

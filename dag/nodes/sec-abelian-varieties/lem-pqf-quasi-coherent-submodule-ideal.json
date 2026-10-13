@@ -1,0 +1,136 @@
+{
+ "id": "lem-pqf-quasi-coherent-submodule-ideal",
+ "kind": "statement",
+ "title": "Quasi-coherent submodules of the structure sheaf are ideal modules",
+ "statement": "Let X be a scheme [def-pc-scheme], M a quasi-coherent O_X-module [pqf-def-coherent], and i:M → O_X a monomorphism of sheaves of modules [def-weil-sheaf-of-modules-category]. There exist ideal sheaf data J on X, with J.toModules quasi-coherent, and an isomorphism M ≅ J.toModules. No affine, quasi-compact, finite-generation or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering, paragraph constructing F_i as the intersection with the first i direct summands; https://stacks.math.columbia.edu/tag/01XF"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open U define J(U) as the range of the linear map i on U-sections. It is an ideal because the target is the section ring as a module over itself. Naturality shows that restricting elements of J(U) to D(f) lands in J(D(f)). For the reverse containment, lift a section m over D(f) after multiplying by a power of f, using exists_map_eq_pow_smul_of_isAffineOpen. Applying i expresses the corresponding power multiple of its image as the restriction of i(a), so it lies in the image ideal. The restriction of f is a unit on D(f), and unit_mul_mem_iff_mem cancels its power. Thus the ideal localization equalities hold and construct genuine IdealSheafData J, with its default support.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every affine open, i(a) belongs to J(U); idealOfOpens_eq_ideal and mem_idealOfOpens_iff say that closed-subscheme restriction kills it. For an arbitrary open, restrict to all affine subopens and apply the sheaf condition to prove the same vanishing. Thus i followed by J.toPushforwardSubscheme is zero. Define l:M → J.toModules by kernel.lift; its composite with J.toModulesι is i.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation preserves monomorphisms, so i is injective on sections. Hence l is injective on sections. On each affine open range_toModulesι_app identifies the range of J.toModulesι with J(U), which is the range of i. This makes l surjective there as well. Apply the existing source lemma Scheme.Modules.isIso_of_bijective_app_of_isAffineOpen: the affine opens form a basis and an isomorphism on that basis is a sheaf isomorphism. Transport quasi-coherence along asIso l.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/QuasiCoherentSubmoduleIdeal.lean",
+  "place": "Lean implementation of the geometric coordinate argument in Stacks Tag 01XF; source read at https://stacks.math.columbia.edu/tag/01XF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasicoherent submodule of the structure sheaf defines ideal sheaf data",
+   "results": "Service returned Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasicoherent submodule of the structure sheaf defines ideal sheaf data",
+   "results": "IdealSheafData.ofIdeals, ofIdealTop and mkOfMemSupportIff are constructors, not the submodule-to-module isomorphism. Source LocallyFreeAffine supplies the affine-basis isomorphism criterion; source Modules.Tilde supplies denominator lifting.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg quasiCoherent_submodule_ideal|submodule.*ideal|ideal.*submodule in DAG and sheaf-module sources; blueprint_refs.py search quasi coherent ideal",
+   "results": "Read IdealSheaf/Module, Sheaf/Free, QuasicoherentKernel, QuasicoherentCokernel, LocallyFreeAffine, and Mathlib modules. No existing theorem combining these into this statement. Blueprint search and DAG concept search found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeKernelIdealFiltration",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-serre-criterion",
+   "place": "Tag 01XF coordinate-filtration paragraph: Quasi-coherent submodules of the structure sheaf are ideal modules",
+   "via": [
+    "lem-pqf-finite-free-kernel-ideal-filtration",
+    "lem-pqf-finite-free-kernel-h1-vanishing",
+    "lem-pqf-h1-finite-basic-cover-unit-ideal",
+    "lem-pqf-quasicompact-h1-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuasiCoherentSubmoduleIdeal",
+  "file": "lean/Sheaf/Paper/QuasiCoherentSubmoduleIdeal.lean",
+  "declaration": "AlgebraicGeometry.quasiCoherent_submodule_ideal",
+  "statement": "theorem quasiCoherent_submodule_ideal (X : Scheme.{u}) {M : X.Modules}\n    [M.IsQuasicoherent] (i : M ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono i] :\n    ∃ J : X.IdealSheafData, J.toModules.IsQuasicoherent ∧\n      Nonempty (M ≅ J.toModules)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T022427-L-3218130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T022427-L-3218130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
