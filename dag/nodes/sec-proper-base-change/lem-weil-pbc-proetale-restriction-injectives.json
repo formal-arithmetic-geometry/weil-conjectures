@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proetale-restriction-injectives",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pro-etale localization preserves injectives",
@@ -20,28 +20,79 @@
  ],
  "proof": [
   {
-   "text": "Composition and base change preserve weak etaleness by the stability lemma\nfor ind-etale algebras. A morphism between two weakly etale $X$-schemes is\nweakly etale as well. On rings, factor $B\\to C$ as $B\\to B\\otimes_AC\\to C$.\nThe first arrow is weakly etale by base change; the second is a base change\nof the flat diagonal of $B/A$. This second map is a flat ring epimorphism,\nwhose own diagonal is an isomorphism, so is weakly etale. The scheme\nassertion follows on affine opens. Objects, morphisms, and coverings of the\nsmall pro-etale site therefore identify the slice with $W_{\\Proet}$.",
-   "uses": [],
-   "elementary": null
+   "text": "Work with the universes and bounded small-site objects of [def-weil-pbc-proetale-site]. Composition of weakly etale maps is supplied by [lem-weil-pbc-ind-etale-stability]; [lem-trf-weakly-etale-between-objects] supplies the additional permanence assertion, which the former node does not state. Send an object $V\\to W$ to $(V\\to X,V\\to W)$ in $X_{\\Proet}/W$. Composition makes it an object of $X_{\\Proet}$. Conversely, for a slice object $(V\\to X,s:V\\to W)$, permanence makes $s$ weakly etale. These assignments are inverse on objects and on the scheme morphisms commuting with the structural maps. A covering on either side is the same family of underlying weakly etale morphisms of schemes, with the same finite-affine fpqc condition in the site definition, so the assignments identify coverings as well. In particular $\\mathrm{id}_W$ is the final slice object. The size bounds are those of the common site convention, so the identification is between the chosen sites, up to the harmless choice of skeleton.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-trf-weakly-etale-between-objects",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-proetale-restriction-injectives.md",
+    "place": "Proof, first paragraph: slice identification"
+   }
   },
   {
-   "text": "The construction of extension by zero along an etale map applies on this\nslice with exactly the same formula: sheafify\n\n$$\n V\\longmapsto\\bigoplus_{s:V\\to W\\text{ over }X}M(V,s).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Let $\\Lambda$ be the constant coefficient ring. In the finite-coefficient convention [def-weil-pbc-proetale-modules], restriction of the coefficient presheaf $V\\mapsto\\operatorname{Cont}(\\pi_0(|V|),\\Lambda)$ has the identical formula on $(V,s)$; sheafification on this slice uses precisely the coverings of $V$ over $W$, so its associated ring sheaf is $\\Lambda_{W,\\Proet}$. For an ordinary constant ring sheaf the same verification starts with the constant presheaf. Thus write $\\mathcal O=\\Lambda_{X,\\Proet}$ and $\\mathcal O|_W=\\Lambda_{W,\\Proet}$. Form $P_M(V)=\\bigoplus_{s:V\\to W\\text{ over }X}M(V,s)$ with the restrictions and componentwise $\\mathcal O(V)$-action of [def-weil-extension-by-zero-presheaf], and put $j_!M=P_M^\\#$ using [def-weil-presheaf-modules-sheafification]. This is the slice construction; [def-weil-pbc-etale-sum-extension] is only its etale special case, not an assertion about weakly etale maps. A module map $M\\to j^*N$ gives the map $P_M(V)\\to N(V)$ obtained by summing its component maps. Conversely a map $P_M\\to N$ restricts on the summand indexed by $s$ to $M(V,s)\\to N(V)$; naturality makes these a map on the slice. The two operations are inverse since a map from a direct sum is determined by its summands. Sheafification's universal property identifies module maps $P_M\\to N$ with maps $j_!M\\to N$. Hence $j_!\\dashv j^*$, naturally in both arguments. This calculation uses only left module actions, not commutativity of $\\Lambda$.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-proetale-restriction-injectives.md",
+    "place": "Proof, second paragraph: direct-sum construction and adjunction"
+   }
   },
   {
-   "text": "A map from this presheaf to $N$ is precisely a family of maps $M(V,s)\\to\nN(V)$ compatible with restrictions, hence a map to the restriction of $N$.\nThis proves its left adjunction to restriction. The constructed functor is\nexact. Kernels are computed summand by summand before sheafification, which\nis exact for module presheaves. For an epimorphism of sheaves on the slice, a\nlocal section of the displayed direct sum has finite support. Lift its\nfinitely many summands on coverings in the slice and take a common covering\nof $V$. Thus its sheafification is locally surjective and hence an\nepimorphism. This proves exactness without a claim about ordinary geometric\nstalks on the pro-etale site.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-weil-pbc-site-restriction-injectives] to the underlying abelian sheaves on the slice. It supplies an exact extension functor left adjoint to restriction, and exactness of restriction. The abelian specialization of the explicit adjunction in step 2 identifies its left adjoint with the sheafified direct-sum construction by uniqueness of left adjoints; the identification is natural, so that construction is exact as well. By [def-weil-sheaf-of-modules-category], kernels of module sheaves are computed sectionwise and cokernels are sheafifications of the sectionwise cokernels; forgetting the action therefore detects exactness. The construction in step 2 has exactly these underlying abelian extension and restriction functors, so $j_!$ and $j^*$ are exact for the coefficient ring $\\Lambda$, including noncommutative rings. In the finite-coefficient setting the exactness of inverse image is also [prop-weil-pbc-proetale-constant-exact]. The adjunction of step 2 and exactness of $j_!$ meet precisely the hypotheses of [lem-sp-right-adjoint-preserves-injectives], with $u=j_!$ and $u_*=j^*$; thus restriction preserves injective module sheaves. No assertion that an injective module sheaf remains injective after forgetting its action is used.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-proetale-restriction-injectives.md",
+    "place": "Proof, second paragraph exactness and third paragraph injective preservation"
+   }
   },
   {
-   "text": "The adjunction now makes restriction preserve injectives. Restriction itself\nis exact by the exactness of the pro-etale inverse image for constant\ncoefficients; it is the inverse image of the pro-etale operations for this\nlocalization. Restricting an injective resolution therefore computes both\nversions of derived sections in the statement.",
-   "uses": [],
-   "elementary": null
+   "text": "For an unbounded complex $K$ on $X_{\\Proet}$, take a K-injective resolution $K\\to I$ using [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-weil-pbc-kinjective-functorial-existence]; the small skeleton and coefficient universe in step 1 satisfy their small-site hypotheses, and the ring-sheaf theorem does not assume commutativity. Exactness of $j^*$ makes $j^*K\\to j^*I$ a quasi-isomorphism. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to the additive pair $j_!\\dashv j^*$ of steps 2-3: $j_!$ is exact, so $j^*I$ is K-injective on the slice. For every integer $n$, the equality $(j^*I)^n(\\mathrm{id}_W)=I^n(W)$ commutes with the differentials because restriction applies to the same sheaf maps. Consequently the complexes computing $R\\Gamma(W,K)$ on $X_{\\Proet}$ and $R\\Gamma(W_{\\Proet},j^*K)$ are identical, not merely cohomologically isomorphic. The maps for a chain map $I\\to I'$ are identical by the same sectionwise equality, and homotopies restrict sectionwise as well, By [lem-weil-pbc-kinjective-hom-derived], every derived morphism between the chosen K-injective representatives is represented by a chain map uniquely up to homotopy, and quasi-isomorphisms between such representatives are homotopy equivalences. The preceding equality on chain maps and homotopies therefore descends to the canonical natural comparison on the derived categories of [def-weil-pbc-proetale-modules], independently of the chosen representatives. For commutative coefficients this is the derived-operations convention of [def-weil-pbc-proetale-operations]. For a sheaf, or a bounded-below complex, step 3 also permits the ordinary injective-resolution computation in the blueprint; the K-injective argument supplies the unbounded case without imposing a boundedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-proetale-restriction-injectives.md",
+    "place": "Proof, third paragraph last two sentences: derived sections, with unbounded K-injective justification"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-site",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-trf-weakly-etale-between-objects",
   "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-site-restriction-injectives",
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof_origin": {
@@ -49,9 +100,31 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-proetale-restriction-injectives.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "weakly etale pro-etale slice restriction preserves injective constant coefficient module sheaves derived global sections",
+   "results": "8 hits, all unrelated formally etale or sheaf infrastructure; no theorem for this complete statement",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesInjectiveObjects, sheafAdjunctionContinuous, pro-etale",
+   "results": "0 hits; loogle: unknown identifier 'PreservesInjectiveObjects'",
+   "date": "2026-10-14",
+   "verdict": "unavailable pattern: no applicable result"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesInjectiveObjects|localizationRestriction|proetale.*injective",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -86,5 +159,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-restriction-injectives",
+  "worker": "stage1",
+  "summary": "Identify the slice with the correct weakly-etale permanence lemma, construct the module extension adjunction explicitly, deduce exactness from the finished abelian-sheaf localization theorem and injective preservation from the existing Mathlib leaf, and compare derived evaluations through a K-injective resolution. No new nodes are needed.",
+  "blueprint": "Realizes the three blueprint proof paragraphs in four steps: paragraph 1 identifies the slice; paragraph 2 constructs the sum-extension adjunction; the exactness part of paragraph 2 and paragraph 3 imply injective preservation; the final sentences of paragraph 3 are justified also for unbounded complexes using K-injectives.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-weakly-etale-between-objects",
+    "why": "Weakly etale permanence for morphisms between objects supplies the reverse slice assignment; the unit stability node states only composition and base change, not this permanence assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-weakly-etale-between-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-6eb757247",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-6eb757247 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route. Repaired step 4’s missing K-injective Hom citation (070I) and recorded the accepted permanence tool use. Slice, noncommutative coefficients, exactness, and unbounded evaluation checks pass. No new nodes or target changes; condensed-coefficient comparison is not certified by this auxiliary lemma. Review and corrected JSON written under the isolated review directory.; 1 file(s) fixed by the reviewer"
+ }
 }
