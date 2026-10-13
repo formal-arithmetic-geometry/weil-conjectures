@@ -12,47 +12,47 @@
  ],
  "proof": [
   {
-   "text": "For a localized map from a total tensor term to M restrict to every K^p tensor L^q summand. Curry the two inputs by the localized tensor-Hom adjunction, then assemble the q and p components using the inner and outer Hom product universal properties. Compatibility with restriction gives a reverse sheaf morphism b. This reverse construction is independent of a forward map; keep the same b for every forward map satisfying the equation.",
+   "text": "Obtain b and its localized evaluation equality from homTensorDegreewise_reverse_construct. This construction is independent of a. Fix any forward morphism a satisfying HomTensorDegreewiseEquation; keep this b for both composites.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-hom-complex"
+    "lem-sc-hom-tensor-reverse-construction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Project a followed by b to p and q and evaluate at x and y. The assumed forward evaluation equation and the inverse laws of tensor-Hom currying give the identity; product extensionality finishes this composite.",
+   "text": "For a followed by b, use the Hom-complex product cone from homComplex_projections_exists to compare the p projections. Apply extensionality of localized presheaf-module morphisms and inner Hom-complex sections. The naturality formula for an inner Hom section moves its evaluation over V -> W to evaluation over the identity of V, with the input section restricted to V. Naturality of the outer localized morphism similarly moves x to K^p(V). At the composite V -> U, the reverse equation for a(s) and forward equation for s have identical tensor evaluations, so their iterated Hom evaluations agree. Product and module-morphism extensionality give a followed by b equal to the identity. The private restriction-evaluation and product-extensionality helpers are proved directly in Lean.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sc-hom-tensor-reverse-construction",
+    "lem-sc-hom-complex-projections",
     "def-pur-hom-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Project b followed by a to each total degree and restrict to every summand. Check on pure tensors before sheafification by the same currying inverse laws. The sheafification adjunction and coproduct/product universal properties give the other identity.",
+   "text": "For b followed by a, compare the total-degree Hom projections by product extensionality. The private localized tensor extensionality helper transposes a morphism X -> Hom(T,N) to T -> Hom(X,N) by the concrete presheaf tensor-Hom equivalence with coefficient and module universe max u v w and symmetry; this transpose is injective. Restrict to each coproduct summand, cancel the tensor sheafification comparison and apply the sheafification adjunction, then compare sectionwise pure tensors. The forward equation on b(s) followed by the reverse equation on s gives equality on each such tensor. This proves the second composite identity and finishes the conjunction. No differential or boundedness result is used.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sc-hom-tensor-reverse-construction",
+    "lem-sc-hom-complex-projections",
     "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex",
-  "lem-pc-sheaf-modules-tensor-closed",
   "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-tensor-reverse-construction"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Y3",
+  "group": "F3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90; degreewise forward construction and inverse, expanded using Tag 03EO and Section 03EK"
+  "place": "Tag 0A90 inverse calculation; private localized tensor extensionality follows the proved library HomTensorLocalizedExt argument, repeated here to avoid its import cycle; reverse construction split off; repair: private curry API generalized to an extra ambient universe w with explicit binders"
  },
  "mathlib_searches": [
   {
@@ -166,11 +166,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c9684",
-  "group": "Y3",
+  "reviewer": "X-78ac2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T100227-L-2505217",
+  "landing": "20261013T133225-L-4192889",
   "kind": "interface",
-  "note": "independent Codex review: Matched the Lean declarations and proof with their DAG nodes, original definitions, change record, and Stacks 0A90/03EO; all four delivered modules and ten direct importers compile cleanly, and axioms match the two reported lower obligations."
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, original interface, source construction, change record and report; compilation, direct-importer and axiom checks pass."
  }
 }
