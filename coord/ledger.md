@@ -11583,3 +11583,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/X2/Sheaf.Algebra.FiniteProjectiveTorAcyclic (stage 3; reviewer PASS; first push; landing 20261013T072412-L-1126932 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat (stage 3; reviewer PASS; first push; landing 20261013T072412-L-1127037 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.TargetSectionClassRestriction (stage 3; reviewer PASS; first push; landing 20261013T072413-L-1127138 (interface); batch 20261013T072335; modules 2; new nodes 1)
+- 07:26 L: returned deliver/E3/Sheaf.RingTheory.ComparisonMapBaseChangeSystem (reviewer RETURN: (reviewer X-aec48, head aec48f28c) E1/E2 (brief point 4): RingHom.exists_comparison_map_base_change_system remains false)
