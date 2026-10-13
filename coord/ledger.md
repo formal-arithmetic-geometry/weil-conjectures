@@ -13175,3 +13175,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:40 L: merged deliver/J3/Sheaf.AlgebraicGeometry.PicardAffineProjectiveBaseChange (stage 3; reviewer PASS; first push; landing 20261013T164048-L-1668155 (interface); batch 20261013T164043; modules 2; new nodes 1)
 - 16:40 L: merged deliver/K2/Sheaf.AlgebraicGeometry.PolynomialChartLocalAlgebra (stage 3; reviewer PASS; first push; landing 20261013T164048-L-1668289 (interface); batch 20261013T164043; modules 4; new nodes 3)
 - 16:40 L: merged deliver/N3/Sheaf.AlgebraicGeometry.Morphisms.CompletePuncturedPrincipalFormalSections (stage 3; reviewer PASS; first push; landing 20261013T164049-L-1668469 (interface); batch 20261013T164043; modules 4; new nodes 3)
+- 16:40 L: merged deliver/P4/Sheaf.AlgebraicGeometry.RestrictedAffineSingleIdentityLaw (stage 3; reviewer PASS; first push; landing 20261013T164049-L-1668666 (interface); batch 20261013T164043; modules 2; new nodes 1)

@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, restriction to an affine etale object; Tag 0EZM coefficient complexes; Tag 03CB canonical inverse-image composition comparisons"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of single complex comparison for a natural isomorphism between additive functors",
+   "results": "CategoryTheory.NatIso.mapHomologicalComplex_hom_app_f; HomologicalComplex.singleMapHomologicalComplex; CategoryTheory.NatIso.mapHomologicalComplex; HomologicalComplex.singleMapHomologicalComplex_hom_app_self; HomologicalComplex.singleObjCyclesSelfIso_hom_naturality; HomologicalComplex.singleMapHomologicalComplex_inv_app_self; CategoryTheory.ShortComplex.mapNatIso_hom; CategoryTheory.SingleFunctors.hom_inv_id_hom_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "Use component and extensionality lemmas; the related library helpers are private and are adapted locally without extra imports."
+  },
+  {
+   "tool": "loogle",
+   "query": "singleMapHomologicalComplex",
+   "results": "loogle: unknown identifier 'singleMapHomologicalComplex'",
+   "date": "2026-10-14",
+   "verdict": "Use component and extensionality lemmas; the related library helpers are private and are adapted locally without extra imports."
+  },
+  {
+   "tool": "grep",
+   "query": "to_single_hom_ext|single_coefficient_unit_heq|complex_transport_heq",
+   "results": "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/Algebra/Homology/Single.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean; Mathlib/CategoryTheory/Abelian/Projective/Extend.lean",
+   "date": "2026-10-14",
+   "verdict": "Use component and extensionality lemmas; the related library helpers are private and are adapted locally without extra imports."
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of the single complex comparison with an identity natural isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "id": "lem-sbc-restricted-affine-single-unit-lift",
+ "title": "Lift a restricted coefficient unit to its single complex",
+ "statement": "If the raw restricted coefficient at an identity arrow is heterogeneously equal to upperStarId on the restricted sheaf, then restrictedAffineSingleTransition is the transported complex unit. The coefficient hypothesis is supplied separately by inverse-image restriction coherence.",
+ "stmt_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Prove the generic single-complex unit equation by to_single_hom_ext. Rewrite its degree-zero component using singleMapHomologicalComplex_hom_app_self and single_map_f_self, cancel the evaluation isomorphism, and apply naturality of the unit. Substitute q = identity to turn the coefficient HEq into this generic equation. Separately eliminate the functor equality in the transported complex unit, and compose the two heterogeneous equalities. Instantiate with the restricted diagram map_id and the given raw coefficient unit. The generic private proof follows RestrictedOverSingleUnit.single_unit, without importing that module or its fixed-coefficient dependencies.",
+   "uses": [
+    "def-sbc-restricted-affine-single-maps",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.Algebra.Homology.Additive and Single; Sheaf.AlgebraicGeometry.RestrictedOverSingleUnit",
+  "place": "P4 second reading: degree-zero naturality and separate HEq transport; all Lean holes closed"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleIdentityLaw",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-restricted-affine-single-identity-law",
+   "place": "Lift the restricted sheaf coefficient unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleUnitLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleUnitLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedAffineSingleUnit_lift",
+  "statement": "theorem restrictedAffineSingleUnit_lift {S : Scheme.{v}}\n    {I : Type v} [Preorder I]\n    (D : Iᵒᵖ ⥤ Over S)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (U : S.Etale) (i : Iᵒᵖ)\n    (hunit : HEq\n      (rawAffineRestrictedCoefficient (D.map (𝟙 i)).left (D.obj i).hom (D.obj i).hom\n        (Over.w (D.map (𝟙 i))) (F i.unop) (F i.unop) (φ (𝟙 i).unop) U)\n      ((upperStarId AddCommGrpCat.{v + 1} (pullback U.hom (D.obj i).hom)).hom.app\n        ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom (D.obj i).hom)).obj\n          (F i.unop)))) :\n    restrictedAffineSingleTransition D F φ U (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1})\n          ((restrictedAffineDiagram D U).map_id i)))\n        (ComplexShape.up ℤ)).hom.app (restrictedAffineK D F U i) ≫\n      (NatIso.mapHomologicalComplex\n        (upperStarId AddCommGrpCat.{v + 1} ((restrictedAffineDiagram D U).obj i))\n        (ComplexShape.up ℤ)).hom.app (restrictedAffineK D F U i)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T164049-L-1668666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T164049-L-1668666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
