@@ -1,0 +1,148 @@
+{
+ "id": "new-pc-standard-single-flat-counit-union-equation",
+ "kind": "statement",
+ "title": "Counit equation for the union complex",
+ "statement": "Let p:Y→B be quasi-compact and quasi-separated, let B and A be affine schemes, let g:A→B, let U,V be opens of Y, and let N be a quasi-coherent module on U∪V flat over B. Suppose StandardSingleFlatCounitOnOpen(p,g,T) holds for T=U,V,U∩V [def-pc-standard-single-flat-counit-presentation-on-open]. Use the standard derived categories of module sheaves. For every bounded-above termwise flat complex K on B and every supplied isomorphism e:R((U∪V)→B)_*(N[0])≅Q(K), there is an isomorphism t from Q(g* K) to the base-changed direct image of the ordinary pullback of N, such that the standard single-module base-change map equals Lg*(e.hom), followed by the pinned derived-pullback counit at K and t.hom. The complex K and isomorphism e are fixed inputs, not newly chosen witnesses.",
+ "stmt_deps": [
+  "def-pc-standard-single-flat-counit-presentation-on-open"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJ9, relative Mayer--Vietoris induction step"
+ },
+ "proof": [
+  {
+   "text": "Restrict N, apply the three open presentation hypotheses and use invertibility of the bounded-flat derived pullback counit (transported to the pinned counit by uniqueness of left-derived functors). The three canonical comparisons for the restrictions are isomorphisms.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct relative Mayer--Vietoris triangles using K-injective resolutions and the short exact cover complexes, on the union and its base change. The underived open counit square identifies the degreewise comparison squares. Naturality of the short-exact boundary and transposition under the pullback/direct-image adjunction identify the connecting square. Thus the three comparisons form a morphism of triangles. Two-out-of-three gives invertibility of the union comparison. The argument uses the general sheaf-module presentation, without compactness or quasi-coherent direct-image assertions.",
+   "uses": [
+    "lem-pc-kinjective-mayer-vietoris-presentation",
+    "lem-pc-mayer-vietoris-underived-open-counit-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit at the supplied bounded-flat K is invertible. The composite a=Lg*(e.hom) followed by this counit is invertible. Set t.hom=a inverse followed by the union comparison. This is invertible; cancelling a with its inverse gives the required factorization for this same K and e.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "lem-pc-mayer-vietoris-underived-open-counit-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 0DJ9, relative Mayer--Vietoris induction step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded flat sheaf complex Mayer Vietoris counit presentation",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "StandardSingleFlatCounitPresentation",
+   "results": "0 hits; identifier unknown to Loogle.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*flat|Mayer.*Vietoris",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded flat sheaf complex presentation gluing on union of opens by Mayer Vietoris",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above flat complex computes derived tensor pullback and the counit is invertible",
+   "results": "8 hits: ordinary Module.Flat exactness and Tor definitions; no sheaf derived-counit gluing statement. Existing Sheaf flatComplexDerivedPullback and pinned-counit uniqueness inspected.",
+   "date": "2026-10-14",
+   "verdict": "no exact gluing match; existing flat comparison used"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "results": "12 hits: IsIso, asIso, inverse and elementary composition infrastructure; none constructs the required union direct image model or the union comparison.",
+   "date": "2026-10-14",
+   "verdict": "category infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedAbove.*flat|flat.*boundedAbove",
+   "results": "msearch Mathlib: 0 hits. Local lean/ search found CochainComplex.exists_functorial_boundedAbove_flat_replacement, flatComplexDerivedPullback, and private counit_isIso_of_isKFlat; no exact union helper.",
+   "date": "2026-10-14",
+   "verdict": "reuse bounded flat replacement and flat pullback comparison; no exact union match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionPresentation",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-flat-counit-union",
+   "place": "The per-module construction of the union complex and the Mayer--Vietoris comparison equation in the gluing step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitUnionEquation.lean",
+  "declaration": "AlgebraicGeometry.standardSingleFlatCounitUnionEquation",
+  "statement": "theorem standardSingleFlatCounitUnionEquation\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]\n    [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)\n    (N : (U ⊔ V).toScheme.Modules) [N.IsQuasicoherent]\n    (hN : N.IsFlatOver ((U ⊔ V).ι ≫ p))\n    (hPU : StandardSingleFlatCounitOnOpen p g U)\n    (hPV : StandardSingleFlatCounitOnOpen p g V)\n    (hPUV : StandardSingleFlatCounitOnOpen p g (U ⊓ V)) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    letI := HasDerivedCategory.standard A.Modules\n    letI := HasDerivedCategory.standard B.Modules\n    ∀ (K : CochainComplex (SheafOfModules.{u} (moduleRings B.toRingedSpace)) ℤ)\n    (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i))\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (K.X i))\n    (e : (schemeDerivedDirectImage ((U ⊔ V).ι ≫ p)).obj\n          ((DerivedCategory.singleFunctor _ 0).obj N) ≅\n          DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K)),\n    ∃ t : DerivedCategory.Qh.obj\n        (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) ≅\n      (schemeDerivedDirectImage (pullback.snd ((U ⊔ V).ι ≫ p) g)).obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          (Scheme.Modules.tensorPullbackObj (pullback.fst ((U ⊔ V).ι ≫ p) g) N)),\n      standardSingleBaseChangeMap ((U ⊔ V).ι ≫ p) N g =\n        (derivedPullback g).map e.hom ≫\n          (SingleComplexBaseChange.counit g).app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫ t.hom",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T224515-L-1473798",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T224515-L-1473798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

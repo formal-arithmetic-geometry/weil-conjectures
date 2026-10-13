@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,6 +30,14 @@ theorem standardSingleFlatCounitPresentation_union_of_open_presentations
     (hPV : StandardSingleFlatCounitOnOpen p g V)
     (hPUV : StandardSingleFlatCounitOnOpen p g (U ⊓ V)) :
     StandardSingleFlatCounitPresentation ((U ⊔ V).ι ≫ p) N g := by
-  sorry
+  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let := HasDerivedCategory.standard A.Modules
+  let := HasDerivedCategory.standard B.Modules
+  rcases standardSingleFlatCounitUnionCore p g U V N hN hPU hPV hPUV with
+    ⟨K, hbounded, hflat, ⟨e⟩⟩
+  obtain ⟨t, ht⟩ := standardSingleFlatCounitUnionEquation p g U V N hN hPU hPV hPUV K
+    hbounded hflat e
+  exact ⟨K, hbounded, hflat, e, t, ht⟩
 
 end AlgebraicGeometry
