@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 public import Sheaf.RingTheory.FormalGlueingH0
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -47,5 +48,62 @@ theorem exists_formalGlueingData_prime
         (∀ h, Y.presheaf.IsCompatible V (fun i ↦ r i h)) ∧
         ∀ h i, p.app (V i) (r i h) =
           O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V i ≤ ⊤)).op
-            (D.toCompleted.appTop (e h.val.1)) := by sorry
+            (D.toCompleted.appTop (e h.val.1)) := by
+  classical
+  dsimp only
+  let C := AdicCompletion (IsLocalRing.maximalIdeal A) A
+  let φ := algebraMap A C
+  let : Algebra A C := φ.toAlgebra
+  let g : CommRingCat.of C ⟶ Γ(E, ⊤) := (ΓSpecIso (.of C)).inv ≫ s.appTop
+  let : Module C Γ(E, ⊤) := Module.compHom _ g.hom
+  let V := fun i ↦ (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)
+  have hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U := by
+    intro i x hx
+    apply (hU x).mpr
+    intro heq
+    have hfi : f i ∈ IsLocalRing.maximalIdeal A := by
+      rw [← hgen]
+      exact Ideal.subset_span (Set.mem_range_self i)
+    exact hx (heq ▸ hfi)
+  have hcover : ⊤ ≤ iSup V := by
+    intro y _
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    by_contra hn
+    have hall : ∀ i, f i ∈ ((q ≫ U.ι) y).asIdeal := by
+      intro i
+      by_contra hi
+      exact hn ⟨i, hi⟩
+    have hm : IsLocalRing.maximalIdeal A ≤ ((q ≫ U.ι) y).asIdeal := by
+      rw [← hgen]
+      exact Ideal.span_le.mpr (by rintro _ ⟨i, rfl⟩; exact hall i)
+    have heq : (q ≫ U.ι) y = IsLocalRing.closedPoint A := by
+      apply PrimeSpectrum.ext
+      exact le_antisymm (IsLocalRing.le_maximalIdeal Ideal.IsPrime.ne_top') hm
+    exact ((hU ((q ≫ U.ι) y)).mp (q y).property) heq
+  obtain ⟨X, e, c, b, d, hb₁, hb₂, hd₁, hd₂⟩ :=
+    exists_affine_chart_realization D t f hf
+  refine ⟨X, e, V, hcover, fun i h ↦ c i (h.val.2 i), ?_, ?_⟩
+  · intro h i j
+    have hh := h.property
+    change h.val ∈ _ ⊓ _ at hh
+    simp only [Submodule.mem_inf, Submodule.mem_iInf, LinearMap.mem_ker,
+      LinearMap.sub_apply, sub_eq_zero, LinearMap.comp_apply,
+      LinearMap.fst_apply, LinearMap.snd_apply, LinearMap.proj_apply,
+      LocalizedModule.mkLinearMap_apply, LinearEquiv.coe_coe] at hh
+    calc
+      _ = b i j (X.alpha_overlap i j (LocalizedModule.mk (h.val.2 i) 1)) :=
+        (hb₁ i j (h.val.2 i)).symm
+      _ = b i j (LocalizedModule.mk (h.val.2 j) 1) := congrArg (b i j) (hh.2 i j)
+      _ = _ := hb₂ i j (h.val.2 j)
+  · intro h i
+    have hh := h.property
+    change h.val ∈ _ ⊓ _ at hh
+    simp only [Submodule.mem_inf, Submodule.mem_iInf, LinearMap.mem_ker,
+      LinearMap.sub_apply, sub_eq_zero, LinearMap.comp_apply,
+      LinearMap.fst_apply, LinearMap.snd_apply, LinearMap.proj_apply,
+      LocalizedModule.mkLinearMap_apply, LinearEquiv.coe_coe] at hh
+    calc
+      _ = d i (TensorProduct.tmul A (1 : C) (h.val.2 i)) := (hd₂ i (h.val.2 i)).symm
+      _ = d i (X.alpha i (LocalizedModule.mk h.val.1 1)) := congrArg (d i) (hh.1 i).symm
+      _ = _ := hd₁ i h.val.1
 end AlgebraicGeometry.Scheme.CompletionGluingData

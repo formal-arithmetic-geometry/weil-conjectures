@@ -1,0 +1,170 @@
+{
+ "id": "lem-sbc-punctured-completion-affine-chart-realization",
+ "kind": "statement",
+ "title": "Affine section realization of formal glueing transition maps",
+ "statement": "Let A be a commutative local ring, C its maximal-ideal adic completion [def-weil-pbc-adic-completion], and phi:A to C its structural map. Let U be any open of Spec A, let q:Y to U and s:E to Spec C be finite [def-weil-finite-integral-morphism], and let D be their supplied overlap identification [def-sbc-punctured-completion-matching-sections]. Let f:Fin t to A satisfy D(f_i) contained in U for every i. Set V_i=(q followed by U inclusion) inverse-image D(f_i), O=Y times_U (Spec C restricted to U), and p:O to Y. Give Gamma(E,top) its structural C-action. There exist formal module glueing data X for phi and f [def-weil-pbc-formal-glueing-data], a C-linear equivalence e:X.M' to Gamma(E,top), additive equivalences c_i:M_i to Gamma(Y,V_i), b_ij:(M_j)_(f_i) to Gamma(Y,V_i intersect V_j), and d_i:C tensor_A M_i to Gamma(O,p inverse-image V_i). For every chart element m in M_i, b_ij(alpha_ij(m/1)) is the restriction of c_i(m) to V_i intersect V_j; for every n in M_j, b_ij(n/1) is the restriction of c_j(n) to that intersection. For every prime element m in M', d_i(alpha_i(m/1)) is the restriction of D.toCompleted.appTop(e(m)) to p inverse-image V_i. For every n in M_i, d_i(1 tensor n)=p.app(V_i)(c_i(n)). No cover or H0 compatibility assertion is made.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs (affine chart rings and transition isomorphisms); Tag 05EL, item (1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof": [
+  {
+   "text": "Put V_i=(q followed by U inclusion) inverse-image D(f_i). Since D(f_i) is contained in U, this is the finite inverse image of an affine open. Thus V_i is affine, and finiteness also makes E affine. Take M'=Gamma(E,top) with its structural C-action and M_i=Gamma(Y,V_i) with the structural A_(f_i)-action. The identifications e and c_i are identities.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The double intersection is the principal open of f_i in V_j. IsAffineOpen.isLocalization_basicOpen identifies its section ring with localization of M_j at f_i; the module localization universal property gives b_ij. The overlap above V_i is the affine base change to Spec C. pullbackSpecIso and its projection formulas identify its section ring with C tensor_A M_i, giving d_i. The base overlap isomorphism and its over condition identify this open also with the principal open f_i in E, hence with the localization of M'.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define alpha_i and alpha_ij by composing the preceding section identifications. They are linear over the structural scalar rings. The square and cocycle identities follow by passing to double and triple principal opens: all paths are restrictions of the same section. Thus the modules and these identifications form X. The localization map sends m to m/1, which restricts the corresponding actual section, giving both b equations. The tensor generator 1 tensor m is pullback along p, giving the second d equation. Restriction of an E section through the supplied overlap identification gives the first d equation. Empty principal charts have zero section and localization modules; with an empty index set all chart assertions are vacuous. Explicitly, a localized section m/f_j^a is restriction of m divided by the image of f_j^a. On (m/f_j^a)/f_k^b both cocycle routes restrict m to the triple intersection and divide by f_j^a f_k^b. On (m'/f_i^a)/f_j^b both square routes restrict the E section to the completed double intersection and divide by f_i^a f_j^b. The canonical swap exchanges denominators, and compare sends (c tensor m)/f_j^b to c tensor (m/f_j^b). Fractions generate the localizations and pure tensors additively generate scalar extensions, so the equalities hold for the complete linear maps, without flatness.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "E1",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs, with the section-identification formulas made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism affine principal opens section modules localization formal gluing data",
+   "results": "AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f, AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier, AlgebraicGeometry.Scheme.affineBasisCoverRing, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-chart realization theorem; localization and affine pullback APIs are ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "FormalGlueing|LocalizedModule.*section",
+   "results": "No matches.",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-chart realization theorem; localization and affine pullback APIs are ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Section rings of affine principal opens are localizations and section rings of affine base changes are tensor products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\"",
+   "results": "AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-chart realization theorem; localization and affine pullback APIs are ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization.*[Bb]asicOpen|[Bb]asicOpen.*isLocalization|[Pp]ullback.*[Tt]ensor|[Tt]ensor.*[Pp]ullback",
+   "results": "Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/Spec.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete affine-chart realization theorem; localization and affine pullback APIs are ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme section ring localization restriction base change tensor product",
+   "results": "IsAffineOpen.appLE_eq_away_map, IsAffineOpen.app_basicOpen_eq_away_map, StructureSheaf.localization_toBasicOpen, StructureSheaf.comap_basicOpen, Gamma_restrict_isLocalization; no complete formal chart realization",
+   "date": "2026-10-14",
+   "verdict": "Independent second reading: constituent restriction/localization APIs only; no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingPrime",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completion-glueing comparison: construct finite affine chart rings and their localization and base-change identifications, before passing to H0.",
+   "via": [
+    "lem-sbc-punctured-completion-formal-glueing-data-prime",
+    "lem-sbc-punctured-completion-formal-glueing-data",
+    "lem-sbc-completed-matching-ring-map-residue-quotient-surjective",
+    "lem-sbc-completed-matching-ring-map-residue-lift",
+    "lem-sbc-completed-matching-ring-map-surjective",
+    "def-sbc-completed-matching-ring-map",
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineChartRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_affine_chart_realization",
+  "statement": "theorem exists_affine_chart_realization\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)\n    (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    letI : Algebra A C := φ.toAlgebra\n    let g : CommRingCat.of C ⟶ Γ(E, ⊤) := (ΓSpecIso (.of C)).inv ≫ s.appTop\n    letI : Module C Γ(E, ⊤) := Module.compHom _ g.hom\n    let V := fun i ↦ (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let O := pullback q (completionSpecMap A ∣_ U)\n    let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ f) (e : X.M' ≃ₗ[C] Γ(E, ⊤))\n      (c : ∀ i, FormalGlueing.piece (f i) (X.M i) ≃+ Γ(Y, V i))\n      (b : ∀ i j, FormalGlueing.localize (f i) (FormalGlueing.piece (f j) (X.M j)) ≃+\n        Γ(Y, V i ⊓ V j))\n      (d : ∀ i, FormalGlueing.extend φ (FormalGlueing.piece (f i) (X.M i)) ≃+\n        Γ(O, p ⁻¹ᵁ V i)),\n      (∀ i j m, b i j (X.alpha_overlap i j (LocalizedModule.mk m 1)) =\n        Y.presheaf.map (homOfLE (inf_le_left : V i ⊓ V j ≤ V i)).op (c i m)) ∧\n      (∀ i j m, b i j (LocalizedModule.mk m 1) =\n        Y.presheaf.map (homOfLE (inf_le_right : V i ⊓ V j ≤ V j)).op (c j m)) ∧\n      (∀ i m, d i (X.alpha i (LocalizedModule.mk m 1)) =\n        O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V i ≤ ⊤)).op\n          (D.toCompleted.appTop (e m))) ∧\n      (∀ i m, d i (TensorProduct.tmul A (1 : C) m) = p.app (V i) (c i m))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T201744-L-3967541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T201744-L-3967541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
