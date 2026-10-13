@@ -10,8 +10,10 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.EquationCountFibreDimensionFlat
+import Sheaf.RingTheory.PopescuPartialChartPolynomial
 import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Mathlib.RingTheory.Kaehler.TensorProduct
+import all Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
 
 /-! # The partial equation chart in Popescu lifting
 
@@ -195,18 +197,19 @@ def finiteChartEquiv (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r) :
 Source: Stacks Project, Tag 07CP (lemma-lifting), the calculation of D_k/pi D_k.
 (blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension).
 
-Proof: On E_k the normalized p_kl vanish identically. Modulo pi and after inverting
- a_k, the cleared relations identify the original-variable quotient with
-(Cbar/pi Cbar) localized at a_k. Solve p_kl for z_l outside E_k to identify the
-special-fibre chart with a polynomial algebra over that quotient in |E_k| variables.
-Smoothness of the prepared chart survives reduction modulo pi and base change to
-the residue field at the contraction of q. Base change and localization of
-differentials, followed by the polynomial extension decomposition, give rank
-(n-|E_k|)+|E_k|=n, using Prepared.card_le. The smooth-over-field dimension lemma
-identifies this with topologicalKrullDimAt of the fibre prime. Renumbering variables
-and ULift do not change the fibre or its prime: they are the explicit equivalence
-finiteChartEquiv. This proves the displayed dimension equality. No flatness or
-equality of annihilators is used in this calculation. -/
+Proof: Pull the chosen prime back along finiteChartEquiv and chartMap. Its contraction
+contains pi, so the residue field B is a compatible R/pi^2-algebra killing pi. The fibre
+prime avoids the image t of a_k. The partial-chart polynomial-model theorem identifies
+the localization at t with a polynomial algebra in card(E_k) variables over the base
+change to B of the smooth reduced coefficient chart. Base change Prepared.differentials
+using tensorKaehlerEquiv, and apply the polynomial differential decomposition. Transfer
+the resulting basis through the polynomial model using differential base change for its
+formally etale algebra equivalence. At a prime Q above the fibre point, base change this
+basis to the residue field; its rank is (n-card(E_k))+card(E_k)=n by Prepared.card_le.
+The smooth-over-field differential dimension theorem gives dimension n at Q. The spectrum
+map of localization at t is an open embedding, which preserves dimension at a point,
+so the original fibre point also has dimension n. No flatness or equality of annihilators
+is used. -/
 theorem partial_chart_fibre_dimension [Algebra R Cbar]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
@@ -217,7 +220,84 @@ theorem partial_chart_fibre_dimension [Algebra R Cbar]
     let p := PrimeSpectrum.comap (algebraMap R (d.finiteChartAlgebra k)) q'
     topologicalKrullDimAt
       (PrimeSpectrum.preimageEquivFiber R (d.finiteChartAlgebra k) p ⟨q', rfl⟩) =
-        (d.n : WithBot ℕ∞) := by sorry
+        (d.n : WithBot ℕ∞) := by
+  classical
+  let S := d.finiteChartAlgebra k
+  let e := d.finiteChartEquiv k
+  let q' := PrimeSpectrum.comap e.toRingHom (d.chartPrime k q)
+  let p := PrimeSpectrum.comap (algebraMap R S) q'
+  let B := p.asIdeal.ResidueField
+  let R₂ := R ⧸ Ideal.span ({π ^ 2} : Set R)
+  let A := Localization.Away (d.reducedElement k)
+  let s : S := Ideal.Quotient.mk _
+    (MvPolynomial.rename finSumFinEquiv (d.includeX (d.a k)))
+  have hπp : π ∈ p.asIdeal := by
+    change d.chartMap k (e (algebraMap R S π)) ∈ q.asIdeal
+    rw [e.commutes, (d.chartMap k).commutes]
+    exact hπ
+  have hπB : algebraMap R B π = 0 := Ideal.algebraMap_residueField_eq_zero.mpr hπp
+  let base : R₂ →ₐ[R] B := Ideal.Quotient.liftₐ _ (Algebra.ofId R B) (by
+    change Ideal.span ({π ^ 2} : Set R) ≤ RingHom.ker (algebraMap R B)
+    apply Ideal.span_le.mpr
+    rintro _ ⟨rfl⟩
+    change algebraMap R B (π ^ 2) = 0
+    rw [map_pow, hπB, zero_pow (by decide)])
+  let : Algebra R₂ B := base.toRingHom.toAlgebra
+  have : IsScalarTower R R₂ B := IsScalarTower.of_algHom base
+  have hs : s ∉ q'.asIdeal := by
+    change d.chartMap k (e s) ∉ q.asIdeal
+    change (ULift.algEquiv (R := R)).symm
+      (Ideal.Quotient.mk d.definingIdeal (d.includeX (d.a k))) ∉ q.asIdeal at hk
+    simpa [s, e, finiteChartEquiv, chartMap, includeX, Function.comp_def] using hk
+  let T := p.asIdeal.Fiber S
+  let qF : PrimeSpectrum T := PrimeSpectrum.preimageEquivFiber R S p ⟨q', rfl⟩
+  let t : T := Algebra.TensorProduct.includeRight (R := R) (A := B) s
+  have ht : t ∉ qF.asIdeal := by
+    have he := congrArg (fun x ↦ x.1.asIdeal)
+      ((PrimeSpectrum.preimageEquivFiber R S p).symm_apply_apply ⟨q', rfl⟩)
+    change Ideal.comap Algebra.TensorProduct.includeRight.toRingHom qF.asIdeal =
+      q'.asIdeal at he
+    intro h
+    exact hs (he ▸ h)
+  let C := TensorProduct R₂ B A
+  let : Algebra A C := Algebra.TensorProduct.rightAlgebra
+  let P := MvPolynomial (Fin (d.E k).card) C
+  let L := Localization.Away t
+  obtain ⟨model⟩ := popescu_partial_chart_polynomial R Cbar π d hd B hπB k
+    (d.finiteChartEquation k) (fun _ ↦ rfl)
+  have : Smooth R₂ A := hd.smooth k
+  have : Smooth B C := inferInstance
+  have : Smooth C P := ⟨inferInstance, inferInstance⟩
+  have : Smooth B P := Smooth.comp B C P
+  have : Smooth B L := Smooth.of_equiv model
+  obtain ⟨bA⟩ := hd.differentials k
+  let bC := (bA.baseChange C).map (KaehlerDifferential.tensorKaehlerEquiv R₂ B A C)
+  obtain ⟨bP⟩ := (KaehlerDifferential.exists_polynomial_extension_equiv B C
+    (d.E k).card).2 (d.n - (d.E k).card) ⟨bC⟩
+  let : Algebra P L := model.toRingHom.toAlgebra
+  have : IsScalarTower B P L := IsScalarTower.of_algHom model.toAlgHom
+  let modelP : P ≃ₐ[P] L := AlgEquiv.ofRingEquiv (f := model.toRingEquiv) (fun _ ↦ rfl)
+  have : FormallyEtale P L := FormallyEtale.of_equiv modelP
+  let bL := (bP.baseChange L).map
+    (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale B P L)
+  have hQ : qF ∈ Set.range (PrimeSpectrum.comap (algebraMap T L)) := by
+    rw [PrimeSpectrum.localization_away_comap_range L t]
+    exact ht
+  obtain ⟨Q, hQ⟩ := hQ
+  let K := Q.asIdeal.ResidueField
+  let bK := bL.baseChange K
+  have hfin : Module.finrank K (TensorProduct L K (KaehlerDifferential B L)) = d.n := by
+    rw [Module.finrank_eq_card_basis bK]
+    simp only [Fintype.card_fin]
+    exact Nat.sub_add_cancel (hd.card_le k)
+  have hsm : IsSmoothAtPrime B Q := by
+    have : Smooth L (Localization.Away (1 : L)) := Smooth.of_isLocalization_Away 1
+    exact ⟨1, Q.asIdeal.one_notMem, Smooth.comp B L (Localization.Away (1 : L))⟩
+  have hdim := (finiteDimensional_and_finrank_kaehlerDifferential_eq_of_isSmoothAtPrime
+    Q hsm).2
+  change topologicalKrullDimAt qF = _
+  rw [← hQ, ← Algebra.dimAt_openEmbedding
+    (PrimeSpectrum.localization_away_isOpenEmbedding L t) Q, ← hdim, hfin]
 
 /-- Apply equation-count flatness to the finite presentation of the partial chart.
 
