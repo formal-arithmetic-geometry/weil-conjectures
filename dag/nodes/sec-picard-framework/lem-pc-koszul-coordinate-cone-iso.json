@@ -14,33 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Reindex the free-module basis by the permutation placing i last and sending the prefix j to i.succAbove(j). Exterior powers of this permutation commute with contraction against the reindexed sequence: check the identity on exterior-algebra scalars and extend by the left-induction Leibniz formula. This gives a Koszul complex isomorphism with the distinguished coordinate last.",
+   "text": "Construct the permutation p=(finSuccEquiv last).trans(finSuccEquiv i).symm, so p(last)=i and p(j.castSucc)=i.succAbove(j). Prove contraction naturality under Finsupp.lmapDomain p by CliffordAlgebra.left_induction. Exterior powers of the corresponding linear equivalence are inverse by exteriorPower.map_comp/map_id. Their compatibility with the Koszul boundary yields a complex isomorphism using HomologicalComplex.Hom.isoOfComponents. Extend its inverse to integer cochain degrees.",
    "uses": [
     "def-weil-pbc-koszul-complex"
    ],
    "elementary": false
   },
   {
-   "text": "For the last coordinate split exterior degree q into the prefix degree q and last-basis-vector wedge prefix degree q-1. The established tensor cone coordinates at M=A, followed by the tensor-unit isomorphism, give this decomposition and the boundary matrix (x,y) -> (d x + a*y,-d y). Degree zero has only the prefix summand. Alternatively construct the untensored maps directly from koszulLastAssembly and its bijectivity. Extend to cochain degrees -q and reorder the two summands into Mathlib mapping-cone order. The matrix equations are precisely the chain-map equations of the degreewise isomorphism, including the degree-zero boundary.",
+   "text": "Apply exists_koszulTensorConeCoordinates to the reindexed sequence with coefficient module A. Conjugate its linear equivalences by TensorProduct.rid, and prove compatibility with the untensored differentials by tensor-product induction and rid naturality. The resulting coordinates satisfy the separate degree-one and higher differential equations. Apply the generic scalar-cone assembly criterion to these coordinates. Rewrite the prefix as j -> g(i.succAbove j) and the last scalar as a.",
    "uses": [
-    "lem-weil-pbc-koszul-tensor-cone-coordinates"
+    "lem-weil-pbc-koszul-tensor-cone-coordinates",
+    "lem-pc-chain-cone-coordinates-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the additive termwise tilde functor to the preceding complex isomorphism. Mathlib CochainComplex.mappingCone.mapHomologicalComplexIso identifies its image cone with the cone of the mapped scalar endomorphism. Compose these two isomorphisms. This works for r=0, for zero scalars, and over the zero ring: the basis decompositions and differential equations do not assume any generator is regular or nonzero.",
+   "text": "Compose the extended reindexing isomorphism with the assembled cone isomorphism and apply the termwise tilde functor. Supply its additive and zero-preserving properties locally using tilde.map_add and tilde.map_zero. Compose with Mathlib CochainComplex.mappingCone.mapHomologicalComplexIso. This is the required sheafified complex isomorphism, with no changed hypothesis or conclusion.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-koszul-complex",
-  "lem-weil-pbc-koszul-tensor-cone-coordinates"
+  "lem-weil-pbc-koszul-tensor-cone-coordinates",
+  "lem-pc-chain-cone-coordinates-iso"
  ],
  "proof_origin": {
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 0628 and 0629, adjoining the final generator as a scalar cone. Read online at https://stacks.math.columbia.edu/tag/0629 (the TeX source is absent locally).",
-  "by": "document"
+  "place": "Tags 0628 and 0629, using explicit generator reindexing, tensor-unit transfer of existing coordinates, the generic cone assembly criterion, and Mathlib additive-functor cone comparison."
  },
  "mathlib_searches": [
   {
@@ -121,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T194141-L-465180",
+  "landing": "20261013T031553-L-3575318",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

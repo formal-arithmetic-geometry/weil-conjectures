@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-chain-cone-coordinates-iso",
+ "kind": "statement",
+ "title": "Assemble scalar cone coordinates after extension by zero",
+ "statement": "Let A be a commutative ring, K and L chain complexes of A-modules indexed by the natural numbers, and a an element of A. Suppose there are A-linear equivalences e0:K_0 -> L_0 and e_n:K_(n+1) -> L_(n+1) direct_sum L_n for all n>=0. Assume e0(d_K x)=d_L(e_0 x).first + a*(e_0 x).second for every x in K_1, and e_n(d_K x)=(d_L(e_(n+1) x).first + a*(e_(n+1) x).second, -d_L(e_(n+1) x).second) for every n>=0 and x in K_(n+2). Extend K and L by zero to cochain degree -n. Then the extended K is isomorphic as a cochain complex to the mapping cone of a times the identity of the extended L. No regularity, boundedness above in homological degree, or nonzero hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0628 and 0629, differential-compatible scalar cone coordinates; read online at https://stacks.math.columbia.edu/tag/0628 and https://stacks.math.columbia.edu/tag/0629. The generic complex assembly and extension-by-zero case are expanded from the displayed cone matrix."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "In cochain degree -(n+1) use e_n, swap the two coordinates, identify their product with the categorical biproduct using ModuleCat.biprodIsoProd, and apply the inverse of HomologicalComplex.homotopyCofiber.XIsoBiprod. Use extendXIso to identify the two terms of extended L with L_n and L_(n+1). In degree zero use e0 and the right summand of the cone; the left summand is zero because extended L in degree one is zero. In strictly positive degrees both sides are zero objects, so use their unique isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the differential from degree -(n+2) to -(n+1), compose with the cone first and second projections. Mathlib mappingCone.d_fst_v gives the negative prefix differential on the shifted source summand. Mathlib mappingCone.d_snd_v gives a times that source summand plus the prefix differential on the target summand. These are exactly the two components of the assumed higher-degree equation, in exchanged coordinate order. For the differential from degree -1 to zero the first projection has zero target and the second projection is exactly the separate degree-one equation. All differentials with positive target degree are zero. HomologicalComplex.extend_d_eq transports the original differentials to the extended complexes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resulting degreewise isomorphisms commute with all differentials. Apply HomologicalComplex.Hom.isoOfComponents to obtain the complex isomorphism. The construction also works for a=0, zero modules and the zero ring, since it uses no cancellation of a scalar and no division.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0628 and 0629: generic assembly of the displayed cone matrix, including extension by zero and Mathlib summand order."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chain complex with degreewise scalar mapping cone coordinates is isomorphic to the mapping cone after extension by zero to integer cochain degrees",
+   "date": "2026-10-13",
+   "results": "msearch.py attempted; service unavailable: Internal Server Error. No verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex is invariant under reindexing its generators and adjoining a generator is a mapping cone",
+   "date": "2026-10-13",
+   "results": "Eight generic mappingCone and homotopyCofiber results, including mappingConeHomOfDegreewiseSplitXIso and mapHomologicalComplexXIso. None assembles the stated natural-number chain coordinates after extension by zero.",
+   "verdict": "No exact match; use the generic component-isomorphism and cone-projection APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map",
+   "date": "2026-10-13",
+   "results": "Exterior-power functoriality lemmas; no cone-coordinate complex assembly.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*cone|koszul.*Cone|mappingCone.*[Ii]so|map.*mappingCone; isoOfComponents; extendXIso; d_fst_v; d_snd_v",
+   "date": "2026-10-13",
+   "results": "Searched both library roots and Mathlib homology. Found HomologicalComplex.Hom.isoOfComponents, extendXIso, extend_d_eq, mappingCone.d_fst_v/d_snd_v and ModuleCat.biprodIsoProd. No theorem with the stated coordinate hypotheses.",
+   "verdict": "Generic tools exist; the assembly criterion is not already stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructing an isomorphism of complexes from a decomposition into two summands whose differential is a triangular block matrix",
+   "date": "2026-10-13",
+   "results": "Second reader: service unavailable; no mathematical verdict inferred."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.Iso",
+   "date": "2026-10-13",
+   "results": "Second reader: eight results, including mappingConeHomOfDegreewiseSplitIso and additive-functor comparison isomorphisms.",
+   "verdict": "The short-complex splitting theorem needs a different input construction; no exact coordinate assembly criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "isoOfComponents|mappingConeHomOfDegreewiseSplitIso|extend_d_eq",
+   "date": "2026-10-13",
+   "results": "Second reader: searched Algebra/Homology; generic component assembly, degreewise splitting and extension transport APIs.",
+   "verdict": "No exact match for the natural-number coordinate criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulCoordinateConeIso",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction step: Koszul orthogonality forces the affine restriction to be the pushforward from the smaller open; Koszul orthogonality propagates to positive powers; A sheafified Koszul coordinate is a scalar mapping cone; step 2: assembling compatible last-generator coordinates into an extended complex isomorphism",
+   "via": [
+    "lem-pc-koszul-coordinate-cone-iso",
+    "lem-pc-koszul-coordinate-mul-triangle",
+    "lem-pc-koszul-powers-orthogonality",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ChainConeCoordinatesIso",
+  "file": "lean/Sheaf/Algebra/Homology/ChainConeCoordinatesIso.lean",
+  "declaration": "ChainComplex.scalarCone_iso_of_coordinates",
+  "statement": "theorem scalarCone_iso_of_coordinates (A : Type u) [CommRing A] (K L : ChainComplex (ModuleCat.{u} A) ℕ) (a : A) (e₀ : K.X 0 ≃ₗ[A] L.X 0) (e : ∀ n : ℕ, K.X (n + 1) ≃ₗ[A] L.X (n + 1) × L.X n) (h₀ : ∀ x : K.X 1, e₀ (K.d 1 0 x) = L.d 1 0 (e 0 x).1 + a • (e 0 x).2) (hd : ∀ (n : ℕ) (x : K.X (n + 2)), e n (K.d (n + 2) (n + 1) x) = (L.d (n + 2) (n + 1) (e (n + 1) x).1 + a • (e (n + 1) x).2, -L.d (n + 1) n (e (n + 1) x).2)) : Nonempty (K.extend ComplexShape.embeddingDownNat ≅ CochainComplex.mappingCone (a • 𝟙 (L.extend ComplexShape.embeddingDownNat)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T031553-L-3575318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T031553-L-3575318",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
