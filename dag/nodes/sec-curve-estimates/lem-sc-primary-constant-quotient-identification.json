@@ -18,17 +18,27 @@
  },
  "proof": [
   {
-   "text": "Every quotient element is represented in B and is annihilated by ell. Integer multiplication modulo ell defines a module over the field ZMod ell. Finiteness of R implies finiteness of B and its quotient, so a finite basis identifies the latter additively with finitely many copies of the prime field. Both actions are trivial, so this is equivariant. A zero quotient has the empty basis.",
+   "text": "Put Q = B.toIntSubmodule / primaryRelativeSubmodule. Its underlying type is finite: inclusion of B into the finite ambient group is injective, and the quotient map is surjective. Quotient induction and mk_smul show that ell kills Q. Give Q its ZMod ell module structure and restrict scalars from ULift (ZMod ell). Choose the vector-space basis; its index injects into the finite group Q, hence is finite. Reindex by Fin d and apply the coordinate equivalence to obtain Q additively isomorphic to Fin d -> ULift (ZMod ell).",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The geometric stalk of a constant sheaf is its value, and constant germs are invariant under changing a pointed lift. The stipulated action formula of C and the existence of extensions of Galois automorphisms identify its image with the trivial representation. Full faithfulness identifies the inverse image of a trivial representation with its constant sheaf. Equivalences preserve finite biproducts; inverse image across e preserves constant sheaves and biproducts. Induct on the basis cardinal to obtain the Nat.rec expression.",
+   "text": "For any abelian group V, let F be its constant sheaf on Spec L and a the canonical map from global constant sections to its geometric stalk at t. The constant geometric stalk theorem makes a an isomorphism. Compose it with the inverse of the given fiber comparison to obtain an additive isomorphism b: V -> C(F). For g in H, extend g to tau on Omega. Each y in L is fixed by g, so the extension identity shows tau fixes the image of L and Spec(tau) followed by t equals t. Apply the comparison action formula at the identity etale neighbourhood with both lifts equal to t and the global constant section of v. Cancel the fiber isomorphism to prove g*b(v)=b(v). The resulting integer-linear equivariant isomorphism is an isomorphism of discrete representations. Apply C.inverse and its unit to identify the inverse of the trivial representation with F; pull back across e.inv using upperStarConstantSheafIso.",
    "uses": [
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
     "lem-exc-galois-automorphism-extension"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove by induction on d that the constant sheaf of Fin d -> ULift (ZMod ell) is the displayed Nat.rec biproduct. For d=0 its coefficient group is subsingleton and the additive constant-sheaf functor sends it to a zero object. For d+1 use Fin.snocEquiv and product commutation to split off one coefficient. The additive-group product is the binary biproduct; the constant-sheaf functor preserves binary biproducts because it preserves coproducts and is additive. Compose with the induction isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the trivial-representation/constant-sheaf isomorphism for Q, the constant-sheaf image of its coordinate additive equivalence, and the finite-biproduct induction. The result is the required witness d and isomorphism. A=B and B=0 give the zero quotient; no inclusion A<=B is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -38,7 +48,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair.; completed in Lean by K1, using the identity etale neighbourhood for constant germs."
  },
  "mathlib_searches": [
   {
@@ -120,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-38891",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T223415-L-1640273",
-  "kind": "interface",
-  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
+  "landing": "20261013T011927-L-2763369",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
