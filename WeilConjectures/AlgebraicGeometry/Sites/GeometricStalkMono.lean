@@ -18,7 +18,7 @@ are injective.
 
 This is a consequence of Mathlib's
 `AlgebraicGeometry.Scheme.isConservative_pointSmallEtale` (moved to the coefficient universe by
-`AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ`)
+`Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ`)
 and `CategoryTheory.ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectMonomorphisms`.
 -/
 
@@ -42,6 +42,12 @@ theorem mono_iff_forall_injective_sheafFiber_map {S : Scheme.{u}} {ι : Type u}
     Mono φ ↔ ∀ i, Function.Injective ((pointSmallEtale (s i)).sheafFiber.map φ) := by
   refine ⟨fun _ i ↦ ?_, fun h ↦ ?_⟩
   · rw [← AddCommGrpCat.mono_iff_injective]
+    have : HasFiniteLimits AddCommGrpCat.{u + 1} := inferInstance
+    have : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
+      AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+    have : LocallySmall.{u} S.Etale := inferInstance
+    have : PreservesFiniteLimits ((pointSmallEtale (s i)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})) := inferInstance
     infer_instance
   · have hP := isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ S s hs
     have hmono (Φ : (ObjectProperty.ofObj fun i ↦

@@ -62,7 +62,8 @@ structure FiniteLocalModelCompatibleTransport (E : Sheaf T.smallEtaleTopology (T
     transport a b hab ⟨(e.hom.app (op (MorphismProperty.Over.mk ⊤ a ha)) s).down.left,
         Over.w _⟩ =
       ⟨(e.hom.app (op (MorphismProperty.Over.mk ⊤ b hb))
-        (E.obj.map (MorphismProperty.Over.homMk (𝟙 S) (by simpa using hab.symm)).op s)).down.left,
+        (E.obj.map (MorphismProperty.Over.homMk (𝟙 S)
+          (by exact (id_comp _).trans hab)).op s)).down.left,
         Over.w _⟩
 
 end AlgebraicGeometry.Scheme
