@@ -10282,3 +10282,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: returned deliver/A2/Sheaf.AlgebraicGeometry.FiniteFreeStalkMapLocal (reviewer RETURN: (reviewer X-742a9, head 742a9a3bd) H8 (review point 4): lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkMapPositive.lean:9–1)
 - 00:31 L: returned deliver/A4/Sheaf.CategoryTheory.ColimitSiteRawSectionCompatibility (reviewer RETURN: (the landing tools, head 329b070b7) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 00:31 L: returned deliver/S1/Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreCandidate (reviewer RETURN: (the landing tools, head d254a6d28) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 00:31 L: merged deliver/A2/Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackComposition (stage 3; reviewer PASS; first push; landing 20261013T003153-L-2427676 (interface); batch 20261013T003152; modules 2; new nodes 1)

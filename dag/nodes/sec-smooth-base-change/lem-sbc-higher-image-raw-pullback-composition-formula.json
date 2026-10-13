@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-higher-image-raw-pullback-composition-formula",
+ "kind": "statement",
+ "title": "Function-level composition of explicit raw cohomology pullbacks",
+ "statement": "For the raw pullback functions of lem-sbc-higher-image-raw-pullback-composition, the function for a composite arrow is the composition of the two pullback functions in contravariant order.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, canonical comparison maps; expansion of the five-factor formula"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-over-naturality",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Expand the two sides as functions using the five-factor definition of raw pullback.",
+   "uses": [
+    "sbc-lem-higher-image-raw-over-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use composition of exact derived inverse images, associativity of upperStarComp, the single-functor composition comparison, and shift compatibility to identify the five factors for the composite with the two successive five-factor formulas.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-sbc-pullback-single-comp",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-image-raw-over-naturality",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-pullback-single-comp",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and the exact-functor factorization interface",
+  "place": "Function-level expansion of the composition step in lem-sbc-higher-image-raw-pullback-functorial"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition equality for explicit derived pullback function",
+   "date": "2026-10-13",
+   "results": "Service unavailable",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImageRawOverPullback\"",
+   "date": "2026-10-13",
+   "results": "No hits",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageRawOverPullback_comp",
+   "date": "2026-10-13",
+   "results": "No existing theorem",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackComposition",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-higher-image-raw-pullback-composition",
+   "place": "Function-level form of the five-factor composition identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackCompositionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawPullbackCompositionFormula.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_function_comp",
+  "statement": "theorem higherDirectImageRawOverPullback_function_comp (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {A B C : Over W} (f : A ⟶ B) (g : B ⟶ C) (U : S.Etale) : higherDirectImageRawOverPullback Λ k G q (f ≫ g) U = (higherDirectImageRawOverPullback Λ k G q f U) ∘ (higherDirectImageRawOverPullback Λ k G q g U)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T003153-L-2427676",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T003153-L-2427676",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

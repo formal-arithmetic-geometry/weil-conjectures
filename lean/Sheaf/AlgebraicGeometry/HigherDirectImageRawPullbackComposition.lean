@@ -6,8 +6,7 @@ Authors: SHEAF group E2
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
-import Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackCompositionFormula
 
 /-! # Composition of raw cohomology pullbacks
 
@@ -51,6 +50,8 @@ theorem higherDirectImageRawOverPullback_comp
     (z : (higherDirectImageRawOverPresheaf Λ k G q C).obj (op U)) :
     higherDirectImageRawOverPullback Λ k G q (f ≫ g) U z =
       higherDirectImageRawOverPullback Λ k G q f U
-        (higherDirectImageRawOverPullback Λ k G q g U z) := by sorry
+        (higherDirectImageRawOverPullback Λ k G q g U z) := by
+  have h := higherDirectImageRawOverPullback_function_comp Λ k G q f g U
+  exact congrFun h z
 
 end AlgebraicGeometry.Etale
