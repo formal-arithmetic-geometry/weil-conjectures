@@ -1,0 +1,115 @@
+{
+ "id": "new-module-cup-godement-tensor-map-of-pairing-exists",
+ "kind": "statement",
+ "title": "Extension of a stalkwise pairing to Godement tensor coordinates",
+ "statement": "Given a stalkwise pairing satisfying the represented-germ formula, there is a family of Godement tensor maps whose evaluated coordinates equal that pairing.",
+ "stmt_deps": [
+  "new-module-cup-godement-tensor-coordinates",
+  "def-sc-module-cup-godement-model"
+ ],
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15–16; Stacks Tag 0FKR"
+ },
+ "proof": [
+  {
+   "text": "For each point compose the skyscraper projections with the pairing. Tensor universality gives a presheaf map, sheafification extends it to a sheaf map, and the product universal property assembles the coordinates.",
+   "uses": [
+    "new-module-cup-godement-tensor-coordinates",
+    "def-sc-module-cup-godement-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-module-cup-godement-tensor-coordinates",
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4; Stacks Tag 0FKR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalkwise tensor pairing on sheaf module germs",
+   "results": "UNAVAILABLE: Internal Server Error from leansearch service.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no result obtained"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalkwise tensor pairing germ sheaf module",
+   "results": "No exact match; generic tensor infrastructure only.",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules tensor germ stalk",
+   "results": "Generic tensor declarations only.",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper.*tensor|tensor.*stalk",
+   "results": "No exact hits.",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "No exact declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementTensorCoordinatesExists",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-module-cup-godement-tensor-coordinates",
+   "place": "coordinate assembly part of construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementTensorMapOfPairingExists",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementTensorMapOfPairingExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_tensor_map_of_pairing_exists",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14",
+  "statement": "theorem moduleCup_godement_tensor_map_of_pairing_exists (X : Scheme.{u})\n    (t : ∀ (H K : X.Modules) (x : X),\n      H.presheaf.stalk x → K.presheaf.stalk x → (H ⊗ K).presheaf.stalk x)\n    (ht : ∀ (H K : X.Modules) (x : X) (U : X.Opens) (hx : x ∈ U)\n        (s : Γ(H, U)) (r : Γ(K, U)),\n      t H K x (H.presheaf.germ U x hx s) (K.presheaf.germ U x hx r) =\n        (H ⊗ K).presheaf.germ U x hx\n          ((moduleCup_sectionTensor X H K).app (op U)\n            (s ⊗ₜ[Γ(X, U)] r))) :\n    ∃ b : ∀ H K : X.Modules,\n      moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶\n        moduleCup_godementObject X (H ⊗ K),\n      ∀ (H K : X.Modules) (x : X) (U : X.Opens) (hx : x ∈ U)\n        (s : Γ(moduleCup_godementObject X H, U))\n        (r : Γ(moduleCup_godementObject X K, U)),\n      (moduleCup_sectionTensor X (moduleCup_godementObject X H)\n          (moduleCup_godementObject X K) ≫ (b H K).val ≫\n        (Pi.π (fun y : X ↦ skyscraper y ((H ⊗ K).presheaf.stalk y)) x).val).app\n          (op U) (s ⊗ₜ[Γ(X, U)] r) ⟨hx⟩ =\n        t H K x\n          ((Pi.π (fun y : X ↦ skyscraper y (H.presheaf.stalk y)) x).app U s ⟨hx⟩)\n          ((Pi.π (fun y : X ↦ skyscraper y (K.presheaf.stalk y)) x).app U r ⟨hx⟩)"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T181101-L-2600848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T181101-L-2600848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

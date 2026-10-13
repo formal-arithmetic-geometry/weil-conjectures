@@ -6,6 +6,8 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.Paper.ModuleCupGodementTensorCoordinates
+import Sheaf.Paper.ModuleCupGodementTensorStalkPairingExists
+import Sheaf.Paper.ModuleCupGodementTensorMapOfPairingExists
 
 /-! # Existence of the coordinatewise Godement tensor map -/
 
@@ -36,7 +38,9 @@ theorem moduleCup_godement_tensor_coordinates_exists (X : Scheme.{u}) :
       moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶
         moduleCup_godementObject X (H ⊗ K),
       ModuleCupGodementTensorCoordinates X b := by
-  sorry
+  obtain ⟨t, ht⟩ := moduleCup_godement_tensor_stalk_pairing_exists X
+  obtain ⟨b, hb⟩ := moduleCup_godement_tensor_map_of_pairing_exists X t ht
+  refine ⟨b, t, ht, hb⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
