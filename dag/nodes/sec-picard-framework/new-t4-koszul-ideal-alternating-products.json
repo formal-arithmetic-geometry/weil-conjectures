@@ -12,29 +12,44 @@
  },
  "proof": [
   {
-   "text": "Choose a free strictly commutative Tate resolution Q of A/I with degree zero A. Lift each x in I to degree one with differential x. Differences of lifts are cycles and hence boundaries by exactness of Q. Adding and scaling lifts establishes A-linearity of the resulting degree-one classes after tensoring with A/I.",
-   "uses": [],
+   "text": "Choose augmentation-preserving Koszul maps b(r,g) into P using new-e1-koszul-augmentation-lift-exists. After tensoring with A/I all Koszul differentials vanish: apply boundary_wedge from the generator-chain-map module and move each ideal coefficient to the quotient tensor factor. The inverse of iCyclesIso therefore gives a concrete A-linear cycle lift x ↦ x tensor 1, and composition with homologyπ and the homology map of b gives wedgeEval(r,g).",
+   "uses": [
+    "new-e1-koszul-augmentation-lift-exists",
+    "new-q2-koszul-generator-chain-map"
+   ],
    "elementary": false
   },
   {
-   "text": "Multiply n degree-one classes in the quotient-tensored Tate algebra. Strict commutativity gives alternation, including squares of odd classes being zero in characteristic two. Each value is annihilated by I. For n=0 take the quotient unit. Transport these products to P by a comparison chain map Q to P, which exists by freeness and exactness as in Tag 00LS(1). This defines F on I, without any quotient-descent assertion.",
-   "uses": [],
+   "text": "For a rectangular substitution t between free modules satisfying linearCombination(g) composed with t = linearCombination(f), assemble exteriorPower.map q t into a chain map U in every degree. The boundary_wedge formula verifies the chain equations, and zeroEquiv_naturality verifies the augmentation. By new-r4-koszul-augmentation-lift-homotopy, b(f) and U followed by b(g) are homotopic. Tensor this homotopy, use homologyπ_naturality and cyclesMap_i, and identify the explicit cycle lifts by monicity of iCycles. This proves wedgeEval(f,x) = wedgeEval(g, exteriorPower.map n t x).",
+   "uses": [
+    "new-q2-koszul-generator-chain-map",
+    "new-r4-koszul-augmentation-lift-homotopy"
+   ],
    "elementary": false
   },
   {
-   "text": "For each tuple g, send Koszul generators to the chosen degree-one lifts of its entries in Q. The differential and exterior relations hold by construction and strict commutativity, giving a dg algebra map. Compose with the comparison Q to P to define b. It preserves augmentation, and evaluation on a wedge of arbitrary vectors v is the product of the corresponding ideal linear combinations by multilinearity. The cycle representative is unambiguous because iCycles is monic. For I=A the target homology is zero; for I=0 the positive products vanish.",
+   "text": "Define ev(w) using the basis wedge in the Koszul complex on w:Fin n→I. Apply substitution invariance with t=linearCombination(v) to express ev(linearCombination(g) composed with v) as wedgeEval(g,ιMulti(v)). For additivity in slot i, take the length-(n+1) tuple formed by update(w,i,x) and the extra element y. Substitute the old basis vector plus the extra basis vector at i; multilinearity of ιMulti and linearity of wedgeEval give the sum of the two evaluations. For scalar compatibility substitute c times the basis vector in the tuple update(w,i,x). If w(i)=w(j), substitute the i-th basis vector in slot j; the tuple of ideal combinations is still w but its wedge is zero by alternation. These three verified identities construct the alternating map F₀ on I.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Every ev(w) is annihilated by I: a in I kills x tensor 1 by moving the scalar to the quotient factor. Monicity of iCycles implies that a kills its explicit cycle lift, and linearity passes this through homologyπ and the induced homology map. Restrict F₀ to torsionBySet to get F. The arbitrary-vector substitution formula gives the required equality for s; its canonical cycle lift equals s.z by wedgeCycles_spec, s.hz and monicity of iCycles. For n=0 the basis wedge is the empty wedge, and the same tensor argument handles its ideal annihilation. No step assumes I proper, a nonzero ring, regularity, or invertibility of two.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-e1-koszul-augmentation-lift-exists",
+  "new-q2-koszul-generator-chain-map",
+  "new-r4-koszul-augmentation-lift-homotopy"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "T4",
+  "group": "T2",
   "date": "2026-10-14",
   "based_on": {
-   "document": "https://stacks.math.columbia.edu/tag/09PQ",
-   "place": "Lemma 23.6.12, Tate-resolution Tor products; Tag 00LS, Lemma 10.71.4(1), comparison with P"
+   "document": "https://stacks.math.columbia.edu/tag/0624; https://stacks.math.columbia.edu/tag/00LS",
+   "place": "Koszul functoriality and uniqueness up to homotopy of augmentation lifts; direct exterior-power proof, avoiding Tate resolutions"
   }
  },
  "mathlib_searches": [
@@ -133,10 +148,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T224522-L-1476511",
-  "kind": "interface",
+  "landing": "20261013T231546-L-1821439",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
