@@ -1,150 +1,147 @@
 {
-  "id": "lem-sc-koszul-ext-off-rank-stalk",
-  "kind": "statement",
-  "title": "Off-rank stalk vanishing of pulled-back Koszul Ext",
-  "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], let $\\mathcal I$ be its kernel ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], and let $C=i^*\\mathcal I$ be its tensor pullback [def-pc-module-pullback]. Use the derived category and derived internal Hom of [def-pc-derived-category, def-pur-derived-internal-hom], and write $F^q=H^q(R\\mathcal Hom_Y(i_*\\mathcal O_Z,\\mathcal O_Y))$. Suppose near every $z\\in Z$ an affine neighbourhood of $i(z)$ cuts out $i$ by a finite Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence]. Let $r:Z\\to\\mathbb N$ be locally constant with $r(z)=\\operatorname{finrank}_{\\mathcal O_{Z,z}}C_z$, where the module stalk is [def-pc-module-stalk-functor]. For every $q\\in\\mathbb Z$ and $z\\in Z$ with $q\\ne r(z)$, the stalk $(i^*F^q)_z$ is zero.",
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-module-pullback",
-    "def-pc-derived-category",
-    "def-pur-derived-internal-hom",
-    "def-weil-pbc-koszul-regular-sequence",
-    "def-pc-module-stalk-functor"
-  ],
-  "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
-  },
-  "proof": [
-    {
-      "text": "Choose an affine Koszul chart at the point, set A to its section ring and I to the kernel ideal. The closed immersion gives the quotient-spectrum identification. The Koszul quotient augmentation is a quasi-isomorphism, and exact associated-module sheafification gives a finite free resolution of the restricted structure-sheaf pushforward. Terms above its length vanish by the exterior-power basis; extend the complex to integer degrees.",
-      "uses": [
-        "lem-sc-koszul-regular-sequence-dual-complex",
-        "lem-sc-affine-quotient-resolution-sheafification"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Restrict derived internal Hom to the chart and compute it by the bounded finite free Hom model into the structure sheaf in degree zero. On standard affine opens, finite free coordinates identify sheaf Hom with associated module Hom and commute with restriction. Homology commutes with exact associated-module sheafification. Use the common K-injective Hom complex to compare the standard and supplied derived universes.",
-      "uses": [
-        "lem-sc-derived-internal-hom-restrict-open",
-        "lem-sc-derived-hom-finite-free-model"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The Koszul conormal basis and affine conormal frame identify the sequence length m with the finrank of C at the chosen point.",
-      "uses": [
-        "lem-sc-koszul-conormal-basis",
-        "lem-sc-affine-conormal-frame"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The dual Koszul cohomology vanishes in every integer degree except m, including negative degrees. The rank hypothesis identifies m=r(z), and q differs from that value. Hence F^q is zero on an affine neighbourhood of i(z). Pullback of the zero module sheaf is zero, and its stalk at z is zero. Empty sequence and empty source are included.",
-      "uses": [
-        "lem-sc-koszul-regular-sequence-dual-complex"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-affine-quotient-resolution-sheafification",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model",
+ "id": "lem-sc-koszul-ext-off-rank-stalk",
+ "kind": "statement",
+ "title": "Off-rank stalk vanishing of pulled-back Koszul Ext",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], let $\\mathcal I$ be its kernel ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], and let $C=i^*\\mathcal I$ be its tensor pullback [def-pc-module-pullback]. Use the derived category and derived internal Hom of [def-pc-derived-category, def-pur-derived-internal-hom], and write $F^q=H^q(R\\mathcal Hom_Y(i_*\\mathcal O_Z,\\mathcal O_Y))$. Suppose near every $z\\in Z$ an affine neighbourhood of $i(z)$ cuts out $i$ by a finite Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence]. Let $r:Z\\to\\mathbb N$ be locally constant with $r(z)=\\operatorname{finrank}_{\\mathcal O_{Z,z}}C_z$, where the module stalk is [def-pc-module-stalk-functor]. For every $q\\in\\mathbb Z$ and $z\\in Z$ with $q\\ne r(z)$, the stalk $(i^*F^q)_z$ is zero.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
+ },
+ "proof": [
+  {
+   "text": "Choose an affine Koszul chart U at i(z), with sequence f of length n. The regular conormal basis gives a basis of (i.ker.ideal U).Cotangent. The affine conormal frame identifies the conormal stalk finrank at z with n. Compose with hr to obtain r(z)=n, and rewrite hq to q≠n.",
+   "uses": [
     "lem-sc-koszul-conormal-basis",
     "lem-sc-affine-conormal-frame"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "agent": "A2",
-    "date": "2026-10-13",
-    "based_on": {
-      "document": "literature/stacks-project/duality.tex",
-      "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
-    },
-    "note": "Koszul calculation follows the cited source; rank-support reconstruction is written explicitly using the open adjunction and stalks."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "For a Koszul regular closed immersion, scalar Ext sheaf vanishes outside the conormal rank degree",
-      "results": "UNAVAILABLE: Internal Server Error; not evidence of absence.",
-      "date": "2026-10-13",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Koszul regular quotient dual complex cohomology vanishes away from length",
-      "results": "General cochain support/exactness and projective/injective dimension results; no scheme Koszul Ext stalk calculation.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "koszul.*homology|homology.*koszul",
-      "results": "No hits in Mathlib/RingTheory.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback",
-    "date": "2026-10-13",
-    "group": "A2"
+  {
+   "text": "In the standard derived category of modules over A=Γ(Y,U), choose the normalized dual Koszul comparison and apply its cohomology theorem to q≠n. This proves that the actual integer-indexed dual Koszul homology module in degree q is zero, including negative q.",
+   "uses": [
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "Scalar Koszul Ext comparison: Off-rank stalk vanishing of pulled-back Koszul Ext",
-      "via": [
-        "lem-sc-koszul-regular-immersion-ext-pullback",
-        "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
-        "lem-sc-koszul-regular-immersion-ext-sheaf",
-        "lem-sc-koszul-regular-immersion-derived-hom",
-        "lem-sc-smooth-proper-diagonal-koszul-dual",
-        "lem-sc-smooth-proper-relative-dualizing-general"
-      ]
-    },
-    "same_as": []
+  {
+   "text": "Apply affine_koszul_scalar_ext_comparison to identify F^q.over U with the transported associated sheaf of this homology module. Tilde, restriction along the affine isomorphism, and the inverse over-site equivalence preserve zero morphisms and hence zero objects. Transport through the comparison to prove F^q.over U is zero.",
+   "uses": [
+    "lem-sc-affine-koszul-scalar-ext-comparison"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk",
-    "file": "lean/Sheaf/AlgebraicGeometry/KoszulExtOffRankStalk.lean",
-    "declaration": "AlgebraicGeometry.koszulRegularImmersion_ext_offRank_stalk",
-    "statement": "theorem koszulRegularImmersion_ext_offRank_stalk {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧ ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)), Ideal.span (Set.range f) = i.ker.ideal U ∧ RingTheory.Sequence.IsKoszulRegular f) (r : LocallyConstant Z ℕ) (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z) ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) (q : ℤ) (z : Z) (hq : q ≠ (r z : ℤ)) : let F : Y.Modules := (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) IsZero ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj F))",
-    "branch": "sheaf-dag",
-    "by": "A2",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261013T045510-L-123855",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261013T045510-L-123855",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Represent each element of the stalk of F^q at i(z) by a germ on V and restrict to V∩U. Applying id=0 for F^q.over U to this restricted section makes it zero. Germ restriction compatibility then proves each original germ is zero, hence the stalk module is a zero object. Use the tensor-pullback stalk isomorphism and preservation of zero objects by extension of scalars to conclude that (i^*F^q)_z is zero.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-affine-conormal-frame",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sc-affine-koszul-scalar-ext-comparison",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
+  },
+  "note": "Compiled reduction: rank identification and dual cohomology vanishing are combined with a new affine scalar Ext comparison. Local zero-to-stalk and tensor stalk transport are proved in the item. The comparison is the only new deferred step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a Koszul regular closed immersion, scalar Ext sheaf vanishes outside the conormal rank degree",
+   "results": "UNAVAILABLE: Internal Server Error; not evidence of absence.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul regular quotient dual complex cohomology vanishes away from length",
+   "results": "General cochain support/exactness and projective/injective dimension results; no scheme Koszul Ext stalk calculation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*homology|homology.*koszul",
+   "results": "No hits in Mathlib/RingTheory.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Scalar Koszul Ext comparison: Off-rank stalk vanishing of pulled-back Koszul Ext",
+   "via": [
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulExtOffRankStalk.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_ext_offRank_stalk",
+  "statement": "theorem koszulRegularImmersion_ext_offRank_stalk {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧ ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)), Ideal.span (Set.range f) = i.ker.ideal U ∧ RingTheory.Sequence.IsKoszulRegular f) (r : LocallyConstant Z ℕ) (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z) ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) (q : ℤ) (z : Z) (hq : q ≠ (r z : ℤ)) : let F : Y.Modules := (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) IsZero ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj F))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T045510-L-123855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T065104-L-897997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -11443,3 +11443,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:51 L: merged deliver/G2/Sheaf.Algebra.Homology.VerticalCutoffEndpointForks (stage 3; reviewer PASS; first push; landing 20261013T065102-L-897642 (proof); batch 20261013T065054; modules 1; new nodes 0)
 - 06:51 L: merged deliver/G2/Sheaf.AlgebraicGeometry.EtaleLimitOpenComparisonCertificate (stage 3; reviewer PASS; first push; landing 20261013T065103-L-897755 (interface); batch 20261013T065054; modules 2; new nodes 1)
 - 06:51 L: merged deliver/H1/Sheaf.CategoryTheory.Abelian.RHomDerivedConnecting (stage 3; reviewer PASS; first push; landing 20261013T065104-L-897870 (interface); batch 20261013T065054; modules 3; new nodes 2)
+- 06:51 L: merged deliver/H2/Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk (stage 3; reviewer PASS; first push; landing 20261013T065104-L-897997 (interface); batch 20261013T065054; modules 2; new nodes 1)
