@@ -15,22 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Restriction along isoSpec evaluates the map at the image open, with scalars changed by its inverse appIso. The inverse slice equivalence evaluates at the open corresponding to U times U. The direct-image scalar map is restriction along the second projection. At the top open isoSpec_hom_appTop identifies the chart map with GammaSpecIso.hom followed by U.topIso.inv. The inverse identities and naturality identify the canonical Spec scalar with the restriction of a along the second projection. Applying the sectionwise scalar hypothesis gives the result. This holds for the empty affine open and arbitrary sheaves, with no point or regular-module presentation.",
+   "text": "Unfold the transported morphism on sections and apply its sectionwise scalar hypothesis. Use Scheme.Modules.smul_Spec_def and ModuleCat.restrictScalars.smul_def to expose the two ring scalars. Apply injectivity of the chart appIso.hom to compare them. Rewrite appIso.hom as appLE and use naturality, followed by IsAffineOpen.isoSpec_hom_appTop. The GammaSpecIso inverse identity leaves the chart restriction. Unfold the slice ring comparison and U.topIso; both sides are composites of the same restriction maps between opens, whose arrows are equal because the opens category is thin. This argument constructs no basis or germs, and includes the empty open.",
    "uses": [
-    "def-pc-scheme",
-    "def-sc-affine-free-basis-germs"
+    "def-pc-scheme"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-sc-affine-free-basis-germs"
+  "def-pc-scheme"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U; Affine chart and slice scalar transport"
+  "place": "Tags 0098 and 01IB; direct section and structure-ring calculation in Mathlib, Q1"
  },
  "mathlib_searches": [
   {
@@ -102,10 +100,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T122230-L-3591493",
-  "kind": "interface",
+  "landing": "20261013T142901-L-499316",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
