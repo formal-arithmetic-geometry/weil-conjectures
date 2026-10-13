@@ -10899,3 +10899,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift (stage 3; reviewer PASS; first push; landing 20261013T031557-L-3576749 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/W3/Sheaf.AlgebraicGeometry.PrincipalCechResolutionQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T031557-L-3576943 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/W3/Sheaf.RingTheory.CohenStructurePowerSeriesSurjection (stage 3; reviewer PASS; first push; landing 20261013T031558-L-3577047 (proof); batch 20261013T031526; modules 1; new nodes 0)
+- 03:15 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.SupportedMapAffineAttachment (stage 3; reviewer PASS; first push; landing 20261013T031558-L-3577148 (interface); batch 20261013T031526; modules 2; new nodes 1)
