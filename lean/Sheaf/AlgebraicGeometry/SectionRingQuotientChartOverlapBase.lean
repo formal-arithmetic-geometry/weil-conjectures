@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapPointwise
 
 /-! # Underlying maps of section-ring quotient charts
 
@@ -85,6 +86,10 @@ theorem sectionRing_overlap_base_map
             (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤
               ⊤)).op (ξ.val (n • e))) :
     (X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ g).base =
-      (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h).base := by sorry
+      (X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h).base := by
+  apply TopCat.hom_ext
+  apply ContinuousMap.ext
+  intro x
+  exact sectionRing_overlap_base_map_pointwise X L d e s t hd he U V hU hV g h hg hh x
 
 end AlgebraicGeometry.Scheme.Modules
