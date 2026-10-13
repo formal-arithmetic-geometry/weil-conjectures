@@ -12,14 +12,14 @@
  ],
  "proof": [
   {
-   "text": "Write A = O_{Y,y}, c = fromSpecStalk y, f′ the first projection, F′ the tensor pullback, and b the actual additive map of the cited definition. Represent r by a structure-sheaf section a on a neighborhood V. Mathlib Scheme.preimage_eq_top_of_closedPoint_mem and fromSpecStalk_closedPoint identify c inverse-image V with top. The germ/stalk-map identity Scheme.germ_stalkClosedPointTo, and stalkClosedPointTo_fromSpecStalk, identify c.app V a, transported to top, with Gamma-Spec.inv r. Hence the source r action is multiplication by f′.appTop (Gamma-Spec.inv r) on the section complex.",
+   "text": "Put F′ equal to the tensor pullback, K equal to its specified injective resolution, h equal to the first projection, and t = Gamma-Spec.inv(r). Unfold the actual additive localDirectImage_stalk_class map. The restricted-scalar action on its domain is h.appTop(t) acting on ordinary module cohomology. Its remaining composite is resolutionSectionClass at top, the inverse right-derived pushforward resolution comparison on top, and the germ.",
    "uses": [
     "def-weil-pbc-local-direct-image-stalk-class-map"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Expand b into its specified resolutionSectionClass, the higher-direct-image resolution isomorphism and the germ. The first resolution comparison is a morphism of modules over global functions of X′. For a fixed base section t, multiplication by its pullback is a chain endomorphism, because every differential is linear. Apply the naturality in the complex of the exact-functor cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology] to this endomorphism, both for forgetting module scalars and for evaluating presheaf modules on top. It identifies the induced homology map with multiplication by t. The identity of section complexes intertwines these multiplication endomorphisms. Evaluation of the presheaf cohomology and theta are linear over global functions of Spec A: theta is a presheaf-of-modules morphism. The higher-direct-image resolution comparison is a module-sheaf morphism and therefore linear on top sections. Thus the section before the final germ for r x is Gamma-Spec.inv r times the section for x.",
+   "text": "Prove the private helper resolution_top_smul for an arbitrary scheme morphism and injective resolution. Let A be the global-section module complex and B the underlying presheaf-module complex of the direct image. The two underlying top-section additive short complexes are definitionally equal. Scalar multiplication by h.appTop(t) on A is equal degreewise to the natural transformation multiplying evaluation at top of B by t. Apply ShortComplex.homologyMap_mapNatTrans (the exact-functor comparison) to this equality. Conjugate the resulting equality by the inverse forgetful mapHomologyIso and the evaluation mapHomologyIso; cancel the inverse pairs. This proves semilinearity of their composite on homology. Compose with the linear isoRightDerivedObj.hom and the linear top component of sectionCohomologyTheta. The intervening homology of the identity section-complex map is identity. This proves scalar compatibility of resolutionSectionClass on top without any new unfinished statement.",
    "uses": [
     "def-weil-pbc-local-direct-image-stalk-class-map",
     "lem-weil-pbc-exact-functor-complex-cohomology"
@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "Restrict the top section to V. Since c inverse-image V is top, this restriction is identity after the canonical identification, and the action of a is the same normalized global scalar found in step 1. PresheafOfModules.germ_smul now sends a times the section to r times its germ. Compose these identities to get b(r x) = r b(x). No injectivity or surjectivity is used: this proves only scalar compatibility. Zero modules, p = 0, and empty local base change satisfy the same calculation.",
+   "text": "Prove the private helper local_germ_smul for any module G on Spec(O_{Y,y}). Represent r by a structure-sheaf section a on V containing y. Scheme.fromSpecStalk_app identifies c.app(V)(a) with the restriction of Gamma-Spec.inv(r) to c inverse V. Rewrite the two top germs as germs of their restrictions to V using germ_res_apply. The restriction map of G respects scalar multiplication, and the preceding ring identity identifies its scalar with c.app(V)(a). The pushforward module action and PresheafOfModules.germ_smul give r times the original germ. No identification of the inverse-image open with top is required. Finally apply resolution_top_smul, linearity of the inverse pushforward resolution comparison on top (Scheme.Modules.Hom.app_smul), and local_germ_smul. All statements remain unchanged, including degree zero, the zero module and empty base change.",
    "uses": [
     "def-weil-pbc-local-direct-image-stalk-class-map"
    ],
@@ -41,7 +41,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01E4",
-  "place": "Lemma 20.7.3, the comparison of section-complex cohomology with higher direct-image sheaves; Tag 02OD, Lemma 30.20.7, the displayed local-stalk/global-cohomology equality, before formal functions. Scalar compatibility expanded by S4."
+  "place": "Stacks Project, Lemma 20.7.3 (Tag 01E4), section-complex comparison; Lemma 30.20.7 (Tag 02OD), local cohomology/stalk equality. A3 formalized scalar compatibility using homologyMap_mapNatTrans and fromSpecStalk_app."
  },
  "mathlib_searches": [
   {
@@ -128,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T011934-L-2765733",
-  "kind": "interface",
+  "landing": "20261013T082328-L-1630129",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
