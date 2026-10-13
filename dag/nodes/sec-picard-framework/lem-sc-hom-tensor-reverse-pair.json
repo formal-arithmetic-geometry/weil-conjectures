@@ -1,0 +1,212 @@
+{
+ "id": "lem-sc-hom-tensor-reverse-pair",
+ "kind": "statement",
+ "title": "Reverse currying for one pair of module sheaves",
+ "statement": "Let $(C,J)$ be a site and $R$ a sheaf of commutative rings. For $R$-module sheaves $S,A,B,D$ [def-weil-sheaf-of-modules-category], a morphism $f:S\\to\\mathcal Hom_R(A\\otimes_R B,D)$ [def-pur-sheaf-hom, def-pur-sheaf-tensor-product] admits a morphism $b:S\\to\\mathcal Hom_R(A,\\mathcal Hom_R(B,D))$. For $s$ over $U$, $W\\to U$, $x\\in A(W)$ and $y\\in B(W)$, evaluating $f_U(s)_W$ on the presheaf-to-sheaf tensor image of $x\\otimes y$ equals evaluating $b_U(s)_W(x)$ on $y$ at the identity localization over $W$. The tensor image is the map of [def-sc-hom-tensor-degreewise-equation].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section internal-hom (03EK), Lemma internal-hom-adjoint-tensor (03EO)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-hom-tensor-degreewise-equation"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the separate-universe presheaf currying and uncurrying constructions already proved privately in HomTensorPair, loaded by a proof-only import all. Precompose the tensor map with the presheaf-to-sheaf tensor map. Uncurry the source parameter S by evaluation at the identity localization, reorder B, A, S using presheaf braiding and associativity, and curry twice. The existing additivity, scalar compatibility, restriction compatibility and evaluation lemmas supply these constructions without restating or proving them again.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sc-hom-tensor-pair-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the two curried maps at x and y. The identity restriction of the pair x tensor the restriction of s is the same pair. Naturality of f identifies evaluation at the identity slice after restriction with evaluation at W. This gives the displayed equality.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sc-hom-tensor-pair-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, reusing the proved presheaf helpers of HomTensorPair via import all; no duplicate currying lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Currying internal Hom of sheaves of modules from tensor product into iterated internal Hom",
+   "results": {
+    "hits": 8,
+    "top": [
+     "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+     "LightCondensed.instMonoidalClosedLightCondMod",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_apply",
+     "ModuleCat.monoidalClosed_curry",
+     "LightCondensed.ihom_map_val_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem for module sheaves with separate site universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homObj\", \"limit\"",
+   "results": {
+    "hits": 2,
+    "top": [
+     "SSetPair.instPreservesColimitChainComplexNatWalkingParallelPairParallelPairAppFunctorChainComplexFunctorLeftToRightOfNatHomObjChainComplexFunctorLeftChainComplexFunctorRightEvalDown",
+     "SSetPair.instPreservesColimitFunctorChainComplexNatWalkingParallelPairParallelPairAppChainComplexFunctorLeftToRightOfNatHomObjChainComplexFunctorLeftChainComplexFunctorRightEvaluation"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem for module sheaves with separate site universes."
+  },
+  {
+   "tool": "grep",
+   "query": "homObj.*(curry|Curry|[Ll]imit)|tensorHomCurry",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem for module sheaves with separate site universes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of sheaves preserves products in the second argument",
+   "results": {
+    "hits": 8,
+    "top": [
+     "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+     "CategoryTheory.Sheaf.cartesianMonoidalCategoryLift_val",
+     "CategoryTheory.Sheaf.cartesianMonoidalCategory",
+     "instMonoidalClosedLightCondSet",
+     "CategoryTheory.Sheaf.cartesianMonoidalCategoryFst_val",
+     "CategoryTheory.Sheaf.instHasFiniteProducts",
+     "CategoryTheory.Sheaf.cartesianMonoidalCategorySnd_val",
+     "instCartesianMonoidalCategoryLightCondSet"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem for module sheaves with separate site universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorHomCurry\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem for module sheaves with separate site universes."
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Pp]roduct|[Pp]roduct.*[Ll]imit",
+   "results": {
+    "hits": 15,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Biproducts.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Biproducts.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Biproducts.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Biproducts.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Biproducts.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem for module sheaves with separate site universes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Currying tensor product internal Hom of sheaves of modules and preservation of products",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "service unavailable: Internal Server Error"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorReverseConstruction",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Transpose tensor maps through the derived tensor-internal-Hom comparison: degreewise iso part of Tag 0A90; reverse construction only; reverse construction, localized pair currying",
+   "via": [
+    "lem-sc-hom-tensor-reverse-construction",
+    "lem-sc-hom-tensor-degreewise-iso",
+    "lem-sc-hom-tensor-degreewise",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-sc-derived-internal-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.HomTensorReversePair",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/HomTensorReversePair.lean",
+  "declaration": "SheafOfModules.homTensorReversePair_construct",
+  "statement": "theorem homTensorReversePair_construct (S A B D : Mod) :\n    letI := monoidalCategory R\n    ∀ f : S ⟶ homObj (R := R) (A ⊗ B) D,\n    ∃ b : S ⟶ homObj (R := R) A (homObj (R := R) B D),\n      ∀ (U : Cᵒᵖ) (s : S.val.obj U) (W : (Over U.unop)ᵒᵖ)\n        (x : A.val.obj (op W.unop.left)) (y : B.val.obj (op W.unop.left)),\n        (((f.val.app U).hom s).app W).hom\n          (((CategoryTheory.homTensorCurrySectionMap R A B).app\n            (op W.unop.left)).hom (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)) =\n        (((((b.val.app U).hom s).app W).hom x).app\n          (op (Over.mk (𝟙 W.unop.left)))).hom y",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c92c5",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T154359-L-1163715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c92c5",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T154359-L-1163715",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all modules and direct importer compiled, with permitted axioms only."
+ }
+}

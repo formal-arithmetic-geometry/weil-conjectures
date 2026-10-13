@@ -13,45 +13,45 @@
  ],
  "proof": [
   {
-   "text": "Restrict each localized morphism from a total tensor term to M to each tensor summand K^p tensor L^q. Precompose with the presheaf-to-sheaf tensor map. This gives the balanced bilinear map (x,y) sent to s(x tensor y) on every further localization. Curry it in y and then x using the localized tensor-Hom adjunction.",
+   "text": "Restrict the input Hom-complex map to each tensor summand by homObjMap, and apply homTensorReversePair_construct. This produces a morphism to the iterated internal Hom for each p,q with its localized pure-tensor evaluation formula.",
    "uses": [
+    "lem-sc-hom-tensor-reverse-pair",
     "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-pur-hom-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Assemble the q components by the inner Hom product universal property, then the p components by the outer Hom product universal property. The component constructions are linear in s. Restriction of the bilinear evaluation map commutes with currying and the product projections, so these sectionwise maps form a sheaf-module morphism b.",
+   "text": "Apply internalHomProductFanIsLimit to the chosen inner Hom-complex product fan, and lift the q components. Lift the resulting p components into the outer Hom-complex product fan. The product specifications are exposed by homComplex_projections_exists.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-sc-internal-hom-product-fan",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": false
   },
   {
-   "text": "Project the assembled morphism b to p and q, then evaluate at x and y at the identity localization. The product lift projection formulas recover the two curried maps; the tensor-Hom evaluation formula recovers the original balanced bilinear map. This gives the displayed evaluation equality, without either composite identity.",
+   "text": "Apply both product lift projection identities, evaluate the resulting equality on the source section, x and y, and use the pair evaluation formula. Transport the target degree from q+(p+n) to p+q+n by integer associativity and commutativity; the theorem signature is unchanged.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-sc-hom-tensor-reverse-pair",
+    "lem-sc-internal-hom-product-fan",
+    "lem-sc-hom-complex-projections"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-hom-tensor-reverse-pair",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "lem-sc-internal-hom-product-fan",
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F3",
+  "group": "W3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90, reverse degreewise tensor-Hom identification, with the omitted site calculation expanded as in Tag 0A5Y"
+  "place": "Tag 0A90, reverse construction using the localized pair formula of 03EO and product universal properties"
  },
  "mathlib_searches": [
   {
@@ -164,11 +164,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-78ac2",
-  "group": "F3",
+  "reviewer": "X-c92c5",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T133225-L-4192889",
+  "landing": "20261013T154359-L-1163715",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, original interface, source construction, change record and report; compilation, direct-importer and axiom checks pass."
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all modules and direct importer compiled, with permitted axioms only."
  }
 }
