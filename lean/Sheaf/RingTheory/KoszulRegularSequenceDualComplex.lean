@@ -13,13 +13,13 @@ public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.KoszulCoefficientExtension
 import Sheaf.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
-import Sheaf.RingTheory.KoszulExtDualHomology
+import Sheaf.RingTheory.KoszulExtRoofRepresentatives
+import Sheaf.RingTheory.KoszulRoofComparisonIndependence
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 import Mathlib.Algebra.Homology.SingleHomology
-import Sheaf.Paper.KoszulComplex
 
 /-!
 # Duality for a Koszul-regular quotient
@@ -372,68 +372,21 @@ theorem exists_koszul_quotient_augmentation
   rw [hi]
   exact hq x
 
-/-- The intrinsic Ext determinant is linear for the quotient action.
+/-- The intrinsic Ext determinant satisfies the normalized Koszul roof formula.
 Source: Stacks Project, Tag 0BQZ.
-(blueprint: lem-sc-koszul-ext-determinant-multiplication).
-Proof: apply the determinant pairing to the quotient scalar action and compare
-the induced Ext multiplication map on every class. This is strictly weaker than
-the full roof comparison below. -/
-theorem intrinsic_ext_determinant_multiplication
+(blueprint: lem-sc-koszul-ext-determinant-roof).
+Proof: choose one generating sequence and a roof-normalized Ext/dual-homology
+comparison. Compose it with the normalized conormal homology isomorphism.
+Represent an arbitrary Ext class on this fixed resolution. Independence of
+normalized roof values compares it with any other generating sequence, and the
+conormal comparison formula gives the required determinant evaluation. -/
+theorem intrinsic_ext_determinant_roof
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
     (I : Ideal A) (r : ℕ)
     (hex : ∃ f : Fin r → A,
       RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) :
     ∃ e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A]
-        koszulNormalDeterminant A I r,
-      ∀ (b : A ⧸ I)
-        (x : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r),
-        e ((Abelian.Ext.mk₀ (ModuleCat.ofHom
-          (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) =
-          @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent))
-            inferInstance b (e x) := by
-  obtain ⟨f, hreg, hf⟩ := hex
-  obtain ⟨d⟩ := exists_koszul_ext_dual_homology_equiv A I r f hreg hf
-  obtain ⟨φ, hφ⟩ := exists_koszul_conormal_comparison A I r f hreg hf
-  have : QuasiIso φ := hφ.2
-  let e := d.trans (CategoryTheory.Iso.toLinearEquiv
-    (asIso (HomologicalComplex.homologyMap φ r) ≪≫
-      HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) r
-        (koszulNormalDeterminant A I r)))
-  refine ⟨e, ?_⟩
-  intro b x
-  obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective b
-  have hm : ModuleCat.ofHom
-      (Ideal.Quotient.mk I c • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))) =
-      c • 𝟙 (ModuleCat.of A (A ⧸ I)) := by
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro y
-    rfl
-  rw [hm, Abelian.Ext.mk₀_smul, Abelian.Ext.smul_comp,
-    Abelian.Ext.mk₀_id_comp, map_smul]
-  rfl
-
-/-- The intrinsic Ext determinant satisfies the normalized Koszul roof formula.
-Source: Stacks Project, Tag 0BQZ.
-(blueprint: lem-sc-koszul-ext-determinant-roof).
-Proof: evaluate the determinant pairing on the finite Koszul roof, use the
-augmentation formula, and apply the ordered contraction sign. This is the roof
-part separated from quotient linearity above. -/
--- STATEMENT-DISPUTED: quotient linearity does not determine normalization.
--- Replacing e by -e preserves hmul but flips the left side.
-theorem intrinsic_ext_determinant_roof
-    (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
-    (I : Ideal A) (r : ℕ)
-    (hex : ∃ f : Fin r → A,
-      RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I)
-    (e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A]
-      koszulNormalDeterminant A I r)
-    (hmul : ∀ (b : A ⧸ I)
-      (x : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r),
-      e ((Abelian.Ext.mk₀ (ModuleCat.ofHom
-        (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) =
-        @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent))
-          inferInstance b (e x)) :
+      koszulNormalDeterminant A I r,
     ∀ (f : Fin r → A) (_hreg : RingTheory.Sequence.IsKoszulRegular f)
         (hf : Ideal.span (Set.range f) = I)
         (ε : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶
@@ -463,12 +416,91 @@ theorem intrinsic_ext_determinant_roof
                 (z.f (-(r : ℤ)) (((koszulComplex A r f).extendXIso
                   ComplexShape.embeddingDownNat (i := r) rfl).inv
                 (exteriorPower.ιMulti A r v)))) := by
-  sorry
+  obtain ⟨f₀, hreg₀, hf₀⟩ := hex
+  obtain ⟨φ₀, hφ₀⟩ := exists_koszul_conormal_comparison A I r f₀ hreg₀ hf₀
+  have : QuasiIso φ₀ := hφ₀.2
+  obtain ⟨ε₀, hε₀, haug₀⟩ := exists_koszul_quotient_augmentation A I r f₀ hreg₀ hf₀
+  have : QuasiIso ε₀ := hε₀
+  obtain ⟨d, hd⟩ := exists_koszul_ext_roof_representatives A I r f₀ hreg₀ hf₀
+  let c := asIso (HomologicalComplex.homologyMap φ₀ r) ≪≫
+    HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) r
+      (koszulNormalDeterminant A I r)
+  let e := d.trans (CategoryTheory.Iso.toLinearEquiv c)
+  refine ⟨e, ?_⟩
+  intro f hreg hf ε hε haug z v
+  obtain ⟨φ, hφ⟩ := exists_koszul_conormal_comparison A I r f hreg hf
+  let x := (Abelian.Ext.homLinearEquiv (R := A)).symm
+    (inv (DerivedCategory.Q.map ε) ≫ DerivedCategory.Q.map z ≫
+      ((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso
+        (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app
+          (ModuleCat.of A A))
+  obtain ⟨z₀, y, hx, hy, hz⟩ := hd ε₀ haug₀ x
+  have hc : e x = koszulComparisonValue A I r f₀ φ₀
+      (((koszulComplex A r f₀).extendXIso
+        ComplexShape.embeddingDownNat (i := r) rfl).inv ≫ z₀.f (-(r : ℤ)) ≫
+        (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+          (ModuleCat.of A A)).hom) := by
+    change c.hom (d x) = _
+    rw [hy]
+    have hh : (koszulDualComplex A r f₀).homologyπ r ≫ c.hom =
+        (koszulDualComplex A r f₀).iCycles r ≫ φ₀.f r ≫
+          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) r
+            (koszulNormalDeterminant A I r)).hom := by
+      simp only [c, Iso.trans_hom, asIso_hom, HomologicalComplex.homologyπ_naturality_assoc,
+        HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom,
+        HomologicalComplex.singleObjCyclesSelfIso_hom,
+        HomologicalComplex.cyclesMap_i_assoc]
+    have hh' := congrArg (fun k ↦ k y) hh
+    simpa only [ModuleCat.comp_apply, hz, koszulComparisonValue] using hh'
+  have htransport := koszul_roof_comparison_independent A I r f₀ f hreg₀ hreg hf₀ hf
+    φ₀ φ hφ₀.1 hφ.1 ε₀ ε haug₀ haug z₀ z
+    (by simpa only [x, LinearEquiv.apply_symm_apply] using
+      congrArg (Abelian.Ext.homLinearEquiv (R := A)) hx.symm)
+  rw [hc, htransport]
+  exact hφ.1 (((koszulComplex A r f).extendXIso
+      ComplexShape.embeddingDownNat (i := r) rfl).inv ≫ z.f (-(r : ℤ)) ≫
+        (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+          (ModuleCat.of A A)).hom) v
+
+/-- The intrinsic Ext determinant is linear for the quotient action.
+Source: Stacks Project, Tag 0BQZ.
+(blueprint: lem-sc-koszul-ext-determinant-multiplication).
+Proof: take the roof-normalized equivalence. Lift a quotient scalar to A;
+its multiplication endomorphism is the lift times the identity. Ext scalar
+composition and A-linearity give the restricted quotient action on the target. -/
+theorem intrinsic_ext_determinant_multiplication
+    (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
+    (I : Ideal A) (r : ℕ)
+    (hex : ∃ f : Fin r → A,
+      RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) :
+    ∃ e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A]
+        koszulNormalDeterminant A I r,
+      ∀ (b : A ⧸ I)
+        (x : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r),
+        e ((Abelian.Ext.mk₀ (ModuleCat.ofHom
+          (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) =
+          @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent))
+            inferInstance b (e x) := by
+  obtain ⟨e, _⟩ := intrinsic_ext_determinant_roof A I r hex
+  refine ⟨e, ?_⟩
+  intro b x
+  obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective b
+  have hm : ModuleCat.ofHom
+      (Ideal.Quotient.mk I c • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))) =
+      c • 𝟙 (ModuleCat.of A (A ⧸ I)) := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro y
+    rfl
+  rw [hm, Abelian.Ext.mk₀_smul, Abelian.Ext.smul_comp,
+    Abelian.Ext.mk₀_id_comp, map_smul]
+  rfl
 
 /-- The intrinsic Ext determinant isomorphism, normalized on every Koszul roof.
 Source: Stacks Project, Tag 0BQZ.
 (blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-The proof combines the quotient-linearity and roof parts recorded immediately above.
+The proof takes the roof-normalized equivalence and proves its quotient linearity
+by lifting quotient scalars to A and applying the Ext scalar-composition formulas.
 -/
 theorem exists_intrinsic_koszul_ext_determinant
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
@@ -511,8 +543,20 @@ theorem exists_intrinsic_koszul_ext_determinant
                 (z.f (-(r : ℤ)) (((koszulComplex A r f).extendXIso
                   ComplexShape.embeddingDownNat (i := r) rfl).inv
                 (exteriorPower.ιMulti A r v)))) := by
-  obtain ⟨e, he⟩ := intrinsic_ext_determinant_multiplication A I r hex
-  exact ⟨e, he, intrinsic_ext_determinant_roof A I r hex e he⟩
+  obtain ⟨e, he⟩ := intrinsic_ext_determinant_roof A I r hex
+  refine ⟨e, ?_, he⟩
+  intro b x
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective b
+  have hm : ModuleCat.ofHom
+      (Ideal.Quotient.mk I a • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))) =
+      a • 𝟙 (ModuleCat.of A (A ⧸ I)) := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro y
+    rfl
+  rw [hm, Abelian.Ext.mk₀_smul, Abelian.Ext.smul_comp,
+    Abelian.Ext.mk₀_id_comp, map_smul]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized comparisons commute with a change of Koszul generators.

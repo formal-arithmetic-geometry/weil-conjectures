@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-koszul-roof-comparison-independence",
+ "kind": "statement",
+ "title": "Equal Koszul roofs give equal normalized conormal values",
+ "statement": "Let A be a commutative ring, I an ideal, r a natural number and f,g:Fin r -> A Koszul-regular sequences generating I [def-weil-pbc-koszul-regular-sequence, def-weil-pbc-koszul-complex]. Let phi and psi be determinant-normalized comparisons from the signed duals to the normal determinant in degree r [def-sc-koszul-conormal-comparison]. Let epsilon_f and epsilon_g be quasi-isomorphic Koszul augmentations with the quotient formula in degree zero. Let z_f:K(f)->A[-r] and z_g:K(g)->A[-r] be cochain maps. If the roofs epsilon_f^{-1} z_f and epsilon_g^{-1} z_g, followed by the standard single-complex shift isomorphism, are equal in D(A), then the values of phi on the transported top component of z_f and of psi on the transported top component of z_g agree in the normal determinant. No Ext equivalence or existence of a determinant isomorphism is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, finite free Koszul resolution computation; generator independence via Lemma 48.15.4 (Tag 0BQY)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex",
+  "def-sc-koszul-conormal-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Express each f_i as a combination of g_j, giving t with linearCombination(g) composed with t = linearCombination(f). Exterior powers of t commute with Koszul contraction, as checked on exterior generators, and form a chain map extending the identity in degree zero. It intertwines the normalized augmentations.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write E_f=K(f).extend embeddingDownNat and u:E_f to E_g for the exterior-power chain map of step 1, so u followed by epsilon_g equals epsilon_f. Finite exterior bases make each natural-number term of K(f) free and hence projective; alternatively use P.complex=K(f) and P.projective from new-j3-koszul-projective-resolution. The integer extension is zero above 0 and has projective terms below 0, including its zero terms. Apply CochainComplex.isKProjective_of_projective at bound 0, recorded in lem-sc-bounded-above-projective-kprojective (also the extension instance at HomotopyCategory/KProjective.lean:126). Now cancel the common isomorphism given by the derived single shift on the right of heq. Precompose with Q(epsilon_f); functoriality and epsilon_f=u followed by epsilon_g cancel Q(epsilon_g) with its inverse and give Q(z_f)=Q(u followed by z_g). Through quotientCompQhIso and its naturality this is equality of Qh applied to the two homotopy classes with common source E_f and target single(A,-r). Apply injectivity of CochainComplex.IsKProjective.Qh_map_bijective, recorded in lem-pc-ring-derived-map-representative, to reflect it to equality of those homotopy classes. One can extract the homotopy by HomotopyCategory.homotopyOfEq. More explicitly, shift both maps to T[r] for T=single(A,0), obtain degree-r cocycles c_f and c_pull via Cocycle.equivHomShift, and use toHom_mk and toHom_bijective to get [c_f]-[c_pull]=0. CohomologyClass.mk_sub and mk_eq_zero_iff imply c_f-c_pull is a coboundary. For r>0, Cocycle.toSingleMk_mem_coboundaries_iff at p=-r and p1=1-r extracts b:E_f^(1-r) to A with E_f.d(-r,1-r) followed by b equal to the transported top component difference. Thus in natural-number coordinates it is d_(r,r-1) followed by b, or equivalently a signed L-boundary after absorbing the unit (-1)^r into b. Every evaluated value is in I: Koszul contraction is a sum with factors f_i. For r=0, E_f^1=0, so the extracted component is zero without introducing a nonexistent natural-number degree -1. No inverse generator matrix and no existence-only Ext/homology equivalence are used.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pc-ring-derived-map-representative",
+    "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+    "lem-sc-hom-single-cocycle-component-formulas",
+    "def-sc-koszul-dual-complex",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalization makes the comparison kill that coboundary, by reduction modulo I. Under change of generators c_g composed with t=c_f: apply the injective cotangent-to-quotient-square map and the generator-functional equality. On each wedge normalization of phi on pullback equals normalization of psi. The conormal basis makes the exterior-dual pairing injective, giving equality of comparison values. Empty sequences and zero quotient cases are included.",
+   "uses": [
+    "def-sc-koszul-conormal-comparison",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-exterior-power-dual-pairing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-conormal-comparison",
+  "def-sc-koszul-dual-complex",
+  "def-weil-pbc-koszul-complex",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-exterior-power-dual-pairing",
+  "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+  "lem-sc-hom-single-cocycle-component-formulas",
+  "lem-sc-koszul-conormal-basis",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "new-j3-koszul-projective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Repair of X-06699 C3/C4: cancel the augmentation and shift, reflect equality through Qh_map_bijective for the explicitly K-projective integer Koszul complex, and extract the top coboundary using HomComplex quotient/component formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext via a projective resolution roof computed by top cocycle evaluation",
+   "results": "ProjectiveResolution.extEquivCohomologyClass and extEquivCohomologyClass_symm_mk_hom found. No result specializes to the Koszul signed dual and its component evaluation or to comparison of conormal values on different resolutions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution",
+   "results": "Unknown identifier 'ProjectiveResolution'; no hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*roof|koszul.*map|comparison|lift|homotopy in project and Mathlib projective resolution/Ext sources",
+   "results": "ProjectiveResolution lift, lift_commutes, liftHomotopy and extMk_surjective are available. KoszulExtDualHomology gives only Nonempty of an equivalence, without evaluation or augmentation normalization. No equal-roof conormal value comparison exists. Blueprint search Koszul roof returned 0 nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul resolution Ext roof naturality normalized evaluation",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof of the diagonal Koszul calculation: the Koszul-complex computation of derived sheaf Hom, specifically its intrinsic Ext identification",
+   "via": [
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulRoofComparisonIndependence",
+  "file": "lean/Sheaf/RingTheory/KoszulRoofComparisonIndependence.lean",
+  "declaration": "ExteriorAlgebra.koszul_roof_comparison_independent",
+  "statement": "theorem koszul_roof_comparison_independent\n    (A : Type u) [CommRing A] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]\n    (I : Ideal A) (r : ℕ) (f g : Fin r → A)\n    (hregf : RingTheory.Sequence.IsKoszulRegular f)\n    (hregg : RingTheory.Sequence.IsKoszulRegular g)\n    (hf : Ideal.span (Set.range f) = I) (hg : Ideal.span (Set.range g) = I)\n    (φ : koszulDualComplex A r f ⟶\n      (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj\n        (koszulNormalDeterminant A I r))\n    (ψ : koszulDualComplex A r g ⟶\n      (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj\n        (koszulNormalDeterminant A I r))\n    (hφ : IsKoszulConormalComparison A I r f hf φ)\n    (hψ : IsKoszulConormalComparison A I r g hg ψ)\n    (εf : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n      (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I)))\n    (εg : (koszulComplex A r g).extend ComplexShape.embeddingDownNat ⟶\n      (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I)))\n    [QuasiIso εf] [QuasiIso εg]\n    (haugf : ∀ x : ⋀[A]^0 (Fin r →₀ A),\n      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n        (ModuleCat.of A (A ⧸ I))).hom\n        (εf.f 0 (((koszulComplex A r f).extendXIso\n          ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =\n      Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x))\n    (haugg : ∀ x : ⋀[A]^0 (Fin r →₀ A),\n      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n        (ModuleCat.of A (A ⧸ I))).hom\n        (εg.f 0 (((koszulComplex A r g).extendXIso\n          ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =\n      Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x))\n    (zf : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n      (CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj (ModuleCat.of A A))\n    (zg : (koszulComplex A r g).extend ComplexShape.embeddingDownNat ⟶\n      (CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj (ModuleCat.of A A))\n    (heq : inv (DerivedCategory.Q.map εf) ≫ DerivedCategory.Q.map zf ≫\n        ((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso\n          (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app (ModuleCat.of A A) =\n      inv (DerivedCategory.Q.map εg) ≫ DerivedCategory.Q.map zg ≫\n        ((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso\n          (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app (ModuleCat.of A A)) :\n    koszulComparisonValue A I r f φ ((((koszulComplex A r f).extendXIso\n      ComplexShape.embeddingDownNat (i := r) rfl).inv ≫ zf.f (-(r : ℤ)) ≫\n        (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))\n          (ModuleCat.of A A)).hom)) =\n      koszulComparisonValue A I r g ψ ((((koszulComplex A r g).extendXIso\n      ComplexShape.embeddingDownNat (i := r) rfl).inv ≫ zg.f (-(r : ℤ)) ≫\n        (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))\n          (ModuleCat.of A A)).hom))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b4752",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T045510-L-124009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b4752",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T045510-L-124009",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+ }
+}

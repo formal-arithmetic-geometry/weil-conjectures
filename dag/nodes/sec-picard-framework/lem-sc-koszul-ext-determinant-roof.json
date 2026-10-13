@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Intrinsic Ext determinant satisfies the normalized roof formula",
- "statement": "The intrinsic Ext determinant isomorphism satisfies the normalized Koszul roof formula.",
+ "statement": "Let A be a commutative ring, I an ideal and r a natural number. If I has a Koszul-regular generating sequence of length r [def-weil-pbc-koszul-regular-sequence, def-weil-pbc-koszul-complex], there EXISTS an A-linear isomorphism Ext^r_A(A/I,A) to the normal determinant [def-sc-koszul-conormal-comparison] which satisfies the normalized determinant evaluation on EVERY Koszul roof with degree-zero quotient augmentation, for every Koszul-regular generating sequence of I of length r. In the evaluation formula the top functional is reduced modulo I and multiplied by (-1)^(r*(r-1)/2). Quotient linearity of an arbitrary isomorphism alone does not imply this normalization.",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
@@ -26,20 +26,38 @@
  ],
  "proof": [
   {
-   "text": "This is the corresponding strictly smaller part of the intrinsic determinant argument in Tag 0BQZ, separated from the other clause so that the parent theorem is obtained by conjunction.",
+   "text": "Fix one generating sequence f0. Obtain its normalized quasi-isomorphism phi0 and quotient augmentation. Obtain a roof-normalized Ext/signed-dual-homology equivalence d. Compose d with homologyMap(phi0) and the single-complex top homology isomorphism to define e within the existential proof.",
    "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex"
+    "lem-sc-koszul-ext-roof-representatives",
+    "lem-sc-koszul-conormal-comparison-existence",
+    "def-sc-koszul-conormal-comparison",
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any roof on any other sequence, represent its Ext class on f0 using the representative theorem. Naturality of homologyPi identifies e of this class with phi0 applied to the representative top component. Equality of Ext classes gives equality of the two derived roofs. Apply normalized roof independence to replace phi0 by the comparison for the other sequence. Its normalization equation is exactly the claimed determinant formula.",
+   "uses": [
+    "lem-sc-koszul-ext-roof-representatives",
+    "lem-sc-koszul-roof-comparison-independence",
+    "def-sc-koszul-conormal-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-koszul-regular-sequence-dual-complex"
+  "def-sc-koszul-conormal-comparison",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-sc-koszul-conormal-comparison-existence",
+  "lem-sc-koszul-ext-roof-representatives",
+  "lem-sc-koszul-roof-comparison-independence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BQZ; conormal basis from More on Algebra Tag 062I; augmentation and change of generators retain their proved routes. Normalized comparison existence is split off and uniqueness is proved from conormal basis coordinates. Ext and localization remain open."
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "A4 repairs the quantification over the isomorphism and combines explicit roof representatives with generator-independent normalized values."
  },
  "mathlib_searches": [
   {
@@ -94,9 +112,9 @@
   "module": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
   "file": "lean/Sheaf/RingTheory/KoszulRegularSequenceDualComplex.lean",
   "declaration": "ExteriorAlgebra.intrinsic_ext_determinant_roof",
-  "statement": "theorem intrinsic_ext_determinant_roof (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)] (I : Ideal A) (r : ℕ) (hex : ∃ f : Fin r → A, RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) (e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A] koszulNormalDeterminant A I r) (hmul : ∀ (b : A ⧸ I) (x : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r), e ((Abelian.Ext.mk₀ (ModuleCat.ofHom (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) = @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent)) inferInstance b (e x)) : ∀ (f : Fin r → A) (_hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) (ε : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶ (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I))) [QuasiIso ε], (∀ x : ⋀[A]^0 (Fin r →₀ A), (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (ModuleCat.of A (A ⧸ I))).hom (ε.f 0 (((koszulComplex A r f).extendXIso ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) = Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x)) → ∀ (z : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶ (CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj (ModuleCat.of A A)) (v : Fin r → (Fin r →₀ A)), exteriorPower.pairingDual (A ⧸ I) I.Cotangent r (e ((Abelian.Ext.homLinearEquiv (R := A)).symm (inv (DerivedCategory.Q.map ε) ≫ DerivedCategory.Q.map z ≫ ((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app (ModuleCat.of A A)))) (exteriorPower.ιMulti (A ⧸ I) r (fun i ↦ koszulConormalVector A I r f hf (v i))) = (-1 : A ⧸ I) ^ (r * (r - 1) / 2) * Ideal.Quotient.mk I ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ)) (ModuleCat.of A A)).hom (z.f (-(r : ℤ)) (((koszulComplex A r f).extendXIso ComplexShape.embeddingDownNat (i := r) rfl).inv (exteriorPower.ιMulti A r v))))",
+  "statement": "theorem intrinsic_ext_determinant_roof\n    (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]\n    (I : Ideal A) (r : ℕ)\n    (hex : ∃ f : Fin r → A,\n      RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) :\n    ∃ e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A]\n      koszulNormalDeterminant A I r,\n    ∀ (f : Fin r → A) (_hreg : RingTheory.Sequence.IsKoszulRegular f)\n        (hf : Ideal.span (Set.range f) = I)\n        (ε : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n          (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I)))\n        [QuasiIso ε],\n        (∀ x : ⋀[A]^0 (Fin r →₀ A),\n          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n            (ModuleCat.of A (A ⧸ I))).hom\n            (ε.f 0 (((koszulComplex A r f).extendXIso\n              ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =\n          Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x)) →\n        ∀ (z : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n            (CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj (ModuleCat.of A A))\n          (v : Fin r → (Fin r →₀ A)),\n          exteriorPower.pairingDual (A ⧸ I) I.Cotangent r\n            (e ((Abelian.Ext.homLinearEquiv (R := A)).symm\n              (inv (DerivedCategory.Q.map ε) ≫ DerivedCategory.Q.map z ≫\n                ((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso\n                  (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app\n                    (ModuleCat.of A A))))\n            (exteriorPower.ιMulti (A ⧸ I) r\n              (fun i ↦ koszulConormalVector A I r f hf (v i))) =\n            (-1 : A ⧸ I) ^ (r * (r - 1) / 2) *\n            Ideal.Quotient.mk I\n              ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))\n                (ModuleCat.of A A)).hom\n                (z.f (-(r : ℤ)) (((koszulComplex A r f).extendXIso\n                  ComplexShape.embeddingDownNat (i := r) rfl).inv\n                (exteriorPower.ιMulti A r v))))",
   "branch": "sheaf-dag",
-  "by": "Q3",
+  "by": "A4",
   "date": "2026-10-13"
  },
  "reviewed_lean": {
@@ -130,21 +148,36 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b3c5c",
-  "group": "V1",
+  "reviewer": "X-b4752",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261012T223424-L-1643422",
+  "landing": "20261013T045510-L-124009",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, node metadata, report, and lcompile.py --all result matched; the roof theorem’s STATEMENT-DISPUTED sign counterexample is valid.",
-  "sorry_before": [
-   "ExteriorAlgebra.intrinsic_ext_determinant_multiplication",
-   "ExteriorAlgebra.intrinsic_ext_determinant_roof",
-   "ExteriorAlgebra.koszul_conormal_comparison_localization"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "A4 stage 2",
+  "old_statement": "The intrinsic Ext determinant isomorphism satisfies the normalized Koszul roof formula.",
+  "what": "The old Lean statement quantified over every A-linear equivalence e with quotient-linearity hmul. This is false: over Q with r=0 and I=0, both e and -e are quotient-linear but only one sends the identity roof to +1. Replace arbitrary e and hmul by existence of an e with the fixed roof normalization. The parent intrinsic theorem keeps exactly its existing signature.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+   "place": "Lemma 48.15.5, finite free Koszul resolution computation; generator independence via Lemma 48.15.4 (Tag 0BQY)"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "This is the corresponding strictly smaller part of the intrinsic determinant argument in Tag 0BQZ, separated from the other clause so that the parent theorem is obtained by conjunction.",
+    "uses": [
+     "lem-sc-koszul-regular-sequence-dual-complex"
+    ],
+    "elementary": false
+   }
   ],
-  "sorry_after": [
-   "ExteriorAlgebra.intrinsic_ext_determinant_roof"
+  "old_proof_deps": [
+   "lem-sc-koszul-regular-sequence-dual-complex"
   ]
  }
 }
