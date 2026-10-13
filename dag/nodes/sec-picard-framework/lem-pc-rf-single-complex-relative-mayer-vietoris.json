@@ -29,59 +29,33 @@
  ],
  "proof": [
   {
-   "text": "Since S is affine and f is quasi-separated, X is quasi-separated, and X=U\\cup V is quasi-compact (Tag 01KU, elementary). Since S and S' are affine, g is affine, hence so is its base change g' (Tag 01S5); thus U'=(g')^{-1}(U), V'=(g')^{-1}(V) are quasi-compact opens with X'=U'\\cup V', and X' is quasi-compact and quasi-separated over the affine S'. So the derived Mayer--Vietoris triangle node applies to the cover X=U\\cup V with E=K and to X'=U'\\cup V' with E=K' [lem-pc-derived-mayer-vietoris-triangle]. Apply the exact functors Lg^*Rf_* and Rf'_* to these triangles and identify Rf_*R(j_W)_*=R(f|_W)_* and Rf'_*R(j_{W'})_*=R(f'|_{W'})_* for W\\in\\{U,V,U\\cap V\\} [lem-pc-derived-direct-image-composition]. This gives distinguished triangles in D(\\mathcal O_{S'}) whose terms are Lg^*R(f|_W)_*(K|_W) and R(f'|_{W'})_*(K'|_{W'}) for W=X,U,V,U\\cap V.",
+   "text": "Apply the canonically identified relative Mayer--Vietoris triangle construction [lem-pc-relative-mv-canonical-triangles]. It supplies two distinguished triangles and a morphism whose first component is the required global composite, whose middle component is the biproduct of the given U and V composites, and whose third component is the given overlap composite.",
    "uses": [
-    "lem-pc-derived-mayer-vietoris-triangle",
-    "lem-pc-derived-direct-image-composition"
+    "lem-pc-relative-mv-canonical-triangles"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BV, distinguished Mayer--Vietoris triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "By the naturality node, applied with the same affine S and S' and the same cover [lem-pc-rf-mv-triangle-naturality], the comparison maps alpha_X, alpha_U direct-sum alpha_V, and alpha_{U intersect V} form a morphism from the first triangle of Step 1 to the second.",
-   "uses": [
-    "lem-pc-rf-mv-triangle-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, induction step; relative Mayer--Vietoris naturality"
-   }
+   "text": "The assumptions on U and V yield isomorphisms. Their biproduct is an isomorphism: its inverse is the biproduct of the two inverses (the private proved Lean helper isIso_biprod_map). Transport this and the overlap assumption along the component equalities.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "By hypothesis, alpha_U and alpha_V are isomorphisms, so alpha_U direct-sum alpha_V is an isomorphism. The hypothesis for U intersect V says that alpha_{U intersect V} is an isomorphism. Applying the Mathlib two-out-of-three theorem for a morphism of distinguished triangles to these latter two components shows that alpha_X is an isomorphism.",
+   "text": "Apply the two-out-of-three theorem for a morphism of distinguished triangles [lem-sf-triangle-morphism-iso] to the second and third components. Transport along the first-component equality to obtain the required global isomorphism.",
    "uses": [
     "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, induction step and conclusion"
-   }
-  },
-  {
-   "text": "For W=X, alpha_X is exactly the canonical composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' appearing in the statement, so the preceding isomorphism is the required conclusion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, induction step and conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-mayer-vietoris-triangle",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-rf-mv-triangle-naturality",
+  "lem-pc-relative-mv-canonical-triangles",
   "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ9, induction step using the relative Mayer--Vietoris triangle"
+  "place": "Tag 0DJ9, induction step; canonical triangle construction separated from the biproduct and two-out-of-three argument by N3"
  },
  "mathlib_searches": [
   {
@@ -198,5 +172,15 @@
    "def-pc-derived-pullback",
    "def-pc-base-change"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T100042-L-2473012",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

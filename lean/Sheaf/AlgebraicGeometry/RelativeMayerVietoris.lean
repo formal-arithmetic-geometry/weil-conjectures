@@ -8,9 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+import Sheaf.AlgebraicGeometry.RelativeMVCanonicalTriangles
 
 /-! # Relative Mayer--Vietoris gluing for one complex
 
@@ -26,6 +24,19 @@ open CategoryTheory CategoryTheory.Limits
 set_option autoImplicit false
 
 namespace AlgebraicGeometry
+
+private theorem isIso_biprod_map
+    {C : Type*} [Category C] [HasZeroMorphisms C] [HasBinaryBiproducts C]
+    {A B A' B' : C} {a : A ⟶ A'} {b : B ⟶ B'}
+    (ha : IsIso a) (hb : IsIso b) : IsIso (biprod.map a b) := by
+  let := ha
+  let := hb
+  change IsIso (biprod.mapIso (asIso a) (asIso b)).hom
+  infer_instance
+
+private theorem isIso_of_eq
+    {C : Type*} [Category C] {A B : C} {a b : A ⟶ B}
+    (h : a = b) (hb : IsIso b) : IsIso a := h.symm ▸ hb
 
 /-- Relative Mayer--Vietoris gluing for the single-complex base-change map.
 Source: Stacks Project, Tag 0DJ9, induction step
@@ -105,6 +116,12 @@ theorem relativeMayerVietoris
         (derivedPullback (pullback.fst g' (U ⊓ V).ι)).map φ))) :
     IsIso (schemeDerivedBaseChangeMap f f' g g' hpull.w K ≫
       (schemeDerivedDirectImage f').map φ) := by
-  sorry
+  classical
+  obtain ⟨d₁, d₂, d₃, d₁', d₂', d₃', hT, hT', t, ht₁, ht₂, ht₃⟩ :=
+    relativeMV_canonicalTriangles f f' g g' hpull K hK K' hK' φ
+      U V hUqc hVqc hUVqc hcover
+  have h₂ := isIso_of_eq ht₂ (isIso_biprod_map hU hV)
+  have h₃ := isIso_of_eq ht₃ hUV
+  exact isIso_of_eq ht₁.symm (Pretriangulated.isIso₁_of_isIso₂₃ t hT hT' h₂ h₃)
 
 end AlgebraicGeometry
