@@ -15,42 +15,43 @@
  ],
  "proof": [
   {
-   "text": "Put A = O_X(U), J = I(U), N = G(U), M = F(U), and H = Hom_A(N,M). Coherent internal Hom and the affine tilde/sections adjunction identify its sections with H. Coherence gives finite modules N, M and H. Ideal-product and quotient-section comparisons identify the three systems, their projections, and their reductions with P/J^(n+1)P for P = H,N,M. Taking compatible families identifies the source with the adic completion of H, giving rho.",
+   "text": "Use the existing coherence criterion to install quasi-coherence and finite type for G and F. Apply the existing Scheme.Modules.finite_sections_of_finiteType theorem directly to make N and M finite; no coherent finite-section helper is restated. The linear-map module H is finite over the Noetherian affine section ring. The surjective tensor/completion map shows that completed H is generated over the completed ring by of(H). Tensor induction proves that completed-ring-linear maps agreeing on of(H) agree everywhere.",
    "uses": [
-    "lem-weil-pbc-coherent-sheaf-hom-coherent",
     "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-completion-finite-module-tensor",
     "pqf-lem-affine-open-locnoeth"
    ],
    "elementary": false
   },
   {
-   "text": "At every quotient level the H-section projection is surjective. Precomposition by the G-quotient is invertible for maps into the F-quotient. Hence the assumed equation he determines e_n uniquely as h modulo J^(n+1)H acting on x modulo J^(n+1)N by h(x) modulo J^(n+1)M. This evaluation commutes with reductions, so evaluation on compatible families gives a completed-ring-linear map E from completed H to Hom between completed N and M. Its value on of(h) is the completed linear map map J h. The completion-tensor comparison shows that of(H) generates completed H over completed A: every tensor is a sum of scalar multiples of 1 tensor h. Thus the supplied epsilon, which has the same values there, equals E.",
+   "text": "Obtain canonical quotient coordinates pN,pM from the affine section-coordinate theorem, and rho,E and the pointwise evaluation formula from the componentwise internal-Hom theorem. The previous generator-extensionality argument identifies the supplied epsilon with E.",
    "uses": [
-    "lem-weil-pbc-completion-internal-hom-quotient",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-completion-finite-module-tensor"
+    "lem-weil-pbc-completion-affine-sections-coordinates",
+    "lem-weil-pbc-completion-internal-hom-affine-componentwise"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restrict the compatible morphisms t_n to U and take their componentwise inverse limit. The affine formal-module equivalence gives the completed-ring-linear map v between completed N and M. The completion projections are jointly injective and are surjective onto each N quotient (Mathlib AdicCompletion.eval_surjective, valid for any module). Thus E(rho(s)) = v implies equality of the two maps at each quotient, by testing arbitrary lifts of quotient elements. Conversely equality at every quotient implies equality on each completed element by joint injectivity of the M projections. The affine tilde/sections equivalence identifies equality of these quotient linear maps with the displayed internal-Hom section equations. Replace E by epsilon to obtain the iff.",
+   "text": "For a compatible family t, apply t_n to pN_n(x). Compatibility of t and pN gives a compatible family of F quotient sections. The universal property of pM gives w(x), uniquely determined by joint injectivity. Joint injectivity also proves additivity. At each level choose an ordinary representative of a completed scalar; both projection scalar laws and linearity of t_n prove B-linearity. This constructs v with pM_n(v(x))=t_n(U)(pN_n(x)).",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-completion-affine-sections-coordinates"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "If the local e_n(s_n) equations hold, the pointwise formula and the projections of v agree for every completed input, so joint injectivity of pM gives epsilon(rho(s))=v. Conversely, this map equality implies equality of pointwise evaluations after pM. Surjectivity of pN tests all quotient inputs, and injectivity of local Hom-section evaluation gives e_n(s_n)=the section of t_n. Both directions are real Lean proofs.",
+   "uses": [
+    "lem-weil-pbc-completion-affine-sections-coordinates",
+    "lem-weil-pbc-completion-internal-hom-affine-componentwise"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-completion-affine-sections-coordinates",
   "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-completion-internal-hom-quotient",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-completion-internal-hom-affine-componentwise",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "pqf-lem-affine-open-locnoeth",
   "pqf-lem-coherent-ft-locnoeth"
@@ -58,7 +59,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0882",
-  "place": "Tags 0882 and 087W were read online. The componentwise evaluation and generator uniqueness details expand the source argument."
+  "place": "S1 repaired stage-3 proof: explicit affine quotient coordinates, finite tensor-generator extension, compatible-morphism limit construction and projection comparison. Reuses finite_sections_of_finiteType directly, with the coherence criterion supplying its instances, and the existing affine Hom-section evaluation bijection."
  },
  "mathlib_searches": [
   {
@@ -165,9 +166,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T040758-L-3951877",
+  "landing": "20261013T100115-L-2483465",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

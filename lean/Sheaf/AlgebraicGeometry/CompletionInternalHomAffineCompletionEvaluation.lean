@@ -9,12 +9,10 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Sheaf.AlgebraicGeometry.CompletionInternalHomQuotient
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentSheafHom
+import Sheaf.AlgebraicGeometry.CompletionAffineSectionsCoordinates
+import Sheaf.AlgebraicGeometry.CompletionInternalHomAffineComponentwise
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Affine completed-Hom evaluation before tensor comparison
 
@@ -28,6 +26,19 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private theorem completion_linearMap_ext_of_finite
+    {A P T : Type u} [CommRing A] [AddCommGroup P] [Module A P] [Module.Finite A P]
+    (J : Ideal A) [AddCommGroup T] [Module (AdicCompletion J A) T]
+    (f g : AdicCompletion J P →ₗ[AdicCompletion J A] T)
+    (h : ∀ x, f (AdicCompletion.of J P x) = g (AdicCompletion.of J P x)) : f = g := by
+  apply LinearMap.ext
+  intro x
+  obtain ⟨z, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J P x
+  induction z using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | tmul r x => simp only [AdicCompletion.ofTensorProduct_tmul, map_smul, h x]
+  | add x y hx hy => simp only [map_add, hx, hy]
 
 /-- Affine quotient evaluation is detected by the linear map on adic completions.
 The supplied map sends each ordinary linear map to its adic completion. There are no
@@ -101,6 +112,84 @@ theorem completion_internal_hom_affine_completion_evaluation {X : Scheme.{u}} [I
               (formalModuleQuotient I (n.unop + 1) G.obj)
               (formalModuleQuotient I (n.unop + 1) F.obj)).symm (t n)).val (op U.val)) ↔
             ε (ρ s) = v := by
-  sorry
+  classical
+  let A := Γ(X, U.val)
+  let J := I.ideal U
+  let B := AdicCompletion J A
+  let N := Γ(G.obj, U.val)
+  let M := Γ(F.obj, U.val)
+  have : IsNoetherianRing A := IsLocallyNoetherian.component_noetherian U
+  have hGfinite := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X G.obj).mp G.property
+  have : G.obj.IsQuasicoherent := hGfinite.1
+  have : G.obj.IsFiniteType := hGfinite.2
+  have : Module.Finite A N := Scheme.Modules.finite_sections_of_finiteType G.obj U.property
+  have hFfinite := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X F.obj).mp F.property
+  have : F.obj.IsQuasicoherent := hFfinite.1
+  have : F.obj.IsFiniteType := hFfinite.2
+  have : Module.Finite A M := Scheme.Modules.finite_sections_of_finiteType F.obj U.property
+  have : Module.Finite A (N →ₗ[A] M) := inferInstance
+  dsimp only
+  intro ε hε
+  obtain ⟨pN, hsurjN, hinjN, htransN, hofN, hscalarN, hlimN⟩ :=
+    completion_affine_sections_coordinates I G U
+  obtain ⟨pM, hsurjM, hinjM, htransM, hofM, hscalarM, hlimM⟩ :=
+    completion_affine_sections_coordinates I F U
+  obtain ⟨ρ, E, hEof, hE, hEvalInj⟩ :=
+    completion_internal_hom_affine_componentwise I F G e he U pN pM
+      hofN hofM hscalarN hscalarM
+  have hεE : ε = E := completion_linearMap_ext_of_finite J ε E
+    (fun h ↦ (hε h).trans (hEof h).symm)
+  refine ⟨ρ, ?_⟩
+  intro t ht
+  have hfamily (x : AdicCompletion J N) (a b : ℕᵒᵖ) (f : a ⟶ b) :
+      ((formalCompletionSystem I F.obj).map f).val.app (op U.val)
+        ((t a).val.app (op U.val) (pN a x)) = (t b).val.app (op U.val) (pN b x) := by
+    have h := congrArg (fun k ↦ k.val.app (op U.val) (pN a x)) (ht a b f)
+    change ((formalCompletionSystem I F.obj).map f).val.app (op U.val)
+      ((t a).val.app (op U.val) (pN a x)) =
+      (t b).val.app (op U.val)
+        (((formalCompletionSystem I G.obj).map f).val.app (op U.val) (pN a x)) at h
+    rw [htransN a b f x] at h
+    exact h
+  choose w hw using fun x : AdicCompletion J N ↦
+    hlimM (fun n ↦ (t n).val.app (op U.val) (pN n x)) (hfamily x)
+  let v : AdicCompletion J N →ₗ[B] AdicCompletion J M :=
+    { toFun := w
+      map_add' := by
+        intro x y
+        apply hinjM
+        intro n
+        simp only [hw, map_add]
+      map_smul' := by
+        intro r x
+        apply hinjM
+        intro n
+        change pM n (w (r • x)) = pM n (r • w x)
+        obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective
+          (AdicCompletion.evalₐ J (n.unop + 1) r)
+        rw [hw, hscalarN n r a x ha.symm, map_smul,
+          hscalarM n r a (w x) ha.symm, hw] }
+  have hv (n : ℕᵒᵖ) (x : AdicCompletion J N) :
+      pM n (v x) = (t n).val.app (op U.val) (pN n x) := hw x n
+  refine ⟨v, ?_⟩
+  intro s
+  rw [hεE]
+  constructor
+  · intro hs
+    apply LinearMap.ext
+    intro x
+    apply hinjM
+    intro n
+    rw [← hE s n x, hs n, hv]
+    rfl
+  · intro hs n
+    apply hEvalInj n
+    apply LinearMap.ext
+    intro x
+    obtain ⟨y, rfl⟩ := hsurjN n x
+    rw [hE s n y, hs, hv]
+    rfl
 
 end AlgebraicGeometry
