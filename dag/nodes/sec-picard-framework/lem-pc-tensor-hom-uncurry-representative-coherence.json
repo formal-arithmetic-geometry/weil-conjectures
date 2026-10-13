@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-tensor-hom-uncurry-representative-coherence",
+ "kind": "statement",
+ "title": "Localized tensor-Hom evaluation is independent of its chain presentation",
+ "statement": "Let $X$ be a scheme and fix a derived category $D$ of its sheaves of modules. Use the tensor and internal-Hom models of [def-pc-canonical-derived-tensor-hom-model] and the explicit uncurrying of [lem-pc-tensor-hom-uncurry-differential]. Let $P,L,M,P',L',M'$ be arbitrary integer-indexed cochain complexes of these module sheaves, with $P,P'$ K-flat. Let $\\phi:P\\to\\mathcal Hom^\\bullet(L,I(M))$ and $\\phi':P'\\to\\mathcal Hom^\\bullet(L',I(M'))$, where $I$ is the fixed functorial K-injective resolution. Suppose $QP=QP'$, $QL=QL'$, $QM=QM'$ as literal objects of $D$, and the normalized inputs $Q\\phi\\circ\\rho_{L,M}^{-1}$ and $Q\\phi'\\circ\\rho_{L',M'}^{-1}$ are equal after transport by these equalities. Then the morphisms obtained by composing the tensor model comparison, the localized explicit uncurrying and the inverse resolution augmentation are equal after the same equality transport. The Lean statement uses heterogeneous equality for these transported equalities. No extension to other derived inputs, and no family of functions, is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "cohomology-lemma-internal-hom (Tag 08DJ); sites-cohomology-lemma-compose (Tag 0A90); sites-cohomology-lemma-RHom-from-K-flat-into-K-injective (Tag 0A96). Read online at https://stacks.math.columbia.edu/tag/08DJ, https://stacks.math.columbia.edu/tag/0A90, https://stacks.math.columbia.edu/tag/0A96."
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-model",
+  "lem-pc-tensor-hom-uncurry-differential"
+ ],
+ "proof": [
+  {
+   "text": "Resolve L and L' by K-flat complexes. Hom into the fixed K-injective\nresolutions and tensoring with P or P' invert these quasi-isomorphisms. On these\nmodels, maps into the Hom complex are chain maps modulo homotopy, since Hom from\na K-flat complex into a K-injective complex is K-injective. Represent the equalities\nof derived objects by the identity morphisms after equality transport, and compute\nthese morphisms by roofs on common K-flat resolutions. The equality of the input\nmorphisms makes the two resulting chain maps homotopic after these comparisons.\nUncurry the degree-minus-one components of this homotopy and extend them over the\ncoproduct defining the total tensor. The Hom differential formula gives a homotopy\nbetween the uncurried chain maps: its boundary is their difference, with the same\nKoszul signs as the total tensor differential. Evaluation commutes with all comparison\nmaps, by naturality of the sheaf tensor-Hom adjunction and the Hom projections;\nverify this on every tensor summand and use the coproduct universal property.\nLocalizing the homotopy and cancelling the quasi-isomorphisms, with the natural\nHom resolution isomorphism, tensor model comparison and inverse augmentation,\ngives the asserted equality after equality transport. Express it as HEq to avoid\nchoosing casts. This works for zero maps, zero complexes and unbounded complexes;\nno injectivity or flatness of L or L' is assumed.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-hom-complex-global-cochains",
+    "lem-sc-derived-hom-tensor-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-sc-derived-hom-tensor-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 08DJ, 0A90, 0A96; equality-transport specialization of representative independence, with details written by E1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localized tensor Hom evaluation is independent of chain representatives of the same derived morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized tensor Hom evaluation is independent of chain representatives of the same derived morphism",
+   "results": [
+    "CategoryTheory.Tor'_map_app",
+    "CategoryTheory.Tor'_obj_map",
+    "CategoryTheory.Tor_map",
+    "CategoryTheory.Localization.Monoidal.id_tensorHom",
+    "CategoryTheory.Localization.Monoidal.tensorHom_id",
+    "CategoryTheory.Localization.Monoidal.tensor_comp",
+    "IsLocalizedModule.map_lTensor",
+    "CategoryTheory.Localization.Monoidal.id_tensorHom_id"
+   ],
+   "date": "2026-10-13",
+   "verdict": "These concern Tor or monoidal localization, not the normalized sheaf Hom evaluation on chain presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.FactorsThrough",
+   "results": [
+    "Function.FactorsThrough",
+    "Function.FactorsThrough.extend_apply",
+    "Function.factorsThrough_iff"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Extension tools only; they require rather than establish independence of chain presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHomUncurry|FactorsThrough.extend",
+   "results": [
+    "Mathlib/Logic/Function/Basic.lean:844 Function.FactorsThrough.extend_apply",
+    "Mathlib/Logic/Function/Basic.lean:898 Function.FactorsThrough.extend_comp",
+    "Mathlib/Data/Set/Restrict.lean:132 Function.FactorsThrough.extend_injOn"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No chain-representative evaluation coherence theorem in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-hom-uncurry-descent",
+   "place": "Common K-flat resolutions show that values assigned by two descriptions of the same literal derived input agree; representative-normalization argument",
+   "via": [
+    "lem-pc-tensor-hom-uncurry-descent-representative",
+    "lem-pc-canonical-derived-tensor-hom-map-existence",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryRepresentativeCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryRepresentativeCoherence.lean",
+  "declaration": "AlgebraicGeometry.tensorHomUncurry_representative_coherence",
+  "statement": "theorem tensorHomUncurry_representative_coherence (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (P L M P' L' M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : P.IsKFlat) (hP' : P'.IsKFlat)\n    (φ : P ⟶ homComplex (R := X.sheaf) L\n      ((schemeHomKInjectiveResolution X).obj M))\n    (φ' : P' ⟶ homComplex (R := X.sheaf) L'\n      ((schemeHomKInjectiveResolution X).obj M'))\n    (hK : DerivedCategory.Q.obj P = DerivedCategory.Q.obj P')\n    (hL : DerivedCategory.Q.obj L = DerivedCategory.Q.obj L')\n    (hM : DerivedCategory.Q.obj M = DerivedCategory.Q.obj M')\n    (hφ : HEq (DerivedCategory.Q.map φ ≫\n        (schemeDerivedInternalHomResolutionIso X L M).inv)\n      (DerivedCategory.Q.map φ' ≫\n        (schemeDerivedInternalHomResolutionIso X L' M').inv)) :\n    HEq (pullbackTensorModelMap X P L ≫\n        DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n          schemeHomResolutionInverse X M)\n      (pullbackTensorModelMap X P' L' ≫\n        DerivedCategory.Q.map (schemeTensorHomUncurry X P' L' M' φ') ≫\n          schemeHomResolutionInverse X M')",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082337-L-1633054",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082337-L-1633054",
+  "kind": "interface"
+ }
+}
