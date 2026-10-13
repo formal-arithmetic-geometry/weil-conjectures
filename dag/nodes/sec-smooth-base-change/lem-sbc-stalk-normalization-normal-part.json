@@ -21,36 +21,34 @@
  ],
  "proof": [
   {
-   "text": "Normality of S follows from its domain stalks and hS. Smooth ascent gives normality of C, and etale ascent normality of P. Finite presentation gives locally Noetherian sources and therefore finitely many irreducible components in every quasi-compact source open.",
+   "text": "The composite g=P -> C_U -> C -> S is smooth, since finite etale and open-immersion maps are smooth. The private helper normal_stalks_of_smooth_integral_base chooses affine charts and applies [lem-weil-pbc-smooth-over-normal-ring-normal] to g.appLE. The base section ring is a normal domain by WeilConjectures Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk and integrality of S. Normality of prime localizations of the target section ring transports to its stalks using IsAffineOpen.isLocalization_stalk and IsLocalization.algEquiv. Finite type of g also makes P locally Noetherian via LocallyOfFiniteType.isLocallyNoetherian.",
    "uses": [
-    "lem-weil-pbc-smooth-over-normal-ring-normal",
-    "lem-weil-pbc-etale-over-normal-ring-normal"
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Stacks 035L to the affine integral-closure charts of relative normalization: each source chart splits into finitely many normal integral components with normal domain section rings; the integral closures are normal domains, and the normalization chart is their disjoint union.",
+   "text": "Apply [lem-sbc-relative-normalization-normal-stalks] to f=P -> C and the normal stalks of P, giving normal domain stalks on f.normalization. This is precisely the unlocalized relative-normalization step.",
    "uses": [
-    "lem-weil-pbc-relative-normalization"
+    "lem-sbc-relative-normalization-normal-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "Over an affine neighbourhood Spec R of s, the pullback to Spec R_p localizes the integral-closure chart rings at R minus p. Nonzero such localizations are normal domains; zero rings have empty spectrum. Further localization at each point gives the desired stalk properties. This is localization of the explicitly constructed chart rings, not an assertion that normality survives arbitrary flat base change.",
+   "text": "WeilConjectures Scheme.flat_fromSpecStalk and Mathlib's IsPreimmersion instance for Scheme.fromSpecStalk (Stalk.lean:89) give flatness and the preimmersion property of Spec O(S,s) -> S. Both properties survive the two pullbacks, so N -> f.normalization is a flat preimmersion. The private helper normal_stalks_of_flat_preimmersion uses Flat.stalkMap and Module.FaithfullyFlat.of_flat_of_isLocalHom to obtain injectivity of this local stalk map; IsPreimmersion.stalkMap_surjective gives surjectivity. RingEquiv.ofBijective yields a ring equivalence. Function.Injective.isDomain and IsIntegrallyClosed.of_equiv transport the two properties to the stalk of N. Empty schemes require no separate case because the quantification is over points.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-smooth-over-normal-ring-normal",
-  "lem-weil-pbc-etale-over-normal-ring-normal",
-  "lem-weil-pbc-relative-normalization"
+  "lem-sbc-relative-normalization-normal-stalks"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "U1",
+  "by": "R2",
   "document": "Stacks Project",
-  "place": "Tags 033C, 035L, 0307"
+  "place": "Tags 033C and 035L. Localization step shortened using flat preimmersions and stalk equivalences; proof written in Lean by R2."
  },
  "mathlib_searches": [
   {
@@ -130,12 +128,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T235114-L-2172770",
+  "landing": "20261013T015611-L-3025915",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

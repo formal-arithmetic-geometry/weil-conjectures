@@ -10584,3 +10584,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.KoszulOpenSystem (stage 3; reviewer PASS; first push; landing 20261013T015609-L-3025533 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/Q4/Sheaf.RingTheory.SymmetricProjectivePresentationConormal (stage 3; reviewer PASS; first push; landing 20261013T015610-L-3025669 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:56 L: merged deliver/R1/Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit (stage 3; reviewer PASS; first push; landing 20261013T015610-L-3025811 (interface); batch 20261013T015540; modules 2; new nodes 1)
+- 01:56 L: merged deliver/R2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart (stage 3; reviewer PASS; first push; landing 20261013T015611-L-3025915 (interface); batch 20261013T015540; modules 2; new nodes 1)
