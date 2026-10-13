@@ -12803,3 +12803,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: merged deliver/G3/Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverOnDivisorCharts (stage 3; reviewer PASS; first push; landing 20261013T142856-L-497584 (interface); batch 20261013T142848; modules 3; new nodes 2)
 - 14:28 L: merged deliver/G3/Sheaf.RingTheory.PopescuAlgebraicResidueEnlargement (stage 3; reviewer PASS; first push; landing 20261013T142856-L-497733 (interface); batch 20261013T142848; modules 2; new nodes 1)
 - 14:28 L: merged deliver/G3/Sheaf.RingTheory.PopescuTranscendentalResidueEnlargement (stage 3; reviewer PASS; first push; landing 20261013T142857-L-497922 (interface); batch 20261013T142848; modules 3; new nodes 2)
+- 14:28 L: merged deliver/G4/Sheaf.AlgebraicGeometry.FinitePresentationOverlapMapLifting (stage 3; reviewer PASS; first push; landing 20261013T142857-L-498116 (interface); batch 20261013T142848; modules 3; new nodes 2)

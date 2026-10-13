@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-fp-overlap-pair-map-lifting",
+ "kind": "statement",
+ "title": "Descend one conjugated pairwise overlap map, persistently",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a diagram of Noetherian rings, $c$ a limit cone of $\\operatorname{Spec}(R)$ with affine vertex $S$, and $f:X_i\\to\\operatorname{Spec}(R_i)$ quasi-compact, quasi-separated and locally finitely presented [def-pc-scheme, def-pc-morphism-conventions]. Fix $j\\geq i$, a finite affine open cover $U$ of $X_j=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$, finitely presented quasi-coherent modules $N_d$ on its charts [pqf-def-coherent], a module $M$ on $X=X_i\\times_{\\operatorname{Spec}(R_i)}S$, and specified isomorphisms $e_d$ from the limit pullbacks of $N_d$ to the restrictions of $M$ [def-pc-base-change]. Fix just two indices $a,b$ of $U$. There exists $k\\geq j$ such that for every $l\\geq k$ (and $l\\geq j$) the following holds. Write $q:X_l\\to X_j$, $p:X\\to X_l$, $t:X\\to X_j$, $V=U\\times_{X_j}X_l$, $A_d=q_d^*N_d$, and $W=V\\times_{X_l}X$. There is a map $\\varphi:(\\operatorname{pr}_1)^*A_a\\to(\\operatorname{pr}_2)^*A_b$ on $V_a\\times_{X_l}V_b$. Its pullback to $W_a\\times_X W_b$, with the canonical composition comparisons, commutes with the transition of $M$ under the canonical component isomorphisms $\\epsilon_d:p_d^*A_d\\simeq M|_{W_d}$. Here $\\epsilon_d$ is fixed, not an existential choice: use the universal chart map $W_d\\to U_d\\times_{X_j}X$, pull back $e_d$, and compose with the canonical pullback-composition and equal-arrow isomorphisms. The transition of $M$ means its restriction descent datum [def-pc-local-overlap-transitions]. No maps for other pairs, no common stage for other pairs, and no naturality on arbitrary test schemes are asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (Zariski gluing); Algebra Tag 05N7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof": [
+  {
+   "text": "The pairwise overlap of the two affine charts is quasi-compact and quasi-separated: the ambient stage scheme is quasi-separated, and open subschemes inherit quasi-separatedness. Choose a finite affine cover of this overlap and finite affine covers of the pairwise refinement intersections. Conjugate the limit restriction transition of M by e_a and e_b. Identify the limit coordinate rings with the directed colimits of the stage coordinate rings and quasi-coherent pullback with scalar extension. The map clause of affine finite-presentation descent lifts the comparison on each affine chart. The equality clause, applied on the finitely many refinement intersections, makes those maps agree at one common later stage. Glue them to the single map on the pairwise overlap.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After that stage, pull the glued map back to any subsequent stage. Successive pullback isomorphisms identify its limit pullback with the original conjugated comparison. The universal map from each iterated limit chart to the original limit chart, and pullback of the specified e_d, give exactly the canonical epsilon_d in the statement. Thus the square on the universal limit overlap is preserved at every later stage. For an empty overlap use the unique module map. A directed preorder is reduced to the partial-order quotient of its nonempty tail above j.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Expansion of Tag 01ZR first proof, restricted to a single pairwise overlap; Tag 05N7 (2) and (3), read at https://stacks.math.columbia.edu/tag/01ZR and https://stacks.math.columbia.edu/tag/05N7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map between finitely presented quasicoherent modules on a quasi compact pairwise overlap descends to a finite stage of an inverse limit of schemes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps between fixed finitely presented quasicoherent modules on pairwise overlaps descend along a directed scheme limit",
+   "results": "Eight hits, including Scheme.GlueData.sheafValGluedMk, SheafOfModules.Presentation.map, and exists_appTop_π_eq_of_isLimit. No matching module-map descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "pullHom",
+   "results": "Unknown identifier pullHom; no hits. Direct inspection located the pseudofunctor pullHom API in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overlap.*(lift|colimit)|cocycle.*(stage|colimit)",
+   "results": "No hits through msearch.py; direct repository search found the parent overlap-map statement and the downstream module-map descent theorem. The latter imports the parent, so it cannot be used without a cycle.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapMapLifting",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: descent of finitely presented local models, the pairwise comparison-map lifting part of the Zariski gluing step (01ZR first proof)",
+   "via": [
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapPairMapLifting.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_overlap_pair_map_lifting",
+  "statement": "theorem exists_finitePresentation_overlap_pair_map_lifting {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : I) (hij : i ≤ j) (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u}) [Finite U.I₀] [∀ a, IsAffine (U.X a)] (N : (a : U.I₀) → (U.X a).Modules) (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent) (M : (pullback f (c.π.app (op i))).Modules) (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) a)).obj (N a) ≅ (Scheme.Modules.pullback ((U.pullback₁ (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))).f a)).obj M) (a b : U.I₀) : ∃ (k : I) (hjk : j ≤ k), ∀ (l : I) (hjl : j ≤ l), k ≤ l → let q := overlapStageMap R f hij hjl let V := U.pullback₁ q let p := overlapLimitMap R c f (hij.trans hjl) let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d) let W := V.pullback₁ p let D := (modulesPseudofunctor.toDescentData W.f).obj M let ε := overlapIteratedComparison U q p (overlapLimitMap R c f hij) (overlapLimitMap_stage_comp R c f hij hjl) N M e ∃ φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶ (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b), overlapPairSquare V A p D ε a b φ",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.Pseudofunctor.overlapPairBaseChangeHom",
+   "CategoryTheory.Pseudofunctor.overlapPairBaseChangeSquare",
+   "AlgebraicGeometry.overlapLimitMap_stage_comp",
+   "AlgebraicGeometry.overlapIteratedChartHom",
+   "AlgebraicGeometry.overlapIteratedComparison",
+   "AlgebraicGeometry.overlapPairSquare",
+   "AlgebraicGeometry.exists_finitePresentation_overlap_pair_map_lifting"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T142857-L-498116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T142857-L-498116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

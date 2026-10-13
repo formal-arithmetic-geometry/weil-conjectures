@@ -8,7 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting
+import Sheaf.AlgebraicGeometry.OverlapPairTransitionsAssembly
+import Mathlib.Data.Finset.Order
 
 /-! # Lifting overlap maps for fixed local models
 
@@ -76,6 +78,45 @@ theorem exists_finitePresentation_overlap_map_lifting
           (Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))) ∧
         Nonempty ((T.pull (p := p) (α := fun a ↦ a)
           (fun a ↦ V.pullbackHom_map p a)).Comparison
-          ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M)) := by sorry
+          ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M)) := by
+  classical
+  let : Fintype U.I₀ := Fintype.ofFinite U.I₀
+  have one (ab : U.I₀ × U.I₀) :=
+    exists_finitePresentation_overlap_pair_map_lifting R c hc i f j hij U N hN hNq M e
+      ab.1 ab.2
+  let stage : U.I₀ × U.I₀ → I := fun ab ↦ (one ab).choose
+  have hlift (ab : U.I₀ × U.I₀) := (one ab).choose_spec.choose_spec
+  let : Nonempty I := ⟨j⟩
+  obtain ⟨k, hk⟩ := (insert j (Finset.univ.image stage)).exists_le
+  have hjk : j ≤ k := hk j (Finset.mem_insert_self _ _)
+  let q := overlapStageMap R f hij hjk
+  let V : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=
+    U.pullback₁ q
+  let p := overlapLimitMap R c f (hij.trans hjk)
+  let A : (a : V.I₀) → (V.X a).Modules :=
+    fun a ↦ (Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a)
+  let W : (pullback f (c.π.app (op i))).OpenCover.{u} := V.pullback₁ p
+  let D := (modulesPseudofunctor.toDescentData W.f).obj M
+  let ε : ∀ a, (Scheme.Modules.pullback (V.pullbackHom p a)).obj (A a) ≅ D.obj a :=
+    overlapIteratedComparison U q p (overlapLimitMap R c f hij)
+      (overlapLimitMap_stage_comp R c f hij hjk) N M e
+  have pair (a b : U.I₀) := hlift (a, b) k hjk
+    (hk (stage (a, b)) (Finset.mem_insert_of_mem
+      (Finset.mem_image.mpr ⟨(a, b), Finset.mem_univ _, rfl⟩)))
+  let φ := fun (a b : U.I₀) ↦ (pair a b).choose
+  have hφ := fun (a b : U.I₀) ↦ (pair a b).choose_spec
+  have ha := exists_overlap_pair_transitions_comparison V A p D ε φ
+  have hb := ha (by
+    intro a b
+    exact hφ a b)
+  rcases hb with ⟨T, hT, hcomparison⟩
+  refine ⟨k, hjk, ?_⟩
+  change ∃ T : modulesPseudofunctor.OverlapTransitions V.f,
+    (∀ a, Nonempty (T.obj a ≅ A a)) ∧
+      Nonempty ((T.pull (p := p) (α := fun a ↦ a)
+        (fun a ↦ V.pullbackHom_map p a)).Comparison D)
+  refine ⟨T, ?_, hcomparison⟩
+  intro a
+  exact ⟨eqToIso (hT a)⟩
 
 end AlgebraicGeometry

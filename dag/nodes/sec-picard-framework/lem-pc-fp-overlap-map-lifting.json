@@ -16,28 +16,29 @@
  ],
  "proof": [
   {
-   "text": "Conjugate the transitions of M by the supplied isomorphisms. Choose finite affine covers of each quasi-compact pairwise overlap and of their refinement intersections. Identify their limit coordinate rings with directed colimits. Lift the comparison maps by the map clause of affine module descent. Apply its equality clause on refinement intersections and choose a common upper bound, so the maps agree and glue on the whole overlaps.",
+   "text": "For each ordered pair of chart indices, apply single-overlap map lifting with persistence. Choose an upper bound for j and the finite set of resulting stages; persistence supplies all pairwise maps at this common stage. The objects at the stage are the actual pullbacks of the prescribed local models.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-overlap-pair-map-lifting"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Pull back the glued maps to all test schemes. Pullback associativity gives the naturality field of the transition structure. Its local objects are the prescribed pullbacks of N. Compose e with iterated pullback comparisons to obtain the limit comparison. Its commutation follows because the glued maps lift the conjugated M transitions. Empty covers use empty families; for a preorder use the partial-order quotient of the nonempty tail above j.",
+   "text": "At the common stage take the actual pullbacks of N as objects, and use their canonical iterated limit comparisons. Each pairwise lifting theorem supplies a map and a commutative square on its universal limit overlap. Apply universal-overlap transition assembly to this family of maps and squares. It returns natural transitions with exactly those objects and the required comparison on all test schemes. Equality of objects gives the local isomorphisms by eqToIso.",
    "uses": [
-    "def-pc-local-overlap-transitions"
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-overlap-pair-transitions-assembly"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-local-overlap-transitions",
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-fp-overlap-pair-map-lifting",
+  "lem-pc-overlap-pair-transitions-assembly"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Expansion of Tag 01ZR first proof; sources read at https://stacks.math.columbia.edu/tag/01ZR and https://stacks.math.columbia.edu/tag/05N7"
+  "place": "Tag 01ZR first proof; Lean finite-pair assembly and universal-overlap naturality by G4; single-pair geometric lifting split into lem-pc-fp-overlap-pair-map-lifting"
  },
  "mathlib_searches": [
   {
@@ -112,9 +113,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T123549-L-3712586",
+  "landing": "20261013T142857-L-498116",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
