@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-localized-approximation-cocones",
+ "kind": "statement",
+ "title": "Localized cocones without finiteness or transition tensor hypotheses",
+ "statement": "Let R→S be commutative rings and M an S-module with the restricted R-action [def-weil-pbc-flat-ring-map]. Let a nonempty directed preorder index compatible diagrams A→B and D of modules, with supplied colimit cocones to the common-universe ULifts of R,S,M [def-weil-pbc-category-colimit, def-weil-directed-colimit-abelian-groups]. No Noetherianity, finiteness or transition tensor hypothesis is imposed. For a prime q of S, there exist local ring diagrams A^l,B^l and a module diagram D^l, with colimits and compatible localized scalar actions. Their base-to-top and transition ring maps are local and their module transitions and coprojections are semilinear. There is a commuting colimit map ψ. The base colimit is the localization R_(q∩R) and its module colimit is R-linearly equivalent to M_q. Each base stage is A_i localized at the contraction of q and its module is A_i-linearly equivalent to (D_i)_(q_i). In addition, there are numerator maps ρA_i,ρB_i,ζ_i, natural in transitions and commuting with A_i→B_i and the localized stage map. With the algebras induced by ρA_i and ρB_i, the stage rings satisfy IsLocalization at the respective contracted prime complements. The ζ_i are semilinear and their associated B_i-linear maps into D^l_i with action restricted through ρB_i satisfy IsLocalizedModule at q_i [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RC first reduction paragraph; Tag 037D proof (localization and colimits); fraction details as in the parent node steps 1,2,3,5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Contract q along the cocone maps followed by ULift.down, and further along A_i→B_i. Naturality and the commuting square identify contractions. Form Localization.AtPrime of both rings and LocalizedModule of D_i. Induced fraction maps form diagrams: they send x/s to f(x)/f(s), and functoriality and the ring squares follow by uniqueness on numerators. Semilinearity preserves the fraction relation and gives the numerator maps and their naturality.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the prime-localization filtered-colimit theorem to both supplied ring cocones, transporting across their colimit isomorphisms and ULift. For modules, lift a numerator and denominator to a common stage. For equal fractions lift a multiplier outside q and descend its zero relation by eventual equality in the supplied group colimit. This gives the module colimit at M_q; multiplication of fractions defines its compatible localized top-ring action. The commuting ring squares induce ψ.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prime localizations are local; induced ring maps preserve nonunits because a fraction is a nonunit precisely when its numerator is in the contracted prime. No stage finiteness or Noetherianity is used.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the base ring and module colimit comparisons through ULift to obtain the R-linear comparison. At a stage the fraction construction gives the A_i-linear comparison with exactly the restricted action. Numerator-one maps have IsLocalizedModule: denominators act invertibly, every fraction has a numerator and denominator, and equality of numerators is killed by a denominator. This records the maps needed to compare transition tensors separately.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit fraction/tensor details of the reduction in Tag 00RC; same route as the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of ring and module diagrams at compatible prime ideals commutes with filtered colimits and tensor base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "Unavailable; no absence verdict based on this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a noetherian ring is noetherian and a localized finite module is finite",
+   "results": "IsLocalization.isNoetherianRing and localization Noetherian instances; no combined cocone or transition interface.",
+   "date": "2026-10-13",
+   "verdict": "Component Noetherianity exists; it does not provide either of the new diagram assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule",
+   "results": "IsLocalizedModule, IsLocalizedModule.linearEquiv, IsLocalizedModule.module, localizedModuleIsLocalizedModule and localization universal-property results.",
+   "date": "2026-10-13",
+   "verdict": "These provide fraction and uniqueness tools, not the diagram construction or the localized transition conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*(colimit|tensor)|colimit.*localiz",
+   "results": "Localization.tensorLeftAlgEquiv, LocalizedModule.equivTensorProduct, IsLocalizedModule.rTensor, ModuleCat.localizedModuleFunctor and unrelated categorical localization. Searched both roots for the item declaration: only its caller and its declaration.",
+   "date": "2026-10-13",
+   "verdict": "No matching combined construction or compatible-prime transition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed diagram of rings and modules has a localized colimit diagram at the contraction of a prime ideal",
+   "results": "8 hits including ModuleCat.directLimitIsColimit, ModuleCat localizedModule preservation of finite colimits, IsLocalizedModule.AtPrime and LocalizedModule.AtPrime.",
+   "date": "2026-10-13",
+   "verdict": "No combined prime-localized diagram of varying rings and modules with these restricted-scalar comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianApproximationLocalizedDiagrams",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The localized approximation construction needed in the flat-point reduction: cocones and scalar comparisons (parent steps 1,2,3,5).",
+   "via": [
+    "lem-weil-pbc-noetherian-approximation-localized-diagrams",
+    "lem-weil-pbc-integer-approximation-flat-point-stage",
+    "lem-weil-pbc-flat-point-noetherian-model",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedApproximationCocones",
+  "file": "lean/Sheaf/RingTheory/LocalizedApproximationCocones.lean",
+  "declaration": "Algebra.exists_localized_approximation_cocones",
+  "statement": "theorem exists_localized_approximation_cocones (R : Type u) (S : Type v) (M : Type w) [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] : let R' := ULift.{max u v w} R let S' := ULift.{max u v w} S let M' := ULift.{max u v w} M letI : Algebra R' S' := ULift.algebra' R S' ∀ {Λ : Type (max u v w)} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)] (A B : Λ ⥤ CommRingCat.{max u v w}) (η : A ⟶ B) (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R')) (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S')) (D : Λ ⥤ AddCommGrpCat.{max u v w}) (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M')) [∀ i : Λ, Module (B.obj i) (D.obj i)] (hmodel : -- (1) the three colimits, compatible with `R' → S'` and the module actions Nonempty (IsColimit (Cocone.mk (CommRingCat.of R') π)) ∧ Nonempty (IsColimit (Cocone.mk (CommRingCat.of S') κ)) ∧ Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M') ν)) ∧ (∀ i, η.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom (algebraMap R' S')) ∧ (∀ (i j : Λ) (h : i ≤ j) (y : B.obj i) (x : D.obj i), (D.map (homOfLE h)).hom (y • x) = (B.map (homOfLE h)).hom y • (D.map (homOfLE h)).hom x) ∧ (∀ i (y : B.obj i) (x : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M') (ν.app i)) (y • x) = (@CommRingCat.Hom.hom _ (CommRingCat.of S') (κ.app i)) y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M') (ν.app i)) x)) (q : PrimeSpectrum S), ∃ (Aₗ Bₗ : Λ ⥤ CommRingCat.{max u v w}) (Dₗ : Λ ⥤ AddCommGrpCat.{max u v w}), ∃ hcA : HasColimit Aₗ, letI := hcA ∃ hcB : HasColimit Bₗ, letI := hcB ∃ hcD : HasColimit Dₗ, letI := hcD ∃ hlocalA : ∀ i, IsLocalRing (Aₗ.obj i), letI := hlocalA ∃ hlocalB : ∀ i, IsLocalRing (Bₗ.obj i), letI := hlocalB ∃ hmodule : ∀ i, Module (Bₗ.obj i) (Dₗ.obj i), letI := hmodule ∃ hmoduleLimit : Module (colimit Bₗ : CommRingCat.{max u v w}) (colimit Dₗ : AddCommGrpCat.{max u v w}), letI := hmoduleLimit ∃ (φ : ∀ i, Aₗ.obj i →+* Bₗ.obj i) (ψ : (colimit Aₗ : CommRingCat.{max u v w}) →+* (colimit Bₗ : CommRingCat.{max u v w})), (∀ i, IsLocalHom (φ i)) ∧ (∀ (i j : Λ) (f : i ⟶ j), IsLocalHom (Aₗ.map f).hom) ∧ (∀ (i j : Λ) (f : i ⟶ j), IsLocalHom (Bₗ.map f).hom) ∧ (∀ (i j : Λ) (f : i ⟶ j), (Bₗ.map f).hom.comp (φ i) = (φ j).comp (Aₗ.map f).hom) ∧ (∀ (i j : Λ) (f : i ⟶ j) (b : Bₗ.obj i) (x : Dₗ.obj i), (Dₗ.map f).hom (b • x) = (Bₗ.map f).hom b • (Dₗ.map f).hom x) ∧ (∀ i, ψ.comp (colimit.ι Aₗ i).hom = (colimit.ι Bₗ i).hom.comp (φ i)) ∧ (∀ (i : Λ) (b : Bₗ.obj i) (x : Dₗ.obj i), (colimit.ι Dₗ i).hom (b • x) = (colimit.ι Bₗ i).hom b • (colimit.ι Dₗ i).hom x) ∧ (∃ ρ : R →+* (colimit Aₗ : CommRingCat.{max u v w}), letI := ρ.toAlgebra letI := Module.compHom (colimit Dₗ : AddCommGrpCat.{max u v w}) ψ letI := Module.compHom (colimit Dₗ : AddCommGrpCat.{max u v w}) ρ IsLocalization (q.asIdeal.comap (algebraMap R S)).primeCompl (colimit Aₗ : CommRingCat.{max u v w}) ∧ Nonempty (LocalizedModule q.asIdeal.primeCompl M ≃ₗ[R] (colimit Dₗ : AddCommGrpCat.{max u v w}))) ∧ (∀ i, ∃ ρ : A.obj i →+* Aₗ.obj i, letI := (φ i).toAlgebra letI := Module.compHom (Dₗ.obj i) (φ i) letI := ρ.toAlgebra letI := Module.compHom (Dₗ.obj i) ρ letI : Algebra (A.obj i) (B.obj i) := (η.app i).hom.toAlgebra letI : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (η.app i).hom letI : IsScalarTower (A.obj i) (B.obj i) (D.obj i) := IsScalarTower.of_compHom _ _ _ IsLocalization (q.asIdeal.comap ((ULift.ringEquiv.toRingHom.comp (κ.app i).hom).comp (η.app i).hom)).primeCompl (Aₗ.obj i) ∧ Nonempty (LocalizedModule (q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)).primeCompl (D.obj i) ≃ₗ[A.obj i] Dₗ.obj i)) ∧ (∃ (ρA : ∀ i, A.obj i →+* Aₗ.obj i) (ρB : ∀ i, B.obj i →+* Bₗ.obj i) (ζ : ∀ i, D.obj i →+ Dₗ.obj i), (∀ i, letI := (ρA i).toAlgebra IsLocalization (q.asIdeal.comap ((ULift.ringEquiv.toRingHom.comp (κ.app i).hom).comp (η.app i).hom)).primeCompl (Aₗ.obj i)) ∧ (∀ i, letI := (ρB i).toAlgebra IsLocalization (q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)).primeCompl (Bₗ.obj i)) ∧ (∀ i, (ρB i).comp (η.app i).hom = (φ i).comp (ρA i)) ∧ (∀ (i j : Λ) (f : i ⟶ j), (ρA j).comp (A.map f).hom = (Aₗ.map f).hom.comp (ρA i)) ∧ (∀ (i j : Λ) (f : i ⟶ j), (ρB j).comp (B.map f).hom = (Bₗ.map f).hom.comp (ρB i)) ∧ (∀ (i j : Λ) (f : i ⟶ j) (x : D.obj i), ζ j ((D.map f).hom x) = (Dₗ.map f).hom (ζ i x)) ∧ (∀ i (b : B.obj i) (x : D.obj i), ζ i (b • x) = ρB i b • ζ i x) ∧ (∀ i, letI := Module.compHom (Dₗ.obj i) (ρB i) ∃ ℓ : D.obj i →ₗ[B.obj i] Dₗ.obj i, (∀ x, ℓ x = ζ i x) ∧ IsLocalizedModule (q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)).primeCompl ℓ))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140820-L-314108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140820-L-314108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

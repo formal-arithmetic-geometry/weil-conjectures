@@ -13,7 +13,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Module
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.LocalizedApproximationCocones
+import Sheaf.RingTheory.LocalizedApproximationTransitions
+import Mathlib.RingTheory.Localization.Submodule
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.Defs
@@ -33,6 +35,8 @@ open scoped TensorProduct
 
 namespace Algebra
 
+-- Preserve the named nondependent forall binder in the existing signature.
+set_option linter.unusedVariables false in
 /-- Localization of a supplied Noetherian approximation produces the local diagrams used
 in the stage-flatness criterion. No flatness of the limit is assumed, and no flat stage
 is selected.
@@ -181,6 +185,75 @@ theorem exists_localized_noetherian_approximation
             (η.app i).hom)).primeCompl (Aₗ.obj i) ∧
         Nonempty (LocalizedModule
           (q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)).primeCompl
-          (D.obj i) ≃ₗ[A.obj i] Dₗ.obj i)) := by sorry
+          (D.obj i) ≃ₗ[A.obj i] Dₗ.obj i)) := by
+  classical
+  dsimp only
+  intro Λ _ _ _ A B η π κ D ν _ hmodel q
+  rcases hmodel with ⟨hcR, hcS, hcM, hcompat, hD, hν, hnoethA, hnoethB,
+    hfiniteOriginal, htB, htD⟩
+  obtain ⟨Aₗ, Bₗ, Dₗ, hcA, hcB, hcD, hlocalA, hlocalB, hmodule,
+    hmoduleLimit, φ, ψ, hφ, hA, hB, hcomm,
+    hscalar, hψ, hlimitScalar, hlimit, hstage,
+    ρA, ρB, ζ, hρA, hρB, hη, hρAnat, hρBnat, hζ, hζscalar, hℓ⟩ :=
+    exists_localized_approximation_cocones R S M A B η π κ D ν
+      ⟨hcR, hcS, hcM, hcompat, hD, hν⟩ q
+  let := hcA
+  let := hcB
+  let := hcD
+  let := hlocalA
+  let := hlocalB
+  let := hmodule
+  let := hmoduleLimit
+  let qᵢ : ∀ i, Ideal (B.obj i) := fun i ↦
+    q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)
+  have hprime : ∀ i, (qᵢ i).IsPrime := fun i ↦ Ideal.IsPrime.comap _
+  have hq (i j : Λ) (f : i ⟶ j) : Ideal.comap (B.map f).hom (qᵢ j) = qᵢ i := by
+    dsimp only [qᵢ]
+    rw [Ideal.comap_comap]
+    congr 1
+    rw [RingHom.comp_assoc]
+    congr 1
+    change (B.map f ≫ κ.app j).hom = (κ.app i).hom
+    rw [κ.naturality]
+    rfl
+  have hρA' : ∀ i, letI := (ρA i).toAlgebra
+      IsLocalization ((qᵢ i).comap (η.app i).hom).primeCompl (Aₗ.obj i) := by
+    intro i
+    simpa only [qᵢ, Ideal.comap_comap] using hρA i
+  have hnoetherianA : ∀ i, IsNoetherianRing (Aₗ.obj i) := by
+    intro i
+    let := (ρA i).toAlgebra
+    let := hρA' i
+    exact IsLocalization.isNoetherianRing
+      ((qᵢ i).comap (η.app i).hom).primeCompl (Aₗ.obj i) (hnoethA i)
+  have hnoetherianB : ∀ i, IsNoetherianRing (Bₗ.obj i) := by
+    intro i
+    let := (ρB i).toAlgebra
+    let := hρB i
+    exact IsLocalization.isNoetherianRing (qᵢ i).primeCompl (Bₗ.obj i) (hnoethB i)
+  have hfinite : ∀ i, Module.Finite (Bₗ.obj i) (Dₗ.obj i) := by
+    intro i
+    let := (ρB i).toAlgebra
+    let := Module.compHom (Dₗ.obj i) (ρB i)
+    have : IsScalarTower (B.obj i) (Bₗ.obj i) (Dₗ.obj i) :=
+      IsScalarTower.of_compHom _ _ _
+    let := hρB i
+    obtain ⟨ℓ, _, hloc⟩ := hℓ i
+    let := hloc
+    let := hfiniteOriginal i
+    obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := B.obj i) (M := D.obj i)
+    refine ⟨Submodule.fg_def.mpr ?_⟩
+    exact ⟨ℓ '' (s : Set (D.obj i)), s.finite_toSet.image ℓ,
+      span_eq_top_of_isLocalizedModule (Bₗ.obj i) (qᵢ i).primeCompl ℓ hs⟩
+  let := hnoetherianA
+  let := hnoetherianB
+  let := hfinite
+  obtain ⟨htransitionRing, htransitionModule⟩ :=
+    localized_approximation_transition_base_change A B η D qᵢ hq Aₗ Bₗ Dₗ φ
+      ρA ρB ζ hρA' hρB hη hρAnat hρBnat hζ hscalar hℓ htB htD
+  exact ⟨Aₗ, Bₗ, Dₗ, hcA, hcB, hcD, hlocalA, hlocalB, hnoetherianA,
+    hnoetherianB, hmodule, hfinite, hmoduleLimit, φ, ψ, hφ, hA, hB, hcomm,
+    hscalar, hψ, hlimitScalar, htransitionRing, htransitionModule, hlimit, hstage⟩
+
 
 end Algebra

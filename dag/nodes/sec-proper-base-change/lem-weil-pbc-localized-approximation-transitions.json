@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-localized-approximation-transitions",
+ "kind": "statement",
+ "title": "Prime-localized transition base changes",
+ "statement": "Let Λ be a preorder, A→B ring diagrams and D a diagram of B_i-modules. Let q_i be primes of B_i, contracting compatibly along every transition [def-weil-pbc-localization-at-prime]. Suppose A^l,B^l,D^l are diagrams with B^l_i-module structures, base-to-top maps φ_i, natural stage maps ρA_i,ρB_i commuting with the base-to-top maps, and numerator maps ζ_i commuting with module transitions. Suppose ρA_i presents A^l_i as localization at q_i contracted to A_i, ρB_i presents B^l_i as localization at q_i, and the B_i-linear maps induced by ζ_i (with action restricted through ρB_i) are IsLocalizedModule at q_i [def-weil-pbc-module-localization]. Suppose localized module transitions are semilinear. If the original canonical ring base changes B_i tensor over A_i A_j→B_j and module base changes B_j tensor over B_i D_i→D_j are isomorphisms with their pure-tensor formulas [def-weil-pbc-module-tensor-product], then every localized ring transition map B^l_i tensor over A^l_i A^l_j→B^l_j presents B^l_j as a localization at a submonoid and takes b tensor a to B^l(f)(b)φ_j(a). Every localized module base change B^l_j tensor over B^l_i D^l_i is B^l_j-linearly equivalent to D^l_j, taking b tensor x to bD^l(f)(x). No colimit, finiteness, Noetherianity or local-hom hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RC first reduction paragraph identifying the system with Tag 00QX, clauses (5),(6); parent node step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix i≤j. Identify B_j with B_i tensor over A_i A_j using the given pure-tensor isomorphism. Invert q_i complements in B_i and the contracted q_j complements in A_j, giving the tensor of the localized factors over localized A_i. The commutative squares identify its product map to localized B_j. All inverted elements avoid q_j. Inverting the complement of the pulled-back prime then gives B_j at q_j by the localization universal property, so choose that complement as W.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the original module tensor equivalence. Tensor-localization compatibility shows that extending the earlier localized module to localized B_j and localizing the original later module both localize B_j tensor over B_i D_i at q_j. The IsLocalizedModule universal property gives their unique linear equivalence. The original pure-tensor formula and ζ naturality prove the formula for numerator-one x, and invertible denominators extend it to all localized x.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit fraction/tensor details of the reduction in Tag 00RC; same route as the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of ring and module diagrams at compatible prime ideals commutes with filtered colimits and tensor base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "Unavailable; no absence verdict based on this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a noetherian ring is noetherian and a localized finite module is finite",
+   "results": "IsLocalization.isNoetherianRing and localization Noetherian instances; no combined cocone or transition interface.",
+   "date": "2026-10-13",
+   "verdict": "Component Noetherianity exists; it does not provide either of the new diagram assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule",
+   "results": "IsLocalizedModule, IsLocalizedModule.linearEquiv, IsLocalizedModule.module, localizedModuleIsLocalizedModule and localization universal-property results.",
+   "date": "2026-10-13",
+   "verdict": "These provide fraction and uniqueness tools, not the diagram construction or the localized transition conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*(colimit|tensor)|colimit.*localiz",
+   "results": "Localization.tensorLeftAlgEquiv, LocalizedModule.equivTensorProduct, IsLocalizedModule.rTensor, ModuleCat.localizedModuleFunctor and unrelated categorical localization. Searched both roots for the item declaration: only its caller and its declaration.",
+   "date": "2026-10-13",
+   "verdict": "No matching combined construction or compatible-prime transition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a ring tensor base change and a module tensor base change at compatible prime ideals preserves the tensor transition formulas",
+   "results": "8 hits including IsLocalization.tensorProduct_tensorProduct, IsLocalization.algebraTensorEquiv, IsLocalizedModule.rTensor, IsLocalizedModule.isBaseChange, IsLocalization.moduleTensorEquiv.",
+   "date": "2026-10-13",
+   "verdict": "Relevant tensor-localization components are already recorded by the two existing tensor nodes; no single compatible-prime diagram transition theorem with both formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianApproximationLocalizedDiagrams",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The localized approximation construction needed in the flat-point reduction: localized transition tensor comparisons (parent step 4).",
+   "via": [
+    "lem-weil-pbc-noetherian-approximation-localized-diagrams",
+    "lem-weil-pbc-integer-approximation-flat-point-stage",
+    "lem-weil-pbc-flat-point-noetherian-model",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedApproximationTransitions",
+  "file": "lean/Sheaf/RingTheory/LocalizedApproximationTransitions.lean",
+  "declaration": "Algebra.localized_approximation_transition_base_change",
+  "statement": "theorem localized_approximation_transition_base_change {Λ : Type u} [Preorder Λ] (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B) (D : Λ ⥤ AddCommGrpCat.{u}) [∀ i, Module (B.obj i) (D.obj i)] (q : ∀ i, Ideal (B.obj i)) [∀ i, (q i).IsPrime] (hq : ∀ (i j : Λ) (f : i ⟶ j), Ideal.comap (B.map f).hom (q j) = q i) (Aₗ Bₗ : Λ ⥤ CommRingCat.{u}) (Dₗ : Λ ⥤ AddCommGrpCat.{u}) [∀ i, Module (Bₗ.obj i) (Dₗ.obj i)] (φ : ∀ i, Aₗ.obj i →+* Bₗ.obj i) (ρA : ∀ i, A.obj i →+* Aₗ.obj i) (ρB : ∀ i, B.obj i →+* Bₗ.obj i) (ζ : ∀ i, D.obj i →+ Dₗ.obj i) (hρA : ∀ i, letI := (ρA i).toAlgebra IsLocalization ((q i).comap (η.app i).hom).primeCompl (Aₗ.obj i)) (hρB : ∀ i, letI := (ρB i).toAlgebra IsLocalization (q i).primeCompl (Bₗ.obj i)) (hη : ∀ i, (ρB i).comp (η.app i).hom = (φ i).comp (ρA i)) (hA : ∀ (i j : Λ) (f : i ⟶ j), (ρA j).comp (A.map f).hom = (Aₗ.map f).hom.comp (ρA i)) (hB : ∀ (i j : Λ) (f : i ⟶ j), (ρB j).comp (B.map f).hom = (Bₗ.map f).hom.comp (ρB i)) (hζ : ∀ (i j : Λ) (f : i ⟶ j) (x : D.obj i), ζ j ((D.map f).hom x) = (Dₗ.map f).hom (ζ i x)) (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : Bₗ.obj i) (x : Dₗ.obj i), (Dₗ.map f).hom (b • x) = (Bₗ.map f).hom b • (Dₗ.map f).hom x) (hℓ : ∀ i, letI := Module.compHom (Dₗ.obj i) (ρB i) ∃ ℓ : D.obj i →ₗ[B.obj i] Dₗ.obj i, (∀ x, ℓ x = ζ i x) ∧ IsLocalizedModule (q i).primeCompl ℓ) (htB : ∀ (i j : Λ) (h : i ≤ j), letI := (η.app i).hom.toAlgebra letI := (A.map (homOfLE h)).hom.toAlgebra ∃ e : B.obj i ⊗[A.obj i] A.obj j ≃+* B.obj j, ∀ (x : B.obj i) (y : A.obj j), e (x ⊗ₜ[A.obj i] y) = (B.map (homOfLE h)).hom x * (η.app j).hom y) (htD : ∀ (i j : Λ) (h : i ≤ j), letI := (B.map (homOfLE h)).hom.toAlgebra ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j, ∀ (y : B.obj j) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • (D.map (homOfLE h)).hom x) : (∀ (i j : Λ) (f : i ⟶ j), letI := (φ i).toAlgebra letI := (Aₗ.map f).hom.toAlgebra ∃ (t : Bₗ.obj i ⊗[Aₗ.obj i] Aₗ.obj j →+* Bₗ.obj j) (W : Submonoid (Bₗ.obj i ⊗[Aₗ.obj i] Aₗ.obj j)), (∀ (b : Bₗ.obj i) (a : Aₗ.obj j), t (b ⊗ₜ[Aₗ.obj i] a) = (Bₗ.map f).hom b * φ j a) ∧ (letI := t.toAlgebra; IsLocalization W (Bₗ.obj j))) ∧ (∀ (i j : Λ) (f : i ⟶ j), letI := (Bₗ.map f).hom.toAlgebra ∃ e : Bₗ.obj j ⊗[Bₗ.obj i] Dₗ.obj i ≃ₗ[Bₗ.obj j] Dₗ.obj j, ∀ (b : Bₗ.obj j) (x : Dₗ.obj i), e (b ⊗ₜ[Bₗ.obj i] x) = b • (Dₗ.map f).hom x)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140820-L-314108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140820-L-314108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
