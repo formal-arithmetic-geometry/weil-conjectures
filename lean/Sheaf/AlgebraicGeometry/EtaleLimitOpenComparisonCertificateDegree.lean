@@ -7,11 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
 public import Sheaf.AlgebraicGeometry.StageCohomologyComparison
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Adjunction.Limits
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitTailOpenGeometry
+import Sheaf.AlgebraicGeometry.EtaleLimitTailOpenCoefficients
 
 /-! # Geometric certificate for the canonical open comparison
 
@@ -23,6 +20,9 @@ Source: Stacks Project, Tag 09YQ, restriction of coherent systems.
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
 
 /-- The canonical cocone on inverse-image opens has a stage-comparison certificate.
 
@@ -90,6 +90,48 @@ theorem etale_limit_open_comparison_certificate_degree
         ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ W).ι).obj L.pt) n)))
     (hι : ∀ j, ι.app j =
       (eK j).hom ≫ tailOpenCohomologyLegDegree D c (e.hom ≫ O.ι) W F G eG L n j) :
-    StageCohomologyComparison allowed (colimit.desc K (Cocone.mk _ ι)) := by sorry
+    StageCohomologyComparison allowed (colimit.desc K (Cocone.mk _ ι)) := by
+  classical
+  let : Nonempty (Set.Ici i₀) := ⟨⟨i₀, le_rfl⟩⟩
+  let : IsDirected (Set.Ici i₀) (· ≤ ·) := ⟨fun j k ↦ by
+    obtain ⟨l, hj, hk⟩ := directed_of (fun i j : I ↦ i ≤ j) j.val k.val
+    exact ⟨⟨l, j.property.trans hj⟩, hj, hk⟩⟩
+  have hg := etale_limit_tail_open_geometry X O W hW hWO D c hc i₀ e
+  let hDW := Classical.choice hg.1
+  let hcompact := hg.2.1
+  let hqs := hg.2.2.1
+  let haffine := hg.2.2.2.1
+  let eW := Classical.choice hg.2.2.2.2
+  let : ∀ j : (Set.Ici i₀)ᵒᵖ, CompactSpace ((tailOpenDiagram D (e.hom ≫ O.ι) W).obj j) := hcompact
+  let : ∀ j : (Set.Ici i₀)ᵒᵖ, QuasiSeparatedSpace ((tailOpenDiagram D (e.hom ≫ O.ι) W).obj j) := hqs
+  let : ∀ (j k : (Set.Ici i₀)ᵒᵖ) (f : j ⟶ k),
+      IsAffineHom ((tailOpenDiagram D (e.hom ≫ O.ι) W).map f) := haffine
+  have hf :=
+    etale_limit_tail_open_coefficients D c F φ hidentity hcomposition G eG hG L hL
+      i₀ (e.hom ≫ O.ι) W
+  let hidW := hf.1
+  let hcompW := hf.2.1
+  let hGW := hf.2.2.1
+  let hLW := Classical.choice hf.2.2.2.1
+  let hlegW := hf.2.2.2.2
+  refine StageCohomologyComparison.system (I := Set.Ici i₀)
+    (tailOpenDiagram D (e.hom ≫ O.ι) W) (tailOpenCone D c (e.hom ≫ O.ι) W) hDW
+    (tailOpenSheaf D (e.hom ≫ O.ι) W F)
+    (@tailOpenCoefficient _ _ D _ _ (e.hom ≫ O.ι) W F φ) hidW hcompW
+    ((tailOpenInclusion i₀ ⋙ G) ⋙ (upperStar AddCommGrpCat.{u + 1}
+      ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ W).ι))
+    (tailOpenLimitIso D c (e.hom ≫ O.ι) W F G eG) hGW
+    ((upperStar AddCommGrpCat.{u + 1}
+      ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ W).ι).mapCocone
+      (L.whisker (tailOpenInclusion i₀))) hLW n K eK ?_ (Cocone.mk _ ι)
+    (Iso.refl _) ?_ W.toScheme hallowed ⟨i₀, le_rfl⟩ eW
+  · intro j k f
+    simpa only [tailOpenCohomologyMapDegree, Category.assoc] using hK j k f
+  · intro j
+    change ι.app j ≫ 𝟙 _ = _
+    rw [Category.comp_id, hι j]
+    dsimp only [tailOpenCohomologyLegDegree]
+    dsimp only [tailOpenCone, tailOpenSheaf]
+    erw [hlegW j]
 
 end AlgebraicGeometry.Etale

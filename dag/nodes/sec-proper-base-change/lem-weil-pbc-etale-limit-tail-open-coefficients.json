@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-limit-tail-open-coefficients",
+ "kind": "statement",
+ "title": "Coherent coefficients and their colimit restrict to explicit tail opens",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{op}\\to Sch$ an inverse diagram of schemes [def-pc-scheme], with any cone $c$ [def-weil-pbc-category-colimit]. Let $F_i$ be abelian etale sheaves and let the inverse-image transitions $\\varphi_f$ obey the canonical identity and composition equations. Let $G$ be a diagram on the cone point, with specified $eG_i:G_i\\cong c_i^*F_i$ and canonical transition formula, and let $L$ be a colimit cocone of $G$. Fix $i_0$, a morphism $g_0:D_{i_0}\\to X$, and an open $W$ of $X$. Use the explicit restricted diagram, cone, sheaves, transitions, tail inclusion $J$, and limit-coefficient isomorphisms of [lem-weil-pbc-etale-limit-open-restricted-system]. The restricted coefficients obey the canonical identity and composition equations, and the arrows of $G|_J$ pulled back to the limit open obey the canonical transition formula with these specified isomorphisms. The cocone $L|_J$ pulled back to the limit open is colimiting. Its coefficient leg after the inverse specified isomorphism equals openSquareCoefficient applied to the original leg $(eG_j)^{-1};L_j$. No compactness, scheme limit, allowed-stage predicate, or cohomological continuity is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), coherent-system construction and restriction; Tag 01F7, canonical pullback and cohomology functoriality. The finite direct-sum application is Tag 0A50 (lemma-mayer-vietoris)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-limit-open-restricted-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply tailOpenRestrictedSystem_coherence to obtain the restricted coefficient identity, composition and diagram-map equations for the explicit tailOpenLimitIso.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-open-restricted-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tail inclusion is final: choose a common upper bound of each original index and i0; filteredness and the uniqueness of preorder morphisms give the finality criterion. Apply Functor.Final.isColimitWhiskerEquiv, then isColimitOfPreserves for the inverse-image left adjoint.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the inverse of tailOpenLimitIso, functoriality of inverse image, and the whiskered cocone leg. Reassociation gives exactly the defined openSquareCoefficient.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-open-restricted-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-etale-limit-open-restricted-system",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ, restricted coherent system; final upper-tail reindexing; Tag 0038, preservation by inverse-image left adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image coherent system sheaves colimit restricted opens directed tail",
+   "results": "['TopCat.Presheaf.whiskerIsoMapGenerateCocone_inv_hom', \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom\", 'TopCat.Presheaf.whiskerIsoMapGenerateCocone_hom_hom', 'TopCat.Presheaf.generateEquivalenceOpensLe_inverse', 'TopCat.Presheaf.isLimitOpensLeEquivGenerate₁', \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map\", 'TopCat.Presheaf.isLimitOpensLeCoverEquivPairwise', 'TopCat.Presheaf.whiskerIsoMapGenerateCocone'] ",
+   "date": "2026-10-13",
+   "verdict": "general tools; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image coherent system sheaves colimit restricted opens directed tail",
+   "results": "[] service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitOpensCone|isColimitOfPreserves|isColimitWhiskerEquiv",
+   "results": "['Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean', 'Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean', 'Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean', 'Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean'] ",
+   "date": "2026-10-13",
+   "verdict": "general tools; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenComparisonCertificateDegree",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Restriction of the inverse diagram and coherent coefficients to quasi-compact opens in the limit argument.",
+   "via": [
+    "lem-weil-pbc-etale-limit-open-comparison-certificate-degree",
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitTailOpenCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitTailOpenCoefficients.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_tail_open_coefficients",
+  "statement": "theorem etale_limit_tail_open_coefficients\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    {X : Scheme.{u}} (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) :\n    let DW := tailOpenDiagram D g₀ W\n    let cW := tailOpenCone D c g₀ W\n    let FW := tailOpenSheaf D g₀ W F\n    let φW := @tailOpenCoefficient _ _ D _ _ g₀ W F φ\n    let R := upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι\n    let J := tailOpenInclusion i₀\n    let GW := (J ⋙ G) ⋙ R\n    let LW := R.mapCocone (L.whisker J)\n    (∀ j, φW (𝟙 j) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (DW.map_id (op j)))).hom.app\n        (FW j) ≫ (upperStarId AddCommGrpCat.{u + 1} (DW.obj (op j))).hom.app (FW j)) ∧\n    (∀ (j k l : Set.Ici i₀) (f : j ⟶ k) (g : k ⟶ l), φW (f ≫ g) =\n      (upperStarComp AddCommGrpCat.{u + 1} (DW.map g.op) (DW.map f.op)\n        (DW.map (f ≫ g).op) (DW.map_comp g.op f.op)).hom.app (FW j) ≫\n      (upperStar AddCommGrpCat.{u + 1} (DW.map g.op)).map (φW f) ≫ φW g) ∧\n    (let eGW := tailOpenLimitIso D c g₀ W F G eG;\n      (∀ (j k : Set.Ici i₀) (f : j ⟶ k), GW.map f =\n        (eGW j).hom ≫\n          (upperStarComp AddCommGrpCat.{u + 1} (cW.π.app (op k)) (DW.map f.op)\n            (cW.π.app (op j)) (cW.w f.op).symm).hom.app (FW j) ≫\n          (upperStar AddCommGrpCat.{u + 1} (cW.π.app (op k))).map (φW f) ≫\n            (eGW k).inv) ∧\n      Nonempty (IsColimit LW) ∧\n      (∀ j : Set.Ici i₀, (eGW j).inv ≫ LW.ι.app j =\n        openSquareCoefficient (c.π.app (op j.val)) (tailStageOpen D g₀ W j).ι\n          ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι (tailLimitOpenMap D c g₀ W j)\n          (by simp only [tailLimitOpenMap, Scheme.Hom.resLE_comp_ι]) (F j.val) L.pt\n          ((eG j.val).inv ≫ L.ι.app j.val)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T095943-L-2455359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T095943-L-2455359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
