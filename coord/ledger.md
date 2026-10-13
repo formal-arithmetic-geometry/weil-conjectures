@@ -10867,3 +10867,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/G4/Sheaf.RingTheory.DepthQuotientNonzerodivisor (stage 3; reviewer PASS; first push; landing 20261013T031540-L-3571016 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/H2/Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic (stage 3; reviewer PASS; first push; landing 20261013T031541-L-3571160 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/H2/Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding (stage 3; reviewer PASS; first push; landing 20261013T031541-L-3571311 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta (stage 3; reviewer PASS; first push; landing 20261013T031542-L-3571414 (proof); batch 20261013T031526; modules 1; new nodes 0)

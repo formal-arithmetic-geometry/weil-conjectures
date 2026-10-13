@@ -25,24 +25,51 @@
  ],
  "proof": [
   {
-   "text": "Properness gives a qcqs morphism. Apply [lem-pc-rf-base-change-complex] with G=O_X[0], which is quasi-coherent, bounded above and flat over Y. Identify E tensor O_X[0] with E and the pullback of O_X[0] with O_X'[0]. The derived-to-ordinary comparison is invertible because O_X is intrinsically flat. Cancel these isomorphisms in the theorem's displayed composite to get the canonical ordinary derived base-change isomorphism for each E.",
+   "text": "Put G = O_X[0]. Its only nonzero term is quasi-coherent, and isFlatOver_of_isInvertible in the source Cohomology.DirectImage.Basic proves its relative flatness using Flat f. The zero terms are free on the empty set and have zero section modules, hence are quasi-coherent and flat. Properness supplies QuasiCompact f and QuasiSeparated f.",
+   "uses": [
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply nonempty_coordinates of [def-pc-single-complex-base-change-stalk-condition] to the identity of derivedPullback(g_X)(E), obtaining a K-flat representative P, Q(P) ≅ E, and invertibility of the canonical counit at P. This is a local existential elimination in a theorem proof; no definition chooses arbitrary data. Set H = Tot(P tensor G). The chain right unitor gives H ≅ P. The recorded derived monoidal construction [def-pc-scheme-derived-tensor-structure], with upstream singleFunctorObjUnitIso, identifies Q(G) with the derived tensor unit. Combine these identifications to construct alpha : E tensor Q(G) ≅ Q(H).",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-rf-base-change-complex] to E, G, P and alpha. Naturality of the canonical counit along the homotopy image of H ≅ P proves it invertible at H. Cancel the invertible functor image of alpha and the direct image of this counit to obtain invertibility of the canonical beta at Q(H).",
    "uses": [
     "lem-pc-rf-base-change-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A1D (Lemma 36.26.4), specialized to the relatively flat complex O_X[0]; also Tag 08IB"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of [def-pc-derived-base-change-map] explicitly: form the natural transformation from the pullback composition comparisons of [lem-pc-ringed-spaces-derived-pullback-composition], square equality transport and adjunction counit; take its adjunction mate. The Hom-equivalence naturality-square lemma proves beta natural in E. Apply this equality to Q(H) ≅ Q(P) ≅ E and cancel the two functor images of that isomorphism. This gives exactly the requested IsIso beta_E.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-rf-base-change-complex"
+  "def-pc-derived-base-change-map",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-rf-base-change-complex",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A1D (Lemma 36.26.4), specialized to the relatively flat complex O_X[0]; also Tag 08IB"
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0A1D, specialization to O_X[0]; Tag 08HY, naturality of the canonical mate",
+  "note": "Complete Lean specialization from the existing relativelyFlat_derivedBaseChange_complex and nonempty_coordinates declarations; no new holes."
  },
  "mathlib_searches": [
   {
@@ -129,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T231633-L-1961621",
-  "kind": "interface",
+  "landing": "20261013T031542-L-3571414",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
