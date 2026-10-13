@@ -1,0 +1,148 @@
+{
+ "id": "lem-sbc-raw-restricted-sections-unit-zero",
+ "kind": "statement",
+ "title": "Degree-zero normalization of the restricted derived-sections unit",
+ "statement": "Let Y be a scheme, W an etale Y-scheme and A an abelian sheaf on Y's small etale site. Write L for restriction to W, R for global sections on W, Q for localization of cochain complexes, and H for zeroth homology. The functor T and the isomorphism zeroIso are those of [def-sbc-raw-restricted-cohomology-comparison-map]; the isomorphism underivedSingleIso is that of [lem-sbc-raw-restricted-homotopy-sections-iso]. For any complex K, define η_K:Q(RLK)→RF(L(QK)) by first transporting Q(RLK) to Qh(R(qLK)), applying the right-derived unit of R at qLK, transporting Qh(qLK) to Q(LK), and applying RF to the inverse of L's localization comparison. Here q is the homotopy quotient and the transports are quotientCompQhIso. Let β_K:H(Q(RLK))≅H(RLK) be homologyFunctorFactors. Then, as morphisms from R(LA) to T(A[0]), underivedSingleIso(W,A).inv ≫ β_{A[0]}.inv ≫ H(η_{A[0]}) = zeroIso(W,A).inv. No K-injectivity is assumed on A[0].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/072W",
+  "place": "Tag 072W, proof using injective section complexes; Tags 0BKV and 0D6F for restriction. The explicit normalization of the Lean classical/total derived comparisons is agent-supplied glue."
+ },
+ "stmt_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-raw-restricted-homotopy-sections-iso"
+ ],
+ "proof": [
+  {
+   "text": "Expand zeroIso into exact restriction on a single sheaf, the unbounded/bounded-below derived compatibility, injective-resolution homology, and the classical degree-zero comparison. The defining compatibility with the two right-derived units cancels the unbounded/bounded-below comparison. Use Functor.rightDerivedNatTrans_app for the identity transformation in the defining rightDerivedUnique comparison; this is its unit factorization equation.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved rightDerivedPlusSingleUnitHomology_comp_comparison to the sheaf L(A). It identifies homology of the bounded-below single unit, transported through the classical comparison, with toRightDerivedZero. Since sections preserve finite limits, rightDerivedZeroIsoSelf is inverse to that map. Cancel these factors. Expand mapDerivedCategorySingleFunctor and use naturality of homologyFunctorFactors to transport through exact restriction and the termwise single-complex isomorphism, giving underivedSingleIso. This yields the displayed equality. All equations are natural-transformation identities and inverse cancellations, including A=0 and empty W.",
+   "uses": [
+    "lem-sbc-raw-restricted-homotopy-sections-iso",
+    "lem-sbc-right-derived-single-unit-homology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-raw-restricted-homotopy-sections-iso",
+  "lem-sbc-right-derived-single-unit-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent F3",
+  "document": "Stacks Project and Lean definitions",
+  "place": "Tags 072W, 0BKV and 0D6F; Functor.homologyRightDerivedFunctorObjSingleFunctorIso, rightDerivedFunctorPlusCompatibility, InjectiveResolution.toRightDerivedZero_eq; second reading uses the existing bounded-below normalization rightDerivedPlusSingleUnitHomology_comp_comparison rather than redoing its augmentation proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The zeroth cohomology of the total right derived functor unit on a single object equals the canonical map to the zeroth classical right derived functor",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth cohomology of the total right derived functor unit on a single object equals the canonical map to the zeroth classical right derived functor",
+   "results": "8 hits, including Functor.toRightDerivedZero, InjectiveResolution.toRightDerivedZero_eq and Functor.rightDerivedZeroIsoSelf; no total-derived unit normalization.",
+   "verdict": "generic ingredients only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero|homologyRightDerivedFunctorObjSingleFunctorIso|rightDerivedFunctorPlusCompatibility",
+   "results": "5 hits in Mathlib/CategoryTheory/Abelian/RightDerived.lean defining the classical degree-zero comparison and its cycles formula; no total-derived unit normalization.",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zeroth homology derived unit single complex canonical comparison right derived zero",
+   "results": "8 hits: singleFunctorCompHomologyFunctorIso, homologyFunctorSingleIso, isoRightDerivedObj, homologyFunctorFactors and singleFunctorIsoCompQ; no total-derived/restriction equation.",
+   "verdict": "generic comparisons only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toRightDerivedZero\"",
+   "results": "12 hits: toRightDerivedZero and its invertibility, cycles and resolution formulas; no equation with the transported total-derived unit.",
+   "verdict": "classical ingredients only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyRightDerivedFunctorObjSingleFunctorIso|rightDerivedFunctorPlusCompatibility|toRightDerivedZero_eq|rightDerivedZeroIsoSelf (local lean/Sheaf and lean/WeilConjectures)",
+   "results": "Found proved rightDerivedPlusSingleUnitHomology_comp_comparison, bounded-below canonical single-unit normalization, and canonicalDirectImageH0Unit for sheaves of modules. The latter has private generic transport calculations. None states the restricted abelian-sheaf equality; reuse the bounded-below theorem in the remaining proof plan.",
+   "verdict": "existing bounded-below normalization reused; no duplicate new statement",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionEvaluation",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Degree-zero source normalization in the resolution evaluation comparison",
+   "via": [
+    "lem-sbc-raw-restricted-resolution-evaluation",
+    "lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso",
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedSectionsUnitZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedSectionsUnitZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.sectionsUnit_zero",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.sectionsUnit",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.sectionsUnit_zero"
+  ],
+  "statement": "theorem sectionsUnit_zero {Y : Scheme.{v}} (W : Y.Etale)\n    (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :\n    (underivedSingleIso W A).inv ≫\n        ((DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} 0).app\n          (((underivedSections W).mapHomologicalComplex (.up ℤ)).obj\n            ((CochainComplex.singleFunctor _ 0).obj A))).inv ≫\n        (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n          (sectionsUnit W ((CochainComplex.singleFunctor _ 0).obj A)) =\n      (zeroIso W A).inv",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T082343-L-1634995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T082343-L-1634995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
