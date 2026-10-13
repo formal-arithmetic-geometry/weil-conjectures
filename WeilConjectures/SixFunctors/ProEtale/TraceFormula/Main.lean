@@ -78,8 +78,9 @@ variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (G : GeometricOperations A (S
 Frobenius of a separated finite type model `X₀` over `k`, for every `m ≥ 1`. The affine
 case is `traceFormulaHolds_of_isAffine`; the general case follows by induction on a finite affine
 open cover of `X₀` (`Scheme.induction_on_isCompl`), splitting off at each step a closed
-subscheme of an affine open, which is affine, by additivity of the trace formula (`traceFormula_of_isCompl`)
-(Step 5 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`). -/
+subscheme of an affine open, which is affine, by additivity of the trace formula
+(`traceFormula_of_isCompl`) (Step 5 of the proof of blueprint
+`thm-trf-coefficient-morphism-trace-formula`). -/
 theorem traceFormula {aX : X ⟶ Spec (.of Ω)} [IsGeometric aX]
     [HasCompactification aX] {W : WeilComplex (A := A) aX} {X₀ : Scheme.{u}}
     {f₀ : X₀ ⟶ Spec (.of k)} [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀]
