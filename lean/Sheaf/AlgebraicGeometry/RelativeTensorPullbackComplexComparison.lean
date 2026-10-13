@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor
+import Sheaf.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Balanced tensor pullback for ordinary complexes
 
@@ -81,6 +84,39 @@ theorem relativeTensorPullback_complex_comparison
             (((TopCat.Sheaf.inverseImageModuleFunctor f.base S.sheaf).mapHomologicalComplex
               (ComplexShape.up ℤ)).obj L)
             (@curriedTensor _ _ (SheafOfModules.monoidalCategory
-              (TopCat.Sheaf.inverseImageRing f.base S.sheaf))))) := by sorry
+              (TopCat.Sheaf.inverseImageRing f.base S.sheaf))))) := by
+  let R := ((sheafCompose (Opens.grothendieckTopology X)
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj
+      (TopCat.Sheaf.inverseImageRing f.base S.sheaf))
+  let U := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
+  let V := SheafOfModules.toSheaf R
+  let H := SheafOfModules.restrictScalars
+    ((sheafCompose (Opens.grothendieckTopology X)
+      (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f))
+  let I := TopCat.Sheaf.inverseImageModuleFunctor f.base S.sheaf
+  let T := @curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)
+  let T' := @curriedTensor _ _ (SheafOfModules.monoidalCategory
+    (TopCat.Sheaf.inverseImageRing f.base S.sheaf))
+  let B := ((T.mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj A).obj
+    ((G.mapHomologicalComplex (.up ℤ)).obj L)
+  let B' := ((T'.mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj
+    ((H.mapHomologicalComplex (.up ℤ)).obj A)).obj
+      ((I.mapHomologicalComplex (.up ℤ)).obj L)
+  have : U.PreservesTotalComplex B (.up ℤ) := fun _ ↦ inferInstance
+  have : V.PreservesTotalComplex B' (.up ℤ) := fun _ ↦ inferInstance
+  obtain ⟨e, h₁, h₂⟩ := exists_relativeTensorPullback_balanced_natural f G hG hGmap
+  let eB : ((U.mapHomologicalComplex₂ (.up ℤ) (.up ℤ)).obj B) ≅
+      ((V.mapHomologicalComplex₂ (.up ℤ) (.up ℤ)).obj B') :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun p ↦ HomologicalComplex.Hom.isoOfComponents
+        (fun q ↦ e (A.X p) (L.X q)) (by
+          intro q q' hq
+          exact (h₂ (A.X p) (L.X q) (L.X q') (L.d q q')).symm)) (by
+        intro p p' hp
+        ext1 q
+        exact (h₁ (A.X p) (A.X p') (A.d p p') (L.X q)).symm)
+  exact ⟨(HomologicalComplex₂.mapTotalIso U B (.up ℤ)).symm ≪≫
+    HomologicalComplex₂.total.mapIso eB (.up ℤ) ≪≫
+      HomologicalComplex₂.mapTotalIso V B' (.up ℤ)⟩
 
 end AlgebraicGeometry.Scheme

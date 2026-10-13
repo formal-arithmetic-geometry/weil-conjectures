@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-relative-tensor-pullback-balanced-naturality",
+ "kind": "statement",
+ "title": "Relative tensor pullback balanced naturality",
+ "statement": "Let f:X → S be a scheme morphism, and let G be a functor on module sheaves whose objects and morphisms agree with the canonical tensor pullback [def-pc-module-pullback]. Write R=f⁻¹O_S, H=restriction of scalars along R → O_X, and I=the canonical inverse-image module functor [def-pc-topological-inverse-image-module]. There is a family of isomorphisms of abelian sheaves e(M,N): underlying(M tensor over O_X G(N)) ≅ underlying(H(M) tensor over R I(N)), natural separately in every O_X-linear map M → M′ and every O_S-linear map N → N′. No additivity of G, flatness, nonzero-ring, boundedness, or derived-category assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Lemma 20.27.4 (Tag 08DE), proof"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "On section tensor products construct m tensor (b tensor n) ↦ (b m) tensor n with inverse m tensor n ↦ m tensor (1 tensor n). The R- and O_X-balancing relations imply both maps are well defined and tensor induction proves inverse identities. Module-map naturality follows from a(b m)=b a(m) and from functoriality of b tensor n.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-tensor-restrict-extend-module-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The balanced section maps commute with all restrictions. Tensoring a module sheaf with module sheafification agrees with sheafifying the presheaf tensor, so replacing the scalar-extension presheaf by its module sheafification yields the same associated abelian sheaf. Underlying module sheafification is abelian sheafification, hence it is independent of the chosen coefficient ring. These universal properties descend the mutually inverse section maps to inverse maps of abelian sheaves, with naturality preserved. Finally transport G.obj along hG; hGmap gives exactly the transported morphisms.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-topological-inverse-image-module",
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-tensor-restrict-extend-module-natural",
+  "def-pc-topological-inverse-image-module",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "reason": "Balanced tensor identity and its naturality from the proof of Stacks Tag 08DE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules over a morphism of ring sheaves, tensor with extension of scalars is naturally isomorphic after forgetting to tensor with restriction of scalars",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, _ ≅ _",
+   "results": "Found forgetting/sheafification comparison isomorphisms, including PresheafOfModules.sheafificationCompToSheaf; no balanced sheaf tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; LeanFinder also found presheaf tensor objects and sectionwise extension/restriction adjunction formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars; changeOfRingsPresheaf; cancelBaseChange",
+   "results": "Mathlib Tower.lean supplies cancelBaseChange. Existing project TensorRestrictExtendScalarsModule proves module-level naturality, SheafificationTensor supplies tensor-sheafification comparison, but neither states the required mixed coefficient sheaf identity.",
+   "date": "2026-10-13",
+   "verdict": "ordinary module-level ingredients exist; sheaf-level assembly remains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTensorPullbackComplexComparison",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DE, proof: ordinary balanced tensor identity preceding totalization",
+   "via": [
+    "lem-pc-relative-tensor-pullback-complex-comparison",
+    "lem-pc-relative-tensor-pullback-homology-comparison",
+    "lem-pc-relative-tor-pullback-tensor-lower-bound",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorPullbackBalancedNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_relativeTensorPullback_balanced_natural",
+  "statement": "theorem exists_relativeTensorPullback_balanced_natural {X S : Scheme.{u}} (f : X ⟶ S) (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hG : ∀ M, G.obj M = Modules.tensorPullbackObj f M) (hGmap : ∀ {M N} (a : M ⟶ N), G.map a = eqToHom (hG M) ≫ Modules.tensorPullbackMap f a ≫ eqToHom (hG N).symm) : let R := ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf)) let U := SheafOfModules.toSheaf (moduleRings X.toRingedSpace) let V := SheafOfModules.toSheaf R let H := SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f)) let I := TopCat.Sheaf.inverseImageModuleFunctor f.base S.sheaf let T := @curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf) let T' := @curriedTensor _ _ (SheafOfModules.monoidalCategory (TopCat.Sheaf.inverseImageRing f.base S.sheaf)) ∃ e : ∀ M N, U.obj ((T.obj M).obj (G.obj N)) ≅ V.obj ((T'.obj (H.obj M)).obj (I.obj N)), (∀ M M' (a : M ⟶ M') N, U.map ((T.map a).app (G.obj N)) ≫ (e M' N).hom = (e M N).hom ≫ V.map ((T'.map (H.map a)).app (I.obj N))) ∧ (∀ M N N' (b : N ⟶ N'), U.map ((T.obj M).map (G.map b)) ≫ (e M N').hom = (e M N).hom ≫ V.map ((T'.obj (H.obj M)).map (I.map b)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140819-L-313794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140819-L-313794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

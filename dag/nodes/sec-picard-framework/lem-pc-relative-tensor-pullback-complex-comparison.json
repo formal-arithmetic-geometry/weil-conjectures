@@ -14,14 +14,14 @@
  ],
  "proof": [
   {
-   "text": "Use the balanced section tensor isomorphism a tensor (b tensor l) maps to (b*a) tensor l, with inverse a tensor l maps to a tensor (1 tensor l). The balancing relations give inverse maps; naturality in restrictions sheafifies these maps to the tensor sheaves.",
+   "text": "Apply the balanced sheaf tensor comparison, natural in both module variables, to every pair of terms of A and L.",
    "uses": [
-    "def-pc-module-pullback"
+    "lem-pc-relative-tensor-pullback-balanced-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality in each factor commutes with each differential. Both total differentials use sign (-1)^p on the second differential. Forgetting scalars preserves coproducts, so coproduct the summand isomorphisms over p+q=n to get inverse chain maps in every degree.",
+   "text": "Assemble the component comparisons into a bicomplex isomorphism using naturality of the differentials, then use totalization and the comparison between a functor applied to a total complex and the total of the mapped bicomplex.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
@@ -30,14 +30,13 @@
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
+  "lem-pc-relative-tensor-pullback-balanced-naturality",
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DE, proof: balanced tensor identity and definitions"
+  "by": "worker",
+  "reason": "The Lean proof constructs the termwise balanced natural comparison, lifts it to bicomplexes, and applies HomologicalComplex₂.mapTotalIso and total.mapIso."
  },
  "mathlib_searches": [
   {
@@ -110,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f8256",
-  "group": "B4",
+  "reviewer": "COMPILER",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T131323-L-4033143",
+  "landing": "20261013T140819-L-313794",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records and Stacks Tag 08DE; existing signature unchanged, delivery and direct importer compile cleanly, axiom probes pass."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
