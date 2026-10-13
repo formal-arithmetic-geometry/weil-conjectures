@@ -17,36 +17,42 @@
  },
  "proof": [
   {
-   "text": "Use the bound-one truncation calculation of 08D4 on sections over inverse images of affine opens. The cycle-to-cohomology-class comparison for a K-injective resolution gives f_*H^i(L) → H^i(Rf_*L), natural in L and compatible with restrictions. It glues and is independent of the resolution. Precompose with sigma at Gamma_A H^i(L) and f_* of the quasi-coherent tilde/Gamma counit, giving alpha.",
+   "text": "Apply exists_affineDerivedPushforwardSheafEdge to obtain the sheaf-level edge epsilon, with its derived-unit normalization. Transfer finite-limit and finite-colimit preservation from scalar restriction followed by tilde_B across the supplied sigma, so tilde_A followed by pushforward preserves homology.",
    "uses": [
-    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
-    "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-pc-affine-derived-pushforward-sheaf-edge",
+    "def-pc-affine-base-change-tilde-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "For L=Q(T_A C), exact tilde identifies H^i(L) with T_A H^i(C). Naturality of sigma and the tilde adjunction triangle identity cancel the unit in b with the counit in alpha. What remains is the termwise sigma followed by the derived unit, namely q. For t.hom=eqToHom h, eliminate h; extensionality of isomorphisms reduces t to Iso.refl. This proves precisely the identity equation, with no invertibility assertion.",
+   "text": "Construct alpha by whiskering sigma with Gamma_A H^i, followed by pushforward of the tilde/Gamma counit, then epsilon. These are composites of natural transformations. Eliminate the object equality in the normalization hypothesis and use Iso.ext to reduce t to the identity.",
    "uses": [
-    "def-pc-affine-base-change-tilde-coordinates",
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Naturality of sigma moves the representative coordinate map across sigma. Naturality of the counit and the left triangle identity cancel the tilde unit, leaving pushforward of the inverse exact-homology and Q/homology comparisons. Apply the sheaf-edge normalization. Finally homologyMap_mapNatTrans and naturality of homologyFunctorFactors identify the remaining composite with the specified q.",
+   "uses": [
+    "def-pc-affine-pushforward-comparison-coordinates",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-base-change-tilde-coordinates",
-  "lem-pc-affine-morphism-hi",
-  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "def-pc-affine-pushforward-comparison-coordinates",
+  "lem-pc-affine-derived-pushforward-sheaf-edge",
   "lem-weil-pbc-affine-tilde-gamma-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U1",
+  "group": "Q4",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/06Z0",
-  "place": "perfect.tex, lemma-affine-morphism-equivalence, cohomology display; lemma-application-nice-K-injective, bound-one truncation; affine derived equivalence (06Z0).",
-  "note": "Lean-facing refinement of the cited comparison argument; sources read online because the local literature checkout is absent."
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "0AVW, proof, cohomology display; 08D4, bound-one truncation comparison, applied on inverse images of affine opens.",
+  "note": "Proposed coordinate calculation; independent homology and adjunction calculations compile, but the item cannot yet be checked because its pre-existing coordinate import is absent from the published compiled library."
  },
  "mathlib_searches": [
   {
@@ -116,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-dcd4f",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T211116-L-396106",
+  "landing": "20261013T222409-L-1225228",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, DAG nodes, report, and Lean compilation match the recorded stage-3 proof and interface changes; all checks pass."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

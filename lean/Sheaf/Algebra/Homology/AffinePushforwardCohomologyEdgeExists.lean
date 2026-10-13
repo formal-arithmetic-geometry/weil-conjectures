@@ -6,6 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
+import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge
+import Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity
 
 /-! # Normalized affine cohomology edge maps -/
 
@@ -61,6 +63,14 @@ theorem exists_affinePushforwardCohomologyEdge
           ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map t.hom) =
         (affinePushforwardTilde B).map ((ModuleCat.restrictScalars φ).map
           (affinePushforwardRepresentativeCohomologyIso A C L.obj t i).hom) ≫ α.app L := by
-  sorry
+  obtain ⟨α, hα⟩ := exists_affinePushforwardCohomologyEdge_identity A B φ i σ
+  refine ⟨α, ?_⟩
+  intro C L t ht
+  rcases L with ⟨K, hK⟩
+  obtain ⟨h, ht⟩ := ht
+  cases h
+  have ht' : t = Iso.refl _ := Iso.ext ht
+  subst t
+  simpa using hα C hK
 
 end AlgebraicGeometry

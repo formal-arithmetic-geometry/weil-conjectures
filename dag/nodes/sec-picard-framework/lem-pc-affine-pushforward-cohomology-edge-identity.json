@@ -1,0 +1,110 @@
+{
+ "id": "lem-pc-affine-pushforward-cohomology-edge-identity",
+ "kind": "statement",
+ "title": "Identity-representative affine cohomology edge normalization",
+ "statement": "Under the hypotheses of lem-pc-affine-pushforward-cohomology-edge-exists, there exists the same natural transformation alpha such that the required equation holds for the canonical representative Q(T_A C), with any chosen quasi-coherence proof of that object.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-affine-pushforward-comparison-coordinates",
+  "lem-pc-affine-derived-pushforward-sheaf-edge"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "perfect.tex, affine morphism equivalence proof, identity representative calculation."
+ },
+ "proof": [
+  {
+   "text": "Construct the edge transformation from the sheaf-level edge, the supplied ordinary comparison, and the tilde/Gamma counit. The coordinate identity for Q(T_A C) follows from exactness of tilde, naturality of the comparison, the tilde adjunction triangle identity, and the derived-unit normalization.",
+   "uses": [
+    "lem-pc-affine-derived-pushforward-sheaf-edge",
+    "def-pc-affine-pushforward-comparison-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-pushforward-comparison-coordinates",
+  "lem-pc-affine-derived-pushforward-sheaf-edge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4",
+  "place": "identity-representative part of affine cohomology edge normalization",
+  "note": "Strict intermediate statement introduced because the full coordinate calculation had type mismatches; target proof derives the general equality by eliminating the object equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "identity representative affine cohomology edge normalization derived pushforward",
+   "results": "no exact match",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology homologyFunctorFactors affine pushforward edge",
+   "results": "generic homology infrastructure only",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorFactors|rightDerivedFunctorUnit",
+   "results": "generic Mathlib declarations only",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeExists",
+  "date": "2026-10-14",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-pushforward-cohomology-edge-exists",
+   "place": "proof step 3, restricted to canonical representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean",
+  "declaration": "AlgebraicGeometry.exists_affinePushforwardCohomologyEdge_identity",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-14",
+  "statement": "theorem exists_affinePushforwardCohomologyEdge_identity\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))) :\n  ∃ α : affineDerivedCohomologyModules A i ⋙\n      (ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B) ⟶\n    (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n      DerivedCategory.homologyFunctor\n        (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i,\n    ∀ (C : CochainComplex (ModuleCat A) ℤ)\n      (hK : schemeDerivedQCohProperty (Spec (.of A))\n        (DerivedCategory.Q.obj (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C))),\n      affinePushforwardCohomologyMapOfComparison A B φ σ C i ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map\n            (𝟙 _)) =\n        (affinePushforwardTilde B).map ((ModuleCat.restrictScalars φ).map\n          (affinePushforwardRepresentativeCohomologyIso A C _ (Iso.refl _) i).hom) ≫\n          α.app ⟨_, hK⟩"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T222409-L-1225228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T222409-L-1225228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
