@@ -11408,3 +11408,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/J1/Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent (stage 3; reviewer PASS; after a return; landing 20261013T062524-L-733712 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/J3/Sheaf.RingTheory.PopescuSpecialChartSubstitution (stage 3; reviewer PASS; after a return; landing 20261013T062525-L-733904 (proof); batch 20261013T062512; modules 1; new nodes 0)
 - 06:25 L: merged deliver/K1/Sheaf.RingTheory.FinitePresentationComparisonSystem (stage 3; reviewer PASS; first push; landing 20261013T062526-L-734064 (interface); batch 20261013T062512; modules 3; new nodes 2)
+- 06:25 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ScalarPullbackTensorCoefficient (stage 3; reviewer PASS; first push; landing 20261013T062526-L-734224 (proof); batch 20261013T062512; modules 1; new nodes 0)
