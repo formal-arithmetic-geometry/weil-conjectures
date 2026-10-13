@@ -1,0 +1,162 @@
+{
+ "id": "lem-sbc-trace-discriminant-section-localization",
+ "kind": "statement",
+ "title": "The explicit trace discriminant section ideal commutes with localization to a basic open.",
+ "statement": "Let $f:X\\to Y$ be a finite flat morphism [def-weil-finite-integral-morphism, def-weil-flat-morphism] of schemes [def-weil-pbc-scheme-conventions], with $Y$ locally Noetherian [def-weil-pbc-noetherian-ring]. For every affine open $U$ and $r\\in\\Gamma(Y,U)$, extension of the explicit ideal $I_f(U)$ [def-sbc-trace-discriminant-section-ideal] along $\\Gamma(Y,U)\\to\\Gamma(Y,D(r))$ equals $I_f(D(r))$.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-trace-discriminant-section-ideal"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BVH, construction preceding Lemma 49.3.1"
+ },
+ "proof": [
+  {
+   "text": "Cover an affine chart U by principal affine opens where the finite flat\nsection algebra is free. Such a cover exists because A is Noetherian, B is finite\nflat and therefore finitely presented, and finite flat modules over local rings are\nfree. On each free chart the intersection defining traceDiscriminantSectionIdeal\nis precisely the principal discriminant ideal: the chart itself gives one inclusion,\nand trace base change and basis-change invariance give the other. These local ideals\nagree on common affine refinements, by the same trace and basis-change calculation.\nThus the intersection is the module of sections satisfying this local ideal condition.\nFor a basic open D(r) the condition restricts, proving the forward inclusion. For the\nreverse inclusion, write a section on D(r) as a fraction s/r^a. Take a finite principal\nfree cover of U. On each chart, localization membership in its discriminant ideal\nmeans some power of r times s belongs to that ideal. Choose the maximum of the\nfinitely many exponents. The resulting section lies in every chart ideal and hence,\nby compatibility and the sheaf condition, in every free subchart ideal. It therefore\nlies in the defining intersection on U and maps to the original section after\nmultiplication by the inverse of a power of r. This proves equality of ideals.\nOnly compactness of affine U is used, not quasi-compactness of Y. If D(r) is empty,\nits section ring is the zero ring, so the assertion is automatic.",
+   "uses": [
+    "lem-sbc-finite-flat-affine-basis",
+    "lem-sbc-trace-discriminant-affine-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finite-flat-affine-basis",
+  "lem-sbc-trace-discriminant-affine-restriction"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 0BVH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite flat morphism over a locally Noetherian scheme has affine neighbourhoods where its section algebra admits a finite basis",
+   "results": "{\"t\": \"2026-10-13T07:31:39Z\", \"tool\": \"leanfinder\", \"query\": \"A finite flat morphism over a locally Noetherian scheme has affine neighbourhoods where its section algebra admits a finite basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\"], \"digest\": \"2a437150b6c5ebc4\"}",
+   "date": "2026-10-13",
+   "verdict": "Related results read and used where applicable; no direct scheme-level match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.discr",
+   "results": "{\"t\": \"2026-10-13T07:33:49Z\", \"tool\": \"loogle\", \"query\": \"Algebra.discr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.discr\", \"Algebra.discr_def\", \"Algebra.discr_zero_of_not_linearIndependent\", \"Algebra.discr_eq_discr_of_algEquiv\", \"Algebra.discr_eq_discr\", \"Algebra.discr_of_matrix_mulVec\", \"Algebra.discr_of_matrix_vecMul\", \"Algebra.discr_isIntegral\"], \"digest\": \"e1139cb198ddc581\"}",
+   "date": "2026-10-13",
+   "verdict": "Related results read and used where applicable; no direct scheme-level match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_comap_ι_eq|exists_free_localizedModule_powers|discr.*baseChange",
+   "results": "{\"t\": \"2026-10-13T07:33:49Z\", \"tool\": \"grep\", \"query\": \"exists_comap_\\u03b9_eq|exists_free_localizedModule_powers|discr.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\"], \"digest\": \"a713200647d584d5\"}",
+   "date": "2026-10-13",
+   "verdict": "Related results read and used where applicable; no direct scheme-level match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local ideals on a finite principal affine open cover glue and their section ideal commutes with localization",
+   "results": "{\"t\": \"2026-10-13T08:06:24Z\", \"tool\": \"leansearch\", \"query\": \"Compatible local ideals on a finite principal affine open cover glue and their section ideal commutes with localization\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "discr_localizationLocalization|discr_of_matrix_vecMul|ideal_eq_iInf_under_map_away|free_of_flat_of_isLocalRing",
+   "results": "{\"t\": \"2026-10-13T08:14:03Z\", \"tool\": \"grep\", \"query\": \"discr_localizationLocalization|discr_of_matrix_vecMul|ideal_eq_iInf_under_map_away|free_of_flat_of_isLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\"], \"digest\": \"b5a7e3935d0ca662\"}",
+   "date": "2026-10-13",
+   "verdict": "Related results read and used where applicable; no direct scheme-level match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discriminants of finite bases generate the same ideal, and this ideal commutes with localization of a finite algebra",
+   "results": "{\"t\": \"2026-10-13T08:14:03Z\", \"tool\": \"leanfinder\", \"query\": \"Discriminants of finite bases generate the same ideal, and this ideal commutes with localization of a finite algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.discr_mem_differentIdeal\", \"coeSubmodule_differentIdeal\", \"differentIdeal_eq_differentIdeal_mul_differentIdeal\", \"isIntegral_discr_mul_of_mem_traceDual\", \"NumberField.natAbs_discr_eq_absNorm_differentIdeal_mul_natAbs_discr_pow\", \"differentialIdeal_le_iff\", \"differentIdeal\", \"differentialIdeal_le_fractionalIdeal_iff\"], \"digest\": \"2443f36eaab63569\"}",
+   "date": "2026-10-13",
+   "verdict": "Related results read and used where applicable; no direct scheme-level match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite flat algebras over locally Noetherian schemes admit finite bases on affine neighbourhoods and their discriminant ideals glue by localization",
+   "results": "{\"t\": \"2026-10-13T08:14:04Z\", \"tool\": \"leansearch\", \"query\": \"Finite flat algebras over locally Noetherian schemes admit finite bases on affine neighbourhoods and their discriminant ideals glue by localization\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTraceDiscriminantGluing",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: discriminant construction in the finite flat purity argument.",
+   "via": [
+    "lem-sbc-finite-flat-trace-discriminant-gluing",
+    "lem-sbc-finite-flat-discriminant-branch-support",
+    "lem-sbc-finite-flat-codimension-one-etale-neighbourhood",
+    "lem-sbc-flat-depth-two-finite-formally-unramified",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantSectionLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/TraceDiscriminantSectionLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.traceDiscriminantSectionIdeal_map_basicOpen",
+  "statement": "theorem traceDiscriminantSectionIdeal_map_basicOpen {X Y : Scheme.{u}} [IsLocallyNoetherian Y] (f : X ⟶ Y) [IsFinite f] [Flat f] (U : Y.affineOpens) (r : Γ(Y, U.1)) : (traceDiscriminantSectionIdeal f U).map (Y.presheaf.map (homOfLE (Y.basicOpen_le r)).op).hom = traceDiscriminantSectionIdeal f (Y.affineBasicOpen r)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100016-L-2465622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100016-L-2465622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
