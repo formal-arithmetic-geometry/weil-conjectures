@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute
+import Sheaf.Paper.GlobalTensorPullbackKFlat
+import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Sheaf.Paper.GlobalTensorPullbackTensorDescent
 
 /-! # Global ringed-space pullback comparisons
 
@@ -59,6 +61,19 @@ local instance globalDerivedDataFlatResolution : Abelian.HasFunctorialFlatResolu
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   schemeModule_hasFunctorialFlatResolution X
 
+private theorem exists_leftDerived_of_derives
+    {A B E : Type*} [Category* A] [Category* B] [Category* E]
+    (W : MorphismProperty A) [W.RespectsIso] [W.ContainsIdentities]
+    [MonoidalCategory A] [W.localizerMorphismKFlat.IsLeftDerivabilityStructure]
+    (Q : A ⥤ B) [Q.IsLocalization W] (F : A ⥤ E)
+    (hF : W.localizerMorphismKFlat.Derives F) :
+    ∃ (L : B ⥤ E) (α : Q ⋙ L ⟶ F), L.IsLeftDerivedFunctor α W := by
+  let := hF.hasLeftDerivedFunctor
+  exact ⟨F.totalLeftDerived Q W, F.totalLeftDerivedCounit Q W, inferInstance⟩
+
+
+set_option maxHeartbeats 400000 in
+-- The concrete point-pullback formulas require additional instance-comparison heartbeats.
 /-- Absolute derived tensor pullback after point evaluation.
 Source: Stacks Tags 079U, 06YJ, 06XN and 0FP0.
 (blueprint: lem-sc-global-tensor-pullback-derived-data)
@@ -133,7 +148,38 @@ theorem exists_globalTensorPullback_derived_data
                    (α.app K' ⊗ₘ α.app M') ≫
                      Functor.LaxMonoidal.μ DerivedCategory.Qh
                        ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj K')
-                       ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj M')) := by sorry
+                       ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj M')) := by
+  classical
+  obtain ⟨hflat, hinv⟩ := globalTensorPullback_kflat X e he P h hm
+  let C := ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))
+  let D := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let W := HomotopyCategory.quasiIso C (ComplexShape.up ℤ)
+  let W' := HomotopyCategory.quasiIso D (ComplexShape.up ℤ)
+  let Ph := P.mapHomotopyCategory (ComplexShape.up ℤ)
+  let F := Ph ⋙ DerivedCategory.Qh
+  have hderives : W.localizerMorphismKFlat.Derives F := by
+    intro K M a ha
+    exact hinv K.obj M.obj a.hom K.property M.property ha
+  obtain ⟨L, α, hL⟩ := exists_leftDerived_of_derives W DerivedCategory.Qh F hderives
+  let := hL
+  have hα (K : HomotopyCategory C (ComplexShape.up ℤ)) (hK : W.kFlat K) :
+      IsIso (α.app K) :=
+    hderives.isIso_of_isLeftDerivedFunctor α ⟨K, hK⟩
+  have hPh (K : HomotopyCategory C (ComplexShape.up ℤ)) (hK : W.kFlat K) :
+      W'.kFlat (Ph.obj K) := hflat K hK
+  refine ⟨L, α, inferInstance, ?_, ?_, ?_⟩
+  · intro H
+    apply W.localizerMorphismKFlat.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
+    intro K
+    have := hα K.obj K.property
+    change IsIso (𝟙 _ ≫ H.map (α.app K.obj))
+    simp only [Category.id_comp]
+    infer_instance
+  · intro K hK
+    exact hα _ ((HomotopyCategory.kFlat_quotient_obj_iff (A := C) K).2 hK)
+  · set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+    exact globalTensorPullback_tensorDescent X P L α hα hPh
 
 end
 end AlgebraicGeometry.Scheme.Modules

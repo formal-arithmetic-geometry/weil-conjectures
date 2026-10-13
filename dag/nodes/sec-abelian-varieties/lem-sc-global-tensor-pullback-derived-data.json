@@ -17,32 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Point evaluation is an exact equivalence and becomes a monoidal equivalence for the ordinary sheaf tensor; its inverse carries K-flat complexes and their quasi-isomorphisms to the point category. Transport the absolute left derivation of concrete tensor pullback through this equivalence. This gives L, α, invertibility of α on K-flat complexes and the asserted postcomposition property.",
+   "text": "Use lem-sc-global-tensor-pullback-kflat to obtain preservation of K-flat homotopy objects and inversion of quasi-isomorphisms between them by P^h followed by Qh. The upstream K-flat localizer is a left derivability structure supplied by functorial flat resolutions. Its Derives.hasLeftDerivedFunctor constructs the universal derived pair L and alpha, and Derives.isIso_of_isLeftDerivedFunctor computes it on K-flat objects.",
    "uses": [
-    "def-pc-global-derived-rhom",
-    "lem-pc-ringed-space-tensor-pullback-absolute"
+    "lem-sc-global-tensor-pullback-kflat",
+    "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   },
   {
-   "text": "For K-flat representatives K and M, their total tensor is K-flat and concrete pullback preserves K-flatness. The inverse ordinary tensor constraint, totalized degreewise, defines the comparison isomorphism on these representatives. Natural comparisons with common K-flat refinements descend it to a bifunctorial isomorphism δ on derived objects. Both sides of the displayed normalization are its defining representative-level map, with the comparison isomorphisms inserted. Consequently normalization and naturality hold. No exactness of P, boundedness of the complexes or flatness of X is assumed.",
+   "text": "After any postcomposition H, alpha is still invertible on K-flat objects, since functors preserve isomorphisms. LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure then proves the requested postcomposition property directly. The quotient K-flat criterion supplies the cochain computation clause.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply normalized tensor descent to the constructed L and alpha. Its hypotheses are comparison invertibility on the K-flat resolving class and preservation of K-flatness by Ph. This supplies simultaneous tensor naturality and the exact normalization on quotient cochain objects.",
    "uses": [
-    "lem-pc-kflat-pullback-preservation",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-sc-global-tensor-pullback-kflat",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-sc-global-tensor-pullback-tensor-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-global-derived-rhom",
-  "lem-pc-ringed-space-tensor-pullback-absolute",
-  "lem-pc-kflat-pullback-preservation",
-  "def-pc-scheme-derived-tensor-structure"
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-global-tensor-pullback-kflat",
+  "lem-sc-global-tensor-pullback-tensor-descent"
  ],
  "proof_origin": {
-  "by": "E4 worker following Stacks with explicit categorical transport",
-  "document": "https://stacks.math.columbia.edu/tag/079U",
-  "place": "Lemma 20.27.3; Tags 0FP0, 06YJ, 06XN for normalization and absolute derivation"
+  "by": "D4 worker",
+  "document": "Stacks Project, Tags 079U, 06YJ and 06XN",
+  "place": "K-flat derivability structure and uniqueness of derived bifunctors; explicit normalized tensor comparison in Lean"
  },
  "mathlib_searches": [
   {
@@ -113,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T162409-L-1518989",
+  "landing": "20261013T181054-L-2598598",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

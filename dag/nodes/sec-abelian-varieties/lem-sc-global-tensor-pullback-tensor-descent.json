@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-global-tensor-pullback-tensor-descent",
+ "kind": "statement",
+ "title": "Descent of the normalized global tensor comparison",
+ "statement": "Let X be a scheme with its derived tensor structure [def-pc-scheme-derived-tensor-structure], and let P from modules over Gamma(X,O_X) to O_X-module sheaves be additive, strong monoidal and a left adjoint. Fix L between the derived categories and alpha:Qh L to Ph Qh. Suppose alpha is invertible on K-flat homotopy objects [def-pc-kflat-complex], and Ph preserves K-flatness. Then there are natural isomorphisms L(A tensor B) to LA tensor LB satisfying the normalization on quotient K-flat cochain objects from the totalized inverse tensor constraint of P. This asserts neither existence nor absoluteness of L.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/079U",
+  "place": "Derived pullback tensor comparison; uniqueness of left derived bifunctors"
+ },
+ "stmt_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Form U=L composed with source derived tensor and V=target derived tensor applied to L in both arguments. Their counits are L(mu) then alpha, and alpha in both arguments then mu. They are isomorphisms on K-flat pairs since tensor preserves K-flatness, alpha is invertible there, and Ph preserves K-flatness. The K-flat derivability structure makes both left derived bifunctors.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Totalize the inverse strong tensor constraint of P and localize it. Uniqueness of left derived bifunctors descends this isomorphism. Naturality in both variables gives tensor naturality; counit compatibility gives normalization. The private generic tensorComparison_of_kflat proves the abstract argument. Specialize its monoidal and categorical parameters to the indicated homotopy and derived categories and quotient functors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D4",
+  "document": "Stacks Tag 079U and derived bifunctor uniqueness",
+  "place": "Third step of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedMonoidal",
+   "results": "Upstream monoidal left derivation and derived bifunctor APIs found; no exact global tensor comparison.",
+   "verdict": "supporting declarations only",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor",
+   "results": "Zero hits: unknown identifier 'Functor.IsLeftDerivedFunctor'. The upstream library supplies the derivability API, rather than Loogle's Mathlib index.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived strong monoidal functor preserves tensor products using K-flat resolutions",
+   "results": "Eight hits: Tor and Tor prime constructions and their component equations, and Localization.Monoidal.functorCoreMonoidalOfComp. None provides the K-flat global comparison. The monoidal localization construction requires a monoidal localization functor, whereas Qh is only lax monoidal on arbitrary objects.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left derived strong monoidal functor preserves tensor products using K-flat resolutions",
+   "results": "Service returned Internal Server Error; no mathematical verdict. The other search kinds and local source searches were used.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat localization tensor bifunctor derived comparison natural isomorphism",
+   "results": "Lean Finder returned exact derived-functor factor comparisons and right-derived localizer comparisons, no normalized nonexact tensor descent. Source rg confirmed the exact leftDerivedTensorComparison has extra exactness hypotheses. Loogle MorphismProperty.kFlat was unavailable as an unknown identifier; grep found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "second reading: supporting results only, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalTensorPullbackDerivedData",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "global cup pairing: descend normalized tensor comparison after constructing L",
+   "via": [
+    "lem-sc-global-tensor-pullback-derived-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalTensorPullbackTensorDescent",
+  "file": "lean/Sheaf/Paper/GlobalTensorPullbackTensorDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.globalTensorPullback_tensorDescent",
+  "statement": "theorem globalTensorPullback_tensorDescent (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) [P.Additive] [P.Monoidal] [P.IsLeftAdjoint] (L : DerivedCategory (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (α : DerivedCategory.Qh ⋙ L ⟶ P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) (hα : ∀ K, (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat K → IsIso (α.app K)) (hPh : ∀ K, (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat K → (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) : ∃ δ : ∀ A B, L.obj (A ⊗ B) ≅ L.obj A ⊗ L.obj B, (∀ A A' B B' (f : A ⟶ A') (g : B ⟶ B'), L.map (f ⊗ₘ g) ≫ (δ A' B').hom = (δ A B).hom ≫ (L.map f ⊗ₘ L.map g)) ∧ ∀ K M : CochainComplex (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) ℤ, (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ)).kFlat K → (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ)).kFlat M → (let K' := (HomotopyCategory.quotient _ _).obj K let M' := (HomotopyCategory.quotient _ _).obj M L.map (Functor.LaxMonoidal.μ DerivedCategory.Qh K' M') ≫ α.app (K' ⊗ M') ≫ DerivedCategory.Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (ComplexShape.up ℤ) P).app K').app M') = (δ (DerivedCategory.Qh.obj K') (DerivedCategory.Qh.obj M')).hom ≫ (α.app K' ⊗ₘ α.app M') ≫ Functor.LaxMonoidal.μ DerivedCategory.Qh ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj K') ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj M'))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-global-tensor-pullback-kflat",
+ "kind": "statement",
+ "title": "K-flat preservation and quasi-isomorphism inversion after point evaluation",
+ "statement": "Let $X$ be a scheme whose category of module sheaves [def-pc-scheme-derived-tensor-structure] admits a derived category. Put $A=\\Gamma(X,\\mathcal O_X)$ and let $p:X\\to (\\mathrm{pt},A)$ be the global sections ringed-space morphism [def-pc-global-derived-rhom]. Let $e:\\operatorname{Mod}(\\mathcal O_{\\mathrm{pt}})\\simeq\\operatorname{Mod}(A)$ be an equivalence whose forward functor is naturally isomorphic to evaluation. Let $P:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(\\mathcal O_X)$ be additive, strong monoidal, and a left adjoint. Assume its object and morphism formulas are exactly inverse evaluation followed by inverse image and change of rings along the adjoint structure map of $p$ [lem-pc-kflat-pullback-preservation]. Then its termwise homotopy functor $P^h$ sends every K-flat object [def-pc-kflat-complex] to a K-flat object. Moreover, for a quasi-isomorphism $a:K\\to M$ between K-flat homotopy objects, $Q_X^h(P^h(a))$ is an isomorphism. No flatness or boundedness assumption is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YC; https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Cohomology Lemma pullback-K-flat and the quasi-isomorphism argument in derived-base-change, after the one-point identification of Tag 0B6A"
+ },
+ "stmt_deps": [
+  "def-pc-global-derived-rhom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at the unique nonempty open commutes with the sheaf tensor and its coproduct totalization. The isomorphism he therefore identifies e with the canonical exact monoidal evaluation equivalence. Its inverse preserves acyclicity and K-flatness: test the tensor against an acyclic complex, move it through the equivalence, and use the inverse unit/counit. This also identifies the generic quasi-isomorphism-preservation definition of K-flatness with the acyclic-tensor definition used for sheaves.",
+   "uses": [
+    "lem-pc-point-module-evaluation-equivalence",
+    "def-pc-global-derived-rhom",
+    "def-pc-kflat-complex",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formulas h and hm identify termwise P, including its differentials, with inverse evaluation followed by the concrete ringed-space tensor pullback. The inverse-image/tensor-pullback comparison and the identity-ring-map case of K-flat pullback preservation show that exact inverse image preserves K-flatness. Applying K-flat pullback preservation to toGlobalSectionsPoint X gives the first assertion after passing to the homotopy quotient.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-inverse-image-tensor-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a homotopy morphism between K-flat complexes to a cochain morphism using fullness of the quotient. Exact inverse evaluation and exact module inverse image preserve its quasi-isomorphism. Change of rings preserves the resulting quasi-isomorphism between K-flat inverse-image complexes. Transport by h and hm and use the quotient quasi-isomorphism criterion; Qh inverts the resulting morphism, proving the second assertion.",
+   "uses": [
+    "lem-pc-inverse-image-module-functor-exact",
+    "lem-pur-change-of-rings-kflat-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-derived-rhom",
+  "def-pc-kflat-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-inverse-image-module-functor-exact",
+  "lem-pc-inverse-image-tensor-pullback-comparison",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-point-module-evaluation-equivalence",
+  "lem-pur-change-of-rings-kflat-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D4",
+  "document": "Stacks Project, Tags 06YC and 06YJ",
+  "place": "Point-evaluation transport of the K-flat pullback argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "point evaluation equivalence preserves K flat complexes and pullback quasi isomorphisms",
+   "results": "Service returned Internal Server Error; no mathematical verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence of abelian categories preserves K-flat complexes",
+   "results": "Eight ordinary module flatness/faithful-flatness results; no K-flat point-evaluation transport theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(exact|KFlat)|tensorPullback.*QuasiIso|kFlat.*equivalence",
+   "results": "msearch returned zero hits. Local rg found the sheaf K-flat pullback theorem, exact inverse-image functor, and change-of-rings quasi-isomorphism theorem, but no point-evaluation transport statement.",
+   "verdict": "supporting declarations only",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse of evaluation from module sheaves on a one point ringed space preserves acyclic tensor complexes",
+   "results": "Lean Finder returned module free-sheaf and Tor/projectivity declarations, no point-evaluation K-flat transport. Independent source rg found only concrete pullback preservation and its private cochain helper in RingedSpacePastedPullbackAdjunction; neither supplies the module-to-point equivalence transport.",
+   "date": "2026-10-14",
+   "verdict": "second reading: supporting results only, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalTensorPullbackDerivedData",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "global cup pairing: point evaluation preserves the K-flat representatives used in the absolute derived tensor comparison",
+   "via": [
+    "lem-sc-global-tensor-pullback-derived-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalTensorPullbackKFlat",
+  "file": "lean/Sheaf/Paper/GlobalTensorPullbackKFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.globalTensorPullback_kflat",
+  "statement": "theorem globalTensorPullback_kflat (e : SheafOfModules.{u} (moduleRings (globalSectionsPoint X)) ≌ ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (he : Nonempty (e.functor ≅ RingedSpace.globalSectionsFunctor (globalSectionsPoint X))) (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (h : ∀ M, P.obj M = SheafOfModules.changeOfRings.{u, u, u} (CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base X.toRingedSpace.sheaf (globalSectionsPoint X).sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩) (TopCat.Sheaf.inverseImageModule (toGlobalSectionsPoint X).hom.base (globalSectionsPoint X).sheaf (e.inverse.obj M))) (hm : ∀ {M N} (a : M ⟶ N), P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u} (CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base X.toRingedSpace.sheaf (globalSectionsPoint X).sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩) (TopCat.Sheaf.inverseImageModule (toGlobalSectionsPoint X).hom.base (globalSectionsPoint X).sheaf (e.inverse.obj M)) (TopCat.Sheaf.inverseImageModuleMap (toGlobalSectionsPoint X).hom.base (globalSectionsPoint X).sheaf (e.inverse.obj M) (e.inverse.map a)) ≫ eqToHom (h N).symm) [P.Additive] [P.Monoidal] [P.IsLeftAdjoint] : (∀ K : HomotopyCategory (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (ComplexShape.up ℤ), (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat K → (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) ∧ (∀ K M : HomotopyCategory (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (ComplexShape.up ℤ), ∀ a : K ⟶ M, (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat K → (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)).kFlat M → HomotopyCategory.quasiIso _ (ComplexShape.up ℤ) a → IsIso ((P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).map a))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
