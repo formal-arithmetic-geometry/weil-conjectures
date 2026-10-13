@@ -1,0 +1,107 @@
+{
+ "id": "lem-pc-hom-tensor-curry-zero",
+ "kind": "theorem",
+ "title": "Zero-degree index normalization of localized currying",
+ "statement": "Let R be a sheaf of commutative rings on a small site with the sheafification hypotheses, and let P,L,I be integer-indexed complexes of R-module sheaves. If a:Hom(P,Hom(L,I))^0 -> Hom(Tot(P tensor L),I)^0 satisfies HomTensorCurryCondition R P L I 0 a [lem-sc-hom-tensor-degreewise], then its localized pure-tensor equation holds with outer index p, output index p+r, and inner projection from Hom(L,I)^p to homObj L^r I^(p+r), using the equalities p+0=p, (p+r)+0=p+r and r+p=p+r. The section, localized site object, and pure tensors are arbitrary, exactly as in HomTensorCurryCondition.",
+ "source": {
+  "document": "lean/Sheaf/Algebra/Homology/HomTensorDegreewise.lean",
+  "place": "HomTensorCurryCondition at n=0; Stacks 0A90 degreewise equation"
+ },
+ "stmt_deps": [
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof": [
+  {
+   "text": "First state the same localized equation for arbitrary indices p_prime,t with equalities p+0=p_prime and p+r+0=t. Substitute both equalities and apply the supplied currying condition at p,r,U,s,W,x,y. Instantiate p_prime=p and t=p+r with integer add-zero equalities. Proof irrelevance identifies the index witnesses.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-13",
+  "document": "lean/Sheaf/Algebra/Homology/HomTensorDegreewise.lean",
+  "place": "HomTensorCurryCondition at n=0; Stacks 0A90 degreewise equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "HomTensorCurryCondition degree zero specialization removing integer add zero in dependent projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a dependent equality between evaluations of internal Hom projections along equal integer degrees by substituting indices",
+   "results": "CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_hom; CochainComplex.HomComplex.Cochain.congr_v; CochainComplex.HomComplex.Cochain.v.hcongr_10; CochainComplex.HomComplex.Cochain.EqUpTo; CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_inv; CategoryTheory.DifferentialObject.objEqToHom; CategoryTheory.DifferentialObject.objEqToHom_d; CochainComplex.HomComplex.Cochain.InductionUp.sequence_eqUpTo",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the named adjunction and transport tools."
+  },
+  {
+   "tool": "grep",
+   "query": "add_zero|HEq|cast",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the named adjunction and transport tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedTensorHomCochainComponents",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-normalized-tensor-hom-cochain-components",
+   "place": "Pure-tensor evaluation and sheafification step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorCurryZero",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorCurryZero.lean",
+  "declaration": "CategoryTheory.homTensorCurryCondition_zero",
+  "declarations": [
+   "CategoryTheory.homTensorCurryCondition_zero"
+  ],
+  "statement": "theorem homTensorCurryCondition_zero (P L I : CochainComplex Mod ℤ) :\n    letI := SheafOfModules.monoidalCategory R\n    ∀ (a : (homComplex (R := R) P (homComplex (R := R) L I)).X 0 ⟶\n        (homComplex (R := R)\n          (CochainComplex.mapBifunctor P L (curriedTensor Mod)) I).X 0),\n      HomTensorCurryCondition R P L I 0 a →\n      ∀ (p r : ℤ) (U : Cᵒᵖ)\n        (s : (homComplex (R := R) P (homComplex (R := R) L I)).X 0 |>.val.obj U)\n        (W : (Over U.unop)ᵒᵖ) (x : (P.X p).val.obj (op W.unop.left))\n        (y : (L.X r).val.obj (op W.unop.left)),\n      let φ := ((homTensorProjection R\n        (CochainComplex.mapBifunctor P L (curriedTensor Mod)) I\n        0 (p + r) (p + r) (add_zero _)).val.app U).hom ((a.val.app U).hom s)\n      let ψ := ((homTensorProjection R P (homComplex (R := R) L I)\n        0 p p (add_zero _)).val.app U).hom s\n      let χ := ((homTensorProjection R L I p r (p + r)\n        (by omega)).val.app (op W.unop.left)).hom ((ψ.app W).hom x)\n      (φ.app W).hom\n        (((CochainComplex.ιMapBifunctor P L (curriedTensor Mod)\n          p r (p + r) rfl).val.app (op W.unop.left)).hom\n          (((homTensorSectionMap R (P.X p) (L.X r)).app (op W.unop.left)).hom\n            (x ⊗ₜ[R.obj.obj (op W.unop.left)] y))) =\n        (χ.app (op (Over.mk (𝟙 W.unop.left)))).hom y",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T111838-L-3047862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T111838-L-3047862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
