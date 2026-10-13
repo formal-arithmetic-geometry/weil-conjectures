@@ -10375,3 +10375,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:50 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteMatrixLift (stage 3; reviewer PASS; first push; landing 20261013T005055-L-2551622 (proof); batch 20261013T005052; modules 1; new nodes 0)
 - 00:52 L: returned deliver/N1/Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionSucc (reviewer RETURN: (reviewer X-36cf5, head 36cf56b41) Point 2: In coord/changes/WellOrderedUnionProjectiveDimensionSucc-imports.md, replace)
 - 00:53 L: returned deliver/M4/Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality (reviewer RETURN: (reviewer X-7cce8, head 7cce8a1b9) H3/H7 (brief point 6): In dag/nodes/sec-smooth-base-change/sbc-lem-higher-image-raw-o)
+- 00:54 L: returned deliver/V4/Sheaf.AlgebraicGeometry.ObjectSectionsNaturality (reviewer RETURN: (reviewer X-4f580, head 4f5808067) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ob)
