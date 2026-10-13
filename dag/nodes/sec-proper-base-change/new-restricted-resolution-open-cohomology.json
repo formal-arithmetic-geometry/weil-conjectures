@@ -14,15 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Restriction along j preserves finite limits; hence its right adjoint pushforward preserves injective objects. Push forward R prime.resolution, and take this termwise-injective complex itself as the comparison complex, with lambda the identity.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-limits",
-    "lem-sp-right-adjoint-preserves-injectives"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Form t by restricting R.comparison along j, composing with the restriction-composition isomorphism to I restricted to L, then with R prime.comparison inverse. Define beta as the restriction unit on R.resolution followed by j_*t. Naturality of the unit and the two augmentation equations show that beta lifts exactly the coefficient map in the statement. Global sections along j inverse top equal global sections on L, giving the sections comparison isomorphism.",
+   "text": "Put j = homOfLE e and c = restrictFunctorComp(j,U.ι) inverse followed by restrictFunctorCongr(j≫U.ι=L.ι). Define t by restricting R.comparison.hom along j, composing with c on I, and then R prime.comparison.inv. Define beta as the restriction unit on R.resolution followed by pushforward of t. The augmentation equations and naturality of c and the unit prove that beta lifts the stated coefficient map.",
    "uses": [
     "def-weil-pbc-flat-base-change-open-choices",
     "def-weil-pbc-module-cohomology-fmap"
@@ -30,19 +22,32 @@
    "elementary": false
   },
   {
-   "text": "Independence of ModuleCohomologyFMapData identifies the cohomology map with this calculation. Cancel target resolution isomorphisms and the sections comparison isomorphism on homology. In every degree, use R.components and R prime.components, naturality of their comparisons, and inverse cancellation: the remaining map is precisely restriction of I sections from U to L. Apply homology and reassociate to obtain the equality. Equal or empty opens, zero coefficients and p=0 use the same identities, with no restriction map inverted.",
+   "text": "Construct the canonical sections isomorphism a from sections on L to sections on U of the pushed target resolution; its inverse components are restriction along j inverse top = top. Apply moduleCohomologyFMap_of_augmentedLift to beta, its augmentation equation, and a. This computes the cohomology map using the given resolutions, with no assumption that pushforward preserves injectives.",
    "uses": [
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
-    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-module-cohomology-augmented-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the chain-map equality Gamma_U(beta) followed by a inverse and R prime.sections.hom equals R.sections.hom followed by termwise restriction of I sections from U to L. In each degree expand the pinned section components, move the inverse target comparison past restriction by naturality and cancel it, then move the source comparison past the restriction unit by naturality. Expand the unit and restriction-composition component formulas. All remaining arrows are maps of the same presheaf along inclusions; combine them by functoriality and use uniqueness of morphisms between opens. This is a complete Lean calculation, independent of injectivity and valid for empty or equal opens.",
+   "uses": [
     "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the homology functor to the chain-map equality. Substitute the augmented-lift formula and cancel the target resolution comparison with its inverse. Functor.map_comp and associativity yield the asserted identity in every natural degree.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-augmented-lift",
+    "lem-weil-pbc-derived-functor-map-via-lift"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "G1 following document",
+  "by": "U4 following document",
   "document": "https://stacks.math.columbia.edu/tag/01FB",
-  "place": "Augmented-lift calculation of Remark 20.14.2; same raw section-complex argument as restrictedResolution_cohomology, now for two arbitrary opens and two pinned restricted resolutions."
+  "place": "Remark 20.14.2, using the existing fixed augmented-lift theorem; restriction components as in Equation 20.7.1.1 (Tag 01E2). The degreewise section calculation and homology cancellation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -120,10 +125,8 @@
  "proof_deps": [
   "def-weil-pbc-flat-base-change-open-choices",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
-  "lem-weil-pbc-module-restriction-open-immersion-limits"
+  "lem-weil-pbc-module-cohomology-augmented-lift",
+  "lem-weil-pbc-derived-functor-map-via-lift"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -138,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8db8f",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T164047-L-1668050",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered packet, base declarations, node fields, compilation, axioms, and both direct importers checked successfully."
+  "landing": "20261013T171518-L-1983702",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
