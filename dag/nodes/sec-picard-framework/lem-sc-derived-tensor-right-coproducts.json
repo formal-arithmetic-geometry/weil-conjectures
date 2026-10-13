@@ -14,35 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat representative P of E. The shared K-flat comparison identifies derived tensor with total tensor on representatives, naturally in their maps. Symmetry allows placing the fixed K-flat representative on the right.",
+   "text": "Install the exact module-sheaf tensor, symmetry, closedness, additivity, Grothendieck abelianness in universe u, and functorial flat resolutions used by the shared derived tensor construction. The upstream K-flat localizer morphism is a left derivability structure. Grothendieck abelianness supplies K-injective resolutions, independently of the localization universe w.",
    "uses": [
-    "lem-pc-kflat-derived-tensor-comparison",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For P = Qh.objPreimage E, form H = internalHom P followed by Qh, R = its total right derived functor, and its unit eta. Use the existing DerivedCategory.tensorLeftQhObjCounit epsilon. Its components are invertible on K-flat objects, so tensorLeft(Qh P) followed by R is left derived for the whiskered epsilon. The components of eta are invertible on K-injectives, so R followed by tensorLeft(Qh P) is right derived for the whiskered eta. Apply Adjunction.derived to HomotopyCategory.tensorHomAdjunction P. Transport the resulting adjunction along Qh.objObjPreimageIso E. This proves tensorLeft E is a left adjoint using only Grothendieck abelianness in u; it does not invoke the bundled closed instance requiring Grothendieck abelianness in w. These are applications of the already proved upstream derivability and derived-adjunction API, as detailed by DerivedCategory/Monoidal/Closed.lean.",
+   "uses": [
     "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   },
   {
-   "text": "Module-sheaf tensor is a left adjoint in both variables, so it preserves coproducts. Coproducts of cochain complexes are degreewise. In total degree n interchange the coproduct of the input complexes with the coproduct over degree pairs adding to n. These canonical interchange maps commute with the signed tensor differential and hence give an isomorphism of complexes respecting coprojections.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Termwise sums compute derived coproducts. The natural K-flat comparison therefore identifies the tensor image of a coproduct cofan with a colimit cofan. All representatives and comparisons live in the given localization universe w; no Grothendieck instance in w is needed. The universal property includes empty coproducts.",
+   "text": "Specialize the simultaneous naturality of the existing derived symmetry to the identity of E and any f:K to L. This assembles s(E,K) into a natural isomorphism tensorLeft E to tensorRight E. A left adjoint preserves colimits of every shape by Mathlib; transport preservation across this natural isomorphism and specialize to Discrete J. There is no nonempty-family assumption, so empty coproducts are included.",
    "uses": [
-    "lem-pc-derived-ambient-direct-sums"
+    "lem-sc-scheme-derived-tensor-symmetry"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-kflat-derived-tensor-comparison"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-scheme-derived-tensor-symmetry"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9U, first two sentences of proof, expanded as a stage-3 obligation by C1"
+  "by": "worker",
+  "group": "D2",
+  "date": "2026-10-13",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Closed.lean",
+  "place": "tensorHomAdjunctionQhObj argument with K-injective resolutions in the scheme universe; Stacks Tags 06YH and 0FPB; Mathlib Adjunction.derived and left-adjoint preservation"
  },
  "mathlib_searches": [
   {
@@ -120,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T184244-L-3997017",
-  "kind": "interface",
+  "landing": "20261013T025259-L-3421939",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

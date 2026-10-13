@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import Sheaf.AlgebraicGeometry.DerivedTensorSymmetry
 
 /-! # Coproduct preservation by the shared derived tensor
 
@@ -22,6 +21,70 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+
+/-- Derive the homotopy tensor-Hom adjunction using K-flat and K-injective
+resolutions. Unlike the bundled upstream closed instance, this argument needs
+Grothendieck abelianness only in the scheme universe.
+Source: the argument of `DerivedCategory.tensorHomAdjunctionQhObj` in
+WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed; Stacks, Tag 06YH. -/
+private theorem derivedTensorLeft_isLeftAdjoint (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (E : schemeDerivedCategory X) : (tensorLeft E).IsLeftAdjoint := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive C :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed C :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : IsGrothendieckAbelian.{u} C :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0, u, u} C
+  have := schemeModule_hasFunctorialFlatResolution X
+  have := DerivedCategory.hasDerivedMonoidalCategory C
+  have (M : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj M) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft M)
+      (NatIso.ofComponents (fun N ↦ β_ M N) (by intros; simp [curriedTensor]))
+  have (M N : GradedObject ℤ C) : M.HasTensor N := inferInstance
+  have (M N P R : GradedObject ℤ C) :
+      GradedObject.HasTensor₄ObjExt M N P R := inferInstance
+  have (M N P : GradedObject ℤ C) :
+      GradedObject.HasGoodTensor₁₂Tensor M N P := inferInstance
+  have (M N P : GradedObject ℤ C) :
+      GradedObject.HasGoodTensorTensor₂₃ M N P := inferInstance
+  have (M : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).obj M) :=
+    inferInstance
+  have : HasExactColimitsOfShape ℤ C := inferInstance
+  have (j : ℤ) : HasColimitsOfShape
+      (Discrete ((ComplexShape.up ℤ).π (.up ℤ) (.up ℤ) ⁻¹' {j})) C := inferInstance
+  have : (HomotopyCategory.quasiIso C (.up ℤ)).localizerMorphismKFlat
+      |>.IsLeftDerivabilityStructure := inferInstance
+  let Q := DerivedCategory.Qh (C := C)
+  let W := HomotopyCategory.quasiIso C (.up ℤ)
+  let P := Q.objPreimage E
+  let H := HomotopyCategory.internalHom P ⋙ Q
+  let R := H.totalRightDerived Q W
+  let η := H.totalRightDerivedUnit Q W
+  let ε := DerivedCategory.tensorLeftQhObjCounit P
+  have : R.IsRightDerivedFunctor η W := by
+    dsimp [R, η]
+    infer_instance
+  have : (tensorLeft (Q.obj P) ⋙ R).IsLeftDerivedFunctor
+      ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε R) W :=
+    W.localizerMorphismKFlat.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure
+      ε (fun Z ↦ DerivedCategory.isIso_tensorLeftQhObjCounit_app P Z.1 Z.2) R
+  have : (R ⋙ tensorLeft (Q.obj P)).IsRightDerivedFunctor
+      (Functor.whiskerRight η (tensorLeft (Q.obj P)) ≫
+        (Functor.associator _ _ _).hom) W :=
+    (HomotopyCategory.KInjectives.localizerMorphism C)
+      |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure
+        η (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives H)
+          |>.isIso_of_isRightDerivedFunctor η I) (tensorLeft (Q.obj P))
+  let adj := (HomotopyCategory.tensorHomAdjunction P).derived W W ε η
+  exact (adj.ofNatIsoLeft ((tensoringLeft _).mapIso (Q.objObjPreimageIso E))).isLeftAdjoint
 
 /-- Tensoring on the right by any derived object preserves scheme-universe coproducts.
 The localization universe w is independent of the scheme universe u.
@@ -45,6 +108,14 @@ no equality w = u and no Grothendieck instance in universe w is required. -/
 theorem derivedTensorRight_preservesCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) (J : Type u) :
-    PreservesColimitsOfShape (Discrete J) (tensorRight E) := by sorry
+    PreservesColimitsOfShape (Discrete J) (tensorRight E) := by
+  have := derivedTensorLeft_isLeftAdjoint X E
+  obtain ⟨s, hs⟩ := exists_schemeDerivedTensorSymmetry X
+  let e : tensorLeft E ≅ tensorRight E :=
+    NatIso.ofComponents (fun K ↦ s E K) (by
+      intro K L f
+      change E ◁ f ≫ (s E L).hom = (s E K).hom ≫ f ▷ E
+      simpa only [id_tensorHom, tensorHom_id] using hs E E K L (𝟙 E) f)
+  exact preservesColimitsOfShape_of_natIso e
 
 end AlgebraicGeometry
