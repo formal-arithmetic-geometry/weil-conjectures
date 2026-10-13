@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-filtered-homology-tower-differential",
+ "kind": "statement",
+ "title": "Canonical tower differential on filtered representatives",
+ "statement": "Let C be an abelian category [def-sp-abelian], and let U=(K,F) be a finite filtered integer-indexed cochain complex [def-sp-filtration]. For every such V and integers p,q,r with r>=1, suppose hBZ gives B_r^(p,q)(V)<=Z_r^(p,q)(V), with the graded cycle and boundary subobjects of [def-sp-filtered-complex-subquotients]. Suppose eH identifies coker(B_1->Z_1) with H^(p+q)(gr^p V). Assume eH is normalized as follows: there are maps z from the first cycle representatives to Z_1 and g from those representatives to the graded cycles, both inducing the graded quotient of the representative inclusion, with z epic and z pi eH=g pi_H. Let X be the concrete homology exact couple of (K,F) [def-sp-filtered-homology-exact-couple], with its canonical cycle-boundary tower T [def-sp-convergence] and initial equality isomorphism e0:X.E(2p+q,-p)->H^(p+q)(gr^p K). Write j_s^(p,q):Z_(s+1)^(p,q)->cycles(gr^p K,p+q) and t_s^(p,q):Z_(s+1)^(p,q)->T.Z(s,2p+q,-p). Their normalization equations are j_s iCycles=the graded cycle-subobject inclusion and t_s T.Z.arrow e0=j_s pi_H. For any families j,t satisfying these equations, any natural s and integers p,q, set r=s+1 and (pprime,qprime)=(p+r,q-r+1). Let A be any object and let a:A->(F^p K)^(p+q), aprime:A->(F^pprime K)^(pprime+qprime), x:A->Z_r^(p,q), y:A->Z_r^(pprime,qprime). Suppose the ambient differential of a is the ambient inclusion of aprime, and the graded projections of a and aprime are respectively the subobject inclusions of x and y. Then x t_s^(p,q) T.projection(s,2p+q,-p) X.pageCouple(s).d(2p+q,-p), followed by the integer-index equality transport to (2pprime+qprime,-pprime), equals y t_s^(pprime,qprime) T.projection(s,2pprime+qprime,-pprime). This equation needs neither epic x nor quotient comparison isomorphisms.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, Lemma 12.24.2 and its cycle/boundary formulas; Tag 011R, derived-couple restriction equations"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtered-homology-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "The equations with the monic graded-cycle inclusions determine j uniquely. Likewise T.Z.arrow and e0 are monic, so the normalization determines t uniquely. Composing the normalization with an unquotiented representative expresses its initial E class as its graded homology class. At s=0, T.projection is its subobject arrow. The definition of X.f is the connecting map of F^(p+1)->F^p->gr^p. The homology-sequence kernel/cokernel construction computes this map by applying the ambient differential to a lift a. The equation on a and aprime therefore identifies its value with the homology class of aprime in F^(p+1). Applying X.g projects to gr^(p+1), giving the stated equation for r=1.",
+   "uses": [
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-filtered-homology-couple-data",
+    "def-sp-convergence",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the successor, a representative whose differential lies in F^(p+s+2) belongs to the previous differential kernel. In the derived couple, f is the factorization of the previous f through the image of alpha, and g is induced by lifting along alpha and then projecting the previous g to homology. Factor the inclusion of F^(p+s+2) through F^(p+s+1); the differential equation for a says exactly that its connecting class has this lift. The defining equations of these two derived maps identify the successor differential with the class of aprime. The canonical tower projection recurrence is cycleLift followed by derivedEProjection; it makes this calculation agree with t at the successor through the monic normalization. Induction gives the equation at every s. Pullbacks along epimorphisms implement any representative lifts in the abelian category; no map from a projective object is required. The target equalities are 2p+q+2+s=2(p+s+1)+(q-s) and -p-1-s=-(p+s+1).",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtered-homology-exact-couple"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtered-homology-couple-data",
+  "def-sp-filtered-homology-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tags 012K and 011R",
+  "note": "V2 componentwise expansion of the parent induction, with unique monic normalizations and canonical tower recurrence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cycleBoundaryTower|filteredHomology_tower",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:24:42Z\", \"tool\": \"grep\", \"query\": \"cycleBoundaryTower|filteredHomology_tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical exact couple cycle boundary tower of filtered complex is quotient of filtered cycles by boundaries",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:24:42Z\", \"tool\": \"leanfinder\", \"query\": \"canonical exact couple cycle boundary tower of filtered complex is quotient of filtered cycles by boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cycles_left_exact\", \"HomologicalComplex.HomologySequence.snakeInput\", \"groupHomology.mapShortComplex₁\", \"HomologicalComplex.HomologySequence.composableArrows₃\", \"groupHomology.mapShortComplex₃\", \"HomologicalComplex.toCycles_i\", \"HomologicalComplex.HomologySequence.composableArrows₃_exact\", \"HomologicalComplex.HomologySequence.snakeInput_L₂\"], \"digest\": \"97a932b8eaf6e89b\"}",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:24:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.Exact.gIsCokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Exact.gIsCokernel\", \"CategoryTheory.Abelian.SpectralObject.dHomologyData_iso_hom\", \"CategoryTheory.Abelian.SpectralObject.dHomologyData_iso_inv\"], \"digest\": \"baa9a9140f10e8b0\"}",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived exact couple of a filtered cochain complex has pages given by quotients of filtered cycles by boundaries, with differential on representatives",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:33:45Z\", \"tool\": \"leansearch\", \"query\": \"The canonical derived exact couple of a filtered cochain complex has pages given by quotients of filtered cycles by boundaries, with differential on representatives\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredHomologyCoupleQuotientPages",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Tag 012K, Lemma 12.24.2: identification of successive pages and their representative differentials; Canonical tower differential on filtered representatives",
+   "via": [
+    "lem-sp-filtered-homology-couple-quotient-pages",
+    "lem-sp-filtered-quotient-canonical-structure",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyTowerDifferential",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyTowerDifferential.lean",
+  "declaration": "CategoryTheory.filteredHomology_tower_differential",
+  "statement": "theorem filteredHomology_tower_differential\n    (C : Type u) [Category.{v} C] [Abelian C]\n    (hBZ : ∀ (U : ObjectProperty.FullSubcategory\n          (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))\n      (p q r : ℤ) (hr : 1 ≤ r),\n      U.obj.filtration.complexBoundaries p (p + q) r ≤\n        U.obj.filtration.complexCycles p (p + q) r)\n    (eH : ∀ (U : ObjectProperty.FullSubcategory\n          (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ),\n      cokernel (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≅\n        (U.obj.filtration.gradedPiece p).homology (p + q))\n    (hH : ∀ (U : ObjectProperty.FullSubcategory\n          (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ),\n      ∃ (z : (U.obj.filtration.complexCycleRepresentatives p (p + q) 1 : C) ⟶\n          (U.obj.filtration.complexCycles p (p + q) 1 : C))\n        (g : (U.obj.filtration.complexCycleRepresentatives p (p + q) 1 : C) ⟶\n          (U.obj.filtration.gradedPiece p).cycles (p + q)),\n        z ≫ (U.obj.filtration.complexCycles p (p + q) 1).arrow =\n          (U.obj.filtration.complexCycleRepresentatives p (p + q) 1).arrow ≫\n            (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧\n        g ≫ (U.obj.filtration.gradedPiece p).iCycles (p + q) =\n          (U.obj.filtration.complexCycleRepresentatives p (p + q) 1).arrow ≫\n            (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧\n        Epi z ∧\n        z ≫ cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫\n            (eH U p q).hom =\n          g ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q))\n    (U : ObjectProperty.FullSubcategory\n          (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))\n    (j : ∀ (s : ℕ) (p q : ℤ),\n      (U.obj.filtration.complexCycles p (p + q) (s + 1) : C) ⟶\n        (U.obj.filtration.gradedPiece p).cycles (p + q))\n    (tQ : ∀ (s : ℕ) (p q : ℤ),\n      (U.obj.filtration.complexCycles p (p + q) (s + 1) : C) ⟶\n        ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.Z\n          s (2 * p + q) (-p) : C))\n    (hj : ∀ (s : ℕ) (p q : ℤ),\n      j s p q ≫ (U.obj.filtration.gradedPiece p).iCycles (p + q) =\n        (U.obj.filtration.complexCycles p (p + q) (s + 1)).arrow)\n    (ht : ∀ (s : ℕ) (p q : ℤ),\n      tQ s p q ≫\n          ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.Z\n            s (2 * p + q) (-p)).arrow ≫\n          (filteredHomologyEIso U.obj.obj U.obj.filtration p q).hom =\n        j s p q ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q))\n    (s : ℕ) (p q : ℤ)\n    (A : C)\n    (a : A ⟶ (U.obj.filtration.step p : CochainComplex C ℤ).X (p + q))\n    (a' : A ⟶ (U.obj.filtration.step (p + (s + 1)) :\n      CochainComplex C ℤ).X (p + (s + 1) + (q - (s + 1) + 1)))\n    (x : A ⟶ (U.obj.filtration.complexCycles p (p + q) (s + 1) : C))\n    (y : A ⟶ (U.obj.filtration.complexCycles (p + (s + 1))\n      (p + (s + 1) + (q - (s + 1) + 1)) (s + 1) : C))\n    (ha : a ≫ (U.obj.filtration.step p).arrow.f (p + q) ≫\n      U.obj.obj.d (p + q) (p + (s + 1) + (q - (s + 1) + 1)) =\n      a' ≫ (U.obj.filtration.step (p + (s + 1))).arrow.f\n        (p + (s + 1) + (q - (s + 1) + 1)))\n    (hx : x ≫ (U.obj.filtration.complexCycles p (p + q) (s + 1)).arrow =\n      a ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q))\n    (hy : y ≫ (U.obj.filtration.complexCycles (p + (s + 1))\n      (p + (s + 1) + (q - (s + 1) + 1)) (s + 1)).arrow =\n      a' ≫ (U.obj.filtration.complexQuotientπ (p + (s + 1))\n        (p + (s + 1) + 1) (by omega)).f\n          (p + (s + 1) + (q - (s + 1) + 1))) :\n    x ≫ tQ s p q ≫\n        (filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.projection\n          s (2 * p + q) (-p) ≫\n        ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).d\n          (2 * p + q) (-p) ≫\n        eqToHom (congrArg₂\n          ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).E\n          (show 2 * p + q + 2 + s =\n            2 * (p + (s + 1)) + (q - (s + 1) + 1) by omega)\n          (show -p - 1 - s = -(p + (s + 1)) by omega)) =\n      y ≫ tQ s (p + (s + 1)) (q - (s + 1) + 1) ≫\n        (filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.projection\n          s (2 * (p + (s + 1)) + (q - (s + 1) + 1)) (-(p + (s + 1))) ",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100200-L-2496979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100200-L-2496979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -18,34 +18,46 @@
  ],
  "proof": [
   {
-   "text": "At stage zero take the equality isomorphism e_0 followed by eH inverse. The normalization hypothesis identifies the quotient projection with canonical graded homology.",
+   "text": "Obtain normalized j,t maps with epic tower composites and boundary kernels. Show each composite Q is a cokernel of the boundary inclusion using image=kernel and epimorphy. The unique comparison of this cokernel cocone with the specified cokernel supplies eQ, and its cocone equation is Q eQ.hom=pi.",
    "uses": [
-    "def-sp-filtered-homology-exact-couple",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-filtered-homology-tower-quotients",
+    "def-sp-abelian"
    ],
    "elementary": true
   },
   {
-   "text": "Induct on s using the derived-couple restriction equations. Differentiating a representative computes its differential. Correct a representative by an incoming current boundary precisely when its differential can be put one filtration step deeper. Thus the outgoing kernel is the successor cycles modulo current boundaries; the incoming image is successor boundaries modulo current boundaries. Take the quotient of this kernel by that image to identify the next E term with Q_(s+2). The same differentiation formula and epic representative-cover cancellation identify the next differential with the specified D_(s+2).",
+   "text": "At zero rewrite the tower projection as its subobject arrow and use t normalization. Cancel the epic representative map z in hH to identify j pi_H with pi eH, then cancel Q to obtain the base morphism equality. This also gives the requested heterogeneous equality.",
    "uses": [
-    "def-sp-exact-couple",
-    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-homology-tower-quotients",
+    "def-sp-convergence",
+    "def-sp-filtered-homology-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For related bidegrees choose the epic simultaneous representative cover. Cancel x followed by Q. The defining equation of the supplied D computes the left side on representatives; the tower differential lemma computes the right side. Postcompose its equation with the target eQ and use the two cokernel projection equations. Associativity and the explicit integer transports finish the equality.",
+   "uses": [
+    "lem-sp-filtered-homology-tower-differential",
+    "lem-sp-filtered-complex-differential-representatives-cover",
     "lem-sp-filtered-complex-page-differential"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
-  "def-sp-filtered-complex-subquotients",
+  "def-sp-abelian",
+  "def-sp-convergence",
   "def-sp-filtered-homology-exact-couple",
-  "lem-sp-filtered-complex-page-differential"
+  "lem-sp-filtered-complex-differential-representatives-cover",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-homology-tower-differential",
+  "lem-sp-filtered-homology-tower-quotients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Homological Algebra",
-  "place": "Tag 012K, Lemma 12.24.2 and its cycle/boundary formulas; Tag 011R, derived-couple restriction equations",
-  "note": "Componentwise formulation and explicit index transports; no countable direct sums."
+  "place": "Tags 012K and 011R",
+  "note": "V2: compiled reduction to normalized tower quotient presentations and the representative differential calculation; cokernel comparison, base normalization, and epic cancellation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -128,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-fef74",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T072340-L-1115686",
+  "landing": "20261013T100200-L-2496979",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with node statements and dependencies; existing signature unchanged; all six modules and direct importer FilteredQuotientPageRealization compile cleanly; axioms and three documented postponed lemmas satisfy the brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
