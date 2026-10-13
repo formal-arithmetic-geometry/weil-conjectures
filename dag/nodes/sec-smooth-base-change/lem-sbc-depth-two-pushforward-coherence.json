@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-depth-two-pushforward-coherence",
+ "kind": "statement",
+ "title": "Coherence and boundary depth of the canonical finite etale pushforward algebra",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], and $j:U\\hookrightarrow L$ an open subscheme. Suppose $\\operatorname{depth}\\mathcal O_{L,y}\\geq2$ for every $y\\notin U$ [def-weil-pbc-depth]. Let $f:X\\to U$ be finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Form the actual direct image algebra $\\mathcal B=(j\\circ f)_*\\mathcal O_X$, with its structure map induced by $f$ followed by $j$ [def-weil-pbc-comm-algebra-sheaf]. Its underlying module is quasi-coherent [pqf-def-coherent]; for every affine open $V\\subseteq L$ the structure ring map $\\mathcal O_L(V)\\to\\mathcal B(V)$ is finite; and for every $y\\notin U$ the stalk $\\mathcal B_y$, as a module over $\\mathcal O_{L,y}$ via the stalk of the structure map, is finite and has depth at least two.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY6(1), depth assertion in the proof of (2); double-dual expansion and Tag 0E9I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "On an affine Noetherian open V the intersection U with V is quasi-compact. The finite etale pushforward on this intersection is finite locally free. Extend it as a finite coherent module M on V. Finite presentations commute with localization, so the double dual N of M restricts to that locally free module.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "At a missing stalk with depth at least two, choose a base regular pair x,y. A finite presentation of the dual of M expresses N as a kernel between finite free modules. The first element x is injective on the kernel. If y n = x nprime in the kernel, regularity in the free source writes n = x m. Then x d(m)=0 in the free target forces d(m)=0, placing m in the kernel. This proves regularity of the pair on N when the stalk is nonzero; the zero stalk has infinite depth.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical Hartogs restriction isomorphism of Tag 0E9I to N. It identifies N with the actual direct image of the locally free module, hence with the underlying module of B on V. The actual direct image already carries its structure algebra map and multiplication. These identifications are canonical on overlaps. Thus the underlying module is quasi-coherent with finite affine section modules and finite stalk modules, and its boundary stalks have the asserted depth.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "T3",
+  "document": "Stacks Project",
+  "place": "Tag 0EY6(1), depth assertion in the proof of (2); double-dual expansion and Tag 0E9I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pushforward of a finite locally free algebra from an open subset with depth two complement is coherent with depth two at boundary stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\"",
+   "results": "12 hits: SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent, SheafOfModules.instIsQuasicoherentObjIsQuasicoherent; no exact matching boundary-depth theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|Hartogs|depth",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean; no exact matching boundary-depth theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth >=2 extension paragraph: the canonical algebra B = j_* pi_* O_Y is coherent with depth >=2 along the complement; isolates the first step of lem-sbc-depth-two-finite-extension.",
+   "via": [
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoPushforwardCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.depth_two_pushforward_coherence",
+  "statement": "theorem depth_two_pushforward_coherence\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f] :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    B.toModule.IsQuasicoherent ∧\n      (∀ V : L.Opens, IsAffineOpen V → (B.hom.hom.app (op V)).hom.Finite) ∧\n      ∀ y : L, y ∉ U →\n        letI : Algebra (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj) :=\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.toAlgebra\n        ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T025309-L-3425017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T025309-L-3425017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

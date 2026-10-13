@@ -1,0 +1,124 @@
+{
+ "id": "lem-sbc-finite-structure-algebra-depth",
+ "kind": "statement",
+ "title": "Transfer of boundary depth from a finite structure algebra to the source local rings",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], $U\\subseteq L$ open, and $\\mathcal A$ a sheaf of commutative $\\mathcal O_L$-algebras [def-weil-pbc-comm-algebra-sheaf]. Assume that for every $y\\notin U$ its stalk $\\mathcal A_y$, as a module over $\\mathcal O_{L,y}$ through the stalk of its structure map, is finite and has depth at least two [def-weil-pbc-depth]. Let $p:E\\to L$ be finite [def-weil-finite-integral-morphism] and supply an isomorphism $\\alpha:\\mathcal A\\cong p_*\\mathcal O_E$ of $\\mathcal O_L$-algebras. Then $\\operatorname{depth}\\mathcal O_{E,z}\\geq2$ for every $z\\in E$ with $p(z)\\notin U$. No cover, etaleness, or depth hypothesis on the base local rings is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0AUK, applied to the finite direct image algebra as in the proof of Tag 0EY6(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "At a boundary point y choose an affine Noetherian neighbourhood Spec R. Its inverse image is Spec S with S finite over R. For q corresponding to y, the stalk of p_* O_E is the localization of S at R minus q. The algebra isomorphism alpha identifies this finite R_q-module with A_y and respects the action of R_q.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Points z of E over y correspond exactly to the maximal ideals of that finite R_q-algebra: finite maps are integral, and a prime over a maximal ideal is maximal. The source local ring O_E,z is its localization at the corresponding maximal ideal.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Tag 0AUK with N equal to the finite R_q-algebra itself. Its depth as an R_q-module is the minimum of the depths of the localizations at these maximal ideals. The supplied lower bound therefore holds for every such local ring. A zero algebra stalk has no points above it, so the conclusion there is vacuous.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "T3",
+  "document": "Stacks Project",
+  "place": "Tag 0AUK, applied to the finite direct image algebra as in the proof of Tag 0EY6(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The depth of a finite algebra over a Noetherian local ring is the minimum of the depths of its localizations at maximal ideals",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"depth\", \"Finite\"",
+   "results": "0 hits: ; no exact matching boundary-depth theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*finite|finite.*depth|depth.*localiz",
+   "results": "0 hits: ; no exact matching boundary-depth theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth >=2 extension paragraph: transfer of depth of the finite pushforward algebra to Y prime above the complement; isolates the depth-comparison part of lem-sbc-depth-two-finite-extension step 2.",
+   "via": [
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteStructureAlgebraDepth",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteStructureAlgebraDepth.lean",
+  "declaration": "AlgebraicGeometry.Scheme.depth_two_of_finite_structure_algebra",
+  "statement": "theorem depth_two_of_finite_structure_algebra\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (A : L.CommAlgebraSheaf)\n    (hdepth : ∀ y : L, y ∉ U →\n      letI : Algebra (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj A.right.obj) :=\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).map A.hom.hom).hom.toAlgebra\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj A.right.obj),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj A.right.obj))\n    {E : Scheme.{u}} (p : E ⟶ L) [IsFinite p]\n    (α : A ≅ Under.mk\n      (⟨p.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} p.base).obj E.sheaf)) :\n    ∀ z : E, p z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T025309-L-3425017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T025309-L-3425017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
