@@ -8,8 +8,8 @@ namespace AlgebraicGeometry.Scheme
 /-- Existence of a compatible descended affine model.
 Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
 (blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux-compatible)
-The finite-presentation descent and affine-limit argument constructs a global pointed
-triple and its canonical compatible map to the prescribed local triple.
+Take the identity triple over R and the composite R → Rₚ → t.B. The structure
+equality is immediate, and compatibility follows from t.compatible, hψ and hK.
 -/
 theorem etaleResidueTriples_primeLocalization_component_extension_compatible
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
@@ -28,5 +28,13 @@ theorem etaleResidueTriples_primeLocalization_component_extension_compatible
       c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧
       i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
         (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ := by
-  sorry
+  let c : EtaleResidueTriples R p K χ :=
+    ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩
+  refine ⟨c, CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α,
+    ?_, ?_⟩
+  · simp [c]
+  · change (CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α) ≫
+      (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
+        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ
+    rw [Category.assoc, t.compatible, hψ, hK]
 end AlgebraicGeometry.Scheme
