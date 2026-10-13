@@ -1,0 +1,160 @@
+{
+ "id": "lem-pc-tensor-hom-uncurry-normalized-comparison",
+ "kind": "statement",
+ "title": "Comparison of localized normalized tensor-Hom evaluation maps",
+ "statement": "Let X be a scheme with a chosen derived category, and let P,L,M and P',L',M' be complexes of module sheaves. Assume P and P' are K-flat. Let phi:P to Hom(L,I(M)) and phi':P' to Hom(L',I(M')) be chain maps, using the fixed resolution and evaluation of [lem-pc-tensor-hom-uncurry-differential] and [def-pc-canonical-derived-tensor-hom-model]. Given derived isomorphisms a:QP to QP', b:QL to QL', c:QM to QM', suppose Q(phi) followed by the inverse Hom comparison equals a.hom followed by the corresponding normalized input for phi', followed by RHom(b.hom,c.inv). Then the localized evaluation for phi equals (a.hom tensor b.hom) followed by the localized evaluation for phi', followed by c.inv. No K-flatness of L,L' or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DJ; sites-cohomology.tex Tags 0A90 and 0A96; https://stacks.math.columbia.edu/tag/08DJ, https://stacks.math.columbia.edu/tag/0A90, https://stacks.math.columbia.edu/tag/0A96 (read online)"
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-model",
+  "lem-pc-tensor-hom-uncurry-differential"
+ ],
+ "proof": [
+  {
+   "text": "Replace L and L' by K-flat resolutions and both targets by the fixed K-injective resolutions. Compute the comparison roofs on common K-flat sources. The Hom complexes with K-flat first input and K-injective target are K-injective, so the hypothesized equality of derived inputs becomes equality of homotopy classes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uncurry the degree-minus-one components of a homotopy on every tensor summand. The signed Hom differential identity identifies its boundary with the difference of the uncurried maps. For chain maps, naturality of the Hom projections and sheaf tensor-Hom adjunction gives the pre- and postcomposition identities on summands. Coproduct extensionality gives the identities of chain maps.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the identities. Naturality of the tensor model map, internal-Hom factorization and resolution augmentation identifies the composites with the two displayed evaluation maps. Cancel the invertible localized quasi-isomorphisms. Since P and P' are K-flat, tensoring with either inverts a resolution of arbitrary L or L'; Hom(-,I(M)) inverts it as well. This recovers the formula without requiring L or L' to be K-flat. Zero inputs, zero complexes and identity isomorphisms satisfy the same formulas.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-pur-hom-complex-global-cochains",
+  "def-pc-canonical-derived-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 08DJ, 0A90, 0A96; explicit comparison refinement of parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": [
+    "CategoryTheory.Functor.map_comp",
+    "PresheafOfModules.map_comp",
+    "PresheafOfModules.map_comp_assoc",
+    "PresheafOfModules.mk",
+    "PresheafOfModulesOfCommRing.mk",
+    "AlgebraicGeometry.PresheafedSpace.map_comp_c_app"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No normalized derived evaluation comparison found. Functor.map_comp is used for transport algebra but supplies no evaluation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized tensor Hom evaluation is independent of K flat representatives and commutes with derived isomorphisms",
+   "results": [
+    "IsLocalizedModule.map_lTensor",
+    "IsLocalization.instIsLocalizedModuleTensorProductMap",
+    "IsLocalization.moduleTensorEquiv",
+    "IsLocalizedModule.rTensor",
+    "LinearMap.tensorEqLocusEquiv_apply",
+    "IsLocalization.tensorProduct_isLocalizedModule",
+    "IsLocalization.moduleLid",
+    "LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No normalized derived evaluation comparison found. Functor.map_comp is used for transport algebra but supplies no evaluation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Hh]om|[Hh]om.*tensor",
+   "results": [],
+   "date": "2026-10-13",
+   "verdict": "No normalized derived evaluation comparison found. Functor.map_comp is used for transport algebra but supplies no evaluation comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized tensor Hom evaluation is independent of K flat representatives and commutes with derived isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-hom-uncurry-descent",
+   "place": "Independence of representatives: comparison of two normalized chain evaluations before constructing an extension family",
+   "via": [
+    "lem-pc-tensor-hom-uncurry-descent-extension",
+    "lem-pc-canonical-derived-tensor-hom-map-existence",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean",
+  "declaration": "AlgebraicGeometry.tensorHomUncurry_normalized_comparison",
+  "statement": "theorem tensorHomUncurry_normalized_comparison (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (P L M P' L' M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : P.IsKFlat) (hP' : P'.IsKFlat)\n    (φ : P ⟶ homComplex (R := X.sheaf) L\n      ((schemeHomKInjectiveResolution X).obj M))\n    (φ' : P' ⟶ homComplex (R := X.sheaf) L'\n      ((schemeHomKInjectiveResolution X).obj M'))\n    (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj P')\n    (b : DerivedCategory.Q.obj L ≅ DerivedCategory.Q.obj L')\n    (c : DerivedCategory.Q.obj M ≅ DerivedCategory.Q.obj M')\n    (h : DerivedCategory.Q.map φ ≫ (schemeDerivedInternalHomResolutionIso X L M).inv =\n      a.hom ≫ DerivedCategory.Q.map φ' ≫\n        (schemeDerivedInternalHomResolutionIso X L' M').inv ≫\n          (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map\n            (b.hom.op, c.inv)) :\n    letI := schemeDerivedTensorMonoidal X\n    pullbackTensorModelMap X P L ≫\n        DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n          schemeHomResolutionInverse X M =\n      (a.hom ⊗ₘ b.hom) ≫ pullbackTensorModelMap X P' L' ≫\n        DerivedCategory.Q.map (schemeTensorHomUncurry X P' L' M' φ') ≫\n          schemeHomResolutionInverse X M' ≫ c.inv",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T072401-L-1123641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T072401-L-1123641",
+  "kind": "interface"
+ }
+}
