@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.KrullDimension.Basic
 
+import Sheaf.RingTheory.FilteredColimitPrimeChainContraction
+import Sheaf.RingTheory.FilteredColimitPrimeChainDimensionBound
+
 /-!
 # Prime chains and dimension of filtered ring colimits
 
@@ -48,6 +51,7 @@ theorem filteredColimit_prime_chain_and_dimension
         (∀ j, (Ideal.comap (colimit.ι R i).hom (p j)).IsPrime) ∧
         StrictMono (fun j ↦ Ideal.comap (colimit.ι R i).hom (p j))) ∧
     ringKrullDim (colimit R : CommRingCat.{u}) ≤ ⨆ i : I, ringKrullDim (R.obj i) := by
-  sorry
+  exact ⟨filteredColimit_prime_chain_contraction R,
+    filteredColimit_prime_chain_dimension_bound R⟩
 
 end CommRingCat
