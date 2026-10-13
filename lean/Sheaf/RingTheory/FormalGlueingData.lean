@@ -47,6 +47,34 @@ abbrev extend (φ : R →+* S) (M : ModuleCat.{w} R) : ModuleCat.{max v w} S :=
   letI : Algebra R S := φ.toAlgebra
   ModuleCat.of S (S ⊗[R] M)
 
+private noncomputable def localEndHom (f : R) (M : ModuleCat.{w} R) :
+    Module.End R M →+* Module.End R (localize f M) where
+  toFun := IsLocalizedModule.map (Submonoid.powers f)
+    (LocalizedModule.mkLinearMap _ M) (LocalizedModule.mkLinearMap _ M)
+  map_one' := IsLocalizedModule.map_id _ _
+  map_mul' h k := IsLocalizedModule.map_comp' _ _ _ _ k h
+  map_zero' := map_zero _
+  map_add' := map_add _
+
+private theorem localEndHom_scalar (f : R) (M : ModuleCat.{w} R) (r : R) :
+    localEndHom f M (algebraMap R (Module.End R M) r) =
+      algebraMap R (Module.End R (localize f M)) r := by
+  ext x
+  induction x using LocalizedModule.induction_on with
+  | _ m t =>
+    change IsLocalizedModule.map (Submonoid.powers f)
+      (LocalizedModule.mkLinearMap _ M) (LocalizedModule.mkLinearMap _ M)
+      (algebraMap R (Module.End R M) r) (LocalizedModule.mk m t) =
+      r • LocalizedModule.mk m t
+    rw [IsLocalizedModule.map_LocalizedModules]
+    exact (LocalizedModule.smul'_mk r m t).symm
+
+private theorem localize_units (f : R) (M : ModuleCat.{w} R) (r : R)
+    (h : IsUnit (algebraMap R (Module.End R M) r)) :
+    IsUnit (algebraMap R (Module.End R (localize f M)) r) := by
+  rw [← localEndHom_scalar]
+  exact h.map (localEndHom f M)
+
 /-- The `S`-action on the localization of an `S`-module, induced by localizing
 each multiplication map. For each `s : S`, multiplication by `s` is R-linear
 on the restriction of `M`. Localize this map using
@@ -62,7 +90,20 @@ theorem exists_localized_s_module (φ : R →+* S) (f : R) (M : ModuleCat.{w} S)
       ∀ (s : S) (m : M) (t : Submonoid.powers f),
         sm.smul s (LocalizedModule.mk (show restrict φ M from m) t) =
           LocalizedModule.mk (show restrict φ M from s • m) t := by
-  sorry
+  let act : S →+* Module.End R (restrict φ M) :=
+    { toFun := fun s ↦
+        { toFun := fun m ↦ s • (m : M)
+          map_add' := smul_add s
+          map_smul' := fun r m ↦ smul_comm s (φ r) m }
+      map_one' := by ext m; exact one_smul S m
+      map_mul' := fun s t ↦ by ext m; exact mul_smul s t m
+      map_zero' := by ext m; exact zero_smul S m
+      map_add' := fun s t ↦ by ext m; exact add_smul s t m }
+  let sm := Module.compHom (localize f (restrict φ M))
+    ((localEndHom f (restrict φ M)).comp act)
+  refine ⟨sm, ?_⟩
+  intro s m t
+  exact IsLocalizedModule.map_LocalizedModules _ (act s) m t
 
 /-- The canonical `S`-module structure from the localized multiplication maps.
 Source: Stacks, Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
@@ -78,6 +119,11 @@ noncomputable def localMap (f : R) {M : ModuleCat.{w₁} R}
     localize f M →ₗ[R] localize f N :=
   IsLocalizedModule.map (Submonoid.powers f)
     (LocalizedModule.mkLinearMap _ M) (LocalizedModule.mkLinearMap _ N) h
+
+private theorem localMap_mk (f : R) {M : ModuleCat.{w₁} R}
+    {N : ModuleCat.{w₂} R} (h : M →ₗ[R] N) (m : M) (t : Submonoid.powers f) :
+    localMap f h (LocalizedModule.mk m t) = LocalizedModule.mk (h m) t :=
+  IsLocalizedModule.map_LocalizedModules _ h m t
 
 /-- Restrict an `S`-linear map to the underlying `R`-modules. Source: Stacks,
 Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
@@ -96,6 +142,35 @@ noncomputable def extendMap (φ : R →+* S) {M : ModuleCat.{w₁} R}
   letI : Algebra R S := φ.toAlgebra
   LinearMap.baseChange S h
 
+private noncomputable def baseEndHom (φ : R →+* S) (M : ModuleCat.{w} R) :
+    Module.End R M →+* Module.End R (restrict φ (extend φ M)) := by
+  let : Algebra R S := φ.toAlgebra
+  exact
+    { toFun := fun h ↦ restrictMap φ (extendMap φ h)
+      map_one' := by
+        ext x
+        simp [extendMap, restrictMap]
+      map_mul' := fun h k ↦ by
+        simp only [Module.End.mul_eq_comp, extendMap, LinearMap.baseChange_comp]
+        rfl
+      map_zero' := by
+        ext x
+        simp [extendMap, restrictMap]
+      map_add' := fun h k ↦ by
+        ext x
+        simp [extendMap, restrictMap] }
+
+private theorem baseEndHom_scalar (φ : R →+* S) (M : ModuleCat.{w} R) (r : R) :
+    baseEndHom φ M (algebraMap R (Module.End R M) r) =
+      algebraMap R (Module.End R (restrict φ (extend φ M))) r := by
+  let : Algebra R S := φ.toAlgebra
+  ext x
+  change (LinearMap.baseChange S (algebraMap R (Module.End R M) r)) x = r • x
+  induction x using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a m => simp [Module.algebraMap_end_apply, TensorProduct.tmul_smul]
+  | add x y hx hy => simp [hx, hy, smul_add]
+
 /-- Interchanging two localizations is uniquely determined on the image of
 the original module. Both `f` and `g` act invertibly on the target.
 First extend `M → (M_g)_f` across localization at `f`, then across localization
@@ -111,7 +186,27 @@ theorem exists_swap (f g : R) (M : ModuleCat.{w} R) :
       ∀ m : M,
         h (LocalizedModule.mk (LocalizedModule.mk m 1) 1) =
           LocalizedModule.mk (LocalizedModule.mk m 1) 1 := by
-  sorry
+  let a := (LocalizedModule.mkLinearMap (Submonoid.powers f) (localize g M)).comp
+    (LocalizedModule.mkLinearMap (Submonoid.powers g) M)
+  have hf : ∀ t : Submonoid.powers f,
+      IsUnit (algebraMap R (Module.End R (localize f (localize g M))) t) :=
+    IsLocalizedModule.map_units (LocalizedModule.mkLinearMap _ (localize g M))
+  have hg : ∀ t : Submonoid.powers g,
+      IsUnit (algebraMap R (Module.End R (localize f (localize g M))) t) :=
+    fun t ↦ localize_units f (localize g M) t
+      (IsLocalizedModule.map_units (LocalizedModule.mkLinearMap _ M) t)
+  let b := LocalizedModule.lift (Submonoid.powers f) a hf
+  let c := LocalizedModule.lift (Submonoid.powers g) b hg
+  refine ⟨c, ?_, ?_⟩
+  · intro m
+    simp only [c, b, LocalizedModule.lift_mk_one]
+    rfl
+  · intro h hh
+    apply (LocalizedModule.lift_unique (Submonoid.powers g) b hg h ?_).symm
+    apply (LocalizedModule.lift_unique (Submonoid.powers f) a hf
+      (h.comp (LocalizedModule.mkLinearMap _ (localize f M))) ?_).symm
+    ext m
+    exact hh m
 
 /-- The canonical interchange of two localizations. Source: Stacks, Remark
 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
@@ -136,7 +231,18 @@ theorem exists_compare (φ : R →+* S) (f : R) (M : ModuleCat.{w} R) :
         restrict φ (extend φ (localize f M)),
       h.comp (LocalizedModule.mkLinearMap _ (restrict φ (extend φ M))) =
         restrictMap φ (extendMap φ (LocalizedModule.mkLinearMap _ M)) := by
-  sorry
+  let a := restrictMap φ (extendMap φ (M := M) (N := localize f M)
+    (LocalizedModule.mkLinearMap (Submonoid.powers f) M))
+  have hf : ∀ t : Submonoid.powers f,
+      IsUnit (algebraMap R (Module.End R (restrict φ (extend φ (localize f M)))) t) := by
+    intro t
+    rw [← baseEndHom_scalar]
+    exact (IsLocalizedModule.map_units (LocalizedModule.mkLinearMap _ M) t).map
+      (baseEndHom φ (localize f M))
+  refine ⟨LocalizedModule.lift (Submonoid.powers f) a hf,
+    LocalizedModule.lift_comp _ a hf, ?_⟩
+  intro h hh
+  exact (LocalizedModule.lift_unique _ a hf h hh).symm
 
 /-- The canonical comparison `(M ⊗ S)_f → M_f ⊗ S`. Source: Stacks,
 Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
@@ -144,6 +250,21 @@ noncomputable def compare (φ : R →+* S) (f : R) (M : ModuleCat.{w} R) :
     localize f (restrict φ (extend φ M)) →ₗ[R]
       restrict φ (extend φ (localize f M)) :=
   (exists_compare φ f M).exists.choose
+
+private theorem localizedSModule_apply_eq (φ : R →+* S) (f : R)
+    (M : ModuleCat.{w} S) (s : S) (x : localize f (restrict φ M)) :
+    (localizedSModule φ f M).smul s x =
+      localMap f (restrictMap φ (s • (LinearMap.id : M →ₗ[S] M))) x := by
+  induction x using LocalizedModule.induction_on with
+  | _ m t =>
+    rw [(exists_localized_s_module φ f M).choose_spec, localMap_mk]
+    rfl
+
+private theorem compare_mk_one (φ : R →+* S) (f : R) (M : ModuleCat.{w} R)
+    (x : restrict φ (extend φ M)) :
+    compare φ f M (LocalizedModule.mk x 1) =
+      restrictMap φ (extendMap φ (LocalizedModule.mkLinearMap _ M)) x :=
+  LinearMap.congr_fun (exists_compare φ f M).exists.choose_spec x
 
 /-- The comparison map commutes with the localized `S`-action. This follows
 on fractions from its formula on pure tensors: multiplying `(a ⊗ m)/f^e`
@@ -157,7 +278,29 @@ theorem compare_smul (φ : R →+* S) (f : R) (M : ModuleCat.{w} R)
     (s : S) (x : localize f (restrict φ (extend φ M))) :
     compare φ f M ((localizedSModule φ f (extend φ M)).smul s x) =
       (s • (compare φ f M x : extend φ (localize f M))) := by
-  sorry
+  let a := restrictMap φ (s • (LinearMap.id : extend φ M →ₗ[S] extend φ M))
+  let b := restrictMap φ
+    (s • (LinearMap.id : extend φ (localize f M) →ₗ[S] extend φ (localize f M)))
+  have hf : ∀ t : Submonoid.powers f,
+      IsUnit (algebraMap R (Module.End R (restrict φ (extend φ (localize f M)))) t) := by
+    intro t
+    rw [← baseEndHom_scalar]
+    exact (IsLocalizedModule.map_units (LocalizedModule.mkLinearMap _ M) t).map
+      (baseEndHom φ (localize f M))
+  have he : (compare φ f M).comp (localMap f a) = b.comp (compare φ f M) := by
+    apply IsLocalizedModule.ext (Submonoid.powers f)
+      (LocalizedModule.mkLinearMap _ (restrict φ (extend φ M))) hf
+    ext m
+    simp only [LinearMap.comp_apply, LocalizedModule.mkLinearMap_apply]
+    rw [localMap_mk (M := restrict φ (extend φ M)) (N := restrict φ (extend φ M)),
+      compare_mk_one, compare_mk_one]
+    change extendMap φ (M := M) (N := localize f M)
+      (LocalizedModule.mkLinearMap _ M) (s • (m : extend φ M)) =
+      s • extendMap φ (M := M) (N := localize f M) (LocalizedModule.mkLinearMap _ M) m
+    exact (extendMap φ (M := M) (N := localize f M)
+      (LocalizedModule.mkLinearMap _ M)).map_smul s m
+  rw [localizedSModule_apply_eq]
+  exact LinearMap.congr_fun he x
 
 /-- Localization of an `S`-linear map remains `S`-linear for the localized
 actions. Write the element as `m/t` using
@@ -171,7 +314,13 @@ theorem localMap_smul (φ : R →+* S) (f : R) {M N : ModuleCat.{w} S}
     (h : M →ₗ[S] N) (s : S) (x : localize f (restrict φ M)) :
     localMap f (restrictMap φ h) ((localizedSModule φ f M).smul s x) =
       (localizedSModule φ f N).smul s (localMap f (restrictMap φ h) x) := by
-  sorry
+  induction x using LocalizedModule.induction_on with
+  | _ m t =>
+    rw [(exists_localized_s_module φ f M).choose_spec, localMap_mk, localMap_mk]
+    rw [(exists_localized_s_module φ f N).choose_spec]
+    change LocalizedModule.mk (show restrict φ N from h (s • (m : M))) t =
+      LocalizedModule.mk (show restrict φ N from s • h m) t
+    rw [h.map_smul]
 
 /-- A module over `R_f`, regarded as an `R`-module. Source: Stacks,
 Remark 05EL (blueprint: def-weil-pbc-formal-glueing-data). -/
@@ -229,6 +378,35 @@ structure Hom {t : ℕ} {φ : R →+* S} {f : Fin t → R}
     (Y.alpha_overlap i j).toLinearMap.comp (localMap (f j) (chart i)) =
       (localMap (f i) (chart j)).comp (X.alpha_overlap i j).toLinearMap
 
+private theorem localMap_id (f : R) (M : ModuleCat.{w} R) :
+    localMap f (LinearMap.id : M →ₗ[R] M) = LinearMap.id :=
+  IsLocalizedModule.map_id _ _
+
+private theorem localMap_comp (f : R) {M : ModuleCat.{w₁} R}
+    {N : ModuleCat.{w₂} R} {P : ModuleCat.{w} R} (h : M →ₗ[R] N) (k : N →ₗ[R] P) :
+    localMap f (k.comp h) = (localMap f k).comp (localMap f h) :=
+  IsLocalizedModule.map_comp' _ _ _ _ h k
+
+private theorem restrictMap_id (φ : R →+* S) (M : ModuleCat.{w} S) :
+    restrictMap φ (LinearMap.id : M →ₗ[S] M) = LinearMap.id := rfl
+
+private theorem restrictMap_comp (φ : R →+* S) {M N P : ModuleCat.{w} S}
+    (h : M →ₗ[S] N) (k : N →ₗ[S] P) :
+    restrictMap φ (k.comp h) = (restrictMap φ k).comp (restrictMap φ h) := rfl
+
+private theorem extendMapR_id (φ : R →+* S) (M : ModuleCat.{w} R) :
+    extendMapR φ (LinearMap.id : M →ₗ[R] M) = LinearMap.id := by
+  let : Algebra R S := φ.toAlgebra
+  simp only [extendMapR, extendMap, LinearMap.baseChange_id]
+  rfl
+
+private theorem extendMapR_comp (φ : R →+* S) {M N P : ModuleCat.{w} R}
+    (h : M →ₗ[R] N) (k : N →ₗ[R] P) :
+    extendMapR φ (k.comp h) = (extendMapR φ k).comp (extendMapR φ h) := by
+  let : Algebra R S := φ.toAlgebra
+  simp only [extendMapR, extendMap, LinearMap.baseChange_comp]
+  rfl
+
 /-- Identity maps satisfy both glueing compatibilities, since localization
 and base change preserve identities [def-weil-pbc-module-localization],
 [def-weil-module-base-change]. Replace each localized or base-changed identity
@@ -248,7 +426,14 @@ theorem id_compat {t : ℕ} {φ : R →+* S} {f : Fin t → R}
             piece (f i) (X.M i))) =
         (localMap (f i) (LinearMap.id : piece (f j) (X.M j) →ₗ[R]
           piece (f j) (X.M j))).comp (X.alpha_overlap i j).toLinearMap) := by
-  sorry
+  constructor
+  · intro i
+    change (X.alpha i).toLinearMap.comp
+      (localMap (f i) (restrictMap φ LinearMap.id)) =
+      (extendMapR φ LinearMap.id).comp (X.alpha i).toLinearMap
+    rw [restrictMap_id, localMap_id, extendMapR_id, LinearMap.comp_id, LinearMap.id_comp]
+  · intro i j
+    rw [localMap_id, localMap_id, LinearMap.comp_id, LinearMap.id_comp]
 
 /-- Componentwise composition respects both glueing compatibilities, by
 functoriality of localization [def-weil-pbc-module-localization] and scalar
@@ -271,7 +456,16 @@ theorem comp_compat {t : ℕ} {φ : R →+* S} {f : Fin t → R}
           (localMap (f j) ((v.chart i).comp (u.chart i))) =
         (localMap (f i) ((v.chart j).comp (u.chart j))).comp
           (X.alpha_overlap i j).toLinearMap) := by
-  sorry
+  constructor
+  · intro i
+    change (Z.alpha i).toLinearMap.comp
+      (localMap (f i) (restrictMap φ (v.prime.comp u.prime))) =
+      (extendMapR φ ((v.chart i).comp (u.chart i))).comp (X.alpha i).toLinearMap
+    rw [restrictMap_comp, localMap_comp, ← LinearMap.comp_assoc, v.prime_compat,
+      LinearMap.comp_assoc, u.prime_compat, ← LinearMap.comp_assoc, ← extendMapR_comp]
+  · intro i j
+    rw [localMap_comp, ← LinearMap.comp_assoc, v.chart_compat, LinearMap.comp_assoc,
+      u.chart_compat, ← LinearMap.comp_assoc, ← localMap_comp]
 
 /-- The identity morphism has identity maps in every component. Source:
 Stacks, Remark 05EL, item (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
@@ -303,7 +497,16 @@ theorem category_laws {t : ℕ} {φ : R →+* S} {f : Fin t → R} :
     (∀ {X Y : Data.{u, v, w} φ f} (u : Hom X Y), compHom u (idHom Y) = u) ∧
     (∀ {W X Y Z : Data.{u, v, w} φ f} (u : Hom W X) (v : Hom X Y) (t : Hom Y Z),
       compHom (compHom u v) t = compHom u (compHom v t)) := by
-  sorry
+  constructor
+  · intro X Y u
+    cases u
+    rfl
+  constructor
+  · intro X Y u
+    cases u
+    rfl
+  · intro W X Y Z u v t
+    rfl
 
 /-- The category `Glue(R → S, (f_i))`. Source: Stacks, Remark 05EL,
 items (1) and (2) (blueprint: def-weil-pbc-formal-glueing-data). -/
