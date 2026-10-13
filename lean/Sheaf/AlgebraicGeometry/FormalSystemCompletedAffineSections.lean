@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
+import Sheaf.AlgebraicGeometry.CompletedAffineSectionsPowerTorsion
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Termwise section comparison for a completed affine chart
 
@@ -61,6 +64,28 @@ theorem formalSystem_completed_affine_sections
             (SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≫ (e H).hom =
           (e G).hom ≫ Functor.whiskerRight
             (Functor.whiskerRight (Functor.whiskerRight a.hom T) E) L := by
-  sorry
+  dsimp only
+  let B := Γ(Y, U.1)
+  let R := AdicCompletion (J.ideal U) B
+  let g : Spec (CommRingCat.of R) ⟶ Y :=
+    Spec.map (CommRingCat.ofHom (algebraMap B R)) ≫ U.2.isoSpec.inv ≫ U.1.ι
+  let A := SheafOfModules.evaluation Y.ringCatSheaf (op U.1)
+  let P := Scheme.Modules.tensorPullback g ⋙ moduleSpecΓFunctor (R := CommRingCat.of R) ⋙
+    ModuleCat.restrictScalars (algebraMap B R)
+  obtain ⟨c, hc⟩ := completedAffineSections_powerTorsion J U
+  have hi (G : CoherentFormalModule Y J) (n : ℕ) : IsIso (c.app (G.obj.obj (op n))) := by
+    have hqc := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+      Y (G.obj.obj (op n))).mp (G.property.1 n)
+    exact hc _ hqc.1 n ((coherentFormalModule_affine_open_sections_adic Y J G U).2.1 n)
+  let e (G : CoherentFormalModule Y J) : G.obj ⋙ A ≅ G.obj ⋙ P :=
+    NatIso.ofComponents (fun n ↦ @asIso _ _ _ _ (c.app (G.obj.obj n)) (hi G n.unop))
+      (fun h ↦ c.naturality (G.obj.map h))
+  refine ⟨e, ?_⟩
+  intro G H a
+  apply NatTrans.ext
+  funext n
+  simpa only [e, NatIso.ofComponents_hom_app, asIso_hom, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.comp_map] using
+    c.naturality (a.hom.app n)
 
 end AlgebraicGeometry

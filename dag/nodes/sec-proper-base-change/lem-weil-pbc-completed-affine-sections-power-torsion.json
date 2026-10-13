@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-completed-affine-sections-power-torsion",
+ "title": "Completed affine sections of a power-torsion quasi-coherent sheaf",
+ "statement": "Let $Y$ be a Noetherian scheme, $J$ an ideal sheaf, $U$ an affine open, $B=\\Gamma(Y,U)$, $R=\\widehat{B}_{J(U)}$ the completion [def-weil-pbc-adic-completion], and $g:\\operatorname{Spec} R\\to Y$ the completion ring map followed by the affine chart inclusion. Let $A$ evaluate module sheaves on $U$, and let $P$ be tensor pullback along $g$ followed by global Spec sections and restriction of scalars along $B\\to R$ [def-pc-module-pullback]. There exists a natural transformation $c:A\\to P$ such that, for every quasi-coherent module sheaf $M$ [pqf-def-coherent] and every $n\\in\\mathbb N$ with $J(U)^{n+1}\\Gamma(U,M)=0$, $c_M$ is an isomorphism of $B$-modules. This concerns individual sheaves and includes no formal system or diagram transitions.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-pc-module-pullback",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Completed base-change paragraph; Tags 05GG (completion quotient) and 01I9 (affine pullback)."
+ },
+ "proof": [
+  {
+   "text": "Define c from the tensor-pullback adjunction unit, restricted to the whole Spec R, which is the inverse image of U. Spec global sections and the affine chart identify the ring action with B → R. Naturality of the unit and restriction gives a natural transformation on all sheaves.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For quasi-coherent M, affine pullback sections identify c_M with m ↦ 1 tensor m. The annihilation assumption factors the B action through B/J(U)^(n+1). The ideal is finitely generated since B is Noetherian, so the completion quotient formula identifies R/J(U)^(n+1)R with B/J(U)^(n+1). Tensoring over this quotient identifies c_M with the identity; hence c_M is invertible.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Completed base-change reduction to power-torsion modules; repaired by second reader J1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi-coherent sheaf killed by an ideal power has unchanged sections after pullback to the adic completion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension unit is an isomorphism for modules killed by a positive power of the completion ideal",
+   "results": "8 hits: AdicCompletion.ofLinearEquiv, congr, ofLinearEquiv_apply, of_bijective, of_bijective_iff, instModuleOfIsScalarTower, module, congr_apply.",
+   "date": "2026-10-13",
+   "verdict": "no exact sheaf comparison; these are tools for module completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "12 hits, including ofTensorProduct, ofTensorProductEquivOfFiniteNoetherian, ofTensorProduct_bijective_of_finite_of_isNoetherian, ofTensorProduct_tmul, and tensor_map_id_left_injective_of_injective.",
+   "date": "2026-10-13",
+   "verdict": "module tensor-completion tools; no natural sheaf comparison on affine charts"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*completion|completion.*torsion|IsIso.*unit",
+   "results": "25 hits, mostly unit isomorphisms for condensed and topological sheaves and localization; no completed affine module section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalSystemCompletedAffineSections",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-system-completed-affine-sections",
+   "place": "The individual power-torsion sheaf comparison, step 2 of the target proof plan."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompletedAffineSectionsPowerTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletedAffineSectionsPowerTorsion.lean",
+  "declaration": "AlgebraicGeometry.completedAffineSections_powerTorsion",
+  "statement": "theorem completedAffineSections_powerTorsion\n    {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData) (U : Y.affineOpens) :\n    let B := Γ(Y, U.1)\n    let R := AdicCompletion (J.ideal U) B\n    let S := Spec (CommRingCat.of R)\n    let g : S ⟶ Y := Spec.map (CommRingCat.ofHom (algebraMap B R)) ≫\n      U.2.isoSpec.inv ≫ U.1.ι\n    let T := Scheme.Modules.tensorPullback g\n    let E := moduleSpecΓFunctor (R := CommRingCat.of R)\n    let L := ModuleCat.restrictScalars (algebraMap B R)\n    ∃ c : SheafOfModules.evaluation Y.ringCatSheaf (op U.1) ⟶ T ⋙ E ⋙ L,\n      ∀ (M : Y.Modules) (_ : M.IsQuasicoherent) (n : ℕ),\n        J.ideal U ^ (n + 1) • (⊤ : Submodule B Γ(M, U.1)) = ⊥ →\n          IsIso (c.app M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T123545-L-3711396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T123545-L-3711396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
