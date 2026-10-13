@@ -25,60 +25,50 @@
  ],
  "proof": [
   {
-   "text": "The assertion is local on the finitely presented scheme X_i. For a quasi-compact open U_i of X_i with preimages U_j in X_j and U in X, let \\mathcal P(U_i) be the condition that for every integer n the canonical map \\operatorname{colim}_{j\\ge i}\\operatorname{Hom}_{D(O_{U_j})}(P_j|_{U_j},Q_j|_{U_j}[n])\\to\\operatorname{Hom}_{D(O_U)}(P|_U,Q|_U[n]) is bijective. Since X_i is quasi-compact and quasi-separated, it suffices by the induction principle for quasi-compact opens [lem-sc-invert-s-cohomology-induction] to prove \\mathcal P for affine opens (Step 2) and the gluing step. For the gluing step let W=U\\cup V with U quasi-compact, V affine, and \\mathcal P holding for U, V, U\\cap V. A perfect object lies in D_{QCoh} (it is locally strictly perfect with quasi-coherent terms [def-pc-perfect-complex]; Stacks Tag 08DB), so the derived Mayer–Vietoris triangle [lem-pc-derived-mayer-vietoris-triangle] applies to Q_j|_{W_j} on each W_j and to Q|_W on the preimage of W. Applying \\operatorname{Hom}(P_j|_{W_j},-[n]) and identifying \\operatorname{Hom}(P_j|_{W_j},R(j_U)_*Q_j|_{U_j}[n])=\\operatorname{Hom}(P_j|_{U_j},Q_j|_{U_j}[n]) by the adjunction L j_U^*\\dashv R(j_U)_* for the open immersion (where L j_U^* is restriction) [lem-pc-ringed-spaces-derived-adjoint], and likewise for V and U\\cap V, gives the long exact Mayer–Vietoris Hom sequence at each stage j and on the preimage of W; these sequences are compatible with derived pullback because pullback commutes with restriction to opens. Filtered colimits of abelian groups are exact, so the colimit of the stage sequences is exact, and the five lemma [lem-weil-pbc-five-lemma], applied around the term for W in degree n (whose four neighbours are terms for U, V, U\\cap V in degrees n-1 and n, bijective by hypothesis), shows \\mathcal P(W). The case W=X_i is the required bijection.",
+   "text": "Apply cofinal-tail Hom continuity to lift the given limit morphism to a finite stage. If it is invertible, apply the same continuity with Q,P at a tail beginning at that stage to lift its inverse. Transport the first lift to the inverse's stage; limit-stage compatibility identifies its limit image with the original morphism.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-perfect-complex",
-    "lem-sc-invert-s-cohomology-induction",
-    "lem-pc-derived-mayer-vietoris-triangle",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-weil-pbc-five-lemma"
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-hom-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.2, Tag 09RE, proof: induction principle on quasi-compact opens and Mayer–Vietoris for Hom"
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, label lemma-descend-homomorphisms (full faithfulness), used in Lemma 36.29.3, Tag 09RF"
    }
   },
   {
-   "text": "Affine case. Let U_i=\\operatorname{Spec}(A_i) be affine, U_j=\\operatorname{Spec}(A_j) and U=\\operatorname{Spec}(A) its preimages, A=\\operatorname{colim}_jA_j (affine transition morphisms). P_i|_{U_i} and Q_i|_{U_i}[n] are perfect, hence in D_{QCoh} (Tag 08DB, as in Step 1), so by [lem-pc-perfect-affine-bounded-projective] they are isomorphic to \\widetilde{E_0} and \\widetilde{K_0} for bounded complexes E_0, K_0 of finite projective A_i-modules; K_0, a bounded complex of flat modules, is K-flat (Stacks Tag 0649). Since the terms are flat, the derived pullbacks to U_j and U are \\widetilde{E_0\\otimes_{A_i}A_j}, \\widetilde{K_0\\otimes_{A_i}A_j} and \\widetilde{E_0\\otimes_{A_i}A}, \\widetilde{K_0\\otimes_{A_i}A}. The equivalence D(A)\\simeq D_{QCoh}(O_{\\operatorname{Spec}A}) [lem-pc-affine-qcoh-derived-equivalence] (D_{QCoh} being a full subcategory) identifies the Hom sets in D(O_{U_j}) and D(O_U) with those in D(A_j) and D(A), compatibly with the transition maps, and the affine calculation [lem-pc-affine-perfect-hom-colimit] then gives the bijection \\mathcal P(U_i).",
+   "text": "Transport preserves identity and composition by functoriality and cancellation of the fixed comparison components. The two lifted composites have the same limit images as the identities. Apply tail equality for P,P and Q,Q, and directedness to satisfy the two inverse identities at a common stage. These identities define an IsIso instance on the transported lift. Cancel the comparison components to recover the exact representation equation of the original statement.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-perfect-hom-colimit"
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-hom-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.2, Tag 09RE, affine case in the proof"
-   }
-  },
-  {
-   "text": "By Step 1 with n=0 the map \\operatorname{colim}_j\\operatorname{Hom}(P_j,Q_j)\\to\\operatorname{Hom}(P,Q) is bijective: surjectivity gives the factorization f=Lf^*f_j, and injectivity gives that two morphisms at stage j with equal pullbacks become equal at a later stage; by filteredness finitely many prescribed equalities hold at one common later stage. If f is an isomorphism, apply the same to Q,P (also perfect) to choose g:Q_j\\to P_j representing f^{-1} at a common stage. The composites g\\circ f_j and f_j\\circ g pull back to identities, so after one further increase of j both are identities; hence f_j is an isomorphism.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.2, Tag 09RE, conclusion and use in Lemma 36.29.3"
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, label lemma-descend-homomorphisms (full faithfulness), used in Lemma 36.29.3, Tag 09RF"
+   }
+  },
+  {
+   "text": "For each equality in the finite family, conjugate the raw pullback equation by the fixed comparison components and apply tail equality. Choose an upper bound of the finite set of resulting stages and then a common upper bound with the starting stage. At this stage every equality holds. Cancel the comparison components to get the raw pullback equalities required by the original statement. When the family is empty the starting stage ensures a valid witness.",
+   "uses": [
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, label lemma-descend-homomorphisms (full faithfulness), used in Lemma 36.29.3, Tag 09RF"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pc-perfect-complex",
-  "lem-sc-invert-s-cohomology-induction",
-  "lem-pc-derived-mayer-vietoris-triangle",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-weil-pbc-five-lemma",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-perfect-hom-colimit"
+  "lem-pc-perfect-hom-continuity",
+  "lem-pc-perfect-hom-transport"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.29.2, Tag 09RE"
+  "place": "Tag 09RE, Hom continuity and the inverse/equality argument"
  },
  "mathlib_searches": [
   {
@@ -201,5 +191,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa353",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T022414-L-3213338",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records and Stacks 09RE/0D5S; all delivery modules and direct importer PerfectComplexDescent compile cleanly; comparison unchanged by rfl; axioms checked."
  }
 }

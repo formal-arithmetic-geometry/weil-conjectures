@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-perfect-hom-transport",
+ "kind": "statement",
+ "title": "Compatibility of canonical Hom transport with increasing a finite stage",
+ "statement": "Let $I$ be a preordered set, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a cocone, $i\\le j\\le k$, and $s:X\\to\\operatorname{Spec}(R_i)$ a scheme morphism [def-pc-scheme]. Assume derived categories exist [def-pc-derived-category]. Set $X_j=X\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ and $X_\\infty=X\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(c.pt)$. For objects $P,Q$ of $D(\\mathcal O_X)$ put $P_j=Lp_j^*P$, $Q_j=Lp_j^*Q$ [def-pc-derived-pullback]. For each transition $g$ define $C_g:Lp_{target}^*\\simeq Lg^*\\circ Lp_{source}^*$ using the fixed counit-pinned comparisons [lem-pc-ringed-spaces-derived-pullback-composition], and set $T_g(a)=C_g(Q)^{-1}\\circ Lg^*(a)\\circ C_g(P)$. Then for every $a:P_j\\to Q_j$, $T_{k,\\infty}(T_{j,k}(a))=T_{j,\\infty}(a)$. No perfectness, finite presentation or colimit hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S, lemma-derived-pullback-composition; application to the base-change system of Tag 09RE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "The base-change maps compose by the pullback universal property and the cocone equation. Their composites with the projection to X equal the relevant direct projections. Apply the associativity law of the fixed derived-pullback comparisons to these three maps.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, label lemma-descend-homomorphisms (full faithfulness), used in Lemma 36.29.3, Tag 09RF"
+   }
+  },
+  {
+   "text": "Evaluate at P and Q, use naturality at a, and cancel adjacent inverse-comparison components. This is exactly the equality of the conjugated Hom maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, label lemma-descend-homomorphisms (full faithfulness), used in Lemma 36.29.3, Tag 09RF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S, comparison associativity and naturality; explicit Lean conjugation and projection-equation proof by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback composition comparison associativity and conjugation of morphisms",
+   "results": "Service returned Internal Server Error; unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associativity of derived pullback composition comparisons",
+   "results": "Eight hits about ordinary categorical pullback comparisons; none about derived pullback coherence",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*[Cc]omp|pullback.*[Aa]ssoc",
+   "results": "Underived sheaf/presheaf pullback_assoc and categorical pullback identities; no derived-pullback identity",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescendMorphisms",
+  "group": "G1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF proof: full faithfulness for perfect complexes descends the overlap isomorphism and its inverse after increasing the index; Compatibility of canonical Hom transport with increasing a finite stage",
+   "via": [
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomTransport.lean",
+  "declaration": "AlgebraicGeometry.perfectLimitMap_stage",
+  "declarations": [
+   "AlgebraicGeometry.perfectHomComposition",
+   "AlgebraicGeometry.perfectHomComparison",
+   "AlgebraicGeometry.perfectHomMap",
+   "AlgebraicGeometry.perfectHomMap_id",
+   "AlgebraicGeometry.perfectHomMap_comp",
+   "AlgebraicGeometry.perfectHomMap_eq_iff",
+   "AlgebraicGeometry.perfectStageMap",
+   "AlgebraicGeometry.perfectLimitMap",
+   "AlgebraicGeometry.perfectStageMap_id",
+   "AlgebraicGeometry.perfectLimitMap_id",
+   "AlgebraicGeometry.perfectLimitMap_stage",
+   "AlgebraicGeometry.perfectHomMap_trans"
+  ],
+  "statement": "theorem perfectLimitMap_stage {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i)) {j k : I} (hij : i ≤ j) (hjk : j ≤ k) {P Q : schemeDerivedCategory X} (f : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Q) : perfectLimitMap R c s (hij.trans hjk) (perfectStageMap R s hij hjk f) = perfectLimitMap R c s hij f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa353",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T022414-L-3213338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa353",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T022414-L-3213338",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records and Stacks 09RE/0D5S; all delivery modules and direct importer PerfectComplexDescent compile cleanly; comparison unchanged by rfl; axioms checked."
+ }
+}
