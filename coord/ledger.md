@@ -12115,3 +12115,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/G1/Sheaf.AlgebraicGeometry.DerivedLowerTruncationCycleFormula (stage 3; reviewer PASS; first push; landing 20261013T111847-L-3051090 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/G1/Sheaf.AlgebraicGeometry.DerivedMonoidalPullbackUnitalShift (stage 3; reviewer PASS; first push; landing 20261013T111848-L-3051267 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:18 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineFreeLowestMatrixLocus (stage 3; reviewer PASS; first push; landing 20261013T111848-L-3051415 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:18 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T111849-L-3051520 (interface); batch 20261013T111833; modules 2; new nodes 1)
