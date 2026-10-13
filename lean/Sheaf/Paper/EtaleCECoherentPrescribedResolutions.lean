@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 
+import Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison
+import Sheaf.Paper.EtaleCEPrescribedQuotientPageDescent
+import Sheaf.Paper.EtaleCETotalizeAugmentedComparison
+
 /-! # Coherent first pages from prescribed Cartan--Eilenberg resolutions
 
 Source: Stacks Project, Tags 015J, 015K and 012K.
@@ -21,6 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent raw-resolution and presentation families together.
 /-- Construct coherent first-page comparisons while retaining the supplied bicomplexes.
@@ -119,6 +124,46 @@ theorem exists_etaleCE_coherent_prescribed_resolutions
               ((D Y L).L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ),
             s ≫ ((D Y L).L.step q).arrow = ((D X K).L.step q).arrow ≫ b) ∧
           EtaleCEPageMapOnRepresentatives (D X K) (D Y L) (e X K) (e Y L)
-            b (M f K L v)) := by sorry
+            b (M f K L v)) := by
+  classical
+  obtain ⟨D, e, hI, hpages⟩ :=
+    exists_etaleCE_prescribed_quotient_page_descent I a hbelow hrows hterms hhorizontal hquasi
+  have hm : ∀ (X Y : Scheme.{u}) (f : Y ⟶ X)
+      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
+      ∃ N : (D X K).sequence ⟶ (D Y L).sequence,
+        (∀ (p : ℕ) (q : ℤ),
+          (N.hom 1).f (q, (p : ℤ)) ≫ ((D Y L).firstPageIso p q).hom =
+            ((D X K).firstPageIso p q).hom ≫
+              AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
+                (cohomologyMap f (K.obj.X q) p))) ∧
+        ∃ u : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj (D X K).sheafTotal ⟶ (D Y L).sheafTotal,
+          ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map (D X K).aug ≫ u = v ≫ (D Y L).aug ∧
+          let b := (D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫
+            (D Y L).totalSectionsIso.inv
+          (∀ q : ℤ, ∃ s : ((D X K).L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ) ⟶
+              ((D Y L).L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ),
+            s ≫ ((D Y L).L.step q).arrow = ((D X K).L.step q).arrow ≫ b) ∧
+          EtaleCEPageMapOnRepresentatives (D X K) (D Y L) (e X K) (e Y L) b N := by
+    intro X Y f K L v
+    obtain ⟨φ, hφ⟩ := exists_cartanEilenberg_augmented_comparison
+      (upperStar AddCommGrpCat.{u + 1} f) K.obj L.obj v
+      (D X K).I (D X K).a (D X K).below (D X K).rows (D X K).horizontal_quasi
+      (D Y L).I (D Y L).a (D Y L).below (D Y L).rows (D Y L).terms
+      (D Y L).horizontal (D Y L).horizontal_quasi
+    obtain ⟨u, hsquare, hu, hfiltered⟩ :=
+      etaleCE_totalize_augmented_comparison f K L v (D X K) (D Y L) φ hφ
+    obtain ⟨N, hfirst, hrep⟩ := hpages f K L v φ hφ u hu hfiltered
+    exact ⟨N, hfirst, u, hsquare, hfiltered, hrep⟩
+  choose M hM using hm
+  refine ⟨D, (fun {X Y} f K L v ↦ M X Y f K L v), e, hI, ?_, ?_⟩
+  · intro X Y f K L v p q
+    exact (hM X Y f K L v).1 p q
+  · intro X Y f K L v
+    exact (hM X Y f K L v).2
 
 end AlgebraicGeometry.Etale

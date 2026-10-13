@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-ce-prescribed-quotient-page-descent",
+ "kind": "statement",
+ "title": "Quotient-page descent retaining prescribed CE bicomplexes",
+ "statement": "For all schemes X and bounded-below complexes K of abelian etale sheaves [def-weil-pbc-scheme-conventions, def-weil-pbc-etale-sheaves], prescribe augmented CE bicomplexes I(X,K),a(X,K) [def-sp-double-complex-total] with individual lower bounds in complex degree, injective object, cycle, boundary and homology terms and quasi-isomorphic augmented columns [def-sp-injective-resolutions]. There exist simultaneous termwise hypercohomology presentations P(X,K) [def-weil-pbc-termwise-hypercohomology-presentation] retaining P(X,K).I=I(X,K), and actual quotient realizations e [lem-weil-pbc-ce-stationary-page-naturality]. Given f:Y→X [def-weil-pbc-inverse-image], v:f⁻¹K→L, a bicomplex comparison φ:f⁻¹P(X,K).I→P(Y,L).I commuting with the augmentations in resolution degree zero, and a sheaf-total map u with the nonnegative diagonal summand equations displayed in the Lean statement, assume the conjugated sections map b [lem-weil-pbc-ce-total-sections-comparison] restricts to every filtration step. Then b induces a spectral-sequence morphism N on quotient representatives. Under the signed first-page identifications N is Sheaf.H.map(v.f q) after cohomologyMap [def-weil-pbc-cohomology-pullback]. This asserts neither the existence of φ nor that of u or its filtration restrictions.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-stationary-page-naturality",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Tag 015J, Lemma 13.21.3, prescribed CE resolution and first-page computation; Tag 015K, Remark 13.21.4; Tag 012K, Lemmas 12.24.2 and 12.24.4. Steps 1 and 3 of lem-weil-pbc-ce-coherent-prescribed-resolutions."
+ },
+ "proof": [
+  {
+   "text": "For each prescribed I,a use the lower bound in complex degree and extension by zero in resolution degree to form the finite-diagonal sections total and its complex-degree filtration. Keep I and a in the presentation. Construct positive pages componentwise as actual boundary cokernels, use the unique representative differential, and use normalized successor homology comparisons. Adjoin the graded page zero. Fill the total augmentation, K-injective comparison and transported finite homology-image filtration as in the first hypercohomology theorem. Only degreewise bounds are needed; do not apply a functor requiring a globally finite filtration.",
+   "uses": [
+    "thm-sp-if-e1",
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-normalized-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a bicomplex comparison φ and a sheaf-total map u with the stated summand equation, assume its conjugated sections map b restricts to every filtration step. The graded quotient maps preserve cycles, by the differential equation, and boundaries, by their image formula. Descend them through the boundary cokernels. Check commutation with the representative differential after an epic representative cover. For successor homology, precompose with the epic successor-cycle cover followed by the homology projection; normalization identifies both composites with the same successor quotient projection. Cancel to obtain the spectral-sequence morphism N. Its defining cokernel square gives EtaleCEPageMapOnRepresentatives for every test object.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-normalized-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose ordinaryComparison by comparing each prescribed injective row with the chosen injective resolution and then applying the explicit Ext-to-sections comparison, evaluation at 1 in the constant integer sheaf. This gives coefficient naturality and the ordinary sheaf-H identification. On page one the diagonal summand equation computes the row map as the sections unit followed by φ. Its degree-zero augmentation equation identifies its homology map with Ext pullback followed by the coefficient map. The same factors (-1)^(pq) on source and target commute with additive row maps and cancel. Hence the first-page map is Sheaf.H.map(v.f q) after cohomologyMap. Zero rows, empty diagonal sums, p=0 and negative q use the same constructions.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-ext-resolution-sections-iso",
+    "lem-weil-pbc-ext-pullback-resolution-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-if-e1",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-normalized-homology",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "lem-weil-pbc-ext-pullback-resolution-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 015J, 015K and 012K",
+  "place": "Expansion of the prescribed quotient-page construction and descent; comparison and total lifts are supplied as hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Prescribed Cartan Eilenberg resolutions construct functorial quotient pages of hypercohomology spectral sequence",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial spectral sequence from a filtered complex with canonical cycle boundary quotient pages",
+   "date": "2026-10-13",
+   "results": "8 results about homology and graded homology functors, including HomologicalComplex.gradedHomologyFunctor. No prescribed CE quotient presentation.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicalSpectralSequence\"",
+   "date": "2026-10-13",
+   "results": "6 spectral-sequence type declarations, without a prescribed CE construction.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartanEilenberg|cartanEilenberg|filteredComplexPage",
+   "date": "2026-10-13",
+   "results": "msearch reports zero Mathlib hits. Local rg found EtaleCEQuotientPageDescent, which chooses its resolutions, and FilteredQuotientCanonicalFunctor, whose globally finite filtration hypothesis does not fit degreewise bounded CE totals.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCECoherentPrescribedResolutions",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 1 and 3 of lem-weil-pbc-ce-coherent-prescribed-resolutions: quotient presentations and descent, with bicomplex and filtered total comparisons supplied.",
+   "via": [
+    "lem-weil-pbc-ce-coherent-prescribed-resolutions",
+    "lem-weil-pbc-ce-supported-first-page-lifts",
+    "lem-weil-pbc-supported-ce-filtered-totals",
+    "lem-weil-pbc-supported-resolution-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": null,
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCEPrescribedQuotientPageDescent",
+  "file": "lean/Sheaf/Paper/EtaleCEPrescribedQuotientPageDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCE_prescribed_quotient_page_descent",
+  "statement": "theorem exists_etaleCE_prescribed_quotient_page_descent\n    (I : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})\n        (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      ((CochainComplex.single₀\n        (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n         (ComplexShape.up ℤ)).obj K.obj ⟶ I X K)\n    (hbelow : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero ((I X K).X s))\n    (hrows : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ), QuasiIso ((a X K).f s))\n    (hterms : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ) (r : ℕ), Injective (((I X K).X s).X r))\n    (hhorizontal : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ) (r : ℕ),\n      Injective (((I X K).cycles s).X r) ∧\n      Injective ((image ((I X K).d (s - 1) s)).X r) ∧\n      Injective (((I X K).homology s).X r))\n    (hquasi : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ),\n      QuasiIso (HomologicalComplex.cyclesMap (a X K) s) ∧\n      QuasiIso (image.map (Arrow.homMk' ((a X K).f (s - 1)) ((a X K).f s)\n        ((a X K).comm (s - 1) s))) ∧\n      QuasiIso (HomologicalComplex.homologyMap (a X K) s)) :\n    ∃ (P : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        EtaleTermwiseHypercohomology X K)\n      (e : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        EtaleCEQuotientRealization (P X K)),\n      (∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        (P X K).I = I X K) ∧\n      ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n    (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n    (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),\n      let D := P X K\n      let D' := P Y L\n      ∀ (φ : (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℕ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.I ⟶ D'.I)\n    (hφ : ∀ q : ℤ,\n      (upperStar AddCommGrpCat.{uNatural + 1} f).map\n          ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.obj.X q)).inv ≫\n            (D.a.f q).f 0) ≫ (φ.f q).f 0 =\n        v.f q ≫\n          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.obj.X q)).inv ≫\n            (D'.a.f q).f 0)\n    (u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj D.sheafTotal ⟶ D'.sheafTotal)\n    (hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),\n        (upperStar AddCommGrpCat.{uNatural + 1} f).map\n            ((HomologicalComplex.extendXIso\n              (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj (D.I.X q))\n              ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫\n                (((CartanEilenbergPresentation.mappedFunctor\n                  (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj\n                    D.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h) ≫ u.f n =\n          (φ.f q).f m ≫\n            (HomologicalComplex.extendXIso\n              (((𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj (D'.I.X q))\n              ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫\n                (((CartanEilenbergPresentation.mappedFunctor\n                  (𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj\n                    D'.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h),\n      let b := D.totalSectionsIso.hom ≫ ceSectionsLift f u ≫ D'.totalSectionsIso.inv\n      (∀ q : ℤ, ∃ s : (D.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ) ⟶\n          (D'.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ),\n        s ≫ (D'.L.step q).arrow = (D.L.step q).arrow ≫ b) →\n      ∃ N : D.sequence ⟶ D'.sequence,\n        (∀ (p : ℕ) (q : ℤ),\n        (N.hom 1).f (q, (p : ℤ)) ≫ (D'.firstPageIso p q).hom =\n          (D.firstPageIso p q).hom ≫\n            AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp\n              (cohomologyMap f (K.obj.X q) p))) ∧\n        EtaleCEPageMapOnRepresentatives D D' (e X K) (e Y L) b N",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T045618-L-140899",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T045618-L-140899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
