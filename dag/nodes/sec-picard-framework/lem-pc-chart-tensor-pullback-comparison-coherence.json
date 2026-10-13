@@ -1,0 +1,138 @@
+{
+ "id": "lem-pc-chart-tensor-pullback-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of ordinary and tensor chart comparison paths",
+ "statement": "For schemes X,Y,Z, a triangle q:Y→X, p:Z→Y, q₀:Z→X with p≫q=q₀, an open cover U of X, an index a and one module F on X, the comparison paths from the iterated ordinary chart pullback of F to the restriction of the iterated tensor pullback agree. Define Uk=U.pullback₁(q), V=Uk.pullback₁(p), W=U.pullback₁(q₀). Let v:V(a)→W(a) be any morphism supplied with the first and second projection equations v≫W.f(a)=V.f(a) and v≫U.pullbackHom(q₀,a)=Uk.pullbackHom(p,a)≫U.pullbackHom(q,a) [def-pc-fibre-product]. Let d and b be supplied ordinary comparison isomorphisms, together with equalities identifying them with, respectively, the canonical ordinary composition comparison using the second projection, and the ordinary comparison from W.f(a)-pullback followed by v-pullback to V.f(a)-pullback using the first projection. With tq,tp,t₀ the open-cover comparisons [def-pc-open-cover-tensor-pullback-comparison] and e the tensor compositor [def-pc-tensor-pullback-composition-iso], pullback(Uk.pullbackHom(p,a)).map(tq.hom(F))≫tp.hom(tensorPullback(q)(F)) equals d.inv(pullback(U.f(a))(F))≫pullback(v).map(t₀.hom(F))≫b.hom(tensorPullback(q₀)(F))≫pullback(V.f(a)).map(e.hom(F)). There is no second module, morphism, ordinary chart map or recovery hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0095 and 0096 (pullback and its adjunction); Scheme.Modules.pseudofunctor_associativity and Adjunction.leftAdjointCompIso_assoc. The specialized diagram argument is expanded by R1."
+ },
+ "proof": [
+  {
+   "text": "Substitute the two supplied equalities identifying d and b with their canonical compositions of pullbackComp and pullbackCongr. The refinement v and its two projection equations remain supplied data.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each triangle arrow f write αf for the pinned leftAdjointUniq from tensorPullback f to ordinary pullback f. The mate definition of e identifies e with αq₀ followed by the inverse ordinary compositor (pullbackComp p q followed by pullbackCongr w), followed by the inverse αq and αp whiskered in the two factors. Each open-cover comparison is its ordinary composition path followed by the inverse αf whiskered with chart restriction. This follows by taking mates, using the pullback adjunction and the defining pushforward composition comparisons.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute these descriptions. Ordinary pullback associativity (or leftAdjointCompIso_assoc after passing to pushforward mates) identifies the path through v,W.f(a),q₀ with the path through the two iterated chart projections and U.f(a). The two pullback-lift projection equations identify the composite scheme morphisms.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equality induction identifies the pullbackCongr transports. Cancel adjacent inverse α comparisons and evaluate the resulting natural-transformation equality at F. This gives exactly the displayed objectwise identity. No recovery equation or morphism transport is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-14",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0095 and 0096; pullback pseudofunctor and adjunction mate associativity",
+  "note": "Second reader replaced a rejected restatement by just the one-object comparison-path identity from the original proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison between tensor pullback and ordinary pullback commutes with composition and restriction on open cover charts",
+   "results": "Service unavailable: Internal Server Error; recorded in searches.jsonl.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the restriction isomorphism on a pulled back open cover with composition of inverse image functors",
+   "results": "Restriction and pullbackRestrictIsoRestrict identities, but no mixed tensor/ordinary chart comparison-path theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "Ordinary pseudofunctor associativity and conjugateEquiv_pullbackComp_inv, ingredients only.",
+   "date": "2026-10-14",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudofunctor_associativity|conjugateEquiv_pullbackComp_inv",
+   "results": "Mathlib ordinary pullback identities; no exact mixed tensor comparison identity.",
+   "date": "2026-10-14",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport",
+  "date": "2026-10-14",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-chart-tensor-pullback-lift-transport",
+   "place": "The one-object coherence part of the original second proof step"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChartTensorPullbackComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartTensorPullbackComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.chart_tensor_pullback_comparison_coherence",
+  "statement": "theorem chart_tensor_pullback_comparison_coherence\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)\n    (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀) (F : X.Modules) :\n    let Uk : Y.OpenCover.{u} := U.pullback₁ q\n    let V : Z.OpenCover.{u} := Uk.pullback₁ p\n    let W : Z.OpenCover.{u} := U.pullback₁ q₀\n    ∀ (v : V.X a ⟶ W.X a)\n      (hv₁ : v ≫ W.f a = V.f a)\n      (hv₂ : v ≫ U.pullbackHom q₀ a = Uk.pullbackHom p a ≫ U.pullbackHom q a),\n    ∀ (d : Scheme.Modules.pullback (U.pullbackHom q₀ a) ⋙ Scheme.Modules.pullback v ≅\n        Scheme.Modules.pullback (U.pullbackHom q a) ⋙\n          Scheme.Modules.pullback (Uk.pullbackHom p a)),\n    d = Scheme.Modules.pullbackComp v (U.pullbackHom q₀ a) ≪≫\n      Scheme.Modules.pullbackCongr hv₂ ≪≫\n      (Scheme.Modules.pullbackComp (Uk.pullbackHom p a) (U.pullbackHom q a)).symm →\n    ∀ (b : Scheme.Modules.pullback (W.f a) ⋙ Scheme.Modules.pullback v ≅\n        Scheme.Modules.pullback (V.f a)),\n    b = Scheme.Modules.pullbackComp v (W.f a) ≪≫\n      Scheme.Modules.pullbackCongr hv₁ →\n    let tq := Scheme.Modules.openCoverTensorPullbackComparison q U a\n    let tp := Scheme.Modules.openCoverTensorPullbackComparison p Uk a\n    let t₀ := Scheme.Modules.openCoverTensorPullbackComparison q₀ U a\n    let e := Scheme.Modules.tensorPullbackCompositionIso p q q₀ w\n    (Scheme.Modules.pullback (Uk.pullbackHom p a)).map (tq.hom.app F) ≫\n        tp.hom.app ((Scheme.Modules.tensorPullback q).obj F) =\n      d.inv.app ((Scheme.Modules.pullback (U.f a)).obj F) ≫\n        (Scheme.Modules.pullback v).map (t₀.hom.app F) ≫\n        b.hom.app ((Scheme.Modules.tensorPullback q₀).obj F) ≫\n        (Scheme.Modules.pullback (V.f a)).map (e.hom.app F)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T215610-L-900272",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T215610-L-900272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

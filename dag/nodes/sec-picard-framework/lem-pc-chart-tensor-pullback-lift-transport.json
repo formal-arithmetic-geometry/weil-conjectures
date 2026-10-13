@@ -16,22 +16,26 @@
  },
  "proof": [
   {
-   "text": "Use the unique left-adjoint comparison to identify each tensor pullback with ordinary pullback to the same pushforward. The tensor composition comparison is the mate of pushforward composition, and the cover comparison is ordinary composition followed by that same left-adjoint comparison.",
+   "text": "Unfold the supplied chartOrdinaryMapRecovery hypothesis and extract its Uk,V,W,v and d lets verbatim. Construct the ordinary direct restriction comparison b using the first projection of the extracted pullback lift.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-tensor-pullback-composition-iso",
-    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-fibre-product",
     "def-pc-chart-ordinary-map-recovery"
    ],
    "elementary": false
   },
   {
-   "text": "The pullback lift v has second projection the composite chart projection. Ordinary pullback associativity and the naturality of pullbackCongr identify the comparisons around this cartesian triangle. Transport ordinary associativity through the left-adjoint comparisons (equivalently apply leftAdjointCompIso_assoc to the pushforward composition comparisons). Naturality moves s through the stage comparison; substitute its supplied recovery equation and cancel adjacent inverse isomorphisms. The remaining composite is precisely the asserted tensor recovery equation, including identity morphisms, empty schemes and zero modules.",
+   "text": "Apply the one-object comparison-path coherence theorem at F and G with the exact extracted refinement v and supplied isomorphisms d,b, their two projection equations, and reflexive canonicality equalities. These identify the two comparison paths without rebuilding the recovery comparison.",
    "uses": [
-    "lem-sc-left-adjoint-composition-iso-associativity",
-    "def-pc-fibre-product"
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-pc-chart-tensor-pullback-comparison-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the proved private categorical comparison_transport helper: it precomposes by the stage comparison, substitutes the ordinary recovery equation, cancels inverse comparisons and applies naturality of b.hom for φ. Its abstract-functor conclusion is exactly the requested transport equation. The private helper has no holes.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -39,16 +43,15 @@
   "def-pc-fibre-product",
   "def-pc-open-cover-tensor-pullback-comparison",
   "def-pc-tensor-pullback-composition-iso",
-  "lem-pc-module-pullback-adjunction",
-  "lem-sc-left-adjoint-composition-iso-associativity"
+  "lem-pc-chart-tensor-pullback-comparison-coherence"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "F4",
+  "by": "worker",
+  "group": "R1",
   "date": "2026-10-14",
-  "document": "Stacks Project",
-  "place": "Tags 0095 and 0096, functoriality and composition of pullback; categorical coherence expanded by F4",
-  "note": "Source tags read online; explicit pullback comparison normalization expanded by F4."
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0095 and 0096; original chart transport plan",
+  "note": "Second-reading repair: genuine morphism-transport calculation, reduced only to the strictly smaller one-object comparison-path coherence identity. One upper hole closed and one lower hole added: decomposition, net zero."
  },
  "mathlib_searches": [
   {
@@ -121,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-2d627",
-  "group": "F4",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T201748-L-3969017",
+  "landing": "20261013T215610-L-900272",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile without warnings; axiom checks match the two reported sorry lemmas."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
