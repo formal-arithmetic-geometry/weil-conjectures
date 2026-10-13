@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-proper-flat-single-derived-direct-image-perfect",
+ "kind": "statement",
+ "title": "Perfection of proper direct image of a relatively flat single module",
+ "statement": "Let $f:X\\to S$ be proper, locally of finite presentation and quasi-compact [def-pc-scheme, def-pc-morphism-conventions], and $F$ a finitely presented module flat over $f$. Supply independent derived localizations on $X$ and $S$ and the localized open sites of $S$ [def-pc-derived-category]. Then $Rf_*(F[0])$ [def-pc-derived-direct-image] is perfect on $S$ [def-pc-perfect-complex]. No chosen Cech complex or base-change comparison occurs in this assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0B91(2), specialized proof of Tag 0A1H with E=O_X and G=F[0]"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Work locally on affine S=Spec A and express A as a filtered colimit of Noetherian rings. Spread out the finitely presented morphism and single module, enlarging the stage so the morphism is proper and the module relatively flat. This is the specialization E=O_X, G=F[0] of Noetherian approximation of the tensor data.",
+   "uses": [
+    "lem-pc-noetherian-approximation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Noetherian perfect-direct-image theorem to O_X tensor F[0]. Proper coherence supplies bounded coherent cohomology; relative flatness supplies finite Tor dimension. Identify pullback of this direct image with the original one by relatively flat derived base change. Its pulled strictly perfect representatives give perfection locally on S. Glue the witnesses and transport across localization uniqueness to exactly the supplied source, base and open localizations. Empty schemes and zero modules use zero representatives.",
+   "uses": [
+    "lem-pc-noetherian-perfect-direct-image",
+    "lem-pc-rf-base-change-complex",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-noetherian-approximation-data",
+  "lem-pc-noetherian-perfect-direct-image",
+  "lem-pc-rf-base-change-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0B91(2), specialized proof of Tag 0A1H with E=O_X and G=F[0]"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented relatively flat module has perfect derived direct image under a proper morphism of finite presentation",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image of a finitely presented module flat over a proper finitely presented morphism is perfect",
+   "results": "8 flatness and universally open morphism results, no perfection theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteAffineCechModel.*[Pp]erfect|[Pp]erfect.*[Cc]ech; Cech and Perfect in Mathlib algebraic geometry and sheaf cohomology",
+   "results": "No Mathlib perfect-object direct image theorem. The project PerfectDirectImageBaseChange and ProperSupportPerfectDirectImage reach this item through NoetherianApproximationData and FiniteFreeComplex; their import would be circular. Blueprint perfect direct image search found only the projective Noetherian special case.",
+   "date": "2026-10-13",
+   "verdict": "no usable match for specified model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelPerfect",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): Perfection of proper direct image of a relatively flat single module",
+   "via": [
+    "lem-pc-finite-affine-cech-model-perfect",
+    "lem-pc-proper-flat-affine-cech-perfect-model",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSingleDerivedDirectImagePerfect.lean",
+  "declaration": "AlgebraicGeometry.properFlat_single_derivedDirectImage_perfect",
+  "statement": "theorem properFlat_single_derivedDirectImage_perfect {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ U : S.Opens, HasDerivedCategory.{wS} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (F : X.Modules) [F.IsFinitePresentation] (hF : F.IsFlatOver f) : S.IsPerfect ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T040754-L-3950801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T040754-L-3950801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
