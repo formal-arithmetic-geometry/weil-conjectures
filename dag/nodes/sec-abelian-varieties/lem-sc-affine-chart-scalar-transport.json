@@ -1,0 +1,111 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "lem-sc-affine-chart-scalar-transport",
+ "title": "Affine chart and slice scalar transport",
+ "statement": "Let X be a scheme [def-pc-scheme], U an affine open, A=Gamma(X,U), and M any sheaf of modules on Spec A. Let f be an endomorphism of M acting as multiplication by a in A on sections of every open. After restriction along hU.isoSpec.hom, inverse slice equivalence, and ordinary direct image [def-sc-affine-free-basis-germs], f acts as multiplication by a on sections over U.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-affine-free-basis-germs"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along isoSpec evaluates the map at the image open, with scalars changed by its inverse appIso. The inverse slice equivalence evaluates at the open corresponding to U times U. The direct-image scalar map is restriction along the second projection. At the top open isoSpec_hom_appTop identifies the chart map with GammaSpecIso.hom followed by U.topIso.inv. The inverse identities and naturality identify the canonical Spec scalar with the restriction of a along the second projection. Applying the sectionwise scalar hypothesis gives the result. This holds for the empty affine open and arbitrary sheaves, with no point or regular-module presentation.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-affine-free-basis-germs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sc-affine-free-basis-germs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U; Affine chart and slice scalar transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tilde functor scalar multiplication map on module sections",
+   "results": "PresheafOfModules.zsmul_app, ModuleCat.Tilde.smul_section_apply, AlgebraicGeometry.Scheme.Modules.Hom.app_smul, PresheafOfModules.map_smul, AlgebraicGeometry.Scheme.Modules.map_smul, ModuleCat.smulNatTrans_apply_app, CategoryTheory.Presieve.FamilyOfElements.smul, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux",
+   "date": "2026-10-13",
+   "verdict": "Related building blocks; no exact transport or associated-sheaf scalar action theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"map\"",
+   "results": "AlgebraicGeometry.tilde.map, AlgebraicGeometry.tilde.map_id, AlgebraicGeometry.tilde.map_id_assoc, AlgebraicGeometry.tilde.functor_map, AlgebraicGeometry.tilde.map_comp, AlgebraicGeometry.tilde.map_zero, AlgebraicGeometry.tilde.map_comp_assoc, AlgebraicGeometry.tilde.map_neg",
+   "date": "2026-10-13",
+   "verdict": "Related building blocks; no exact transport or associated-sheaf scalar action theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*smul|smul.*tilde|map_smul_Spec",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "Related building blocks; no exact transport or associated-sheaf scalar action theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf scalar multiplication is preserved under affine chart restriction and the slice equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineScalarSectionAction",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-scalar-section-action",
+   "place": "proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartScalarTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_chart_scalar_transport",
+  "statement": "theorem affine_chart_scalar_transport (X : Scheme.{u}) (U : X.Opens)\n    (hU : IsAffineOpen U) (a : Γ(X, U))\n    (M : (Spec Γ(X, U)).Modules) (f : M ⟶ M)\n    (hf : ∀ (V : (Spec Γ(X, U)).Opens) (s : Γ(M, V)),\n      (f.val.app (.op V)) s = a • s) :\n    let T := Modules.restrictFunctor hU.isoSpec.hom ⋙ (Modules.overEquiv U).inverse\n    let P := SheafOfModules.pushforward.{u}\n      (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U)\n    ∀ m : (P.obj (T.obj M)).val.obj (.op U),\n      (P.map (T.map f)).val.app (.op U) m = a • m",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T122230-L-3591493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T122230-L-3591493",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

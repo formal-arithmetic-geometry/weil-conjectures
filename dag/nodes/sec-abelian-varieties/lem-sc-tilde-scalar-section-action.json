@@ -1,0 +1,104 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "lem-sc-tilde-scalar-section-action",
+ "title": "Associated sheaf scalar action on all sections",
+ "statement": "For a commutative ring R, an R-module M, a in R, and an endomorphism f acting as a times the identity on M, tilde(f) acts as a times the identity on sections over every open of Spec R. The associated-sheaf functor is the one used by [lem-pc-affine-perfect-module-model].",
+ "stmt_deps": [
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply extensionality to section functions. The map acts pointwise by Localizations.comapFun. The linear equivalence modulesSpecToSheafIso identifies the coordinate-ring scalar with pointwise scalar multiplication. Represent each localized value by m/s; comapFun_mk gives f(m)/s, and the input equality and smul_mk give a times m/s.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U; Associated sheaf scalar action on all sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tilde functor scalar multiplication map on module sections",
+   "results": "PresheafOfModules.zsmul_app, ModuleCat.Tilde.smul_section_apply, AlgebraicGeometry.Scheme.Modules.Hom.app_smul, PresheafOfModules.map_smul, AlgebraicGeometry.Scheme.Modules.map_smul, ModuleCat.smulNatTrans_apply_app, CategoryTheory.Presieve.FamilyOfElements.smul, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux",
+   "date": "2026-10-13",
+   "verdict": "Related building blocks; no exact transport or associated-sheaf scalar action theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"map\"",
+   "results": "AlgebraicGeometry.tilde.map, AlgebraicGeometry.tilde.map_id, AlgebraicGeometry.tilde.map_id_assoc, AlgebraicGeometry.tilde.functor_map, AlgebraicGeometry.tilde.map_comp, AlgebraicGeometry.tilde.map_zero, AlgebraicGeometry.tilde.map_comp_assoc, AlgebraicGeometry.tilde.map_neg",
+   "date": "2026-10-13",
+   "verdict": "Related building blocks; no exact transport or associated-sheaf scalar action theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*smul|smul.*tilde|map_smul_Spec",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "Related building blocks; no exact transport or associated-sheaf scalar action theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf scalar multiplication is preserved under affine chart restriction and the slice equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineScalarSectionAction",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-scalar-section-action",
+   "place": "proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TildeScalarSectionAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TildeScalarSectionAction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.tilde_scalar_section_action",
+  "statement": "theorem tilde_scalar_section_action (R : CommRingCat.{u}) (M : ModuleCat.{u} R)\n    (a : R) (f : M ⟶ M) (hf : ∀ m : M, f m = a • m)\n    (V : (Spec R).Opens) (s : Γ((tilde.functor R).obj M, V)) :\n    (((tilde.functor R).map f).val.app (.op V)) s = a • s",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T122230-L-3591493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T122230-L-3591493",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

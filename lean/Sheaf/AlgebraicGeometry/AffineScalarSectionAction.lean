@@ -6,6 +6,8 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.AffineFreeBasisGerms
+import Sheaf.AlgebraicGeometry.TildeScalarSectionAction
+import Sheaf.AlgebraicGeometry.AffineChartScalarTransport
 
 /-! # Scalar action on sections after affine sheafification
 
@@ -43,6 +45,12 @@ theorem affineScalarEnd_section_action (X : Scheme.{u}) (U : X.Opens)
     ∀ m : (P.obj ((affinePerfectSheafification X U hU).obj
         (ModuleCat.of Γ(X, U) Γ(X, U)))).val.obj (.op U),
       (P.map ((affinePerfectSheafification X U hU).map
-        (affineScalarEnd X U a))).val.app (.op U) m = a • m := by sorry
+        (affineScalarEnd X U a))).val.app (.op U) m = a • m := by
+  apply affine_chart_scalar_transport X U hU a
+    ((AlgebraicGeometry.tilde.functor Γ(X, U)).obj (ModuleCat.of Γ(X, U) Γ(X, U)))
+    ((AlgebraicGeometry.tilde.functor Γ(X, U)).map (affineScalarEnd X U a))
+  intro V s
+  exact tilde_scalar_section_action Γ(X, U) (ModuleCat.of Γ(X, U) Γ(X, U)) a
+    (affineScalarEnd X U a) (fun _ ↦ rfl) V s
 
 end AlgebraicGeometry.Scheme
