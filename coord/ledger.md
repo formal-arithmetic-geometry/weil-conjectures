@@ -13437,3 +13437,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 03:54 L: batch 20261013T190131 dependency take-out
 - 19:55 L: returned deliver/XRdbb7091a3d1839f4/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-19b4c, head 19b4c1a81) d: The unheld adaptation violates signature preservation, and this delivery changes i)
+- 19:55 L: returned deliver/H4/Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations (reviewer RETURN: (reviewer X-85d81, head 85d81d29c) Reader gate / forced adaptation: add ScalarUnitCohomologyPullbackNaturality.lean as a)
