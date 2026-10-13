@@ -10574,3 +10574,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/P1/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonProjection (stage 3; reviewer PASS; first push; landing 20261013T015605-L-3024167 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/P3/Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationBaseChange (stage 3; reviewer PASS; first push; landing 20261013T015605-L-3024354 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/P4/Sheaf.CategoryTheory.FilteredComplexIncomingBoundaryQuotient (stage 3; reviewer PASS; first push; landing 20261013T015606-L-3024477 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:56 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent (stage 3; reviewer PASS; first push; landing 20261013T015606-L-3024672 (proof); batch 20261013T015540; modules 1; new nodes 0)

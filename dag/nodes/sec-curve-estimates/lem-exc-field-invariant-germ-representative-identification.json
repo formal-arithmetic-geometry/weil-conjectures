@@ -24,9 +24,8 @@
    "elementary": false
   },
   {
-   "text": "Restrict the sheaf along etale composition from Spec L to Spec K. This preserves covers. Since E/L is finite Galois, finite Galois sections descent gives w whose pullback is z. The canonical lifts are compatible with L contained in E, so naturality of the stalk injections identifies the germs of w and z.",
+   "text": "Construct the localization functor c = MorphismProperty.Over.map along Spec L -> Spec K. The proved upstream isContinuous_overMap hp le_rfl and Mathlib Functor.op_comp_isSheaf make G = c.op composed with F a sheaf on Spec L. Compare c(Spec E over L) and c(Spec L over L) to the original site objects using identity-on-scheme isomorphisms; their structure maps agree by the scalar tower identity. Transport z to G, and the automorphism pullbacks commute with these isomorphisms, so step 1 gives invariance. Apply finiteGaloisSectionsDescent to E/L and G. Transport the descended section back to F, checking that its restriction along the inclusion L -> E is z. The canonical lifts satisfy fiber.map f y = x by the inclusion formula, and toPresheafFiber_w_apply identifies the two germs.",
    "uses": [
-    "lem-weil-pbc-etale-covering-composition",
     "lem-exc-finite-galois-sections-descent",
     "def-weil-pbc-geometric-stalks"
    ],
@@ -36,13 +35,12 @@
  "proof_deps": [
   "lem-exc-galois-automorphism-extension",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-etale-covering-composition",
   "lem-exc-finite-galois-sections-descent"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM, direct proof, specialized to the canonical lifts over L; second-reader formal reduction G3"
+  "place": "Tag 04JM, direct proof; Q1 second reading: automorphism extension and germ injectivity, concrete restriction by upstream isContinuous_overMap, finiteGaloisSectionsDescent, and naturality of canonical lifts"
  },
  "mathlib_searches": [
   {
@@ -141,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T230756-L-1908434",
-  "kind": "interface",
+  "landing": "20261013T015606-L-3024672",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

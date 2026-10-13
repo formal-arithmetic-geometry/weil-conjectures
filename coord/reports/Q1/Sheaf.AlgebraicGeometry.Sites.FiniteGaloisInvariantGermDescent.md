@@ -1,0 +1,27 @@
+## What changed
+
+Completed `AlgebraicGeometry.Scheme.exists_fieldSection_of_finiteGalois_invariant_representative` without changing its signature or definitions. Kept the first worker's invariance argument. Added the concrete restriction sheaf, identity-on-scheme comparison isomorphisms, finite Galois descent, and canonical-lift naturality argument. The proof uses the plain import `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small` for the already proved `isContinuous_overMap` API. All public imports support the existing statement or its instance elaboration. A theorem-local unused-variable linter option preserves the existing unused hypothesis and nested binder names byte for byte.
+
+## Proved and sorry left
+
+Closed: `AlgebraicGeometry.Scheme.exists_fieldSection_of_finiteGalois_invariant_representative` (node `lem-exc-field-invariant-germ-representative-identification`). One of one original theorem holes closed; zero holes added; zero split-off statements. No sorry remains in any delivered Lean module.
+
+The scratch `#print axioms` reports `propext`, `Classical.choice`, `Quot.sound`, and `sorryAx` inherited from the existing dependency closure. In particular, `finiteGaloisTensorDecomposition` remains open in the repository and is used by the existing `finiteGaloisSectionsDescent`; this delivery does not claim closure of those dependencies.
+
+## No longer needed
+
+No imports or modules removed. Removed `lem-weil-pbc-etale-covering-composition` from this node's `proof_deps`: the concrete restriction uses the already proved upstream `isContinuous_overMap` and Mathlib `Functor.op_comp_isSheaf`, rather than a separate covering-composition argument. All other old proof dependencies remain used. No unit realization is removed or bypassed.
+
+## Where the brief, the DAG or earlier work was wrong
+
+The first worker's partial target proof left an unnamed internal sorry for site restriction, which is not an admissible stage-3 delivery and did not close a declaration. The missing comparison exists in the upstream continuity API; the remaining identifications are explicit scalar-tower and functoriality calculations. The saved full-proof attempt timed out while inferring unspecified maps in the comparison isomorphisms. Giving the maps and scalar-tower equality explicitly resolves this without changing any definition or compile limit. The final functor identity rewrite must use `CategoryTheory.Functor.map_id`, and lift equality uses `Over.OverMorphism.ext`.
+
+## Second reading by Q1
+
+1. Compared the sole delivered module with the repository using diff and an exact text comparison of the existing theorem signature. Verdict: byte-for-byte identical signature; unchanged existing docstrings, visibility, local instance declaration, and public imports. No definition or statement changes, no forced adaptations, no change records needed.
+2. Read the proof from the conclusion back through section transport and invariance. Local launcher compilation succeeds. The module has no sorry and no axiom, unsafe, opaque, implemented_by, or extern declaration. Scratch `#print axioms` shows only the three permitted axioms and inherited `sorryAx` from open dependencies. G is an explicit functor composition with an existing sheaf proof; eE and eL are constructed identity-on-scheme isomorphisms. The existential wG is eliminated only within the proof, not chosen as data for a public definition.
+3. No new or split-off statement was added. Checked E=L (identity extension), L=K, and positive characteristic: finite-dimensionality and Galois tower descent do not require perfection, and the automorphism extension is the existing separable-closure theorem. Each q fixes L by q.commutes; liftNormal_commutes proves g is in the required fixing subgroup. The hypothesis hinj is applied at precisely the original canonical y, after the action/naturality equality has been established.
+4. Read Stacks Tag 04JM, lemma-global-sections-point, direct proof (https://stacks.math.columbia.edu/tag/04JM), and the imported finiteGaloisSectionsDescent and automorphism-extension statements. Checked the existing upstream restriction API instead of adding a comparison lemma. Searched the repository and upstream Hilbert90 and ran a fresh LeanFinder query about continuous restriction; Mathlib op_comp_isSheaf is the matching generic tool. No shorter theorem directly supplies this invariant-germ statement without bypassing the required finite Galois descent route. All imports are needed for the signature or for the two cited results and restriction construction. Read dag/units/sk-prop-h2.json: the unit's Kummer route and realized fields are untouched. The complete unused-node list is recorded above.
+5. Read the item's node and each cited dependency. Updated its second proof step to name the restriction construction, both comparison isomorphisms, automorphism compatibility, section pullback, and canonical-lift equality exactly as in Lean; removed the unused covering-composition dependency and updated proof_origin. All remaining proof_deps occur in the argument. No new node or modified unit.
+
+Second reading changed: closed the remaining descent hole; repaired the saved comparison-isomorphism attempt with explicit algebra maps and tower equality; fixed the final categorical identity rewrite and lift extensionality theorem; preserved the exact signature; updated the DAG and this report.
