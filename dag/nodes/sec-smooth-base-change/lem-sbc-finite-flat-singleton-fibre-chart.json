@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-finite-flat-singleton-fibre-chart",
+ "kind": "statement",
+ "title": "Finite flat singleton fibre chart",
+ "statement": "For a finite flat morphism f:X→Y of locally Noetherian schemes and x∈X, there exist locally Noetherian schemes Z,T, etale maps a:Z→X and b:T→Y, a finite flat map g:Z→T, and z∈Z such that af=gb, a(z)=x, z is the unique point over g(z), and for every w∈Z, g has an etale source neighbourhood at w if and only if f has one at a(w). No ramification or dimension assumption is required.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02LK and 0BJH, etale localization and invariance of the etale locus"
+ },
+ "proof": [
+  {
+   "text": "Apply 02LK to the finite, hence quasi-finite, morphism at x. After an etale\nbase neighbourhood T of f(x), select the finite open-and-closed piece Z containing\nan appropriate lift z of x and having only z above g(z). The map a to X and the\nmap b to Y are etale and the square commutes. Flatness is preserved by base\nchange and restriction; the schemes are locally Noetherian because etale maps\nare locally of finite type. For each w in Z, g is etale at w if and only if\nf is etale at a(w): the equation a f = g b and etale b identify the etale\nloci of g and a f, and etale localization on the source identifies the latter\nwith the inverse image of the etale locus of f. These loci are open, so being\netale at a point is expressed by the existence of the indicated open neighbourhood.\nNo ramification hypothesis or positive-dimension hypothesis is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "V3",
+  "document": "Stacks Project",
+  "place": "Tags 02LK and 0BJH, etale localization and invariance of the etale locus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "singleton.*fibre|locallyPrincipal|discriminant.*etale",
+   "results": "{\"t\": \"2026-10-13T04:48:34Z\", \"tool\": \"grep\", \"query\": \"singleton.*fibre|locallyPrincipal|discriminant.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level statement; retained the source argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite flat morphism branch discriminant locally principal and etale singleton fibre chart",
+   "results": "{\"t\": \"2026-10-13T04:48:34Z\", \"tool\": \"leansearch\", \"query\": \"finite flat morphism branch discriminant locally principal and etale singleton fibre chart\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite flat morphism singleton fibre etale chart discriminant locally principal support dimension one",
+   "results": "{\"t\": \"2026-10-13T04:48:34Z\", \"tool\": \"leanfinder\", \"query\": \"Finite flat morphism singleton fibre etale chart discriminant locally principal support dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.Etale.toAlgebra\", \"Algebra.Etale\"], \"digest\": \"51051d49149da155\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level statement; retained the source argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change separates a point of a finite morphism as the unique point of a fibre",
+   "results": "{\"t\": \"2026-10-13T04:53:03Z\", \"tool\": \"leanfinder\", \"query\": \"Etale base change separates a point of a finite morphism as the unique point of a fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.comp\"], \"digest\": \"eddcd8dc81f8cff5\"}",
+   "date": "2026-10-13",
+   "verdict": "Second reading: related algebraic tools only; no direct replacement for this scheme-level statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtaleNeighbourhood",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: the extension is etale exactly where it is flat (0EY6(3)); local ramification step using 0BJH.",
+   "via": [
+    "lem-sbc-finite-flat-codimension-one-etale-neighbourhood",
+    "lem-sbc-flat-depth-two-finite-formally-unramified",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatSingletonFibreChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteFlatSingletonFibreChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_flat_singleton_fibre_chart",
+  "statement": "theorem exists_finite_flat_singleton_fibre_chart\n    {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]\n    (f : X ⟶ Y) [IsFinite f] [Flat f] (x : X) :\n    ∃ (Z T : Scheme.{u}) (a : Z ⟶ X) (b : T ⟶ Y) (g : Z ⟶ T) (z : Z),\n      Etale a ∧ Etale b ∧ IsFinite g ∧ Flat g ∧\n      IsLocallyNoetherian Z ∧ IsLocallyNoetherian T ∧\n      a ≫ f = g ≫ b ∧ a z = x ∧\n      (∀ w : Z, g w = g z → w = z) ∧\n      (∀ w : Z, (∃ V : Z.Opens, w ∈ V ∧ Etale (V.ι ≫ g)) ↔\n        ∃ V : X.Opens, a w ∈ V ∧ Etale (V.ι ≫ f))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T054243-L-451120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T054243-L-451120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
