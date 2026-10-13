@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-overlap-comparison-refinement",
+ "kind": "statement",
+ "title": "Comparison transport through canonical refinement of overlap transitions",
+ "statement": "Let U be an open cover of a scheme X and q₀:Y→X, q:Z→X, r:Z→Y satisfy r followed by q₀ equals q. Let p₀:L→Y and p:L→Z satisfy p followed by r equals p₀. Let T be natural overlap transitions on the pullback cover U_Y and M a module on L [def-pc-local-overlap-transitions]. If the p₀-pullback of T admits an invertible component comparison to the restriction descent data of M on U_Y pulled back to L, then the p-pullback of the canonical refinement pullback of T to U_Z admits an invertible component comparison to the restriction descent data of M on U_Z pulled back to L. No finiteness condition, inverse-limit condition, or coherence at Y or Z is required.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof (Zariski gluing), and clause (3); https://stacks.math.columbia.edu/tag/01ZR"
+ },
+ "stmt_deps": [
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Construct t from each refined chart at L to the original chart at L by pullback.lift. Its first projection is the refined chart projection to L. Its second projection is the refined chart projection to Z followed by the canonical refinement map to Y. The two equations follow from lift_fst and lift_snd and p≫r=p₀.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull the supplied comparison along t. Its limit transitions are coherent by Comparison.coherent, so isoMk and pullFunctor.mapIso prove commutation for the pulled comparison. Postcompose with Mathlib toDescentDataCompPullFunctorIso and the mapId component to identify the target with the refined restriction datum of M.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private comp_comm lemma expands pulledHom_eq twice and uses mapComp associativity to identify a double raw pullback with its direct composite. It does not assume the original T coherent. Use its inverse direction on the original limit path, then its forward direction on the refinement path. Postcompose the component isomorphisms and cancel their inverse identities to prove commutation. This constructs the required comparison explicitly.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof: canonical refinement and transport of the limit comparison; categorical computation from Mathlib DescentData.pullFunctorCompIso"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport an invertible component comparison of raw natural overlap maps under canonical refinement of a scheme open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a component comparison for pseudofunctor overlap transitions through composition of pullbacks",
+   "results": "pullHom_pullHom, map_eq_pullHom, pullFunctorObjHom and pullFunctorCompIso. The latter requires genuine descent data, whereas T is not coherent.",
+   "date": "2026-10-13",
+   "verdict": "related tools used"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso",
+   "results": "Five hits, the composition iso and its component/equivalence lemmas. Read the proof and reuse its associativity calculation for raw maps.",
+   "date": "2026-10-13",
+   "verdict": "related tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "ChosenPullback.*Coherent|Coherent.*ChosenPullback|pullFunctorCompIso",
+   "results": "Three hits in DescentData.lean, all for genuine descent data. No raw overlap Comparison refinement theorem.",
+   "date": "2026-10-13",
+   "verdict": "related tool used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR first proof: canonical refinement and transport of the limit comparison; categorical computation from Mathlib DescentData.pullFunctorCompIso",
+   "via": [
+    "lem-pc-fp-overlap-eventual-coherence",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapComparisonRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapComparisonRefinement.lean",
+  "declaration": "AlgebraicGeometry.nonempty_overlap_comparison_refinement",
+  "statement": "theorem nonempty_overlap_comparison_refinement\n    {X Y Z L : Scheme.{u}} (U : X.OpenCover.{u})\n    (q₀ : Y ⟶ X) (q : Z ⟶ X) (r : Z ⟶ Y) (hr : r ≫ q₀ = q)\n    (p₀ : L ⟶ Y) (p : L ⟶ Z) (hp : p ≫ r = p₀)\n    (T : modulesPseudofunctor.OverlapTransitions (U.pullback₁ q₀).f)\n    (M : L.Modules)\n    (hcmp : Nonempty ((T.pull (p := p₀) (α := fun a ↦ a)\n      (fun a ↦ Scheme.Cover.pullbackHom_map (U.pullback₁ q₀) p₀ a)).Comparison\n      ((modulesPseudofunctor.toDescentData ((U.pullback₁ q₀).pullback₁ p₀).f).obj M))) :\n    let V : Z.OpenCover.{u} := U.pullback₁ q\n    let T' := T.pull (p := r) (α := fun a ↦ a)\n      (p' := overlapRefinementHom U q₀ q r hr)\n      (fun a ↦ overlapRefinementHom_map U q₀ q r hr a)\n    Nonempty ((T'.pull (p := p) (α := fun a ↦ a)\n      (fun a ↦ V.pullbackHom_map p a)).Comparison\n      ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M))",
+  "declarations": [
+   "AlgebraicGeometry.nonempty_overlap_comparison_refinement"
+  ],
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141526-L-379026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141526-L-379026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

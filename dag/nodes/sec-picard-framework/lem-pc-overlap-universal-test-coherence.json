@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-overlap-universal-test-coherence",
+ "kind": "statement",
+ "title": "Coherence from diagonal and universal triple tests",
+ "statement": "For a category C, a Cat-valued pseudofunctor F on Cᵒᵖ, and a family f_a:X_a→S, let T be natural overlap transitions [def-pc-local-overlap-transitions]. Choose pairwise pullbacks sq_ab of f_a and f_b and compatible threefold pullbacks sq₃_abc. If T has identity on each chart tested with its two identity maps and its composition equation on each chosen threefold pullback with the universal projections, then T is coherent on every test object. There are no scheme, finite presentation, directed limit or comparison hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof (Zariski gluing), and clause (3); https://stacks.math.columbia.edu/tag/01ZR"
+ },
+ "stmt_deps": [
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Pull the chart diagonal identity along an arbitrary map into that chart. Naturality identifies the pulled transition with its given transition. Pullback preserves identity, and the pseudofunctor comparison isomorphisms cancel.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The threefold pullback universal property gives a simultaneous lift of any three maps having the same composite to S. Pull the tested composition equation along that lift. Naturality identifies all three maps; pullback preserves their composition after cancellation of the comparison isomorphisms.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof: extend universal chart equations to all test objects using ChosenPullback₃.exists_lift and pullHom_hom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherence for pseudofunctor natural overlap transitions from diagonal and chosen threefold pullback tests",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural overlap transitions follows from identity on chart diagonal and composition on chosen threefold pullbacks",
+   "results": "chartAt_comp; StructureGroupoid.compatible; HasGroupoid.compatible; FiberBundleCore.coordChange_comp; ChartedSpace.comp; StructureGroupoid.compatible_of_mem_maximalAtlas; writtenInExtChartAt_comp; ChartedSpaceCore.continuousOn_toFun",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.ChosenPullback₃.exists_lift",
+   "results": "CategoryTheory.Limits.ChosenPullback₃.exists_lift",
+   "date": "2026-10-13",
+   "verdict": "related universal property used"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent_of_tests|coherent_of_universal_tests|ChosenPullback.*Coherent",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR first proof: canonical refinement and transport of the limit comparison; categorical computation from Mathlib DescentData.pullFunctorCompIso",
+   "via": [
+    "lem-pc-fp-overlap-eventual-coherence",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapUniversalTestCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapUniversalTestCoherence.lean",
+  "declaration": "AlgebraicGeometry.coherent_of_universal_tests",
+  "statement": "theorem coherent_of_universal_tests {C : Type*} [Category C] {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat} {ι : Type*} {S : C} {X : ι → C} {f : ∀ a, X a ⟶ S} (T : F.OverlapTransitions f) (sq : ∀ a b, Limits.ChosenPullback (f a) (f b)) (sq₃ : ∀ a b c, Limits.ChosenPullback₃ (sq a b) (sq b c) (sq a c)) (hself : ∀ a, T.hom (f a) (𝟙 _) (𝟙 _) (Category.id_comp _) (Category.id_comp _) = 𝟙 _) (hcomp : ∀ a b c, T.hom (sq₃ a b c).p (sq₃ a b c).p₁ (sq₃ a b c).p₂ (sq₃ a b c).w₁ (sq₃ a b c).w₂ ≫ T.hom (sq₃ a b c).p (sq₃ a b c).p₂ (sq₃ a b c).p₃ (sq₃ a b c).w₂ (sq₃ a b c).w₃ = T.hom (sq₃ a b c).p (sq₃ a b c).p₁ (sq₃ a b c).p₃ (sq₃ a b c).w₁ (sq₃ a b c).w₃) : T.Coherent",
+  "declarations": [
+   "AlgebraicGeometry.coherent_of_universal_tests"
+  ],
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141526-L-379026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141526-L-379026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,7 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationOverlapChartEquations
+import Sheaf.AlgebraicGeometry.OverlapComparisonRefinement
+import Sheaf.AlgebraicGeometry.OverlapUniversalTestCoherence
 
 /-! # Eventual identity and cocycle equations for lifted maps
 
@@ -22,6 +24,19 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private lemma overlapLimitMap_stage_comp {I : Type u} [Preorder I]
+    (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec))
+    {i j k : I} {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
+    (hij : i ≤ j) (hjk : j ≤ k) :
+    overlapLimitMap R c f (hij.trans hjk) ≫ overlapStageMap R f hij hjk =
+      overlapLimitMap R c f hij := by
+  dsimp only [overlapLimitMap, overlapStageMap]
+  rw [← baseChangeMap_comp]
+  congr 1
+  ext
+  exact c.w (homOfLE hjk).op
+
 
 /-- The specific lifted natural overlap maps become coherent at a later stage.
 Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing, and Tag 05N7,
@@ -86,6 +101,33 @@ theorem exists_finitePresentation_overlap_eventual_coherence
           T'.Coherent ∧
             Nonempty ((T'.pull (p := p) (α := fun a ↦ a)
               (fun a ↦ V.pullbackHom_map p a)).Comparison
-              ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M)) := by sorry
+              ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M)) := by
+  classical
+  intro k hjk
+  dsimp only
+  intro T hT hcmp
+  obtain ⟨ε⟩ := hcmp
+  obtain ⟨l, hkl, sq, sq₃, hself, hcomp⟩ :=
+    exists_finitePresentation_overlap_eventual_chart_equations R c hc i f j hij U
+      N hN hNq k hjk T hT ε.coherent
+  refine ⟨l, hkl, ?_, ?_⟩
+  · generalize ht : T.pull
+        (p := overlapStageMap R f (hij.trans hjk) hkl) (α := fun a ↦ a)
+        (p' := overlapRefinementHom U (overlapStageMap R f hij hjk)
+          (overlapStageMap R f hij (hjk.trans hkl))
+          (overlapStageMap R f (hij.trans hjk) hkl)
+          (overlapStageMap_comp R f hij hjk hkl))
+        (fun a ↦ overlapRefinementHom_map U (overlapStageMap R f hij hjk)
+          (overlapStageMap R f hij (hjk.trans hkl))
+          (overlapStageMap R f (hij.trans hjk) hkl)
+          (overlapStageMap_comp R f hij hjk hkl) a) = TT at hself hcomp ⊢
+    exact coherent_of_universal_tests (F := modulesPseudofunctor) TT sq sq₃ hself hcomp
+  · exact nonempty_overlap_comparison_refinement U (overlapStageMap R f hij hjk)
+      (overlapStageMap R f hij (hjk.trans hkl))
+      (overlapStageMap R f (hij.trans hjk) hkl)
+      (overlapStageMap_comp R f hij hjk hkl)
+      (overlapLimitMap R c f (hij.trans hjk))
+      (overlapLimitMap R c f (hij.trans (hjk.trans hkl)))
+      (overlapLimitMap_stage_comp R c f (hij.trans hjk) hkl) T M ⟨ε⟩
 
 end AlgebraicGeometry

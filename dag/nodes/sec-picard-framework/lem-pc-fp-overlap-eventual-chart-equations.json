@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-fp-overlap-eventual-chart-equations",
+ "kind": "statement",
+ "title": "Eventual equations on diagonal and triple overlap test charts",
+ "statement": "Let I be a directed preorder, R a diagram of Noetherian commutative rings, c an affine limit cone of Spec(R), and f:X_i→Spec(R_i) a quasi-compact quasi-separated locally finitely presented morphism [def-pc-scheme, def-pc-morphism-conventions, def-pc-base-change]. Fix j≥i, a finite affine open cover U of X_j, and finitely presented quasi-coherent modules N_a on its charts [pqf-def-coherent]. Suppose k≥j and natural overlap transitions T on U pulled back to X_k [def-pc-local-overlap-transitions] have components isomorphic to the pullbacks of N_a, and the limit pullback of T is coherent. There is l≥k where the prescribed canonical refinement pullback T′ has identity transitions on the diagonal test of every chart, and satisfies the composition equation on the universal threefold overlap of every triple of charts. The conclusion supplies chosen pairwise pullbacks sq and compatible chosen threefold pullbacks sq₃ on the refined cover. It asserts only the equations on these finitely many universal tests, and asserts no comparison to any module on the limit.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof (Zariski gluing), and clause (3); https://stacks.math.columbia.edu/tag/01ZR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof": [
+  {
+   "text": "At k evaluate the diagonal and triple composition defects. Quasi-separatedness makes the triple overlaps quasi-compact. Restrictions of the supplied components are finitely presented and quasi-coherent, by their prescribed component isomorphisms and preservation under pullback. The limit coherence hypothesis and pullback naturality say that the pullbacks of these difference maps are zero. Regard each test scheme as a quasi-compact scheme over Spec(R_k). Identify its identity and limit base changes by their canonical pullback isomorphisms.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finitePresentation_zero_map_descent to each difference map, with initial index and supplied stage both k. Its finite-type source and finitely presented target hypotheses hold. This gives a stage above k where that particular diagonal or triple defect vanishes. This uses the scheme zero-map clause, avoiding a new reconstruction of affine ring/module models.",
+   "uses": [
+    "lem-pc-fp-zero-map-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a common upper bound of these finitely many stages and k. Pullback preserves zero maps, subtraction and composition. The canonical base changes of the pairwise and threefold test pullbacks are chosen pullbacks at the new stage; identify their projections by universal properties. Naturality and pseudofunctor composition comparisons identify the maps with the prescribed pullback T′. The resulting diagonal and triple equations are the claimed tests. If the cover is empty take l=k.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "lem-pc-fp-zero-map-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR (3), finite-stage chart equations in the original coherence proof, using the existing zero-map descent clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Eventually identity and triple overlap cocycle equations for finitely presented quasi coherent modules over inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of overlap transition maps descends eventually for finitely presented quasi-coherent modules over a directed inverse limit of schemes",
+   "results": "Finite-presentation predicates and basic quasicoherent sheaf facts; none stabilizes chart equations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Pseudofunctor.mapComp",
+   "results": "Loogle does not know the unqualified identifier; no hits. The qualified pullFunctorCompIso search succeeds and is used for comparison transport.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ChosenPullback|pullHom_pullHom",
+   "results": "Read ChosenPullback and DescentDataPrime. Their universal-property and naturality lemmas extend chart equations, but do not give finite-stage equations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR (3), finite-stage chart equations in the original coherence proof, using the existing zero-map descent clause",
+   "via": [
+    "lem-pc-fp-overlap-eventual-coherence",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapChartEquations",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapChartEquations.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_overlap_eventual_chart_equations",
+  "statement": "theorem exists_finitePresentation_overlap_eventual_chart_equations\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [Finite U.I₀] [∀ a, IsAffine (U.X a)]\n    (N : (a : U.I₀) → (U.X a).Modules)\n    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)\n    :\n    ∀ (k : I) (hjk : j ≤ k),\n      let q₀ := overlapStageMap R f hij hjk\n      let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=\n        U.pullback₁ q₀\n      let p₀ := overlapLimitMap R c f (hij.trans hjk)\n      ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f,\n        (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅\n          (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) →\n        (T.pull (p := p₀) (α := fun a ↦ a)\n          (fun a ↦ V₀.pullbackHom_map p₀ a)).Coherent →\n        ∃ (l : I) (hkl : k ≤ l),\n          let q := overlapStageMap R f hij (hjk.trans hkl)\n          let V : (pullback f (Spec.map\n              (R.map (homOfLE (hij.trans (hjk.trans hkl)))))).OpenCover.{u} :=\n            U.pullback₁ q\n          let r := overlapStageMap R f (hij.trans hjk) hkl\n          let s := overlapRefinementHom U q₀ q r\n            (overlapStageMap_comp R f hij hjk hkl)\n          let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s)\n            (fun a ↦ overlapRefinementHom_map U q₀ q r\n              (overlapStageMap_comp R f hij hjk hkl) a)\n          ∃ sq : ∀ a b, ChosenPullback (V.f a) (V.f b),\n          ∃ sq₃ : ∀ a b d, ChosenPullback₃ (sq a b) (sq b d) (sq a d),\n            (∀ a, T'.hom (V.f a) (𝟙 _) (𝟙 _) (Category.id_comp _) (Category.id_comp _) = 𝟙 _) ∧\n            (∀ a b d,\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₂\n                (sq₃ a b d).w₁ (sq₃ a b d).w₂ ≫\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃\n                (sq₃ a b d).w₂ (sq₃ a b d).w₃ =\n              T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃\n                (sq₃ a b d).w₁ (sq₃ a b d).w₃)",
+  "declarations": [
+   "AlgebraicGeometry.exists_finitePresentation_overlap_eventual_chart_equations"
+  ],
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141526-L-379026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141526-L-379026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
