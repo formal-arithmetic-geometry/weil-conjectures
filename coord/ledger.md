@@ -12134,3 +12134,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/J2/Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent (stage 3; reviewer PASS; first push; landing 20261013T111855-L-3053584 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/J2/Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses (stage 3; reviewer PASS; first push; landing 20261013T111856-L-3053766 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:18 L: merged deliver/J2/Sheaf.AlgebraicGeometry.RadicialGenericReducedPreparation (stage 3; reviewer PASS; first push; landing 20261013T111856-L-3053914 (interface); batch 20261013T111833; modules 3; new nodes 2)
+- 11:18 L: merged deliver/J3/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryRepresentativeCoherence (stage 3; reviewer PASS; after a return; landing 20261013T111856-L-3054052 (interface); batch 20261013T111833; modules 2; new nodes 1)

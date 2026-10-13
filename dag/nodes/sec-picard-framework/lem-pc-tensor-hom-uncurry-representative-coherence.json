@@ -13,32 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Resolve L and L' by K-flat complexes. Hom into the fixed K-injective\nresolutions and tensoring with P or P' invert these quasi-isomorphisms. On these\nmodels, maps into the Hom complex are chain maps modulo homotopy, since Hom from\na K-flat complex into a K-injective complex is K-injective. Represent the equalities\nof derived objects by the identity morphisms after equality transport, and compute\nthese morphisms by roofs on common K-flat resolutions. The equality of the input\nmorphisms makes the two resulting chain maps homotopic after these comparisons.\nUncurry the degree-minus-one components of this homotopy and extend them over the\ncoproduct defining the total tensor. The Hom differential formula gives a homotopy\nbetween the uncurried chain maps: its boundary is their difference, with the same\nKoszul signs as the total tensor differential. Evaluation commutes with all comparison\nmaps, by naturality of the sheaf tensor-Hom adjunction and the Hom projections;\nverify this on every tensor summand and use the coproduct universal property.\nLocalizing the homotopy and cancelling the quasi-isomorphisms, with the natural\nHom resolution isomorphism, tensor model comparison and inverse augmentation,\ngives the asserted equality after equality transport. Express it as HEq to avoid\nchoosing casts. This works for zero maps, zero complexes and unbounded complexes;\nno injectivity or flatness of L or L' is assumed.",
+   "text": "Specialize localized chain-map evaluation naturality with source the Hom complex, its input the identity, source-variable map phi, and identity maps in L and M. Functor preservation of identities simplifies the resulting input to phi. Tensor composition and the inverse-hom equation for the internal-Hom resolution isomorphism factor the evaluation through the normalized input tensor identity followed by normalized identity evaluation. No K-flatness is needed for this factorization.",
    "uses": [
-    "lem-pc-tensor-hom-uncurry-differential",
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pur-hom-complex-global-cochains",
-    "lem-sc-derived-hom-tensor-total"
+    "lem-pc-tensor-hom-uncurry-localized-evaluation"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply identity-evaluation coherence to the literal equalities QL=QLprime and QM=QMprime. This compares only the fixed evaluation morphisms, independently of P and phi.",
+   "uses": [
+    "lem-pc-tensor-hom-identity-evaluation-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equality induction on QP=QPprime, QL=QLprime and QM=QMprime puts the normalized inputs and identity evaluations in the same Hom sets. Convert their heterogeneous equalities to equalities, substitute, and conclude heterogeneous equality of the tensor-composites. Rewrite both factorization equations to obtain the original conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-tensor-hom-uncurry-differential",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pur-hom-complex-global-cochains",
-  "lem-sc-derived-hom-tensor-total"
+  "lem-pc-tensor-hom-uncurry-localized-evaluation",
+  "lem-pc-tensor-hom-identity-evaluation-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E1",
+  "group": "J3",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; equality-transport specialization of representative independence, with details written by E1"
+  "place": "Tags 08DJ, 0A90, 0A96; factor arbitrary representatives through identity evaluation, then equality induction. Repair removes an unavailable normalized-comparison source import."
  },
  "mathlib_searches": [
   {
@@ -142,9 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T082337-L-1633054",
-  "kind": "interface"
+  "landing": "20261013T111856-L-3054052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
