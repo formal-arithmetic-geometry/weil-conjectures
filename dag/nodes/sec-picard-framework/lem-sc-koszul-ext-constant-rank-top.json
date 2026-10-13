@@ -21,23 +21,7 @@
  },
  "proof": [
   {
-   "text": "Choose an affine Koszul chart at the point, set A to its section ring and I to the kernel ideal. The closed immersion gives the quotient-spectrum identification. The Koszul quotient augmentation is a quasi-isomorphism, and exact associated-module sheafification gives a finite free resolution of the restricted structure-sheaf pushforward. Terms above its length vanish by the exterior-power basis; extend the complex to integer degrees.",
-   "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-affine-quotient-resolution-sheafification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict derived internal Hom to the chart and compute it by the bounded finite free Hom model into the structure sheaf in degree zero. On standard affine opens, finite free coordinates identify sheaf Hom with associated module Hom and commute with restriction. Homology commutes with exact associated-module sheafification. Use the common K-injective Hom complex to compare the standard and supplied derived universes.",
-   "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The Koszul conormal basis and affine conormal frame identify the sequence length m with the finrank of C at the chosen point.",
+   "text": "At every z in V choose an affine Koszul chart of length m. Choose the conormal basis and use the affine conormal frame to compute its stalk finrank as m. The given constant finrank hypothesis implies m=n.",
    "uses": [
     "lem-sc-koszul-conormal-basis",
     "lem-sc-affine-conormal-frame"
@@ -45,42 +29,37 @@
    "elementary": false
   },
   {
-   "text": "On the open V the stalk-rank hypothesis gives m=n. The normalized dual Koszul comparison identifies degree-n cohomology with the quotient module exterior determinant of the dual conormal. Pullback is taken only after cohomology: tensoring an A/I-module with A/I preserves it canonically. The affine conormal identification turns I/I² into C on the closed preimage. The finite free coordinate formulas for internal Hom and exterior power give the specified sheaf exterior power.",
+   "text": "Construct the actual scalar-to-self Ext coefficient map induced by the pullback-pushforward adjunction unit O_Y -> i_*O_Z. Apply derived internal Hom, degree-n homology, tensor pullback, then restriction to V. The length-n local coefficient lemma makes every stalk map bijective. Reflect the isomorphism using the stalk criterion for module sheaves.",
    "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-affine-conormal-frame",
-    "def-sc-sheaf-exterior-power",
-    "def-pur-sheaf-hom"
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-weil-pbc-module-iso-on-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "The intrinsic Ext determinant comparisons commute with localization and changes of regular generators. Refine chart overlaps by affine standard opens. The comparisons and their inverses agree there and therefore glue by the sheaf condition on V. At n=0 the empty complex computes the structure sheaf, the zeroth exterior power; on empty V both sheaves are zero.",
+   "text": "The all-degree self-coefficient Ext comparison on the regular locus identifies the codomain with the nth exterior sheaf of the restricted conormal dual. Compose this comparison with asIso of the coefficient morphism.",
    "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex"
+    "lem-sc-koszul-self-ext-exterior"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-koszul-regular-sequence-dual-complex",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-hom-finite-free-model",
   "lem-sc-koszul-conormal-basis",
   "lem-sc-affine-conormal-frame",
-  "def-sc-sheaf-exterior-power",
-  "def-pur-sheaf-hom"
+  "lem-sc-koszul-ext-coefficient-stalk-iso",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-sc-koszul-self-ext-exterior"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "A2",
+  "agent": "P3",
   "date": "2026-10-13",
   "based_on": {
-   "document": "literature/stacks-project/duality.tex",
-   "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
+   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+   "place": "Lemma 48.15.5, canonical coefficient map to self Ext and Lemma 48.15.4"
   },
-  "note": "Koszul calculation follows the cited source; rank-support reconstruction is written explicitly using the open adjunction and stalks."
+  "note": "Compiling reduction to local coefficient bijectivity and the all-degree self-Ext exterior comparison; the rank identification and stalk detection are proved from existing declarations."
  },
  "mathlib_searches": [
   {
@@ -155,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T045510-L-123855",
+  "landing": "20261013T100050-L-2474954",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

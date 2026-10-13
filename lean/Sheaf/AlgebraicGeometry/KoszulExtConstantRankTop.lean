@@ -16,12 +16,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+import Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkIso
+import Sheaf.AlgebraicGeometry.KoszulSelfExtExterior
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Constant-rank top scalar Koszul Ext
 
@@ -35,31 +34,23 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Unfolding the two derived coefficient objects requires additional elaboration fuel.
 /-- The top scalar Ext on a constant conormal-rank open is its dual determinant.
 
 Source: Stacks Project, Tag 0BQZ, proof of lemma-regular-immersion-ext.
 (blueprint: lem-sc-koszul-ext-constant-rank-top).
 
-Proof: Fix z in V and choose an affine Koszul chart with regular sequence f of
-length m. Its conormal basis localizes to a basis at z; the affine conormal frame
-computes the stalk finrank as m, so hVrank gives m=n. Shrink within V. The Koszul
-augmentation resolves the quotient by finite free modules. Restrict derived
-internal Hom to the chart and compute it by bounded finite free Hom into the
-structure sheaf in degree zero. Exact associated-module sheafification identifies
-this complex with the sheafified dual Koszul complex, extended by zero to integer
-degrees. The normalized dual Koszul comparison identifies degree-n cohomology
-with the quotient-module determinant of the dual of I/I². Pullback AFTER taking
-cohomology tensors this quotient module with the quotient ring, canonically
-leaving it unchanged. The affine conormal identification and finite free internal
-Hom identify the result with exteriorSheaf of the restricted conormal dual.
-The intrinsic Ext determinant comparison is independent of regular generators
-and commutes with localization. On overlaps refine by affine standard opens;
-the normalized comparisons and their inverses agree there. The sheaf condition
-glues both directions to the stated isomorphism on V. This does not require
-quasi-separatedness, a rank function away from V, or regularity away from V.
-For n=0 the empty Koszul resolution gives the structure sheaf, the zeroth
-exterior power. For empty V both objects are zero. The common K-injective Hom
-complex transports the calculation to the supplied derived universe. -/
+Proof: Fix z in V and choose an affine Koszul chart of length m. The conormal
+basis and affine conormal frame compute its stalk finrank as m; hVrank gives
+m=n. The structure-sheaf coefficient map induces a morphism from scalar Ext to
+self-coefficient Ext. Restrict its tensor pullback to V. The local coefficient
+comparison is bijective on each stalk by the length-n Koszul calculation, hence
+this restricted morphism is an isomorphism. Self-coefficient Ext is canonically
+the exterior power of the conormal dual on the regular locus, in every degree.
+Compose these isomorphisms. This argument uses no rank or regularity away from V;
+empty V is covered by the vacuous stalk criterion, and n=0 by the empty Koszul
+coefficient calculation. -/
 theorem koszulRegularImmersion_ext_constantRank_top
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -87,6 +78,23 @@ theorem koszulRegularImmersion_ext_constantRank_top
         ((Scheme.Modules.restrictFunctor V.ι).obj
           (SheafOfModules.homObj (R := Z.sheaf)
             ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
-            (SheafOfModules.unit Z.ringCatSheaf))) n) := by sorry
+            (SheafOfModules.unit Z.ringCatSheaf))) n) := by
+  classical
+  dsimp only
+  let φ := (Scheme.Modules.restrictFunctor V.ι).map
+    (koszulScalarExtCoefficientMap i n)
+  have : IsIso φ := by
+    apply Scheme.Modules.isIso_of_bijective_stalkLinearMap
+    intro z
+    obtain ⟨U, hzU, m, f, hf, hreg⟩ := hregular z.1 z.2
+    obtain ⟨b, _⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
+      Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
+    have hdim := (affine_conormal_frame i U m b).2 z.1 hzU
+    have hmn : m = n := hdim.symm.trans (hVrank z.1 z.2)
+    cases hmn
+    exact koszulRegularImmersion_ext_coefficient_stalk_iso i V n z U hzU f hf hreg
+  obtain ⟨e⟩ := koszulRegularImmersion_self_ext_exterior i V n hregular
+  exact ⟨asIso φ ≪≫ e⟩
+
 
 end AlgebraicGeometry

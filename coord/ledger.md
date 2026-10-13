@@ -11920,3 +11920,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FiniteRelationDescent (stage 3; reviewer PASS; first push; landing 20261013T100048-L-2474554 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/P2/Sheaf.AlgebraicGeometry.PerfectLowestMatrixCharts (stage 3; reviewer PASS; first push; landing 20261013T100048-L-2474674 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso (stage 3; reviewer PASS; first push; landing 20261013T100049-L-2474808 (interface); batch 20261013T095923; modules 5; new nodes 4)
+- 10:00 L: merged deliver/P3/Sheaf.AlgebraicGeometry.KoszulExtConstantRankTop (stage 3; reviewer PASS; first push; landing 20261013T100050-L-2474954 (interface); batch 20261013T095923; modules 3; new nodes 2)
