@@ -36,81 +36,48 @@
  ],
  "proof": [
   {
-   "text": "Put $H=H^0(\\mathbf M)$ and $u=f_i$. For each $j$ let $B_j=M_j\\otimes_RS$ and $C_{jk}=(M_k)_{f_j}$. Define an $R$-linear map $d:M'\\times\\prod_jM_j\\to\\prod_jB_j\\times\\prod_{j,k}C_{jk}$ whose $j$-component is $\\alpha_j(m'/1)-m_j\\otimes1$ and whose $(j,k)$-component is $\\alpha_{jk}(m_j/1)-m_k/1$. By the displayed definition of $H$ in the statement, $H=\\ker d$ with its inclusion into the finite product. The maps and differences are $R$-linear because the localization and tensor maps are linear [def-weil-pbc-formal-glueing-data], [def-weil-pbc-module-localization-away], [def-weil-module-base-change].",
+   "text": "Extract both compatibility equations from membership in the intersection of kernels defining H^0.",
    "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-module-base-change"
+    "def-weil-pbc-formal-glueing-H0",
+    "def-weil-pbc-formal-glueing-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Remark 05EL (remark-glueing-data), displayed definition of H^0 and its exact sequence; Lemma 05EQ (lemma-base-change-glue)"
-   }
+   "elementary": true
   },
   {
-   "text": "The natural map $H_u\\to (M')_u\\times\\prod_j(M_j)_u$ identifies $H_u$ with the families satisfying the localized equations of step 1. Indeed localization at $u$ is exact [lem-weil-pbc-localization-module-exact], so it preserves the kernel of $d$. Here localization commutes with the two finite products: a tuple of fractions has a common denominator $u^n$, obtained by taking the largest of its finitely many exponents, and a tuple is zero after localization precisely when one common power of $u$ kills every coordinate. Thus the localized map of $d$ is exactly the list of its component equations, localized at $u$. For surjectivity of the identification directly, write a compatible localized tuple with common denominator $u^n$; each of the finitely many equations becomes zero after multiplying by some power of $u$, so one common power $u^N$ clears them all. Its numerator multiplied by $u^N$ lies in $H$ and represents the original tuple as a fraction in $H_u$. The same common-power argument proves injectivity.",
+   "text": "For a compatible section with zero i-th coordinate, alpha_i injectivity makes its prime coordinate zero after localization at f_i. The (i,j) overlap equations make every chart coordinate zero after localization at f_i. Apply IsLocalizedModule.exists_of_eq to the product of the prime localization map and the finite product of chart localization maps (Mathlib IsLocalizedModule.prodMap and IsLocalizedModule.pi), to get a single denominator killing the whole section. Apply this to a difference of sections to obtain the equality-clearing axiom.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-formal-glueing-data",
     "def-weil-pbc-module-localization-away"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 05EQ (lemma-base-change-glue), proof omitted in the source; applied to localization at f_i as in the proof of Proposition 05ER (proposition-equivalence)"
-   }
+   "elementary": true
   },
   {
-   "text": "For $x\\in M_i$ construct a localized tuple $e(x)$. Its $M'$-coordinate is $y'=\\alpha_i^{-1}(x\\otimes1)\\in(M')_u$; its $M_j$-coordinate is $y_j=\\alpha_{ij}(x/1)\\in(M_j)_u$ for every $j$. These expressions are meaningful because $u=f_i$ is invertible on $M_i$, $M_i\\otimes_RS$, and $(M_j)_u$ [def-weil-pbc-module-localization-away], [def-weil-pbc-formal-glueing-data]. The cocycle condition (b) with all three indices $i$ says $\\alpha_{ii}^2=\\alpha_{ii}$ after the canonical iterated-localization identifications; since $\\alpha_{ii}$ is an isomorphism, it is the identity. Hence $y_i=x/1$, identified with $x$ under $(M_i)_u\\cong M_i$. The tuple $e(x)$ is $R$-linear in $x$.",
+   "text": "The chart-power-lift lemma gives for each x in M_i a compatible section h and exponent n with p_i(h)=f_i^n x; this is the denominator-surjectivity axiom.",
    "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "lem-weil-pbc-formal-glueing-H0-chart-power-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 05EP (lemma-equivalence-I-unit), proof: after a generator becomes a unit one component recovers the others; Remark 05EL, cocycle condition (b)"
-   }
+   "elementary": false
   },
   {
-   "text": "The tuple $e(x)$ satisfies the localized equations of step 2. For the $j$th equation, localize condition (a) of [def-weil-pbc-formal-glueing-data] at $u=f_i$ and evaluate it on $y'/1\\in((M')_{f_i})_{f_j}$. Its left side, $(\\alpha_{ij}\\otimes_RS)c^{M_i}_{f_j}(\\alpha_i)_{f_j}(y'/1)$, is $\\alpha_{ij}(x/1)\\otimes1=y_j\\otimes1$; its right side, $c^{M_j}_{f_i}(\\alpha_j)_{f_i}\\sigma^{M'}_{f_i,f_j}(y'/1)$, is the image of $\\alpha_j(y')$ under the tensor-localization identification. Hence the $j$th localized equation holds [lem-weil-pbc-formal-glueing-canonical-maps] (2), (3). For the $(j,k)$th equation, evaluate condition (b) on $(x/1)/1$ in $((M_i)_{f_j})_{f_k}$ and localize at $u$: its left side is $\\alpha_{jk}(y_j/1)$ and its right side is $y_k/1$ after the swaps $\\sigma$ identify the iterated localizations [lem-weil-pbc-formal-glueing-canonical-maps] (2). Thus step 2 supplies an element $e(x)\\in H_u$ whose $i$th projection is $x$.",
+   "text": "The identity of M_i is a localization at f_i (isLocalizedModule_id), because M_i is an R_{f_i}-module. Its map_units axiom, the denominator-surjectivity axiom, and the equality-clearing axiom make p_i an IsLocalizedModule map. Use IsLocalizedModule.linearEquiv between the fraction localization of H^0 and M_i. The equation on h/1 is linearEquiv_apply; uniqueness follows from IsLocalizedModule.ext; bijectivity follows from the linear equivalence.",
    "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "lem-weil-pbc-formal-glueing-canonical-maps",
-    "lem-weil-pbc-localization-module-exact"
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization-away"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Remark 05EL (remark-glueing-data), conditions (a) and (b); Lemma 05EP (lemma-equivalence-I-unit); proof of Proposition 05ER (proposition-equivalence), second paragraph"
-   }
-  },
-  {
-   "text": "Conversely, let $(z',(z_j)_j)$ be a family in $H_u$ as described in step 2, and let $x=z_i\\in(M_i)_u=M_i$. Its $i$th equation says $\\alpha_i(z')=x\\otimes1$, hence $z'=\\alpha_i^{-1}(x\\otimes1)=y'$. Its $(i,j)$th equation says $z_j=\\alpha_{ij}(x/1)=y_j$ in $(M_j)_u$. Therefore the tuple equals $e(x)$, and the localized $i$th projection $H_u\\to M_i$ and $e$ are inverse $R$-linear maps. The universal property of localization [def-weil-pbc-module-localization-away] says this projection is the unique $R$-linear map taking $h/1$ to $p_i(h)$; it is bijective as required.",
-   "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 05EP (lemma-equivalence-I-unit) and proof of Proposition 05ER (proposition-equivalence), second paragraph: the i-th component of Psi after localization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-formal-glueing-H0",
   "def-weil-pbc-formal-glueing-data",
   "def-weil-pbc-module-localization-away",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-formal-glueing-canonical-maps"
+  "lem-weil-pbc-formal-glueing-H0-chart-power-lift",
+  "def-weil-ring-localization-away"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proposition 05ER (proposition-equivalence), second paragraph, using Remark 05EL and Lemmas 05EQ and 05EP; details of the base-change lemma 05EQ are omitted in Stacks and expanded here"
+  "place": "Proposition 05ER, second paragraph; P3 formalization of the kernel/equality-clearing and localization universal-property steps, with only the surjectivity numerator construction split off."
  },
  "mathlib_searches": [
   {
@@ -209,5 +176,15 @@
   "group": "H1",
   "result": "pass",
   "note": "h0 membership proved (sandbox) to be exactly alpha i (m'/1) = 1 ⊗ m_i and alpha_overlap i j (m_i/1) = m_j/1 for all i,j on restrict φ M' × Π piece; flat φ, Fin t → R, X : Data, fixed i; π R-linear H0_{f_i} → piece, π(h/1) = h.val.2 i, uniqueness over all R-linear π', Bijective; new def node fields per EXTRA NODES rule; no H^0 elsewhere in lean/Sheaf"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T082401-L-1642464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
