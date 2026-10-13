@@ -10,8 +10,9 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Algebra.FinitePresentationColimit
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.SquareZeroStalkCoefficientsSpread
+import Sheaf.AlgebraicGeometry.AffineFreeSheafStalkRealization
 
 /-! # A bounded free complex on an affine neighbourhood of a stalk
 
@@ -35,6 +36,31 @@ instance openModuleDirectImage_preservesZeroMorphisms (X : Scheme.{u}) (U : X.Op
   map_zero M N := by
     ext V m
     rfl
+
+private theorem affineSheafification_coordinate_free
+    (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U) (n : ℕ) :
+    Nonempty ((affinePerfectSheafification X U hU).obj
+      (ModuleCat.of Γ(X, U) (ULift.{0} (Fin n → Γ(X, U)))) ≅
+        SheafOfModules.free (R := (moduleRings X.toRingedSpace).over U)
+          (ULift.{u} (Fin n))) := by
+  let R := Γ(X, U)
+  let e : ULift.{0} (Fin n → R) ≃ₗ[R] (ULift.{u} (Fin n) →₀ R) :=
+    (ULift.moduleEquiv.trans (Finsupp.linearEquivFunOnFinite R R (Fin n)).symm).trans
+      (Finsupp.domLCongr (Equiv.ulift.symm : Fin n ≃ ULift.{u} (Fin n)))
+  let H := Modules.restrictFunctor hU.isoSpec.hom ⋙ (Modules.overEquiv U).inverse
+  have : PreservesColimitsOfSize.{u, u} (Modules.overEquiv U).inverse :=
+    (Modules.overEquiv U).symm.toAdjunction.leftAdjoint_preservesColimits
+  have : PreservesColimitsOfSize.{u, u} H := by
+    dsimp [H]
+    infer_instance
+  let unitIso := (Modules.overEquiv U).inverse.mapIso
+    ((Modules.restrictUnitIso hU.isoSpec.hom) ≪≫
+      Modules.overEquivFunctorObjUnitIso U) ≪≫
+      ((Modules.overEquiv U).unitIso.app
+        (SheafOfModules.unit ((moduleRings X.toRingedSpace).over U))).symm
+  refine ⟨(affinePerfectSheafification X U hU).mapIso e.toModuleIso ≪≫
+    H.mapIso (tildeFinsupp (ULift.{u} (Fin n))) ≪≫ ?_⟩
+  exact (SheafOfModules.mapFreeIso H (ULift.{u} (Fin n)) unitIso.symm).symm
 
 /-- The affine-local part of bounded free stalk-complex lifting.
 
@@ -84,7 +110,44 @@ theorem exists_boundedFree_stalk_complex_local_lift
           (((SheafOfModules.pushforward.{u}
               (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U) ⋙
             RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj L)) := by sorry
+            (ComplexShape.up ℤ)).obj L)) := by
+  classical
+  let E (i : ℤ) : ModuleCat.{u} (X.presheaf.stalk x) :=
+    ModuleCat.of (X.presheaf.stalk x) (ULift.{0} (Fin (d i) → X.presheaf.stalk x))
+  let eF (i : ℤ) : F.X i ≅ E i := eqToIso (hterms i)
+  let δ (i : ℤ) : E i ⟶ E (i + 1) :=
+    (eF i).inv ≫ F.d i (i + 1) ≫ (eF (i + 1)).hom
+  have hδ (i : ℤ) : δ i ≫ δ (i + 1) = 0 := by
+    simp only [δ, Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← Category.assoc (F.d i (i + 1)), F.d_comp_d, zero_comp, comp_zero]
+  obtain ⟨U, hxU, hU, D, hD, hcoeff⟩ :=
+    exists_squareZero_stalk_coefficients_spread X x d a b hd δ hδ
+  obtain ⟨e, he⟩ :=
+    exists_affine_freeSheaf_stalk_realization X x U hxU hU
+  let Φ := affinePerfectSheafification X U hU
+  let C := CochainComplex.of
+    (fun i : ℤ ↦ ModuleCat.of Γ(X, U) (ULift.{0} (Fin (d i) → Γ(X, U)))) D hD
+  let L := (Φ.mapHomologicalComplex (ComplexShape.up ℤ)).obj C
+  let T := SheafOfModules.pushforward.{u}
+      (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U) ⋙
+    RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  refine ⟨U, hxU, hU, L, ?_, ?_, ?_⟩
+  · intro i hi
+    apply Φ.map_isZero
+    change IsZero (ModuleCat.of Γ(X, U) (ULift.{0} (Fin (d i) → Γ(X, U))))
+    rw [hd i hi]
+    exact ModuleCat.isZero_of_subsingleton _
+  · intro i
+    exact affineSheafification_coordinate_free X U hU (d i)
+  · refine ⟨HomologicalComplex.Hom.isoOfComponents (fun i ↦ eF i ≪≫ e (d i)) ?_⟩
+    intro i j hij
+    obtain rfl : i + 1 = j := hij
+    change (eF i).hom ≫ (e (d i)).hom ≫ T.map (Φ.map (C.d i (i + 1))) =
+      F.d i (i + 1) ≫ (eF (i + 1)).hom ≫ (e (d (i + 1))).hom
+    simp only [C, CochainComplex.of_d]
+    rw [he (d i) (d (i + 1)) (D i) (δ i) (hcoeff i)]
+    simp [δ, Category.assoc]
+
 
 end
 end AlgebraicGeometry.Scheme

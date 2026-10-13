@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-affine-free-sheaf-stalk-realization",
+ "kind": "statement",
+ "title": "Natural finite-coordinate stalk comparison for affine sheafification",
+ "statement": "Let X be a scheme [def-pc-scheme], x in an affine open U, A = Gamma(X,U), and R = O_{X,x} [def-pc-module-stalk-functor]. Let Phi = affinePerfectSheafification X U hU, the existing tilde/restriction/slice-equivalence functor [lem-pc-affine-perfect-module-model], and let T be ordinary open direct image followed by the ambient module stalk functor. Put E_B(n) = ULift(Fin(n) -> B). There are isomorphisms e_n : E_R(n) -> T(Phi(E_A(n))) for all n. For any A-linear f : E_A(n) -> E_A(m) and R-linear g : E_R(n) -> E_R(m), if every standard-basis coefficient of f has germ equal to the corresponding coefficient of g, then T(Phi(f)) e_n = e_m g. This compares individual free modules and their maps, with no complex, bounds, square-zero condition, or shrinking assertion.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing affinePerfectSheafification functor, defined by tilde on Spec(A), restriction along the affine chart, and the inverse of overEquiv U. Its value on a coordinate module is the finite free sheaf on the standard basis.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural tilde stalk localization identifies a basis vector with its basis germ and localizes all its coefficients. Transport along the affine chart and the slice-site equivalence. In ordinary direct image, each neighbourhood V contained in U has the same sections as the local sheaf. These neighbourhoods are cofinal at x; taking their colimit therefore gives the ambient stalk with the identical scalar action. The finite basis germs give the isomorphisms e_n, including the empty basis.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply both sides of the proposed naturality equation to every standard basis vector. On the left the coordinates are the germs of f coefficients, by the natural associated-sheaf localization map. On the right they are the coefficients of g. The assumed coefficient equations make these equal. Equality on a finite basis proves the equality of R-linear maps.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-affine-perfect-module-model",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the associated sheaf of a finite free module is naturally the free stalk module",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "note": "No mathematical absence verdict from this unavailable service."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tilde\"",
+   "results": "tilde.toStalk and its IsLocalizedModule instance; no ordinary open-direct-image natural comparison.",
+   "date": "2026-10-13",
+   "verdict": "related lemmas; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*tilde|tilde.*stalk|localStalkEquiv|finite_scalar_lift; Mathlib and lean/Sheaf/AlgebraicGeometry",
+   "results": "Mathlib exists_le_germ_eq, germ_eq, Matrix.toLin', and tilde.toStalk; the existing affinePerfectSheafification is reused. Stalk coordinate naturality after ordinary open direct image is not stated.",
+   "date": "2026-10-13",
+   "verdict": "building blocks found; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; construction of the bounded finite-free complex by lifting matrices, before descent of its comparison; finite-matrix spreading on an affine neighbourhood after normalization of the stalk terms; finite free stalk identification and ordinary direct-image comparison",
+   "via": [
+    "lem-sc-bounded-free-stalk-complex-local-lift",
+    "lem-sc-bounded-free-stalk-complex-lift",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeSheafStalkRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeSheafStalkRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_freeSheaf_stalk_realization",
+  "statement": "theorem exists_affine_freeSheaf_stalk_realization (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U) : ∃ e : ∀ n : ℕ, ModuleCat.of (X.presheaf.stalk x) (ULift.{0} (Fin n → X.presheaf.stalk x)) ≅ (SheafOfModules.pushforward.{u} (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U) ⋙ RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj ((affinePerfectSheafification X U hU).obj (ModuleCat.of Γ(X, U) (ULift.{0} (Fin n → Γ(X, U))))), ∀ (n m : ℕ) (f : ModuleCat.of Γ(X, U) (ULift.{0} (Fin n → Γ(X, U))) ⟶ ModuleCat.of Γ(X, U) (ULift.{0} (Fin m → Γ(X, U)))) (g : ModuleCat.of (X.presheaf.stalk x) (ULift.{0} (Fin n → X.presheaf.stalk x)) ⟶ ModuleCat.of (X.presheaf.stalk x) (ULift.{0} (Fin m → X.presheaf.stalk x))), (∀ (p : Fin n) (q : Fin m), X.presheaf.germ U x hxU ((f (ULift.up (Pi.single p 1))).down q) = ((g (ULift.up (Pi.single p 1))).down q)) → (e n).hom ≫ (SheafOfModules.pushforward.{u} (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U) ⋙ RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ((affinePerfectSheafification X U hU).map f) = g ≫ (e m).hom",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T082354-L-1639186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T082354-L-1639186",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

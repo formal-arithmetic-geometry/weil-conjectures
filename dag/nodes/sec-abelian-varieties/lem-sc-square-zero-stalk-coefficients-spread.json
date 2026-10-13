@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-square-zero-stalk-coefficients-spread",
+ "kind": "statement",
+ "title": "Spreading square-zero coefficient maps to an affine section ring",
+ "statement": "Let X be a scheme [def-pc-scheme], x a point, R = O_{X,x} [def-pc-module-stalk-functor], and d : Z -> N with d(i) = 0 if i < a or b < i. Write E_A(n) = ULift(Fin(n) -> A), the standard coordinate A-module. Suppose linear maps delta_i : E_R(d(i)) -> E_R(d(i+1)) satisfy delta_{i+1} delta_i = 0. There are an affine open U containing x and linear maps D_i : E_{Gamma(X,U)}(d(i)) -> E_{Gamma(X,U)}(d(i+1)) with D_{i+1} D_i = 0. For every p in Fin(d(i)) and q in Fin(d(i+1)), the germ at x of the q coordinate of D_i applied to the p-th standard basis vector equals the q coordinate of delta_i applied to the p-th standard basis vector. No sheaf complex or stalk isomorphism is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0BCD and 0BC7, finite-matrix spreading; elementary stalk representative and equality criteria, Mathlib.Topology.Sheaves.Stalks exists_le_germ_eq and germ_eq"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the ULift coordinate modules by ULift.moduleEquiv and use LinearMap.toMatrix' to express maps as matrices. Composition corresponds to matrix multiplication, and this correspondence is injective.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Index all coefficients by the finite dependent sum over i in Finset.Icc a b. Represent each germ on a neighbourhood, then intersect the finitely many neighbourhoods and restrict all representatives to that intersection. For degrees outside the interval, the source rank is zero and there are no entries.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ring germ homomorphism to each entry of A(i+1) A(i). Matrix multiplication commutes with ring homomorphisms, so the square-zero hypothesis makes each germ zero. Use the stalk equality criterion against the zero section for all entries, intersect their neighbourhoods, and restrict further to an affine open containing x. These matrix products now vanish as sections. Convert the matrices back to maps by Matrix.toLin' and ULift.moduleEquiv. Their compositions are zero by matrix injectivity, and restriction preserves the original coefficient germs. Empty intervals and zero ranks have empty indexing types.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-module-stalk-functor",
+    "def-weil-matrix"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "def-pc-scheme",
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0BCD and 0BC7, finite-matrix spreading; elementary stalk representative and equality criteria, Mathlib.Topology.Sheaves.Stalks exists_le_germ_eq and germ_eq"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite square-zero maps of coordinate modules over a scheme stalk descend to sections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "note": "No mathematical absence verdict from this unavailable service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free complex over a scheme stalk extends to an affine neighbourhood",
+   "results": "Affine denominator lemmas and exists_lift_of_germInjective; none descends the complete finite square-zero data without germ injectivity.",
+   "date": "2026-10-13",
+   "verdict": "related lemmas; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*tilde|tilde.*stalk|localStalkEquiv|finite_scalar_lift; Mathlib and lean/Sheaf/AlgebraicGeometry",
+   "results": "FiniteFreeStalkFiniteMatrixLift has finite_scalar_lift for coefficients. This proof repeats its elementary common-neighbourhood argument and also shrinks the product relations using Mathlib germ_eq.",
+   "date": "2026-10-13",
+   "verdict": "building blocks found; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; construction of the bounded finite-free complex by lifting matrices, before descent of its comparison; finite-matrix spreading on an affine neighbourhood after normalization of the stalk terms; coefficient representation and square-zero relation shrinking",
+   "via": [
+    "lem-sc-bounded-free-stalk-complex-local-lift",
+    "lem-sc-bounded-free-stalk-complex-lift",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroStalkCoefficientsSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroStalkCoefficientsSpread.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_squareZero_stalk_coefficients_spread",
+  "statement": "theorem exists_squareZero_stalk_coefficients_spread (X : Scheme.{u}) (x : X) (d : ℤ → ℕ) (a b : ℤ) (hd : ∀ i : ℤ, i < a ∨ b < i → d i = 0) (δ : ∀ i : ℤ, ModuleCat.of (X.presheaf.stalk x) (ULift.{0} (Fin (d i) → X.presheaf.stalk x)) ⟶ ModuleCat.of (X.presheaf.stalk x) (ULift.{0} (Fin (d (i + 1)) → X.presheaf.stalk x))) (hδ : ∀ i, δ i ≫ δ (i + 1) = 0) : ∃ (U : X.Opens) (hxU : x ∈ U), IsAffineOpen U ∧ ∃ D : ∀ i : ℤ, ModuleCat.of Γ(X, U) (ULift.{0} (Fin (d i) → Γ(X, U))) ⟶ ModuleCat.of Γ(X, U) (ULift.{0} (Fin (d (i + 1)) → Γ(X, U))), (∀ i, D i ≫ D (i + 1) = 0) ∧ ∀ i (p : Fin (d i)) (q : Fin (d (i + 1))), X.presheaf.germ U x hxU ((D i (ULift.up (Pi.single p 1))).down q) = ((δ i (ULift.up (Pi.single p 1))).down q)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T082354-L-1639186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T082354-L-1639186",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
