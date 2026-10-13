@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistGenerator
-public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.ChartTransition
-public import WeilConjectures.Mathlib.RingTheory.Kaehler.LocalizationPolynomial
+public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
+public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 
 /-!
 # The canonical sheaf of projective space

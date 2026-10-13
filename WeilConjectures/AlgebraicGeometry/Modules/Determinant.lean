@@ -133,7 +133,7 @@ lemma exists_isLocalFrame (M : X.Modules) {r : ℕ} [M.IsFiniteLocallyFreeOfRank
   by_cases hj : j = ⟨k⟩
   · subst hj
     simp
-  · simp [Pi.single_apply, hj]
+  · simp [hj]
 
 
 /-- An `𝒪_X`-module with a free generator around every point is invertible. -/
@@ -194,7 +194,8 @@ lemma IsLocalFrame.cons_of_shortExact (hS : S.ShortExact) {r : ℕ} {U : X.Opens
   obtain ⟨b₁, hb₁⟩ := hl W hW
   obtain ⟨b₃, hb₃⟩ := ht W hW
   obtain ⟨b, hb⟩ := Module.Basis.exists_eq_cons_of_exact (f := Hom.appₗ S.f W)
-    (g := Hom.appₗ S.g W) (injective_app_of_mono' S.f W) (exact_appₗ hS W) b₁ b₃ (fun k ↦ S.X₂.presheaf.map (homOfLE hW).op (t k)) fun k ↦ by
+    (g := Hom.appₗ S.g W) (injective_app_of_mono' S.f W) (exact_appₗ hS W) b₁ b₃
+    (fun k ↦ S.X₂.presheaf.map (homOfLE hW).op (t k)) fun k ↦ by
       rw [Hom.appₗ_apply, Hom.app_presheaf_map, hb₃]
   refine ⟨b, fun k ↦ ?_⟩
   rw [hb]

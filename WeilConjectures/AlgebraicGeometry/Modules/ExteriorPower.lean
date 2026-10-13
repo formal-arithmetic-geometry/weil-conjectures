@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Top
+public import WeilConjectures.LinearAlgebra.ExteriorPower.Top
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
 
 /-!
 # Exterior powers of sheaves of modules on a scheme

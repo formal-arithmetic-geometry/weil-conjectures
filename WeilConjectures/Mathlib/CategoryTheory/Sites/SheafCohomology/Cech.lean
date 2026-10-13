@@ -18,10 +18,10 @@ public import WeilConjectures.Algebra.Homology.TotalComplexRowResolution
 public import WeilConjectures.CategoryTheory.Sites.CechSheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveResolution
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Injective
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ChgUniv
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Transport
+public import WeilConjectures.Algebra.Homology.SpectralSequence.Transport
 
 /-!
 # The Čech-to-derived spectral sequence

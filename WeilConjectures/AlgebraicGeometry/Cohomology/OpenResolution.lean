@@ -240,8 +240,16 @@ lemma quasiIso_restrictAugmentation_of_le {ℱ : X.Modules} {A : CochainComplex 
         0).app (ℱ.restrict Ω₁.ι)).symm)
       ((NatIso.mapHomologicalComplex e _).app A) (by
         refine HomologicalComplex.from_single_hom_ext ?_
-        simp [restrictAugmentation, e, k]
-        erw [Category.id_comp])
+        simp only [restrictAugmentation, e, k, CochainComplex.single₀_obj_zero, Arrow.mk_right,
+          Arrow.mk_left, Functor.comp_obj, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+          Iso.symm_hom, Iso.app_inv, Arrow.mk_hom, Category.assoc, HomologicalComplex.comp_f,
+          CochainComplex.single₀_map_f_zero,
+          HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
+          CochainComplex.single₀ObjXSelf, Iso.refl_hom, Iso.refl_inv,
+          CategoryTheory.Functor.map_id,
+          Category.comp_id, Functor.mapHomologicalComplex_map_f,
+          NatIso.mapHomologicalComplex_hom_app_f, Category.id_comp, Functor.map_comp]
+        exact ((restrictFunctorIsoOfLE h).hom.naturality _).symm)
   exact (quasiIso_iff_of_arrow_mk_iso _ _ iso).2 inferInstance
 
 end Restrict
@@ -260,8 +268,8 @@ variable (Ω : X.Opens) (ℱ : X.Modules)
 noncomputable def pushforwardResolution : CochainComplex X.Modules ℕ :=
   ((pushforward Ω.ι).mapHomologicalComplex _).obj (injectiveResolution (ℱ.restrict Ω.ι)).cocomplex
 
-/-- The augmentation `j_* (ℱ|_Ω) ⟶ j_* I` of `AlgebraicGeometry.Scheme.Modules.pushforwardResolution`,
-for `j : Ω ⟶ X` the inclusion. -/
+/-- The augmentation `j_* (ℱ|_Ω) ⟶ j_* I` of
+`AlgebraicGeometry.Scheme.Modules.pushforwardResolution`, for `j : Ω ⟶ X` the inclusion. -/
 noncomputable def pushforwardResolutionι :
     (CochainComplex.single₀ X.Modules).obj ((pushforward Ω.ι).obj (ℱ.restrict Ω.ι)) ⟶
       pushforwardResolution Ω ℱ :=
@@ -284,7 +292,11 @@ lemma isOpenResolution_pushforwardResolution :
       ((NatIso.mapHomologicalComplex c _).app J.cocomplex ≪≫
         (Functor.mapHomologicalComplexIdIso _ _).app J.cocomplex) (by
         refine HomologicalComplex.from_single_hom_ext ?_
-        simp [restrictAugmentation, pushforwardResolutionι, c, J]
+        simp only [restrictAugmentation, pushforwardResolutionι, c, J,
+          CochainComplex.single₀_obj_zero,
+          Arrow.mk_right, Arrow.mk_left, Functor.mapIso_hom, Iso.app_hom, Arrow.mk_hom,
+          HomologicalComplex.comp_f, CochainComplex.single₀_map_f_zero, Iso.trans_hom,
+          NatIso.mapHomologicalComplex_hom_app_f, Functor.mapHomologicalComplexIdIso_hom_app_f]
         erw [Category.id_comp, Category.comp_id]
         exact ((restrictFunctorAdjCounitIso Ω.ι).hom.naturality _).symm)
   exact (quasiIso_iff_of_arrow_mk_iso _ _ iso).2 inferInstance

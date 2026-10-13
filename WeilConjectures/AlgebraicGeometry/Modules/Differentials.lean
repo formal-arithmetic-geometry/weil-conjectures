@@ -74,8 +74,11 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
 
 ## References
 
-- [Stacks: Section 01UM, sheaf of differentials of a morphism of schemes](https://stacks.math.columbia.edu/tag/01UM)
-- [Stacks: Section 08RL, differentials of sheaves of rings](https://stacks.math.columbia.edu/tag/08RL)
+- [Stacks: Section 01UM, sheaf of differentials of a morphism of schemes][stacks-01UM]
+- [Stacks: Section 08RL, differentials of sheaves of rings][stacks-08RL]
+
+[stacks-01UM]: https://stacks.math.columbia.edu/tag/01UM
+[stacks-08RL]: https://stacks.math.columbia.edu/tag/08RL
 -/
 
 @[expose] public section

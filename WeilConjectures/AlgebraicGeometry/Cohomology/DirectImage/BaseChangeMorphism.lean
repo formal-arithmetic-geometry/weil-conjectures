@@ -124,7 +124,8 @@ lemma baseChangeOfResolutions_comp (w : g' ≫ f = f' ≫ g)
         (((pushforward f').mapHomologicalComplex _).map v)) i := by
     rw [← HomologicalComplex.homologyMap_comp, ← HomologicalComplex.homologyMap_comp]
     congr 1
-    exact (NatIso.mapHomologicalComplex (pushforwardSquareIso w) (ComplexShape.up ℕ)).hom.naturality v
+    exact (NatIso.mapHomologicalComplex (pushforwardSquareIso w) (ComplexShape.up ℕ)).hom.naturality
+      v
   have s3 := HomologicalComplex.homologyMap_homologyToMap (pushforward g)
     (((pushforward f').mapHomologicalComplex _).map v) i
   have s4 : (pushforward g).map (HomologicalComplex.homologyMap
@@ -167,6 +168,7 @@ noncomputable def baseChangeAugmentation (θ : ℱ ⟶ (pushforward g').obj ℱ'
     ℱ ⟶ (((pushforward g').mapHomologicalComplex _).obj J.cocomplex).X 0 :=
   θ ≫ (pushforward g').map (J.ι.f 0)
 
+omit [HasInjectiveResolutions X.Modules] [HasInjectiveResolutions X'.Modules] in
 lemma baseChangeAugmentation_d (θ : ℱ ⟶ (pushforward g').obj ℱ') (J : InjectiveResolution ℱ') :
     baseChangeAugmentation θ J ≫
       (((pushforward g').mapHomologicalComplex _).obj J.cocomplex).d 0 1 = 0 := by
@@ -186,6 +188,7 @@ noncomputable abbrev baseChangeResolution (θ : ℱ ⟶ (pushforward g').obj ℱ
   have := (isGrothendieckAbelian X).enoughInjectives
   CochainComplex.OverResolution _ (baseChangeAugmentation θ J) (baseChangeAugmentation_d θ J)
 
+omit [HasInjectiveResolutions X'.Modules] in
 lemma rightAcyclic_baseChangeResolution (θ : ℱ ⟶ (pushforward g').obj ℱ')
     (J : InjectiveResolution ℱ') (n : ℕ) :
     (pushforward f).rightAcyclic ((baseChangeResolution θ J).X n) := by

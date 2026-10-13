@@ -1,6 +1,7 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
@@ -16,6 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.Algebra.Homology.Embedding.RestrictionExtend
 public import WeilConjectures.Algebra.Homology.ExactCouple.Basic
@@ -54,7 +56,9 @@ public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
 public import WeilConjectures.Algebra.Homology.Monoidal.Dual
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
+public import WeilConjectures.Algebra.Homology.ShortComplex.HomologyToMap
 public import WeilConjectures.Algebra.Homology.ShortComplex.SplitHomology
+public import WeilConjectures.Algebra.Homology.SpectralSequence.Transport
 public import WeilConjectures.Algebra.Homology.TotalComplexRowResolution
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
@@ -106,6 +110,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMor
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChangeMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
@@ -710,6 +715,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
+public import WeilConjectures.CategoryTheory.Abelian.RelativeInjectiveResolution
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
@@ -1195,6 +1201,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFu
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
+public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
+public import WeilConjectures.LinearAlgebra.ExteriorPower.Top
 public import WeilConjectures.LinearAlgebra.Matrix.ComplementaryMinors
 public import WeilConjectures.LinearAlgebra.Matrix.SplitFactorization
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
@@ -1222,7 +1230,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
@@ -1257,7 +1264,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
@@ -1299,7 +1305,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Transport
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
 public import WeilConjectures.Mathlib.Algebra.Lie.Engel
@@ -1613,8 +1618,6 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
-public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.ChartTransition
-public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Top
 public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Lagrange
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
@@ -1708,7 +1711,6 @@ public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosu
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
-public import WeilConjectures.Mathlib.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
@@ -1846,6 +1848,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Identity
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Stabilizer
+public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.RingTheory.Kaehler.Trace
 public import WeilConjectures.RingTheory.Kaehler.TraceBaseChange
 public import WeilConjectures.RingTheory.Kaehler.TraceDuality
