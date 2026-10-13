@@ -9,6 +9,8 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.AlgebraicGeometry.StalkFiniteFree
+import Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso
 
 /-! # Reflection of invertibility at a vector bundle stalk
 
@@ -45,6 +47,17 @@ theorem isIso_moduleStalkMap_of_isIso_extendScalars
     (h : T ⟶ W) (t : T)
     (hφ : IsIso ((ModuleCat.extendScalars (h.stalkMap t).hom).map
       ((RingedSpace.moduleStalkFunctor W.toRingedSpace (h t)).map φ))) :
-    IsIso ((RingedSpace.moduleStalkFunctor W.toRingedSpace (h t)).map φ) := by sorry
+    IsIso ((RingedSpace.moduleStalkFunctor W.toRingedSpace (h t)).map φ) := by
+  let R := W.presheaf.stalk (h t)
+  let S := T.presheaf.stalk t
+  let f : R →+* S := (h.stalkMap t).hom
+  have hM := stalk_isFiniteFree_of_isFiniteLocallyFree M (h t)
+  have hN := stalk_isFiniteFree_of_isFiniteLocallyFree N (h t)
+  have := hM.1
+  have := hM.2
+  have := hN.1
+  have := hN.2
+  exact isIso_of_isIso_extendScalars_of_finite_free f
+    ((RingedSpace.moduleStalkFunctor W.toRingedSpace (h t)).map φ) hφ
 
 end AlgebraicGeometry.Scheme.Modules

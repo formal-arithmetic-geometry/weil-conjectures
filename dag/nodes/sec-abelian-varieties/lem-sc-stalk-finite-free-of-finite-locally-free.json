@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-stalk-finite-free-of-finite-locally-free",
+ "kind": "statement",
+ "title": "Finite locally free sheaves have finite free stalk modules.",
+ "statement": "For a scheme X [def-pc-scheme], a finite locally free module sheaf M [def-sc-finite-locally-free-sheaf] and x ∈ X, its stalk computed by [def-pc-module-stalk-functor] is both a free and a finite module over O_{X,x}.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01C6",
+  "place": "Definition 17.14.1(2), taking stalks of the finite local frame"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Finite local freeness gives a neighborhood of x on which M is isomorphic to a finite direct sum of the structure sheaf. Taking the stalk preserves this isomorphism, identifying M_x with a finite-rank free module over O_{X,x}; the standard finite basis instance gives both Module.Free and Module.Finite.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01C6",
+  "place": "Definition 17.14.1(2), finite local frame and its coordinate germs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free sheaf stalk free module",
+   "results": "Internal Server Error; service unavailable. No conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of locally free sheaf is finite free module",
+   "results": "Eight hits: stalk localization and free-locus ranks; no general locally free sheaf stalk freeness.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free",
+   "results": "Twelve basic free-module declarations, including Module.Free.of_basis; no sheaf-stalk statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ff]ree|[Ff]ree.*stalk",
+   "results": "Mathlib: eight free-locus/localization rank hits. Local library: private localStalkEquiv in FiniteLocallyFreeStalkFinrank; PicardBaseChangeStalkFiniteBases is specialized and sorry. No exact public general statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkBaseChangeReflectsIso",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-locally-free-stalk-base-change-reflects-iso",
+   "place": "Stacks Project, Tag 00O0, Lemma 10.79.4(3), matrix argument",
+   "via": [
+    "lem-sc-finite-locally-free-stalk-base-change-reflects-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkFiniteFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkFiniteFree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.stalk_isFiniteFree_of_isFiniteLocallyFree",
+  "statement": "theorem stalk_isFiniteFree_of_isFiniteLocallyFree\n    {X : Scheme.{u}} (M : X.Modules) [M.IsFiniteLocallyFree] (x : X) :\n    Module.Free (X.presheaf.stalk x)\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M) ∧\n      Module.Finite (X.presheaf.stalk x)\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T022421-L-3216439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T022421-L-3216439",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
