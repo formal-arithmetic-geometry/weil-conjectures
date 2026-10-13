@@ -1383,6 +1383,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Descent
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FiniteProjectiveResolution
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
@@ -2237,6 +2238,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Matrix
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.TorSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
