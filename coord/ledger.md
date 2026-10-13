@@ -10594,3 +10594,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/S3/Sheaf.Algebra.Homology.HomTensorDifferential (stage 3; reviewer PASS; first push; landing 20261013T015614-L-3026831 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Morphisms.TraitEtaleExtension (stage 3; reviewer PASS; first push; landing 20261013T015614-L-3026987 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/S3/Sheaf.AlgebraicGeometry.SquareZeroTensorPowerBoundary (stage 3; reviewer PASS; first push; landing 20261013T015614-L-3027133 (interface); batch 20261013T015540; modules 2; new nodes 1)
+- 01:56 L: merged deliver/T1/Sheaf.Paper.PolynomialIdealCoefficientsMonomialMap (stage 3; reviewer PASS; first push; landing 20261013T015615-L-3027246 (proof); batch 20261013T015540; modules 1; new nodes 0)
