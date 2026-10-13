@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-affine-sections-complex-counit",
+ "kind": "statement",
+ "title": "Affine quasi-coherent complex reconstructed from ordinary sections",
+ "statement": "Let Y be an affine scheme [def-pc-scheme], A = Gamma(Y,O), and D an integer cochain complex of O_Y-modules [def-pc-cochain-complex-modules] with quasi-coherent terms. Apply ordinary sections termwise to obtain a complex of A-modules, and apply associated sheaf on Spec A [lem-weil-pbc-affine-tilde-gamma-adjunction] termwise. Push this complex forward along Y.isoSpec.inv : Spec A -> Y. The resulting complex is isomorphic to D. No boundedness, perfectness, derived-category choices, or nonemptiness are assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01IB (schemes-lemma-spec-sheaves), applied termwise; Tag 06Z0 (perfect-lemma-affine-compare), associated-sheaf complex construction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Set A = Gamma(Y,O), F = pushforward along Y.isoSpec.hom, G = pushforward along its inverse, S = moduleSpecGammaFunctor and T = tilde. Define a natural isomorphism between ordinary evaluation of Y-modules at top and F followed by S. On underlying additive groups its components are identities. The scalar compatibility is Y.isoSpec.hom.appTop composed with GammaSpecIso.inv equal to the identity, by toSpecGamma_appTop and inv_hom_id. Naturality is the identity of the actual section maps.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The functors F and G form the module-sheaf equivalence given by pushforwardComp, pushforwardCongr and pushforwardId. Hence F is left adjoint to G. Restriction along Y.isoSpec.inv is also left adjoint to G, so uniqueness of left adjoints identifies F with this restriction. Mathlib proves restriction along an open immersion preserves quasi-coherence. Apply this to every term of D to obtain quasi-coherent terms of F(D). The natural tilde/Gamma counit is invertible on these terms by [lem-weil-pbc-affine-tilde-gamma-adjunction]. Map it to complexes; naturality gives differential compatibility and componentwise invertibility yields tilde(S(F(D))) isomorphic to F(D). Compose with tilde of the inverse termwise section comparison.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Push the preceding complex isomorphism through G. Map the natural isomorphism F followed by G isomorphic to the identity to complexes; it is pushforwardComp followed by pushforwardCongr of Y.isoSpec.hom_inv_id followed by pushforwardId. Composing gives G(tilde(Gamma(Y,D))) isomorphic to D. The construction has no boundedness or nonemptiness assumption, so applies to zero and unbounded complexes and the empty affine scheme.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01IB and 06Z0; chain-level naturality and canonical affine-chart scalar comparison proved by B2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex of quasi-coherent modules on an affine scheme is isomorphic to the associated sheaf of its ordinary section complex",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi coherent counit on an affine scheme is a natural isomorphism of complexes",
+   "results": "Eight Gamma-Spec adjunction and affine-scheme hits, including instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine and GammaSpec.adjunction_counit_app; no complex-level statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; use the affine chart APIs"
+  },
+  {
+   "tool": "grep",
+   "query": "fromTildeΓNatTrans|mapHomologicalComplexCompIso",
+   "results": "Six hits, including Scheme.Modules.fromTildeΓNatTrans in Mathlib/AlgebraicGeometry/Modules/Tilde.lean and Functor.mapHomologicalComplexCompIso in Mathlib/Algebra/Homology/Additive.lean.",
+   "date": "2026-10-13",
+   "verdict": "components available; explicit assembly needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectSectionsProjectiveModel",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): canonical affine reconstruction of the section complex in the bounded perfect replacement argument",
+   "via": [
+    "lem-pc-affine-perfect-sections-projective-model",
+    "lem-pc-affine-perfect-flat-model-replacement",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionsComplexCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionsComplexCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_sections_complex_counit",
+  "statement": "theorem affine_sections_complex_counit (Y : Scheme.{u}) [IsAffine Y]\n    (D : CochainComplex Y.Modules ℤ)\n    (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent) :\n    Nonempty\n      (((@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (Spec Γ(Y, ⊤)).ringCatSheaf)\n        (SheafOfModules.{u} Y.ringCatSheaf) _ _ _ _\n        (SheafOfModules.pushforward Y.isoSpec.inv.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)).obj\n        ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Γ(Y, ⊤) : Type u))\n          (SheafOfModules.{u} (Spec Γ(Y, ⊤)).ringCatSheaf) _ _ _ _\n          (tilde.functor Γ(Y, ⊤)) ⟨fun _ _ ↦ tilde.map_zero⟩\n          (ComplexShape.up ℤ)).obj\n          (((SheafOfModules.evaluation.{u}\n            Y.ringCatSheaf (op ⊤)).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj D))) ≅ D)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T045511-L-124133",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T045511-L-124133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
