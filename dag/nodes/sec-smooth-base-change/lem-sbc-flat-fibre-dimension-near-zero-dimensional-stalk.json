@@ -1,0 +1,131 @@
+{
+ "id": "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+ "kind": "statement",
+ "title": "Constant fibre dimension near a zero-dimensional fibre stalk",
+ "statement": "Let $f:X\\to T$ be a scheme morphism [def-pc-scheme] and $U\\subseteq T$ an open such that $f|_U$ is flat [def-weil-flat-morphism] and locally finitely presented [def-sbc-locally-finite-presentation]. Let $x\\in X$ with $f(x)\\in U$, and assume that the local ring of the scheme-theoretic fibre $X_{f(x)}$ [def-pc-scheme-fibre] at $x$ has Krull dimension zero [def-weil-pbc-krull-dimension-ring; def-weil-pbc-module-stalk]. Then there exist $n\\in\\mathbb N$ and an open neighbourhood $V\\subseteq X$ of $x$, lying over $U$, such that for every $y\\in V$ the local topological dimension of $X_{f(y)}$ at $y$ [def-kun-topological-dimension-at-point] is $n$. The integer $n$ need not be zero.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 045U, 02NM and 02NJ; dimension-zero-stalk special case of the local neighbourhood construction in Tag 054T"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-stalk",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the morphism over U. The fibre at f(x) is canonically isomorphic to the original fibre: the residue field is unchanged by open restriction, and pullback associativity identifies the two fibres. Its local rings therefore agree. The fibre is locally Noetherian by the restricted-fibre theorem. The dimension-zero fibre local ring is Artinian and Cohen-Macaulay: the empty regular sequence attains its dimension zero.",
+   "uses": [
+    "lem-sbc-restricted-fibre-locally-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tag 045U makes the Cohen-Macaulay locus of the restricted flat locally finitely presented morphism open. Restrict the source to this locus. Its fibres are Cohen-Macaulay and the morphism remains flat and locally finitely presented. Tag 02NM decomposes it into open-and-closed pieces of pure relative dimension n. Choose the piece containing x. Its image V in X is open because the source and target restriction inclusions are open immersions, and lies over U.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The fibres of the chosen piece are equidimensional of dimension n (Tag 02NJ). In a scheme locally of finite type over a field with equidimensional fibres of dimension n, every nonempty open neighbourhood of a point has dimension n: shrink to a finite-type affine neighbourhood and use that nonempty opens of each component preserve its dimension. Thus local topological dimension on each fibre of the piece is n. These fibre inclusions are open immersions into the original fibres, so the infimum over open neighbourhoods is unchanged. This gives the asserted equality at every y in V.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-restricted-fibre-locally-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 045U and 02NM, as combined in Tag 054T; open-restriction and local-dimension transport expanded by M1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented scheme morphism has locally constant fibre dimension near a point with zero dimensional fibre local ring",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Near a generic point of a fibre of a flat locally finitely presented scheme morphism the fibre dimension is constant",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, Module.rankAtStalk_eq, AlgebraicGeometry.Flat, Module.isLocallyConstant_rankAtStalk, RingHom.Flat.generalizingMap_comap",
+   "verdict": "No matching theorem; flatness/generalizing maps and rank constancy do not give fibre-dimension constancy."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|equidimensional|IsLocallyConstant.*[dD]im|[dD]im.*IsLocallyConstant",
+   "date": "2026-10-13",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean",
+   "verdict": "No matching theorem; flatness/generalizing maps and rank constancy do not give fibre-dimension constancy."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCore",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the constant-dimension neighbourhood step used to spread generic closed-fibre geometry; in Tag 054T, the neighbourhood of a fibre component generic point is obtained from the Cohen-Macaulay locus and its pure-relative-dimension pieces.",
+   "via": [
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatFibreDimensionNearZeroDimensionalStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFibreDimensionNearZeroDimensionalStalk.lean",
+  "declaration": "AlgebraicGeometry.exists_constant_fibre_dimension_neighbourhood_of_stalk_dimension_zero",
+  "statement": "theorem exists_constant_fibre_dimension_neighbourhood_of_stalk_dimension_zero\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]\n    (x : X) (hx : f x ∈ U)\n    (hdim : ringKrullDim ((f.fiber (f x)).presheaf.stalk (f.asFiber x)) = 0) :\n    ∃ (n : ℕ) (V : X.Opens), x ∈ V ∧\n      ∀ y ∈ V, f y ∈ U ∧ topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T134101-L-71979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T134101-L-71979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

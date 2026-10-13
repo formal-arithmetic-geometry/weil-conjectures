@@ -15,16 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Restrict f to the inverse image of U. By Tag 045U, its Cohen-Macaulay locus is open and fibrewise dense. Restrict further to that locus and use Tag 02NM to decompose it into open and closed pieces of relative dimension n, indexed by natural numbers. Their union is the Cohen-Macaulay locus, so is fibrewise dense. Their images in X are open because both restriction inclusions are open immersions. For t in U, pullback associativity identifies the restricted fibre with f.fiber t. Each piece has equidimensional fibres of dimension n by Tag 02NJ; hence its local topological dimension is n. Local dimension is unchanged by inclusion of an open fibre subscheme, giving the displayed equality in the original fibre. Fibres outside U do not meet these opens, so the dimension conclusion there is vacuous. Empty fibres satisfy density of the empty union. This constructs the opens without choosing arbitrary data from an unproved existence theorem.",
+   "text": "Construct V_n as the interior in X of the set of x with f(x) in U and local topological fibre dimension n. Membership implies the required dimension equality by interior_subset.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Fix t in U. Component generic points of the scheme-theoretic fibre are dense by genericPoints.closure. At such a z the closure of z is a maximal irreducible closed subset. Thus z is maximal in the specialization order and has coheight zero. The stalk-dimension/coheight theorem gives ringKrullDim of the fibre stalk equal to zero.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let x be the image of z in X. The fibre homeomorphism gives f(x)=t, and injectivity of fibre inclusion identifies asFiber x with z. Apply the zero-dimensional-stalk neighbourhood theorem to x. It gives n and an open W containing x on which f(y) lies in U and the fibre dimension is n. Since W is open and contained in this level set, W is contained in its interior V_n. Hence the inverse-image union of the V_n contains every fibre generic point. Density follows by Dense.mono.",
+   "uses": [
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 054T and 054U; expanded restriction and topology steps"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 054T local-neighbourhood argument; Mathlib genericPoints.closure and ringKrullDim_stalk_eq_coheight; explicit canonical-interior construction and fibre-point transport by M1"
  },
  "mathlib_searches": [
   {
@@ -104,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T131948-L-4087291",
+  "landing": "20261013T134101-L-71979",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
