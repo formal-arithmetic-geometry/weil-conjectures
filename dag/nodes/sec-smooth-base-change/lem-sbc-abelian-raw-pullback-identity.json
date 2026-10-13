@@ -16,22 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Substitute ha, so a is the identity, and convert hφ to equality of morphisms.\nThe left unit law upperStarComp_id_left identifies the first raw factor with the single\nfunctor applied to upperStarId.inv at h-pullback of the free sheaf of U. Let eD be the\ncanonical derived identity comparison upperStarIdDerivedPlus. On a single complex its\ncomponent is the single-functor comparison followed by single(upperStarId.hom): compute\non the complex concentrated in degree zero, where both maps are upperStarId.hom; in all\nother degrees they are the unique map between zero objects. Apply the factorization\ncomparison and localization to obtain this equality in the derived category, then restrict\nto D⁺ using the fully faithful inclusion. The same termwise computation shows that eD\ncommutes with shifts. Consequently the last three factors of the raw formula are\nD(id^*).map z followed by eD.hom at the shifted single of F. Naturality of eD changes\nthis to eD.hom at the source single followed by z. The inverse single comparison cancels\nits direct comparison. What remains is single(upperStarId.inv) followed by\nsingle(upperStarId.hom) followed by z; functoriality and the inverse-hom identity give z.\nThis proof applies also for zero F, zero z, empty schemes and p = 0.",
+   "text": "Substitute a = 1_Y and use eq_of_heq to replace the coefficient map by upperStarId.hom.app F. Expand the raw five-factor formula. The proved sheaf left unit law upperStarComp_id_left identifies its first factor with single(upperStarId.inv) at the h-pullback of the free sheaf representing U.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-derived-inverse-image-composition"
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reuse the fully proved private single_hom and plus_single_natIso helpers of Sheaf.AlgebraicGeometry.AbelianHigherDirectImageCoreComp via a proof-only import all. The latter already transports the degreewise natural-isomorphism compatibility through derived localization and the faithful D⁺ inclusion; its proof uses the existing complex_single_natIso and derived_single_natIso helpers there. For the derived identity functor itself, the local proved id_single helper uses mapDerivedCategoryIdIso_factorsh, mapHomotopyCategoryIdIso_hom_app_eq_id, and mapDerivedCategoryFactorsh_hom_app. The quotient comparison maps are identities by Quotient.lift.isLift_hom and Quotient.lift.isLift_inv, and the single-map comparison for Id is identity by componentwise extensionality. Hence the hom component of upperStarIdDerivedPlus at single(X) is the single comparison followed by single(upperStarId.hom.app X). No single-complex compatibility statement is duplicated locally.",
+   "uses": [
+    "lem-sbc-abelian-higher-direct-image-core-comp"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove compatibility with shifts directly, in the private helper identity_commShift. The complex identity comparison commutes with shifts by degreewise extensionality. Its homotopy comparison is detected after precomposition with the essentially surjective homotopy quotient; its D⁺ homotopy comparison is detected by the faithful inclusion. Precompose the derived identity comparison with the essentially surjective localization Qh of bounded below homotopy complexes. Its characterization is the derived factorization, followed by the termwise natural isomorphism and identity comparison. Each factor commutes with shifts, by the existing proved commutation instances. NatTrans.CommShift.of_whiskerLeft descends this property to D⁺. This proves the shift equation without using the full derivedInverseImageComposition conjunction.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the last single-and-coefficient factor using step 2. NatTrans.shift_app_comm from step 3 identifies the last two factors with the derived identity component at the shifted target. Its naturality moves the pulled-back class to the right of the source identity component. Rewrite that component by step 2 and cancel the inverse single comparison with its hom. The remaining single(upperStarId.inv) followed by single(upperStarId.hom) cancels by map_comp and Iso.inv_hom_id_app. The result is z. No nonzero, nonempty or positive-degree hypothesis was used. The fully proved private helper identity_single_shift performs this calculation for any exact endofunctor P equipped with P ≅ Id; the item applies it to the canonical sheaf pullback identity. This avoids unfolding concrete sheaf instances in the structural calculation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-derived-inverse-image-composition"
+  "lem-sbc-abelian-higher-direct-image-core-comp"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 09Z1 and 03CB",
-  "place": "G3 spells out the structural five-factor calculation in parent proof step 2; not the geometric continuity argument."
+  "document": "Stacks Project, Tags 09Z1 and 03CB; existing Lean derived localization constructions",
+  "place": "F3 repair reuses the existing single-complex compatibility proofs from AbelianHigherDirectImageCoreComp; the identity and shift cancellation remains proved locally, without invoking the full derived-composition conjunction."
  },
  "mathlib_searches": [
   {
@@ -124,10 +140,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T054217-L-442825",
-  "kind": "interface",
+  "landing": "20261013T082342-L-1634702",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
