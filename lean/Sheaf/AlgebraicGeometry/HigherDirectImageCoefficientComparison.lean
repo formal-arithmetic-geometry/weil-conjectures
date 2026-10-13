@@ -8,8 +8,8 @@ module
 public import Sheaf.Paper.HigherDirectImagePresheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.OpenRestrictionModuleCohomology
+import Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality
 
 /-! # Coefficient-natural comparison with resolution section cohomology
 
@@ -27,6 +27,35 @@ attribute [local instance] Scheme.Modules.enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+noncomputable section
+
+private def derivedSectionsMap {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) (V : Y.Opens) :
+    (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).rightDerived p ⟶
+      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙
+        RingedSpace.openModuleSections Y.toRingedSpace V where
+  app N := higherDirectImageResolutionSectionMap f p V (injectiveResolution N)
+  naturality := fun _ _ a ↦ higherDirectImage_resolution_naturality f p V a _ _
+
+private theorem derivedSectionsMap_app {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (p : ℕ) (V : Y.Opens)
+    {N : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (I : InjectiveResolution N) :
+    (derivedSectionsMap f p V).app N = higherDirectImageResolutionSectionMap f p V I := by
+  have h :
+      ((RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).rightDerived p).map
+          (𝟙 N) ≫ higherDirectImageResolutionSectionMap f p V I =
+        higherDirectImageResolutionSectionMap f p V (injectiveResolution N) ≫
+          ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙
+            RingedSpace.openModuleSections Y.toRingedSpace V).map (𝟙 N) :=
+    higherDirectImage_resolution_naturality f p V (𝟙 N) (injectiveResolution N) I
+  have hT := (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).rightDerived p
+    |>.map_id N
+  have hD := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙
+    RingedSpace.openModuleSections Y.toRingedSpace V).map_id N
+  erw [hT, hD] at h
+  exact ((Category.comp_id
+    (higherDirectImageResolutionSectionMap f p V (injectiveResolution N))).symm.trans
+    (h.symm.trans (Category.id_comp (higherDirectImageResolutionSectionMap f p V I))))
 
 /-- The comparison from cohomology on inverse-image opens to higher-image sections
 is natural in coefficients. Its component is the resolution comparison followed by
@@ -77,6 +106,27 @@ theorem higherDirectImage_coefficient_comparison
                 (SheafOfModules.forget (moduleRings Y.toRingedSpace)).map
                   (I.isoRightDerivedObj
                     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p).inv)).app
-                      (Opposite.op V) := by sorry
+                      (Opposite.op V) := by
+  classical
+  let a (V : Y.Opens) := Classical.choice
+    (nonempty_openRestriction_moduleCohomology_iso X (f ⁻¹ᵁ V) p)
+  refine ⟨fun V ↦ (a V).hom ≫ derivedSectionsMap f p V, ?_⟩
+  intro N I V
+  let K : CochainComplex Y.Modules ℕ :=
+    ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
+      (.up ℕ)).obj I.cocomplex
+  let L := ((SheafOfModules.forget Y.ringCatSheaf).mapHomologicalComplex (.up ℕ)).obj K
+  let E := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
+    (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (Opposite.op V)
+  let e := (a V).app N ≪≫
+    I.isoRightDerivedObj (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)) p ≪≫
+      (L.sc p).mapHomologyIso E
+  refine ⟨e, ?_⟩
+  dsimp only [NatTrans.comp_app]
+  rw [derivedSectionsMap_app f p V I]
+  simp only [e, higherDirectImageResolutionSectionMap, Iso.trans_hom, Category.assoc]
+  rfl
+
+end
 
 end AlgebraicGeometry

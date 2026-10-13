@@ -11383,3 +11383,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:04 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore (stage 3; reviewer PASS; after a return; landing 20261013T060430-L-586464 (interface); batch 20261013T060408; modules 3; new nodes 2)
 - 06:04 L: merged deliver/X2/Sheaf.RingTheory.PopescuParameterCoefficientModel (stage 3; reviewer PASS; first push; landing 20261013T060431-L-586583 (interface); batch 20261013T060408; modules 2; new nodes 1)
 - 06:04 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackComparison (stage 3; reviewer PASS; first push; landing 20261013T060431-L-586707 (interface); batch 20261013T060408; modules 3; new nodes 2)
+- 06:04 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261013T060432-L-586812 (interface); batch 20261013T060408; modules 3; new nodes 2)

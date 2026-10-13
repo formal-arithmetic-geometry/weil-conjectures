@@ -1,0 +1,165 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3, naturality of the section-class comparison under augmentation-preserving resolution maps"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sp-injective-resolutions",
+  "def-sc-open-module-cohomology",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Steps 1 and 2 of the coefficient comparison: Naturality of the concrete higher-direct-image resolution section map",
+   "via": [
+    "lem-pc-higher-direct-image-coefficient-comparison",
+    "lem-pc-higher-direct-image-affine-cohomology-presentation",
+    "lem-pc-module-higher-direct-image-coproduct-epi",
+    "lem-pc-truncated-direct-image-second-page-coproduct-epi",
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-pc-higher-direct-image-resolution-naturality",
+ "title": "Naturality of the concrete higher-direct-image resolution section map",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientComparison",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3, naturality of the section-class comparison under augmentation-preserving resolution maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right derived cohomology commutes with exact restriction preserving injective modules and is natural in coefficients",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn from this search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from cohomology of sections of an injective resolution to sections of a higher direct image is natural in the coefficient module",
+   "results": "Eight hits. Generic resolution comparison naturality exists in Mathlib; no specialized open-restriction natural isomorphism or theta-resolution formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomology.*[Ii]so|[Ii]so.*moduleCohomology|sectionCohomologyTheta.*natur|mapHomologyIso.*naturality; both library roots and Mathlib",
+   "results": "Found top-open comparison and objectwise OpenModuleCohomologyComparison, plus generic isoRightDerivedObj and mapHomologyIso naturality. None states this natural isomorphism or the fixed section-map naturality. Blueprint/DAG search found the parent coefficient comparison, without these separate statements.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\", \"naturality\"",
+   "results": "Second reader: eight generic ShortComplex mapHomologyIso naturality lemmas; these prove intermediate squares but do not state naturality of theta combined with resolution isomorphisms.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of sheafification homology comparison from homology of the presheaf complex to underlying sheaf homology",
+   "results": "Second reader: eight hits on homology cycles/opcycles and sheafification units. None gives the displayed coefficient-comparison formula. Read the existing objectwise OpenModuleCohomologyComparison and top-open ModuleCohomologyTopComparison; neither supplies the general natural restriction isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "statement": "Let f:X→Y be a morphism of schemes [def-pc-scheme], p a natural number, V an open of Y, and a:M→N a map of module sheaves [def-weil-sheaf-of-modules-category]. Let I and J be arbitrary injective resolutions of M and N [def-sp-injective-resolutions]. Define b_I by the real construction higherDirectImageResolutionSectionMap: isoRightDerivedObj for sections on f⁻¹V [def-sc-open-module-cohomology], then the exact evaluation mapHomologyIso for the presheaf complex underlying f_*I, then sectionCohomologyTheta [def-weil-pbc-flat-base-change-open-choices], then evaluation of the inverse isoRightDerivedObj for f_*. Define b_J the same way. Then R^pΓ(f⁻¹V,a) followed by b_J equals b_I followed by Γ(V,R^p f_*(a)). This is a fixed equality of specified maps, not existence of an unspecified comparison.",
+ "proof": [
+  {
+   "text": "Lift a to a map g:I→J preserving the augmentations. By isoRightDerivedObj_hom_naturality the source derived-sections map followed by the resolution identification equals the resolution identification followed by homology of the sectionwise map g.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact evaluation commutes with homology by mapHomologyIso, naturally in g. Theta is adjoint to the comparison from sheafification of presheaf homology to sheaf homology. This comparison is built from mapHomologyIso for exact sheafification and the counit; both are natural in the complex. Naturality of the adjunction homEquiv therefore makes theta commute with f_*g.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isoRightDerivedObj_inv_naturality for direct image to move the map f_*g through the inverse target resolution comparison. Evaluate at V and combine with the two preceding squares by associativity. Any two augmentation-preserving lifts are homotopic, so their induced homology maps agree. This also proves the assertion for identity maps between different resolutions and for zero maps, degree zero, and empty inverse-image opens.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageResolutionNaturality.lean",
+  "declaration": "AlgebraicGeometry.higherDirectImage_resolution_naturality",
+  "statement": "theorem higherDirectImage_resolution_naturality\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) (V : Y.Opens)\n    {M N : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (a : M ⟶ N)\n    (I : InjectiveResolution M) (J : InjectiveResolution N) :\n  ((RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).rightDerived p).map a ≫\n      higherDirectImageResolutionSectionMap f p V J =\n        higherDirectImageResolutionSectionMap f p V I ≫\n        ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙\n          RingedSpace.openModuleSections Y.toRingedSpace V).map a",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.higherDirectImageResolutionSectionMap",
+   "AlgebraicGeometry.higherDirectImage_resolution_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T060432-L-586812",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T060432-L-586812",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

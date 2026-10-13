@@ -16,35 +16,38 @@
  ],
  "proof": [
   {
-   "text": "For each coefficient module M choose an injective resolution I. Open restriction is exact and carries I to an injective resolution on U (01E1). Through overFunctorEquiv, the resolution is a resolution of Scheme.Modules.restrictFunctor U.ι applied to M. The restrictAppIso at top identifies its global sections complex with the sections of I over U; forgetting scalars is exact, so the resulting homology is the underlying additive group of H^p(U,M|U).",
+   "text": "Apply the fully proved natural open-restriction comparison to each U=f⁻¹V. Choose its natural isomorphism a_V; its existence is proved by an actual restricted resolution and homology comparison, not by a new unproved existence statement.",
    "uses": [
-    "lem-sc-ringed-space-restrict-injective-resolution",
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "def-sp-injective-resolutions"
+    "lem-pc-open-restriction-module-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "This section complex is also the evaluation at V of f_*I. Map its homology through sectionCohomologyTheta, then through the inverse of I.isoRightDerivedObj f_* p. This defines c_V(M). Lift every coefficient map to a map of the chosen resolutions. The restricted lift preserves the augmentation; isoRightDerivedObj_hom_naturality, naturality of mapHomologyIso, and the adjunction unit/counit identities show that the displayed maps commute with this lift. Homotopic lifts give identical homology maps, yielding a natural transformation on coefficient modules. The isomorphism e in the conclusion is the composite of the restricted-resolution homology isomorphism and exact evaluation at V; by construction c_V(N) equals e.hom followed by canonical theta and the inverse resolution comparison. This formula holds for any I because augmentation-preserving resolution comparisons are homotopy equivalences.",
+   "text": "Construct the comparison on derived open sections using the concrete resolution section map on Mathlib chosen resolutions. The fixed resolution naturality equality makes its components a natural transformation. Apply the same equality to the identity coefficient map between a chosen resolution and arbitrary I; functors preserve identity maps, so the components agree for every I.",
    "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-sp-injective-resolutions"
+    "lem-pc-higher-direct-image-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose a_V.hom with this natural transformation. For N and I take e to be a_V(N), followed by I.isoRightDerivedObj for open sections and exact evaluation mapHomologyIso for the section cohomology presheaf. This is an actual composite of isomorphisms. The arbitrary-resolution formula from the preceding step and associativity give the required component identity.",
+   "uses": [
+    "lem-pc-open-restriction-module-cohomology",
+    "lem-pc-higher-direct-image-resolution-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-ringed-space-restrict-injective-resolution",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-higher-direct-image-presheaf"
+  "lem-pc-open-restriction-module-cohomology",
+  "lem-pc-higher-direct-image-resolution-naturality"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A2",
+  "group": "Y3",
   "date": "2026-10-13",
   "document": "Stacks Project, Tags 01E1 and 01E4",
-  "place": "Formal decomposition of steps 1 and 2 of the affine-cohomology presentation, retaining the canonical resolution formula"
+  "place": "Complete restriction comparison and assembly; fixed resolution-map naturality split into its own node"
  },
  "mathlib_searches": [
   {
@@ -159,9 +162,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T040739-L-3946199",
+  "landing": "20261013T060432-L-586812",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
