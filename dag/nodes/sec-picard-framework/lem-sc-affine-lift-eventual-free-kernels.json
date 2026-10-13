@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-perfect-pseudo-coherent-locally-finite-tor] to F. Quasi-compactness gives a global Tor interval [a,b] by [lem-pc-quasi-compact-finite-tor-dimension]. Tensoring with the structure sheaf then gives vanishing of ordinary cohomology below a; exact restriction and the supplied representation transfer this to R(K).",
+   "text": "Install derived localizations on open subschemes of U by transporting the already supplied over-site localizations through Modules.overEquiv. Compactness of the subtype U gives CompactSpace U.toScheme. Apply perfect_isPseudoCoherent_and_hasLocallyFiniteTorDimension, then hasFiniteTorDimension_of_locallyFinite, to obtain a common interval [a,b]. Exact-functor mapDerivedCategoryFactors and the supplied representing isomorphism identify Q(L) with F, where L is the actual termwise restricted complex.",
    "uses": [
     "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
     "lem-pc-quasi-compact-finite-tor-dimension"
@@ -23,32 +23,53 @@
    "elementary": false
   },
   {
-   "text": "Identify X with Spec of its global sections, transporting K and U along that scheme isomorphism. Apply [lem-pc-affine-finite-free-sheaf-complex-lift] to the transported K. This gives a bounded-above finite-free module complex whose associated sheaf complex is isomorphic to K. The affine tilde/sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] carries the termwise maps and their kernels and images compatibly.",
+   "text": "Test tensor vanishing against the unit. Unpack its K-flat witness P; mapBifunctorSingle₂Iso followed by the right unitor identifies its tensor with P itself. DerivedCategory.homologyFunctorFactors transports zero homology along Q(L) ≅ F ≅ Q(P), proving L.ExactAt i for i<a. Restriction preserves finite freeness by overFunctorEquiv, restrictFunctorIsoPullback and pullbackFreeIso. Finite free sheaves are flat by flat_coproduct and transport along their isomorphisms, so L is K-flat by the bounded-above-flat criterion.",
    "uses": [
-    "lem-pc-affine-finite-free-sheaf-complex-lift",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-flat-coproduct",
+    "lem-pc-bounded-above-flat-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "For each r at most N=a-1, apply [lem-sc-affine-truncation-kernel-finite-locally-free] using this model and the common Tor interval. Its restricted image identifies with the outgoing kernel on U and is finite locally free. Transport this property back through the termwise and scheme-isomorphism comparisons. Ordinary cohomology vanishing gives exactness in every degree i at most r. For U empty all restricted sheaves are zero; take N=0 and use the rank-zero sheaf.",
+   "text": "For each G, unpack its tensor vanishing witness P. Apply kFlat_derivedTensor_comparison_natIso to constant singleton families for both L and P. Tensor the representing isomorphism Q(L) ≅ Q(P) with Q(G[0]) and compose the comparisons. homologyFunctorFactors and mapBifunctorSingle₂Iso give ExactAt i for the ordinary termwise tensor L tensor G when i<a. For r<a apply the proved upstream CategoryTheory.ObjectProperty.flat_opcycles_of_exactAt (WeilConjectures.CategoryTheory.DerivedCategory.FlatModel) at r-1; the required tensor-exact degree is r-2<a. Conjugate the two defining finite-free terms by their free isomorphisms, use opcyclesIsCokernel, and construct presentationOfIsCokernelFree. Its finite generating and relation index sets prove finite presentation of the opcycles.",
    "uses": [
-    "lem-sc-affine-truncation-kernel-finite-locally-free"
+    "lem-pc-kflat-derived-tensor-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "FlatSheafStalk gives flat stalks of the opcycles. Apply relative_flat_of_stalks to the identity morphism, using restrictScalarsId'App to identify identity restriction of stalk scalars. Specialize its affine-section criterion to the same affine open on both sides and identify the identity appLE ring homomorphism. Finite presentation of affine sections and isFiniteLocallyFree_of_isAffineOpen give finite local freeness.",
+   "uses": [
+    "lem-pc-flat-sheaf-stalk-flat",
+    "lem-weil-pbc-finite-presentation-affine-sections",
+    "lem-pc-affine-sections-finite-locally-free-criterion",
+    "lem-pc-relative-flat-of-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness at r-1 and r makes L.opcyclesToCycles (r-1) r monic and epic, using the short-complex mono_fromOpcycles and epi_toCycles criteria and the two canonical factorization identities. In the abelian category it is an isomorphism. Compose with cyclesIsoSc' and cyclesIsoKernel, then transport IsFiniteLocallyFree. Set N=a-1; i≤r≤N implies i<a. The compactness theorem inserts zero endpoints for empty covers, and every subsequent argument also includes empty opens, zero sheaves, and rank-zero free terms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-finite-free-sheaf-complex-lift",
   "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
   "lem-pc-quasi-compact-finite-tor-dimension",
-  "lem-sc-affine-truncation-kernel-finite-locally-free",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-weil-pbc-flat-coproduct",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-pc-flat-sheaf-stalk-flat",
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "lem-pc-affine-sections-finite-locally-free-criterion",
+  "lem-pc-relative-flat-of-stalks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EG, proof of Lemma 36.13.6, finite-free lift and stupid truncation; read online at https://stacks.math.columbia.edu/tag/08EG"
+  "place": "Tag 08EG, kernel paragraphs; direct categorical Tor-opcycles argument from Tag 0653, without ambient spectrum transport"
  },
  "mathlib_searches": [
   {
@@ -138,11 +159,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q4",
+  "reviewer": "X-6d99b",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T082406-L-1645406",
+  "landing": "20261013T111945-L-3070894",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged public signature with the node and baseline, the proof with the updated DAG, and the repair with the earlier return; delivery and sole direct importer compile cleanly, and all seven declarations use only permitted axioms."
  }
 }
