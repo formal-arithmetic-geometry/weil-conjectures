@@ -27,48 +27,50 @@
  ],
  "proof": [
   {
-   "text": "Construct U and the maps r by Steps 1--2 of Lemma 01YB, proving the stalk, restriction-isomorphism, compatibility, and finiteness assertions.",
+   "text": "Obtain the ideal module quasicoherence from the affine product theorem at exponent one. Its finite type follows from the proved finite-type-ideal-module theorem and the Noetherian finite-type-ideal fact. Apply sections_over_quasiCompact_open to get U, its stalk characterization, and bijectivity of all ideal powers on every open inside U.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-    "def-pc-scheme",
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "pqf-lem-coherent-ft-locnoeth"
+    "lem-pqf-finite-type-ideal-module",
+    "lem-weil-pbc-sections-over-quasi-compact-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YB proof, Steps 1--2"
-   }
+   "elementary": false
   },
   {
-   "text": "Construct the Hom diagram and cocone, prove its compatibility, and establish bijectivity of the colimit map by Steps 3--7 and 13 of Lemma 01YB (the support-power-ideal argument supplies injectivity).",
+   "text": "Construct each transition r n m from formalModuleQuotient_factor for the identity of G. The factors are uniquely determined by the monomorphic product inclusions, so choices are not arbitrary data. Prove all product inclusions are isomorphisms after restriction: ideal_module_product_stalk identifies their stalk ranges with I_x^n G_x, which is the whole stalk on U; handle exponent zero using the identity ideal. Stalkwise bijectivity gives sectionwise bijectivity on every open inside U and thus an isomorphism in the over-site category.",
    "uses": [
-    "lem-weil-pbc-sections-over-quasi-compact-open",
-    "lem-weil-pbc-module-finite-type-submodule-extension",
-    "lem-weil-pbc-coherent-support-power-ideal-kills",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+    "lem-weil-pbc-formal-module-ideal-power-factor",
+    "lem-weil-pbc-ideal-module-product-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YB proof, Steps 3--7 and 13"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Cancel the monomorphic inclusions to prove the identity and composition laws of r. Define D n as AddCommGrpCat.of (I^n G -> F) and D.map by precomposition. Define the restriction cocone using the inverse of the restricted product inclusion. Its naturality follows by cancellation and hcomp; its required compatibility follows from the inverse identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For surjectivity of colimit.desc use finite-stage extension and the colimit cocone identity. For injectivity represent a class by chi at stage n, using Mathlib Concrete.colimit_exists_rep and preservation of the filtered colimit by forget. If its cocone image is zero, the restriction of chi is zero. Eventual vanishing supplies a later stage where r followed by chi is zero; colimit.w makes the original class zero. The additive map kernel criterion gives injectivity. Package U, r and the proved properties as CoherentHomsOverOpenData.",
+   "uses": [
+    "lem-weil-pbc-coherent-hom-ideal-power-extension",
+    "lem-weil-pbc-coherent-hom-ideal-power-eventually-zero"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "lem-weil-pbc-coherent-support-power-ideal-kills",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-pqf-finite-type-ideal-module",
+  "lem-weil-pbc-coherent-hom-ideal-power-eventually-zero",
+  "lem-weil-pbc-coherent-hom-ideal-power-extension",
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "lem-weil-pbc-ideal-module-product-stalk",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-module-finite-type-submodule-extension",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "lem-weil-pbc-sections-over-quasi-compact-open",
-  "pqf-lem-coherent-ft-locnoeth"
+  "lem-weil-pbc-sections-over-quasi-compact-open"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01YB (label lemma-homs-over-open, line 2621) and its proof (lines 2649-2743); the two places the source omits (I^nK = 0, injectivity of the first arrow) are written out by the agent in Steps 10 and 13, and the map, the restrictions to U and the finiteness facts (Steps 1, 2) are made explicit"
+  "by": "agent",
+  "agent": "Q2",
+  "date": "2026-10-13",
+  "reason": "Lean construction following Stacks Project Lemma 01YB; retain the geometric surjectivity and eventual-vanishing steps separately, construct and verify the Hom diagram and colimit comparison explicitly."
  },
  "mathlib_searches": [
   {
@@ -127,17 +129,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T022413-L-3212910",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.coherent_homs_over_open_data",
-   "AlgebraicGeometry.Scheme.coherent_homs_over_open_extension"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.coherent_homs_over_open_data"
-  ]
+  "landing": "20261013T100058-L-2477826",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

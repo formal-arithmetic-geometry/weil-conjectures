@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-coherent-hom-ideal-power-eventually-zero",
+ "kind": "statement",
+ "title": "Eventual vanishing of a homomorphism zero on an open complement",
+ "statement": "Let X be a locally Noetherian quasi-compact scheme [pqf-def-locnoeth], I a quasi-coherent ideal sheaf, F a quasi-coherent module, and G a coherent module [pqf-def-coherent]. Write j_n:I^n G -> G for the image-defined inclusion [lem-weil-pbc-ideal-module-product-stalk]. Let U be an open consisting exactly of points where I_x -> O_X,x is surjective. If chi:I^n G -> F restricts to zero on U [def-weil-sheaf-of-modules-category], then there exist m >= n such that every r:I^m G -> I^n G satisfying r followed by j_n equal to j_m has r followed by chi equal to zero. This asserts only eventual vanishing, not extension or existence of the transition maps.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Cohomology of Schemes, Lemma 01YB (lemma-homs-over-open), omitted injectivity, expanded with Lemma 01Y9",
+  "url": "https://stacks.math.columbia.edu/tag/01YB"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Quasi-coherence of powers and their products follows from the affine ideal-product formulas. I^n G is a quasi-coherent submodule of coherent G, hence coherent on the locally Noetherian scheme.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image Q of chi is quasi-coherent, with affine section modules equal to images of the affine section maps. Those modules are finitely generated as images of the finite section modules of I^n G. The affine finite-type criterion and coherence criterion imply that Q is coherent. The zero restriction of chi implies zero image on U, hence zero stalks of Q at points of U. Using hU, its nonzero-stalk locus is contained in the nonsurjective-stalk locus of I.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The support-power-ideal lemma gives t with I^t Q=0. Set m=n+t. On each affine W the image of j_m is I(W)^t I(W)^n G(W). Any factor r through the monomorphic j_n identifies this with I(W)^t times the sections of I^n G; linearity shows that chi sends it to I(W)^t Q(W)=0. Thus r followed by chi vanishes on every affine open. Sheaf separatedness over the affine basis makes it zero globally. The same exponent works for every r, since the factor through j_n is unique.",
+   "uses": [
+    "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2",
+  "date": "2026-10-13",
+  "reason": "Lean construction following Stacks Project Lemma 01YB; retain the geometric surjectivity and eventual-vanishing steps separately, construct and verify the Hom diagram and colimit comparison explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from powers of an ideal times a coherent sheaf to a quasi-coherent sheaf is colimit of Hom on the open complement",
+   "results": "localCohomology.ofDiagram; SheafOfModules.Presentation.isColimit; AlgebraicGeometry.Scheme.Modules.instHasColimits; localCohomology.hasColimitDiagram; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat; SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat; localCohomology; SheafOfModules.isColimitFreeCofan",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from an ideal power times a coherent module which vanishes off V(I) vanishes on a higher ideal power",
+   "results": "IsHausdorff.haus; IsHausdorff.haus'; isHausdorff_iff; Ideal.exists_pow_inf_eq_pow_smul; IsHausdorff.iInf_pow_smul; localCohomology; Ideal.mem_iInf_smul_pow_eq_bot_iff; Ideal.iInf_pow_smul_eq_bot_of_isLocalRing",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules",
+   "results": "AlgebraicGeometry.Scheme.Modules; AlgebraicGeometry.Scheme.Modules.instCategory; AlgebraicGeometry.Scheme.Modules.Hom; AlgebraicGeometry.Scheme.Modules.instAbelian; AlgebraicGeometry.Scheme.Modules.instHasColimits; AlgebraicGeometry.Scheme.Modules.instHasLimits; AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian; AlgebraicGeometry.Scheme.Modules.presheaf",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*pow.*[Hh]om|[Hh]om.*ideal.*pow|support.*annihilat",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a noetherian scheme maps between coherent sheaves on the complement of V(I) extend from I^n G, and maps restricting to zero vanish on higher ideal powers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentHomsOverOpen",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Lemma 01YB Step 13 (injectivity)",
+   "via": [
+    "lem-weil-pbc-coherent-homs-over-open-data",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentHomIdealPowerEventuallyZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentHomIdealPowerEventuallyZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coherent_hom_ideal_power_eventually_zero",
+  "statement": "theorem coherent_hom_ideal_power_eventually_zero {X : Scheme.{u}} [IsLocallyNoetherian X]\n    [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]\n    (hG : RingedSpace.IsCoherent X.toRingedSpace G) (U : X.Opens)\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map I.toModulesι).hom)\n    (n : ℕ) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F)\n    (hχ : (SheafOfModules.overFunctor X.ringCatSheaf U).map χ = 0) :\n    ∃ (m : ℕ) (_ : n ≤ m),\n      ∀ r : idealModuleProduct (idealSheafPower I.toModulesι m).2 G ⟶\n          idealModuleProduct (idealSheafPower I.toModulesι n).2 G,\n        r ≫ idealModuleProductι (idealSheafPower I.toModulesι n).2 G =\n          idealModuleProductι (idealSheafPower I.toModulesι m).2 G → r ≫ χ = 0",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100058-L-2477826",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100058-L-2477826",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
