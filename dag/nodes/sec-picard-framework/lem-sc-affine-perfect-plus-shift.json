@@ -36,8 +36,9 @@
    }
   },
   {
-   "text": "The perfect object E lies in D_QCoh(\\mathcal O_X) [def-pc-derived-category]: locally it is isomorphic to a strictly perfect complex [def-pc-perfect-complex], a bounded complex of finite locally free modules, whose cohomology sheaves are kernels modulo images of maps of quasi-coherent modules, hence quasi-coherent, and quasi-coherence is local. So [lem-sc-affine-perfect-map-lift] applies with A=E and E'=E to the endomorphism of E|_U that is the identity on the summand \\mathcal F[-r] and zero on the summand F (defined through the chosen isomorphism of Step 1). It gives a perfect E_1 and maps E\\xleftarrow{\\beta}E_1\\xrightarrow{\\gamma}E with \\beta an isomorphism on U and \\gamma|_U\\circ(\\beta|_U)^{-1} equal to this endomorphism.",
+   "text": "Apply [lem-sc-perfect-qcoherent] to the perfect object P from Step 1, giving an object of D_QCoh with underlying object P. Conjugate the projection id on the shifted locally free summand and zero on F by the restriction isomorphism. Apply [lem-sc-affine-perfect-map-lift] with source P and target this quasi-coherent object to obtain a perfect A and a map gamma:A to P, together with an isomorphism b_U:R(A) to R(P) satisfying alpha=b_U inverse followed by R(gamma). Multiplying by b_U gives R(gamma)=b_U followed by alpha.",
    "uses": [
+    "lem-sc-perfect-qcoherent",
     "lem-sc-affine-perfect-map-lift"
    ],
    "elementary": false,
@@ -47,26 +48,44 @@
    }
   },
   {
-   "text": "Let C=\\operatorname{Cone}(\\gamma), so E_1\\to E\\to C\\to E_1[1] is a distinguished triangle; since E_1 and E are perfect, C is perfect [lem-pc-perfect-two-out-of-three]. Restriction to U is a triangulated functor, so C|_U\\cong\\operatorname{Cone}(\\gamma|_U). On U, identify E_1 with E using \\beta; then \\gamma|_U becomes the projection \\mathrm{id}\\oplus 0 on \\mathcal F[-r]\\oplus F, whose cone is \\operatorname{Cone}(\\mathrm{id}_{\\mathcal F[-r]})\\oplus\\operatorname{Cone}(0:F\\to F)\\cong 0\\oplus(F\\oplus F[1]). Thus C|_U\\simeq F\\oplus F[1].",
+   "text": "By TR1 [def-weil-triangulated-category], complete gamma to a distinguished triangle A to P to E to A[1]. Apply [lem-pc-perfect-two-out-of-three] to obtain perfectness of E. Exact derived restriction [def-pc-derived-category] sends this to a distinguished triangle whose first arrow, under b_U and the isomorphism of Step 1, is the projection onto the shifted locally free summand.",
    "uses": [
-    "lem-pc-perfect-two-out-of-three"
+    "def-weil-triangulated-category",
+    "lem-pc-perfect-two-out-of-three",
+    "def-pc-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
     "place": "Tag 08EI proof, final sentence"
    }
+  },
+  {
+   "text": "Compute that projection cone in the private proved helper cone_projection_iso. Start with the contractible triangle M to M to 0. The existing source-library theorem CategoryTheory.Pretriangulated.mk_fst_comp_distinguished adjoins F to the source, giving first arrow M direct sum F to M. Then mk_comp_inl_distinguished adjoins F to the target, giving first arrow the projection endomorphism on M direct sum F and third term (0 direct sum F[1]) direct sum F. Mathlib isoTriangleOfIso12 extends the two given isomorphisms to an isomorphism of distinguished triangles, using TR3 [def-weil-triangulated-category] and [lem-sf-triangle-morphism-iso]. Project to the third term, remove the zero summand, and exchange the two summands. The result is R(E) isomorphic to F direct sum F[1]. The two padding results are already proved in WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated, lines 50 and 113; no new unproved statement is introduced.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EI, final sentence; explicit cone cancellation using the source-library trivial-summand triangle lemmas"
+   }
   }
  ],
  "proof_deps": [
   "lem-sc-affine-perfect-plus-locally-free",
+  "lem-sc-perfect-qcoherent",
   "lem-sc-affine-perfect-map-lift",
-  "lem-pc-perfect-two-out-of-three"
+  "def-weil-triangulated-category",
+  "lem-pc-perfect-two-out-of-three",
+  "def-pc-derived-category",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EI (Lemma 36.13.8)"
+  "place": "Tag 08EI, original extension/lifting/cone route, with complete Lean cone cancellation by the proved source-library padding lemmas"
  },
  "mathlib_searches": [
   {
@@ -151,5 +170,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T045517-L-125679",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
