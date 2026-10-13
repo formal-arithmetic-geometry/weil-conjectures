@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-flat-resolution-tor-comparison",
+ "kind": "statement",
+ "title": "Tor computed by an augmented flat resolution",
+ "statement": "Let R be a commutative ring, M and N be R-modules, and F a nonnegative chain complex of R-modules [def-weil-pbc-module-chain-complex-homology]. Let epsilon:F -> M[0] be a quasi-isomorphism, so F is an augmented resolution of M. Suppose every term F_i is flat [def-weil-pbc-flat-ring-map]. For every natural degree j, there is an R-module isomorphism Tor^R_j(M,N) [def-weil-pbc-tor-modules] = H_j(F tensor_R N). No boundedness or finite generation assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 10.75 (Tag 00LY), Lemma 10.75.3 (Tag 00M1), and Lemma 10.75.5 (Tag 00M3); https://stacks.math.columbia.edu/tag/00LY"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Take a projective resolution Q of N and form the commuting first-quadrant tensor bicomplex F_p tensor Q_q. Its rows are exact in positive degrees since Q_q is projective and hence flat, and F resolves M. Its columns are exact in positive degrees by flatness of F_p and exactness of Q. The quasi-isomorphism of F at zero gives exactness of F_1 -> F_0 -> M and surjectivity onto M.",
+   "uses": [
+    "def-weil-pbc-tensor-bicomplex",
+    "def-weil-pbc-module-chain-complex-homology",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 10.75 (Tag 00LY), Lemma 10.75.3 (Tag 00M1), and Lemma 10.75.5 (Tag 00M3); https://stacks.math.columbia.edu/tag/00LY"
+   }
+  },
+  {
+   "text": "Use right exactness of tensor to identify the column cokernel complex with F tensor N and the row cokernel complex with Q tensor M (braiding in the latter identification). Define these maps by the augmentation on each component, descend through opcycles, and verify they are isomorphisms by degreewise exactness and surjectivity. The positive exactness hypotheses give the homology isomorphism between both cokernel complexes by the double-complex comparison.",
+   "uses": [
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "def-weil-pbc-tensor-bicomplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 10.75 (Tag 00LY), Lemma 10.75.3 (Tag 00M1), and Lemma 10.75.5 (Tag 00M3); https://stacks.math.columbia.edu/tag/00LY"
+   }
+  },
+  {
+   "text": "The projective resolution Q computes Tor_prime(N,M) by Mathlib ProjectiveResolution.isoLeftDerivedObj. Apply Tor symmetry to identify Tor_prime(M,N) with this module and compose with the preceding homology isomorphisms. The proof works also in degree zero and for zero modules.",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 10.75 (Tag 00LY), Lemma 10.75.3 (Tag 00M1), and Lemma 10.75.5 (Tag 00M3); https://stacks.math.columbia.edu/tag/00LY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-tensor-bicomplex",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-double-complex-cokernel-homology-iso",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 10.75 (Tag 00LY), Lemma 10.75.3 (Tag 00M1), and Lemma 10.75.5 (Tag 00M3); https://stacks.math.columbia.edu/tag/00LY; source read online; Lean argument written by U4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The homology of a flat resolution tensor a module is isomorphic to Tor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homology of a flat resolution tensor a module is isomorphic to Tor",
+   "results": "LeanFinder returned Rep.torIso (projective resolutions), Module.Flat tensor exactness, and Tor_prime_obj_obj; none computes Tor from a flat resolution.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLeftDerivedObj|flatResolution",
+   "results": "Mathlib gives polynomial presentations and projective-resolution Tor computations, but not stalkwise perfection over polynomial presentations or flat-resolution comparison. Searches of both library roots and DAG found no exact declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSectionsFiniteTorOfStalkwise",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Relative finite Tor part of the proper perfect pushforward argument descending from lem-sc-finite-duality; step 1 of lem-pc-perfect-relative-tensor-locally-bounded (Tag 069C, stalkwise finite Tor dimension to a uniform neighbourhood bound). Step 1 of lem-pc-stalk-tor-dimension-locally-uniform: polynomial presentation and finite Tor bound for the affine coordinate algebra.; Section 10.75 (Tag 00LY), Lemma 10.75.3 (Tag 00M1), and Lemma 10.75.5 (Tag 00M3); https://stacks.math.columbia.edu/tag/00LY",
+   "via": [
+    "lem-pc-affine-sections-finite-tor-of-stalkwise",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatResolutionTorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FlatResolutionTorComparison.lean",
+  "declaration": "ModuleCat.flatResolution_torComparison",
+  "statement": "theorem flatResolution_torComparison\n    {R : Type u} [CommRing R] (M : ModuleCat.{u} R)\n    (F : ChainComplex (ModuleCat.{u} R) ℕ)\n    (ε : F ⟶ (ChainComplex.single₀ (ModuleCat.{u} R)).obj M)\n    [QuasiIso ε] (hflat : ∀ i : ℕ, Module.Flat R (F.X i))\n    (N : ModuleCat.{u} R) (j : ℕ) :\n    Nonempty ((((Tor' (ModuleCat.{u} R) j).obj M).obj N) ≅\n      (((tensorRight N).mapHomologicalComplex (.down ℕ)).obj F).homology j)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T100153-L-2494740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T100153-L-2494740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

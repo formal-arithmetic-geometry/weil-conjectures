@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-affine-polynomial-resolution-of-stalkwise",
+ "kind": "statement",
+ "title": "Polynomial affine resolution from stalkwise finite Tor dimension",
+ "statement": "Let $f:X\\to Y$ be a locally finite type morphism of schemes [def-pc-scheme], with $Y$ Noetherian [pqf-def-locnoeth] and stalkwise finite Tor dimension [def-pc-perfect-morphism]. For affine opens $U\\subset Y$, $V\\subset X$ with $V\\subset f^{-1}U$, put $A=\\Gamma(Y,U)$ and $B=\\Gamma(X,V)$. Let $n\\in\\mathbb N$ and let $g:A[t_1,\\ldots,t_n]\\to B$ be a surjective ring homomorphism whose restriction to $A$ is the coordinate map induced by $f$. Then there exist $d\\in\\mathbb N$ and a projective resolution $P_\\bullet\\to B$ of $B$ as an $A[t_1,\\ldots,t_n]$-module [def-weil-pbc-finite-global-dimension] such that $P_i=0$ for all $i>d$. The polynomial presentation and bound may have $n=0$, $d=0$, and $B=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, proof of (3) implies (1); More on Algebra Tags 068X and 068W; https://stacks.math.columbia.edu/tag/069C"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-perfect-morphism",
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof": [
+  {
+   "text": "The affine target ring A is Noetherian. For P=A[t_1,...,t_n], Hilbert basis theorem makes P Noetherian. Surjectivity of g makes B a finite P-module, hence B[0] is pseudo-coherent. For a prime q not containing ker(g), B_q=0. Otherwise q/ker(g) corresponds to a source point x in V; affine stalk identifications identify B_q with O_{X,x} and A_p with O_{Y,f(x)}. Compatibility of g with the coordinate map identifies the scalar actions. The stalkwise hypothesis therefore gives finite Tor dimension for B_q over A_p.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-locnoeth",
+    "def-pc-perfect-morphism",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, proof of (3) implies (1); More on Algebra Tags 068X and 068W; https://stacks.math.columbia.edu/tag/069C"
+   }
+  },
+  {
+   "text": "The localized map A_p -> P_q is flat. Each fibre is a localization of a polynomial algebra over a residue field and has global dimension at most n. Tag 068X makes B_q perfect over P_q, including the zero localization. Since B[0] is pseudo-coherent and bounded below, Tag 068W glues these pointwise perfect models to a bounded complex of finite projectives over P.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-locnoeth",
+    "def-pc-perfect-morphism",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, proof of (3) implies (1); More on Algebra Tags 068X and 068W; https://stacks.math.columbia.edu/tag/069C"
+   }
+  },
+  {
+   "text": "The bounded projective representative has homology B in degree zero only. Split its exact positive cochain-degree tail recursively, using projectivity of the last nonzero term, to remove the tail and retain projective degree zero. The remaining bounded nonpositive cochain complex, with its quotient augmentation to B, is a projective resolution after reversing degrees. Choose a natural upper chain-degree bound d. If B=0 use the zero complex with its zero augmentation.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-locnoeth",
+    "def-pc-perfect-morphism",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, proof of (3) implies (1); More on Algebra Tags 068X and 068W; https://stacks.math.columbia.edu/tag/069C"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-finite-global-dimension",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, proof of (3) implies (1); More on Algebra Tags 068X and 068W; https://stacks.math.columbia.edu/tag/069C; source read online; Lean argument written by U4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite module over a Noetherian polynomial algebra with finite projective dimension at every prime has a bounded projective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a Noetherian polynomial algebra with finite projective dimension at every prime has a bounded projective resolution",
+   "results": "LeanFinder returned CategoryTheory.projectiveDimension_ne_top_iff, projectiveDimension_le_iff and projective resolution existence; none gives the stalkwise criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteType.iff_quotient_mvPolynomial|projectiveDimension|finite.*[Pp]rojective.*[Ll]ocal",
+   "results": "Mathlib gives polynomial presentations and projective-resolution Tor computations, but not stalkwise perfection over polynomial presentations or flat-resolution comparison. Searches of both library roots and DAG found no exact declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSectionsFiniteTorOfStalkwise",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Relative finite Tor part of the proper perfect pushforward argument descending from lem-sc-finite-duality; step 1 of lem-pc-perfect-relative-tensor-locally-bounded (Tag 069C, stalkwise finite Tor dimension to a uniform neighbourhood bound). Step 1 of lem-pc-stalk-tor-dimension-locally-uniform: polynomial presentation and finite Tor bound for the affine coordinate algebra.; Tag 069C, proof of (3) implies (1); More on Algebra Tags 068X and 068W; https://stacks.math.columbia.edu/tag/069C",
+   "via": [
+    "lem-pc-affine-sections-finite-tor-of-stalkwise",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePolynomialResolutionOfStalkwise",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePolynomialResolutionOfStalkwise.lean",
+  "declaration": "AlgebraicGeometry.affinePolynomial_boundedResolution_of_stalkwise",
+  "statement": "theorem affinePolynomial_boundedResolution_of_stalkwise\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (f : X ⟶ Y) [LocallyOfFiniteType f]\n    (hperfect : HasStalkwiseFiniteTorDimension f)\n    (U : Y.Opens) (hU : IsAffineOpen U)\n    (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)\n    (n : ℕ) (g : MvPolynomial (Fin n) Γ(Y, U) →+* Γ(X, V))\n    (hg : Function.Surjective g)\n    (hcomp : g.comp (MvPolynomial.C) = (f.appLE U V e).hom) :\n    ∃ (d : ℕ) (P : ProjectiveResolution\n        ((ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V)))),\n      ∀ i : ℕ, d < i → IsZero (P.complex.X i)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T100153-L-2494740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T100153-L-2494740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
