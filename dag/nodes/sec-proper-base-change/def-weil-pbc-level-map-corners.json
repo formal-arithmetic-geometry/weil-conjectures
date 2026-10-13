@@ -3,25 +3,150 @@
  "blueprint": {
   "is": "def-weil-pbc-level-map-corners",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Four finite-level rectangle corners",
- "statement": "For the proper Cartesian square $\\square$, put $E=L(g')^*K$ and, for every\n$n\\geq1$, define\n\n$$\n\\begin{aligned}\nA_n&:=Lg^*((Rf_*K)\\otimes^LP_n),&\nB_n&:=Lg^*Rf_*K_n,\\\\\nC_n&:=(Rf'_*E)\\otimes^LP_n,&\nD_n&:=Rf'_*E_n,\n\\end{aligned}\n$$\n\nwhere $E_n=L(g')^*K_n=E\\otimes^LP_n$. The chosen Cartesian\nidentification supplies\n$L(g')^*Lf^*=L(f')^*Lg^*$ throughout.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a Cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$ proper, $g:Y'\\to Y$, $g':X'\\to X$, and $f':X'\\to Y'$. Use the constant coefficient datum $\\Lambda,I,P_n=\\Lambda/I^n$ and reductions of [def-weil-pbc-complete-coefficient-datum], and let $K\\in D(X_{\\mathrm{proet}},\\Lambda)$, with the small sites and derived categories of [def-weil-pbc-proetale-site]. For each scheme $T$ write $\\Lambda_T,(P_n)_T$ for the constant sheaves. All operations below are the ordinary uncompleted derived module operations of [def-weil-pbc-proetale-operations], using the canonical constant-coefficient identifications $u^{-1}\\Lambda_V\\cong\\Lambda_U$ for each arrow $u:U\\to V$ of the square. Tensor products are over the constant sheaf on the relevant scheme [def-weil-derived-tensor]. Reductions are regarded as $\\Lambda$-objects by restriction of scalars, as in the coefficient datum.\n\nPut $E=L(g')^*K\\in D(X'_{\\mathrm{proet}},\\Lambda)$. For every $n\\geq1$ define four objects of $D(Y'_{\\mathrm{proet}},\\Lambda)$:\n$$\n\\begin{aligned}\nA_n&:=Lg^*((Rf_*K)\\otimes^L_{\\Lambda_Y}(P_n)_Y),&\nB_n&:=Lg^*(Rf_*K_n),\\\\\nC_n&:=(Rf'_*E)\\otimes^L_{\\Lambda_{Y'}}(P_n)_{Y'},&\nD_n&:=Rf'_*(E_n),\n\\end{aligned}\n$$\nwhere $K_n=K\\otimes^L_{\\Lambda_X}(P_n)_X$ and $E_n:=L(g')^*K_n$. Equip this definition with the canonical identification\n$$\nE_n\\xrightarrow{\\sim}E\\otimes^L_{\\Lambda_{X'}}(P_n)_{X'}\n$$\nobtained from [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the constant-coefficient comparison. The Cartesian identification used throughout is the natural isomorphism\n$$\nL(g')^*Lf^*\\xrightarrow{\\sim}L(f')^*Lg^*,\n$$\nformed by the inverse of $c_{g',f}$ followed by $c_{f',g}$ of [lem-weil-pbc-proetale-derived-pullback-composition], identifying $f\\circ g'=g\\circ f'$ through $\\alpha$. Equalities between these expressions in the blueprint mean these specified canonical isomorphisms.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-level-map-corners.md",
   "place": "node def-weil-pbc-level-map-corners, order 1327"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-complete-coefficient-datum"
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For any arrow $u:U\\to V$ of the square and commutative ring $R$, the ring-sheaf inverse image has the ring adjunction: use the pro-etale inverse image of [def-weil-proetale-inverse-image] (whose inverse image preserves finite limits, since it is a morphism of sites) and its finite-product-preserving lift [lem-weil-pbc-adjunction-lifts-group-ring-objects], interpreting ring sheaves as ring objects by [lem-weil-pbc-sheaf-algebraic-structures-objects]. For a ring sheaf $F$ on $U$, [lem-weil-pbc-constant-sheaf-maps-global-sections] gives natural bijections $\\operatorname{Hom}(u^{-1}R_V,F)\\cong\\operatorname{Hom}(R_V,u_*F)\\cong\\operatorname{Hom}_{\\mathrm{CRing}}(R,(u_*F)(V))=\\operatorname{Hom}_{\\mathrm{CRing}}(R,F(U))\\cong\\operatorname{Hom}(R_U,F)$. The middle equality uses the direct-image formula and $U\\times_VV\\cong U$. Write $\\Phi_F$ for this bijection. Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] with $A=u^{-1}R_V$ and $B=R_U$: it gives an isomorphism $\\theta:R_U\\to u^{-1}R_V$ and $\\Phi_F(a)=a\\circ\\theta$. For the structure map $c^u_R:u^{-1}R_V\\to R_U$ of [def-weil-proetale-inverse-image], its adjunct sends each constant section $r$ to the same constant section $r$. Thus $\\Phi_{R_U}(c^u_R)=1_{R_U}$, so $c^u_R\\circ\\theta=1_{R_U}$ and $c^u_R=\\theta^{-1}$. Use this specified structure map as the isomorphism $u^{-1}R_V\\cong R_U$; the displayed bijections show naturality in $R$. Thus the identifications for $R=\\Lambda$ and $R=P_n$ commute with $\\Lambda\\to P_n$. For composable arrows $u:U\\to V$, $v:V\\to W$, identify $(v\\circ u)^{-1}$ with $u^{-1}v^{-1}$. The adjuncts of $c^{v\\circ u}_R$ and $c^u_R\\circ u^{-1}(c^v_R)$ are both maps $R_W\\to(v\\circ u)_*R_U$ sending $r$ to its constant section on $U\\times_W Z$ for every object $Z$ on $W$. The constant-sheaf Hom bijection makes these adjuncts equal; injectivity of the adjunction makes the comparisons equal. For the identity arrow, the same bijection identifies the adjunct with the identity map, giving the identity comparison.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (example-constant-sheaf), Tag 00YV (proposition-functoriality-algebraic-structures-topoi); categories.tex Tag 001P (lemma-yoneda); proetale.tex Tag 09A5 (section-morphism)"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-proetale-operations], module pullback with the ring identifications of step 1 is exact, and $Lu^*$ is its termwise derived functor. Naturality of those identifications in $\\Lambda\\to P_n$ identifies $L(g')^*(P_n)_X$ with $(P_n)_{X'}$ in degree zero, with the correct $\\Lambda_{X'}$-action. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $K$ and $(P_n)_X$. With the reduction definition of [def-weil-pbc-complete-coefficient-datum] this gives $L(g')^*K_n\\cong L(g')^*K\\otimes^L_{\\Lambda_{X'}}(P_n)_{X'}$. Define $E=L(g')^*K$, $E_n=L(g')^*K_n$ and retain this isomorphism. All objects and comparisons here are taken after restriction to $\\Lambda$-coefficients; no exchange of pushforward with restriction of scalars is used.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-complete-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), specialized to constant ring sheaves"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-complete-coefficient-datum] for $K_n$ and [def-weil-derived-tensor] for reduction on $Y$ and $Y'$. The source and target categories in [def-weil-pbc-proetale-operations] show that $Rf_*K$ and $Rf_*K_n$ are objects on $Y$, that their indicated reductions and pullbacks give $A_n,B_n$ on $Y'$, and that $Rf'_*E$ and $Rf'_*E_n$ are on $Y'$, giving $C_n,D_n$. These are exactly the four displayed definitions, all in $D(Y'_{\\mathrm{proet}},\\Lambda)$. Only the operations and their domains are being composed; no projection formula or base-change isomorphism is asserted here.",
+   "uses": [
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-derived-tensor",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-level-map-corners.md",
+    "place": "display defining A_n, B_n, C_n, D_n"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-cartesian-square], the chosen $\\alpha$ gives $f\\circ g'=g\\circ f'$. The constant coefficient identifications are compatible with composition by step 1, so [lem-weil-pbc-proetale-derived-pullback-composition] applies to $(h,k)=(g',f)$ and $(f',g)$. The composite $(c_{g',f})^{-1}$, the identification of the common composite arrow, and $c_{f',g}$ is the specified natural isomorphism $L(g')^*Lf^*\\cong L(f')^*Lg^*$ from $D(Y_{\\mathrm{proet}},\\Lambda)$ to $D(X'_{\\mathrm{proet}},\\Lambda)$. This fixes the Cartesian identification used by the definition; it does not assume that the two composites of functors are literally equal.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-tensor",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-level-map-corners.md",
+  "place": "explicit typing and canonical-identification verification of the four displayed corners, using Stacks 0H7J, 001P, 00YV, 07A4, 0D6D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Four corners of the derived proper base change rectangle with reduction modulo powers of an ideal on the pro etale site",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instHasPullbacksEtale, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-14",
+   "verdict": "no match: etale scheme morphisms and their over categories do not define this derived rectangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: generic derived category and single functors do not define tensor reductions or the four corners"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|derived.*tensor",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor degree functors are not the unbounded derived four-corner datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback commutes with derived tensor reduction of constant coefficients on a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived pullback of sheaves of modules commutes with derived tensor product and quotient coefficient reduction",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary module-sheaf pullback, free-module comparisons and composition lack derived tensor reductions and the four-corner datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-14",
+   "verdict": "no match: scheme pullback residue-field tensors are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derived.*pullback|pullback.*derived",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: no K-flat or derived-pullback hit in Algebra/Homology"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +172,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-level-map-corners",
+  "worker": "stage1",
+  "summary": "Made constant coefficient categories, scalar restriction, all four object types and the two canonical isomorphisms explicit. Reused existing generic nodes for ring inverse images, constant-sheaf adjunction, tensor pullback and composition. No new nodes; the completed-coefficient four-corners item is not a duplicate.",
+  "blueprint": "Opening E definition, four displayed corner definitions, E_n identification, and final Cartesian identification; the four verification steps spell out their typing and canonical comparisons."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-6e20dfedd",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-6e20dfedd (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and source passages in full. All four corners are correctly typed; tensor reduction and Cartesian comparisons have the correct hypotheses and directions. No new nodes or repairs. review.md records edge cases, inherited DAG cycles, and why this constant-coefficient definition does not certify comparison with the condensed master targets."
+ }
 }
