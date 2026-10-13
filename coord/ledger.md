@@ -11323,3 +11323,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/X2/Sheaf.RingTheory.LengthQuotSMulTopFractionFieldSubmodule (stage 3; reviewer PASS; first push; landing 20261013T054246-L-451897 (interface); batch 20261013T054206; modules 3; new nodes 2)
 - 05:42 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ArtinReesAffineComparison (stage 3; reviewer PASS; after a return; landing 20261013T054246-L-451998 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero (stage 3; reviewer PASS; first push; landing 20261013T054246-L-452096 (proof); batch 20261013T054206; modules 1; new nodes 1)
+- 05:43 L: returned deliver/U2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (reviewer RETURN: (reviewer X-b1b7d, head b1b7d2e45) H4 — Duplicate library statement (roles/lead.md §4.5; review point 5): sectionRingVer)
