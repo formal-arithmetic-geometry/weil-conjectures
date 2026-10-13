@@ -13885,3 +13885,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 07:31 L: batch 20261013T231527 dependency take-out
 - 23:32 L: returned deliver/C1/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore (reviewer RETURN: (reviewer X-7ffa6, head 7ffa6ee5f) C1: In lean/Sheaf/AlgebraicGeometry/UnionBoundedAboveModel.lean, replace `public impo)
+- 23:33 L: returned deliver/Y3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-b03e4, head b03e441d7) F (reader gate/interface hazard): removing `CategoryTheory.Abelian.Ext.commShift_of_l)
