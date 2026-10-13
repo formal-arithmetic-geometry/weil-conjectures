@@ -17,22 +17,11 @@
  ],
  "proof": [
   {
-   "text": "Work on the affine scheme V. The intersection W intersect V is quasi-compact by quasi-separatedness and compactness of affine opens. Restrict the finite presentation on W to the overlap, using the canonical restriction identifications.",
+   "text": "The overlap K = W intersect V is compact by quasi-separatedness. Restrict finite presentation from W to K using overMap and overFunctorMap; fp_overMap proves the localized-site preservation through continuous left-adjoint pushforward.",
    "uses": [
-    "lem-weil-pbc-affine-scheme-qcqs",
     "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
-   }
-  },
-  {
-   "text": "Apply finite-type submodule extension to H restricted to V, using its whole finite-type restriction on the overlap. This gives a finite-type quasi-coherent H-prime contained in H restricted to V, with equal restriction on the overlap.",
-   "uses": [
-    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "pqf-def-coherent"
    ],
    "elementary": false,
@@ -42,10 +31,23 @@
    }
   },
   {
-   "text": "Take a finite free epimorphism onto H-prime using its affine global generators. Its kernel K is quasi-coherent. Restriction preserves kernels and epimorphisms. The restricted target is finitely presented, so Modules 01BP says that K restricted to the overlap is finite type.",
+   "text": "Apply exists_finiteType_affine_generators directly to H on K. It gives a map phi from a finite free module on V to H restricted to V, epimorphic after restriction to K. The restriction of its target is finitely presented by the canonical overFunctorMap isomorphism. No finite-type capture of the target or global epimorphism on V is required.",
    "uses": [
-    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "lem-weil-pbc-module-finite-type-affine-generators",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "The kernel of phi is quasi-coherent, by transport across overEquiv and isQuasicoherent_kernel. Localized restriction preserves kernels: transport overMap along overMapCompOverEquiv to the open-subscheme restriction functor and use its source-library limit preservation. On K the target H restricted to V is finitely presented and the source is finite free; transport to K.toScheme and apply finitePresentation_kernel_surjection_finiteType. Transfer finite type back to the localized site.",
+   "uses": [
     "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
     "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
@@ -56,11 +58,36 @@
    }
   },
   {
-   "text": "Apply finite-type submodule extension to K and its whole restriction on the overlap, producing K-prime. The cokernel E of K-prime mapping to the finite free source is finitely presented by Modules 0H96. Since K-prime is contained in the kernel, the epimorphism descends to a map E to H-prime and then H. On the overlap K-prime equals K; an epimorphism is the cokernel of its kernel, so the restricted induced map is an isomorphism. Transport E and its map back to the localized site over V.",
+   "text": "Extend the quasi-coherent kernel from V to an ambient quasi-coherent L using 01PE(3), applied to its zero map into H on V. The returned isomorphism identifies L on V with the kernel; overFunctorMap identifies its restriction on K. Apply affine capture to L on K, producing a finite-type Q on V and a map kappa into the kernel that is an isomorphism on K. No arbitrary existence witness is used as the body of a definition.",
    "uses": [
-    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-quasi-coherent-extension-qc-open",
+    "lem-weil-pbc-module-finite-type-affine-capture",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "Set a = kappa followed by the kernel inclusion and E = cokernel a. The free source is finitely presented using its zero-relations presentation. Transfer a to V.toScheme and apply the finite-type-source cokernel theorem, then transfer finite presentation back through overEquiv. The equation a followed by phi = 0 defines the descent map j from E to H restricted to V.",
+   "uses": [
     "lem-weil-pbc-module-finite-presentation-cokernel",
     "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "On K the restricted phi is epi and the preserved kernel fork is limiting, so Abelian.epiIsCokernelOfKernel makes phi the cokernel of the restricted kernel inclusion. Since restricted kappa is an isomorphism, isCokernelEpiComp makes it a cokernel of restricted a as well. Restriction preserves the cokernel defining E. Uniqueness of these two cokernels identifies restricted j with the canonical isomorphism. This j is the required map into H restricted to V.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false,
@@ -73,19 +100,24 @@
  "proof_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-affine-finite-type-generating-sections",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
   "lem-weil-pbc-module-finite-presentation-cokernel",
-  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-module-finite-type-affine-capture",
+  "lem-weil-pbc-module-finite-type-affine-generators",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-quasi-coherent-extension-qc-open",
   "lem-weil-pbc-quasi-coherent-module-kernel",
   "pqf-def-coherent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "S3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI",
+  "note": "Lean combination of finite generators epimorphic on the overlap, kernel finiteness, quasi-coherent extension, affine capture of the kernel relations, and cokernel uniqueness; follows the affine step of Stacks 01PI. No global finite-type approximation of H is needed."
  },
  "mathlib_searches": [
   {
@@ -166,11 +198,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-37329",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T100015-L-2465275",
+  "landing": "20261013T124316-L-3777996",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered theorem and proof match the unchanged node; module and sole direct importer compile cleanly, private helpers use only permitted axioms, and sorryAx comes from existing dependencies."
  }
 }
