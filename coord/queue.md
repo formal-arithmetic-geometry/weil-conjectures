@@ -1,6 +1,6 @@
 # Work queue
 
-127 items; claim with `tools/claim.py next <group> [--stage N]`.
+126 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (127)
+## Stage 3: modules to prove (126)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -67,6 +67,7 @@
 | `Sheaf.AlgebraicGeometry.OverlapPairModelTransport` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation` | 24 | 1 | proof |
+| `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapStageModelRestriction` | 25 | 1 | proof |
@@ -78,8 +79,6 @@
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturality` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization` | 26 | 2 | proof |
-| `Sheaf.Paper.CechCupResolutionBetaClassPairing` | 26 | 1 | proof |
-| `Sheaf.Paper.CechFlasqueResolutionComparison` | 26 | 1 | proof |
 | `Sheaf.Paper.CechRefinementResolutionBeta` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentOverTransport` | 27 | 1 | proof |
