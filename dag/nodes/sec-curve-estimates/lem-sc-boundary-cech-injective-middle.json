@@ -30,60 +30,45 @@
  ],
  "proof": [
   {
-   "text": "On each overlap U_{i_0} cap U_{i_1}, the image of x_{i_1}-x_{i_0} in Q is q|_{U_{i_0} cap U_{i_1}}-q|_{U_{i_0} cap U_{i_1}}=0, so exactness puts this difference in A. On a triple overlap, the alternating sum (x_{i_2}-x_{i_1})-(x_{i_2}-x_{i_0})+(x_{i_1}-x_{i_0}) is zero by cancellation, hence these differences are a Cech 1-cocycle by the differential in [def-weil-pbc-site-cech-complex].",
+   "text": "Construct the local difference cocycle directly in Lean. Form the degree-zero cochain b from the lifts x_i using ModuleCat.piIsoPi. The degree-one differential has components x_i1-x_i0 by TopCat.Presheaf.cechComplexFunctorπ_d_apply. Its image under g is zero by naturality and the lift equations. Evaluation preserves kernels, and hS.mono_f together with hS.exact gives sectionwise exactness, so lift every component to A. Naturality of the Cech map f and d^2=0, followed by sectionwise injectivity, prove the lifted cochain is a cycle. HomologicalComplex.cyclesMk supplies z.",
    "uses": [
-    "def-weil-pbc-site-cech-complex"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 0B8S (cohomology-lemma-cech-h1), local-lift paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the canonical comparison map described in [lem-sc-cech-comparison-map-naturality]: for an injective resolution A \\to J^bullet, the total complex has maps alpha_A from global sections and beta_A from the Cech complex, with alpha_A a quasi-isomorphism, and c_A is H^1(alpha_A)^{-1} H^1(beta_A) followed by H^1(Gamma(X,J^bullet)) = H^1(X,A). Thus the c_A in the statement is the map used by the total-complex computation.",
+   "text": "Choose an arbitrary compatible horseshoe IA, IB, IC using exists_horseshoe_resolutions. The ringed-space module category has enough injectives. Obtain a global lift b and a global cycle a representing the boundary using boundary_horseshoe_representative.",
    "uses": [
-    "lem-sc-cech-comparison-map-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EQ proof via the double complex, together with Lemma 01EP (lemma-injective-trivial-cech)"
-   }
-  },
-  {
-   "text": "Since I is injective and A \\to I is a monomorphism, choose an injective resolution A \\to J^\\bullet with J^0=I and J^q=0 for q<0 (continue by [lem-weil-pbc-scheme-modules-enough-injectives]). Exactness of J^\\bullet gives Q=I/A \\cong \\mathrm{im}(d^0) \\subset J^1, so s_C: Q \\to J^1, with the complex K^n=J^{n+1} and differential -d, is an injective resolution of Q. Let q~ in J^1(X) be the image of q; then d(x_i)=q~|_{U_i}. Horseshoe: put I_B^n=J^n \\oplus J^{n+1}, d_B(a,b)=(da-b,-db), s_B(x)=(x,dx), \\alpha^n(a)=(a,0), \\beta^n(a,b)=b. Direct checks: d_B^2=0, \\alpha and \\beta are cochain maps, \\alpha^0 s_A=s_B f, \\beta^0 s_B=s_C g, each 0 \\to J^n \\to I_B^n \\to K^n \\to 0 is split exact, and s_B is an injective resolution of I (a cocycle (a,b) of I_B has b=da, so (a,b)=(a,da)=d_B(0,-a) is a coboundary in degrees \\geq 1, and the degree-0 cocycles are \\{(x,dx)\\}=s_B(I)). So (J,I_B,K,\\alpha,\\beta) is a horseshoe resolution of 0 \\to A \\to I \\to Q \\to 0 as in [lem-weil-pbc-horseshoe-delta-functor] (compare [lem-weil-pbc-injective-resolution-ses]), and \\delta^0(q) is computed by the snake: lift q~ in K^0(X) to (0,q~) in I_B^0(X); d_B(0,q~)=(-q~,0)=\\alpha^1(-q~). Hence partial(q)=-[q~] in H^1(\\Gamma(X,J^\\bullet)), transported to H^1(X,A) by the isomorphism \\iota_J of [lem-weil-pbc-derived-functor-map-via-lift]. Total complex: in Tot(Cech(U,J^\\bullet)) with d=d_I+(-1)^p d_{II} [def-sp-double-complex-total] and d_Cech(s)_{i_0i_1}=s_{i_1}-s_{i_0} [def-weil-pbc-site-cech-complex], the 0-cochain (x_i) in Cech^0(U,J^0) has total differential (x_{i_1}-x_{i_0}) + (q~|_{U_i}) = \\beta_A(c)+\\alpha_A(q~), where c=(x_{i_1}-x_{i_0}) is the A-valued cocycle of Step 1. So H^1(\\beta_A)[c]=-H^1(\\alpha_A)[q~], and by Step 2 c_A[c]=-[q~]=partial(q).",
-   "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-horseshoe-delta-functor",
     "lem-weil-pbc-injective-resolution-ses",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "lem-sc-cech-comparison-map-naturality",
-    "def-weil-pbc-site-cech-complex",
-    "def-sp-double-complex-total",
-    "def-sp-injective-resolutions"
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-boundary-horseshoe-representative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EQ proof (maps beta followed by alpha^{-1}) and Lemma 0B8S local-lift description of the connecting class"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply cech_horseshoe_lift_class to z, b, a to equate H(beta)[z] and H(alpha)[a]. Evaluate hc IA at [z]; it states H(alpha)(isoRightDerivedObj(c[z]))=H(beta)[z]. Substitute the representative equation. Cancel H(alpha), which is invertible for the covering by moduleCechAlpha_isIso, and cancel isoRightDerivedObj to get c[z]=boundary(q).",
+   "uses": [
+    "lem-sc-cech-horseshoe-lift-class",
+    "def-sc-module-cech-comparison",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-cech-complex",
-  "def-sp-double-complex-total",
-  "lem-sc-cech-comparison-map-naturality",
-  "lem-weil-pbc-horseshoe-delta-functor",
+  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-injective-resolution-ses",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-scheme-modules-enough-injectives"
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-boundary-horseshoe-representative",
+  "lem-sc-cech-horseshoe-lift-class",
+  "def-sc-module-cech-comparison",
+  "lem-weil-pbc-derived-functor-map-via-lift"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 01EQ (cohomology-lemma-cech-cohomology), proof via the double complex and Lemma 01EP, with the local-lift boundary formula of Lemma 0B8S"
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-13",
+  "note": "Direct sectionwise cocycle proof and arbitrary horseshoe correction t_i lifting aug_B(x_i)-b|U_i, following Stacks 01EQ/0B8S; avoids constructing a resolution starting in the injective middle term."
  },
  "mathlib_searches": [
   {
@@ -226,5 +211,15 @@
   "reviewer": "Z2-bim",
   "group": "Z2",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T113358-L-3189269",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-boundary-horseshoe-representative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Local-lift Cech computation of the connecting boundary, via a compatible horseshoe resolution",
+   "via": [
+    "lem-sc-boundary-cech-injective-middle",
+    "lem-sc-boundary-cech-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Global horseshoe representative of the cohomology boundary",
+ "statement": "Let X be a scheme with the indicated derived categories and enough injectives. Let S be a short exact sequence of module sheaves, and let IA, IB, IC be compatible injective resolutions with maps alpha, beta, alpha beta = 0, compatible augmentations and short exact rows. For every global section q of S.X3 there exist a global section b of IB^0 and a cycle a in Gamma(IA)^1 such that beta^0(b)=aug_C(q), alpha^1(a)=d b, and the resolution identification sends the canonical module cohomology boundary of toRightDerivedZero(q) to [a].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 0117, 013T and 015B: snake boundary of a compatible resolution and derived triangle"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-module-cohomology-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Split each horseshoe row since IA^k is injective. The additive global sections functor preserves the splitting identities, so all global rows are short exact. Lift aug_C(q) to b in Gamma(IB^0).",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The augmentation square and beta being a chain map imply beta^1(d b)=d aug_C(q)=0. Exactness gives a unique a in Gamma(IA^1) with alpha^1(a)=d b. Its differential is zero by d^2=0, the chain map identity and monicity of alpha^2.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The concrete snake formula gives delta([aug_C(q)])=[a] in the global horseshoe sequence. The degree-zero identification toRightDerivedZero sends q to [aug_C(q)]. Transport along isoRightDerivedObj and use rightDerived_triangle_connecting to identify the snake boundary with the moduleCohomologyBoundary defined by the derived image triangle.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "def-sc-module-cohomology-boundary"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "def-sc-module-cohomology-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-13",
+  "note": "Detailed horseshoe form of the cited Stacks argument; source checked at https://stacks.math.columbia.edu/tag/01EQ, /0B8S and /0117."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A global lift in a horseshoe injective resolution represents the connecting cohomology class",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.δ_apply",
+   "results": "Mathlib.Algebra.Homology.ConcreteCategory δ_apply is the chain-level formula; transport through right derived and triangle identifications is still required.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "horseshoeBoundary|rightDerived_triangle_connecting|toRightDerivedZero_eq in lean/Sheaf and Mathlib",
+   "results": "HorseshoeDeltaFunctor, RightDerivedTriangleConnecting and InjectiveResolution.toRightDerivedZero_eq provide the ingredients; no bundled sheaf global representative theorem.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BoundaryCechInjectiveMiddle",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundaryHorseshoeRepresentative",
+  "file": "lean/Sheaf/Paper/BoundaryHorseshoeRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundary_horseshoe_representative",
+  "statement": "theorem boundary_horseshoe_representative (X : Scheme.{u})\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]\n    [EnoughInjectives X.Modules]\n    [EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [(RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive]\n    (S : ShortComplex X.Modules)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hιA : IA.ι ≫ α = (CochainComplex.single₀ X.Modules).map S.f ≫ IB.ι)\n    (hιB : IB.ι ≫ β = (CochainComplex.single₀ X.Modules).map S.g ≫ IC.ι)\n    (hrows : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval X.Modules (ComplexShape.up ℕ) k)).ShortExact)\n    (hS : S.ShortExact) (q : S.X₃.val.obj (op ⊤)) :\n    ∃ (b : (IB.cocomplex.X 0).val.obj (op ⊤))\n      (a : (RingedSpace.globalSectionsComplex IA).cycles 1),\n      (β.f 0).val.app (op ⊤) b = (IC.ι.f 0).val.app (op ⊤) q ∧\n      (α.f 1).val.app (op ⊤)\n        ((RingedSpace.globalSectionsComplex IA).iCycles 1 a) =\n          (IB.cocomplex.d 0 1).val.app (op ⊤) b ∧\n      (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).hom\n        (RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0\n          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ q)) =\n        (RingedSpace.globalSectionsComplex IA).homologyπ 1 a",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T113358-L-3189269",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T113358-L-3189269",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
