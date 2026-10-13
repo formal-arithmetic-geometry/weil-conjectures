@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-formal-polynomial-quotient-span",
+ "kind": "statement",
+ "title": "Homogeneous evaluation lifts span the associated graded quotients locally",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $X$ a scheme [def-pc-scheme], $f:X\\to\\operatorname{Spec}(A)$ a morphism and $x:\\operatorname{Fin}(r)\\to A$ a finite generating family for $I$. Put $J=I\\mathcal O_X$ [def-nagata-extended-ideal] and $B_k=J^k/J^{k+1}$, with projection $\\pi_k$ [def-weil-pbc-formal-kernel-graded-pieces]. Suppose functions $l_{k,U}:A[T_0,\\ldots,T_{r-1}]_k\\to J^k(U)$ are given on every open, whose structure-sheaf image is evaluation in the images of the generators, using the coefficient map $\\rho_U=f^\\sharp|_U$. Then for every $k$, every open $U$, every finite family $a:\\operatorname{Fin}(s)\\to B_k(U)$, and every point $y\\in U$, there is an open $y\\in W\\subseteq U$ such that each $a_i|_W$ lies in the $\\mathcal O_X(W)$-span of the sections $\\pi_k(l_{k,W}(b))$ for homogeneous $b$ over $A$. No graded multiplication or unit hypothesis is required. Empty generating and section families are allowed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 0884 (lemma-vanishing-projective), first paragraph; finite polynomial cover refinement of the associated graded ideal algebra. Supporting affine calculations: Schemes 01I8 and 01IC, as recorded by lem-weil-pbc-ideal-times-quasi-coherent-affine-sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Reuse formalPolynomial_power_injective from FormalPolynomialPowerLifts, specialized to J.toModulesι, rather than reproving monicity or sectionwise injectivity. Reuse formalPolynomial_extendedIdeal_affine from that same module for the affine generator calculation. Prove the purely algebraic span assertion. For a ring map rho:A→R, an element v in the kth power of the ideal spanned by rho(x_i) is the evaluation of a homogeneous polynomial p over R by Ideal.mem_span_pow_iff_exists_isHomogeneous. Expand p by MvPolynomial.as_sum. For every supported exponent d, homogeneity gives d.degree=k, since otherwise hp.coeff_eq_zero contradicts support membership. The monomial with exponent d and coefficient one is homogeneous over A. Its rho-evaluation multiplied by coeff d p equals the evaluation of the corresponding term of p. Submodule.sum_mem and Submodule.smul_mem place v in the span of homogeneous evaluations over A.",
+   "uses": [
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose an affine neighbourhood W of y inside U using X.isBasis_affineOpens. The kth power module M is quasi-coherent: the structure module in degree zero, and the positive-power clause of ideal_times_quasiCoherent_affine_sections otherwise. Apply the affine quotient-surjectivity clause to M to lift each a_i restricted to W through pi_k. The power-range clause places each lift image in J(W)^k; at degree zero this follows from J(W)^0=top. The affine ideal-extension calculation identifies the generators, as in ideal_comap_appLE and ideal_top_ofIdealTop.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-pc-ideal-sheaf-comap-affine-extension",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let S be the section-ring span of the given l(k,W,b) in M(W). Submodule.map_span and the stipulated image formula identify the image of S under the power inclusion with the span of homogeneous evaluations. The algebraic span assertion puts the lift image in that submodule. Extract a preimage in S; sectionwise injectivity of the power inclusion shows it equals the quotient lift. Finally apply the linear quotient map and Submodule.map_span again to obtain membership in the span of projected lifts. The affine W works for all sections of the finite family, including an empty family.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-formal-polynomial-power-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Complete Lean proof of the affine power refinement of Stacks Tags 0884 and 087Z, using Schemes Tags 01I8 and 01IC; elementary gluing and monomial details written by G2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous polynomial evaluation in generators of an ideal locally spans its associated graded ideal sheaf",
+   "results": "8 hits: Ideal.mem_span_iff_exists_isHomogeneous, Ideal.mem_span_pow_iff_exists_isHomogeneous, Ideal.span_eq_map_homogeneousSubmodule, AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply, AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.mk_mem_carrier, HomogeneousLocalization.Away.span_mk_prod_pow_eq_top, Ideal.span_pow_eq_map_homogeneousSubmodule, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only; no exact sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span_pow_eq_map_homogeneousSubmodule",
+   "results": "1 hits: Ideal.span_pow_eq_map_homogeneousSubmodule",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only; no exact sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "idealSheafPower.*[Mm]ono|[Mm]ono.*idealSheafPower",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only; no exact sheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous polynomial evaluations lift uniquely to ideal power sheaves on arbitrary opens and span affine graded quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_gluing|mem_span_pow_iff_exists_isHomogeneous",
+   "results": "13 hits: Mathlib/Geometry/RingedSpace/Basic.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only; no exact sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Polynomial cover refinement: steps 4–5, spanning the associated graded quotient",
+   "via": [
+    "lem-weil-pbc-formal-associated-graded-polynomial-cover",
+    "lem-weil-pbc-formal-kernel-polynomial-action",
+    "lem-weil-pbc-vanishing-projective",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalPolynomialQuotientSpan",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalPolynomialQuotientSpan.lean",
+  "declaration": "AlgebraicGeometry.formalPolynomial_quotient_span",
+  "statement": "theorem formalPolynomial_quotient_span\n    {A : Type u} [CommRing A] (I : Ideal A)\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))\n    {r : ℕ} (generators : Fin r → A)\n    (hgenerators : Ideal.span (Set.range generators) = I)\n    (l : ∀ (k : ℕ) (U : X.Opens),\n      MvPolynomial.homogeneousSubmodule (Fin r) A k →\n        (Scheme.idealSheafPower ((Scheme.IdealSheafData.ofIdealTop\n        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).toModulesι k).1.val.obj\n          (op U))\n    (hl : ∀ k U b, (Scheme.idealSheafPower _ k).2.val.app (op U) (l k U b) =\n        MvPolynomial.eval₂Hom\n          (((X.presheaf.map (homOfLE (le_top (a := U))).op).hom).comp\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom))\n          (fun i => (X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom (generators i))) b.val) :\n    ∀ (k : ℕ) (U : X.Opens) (s : ℕ)\n      (a : Fin s → (formalAssociatedGradedPiece ((Scheme.IdealSheafData.ofIdealTop\n        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) k).val.obj (op U))\n      (y : X), y ∈ U → ∃ (W : X.Opens) (hWU : W ≤ U), y ∈ W ∧\n        ∀ i, (formalAssociatedGradedPiece _ k).val.map (homOfLE hWU).op (a i) ∈\n          Submodule.span Γ(X, W)\n            (Set.range (fun b => (formalAssociatedGradedπ _ k).val.app (op W) (l k W b)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

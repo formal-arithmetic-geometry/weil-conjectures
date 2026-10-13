@@ -9,8 +9,8 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import Sheaf.AlgebraicGeometry.GradedSheafStructures
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
+import Sheaf.AlgebraicGeometry.FormalPolynomialQuotientSpan
 
 /-! # A local polynomial cover of the associated graded ideal algebra
 
@@ -28,6 +28,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Homogeneous polynomials in finite generators locally span the graded ideal algebra.
 Source: Stacks Project, proof of Lemma 0884, first paragraph, polynomial cover refinement;
 Lemma 087Z for the associated graded algebra
@@ -107,6 +108,78 @@ theorem formalAssociatedGraded_polynomial_cover
         (a : Fin s → (formalAssociatedGradedPiece _ k).val.obj (op U))
         (y : X), y ∈ U → ∃ (W : X.Opens) (hWU : W ≤ U), y ∈ W ∧
           ∀ i, (formalAssociatedGradedPiece _ k).val.map (homOfLE hWU).op (a i) ∈
-            Submodule.span Γ(X, W) (Set.range (e k W))) := by sorry
+            Submodule.span Γ(X, W) (Set.range (e k W))) := by
+  classical
+  let J := (Scheme.IdealSheafData.ofIdealTop
+    (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f
+  let ρ (U : X.Opens) : A →+* Γ(X, U) :=
+    ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom).comp
+      (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom)
+  let ev (U : X.Opens) : MvPolynomial (Fin r) A →+* Γ(X, U) :=
+    MvPolynomial.eval₂Hom (ρ U) (fun i => ρ U (generators i))
+  obtain ⟨l, hl⟩ := formalPolynomial_power_lifts I f generators hgenerators
+  change ∀ k U b, (Scheme.idealSheafPower J.toModulesι k).2.val.app (op U)
+    (l k U b) = ev U b.val at hl
+  have hladd (k : ℕ) (U : X.Opens) (b b' :
+      MvPolynomial.homogeneousSubmodule (Fin r) A k) :
+      l k U (b + b') = l k U b + l k U b' := by
+    apply formalPolynomial_power_injective J.toModulesι k U
+    rw [map_add, hl, hl, hl]
+    exact map_add (ev U) b.val b'.val
+  have hev (U V : X.Opens) (h : V ≤ U) (b : MvPolynomial (Fin r) A) :
+      (X.presheaf.map (homOfLE h).op).hom (ev U b) = ev V b := by
+    have hρ : ((X.presheaf.map (homOfLE h).op).hom).comp (ρ U) = ρ V := by
+      ext a
+      change (X.presheaf.map (homOfLE h).op).hom
+        ((X.presheaf.map (homOfLE le_top).op).hom _) = _
+      change ((X.presheaf.map (homOfLE le_top).op ≫
+        X.presheaf.map (homOfLE h).op).hom) _ = _
+      rw [← X.presheaf.map_comp]
+      rfl
+    change (X.presheaf.map (homOfLE h).op).hom
+      (MvPolynomial.eval₂Hom (ρ U) (fun i => ρ U (generators i)) b) = _
+    rw [MvPolynomial.map_eval₂Hom, hρ]
+    have hg : (fun i => (X.presheaf.map (homOfLE h).op).hom
+        (ρ U (generators i))) = (fun i => ρ V (generators i)) := by
+      funext i
+      exact congrArg (fun q : A →+* Γ(X, V) => q (generators i)) hρ
+    rw [hg]
+  have hlnat (k : ℕ) (U V : X.Opens) (h : V ≤ U)
+      (b : MvPolynomial.homogeneousSubmodule (Fin r) A k) :
+      (Scheme.idealSheafPower J.toModulesι k).1.val.map (homOfLE h).op
+        (l k U b) = l k V b := by
+    apply formalPolynomial_power_injective J.toModulesι k V
+    rw [PresheafOfModules.naturality_apply]
+    change (X.presheaf.map (homOfLE h).op).hom
+      ((Scheme.idealSheafPower J.toModulesι k).2.val.app (op U) (l k U b)) = _
+    rw [hl, hl]
+    exact hev U V h b.val
+  let e := fun k U b => (formalAssociatedGradedπ J k).val.app (op U) (l k U b)
+  refine ⟨e, ?_, ?_, ?_, ?_, ?_⟩
+  · intro k U V h b
+    change (formalAssociatedGradedPiece J k).val.map (homOfLE h).op
+      ((formalAssociatedGradedπ J k).val.app (op U) (l k U b)) = _
+    rw [← PresheafOfModules.naturality_apply]
+    rw [hlnat]
+  · intro k U b b'
+    change (formalAssociatedGradedπ J k).val.app (op U) (l k U (b + b')) = _
+    rw [hladd, map_add]
+  · intro k n U b b'
+    obtain ⟨c, hc, hprod⟩ := hmul k n U (l k U b) (l n U b')
+    have heq : c = l (k + n) U ⟨b.val * b'.val, b.property.mul b'.property⟩ := by
+      apply formalPolynomial_power_injective J.toModulesι (k + n) U
+      rw [hc, hl, hl, hl]
+      exact (map_mul (ev U) b.val b'.val).symm
+    change G.mul k n U _ _ = _
+    rw [hprod, heq]
+  · intro U a
+    rw [hunit]
+    change (formalAssociatedGradedπ J 0).val.app (op U)
+      (l 0 U ⟨MvPolynomial.C a, MvPolynomial.isHomogeneous_C (Fin r) a⟩) = _
+    congr 1
+    have hc := hl 0 U ⟨MvPolynomial.C a, MvPolynomial.isHomogeneous_C (Fin r) a⟩
+    change l 0 U ⟨MvPolynomial.C a, MvPolynomial.isHomogeneous_C (Fin r) a⟩ = _ at hc
+    exact hc.trans (MvPolynomial.eval₂Hom_C (ρ U) (fun i => ρ U (generators i)) a)
+  · exact formalPolynomial_quotient_span I f generators hgenerators l hl
 
 end AlgebraicGeometry
