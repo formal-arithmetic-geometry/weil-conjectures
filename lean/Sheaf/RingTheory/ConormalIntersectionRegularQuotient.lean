@@ -26,21 +26,45 @@ regular on `R/I`, then `I ∩ J² = IJ`.
 Source: Stacks Project, Tags 07CX, 0666, 062F and 0CEM
 (blueprint: lem-weil-pbc-conormal-intersection-regular-quotient).
 
-Proof: Choose the generators `fs` and put `G = Ideal.ofList fs`. Generation in the quotient
-and `I ≤ J` give `J = I + G`. Expand `J² = I² + IG + G²`. For `x ∈ I ∩ J²`, write
-`x = a + b + y` with `a ∈ I²`, `b ∈ IG`, and `y ∈ G²`. Since `a,b ∈ I`, we have
-`y ∈ I ∩ G`. Apply lem-weil-pbc-regular-quotient-ideal-intersection (Stacks Tag 0665,
-with regularity implying Koszul regularity by 062F and then H₁-regularity by 0CEM)
-to get `I ∩ G = IG`. Thus `y ∈ IG`. The inclusions `I ≤ J` and `G ≤ J` imply
-`a ∈ IJ` and `b,y ∈ IJ`, so `x ∈ IJ`. Conversely, `IJ ≤ I` and `IJ ≤ J²`, giving
-`IJ ≤ I ∩ J²`. If the sequence is empty, `G = 0` and `J = I`; the equality is
-`I ∩ I² = I²`. -/
+Proof: Choose the generators `fs` and put `G = Ideal.ofList fs`. Pulling the generation
+identity back along the quotient map gives `G ⊔ I = J`. By the regular-quotient
+intersection lemma (Stacks Tag 0665, specialized using 062F and 0CEM), `I ⊓ G = I * G`.
+Distributivity gives `J² = (G ⊔ I) * J = GJ ⊔ IJ ≤ G ⊔ IJ`. The modular law, using
+`IJ ≤ I`, now yields `I ⊓ J² ≤ I ⊓ (G ⊔ IJ) = (I ⊓ G) ⊔ IJ = IG ⊔ IJ = IJ`,
+since `G ≤ J`. Conversely `IJ ≤ I` and `IJ ≤ J²` by `I ≤ J`. The same argument
+includes the empty sequence, where `G = 0` and `J = I`. -/
 theorem inf_sq_eq_mul_of_regular_quotient {R : Type u} [CommRing R]
     (I J : Ideal R) (hIJ : I ≤ J)
     (h : ∃ fs : List R, (∀ f ∈ fs, f ∈ J) ∧
       RingTheory.Sequence.IsRegular (R ⧸ I) (fs.map (Ideal.Quotient.mk I)) ∧
       Ideal.ofList (fs.map (Ideal.Quotient.mk I)) = J.map (Ideal.Quotient.mk I)) :
     I ⊓ J ^ 2 = I * J := by
-  sorry
+  obtain ⟨fs, hfsJ, hreg, hgen⟩ := h
+  let G := Ideal.ofList fs
+  have hGJ : G ≤ J := Ideal.span_le.mpr hfsJ
+  have hsup : G ⊔ I = J := by
+    have he := congrArg (Ideal.comap (Ideal.Quotient.mk I)) hgen
+    rw [← Ideal.map_ofList, Ideal.comap_map_of_surjective _
+      Ideal.Quotient.mk_surjective, Ideal.comap_map_of_surjective _
+      Ideal.Quotient.mk_surjective, ← RingHom.ker_eq_comap_bot, Ideal.mk_ker,
+      sup_eq_left.mpr hIJ] at he
+    exact he
+  have hinter : I ⊓ G = I * G :=
+    Ideal.inf_ofList_eq_mul_of_regular_quotient I fs hreg
+  have hsq : J ^ 2 ≤ G ⊔ I * J := by
+    calc
+      J ^ 2 = (G ⊔ I) * J := by rw [hsup, pow_two]
+      _ = G * J ⊔ I * J := Ideal.sup_mul G I J
+      _ ≤ G ⊔ I * J := sup_le_sup Ideal.mul_le_left le_rfl
+  apply le_antisymm
+  · calc
+      I ⊓ J ^ 2 ≤ I ⊓ (G ⊔ I * J) := inf_le_inf_left I hsq
+      _ = I ⊓ G ⊔ I * J :=
+        (inf_sup_assoc_of_le G Ideal.mul_le_left).symm
+      _ = I * G ⊔ I * J := by rw [hinter]
+      _ = I * J := sup_eq_right.mpr (Ideal.mul_mono le_rfl hGJ)
+  · exact le_inf Ideal.mul_le_left (by
+      rw [pow_two]
+      exact Ideal.mul_mono hIJ le_rfl)
 
 end Ideal

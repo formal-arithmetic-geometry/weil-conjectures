@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Put $G=(f_1,\\dots,f_c)$. The generation hypothesis gives $J=I+G$. Distributing ideal products gives $J^2=I^2+IG+G^2$. In particular, each $x\\in I\\cap J^2$ can be written $x=a+b+y$ with $a\\in I^2$, $b\\in IG$, and $y\\in G^2$; since $a,b\\in I$, the element $y=x-a-b$ also lies in $I\\cap G$.",
+   "text": "Put G = Ideal.ofList fs. Map G to R/I using Ideal.map_ofList and pull the generation equality back along the surjective quotient map. Its kernel is I, so G ⊔ I = J. The generators belong to J, hence G ≤ J. Distributivity gives J² = (G ⊔ I)J = GJ ⊔ IJ ≤ G ⊔ IJ.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "The images of the $f_i$ are a regular sequence in $R/I$, so [lem-weil-pbc-regular-quotient-ideal-intersection] gives $I\\cap G=IG$. Apply this to $y$ from step 1. Since $I\\subseteq J$ and $G\\subseteq J$, we have $a\\in I^2\\subseteq IJ$ and $b,y\\in IG\\subseteq IJ$; hence $x=a+b+y\\in IJ$. Conversely, $IJ\\subseteq I$ and $IJ\\subseteq J^2$ because $I\\subseteq J$. Thus $I\\cap J^2=IJ$. For $c=0$, $G=0$ and $J=I$, so the equality reduces to $I\\cap I^2=I^2$.",
+   "text": "Apply lem-weil-pbc-regular-quotient-ideal-intersection to the given regular sequence to obtain I ⊓ G = IG. Since IJ ≤ I, the modular law gives I ⊓ J² ≤ I ⊓ (G ⊔ IJ) = (I ⊓ G) ⊔ IJ = IG ⊔ IJ = IJ, where IG ≤ IJ follows from G ≤ J. Conversely IJ ≤ I and IJ ≤ J² by I ≤ J. All calculations include the empty-sequence case G = 0.",
    "uses": [
     "lem-weil-pbc-regular-quotient-ideal-intersection"
    ],
@@ -57,7 +57,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tags 0665, 0666 and 07CX, with regularity supplied by Tags 062F and 0CEM"
+  "place": "More on Algebra, Lemma Tags 0665, 0666 and 07CX, with regularity supplied by Tags 062F and 0CEM; the expansion in 0666 is compressed using the modular law for ideals."
  },
  "mathlib_searches": [
   {
@@ -135,5 +135,15 @@
   "group": "G1",
   "result": "pass",
   "note": "R CommRing any universe; I J : Ideal R, I<=J; exists fs : List R, all in J, images IsRegular on R/I (mathlib_match of def-weil-pbc-regular-sequence, incl. nonzero final quotient), ofList images = J.map mk (= J/I); conclusion I ⊓ J^2 = I*J; empty list and I=R edge cases; #check names resolve"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T015617-L-3028012",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
