@@ -15,26 +15,39 @@
  },
  "proof": [
   {
-   "text": "Express x as the restriction class of its unique global section s using\ncechCohomologyZeroIso. In each V-member the explicit cochain map sends the\nrestriction of s to the restriction of the adjunction unit applied to s.\nNaturality of the unit and composition of restriction maps prove this equality\nof cochains, hence of their degree-zero classes. For Ext, write the degree-zero\nclass as mk₀ f for a morphism from the constant integer sheaf. Exact inverse\nimage sends this to mk₀ of the composite constIso.inv followed by the inverse\nimage of f. The definition of constIso as uniqueness of left adjoints identifies\nits constant-sheaf adjunct with the inverse-image unit composed with f. Evaluating\nat the integer 1 gives precisely the same pulled-back global section. Apply the\ninverse global-section equivalence to conclude. This uses only degree zero and\nno comparison system or positive-degree connecting map. If a cover is empty,\nthe covered scheme and its inverse image are empty and all sections are zero.",
+   "text": "For any coefficient map alpha : F -> g_*G, prove naturality of the degree-zero restriction augmentation. On a one-tuple the cochain map is alpha followed by restriction; naturality of alpha and composition of restrictions identify it with restricting the pulled-back global section. Pass to homology using homology-pi naturality and the liftCycles identities. This is the private proved helper cech_augmentation_naturality, using the existing toCechCohomologyZero of WeilConjectures.Topology.Sheaves.CechCohomology.",
    "uses": [
     "def-pc-scheme",
-    "def-pc-flat-cohomology-comparison",
-    "def-pc-cech-comparison-system",
     "def-pc-cech-inverse-image-cochain-map"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Identify the adjunct of constIso(g).inv followed by inverse image of a morphism f out of the constant integer sheaf. Unfold constIso as uniqueness of left adjoints, apply homEquiv_leftAdjointUniq_hom_app to the reversed comparison, then expand the composed adjunction and use unit naturality. This gives the global-sections adjunct of f followed by the inverse-image unit. Write every Ext-zero class as mk-zero of f, use mapExactFunctor_mk-zero and mk-zero composition, and evaluate the constant-sheaf adjunct via uliftZMultiplesAddEquiv. These are the private proved helpers constant_adjunct_pullback and ext_zero_sections. The restriction from the preimage of top to top is the identity by map_id.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing cechCohomologyZeroIso to express the input as the restriction class of a global section s. Step 1 identifies its cochain-map image with the restriction class of the unit-pulled-back section t. Cancel the two Cech isomorphisms, apply the injective Ext-to-sections equivalence, and use Step 2 to obtain the stated equality. Both cover hypotheses are used only through their zero isomorphisms; no nonempty index set or nonempty scheme is assumed, so empty covers and empty schemes are included.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "def-pc-cech-inverse-image-cochain-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-scheme",
   "def-pc-flat-cohomology-comparison",
-  "def-pc-cech-comparison-system",
   "def-pc-cech-inverse-image-cochain-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Expansion of the assigned node plan, with the relative-effacement induction."
+  "place": "Lemma 20.15.1, degree-zero face; Tag 01EQ, restriction augmentation. Formalized directly by V4 using existing Cech zero isomorphisms, exact-functor Ext zero identities, and uniqueness of left adjoints."
  },
  "mathlib_searches": [
   {
@@ -157,13 +170,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
+  "reviewer": "X-8b67d",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T223413-L-1639538",
+  "landing": "20261013T003202-L-2430600",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered module, node metadata, change record, report, proof axioms, and direct importer against the stage-3 review criteria."
  }
 }
