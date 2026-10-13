@@ -54,6 +54,106 @@ noncomputable def affineDualBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOp
         tildeFinsupp (R := Γ(Y, U.1)) I) ≪≫
     Scheme.Modules.restrictFreeIso U.2.isoSpec.hom I
 
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma tilde_single {R : CommRingCat.{u}} {I : Type u} (i : I) :
+    (tilde.functor R).map (ModuleCat.ofHom (Finsupp.lsingle i)) ≫
+      (tildeFinsupp (R := R) I).hom = SheafOfModules.ιFree i := by
+  let H : Limits.IsColimit ((tilde.functor R).mapCocone (ModuleCat.finsuppCocone R R I)) :=
+    Limits.isColimitOfPreserves (tilde.functor R) (ModuleCat.finsuppCoconeIsColimit R R I)
+  let e : (Discrete.functor fun _ : I ↦ ModuleCat.of R R) ⋙ tilde.functor R ≅
+      Discrete.functor fun _ ↦ SheafOfModules.unit.{u} (Spec R).ringCatSheaf :=
+    Discrete.natIso (fun _ ↦ tildeSelf)
+  have h := Limits.IsColimit.comp_coconePointUniqueUpToIso_hom
+    ((Limits.IsColimit.precomposeHomEquiv e.symm _).symm H)
+    (Limits.coproductIsCoproduct _) (Discrete.mk i)
+  change (𝟙 _ ≫ (tilde.functor R).map (ModuleCat.ofHom (Finsupp.lsingle i))) ≫
+    (tildeFinsupp (R := R) I).hom = SheafOfModules.ιFree i at h
+  simpa only [Category.id_comp] using h
+
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma restrict_free_single {X Z : Scheme.{u}} (g : Z ⟶ X)
+    [IsOpenImmersion g] {I : Type u} (i : I) :
+    (Scheme.Modules.restrictFunctor g).map (SheafOfModules.ιFree i) ≫
+        (Scheme.Modules.restrictFreeIso g I).hom =
+      ((Scheme.Modules.restrictFunctorIsoPullback g).app
+        (SheafOfModules.unit X.ringCatSheaf) ≪≫
+          Scheme.Modules.pullbackObjUnitIso g).hom ≫ SheafOfModules.ιFree i := by
+  dsimp only [Scheme.Modules.restrictFreeIso, Iso.trans_hom, Iso.app_hom]
+  rw [← Category.assoc, NatTrans.naturality]
+  simp only [Category.assoc, Scheme.Modules.pullback_map_ιFree_pullbackFreeIso_hom]
+
+set_option backward.isDefEq.respectTransparency.types false in
+@[irreducible]
+private noncomputable def affineFreeIso {Y : Scheme.{u}} (U : Y.affineOpens)
+    (I : Type u) :
+    ((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj
+      (ModuleCat.of Γ(Y, U.1) (I →₀ Γ(Y, U.1)))) ≅
+        SheafOfModules.free (R := U.1.toScheme.ringCatSheaf) I :=
+  (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).mapIso (tildeFinsupp I) ≪≫
+    Scheme.Modules.restrictFreeIso U.2.isoSpec.hom I
+
+set_option backward.isDefEq.respectTransparency.types false in
+@[irreducible]
+private noncomputable def affineUnitIso {Y : Scheme.{u}} (U : Y.affineOpens) :
+    ((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj
+      (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1))) ≅
+        SheafOfModules.unit U.1.toScheme.ringCatSheaf :=
+  (Scheme.Modules.restrictFunctorIsoPullback U.2.isoSpec.hom).app _ ≪≫
+    Scheme.Modules.pullbackObjUnitIso U.2.isoSpec.hom
+
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma affine_free_single {Y : Scheme.{u}} (U : Y.affineOpens)
+    {I : Type u} (i : I) :
+    (tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).map
+      (ModuleCat.ofHom (Finsupp.lsingle i)) ≫ (affineFreeIso U I).hom =
+        (affineUnitIso U).hom ≫ SheafOfModules.ιFree i := by
+  unfold affineFreeIso affineUnitIso
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Functor.comp_map]
+  rw [← Functor.map_comp_assoc, tilde_single (R := Γ(Y, U.1)) i,
+    restrict_free_single U.2.isoSpec.hom i]
+  rfl
+
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma free_component {R : CommRingCat.{u}} {X : Scheme.{u}}
+    (T : ModuleCat.{u} R ⥤ SheafOfModules.{u} X.ringCatSheaf) [T.Additive]
+    (e : ∀ K : Type u, T.obj (ModuleCat.of R (K →₀ R)) ≅ SheafOfModules.free K)
+    (e₀ : T.obj (ModuleCat.of R R) ≅ SheafOfModules.unit X.ringCatSheaf)
+    (hι : ∀ (K : Type u) (k : K),
+      T.map (ModuleCat.ofHom (Finsupp.lsingle k)) ≫ (e K).hom =
+        e₀.hom ≫ SheafOfModules.ιFree k)
+    {A B : ModuleCat.{u} R} {I J : Type u} [DecidableEq J]
+    (p : A ≅ ModuleCat.of R (I →₀ R)) (q : B ≅ ModuleCat.of R (J →₀ R))
+    (f : A ⟶ B) (i : I) (j : J) :
+    SheafOfModules.ιFree i ≫ (T.mapIso p ≪≫ e I).inv ≫ T.map f ≫
+      (T.mapIso q ≪≫ e J).hom ≫ Scheme.Modules.freeπ j =
+    e₀.inv ≫ T.map (ModuleCat.ofHom (Finsupp.lsingle i) ≫ p.inv ≫ f ≫ q.hom ≫
+      ModuleCat.ofHom (Finsupp.lapply j)) ≫ e₀.hom := by
+  have hinv (K : Type u) (k : K) : SheafOfModules.ιFree k ≫ (e K).inv =
+      e₀.inv ≫ T.map (ModuleCat.ofHom (Finsupp.lsingle k)) := by
+    rw [Iso.comp_inv_eq, Category.assoc, hι, Iso.inv_hom_id_assoc]
+  have hπ : (e J).hom ≫ Scheme.Modules.freeπ j =
+      T.map (ModuleCat.ofHom (Finsupp.lapply j)) ≫ e₀.hom := by
+    rw [← cancel_epi (e J).inv, Iso.inv_hom_id_assoc]
+    apply Scheme.Modules.free_hom_ext
+    intro k
+    rw [reassoc_of% (hinv J k), ← T.map_comp_assoc]
+    have h : ModuleCat.ofHom (Finsupp.lsingle k (R := R) (M := R)) ≫
+        ModuleCat.ofHom (Finsupp.lapply j) =
+        if k = j then 𝟙 _ else 0 := by
+      split_ifs with h
+      · subst k
+        ext
+        simp
+      · ext
+        simp [h]
+    rw [h, Scheme.Modules.ιFree_freeπ]
+    split_ifs <;> simp
+  simp only [Iso.trans_inv, Iso.trans_hom, Functor.mapIso_inv, Functor.mapIso_hom,
+    Category.assoc]
+  rw [reassoc_of% (hinv I i), hπ]
+  simp only [Functor.map_comp, Category.assoc]
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Sheafification and restriction preserve the transposed entries of a dual map.
 Source: Stacks Project, schemes.tex, Tag 01HV(4)-(5) and functoriality;
 Basis.dualBasis_repr in Mathlib.LinearAlgebra.Dual.Basis.
@@ -88,6 +188,43 @@ theorem affineBasisDualMatrix_component {Y : Scheme.{u}} (U : Y.affineOpens)
         T.map (ModuleCat.ofHom (Linear.leftComp Γ(Y, U.1)
           (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) f)) ≫ dN.hom ≫ Scheme.Modules.freeπ j =
       SheafOfModules.ιFree j ≫ eN.inv ≫ T.map f ≫ eM.hom ≫ Scheme.Modules.freeπ i :=
-  by sorry
+  by
+    classical
+    dsimp only
+    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
+    have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive :=
+      Functor.additive_of_iso (Scheme.Modules.restrictFunctorIsoPullback
+        U.2.isoSpec.hom).symm
+    let pM := bM.repr.toModuleIso
+    let pN := bN.repr.toModuleIso
+    let pdM : ModuleCat.of Γ(Y, U.1) (M ⟶ ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) ≅
+        ModuleCat.of Γ(Y, U.1) (I →₀ Γ(Y, U.1)) := by
+      letI : DecidableEq I := Classical.typeDecidableEq I
+      exact (ModuleCat.homLinearEquiv.trans bM.dualBasis.repr).toModuleIso
+    let pdN : ModuleCat.of Γ(Y, U.1) (N ⟶ ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) ≅
+        ModuleCat.of Γ(Y, U.1) (J →₀ Γ(Y, U.1)) := by
+      letI : DecidableEq J := Classical.typeDecidableEq J
+      exact (ModuleCat.homLinearEquiv.trans bN.dualBasis.repr).toModuleIso
+    let df := ModuleCat.ofHom (Linear.leftComp Γ(Y, U.1)
+      (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) f)
+    have halg : ModuleCat.ofHom (Finsupp.lsingle i) ≫ pdM.inv ≫ df ≫ pdN.hom ≫
+        ModuleCat.ofHom (Finsupp.lapply j) =
+      ModuleCat.ofHom (Finsupp.lsingle j) ≫ pN.inv ≫ f ≫ pM.hom ≫
+        ModuleCat.ofHom (Finsupp.lapply i) := by
+      ext
+      simp [pM, pN, pdM, pdN, df, ModuleCat.homLinearEquiv]
+      rfl
+    have h := congrArg (fun g ↦ (affineUnitIso U).inv ≫ T.map g ≫
+      (affineUnitIso U).hom) halg
+    rw [← free_component (R := Γ(Y, U.1)) (X := U.1.toScheme)
+        T (affineFreeIso U) (affineUnitIso U)
+        (fun K k ↦ affine_free_single U k) pdM pdN df i j,
+      ← free_component (R := Γ(Y, U.1)) (X := U.1.toScheme)
+        T (affineFreeIso U) (affineUnitIso U)
+        (fun K k ↦ affine_free_single U k) pN pM f j i] at h
+    simpa only [pM, pN, pdM, pdN, df, T, affineBasisCoordinatesIso,
+      affineDualBasisCoordinatesIso, affineFreeIso, Iso.trans_hom, Iso.trans_inv,
+      Functor.mapIso_hom, Functor.mapIso_inv, Functor.comp_map, Functor.map_comp,
+      Category.assoc] using h
 
 end AlgebraicGeometry
