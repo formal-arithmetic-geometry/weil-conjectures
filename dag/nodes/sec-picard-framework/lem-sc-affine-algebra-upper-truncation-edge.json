@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-affine-algebra-upper-truncation-edge",
+ "kind": "statement",
+ "title": "Canonical affine edge on upper truncation",
+ "statement": "Let f:X\\to Y be an affine morphism of schemes [def-pc-scheme]. Write F for direct image to f_*\\mathcal O_X-modules [def-sc-direct-image-algebra-derived-category], with total right derived functor RF [def-pc-ringed-spaces-derived-direct-image]. Assume derived categories on both module-sheaf categories and enough injectives on X. Let I be a cochain complex with quasi-coherent cohomology in every degree [def-pc-cochain-complex-modules], and n\\in\\mathbf Z. Write h for the chosen left homology data of I.sc(n), so h.K is cycles, h.fprime is the differential into cycles and h.pi is the homology projection. Let A=\\tau_{\\le n}I and let c:\\operatorname{coker}(F(h.fprime))\\to H^n(RF(QA)) be the composite of the canonical cokernel-to-homology isomorphism, the inverse of H^n(F(A\\to I)), the localization homology comparison, and H^n of the derived unit at A [lem-sc-left-exact-upper-truncation-comparison]. There exists an isomorphism e:H^n(RF(QA))\\to F(h.H) such that \\operatorname{coker}\\pi\\,c\\,e=F(h.pi). No K-injectivity or boundedness of I is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof cohomology display; Tag 08D4 (2),(3) with N=1; Tag 05TC"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-left-exact-upper-truncation-comparison"
+ ],
+ "proof": [
+  {
+   "text": "On inverse images of affine opens, positive right-derived sections vanish on quasi-coherent modules by affine vanishing and the module/source comparison. Sections preserve countable products. Apply the unbounded bound with N=1 to tau<=n-1 I; derived sections vanish in degrees n and n+1. The truncation triangle gives H^n(RGamma(A)) isomorphic to H^n(RGamma(tau>=n A)).",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-sc-module-cohomology-source-comparison",
+    "lem-pc-unbounded-derived-functor-cohomological-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The double truncation is H^n(I) placed in degree n. Single-object derived identification and the left-exact bottom comparison identify degree-n derived sections with sections of H^n(I). The maps commute with restriction and respect scalars, so glue over the affine basis to an isomorphism of direct-image-algebra module sheaves.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "new-qcoh-sections-left-exact-bottom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the raw-to-derived unit to A -> tau>=n A. Its degree-n component is the quotient of cycles by boundaries. Invert the raw upper-truncation homology comparison. Kernel and cokernel uniqueness give the stated identity after the cokernel projection; these are precisely the factors defining upperTruncationBoundaryComparison.",
+   "uses": [
+    "lem-sc-left-exact-upper-truncation-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-sp-derived-functor-single-identification",
+  "new-qcoh-sections-left-exact-bottom",
+  "lem-sc-left-exact-upper-truncation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof cohomology display; Tag 08D4 (2),(3) with N=1; Tag 05TC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism the derived cohomology of the upper truncation is canonically direct image of homology and the cycle class map factors through the derived unit",
+   "results": "8 hits; ; candidates: CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc, CochainComplex.liftCycles_shift_homologyπ, CochainComplex.mappingCone.homologySequenceδ_triangleh, CochainComplex.liftCycles_shift_homologyπ_assoc, DerivedCategory.homologyFunctorFactors, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, CochainComplex.ιTruncLE_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor",
+   "results": "0 hits; loogle: unknown identifier 'Functor.rightDerivedFunctor'; candidates: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperTruncation|truncated_bottom|cycle.*class",
+   "results": "11 hits; ; candidates: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived cohomology upper truncation canonical cycle class comparison",
+   "results": "0 hits; service unavailable: Internal Server Error; candidates: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveBoundaryExactness",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: canonical affine cohomology calculation; cycle-class surjectivity and kernel-boundary identification; upper-truncation comparison and canonical cycle calculation",
+   "via": [
+    "new-affine-algebra-kinjective-boundary-exactness",
+    "new-affine-algebra-canonical-comparison-identification",
+    "lem-sc-affine-algebra-counit-homology-comparison-isIso",
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraUpperTruncationEdge",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraUpperTruncationEdge.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_upper_truncation_edge",
+  "statement": "theorem affine_algebra_upper_truncation_edge\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))]\n    [EnoughInjectives (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)\n    (hI : ∀ n : ℤ, (I.homology n).IsQuasicoherent) (n : ℤ) :\n    let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)\n    ∃ e : (DerivedCategory.homologyFunctor\n        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) n).obj\n        (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj (I.truncLE n))) ≅\n        F.obj (I.sc n).homologyData.left.H,\n      cokernel.π (F.map (I.sc n).homologyData.left.f') ≫\n          F.upperTruncationBoundaryComparison I n ≫ e.hom =\n        F.map (I.sc n).homologyData.left.π",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095950-L-2457526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095950-L-2457526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,49 +17,28 @@
  ],
  "proof": [
   {
-   "text": "For an affine open V in Y its inverse image U is affine. Restrict the quasi-coherent cohomology modules to U. Affine vanishing, transported from the source H model to module right-derived sections, gives R^p Gamma(U,-)=0 on these modules for p>0. Sections commute with countable products because sections are evaluation of the underlying sheaf, whose limits are computed sectionwise.",
+   "text": "Use left exactness of direct image and the raw/derived upper-truncation comparisons. Apply degree-n homology to naturality of the derived unit for tau<=n I -> I. Both vertical arrows and the unit at K-injective I are invertible, hence so is the unit at tau<=n I. Thus upperTruncationBoundaryComparison is invertible.",
    "uses": [
-    "lem-pc-affine-vanishing",
-    "lem-sc-module-cohomology-source-comparison"
+    "lem-sc-left-exact-upper-truncation-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Set A=tau_{<=n}I and B=tau_{>=n}A=H^n(I)[-n]. Left exactness of derived sections makes H^n(RGamma(A)) -> H^n(RGamma(I)) invertible, since the upper tail starts in degree n+1. Apply the unbounded bound with N=1 to the lower tail tau_{<=n-1}I. Its derived sections vanish in degrees n and n+1, so the truncation triangle makes H^n(RGamma(A)) -> H^n(RGamma(B)) invertible. The derived single-object identification and the degree-zero right-derived-functor isomorphism identify the latter object with Gamma(U,H^n(I)).",
+   "text": "The affine upper-truncation edge is an isomorphism from derived homology to pushed chosen homology, whose composite after the cokernel projection is the pushed class map. Cancel the cokernel projection to identify the induced cokernel desc with the composite of two isomorphisms. It is monic, so Mathlib exact_iff_mono_cokernel_desc proves the required exactness.",
    "uses": [
-    "lem-pc-unbounded-derived-functor-cohomological-bound",
-    "lem-sp-derived-functor-single-identification"
+    "lem-sc-affine-algebra-upper-truncation-edge"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction to U preserves K-injectivity by exact extension by zero and its restriction adjunction (Tag 08BS). Identify the preceding map with the actual cycle-class map. The natural comparison Gamma(K) -> RGamma(QK) is invertible for K=I: compare I to its K-injective resolution; a quasi-isomorphism between K-injectives is a homotopy equivalence and sections preserve homotopies. Sections preserve kernels, so Gamma(A) -> Gamma(I) induces an isomorphism on H^n. The natural comparison square for A -> I therefore makes Gamma(A) -> RGamma(A) invertible on H^n. In the square for A -> B, Gamma(B) -> RGamma(B) is the canonical bottom-degree identification. The degree-n component of A -> B is the quotient of cycles by boundaries, so commutativity identifies the composite isomorphism with the raw class map. The left homology data is a kernel followed by its cokernel; their uniqueness identifies its pi with that raw map. No arbitrary comparison isomorphism is chosen.",
-   "uses": [
-    "def-pur-kinjective-complex",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sc-derived-k-injective-restrict-open"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Injectivity of the raw comparison says that a cycle section with zero homology-sheaf class represents zero in the section-complex cohomology, so it is the differential of a degree-(n-1) section. Thus kernel of F(pi) equals image of F(fprime) on every affine open. The other inclusion is differential squared equal to zero. Local exactness on the affine basis is exactness of the displayed module-sheaf short complex. Empty opens, zero complexes and all degrees are included.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-vanishing",
-  "lem-sc-module-cohomology-source-comparison",
-  "lem-pc-unbounded-derived-functor-cohomological-bound",
-  "lem-sp-derived-functor-single-identification",
-  "def-pur-kinjective-complex",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sc-derived-k-injective-restrict-open"
+  "lem-sc-left-exact-upper-truncation-comparison",
+  "lem-sc-affine-algebra-upper-truncation-edge"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Canonical cycle calculation expanding the omitted detail in Tag 0AVW using Tag 08D4; read from the official Stacks tag pages."
+  "place": "Tag 0AVW cycle calculation and Tag 08D4, formalized by upper-truncation naturality and cokernel monicity."
  },
  "mathlib_searches": [
   {
@@ -151,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T065111-L-899462",
+  "landing": "20261013T095950-L-2457526",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

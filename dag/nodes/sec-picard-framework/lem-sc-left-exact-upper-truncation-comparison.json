@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-left-exact-upper-truncation-comparison",
+ "kind": "statement",
+ "title": "Raw and derived upper-truncation comparisons",
+ "statement": "Let C and D be abelian categories with derived categories [def-pc-derived-category]. Assume C has enough injectives and K-injective resolutions [prop-pur-kinjective-resolutions-exist]. Let F:C\\to D be additive and preserve finite limits [def-sp-left-exact-additive]. For any integer-indexed cochain complex I [def-pc-cochain-complex-modules] and n\\in\\mathbf Z, write a:\\tau_{\\le n}I\\to I for the canonical upper smart truncation inclusion [def-sbc-standard-tstructure-derived-category]. Both H^n(F(a)) and H^n(RF(Q(a))) are isomorphisms. Here F(a) is termwise application, Q is localization, and RF is the total right derived functor. No K-injectivity of I is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TC (2), lemma-negative-vanishing; raw kernel calculation in Tag 0AVW"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sp-left-exact-additive",
+  "def-pc-cochain-complex-modules",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Finite-limit preservation gives a canonical isomorphism from F of cycles to cycles of the mapped short complex. Its naturality follows by cancellation of the cycle inclusion. For the upper-truncation inclusion, the degree n-1 component is invertible, the degree n component is monic, and the homology map is invertible. Apply the epi diagram lemma to cycles -> homology and use monicity to prove its cycle map invertible. Transport through the kernel comparison and use isIso_homologyMap_of_isIso_cyclesMap_of_epi to obtain the raw comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The quotient of the upper-truncation inclusion is quasi-isomorphic to tau>=n+1 I. Take the distinguished triangle of the truncation short exact sequence and apply RF. Lift tau>=n+1 I to the bounded-below category, use negative vanishing there, and transport along bounded-below/unbounded compatibility and the quotient quasi-isomorphism. Derived homology of the third term is zero in degrees n-1 and n, so isIso_homologyMap_mor1 gives the derived comparison.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-pc-right-derived-functor-triangulated",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pc-right-derived-functor-triangulated",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TC (2), lemma-negative-vanishing; raw kernel calculation in Tag 0AVW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left exact additive functor preserves cohomology in degree n of the upper smart truncation inclusion and its right derived functor does also",
+   "results": "8 hits; ; candidates: CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.instIsHomologicalHomologyFunctor, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.mapDerivedCategory, CochainComplex.shortComplexTruncLE_shortExact, CategoryTheory.Functor.IsHomological.exact, HomotopyCategory.instIsHomologicalIntUpHomologyFunctor",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.ιTruncLE",
+   "results": "9 hits; ; candidates: CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.instQuasiIsoAtIntιTruncLE, CochainComplex.ιTruncLE, CochainComplex.quasiIsoAt_ιTruncLE, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.ιTruncLE_naturality",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*truncLE|truncLE.*isIso|cycle.*[Ee]dge",
+   "results": "25 hits; ; candidates: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left exact functor upper smart truncation induces isomorphism in degree n before and after derivation",
+   "results": "0 hits; service unavailable: Internal Server Error; candidates: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveBoundaryExactness",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: canonical affine cohomology calculation; cycle-class surjectivity and kernel-boundary identification; upper-truncation comparison and canonical cycle calculation",
+   "via": [
+    "new-affine-algebra-kinjective-boundary-exactness",
+    "new-affine-algebra-canonical-comparison-identification",
+    "lem-sc-affine-algebra-counit-homology-comparison-isIso",
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LeftExactUpperTruncationComparison",
+  "file": "lean/Sheaf/CategoryTheory/LeftExactUpperTruncationComparison.lean",
+  "declaration": "CategoryTheory.Functor.upperTruncation_comparisons",
+  "statement": "theorem upperTruncation_comparisons (I : CochainComplex C ℤ) (n : ℤ) :\n    IsIso (HomologicalComplex.homologyMap\n      ((F.mapHomologicalComplex (.up ℤ)).map (I.ιTruncLE n)) n) ∧\n    IsIso ((DerivedCategory.homologyFunctor D n).map\n      (F.rightDerivedFunctor.map (DerivedCategory.Q.map (I.ιTruncLE n))))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095950-L-2457526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095950-L-2457526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
