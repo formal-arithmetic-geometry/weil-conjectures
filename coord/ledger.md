@@ -11216,3 +11216,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: returned deliver/H3/Sheaf.CategoryTheory.FiniteCoconeStationary (reviewer RETURN: (the landing tools, head 0c6987346) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 05:42 L: returned deliver/J3/Sheaf.RingTheory.PopescuSpecialChartSubstitution (reviewer RETURN: (the landing tools, head 4db35814e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 05:42 L: returned deliver/M3/Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology (reviewer RETURN: (the landing tools, head aca83ac05) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 05:42 L: returned deliver/R1/Sheaf.AlgebraicGeometry.EtaleLimitBinarySuccessorCoconeSegment (reviewer RETURN: (the landing tools, head c0b520330) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
