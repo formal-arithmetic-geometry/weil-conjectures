@@ -9,11 +9,8 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.AffineBaseChangeSourceModel
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Cohomology coordinates for affine derived base change
 
@@ -28,34 +25,88 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem affine_stalkComparison_normalized
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X S X' S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (sq : IsPullback g' f' f g)
+    {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
+    {φ : (derivedPullback g').obj K ⟶ K'}
+    (c : SingleComplexBaseChange.Coordinates g' K K' φ) (p : X') (i : ℤ) :
+    let H := DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) i
+    let st := RingedSpace.moduleStalkFunctor X'.toRingedSpace p
+    SingleComplexBaseChange.stalkComparison f f' g g' sq c p i ≫
+        (affineRepresentativeStalkIso X' p c.N i).inv ≫ st.map (H.map c.e'.hom) =
+      affineBaseChangeIntoPullback f f' g g' sq K c.P c.e c.counit_isIso p i ≫
+        st.map (H.map φ) := by
+  let := SingleComplexBaseChange.leftAlgebra f g' p
+  let := SingleComplexBaseChange.rightAlgebra f f' g g' sq p
+  let := (SingleComplexBaseChange.tensorMap f f' g g' sq p).toAlgebra
+  let := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' p))
+  let := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' p))
+  have := c.counit_isIso
+  dsimp only
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) i
+  let st := RingedSpace.moduleStalkFunctor X'.toRingedSpace p
+  let T := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj c.P
+  have ht : HomologicalComplex.homologyMap
+      (((RingedSpace.moduleStalkFunctor X'.toRingedSpace p).mapHomologicalComplex
+        (.up ℤ)).map c.t) i ≫ (affineRepresentativeStalkIso X' p c.N i).inv =
+      (affineRepresentativeStalkIso X' p T i).inv ≫ st.map (H.map (DerivedCategory.Q.map c.t)) := by
+    apply (cancel_epi (affineRepresentativeStalkIso X' p T i).hom).mp
+    rw [← Category.assoc, ← affineRepresentativeStalkIso_naturality X' p c.t i]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc]
+    rfl
+  have hrep := c.represents
+  have hrep' : (DerivedCategory.Q
+      (C := SheafOfModules.{u} (moduleRings X'.toRingedSpace))).map c.t ≫ c.e'.hom =
+      inv ((SingleComplexBaseChange.counit g').app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫
+          (derivedPullback g').map c.e.hom ≫ φ := by
+    rw [← hrep]
+    simp only [IsIso.inv_hom_id_assoc]
+  simp only [SingleComplexBaseChange.stalkComparison, affineBaseChangeIntoPullback,
+    Category.assoc, Functor.map_comp]
+  dsimp only [st, H, T] at ht
+  rw [reassoc_of% ht]
+  have hrepmap := congrArg (fun z => st.map (H.map z)) hrep'
+  simp only [Functor.map_comp] at hrepmap
+  dsimp only [st, H] at hrepmap
+  rw [hrepmap]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Expanding the stalk comparison and the two localization transports needs this budget.
 /-- The degree-i affine module comparison and its prime localizations, without any
 invertibility hypothesis. Source: Stacks Project, perfect.tex, Tag 0DJ8, affine
 proof, equation-bc and the displayed localization identity.
 (blueprint: lem-pc-affine-base-change-cohomology-model).
 
-Proof: identify the cartesian affine square with the tensor square A tensor_R R'.
-Use the affine quasi-coherent derived equivalence to represent K and K' by module
-complexes M and N. Derived pullback is derived scalar extension; affine derived
-pushforward is restriction of scalars. The canonical adjunction and composition
-counits defining schemeDerivedBaseChangeMap identify it with the K-flat comparison
-span E tensor_R R' -> P tensor_A A' of the affine derived comparison theorem.
-In degree i the source has its A' action induced by multiplication on M, commuting
-with R'; the target has the usual A' action on H^i(N). The composite with phi is
-A'-linear. Take these two cohomology modules U,V and their map a. Exact tilde and
-the affine derived equivalence identify the restricted modules with the cohomology
-sheaves on Spec R', giving eU,eV and the displayed commuting square.
-At a prime p of A', the affine comparison localization theorem identifies source
-cohomology localized at p with the base-derived tensor cohomology in equation-bc.
-Exact module localization identifies target cohomology with H^i(N_p). Tilde stalks
-are module localizations; derived pullback agrees with the canonical tensor-stalk
-isomorphism. Naturality identifies the localized a with stalkComparison, up to
-these source and target isomorphisms. K-flat resolution comparisons give the same
-identification in any supplied Coordinates c: apply exact stalks to the
-representative isomorphisms, then use the derived tensor universal counit
-equations and the represents equation for c. This gives the additive equivalences
-lU,lV and their pointwise commuting square. No complex of A'-modules representing
-M tensor-derived_R R' is used:
-only its cohomology carries the A' action. -/
+Proof: first apply exists_affineBaseChangeSourceModel to K and the supplied
+K-flat representative c.P, with target the canonical pullback Lg'^*K. This provides
+U, its map a0 to global sections of pullback cohomology, its source isomorphism,
+a natural affine direct-image cohomology isomorphism d, and the localized source
+square. Derived pullback preserves quasi-coherent cohomology. Set V to the actual
+global sections of H^i(K') and a to a0 followed by the map on global sections
+induced by phi. Set eV to d at K'. Naturality of d and functoriality of H give the
+global square. The canonical affineDerivedCohomologyStalkIso identifies V_p with
+the stalk of H^i(K'). Compose it with the stalk of H^i(c.e') inverse and the exact
+stalk/representative isomorphism to obtain lV. Localization of global sections is
+natural, as proved in affineDerivedCohomologyStalkIso_naturality. Exactness of
+stalks gives naturality of affineRepresentativeStalkIso for c.t. The represents
+equation for c and cancellation of its invertible counit prove
+stalkComparison followed by the target normalization equals the comparison into
+pullback followed by the stalk of H^i(phi). Apply this equation to lU(x), use the
+localized source square and localization of composition, and cancel the target
+normalization isomorphism. This proves the local equality for the supplied
+coordinates, without selecting different coordinates or assuming any comparison
+is invertible. -/
 theorem exists_affineBaseChangeCohomologyModel
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -91,6 +142,71 @@ theorem exists_affineBaseChangeCohomologyModel
         ∃ (lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk t).left)
           (lV : LocalizedModule p.asIdeal.primeCompl V ≃+ (Arrow.mk t).right),
           ∀ x, lV (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = t (lU x) := by
-  sorry
+  classical
+  dsimp only
+  let g' := Spec.map (CommRingCat.ofHom φg')
+  let L : schemeDerivedQCohCategory (Spec (.of A')) :=
+    ⟨(derivedPullback g').obj K, (derivedPullback_tensor_preserve_QCoh g').1 K hK⟩
+  let N : schemeDerivedQCohCategory (Spec (.of A')) := ⟨K', hK'⟩
+  let v : L ⟶ N := ⟨φ⟩
+  let T := affineDerivedCohomologyModules A' i
+  let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i
+  obtain ⟨d, U, a, eU, ha, hl⟩ := exists_affineBaseChangeSourceModel
+    R A R' A' φf φg φg' φf' sq K hK L.property c.P c.isKFlat c.e c.counit_isIso i
+  refine ⟨U, T.obj N, a ≫ T.map v, eU, d.app N, ?_, ?_⟩
+  · change eU.hom ≫ H.map (_ ≫ _) = F.map (a ≫ T.map v) ≫ d.hom.app N
+    rw [H.map_comp, ← Category.assoc, ha, Category.assoc, F.map_comp]
+    have hd := d.hom.naturality v
+    change F.map (T.map v) ≫ d.hom.app N =
+      d.hom.app L ≫ H.map ((schemeDerivedDirectImage
+        (Spec.map (CommRingCat.ofHom φf'))).map φ) at hd
+    simpa only [Category.assoc] using
+      (congrArg (fun z => F.map a ≫ z) hd).symm
+  · intro p
+    obtain ⟨lU, hlU⟩ := hl p
+    let H' := DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i
+    let st := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p
+    let q := st.mapIso (H'.mapIso c.e')
+    let lV := (affineDerivedCohomologyStalkIso A' i p N).trans
+      (q.symm.toLinearEquiv.toAddEquiv.trans
+        (affineRepresentativeStalkIso (Spec (.of A')) p c.N i).toLinearEquiv.toAddEquiv)
+    refine ⟨lU, lV, ?_⟩
+    intro x
+    apply (CategoryTheory.Iso.toLinearEquiv
+      ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).symm ≪≫ q)).injective
+    change q.hom ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).inv
+      (lV (LocalizedModule.map p.asIdeal.primeCompl (a ≫ T.map v).hom x))) = _
+    have hloc : LocalizedModule.map p.asIdeal.primeCompl (a ≫ T.map v).hom x =
+        LocalizedModule.map p.asIdeal.primeCompl (T.map v).hom
+          (LocalizedModule.map p.asIdeal.primeCompl a.hom x) := by
+      change LocalizedModule.map p.asIdeal.primeCompl
+        ((T.map v).hom.comp a.hom) x = _
+      exact IsLocalizedModule.map_comp' p.asIdeal.primeCompl
+        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl U)
+        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl (T.obj L))
+        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl (T.obj N)) a.hom (T.map v).hom
+        |> fun h => congrArg (fun z => z x) h
+    have hn := affine_stalkComparison_normalized
+      (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
+      (Spec.map (CommRingCat.ofHom φg)) g' sq c p i
+    have hn' := congrArg (fun z => z (lU x)) hn
+    simp only [ModuleCat.comp_apply] at hn'
+    simp only [lV, AddEquiv.trans_apply, CategoryTheory.Iso.toLinearEquiv_apply,
+      LinearEquiv.coe_toAddEquiv]
+    rw [hloc, affineDerivedCohomologyStalkIso_naturality, hlU]
+    change q.hom ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).inv
+      ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).hom
+        (q.inv (st.map (H'.map φ) (affineBaseChangeIntoPullback
+          (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
+          (Spec.map (CommRingCat.ofHom φg)) g' sq K c.P c.e c.counit_isIso p i (lU x)))))) =
+      q.hom ((affineRepresentativeStalkIso (Spec (.of A')) p c.N i).inv
+        (SingleComplexBaseChange.stalkComparison
+          (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
+          (Spec.map (CommRingCat.ofHom φg)) g' sq c p i (lU x)))
+    simp only [Iso.hom_inv_id_apply, Iso.inv_hom_id_apply]
+    exact hn'.symm
 
 end AlgebraicGeometry
