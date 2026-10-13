@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologySurjective
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologyInjective
 
 /-! # Alternating total Čech complexes on finite principal covers
 
@@ -972,7 +974,63 @@ theorem principalCechAugmentation_quasiIso
     (J : CochainComplex
       (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) [J.IsKInjective] :
     QuasiIso ((principalCechAugmentation r f).app J) := by
-  sorry
+  classical
+  let V : (Spec (.of A)).Opens := ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)
+  let K := ((affineOpenSections A V).mapHomologicalComplex (ComplexShape.up ℤ)).obj J
+  let T := (principalCechFunctor r f).obj J
+  let σ (n : ℤ) : K.X n ≅ (modulesSpecToSheaf.obj (J.X n)).obj.obj (op V) :=
+    Iso.refl _
+  let τ (n : ℤ) : T.X n ≅ principalCechTerms r f J n :=
+    (HomologicalComplex.eval _ (ComplexShape.up ℤ) n).mapIso
+    (principalCechObjIso r f J)
+  let α : K ⟶ T := (principalCechAugmentation r f).app J
+  have hls (S : {S : Finset (Fin r) // S.Nonempty}) (h : S.val.card = 1) :
+      principalCechIntersection r f S.val ≤ V := by
+    obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h
+    rw [hj]
+    exact principalCechIntersection_singleton_le r f j
+  have hes (S : {S : Finset (Fin r) // S.Nonempty}) (h : S.val.card = 1) (n : ℤ) :
+      n = n + 1 - (S.val.card : ℤ) := by rw [h]; omega
+  have hd (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}) :
+      (τ (n + 1)).hom (T.d n (n + 1) s) S =
+        principalCechDifferentialValue r f J n ((τ n).hom s) S := by
+    have h := ConcreteCategory.congr_hom ((principalCechObjIso r f J).hom.comm n (n + 1)) s
+    simp only [ModuleCat.comp_apply, principalCechTotal, CochainComplex.of_d] at h
+    change principalCechDifferential r f J n ((τ n).hom s) =
+      (τ (n + 1)).hom (T.d n (n + 1) s) at h
+    rw [← h]
+    exact congrFun ((principalCechDifferential_exists r f J n).choose_spec ((τ n).hom s)) S
+  have ha (n : ℤ) (s : K.X n) (S : {S : Finset (Fin r) // S.Nonempty}) :
+      (τ n).hom (α.f n s) S = if h : S.val.card = 1 then
+        (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map
+          (homOfLE (hls S h)).op
+          ((affineOpenSections A V).map (eqToHom (congrArg J.X (hes S h n))) s)
+        else 0 := by
+    change ((α ≫ (principalCechObjIso r f J).hom).f n) s S = _
+    by_cases h : S.val.card = 1
+    · rw [dif_pos h]
+      obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h
+      rcases S with ⟨S, hS⟩
+      dsimp only at hj
+      subst S
+      exact (principalCechAugmentation_exists r f).choose_spec.1 J n s j
+    · rw [dif_neg h]
+      have hlarge : 1 < S.val.card := by
+        have := S.property.card_pos
+        omega
+      exact (principalCechAugmentation_exists r f).choose_spec.2 J n s S hlarge
+  apply (quasiIso_iff _).2
+  intro n
+  apply (quasiIsoAt_iff_isIso_homologyMap _ n).2
+  have hmono : Mono (HomologicalComplex.homologyMap α n) :=
+    principalOpenCech_homology_injective A r f J K T σ τ α
+      (principalCechIntersection_erase_le r f) hls (principalCech_erase_degree r) hes
+      (fun _ _ ↦ rfl) hd ha n
+  have hepi : Epi (HomologicalComplex.homologyMap α n) :=
+    principalOpenCech_homology_surjective A r f J K T σ τ α
+      (principalCechIntersection_erase_le r f) hls (principalCech_erase_degree r) hes
+      (fun _ _ ↦ rfl) hd ha n
+  exact isIso_of_mono_of_epi _
 
 variable [HasDerivedCategory.{wC}
   (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace))]

@@ -32,7 +32,7 @@
    "elementary": true
   },
   {
-   "text": "principalCechFunctor_exists constructs its object function as principalCechTotal and its morphisms as componentwise section maps of coefficient chain maps. Vertical compatibility follows by applying the sections functor to g.comm. For horizontal compatibility, equality transports commute with g by equality induction, and restriction commutes with g by naturality of modulesSpecToSheaf.map; compare each summand, including the zero branch. Identities, composition and addition hold componentwise. Proof irrelevance reduces the displayed object equality transports to reflexivity. The complex objects still use the original unproved principalCechDifferential_square; this step is a proved reduction, not a proof of square-zero.",
+   "text": "principalCechFunctor_exists constructs its object function as principalCechTotal and its morphisms as componentwise section maps of coefficient chain maps. Vertical compatibility follows by applying the sections functor to g.comm. For horizontal compatibility, equality transports commute with g by equality induction, and restriction commutes with g by naturality of modulesSpecToSheaf.map; compare each summand, including the zero branch. Identities, composition and addition hold componentwise. Proof irrelevance reduces the displayed object equality transports to reflexivity. The complex objects use principalCechDifferential_square, now proved by the preceding step.",
    "uses": [],
    "elementary": true
   },
@@ -45,13 +45,24 @@
    "text": "principalCechDerivedComparison_exists uses the functorial K-injective resolution I with natural quasi-isomorphism eta. Write T = sections followed by Q, B = principalCechFunctor followed by Q, and D = Q followed by the right derived sections functor. The localized augmentation a:T→B and the standard derived-sections unit b:T→D are natural. On I, a is invertible by the original principalCechAugmentation_quasiIso theorem; D(eta) is invertible because eta is a quasi-isomorphism. Define beta = B(eta) followed by the inverse of a on I, followed by b on I, followed by the inverse of D(eta). Naturality gives a beta = b. On any K-injective J, b is the inverse of rightDerivedFunctorObjQIso J; cancellation of the invertible a on J gives beta_J followed by that isomorphism and a_J equal to the identity. Naturality of beta then proves the required equation for every resolution F→J. This is a proved reduction to the original K-injective augmentation quasi-isomorphism obligation, not a proof of that obligation. The categorical construction follows the existing sectionsDerivedUnit and comparison construction in QCohComplexAlternatingCechDerivedSections, but does not need its quasi-coherence hypothesis or import its module.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "principalCechAugmentation_quasiIso is reduced to the injectivity and surjectivity halves of the principal-open augmentation homology calculation. Instantiate their degree-coordinate presentations with identity section coordinates and the evaluated principalCechObjIso. The chain-map equation of that iso and principalCechDifferential_exists identify the differential formula. The original augmentation specification gives the singleton and zero formulas. In every degree the two new lemmas supply Mono and Epi of homologyMap; the abelian isIso_of_mono_of_epi theorem then gives QuasiIsoAt, and quasiIso_iff assembles these into the unchanged QuasiIso assertion. This is a decomposition: one original hole is closed and two strictly weaker cohomology halves remain.",
+   "uses": [
+    "lem-sc-principal-open-cech-homology-injective",
+    "lem-sc-principal-open-cech-homology-surjective"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-principal-open-cech-homology-injective",
+  "lem-sc-principal-open-cech-homology-surjective"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Partial Lean realization of Tags 08D1, 08D2 and 08C2. V3 proves the total differential square-zero by vertical square-zero, the swap involution for horizontal double deletions, and mixed-term cancellation. All new helpers are private and proved. The previous augmentation and derived-comparison constructions remain unchanged. Only principalCechAugmentation_quasiIso remains as the original named theorem hole."
+  "place": "Partial Lean realization of Tags 08D1, 08D2 and 08C2. V3 proves the total differential square-zero by vertical square-zero, the swap involution for horizontal double deletions, and mixed-term cancellation. All new helpers are private and proved. The previous augmentation and derived-comparison constructions remain unchanged. The original principalCechAugmentation_quasiIso obligation is decomposed below into two new named cohomology obligations. U1 decomposes the remaining augmentation quasi-isomorphism into separate injectivity and surjectivity assertions on homology, checking all differential and augmentation coordinate equations in Lean."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -176,10 +187,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T111937-L-3068253",
-  "kind": "proof",
+  "landing": "20261013T124316-L-3778142",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
