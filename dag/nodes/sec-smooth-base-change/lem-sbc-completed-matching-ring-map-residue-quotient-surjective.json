@@ -20,23 +20,41 @@
  ],
  "proof": [
   {
-   "text": "Reduce the canonical H0 comparison of formal glueing modulo the maximal ideal.",
+   "text": "Choose finite generators f of the maximal ideal by Noetherianity. Mathlib gives flatness of adic completion and bijectivity on residue fields. Transport the latter across the equality of the completed maximal ideal with the mapped maximal ideal, obtaining the quotient-map hypothesis for formal gluing.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the affine-chart module gluing datum X, its C-linear prime identification e, and the matching-section function k preserving the prime coordinate.",
    "uses": [
-    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-sbc-punctured-completion-formal-glueing-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Make the completed pushout map F C-linear using its second pushout injection and pushout.inr_desc. The H0 prime coordinates span X.Mprime. Each such coordinate maps under e into range(F), with witness pushout.inl(k(h)), by pushout.inl_desc and the geometric bridge projection equation. Span monotonicity puts all of X.Mprime in the comap of range(F); surjectivity of e proves F is surjective.",
+   "uses": [
+    "lem-sbc-formal-glueing-h0-prime-span",
     "def-sbc-completed-matching-ring-map"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Compose surjectivity of F with Mathlib Ideal.Quotient.mk_surjective to obtain exactly the residue-quotient map in the existing statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-formal-glueing-equivalence",
+  "lem-sbc-punctured-completion-formal-glueing-data",
+  "lem-sbc-formal-glueing-h0-prime-span",
   "def-sbc-completed-matching-ring-map"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "M1",
+  "by": "G4",
   "document": "Stacks Project",
-  "place": "Tags 0BLH and 05ER"
+  "place": "Tags 0BLH and 05ER; affine-chart bridge plus a proved H0 prime-span lemma; completion properties and pushout/range argument written in Lean."
  },
  "mathlib_searches": [
   {
@@ -102,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T172656-L-2100083",
+  "landing": "20261013T181059-L-2600101",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

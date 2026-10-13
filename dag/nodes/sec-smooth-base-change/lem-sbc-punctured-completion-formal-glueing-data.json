@@ -1,0 +1,163 @@
+{
+ "id": "lem-sbc-punctured-completion-formal-glueing-data",
+ "kind": "statement",
+ "title": "Finite affine charts give gluing data and compatible matching sections",
+ "statement": "Let $A$ be a commutative local ring with maximal ideal $\\mathfrak m$, $C$ its $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion], and $U\\subset\\operatorname{Spec} A$ exactly the complement of the closed point. Let $q:Y\\to U$ and $s:E\\to\\operatorname{Spec} C$ be finite morphisms [def-weil-finite-integral-morphism], and let $D$ be an overlap identification with its explicit matching ring $B$ [def-sbc-punctured-completion-matching-sections]. Fix $t\\in\\mathbf N$ and $f:\\{0,\\ldots,t-1\\}\\to A$ generating $\\mathfrak m$. Let $g:C\\to\\Gamma(E,\\mathcal O_E)$ be the structural ring map. There exist module glueing data $X$ for $A\\to C$ and $f$ [def-weil-pbc-formal-glueing-data], a $C$-linear equivalence $e:X.M\\prime\\simeq\\Gamma(E,\\mathcal O_E)$ with scalar action via $g$, and a function $k:H^0(X)\\to B$ [def-weil-pbc-formal-glueing-H0], such that the second pullback projection of $k(h)$ equals $e(p(h))$ for every compatible family $h$. This assertion makes no claim about the span of prime coordinates or about surjectivity of the completed comparison.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs (affine charts and overlap data); Tag 05EL, definition of H0. https://stacks.math.columbia.edu/tag/0BLH and https://stacks.math.columbia.edu/tag/05EL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-formal-glueing-H0"
+ ],
+ "proof": [
+  {
+   "text": "The principal opens D(f_i) cover U since f generates its closed-point ideal. Finite q makes their inverse images affine; finite s makes E affine. Take the modules of chart sections and completed sections, identify localizations and scalar extensions using these affine charts, and use the given overlap isomorphism to form the prime comparison maps. Restriction to double and triple intersections proves the two gluing equations. This constructs Data and its C-linear prime identification.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a compatible H0 family, glue the chart sections on the covering of Y using their overlap equations. Its prime/chart equations say the resulting global section agrees with its completed coordinate on the overlap; verify this on the principal-open cover and use sheaf separatedness. The pullback of section rings defining matchingRing receives the pair. Its second projection is the completed coordinate by the pullback lift equation. This construction also works for the empty cover and for zero chart rings.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-H0",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-formal-glueing-H0"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "G4",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs (affine charts and overlap data); Tag 05EL, definition of H0. https://stacks.math.columbia.edu/tag/0BLH and https://stacks.math.columbia.edu/tag/05EL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "formal gluing matching sections surjective modulo maximal ideal of completion",
+   "results": "8 hits: CategoryTheory.GlueData.types_π_surjective, AdicCompletion.eval_surjective, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AdicCompletion.surjective_evalₐ, AdicCompletion.of_surjective, AdicCompletion.map_surjective_of_mkQ_comp_surjective, AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective, AdicCompletion.mk_surjective",
+   "date": "2026-10-14",
+   "verdict": "No exact formal-glueing bridge; span lemmas used only as elementary algebra. Local rg found no existing H0 prime-span theorem or chart-data bridge."
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal gluing compatible sections span completed module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.span, Set.range",
+   "results": "12 hits: Submodule.span_range_eq_iSup, Submodule.span_singleton_eq_range, Submodule.span_range_update_sub_smul, Submodule.span_range_update_add_smul, Fintype.range_linearCombination, Finsupp.range_linearCombination, Submodule.mem_span_range_iff_exists_fun, Finsupp.mem_span_range_iff_exists_finsupp",
+   "date": "2026-10-14",
+   "verdict": "No exact formal-glueing bridge; span lemmas used only as elementary algebra. Local rg found no existing H0 prime-span theorem or chart-data bridge."
+  },
+  {
+   "tool": "grep",
+   "query": "formalGlueing|glueing|gluing",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact formal-glueing bridge; span lemmas used only as elementary algebra. Local rg found no existing H0 prime-span theorem or chart-data bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite affine principal open charts of a scheme with an overlap isomorphism give formal module gluing data and compatible families yield global matching sections",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Scheme.affineOpenCover_f, AlgebraicGeometry.Scheme.AffineOpenCover.openCover_f, AlgebraicGeometry.Scheme.AffineZariskiSite.cocone, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U",
+   "date": "2026-10-14",
+   "verdict": "No exact formal-glueing bridge; span lemmas used only as elementary algebra. Local rg found no existing H0 prime-span theorem or chart-data bridge."
+  },
+  {
+   "tool": "grep",
+   "query": "matchingRing|FormalGlueing",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact formal-glueing bridge; span lemmas used only as elementary algebra. Local rg found no existing H0 prime-span theorem or chart-data bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueQuotientSurjective",
+  "date": "2026-10-14",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The completion-glueing comparison used to extend a finite model across a punctured local spectrum; Finite affine charts give gluing data and compatible matching sections",
+   "via": [
+    "lem-sbc-completed-matching-ring-map-residue-quotient-surjective",
+    "lem-sbc-completed-matching-ring-map-residue-lift",
+    "lem-sbc-completed-matching-ring-map-surjective",
+    "def-sbc-completed-matching-ring-map",
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_formalGlueingData_matching_projection",
+  "statement": "theorem exists_formalGlueingData_matching_projection\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)\n    (hgen : Ideal.span (Set.range f) = IsLocalRing.maximalIdeal A) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let g : CommRingCat.of C ⟶ Γ(E, ⊤) := (ΓSpecIso (.of C)).inv ≫ s.appTop\n    letI : Module C Γ(E, ⊤) := Module.compHom _ g.hom\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ f) (e : X.M' ≃ₗ[C] Γ(E, ⊤))\n      (k : FormalGlueing.h0 φ f X → D.matchingRing),\n      ∀ h, pullback.snd\n        (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop\n          (k h) = e h.val.1",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T181059-L-2600101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T181059-L-2600101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
