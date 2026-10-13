@@ -18,25 +18,47 @@
  },
  "proof": [
   {
-   "text": "On Noetherian affine target opens, local purity (0BMA) and extension (0EY7) give finite etale models. The regular-generator lemma gives boundary target depth at least two and the flat local depth formula propagates it to the source. Hartogs uniqueness (0EY6(2)) identifies these models canonically on overlaps; its uniqueness ensures the cocycle, so they glue, with finiteness and etaleness local on the target.",
+   "text": "Use a minimal generating set of the regular local maximal ideal. The regular-generator theorem makes it a regular sequence of length the Krull dimension. Its length enters the supremum defining depth, so each boundary target stalk has depth at least two.",
    "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-flat-local-depth-formula",
-    "lem-sbc-depth-two-finite-extension-uniqueness"
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing depth-two finite extension theorem to the etale cover p restricted to V. Obtain a finite morphism r with source boundary depth two and an isomorphism from its restriction to that cover.",
+   "uses": [
+    "lem-sbc-depth-two-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each boundary point apply punctured-spectrum regular-local purity, Tag 0BMA. The local-purity depth-two finite flatness theorem then makes r flat.",
+   "uses": [
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-local-purity-depth-two-finite-flat-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing flat depth-two extension theorem gives formal unramifiedness. Finiteness gives local finite presentation, so flatness and formal unramifiedness give Etale r. Retain the source depth bound and invert the restriction isomorphism to obtain the required comparison with p.",
+   "uses": [
+    "lem-sbc-flat-depth-two-finite-formally-unramified"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-weil-pbc-flat-local-depth-formula",
-  "lem-sbc-depth-two-finite-extension-uniqueness"
+  "lem-sbc-depth-two-finite-extension",
+  "lem-sbc-regular-local-punctured-etale-purity",
+  "lem-sbc-local-purity-depth-two-finite-flat-stalk",
+  "lem-sbc-flat-depth-two-finite-formally-unramified"
  ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "J3",
+  "kind": "written-by-agent",
+  "by": "U1",
   "document": "Stacks Project",
-  "place": "Tags 0BMA and 0EY7, with 0EY6(2) for gluing"
+  "place": "Tags 0BMA, 0EY7 and 0EY6(2),(3); global depth-two extension followed by minimal nonflat fibre argument"
  },
  "mathlib_searches": [
   {
@@ -106,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T123545-L-3711496",
+  "landing": "20261013T133229-L-4194273",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

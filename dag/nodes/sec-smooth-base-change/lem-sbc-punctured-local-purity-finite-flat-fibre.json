@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-punctured-local-purity-finite-flat-fibre",
+ "kind": "statement",
+ "title": "Local purity makes a minimal nonflat fibre flat",
+ "statement": "Let p:E -> L be finite with L locally Noetherian [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring, def-weil-finite-integral-morphism]. Let V be open with p restricted to V etale [def-weil-etale-morphism] and source stalk depth at least two above L minus V [def-weil-pbc-depth]. Let s be outside V with target stalk depth at least two. Assume every finite etale cover of the punctured spectrum of the target stalk at s extends to a finite etale cover of that whole spectrum. If every stalk map of p above every proper generalization of s is flat [def-weil-flat-morphism], then every stalk map above s is flat.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-depth",
+  "def-weil-flat-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY7, punctured local-spectrum step; Tag 0EY6(2),(3), pione-lemma-extend-S2; flat descent along the canonical stalk spectrum"
+ },
+ "proof": [
+  {
+   "text": "Base change p along a:Spec O(L,s) -> L. The canonical morphism is flat. Define the target open W on which all finite source stalk maps are flat. Every punctured local-spectrum point maps to a proper generalization of s, so its image lies in W; flatness therefore pulls back to the whole punctured spectrum.",
+   "uses": [
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "lem-sbc-finite-flat-target-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etaleness over V pulls back. The flat local depth formula along the pullback projection preserves the source boundary depth bound. Apply the flat quasi-finite depth-two purity criterion to obtain etaleness over the whole punctured spectrum.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-flat-quasi-finite-depth-purity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the assumed punctured local purity to this finite etale cover. The resulting finite etale model has source depth two above the closed point by the flat local depth formula. The pullback of p has the same bound using hsource. The depth-two uniqueness theorem identifies these finite extensions over the local spectrum, hence the pullback of p is flat.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-depth-two-finite-extension-uniqueness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply flat descent near the closed point of Spec O(L,s), packaged by the stalk-normalization flat-core theorem, to get an open neighbourhood of s on which p is flat. Transport restricted stalk flatness along restriction stalk isomorphisms.",
+   "uses": [
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-sbc-finite-flat-target-locus",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-flat-quasi-finite-depth-purity",
+  "lem-sbc-depth-two-finite-extension-uniqueness",
+  "lem-sbc-stalk-normalization-depth-two-section-flat-core"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "U1",
+  "document": "Stacks Project",
+  "place": "Tag 0EY7, punctured local-spectrum step; Tag 0EY6(2),(3), pione-lemma-extend-S2; flat descent along the canonical stalk spectrum"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite depth two extension flat at proper generalizations of a target point is flat over that point if purity holds on its punctured local spectrum",
+   "results": "8 hits: ['Algebra.HasGoingDown.of_flat', 'RingHom.Flat.ofLocalizationPrime', 'instFlatAtPrime', 'RingHom.Flat.localRingHom', 'RingHom.Flat.generalizingMap_comap', 'RingHom.Flat.ofLocalizationSpanTarget', 'Module.flat_of_localized_maximal', 'RingHom.Flat.propertyIsLocal']",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem; use existing flatness and etaleness tools in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite depth two extension flat at proper generalizations of a target point is flat over that point if purity holds on its punctured local spectrum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|extend.*etale|etale.*extend",
+   "results": "0 hits: []",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem; use existing flatness and etaleness tools in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity extension across the regular special divisor; regular codimension-two boundary purity. Local purity makes a minimal nonflat fibre flat",
+   "via": [
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedLocalPurityFiniteFlatFiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedLocalPurityFiniteFlatFiber.lean",
+  "declaration": "AlgebraicGeometry.Scheme.flat_fibre_of_punctured_local_purity",
+  "statement": "theorem flat_fibre_of_punctured_local_purity\n    {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)\n    (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ V)]\n    (hsource : ∀ z : E, p z ∉ V →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z))\n    (s : L) (hs : s ∉ V)\n    (hdepth : (2 : ℕ∞) ≤\n      IsLocalRing.depth (R := L.presheaf.stalk s) (L.presheaf.stalk s))\n    (hpurity : ∀ (U : (Spec (L.presheaf.stalk s)).Opens),\n        (∀ x : Spec (L.presheaf.stalk s),\n          x ∈ U ↔ x ≠ IsLocalRing.closedPoint (L.presheaf.stalk s)) →\n        ∀ (Z : Scheme.{u}) (q : Z ⟶ U.toScheme), IsFinite q → Etale q →\n          ∃ (F : Scheme.{u}) (r : F ⟶ Spec (L.presheaf.stalk s)),\n            IsFinite r ∧ Etale r ∧\n              ∃ e : Z ≅ (r ⁻¹ᵁ U).toScheme, e.hom ≫ r ∣_ U = q)\n    (hflat : ∀ t : L, t ⤳ s → t ≠ s →\n      ∀ z : E, p z = t → (p.stalkMap z).hom.Flat) :\n    ∀ z : E, p z = s → (p.stalkMap z).hom.Flat",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T133229-L-4194273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T133229-L-4194273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
