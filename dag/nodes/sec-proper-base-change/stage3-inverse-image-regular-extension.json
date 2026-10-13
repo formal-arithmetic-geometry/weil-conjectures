@@ -1,0 +1,133 @@
+{
+ "id": "stage3-inverse-image-regular-extension",
+ "kind": "statement",
+ "title": "Normalized regular module comparison for inverse image and scalar extension",
+ "statement": "Let g:T → T′ be a continuous map of topological spaces, A a commutative-ring sheaf on T′, B a commutative-ring sheaf on T, and t:g⁻¹A → B a ring-sheaf morphism. Write R(S) for the associated ring sheaf and unit R(S) for its regular module. There exists a B-linear isomorphism e:B tensor_{g⁻¹A} g⁻¹(unit R(A)) ≅ unit R(B), with the tensors sheafified. For every open V of T′ and a in A(V), the forward isomorphism takes the sheafification of 1 tensor η_Ab(a) over g⁻¹V to t(η_A(a)), where η_Ab is the abelian inverse-image unit and η_A the ring inverse-image unit. All constructions are the explicit inverse-image modules and sheafified scalar extensions of [def-pc-topological-inverse-image-module] and [def-pur-sheaf-tensor-product].",
+ "stmt_deps": [
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "Stacks Project, Sheaves on Spaces",
+  "place": "Tags 008X and 008Y (inverse-image modules and adjunction); Tag 008A (scalar-extension adjunction)"
+ },
+ "proof": [
+  {
+   "text": "Compose the scalar-extension hom equivalence with the inverse-image module hom equivalence. Maps from the inverse-image regular module to the scalar restriction of N correspond to maps from the regular A-module to its direct image. Both adjunctions provide their canonical unit section formulas.",
+   "uses": [
+    "lem-pc-module-change-of-rings-adjunction",
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maps from a regular module are compatible global sections. Precomposition by the map on opens is a bijection on sections: the map on opens is final, since inverse image preserves the terminal open. Combining these natural equivalences gives Hom(F,N) ≃ Hom(unit B,N). Set the forward map to the inverse image of the identity on unit B and the inverse map to the image of the identity on F. Naturality and the inverse identities of the equivalences show they are inverse. This is an elementary representable-functor argument.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two adjunction formulas identify the value on the sheafification of 1 tensor η_Ab(a) with the adjunct at a. The adjunct sends 1 to 1, since the hom equivalence sends the forward isomorphism to the identity. Its A-linearity gives its value on a = a times 1 as t(η_A(a)) times 1, which equals t(η_A(a)). No nonzero ring or nonempty open is assumed.",
+   "uses": [
+    "lem-pc-module-change-of-rings-adjunction",
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-change-of-rings-adjunction",
+  "lem-pc-module-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Sheaves on Spaces",
+  "place": "Tags 008A and 008Y, specialized to the regular module and combined using its section universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image and extension of scalars preserve the regular sheaf module compatibly with the unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of the inverse image of the regular sheaf module is the regular module with unit compatibility",
+   "results": "Returns regular scalar action, tilde modules and restrictScalars; no normalized isomorphism for the explicit inverse-image and scalar-extension constructions. Loogle for SheafOfModules.unitHomEquiv finds the regular-module Hom/sections equivalence used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*iso|iso.*unit in sheaf-module files; regular module and 008A in blueprint",
+   "results": "Mathlib PullbackFree treats its abstract pullback, not the explicit inverseImageModule/changeOfRings construction. AffineModuleTensorAlgebraQuasiCoherent has private unnormalized unit isomorphisms; no public normalized comparison. No blueprint match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushoutRingSectionProducts",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence steps 4–7: affine tensor computation and invertibility; canonical unit map on an affine base open (01SB key algebra observation); affine tensor unit section calculation: affine identifications and diagonal balancing-relation quotient, before proving bijectivity; affine section presentation steps 1 and 2 only: pushout ring and first tensor module with its two actions, before extension by epsilon; ring section presentation: affine ring pushout comparison, before the counit triangle and pure-tensor generation; affine ring-section calculation: Finite product generation of affine ring-sheaf pushout sections; normalized regular-module identification in step 2",
+   "via": [
+    "stage3-affine-pushout-ring-section-products",
+    "stage3-affine-pushout-ring-affine-sections",
+    "lem-weil-pbc-affine-pushout-ring-section-presentation",
+    "lem-weil-pbc-affine-pushout-first-tensor-sections",
+    "lem-weil-pbc-affine-tensor-unit-section-presentation",
+    "lem-weil-pbc-affine-module-tensor-unit-sections",
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.InverseImageRegularExtension",
+  "file": "lean/Sheaf/Topology/InverseImageRegularExtension.lean",
+  "declaration": "SheafOfModules.inverseImageRegularExtension",
+  "statement": "theorem inverseImageRegularExtension\n    {T T' : TopCat.{u}} (g : T ⟶ T') (A : T'.Sheaf CommRingCat.{u})\n    (B : T.Sheaf CommRingCat.{u}) (t : TopCat.Sheaf.inverseImageRing g A ⟶ B) :\n    ∃ e : changeOfRings.{u, u, u} t\n        (TopCat.Sheaf.inverseImageModule g A (unit (𝓡 A))) ≅ unit (𝓡 B),\n      ∀ (V : (Opens T')ᵒᵖ) (a : A.obj.obj V),\n        e.hom.val.app ((Opens.map g).op.obj V)\n          (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n            (changeOfRingsPresheaf.{u, u, u} t\n              (TopCat.Sheaf.inverseImageModule g A (unit (𝓡 A))))).app\n                ((Opens.map g).op.obj V)\n                ((1 : B.obj.obj ((Opens.map g).op.obj V)) ⊗ₜ[\n                  (TopCat.Sheaf.inverseImageRing g A).obj.obj ((Opens.map g).op.obj V),\n                  (t.hom.app ((Opens.map g).op.obj V)).hom]\n                  (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n                    (Opens.map g) AddCommGrpCat.{u} (Opens.grothendieckTopology T')\n                    (Opens.grothendieckTopology T)).unit.app\n                      ((toSheaf (𝓡 A)).obj (unit (𝓡 A)))).hom.app V a))) =\n          (t.hom.app ((Opens.map g).op.obj V)).hom\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')\n              (Opens.grothendieckTopology T)).unit.app A).hom.app V a)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T045520-L-126298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T045520-L-126298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
