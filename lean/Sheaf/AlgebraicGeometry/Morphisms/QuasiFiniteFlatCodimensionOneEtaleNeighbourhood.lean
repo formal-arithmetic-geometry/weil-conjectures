@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtaleNeighbourhood
+import Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint
+import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # The pointwise ramification criterion for a flat quasi-finite morphism
@@ -23,30 +27,38 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A flat morphism that is quasi-finite at a positive-dimensional source point
 is etale near that point if it is unramified at its dimension-one generalizations.
 
 Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH).
 (blueprint: lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood)
 
-Proof: Positive stalk dimension says that x is not the generic point of an
-irreducible component. The supplied neighbourhoods, together with local finite
-type, express unramifiedness at each dimension-one generalization of x.
-Work etale locally on source and target (Stacks 02LK) to make f finite and x the
-unique point above y = f(x). These localizations preserve stalk dimensions,
-flatness and unramifiedness; etaleness descends through them. The resulting finite
-flat map over a locally Noetherian target is finite locally free. Its discriminant
-cuts out a locally principal closed branch locus D in the target (Stacks 0BJF).
-Suppose y belongs to D. Source and target stalk dimensions agree for a finite
-flat map (Stacks 00ON), so the target stalk at y has positive dimension. Stacks
-0BJG supplies a dimension-one generalization y' of y in D, even if the
-discriminant vanishes identically. There is a ramified point x' above y'. Since
-the finite map is closed and its fibre at y contains only x, x' specializes to x.
-Dimension equality again gives dimension one at x', contradicting the supplied
-unramified neighbourhood. Thus y is outside D, and f is etale at x. The etale
-locus is open, giving the asserted neighbourhood in the original source.
-A zero-dimensional point is excluded by hpos; an empty source has no point x.
-No normality, dominance or separateness hypothesis is required. -/
+Proof:
+1. Quasi-finiteness at x makes its singleton in the fibre open. Apply the
+   elementary etale finite-open theorem (Stacks 02LK), obtaining b : T → Y,
+   a finite open piece V of X ×[Y] T and a point v above x. The maps
+   a : V → X and g : V → T are etale and finite flat, respectively.
+2. Flat locally quasi-finite maps preserve coheight. The source-library theorem
+   `Scheme.Hom.coheight_apply_of_flat` and the stalk-dimension/coheight identity
+   therefore identify the local dimensions at z and a(z). Specialization maps
+   along a. Pull a supplied unramified neighbourhood back along a and cancel
+   the formally unramified map b to obtain the codimension-one hypotheses for g.
+3. Apply the existing finite-flat codimension-one criterion to g at v.
+   Its branch-locus argument is the finite case of Stacks 0BJH.
+4. The resulting etale open piece B → X has open image U containing x.
+   Factor it through U to get an etale surjection q : B → U. Since the
+   composite B → Y is etale, smoothness descends along q by the already proved
+   source-library theorem `Smooth.of_comp_of_flat_of_surjective` (Stacks 05B5).
+5. The isolated singleton in the original fibre has dimension zero. In the
+   infimum defining dimension at the point, this singleton gives the upper
+   bound zero; every neighbourhood contains the point and has dimension at
+   least zero. Apply the existing smooth-zero-fibre-dimension neighbourhood
+   criterion to shrink U to an etale neighbourhood of x.
+
+No source point exists when X is empty. Positive stalk dimension excludes
+zero-dimensional source points. No global quasi-finiteness, normality,
+dominance, separateness or quasi-compactness assumption is added. -/
 theorem exists_etale_neighbourhood_of_flat_of_quasiFiniteAt_of_codimension_one
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [Flat f] (x : X)
@@ -55,6 +67,83 @@ theorem exists_etale_neighbourhood_of_flat_of_quasiFiniteAt_of_codimension_one
     (hunram : ∀ x' : X, Specializes x' x →
       ringKrullDim (X.presheaf.stalk x') = 1 →
       ∃ V : X.Opens, x' ∈ V ∧ FormallyUnramified (V.ι ≫ f)) :
-    ∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f) := by sorry
+    ∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f) := by
+  obtain ⟨T, b, -, hb, -, -, V, hfinite, v, -, -, hv, -⟩ :=
+    exists_etale_finite_open_of_isolated_fiber_point f x hq.isClopen_singleton_asFiber.isOpen
+  have : Etale b := hb
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian b
+  let a : V.toScheme ⟶ X := V.ι ≫ CategoryTheory.Limits.pullback.fst f b
+  let g : V.toScheme ⟶ T := V.ι ≫ CategoryTheory.Limits.pullback.snd f b
+  have : IsFinite g := hfinite
+  have : Flat g := by dsimp [g]; infer_instance
+  have : Etale a := by dsimp [a]; infer_instance
+  have hcomm : a ≫ f = g ≫ b := by
+    simp only [a, g, Category.assoc, CategoryTheory.Limits.pullback.condition]
+  have hav : a v = x := hv
+  have hdim (z : V) :
+      ringKrullDim (X.presheaf.stalk (a z)) = ringKrullDim (V.toScheme.presheaf.stalk z) := by
+    rw [ringKrullDim_stalk_eq_coheight, ringKrullDim_stalk_eq_coheight]
+    exact congrArg (fun d : ℕ∞ => (d : WithBot ℕ∞)) (a.coheight_apply_of_flat z)
+  have hposV : (0 : WithBot ℕ∞) < ringKrullDim (V.toScheme.presheaf.stalk v) := by
+    rw [← hdim v, hav]
+    exact hpos
+  have hunramV : ∀ z : V, Specializes z v →
+      ringKrullDim (V.toScheme.presheaf.stalk z) = 1 →
+      ∃ W : V.toScheme.Opens, z ∈ W ∧ FormallyUnramified (W.ι ≫ g) := by
+    intro z hz hd
+    obtain ⟨W, hzW, hW⟩ := hunram (a z) (by simpa only [hav] using hz.map a.continuous)
+      ((hdim z).trans hd)
+    have : FormallyUnramified (W.ι ≫ f) := hW
+    let W' := a ⁻¹ᵁ W
+    have : FormallyUnramified ((a ∣_ W) ≫ (W.ι ≫ f)) :=
+      MorphismProperty.comp_mem @FormallyUnramified _ _ inferInstance inferInstance
+    have : FormallyUnramified ((W'.ι ≫ g) ≫ b) := by
+      rw [Category.assoc, ← hcomm, ← Category.assoc,
+        ← morphismRestrict_ι, Category.assoc]
+      infer_instance
+    exact ⟨W', hzW, FormallyUnramified.of_comp (W'.ι ≫ g) b⟩
+  obtain ⟨B, hvB, hB⟩ :=
+    exists_etale_neighbourhood_of_finite_flat_of_codimension_one g v hposV hunramV
+  have : Etale (B.ι ≫ g) := hB
+  let e := B.ι ≫ a
+  have : Etale e := by dsimp [e]; infer_instance
+  have : Etale (e ≫ f) := by
+    simpa only [e, Category.assoc, hcomm] using
+      (inferInstance : Etale ((B.ι ≫ g) ≫ b))
+  let U : X.Opens := ⟨Set.range e, e.isOpenMap.isOpen_range⟩
+  have hxU : x ∈ U := ⟨⟨v, hvB⟩, hv⟩
+  let q : B.toScheme ⟶ U.toScheme :=
+    IsOpenImmersion.lift U.ι e (by rw [Opens.range_ι]; exact Set.Subset.rfl)
+  have hqfac : q ≫ U.ι = e := IsOpenImmersion.lift_fac _ _ _
+  have : Etale q := by
+    have : Etale (q ≫ U.ι) := hqfac.symm ▸ inferInstance
+    exact Etale.of_comp q U.ι
+  have : Surjective q := by
+    constructor
+    intro z
+    obtain ⟨w, hw⟩ := z.property
+    refine ⟨w, ?_⟩
+    apply U.ι.isOpenEmbedding.injective
+    rw [← Scheme.Hom.comp_apply, hqfac]
+    exact hw
+  have : Smooth (q ≫ (U.ι ≫ f)) := by
+    rw [← Category.assoc, hqfac]
+    infer_instance
+  have hsm : Smooth (U.ι ≫ f) := Smooth.of_comp_of_flat_of_surjective q (U.ι ≫ f)
+  have hzero : topologicalKrullDimAt (f.asFiber x) = 0 := by
+    let W : (f.fiber (f x)).Opens := ⟨{f.asFiber x}, hq.isClopen_singleton_asFiber.isOpen⟩
+    apply le_antisymm
+    · have : Subsingleton W := inferInstanceAs (Subsingleton ({f.asFiber x} :
+          Set (f.fiber (f x))))
+      exact (iInf₂_le W (show f.asFiber x ∈ W from Set.mem_singleton _)).trans
+        (topologicalKrullDim_zero_of_discreteTopology W)
+    · apply le_iInf₂
+      intro W hxW
+      exact Order.krullDim_nonneg_iff.mpr
+        ⟨⟨closure {⟨f.asFiber x, hxW⟩},
+          isIrreducible_singleton.closure, isClosed_closure⟩⟩
+  obtain ⟨U', -, hxU', hU'⟩ :=
+    exists_etale_open_of_smooth_of_fibre_dimension_zero f x U hxU hsm hzero
+  exact ⟨U', hxU', hU'⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-flat-locally-quasi-finite-coheight",
+ "kind": "statement",
+ "title": "Flat locally quasi-finite scheme morphisms preserve coheight",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-weil-pbc-scheme-conventions], flat [def-weil-flat-morphism] and locally quasi-finite (quasi-finite at every source point [pqf-def-quasifinite]). For any $z\\in X$, the coheight of $f(z)$ equals the coheight of $z$. Coheight is the supremum of the lengths of strict chains of generalizations ending at the specified point, in the specialization order; for a scheme point it equals the Krull dimension of its stalk [def-weil-pbc-krull-dimension-ring]. No Noetherian hypothesis is required.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+  "place": "Scheme.Hom.coheight_apply_of_flat, lines 94–115; equality of local dimensions under the etale localization used in Stacks 0BJH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-flat-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "This is the existing proved source-library declaration Scheme.Hom.coheight_apply_of_flat, read at lines 94–115. It is attached, not restated in Lean. A locally quasi-finite fibre has no distinct comparable points. Thus a specialization and its reverse between image points force equality upstairs, making f strictly monotone in the specialization order.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Flatness makes f generalizing: every strict generalization of f(z) lifts to a generalization of z. The lift is strict because its image is strict. The order-theoretic coheight equality theorem for a strictly monotone map with this lifting property gives the asserted equality. The source proof closes this argument without sorry. Empty sources have no point z; zero and infinite coheight are both covered by the order-theoretic statement.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite",
+  "place": "Scheme.Hom.coheight_apply_of_flat, lines 94–115; equality of local dimensions under the etale localization used in Stacks 0BJH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat locally quasi finite morphisms preserve codimension of points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally quasi finite morphisms preserve codimension of points",
+   "results": "AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; the existing source-library declaration supplies the result."
+  },
+  {
+   "tool": "grep",
+   "query": "coheight_apply_of_flat|coheight.*flat|flat.*coheight",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; the existing source-library declaration supplies the result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFlatCodimensionOneEtaleNeighbourhood",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: Scheme.Hom.coheight_apply_of_flat, lines 94–115; equality of local dimensions under the etale localization used in Stacks 0BJH.",
+   "via": [
+    "lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood",
+    "lem-sbc-flat-quasi-finite-depth-purity",
+    "lem-sbc-stalk-normalization-flat-etale",
+    "lem-sbc-stalk-normalization-depth-two-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.coheight_apply_of_flat",
+  "statement": "lemma Scheme.Hom.coheight_apply_of_flat (f : X ⟶ Y) [Flat f] [LocallyQuasiFinite f] (y : X) :\n    coheight (f y) = coheight y",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T060421-L-584191",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T060421-L-584191",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

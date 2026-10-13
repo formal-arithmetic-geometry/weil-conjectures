@@ -18,22 +18,52 @@
  ],
  "proof": [
   {
-   "text": "Positive stalk dimension excludes a generic point of an irreducible component. The supplied formally unramified neighbourhoods and local finite type give the unramifiedness hypotheses of Tag 0BJH.",
-   "uses": [],
+   "text": "Apply exists_etale_finite_open_of_isolated_fiber_point to the open isolated fibre singleton supplied by hq. Obtain b:T→Y etale, a finite open piece V in the pullback and v mapping to x. Put a=V.ι followed by the first projection and g=V.ι followed by the second. The pullback square gives a followed by f = g followed by b. Composition and base-change instances give Etale a, Flat g and IsFinite g; local finite type of b gives local Noetherianness of T.",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-at-point-elementary"
+   ],
    "elementary": false
   },
   {
-   "text": "Work etale locally at x and its image to obtain a finite flat morphism with x the sole point over its image. Local dimension, flatness and unramifiedness are preserved, and etaleness descends. The finite flat morphism is finite locally free. Its discriminant defines a locally principal branch locus. If the image of x belongs to this locus, positive source dimension and equality of source and target local dimensions allow Tag 0BJG to supply a dimension-one generalization in the branch locus. Choose a ramified point over it. Closedness of the finite morphism and the singleton fibre imply that this point specializes to x. Equality of local dimensions makes its dimension one, contrary to the assumed unramified neighbourhood. Hence f is etale at x; openness of the etale locus supplies the desired source neighbourhood.",
-   "uses": [],
+   "text": "Use Scheme.Hom.coheight_apply_of_flat for the etale map a, which is flat and locally quasi-finite, and Mathlib ringKrullDim_stalk_eq_coheight to identify dimensions of V stalks with X stalks. Specializations map along a. Given z specializing to v with dimension-one stalk, pull the supplied formally unramified open W of a(z) back along a. The restriction of the etale a is formally unramified; compose with W.ι followed by f, rewrite the pullback commutativity identity, and use FormallyUnramified.of_comp to cancel b. This supplies a formally unramified open of z for g. Positive dimension at v follows from a(v)=x and the same dimension identity.",
+   "uses": [
+    "lem-sbc-flat-locally-quasi-finite-coheight"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_etale_neighbourhood_of_finite_flat_of_codimension_one to g and v, with the positive-dimension and dimension-one unramifiedness hypotheses just proved. It gives B open in V containing v with B.ι followed by g etale. The discriminant and dimension-one branch-locus argument remains entirely in this existing finite-specialization node.",
+   "uses": [
+    "lem-sbc-finite-flat-codimension-one-etale-neighbourhood"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put e=B.ι followed by a. It is etale and its composite with f is etale by the commutative square and composition with b. Its image U is open and contains x. Use IsOpenImmersion.lift to factor e through U.ι as q:B→U. Etale.of_comp proves q etale. Its surjectivity follows from the definition of U as range e and injectivity of U.ι. Smooth.of_comp_of_flat_of_surjective applied to q then proves Smooth (U.ι followed by f).",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the original fibre the singleton of f.asFiber x is open. It is a discrete singleton, so its topological dimension is zero. The infimum over neighbourhoods defining topologicalKrullDimAt is at most zero using this singleton. Each neighbourhood contains the point, so the closure of that singleton is a nonempty irreducible closed subset, giving the lower bound zero. Apply exists_etale_open_of_smooth_of_fibre_dimension_zero to f, x and U and return the smaller etale open.",
+   "uses": [
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "lem-sbc-flat-locally-quasi-finite-coheight",
+  "lem-sbc-finite-flat-codimension-one-etale-neighbourhood",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+ ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "G1",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Lemma 58.21.2, Tag 0BJH (pione-lemma-ramification-quasi-finite-flat)"
+  "place": "Tags 0BJH and 02LK, reduction to the existing finite-flat criterion; descent via the already proved source-library Smooth.of_comp_of_flat_of_surjective (05B5) and the already proved smooth-zero-fibre-dimension neighbourhood criterion."
  },
  "mathlib_searches": [
   {
@@ -159,10 +189,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T045529-L-128772",
-  "kind": "interface",
+  "landing": "20261013T060421-L-584191",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

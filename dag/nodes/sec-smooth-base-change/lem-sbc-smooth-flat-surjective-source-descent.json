@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-smooth-flat-surjective-source-descent",
+ "kind": "statement",
+ "title": "Smoothness descends along flat surjective locally finitely presented source maps",
+ "statement": "Let $X\\prime,X,S$ be schemes [def-weil-pbc-scheme-conventions], with $q:X\\prime\\to X$ flat [def-weil-flat-morphism], surjective on points, and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $f:X\\to S$ be a morphism. If $f\\circ q$ is smooth [def-sbc-smooth-morphisms], then $f$ is smooth. No quasi-compactness assumption on $q$ is needed.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "place": "Smooth.of_comp_of_flat_of_surjective, lines 671–692; Stacks Tag 05B5, smooth case, used for etale descent in the localization step of 0BJH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Attach the existing proved source-library declaration Smooth.of_comp_of_flat_of_surjective, read at lines 671–692. Local finite presentation of f descends from its smooth composite along the flat surjective locally finitely presented q; flatness of f descends along the flat surjection. It remains to establish smoothness of each fibre.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Base change q to the fibre over an arbitrary point s of S. It remains flat and surjective. The composite fibre morphism is the base change of q followed by f, hence smooth. Apply the already proved source-library field-valued smooth descent theorem: after extending the field to an algebraic closure, the target fibre is a locally finite type Jacobson scheme; at each closed point choose a preimage under q. Its regular local ring descends along the flat local stalk map. A regular closed point over the algebraically closed field is smooth, and openness of the smooth locus and the Jacobson property then give smoothness everywhere. Descend from the algebraic closure by faithfully flat field base change.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Thus every fibre of f is smooth. Together with flatness and local finite presentation, the fibrewise smoothness criterion proves Smooth f. This proof in the existing source has no sorry. Surjectivity covers empty-source edge cases, and no global quasi-compactness premise is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+  "place": "Smooth.of_comp_of_flat_of_surjective, lines 671–692; Stacks Tag 05B5, smooth case, used for etale descent in the localization step of 0BJH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smoothness descends along flat surjective morphisms locally of finite presentation on the source",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness descends along flat surjective morphisms locally of finite presentation on the source",
+   "results": "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmooth_iff, RingHom.smooth_def, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; the existing source-library declaration supplies the result."
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp_of_flat_of_surjective|smooth.*descent|descendsAlong.*Smooth",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Smooth/Flat.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; the existing source-library declaration supplies the result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFlatCodimensionOneEtaleNeighbourhood",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: Smooth.of_comp_of_flat_of_surjective, lines 671–692; Stacks Tag 05B5, smooth case, used for etale descent in the localization step of 0BJH.",
+   "via": [
+    "lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood",
+    "lem-sbc-flat-quasi-finite-depth-purity",
+    "lem-sbc-stalk-normalization-flat-etale",
+    "lem-sbc-stalk-normalization-depth-two-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+  "declaration": "AlgebraicGeometry.Smooth.of_comp_of_flat_of_surjective",
+  "statement": "theorem Smooth.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ S)\n    [Flat u] [Surjective u] [LocallyOfFinitePresentation u] [Smooth (u ≫ f)] : Smooth f",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T060421-L-584191",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T060421-L-584191",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
