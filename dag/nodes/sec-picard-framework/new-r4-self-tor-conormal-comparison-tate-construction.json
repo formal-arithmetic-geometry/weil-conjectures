@@ -1,0 +1,108 @@
+{
+ "id": "new-r4-self-tor-conormal-comparison-tate-construction",
+ "kind": "statement",
+ "title": "Tate comparison computed by chosen Koszul augmentation lifts",
+ "statement": "For every commutative ring A, ideal I and degree n, there is an A-linear map from the conormal exterior module [new-r4-conormal-exterior-module] to Tor_n^A(A/I,A/I) with the following property: for every finite tuple g in I and every projective resolution P of A/I there exists an augmentation-preserving Koszul chain map a into P. On every cycle representing a degree-n wedge after tensoring with A/I, the homology map of a equals the value of the comparison on the wedge of the conormal classes, transported by P.isoLeftDerivedObj. Only this chosen lift is asserted to satisfy the formula, rather than all augmentation lifts as in [new-r4-self-tor-conormal-predicate].",
+ "stmt_deps": [
+  "new-r4-conormal-exterior-module",
+  "new-r4-self-tor-conormal-predicate"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Tag 09PQ, Tate resolution computation of strictly commutative Tor; Tag 00LS, part (1), comparison lifting"
+ },
+ "proof": [
+  {
+   "text": "Use a free Tate dg algebra resolution of A/I to compute self-Tor, with its strictly graded commutative product. Identify degree-one classes with I/I² via the quotient boundary. Odd classes square to zero in all characteristics; their products are alternating and A/I-multilinear, yielding a map on the exterior conormal power.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift each tuple element to degree one of the Tate resolution and extend to a Koszul dg algebra map. Choose a comparison map from the free Tate complex to P preserving augmentation by inductive projective lifting. The composite gives the required chosen Koszul lift; its wedge products give the displayed formula under the canonical derived comparison. No claim about other Koszul lifts is made.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2 second reader",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/09PQ",
+   "place": "Tag 09PQ, Tate resolution computation of strictly commutative Tor; Tag 00LS, part (1), comparison lifting"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An alternating product of first self Tor of a quotient ring defines a linear map from the exterior power of the conormal module, compatible with a chosen Koszul augmentation lift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Tate resolution of a quotient gives an alternating product of degree one Tor classes from I modulo I squared, computed by a Koszul augmentation lift on wedge generators",
+   "results": "8 hits: Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.cotangentComplex, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δAux, Algebra.Presentation.differentials.comm₁₂, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ",
+   "date": "2026-10-14",
+   "verdict": "used as a tool lemma; no full construction match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b[Tt]ate\\b|conormal.*Tor|Tor.*conormal|cotangent.*Tor|Tor.*cotangent",
+   "results": "1 hits: Mathlib/Algebra/Module/SpanRankOperations.lean",
+   "date": "2026-10-14",
+   "verdict": "no full comparison construction in the returned matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalComparisonExistence",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-r4-self-tor-conormal-comparison-existence",
+   "place": "intermediate result",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SelfTorConormalComparisonTateConstruction",
+  "file": "lean/Sheaf/RingTheory/SelfTorConormalComparisonTateConstruction.lean",
+  "declaration": "AlgebraicGeometry.tate_selfTor_conormal_map",
+  "statement": "theorem tate_selfTor_conormal_map (A : Type u) [CommRing A]\n    (I : Ideal A) (n : ℕ) :\n    ∃ c : conormalExteriorModule A I n ⟶\n      ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj\n        (ModuleCat.of A (A ⧸ I)), TateComparisonCertificate A I n c",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

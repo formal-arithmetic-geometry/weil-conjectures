@@ -1,0 +1,114 @@
+{
+ "id": "new-r4-koszul-augmentation-lift-homotopy",
+ "kind": "statement",
+ "title": "Koszul augmentation lifts are chain homotopic",
+ "statement": "For every commutative ring A, ideal I, finite tuple g in I and projective resolution P of A/I, any two chain maps from the Koszul complex [def-weil-pbc-koszul-complex] of g into P having the same composite with its augmentation in degree zero are chain homotopic. No regularity or source exactness hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Part (2); adapted from Mathlib ProjectiveResolution.liftHomotopyZero and Homotopy.mkInductive"
+ },
+ "proof": [
+  {
+   "text": "Each Koszul term is free by exteriorPower.instFree, hence projective in ModuleCat. Subtract the two chain maps; their degree-zero difference is killed by the augmentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use exactness at the augmentation to lift the degree-zero difference to degree one. Use exactness in positive degrees to lift successively the residual difference after the previous homotopy component. The chain-map equations and d²=0 show each residual is a cycle. Assemble these actual lifts with Homotopy.mkInductive and Homotopy.equivSubZero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2 second reader",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/00LS",
+   "place": "Part (2); adapted from Mathlib ProjectiveResolution.liftHomotopyZero and Homotopy.mkInductive"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two augmentation preserving maps from a complex of free modules into a projective resolution are homotopic and induce equal homology maps after tensoring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two maps from a bounded below complex of projective modules to an exact projective resolution lifting the same augmentation are chain homotopic",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc, CategoryTheory.ProjectiveResolution.liftHomotopyZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc_comp, CategoryTheory.ProjectiveResolution.homotopyEquiv, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne_comp",
+   "date": "2026-10-14",
+   "verdict": "used as a tool lemma; no full construction match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.liftHomotopy",
+   "results": "1 hits: CategoryTheory.ProjectiveResolution.liftHomotopy",
+   "date": "2026-10-14",
+   "verdict": "used as a tool lemma; no full construction match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*Tor|Tor.*cotangent|homotop.*(exact|projective)|projective.*homotop",
+   "results": "25 hits: Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no full comparison construction in the returned matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalComparisonExistence",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-r4-self-tor-conormal-comparison-existence",
+   "place": "intermediate result",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulAugmentationLiftHomotopy",
+  "file": "lean/Sheaf/RingTheory/KoszulAugmentationLiftHomotopy.lean",
+  "declaration": "AlgebraicGeometry.koszul_augmentation_lifts_homotopic",
+  "statement": "theorem koszul_augmentation_lifts_homotopic (A : Type u) [CommRing A]\n    (I : Ideal A) (r : ℕ) (g : Fin r → I)\n    (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))\n    (a b : ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A)) ⟶ P.complex)\n    (hab : a.f 0 ≫ P.π.f 0 = b.f 0 ≫ P.π.f 0) : Nonempty (Homotopy a b)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

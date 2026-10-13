@@ -1,0 +1,126 @@
+{
+ "id": "new-r4-self-tor-conormal-comparison-homotopy-normalization",
+ "kind": "statement",
+ "title": "Chosen lift normalization extends to arbitrary lifts",
+ "statement": "For a commutative ring A, ideal I, degree n and an A-linear conormal-to-self-Tor map c, the chosen-lift wedge certificate [new-r4-self-tor-conormal-comparison-tate-construction] implies the full arbitrary-lift normalization predicate [new-r4-self-tor-conormal-predicate].",
+ "stmt_deps": [
+  "new-r4-self-tor-conormal-comparison-tate-construction",
+  "new-r4-self-tor-conormal-predicate"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Part (2), tensoring chain homotopies and equality of induced homology maps"
+ },
+ "proof": [
+  {
+   "text": "For the given tuple and resolution take the lift b supplied by the certificate. The arbitrary lift a has the same augmentation. Apply the Koszul comparison homotopy lemma.",
+   "uses": [
+    "new-r4-koszul-augmentation-lift-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the homotopy with A/I using Functor.mapHomotopy. Apply Homotopy.homologyMap_eq and substitute into the certificate formula. This proves the required formula for a.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-r4-koszul-augmentation-lift-homotopy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2 second reader",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/00LS",
+   "place": "Part (2), tensoring chain homotopies and equality of induced homology maps"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two augmentation preserving maps from a complex of free modules into a projective resolution are homotopic and induce equal homology maps after tensoring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two maps from a bounded below complex of projective modules to an exact projective resolution lifting the same augmentation are chain homotopic",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc, CategoryTheory.ProjectiveResolution.liftHomotopyZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc_comp, CategoryTheory.ProjectiveResolution.homotopyEquiv, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne_comp",
+   "date": "2026-10-14",
+   "verdict": "used as a tool lemma; no full construction match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.liftHomotopy",
+   "results": "1 hits: CategoryTheory.ProjectiveResolution.liftHomotopy",
+   "date": "2026-10-14",
+   "verdict": "used as a tool lemma; no full construction match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*Tor|Tor.*cotangent|homotop.*(exact|projective)|projective.*homotop",
+   "results": "25 hits: Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no full comparison construction in the returned matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy.homologyMap_eq",
+   "results": "1 hits: Homotopy.homologyMap_eq",
+   "date": "2026-10-14",
+   "verdict": "used as a tool lemma; no full construction match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalComparisonExistence",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-r4-self-tor-conormal-comparison-existence",
+   "place": "intermediate result",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SelfTorConormalComparisonHomotopyNormalization",
+  "file": "lean/Sheaf/RingTheory/SelfTorConormalComparisonHomotopyNormalization.lean",
+  "declaration": "AlgebraicGeometry.tate_comparison_homotopy_normalization",
+  "statement": "theorem tate_comparison_homotopy_normalization (A : Type u) [CommRing A]\n    (I : Ideal A) (n : ℕ)\n    (c : conormalExteriorModule A I n ⟶\n      ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj\n        (ModuleCat.of A (A ⧸ I)))\n    (h : TateComparisonCertificate A I n c) :\n    IsSelfTorConormalComparison A I n c",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

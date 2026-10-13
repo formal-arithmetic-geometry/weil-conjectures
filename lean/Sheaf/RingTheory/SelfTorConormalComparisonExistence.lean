@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.RingTheory.SelfTorConormalComparisonPredicate
+import Sheaf.RingTheory.SelfTorConormalComparisonHomotopyNormalization
 
 /-! Existence of the normalized self-Tor comparison. -/
 @[expose] public section
@@ -42,6 +43,8 @@ theorem selfTorConormalComparison_exists (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) :
     ∃ c : conormalExteriorModule A I n ⟶
       ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj
-        (ModuleCat.of A (A ⧸ I)), IsSelfTorConormalComparison A I n c := by sorry
+        (ModuleCat.of A (A ⧸ I)), IsSelfTorConormalComparison A I n c := by
+  obtain ⟨c, hc⟩ := tate_selfTor_conormal_map A I n
+  exact ⟨c, tate_comparison_homotopy_normalization A I n c hc⟩
 
 end AlgebraicGeometry
