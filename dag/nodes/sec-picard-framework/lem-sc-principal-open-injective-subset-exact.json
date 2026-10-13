@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-principal-open-injective-subset-exact",
+ "kind": "statement",
+ "title": "Principal-open subset Cech exactness for one injective coefficient module",
+ "statement": "Let A be a commutative ring and X=Spec(A) [def-pc-scheme], r a natural number and f:Fin(r)->A. Set D_T=D(product_{i in T} f_i) and supply the erasure restriction inequalities. Let M be an injective [def-sp-injective-resolutions] structure-sheaf module [def-weil-sheaf-of-modules-category] on X and k>=1. For a family c_T of M-sections on D_T indexed by nonempty subsets, suppose the sum of signed restrictions of c_(T erase j) is zero on every subset of cardinality k+2; the sign is (-1)^#{i in T:i<j}, and empty erasures contribute zero. Then there exists a family b_T of sections of the same fixed module M whose signed restriction sum equals c_T on every subset of cardinality k+1. No complex, degree transport, or support condition is involved.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01EP and 01FM; Tag 08C1, first paragraph. https://stacks.math.columbia.edu/tag/01EP and https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct actual finite intersections and their inclusion maps for the full tuple complex. The universal property follows from le_iInf; all commutation and uniqueness identities hold because opens form a thin category. Regard the same intersections as a complex over the union V of the principal opens. Apply module injective open-cover Cech acyclicity in degree k>0. Changing arrows to V to arrows to the top changes none of the cochains or differentials, so it has zero full homology. The underlying abelian presheaf is unchanged by scalar restriction from global sections to A.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the subset-coordinate comparison to the presheaf modulesSpecToSheaf(M).obj, without a cover hypothesis. Its homology map is an isomorphism, so the subset-coordinate complex has zero homology in degree k and is exact there.",
+   "uses": [
+    "lem-sc-principal-open-subset-cech-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write k=p+1. Use the degree-(p+1) coordinate isomorphism to send c on subsets of cardinality p+2 into a cochain c0. The explicit differential formula and nonemptiness of every erasure on cardinality p+3 show that d(c0)=0. ShortComplex.ab_exact_iff gives b0 in degree p with d(b0)=c0. Evaluate the degree-p isomorphism on cardinality p+1 and put zero elsewhere. On cardinality p+2 each erasure has cardinality p+1 and is nonempty, so the differential formula gives the required signed sum. There is no restriction on r or on the opens; empty products and high degrees are covered.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-principal-open-subset-cech-comparison",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01EP, 01FJ, 01FK, 01FM and 08C1; explicit subset reindexing and degree transport, F4 stage 3, 2026-10-13."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordered Cech complex finite subsets cohomology comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reindex increasing tuples by finite subsets in Cech complex preserving signed differential",
+   "results": "DoldKan Gamma summands, simplicial splitting indices, simplex subinterval identities and ComplexShape.prev_pi1; no site subset Cech comparison",
+   "date": "2026-10-13",
+   "verdict": "No direct comparison or fixed-coefficient subset exactness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.orderEmbOfFin_unique",
+   "results": "Finset.orderEmbOfFin_unique in Mathlib.Data.Finset.Sort",
+   "date": "2026-10-13",
+   "verdict": "Used for the tuple/subset inverse and the erased enumeration; does not state Cech exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "subset.*[Cc]ech|[Cc]ech.*primitive",
+   "results": "Mathlib only Stone-Cech compactification; project full-tuple exactAt_cechComplex_of_isFlasque, module_injective_open_cover_cech_acyclic and alternatingCechRestrictionHomotopy. No existing subset-coordinate comparison or fixed-coefficient primitive.",
+   "date": "2026-10-13",
+   "verdict": "Reuse the existing full-tuple acyclicity and homotopy inverse; prove the finite subset coordinate bridge."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Positive horizontal row exactness: fixed coefficients and finite-subset reindexing of ordered Cech cochains.",
+   "via": [
+    "lem-sc-principal-open-cech-subset-row-primitive",
+    "lem-sc-principal-open-cech-column-step",
+    "lem-sc-principal-open-cech-injective-terms",
+    "lem-sc-principal-open-cech-homology-injective",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenInjectiveSubsetExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenInjectiveSubsetExact.lean",
+  "declaration": "AlgebraicGeometry.principalOpen_injective_subset_exact",
+  "statement": "theorem principalOpen_injective_subset_exact\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (M : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀ (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (k : ℕ), 1 ≤ k → Injective M →\n      ∀ c : (∀ S : {S : Finset (Fin r) // S.Nonempty},\n        (modulesSpecToSheaf.obj M).obj.obj (op (D S.val))),\n      (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 2 →\n        (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj M).obj.map (homOfLE (hle S.val j.val)).op\n                (c ⟨S.val.erase j.val, h⟩)\n          else 0) = 0) →\n      ∃ b : (∀ S : {S : Finset (Fin r) // S.Nonempty},\n        (modulesSpecToSheaf.obj M).obj.obj (op (D S.val))),\n        ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 1 →\n          (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj M).obj.map (homOfLE (hle S.val j.val)).op\n                (b ⟨S.val.erase j.val, h⟩)\n          else 0) = c S",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T161728-L-1460027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T161728-L-1460027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

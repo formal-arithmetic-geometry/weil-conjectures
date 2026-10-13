@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-principal-open-subset-cech-comparison",
+ "kind": "statement",
+ "title": "Subset-coordinate Cech comparison for arbitrary module presheaves",
+ "statement": "Let A be a commutative ring, X=Spec(A) [def-pc-scheme], r a natural number, f:Fin(r)->A, F a presheaf of A-modules on the opens of X and S any full SiteCechComplex [def-weil-pbc-site-cech-complex] for the principal opens with arrows to the top. Write D_T=D(product_{i in T} f_i), with the erasure restriction inclusions supplied. There exist a nonnegative cochain complex C of abelian groups, degreewise isomorphisms e_p from C^p to the product of F(D_T) over subsets of cardinality p+1, and a cochain map z from the underlying full Cech complex to C. In these coordinates d is the signed erasure restriction sum with sign (-1)^#{i in T:i<j}. The map z induces an isomorphism on homology in every degree. There is no cover hypothesis or injectivity assumption on F.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FJ, 01FK and 01FM. https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "The finite range of a strictly increasing tuple has the tuple cardinality. Conversely the order embedding of Fin(p+1) enumerates each subset of cardinality p+1. Finset.orderEmbOfFin_unique and image_orderEmbOfFin_univ show that these operations are inverse. The universal property of S and the identity basicOpen(product)=intersection identify S.W(p,t) with D_range(t). Applying F to this equality and the dependent product equivalence gives a concrete additive isomorphism from ordered tuple cochains to subset coordinates.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define ordered tuple terms and their signed deletion differential explicitly. Restriction of full cochains to increasing tuples is degreewise surjective by extension by zero. It commutes with the differential definitionally, so cancel this epimorphism against full differential-squared to prove ordered differential-squared. Construct C with CochainComplex.of and its restriction map z with CochainComplex.ofHom; these constructions choose no unproved data.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Deletion followed by the subset enumeration is the unique increasing enumeration of the erased subset, by orderEmbOfFin_unique and succAbove_ne. Filtering the full enumeration below the deleted entry is the image of Finset.Iio of its position; cardinalities give precisely that position by Fin.card_Iio. Reindex the signed tuple sum using the subset order isomorphism. Equality section transports preserve sums and integer signs, and commute with each restriction because the opens category is thin. Integer signs agree with scalar signs by Int.cast_smul_eq_zsmul. This proves exactly the displayed coordinate differential formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ordered complex has its identity tuple-coordinate isomorphisms, and z is literally restriction. Apply alternatingCechRestrictionHomotopy for any family of opens, with no covering hypothesis. Combine its supplied inverse and the two homotopies as HomotopyEquiv. The induced HomotopyEquiv.toHomologyIso proves IsIso(homologyMap z p) for every p. All indexing constructions allow empty and repeated opens and empty high-degree terms.",
+   "uses": [
+    "lem-pc-alternating-cech-restriction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-restriction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01EP, 01FJ, 01FK, 01FM and 08C1; explicit subset reindexing and degree transport, F4 stage 3, 2026-10-13."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordered Cech complex finite subsets cohomology comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reindex increasing tuples by finite subsets in Cech complex preserving signed differential",
+   "results": "DoldKan Gamma summands, simplicial splitting indices, simplex subinterval identities and ComplexShape.prev_pi1; no site subset Cech comparison",
+   "date": "2026-10-13",
+   "verdict": "No direct comparison or fixed-coefficient subset exactness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.orderEmbOfFin_unique",
+   "results": "Finset.orderEmbOfFin_unique in Mathlib.Data.Finset.Sort",
+   "date": "2026-10-13",
+   "verdict": "Used for the tuple/subset inverse and the erased enumeration; does not state Cech exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "subset.*[Cc]ech|[Cc]ech.*primitive",
+   "results": "Mathlib only Stone-Cech compactification; project full-tuple exactAt_cechComplex_of_isFlasque, module_injective_open_cover_cech_acyclic and alternatingCechRestrictionHomotopy. No existing subset-coordinate comparison or fixed-coefficient primitive.",
+   "date": "2026-10-13",
+   "verdict": "Reuse the existing full-tuple acyclicity and homotopy inverse; prove the finite subset coordinate bridge."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Positive horizontal row exactness: fixed coefficients and finite-subset reindexing of ordered Cech cochains.",
+   "via": [
+    "lem-sc-principal-open-cech-subset-row-primitive",
+    "lem-sc-principal-open-cech-column-step",
+    "lem-sc-principal-open-cech-injective-terms",
+    "lem-sc-principal-open-cech-homology-injective",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenSubsetCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenSubsetCechComparison.lean",
+  "declaration": "AlgebraicGeometry.principalOpen_subset_cech_comparison",
+  "statement": "theorem principalOpen_subset_cech_comparison\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (F : (Spec (.of A)).Opensᵒᵖ ⥤ ModuleCat.{u} A)\n    (S : SiteCechComplex (fun i ↦ PrimeSpectrum.basicOpen (f i))\n      (fun i ↦ homOfLE (le_top : PrimeSpectrum.basicOpen (f i) ≤ ⊤))) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun T ↦ PrimeSpectrum.basicOpen (∏ j ∈ T, f j)\n    ∀ (hle : ∀ (T : Finset (Fin r)) (j : Fin r), D T ≤ D (T.erase j)),\n    ∃ C : CochainComplex AddCommGrpCat.{u} ℕ,\n      ∃ e : ∀ p : ℕ, C.X p ≅ AddCommGrpCat.of\n        (∀ T : {T : Finset (Fin r) // T.card = p + 1}, F.obj (op (D T.val))),\n        ∃ z : S.complex (F ⋙ forget₂ (ModuleCat A) AddCommGrpCat) ⟶ C,\n          (∀ (p : ℕ) (c : C.X p)\n            (T : {T : Finset (Fin r) // T.card = (p + 1) + 1}),\n            (e (p + 1)).hom (C.d p (p + 1) c) T =\n              ∑ j : T.val, (-1 : A) ^ ((T.val.filter (fun i ↦ i < j.val)).card) •\n                F.map (homOfLE (hle T.val j.val)).op\n                  ((e p).hom c ⟨T.val.erase j.val, by\n                    rw [Finset.card_erase_of_mem j.property, T.property]\n                    omega⟩)) ∧\n          ∀ p : ℕ, IsIso (HomologicalComplex.homologyMap z p)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T161728-L-1460027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T161728-L-1460027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

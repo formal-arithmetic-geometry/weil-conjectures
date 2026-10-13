@@ -14,32 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Set q=n+1-k. Restrict c to subsets of cardinality k+1 and transport each coefficient along n+2-(k+1)=q. For a subset of size k+2, deleting any element leaves size k+1, and he at degree n+1 identifies both the source and target coefficients with J.X q. Thus the assumed equation is exactly the alternating restriction cocycle equation in degree k. No coordinate of c at another cardinality is used.",
+   "text": "Set q=n+1-k. Define a fixed-coefficient family by applying the functorial eqToHom section cast to c on cardinality k+1 and zero elsewhere. On cardinality k+2 each deletion has cardinality k+1. Cast the given cocycle equation to q, distribute over the finite sum and scalar signs, and use restriction naturality and composition of equality casts. This proves the fixed-coefficient cocycle equation. Equality casts are identity, injective, and inverse under equality elimination.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Let V be the union of D(f i), covered by those opens. Apply injective module open-cover Cech acyclicity to J.X q in degree k>0, and the alternating comparison (applied on V) to obtain exactness for strictly increasing tuples. Identify each such tuple with its finite range, and its intersection with the basic open of the product. Omitting its j-th entry erases that element; its position j is the number of smaller elements. The isomorphism therefore preserves the displayed signed restriction sum. Exactness provides a primitive on the subsets of cardinality k. For the alternating comparison, regard V as an open subscheme and restrict the underlying abelian presheaf to its opens: both the full and the ordered cochains identify sectionwise with those for the same opens inside X. Full-complex vanishing comes from the injective sheaf on X, so no injectivity assumption on its underlying abelian sheaf is required. Integer sign multiplication equals multiplication by the corresponding sign in A.",
+   "text": "Apply fixed-coefficient principal-open subset exactness to the injective module J.X q, obtaining a primitive b-prime on nonempty subsets with its differential equation on cardinality k+1.",
    "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-pc-alternating-cech-computes"
+    "lem-sc-principal-open-injective-subset-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Transport this primitive to J.X (n+1-card S) on subsets of size k and extend it by zero on all other nonempty subsets. Arithmetic and proof irrelevance identify the resulting eqToHom with he at degree n. Its signed horizontal differential on size k+1 is c. If k+1>r the cochain is empty and the zero primitive works; if k=r-1 (with k>0) the outgoing cocycle condition is vacuous but exactness still applies at the last nonzero degree. Empty or coinciding basic opens are allowed in the open-cover theorem. For r=0 there are no nonempty subsets.",
+   "text": "Define b on cardinality k by casting b-prime from q to n+1-card S and define it as zero elsewhere. The support assertion follows by the negative branch of this definition. On cardinality k+1 each deletion has cardinality k. Cast the desired equation to q; commute the cast through each restriction and deletion transport and cancel the inverse cast on b-prime. The primitive equation gives the transported equality, and injectivity of the equality cast gives the original equality. Empty covers and high degrees are included without a nonemptiness assumption on the index set.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "lem-pc-alternating-cech-computes"
+  "lem-sc-principal-open-injective-subset-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01EP and 01FM; Tag 08C1, first paragraph, positive horizontal row exactness"
+  "place": "Tags 01EP, 01FJ, 01FK, 01FM and 08C1; explicit subset reindexing and degree transport, F4 stage 3, 2026-10-13."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -145,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T153935-L-1123629",
+  "landing": "20261013T161728-L-1460027",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
