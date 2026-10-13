@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-perfect-qcoherent",
+ "kind": "statement",
+ "title": "Perfect complexes have quasi-coherent cohomology",
+ "statement": "Let X be a scheme [def-pc-scheme] and K an object of its derived category [def-pc-derived-category]. If K is perfect [def-pc-perfect-complex], every cohomology sheaf of K is quasi-coherent, i.e. K belongs to D_QCoh(O_X).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08C4 (definition-strictly-perfect), 08CM (definition-perfect); scheme quasi-coherence via perfect.tex, Tag 08E5 (lemma-pseudo-coherent)"
+ },
+ "proof": [
+  {
+   "text": "At each point take a strictly perfect local model and refine it to a bounded finite-free model. Retain its upper bound and the representation isomorphism: these data satisfy the definition of pseudo-coherence.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-strictly-perfect-finite-free-refinement",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply quasi-coherence of every cohomology sheaf of a pseudo-coherent derived object.",
+   "uses": [
+    "lem-sc-pseudo-coherent-qcoh"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-strictly-perfect-finite-free-refinement",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-pseudo-coherent-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08C4 (definition-strictly-perfect), 08CM (definition-perfect); scheme quasi-coherence via perfect.tex, Tag 08E5 (lemma-pseudo-coherent)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally bounded finite projective complex cohomology quasicoherent",
+   "results": "8 hits: K-projectivity, sheaf cohomology and finite-presentation data, no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStrictlyPerfect\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isPerfect|IsPerfect|isStrictlyPerfect|IsStrictlyPerfect",
+   "results": "25 hits on perfect groups, fields and pairings; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective sheaf complex has quasi-coherent homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-rhom-supported-qcoherent-perfect-part",
+   "place": "perfect source has quasi-coherent cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectImpliesQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectImpliesQCoh.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedQCohProperty_of_isPerfect",
+  "statement": "theorem schemeDerivedQCohProperty_of_isPerfect\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K : schemeDerivedCategory X) (hK : Scheme.IsPerfect X K) :\n    schemeDerivedQCohProperty X K",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f0f3d",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T002359-L-2377297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f0f3d",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T002359-L-2377297",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly, preserve the target statement and existing signatures, satisfy the proof/node/report requirements, and the sole direct importer compiles against them."
+ }
+}

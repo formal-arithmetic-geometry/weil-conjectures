@@ -2,7 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
+import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 
 /-! # PerfectPart of derived internal Hom
@@ -15,7 +16,7 @@ Source: Stacks Project, Tag 0A6H
 
 universe u w
 
-open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -44,6 +45,23 @@ theorem rhom_supported_quasiCoherent_perfect_part
     schemeDerivedQCohProperty X
       ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
         X.toRingedSpace.sheaf).obj (op K, L)) := by
-  sorry
+  classical
+  obtain ⟨adj, s, adj', hadj, hs, hadj_sym, hadj'⟩ :=
+    scheme_derivedInternalHom_adjunction X
+  let N : schemeDerivedQCohCategory X := ⟨L, hL⟩
+  obtain ⟨D, hD, ev, hev, hDperfect, comparison, hcomp, hcompM, hcompK,
+      bidual, hbidual, hbidual_iso, η, hη, hηuniq, hp, hbase⟩ :=
+    perfect_rhom_tensor_comparison X
+      ⟨K, schemeDerivedQCohProperty_of_isPerfect X K hK⟩ N hK adj hadj adj' hadj'
+  let := schemeDerivedTensorMonoidal X
+  have htensor : schemeDerivedQCohProperty X (N.obj ⊗ D.obj) :=
+    canonical_derivedTensor_preserve_QCoh X N.obj D.obj N.property D.property
+  let c := comparison N
+  have hc : IsIso c := hcompM
+  intro n
+  apply (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+    ((DerivedCategory.homologyFunctor
+      (SheafOfModules (moduleRings X.toRingedSpace)) n).mapIso (asIso c))
+  exact htensor n
 
 end AlgebraicGeometry
