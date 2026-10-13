@@ -2,7 +2,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Sheaf.AlgebraicGeometry.Modules.ExtendLocalFreeMap
 
 /-! # Extending a local basis on a quasi-affine open
 
@@ -40,6 +41,22 @@ theorem exists_free_map_isIso_near_of_isFiniteLocallyFree
     ∃ (U : V.toScheme.Opens), x ∈ U ∧
       ∃ (r : ℕ) (φ : free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ N),
         IsIso ((restrictFunctor U.ι).map φ) := by
-  sorry
+  classical
+  obtain ⟨U, I, hI, hxU, e⟩ :=
+    AlgebraicGeometry.Scheme.Modules.exists_restrict_iso_free_of_isFiniteLocallyFree N x
+  let := hI
+  let e' := (restrictFreeIso U.ι I) ≪≫ e.some.symm
+  obtain ⟨W, hWU, hxW, φ, a, hφ⟩ :=
+    exists_global_map_of_local_free_map V N U x hxU I e'.hom
+  have : IsIso ((restrictFunctor W.ι).map φ) := by
+    rw [hφ]
+    infer_instance
+  let := Fintype.ofFinite I
+  let q := (SheafOfModules.freeFunctor (R := V.toScheme.ringCatSheaf)).mapIso
+    ((Equiv.ulift.trans (Fintype.equivFin I).symm).toIso)
+  have : IsIso ((restrictFunctor W.ι).map q.hom) := by infer_instance
+  exact ⟨W, hxW, Fintype.card I, q.hom ≫ φ, by
+    rw [Functor.map_comp]
+    infer_instance⟩
 
 end AlgebraicGeometry.Scheme.Modules
