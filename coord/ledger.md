@@ -12620,3 +12620,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:19 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport (stage 3; reviewer PASS; first push; landing 20261013T131951-L-4088282 (interface); batch 20261013T131946; modules 3; new nodes 2)
 - 13:19 L: merged deliver/W2/Sheaf.AlgebraicGeometry.CartesianFlatSingleLocalizedBaseChange (stage 3; reviewer PASS; first push; landing 20261013T131951-L-4088458 (interface); batch 20261013T131946; modules 3; new nodes 2)
 - 13:19 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologyInjective (stage 3; reviewer PASS; first push; landing 20261013T131952-L-4088561 (interface); batch 20261013T131946; modules 3; new nodes 2)
+- 13:19 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCommonRepresentative (stage 3; reviewer PASS; first push; landing 20261013T131952-L-4088710 (interface); batch 20261013T131946; modules 4; new nodes 3)

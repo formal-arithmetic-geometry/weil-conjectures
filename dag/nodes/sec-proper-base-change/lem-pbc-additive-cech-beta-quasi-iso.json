@@ -1,0 +1,158 @@
+{
+ "id": "lem-pbc-additive-cech-beta-quasi-iso",
+ "kind": "statement",
+ "title": "Fixed affine additive coefficient augmentation quasi-isomorphism",
+ "statement": "Let X be a separated scheme, U a finite family of opens with every positive tuple intersection affine, and I an injective resolution of X.etaleAdditiveSheaf. There is a chain map b from the ordinary unit cechOver X.toSpecGamma U complex, after forgetting module scalars and applying AddCommGrpCat.uliftFunctor, to additiveCechTotal U I. For every degree n and ordinary cochain x, b.f n (ULift.up x)=additiveCechBeta U I n x, and b is a quasi-isomorphism. No covering condition or compactness assumption is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, affine vanishing and separated affine intersections; Tag 01EQ Lemma 20.11.2, beta from the resolution augmentation; Tag 0133 Lemma 12.25.4, first-quadrant double-complex comparison."
+ },
+ "proof": [
+  {
+   "text": "Identify the lifted ordinary unit Cech complex with the Cech complex of additive structure sections on opens. In each tuple coordinate use restrictFunctorGamma.inv; its naturality identifies the cofaces and their alternating sums. Forgetting scalars and ULift preserve the finite products. The natural tensor-unit section coordinates identify these with the usual quasi-coherent unit sheaf coefficients.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply I.iota.f 0 on each tuple and include in bidegree (n,0). Naturality commutes with horizontal differentials and I.iota_f_zero_comp_complex_d makes the vertical differential vanish. Thus these components define a chain map with precisely additiveCechBeta coordinates. This construction uses no injective-row augmentation theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Affine quasi-coherent acyclicity, obtained from the finite affine etale Cech vanishing criterion and the tensor-unit coordinates, makes all positive derived evaluations of the additive structure sheaf vanish on each tuple intersection. Degree-zero left exactness identifies the augmentation kernel with coefficient sections. Exact products commute with these evaluations and homology, so the augmented vertical columns are quasi-isomorphisms.",
+   "uses": [
+    "new-etale-affine-tensor-cech-vanishing",
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "lem-sc-etale-affine-open-cech-resolution-columns"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the bicomplex, apply the first-quadrant column augmentation criterion, and transport through the standard sign isomorphism between the two totals. The finite diagonal filtration proves that the constructed b is a quasi-isomorphism. Degree zero uses the same kernel calculation; an empty tuple index family yields the zero complexes, even without a cover.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-affine-open-cech-resolution-columns",
+  "lem-sc-etale-tensor-unit-sections-natural",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "new-etale-affine-tensor-cech-vanishing"
+ ],
+ "proof_origin": {
+  "by": "Y3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, affine vanishing and separated affine intersections; Tag 01EQ Lemma 20.11.2, beta from the resolution augmentation; Tag 0133 Lemma 12.25.4, first-quadrant double-complex comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "the restriction augmentation from global sections to a Cech complex has zero Cech differential",
+   "results": "8 hits on alternating face-map augmentations, differentials squared, and Dold-Kan. No exact normalized additive etale augmentation result.",
+   "verdict": "Prove the concrete restriction identities using Cech differential projections and naturality.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "One exact hit in Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex.",
+   "verdict": "Use it for beta representative projection naturality.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "an augmentation of an acyclic first quadrant double complex is surjective on cohomology",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a cycle in a first quadrant double complex is represented by a bottom row cycle when columns are acyclic",
+   "results": "8 hits, including HomologicalComplex.cyclesMk, i_cyclesMk, liftCycles and toCycles_i.",
+   "verdict": "Use cycle constructors and projection naturality; no theorem for the fixed additive etale beta coordinates.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMk",
+   "results": "3 hits: cyclesMk, i_cyclesMk, ShortComplex.ShortExact.delta_apply.",
+   "verdict": "cyclesMk lowers a lifted coefficient cochain to an ordinary coefficient cycle.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclesMk|i_cyclesMk|quasiIso_of_column_augmentation; local additiveCechAlpha|additiveCechBeta",
+   "results": "Mathlib concrete cycle constructors and the project first-quadrant augmentation theorem. EtaleOpenCechResolutionTotal proves analogous restriction chain identities as private helpers. ModuleCechBetaAffineQuasiIso concerns injective resolutions of module sheaves, not the given additive etale resolution.",
+   "verdict": "Adapt the restriction argument directly; the specified lifted etale beta chain comparison remains a separate obligation.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCommonRepresentative",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier additive structure-sheaf comparison: Fixed affine additive coefficient augmentation quasi-isomorphism",
+   "via": [
+    "new-w2-additive-cech-common-representative",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechBetaQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_additiveCech_beta_quasiIso",
+  "statement": "theorem exists_additiveCech_beta_quasiIso\n    (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]\n    (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf) :\n    ∃ b : (((forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u} ⋙\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (.up ℕ)).obj\n          (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf))) ⟶\n        additiveCechTotal U I,\n      (∀ (n : ℕ) (x : (cechOver X.toSpecΓ U\n        (SheafOfModules.unit X.ringCatSheaf)).X n),\n        b.f n (ULift.up x) = additiveCechBeta U I n x) ∧ QuasiIso b",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T131952-L-4088710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T131952-L-4088710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

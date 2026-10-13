@@ -1,0 +1,143 @@
+{
+ "id": "new-w2-additive-cech-beta-representative",
+ "kind": "statement",
+ "title": "Beta cycles represent arbitrary total homology classes",
+ "statement": "Let X be a separated scheme, U a finite family of opens with every positive tuple intersection affine, I an injective resolution of X.etaleAdditiveSheaf, and n a natural number. For any h in the degree-n homology of additiveCechTotal U I, there are an ordinary unit Cech cycle z and a total cycle t_beta such that iCycles(t_beta)=additiveCechBeta U I n (iCycles(z)) and homologyPi(t_beta)=h. No global cycle, compactness or covering condition is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, affine-intersection comparison, with the beta augmentation of Tag 01EQ."
+ },
+ "proof": [
+  {
+   "text": "Obtain the beta quasi-isomorphism b with its fixed components from [lem-pbc-additive-cech-beta-quasi-iso]. Its homology map is invertible. Take the inverse image of h and then a lifted source cycle w using the surjectivity of homologyPi.",
+   "uses": [
+    "lem-pbc-additive-cech-beta-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let x be the ULift.down of iCycles(w). The equation iCycles_d=0, after applying ULift.down, says that x is an ordinary unit Cech cocycle. Construct z with cyclesMk and use i_cyclesMk to recover x.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let t_beta=cyclesMap(b)(w). Naturality cyclesMap_i and the prescribed components of b give the beta inclusion. Naturality of homologyPi, the chosen projection of w, and inv_hom_id give homologyPi(t_beta)=h.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-additive-cech-beta-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "Y3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, affine-intersection comparison, with the beta augmentation of Tag 01EQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "the restriction augmentation from global sections to a Cech complex has zero Cech differential",
+   "results": "8 hits on alternating face-map augmentations, differentials squared, and Dold-Kan. No exact normalized additive etale augmentation result.",
+   "verdict": "Prove the concrete restriction identities using Cech differential projections and naturality.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "One exact hit in Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex.",
+   "verdict": "Use it for beta representative projection naturality.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "an augmentation of an acyclic first quadrant double complex is surjective on cohomology",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a cycle in a first quadrant double complex is represented by a bottom row cycle when columns are acyclic",
+   "results": "8 hits, including HomologicalComplex.cyclesMk, i_cyclesMk, liftCycles and toCycles_i.",
+   "verdict": "Use cycle constructors and projection naturality; no theorem for the fixed additive etale beta coordinates.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMk",
+   "results": "3 hits: cyclesMk, i_cyclesMk, ShortComplex.ShortExact.delta_apply.",
+   "verdict": "cyclesMk lowers a lifted coefficient cochain to an ordinary coefficient cycle.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclesMk|i_cyclesMk|quasiIso_of_column_augmentation; local additiveCechAlpha|additiveCechBeta",
+   "results": "Mathlib concrete cycle constructors and the project first-quadrant augmentation theorem. EtaleOpenCechResolutionTotal proves analogous restriction chain identities as private helpers. ModuleCechBetaAffineQuasiIso concerns injective resolutions of module sheaves, not the given additive etale resolution.",
+   "verdict": "Adapt the restriction argument directly; the specified lifted etale beta chain comparison remains a separate obligation.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCommonRepresentative",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier additive structure-sheaf comparison: Beta cycles represent arbitrary total homology classes",
+   "via": [
+    "new-w2-additive-cech-common-representative",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechBetaRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCech_beta_representative",
+  "statement": "theorem additiveCech_beta_representative\n    (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]\n    (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)\n    (h : (additiveCechTotal U I).homology n) :\n    ∃ (z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n)\n      (tβ : (additiveCechTotal U I).cycles n),\n      (additiveCechTotal U I).iCycles n tβ = additiveCechBeta U I n\n        ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z) ∧\n      (additiveCechTotal U I).homologyπ n tβ = h",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T131952-L-4088710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T131952-L-4088710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

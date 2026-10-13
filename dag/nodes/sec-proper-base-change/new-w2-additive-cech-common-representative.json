@@ -16,22 +16,28 @@
  },
  "proof": [
   {
-   "text": "Restrictions to open subschemes preserve injectives, so the augmented Čech\nrows of each resolution term are exact for the covering U. Hence alpha is a\nquasi-isomorphism. On each finite intersection, the additive structure sheaf has\nvanishing positive cohomology by affine quasi-coherent acyclicity. Consequently\nbeta is a quasi-isomorphism by the first-quadrant double-complex comparison.\nThe coordinate identification by restrictFunctorΓ and the additive universe lift\nidentifies its source with the ordinary unit Čech complex. Alpha sends s to a\ncycle tα. Surjectivity of beta on homology gives a coefficient homology class\nwith image [tα]. Lift this class to a coefficient cycle z, and apply beta to get\ntβ. The chain-map identities give the two cycle equations, and the chosen\nclass gives [tα]=[tβ]. At degree zero the same argument is the augmented kernel\ncalculation; an empty covering covers only the empty scheme and all groups are\nzero. No normalized equivalence or scalar action on sheaf cohomology is used.",
+   "text": "Use the proved alpha cycle-realization lemma, which uses only restriction naturality and cancellation of the degree-zero Cech differential, to obtain t_alpha with the required inclusion.",
    "uses": [
-    "lem-sc-etale-open-cech-injective-augmentation",
-    "lem-sc-etale-affine-open-cech-resolution-columns"
+    "new-w2-additive-cech-alpha-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply beta realization of an arbitrary total homology class to h=homologyPi(t_alpha). Obtain z and t_beta with the required beta inclusion and homologyPi(t_beta)=h. Reverse that equality and combine the three witnesses. No alpha quasi-isomorphism or injective-row acyclicity is used.",
+   "uses": [
+    "new-w2-additive-cech-beta-representative"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-open-cech-injective-augmentation",
-  "lem-sc-etale-affine-open-cech-resolution-columns"
+  "new-w2-additive-cech-alpha-representative",
+  "new-w2-additive-cech-beta-representative"
  ],
  "proof_origin": {
-  "by": "W2 worker",
-  "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Component-level form of the augmented double-complex diagram, with Tag 03P2 affine vanishing."
+  "by": "Y3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2 alpha chain map, together with Tag 03P2 affine beta comparison; only beta needs a quasi-isomorphism in this direction."
  },
  "mathlib_searches": [
   {
@@ -125,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T122231-L-3592126",
+  "landing": "20261013T131952-L-4088710",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

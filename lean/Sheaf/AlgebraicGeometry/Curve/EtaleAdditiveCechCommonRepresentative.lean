@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaRepresentative
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaRepresentative
 
 /-! # Common augmentation representatives
 
@@ -51,6 +53,12 @@ theorem additiveCech_common_representative
       (additiveCechTotal U I).iCycles n tβ = additiveCechBeta U I n
         ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z) ∧
       (additiveCechTotal U I).homologyπ n tα =
-        (additiveCechTotal U I).homologyπ n tβ := by sorry
+        (additiveCechTotal U I).homologyπ n tβ := by
+  -- Only beta comparison and the alpha chain-map property are needed in this direction.
+  have _hcover := hcover
+  obtain ⟨tα, hα⟩ := additiveCech_alpha_representative U I n s
+  obtain ⟨z, tβ, hβ, ht⟩ :=
+    additiveCech_beta_representative X U hU I n ((additiveCechTotal U I).homologyπ n tα)
+  exact ⟨z, tα, tβ, hα, hβ, ht.symm⟩
 
 end AlgebraicGeometry.Scheme.Modules
