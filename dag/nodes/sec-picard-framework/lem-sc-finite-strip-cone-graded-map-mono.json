@@ -12,7 +12,19 @@
  },
  "proof": [
   {
-   "text": "Proof: project the ambient cone in degree n onto its target diagonal summand\nK.X (n-p).X p, using the total coproduct projection, and onto its source summand\nA.X (n+1) only when n+1=p. Identify the latter with the degree n-p+1 object\nof single(A.X p,0); in other degrees that single object is zero. Combine these\nprojections using the degreewise biproduct decomposition of Cone(f p). Restrict\nto the current tail. Each target generator of the next tail has vertical index\nat least p+1 and is killed by this projection. Its source generator is present\nonly when p+1<=n+1, which excludes n+1=p, so it too is killed. Hence the restricted\nprojection descends through the evaluated cokernel defining the graded quotient.\nIts composite with finiteStripGradedMap is the identity: check the two row cone\nsummands using the biproduct projection-inclusion identities and the total\ncoproduct identities. If n-p is outside [0,r), that target object is zero by\nhsupport; the identity there is zero. The source identity is checked at n+1=p,\nand otherwise its object is zero. Thus this descended arrow is a left inverse,\nwhich implies monomorphy. This includes r=0, where only the source can survive.",
+   "text": "Construct the total projection using totalDesc, with the identity on component (n-p,p) and zero on every other component. Construct the source projection by the inverse single-object isomorphism when n+1=p and by zero otherwise. Combine them through the ambient and row cone biproduct isomorphisms. The composite with finiteStripRowInclusion is the identity, checked on the two biproduct inclusions; away from n+1=p the single source object is zero.",
+   "uses": [
+    "def-sc-finite-strip-cone-graded-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The next-tail subobject is contained in the kernel of the concrete row projection. Apply sup_le and Finset.sup_le to its stated generator formula. Its source generator can occur only when p+1<=n+1, so the source projection is zero. Its target generators have n-i>=p+1, so none is the selected component (n-p,p). Use imageSubobject_arrow_comp_eq_zero on each generator.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The evaluated next-step inclusion therefore composes to zero with the projection. Evaluation preserves cokernels, so CokernelCofork.IsColimit.desc' gives a descended arrow from the graded piece. Cancel the invertible image factor in the definition of finiteStripGradedMap and use Subobject.factorThru_arrow to identify its composite with the row-inclusion retraction identity. Cancel this left inverse to prove monomorphy.",
    "uses": [
     "def-sc-finite-strip-cone-graded-map"
    ],
@@ -22,7 +34,7 @@
  "proof_deps": [
   "def-sc-finite-strip-cone-graded-map"
  ],
- "proof_origin": "R4 stage-3 decomposition of the parent diagonal quotient argument into cancellation on generators and a left inverse.",
+ "proof_origin": "K3 second reading: explicit diagonal projection, annihilation of next-tail generators, and evaluated cokernel descent; all steps proved in Lean without new holes or public helpers.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -107,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T155939-L-1304509",
-  "kind": "interface",
+  "landing": "20261013T163538-L-1620784",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
