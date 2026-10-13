@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-module-resolution-homology-ext",
+ "kind": "lemma",
+ "title": "A fixed module resolution identifies sections homology with Ext",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category], $I$ an injective resolution of $F$ [def-sp-injective-resolutions], and $n\\in\\mathbb N$. The degree-$n$ homology of the global-sections complex $\\Gamma(X,I^\\bullet)$ [def-sc-ringed-space-module-cohomology] is additively equivalent to $\\operatorname{Ext}^n(\\mathcal O_X,F)$. If a cycle $a$ is obtained by evaluating a cocycle morphism $\\varphi:\\mathcal O_X\\to I^n$ at $1$ on $X$, this equivalence sends the homology class of $a$ to the Ext class represented by $\\varphi$. This concerns a fixed resolution only; it does not assert compatibility between resolutions or identify a derived-functor object.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ (cohomology of modules) and 0B6A (Global derived hom; Ext as cohomology of derived global Hom)"
+ },
+ "proof": [
+  {
+   "text": "Evaluate an O_X-linear map O_X→I^n at 1 on X. Its inverse sends a global section to multiplication by its restrictions on every open set. These are additive inverse maps and commute with differentials.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The preceding identification sends global-section cycles to cocycle morphisms. In positive degree boundaries are exactly morphisms factoring through the preceding differential, hence null-homotopic cocycle maps; in degree zero both boundary subgroups vanish. Pass to the quotients to obtain the additive equivalence with cohomology classes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose with the inverse of InjectiveResolution.extAddEquivCohomologyClass. The representative formula follows from the definition of extMk. Every homology class has a cycle representative, so the formula uniquely determines the map. Zero modules and the empty scheme give zero groups on both sides.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "U3: Stacks 01DZ and 0B6A; evaluation at 1 and Mathlib Ext via injective-resolution cohomology classes.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The homology of global sections of an injective resolution is Ext from the structure sheaf",
+   "results": "Service unavailable: Internal Server Error. Other search kinds and local rg used.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from the structure sheaf identifies sections of an injective resolution with Ext cohomology classes",
+   "results": "InjectiveResolution.extMk, extEquivCohomologyClass and extAddEquivCohomologyClass; no sections-complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "extMk",
+   "results": "Ext representative and comparison APIs, including extMk_surjective, mk₀_comp_extMk and extMk_comp_mk₀; no concrete sections-homology equivalence.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSectionsComplex|extAddEquivCohomologyClass|moduleExtEquiv",
+   "results": "Library has the parent unresolved exists_moduleExtEquiv and the sections complex; Mathlib has Ext/cohomology-class equivalences. No fixed-resolution sections equivalence found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of sections of a sheaf of modules equals extensions of its unit module",
+   "results": "SheafOfModules.unitHomEquiv and InjectiveResolution.extEquivCohomologyClass_extMk are partial APIs. Sheaf.H and groupCohomologyIsoExt use different objects; no exact sections-homology representative comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "unitHomEquiv, unitHomEquiv_apply_coe, unitHomEquiv_comp_apply and unitHomEquiv_symm_comp supply degreewise evaluation and naturality only.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*Ext|Ext.*homology|unit.*homEquiv|homEquiv.*unit",
+   "results": "No exact Mathlib statement; group-cohomology comparisons concern a different category. Local library search also inspected ResolutionSectionCohomology, ObjectCohomologyResolutionCocycleEquivalence, InjectiveResolutionCohomologyPresheafData and HomComplexSectionsCanonicalComparison. Their public comparisons concern abelian sheaves or sheaf Hom complexes; the generic nonnegative Hom-to-Ext representative comparison is private.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Fixed-resolution component of the module-cohomology Ext comparison needed by field-linear cohomology operations",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube",
+    "def-sc-field-linear-module-cohomology-operations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleResolutionHomologyExt.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleResolutionHomologyExtEquiv",
+  "statement": "theorem moduleResolutionHomologyExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf)\n    (I : InjectiveResolution F) (n : ℕ) :\n    ∃ e : (RingedSpace.globalSectionsComplex I).homology n ≃+\n        Abelian.Ext.{u} (SheafOfModules.unit X.ringCatSheaf) F n,\n      ∀ (a : (RingedSpace.globalSectionsComplex I).cycles n)\n        (φ : SheafOfModules.unit X.ringCatSheaf ⟶ I.cocomplex.X n)\n        (hφ : φ ≫ I.cocomplex.d n (n + 1) = 0),\n        φ.val.app (op ⊤) (1 : Γ(X, ⊤)) =\n          (RingedSpace.globalSectionsComplex I).iCycles n a →\n        e ((RingedSpace.globalSectionsComplex I).homologyπ n a) =\n          I.extMk φ (n + 1) rfl hφ",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d5d9d",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100148-L-2493399",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d5d9d",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100148-L-2493399",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs, fixed-resolution statement, node records and report matched against the repository and sources; compilation and axiom checks passed, including all 22 direct importers."
+ }
+}

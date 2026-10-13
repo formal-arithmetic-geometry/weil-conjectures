@@ -1,198 +1,207 @@
 {
-  "id": "def-sc-field-linear-module-cohomology-operations",
-  "kind": "definition",
-  "title": "Field-linear module cohomology, pullback and external cup product",
-  "status": "split",
-  "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme [def-pc-scheme], $f:X\\to\\operatorname{Spec}(k)$, and $F,G$ sheaves of modules over $\\mathcal O_X$ [def-weil-sheaf-of-modules-category]. Regard each module sheaf as a sheaf of $k$-vector spaces by restricting the action on an open $U$ along $k\\to\\Gamma(X,\\mathcal O_X)\\to\\Gamma(U,\\mathcal O_X)$. Write $H_k^n(X,F)$ for the cohomology of $F$ [def-sc-ringed-space-module-cohomology] with scalars restricted along $k\\to\\Gamma(X,\\mathcal O_X)$. For a morphism $a:Y\\to X$ over $k$, define the canonical cohomology pullback $H_k^n(X,F)\\to H_k^n(Y,a^*F)$ using exact inverse image on sheaves of $k$-vector spaces and the coefficient map adjoint to the unit $F\\to a_*a^*F$ of tensor pullback [def-pc-module-pullback]. Define $H_k^p(X,F)\\times H_k^q(X,G)\\to H_k^{p+q}(X,F\\otimes_{\\mathcal O_X}G)$ [def-pur-sheaf-tensor-product] by transporting the Yoneda cup product on Ext from the constant sheaf $k$ along the canonical injective-resolution comparison, then applying the coefficient map induced by $s\\otimes_k t\\mapsto s\\otimes_{\\mathcal O_X}t$. For $g:Y\\to\\operatorname{Spec}(k)$, modules $F$ on $X$ and $G$ on $Y$, define the external cup product on $X\\times_kY$ [def-pc-fibre-product] as projection pullbacks followed by this cup product. For a commutative square, the pullback-composition comparison is the unique isomorphism of left adjoints compatible with the canonical tensor-pullback units. The external-tensor coefficient comparison is the tensor-pullback comparison followed by the two composition comparisons. All coefficient maps on cohomology are the maps of the recorded derived functor.",
-  "stmt_deps": [
-    "def-weil-field",
-    "def-pc-scheme",
-    "def-sc-ringed-space-module-cohomology",
-    "def-pc-module-pullback",
-    "def-pc-fibre-product",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product"
-  ],
-  "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BED, lemma-kunneth, the projection pullbacks and cup product before equation-kunneth-on-cech; Cohomology Tag 01F7"
+ "id": "def-sc-field-linear-module-cohomology-operations",
+ "kind": "definition",
+ "title": "Field-linear module cohomology, pullback and external cup product",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme [def-pc-scheme], $f:X\\to\\operatorname{Spec}(k)$, and $F,G$ sheaves of modules over $\\mathcal O_X$ [def-weil-sheaf-of-modules-category]. Regard each module sheaf as a sheaf of $k$-vector spaces by restricting the action on an open $U$ along $k\\to\\Gamma(X,\\mathcal O_X)\\to\\Gamma(U,\\mathcal O_X)$. Write $H_k^n(X,F)$ for the cohomology of $F$ [def-sc-ringed-space-module-cohomology] with scalars restricted along $k\\to\\Gamma(X,\\mathcal O_X)$. For a morphism $a:Y\\to X$ over $k$, define the canonical cohomology pullback $H_k^n(X,F)\\to H_k^n(Y,a^*F)$ using exact inverse image on sheaves of $k$-vector spaces and the coefficient map adjoint to the unit $F\\to a_*a^*F$ of tensor pullback [def-pc-module-pullback]. Define $H_k^p(X,F)\\times H_k^q(X,G)\\to H_k^{p+q}(X,F\\otimes_{\\mathcal O_X}G)$ [def-pur-sheaf-tensor-product] by transporting the Yoneda cup product on Ext from the constant sheaf $k$ along the canonical injective-resolution comparison, then applying the coefficient map induced by $s\\otimes_k t\\mapsto s\\otimes_{\\mathcal O_X}t$. For $g:Y\\to\\operatorname{Spec}(k)$, modules $F$ on $X$ and $G$ on $Y$, define the external cup product on $X\\times_kY$ [def-pc-fibre-product] as projection pullbacks followed by this cup product. For a commutative square, the pullback-composition comparison is the unique isomorphism of left adjoints compatible with the canonical tensor-pullback units. The external-tensor coefficient comparison is the tensor-pullback comparison followed by the two composition comparisons. All coefficient maps on cohomology are the maps of the recorded derived functor.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, the projection pullbacks and cup product before equation-kunneth-on-cech; Cohomology Tag 01F7"
+ },
+ "proof": [
+  {
+   "text": "Definition repair (partial): bundle the ring map k to global sections as scalarUnitLinear, proving additivity by map_add and restricted scalar linearity by map_mul. Its value formula is reflexive. Construct scalarTensorCoefficientApp by tensorLift of tmulSection; its four bilinear laws are the tensor-section additivity and scalar laws. Tensor extensionality and tmulSection_map prove naturality. Form the presheaf morphism and extend it along the sheafification adjunction, using Sheaf.tensorLeftIso for the tensor source. The sectionwise formula remains the named characterization theorem exists_scalarTensorCoefficient. Other comparison constructions are unchanged and remain unrepaired.",
+   "uses": [],
+   "elementary": true
   },
-  "proof": [
-    {
-      "text": "Definition repair (partial): bundle the ring map k to global sections as scalarUnitLinear, proving additivity by map_add and restricted scalar linearity by map_mul. Its value formula is reflexive. Construct scalarTensorCoefficientApp by tensorLift of tmulSection; its four bilinear laws are the tensor-section additivity and scalar laws. Tensor extensionality and tmulSection_map prove naturality. Form the presheaf morphism and extend it along the sheafification adjunction, using Sheaf.tensorLeftIso for the tensor source. The sectionwise formula remains the named characterization theorem exists_scalarTensorCoefficient. Other comparison constructions are unchanged and remain unrepaired.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "K1 partial proof: scalarRestriction_id and scalarRestriction_comp follow by ModuleCat extensionality and the presheaf identity/composition laws. scalarHom_linear is the section map linearity applied to scalarMap f U r. scalarHom_naturality is PresheafOfModules.naturality_apply after extensionality. scalarHom_id, scalarHom_comp and scalarFunctor_additive are sectionwise definitional equalities. The other 17 named obligations remain open; all constructions and interfaces are unchanged.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "H3 partial proof: scalarRestriction_linear follows from the module restriction scalar law and composition of the structure-ring maps. scalarPresheaf_isSheaf follows by forgetting to abelian groups and reflecting sheafhood. scalarFunctor_preservesFiniteLimits follows from sectionwise evaluation and restriction of scalars, then reflection by sheafToPresheaf. The inverse-image functor is additive by its adjunction to additive pushforward; left Kan extension along the flat opens map and sheafification preserve finite limits; the left adjunction preserves finite colimits. Tensoring on the left preserves finite limits sectionwise over the field, followed by sheafification and Sheaf.tensorLeftIso; monoidal closedness gives finite colimits. The braiding transfers these results to right tensoring. The tensor coefficient formula follows from the sheafification adjunction, the monoidal tensor comparison and evaluation on a pure tensor. Six existing named obligations remain open: exists_moduleExtEquiv, exists_scalarPullbackCoefficient, scalarCohomologyExtMap_add, scalarCohomologyExtMap_bijective, scalarCohomologyExtMap_smul, scalarFunctor_preservesFiniteColimits. All statements and definition bodies are unchanged.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only. K1 stage-3 second reading: sectionwise functor laws; partial proof. H3 stage-3 partial proof using Mathlib sheaf reflection, adjunction additivity, flat Kan extension, field tensor exactness, reflective monoidal closedness, and the monoidal sheafification comparison.",
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "field linear cohomology pullback cup product module sheaves ringed space",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "field linear cohomology pullback cup product module sheaves ringed space",
-      "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjUnitToUnit",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "scalarCohomology|scalarSheaf|scalarExtMap|moduleExtEquiv",
-      "results": "No hits. Additional rg of WeilConjectures and lean/Sheaf found no field-linear cohomology operations.",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-picard-kunneth-qcoh",
-    "date": "2026-10-11",
-    "group": "G1"
+  {
+   "text": "K1 partial proof: scalarRestriction_id and scalarRestriction_comp follow by ModuleCat extensionality and the presheaf identity/composition laws. scalarHom_linear is the section map linearity applied to scalarMap f U r. scalarHom_naturality is PresheafOfModules.naturality_apply after extensionality. scalarHom_id, scalarHom_comp and scalarFunctor_additive are sectionwise definitional equalities. The other 17 named obligations remain open; all constructions and interfaces are unchanged.",
+   "uses": [],
+   "elementary": true
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof, invoke Varieties lemma-kunneth on the special fibre: its canonical cohomology map",
-      "via": [
-        "lem-sc-picard-kunneth-qcoh",
-        "lem-sc-picard-h1-product-injective",
-        "lem-sc-picard-product-open",
-        "lem-sc-general-theorem-of-cube"
-      ]
-    },
-    "same_as": []
+  {
+   "text": "H3 partial proof: scalarRestriction_linear follows from the module restriction scalar law and composition of the structure-ring maps. scalarPresheaf_isSheaf follows by forgetting to abelian groups and reflecting sheafhood. scalarFunctor_preservesFiniteLimits follows from sectionwise evaluation and restriction of scalars, then reflection by sheafToPresheaf. The inverse-image functor is additive by its adjunction to additive pushforward; left Kan extension along the flat opens map and sheafification preserve finite limits; the left adjunction preserves finite colimits. Tensoring on the left preserves finite limits sectionwise over the field, followed by sheafification and Sheaf.tensorLeftIso; monoidal closedness gives finite colimits. The braiding transfers these results to right tensoring. The tensor coefficient formula follows from the sheafification adjunction, the monoidal tensor comparison and evaluation on a pure tensor. Six existing named obligations remain open: exists_moduleExtEquiv, exists_scalarPullbackCoefficient, scalarCohomologyExtMap_add, scalarCohomologyExtMap_bijective, scalarCohomologyExtMap_smul, scalarFunctor_preservesFiniteColimits. All statements and definition bodies are unchanged.",
+   "uses": [],
+   "elementary": true
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCup",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.scalarMap",
-      "AlgebraicGeometry.Scheme.Modules.KSheaf",
-      "AlgebraicGeometry.Scheme.Modules.scalarObj",
-      "AlgebraicGeometry.Scheme.Modules.scalarRestriction_linear",
-      "AlgebraicGeometry.Scheme.Modules.scalarRestriction",
-      "AlgebraicGeometry.Scheme.Modules.scalarRestriction_id",
-      "AlgebraicGeometry.Scheme.Modules.scalarRestriction_comp",
-      "AlgebraicGeometry.Scheme.Modules.scalarPresheaf",
-      "AlgebraicGeometry.Scheme.Modules.scalarPresheaf_isSheaf",
-      "AlgebraicGeometry.Scheme.Modules.scalarSheaf",
-      "AlgebraicGeometry.Scheme.Modules.scalarHom_linear",
-      "AlgebraicGeometry.Scheme.Modules.scalarHomApp",
-      "AlgebraicGeometry.Scheme.Modules.scalarHom_naturality",
-      "AlgebraicGeometry.Scheme.Modules.scalarHom",
-      "AlgebraicGeometry.Scheme.Modules.scalarHom_id",
-      "AlgebraicGeometry.Scheme.Modules.scalarHom_comp",
-      "AlgebraicGeometry.Scheme.Modules.scalarFunctor",
-      "AlgebraicGeometry.Scheme.Modules.scalarFunctor_additive",
-      "AlgebraicGeometry.Scheme.Modules.scalarFunctor_preservesFiniteLimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarFunctor_preservesFiniteColimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCarrier",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyModule",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomology",
-      "AlgebraicGeometry.Scheme.Modules.exists_moduleExtEquiv",
-      "AlgebraicGeometry.Scheme.Modules.moduleExtEquiv",
-      "AlgebraicGeometry.Scheme.Modules.constantScalarUnit",
-      "AlgebraicGeometry.Scheme.Modules.constantScalarUnitIso",
-      "AlgebraicGeometry.Scheme.Modules.exists_scalarUnitLinear",
-      "AlgebraicGeometry.Scheme.Modules.scalarUnitLinear",
-      "AlgebraicGeometry.Scheme.Modules.scalarUnitMorphism",
-      "AlgebraicGeometry.Scheme.Modules.scalarExtMap",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_add",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_smul",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_bijective",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtEquiv",
-      "AlgebraicGeometry.Scheme.Modules.scalarInverseImage",
-      "AlgebraicGeometry.Scheme.Modules.scalarInverseImage_additive",
-      "AlgebraicGeometry.Scheme.Modules.scalarInverseImage_preservesFiniteLimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarInverseImage_preservesFiniteColimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarInverseUnitIso",
-      "AlgebraicGeometry.Scheme.Modules.exists_scalarPullbackCoefficient",
-      "AlgebraicGeometry.Scheme.Modules.scalarPullbackCoefficient",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyPullback",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorLeftLimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorLeftColimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorRightLimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorRightColimits",
-      "AlgebraicGeometry.Scheme.Modules.scalarExtCup",
-      "AlgebraicGeometry.Scheme.Modules.exists_scalarTensorCoefficient",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficient",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCup",
-      "AlgebraicGeometry.Scheme.Modules.scalarPullbackAdjunction",
-      "AlgebraicGeometry.Scheme.Modules.scalarPullbackCompIso",
-      "AlgebraicGeometry.Scheme.Modules.scalarPullbackSquareIso",
-      "AlgebraicGeometry.Scheme.Modules.scalarCohomologyMap",
-      "AlgebraicGeometry.Scheme.Modules.externalCupCoefficients",
-      "AlgebraicGeometry.Scheme.Modules.externalCup",
-      "AlgebraicGeometry.Scheme.Modules.externalCupPullbackIso",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp_naturality",
-      "AlgebraicGeometry.Scheme.Modules.scalarTensorPresheafCoefficient"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/FieldLinearModuleCohomologyOperations.lean",
-    "statement": "def scalarCohomologyCup (F G : SheafOfModules.{u} X.ringCatSheaf) (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology f G q) : scalarCohomology f (F ⊗ G) (p+q)",
-    "branch": "sheaf-dag",
-    "by": "Z2",
-    "date": "2026-10-12",
-    "existing": false,
-    "fixed_by": "R-pkq2",
-    "note": "Partial explicit-data repair. Changed characterization signatures (verbatim):\ntheorem exists_scalarUnitLinear (r : k) : scalarUnitLinear f r = scalarMap f ⊤ r\ntheorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :\n    ∀ (U : X.Opens) (s : scalarObj f F (op U)) (t : scalarObj f G (op U)),\n      (scalarTensorCoefficient f F G).hom.app (op U)\n        (((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)\n          (ModuleCat.{u} k)) (scalarSheaf f F) (scalarSheaf f G)).app (op U))\n            (s ⊗ₜ[k] t)) = tmulSection s t\nAll other existing signatures unchanged; no TeX statement changes. Remaining hollow comparisons are documented in the report."
-  },
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-pkq2",
-    "group": "G1",
-    "result": "fix",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-pkq2",
-    "group": "G1",
-    "result": "fix"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-38efb",
-    "group": "H3",
-    "result": "pass",
-    "landing": "20261013T054220-L-443657",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered module and node/report checked against repository, compiled successfully with all 14 direct importers, and proved declarations use only permitted axioms."
+  {
+   "text": "U3 decomposition: for a fixed injective resolution, use moduleResolutionHomologyExtEquiv. Choose one resolution and transport this equivalence along isoRightDerivedObj. For another resolution, descend the identity into the chosen resolution; cyclesMap_i and homologyπ_naturality identify representatives, isoRightDerivedObj_inv_naturality identifies the derived-functor classes, and extMk_comp_mk₀ with comp_mk₀_id identifies Ext classes. The finite-colimit forgetful helper uses the restriction/coextension adjunction and sheafification comparison; the additive proof uses composition of additive homomorphisms. For exists_scalarPullbackCoefficient, restrict the normalized tensor-pullback unit sectionwise to k; naturality of scalarMap along the morphism over Spec k proves scalar linearity. Apply the inverse sheaf adjunction, whose apply_symm_apply identity proves the required formula. Scalar linearity and bijectivity remain unchanged obligations. Existing comparison data and signatures are preserved; the AddEquiv constructor is written directly with Equiv.ofBijective and its additive law.",
+   "uses": [
+    "lem-sc-module-resolution-homology-ext"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-module-resolution-homology-ext"
+ ],
+ "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only. K1 stage-3 second reading: sectionwise functor laws; partial proof. H3 stage-3 partial proof using Mathlib sheaf reflection, adjunction additivity, flat Kan extension, field tensor exactness, reflective monoidal closedness, and the monoidal sheafification comparison. U3 stage-3: resolution-comparison glue using Mathlib injective-resolution and Ext APIs; fixed-resolution sections-to-Ext comparison split off.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "field linear cohomology pullback cup product module sheaves ringed space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "field linear cohomology pullback cup product module sheaves ringed space",
+   "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCohomology|scalarSheaf|scalarExtMap|moduleExtEquiv",
+   "results": "No hits. Additional rg of WeilConjectures and lean/Sheaf found no field-linear cohomology operations.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-picard-kunneth-qcoh",
+  "date": "2026-10-11",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, invoke Varieties lemma-kunneth on the special fibre: its canonical cohomology map",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCup",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.scalarMap",
+   "AlgebraicGeometry.Scheme.Modules.KSheaf",
+   "AlgebraicGeometry.Scheme.Modules.scalarObj",
+   "AlgebraicGeometry.Scheme.Modules.scalarRestriction_linear",
+   "AlgebraicGeometry.Scheme.Modules.scalarRestriction",
+   "AlgebraicGeometry.Scheme.Modules.scalarRestriction_id",
+   "AlgebraicGeometry.Scheme.Modules.scalarRestriction_comp",
+   "AlgebraicGeometry.Scheme.Modules.scalarPresheaf",
+   "AlgebraicGeometry.Scheme.Modules.scalarPresheaf_isSheaf",
+   "AlgebraicGeometry.Scheme.Modules.scalarSheaf",
+   "AlgebraicGeometry.Scheme.Modules.scalarHom_linear",
+   "AlgebraicGeometry.Scheme.Modules.scalarHomApp",
+   "AlgebraicGeometry.Scheme.Modules.scalarHom_naturality",
+   "AlgebraicGeometry.Scheme.Modules.scalarHom",
+   "AlgebraicGeometry.Scheme.Modules.scalarHom_id",
+   "AlgebraicGeometry.Scheme.Modules.scalarHom_comp",
+   "AlgebraicGeometry.Scheme.Modules.scalarFunctor",
+   "AlgebraicGeometry.Scheme.Modules.scalarFunctor_additive",
+   "AlgebraicGeometry.Scheme.Modules.scalarFunctor_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarFunctor_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCarrier",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyModule",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomology",
+   "AlgebraicGeometry.Scheme.Modules.exists_moduleExtEquiv",
+   "AlgebraicGeometry.Scheme.Modules.moduleExtEquiv",
+   "AlgebraicGeometry.Scheme.Modules.constantScalarUnit",
+   "AlgebraicGeometry.Scheme.Modules.constantScalarUnitIso",
+   "AlgebraicGeometry.Scheme.Modules.exists_scalarUnitLinear",
+   "AlgebraicGeometry.Scheme.Modules.scalarUnitLinear",
+   "AlgebraicGeometry.Scheme.Modules.scalarUnitMorphism",
+   "AlgebraicGeometry.Scheme.Modules.scalarExtMap",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_add",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_smul",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtMap_bijective",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtEquiv",
+   "AlgebraicGeometry.Scheme.Modules.scalarInverseImage",
+   "AlgebraicGeometry.Scheme.Modules.scalarInverseImage_additive",
+   "AlgebraicGeometry.Scheme.Modules.scalarInverseImage_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarInverseImage_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarInverseUnitIso",
+   "AlgebraicGeometry.Scheme.Modules.exists_scalarPullbackCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.scalarPullbackCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyPullback",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorLeftLimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorLeftColimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorRightLimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorRightColimits",
+   "AlgebraicGeometry.Scheme.Modules.scalarExtCup",
+   "AlgebraicGeometry.Scheme.Modules.exists_scalarTensorCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCup",
+   "AlgebraicGeometry.Scheme.Modules.scalarPullbackAdjunction",
+   "AlgebraicGeometry.Scheme.Modules.scalarPullbackCompIso",
+   "AlgebraicGeometry.Scheme.Modules.scalarPullbackSquareIso",
+   "AlgebraicGeometry.Scheme.Modules.scalarCohomologyMap",
+   "AlgebraicGeometry.Scheme.Modules.externalCupCoefficients",
+   "AlgebraicGeometry.Scheme.Modules.externalCup",
+   "AlgebraicGeometry.Scheme.Modules.externalCupPullbackIso",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp_naturality",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorPresheafCoefficient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldLinearModuleCohomologyOperations.lean",
+  "statement": "def scalarCohomologyCup (F G : SheafOfModules.{u} X.ringCatSheaf) (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology f G q) : scalarCohomology f (F ⊗ G) (p+q)",
+  "branch": "sheaf-dag",
+  "by": "Z2",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-pkq2",
+  "note": "Partial explicit-data repair. Changed characterization signatures (verbatim):\ntheorem exists_scalarUnitLinear (r : k) : scalarUnitLinear f r = scalarMap f ⊤ r\ntheorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :\n    ∀ (U : X.Opens) (s : scalarObj f F (op U)) (t : scalarObj f G (op U)),\n      (scalarTensorCoefficient f F G).hom.app (op U)\n        (((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)\n          (ModuleCat.{u} k)) (scalarSheaf f F) (scalarSheaf f G)).app (op U))\n            (s ⊗ₜ[k] t)) = tmulSection s t\nAll other existing signatures unchanged; no TeX statement changes. Remaining hollow comparisons are documented in the report."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pkq2",
+  "group": "G1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pkq2",
+  "group": "G1",
+  "result": "fix"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d5d9d",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100148-L-2493399",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs, fixed-resolution statement, node records and report matched against the repository and sources; compilation and axiom checks passed, including all 22 direct importers."
+ }
 }

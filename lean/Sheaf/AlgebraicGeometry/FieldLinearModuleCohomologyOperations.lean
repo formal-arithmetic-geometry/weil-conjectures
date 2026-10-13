@@ -18,6 +18,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Functors
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.Adjunction
+import Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
@@ -246,16 +249,45 @@ a sectionwise isomorphism and therefore a sheaf isomorphism. -/
       exact comp_preservesFiniteLimits _ _)
   exact preservesFiniteLimits_of_reflects_of_preserves (scalarFunctor f)
     (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k))
+/-- Forgetting scalar sheaves commutes with sheafification and reflects finite colimits.
+Source: Stacks Project, Modules on Sites, Tag 03DB. -/
+private theorem scalarForget_preservesFiniteColimits :
+    PreservesFiniteColimits (sheafCompose (Opens.grothendieckTopology X)
+      (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u})) := by
+  let U := ModuleCat.restrictScalars.{u} (Int.castRingHom k)
+  let V := forget₂ (ModuleCat.{u} ℤ) AddCommGrpCat.{u}
+  have : U.IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{0, 0, u} (Int.castRingHom k)).isLeftAdjoint
+  have : (U ⋙ V).IsLeftAdjoint := inferInstance
+  have : (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u}).IsLeftAdjoint :=
+    inferInstanceAs (U ⋙ V).IsLeftAdjoint
+  let J := Opens.grothendieckTopology X
+  let G := forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u}
+  let e : Sheaf.composeAndSheafify J G ≅ sheafCompose J G :=
+    Functor.isoWhiskerLeft (sheafCompose J G)
+      (sheafificationNatIso J AddCommGrpCat.{u}).symm ≪≫
+      Functor.rightUnitor (sheafCompose J G)
+  have : (Sheaf.composeAndSheafify J G).IsLeftAdjoint := inferInstance
+  have : (sheafCompose J G).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e
+  infer_instance
+
 /-- scalar Functor preserves Finite Colimits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Check the comparison morphism on stalks. Stalks preserve finite colimits of
-module sheaves, and stalks of scalarSheaf f F are the underlying k-modules of the
-O_X-stalks. Restriction of scalars preserves cokernels and finite direct sums of modules.
-Thus the comparison is an isomorphism on every stalk, hence an isomorphism of sheaves. -/
+Proof: Forgetting from k-module sheaves to abelian sheaves preserves sheafification:
+local injectivity and local surjectivity depend only on the unchanged underlying functions.
+Thus this forgetful functor preserves finite colimits, using the sheafification adjunction.
+Its composite with scalarFunctor is the underlying-abelian-sheaf functor of O-module
+sheaves, which preserves colimits. The forgetful functor reflects isomorphisms and hence
+finite colimits. Reflection therefore proves the assertion. -/
 @[instance] theorem scalarFunctor_preservesFiniteColimits :
     PreservesFiniteColimits (scalarFunctor f) := by
-  sorry
+  let Q := sheafCompose (Opens.grothendieckTopology X)
+    (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u})
+  have : PreservesFiniteColimits Q := scalarForget_preservesFiniteColimits
+  have : PreservesFiniteColimits (scalarFunctor f ⋙ Q) :=
+    inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf X.ringCatSheaf))
+  exact preservesFiniteColimits_of_reflects_of_preserves (scalarFunctor f) Q
 local instance : EnoughInjectives (SheafOfModules.{u} X.ringCatSheaf) :=
   (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
 local instance : HasExt.{u} (SheafOfModules.{u} X.ringCatSheaf) :=
@@ -284,6 +316,8 @@ Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED
 def scalarCohomology (F : (SheafOfModules.{u} X.ringCatSheaf)) (n : ℕ) : ModuleCat.{u} k :=
   ModuleCat.of k (scalarCohomologyCarrier f F n)
 
+set_option maxHeartbeats 800000 in
+-- Comparing resolution homology with derived functors requires universe-level conversion.
 /-- exists module Ext Equiv.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -302,7 +336,42 @@ theorem exists_moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) 
         e ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv
           ((RingedSpace.globalSectionsComplex I).homologyπ n a)) =
             InjectiveResolution.extMk.{u, u, u + 1} I φ (n+1) rfl hφ := by
-  sorry
+  let J := injectiveResolution F
+  let Γ := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  obtain ⟨eJ, heJ⟩ := moduleResolutionHomologyExtEquiv F J n
+  let e := (J.isoRightDerivedObj Γ n).toLinearEquiv.toAddEquiv.trans eJ
+  refine ⟨e, ?_⟩
+  intro I c φ hφ hc
+  let ψ : I.Hom J (𝟙 F) := ⟨InjectiveResolution.desc (𝟙 F) J I, by simp⟩
+  let K := RingedSpace.globalSectionsComplex I
+  let L := RingedSpace.globalSectionsComplex J
+  let χ : K ⟶ L := (Γ.mapHomologicalComplex (.up ℕ)).map ψ.hom
+  let c' := HomologicalComplex.cyclesMap χ n c
+  change φ.val.app (op ⊤) (1 : Γ(X, ⊤)) = K.iCycles n c at hc
+  have hc' : (φ ≫ ψ.hom.f n).val.app (op ⊤) (1 : Γ(X, ⊤)) = L.iCycles n c' := by
+    have h := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i χ n) c
+    simp only [ConcreteCategory.comp_apply] at h
+    rw [← hc] at h
+    exact h.symm
+  have hn := ConcreteCategory.congr_hom
+    (InjectiveResolution.isoRightDerivedObj_inv_naturality (𝟙 F) I J ψ.hom
+      (by simp [ψ]) Γ n) (K.homologyπ n c)
+  have hp := ConcreteCategory.congr_hom
+    (HomologicalComplex.homologyπ_naturality χ n) c
+  simp only [ConcreteCategory.comp_apply] at hn hp
+  change (Γ.rightDerived n).map (𝟙 F)
+      ((I.isoRightDerivedObj Γ n).inv (K.homologyπ n c)) =
+    (J.isoRightDerivedObj Γ n).inv
+      (HomologicalComplex.homologyMap χ n (K.homologyπ n c)) at hn
+  rw [CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] at hn
+  rw [hp] at hn
+  rw [hn]
+  change eJ ((J.isoRightDerivedObj Γ n).hom
+    ((J.isoRightDerivedObj Γ n).inv (L.homologyπ n c'))) = _
+  rw [← ConcreteCategory.comp_apply, Iso.inv_hom_id, ConcreteCategory.id_apply]
+  rw [heJ c' (φ ≫ ψ.hom.f n) (by simp [reassoc_of% hφ]) hc']
+  exact (InjectiveResolution.extMk_comp_mk₀ φ (n + 1) rfl hφ ψ).symm.trans
+    (Abelian.Ext.comp_mk₀_id _)
 
 /-- module Ext Equiv.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -311,6 +380,10 @@ def moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     ((RingedSpace.moduleCohomology X.toRingedSpace n).obj F) ≃+
       Abelian.Ext.{u} (SheafOfModules.unit X.ringCatSheaf) F n :=
   Classical.choose (exists_moduleExtEquiv F n)
+
+section
+
+attribute [local irreducible] moduleExtEquiv
 
 /-- constant Scalar Unit.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -324,6 +397,8 @@ Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 def constantScalarUnitIso : constantScalarUnit (X := X) (k := k) ≅ 𝟙_ (KSheaf X k) :=
   (Functor.Monoidal.εIso
     (presheafToSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k))).symm
+
+attribute [local irreducible] constantScalarUnitIso
 
 /-- scalar Unit Linear.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -356,6 +431,10 @@ def scalarUnitMorphism : 𝟙_ (KSheaf X k) ⟶
     ((constantSheafAdj (Opens.grothendieckTopology X) (ModuleCat.{u} k)
       isTerminalTop).homEquiv _ _).symm (scalarUnitLinear f)
 
+attribute [local irreducible] scalarUnitMorphism
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- scalar Ext Map.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -365,6 +444,10 @@ def scalarExtMap (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
   (Abelian.Ext.mk₀ (scalarUnitMorphism f)).comp
     (a.mapExactFunctor (scalarFunctor f)) (zero_add n)
 
+attribute [local irreducible] scalarExtMap
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- scalar Cohomology Ext Map.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -373,16 +456,26 @@ def scalarCohomologyExtMap (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n :=
   scalarExtMap f F n (moduleExtEquiv F n a)
 
+attribute [local irreducible] scalarCohomologyExtMap
+
 /-- scalar Cohomology Ext Map add.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: The injective-resolution comparison is additive and k-linear, as are exact-functor
-transport on Ext and precomposition by the scalar-unit morphism. Compose these maps. -/
+Proof: The chosen moduleExtEquiv is an additive equivalence, so it sends a sum to the
+sum of its images. Exact-functor transport on Ext preserves addition by
+Ext.mapExactFunctor_add. Precomposition by the degree-zero scalar-unit Ext class preserves
+addition by Ext.comp_add. Compose these three equalities. -/
 theorem scalarCohomologyExtMap_add (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (a b : scalarCohomology f F n) :
     scalarCohomologyExtMap f F n (a+b) =
       scalarCohomologyExtMap f F n a + scalarCohomologyExtMap f F n b := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+      unfold scalarCohomologyExtMap scalarExtMap
+      exact (((Abelian.Ext.precomp (Abelian.Ext.mk₀ (scalarUnitMorphism f))
+        (scalarSheaf f F) (zero_add n)).comp
+        ((scalarFunctor f).mapExtAddHom (SheafOfModules.unit X.ringCatSheaf) F n)).comp
+          (moduleExtEquiv F n).toAddMonoidHom).map_add a b
 
 /-- scalar Cohomology Ext Map smul.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -404,6 +497,8 @@ theorem scalarCohomologyExtMap_bijective (F : SheafOfModules.{u} X.ringCatSheaf)
     Function.Bijective (scalarCohomologyExtMap f F n) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- scalar Cohomology Ext Equiv: the comparison `scalarCohomologyExtMap` as an additive
 equivalence; it is k-linear by `scalarCohomologyExtMap_smul`.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -411,9 +506,11 @@ Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 def scalarCohomologyExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     scalarCohomology f F n ≃+
       Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n :=
-  AddEquiv.ofBijective
-    (AddMonoidHom.mk' (scalarCohomologyExtMap f F n) (scalarCohomologyExtMap_add f F n))
-    (scalarCohomologyExtMap_bijective f F n)
+  { Equiv.ofBijective (scalarCohomologyExtMap f F n)
+      (scalarCohomologyExtMap_bijective f F n) with
+    map_add' := scalarCohomologyExtMap_add f F n }
+
+end
 
 attribute [irreducible] scalarCohomologyExtEquiv
   scalarCohomologyExtMap scalarExtMap moduleExtEquiv
@@ -477,6 +574,25 @@ def scalarInverseUnitIso (a : Y ⟶ X) :
     ((Opens.map a.base).constantSheafsheafPullbackIso (ModuleCat.{u} k) _ _
       isTerminalTop isTerminalTop).app (ModuleCat.of k k) ≪≫ constantScalarUnitIso
 
+/-- Naturality of the restricted field action along a morphism over Spec k.
+Source: Stacks Project, Modules, Tag 0096. -/
+private theorem scalarMap_pullback (g : Y ⟶ Spec (CommRingCat.of k))
+    (a : Y ⟶ X) (h : a ≫ f = g) (U : X.Opens) (r : k) :
+    (a.app U).hom (scalarMap f U r) = scalarMap g (a ⁻¹ᵁ U) r := by
+  have hn := a.naturality (homOfLE (le_top (a := U))).op
+  have ht := congrArg Scheme.Hom.appTop h
+  rw [Scheme.Hom.comp_appTop] at ht
+  simp only [scalarMap, RingHom.comp_apply]
+  change (X.presheaf.map (homOfLE (le_top (a := U))).op ≫ a.app U)
+    (((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop) r) = _
+  rw [hn]
+  change (a.appTop ≫ Y.presheaf.map (homOfLE (le_top (a := a ⁻¹ᵁ U))).op)
+    (((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop) r) = _
+  change ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop ≫ a.appTop ≫
+    Y.presheaf.map (homOfLE (le_top (a := a ⁻¹ᵁ U))).op) r = _
+  rw [← Category.assoc f.appTop, ht]
+  rfl
+
 /-- exists scalar Pullback Coefficient.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -492,7 +608,42 @@ theorem exists_scalarPullbackCoefficient (g : Y ⟶ Spec (CommRingCat.of k))
           _ _) j).hom.app (op U) s =
             ((Classical.choose (exists_tensorPullbackAdjunction a)).unit.app F).val.app
               (op U) s := by
-  sorry
+  let η : F ⟶ (pushforward a).obj ((tensorPullback a).obj F) :=
+    (Classical.choose (exists_tensorPullbackAdjunction a)).unit.app F
+  let H := (tensorPullback a).obj F
+  let βApp (U : (Opens X)ᵒᵖ) :
+      scalarObj f F U ⟶ scalarObj g H ((Opens.map a.base).op.obj U) :=
+    letI : Module k (F.val.obj U) := Module.compHom _ (scalarMap f U.unop)
+    letI : Module k (H.val.obj ((Opens.map a.base).op.obj U)) :=
+      Module.compHom _ (scalarMap g (a ⁻¹ᵁ U.unop))
+    ModuleCat.ofHom
+      { toFun := fun s : scalarObj f F U ↦
+          (η.val.app U s : scalarObj g H ((Opens.map a.base).op.obj U))
+        map_add' := fun s t ↦ (η.val.app U).hom.map_add s t
+        map_smul' := by
+          intro r s
+          change η.val.app U ((scalarMap f U.unop r) • (show F.val.obj U from s)) =
+            (scalarMap g (a ⁻¹ᵁ U.unop) r) •
+              (show H.val.obj ((Opens.map a.base).op.obj U) from η.val.app U s)
+          rw [(η.val.app U).hom.map_smul]
+          change ((a.app U.unop).hom (scalarMap f U.unop r)) •
+            (show H.val.obj ((Opens.map a.base).op.obj U) from η.val.app U s) = _
+          rw [scalarMap_pullback f g a h] }
+  let β : scalarSheaf f F ⟶
+      ((Opens.map a.base).sheafPushforwardContinuous (ModuleCat.{u} k)
+        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).obj
+          (scalarSheaf g H) :=
+    ⟨{ app := βApp, naturality := by
+        intro U V i
+        ext s
+        exact PresheafOfModules.naturality_apply η.val i s }⟩
+  let adj := (Opens.map a.base).sheafAdjunctionContinuous (ModuleCat.{u} k)
+    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
+  refine ⟨(adj.homEquiv _ _).symm β, ?_⟩
+  intro U s
+  exact ConcreteCategory.congr_hom
+    (NatTrans.congr_app (congrArg (fun t ↦ t.hom)
+      ((adj.homEquiv _ _).apply_symm_apply β)) (op U)) s
 
 /-- scalar Pullback Coefficient.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -757,6 +908,8 @@ def externalCup {A B : Scheme.{u}} (a : A ⟶ Spec (CommRingCat.of k))
     (scalarCohomologyPullback a (Limits.pullback.fst a b ≫ a) (Limits.pullback.fst a b) rfl M p x)
     (scalarCohomologyPullback b (Limits.pullback.fst a b ≫ a) (Limits.pullback.snd a b)
       (Limits.pullback.condition.symm) N q y)
+
+attribute [local irreducible] scalarPullbackSquareIso
 
 /-- The canonical coefficient comparison for pullback of the external tensor product.
 Source: Stacks Project, Tags 0097 and 01CD; Varieties, Tag 0BED
