@@ -18,60 +18,40 @@
  },
  "proof": [
   {
-   "text": "The stalk maps of the inverse spectrum isomorphisms are ring isomorphisms. Tensor-pullback stalks identify a pulled-back germ with 1 tensor that germ. Extension along a ring isomorphism is an exact equivalence: its inverse is scalar restriction and its unit and counit are the multiplication identifications. Consequently pullback along the inverse spectrum isomorphism is exact. Its universal left-derived counit and the exact-stalk localization factors lift this natural stalk identification to derived categories. Apply degree-i homology and forget scalars to obtain T, naturally in all objects of D(O_Xprime).",
+   "text": "Use the explicitly constructed isoPullbackStalkCohomologyIso for the target functor T, and the canonical representative comparison square for P and its termwise spectrum pullback Q.",
    "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-stalk-comparison-source-transport"
+    "lem-pc-iso-pullback-stalk-cohomology",
+    "lem-pc-affine-spectrum-canonical-comparison-square"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use isoSpec naturality and stalkMap_comp to identify the four stalk rings and their structural ring homomorphisms. TensorMap is determined by its restrictions to A and B; tensor universality intertwines the two tensorMap maps. The equality of Q with termwise pullback of P and the germ formula identify the derived stalk inputs. Compose with the derived ratios of e and e0 to account for arbitrary choices of representative isomorphisms.",
+   "text": "Correct the arbitrary representative choices by the automorphism a=e0;J(e inverse);d inverse of Q. exists_comparisonSourceIso gives the tensor-algebra source automorphism c and comparisonIntoPullback_naturality gives its commuting square. Extend c to the target stalk and forget scalars, obtaining b.",
    "uses": [
-    "def-pc-affine-spectrum-derived-coordinates",
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-pc-stalk-comparison-source-transport"
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-stalk-comparison-pullback-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Universal left-derived scalar extensions are carried to each other by the exact equivalences of scalar categories induced by these ring isomorphisms. Their counit-compatible natural isomorphism carries the corrected derived input to the spectrum input. Apply homology. Naturality with A-multiplication and cohomologyIso_smul supply the full tensor-algebra action. Extend to C and forget scalars; the inverse scalar transports give the inverse of l.",
+   "text": "Take l=l0;b inverse. The identity a;d;J(e)=e0, naturality of T and of affineSpectrumDerivedPullbackIso.inv, and cancellation of b give the required square. This is proved by the private generic transport_representatives lemma.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-stalk-comparison-source-transport"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The model equations comparison_eq and localized_eq identify the localized comparisons with the scalar-extension counits. The natural tensorStalkIso identifies the ordinary extension maps. The derived stalk extension comparison expresses comparisonIntoPullback by these counits. Uniqueness of the leftDerivedLift and the defining equation of affineSpectrumDerivedPullbackIso identify the composition comparison with the specified inverse in the displayed equation. Postcompose with e and e0; functoriality gives the stated commuting square before any coefficient morphism.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-stalk-derived-extension-comparison",
-    "lem-pc-stalk-comparison-pullback-naturality",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-affine-spectrum-derived-coordinates"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-spectrum-derived-coordinates",
-  "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-spectrum-canonical-comparison-square",
+  "lem-pc-iso-pullback-stalk-cohomology",
   "lem-pc-stalk-comparison-pullback-naturality",
-  "lem-pc-stalk-comparison-source-transport",
-  "lem-pc-stalk-derived-extension-comparison",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-pc-stalk-comparison-source-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Explicit source-only expansion of the affine reduction, using Tags 0098 and 0D5S; all three pages read online because literature is not materialized in this clone."
+  "place": "V1 Lean reduction: explicit natural stalk iso and canonical square, with arbitrary representative correction proved from source transport and naturality"
  },
  "mathlib_searches": [
   {
@@ -149,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T130751-L-3986576",
+  "landing": "20261013T151138-L-878690",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
