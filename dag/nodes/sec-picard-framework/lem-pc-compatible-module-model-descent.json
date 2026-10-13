@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-compatible-module-model-descent",
+ "kind": "statement",
+ "title": "A module equivalence descends along compatible coefficient maps",
+ "statement": "Let I be a directed preorder, F:I→CommRing a diagram, and (C,ι) a colimit cocone [def-weil-pbc-category-colimit]. Fix i∈I and an F(i)-algebra B. Let M be a finitely presented B-module and L a finitely presented Q-module for a commutative ring Q [def-sc-finitely-presented-module]. For j≥i set B_j=F(j)⊗_{F(i)}B and Y=C⊗_{F(i)}B. Give Y its B-algebra structure by right tensor inclusion and its Q-algebra structure by a specified ring map q_C:Q→Y. Suppose Y⊗_Q L≃_Y Y⊗_B M. Fix k≥i and ring maps q_j:Q→B_j for all j≥k, compatible with all transitions B_j→B_l and with the coprojections B_j→Y (whose composites with q_j equal q_C). Then there exists j₀≥k such that for every j≥j₀, with the Q-action on B_j induced by q_j and its B-action by right tensor inclusion, B_j⊗_Q L≃_{B_j}B_j⊗_B M. The specified limit isomorphism need not itself be recorded in the conclusion. There are no finite-presentation assumptions on B as an algebra or on Q as a ring, and no flatness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "On the cofinal tail above k, the algebras B_j = F(j) tensor B have colimit\n   c.pt tensor B. The compatibility assumptions make them Q-algebras and make\n   their coprojections Q-linear. This colimit assertion follows by tensor\n   representatives and eventual equality. If the index is only a preorder,\n   take its poset reflection: mutually comparable indices give inverse ring\n   maps, so both the diagram and its colimit descend up to canonical isomorphism.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  },
+  {
+   "text": "At k the modules B_k tensor_Q L and B_k tensor_B M are finitely presented\n   over B_k, by finite presentation under base change. Their base changes to\n   the colimit are the two modules in eM, by tensor cancellation.",
+   "uses": [
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  },
+  {
+   "text": "Apply Tag 05N7 (2) to eM and its inverse, take a common later stage, and apply\n   part (3) to their two composites and the identity maps. At a common upper\n   bound the descended maps are inverse, hence define a linear equivalence.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  },
+  {
+   "text": "Base change this equivalence to every later stage. Compatibility of q\n   and tensor cancellation identify those modules with the displayed ones.\n   Transport from the poset reflection to original indices if necessary.\n   Empty presentations and zero modules need no separate argument, and no\n   flatness is used to descend maps, equalities, or inverse identities.",
+   "uses": [
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-base-change",
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear equivalence between finitely presented modules descends along a compatible system of ring maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear equivalence between finitely presented modules descends along a compatible system of ring maps",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; ModuleCat.FilteredColimits.M.mk_eq; ModuleCat.FilteredColimits.colimitCoconeIsColimit. Existing Sheaf.Algebra.FinitePresentationColimit has module-map descent and equality for PartialOrder diagrams and categorical colimits in a single universe. None states the compatible-coefficient equivalence here.",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg equiv.*colimit|colimit.*equiv|eventually.*equiv|pushout.*tail|tail.*pushout Mathlib/Algebra/Module Mathlib/Algebra/Category/Ring Mathlib/RingTheory/FinitePresentation.lean",
+   "results": "No exact theorem in Mathlib. Library search found finitePresentation_descent_directedColimit and algebra comparison-system lemmas, with different tensor conventions and interfaces; no compatible family in the interface needed here. Blueprint searches for tensor model and 05N7 returned no matching imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FpModuleTensorModelComparison",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: eventual flatness of a finitely presented module, using Algebra Lemma 10.168.1 (Tag 02JO), part (3), after restricting to affine charts; model comparison, affine descent step 8; tensor-model comparison: A module equivalence descends along compatible coefficient maps",
+   "via": [
+    "lem-pc-fp-module-tensor-model-comparison",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompatibleModuleModelDescent",
+  "file": "lean/Sheaf/RingTheory/CompatibleModuleModelDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_eventually_compatible_module_equiv",
+  "statement": "theorem exists_eventually_compatible_module_equiv\n    {I : Type v} [Preorder I] [IsDirectedOrder I]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    {i : I} {B M : Type w} [CommRing B] [AddCommMonoid M]\n    [Algebra (F.obj i : Type v) B] [Module B M] [Module.FinitePresentation B M]\n    (Q L : Type x) [CommRing Q] [AddCommMonoid L] [Module Q L]\n    [Module.FinitePresentation Q L]\n    (qC : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      Q →+* (c.pt : Type v) ⊗[F.obj i] B)\n    (eM : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI : Algebra Q ((c.pt : Type v) ⊗[F.obj i] B) := qC.toAlgebra\n      letI : Algebra B ((c.pt : Type v) ⊗[F.obj i] B) :=\n        Algebra.TensorProduct.rightAlgebra\n      Nonempty (((c.pt : Type v) ⊗[F.obj i] B) ⊗[Q] L ≃ₗ[\n        (c.pt : Type v) ⊗[F.obj i] B] ((c.pt : Type v) ⊗[F.obj i] B) ⊗[B] M))\n    (k : I) (hik : i ≤ k)\n    (q : ∀ (j : I) (hkj : k ≤ j),\n      letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n      Q →+* (F.obj j : Type v) ⊗[F.obj i] B)\n    (hqC : ∀ (j : I) (hkj : k ≤ j),\n      letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n      letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      let t : F.obj j →ₐ[F.obj i] c.pt :=\n        { (c.ι.app j).hom with\n          commutes' := fun s ↦ ConcreteCategory.congr_hom\n            (c.w (homOfLE (hik.trans hkj))) s }\n      (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp\n        (q j hkj) = qC)\n    (hq : ∀ (j l : I) (hkj : k ≤ j) (hkl : k ≤ l) (hjl : j ≤ l),\n      letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n      letI := (F.map (homOfLE (hik.trans hkl))).hom.toAlgebra\n      let t : F.obj j →ₐ[F.obj i] F.obj l :=\n        { (F.map (homOfLE hjl)).hom with\n          commutes' := fun s ↦ (ConcreteCategory.congr_hom\n            (F.map_comp (homOfLE (hik.trans hkj)) (homOfLE hjl)) s).symm }\n      (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp\n        (q j hkj) = q l hkl) :\n    ∃ (j₀ : I) (hkj₀ : k ≤ j₀), ∀ (j : I) (h₀ : k ≤ j₀) (h₁ : j₀ ≤ j),\n      letI := (F.map (homOfLE (hik.trans (h₀.trans h₁)))).hom.toAlgebra\n      let E := (F.obj j : Type v) ⊗[F.obj i] B\n      letI : Algebra Q E := (q j (h₀.trans h₁)).toAlgebra\n      letI : Algebra B E := Algebra.TensorProduct.rightAlgebra\n      Nonempty (E ⊗[Q] L ≃ₗ[E] E ⊗[B] M)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100055-L-2476642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100055-L-2476642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

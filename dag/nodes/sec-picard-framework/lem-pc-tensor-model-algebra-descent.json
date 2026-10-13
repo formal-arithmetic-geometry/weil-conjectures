@@ -1,0 +1,160 @@
+{
+ "id": "lem-pc-tensor-model-algebra-descent",
+ "kind": "statement",
+ "title": "A compatible algebra tensor model becomes a pushout on a directed tail",
+ "statement": "Let I be a directed preorder and F:I→CommRing a diagram with colimit cocone (C,ι) [def-weil-pbc-category-colimit]. Fix i∈I, finitely presented F(i)-algebras A,B [def-weil-pbc-finitely-presented-algebra], and an F(i)-algebra map f:A→B. Let P,Q be commutative rings with a P-algebra structure on Q, P finitely presented over Z and Q finitely presented over P. Write A_j=F(j)⊗_{F(i)}A, B_j=F(j)⊗_{F(i)}B, X=C⊗_{F(i)}A and Y=C⊗_{F(i)}B. Suppose a P-algebra structure on X and a ring equivalence e:X⊗_P Q≃Y are given, with e restricted to X equal to the tensor extension of f. Then there are k≥i and ring maps q_j:Q→B_j for every j≥k such that (1) the coprojection B_j→Y composed with q_j equals e composed with the right inclusion Q→X⊗_P Q; (2) every transition B_j→B_l sends q_j to q_l, for k≤j≤l; (3) for every j≥k there is a P-algebra structure on A_j such that the P-structure on B_j through f_j:A_j→B_j agrees with the one through q_j, and the square P→A_j, P→Q, A_j→B_j, Q→B_j is an algebra pushout. All tensor structures are induced by transitions of F; the coprojections are induced by ι. No module is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "On the cofinal tail above i, the tensors with A and B have colimits X and Y.\n   Tensor products commute with filtered colimits, by representatives and eventual\n   equality. Factor P to X through one stage using finite presentation over Z.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  },
+  {
+   "text": "The map Q to Y induced by e is P-linear, by he. Factor it through a B stage\n   using finite presentation of Q over P. The tensor universal property produces\n   a comparison from the model algebra to the prescribed algebra there.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  },
+  {
+   "text": "B is finitely presented over A: finite presentation over the common base and\n   finite type of A imply this. Both sides of the comparison are therefore\n   finitely presented over the A stage. Descend the inverse of e and both inverse\n   identities by Tag 05N9, then take a common upper bound.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  },
+  {
+   "text": "Extend the resulting algebra isomorphism and the two structure maps to every\n   later stage by base change. Its tensor universal property is precisely the\n   pushout square asserted here. The maps from Q are compatible with transition\n   maps and with the given map to Y by construction. Zero rings and empty\n   presentations require no separate nonvanishing or flatness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra tensor model descends to compatible pushout squares over a tail of a directed ring colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented algebra tensor model descends to compatible pushout squares over a tail of a directed ring colimit",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; exists_comp_map_eq_of_isColimit; CommRingCat.isPushout_tensorProduct; RingHom.CodescendsAlong.includeRight. None supplies the compatible eventual algebra-model family.",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg equiv.*colimit|colimit.*equiv|eventually.*equiv|pushout.*tail|tail.*pushout Mathlib/Algebra/Module Mathlib/Algebra/Category/Ring Mathlib/RingTheory/FinitePresentation.lean",
+   "results": "No exact theorem in Mathlib. Library search found finitePresentation_descent_directedColimit and algebra comparison-system lemmas, with different tensor conventions and interfaces; no compatible family in the interface needed here. Blueprint searches for tensor model and 05N7 returned no matching imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FpModuleTensorModelComparison",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: eventual flatness of a finitely presented module, using Algebra Lemma 10.168.1 (Tag 02JO), part (3), after restricting to affine charts; model comparison, affine descent step 8; tensor-model comparison: A compatible algebra tensor model becomes a pushout on a directed tail",
+   "via": [
+    "lem-pc-fp-module-tensor-model-comparison",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorModelAlgebraDescent",
+  "file": "lean/Sheaf/RingTheory/TensorModelAlgebraDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_tensor_model_algebra_tail",
+  "statement": "theorem exists_tensor_model_algebra_tail\n    {I : Type v} [Preorder I] [IsDirectedOrder I]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    {i : I} {A B : Type w} [CommRing A] [CommRing B]\n    [Algebra (F.obj i : Type v) A] [Algebra (F.obj i : Type v) B]\n    [Algebra.FinitePresentation (F.obj i : Type v) A]\n    [Algebra.FinitePresentation (F.obj i : Type v) B] (f : A →ₐ[F.obj i] B)\n    (P Q : Type x) [CommRing P] [CommRing Q] [Algebra P Q]\n    [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q]\n    (aP : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      Algebra P ((c.pt : Type v) ⊗[F.obj i] A))\n    (e : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      ((c.pt : Type v) ⊗[F.obj i] A) ⊗[P] Q ≃+* (c.pt : Type v) ⊗[F.obj i] B)\n    (he : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom =\n        (Algebra.TensorProduct.map (Algebra.ofId (c.pt : Type v) (c.pt : Type v))\n          f).toRingHom) :\n    ∃ (k : I) (hik : i ≤ k),\n      ∃ q : ∀ (j : I) (hkj : k ≤ j),\n        letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n        Q →+* (F.obj j : Type v) ⊗[F.obj i] B,\n      (∀ (j : I) (hkj : k ≤ j),\n        letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n        letI : Algebra (F.obj i : Type v) (c.pt : Type v) :=\n          (c.ι.app i).hom.toAlgebra\n        let t : F.obj j →ₐ[F.obj i] c.pt :=\n          { (c.ι.app j).hom with\n            commutes' := fun s ↦ ConcreteCategory.congr_hom\n              (c.w (homOfLE (hik.trans hkj))) s }\n        (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp\n          (q j hkj) = e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) ∧\n      (∀ (j l : I) (hkj : k ≤ j) (hkl : k ≤ l) (hjl : j ≤ l),\n        letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n        letI := (F.map (homOfLE (hik.trans hkl))).hom.toAlgebra\n        let t : F.obj j →ₐ[F.obj i] F.obj l :=\n          { (F.map (homOfLE hjl)).hom with\n            commutes' := fun s ↦ (ConcreteCategory.congr_hom\n              (F.map_comp (homOfLE (hik.trans hkj)) (homOfLE hjl)) s).symm }\n        (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp\n          (q j hkj) = q l hkl) ∧\n      (∀ (j : I) (hkj : k ≤ j),\n        letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n        let D := (F.obj j : Type v) ⊗[F.obj i] A\n        let E := (F.obj j : Type v) ⊗[F.obj i] B\n        let d : D →+* E :=\n          (Algebra.TensorProduct.map (AlgHom.id (F.obj j) (F.obj j)) f).toRingHom\n        letI : Algebra D E := d.toAlgebra\n        letI : Algebra Q E := (q j hkj).toAlgebra\n        ∃ aPj : Algebra P D,\n          letI := aPj\n          letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n          letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n          ∃ hPQ : IsScalarTower P Q E,\n            letI := hPQ\n            Algebra.IsPushout P D Q E)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100055-L-2476642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100055-L-2476642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

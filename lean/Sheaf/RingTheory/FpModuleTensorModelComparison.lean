@@ -10,9 +10,8 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
 
-import Sheaf.Algebra.FinitePresentationColimit
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
-import Sheaf.RingTheory.ColimitCategoryFpAlgebras
+import Sheaf.RingTheory.TensorModelAlgebraDescent
+import Sheaf.RingTheory.CompatibleModuleModelDescent
 
 /-! # Comparing a finite-presentation module model with prescribed stages
 
@@ -101,6 +100,63 @@ theorem exists_eventually_tensor_model_equiv
         letI := aPj
         Nonempty (((F.obj j : Type v) ⊗[F.obj i] A) ⊗[P] L ≃ₗ[
           (F.obj j : Type v) ⊗[F.obj i] A] ((F.obj j : Type v) ⊗[F.obj i] A) ⊗[A] M) := by
-  sorry
+  classical
+  obtain ⟨k, hik, q, hqC, hq, hmodel⟩ :=
+    exists_tensor_model_algebra_tail F c hc f P Q aP e he
+  obtain ⟨j₀, hkj₀, hmodules⟩ :=
+    exists_eventually_compatible_module_equiv F c hc Q L
+      (e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom)
+      eM k hik q hqC hq
+  let : Module A M := Module.compHom M f.toRingHom
+  let : Module P L := Module.compHom L (algebraMap P Q)
+  refine ⟨j₀, hik.trans hkj₀, ?_⟩
+  intro j h₀ h₁
+  let hkj : k ≤ j := hkj₀.trans h₁
+  let : Algebra (F.obj i : Type v) (F.obj j : Type v) :=
+    (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+  let D := (F.obj j : Type v) ⊗[F.obj i] A
+  let E := (F.obj j : Type v) ⊗[F.obj i] B
+  let d : D →+* E :=
+    (Algebra.TensorProduct.map (AlgHom.id (F.obj j) (F.obj j)) f).toRingHom
+  let : Algebra D E := d.toAlgebra
+  let : Algebra Q E := (q j hkj).toAlgebra
+  obtain ⟨aPj, hPQ, hpush⟩ := hmodel j hkj
+  let : Algebra P D := aPj
+  let : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
+  let : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
+  let : IsScalarTower P Q E := hPQ
+  let : Algebra.IsPushout P D Q E := hpush
+  let : Algebra A D := Algebra.TensorProduct.rightAlgebra
+  refine ⟨aPj, ?_⟩
+  obtain ⟨u⟩ := hmodules j hkj₀ h₁
+  let : IsScalarTower P Q L := IsScalarTower.of_compHom P Q L
+  let : Algebra B E := Algebra.TensorProduct.rightAlgebra
+  let : Algebra A B := f.toRingHom.toAlgebra
+  let : Algebra A E :=
+    (Algebra.TensorProduct.includeRight.toRingHom.comp f.toRingHom).toAlgebra
+  let : IsScalarTower A B E := .of_algebraMap_eq fun _ ↦ rfl
+  let : IsScalarTower A B M := IsScalarTower.of_compHom A B M
+  let : IsScalarTower A D E := .of_algebraMap_eq fun a ↦ by
+    change (1 : F.obj j) ⊗ₜ[F.obj i] f a = _
+    rfl
+  let : IsScalarTower (F.obj i) A B :=
+    .of_algebraMap_eq fun s ↦ (f.commutes s).symm
+  let : IsScalarTower (F.obj j) D E := .of_algebraMap_eq fun a ↦ by
+    change a ⊗ₜ[F.obj i] (1 : B) = a ⊗ₜ[F.obj i] f 1
+    rw [map_one]
+  let : IsScalarTower (F.obj i) D E := .of_algebraMap_eq fun a ↦ by
+    change (algebraMap (F.obj i) (F.obj j) a) ⊗ₜ[F.obj i] (1 : B) =
+      (algebraMap (F.obj i) (F.obj j) a) ⊗ₜ[F.obj i] f 1
+    rw [map_one]
+  let : Algebra.IsPushout (F.obj i) A (F.obj j) D := inferInstance
+  let : Algebra.IsPushout (F.obj i) B (F.obj j) E := inferInstance
+  have hAB : Algebra.IsPushout A B D E :=
+    (Algebra.IsPushout.comp_iff (F.obj i) A (F.obj j) D (T := B) (T' := E)).mp
+      inferInstance
+  let : Algebra.IsPushout A D B E := hAB.symm
+  let : AddCommGroup L := Module.addCommMonoidToAddCommGroup Q
+  let : AddCommGroup M := Module.addCommMonoidToAddCommGroup B
+  exact ⟨(Algebra.IsPushout.cancelBaseChange P D Q E L).symm.trans
+    ((u.restrictScalars D).trans (Algebra.IsPushout.cancelBaseChange A D B E M))⟩
 
 end AlgebraicGeometry
