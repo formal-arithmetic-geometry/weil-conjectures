@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Homology.HomTensorDifferentialSummand
+import Sheaf.Algebra.Homology.HomTensorSummandRestriction
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
 
 /-!
 # Component of the iterated Hom differential after currying
@@ -25,6 +28,15 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
+private lemma homObjMap_add_first {A A' B : Mod} (f g : A' ⟶ A) :
+    SheafOfModules.homObjMap (R := R) (f + g) (𝟙 B) =
+      SheafOfModules.homObjMap (R := R) f (𝟙 B) +
+        SheafOfModules.homObjMap (R := R) g (𝟙 B) :=
+  SheafOfModules.hom_ext
+    (PresheafOfModules.homObjMap_add_left (R := R.obj) f.val g.val (𝟙 B.val))
+
+set_option maxHeartbeats 1000000 in
+-- Rewriting the total-complex differential elaborates the dependent coproduct indices.
 set_option synthInstance.maxSize 256 in
 /-- The component of the iterated Hom differential after degreewise currying.
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
@@ -60,6 +72,26 @@ theorem homTensorDegreewiseMap_iteratedDifferential_component
       n.negOnePow • (homTensorDegreewiseMap R K L M n ≫
         homTensorProjection R T M n (t + 1) (t + (n + 1)) (by omega) ≫
           SheafOfModules.homObjMap (R := R) (T.d t (t + 1)) (𝟙 (M.X (t + (n + 1))))) :=
-  by sorry
+  by
+    let := SheafOfModules.monoidalCategory R
+    let T := CochainComplex.mapBifunctor K L (curriedTensor Mod)
+    apply homTensorSummandRestriction_ext R K L t
+    intro p q h
+    rw [Preadditive.sub_comp, Linear.units_smul_comp]
+    simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
+      Category.comp_id]
+    have hd :
+        CochainComplex.ιMapBifunctor K L (curriedTensor Mod) p q t h ≫
+          T.d t (t + 1) =
+        HomologicalComplex.mapBifunctor.d₁ K L (curriedTensor Mod)
+          (ComplexShape.up ℤ) p q (t + 1) +
+        HomologicalComplex.mapBifunctor.d₂ K L (curriedTensor Mod)
+          (ComplexShape.up ℤ) p q (t + 1) := by
+      rw [HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add,
+        HomologicalComplex.mapBifunctor.ι_D₁, HomologicalComplex.mapBifunctor.ι_D₂]
+    rw [hd, homObjMap_add_first, Preadditive.comp_add, Preadditive.comp_add, smul_add]
+    rw [← sub_sub]
+    simpa only [Category.assoc] using
+      homTensorDegreewiseMap_iteratedDifferential_summand R K L M n t p q h
 
 end CategoryTheory

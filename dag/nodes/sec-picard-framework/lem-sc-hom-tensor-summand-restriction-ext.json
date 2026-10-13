@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-hom-tensor-summand-restriction-ext",
+ "kind": "statement",
+ "title": "Internal Hom maps determined by total tensor summand restrictions",
+ "statement": "Let C be a site, R a sheaf of commutative rings, and Mod(R) its category of sheaf modules. For cochain complexes K,L in Mod(R) put T=Tot(K tensor L) [def-pc-tensor-complex-sheaves], using the sheaf tensor [def-pur-sheaf-tensor-product]. For every integer t and modules A,N, two morphisms f,g:A→internalHom(T^t,N) [def-pur-sheaf-hom] are equal if for every p,q with p+q=t their composites with precomposition by the summand inclusion ι_(p,q):K^p tensor L^q→T^t are equal. No differentials or currying maps of Hom complexes occur in this criterion.",
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Lemma internal-hom-adjoint-tensor (Tag 03EO), with the coproduct universal property"
+ },
+ "proof": [
+  {
+   "text": "Use the tensor-Hom adjunction [lem-pc-sheaf-modules-tensor-closed] to uncurry f and g into maps T^t tensor A→N. Naturality identifies the assumed internal Hom restrictions with precomposition by ι_(p,q) tensor identity_A.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor with A preserves coproducts: by symmetry it is isomorphic to the tensor-left functor, which has internal Hom as right adjoint. Apply the coproduct universal property to the total-degree coproduct [def-pc-tensor-complex-sheaves] after tensoring. The uncurried maps agree on every summand, so they agree. Injectivity of the tensor-Hom equivalence gives f=g. This works for all integer t and for zero summands; it does not assume that sections of sheaf tensor are sums of global pure tensors.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Lemma internal-hom-adjoint-tensor (Tag 03EO), with the coproduct universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps into internal Hom of a coproduct are determined by restriction to each summand",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from coproduct, restrictions to summands jointly determine a morphism",
+   "results": "Sigma.hom_ext, Sigma.hom_ext_iff, coprod.hom_ext: maps out of ordinary coproducts. No sheaf internal-Hom result.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; ordinary coproduct extensionality is part of the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "curry.*(differential|negOnePow)|homObj.*(coproduct|Coproduct), Mathlib/CategoryTheory/Monoidal and Mathlib/Algebra/Homology",
+   "results": "No matching formula; Bifunctor.lean supplies mapBifunctor.d_eq, ι_D₁ and ι_D₂ for assembly. Existing Sheaf HomTensorDegreewise supplies the defining currying equation, but no summand differential expansion.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDifferentialComponent",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-differential",
+   "place": "component calculation: Internal Hom maps determined by total tensor summand restrictions",
+   "via": [
+    "lem-sc-hom-tensor-iterated-differential-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorSummandRestriction",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorSummandRestriction.lean",
+  "declaration": "CategoryTheory.homTensorSummandRestriction_ext",
+  "statement": "theorem homTensorSummandRestriction_ext\n    (K L : CochainComplex Mod ℤ) (t : ℤ) (A N : Mod) :\n    letI := SheafOfModules.monoidalCategory R\n    let T := CochainComplex.mapBifunctor K L (curriedTensor Mod)\n    ∀ (f g : A ⟶ SheafOfModules.homObj (R := R) (T.X t) N),\n      (∀ (p q : ℤ) (h : p + q = t),\n        f ≫ SheafOfModules.homObjMap (R := R)\n          (CochainComplex.ιMapBifunctor K L (curriedTensor Mod) p q t h) (𝟙 N) =\n        g ≫ SheafOfModules.homObjMap (R := R)\n          (CochainComplex.ιMapBifunctor K L (curriedTensor Mod) p q t h) (𝟙 N)) →\n      f = g",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T040754-L-3950618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T040754-L-3950618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-hom-tensor-iterated-differential-summand",
+ "kind": "statement",
+ "title": "Three-term iterated Hom differential on one tensor summand",
+ "statement": "Let C be a site, R a sheaf of commutative rings, and K,L,M cochain complexes of R-modules. Use the chosen Hom complex and projections [def-pur-hom-complex] and degreewise currying a_n [lem-sc-hom-tensor-degreewise]. Put T=Tot(K tensor L) [def-pc-tensor-complex-sheaves]. For integers n,t,p,q with p+q=t, let ι:K^p tensor L^q→T^t be the summand inclusion, and let d1,d2:K^p tensor L^q→T^(t+1) be the first and signed second summand differentials. After restriction by internalHom(ι,id), d_iterated a_(n+1) π_(n+1,t) equals a_n π_(n,t) internalHom(ι,d_M) minus (-1)^n a_n π_(n,t+1) internalHom(d1,id) minus (-1)^n a_n π_(n,t+1) internalHom(d2,id). Here d1 sends x tensor y to d_K x tensor y, while d2 sends it to (-1)^p x tensor d_L y. This statement concerns one summand only, with separate differential contributions.",
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "lem-sc-hom-tensor-degreewise",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), referring to More on Algebra Tag 0A5Y"
+ },
+ "proof": [
+  {
+   "text": "Use the defining currying equation [lem-sc-hom-tensor-degreewise] at n+1, then the outer Hom differential projection identity [def-pur-hom-complex]. Evaluate on localized sections x of K^p and y of L^q: the postcomposition term applies the inner differential to f(x); the precomposition term is minus (-1)^n f(d_K x)(y). Apply the inner Hom projection identity to the first term, giving d_M(f(x)(y)) minus (-1)^(p+n) f(x)(d_L y).",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor summand maps d1 and d2 have the values stated above [def-pc-tensor-complex-sheaves]. Identify the degree-n evaluations using the currying equation [lem-sc-hom-tensor-degreewise]. The integer sign identity (-1)^(p+n)=(-1)^n*(-1)^p makes the localized calculation exactly the three-term formula, with d2 already carrying the sign (-1)^p. This identity also holds for negative n,p.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Bilinearity extends the calculation on pure tensors to the presheaf tensor. The sheafification adjunction and tensor-Hom adjunction [lem-pc-sheaf-modules-tensor-closed] extend equality to the sheaf tensor on each localized site, hence to the internal Hom factor of this summand. No coproduct assembly or combination of d1 and d2 is claimed here. If K,L,M or their differentials vanish the same computation gives zero terms.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-tensor-degreewise",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), referring to More on Algebra Tag 0A5Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Iterated Hom differential after currying on one tensor summand has target, left, and right differential terms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying iterated internal Hom differential on tensor cochain complexes",
+   "results": "CochainComplex.HomComplex.δ_v, δ_comp, δ_hom_apply, δ_single: group-valued cochains only, no sheaf internal-Hom summand formula.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "curry.*(differential|negOnePow)|homObj.*(coproduct|Coproduct), Mathlib/CategoryTheory/Monoidal and Mathlib/Algebra/Homology",
+   "results": "No matching formula; Bifunctor.lean supplies mapBifunctor.d_eq, ι_D₁ and ι_D₂ for assembly. Existing Sheaf HomTensorDegreewise supplies the defining currying equation, but no summand differential expansion.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDifferentialComponent",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-differential",
+   "place": "component calculation: Three-term iterated Hom differential on one tensor summand",
+   "via": [
+    "lem-sc-hom-tensor-iterated-differential-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorDifferentialSummand",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorDifferentialSummand.lean",
+  "declaration": "CategoryTheory.homTensorDegreewiseMap_iteratedDifferential_summand",
+  "statement": "theorem homTensorDegreewiseMap_iteratedDifferential_summand\n    (K L M : CochainComplex Mod ℤ) (n t p q : ℤ) (h : p + q = t) :\n    letI := SheafOfModules.monoidalCategory R\n    let T := CochainComplex.mapBifunctor K L (curriedTensor Mod)\n    let ι := CochainComplex.ιMapBifunctor K L (curriedTensor Mod) p q t h\n    (homComplex (R := R) K (homComplex (R := R) L M)).d n (n + 1) ≫\n        homTensorDegreewiseMap R K L M (n + 1) ≫\n          homTensorProjection R T M (n + 1) t (t + (n + 1)) rfl ≫\n            SheafOfModules.homObjMap (R := R) ι (𝟙 (M.X (t + (n + 1)))) =\n      (homTensorDegreewiseMap R K L M n ≫\n        homTensorProjection R T M n t (t + n) rfl ≫\n          SheafOfModules.homObjMap (R := R) ι (M.d (t + n) (t + (n + 1)))) -\n      n.negOnePow • (homTensorDegreewiseMap R K L M n ≫\n        homTensorProjection R T M n (t + 1) (t + (n + 1)) (by omega) ≫\n          SheafOfModules.homObjMap (R := R)\n            (HomologicalComplex.mapBifunctor.d₁ K L (curriedTensor Mod)\n              (ComplexShape.up ℤ) p q (t + 1)) (𝟙 (M.X (t + (n + 1))))) -\n      n.negOnePow • (homTensorDegreewiseMap R K L M n ≫\n        homTensorProjection R T M n (t + 1) (t + (n + 1)) (by omega) ≫\n          SheafOfModules.homObjMap (R := R)\n            (HomologicalComplex.mapBifunctor.d₂ K L (curriedTensor Mod)\n              (ComplexShape.up ℤ) p q (t + 1)) (𝟙 (M.X (t + (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T040754-L-3950618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T040754-L-3950618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
