@@ -15,42 +15,57 @@
  ],
  "proof": [
   {
-   "text": "Enumerate the finite frame index types. In equal ranks the restriction of the morphism is a square matrix of sections on U. Take f to be its determinant. Restriction carries this matrix to the matrix on each smaller open. On D(f) the determinant is a unit, so the adjugate matrix divided by f gives an inverse. Tensor pullback along open inclusions and ordinary restriction are naturally isomorphic by uniqueness of left adjoints to module pushforward. Hence D(f) is contained in U intersect the neighbourhood-defined isomorphism locus.",
+   "text": "Choose Fintype structures on I and J. When their cardinalities agree, Fintype.equivOfCardEq and freeFunctor.mapIso reindex the target frame to I. Let psi be eM.inv followed by the restricted map followed by the reindexed eN.hom. Define delta as det(freeMatrix psi) over the global sections of the open subscheme U, and f as U.topIso.hom(delta). This constructs the witness without any unproved existence theorem.",
    "uses": [
-    "def-sc-module-map-iso-locus",
-    "def-pc-module-pullback",
-    "def-weil-affine-spectrum"
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On V = U.basicOpen(delta), the section delta restricts to a unit, by Scheme.isUnit_ι_appTop_basicOpen. Naturality of restrictFunctorIsoPullback and freeMatrix_pullback identifies the restricted free matrix with freeMatrix psi mapped by V.ι.appTop; RingHom.map_det identifies its determinant with the restricted delta. Apply local_invertible_minor_block_isIso to obtain an inverse map. The canonical frames and restrictFunctorComp transport this to invertibility of the original map restricted along V.ι followed by U.ι.",
+   "uses": [
+    "lem-pc-local-invertible-minor-block-iso",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Conversely, a point in U intersect the locus has an inverse on some neighbourhood. Intersect that neighbourhood with U and take the stalk: the transported matrices are inverse. The determinant is therefore a unit in the local ring, precisely the condition for membership in D(f). This proves the equality in equal ranks, including rank zero with determinant 1.",
+   "text": "Use uniqueness of left adjoints to pushforward to compare tensor pullback and Mathlib pullback. For an open immersion g with invertible pullback, g.isoOpensRange and pullbackComp transfer invertibility to pullback along its image-open inclusion. The defining neighbourhood criterion places every g(x) in moduleMapIsoLocus. Scheme.Opens.ι_image_basicOpen_topIso_inv identifies the image of V with W.basicOpen(f), proving the forward inclusion.",
    "uses": [
-    "def-sc-module-map-iso-locus",
     "def-pc-module-pullback",
-    "def-weil-affine-spectrum"
+    "def-sc-module-map-iso-locus"
    ],
    "elementary": false
   },
   {
-   "text": "For unequal ranks take f=0. If a point were in the intersection, the neighbourhood inverse would induce an isomorphism on residue-field vector spaces of dimensions card I and card J. Their dimensions must agree, a contradiction. Thus both sides are empty. An empty U has no points and satisfies the equality as well.",
+   "text": "For x in U intersect moduleMapIsoLocus, let y be x as a point of U and g:Spec κ(y)→U its residue-field point. The composite g followed by U.ι has singleton image x. Apply isIso_tensorPullback_of_range_subset_moduleMapIsoLocus and the pullback comparison, then pullbackComp and the given frames, to obtain an invertible pullback of psi. For a square free map, the global-section map is surjective; freeSectionsEquiv_app identifies it with multiplication by freeMatrix. Matrix.mulVec_surjective_iff_isUnit and Matrix.isUnit_iff_isUnit_det show its determinant is a unit. The freeMatrix_pullback identity and RingHom.map_det identify this with g.appTop(delta). The global sections of Spec κ(y) form a field, so this unit is nonzero. Hom.appTop_ne_zero_iff_mem_basicOpen, fromSpecResidueField_apply and the image-basic-open identity yield x in W.basicOpen(f). The two inclusions give the required equality.",
    "uses": [
-    "def-sc-module-map-iso-locus",
+    "lem-sc-module-map-iso-locus-pullback",
     "def-pc-module-pullback",
-    "def-weil-affine-spectrum"
+    "def-sc-module-map-iso-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If card I differs from card J, take f=0. A point x of U intersect the locus would give an invertible residue-field pullback by the same preceding argument. Apply global sections and freeSectionsEquiv to its two pulled-back free frames. The induced linear equivalence between the function spaces indexed by I and J over Γ(Spec κ(y),top) forces card I=card J by LinearEquiv.finrank_eq and finite-dimensional function-space finrank, a contradiction. Thus the intersection is empty, as is W.basicOpen(0). Empty U and rank zero are allowed throughout; no affineness, reducedness or positive-rank argument is used.",
+   "uses": [
+    "lem-sc-module-map-iso-locus-pullback",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-module-map-iso-locus",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-local-invertible-minor-block-iso",
   "def-pc-module-pullback",
-  "def-weil-affine-spectrum"
+  "def-sc-module-map-iso-locus",
+  "lem-sc-module-map-iso-locus-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/05GD",
-  "place": "Local finite free matrix argument in Lemma 10.79.4(3); explicit determinant expansion of the final sentence of Tag 0BDP"
+  "place": "Lemma 10.79.4(3), local free matrix and residue-field criterion; Tag 0BDP, final determinant sentence. J3 formalization uses the proved square free sheaf inverse lemma and pullback-preserves-locus theorem; it replaces the planned stalk converse by the residue-field converse."
  },
  "mathlib_searches": [
   {
@@ -159,10 +174,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T004023-L-2490829",
-  "kind": "interface",
+  "landing": "20261013T015558-L-3022073",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
