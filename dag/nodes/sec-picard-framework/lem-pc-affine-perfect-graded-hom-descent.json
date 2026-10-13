@@ -15,29 +15,30 @@
  ],
  "proof": [
   {
-   "text": "For each degree m in a finite support interval of E₀, apply the maps clause of finite-presentation descent to E₀.X m and K₀.X (m-1). Choose a common upper stage also above i. For a preorder, quotient by mutual comparability and choose representatives. This is an equivalent indexing category; F sends equivalent indices to inverse ring isomorphisms. Use finite-presentation descent on that partial-order diagram and transport back, enlarging above the requested original i. Equivalently the coefficient-matrix proof uses the elementwise filtered-colimit criterion and only directedness.",
+   "text": "Construct the zero-differential cochain complex Q with Q.X m = K₀.X (m-1). The up-shape relation from m-1 to m holds. Apply bounded graded map descent to E₀,Q and the family s m (m-1), using hbounded, hEfp and hKfp. This gives a stage j and maps v m with the canonical comparison equality. No relation to the differential of K₀ is needed, so the zero-differential construction preserves exactly the component data used here.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-bounded-graded-map-colimit-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Transport every descended component to the common stage by scalar-extension associativity. The comparison isomorphisms in the finite-presentation theorem send 1 tensor x to 1 tensor (1 tensor x). These are exactly the values of extendScalarsComp, so tensor generation identifies the comparisons with the displayed L and R, after the ring-homomorphism equality hc. Put zero outside the finite source interval; extension of scalars preserves these zero source terms. The up-shape relation n to m forces n=m-1, so this defines every required component and proves its equality to s after extension.",
-   "uses": [
-    "lem-pc-fp-module-map-descent-affine"
-   ],
-   "elementary": false
+   "text": "Choose a common upper bound k of i and j. Extend every v m from j to k and conjugate by extendScalarsComp. The private transport helper evaluates extendScalars_assoc on each module, obtains the inverse equality by Iso.ext, and applies naturality. The private transportComparisons helper substitutes the cocone ring equalities to incorporate eqToIso. Therefore the comparison at k equals the comparison at j. This proves the required component equation, independently in every degree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The relation (ComplexShape.up ℤ).Rel n m gives n+1=m, hence n=m-1. Define the requested family by w m followed by eqToHom for this equality of target terms. After substituting n=m-1 this transport is the identity. Expand the homological-complex comparison component formulas to identify the module comparisons with the displayed L.f m and R.f n. Proof irrelevance identifies the relation witnesses. This yields precisely the original conclusion, including the upper bound above i. Empty support and zero terms are handled already by bounded graded map descent.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine",
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-pc-bounded-graded-map-colimit-descent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE, affine proof of case (1), the finite number of finitely presented source terms; Algebra Tag 05N7, algebra-lemma-colimit-category-fp-modules"
+  "place": "Tag 09RE affine case (1), reusing bounded graded map descent with target terms shifted by -1; scalar-extension coherence and upper-stage enlargement proved by Q2"
  },
  "mathlib_searches": [
   {
@@ -107,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c12a9",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T100154-L-2494996",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proof with all three nodes, finite-presentation dependency, Stacks Tags 09RE/05N7, unchanged existing signature, and clean compilation of delivery plus AffinePerfectHomColimit."
+  "landing": "20261013T111913-L-3059283",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

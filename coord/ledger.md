@@ -12174,3 +12174,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/Q1/Sheaf.RingTheory.HenselianFiniteEtaleMapBijective (stage 3; reviewer PASS; first push; landing 20261013T111912-L-3058898 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/Q1/Sheaf.RingTheory.TorVanishingLocalizedAlgebra (stage 3; reviewer PASS; first push; landing 20261013T111912-L-3058997 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/Q1/Sheaf.RingTheory.TorVanishingLocalizedBase (stage 3; reviewer PASS; first push; landing 20261013T111912-L-3059175 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/Q2/Sheaf.Algebra.Homology.AffinePerfectGradedHomDescent (stage 3; reviewer PASS; first push; landing 20261013T111913-L-3059283 (proof); batch 20261013T111833; modules 1; new nodes 0)
