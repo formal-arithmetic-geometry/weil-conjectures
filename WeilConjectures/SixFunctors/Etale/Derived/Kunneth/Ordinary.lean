@@ -792,7 +792,8 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
   isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ aX
-    (hasFiniteCohomologicalDimension_of_isSepClosed Λ aX) E C
+    (hasFiniteCohomologicalDimension_of_isSepClosed Λ (fun x ↦ isOfFinAddOrder_of_finite x) aX)
+    E C
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
