@@ -1,0 +1,105 @@
+{
+ "id": "new-single-complex-open-union-ses-core",
+ "kind": "statement",
+ "title": "Strict chain model data for union comparison arrows",
+ "statement": "For the comparison arrows on U ⊔ V, U, V and U ⊓ V, there are strict chain maps t,t',α,β with t≫β=α≫t' and derived-category isomorphisms from A,B,Cone(t),A',B',Cone(t') to the six displayed vertices.",
+ "stmt_deps": [
+  "def-pc-single-complex-open-comparison",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 08HZ, 08HY and 0DJ9, chain-level K-injective restriction construction"
+ },
+ "proof": [
+  {
+   "text": "Choose K-injective resolutions with injective terms, form the degreewise restriction sequence on the compact-open union and its two members, and lift the coefficient morphism functorially. The resulting strict square and functorial cone comparisons give the six displayed isomorphisms.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Chain-level decomposition of the union SES presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict chain model for Mayer-Vietoris union comparison arrows",
+   "results": "No exact match; geometric construction required.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "chain complexes cone derived category isomorphism Mayer Vietoris",
+   "results": "Generic cone lemmas only.",
+   "date": "2026-10-14",
+   "verdict": "partial match only"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplexOpenComparison union chain model",
+   "results": "No existing declaration.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESObjects",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnionSESCore.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_union_ses_core",
+  "statement": "theorem singleComplexOpenComparison_union_ses_core [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K') (φ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X)) (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) : let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦ Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z) ∃ (A B A' B' : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ) (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B') (hc : t ≫ β = α ≫ t') (e₁ : DerivedCategory.Q.obj A ≅ (a (U ⊔ V)).left) (e₂ : DerivedCategory.Q.obj B ≅ (a U).left ⊞ (a V).left) (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ (a (U ⊓ V)).left) (e₁' : DerivedCategory.Q.obj A' ≅ (a (U ⊔ V)).right) (e₂' : DerivedCategory.Q.obj B' ≅ (a U).right ⊞ (a V).right) (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ (a (U ⊓ V)).right), True",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-single-complex-open-union-ses-objects",
+   "place": "Strict chain-model part of the union SES construction",
+   "via": [
+    "new-single-complex-open-union-ses-objects"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820751",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

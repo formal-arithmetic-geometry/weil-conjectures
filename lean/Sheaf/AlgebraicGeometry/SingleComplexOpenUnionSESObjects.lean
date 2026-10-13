@@ -5,6 +5,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
+import Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCore
+import Sheaf.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
 
 /-! # Construction component for the union SES presentation
 (blueprint: new-single-complex-open-union-ses-objects). -/
@@ -15,17 +17,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Chain-level component split from the union SES presentation.
-
-The construction follows the compact-open Mayer--Vietoris restriction row: resolve
-the two coefficients by K-injective complexes, form the degreewise short exact
-restriction complexes on `U`, `V`, and `U ⊓ V`, and transport them through the
-derived pullback and direct-image comparison isomorphisms.  The mapping-cylinder
-construction on the first maps supplies the six displayed vertex isomorphisms
-and preserves short exactness.  This is the construction component of the
-parent presentation theorem; the proof is postponed to the corresponding DAG
-node.
-(blueprint: new-single-complex-open-union-ses-objects). -/
+set_option linter.unusedVariables false in
 theorem singleComplexOpenComparison_union_ses_objects
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -50,6 +42,16 @@ theorem singleComplexOpenComparison_union_ses_objects
       (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ (a (U ⊔ V)).right)
       (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (a U).right ⊞ (a V).right)
       (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (a (U ⊓ V)).right),
-      P.ShortExact ∧ P'.ShortExact := by sorry
+      P.ShortExact ∧ P'.ShortExact := by
+  dsimp only
+  let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦
+    Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)
+  obtain ⟨A, B, A', B', t, t', α, β, hc, e₁, e₂, e₃, e₁', e₂', e₃', _⟩ :=
+    singleComplexOpenComparison_union_ses_core f f' g g' sq K hK K' hK' φ U V
+      hUqc hVqc hUVqc
+  obtain ⟨P, P', _m, _d₁, _d₂, _d₃, _d₁', _d₂', _d₃', hP, hP', _⟩ :=
+    cone_diagram_ses_presentation A B A' B' t t' α β hc
+  exact ⟨P, P', _m, _d₁ ≪≫ e₁, _d₂ ≪≫ e₂, _d₃ ≪≫ e₃,
+    _d₁' ≪≫ e₁', _d₂' ≪≫ e₂', _d₃' ≪≫ e₃', hP, hP'⟩
 
 end AlgebraicGeometry
