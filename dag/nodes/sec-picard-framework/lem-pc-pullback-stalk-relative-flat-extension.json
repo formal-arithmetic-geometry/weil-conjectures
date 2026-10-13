@@ -20,7 +20,7 @@
    "elementary": false
   },
   {
-   "text": "For an injection N -> Nprime of B-modules, R-flatness of M gives injectivity of M tensor_R N -> M tensor_R Nprime. These are D-modules (A acts on M, B on N). D-flatness of C preserves injectivity after tensoring by C over D. The balanced isomorphisms (C tensor_A M) tensor_B N = C tensor_D (M tensor_R N), sending (c tensor m) tensor n to c tensor (m tensor n), identify this map with the tensor of the original injection. The inverse reverses this formula; balancing over A, B and R and naturality are checked on pure tensors. The tensor-injectivity criterion gives B-flatness. The zero module and an empty fibre product give no exception.",
+   "text": "Give M tensor_R N its A tensor_R B action using TensorProduct.Algebra.module and the B-action transported through TensorProduct.comm. Construct both balanced additive maps using TensorProduct.liftAddHom. The projection compatibility equations verify A- and B-balancing, and scalar towers verify R-balancing. Tensor induction proves the maps inverse and natural in each B-linear map N -> Nprime. Apply Module.Flat.lTensor_preserves_injective_linearMap first over R to M, then over A tensor_R B to C; transport injectivity through the balanced equivalence and use Module.Flat.iff_lTensor_preserves_injective_linearMap. All these algebraic steps are proved by private helpers in the item; no new sorry or module is needed.",
    "uses": [
     "lem-weil-pbc-flat-tensor-exact"
    ],
@@ -32,10 +32,11 @@
   "lem-weil-pbc-flat-tensor-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "P1",
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/051D",
-  "place": "Algebra, Lemma 10.100.1(1), proof; Examples Tag 0FLS, canonical stalk map"
+  "place": "Algebra, Lemma 10.100.1(1), proof; Examples Tag 0FLS, canonical stalk map; complete Lean proof via the tensor-injectivity criterion, with explicit balanced maps and naturality."
  },
  "mathlib_searches": [
   {
@@ -106,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-2acad",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T082400-L-1642127",
+  "landing": "20261013T100036-L-2471144",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and implemented proof with its node and dependencies; delivered module and sole direct importer compile cleanly, and all 22 declarations use only permitted axioms."
  }
 }
