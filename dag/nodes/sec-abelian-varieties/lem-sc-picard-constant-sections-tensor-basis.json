@@ -16,14 +16,24 @@
  },
  "proof": [
   {
-   "text": "The constant M presheaf is the coproduct of copies of the constant k module using the basis representation b.repr, sectionwise; identity restrictions commute with this expansion.",
+   "text": "Use the basis representation b.repr to identify the constant vector presheaf with the free module presheaf on the constant type I. The component is b.repr.symm; naturality is checked on free generators, where both restriction maps are identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the free-presheaf adjunction over the constant ring with the pullback-pushforward adjunction along the structure ring map [def-sc-field-linear-module-cohomology-operations]. For the identity functor on opens, pushforward followed by forgetting scalars is definitionally the target forgetful functor. Uniqueness of left adjoints therefore identifies scalar extension of the free constant-I presheaf with the free constant-I presheaf over the structure ring.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Presheaf extension of scalars is left adjoint to restriction and takes the constant unit to the structure-presheaf unit, by uniqueness of the represented Hom functor. It preserves the basis coproduct. Tensoring with G preserves coproducts, and the left unitor identifies each unit-tensor-G summand with G. Compose these isomorphisms. This also covers zero modules and empty index types.",
+   "text": "Construct the coproduct cofan of copies of the unit into the free constant-I presheaf by its generator sections i. For any cofan t, the descent map sends the i-th generator on U to t.inj(i).app(U)(1). Naturality follows from naturality of the unit maps. The factorization identities follow by evaluating unit maps at 1; uniqueness follows by free-module generator extensionality on each open. Thus the free presheaf is the coproduct of copies of the unit, also for empty I.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose these isomorphisms to identify the scalar-extended constant vector presheaf with the coproduct of unit presheaves. Mathlib proves that pointwise tensorRight G.val preserves coproducts. Its coproduct comparison and the left unitors give the coproduct of copies of G.val. Tensor the scalar-extension isomorphism with the identity of G.val and compose.",
    "uses": [],
    "elementary": true
   }
@@ -34,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, ordinary direct-image degree-zero tensor calculation; read at https://stacks.math.columbia.edu/tag/0BED"
+  "place": "Tag 0BED, lemma-kunneth, second isomorphism in the ordinary direct-image degree-zero calculation; read at https://stacks.math.columbia.edu/tag/0BED. Formalized by A3 using Mathlib freeAdjunction, pullbackPushforwardAdjunction, leftAdjointUniq, unitHomEquiv and PreservesCoproduct.iso."
  },
  "mathlib_searches": [
   {
@@ -119,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W4",
+  "reviewer": "X-b6671",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T131329-L-4035340",
+  "landing": "20261013T150349-L-808638",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered theorem and proof with the node, unchanged library interfaces, metadata, report, clean compilation, and permitted axioms."
  }
 }

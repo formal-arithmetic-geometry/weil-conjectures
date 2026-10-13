@@ -25,6 +25,8 @@ open scoped MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The constant ring map induced by the structure morphism.
 Source: Stacks Project, Varieties, Tag 0BED, scalar coefficients in the ordinary
@@ -64,6 +66,79 @@ def picardConstantSectionsTensor (k : Type w) [Field k] (Y : Scheme.{w})
     (picardConstantVector k Y M)) ⊗ G.val
 
 
+private def constantBasisIso (k : Type w) [Field k] (Y : Scheme.{w})
+    (M : ModuleCat.{w} k) (I : Type w) (b : Module.Basis I k M) :
+    (PresheafOfModules.free ((Functor.const Y.Opensᵒᵖ).obj (RingCat.of k))).obj
+      ((Functor.const Y.Opensᵒᵖ).obj I) ≅ picardConstantVector k Y M :=
+  PresheafOfModules.isoMk (fun _ ↦ b.repr.symm.toModuleIso) (by
+    intro U V f
+    apply ModuleCat.free_hom_ext
+    intro i
+    simp [PresheafOfModules.free, PresheafOfModules.freeObj, picardConstantVector]
+    rfl)
+
+private def scalarExtensionFreeIso (k : Type w) [Field k] (Y : Scheme.{w})
+    (g : Y ⟶ Spec (CommRingCat.of k)) :
+    PresheafOfModules.free ((Functor.const Y.Opensᵒᵖ).obj (RingCat.of k)) ⋙
+      PresheafOfModules.pullback (picardConstantRingMap k Y g) ≅
+        PresheafOfModules.free Y.ringCatSheaf.obj :=
+  ((PresheafOfModules.freeAdjunction _).comp
+    (PresheafOfModules.pullbackPushforwardAdjunction (picardConstantRingMap k Y g))).leftAdjointUniq
+      (PresheafOfModules.freeAdjunction _)
+
+private def freeConstantCofan {C : Type w} [SmallCategory C]
+    (R : Cᵒᵖ ⥤ RingCat.{w}) (I : Type w) :
+    Cofan (fun _ : I ↦ PresheafOfModules.unit R) :=
+  Cofan.mk ((PresheafOfModules.free R).obj ((Functor.const Cᵒᵖ).obj I))
+    (fun i ↦ (PresheafOfModules.unitHomEquiv _).symm
+      (PresheafOfModules.sectionsMk (fun _ ↦ ModuleCat.freeMk i) (by
+        intro U V f
+        exact ModuleCat.freeDesc_apply _ i)))
+
+private lemma freeConstantCofan_inj_one {C : Type w} [SmallCategory C]
+    (R : Cᵒᵖ ⥤ RingCat.{w}) (I : Type w) (i : I) (U : Cᵒᵖ) :
+    ((freeConstantCofan R I).inj i).app U (1 : R.obj U) = ModuleCat.freeMk i := by
+  exact congrArg (fun s ↦ s.val U)
+    ((PresheafOfModules.unitHomEquiv (freeConstantCofan R I).pt).apply_symm_apply
+      (PresheafOfModules.sectionsMk (M := (freeConstantCofan R I).pt)
+        (fun _ ↦ ModuleCat.freeMk i) (by
+        intro X Y f
+        exact ModuleCat.freeDesc_apply _ i)))
+
+private def freeConstantDesc {C : Type w} [SmallCategory C]
+    (R : Cᵒᵖ ⥤ RingCat.{w}) (I : Type w)
+    (t : Cofan (fun _ : I ↦ PresheafOfModules.unit R)) :
+    (freeConstantCofan R I).pt ⟶ t.pt :=
+  PresheafOfModules.freeObjDesc
+    { app := fun U ↦ ↾fun i ↦ (t.inj i).app U (1 : R.obj U)
+      naturality := fun U V f ↦ by
+        ext i
+        exact ((PresheafOfModules.unitHomEquiv t.pt) (t.inj i)).property f |>.symm }
+
+private def freeConstantIsColimit {C : Type w} [SmallCategory C]
+    (R : Cᵒᵖ ⥤ RingCat.{w}) (I : Type w) :
+    IsColimit (freeConstantCofan R I) := by
+  refine Cofan.IsColimit.mk _ (freeConstantDesc R I) ?_ ?_
+  · intro t i
+    apply (PresheafOfModules.unitHomEquiv t.pt).injective
+    ext U
+    change (freeConstantDesc R I t).app U
+      (((freeConstantCofan R I).inj i).app U (1 : R.obj U)) =
+        (t.inj i).app U (1 : R.obj U)
+    rw [freeConstantCofan_inj_one]
+    exact ModuleCat.freeDesc_apply _ i
+  · intro t m hm
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.free_hom_ext
+    intro i
+    have h := congrArg (fun a ↦ (a.app U).hom (1 : R.obj U)) (hm i)
+    change (m.app U).hom (((freeConstantCofan R I).inj i).app U (1 : R.obj U)) =
+      (t.inj i).app U (1 : R.obj U) at h
+    rw [freeConstantCofan_inj_one] at h
+    exact h.trans (ModuleCat.freeDesc_apply
+      (↾fun j ↦ (t.inj j).app U (1 : R.obj U)) i).symm
+
 /-- A prescribed basis identifies the tensor coefficient presheaf with a coproduct.
 Source: Stacks Project, Varieties, Tag 0BED, the second isomorphism in the
 ordinary direct-image calculation.
@@ -85,7 +160,26 @@ theorem exists_picard_constant_sections_tensor_basis
     (k : Type w) [Field k] (Y : Scheme.{w})
     (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)
     (I : Type w) (b : Module.Basis I k M) :
-    Nonempty ((∐ fun _ : I ↦ G.val) ≅ picardConstantSectionsTensor k Y g M G) := by sorry
+    Nonempty ((∐ fun _ : I ↦ G.val) ≅ picardConstantSectionsTensor k Y g M G) := by
+  let R := Y.ringCatSheaf.obj
+  let F := PresheafOfModules.pullback (picardConstantRingMap k Y g)
+  let e : (∐ fun _ : I ↦ PresheafOfModules.unit R) ≅
+      F.obj (picardConstantVector k Y M) :=
+    (colimit.isColimit _).coconePointUniqueUpToIso (freeConstantIsColimit R I) ≪≫
+      ((scalarExtensionFreeIso k Y g).app ((Functor.const Y.Opensᵒᵖ).obj I)).symm ≪≫
+        F.mapIso (constantBasisIso k Y M I b)
+  have : PreservesColimitsOfSize.{w, w}
+      (CategoryTheory.MonoidalCategory.tensorRight G.val) := by
+    change PreservesColimitsOfSize.{w, w}
+      (CategoryTheory.MonoidalCategory.tensorRight
+        (C := _root_.PresheafOfModules.{w}
+          (Y.presheaf ⋙ forget₂ CommRingCat RingCat)) G.val)
+    infer_instance
+  exact ⟨Sigma.mapIso (fun _ : I ↦ (λ_ G.val).symm) ≪≫
+    (PreservesCoproduct.iso (CategoryTheory.MonoidalCategory.tensorRight G.val)
+      (fun _ : I ↦ PresheafOfModules.unit R)).symm ≪≫
+        CategoryTheory.MonoidalCategory.tensorIso e (Iso.refl G.val)⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
+
