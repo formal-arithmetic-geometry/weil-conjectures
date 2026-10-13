@@ -8,7 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Mathlib.Algebra.Homology.ModelCategory.Injective
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage.Rows
 import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
 
 /-! # The object stage of a Cartan–Eilenberg comparison
@@ -23,6 +24,17 @@ universe v₁ v₂ u₁ u₂
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private theorem cycleObjectRow_shortExact
+    {A : Type u₁} [Category.{v₁} A] [Abelian A]
+    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (p : ℤ) :
+    (cartanEilenbergCycleObjectRow I p).ShortExact where
+  exact := (cartanEilenbergCycleObjectRow I p).exact_of_f_is_kernel
+    (isKernelOfComp (image.ι (I.d p (p + 1))) (I.d p (p + 1))
+      (I.cyclesIsKernel p (p + 1) (by simp)) (cartanEilenbergCycleObjectRow I p).zero
+      (image.fac (I.d p (p + 1))))
+  mono_f := by change Mono (I.iCycles p); infer_instance
+  epi_g := by change Epi (factorThruImage (I.d p (p + 1))); infer_instance
 
 /-- Extend a specified augmented cycle map through the object column.
 No incoming boundary map or homology comparison is involved.
@@ -82,6 +94,60 @@ theorem exists_cartanEilenberg_comparison_object_stage
         u.f p ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X p)).inv ≫
           (eJ.f p).f 0) ∧
       (F.mapHomologicalComplex (ComplexShape.up ℕ)).map (I.iCycles p) ≫ x =
-        y ≫ J.iCycles p := by sorry
+        y ≫ J.iCycles p := by
+  subst q
+  have hp : p + 1 - 1 = p := by omega
+  rw [hp] at hIout hJout hJoutInj
+  obtain ⟨a, b, f, δ, γ, ha₁, hb₁, ha₂, hb₂⟩ :=
+    exists_cartanEilenberg_comparison_augmented_rows F K L u p I eI hIcol hIcycles
+      hIout J eJ hJcol hJcycles hJout
+  let := a.quasiIso₁
+  let := a.quasiIso₂
+  let := a.quasiIso₃
+  let JA : InjectiveResolution b.base.X₁ :=
+    { cocomplex := J.cycles p
+      injective := hJcyclesInj
+      ι := b.augmentation.τ₁
+      quasiIso := b.quasiIso₁ }
+  let JB : InjectiveResolution b.base.X₂ :=
+    { cocomplex := J.X p
+      injective := hJinj
+      ι := b.augmentation.τ₂
+      quasiIso := b.quasiIso₂ }
+  let JC : InjectiveResolution b.base.X₃ :=
+    { cocomplex := image (J.d p (p + 1))
+      injective := hJoutInj
+      ι := b.augmentation.τ₃
+      quasiIso := b.quasiIso₃ }
+  let c := InjectiveResolution.descOfQuasiIso f.τ₃ JC a.augmentation.τ₃
+  have hc : a.augmentation.τ₃ ≫ c = (CochainComplex.single₀ B).map f.τ₃ ≫ JC.ι :=
+    InjectiveResolution.descOfQuasiIso_commutes _ _ _
+  have hy' : a.augmentation.τ₁ ≫ y = (CochainComplex.single₀ B).map f.τ₁ ≫ JA.ι := by
+    apply HomologicalComplex.from_single_hom_ext
+    apply (cancel_mono ((J.iCycles p).f 0)).1
+    simp only [HomologicalComplex.comp_f, Category.assoc]
+    rw [ha₁, Category.assoc, hy]
+    exact hb₁.symm
+  obtain ⟨x, hx, hi, _⟩ := InjectiveResolution.exists_horseshoe_morphism_lift_exact_source
+    a.base b.base a.base_shortExact b.base_shortExact f
+    _ _ _ a.augmentation.τ₁ a.augmentation.τ₂ a.augmentation.τ₃
+    _ _ ((cartanEilenbergCycleObjectRow I p).map
+      (F.mapHomologicalComplex (ComplexShape.up ℕ))).zero
+    a.augmentation.comm₁₂ a.augmentation.comm₂₃
+    (fun n ↦ ((cycleObjectRow_shortExact I p).map_of_exact
+      (F.mapHomologicalComplex (ComplexShape.up ℕ))).map_of_exact
+        (HomologicalComplex.eval B (ComplexShape.up ℕ) n))
+    JA JB JC _ _ (cartanEilenbergCycleObjectRow J p).zero
+    b.augmentation.comm₁₂ b.augmentation.comm₂₃
+    (fun n ↦ (cycleObjectRow_shortExact J p).map_of_exact
+      (HomologicalComplex.eval B (ComplexShape.up ℕ) n))
+    y c hy' hc
+  refine ⟨x, ?_, hi⟩
+  have hx₀ := congrArg (fun k ↦ k.f 0) hx
+  change a.augmentation.τ₂.f 0 ≫ x.f 0 =
+    ((CochainComplex.single₀ B).map f.τ₂).f 0 ≫ b.augmentation.τ₂.f 0 at hx₀
+  rw [ha₂, Category.assoc, hx₀]
+  exact hb₂
+
 
 end CategoryTheory

@@ -11403,3 +11403,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineAlternatingCechAugmentedConstruction (stage 3; reviewer PASS; first push; landing 20261013T062521-L-732713 (interface); batch 20261013T062512; modules 5; new nodes 4)
 - 06:25 L: merged deliver/H2/Sheaf.AlgebraicGeometry.ProperFlatSingleLocalFiniteTor (stage 3; reviewer PASS; after a return; landing 20261013T062522-L-732905 (proof); batch 20261013T062512; modules 1; new nodes 0)
 - 06:25 L: merged deliver/H2/Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate (stage 3; reviewer PASS; after a return; landing 20261013T062522-L-733115 (proof); batch 20261013T062512; modules 1; new nodes 0)
+- 06:25 L: merged deliver/H2/Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage (stage 3; reviewer PASS; first push; landing 20261013T062523-L-733340 (interface); batch 20261013T062512; modules 2; new nodes 1)

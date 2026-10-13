@@ -14,38 +14,51 @@
  },
  "proof": [
   {
-   "text": "With $q-1=p$, form the short exact row $0\\to Z^p(I)\\to I^p\\to\\operatorname{Im}(d_I^{p,q})\\to0$ and its target analogue. The first arrow is the kernel inclusion and the last is the image factor; hence these rows are short exact in the category of resolution complexes. Evaluation and $G$ preserve their exactness. The single-degree-zero functor identifies the source rows with single complexes on $Z^p(K),K^p,B^q(K)$ and the corresponding objects for $L$.",
+   "text": "Construct the kernel/object/image row explicitly as cartanEilenbergCycleObjectRow. Its zero composite follows by cancellation of image.ι and iCycles_d. The private Lean helper cycleObjectRow_shortExact identifies iCycles as the kernel of factorThruImage via cyclesIsKernel and isKernelOfComp; factorThruImage is epi. ShortExact.map_of_exact maps the source row through F and evaluates both rows, producing exactly the degreewise exactness inputs for the horseshoe theorem.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The augmentation equation for $y$, after these identifications and cancellation of the target cycle inclusion in resolution degree zero, is the augmented cycle square. Equality in every positive resolution degree is automatic because the single complex is zero there. Thus $y$ is an augmented endpoint comparison for this short exact row.",
-   "uses": [],
-   "elementary": true
+   "text": "Use [lem-weil-pbc-ce-comparison-augmented-rows] to identify the source and target rows with augmented short exact base rows S,T and a base-row map f induced by u. This gives the six augmentation quasi-isomorphisms and the four degree-zero transport equations. Bundle the three target columns as InjectiveResolution structures, using the given termwise injectivity proofs and these augmentations.",
+   "uses": [
+    "lem-weil-pbc-ce-comparison-augmented-rows"
+   ],
+   "elementary": false
   },
   {
-   "text": "Transport the outgoing boundary augmentations to maps from single complexes on $B^q(K)$ and $B^q(L)$. Their quasi-isomorphisms say they are resolutions, and after applying $F$ this remains true. The source augmentation is monomorphic in every degree, by the degree-zero kernel identification and the zero source in positive degrees. The map induced by $u$ on outgoing boundaries therefore lifts to a complex map $c$ into the termwise injective target outgoing boundary column by [lem-weil-pbc-lift-along-injective-quasi-iso].",
+   "text": "Lift f.τ₃ from the exact augmented source outgoing-image column to the bundled target outgoing-image injective resolution. The Lean construction is InjectiveResolution.descOfQuasiIso; descOfQuasiIso_commutes gives the strict augmented square. This is the nonnegative-resolution specialization of [lem-weil-pbc-lift-along-injective-quasi-iso].",
    "uses": [
     "lem-weil-pbc-lift-along-injective-quasi-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to this cycle/object/outgoing-boundary row, prescribing $y$ and the outgoing lift $c$. The given object, cycle and outgoing-boundary columns of $J$ are injective resolutions, and the mapped source row is exact and augmented. The resulting middle map $x$ satisfies the object augmentation square and the cycle inclusion square. Retain precisely these two equations; no incoming boundary or homology argument occurs in this step.",
+   "text": "Use from_single_hom_ext to reduce the prescribed cycle augmentation square to degree zero. Cancel the monomorphic degree-zero cycle inclusion of J, substitute the first transport equation, apply hy, and use the second transport equation. This proves the exact endpoint equation needed for the prescribed cycle map y.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to S,T,f and the two augmented kernel/object/image rows. Prescribe the cycle endpoint y and the outgoing lift constructed above. The augmentation morphisms give both row squares, and the private exactness helper gives the degreewise exactness. Obtain x together with its augmentation square and its cycle inclusion square; discard only the unused outgoing square.",
    "uses": [
     "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate the middle augmentation square in degree zero. Precompose by γ.hom and apply the third and fourth transport equations. This yields the original object augmentation equation. Retain it and the horseshoe cycle square as the two required conjuncts. The original theorem signature is unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-ce-comparison-augmented-rows",
   "lem-weil-pbc-lift-along-injective-quasi-iso",
   "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Explicit expansion of the alternating-row functoriality argument of Tags 015I and 015K, using Tag 013P(2) and the existing exact-source horseshoe comparison"
+  "place": "Tags 015I, 015K and 013P(2); H2 Lean proof using explicit short exact kernel/image rows, canonical augmentation transport, descOfQuasiIso, and the exact-source horseshoe comparison."
  },
  "mathlib_searches": [
   {
@@ -131,9 +144,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T045537-L-131063",
+  "landing": "20261013T062523-L-733340",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

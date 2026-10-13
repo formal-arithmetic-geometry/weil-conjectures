@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-ce-comparison-augmented-rows",
+ "kind": "statement",
+ "title": "Canonical augmented cycle/object/outgoing-image rows",
+ "statement": "Let A and B be abelian categories [def-sp-abelian], let F:A -> B be additive and preserve finite limits and colimits, let K and L be integer-indexed cochain complexes, and let u:F(K) -> L be a complex morphism. Fix p in Z and bicomplex augmentations eI:single_0(K) -> I and eJ:single_0(L) -> J with natural-number resolution index [def-sp-double-complex-total]. Suppose the object, cycle and outgoing-image augmentation maps in horizontal degree p are quasi-isomorphisms, for both I and J. Put R_I=(Z^p(I) -> I^p -> image(d_I^{p,p+1})) and define R_J likewise; put G=F applied to resolution complexes. There exist short exact base rows S,T in B, augmentations a:single_0(S) -> G(R_I) and b:single_0(T) -> R_J whose three components are quasi-isomorphisms, a base-row morphism f:S -> T, and degree-zero identifications δ:single_0(S.X₁)^0 ~= F(Z^p(single_0(K))^0) and γ:F(K^p) ~= single_0(S.X₂)^0. They satisfy the following identities, in Lean composition order (≫): (1) a.τ₁^0 = δ.hom ≫ F((cyclesMap eI p)^0); (2) single_0(f.τ₁)^0 ≫ b.τ₁^0 ≫ (J.iCycles p)^0 = δ.hom ≫ F((single_0(K).iCycles p)^0) ≫ F(ρ_K.hom) ≫ u^p ≫ ρ_L.inv ≫ (eJ^p)^0; (3) F(ρ_K.inv ≫ (eI^p)^0) = γ.hom ≫ a.τ₂^0; (4) γ.hom ≫ single_0(f.τ₂)^0 ≫ b.τ₂^0 = u^p ≫ ρ_L.inv ≫ (eJ^p)^0. Here ρ_K:single_0(K^p)^0 ~= K^p and ρ_L are the standard singleObjXSelf identifications. This is only a row/augmentation presentation: it requires no injectivity and specifies no map between the resolution columns.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I (derived-lemma-cartan-eilenberg), alternating cycle/object/outgoing-boundary row; Remark 015K (derived-remark-functorial), naturality. Read online at https://stacks.math.columbia.edu/tag/015I and /tag/015K."
+ },
+ "proof": [
+  {
+   "text": "For K form the row Z^p(K) -> K^p -> image(d_K^{p,p+1}); for L form the same row. The first arrow is the kernel inclusion, the second factorThruImage. Their composite vanishes after composing with image.ι, which is mono. cyclesIsKernel and isKernelOfComp identify the first arrow as the kernel of the second, which is epi. Thus both base rows are short exact. These are the same kernel/object/image rows used in the main module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let S be the row for K mapped by F and T the row for L. ShortComplex.ShortExact.map_of_exact gives short exactness of S and T. The degree-zero single functor preserves finite limits and colimits. Use the canonical kernel comparison (mapCyclesIso) and image comparison for this functor to identify the cycle and outgoing-image columns of single_0(K) with single_0(Z^p(K)) and single_0(image(d_K)); the object column is already single_0(K^p). Do the same for L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each of the three source columns precompose G of the induced augmentation by the preceding column identification and by singleMapHomologicalComplex for F. This gives maps from single_0(S.X_i) to G of the corresponding column of I. Transport the two squares of the augmentation through these natural kernel and image isomorphisms, giving the ShortComplex morphism a.augmentation. Do the same without F to obtain b.augmentation into the three columns of J.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Install the assumed quasi-isomorphisms as instances. F preserves homology because it preserves finite limits and finite colimits. Applying F to each assumed source quasi-isomorphism and composing with the isomorphisms used above preserves QuasiIso. The analogous target compositions preserve the three target QuasiIso instances. These provide the six quasiIso fields of a and b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define f.τ₂=u.f p. Define f.τ₁ using the inverse cycle-preservation isomorphism F(Z^p(K)) -> Z^p(F(K)), followed by cyclesMap u p. Define f.τ₃ using the image-preservation isomorphism F(image(d_K)) -> image(d_F(K)), followed by image.map of the square (u.f p,u.f(p+1)). Naturality of cyclesMap_i and of image factorization gives f.comm₁₂ and f.comm₂₃.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let δ be the degree-zero evaluation of the source cycle-column identification used in constructing a.augmentation. Let γ be the inverse source object-column degree-zero identification. Evaluating the defining composition for a.augmentation.τ₁ gives the first equation. Evaluating the cycle naturality square gives the second equation. Evaluating the object augmentation and its naturality square gives the third and fourth equations. These are transport identities between the canonical single-complex isomorphisms; no comparison map on I or J is constructed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit single-complex and exact-functor transport of the rows in Tags 015I and 015K; no comparison lift is part of this lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Applying an exact additive functor to a cycle object image short exact row of complexes commutes with the single complex functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.iCycles",
+   "results": "Read HomologicalComplex.iCycles, HomologicalComplex.instMonoICycles, HomologicalComplex.toCycles_i, HomologicalComplex.homology_π_ι, HomologicalComplex.toCycles_i_assoc, ChainComplex.isIso_iCycles₀, HomologicalComplex.isIso_iCycles, HomologicalComplex.iCycles_d. These provide component APIs, not the augmented row presentation and its four transport equations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclesMap_i|shortExact.*image|single.*hom_ext|map.*single.*Iso",
+   "results": "Read Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean. These provide component APIs, not the augmented row presentation and its four transport equations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; comparison construction, Steps 1-3; the one-degree extension within Step 2; the object half of its one-column comparison; object-stage proof Steps 1 and 2, canonical augmented row identifications",
+   "via": [
+    "lem-weil-pbc-ce-comparison-object-stage",
+    "lem-weil-pbc-ce-comparison-column-step",
+    "lem-weil-pbc-ce-augmented-comparison",
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage.Rows",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergComparisonObjectStage/Rows.lean",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_comparison_augmented_rows",
+  "statement": "theorem exists_cartanEilenberg_comparison_augmented_rows\n    {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]\n    [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (K : CochainComplex A ℤ) (L : CochainComplex B ℤ)\n    (u : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (p : ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (eI : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I)\n    (hIcol : QuasiIso (eI.f p))\n    (hIcycles : QuasiIso (HomologicalComplex.cyclesMap eI p))\n    (hIout : QuasiIso\n      (image.map (Arrow.homMk' (eI.f p) (eI.f (p + 1)) (eI.comm p (p + 1)))))\n    (J : HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (eJ : ((CochainComplex.single₀ B).mapHomologicalComplex (ComplexShape.up ℤ)).obj L ⟶ J)\n    (hJcol : QuasiIso (eJ.f p))\n    (hJcycles : QuasiIso (HomologicalComplex.cyclesMap eJ p))\n    (hJout : QuasiIso\n      (image.map (Arrow.homMk' (eJ.f p) (eJ.f (p + 1)) (eJ.comm p (p + 1))))) :\n    ∃ (a : CartanEilenbergAugmentedRow ((cartanEilenbergCycleObjectRow I p).map\n        (F.mapHomologicalComplex (ComplexShape.up ℕ))))\n      (b : CartanEilenbergAugmentedRow (cartanEilenbergCycleObjectRow J p))\n      (f : a.base ⟶ b.base)\n      (δ : ((CochainComplex.single₀ B).obj a.base.X₁).X 0 ≅\n        F.obj (((((CochainComplex.single₀ A).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K).cycles p).X 0))\n      (γ : F.obj (K.X p) ≅ ((CochainComplex.single₀ B).obj a.base.X₂).X 0),\n      a.augmentation.τ₁.f 0 = δ.hom ≫ F.map ((HomologicalComplex.cyclesMap eI p).f 0) ∧\n      ((CochainComplex.single₀ B).map f.τ₁).f 0 ≫ b.augmentation.τ₁.f 0 ≫\n        (J.iCycles p).f 0 =\n        δ.hom ≫ F.map\n          (((((CochainComplex.single₀ A).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K).iCycles p).f 0) ≫\n          F.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X p)).hom ≫\n          u.f p ≫ (HomologicalComplex.singleObjXSelf\n            (ComplexShape.up ℕ) 0 (L.X p)).inv ≫ (eJ.f p).f 0 ∧\n      F.map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X p)).inv ≫\n        (eI.f p).f 0) = γ.hom ≫ a.augmentation.τ₂.f 0 ∧\n      γ.hom ≫ ((CochainComplex.single₀ B).map f.τ₂).f 0 ≫ b.augmentation.τ₂.f 0 =\n        u.f p ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X p)).inv ≫\n          (eJ.f p).f 0",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T062523-L-733340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T062523-L-733340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
