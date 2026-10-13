@@ -8,9 +8,13 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
-# Blueprint statements
+# The derived base change map on K-injective representatives
 
-lem-weil-pbc-derived-exchange-termwise.
+For a cartesian square `g' ≫ f = f' ≫ g` of schemes and a bounded below complex `K` of
+sheaves on `X`, represented by a K-injective complex `I`, and a K-injective replacement `J` of
+`g'^* I`, the derived base change map `g^* R f_* K ⟶ R f'_* g'^* K` is computed termwise by
+the underived base change maps `g^* f_* I^n ⟶ f'_* g'^* I^n` followed by `f'_* (g'^* I ⟶ J)`
+(blueprint: `lem-weil-pbc-derived-exchange-termwise`).
 -/
 
 @[expose] public section
@@ -19,12 +23,18 @@ universe u
 
 open CategoryTheory Category Limits Opposite
 
-namespace AlgebraicGeometry
+namespace AlgebraicGeometry.Etale
 
-open Etale
-
-/-- Blueprint: lem-weil-pbc-derived-exchange-termwise. -/
-lemma derivedExchangeTermwise
+/-- **The derived base change map is computed termwise on K-injective representatives.**
+Let `s : K ≅ I` identify `K ∈ D⁺(X)` with a K-injective complex `I`, and let `j : g'^* I ⟶ J`
+be a quasi-isomorphism to a K-injective complex `J`. There is a unique pair of homotopy
+classes `I ⟶ P`, `J ⟶ P'` into the chosen injective models of `K` and `g'^* K` compatible with
+`s` and `j`. For such a pair, these maps, the induced identifications `χ : f_* I ≅ R f_*⁺ K`,
+`χ' : f'_* J ≅ R f'_*⁺ (g'^* K)` and `σsrc : g^* f_* I ≅ g^* R f_*⁺ K` are isomorphisms, and
+under them the derived base change map is the termwise underived base change map
+`g^* f_* I ⟶ f'_* g'^* I` followed by `f'_* j`.
+(blueprint: `lem-weil-pbc-derived-exchange-termwise`) -/
+lemma derivedBaseChangeMapPlus_eq_of_isKInjective
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -59,7 +69,6 @@ lemma derivedExchangeTermwise
     let ex₀ := (NatTrans.mapHomologicalComplex
       (Etale.baseChangeMap B sq.toCommSq) (.up ℤ)).app I
     let e := ex₀ ≫ (F'.mapHomologicalComplex (.up ℤ)).map j
-    (∀ n : ℤ, ex₀.f n = (Etale.baseChangeMap B sq.toCommSq).app (I.X n)) ∧
     (∃! h : ((q.obj I ⟶ P.obj) × (q'.obj J ⟶ P'.obj)),
       s.hom ≫ DerivedCategory.Qh.map h.1 = ρ ∧
       t ≫ DerivedCategory.Qh.map h.2 = ρ') ∧
@@ -80,4 +89,4 @@ lemma derivedExchangeTermwise
         DerivedCategory.Qh.map (qY.map e) ≫ χ' := by
   sorry
 
-end AlgebraicGeometry
+end AlgebraicGeometry.Etale

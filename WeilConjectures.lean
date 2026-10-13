@@ -115,7 +115,6 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
 public import WeilConjectures.AlgebraicGeometry.Bertini
 public import WeilConjectures.AlgebraicGeometry.CechNerve
-public import WeilConjectures.AlgebraicGeometry.ChowFactorization
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
@@ -500,7 +499,6 @@ public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
-public import WeilConjectures.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import WeilConjectures.AlgebraicGeometry.PrimitiveRootsCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedCoverExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
@@ -562,7 +560,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Mul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
-public import WeilConjectures.AlgebraicGeometry.QcqsHigherDirectImage
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.RelativeGluing.BaseChange
@@ -663,7 +660,6 @@ public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.CrossIdeal
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Slices
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
-public import WeilConjectures.AlgebraicGeometry.TorsionAbelianBaseChange
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
