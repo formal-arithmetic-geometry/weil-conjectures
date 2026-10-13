@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.HorizontalDualityMateComparisons
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
+import Sheaf.AlgebraicGeometry.HorizontalOrdinaryInverseFixedPasting
 
 /-! # Ordinary inverse-square pasting with the fixed upper transport
 
@@ -22,6 +23,101 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+-- The inverse mate of transported right-adjoint uniqueness is the equivalence counit.
+private theorem transport_mate
+    {A B T : Type*} [Category* A] [Category* B] [Category* T]
+    (e : A ≌ B) {P : A ⥤ T} {Q : B ⥤ T} {c : T ⥤ A} {d : T ⥤ B}
+    (ac : P ⊣ c) (ad : Q ⊣ d) (li : Q ≅ e.inverse ⋙ P) :
+    let a := (e.symm.toAdjunction.comp ac).ofNatIsoLeft li.symm
+    let r := ad.rightAdjointUniq a
+    let κ := (mateEquiv ac ad).symm (r.inv ≫ (Functor.leftUnitor d).inv)
+    ∀ K : A, κ.app K = li.hom.app (e.functor.obj K) ≫
+      P.map (e.unitIso.inv.app K) := by
+  intro a r κ K
+  dsimp [κ, mateEquiv]
+  simp only [Q.map_id, Category.id_comp, Category.comp_id]
+  change Q.map (e.functor.map (ac.unit.app K)) ≫
+    Q.map (r.inv.app (P.obj K)) ≫ ad.counit.app (P.obj K) = _
+  rw [Adjunction.rightAdjointUniq_inv_app, Adjunction.rightAdjointUniq_hom_app_counit]
+  dsimp [a, Adjunction.ofNatIsoLeft]
+  rw [Adjunction.comp_counit_app]
+  change Q.map (e.functor.map (ac.unit.app K)) ≫
+    li.hom.app (e.functor.obj (c.obj (P.obj K))) ≫
+    P.map (e.unitIso.inv.app (c.obj (P.obj K))) ≫ ac.counit.app (P.obj K) = _
+  have hn := li.hom.naturality (e.functor.map (ac.unit.app K))
+  dsimp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map] at hn
+  rw [← Category.assoc, ← Category.assoc, hn]
+  simp only [Category.assoc]
+  rw [← P.map_comp_assoc]
+  have hu := e.unitIso.inv.naturality (ac.unit.app K)
+  dsimp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at hu
+  rw [hu]
+  rw [P.map_comp, Category.assoc]
+  rw [ac.left_triangle_components]
+  simp
+
+set_option backward.isDefEq.respectTransparency true in
+-- Component formula for the ordinary square constructed from the inverse unit.
+private theorem canonical_transfer_app
+    {A B T : Type*} [Category* A] [Category* B] [Category* T]
+    (e : A ≌ B) {P : A ⥤ T} {Q : B ⥤ T} (li : Q ≅ e.inverse ⋙ P) :
+    let k : TwoSquare e.functor P Q (𝟭 T) := .mk _ _ _ _ <|
+      (Functor.isoWhiskerLeft e.functor li).hom ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight e.unitIso.inv P ≫
+        (Functor.leftUnitor P).hom ≫ (Functor.rightUnitor P).inv
+    ∀ K : A, k.app K = li.hom.app (e.functor.obj K) ≫
+      P.map (e.unitIso.inv.app K) := by
+  intro k K
+  simp [k, TwoSquare.mk, Functor.isoWhiskerLeft_hom]
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+-- Specialize the categorical calculation to the pinned scheme comparisons.
+private theorem fixed_transport_mate
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {P Q Z : Scheme.{u}}
+    [CompactSpace P] [QuasiSeparatedSpace P] [CompactSpace Q] [QuasiSeparatedSpace Q]
+    [CompactSpace Z] [QuasiSeparatedSpace Z]
+    (e : P ≅ Q) (q : Q ⟶ Z) (p : P ⟶ Z) [QuasiCompact q] [QuasiSeparated q]
+    [QuasiCompact p] [QuasiSeparated p] (hp : e.hom ≫ q = p)
+    (c : schemeDerivedQCohCategory Z ⥤ schemeDerivedQCohCategory Q)
+    (d : schemeDerivedQCohCategory Z ⥤ schemeDerivedQCohCategory P)
+    (ac : horizontalMatePushforward q ⊣ c) (ad : horizontalMatePushforward p ⊣ d) :
+    let ev := horizontalMateEquivalence e
+    let ri := (horizontalMateAdjunction e.hom).rightAdjointUniq ev.toAdjunction
+    let li := eqToIso (congrArg qcDirectImage hp.symm) ≪≫
+      horizontalMatePushComp e.hom q ≪≫
+      Functor.isoWhiskerRight ri (horizontalMatePushforward q)
+    let r := horizontalMateRightAdjointIso e q p hp c d ac ad
+    let κ := (mateEquiv ac ad).symm (r.inv ≫ (Functor.leftUnitor d).inv)
+    let k : TwoSquare (horizontalMatePullback e.hom)
+        (horizontalMatePushforward q) (horizontalMatePushforward p)
+        (𝟭 (schemeDerivedQCohCategory Z)) := .mk _ _ _ _ <|
+      (Functor.isoWhiskerLeft (horizontalMatePullback e.hom) li).hom ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight ev.unitIso.inv (horizontalMatePushforward q) ≫
+        (Functor.leftUnitor (horizontalMatePushforward q)).hom ≫
+        (Functor.rightUnitor (horizontalMatePushforward q)).inv
+    κ = k := by
+  subst p
+  intro ev ri li r κ k
+  apply TwoSquare.ext
+  intro K
+  have ht := transport_mate ev ac ad (horizontalMatePushComp e.hom q ≪≫
+    Functor.isoWhiskerRight ri (horizontalMatePushforward q)) K
+  have hc := canonical_transfer_app ev (horizontalMatePushComp e.hom q ≪≫
+    Functor.isoWhiskerRight ri (horizontalMatePushforward q)) K
+  dsimp only [Equivalence.symm_inverse] at ht hc
+  dsimp only [ev, horizontalMateEquivalence, CategoryTheory.Equivalence.mk] at ht hc
+  dsimp only [κ, r, horizontalMateRightAdjointIso, k, li, ev,
+    horizontalMateEquivalence, CategoryTheory.Equivalence.mk, eqToIso_refl]
+  simp only [Iso.refl_trans]
+  exact ht.trans hc.symm
+
+
 
 /-- The pasted inverse ordinary square agrees with the rectangle inverse square,
 after changing its upper projection and base pullback by the pinned comparisons.
@@ -102,6 +198,23 @@ theorem horizontal_inverse_square_fixed_pasting
       (horizontalMatePushforward (pullback.snd (pullback.snd f g) h)).map
           (s.hom.app E) ≫ (τ ≫ₕ κ).app E =
         σ.app E ≫ (horizontalMateComp h g).hom.app
-          ((horizontalMatePushforward f).obj E) := by sorry
+          ((horizontalMatePushforward f).obj E) := by
+  set_option backward.isDefEq.respectTransparency true in
+   set_option backward.isDefEq.respectTransparency.types true in
+    classical
+    let : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))
+    let : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)
+    let : QuasiSeparatedSpace (pullback f g : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)
+    intro s r κ τ σ E
+    have hk := fixed_transport_mate (pullbackLeftPullbackSndIso f g h)
+      (pullback.snd f (h ≫ g)) (pullback.snd (pullback.snd f g) h)
+      (pullbackLeftPullbackSndIso_hom_snd f g h) c d adjc adjd
+    have ho := horizontal_ordinary_inverse_fixed_pasting g f hβ h hβh hβ₂ E
+    simp only [s, r, κ, τ, σ, ← hk, TwoSquare.mk] at ho ⊢
+    convert ho using 1
+    rfl
 
 end AlgebraicGeometry
