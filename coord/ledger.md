@@ -11428,3 +11428,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:38 L: batch 20261013T062512 dependency take-out
 - 06:42 L: returned deliver/C2/Sheaf.AlgebraicGeometry.ClosedStructureIdealProductIso (reviewer RETURN: (reviewer X-233d1, head 233d190a3) the reviewer passed it, but the landing failed: : Sheaf.AlgebraicGeometry.ClosedStruc)
 - 06:50 L: returned deliver/B3/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso (reviewer RETURN: (the landing tools, head 4c00b33c9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 06:50 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.ProjectiveGraphTwistVanishing (reviewer RETURN: (the landing tools, head b9f812533) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
