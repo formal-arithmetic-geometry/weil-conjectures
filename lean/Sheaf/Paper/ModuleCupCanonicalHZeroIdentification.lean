@@ -39,6 +39,51 @@ def moduleCup_singleTensorIso (F G : C) :
       ((CochainComplex.singleFunctor C 0).obj F) ≪≫
     (HomologicalComplex.singleMapHomologicalComplex (tensorRight G) (.up ℤ) 0).app F
 
+private lemma flat_comparison (P L : CochainComplex C ℤ)
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    (QObjTensorQObjIsoOfKFlatLeft P L hP).hom = Functor.LaxMonoidal.μ Q P L := by
+  simp only [QObjTensorQObjIsoOfKFlatLeft, Iso.trans_hom, tensorIso_hom,
+    Iso.app_hom, Iso.symm_hom, asIso_hom, Functor.mapIso_hom]
+  change _ = ((quotientCompQhIso C).inv.app P ⊗ₘ
+    (quotientCompQhIso C).inv.app L) ≫
+    (Functor.LaxMonoidal.μ Qh ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+      ((HomotopyCategory.quotient C (.up ℤ)).obj L) ≫
+      Qh.map (Functor.LaxMonoidal.μ (HomotopyCategory.quotient C (.up ℤ)) P L)) ≫
+    (quotientCompQhIso C).hom.app (P ⊗ L)
+  simp only [Category.assoc, Functor.Monoidal.μIso_hom]
+  rfl
+
+private lemma transport (F G : C) (P : CochainComplex C ℤ)
+    (p : P ⟶ (CochainComplex.singleFunctor C 0).obj F) [QuasiIso p]
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    Functor.LaxMonoidal.μ Q ((CochainComplex.singleFunctor C 0).obj F)
+        ((CochainComplex.singleFunctor C 0).obj G) ≫
+      Q.map (moduleCup_singleTensorIso F G).hom =
+    (tensorIso (asIso (Q.map p))
+      (Iso.refl (Q.obj ((CochainComplex.singleFunctor C 0).obj G)))).inv ≫
+    (QObjTensorQObjIsoOfKFlatLeft P ((CochainComplex.singleFunctor C 0).obj G) hP).hom ≫
+    Q.map (p ⊗ₘ 𝟙 _) ≫ Q.map (moduleCup_singleTensorIso F G).hom := by
+  rw [flat_comparison]
+  rw [← cancel_epi (tensorIso (asIso (Q.map p))
+    (Iso.refl (Q.obj ((CochainComplex.singleFunctor C 0).obj G)))).hom]
+  rw [Iso.hom_inv_id_assoc]
+  simp only [tensorIso_hom, asIso_hom, Iso.refl_hom, tensorHom_id]
+  rw [Functor.LaxMonoidal.μ_natural_left_assoc]
+
+omit [Abelian.HasFunctorialFlatResolution C] in
+private lemma total_hzero (F G : C) (P : CochainComplex C ℤ)
+    (p : P ⟶ (CochainComplex.singleFunctor C 0).obj F)
+    (h : IsIso (HomologicalComplex.homologyMap
+      (((tensorRight G).mapHomologicalComplex (ComplexShape.up ℤ)).map p) 0)) :
+    IsIso ((homologyFunctor C 0).map
+      (Q.map (p ⊗ₘ 𝟙 ((CochainComplex.singleFunctor C 0).obj G)))) := by
+  apply (NatIso.isIso_map_iff (homologyFunctorFactors C 0)
+    (p ⊗ₘ 𝟙 ((CochainComplex.singleFunctor C 0).obj G))).2
+  let e := CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor C) G
+  have ht := (NatIso.isIso_map_iff
+    (Functor.isoWhiskerRight e (HomologicalComplex.homologyFunctor C (.up ℤ) 0)) p).2 h
+  exact ht
+
 /-- H-zero of the canonical derived-to-ordinary tensor comparison is invertible.
 Source: Stacks Project, Tag 06YH, flat construction of derived tensor.
 (blueprint: lem-sc-module-cup-canonical-hzero-identification)
@@ -69,7 +114,20 @@ theorem moduleCup_canonical_hzero_identification (F G : C) :
         c =
           (tensorIso (asIso (Q.map p)) (Iso.refl (Q.obj G₀))).inv ≫
             (QObjTensorQObjIsoOfKFlatLeft P G₀ hP).hom ≫
-            Q.map (p ⊗ₘ 𝟙 G₀) ≫ Q.map (moduleCup_singleTensorIso F G).hom := by sorry
+            Q.map (p ⊗ₘ 𝟙 G₀) ≫ Q.map (moduleCup_singleTensorIso F G).hom := by
+  dsimp only
+  constructor
+  · obtain ⟨P, hLE, p, hp, hflat⟩ :=
+      CochainComplex.exists_quasiIso_flat_of_isStrictlyLE
+        ((CochainComplex.singleFunctor C 0).obj F) 0
+    let := hLE
+    let := hp
+    have hP := CochainComplex.kFlat_of_isStrictlyLE_of_flat P 0 hflat
+    have := total_hzero F G P p (moduleCup_hzero_identification F G P p hflat)
+    rw [transport F G P p hP, Functor.map_comp, Functor.map_comp, Functor.map_comp]
+    infer_instance
+  · intro P p _ _ _hflat hP
+    exact transport F G P p hP
 
 end
 end DerivedCategory
