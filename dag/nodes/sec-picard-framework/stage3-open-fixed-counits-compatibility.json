@@ -1,0 +1,173 @@
+{
+ "id": "stage3-open-fixed-counits-compatibility",
+ "kind": "statement",
+ "title": "Open base-change restriction for single modules in any integer degree",
+ "statement": "Fix shared derived categories [def-pc-derived-category] and additive tensor pullbacks [def-pc-module-pullback]. Let f:X→S, g:S′→S, g′:X′→X, f′:X′→S′ form a cartesian square [def-pc-fibre-product]. Let G be an arbitrary O_X-module and n any integer. Let V⊆S, W⊆S′ be open with W⊆g⁻¹V, and put U=f⁻¹V, fA=f|V, gA=g|W, H=G|U, P=U×_V W, p:P→U and q:P→W. Write M(n) for the complex with M in degree n and zero elsewhere, and R for exact derived restriction to W [def-pc-derived-open-restriction-maps]. A comparison at (k,M,n) means the component at M(n) of a witnessing left-derived tensor-pullback counit, followed by the termwise single-complex identification with (k*_tensor M)(n) [def-pc-derived-module-base-change-map]. For any such comparisons c at (g′,G,n) and c0 at (p,H,n), there exist isomorphisms a:R(Lg*Rf*(G(n)))≅LgA*RfA*(H(n)) and b:R(Rf′*((g′*_tensor G)(n)))≅Rq*((p*_tensor H)(n)) such that R(β≫Rf′*(c))≫b=a≫(βA≫Rq*(c0)), where β and βA are the chosen derived base-change mates [def-pc-derived-base-change-map]. No flatness, affineness, properness or nonemptiness is assumed. The degree n is universally quantified, and both comparison witnesses are explicit in Lean.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY (derived counit and base-change mate); Tag 08FE (restriction of derived direct image); Tag 08IB (locality); Tag 0D5U (exact extension by zero). The single-complex argument applies in every integer degree."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Let Z be the inverse image of W under f'. The universal property of the original cartesian square identifies Z with the chosen pullback P of the restricted maps: a cone over U and W composes to a cone over X and S', whose unique lift has image in Z. The two projections agree under this identification. This includes empty opens.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compute derived direct images on K-injective resolutions and pullbacks on K-flat resolutions. Apply derived direct-image restriction to f and f', and derived pullback restriction to g. Exact restriction identifies G(n) with H(n). The ordinary pullback restriction identifies the restriction of g'*G with p*H. These give the source and target isomorphisms a and b.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the fixed counit components at the single complex in degree n. The underived restriction square and tensor reassociation commute termwise; transposing through the pinned derived adjunctions and localizing the identity gives the same base-change mates after restriction. These give compatible source and target isomorphisms. For a different witnessing left-derived counit, right Kan extension uniqueness supplies an automorphism of derived pullback. Resolve G(n) by a flat complex supported in degrees at most n: right exactness makes the counit invertible on H^n. Maps to a single complex in degree n factor uniquely through degree-n truncation, so the alternative comparison differs by an automorphism of the ordinary pullback module in degree n. Apply this also on P and conjugate the target isomorphism by the two automorphisms. This proves the displayed equality for arbitrary c and c0. This is the degree-n version of the target-automorphism argument; n need not be zero. The zero module and empty opens are covered by the same resolution and truncation arguments.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-weil-pbc-module-square-restriction-commutes",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-module-pullback-comparison-target-automorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-fibre-product",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-module-pullback-comparison-target-automorphism",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-module-square-restriction-commutes",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "The original fixed-counit geometric restriction argument, generalized to degree n; choice independence by degree-n truncation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback comparison canonical single module",
+   "results": "No exact match; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback comparison canonical single module",
+   "results": "No exact match",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalSinglePullbackMap IsDerivedModulePullbackComparison",
+   "results": "No Mathlib hits",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "restricted_base_change_compatibility and canonicalTensorComparison in lean/Sheaf/AlgebraicGeometry/CanonicalModuleBaseChangeOpenComparisonCompat.lean; import_direction.py may",
+   "results": "Existing theorem has degree zero. Import checker reports NO: it already reaches BaseChangeOpenFixedCounits, so the requested import would close a cycle. Its private canonicalTensorComparison provides the cancellation proof used here.",
+   "verdict": "Generalize the duplicate in place to a universally quantified integer degree; use the existing cancellation argument as a proved private helper.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Beck Chevalley transformation compatibility with restriction and single complexes",
+   "results": "mapDerivedCategorySingleFunctor and exact localization comparison lemmas; none states compatibility of the geometric base-change square.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app",
+   "results": "One general derived counit factorization theorem; it does not supply the open-square mate comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "BeckChevalley|baseChange.*[Rr]estrict|[Rr]estrict.*baseChange",
+   "results": "Mathlib hits concern algebraic scalar base change. Repository search finds only the degree-zero downstream compatibility theorem, which imports this item.",
+   "verdict": "no usable exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounits",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-base-change-open-fixed-counits",
+   "place": "Geometric open-square compatibility generalized to every integer degree, after separating explicit canonical-counit cancellation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeOpenFixedCounitsCompatibility.lean",
+  "declaration": "AlgebraicGeometry.restricted_base_change_compatibility_single_degree",
+  "statement": "theorem restricted_base_change_compatibility_single_degree\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (a : Y ⟶ Z), (Scheme.Modules.tensorPullback a).Additive]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g)\n    (G : X.Modules) (n : ℤ)\n    (c : (derivedPullback g').obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj\n            ((Scheme.Modules.tensorPullback g').obj G))\n    (hc : (∃ ε : DerivedCategory.Qh.{w} ⋙ derivedPullback g' ⟶\n          (Scheme.Modules.tensorPullback g').mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n            DerivedCategory.Qh.{w} (C := SheafOfModules.{u}\n              (moduleRings X'.toRingedSpace)),\n        (derivedPullback g').IsLeftDerivedFunctor ε\n            (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) ∧\n          c = ε.app ((HomotopyCategory.singleFunctor _ n).obj G) ≫\n            DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n              ((HomologicalComplex.singleMapHomologicalComplex\n                (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G))))\n    (V : S.Opens) (W : S'.Opens) (hWV : W ≤ g ⁻¹ᵁ V) :\n    let U := f ⁻¹ᵁ V\n    let fA := f ∣_ V\n    let gA := g.resLE V W hWV\n    let H := (schemeOpenRestriction X U).obj G\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj G\n    let E0 := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj H\n    let R := (schemeOpenRestriction S' W).mapDerivedCategory\n    ∀ (c0 : (derivedPullback (pullback.fst fA gA)).obj E0 ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) n).obj\n            ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H))\n    (hc0 : (∃ ε : DerivedCategory.Qh.{w} ⋙ derivedPullback (pullback.fst fA gA) ⟶\n          (Scheme.Modules.tensorPullback (pullback.fst fA gA)).mapHomotopyCategory\n              (ComplexShape.up ℤ) ⋙\n            DerivedCategory.Qh.{w} (C := SheafOfModules.{u}\n              (moduleRings (pullback fA gA).toRingedSpace)),\n        (derivedPullback (pullback.fst fA gA)).IsLeftDerivedFunctor ε\n            (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) ∧\n          c0 = ε.app ((HomotopyCategory.singleFunctor _ n).obj H) ≫\n            DerivedCategory.Qh.{w}.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n              ((HomologicalComplex.singleMapHomologicalComplex\n                (Scheme.Modules.tensorPullback (pullback.fst fA gA))\n                  (ComplexShape.up ℤ) n).hom.app H)))),\n      ∃ a : R.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≅\n          (derivedPullback gA).obj ((schemeDerivedDirectImage fA).obj E0),\n      ∃ b : R.obj ((schemeDerivedDirectImage f').obj\n            ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n).obj\n                ((Scheme.Modules.tensorPullback g').obj G))) ≅\n          (schemeDerivedDirectImage (pullback.snd fA gA)).obj\n            ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) n).obj\n                ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H)),\n        R.map (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫\n            (schemeDerivedDirectImage f').map c) ≫ b.hom =\n          a.hom ≫\n            (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)\n              pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T015546-L-3017368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T015546-L-3017368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

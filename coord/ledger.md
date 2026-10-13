@@ -10527,3 +10527,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/B3/Sheaf.RingTheory.EquationCountLocalizeRGCI (stage 3; reviewer PASS; first push; landing 20261013T015544-L-3016882 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/C1/Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality (stage 3; reviewer PASS; first push; landing 20261013T015545-L-3016995 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/C1/Sheaf.RingTheory.UniversalFirstOrderThickeningCore (stage 3; reviewer PASS; first push; landing 20261013T015545-L-3017183 (interface); batch 20261013T015540; modules 2; new nodes 1)
+- 01:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounits (stage 3; reviewer PASS; after a return; landing 20261013T015546-L-3017368 (interface); batch 20261013T015540; modules 2; new nodes 1)

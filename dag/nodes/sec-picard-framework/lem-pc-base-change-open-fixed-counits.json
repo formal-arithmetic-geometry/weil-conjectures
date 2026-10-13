@@ -21,50 +21,32 @@
  ],
  "proof": [
   {
-   "text": "Let Z be the inverse image of W under f'. The universal property of the original cartesian square identifies Z with the chosen pullback P of the restricted maps: a cone over U and W composes to a cone over X and S', whose unique lift has image in Z. The two projections agree under this identification. This includes empty opens.",
+   "text": "Unfold canonicalSinglePullbackMap for any morphism k and module M. Choose its recorded derived counit and left-derived witness. Functoriality and the adjunction comparison hom_inv_id cancel the final tensor-to-ordinary comparison with its inverse. The remaining component satisfies IsDerivedModulePullbackComparison. This is the proved private canonical_single_pullback_comparison_fixed helper.",
    "uses": [
-    "def-pc-fibre-product"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-canonical-single-pullback-comparison",
+    "def-pc-derived-module-base-change-map"
    ],
    "elementary": true
   },
   {
-   "text": "Compute derived direct images on K-injective resolutions and pullbacks on K-flat resolutions. Apply derived direct-image restriction to f and f', and derived pullback restriction to g. Exact restriction identifies G[0] with H[0]. The ordinary pullback restriction identifies the restriction of g'*G with p*H. These give the source and target isomorphisms a and b.",
+   "text": "Apply the proved cancellation helper to g′ and G, and to p and H. Specialize the integer-degree open compatibility theorem to n=0 with these two comparison proofs. Simplifying the local names gives exactly fixedCounitRestrictionStatement, with no change to its signature or meaning.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-pc-derived-open-restriction-maps"
+    "stage3-open-fixed-counits-compatibility"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use the fixed left-derived counits selected in the composition structure, whose single components are d after cancelling t followed by t inverse. On K-flat representatives, pullback composition is the underived tensor reassociation; the derived adjunction is pinned to the same counits. Transpose the original and restricted mates under their pinned adjunctions. The underived square commutes sectionwise, by the restriction/pasting identity. Its localization and the derived counit equations identify the two transposes. To compare the two fixed counits on the open, extend complexes by zero, which is exact, and use the universal property of the left-derived functor. The resulting degree-zero identification can be absorbed into b; thus the asserted isomorphisms exist even though fixed counits on distinct morphisms are not assumed literally equal under restriction. This yields the displayed equality after composing the mates with d.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-base-change-map",
-    "lem-pc-canonical-single-pullback-comparison",
-    "lem-weil-pbc-module-square-restriction-commutes",
-    "lem-sc-derived-open-restriction-adjunction-exact"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-derived-open-restriction-maps",
-  "def-pc-fibre-product",
+  "def-pc-derived-module-base-change-map",
   "lem-pc-canonical-single-pullback-comparison",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-restrict-derived-direct-image-open",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-weil-pbc-module-square-restriction-commutes",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "stage3-open-fixed-counits-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Restriction computation using Tags 08FE and 0D5U; the first locality paragraph of Tag 08IB. Fixed-counit bookkeeping made explicit by Q2."
+  "place": "Explicit cancellation of the adjunction comparison, followed by degree-zero specialization of the generalized open restriction theorem (C3 repair)."
  },
  "mathlib_searches": [
   {
@@ -161,12 +143,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T225325-L-1811484",
+  "landing": "20261013T015546-L-3017368",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
