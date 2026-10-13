@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-alternating-cech-prefix-deletion-bijection",
+ "kind": "statement",
+ "title": "Unsigned prefix deletion bijection for stable Cech sorting",
+ "statement": "Let $I$ be a linearly ordered type, $p\\ge0$, $n=p+2$, and $t:\\operatorname{Fin}(n)\\to I$.\nUse stable sorting and partial sorting [def-pc-alternating-cech-sorting-operators].\nLet $O_t$ be the set of quadruples $(\\sigma,a,\\tau,r)$ with\n$\\sigma,\\tau\\in S_n$, $a\\in\\operatorname{Fin}(n)$, $r\\in\\operatorname{Fin}(n+1)$,\n$\\operatorname{cechStableSort}(t,\\sigma)$, $\\operatorname{cechPartialSort}(\\sigma,\\tau,a)$,\n$r<a$.\nLet $N_t$ be the set of quadruples $(j,\\rho,b,\\eta)$ with\n$j\\in\\operatorname{Fin}(n)$, $\\rho,\\eta\\in S_{n-1}$, $b\\in\\operatorname{Fin}(n-1)$,\n$\\operatorname{cechStableSort}(t\\circ\\delta_j,\\rho)$,\n$\\operatorname{cechPartialSort}(\\rho,\\eta,b)$, and\n$t(j)<t(\\delta_j(\\rho(b)))$ or $t(j)=t(\\delta_j(\\rho(b)))$ and $j<\\delta_j(\\rho(b))$.\nHere $S_m$ is the permutation group of $\\operatorname{Fin}(m)$ and $\\delta_j$ is the increasing map omitting $j$.\nThere exists an equivalence $e:O_t\\simeq N_t$ such that if $e(\\sigma,a,\\tau,r)=(j,\\rho,b,\\eta)$,\nthen $a=b+1$, $r<n$, $\\tau(r)=j$, and for every $k\\in\\operatorname{Fin}(n-1)$,\n$\\sigma(\\delta_r(k))=\\delta_j(\\rho(k))$ and $\\tau(\\delta_r(k))=\\delta_j(\\eta(k))$.\nIn these restriction identities $r$ is regarded as an element of $\\operatorname{Fin}(n)$.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, lemma-alternating-usual, equation-first-homotopy (Tag 01FN), omitted verification; prefix labelled-deletion correspondence"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Use stable sorting and partial sorting from [def-pc-alternating-cech-sorting-operators]. For an outgoing quadruple $(\\sigma,a,\\tau,r)$, $r<a$ implies $r<n$. The partial-sort prefix gives $j=\\tau(r)=\\sigma(r)$. Delete position $r$ and label $j$ from both permutations and renumber the remaining labels increasingly through $\\delta_j$. Put $b=a-1$. The restricted stable permutation orders exactly the remaining pairs $(t(k),k)$, because $\\delta_j$ is increasing and thus preserves tie breaking. Agreement of the prefixes persists before $b$, and increasing tails persist starting at $b$. The omitted label precedes the remaining stable junction since its original stable rank was $r<a$. This constructs an incoming quadruple and gives both restriction identities and $a=b+1$.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, take an incoming $(j,\\rho,b,\\eta)$. Let $r$ be the number of remaining labels $k$ whose pair $(t(k),k)$ is less than $(t(j),j)$. The before condition implies $r\\le b$. Insert $j$ at position $r$ into the lists $\\delta_j\\circ\\rho$ and $\\delta_j\\circ\\eta$, and put $a=b+1$. The first permutation is stably sorted, and the second agrees with it on the first $a$ positions; its tail starting at $a$ remains increasing. Deletion and insertion are inverse: the stable rank uniquely recovers $r$, $a=b+1$ recovers the prefix length, and the increasing renumbering recovers both permutations. Thus the two maps define an equivalence. This works for $b=0$, $b=n-2$, constant tuples, and all repeated values; an empty ordered type has no input tuple.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W4",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, lemma-alternating-usual, equation-first-homotopy (Tag 01FN), omitted verification; prefix labelled-deletion correspondence; explicit deletion/insertion proof of the omitted correspondence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stable sorting permutation restriction after deleting a label gives bijection between partial sorting prefixes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bijection between prefix deletion in a stable partial sorting junction and incoming faces, preserving the junction map",
+   "results": "8 hits, including OrderedFinpartition.extendEquiv, Fin.insertNthOrderIso, Fin.insertNthOrderIso_symm_apply, and Numbering.prefixedEquiv. None states this sorting-filter correspondence.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Tuple.sort, Fin.succAbove",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechStableSort|cechPartialSort|cechJunction",
+   "results": "0 hits in Mathlib. Local library search found sorting operators and the parent cancellation but no unsigned deletion correspondence.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingPrefixCancellation",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Proof: alternating Cech comparison used to truncate the Cech complex; unsigned prefix-deletion step in the sorting homotopy verification",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-prefix-cancellation",
+    "lem-pc-alternating-cech-first-sorting-nonjunction-cancellation",
+    "lem-pc-alternating-cech-first-sorting-boundary",
+    "lem-pc-alternating-cech-first-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechPrefixDeletionBijection",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechPrefixDeletionBijection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechPrefixDeletionBijection",
+  "statement": "theorem cechPrefixDeletionBijection {I : Type v} [LinearOrder I] (p : ℕ)\n    (t : Fin (p + 2) → I) :\n    ∃ e : CechPrefixOutgoing p t ≃ CechPrefixIncoming p t, ∀ x,\n      let y := e x\n      x.1.2.1.val = y.1.2.2.1.val + 1 ∧\n      ∃ hr : x.1.2.2.2.val < p + 2,\n        x.1.2.2.1 ⟨x.1.2.2.2.val, hr⟩ = y.1.1 ∧\n        (∀ k : Fin (p + 1),\n          x.1.1 ((⟨x.1.2.2.2.val, hr⟩ : Fin (p + 2)).succAbove k) =\n            y.1.1.succAbove (y.1.2.1 k)) ∧\n        (∀ k : Fin (p + 1),\n          x.1.2.2.1 ((⟨x.1.2.2.2.val, hr⟩ : Fin (p + 2)).succAbove k) =\n            y.1.1.succAbove (y.1.2.2.2 k))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T003204-L-2431286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T003204-L-2431286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

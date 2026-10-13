@@ -12,21 +12,34 @@
  ],
  "proof": [
   {
-   "text": "Order labels j by the pairs (t j, j), so all labels are distinct even if\nvalues repeat. The stable-sort filter has one permutation, and the partial-sort\nfilter has one permutation for each prefix length. For an outgoing term with\nr < a, remove j = σ r = τ r. Restrict σ and τ to the other labels and renumber\nthose labels increasingly. The restricted stable sort is the stable sort of\nthe face omitting j; the restricted partial sort has prefix length b = a - 1.\nThe removed label precedes the remaining junction label in the pair order.\nDeleting r from the outgoing junction gives exactly the incoming face junction,\nas a map to the original labels. Conversely, insert the incoming deleted label\nj at its stable rank r before the junction; set a = b + 1 and extend both\npermutations. This inverts restriction, including at b = 0 and b = p.\nIf τ' is the restricted permutation, then sign τ' = (-1)^(r+j) sign τ:\nmove position r and label j to the end, then restrict, counting the two moves.\nThus the incoming coefficient is (-1)^(j+a-1+r+j) sign τ, the negative of\n(-1)^(a+r) sign τ. Sum along this bijection. Each pair evaluates f on the\nsame map of labels and has opposite integer coefficients, so it cancels.\nFor a = 0 the outgoing prefix part is empty. Empty I has no input tuple.",
+   "text": "First remove the redundant outgoing nonjunction filter: r<a puts the junction value at σ(r), which differs from σ(a) by injectivity (proved local prefix_nonjunction and prefix_filter). Rewrite the four nested filtered outgoing and incoming sums as sums over the subtypes CechPrefixOutgoing and CechPrefixIncoming, using Fintype.sum_prod_type' and Finset.sum_subtype (local sum_subtype_ite). Obtain the unsigned correspondence and its restriction equations from [lem-pc-alternating-cech-prefix-deletion-bijection].",
+   "uses": [
+    "lem-pc-alternating-cech-prefix-deletion-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For corresponding indices, use the two restriction equations and a=b+1 to identify the deleted outgoing junction with the incoming label map. The proved local junction_restrict splits at k≤b and checks the values of succAbove in each branch. Apply the proved local sign_restrict: conjugating τ by j.cycleRange on the left and r.cycleRange inverse on the right gives decomposeFin.symm(0,η). Mathlib sign_cycleRange and decomposeFin.symm_sign yield sign η=(-1)^j sign τ (-1)^r. Together with a=b+1 and ((-1)^j)^2=1, integer ring arithmetic makes the incoming coefficient the negative of the outgoing coefficient. The evaluated f arguments agree, so neg_smul gives u(x)=-z(e(x)).",
    "uses": [
     "def-pc-alternating-cech-sorting-operators"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Fintype.sum_equiv to the correspondence and the pointwise equality u(x)=-z(e(x)); then Finset.sum_neg_distrib and neg_add_cancel finish. All these summation and coefficient steps are proved in Lean, with no additional holes.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-alternating-cech-prefix-deletion-bijection",
   "def-pc-alternating-cech-sorting-operators"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3",
+  "agent": "W4",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, equation 20.23.6.1; explicit prefix labelled-deletion proof of the omitted computation"
+  "place": "Tag 01FM, equation-first-homotopy (01FN); unsigned correspondence followed by proved junction restriction, permutation sign, and finite-sum calculations"
  },
  "mathlib_searches": [
   {
@@ -99,12 +112,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261012T230755-L-1907977",
+  "landing": "20261013T003204-L-2431286",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
