@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
+import Sheaf.AlgebraicGeometry.OpenExtensionTensorCounitIsIso
 
 /-! Projection mate for transported open extension.
 Source: Stacks Project, Tags 01AK, 06YB and 08BS.
@@ -26,10 +28,10 @@ local instance openExtensionProjectionStandardDerivedAux (X : Scheme.{u}) (U : X
 /-- The projection mate is invertible for the transported adjunction.
 Source: Stacks Project, Tags 01AK, 06YB and 08BS.
 (blueprint: lem-pc-open-extension-projection-aux).
-Proof: compute the mate after restriction using the adjunction hom-equivalence. The
-unit and the monoidal comparison are invertible, and restriction reflects
-isomorphisms on the supported objects arising from extension by zero. Hence the
-mate is invertible for every object `A` and `K` and every strong monoidal structure. -/
+Proof: the derived unit and the counit on J(A) tensor K are invertible. Tensoring
+that unit with the identity and composing with the strong monoidal comparison gives
+an invertible morphism f. The adjunction homEquiv_counit formula identifies its
+transpose with J.map f followed by that counit, so both factors are invertible. -/
 theorem openExtension_projection_formula_of_adjunction (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)
@@ -48,7 +50,24 @@ theorem openExtension_projection_formula_of_adjunction (X : Scheme.{u})
           IsIso ((adj.homEquiv (A ⊗ R.obj K) (J.obj A ⊗ K)).symm
             ((adj.unit.app A ⊗ₘ 𝟙 (R.obj K)) ≫
               (Functor.Monoidal.μIso R (J.obj A) K).hom)) := by
-  sorry
+  dsimp
+  intro m
+  let _ := m
+  intro J adj A K
+  have : IsIso (adj.unit.app A) := openExtension_derived_unit_isIso X U J adj A
+  have : IsIso (adj.counit.app (J.obj A ⊗ K)) :=
+    openExtension_tensor_counit_isIso X U J adj A K
+  let R := (SheafOfModules.overFunctor.{u}
+    (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙
+      (Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U)).mapDerivedCategory
+  let f := (adj.unit.app A ⊗ₘ 𝟙 (R.obj K)) ≫
+    (Functor.Monoidal.μIso R (J.obj A) K).hom
+  have hf : IsIso f := by dsimp [f]; infer_instance
+  have h := adj.homEquiv_counit (A ⊗ R.obj K) (J.obj A ⊗ K) f
+  exact h.symm ▸ (inferInstance : IsIso (J.map f ≫ adj.counit.app (J.obj A ⊗ K)))
 
 end
 end AlgebraicGeometry

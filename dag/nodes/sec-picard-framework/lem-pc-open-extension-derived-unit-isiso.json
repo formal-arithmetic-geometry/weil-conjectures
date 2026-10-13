@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-open-extension-derived-unit-isiso",
+ "kind": "statement",
+ "title": "OpenExtensionDerivedUnitIsIso",
+ "statement": "For a scheme X and open U with the specified derived categories, let E be the derived over-site equivalence to module sheaves on U.toScheme and R the composite of derived open restriction with E.functor. For every J left adjoint to R, every supplied adjunction adj : J ⊣ R, and every A in D(O_U), the unit component adj.unit.app A is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Sheaves Tag 00A7 (4); Modules on Sites Tag 03DI; Cohomology Tags 08BS and 08BT. Mathlib CategoryTheory.Monad.Adjunction supplies fullyFaithfulLOfCompIsoId."
+ },
+ "proof": [
+  {
+   "text": "Take the canonical ordinary extension-by-zero adjunction. Its unit is invertible. Apply the exact derived adjunction theorem to obtain an adjunction between its mapDerivedCategory functors. The composition and natural-isomorphism comparison maps identify derived extension followed by derived restriction with the identity. Mathlib fullyFaithfulLOfCompIsoId makes the derived left adjoint fully faithful.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-unit-isiso",
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inverse derived over-site equivalence with that fully faithful left adjoint. The composite is fully faithful and left adjoint to R; its unit is therefore invertible. The leftAdjointUniq unit comparison identifies its unit, composed with an invertible map, with the supplied adjunction unit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-extension-by-zero-unit-isiso",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent V3",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Sheaves Tag 00A7 (4); Modules on Sites Tag 03DI; Cohomology Tags 08BS and 08BT. Mathlib CategoryTheory.Monad.Adjunction supplies fullyFaithfulLOfCompIsoId.",
+  "description": "Extracted the unit and supported-tensor counit steps of lem-pc-open-extension-projection-aux. The unit is proved by existing Lean tools; the geometric tensor-support step is also proved using existing support lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful left adjoint has invertible unit and projection formula for extension by zero on derived sheaves",
+   "results": "Found derived-unit comparison lemmas and site adjunctions; no transported derived open-extension unit or tensor counit theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.fullyFaithfulLOfCompIsoId; CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "Found the fully faithful criterion in Mathlib.CategoryTheory.Monad.Adjunction and the explicit Hom-transpose formula in Mathlib.CategoryTheory.Adjunction.Basic. Both used.",
+   "date": "2026-10-14",
+   "verdict": "categorical tools, not the geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*tensor|tensor.*extensionByZero|counit.*IsIso; rg unit/FullyFaithful in derived-open modules",
+   "results": "No open-extension derived tensor counit theorem. Found ModuleExtensionByZeroUnitIsIso and DerivedOpenShriekAdjunction, used to prove the new derived unit theorem.",
+   "date": "2026-10-14",
+   "verdict": "unit ingredients found; tensor-support calculation remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of derived extension by zero and open restriction is invertible; its counit on a tensor with an extended object is invertible",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder, Loogle and local source searches instead.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormulaAux",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-extension-projection-aux",
+   "place": "Projection mate proof: invertible unit and counit on the supported tensor target.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenExtensionDerivedUnitIsIso.lean",
+  "declaration": "AlgebraicGeometry.openExtension_derived_unit_isIso",
+  "statement": "theorem openExtension_derived_unit_isIso (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    ∀ (J : schemeDerivedCategory U.toScheme ⥤ schemeDerivedCategory X)\n      (adj : J ⊣ R) (A : schemeDerivedCategory U.toScheme), IsIso (adj.unit.app A)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T171519-L-1983989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T171519-L-1983989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
