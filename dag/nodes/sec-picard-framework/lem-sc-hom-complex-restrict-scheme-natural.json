@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-hom-complex-restrict-scheme-natural",
+ "kind": "statement",
+ "title": "Restriction of ordinary Hom complexes, natural in the coefficient complex",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $U\\subseteq Y$ an open, and $L^\\bullet$ an integer cochain complex of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category, def-pur-hom-complex]. Write $R$ for restriction of module sheaves to the open subscheme $U$, and $R_c$ for its termwise action on complexes. There is a natural isomorphism of functors on the whole category of integer cochain complexes of $\\mathcal O_Y$-modules:\n$$R_c(\\mathcal Hom_Y^\\bullet(L^\\bullet,-))\\ \\cong\\ \\mathcal Hom_U^\\bullet(R_c(L^\\bullet),R_c(-)).$$\nNo boundedness, finite freeness, augmentation, or derived category is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3: ordinary Hom restriction in the construction of RHom, transported by Scheme.Modules.overEquiv"
+ },
+ "proof": [
+  {
+   "text": "Identify each sheaf Hom after restriction by restricting local module maps and transporting them through the over-site equivalence. The local map identification commutes with postcomposition by a map of coefficient modules.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction and the over-site equivalence preserve all products. Apply the preceding identification to every product factor of each total Hom degree. The formula for the Hom differential is respected, since the identification preserves postcomposition, precomposition, and addition. This constructs componentwise chain isomorphisms.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every coefficient chain map, check the naturality square on each product projection. Both sides are restriction of the same postcomposition of local module maps, so they agree. Assemble the chain isomorphisms into a natural isomorphism; this includes zero complexes and empty U.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "group": "T2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3: ordinary Hom restriction in the construction of RHom, transported by Scheme.Modules.overEquiv"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the sheaf internal Hom complex to an open subscheme is a natural isomorphism of functors in the second complex",
+   "results": "Eight hits for scheme restriction, restrictFunctorGamma and restrictFunctorIsoPullback; none for the Hom-complex functor.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor, NatIso",
+   "results": "0 hits; Loogle reported unknown identifier 'NatIso'.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(restrict|quasiIso)|quasiIso.*homComplex in Mathlib/Algebra/Homology and Mathlib/AlgebraicGeometry/Modules",
+   "results": "No hits. The project has objectwise restriction and bounded-above Hom acyclicity with a bounded-below target; neither is the required statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary sheaf internal Hom complexes commute naturally with restriction to an open subscheme",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-local-finite-free-homology-natural",
+   "place": "The coefficient-natural comparison: Restriction of ordinary Hom complexes, natural in the coefficient complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexRestrictSchemeNatural.lean",
+  "declaration": "AlgebraicGeometry.homComplex_restrict_scheme_natural",
+  "statement": "theorem homComplex_restrict_scheme_natural {Y : Scheme.{u}} (U : Y.Opens)\n    (L : CochainComplex Y.Modules ℤ) :\n    Nonempty (\n      (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op L) ⋙\n          (Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ) ≅\n      (Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ) ⋙\n        (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj\n          (op (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj\n            L)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-48bed",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T142905-L-500939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-48bed",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T142905-L-500939",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, signatures, compilation, and direct importer all match the stage-3 requirements"
+ }
+}

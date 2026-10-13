@@ -9,8 +9,11 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNatural
+import Sheaf.Algebra.Homology.StrictlyPerfectHomQuasiIso
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Coefficient naturality for a local finite free resolution
 
@@ -26,6 +29,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFunctor
+  homComplexFunctor derivedInternalHom HomologicalComplex.homologyFunctor
+  DerivedCategory.homologyFunctor Functor.mapHomologicalComplex
+
+
+set_option maxHeartbeats 800000 in
+-- The functor-level comparisons require more elaboration steps than objectwise comparisons.
 /-- A bounded finite free resolution on an open computes restricted Ext
 naturally in every coefficient sheaf.
 Source: Stacks Project, Tag 08DL (restriction of derived internal Hom), and
@@ -70,6 +81,121 @@ theorem local_finite_free_homology_natural
       Scheme.Modules.restrictFunctor U.ι ⋙
         CochainComplex.singleFunctor U.toScheme.Modules 0 ⋙
         (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj (op E) ⋙
-        HomologicalComplex.homologyFunctor U.toScheme.Modules (ComplexShape.up ℤ) q) := by sorry
+        HomologicalComplex.homologyFunctor U.toScheme.Modules (ComplexShape.up ℤ) q) := by
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let O := SheafOfModules.overFunctor.{u} Y.ringCatSheaf U
+  let T := (Scheme.Modules.overEquiv U).functor
+  let : PreservesFiniteLimits O := moduleOverFunctor_limits_proof Y.toRingedSpace U
+  let : PreservesFiniteColimits O := moduleOverFunctor_colimits_proof Y.toRingedSpace U
+  let hOTl : PreservesFiniteLimits (O ⋙ T) := comp_preservesFiniteLimits O T
+  let hOTc : PreservesFiniteColimits (O ⋙ T) := comp_preservesFiniteColimits O T
+  let R : A ⥤ U.toScheme.Modules := Scheme.Modules.restrictFunctor U.ι
+  let eR : O ⋙ T ≅ R := Scheme.Modules.overFunctorEquiv U
+  let : PreservesFiniteLimits R := @preservesFiniteLimits_of_natIso _ _ _ _ (O ⋙ T) R eR hOTl
+  let : PreservesFiniteColimits R := @preservesFiniteColimits_of_natIso _ _ _ _ (O ⋙ T) R eR hOTc
+  let hRadd : R.Additive := R.additive_of_preserves_binary_products
+  let : T.Additive := T.additive_of_preserves_binary_products
+  let hOTadd : (O ⋙ T).Additive := (O ⋙ T).additive_of_preserves_binary_products
+  let hRzero : R.PreservesZeroMorphisms :=
+    @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ R hRadd
+  let hOTzero : (O ⋙ T).PreservesZeroMorphisms :=
+    @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ (O ⋙ T) hOTadd
+  let Rc : CochainComplex A ℤ ⥤ CochainComplex U.toScheme.Modules ℤ :=
+    R.mapHomologicalComplex (.up ℤ)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let cs := CochainComplex.singleFunctor A 0
+  let S := DerivedCategory.singleFunctor A 0
+  let L := cs.obj B
+  let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+  let HL := (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op L)
+  let J := cs ⋙ I
+  let HY := DerivedCategory.homologyFunctor A q
+  let CU := HomologicalComplex.homologyFunctor U.toScheme.Modules (.up ℤ) q
+  obtain ⟨e⟩ := derivedInternalHom_comparison
+    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf I η (fun M ↦
+      ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+        CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
+  let D := S ⋙ (Functor.curry.obj H).obj (op (S.obj B))
+  let eD₀ : (cs ⋙ DerivedCategory.Q) ⋙
+      (Functor.curry.obj H).obj (op (DerivedCategory.Q.obj L)) ≅
+      J ⋙ HL ⋙ DerivedCategory.Q := NatIso.ofComponents
+    (fun C ↦ e.app (op L, cs.obj C)) (by
+      intro C C' f
+      have hn := e.hom.naturality (Prod.mkHom (𝟙 (op L)) (cs.map f))
+      simpa [J, HL, Functor.comp_map, Functor.curry_obj_obj_map,
+        Functor.uncurry, Functor.prod] using hn)
+  let eD : D ≅ J ⋙ HL ⋙ DerivedCategory.Q :=
+    Functor.isoWhiskerRight (DerivedCategory.singleFunctorIsoCompQ A 0)
+      ((Functor.curry.obj H).obj (op (S.obj B))) ≪≫ eD₀
+  obtain ⟨eC⟩ := homComplex_restrict_scheme_natural U L
+  let eH : D ⋙ HY ⋙ R ≅ J ⋙ Rc ⋙
+      (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj (op (Rc.obj L)) ⋙
+      CU :=
+    Functor.isoWhiskerRight (Functor.isoWhiskerRight eD HY) R ≪≫
+      Functor.isoWhiskerRight (Functor.isoWhiskerLeft (J ⋙ HL)
+        (DerivedCategory.homologyFunctorFactors A q)) R ≪≫
+      Functor.isoWhiskerLeft (J ⋙ HL) (R.mapHomologicalComplexHomologyIso (.up ℤ) q).symm ≪≫
+      Functor.isoWhiskerRight (Functor.isoWhiskerLeft J eC) CU
+  let eRc := @NatIso.mapHomologicalComplex ℤ _ _ _ _ _ _ (O ⋙ T) R
+    hOTzero hRzero eR (.up ℤ)
+  have hKI (C : A) : CochainComplex.IsKInjective (Rc.obj (J.obj C)) := by
+    let Ic := J.obj C
+    let : Ic.IsKInjective :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A (cs.obj C)
+    let : (Scheme.Modules.overEquiv U).symm.functor.Additive :=
+      (Scheme.Modules.overEquiv U).symm.functor.additive_of_preserves_binary_products
+    let : T.PreservesKInjectiveComplexes :=
+      (Scheme.Modules.overEquiv U).symm.toAdjunction.preservesKInjectiveComplexes
+    let : CochainComplex.IsKInjective ((O.mapHomologicalComplex (.up ℤ)).obj Ic) :=
+      kInjective_of_restrict_open Y.toRingedSpace U Ic
+    let : CochainComplex.IsKInjective ((T.mapHomologicalComplex (.up ℤ)).obj
+        ((O.mapHomologicalComplex (.up ℤ)).obj Ic)) :=
+      Functor.PreservesKInjectiveComplexes.isKInjective_map (F := T)
+        ((O.mapHomologicalComplex (.up ℤ)).obj Ic)
+    have : CochainComplex.IsKInjective
+        (((O ⋙ T).mapHomologicalComplex (.up ℤ)).obj Ic) :=
+      CochainComplex.isKInjective_of_iso
+        (L₁ := (T.mapHomologicalComplex (.up ℤ)).obj
+          ((O.mapHomologicalComplex (.up ℤ)).obj Ic))
+        ((Functor.mapHomologicalComplexCompIso (Iso.refl (O ⋙ T)) (.up ℤ)).app Ic)
+    exact CochainComplex.isKInjective_of_iso (eRc.app Ic)
+  let eSingle := HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0
+  let t : E ⟶ Rc.obj L := ε ≫ (eSingle.app B).inv
+  have : QuasiIso t := by
+    dsimp only [t]
+    exact quasiIso_comp ε (eSingle.app B).inv
+  let HE := (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj (op E)
+  let α := Functor.whiskerLeft (J ⋙ Rc)
+    ((homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).map t.op)
+  let αq := Functor.whiskerRight α CU
+  have : IsIso αq := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro C
+    have : CochainComplex.IsKInjective (Rc.obj (J.obj C)) := hKI C
+    have : QuasiIso (α.app C) := by
+      simpa [α] using quasiIso_homComplex_map (𝟙 (Rc.obj (J.obj C))) t
+    change IsIso (CU.map (α.app C))
+    unfold CU HomologicalComplex.homologyFunctor
+    infer_instance
+  let γ := Functor.whiskerRight (Functor.whiskerLeft cs η) Rc
+  let β := Functor.whiskerRight γ (HE ⋙ CU)
+  have : IsIso β := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro C
+    have : QuasiIso (η.app (cs.obj C)) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A (cs.obj C)).2
+    have : QuasiIso (γ.app C) := by
+      dsimp [γ]
+      infer_instance
+    have : QuasiIso (HE.map (γ.app C)) :=
+      quasiIso_homComplex_map_of_bounded_finiteFree U.toScheme.toRingedSpace
+        E hbounded hbelow hfree (γ.app C)
+    change IsIso (CU.map (HE.map (γ.app C)))
+    unfold CU HomologicalComplex.homologyFunctor
+    infer_instance
+  exact ⟨eH ≪≫ asIso αq ≪≫ (asIso β).symm ≪≫
+    Functor.isoWhiskerRight eSingle (HE ⋙ CU)⟩
 
 end AlgebraicGeometry
