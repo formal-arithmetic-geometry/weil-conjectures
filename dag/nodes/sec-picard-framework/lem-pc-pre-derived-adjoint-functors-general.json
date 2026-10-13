@@ -26,84 +26,47 @@
  ],
  "proof": [
   {
-   "text": "Since $RF$ is defined at $K$, the ind-system $I\\mapsto F(I)$ indexed by arrows $s:K\\to I$ is essentially constant with value $RF(K)$. Applying the essential-constant ind Hom-colimit formula gives $\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))\\cong\\varinjlim_{s:K\\to I}\\operatorname{Hom}_{D(\\mathcal B)}(M,F(I))$.",
+   "text": "Apply derivedAdjunction_source_colimit to the quasi-isomorphism systems, Qh_B and Fh, with the chosen cocone p. Apply derivedAdjunction_target_colimit to Qh_A and the homotopy adjunction, with the chosen cone u. These give bijections from the same product ColimitType to the two required Hom sets.",
    "uses": [
-    "lem-pc-essentially-constant-ind-hom-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0FND proof (line 9515), first equality"
-   }
-  },
-  {
-   "text": "For each $I$, morphisms in the right localization are computed, since the quasi-isomorphisms of the homotopy category form a multiplicative system, by the colimit over arrows $t:P\\to M$: $\\operatorname{Hom}_{D(\\mathcal B)}(M,F(I))\\cong\\varinjlim_{t:P\\to M}\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))$.",
-   "uses": [
-    "lem-pc-right-localization-hom-colimit",
+    "lem-pc-derived-adjunction-source-colimit",
+    "lem-pc-derived-adjunction-target-colimit",
     "lem-pc-quasi-isomorphisms-multiplicative-system"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0FND proof (line 9515), second equality"
-   }
+   "elementary": false
   },
   {
-   "text": "The two indexing categories are independent, so the iterated colimits can be interchanged canonically, yielding $\\varinjlim_s\\varinjlim_t\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))\\cong\\varinjlim_t\\varinjlim_s\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))$.",
+   "text": "Compose the inverse source bijection with the target bijection. Their representative formulas prove canonicality. Surjectivity of the source comparison and jointly surjective ColimitType representatives express every source morphism as a right fraction followed by p_s. Canonicality thus determines the equivalence uniquely.",
    "uses": [
-    "lem-pc-colimit-fubini"
+    "def-pc-derived-adjunction-hom-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0FND proof (line 9515), third equality"
-   }
+   "elementary": true
   },
   {
-   "text": "The underived adjunction $G\\dashv F$ gives a natural bijection $\\operatorname{Hom}_{K(\\mathcal B)}(P,F(I))\\cong\\operatorname{Hom}_{K(\\mathcal A)}(G(P),I)$ for every $P$ and $I$; applying it inside both colimits gives the corresponding iterated-colimit isomorphism.",
+   "text": "For a source representative (s,t,f) and localized maps k,m, represent inv(QA(s)) followed by k by a left fraction (a,s′), and m followed by inv(QB(t)) by a right fraction (t′,b). Cancelling denominators gives precisely the two hypotheses in the assumed compatibility equations for r,l.",
+   "uses": [
+    "lem-pc-left-localization-fraction-representation",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The transformed source is the representative (s′,t′, b followed by f followed by Fh(a)). Use both canonical formulas, then homEquiv_naturality_left_symm and homEquiv_naturality_right_symm. The r,l compatibility equations and inverse-denominator cancellation yield e′(m h r)=l e(h) k. This proves naturality for every localized h.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0FND proof (line 9515), fourth equality"
-   }
-  },
-  {
-   "text": "For each $P$, morphisms in the left localization are computed, since the quasi-isomorphisms of the homotopy category form a multiplicative system, by the colimit over arrows $s:K\\to I$: $\\operatorname{Hom}_{D(\\mathcal A)}(G(P),K)\\cong\\varinjlim_{s:K\\to I}\\operatorname{Hom}_{K(\\mathcal A)}(G(P),I)$.",
-   "uses": [
-    "lem-pc-left-localization-hom-colimit",
-    "lem-pc-quasi-isomorphisms-multiplicative-system"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0FND proof (line 9515), fifth equality"
-   }
-  },
-  {
-   "text": "Since $LG$ is defined at $M$, the pro-system $P\\mapsto G(P)$ indexed by arrows $t:P\\to M$ is essentially constant with value $LG(M)$. Applying the essential-constant pro Hom-colimit formula gives $\\varinjlim_{t:P\\to M}\\operatorname{Hom}_{D(\\mathcal A)}(G(P),K)\\cong\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)$.",
-   "uses": [
-    "lem-pc-essentially-constant-pro-hom-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0FND proof (line 9515), sixth equality"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-essentially-constant-ind-hom-colimit",
-  "lem-pc-right-localization-hom-colimit",
-  "lem-pc-colimit-fubini",
-  "lem-pc-left-localization-hom-colimit",
-  "lem-pc-essentially-constant-pro-hom-colimit",
-  "lem-pc-quasi-isomorphisms-multiplicative-system"
+  "def-pc-derived-adjunction-hom-diagram",
+  "lem-pc-derived-adjunction-source-colimit",
+  "lem-pc-derived-adjunction-target-colimit",
+  "lem-pc-left-localization-fraction-representation",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories, Lemma 0FND proof (lines 9515--9516), specialized to complexes and derived categories"
+  "place": "Lemma 0FND/0DVC; R4 direct product-ColimitType proof of the six-equality calculation and explicit fraction proof of its naturality, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -224,5 +187,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082411-L-1646890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

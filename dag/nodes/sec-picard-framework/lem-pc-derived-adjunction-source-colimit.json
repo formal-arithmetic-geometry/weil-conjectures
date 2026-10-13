@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-derived-adjunction-source-colimit",
+ "kind": "statement",
+ "title": "Source Hom is the product colimit of numerators",
+ "statement": "Let $C,D,E$ be categories, $W,W^{\\prime}$ morphism properties on $C,D$, assume $W^{\\prime}$ has a right calculus of fractions, and let $Q:D\\to E$ be a localization at $W^{\\prime}$. Fix a functor $F:C\\to D$ and objects $K\\in C,M\\in D,V\\in E$. Let $J,T,H$ be the denominator categories and numerator diagram [def-pc-derived-adjunction-hom-diagram], and let $R:J\\to E$ send $s:K\\to I$ to $QF(I)$. Assume $R$ is essentially constant with value $V$ [def-pc-essentially-constant-ind-diagram]. For every cocone $p:R\\to V$ satisfying the chosen splitting and factorization clauses of that definition, there exists a bijective map $\\phi:H.\\mathrm{ColimitType}\\to\\operatorname{Hom}_E(QM,V)$ whose value at each representative $(s,t,f)$ is $Q(t)^{-1}Q(f)p_s$ in diagrammatic composition. No adjunction or pro value is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 0FND proof, first three equalities; Stacks Tag 0FND (https://stacks.math.columbia.edu/tag/0FND)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-adjunction-hom-diagram",
+  "def-pc-essentially-constant-ind-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Define the cocone on H by inverse incoming denominator, localized numerator and p_s. An incoming triangle preserves its right fraction, and an outgoing triangle commutes with p, so the cocone descends to ColimitType.",
+   "uses": [
+    "def-pc-derived-adjunction-hom-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any h:Q(M)→V choose the section a:V→R(s₀) from the chosen splitting. Represent h followed by a as a right fraction. Its image in the cocone is h, by a followed by p_s₀ = identity.",
+   "uses": [
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For two representatives with equal images, apply the factorization clause at each outgoing stage. Use IsFilteredOrEmpty.cocone_objs to join the resulting stages and cocone_maps to coequalize their arrows from s₀. The resulting transitions both factor through p, a, and the same map from s₀. Postcomposing the assumed equality therefore equates the transported right fractions.",
+   "uses": [
+    "def-pc-essentially-constant-ind-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the common-refinement criterion to these right fractions. The resulting incoming triangles have equal transported numerators at the common outgoing stage. Functor.ιColimitType_eq_of_map_eq_map identifies the two original representatives; this proves injectivity.",
+   "uses": [
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-adjunction-hom-diagram",
+  "def-pc-essentially-constant-ind-diagram",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-pc-right-fraction-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 0FND proof, first three equalities; direct product-ColimitType implementation of the cited calculation, written by R4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "double colimit of fraction numerators Hom P F I with essentially constant ind or pro values",
+   "results": "IndObjectPresentation and IndParallelPairPresentation colimit results, no fraction numerator diagram or the two pointwise Hom comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ColimitType",
+   "results": "ColimitType, descColimitType, jointly surjective representatives, CoconeTypes.IsColimit.equiv; generic quotient-colimit API only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; API used"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedAdjunctionHomDiagram|derivedAdjunction_source_colimit|derivedAdjunction_target_colimit",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "double colimit of localization fraction numerators and essentially constant ind pro diagrams",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the derived direct-image composition proof uses the adjunction between derived pullback and derived direct image (Stacks Tag 079W), whose proof is Derived Categories Lemma 09T5; Derived Categories, Lemma 0FND proof, first three equalities",
+   "via": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedAdjunctionSourceColimit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedAdjunctionSourceColimit.lean",
+  "declaration": "CategoryTheory.derivedAdjunction_source_colimit",
+  "statement": "theorem derivedAdjunction_source_colimit {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D] {E : Type uE} [Category.{vE} E] (W : MorphismProperty C) (W' : MorphismProperty D) [W'.HasRightCalculusOfFractions] (Q : D ⥤ E) [Q.IsLocalization W'] (F : C ⥤ D) (K : C) (M : D) (V : E) : let R := MorphismProperty.Under.forget W ⊤ K ⋙ Under.forget K ⋙ F ⋙ Q IsEssentiallyConstantIndDiagram R V → ∀ p : R ⟶ (Functor.const _).obj V, (∃ (s₀ : W.Under ⊤ K) (a : V ⟶ R.obj s₀), a ≫ p.app s₀ = 𝟙 V ∧ ∀ s, ∃ (s₁ : W.Under ⊤ K) (b : s₀ ⟶ s₁) (c : s ⟶ s₁), R.map c = p.app s ≫ a ≫ R.map b) → ∃ φ : (derivedAdjunctionHomDiagram W W' F K M).ColimitType → (Q.obj M ⟶ V), Function.Bijective φ ∧ ∀ (s : W.Under ⊤ K) (t : W'.Over ⊤ M) (f : t.left ⟶ F.obj s.right), φ ((derivedAdjunctionHomDiagram W W' F K M).ιColimitType (s, Opposite.op t) f) = (MorphismProperty.RightFraction.mk t.hom t.prop f).map Q (Localization.inverts Q W') ≫ p.app s",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082411-L-1646890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082411-L-1646890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
