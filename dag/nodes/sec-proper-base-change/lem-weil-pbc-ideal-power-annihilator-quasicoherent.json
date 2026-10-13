@@ -15,20 +15,41 @@
  },
  "proof": [
   {
-   "text": "On every affine open identify the ideal power with a finitely generated ideal J and F with the sheaf of a module M. The canonical annihilator has affine sections N = {m | J m = 0}. Localization of N is exactly the annihilator of the localized ideal: one inclusion is immediate, and for the other, finitely many generators and clearing denominators provide one common power of the denominator. These identifications on affine opens prove quasi-coherence.",
+   "text": "Reuse powers_affine_sections from CoherentSupportVanishingIdealNilpotence via a proof-only import all. This already proved private helper applies to every quasi-coherent module map to the structure module, without Noetherian or monicity hypotheses. It proves quasi-coherence of the recursive power object and identifies its affine inclusion range with the nth power of the original affine range, including exponent zero. Reuse finite_sections_of_finiteType from QuasicoherentFiniteTypeAffine to see that the original ideal sections over an affine open form a finite module. Mathlib Submodule.fg_range and Ideal.FG.pow make every power range finitely generated.",
    "uses": [
-    "lem-weil-pbc-ideal-module-product-stalk"
+    "lem-pc-s3-coherent-support-vanishing-ideal-nilpotence",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-coherent module map j:P -> O_X, define J(U) as the range of j on each affine open. Naturality proves the forward inclusion in the principal-open ideal-extension identity. For the reverse inclusion, lift a section b of P on D(f), after multiplying by a power of f, to a section on U using the affine localization theorem. Its image under j is in the extended ideal; the restriction of f is a unit, so multiplication by its power can be cancelled for ideal membership. These explicitly constructed affine ideals form IdealSheafData J. Reuse the proved ideal_qc helper from CoherentSupportVanishingIdealNilpotence with the identity isomorphism to show J.toModules is quasi-coherent. Its injective section map identifies its sections on U with the finitely generated ideal J(U), giving finite sections; the affine finite-type criterion on the full affine cover shows J.toModules is of finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "lem-pc-s3-coherent-support-vanishing-ideal-nilpotence",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Show that the actual canonical annihilator inclusion has affine image exactly the sections killed by J(U). One implication tests the defining condition on U itself and the identity restriction. Conversely, cover any smaller open V by its affine subopens W. Ideal extension along W subset U puts J(W) in the ideal of scalars killing the restricted section. Naturality sends every local section of P on V into J(W), so its product with the restricted section vanishes on every W. Sheaf separatedness makes the product vanish on V, giving a section of the canonical annihilator. Apply annihilator_subsheaf_quasicoherent to this actual inclusion and the finite-type ideal data J, then specialize j to the nth recursive power inclusion.",
+   "uses": [
+    "lem-weil-pbc-annihilator-quasicoherent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ideal-module-product-stalk"
+  "lem-pc-s3-coherent-support-vanishing-ideal-nilpotence",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-annihilator-quasicoherent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PO, proof of clause (1), applied to powers in Lemma 01PQ"
+  "by": "worker",
+  "agent": "T3",
+  "date": "2026-10-13",
+  "based_on": "Stacks Project, Properties, Tags 01PO and 01PQ. Lean proof bridges affine section ranges to IdealSheafData and reuses the existing proved annihilator theorem and generic power-range helpers; the canonical subsheaf, target signature and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -118,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T060416-L-582679",
-  "kind": "interface",
+  "landing": "20261013T072407-L-1125540",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

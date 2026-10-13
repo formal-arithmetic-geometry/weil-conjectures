@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+import Sheaf.AlgebraicGeometry.AnnihilatorQuasicoherent
+import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # The canonical annihilator of an ideal power
 
@@ -116,6 +119,105 @@ instance {X : Scheme.{u}} {P : X.Modules}
     change Mono (idealAnnihilatorPresheaf j F).ι
     infer_instance)
 
+set_option backward.isDefEq.respectTransparency false in
+/-- The section range of a quasi-coherent module map to the unit localizes on basic opens. -/
+private theorem range_ideal_basicOpen {X : Scheme.{u}} {P : X.Modules}
+    (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) [P.IsQuasicoherent]
+    (U : X.affineOpens) (f : Γ(X, U.1)) :
+    Ideal.map (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom
+        (LinearMap.range (j.val.app (op U.1)).hom) =
+      LinearMap.range (j.val.app (op (X.basicOpen f))).hom := by
+  apply le_antisymm
+  · apply Ideal.map_le_iff_le_comap.mpr
+    rintro _ ⟨b, rfl⟩
+    refine ⟨P.presheaf.map (homOfLE (X.basicOpen_le f)).op b, ?_⟩
+    exact ConcreteCategory.congr_hom
+      (j.mapPresheaf.naturality (homOfLE (X.basicOpen_le f)).op) b
+  · rintro _ ⟨b, rfl⟩
+    obtain ⟨k, t, ht⟩ := Modules.exists_map_eq_pow_smul_of_isAffineOpen P U.2 f b
+    let K := Ideal.map (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom
+      (LinearMap.range (j.val.app (op U.1)).hom)
+    have hmem : (X.presheaf.map (homOfLE (X.basicOpen_le f)).op f) ^ k *
+        (show Γ(X, X.basicOpen f) from j.app (X.basicOpen f) b) ∈ K := by
+      have h := Ideal.mem_map_of_mem
+        (X.presheaf.map (homOfLE (X.basicOpen_le f)).op).hom
+        (show j.app U.1 t ∈ LinearMap.range (j.val.app (op U.1)).hom from ⟨t, rfl⟩)
+      have hn : X.presheaf.map (homOfLE (X.basicOpen_le f)).op
+          (j.app U.1 t) = j.app (X.basicOpen f)
+            (P.presheaf.map (homOfLE (X.basicOpen_le f)).op t) :=
+        (ConcreteCategory.congr_hom
+          (j.mapPresheaf.naturality (homOfLE (X.basicOpen_le f)).op) t).symm
+      rw [hn, ht, Modules.Hom.app_smul] at h
+      exact h
+    exact (K.unit_mul_mem_iff_mem ((X.toRingedSpace.isUnit_res_basicOpen f).pow k)).mp hmem
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Convert finite affine ranges into ideal data and apply the affine annihilator theorem. -/
+private theorem annihilator_quasicoherent_of_affine_fg {X : Scheme.{u}} {P : X.Modules}
+    (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) [P.IsQuasicoherent]
+    (hfg : ∀ U : X.affineOpens, (LinearMap.range (j.val.app (op U.1)).hom).FG)
+    (F : X.Modules) [F.IsQuasicoherent] : (idealAnnihilator j F).IsQuasicoherent := by
+  let J : X.IdealSheafData :=
+    { ideal := fun U ↦ LinearMap.range (j.val.app (op U.1)).hom
+      map_ideal_basicOpen := range_ideal_basicOpen j }
+  have hJqc : J.toModules.IsQuasicoherent := Modules.ideal_qc J _ (Iso.refl _)
+  have hfinite (U : X.affineOpens) : Module.Finite Γ(X, U.1) Γ(J.toModules, U.1) := by
+    let q := (J.toModulesι.val.app (op U.1)).hom
+    have hR : q.range = J.ideal U := SetLike.coe_injective (J.range_toModulesι_app U)
+    have : Module.Finite Γ(X, U.1) q.range := by
+      rw [hR]
+      exact Module.Finite.of_fg (hfg U)
+    exact (q.rangeRestrict.finite_iff_of_bijective
+      ⟨fun a b h ↦ J.injective_toModulesι_app U.1 (congrArg Subtype.val h),
+        fun ⟨a, b, hb⟩ ↦ ⟨b, Subtype.ext hb⟩⟩).mpr
+      (show Module.Finite Γ(X, U.1) q.range from inferInstance)
+  have : J.toModules.IsFiniteType :=
+    (((Modules.quasicoherent_finite_type_affine.{u, u} X).2 J.toModules hJqc).2.1
+      X.affineOpens (fun U ↦ U.1) (iSup_affineOpens_eq_top X) (fun U ↦ U.2) hfinite).1
+  apply AlgebraicGeometry.annihilator_subsheaf_quasicoherent X J F
+    (idealAnnihilator j F) (idealAnnihilatorι j F)
+  intro U s
+  change (∃ t : idealAnnihilatorSections j F U.1, t.val = s) ↔
+    ∀ a ∈ J.ideal U, a • s = 0
+  constructor
+  · rintro ⟨t, rfl⟩ a ⟨b, rfl⟩
+    have ht := t.property U.1 le_rfl b
+    change (show Γ(X, U.1) from j.app U.1 b) • t.val = 0
+    change (show Γ(X, U.1) from j.app U.1 b) •
+      F.presheaf.map (𝟙 (op U.1)) t.val = 0 at ht
+    rwa [F.presheaf.map_id, ConcreteCategory.id_apply] at ht
+  · intro hs
+    refine ⟨⟨s, ?_⟩, rfl⟩
+    intro V hV b
+    let A : TopCat.Sheaf Ab X := ⟨F.presheaf, F.isSheaf⟩
+    let K := {W : X.affineOpens // W.1 ≤ V}
+    refine A.eq_of_locally_eq' (fun W : K ↦ W.val.val) V
+      (fun W ↦ homOfLE W.property) ?_ _ 0 ?_
+    · intro x hx
+      obtain ⟨W, hW, hxW, hWV⟩ := exists_isAffineOpen_mem_and_subset hx
+      exact Opens.mem_iSup.mpr ⟨⟨⟨W, hW⟩, hWV⟩, hxW⟩
+    · intro W
+      rw [map_zero, F.map_smul]
+      have hb : X.presheaf.map (homOfLE W.property).op (j.app V b) ∈ J.ideal W.val := by
+        refine ⟨P.presheaf.map (homOfLE W.property).op b, ?_⟩
+        exact ConcreteCategory.congr_hom
+          (j.mapPresheaf.naturality (homOfLE W.property).op) b
+      let t : Γ(F, W.val.val) := F.presheaf.map (homOfLE (W.property.trans hV)).op s
+      let L : Ideal Γ(X, W.val.val) :=
+        LinearMap.ker (LinearMap.toSpanSingleton Γ(X, W.val.val) Γ(F, W.val.val) t)
+      have hle : J.ideal W.val ≤ L := by
+        rw [← J.map_ideal (W.property.trans hV), Ideal.map_le_iff_le_comap]
+        intro a ha
+        change X.presheaf.map (homOfLE (W.property.trans hV)).op a • t = 0
+        dsimp only [t]
+        rw [← F.map_smul, hs a ha, map_zero]
+      have hkill := hle hb
+      change X.presheaf.map (homOfLE W.property).op (j.app V b) • t = 0 at hkill
+      convert hkill using 1
+      dsimp only [t]
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+      rfl
+
 /-- The annihilator of each power of a finite-type quasi-coherent ideal is quasi-coherent.
 
 Source: Stacks Project, Properties, Tag 01PO, proof of (1), applied to the powers
@@ -138,6 +240,15 @@ into F make these local identifications compatible. It is quasi-coherent.
 theorem ideal_power_annihilator_quasicoherent {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
     [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent]
-    (n : ℕ) : (idealAnnihilator (idealSheafPower ι n).2 F).IsQuasicoherent := by sorry
+    (n : ℕ) : (idealAnnihilator (idealSheafPower ι n).2 F).IsQuasicoherent := by
+  have hp := Modules.powers_affine_sections ι n
+  have : (idealSheafPower ι n).1.IsQuasicoherent := hp.1
+  apply annihilator_quasicoherent_of_affine_fg (idealSheafPower ι n).2 _ F
+  intro U
+  rw [hp.2 U]
+  have : Module.Finite Γ(X, U.1) Γ(I, U.1) :=
+    Modules.finite_sections_of_finiteType I U.2
+  let q : Γ(I, U.1) →ₗ[Γ(X, U.1)] Γ(X, U.1) := (ι.val.app (op U.1)).hom
+  exact (Submodule.fg_range q).pow n
 
 end AlgebraicGeometry.Scheme
