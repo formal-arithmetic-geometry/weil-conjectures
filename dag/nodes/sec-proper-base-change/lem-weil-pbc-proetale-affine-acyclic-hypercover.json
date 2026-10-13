@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Affine weakly contractible hypercovers of qcqs pro-etale objects",
- "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-etale site and universes [def-weil-pbc-proetale-site] [def-weil-size-convention], and let $W\\to X$ be a site object whose scheme $W$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. There exists an augmented simplicial object $U_\\bullet\\to W$ in this site, with each $U_p$ affine and weakly contractible, which is a hypercover of $W$. Here weakly contractible means that evaluation $F\\mapsto F(U_p)$ on sheaves of sets sends every epimorphism to a surjection. Hypercover means that for every $p\\geq0$ the map from the representable sheaf of $U_p$ to its matching sheaf is an epimorphism. The matching sheaf in degree zero is the representable sheaf of $W$; in degree $p>0$ it is the sheaf of compatible proper faces of a $p$-simplex, the finite limit of the lower-degree representable sheaves indexed by proper faces. The face and degeneracy maps satisfy the simplicial identities. Representable sheaves here are the sheaves of scheme morphisms over $X$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-etale site and universes [def-weil-pbc-proetale-site] [def-weil-size-convention], and let $W\\to X$ be a site object whose scheme $W$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. There exists an augmented simplicial object [def-weil-pbc-simplicial-object] $U_\\bullet\\to W$ in this site, with each $U_p$ affine and weakly contractible, which is a hypercover of $W$. Here weakly contractible means that evaluation $F\\mapsto F(U_p)$ on sheaves of sets on the full site $X_{\\mathrm{proet}}$ sends every epimorphism to a surjection. Hypercover means that for every $p\\geq0$ the map $h_{U_p}\\to M_p$ to its matching sheaf is an epimorphism. The matching sheaf in degree zero is $h_W$; in degree $p>0$ it is the finite limit of the compatible proper-face diagram in the category of sheaves of sets over $h_W$. In particular $M_1=h_{U_0}\\times_{h_W}h_{U_0}$. The face and degeneracy maps satisfy the simplicial identities and commute with the augmentation. Representable sheaves here are the sheaves $h_V=\\operatorname{Hom}_X(-,V)$.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09A1, label lemma-w-contractible-hypercovering, clause (2); weak contractibility: sites.tex Tag 090L, label definition-w-contractible, with Tag 090K, label lemma-w-contractible"
@@ -23,12 +23,70 @@
   "def-pc-scheme",
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Work in the qcqs subsite $\\mathcal D$ of $X_{\\mathrm{proet}}$ from [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. The given $W$ belongs to it. Its fibre products and slice matching limits agree with scheme limits in the full site, its coverings are finite pro-etale coverings, and adjoining finitely many arrows preserves a covering. Let $\\mathcal B$ consist of the affine objects of $\\mathcal D$ that are weakly contractible for sheaves on the full site. For each $T\\in\\mathcal D$, [lem-weil-pbc-proetale-qc-affine-contractible-cover] gives a one-member cover $V\\to T$ with $V$ affine and weakly contractible. Affine schemes are qcqs, so $V\\in\\mathcal B$. Thus the finite-cover and enlargement hypotheses of the finite-basis construction hold, with no affine hypothesis on $W$ or $X$.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A1, proof of (2), qcqs subsite and choice of B; Tag 0F4P"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-finite-basis-hypercover-existence] to $(\\mathcal D,\\mathcal B,W)$. Obtain a genuine simplicial family hypercover $K_n=\\{V_{n,i}\\to W\\}_{i\\in I_n}$, with $I_n$ finite and all $V_{n,i}$ affine and weakly contractible in the full site. Regard these same families and component maps in the full site. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], the fibre products and finite limits in the slices agree, so their proper-face matching objects and arrows are the same. Each componentwise matching cover in $\\mathcal D$ is a pro-etale cover in the full site. Thus $K$ is a family hypercover there as well; the face and degeneracy identities are equalities of the same scheme maps.",
+   "uses": [
+    "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A1, proof of (2), application of Tag 094K; transfer of matching coverings along the qcqs inclusion (Tag 0DAZ)"
+   }
+  },
+  {
+   "text": "Set $U_n=\\coprod_{i\\in I_n}V_{n,i}$. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], these finite disjoint unions lie in the site, are affine, and $\\coprod_i h_{V_{n,i}}\\cong h_{U_n}$. Apply [lem-weil-pbc-site-hypercover-disjoint-union] to the full-site family hypercover of step 2. On a component $V_{n,i}$ a simplicial operator with family data $(\\alpha,f_i)$ is the composite of $f_i:V_{n,i}\\to V_{m,\\alpha(i)}$ and the corresponding coproduct injection into $U_m$. Composition and identity agree componentwise, hence agree on $U_n$ by its coproduct universal property. This supplies the augmentation and all simplicial identities. The cited disjoint-union theorem gives an epimorphism $h_{U_n}\\to M_n$ for every degree, with matching limits explicitly over $h_W$, including $M_0=h_W$.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-site-hypercover-disjoint-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A1, final sentences of proof (2); hypercovering.tex Tags 0DB1, 0DB2"
+   }
+  },
+  {
+   "text": "For an epimorphism $F\\to G$ of sheaves of sets on the full site, [lem-weil-pbc-proetale-qcqs-finite-family-geometry] identifies its evaluation on $U_n$ with $\\prod_i F(V_{n,i})\\to\\prod_i G(V_{n,i})$. Given a tuple of sections on the right, weak contractibility of each $V_{n,i}$ supplies a preimage in each of the finitely many factors. The tuple of these preimages gives a section of $F(U_n)$ mapping to the prescribed section. For the empty family both products are singletons. Therefore $U_n$ is weakly contractible in exactly the sense asserted. Together with step 3 this proves all clauses.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F4P, disjoint-union paragraph; Tag 09A1, final disjoint unions in proof (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "lem-weil-pbc-site-hypercover-disjoint-union"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A1, lemma-w-contractible-hypercovering, proof of (2)"
+ },
+ "status": "split",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,6 +115,41 @@
    "results": "service unavailable: Internal Server Error; 0 hits. Executed through msearch.py by the maintainer reader; log stored within this isolated review.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated pro etale scheme has an affine weakly contractible hypercover",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.quasiCompactCover_iff, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine weakly contractible all-degree pro-etale hypercover theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of simplicial resolutions by projective objects on pro etale sites",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.of, CategoryTheory.projectiveResolutions, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.projective, CategoryTheory.projectiveResolution",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine weakly contractible all-degree pro-etale hypercover theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hypercover\"",
+   "results": "12 hits: CategoryTheory.PreZeroHypercover, CategoryTheory.PreZeroHypercover.empty, CategoryTheory.Precoverage.ZeroHypercover, CategoryTheory.PreZeroHypercover.HasPullbacks, CategoryTheory.PreZeroHypercover.I₀, CategoryTheory.PreZeroHypercover.instCategory, CategoryTheory.PreZeroHypercover.presieve₀, CategoryTheory.PreZeroHypercover.shrink",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine weakly contractible all-degree pro-etale hypercover theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|weaklyContractible",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean, Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean, Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no affine weakly contractible all-degree pro-etale hypercover theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine weakly contractible hypercovers in the pro etale topology",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
@@ -75,5 +168,20 @@
    "state": "none"
   }
  },
- "merged_into": null
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "worker": "stage1",
+  "summary": "Followed 09A1(2): qcqs subsite, finite-basis family hypercover, degreewise disjoint unions, and the explicit finite-product proof of weak contractibility. Corrected the imported matching-sheaf wording to limits over h_W; ordinary limits over X give a false degree-one requirement for W=X disjoint union X. Four smaller statement-only nodes, no Mathlib matches.",
+  "blueprint": "Proof paragraph 1: coefficient-extension coproduct continuity; affine weakly contractible hypercover construction in the 09A3 argument."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-ba9c48dd0",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-ba9c48dd0 (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full against Stacks 09A1, 0F4P, 094K, 0DB1/2 and supporting sources. The construction and matching objects over h_W are sound; no duplicate found. Added the missing simplicial-object definition citation and dependency in fixes. Checked master target hypotheses, condensed coefficients, and exchange direction. Concrete checks and inherited DAG-cycle findings are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
