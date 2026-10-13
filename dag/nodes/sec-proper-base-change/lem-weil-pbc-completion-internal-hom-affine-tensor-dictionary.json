@@ -15,52 +15,42 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_X(U)$, $J=\\mathcal I(U)$, $N=\\mathcal G(U)$, $M=\\mathcal F(U)$, and $H=\\operatorname{Hom}_A(N,M)$. The affine open is a spectrum [def-weil-affine-spectrum], with Noetherian section ring [pqf-lem-affine-open-locnoeth]. The internal Hom is coherent [lem-weil-pbc-coherent-sheaf-hom-coherent]. Coherence gives quasi-coherence and finite type [pqf-lem-coherent-ft-locnoeth], so $N,M,H$ are finite by the affine sections comparison [lem-weil-pbc-quasi-coherent-finite-type-affine]. The tilde-sections adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies morphisms and sections over U with module linear maps. Ideal products and quotient sections identify with $J^{n+1}$-products and module quotients [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections]. The source quotient on affine sections is surjective, and precomposition by the quotient of G is an isomorphism [lem-weil-pbc-completion-internal-hom-quotient]. Thus he forces $e_n(U)$ to be $h\\bmod J^{n+1}H\\mapsto (x\\bmod J^{n+1}N\\mapsto h(x)\\bmod J^{n+1}M)$. The affine formal-module equivalence [lem-weil-pbc-coherent-formal-modules-affine] applies to these quotient systems.",
+   "text": "Coherence gives quasi-coherence and finite type for N and M. Reuse Scheme.Modules.isFiniteType_over from FinitePushforwardCoherent (a proof-only import all) for finite type over U. The affine finite-type criterion gives finite generation of sections. The affine ring is Noetherian, hence Hom_A(N,M) is finite by the Mathlib instance.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "pqf-lem-affine-open-locnoeth",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-coherent-sheaf-hom-coherent",
     "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-completion-internal-hom-quotient"
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
    ],
    "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-coherent-formal-modules-affine], compatible maps between the quotient systems on U identify with $\\operatorname{Hom}_{A^\\wedge}(N^\\wedge,M^\\wedge)$, and compatible source sections identify with $H^\\wedge$. The evaluation map under these identifications is the componentwise map $\\beta:(h_n)_n\\mapsto ((x_n)_n\\mapsto(h_n(x_n))_n)$. It is $A^\\wedge$-linear since scalar multiplication and evaluation are componentwise. For $h\\in H$, its value on the image of h in $H^\\wedge$ is the completed linear map $h^\\wedge$. Componentwise evaluation commutes with all quotient transitions, so it induces the completed-ring-linear map on the inverse limits.",
+   "text": "Use Mathlib completion-tensor equivalences cH,cN,cM. Construct beta by AlgebraTensorModule.lift from b,h mapped to b times baseChangeHom(h). Its generator equation follows from one_smul. Let C = arrowCongr cN cM and epsilon = C composed with beta composed with cH inverse. Mathlib tensor_map_id_left_eq_map and the inverse tensor-completion formula on of(h) show epsilon(of(h)) = map J h.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-completion-finite-module-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "For P=N,M,H use the natural completion-tensor equivalences c_P. Set rho=c_H^{-1} composed with the compatible-section/limit identification. Conjugating componentwise evaluation by c_N and c_M yields beta. On 1 tensor h, evaluation is the completed map h, so tensor-completion naturality gives the stated baseChangeHom formula. Apply the affine formal-module equivalence to t restricted to U to define v, then conjugate by c_N and c_M. Faithfulness and naturality of the limit projections identify beta(rho(s))=v with all componentwise evaluation equations, in both directions. This step uses no flatness or Hom base-change bijection.",
+   "text": "Apply the completion-only affine evaluation theorem to epsilon. It returns q and maps w representing t. Set rho = cH inverse composed with q and v = C inverse(w). The given iff becomes C(beta(rho(s))) = w, equivalent by the inverse equivalence identity to beta(rho(s)) = v. This is the required statement, with its generator equation already proved.",
    "uses": [
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-completion-internal-hom-affine-completion-evaluation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "pqf-lem-affine-open-locnoeth",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-sheaf-hom-coherent",
-  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-completion-internal-hom-affine-completion-evaluation",
+  "lem-weil-pbc-finite-pushforward-coherent",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-completion-internal-hom-quotient",
-  "lem-weil-pbc-completion-finite-module-tensor"
+  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0882",
-  "place": "Tag 0882, lemma-completion-internal-hom, affine identification in its proof; Tag 087W, lemma-inverse-systems-affine; Tag 00MA, lemma-completion-finite, part (3). The local literature checkout is absent; the three cited Stacks web pages were read. The explicit evaluation and naturality checks expand the source argument."
+  "place": "Affine-local proof, with tensor transport formalized using Mathlib AsTensorProduct and arrowCongr. The sheaf/limit identification is isolated as completion-only evaluation."
  },
  "mathlib_searches": [
   {
@@ -152,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T004333-L-2508901",
+  "landing": "20261013T040758-L-3951877",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
