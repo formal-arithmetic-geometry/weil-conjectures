@@ -13,35 +13,37 @@
  },
  "proof": [
   {
-   "text": "Use the Koszul projective resolution of A/I. Tensor with A/I, so every differential coefficient vanishes and homology is the degree-n term.",
+   "text": "Obtain the Koszul conormal basis b and the normalized Koszul projective resolution P with a:K(f) isomorphic to P.complex and a_0 followed by P.pi_0 equal to the quotient augmentation. The augmented refinement is necessary because the older existence theorem fixes the complex but not the augmentation.",
    "uses": [
-    "new-j3-koszul-projective-resolution"
+    "lem-sc-koszul-conormal-basis",
+    "new-d3-koszul-normalized-projective-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Use the conormal basis indexed by f. Its nth exterior basis corresponds to the increasing Koszul wedges in the tensor resolution.",
+   "text": "Apply the quotient-coefficient Koszul homology basis calculation to b. It gives an isomorphism e from the exterior conormal module to H_n(K(f) tensor A/I), carrying each increasing exterior basis vector to the corresponding Koszul cycle class.",
    "uses": [
-    "lem-sc-koszul-conormal-basis"
+    "new-d3-koszul-quotient-tensor-homology-basis"
    ],
    "elementary": false
   },
   {
-   "text": "The defining normalization of the canonical map sends each of these wedges to that Koszul homology class. It is the composite of the exterior basis, zero-differential homology, and resolution Tor isomorphisms.",
+   "text": "Use the normalization of selfTorConormalComparison with the ideal lifts of f, a.hom, and the supplied basis cycles. It identifies c followed by the projective-resolution Tor comparison with e followed by the homology map of a. Extend this equality from the exterior basis to every element by its finite basis expansion, lifting each A/I coefficient to A. Since the other three arrows are isomorphisms, cancellation writes c as their composite and its invertibility follows.",
    "uses": [
     "new-r4-self-tor-conormal-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-koszul-conormal-basis",
-  "new-j3-koszul-projective-resolution",
+  "new-d3-koszul-normalized-projective-resolution",
+  "new-d3-koszul-quotient-tensor-homology-basis",
   "new-r4-self-tor-conormal-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "R4",
+  "agent": "D3",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/09PQ",
@@ -113,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R4",
+  "reviewer": "X-a6ce6",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T181120-L-2606540",
+  "landing": "20261013T201743-L-3967310",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, node records, report, proofs, axioms, and direct importer match the stage-3 review brief; all compile cleanly."
  }
 }

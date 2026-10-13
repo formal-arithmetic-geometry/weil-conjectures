@@ -1,0 +1,129 @@
+{
+ "id": "new-d3-koszul-normalized-projective-resolution",
+ "kind": "statement",
+ "title": "The Koszul projective resolution with its quotient augmentation",
+ "statement": "Let $A$ be a commutative ring, $I$ an ideal, $r$ a natural number, and $f:\\operatorname{Fin}(r)\\to A$ a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] with $(f)=I$. There exist a projective resolution $P$ of the $A$-module $A/I$ and a chain isomorphism $a:K_A(f)\\cong P_\\bullet$ [def-weil-pbc-koszul-complex] such that $a_0$ followed by the degree-zero augmentation of $P$ is the quotient map $\\bigwedge_A^0 A^r\\cong A\\to A/I$. Empty sequences and unit ideals are included.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "duality.tex, lemma-regular-immersion-ext, finite free Koszul resolution; Tags 0623 and 062E for the differential and regularity"
+ },
+ "proof": [
+  {
+   "text": "Import the existing private degree-one formula koszulBoundary_zero_quotient_formula from KoszulProjectiveResolution with a proof-only import all. Define the quotient augmentation using the degree-zero exterior equivalence. The imported formula identifies contraction in degree one with the generator linear combination, whose image is I, so the augmentation kills the differential.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "new-j3-koszul-projective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Surjectivity of the quotient and equality of its kernel with the image of the first differential prove degree-zero quasi-isomorphism by the cokernel property. Koszul regularity gives exactness in all positive degrees; the target single complex is exact there.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard exterior basis makes each term projective. Bundle the exact original Koszul complex, the specified augmentation and these proofs as P; take a to be the identity isomorphism. Its degree-zero normalization is the constructed augmentation equality.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "new-j3-koszul-projective-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "D3",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+   "place": "duality.tex, lemma-regular-immersion-ext, finite free Koszul resolution; Tags 0623 and 062E for the differential and regularity"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul projective resolution with augmentation quotient map and exterior power identification",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul complex of a Koszul regular sequence is a projective resolution with quotient augmentation in degree zero",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.of_def, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.of, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.projectiveResolution, CategoryTheory.ProjectiveResolution.projective",
+   "date": "2026-10-14",
+   "verdict": "general projective-resolution constructions only; no normalized Koszul resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|Koszul",
+   "results": "1 hits: Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-14",
+   "verdict": "Mathlib records Koszul sequences as a TODO"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalRegularIso",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local diagonal Koszul calculation: normalized exterior-to-self-Tor isomorphism on a regular quotient",
+   "via": [
+    "new-r4-self-tor-conormal-regular-iso",
+    "lem-sc-self-tor-conormal-dual-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulNormalizedProjectiveResolution",
+  "file": "lean/Sheaf/RingTheory/KoszulNormalizedProjectiveResolution.lean",
+  "declaration": "ExteriorAlgebra.exists_koszul_normalized_projective_resolution",
+  "statement": "theorem exists_koszul_normalized_projective_resolution\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :\n    ∃ P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)),\n      ∃ a : koszulComplex A r f ≅ P.complex,\n        a.hom.f 0 ≫ P.π.f 0 =\n          ModuleCat.ofHom (I.mkQ.comp\n            (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a6ce6",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201743-L-3967310",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a6ce6",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201743-L-3967310",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node records, report, proofs, axioms, and direct importer match the stage-3 review brief; all compile cleanly."
+ }
+}
