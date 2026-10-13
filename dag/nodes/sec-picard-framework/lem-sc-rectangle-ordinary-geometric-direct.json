@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-rectangle-ordinary-geometric-direct",
+ "kind": "statement",
+ "title": "Direct-image comparison and inverse ordinary pasting for fixed upper comparison",
+ "statement": "Let X,Y,S,T be quasi-compact quasi-separated schemes [def-pc-scheme], f:X→Y quasi-compact and quasi-separated, g:S→Y and h:T→S. Suppose ordinary base change is invertible on QCoh complexes for f against g, for the resulting second projection against h, and for f against h followed by g [def-pc-derived-base-change-map]. Let k:(X×Y S)×S T→X×Y T satisfy both projection equations [def-pc-fibre-product]. Write U,L,V for the quasi-coherent pullbacks along the outer first projection, k, and the two inner first projections; write P,Q for quasi-coherent direct images along the outer and inner second projections [def-pc-derived-pullback,def-pc-derived-direct-image]. Write B for pullback along h followed by g and H for successive pullbacks along g and h. Let α be the outer inverse base-change square and δ the horizontal paste of the two inner inverse squares [lem-sc-duality-base-change-inverse-square-mate]. For any fixed s:U⋙L≅V with L an equivalence and s having exactly the ambient three-factor component prescribed by the first projection equation and the pinned pullback composition family [lem-pc-ringed-spaces-derived-pullback-composition], there exist p:L⋙Q≅P and b:B≅H such that, for every QCoh complex E on X, Q(s_E) followed by δ_E equals p_{U(E)} followed by α_E followed by b_{Rf(E)}. This statement constructs no s and proves no equivalence of L.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0ATM",
+  "place": "Tag 0ATM, cohomology-remark-base-change-compose; Tag 08HY counit formula, Tag 0D5S composition, Tag 0D5T direct-image composition; ordinary comparison subargument of Tag 0ATR"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "lem-sc-duality-base-change-inverse-square-mate"
+ ],
+ "proof": [
+  {
+   "text": "Identify k with the canonical iterated pullback isomorphism. Use the pinned pullback/direct-image adjunction and composition comparison together with invertibility of its unit along k and hk₂ to construct the direct-image comparison p; restrict it to QCoh. Restrict the inverse pullback comparison c(h,g) to obtain b.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical ambient component of s. Transpose the horizontally pasted ordinary maps under the pinned composite adjunction; substitute the counit formula, move counits by naturality, and use both pullback-composition associativity identities. Cancel the unit along the equivalence k by the triangle identity. The transposes of rectangle and paste coincide; Hom-equivalence injectivity gives ordinary pasting. Invert the three isomorphisms and cancel the comparisons, then restrict faithfully to QCoh to obtain Q(s)δ=pαb. The same functorial identities cover empty schemes, zero objects, and identity maps.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-base-change-pasting",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-derived-base-change-map",
+  "lem-pc-derived-base-change-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0ATM",
+  "note": "Detailed restriction/glue written from the cited composition and base-change source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along an isomorphism is an equivalence and composition of derived pullbacks",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.isoInv, CategoryTheory.GrothendieckTopology.pullbackComp, CategoryTheory.ChosenPullbacksAlong.iso, CategoryTheory.ChosenPullbacksAlong.iso_pullback_obj, CategoryTheory.ChosenPullbacksAlong.iso_pullback_map, CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_hom_app, CategoryTheory.ChosenPullbacksAlong.isoInv_pullback_obj_hom, CategoryTheory.GrothendieckTopology.overMapPullbackComp",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullbackLeftPullbackSndIso",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.Limits.pullbackLeftPullbackSndIso, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_snd_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_snd_snd_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst_snd",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "qcPullback|qcDirectImage",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of derived base change maps for quasi coherent derived categories",
+   "date": "2026-10-13",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "date": "2026-10-13",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedBaseChange_pasting|qcInverseBaseChange|fullyFaithfulCancelRight",
+   "date": "2026-10-13",
+   "results": "10 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition restricted to quasi coherent objects and horizontal pasting of derived base change maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: ",
+   "verdict": "unavailable",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricComparisons",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-duality-base-change-inverse-square-mate",
+   "place": "Ordinary rectangle comparison and base-change pasting used in the proof of Tag 0ATR",
+   "via": [
+    "lem-sc-rectangle-ordinary-geometric-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricDirect",
+  "file": "lean/Sheaf/AlgebraicGeometry/RectangleOrdinaryGeometricDirect.lean",
+  "declaration": "AlgebraicGeometry.rectangle_ordinary_geometric_direct",
+  "statement": "theorem rectangle_ordinary_geometric_direct\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y S T : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace T] [QuasiSeparatedSpace T]\n    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (g : S ⟶ Y) (h : T ⟶ S)\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)\n        (pullback.fst f (h ≫ g)) pullback.condition E.obj))\n    (hβS : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n        (pullback.fst f g) pullback.condition E.obj))\n    (hβI : ∀ E : schemeDerivedQCohCategory (pullback f g),\n      IsIso (schemeDerivedBaseChangeMap (pullback.snd f g) (pullback.snd (pullback.snd f g) h) h\n        (pullback.fst (pullback.snd f g) h) pullback.condition E.obj))\n    (k : pullback (pullback.snd f g) h ⟶ pullback f (h ≫ g))\n    (hk₁ : k ≫ pullback.fst f (h ≫ g) =\n      pullback.fst (pullback.snd f g) h ≫ pullback.fst f g)\n    (hk₂ : k ≫ pullback.snd f (h ≫ g) = pullback.snd (pullback.snd f g) h) :\n    let U := qcPullback (pullback.fst f (h ≫ g))\n    let L := qcPullback k\n    let V := qcPullback (pullback.fst f g) ⋙\n      qcPullback (pullback.fst (pullback.snd f g) h)\n    let P := @qcDirectImage _ _ _ _\n      (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))) _ _\n      (pullback.snd f (h ≫ g))\n    let Q := @qcDirectImage _ _ _ _\n      (quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)) _ _\n      (pullback.snd (pullback.snd f g) h)\n    let B := qcPullback (h ≫ g)\n    let H := qcPullback g ⋙ qcPullback h\n    let α := qcInverseBaseChange f (h ≫ g) hβ\n    let δ := qcInverseBaseChange f g hβS ≫ₕ\n      @qcInverseBaseChange _ (pullback f g) S T _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _ h hβI\n    ∀ (s : U ⋙ L ≅ V) (hL : L.IsEquivalence) (hs : ∀ E : schemeDerivedQCohCategory X,\n      (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map (s.hom.app E) =\n        (let comp := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition)))\n         (comp k (pullback.fst f (h ≫ g))).hom.app E.obj ≫\n           eqToHom (congrArg (fun v ↦ (derivedPullback v).obj E.obj) hk₁) ≫\n           (comp (pullback.fst (pullback.snd f g) h)\n             (pullback.fst f g)).inv.app E.obj)),\n    ∃ (p : L ⋙ Q ≅ P) (b : B ≅ H),\n      (∀ E : schemeDerivedQCohCategory X,\n        Q.map (s.hom.app E) ≫ δ.app E =\n          p.hom.app (U.obj E) ≫ α.app E ≫ b.hom.app ((qcDirectImage f).obj E))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T165639-L-1807379",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T165639-L-1807379",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

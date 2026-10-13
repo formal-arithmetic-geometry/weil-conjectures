@@ -6,8 +6,8 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricPullback
+import Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricDirect
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
@@ -90,6 +90,13 @@ theorem rectangle_ordinary_geometric_comparisons
            (comp k (pullback.fst f (h ≫ g))).hom.app E.obj ≫
              eqToHom (congrArg (fun v ↦ (derivedPullback v).obj E.obj) hk₁) ≫
              (comp (pullback.fst (pullback.snd f g) h)
-               (pullback.fst f g)).inv.app E.obj)) := by sorry
+               (pullback.fst f g)).inv.app E.obj)) := by
+  intro U L V P Q B H α δ
+  have hpull := rectangle_ordinary_geometric_pullback.{u, w} f g h k hk₁ hk₂
+  rcases hpull with ⟨s, hL, hs⟩
+  have hdir := rectangle_ordinary_geometric_direct.{u, w}
+    (X := X) (Y := Y) (S := S) (T := T) f g h hβ hβS hβI k hk₁ hk₂ s hL hs
+  rcases hdir with ⟨p, b, hp⟩
+  exact ⟨s, p, b, hL, hp, hs⟩
 
 end AlgebraicGeometry

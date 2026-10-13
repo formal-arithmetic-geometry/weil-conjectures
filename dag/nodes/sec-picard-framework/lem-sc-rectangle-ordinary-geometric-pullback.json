@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-rectangle-ordinary-geometric-pullback",
+ "kind": "statement",
+ "title": "Canonical upper pullback comparison on an iterated fiber product",
+ "statement": "Let X,Y,S,T be schemes [def-pc-scheme] with a family of derived categories [def-pc-derived-category], f:X→Y, g:S→Y and h:T→S. Let k:(X×Y S)×S T→X×Y T satisfy k followed by the outer first projection equals the composite inner first projections, and k followed by the outer second projection equals the inner second projection [def-pc-fibre-product]. Let U be quasi-coherent derived pullback along the outer first projection, L along k, and V the composite along the two inner first projections [def-pc-derived-pullback]. Then L is an equivalence and there exists a natural isomorphism s:U⋙L≅V whose image under the full-subcategory inclusion is the pinned composition comparison for k and the outer first projection, followed by the equality transport for the first projection equation, followed by the inverse pinned composition comparison for the inner first projections [lem-pc-ringed-spaces-derived-pullback-composition]. No compactness or invertibility of base change is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S, cohomology-lemma-derived-pullback-composition; restriction to the full QCoh subcategory and the iterated pullback universal property"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "lem-sc-duality-base-change-inverse-square-mate"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the pinned composition and identity comparisons through the fully faithful QCoh inclusion to give cc and ii.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By pullback.hom_ext and the projection equations, k is pullbackLeftPullbackSndIso.hom. Compose cc with inverse-identity equality transports and ii, and apply Equivalence.mk to qcPullback k with inverse pullback along the inverse scheme isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the two ambient pullback comparisons around the first-projection equality transport. Lift via the fully faithful inclusion and evaluate map_preimage to compute the prescribed component.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "note": "Detailed restriction/glue written from the cited composition and base-change source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along an isomorphism is an equivalence and composition of derived pullbacks",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.isoInv, CategoryTheory.GrothendieckTopology.pullbackComp, CategoryTheory.ChosenPullbacksAlong.iso, CategoryTheory.ChosenPullbacksAlong.iso_pullback_obj, CategoryTheory.ChosenPullbacksAlong.iso_pullback_map, CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_hom_app, CategoryTheory.ChosenPullbacksAlong.isoInv_pullback_obj_hom, CategoryTheory.GrothendieckTopology.overMapPullbackComp",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullbackLeftPullbackSndIso",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.Limits.pullbackLeftPullbackSndIso, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_snd_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_snd_snd_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst_snd",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "qcPullback|qcDirectImage",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of derived base change maps for quasi coherent derived categories",
+   "date": "2026-10-13",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "date": "2026-10-13",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedBaseChange_pasting|qcInverseBaseChange|fullyFaithfulCancelRight",
+   "date": "2026-10-13",
+   "results": "10 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean, Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+   "verdict": "Generic categorical or underived results only; no exact QCoh comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition restricted to quasi coherent objects and horizontal pasting of derived base change maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: ",
+   "verdict": "unavailable",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricComparisons",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-duality-base-change-inverse-square-mate",
+   "place": "Ordinary rectangle comparison and base-change pasting used in the proof of Tag 0ATR",
+   "via": [
+    "lem-sc-rectangle-ordinary-geometric-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/RectangleOrdinaryGeometricPullback.lean",
+  "declaration": "AlgebraicGeometry.rectangle_ordinary_geometric_pullback",
+  "statement": "theorem rectangle_ordinary_geometric_pullback\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y S T : Scheme.{u}}\n    (f : X ⟶ Y) (g : S ⟶ Y) (h : T ⟶ S)\n    (k : pullback (pullback.snd f g) h ⟶ pullback f (h ≫ g))\n    (hk₁ : k ≫ pullback.fst f (h ≫ g) =\n      pullback.fst (pullback.snd f g) h ≫ pullback.fst f g)\n    (hk₂ : k ≫ pullback.snd f (h ≫ g) = pullback.snd (pullback.snd f g) h) :\n    let U := qcPullback (pullback.fst f (h ≫ g))\n    let L := qcPullback k\n    let V := qcPullback (pullback.fst f g) ⋙\n      qcPullback (pullback.fst (pullback.snd f g) h)\n    ∃ (s : U ⋙ L ≅ V),\n      L.IsEquivalence ∧\n      (∀ E : schemeDerivedQCohCategory X,\n        (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map\n            (s.hom.app E) =\n          (let comp := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n            (Classical.choose_spec exists_derivedPullbackComposition)))\n           (comp k (pullback.fst f (h ≫ g))).hom.app E.obj ≫\n             eqToHom (congrArg (fun v ↦ (derivedPullback v).obj E.obj) hk₁) ≫\n             (comp (pullback.fst (pullback.snd f g) h)\n               (pullback.fst f g)).inv.app E.obj))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T165639-L-1807379",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T165639-L-1807379",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
