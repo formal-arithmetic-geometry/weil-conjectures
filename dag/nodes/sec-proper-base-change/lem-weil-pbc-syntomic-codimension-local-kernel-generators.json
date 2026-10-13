@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-syntomic-codimension-local-kernel-generators",
+ "kind": "statement",
+ "title": "Syntomic local kernel generators retaining their fibre codimension count",
+ "statement": "Let R,S be commutative rings, S an R-algebra, q∈Spec S, n a natural number, and φ:R[x_1,...,x_n]→S a surjective R-algebra map with finitely generated kernel I. Assume R_{q∩R}→S_q is flat and the canonical fibre prime of S has a principal global-complete-intersection neighbourhood over κ(q∩R). Then there are c≤n and f:Fin c→R[x_1,...,x_n] such that (f)≤I, the extensions of (f) and I to the polynomial local ring at φ⁻¹(q) agree, and the local topological dimension at the canonical fibre prime of S is n-c.",
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00SY proof of (3) implies (2), conormal-basis selection through Nakayama; 00SC, 00P2"
+ },
+ "proof": [
+  {
+   "text": "Proof: Set P = R[x_1,...,x_n], I = ker φ, p = q ∩ R, Q = φ⁻¹(q), k = κ(p).\nCoefficient reduction and tensoring the surjection identify the fibre with\nk[x_1,...,x_n]/Ibar and its canonical prime with a quotient prime t. The complete\nintersection neighbourhood hypothesis transfers to this quotient. By 00SC its localized\nconormal module is free of rank c = n-d, where d is the local topological dimension\nat t; 00P2 gives d ≤ n. The same homeomorphism identifies d with the stated dimension\nof the fibre of S. Write Qbar for the inverse-image prime in k[x_1,...,x_n]. The vector space\nIbar_Qbar / Qbar Ibar_Qbar has dimension c: it is the residue reduction of the\nlocalized conormal module, since Ibar_Qbar is contained in Qbar. The images of I\nspan this vector space, so select c of those images as a basis and use their\noriginal representatives f_i in I. Equivalently, clear denominators outside Qbar\nin these selected representatives; multiplying individual basis vectors by units\npreserves their linear independence and span.\nNakayama over the polynomial fibre local ring makes these c images generate Ibar\nthere. The polynomial local ring A = P_Q modulo pA is this polynomial fibre local\nring, so, with J = (f_i), IA ≤ JA + pA. More precisely IA ≤ JA + (IA ∩ pA).\nFlatness of S_q over R_p gives IA ∩ pA = pIA by tensoring the kernel sequence;\nthus IA ≤ JA + pIA. The ideal IA is finite by hfg, and pA lies in the maximal\nideal of A. Nakayama applied to IA/JA gives IA = JA. Since d ≤ n and c = n-d,\nwe have c ≤ n and n-c = d. For c = 0 the same argument makes IA zero; the\nspecified fibre prime excludes the empty fibre. No regularity of R is required.",
+   "uses": [
+    "lem-weil-pbc-syntomic-polynomial-fibre-comparison",
+    "lem-weil-pbc-lci-conormal-free-rank-codimension",
+    "lem-weil-pbc-syntomic-local-kernel-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00SY proof of (3) implies (2), conormal-basis selection through Nakayama; 00SC, 00P2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-syntomic-polynomial-fibre-comparison",
+  "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "lem-weil-pbc-syntomic-local-kernel-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00SY proof of (3) implies (2), retaining the rank c from 00SC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented flat algebra complete intersection fiber choose kernel generators number equals codimension",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local dimension of spectrum invariant under localization away element outside prime",
+   "results": "Localization dimension lemmas returned; none constructs generators with fibre codimension count.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsEmbedding.restrictPreimage",
+   "results": "Topology.IsEmbedding.restrictPreimage, a topological tool only; no counted kernel generators.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(codimension|equationCount)|spanFinrank.*cotangent",
+   "results": "Span-rank operations and maximal ideal cotangent dimension found. The library bounded fibre/kernel generators omit the dimension count from their conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal number generators ideal in local ring equals dimension cotangent modulo maximal ideal complete intersection codimension",
+   "results": "IsLocalRing.finrank_cotangentSpace_le_one_iff, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, IsLocalRing.finrank_cotangentSpace_eq_zero, IsLocalRing.finrank_CotangentSpace_eq_one, IsLocalRing.finrank_CotangentSpace_eq_one_iff, Algebra.IsStandardSmooth.relativeDimension, ringKrullDim_le_ringKrullDim_add_spanFinrank, PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime",
+   "date": "2026-10-13",
+   "verdict": "Second reading: module-rank tools only; no counted generators with the specified fibre dimension and localized-kernel equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.spanFinrank, Module.finrank",
+   "results": "Module.finrank_eq_spanFinrank_of_free, IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace, IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace_of_fg, IsLocalRing.spanFinrank_maximalIdeal_add_finrank_eq_of_surjective, IsLocalRing.spanFinrank_eq_finrank_quotient",
+   "date": "2026-10-13",
+   "verdict": "Second reading: module-rank tools only; no counted generators with the specified fibre dimension and localized-kernel equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SyntomicEquationCountComparisonDimension",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity clause (b), realized by proof step 2: the approximation route uses the syntomic comparison construction; this node supplies the conormal-basis selection and Nakayama subargument of Tag 00SY (3) implies (2), retaining the codimension count from Tag 00SC.",
+   "via": [
+    "lem-weil-pbc-syntomic-equation-count-comparison-dimension",
+    "lem-weil-pbc-syntomic-equation-count-comparison",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators",
+  "file": "lean/Sheaf/RingTheory/SyntomicCodimensionLocalKernelGenerators.lean",
+  "declaration": "Algebra.exists_codimension_local_kernel_generators",
+  "statement": "theorem exists_codimension_local_kernel_generators\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (q : PrimeSpectrum S) (n : ℕ) (φ : MvPolynomial (Fin n) R →ₐ[R] S)\n    (hφ : Function.Surjective φ) (hfg : (RingHom.ker φ.toRingHom).FG)\n    (hflat : (Localization.localRingHom (q.asIdeal.comap (algebraMap R S)) q.asIdeal\n      (algebraMap R S) rfl).Flat)\n    (hci : ∃ h : (q.asIdeal.comap (algebraMap R S)).Fiber S,\n      h ∉ (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S))\n        ⟨q, rfl⟩).asIdeal ∧\n      IsGlobalCompleteIntersection (q.asIdeal.comap (algebraMap R S)).ResidueField\n        (Localization.Away h)) :\n    ∃ (c : ℕ) (f : Fin c → MvPolynomial (Fin n) R),\n      c ≤ n ∧ Ideal.span (Set.range f) ≤ RingHom.ker φ.toRingHom ∧\n      Ideal.map (algebraMap _\n        (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (Ideal.span (Set.range f)) =\n      Ideal.map (algebraMap _\n        (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (RingHom.ker φ.toRingHom) ∧\n      topologicalKrullDimAt\n        (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S)) ⟨q, rfl⟩) =\n          (n - c : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a9934",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095949-L-2457363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a9934",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095949-L-2457363",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with nodes, change record, source arguments, preserved caller interface, compiler results and axiom probes; verified forced adaptation and direct importer."
+ }
+}

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-syntomic-equation-count-comparison-dimension",
  "kind": "statement",
  "title": "Dimension of the comparison quotient fibre",
- "statement": "Dimension calculation for a comparison quotient at the canonical fibre prime",
+ "statement": "Let R and S be commutative rings with an R-algebra structure, q a prime of S, n,c natural numbers, and f a family of c equations in R[x_1,...,x_n]. Put T=R[x]/(f). Let π:T→S be a surjective R-algebra map and u∈T with π(u)∉q. Assume the canonical localization map T_u→S_{π(u)} is bijective and the local topological dimension at the canonical fibre prime of S over q∩R equals n-c. Then the local topological dimension at the canonical fibre prime of T over π⁻¹(q)∩R also equals n-c.",
  "stmt_deps": [],
  "source": {
   "document": "literature/stacks-project/algebra.tex",
@@ -10,24 +10,20 @@
  },
  "proof": [
   {
-   "text": "Apply the polynomial quotient dimension and height-difference theorem to the comparison presentation. The localization bijection identifies the relevant prime chains, and the quotient by c equations has fibre dimension n − c.",
-   "uses": [
-    "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference"
-   ],
-   "elementary": false,
+   "text": "Injectivity of the localized map implies every element a of ker π is annihilated by a power of u. Any prime not containing u therefore contains ker π. Surjectivity of π makes spectrum contraction an embedding, and its image consequently contains D(u). Restrict this embedding to the base fibre, then to this open neighbourhood; it is a homeomorphism there. The residue-field fibre homeomorphisms and invariance of local dimension under homeomorphisms and open subspaces identify the two canonical fibre dimensions. Apply the given dimension equality of the S fibre. All these assertions are proved as private helpers using Mathlib spectrum and topology lemmas.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "00SY and 00P2"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "00SY and 00P2"
+  "place": "00SY localization comparison; topological argument written by F1, using Mathlib and IsOpen.topologicalKrullDimAt_eq"
  },
  "mathlib_searches": [
   {
@@ -89,10 +85,11 @@
   "module": "Sheaf.RingTheory.SyntomicEquationCountComparisonDimension",
   "file": "lean/Sheaf/RingTheory/SyntomicEquationCountComparisonDimension.lean",
   "declaration": "Algebra.equationCount_comparison_dimension",
-  "statement": "theorem equationCount_comparison_dimension\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (q : PrimeSpectrum S) {n c : ℕ} {f : Fin c → MvPolynomial (Fin n) R}\n    (π : (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) →ₐ[R] S)\n    (u : MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n    (hsurj : Function.Surjective π) (hu : π u ∉ q.asIdeal)\n    (hbij : Function.Bijective\n      (IsLocalization.Away.mapₐ (Localization.Away u) (Localization.Away (π u)) π u))\n    (hle : c ≤ n) :\n    topologicalKrullDimAt\n      (PrimeSpectrum.preimageEquivFiber R\n        (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n        ((q.comap π.toRingHom).comap\n          (algebraMap R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))))\n        ⟨q.comap π.toRingHom, rfl⟩) = (n - c : ℕ)",
+  "statement": "theorem equationCount_comparison_dimension\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (q : PrimeSpectrum S) {n c : ℕ} {f : Fin c → MvPolynomial (Fin n) R}\n    (π : (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) →ₐ[R] S)\n    (u : MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n    (hsurj : Function.Surjective π) (hu : π u ∉ q.asIdeal)\n    (hbij : Function.Bijective\n      (IsLocalization.Away.mapₐ (Localization.Away u) (Localization.Away (π u)) π u))\n    (hdim : topologicalKrullDimAt\n      (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S)) ⟨q, rfl⟩) =\n        (n - c : ℕ)) :\n    topologicalKrullDimAt\n      (PrimeSpectrum.preimageEquivFiber R\n        (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n        ((q.comap π.toRingHom).comap\n          (algebraMap R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))))\n        ⟨q.comap π.toRingHom, rfl⟩) = (n - c : ℕ)",
   "branch": "sheaf-dag",
   "by": "C2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "F1 corrected the false equation-count premise and proved local fibre dimension transport."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -107,11 +104,44 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-a9934",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T004022-L-2490477",
+  "landing": "20261013T095949-L-2457363",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with nodes, change record, source arguments, preserved caller interface, compiler results and axiom probes; verified forced adaptation and direct importer."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "F1 stage 2",
+  "old_statement": "Dimension calculation for a comparison quotient at the canonical fibre prime",
+  "what": "STATEMENT-DISPUTED (old signature): n=c=1, f=0, R=k a field, S=T=k[x], π=id and u=1 satisfy every old assumption but have fibre dimension 1, not 0. The number of arbitrary equations is not codimension. Restore the hypothesis retained by the basis choice in 00SY/00SC: dim of the S fibre is n-c. The caller now obtains generators with that count before transporting dimension. No target signature or definition changes.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "00SY (3) implies (2), choice of a basis with c elements; 00SC opening defines c as the height difference; 00P2"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-syntomic-equation-count-comparison",
+    "holds": true,
+    "note": "The syntomic comparison statement is unchanged. Its proof must choose the kernel generators with their codimension count; the adapted caller does so via the new local-kernel-generators node."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the polynomial quotient dimension and height-difference theorem to the comparison presentation. The localization bijection identifies the relevant prime chains, and the quotient by c equations has fibre dimension n − c.",
+    "uses": [
+     "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/algebra.tex",
+     "place": "00SY and 00P2"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference"
+  ]
  }
 }

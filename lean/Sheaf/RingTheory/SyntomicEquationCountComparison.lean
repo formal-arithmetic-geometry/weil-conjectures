@@ -10,7 +10,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.SyntomicEquationCountComparisonCore
+import all Sheaf.RingTheory.SyntomicEquationCountComparisonCore
+import Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators
 import Sheaf.RingTheory.SyntomicEquationCountComparisonDimension
 
 /-!
@@ -31,25 +32,16 @@ Source: Stacks Project, Algebra, Tag 00SY, proof of (3) ⇒ (2), from choosing a
 through Nakayama, with Tags 00SG, 00SC and 00P2 for the fibre dimension.
 (blueprint: lem-weil-pbc-syntomic-equation-count-comparison).
 
-Proof: write S = P/I for P = R[x_1,...,x_n] and a finitely generated ideal I. Scalar extension
-identifies its fibre with k[x]/Ibar, where k is the residue field of the contracted prime.
-At the canonical fibre prime the conormal module is free of rank c = n-d, where d is the
-local dimension and d ≤ n (00SG and 00SC). Choose c elements f of I whose reductions form
-a basis modulo the maximal ideal; Nakayama implies their images generate Ibar localized
-at the inverse-image polynomial prime. Put T = P/(f) and let π : T → S be the quotient map.
-Its kernel J is finitely generated. Localizing 0 → J → T → S → 0 at the polynomial prime
-and tensoring with k stays exact on the left by flatness of S_q (00HL). The localized fibres
-of T and S agree: the coefficient reduction from the localized polynomial ring onto
-k[x] localized at the fibre prime is surjective with kernel the extended base prime,
-and Ibar and (fbar) generate the same localized ideal. Thus the localized J modulo the
-base prime is zero. Nakayama over the localized polynomial ring gives J localized equal
-to zero. Choose one annihilating denominator for each of its finitely many generators and
-multiply them to get u outside the inverse-image prime, with J_u = 0. The canonical map
-T_u → S_{π(u)} is therefore bijective. Finally the chains of primes below the polynomial
-fibre prime containing Ibar and (fbar) coincide, since the localized ideals coincide.
-Their quotient-prime heights are equal; the height-difference formula 00P2 yields local
-fibre dimension d = n-c for T at the inverse image of q. This proves both the equation
-count inequality and the dimension equality. -/
+Proof: Choose a finite polynomial presentation φ : P → S. The counted local
+kernel-generator theorem chooses c ≤ n and f in ker φ, with equality of the two
+ideals after localization at φ⁻¹(q), and fibre dimension n-c for S. Since ker φ
+is finite, clear the finitely many denominators in this ideal equality to obtain
+s outside φ⁻¹(q) with s · ker φ contained in (f). Put T = P/(f), let π : T → S
+be the quotient lift, and let u be the class of s. The lift is surjective and
+π(u) is outside q. Each kernel element of π is killed by u, so the induced map
+T_u → S_{π(u)} is injective; surjectivity follows from that of π. The proved
+dimension-transport theorem identifies the local fibre dimensions through the
+spectrum embedding on an open neighbourhood, giving n-c for T as required. -/
 theorem exists_equationCount_comparison_of_syntomicAtPrime
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S)
@@ -72,9 +64,42 @@ theorem exists_equationCount_comparison_of_syntomicAtPrime
           (PrimeSpectrum.preimageEquivFiber R T
             ((q.comap π.toRingHom).comap (algebraMap R T))
             ⟨q.comap π.toRingHom, rfl⟩) = (n - c : ℕ) := by
-  obtain ⟨n, c, f, π, u, hsurj, hu, hbij, hle⟩ :=
-    exists_equationCount_comparison_core q hfp hflat hci
-  refine ⟨n, c, f, π, u, hsurj, hu, hbij, hle, ?_⟩
-  exact equationCount_comparison_dimension q π u hsurj hu hbij hle
+  obtain ⟨n, φ, hφ, hfg⟩ := hfp.out
+  obtain ⟨c, f, hcn, hJ, hlocal, hdim⟩ :=
+    exists_codimension_local_kernel_generators q n φ hφ hfg hflat hci
+  let P := MvPolynomial (Fin n) R
+  let I : Ideal P := RingHom.ker φ.toRingHom
+  let J : Ideal P := Ideal.span (Set.range f)
+  let p : Ideal P := q.asIdeal.comap φ.toRingHom
+  obtain ⟨s, hs, hkill⟩ := exists_multiplier_of_localized_le p.primeCompl
+    (Localization.AtPrime p) I J hfg (le_of_eq hlocal.symm)
+  let T := P ⧸ J
+  let π : T →ₐ[R] S := Ideal.Quotient.liftₐ J φ (fun x hx ↦ hJ hx)
+  let u : T := Ideal.Quotient.mk J s
+  have hπ : ∀ x : P, π (Ideal.Quotient.mk J x) = φ x := by
+    intro x
+    rfl
+  have hsurj : Function.Surjective π := by
+    intro y
+    obtain ⟨x, rfl⟩ := hφ y
+    exact ⟨Ideal.Quotient.mk J x, hπ x⟩
+  have hu : π u ∉ q.asIdeal := hs
+  have hbij : Function.Bijective
+      (IsLocalization.Away.mapₐ (Localization.Away u) (Localization.Away (π u)) π u) := by
+    constructor
+    · change Function.Injective (IsLocalization.Away.map
+        (Localization.Away u) (Localization.Away (π u)) π.toRingHom u)
+      apply (IsLocalization.Away.map_injective_iff
+        (Localization.Away (π u)) π.toRingHom u).mpr
+      intro x hx
+      obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+      refine ⟨1, ?_⟩
+      rw [pow_one]
+      change Ideal.Quotient.mk J s * Ideal.Quotient.mk J a = 0
+      rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem]
+      exact hkill a hx
+    · exact IsLocalization.Away.mapₐ_surjective_of_surjective u hsurj
+  refine ⟨n, c, f, π, u, hsurj, hu, hbij, hcn, ?_⟩
+  exact equationCount_comparison_dimension q π u hsurj hu hbij hdim
 
 end Algebra
