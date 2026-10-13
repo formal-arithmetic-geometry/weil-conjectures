@@ -520,6 +520,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.SplitSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationGeneric
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
@@ -903,6 +904,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
+public import WeilConjectures.DeligneLaumon.AffineLine.PunctualSupport
 public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
 public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
