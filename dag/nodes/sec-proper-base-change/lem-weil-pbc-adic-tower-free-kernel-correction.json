@@ -14,31 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Identify the completed finite free module with a finite product of B. The scalar residue equation on its basis vectors shows that each composite p_n q depends only on the nth free residue. Thus it induces compatible A-linear presentations P_n -> T_n. The tower projections are surjective by recursive lifting along the surjective successors. Thus each composite p_n q is surjective because q is; its factor P_n → T_n is surjective.",
+   "text": "Expand a completed free vector in the finite basis supplied by AdicCompletion.piEquivFin. Its coefficient evaluations are images of its free residue under the coordinate projections (AdicCompletion.map_val_apply), hence vanish when that residue vanishes. Apply the completed scalar residue equation with scalar representative zero to each basis summand. Thus each projected presentation vanishes on the free evaluation kernel.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Define K_n as the presentation kernel. Lift a K_n vector to P_(n+1); its image is in the transition kernel I^(n+1)T_(n+1). Lift an I^(n+1) correction through the surjective presentation and subtract it, proving surjectivity of K_(n+1) -> K_n.",
+   "text": "For every j, reindex T by the cofinal shift k ↦ j+k. Mathlib Concrete.surjective_π_app_zero_of_surjective_map gives a surjective projection to T_j. Compose with the isomorphism e and the surjection q to obtain a surjective A-linear presentation p_j from the completed free module. The equations limit.w give compatibility of these presentations.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The nth residue of y lies in K_n. Surjective kernel tower projections lift it to a compatible kernel sequence. Interpret this sequence as z in the free completion; all projections of e(q(z)) vanish, so q(z)=0 by limit extensionality and injectivity of e. Its nth residue is the residue of y.",
-   "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
-   ],
-   "elementary": false
+   "text": "If p_j(x)=0, compatibility puts p_(j+1)(x) in the transition kernel I^(j+1)T_(j+1). Submodule.map_smul'' and surjectivity of p_(j+1) lift this image to w in I^(j+1) times the completed free module. Set x'=x-w. Then p_(j+1)(x')=0. Mathlib AdicCompletion.pow_smul_top_le_ker_eval shows eval_(j+1)(w)=0, so x' and x have the same preceding residue. This inclusion requires no finite generation of I.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Iterate this proved one-step correction starting with y: f_0=y and p_(n+k)(f_k)=0, while eval_(n+k+1)(f_(k+1))=eval_(n+k+1)(f_k). Classical choice here is applied only to a proved existence theorem. Applying transition maps and induction proves stabilization of every earlier residue.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct z directly as the completion element whose mth coordinate is eval_m(f_m). The stabilization equations and AdicCompletion.transitionMap_comp_eval_apply prove compatibility. They also give eval_(n+k+1)(z)=eval_(n+k+1)(f_k) for every k. Applying the first step to z-f_k gives p_(n+k)(z)=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary tower index j, map the zero coordinate at n+j down to j using limit.w. Thus every projection of e(q(z)) is zero. Concrete.limit_ext and injectivity of e.hom yield q(z)=0. The stabilized residue equation at k=0 gives the required nth residue equality with y.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "group": "V1",
+  "group": "T3",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W, proof; explicit categorical and completed scalar glue by V1"
+  "place": "Stacks 087W, final kernel projection argument, read at https://stacks.math.columbia.edu/tag/087W; recursive correction and direct stabilized-residue construction formalized by T3 using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -123,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T024051-L-3340131",
-  "kind": "interface",
+  "landing": "20261013T045605-L-137882",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
