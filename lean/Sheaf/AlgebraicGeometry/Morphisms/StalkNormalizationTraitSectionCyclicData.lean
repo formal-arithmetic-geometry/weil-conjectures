@@ -17,6 +17,9 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 public import Mathlib.RingTheory.RingHom.Flat
 
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionChartGenericFactor
+import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverOpenFactorRationalPoint
+
 /-!
 # Cyclic local chart data along a split trait section
 
@@ -96,6 +99,43 @@ theorem GaloisCover.stalk_normalization_trait_section_cyclic_data {S C : Scheme.
           (ord : Kˣ →* Multiplicative ℤ) (π z : Kˣ),
           0 < e ∧
           IsLocalRing.maximalIdeal D = J.map β ⊔ Ideal.span {t} ∧
-          t ^ e ∈ J.map β ∧ z ^ e = π ∧ ord π = Multiplicative.ofAdd 1 := by sorry
+          t ^ e ∈ J.map β ∧ z ^ e = π ∧ ord π = Multiplicative.ofAdd 1 := by
+  classical
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  dsimp only
+  intro hn x hx
+  have hchart := GaloisCover.stalk_normalization_trait_section_chart_generic_factor
+    (S := S) (C := C) (Cη := Cη)
+    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ s hs hmin hdvr
+  have hc := hchart hn x hx
+  obtain ⟨D, hD, β, hβlocal, hβflat, t, e, K, hK, ord, π, b,
+    he, hgen, hpow, hπ, g, hg, hw⟩ := hc
+  let := hD
+  let := hK
+  let p : Polynomial K := Polynomial.X ^ e - Polynomial.C (π : K)
+  have : Nontrivial (AdjoinRoot p) := AdjoinRoot.nontrivial p (by
+    dsimp only [p]
+    rw [Polynomial.degree_X_pow_sub_C he]
+    exact_mod_cast ne_of_gt he)
+  have hp := GaloisCover.open_factor_rational_point (Y := Cη) G Z S.functionField sη hZ
+    K b (AdjoinRoot p) g hg hw
+  obtain ⟨φ⟩ := hp
+  have hz : φ (AdjoinRoot.root p) ^ e = (π : K) := by
+    have hroot := AdjoinRoot.aeval_algHom_eq_zero p φ
+    simpa only [p, map_sub, map_pow, Polynomial.aeval_X, Polynomial.aeval_C,
+      Algebra.algebraMap_self, RingHom.id_apply, sub_eq_zero] using hroot
+  have hne : φ (AdjoinRoot.root p) ≠ 0 := by
+    intro hzero
+    have : (π : K) = 0 := by simpa [hzero, ne_of_gt he] using hz.symm
+    exact π.ne_zero this
+  let z : Kˣ := Units.mk0 (φ (AdjoinRoot.root p)) hne
+  have hzunits : z ^ e = π := by
+    apply Units.ext
+    exact hz
+  exact ⟨D, hD, β, hβlocal, hβflat, t, e, K, hK, ord, π, z,
+    he, hgen, hpow, hzunits, hπ⟩
 
 end AlgebraicGeometry.Scheme
