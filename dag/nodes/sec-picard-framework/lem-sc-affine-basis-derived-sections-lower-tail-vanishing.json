@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-affine-basis-derived-sections-lower-tail-vanishing",
+ "kind": "statement",
+ "title": "Vanishing of derived affine sections above a basis-acyclic lower tail",
+ "statement": "Let X be a scheme [def-pc-scheme], V an affine open, and F an integer-indexed complex of O_X-modules [def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category]. Assume that for every affine open W contained in V, every integer r and every positive integer p, H^p(W,H^r(F)) [def-sc-sheaf-cohomology-functor] is zero. Write QF for its image in the derived category [def-weil-abstract-derived-category], tau_{<a} for the standard strictly lower truncation [def-weil-t-structure], and S for evaluation on V, an additive left exact functor [def-sp-left-exact-additive]. For all integers a and i with a <= i, H^i(RS(tau_{<a}(QF))) is zero. No K-injectivity of F is assumed. The derived category universes are arbitrary.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-cohomology-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-t-structure",
+  "def-sp-left-exact-additive"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0BKT (lemma-cohomology-over-U-trivial), applied to the strictly lower tail; Tag 0D64 (lemma-is-limit-dimension); Tag 071B (lemma-K-injective), compatible resolution model"
+ },
+ "proof": [
+  {
+   "text": "Restrict to V. Exact restriction identifies homology sheaves and commutes with truncation. Restriction preserves K-injectives, so derived evaluation on V is derived global sections of the restricted object. The module-to-abelian comparison changes the stated H vanishings into vanishings of positive right-derived sections on every affine basis open. The strictly lower tail has the original homology below a and zero homology from a on.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the local-bound reconstruction theorem on V with the basis of its affine opens and bound zero. The hypothesis holds for every homology degree, so also for the negative degrees required by that theorem. It reconstructs the lower tail as the derived limit of its canonical bounded-below lower truncations. Sections commute with countable products, hence the derived-functor comparison sends this Roos triangle to the one for the section images.",
+   "uses": [
+    "lem-pc-ringed-space-truncation-derived-limit",
+    "lem-pc-derived-functor-commutes-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each bounded-below truncation use the convergent truncation hypercohomology spectral sequence. Every positive-p term vanishes by acyclicity of the actual homology sheaves on V; the p=0 row is sections of those sheaves. The finite filtration therefore identifies cohomology with this row, naturally for truncation projections. In degree i >= a it is zero; in degree i-1 its transitions are isomorphisms once the lower cutoff is <= i-1.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree i the Milnor sequence has left endpoint the first derived limit of the degree i-1 homology tower, and right endpoint the inverse limit of the degree i homology tower. Eventual isomorphisms make the left endpoint zero. Every object in the right tower is zero, so its limit is zero. Exactness between zero endpoints makes the middle object zero. Exact forgetting from modules to abelian groups reflects this vanishing. Empty V, the zero complex and all integer cutoffs satisfy the same calculation.",
+   "uses": [
+    "lem-pc-derived-limit-milnor-sequence",
+    "lem-pc-derived-limit-eventually-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-functor-commutes-derived-limit",
+  "lem-pc-derived-limit-eventually-iso",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-ringed-space-truncation-derived-limit",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-module-cohomology-source-comparison",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0BKT, lemma-cohomology-over-U-trivial, specialized to the strictly lower tail; zero-bound basis reconstruction and stabilized Milnor calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of the part of a complex strictly below a vanish in degrees at least a when its homology sheaves are acyclic on an affine basis",
+   "results": "8 hits: DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isLE_iff, CochainComplex.isZero_of_isGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isZero_of_isLE. These are support criteria, not a derived sections theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZero\", \"rightDerivedFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*truncLT|truncLT.*rightDerivedFunctor",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of a complex with acyclic homology sheaves on a basis vanish above the cohomological support",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: unbounded sections comparison on affine opens; lower-tail convergence needed by lem-sc-affine-basis-kinjective-sections-preserves-homology",
+   "via": [
+    "lem-sc-affine-basis-sections-resolution-homology-epi",
+    "lem-sc-affine-basis-sections-derived-unit",
+    "lem-sc-affine-basis-kinjective-sections-preserves-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBasisDerivedSectionsLowerTailVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisDerivedSectionsLowerTailVanishing.lean",
+  "declaration": "AlgebraicGeometry.affineBasisDerivedSections_lowerTail_isZero",
+  "statement": "theorem affineBasisDerivedSections_lowerTail_isZero\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wD}\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V)))]\n    (F : CochainComplex X.Modules ℤ)\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1)))\n    (a i : ℤ) (hai : a ≤ i) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    IsZero ((DerivedCategory.homologyFunctor _ i).obj\n      (S.rightDerivedFunctor.obj\n        ((DerivedCategory.TStructure.t.truncLT a).obj (DerivedCategory.Q.obj F))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T141528-L-379380",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T141528-L-379380",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
