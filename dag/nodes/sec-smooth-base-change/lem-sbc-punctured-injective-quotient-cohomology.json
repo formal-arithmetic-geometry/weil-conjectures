@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-punctured-injective-quotient-cohomology",
+ "kind": "statement",
+ "title": "The injective quotient complex computes puncture cohomology",
+ "statement": "Let R be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], W the open complement of its closed point in Spec R [def-weil-pbc-scheme-conventions], and I any injective resolution of R as an R-module. For every natural number n, H^n(W,O_W), defined as Modules.H of the unit structure module, is additively equivalent to H^n(coker(Gamma_m(I) into I)), where the inclusion is [def-sbc-ideal-power-torsion-cocomplex-inclusion] and Gamma_m is [def-sbc-ideal-power-torsion-functor].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BK0, Lemma 51.8.2; 0A6T, Lemma 51.2.1; 09T2, Lemma 36.8.1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-ideal-power-torsion-cocomplex-inclusion",
+  "def-sbc-ideal-power-torsion-functor"
+ ],
+ "proof": [
+  {
+   "text": "A prime containing m equals m, so the specified W equals Spec R minus V(m). The associated sheaves of the injective modules I^k are flasque on the Noetherian affine scheme by 09T2, and their restrictions to W are flasque. Sheafification and restriction are exact (on affine basic opens this is exactness of localization), so these sheaves form a resolution of O_W.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite generators f_i of m, the kernel of I^k into sections on W is exactly Gamma_m(I^k): vanishing in each localization gives exponents e_i killing the element by f_i^e_i; a power with exponent sum e_i kills it by the pigeonhole principle for monomials. The converse follows by localization. Flasqueness gives surjectivity. These maps commute with the differentials, so the sections complex is the cokernel of the explicit torsion inclusion.",
+   "uses": [
+    "def-sbc-ideal-power-torsion-cocomplex-inclusion",
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The flasque acyclic-resolution computation identifies all cohomology groups of the sections complex with Ext from the constant integer sheaf to the additive structure sheaf. This is Modules.H of the unit module. For an empty W both the sections complex and its cohomology vanish, and the same comparison applies. No connecting isomorphism and no derived torsion comparison is used here.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-power-torsion-cocomplex-inclusion",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0BK0, Lemma 51.8.2; 0A6T, Lemma 51.2.1; 09T2, Lemma 36.8.1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of complement of closed subset computed by quotient of injective resolution by ideal power torsion",
+   "date": "2026-10-14",
+   "results": "Internal Server Error; service unavailable",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology computed by quotient of module injective resolution by ideal power torsion subcomplex",
+   "date": "2026-10-14",
+   "results": "InjectiveResolution.ofCocomplex, InjectiveResolution.extMk, InjectiveResolution.extEquivCohomologyClass_extMk and general injective-complex constructions; no affine puncture comparison",
+   "verdict": "General resolution infrastructure exists, but no quotient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.primaryComponent.map",
+   "date": "2026-10-14",
+   "results": "Ideal.primaryComponent.map, map_apply_coe, map_ker_eq, map_surjective",
+   "verdict": "Provides the torsion restriction map; no inclusion of torsion cochain complexes or puncture comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "primaryComponent|cokernelSequence",
+   "date": "2026-10-14",
+   "results": "Ideal.primaryComponent and its map; ShortComplex.cokernelSequence and cokernelSequence_exact. Searches of the imported blueprint for torsion subcomplex and injective quotient cohomology found zero matches.",
+   "verdict": "Use the existing primary component and cokernel APIs; geometric comparison not found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-three punctured-spectrum H¹ comparison: construct the torsion subcomplex and compute cohomology on the puncture before the connecting degree shift.",
+   "via": [
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedInjectiveQuotientCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_punctured_h_addEquiv_injective_quotient",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.nonempty_punctured_h_addEquiv_injective_quotient"
+  ],
+  "statement": "theorem nonempty_punctured_h_addEquiv_injective_quotient\n    (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (W : (Spec (.of R)).Opens)\n    (hW : ∀ x : Spec (.of R), x ∈ W ↔ x ≠ IsLocalRing.closedPoint R)\n    (I : InjectiveResolution (ModuleCat.of R R : ModuleCat.{u} R)) (n : ℕ) :\n    Nonempty (Modules.H (X := W.toScheme)\n      (SheafOfModules.unit W.toScheme.ringCatSheaf) n ≃+\n      ((cokernel (ModuleCat.idealPowerTorsionCocomplexι\n        (IsLocalRing.maximalIdeal R) I.cocomplex)).homology n).carrier)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T215602-L-897109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T215602-L-897109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

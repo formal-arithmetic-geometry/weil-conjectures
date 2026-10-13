@@ -1,0 +1,119 @@
+{
+ "id": "def-sbc-ideal-power-torsion-cocomplex-inclusion",
+ "kind": "definition",
+ "title": "Inclusion of the ideal-power torsion subcomplex",
+ "statement": "Let R be a commutative ring, J an ideal, and K an N-indexed cochain complex of R-modules. The degreewise inclusions Gamma_J(K^n) into K^n define a monomorphism Gamma_J(K) into K, where Gamma_J is [def-sbc-ideal-power-torsion-functor].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BJA and 0A6T; the torsion subcomplex inclusion"
+ },
+ "stmt_deps": [
+  "def-sbc-ideal-power-torsion-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual submodule subtype inclusions as the components. The definition of primaryComponent.map makes the cochain compatibility square commute on every element. Each component is injective, hence monic; HomologicalComplex.mono_of_mono_f proves monicity of the complex map.",
+   "uses": [
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-power-torsion-functor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0BJA and 0A6T; the torsion subcomplex inclusion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of complement of closed subset computed by quotient of injective resolution by ideal power torsion",
+   "date": "2026-10-14",
+   "results": "Internal Server Error; service unavailable",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology computed by quotient of module injective resolution by ideal power torsion subcomplex",
+   "date": "2026-10-14",
+   "results": "InjectiveResolution.ofCocomplex, InjectiveResolution.extMk, InjectiveResolution.extEquivCohomologyClass_extMk and general injective-complex constructions; no affine puncture comparison",
+   "verdict": "General resolution infrastructure exists, but no quotient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.primaryComponent.map",
+   "date": "2026-10-14",
+   "results": "Ideal.primaryComponent.map, map_apply_coe, map_ker_eq, map_surjective",
+   "verdict": "Provides the torsion restriction map; no inclusion of torsion cochain complexes or puncture comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "primaryComponent|cokernelSequence",
+   "date": "2026-10-14",
+   "results": "Ideal.primaryComponent and its map; ShortComplex.cokernelSequence and cokernelSequence_exact. Searches of the imported blueprint for torsion subcomplex and injective quotient cohomology found zero matches.",
+   "verdict": "Use the existing primary component and cokernel APIs; geometric comparison not found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-three punctured-spectrum H¹ comparison: construct the torsion subcomplex and compute cohomology on the puncture before the connecting degree shift.",
+   "via": [
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.IdealPowerTorsionCocomplexInclusion",
+  "file": "lean/Sheaf/Algebra/Homology/IdealPowerTorsionCocomplexInclusion.lean",
+  "declaration": "ModuleCat.idealPowerTorsionCocomplexι",
+  "declarations": [
+   "ModuleCat.idealPowerTorsionCocomplexι",
+   "ModuleCat.idealPowerTorsionCocomplexι_f_mono",
+   "ModuleCat.idealPowerTorsionCocomplexι_mono"
+  ],
+  "statement": "def idealPowerTorsionCocomplexι {R : Type u} [CommRing R] (J : Ideal R)\n    (K : CochainComplex (ModuleCat.{u} R) ℕ) :\n    ((idealPowerTorsion J).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ⟶ K",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T215602-L-897109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T215602-L-897109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

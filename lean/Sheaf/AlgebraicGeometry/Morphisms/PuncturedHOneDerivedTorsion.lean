@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology
+import Mathlib.Algebra.Homology.HomologySequence
 
 /-! # The puncture localization sequence for derived torsion
 
@@ -49,6 +51,21 @@ theorem nonempty_punctured_h_one_addEquiv_derived_torsion
     Nonempty (Modules.H (X := W.toScheme)
       (SheafOfModules.unit W.toScheme.ringCatSheaf) 1 ≃+
       (((ModuleCat.idealPowerTorsion (IsLocalRing.maximalIdeal R)).rightDerived 2).obj
-        (ModuleCat.of R R : ModuleCat.{u} R)).carrier) := by sorry
+        (ModuleCat.of R R : ModuleCat.{u} R)).carrier) := by
+  classical
+  obtain ⟨I⟩ := HasInjectiveResolution.out (Z := (ModuleCat.of R R : ModuleCat.{u} R))
+  let f := ModuleCat.idealPowerTorsionCocomplexι (IsLocalRing.maximalIdeal R) I.cocomplex
+  let S := ShortComplex.cokernelSequence f
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.cokernelSequence_exact f)
+      (inferInstance : Mono f) inferInstance
+  have h₁ : CategoryTheory.Limits.IsZero (I.cocomplex.homology 1) :=
+    (I.cocomplex_exactAt_succ 0).isZero_homology
+  have h₂ : CategoryTheory.Limits.IsZero (I.cocomplex.homology 2) :=
+    (I.cocomplex_exactAt_succ 1).isZero_homology
+  obtain ⟨e⟩ := nonempty_punctured_h_addEquiv_injective_quotient R W hW I 1
+  let δ := hS.δIso 1 2 (by decide) h₁ h₂
+  let d := I.isoRightDerivedObj (ModuleCat.idealPowerTorsion (IsLocalRing.maximalIdeal R)) 2
+  exact ⟨e.trans (δ.toLinearEquiv.toAddEquiv.trans d.symm.toLinearEquiv.toAddEquiv)⟩
 
 end AlgebraicGeometry.Scheme
