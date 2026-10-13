@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-picard-external-cup-right-short-exact",
+ "kind": "statement",
+ "title": "Two-out-of-three external cup comparison for a right coefficient sequence",
+ "statement": "Let k be a field [def-weil-field], X and Y quasi-compact k-schemes [def-pc-scheme] with affine diagonals, F a quasi-coherent module on X [pqf-def-coherent], and S a short exact sequence of quasi-coherent modules on Y [def-sp-abelian]. Specify normalized cochain realizations c1, c2, c3 [lem-sc-picard-external-cup-cochain] on the scalar resolution models [lem-sc-picard-kunneth-resolution-model] for its three coefficients. If H^m(c2) and H^m(c3) are invertible for every natural degree m, then H^n(c1) is invertible for any natural degree n. This is an exact-sequence transfer statement without bounds, an acyclic embedding, or an induction hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, short exact sequence paragraph following equation 33.29.1.1 and the same argument in the right coefficient"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-external-cup-cochain",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the exact five-term comparison ladder from the right exact-ladder theorem. Apply the hypotheses for c2 and c3 to its outside-arrow clause. The four outside vertical maps are isomorphisms.",
+   "uses": [
+    "lem-sc-picard-external-cup-right-exact-ladder"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An isomorphism is both epi and mono. Apply the categorical five lemma to the exact rows to obtain an isomorphism of their middle objects.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Substitute the middle-arrow equation, which is conjugation of H^n(c1) by eA.hom and eB.inv. Cancel these two isomorphisms with Mathlib isIso_comp_right_iff and isIso_comp_left_iff to conclude IsIso of H^n(c1).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-external-cup-right-exact-ladder",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED; C3 extracted the exact homology ladder and formalized the categorical five-lemma application separately. The official Stacks tag page was read because this machine does not have the literature checkout."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "External cup product on quasi coherent sheaf cohomology is compatible with the long exact sequence of a short exact coefficient sequence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension shifting external cup product isomorphism quasi coherent cohomology short exact sequence",
+   "results": "Eight matches for generic Ext, group cohomology connecting maps, and the mapping-cone comparison for a short exact sequence. No geometric external-cup ladder.",
+   "date": "2026-10-13",
+   "verdict": "No matching geometric comparison or ladder."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono",
+   "results": "One exact match: Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four, the categorical five lemma.",
+   "date": "2026-10-13",
+   "verdict": "Proves the diagram chase once the geometric ladder is supplied; does not construct that ladder."
+  },
+  {
+   "tool": "grep",
+   "query": "externalCup|[Kk]unneth in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology; rightDerived.*(exact|isZero)|isZero.*rightDerived",
+   "results": "No external cup or Kunneth statements in the searched Mathlib directories. RightDerived supplies vanishing for injective objects. Local project searches found external cup construction, normalized cochain existence and bounded shift statements, but no right short-exact comparison or ladder.",
+   "date": "2026-10-13",
+   "verdict": "No matching geometric statement; reuse the existing long exact and five-lemma nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural external product comparison commutes with coefficient connecting homomorphisms",
+   "results": "Found HomologicalComplex.HomologySequence.δ_naturality and generic snake/derived connecting-map naturality; no geometric external-cup ladder.",
+   "date": "2026-10-13",
+   "verdict": "Second reading confirms generic components only."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomologySequence.δ_naturality",
+   "results": "Exact match in Mathlib.Algebra.Homology.HomologySequenceLemmas, for a morphism of short exact sequences of complexes.",
+   "date": "2026-10-13",
+   "verdict": "Provides connecting-map naturality after the geometric short-exact comparison is constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*(cup|product)|cup.*(exact|connect|natur)|kunneth.*(exact|connect)",
+   "results": "Searched lean/Sheaf, upstream WeilConjectures, Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology. Found Cech coefficient naturality and etale/pro-etale external products with different coefficients; no matching ladder.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate geometric statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Short exact sequence comparison within right coefficient dimension shifting, Tag 0BED",
+   "via": [
+    "lem-sc-picard-external-cup-shift-right",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupRightShortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupRightShortExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCochain_isIso_of_right_shortExact",
+  "statement": "theorem picardExternalCupCochain_isIso_of_right_shortExact\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y]\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (S : ShortComplex Y.Modules) (hS : S.ShortExact)\n    [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]\n    (c1 : picardExternalTotal f g F S.X₁ ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F S.X₁))\n    (hc1 : IsPicardExternalCupCochain f g F S.X₁ c1)\n    (c2 : picardExternalTotal f g F S.X₂ ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F S.X₂))\n    (hc2 : IsPicardExternalCupCochain f g F S.X₂ c2)\n    (c3 : picardExternalTotal f g F S.X₃ ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F S.X₃))\n    (hc3 : IsPicardExternalCupCochain f g F S.X₃ c3)\n    (h2 : ∀ n : ℕ, IsIso (HomologicalComplex.homologyMap c2 (n : ℤ)))\n    (h3 : ∀ n : ℕ, IsIso (HomologicalComplex.homologyMap c3 (n : ℤ)))\n    (n : ℕ) : IsIso (HomologicalComplex.homologyMap c1 (n : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T065057-L-896327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T065057-L-896327",
+  "kind": "interface"
+ }
+}
