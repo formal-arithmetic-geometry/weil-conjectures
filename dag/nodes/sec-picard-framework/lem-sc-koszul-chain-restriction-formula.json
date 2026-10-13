@@ -14,24 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Use evaluation at one for derived Hom from the structure sheaf on U. Identify the restricted chosen structure object with that structure sheaf and restrict scalars from Gamma(U,O_U) to A. This gives the additive equivalence b; postcompose along e_F to give its target E.",
+   "text": "Apply koszulOpenHom_chain_evaluation to obtain natural equivalences for every derived target. Prove their additivity using binary biproducts: pair two restricted arrows with the images of inl and inr, use naturality for fst, snd, and fst+snd, and use additivity of derived restriction and derived sections followed by homology. Upgrade the equivalence at E to an additive equivalence.",
    "uses": [
-    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+    "lem-sc-koszul-open-hom-chain-evaluation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the cocone formula on the actual chain map g: on the intersection J its value is evaluation on the ordered exterior basis, divided by the generator product to exponent e+1, with the specified totalization sign. The canonical counit condition on s identifies this with the sheaf evaluation of Tg. On D(f_j), exterior multiplication by the jth generator divided by f_j^(e+1) contracts the full Koszul complex. Applying the chain-map identity to that contraction shows that inverse augmentation followed by Tg has exactly these localized values, including the signs. Agreement on intersections and the Cech-derived comparison give the equality in derived sections. The equation imposed on psi determines this inverse-augmentation composite, by lem-sc-affine-perfect-koszul-principal-unit-iso at exponent e+1, since its shifted tail and augmentation agree with the open-system definitions and the subsequent overEquiv preserves isomorphisms.",
+   "text": "For g put t=T(g) followed by s.hom. The counit hypothesis hs and the tilde/sections adjunction on complexes imply that koszulOpenHomTranspose(t)=g. Injectivity of the cycles inclusion and the given equation hz identify koszulHomChainClass(g) with homologyπ(z). These are equalities of the actual constructed class, not representability assertions. The citation to the chain-representatives node is only for its explicit definitions koszulOpenHomTranspose, koszulHomChainClass and koszulOpenHomStageClass; its theorem koszulOpenHom_chain_representatives is not invoked.",
    "uses": [
-    "def-sc-koszul-open-system",
-    "def-sc-koszul-cech-comparison-construction",
-    "lem-sc-affine-perfect-koszul-principal-unit-iso"
+    "lem-sc-koszul-open-hom-chain-representatives",
+    "def-sc-koszul-open-system"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Pass the equality to H^0. The condition on z identifies its projection pi(z) with the class of g; j_e inverse transports it to D_e, and the cocone leg factors as comparison composed with iota_e. The inverse localization/homology comparison gives exactly beta as displayed. Evaluation at one yields b(psi). For r=0, zero ring, F=0, and g=0 the same constructions are zero and the formula holds.",
+   "text": "Postcompose psi with R(eF.inv). Functoriality and the iso equations give the augmentation equation for this arrow into Q(F). Apply the existing chain-evaluation formula for t, then use its naturality under eF.hom. Naturality of the inverse localization/homology comparison at the stage object iso and the colimit leg converts the derived stage class to the two displayed homologyMap applications. Associativity and functoriality of homology give exactly beta.",
    "uses": [
+    "lem-sc-koszul-open-hom-chain-evaluation",
     "def-sc-koszul-cech-comparison-construction"
    ],
    "elementary": true
@@ -40,15 +40,15 @@
  "proof_deps": [
   "def-sc-koszul-cech-comparison-construction",
   "def-sc-koszul-open-system",
-  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
-  "lem-sc-affine-perfect-koszul-principal-unit-iso"
+  "lem-sc-koszul-open-hom-chain-evaluation",
+  "lem-sc-koszul-open-hom-chain-representatives"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Y2",
+  "group": "D2",
   "document": "https://stacks.math.columbia.edu/tag/08D1",
   "place": "perfect-lemma-alternating-cech-complex-complex, signed Hom-to-Cech identification; Equation perfect-equation-comparison (Tag 08DC), proof of perfect-proposition-represent-cohomology-class-on-open (Tag 08DD)",
-  "note": "Generic quotient and chain-level portions of the parent argument."
+  "note": "Use the existing chain-evaluation theorem; prove additivity, counit normalization, cycle normalization and derived homology transport in Lean. No new holes or interface changes."
  },
  "mathlib_searches": [
   {
@@ -122,10 +122,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T082425-L-1652075",
-  "kind": "interface",
+  "landing": "20261013T095938-L-2454004",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
