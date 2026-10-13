@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-picard-coefficient-transpose-pasting",
+ "kind": "statement",
+ "title": "picardCoefficientTranspose_pasting",
+ "statement": "Schemes and module sheaves are as in [def-pc-scheme] and [def-weil-sheaf-of-modules-category], with the shared derived categories [def-pc-derived-category]. Fix $f:X\\to S$, an $\\mathcal O_X$-module $L$, and $k:W\\to S$. Put $M=q_W^\\otimes L$ and $E=Rp_{W*}(M[0])$. For $r:V\\to W$, let $a_r:X\\times_S V\\to X\\times_S W$ be the projection lift, $N_r=q_V^\\otimes L$, and $d_r:a_r^*M\\cong N_r$ the ordinary-to-tensor adjunction comparison followed by the inverse conjugate of pushforward composition [lem-pc-module-pullback-adjunction]. Let $B_r: Lr^*E\\to Rp_{V*}(N_r[0])$ be canonical base change [def-pc-derived-base-change-map] followed by direct image of $s_{a_r}(M)$ and $d_r[0]$, where $s$ is [lem-pc-canonical-single-pullback-comparison]. Write $\\tau_r:Lp_V^*Lr^*E\\to N_r[0]$ for its pinned derived-adjunction transpose [lem-pc-scheme-derived-mate-evaluation]. Given $i:T'\\to T$, $t:T\\to W$, $t':T'\\to W$ with $it=t'$, and $j:X\\times_S T'\\to X\\times_S T$ satisfying $jq_T=q_{T'}$ and $jp_T=p_{T'}i$, let $C:Li^*Lt^*\\cong Lt'^*$ and $D: Lp_{T'}^*Li^*\\cong Lj^*Lp_T^*$ be the canonical derived comparisons [lem-pc-ringed-spaces-derived-pullback-composition], and let $d:j^*N_t\\cong N_{t'}$ be the analogous coefficient comparison. Then, in Lean composition order, $D_{Lt^*E}\\gg Lj^*(\\tau_t)\\gg s_j(N_t)\\gg d[0]=Lp_{T'}^*(C_E)\\gg\\tau_{t'}$. No test section or structure-sheaf source normalization occurs, and no coefficient comparison $s_j$ is assumed invertible. The displayed construction is named in [def-sc-picard-coefficient-transpose].",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 08HY (remark-base-change) and 0D5S (lemma-pullback-composition); the indicated component of the parent pasting calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-derived-base-change-map",
+  "lem-pc-scheme-derived-mate-evaluation",
+  "def-sc-picard-coefficient-transpose"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the defining pinned base-change mate to express each tau as its derived square comparison followed by pullback of the counit and the coefficient comparison. Use naturality of the adjunction counit to move the coefficient morphism outside the transpose.",
+   "uses": [
+    "lem-pc-scheme-derived-mate-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback.hom_ext and the two projection equations show j followed by a_t equals a_tprime. Apply derived pullback associativity twice to the pasted squares; transport along i followed by t equals tprime. The resulting two derived square paths agree.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the left-derived counit composition factorization on M[0], use canonicalSinglePullbackSquare for the coefficient maps, and use uniqueness of left adjoints to identify the ordinary-to-tensor comparison with the inverse conjugate of pushforward composition. This identifies the remaining output morphism with single(d.hom), giving the equation without inverting any single comparison on M or N.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-square",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-derived-mate-evaluation",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-pullback-square",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S; component calculation of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient transpose of derived base change respects composition of commuting scheme squares and single complex pullback comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose composition base change mates pasting derived pullback",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.mateEquiv, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left_symm|mateEquiv.*comp|pullbackObjUnitToUnit",
+   "results": "25 hits: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/GuitartExact/KanExtension.lean, Mathlib/CategoryTheory/Category/Pointed.lean, Mathlib/CategoryTheory/Category/TwoP.lean, Mathlib/CategoryTheory/Category/TwoP.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposePasting",
+  "date": "2026-10-14",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "parent proof step 2: canonical mates and evaluation give the successive-base-change equation; coefficient counit component",
+   "via": [
+    "lem-sc-picard-direct-image-unit-morphism-pullback",
+    "lem-sc-picard-direct-image-section-map-restriction",
+    "lem-sc-picard-direct-image-section-naturality",
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCoefficientTransposePasting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardCoefficientTranspose_pasting",
+  "statement": "theorem picardCoefficientTranspose_pasting\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)\n    {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n    (h : i ≫ t = t')\n    (j : pullback f (t' ≫ k) ⟶ pullback f (t ≫ k))\n    (hj₁ : j ≫ pullback.fst f (t ≫ k) = pullback.fst f (t' ≫ k))\n    (hj₂ : j ≫ pullback.snd f (t ≫ k) = pullback.snd f (t' ≫ k) ≫ i)\n :\n  let τ : ∀ {V : Scheme.{v}} (r : V ⟶ W),\n    (derivedPullback (pullback.snd f (r ≫ k))).obj\n      ((derivedPullback r).obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n              ((Modules.tensorPullback (pullback.fst f k)).obj L)))) ⟶\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f (r ≫ k)).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f (r ≫ k))).obj L) :=\n    picardCoefficientTranspose f L W k\n  let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n    ((DerivedCategory.singleFunctor\n      (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n        ((Modules.tensorPullback (pullback.fst f k)).obj L))\n  let C := canonicalDerivedPullbackComposition i t ≪≫\n    eqToIso (congrArg (fun q : T' ⟶ W ↦ derivedPullback q) h)\n  let N := (Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L\n  let c := (conjugateIsoEquiv\n    ((Classical.choose (Modules.exists_tensorPullbackAdjunction\n      (pullback.fst f (t ≫ k)))).comp\n        (Classical.choose (Modules.exists_tensorPullbackAdjunction j)))\n    (Classical.choose (Modules.exists_tensorPullbackAdjunction\n      (pullback.fst f (t' ≫ k))))).symm\n    (Modules.pushforwardComp j (pullback.fst f (t ≫ k)) ≪≫\n      Modules.pushforwardCongr hj₁)\n  let d := ((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).leftAdjointUniq\n    (Modules.pullbackPushforwardAdjunction j)).symm.app N ≪≫ (c.app L).symm\n  canonicalDerivedSquareComparison (pullback.snd f (t ≫ k))\n      (pullback.snd f (t' ≫ k)) i j hj₂ ((derivedPullback t).obj E) ≫\n    (derivedPullback j).map (τ t) ≫ Modules.canonicalSinglePullbackMap j N ≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f (t' ≫ k)).toRingedSpace)) 0).map\n          d.hom =\n    (derivedPullback (pullback.snd f (t' ≫ k))).map (C.hom.app E) ≫ τ t'",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T201738-L-3965222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T201738-L-3965222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

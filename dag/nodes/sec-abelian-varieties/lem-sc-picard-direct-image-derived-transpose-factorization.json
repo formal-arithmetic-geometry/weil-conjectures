@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-picard-direct-image-derived-transpose-factorization",
+ "kind": "statement",
+ "title": "Normalized transpose factorization",
+ "statement": "Fix schemes $X,S,W,V$ [def-pc-scheme], $f:X\\to S$, an $\\mathcal O_X$-module $L$, $k:W\\to S$, and $r:V\\to W$, with the shared derived categories [def-pc-derived-category]. Write $X_U=X\\times_S U$ and $q_U:X_U\\to X$, $p_U:X_U\\to U$ for its projections, using $k$ for $U=W$ and $r\\gg k$ for $U=V$. Put $M=q_W^\\otimes L$ and $E=Rp_{W*}(M[0])$. Construct $B_r:Lr^*E\\to Rp_{V*}(q_V^\\otimes L[0])$ by canonical derived base change [def-pc-derived-base-change-map], the single-pullback coefficient comparison [lem-pc-canonical-single-pullback-comparison], and the ordinary-to-tensor comparison supplied by left-adjoint uniqueness [lem-pc-module-pullback-adjunction]. Let $\\tau_r$ be its transpose under the pinned derived adjunction. Let $e_r:Lr^*\\mathcal O_W[0]\\cong\\mathcal O_V[0]$ be the single-pullback structure-sheaf comparison followed by the unit map. For any test section $\\zeta:Lr^*(\\mathcal O_W[0])\\to Lr^*E$ [def-sc-picard-derived-model-sections], the normalized transpose [def-sc-picard-direct-image-derived-transpose] equals $Lp_V^*(e_r^{-1}\\gg\\zeta)\\gg\\tau_r$. There is only one base-change square, no second restriction or pasting comparison, and no coefficient map is inverted. The two explicit constructions are named in [def-sc-picard-coefficient-transpose, def-sc-picard-derived-unit-normalization].",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 08HY; adjunction naturality component of the parent pasting calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison",
+  "def-pc-derived-base-change-map",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-picard-derived-model-sections",
+  "def-sc-picard-direct-image-derived-transpose",
+  "def-sc-picard-coefficient-transpose",
+  "def-sc-picard-derived-unit-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Expand the definition of picardDirectImageDerivedTranspose. Its argument under the pinned inverse Hom equivalence is e.inv followed by zeta followed by B. Reassociate this to (e.inv followed by zeta) followed by B. Apply Adjunction.homEquiv_naturality_left_symm to factor out derived pullback of the normalized section. The remaining inverse Hom equivalence applied to B is precisely tau. No square composition or source restriction is involved.",
+   "uses": [
+    "def-sc-picard-direct-image-derived-transpose",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-direct-image-derived-transpose",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08HY; naturality of the Hom equivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient transpose of derived base change respects composition of commuting scheme squares and single complex pullback comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose composition base change mates pasting derived pullback",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.mateEquiv, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left_symm|mateEquiv.*comp|pullbackObjUnitToUnit",
+   "results": "25 hits: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/GuitartExact/KanExtension.lean, Mathlib/CategoryTheory/Category/Pointed.lean, Mathlib/CategoryTheory/Category/TwoP.lean, Mathlib/CategoryTheory/Category/TwoP.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposePasting",
+  "date": "2026-10-14",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "parent proof: the one-square adjunction factorization",
+   "via": [
+    "lem-sc-picard-direct-image-unit-morphism-pullback",
+    "lem-sc-picard-direct-image-section-map-restriction",
+    "lem-sc-picard-direct-image-section-naturality",
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposeFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDirectImageDerivedTransposeFactorization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardDirectImageDerivedTranspose_factorization",
+  "statement": "theorem picardDirectImageDerivedTranspose_factorization\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)\n    {V : Scheme.{v}} (r : V ⟶ W)\n    (ζ : picardDerivedModelSections\n      ((schemeDerivedDirectImage (pullback.snd f k)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n            ((Modules.tensorPullback (pullback.fst f k)).obj L))) r) :\n  let τ : ∀ {V : Scheme.{v}} (r : V ⟶ W),\n    (derivedPullback (pullback.snd f (r ≫ k))).obj\n      ((derivedPullback r).obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n              ((Modules.tensorPullback (pullback.fst f k)).obj L)))) ⟶\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f (r ≫ k)).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f (r ≫ k))).obj L) :=\n    picardCoefficientTranspose f L W k\n  let e : ∀ {V : Scheme.{v}} (r : V ⟶ W),\n    (derivedPullback r).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings W.toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings W.toRingedSpace))) ≅\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings V.toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings V.toRingedSpace)) :=\n    picardDerivedUnitNormalization W\n  picardDirectImageDerivedTranspose f L W k r ζ =\n    (derivedPullback (pullback.snd f (r ≫ k))).map ((e r).inv ≫ ζ) ≫ τ r",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T201738-L-3965222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T201738-L-3965222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

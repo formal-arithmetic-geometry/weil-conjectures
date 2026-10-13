@@ -19,28 +19,40 @@
  ],
  "proof": [
   {
-   "text": "The projection equations identify j as the unique map between the two\nfibre products. Their comparison maps a and a' to X_W satisfy j followed by a\n equal to a', by pullback.hom_ext. Expand both base-change maps as the pinned\n derived-adjunction transposes of the pulled-back counit. Transpose the entire\n equality under the adjunction for the new fibre projection. Naturality moves\n the adjunction unit through the coefficient maps; its composite with the\n counit cancels by the triangle identity. The remaining derived composition\n comparisons agree by the associativity clause of exists_derivedPullbackComposition,\n transported along i followed by t equal to t'. Their coefficient counits agree\n with the composite tensor comparison by their left-derived factorization;\n canonicalSinglePullbackSquare expresses this on N[0]. Thus the coefficient\n comparison is the ordinary-to-tensor left-adjoint comparison followed by the\n inverse conjugate of pushforward composition. On the source, expand the\n conjugation defining picardDerivedModelRestriction. Composition coherence and\n canonicalSinglePullbackSquare for O_W identify its normalization with the\n single-pullback comparison for i followed by pullbackObjUnitToUnit i. This\n gives the displayed equality, before applying any fibre-unit identification\n or taking H^0. Only structure-sheaf comparisons are inverted, so the assertion\n includes zero modules, identities and empty schemes without extra conditions.",
+   "text": "Apply picardDirectImageDerivedTranspose_factorization to each test section. Its proved one-square adjunction naturality calculation gives the pullback of the normalized section followed by the coefficient transpose.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-canonical-single-pullback-square",
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-derived-base-change-map",
-    "lem-sc-pullback-structure-unit-square"
+    "lem-sc-picard-direct-image-derived-transpose-factorization"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply picardDerivedUnitNormalization_comp. Postcompose by the inverse derived composition comparison and the pulled-back test section; cancel the hom-inv pair. Expanding picardDerivedModelRestriction gives compatibility of the normalized test section with restriction.",
+   "uses": [
+    "lem-sc-picard-derived-unit-normalization-composition",
+    "def-sc-picard-derived-model-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the derived square comparison moves the pulled-back normalized test section to the left of the coefficient transpose. Apply picardCoefficientTranspose_pasting to the remaining coefficient part. Combine the normalized restriction identity with functor.map_comp and reassociate to obtain the unchanged equation.",
+   "uses": [
+    "lem-sc-picard-coefficient-transpose-pasting",
+    "lem-pc-scheme-derived-mate-evaluation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-canonical-single-pullback-square",
-  "lem-pc-module-pullback-adjunction",
-  "def-pc-derived-base-change-map",
-  "lem-sc-pullback-structure-unit-square"
+  "lem-sc-picard-direct-image-derived-transpose-factorization",
+  "lem-sc-picard-derived-unit-normalization-composition",
+  "def-sc-picard-derived-model-sections",
+  "lem-sc-picard-coefficient-transpose-pasting",
+  "lem-pc-scheme-derived-mate-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 08HY and 0D5S; explicit adjunction and structure-sheaf comparison calculation"
+  "place": "Tags 08HY and 0D5S; coefficient/source separation with adjunction naturality and square naturality"
  },
  "mathlib_searches": [
   {
@@ -112,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-3a5f9",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T172658-L-2100781",
+  "landing": "20261013T201738-L-3965222",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the recorded statements and dependencies; all files and the direct importer compiled cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
