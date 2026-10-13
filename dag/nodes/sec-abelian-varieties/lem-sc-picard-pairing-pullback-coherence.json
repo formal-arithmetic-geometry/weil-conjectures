@@ -16,41 +16,43 @@
  ],
  "proof": [
   {
-   "text": "Write e_W=δ_qW^(-1) P_qW(ev) u_qW and e_T similarly. Transport by picardTensorComparison to ordinary pullback. Tensor and unit comparisons for ordinary pullback compose, and its composition isomorphism is monoidal (the sectionwise map sends an iterated pure tensor r⊗(s⊗m) to rs⊗m). Transport back. The square comparison C is therefore monoidal, as is the coefficient comparison D. These facts include identity, zero-module and empty-scheme cases.",
+   "text": "Apply picardPairing_comp to the bottom path p_T followed by h and the top path v followed by p_W, using pullback.lift_snd to identify the composites. The proved private tensor_pairing_paths cancels the top composition isomorphisms on both tensor factors. The definition of the square isomorphism identifies the resulting tensor map with C_A tensor C_B. This is the private pairing_square identity.",
    "uses": [
-    "def-sc-picard-cup-product-map",
-    "lem-sc-picard-canonical-base-change-comparisons",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Square tensor/unit coherence and naturality express the left side as δ_pT (C_A⊗C_B) δ_v^(-1) P_v(δ_pW^(-1) P_pW(g) u_pW) u_v. Substitute the assumed equation hg; δ_pW^(-1) δ_pW cancels, giving δ_pT (C_A⊗C_B) δ_v^(-1) P_v((a⊗b) e_W) u_v.",
-   "uses": [
-    "def-sc-picard-cup-product-map",
-    "lem-sc-picard-base-change-counit"
+    "lem-sc-picard-pairing-composition",
+    "lem-sc-picard-base-change-counit",
+    "lem-sc-picard-canonical-base-change-comparisons"
    ],
    "elementary": true
   },
   {
-   "text": "Functoriality and tensor naturality change the latter expression to δ_pT ((C_A P_v(a))⊗(C_B P_v(b))) δ_v^(-1) P_v(e_W) u_v. Coefficient tensor/unit coherence says δ_v^(-1) P_v(e_W) u_v = (D_M⊗D_N) e_T. Substitute and combine the two tensor morphisms by tensorHom_comp_tensorHom to give exactly the right side. This uses no β, adjunction counit or inverse structure unit.",
+   "text": "Cancel the epimorphism δ_pT inverse and apply pairing_square. Expand functorial mapping of compositions and substitute hg inside P_v. Cancel δ_pW inverse followed by δ_pW under the functor. Prove naturality of δ_v inverse by expanding its transport along picardTensorComparison, using naturality of that comparison, and monoidal μ naturality. This moves P_v(a tensor b) before δ_v inverse as P_v(a) tensor P_v(b).",
    "uses": [
     "def-sc-picard-cup-product-map",
-    "lem-sc-picard-base-change-counit"
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Regroup the three mapped factors of e_W by functoriality. Apply picardPairing_comp to v followed by q_W and q_T, using pullback.lift_fst for their equality. The definition of D_M and D_N identifies the two resulting composition maps with the coefficient comparisons. The proved private tensor_pairing_coefficients combines the successive tensor maps into (C_A followed by P_v(a) followed by D_M) tensor (C_B followed by P_v(b) followed by D_N), giving exactly the conclusion. No adjunction-counit formula is applied.",
+   "uses": [
+    "lem-sc-picard-pairing-composition",
+    "lem-sc-picard-base-change-counit",
+    "lem-sc-picard-canonical-base-change-comparisons"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-pairing-composition",
+  "lem-sc-picard-base-change-counit",
   "lem-sc-picard-canonical-base-change-comparisons",
-  "def-pc-module-pullback",
-  "lem-sc-picard-base-change-counit"
+  "def-sc-picard-cup-product-map",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "Categorical glue for the final degree-zero cup-product paragraph, expanded using Tags 0095, 0096 and 08HY."
+  "place": "Degree-zero pairing base-change coherence: Lean reduction to one generic composition-of-pulled-pairings identity, tensor naturality and categorical cancellations, refining the supplied plan without changing the unit route."
  },
  "mathlib_searches": [
   {
@@ -126,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T082423-L-1651346",
+  "landing": "20261013T095957-L-2459980",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-picard-pairing-composition",
+ "kind": "statement",
+ "title": "Composition of arbitrary tensor-pulled pairings",
+ "statement": "Let X,Y,Z be schemes [def-pc-scheme], k:Z→Y, l:Y→X and t:Z→X with k followed by l = t. Let M,N be O_X-modules and g:M tensor N→O_X any pairing. Use tensor pullback P [def-pc-module-pullback], tensor comparison δ and unit comparison u [def-sc-picard-cup-product-map], and the transported composition isomorphism c [lem-sc-picard-canonical-base-change-comparisons]. Then δ_k inverse followed by P_k(δ_l inverse followed by P_l(g) and u_l) and u_k equals (c_M followed by the equality comparison, tensor c_N followed by the equality comparison), then δ_t inverse, P_t(g), and u_t. The exact formula is lean.statement. No square, coefficient maps or compatibility hypothesis is present.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Definition 6.26.1(2), tensor formula; Tag 0096, adjunction identifying the composition comparison. Expanded monoidal-composition calculation used in the original item proof step 1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Eliminate the equality k followed by l = t. Expand the three Picard comparison definitions. Naturality of picardTensorComparison at the inner pairing cancels its intervening hom/inv factors. Both sides now are ordinary pulled pairings, with the ordinary pullbackComp on each argument. This reduction uses no properties of the pairing.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-canonical-base-change-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For ordinary pullback, use the tensor formula O_Z tensor over k-inverse O_Y of k-inverse(O_Y tensor over l-inverse O_X of l-inverse M). The composition comparison takes r tensor (s tensor m) to r*k-sharp(s) tensor m. Its map is characterized by the adjunction of pullback and pushforward, hence is the pinned pullbackComp. For two such generators, the inverse tensor comparison multiplies the two outer coefficients; the inner inverse tensor comparison multiplies the two inner coefficients. Consequently both routes, followed by the pairing g and the unit comparison, give r*r-prime*k-sharp(s*s-prime)*((k followed by l)-sharp(g(m tensor n))). The equalities use the ring-map law and commutativity. The unit comparison is r tensor a mapped to r*k-sharp(a), so its composition is the same multiplication rule. Generators determine the presheaf maps; sheafification preserves these equalities and the tensor comparison is the one obtained by localization of the same presheaf construction. Thus the ordinary pairing identity holds for every pairing.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-canonical-base-change-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this identity back across picardTensorComparison. Its naturality at g cancels the remaining hom/inv factors and its composition conjugation is precisely picardTensorCompIso. Reinsert the equality k followed by l = t, giving the two eqToIso factors of the statement. Empty schemes, zero modules, zero pairings and identity morphisms satisfy the same generator or universal-property equalities; no hypothesis excludes them.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-canonical-base-change-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Tensor-formula calculation of the composition coherence implicit in the parent node step 1, with Tag 0096 fixing the comparison by adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of pullbacks of sheaves of modules respects tensor products and structure sheaf unit maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition comparison of pullback functors preserves tensor products and unit",
+   "results": "Hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, PresheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Over.μ_pullback_left_fst_snd', CategoryTheory.Over.μ_pullback_left_fst_fst', CategoryTheory.Over.μ_pullback_left_snd",
+   "date": "2026-10-13",
+   "verdict": "No exact match. PresheafOfModules.pullbackComp supplies composition but no tensor/unit compatibility for the transported Picard comparisons; generic chosen categorical pullbacks and Over tensors concern different categories."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp.*[Mm]onoidal|picardPairing_comp",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match. PresheafOfModules.pullbackComp supplies composition but no tensor/unit compatibility for the transported Picard comparisons; generic chosen categorical pullbacks and Over tensors concern different categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardPairingPullbackCoherence",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero cup-pairing base-change compatibility in Tag 0BDP; pairing pullback coherence step 1, composition tensor/unit calculation.",
+   "via": [
+    "lem-sc-picard-pairing-pullback-coherence",
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardPairingComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardPairingComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardPairing_comp",
+  "statement": "theorem picardPairing_comp\n    {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) (t : Z ⟶ X)\n    (e : k ≫ l = t) (M N : X.Modules)\n    (g : M ⊗ N ⟶ SheafOfModules.unit X.ringCatSheaf) :\n    (picardTensorObjIso k ((tensorPullback l).obj M) ((tensorPullback l).obj N)).inv ≫\n      (tensorPullback k).map\n        ((picardTensorObjIso l M N).inv ≫ (tensorPullback l).map g ≫\n          (picardTensorUnitIso l).hom) ≫ (picardTensorUnitIso k).hom =\n    (((picardTensorCompIso k l M).hom ≫\n        (eqToIso (congrArg (fun s ↦ (tensorPullback s).obj M) e)).hom) ⊗ₘ\n      ((picardTensorCompIso k l N).hom ≫\n        (eqToIso (congrArg (fun s ↦ (tensorPullback s).obj N) e)).hom)) ≫\n      (picardTensorObjIso t M N).inv ≫ (tensorPullback t).map g ≫\n        (picardTensorUnitIso t).hom",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T095957-L-2459980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T095957-L-2459980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
