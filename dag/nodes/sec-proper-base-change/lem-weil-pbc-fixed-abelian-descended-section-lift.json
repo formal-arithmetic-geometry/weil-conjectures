@@ -28,32 +28,32 @@
  },
  "proof": [
   {
-   "text": "Restrict to the upper tail of i, which is directed and cofinal. Base change T_i to this tail. Affine projections preserve its qcqs property. The full affine étale site of the limit is the colimit of the full affine stage sites.",
+   "text": "Import and reuse the existing private theorem exists_abelianPullbackSectionComparison from AbelianPullbackGlobalSectionsComparison with a proof-only import all. It supplies section equivalences between abelian inverse images and set inverse images at arbitrary etale objects, compatible with the canonical unit/composition section comparison. No coefficient comparison or unit identity is reproved in this module.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit"
+    "lem-weil-pbc-abelian-pullback-global-sections-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Use the full affine étale topos comparison. For the single sheaf H, the inverse-image section formula on the colimit site gives a filtered colimit of sections of p_ki^*H on B_pki T_i. Its coprojections are the units for pi_k followed by the inverse-image composition comparison. Therefore an affine limit section has a stage representative. The first-projection hypotheses identify beta with the pullback-pasting comparison by uniqueness of arrows of pullbacks.",
+   "text": "The descended object T_i is qcqs: T_0 has quasi-compact and quasi-separated structural morphism, and both properties survive pullback. Apply the proved set-valued section lift to the underlying set sheaf of H and to T_i. It gives j in Over(op i) and a stage section t. Its opposite arrow gives i <= j, hence a stage k in the original tail. Apply the inverse section equivalence to t to construct s. Injectivity of the limit section equivalence converts the set lifting equation into the abelian canonical comparison equation.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-of-sites"
+    "lem-weil-pbc-sets-section-lift"
    ],
    "elementary": false
   },
   {
-   "text": "For qcqs T_i use a finite affine cover and finite affine covers of the pairwise intersections. Represent each cover restriction at a stage. The equality criterion for the same filtered section colimits makes the finitely many overlap equalities hold at one later stage. The stage sheaf condition glues the matching family; separatedness identifies its limit image with y. Equivalently, the finite-cover section-colimit theorem commutes these finite matching equalizers with the filtered colimit. Empty covers produce zero sections.",
+   "text": "Let b be the canonical pullbackComp hom at T_i. Pullback hom-ext identifies b followed by base change of gamma.hom and delta_k.hom with delta_i.hom: the first projection follows from the supplied gamma/delta equations and pullbackComp_left_fst_fst, while the second follows from the over-morphism equations. Cancel the isomorphisms to identify beta with b. Naturality of upperStarComp.inv moves restriction past the composition comparison, giving exactly the requested three-factor equation for s.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-sections"
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 09YM, 09YN and 09YQ",
-  "place": "Fixed-coefficient inner colimit in 09YN, with finite affine-cover descent; extracted from the scalar representative proof."
+  "group": "H1",
+  "document": "Stacks Project, Tags 09YN, 09YQ, 00YV, 03CB and 03CC",
+  "place": "Reuse the existing abelian arbitrary-object section comparison and the fixed-coefficient set-section lift, followed by pullback projection uniqueness. Proof-only import all accesses the already proved private section comparison without changing any existing declaration or visibility."
  },
  "mathlib_searches": [
   {
@@ -102,10 +102,9 @@
   "same_as": []
  },
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-colimit-of-sites-sections"
+  "lem-weil-pbc-abelian-pullback-global-sections-comparison",
+  "lem-weil-pbc-sets-section-lift",
+  "def-pc-fibre-product"
  ],
  "lean": {
   "existing": false,
@@ -131,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T022426-L-3218028",
-  "kind": "interface",
+  "landing": "20261013T095959-L-2460817",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
