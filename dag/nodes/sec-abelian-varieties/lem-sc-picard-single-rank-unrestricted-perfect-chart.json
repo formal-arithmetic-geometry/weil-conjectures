@@ -17,59 +17,56 @@
  ],
  "proof": [
   {
-   "text": "The clopen rank loci X_r of E have open and closed images: flat local finite presentation makes f open, and properness makes f closed. The image V=f(X) is clopen. For a nonempty homogeneous fibre of rank r, the clopen neighbourhood V minus f(X minus X_r) contains only nonempty fibres of this rank.",
+   "text": "Apply the ordinary local normal-form theorem. It gives a neighbourhood U and either a rank r whose universal ordinary direct-image freeness is exactly the reference-rank predicate, or a predicate equivalent to emptiness of the test scheme.",
    "uses": [
-    "def-amb-finite-locally-free-module",
-    "lem-weil-pbc-flat-lfp-open"
+    "lem-sc-picard-rank-match-direct-image-normal-form"
    ],
    "elementary": false
   },
   {
-   "text": "On this neighbourhood finite local freeness makes F finitely presented and relatively flat. Tag 0B91 gives perfect Rf_*F and arbitrary derived base change. Its pullbacks have no negative cohomology. Shrink near s to a finite strictly perfect model of Tor amplitude [0,b]. Degree-zero derived base change identifies all its pulled-back H^0 sheaves with the ordinary direct images in the predicate. The reference E has rank r on all inverse images. In any local witness its rank equals r by invariant basis number on a stalk of a nonempty fibre. Locality of rank-r freeness proves the equivalence in both directions, including nonreduced tests and rank zero.",
+   "text": "In the fixed-rank case refine U to an affine neighbourhood V of s and apply the existing proper flat affine Cech perfect-model theorem to F. Its bounded nonnegative complex D has perfect Q(D). Affine-local flatness implies tensor flatness and bounded-above flatness implies K-flatness. The bifunctor/single-complex isomorphism and zero terms outside the bounds prove the required tensor-cohomology vanishing.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
+    "lem-pc-proper-flat-affine-cech-perfect-model",
+    "lem-pc-affine-flat-module-tensor-flat",
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-derived-tensor-cohomology-vanishes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived-pullback counit is invertible on D, by its defining universal property. Compose the quotient comparison, homological-complex pullback comparison, Cech cohomology comparison, degree-zero right-derived pushforward comparison and uniqueness-of-left-adjoint tensor/pullback isomorphisms. This identifies all pulled-back H^0 sheaves with the ordinary direct images. Rewrite the neighbourhood inclusion composite and transfer rank-r freeness along these isomorphisms in both directions.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-proper-flat-affine-cech-perfect-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the emptiness case use the zero derived object, b=0 and r=1. Zero is perfect via the zero complex on each open. The zero complex is bounded, flat and K-flat, and has zero tensor cohomology in every degree. Derived pullback is additive by its triangulated structure, so it and homology preserve zero. Every module on an empty scheme has every rank, as witnessed by an empty cover. Conversely, a zero module of rank one on a scheme forces that scheme empty: at a point its stalk would have both finrank zero and one. Apply the universal rank condition to the identity test to obtain emptiness.",
+   "uses": [
     "def-pc-perfect-complex",
-    "lem-sc-finite-locally-free-stalk-finrank",
-    "def-sc-picard-universal-single-rank-match"
+    "def-pc-derived-pullback",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-sc-finite-locally-free-stalk-finrank"
    ],
    "elementary": false
-  },
-  {
-   "text": "If s has empty fibre, take U=S minus V. All pullback fibres and direct images are empty and zero respectively. The reference clause is vacuous. Take the actual zero derived object K, b=0 and r=0: both sides hold on every test scheme.",
-   "uses": [
-    "def-sc-picard-universal-single-rank-match",
-    "def-pc-perfect-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If the fibre at s has two different ranks a and c, take the intersection of the images of X_a and X_c as U. Every fibre over U contains both ranks. They persist after residue-field extension, so a nonempty test scheme cannot satisfy the reference clause, tested at one of its residue-field points. Thus the predicate holds exactly for empty tests. Take the actual zero derived object K, b=0 and r=1: its pulled-back H^0 is zero, which is rank one exactly on an empty scheme, since the residue field at any point of a nonempty scheme is nonzero.",
-   "uses": [
-    "def-sc-picard-universal-single-rank-match",
-    "lem-sc-finite-locally-free-stalk-finrank",
-    "def-pc-perfect-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "These three cases exhaust all fibres. The zero objects in the last two cases are perfect and have the stated vanishing. No complex is chosen from an undetermined existence claim. Empty tests have vacuous covers, so their module sheaves have every finite rank and both equivalences include them.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes",
   "def-pc-perfect-complex",
-  "def-sc-picard-universal-single-rank-match",
-  "lem-pc-rf-perfect-base-change",
+  "lem-pc-affine-flat-module-tensor-flat",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-proper-flat-affine-cech-perfect-model",
   "lem-sc-finite-locally-free-stalk-finrank",
-  "lem-weil-pbc-flat-lfp-open"
+  "lem-sc-picard-rank-match-direct-image-normal-form"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "first three proof paragraphs; Tag 0B91(2); homogeneous, empty and mixed-fibre adaptation in proof steps 1-3 of lem-sc-picard-universal-single-rank-locus-lfp",
-  "note": "G4 compiling reduction; source adaptation specified explicitly. Unit route unchanged."
+  "place": "first three proof paragraphs; Tag 0B91(2); unrestricted fibre-rank adaptation from the original chart node",
+  "note": "U4: ordinary rank normal form plus explicit nonnegative affine Cech chart and actual zero complex. The unit route stays unchanged."
  },
  "mathlib_searches": [
   {
@@ -151,9 +148,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T095958-L-2460214",
+  "landing": "20261013T113356-L-3188364",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
