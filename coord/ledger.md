@@ -13698,3 +13698,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:19 L: returned deliver/M1/Sheaf.Topology.RingedModuleSkyscraper (reviewer RETURN: (reviewer X-1f103, head 1f103bd59) A (review point 2): In coord/changes/ringed-module-skyscraper-restoration.md, immedia)
 - 22:21 L: returned deliver/D2/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality (reviewer RETURN: (reviewer X-4de8e, head 4de8e0084) E1/E2: at the theorem declaration, old unrestricted `(e ...) (ε ...) : ... := by sorr)
 - 22:23 L: returned deliver/M1/Sheaf.Paper.ModuleCupHomologyRepresentability (reviewer RETURN: (the landing tools, head 1c8a59ea1) the delivery did not land: lean/Sheaf/Paper/ModuleCupHomologyRepresentability.lean c)
+- 22:23 L: merged deliver/C1/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261013T222358-L-1220778 (proof); batch 20261013T222357; modules 1; new nodes 0)
