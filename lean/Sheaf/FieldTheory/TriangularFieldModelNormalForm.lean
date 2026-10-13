@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Polynomial.Monic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 
+import Sheaf.FieldTheory.TriangularFieldModelLocalizedNormalForm
+import Mathlib.RingTheory.AlgebraicIndependent.Adjoin
+
 /-!
 # Coordinates from successive monic division
 
@@ -63,6 +66,48 @@ theorem triangularFieldModel_normal_form
       ∀ q : MvPolynomial (Fin (d + 1 + m)) k,
         MvPolynomial.aeval y q =
           ∑ a : ((i : Fin m) → Fin (e i)),
-            coord (Ideal.Quotient.mk _ q) a • (∏ i, b i ^ (a i).val) := by sorry
+            coord (Ideal.Quotient.mk _ q) a • (∏ i, b i ^ (a i).val) := by
+  classical
+  let R := MvPolynomial (Fin d) k
+  let D := Localization.Away h
+  let F := IntermediateField.adjoin k (Set.range x)
+  let g : R →ₐ[k] F := hx.aevalEquivField.toAlgHom.comp
+    (IsScalarTower.toAlgHom k R (FractionRing R))
+  have hg : Function.Injective g :=
+    hx.aevalEquivField.injective.comp (IsFractionRing.injective R (FractionRing R))
+  have hgh : g h ≠ 0 := by
+    intro hz
+    apply hh
+    exact hg (by simpa using hz)
+  let f : D →ₐ[k] F := IsLocalization.Away.liftAlgHom h (isUnit_iff_ne_zero.mpr hgh)
+  have hf : Function.Injective f := by
+    apply (IsLocalization.injective_iff_map_algebraMap_eq
+      (Submonoid.powers h) f.toRingHom).2
+    intro r s
+    constructor
+    · intro hrs
+      exact congrArg f hrs
+    · intro hrs
+      have hgs : g r = g s := by simpa [f] using hrs
+      exact congrArg (algebraMap R D) (hg hgs)
+  let phi : D →ₐ[k] K := (IntermediateField.val F).comp f
+  have hphi : ∀ r : R, phi (algebraMap R D r) = MvPolynomial.aeval x r := by
+    intro r
+    simp [phi, f, g, R, F, IsScalarTower.toAlgHom]
+  obtain ⟨nf, hev⟩ := triangularFieldModel_localized_normal_form k K d x m b h p y e
+    hp he hyx hyt hyb hzero phi hphi
+  let coord := (LinearMap.pi fun a => f.toLinearMap.comp
+    (LinearMap.proj a)).comp nf.toLinearMap
+  refine ⟨coord, ?_, ?_⟩
+  · intro z w hzw
+    apply nf.injective
+    funext a
+    exact hf (congrFun hzw a)
+  · intro q
+    rw [hev]
+    apply Finset.sum_congr rfl
+    intro a ha
+    rfl
+
 
 end FieldTheory

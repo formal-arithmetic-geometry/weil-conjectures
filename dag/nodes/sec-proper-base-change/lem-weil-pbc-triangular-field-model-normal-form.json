@@ -18,60 +18,41 @@
  ],
  "proof": [
   {
-   "text": "Let R=k[X] and D=R[1/h]. Algebraic independence embeds R in F=k(x). The assumption h nonzero extends this to an embedding D into F. The quotient by hT-1 identifies the first d+1 variable quotient with D.",
+   "text": "Construct g:k[X]→k(x) using the algebraic-independence equivalence from its fraction field. Its injectivity and h≠0 make g(h) a unit. Extend g to f:D→k(x) with IsLocalization.Away.liftAlgHom. The localization injectivity criterion and injectivity of g prove f injective. Its composite with k(x)→K agrees with aeval x on k[X].",
    "uses": [
     "def-weil-pbc-transcendence-basis",
-    "def-weil-ring-localization-away",
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-pbc-triangular-field-model-equations"
+    "def-weil-ring-localization-away"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
+   "elementary": true
   },
   {
-   "text": "Take quotients successively by the p_i. Each is monic of degree e_i over the quotient of the preceding variables, so its powers below e_i form a basis. Multiply these bases using Basis.smulTower to get a D-basis indexed by the exponent tuples. Take basis coordinates and embed each coefficient in F. The resulting k-linear coordinate map is injective.",
+   "text": "Apply localized normal form with phi equal to the composite D→k(x)→K, obtaining a linear equivalence nf from the quotient to exponent-indexed D-coefficients and its evaluation formula.",
    "uses": [
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-tower-product-basis",
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-algebra-hom-quotient"
+    "lem-weil-pbc-triangular-field-model-localized-normal-form"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
+   "elementary": false
   },
   {
-   "text": "Evaluation kills every generator by the vanishing assumption and descends to the quotient. Apply it to the basis expansion. The equations for y identify the evaluations of basis monomials with the products of b_i and the evaluation on D with the inclusion into F. This gives the asserted finite sum formula. If any e_i=0, the monic polynomial is one and vanishing is impossible; m=0 gives the single coordinate of D.",
+   "text": "Compose nf with the pointwise k-linear map induced by f. If two images are equal, apply injectivity of f at each exponent and injectivity of nf. The evaluation formula becomes the desired one because the intermediate-field scalar action on K is multiplication by its inclusion.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-free-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-transcendence-basis",
   "def-weil-ring-localization-away",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
-  "def-weil-pbc-triangular-field-model-equations",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-tower-product-basis",
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-algebra-hom-quotient",
-  "def-weil-pbc-mv-polynomial-ring"
+  "lem-weil-pbc-triangular-field-model-localized-normal-form",
+  "def-weil-pbc-free-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "W4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent.",
+  "note": "Localized coefficient equivalence isolated; embedding and coordinate injectivity proved with Mathlib."
  },
  "mathlib_searches": [
   {
@@ -158,11 +139,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d0af7",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T113357-L-3188781",
+  "landing": "20261013T125450-L-3876073",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node statements; all three delivered modules and the direct importer compiled successfully, including the required reduced-public-import reader check. No target signature or existing declaration changed; remaining sorrys are the two named, documented split lemmas."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

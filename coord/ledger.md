@@ -12541,3 +12541,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:54 L: merged deliver/N3/Sheaf.AlgebraicGeometry.CoherentOpenSectionCarrier (stage 3; reviewer PASS; first push; landing 20261013T125448-L-3875614 (proof); batch 20261013T125443; modules 1; new nodes 0)
 - 12:54 L: merged deliver/T2/Sheaf.AlgebraicGeometry.EtaleLimitAffineStageTailColimit (stage 3; reviewer PASS; first push; landing 20261013T125449-L-3875806 (interface); batch 20261013T125443; modules 2; new nodes 1)
 - 12:54 L: merged deliver/V3/Sheaf.AlgebraicGeometry.CoefficientTargetTensorSurjective (stage 3; reviewer PASS; first push; landing 20261013T125449-L-3875905 (interface); batch 20261013T125443; modules 3; new nodes 2)
+- 12:54 L: merged deliver/W4/Sheaf.FieldTheory.TriangularFieldModelNormalForm (stage 3; reviewer PASS; first push; landing 20261013T125450-L-3876073 (interface); batch 20261013T125443; modules 2; new nodes 1)
