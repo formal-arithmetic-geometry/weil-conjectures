@@ -222,7 +222,8 @@ lemma Etale.stageCohomologyEquiv_apply (U : Over B) (x) :
 
 lemma Etale.stageCohomologyEquiv_zero (U : Over B) :
     Etale.stageCohomologyEquiv Λ k W G q U 0 = 0 := by
-  sorry
+  rw [Etale.stageCohomologyEquiv_apply, Etale.freeSheafSingleHomEquiv_zero, Limits.zero_comp,
+    Etale.lowerStarPlusShiftedHomEquiv_zero, Limits.zero_comp, Limits.comp_zero]
 
 end Stage
 
