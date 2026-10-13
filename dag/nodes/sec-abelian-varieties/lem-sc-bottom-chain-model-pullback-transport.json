@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-bottom-chain-model-pullback-transport",
+ "kind": "statement",
+ "title": "Local homology square for pullback of a bottom chain representative",
+ "statement": "Let S and Y be schemes [def-pc-scheme], k:Y -> S, and f:X -> Z an arrow in D(O_S) [def-pc-derived-category]. Let U be an open of S and let A,B be strictly perfect complexes [def-pc-perfect-complex] on its localized ringed site [def-pur-localized-ringed-site]. Suppose A^i=0 for i != 0, B^i=0 for i < 0, B.d(0,1)=0, and alpha:A -> B has invertible component alpha^0. Fix isomorphisms eA:X|U -> Q(A) and eB:Z|U -> Q(B) for which f|U >> eB = eA >> Q(alpha). For every y of Y with k(y) in U there is an open V containing y, complexes P,Q on the localized site over V, and beta:P -> Q, such that P^-1=Q^-1=0, P.d(0,1)=Q.d(0,1)=0 and beta^0 is invertible. There are isomorphisms eP:H0(Lk*X)|V -> H0(P) and eQ:H0(Lk*Z)|V -> H0(Q) such that H0(Lk*f)|V >> eQ = eP >> H0(beta), where derived pullback is [def-pc-derived-pullback]. No universal rank hypothesis or construction of the original model is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Tag 0BDL, canonical pullback clause; Tags 06YD and 06YJ, termwise K-flat computation; Tag 08DW, restriction compatibility"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-amb-finite-locally-free-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Put V=k inverse-image U, which contains y. Transport A,B and alpha through the equivalence of the localized open site and U.toScheme. Their terms are retracts of finite free modules and therefore flat; the complexes are bounded above.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-localized-pullback-perfect-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the bounded-flat-complex comparison along V.toScheme -> U.toScheme for both complexes. The defining derived counit is the same natural transformation for A and B, so its naturality gives the arrow comparison for alpha. Identify ordinary tensor pullback with scheme-module pullback by uniqueness of left adjoints. Transfer through the inverse open-site equivalence to obtain P,Q and beta. Additivity preserves zero objects and zero differentials; functors preserve invertible beta^0. This supplies all the asserted bottom conditions.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural comparison between derived pullback and open restriction to transport the supplied square for f. Exact restriction commutes with homology. Apply H0 to the transported square and compose the exact-restriction homology comparison with the factorization of H0 through Q on the pulled complexes. The resulting component isomorphisms eP and eQ have the displayed naturality equation. This construction uses a common natural counit; separate existential object isomorphisms are insufficient.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-localized-pullback-perfect-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Tag 0BDL, canonical pullback clause; Tags 06YD and 06YJ, termwise K-flat computation; Tag 08DW, restriction compatibility",
+  "note": "F3 made the stated matrix-chart argument and its canonical morphism transport into separate Lean interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism on homology of cochain complexes zero negative degree and zero outgoing differential",
+   "results": "8 hits: CochainComplex.isIso_homologyπ₀, CochainComplex.isoHomologyπ₀, CochainComplex.ConnectData.homologyIsoPos, CochainComplex.ConnectData.homologyIsoNeg, CochainComplex.quasiIsoAt₀_iff, HomologicalComplex.singleObjHomologySelfIso_inv_homologyι_assoc, CochainComplex.isoHomologyπ₀_inv_naturality_assoc, CochainComplex.isZero_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "generic tools only, no scheme-level arrow criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"IsIso\"",
+   "results": "1 hits: CategoryTheory.ShortComplex.isIso_homologyFunctor_map_of_epi_of_isIso_of_mono",
+   "date": "2026-10-13",
+   "verdict": "generic tools only, no scheme-level arrow criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "universalH0|truncation_pullback|HomologyMapData.ofZeros",
+   "results": "3 hits: Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+   "date": "2026-10-13",
+   "verdict": "generic tools only, no scheme-level arrow criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect complex universally locally free lowest cohomology finite free chain representative",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback natural comparison termwise pullback bounded flat complex morphism",
+   "results": "8 hits: CategoryTheory.ShortComplex.SnakeInput.functorP_map, CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.pullbackComparison_comp_fst, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.pullbackComparison_comp_snd, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.PreservesPullback.iso_hom",
+   "date": "2026-10-13",
+   "verdict": "generic tools only, no scheme-level arrow criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalH0TruncationPullback",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Tag 0BDP third paragraph, omitted canonical base-change detail; Tag 0BDL, canonical pullback clause; Tags 06YD and 06YJ, termwise K-flat computation; Tag 08DW, restriction compatibility",
+   "via": [
+    "lem-sc-perfect-universal-h0-truncation-pullback",
+    "lem-sc-picard-base-change-stalk-surjective",
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BottomChainModelPullbackTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/BottomChainModelPullbackTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.bottom_chain_model_pullback_transport",
+  "statement": "theorem bottom_chain_model_pullback_transport\n    [∀ T : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    (S : Scheme.{u})\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    (X Z : schemeDerivedCategory S) (f : X ⟶ Z) (U : S.Opens)\n    (A B : CochainComplex\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ)\n    (hA : IsStrictlyPerfect S U A) (hB : IsStrictlyPerfect S U B)\n    (hAzero : ∀ i : ℤ, i ≠ 0 → IsZero (A.X i))\n    (hBnegative : ∀ i : ℤ, i < 0 → IsZero (B.X i))\n    (hBzero : B.d 0 1 = 0) (α : A ⟶ B) (hα : IsIso (α.f 0))\n    (eA : (SheafOfModules.overFunctor.{u}\n        (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj X ≅\n          DerivedCategory.Q.obj A)\n    (eB : (SheafOfModules.overFunctor.{u}\n        (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj Z ≅\n          DerivedCategory.Q.obj B)\n    (hsquare : (SheafOfModules.overFunctor.{u}\n        (moduleRings S.toRingedSpace) U).mapDerivedCategory.map f ≫ eB.hom =\n          eA.hom ≫ DerivedCategory.Q.map α)\n    {Y : Scheme.{u}} (k : Y ⟶ S) (y : Y) (hy : k.base y ∈ U) :\n    ∃ V : Y.Opens, y ∈ V ∧\n      ∃ P Q : CochainComplex\n          (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) ℤ,\n        IsZero (P.X (-1)) ∧ IsZero (Q.X (-1)) ∧\n        P.d 0 1 = 0 ∧ Q.d 0 1 = 0 ∧\n        ∃ β : P ⟶ Q, IsIso (β.f 0) ∧\n          ∃ (eP : ((DerivedCategory.homologyFunctor\n                (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((derivedPullback k).obj X)).over V ≅ P.homology 0)\n            (eQ : ((DerivedCategory.homologyFunctor\n                (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((derivedPullback k).obj Z)).over V ≅ Q.homology 0),\n            (((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map\n                ((derivedPullback k).map f)).over V) ≫ eQ.hom =\n                  eP.hom ≫ HomologicalComplex.homologyMap β 0",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T032958-L-3675022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T032958-L-3675022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

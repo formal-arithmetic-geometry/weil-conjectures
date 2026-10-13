@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.PerfectUniversalH0LocalChainModel
+import Sheaf.AlgebraicGeometry.BottomChainModelPullbackTransport
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Canonical truncation on a universally free lowest-cohomology locus
 
@@ -21,6 +24,40 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem bottom_homologyMap_isIso
+    {C : Type*} [Category C] [Abelian C]
+    {P Q : CochainComplex C ℤ} (β : P ⟶ Q)
+    (hPnegative : IsZero (P.X (-1))) (hQnegative : IsZero (Q.X (-1)))
+    (hPzero : P.d 0 1 = 0) (hQzero : Q.d 0 1 = 0)
+    (hβ : IsIso (β.f 0)) : IsIso (HomologicalComplex.homologyMap β 0) := by
+  have hp : (ComplexShape.up ℤ).prev 0 = -1 :=
+    (ComplexShape.up ℤ).prev_eq' (by decide)
+  have hn : (ComplexShape.up ℤ).next 0 = 1 :=
+    (ComplexShape.up ℤ).next_eq' (by decide)
+  let φ := (HomologicalComplex.shortComplexFunctor C (ComplexShape.up ℤ) 0).map β
+  have hfP : (P.sc 0).f = 0 := by
+    change P.d ((ComplexShape.up ℤ).prev 0) 0 = 0
+    rw [hp]
+    exact hPnegative.eq_of_src _ _
+  have hfQ : (Q.sc 0).f = 0 := by
+    change Q.d ((ComplexShape.up ℤ).prev 0) 0 = 0
+    rw [hp]
+    exact hQnegative.eq_of_src _ _
+  have hgP : (P.sc 0).g = 0 := by
+    change P.d 0 ((ComplexShape.up ℤ).next 0) = 0
+    rw [hn]
+    exact hPzero
+  have hgQ : (Q.sc 0).g = 0 := by
+    change Q.d 0 ((ComplexShape.up ℤ).next 0) = 0
+    rw [hn]
+    exact hQzero
+  change IsIso (ShortComplex.homologyMap φ)
+  rw [(ShortComplex.LeftHomologyMapData.ofZeros φ hfP hgP hfQ hgQ).homologyMap_eq]
+  change IsIso (_ ≫ β.f 0 ≫ _)
+  infer_instance
 
 /-- Pulling back a degree-zero truncation preserves its degree-zero isomorphism on
 an open cover with universally constant free lowest cohomology.
@@ -74,6 +111,35 @@ theorem perfect_universalH0_truncation_pullback_isIso
     {Y : Scheme.{u}} (k : Y ⟶ S) :
     IsIso ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
-        ((derivedPullback k).map a)) := by sorry
+        ((derivedPullback k).map a)) := by
+  classical
+  let g := (DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
+      ((derivedPullback k).map a)
+  have hlocal : ∀ y : Y, ∃ V : Y.Opens, y ∈ V ∧ IsIso (g.over V) := by
+    intro y
+    obtain ⟨U, hy, A, B, hA, hB, hAzero, hBnegative, hBzero,
+      α, hα, eA, eB, hsquare⟩ :=
+      perfect_universalH0_local_chain_model S K hK hnegative hloc M a ha (k.base y)
+    obtain ⟨V, hyV, P, Q, hPnegative, hQnegative, hPzero, hQzero,
+      β, hβ, eP, eQ, hβsquare⟩ :=
+      bottom_chain_model_pullback_transport S _ K a U A B hA hB hAzero
+        hBnegative hBzero α hα eA eB hsquare k y hy
+    have := bottom_homologyMap_isIso β hPnegative hQnegative hPzero hQzero hβ
+    have : IsIso (g.over V ≫ eQ.hom) := by
+      rw [hβsquare]
+      infer_instance
+    exact ⟨V, hyV, IsIso.of_isIso_comp_right (g.over V) eQ.hom⟩
+  choose V hV hIso using hlocal
+  have hcover : ⨆ y, V y = ⊤ := by
+    ext y
+    change y ∈ (⨆ y, V y : Y.Opens) ↔ y ∈ (⊤ : Y.Opens)
+    constructor
+    · intro _
+      trivial
+    · intro _
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨y, hV y⟩
+  exact (sheaf_module_isIso_iff_isIso_over_open_cover.{u, u, u}
+    Y.toRingedSpace Y V hcover _ _ g).2 hIso
 
 end AlgebraicGeometry.Scheme
