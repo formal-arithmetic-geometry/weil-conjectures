@@ -12244,3 +12244,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/X3/Sheaf.RingTheory.BaseChangeIdealKernelGenerators (stage 3; reviewer PASS; first push; landing 20261013T111943-L-3070387 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/X3/Sheaf.RingTheory.FinitePresentationModuleBaseChangeDiagram (stage 3; reviewer PASS; first push; landing 20261013T111944-L-3070511 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/X3/Sheaf.RingTheory.FlatPointNoetherianModel (stage 3; reviewer PASS; first push; landing 20261013T111944-L-3070658 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/X3/Sheaf.RingTheory.LocalizationIdealKernelGenerators (stage 3; reviewer PASS; first push; landing 20261013T111944-L-3070795 (proof); batch 20261013T111833; modules 1; new nodes 0)

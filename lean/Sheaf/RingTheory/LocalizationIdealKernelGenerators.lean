@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.RingTheory.Ideal.Maps
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.Algebra.Module.LocalizedModule.Submodule
 
 /-!
 # Localization of ideal multiplication kernels
@@ -69,6 +71,187 @@ theorem exists_localization_ideal_kernel_generators
                 ((LinearMap.lsmul R' (R' ⊗[R] M)).comp
                   (I.map (algebraMap R R')).subtype)) :
                 Set ((I.map (algebraMap R R')) ⊗[R'] (R' ⊗[R] M))))) := by
-  sorry
+  obtain ⟨q, W, hq, hloc⟩ := hloc
+  let N := R' ⊗[R] M
+  let P := S' ⊗[S] M
+  let A := S ⊗[R] R'
+  let f : N →ₗ[R'] P :=
+    ((TensorProduct.mk S S' M 1).restrictScalars R).liftBaseChange R'
+  have hf (r : R') (m : M) : f (r ⊗ₜ[R] m) =
+      algebraMap R' S' r • ((1 : S') ⊗ₜ[S] m) := by
+    change r • ((1 : S') ⊗ₜ[S] m) = _
+    rw [algebraMap_smul]
+  -- The S-action on N is obtained by base-changing the action on M.
+  let φ : S →ₐ[R] Module.End R' N :=
+    (Module.End.baseChangeHom R R' M).comp (Algebra.lsmul R R M)
+  let : Module S N := Module.compHom N φ.toRingHom
+  have hs (s : S) (r : R') (m : M) : s • (r ⊗ₜ[R] m : N) =
+      r ⊗ₜ[R] (s • m) := rfl
+  have : IsScalarTower R S N := IsScalarTower.of_algebraMap_smul fun r x ↦ by
+    change φ (algebraMap R S r) x = r • x
+    rw [φ.commutes]
+    rfl
+  have : SMulCommClass S R' N := ⟨fun s r x ↦ (φ s).map_smul r x⟩
+  let : Module A N := TensorProduct.Algebra.module
+  let : Algebra R' A := Algebra.TensorProduct.rightAlgebra
+  have : IsScalarTower R' A N := IsScalarTower.of_algebraMap_smul fun r x ↦ by
+    change (1 : S) • r • x = r • x
+    rw [one_smul]
+  let : Algebra A S' := q.toAlgebra
+  let : Module A P := Module.compHom P q
+  have : IsScalarTower A S' P := ⟨fun a b x ↦ by
+    change (q a * b) • x = q a • b • x
+    exact mul_smul _ _ _⟩
+  have : IsScalarTower R' A S' := IsScalarTower.of_algebraMap_smul fun r x ↦ by
+    rw [Algebra.smul_def]
+    change q ((1 : S) ⊗ₜ[R] r) * x = r • x
+    rw [hq, map_one, one_mul]
+    exact (Algebra.smul_def r x).symm
+  have : IsScalarTower R' A P := IsScalarTower.of_algebraMap_smul fun r x ↦ by
+    change q ((1 : S) ⊗ₜ[R] r) • x = r • x
+    rw [hq, map_one, one_mul, algebraMap_smul]
+  let fA : N →ₗ[A] P :=
+    { f.toAddHom with
+      map_smul' := by
+        intro a n
+        induction a using TensorProduct.induction_on with
+        | zero => simp
+        | tmul s r =>
+          induction n using TensorProduct.induction_on with
+          | zero => simp
+          | tmul r₁ m =>
+            change f (s • r • (r₁ ⊗ₜ[R] m)) = q (s ⊗ₜ[R] r) • f (r₁ ⊗ₜ[R] m)
+            rw [TensorProduct.smul_tmul', hs, hf, hf, hq]
+            rw [TensorProduct.tmul_smul, ← algebraMap_smul S' s]
+            simp only [smul_smul, Algebra.smul_def, map_mul]
+            congr 1
+            simp [mul_comm, mul_left_comm]
+          | add x y hx hy => simp_all
+        | add a b ha hb =>
+          change f ((a + b) • n) = q (a + b) • f n
+          change f (a • n) = q a • f n at ha
+          change f (b • n) = q b • f n at hb
+          rw [add_smul, map_add, ha, hb, map_add, add_smul] }
+  have : IsLocalization W S' := hloc
+  have : IsScalarTower S A S' := IsScalarTower.of_algebraMap_smul fun s x ↦ by
+    rw [Algebra.smul_def]
+    change q (s ⊗ₜ[R] (1 : R')) * x = s • x
+    rw [hq, map_one, mul_one]
+    exact (Algebra.smul_def s x).symm
+  -- Tensor cancellation: ((s tensor r) tensor m) maps to r tensor (s • m).
+  let eR : (A ⊗[S] M) ≃ₗ[R] N :=
+    ((TensorProduct.AlgebraTensorModule.rightComm R S S S M R').symm.restrictScalars R).trans
+      ((TensorProduct.AlgebraTensorModule.congr (TensorProduct.lid S M)
+        (LinearEquiv.refl R R')).restrictScalars R |>.trans (TensorProduct.comm R M R'))
+  have heR (s : S) (r : R') (m : M) : eR ((s ⊗ₜ[R] r) ⊗ₜ[S] m) =
+      r ⊗ₜ[R] (s • m) := rfl
+  let e : (A ⊗[S] M) ≃ₗ[A] N :=
+    { eR.toAddEquiv with
+      map_smul' := by
+        intro a x
+        induction a using TensorProduct.induction_on with
+        | zero => simp
+        | tmul s r =>
+          induction x using TensorProduct.induction_on with
+          | zero => simp
+          | tmul b m =>
+            induction b using TensorProduct.induction_on with
+            | zero => simp
+            | tmul s₁ r₁ =>
+              change eR (((s ⊗ₜ[R] r) * (s₁ ⊗ₜ[R] r₁)) ⊗ₜ[S] m) =
+                s • r • eR ((s₁ ⊗ₜ[R] r₁) ⊗ₜ[S] m)
+              rw [Algebra.TensorProduct.tmul_mul_tmul, heR, heR, TensorProduct.smul_tmul', hs]
+              simp [mul_smul]
+            | add b c hb hc => simp_all [TensorProduct.add_tmul]
+          | add x y hx hy => simp_all
+        | add a b ha hb =>
+          change eR ((a + b) • x) = (a + b) • eR x
+          change eR (a • x) = a • eR x at ha
+          change eR (b • x) = b • eR x at hb
+          rw [add_smul, map_add, ha, hb, add_smul] }
+  -- Tensoring the ring localization and transporting across e localizes fA.
+  let f₀ : A →ₗ[A] S' := Algebra.linearMap A S'
+  let fT := TensorProduct.AlgebraTensorModule.rTensor S M f₀
+  have hfe : fA.comp e.toLinearMap = fT := by
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro a m
+    induction a using TensorProduct.induction_on with
+    | zero => simp
+    | tmul s r =>
+      change f (r ⊗ₜ[R] (s • m)) = q (s ⊗ₜ[R] r) ⊗ₜ[S] m
+      rw [hf, hq, TensorProduct.tmul_smul, ← algebraMap_smul S' s, smul_smul,
+        TensorProduct.smul_tmul']
+      simp [mul_comm]
+    | add a b ha hb => simp_all [TensorProduct.add_tmul]
+  have hfT : IsLocalizedModule W fT := inferInstance
+  have hfA : IsLocalizedModule W fA := by
+    apply (IsLocalizedModule.comp_iff_of_bijective_right W e.toLinearMap e.bijective).mp
+    rw [hfe]
+    exact hfT
+  -- Put N first so multiplication and localization are A-linear.
+  let J := I.map (algebraMap R R')
+  let gN : N ⊗[R'] J →ₗ[A] N := TensorProduct.AlgebraTensorModule.lift
+    (((Algebra.lsmul R' A N).toLinearMap.comp J.subtype).flip)
+  let gP : P ⊗[R'] J →ₗ[A] P := TensorProduct.AlgebraTensorModule.lift
+    (((Algebra.lsmul R' A P).toLinearMap.comp J.subtype).flip)
+  let α : N ⊗[R'] J →ₗ[R'] P ⊗[R'] J := TensorProduct.map f LinearMap.id
+  let αA : N ⊗[R'] J →ₗ[A] P ⊗[R'] J := TensorProduct.AlgebraTensorModule.rTensor R' J fA
+  have : IsLocalizedModule W αA := inferInstance
+  have hmap : IsLocalizedModule.map W αA fA gN = gP := by
+    apply IsLocalizedModule.linearMap_ext W αA fA
+    rw [IsLocalizedModule.map_comp]
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro n b
+    change f (b.val • n) = b.val • f n
+    exact f.map_smul _ _
+  -- Mathlib identifies the localized kernel with the span of the old kernel.
+  have hspan : LinearMap.ker gP =
+      (Submodule.span S' (αA '' (LinearMap.ker gN : Set (N ⊗[R'] J)))).restrictScalars A := by
+    rw [← hmap, LinearMap.ker_localizedMap_eq_localized'_ker S' W αA fA gN,
+      Submodule.localized'_eq_span]
+  have hsymN (y : J ⊗[R'] N) :
+      gN (TensorProduct.comm R' J N y) =
+        TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype) y := by
+    induction y using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b n => rfl
+    | add x y hx hy => simp_all
+  have hsymP (z : J ⊗[R'] P) :
+      gP (TensorProduct.comm R' J P z) =
+        TensorProduct.lift ((LinearMap.lsmul R' P).comp J.subtype) z := by
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b n => rfl
+    | add x y hx hy => simp_all
+  -- Reindex those generators using the symmetries in the statement.
+  have hset : αA '' (LinearMap.ker gN : Set (N ⊗[R'] J)) =
+      (fun y : J ⊗[R'] N ↦ α (TensorProduct.comm R' J N y)) ''
+        (LinearMap.ker (TensorProduct.lift
+          ((LinearMap.lsmul R' N).comp J.subtype)) : Set (J ⊗[R'] N)) := by
+    ext x
+    constructor
+    · rintro ⟨y, hy, rfl⟩
+      refine ⟨(TensorProduct.comm R' J N).symm y, ?_, ?_⟩
+      · change TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype)
+          ((TensorProduct.comm R' J N).symm y) = 0
+        rw [← hsymN, LinearEquiv.apply_symm_apply]
+        exact hy
+      · simp only [LinearEquiv.apply_symm_apply]
+        rfl
+    · rintro ⟨y, hy, rfl⟩
+      refine ⟨TensorProduct.comm R' J N y, ?_, rfl⟩
+      change gN (TensorProduct.comm R' J N y) = 0
+      rw [hsymN]
+      exact hy
+  refine ⟨α, ?_, ?_⟩
+  · intro r x b
+    change f (r ⊗ₜ[R] x) ⊗ₜ[R'] b = _
+    rw [hf]
+  · intro z hz
+    rw [← hset]
+    change TensorProduct.comm R' J P z ∈
+      (Submodule.span S' (αA '' (LinearMap.ker gN : Set (N ⊗[R'] J)))).restrictScalars A
+    rw [← hspan, LinearMap.mem_ker, hsymP]
+    exact hz
 
 end Module
