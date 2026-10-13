@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-picard-descended-fibre-coefficient-trivial",
+ "kind": "statement",
+ "title": "Picard descended fibre coefficient is trivial",
+ "statement": "Let f:X to S be a scheme morphism whose tensor-pullback structure adjunction unit is an isomorphism after every base change. Let L be invertible on X, let s be a point of S, and suppose L_s is isomorphic to the pullback of a finite locally free N on Spec kappa(s). Then L_s is isomorphic to the structure module on X_s. The universal structure-unit condition and tensor pullback are [lem-pc-module-pullback-adjunction, def-pc-module-pullback], invertibility is [def-sc-invertible-module], and finite local freeness is [def-amb-finite-locally-free-module]. No derived model, target family, basis, flatness or properness is assumed.",
+ "stmt_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, displayed fibre-coefficient identification; Tag 0BDP, fibrewise descent criterion and field rank-one consequence; parent proof step 2"
+ },
+ "proof": [
+  {
+   "text": "At Spec kappa(s), an empty source fibre would make every module on the fibre zero (Modules.isZero_of_isEmpty). Additive pushforward preserves zero objects. The assumed invertible adjunction unit would make the nonzero field-spectrum structure module zero (Modules.not_isZero_unit), a contradiction. Thus X_s is nonempty.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify tensor pullback with ordinary module pullback by uniqueness of left adjoints. Ordinary pullback preserves invertibility. Transport it through the descent isomorphism to the pullback of N. Apply field pullback rank-one triviality on the nonempty source fibre, obtaining N isomorphic to the field structure module.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-field-pullback-rank-one-trivial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensor pullback to the trivialization of N, compose with the descent isomorphism, and use the pullback structure-unit isomorphism. This yields the asserted trivialization of L_s.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-field-pullback-rank-one-trivial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-14",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0BF2, displayed fibre-coefficient identification; Tag 0BDP, fibrewise descent criterion and field rank-one consequence; parent proof step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "descended invertible coefficient on nonempty fibre is trivial",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free module over field invertible nonempty pullback is trivial",
+   "results": "Eight hits, including CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum and Module.free_of_flat_of_isLocalRing; none supplies scheme-fibre coefficient triviality.",
+   "date": "2026-10-14",
+   "verdict": "No matching theorem; use the existing stated geometric dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEmpty|isZero_of_isEmpty|pullback.*IsInvertible",
+   "results": "Existing library Modules.isZero_of_isEmpty, Modules.not_isZero_unit, and IsInvertible.pullback; no single theorem with the universal structure-unit and descent hypotheses.",
+   "date": "2026-10-14",
+   "verdict": "No exact Mathlib statement; library tools are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardFixedModelResidueCycleComparison",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, displayed fibre-coefficient identification; Tag 0BDP, fibrewise descent criterion and field rank-one consequence; parent proof step 2",
+   "via": [
+    "lem-sc-picard-fixed-model-residue-cycle-comparison",
+    "lem-sc-picard-fixed-model-residue-derived-comparison",
+    "lem-sc-picard-fixed-model-residue-chain-comparison",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDescendedFibreCoefficientTrivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDescendedFibreCoefficientTrivial.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_descended_fibre_coefficient_trivial",
+  "statement": "theorem picard_descended_fibre_coefficient_trivial {X S : Scheme.{v}} (f : X ⟶ S) (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (L : X.Modules) [L.IsInvertible] (s : S) (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N)) : Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T211052-L-388082",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T211052-L-388082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

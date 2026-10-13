@@ -18,9 +18,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.PicardDescendedFibreCoefficientTrivial
+import Sheaf.AlgebraicGeometry.PicardResidueCyclesGeometricNaturality
 
 /-! # Fixed Picard models: residue comparison on target cycles
 Source: Stacks Project, Tag 0BF2 and Tag 0B91.
@@ -34,6 +33,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 1500000 in
+-- Elaborating the evaluated sheaf-module tensor maps requires many scalar identifications.
 /-- Residue homology comparison on cycles, before extending to all degree-one vectors.
 Source: Stacks Project, Tag 0BF2, functoriality of E to E_i; Tag 0B91, base change.
 (blueprint: lem-sc-picard-fixed-model-residue-cycle-comparison)
@@ -136,6 +137,91 @@ theorem picard_fixed_model_residue_cycle_comparison
           structureSheafCohomologyPullback
             (((Over.pullback (S.fromSpecResidueField s)).map
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                (ui i) (hui i))).left) 1 (α z) := by sorry
+                (ui i) (hui i))).left) 1 (α z) := by
+  classical
+  let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
+  let comparison :=
+    picard_residue_cycles_geometric_naturality f Xi fi ui hui L W k w s hw τ
+      U hwU hU htrivial K hK hnegative hE C hC hCnegative hCzero hCi
+  obtain ⟨γ, a, β, hsurj, hker, hnatural⟩ := comparison
+  let p := RingHom.ker (W.evaluation U w hwU).hom
+  let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
+  let dK (j l : ℤ) :=
+    (show (K.X j).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)]
+      (K.X l).val.obj (.op (Over.mk (𝟙 U))) from
+        ((K.d j l).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField
+  let ZK := LinearMap.ker (dK 1 2)
+  have hd01 : dK 0 1 = 0 := hreszero 0
+  have hd12 : dK 1 2 = 0 := hreszero 1
+  have hinj : Function.Injective γ := by
+    apply (injective_iff_map_eq_zero γ).mpr
+    intro x hx
+    have hb : ∃ y, dK 0 1 y = x.val := (hker x).mp hx
+    let y := Classical.choose hb
+    have hy := Classical.choose_spec hb
+    apply Subtype.ext
+    change x.val = 0
+    change dK 0 1 y = x.val at hy
+    rw [hd01] at hy
+    exact hy.symm
+  let toCycles : (p.ResidueField ⊗[Γ(W, U)]
+      (K.X 1).val.obj (.op (Over.mk (𝟙 U)))) ≃+ ZK :=
+    { toFun := fun x ↦ ⟨x, by
+        change dK 1 2 x = 0
+        rw [hd12]
+        rfl⟩
+      invFun := fun x ↦ x.val
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl
+      map_add' := fun _ _ ↦ rfl }
+  let coords := (e1.symm.baseChange Γ(W, U) p.ResidueField).toAddEquiv
+  let α := coords.trans (toCycles.trans (AddEquiv.ofBijective γ ⟨hinj, hsurj⟩))
+  refine ⟨α, a, β, ?_⟩
+  intro i φ hφ
+  dsimp only
+  intro z
+  let F : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)]
+      ((C i).X 1).val.obj (.op (Over.mk (𝟙 U))) :=
+    ((φ.f 1).val.app (.op (Over.mk (𝟙 U)))).hom
+  let dC := ((show ((C i).X 1).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)]
+    ((C i).X 2).val.obj (.op (Over.mk (𝟙 U))) from
+      (((C i).d 1 2).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField)
+  let D1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)]
+      (K.X 2).val.obj (.op (Over.mk (𝟙 U))) :=
+    ((K.d 1 2).val.app (.op (Over.mk (𝟙 U)))).hom
+  let D2 : ((C i).X 1).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)]
+      ((C i).X 2).val.obj (.op (Over.mk (𝟙 U))) :=
+    (((C i).d 1 2).val.app (.op (Over.mk (𝟙 U)))).hom
+  let F2 : (K.X 2).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)]
+      ((C i).X 2).val.obj (.op (Over.mk (𝟙 U))) :=
+    ((φ.f 2).val.app (.op (Over.mk (𝟙 U)))).hom
+  have hsection := congrArg (fun t : K.X 1 ⟶ (C i).X 2 ↦
+    (t.val.app (.op (Over.mk (𝟙 U)))).hom) (φ.comm 1 2)
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.hom_comp] at hsection
+  have hsec : D2.comp F = F2.comp D1 := hsection
+  have hcomm : dC.comp (F.baseChange p.ResidueField) =
+      (F2.baseChange p.ResidueField).comp (dK 1 2) := by
+    change (D2.baseChange p.ResidueField).comp (F.baseChange p.ResidueField) =
+      (F2.baseChange p.ResidueField).comp (D1.baseChange p.ResidueField)
+    exact (LinearMap.baseChange_comp F D2).symm.trans
+      ((congrArg (fun q ↦ q.baseChange p.ResidueField) hsec).trans
+        (LinearMap.baseChange_comp D1 F2))
+  have hz : dC ((F.comp e1.symm.toLinearMap).baseChange p.ResidueField z) = 0 := by
+    rw [LinearMap.baseChange_comp, LinearMap.comp_apply, ← LinearMap.comp_apply, hcomm]
+    rw [hd12]
+    simp
+  refine ⟨hz, ?_⟩
+  have hy : dC ((F.baseChange p.ResidueField) (coords z)) = 0 := by
+    change dC ((F.baseChange p.ResidueField)
+      (e1.symm.toLinearMap.baseChange p.ResidueField z)) = 0
+    simpa only [LinearMap.baseChange_comp, LinearMap.comp_apply] using hz
+  have heq := hnatural i φ hφ (toCycles (coords z)) hy
+  have hcycle :
+      (⟨(F.comp e1.symm.toLinearMap).baseChange p.ResidueField z, hz⟩ :
+        LinearMap.ker dC) = ⟨(F.baseChange p.ResidueField) (coords z), hy⟩ := by
+    apply Subtype.ext
+    exact LinearMap.congr_fun (LinearMap.baseChange_comp e1.symm.toLinearMap F) z
+  exact (congrArg (β i) hcycle).trans heq
 
 end AlgebraicGeometry.Scheme
