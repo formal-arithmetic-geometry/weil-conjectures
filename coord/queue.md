@@ -1,6 +1,6 @@
 # Work queue
 
-148 items; claim with `tools/claim.py next <group> [--stage N]`.
+147 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (148)
+## Stage 3: modules to prove (147)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -43,8 +43,7 @@
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ConstantModuleHigherDirectImageCyclicReduction` | 11 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing` | 11 | 1 | proof |
+| `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries` | 15 | 1 | proof |
