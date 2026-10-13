@@ -1,0 +1,122 @@
+{
+ "id": "new-b2-homology-evaluation-local-iso-core",
+ "kind": "statement",
+ "title": "Finite-free roof calculation for local evaluation",
+ "statement": "Under the hypotheses of local homology evaluation, after choosing the finite-free zero-differential quasi-isomorphism roof E <- L -> F(T), the restricted evaluation morphism is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "zero-differential Hom calculation"
+ },
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-kinjective-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-free zero-differential Hom calculation and transport across the quasi-isomorphism comparison square.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-kinjective-complex",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-kinjective-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "G4",
+  "agent": "G4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "zero-differential Hom calculation"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free Hom complex evaluation isomorphism",
+   "results": "service unavailable",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso homology map IsIso internal Hom",
+   "results": "no exact match",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.free.*homology.*evaluation",
+   "results": "no exact match in Mathlib or source",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluationLocalIso",
+  "date": "2026-10-14",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation; finite-free roof subargument",
+   "via": [
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationLocalIsoCore",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationLocalIsoCore.lean",
+  "declaration": "CategoryTheory.homologyEvaluation_local_iso_of_roof",
+  "statement": "theorem homologyEvaluation_local_iso_of_roof (X : AlgebraicGeometry.Scheme.{u})\n    (T J : CochainComplex X.Modules ℤ) (n : ℤ)\n    (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k))\n    (e : (homComplex (R := X.sheaf) T J).homology n ⟶\n      SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0))\n    (he : IsHomologyEvaluation X T J n e) (V : X.Opens) (W : V.toScheme.Opens)\n    (hI : CochainComplex.IsKInjective ((moduleOpenOverComplexFunctor X V W).obj J))\n    (E L : CochainComplex\n      (SheafOfModules (V.toScheme.ringCatSheaf.over W)) ℤ)\n    (q : L ⟶ (moduleOpenOverComplexFunctor X V W).obj T)\n    (p : L ⟶ E) (hq : QuasiIso q) (hp : QuasiIso p)\n    (hzero : ∀ a b : ℤ, E.d a b = 0)\n    (hsupp : ∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (E.X k))\n    (hfree : ∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅\n      SheafOfModules.free (R := V.toScheme.ringCatSheaf.over W) (ULift.{u} (Fin r)))) :\n    IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T181057-L-2599640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T181057-L-2599640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

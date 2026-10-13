@@ -9,6 +9,7 @@ public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.HomComplexRestrictOpen
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.HomologyEvaluationLocalIsoCore
 
 /-! # A step in the construction of homology evaluation -/
 
@@ -50,6 +51,9 @@ theorem homologyEvaluation_local_iso_of_cycle (X : AlgebraicGeometry.Scheme.{u})
     (hI : CochainComplex.IsKInjective ((moduleOpenOverComplexFunctor X V W).obj J))
     (hT : HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W)
       ((moduleOpenOverComplexFunctor X V W).obj T)) :
-    IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W) := by sorry
+    IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W) := by
+  obtain ⟨E, L, q, p, hq, hp, hzero, hsupp, hfree⟩ := hT
+  exact homologyEvaluation_local_iso_of_roof X T J n hJ e he V W hI E L q p hq hp
+    hzero hsupp hfree
 
 end CategoryTheory
