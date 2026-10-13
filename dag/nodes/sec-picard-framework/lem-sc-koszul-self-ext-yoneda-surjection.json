@@ -21,43 +21,47 @@
  },
  "proof": [
   {
-   "text": "Use the boundary of 0→I/I²→O_Y/I²→B→0 to send a conormal-dual section to a degree-one self Ext class. The boundary is intrinsic and commutes with restriction. Compose n such classes by derived internal Hom composition.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "On any regular affine chart, sheafify the augmented finite free Koszul resolution and use restriction and the finite-free Hom model. Contraction derivations represent the degree-one boundary classes. Their squares vanish and distinct contractions anticommute, so the product is alternating in all characteristics. The conormal basis identifies its domain.",
+   "text": "Apply the Koszul Hom-complex computation to identify the restricted dual of exteriorSheaf(i*ker(i),n) with the desired self Ext pullback T. This computation does not involve the exterior power of the dual.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-sc-affine-quotient-resolution-sheafification",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model",
-    "lem-sc-koszul-conormal-basis"
+    "lem-sc-koszul-self-ext-dual-exterior-conormal"
    ],
    "elementary": false
   },
   {
-   "text": "Factor the alternating products through sectionwise exterior powers and sheafification. Intrinsic boundary and composition make these maps restriction-compatible, so they define a global morphism on V. The quotient scalar action agrees with the ordinary B action, so tensor pullback after cohomology preserves the map. Products of contractions span degree n of Hom(K,B), whose differential is zero, giving stalkwise surjectivity. Empty V is vacuous, n=0 is the unit, and n>m gives a zero target stalk.",
-   "uses": [],
+   "text": "Construct the existing determinant-evaluation morphism exteriorSheaf(C dual,n)→dual(exteriorSheaf C n). Each supplied regular chart gives a conormal basis, hence a finite free conormal frame; the determinant pairing is bijective on sections of every subopen of that chart. Represent a target germ on such a subopen and lift it through the section map to prove stalk surjectivity.",
+   "uses": [
+    "lem-sc-exterior-dual-pairing-construction",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-affine-conormal-frame",
+    "lem-sc-exterior-dual-pairing-local-bijective"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Open restriction of exterior powers gives E≅(exteriorSheaf(C dual,n))|V. Naturality of the restriction-stalk isomorphism transfers surjectivity of the determinant morphism to V. Compose the inverse exterior-restriction isomorphism, that restricted determinant morphism, and the Koszul comparison isomorphism. On stalks the two isomorphisms are surjective; lifting an element successively through the three maps proves the composite is surjective.",
+   "uses": [
+    "lem-sc-exterior-sheaf-restrict-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-j3-koszul-projective-resolution",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-sc-koszul-conormal-basis"
+  "lem-sc-koszul-self-ext-dual-exterior-conormal",
+  "lem-sc-exterior-dual-pairing-construction",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-affine-conormal-frame",
+  "lem-sc-exterior-dual-pairing-local-bijective",
+  "lem-sc-exterior-sheaf-restrict-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "J3",
+  "agent": "M4",
   "date": "2026-10-13",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
-   "place": "Lemma 48.15.4, contraction products and zero-differential Hom calculation; Tag 0BQW, degree-one boundary"
+   "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Precise sheaf and derived-universe interface adapted from the cited proof, read online; no object defined by an arbitrary unproved existence witness."
+  "note": "Separates the zero-differential Koszul Hom calculation from exterior duality. The latter is proved using the existing determinant pairing and finite conormal frames; the only remaining new hole is the former."
  },
  "mathlib_searches": [
   {
@@ -142,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T111857-L-3054171",
+  "landing": "20261013T121222-L-3506236",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -16,10 +16,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal
+import Sheaf.AlgebraicGeometry.DeterminantDualPairing
+import Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal
+import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import Sheaf.RingTheory.KoszulConormalBasis
 
 /-! # Surjectivity of the exterior Yoneda comparison
@@ -36,6 +37,38 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem stalk_surjective_of_local_app
+    {X : Scheme.{u}} {M N : X.Modules} (f : M ⟶ N)
+    (x : X) (U : X.Opens) (hx : x ∈ U)
+    (h : ∀ (W : X.Opens), W ≤ U → Function.Surjective (f.val.app (op W))) :
+    Function.Surjective (f.stalkLinearMap x) := by
+  intro t
+  obtain ⟨W, hWU, hxW, t, rfl⟩ := N.presheaf.exists_le_germ_eq t hx
+  obtain ⟨s, hs⟩ := h W hWU t
+  refine ⟨M.presheaf.germ W x hxW s, ?_⟩
+  rw [Scheme.Modules.Hom.stalkLinearMap_germ]
+  exact congrArg (N.presheaf.germ W x hxW) hs
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restrict_stalk_surjective
+    {X : Scheme.{u}} {M N : X.Modules} (f : M ⟶ N) (V : X.Opens)
+    (z : V.toScheme) (h : Function.Surjective (f.stalkLinearMap z.1)) :
+    Function.Surjective (((Scheme.Modules.restrictFunctor V.ι).map f).stalkLinearMap z) := by
+  let e := Scheme.Modules.restrictStalkNatIso V.ι z
+  intro t
+  obtain ⟨s, hs⟩ := h ((e.hom.app N) t)
+  obtain ⟨s', hs'⟩ := ConcreteCategory.bijective_of_isIso (e.hom.app M) |>.2 s
+  refine ⟨s', ?_⟩
+  apply (ConcreteCategory.bijective_of_isIso (e.hom.app N)).1
+  have hn := ConcreteCategory.congr_hom (e.hom.naturality f) s'
+  change (e.hom.app N)
+    (((Scheme.Modules.restrictFunctor V.ι).map f).stalkLinearMap z s') =
+      f.stalkLinearMap z.1 ((e.hom.app M) s') at hn
+  rw [hn, hs', hs]
+
+set_option maxHeartbeats 800000 in
+-- Comparing restricted internal-Hom and exterior sheaf objects takes additional elaboration.
+set_option backward.isDefEq.respectTransparency false in
 /-- The alternating Yoneda products give a surjection from the exterior sheaf to
 self Ext on the Koszul-regular open. This asserts generation, not injectivity.
 
@@ -82,6 +115,33 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
         (SheafOfModules.homObj (R := Z.sheaf)
           ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
           (SheafOfModules.unit Z.ringCatSheaf))) n
-    ∃ φ : E ⟶ T, ∀ z : V.toScheme, Function.Surjective (φ.stalkLinearMap z) := by sorry
+    ∃ φ : E ⟶ T, ∀ z : V.toScheme, Function.Surjective (φ.stalkLinearMap z) := by
+  classical
+  dsimp only
+  let C := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+  obtain ⟨p, hp⟩ := exterior_dual_pairing_exists Z C n
+  obtain ⟨a⟩ := Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
+  obtain ⟨b⟩ := koszulRegularImmersion_self_ext_dual_exterior_conormal i V n hregular
+  let q := (Scheme.Modules.restrictFunctor V.ι).map p
+  let φ := a.inv ≫ q ≫ b.hom
+  refine ⟨φ, ?_⟩
+  intro z
+  obtain ⟨U, hzU, m, f, hf, hreg⟩ := hregular z.1 z.2
+  obtain ⟨c, hc⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
+    Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
+  obtain ⟨⟨e⟩, he⟩ := affine_conormal_frame i U m c
+  have hps : Function.Surjective (p.stalkLinearMap z.1) :=
+    stalk_surjective_of_local_app p z.1 (i ⁻¹ᵁ U.1) hzU fun W hW ↦
+      (exterior_dual_pairing_app_bijective Z C n p hp (i ⁻¹ᵁ U.1) m e W
+        (homOfLE hW)).2
+  have hqs : Function.Surjective (q.stalkLinearMap z) :=
+    restrict_stalk_surjective p V z hps
+  let F := Scheme.Modules.toPresheaf V.toScheme ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} z
+  change Function.Surjective (F.map q) at hqs
+  have has := (ConcreteCategory.bijective_of_isIso (F.map a.inv)).2
+  have hbs := (ConcreteCategory.bijective_of_isIso (F.map b.hom)).2
+  have hs := hbs.comp (hqs.comp has)
+  change Function.Surjective (F.map φ)
+  simpa only [φ, Functor.map_comp, ConcreteCategory.coe_comp, Function.comp_assoc] using hs
 
 end AlgebraicGeometry

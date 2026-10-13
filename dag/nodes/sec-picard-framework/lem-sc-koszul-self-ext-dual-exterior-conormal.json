@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-koszul-self-ext-dual-exterior-conormal",
+ "kind": "statement",
+ "title": "Koszul self Ext is the dual of the exterior conormal",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], V an open of Z and n a natural number. Suppose that every z∈V has an affine neighborhood U of i(z) for which the ideal i.ker.ideal U [def-sbc-closed-immersion-ideal-sheaf] is the span of a finite Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence]. Put C=i*ker(i) using tensor pullback [def-pc-module-pullback], B=i_*O_Z, and G=H^n(RHom_Y(B[0],B[0])) [def-pc-derived-category, def-pur-derived-internal-hom]. Then the restriction to V of Hom_Z(exteriorSheaf(C,n),O_Z) [def-sc-sheaf-exterior-power, def-pur-sheaf-hom] is isomorphic as an O_V-module to (i*G)|V. The conclusion concerns the dual of the exterior conormal, not an exterior power of the dual, and asserts no compatibility with Yoneda products.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+ },
+ "proof": [
+  {
+   "text": "On a regular affine chart resolve A/I by the actual augmented Koszul projective resolution. Sheafify its augmentation and use open restriction of derived internal Hom and the bounded-above finite-free Hom model. The differential of Hom(K,A/I) is zero, since every generator lies in I. Thus degree-n cohomology is Hom_A(wedge^n A^m,A/I), which equals Hom_(A/I)(wedge^n((A/I)^m),A/I).",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify (A/I)^m with I/I² by the regular conormal basis. This identifies the preceding module with the dual of wedge^n(I/I²). Sheafifying identifies it with dual(exteriorSheaf C n) on the inverse-image chart, where C=i*ker(i). The quotient scalar action is the usual A/I action, so the tensor pullback after cohomology gives that same module.",
+   "uses": [
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a substitution f′=A f use exteriorPower.map of the corresponding degree-one linear map in every Koszul degree. The contraction-sum formula shows it commutes with the differential and it lifts the identity of A/I. On reduction modulo I its degree-one map is exactly the map on conormal classes, and its degree-n map is their nth exterior power. Hom into A/I transposes this map, exactly the transition on the dual exterior conormal. Comparison maps lifting the identity of A/I are homotopic because both are projective resolutions; hence choices give identical cohomology maps. These formulas commute with localization. Refine intersections by affine subopens and glue the local maps and inverses by the sheaf condition. A common K-injective Hom model compares the given derived universe. Degree zero, degrees above the chart length, and empty V satisfy the same formulas.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "new-q2-koszul-generator-chain-map",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-j3-koszul-projective-resolution",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-affine-conormal-frame",
+  "new-q2-koszul-generator-chain-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "M4",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+  },
+  "note": "The zero-differential Koszul Hom calculation of 0BQY followed by the conormal identification. The explicit overlap argument is supplied here; the exterior-of-dual determinant pairing is a separate, existing lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Self Ext of a regular quotient is the dual of the exterior power of its conormal module",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Self Ext of a regular quotient is the dual of the exterior power of its conormal module",
+   "results": "Eight hits, including exteriorPower.pairingDual, ModuleCat.exteriorPower.iso₁, and exterior-power presentations. None identifies derived self Ext with the dual exterior conormal sheaf. The pairing is already used by existing project modules, separately from this calculation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "No matches in Mathlib/LinearAlgebra. Project-wide rg finds the parent exterior self-Ext theorem, the current surjection theorem and the sibling stalk-bases theorem; none gives this intermediate Hom-complex/conormal-dual comparison without relying on the current module. Blueprint search for dual exterior conormal returned no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtYonedaSurjection",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Self-coefficient Ext step: the Koszul Hom complex has zero differential and identifies self Ext with the dual of the exterior conormal before exterior duality.",
+   "via": [
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtDualExteriorConormal.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_dual_exterior_conormal",
+  "statement": "theorem koszulRegularImmersion_self_ext_dual_exterior_conormal\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ)\n    (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    Nonempty (F ≅ T)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T121222-L-3506236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T121222-L-3506236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
