@@ -1,0 +1,134 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF groups F1 and M2
+-/
+module
+
+public import Sheaf.CategoryTheory.ArrowsFunctor
+public import Sheaf.CategoryTheory.FinitePrecoverage
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+
+/-! # ColimitSiteRawAbelianSectionSheaf
+
+Source: Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
+(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-sheaf).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory.Functor.sheafPullbackConstruction
+
+namespace CategoryTheory
+
+/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+presentation construction and adjunction paragraphs; abelian colimits
+as in Modules on Sites, Tag 03CO.
+(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-sheaf).
+
+Proof: Fix an object Y of the limit category. A presentation is a stage t
+above i, an object W at that stage, and an equality V_t(W) = Y. Refinements
+transport W along the stage functor and the equality along the cocone equation.
+The object-colimit hypothesis supplies a presentation, and eventual equality in
+the object colimit gives common refinements. Equalizing parallel stage arrows
+makes this category filtered. Adjunction uniqueness under hθ identifies all
+refinement maps on the section groups and proves their coherence.
+
+Compute each left Kan extension by its pointwise abelian colimit. Its elements
+are finite sums of generators (W, x, f : Y → V_t(W)), modulo linearity and
+restriction relations. Lift the finitely many f and their endpoints to a common
+stage using harrows and hobjects. Restrict the transported sections there.
+They now belong to one presentation group, so their sum is a single section.
+Lift the finitely many relations witnessing any equality in the same manner;
+Kan relations become restriction, linearity or transition identities. Eventual
+arrow equality and hβmap make these identities hold at one refinement. This
+identifies (colimit B)(Y) with the filtered presentation colimit, naturally in Y;
+lifting two composable arrows verifies naturality and the presheaf laws.
+
+For a Q-cover use hQ to choose an equality-transported image of a stage cover.
+Its finite indexing set is the set of distinct arrows of that cover, by hfinite;
+repeated image arrows cause no problem since their local sections agree. Lift
+any finite family of local representatives and its pairwise overlap equations
+to one later stage. Covering pullbacks exist and hpullback and hVpullback
+identify their images with the limit-site pullbacks. The lifted matching data
+therefore form the finite product/equalizer diagram for the transported cover,
+which remains covering by hcover. Filtered abelian colimits commute with finite
+products and equalizers. The stage sheaf equalizers thus give the equalizer for
+the limit covering. With an empty cover the stage equalizer is the zero group,
+so existence and uniqueness hold as well. Finite base change makes pullbacks
+of finite covers covering, and finite composition and isomorphism covers extend
+this condition to Q.toGrothendieck. This proves sheafness only; no comparison
+with the canonical inverse image or zero-detection is used.
+-/
+theorem colimit_site_raw_abelian_section_isSheaf
+    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
+    (P : ∀ j : J, Precoverage (F.obj j))
+    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]
+    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]
+    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →
+      Finite R.uncurry)
+    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
+      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))
+    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
+      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
+        PreservesLimit (cospan f g) (F.map a).toFunctor)
+    [∀ (j k : J) (a : j ⟶ k),
+      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]
+    (V : Cocone F)
+    (hobjects : IsColimit (Cat.objects.mapCocone V))
+    (harrows : IsColimit (Cat.arrows.mapCocone V))
+    (Q : Precoverage V.pt)
+    [Q.HasIsos] [Q.IsStableUnderFiniteComposition]
+    [Q.IsStableUnderFiniteBaseChange] [Q.HasPullbacks]
+    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔
+          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),
+            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R))
+    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →
+            ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
+              PreservesLimit (cospan f g) (V.ι.app j).toFunctor))
+    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous
+      (P j).toGrothendieck Q.toGrothendieck]
+    (i : J) (G : Sheaf (P i).toGrothendieck AddCommGrpCat.{u})
+    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),
+                        (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}
+                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶
+                        ((F.map b.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}
+                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj
+                          ((sheafPullback (F.map t'.hom).toFunctor AddCommGrpCat.{u}
+                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))
+    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),
+      (∀ X : F.obj i,
+                          Arrow.mk
+                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u}
+                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app
+                                G).hom.app (op X) ≫
+                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =
+                          Arrow.mk
+                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor AddCommGrpCat.{u}
+                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app
+                                G).hom.app (op X))))
+    (B : Under i ⥤ (V.ptᵒᵖ ⥤ AddCommGrpCat.{u}))
+    (β : ∀ t : Under i,
+      ((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}
+        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶
+        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)
+    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))
+    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),
+      Arrow.mk ((β t).app (op X) ≫
+        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =
+      Arrow.mk ((θ t t' b).hom.app (op X) ≫
+        (β t').app (op ((F.map b.right).toFunctor.obj X))))
+ :
+    Presheaf.IsSheaf Q.toGrothendieck (colimit B) := by sorry
+
+end CategoryTheory

@@ -15,58 +15,50 @@
  ],
  "proof": [
   {
-   "text": "A presentation of Y is (t,W,p), with t in Under(i), W in F(t.right), and p:V(t.right)(W)=Y. A refinement b:t to t-prime carries W to W-prime, with endpoint transports. Nonemptiness follows by lifting Y using hobjects and moving its stage to a common stage with i. Under(i) is filtered. A common stage for two presentations followed by eventual equality of their object representatives supplies a common refinement. Filteredness equalizes parallel refinements. Evaluating the unique unit-characterized adjunct transition at W gives the group transition; uniqueness proves identity and composition. Lift restriction arrows using harrows, move to a common stage with i and the chosen presentations, and correct endpoints using hobjects. Eventual arrow equality proves independence of the lift; lifting finite collections proves the presheaf laws. Refinements of any fixed presentation are final: lift its representative and any other representative to a common stage and use eventual object equality, then equalize parallel refinements. Equivalently apply the dual cofiltered initiality criterion.",
+   "text": "Construct the raw abelian presheaf diagram B, its Kan units beta and the compatible comparison gamma from the supplied alpha and theta. The imported raw-diagram theorem is proved by explicit leftKanExtension, descOfIsLeftKanExtension, stage-adjunction injectivity and Kan hom_ext. It needs no object/arrow colimit or finite-cover hypothesis.",
    "uses": [
-    "def-weil-pbc-arrows-functor",
+    "lem-weil-pbc-colimit-site-raw-abelian-section-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the independent raw-abelian sheaf-condition statement to B. This uses finite covers and preserved covering pullbacks; it makes no assertion about the canonical inverse image.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-abelian-section-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each stage, compose the two sheaf adjunctions and use leftAdjointUniq to identify the adjunct of alpha with the composite inverse-image isomorphism: h-alpha identifies its transpose with the original unit. Kan uniqueness identifies gamma with the corresponding raw comparison. Hence sheafification of gamma is an isomorphism. On the connected category Under i the colimit of these isomorphisms to the same target is an isomorphism, by the constant-cocone universal property. Since colimit B and the target are sheaves, their sheafification units are isomorphisms; naturality cancels these to prove the actual raw colimit comparison phi is an isomorphism. These two arguments are fully proved in private helpers raw_comparison_iso and raw_colimit_comparison_iso.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "def-weil-pbc-category-colimit",
-    "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Take the filtered colimit of the inverse-image section groups over these presentations. Lift a restriction arrow to a common stage. The unit equations determine transition sheaf maps uniquely by the stage adjunction, so eventual equality and naturality make restriction independent of its lift and prove the identity and composition laws. All restrictions are additive. Every Q cover is an image finite stage cover by hQ and hfinite. Covering pullbacks are preserved. Lift the finitely many matching-family objects and equations to one stage; filtered group colimits commute with the finite products and equalizers for the stage sheaf condition. This makes the constructed abelian presheaf a sheaf. An empty cover gives its zero section group.",
+   "text": "Use raw abelian evaluation to obtain a colimit cocone R on the supplied D and its evaluation isomorphism q, with the formula for its legs followed by phi. Arrow.mk_injective applied to hK and that formula identifies K_t followed by e with R_t followed by q and phi. Apply the zero hypothesis and map_zero to this composite. Cancel the isomorphism q followed by phi to get R_t(x)=R_t(0). The forgetful functor on abelian groups preserves filtered colimits. Apply the same-stage filtered-set equality criterion to its image of R, obtaining one b with D(b)(x)=D(b)(0); map_zero concludes D(b)(x)=0. No inverse-image zero-detection or parent comparison is imported.",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "def-weil-pbc-finite-precoverage"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Maps from this sheaf to an arbitrary abelian sheaf T are compatible maps on stage section groups. Moving a presentation to its identity refinement identifies each compatible family with a stage sheaf map L_t to V_t restriction of T. The stage adjunction transposes this to a map G to V_i restriction of T; compatibility with the source unit forces the adjunct to be the same for all t. Conversely such a map supplies each stage adjunct, and the colimit property assembles the section maps. The inverse homEquiv equations and colimit hom_ext show that these correspondences are mutually inverse and natural in T. Uniqueness of left adjoints identifies the constructed sheaf with the canonical V_i inverse image, compatibly with its unit.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At V_i(U), carried-U presentations are final by the common-stage and eventual-object/arrow equality argument. Identify the constructed sheaf with the canonical inverse image by the preceding adjunction argument. Use hK to transfer the zero-image hypothesis to that filtered presentation colimit. Equality with the zero representative occurs at a common refinement; equalize the two outgoing refinement arrows and pass to a carried-U refinement. Unit uniqueness identifies the maps with the supplied theta. Use hD and injectivity of E at the refined stage to conclude D.map b x = 0. No source-unit zero-detection or theorem depending on the parent comparison is used.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-colimit-site-raw-abelian-section-evaluation",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
   "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-site-raw-abelian-section-diagram",
+  "lem-weil-pbc-colimit-site-raw-abelian-section-evaluation",
+  "lem-weil-pbc-colimit-site-raw-abelian-section-sheaf",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, independent presentation construction, finite-cover sheaf equalizers and adjunction identification, followed only by eventual equality with zero. Abelian extension via Tag 03CO; omitted construction details expanded by the agent."
+  "place": "Tag 0A35 independent raw Kan-extension construction and adjunction identification; abelian adaptation via Tag 03CO. M2 compiled reduction: two independent raw computations left, diagram construction and complete adjunction/cancellation/filtered-zero argument proved."
  },
  "mathlib_searches": [
   {
@@ -148,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T024039-L-3335947",
+  "landing": "20261013T040751-L-3949757",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
