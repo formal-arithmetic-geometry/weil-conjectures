@@ -158,7 +158,50 @@ proving b_left, b_right and d_prime. The tensor map m to 1 tensor m is pullback
 of sections, proving d_chart. No square or cocycle is asserted here. Empty
 principal opens have the zero section ring and zero localized modules, so
 the same universal properties apply. For t=0 only M' and e are needed.
+(blueprint: lem-sbc-punctured-completion-affine-chart-transitions-succ)
+
+Proof: construct the affine section modules, localization and tensor-product equivalences,
+and scalar and restriction identities for the positive finite chart family as in Tags 0BLH and 05EL.
 -/
+theorem exists_affine_chart_transitions_succ
+    {A : Type u} [CommRing A] [IsLocalRing A]
+    {U : (Spec (.of A)).Opens}
+    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}
+    {E : Scheme.{u}} [IsAffine E] {s : E ⟶ Spec
+      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}
+    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin (t + 1) → A)
+    (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U)
+    (hV : ∀ i, IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i))) :
+    Nonempty (AffineChartTransitions D (t + 1) f) := by sorry
+
+private theorem empty_chart_transitions
+    {A : Type u} [CommRing A] [IsLocalRing A]
+    {U : (Spec (.of A)).Opens} {Y E : Scheme.{u}} {q : Y ⟶ U.toScheme}
+    {s : E ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}
+    (D : CompletionGluingData A U q E s) (f : Fin 0 → A) :
+    Nonempty (AffineChartTransitions D 0 f) := by
+  let _ : Module (AdicCompletion (IsLocalRing.maximalIdeal A) A) Γ(E, ⊤) :=
+    completedChartModule s
+  let F : FormalGlueing.Transitions
+      (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) f :=
+    { M' := ModuleCat.of (AdicCompletion (IsLocalRing.maximalIdeal A) A) Γ(E, ⊤)
+      M := fun i ↦ Fin.elim0 i
+      alpha := fun i ↦ Fin.elim0 i
+      alpha_smul := fun i ↦ Fin.elim0 i
+      alpha_overlap := fun i ↦ Fin.elim0 i }
+  exact ⟨{
+    F := F
+    e := LinearEquiv.refl (AdicCompletion (IsLocalRing.maximalIdeal A) A) Γ(E, ⊤)
+    c := fun i ↦ Fin.elim0 i
+    b := fun i ↦ Fin.elim0 i
+    d := fun i ↦ Fin.elim0 i
+    b_left := fun i ↦ Fin.elim0 i
+    b_right := fun i ↦ Fin.elim0 i
+    d_prime := fun i ↦ Fin.elim0 i
+    d_chart := fun i ↦ Fin.elim0 i
+    b_scalar := fun i ↦ Fin.elim0 i
+    d_scalar := fun i ↦ Fin.elim0 i }⟩
+
 theorem exists_affine_chart_transitions
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}
@@ -168,6 +211,9 @@ theorem exists_affine_chart_transitions
     (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)
     (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U)
     (hV : ∀ i, IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i))) :
-    Nonempty (AffineChartTransitions D t f) := by sorry
+    Nonempty (AffineChartTransitions D t f) := by
+  cases t with
+  | zero => exact empty_chart_transitions D f
+  | succ t => exact exists_affine_chart_transitions_succ D t f hf hV
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
