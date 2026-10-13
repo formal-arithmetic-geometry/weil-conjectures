@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-colimit-site-finite-kan-arrow-lift",
+ "kind": "statement",
+ "title": "Finite Kan arrow diagrams lift simultaneously above their stage",
+ "statement": "Let J be a small filtered category and F:J→Cat a diagram of small categories [def-weil-pbc-category-colimit]. Let V be a cocone whose object and arrow cocones are colimits of sets [def-weil-pbc-arrows-functor]. Fix i in J, t=(i→j) in Under(i), and U in F(j). Put L=V_j^op and D=CostructuredArrow(L,L(U^op)); an object p of D consists of W_p in F(j) and an arrow f_p:V_j(U)→V_j(W_p). A morphism h:p→q has underlying arrow h^unop:W_q→W_p with f_q followed by V_j(h^unop)=f_p. Let S be any finite set of objects of D containing p₀=(U,id), and T any finite set of morphisms of D (encoded together with their endpoints). Then there exist r in Under(i), b:t→r, and for every p in S an arrow g_p:F(b.right)(U)→F(b.right)(W_p), such that g_q followed by F(b.right)(h^unop)=g_p whenever p,q lie in S and h:p→q belongs to T, and g_p₀=id. No section or presheaf is part of this assertion; morphisms of T with an endpoint outside S impose no equation.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), omitted independence-of-presentation verification; Categories, Section Tag 04AX, eventual equality in filtered set colimits"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Represent each f_p in the arrow colimit by joint surjectivity. Choose common later stages receiving j and each representative stage, then use IsFiltered.wideSpan on the maps out of j to obtain one stage k and one map c:j→k for the entire finite family. Cocone naturality identifies the images of these representatives with the original arrows.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each p, the source of its representative has the same object-colimit image as F(c)(U), and its target has the same image as F(c)(W_p). Apply same-stage eventual equality to this finite family indexed by S×Bool. Synchronize all resulting maps out of k using IsFiltered.wideSpan, obtaining d:k→l where both endpoint equalities hold for every p. Transport each arrow along these equalities, obtaining g_p from F(d)F(c)(U) to F(d)F(c)(W_p). Transport does not change its Arrow image.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the finite edge set T to edges whose endpoints belong to S. For each such h:p→q compare the entire arrows g_q followed by F(d)F(c)(h^unop) and g_p. Their Arrow images agree by the costructured-arrow triangle, cocone naturality, and preservation of composition. Also compare g_p₀ with the identity. Its Arrow image is the identity by construction. Apply same-stage eventual equality in the arrow colimit to this finite family of comparisons, indexed by the restricted edge set plus one distinguished identity comparison. Synchronize with wideSpan, obtaining a:l→m where all equations hold.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let v=c followed by d followed by a, r=Under.mk(t.hom followed by v), and b=Under.homMk(v). Transport the arrows F(a)(g_p) along the object equalities supplied by F.map_comp. Functor.congr_hom transports each transition arrow consistently, so the triangle equations just established persist; the identity comparison gives g_p₀=id. The common map v makes the Under triangle hold without a separate equalization out of i. Finite-family constructions include the case of an empty edge set.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), omitted independence-of-presentation verification; Categories, Section Tag 04AX, eventual equality in filtered set colimits",
+  "note": "K1 formal proof of the finite arrow-diagram step of the Kan relation argument. Source read at https://stacks.math.columbia.edu/tag/0A35. Finite representatives and finite equality are proved locally using Mathlib joint surjectivity, eventual equality, and IsFiltered.wideSpan. Their local proofs match the private constructions in Sheaf.CategoryTheory.FilteredColimitFiniteIsoLift, which are not accessible as public API and are not imported."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of arrows in a filtered colimit of categories lifts to one common stage with prescribed identity and commuting triangles",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite diagram of arrows out of a fixed object in a filtered colimit of categories, preserving finitely many triangles and an identity",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.IsFiltered.sup_exists, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom, CategoryTheory.IsFiltered.toSup, CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit, CategoryTheory.IsFiltered.sup, CategoryTheory.IsFiltered.toSup_commutes, CategoryTheory.IsFiltered.sup_objs_exists",
+   "verdict": "generic filteredness or unrelated lifting lemmas; no finite Kan arrow lifting theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered.wideSpan",
+   "date": "2026-10-13",
+   "results": "1 hits: CategoryTheory.IsFiltered.wideSpan",
+   "verdict": "generic filteredness or unrelated lifting lemmas; no finite Kan arrow lifting theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(arrow|diagram).*lift|costructured.*lift",
+   "date": "2026-10-13",
+   "results": "18 hits: Mathlib/CategoryTheory/Subobject/Comma.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/LinearAlgebra/Dimension/FreeAndStrongRankCondition.lean, Mathlib/CategoryTheory/Bicategory/Extension.lean, Mathlib/CategoryTheory/Bicategory/Kan/IsKan.lean, Mathlib/CategoryTheory/Elements.lean, Mathlib/CategoryTheory/Elements.lean, Mathlib/CategoryTheory/Elements.lean",
+   "verdict": "generic filteredness or unrelated lifting lemmas; no finite Kan arrow lifting theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteKanUnitRelations",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2 of lem-weil-pbc-colimit-site-kan-unit-relations: lift the finite Kan relation diagram and its identity endpoint at one refinement. The existing ancestor chain stops at a module name.",
+   "via": [
+    "lem-weil-pbc-colimit-site-kan-unit-relations",
+    "lem-weil-pbc-colimit-site-raw-section-relations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteFiniteKanArrowLift",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteFiniteKanArrowLift.lean",
+  "declaration": "CategoryTheory.colimit_site_finite_kan_arrow_lift",
+  "statement": "theorem colimit_site_finite_kan_arrow_lift (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V)) (harrows : IsColimit (Cat.arrows.mapCocone V)) (i : J) (t : Under i) (U : F.obj t.right) : let L := (V.ι.app t.right).toFunctor.op let D := CostructuredArrow L (L.obj (op U)) ∀ (S : Finset D) (T : Finset (Σ p q : D, p ⟶ q)) (hunit : CostructuredArrow.mk (𝟙 (L.obj (op U))) ∈ S), ∃ (r : Under i) (b : t ⟶ r) (g : ∀ p : S, (F.map b.right).toFunctor.obj U ⟶ (F.map b.right).toFunctor.obj p.val.left.unop), (∀ (p q : S) (h : p.val ⟶ q.val), ⟨p.val, q.val, h⟩ ∈ T → g q ≫ (F.map b.right).toFunctor.map h.left.unop = g p) ∧ g ⟨CostructuredArrow.mk (𝟙 (L.obj (op U))), hunit⟩ = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T054222-L-444498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T054222-L-444498",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
