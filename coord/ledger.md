@@ -13864,3 +13864,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261013T231548-L-1821837 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/U1/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261013T231548-L-1821985 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/U2/Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData (stage 3; reviewer PASS; first push; landing 20261013T231549-L-1822161 (interface); batch 20261013T231527; modules 2; new nodes 2)
+- 23:15 L: merged deliver/U2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAux (stage 3; reviewer PASS; first push; landing 20261013T231549-L-1822404 (interface); batch 20261013T231527; modules 3; new nodes 2)

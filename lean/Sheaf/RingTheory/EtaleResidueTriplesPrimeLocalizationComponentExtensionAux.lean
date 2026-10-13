@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxModel
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization
 
 @[expose] public section
 universe u
@@ -51,6 +53,12 @@ theorem etaleResidueTriples_primeLocalization_component_extension_aux
             ∀ (f g : s.B ⟶ V),
               (etaleResidueTriplesRingDiagram R p K χ).map a ≫ f =
                 (etaleResidueTriplesRingDiagram R p K χ).map a ≫ g → f = g := by
-  sorry
+  obtain ⟨c, i, hiα, hiφ⟩ :=
+    etaleResidueTriples_primeLocalization_component_extension_model
+      R p K χ q ψ hψ hK t
+  obtain ⟨b, hbi, hfac⟩ :=
+    etaleResidueTriples_primeLocalization_component_extension_factorization
+      R p K χ q ψ hψ hK V η t c i hiα hiφ
+  exact ⟨c, i, hiα, hiφ, b, hbi, hfac⟩
 
 end AlgebraicGeometry.Scheme
