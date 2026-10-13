@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
 
 /-! # Pointwise pseudo-coherent localization on an affine open
 
@@ -80,6 +80,37 @@ theorem affine_open_pseudoCoherent_localization_point
         (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex
           (ModuleCat.extendScalars
             (algebraMap (X.presheaf.obj (.op ⊤)) (Localization.Away f)))
-          (ComplexShape.up ℤ)).obj M)) := by sorry
+          (ComplexShape.up ℤ)).obj M)) := by
+  classical
+  let A := X.presheaf.obj (.op ⊤)
+  let Y := Spec A
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  let := fun W : Y.Opens ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))
+  have : (tilde.functor A).PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
+  let C := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M
+  let D := ((tilde.functor A).mapHomologicalComplex (ComplexShape.up ℤ)).obj M
+  obtain ⟨t⟩ := hT
+  have hC : Nonempty (C ≅
+      ((Modules.restrictFunctor X.isoSpec.hom).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj D) :=
+    ⟨HomologicalComplex.Hom.isoOfComponents (fun i ↦ t.app (M.X i))⟩
+  obtain ⟨V, hxV, P, hb, hfree, hiso⟩ := hM ⟨x, hx⟩
+  obtain ⟨W, hW, P', hb', hfree', hiso'⟩ :=
+    exists_scheme_iso_nested_open_finite_free_model X.isoSpec U C D hC V P hb hfree hiso
+  have hxW : X.isoSpec.hom x ∈ W := (hW x).mpr ⟨hx, hxV⟩
+  obtain ⟨B, ⟨f, rfl⟩, hxf, hfW⟩ :=
+    PrimeSpectrum.isTopologicalBasis_basic_opens.isOpen_iff.mp W.isOpen
+      (X.isoSpec.hom x) hxW
+  have hbasic (y : X) : y ∈ X.basicOpen f ↔
+      X.isoSpec.hom y ∈ PrimeSpectrum.basicOpen f := by
+    change y ∈ X.basicOpen f ↔ y ∈ X.isoSpec.hom ⁻¹ᵁ PrimeSpectrum.basicOpen f
+    rw [X.map_PrimeSpectrum_basicOpen_of_affine]
+  refine ⟨f, (hbasic x).mpr hxf, ?_, ?_⟩
+  · intro y hy
+    obtain ⟨hyU, _⟩ := (hW y).mp (hfW ((hbasic y).mp hy))
+    exact hyU
+  · exact affine_pseudoCoherent_principal_model A M f W hfW P' hb' hfree' hiso'
 
 end AlgebraicGeometry.Scheme

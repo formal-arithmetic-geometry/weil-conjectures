@@ -12233,3 +12233,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/V4/Sheaf.AlgebraicGeometry.KoszulOpenHomIdentityEvaluation (stage 3; reviewer PASS; first push; landing 20261013T111938-L-3068541 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/V4/Sheaf.AlgebraicGeometry.MixedAffineSectionsBaseChangeMate (stage 3; reviewer PASS; first push; landing 20261013T111938-L-3068769 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/V4/Sheaf.AlgebraicGeometry.MixedPerfectInternalHomPullbackIsIso (stage 3; reviewer PASS; first push; landing 20261013T111939-L-3068989 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint (stage 3; reviewer PASS; first push; landing 20261013T111939-L-3069094 (interface); batch 20261013T111833; modules 2; new nodes 1)

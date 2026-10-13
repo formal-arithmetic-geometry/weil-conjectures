@@ -15,51 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Apply the definition of pseudo-coherence at the point x of U. Obtain a neighbourhood V in U, a bounded-above complex P of finite free modules on its localized site, and an isomorphism from the derived restriction of Q(T M) to Q(P). Map V into X using the open immersion of U. Its image W is open, contained in U, and contains x.",
+   "text": "Apply the local finite-free definition of pseudo-coherence at the point (x,hx) of U. This supplies V, membership, P, its upper bound and finite ranks, and the derived model isomorphism.",
    "uses": [
     "def-pur-pseudo-coherent-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08EE",
-    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
-   }
+   "elementary": false
   },
   {
-   "text": "Transport X to Spec(A) by X.isoSpec. The principal-open basis yields a in A with x in D(a) contained in W. Transport P to the localized site of the image of W in Spec(A). Use the exact equivalences on module sheaves induced by the scheme isomorphism and the open scheme/localized site equivalences. These preserve zero objects and carry free modules to free modules of the same rank via preservation of coproducts and the unit-sheaf comparison. Localize these equivalences; the composition and localization factorization comparisons transport the local-model isomorphism. The natural isomorphism hT identifies the transported termwise T-complex with the tilde complex of M. Auxiliary derived categories on Spec(A) and its open sites may be the standard ones; localization equivalences compare them with the supplied categories, so no equality of morphism universes is needed.",
+   "text": "Choose standard auxiliary derived categories on Spec Gamma(X,OX) and its localized sites. Lift hT termwise by HomologicalComplex.Hom.isoOfComponents. Apply the nested-open transport theorem along X.isoSpec to obtain a finite-free model on W in the spectrum and the exact membership equivalence.",
    "uses": [
-    "lem-pc-scheme-iso-derived-equivalence",
-    "def-pur-pseudo-coherent-complex"
+    "lem-pc-scheme-iso-nested-open-finite-free-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08EE",
-    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply affine_pseudoCoherent_principal_model to this neighbourhood, the chosen principal open D(a), the transported P and its bound, finite ranks and model isomorphism. It makes Q(M_a) pseudo-coherent. Return a, its membership at x, containment in U and this property. For empty U there is no point; for empty principal opens the principal-model theorem includes the zero ring.",
+   "text": "At the image of x use the principal-open topological basis to choose f with x in D(f) and D(f) contained in W. Scheme.map_PrimeSpectrum_basicOpen_of_affine identifies its inverse image with X.basicOpen f. The transported membership equivalence implies containment in U. Apply affine_pseudoCoherent_principal_model to W, P and f and return the three asserted properties.",
    "uses": [
     "lem-pc-affine-pseudo-coherent-principal-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08EE",
-    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pur-pseudo-coherent-complex",
-  "lem-pc-scheme-iso-derived-equivalence",
+  "lem-pc-scheme-iso-nested-open-finite-free-model",
   "lem-pc-affine-pseudo-coherent-principal-model"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "Y2",
+  "by": "worker",
+  "group": "W2",
   "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/08EE",
-  "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+  "place": "Local model transport of Tag 08E7 followed by the principal-open basis and affine principal-model comparison; implemented Lean reduction."
  },
  "mathlib_searches": [
   {
@@ -147,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T100224-L-2504251",
+  "landing": "20261013T111939-L-3069094",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

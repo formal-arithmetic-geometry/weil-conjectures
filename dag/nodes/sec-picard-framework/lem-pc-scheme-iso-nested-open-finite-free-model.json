@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-scheme-iso-nested-open-finite-free-model",
+ "kind": "statement",
+ "title": "Transport a nested-open finite-free model across a scheme isomorphism",
+ "statement": "Let s : X ≅ Y be a scheme isomorphism [def-pc-scheme], U an open of X and V an open of U. Fix derived categories [def-pc-derived-category] on X, U and the localized open sites of U in one morphism universe, and on Y and its localized open sites in an independent universe. Let C and D be structure-sheaf complexes on X and Y, with C isomorphic to the termwise restriction of D along s.hom. Suppose P is a bounded-above complex of finite free sheaves on the localized site over V, and Q(P) is isomorphic to the derived restriction of Q(C), first to the open subscheme U and then to V. There is an open W of Y whose inverse image under s.hom is exactly the image of V in X, and a bounded-above finite-free complex Pprime on the localized site over W, with Q(Pprime) isomorphic to the derived restriction of Q(D) to W. This is transport of one specified local model, not a pseudo-coherence criterion or a localization theorem; see [def-pur-pseudo-coherent-complex] for the same finite-free model clauses and [lem-pc-scheme-iso-derived-equivalence] for derived isomorphism transport.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EE",
+  "place": "Lemma 36.13.3, passage to an affine spectrum and restriction of local finite-free models"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-scheme-iso-derived-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Set j = U.ι composed with s.hom and W = j image V. The explicit open-image isomorphism a identifies V.toScheme with W.toScheme. Injectivity of s.hom proves the displayed membership equivalence.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose Modules.overEquiv V, restriction along a.inv with its explicit inverse equivalence, and the inverse of Modules.overEquiv W. Apply this equivalence termwise to P. Preservation of zero objects gives the same upper bound. The over-site unit comparisons and Modules.restrictUnitIso identify unit objects; SheafOfModules.mapFreeIso transports each specified finite free term with the same rank.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify restriction of D along s.hom with C using hC. Compose Modules.overFunctorEquiv, restrictFunctorComp, isoImage_inv_ι and the over-equivalence unit to compare the nested restriction followed by transport with restriction of D to W. Map these comparisons to complexes, apply the given model isomorphism, and compose mapDerivedCategoryFactors for H, G, L and the transport equivalence. These factorization comparisons allow independent derived-category universes.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08EE",
+  "place": "Explicit termwise open-image equivalence and Mathlib restriction/localization comparisons; complete Lean proof, adapted from the functor comparisons in OpenPerfectModelTransport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "transport finite free sheaf complex across scheme isomorphism open",
+   "results": "Scheme.Modules.restrictFunctorCongr, Scheme.Modules.pushforwardCongr, Modules.Hom.isIso_iff_isIso_app, Scheme.Hom.instIsIsoCommRingCatApp and related section isomorphism facts; no theorem transporting a nested-open finite-free derived model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overFunctor\"",
+   "results": "Seven hits, including SheafOfModules.overFunctor, overFunctorMap and Scheme.Modules.overFunctorEquiv; these supply restriction functor comparisons but not preservation and transport of the finite-free derived model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*(mapFreeIso|mapDerivedCategory)|mapFreeIso.*overFunctor",
+   "results": "Zero Mathlib source hits. Separate direct source inspection found SheafOfModules.mapFreeIso in Free.lean and Scheme.Modules.overFunctorEquiv in Modules/Sheaf.lean.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport finite free sheaf complex across scheme isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-open-pseudo-coherent-localization-point",
+   "place": "Transport step of the pointwise affine localization proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoNestedOpenFiniteFreeModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_scheme_iso_nested_open_finite_free_model",
+  "statement": "theorem exists_scheme_iso_nested_open_finite_free_model\n    {X Y : Scheme.{u}} (s : X ≅ Y) (U : X.Opens)\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{wX}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ W : Y.Opens, HasDerivedCategory.{wY}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))]\n    (C : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (D : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (hC : Nonempty (C ≅\n      ((Modules.restrictFunctor s.hom).mapHomologicalComplex (ComplexShape.up ℤ)).obj D))\n    (V : U.toScheme.Opens)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V)) ℤ)\n    (hb : ∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P.X i))\n    (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free\n      (R := (moduleRings U.toScheme.toRingedSpace).over V) (ULift.{u} (Fin r))))\n    (hiso : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.obj\n        (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj (DerivedCategory.Q.obj C)) ≅\n        DerivedCategory.Q.obj P)) :\n    ∃ W : Y.Opens,\n      (∀ y : X, s.hom y ∈ W ↔ ∃ hy : y ∈ U, (⟨y, hy⟩ : U.toScheme) ∈ V) ∧\n      ∃ P' : CochainComplex\n          (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W)) ℤ,\n        (∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P'.X i)) ∧\n        (∀ i : ℤ, ∃ r : ℕ, Nonempty (P'.X i ≅ SheafOfModules.free\n          (R := (moduleRings Y.toRingedSpace).over W) (ULift.{u} (Fin r)))) ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings Y.toRingedSpace) W).mapDerivedCategory.obj\n            (DerivedCategory.Q.obj D) ≅ DerivedCategory.Q.obj P')",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T111939-L-3069094",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T111939-L-3069094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
