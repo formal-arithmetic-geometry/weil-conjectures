@@ -6,6 +6,7 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartLocalization
 
 /-!
 # Localization of actual chart sections on double intersections
@@ -61,6 +62,28 @@ theorem exists_chart_overlap_localizations
         ((ΓSpecIso (.of A)).inv ≫ h.appTop ≫
           Y.presheaf.map (homOfLE (le_top :
             (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓
-              (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j)) ≤ ⊤)).op).hom a * b i j m) := by sorry
+              (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j)) ≤ ⊤)).op).hom a * b i j m) := by
+  classical
+  dsimp
+  let (i j : Fin t) : Module A Γ(Y,
+      (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓ (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j))) :=
+    Module.compHom _ ((ΓSpecIso (.of A)).inv ≫ h.appTop ≫
+      Y.presheaf.map (homOfLE (le_top :
+        (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓
+          (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j)) ≤ ⊤)).op).hom
+  choose b hb using fun i j ↦ exists_chart_section_localization h (f i) (f j) (hV j)
+    ((h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓ (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j))) rfl
+  choose c hc using fun i j ↦ exists_chart_section_localization h (f j) (f i) (hV i)
+    ((h ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ⊓ (h ⁻¹ᵁ PrimeSpectrum.basicOpen (f j)))
+    (inf_comm _ _)
+  refine ⟨fun i j ↦ (c i j).trans (b i j).symm, fun i j ↦ (b i j).toAddEquiv, ?_,
+    ?_, ?_⟩
+  · intro i j m
+    change b i j ((b i j).symm (c i j (LocalizedModule.mk m 1))) = _
+    rw [LinearEquiv.apply_symm_apply]
+    exact hc i j m
+  · exact hb
+  · intro i j a m
+    exact (b i j).map_smul a m
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

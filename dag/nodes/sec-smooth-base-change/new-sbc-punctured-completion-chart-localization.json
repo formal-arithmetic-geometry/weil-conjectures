@@ -1,0 +1,125 @@
+{
+ "id": "new-sbc-punctured-completion-chart-localization",
+ "kind": "statement",
+ "title": "Single affine chart section localization",
+ "statement": "Let A be a commutative ring, h:Y → Spec A a scheme morphism, and a,g ∈ A. Suppose V=h⁻¹D(g) is affine and U=h⁻¹D(a) ∩ V. The localization at a of the fixed A-module underlying chartSectionModule h g [def-sbc-punctured-completion-chart-section-modules] is A-linearly equivalent to Γ(Y,U), with structural A-action. The equivalence sends m/1 to restriction of m from V to U. Localization and restriction of scalars have the meanings in [def-weil-pbc-formal-glueing-data].",
+ "stmt_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first proof paragraph; Tag 05EL, item (1)."
+ },
+ "proof": [
+  {
+   "text": "Define the concrete structural ring maps φ:A→Γ(Y,V), ψ:A→Γ(Y,U), and restriction ρ:Γ(Y,V)→Γ(Y,U). Presheaf functoriality proves ρ∘φ=ψ. chartSectionModule_smul identifies the fixed chart A-action with multiplication through φ, giving an identity-on-elements A-linear equivalence e₀ to Γ(Y,V) with algebra structure φ.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scheme.basicOpen_res, Scheme.preimage_basicOpen_top and basicOpen_eq_of_affine identify U with Y.basicOpen(φ(a)). IsAffineOpen.isLocalization_of_eq_basicOpen gives IsLocalization.Away(φ(a)) Γ(Y,U) with restriction algebra map. Algebra.algebraMapSubmonoid_powers and the IsLocalizedModule instance of Mathlib.Algebra.Module.LocalizedModule.IsLocalization give the corresponding A-module localization property for restriction; transport the source through e₀ using IsLocalizedModule.of_linearEquiv_right.",
+   "uses": [
+    "def-sbc-punctured-completion-chart-section-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply IsLocalizedModule.linearEquiv to the standard localized module and the restriction map composed with e₀. IsLocalizedModule.linearEquiv_apply yields the formula on m/1.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-chart-section-modules",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, chart localization paragraph, implemented directly with Mathlib localization APIs by E1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "linear identification of localized sections of an affine open with sections on its principal open",
+   "results": "AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen; AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen; AlgebraicGeometry.Γ_restrict_isLocalization; AlgebraicGeometry.isLocalization_away_of_isAffine; AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'; AlgebraicGeometry.StructureSheaf.toBasicOpen_to_map",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs used directly in the proof; no theorem matching the concrete chart module and structural section action."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.linearEquiv",
+   "results": "IsLocalizedModule.linearEquiv; IsLocalizedModule.linearEquiv_of_isLocalizedModule_comp; IsLocalizedModule.linearEquiv_apply; IsLocalizedModule.linearEquiv_symm_apply",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs used directly in the proof; no theorem matching the concrete chart module and structural section action."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_of_eq_basicOpen|isLocalizedModule_iff_isLocalization|chart_section_localization",
+   "results": "Mathlib/LinearAlgebra/Dimension/Localization.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs used directly in the proof; no theorem matching the concrete chart module and structural section action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The module of sections on an affine open localized at a scalar is linearly equivalent to sections on the inverse image of a principal open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartOverlapLocalizations",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-punctured-completion-chart-overlap-localizations",
+   "place": "Single-chart localization step, before assembling overlap transitions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_chart_section_localization",
+  "statement": "theorem exists_chart_section_localization\n    {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A))\n    (a g : A) (hV : IsAffineOpen (h ⁻¹ᵁ PrimeSpectrum.basicOpen g))\n    (U : Y.Opens) (hU : U = (h ⁻¹ᵁ PrimeSpectrum.basicOpen a) ⊓\n      (h ⁻¹ᵁ PrimeSpectrum.basicOpen g)) :\n    letI : Module A Γ(Y, U) := Module.compHom _\n      ((ΓSpecIso (.of A)).inv ≫ h.appTop ≫\n        Y.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op).hom\n    ∃ e : FormalGlueing.localize a (FormalGlueing.piece g (chartSectionModule h g)) ≃ₗ[A]\n        Γ(Y, U),\n      ∀ m, e (LocalizedModule.mk m 1) =\n        Y.presheaf.map (homOfLE (hU.le.trans inf_le_right)).op m",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T231533-L-1816663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T231533-L-1816663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
