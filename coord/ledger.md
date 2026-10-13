@@ -11816,3 +11816,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluing (stage 3; reviewer PASS; first push; landing 20261013T095942-L-2454887 (interface); batch 20261013T095923; modules 5; new nodes 5)
 - 09:59 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree (stage 3; reviewer PASS; first push; landing 20261013T095942-L-2455124 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 09:59 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleLimitOpenComparisonCertificateDegree (stage 3; reviewer PASS; first push; landing 20261013T095943-L-2455359 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 09:59 L: merged deliver/E3/Sheaf.CategoryTheory.ColimitStageAbelianKanCocone (stage 3; reviewer PASS; after a return; landing 20261013T095943-L-2455589 (proof); batch 20261013T095923; modules 1; new nodes 0)

@@ -15,52 +15,45 @@
  },
  "proof": [
   {
-   "text": "Evaluate at an object U of F(j). The pointwise abelian Kan colimit is generated additively by sections x paired with arrows V(j)(U) to V(t.right)(X), modulo linearity and restriction relations. Every element of the outer filtered colimit comes from one B(t). Lift the finitely many arrows in its generators using harrows and align endpoints using hobjects and eventual equality. Refine to receive k and equalize the maps from i. Transport by theta and restrict along the lifted arrows, then apply e inverse. All summands now lie in one D object and can be added. Naturality of beta, hbeta_map and hnu show that this section maps to the original element.",
+   "text": "Reuse the existing private lift_stage_arrow theorem from ColimitStageKanCocone, accessed with import all, to lift one Kan generator arrow. The transported stage section restricts along this lift. The formulas hbeta_map and hnu, naturality of beta, and e inverse show it is represented by a D section. The representative subset in the vertex group is an additive subgroup: use filteredness to add representatives at one common stage. Every pointwise Kan coprojection lands in this subgroup. Prove that a subgroup containing all coprojection images of an abelian colimit is the whole group by factoring the colimit cocone through the subgroup and its inclusion. Thus all B-stage elements are represented; filtered-set joint surjectivity for the outer B colimit proves surjectivity.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-colimit-stage-kan-cocone"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
-   }
+   "elementary": false
   },
   {
-   "text": "For injectivity, equality of two D classes in the outer filtered abelian colimit holds at one B stage, because forgetting abelian groups preserves filtered colimits. Equality in its pointwise Kan colimit has a witness consisting of a finite additive combination of linearity and restriction relations. Lift all objects, arrows and equations in this witness to one stage using hobjects, harrows and eventual equality; equalize all maps from k. Identity and composition of theta make these refinements coherent. Naturality of beta handles restriction relations; hbeta_map and hD identify outer transitions with D transitions. All maps are additive, so linearity relations hold as well. The two D sections agree after a further transition, hence define the same D colimit class.",
+   "text": "Under.map a is final by the filtered finality criterion, using a common successor and coequalization. Normalize the components e followed by beta with endpoint transports. The formulas hD and hbeta_map prove that they commute with transitions, and hnu identifies them with the cocone maps. Evaluation and forgetting abelian groups preserve the outer filtered colimit. Eventual equality moves two equal cocone images to one stage where the two normalized beta images agree. Cancel the invertible endpoint transport, then apply the abelian Kan-unit relation lemma to the family indexed by Under k. Its later equality, hD, and cancellation of the e component give equality of the D-transition images.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-colimit-site-abelian-kan-unit-relations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
-   }
+   "elementary": false
   },
   {
-   "text": "The map from colimit D induced by nu is natural and has bijective underlying component maps, by the preceding two steps. The forgetful functor on abelian groups reflects isomorphisms, so this is a presheaf isomorphism. Transport the chosen colimit cocone along it, yielding IsColimit nu. The zero element is represented at any stage, so an empty sum causes no exception.",
+   "text": "Evaluate nu at each U and forget abelian groups. The representative and relation calculations satisfy Types.FilteredColimit.isColimitOf. Forgetting reflects this colimit because it reflects isomorphisms, preserves the filtered colimit, and an abelian colimit exists. Finally evaluation jointly reflects presheaf colimits, yielding Nonempty(IsColimit nu).",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-arrows-functor",
   "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-site-abelian-kan-unit-relations",
+  "lem-weil-pbc-colimit-stage-kan-cocone",
   "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of presentations; Modules on Sites, Tag 03CO, abelian colimits. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO. The finite additive relation verification is supplied by E3.",
+  "note": "E3 complete Lean proof: subgroup argument for generator surjectivity, finality for outer equality, and the proved abelian unit-relation lemma. No new sorry. Repair: remove the duplicated lift_stage_arrow proof and reuse the existing private theorem via import all Sheaf.CategoryTheory.ColimitStageKanCocone."
  },
  "mathlib_searches": [
   {
@@ -138,10 +131,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T062531-L-735633",
-  "kind": "interface",
+  "landing": "20261013T095943-L-2455589",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
