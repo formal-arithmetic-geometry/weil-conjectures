@@ -28,7 +28,7 @@ theorem projective_resolution_ext_degree
     (HasProjectiveResolutionLE X n ↔
       ∀ Y : ModuleCat.{max u v} R,
         Subsingleton
-          (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y (n + 1))) := by
+          (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y (Nat.succ n))) := by
   let := HasExt.standard (ModuleCat.{max u v} R)
   constructor
   · rintro ⟨P, hP⟩ Y

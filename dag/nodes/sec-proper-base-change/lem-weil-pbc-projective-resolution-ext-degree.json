@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "One-component Ext degree characterization",
- "statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree n + 1 against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (n + 1)) using HasExt.standard.",
+ "statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree Nat.succ n against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (Nat.succ n)) using HasExt.standard.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 065R"
@@ -110,7 +110,7 @@
   "module": "Sheaf.RingTheory.ProjectiveResolutionExtDegree",
   "declaration": "ModuleCat.projective_resolution_ext_degree",
   "file": "lean/Sheaf/RingTheory/ProjectiveResolutionExtDegree.lean",
-  "statement": "theorem projective_resolution_ext_degree {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) : (HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat.{max u v} R, Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y (n + 1)))",
+  "statement": "theorem projective_resolution_ext_degree {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) : (HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat.{max u v} R, Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y (Nat.succ n)))",
   "branch": "sheaf-dag",
   "by": "T1",
   "date": "2026-10-13",
@@ -127,13 +127,35 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J4",
+  "reviewer": "X-6a4f0",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T234220-L-2125360",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T190135-L-3214396",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG statement/change record, report, and all three direct importers matched and compiled cleanly; axioms are permitted."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "C1 stage 2",
+  "old_statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree n + 1 against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (n + 1)) using HasExt.standard.",
+  "what": "Use Nat.succ n for the Ext degree. This is definitionally equal to n + 1, so the mathematical statement and all callers are unchanged. The repair review's claimed duplicate is not applicable: HasProjectiveResolutionLE is the library's explicit bounded-resolution predicate, whereas Mathlib HasProjectiveDimensionLE is an Ext-vanishing typeclass; no Mathlib declaration has the delivered theorem's statement.",
+  "source": {
+   "document": "coord/upstream-review-20261013.md",
+   "place": "#1428, projective-dimension cluster"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-affine-polynomial-resolution-of-stalkwise",
+    "holds": true,
+    "note": "The caller uses the theorem to obtain an explicit ProjectiveResolution; Nat.succ n is definitionally equal to n + 1."
+   },
+   {
+    "id": "lem-weil-pbc-projective-resolution-ext-all-degrees",
+    "holds": true,
+    "note": "The caller rewrites the degree arithmetic; the definitionally equal spelling preserves elaboration."
+   }
+  ]
  }
 }
