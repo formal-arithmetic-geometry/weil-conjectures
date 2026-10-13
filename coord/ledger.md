@@ -12991,3 +12991,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:32 L: merged deliver/H4/Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint (stage 3; reviewer PASS; first push; landing 20261013T153222-L-1059758 (interface); batch 20261013T153218; modules 2; new nodes 1)
 - 15:32 L: merged deliver/J3/Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitShift (stage 3; reviewer PASS; first push; landing 20261013T153222-L-1059856 (interface); batch 20261013T153218; modules 3; new nodes 2)
 - 15:32 L: merged deliver/J4/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer (stage 3; reviewer PASS; first push; landing 20261013T153222-L-1060032 (interface); batch 20261013T153218; modules 2; new nodes 1)
+- 15:32 L: merged deliver/U2/Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionNeighbourhood (stage 3; reviewer PASS; first push; landing 20261013T153223-L-1060209 (interface); batch 20261013T153218; modules 3; new nodes 3)

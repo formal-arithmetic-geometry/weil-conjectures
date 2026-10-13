@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+ "kind": "statement",
+ "title": "Flat quasi-finite chart near a Cohen-Macaulay fibre point",
+ "statement": "Let f:X→T be a scheme morphism [def-pc-scheme], U an open of T on which f is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let y∈X with f(y)∈U, and suppose the depth [def-weil-pbc-depth] of its fibre stalk [def-pc-scheme-fibre; def-weil-pbc-module-stalk] equals its ring Krull dimension [def-weil-pbc-krull-dimension-ring]. There exist n∈ℕ, an open O of X containing y, a scheme P, a flat locally quasi-finite [pqf-def-quasifinite] locally finitely presented morphism h:O→P, and a smooth morphism g:P→T of relative dimension n [def-sbc-smooth-morphisms], with h followed by g equal to the restriction of f to O. No constancy-of-dimension assertion is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00RH, proof of the quasi-finite polynomial chart and flat shrinking; Tags 00QE, 00RE, 00R7, 00RC and 0A21 (10)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-depth",
+  "pqf-def-quasifinite",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods of f(y) inside U and of y over that base affine. Identify the fibre stalk with the localization of the affine fibre algebra. Its depth equals its dimension by the given hypothesis. The finite-type-field dimension-at-point formula gives a finite local topological fibre dimension n.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply quasi-finite polynomial factorization to the affine ring map R→S and n. After a principal shrinking away from y obtain R[t_1,...,t_n]→S_g that is quasi-finite. Its fibre local map has regular source and Cohen-Macaulay target. Finite residue extension and the local-ring-plus-transcendence-degree formula verify equality of local-ring dimensions and the zero-dimensional-fibre additive dimension condition. Miracle flatness makes this fibre local map flat.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the fibrewise-flatness criterion to make the polynomial local map flat at y. It is finitely presented because both its source polynomial algebra and target are finitely presented over R. The open flat locus contains y; choose a further principal neighbourhood on which the polynomial map is flat everywhere.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-openness-of-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take spectra of the polynomial chart to obtain h:O→P. Localizations preserve finite presentation and quasi-finiteness. Let g be the affine-space projection followed by the chosen base open immersion. The proved source-library instance AffineSpace.smoothOfRelativeDimension_over and the relative-dimension composition instance make g smooth of dimension n. The R-algebra property of the polynomial map gives the required composition equality. These are precisely the chart constructed in the first half of the proof of 00RH; no fibre-dimension calculation away from y is asserted here.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent U2",
+  "document": "Stacks Project",
+  "place": "Tag 00RH, proof of the quasi-finite polynomial chart and flat shrinking; Tags 00QE, 00RE, 00R7, 00RC and 0A21 (10)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Cohen Macaulay fibre point of a flat finitely presented morphism admits a flat quasi finite chart to affine space",
+   "results": "Service unavailable: Internal Server Error through msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cohen Macaulay fibre point admits a flat quasi finite map to relative affine space on an open neighbourhood",
+   "results": "Eight hits, including Flat.flat_appLE, Flat.flat_of_affine_subset, the flat affine characterization and IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; none asserts the chart construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*Flat|Flat.*topologicalKrullDim|CohenMacaulay.*chart",
+   "results": "msearch.py returned zero Mathlib hits. Source library was searched and the relevant declarations read separately.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionNeighbourhood",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: Flat quasi-finite chart near a Cohen-Macaulay fibre point",
+   "via": [
+    "lem-sbc-cohen-macaulay-fibre-dimension-neighbourhood"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayFlatQuasiFiniteChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayFlatQuasiFiniteChart.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_quasiFinite_chart_of_fibre_depth_eq_ringKrullDim",
+  "statement": "theorem exists_flat_quasiFinite_chart_of_fibre_depth_eq_ringKrullDim\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]\n    (y : X) (ht : f y ∈ U)\n    (hdepth :\n      (IsLocalRing.depth (R := (f.fiber (f y)).presheaf.stalk (f.asFiber y))\n        ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) : WithBot ℕ∞) =\n          ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))) :\n    ∃ (n : ℕ) (O : X.Opens) (P : Scheme.{u}) (h : O.toScheme ⟶ P) (g : P ⟶ T),\n      y ∈ O ∧ Flat h ∧ LocallyQuasiFinite h ∧ LocallyOfFinitePresentation h ∧\n        SmoothOfRelativeDimension n g ∧ h ≫ g = O.ι ≫ f",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153223-L-1060209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153223-L-1060209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

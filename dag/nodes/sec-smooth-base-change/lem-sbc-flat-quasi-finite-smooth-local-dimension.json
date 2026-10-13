@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+ "kind": "statement",
+ "title": "Local dimension of a flat quasi-finite chart over a smooth scheme",
+ "statement": "Let k be a field [def-weil-field], X and P schemes [def-pc-scheme], h:X→P a flat [def-weil-flat-morphism] locally quasi-finite [pqf-def-quasifinite] locally finitely presented [def-sbc-locally-finite-presentation] morphism, and g:P→Spec k smooth of relative dimension n∈ℕ [def-sbc-smooth-morphisms]. For every x∈X, the local topological Krull dimension at x [def-kun-topological-dimension-at-point] equals n. The morphism h need not be etale or have separable residue extensions.",
+ "source": {
+  "document": "Stacks Project and source library",
+  "place": "Tag 01UA; Scheme.Hom.coheight_apply_of_flat in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite; topologicalKrullDim_eq_of_smoothOfRelativeDimension in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-quasifinite",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "For any open neighbourhood U of x, the morphism f:U→P is flat, locally quasi-finite and locally finitely presented. Its image V is open by 01UA and nonempty since x∈U. The open restriction of g to V remains smooth of relative dimension n. Both P and V therefore have dimension n.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sbc-smooth-fixed-dimension-over-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quasi-finiteness gives injectivity on comparable points. The proved source theorem topologicalKrullDim_le_of_continuous therefore bounds dim U by dim P=n. To get the reverse inequality, write dim V as the supremum of coheights of its points. Lift each z∈V to a∈U. The open embedding V→P preserves coheight, and flat quasi-finite coheight invariance identifies coheight of f(a) with coheight of a, which is at most dim U. Thus n=dim V≤dim U.",
+   "uses": [
+    "lem-sbc-flat-locally-quasi-finite-coheight"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All open neighbourhoods of x have dimension n. Apply the proved source theorem topologicalKrullDimAt_eq_of_forall, which unfolds the infimum defining local dimension.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-flat-locally-quasi-finite-coheight",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "agent U2",
+  "document": "Stacks Project and source library",
+  "place": "Tag 01UA; Scheme.Hom.coheight_apply_of_flat in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite; topologicalKrullDim_eq_of_smoothOfRelativeDimension in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat quasi finite morphism to a smooth scheme of relative dimension n has constant local fibre dimension n",
+   "results": "Service unavailable: Internal Server Error through msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat quasi finite morphism to a smooth scheme of relative dimension n has constant local fibre dimension n",
+   "results": "Eight hits on IsSmoothOfRelativeDimension and standard smooth presentations and composition. None gives the local dimension of a flat quasi-finite chart; the source coheight theorem supplies the key comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*Flat|Flat.*topologicalKrullDim|CohenMacaulay.*chart",
+   "results": "msearch.py returned zero Mathlib hits. Source library was searched and the relevant declarations read separately.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionNeighbourhood",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: Local dimension of a flat quasi-finite chart over a smooth scheme",
+   "via": [
+    "lem-sbc-cohen-macaulay-fibre-dimension-neighbourhood"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatQuasiFiniteSmoothDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatQuasiFiniteSmoothDimension.lean",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_of_flat_quasiFinite_to_smooth",
+  "statement": "theorem topologicalKrullDimAt_eq_of_flat_quasiFinite_to_smooth\n    {k : Type u} [Field k] {X P : Scheme.{u}}\n    (h : X ⟶ P) (g : P ⟶ Spec (.of k)) (n : ℕ)\n    [Flat h] [LocallyQuasiFinite h] [LocallyOfFinitePresentation h]\n    [SmoothOfRelativeDimension n g] (x : X) :\n    topologicalKrullDimAt x = (n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153223-L-1060209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153223-L-1060209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

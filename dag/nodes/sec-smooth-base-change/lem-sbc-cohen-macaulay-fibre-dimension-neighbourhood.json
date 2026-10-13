@@ -19,32 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Work in the source open W intersected with the inverse image of U. Choose affine neighbourhoods of f(y) in U and y in this source open. Their ring map R to S is flat and finitely presented. The fibre local ring at the prime q of y is the given fibre stalk, so hdepth makes it Cohen-Macaulay. Its local relative dimension n is a natural number, since the fibre is locally of finite type over a field. Tag 0A21 (10) identifies this relative dimension with local topological fibre dimension. The proof of Tag 00RH gives an open neighbourhood of q where that relative dimension is n: after a principal shrinking choose a quasi-finite map R[t_1,...,t_n] to S. On the fibre its target local ring is Cohen-Macaulay and its source is regular, so the fibre map is flat (00RE). Fibrewise flatness (00R7) gives flatness of the polynomial map at q. Openness of flatness (00RC) gives a further principal shrinking on which it is flat. At every point of this shrinking, base change makes the corresponding fibre map flat and quasi-finite over polynomial n-space. The local dimension formula therefore gives relative dimension n at every point (again 00RE). The image O of this principal affine open is open in X, contains y, and lies in W. Open fibre inclusions and the residue-field restriction isomorphisms preserve local topological dimension, giving the equality for all z in O. Only the fibre stalk at y is assumed Cohen-Macaulay; no partition is used. The cited dimension-at-point formula supplies finiteness and the local-ring-plus-residue-transcendence-degree equality. Quasi-finite polynomial factorization is the cited 00QE node. Its fibre residue extension is finite, so the transcendence degrees agree and the zero-dimensional fibre makes the local ring dimensions equal; this verifies the additive dimension hypothesis of the cited miracle-flatness node (00R4). The fibrewise-flatness and openness steps are the cited 00R7 and 00RC nodes. These are dependencies of the natural-language plan; the Lean theorem remains the single named sorry, not a claim that its algebraic-to-scheme transport has been formalized.",
+   "text": "Construct a flat locally quasi-finite locally finitely presented chart h:V→P containing y, with g:P→T smooth of some fixed relative dimension n and h≫g=V.ι≫f.",
    "uses": [
-    "lem-sbc-restricted-fibre-locally-noetherian",
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
-    "lem-weil-pbc-miracle-flatness",
-    "lem-weil-pbc-criterion-flatness-fibre",
-    "lem-weil-pbc-openness-of-flatness"
+    "lem-sbc-cohen-macaulay-flat-quasi-finite-chart"
    ],
    "elementary": false
+  },
+  {
+   "text": "For any point z of V, form the map from the fibre of h≫g at its image to the corresponding fibre of g. Pullback cancellation proves this is a base change of h, so it is flat, locally quasi-finite and locally finitely presented. The fibre of g is smooth of relative dimension n over the residue field. The flat quasi-finite smooth local-dimension theorem computes the local dimension of the fibre of h≫g at z as n.",
+   "uses": [
+    "lem-sbc-flat-quasi-finite-smooth-local-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this dimension through the open immersion V→X: use the canonical pullback map between fibres, prove it is an open immersion and sends the canonical fibre point to the original one, and compare infima over open neighbourhoods via inverse images and open images. Take O=V∩W. It contains y, is contained in W, and every point of O has the computed local fibre dimension n.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-topological-dimension-at-point",
-  "lem-sbc-restricted-fibre-locally-noetherian",
-  "lem-weil-pbc-criterion-flatness-fibre",
-  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-  "lem-weil-pbc-miracle-flatness",
-  "lem-weil-pbc-openness-of-flatness",
-  "lem-weil-pbc-quasi-finite-over-polynomial-algebra"
+  "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+  "lem-sbc-flat-quasi-finite-smooth-local-dimension"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 00RH (Lemma 10.130.4), its proof using 00QE, 00RE, 00R7, 00RC; Tag 0A21 (10); local step underlying 02NM"
+  "by": "agent U2",
+  "document": "Stacks Project and source library",
+  "place": "00RH flat quasi-finite chart construction; proved flat quasi-finite coheight invariance and smooth fixed-dimension theorem, followed by pullback and open-fibre transport in Lean."
  },
  "mathlib_searches": [
   {
@@ -139,7 +140,7 @@
   "reviewer": "COMPILER",
   "group": "U2",
   "result": "pass",
-  "landing": "20261013T145730-L-752517",
+  "landing": "20261013T153223-L-1060209",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
