@@ -1,6 +1,6 @@
 # Work queue
 
-715 items; claim with `tools/claim.py next <group> [--stage N]`.
+713 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,13 +44,13 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (685)
+## Stage 3: modules to prove (683)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap` | 20 | 1 | repair |
 | `Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap` | 18 | 0 | repair |
-| `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso` | 19 | 1 | repair |
+| `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso` | 19 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.PerfectDescendMorphisms` | 21 | 1 | repair |
 | `Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap` | 13 | 0 | repair |
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
@@ -209,7 +209,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixed` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorPowerBoundary` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ValuationZeroSectionRelativeCartier` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.ColimitSiteAbelianCoverSectionLift` | 16 | 1 | proof |
@@ -250,7 +249,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Algebra.Homology.HomTensorDifferential` | 17 | 1 | proof |
 | `Sheaf.Algebra.Homology.HomTensorNaturality` | 17 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedHomComplexCycles` | 17 | 1 | proof |
-| `Sheaf.Algebra.Homology.LocalizedHomComplexHomology` | 17 | 1 | proof |
 | `Sheaf.Algebra.Homology.ModuleRestrictionStalkLinear` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModuleFiniteType` | 17 | 1 | proof |
@@ -273,7 +271,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.DerivedPullbackKFlatTensorModel` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedQCohCompactDetection` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives` | 17 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations` | 17 | 17 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteConductorMul` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusCompact` | 17 | 1 | proof |
@@ -307,7 +305,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardKunnethQcohIso` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardPullbackBaseChangePrimal` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusQuasiCompact` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperPerfectPreservesCompact` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PushforwardSupportClosed` | 17 | 1 | proof |
@@ -357,7 +354,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.FiniteNormalCover` | 17 | 1 | proof |
 | `Sheaf.RingTheory.FlatLocalMonogenicExtension` | 17 | 1 | proof |
 | `Sheaf.RingTheory.FormallySmoothCompleteDegreePUnitDerivation` | 17 | 1 | proof |
-| `Sheaf.RingTheory.FreeComplexModNonzerodivisorExact` | 17 | 1 | proof |
 | `Sheaf.RingTheory.KoszulConormalTopHomology` | 17 | 1 | proof |
 | `Sheaf.RingTheory.KoszulDualBelowTopHomology` | 17 | 1 | proof |
 | `Sheaf.RingTheory.LocalTensorQuotientComponentMap` | 17 | 1 | proof |
@@ -385,6 +381,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Algebra.Homology.ConeHorizontalQuotientIsoExists` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.FilteredFreeKProjective` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.HomTensorDegreewise` | 18 | 1 | proof |
+| `Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.TensorKunneth` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictPositive` | 18 | 1 | proof |
 | `Sheaf.Algebra.LimitFinitePresentation` | 18 | 1 | proof |
@@ -401,7 +398,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.CoherentArtinRees` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedBound` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedSystem` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineLimit` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentHomsOverOpen` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationBiproductSucc` | 18 | 1 | proof |
@@ -509,6 +505,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence` | 18 | 1 | proof |
 | `Sheaf.RingTheory.UnitMaximalMinorOfDepthZero` | 18 | 1 | proof |
 | `Sheaf.Topology.FiniteTypeSurjectiveNearStalk` | 18 | 1 | proof |
+| `Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit` | 19 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction` | 19 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePerfectColimitDescent` | 19 | 1 | proof |
 | `Sheaf.Algebra.Homology.BaseChangeRHomPerfect` | 19 | 1 | proof |
@@ -523,6 +520,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.AssociatedModule` | 19 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsCore` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineSectionsAdic` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotient` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotientCone` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineReconstructionAssembly` | 19 | 1 | proof |
@@ -591,8 +589,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.RegularSequenceFlatClosedFiber` | 19 | 1 | proof |
 | `Sheaf.RingTheory.SimpleFiltration` | 19 | 1 | proof |
 | `Sheaf.RingTheory.TransitivityGamma` | 19 | 1 | proof |
-| `Sheaf.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps` | 20 | 1 | proof |
-| `Sheaf.Algebra.Category.ModuleCat.TowerLimitInducedMaps` | 20 | 1 | proof |
 | `Sheaf.Algebra.FinitePresentationColimit` | 20 | 1 | proof |
 | `Sheaf.Algebra.Homology.DerivedHomFiniteFreeModelAux` | 20 | 1 | proof |
 | `Sheaf.Algebra.Homology.ModuleHomComplex` | 20 | 2 | proof |
@@ -645,6 +641,8 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.StablyFreeComplexLift` | 20 | 1 | proof |
 | `Sheaf.RingTheory.TorIdealKernelNaturality` | 20 | 1 | proof |
 | `Sheaf.RingTheory.TorOneSurjectiveFlatMiddle` | 20 | 1 | proof |
+| `Sheaf.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps` | 21 | 1 | proof |
+| `Sheaf.Algebra.Category.ModuleCat.TowerLimitInducedMaps` | 21 | 1 | proof |
 | `Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic` | 21 | 1 | proof |
 | `Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution` | 21 | 1 | proof |
 | `Sheaf.Algebra.TwoTermHomotopyEquivalenceDirectSum` | 21 | 1 | proof |
