@@ -13,15 +13,13 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
-import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
+import Mathlib.Algebra.Category.Grp.Zero
+import Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChange
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Sheaf.AlgebraicGeometry.AmplePullback
-import Sheaf.AlgebraicGeometry.AssociatedModule
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Serre vanishing for finite graded modules
 
@@ -104,6 +102,63 @@ theorem graded_serre_vanishing
     ∃ d₀ : ℕ, ∀ (p d : ℕ), 0 < p → d₀ ≤ d →
       IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj
         (Scheme.Modules.tensorObj (∐ G) (L.tensorPow d))) := by
-  sorry
+  classical
+  let b : Spec (.of B) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (algebraMap A B))
+  let Y := pullback f b
+  let pi : Y ⟶ X := pullback.fst f b
+  let f' : Y ⟶ Spec (.of B) := pullback.snd f b
+  have : IsAffineHom b :=
+    inferInstanceAs (IsAffineHom (Spec.map (CommRingCat.ofHom (algebraMap A B))))
+  have : IsAffineHom pi := by
+    change IsAffineHom (pullback.fst f b)
+    exact MorphismProperty.pullback_fst _ _ ‹IsAffineHom b›
+  have : IsProper f' := inferInstanceAs (IsProper (pullback.snd f b))
+  have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing A B
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian f'
+  obtain ⟨F, hFq, hFt, ⟨e⟩⟩ := exists_finiteType_graded_module_affine_baseChange
+    graded hgrading hunit hmul hscalar f G hG mu hmu_add hmu_mul hmu_scalar hfinite
+  have hF : RingedSpace.IsCoherent Y.toRingedSpace F :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y F).2 ⟨hFq, hFt⟩
+  have : F.IsQuasicoherent := hFq
+  let L' := (Scheme.Modules.tensorPullback pi).obj L
+  have : L'.IsInvertible := (Scheme.Modules.invertible_pullback_tensor pi).1 L |>.2
+  have hL' : Scheme.Modules.IsAmple Y L' :=
+    Scheme.Modules.isAmple_tensorPullback_of_isAffineHom pi L hL
+  obtain ⟨d₀, hd₀⟩ := Scheme.Modules.exists_isZero_moduleCohomology_tensorPow_of_ample
+    B f' F hF L' hL'
+  refine ⟨d₀, ?_⟩
+  intro p d hp hd
+  let c := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction pi)).leftAdjointUniq
+    (Scheme.Modules.pullbackPushforwardAdjunction pi)
+  have cp (n : ℕ) : Nonempty (L'.tensorPow n ≅
+      ((Scheme.Modules.pullback pi).obj L).tensorPow n) := by
+    induction n with
+    | zero => exact ⟨Iso.refl _⟩
+    | succ n ih => exact ⟨MonoidalCategory.tensorIso (c.app L) ih.some⟩
+  obtain ⟨q⟩ := Scheme.Modules.nonempty_pullback_tensorPow_iso pi L d
+  let t := cp d |>.some
+  let twistIso := t ≪≫ q.symm
+  obtain ⟨r⟩ := Scheme.Modules.nonempty_pushforward_tensorObj_pullback_iso pi F (L.tensorPow d)
+  let s := (Scheme.Modules.pushforward pi).mapIso
+      (MonoidalCategory.tensorIso (Iso.refl F) twistIso) ≪≫
+    r ≪≫ (MonoidalCategory.tensorIso e (Iso.refl (L.tensorPow d)))
+  have hFqd : (Scheme.Modules.tensorObj F (L'.tensorPow d)).IsQuasicoherent :=
+    Scheme.Modules.isQuasicoherent_tensorObj F (L'.tensorPow d)
+  have hc := (Scheme.Modules.affine_morphism_cohomology_edge pi
+    (Scheme.Modules.tensorObj F (L'.tensorPow d))).2 p |>.1
+  have hz := hd₀ p d hp hd
+  have hz' := (forget₂ _ AddCommGrpCat.{u}).map_isZero hz
+  have hdown := hz'.of_iso
+    (asIso (Scheme.Modules.moduleCohomologyEdgeMap pi
+      (Scheme.Modules.tensorObj F (L'.tensorPow d)) p))
+  have : Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace p).obj
+      ((Scheme.Modules.pushforward pi).obj
+        (Scheme.Modules.tensorObj F (L'.tensorPow d)))) :=
+    (AddCommGrpCat.isZero_iff_subsingleton).mp hdown
+  have hzero := ModuleCat.isZero_of_subsingleton
+    ((RingedSpace.moduleCohomology X.toRingedSpace p).obj
+      ((Scheme.Modules.pushforward pi).obj
+        (Scheme.Modules.tensorObj F (L'.tensorPow d))))
+  exact hzero.of_iso ((RingedSpace.moduleCohomology X.toRingedSpace p).mapIso s).symm
 
 end AlgebraicGeometry

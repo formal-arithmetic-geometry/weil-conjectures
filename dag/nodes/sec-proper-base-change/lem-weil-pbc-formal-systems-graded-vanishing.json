@@ -35,72 +35,60 @@
  ],
  "proof": [
   {
-   "text": "Forget the grading. The hypothesis of graded finite type supplies local finite generating sections of the underlying $\\mathcal B$-module. Form $X'=\\operatorname{Spec}(B)\\times_{\\operatorname{Spec}(A)}X$ with projections $\\pi:X'\\to X$ and $f':X'\\to\\operatorname{Spec}(B)$. The morphism $\\pi$ is affine, since it is the base change of a morphism of affine schemes. Properness of $f'$ follows by base change. Since $B$ is a finite type algebra over Noetherian $A$, it is Noetherian, and $X'$ is Noetherian because $f'$ is proper, hence finite type.",
+   "text": "Form b = Spec(A → B), Y = pullback f b, pi = pullback.fst f b and f-prime = pullback.snd f b. Prove pi affine by Mathlib base-change stability and f-prime proper by the proper pullback instance. B is Noetherian by Algebra.FiniteType.isNoetherianRing A B, and Y is locally Noetherian by LocallyOfFiniteType.isLocallyNoetherian f-prime. Apply the graded-module affine-base-change realization theorem to get F, F.IsQuasicoherent, F.IsFiniteType and e : pi_*F ≅ coproduct G. Use isCoherent_iff_isQuasicoherent_and_isFiniteType to get coherence of F.",
    "uses": [
     "lem-weil-pbc-morphism-affine-schemes-affine",
     "lem-weil-pbc-affine-morphism-permanence",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
-   }
-  },
-  {
-   "text": "On an affine open $U=\\operatorname{Spec}(R)\\subseteq X$, $\\pi^{-1}U=\\operatorname{Spec}(R\\otimes_A B)$; the associated-algebra and pullback constructions identify $\\mathcal B|_U$ with the sheaf associated to $R\\otimes_A B$. Thus $X'$ is the relative spectrum of $\\mathcal B$, and $\\pi_*\\mathcal O_{X'}=\\mathcal B$. By the affine module correspondence choose $\\mathcal G'$ quasi-coherent with $\\pi_*\\mathcal G'=\\mathcal G$. Finite type is preserved by that correspondence, so $\\mathcal G'$ is finite type; since $X'$ is locally Noetherian, it is coherent.",
-   "uses": [
-    "def-weil-pbc-associated-module",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-affine-module-correspondence",
-    "lem-weil-pbc-affine-module-finite-type",
+    "lem-weil-pbc-graded-module-affine-base-change",
     "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
    }
   },
   {
-   "text": "Set $\\mathcal L'=\\pi^*\\mathcal L$. Pullback along the affine morphism $\\pi$ preserves ampleness. Apply coherent Serre vanishing to $f'$, $\\mathcal G'$ and $\\mathcal L'$: there is one $d_0\\ge0$ with $H^p(X',\\mathcal G'\\otimes(\\mathcal L')^{\\otimes d})=0$ for all $p>0$, $d\\ge d_0$.",
+   "text": "Let L-prime = tensorPullback pi applied to L. Invertible pullback gives its invertibility, and isAmple_tensorPullback_of_isAffineHom gives ampleness. Apply exists_isZero_moduleCohomology_tensorPow_of_ample over B to f-prime, coherent F, and ample invertible L-prime. Obtain a single d0 for all p>0 and d≥d0.",
    "uses": [
-    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
     "lem-weil-pbc-pullback-ample-invertible",
     "lem-weil-pbc-coherent-serre-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
    }
   },
   {
-   "text": "For every $d\\ge0$ there is a canonical isomorphism $\\pi_*(\\mathcal G'\\otimes\\pi^*\\mathcal L^{\\otimes d})=\\mathcal G\\otimes\\mathcal L^{\\otimes d}$. To verify it, take an open set on which $\\mathcal L$ is free of rank one. Both sides identify with $\\pi_*\\mathcal G'$ there; changing the generator by a unit $a$ multiplies both identifications by the same $a^d$, so the identifications glue. The same trivializations show $(\\pi^*\\mathcal L)^{\\otimes d}=\\pi^*(\\mathcal L^{\\otimes d})$.",
+   "text": "Uniqueness of left adjoints to pushforward pi gives c : tensorPullback pi ≅ pullback pi. Induct on d, tensoring c.app L at each successor, to identify (L-prime)^d with (pullback pi L)^d. Compose with the inverse of nonempty_pullback_tensorPow_iso to identify this with pullback pi (L^d). Apply the proved source projection formula for invertible L^d, then tensor e with the identity on L^d. The resulting isomorphism s identifies pi_*(F tensor (L-prime)^d) with (coproduct G) tensor L^d.",
    "uses": [
+    "def-pc-module-pullback",
     "def-sc-invertible-module",
-    "def-pc-module-pullback"
+    "lem-pc-closed-immersion-coherent-cohomology"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
    }
   },
   {
-   "text": "The tensor product upstairs is quasi-coherent: on the same trivializing opens it equals $\\mathcal G'$. The affine cohomology edge isomorphism for $\\pi$ therefore identifies $H^p(X,\\mathcal G\\otimes\\mathcal L^{\\otimes d})$ with $H^p(X',\\mathcal G'\\otimes(\\mathcal L')^{\\otimes d})$. The latter vanishes by Step 3 for every $p>0$ and $d\\ge d_0$, proving the assertion.",
+   "text": "Twisting quasi-coherent F by the invertible tensor power of L-prime is quasi-coherent, by the proved source isQuasicoherent_tensorObj. affine_morphism_cohomology_edge makes the edge map an isomorphism of additive groups. The upstairs cohomology module is zero by the bound from the second step, so its underlying additive group is zero. Transport through the edge isomorphism and reflect zero back to modules using AddCommGrpCat.isZero_iff_subsingleton and ModuleCat.isZero_of_subsingleton. Finally apply cohomology to s and transport zero across its inverse. This proves the unchanged conclusion.",
    "uses": [
+    "def-sc-invertible-module",
     "pqf-def-coherent",
+    "lem-pc-closed-immersion-coherent-cohomology",
     "lem-weil-pbc-affine-morphism-cohomology-edge"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+    "place": "Tag 0897, proof, realization of the graded module on the relative spectrum and the finite-type paragraph; see also Morphisms Tag 01SB and Properties Tag 01PB. Read at https://stacks.math.columbia.edu/tag/0897."
    }
   }
  ],
@@ -110,23 +98,21 @@
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-proper-morphism",
-  "def-weil-pbc-associated-module",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-affine-module-correspondence",
-  "lem-weil-pbc-affine-module-finite-type",
+  "lem-weil-pbc-graded-module-affine-base-change",
   "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-invertible-pullback-tensor",
   "lem-weil-pbc-pullback-ample-invertible",
   "lem-weil-pbc-coherent-serre-vanishing",
+  "def-pc-module-pullback",
   "def-sc-invertible-module",
+  "lem-pc-closed-immersion-coherent-cohomology",
   "pqf-def-coherent",
   "lem-weil-pbc-affine-morphism-cohomology-edge"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof of (2)"
+  "place": "Tag 0897(2), same relative-spectrum / Serre / projection-formula route, assembled in Lean by Q4 on 2026-10-13. The realization step is isolated as a strictly simpler theorem; all subsequent steps are complete Lean."
  },
  "mathlib_searches": [
   {
@@ -207,5 +193,15 @@
   "group": "K1",
   "result": "fix",
   "note": "R-fgv: PulledBackGradedModule was a second spelling (H4/H12) of the graded f^*B~-module of the landed sibling 0897(1) gradedFinitenessCohomology (STATE GRADED O_X-ALGEBRAS AND MODULES); restated in that sibling's inline form (IsInternal grading, pieces G, homogeneous maps mu, shifted local generators d i) with the sheaf tensor Scheme.Modules.tensorObj (∐ G) (L.tensorPow d) (STATE SECTIONWISE TENSOR MAP); dropped duplicate new node(s) def-weil-pbc-pulled-back-graded-module (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/PulledBackGradedModule.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T001227-L-2305647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
