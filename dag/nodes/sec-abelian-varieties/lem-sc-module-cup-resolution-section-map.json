@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-module-cup-resolution-section-map",
+ "kind": "statement",
+ "title": "Section map assembly for a cochain realization",
+ "statement": "For a scheme X, module sheaves F,G and a computing resolution pairing D, there is a family of degree maps satisfying the section formula on every nonnegative bidegree.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "construction before Lemma 20.31.3"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-realization-complex-data",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Linearize each restriction-compatible sectionwise bilinear pairing through the sheaf tensor universal property and assemble the maps on the total tensor coproduct.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-sc-module-cup-resolution-data",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-sc-module-cup-resolution-data",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "V4 second reader",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "construction before Lemma 20.31.3; explicit assembly argument expanded by the second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bilinear natural pairing sheaf modules tensor universal property induces morphism",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ihom_coev_app, PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorHom_app, ModuleCat.ihom_ev_app, ModuleCat.monoidalClosed_uncurry, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no sectionwise component or Leibniz assembly theorem",
+   "digest": "88b86433bc3b17d9"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*desc|desc.*tensor",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no sectionwise component or Leibniz assembly theorem",
+   "digest": "e6f43244b4ebf56e"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorDesc",
+   "results": "HomologicalComplex.mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc_assoc",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no sectionwise component or Leibniz assembly theorem",
+   "digest": "4c81643b3f25f28c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bilinear pairing of sheaf complexes satisfying Leibniz induces a map on tensor total complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupResolutionExistence",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-resolution-components",
+   "place": "component assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupComponentSectionMap",
+  "file": "lean/Sheaf/Paper/ModuleCupComponentSectionMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_component_section_map_exists",
+  "statement": "theorem moduleCup_component_section_map_exists {F G : X.Modules} (D : CupResolutionPairing F G) : ∃ l : ∀ n : ℤ, (D.left.integerComplex ⊗ D.right.integerComplex).X n ⟶ D.target.integerComplex.X n, ∀ (p q : ℕ) (V : X.Opens) (a : Γ(D.left.K.X p, V)) (b : Γ(D.right.K.X q, V)), ((HomologicalComplex.ιTensorObj D.left.integerComplex D.right.integerComplex (p : ℤ) (q : ℤ) ((p + q : ℕ) : ℤ) (by omega)) ≫ l (p + q) ≫ (D.target.K.extendXIso ComplexShape.embeddingUpNat (by rfl)).hom).val.app (op V) (tmulSection ((D.left.K.extendXIso ComplexShape.embeddingUpNat (by rfl)).inv.val.app (op V) a) ((D.right.K.extendXIso ComplexShape.embeddingUpNat (by rfl)).inv.val.app (op V) b)) = D.pair p q V a b",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T155945-L-1307137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T155945-L-1307137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

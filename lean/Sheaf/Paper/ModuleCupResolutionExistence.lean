@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ModuleCupRealizationComplexData
+import Sheaf.Paper.ModuleCupComponentSectionMap
+import Sheaf.Paper.ModuleCupComponentChainEquation
 
 /-! # Cochain obligations for resolution pairings
 
@@ -61,7 +63,8 @@ then use the coproduct universal property of the total tensor. The Leibniz ident
 the displayed chain equation; negative summands are zero by extension. -/
 theorem moduleCup_component_data_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
     D.ComponentData := by
-  sorry
+  obtain ⟨l, hl⟩ := moduleCup_component_section_map_exists D
+  exact ⟨l, hl, moduleCup_component_chain_equation D l hl⟩
 
 /-- A cochain realization exists.
 Source: Stacks Project, Tag 0FKU, construction before Lemma 20.31.3.
