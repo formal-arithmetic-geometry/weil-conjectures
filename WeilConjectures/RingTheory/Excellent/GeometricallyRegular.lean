@@ -36,18 +36,18 @@ theorem of_ringEquiv {k₁ k₂ : Type u} [Field k₁] [Field k₂] {A₁ : Type
     (he : ∀ x, e (algebraMap k₁ A₁ x) = algebraMap k₂ A₂ (σ x))
     (h : IsGeometricallyRegular k₁ A₁) : IsGeometricallyRegular k₂ A₂ := by
   refine ⟨@isNoetherianRing_of_ringEquiv _ _ _ _ e h.1, fun k' _ _ _ _ ↦ ?_⟩
-  letI : Algebra k₁ k₂ := σ.toRingHom.toAlgebra
-  letI : Algebra k₁ k' := ((algebraMap k₂ k').comp σ.toRingHom).toAlgebra
-  letI : Algebra k₁ A₂ := ((algebraMap k₂ A₂).comp σ.toRingHom).toAlgebra
-  haveI : IsScalarTower k₁ k₂ k' := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  haveI : IsScalarTower k₁ k₂ A₂ := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  haveI : Module.Finite k₁ k₂ :=
+  let _ : Algebra k₁ k₂ := σ.toRingHom.toAlgebra
+  let _ : Algebra k₁ k' := ((algebraMap k₂ k').comp σ.toRingHom).toAlgebra
+  let _ : Algebra k₁ A₂ := ((algebraMap k₂ A₂).comp σ.toRingHom).toAlgebra
+  have : IsScalarTower k₁ k₂ k' := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower k₁ k₂ A₂ := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : Module.Finite k₁ k₂ :=
     Module.Finite.of_surjective (Algebra.linearMap k₁ k₂) σ.surjective
-  haveI : Module.Finite k₁ k' := Module.Finite.trans k₂ k'
-  haveI : IsPurelyInseparable k₁ k₂ := ⟨inferInstance, fun x _ ↦ σ.surjective x⟩
-  haveI : IsPurelyInseparable k₁ k' := IsPurelyInseparable.trans k₁ k₂ k'
-  haveI : TensorProduct.CompatibleSMul k₁ k₂ k' A₂ :=
-    TensorProduct.CompatibleSMul.of_algebraMap_surjective σ.surjective
+  have : Module.Finite k₁ k' := Module.Finite.trans k₂ k'
+  have : IsPurelyInseparable k₁ k₂ := ⟨inferInstance, fun x _ ↦ σ.surjective x⟩
+  have : IsPurelyInseparable k₁ k' := IsPurelyInseparable.trans k₁ k₂ k'
+  have : TensorProduct.CompatibleSMul k₁ k₂ k' A₂ :=
+    TensorProduct.CompatibleSMul.of_algebraMap_surjective _ _ σ.surjective
   have hreg := h.2 k'
   let e₁ : A₁ ≃ₐ[k₁] A₂ := AlgEquiv.ofRingEquiv (f := e) he
   let e₂ : k' ⊗[k₁] A₁ ≃ₐ[k₁] k' ⊗[k₁] A₂ := Algebra.TensorProduct.congr AlgEquiv.refl e₁
@@ -73,7 +73,8 @@ over the canonical generic residue field `κ(0)`, then `K ⊗_A C` is geometrica
 theorem genericFormalFiber_geometricallyRegular_of_fractionField_transport (A : Type u)
     [CommRing A] [IsDomain A] [IsNoetherianRing A] (K : Type u) [Field K] [Algebra A K]
     [IsFractionRing A K] (P : Ideal A) [P.IsPrime]
-    (h : let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
+    (h :
+      let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
         (Localization.AtPrime P)
       Algebra.IsGeometricallyRegular (⊥ : Ideal A).ResidueField ((⊥ : Ideal A).Fiber C)) :
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
@@ -84,4 +85,5 @@ theorem genericFormalFiber_geometricallyRegular_of_fractionField_transport (A : 
     IsLocalization.algEquiv (nonZeroDivisors A) _ K
   let e : (⊥ : Ideal A).Fiber C ≃ₐ[A] K ⊗[A] C := Algebra.TensorProduct.congr σ AlgEquiv.refl
   refine Algebra.IsGeometricallyRegular.of_ringEquiv σ.toRingEquiv e.toRingEquiv (fun x ↦ ?_) h
-  simp [e, Algebra.TensorProduct.algebraMap_apply]
+  change Algebra.TensorProduct.map (σ : _ →ₐ[A] K) (AlgHom.id A C) (x ⊗ₜ[A] (1 : C)) = _
+  simp

@@ -51,7 +51,7 @@ lemma exists_fg_forall_mem_range_lTensor (S : Type*) [CommRing S] [Algebra R S]
   have hg : LinearMap.range g = ⊤ := by
     rw [eq_top_iff, ← hs, Submodule.span_le]
     intro x hx
-    rw [h ⟨x, hx⟩]
+    rw [show x = _ from h ⟨x, hx⟩]
     refine sum_mem fun j _ ↦ ⟨t ⟨x, hx⟩ j ⊗ₜ ⟨m ⟨x, hx⟩ j, Submodule.subset_span ⟨⟨⟨x, hx⟩, j⟩,
       rfl⟩⟩, ?_⟩
     simp [g]
