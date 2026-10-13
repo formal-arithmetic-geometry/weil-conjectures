@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierFrobeniusExactRows
+
 /-! # Prime-coefficient Artin--Schreier comparison under field extension -/
 
 @[expose] public section
@@ -20,6 +22,53 @@ open CategoryTheory
 open scoped TensorProduct
 
 namespace AlgebraicGeometry.IsCurve
+
+private theorem exists_fixedPoints_equiv_of_exact_row
+    {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p]
+    {X : Scheme.{u}} {A G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (i : A ⟶ G) (wp : G ⟶ G) (z : i ≫ wp = 0)
+    (hS : (ShortComplex.mk i wp z).ShortExact)
+    (hs : Function.Surjective (Sheaf.H.map wp 0))
+    (V : Type (u + 1)) [AddCommGroup V] [Module k V]
+    (F : V →ₛₗ[frobenius k p] V) (b : Sheaf.H G 1 ≃+ V)
+    (hF : ∀ x, b (Sheaf.H.map wp 1 x) = F (b x) - b x) :
+    ∃ e : Sheaf.H A 1 ≃+ LinearMap.Frobenius.fixedPoints F,
+      ∀ x, (e x : V) = b (Sheaf.H.map i 1 x) := by
+  classical
+  have hδ : ∀ y, Sheaf.H.δSucc hS 0 y = 0 := by
+    intro y
+    exact ((Sheaf.H.exact_map_δSucc hS 0) y).2 (hs y)
+  have hinj : Function.Injective (Sheaf.H.map i 1) := by
+    apply (injective_iff_map_eq_zero _).2
+    intro x hx
+    obtain ⟨y, hy⟩ := ((Sheaf.H.exact_δSucc_map hS 0) x).1 hx
+    exact hy.symm.trans (hδ y)
+  have hfix (x : Sheaf.H A 1) :
+      F (b (Sheaf.H.map i 1 x)) = b (Sheaf.H.map i 1 x) := by
+    apply sub_eq_zero.mp
+    rw [← hF]
+    have hx := ((Sheaf.H.exact_map_map hS 1) (Sheaf.H.map i 1 x)).2 ⟨x, rfl⟩
+    rw [hx, map_zero]
+  let j : Sheaf.H A 1 →+ LinearMap.Frobenius.fixedPoints F :=
+    { toFun x := ⟨b (Sheaf.H.map i 1 x), LinearMap.Frobenius.mem_fixedPoints.mpr (hfix x)⟩
+      map_zero' := by apply Subtype.ext; simp
+      map_add' x y := by apply Subtype.ext; simp }
+  have hj : Function.Bijective j := by
+    constructor
+    · intro x y hxy
+      apply hinj
+      apply b.injective
+      exact congrArg Subtype.val hxy
+    · intro y
+      have hy : Sheaf.H.map wp 1 (b.symm (y : V)) = 0 := by
+        apply b.injective
+        rw [hF, AddEquiv.apply_symm_apply, map_zero]
+        exact sub_eq_zero.mpr (LinearMap.Frobenius.mem_fixedPoints.mp y.property)
+      obtain ⟨x, hx⟩ := ((Sheaf.H.exact_map_map hS 1) (b.symm (y : V))).1 hy
+      refine ⟨x, Subtype.ext ?_⟩
+      change b (Sheaf.H.map i 1 x) = (y : V)
+      rw [hx, AddEquiv.apply_symm_apply]
+  exact ⟨AddEquiv.ofBijective j hj, fun _ ↦ rfl⟩
 
 /-- Prime-coefficient first cohomology is the Frobenius kernel, naturally under base change.
 Source: Stacks Project, Tag 0A3P, proof, and Tag 02KH, flat base change.
@@ -58,6 +107,19 @@ theorem exists_constantZMod_one_frobenius_baseChange_model
         (⟨1 ⊗ₜ[k] (e x : V), by
           rw [LinearMap.Frobenius.mem_fixedPoints, hF',
             LinearMap.Frobenius.mem_fixedPoints.mp (e x).2]⟩ :
-          LinearMap.Frobenius.fixedPoints F') := by sorry
+          LinearMap.Frobenius.fixedPoints F') := by
+  obtain ⟨V, hV, F, F', hF', G, G', i, i', wp, wp', z, z', q, b, b',
+    hS, hS', hs, hs', hsq, hF, hFmodel', hbc⟩ :=
+    exists_artinSchreier_frobenius_exact_rows f p h
+  obtain ⟨e, he⟩ := exists_fixedPoints_equiv_of_exact_row p i wp z hS hs V F b hF
+  obtain ⟨e', he'⟩ :=
+    exists_fixedPoints_equiv_of_exact_row p i' wp' z' hS' hs' (k' ⊗[k] V) F' b' hFmodel'
+  refine ⟨V, hV, F, F', hF', e, e', ?_⟩
+  intro x
+  apply Subtype.ext
+  change (e' (Etale.cohomologyMap ι' (C.constantZMod p) 1 x) : k' ⊗[k] V) =
+    1 ⊗ₜ[k] (e x : V)
+  rw [he', he, ← hsq, Sheaf.H.map_comp_apply, ← Etale.cohomologyMap_map]
+  exact hbc (Sheaf.H.map i 1 x)
 
 end AlgebraicGeometry.IsCurve
