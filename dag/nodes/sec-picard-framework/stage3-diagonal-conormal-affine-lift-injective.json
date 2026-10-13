@@ -15,24 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Put A = Γ(X,U), R = Γ(S,V), B = A ⊗_R A and J = ker(μ:B → A). Restrict the diagonal to the affine open U ×_V U, where it is the closed immersion Spec A → Spec B. Restriction of the actual module-sheaf kernel is the ideal module of J. Compare tensor pullback with restriction through its adjunction, then apply affine conormal sections existence to this closed immersion. This identifies actual conormal sections on U with J/J² and identifies the tensor-pullback unit with the quotient class map. The generic closed-immersion conormal statement applies to the restricted ideal module, not directly to the global diagonal kernel; proving the restriction/adjunction comparison is part of this step.",
+   "text": "Set A = Γ(X,U), R = Γ(S,V), with algebra structure from f.appLE, and W = p₁⁻¹U ∩ p₂⁻¹U. The diagonal identities give U ⊆ Δ⁻¹W. Apply diagonalConormal_affine_ideal_class_core to obtain tensor ring coordinates r, the two projection formulas, and lifts of every multiplication-kernel element to an actual kernel section. Apply diagonalConormal_affine_ideal_class_q in these same coordinates to obtain an A-linear cotangent equivalence c with its tensor-pullback-unit formula.",
    "uses": [
-    "def-sc-diagonal-conormal",
-    "lem-weil-pbc-diagonal-immersion",
-    "lem-weil-pbc-affine-conormal-sections-existence",
-    "lem-pc-module-pullback-adjunction"
+    "stage3-diagonal-conormal-affine-ideal-class-core",
+    "stage3-diagonal-conormal-affine-ideal-class-q"
    ],
    "elementary": false
   },
   {
-   "text": "The sectionwise kernel property supplies the ideal section representing 1 ⊗ a - a ⊗ 1. Apply the normalization IsDiagonalConormalDerivation to the two projections on U ×_V U. Under the unit-compatible quotient coordinates from step 1 this says D(a) is the class of that difference.",
+   "text": "For a in A, take j = 1 ⊗ a - a ⊗ 1 in the multiplication ideal. Choose its kernel section s using the core lemma. Ring-map additivity and the projection formulas identify the inclusion of s with p₂*(a) - p₁*(a). The unit formula for c and the normalization hD give c(da) = D(a), because Mathlib identifies da definitionally with the cotangent class of j. This is the same as e(da) by he.",
    "uses": [
-    "lem-sc-diagonal-conormal-derivation-exists"
+    "lem-sc-diagonal-conormal-derivation-exists",
+    "lem-sc-kahler-differentials-diagonal-ideal"
    ],
    "elementary": false
   },
   {
-   "text": "Mathlib defines Ω[A/R] as J.Cotangent and gives da = [1 ⊗ a - a ⊗ 1]. The differentials span Ω[A/R], so after the section identification the map e is the identity by linear-map extensionality on the generating differentials. Equality e(x)=e(y) thus implies x=y. This only uses injectivity of the affine section identification; no generation or surjectivity assertion about the actual conormal lift is assumed.",
+   "text": "Apply Mathlib CommRingCat.KaehlerDifferential.ext to the ModuleCat morphisms corresponding to e and c.toLinearMap. Their equality on every da gives equality of morphisms, hence equality of underlying linear maps. Replace e by c.toLinearMap and use c.injective. No surjectivity of e or generation theorem for actual conormal sections is needed.",
    "uses": [
     "lem-sc-kahler-differentials-diagonal-ideal"
    ],
@@ -40,17 +39,15 @@
   }
  ],
  "proof_deps": [
-  "def-sc-diagonal-conormal",
-  "lem-pc-module-pullback-adjunction",
   "lem-sc-diagonal-conormal-derivation-exists",
   "lem-sc-kahler-differentials-diagonal-ideal",
-  "lem-weil-pbc-affine-conormal-sections-existence",
-  "lem-weil-pbc-diagonal-immersion"
+  "stage3-diagonal-conormal-affine-ideal-class-core",
+  "stage3-diagonal-conormal-affine-ideal-class-q"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 08S2 (lemma-differentials-diagonal), final affine calculation; Tags 01R3 (lemma-affine-conormal), 01KJ and 00RW; read online 2026-10-13; injectivity/generation decomposition"
+  "place": "Tag 08S2 (lemma-differentials-diagonal), final affine calculation; Tag 01R3 (lemma-affine-conormal), read online 2026-10-13; existing affine tensor core and cotangent-unit comparison combined by normalization and Mathlib generator extensionality"
  },
  "mathlib_searches": [
   {
@@ -132,10 +129,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T022420-L-3216137",
-  "kind": "interface",
+  "landing": "20261013T100208-L-2499605",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

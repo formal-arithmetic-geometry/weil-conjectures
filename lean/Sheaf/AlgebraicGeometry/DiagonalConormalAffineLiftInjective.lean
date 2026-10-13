@@ -6,6 +6,8 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassCore
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
 import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
 import Sheaf.AlgebraicGeometry.DiagonalConormal
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
@@ -50,6 +52,38 @@ theorem diagonalConormal_affine_lift_injective (f : X ⟶ S)
     (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)]
       Γ(diagonalConormal f, U.1))
     (he : ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =
-      D.d (X := op U.1) a) : Function.Injective e := by sorry
+      D.d (X := op U.1) a) : Function.Injective e := by
+  open CategoryTheory.Limits in
+  open scoped TensorProduct in
+  let : Algebra Γ(S, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra
+  let W := (pullback.fst f f) ⁻¹ᵁ U.1 ⊓ (pullback.snd f f) ⁻¹ᵁ U.1
+  have hδ : U.1 ≤ (pullback.diagonal f) ⁻¹ᵁ W := by
+    simp only [W, Scheme.Hom.preimage_inf, ← Scheme.Hom.comp_preimage,
+      pullback.diagonal_fst, pullback.diagonal_snd, Scheme.Hom.id_preimage, inf_idem]
+    exact le_rfl
+  obtain ⟨r, hr₂, hr₁, hlift⟩ := diagonalConormal_affine_ideal_class_core f U V hUV
+  obtain ⟨c, hc⟩ := diagonalConormal_affine_ideal_class_q f U V hUV r hr₂ hr₁
+  have hcd (a : Γ(X, U.1)) : c (CommRingCat.KaehlerDifferential.d a) =
+      D.d (X := op U.1) a := by
+    let j : KaehlerDifferential.ideal Γ(S, V.1) Γ(X, U.1) :=
+      ⟨(1 : Γ(X, U.1)) ⊗ₜ[Γ(S, V.1)] a - a ⊗ₜ[Γ(S, V.1)] (1 : Γ(X, U.1)),
+        KaehlerDifferential.one_smul_sub_smul_one_mem_ideal Γ(S, V.1) a⟩
+    obtain ⟨s, hs⟩ := hlift j
+    have hs' : (kernel.ι (SheafOfModules.unitToPushforwardObjUnit
+        (pullback.diagonal f).toRingCatSheafHom)).val.app (op W) s =
+          (pullback.snd f f).appLE U.1 W inf_le_right a -
+            (pullback.fst f f).appLE U.1 W inf_le_left a := by
+      rw [hs]
+      change r (_ - _) = _
+      rw [map_sub, hr₂, hr₁]
+    exact (hc hδ j s hs).trans (hD U.1 W inf_le_left inf_le_right hδ a s hs').symm
+  have hec : e = c.toLinearMap := by
+    have h : ModuleCat.ofHom e = ModuleCat.ofHom c.toLinearMap := by
+      apply CommRingCat.KaehlerDifferential.ext
+      intro a
+      exact (he a).trans (hcd a).symm
+    exact congrArg (fun g ↦ g.hom) h
+  rw [hec]
+  exact c.injective
 
 end AlgebraicGeometry
