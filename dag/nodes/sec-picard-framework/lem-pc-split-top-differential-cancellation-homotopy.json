@@ -14,16 +14,26 @@
  ],
  "proof": [
   {
-   "text": "Take the canonical truncation at m. For a section σ of δ, the endomorphism id - σ∘δ factors through the cycles. This gives the inverse of the canonical inclusion, identity below m and zero above m. The differential-square equation proves the chain-map identities and the kernel equation gives inverse composed with inclusion equal to identity.",
+   "text": "Choose a section σ of the split epimorphism δ. Define the degree-minus-one family h with σ in degree m+1 to m and zero elsewhere. Mathlib Homotopy.nullHomotopicMap h is a chain map N = dh+hd and Homotopy.nullHomotopy h proves N is homotopic to zero. Put p = id-N. At degree m+1 the section equation makes p zero; above m+1 the support hypothesis makes it zero.",
    "uses": [
     "def-pc-cochain-complex-modules"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The degree-minus-one family consisting of σ from m+1 to m and zero elsewhere contracts the complementary identity pair. Its boundary is σ∘δ in degree m, δ∘σ=id in degree m+1, and zero elsewhere. Above m+1 use the assumed zero terms. This proves the other inverse identity up to homotopy and constructs HomotopyEquiv.",
+   "text": "The canonical inclusion i of truncLE m into B satisfies i composed with p = i. Below m the homotopy boundary vanishes. At m, the chain-map equation for i and the zero term of the truncation at m+1 show i_m δ=0. Above m the source of i is zero.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Factor p through its abelian image I with epimorphism e and monomorphism j. Each I term above m is zero: cancel e and j in e_i j_i=p_i=0 to obtain id_{I_i}=0. Therefore the canonical inclusion of truncLE m I is an isomorphism. Set g=e composed with its inverse composed with truncLEMap j. Truncation naturality gives g composed with i=p.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the monomorphism i in i composed with g composed with i=i composed with p=i to obtain i composed with g=id. Negate the null homotopy of N and add the identity homotopy to obtain a homotopy p~id. Using g composed with i=p yields the second inverse homotopy. Assemble HomotopyEquiv with hom=i and inv=g.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -32,7 +42,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 068V and 00MT; explicit categorical split identity-pair cancellation expanding the planned argument"
+  "place": "Tags 068V and 00MT; explicit split identity-pair contraction; H2 uses the abelian image of id-dh-hd to factor through canonical truncation"
  },
  "mathlib_searches": [
   {
@@ -113,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T005855-L-2606492",
-  "kind": "interface",
+  "landing": "20261013T022416-L-3214148",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
