@@ -25,70 +25,39 @@
  },
  "proof": [
   {
-   "text": "Use the supplied target trivializations and perfect direct-image base change to obtain perfect target complexes on the entire affine U. Use the affine bounded-projective characterization and the affine localized-site derived transport to choose bounded finite projective representatives on U. Cancel the negative terms from the lowest degree upward using universal fibre connectiveness: over each local ring the outgoing map of finite free terms is split injective by IsLocalRing.split_injective_iff_lTensor_residueField_injective (Mathlib/RingTheory/LocalRing/Module.lean), so its finitely presented cokernel is locally free and hence finite projective on the affine; split globally and cancel the pair. Use exists_flat_derived_structure_unit for the derived unit and its canonical H-zero fibre comparison, and represent it by a chain map. Its degree-zero cycle is unimodular at every residue field by the universal structure adjunction unit. Split off its structure-module summand. The remaining degree-zero differential is injective on all residue fields, hence has finite locally free cokernel and splits; cancel this contractible pair. The resulting connective strictly perfect target complex has zero outgoing degree-zero differential.",
+   "text": "Choose normalized targets C_i on the supplied affine U from picard_affine_target_normalization. Apply picard_fixed_model_residue_chain_comparison to obtain alpha, the product evaluated section map t annihilating the source degree-zero image, and the product residue map gamma.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-perfect-affine-map-representative",
-    "def-pc-perfect-complex",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-localized-derived-sheafification",
-    "lem-sc-flat-derived-structure-unit"
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-fixed-model-residue-chain-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, More on Morphisms",
-    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
-   }
+   "elementary": false
   },
   {
-   "text": "Represent the canonical derived coefficient pullback arrows by chain maps from the supplied K to the target complexes. Embed each finite projective degree-one target term as a retract of a finite free module. Identify the finite product of these ambient free modules with A^q. Composing the degree-one components with these embeddings defines b. The chain equations and zero target outgoing degree-zero differentials say that b annihilates every outgoing source degree-zero image.",
+   "text": "For each C_i^1 use the strictly perfect retract into the finite free sheaf of rank r_i. Evaluate sections, identify the free sections by SheafOfModules.freeSectionsLinearEquiv, and combine the embeddings of t_i. Enumerate the finite sigma type of all coordinates using Fintype.equivFin to obtain q and b. The individual vanishing equations t_i(d(a))=0 and linearity of the embeddings prove the joint annihilation statement.",
    "uses": [
-    "lem-pc-perfect-affine-map-representative",
-    "lem-pc-rf-perfect-base-change",
     "def-pc-perfect-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, More on Morphisms",
-    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
-   }
+   "elementary": true
   },
   {
-   "text": "Minimality of the supplied source model identifies its residue degree-one term with its H-one. Trivialize the source fibre using the field rank-one theorem and source descent. On each target project from its ambient free term onto its projective term, then choose a residue-field linear retraction onto the kernel of the outgoing differential. This kernel is target H-one because there are no incoming boundaries. The source chain-map image already lies in this kernel, so the retraction does not change it. Normalize the target trivialization by the scalar comparing it with the pulled-back source trivialization. Affine higher-direct-image/cohomology comparison and naturality of canonical derived base change identify the resulting maps with the canonical structure-sheaf pullbacks. Identify kappa(p), kappa(w), and kappa(s) using affine evaluation and the immersion. The finite product gives beta. For n=0 use q=0; for m=0 the source H-one is zero.",
+   "text": "Assemble the retract projections into rho:A^q to the product of degree-one section modules. The retract identities give rho composed with b equal to t. Base-change this identity using LinearMap.baseChange_comp and compose with the supplied product residue map gamma. The residue comparison equality proves the required square. Empty index sets and zero source rank require no separate branch.",
    "uses": [
-    "lem-sc-field-pullback-rank-one-trivial",
-    "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-rf-perfect-base-change",
-    "def-sc-structure-sheaf-cohomology-pullback",
-    "def-weil-residue-field",
-    "def-sc-derived-fiber-betti"
+    "lem-sc-picard-fixed-model-residue-chain-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, More on Morphisms",
-    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "def-sc-derived-fiber-betti",
-  "def-sc-structure-sheaf-cohomology-pullback",
-  "def-weil-residue-field",
-  "lem-pc-affine-localized-derived-sheafification",
-  "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-perfect-affine-map-representative",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-field-pullback-rank-one-trivial",
-  "lem-sc-flat-derived-structure-unit"
+  "lem-sc-picard-affine-target-normalization",
+  "lem-sc-picard-fixed-model-residue-chain-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, More on Morphisms",
-  "place": "Tag 0BF2; fixed-affine projective-target variant and explicit scalar/field comparison written by V3"
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0BF2: target normalization and residue chain comparison split off; finite-free retract and tensor composition argument proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -163,10 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "X-48454",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T100206-L-2498848",
-  "kind": "interface"
+  "landing": "20261013T144156-L-614795",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs, and remaining holes with their DAG nodes and cited source; existing signature unchanged; all three modules and the sole direct importer compile cleanly; axiom check shows only permitted axioms plus expected sorryAx."
  }
 }

@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-picard-affine-target-normalization",
+ "kind": "statement",
+ "title": "PicardAffineTargetNormalization",
+ "statement": "Let f:X→S be flat proper locally finitely presented with universally isomorphic structure adjunction units. Fix derived-category instances for every scheme and localized open. Let M be an O_X-module, k:W→S any morphism, and U an affine open of W such that the pullback of M to X×S U is trivial. Then the restriction to U of R(f_W)_*(M_W[0]) is represented by a strictly perfect complex C on the localized module site over U with all negative terms zero and differential C^0→C^1 zero. The affine U is supplied and is not shrunk. The notions are [def-pc-perfect-complex], [def-pc-derived-direct-image], [def-pc-module-pullback], [def-weil-flat-morphism], [def-weil-proper-morphism], [def-sbc-locally-finite-presentation], and [lem-pc-module-pullback-adjunction].",
+ "stmt_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-derived-fiber-betti",
+  "def-sc-invertible-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "Stacks Project, More on Morphisms",
+  "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Use the trivialization and open base-change compatibility to identify the restricted image with R(f_U)_*O. Perfect base change makes it perfect and universally connective. Transfer to modules on the affine and obtain a bounded finite projective representative.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel negative terms successively. At the lowest term fibre connectiveness makes the differential injective on every residue field. Mathlib IsLocalRing.split_injective_iff_lTensor_residueField_injective gives a local splitting with locally free cokernel. The finitely presented cokernel is therefore finite projective on the affine; split it globally and cancel the contractible pair. Repeat finitely many times.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the derived structure unit by a chain map. Universal H-zero comparison makes its cycle unimodular. Split off its unit summand, then apply the same residue split-injection criterion to the remaining degree-zero summand and cancel its contractible pair. Sheafify to obtain C and the derived isomorphism. The empty affine gives the zero complex.",
+   "uses": [
+    "lem-sc-flat-derived-structure-unit",
+    "lem-pc-perfect-affine-map-representative",
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-localized-derived-sheafification",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-flat-derived-structure-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, More on Morphisms",
+  "place": "Tag 0BF2; fixed-affine projective-target adaptation of the existing proof plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universally connective perfect complex over affine ring with universal zeroth cohomology rank one has connective projective model with zero differential in degree zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal finite free complex residue cohomology canonical comparison of chain maps geometric cohomology pullback",
+   "results": "8 hits: groupCohomologyIso, groupCohomology.isoShortComplexH1_hom, groupCohomology.toCocycles_comp_isoCocycles₁_hom, groupCohomology.linearYonedaObjResProjectiveResolutionIso, groupCohomology.isoCocycles₁_inv_comp_iCocycles, groupCohomology.isoCocycles₁_hom_comp_i, groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply, CochainComplex.HomComplex.leftHomologyData'_H_coe",
+   "date": "2026-10-13",
+   "verdict": "No exact geometric comparison; abstract tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "connective.*projective|residue.*chain.*comparison|zero.*degree.zero.*differential",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact geometric comparison; abstract tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1FixedModelComparison",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2: normalize target complexes on the supplied affine before forming degree-one chain maps",
+   "via": [
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardAffineTargetNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardAffineTargetNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_affine_target_normalization",
+  "statement": "theorem picard_affine_target_normalization [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (M : X.Modules) (W : Scheme.{v}) (k : W ⟶ S) (U : W.Opens) (hU : IsAffineOpen U) (htrivial : Nonempty ((Modules.tensorPullback (pullback.fst f (U.ι ≫ k))).obj M ≅ SheafOfModules.unit (pullback f (U.ι ≫ k)).ringCatSheaf)) : ∃ C : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ, IsStrictlyPerfect W U C ∧ (∀ j : ℤ, j < 0 → IsZero (C.X j)) ∧ C.d 0 1 = 0 ∧ Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj M))) ≅ DerivedCategory.Q.obj C)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-48454",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T144156-L-614795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-48454",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T144156-L-614795",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs, and remaining holes with their DAG nodes and cited source; existing signature unchanged; all three modules and the sole direct importer compile cleanly; axiom check shows only permitted axioms plus expected sorryAx."
+ }
+}
