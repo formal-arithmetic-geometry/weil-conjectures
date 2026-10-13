@@ -15,26 +15,30 @@
  ],
  "proof": [
   {
-   "text": "Intersect W with each U_i. Restriction preserves the structure module, finite sums and kernels sectionwise, so the local hypothesis gives finite generators for the restricted kernels. For each point choose a cover member and a neighbourhood carrying those generators; the resulting neighbourhoods and generators form finite local-generators data for the global kernel.",
+   "text": "For each cover member U_i form the slice object W intersection U_i -> W. Apply the fixed-rank single-intersection comparison with the hypothesis hK i restricted to the rank n of f; obtain finite type of the restriction of kernel f to that object.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent"
+    "lem-weil-pbc-coherent-kernel-intersection-finite-type"
    ],
+   "elementary": true
+  },
+  {
+   "text": "The intersection objects cover the slice site over W: for an open T -> W and x in T, choose i with x in U_i using the union equality, and use T intersection U_i, which maps both to T and to W intersection U_i. This is proved directly with the pointwise definition of the open-set topology.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose finite local generating data for each restricted kernel. Flatten their index types by a dependent sum. CoversTop.over proves the flattened family covers. Map each finite generating family through pushforwardPushforwardEquivalence for Over.iteratedSliceEquiv, then through the counit comparison isomorphism. GeneratingSections.map and ofEpi preserve the finite generator index. This constructs finite local-generators data for kernel f, with index in universe u. This is the generators analogue of Mathlib QuasicoherentData.bind, implemented and proved locally.",
+   "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "pqf-def-coherent"
+  "lem-weil-pbc-coherent-kernel-intersection-finite-type"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Definitions 01BV and 01B5 and Section 01AF"
+  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels); proved cover and generator flattening, with the single-intersection comparison split off; Mathlib QuasicoherentData.bind supplies the iterated-slice construction pattern"
  },
  "mathlib_searches": [
   {
@@ -82,10 +86,11 @@
   "module": "Sheaf.AlgebraicGeometry.CoherentKernelConditionGluing",
   "file": "lean/Sheaf/AlgebraicGeometry/CoherentKernelConditionGluing.lean",
   "declaration": "AlgebraicGeometry.coherent_kernel_condition_local_generators",
-  "statement": "theorem coherent_kernel_condition_local_generators\n    (X : Scheme.{u}) (F : X.Modules)\n    (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)\n    (hK : ∀ (i : I) (V : (U i).toScheme.Opens) (n : ℕ)\n      (f : SheafOfModules.free (R := (U i).toScheme.ringCatSheaf.over V)\n        (ULift.{u} (Fin n)) ⟶ ((Scheme.Modules.restrictFunctor (U i).ι).obj F).over V),\n      (kernel f).IsFiniteType)\n    (W : X.Opens) (n : ℕ)\n    (f : SheafOfModules.free (R := X.ringCatSheaf.over W) (ULift.{u} (Fin n)) ⟶\n      F.over W) :\n    ∃ σ : (kernel f).LocalGeneratorsData, σ.IsFiniteType",
+  "statement": "theorem coherent_kernel_condition_local_generators\n    (X : Scheme.{u}) (F : X.Modules)\n    (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)\n    (hK : ∀ (i : I) (V : (U i).toScheme.Opens) (n : ℕ)\n      (f : SheafOfModules.free (R := (U i).toScheme.ringCatSheaf.over V)\n        (ULift.{u} (Fin n)) ⟶ ((Scheme.Modules.restrictFunctor (U i).ι).obj F).over V),\n      (kernel f).IsFiniteType)\n    (W : X.Opens) (n : ℕ)\n    (f : SheafOfModules.free (R := X.ringCatSheaf.over W) (ULift.{u} (Fin n)) ⟶\n      F.over W) :\n    ∃ σ : SheafOfModules.LocalGeneratorsData.{u} (kernel f), σ.IsFiniteType",
   "branch": "sheaf-dag",
   "by": "E4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "The local-generators index universe is explicitly u, the site universe, rather than an unintended independent universe. See coord/changes/coherent-kernel-local-generators-universe.md."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -98,13 +103,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
+  "reviewer": "X-706f3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T232857-L-2041305",
+  "landing": "20261013T011929-L-2763847",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, the universe change record, source statements, report, axiom checks, and clean compilation of both modules and the sole direct importer."
  }
 }
