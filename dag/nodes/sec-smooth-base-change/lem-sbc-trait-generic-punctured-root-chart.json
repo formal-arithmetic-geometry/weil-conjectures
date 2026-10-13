@@ -17,31 +17,36 @@
  ],
  "proof": [
   {
-   "text": "A DVR is Noetherian regular. Smoothness makes L regular and locally Noetherian. The closed fibre is smooth over the residue field and regular; flatness makes its equation a nonzerodivisor. Its complement is the generic fibre.",
-   "uses": [],
+   "text": "Choose a uniformizer pi by Mathlib IsDiscreteValuationRing.exists_irreducible. Use smooth_trait_affine_generic_open to obtain an affine smooth A-algebra R, an etale neighborhood phi and a lifted point y, and the generic-fibre pullback isomorphism beta with D(pi_R).",
+   "uses": [
+    "lem-sbc-smooth-trait-affine-generic-open"
+   ],
    "elementary": false
   },
   {
-   "text": "For every connected torsor component use its stabilizer in G. Tag 09EB shows that ramification indices and inseparable residue degrees divide the stabilizer order, hence the invertible order of G. Thus the cover is tame in codimension one.",
-   "uses": [],
+   "text": "Apply Algebra.isRegularRing_of_smooth to the DVR A and its smooth algebra R. Flatness of a smooth algebra preserves the regularity of multiplication by the nonzero pi. To prove regularity of R/(pi_R), identify it by quotIdealMapEquivQuotTensor with k tensor_A R, where k=A/m_A. This is smooth over the regular field k, so apply the same smooth-ascent theorem. Rewrite m_A=(pi) and map of its span. These are the complete Lean proof of the private helper smooth_trait_regular_quotient.",
+   "uses": [
+    "lem-weil-pbc-regular-ring-smooth-ascent"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply Tag 0EYG to obtain an affine etale neighborhood and finitely many punctured root covers with a common equation f and positive invertible exponents. The base ring and quotient by f are regular by etale pullback of the regular base and divisor. Flatness preserves injectivity of multiplication by f. Enumerate the covers by Fin m and identify their disjoint union with D(f) in Spec of the product of full root algebras. The isomorphism is over Spec R, which is the displayed compatibility.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "At points off the closed fibre, split the finite etale cover etale locally and take f=1 and e_k=1. The zero quotient R/(1) is regular since it has no primes. For an empty cover use m=0. These cases require no connectedness hypothesis.",
-   "uses": [],
+   "text": "Map the invertible group order from A to R. Apply regular_divisor_punctured_root_chart to the generic-fibre projection, W, R, pi_R and beta. It gives an etale refinement psi and the root chart over Spec S. Compose psi with phi, use etale stability under composition, and prove that the lifted point maps to x by Scheme.Hom.comp_apply and the two point equalities. The root-chart isomorphism already has the desired composite base map, so its compatibility is unchanged.",
+   "uses": [
+    "lem-sbc-regular-divisor-galois-punctured-root-chart"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-smooth-trait-affine-generic-open",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-sbc-regular-divisor-galois-punctured-root-chart"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 0EYJ (first trait paragraph), 09EB and 0EYG (Abhyankar lemma for a regular divisor)"
+  "place": "Tags 0EYJ, 09EB and 0EYG; affine generic-open identification, regularity via smooth ascent and tensor-quotient equivalence, and etale refinement assembly implemented in Lean by H4"
  },
  "mathlib_searches": [
   {
@@ -158,9 +163,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T065056-L-896098",
+  "landing": "20261013T100006-L-2462759",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -13,6 +13,11 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothTraitAffineGenericOpen
+import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisPuncturedRootChart
+import Sheaf.RingTheory.RegularRingSmoothAscent
+import Mathlib.RingTheory.TensorProduct.Quotient
+
 /-! Punctured Kummer charts before normality. -/
 
 @[expose] public section
@@ -20,6 +25,30 @@ public import Mathlib.Algebra.Regular.SMul
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+private theorem smooth_trait_regular_quotient
+    (A R : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
+    [CommRing R] [Algebra A R] [Algebra.Smooth A R]
+    (π : A) (hπ : Irreducible π) :
+    IsRegularRing R ∧ IsSMulRegular R (algebraMap A R π) ∧
+      IsRegularRing (R ⧸ Ideal.span {algebraMap A R π}) := by
+  have hR : IsRegularRing R := Algebra.isRegularRing_of_smooth A R
+  have hπreg : IsSMulRegular A π :=
+    isLeftRegular_iff.mp (IsRegular.of_ne_zero' hπ.ne_zero).1
+  have hf : IsSMulRegular R (algebraMap A R π) := hπreg.of_flat
+  refine ⟨hR, hf, ?_⟩
+  let I : Ideal A := IsLocalRing.maximalIdeal A
+  let k := A ⧸ I
+  let : Field k := Ideal.Quotient.field I
+  have hT : IsRegularRing (TensorProduct A k R) :=
+    Algebra.isRegularRing_of_smooth k (TensorProduct A k R)
+  have hQ : IsRegularRing (R ⧸ I.map (algebraMap A R)) :=
+    IsRegularRing.of_ringEquiv
+      (Algebra.TensorProduct.quotIdealMapEquivQuotTensor R I).symm.toRingEquiv
+  rw [show I = Ideal.span {π} from hπ.maximalIdeal_eq] at hQ
+  rw [Ideal.map_span] at hQ
+  rw [Set.image_singleton] at hQ
+  exact hQ
 
 /-- Punctured Kummer charts for a generic torsor over a smooth trait family.
 
@@ -68,6 +97,26 @@ theorem GaloisCover.trait_generic_punctured_root_chart
           (algebraMap R (∀ k : Fin m,
             AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)) f)
         ∃ γ : pullback p φ ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd p φ := by sorry
+          γ.hom ≫ V.ι ≫ q = pullback.snd p φ := by
+  dsimp only
+  intro x
+  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible A
+  obtain ⟨R, φ, y, hφ, hy, a, hsmooth, β, hβ⟩ :=
+    smooth_trait_affine_generic_open A K π hπ d x
+  let : Algebra A R := a
+  have : Algebra.Smooth A R := hsmooth
+  obtain ⟨hR, hf, hRf⟩ := smooth_trait_regular_quotient A R π hπ
+  have : IsRegularRing R := hR
+  have : IsRegularRing (R ⧸ Ideal.span {algebraMap A R π}) := hRf
+  have hGR : IsUnit (Nat.card G : R) := by
+    simpa only [map_natCast] using hG.map (algebraMap A R)
+  obtain ⟨S, ψ, z, hψ, hz, m, g, e, he, hS, hg, hSg, γ, hγ⟩ :=
+    GaloisCover.regular_divisor_punctured_root_chart
+      (pullback.fst d (Spec.map (CommRingCat.ofHom (algebraMap A K))))
+      G W R φ (algebraMap A R π) hGR hf β hβ y
+  have : Etale φ := hφ
+  have : Etale ψ := hψ
+  refine ⟨S, ψ ≫ φ, z, inferInstance, ?_, m, g, e, he, hS, hg, hSg, γ, hγ⟩
+  rw [Scheme.Hom.comp_apply, hz, hy]
 
 end AlgebraicGeometry.Scheme

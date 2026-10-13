@@ -1,0 +1,146 @@
+{
+ "id": "lem-sbc-smooth-trait-affine-generic-open",
+ "kind": "statement",
+ "title": "Affine smooth trait neighborhoods and their principal generic open",
+ "statement": "Let $A$ be a discrete valuation domain [def-sc-discrete-valuation-ring] with fraction field $K$ as an $A$-algebra. Fix an irreducible element $\\pi\\in A$ (a uniformizer). Let $d:L\\to\\operatorname{Spec}A$ be smooth [def-sbc-smooth-morphisms] and $x\\in L$ [def-weil-pbc-scheme-conventions]. Put $b:\\operatorname{Spec}K\\to\\operatorname{Spec}A$ and $i:L_K\\to L$ for the generic-fibre projection [def-pc-fibre-product]. There exist a commutative ring $R$, an etale morphism $\\varphi:\\operatorname{Spec}R\\to L$, and a point $y$ with $\\varphi(y)=x$, together with an $A$-algebra structure on $R$ for which $R$ is smooth over $A$. If $D=D(\\operatorname{algebraMap}_{A,R}(\\pi))\\subset\\operatorname{Spec}R$, there is an isomorphism $\\beta:L_K\\times_L\\operatorname{Spec}R\\simeq D$ such that $\\beta;\\iota_D=\\operatorname{pr}_2$. All rings and schemes lie in one universe. No group or torsor occurs in this statement.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, first paragraph; affine-open and localization arguments implemented in Mathlib"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Show K is the localization of A at powers of pi. For a fraction r/s, express its nonzero denominator as a unit times a power of pi using IsDiscreteValuationRing.eq_unit_mul_pow_irreducible. Multiply the numerator by the inverse unit. Injectivity of the fraction-ring map proves the localization equality condition. This is the proved private helper fractionRing_away_uniformizer.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine open V containing x by Mathlib exists_isAffineOpen_mem_and_subset. Set R to the ring of sections and phi to IsAffineOpen.fromSpec. The affine isomorphism gives y mapping to x. The A-algebra structure is induced by Spec.preimage of phi followed by d. HasRingHomProperty.Spec_iff and smooth composition give Algebra.Smooth A R.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The localization map b is an open immersion with range D(pi). Both successive pullbacks are open immersions. Mathlib range_pullbackSnd and opensRange_pullbackFst identify the range of their composite pullback projection with the inverse image of D(pi), which is D(pi_R) by PrimeSpectrum.comap_basicOpen. IsOpenImmersion.isoOfRangeEq gives beta and isoOfRangeEq_hom_fac proves the compatibility.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, first paragraph; affine-open and localization arguments implemented in Mathlib"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth trait affine generic fibre is principal open of image of uniformizer",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth scheme over discrete valuation ring regular local equation generic fibre open complement",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.isOpen_smoothLocus, AlgebraicGeometry.isSmooth_iff; no exact theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_away_comap_range|isoOfRangeEq|exists_isAffineOpen_mem",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; no exact theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fraction field of discrete valuation ring is localization away from any irreducible element",
+   "results": "Eight hits on DVR prime localization and fraction fields of valuation rings; none gives the affine smooth trait neighborhood and its compatible generic-open identification.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsFractionRing",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_generic_open|localization.*uniformizer|Away.*Irreducible in lean/Sheaf and lean/WeilConjectures",
+   "results": "No matching theorem in either library root.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraitGenericPuncturedRootChart",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: the smooth closed fibre is a regular effective Cartier divisor and its complement is the generic fibre.",
+   "via": [
+    "lem-sbc-trait-generic-punctured-root-chart",
+    "lem-sbc-trait-generic-root-model",
+    "lem-sbc-trait-generic-normalization-charts",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothTraitAffineGenericOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothTraitAffineGenericOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smooth_trait_affine_generic_open",
+  "statement": "theorem smooth_trait_affine_generic_open\n    (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Field K] [Algebra A K] [IsFractionRing A K]\n    (π : A) (hπ : Irreducible π)\n    {L : Scheme.{u}} (d : L ⟶ Spec (CommRingCat.of A)) [Smooth d] (x : L) :\n    let b := Spec.map (CommRingCat.ofHom (algebraMap A K))\n    ∃ (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R),\n      Etale φ ∧ φ y = x ∧\n      ∃ _a : Algebra A R, Algebra.Smooth A R ∧\n        let D : (Spec R).Opens := PrimeSpectrum.basicOpen (algebraMap A R π)\n        ∃ β : pullback (pullback.fst d b) φ ≅ D.toScheme,\n          β.hom ≫ D.ι = pullback.snd (pullback.fst d b) φ",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100006-L-2462759",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100006-L-2462759",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
