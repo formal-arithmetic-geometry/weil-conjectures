@@ -16,25 +16,38 @@
  },
  "proof": [
   {
-   "text": "Compose g with S.toSpecGamma and restrict to the affine scheme B. Pullback\ncomposition is the unique isomorphism of left adjoints compatible with their units.\nThe affine pullback section formula for this composite identifies the sections with\nR tensor_A N, where A = Gamma(S,O) and R = Gamma(B,O). The ring map A -> R is\ng.appLE top B: the canonical GammaSpecIso cancels the chart's scalar map. The unit\nof the tilde/Gamma adjunction sends s to tilde.toOpen N top s. Compatibility of\ncomposite pullback units therefore sends the displayed coefficientGenerator,\nrestricted to B, to 1 tensor s. Swap tensor factors if the section formula is\nwritten N tensor_A R. The formula and equivalence are also valid for B empty\nor N zero, since both sides then have the corresponding zero module.",
+   "text": "Set j=hB.fromSpec and phi=g.appLE top B. The naturality of toSpecGamma and fromSpec_toSpecGamma show (j composed with g) composed with S.toSpecGamma equals Spec.map phi. Compose restrictFunctorIsoPullback j with the two pullbackCompOfEq comparisons, and take global sections. This gives an R-linear equivalence from the sections of P restricted along j to the sections of the spectral pullback of tilde N.",
    "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved source sectionsRestrictFromSpecLinearEquiv to identify the chart sections with Gamma(P,B). Its inverse followed by restrictFunctorIsoPullback sends the restriction of any global x to pullbackGamma j P x: expand the restriction unit and combine the two presheaf restrictions. The definition of coefficientGenerator is the successive global pullback units, since its top restrictions are identities. Apply pullbackCompOfEq_hom_app_pullbackGamma twice to transport these units through the chart comparison.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved source tildePullbackGammaEquiv composed with ModuleCat.tensorEquivExtendScalars identifies native R tensor_A N with the spectral pullback sections. The source one-tensor equation identifies 1 tensor s with its standard pullback unit. Compose the inverse equivalence with the chart and restriction equivalences. The unit calculation of the previous step gives the required generator equation by inverse cancellation. All constructions allow empty B and zero N without additional hypotheses. This uses the proved standard-pullback source implementation directly, not the recorded tensorPullback theorem of lem-weil-pbc-tilde-pullback-base-change; its equivalence is built from tilde.adjunction and uniqueness of left adjoints.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-affine-sections",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent C3",
   "document": "Stacks Project",
-  "place": "Affine tensor calculation of Tags 01I9, 01IA",
-  "note": "M2: standard-unit and open-restriction transport supplied explicitly from the parent plan."
+  "place": "Tags 01I9 and 01IA; standard-unit affine-chart calculation using proved source Modules.PullbackTilde, Modules.PullbackUnit and Modules.LocallyFreeAffine, with explicit restriction and composition transport."
  },
  "mathlib_searches": [
   {
@@ -138,10 +151,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T100030-L-2469397",
-  "kind": "interface",
+  "landing": "20261013T123202-L-3675704",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

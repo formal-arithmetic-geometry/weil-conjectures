@@ -12422,3 +12422,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:28 L: returned deliver/R3/Sheaf.Paper.CechCupPullbackCompat (reviewer RETURN: (reviewer X-ea0f0, head ea0f0f94d) H10: In lean/Sheaf/Paper/CechCupPullbackCompat.lean, optimize the newly added cechRef)
 - 12:31 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore (reviewer RETURN: (reviewer X-16cf1, head 16cf1eea9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
 - 12:32 L: merged deliver/A3/Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeExchange (stage 3; reviewer PASS; first push; landing 20261013T123202-L-3675525 (interface); batch 20261013T123200; modules 3; new nodes 2)
+- 12:32 L: merged deliver/C3/Sheaf.AlgebraicGeometry.CoefficientSourceAffineTensorPresentation (stage 3; reviewer PASS; first push; landing 20261013T123202-L-3675704 (proof); batch 20261013T123200; modules 1; new nodes 0)
