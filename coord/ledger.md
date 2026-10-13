@@ -12742,3 +12742,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: merged deliver/T3/Sheaf.AlgebraicGeometry.ProjectionMateAffineChartTransport (stage 3; reviewer PASS; first push; landing 20261013T140827-L-316716 (interface); batch 20261013T140810; modules 2; new nodes 1)
 - 14:08 L: merged deliver/T3/Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective (stage 3; reviewer PASS; first push; landing 20261013T140827-L-316949 (proof); batch 20261013T140810; modules 1; new nodes 0)
 - 14:08 L: merged deliver/W4/Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence (stage 3; reviewer PASS; first push; landing 20261013T140828-L-317094 (interface); batch 20261013T140810; modules 2; new nodes 1)
+- 14:08 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame (stage 3; reviewer PASS; first push; landing 20261013T140828-L-317229 (interface); batch 20261013T140810; modules 2; new nodes 1)

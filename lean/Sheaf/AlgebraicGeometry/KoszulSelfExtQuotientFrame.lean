@@ -13,11 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 public import Mathlib.Data.Set.PowersetCard
 
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel
+import Sheaf.AlgebraicGeometry.KoszulQuotientHomologyFrame
 
 /-! # Affine zero-differential self Ext calculation -/
 
@@ -54,6 +51,18 @@ theorem koszul_self_ext_quotient_frame
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj
         (H.obj (op (S.obj B), S.obj B))
     Nonempty (G.over U.1 ≅
-      (∐ fun _ : ULift.{u} (Set.powersetCard (Fin m) n) ↦ B).over U.1) := by sorry
+      (∐ fun _ : ULift.{u} (Set.powersetCard (Fin m) n) ↦ B).over U.1) := by
+  classical
+  dsimp only
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let a : SheafOfModules.unit Y.ringCatSheaf ⟶ B :=
+    (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫
+      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom
+  obtain ⟨_, eG, _⟩ := koszulExtCoefficient_affine_model i m n U f hf hreg a rfl
+  obtain ⟨eQ⟩ := koszul_quotient_homology_frame i U n m f hf
+  let E := Scheme.Modules.overEquiv U.1
+  let eR := Scheme.Modules.overFunctorEquiv U.1
+  exact ⟨E.functor.preimageIso
+    (eR.app _ ≪≫ eG ≪≫ eQ ≪≫ (eR.app _).symm)⟩
 
 end AlgebraicGeometry

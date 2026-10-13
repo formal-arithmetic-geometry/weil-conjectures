@@ -1,0 +1,151 @@
+{
+ "id": "lem-y3-koszul-quotient-homology-frame",
+ "kind": "statement",
+ "title": "Sheafified quotient-valued dual Koszul homology has the increasing wedge frame",
+ "statement": "Let i:Z\\to Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], U an affine open, A=\\Gamma(Y,U), I=ker(i)(U) [def-sbc-closed-immersion-ideal-sheaf], and n,m natural numbers. Let f:Fin(m)\\to A generate I. Let K be the explicit quotient-valued signed dual Koszul cochain complex with K^p=Hom_A(\\wedge^p A^m,A/I) and differential signed precomposition by the Koszul boundary [new-j3-koszul-quotient-coefficient-complex]. Let T be associated-module sheafification followed by restriction along the spectrum isomorphism U\\simeq Spec(A) [lem-weil-pbc-spec-module-tilde-sections]. Then T(H^n(K)) is isomorphic to the restriction to U of the coproduct of copies of B=i_*O_Z indexed by ULift of n-element subsets of Fin(m) [def-weil-sheaf-of-modules-category, def-pc-module-pullback]. No Koszul regularity or derived-category hypothesis is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "new-j3-koszul-quotient-coefficient-complex",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Lemma 48.15.4, proof: the quotient-valued Hom complex has zero differential and its cohomology is the Hom from the corresponding Koszul term."
+ },
+ "proof": [
+  {
+   "text": "Use the explicit contraction formula for the Koszul differential. On a decomposable wedge the boundary is a sum of wedges with coefficients sign times linearCombination(f,v_j). Each coefficient lies in I. Applying any A-linear map into A/I therefore kills each summand, so signed precomposition is zero. Non-successor differentials vanish by the complex shape. ShortComplex.HomologyData.ofZeros identifies homology with its middle term.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential",
+    "new-j3-koszul-quotient-coefficient-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exterior-power basis of the standard finite free module, reindexed by ULift. Module.Basis.constr identifies functionals with their values on this basis, and Finsupp.linearEquivFunOnFinite turns these functions into finitely supported functions. ModuleCat.finsuppCoconeIsColimit identifies this module with the coproduct of A/I. Map the isomorphism by T and use PreservesCoproduct.iso.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the affine chart the closed immersion gives a surjection A to Gamma(i inverse U) with kernel I. Its kernel-lift ring equivalence and the source affine spectrum isomorphism give a compatible presentation i inverse U as Spec(A/I); compatibility follows from toSpecGamma naturality. Apply affine_quotient_restricted_iso to identify T(A/I) with B restricted to U. Apply Sigma.mapIso to these identifications and the inverse coproduct-preservation comparison for ordinary open restriction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sc-affine-quotient-restricted-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-koszul-differential",
+  "new-j3-koszul-quotient-coefficient-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-closed-immersion",
+  "lem-sc-affine-quotient-restricted-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Y3",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Lemma 48.15.4, explicit zero-differential affine Hom calculation",
+  "note": "Complete Lean proof; private contraction/quotient-zero proofs adapted from KoszulCoefficientTopHomology and private quotient-presentation proof from AffineKoszulFiniteFreeResolution. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex Hom with quotient coefficients has zero differential and cohomology is finite free",
+   "results": "8 hits concerning cotangent H1 and formally smooth rings; no exact quotient-valued Koszul homology frame.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.constr",
+   "results": "12 hits, including Module.Basis.constr and constr_symm_apply. constr supplies the linear equivalence between basis values and linear maps used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "component match, not the assembled sheaf frame"
+  },
+  {
+   "tool": "grep",
+   "query": "finsuppCoconeIsColimit|HomologyData.ofZeros",
+   "results": "23 hits including ModuleCat.finsuppCoconeIsColimit and ShortComplex.HomologyData.ofZeros; both are used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "component matches, no exact assembled frame"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual Koszul complex with quotient coefficients has zero differential and its cohomology has an exterior basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Self-coefficient Ext affine Koszul calculation: identify quotient-valued zero-differential Hom cohomology with the increasing wedge coproduct frame, before pullback or conormal comparison.",
+   "via": [
+    "lem-u1-koszul-self-ext-quotient-frame",
+    "lem-sc-koszul-self-ext-stalk-bases",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulQuotientHomologyFrame",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulQuotientHomologyFrame.lean",
+  "declaration": "AlgebraicGeometry.koszul_quotient_homology_frame",
+  "statement": "theorem koszul_quotient_homology_frame\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.affineOpens) (n m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let Q := (ExteriorAlgebra.koszulQuotientDualComplex\n      (Γ(Y, U.1) : Type u) (i.ker.ideal U) m f).homology n\n    Nonempty (T.obj Q ≅ (Scheme.Modules.restrictFunctor U.1.ι).obj\n      (∐ fun _ : ULift.{u} (Set.powersetCard (Fin m) n) ↦ B))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T140828-L-317229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T140828-L-317229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
