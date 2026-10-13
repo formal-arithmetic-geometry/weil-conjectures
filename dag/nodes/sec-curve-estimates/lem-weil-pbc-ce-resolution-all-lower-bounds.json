@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-ce-resolution-all-lower-bounds",
+ "kind": "statement",
+ "title": "Cartan--Eilenberg resolutions preserving every lower support bound",
+ "statement": "Let B be an abelian category [def-sp-abelian] with enough injectives [def-sp-enough-injectives] and K a bounded-below integer-indexed cochain complex. There exist a bicomplex I with complex degree in Z and resolution degree in N [def-sp-double-complex-total] and an augmentation a from K placed in resolution degree zero. Every column augmentation is a quasi-isomorphism. All terms and all horizontal cycle, boundary and homology terms are injective [def-sp-injective-resolutions], and the induced augmentations on those three horizontal objects are quasi-isomorphisms. For EVERY b such that K is zero below b, the rows I.X s are zero for s<b. No spectral sequence, presentation or naturality is asserted.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-enough-injectives",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015I",
+  "place": "Tag 015I, alternating exact rows; intrinsic zero-object choice refinement of step 1 of lem-weil-pbc-ce-supported-first-page-lifts"
+ },
+ "proof": [
+  {
+   "text": "Choose resolutions of the boundary and homology objects in every degree, using InjectiveResolution.self when the object is zero. Apply the prescribed-end horseshoe to B^p -> Z^p -> H^p. If K^p is zero then both B^p and H^p are zero; the exact row forces the cycle resolution to be zero. Retain the same boundary resolutions in adjacent degrees.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "def-sp-injective-resolutions",
+    "def-sp-cartan-eilenberg-boundary-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the prescribed-end horseshoe again to Z^p -> K^p -> B^(p+1). The boundary projection and image factorization show this row is short exact. Below any lower support bound b, the two outer resolution complexes are zero, so the middle term resolution is zero. The choices depended on the objects being zero, not on b, and hence work simultaneously for every bound. Assemble the compatible row system and its horizontal differential through the next boundary and cycle resolutions.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "def-sp-cartan-eilenberg-boundary-projection",
+    "def-sp-cartan-eilenberg-rows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical row identifications. Evaluation transfers the three injectivity properties along the isomorphisms. Their augmentation equations and cancellation of quasi-isomorphisms along isomorphisms prove the three horizontal quasi-isomorphism conditions. Column injectivity and quasi-isomorphisms are inherited directly. The construction also covers the all-zero complex.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-rows-identifications"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "def-sp-injective-resolutions",
+  "def-sp-cartan-eilenberg-boundary-projection",
+  "def-sp-cartan-eilenberg-rows",
+  "lem-sp-cartan-eilenberg-rows-identifications"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 015I, 015J, 015K and 012K",
+  "place": "Tag 015I, alternating exact rows; intrinsic zero-object choice refinement of step 1 of lem-weil-pbc-ce-supported-first-page-lifts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg resolution retaining zero rows and natural maps on the first hypercohomology page",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the first page of the hypercohomology spectral sequence constructed from prescribed Cartan Eilenberg resolutions",
+   "results": "8 results about ordinary injective-resolution comparisons and homology naturality; no construction of coherent CE quotient pages for prescribed bicomplexes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicalSpectralSequence\"",
+   "results": "6 hits defining spectral sequence types. No prescribed-resolution construction or natural first-page comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cartanEilenberg|CartanEilenberg|coherent.*first.page",
+   "results": "0 hits in Mathlib. Local searches found the existing row construction, prescribed horseshoe and row identifications.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCESupportedFirstPageLifts",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 015I, alternating exact rows; intrinsic zero-object choice refinement of step 1 of lem-weil-pbc-ce-supported-first-page-lifts",
+   "via": [
+    "lem-weil-pbc-ce-supported-first-page-lifts",
+    "lem-weil-pbc-supported-ce-filtered-totals",
+    "lem-weil-pbc-supported-resolution-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": null,
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergAllLowerBounds",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergAllLowerBounds.lean",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_resolution_all_lower_bounds",
+  "statement": "theorem exists_cartanEilenberg_resolution_all_lower_bounds\n    (B : Type u) [Category.{v} B] [Abelian B] [EnoughInjectives B]\n    (K : CochainComplex.Plus B) :\n    ∃ (I : HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n      (a : ((CochainComplex.single₀ B).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        K.obj ⟶ I),\n      (∀ (b : ℤ), (∀ s : ℤ, s < b → IsZero (K.obj.X s)) →\n        ∀ s : ℤ, s < b → IsZero (I.X s)) ∧\n      (∀ s : ℤ, QuasiIso (a.f s)) ∧\n      (∀ (s : ℤ) (r : ℕ), Injective ((I.X s).X r)) ∧\n      (∀ (s : ℤ) (r : ℕ),\n        Injective ((I.cycles s).X r) ∧\n        Injective ((image (I.d (s - 1) s)).X r) ∧\n        Injective ((I.homology s).X r)) ∧\n      (∀ s : ℤ,\n        QuasiIso (HomologicalComplex.cyclesMap a s) ∧\n        QuasiIso (image.map (Arrow.homMk' (a.f (s - 1)) (a.f s) (a.comm (s - 1) s))) ∧\n        QuasiIso (HomologicalComplex.homologyMap a s))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T040753-L-3950359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T040753-L-3950359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
