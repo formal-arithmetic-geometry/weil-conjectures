@@ -12,6 +12,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+-- STATEMENT-DISPUTED: Completion cannot detect support away from V(I).
+-- Take A = Q[[t]], I = (t), Z = Y = Spec Q((t)), q = identity, G = 0,
+-- and F = O_Y. Then Q = O_Y and every completion term is zero, but
+-- Supp(F) = Y is not proper over A: its image D(t) is not closed.
+-- Stacks 088E constructs a particular candidate on a projective compactification;
+-- the completion isomorphism alone does not retain that construction's support property.
+
 /-- Proper support for the algebraization candidate. Source: Stacks Project, Theorem 088E,
 support paragraphs (blueprint: new-chow-algebraization-core-support).
 The support calculation in the compactification identifies the support of the candidate
