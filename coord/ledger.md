@@ -11550,3 +11550,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/N2/Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso (stage 3; reviewer PASS; first push; landing 20261013T072359-L-1122970 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/N3/Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineSpecTransport (stage 3; reviewer PASS; first push; landing 20261013T072359-L-1123073 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/N3/Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections (stage 3; reviewer PASS; first push; landing 20261013T072400-L-1123218 (interface); batch 20261013T072335; modules 4; new nodes 3)
+- 07:24 L: merged deliver/N4/Sheaf.CategoryTheory.FiniteCycleDerivedComparison (stage 3; reviewer PASS; first push; landing 20261013T072400-L-1123320 (proof); batch 20261013T072335; modules 1; new nodes 0)
