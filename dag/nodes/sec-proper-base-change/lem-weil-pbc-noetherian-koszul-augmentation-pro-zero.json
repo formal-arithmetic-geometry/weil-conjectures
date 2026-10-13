@@ -23,9 +23,77 @@
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J_m=(a_1^m,\\ldots,a_r^m)$ and $C_m=\\operatorname{Cone}(\\epsilon_m)$. Each $a_j^m$ lies in $I^m$, so the quotient $A\\to A/I^m$ kills the differential into $Q_m^0=A$ and defines the claimed augmentation. For $k\\geq m$, its square commutes strictly: the map $Q_k^0\\to Q_m^0$ is the identity, and both paths send $x\\in A$ to its class modulo $I^m$. On the summand indexed by $S\\subseteq\\{1,\\ldots,r\\}$, in degree $-|S|$, the transition $Q_k\\to Q_m$ is multiplication by $\\prod_{j\\in S}a_j^{k-m}$. The total-tensor sign rule gives the differential $d(e_S)=\\sum_{j\\in S}(-1)^{\\operatorname{pos}(j,S)-1}a_j^m e_{S\\setminus\\{j\\}}$, where $S$ is increasingly ordered. The differential and transition formulas commute term by term since $a_j^m a_j^{k-m}=a_j^k$. For $r=0$, $I=0$ and $Q_m=A[0]$, so $\\epsilon_m$ is the identity and $C_m$ is acyclic; the conclusion follows directly from localization at quasi-isomorphisms. Hence assume $r\\geq1$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BKC (situation-koszul), transition formula after that situation; Tag 0921 (lemma-sequence-Koszul-complexes)"
+   }
+  },
+  {
+   "text": "For each $j$ let $h_j$ be signed insertion of $j$ into a basis subset: $h_j(e_S)=0$ if $j\\in S$, and otherwise $h_j(e_S)=(-1)^{\\#\\{i\\in S:i<j\\}}e_{S\\cup\\{j\\}}$. It lowers cohomological degree by one. Expanding the preceding differential, the terms deleting an index different from $j$ cancel in $dh_j+h_jd$, and the term deleting $j$ is $a_j^m e_S$; when $j\\in S$ the latter term comes from $h_jd$. Thus $dh_j+h_jd=a_j^m\\mathrm{id}$. For a cycle $z$, $a_j^m z=d(h_jz)$, so $J_m Z_m^p\\subseteq B_m^p$, where $Z_m^p=\\ker(d:Q_m^p\\to Q_m^{p+1})$ and $B_m^p=\\operatorname{im}(d:Q_m^{p-1}\\to Q_m^p)$. This proves the annihilation needed below directly from the finite basis formulas; no regular-sequence hypothesis is used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0626 (lemma-homotopy-koszul-abstract), 0663 (lemma-homotopy-koszul), explicit signed-insertion identity"
+   }
+  },
+  {
+   "text": "Fix $m\\geq1$ and $-r\\leq p<0$. Apply [lem-weil-pbc-artin-rees] to the ideal $J_m$, the finite free module $M=Q_m^p$ and its submodule $N=Z_m^p$. Its hypotheses hold: $A$ is Noetherian and $Q_m^p$ has the finite subset basis above. Obtain $c\\geq0$ with $J_m^{c+1}M\\cap N\\subseteq J_m N$. Choose $k\\geq m+m(c+1)$. Since $S$ is nonempty in degree $p<0$, each diagonal transition coefficient contains some factor $a_j^{k-m}\\in J_m^{c+1}$. A cycle of $Q_k$ therefore maps into $J_m^{c+1}M\\cap Z_m^p\\subseteq J_m Z_m^p\\subseteq B_m^p$ by step 2. Consequently $H^p(Q_k)\\to H^p(Q_m)$ is zero. Enlarging $k$ preserves this property by composition of transitions. Taking a maximum over the finitely many $p=-r,\\ldots,-1$ gives a single $k$ killing all negative Koszul cohomology transitions to level $m$.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0921 (lemma-sequence-Koszul-complexes), Artin-Rees paragraph; Algebra Tag 00IN (lemma-Artin-Rees)"
+   }
+  },
+  {
+   "text": "Compute cohomology of the strict cone from its defining differential in [def-weil-abstract-derived-category]. Its terms are $C_m^0=A/I^m$, $C_m^{-1}=Q_m^0=A$, and $C_m^q=Q_m^{q+1}$ for $q\\leq-2$; the differential $C_m^{-1}\\to C_m^0$ is the quotient, and the lower differentials are $-d_{Q_m}$. Thus $H^0(C_m)=0$, $H^{-1}(C_m)=I^m/J_m$, and $H^q(C_m)=H^{q+1}(Q_m)$ for $q\\leq-2$. These identifications describe the transitions too: the cone map is the quotient in degree zero, the identity on $A$ in degree $-1$, and the map $Q_k^{q+1}\\to Q_m^{q+1}$ in degrees $q\\leq-2$. In particular, the transition $I^k/J_k\\to I^m/J_m$ sends the class of $x$ to the class of the same $x$. For $s=r(m-1)+1$, every degree-$s$ monomial in the generators has some generator with exponent at least $m$, so $I^s\\subseteq J_m$. Therefore any $k\\geq\\max(m,s)$ kills this degree-$-1$ transition. Step 3 kills all degrees $q\\leq-2$ eventually. The cones have terms only in $[-r-1,0]$, independently of $m$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0922 (proposition-noetherian-naive-completion-is-completion), cofinal-power paragraph, expanded via the cone differential of derived.tex (definition-cone)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-bounded-derived-tower-pro-zero] to $X_m=C_m$ in $D(\\operatorname{Mod}_A)$. The strict commuting squares of step 1 give actual cone chain maps; their composites and identities are the cone maps of the composite squares, so they are a tower in the derived category. Its cohomology is uniformly supported in $[-r-1,0]$ by step 4. For every degree and every target level, steps 3 and 4 provide a later level killing the induced cohomology map (outside the range it is already zero). All hypotheses of the cited bounded-tower lemma hold, so for each $m$ some $k\\geq m$ makes the very same transition $C_k\\to C_m$ zero in $D(A)$, as required. This final upgrade is essential: one cohomologically zero morphism alone need not be zero in the derived category.",
+   "uses": [
+    "lem-weil-pbc-bounded-derived-tower-pro-zero",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3B (lemma-essentially-constant-cohomology), zero-valued specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-bounded-derived-tower-pro-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0921 (lemma-sequence-Koszul-complexes), 0922 (proposition-noetherian-naive-completion-is-completion), with explicit cone calculation and derived.tex Tag 0G3B"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,15 +136,65 @@
    "results": "Hausdorffification, localCohomology, localCohomology.isoSelfLERadical, IsAdicComplete, AdicCompletion.map_exact, localCohomology.ofSelfLERadical, Hausdorffification.instIsHausdorff, AdicCompletion",
    "date": "2026-10-14",
    "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|proregular",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean; Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, local cohomology, Artin-Rees and Koszul TODO comments do not state the strict Koszul augmentation cone-tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, local cohomology, Artin-Rees and Koszul TODO comments do not state the strict Koszul augmentation cone-tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian Koszul augmentation to ideal power quotient has pro-zero mapping cones",
+   "results": "No hits. service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring the cones of the Koszul power augmentation to quotients by ideal powers form a pro-zero tower",
+   "results": "Hausdorffification; IsAdicComplete; AdicCompletion.flat_of_isNoetherian; IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime; AdicCompletion.map_exact; Ideal.exists_pow_inf_eq_pow_smul; localCohomology.ideal_powers_initial; AdicCompletion",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, local cohomology, Artin-Rees and Koszul TODO comments do not state the strict Koszul augmentation cone-tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees kills negative Koszul homology transitions for powers of ideal generators",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul; Ideal.iInf_pow_smul_eq_bot_of_isLocalRing; localCohomology.ideal_powers_initial; Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors; Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree; Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge; Ideal.Filtration.Stable.exists_pow_smul_eq; Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion, local cohomology, Artin-Rees and Koszul TODO comments do not state the strict Koszul augmentation cone-tower assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-constant-completion-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Expanded the Noetherian Koszul comparison into signed-insertion homotopy, the existing Artin-Rees leaf applied to cycle submodules, explicit cone cohomology and generator-power containment, and one new statement-only generic bounded-derived-tower lemma. No Koszul cohomology or cone clause is delegated to a restatement node. No attachment was found.",
+  "blueprint": "Realizes def-weil-pbc-completed-pullback Detailed form, comparison with Stacks 099N, through lem-weil-pbc-constant-completion-equivalence: the constant Noetherian Koszul augmentation pro-zero input, including actual strict cone transitions."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-d9fa7abeb",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-d9fa7abeb (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including Tags 0921, 0922, 0626, 0663, 00IN, and 0G3B; edge cases and coefficient-category distinctions were verified. One formal fault: the new node’s `created` metadata omitted required `by`, `date`, and `group` fields (delivery-errors B9). Corrected whole DAG JSON is in `fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-bounded-derived-tower-pro-zero.json`.; 1 file(s) fixed by the reviewer"
+ }
 }
