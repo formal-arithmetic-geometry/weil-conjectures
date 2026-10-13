@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-diagonal-conormal-affine-ideal-class",
+ "kind": "lemma",
+ "title": "Surjective affine diagonal ideal class map with actual kernel-unit coordinates",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], and let $U\\subset X$ and $V\\subset S$ be affine opens with $U\\subset f^{-1}V$. Put $A=\\Gamma(X,U)$, $R=\\Gamma(S,V)$ with the algebra structure induced by $f$, $B=A\\otimes_R A$, and $J=\\ker(\\mu:B\\to A)$, where $\\mu(a\\otimes b)=ab$. Let $p_1,p_2:X\\times_S X\\to X$ and $\\Delta:X\\to X\\times_S X$ be the projections and diagonal of the fibre product [def-pc-fibre-product], put $W=p_1^{-1}U\\cap p_2^{-1}U$, and let $\\mathcal I$ be the actual module-sheaf kernel of $\\mathcal O_{X\\times_S X}\\to\\Delta_*\\mathcal O_X$. Let $C=\\Delta^*\\mathcal I$ be the tensor-formula diagonal conormal [def-sc-diagonal-conormal], and $\\eta$ the canonical tensor-pullback adjunction unit [lem-pc-module-pullback-adjunction]. There exist a ring isomorphism $r:B\\simeq\\Gamma(X\\times_S X,W)$ and a surjective $A$-linear map $q:J\\to\\Gamma(U,C)$, with the $A$-action on $J$ through the first tensor factor, such that $r(1\\otimes a)=p_2^*(a)$ and $r(a\\otimes1)=p_1^*(a)$ for every $a\\in A$. For every inclusion $h:U\\subset\\Delta^{-1}W$ and every $j\\in J$ there exists $s\\in\\Gamma(W,\\mathcal I)$ whose kernel inclusion is $r(j)$ and such that $q(j)$ equals the restriction to $U$ along $h$ of $\\eta_W(s)$. No derivation is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sc-diagonal-conormal",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Put A = Γ(X,U), R = Γ(S,V), B = A ⊗_R A and J = ker(μ:B → A). Since U maps into V, the open W = p₁⁻¹U ∩ p₂⁻¹U is U ×_V U. The affine fibre-product calculation identifies its section ring with B. The ring isomorphism r sends a ⊗ 1 to the first projection pullback and 1 ⊗ a to the second projection pullback. The diagonal inverse image of W equals U, and its restriction to W is the closed immersion induced by μ.",
+   "uses": [
+    "lem-weil-pbc-diagonal-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+   }
+  },
+  {
+   "text": "Restrict the actual module-sheaf kernel of O → Δ_* O to W. Restriction to an open is exact, and the restricted pushforward is pushforward by the restricted diagonal, so this kernel is the ideal module associated to J. On the affine open W its kernel inclusion is injective with range ker μ. Therefore, for every j in J, there is a unique actual kernel section s whose inclusion equals r(j). This identifies the kernel section module with J, without assuming global quasi-coherence of the diagonal kernel.",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "lem-weil-pbc-diagonal-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+   }
+  },
+  {
+   "text": "Restrict the tensor-formula pullback to U. Inverse image and change of rings commute with restriction, so it is tensor pullback of the ideal module by the restricted closed diagonal. Under this identification the adjunction unit is preserved: its inverse-image unit and pure tensor 1 ⊗ s restrict to the corresponding units on the chart. Apply affine_conormal_sections_existence to that restricted closed immersion, not directly to the original diagonal. This identifies actual conormal sections on U with J/J² and sends the restricted adjunction-unit class of the section representing j to the quotient class of j.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-affine-conormal-sections-existence",
+    "def-sc-diagonal-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+   }
+  },
+  {
+   "text": "Compose the quotient class map J → J/J² with the section identification to obtain q. Quotient classes exhaust J/J², so q is surjective. The A-action through the first tensor factor agrees modulo J with multiplication on A and hence with the A-action on actual conormal sections; thus q is A-linear. For every j the kernel section from step 2 and the unit calculation from step 3 give precisely the displayed formula, for any proof of U ≤ Δ⁻¹W. The proof argument of this inclusion is immaterial by proof irrelevance. Empty U gives zero rings and modules, so it introduces no exception.",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "lem-weil-pbc-affine-conormal-sections-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-diagonal-conormal",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-conormal-sections-existence",
+  "lem-weil-pbc-diagonal-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (lemma-differentials-diagonal), affine chart calculation; Tag 01R3 (lemma-affine-conormal); Tag 01KJ (schemes, lemma-diagonal-immersion); read online 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine sections of tensor pullback of the diagonal ideal are a quotient of the kernel of multiplication on the tensor product",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical class map from the diagonal ideal to affine sections of its conormal sheaf is surjective and compatible with the tensor pullback adjunction unit",
+   "results": "diagonal_Spec_map and diagonal_SpecMap give the affine multiplication diagonal; IdealSheafData.subschemeι_app_surjective gives closed-subscheme ring surjectivity. None identifies the actual tensor pullback kernel unit with conormal sections.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*conormal|conormal.*affine|tensorPullback.*sections",
+   "results": "msearch: no hits. Additional rg in the library located affine_conormal_sections_existence and affine_ideal_tensor_sections, which apply to an actual closed immersion ideal module, requiring the restriction comparison for the original diagonal kernel.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineDerivationSpan",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, diagonal conormal identification, affine calculation: restrict the actual diagonal kernel and tensor-pullback unit to U ×_V U, before using the generators of J",
+   "via": [
+    "stage3-diagonal-conormal-affine-derivation-span",
+    "stage3-diagonal-conormal-chosen",
+    "lem-sc-diagonal-conormal-affine-sections-base",
+    "lem-sc-diagonal-conormal-affine-sections",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineIdealClass.lean",
+  "declaration": "AlgebraicGeometry.diagonalConormal_affine_ideal_class",
+  "statement": "theorem diagonalConormal_affine_ideal_class (f : X ⟶ S) (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) : letI : Algebra Γ(S, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra let W := (pullback.fst f f) ⁻¹ᵁ U.1 ⊓ (pullback.snd f f) ⁻¹ᵁ U.1 ∃ (r : (Γ(X, U.1) ⊗[Γ(S, V.1)] Γ(X, U.1)) ≃+* Γ(pullback f f, W)) (q : KaehlerDifferential.ideal Γ(S, V.1) Γ(X, U.1) →ₗ[Γ(X, U.1)] Γ(diagonalConormal f, U.1)), Function.Surjective q ∧ (∀ a : Γ(X, U.1), r ((1 : Γ(X, U.1)) ⊗ₜ[Γ(S, V.1)] a) = (pullback.snd f f).appLE U.1 W inf_le_right a) ∧ (∀ a : Γ(X, U.1), r (a ⊗ₜ[Γ(S, V.1)] (1 : Γ(X, U.1))) = (pullback.fst f f).appLE U.1 W inf_le_left a) ∧ ∀ (hδ : U.1 ≤ (pullback.diagonal f) ⁻¹ᵁ W) (j : KaehlerDifferential.ideal Γ(S, V.1) Γ(X, U.1)), ∃ s : Γ(kernel (SheafOfModules.unitToPushforwardObjUnit (pullback.diagonal f).toRingCatSheafHom), W), (kernel.ι (SheafOfModules.unitToPushforwardObjUnit (pullback.diagonal f).toRingCatSheafHom)).val.app (op W) s = r j ∧ q j = (diagonalConormal f).presheaf.map (homOfLE hδ).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.diagonal f))).unit.app (kernel (SheafOfModules.unitToPushforwardObjUnit (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T040806-L-3954403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T040806-L-3954403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
