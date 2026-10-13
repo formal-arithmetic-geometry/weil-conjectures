@@ -12411,3 +12411,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:24 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent (stage 3; reviewer PASS; after a return; landing 20261013T122445-L-3610301 (interface); batch 20261013T122442; modules 2; new nodes 1)
 - 12:27 L: merged deliver/A2/Sheaf.AlgebraicGeometry.TailOpenCohomologyArrowLaws (stage 3; reviewer PASS; first push; landing 20261013T122726-L-3631704 (proof); batch 20261013T122724; modules 1; new nodes 0)
 - 12:27 L: merged deliver/D4/Sheaf.Algebra.Homology.ProjectiveRestrictionTorBound (stage 3; reviewer PASS; first push; landing 20261013T122726-L-3631940 (interface); batch 20261013T122724; modules 2; new nodes 1)
+- 12:27 L: merged deliver/F3/Sheaf.Algebra.Homology.HomTensorDegreewiseConstruction (stage 3; reviewer PASS; first push; landing 20261013T122727-L-3632122 (interface); batch 20261013T122724; modules 2; new nodes 1)

@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-hom-tensor-pair-construction",
+ "kind": "statement",
+ "title": "Currying a pair of sheaf evaluations",
+ "statement": "Let $C$ be a category with objects in universe $u$ and morphisms in universe $v$, let $J$ be a Grothendieck topology on $C$, and let $R$ be a sheaf of commutative rings in universe $\\max(u,v)$. Let $S,A,H,B,D$ be sheaves of $R$-modules [def-weil-sheaf-of-modules-category], and let $f:S\\to\\mathcal Hom_R(A,H)$ and $g:H\\to\\mathcal Hom_R(B,D)$ be sheaf morphisms, with internal Hom as in [def-pur-sheaf-hom]. Put $\\tau_{A,B}:A\\otimes_{p,R}B\\to (A\\otimes_R B)_{\\mathrm{pre}}$ for the module-sheafification unit followed by the inverse of the tensor comparison [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification]. There exists $b:S\\to\\mathcal Hom_R(A\\otimes_R B,D)$ such that for every $U\\in C$, $s\\in S(U)$, object $(W\\to U)$ of $C/U$, $x\\in A(W)$ and $y\\in B(W)$, one has $b_U(s)_W(\\tau_{A,B,W}(x\\otimes y))=g_W(f_U(s)_W(x))_{(W\\xrightarrow{1}W)}(y)$. Here a section of internal Hom over an object is a morphism on its slice site, so both displayed evaluations use the indicated slice objects. No complexes, product families, coproducts, uniqueness or invertibility are asserted.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma internal-hom-adjoint-tensor (Tag 03EO), local tensor-Hom correspondence; Lemma sites-cohomology-lemma-compose (Tag 0A90), a single tensor summand"
+ },
+ "proof": [
+  {
+   "text": "Uncurry f and g on the underlying presheaves by the sectionwise balanced tensor universal property. Braiding and associativity give the restriction-compatible trilinear map s tensor (x tensor y) mapped to g(f(s)(x))(y). Curry the S input to obtain A.val tensor B.val -> internalHom(S,D). All constructions are actual presheaf morphisms with sectionwise linear maps; their naturality is checked on pure tensors.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since internalHom(S,D) is a sheaf, extend the preceding presheaf tensor morphism through the module sheafification adjunction and the tensor comparison, obtaining k:A tensor B -> internalHom(S,D). Its composite with the sheafification unit is the prescribed presheaf map by the adjunction inverse law and the tensor comparison inverse law.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose k by the local pairing: b_U(s) at W takes z to k_W(z) evaluated at the identity slice object and the restriction of s to W. Naturality of this pairing proves that b is a sheaf morphism. On the unit image of x tensor y the preceding factorization reduces to g(f_W(s|W)(x))(y). Naturality of f, evaluated at the identity slice object, identifies f_W(s|W)(x) with f_U(s)_W(x), proving the equation. The same linear constructions handle zero modules, zero rings and empty sites.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO: explicit separate-universe presheaf currying, sheafification and transposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, a pair of evaluations f(s)(x) followed by g applied to the result and y induces a map into internal Hom of A tensor B",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism into iterated internal Hom gives a morphism into internal Hom from a tensor product of sheaves",
+   "results": "8 hits, including LightCondensed.ihomPoints and instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; no exact localized sheaf-module evaluation formula",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.internalHom",
+   "results": "12 hits, including CategoryTheory.MonoidalClosed.internalHomAdjunction₂ and internalHom_map; general abstract closed structure, without the specified local evaluation formula",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*tensor|tensor.*ihom",
+   "results": "19 hits, including ModuleCat.Monoidal.Closed, RepresentationTheory.Rep.Basic and Monoidal.Closed.Basic; no exact sheaf-module pair evaluation in separate universes",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDegreewiseConstruction",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Transpose tensor maps through the derived tensor-internal-Hom comparison: the single-summand local evaluation in the forward degreewise construction",
+   "via": [
+    "lem-sc-hom-tensor-degreewise-construction",
+    "lem-sc-hom-tensor-degreewise",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-sc-derived-internal-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.HomTensorPair",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/HomTensorPair.lean",
+  "declaration": "SheafOfModules.homTensorPair_construct",
+  "statement": "theorem homTensorPair_construct (S A H B D : Mod)\n    (f : S ⟶ homObj (R := R) A H) (g : H ⟶ homObj (R := R) B D) :\n    let := monoidalCategory R\n    ∃ b : S ⟶ homObj (R := R) (A ⊗ B) D,\n      ∀ (U : Cᵒᵖ) (s : S.val.obj U) (W : (Over U.unop)ᵒᵖ)\n        (x : A.val.obj (op W.unop.left)) (y : B.val.obj (op W.unop.left)),\n        (((b.val.app U).hom s).app W).hom\n          (((PresheafOfModules.sheafificationAdjunction\n            (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app\n              (A.val ⊗ B.val) ≫ (tensorObjIsoSheafification (R := R) A B).inv.val).app\n                (op W.unop.left) |>.hom (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)) =\n        ((((g.val.app (op W.unop.left)).hom\n          ((((f.val.app U).hom s).app W).hom x)).app\n            (op (Over.mk (𝟙 W.unop.left)))).hom y)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T122727-L-3632122",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T122727-L-3632122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
