@@ -12,8 +12,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.StalkInternalHomEvaluation
+import Sheaf.AlgebraicGeometry.FinitePresentationSourceStalk
+import Sheaf.AlgebraicGeometry.InternalHomGermZeroFiniteType
+import Sheaf.AlgebraicGeometry.StalkLinearMapLocalLiftFinitePresentation
+import Mathlib.LinearAlgebra.LeftExact
 
 /-!
 # A local finite presentation and its internal-Hom stalk kernel
@@ -79,6 +82,69 @@ theorem exists_finitePresentation_stalk_kernel
           TopCat.Presheaf.germ G.val.presheaf (U ⊓ W) x ⟨hxU, hxW⟩
             (φ.app (op (Over.mk (homOfLE inf_le_right : U ⊓ W ⟶ W)))
               (F.val.presheaf.map (homOfLE inf_le_left : U ⊓ W ⟶ U).op (s i)))) := by
-  sorry
+  classical
+  obtain ⟨U, hxU, m, n, s, a, b, hb, hab, hs⟩ :=
+    exists_finitePresentation_source_stalk X F x
+  obtain ⟨c, hc⟩ := exists_stalk_internalHom_linearMap X F G x
+  let R := X.presheaf.stalk x
+  let N := (moduleStalkFunctor X x).obj G
+  let θn := LinearEquiv.piRing R N (Fin n) R
+  let θm := LinearEquiv.piRing R N (Fin m) R
+  let ε := θn.toLinearMap.comp (LinearMap.lcomp R N b)
+  let α := θm.toLinearMap.comp ((LinearMap.lcomp R N a).comp θn.symm.toLinearMap)
+  let β := ε.comp c
+  have hc_inj : Function.Injective c := by
+    apply (injective_iff_map_eq_zero c).2
+    intro h hh
+    obtain ⟨W, hxW, φ, rfl⟩ :=
+      TopCat.Presheaf.exists_germ_eq (F.homObj G).val.presheaf h
+    apply internalHom_germ_eq_zero_of_finiteType X F G x W hxW φ
+    intro V i hxV t
+    rw [← hc W hxW φ V i hxV t, hh]
+    rfl
+  have hc_surj : Function.Surjective c := by
+    intro χ
+    obtain ⟨W, hxW, φ, hφ⟩ := exists_local_internalHom_of_stalkLinearMap X F G x χ
+    refine ⟨TopCat.Presheaf.germ (F.homObj G).val.presheaf W x hxW φ, ?_⟩
+    ext v
+    obtain ⟨V, hxV, t, rfl⟩ := TopCat.Presheaf.exists_germ_eq F.val.presheaf v
+    have hx : x ∈ W ⊓ V := ⟨hxW, hxV⟩
+    rw [← TopCat.Presheaf.germ_res_apply F.val.presheaf
+      (homOfLE inf_le_right : W ⊓ V ⟶ V) x hx t]
+    exact (hc W hxW φ (W ⊓ V) (homOfLE inf_le_left) hx
+      (F.val.presheaf.map (homOfLE inf_le_right : W ⊓ V ⟶ V).op t)).trans
+        (hφ (W ⊓ V) (homOfLE inf_le_left) hx
+          (F.val.presheaf.map (homOfLE inf_le_right : W ⊓ V ⟶ V).op t))
+  have hε_inj : Function.Injective ε :=
+    θn.injective.comp (LinearMap.lcomp_injective_of_surjective b hb)
+  have hε_range : LinearMap.range ε = LinearMap.ker α := by
+    ext y
+    constructor
+    · rintro ⟨χ, rfl⟩
+      change θm ((LinearMap.lcomp R N a) (θn.symm (θn (χ.comp b)))) = 0
+      rw [θn.symm_apply_apply]
+      change θm ((χ.comp b).comp a) = 0
+      rw [LinearMap.comp_assoc, hab.linearMap_comp_eq_zero, LinearMap.comp_zero, map_zero]
+    · intro hy
+      have hz : (LinearMap.lcomp R N a) (θn.symm y) = 0 := by
+        apply θm.injective
+        exact hy
+      obtain ⟨χ, hχ⟩ :=
+        (LinearMap.exact_lcomp_of_exact_of_surjective N hab hb) (θn.symm y) |>.mp hz
+      refine ⟨χ, ?_⟩
+      change θn ((LinearMap.lcomp R N b) χ) = y
+      rw [hχ, θn.apply_symm_apply]
+  refine ⟨U, hxU, m, n, s, a, b, β, hb, hab, hs, hε_inj.comp hc_inj, ?_, ?_⟩
+  · exact (LinearMap.range_comp_of_range_eq_top ε
+      (LinearMap.range_eq_top.mpr hc_surj)).trans hε_range
+  · intro W hxW φ i
+    change c (TopCat.Presheaf.germ (F.homObj G).val.presheaf W x hxW φ)
+      (b (Pi.single i 1)) = _
+    rw [hs]
+    have hx : x ∈ U ⊓ W := ⟨hxU, hxW⟩
+    rw [← TopCat.Presheaf.germ_res_apply F.val.presheaf
+      (homOfLE inf_le_left : U ⊓ W ⟶ U) x hx (s i)]
+    exact hc W hxW φ (U ⊓ W) (homOfLE inf_le_right) hx
+      (F.val.presheaf.map (homOfLE inf_le_left : U ⊓ W ⟶ U).op (s i))
 
 end AlgebraicGeometry.RingedSpace

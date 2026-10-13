@@ -11703,3 +11703,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/R2/Sheaf.Paper.FormalGlueingCanonicalMaps (stage 3; reviewer PASS; first push; landing 20261013T082409-L-1646257 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/R3/Sheaf.AlgebraicGeometry.CoherentIdealPowerSupportedOnClosed (stage 3; reviewer PASS; first push; landing 20261013T082409-L-1646393 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/R3/Sheaf.AlgebraicGeometry.DerivedOpenDifferenceDiagram (stage 3; reviewer PASS; first push; landing 20261013T082409-L-1646492 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:24 L: merged deliver/R4/Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel (stage 3; reviewer PASS; first push; landing 20261013T082410-L-1646636 (interface); batch 20261013T082326; modules 4; new nodes 3)

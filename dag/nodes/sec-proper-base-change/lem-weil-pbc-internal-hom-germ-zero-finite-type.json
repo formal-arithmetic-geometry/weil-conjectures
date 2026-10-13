@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-internal-hom-germ-zero-finite-type",
+ "kind": "statement",
+ "title": "Zero-germ detection for a local morphism from a finite type source",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\mathcal F$ a finite type module sheaf [def-weil-pbc-module-finite-type-presentation], $\\mathcal G$ any module sheaf, $x\\in U$ with $U$ open, and $\\varphi\\in\\mathcal Hom(\\mathcal F,\\mathcal G)(U)$ [def-pur-sheaf-hom]. Suppose that for every open $V\\subseteq U$ containing $x$ and every $s\\in\\mathcal F(V)$, the germ at $x$ of $\\varphi_V(s)$ is zero in $\\mathcal G_x$ [def-weil-pbc-module-stalk]. Then the germ $\\varphi_x$ is zero in $\\mathcal Hom(\\mathcal F,\\mathcal G)_x$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, proof, second paragraph (finite type injectivity)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose an open neighborhood of x with finitely many generating sections for F, and intersect it with U. The restricted sections still generate: restriction to a smaller slice is exact and preserves the free generator epimorphism.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the hypothesis to each restricted generator. Its image has zero germ. For each generator, the definition of equality of germs supplies a smaller neighborhood on which its image is zero; take the finite intersection of these neighborhoods.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted local morphism vanishes on the generators, so its composite with their free epimorphism is zero. Cancel that epimorphism to conclude that the restricted morphism is zero. Taking its germ gives the original germ by restriction compatibility, so the original germ is zero. The empty family gives a zero source and the same cancellation argument.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-module-stalk",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, proof, second paragraph (finite type injectivity). Read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13; categorical expansion by R4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a finite type sheaf of modules with zero stalk map has zero germ in internal Hom",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable; no mathematical verdict",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A germ of a local sheaf morphism from a finite type module sheaf is zero if its induced stalk linear map is zero",
+   "results": "Hits: AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, ModuleCat.Tilde.stalkToFiberLinearMap_germ, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.localizationToStalk_mk",
+   "verdict": "No matching ringed-space assertion; presentation constructors or individual germ formulas only.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rg internalHom|internal.hom|stalk in Mathlib/Algebra/Category/ModuleCat/Sheaf and ModuleCat/Stalk.lean; rg stalk.*Hom|Hom.*stalk in lean/Sheaf/AlgebraicGeometry and WeilConjectures module sheaves; rg -l 01CP dag/nodes",
+   "results": "Mathlib has module stalk actions and local finite presentation data, but no internal-Hom stalk theorem. Library has StalkInternalHomEvaluation and the parent FinitePresentationStalkKernel. StalkInternalHomFinitePresentation imports the parent and cannot be used here. Existing 01CP nodes concern the whole comparison, scheme Hom kernels, or coherent stalk maps, not this intermediate assertion.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Finite-presentation coordinate kernel on module stalks in the proof of 01CP; refinement: Tag 01CP, proof, second paragraph (finite type injectivity).",
+   "via": [
+    "lem-weil-pbc-finite-presentation-stalk-kernel",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InternalHomGermZeroFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/InternalHomGermZeroFiniteType.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.internalHom_germ_eq_zero_of_finiteType",
+  "statement": "theorem internalHom_germ_eq_zero_of_finiteType (X : RingedSpace.{u}) (F G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) [SheafOfModules.IsFiniteType.{u} F] (x : X) (U : Opens X) (hxU : x ∈ U) (φ : (F.homObj G).val.obj (op U)) (hφ : ∀ (V : Opens X) (i : V ⟶ U) (hxV : x ∈ V) (s : F.val.obj (op V)), TopCat.Presheaf.germ G.val.presheaf V x hxV (φ.app (op (Over.mk i)) s) = 0) : TopCat.Presheaf.germ (F.homObj G).val.presheaf U x hxU φ = 0",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082410-L-1646636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082410-L-1646636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

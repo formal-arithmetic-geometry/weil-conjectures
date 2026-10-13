@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-source-stalk",
+ "kind": "statement",
+ "title": "Finite local presentation transported to the source stalk",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\mathcal F$ a finitely presented module sheaf [def-weil-pbc-module-finite-type-presentation] and $x\\in X$. With $R=\\mathcal O_{X,x}$ and $\\mathcal F_x$ the module stalk [def-weil-pbc-module-stalk], [def-pc-module-stalk-functor], there exist an open $U\\ni x$, $m,n\\geq0$, sections $s_i\\in\\mathcal F(U)$, and $R$-linear maps $a:R^m\\to R^n$ and $b:R^n\\to\\mathcal F_x$ such that $b$ is surjective, $\\operatorname{Im}(a)=\\operatorname{Ker}(b)$, and $b(e_i)=(s_i)_x$ for every $i<n$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, proof, third paragraph: the right exact source-stalk presentation; Definition 01BN."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose quasicoherentData supplied by IsFinitePresentation. Its covering property gives an open U containing x and a finite Presentation of F over U. Reindex its finite generator and relation sets by Fin n and Fin m, using ULift if needed for the universe of free sheaves. Evaluate the generating sections at U to obtain s_i.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The free presentation is a cokernel cofork by Presentation.isColimit. Restriction to the slice over U has the same stalk at x: opens contained in U are cofinal among all neighborhoods. Component germs identify a finite free sheaf stalk with R^k. Surjectivity follows by representing finitely many ring germs on a common neighborhood; injectivity follows by shrinking for their finitely many coordinate equalities.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-stalk-functor",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exactness of module stalks to the presentation. Transport the two maps through the component-germ identifications to define a and b. The cokernel map b is surjective, and exactness gives Im a = Ker b. Each basis germ maps to the germ of the corresponding generating section by naturality. Empty finite sets use the zero module and require no shrinking.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, proof, third paragraph: the right exact source-stalk presentation; Definition 01BN. Read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13; categorical expansion by R4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite local presentations of module sheaves induce finite free presentations of their stalks",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable; no mathematical verdict",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation of sheaf gives exact sequence of stalks of finite free modules",
+   "results": "IsFinitePresentation and local presentation constructors; no transported finite-coordinate stalk presentation.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rg stalk.*[Ff]inite|[Ff]inite.*stalk in Mathlib; rg stalk in Mathlib/Algebra/Category/ModuleCat/Sheaf and ModuleCat/Stalk.lean",
+   "results": "Exact stalk functors in Topology/Sheaves/Abelian and module stalk actions; no theorem choosing finite stalk presentation with the generator germ formula.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Finite-presentation coordinate kernel on module stalks in the proof of 01CP; refinement: Tag 01CP, proof, third paragraph: the right exact source-stalk presentation; Definition 01BN.",
+   "via": [
+    "lem-weil-pbc-finite-presentation-stalk-kernel",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationSourceStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationSourceStalk.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_finitePresentation_source_stalk",
+  "statement": "theorem exists_finitePresentation_source_stalk (X : RingedSpace.{u}) (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) [SheafOfModules.IsFinitePresentation.{u} F] (x : X) : ∃ (U : Opens X) (hxU : x ∈ U) (m n : ℕ) (s : Fin n → F.val.obj (op U)) (a : (Fin m → X.presheaf.stalk x) →ₗ[X.presheaf.stalk x] (Fin n → X.presheaf.stalk x)) (b : (Fin n → X.presheaf.stalk x) →ₗ[X.presheaf.stalk x] (moduleStalkFunctor X x).obj F), Function.Surjective b ∧ Function.Exact a b ∧ (∀ i, b (Pi.single i 1) = TopCat.Presheaf.germ F.val.presheaf U x hxU (s i))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082410-L-1646636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T082410-L-1646636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
