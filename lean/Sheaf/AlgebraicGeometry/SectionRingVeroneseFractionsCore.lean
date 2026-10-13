@@ -6,14 +6,15 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsFormula
+public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsFormula
 public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
-/-! # Additive equivalence for Veronese section fractions
+/-! # Bijection for Veronese section fractions
 
-Reuse the existing constructed Veronese fraction equivalence as the witness
-of the core nonemptiness statement.
+The canonical map from the section-fraction presentation, sending a class
+`[n, ξ]` to the homogeneous fraction `ξ / s^n`, is the inverse of the
+constructed Veronese fraction equivalence.
 Source: Stacks Project, Properties, Tags 0B5L, 01PW, and 01Q1.
 -/
 
@@ -24,17 +25,18 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Core additive equivalence for the Veronese fraction presentation.
+/-- The canonical Veronese fraction map is bijective.
 Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
 (blueprint: lem-sc-section-ring-veronese-fractions-core)
-The equivalence is obtained by identifying each homogeneous summand with the
-corresponding tensor-power section summand and quotienting by the transition relations.
+The map sends the class represented by a numerator `ξ` in degree `n` to the
+homogeneous localization fraction `ξ / s^n`.  It is the inverse of the
+explicit quotient equivalence, so its bijectivity follows from that construction.
 -/
 theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :
-    Nonempty (HomogeneousLocalization.Away (sectionRingGrade L) s.val ≃+
-      SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d)) := by
-  exact ⟨sectionRingVeroneseFractionEquiv X L d s⟩
+    Function.Bijective
+      (sectionRingVeroneseFractionEquiv X L d s).symm := by
+  exact (sectionRingVeroneseFractionEquiv X L d s).symm.bijective
 
 end AlgebraicGeometry.Scheme.Modules

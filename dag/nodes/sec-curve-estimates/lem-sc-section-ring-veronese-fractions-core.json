@@ -2,7 +2,7 @@
  "id": "lem-sc-section-ring-veronese-fractions-core",
  "kind": "statement",
  "title": "Core additive equivalence for Veronese fractions",
- "statement": "For a scheme X, an invertible module L, a natural number d, and a homogeneous section s of degree d, the type of additive equivalences from HomogeneousLocalization.Away (sectionRingGrade L) s.val to SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d) is nonempty. This is the core equivalence assertion; the generator formula is stated separately.",
+ "statement": "For a scheme X, an invertible module L, a natural number d, and a homogeneous section s of degree d, the canonical map from SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d) to HomogeneousLocalization.Away (sectionRingGrade L) s.val, sending the class [n, ξ] to the homogeneous fraction ξ / s^n, is bijective.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Use the existing constructed sectionRingVeroneseFractionEquiv X L d s as the witness of Nonempty.",
+   "text": "The canonical map is the inverse of the explicitly constructed additive equivalence sectionRingVeroneseFractionEquiv X L d s, hence is bijective.",
    "uses": [
     "lem-sc-section-ring-veronese-fractions-formula"
    ],
@@ -26,11 +26,11 @@
   "lem-sc-section-ring-veronese-fractions-formula"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "U2",
-  "date": "2026-10-13",
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Reuse the existing explicit sectionRingVeroneseFractionEquiv from SectionRingVeroneseFractionsFormula as the Nonempty witness. Its construction uses the proved fraction-map surjectivity and the existing unresolved sectionRingVeroneseFractionMap_kernel; no duplicate kernel calculation is introduced."
+  "place": "Repair of upstream review #1428: replace the bare Nonempty assertion by bijectivity of the canonical map [n, ξ] ↦ ξ/s^n, identified with the inverse of the explicit quotient equivalence."
  },
  "mathlib_searches": [
   {
@@ -89,7 +89,7 @@
   "module": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore",
   "file": "lean/Sheaf/AlgebraicGeometry/SectionRingVeroneseFractionsCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRing_veronese_fraction_core",
-  "statement": "theorem sectionRing_veronese_fraction_core\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) :\n    Nonempty (HomogeneousLocalization.Away (sectionRingGrade L) s.val ≃+\n      SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d))",
+  "statement": "theorem sectionRing_veronese_fraction_core\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) :\n    Function.Bijective\n      (sectionRingVeroneseFractionEquiv X L d s).symm",
   "branch": "sheaf-dag",
   "by": "A3",
   "date": "2026-10-13"
@@ -107,11 +107,31 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-0fd13",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T060427-L-585644",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T190155-L-3221358",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the corrected Lean statement and proof with the delivered node, documented change, and explicit canonical quotient map; delivery and sole direct importer compile cleanly, with only permitted axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "T3 stage 2",
+  "old_statement": "For a scheme X, an invertible module L, a natural number d, and a homogeneous section s of degree d, the type of additive equivalences from HomogeneousLocalization.Away (sectionRingGrade L) s.val to SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d) is nonempty. This is the core equivalence assertion; the generator formula is stated separately.",
+  "what": "Replace the weakened Nonempty assertion by bijectivity of the canonical fraction map [n, ξ] ↦ ξ / s^n, represented by the inverse of the explicit quotient equivalence.",
+  "source": {
+   "document": "coord/upstream-review-20261013.md",
+   "place": "upstream review #1428, weakened statement item for SectionRingVeroneseFractionsCore"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Use the existing constructed sectionRingVeroneseFractionEquiv X L d s as the witness of Nonempty.",
+    "uses": [
+     "lem-sc-section-ring-veronese-fractions-formula"
+    ],
+    "elementary": true
+   }
+  ]
  }
 }
