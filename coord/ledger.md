@@ -10793,3 +10793,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:52 L: returned deliver/V2/Sheaf.AlgebraicGeometry.FlatBaseChangeAffineTarget (reviewer RETURN: (the landing tools, head 8d389cc45) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 02:52 L: returned deliver/W2/Sheaf.RingTheory.KoszulConormalTopHomologyPos (reviewer RETURN: (the landing tools, head 49a3d3114) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 02:52 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonCore (stage 3; reviewer PASS; first push; landing 20261013T025256-L-3421140 (interface); batch 20261013T025255; modules 2; new nodes 1)
+- 02:52 L: merged deliver/A4/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (stage 3; reviewer PASS; after a return; landing 20261013T025257-L-3421247 (proof); batch 20261013T025255; modules 1; new nodes 0)

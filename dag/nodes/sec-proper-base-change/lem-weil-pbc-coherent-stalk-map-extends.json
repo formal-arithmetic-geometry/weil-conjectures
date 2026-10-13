@@ -35,11 +35,11 @@
  ],
  "proof": [
   {
-   "text": "Since $X$ is locally Noetherian and $\\mathcal G$ is coherent, $\\mathcal G$ is finitely presented as an $\\mathcal O_X$-module: by [pqf-lem-coherent-ft-locnoeth] it is of finite type, and by coherence [pqf-def-coherent], after shrinking around $x$ a finite set of generating sections gives a surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ whose kernel is of finite type. Shrink once more and choose finitely many sections generating that kernel. Their map $\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus n}$ has cokernel $\\mathcal G|_V$, exactly a finite presentation [def-weil-pbc-module-finite-type-presentation].",
+   "text": "The coherent source G is finite type directly by [pqf-def-coherent]. Choose finite local generating sections using IsFiniteType.exists_localGeneratorsData. Reindex each finite generator family by ULift (Fin n), so the coherence kernel clause applies. Invoke Scheme.Modules.isFinitePresentation_of_generators_kernel, the existing proved private helper of the module for [pqf-lem-coherent-ft-locnoeth], made available by a proof-only import all. It constructs finite local cokernel presentations from the finite generators and finite-type kernels [def-weil-pbc-module-finite-type-presentation]. Assemble these presentations using IsFinitePresentation.of_coversTop. This proves G.IsFinitePresentation without using local Noetherianity.",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
     "pqf-def-coherent",
-    "def-weil-pbc-module-finite-type-presentation"
+    "def-weil-pbc-module-finite-type-presentation",
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false,
    "source": {
@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-stalk-internal-hom-finite-presentation] to the finitely presented source $\\mathcal G$ (step 1) and target $\\mathcal F$. It gives an isomorphism $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)_x\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal G_x,\\mathcal F_x)$, so the given $\\psi$ has a preimage $h$ in the internal-Hom stalk. By [def-pur-sheaf-hom], the sections of internal Hom over an open $U$ are precisely the $\\mathcal O_U$-linear morphisms $\\mathcal G|_U\\to\\mathcal F|_U$, and the stalk is their germs [def-weil-pbc-module-stalk]. Thus $h$ has a representative $(U,\\varphi)$ for some open $x\\in U$, with $\\varphi:\\mathcal G|_U\\to\\mathcal F|_U$.",
+   "text": "Apply [lem-weil-pbc-stalk-internal-hom-finite-presentation] to G and F. Surjectivity of the supplied linear equivalence gives a preimage t of the linear map psi. Represent t by a germ of an internal-Hom section phi on U containing x, using Mathlib's TopCat.Presheaf.exists_germ_eq [def-weil-pbc-module-stalk]. By [def-pur-sheaf-hom], phi is a morphism on the over-site. Turn it into a morphism of restricted scheme modules by applying Scheme.Modules.overEquiv U, conjugated by overFunctorEquiv U.",
    "uses": [
     "lem-weil-pbc-stalk-internal-hom-finite-presentation",
     "def-pur-sheaf-hom",
@@ -61,9 +61,11 @@
    }
   },
   {
-   "text": "The canonical map of step 2 sends the germ represented by $(U,\\varphi)$ to $\\varphi_x$ [lem-weil-pbc-stalk-internal-hom-finite-presentation]. Since it sends $h$ to $\\psi$ by construction, $\\varphi_x=\\psi$. This $U$ and $\\varphi$ give the required extension.",
+   "text": "For m in G_x, represent its image under restrictStalkNatIso.inv by a section s on an open V of U. The hom formula germ_restrictStalkNatIso_hom_app and the inverse-hom identity show that the germ of s on the image open in X equals m. Evaluate the formula of [lem-weil-pbc-stalk-internal-hom-finite-presentation] at phi and s; since the germ of phi is t and e t = psi, its value is psi m. On the other hand, the germ formula for the stalk functor [def-pc-module-stalk-functor], followed by germ_restrictStalkNatIso_hom_app for F, gives exactly the same germ for the transported restricted morphism. Their equality proves the displayed pointwise conclusion.",
    "uses": [
-    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "def-pc-module-stalk-functor",
+    "def-weil-pbc-module-stalk"
    ],
    "elementary": true,
    "source": {
@@ -73,17 +75,18 @@
   }
  ],
  "proof_deps": [
-  "pqf-lem-coherent-ft-locnoeth",
   "pqf-def-coherent",
   "def-weil-pbc-module-finite-type-presentation",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-weil-pbc-stalk-internal-hom-finite-presentation",
   "def-pur-sheaf-hom",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407; uses Tag 01XZ and Modules Tag 01CP"
+  "place": "Cohomology of Schemes, Lemma Tag 01Y4, using the coherent-to-finite-presentation construction of Tag 01XZ and Modules Tag 01CP; Lean reconstruction by A4, 2026-10-13. Repair reuses Scheme.Modules.isFinitePresentation_of_generators_kernel through import all instead of duplicating its proof; the remaining argument uses explicit germ formulas."
  },
  "mathlib_searches": [
   {
@@ -162,5 +165,15 @@
   "group": "H1",
   "result": "fix",
   "note": "locnoeth instance; F,G X.Modules coherent via RingedSpace.IsCoherent; psi and phi_x switched to RingedSpace.moduleStalkFunctor (MODULE STALKS form, K1 ab9999373); U open with x in U; phi on restrictFunctor U.ι (J1 form); tied equation psi = restrictStalkNatIso.hom ∘ phi_x ∘ restrictStalkNatIso.inv elementwise; rfl-checked moduleStalkFunctor.map = Ab stalk map of mapPresheaf"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T025257-L-3421247",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
