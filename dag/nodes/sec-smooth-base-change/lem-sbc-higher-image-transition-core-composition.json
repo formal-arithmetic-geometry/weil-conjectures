@@ -18,26 +18,32 @@
  ],
  "proof": [
   {
-   "text": "use the derived transition composition identity at F[0], then apply homology.\nThe derived identity follows by applying the inverse h'' adjunction hom-set equivalence:\nnaturality moves the first transition inside b^*, the h' counit cancels the h' unit,\nand associativity of derived pullback comparisons identifies the remaining adjunct\nwith the one for b≫a. The two degree-zero comparisons compose to the ordinary pullback\ncomparison, as checked degreewise on the single complex and preserved by localization.\nThus homology gives precisely the displayed comparison. Identity morphisms give the\nunit law and zero sheaves give zero maps; no properness or degree bound is required.",
+   "text": "Prove derived-transition composition by the explicit adjunction hom-set calculation of lowerStarPlusTransition_comp, using derived pullback associativity. This calculation is reproduced as a proved private helper because importing LowerStarPlusTransitionComp would create an import cycle through HigherDirectImage.Transition and HigherDirectImageOverCoherence. Naturality of the unit, counit, and pullback comparison gives naturality of the second transition in the first single-complex comparison.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
     "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-sbc-lower-star-plus-transition-comp"
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use upperStarPlusComp_single for the two pullbacks on F[0]. A generic categorical calculation rewrites naturality of the second transition at the first single-complex comparison, then uses derived-transition composition and the coefficient identity. Postcompose with the direct ordinary pullback comparison to cancel its inverse. Apply degree-q homology, preserving both composites. The final proof compares the mapped equality with the unchanged target through heterogeneous congruence: proof irrelevance identifies auxiliary instance proofs, projection expansion identifies named accessor forms, and Functor.comp_obj identifies successive object applications. This avoids unfolding the large derived single-complex comparison during kernel conversion.",
+   "uses": [
+    "lem-sbc-pullback-single-comp"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-derived-inverse-image-adjunction",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-sbc-lower-star-plus-transition-comp"
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-sbc-pullback-single-comp",
+  "lem-weil-pbc-derived-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project and source library",
-  "place": "Canonical comparison of Tag 09Z1; explicit formal assembly from derived adjunction and pullback coherence"
+  "document": "Stacks Project, Tags 09Z1 and 03Q8; source library and Mathlib adjunction calculus",
+  "place": "Explicit adjunction calculation reproduced locally from LowerStarPlusTransitionComp and upperStarCompDerivedPlus_assoc; upperStarPlusComp_single; categorical cancellation followed by homology. Kernel-checked heterogeneous congruence transports between the two definitionally equal instance and object presentations. Complete-file local compilation passed (scratchpad/fourth-structural-direct7.log)."
  },
  "mathlib_searches": [
   {
@@ -105,13 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-c8d83",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T112837-L-766677",
+  "landing": "20261013T181122-L-2607011",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and direct importer compile successfully; target signature and DAG statement match baseline, with only permitted proof/interface metadata changes."
  }
 }
