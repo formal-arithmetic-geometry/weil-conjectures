@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-stalk-presentation",
+ "kind": "statement",
+ "title": "Compatible bounded stalk presentations of stabilized images",
+ "statement": "Let X be a Noetherian scheme, I a quasi-coherent ideal and alpha:F -> H a map of coherent formal modules [def-weil-pbc-coherent-formal-module]. Let c be a stabilization bound for images of ker(alpha_l) in F_m for l >= m+c. Let S be an inverse system with a natural transformation j:S -> F whose components identify S_m with these stabilized images. There is b such that, for every x in X and every germ-compatible identification of the unit stalk with O_(X,x), there is an O_(X,x)-module M and compatible surjective linear maps p_m:M -> (S_m)_x, satisfying ker p_(n+d) contained in J^(n+1) M for all n and all d >= max(c,b), where J is the stalk image of I [lem-weil-pbc-ideal-module-product-stalk]. Compatibility means (S_b -> S_a)_x p_b = p_a for every a <= b. No finite-generation assertion over O_(X,x) is made.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine calculation for claims (a)--(c); source read at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Restrict F, H and alpha to the members of a finite affine cover. The affine formal-module equivalence gives finite modules over the completed coordinate ring and a completed-linear map f, with level m the quotient modulo I^(m+1) and transitions the reductions.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed ring is Noetherian. Apply the reduced-kernel image bound to f. Choose l at least both m+c and m+a, where a is this algebraic bound. The stabilized image hypothesis hc and hS identify S_m with the image of L=ker(f) in M_source/I^(m+1)M_source, equivalently L/(L intersect I^(m+1)M_source). Naturality of j and its monicity identify all transitions with the reductions of this presentation.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "new-adic-kernel-image-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Artin--Rees to L inside the finite source module over the completed ring. Choose b_U with L intersect I^(r+b_U)M_source contained in I^r L. Take the maximum over the finite affine cover. For any x choose an affine member containing it, restrict scalars to its coordinate ring, and localize L at x. Exactness of localization gives the compatible surjective stalk presentations p_m and localizes the kernel containment. Scalar restriction identifies powers of the extended ideal with powers of the coordinate ideal. The ideal-product stalk theorem identifies their localization with J, independent of the germ-compatible unit-stalk isomorphism e. The empty cover has bound zero.",
+   "uses": [
+    "lem-weil-pbc-artin-rees",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "new-adic-kernel-image-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine calculation for claims (a)--(c); source read at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stabilized kernel image inverse system has compatible surjections from a module with kernels bounded by ideal powers",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stabilized kernel image inverse system has compatible surjections from a module with kernels bounded by ideal powers",
+   "results": "Eight completion and quotient lifting results, including AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, transitionMap, and Hausdorffification. None identifies stabilized sheaf kernel images.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*stalk.*presentation|stalk.*kernel.*bound|stalk.*image.*adic",
+   "results": "msearch returned zero matches. Direct rg on both library roots found the affine kernel-image comparison and the original exactness bound, no compatible stalk presentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 0GS2 essential-surjectivity route, coherent formal kernel construction; Stacks 087X claims (a)--(c), before computing transition exactness",
+   "via": [
+    "lem-weil-pbc-formal-kernel-quotient-transition-exact-bound",
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+    "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+    "lem-weil-pbc-formal-kernel-quotient-aux",
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-coherent-formal-module-kernel"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStalkPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelStalkPresentation.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_stalk_presentation",
+  "statement": "theorem coherentFormalModule_kernel_stalk_presentation\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ x : X,\n      ∀ e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n          (SheafOfModules.unit X.ringCatSheaf) ≅\n          ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),\n      (∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),\n        e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n          U x hx r) = X.presheaf.germ U x hx r) →\n      let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n      let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n      ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n        ∃ p : ∀ m : ℕ, M →ₗ[X.presheaf.stalk x] T.obj (S.obj (op m)),\n          (∀ m : ℕ, Function.Surjective (p m)) ∧\n          (∀ (a b : ℕ) (h : a ≤ b) (z : M),\n            (T.map (S.map (homOfLE h).op)).hom (p b z) = p a z) ∧\n          (∀ (d : ℕ), max c b ≤ d → ∀ n : ℕ,\n            LinearMap.ker (p (n + d)) ≤\n              J ^ (n + 1) • (⊤ : Submodule (X.presheaf.stalk x) M))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111945-L-3070995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111945-L-3070995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

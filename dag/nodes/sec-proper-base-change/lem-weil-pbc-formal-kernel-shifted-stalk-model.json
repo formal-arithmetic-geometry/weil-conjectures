@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-shifted-stalk-model",
+ "kind": "statement",
+ "title": "Shifted stabilized kernel stalks are compatible power quotients",
+ "statement": "Let X, I, F, H, alpha, c, S and j satisfy the stabilized kernel image hypotheses of [lem-weil-pbc-formal-kernel-stalk-presentation]. Let Q(d)_n = S_(n+d)/I^(n+1)S_(n+d), with the canonical transitions [lem-weil-pbc-formal-shifted-quotient]. There is b such that for d >= max(c,b), every point x and every germ-compatible unit-stalk identification give an O_(X,x)-module M and linear isomorphisms E_n:(Q(d)_n)_x -> M/J^(n+1)M for all n. For every z at level n+1, E_n((Q(d)_(n+1) -> Q(d)_n)_x(z)) is the canonical reduction of E_(n+1)(z). Here J is the image of the stalk inclusion of I under that identification [lem-weil-pbc-ideal-module-product-stalk].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine calculation for claims (a)--(c); source read at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-formal-kernel-stalk-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the compatible stalk presentation and keep its bound b. For d>=max(c,b), the stalk q_n of S_(n+d) -> Q_n is surjective with kernel J^(n+1) S_(n+d), by cokernel exactness on stalks and the ideal-product stalk formula. The germ-compatible unit-stalk isomorphism obtained by that formula agrees with the input e: check their maps on germs.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-stalk-presentation",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose q_n with p_(n+d). By Submodule.comap_smul_top_of_surjective its kernel is J^(n+1)M plus ker p_(n+d), hence just J^(n+1)M by the bound. Its surjectivity and the first isomorphism theorem produce E_n. For compatibility lift a section through this composite at n+1. Apply T to the defining cokernel equation for formalModuleQuotientMap and then use compatibility of p. Both quotient classes are represented by the same element of M.",
+   "uses": [
+    "lem-weil-pbc-formal-shifted-quotient"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-kernel-stalk-presentation",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine calculation for claims (a)--(c); source read at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stabilized kernel image inverse system has compatible surjections from a module with kernels bounded by ideal powers",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stabilized kernel image inverse system has compatible surjections from a module with kernels bounded by ideal powers",
+   "results": "Eight completion and quotient lifting results, including AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, transitionMap, and Hausdorffification. None identifies stabilized sheaf kernel images.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*stalk.*presentation|stalk.*kernel.*bound|stalk.*image.*adic",
+   "results": "msearch returned zero matches. Direct rg on both library roots found the affine kernel-image comparison and the original exactness bound, no compatible stalk presentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 0GS2 essential-surjectivity route, coherent formal kernel construction; Stacks 087X claims (a)--(c), before computing transition exactness",
+   "via": [
+    "lem-weil-pbc-formal-kernel-quotient-transition-exact-bound",
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+    "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+    "lem-weil-pbc-formal-kernel-quotient-aux",
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-coherent-formal-module-kernel"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelShiftedStalkModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelShiftedStalkModel.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_shifted_stalk_model",
+  "statement": "theorem coherentFormalModule_kernel_shifted_stalk_model\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ x : X,\n      ∀ e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n          (SheafOfModules.unit X.ringCatSheaf) ≅\n          ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),\n      (∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),\n        e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n          U x hx r) = X.presheaf.germ U x hx r) →\n      let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n      let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n      ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n        ∃ E : ∀ n : ℕ, T.obj ((formalShiftedQuotient I S d).obj (op n)) ≃ₗ[\n            X.presheaf.stalk x] (M ⧸ J ^ (n + 1) • (⊤ : Submodule _ M)),\n          ∀ (n : ℕ) (z : T.obj ((formalShiftedQuotient I S d).obj (op (n + 1)))),\n            E n ((T.map ((formalShiftedQuotient I S d).map\n              (homOfLE (Nat.le_succ n)).op)).hom z) =\n              Submodule.factorPow J M (Nat.le_succ (n + 1)) (E (n + 1) z)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111945-L-3070995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111945-L-3070995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
