@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.AffineHomComparisonGeneratorExistence
 
 /-! # Extending the affine Hom comparison from its global generators
 
@@ -73,6 +74,19 @@ noncomputable def affineHomSection {C : Type u} [Category.{u} C]
   (SheafOfModules.homObj (R := R) M N).unitHomEquiv.symm
     ((SheafOfModules.homObjSectionsEquiv M N).symm h)
 
+private theorem hom_ext_of_elements {A : Type u} [CommRing A]
+    {D : Type (u + 1)} [Category.{u} D]
+    (T : ModuleCat.{u} A ⥤ D) (S : D ⥤ ModuleCat.{u} A) (adj : T ⊣ S)
+    (H : ModuleCat.{u} A) (N : D) (f g : T.obj H ⟶ N)
+    (h : ∀ x : H, T.map (affineHomElement H x) ≫ f =
+      T.map (affineHomElement H x) ≫ g) : f = g := by
+  apply (adj.homEquiv H N).injective
+  ext x
+  have hx := congrArg (adj.homEquiv (ModuleCat.of A A) N) (h x)
+  rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_left] at hx
+  have hy := congrArg (fun k : ModuleCat.of A A ⟶ S.obj N ↦ k.hom 1) hx
+  simpa [affineHomElement] using hy
+
 /-- The images of global linear maps extend uniquely to the affine Hom comparison.
 Source: Stacks Project, Tag 01I7, the mapping property, and Tag 01HV (4)-(5).
 (blueprint: lem-sc-k4-affine-hom-generator-extension).
@@ -97,7 +111,33 @@ theorem existsUnique_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affin
         affineHomGenerator U (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) h ≫ c =
           affineHomSection (R := U.1.toScheme.toRingedSpace.sheaf)
             ((affineHomComparisonFunctor U).obj M) ((affineHomComparisonFunctor U).obj N)
-            ((affineHomComparisonFunctor U).map h) := by sorry
+            ((affineHomComparisonFunctor U).map h) := by
+  have hex : ∃ c :
+      (affineHomComparisonFunctor U).obj (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) ⟶
+        SheafOfModules.homObj (R := U.1.toScheme.toRingedSpace.sheaf)
+          ((affineHomComparisonFunctor U).obj M) ((affineHomComparisonFunctor U).obj N),
+      ∀ h : M ⟶ N,
+      affineHomGenerator U (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) h ≫ c =
+        affineHomSection (R := U.1.toScheme.toRingedSpace.sheaf)
+          ((affineHomComparisonFunctor U).obj M) ((affineHomComparisonFunctor U).obj N)
+          ((affineHomComparisonFunctor U).map h) := by
+    exact exists_affineHom_generator_extension U M N
+      (affineHomComparisonFunctor U) (affineHomComparisonUnitIso U) rfl HEq.rfl
+  obtain ⟨c, hc⟩ := hex
+  refine ⟨c, hc, ?_⟩
+  intro d hd
+  have hAdj : (affineHomComparisonFunctor U).IsLeftAdjoint := by
+    rw [affineHomComparisonFunctor_eq]
+    infer_instance
+  apply hom_ext_of_elements (affineHomComparisonFunctor U)
+    (affineHomComparisonFunctor U).rightAdjoint
+    (Adjunction.ofIsLeftAdjoint (affineHomComparisonFunctor U)) _ _ d c
+  intro x
+  have hx := hd x
+  have hx' := hc x
+  dsimp only [affineHomGenerator, comparisonGenerator] at hx hx'
+  apply (cancel_epi (affineHomComparisonUnitIso U).inv).mp
+  simpa only [Category.assoc] using hx.trans hx'.symm
 
 /-- The comparison uniquely determined by its values on global generators.
 The preceding unique-existence theorem determines this morphism up to equality;
@@ -129,19 +169,6 @@ theorem affineHomGenerator_map {Y : Scheme.{u}} (U : Y.affineOpens)
   congr 2
   ext
   simp [affineHomElement]
-
-private theorem hom_ext_of_elements {A : Type u} [CommRing A]
-    {D : Type (u + 1)} [Category.{u} D]
-    (T : ModuleCat.{u} A ⥤ D) (S : D ⥤ ModuleCat.{u} A) (adj : T ⊣ S)
-    (H : ModuleCat.{u} A) (N : D) (f g : T.obj H ⟶ N)
-    (h : ∀ x : H, T.map (affineHomElement H x) ≫ f =
-      T.map (affineHomElement H x) ≫ g) : f = g := by
-  apply (adj.homEquiv H N).injective
-  ext x
-  have hx := congrArg (adj.homEquiv (ModuleCat.of A A) N) (h x)
-  rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_left] at hx
-  have hy := congrArg (fun k : ModuleCat.of A A ⟶ S.obj N ↦ k.hom 1) hx
-  simpa [affineHomElement] using hy
 
 /-- Morphisms from an associated module are detected by its global generators.
 This follows from the tilde adjunction: adjoint maps are linear maps, and a
