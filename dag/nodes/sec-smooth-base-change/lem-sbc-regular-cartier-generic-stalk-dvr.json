@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-regular-cartier-generic-stalk-dvr",
+ "kind": "statement",
+ "title": "The generic ambient stalk of a regular integral Cartier divisor is a DVR",
+ "statement": "Let j:D -> X be an effective Cartier centre [def-nagata-effective-cartier-ideal], with D integral and eta a generic point of D. If O_{X,j(eta)} is regular local [def-weil-regular-scheme], then it is a domain and, equipped with this domain property, is a discrete valuation ring [def-sc-discrete-valuation-ring].",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-regular-scheme",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYG (generic divisor local calculation), 00NP (regular local domains), 00PD (principal nonzero maximal ideal criterion)."
+ },
+ "proof": [
+  {
+   "text": "Install integrality of D and regularity of the ambient stalk. The uniqueness of the generic point identifies eta with genericPoint D, so its stalk is the function field and is a field. The ambient regular local stalk is a domain by IsRegularLocalRing.isDomain.",
+   "uses": [
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Cartier centre is a closed immersion; its surjective stalk map to the field has kernel equal to the maximal ideal (IsLocalRing.ker_eq_maximalIdeal). Choose the Cartier affine neighbourhood U. By Scheme.Hom.ker_stalkMap the stalk-map kernel is the image of the Cartier ideal under the germ map. The affine germ map is a localization and hence flat; Ideal.IsRegularPrincipal.map_of_flat transports the nonzerodivisor generator to the stalk. This writes its maximal ideal as span(t) with t in the nonzerodivisors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stalk is nontrivial since it is local, so the nonzerodivisor generator is nonzero. Apply IsDiscreteValuationRing.of_maximalIdeal_eq_span_singleton to the Noetherian local domain and this principal maximal ideal. This supplies the DVR proof for the same stalk and the domain proof already established.",
+   "uses": [
+    "lem-sc-principal-ideal-dvr"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-principal-ideal-dvr",
+  "lem-sc-regular-local-domain"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "D3",
+  "document": "Stacks Project",
+  "place": "Tags 0EYG (generic divisor local calculation), 00NP (regular local domains), 00PD (principal nonzero maximal ideal criterion)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A regular local ring at the generic point of an integral effective Cartier divisor is a discrete valuation ring",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At the generic point of an integral effective Cartier divisor the regular ambient local ring is a discrete valuation ring",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, AlgebraicGeometry.Scheme.functionField, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, AlgebraicGeometry.functionField_isFractionRing_of_affine, AlgebraicGeometry.stalkFunctionFieldAlgebra",
+   "verdict": "No exact scheme-level theorem; use the recorded Mathlib or library lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*torsion|torsion.*normalization|ker_stalkMap",
+   "date": "2026-10-14",
+   "results": "2 hits: Mathlib/Algebra/GroupWithZero/Torsion.lean, Mathlib/Algebra/GroupWithZero/Torsion.lean",
+   "verdict": "No exact scheme-level theorem; use the recorded Mathlib or library lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkFlat",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-normalization-generic-stalk-flat",
+   "place": "The generic ambient stalk of a regular integral Cartier divisor is a DVR",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularCartierGenericStalkDvr.lean",
+  "declaration": "AlgebraicGeometry.Scheme.regular_cartier_generic_stalk_dvr",
+  "statement": "theorem regular_cartier_generic_stalk_dvr\n    {X D : Scheme.{u}} (j : D ⟶ X) (hD : IsIntegral D)\n    (hj : IsEffectiveCartierCenter j) (η : D) (hη : IsGenericPoint η Set.univ)\n    (hreg : IsRegularLocalRing (X.presheaf.stalk (j η))) :\n    ∃ hdom : IsDomain (X.presheaf.stalk (j η)),\n      letI := hdom\n      IsDiscreteValuationRing (X.presheaf.stalk (j η))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201743-L-3967115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201743-L-3967115",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

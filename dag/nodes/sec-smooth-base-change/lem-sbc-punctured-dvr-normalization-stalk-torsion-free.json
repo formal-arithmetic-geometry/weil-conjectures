@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-punctured-dvr-normalization-stalk-torsion-free",
+ "kind": "statement",
+ "title": "Torsion-free relative normalization stalks over punctured DVR stalks",
+ "statement": "Let X be locally Noetherian, U an open of X, and p:P -> U a finite etale morphism [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Set a=p composed with U -> X and take x in its concrete relative normalization [lem-weil-pbc-relative-normalization]. Suppose s=a.fromNormalization(x) is outside U and O_{X,s} is a domain and a DVR [def-sc-discrete-valuation-ring]. Then O_{a.normalization,x} is torsion-free as an O_{X,s}-module for the algebra structure induced by a.fromNormalization.stalkMap(x).",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0307 (integral closure commutes with localization), 035I (relative normalization), 0539 (subsequent torsion-free flatness criterion)."
+ },
+ "proof": [
+  {
+   "text": "Write R=O_{X,s} and K=Frac(R). Base change along Spec R -> X. Apply normalization-stalk-base-change with c the identity of X (the pullback of the identity is Spec R) to identify the relative normalization after this localization with the pullback of a.normalization. The inverse image of U is an open omitting the closed point of Spec R, hence is either empty or Spec K, since a DVR has only its zero and maximal primes.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If that open is empty, the pulled-back cover and its relative normalization are empty, so there is no point above x. Otherwise the pulled-back cover is finite etale over K and is affine with coordinate K-algebra B. The relative normalization over Spec R is Spec C, where C is the integral closure of R in B. The actual inclusion C -> B is injective; multiplication by any nonzero r of R is injective on B since r becomes a unit in K. It is therefore injective on C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Localization at a source prime is exact, so multiplication by every nonzero r remains injective on C_q. The corresponding point over x exists in the pullback because its image is s; the local ring there identifies with the original source stalk, since base-change to Spec O_{X,s} only inverts elements already units in that source stalk. These canonical affine and stalk identifications preserve the R-action and transport torsion-freeness to the displayed algebra structure. Empty covers are vacuous; disconnected finite etale K-algebras are allowed because only the K-module structure is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "D3",
+  "document": "Stacks Project",
+  "place": "Tags 0307 (integral closure commutes with localization), 035I (relative normalization), 0539 (subsequent torsion-free flatness criterion)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a finite etale cover of the punctured spectrum of a discrete valuation ring has torsion free stalks",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the relative normalization of a finite etale cover at a point over a DVR outside the covering open is torsion free over the DVR",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.functionField_isScalarTower, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt",
+   "verdict": "No exact scheme-level theorem; use the recorded Mathlib or library lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*torsion|torsion.*normalization|ker_stalkMap",
+   "date": "2026-10-14",
+   "results": "2 hits: Mathlib/Algebra/GroupWithZero/Torsion.lean, Mathlib/Algebra/GroupWithZero/Torsion.lean",
+   "verdict": "No exact scheme-level theorem; use the recorded Mathlib or library lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkFlat",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-normalization-generic-stalk-flat",
+   "place": "Torsion-free relative normalization stalks over punctured DVR stalks",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkTorsionFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedDvrNormalizationStalkTorsionFree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_dvr_normalization_stalk_torsionFree",
+  "statement": "theorem punctured_dvr_normalization_stalk_torsionFree\n    {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)\n    {P : Scheme.{u}} (p : P ⟶ U.toScheme) [IsFinite p] (hetale : Etale p)\n    (x : (p ≫ U.ι).normalization)\n    (hs : (p ≫ U.ι).fromNormalization x ∉ U)\n    [IsDomain (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))]\n    [IsDiscreteValuationRing (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))] :\n    letI := ((p ≫ U.ι).fromNormalization.stalkMap x).hom.toAlgebra\n    Module.IsTorsionFree (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))\n      ((p ≫ U.ι).normalization.presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201743-L-3967115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201743-L-3967115",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

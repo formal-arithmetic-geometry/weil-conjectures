@@ -17,34 +17,35 @@
  },
  "proof": [
   {
-   "text": "Monicity of X^n-g gives A a finite free H-basis. Injective multiplication by g remains injective on A, and t^n=g gives injective multiplication by t. Evaluation at t=0 induces A/(t) = H/(g), so (t) is prime. The principal ideal theorem gives height at most one; the nonzerodivisor excludes height zero. Hence (t) has height one. These are the polynomial and prime-ideal calculations in 0EYG.",
+   "text": "The support condition puts j(eta) outside D(g). Thus g lies in its prime. AdjoinRoot.eval2_root gives t^n=g, so prime ideal radicality puts t in the same prime. Apply the given localization regularity and transport it through StructureSheaf.stalkIso to obtain regularity of the ambient stalk at j(eta). No quotient computation or height calculation in the root algebra is required.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The equality t^n=g identifies the closed complement of V with V(t). The Cartier centre is a closed immersion. A generic point of its integral source maps to the generic point of its closed image. Thus j(eta) is (t). The regularity assumption at this prime makes A_(t) a one-dimensional regular local ring, hence a DVR.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Base change to the stalk at j(eta), using normalization-stalk-base-change with c the identity of N. Its punctured source is a finite etale algebra over the DVR fraction field. The affine relative normalization is the integral closure of the DVR in that algebra. It is a submodule of a vector space over the fraction field and thus torsion-free. Finiteness of a.fromNormalization makes this integral closure a finite module over the DVR. Apply finite torsion-free DVR modules are free. Its localizations at source primes remain flat, and canonical stalk identifications transport this flatness to every displayed stalk map.",
+   "text": "Apply regular-cartier-generic-stalk-dvr to the given integral Cartier centre and its generic point. This proves that the actual ambient stalk is a domain and a DVR. Transport both proof properties along the equality a.fromNormalization(x)=j(eta).",
    "uses": [
-    "lem-sbc-normalization-stalk-base-change",
-    "lem-sc-dvr-fg-torsionfree-free"
+    "lem-sbc-regular-cartier-generic-stalk-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The support condition and the image equality put the image of x outside V. Apply punctured-dvr-normalization-stalk-torsion-free to the cover p over V with the DVR stalk just obtained. Install the algebra structure of the normalization stalk map. Mathlib.RingTheory.Flat.TorsionFree supplies Module.Flat for a torsion-free module over a DVR (a Dedekind domain), which is definitionally RingHom.Flat of the required stalk map. No finite-free module theorem or finiteness of the normalization is used.",
+   "uses": [
+    "lem-sbc-punctured-dvr-normalization-stalk-torsion-free"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-normalization-stalk-base-change",
-  "lem-sc-dvr-fg-torsionfree-free"
+  "lem-sbc-regular-cartier-generic-stalk-dvr",
+  "lem-sbc-punctured-dvr-normalization-stalk-torsion-free"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "N1",
-  "document": "Stacks Project",
-  "place": "Tags 0EYG (height-one root-divisor calculation), 0307 (localization of integral closure), 0539 and 0AUW (torsion-free DVR modules are flat/free)."
+  "group": "D3",
+  "document": "Stacks Project; Mathlib and WeilConjectures",
+  "place": "Tags 0EYG, 00NP, 00PD, 0307, 035I, 0539; Cartier stalk kernel and principal maximal ideal criterion; Mathlib torsion-free DVR flatness."
  },
  "mathlib_searches": [
   {
@@ -112,9 +113,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T190147-L-3218544",
+  "landing": "20261013T201743-L-3967115",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
