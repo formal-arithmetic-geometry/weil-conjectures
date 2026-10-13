@@ -242,8 +242,8 @@ of the completion map of `j'_!((Lg'^* K)^)`, the inverse of the completion of `j
 completion map of `Lg'^* K` (an isomorphism by
 `AlgebraicGeometry.ProEtale.isIso_completion_map_map_completionUnit_app`), and the completion of
 the base change isomorphism `Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*`
-(`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`). Its inverse, on
-derived complete objects, is the comparison `Lg^*_comp j_! K ⟶ j'_! Lg_U^*_comp K` of blueprint
+(`AlgebraicGeometry.ProEtale.leftDerivedOpenImmersionLowerShriekBaseChangeIso`). Its inverse,
+on derived complete objects, is the comparison `Lg^*_comp j_! K ⟶ j'_! Lg_U^*_comp K` of blueprint
 `lem-cbc-completed-extension-zero-comparison`. -/
 noncomputable def completedOpenImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :
     completedUpperStar I hI g' ⋙
@@ -256,7 +256,7 @@ noncomputable def completedOpenImmersionLowerShriekBaseChangeMap (hsq : IsPullba
         D((j')_!open[ModuleCat.{u + 1} R])) (completionUnit I hI Z') ≫
     inv (completionMapOpenImmersionLowerShriek I hI (g' := g') (j' := j')) ≫
     Functor.whiskerRight
-      (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} R) hsq).hom
+      (leftDerivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} R) hsq).hom
       (completion I hI Z')
 
 /-- Blueprint `lem-cbc-completed-extension-zero-comparison`: Completed extension-by-zero base
