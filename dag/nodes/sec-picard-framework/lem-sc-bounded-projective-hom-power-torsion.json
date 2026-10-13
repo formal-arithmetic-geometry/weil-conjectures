@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-bounded-projective-hom-power-torsion",
+ "kind": "statement",
+ "title": "Power torsion of Hom from bounded finite-projective complexes",
+ "statement": "Let A be a commutative ring and D(A) its derived category [def-weil-abstract-derived-category]. Let r be in A and P be a cochain complex of A-modules with bounds a,b such that P^i is zero outside [a,b]; assume every P^i is finite and projective. Let M be any object of D(A), and suppose every element m of every H^i(M) is killed by some power of r. Then for every morphism alpha:Q(P) to M there is n>=0 such that r^n times alpha is zero. No boundedness or finiteness assumption is imposed on M, and no scheme or support comparison enters this lemma.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EJ, affine paragraph (canonical text checked at https://stacks.math.columbia.edu/tag/08EJ)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the length of a finite interval supporting P. The empty interval has P=0, so every morphism is zero. For a single finite projective term in degree t, projectivity identifies Hom_D(A)(P[-t],M) with Hom_A(P,H^t(M)). Take a finite generating set of P; for the image of each generator choose an annihilating exponent from the assumed elementwise torsion. The maximum exponent kills all images, and linearity kills the whole module map and therefore the derived morphism. The empty generating set needs exponent zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a longer interval, use the stupid-truncation distinguished triangle P^b[-b] to P to sigma_le_(b-1)P. Restrict alpha to the first term and use the single-term case to kill it by r^a. The exact Hom sequence then lifts r^a alpha from the shorter truncation. Apply induction to that lift with exponent bprime. Composition is A-linear, hence r^bprime r^a alpha=0. Combine the powers with exponent a+bprime. This also works if an endpoint term is zero, and for r=0, a unit r, or the zero ring.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "note": "Stage-3 decomposition of the Stacks 08EJ affine proof; explicit model comparison and ring Hom induction are independent remaining tasks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from bounded finite projective complex to complex with power torsion cohomology killed by a power",
+   "results": "Service unavailable: Internal Server Error; other search kinds and source grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism from bounded finite projective complex to complex with f power torsion cohomology killed by a power of f",
+   "results": "Projective single-functor vanishing and K-projectivity lemmas found, but no elementwise-power-torsion Hom result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Module.Finite, Module.Projective",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*torsion|torsion.*projective|support.*affine.*model",
+   "results": "Four unrelated hits; source-library derived-category search found no power-torsion Hom theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived morphisms out of a compact perfect complex commute with localization at a ring element",
+   "results": "Second reading: fraction representations and mapDerivedCategoryFactors; no replacement for either split theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, IsLocalizedModule",
+   "results": "Second reading: Module.Finite.exists_smul_of_comp_eq_of_isLocalizedModule can support the single-module case, but does not give derived Hom torsion or affine comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalizedModule.*[Hh]om|[Hh]om.*isLocalizedModule|[Pp]rojective.*[Tt]orsion",
+   "results": "Second reading: tilde localization and local projectivity lemmas, no duplicate. Independent rg over lean/Sheaf and lean/WeilConjectures for power_torsion and torsion Hom found no replacement; the global supported-map theorem imports this item and would be circular.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSupportAffineOpenTorsion",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, affine power-annihilation argument; affine paragraph: stupid-truncation induction and finite-projective single-term case",
+   "via": [
+    "lem-sc-perfect-support-affine-open-torsion",
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerTorsion",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/BoundedProjectiveHomPowerTorsion.lean",
+  "declaration": "DerivedCategory.bounded_projective_hom_power_torsion",
+  "statement": "theorem bounded_projective_hom_power_torsion\n    (A : Type u) [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    (r : A) (P : CochainComplex (ModuleCat.{u} A) ℤ)\n    (hb : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i))\n    (hf : ∀ i : ℤ, Module.Finite A (P.X i))\n    (hp : ∀ i : ℤ, Module.Projective A (P.X i))\n    (M : DerivedCategory (ModuleCat.{u} A))\n    (hM : ∀ (i : ℤ) (m : (homologyFunctor (ModuleCat.{u} A) i).obj M),\n      ∃ n : ℕ, r ^ n • m = 0)\n    (α : Q.obj P ⟶ M) :\n    ∃ n : ℕ, r ^ n • α = 0",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T082426-L-1652309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T082426-L-1652309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
