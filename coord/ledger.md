@@ -13147,3 +13147,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 00:31 L: batch 20261013T162406 dependency take-out
 - 16:35 L: merged deliver/B3/Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormula (stage 3; reviewer PASS; first push; landing 20261013T163533-L-1619350 (interface); batch 20261013T163531; modules 3; new nodes 2)
+- 16:35 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AffinePullbackSectionsUnitUncancelled (stage 3; reviewer PASS; first push; landing 20261013T163533-L-1619454 (proof); batch 20261013T163531; modules 1; new nodes 0)
