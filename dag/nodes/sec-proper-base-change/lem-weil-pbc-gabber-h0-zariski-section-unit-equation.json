@@ -9,7 +9,7 @@
  },
  "proof": [
   {
-   "text": "With f, B, p, b and a as in the Lean docstring, prove a.inv composed with p.hom equals B.map b.inv by forgetting to schemes, comparing both pullback projections and using that the top-open inclusion is an isomorphism. Contravariant functoriality of the iterated pullback sheaf gives K.map a.inv.op after K.map p.hom.op equal to K.map (B.map b.inv).op.",
+   "text": "Put j = pullback.snd i h, B = base change along j, H = h*F, K = j*H, and a equal to the first etale-object isomorphism in gabberZariskiSectionIso. Both a.inv followed by gabberPreimageEtaleIso j top.hom and B.map (gabberTopPullbackIso h).inv are morphisms over pullback i h into the pullback of the top-open inclusion of Xprime. That inclusion is an isomorphism, so its base-change second projection is an isomorphism and in particular a monomorphism. Forget to schemes, cancel this projection, and use the defining over-morphism equations to prove the maps equal. Apply K.obj.map to their opposites and evaluate on the unit section; contravariant functoriality gives the composite of the two restrictions.",
    "uses": [
     "def-weil-pbc-gabber-h0-zariski-constructions",
     "def-pc-fibre-product"
@@ -17,7 +17,7 @@
    "elementary": false
   },
   {
-   "text": "Evaluate that equality on the étale unit at the top-open object. Unit naturality at b.inv identifies the result with the unit at the identity-pullback object applied to lift(s). Expand the remaining factors of the constructed section isomorphism: they are the same chosen sheaf composition component, pullbackComp restriction, and pullback.condition.symm transport as in etaleSetDescentComparison. Function extensionality gives the equality. Empty schemes satisfy the same categorical equalities.",
+   "text": "Apply clause (0), site-object naturality, of etaleSetInverseImageCompositionUnits to (gabberTopPullbackIso h).inv and the section s. Its equality and the first step identify the two inner section expressions. Group the remaining three factors into an isomorphism e: the same chosen sheaf composition component, restriction along pullbackComp, and transport along pullback.condition.symm. Expand the section comparison on the left by focused conversion, rewrite the inner expression by unit naturality, and expand e. Expand etaleSetDescentComparison and gabberZariskiLift on the right. Evaluation of composed Type-valued isomorphisms and of the sheafToPresheaf image identifies the factors. Congruence and simplification of sheafToPresheaf object projections and functor composition close the remaining definitional equalities. Function extensionality proves the stated equation, without closedness or finiteness assumptions and also for empty schemes.",
    "uses": [
     "def-weil-pbc-gabber-h0-zariski-constructions",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
@@ -32,11 +32,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X2",
+  "group": "T3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09ZF, pullback-functoriality paragraph and fourth proof paragraph",
-  "note": "Expanded categorical computation of the compatibility left to the reader in the source; checked independently by the second reader."
+  "note": "Complete Lean proof by cancellation of the isomorphic top-open pullback projection, unit naturality, and explicit evaluation of the constructed comparison. The unit route is unchanged."
  },
  "status": "split",
  "created": {
@@ -145,13 +145,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T212212-L-1098610",
-  "kind": "interface",
+  "landing": "20261013T100136-L-2489823",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
