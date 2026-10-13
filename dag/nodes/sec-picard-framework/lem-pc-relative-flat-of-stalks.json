@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-relative-flat-of-stalks",
+ "kind": "statement",
+ "title": "Relative flatness from stalks",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and $G$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Suppose for every $x\\in X$ the stalk $G_x$ [def-pc-module-stalk-functor], with scalar action through $f^\\sharp_x$, is flat over $\\mathcal O_{S,f(x)}$. Then $G$ satisfies the affine-section relative-flatness condition [def-pc-scheme-module-flat-over].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-stalk-functor",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01U4",
+  "place": "Morphisms, lemma-flat-module, implication (1) to (2); Algebra Tag 00HT, local criterion for flatness"
+ },
+ "proof": [
+  {
+   "text": "Fix affine V and U with U contained in f inverse V. Let R=O(V), A=O(U), N=G(U), restricting N along f.appLE. For each maximal ideal q of A, choose x using isoSpec.inv; isoSpec.inv_hom_id identifies its primeIdealOf with q. The source stalk is the localization of A at q. Rewrite the equal-open identity appLE to the identity map and obtain E: O_x tensor_A N is O_x-linearly equivalent to G_x from affine_sections_stalk_tensor_presentation. Restrict E to A and compose with m -> 1 tensor m. IsLocalizedModule.of_linearEquiv transports the canonical localization map of the tensor product, giving the localization data required by flat_of_isLocalized_maximal.",
+   "uses": [
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each maximal q, put B=O_S(f(x)). The hypothesis makes G_x B-flat. The base affine stalk localization makes B R-flat. The formula f.germ_stalkMap_apply followed by germ_res_apply proves that the R-action via R -> A -> O_x agrees with restriction along R -> B -> O_x. This gives IsScalarTower R B G_x explicitly. Module.Flat.trans now makes G_x R-flat.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Module.flat_of_isLocalized_maximal with R, A, N, the stalk modules at the points of maximal ideals, and the constructed localization maps. This gives the required R-flatness of N for the affine-pair test. Repeat for every V,U. Empty affine opens have no maximal ideals and zero sections, included in the local criterion.",
+   "uses": [
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "document": "https://stacks.math.columbia.edu/tag/01U4",
+  "place": "Tag 01U4 implication (1) to (2); Lean proof using the existing affine stalk tensor presentation and Mathlib flat_of_isLocalized_maximal, with explicit scalar-action compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-coherent sheaf flat stalks implies flat modules of sections over affine base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a quasi-coherent sheaf over the base is preserved by arbitrary scheme base change",
+   "results": "Hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, RingHom.FaithfullyFlat.isStableUnderBaseChange, Module.Flat.iff_flat_tensorProduct, AlgebraicGeometry.Flat.comp. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOver|flat.*stalk|stalk.*flat",
+   "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/LocallyFree.lean. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0A1H affine reduction: preservation of relative flatness on restricting the tensor data; Relative flatness from stalks",
+   "via": [
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-pc-proper-support-local-noetherian-model",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatOfStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatOfStalks.lean",
+  "declaration": "AlgebraicGeometry.relative_flat_of_stalks",
+  "statement": "theorem relative_flat_of_stalks {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) [G.IsQuasicoherent]\n    (h : ∀ x : X, Module.Flat (S.presheaf.stalk (f x))\n      ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G))) :\n    G.IsFlatOver f",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T082400-L-1642127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T082400-L-1642127",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
