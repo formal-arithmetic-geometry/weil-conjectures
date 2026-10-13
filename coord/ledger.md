@@ -11420,3 +11420,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification (stage 3; reviewer PASS; first push; landing 20261013T062532-L-736046 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/U1/Sheaf.RingTheory.FibreDimensionLocalizedBound (stage 3; reviewer PASS; after a return; landing 20261013T062533-L-736221 (proof); batch 20261013T062512; modules 1; new nodes 0)
 - 06:25 L: merged deliver/U3/Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoClosedFiberFlat (stage 3; reviewer PASS; first push; landing 20261013T062533-L-736380 (interface); batch 20261013T062512; modules 3; new nodes 2)
+- 06:25 L: merged deliver/V2/Sheaf.AlgebraicGeometry.EtaleTensorSectionsCokernelExact (stage 3; reviewer PASS; first push; landing 20261013T062534-L-736575 (proof); batch 20261013T062512; modules 1; new nodes 0)
