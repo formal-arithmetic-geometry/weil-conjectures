@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-local-tensor-quotient-component-map",
+ "kind": "statement",
+ "title": "Injective component map for tensor quotients",
+ "statement": "For a Noetherian finite algebra S over R, a prime p of R, and n>0, the quotient tensor product (R_p/m^n) tensor_R S admits an injective R-linear map to the product over primes q over p of the corresponding localized quotients, carrying pure tensors to localized products.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, quotient-product argument"
+ },
+ "proof": [
+  {
+   "text": "Use the Artinian product decomposition of the finite quotient algebra and localization at its maximal ideals; the resulting product map is injective and has the stated pure-tensor formula.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, quotient-product argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective linear map from tensor quotient over localization to product of local quotient rings",
+   "results": "Found related localization and tensor injectivity lemmas, but no theorem matching the finite Artinian product decomposition or the stated pure-tensor formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective TensorProduct Ideal.Quotient Localization",
+   "results": "No exact match; search parser returned an application-type diagnostic while checking the query.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotIdealMapEquivTensorQuot|PrimeSpectrum.toPiLocalization_injective",
+   "results": "Found quotient-tensor equivalence and localization injectivity ingredients, but no theorem combining them into this component map.",
+   "date": "2026-10-13",
+   "verdict": "partial ingredients only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LocalTensorQuotientBaseIdealDetection",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-local-tensor-quotient-base-ideal-detection",
+   "place": "intermediate Artinian product decomposition"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalTensorQuotientComponentMap",
+  "file": "lean/Sheaf/RingTheory/LocalTensorQuotientComponentMap.lean",
+  "declaration": "AdicCompletion.tensor_quotient_component_map",
+  "statement": "theorem tensor_quotient_component_map (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] (n : ℕ) (hn : 0 < n) : let A := Localization.AtPrime p let m := IsLocalRing.maximalIdeal A ∃ φ : ((Localization.AtPrime p ⧸ (m ^ n)) ⊗[R] S) →ₗ[R] (∀ q : p.primesOver S, (Localization.AtPrime q.1 ⧸ (m ^ n).map (Localization.localRingHom p q.1 (algebraMap R S) (Ideal.LiesOver.over (P := q.1) (p := p))))) , Function.Injective φ ∧ ∀ (r : A) (s : S) (q : p.primesOver S), φ ((Ideal.Quotient.mk (m ^ n) r) ⊗ₜ[R] s) q = Ideal.Quotient.mk ((m ^ n).map (Localization.localRingHom p q.1 (algebraMap R S) (Ideal.LiesOver.over (P := q.1) (p := p)))) (Localization.localRingHom p q.1 (algebraMap R S) (Ideal.LiesOver.over (P := q.1) (p := p)) r * algebraMap S (Localization.AtPrime q.1) s)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T000423-L-2252192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T000423-L-2252192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
