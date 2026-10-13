@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-proj-chart-restriction-is-localized",
+ "kind": "statement",
+ "title": "Restriction from a principal chart is localized",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, let $M$ be an $S$-module, and set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$. Put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], $N_f=M_a$, and let $Z_f\\subseteq N_f$ be $R_f$-submodules, where the scalar action on $N_f$ is restricted from $S_a$. For each inclusion $D_g\\subseteq D_f$, suppose ring maps $\\rho^S_{f,g}:R_f\\to R_g$ and additive maps $\\rho_{f,g}:Z_f\\to Z_g$ are given. Let $U_{f,g}\\in R_f$ have image $g^{\\deg f}/f^{\\deg g}$ in $S_f$. Suppose additive equivalences $\\theta_{f,g}:(Z_f)_{U_{f,g}}\\cong Z_g$ and ring equivalences $\\theta^S_{f,g}:(R_f)_{U_{f,g}}\\cong R_g$ are given for all these inclusions, with $\\theta_{f,g}(q/1)=\\rho_{f,g}(q)$, $\\theta^S_{f,g}(r/1)=\\rho^S_{f,g}(r)$ and $\\theta_{f,g}(tq)=\\theta^S_{f,g}(t)\\theta_{f,g}(q)$. Assume every $\\rho^S_{f,g}$ is induced by an $S$-algebra map $S_f\\to S_g$. Let $F$ be an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category] with additive equivalences $\\alpha_f:F(D_f)\\cong Z_f$, compatible with scalar multiplication via awayToSection and with restriction via $\\rho$. Fix f and r in R_f. Put E=F restricted to D_f and V=e inverse D(r), with e the canonical affine chart isomorphism. Let k:R_f to O_Df(V) send x to the restriction to V of its pulled-back constant. Let b:E(top) to Z_f be alpha_f composed with restrictAppIso and the identification of the image of the terminal chart open with D_f. Give E(V) its R_f-module structure along k. Every R_f-linear map l:Z_f to E(V) satisfying l(q)=(b inverse(q)) restricted to V has the three localization properties at powers of r: each power of r acts invertibly on E(V), every section has a power-of-r multiple in the image of l, and equality of two l-images is killed by a power of r.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01M4 (1)(e),(h), 01M7 and 01MB, last paragraph; read on https://stacks.math.columbia.edu/tag/01M4, /01M7 and /01MB"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "def-weil-pbc-module-localization-away",
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Write r as a homogeneous fraction and choose the positive-degree chart g=f*a. The chart-intersection formula identifies the inverse image with D_+(g), and hU identifies the transition element with a positive power of r.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An S-algebra map out of S_f sends a/f^n to the image of a times the inverse of the image of f^n, so hcanonical identifies rhoS with actual section restriction, using injectivity of the homogeneous inclusion. Let beta:E(V) to Z_g be restrictAppIso followed by transport of the image open and alpha_g. Naturality and hrestriction give beta(l(q))=rho(q), and hscalar gives beta(k(x) smul s)=rhoS(x) smul beta(s). Thus psi=theta inverse composed with beta is R_f-linear and psi(l(q))=q/1 by htheta. The standard localized module has invertible U-action; writing psi(s)=q/U^j gives U^j smul s=l(q), and equality of q1/1 and q2/1 gives a power U^j killing their difference. These are the three localization conditions transported through psi.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Put d=deg(f)>0 and U=r^d. The denominators and equality witnesses from step 2 already are powers r^(d*j). If A is multiplication by r and B inverts A^d, then A commutes with B and A^(d-1)*B inverts A, hence all powers of r act invertibly. This is also IsLocalizedModule.of_exists_mul_mem for powers(r^d) contained in powers(r). If r=0 the open is empty and E(V) is zero; for unit r it is the whole chart. Empty charts and zero modules are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "Y2 stage-3 worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01M4, 01M7 and 01MB",
+  "note": "Transport argument of the existing node, using the cited source chart-localization formulas; its algebraic assembly is now proved in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a sheaf of modules on a homogeneous projective chart is a localization map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of sections of a sheaf of modules on principal opens of Proj",
+   "date": "2026-10-13",
+   "results": "Proj.awayToSection; ModuleCat.Tilde.const; projective structure sheaf declarations. No arbitrary module restriction localization theorem.",
+   "verdict": "No exact result; use the geometric argument from the source."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule; restrictAppIso; of_exists_mul_mem; principalOpen_chart",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Module/LocalizedModule/Basic.lean has the localization predicate, iso, and cofinal-submonoid transfer. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean has restrictAppIso and scalar naturality. The existing principalOpen_chart proof is private in ProjGradedModuleChartBasisComparisonFixedGenerators.lean.",
+   "verdict": "No exact public theorem for these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule",
+   "date": "2026-10-13",
+   "results": "Second reader: localizedModuleIsLocalizedModule, of_linearEquiv and localization iso give the algebraic universal property, but not the chart restriction identification.",
+   "verdict": "No duplicate of the geometric intermediate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules with localized transition maps on projective standard opens has localized sections on every distinguished affine open",
+   "date": "2026-10-13",
+   "results": "Second reader: projective structure sheaf fractions, affine structure-ring localization, tilde local fractions and AffineZariskiSite.PreservesLocalization.",
+   "verdict": "No exact theorem for F and the given chart transition data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartPrincipalLocalization",
+  "group": "Y2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-core",
+   "place": "Principal-open identification of the given sheaf: restriction localization universal property",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-chart-principal-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjChartRestrictionIsLocalized",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjChartRestrictionIsLocalized.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_restriction_isLocalized",
+  "statement": "theorem gradedModuleChart_restriction_isLocalized\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (U : ∀ (f g : Fidx), R[f])\n    (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)\n      (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))\n    (theta : ∀ (f g : Fidx), D[g] ≤ D[f] →\n      LocalizedModule.Away (U f g) (Z f) ≃+ Z g)\n    (thetaS : ∀ (f g : Fidx), D[g] ≤ D[f] → Localization.Away (U f g) ≃+* R[g])\n    (htheta : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      (∀ r : R[f], thetaS f g i (algebraMap R[f] (Localization.Away (U f g)) r) =\n        rhoS f g i r) ∧\n      (∀ q : Z f, theta f g i (mk q 1) = rho f g i q) ∧\n      (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)),\n        theta f g i (r • q) = thetaS f g i r • theta f g i q))\n    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,\n        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =\n          algebraMap S (Localization.Away g.val.1) a) ∧\n        ∀ r : R[f], (rhoS f g i r).val = l r.val)\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hscalar : ∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n      alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s)\n    (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f])\n      (s : F.val.obj (op D[f])),\n      alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s))\n    (f : Fidx) (r : R[f]) :\n    let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1\n    let E := Scheme.Modules.restrict F D[f].ι\n    let V := e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r\n    let k := (e.hom.appLE ⊤ V (by simp)).hom.comp\n      (Scheme.ΓSpecIso (CommRingCat.of R[f])).inv.hom\n    let b := ((F.restrictAppIso D[f].ι ⊤) ≪≫\n      F.presheaf.mapIso (eqToIso D[f].ι_image_top.symm).op).addCommGroupIsoToAddEquiv.trans\n        (alpha f)\n    letI : Module R[f] (E.val.obj (op V)) := Module.compHom (E.val.obj (op V)) k\n    ∀ l : Z f →ₗ[R[f]] E.val.obj (op V),\n      (∀ q : Z f, l q = E.val.map V.leTop.op (b.symm q)) →\n      IsLocalizedModule (Submonoid.powers r) l",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100227-L-2504901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100227-L-2504901",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,31 +16,31 @@
  ],
  "proof": [
   {
-   "text": "For r=a/f^n choose g=f*a of degree (n+1)*deg(f)>0. The chart intersection formula and U f g=r^deg(f) identify the image of e inverse D(r) with D_+(g). The localization at r^deg(f) equals that at r, since deg(f)>0. This remains valid for r=0.",
-   "uses": [
-    "lem-weil-pbc-proj-basic-open-intersection"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify whole-chart sections with Z f via restrictionAppIso and alpha f. On the principal open transport alpha g through theta inverse and the r-power localization identification. hrestriction and htheta show that whole-chart restrictions map to b(s)/1.",
+   "text": "Construct b explicitly from restrictAppIso, transport along the terminal-image equality, and alpha_f. Use basicOpenToSpec_app_top, scalar naturality of restriction, and hscalar to make the canonical restriction map l R_f-linear.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For any fraction a/f^n, an S-algebra map out of S_f sends it to a times the inverse of f^n. Thus hcanonical fixes rhoS uniquely and it agrees with structure-sheaf restriction under the chart identifications. For a fraction x/r^k in the chart section ring, the specified ring equivalence t must send it to (x/1)/(r/1)^k. Transporting alpha g through theta inverse then gives c(x*s)=t(x)*c(s) directly from hscalar and htheta. The ring and module identifications used here are those constructed in steps 1 and 2; no new geometric assertion is used.",
+   "text": "Apply the restriction localization universal property to l. Construct c as the inverse of IsLocalizedModule.iso, and prove restriction normalization by iso_symm_apply.",
+   "uses": [
+    "lem-weil-pbc-proj-chart-restriction-is-localized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip the section ring with its chart R_f-algebra structure. The prescribed ring equivalence t is an R_f-algebra equivalence by its constant normalization, hence the section ring is a localization at powers of r. Give the target localized module its section-ring action via t. The inverse localization comparison is R_f-linear; linearMap_compatibleSMul extends its linearity to the section ring, proving the scalar formula.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-basic-open-intersection"
+  "lem-weil-pbc-proj-chart-restriction-is-localized"
  ],
  "proof_origin": {
-  "by": "E2 stage-3 worker",
+  "by": "Y2 stage-3 worker",
   "document": "literature/stacks-project/constructions.tex",
   "place": "Tags 01M4 (lemma-standard-open) (1)(e),(h), 01M7 (lemma-sheaves) and 01MB (lemma-proj-scheme), last paragraph; read via the Stacks website",
-  "note": "Formalized the localization and transport steps of the fixed-core proof."
+  "note": "Explicit chart equivalence, linear restriction map, localization inverse, and extension of scalars; the geometric localization property is split into a separate item."
  },
  "mathlib_searches": [
   {
@@ -116,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T040744-L-3947704",
+  "landing": "20261013T100227-L-2504901",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
