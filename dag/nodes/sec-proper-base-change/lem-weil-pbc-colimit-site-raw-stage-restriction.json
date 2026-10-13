@@ -14,20 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Choose a common stage k receiving i and j, with arrows a and b. For t in Under k define D(t) by pulling G along a followed by t.hom and pushing it to stage j along b followed by t.hom. Continuity makes this a sheaf on stage j. Use the adjunction transpose of the unit for each transition; adjunction uniqueness proves identity and composition. The componentwise unit condition htheta identifies this transition with the supplied theta after the functor composition isomorphisms. Under k is filtered by the dual of the cofiltered-over-category assertion.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula and adjunction paragraph; read at https://stacks.math.columbia.edu/tag/0A35"
-   }
-  },
-  {
-   "text": "For each object U of stage j, compose the Kan unit beta at the image of U with the outer colimit coprojection, transporting the target along the cocone equality to V(j)(U). Naturality of beta and hbeta_map make this a compatible cocone in t, natural in U. This defines a comparison from the presheaf colimit of the underlying D to the raw presheaf restricted along V(j).",
+   "text": "Use adjunction hom-equivalence injectivity and htheta to prove the identity and composition equations of theta, with the functor equality transports. Choose k,a,b by IsFilteredOrEmpty.cocone_objs. For t in Under k define R(t) by pushforward along b≫t.hom of the inverse-image sheaf along a≫t.hom. Whisker theta along this stage-j functor and transport along F.map_comp and Under.w to define its transitions. The proved theta identity and composition equations give a functor D. The required object isomorphisms are Iso.refl. The private postcomposition helper is generalized to functors between arbitrary categories: after substituting the equal indexing objects, Arrow.mk_injective gives equality of the arrows, hence equality after postcomposition.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-sites-and-cohomology"
@@ -39,12 +26,22 @@
    }
   },
   {
-   "text": "Compute each raw B value by its pointwise Kan presentation. A generator is a stage section and an arrow from V(j)(U) to a stage image. Represent the arrow in the given arrow-set colimit. Refine to equate both endpoints with the desired object representatives using the given object-set colimit; take a common stage receiving k and the generator stage, and equalize arrows out of k. Restrict the transported section along this lifted arrow. The resulting D representative maps to the original generator, proving surjectivity. For injectivity, an equality is a finite chain of Kan and outer-colimit relations. Lift its finitely many arrows and equations to a single later stage by the same set-colimit equality criterion. Naturality and hbeta_map identify every relation there with restriction or transition in D; consequently the two D classes agree. These pointwise bijections are natural, hence are a presheaf isomorphism. The stated object isomorphisms hold by construction of D.",
+   "text": "Define z(t) by beta(t) followed by the B coprojection. Restrict z(Under.map(a)(t)) along F(b≫t.hom), transporting its target using V.w, to define n(t). Postcompose hbeta_map with the outer coprojection, use colimit.w, and cancel endpoint transports in Arrow(Set). This proves D-transition compatibility and constructs a presheaf cocone nu with vertex V(j)^op⋆colimit B. Its canonical object comparison isos are identities; its transition and unit formulas are checked directly.",
    "uses": [
-    "def-weil-pbc-arrows-functor",
     "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula and adjunction paragraph; read at https://stacks.math.columbia.edu/tag/0A35"
+   }
+  },
+  {
+   "text": "Apply colimit_stage_kan_cocone to the underlying stage presheaves, the already constructed diagram D, the identity object comparisons, and nu, with the proved transition and unit formulas. Obtain Nonempty(IsColimit nu). The uniqueness isomorphism between the chosen colimit cocone and nu gives q. Together with the explicit stage choices and identity object isomorphisms this proves the original existential statement unchanged.",
+   "uses": [
+    "lem-weil-pbc-colimit-stage-kan-cocone",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
@@ -54,11 +51,9 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-colimit-stage-kan-cocone"
  ],
  "proof_origin": {
   "by": "agent",
@@ -142,12 +137,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T230757-L-1908539",
+  "landing": "20261013T022432-L-3221441",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
