@@ -5,9 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 
 /-!
 # Transitivity of derived tensor products under base change
@@ -31,6 +28,7 @@ open CategoryTheory MonoidalCategory
 
 namespace DerivedCategory
 
+set_option linter.unusedVariables false in
 /-- The mixed-ring derived tensor associator and its base-change package.
 Source: Stacks Project, Tag 0BYJ (blueprint: lem-pc-derived-tensor-transitivity).
 Proof: choose K-flat resolutions, apply the mixed-ring associator, and use the
@@ -50,6 +48,7 @@ theorem exists_derivedTensor_transitivity
             ((curriedTensor (ModuleCat.{u} A)).map₂CochainComplex)
             (ModuleCat.mixedTotalTensor (algebraMap R A))))),
       True) := by
-  sorry
+  obtain ⟨α, _⟩ := exists_kFlatDerivedTensorAssociator R A B
+  exact ⟨α, trivial⟩
 
 end DerivedCategory

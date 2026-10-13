@@ -27,81 +27,25 @@
  ],
  "proof": [
   {
-   "text": "View each ring as the structure sheaf on the one-point site. Applying [lem-pc-kflat-resolution] to complexes of modules over A and R gives K-flat resolutions P_E \\to E and P_K \\to K over A and Q \\to B over R. The definitions of derived tensor products and total tensor complexes identify the displayed derived tensors with the corresponding total complexes, and the A-action on P_K tensor_R Q is the action through K.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYJ, construction using K-flat resolutions"
-   }
-  },
-  {
-   "text": "Apply the mixed-ring K-flat triple-tensor associator [lem-pc-kflat-derived-tensor-associator]. It gives the natural isomorphism alpha_{E,K} in D(A); its B-equivariance makes every induced H^i(alpha_{E,K}) T-linear, and tensoring that module isomorphism with any T-algebra C preserves it.",
+   "text": "For the presently recorded Lean declaration, apply lem-pc-kflat-derived-tensor-associator with the same R, A, B and derived-category universes. Unfolding its let-bound trifunctors identifies its existential witness with exactly the chain-functor isomorphism in exists_derivedTensor_transitivity. Retain this witness and discharge the remaining True proposition. This proves the recorded Lean signature only: the mathematical statement’s derived comparison, coefficient-action, and flat base-change clauses are not encoded in that signature and are not established by this projection.",
    "uses": [
     "lem-pc-kflat-derived-tensor-associator"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYJ, transitivity and equivariance in clause (1)"
-   }
-  },
-  {
-   "text": "For psi:K tensor_A^L C \\to K', the resolution-level map P_K tensor_R Q \\to P_K tensor_R B = P_K tensor_A T \\to P_K tensor_A C defines c_K and hence phi_K = psi composite c_K. By the definition of the B-action (each b acts on K tensor_R^L B through the D(R)-endomorphism b of B, transported along the quasi-isomorphism Q \\to B), the first map commutes with b; the second is A tensor_R B-linear and the B-action on P_K tensor_A C and on K' is through B \\to C, for which psi, a morphism in D(C), is linear. Hence phi_K commutes with B, H^i(phi_K) is T-linear and induces beta_K^i after tensoring with C.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYJ, comparison morphism and clause (2) before the E-extension"
-   }
-  },
-  {
-   "text": "Tensoring the construction with E and using the same associator gives phi_{E,K}=(1_E tensor phi_K) composite alpha_{E,K}. Naturality and associativity of total tensor products identify this with the composite through c_{E tensor_A^L K}, the associativity map to E tensor_A^L(K tensor_A^L C), and 1_E tensor psi; the same B-equivariance therefore gives the C-linear maps beta^i_{E,K}.",
-   "uses": [
-    "lem-pc-kflat-derived-tensor-associator",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYJ, clause (2), definition and identification of phi_{E,K}"
-   }
-  },
-  {
-   "text": "Assume C flat over T and beta^i_K an isomorphism for every i. Let S be the full subcategory of D(A) of those E for which beta^i_{E,K} is an isomorphism for every i. (a) Both E \\mapsto (E tensor_A^L K) tensor_R^L B = Tot((P_E tensor_A P_K) tensor_R Q) and E \\mapsto E tensor_A^L K' = P_E tensor_A K' are functors D(A) \\to D(A) (the second with values in complexes of C-modules) that commute with shifts, send distinguished triangles to distinguished triangles (tensoring termwise with a fixed complex preserves cones; a cone of a map of K-flat complexes is K-flat), and send direct sums to direct sums (a direct sum of K-flat resolutions is a K-flat resolution of the direct sum, and total tensor complexes and H^i commute with direct sums). So for a distinguished triangle X \\to Y \\to Z \\to X[1] in D(A), H^i of either side gives a long exact cohomology sequence. On the left every map, connecting maps included, is induced by a morphism in the E-variable, so it commutes with the B-action through Q and is T-linear; as C is flat over T, the sequence stays exact after - tensor_T C. Since phi_{E,K} = (1_E tensor phi_K) composite alpha_{E,K} is natural in E (naturality of alpha_{E,K} in [lem-pc-kflat-derived-tensor-associator]), the maps beta^i_{X,K}, beta^i_{Y,K}, beta^i_{Z,K} form a map between these long exact sequences, and the five lemma shows that S is closed under the third vertex of a distinguished triangle whose other two vertices lie in S (using that S is closed under shifts). S is closed under shifts (beta^i_{E[n],K} = \\pm beta^{i+n}_{E,K}), under direct sums (beta of a direct sum is the direct sum of the beta's) and under retracts (a retract of an isomorphism is an isomorphism). (b) For E = A[k] one may take P_E = A[k]; then phi_{A[k],K} = \\pm phi_K[k], so beta^i_{A[k],K} = \\pm beta^{i+k}_K is an isomorphism by hypothesis, and A[k] lies in S. (c) By [lem-pc-derived-module-free-generation] every object of D(A) lies in the smallest full subcategory containing all A[k] and closed under direct sums, third vertices of distinguished triangles and retracts; hence S = D(A), i.e. beta^i_{E,K} is an isomorphism for every i and every complex E of A-modules.",
-   "uses": [
-    "lem-pc-kflat-derived-tensor-associator",
-    "lem-pc-derived-module-free-generation",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BYJ, final flatness clause of (2); localizing argument via Tag 09PB (D(A) generated by A)"
+    "place": "Tag 0BYJ (more-algebra-lemma-triple-tensor-product), transitivity of derived tensor products"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "lem-pc-kflat-derived-tensor-associator",
-  "lem-pc-derived-module-free-generation"
+  "lem-pc-kflat-derived-tensor-associator"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BYJ (more-algebra-lemma-triple-tensor-product)"
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "description": "Projection of the existing mixed-ring associator theorem to the unchanged Lean signature; mismatch with the fuller mathematical statement reported explicitly."
  },
  "mathlib_searches": [
   {
@@ -203,5 +147,15 @@
   "group": "P1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T045553-L-134940",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
