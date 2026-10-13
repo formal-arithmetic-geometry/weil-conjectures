@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-supported-complex-single-realization",
+ "kind": "statement",
+ "title": "Realizing the normalized morphism from a supported complex",
+ "statement": "Let B be an abelian category with a chosen derived category [def-weil-abstract-derived-category]. Let L be a bounded-below integer-indexed cochain complex and n a natural number, with L.X i a zero object for every i ≠ n. Put X = H^n(Q L), and let S be the literal single cochain complex on X in degree n. Let e : single_n X ≅ Q S be the canonical singleFunctorIsoCompQ followed by the inverse quotientCompQhIso, lifted to the bounded-below derived category. For every f : Q L → single_n X whose H^n map followed by singleFunctorCompHomologyFunctorIso is the identity of X, there exists a cochain map t : L → S such that Q(t) followed by e inverse is f, and iCycles(L,n) followed by t_n and the sole-term identification S.X n ≅ X equals homologyπ(L,n) followed by homologyFunctorObjQIso(L,n) inverse. This statement needs no coefficient functor or Grothendieck hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The support hypothesis makes the outgoing differential zero. Obtain an invertible cycle inclusion by HomologicalComplex.isIso_iCycles. Define φ explicitly as its inverse followed by homologyπ and the inverse quotient comparison. Construct t with mkHomToSingle φ: any incoming differential has zero source. The mkHomToSingle_f equation and isomorphism cancellation prove the coefficient identity.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
+  },
+  {
+   "text": "Expand the canonical single-complex homology isomorphism and cancel the homology quotient comparisons, using DerivedCategory.singleFunctorsPostcompQIso_inv_hom. The canonical e inverse is the identity after applying the fully faithful inclusion. Quotient homology naturality, homologyπ naturality, and the coefficient identity prove that Q(t) followed by e inverse induces the identity on X.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
+  },
+  {
+   "text": "Support also gives IsStrictlyGE n and IsStrictlyLE n. Transfer these to Q L via the quotient comparison. Apply the already proved DerivedCategory.Plus.singleFunctor_hom_ext_of_isGE_of_isLE to Q(t) followed by e inverse and f; their homology maps agree by the preceding identity and the normalization hypothesis.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons.",
+  "note": "G2 second reader: follows the original normalization route; constructed the realization proof and isolated only the literal-single shift calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex supported in one degree has a canonical map to the single complex on its homology, inducing the identity on homology",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism from a cochain complex supported in one degree to the single complex on its homology is uniquely determined by its action on homology",
+   "results": "8 hits: CochainComplex.fromSingle₀Equiv, CochainComplex.mappingCone.ext_cochain_from_iff, CochainComplex.mappingCone.ext_cochain_to_iff, CochainComplex.mappingCone.ext_to, CochainComplex.mappingCone.ext_from, CochainComplex.HomComplex.Cochain.ext₀, CochainComplex.mappingCone.ext_from_iff, CochainComplex.mappingCone.ext_to_iff",
+   "date": "2026-10-13",
+   "verdict": "Supporting declarations found; no exact statement or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mkHomToSingle",
+   "results": "2 hits: HomologicalComplex.mkHomToSingle, HomologicalComplex.mkHomToSingle_f",
+   "date": "2026-10-13",
+   "verdict": "Supporting declarations found; no exact statement or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mkHomToSingle|singleFunctor_hom_ext|homologyFunctorSingleIso",
+   "results": "15 hits: Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/Extend.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean",
+   "date": "2026-10-13",
+   "verdict": "Supporting declarations found; no exact statement or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedUnitSingleDegree",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Single-degree unit normalization: Realizing the normalized morphism from a supported complex",
+   "via": [
+    "lem-pc-right-derived-unit-single-degree",
+    "lem-pc-hypercohomology-left-edge-single-aux",
+    "lem-pc-hypercohomology-left-edge-single",
+    "lem-pc-hypercohomology-edge-cocycle-canonical",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SupportedComplexSingleRealization",
+  "file": "lean/Sheaf/CategoryTheory/SupportedComplexSingleRealization.lean",
+  "declaration": "DerivedCategory.Plus.supported_complex_single_realization",
+  "statement": "theorem supported_complex_single_realization (L : CochainComplex.Plus B) (n : ℕ) (hL : ∀ i : ℤ, i ≠ (n : ℤ) → IsZero (L.obj.X i)) : let X := (homologyFunctor B n).obj (Q.obj L) let S : CochainComplex.Plus B := ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩ let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅ DerivedCategory.Plus.Q.obj S := DerivedCategory.Plus.ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫ (DerivedCategory.quotientCompQhIso B).symm.app _) ∀ (f : Q.obj L ⟶ (singleFunctor B n).obj X), (homologyFunctor B n).map f ≫ (singleFunctorCompHomologyFunctorIso (C := B) n).hom.app X = 𝟙 X → ∃ (t : L ⟶ S), Q.map t ≫ e.inv = f ∧ L.obj.iCycles n ≫ t.hom.f n ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom = L.obj.homologyπ n ≫ (homologyFunctorObjQIso L n).inv",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T000045-L-2231535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T000045-L-2231535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

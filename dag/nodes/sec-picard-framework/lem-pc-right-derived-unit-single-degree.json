@@ -12,31 +12,38 @@
  ],
  "proof": [
   {
-   "text": "The support assumption gives a concrete isomorphism L ≅ L^n[n]. Shift by n and commute the derived unit with the shift. The given normalization on f identifies it with the canonical single-degree identification, by faithfulness of homology between pure degree-n objects. Use the quotient homology comparisons to express its cycle representative.",
+   "text": "Use [lem-pc-supported-complex-single-realization] to represent f as Q(t) followed by the canonical single comparison inverse, with the coefficient identity on cycles.",
    "uses": [
-    "def-pc-right-derived-single-degree-comparison"
+    "lem-pc-supported-complex-single-realization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
   },
   {
-   "text": "Shift to degree zero using NatTrans.CommShift for the derived unit and the single-functor and homology shift isomorphisms. The composite becomes rightDerivedPlusSingleUnitHomology followed by its single-complex comparison. Apply the already proved rightDerivedPlusSingleUnitHomology_comp_comparison to obtain toRightDerivedZero. For left exact G this is rightDerivedZeroIsoSelf.inv, so composing its hom gives the identity. Transport back through the quotient and shift comparisons; uniqueness of a by the mono cycle inclusion identifies its representative. This includes n=0 and a zero coefficient.",
+   "text": "Apply naturality of rightDerivedFunctorPlusUnit to t and naturality of homologyFunctorObjQIso to G(t). Homology projection naturality rewrites the composite as a followed by cyclesMap(G(t)) and the literal-single composite. Apply [lem-pc-right-derived-canonical-single-unit]. Then cyclesMap_i, the given equation a iCycles = G(iCycles), and functoriality reduce the result to G of the coefficient identity from the realization theorem.",
    "uses": [
-    "lem-sbc-right-derived-single-unit-homology-comparison",
-    "lem-sp-derived-functor-single-identification"
+    "lem-pc-right-derived-canonical-single-unit",
+    "lem-pc-supported-complex-single-realization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
   }
  ],
  "proof_deps": [
-  "def-pc-right-derived-single-degree-comparison",
-  "lem-sbc-right-derived-single-unit-homology-comparison",
-  "lem-sp-derived-functor-single-identification"
+  "lem-pc-supported-complex-single-realization",
+  "lem-pc-right-derived-canonical-single-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/015J",
-  "place": "Proof, remark (1), and single-complex specialization; canonical comparison elaborated by A3.",
-  "note": "A3 expansion of the canonical single-complex calculation, using the concrete library isomorphisms. The truncation factorization is proved in Lean; the derived-unit normalization remains to be proved."
+  "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons.",
+  "note": "G2 second reading: proved reduction by explicit map realization and unit/quotient/homology naturality. The realization theorem is proved. Only the literal-single shifted-unit calculation remains sorry; one original hole replaced by one strictly smaller hole (decomposition, net zero)."
  },
  "mathlib_searches": [
   {
@@ -128,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T220516-L-1391979",
+  "landing": "20261013T000045-L-2231535",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

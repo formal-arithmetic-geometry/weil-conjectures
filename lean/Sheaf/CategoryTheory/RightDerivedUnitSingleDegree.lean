@@ -7,8 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import Sheaf.CategoryTheory.SupportedComplexSingleRealization
+import Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit
 
 /-! # Normalization of the derived unit on a single-degree complex
 
@@ -71,6 +71,40 @@ theorem rightDerivedFunctorPlusUnit_single_degree
           (G.rightDerivedSingleDegreeComparison n).hom.app X =
         G.map (L.obj.homologyπ n ≫
           (DerivedCategory.Plus.homologyFunctorObjQIso L n).inv) := by
-  sorry
+  dsimp only
+  intro f hf a ha
+  let X := (DerivedCategory.Plus.homologyFunctor B n).obj (DerivedCategory.Plus.Q.obj L)
+  let S : CochainComplex.Plus B :=
+    ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩
+  obtain ⟨t, ht, hc⟩ := DerivedCategory.Plus.supported_complex_single_realization L n hL f hf
+  let GL := G.mapCochainComplexPlus.obj L
+  let GS := G.mapCochainComplexPlus.obj S
+  let gt := G.mapCochainComplexPlus.map t
+  let H := DerivedCategory.Plus.homologyFunctor C n
+  have hq :
+      (DerivedCategory.Plus.homologyFunctorObjQIso GL n).inv ≫
+          H.map (DerivedCategory.Plus.Q.map gt) =
+        HomologicalComplex.homologyMap gt.hom n ≫
+          (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv := by
+    apply (cancel_mono (DerivedCategory.Plus.homologyFunctorObjQIso GS n).hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality]
+    simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+  have hu := G.rightDerivedFunctorPlusUnit.naturality
+    ((HomotopyCategory.Plus.quotient B).map t)
+  have hu' := congrArg H.map hu
+  simp only [Functor.map_comp] at hu'
+  have hs := G.rightDerivedFunctorPlusUnit_canonical_single X n
+  rw [← ht, Functor.map_comp, H.map_comp, Category.assoc]
+  erw [← reassoc_of% hu']
+  erw [reassoc_of% hq]
+  erw [HomologicalComplex.homologyπ_naturality_assoc]
+  erw [hs]
+  rw [HomologicalComplex.cyclesMap_i_assoc]
+  change a ≫ GL.obj.iCycles n ≫ G.map (t.hom.f n) ≫
+      G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom = _
+  erw [reassoc_of% ha]
+  rw [← G.map_comp, ← G.map_comp]
+  exact congrArg G.map hc
 
 end CategoryTheory.Functor

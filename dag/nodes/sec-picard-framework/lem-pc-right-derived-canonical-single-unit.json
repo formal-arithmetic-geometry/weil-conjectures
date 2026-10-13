@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-right-derived-canonical-single-unit",
+ "kind": "statement",
+ "title": "The derived unit on a literal single complex",
+ "statement": "Let B be Grothendieck abelian and C abelian, both with chosen derived categories [def-weil-abstract-derived-category]. Let G : B → C be additive and left exact. Let X be an object of B and n a natural number. Let S be the literal single complex on X in degree n, e : single_n X ≅ Q S the canonical singleFunctorIsoCompQ followed by the inverse quotientCompQhIso lifted to the bounded-below derived category, and GS = G(S). Then homologyπ(GS,n), followed by homologyFunctorObjQIso(GS,n) inverse, H^n of the right-derived unit on S, H^n(RG(e inverse)), and the hom component of [def-pc-right-derived-single-degree-comparison] at X, equals iCycles(GS,n) followed by G of the sole-term identification S.X n ≅ X.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-right-derived-single-degree-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Shift the literal degree-n single complex by n to degree zero using the single-functor shift isomorphism. Apply NatTrans.CommShift to the derived unit, and use the quotient and homology shift comparisons. Expanding the shifted comparison [def-pc-right-derived-single-degree-comparison] turns its left side into the degree-zero canonical unit followed by the single-complex derived homology comparison.",
+   "uses": [
+    "def-pc-right-derived-single-degree-comparison",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
+  },
+  {
+   "text": "Apply rightDerivedPlusSingleUnitHomology_comp_comparison from [lem-sbc-right-derived-single-unit-homology-comparison] to identify this degree-zero composite with toRightDerivedZero. Left exactness identifies it with rightDerivedZeroIsoSelf inverse; composing with its hom gives the identity. The literal single-complex cycles-to-coefficient map is the single homology identification. Transport the equation back through the same shifts and quotient comparisons.",
+   "uses": [
+    "lem-sbc-right-derived-single-unit-homology-comparison",
+    "lem-sp-derived-functor-single-identification",
+    "def-pc-right-derived-single-degree-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/015J",
+    "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-right-derived-single-degree-comparison",
+  "lem-sbc-right-derived-single-unit-homology-comparison",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof, remark (1), single-complex specialization, with agent-written canonical normalization in the named Lean comparisons.",
+  "note": "G2 second reader: follows the original normalization route; constructed the realization proof and isolated only the literal-single shift calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of a right derived functor on a single complex shifted by n agrees in degree n with the classical degree zero augmentation",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor unit isomorphism cohomology complex supported in one degree",
+   "results": "8 hits: DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.InjectiveResolution.isoRightDerivedObj, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.homologyFunctorFactors, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorsPostcompQhIso",
+   "date": "2026-10-13",
+   "verdict": "Supporting declarations found; no exact statement or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.CommShift\"",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.NatTrans.CommShiftCore, CategoryTheory.NatTrans.CommShiftCore.zero, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor",
+   "date": "2026-10-13",
+   "verdict": "Supporting declarations found; no exact statement or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*Unit|rightDerivedZeroIsoSelf|singleFunctor.*[Ss]hift",
+   "results": "15 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "Supporting declarations found; no exact statement or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedUnitSingleDegree",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Single-degree unit normalization: The derived unit on a literal single complex",
+   "via": [
+    "lem-pc-right-derived-unit-single-degree",
+    "lem-pc-hypercohomology-left-edge-single-aux",
+    "lem-pc-hypercohomology-left-edge-single",
+    "lem-pc-hypercohomology-edge-cocycle-canonical",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedCanonicalSingleUnit.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlusUnit_canonical_single",
+  "statement": "theorem rightDerivedFunctorPlusUnit_canonical_single (X : B) (n : ℕ) : let S : CochainComplex.Plus B := ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩ let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅ DerivedCategory.Plus.Q.obj S := DerivedCategory.Plus.ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫ (DerivedCategory.quotientCompQhIso B).symm.app _) let GS := G.mapCochainComplexPlus.obj S GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫ (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫ (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫ (G.rightDerivedSingleDegreeComparison n).hom.app X = GS.obj.iCycles n ≫ G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T000045-L-2231535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T000045-L-2231535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
