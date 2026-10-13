@@ -6,6 +6,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.RingTheory.Etale.Field
+import Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent
+import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility
 
 /-!
 # Splitting the irreducible components over a field
@@ -51,6 +55,34 @@ theorem exists_finite_etale_geometric_component_extension {k : Type u} [Field k]
       IsFinite y ∧ Etale y ∧
       ∀ A ∈ irreducibleComponents ↥(pullback f y),
         ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L)),
-          IsIrreducible ((pullback.fst (pullback.snd f y) z) ⁻¹' A) := by sorry
+          IsIrreducible ((pullback.fst (pullback.snd f y) z) ⁻¹' A) := by
+  let Ω := SeparableClosure k
+  let q := Spec.map (CommRingCat.ofHom (algebraMap k Ω))
+  have : IsNoetherian (pullback f q) := ⟨⟩
+  have hfinite : (irreducibleComponents ↥(pullback f q)).Finite :=
+    finite_irreducibleComponents_of_isNoetherian
+  obtain ⟨L, hL, hcomponents⟩ :=
+    exists_finite_intermediateField_component_preimages f hfinite
+  have : Module.Finite k L := hL
+  let y := Spec.map (CommRingCat.ofHom (algebraMap k L))
+  have hfin : IsFinite y := by
+    rw [IsFinite.SpecMap_iff]
+    exact RingHom.finite_algebraMap.mpr inferInstance
+  have het : Etale y := by
+    rw [HasRingHomProperty.Spec_iff (P := @Etale)]
+    have : Algebra.FormallyEtale k L := Algebra.FormallyEtale.of_isSeparable k L
+    have : Algebra.FinitePresentation k L :=
+      Algebra.FinitePresentation.of_finiteType.mp inferInstance
+    change (algebraMap k L).Etale
+    rw [RingHom.etale_algebraMap]
+    exact ⟨inferInstance, inferInstance⟩
+  refine ⟨L, inferInstance, y, hfin, het, ?_⟩
+  intro A hA
+  have hgeom : IsIrreducible
+      ((pullback.fst (pullback.snd f y)
+        (Spec.map (CommRingCat.ofHom L.subtype))) ⁻¹' A) :=
+    (hcomponents A hA).1
+  exact isIrreducible_preimage_of_isSepClosed_extension (Ω := Ω)
+    (pullback.snd f y) A hgeom
 
 end AlgebraicGeometry

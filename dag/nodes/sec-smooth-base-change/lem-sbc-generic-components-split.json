@@ -18,16 +18,46 @@
  ],
  "proof": [
   {
-   "text": "the scheme is noetherian, since it is finite type over a field. By Tag 054R,\nbase change to a separable algebraic closure. Its finitely many irreducible\ncomponents descend to a finite subextension: on a finite affine cover their defining\nideals have finitely many generators, and only finitely many algebraic coefficients\noccur. Enlarge the subextension for all components simultaneously. The descended\ncomponents are geometrically irreducible, since their base changes to the separable\nclosure are irreducible (purely inseparable extensions do not change the topology).\nThus this is a finite separable extension with the required components. Its spectrum\nmap is finite and etale. For a component C,\ngive C its reduced closed subscheme structure. Geometric irreducibility says that\nevery field base change of this subscheme is irreducible and nonempty. The underlying\nsubset of that base change in the base changed ambient scheme is exactly the inverse\nimage of C under the first pullback projection. Hence that inverse image is\nirreducible. If the scheme is empty, use the identity extension; there are no\ncomponents and the universal assertion is vacuous.",
-   "uses": [],
+   "text": "Base change f to the spectrum of SeparableClosure k. This pullback is locally noetherian by finite type over a field and compact by quasi-compactness. Apply finite_irreducibleComponents_of_isNoetherian to get the finite-component hypothesis.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply lem-sbc-components-finite-separable-descent to choose a finite intermediate field L whose every component has a single component as inverse image over the separable closure.",
+   "uses": [
+    "lem-sbc-components-finite-separable-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The intermediate field is separable over k. The spectrum map is finite by IsFinite.SpecMap_iff and finite_algebraMap; it is etale by Algebra.FormallyEtale.of_isSeparable and finite presentation of a finite type algebra over the noetherian field k.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each component A of X_L, the descent statement gives an irreducible nonempty inverse image over the separable closure. Apply lem-sbc-subset-geometric-irreducibility to the structure map of X_L and the subset A to obtain the asserted inverse-image irreducibility for every test field. No reduced closed subscheme or topology transport through such a subscheme is needed.",
+   "uses": [
+    "lem-sbc-subset-geometric-irreducibility"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-components-finite-separable-descent",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-spec-finite-ring-map-finite"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 054R and 0551, splitting the components over the generic field."
+  "place": "Tags 054R and 04KZ for finite descent; Tags 054P, 020J and 038I for the subset criterion, proved using the existing field-tensor and common-extension declarations."
  },
  "mathlib_searches": [
   {
@@ -113,12 +143,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T225333-L-1814183",
+  "landing": "20261013T004025-L-2491659",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
