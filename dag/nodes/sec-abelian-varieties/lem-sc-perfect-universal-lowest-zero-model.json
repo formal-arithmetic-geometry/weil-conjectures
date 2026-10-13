@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-perfect-universal-lowest-zero-model",
+ "kind": "statement",
+ "title": "Local zero-bottom-differential models on a universally free locus",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], $E\\in D(\\mathcal O_S)$ [def-pc-derived-category] perfect [def-pc-perfect-complex], and $a,b\\in\\mathbb Z$. Suppose for every module sheaf $F$ on $S$, $H^i(E\\otimes^{\\mathbf L}F)=0$ for $i<a$ or $b<i$ [def-pc-derived-tensor-cohomology-vanishes]. Let $h:T\\to S$ and $r\\in\\mathbb N$ such that $H^a(L(h\\circ v)^*E)$ [def-pc-derived-pullback] is finite locally free of rank $r$ [def-amb-finite-locally-free-module] for every scheme $Y$ and $v:Y\\to T$. Then every $t\\in T$ has an open neighbourhood $U$ and a cochain complex $K$ of $\\mathcal O_U$-modules [def-pc-cochain-complex-modules] which is bounded above, is zero in all degrees $i<a$, has $d^a=0$, and has a finite free term in every degree [def-weil-pbc-free-module], together with an isomorphism $L(U\\hookrightarrow T)^*Lh^*E\\cong Q(K)$. Derived categories on all schemes are chosen in the same localization universe; on the localized open sites of S they are also supplied, as required to express perfection. No representing locus or cohomology comparison is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Matrix-chart proof, with Tags 0BCD and 0EWY; Tor-amplitude restriction from 08E9 and 09U8"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "At t test universal freeness on the residue-field morphism. Fibre Betti numbers commute with field extension, so the degree-a Betti number of E at h(t) is r. Tor amplitude gives vanishing below a: restrict to an affine chart and use the affine Tor-amplitude criterion to tensor with the residue field. This is local by the fixed-interval Tor-amplitude locality theorem. If b<a, all such fibres vanish and necessarily r=0 at every point of T. Choose the finite-free residue model; its term ranks below a vanish and its a-th term has rank r.",
+   "uses": [
+    "lem-sc-perfect-jump-loci",
+    "lem-pc-tor-amplitude-open-local",
+    "lem-pc-affine-tor-amplitude-criterion",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull this model to an affine neighbourhood of t in the inverse image of the chart. Bounded-above finite free terms are flat; the flat-complex counit and composition identify the pulled-back complex with Lh*E restricted to this neighbourhood. Tensor pullback preserves free terms, zero terms and the bound. Exact open pullback identifies its degree-a kernel with restricted degree-a homology.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-open-pullback-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity test makes this kernel locally free of rank r. Shrink to trivialize it. Its inclusion into the first rank-r free term is an injective square free map. The cokernel has zero dual by 0EWY. Each coordinate of the outgoing differential factors through this cokernel; all coordinates vanish. Hence d^a=0. The representing derived isomorphism is retained after this shrinking. The empty T has no points, and r=0 gives a zero first term.",
+   "uses": [
+    "lem-sc-square-injective-free-map-dual-coker-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-pc-derived-open-pullback-homology",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-tor-amplitude-open-local",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-perfect-jump-loci",
+  "lem-sc-square-injective-free-map-dual-coker-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Matrix-chart proof, with Tags 0BCD and 0EWY; Tor-amplitude restriction from 08E9 and 09U8",
+  "note": "W2 made explicit a strictly separate part of the original matrix-chart argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex with universally locally free bottom cohomology locally has a bounded finite free model with zero first differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex universally locally free lowest cohomology has local finite free model with zero first differential",
+   "results": "Eight hits including CochainComplex.IsKProjective, Module.freeLocus_eq_univ_iff, CochainComplex.isKProjective_of_projective and derived single-functor projective lemmas. None asserts the geometric local model.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zero.*differential|differential.*zero|pullback.*homology|homology.*pullback",
+   "results": "Mathlib includes generic short-complex homology and cyclesIsoX for zero differentials; no scheme-level theorem. Source and Sheaf search finds PerfectUniversalH0LocalChainModel (requires a specified truncation arrow in degree zero), BottomChainModelPullbackTransport (transports that arrow), and DerivedOpenPullbackHomology (only open pullbacks). Their hypotheses/conclusions do not supply this statement. Blueprint searches for zero bottom differential and lowest cohomology pullback give no matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalLowestCohomologyPullback",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; pullback comparison clause and the zero outgoing differential in the matrix-chart proof; local zero-bottom-differential model",
+   "via": [
+    "lem-sc-perfect-universal-lowest-cohomology-pullback",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectUniversalLowestZeroModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfectUniversalLowest_zero_model",
+  "statement": "theorem perfectUniversalLowest_zero_model [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (S : Scheme.{u}) [∀ U : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (E : schemeDerivedCategory S) (hE : IsPerfect S E) (a b : ℤ) (hamp : ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes S E F i) (r : ℕ) (T : Scheme.{u}) (h : T ⟶ S) (hfree : ∀ (T' : Scheme.{u}) (u' : T' ⟶ T), SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj ((derivedPullback (u' ≫ h)).obj E)) r) : ∀ t : T, ∃ U : T.Opens, t ∈ U ∧ ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ, (∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (K.X i)) ∧ (∀ i : ℤ, i < a → IsZero (K.X i)) ∧ K.d a (a + 1) = 0 ∧ (∀ i : ℤ, ∃ n : ℕ, Nonempty (K.X i ≅ SheafOfModules.free (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin n)))) ∧ Nonempty ((derivedPullback U.ι).obj ((derivedPullback h).obj E) ≅ DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T045616-L-140222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T045616-L-140222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-local-zero-bottom-model-pullback",
+ "kind": "statement",
+ "title": "Pullback of bottom cohomology from local zero-differential models",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $D\\in D(\\mathcal O_T)$ [def-pc-derived-category], and $a\\in\\mathbb Z$. Suppose every $t\\in T$ has an open neighbourhood $U$ and a cochain complex $K$ of $\\mathcal O_U$-modules [def-pc-cochain-complex-modules] which is bounded above, zero for $i<a$, has $d^a=0$, and has every term finite free [def-weil-pbc-free-module], with $L(U\\hookrightarrow T)^*D\\cong Q(K)$ [def-pc-derived-pullback]. For every morphism $g:Y\\to T$, there is an isomorphism of module sheaves $g^*H^a(D)\\cong H^a(Lg^*D)$ [def-pc-module-pullback]. Derived categories on all schemes are chosen in the same localization universe. No perfection, rank or universal-freeness hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Pullback comparison clause in the matrix-chart proof, with termwise pullback from 06YD/06YJ and composition from 0D5S"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "On each U the incoming differential at a has zero source and the outgoing differential is zero. The homology data of a short complex with both differentials zero give the canonical identification H^a(K)=K^a; it commutes with chain maps. The finite-free bounded-above complex is flat, so the counit computes derived pullback termwise.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the inverse image of U along g, derived composition identifies the restriction of Lg*D with the pullback of the displayed Q(K). The latter is the termwise pullback complex. It has the same zero bottom differentials, so its degree-a homology is g*K^a. Exact open pullback gives the corresponding restrictions of global homology. Under these canonical identifications the bottom homology comparison is invertible.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-derived-open-pullback-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Refine overlaps of model charts by affine opens W. Transport their restrictions to the localized open site of W; the complexes are strictly perfect. Represent the derived transition e_1 inverse followed by e_2 by a chain map alpha using the affine perfect-map representative theorem. Under the canonical zero-differential identifications, H^a(alpha) is alpha.f a. Since Q(alpha) is invertible, alpha.f a is invertible. After termwise pullback the homology map is the pullback of alpha.f a, hence also invertible. Counit naturality identifies this with the pulled-back derived transition. Therefore the local comparisons commute with this same transition on their two sides; conjugating by the representing isomorphisms shows that they are equal as maps of the restricted global sheaves. Equality on the affine refinement gives equality on the whole overlap. Inverses agree by uniqueness. Glue maps and inverses on the inverse-image cover; their composites are identity because this holds on every member. No intersection is assumed affine, and empty sources are included.",
+   "uses": [
+    "lem-pc-perfect-affine-map-representative",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-derived-open-pullback-homology",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Pullback comparison clause in the matrix-chart proof, with termwise pullback from 06YD/06YJ and composition from 0D5S",
+  "note": "W2 made explicit a strictly separate part of the original matrix-chart argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bottom cohomology commutes with arbitrary derived pullback for a locally finite free bounded complex with zero outgoing bottom differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lowest cohomology of a bounded finite free complex whose first differential is zero commutes with arbitrary pullback",
+   "results": "Eight group-cohomology and HomComplex hits. None asserts scheme-level pullback of bottom cohomology.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zero.*differential|differential.*zero|pullback.*homology|homology.*pullback",
+   "results": "Mathlib includes generic short-complex homology and cyclesIsoX for zero differentials; no scheme-level theorem. Source and Sheaf search finds PerfectUniversalH0LocalChainModel (requires a specified truncation arrow in degree zero), BottomChainModelPullbackTransport (transports that arrow), and DerivedOpenPullbackHomology (only open pullbacks). Their hypotheses/conclusions do not supply this statement. Blueprint searches for zero bottom differential and lowest cohomology pullback give no matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalLowestCohomologyPullback",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; pullback comparison clause and the zero outgoing differential in the matrix-chart proof; bottom cohomology comparison and overlap gluing",
+   "via": [
+    "lem-sc-perfect-universal-lowest-cohomology-pullback",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalZeroBottomModelPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalZeroBottomModelPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.localZeroBottomModel_pullback",
+  "statement": "theorem localZeroBottomModel_pullback\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (T : Scheme.{u}) (D : schemeDerivedCategory T) (a : ℤ)\n    (hmodel :\n      ∀ t : T, ∃ U : T.Opens, t ∈ U ∧\n      ∃ K : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ,\n        (∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (K.X i)) ∧\n        (∀ i : ℤ, i < a → IsZero (K.X i)) ∧ K.d a (a + 1) = 0 ∧\n        (∀ i : ℤ, ∃ n : ℕ, Nonempty (K.X i ≅ SheafOfModules.free\n          (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin n)))) ∧\n        Nonempty ((derivedPullback U.ι).obj D ≅ DerivedCategory.Q.obj K))\n    (T' : Scheme.{u}) (g : T' ⟶ T) :\n    Nonempty\n      ((Modules.tensorPullback g).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj D) ≅\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj\n            ((derivedPullback g).obj D)) ",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T045616-L-140222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T045616-L-140222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

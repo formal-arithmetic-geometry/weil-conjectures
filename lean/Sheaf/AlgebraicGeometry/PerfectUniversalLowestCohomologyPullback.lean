@@ -9,10 +9,9 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.PerfectJumpLoci
+import Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel
+import Sheaf.AlgebraicGeometry.LocalZeroBottomModelPullback
 
 /-! # Pullback of universally free lowest cohomology
 
@@ -76,6 +75,11 @@ theorem perfectUniversalLowestCohomology_pullback
               ((derivedPullback h).obj E)) ≅
         (DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj
-            ((derivedPullback (g ≫ h)).obj E)) := by sorry
+            ((derivedPullback (g ≫ h)).obj E)) := by
+  obtain hmodel := perfectUniversalLowest_zero_model S E hE a b hamp r T h hfree
+  obtain ⟨e⟩ := localZeroBottomModel_pullback T ((derivedPullback h).obj E) a hmodel T' g
+  obtain ⟨_, _, _, c, _⟩ := exists_derivedPullbackComposition.{u, w}
+  exact ⟨e ≪≫ (DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).mapIso ((c g h).app E)⟩
 
 end AlgebraicGeometry.Scheme
