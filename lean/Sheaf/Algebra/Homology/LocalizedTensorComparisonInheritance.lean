@@ -73,6 +73,6 @@ theorem localizedTensorComparison_inheritance
         ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by
   dsimp
   intro t m mU h i
-  exact localizedTensorComparison_inheritance_fixed_degree R A B C hC U Q N hU hQ t m mU i (h i)
+  exact localizedTensorComparison_inheritance_fixed_degree R A B C hC U Q N hU hQ t m mU i h
 
 end ModuleCat

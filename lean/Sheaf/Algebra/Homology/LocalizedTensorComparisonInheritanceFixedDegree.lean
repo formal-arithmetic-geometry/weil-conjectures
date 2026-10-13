@@ -3,12 +3,13 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import Mathlib.RingTheory.Flat.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonGenerators
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosure
+import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 
 @[expose] public section
 universe u
@@ -19,6 +20,10 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
+-- STATEMENT-DISPUTED: the former single-degree hypothesis is false for shifted U.
+-- For R=A=B=C=Z, Q=0, N=Z concentrated in degree 1, i=0 and U=Z
+-- concentrated in degree -1, the hypothesis was 0 -> 0, but the conclusion is 0 -> Z.
+-- The corrected helper requires the comparison for Q in every degree.
 /-- Fixed-degree local computation underlying tensor inheritance.
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ.
@@ -45,8 +50,19 @@ theorem localizedTensorComparison_inheritance_fixed_degree
       (m : BaseDerivedTensorCohomologyModel R A B Q C)
       (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C)
       (i : ℤ),
-      (IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) →
+      (∀ j : ℤ, IsIso (m.localizedComparison j ≫ HomologicalComplex.homologyMap t j)) →
       IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
-        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by sorry
+        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by
+  let := HasDerivedCategory.standard (ModuleCat.{u} R)
+  let := HasDerivedCategory.standard (ModuleCat.{u} A)
+  let := HasDerivedCategory.standard (ModuleCat.{u} B)
+  dsimp
+  intro t m mU i h
+  obtain ⟨hcop, htri, hret⟩ :=
+    localizedTensorComparisonProperty_closure R A B C Q N t hC hQ
+  have hgen := localizedTensorComparisonProperty_generators R A B C Q N t hQ m h
+  have hp := derivedModuleFreeGeneration.{u, 0} A (DerivedCategory.Q.obj U)
+    (localizedTensorComparisonProperty R A B C Q N t) hgen hcop htri hret
+  exact hp U ⟨Iso.refl _⟩ hU mU i
 
 end ModuleCat

@@ -2,7 +2,7 @@
  "id": "lem-pc-localized-tensor-comparison-inheritance-fixed-degree",
  "kind": "statement",
  "title": "Fixed-degree localized tensor cohomology comparison inheritance",
- "statement": "Under the hypotheses of localized tensor comparison inheritance, for a fixed cohomological degree i, if the localized comparison for Q followed by H^i(t) is an isomorphism, then the corresponding map for U tensor Q is an isomorphism.",
+ "statement": "Let R,A,B,C be commutative rings in a universe u, A and B commutative R-algebras, and C an algebra over E=A tensor_R B. Use the derived categories of R-, A- and B-modules. Let Q be a cochain complex of A-modules, N a cochain complex of C-modules, F termwise scalar extension along A to E to C, and t:F(Q) to N a chain map. Assume C is flat over E and U,Q are K-flat complexes of A-modules. Let m,mU be the base-derived tensor cohomology models for Q and U tensor_A Q. Suppose m.localizedComparison_j followed by H^j(t) is invertible for EVERY integer j. For a fixed integer i, mU.localizedComparison_i followed by H^i(mu_F(U,Q)^(-1) followed by (F(U) tensor t)) is invertible. The hypothesis ranges over all degrees because shifts of U can bring another degree into degree i.",
  "stmt_deps": [
   "def-pc-base-derived-tensor-cohomology-model"
  ],
@@ -12,30 +12,38 @@
  },
  "proof": [
   {
-   "text": "For fixed degree i, perform the mixed-ring K-flat associator calculation and identify the model counit comparison after flat scalar extension.",
+   "text": "Define the explicit property P on D(A) by universal quantification over its K-flat representatives and cohomology models.",
    "uses": [
-    "lem-pc-kflat-derived-tensor-associator",
-    "def-pc-base-derived-tensor-cohomology-model"
+    "def-pc-localized-tensor-comparison-property"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The comparisons that are isomorphisms form a localizing subcategory in U; shifts, sums, triangles and retracts preserve the property, and free generation by shifts of A gives the claim for U.",
+   "text": "Apply the generator assertion and the coproduct, triangle and retract closure assertion to P.",
+   "uses": [
+    "lem-pc-localized-tensor-comparison-generators",
+    "lem-pc-localized-tensor-comparison-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedModuleFreeGeneration to Q_A(U); then specialize P to U, the identity isomorphism, hU, mU and i.",
    "uses": [
     "lem-pc-derived-module-free-generation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-localized-tensor-comparison-property",
   "lem-pc-derived-module-free-generation",
-  "lem-pc-kflat-derived-tensor-associator"
+  "lem-pc-localized-tensor-comparison-closure",
+  "lem-pc-localized-tensor-comparison-generators"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1)"
+  "place": "Tag 0DJA(1): Lean assembly of the generator and closure statements by derivedModuleFreeGeneration"
  },
  "mathlib_searches": [
   {
@@ -84,7 +92,7 @@
   "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritanceFixedDegree",
   "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonInheritanceFixedDegree.lean",
   "declaration": "ModuleCat.localizedTensorComparison_inheritance_fixed_degree",
-  "statement": "theorem localizedTensorComparison_inheritance_fixed_degree\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (U Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ)\n    (hU : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} B)\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∀ (t : F.obj Q ⟶ N)\n      (m : BaseDerivedTensorCohomologyModel R A B Q C)\n      (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C)\n      (i : ℤ),\n      (IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) →\n      IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
+  "statement": "theorem localizedTensorComparison_inheritance_fixed_degree\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (U Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ)\n    (hU : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} B)\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∀ (t : F.obj Q ⟶ N)\n      (m : BaseDerivedTensorCohomologyModel R A B Q C)\n      (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C)\n      (i : ℤ),\n      (∀ j : ℤ, IsIso (m.localizedComparison j ≫ HomologicalComplex.homologyMap t j)) →\n      IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
   "branch": "sheaf-dag",
   "by": "E2",
   "date": "2026-10-13"
@@ -102,11 +110,44 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "X-23799",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T155931-L-1301783",
+  "landing": "20261013T165640-L-1807630",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules compiled cleanly; original caller fails exactly on h i against the changed helper, adapted caller compiles, signatures and reported sorries/axioms match the packet."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "G2 stage 2",
+  "old_statement": "Under the hypotheses of localized tensor comparison inheritance, for a fixed cohomological degree i, if the localized comparison for Q followed by H^i(t) is an isomorphism, then the corresponding map for U tensor Q is an isomorphism.",
+  "what": "The former single-degree assertion is false: take R=A=B=C=Z, Q=0, N=Z in degree 1, U=Z in degree -1 and i=0. Both U and Q are K-flat and C is E-flat. The degree-zero premise is the isomorphism 0 to 0, while the conclusion is 0 to Z. Require the premise for all degrees, as the actual source and the global caller already do. This is a correction of an intermediate helper, not a change of any Challenge target.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0DJA(1), local computation using Tag 0BYJ"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "For fixed degree i, perform the mixed-ring K-flat associator calculation and identify the model counit comparison after flat scalar extension.",
+    "uses": [
+     "lem-pc-kflat-derived-tensor-associator",
+     "def-pc-base-derived-tensor-cohomology-model"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The comparisons that are isomorphisms form a localizing subcategory in U; shifts, sums, triangles and retracts preserve the property, and free generation by shifts of A gives the claim for U.",
+    "uses": [
+     "lem-pc-derived-module-free-generation"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-pc-base-derived-tensor-cohomology-model",
+   "lem-pc-derived-module-free-generation",
+   "lem-pc-kflat-derived-tensor-associator"
+  ]
  }
 }

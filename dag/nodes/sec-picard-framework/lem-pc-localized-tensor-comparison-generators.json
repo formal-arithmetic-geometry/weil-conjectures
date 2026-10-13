@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-generators",
+ "kind": "statement",
+ "title": "Localized tensor comparison on the free generators",
+ "statement": "Let R,A,B,C be commutative rings in a universe u, A and B commutative R-algebras, and C an algebra over E=A tensor_R B. Use the derived categories of R-, A- and B-modules. Let Q be a cochain complex of A-modules, N a cochain complex of C-modules, F termwise scalar extension along A to E to C, and t:F(Q) to N a chain map. Assume Q is K-flat over A. Let m be a base-derived tensor cohomology model for Q and suppose m.localizedComparison_i followed by H^i(t) is an isomorphism for every integer i. The predicate P of [def-pc-localized-tensor-comparison-property] holds for every shift of the free rank-one A-module in D(A), represented in Lean by ULift A. No flatness of C over E is required for this generator assertion.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-abstract-derived-category",
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1); Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "For the unit complex, use the tensor unitors and localized_eq. Shifts reindex this square, so the all-degree hypothesis proves the predicate on the shifted unit. For any K-flat representative of that derived object, represent its derived isomorphism by a roof, resolve the apex K-flatly, and use the natural mixed-ring associator and universal derived counit to identify the two comparison arrows and their coefficient actions. The invertible roof homology maps transport the result to every model in the predicate.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-associator",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-kflat-derived-tensor-associator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), explicit localizing-subcategory argument from the fixed-degree node plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kFlat|[Kk]Flat",
+   "results": "No matches.",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars preserves K-flat complexes and tensoring a quasi-isomorphism with a K-flat complex preserves quasi-isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.QuasiIso, HomologicalComplex.homologyMap",
+   "results": "loogle: unknown identifier 'HomologicalComplex.QuasiIso'",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|generator",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory of the derived category of modules closed under arbitrary coproducts distinguished triangles and retracts and containing shifts of the ring contains every object",
+   "results": "DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsLE; DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty",
+   "results": "CategoryTheory.ObjectProperty; CategoryTheory.ObjectProperty.Nonempty; CategoryTheory.ObjectProperty.singleton; CategoryTheory.ObjectProperty.Is; CategoryTheory.ObjectProperty.pair; CategoryTheory.ObjectProperty.ofObj; CategoryTheory.ObjectProperty.arbitrary; CategoryTheory.ObjectProperty.nonempty_of_prop",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritanceFixedDegree",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "single-complex base-change criterion, tensor inheritance (Tag 0DJA(1)), via the fixed-degree local comparison",
+   "via": [
+    "lem-pc-localized-tensor-comparison-inheritance",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonGenerators",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonGenerators.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_generators",
+  "statement": "theorem localizedTensorComparisonProperty_generators\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (m : BaseDerivedTensorCohomologyModel R A B Q C)\n    (h : ∀ i : ℤ, IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) :\n    ∀ n : ℤ, localizedTensorComparisonProperty R A B C Q N t\n      (((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj\n        (ModuleCat.of A (ULift.{0} A)))⟦n⟧)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-23799",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T165640-L-1807630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-23799",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T165640-L-1807630",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compiled cleanly; original caller fails exactly on h i against the changed helper, adapted caller compiles, signatures and reported sorries/axioms match the packet."
+ }
+}

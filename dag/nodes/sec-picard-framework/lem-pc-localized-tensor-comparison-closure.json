@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-closure",
+ "kind": "statement",
+ "title": "Localizing closure of the tensor comparison predicate",
+ "statement": "Let R,A,B,C be commutative rings in a universe u, A and B commutative R-algebras, and C an algebra over E=A tensor_R B. Use the derived categories of R-, A- and B-modules. Let Q be a cochain complex of A-modules, N a cochain complex of C-modules, F termwise scalar extension along A to E to C, and t:F(Q) to N a chain map. Assume Q is K-flat over A and C is flat over E. The predicate P of [def-pc-localized-tensor-comparison-property] is closed under coproducts indexed by any type in universe u, under the third vertex of a distinguished triangle whose first two vertices satisfy P, and under retracts (if X is a retract of Y and P(Y), then P(X)). This closure assertion has no hypothesis that t or the localized comparison for Q is invertible.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-abstract-derived-category",
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1); Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "Use the natural mixed-ring associator and the canonical counit squares to obtain a natural comparison of cohomological functors in U, with the canonical E-action. Coproducts commute with tensor, cohomology and scalar extension. For triangles, C-flatness over E preserves the source long exact sequence; the mixed associator and counit naturality make it compatible with the target long exact sequence, so the five lemma gives the third vertex. Functoriality makes comparison arrows for retracts into retracts of comparison arrows, and retracts of isomorphisms are isomorphisms. Roof invariance gives each assertion for all K-flat representatives and all models quantified in P.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-associator",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-kflat-derived-tensor-associator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), explicit localizing-subcategory argument from the fixed-degree node plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kFlat|[Kk]Flat",
+   "results": "No matches.",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars preserves K-flat complexes and tensoring a quasi-isomorphism with a K-flat complex preserves quasi-isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.QuasiIso, HomologicalComplex.homologyMap",
+   "results": "loogle: unknown identifier 'HomologicalComplex.QuasiIso'",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|generator",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory of the derived category of modules closed under arbitrary coproducts distinguished triangles and retracts and containing shifts of the ring contains every object",
+   "results": "DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsLE; DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty",
+   "results": "CategoryTheory.ObjectProperty; CategoryTheory.ObjectProperty.Nonempty; CategoryTheory.ObjectProperty.singleton; CategoryTheory.ObjectProperty.Is; CategoryTheory.ObjectProperty.pair; CategoryTheory.ObjectProperty.ofObj; CategoryTheory.ObjectProperty.arbitrary; CategoryTheory.ObjectProperty.nonempty_of_prop",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritanceFixedDegree",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "single-complex base-change criterion, tensor inheritance (Tag 0DJA(1)), via the fixed-degree local comparison",
+   "via": [
+    "lem-pc-localized-tensor-comparison-inheritance",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosure",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonClosure.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_closure",
+  "statement": "theorem localizedTensorComparisonProperty_closure\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    let P := localizedTensorComparisonProperty R A B C Q N t\n    (∀ {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))\n      (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i : I, G i ⟶ S),\n      CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.Cofan.mk S ι) →\n      (∀ i : I, P (G i)) → P S) ∧\n    (∀ T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} A)),\n      T ∈ Pretriangulated.distinguishedTriangles → P T.obj₁ → P T.obj₂ → P T.obj₃) ∧\n    (∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y → P Y → P X)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-23799",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T165640-L-1807630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-23799",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T165640-L-1807630",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compiled cleanly; original caller fails exactly on h i against the changed helper, adapted caller compiles, signatures and reported sorries/axioms match the packet."
+ }
+}
