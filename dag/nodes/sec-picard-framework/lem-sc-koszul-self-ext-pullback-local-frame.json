@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-koszul-self-ext-pullback-local-frame",
+ "kind": "statement",
+ "title": "Finite free self Ext pullback frame on a Koszul chart",
+ "statement": "Let i:Z\\to Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. Let U be an affine open of Y, and let n,m be nonnegative integers. Let f:Fin(m)\\to\\Gamma(Y,U) be Koszul-regular [def-weil-pbc-koszul-regular-sequence] and generate the kernel ideal i.ker.ideal(U) [def-sbc-closed-immersion-ideal-sheaf]. Set B=i_*\\mathcal O_Z and G=H^n(R\\mathcal Hom_Y(B,B)) [def-pc-derived-category, def-pur-derived-internal-hom]. Then the restriction of the ordinary tensor pullback i^*G [def-pc-module-pullback] to the over-i^{-1}(U) site is isomorphic to the free structure module indexed by ULift of the n-element subsets of Fin(m) [def-weil-sheaf-of-modules-category]. This holds also for n=0, n>m, m=0, and empty inverse-image charts. No regularity outside U or stalk hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Lemma 48.15.4, proof: zero-differential Hom calculation and increasing contraction basis"
+ },
+ "proof": [
+  {
+   "text": "Let A be the section ring of the specified affine open U, I its kernel ideal, and B=A/I. The affine closed immersion is Spec B into Spec A. Obtain the actual Koszul projective resolution of B and sheafify its augmentation. Reindex the nonnegative chain complex as a nonpositive cochain complex. The increasing wedge basis of each term makes it finite free, with zero terms above degree zero and below minus m.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of derived internal Hom to U agrees with derived internal Hom of the restricted single objects. The bounded-above finite-free model therefore computes this Hom by the sheaf Hom from the Koszul resolution into B[0]. In degree n there is exactly the dual of the nth Koszul term with coefficients in B. Every coefficient of the induced differential is one of the generators f_j and vanishes in B, so this differential is zero. Its cohomology is consequently the same degree-n module. The dual increasing wedge basis is indexed by n-element subsets of Fin m. For arbitrary derived universes compute both objects using the same K-injective model and localization comparison, so the cohomology is the one in the statement.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These coordinates commute with localization, identifying the restricted self Ext with the associated free B-module on the subset index. Tensor pullback after cohomology along Spec B into Spec A leaves this module unchanged: multiplication identifies B tensor_A B with B and b maps to 1 tensor b is its inverse, because elements of B lift to A. Transport the affine chart isomorphisms to the over site and reindex by ULift to obtain the required free sheaf. At n=0 the index is a singleton; for n>m it is empty. For m=0 the quotient ideal is zero. A zero quotient or empty inverse-image chart is also included, without requiring properness of I.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-j3-koszul-projective-resolution",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Lemma 48.15.4, proof: zero-differential Hom calculation and increasing contraction basis",
+  "agent": "Y2",
+  "date": "2026-10-13",
+  "note": "Source read online; affine zero-differential calculation expanded through tensor pullback and over-site transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The self Ext sheaf of the quotient by a Koszul regular sequence is locally free with the exterior basis",
+   "results": "Service unavailable: Internal Server Error. No conclusion about absence is drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Koszul regular closed immersion, tensor pullback of nth self Ext on an affine chart is the free sheaf on n element subsets",
+   "results": "Eight hits on cotangent module base change and formally unramified spectrum maps; none computes sheaf self Ext.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "Free sheaf, free sections, inclusions and free Hom equivalence; no Koszul self Ext frame.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*self.*ext|self.*ext.*free in Mathlib; self Ext and 0BQY in the whole blueprint; Koszul and SelfExt in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib and blueprint searches gave no matches. The library has the parent stalk-basis statement and downstream exterior identification, but no independent local self Ext frame. Existing derived Hom and Koszul resolution modules supply parts of the argument.",
+   "date": "2026-10-13",
+   "verdict": "no existing local-frame statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtStalkBases",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Self-coefficient Ext step: the finite free chart obtained from the affine Koszul zero-differential Hom computation before taking stalks",
+   "via": [
+    "lem-sc-koszul-self-ext-stalk-bases",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtPullbackLocalFrame.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_pullback_local_frame",
+  "statement": "theorem koszulRegularImmersion_self_ext_pullback_local_frame\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (U : Y.affineOpens) (n : ℕ)\n    (m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    Nonempty ((((Scheme.Modules.tensorPullback i).obj G).over (i ⁻¹ᵁ U.1)) ≅\n      SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin m) n)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T123550-L-3712782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T123550-L-3712782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
