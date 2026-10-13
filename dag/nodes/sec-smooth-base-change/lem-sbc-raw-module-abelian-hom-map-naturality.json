@@ -1,0 +1,110 @@
+{
+ "id": "lem-sbc-raw-module-abelian-hom-map-naturality",
+ "kind": "statement",
+ "title": "The fixed raw scalar comparison intertwines pullback",
+ "statement": "For every Λ,k:W→S,G,q∈N,U and f:A→B in Over(W), the explicit additive maps rawModuleAbelianHomMap commute with the module and abelian five-factor raw pullbacks. On abelian coefficients the arrow is upperStarComp(f.left,B.hom,A.hom).inv.app(forget G). No bijectivity of rawModuleAbelianHomMap is assumed or asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03FD, 03Q8 and 03D7, natural sections comparison and inverse-image coherence"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-abelian-hom-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand rawModuleAbelianHomMap and both raw pullbacks. The Kan-extension and\nsheafification comparisons commute with their units. Under the inverse-image\nadjunction their inverse therefore corresponds to the underlying module unit.\nNaturality of this unit and the adjunction triangle identity show that its\ncomposition comparison\ncommutes with upperStarComp. The same calculation applied to freeMap moves\nthe source generator comparison across the first pullback factor. The single\ncomparison commutes with scalar forgetting by naturality of\nmapDerivedCategoryPlusSingleFunctor. Functoriality of derived forgetting moves\nthe class itself through the third factor. Compatibility of its commShiftIso\nwith the single comparison identifies the fourth factor. Finally the mate\ncomposition equation identifies the inverse coefficient comparison with the\nabelian upperStarComp inverse in the fifth factor. Associativity gives the\nstated equality. No invertibility of the raw Hom map is needed in this argument;\nin particular this is independent of the acyclicity argument of Tag 03FD.\nThe computation also applies to identity arrows, degree zero and empty objects.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "M4",
+  "document": "Stacks Project",
+  "place": "Tags 03FD, 03Q8 and 03D7, natural sections comparison and inverse-image coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar forgetting on sheaves induces a natural isomorphism on derived Hom from free represented sheaves",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service returned Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from free module sheaf to shifted sheaf equals cohomology of underlying abelian sheaf",
+   "date": "2026-10-13",
+   "results": "Sheaf.H, cohomologyPresheafFunctor and InjectiveResolution.extEquivCohomologyClass; no scalar comparison of the raw groups.",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryPlus",
+   "date": "2026-10-13",
+   "results": "Loogle returned zero hits: unknown identifier CategoryTheory.Functor.mapDerivedCategoryPlus. The source API was found by rg in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "verdict": "exact derived forgetting is available; its raw-Hom invertibility and naturality are not"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*[Cc]ohomology|[Cc]ohomology.*sheafCompose",
+   "date": "2026-10-13",
+   "results": "0 hits from msearch. Direct rg found exists_upperStar_forget₂_natIso and the derived exact functor single and shift APIs.",
+   "verdict": "use existing APIs for explicit data; separate the two proof obligations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomComparison",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Explicit scalar-forgetting comparison of raw derived Hom, split into construction, invertibility and pullback compatibility",
+   "via": [
+    "lem-sbc-raw-module-abelian-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleAbelianHomMapNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleAbelianHomMap_naturality",
+  "statement": "theorem rawModuleAbelianHomMap_naturality\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale) :\n    ∀ (A B : Over W) (f : A ⟶ B)\n        (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)),\n        rawModuleAbelianHomMap Λ k G q U A\n          ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =\n          abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n            (by rw [← Category.assoc, Over.w]) q\n            (restrictedOverCoefficient\n              ((sheafCompose _\n                (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) B)\n            (restrictedOverCoefficient\n              ((sheafCompose _\n                (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) A)\n            ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n              (Over.w f).symm).inv.app\n                ((sheafCompose _\n                  (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G))\n            U (rawModuleAbelianHomMap Λ k G q U B z)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

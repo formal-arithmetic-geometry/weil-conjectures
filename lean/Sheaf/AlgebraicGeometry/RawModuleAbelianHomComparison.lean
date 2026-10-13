@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapIsIso
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality
 
 /-! # Scalar comparison for raw derived Hom
 
@@ -66,6 +68,10 @@ theorem exists_rawModule_abelianHom_comparison
               (Over.w f).symm).inv.app
                 ((sheafCompose _
                   (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G))
-            U ((e B).hom z) := by sorry
+            U ((e B).hom z) := by
+  have (A : Over W) : IsIso (rawModuleAbelianHomMap Λ k G q U A) :=
+    isIso_rawModuleAbelianHomMap Λ k G q U A
+  refine ⟨fun A ↦ asIso (rawModuleAbelianHomMap Λ k G q U A), ?_⟩
+  exact rawModuleAbelianHomMap_naturality Λ k G q U
 
 end AlgebraicGeometry.Etale

@@ -12645,3 +12645,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:32 L: merged deliver/K1/Sheaf.FieldTheory.TriangularFieldModelLocalizedNormalForm (stage 3; reviewer PASS; first push; landing 20261013T133225-L-4193123 (interface); batch 20261013T133222; modules 2; new nodes 1)
 - 13:32 L: merged deliver/K3/Sheaf.Algebra.Homology.DerivedInternalHomShiftRight (stage 3; reviewer PASS; first push; landing 20261013T133226-L-4193302 (interface); batch 20261013T133222; modules 3; new nodes 2)
 - 13:32 L: merged deliver/M3/Sheaf.AlgebraicGeometry.PicardDirectImageSectionNaturality (stage 3; reviewer PASS; first push; landing 20261013T133226-L-4193401 (interface); batch 20261013T133222; modules 4; new nodes 3)
+- 13:32 L: merged deliver/M4/Sheaf.AlgebraicGeometry.RawModuleAbelianHomComparison (stage 3; reviewer PASS; first push; landing 20261013T133226-L-4193562 (interface); batch 20261013T133222; modules 5; new nodes 4)

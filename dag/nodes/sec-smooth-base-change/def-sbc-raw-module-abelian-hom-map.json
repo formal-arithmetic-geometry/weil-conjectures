@@ -1,0 +1,103 @@
+{
+ "id": "def-sbc-raw-module-abelian-hom-map",
+ "kind": "definition",
+ "title": "The explicit scalar-forgetting map of raw derived Hom",
+ "statement": "For Λ,k:W→S,G,q∈N,U and A∈Over(W), construct an additive map from the module raw derived Hom group to the abelian raw derived Hom group with coefficient A^*forget(G). Precompose the derived forgotten class by the pulled-back free represented generator map and the canonical inverse-image scalar comparison; postcompose by the shift and single comparisons and the inverse coefficient comparison. All data are constructed explicitly.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03FD, the scalar-forgetting morphism, and Tags 03D3 and 03D7"
+ },
+ "stmt_deps": [
+  "def-sbc-higher-image-raw-diagram",
+  "lem-sbc-restricted-over-abelian-complex-data",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "def-sbc-raw-module-scalar-pullback-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "M4",
+  "document": "Stacks Project",
+  "place": "Tag 03FD, the scalar-forgetting morphism, and Tags 03D3 and 03D7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar forgetting on sheaves induces a natural isomorphism on derived Hom from free represented sheaves",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service returned Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from free module sheaf to shifted sheaf equals cohomology of underlying abelian sheaf",
+   "date": "2026-10-13",
+   "results": "Sheaf.H, cohomologyPresheafFunctor and InjectiveResolution.extEquivCohomologyClass; no scalar comparison of the raw groups.",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryPlus",
+   "date": "2026-10-13",
+   "results": "Loogle returned zero hits: unknown identifier CategoryTheory.Functor.mapDerivedCategoryPlus. The source API was found by rg in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "verdict": "exact derived forgetting is available; its raw-Hom invertibility and naturality are not"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*[Cc]ohomology|[Cc]ohomology.*sheafCompose",
+   "date": "2026-10-13",
+   "results": "0 hits from msearch. Direct rg found exists_upperStar_forget₂_natIso and the derived exact functor single and shift APIs.",
+   "verdict": "use existing APIs for explicit data; separate the two proof obligations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomComparison",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Explicit scalar-forgetting comparison of raw derived Hom, split into construction, invertibility and pullback compatibility",
+   "via": [
+    "lem-sbc-raw-module-abelian-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleAbelianHomMap.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleAbelianHomMap",
+  "statement": "def rawModuleAbelianHomMap\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)\n    (U : S.Etale) (A : Over W) :\n    (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op A) ⟶\n      (abelianHigherDirectImageRawPresheaf (A.hom ≫ k) q\n        (restrictedOverCoefficient\n          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)\n          A)).obj (op U)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
