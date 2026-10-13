@@ -18,28 +18,32 @@
  "statement": "Let L be a locally Noetherian scheme, U an open, N a quasi-coherent module, V an affine open, and p a prime of R=O(V) whose point is outside U. For any submodule S of (j_*(N|U))(V), there exist finitely many R_p-modules Q_i, scalars a_i in the maximal ideal of R_p, and R_p-linear maps phi_i:S_p -> Q_i, such that multiplication by a_i is injective on Q_i and all phi_i(z)=0 implies z=0. The family may be empty.",
  "proof": [
   {
-   "text": "Choose finitely many basic opens D(f_i) covering U intersect V. Every f_i lies in p since the point of p is outside U. Quasi-coherence of restriction and qcqs pushforward identifies sections on these opens with P[1/f_i]. Sheaf separatedness on U intersect V makes the restriction map from P to the finite product injective.",
-   "uses": [
-    "pqf-lem-pushforward-qcoh",
-    "lem-weil-pbc-affine-module-basic-open-localization"
-   ],
-   "elementary": false
+   "text": "Local Noetherianity supplies QuasiCompact U.ι. The compact preimage of V has compact image U intersect V. Apply the fully proved source-library IsAffineOpen.exists_finset_basicOpen_eq and enumerate its finset by Fin s.card. Each chosen f_i lies in p: otherwise fromSpec(p) belongs to D(f_i), contained in U, contradicting the boundary hypothesis.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Localize the finite-product injection at p and compose with the localized inclusion S -> P. These remain injective. Set Q_i=(P[1/f_i])_p and a_i=image(f_i) in the maximal ideal. Each a_i acts invertibly on Q_i. The component maps phi_i detect zero. For an empty cover, sheaf separatedness gives P=0 and hence S_p=0.",
+   "text": "Let F=j_*(N|U) and let T_i be F(D(f_i)) with scalars restricted to R=O(V). Define g_i:S -> T_i by inclusion followed by restriction. On the open subscheme U, the preimages of D(f_i) cover the preimage of V. TopCat.Sheaf.eq_of_locally_eq' applied to N|U shows that g_i jointly detect zero. The structure-sheaf theorem isUnit_res_basicOpen makes multiplication by f_i injective on T_i. These are ordinary section modules; no quasi-coherence or affine localization identification is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set Q_i=LocalizedModule.AtPrime p T_i and a_i=algebraMap(f_i), which belongs to the maximal ideal by IsLocalization.AtPrime.map_eq_maximalIdeal and Ideal.mem_map_of_mem. Define phi_i using IsLocalizedModule.mapExtendScalars. Localizing the injective endomorphism f_i times identity proves injectivity of multiplication by a_i, using IsLocalizedModule.map_injective and linearMap_ext.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For joint zero detection, represent z as m/d by mk'_surjective. map_mk' and eq_zero_iff give, for every i, a denominator c_i outside p annihilating g_i(m). The private common_annihilator lemma multiplies these denominators by induction on the finite set, including its empty case c=1. Linearity and joint detection imply c*m=0; mk'_eq_zero' now gives z=0. The private localized_joint_zero lemma contains this complete argument.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-affine-module-basic-open-localization",
-  "pqf-lem-pushforward-qcoh"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "kind": "from-document",
-  "by": "F4",
+  "by": "M1",
   "document": "Stacks Project",
-  "place": "Tag 0AVN, finite localization injection paragraph; Tag 01LC"
+  "place": "Tag 0AVN, finite basic-open restriction argument; direct section modules and common denominators, fully proved in Lean"
  },
  "status": "split",
  "created": {
@@ -114,10 +118,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T131948-L-4087397",
-  "kind": "interface",
+  "landing": "20261013T141529-L-379894",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
