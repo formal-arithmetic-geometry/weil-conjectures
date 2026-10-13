@@ -9,6 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Leray
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
 
@@ -32,6 +38,315 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X T : Scheme.{u}}
 variable (f : X ⟶ T) (ℱ : X.Modules)
 
+section QuasiCoherence
+
+variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
+quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem isQuasicoherent_higherDirectImage (q : ℕ) :
+    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
+  sorry
+
+end QuasiCoherence
+section Comparison
+
+/-- Global sections along an isomorphism of `𝒪_X`-modules. -/
+noncomputable def appTopAddEquiv {M N : X.Modules} (e : M ≅ N) : Γ(M, ⊤) ≃+ Γ(N, ⊤) :=
+  ((Modules.toPresheaf X).mapIso e).app (Opposite.op ⊤) |>.addCommGroupIsoToAddEquiv
+
+/-- The pushforward of an injective `𝒪_X`-module is acyclic, being flasque. -/
+lemma subsingleton_H_pushforward_of_injective (I : X.Modules) [Injective I] (m : ℕ) :
+    Subsingleton (((pushforward f).obj I).H (m + 1)) :=
+  have := isFlasque_of_injective I
+  have : TopCat.Presheaf.IsFlasque
+      ((SheafOfModules.toSheaf T.ringCatSheaf).obj ((pushforward f).obj I)).obj :=
+    inferInstanceAs (TopCat.Presheaf.IsFlasque
+      (f.base _* ((SheafOfModules.toSheaf X.ringCatSheaf).obj I).obj))
+  TopCat.Sheaf.IsFlasque.subsingleton_H m
+    ((SheafOfModules.toSheaf T.ringCatSheaf).obj ((pushforward f).obj I))
+
+variable [IsAffine T] [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+/-- The cohomology sheaves of `f_* I`, for an injective resolution `I` of `ℱ`, are the higher
+direct images of `ℱ`; over the affine `T` they are acyclic, being quasi-coherent. -/
+lemma subsingleton_H_homology_pushforward (I : InjectiveResolution ℱ) (q m : ℕ) :
+    Subsingleton ((HomologicalComplex.homology
+      (((pushforward f).mapHomologicalComplex _).obj I.cocomplex) q).H (m + 1)) :=
+  have := isQuasicoherent_higherDirectImage f ℱ q
+  have : Subsingleton ((((pushforward f).rightDerived q).obj ℱ).H (m + 1)) :=
+    subsingleton_H_succ_of_isAffine ((higherDirectImage f q).obj ℱ) m
+  subsingleton_H_of_iso (I.isoRightDerivedObj (pushforward f) q) (m + 1)
+
+/-- **`Γ(T, R^{n+1} f_* ℱ) ≅ H^{n+1}(X, ℱ)`** computed with an injective resolution `I` of `ℱ`:
+`Γ(T, Hⁿ⁺¹(f_* I)) = Hⁿ⁺¹(Γ(X, I)) = Hⁿ⁺¹(X, ℱ)`, the first identification because the terms
+and the cohomology sheaves of `f_* I` are acyclic on the affine `T`, the second because the terms
+of `I` are acyclic. -/
+noncomputable def sectionsHigherDirectImageSuccAddEquiv (I : InjectiveResolution ℱ) (n : ℕ) :
+    Γ((higherDirectImage f (n + 1)).obj ℱ, ⊤) ≃+ ℱ.H (n + 1) :=
+  let L := ((pushforward f).mapHomologicalComplex _).obj I.cocomplex
+  have hL : ∀ j m, Subsingleton ((L.X j).H (m + 1)) := fun j m ↦
+    subsingleton_H_pushforward_of_injective f (I.cocomplex.X j) m
+  (appTopAddEquiv (I.isoRightDerivedObj (pushforward f) (n + 1))).trans <|
+  (homologySectionsAddEquiv L hL (subsingleton_H_homology_pushforward f ℱ I) n).trans <|
+  (cyclesQuotientAddEquiv L n).trans <|
+  (AddEquiv.refl (sectionsCycles I.cocomplex n ⧸ sectionsBoundaries I.cocomplex n)).trans <|
+  (cyclesQuotientAddEquiv I.cocomplex n).symm.trans <|
+  (H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+    (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm.trans <|
+  H.mapAddEquiv I.isoCyclesZero.symm (n + 1)
+
+lemma sectionsHigherDirectImageSuccAddEquiv_apply (I : InjectiveResolution ℱ) (n : ℕ)
+    (x : Γ((higherDirectImage f (n + 1)).obj ℱ, ⊤)) :
+    sectionsHigherDirectImageSuccAddEquiv f ℱ I n x =
+      H.map I.isoCyclesZero.inv (n + 1) ((H.cyclesZeroSuccAddEquiv I.cocomplex
+        I.cocomplex_exactAt_succ (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm
+        ((cyclesQuotientAddEquiv I.cocomplex n).symm
+          (cyclesQuotientAddEquiv (((pushforward f).mapHomologicalComplex _).obj I.cocomplex) n
+            (homologySectionsAddEquiv (((pushforward f).mapHomologicalComplex _).obj I.cocomplex)
+              (fun j m ↦ subsingleton_H_pushforward_of_injective f (I.cocomplex.X j) m)
+              (subsingleton_H_homology_pushforward f ℱ I) n
+              (((I.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤) x))))) :=
+  rfl
+
+set_option maxHeartbeats 1600000 in
+-- identifying sections of `f_* Iⁿ` and of `Iⁿ` over `⊤` unfolds `f ⁻¹ᵁ ⊤`
+/-- The comparison `Γ(T, R^{n+1} f_* ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
+lemma sectionsHigherDirectImageSuccAddEquiv_naturality (𝒢 : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
+    (I : InjectiveResolution ℱ) (J : InjectiveResolution 𝒢) (n : ℕ)
+    (x : Γ((higherDirectImage f (n + 1)).obj ℱ, ⊤)) :
+    sectionsHigherDirectImageSuccAddEquiv f 𝒢 J n
+        (((higherDirectImage f (n + 1)).map φ).app ⊤ x) =
+      H.map φ (n + 1) (sectionsHigherDirectImageSuccAddEquiv f ℱ I n x) := by
+  let ψ := InjectiveResolution.desc φ J I
+  let χ := ((pushforward f).mapHomologicalComplex _).map ψ
+  have hK := I.cocomplex_exactAt_succ
+  have hK' := J.cocomplex_exactAt_succ
+  have hacyc : ∀ j m, Subsingleton ((I.cocomplex.X j).H (m + 1)) :=
+    fun _ m ↦ subsingleton_H_of_injective _ m
+  have hacyc' : ∀ j m, Subsingleton ((J.cocomplex.X j).H (m + 1)) :=
+    fun _ m ↦ subsingleton_H_of_injective _ m
+  have hL : ∀ j m, Subsingleton
+      (((((pushforward f).mapHomologicalComplex _).obj I.cocomplex).X j).H (m + 1)) :=
+    fun j m ↦ subsingleton_H_pushforward_of_injective f (I.cocomplex.X j) m
+  have hL' : ∀ j m, Subsingleton
+      (((((pushforward f).mapHomologicalComplex _).obj J.cocomplex).X j).H (m + 1)) :=
+    fun j m ↦ subsingleton_H_pushforward_of_injective f (J.cocomplex.X j) m
+  -- the derived functor side
+  have h1 : ((J.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤)
+      (((higherDirectImage f (n + 1)).map φ).app ⊤ x) =
+      ((HomologicalComplex.homologyMap χ (n + 1)).app ⊤)
+        (((I.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤) x) := by
+    change ((((pushforward f).rightDerived (n + 1)).map φ ≫
+      (J.isoRightDerivedObj (pushforward f) (n + 1)).hom).app ⊤) x = _
+    rw [InjectiveResolution.isoRightDerivedObj_hom_naturality φ I J ψ
+      (InjectiveResolution.desc_commutes_zero φ J I)]
+    rfl
+  let LI := ((pushforward f).mapHomologicalComplex _).obj I.cocomplex
+  let a := homologySectionsAddEquiv LI hL (subsingleton_H_homology_pushforward f ℱ I) n
+    (((I.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤) x)
+  let b : sectionsCycles I.cocomplex n ⧸ sectionsBoundaries I.cocomplex n :=
+    cyclesQuotientAddEquiv LI n a
+  let c := (cyclesQuotientAddEquiv I.cocomplex n).symm b
+  let w := (H.cyclesZeroSuccAddEquiv I.cocomplex hK hacyc n).symm c
+  have hc : (cyclesQuotientAddEquiv J.cocomplex n).symm
+      (QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n) b) =
+      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap ψ n) c := by
+    rw [AddEquiv.symm_apply_eq, cyclesQuotientAddEquiv_naturality, AddEquiv.apply_symm_apply]
+  have hw : (H.cyclesZeroSuccAddEquiv J.cocomplex hK' hacyc' n).symm
+      (QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap ψ n) c) =
+      H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w := by
+    rw [AddEquiv.symm_apply_eq, H.cyclesZeroSuccAddEquiv_naturality ψ hK hacyc hK' hacyc',
+      AddEquiv.apply_symm_apply]
+  have hc' : (cyclesQuotientAddEquiv J.cocomplex n).symm
+      (QuotientAddGroup.map _ _ (sectionsCyclesMap χ n) (sectionsBoundaries_le_comap χ n)
+        (cyclesQuotientAddEquiv LI n a)) =
+      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap ψ n) c := hc
+  have key : (H.cyclesZeroSuccAddEquiv J.cocomplex hK' hacyc' n).symm
+      ((cyclesQuotientAddEquiv J.cocomplex n).symm
+        (QuotientAddGroup.map _ _ (sectionsCyclesMap χ n) (sectionsBoundaries_le_comap χ n)
+          (cyclesQuotientAddEquiv LI n a))) =
+      H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w := by
+    rw [hc', hw]
+  rw [sectionsHigherDirectImageSuccAddEquiv_apply, sectionsHigherDirectImageSuccAddEquiv_apply, h1,
+    homologySectionsAddEquiv_naturality χ hL (subsingleton_H_homology_pushforward f ℱ I) hL'
+      (subsingleton_H_homology_pushforward f 𝒢 J), cyclesQuotientAddEquiv_naturality χ, key,
+    ← H.map_comp_apply, ← H.map_comp_apply, InjectiveResolution.isoCyclesZero_inv_naturality]
+
+
+/-- **`Γ(T, R⁰ f_* ℱ) ≅ H⁰(X, ℱ)`**: both are the global sections of `ℱ`. -/
+noncomputable def sectionsHigherDirectImageZeroAddEquiv :
+    Γ((higherDirectImage f 0).obj ℱ, ⊤) ≃+ ℱ.H 0 :=
+  (appTopAddEquiv ((pushforward f).rightDerivedZeroIsoSelf.app ℱ)).trans
+    (H.zeroLinearEquiv ℱ).symm.toAddEquiv
+
+omit [IsAffine T] [QuasiCompact f] [IsSeparated f]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] in
+lemma sectionsHigherDirectImageZeroAddEquiv_naturality (𝒢 : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
+    (x : Γ((higherDirectImage f 0).obj ℱ, ⊤)) :
+    sectionsHigherDirectImageZeroAddEquiv f 𝒢 (((higherDirectImage f 0).map φ).app ⊤ x) =
+      H.map φ 0 (sectionsHigherDirectImageZeroAddEquiv f ℱ x) := by
+  have h : (((pushforward f).rightDerivedZeroIsoSelf.app 𝒢).hom.app ⊤)
+      (((higherDirectImage f 0).map φ).app ⊤ x) =
+      (((pushforward f).map φ).app ⊤)
+        (((pushforward f).rightDerivedZeroIsoSelf.app ℱ).hom.app ⊤ x) := by
+    change ((((pushforward f).rightDerived 0).map φ ≫
+      ((pushforward f).rightDerivedZeroIsoSelf.app 𝒢).hom).app ⊤) x = _
+    rw [Iso.app_hom, (pushforward f).rightDerivedZeroIsoSelf.hom.naturality φ]
+    rfl
+  change (H.zeroLinearEquiv 𝒢).symm (((pushforward f).rightDerivedZeroIsoSelf.app 𝒢).hom.app ⊤
+      (((higherDirectImage f 0).map φ).app ⊤ x)) =
+    H.map φ 0 ((H.zeroLinearEquiv ℱ).symm
+      (((pushforward f).rightDerivedZeroIsoSelf.app ℱ).hom.app ⊤ x))
+  rw [h, LinearEquiv.symm_apply_eq, H.zeroLinearEquiv_map, LinearEquiv.apply_symm_apply]
+  rfl
+
+end Comparison
+
+section RightDerivedGlobalSections
+
+/-- In the complex of global sections of `K`, the image of `Γ(Kⁿ)` among the cocycles of degree
+`n + 1` is the subgroup of coboundaries. -/
+lemma range_abToCycles_globalSections (K : CochainComplex X.Modules ℕ) (n : ℕ) :
+    AddMonoidHom.range
+        ((((globalSectionsFunctor X).mapHomologicalComplex _).obj K).sc' n (n + 1)
+          (n + 2)).abToCycles = sectionsBoundaries K n := by
+  ext ⟨x, hx⟩
+  simp only [AddMonoidHom.mem_range, AddSubgroup.mem_addSubgroupOf]
+  constructor
+  · rintro ⟨y, hy⟩
+    exact ⟨y, congrArg Subtype.val hy⟩
+  · rintro ⟨y, hy⟩
+    exact ⟨y, Subtype.ext hy⟩
+
+
+variable [HasInjectiveResolutions X.Modules]
+
+/-- **Sheaf cohomology is the right derived functor of global sections**:
+`R^{n+1} Γ(X, ℱ) ≅ H^{n+1}(X, ℱ)`, computed with an injective resolution `I` of `ℱ`. Both sides
+are the cohomology of the complex `Γ(X, I)`, the right side because injective `𝒪_X`-modules
+are acyclic. -/
+noncomputable def rightDerivedGlobalSectionsSuccAddEquiv (I : InjectiveResolution ℱ) (n : ℕ) :
+    ((globalSectionsFunctor X).rightDerived (n + 1)).obj ℱ ≃+ ℱ.H (n + 1) :=
+  let C := ((globalSectionsFunctor X).mapHomologicalComplex _).obj I.cocomplex
+  (I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).addCommGroupIsoToAddEquiv.trans <|
+  (CochainComplex.abHomologySuccAddEquiv C n).trans <|
+  (QuotientAddGroup.quotientAddEquivOfEq
+    (range_abToCycles_globalSections I.cocomplex n)).trans <|
+  (cyclesQuotientAddEquiv I.cocomplex n).symm.trans <|
+  (H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+    (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm.trans <|
+  H.mapAddEquiv I.isoCyclesZero.symm (n + 1)
+
+
+/-- **Sheaf cohomology is the right derived functor of global sections**: for every `q`,
+`R^q Γ(X, ℱ) ≅ H^q(X, ℱ)` (in degree `0` both sides are `Γ(X, ℱ)`). -/
+theorem nonempty_rightDerived_globalSections_addEquiv_H (q : ℕ) :
+    Nonempty (((globalSectionsFunctor X).rightDerived q).obj ℱ ≃+ ℱ.H q) := by
+  cases q with
+  | zero =>
+    exact ⟨((globalSectionsFunctor X).rightDerivedZeroIsoSelf.app ℱ).addCommGroupIsoToAddEquiv.trans
+      (H.zeroLinearEquiv ℱ).symm.toAddEquiv⟩
+  | succ n => exact ⟨rightDerivedGlobalSectionsSuccAddEquiv ℱ (injectiveResolution ℱ) n⟩
+
+
+lemma rightDerivedGlobalSectionsSuccAddEquiv_apply (I : InjectiveResolution ℱ) (n : ℕ)
+    (x : ((globalSectionsFunctor X).rightDerived (n + 1)).obj ℱ) :
+    rightDerivedGlobalSectionsSuccAddEquiv ℱ I n x =
+      H.map I.isoCyclesZero.inv (n + 1) ((H.cyclesZeroSuccAddEquiv I.cocomplex
+        I.cocomplex_exactAt_succ (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm
+        ((cyclesQuotientAddEquiv I.cocomplex n).symm
+          (QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
+            (CochainComplex.abHomologySuccAddEquiv _ n
+              ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x))))) :=
+  rfl
+
+set_option maxHeartbeats 1600000 in
+-- the identifications of the global sections complexes unfold the sections functor
+/-- `R^{n+1} Γ(X, ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
+lemma rightDerivedGlobalSectionsSuccAddEquiv_naturality (𝒢 : X.Modules) (φ : ℱ ⟶ 𝒢)
+    (I : InjectiveResolution ℱ) (J : InjectiveResolution 𝒢) (n : ℕ)
+    (x : ((globalSectionsFunctor X).rightDerived (n + 1)).obj ℱ) :
+    rightDerivedGlobalSectionsSuccAddEquiv 𝒢 J n
+        (((globalSectionsFunctor X).rightDerived (n + 1)).map φ x) =
+      H.map φ (n + 1) (rightDerivedGlobalSectionsSuccAddEquiv ℱ I n x) := by
+  let ψ := InjectiveResolution.desc φ J I
+  let Γψ := ((globalSectionsFunctor X).mapHomologicalComplex _).map ψ
+  have hK := I.cocomplex_exactAt_succ
+  have hK' := J.cocomplex_exactAt_succ
+  have hacyc : ∀ j m, Subsingleton ((I.cocomplex.X j).H (m + 1)) :=
+    fun _ m ↦ subsingleton_H_of_injective _ m
+  have hacyc' : ∀ j m, Subsingleton ((J.cocomplex.X j).H (m + 1)) :=
+    fun _ m ↦ subsingleton_H_of_injective _ m
+  have h1 : (J.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom
+      (((globalSectionsFunctor X).rightDerived (n + 1)).map φ x) =
+      HomologicalComplex.homologyMap Γψ (n + 1)
+        ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x) := by
+    rw [← ConcreteCategory.comp_apply, InjectiveResolution.isoRightDerivedObj_hom_naturality φ I J
+      ψ (InjectiveResolution.desc_commutes_zero φ J I)]
+    rfl
+  obtain ⟨c, hc⟩ := (AddCommGrpCat.epi_iff_surjective (HomologicalComplex.homologyπ
+      (((globalSectionsFunctor X).mapHomologicalComplex _).obj I.cocomplex) (n + 1))).mp
+    inferInstance
+    ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x)
+  let CI := ((globalSectionsFunctor X).mapHomologicalComplex _).obj I.cocomplex
+  let CJ := ((globalSectionsFunctor X).mapHomologicalComplex _).obj J.cocomplex
+  have hv : CJ.iCycles (n + 1) (HomologicalComplex.cyclesMap Γψ (n + 1) c) =
+      (ψ.f (n + 1)).app ⊤ (CI.iCycles (n + 1) c) := by
+    rw [← ConcreteCategory.comp_apply, HomologicalComplex.cyclesMap_i]
+    rfl
+  have hI : QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
+      (CochainComplex.abHomologySuccAddEquiv CI n
+        ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x))
+      = QuotientAddGroup.mk ⟨CI.iCycles (n + 1) c, by
+        change (CI.iCycles (n + 1) ≫ CI.d (n + 1) (n + 2)) c = 0
+        rw [HomologicalComplex.iCycles_d]; rfl⟩ := by
+    rw [← hc, CochainComplex.abHomologySuccAddEquiv_homologyπ]
+    rfl
+  have hJ : QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections J.cocomplex n)
+      (CochainComplex.abHomologySuccAddEquiv CJ n
+        ((J.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom
+        (((globalSectionsFunctor X).rightDerived (n + 1)).map φ x))) =
+      QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n)
+        (QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
+          (CochainComplex.abHomologySuccAddEquiv CI n
+            ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x))) := by
+    have hπ : HomologicalComplex.homologyMap Γψ (n + 1) (CI.homologyπ (n + 1) c) =
+        CJ.homologyπ (n + 1) (HomologicalComplex.cyclesMap Γψ (n + 1) c) := by
+      rw [← ConcreteCategory.comp_apply, HomologicalComplex.homologyπ_naturality]
+      rfl
+    rw [hI, h1, ← hc, hπ]
+    rw [CochainComplex.abHomologySuccAddEquiv_homologyπ, QuotientAddGroup.map_mk]
+    refine congrArg QuotientAddGroup.mk (Subtype.ext ?_)
+    exact hv
+  rw [rightDerivedGlobalSectionsSuccAddEquiv_apply, rightDerivedGlobalSectionsSuccAddEquiv_apply,
+    hJ]
+  have hc' : (cyclesQuotientAddEquiv J.cocomplex n).symm
+      (QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n)
+        (QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
+          (CochainComplex.abHomologySuccAddEquiv CI n
+            ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x)))) =
+      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap ψ n) ((cyclesQuotientAddEquiv I.cocomplex n).symm
+          (QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
+            (CochainComplex.abHomologySuccAddEquiv CI n
+              ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x)))) := by
+    rw [AddEquiv.symm_apply_eq, cyclesQuotientAddEquiv_naturality, AddEquiv.apply_symm_apply]
+  rw [hc', H.cyclesZeroSuccAddEquiv_naturality_symm ψ hK hacyc hK' hacyc', ← H.map_comp_apply,
+    ← H.map_comp_apply, InjectiveResolution.isoCyclesZero_inv_naturality]
+
+end RightDerivedGlobalSections
+
 /-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
 base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
 cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`.
@@ -48,8 +363,14 @@ theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact 
       ∀ (ℱ 𝒢 : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
         [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
         (x : Γ((higherDirectImage f q).obj ℱ, ⊤)),
-        e 𝒢 (((higherDirectImage f q).map φ).app ⊤ x) = H.map φ q (e ℱ x) :=
-  sorry
+        e 𝒢 (((higherDirectImage f q).map φ).app ⊤ x) = H.map φ q (e ℱ x) := by
+  cases q with
+  | zero =>
+    exact ⟨fun ℱ _ ↦ sectionsHigherDirectImageZeroAddEquiv f ℱ,
+      fun ℱ 𝒢 _ _ φ x ↦ sectionsHigherDirectImageZeroAddEquiv_naturality f ℱ 𝒢 φ x⟩
+  | succ n =>
+    exact ⟨fun ℱ _ ↦ sectionsHigherDirectImageSuccAddEquiv f ℱ (injectiveResolution ℱ) n,
+      fun ℱ 𝒢 _ _ φ x ↦ sectionsHigherDirectImageSuccAddEquiv_naturality f ℱ 𝒢 φ _ _ n x⟩
 
 /-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
 base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
@@ -221,21 +542,6 @@ theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [�
 
 end BaseChange
 
-section QuasiCoherence
-
-variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
-  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-
-/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
-quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
-quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
-
-(blueprint: `sk-thm-picard-coherence`) -/
-theorem isQuasicoherent_higherDirectImage (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
-  sorry
-
-end QuasiCoherence
 
 section Vanishing
 
