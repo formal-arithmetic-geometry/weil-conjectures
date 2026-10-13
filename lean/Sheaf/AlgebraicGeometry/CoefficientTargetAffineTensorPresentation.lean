@@ -7,9 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
+import Sheaf.AlgebraicGeometry.CoefficientTargetGeneratorScalar
+import Sheaf.AlgebraicGeometry.CoefficientTargetTensorInjective
+import Sheaf.AlgebraicGeometry.CoefficientTargetTensorSurjective
 
 /-! # Tensor presentation of inverse-image coefficient sections
 
@@ -24,6 +26,9 @@ open CategoryTheory Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Sections supported on the inverse image of an affine coefficient open have a
 unit-compatible tensor presentation. This assertion only describes the target sections;
@@ -70,7 +75,53 @@ theorem exists_coefficientTarget_affine_tensor_presentation
         (coefficientSupportIso f' M W B).hom
           (e.symm ((1 : Γ(T', B)) ⊗ₜ[Γ(U.toScheme, ⊤)] (s : N))) =
         M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op
-          (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s) := by sorry
+          (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s) := by
+  classical
+  dsimp only
+  let : Algebra Γ(U.toScheme, ⊤) Γ(T', B) :=
+    (g.appLE ⊤ B (by simp)).hom.toAlgebra
+  let N := (ModuleCat.restrictScalars
+    (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
+      ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj
+        ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z))
+  let M := (pullback g').obj F
+  let Q := (pushforward (W.ι ≫ f')).obj (M.restrict W.ι)
+  let : Module Γ(U.toScheme, ⊤) Γ(Q, B) :=
+    Module.compHom _ (algebraMap Γ(U.toScheme, ⊤) Γ(T', B))
+  let : IsScalarTower Γ(U.toScheme, ⊤) Γ(T', B) Γ(Q, B) :=
+    IsScalarTower.of_algebraMap_smul (fun _ _ ↦ rfl)
+  let p : N →ₗ[Γ(U.toScheme, ⊤)] Γ(Q, B) :=
+    { toFun := fun s ↦ (coefficientSupportIso f' M W B).inv
+          (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op
+            (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s))
+      map_add' := by
+        intro s t
+        simp only [coefficientPullbackGenerator, map_add]
+      map_smul' := by
+        intro a s
+        exact coefficientTarget_generator_scalar f F U Z g g' f' sq.w W hW B a s }
+  let c : (Γ(T', B) ⊗[Γ(U.toScheme, ⊤)] N) →ₗ[Γ(T', B)] Γ(Q, B) :=
+    TensorProduct.AlgebraTensorModule.lift
+      { toFun := fun r ↦ (Algebra.lsmul Γ(U.toScheme, ⊤) Γ(U.toScheme, ⊤) Γ(Q, B) r).comp p
+        map_add' := by intro r t; ext s; exact add_smul r t (p s)
+        map_smul' := by intro r t; ext s; exact mul_smul r t (p s) }
+  have hc (s : N) : c ((1 : Γ(T', B)) ⊗ₜ[Γ(U.toScheme, ⊤)] s) = p s := by
+    change (1 : Γ(T', B)) • p s = p s
+    exact one_smul _ _
+  have hi : Function.Injective c :=
+    coefficientTarget_tensor_injective f F U hU Z hZ g g' f' sq W hW B hB c hc
+  have hs : Function.Surjective c :=
+    coefficientTarget_tensor_surjective f F U hU Z hZ g g' f' sq W hW B hB c hc
+  let e := (LinearEquiv.ofBijective c ⟨hi, hs⟩).symm
+  refine ⟨e, ?_⟩
+  intro s
+  change (coefficientSupportIso f' M W B).hom
+    (c ((1 : Γ(T', B)) ⊗ₜ[Γ(U.toScheme, ⊤)] (s : N))) = _
+  rw [hc]
+  change (coefficientSupportIso f' M W B).hom
+    ((coefficientSupportIso f' M W B).inv _) = _
+  exact Iso.inv_hom_id_apply (coefficientSupportIso f' M W B) _
+
 
 end
 end AlgebraicGeometry.Scheme.Modules
