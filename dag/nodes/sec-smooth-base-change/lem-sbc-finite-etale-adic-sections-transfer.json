@@ -14,36 +14,36 @@
  ],
  "proof": [
   {
-   "text": "V is Noetherian and quasi-affine because it is an open of a Noetherian affine scheme. The finite étale map P→V is finite, flat and finitely presented, so its direct image E of O_P is finite locally free.",
+   "text": "Obtain finite scalar kernel coordinates and matrix relations, compatible with projections and transitions, from the geometric kernel presentation.",
    "uses": [
-    "lem-pc-finite-flat-pushforward-locally-free"
+    "new-finite-etale-adic-sections-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "O_V is ample on the quasi-affine scheme. The dual of E is finite type, so finitely many global generators give a surjection O^r→E dual. Dualizing, locally where E is free, gives a universally injective E→O^r whose cokernel C is locally free. Repeat for C and compose to obtain 0→E→O^r→O^s, universally exact at the first two terms. This uses the construction in Stacks 0EKP, (2)→(3), with the ample bundle O_V.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Pull back this universally exact sequence to every V_n. Sections express Γ(V,E) and Γ(V_n,E|V_n) as kernels of the maps between the respective finite powers of scalar section rings. The scalar comparison hypothesis gives bijections on these powers, and the matrices defining the sheaf map commute with restrictions. Given a compatible family in the latter kernels, lift its coordinates uniquely using scalar comparison; its image in O^s vanishes because it vanishes at every index, and scalar uniqueness detects zero. This yields existence and uniqueness in Γ(V,E).",
+   "text": "Scalar uniqueness implies two ambient scalar sections agreeing on all thickenings are equal: apply hscalar to the restricted family and compare both with its unique lift. The restriction family is compatible because the transition followed by the projection is the projection.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Finite affine base change identifies E|V_n with the direct image of O_(P_n) along P_n→V_n. Direct-image sections are the sections of the total space, and the base-change identification respects the projections and transitions. The preceding kernel bijection therefore has exactly the stated coverMap and coverTransition equalities. Empty opens and rank-zero or variable-rank covers are included.",
+   "text": "Use transition compatibility to show that every coordinate of en(s_n) is a compatible scalar family. Apply scalar existence coordinatewise to obtain x in Γ(V,O)^r. Restrict each row of cx; map_sum and map_mul identify it with the zero matrix relation at each thickening. Scalar uniqueness against zero gives cx=0. Lift x through e to a section a. Projection compatibility and injectivity of en give the required restrictions of a.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For any other lift b, projection compatibility gives equal restrictions of each coordinate of e(b) and e(a). Scalar uniqueness gives coordinate equality; injectivity of e gives b=a.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-flat-pushforward-locally-free"
+  "new-finite-etale-adic-sections-kernel"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "S1",
+  "by": "J4",
   "document": "Stacks Project",
-  "place": "Tag 0EKP, implications (1)→(2)→(3), together with finite affine base change for the structure sheaf."
+  "place": "Tag 0EKP, scalar kernel comparison in (2)→(3), specialized to O_V; geometry separated into new-finite-etale-adic-sections-kernel"
  },
  "mathlib_searches": [
   {
@@ -115,9 +115,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T150353-L-810369",
+  "landing": "20261013T153222-L-1060032",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
