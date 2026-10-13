@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-open-module-image-section-restriction",
+ "kind": "statement",
+ "title": "Sectionwise formula for transported nested-open module restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $W\\subseteq U$ open subsets, $T$ an open subset of $X$, and $M$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $M_A=j_{A*}r_A M$ and $\\rho_{U,W}:M_U\\to M_W$ be the transported open restriction of [def-pc-kinjective-mayer-vietoris-data], built using the composition comparison of [def-pc-derived-open-restriction-maps]. Write $e_A:M_A\\xrightarrow{\\sim} j_{A*}(M|_A)$ for the direct image of Scheme.Modules.overFunctorEquiv. For every $a\\in M_U(T)$, $e_W(T)(\\rho_{U,W}(T)(a))$ equals the ordinary restriction of $e_U(T)(a)$ from $U\\cap T$ to $W\\cap T$. No cover or nonemptiness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV (lemma-exact-sequence-j-star), the maps in the sectionwise sequence; concrete realization by schemeOpenModuleImageRestriction"
+ },
+ "proof": [
+  {
+   "text": "Expand the mate into the smaller restriction unit, the inverse\ncomposition comparison, the restricted larger counit, and the forward\ncomposition comparison. Insert overFunctorEquiv on both ends. Its inverse\nand forward components cancel. The unit and counit of overEquiv cancel by\nthe equivalence triangle identity, and overFunctorMap has identity section\ncomponents. The remaining ordinary unit and counit components are restriction\nmaps by restrictAdjunction_unit_app_app and restrictAdjunction_counit_app_app.\nFunctoriality combines them into the single restriction along\nW ∩ T ⊆ U ∩ T. The opens written as image-preimages below equal these\nintersections by image_preimage_eq_opensRange_inf and opensRange_ι.\nThis computation holds for all nested opens, including the empty and equal\nones, and uses no covering hypothesis or sheaf amalgamation.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV; U4 expansion of the concrete transported mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "overFunctorEquiv|restrictAdjunction_unit_app_app|restrictAdjunction_counit_app_app",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. No theorem for the transported mate.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctorMap",
+   "results": "1 hits: SheafOfModules.overFunctorMap. No theorem for the transported mate.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "component of restriction between direct images from nested opens agrees with ordinary sheaf restriction after open site comparison",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.restrict_presheaf_map, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.ofRestrict_appLE, AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app. No theorem for the transported mate.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction map between direct images from nested open subschemes is section restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenModuleImageAmalgamation",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Derived Mayer-Vietoris gluing over two opens: sheaf gluing gives the kernel of the degreewise restriction/difference sequence; identify the nested-open restriction maps sectionwise",
+   "via": [
+    "lem-pc-open-module-image-gluing-existence",
+    "lem-pc-open-module-image-gluing",
+    "lem-pc-kinjective-mayer-vietoris-degreewise",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleImageSectionRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleImageSectionRestriction.lean",
+  "declaration": "AlgebraicGeometry.schemeOpenModuleImage_section_restriction",
+  "statement": "theorem schemeOpenModuleImage_section_restriction\n    (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)\n    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (T : X.Opens)\n    (a : ((schemeOpenModuleImage X U).obj M).val.obj (.op T)) :\n    (((Scheme.Modules.pushforward W.ι).map\n      ((Scheme.Modules.overFunctorEquiv W).hom.app M)).val.app (.op T))\n      (((schemeOpenModuleImageRestriction X i).app M).val.app (.op T) a) =\n    M.val.map (homOfLE (show W.ι ''ᵁ (W.ι ⁻¹ᵁ T) ≤ U.ι ''ᵁ (U.ι ⁻¹ᵁ T) by\n      rw [Scheme.Hom.image_preimage_eq_opensRange_inf,\n        Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,\n        Scheme.Opens.opensRange_ι]\n      exact inf_le_inf_right T (leOfHom i))).op\n      ((((Scheme.Modules.pushforward U.ι).map\n        ((Scheme.Modules.overFunctorEquiv U).hom.app M)).val.app (.op T)) a)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T082418-L-1649699",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T082418-L-1649699",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
