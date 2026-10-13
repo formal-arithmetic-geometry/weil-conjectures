@@ -62,6 +62,21 @@ open CategoryTheory Limits Opposite Pretriangulated
 
 open scoped CategoryTheory.Functor
 
+namespace CategoryTheory.Functor
+
+/-- A whiskering `F ◫ α` is an isomorphism as soon as `α` is one at every object `F.obj X`.
+Stated for abstract functors: for concrete derived functors `G`, the kernel can take very long
+to match `(F ⋙ G).obj X` against `G.obj (F.obj X)`. -/
+lemma isIso_whiskerLeft_of_isIso_app {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (F : C ⥤ D) {G H : D ⥤ E} (α : G ⟶ H) [∀ X, IsIso (α.app (F.obj X))] :
+    IsIso (Functor.whiskerLeft F α) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro X
+  rw [Functor.whiskerLeft_app]
+  infer_instance
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme _root_.DerivedCategory
@@ -88,6 +103,20 @@ def DerivedCategory.boundedConstructibleComplete (T : Scheme.{u}) : ObjectProper
       TStructure.t.IsGE ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n)) a ∧
       TStructure.t.IsLE ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n)) b
 
+/-- The reductions `K_n = K ⊗ᴸ R/Iⁿ` of `K` are of étale origin with bounded constructible
+cohomology. -/
+def DerivedCategory.ReductionsBoundedConstructible (T : Scheme.{u}) (K : 𝐃(T)) : Prop :=
+  ∀ n : ℕ, ProEtale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} R) T
+    ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n))
+
+/-- The reductions of an object of `Dᵇc(T_proét, R)` are of étale origin with bounded
+constructible cohomology. -/
+lemma DerivedCategory.boundedConstructibleComplete.reductionsBoundedConstructible
+    {T : Scheme.{u}} {K : 𝐃(T)} (hK : DerivedCategory.boundedConstructibleComplete I T K) :
+    DerivedCategory.ReductionsBoundedConstructible I T K := by
+  obtain ⟨-, a, b, hab⟩ := hK
+  exact fun n ↦ (hab n).1
+
 variable {I}
 
 /-- An integer `N` lying in `I` acts by zero on the `n`-th reduction `K ⊗ᴸ R/Iⁿ` through its
@@ -105,7 +134,8 @@ lemma smul_id_map_derivedCompletionDiagram_obj {T T' : Scheme.{u}} {ϖ : R} (hϖ
     ϖ ^ n • 𝟙 (Φ.obj ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n))) =
       0 := by
   rw [← Φ.map_id, ← Functor.map_smul, smul_id_derivedCompletionDiagram_obj _ hϖ K n,
-    Φ.map_zero]
+    ← zero_smul R (0 : (derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n) ⟶ _),
+    Functor.map_smul, zero_smul]
 
 /-- The point of a homotopy limit of a tower of `D(T_proét, R)` whose terms are killed by powers
 of `ϖ` is derived complete for `I = (ϖ)`: it receives no nonzero map from an object on which `ϖ`
@@ -155,11 +185,28 @@ noncomputable def adicBaseChangeTowerMap (sq : CommSq e h g p) (K : 𝐃(T)) :
         L((e)^*[ModuleCat.{u + 1} R]) ⋙ R((h)_*[ModuleCat.{u + 1} R]) :=
   Functor.whiskerLeft _ (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} R) sq)
 
-lemma adicBaseChangeTowerMap_app (sq : CommSq e h g p) (K : 𝐃(T)) (n : ℕᵒᵖ) :
-    (adicBaseChangeTowerMap I sq K).app n =
-      (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} R) sq).app
-        ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj n) := by
-  rw [adicBaseChangeTowerMap, Functor.whiskerLeft_app]
+/-- The whiskering of the exchange map `Ex` by the reduction tower is an isomorphism of towers as
+soon as every `Ex_{K_n}` is an isomorphism. -/
+lemma isIso_whiskerLeft_derivedBaseChangeMap (sq : CommSq e h g p) (K : 𝐃(T))
+    (hK : ∀ n : ℕ, IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} R) sq).app
+      ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n)))) :
+    IsIso (Functor.whiskerLeft (derivedCompletionDiagram (Scheme.ProEt.topology T) I K)
+      (ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} R) sq)) := by
+  have (X : ℕᵒᵖ) : IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} R) sq).app
+      ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj X)) := by
+    -- `hK X.unop` would make the kernel match `op X.unop` against `X` inside the derived
+    -- functors, which unfolds them
+    cases X; exact hK _
+  exact Functor.isIso_whiskerLeft_of_isIso_app _ _
+
+/-- The levelwise exchange maps form an isomorphism of towers as soon as every `Ex_{K_n}` is an
+isomorphism. -/
+lemma isIso_adicBaseChangeTowerMap_of_forall (sq : CommSq e h g p) (K : 𝐃(T))
+    (hK : ∀ n : ℕ, IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} R) sq).app
+      ((derivedCompletionDiagram (Scheme.ProEt.topology T) I K).obj (op n)))) :
+    IsIso (adicBaseChangeTowerMap I sq K) :=
+  -- stated separately: proving it directly makes the kernel unfold the derived functors
+  isIso_whiskerLeft_derivedBaseChangeMap sq K hK
 
 /-- The derived direct image `Rh_*` commutes with derived limits: it sends a homotopy limit cone
 of a tower to a homotopy limit cone of its image. It is a triangulated right adjoint, so it
@@ -292,7 +339,10 @@ theorem isIso_fromIntegral_map_of_isIso_adicBaseChangeTowerMap (sq : CommSq e h 
       (ObjectProperty.homMk (P := derivedCompleteIntegral (Scheme.ProEt.topology X) l E)
         (X := ⟨A, derivedCompleteIntegral_adicSource l E g p K hPF hA⟩)
         (Y := ⟨B, derivedCompleteIntegral_adicTarget l E e h K hPG hB⟩) u)) := this
-  have := isIso_of_reflects_iso _ (derivedCompleteIntegral (Scheme.ProEt.topology X) l E).ι
+  have : IsIso (ObjectProperty.homMk (P := derivedCompleteIntegral (Scheme.ProEt.topology X) l E)
+      (X := ⟨A, derivedCompleteIntegral_adicSource l E g p K hPF hA⟩)
+      (Y := ⟨B, derivedCompleteIntegral_adicTarget l E e h K hPG hB⟩) u) :=
+    isIso_of_reflects_iso _ (derivedCompleteIntegral (Scheme.ProEt.topology X) l E).ι
   exact Functor.map_isIso _ _
 
 /-- The objects of `D(T_proét, 𝒪_E)` of étale origin with bounded constructible cohomology in
@@ -329,16 +379,14 @@ variable {l E} {K : DerivedCategoryDerivedCompleteRational (Scheme.ProEt.topolog
 /-- Blueprint `sbc-def-admissible-lattices`: a lattice is *finite-level étale admissible* if each
 reduction `L_n = L ⊗ᴸ 𝒪_E/𝔪_Eⁿ` is of étale origin with bounded constructible cohomology. -/
 def IsFiniteLevelEtaleAdmissible (Λ : IntegralLattice l E K) : Prop :=
-  ∀ n : ℕ, ProEtale.DerivedCategory.boundedConstructible 𝐌 T
-    ((derivedCompletionDiagram (Scheme.ProEt.topology T) 𝔪 Λ.obj).obj (op n))
+  DerivedCategory.ReductionsBoundedConstructible 𝔪 T Λ.obj
 
 /-- Every integral lattice is finite-level étale admissible: in this formalisation the étale
 origin of the reductions is part of the definition of `Dᵇc(T_proét, 𝒪_E)`, as it is in blueprint
 `def-weil-pbc-bounded-constructible-complete`. -/
 lemma isFiniteLevelEtaleAdmissible (Λ : IntegralLattice l E K) :
-    Λ.IsFiniteLevelEtaleAdmissible := by
-  obtain ⟨-, a, b, hab⟩ := Λ.mem
-  exact fun n ↦ (hab n).1
+    Λ.IsFiniteLevelEtaleAdmissible :=
+  Λ.mem.reductionsBoundedConstructible
 
 /-- Blueprint `sbc-def-admissible-lattices`: a lattice is *square-constructibly admissible* for
 a commutative square `sq` if the four finite-level systems `Rg_* L_n`, `Lp^* Rg_* L_n`, `Le^* L_n`
