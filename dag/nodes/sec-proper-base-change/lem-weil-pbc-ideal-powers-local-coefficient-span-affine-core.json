@@ -15,24 +15,52 @@
  },
  "proof": [
   {
-   "text": "Use the affine section formulas for quasi-coherent modules and extended ideals, induct on the recursive idealSheafPower, and expand ideal-module product membership as finite sums. Rewrite each module factor using the spanning hypothesis.",
+   "text": "Use the surjective affine section base-change comparison from U to W. Tensor induction followed by span induction on the U-factor proves that the restrictions of the given generators span F(W).",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ideal_comap_appLE to the affine top open of Spec A. ideal_top_ofIdealTop and Ideal.map_map identify J(W) with the extension of I along the displayed coefficient ring map.",
+   "uses": [
+    "lem-pc-ideal-sheaf-comap-affine-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any quasi-coherent K and morphism i:K -> O_X, the affine abelian image formula lifts an image section to the multiplication tensor. The canonical image/abelian-image isomorphism relates this image to idealModuleProduct. The affine tensor comparison and tensor induction show that the section belongs to range(i_W) times F(W); pure tensors map to i_W(s) times v.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
     "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
    ],
    "elementary": false
+  },
+  {
+   "text": "For m>0 the existing affine ideal-power formulas give quasi-coherence of J^m and range of its inclusion equal to J(W)^m. For m=0 the module is the structure sheaf and the inclusion is the identity, whose range is top.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the power range and the spanning family in the multiplication membership. Ideal.map_pow, the definition of Ideal.map, and Mathlib Submodule.span_smul_span express this as the span of the image of I^m times the range of the restricted generators, which is the desired generating set.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "worker W3, second reading",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 02O8"
+  "place": "Tag 02O8, finite-type argument",
+  "note": "Direct reduction through affine base change, affine image and tensor formulas, and ideal powers; no finite-expansion restatement and no new holes."
  },
  "mathlib_searches": [
   {
@@ -104,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T000909-L-2282015",
+  "landing": "20261013T010623-L-2674099",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
