@@ -32,60 +32,20 @@
  ],
  "proof": [
   {
-   "text": "*The images are $H_1$-regular in $A/I$.* Write $A$ for the ring $R$ of the statement (the source's notation), $\\bar A=A/I$, and $\\bar x$ for the image of $x\\in A$ in $\\bar A$; the Koszul complexes below are written $K_\\bullet(-)$, not to be confused with the ideal $K=(g_1,\\dots,g_m)$. By hypothesis $\\bar g_1,\\dots,\\bar g_m$ is a regular sequence in $\\bar A$ [def-weil-pbc-regular-sequence]: for each $i$, multiplication by $\\bar g_i$ is injective on $\\bar A/(\\bar g_1,\\dots,\\bar g_{i-1})$. So [lem-weil-pbc-regular-sequence-koszul-regular] (Stacks 062F, with ring $\\bar A$ and $M=\\bar A$) shows that $\\bar g_1,\\dots,\\bar g_m$ is Koszul-regular, i.e. $H_i(K_\\bullet(\\bar A,\\bar g_1,\\dots,\\bar g_m))=0$ for all $i\\neq0$ [def-weil-pbc-koszul-regular-sequence]. Taking $i=1$, it is $H_1$-regular (Stacks 0CEM: 'immediate from the definition'): $H_1(K_\\bullet(\\bar A,\\bar g_\\bullet))=0$.",
+   "text": "Apply the split auxiliary inclusion `aux-regular-quotient-ideal-intersection-inclusion` to obtain I ⊓ Ideal.ofList gs ≤ I * Ideal.ofList gs. For the reverse inclusion, use that ideal multiplication is contained in each factor, then conclude by antisymmetry.",
    "uses": [
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-regular-sequence-koszul-regular",
-    "def-weil-pbc-koszul-regular-sequence"
+    "aux-regular-quotient-ideal-intersection-inclusion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 062F (lemma-regular-koszul-regular, line 7265) and Lemma Tag 0CEM (lemma-koszul-regular-H1-regular, line 7301), turning the hypothesis of the item into the hypothesis of Lemma Tag 0665"
-   }
-  },
-  {
-   "text": "*The two Koszul complexes in degrees $\\le2$ and reduction modulo $I$.* By [def-weil-pbc-koszul-complex], $K_0(A,g_\\bullet)=A$, $K_1(A,g_\\bullet)=A^{\\oplus m}$ with basis $e_1,\\dots,e_m$ and $d_1(e_i)=g_i$, so $d_1(\\sum_ia_ie_i)=\\sum_ia_ig_i$; $K_2(A,g_\\bullet)$ is free on $e_i\\wedge e_j$ ($i<j$) with $d_2(e_i\\wedge e_j)=g_ie_j-g_je_i$, so $d_1d_2=0$. The same holds over $\\bar A$ with $\\bar g_i$. Reducing coordinates modulo $I$ in these bases gives surjections $\\pi_n:K_n(A,g_\\bullet)\\to K_n(\\bar A,\\bar g_\\bullet)$ for $n=0,1,2$ with $\\pi_{n-1}d_n=\\bar d_n\\pi_n$ (the matrices of $\\bar d_n$ are those of $d_n$ reduced mod $I$), and $\\ker\\pi_1=I^{\\oplus m}=\\{\\sum_ic_ie_i: c_i\\in I\\}$. This is the low-degree part of the source's exact sequence of complexes $0\\to I\\otimes_AK_\\bullet(A,g_\\bullet)\\to K_\\bullet(A,g_\\bullet)\\to K_\\bullet(A/I,g_\\bullet)\\to0$ (exact because each $K_n(A,g_\\bullet)$ is free).",
-   "uses": [
-    "def-weil-pbc-koszul-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0665 (lemma-H1-regular-in-quotient, line 7472), proof, first display (the exact sequence of complexes), with Definitions 0622/0623 (lines 6566-6600)"
-   }
-  },
-  {
-   "text": "*$I\\cap K\\subseteq IK$ (the source's injectivity of $\\operatorname{Coker}(I^{\\oplus m}\\to I)\\to\\operatorname{Coker}(A^{\\oplus m}\\to A)$, written out).* Let $x\\in I\\cap K$. As $K=(g_1,\\dots,g_m)$, write $x=\\sum_ia_ig_i$ with $a_i\\in A$ and put $a=\\sum_ia_ie_i\\in K_1(A,g_\\bullet)$, so $d_1(a)=x$. By step 2, $\\bar d_1(\\pi_1(a))=\\pi_0(d_1a)=\\bar x=0$ since $x\\in I$; so $\\pi_1(a)$ is a $1$-cycle of $K_\\bullet(\\bar A,\\bar g_\\bullet)$, and by step 1 ($H_1=0$) there is $\\beta\\in K_2(\\bar A,\\bar g_\\bullet)$ with $\\bar d_2(\\beta)=\\pi_1(a)$. Choose $b\\in K_2(A,g_\\bullet)$ with $\\pi_2(b)=\\beta$ (lift each coordinate). Put $c=a-d_2(b)=\\sum_ic_ie_i$. Then $\\pi_1(c)=\\pi_1(a)-\\bar d_2(\\pi_2b)=0$, so every $c_i\\in I$ (step 2), and $\\sum_ic_ig_i=d_1(c)=d_1(a)-d_1d_2(b)=x$. Hence $x=\\sum_ic_ig_i\\in IK$.",
-   "uses": [
-    "def-weil-pbc-koszul-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0665 (lemma-H1-regular-in-quotient), proof, lines 7487-7494: 'Since the complex on the right has H_1 = 0 ... is injective. This is equivalent to the assertion of the lemma.'"
-   }
-  },
-  {
-   "text": "*Conclusion.* Conversely $IK\\subseteq I$ and $IK\\subseteq K$ because both are ideals, so $IK\\subseteq I\\cap K$; with step 3, $I\\cap K=IK$. (For $m=0$ both sides are $0$.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0665, proof, last sentence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-koszul-complex",
-  "def-weil-pbc-koszul-regular-sequence",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-regular-sequence-koszul-regular"
+  "aux-regular-quotient-ideal-intersection-inclusion"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 0665 (lemma-H1-regular-in-quotient, lines 7471-7494) with its proof, the hypothesis supplied by Lemma Tag 062F (line 7265) and Lemma Tag 0CEM (line 7301)"
+  "by": "worker",
+  "document": "lean/Sheaf/RingTheory/RegularQuotientIdealIntersectionAux.lean",
+  "place": "Auxiliary inclusion plus ideal monotonicity"
  },
  "mathlib_searches": [
   {
@@ -179,5 +139,15 @@
   "group": "H1",
   "result": "pass",
   "note": "CommRing R universe u; I : Ideal R; gs : List R (m=0 allowed, both sides ⊥); IsRegular (R⧸I) over R⧸I of gs.map mk = images regular in R/I (recorded dep decl); K = Ideal.ofList gs; I ⊓ K = I * K; form agrees with landed inf_sq_eq_mul_of_regular_quotient"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054229-L-446690",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

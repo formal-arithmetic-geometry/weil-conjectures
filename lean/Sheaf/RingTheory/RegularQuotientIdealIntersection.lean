@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.Paper.KoszulComplex
 import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
+import Sheaf.RingTheory.RegularQuotientIdealIntersectionAux
 
 /-!
 # Ideal intersection for a sequence regular modulo an ideal
@@ -49,6 +50,10 @@ theorem inf_ofList_eq_mul_of_regular_quotient {R : Type u} [CommRing R]
     (I : Ideal R) (gs : List R)
     (hgs : RingTheory.Sequence.IsRegular (R ⧸ I) (gs.map (Ideal.Quotient.mk I))) :
     I ⊓ Ideal.ofList gs = I * Ideal.ofList gs := by
-  sorry
+  apply le_antisymm
+  · exact inf_ofList_le_mul_of_regular_quotient I gs hgs
+  · refine le_inf ?_ ?_
+    · exact mul_le_left
+    · exact mul_le_right
 
 end Ideal
