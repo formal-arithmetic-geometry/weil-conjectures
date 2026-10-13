@@ -176,11 +176,11 @@ lemma stalkCoefficientIso_hom_app {s : Scheme.{u}} (x : s ⟶ X)
 variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [IsGeometric aX]
   [HasCompactification aX]
 
-/-- Blueprint `sk-prop-sf-trace-perfectness` (`prop-trf-compact-support-perfectness`), in the
-pro-étale setting: for a finite coefficient ring `Λ` whose exponent is invertible on the
-separably closed field `k`, a separated finite-type `a_X : X ⟶ Spec k` and
-`K ∈ Dᵇctf(X, Λ)`, compact cohomology `RΓ_c(X, K)` and every geometric stalk `K_x̄` are perfect
-complexes of `Λ`-modules. -/
+/-- Blueprint `sk-prop-sf-trace-perfectness` (the statement of that subsection, proved there via
+`prop-trf-compact-support-perfectness`), in the pro-étale setting: for a finite coefficient ring
+`Λ` whose exponent is invertible on the separably closed field `k`, a separated finite-type
+`a_X : X ⟶ Spec k` and `K ∈ Dᵇctf(X, Λ)`, compact cohomology `RΓ_c(X, K)` and every geometric
+stalk `K_x̄` are perfect complexes of `Λ`-modules. -/
 theorem isPerfect_compactlySupportedGlobalSections_obj [Finite Λ]
     [HasInvertibleExponent Λ (Spec (.of k))]
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -189,11 +189,13 @@ theorem isPerfect_compactlySupportedGlobalSections_obj [Finite Λ]
       ∀ x : Spec (.of k) ⟶ X, x ≫ aX = 𝟙 _ → ((geometricStalk Λ x).obj K).IsPerfect :=
   sorry
 
-/-- Blueprint `lem-fix-compact-support-coefficient-change`, read at the point through
-`def-weil-finite-coefficient-point`: for a surjection `ρ : Λ →+* Λ'` of finite coefficient rings
-whose exponent is invertible on `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact
-support `Ra_{X!}` and the point identification `RΓ(s, -)` commute with restriction of scalars
-along `ρ`, and the resulting canonical coefficient comparison
+/-- Blueprint `sk-p-trace-coeff` (the statement of that subsection, for compact cohomology; its
+detailed nodes are `thm-trf-finite-coefficient-map` and
+`lem-fix-compact-support-coefficient-change`): compact cohomology commutes with finite-level
+coefficient reduction. For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose
+exponent is invertible on `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact support
+`Ra_{X!}` and the point identification `RΓ(s, -)` (`def-weil-finite-coefficient-point`) commute
+with restriction of scalars along `ρ`, and the resulting coefficient comparison
 `RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for `K ∈ Dᵇctf(X, Λ)`. -/
 theorem exists_isCoefficientChange_compactlySupportedGlobalSections [Finite Λ] [Finite Λ']
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
@@ -202,12 +204,13 @@ theorem exists_isCoefficientChange_compactlySupportedGlobalSections [Finite Λ] 
       (compactCoefficientIso ρ aX δ αs) :=
   sorry
 
-/-- Blueprint `thm-trf-finite-coefficient-map` (the pullback isomorphism, at a geometric point,
-read at the point through `def-weil-finite-coefficient-point`): for a surjection
-`ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible on `k` and a geometric
-point `x̄ : Spec k ⟶ X`, the geometric stalk commutes with restriction of scalars along `ρ`, and
-the coefficient comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for
-`K ∈ Dᵇctf(X, Λ)`. -/
+/-- Blueprint `sk-p-trace-coeff` (the statement of that subsection, for geometric stalks; its
+detailed node is the pullback isomorphism of `thm-trf-finite-coefficient-map`): geometric stalks
+commute with finite-level coefficient reduction. For a surjection `ρ : Λ →+* Λ'` of finite
+coefficient rings whose exponent is invertible on `k` and a geometric point `x̄ : Spec k ⟶ X`,
+the geometric stalk, read at the point through `def-weil-finite-coefficient-point`, commutes with
+restriction of scalars along `ρ`, and the coefficient comparison
+`K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for `K ∈ Dᵇctf(X, Λ)`. -/
 theorem exists_isCoefficientChange_stalk [Finite Λ] [Finite Λ']
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ)
     (x : Spec (.of k) ⟶ X) (hx : x ≫ aX = 𝟙 _) :
