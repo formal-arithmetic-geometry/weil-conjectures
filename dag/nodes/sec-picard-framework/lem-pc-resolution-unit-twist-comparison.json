@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-resolution-unit-twist-comparison",
+ "kind": "statement",
+ "title": "Unit-twist comparison for raw resolution sections",
+ "statement": "Let f:X→T be a scheme morphism, F an O_X-module, I an injective resolution of F, q a natural number, W an open of T and a∈Γ(T,W). Put K=f_*I, P(V)=H^q(K(V)), Y=f⁻¹W and G=F|_Y. There are a global section s of the tensor unit on Y and additive equivalences e_n:P(W)≃H^q(Y,G⊗O_Y^n) such that restriction from W to D(a) agrees with restriction from Y to the nonvanishing locus of s, and the transition induced by s^n carries e_0(x) to e_n(a^n x).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3, evaluation of f_*I on inverse-image opens; combined with Tag 01E1 restriction of injective resolutions and Tag 09MR tensor-unit numerator maps"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict I to Y and to the inverse image of D(a). Tag 01E1 gives an injective resolution after restriction. Evaluating the pushforward complex on W and D(a) is definitionally evaluation of those restricted sections complexes, and exact evaluation identifies their homology with P(W) and P(D(a)); naturality gives the restriction square.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the tensor unit on Y and the pulled-back section a as s. The unitors identify every tensor power with the unit and identify G tensor that power with G. Under these identifications the transition map induced by s^n is multiplication by a^n. The scalar compatibility of section-complex homology transports this equality through e_n. Degreewise pushforward evaluation and restriction are semilinear for the pullback of functions. View the section complexes as modules over Γ(T,W) by restriction of scalars; their comparison is then linear and so is its induced homology map. This proves scalar compatibility directly, without assuming a separate scalar-comparison theorem.",
+   "uses": [
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "the section-complex comparison in Lemma 20.7.3 and tensor-unit specialization of Tag 09MR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of sections of a pushed forward injective resolution agrees with cohomology on an inverse image open naturally in restriction and multiplication by functions",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf and cohomologyPresheafFunctor; no scheme-module raw resolution comparison",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor.mapIso",
+   "results": "unknown identifier; no match",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionCohomology|tensorPowSection|isoRightDerivedObj",
+   "results": "existing section cohomology, resolution restriction, and scalar-compatibility declarations were inspected; no theorem states this combined comparison",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between derived sections computed by an injective resolution and cohomology on an open subset",
+   "results": "InjectiveResolution.isoRightDerivedObj and its naturality lemmas supply general resolution comparison machinery, but not the pushforward evaluation, restriction, and unit-tensor scalar compatibility together.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; useful general machinery"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "results": "Service returned unknown identifier; LeanFinder and local source search located the fully qualified declaration.",
+   "date": "2026-10-13",
+   "verdict": "search inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|mapHomologyIso|tensorPowSection_zero; restrict injective, resolution comparison, and unit cohomology in lean/",
+   "results": "Read RestrictInjectiveResolution, OpenModuleCohomology, ResolutionSectionsHomologyScalar, and DirectImage/Sections. Existing results supply restriction, scalar transport and general homology comparisons; no combined comparison theorem. DirectImage/Sections depends on this item through HigherDirectImageSectionTorsion, so cannot be imported.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalTorsion",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "raw section-complex comparison used in the tensor-unit specialization of the higher-image denominator argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionUnitTwistComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionUnitTwistComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.resolution_unitTwist_comparison",
+  "statement": "theorem resolution_unitTwist_comparison {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ) (W : T.Opens) (a : Γ(T, W)) : let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex let P := sectionCohomologyPresheaf K q let Y := (f ⁻¹ᵁ W).toScheme let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F let L := 𝟙_ Y.Modules ∃ (s : Γ(L, ⊤)) (e : ∀ n : ℕ, P.obj (op W) ≃+ (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).obj (G ⊗ L.tensorPow n : Y.Modules)), (∀ (U : Y.Opens), (U : Set Y) = nonvanishingLocus L s → ∃ d : P.obj (op (T.basicOpen a)) ≃+ (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj (G ⊗ L.tensorPow 0 : Y.Modules), ∀ x : P.obj (op W), (RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q (homOfLE (le_top : U ≤ ⊤))).app (G ⊗ L.tensorPow 0 : Y.Modules) (e 0 x) = d ((P.map (homOfLE (T.basicOpen_le a)).op).hom x)) ∧ (∀ (n : ℕ) (x : P.obj (op W)), (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).map (mulTensorPowSection (homOfGlobalSection L s) G 0 n) (e 0 x) = e (0 + n) (a ^ n • x))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T111926-L-3064275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T111926-L-3064275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
