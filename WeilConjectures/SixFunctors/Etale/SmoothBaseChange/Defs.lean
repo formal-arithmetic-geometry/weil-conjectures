@@ -36,7 +36,7 @@ at `F` of the natural transformation
 blueprint is that this map is an isomorphism for every such square and every `F`.
 
 The coefficient condition of the theorem is
-`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`, which lives next to the
+`AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder`, which lives next to the
 torsion condition of proper base change in
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf`. A natural number `n`
 is *invertible on `S`* when `IsUnit (n : Γ(S, ⊤))`; no definition is introduced for that,

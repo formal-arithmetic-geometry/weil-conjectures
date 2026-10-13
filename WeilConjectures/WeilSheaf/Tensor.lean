@@ -58,20 +58,23 @@ variable {C : Type*} [Category* C] {J : GrothendieckTopology C}
 /-- Multiplication by a unit `b` of `ℚ̄_ℓ`, as an automorphism of a sheaf of `ℚ̄_ℓ`-modules. -/
 noncomputable def smulIso (b : (PadicAlgCl l)ˣ) (M : Sheaf J (WeilCoefficients.{u} l)) :
     M ≅ M where
-  hom := ObjectProperty.homMk (ULift.up (b : PadicAlgCl l) • 𝟙 M.obj)
-  inv := ObjectProperty.homMk (ULift.up ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l) • 𝟙 M.obj)
+  hom := ObjectProperty.homMk (ULift.up.{u + 1} (b : PadicAlgCl l) • 𝟙 M.obj)
+  inv := ObjectProperty.homMk
+    (ULift.up.{u + 1} ((b⁻¹ : (PadicAlgCl l)ˣ) : PadicAlgCl l) • 𝟙 M.obj)
   hom_inv_id := by
     ext1
     simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
       Linear.smul_comp, Linear.comp_smul, Category.id_comp, smul_smul,
       ObjectProperty.FullSubcategory.id_hom]
-    exact (congrArg (· • 𝟙 M.obj) (congrArg ULift.up (Units.inv_mul b))).trans (one_smul _ _)
+    exact (congrArg (· • 𝟙 M.obj) (congrArg ULift.up.{u + 1} (Units.inv_mul b))).trans
+      (one_smul _ _)
   inv_hom_id := by
     ext1
     simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
       Linear.smul_comp, Linear.comp_smul, Category.id_comp, smul_smul,
       ObjectProperty.FullSubcategory.id_hom]
-    exact (congrArg (· • 𝟙 M.obj) (congrArg ULift.up (Units.mul_inv b))).trans (one_smul _ _)
+    exact (congrArg (· • 𝟙 M.obj) (congrArg ULift.up.{u + 1} (Units.mul_inv b))).trans
+      (one_smul _ _)
 
 end WeilCoefficients
 

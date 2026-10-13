@@ -64,7 +64,9 @@ of the exceptional adjunction `AlgebraicGeometry.Etale.rightDerivedUpperShriekAd
 an isomorphism; since a closed immersion is proper, `Ri_!` is `Ri_*`, so this says that `Ri_*`
 is fully faithful on the exceptional side. It is the derived counterpart of the full
 faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`. -/
-theorem isIso_rightDerivedUpperShriekAdjunction_unit_app (i : Z ⟶ X) [IsClosedImmersion i]
+theorem isIso_rightDerivedUpperShriekAdjunction_unit_app [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] (i : Z ⟶ X) [IsClosedImmersion i]
     [HasCompactification i] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
     IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) :=
   sorry

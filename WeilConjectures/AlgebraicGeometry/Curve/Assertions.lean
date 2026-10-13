@@ -31,8 +31,8 @@ The proof of proper base change for the projective line rests on eight assertion
 They are bundled in `AlgebraicGeometry.IsCurve.Assertions`. The coefficient sheaf is a
 sheaf of `Λ`-modules and `Hᵠ(X, F)` is the cohomology of its underlying abelian sheaf; the
 torsion conditions are conditions on the geometric stalks
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`,
-`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`). The field extension in `C₆` and
+(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`,
+`AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder`). The field extension in `C₆` and
 `C₇` is given by an arbitrary cartesian square
 
 ```
@@ -90,7 +90,7 @@ structure IsCurve.Assertions {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ 
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
   /-- `C₄`: `Hᵠ(X, F)` is finite when `F` is constructible with torsion prime to `char k`. -/
   finite_of_isTorsionSheafOfInvertibleOrder [Scheme.IsConstructibleSheaf F]
-    [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F] (q : ℕ) :
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec (.of k)) F] (q : ℕ) :
     Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
   /-- `C₅`: `Hᵠ(X, F)` is finite when `X` is proper and `F` is constructible. -/
@@ -100,7 +100,7 @@ structure IsCurve.Assertions {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ 
   /-- `C₆`: the pullback `Hᵠ(X, F) ⟶ Hᵠ(X_{k'}, F|)` is bijective for every algebraically
   closed extension `k'/k` when the torsion of `F` is prime to `char k`. -/
   bijective_cohomologyMap_of_isTorsionSheafOfInvertibleOrder
-    [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec (.of k)) F]
     (k' : Type u) [Field k'] [IsAlgClosed k'] {X' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
     {f' : X' ⟶ Spec (.of k')} {ι' : X' ⟶ X} (h : IsPullback ι' f' f ι) (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'

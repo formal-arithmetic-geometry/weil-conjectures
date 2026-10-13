@@ -16,7 +16,9 @@ and it is full when the morphism is a monomorphism
 (`CategoryTheory.MorphismProperty.Over.full_map`).
 
 Base change along a morphism `f : X ⟶ Y` sends a morphism of `P.Over Q Y` to a cartesian
-square (`CategoryTheory.MorphismProperty.Over.isPullback_map_left`).
+square (`CategoryTheory.MorphismProperty.Over.isPullback_map_left`). Base change along an equality
+`f = g` is compatible with the second projections
+(`CategoryTheory.MorphismProperty.Over.pullbackCongr_hom_app_left_snd`).
 
 Mathlib provides the composition isomorphism `MorphismProperty.Over.pullbackComp` for base
 change, but neither the identity isomorphism nor any coherence law. Both are added here, so
@@ -112,6 +114,24 @@ lemma MorphismProperty.Over.isPullback_map_left {A B : P.Over Q Y} (φ : A ⟶ B
 
 end Pullback
 
+section PullbackCongr
+
+set_option backward.defeqAttrib.useBackward true in
+/-- The base change isomorphism along an equality `f = g` is compatible with the second
+projections. This complements mathlib's
+`CategoryTheory.MorphismProperty.Over.pullbackCongr_hom_app_left_fst`. -/
+@[reassoc (attr := simp)]
+lemma MorphismProperty.Over.pullbackCongr_hom_app_left_snd {f g : X ⟶ Y}
+    [P.HasPullbacksAlong f] [P.IsStableUnderBaseChangeAlong f] [Q.IsStableUnderBaseChange]
+    (h : f = g) (B : P.Over Q Y) :
+    haveI : P.HasPullbacksAlong g := by subst h; infer_instance
+    ((MorphismProperty.Over.pullbackCongr h).hom.app B).left ≫ pullback.snd B.hom g =
+      pullback.snd B.hom f := by
+  subst h
+  simp [MorphismProperty.Over.pullbackCongr]
+
+end PullbackCongr
+
 section PullbackCoherence
 
 namespace MorphismProperty
@@ -142,8 +162,11 @@ lemma Over.pullbackId_inv_app_left_fst {X : T} [P.HasPullbacksAlong (𝟙 X)]
 
 omit [Q.RespectsIso] in
 /-- Base change along `f` compared with itself through a proof of `f = f` is the identity
-isomorphism. -/
-@[simp]
+isomorphism.
+
+Not a `simp` lemma: rewriting `Over.pullbackCongr` away interferes with the proofs that unfold
+it componentwise, such as those of
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence`. -/
 lemma Over.pullbackCongr_refl (f : X ⟶ Y) [P.HasPullbacksAlong f]
     [P.IsStableUnderBaseChangeAlong f] (h : f = f) :
     Over.pullbackCongr (P := P) (Q := Q) h = Iso.refl (Over.pullback P Q f) := by

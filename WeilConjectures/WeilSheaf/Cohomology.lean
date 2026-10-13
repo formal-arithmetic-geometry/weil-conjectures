@@ -143,6 +143,11 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+/-- The structure morphism `X ⟶ Spec k₀` is a morphism over `Spec k₀`, for the structure of
+`Spec k₀` over itself given by `AlgebraicGeometry.specOverSpec`. -/
+instance : (X ↘ Spec (CommRingCat.of k₀)).IsOver (Spec (CommRingCat.of k₀)) :=
+  ⟨by simp [specOverSpec_over, Algebra.algebraMap_self]⟩
+
 namespace LAdicWeilComplex
 
 -- TODO(unify): thm:proetale-weil-perfectness

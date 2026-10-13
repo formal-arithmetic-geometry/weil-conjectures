@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 
 /-!
@@ -18,8 +19,7 @@ rationalization over `E`, and the colimit over finite extensions `E/ℚ_ℓ` giv
 
 In this repository the `𝒪_E` stage is the derived-complete subcategory
 `AlgebraicGeometry.DerivedCategory.derivedCompleteIntegral` of the derived category of sheaves
-of `𝒪_E`-modules, and the `E` stage is its rationalization
-`AlgebraicGeometry.DerivedCategoryDerivedCompleteRational`.
+of `𝒪_E`-modules, and the `E` stage is its rationalization (`CategoryTheory.Rationalization`).
 
 ## Implementation notes
 

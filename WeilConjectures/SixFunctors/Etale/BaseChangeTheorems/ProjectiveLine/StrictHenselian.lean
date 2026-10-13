@@ -82,7 +82,7 @@ theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
     (i : Y₀ ⟶ Y) (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
     (n : ℕ) (U : Fin (n + 1) → Y.Opens) (hU : ∀ j, IsAffineOpen (U j)) (hcov : ⨆ j, U j = ⊤)
-    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] [IsTorsionSheaf J]
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] [IsTorsionModuleSheaf J]
     (q : ℕ) (hq : n < q) :
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -155,7 +155,7 @@ bijective.
 theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
     (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
@@ -196,7 +196,7 @@ should be replaced by it, composed with the restrictions to the closed fibres.
 (blueprint: `prop-weil-pbc-strict-local-exchange`) -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     ∃ (e₁ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
           (A := ModuleCat.{u + 1} Λ)).obj
           ((Etale.baseChangeSourceFunctor Λ (Spec.map (CommRingCat.ofHom φ))
@@ -232,7 +232,7 @@ pullback along the isomorphism `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}` is bijective on c
 theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal
     (hφ : Function.Bijective (IsLocalRing.ResidueField.map φ))
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     IsIso (((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
       (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ
         (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) q F)) := by

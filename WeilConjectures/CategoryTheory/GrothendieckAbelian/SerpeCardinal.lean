@@ -75,8 +75,11 @@ variable (C) in
 @[no_expose] noncomputable def serpeCardinal : Cardinal.{w} :=
   (exists_serpeCardinal.{w} C).choose
 
+-- Scoped: as a global instance it matches every goal `Fact κ.IsRegular` with `κ` a
+-- metavariable (as in mathlib's `LocallySmall` search through accessible categories) and then
+-- searches for an unconstrained category `C`, which does not terminate.
 variable (C) in
-instance fact_isRegular_serpeCardinal : Fact (serpeCardinal.{w} C).IsRegular :=
+scoped instance fact_isRegular_serpeCardinal : Fact (serpeCardinal.{w} C).IsRegular :=
   ⟨(exists_serpeCardinal.{w} C).choose_spec.1⟩
 
 variable (C) in

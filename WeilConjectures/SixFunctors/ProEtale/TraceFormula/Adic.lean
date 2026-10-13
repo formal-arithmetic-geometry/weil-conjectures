@@ -6,7 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.LinearAlgebra.Trace
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
@@ -67,10 +68,8 @@ which are exactly what uniformity buys. Equivariance of the isomorphisms for the
 local Frobenius operators cannot be stated, because the isomorphisms are only asserted to
 exist. Rationalization and coefficient-field extension are already carried by the project:
 `CategoryTheory.Rationalization` is *defined* as the localization of a triangulated
-category at the torsion morphisms, `DerivedCategoryDerivedCompleteRational` is by
-definition the rationalization of `DerivedCategoryDerivedCompleteIntegral` at the nonzero
-divisors of `𝒪_E`, and `DerivedCategoryDerivedCompleteRational.fromIntegral` is the
-canonical functor.
+category at the torsion morphisms, and the `E` stage is the rationalization of
+`DerivedCategoryDerivedCompleteIntegral` at the nonzero divisors of `𝒪_E`.
 
 The Euler product is not a statement about the abstract coefficient category: a determinant
 needs an actual finite-dimensional vector space. It is therefore stated for a realization

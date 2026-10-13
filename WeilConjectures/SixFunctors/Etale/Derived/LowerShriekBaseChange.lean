@@ -25,7 +25,7 @@ For a cartesian square of schemes
 
 and a compactification `c` of `f`, write `c = (X ⟶[i] Z ⟶[p] Y)`, i.e. `i := c.i` and
 `p := c.g` (we write `p` rather than `g` for the proper map, since `g` is the base change
-morphism). The base changed compactification `c.ofIsPullback sq = (X' ⟶[i'] Z ×_Y Y' ⟶[p'] Y')`
+morphism). The base changed compactification `c.baseChange sq = (X' ⟶[i'] Z ×_Y Y' ⟶[p'] Y')`
 of `f'` sits in a diagram of two cartesian squares
 
 ```
@@ -96,12 +96,12 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 /-- **The compactly supported base change map along a compactification** `Ex_!(c)`: for a
 cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f`, the natural
 transformation `Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*`, where `c ×_Y Y'` is the base changed
-compactification `c.ofIsPullback sq` of `f'`. Write `i := c.i`, `p := c.g`, and `i'`, `p'` for
+compactification `c.baseChange sq` of `f'`. Write `i := c.i`, `p := c.g`, and `i'`, `p'` for
 the corresponding maps of `c ×_Y Y'`, so that `Rp_*` is `R((c.g)_*[A])`. Then `Ex_!(c)` is the
 derived base change map `Ex_*` of the cartesian square `Z ×_Y Y' ⟶ Z` over `g`, whiskered by
 `Di_!`, followed by the inverse of the derived base change isomorphism of the extension by
 zero `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekBaseChangeIso` for the cartesian
-square `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered by `Rp'_*`.
+square `AlgebraicGeometry.Compactification.baseChange_isPullback_i`, whiskered by `Rp'_*`.
 
 ```
   D(X) --Lg'^*--> D(X')
@@ -118,14 +118,14 @@ square `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered
 (blueprint: `sk-def-sf-exchanges`) -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
-    Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
+    Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.baseChange sq)[A] :=
   (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft D((c.i)_!open[A])
       (derivedBaseChangeMap A (IsPullback.of_hasPullback c.g g).toCommSq) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight
-      (derivedOpenImmersionLowerShriekBaseChangeIso A (c.isPullback_i_ofIsPullback sq)).inv
-      R(((c.ofIsPullback sq).g)_*[A]) ≫
+      (derivedOpenImmersionLowerShriekBaseChangeIso A (c.baseChange_isPullback_i sq)).inv
+      R(((c.baseChange sq).g)_*[A]) ≫
     (Functor.associator _ _ _).hom
 
 /-- `Ex_!(c)` is an isomorphism if and only if the derived base change map `Ex_*` for the

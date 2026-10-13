@@ -20,7 +20,7 @@ contains the passage between the two.
   the derived pushforwards preserving complexes concentrated in nonnegative degrees.
 - *Filtered torsion*: `F` is the filtered colimit of subsheaves killed by integers `n`
   invertible on `S`
-  (`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit`); the source
+  (`AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder.exists_isColimit`); the source
   `p⁻¹ R^q g_*` and the target `R^q h_* e⁻¹` of the base-change map commute with filtered
   colimits (`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`, and `p⁻¹`,
   `e⁻¹` are left adjoints), so it suffices to treat sheaves killed by one such `n`.
@@ -149,12 +149,12 @@ theorem Etale.isIso_baseChangeHomologyMap_of_forall_nsmul_eq_zero (sq : IsPullba
       ∀ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), n • 𝟙 G = 0 →
         IsIso (Etale.baseChangeHomologyMap Λ sq q G))
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   have : QuasiCompact h := MorphismProperty.of_isPullback sq ‹_›
   have : QuasiSeparated h := MorphismProperty.of_isPullback sq ‹_›
   obtain ⟨J, _, _, D, c, hc, rfl, hD⟩ :=
-    Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit Λ S F
+    Scheme.IsTorsionModuleSheafOfInvertibleOrder.exists_isColimit Λ S F
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ g q J
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ h q J
   have : PreservesColimitsOfSize.{0, 0} ((p)^*[ModuleCat.{u + 1} Λ]) :=

@@ -37,7 +37,7 @@ flipped square. It exists for every commutative square. For a cartesian square i
 conjugate of an isomorphism by étale base change for the pushforward
 (`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`), hence an isomorphism.
 
-For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChange`
+For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekSheafBaseChange`
 (`AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_id_left`).
 
 ## Main definitions
@@ -51,7 +51,7 @@ For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekB
   the extension by zero**: for a cartesian square, `j'_! g'^* ⟶ g''^* j_!` is an
   isomorphism.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_id_left`: for `g' = 𝟙` the
-  base change map is `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChange`.
+  base change map is `AlgebraicGeometry.Etale.openImmersionLowerShriekSheafBaseChange`.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap`: the
   comparison `j_! ⟶ j_*` intertwines this base change map with the base change map
   `g''^* j_* ⟶ j'_* g'^*` of the pushforward. Both sides are compared through their
@@ -228,12 +228,13 @@ X --k--> D
 ```
 
 the base change map `(𝟙 X)^* ⋙ j_! ⟶ k_! ⋙ q^*` is
-`Etale.openImmersionLowerShriekBaseChange`, preceded by the identification `(𝟙 X)^* ≅ 𝟭` of
+`Etale.openImmersionLowerShriekSheafBaseChange`, preceded by the identification `(𝟙 X)^* ≅ 𝟭` of
 `Etale.upperStarId`. -/
 lemma Etale.openImmersionLowerShriekBaseChangeMap_id_left :
     Etale.openImmersionLowerShriekBaseChangeMap A (⟨by simp [hk]⟩ : CommSq (𝟙 X) j k q) =
       Functor.whiskerRight (Etale.upperStarId A X).hom (j)_!open[A] ≫
-        ((j)_!open[A]).leftUnitor.hom ≫ Etale.openImmersionLowerShriekBaseChange A j q k hk := by
+        ((j)_!open[A]).leftUnitor.hom ≫
+          Etale.openImmersionLowerShriekSheafBaseChange A j q k hk := by
   have hconj : conjugateEquiv Adjunction.id (Etale.upperStarLowerStarAdjunction A (𝟙 X))
       (Etale.upperStarId A X).hom = (Etale.lowerStarId A X).inv :=
     congrArg Iso.hom (Etale.conjugateIsoEquiv_upperStarId A X)
@@ -246,7 +247,7 @@ lemma Etale.openImmersionLowerShriekBaseChangeMap_id_left :
     ← conjugateEquiv_comp _
       (Adjunction.id.comp (Etale.openImmersionLowerShriekUpperStarAdjunction A j)) _,
     ← conjugateEquiv_comp _ (Etale.openImmersionLowerShriekUpperStarAdjunction A j) _,
-    conjugateEquiv_whiskerRight, hconj, hlu, Etale.openImmersionLowerShriekBaseChange,
+    conjugateEquiv_whiskerRight, hconj, hlu, Etale.openImmersionLowerShriekSheafBaseChange,
     Equiv.apply_symm_apply, Category.assoc]
 
 end IdLeft

@@ -173,6 +173,13 @@ theorem exists_hasDirectImageWeightBound_opensι_comp_of_isAffine {T Y₀ : Sche
     have : QuasiCompact (c ≫ Y ↘ Spec (CommRingCat.of k₀)) := by
       rw [comp_over c]; infer_instance
     exact QuasiCompact.of_comp c (Y ↘ Spec (CommRingCat.of k₀))
+  -- `c` is a composite of immersions, hence locally quasi-finite. Spelled out, since the
+  -- unguided instance search for `LocallyQuasiFinite c` times out.
+  have : IsClosedImmersion (Spec.map mk) :=
+    IsClosedImmersion.spec_of_surjective mk Ideal.Quotient.mk_surjective
+  have : LocallyQuasiFinite c := by
+    have : IsImmersion c := by dsimp only [c]; infer_instance
+    exact instLocallyQuasiFiniteOfIsImmersion c
   have key : e ≫ ν ≫ iteratedAffineLineProj D d ≫ c =
       (T.isoSpec.hom ⁻¹ᵁ V').ι ≫ g₀ ≫ a := by
     simp only [c, e, V', D]

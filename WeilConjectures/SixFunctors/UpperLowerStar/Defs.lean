@@ -297,7 +297,7 @@ lemma lowerStarComp_id_left (h₂ : S ⟶ R) :
   ext M b
   simp only [lowerStarComp, lowerStarId, lowerStar,
     MorphismProperty.Over.pullbackComp_id_left h₂ h₂ (id_comp h₂).symm]
-  simp
+  simp [MorphismProperty.Over.pullbackCongr_refl]
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The right unit law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the
@@ -309,7 +309,7 @@ lemma lowerStarComp_id_right (h₁ : T ⟶ S) :
   ext M b
   simp only [lowerStarComp, lowerStarId, lowerStar,
     MorphismProperty.Over.pullbackComp_id_right h₁ h₁ (comp_id h₁).symm]
-  simp
+  simp [MorphismProperty.Over.pullbackCongr_refl]
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The associativity law for `CategoryTheory.GrothendieckTopology.lowerStarComp`: the two

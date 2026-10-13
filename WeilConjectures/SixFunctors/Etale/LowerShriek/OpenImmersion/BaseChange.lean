@@ -72,7 +72,7 @@ the comparison of the two derived lower shrieks attached to `c` and to `d`.
 - `AlgebraicGeometry.Etale.upperStarBaseChange`: the base change map
   `q_* ⋙ k^* ⟶ j^*` on étale sheaves, the composition isomorphism `k^* ≅ q^* ⋙ j^*`
   followed by the counit of `q^* ⊣ q_*`.
-- `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChange`: the base change comparison
+- `AlgebraicGeometry.Etale.openImmersionLowerShriekSheafBaseChange`: the base change comparison
   `j_! ⟶ k_! ⋙ q^*`, the mate of `Etale.upperStarBaseChange`.
 - `AlgebraicGeometry.Compactification.Refinement.openImmersionLowerShriekBaseChange`: the
   base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` attached to a refinement `r` of
@@ -86,7 +86,7 @@ the comparison of the two derived lower shrieks attached to `c` and to `d`.
   `q_* ⋙ k^* ⟶ j^*` is the composition isomorphism `j_* ⋙ q_* ≅ k_*`.
 - `AlgebraicGeometry.Etale.upperStarBaseChange_eq`: the base change map defined by the
   counit of `q^* ⊣ q_*` is the one induced by the comparison of site functors.
-- `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChange`: **base change for the
+- `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekSheafBaseChange`: **base change for the
   extension by zero**: `j_! ⟶ k_! ⋙ q^*` is an isomorphism when the square is cartesian.
 - `AlgebraicGeometry.Compactification.Refinement.isIso_openImmersionLowerShriekBaseChange`:
   the same statement for a refinement of compactifications.
@@ -364,7 +364,7 @@ include hk in
 /-- The base change comparison `j_! ⟶ k_! ⋙ q^*` for the extension by zero along an open
 immersion: the mate of `Etale.upperStarBaseChange` under the adjunctions `j_! ⊣ j^*` and
 `k_! ⋙ q^* ⊣ q_* ⋙ k^*`. -/
-noncomputable def Etale.openImmersionLowerShriekBaseChange :
+noncomputable def Etale.openImmersionLowerShriekSheafBaseChange :
     (j)_!open[A] ⟶ (k)_!open[A] ⋙ (q)^*[A] :=
   (conjugateEquiv ((Etale.openImmersionLowerShriekUpperStarAdjunction A k).comp
       (Etale.upperStarLowerStarAdjunction A q))
@@ -375,8 +375,8 @@ include hk in
 /-- **Base change for the extension by zero**: if the square is cartesian, the comparison
 `j_! ⟶ k_! ⋙ q^*` is an isomorphism, being the conjugate of the isomorphism
 `Etale.upperStarBaseChange`. -/
-lemma Etale.isIso_openImmersionLowerShriekBaseChange (hcart : IsPullback j (𝟙 X) q k) :
-    IsIso (Etale.openImmersionLowerShriekBaseChange A j q k hk) := by
+lemma Etale.isIso_openImmersionLowerShriekSheafBaseChange (hcart : IsPullback j (𝟙 X) q k) :
+    IsIso (Etale.openImmersionLowerShriekSheafBaseChange A j q k hk) := by
   have := Etale.isIso_upperStarBaseChange A j q k hk hcart
   exact conjugateEquiv_symm_iso _ _ _
 
@@ -461,7 +461,7 @@ lemma Etale.upperStarBaseChange_comp (j : X ⟶ C) (q₁ : C ⟶ D) (q₂ : D �
 `Etale.upperStarId`. -/
 lemma Etale.openImmersionLowerShriekBaseChange_id (j : X ⟶ C) [IsOpenImmersion j]
     (hj : j ≫ 𝟙 C = j) :
-    Etale.openImmersionLowerShriekBaseChange A j (𝟙 C) j hj =
+    Etale.openImmersionLowerShriekSheafBaseChange A j (𝟙 C) j hj =
       ((j)_!open[A]).rightUnitor.inv ≫
         Functor.whiskerLeft (j)_!open[A] (Etale.upperStarId A C).inv := by
   have hconj : conjugateEquiv (Etale.upperStarLowerStarAdjunction A (𝟙 C))
@@ -475,7 +475,7 @@ lemma Etale.openImmersionLowerShriekBaseChange_id (j : X ⟶ C) [IsOpenImmersion
       ((j)_!open[A]).rightUnitor.inv = ((j)^*[A]).leftUnitor.hom :=
     congrArg Iso.inv (conjugateIsoEquiv_rightUnitor
       (Etale.openImmersionLowerShriekUpperStarAdjunction A j))
-  rw [Etale.openImmersionLowerShriekBaseChange, Equiv.symm_apply_eq,
+  rw [Etale.openImmersionLowerShriekSheafBaseChange, Equiv.symm_apply_eq,
     Etale.upperStarBaseChange_id,
     ← conjugateEquiv_comp _ ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).comp
       (Adjunction.id (C := Sheaf C.smallEtaleTopology A))) _,
@@ -487,9 +487,9 @@ comparisons along `q₁` and along `q₂`, reassociated through `Etale.upperStar
 lemma Etale.openImmersionLowerShriekBaseChange_comp (j : X ⟶ C) [IsOpenImmersion j]
     (q₁ : C ⟶ D) (q₂ : D ⟶ E) (k : X ⟶ D) [IsOpenImmersion k] (l : X ⟶ E)
     [IsOpenImmersion l] (hk : j ≫ q₁ = k) (hl : k ≫ q₂ = l) (hjl : j ≫ (q₁ ≫ q₂) = l) :
-    Etale.openImmersionLowerShriekBaseChange A j (q₁ ≫ q₂) l hjl =
-      Etale.openImmersionLowerShriekBaseChange A j q₁ k hk ≫
-        Functor.whiskerRight (Etale.openImmersionLowerShriekBaseChange A k q₂ l hl) (q₁)^*[A] ≫
+    Etale.openImmersionLowerShriekSheafBaseChange A j (q₁ ≫ q₂) l hjl =
+      Etale.openImmersionLowerShriekSheafBaseChange A j q₁ k hk ≫
+        Functor.whiskerRight (Etale.openImmersionLowerShriekSheafBaseChange A k q₂ l hl) (q₁)^*[A] ≫
         (Functor.associator _ _ _).hom ≫
         Functor.whiskerLeft (l)_!open[A] (Etale.upperStarComp A q₁ q₂).inv := by
   have hconj : conjugateEquiv (Etale.upperStarLowerStarAdjunction A (q₁ ≫ q₂))
@@ -497,7 +497,7 @@ lemma Etale.openImmersionLowerShriekBaseChange_comp (j : X ⟶ C) [IsOpenImmersi
         (Etale.upperStarLowerStarAdjunction A q₁))
       (Etale.upperStarComp A q₁ q₂).inv = (Etale.lowerStarComp A q₁ q₂).inv :=
     congrArg Iso.inv (Etale.conjugateIsoEquiv_upperStarComp A q₁ q₂)
-  simp only [Etale.openImmersionLowerShriekBaseChange]
+  simp only [Etale.openImmersionLowerShriekSheafBaseChange]
   rw [Equiv.symm_apply_eq, Etale.upperStarBaseChange_comp A j q₁ q₂ k l hk hl hjl,
     ← conjugateEquiv_comp _ ((Etale.openImmersionLowerShriekUpperStarAdjunction A k).comp
       (Etale.upperStarLowerStarAdjunction A q₁)) _,
@@ -525,7 +525,7 @@ open Etale
 `r` of the compactification `d` by the compactification `c`. -/
 noncomputable def Compactification.Refinement.openImmersionLowerShriekBaseChange :
     (c.i)_!open[A] ⟶ (d.i)_!open[A] ⋙ (r.hom)^*[A] :=
-  Etale.openImmersionLowerShriekBaseChange A c.i r.hom d.i r.i_hom
+  Etale.openImmersionLowerShriekSheafBaseChange A c.i r.hom d.i r.i_hom
 
 /-- If the square of a refinement `r` over `S` is cartesian, i.e. `r.hom ⁻¹ (S) = S`, then
 the base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` is an isomorphism.
@@ -533,7 +533,7 @@ the base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` is an isomorphism
 lemma Compactification.Refinement.isIso_openImmersionLowerShriekBaseChange
     (hcart : IsPullback c.i (𝟙 S) r.hom d.i) :
     IsIso (r.openImmersionLowerShriekBaseChange A) :=
-  Etale.isIso_openImmersionLowerShriekBaseChange A c.i r.hom d.i r.i_hom hcart
+  Etale.isIso_openImmersionLowerShriekSheafBaseChange A c.i r.hom d.i r.i_hom hcart
 
 /-- **Identity law**: the base change comparison attached to the identity refinement of a
 compactification `c` is the unitor built from `Etale.upperStarId`. -/

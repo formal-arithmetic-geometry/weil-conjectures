@@ -98,11 +98,11 @@ compactification `e` of `f ≫ m`, the compactification of `f` with compactifyin
 `IsPullback.id_comp_of_mono f m`. -/
 @[simps! Z g]
 noncomputable def restrict : Compactification f :=
-  e.ofIsPullback (.id_comp_of_mono f m)
+  e.baseChange (.id_comp_of_mono f m)
 
 /-- The open immersion of `e.restrict` followed by the projection to `e.Z` is `e.i`. -/
 @[reassoc (attr := simp)] lemma restrict_i_fst : e.restrict.i ≫ pullback.fst e.g m = e.i :=
-  (ofIsPullback_i_fst _ e).trans (Category.id_comp _)
+  (baseChange_i_fst e _).trans (Category.id_comp _)
 
 /-- The open immersion of `e.restrict` is the base change of `e.i` along the projection:
 ```
@@ -114,7 +114,7 @@ noncomputable def restrict : Compactification f :=
 ```
 -/
 theorem isPullback_i_restrict : IsPullback (𝟙 X) e.restrict.i e.i (pullback.fst e.g m) :=
-  e.isPullback_i_ofIsPullback _
+  e.baseChange_isPullback_i _
 
 /-- The proper morphism of `e.restrict` is the base change of `e.g` along `m`:
 ```
@@ -126,7 +126,7 @@ theorem isPullback_i_restrict : IsPullback (𝟙 X) e.restrict.i e.i (pullback.f
 ```
 -/
 theorem isPullback_restrict : IsPullback e.restrict.g (pullback.fst e.g m) m e.g :=
-  e.isPullback_g_ofIsPullback _
+  (e.baseChange_isPullback_g _).flip
 
 end Restrict
 

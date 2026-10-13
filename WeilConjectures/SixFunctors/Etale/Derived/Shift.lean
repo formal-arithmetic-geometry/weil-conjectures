@@ -73,15 +73,15 @@ noncomputable instance commShiftRightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
   inferInstanceAs ((D(((HasCompactification.compactification f).i)_!open[A]) ⋙
     R(((HasCompactification.compactification f).g)_*[A])).CommShift ℤ)
 
-/-- The exceptional inverse image `Rf^!` commutes with shifts, being right adjoint to `Rf_!`. -/
-noncomputable instance commShiftRightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] : (R(f)^![A]).CommShift ℤ :=
-  (rightDerivedUpperShriekAdjunction A f).rightAdjointCommShift ℤ
-
 section Monoidal
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
+
+/-- The exceptional inverse image `Rf^!` commutes with shifts, being right adjoint to `Rf_!`. -/
+noncomputable instance commShiftRightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] : (R(f)^![A]).CommShift ℤ :=
+  (rightDerivedUpperShriekAdjunction A f).rightAdjointCommShift ℤ
 
 /-- The derived pullback `Lg^*` commutes with shifts, being isomorphic to the functor `D(g^*)`
 induced by the exact pullback (`Etale.leftDerivedUpperStarIsoMapDerivedCategory`). -/

@@ -28,7 +28,7 @@ X --p--> S
 
 with `p` **smooth** and `g` quasi-compact quasi-separated. For every sheaf `F` of
 `Λ`-modules on `T_ét` all of whose geometric stalks are torsion of orders invertible on `S`
-— that is, `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder` — the base-change map
+— that is, `AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder` — the base-change map
 
 `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F`
 
@@ -194,7 +194,7 @@ the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism in
 theorem Etale.isIso_baseChangeHomologyMap_of_smooth (p : X ⟶ S) [Smooth p] (g : T ⟶ S)
     (e : Y ⟶ T) (h : Y ⟶ X) [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   obtain hq | hq := lt_or_ge q 0
   · exact Etale.isIso_baseChangeHomologyMap_of_neg Λ sq hq F

@@ -105,9 +105,7 @@ theorem exists_compactification_locallyOfFinitePresentation {X S : Scheme.{u}} (
   have := hp₁; have := hp₂; have := hp₃
   obtain ⟨c⟩ := (nagataCompactification_of_isNoetherian p).nonempty_compactification
   have : LocallyOfFinitePresentation c.g := c.locallyOfFinitePresentation_g
-  refine ⟨Compactification.ofIsPullback H c, ?_⟩
-  rw [Compactification.ofIsPullback_g]
-  infer_instance
+  exact ⟨c.baseChange H, c.locallyOfFinitePresentation_g_baseChange H⟩
 
 /-- A choice of compactification with structure morphism locally of finite presentation, for a
 separated, quasi-compact morphism of finite presentation over a quasi-compact quasi-separated
