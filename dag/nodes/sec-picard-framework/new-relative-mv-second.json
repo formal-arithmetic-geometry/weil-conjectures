@@ -1,0 +1,121 @@
+{
+ "id": "new-relative-mv-second",
+ "kind": "statement",
+ "title": "Base change commutes with one inclusion of opens",
+ "statement": "Let g′:X′→X, f′:X′→S′, f:X→S and g:S′→S form a cartesian square of schemes [def-pc-scheme, def-pc-base-change]. Work in the unbounded derived categories of modules [def-pc-derived-category], with K∈D(O_X), K′∈D(O_X′), and φ:L(g′)K→K′ [def-pc-derived-pullback]. For opens W⊆U⊆X, let αW and αU be the local arrows of [def-pc-relative-mv-maps]. Let r: R(f|U)_*(K|U)→R(f|W)_*(K|W) be its canonical relative restriction, and let r′ be the analogous restriction for the inverse-image opens, expressed using the canonical pullback lift. Then Lg*(r) followed by αW equals αU followed by r′. No covering, quasi-coherence or compactness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY (remark-base-change), 08BV (lemma-unbounded-mayer-vietoris), and 08HZ (lemma-unbounded-relative-mayer-vietoris)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof": [
+  {
+   "text": "Expand relativeMVRestriction as the mate of the restricted counit and\ncancel the right-adjoint composition comparisons on both paths. Transpose under\nthe adjunction for W and its inverse-image open. The resulting maps are\ncomposites of pullbacks of the same counit. Naturality of that counit and of φ\nidentifies their middle factors; associativity of the pinned pullback\ncomposition comparisons identifies the outside factors. The lift identities\nfor relativeMVOpenLift give equality of the two projections, hence the equality\ntransport appearing in the local comparison is precisely the one in the\nrestriction. Injectivity of the adjunction Hom equivalence gives the claimed\nsquare. No strictness of the inclusion is used, so equality and empty opens\nare included.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY (remark-base-change), 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris); individual naturality step of lem-pc-relative-mv-restriction-squares."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: the first two commuting squares, independently of constructing the connecting maps",
+   "via": [
+    "lem-pc-relative-mv-restriction-squares",
+    "lem-pc-relative-mv-canonical-triangles",
+    "lem-pc-rf-single-complex-relative-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVRestrictionSecond",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVRestrictionSecond.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_restriction_naturality",
+  "statement": "theorem relativeMV_restriction_naturality\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (W U : X.Opens) (i : W ≤ U) :\n    (derivedPullback g).map\n        (relativeMVRestriction (X.homOfLE i) U.ι W.ι (Scheme.homOfLE_ι X i) f K) ≫\n      (relativeMVLocalArrow f f' g g' hpull K K' φ W).hom =\n      (relativeMVLocalArrow f f' g g' hpull K K' φ U).hom ≫\n        relativeMVRestriction (relativeMVOpenLift g' i) (pullback.fst g' U.ι)\n          (pullback.fst g' W.ι) (pullback.lift_fst _ _ _) f' K'",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*naturality|baseChange.*unit|relativeMV",
+   "results": "1 hits: Mathlib/RingTheory/Extension/Presentation/Submersive.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the canonical derived open unit or inclusion square; adjunction and underived open restriction lemmas are building blocks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of base change with respect to open immersion restriction and adjunction units",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the canonical derived open unit or inclusion square; adjunction and underived open restriction lemmas are building blocks."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the canonical derived open unit or inclusion square; adjunction and underived open restriction lemmas are building blocks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change commutes with restriction to an open subscheme and with the unit of the derived pullback direct image adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T125445-L-3874447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T125445-L-3874447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

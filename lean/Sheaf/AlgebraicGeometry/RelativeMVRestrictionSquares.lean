@@ -6,6 +6,8 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+import Sheaf.AlgebraicGeometry.RelativeMVRestrictionFirst
+import Sheaf.AlgebraicGeometry.RelativeMVRestrictionSecond
 
 /-! # Base change and the two restriction squares
 
@@ -52,6 +54,22 @@ theorem relativeMV_restriction_squares
       aX.hom ≫ relativeMVTargetFirst g' f' U V K' ∧
     relativeMVSourceSecond f g U V K ≫ (a (U ⊓ V)).hom =
       biprod.map (a U).hom (a V).hom ≫ relativeMVTargetSecond g' f' U V K' := by
-  sorry
+  dsimp only
+  constructor
+  · dsimp only [relativeMVSourceFirst, relativeMVTargetFirst, relativeMVFirst, Functor.id_map]
+    apply biprod.hom_ext
+    · simp only [Category.assoc, biprod.map_fst, biprod.lift_fst_assoc]
+      erw [biprod.lift_fst]
+      exact relativeMV_restriction_unit f f' g g' hpull K K' φ U
+    · simp only [Category.assoc, biprod.map_snd, biprod.lift_snd_assoc]
+      erw [biprod.lift_snd]
+      exact relativeMV_restriction_unit f f' g g' hpull K K' φ V
+  · apply biprod.hom_ext'
+    · simpa [relativeMVSourceSecond, relativeMVTargetSecond, relativeMVSecond,
+        Category.assoc] using
+        relativeMV_restriction_naturality f f' g g' hpull K K' φ (U ⊓ V) U inf_le_left
+    · simpa [relativeMVSourceSecond, relativeMVTargetSecond, relativeMVSecond,
+        Category.assoc] using congrArg Neg.neg
+        (relativeMV_restriction_naturality f f' g g' hpull K K' φ (U ⊓ V) V inf_le_right)
 
 end AlgebraicGeometry
