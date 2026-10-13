@@ -15,17 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Give the localized-site sheaf category the action of global sections of X\nby restricting each compatible family of scalars to objects over U. The overFunctor\nis linear for this action. Give A-modules the same action via evaluation at U.\nCompatibility of sections says that affinePerfectSheafification sends a|U times\nany module map to multiplication by the corresponding restricted global scalar.\nIndeed tilde applies the scalar in each local module localization, scheme-isomorphism\nrestriction transports it through the structure-sheaf ring map, and the over-site\ninverse equivalence only reindexes the sections. These identities pass termwise to\ncomplexes and then through Q, which is linear. Naturality of the given comparison at\nK identifies F(a|U id_Q(K)) with the scalar identity on F(Q(K)). Centrality of scalar\nmultiplication in the target derived category allows this scalar identity to commute\nwith the arbitrary comparison e. Linearity of derived restriction identifies the\nscalar identity on R(E) with R(schemeDerivedScalar X a id_E). Compose the resulting\nequality with e.hom. For zero scalars and empty U the same equations hold, and no\nchoice of e or perfect model is needed.",
+   "text": "On the localized site use the linear structure over compatible local sections. The global family a restricts to overSections U (a(U)), by its compatibility equation. Componentwise extensionality proves overFunctor maps a times the identity to this restricted scalar identity. Apply this termwise to complexes. Naturality of mapDerivedCategoryFactors and linearity of Q prove the same identity on Q(L). Essential surjectivity of Q and conjugation by its object-preimage isomorphism prove it for any E. All these steps are proved in the private restriction_scalar lemma.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use affine_perfect_sheafification_scalar on each K.X n. Complex-morphism extensionality yields the termwise scalar identity. Naturality of the given comparison Q followed by F, linearity of both Q functors, and cancellation of the comparison component give F(a(U) times id_Q(K)) = overSections U (a(U)) times id_F(Q(K)).",
+   "uses": [
+    "lem-sc-affine-sheafification-scalar"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scalar multiplication commutes with every morphism in the target linear derived category, in particular e.hom. Rewrite the two scalar identities proved above to obtain the asserted equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-affine-sheafification-scalar"
+ ],
  "proof_origin": {
   "by": "agent",
-  "group": "X3",
-  "date": "2026-10-13",
-  "note": "Formal interface for a strictly separate part of the parent affine model argument; canonical Stacks text checked online."
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 and 08EJ; Lean scalar/comparison assembly by W3",
+  "group": "W3",
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -112,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T100220-L-2502922",
+  "landing": "20261013T121225-L-3506969",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
