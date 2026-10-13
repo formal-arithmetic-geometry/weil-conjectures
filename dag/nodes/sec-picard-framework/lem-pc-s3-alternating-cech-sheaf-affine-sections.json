@@ -13,7 +13,22 @@
  ],
  "proof": [
   {
-   "text": "The intersection presheaf V ↦ G(V ∩ W) is already a sheaf: it is the direct\nimage from the over site of W. Its sheafification unit is therefore an isomorphism.\nModule sheafification is additive and preserves finite biproducts, hence finite products. The forgetful functor and evaluation preserve products. Therefore the degree-p global sections of the sheafified product are the product of G(W_t). At the top open, top ∩ W_t = W_t.\nPushforward sections at the top are sections on X, and restriction of scalars is\nalong A → Γ(X,O_X), the composite of ΓSpecIso.inv and f.appTop. These identifications\ncommute with each face restriction since they are the sheafification unit followed\nby restriction along top ∩ W_t = W_t. Additivity then identifies the finite signed\nsums defining both differentials. Thus the degree comparisons form a complex\nisomorphism. In negative degrees both extended complexes are zero, and the unique\nmaps give the comparison there. The empty family and empty tuple types contribute\nzero modules, and require no covering or affineness hypothesis. ",
+   "text": "For each open W, factor the intersection functor V ↦ V ∩ W as inverse image under W → X followed by the open-image functor. Both functors are continuous for the opens sites. Identify the underlying abelian-group intersection presheaf with this composite applied to G; Mathlib Functor.op_comp_isSheaf gives its sheaf condition. PresheafOfModules.isSheaf_of_isLimit gives the sheaf condition of the tuple product, including empty products. Apply Adjunction.isIso_unit_app_of_iso to the actual module sheaf formed by this presheaf to prove that its sheafification unit is an isomorphism. No witness of an unproved existence statement is used.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the explicit presheaf product at top using PreservesProduct.iso, map each factor along top ∩ W = W, and apply ModuleCat.piIsoPi. Prove compatibility with a face restriction by presheaf functoriality and uniqueness of opens morphisms. Project each differential to a tuple coordinate; expand the finite signed sum, use this face compatibility, and use additivity of evaluation. HomologicalComplex.Hom.isoOfComponents forms the nonnegative section-complex isomorphism. The evaluated sheafification unit is natural and has invertible degree components, giving the comparison from sheaf sections to the explicit section complex.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct a natural isomorphism between pushforward followed by moduleSpecΓFunctor and top evaluation followed by restriction of scalars along ΓSpecIso.inv ≫ f.appTop: the section maps are identities and their scalar actions agree definitionally. Construct the isomorphism commuting any zero-preserving functor with extension from natural to integer degrees: in nonnegative degree use mapIso of extendXIso; in negative degree both terms are zero and their maps are unique. Check the differential equation with extend_d_eq in nonnegative degrees and IsZero.eq_of_src or eq_of_tgt otherwise. Map the nonnegative comparison through extension and restriction of scalars and compose these isomorphisms.",
    "uses": [
     "def-pc-s3-alternating-cech-sheaf-construction",
     "def-sc-alternating-cech-total-complex"
@@ -28,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 01FM, 02KG and 02KH, explicit interface reduction by F2"
+  "place": "Tags 01FM, 02KG and 02KH; explicit intersection-sheaf, product, differential, pushforward and extension comparisons proved by F4 using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -149,10 +164,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T082341-L-1634350",
-  "kind": "interface",
+  "landing": "20261013T095952-L-2458196",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
