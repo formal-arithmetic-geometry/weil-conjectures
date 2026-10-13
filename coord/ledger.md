@@ -12197,3 +12197,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnit (stage 3; reviewer PASS; first push; landing 20261013T111921-L-3062387 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/S1/Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation (stage 3; reviewer PASS; after a return; landing 20261013T111922-L-3062587 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ChosenModuleFlatProperStage (stage 3; reviewer PASS; first push; landing 20261013T111922-L-3062733 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/S3/Sheaf.AlgebraicGeometry.EtaleInverseImageUnitEventualEquality (stage 3; reviewer PASS; after a return; landing 20261013T111923-L-3062861 (interface); batch 20261013T111833; modules 2; new nodes 1)

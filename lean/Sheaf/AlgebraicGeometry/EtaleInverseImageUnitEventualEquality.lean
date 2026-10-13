@@ -6,6 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleAbelianUnitEqualOpen
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Eventual equality for a single inverse-image unit
 
@@ -54,6 +56,25 @@ theorem etale_inverse_image_unit_eventual_equality
       ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
         (D.map a.op)).unit.app F).hom.app (op U) s =
       ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
-        (D.map a.op)).unit.app F).hom.app (op U) t := by sorry
+        (D.map a.op)).unit.app F).hom.app (op U) t := by
+  have : ∀ {j k : Iᵒᵖ} (a : j ⟶ k), IsAffineHom (D.map a) :=
+    fun a ↦ inferInstance
+  obtain ⟨W, hW⟩ := etale_abelian_unit_equal_open (D.obj (op i)) F U s t
+  have : CompactSpace ↥((𝟭 Scheme).obj U.left) :=
+    inferInstanceAs (CompactSpace U.left)
+  let B := baseChangeDiagram D U.hom
+  let b := baseChangeCone D c U.hom
+  let j₀ : Over (op i) := Over.mk (𝟙 (op i))
+  let f₀ := pullback.fst U.hom (D.map j₀.hom)
+  have : ∀ j, CompactSpace (B.obj j) := fun j ↦
+    inferInstanceAs (CompactSpace ((baseChangeDiagram D U.hom).obj j))
+  have hlimit : b.π.app j₀ ⁻¹ᵁ (f₀ ⁻¹ᵁ W) = ⊤ := by
+    rw [← Scheme.Hom.comp_preimage]
+    simpa [b, f₀] using (hW c.pt (c.π.app (op i))).mp hst
+  obtain ⟨j, a, ha⟩ := exists_map_eq_top B b
+    (isLimitBaseChangeCone D c U.hom hc) (f₀ ⁻¹ᵁ W) hlimit
+  refine ⟨j.left.unop, j.hom.unop, (hW _ _).mpr ?_⟩
+  rw [← Scheme.Hom.comp_preimage] at ha
+  simpa [B, f₀] using ha
 
 end AlgebraicGeometry.Etale

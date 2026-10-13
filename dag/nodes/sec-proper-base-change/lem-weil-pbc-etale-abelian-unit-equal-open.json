@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-etale-abelian-unit-equal-open",
+ "kind": "statement",
+ "title": "Agreement open for abelian etale inverse-image unit sections",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], $U\\to S$ an etale object [def-weil-pbc-etale-site], and $s,t\\in F(U)$. There exists an open $W\\subset U$ such that for every scheme morphism $f:X\\to S$, the images of $s,t$ under the adjunction unit $F\\to f_*f^*F$, evaluated at $U$, agree if and only if the inverse image of $W$ under $U\\times_S X\\to U$ is the whole scheme. The unit is the canonical inverse-image/direct-image adjunction unit; no compactness or limiting-system hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), Tag 03Q1 (lemma-stalk-pullback), and Tag 03S2 (section-extension-by-zero), restriction paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Forget abelian groups to sets and apply the unique agreement-open theorem to F, U, s and t. This supplies W characterized by equality after arbitrary restriction into U.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that the adjoint transpose of the forgotten abelian inverse-image unit is an isomorphism. The forgetful functor preserves filtered colimits, hence pointwise Kan extensions along the opposite etale base-change functor, whose comma categories are filtered. Compose lanCompIsoOfPreserves with sheafComposeNatIso. The sheafification-unit naturality, sheafComposeNatTrans_fac and leftKanExtensionCompIsoOfPreserves_inv_fac identify this isomorphism with the displayed adjoint transpose. All ingredients here are proved Mathlib constructions; this is the private isIso_abelian_forget_comparison proof. The two concrete unit formulas are obtained directly from Mathlib adjunction restriction/composition and sheafification-unit equations; no duplicate generic pullback_unit_hom declaration is introduced.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the adjunction unit equation at U: the preceding comparison sends the set unit images to the abelian unit images. Its component is injective, so the two equality propositions are equivalent. Apply the cartesian-unit equality criterion at the actual base change with the identity isomorphism; this identifies equality with arbitrary restriction along the first pullback projection p.",
+   "uses": [
+    "lem-weil-pbc-sets-cartesian-unit-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining criterion for W says that this restriction equality is equivalent to factorization of p through the open immersion W to U. A factorization implies every point maps into W. Conversely whole inverse image gives range containment and IsOpenImmersion.lift constructs the factorization. Thus the condition is precisely p inverse-image W = top.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-sets-cartesian-unit-equality"
+ ],
+ "proof_origin": {
+  "by": "S3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), Tag 03Q1 (lemma-stalk-pullback), and Tag 03S2 (section-extension-by-zero), restriction paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The equality locus of two sections of an abelian etale sheaf is an open subset, compatible with arbitrary inverse images",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of adjunction unit images of two sections of an abelian etale sheaf is equivalent to the pullback of an agreement open being the whole scheme",
+   "date": "2026-10-13",
+   "results": "8 matches concern structure-sheaf section equalities and scheme morphisms; none is an arbitrary abelian etale sheaf unit criterion.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves",
+   "date": "2026-10-13",
+   "results": "11 matches including the Kan-extension comparison and its inverse unit factorization, used in the private coefficient comparison proof.",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "equal_open|agreement.*open|unit.*forget",
+   "date": "2026-10-13",
+   "results": "25 unrelated Mathlib matches. Local library searches found the set-valued agreement-open and cartesian-unit lemmas, and a module-coefficient comparison used as a template for the proved abelian comparison.",
+   "verdict": "no direct abelian agreement-open theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageUnitEventualEquality",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Scalar section continuity: equality under one stage inverse-image unit, reduced to the agreement open and eventual open containment.",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-unit-eventual-equality",
+    "lem-weil-pbc-etale-limit-scalar-section-eventual-equality",
+    "lem-weil-pbc-etale-limit-scalar-section-colimit",
+    "lem-weil-pbc-etale-limit-finite-cech-colimit",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAbelianUnitEqualOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAbelianUnitEqualOpen.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_abelian_unit_equal_open",
+  "statement": "theorem etale_abelian_unit_equal_open\n    (S : Scheme.{u})\n    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (U : S.Etale) (s t : F.obj.obj (op U)) :\n    ∃ W : U.left.Opens, ∀ (X : Scheme.{u}) (f : X ⟶ S),\n      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app F).hom.app\n          (op U) s =\n        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app F).hom.app\n          (op U) t) ↔\n      pullback.fst U.hom f ⁻¹ᵁ W = ⊤",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T111923-L-3062861",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T111923-L-3062861",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
