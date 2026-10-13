@@ -11393,11 +11393,9 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/B2/Sheaf.AlgebraicGeometry.DerivedBaseChangeTopIso (stage 3; reviewer PASS; first push; landing 20261013T062515-L-731174 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/B3/Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData (stage 3; reviewer PASS; first push; landing 20261013T062516-L-731308 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/C2/Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor (stage 3; reviewer PASS; first push; landing 20261013T062516-L-731480 (interface); batch 20261013T062512; modules 3; new nodes 2)
-- 06:25 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight (stage 3; reviewer PASS; first push; landing 20261013T062517-L-731650 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/D3/Sheaf.AlgebraicGeometry.FormalCompletionAffineComparison (stage 3; reviewer PASS; after a return; landing 20261013T062517-L-731821 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/D3/Sheaf.Paper.BalancedActionAffineSections (stage 3; reviewer PASS; first push; landing 20261013T062518-L-731966 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/E2/Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyTensorKernel (stage 3; reviewer PASS; first push; landing 20261013T062519-L-732081 (interface); batch 20261013T062512; modules 3; new nodes 2)
-- 06:25 L: merged deliver/E2/Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft (stage 3; reviewer PASS; first push; landing 20261013T062519-L-732227 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/E3/Sheaf.AlgebraicGeometry.CoherentCokernelRelationsLocal (stage 3; reviewer PASS; after a return; landing 20261013T062520-L-732369 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/F2/Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation (stage 3; reviewer PASS; first push; landing 20261013T062521-L-732531 (proof); batch 20261013T062512; modules 1; new nodes 0)
 - 06:25 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineAlternatingCechAugmentedConstruction (stage 3; reviewer PASS; first push; landing 20261013T062521-L-732713 (interface); batch 20261013T062512; modules 5; new nodes 4)
@@ -11423,7 +11421,8 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/V2/Sheaf.AlgebraicGeometry.EtaleTensorSectionsCokernelExact (stage 3; reviewer PASS; first push; landing 20261013T062534-L-736575 (proof); batch 20261013T062512; modules 1; new nodes 0)
 - 06:25 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ClosedStructureAmbientIdealExtension (stage 3; reviewer PASS; first push; landing 20261013T062535-L-736731 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientMaps (stage 3; reviewer PASS; first push; landing 20261013T062536-L-736941 (interface); batch 20261013T062512; modules 2; new nodes 1; change records: coord/changes/formalFunctions_finite_quotient_maps_elaboration.md)
-- 06:25 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PicardExternalCupCochain (stage 3; reviewer PASS; after a return; landing 20261013T062536-L-737120 (proof); batch 20261013T062512; modules 1; new nodes 0)
 - 06:25 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.DerivedDirectImageInternalHom (stage 3; reviewer PASS; after a return; landing 20261013T062537-L-737388 (interface); batch 20261013T062512; modules 1; new nodes 0; change records: coord/changes/DerivedDirectImageInternalHomProofContext.md)
 - 06:28 L: returned deliver/W2/Sheaf.AlgebraicGeometry.AffinePushoutModuleSectionPresentation (reviewer RETURN: (reviewer X-1a676, head 1a676f933) B9: In dag/nodes/sec-proper-base-change/lem-w2-inverse-image-change-of-rings-unit-smu)
 - 06:36 L: returned deliver/M3/Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology (reviewer RETURN: (reviewer X-925c0, head 925c0d899) H10: lean/Sheaf/AlgebraicGeometry/RHomSupportedQuasiCoherentPseudoPartQCCohomology.le)
+
+- 14:38 L: batch 20261013T062512 dependency take-out
