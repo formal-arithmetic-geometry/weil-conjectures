@@ -16,45 +16,24 @@
  ],
  "proof": [
   {
-   "text": "For f affine, higher direct images of every quasi-coherent module vanish. Apply the unbounded acyclic derived pushforward cohomology comparison with bound one on each inverse image of an affine open. Use the comparison induced by the right-derived unit, computed by a K-injective resolution and the truncation argument of 08D4, rather than an arbitrary choice of the existence-only isomorphism. This gives H^i(Rf*L) naturally isomorphic to f*H^i(L).",
+   "text": "Obtain the identity-representative comparison and apply the naturality extension theorem to it.",
    "uses": [
-    "lem-pc-affine-morphism-hi",
-    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
-    "def-pc-derived-direct-image"
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization-extend"
    ],
    "elementary": false
-  },
-  {
-   "text": "The affine tilde/Gamma counit and the natural identity-on-sections pushforward/restriction comparison identify f*H^i(L) with T_B res_phi Gamma_A H^i(L). Compose the inverse of the preceding normalized cohomology comparison to obtain d. Exact tilde and exact restriction of scalars give q_C as specified. The tilde adjunction triangle identity identifies its termwise comparison with the same ordinary-to-derived unit. Thus q_C equals T_B res_phi b_(C,id) followed by d at Q(T_A C).",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pc-affine-base-change-tilde-coordinates",
-    "lem-pc-affine-derived-cohomology-presentation",
-    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the naturality equation of d to t. The definition of b_(C,t) is b_(C,id) followed by Gamma_A H^i(t). Reassociate and use functoriality to obtain the displayed equation. For a zero ring all objects and maps are zero; no step excludes that case. The bound-one truncation argument applies to all unbounded C.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-base-change-tilde-coordinates",
-  "def-pc-derived-direct-image",
-  "lem-pc-affine-derived-cohomology-presentation",
-  "lem-pc-affine-morphism-hi",
-  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+  "lem-pc-affine-tilde-pushforward-cohomology-normalization-extend"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "B4",
-  "date": "2026-10-13",
-  "document": "Stacks Project, perfect.tex and cohomology.tex",
-  "place": "perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW), cohomology display; lemma-application-nice-K-injective (Tag 08D4), degreewise truncation; lemma-single-complex-base-change-condition (Tag 0DJ8), affine representative coordinates.",
-  "note": "Detailed normalization/factorization of the affine calculation, without boundedness or a cartesian assumption."
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0AVW, 08D4 and 0DJ8"
  },
  "mathlib_searches": [
   {
@@ -118,7 +97,8 @@
    "AlgebraicGeometry.affineTildePushforwardComparison",
    "AlgebraicGeometry.affineTildePushforwardCohomologyMap",
    "AlgebraicGeometry.affineTildeRepresentativeCohomologyIso",
-   "AlgebraicGeometry.exists_affineTildePushforwardCohomologyNormalization"
+   "AlgebraicGeometry.exists_affineTildePushforwardCohomologyNormalization",
+   "AlgebraicGeometry.affineTildePushforwardNormalizationEquation"
   ],
   "statement": "theorem exists_affineTildePushforwardCohomologyNormalization (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : ∃ d : affineDerivedCohomologyModules A i ⋙ (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i, ∀ (L : schemeDerivedQCohCategory (Spec (.of A))) (C : CochainComplex (ModuleCat.{u} A) ℤ) (t : DerivedCategory.Q.obj (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L.obj), affineTildePushforwardCohomologyMap A B φ C i ≫ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map t.hom) = (affineTildeFunctor B).map ((ModuleCat.restrictScalars φ).map (affineTildeRepresentativeCohomologyIso A C L.obj t i).hom) ≫ d.hom.app L",
   "branch": "sheaf-dag",
@@ -139,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T171510-L-1980815",
-  "kind": "interface",
+  "landing": "20261013T190156-L-3221780",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

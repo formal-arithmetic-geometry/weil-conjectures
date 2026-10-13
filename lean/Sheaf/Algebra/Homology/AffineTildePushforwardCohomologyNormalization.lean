@@ -146,6 +146,137 @@ def affineTildeRepresentativeCohomologyIso (A : Type u) [CommRing A]
         ((DerivedCategory.homologyFunctorFactors _ i).app
           ((T.mapHomologicalComplex (.up ℤ)).obj C)).symm ≪≫ H.mapIso t)
 
+/-- The normalization equation for a fixed representative.
+Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
+(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
+def affineTildePushforwardNormalizationEquation
+    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
+    (d : affineDerivedCohomologyModules A i ⋙
+      (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅
+      (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
+      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
+      DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i)
+    (L : schemeDerivedQCohCategory (Spec (.of A)))
+    (C : CochainComplex (ModuleCat.{u} A) ℤ)
+    (t : DerivedCategory.Q.obj
+      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L.obj) : Prop :=
+  affineTildePushforwardCohomologyMap A B φ C i ≫
+      (DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
+        ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map t.hom) =
+    (affineTildeFunctor B).map ((ModuleCat.restrictScalars φ).map
+      (affineTildeRepresentativeCohomologyIso A C L.obj t i).hom) ≫ d.hom.app L
+
+/-- The identity-representative part of affine pushforward normalization.
+Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
+Proof: construct the affine comparison using acyclic pushforward and verify the
+canonical representative by the tilde/Gamma counit and derived unit identities.
+(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization-base). -/
+def affineTildePushforwardIdentityNormalization
+    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
+    (d : affineDerivedCohomologyModules A i ⋙
+      (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅
+      (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
+      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
+      DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i)
+    (C : CochainComplex (ModuleCat.{u} A) ℤ) : Prop :=
+  ∀ (L : schemeDerivedQCohCategory (Spec (.of A)))
+    (t : DerivedCategory.Q.obj
+      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L.obj),
+    (∃ h : DerivedCategory.Q.obj
+        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) = L.obj,
+      t.hom = eqToHom h) →
+      affineTildePushforwardNormalizationEquation A B φ i d L C t
+
+/-- Identity representatives determine the comparison by naturality.
+Source: Stacks Project, Tag 0AVW.
+Proof: transport the identity equation along the representative isomorphism,
+using functoriality of derived pushforward, homology, and the cohomology coordinates.
+(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization-extend). -/
+theorem affineTildePushforwardCohomologyNormalization_extend
+    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
+    (d : affineDerivedCohomologyModules A i ⋙
+      (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅
+      (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
+      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
+      DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i)
+    (h : ∀ C : CochainComplex (ModuleCat.{u} A) ℤ,
+      affineTildePushforwardIdentityNormalization A B φ i d C) :
+    ∀ (L : schemeDerivedQCohCategory (Spec (.of A)))
+      (C : CochainComplex (ModuleCat.{u} A) ℤ)
+      (t : DerivedCategory.Q.obj
+        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L.obj),
+      affineTildePushforwardNormalizationEquation A B φ i d L C t := by
+  intro L C t
+  let K := DerivedCategory.Q.obj
+    (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C)
+  have hK : schemeDerivedQCohProperty (Spec (.of A)) K := by
+    intro n
+    exact (SheafOfModules.isQuasicoherent
+      (moduleRings (Spec (.of A)).toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).mapIso t.symm)
+      (L.property n)
+  let L₀ : schemeDerivedQCohCategory (Spec (.of A)) := ⟨K, hK⟩
+  have h₀ := h C L₀ (Iso.refl K) ⟨rfl, rfl⟩
+  let a : L₀ ⟶ L := ObjectProperty.homMk t.hom
+  have hn := d.hom.naturality a
+  have hb : (affineTildeRepresentativeCohomologyIso A C L.obj t i).hom =
+      (affineTildeRepresentativeCohomologyIso A C L₀.obj (Iso.refl K) i).hom ≫
+        (moduleSpecΓFunctor (R := .of A)).map
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).map t.hom) := by
+    dsimp only [affineTildeRepresentativeCohomologyIso, Iso.trans_hom, Iso.symm_hom,
+      Functor.mapIso_hom, Iso.refl_hom]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+    simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  unfold affineTildePushforwardNormalizationEquation at h₀ ⊢
+  dsimp only [Iso.refl_hom] at h₀
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.comp_id] at h₀
+  erw [h₀, Category.assoc]
+  change (affineTildeFunctor B).map ((ModuleCat.restrictScalars φ).map
+      ((moduleSpecΓFunctor (R := .of A)).map
+        ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).map t.hom))) ≫
+      d.hom.app L = _ at hn
+  erw [← hn]
+  rw [hb]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+
+/-- Base affine comparison, normalized on identity representatives.
+Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
+Proof: On inverse images of affine opens, quasi-coherent sheaves have no higher
+cohomology. The bound-one truncation calculation of Tag 08D4 therefore identifies
+H^i(Rf_*L) naturally with f_*H^i(L), also for unbounded L. Use a K-injective
+resolution to compute this comparison: the map from termwise pushforward into
+Rf_* is the right-derived unit, so its cohomology is this comparison whenever
+the input is a complex of associated sheaves. The quasi-coherent counit identifies
+T_A Gamma_A H^i(L) with H^i(L); apply f_* and the ordinary affine pushforward
+comparison to identify T_B res_phi Gamma_A H^i(L) with f_*H^i(L). Compose with
+the inverse cohomology comparison to obtain d, naturally in L. For Q(T_A C),
+exactness of tilde and restriction of scalars identifies cohomology with
+T_B res_phi H^i(C). Under this identification the tilde unit/counit triangle
+identity makes the preceding ordinary comparison precisely the termwise map
+in affineTildePushforwardCohomologyMap. Its composite with the derived unit
+is thus the coordinate map followed by d. This proves the identity case.
+For t.hom = eqToHom h, eliminate h and use uniqueness of inverses to reduce
+t to the identity isomorphism. No step requires a nonzero ring or a bound on C.
+(blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization-base). -/
+theorem affineTildePushforwardCohomologyNormalization_base
+    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :
+    ∃ d : affineDerivedCohomologyModules A i ⋙
+          (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅
+        (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
+          schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙
+          DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,
+      ∀ C : CochainComplex (ModuleCat.{u} A) ℤ,
+        affineTildePushforwardIdentityNormalization A B φ i d C := by
+  sorry
+
 /-- The affine cohomology presentation is normalized by the right-derived unit
 on all complexes of associated sheaves, and hence on every representative.
 Source: Stacks Project, perfect.tex, Tag 0AVW, proof of
@@ -183,6 +314,11 @@ theorem exists_affineTildePushforwardCohomologyNormalization
             (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map
             ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map t.hom) =
           (affineTildeFunctor B).map ((ModuleCat.restrictScalars φ).map
-            (affineTildeRepresentativeCohomologyIso A C L.obj t i).hom) ≫ d.hom.app L := by sorry
+            (affineTildeRepresentativeCohomologyIso A C L.obj t i).hom) ≫ d.hom.app L := by
+  obtain ⟨d, hd⟩ := affineTildePushforwardCohomologyNormalization_base A B φ i
+  refine ⟨d, ?_⟩
+  intro L C t
+  have h := affineTildePushforwardCohomologyNormalization_extend A B φ i d hd L C t
+  simpa [affineTildePushforwardNormalizationEquation] using h
 
 end AlgebraicGeometry

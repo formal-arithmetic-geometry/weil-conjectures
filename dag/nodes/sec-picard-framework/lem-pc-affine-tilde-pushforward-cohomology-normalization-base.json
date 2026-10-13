@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+ "kind": "statement",
+ "title": "Affine pushforward normalization on identity representatives",
+ "statement": "For commutative rings A and B, a ring map phi : B → A, an integer i, and the shared derived-category instances, there is a natural isomorphism from T_B res_phi Gamma_A H^i to H^i Rf_* on D_QCoh(Spec A), with f = Spec(phi), satisfying q_C = T_B res_phi b_(C,id) followed by d at Q(T_A C). Equivalently it satisfies the normalization equation whenever the representative isomorphism is eqToHom of an object equality. T, q and b are the concrete tilde, derived-unit and cohomology-coordinate maps of the parent module; their definition dependencies are listed in stmt_deps. Only identity representatives, not arbitrary automorphisms, are asserted.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "def-pc-affine-base-change-tilde-coordinates"
+ ],
+ "source": {
+  "document": "Stacks Project, Tags 0AVW, 08D4 and 0DJ8",
+  "place": "affine cohomology calculation"
+ },
+ "proof": [
+  {
+   "text": "For f affine, higher direct images of every quasi-coherent module vanish. Apply the unbounded acyclic derived pushforward cohomology comparison with bound one on each inverse image of an affine open. Use the comparison induced by the right-derived unit, computed by a K-injective resolution and the truncation argument of 08D4, rather than an arbitrary choice of the existence-only isomorphism. This gives H^i(Rf*L) naturally isomorphic to f*H^i(L).",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine tilde/Gamma counit and the natural identity-on-sections pushforward/restriction comparison identify f*H^i(L) with T_B res_phi Gamma_A H^i(L). Compose the inverse of the preceding normalized cohomology comparison to obtain d. Exact tilde and exact restriction of scalars give q_C as specified. The tilde adjunction triangle identity identifies its termwise comparison with the same ordinary-to-derived unit. Thus q_C equals T_B res_phi b_(C,id) followed by d at Q(T_A C).",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-affine-base-change-tilde-coordinates",
+    "lem-pc-affine-derived-cohomology-presentation",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a representative whose hom is eqToHom h, eliminate h; uniqueness of inverses identifies the representative isomorphism with Iso.refl. Apply the identity calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-derived-direct-image",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0AVW, 08D4 and 0DJ8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cohomology comparison for an affine derived pushforward agrees with its unit on complexes of associated sheaves",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred. LeanFinder, Loogle and source grep were performed instead.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived pushforward unit is a quasi isomorphism on unbounded complexes of quasi coherent sheaves for an affine morphism",
+   "results": "Functor.mapHomologicalComplexUpToQuasiIsoFactors and DerivedCategory.isIso_Q_map_iff_quasiIso are generic comparison facts; no normalized affine pushforward theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans",
+   "results": "CategoryTheory.NatTrans.naturality and naturality_assoc supply the extension step, not the affine comparison.",
+   "date": "2026-10-14",
+   "verdict": "use naturality for extension"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean supplies mapHomologyIso. Together with direct repository searches in AffineDerivedUnitHomologyIsIso, QCohAcyclicDerivedPushforwardCohomology and AffineDerivedCohomology, no theorem supplies the needed affine derived-unit normalization.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildePushforwardCohomologyNormalization.lean",
+  "declaration": "AlgebraicGeometry.affineTildePushforwardCohomologyNormalization_base",
+  "statement": "theorem affineTildePushforwardCohomologyNormalization_base\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :\n    ∃ d : affineDerivedCohomologyModules A i ⋙\n          (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅\n        (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n          schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n          DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,\n      ∀ C : CochainComplex (ModuleCat.{u} A) ℤ,\n        affineTildePushforwardIdentityNormalization A B φ i d C",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.affineTildePushforwardCohomologyNormalization_base",
+   "AlgebraicGeometry.affineTildePushforwardIdentityNormalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T190156-L-3221780",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T190156-L-3221780",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
