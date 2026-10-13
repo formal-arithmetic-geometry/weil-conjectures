@@ -13,32 +13,27 @@
  },
  "proof": [
   {
-   "text": "For K form the row Z^p(K) -> K^p -> image(d_K^{p,p+1}); for L form the same row. The first arrow is the kernel inclusion, the second factorThruImage. Their composite vanishes after composing with image.ι, which is mono. cyclesIsKernel and isKernelOfComp identify the first arrow as the kernel of the second, which is epi. Thus both base rows are short exact. These are the same kernel/object/image rows used in the main module.",
+   "text": "Form the cycle/object/outgoing-image rows of the single bicomplexes on K and L. Specialize the proved kernel/image row lemma for an arbitrary HomologicalComplex in an arbitrary abelian category and arbitrary complex shape, with indices p,q satisfying c.next p = q, to q = p + 1. Its proof uses cyclesIsKernel and isKernelOfComp. Map the source row by F on resolution complexes, then evaluate both rows at zero to obtain short exact base rows.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Let S be the row for K mapped by F and T the row for L. ShortComplex.ShortExact.map_of_exact gives short exactness of S and T. The degree-zero single functor preserves finite limits and colimits. Use the canonical kernel comparison (mapCyclesIso) and image comparison for this functor to identify the cycle and outgoing-image columns of single_0(K) with single_0(Z^p(K)) and single_0(image(d_K)); the object column is already single_0(K^p). Do the same for L.",
+   "text": "Each column of a single bicomplex row vanishes in positive resolution degrees: for cycles use the monomorphic cycle inclusion, and for images use the epimorphic factorThruImage. F preserves zero objects. For a nonnegative cochain complex concentrated at zero, fromSingle₀Equiv constructs an isomorphism from the single complex on its zero term, with identity zero component. Apply this separately to the three columns; from_single_hom_ext gives the two row squares and ShortComplex.isoMk gives row isomorphisms.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For each of the three source columns precompose G of the induced augmentation by the preceding column identification and by singleMapHomologicalComplex for F. This gives maps from single_0(S.X_i) to G of the corresponding column of I. Transport the two squares of the augmentation through these natural kernel and image isomorphisms, giving the ShortComplex morphism a.augmentation. Do the same without F to obtain b.augmentation into the three columns of J.",
+   "text": "Construct the row morphisms induced by eI and eJ using cyclesMap, the object components, and image.map. Their squares follow from cyclesMap_i and image.factor_map. Precompose the mapped source row morphism and the target row morphism with the row isomorphisms. Their six components are quasi-isomorphisms by exactness of F, the six hypotheses, and composition with isomorphisms. This constructs a and b; their cycle and object augmentation components at zero are the specified augmentation maps.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Install the assumed quasi-isomorphisms as instances. F preserves homology because it preserves finite limits and finite colimits. Applying F to each assumed source quasi-isomorphism and composing with the isomorphisms used above preserves QuasiIso. The analogous target compositions preserve the three target QuasiIso instances. These provide the six quasiIso fields of a and b.",
+   "text": "The middle base-row map is u.f p. Its composite from the source cycles to the target outgoing image is zero: cancel the monomorphic target image inclusion, use image.fac, u.comm, and the source iCycles_d equation evaluated at zero and mapped by F. The target short exact row lifts the source-cycle-to-target-object map to target cycles. The source short exact row descends the object-to-target-image map to its outgoing image. Their lift_f and g_desc equations construct f.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Define f.τ₂=u.f p. Define f.τ₁ using the inverse cycle-preservation isomorphism F(Z^p(K)) -> Z^p(F(K)), followed by cyclesMap u p. Define f.τ₃ using the image-preservation isomorphism F(image(d_K)) -> image(d_F(K)), followed by image.map of the square (u.f p,u.f(p+1)). Naturality of cyclesMap_i and of image factorization gives f.comm₁₂ and f.comm₂₃.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Let δ be the degree-zero evaluation of the source cycle-column identification used in constructing a.augmentation. Let γ be the inverse source object-column degree-zero identification. Evaluating the defining composition for a.augmentation.τ₁ gives the first equation. Evaluating the cycle naturality square gives the second equation. Evaluating the object augmentation and its naturality square gives the third and fourth equations. These are transport identities between the canonical single-complex isomorphisms; no comparison map on I or J is constructed.",
+   "text": "Take δ and γ to be identity isomorphisms on the zero components. The first and third identities are the computed zero components of a. The fourth follows from the definition of the middle component of f and the zero component of b. For the second evaluate cyclesMap_i for eJ at zero and combine it with lift_f for f.τ₁. The singleObjXSelf identifications at zero are identity isomorphisms.",
    "uses": [],
    "elementary": true
   }
@@ -47,7 +42,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Explicit single-complex and exact-functor transport of the rows in Tags 015I and 015K; no comparison lift is part of this lemma."
+  "place": "F1: Tags 015I and 015K, canonical single-bicomplex rows; degree-zero evaluation, fromSingle₀Equiv, and kernel/cokernel universal properties replace explicit cycle/image preservation comparisons. Repair: generalize the private short-exact-row helper to arbitrary abelian categories and complex shapes, avoiding duplication of the private helper in the downstream object-stage module."
  },
  "mathlib_searches": [
   {
@@ -122,10 +117,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T062523-L-733340",
-  "kind": "interface",
+  "landing": "20261013T082341-L-1634196",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

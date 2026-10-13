@@ -11631,3 +11631,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/E3/Sheaf.RingTheory.ComparisonMapFiniteStage (stage 3; reviewer PASS; first push; landing 20261013T082340-L-1633865 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/E4/Sheaf.AlgebraicGeometry.CoherentIntegralGenericLatticeExtension (stage 3; reviewer PASS; first push; landing 20261013T082340-L-1633971 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/F1/Sheaf.AlgebraicGeometry.AffineMapAnnihilationSheafification (stage 3; reviewer PASS; after a return; landing 20261013T082341-L-1634071 (proof); batch 20261013T082326; modules 1; new nodes 0)
+- 08:23 L: merged deliver/F1/Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage.Rows (stage 3; reviewer PASS; after a return; landing 20261013T082341-L-1634196 (proof); batch 20261013T082326; modules 1; new nodes 0)
