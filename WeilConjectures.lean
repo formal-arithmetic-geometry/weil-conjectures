@@ -29,6 +29,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
@@ -244,6 +245,11 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.PoincareDuality.BoundedConstructible
+public import WeilConjectures.PoincareDuality.Poincare
+public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LowerShriek.MorphismDefs
