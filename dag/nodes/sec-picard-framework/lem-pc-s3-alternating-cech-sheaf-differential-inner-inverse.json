@@ -12,20 +12,38 @@
  },
  "proof": [
   {
-   "text": "For a nonnegative degree k, on each test open V contained in U i,\ndefine s from degree k+1 to k by signed insertion of i: the t-coordinate\nis zero when t contains i, and otherwise is (-1)^b times the coordinate\nindexed by t with i inserted in its increasing position b. The two\nintersection opens inside V coincide. These formulas are linear and commute\nwith restriction, giving a morphism of restricted module presheaves.\nApply this formula to d(x). Its differential is d(x): on an inserted tuple\nthis follows from d(d(x))=0 and the face deleting i; on a tuple containing i\nonly the face omitting i contributes, with sign squared one. Consequently\nd s d=d. This calculation only concerns boundaries, and does not assert\nan identity on arbitrary cochains or compare adjacent choices of s.\nThe intersection presheaves V ↦ G(V intersect W) are already sheaves,\nbeing direct images of restrictions to W. Their finite products are\nsheaves, so each term's sheafification unit is an isomorphism. Restrict\nthese units to U i; naturality identifies their differential with the\nrestricted sheafified differential. Lift the insertion map through the\nfully faithful forgetful functor and conjugate by these units. This\npreserves d s d=d. Transport through extendXIso in the three\noccurrences of d. For k<0 the differential is zero, since its source is\nan extension-by-zero term, and s=0 works. Empty opens and zero terms cause\nno exception; r=0 admits no index i.",
+   "text": "Use the presheaf positive insertion identity to obtain s:P(p+1)→K(Pp) and t:P(p+2)→K(P(p+1)) with restriction ν=s K(d)+d t. Put T=module sheafification followed by restriction to U i. By the cap-unit local isomorphism theorem, T(ν) is invertible on both relevant terms. Set s'=T(s) T(ν_p)^{-1} and t'=T(t) T(ν_(p+1))^{-1}. Naturality gives T(d_p) T(ν_(p+1))=T(ν_p) T(K(d_p)). Postcompose s' T(d_p)+T(d_(p+1)) t' with T(ν_(p+1)); cancel the inverse units and use additivity to identify the result with T(ν_(p+1)). Cancelling this isomorphism yields the identity in natural degree p+1. The private lemma alternatingCechSheaf_restrict_natural_insertion proves this step in Lean.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction",
+    "lem-pc-s3-cech-cap-presheaf-local-iso",
+    "lem-pc-s3-alternating-cech-presheaf-positive-insertion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For k≥0 put p=k.toNat. Precompose s' d_p+d_(p+1) t'=id by d_p. The complex equation d_p d_(p+1)=0 yields d_p s' d_p=d_p. Apply the functor to extendXIso at k and k+1. Mathlib extend_d_eq writes the integer differential as e_k d_p e_(k+1)^{-1}. Conjugate s' as e_(k+1) s' e_k^{-1}. Cancellation of the inverse isomorphisms in the triple composite proves the required integer equation.",
    "uses": [
     "def-pc-s3-alternating-cech-sheaf-construction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "If k<0, no natural number maps to k under embeddingUpNat. Mathlib isZero_extend_X makes the source term zero, and map_isZero preserves this under open restriction. Choose the zero morphism s; all morphisms out of this zero source agree, so d s d=d. This includes k=-1, regardless of the degree-zero target.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-s3-alternating-cech-sheaf-construction"
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-cech-cap-presheaf-local-iso",
+  "lem-pc-s3-alternating-cech-presheaf-positive-insertion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 02FU, local insertion formula restricted to increasing tuples; C1 extraction of signed insertion applied only to boundaries in the local insertion computation"
+  "place": "Tag 02FU local insertion with the increasing convention of Tag 01FM; H3 proves local sheafification transport, d-square cancellation and integer extension, leaving only the presheaf signed-face identity."
  },
  "mathlib_searches": [
   {
@@ -96,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T131324-L-4033406",
+  "landing": "20261013T140819-L-313478",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

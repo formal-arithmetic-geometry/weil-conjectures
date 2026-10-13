@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-s3-alternating-cech-presheaf-positive-insertion",
+ "kind": "statement",
+ "title": "Positive signed insertion identity on intersection module presheaves",
+ "statement": "Let $X$ be a scheme, $r\\in\\mathbb N$, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$, $G$ an $\\mathcal O_X$-module, $i\\in\\operatorname{Fin}(r)$, and $p\\in\\mathbb N$. Let $P_q$ and $d_q:P_q\\to P_{q+1}$ be the increasing-tuple module presheaf terms and signed face differentials [def-pc-s3-alternating-cech-sheaf-construction]. Put $W=U_i$ and $K(P)(V)=P(V\\cap W)$ with scalars restricted from $V$, and let $\\nu_P:P\\to K(P)$ be the natural restriction [lem-pc-s3-cech-cap-presheaf-local-iso]. There are module-presheaf morphisms $s:P_{p+1}\\to K(P_p)$ and $t:P_{p+2}\\to K(P_{p+1})$ satisfying $\\nu_{P_{p+1}}=K(d_p)\\circ s+t\\circ d_{p+1}$. No cover condition, sheafification, augmentation, or integer extension is involved.",
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-cech-cap-presheaf-local-iso"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU, displayed local insertion cancellation computation, adapted to increasing tuples as in Tag 01FM"
+ },
+ "proof": [
+  {
+   "text": "Write W=U i and K(P)(V)=P(V intersect W), with scalars restricted\nfrom V. For an increasing tuple a of length q+1, define the a-coordinate\nof the degree-q insertion map from P(q+1) to K(Pq) by zero if i occurs\nin a. Otherwise insert i in its unique increasing position b, project\nto that tuple, restrict to V intersect W intersect the intersection of a,\nand multiply by (-1)^b. These opens coincide with the inserted tuple's\nintersection with V; their equality provides a linear section map.\nThe maps commute with restriction. The finite product comparison for K\nidentifies these coordinate maps with a morphism to K(Pq). Use q=p for s\nand q=p+1 for t. To check the equation, project to a tuple a of length p+2\nand evaluate on V. If a omits i, in the face sum of the inserted tuple\nthe face deleting i contributes restriction of the a-coordinate to W.\nEach other deletion pairs with inserting i after that deletion, with the\nsame restriction and opposite sign. More precisely, if the inserted index\nhas position b and a face deletes position j<b, the two exponents are\nj+b-1 and j+b. If j is at least b, they are j+b and j+b+1. The face\nomitting the inserted i has the product of two signs (-1)^b, hence sign\none. If a contains i, insertion at a is\nzero, and among its faces only deleting i permits insertion; the two\nsigns are (-1)^b and their product is one. Thus s K(d)+d t is exactly\nrestriction to W in every coordinate. Product extensionality proves the\npresheaf equality. This argument needs no cover condition. Empty opens\nand empty tuple index sets are zero modules; if r=0 no index i exists.\nThere is no sheafification or extension to integer degrees in this claim.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction",
+    "lem-pc-s3-cech-cap-presheaf-local-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-cech-cap-presheaf-local-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU local insertion; H3 explicit ordered-index sign pairing before sheafification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed insertion contracts a restricted alternating Cech complex in each positive degree",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local signed insertion map on the alternating Cech complex satisfies the contraction identity in positive natural degrees",
+   "results": "8 hits, including Rep.standardComplex.d_of, AlternatingFaceMapComplex.obj_d_eq, AlternatingCofaceMapComplex.objD and DoldKan homotopies. None states the ordered module-presheaf insertion identity.",
+   "date": "2026-10-13",
+   "verdict": "No direct match for these presheaves and face differentials."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extend_d_eq",
+   "results": "One hit: HomologicalComplex.extend_d_eq, used for the parent extension transport but not the presheaf cancellation.",
+   "date": "2026-10-13",
+   "verdict": "Transport found; no insertion identity."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*homotopy|inner_inverse|extend_d_eq",
+   "results": "18 hits, all homological-complex extension formulas. Local repository search also found the insertion-identities and positive-contraction modules, which transitively depend on the parent and cannot be imported without a cycle. The degree-zero presheaf identity handles only degree zero.",
+   "date": "2026-10-13",
+   "verdict": "No matching positive-degree presheaf identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafDifferentialInnerInverse",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local signed insertion calculation in the inner-inverse proof; before sheafification, degreewise positive cancellation",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-differential-inner-inverse",
+    "lem-pc-s3-alternating-cech-sheaf-positive-contraction",
+    "lem-pc-s3-alternating-cech-sheaf-singleton-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechPresheafPositiveInsertion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechPresheafPositiveInsertion.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafPresheaf_positive_insertion",
+  "statement": "theorem alternatingCechSheafPresheaf_positive_insertion\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)\n    (p : ℕ) :\n    let K := cechCapPresheafFunctor (U i)\n    let P₀ := alternatingCechSheafPresheafTerms U G p\n    let P₁ := alternatingCechSheafPresheafTerms U G (p + 1)\n    let P₂ := alternatingCechSheafPresheafTerms U G (p + 1 + 1)\n    ∃ (s : P₁ ⟶ K.obj P₀) (t : P₂ ⟶ K.obj P₁),\n      (cechCapPresheafUnit (U i)).app P₁ =\n        s ≫ K.map (alternatingCechSheafPresheafD U G p) +\n          alternatingCechSheafPresheafD U G (p + 1) ≫ t",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T140819-L-313478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T140819-L-313478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
