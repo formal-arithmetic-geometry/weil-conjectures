@@ -25,11 +25,69 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-proetale-qcqs-site-limits",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The qcqs objects form the finite-cover site, and its fibre products and finite limits are computed as scheme limits; the inclusion into the full pro-etale site preserves fibre products and coverings. The same statement in each slice gives the asserted slice limits. The finite-cover topology is stable under adjoining finitely many arrows with common target. Every affine object is qcqs by the affine scheme conventions.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-site-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A1, proof of lemma-w-contractible-hypercovering, qcqs subsite paragraph; Tag 098M"
+   }
+  },
+  {
+   "text": "The pro-etale topology is subcanonical by Tag 098Z, so each representable h_V is a sheaf of sets.",
+   "uses": [
+    "lem-weil-pbc-proetale-subcanonical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098Z, lemma-proetale-subcanonical"
+   }
+  },
+  {
+   "text": "For a finite family of qcqs objects, the scheme disjoint union exists in the qcqs site and is affine when all summands are affine. The coproduct comparison of representable sheaves is an isomorphism, and evaluating any sheaf on the union identifies its sections with the product of the sections on the summands; the empty family gives the empty scheme and singleton value.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0F4P, lemma-weakly-contractible-cover; Tag 0DB1, remark-take-unions-hypercovering-X"
+   }
+  },
+  {
+   "text": "Combining the preceding finite-limit, subcanonical, and finite-coproduct facts yields all clauses of the statement, including naturality in F and the inclusion and slice assertions.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-site-limits",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09A1, 098Z, 0F4P and Hypercoverings 0DB1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-qcqs-site-limits",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A1, 098M, 098Z, 0F4P; Hypercoverings 0DB1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,12 +126,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-affine-acyclic-hypercover",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "worker": "stage1",
+  "summary": "Audited the imported conjunction against Stacks Tags 09A1, 098M, 098Z, 0F4P and Hypercoverings 0DB1. Split out the qcqs finite-cover site and finite-limit facts, subcanonicality, and finite disjoint-union/evaluation comparison; the item proof now cites each statement explicitly and checks affine and empty-family edge cases.",
+  "blueprint": "Realizes thm-weil-pbc-qbar proof paragraph 1 on coefficient-extension coproduct continuity and affine weakly contractible hypercover constructions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-227d67560",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-227d67560 (reviewer sub-agent of L); spot-checked: Full mathematical review passed. All three new nodes omit required created.by and created.date metadata; corrected complete JSON files are in fixes/dag/nodes/sec-proper-base-change/. Review written to review.md.; 3 file(s) fixed by the reviewer"
+ }
 }
