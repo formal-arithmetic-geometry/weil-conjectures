@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Sheaf.Algebra.Homology.FiniteFreeZeroHomologyProduct
 
 
 @[expose] public section
@@ -20,6 +20,42 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
+private theorem fan_projection_isIso
+    {A : Type*} [Category A] [HasZeroMorphisms A]
+    {I : Type*} {F : I → A} {H : A}
+    (g : ∀ i, H ⟶ F i) (hg : IsLimit (Fan.mk H g))
+    (j : I) (hz : ∀ i, i ≠ j → IsZero (F i)) : IsIso (g j) := by
+  classical
+  let v : F j ⟶ H := Fan.IsLimit.lift hg
+    (fun i ↦ if h : j = i then eqToHom (congrArg F h) else 0)
+  have hv : ∀ i, v ≫ g i = if h : j = i then eqToHom (congrArg F h) else 0 :=
+    fun i ↦ Fan.IsLimit.fac hg _ i
+  refine ⟨⟨v, ?_, ?_⟩⟩
+  · apply Fan.IsLimit.hom_ext hg
+    intro i
+    by_cases hi : i = j
+    · subst i
+      simp [Category.assoc, hv]
+    · exact (hz i hi).eq_of_tgt _ _
+  · simpa using hv j
+
+private theorem homObj_isZero_right
+    {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
+    (R : Sheaf S CommRingCat.{u})
+    (A B : SheafOfModules.{u}
+      ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+    (hB : IsZero B) : IsZero (SheafOfModules.homObj (R := R) A B) := by
+  apply (IsZero.iff_id_eq_zero _).2
+  rw [← SheafOfModules.homObjMap_id (R := R)]
+  rw [hB.eq_of_src (𝟙 B) 0]
+  apply SheafOfModules.hom_ext
+  ext U φ : 3
+  change (PresheafOfModules.restrictOver R.obj U.unop).map (𝟙 A.val) ≫ φ ≫
+    (PresheafOfModules.restrictOver R.obj U.unop).map 0 = 0
+  ext W x
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Invertibility of the cycle-compatible finite-free homology evaluation map.
 
 Source: Stacks Project, Tag 0BQY, finite-free Hom calculation in Lemma 48.15.4;
@@ -66,6 +102,61 @@ theorem finiteFreeZero_homologyEvaluation_iso
       (homComplex (R := R) E K).homologyπ n ≫ f ≫
         SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _)) :
     IsIso f := by
-  sorry
+  classical
+  let P := homComplex (R := R) E K
+  obtain ⟨g, ⟨hg⟩, hcomp⟩ := finiteFreeZero_homologyProduct R E K n hzero hsupp hfree
+  have hgIso : IsIso (g (-n) (-n + n) rfl) :=
+    fan_projection_isIso (fun p ↦ g p (p + n) rfl) hg (-n) (by
+      intro p hp
+      exact homObj_isZero_right R _ _ (hK (p + n) (by omega)))
+  have hgIso' : ∀ q (h : -n + n = q), IsIso (g (-n) q h) := by
+    intro q h
+    subst q
+    exact hgIso
+  have hgIso0 : IsIso (g (-n) 0 (by omega)) := hgIso' 0 (by omega)
+  have : IsIso (E.iCycles (-n)) :=
+    E.isIso_iCycles (-n) (-n + 1) (by simp) (hzero _ _)
+  have : IsIso (E.homologyπ (-n)) :=
+    E.isIso_homologyπ (-n - 1) (-n) (by simp) (hzero _ _)
+  let d := c ≫ SheafOfModules.homObjMap (R := R) (inv (E.iCycles (-n))) (𝟙 _)
+  have hd : d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) =
+      P.iCycles n ≫ (Classical.choose (homComplex_projections_exists (R := R)))
+        E K n (-n) 0 (by omega) := by
+    dsimp only [d]
+    calc
+      _ = c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) ≫
+          SheafOfModules.homObjMap (R := R) (inv (E.iCycles (-n))) (𝟙 _) := by
+        simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
+          Category.id_comp, Category.comp_id]
+      _ = _ := by
+        rw [← Category.assoc c, hc]
+        simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
+          IsIso.inv_hom_id, SheafOfModules.homObjMap_id,
+          Category.comp_id, P]
+  have hdπ := hcomp (-n) 0 (by omega) d hd
+  have heq : f ≫ SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _) ≫
+      SheafOfModules.homObjMap (R := R) (inv (E.iCycles (-n))) (𝟙 _) =
+      g (-n) 0 (by omega) := by
+    apply (cancel_epi (P.homologyπ n)).1
+    rw [← hdπ]
+    simpa only [P, d, Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
+      Category.id_comp, Category.comp_id] using
+      congrArg (fun t ↦ t ≫ SheafOfModules.homObjMap (R := R)
+        (inv (E.iCycles (-n))) (𝟙 (K.homology 0))) hf.symm
+  have : IsIso (SheafOfModules.homObjMap (R := R) (E.homologyπ (-n))
+      (𝟙 (K.homology 0))) :=
+    inferInstanceAs (IsIso (((SheafOfModules.homFunctor R).flip.obj
+      (K.homology 0)).map (E.homologyπ (-n)).op))
+  have : IsIso (SheafOfModules.homObjMap (R := R) (inv (E.iCycles (-n)))
+      (𝟙 (K.homology 0))) :=
+    inferInstanceAs (IsIso (((SheafOfModules.homFunctor R).flip.obj
+      (K.homology 0)).map (inv (E.iCycles (-n))).op))
+  have : IsIso (f ≫ SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _) ≫
+      SheafOfModules.homObjMap (R := R) (inv (E.iCycles (-n))) (𝟙 _)) := by
+    rw [heq]
+    exact hgIso0
+  exact IsIso.of_isIso_comp_right f
+    (SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _) ≫
+      SheafOfModules.homObjMap (R := R) (inv (E.iCycles (-n))) (𝟙 _))
 
 end CategoryTheory

@@ -1,0 +1,145 @@
+{
+ "id": "new-h3-finite-free-zero-homology-product",
+ "kind": "lemma",
+ "title": "Coordinate homology product for finite-free zero-differential internal Hom",
+ "statement": "Let C be a small category with a Grothendieck topology S and a sheaf R of commutative rings, and use its abelian category of sheaves of modules [def-weil-sheaf-of-modules-category]. Let E,K be integer-indexed cochain complexes [def-pc-cochain-complex-modules]. Assume every differential of E is zero, that E is zero outside some finite integer interval, and that every E.X p is isomorphic to a finite free sheaf. Write P=Hom(E,K) [def-pur-hom-complex], with the fixed product projections π of [lem-sc-hom-complex-projections], and internal Hom from [def-pur-sheaf-hom]. For every n there are maps g(p,q,h):H^n(P)→Hom(E.X p,H^q(K)) for p+n=q with proof h. The fan with vertex H^n(P) and projections g(p,p+n,rfl) is a product-limit fan. Moreover, for every such p,q,h and every d:Z^n(P)→Hom(E.X p,Z^q(K)), if d followed by Hom(id,iCycles_K q) equals iCycles_P n followed by π(E,K,n,p,q,h), then d followed by Hom(id,homologyπ_K q) equals homologyπ_P n followed by g(p,q,h). No concentration of K and no evaluation map on H(E) is assumed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "finite-free Hom calculation, expanded using Tag 0A8X"
+ },
+ "proof": [
+  {
+   "text": "Using the fixed projections and the Hom differential formula, hzero identifies the Hom complex with the coordinatewise product of the translated Hom(E.X p,K) complexes. Outside the interval of hsupp, Hom from the zero source is zero, so the product is equivalent to a finite product.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose each given finite-free basis. finiteFreeInternalHomExact identifies the coordinate functor Hom(E.X p,-) with a finite sum of identities, naturally in its argument, and proves its short-exactness. It preserves kernels and cokernels and hence the cycles, boundaries and homology of each translated complex. Finite products are finite biproducts in the abelian category of sheaves of modules and preserve those kernels and cokernels. The resulting coordinate quotient maps g therefore form a limiting fan.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Hom(E.X p,iCycles_K q) is a kernel inclusion, hence monic. Thus any supplied cycle lift d of the ambient projection is the unique lift obtained in the kernel calculation. Its composite with Hom(id,homologyπ_K q) is the coordinate cokernel quotient map. By the homology cokernel property it equals homologyπ_P n followed by g. Transport along p+n=q gives the stated proof-indexed coordinates.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H3",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "finite-free Hom calculation, expanded using Tag 0A8X"
+  },
+  "description": "General product-homology calculation expanding steps 1 and the exactness/product part of step 2 of the assigned node; follows finite-free Hom and finite biproduct exactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology internal Hom bounded finite free zero differential complex concentrated homology",
+   "results": "8 hits; groupCohomologyIsoExt, Rep.standardResolution.extIso, groupCohomologyIso, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CochainComplex.HomComplex.homologyAddEquiv, Rep.barResolution.extIso, CochainComplex.HomComplex.leftHomologyData_H_coe",
+   "date": "2026-10-14",
+   "verdict": "General homology-preservation API or group-valued Hom-complex results only; no sheaf-valued coordinate product comparison with the required cycle equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesHomology\"",
+   "results": "12 hits; CategoryTheory.Functor.PreservesHomology, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf, CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf, CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology, CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology, CategoryTheory.Functor.PreservesHomology.preservesCokernel, CategoryTheory.Functor.PreservesHomology.preservesCokernels",
+   "date": "2026-10-14",
+   "verdict": "General homology-preservation API or group-valued Hom-complex results only; no sheaf-valued coordinate product comparison with the required cycle equation."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*(product|pi)|PreservesHomology",
+   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/Localization.lean",
+   "date": "2026-10-14",
+   "verdict": "General homology-preservation API or group-valued Hom-complex results only; no sheaf-valued coordinate product comparison with the required cycle equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of a finite product of complexes in an abelian category",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluationIso",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation: the finite-free Hom product and its coordinate quotient maps, before concentration and evaluation transport.",
+   "via": [
+    "new-v4-finite-free-zero-homology-evaluation-iso",
+    "new-v4-finite-free-zero-homology-evaluation",
+    "new-b2-homology-evaluation-local-iso-core",
+    "new-b2-homology-evaluation-local-iso",
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteFreeZeroHomologyProduct",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeZeroHomologyProduct.lean",
+  "declaration": "CategoryTheory.finiteFreeZero_homologyProduct",
+  "statement": "theorem finiteFreeZero_homologyProduct\n    {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}\n    (R : Sheaf S CommRingCat.{u})\n    (E K : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℤ) (hzero : ∀ a b : ℤ, E.d a b = 0)\n    (hsupp : ∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (E.X k))\n    (hfree : ∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅\n      SheafOfModules.free (ULift.{u} (Fin r)))) :\n    let P := homComplex (R := R) E K\n    ∃ g : ∀ (p q : ℤ), p + n = q →\n        (P.homology n ⟶ SheafOfModules.homObj (R := R) (E.X p) (K.homology q)),\n      Nonempty (IsLimit (Fan.mk (P.homology n)\n        (fun p : ℤ ↦ g p (p + n) rfl))) ∧\n      ∀ (p q : ℤ) (hpq : p + n = q)\n        (d : P.cycles n ⟶ SheafOfModules.homObj (R := R) (E.X p) (K.cycles q)),\n        d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles q) =\n          P.iCycles n ≫ (Classical.choose (homComplex_projections_exists (R := R)))\n            E K n p q hpq →\n        d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ q) =\n          P.homologyπ n ≫ g p q hpq",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-sc-finite-free-internal-hom-exact",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T211105-L-392518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T211105-L-392518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
