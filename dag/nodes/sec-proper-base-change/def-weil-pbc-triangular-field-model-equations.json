@@ -1,0 +1,107 @@
+{
+ "id": "def-weil-pbc-triangular-field-model-equations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The field model in step 7 of the finite-etale lifting split, through Cartier equality; Explicit triangular field-model equations",
+   "via": [
+    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Explicit triangular field-model equations",
+ "statement": "Let $k$ be a commutative ring and let $d,r\\geq0$. Write $R_j=k[X_0,\\ldots,X_{j-1}]$ [def-weil-pbc-mv-polynomial-ring]. Given $h\\in R_d$ and $p_i\\in R_{d+1+i}[Z]$ for $0\\leq i<r$, define a list $f$ in $R_{d+1+r}$: its first entry is $hX_d-1$, and its entry $i+1$ is $p_i(X_{d+1+i})$, embedding its coefficient ring by the inclusion of the first $d+1+i$ variables. Thus $f$ has length $r+1$. This is the explicit presentation with $T=X_d$ and $Y_i=X_{d+1+i}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "construct list of triangular polynomial equations hT minus one and monic equations by renaming variables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"rename\"",
+   "results": "MvPolynomial.rename, MvPolynomial.renameEquiv, MvPolynomial.renameEquiv_refl, MvPolynomial.rename_id, MvPolynomial.rename_eq, MvPolynomial.rename_eq_aeval, MvPolynomial.aeval_comp_rename, MvPolynomial.renameEquiv_symm",
+   "date": "2026-10-13",
+   "verdict": "no match: ingredients only, no triangular model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "triangularFieldModel|triangular.*regular|triangular.*presentation",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "no match: ingredients only, no triangular model theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TriangularFieldModelEquations",
+  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelEquations.lean",
+  "declaration": "FieldTheory.triangularFieldModelEquations",
+  "statement": "def triangularFieldModelEquations\n    (k : Type u) [CommRing k] (d r : ℕ) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin r) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k)) :\n    List (MvPolynomial (Fin (d + 1 + r)) k)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

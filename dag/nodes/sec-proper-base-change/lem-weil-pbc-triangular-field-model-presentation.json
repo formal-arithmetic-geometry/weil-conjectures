@@ -1,0 +1,212 @@
+{
+ "id": "lem-weil-pbc-triangular-field-model-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The field model in step 7 of the finite-etale lifting split, through Cartier equality; An embedded triangular presentation with fraction representations",
+   "via": [
+    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An embedded triangular presentation with fraction representations",
+ "statement": "Let $k$ and $K$ be fields [def-weil-field] with a $k$-algebra structure [def-pc-field-extension], suppose $K=k(b_0,\\ldots,b_{m-1})$ for a finite family, and let $x:\\operatorname{Fin}(d)\\to K$ be a transcendence basis [def-weil-pbc-transcendence-basis]. There exist $r\\geq0$, a nonzero $h\\in k[X_0,\\ldots,X_{d-1}]$, and monic polynomials $p_i\\in k[X_0,\\ldots,X_{d+i}][Z]$ ($0\\leq i<r$; monic means leading coefficient one) such that, for the explicit list $f$ of [def-weil-pbc-triangular-field-model-equations], the quotient $A=k[X_0,\\ldots,X_{d+r}]/(f)$ admits an injective $k$-algebra map $\\iota:A\\to K$ and every $z\\in K$ equals $\\iota(a)\\iota(s)^{-1}$ for some $a,s\\in A$ with $s\\ne0$. No regularity claim is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "*The base field $F$ and the tower.* Since $x_1,\\dots,x_d$ is a transcendence basis [def-weil-pbc-transcendence-basis], the $k$-algebra map $k[X_1,\\dots,X_d]\\to K$, $X_j\\mapsto x_j$, is injective, so its image $k[x]=k[x_1,\\dots,x_d]$ is a domain isomorphic to the polynomial ring, and $K$ is algebraic over $F:=k(x_1,\\dots,x_d)$. The set $\\{a/s: a,s\\in k[x],\\ s\\ne0\\}$ is a subfield of $K$ containing $k$ and the $x_j$ and is contained in every such subfield, so it is $F$. Put $r:=m$, $L_0:=F$ and $L_i:=F(b_1,\\dots,b_i)$ (the smallest subfield of $K$ containing $F$ and $b_1,\\dots,b_i$), so $L_i=L_{i-1}(b_i)$; $L_r$ contains $k$ and all $b_j$, hence $L_r\\supseteq k(b_1,\\dots,b_m)=K$, so $L_r=K$. Each $b_i$ is algebraic over $F$ [def-weil-algebraic-element], hence over $L_{i-1}\\supseteq F$ (the same nonzero polynomial).",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "Each generator has a monic minimal polynomial of positive degree over the preceding field. Use the minimal-polynomial quotient isomorphism and its power basis, then Basis.smulTower, to obtain an F-basis of K consisting of bounded monomials in the generators. No separability hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-tower-product-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "*The polynomials $P_i$ over $F$.* Fix $i$ and write $\\mu_i=T^{e_i}+\\sum_{l<e_i}c_{il}T^l$ with $c_{il}\\in L_{i-1}$. By step 2 each $c_{il}$ is an $F$-linear combination of monomials in $b_1,\\dots,b_{i-1}$; replacing $b_j$ by the variable $Y_j$ gives $g_{il}\\in F[Y_1,\\dots,Y_{i-1}]$ [def-weil-pbc-mv-polynomial-ring] with $g_{il}(b_1,\\dots,b_{i-1})=c_{il}$. Put $P_i:=Y_i^{e_i}+\\sum_{l<e_i}g_{il}Y_i^l\\in F[Y_1,\\dots,Y_i]$. Then $P_i$ is monic of degree $e_i$ in $Y_i$ with coefficients in $F[Y_1,\\dots,Y_{i-1}]$, and $P_i(b_1,\\dots,b_i)=\\mu_i(b_i)=0$ in $K$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "*Clearing denominators: $h$ and $D$.* The polynomials $P_1,\\dots,P_r\\in F[Y_1,\\dots,Y_r]$ have finitely many nonzero coefficients in $F$; by step 1 each is $a/s$ with $a,s\\in k[x]$, $s\\ne0$. Let $h\\in k[x]$ be the product of all these denominators $s$; $h\\ne0$ since $k[x]$ is a domain. Then each coefficient $a/s$ equals $(a\\,h/s)/h$ with $a\\,h/s=a\\prod_{s'\\ne s}s'\\in k[x]$, so it lies in the subring $D:=\\{a/h^j: a\\in k[x],\\ j\\ge0\\}\\subseteq F$. Hence $P_i\\in D[Y_1,\\dots,Y_i]$, monic in $Y_i$ of degree $e_i$ with coefficients in $D[Y_1,\\dots,Y_{i-1}]$, and $P_i(b_1,\\dots,b_i)=0$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "Lift each coefficient a/h^j to a(X) T^j, preserving the leading coefficient one. Assemble the resulting equations using [def-weil-pbc-triangular-field-model-equations]. The localization presentation identifies quotienting by hT - 1 with adjoining 1/h. Taking the further quotient by the lifted monic equations identifies the explicit polynomial quotient A with B = D[Y]/(P).",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-triangular-field-model-equations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "*$B_i$ is free over $D$.* For $0\\le i\\le r$ put $B_i:=D[Y_1,\\dots,Y_i]/(P_1,\\dots,P_i)$ and $E_i:=\\prod_{j\\le i}\\{0,\\dots,e_j-1\\}$. Claim: the classes of $Y^\\varepsilon$, $\\varepsilon\\in E_i$, form a basis of $B_i$ as a $D$-module [def-weil-pbc-free-module]. For $i=0$, $B_0=D$ with basis $\\{1\\}$. For $i\\ge1$: $P_1,\\dots,P_{i-1}$ do not involve $Y_i$, so taking the quotient in two stages $B_i\\cong B_{i-1}[Y_i]/(\\bar P_i)$, $\\bar P_i$ the image of $P_i$, which is monic of degree $e_i$ in $Y_i$ (step 4). By [lem-weil-pbc-monic-quotient-free], $1,Y_i,\\dots,Y_i^{e_i-1}$ is a $B_{i-1}$-basis of $B_i$, and by the induction hypothesis and [lem-weil-pbc-tower-product-basis] (for $D\\to B_{i-1}$ and the $B_{i-1}$-module $B_i$) the products $Y^\\varepsilon Y_i^l$, i.e. the $Y^{\\varepsilon'}$, $\\varepsilon'\\in E_i$, form a $D$-basis of $B_i$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-tower-product-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "*The map $\\iota_0:B_r\\to K$: injective, and $K$ is its field of fractions.* The $D$-algebra map $D[Y_1,\\dots,Y_r]\\to K$, $Y_j\\mapsto b_j$ ($D\\subseteq F\\subseteq K$), kills every $P_i$ (step 4), so it induces a $k$-algebra map $\\iota_0:B_r\\to K$ with $\\iota_0(Y^\\varepsilon)=b^\\varepsilon$. If $\\iota_0(\\sum_{\\varepsilon\\in E_r}d_\\varepsilon Y^\\varepsilon)=\\sum d_\\varepsilon b^\\varepsilon=0$ with $d_\\varepsilon\\in D\\subseteq F$, then all $d_\\varepsilon=0$ because the $b^\\varepsilon$ are $F$-linearly independent (step 2); by step 6 every element of $B_r$ is such a sum, so $\\iota_0$ is injective. Every $z\\in K$ is $\\sum_\\varepsilon q_\\varepsilon b^\\varepsilon$ with $q_\\varepsilon\\in F$ (step 2); writing $q_\\varepsilon=a_\\varepsilon/s$ with one common $s\\in k[x]\\setminus\\{0\\}$ (the product of the denominators, step 1) gives $z=\\iota_0(\\sum a_\\varepsilon Y^\\varepsilon)\\,\\iota_0(s)^{-1}$, where $\\iota_0(s)=s\\neq0$ in $K$ and hence $s\\neq0$ in $B_r$. Transport the map and fraction representations across the quotient presentation of the previous step. This proves exactly the claimed injection and fraction representations, without asserting regularity.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-tower-product-basis",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "triangular monic polynomial presentation of a finitely generated field extension over a transcendence basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated field extension fraction field quotient polynomial ring regular sequence complete intersection",
+   "results": "instFiniteDimensionalFractionRingOfFinite, Algebra.IsStandardSmoothOfRelativeDimension.out, Ideal.FinrankQuotientMap.span_eq_top, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.Smooth.exists_finiteType, exists_finite_inj_algHom_of_fg, Algebra.QuasiFinite.instOfIsFractionRing, exists_integral_inj_algHom_of_fg",
+   "date": "2026-10-13",
+   "verdict": "no match: ingredients only, no triangular model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "triangularFieldModel|triangular.*regular|triangular.*presentation",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "no match: ingredients only, no triangular model theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TriangularFieldModelPresentation",
+  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelPresentation.lean",
+  "declaration": "FieldTheory.exists_triangularFieldModel_presentation",
+  "statement": "theorem exists_triangularFieldModel_presentation\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (hfg : ∃ (m : ℕ) (b : Fin m → K), IntermediateField.adjoin k (Set.range b) = ⊤)\n    (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x) :\n    ∃ (r : ℕ) (h : MvPolynomial (Fin d) k)\n      (p : (i : Fin r) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k)),\n      h ≠ 0 ∧ (∀ i, (p i).Monic) ∧\n      let A := MvPolynomial (Fin (d + 1 + r)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d r h p)\n      ∃ (ι : A →ₐ[k] K), Function.Injective ι ∧\n        ∀ z : K, ∃ a s : A, s ≠ 0 ∧ z = ι a * (ι s)⁻¹",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

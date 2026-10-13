@@ -35,141 +35,64 @@
  ],
  "proof": [
   {
-   "text": "*The base field $F$ and the tower.* Since $x_1,\\dots,x_d$ is a transcendence basis [def-weil-pbc-transcendence-basis], the $k$-algebra map $k[X_1,\\dots,X_d]\\to K$, $X_j\\mapsto x_j$, is injective, so its image $k[x]=k[x_1,\\dots,x_d]$ is a domain isomorphic to the polynomial ring, and $K$ is algebraic over $F:=k(x_1,\\dots,x_d)$. The set $\\{a/s: a,s\\in k[x],\\ s\\ne0\\}$ is a subfield of $K$ containing $k$ and the $x_j$ and is contained in every such subfield, so it is $F$. Put $r:=m$, $L_0:=F$ and $L_i:=F(b_1,\\dots,b_i)$ (the smallest subfield of $K$ containing $F$ and $b_1,\\dots,b_i$), so $L_i=L_{i-1}(b_i)$; $L_r$ contains $k$ and all $b_j$, hence $L_r\\supseteq k(b_1,\\dots,b_m)=K$, so $L_r=K$. Each $b_i$ is algebraic over $F$ [def-weil-algebraic-element], hence over $L_{i-1}\\supseteq F$ (the same nonzero polynomial).",
+   "text": "Apply [lem-weil-pbc-triangular-field-model-presentation] to get r, h, monic p_i and an injective map from the explicitly presented quotient to K with fraction representations. Set f to [def-weil-pbc-triangular-field-model-equations].",
    "uses": [
-    "def-weil-pbc-transcendence-basis",
-    "def-weil-algebraic-element"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV (lemma-colimit-syntomic), lines 44541-44544 ('Pick a transcendence basis x_1, ..., x_d in L over k. The extension L/k(x_1, ..., x_d) is finite. Say L = k(x_1, ..., x_d)[y_1, ..., y_r]'), with E = {b_1, ..., b_m}, L = K, y_i = b_i"
-   }
-  },
-  {
-   "text": "*A monomial basis of $K$ over $F$.* For $i=1,\\dots,r$ let $\\mu_i\\in L_{i-1}[T]$ be the minimal polynomial of $b_i$ over $L_{i-1}$ [def-weil-pbc-separable-algebraic-extension] and $e_i:=\\deg\\mu_i$. By [lem-weil-pbc-minimal-polynomial-quotient-field-iso], $e_i\\ge1$ and $L_{i-1}[T]/(\\mu_i)\\to L_i$, $T\\mapsto b_i$, is an isomorphism of $L_{i-1}$-algebras; by [lem-weil-pbc-monic-quotient-free] ($\\mu_i$ is monic) the classes of $1,T,\\dots,T^{e_i-1}$ are an $L_{i-1}$-basis of $L_{i-1}[T]/(\\mu_i)$, so $1,b_i,\\dots,b_i^{e_i-1}$ is an $L_{i-1}$-basis of $L_i$. By induction on $i$, using [lem-weil-pbc-tower-product-basis] for $F\\subseteq L_{i-1}\\subseteq L_i$, the monomials $b^\\varepsilon:=b_1^{\\varepsilon_1}\\cdots b_i^{\\varepsilon_i}$ with $0\\le\\varepsilon_j<e_j$ ($j\\le i$) form an $F$-basis of $L_i$ (for $i=0$: the basis $\\{1\\}$ of $F$). In particular, for $i=r$, the $b^\\varepsilon$, $\\varepsilon\\in E_r:=\\prod_{j\\le r}\\{0,\\dots,e_j-1\\}$, form an $F$-basis of $K$, and $L_{i-1}$ is the $F$-span of the monomials in $b_1,\\dots,b_{i-1}$.",
-   "uses": [
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-tower-product-basis"
+    "lem-weil-pbc-triangular-field-model-presentation",
+    "def-weil-pbc-triangular-field-model-equations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44545-44551 ('maps to the minimum polynomial of y_i in k(x_1, ..., x_d)[y_1, ..., y_{i-1}][Y_i]', 'L = k(x_1, ..., x_r)[Y_1, ..., Y_r]/(P_1, ..., P_r)' [sic: x_d]), with Fields Lemmas 09G1, 09GN, 09G9"
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
    }
   },
   {
-   "text": "*The polynomials $P_i$ over $F$.* Fix $i$ and write $\\mu_i=T^{e_i}+\\sum_{l<e_i}c_{il}T^l$ with $c_{il}\\in L_{i-1}$. By step 2 each $c_{il}$ is an $F$-linear combination of monomials in $b_1,\\dots,b_{i-1}$; replacing $b_j$ by the variable $Y_j$ gives $g_{il}\\in F[Y_1,\\dots,Y_{i-1}]$ [def-weil-pbc-mv-polynomial-ring] with $g_{il}(b_1,\\dots,b_{i-1})=c_{il}$. Put $P_i:=Y_i^{e_i}+\\sum_{l<e_i}g_{il}Y_i^l\\in F[Y_1,\\dots,Y_i]$. Then $P_i$ is monic of degree $e_i$ in $Y_i$ with coefficients in $F[Y_1,\\dots,Y_{i-1}]$, and $P_i(b_1,\\dots,b_i)=\\mu_i(b_i)=0$ in $K$.",
+   "text": "Apply [lem-weil-pbc-triangular-field-model-weak-regularity] for weak regularity. The unital map A -> K forces 1 != 0 in A. If the defining ideal were top, Ideal.Quotient.eq_zero_iff_mem would give 1=0 and its image would contradict 1!=0 in K. Thus the ideal is proper, which, together with weak regularity, gives regularity. Use Ideal.smul_eq_mul and Ideal.mul_top to match top_ne_smul.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-triangular-field-model-weak-regularity",
+    "def-weil-pbc-regular-sequence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44545-44548 ('Pick inductively polynomials P_i ... monic in Y_i ... and maps to the minimum polynomial of y_i')"
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
    }
   },
   {
-   "text": "*Clearing denominators: $h$ and $D$.* The polynomials $P_1,\\dots,P_r\\in F[Y_1,\\dots,Y_r]$ have finitely many nonzero coefficients in $F$; by step 1 each is $a/s$ with $a,s\\in k[x]$, $s\\ne0$. Let $h\\in k[x]$ be the product of all these denominators $s$; $h\\ne0$ since $k[x]$ is a domain. Then each coefficient $a/s$ equals $(a\\,h/s)/h$ with $a\\,h/s=a\\prod_{s'\\ne s}s'\\in k[x]$, so it lies in the subring $D:=\\{a/h^j: a\\in k[x],\\ j\\ge0\\}\\subseteq F$. Hence $P_i\\in D[Y_1,\\dots,Y_i]$, monic in $Y_i$ of degree $e_i$ with coefficients in $D[Y_1,\\dots,Y_{i-1}]$, and $P_i(b_1,\\dots,b_i)=0$.",
-   "uses": [],
+   "text": "The explicit equations list has length r+1. Choose n=d+1+r and c=r+1. Arithmetic proves c<=n and n-c=d.",
+   "uses": [
+    "def-weil-pbc-triangular-field-model-equations"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44552-44554 ('If h in k[x_1, ..., x_d] is a polynomial such that P_i in k[x_1, ..., x_d, 1/h, Y_1, ..., Y_r]')"
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
    }
   },
   {
-   "text": "*The presentation of $D[Y]$ and the $f$'s.* Let $R:=k[X_1,\\dots,X_d]$ and $h(X)\\in R$ the polynomial with $h(X)\\mapsto h$ under the isomorphism $R\\cong k[x]$ of step 1. By [lem-weil-pbc-localization-away-polynomial-quotient], $R[T]/(h(X)T-1)\\cong R_{h}$ [def-weil-ring-localization-away], $T\\mapsto1/h$; and $R_h\\to F$, $a/h^j\\mapsto a(x)/h^j$, is injective with image $D$ ($a/h^j\\mapsto0$ forces $a(x)=0$, so $a=0$; $R$ is a domain [lem-weil-pbc-polynomial-ring-domain]). So $\\psi_0:k[X,T]\\to D$, $X_j\\mapsto x_j$, $T\\mapsto1/h$, is surjective with kernel $(h(X)T-1)$. Its coefficientwise extension $\\psi:k[X,T,Y_1,\\dots,Y_r]=k[X,T][Y]\\to D[Y]$, $Y_j\\mapsto Y_j$ [def-weil-pbc-mv-polynomial-ring], is surjective with kernel the polynomials all of whose coefficients lie in $(h(X)T-1)$, i.e. $(h(X)T-1)k[X,T,Y]$. For each $i$ write every coefficient of $P_i$ as $a(x)/h^j$ and replace it by $a(X)T^j$: this gives $\\tilde P_i\\in k[X,T,Y_1,\\dots,Y_i]$, monic in $Y_i$ of degree $e_i$ with coefficients in $k[X,T,Y_1,\\dots,Y_{i-1}]$, with $\\psi(\\tilde P_i)=P_i$. Now take $n:=d+1+r$ variables $X_1,\\dots,X_d,T,Y_1,\\dots,Y_r$ (renumbered $X_1,\\dots,X_n$), $c:=r+1$, $f_1:=h(X)T-1$, $f_{1+i}:=\\tilde P_i$ ($1\\le i\\le r$). Then $n\\ge c\\ge1$ and $n-c=d$.",
-   "uses": [
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-ring-localization-away",
-    "lem-weil-pbc-polynomial-ring-domain",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44554-44557 ('A = k[x_1, ..., x_d, 1/h, Y_1, ..., Y_r]/(P_1, ..., P_r) is a global complete intersection'), the presentation k[x, T, Y]/(hT - 1, P) being the one of Algebra 08JZ's proof (line 35632, 'P[x]/(I, fx - 1) = B_g') used by the node lem-weil-pbc-localization-away-polynomial-quotient"
-   }
-  },
-  {
-   "text": "*$B_i$ is free over $D$.* For $0\\le i\\le r$ put $B_i:=D[Y_1,\\dots,Y_i]/(P_1,\\dots,P_i)$ and $E_i:=\\prod_{j\\le i}\\{0,\\dots,e_j-1\\}$. Claim: the classes of $Y^\\varepsilon$, $\\varepsilon\\in E_i$, form a basis of $B_i$ as a $D$-module [def-weil-pbc-free-module]. For $i=0$, $B_0=D$ with basis $\\{1\\}$. For $i\\ge1$: $P_1,\\dots,P_{i-1}$ do not involve $Y_i$, so taking the quotient in two stages $B_i\\cong B_{i-1}[Y_i]/(\\bar P_i)$, $\\bar P_i$ the image of $P_i$, which is monic of degree $e_i$ in $Y_i$ (step 4). By [lem-weil-pbc-monic-quotient-free], $1,Y_i,\\dots,Y_i^{e_i-1}$ is a $B_{i-1}$-basis of $B_i$, and by the induction hypothesis and [lem-weil-pbc-tower-product-basis] (for $D\\to B_{i-1}$ and the $B_{i-1}$-module $B_i$) the products $Y^\\varepsilon Y_i^l$, i.e. the $Y^{\\varepsilon'}$, $\\varepsilon'\\in E_i$, form a $D$-basis of $B_i$.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-tower-product-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44548-44557 ('it is clear that P_1, ..., P_r is a regular sequence'); the freeness is the detail behind 'clear' and behind 'A \\subset K' (line 44529-44531), written out here"
-   }
-  },
-  {
-   "text": "*The map $\\iota_0:B_r\\to K$: injective, and $K$ is its field of fractions.* The $D$-algebra map $D[Y_1,\\dots,Y_r]\\to K$, $Y_j\\mapsto b_j$ ($D\\subseteq F\\subseteq K$), kills every $P_i$ (step 4), so it induces a $k$-algebra map $\\iota_0:B_r\\to K$ with $\\iota_0(Y^\\varepsilon)=b^\\varepsilon$. If $\\iota_0(\\sum_{\\varepsilon\\in E_r}d_\\varepsilon Y^\\varepsilon)=\\sum d_\\varepsilon b^\\varepsilon=0$ with $d_\\varepsilon\\in D\\subseteq F$, then all $d_\\varepsilon=0$ because the $b^\\varepsilon$ are $F$-linearly independent (step 2); by step 6 every element of $B_r$ is such a sum, so $\\iota_0$ is injective. Every $z\\in K$ is $\\sum_\\varepsilon q_\\varepsilon b^\\varepsilon$ with $q_\\varepsilon\\in F$ (step 2); writing $q_\\varepsilon=a_\\varepsilon/s$ with one common $s\\in k[x]\\setminus\\{0\\}$ (the product of the denominators, step 1) gives $z=\\iota_0(\\sum a_\\varepsilon Y^\\varepsilon)\\,\\iota_0(s)^{-1}$, where $\\iota_0(s)=s\\neq0$ in $K$ and hence $s\\neq0$ in $B_r$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44529-44531 and 44557-44559 ('there exists a k subalgebra A \\subset K ...', 'After adjusting our choice of h we may assume E \\subset A'): the inclusion A \\subset K, which the source asserts, proved from steps 2 and 6"
-   }
-  },
-  {
-   "text": "*$A\\cong B_r$ and the map $\\iota$.* Let $A:=k[X_1,\\dots,X_n]/(f_1,\\dots,f_c)$. The composite of $\\psi$ (step 5) with $D[Y]\\to B_r$ is surjective, and its kernel is $\\psi^{-1}((P_1,\\dots,P_r))=\\ker\\psi+(\\tilde P_1,\\dots,\\tilde P_r)=(f_1,f_2,\\dots,f_c)$, since $\\psi(\\tilde P_i)=P_i$ and $\\psi$ is surjective with kernel $(f_1)$. So it induces an isomorphism of $k$-algebras $A\\cong B_r$, and $\\iota:=\\iota_0\\circ(A\\cong B_r):A\\to K$ is a $k$-algebra homomorphism ($X_j\\mapsto x_j$, $T\\mapsto1/h$, $Y_i\\mapsto b_i$) which by step 7 is injective, (a), and satisfies (b).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44554-44557, with the presentation of step 5"
-   }
-  },
-  {
-   "text": "*$f_1,\\dots,f_c$ is a regular sequence.* Check the two conditions of [def-weil-pbc-regular-sequence] for $M=R_0:=k[X_1,\\dots,X_n]$. (i) $R_0$ is a domain [lem-weil-pbc-polynomial-ring-domain] and $f_1=h(X)T-1\\ne0$ (its coefficient of $T$ is $h(X)\\ne0$), so $f_1$ is a nonzerodivisor on $R_0$. (Note: $f_1$ is not monic in $T$; its leading coefficient is $h(X)$.) (ii) For $1\\le i\\le r$: as in step 8 (with $P_1,\\dots,P_{i-1}$ in place of $P_1,\\dots,P_r$), $R_0/(f_1,\\dots,f_i)\\cong D[Y_1,\\dots,Y_r]/(P_1,\\dots,P_{i-1})\\cong B_{i-1}[Y_i,\\dots,Y_r]=C[Y_i]$ with $C:=B_{i-1}[Y_{i+1},\\dots,Y_r]$, and $f_{i+1}=\\tilde P_i$ maps to the image of $P_i$, which lies in $B_{i-1}[Y_i]\\subseteq C[Y_i]$ and is monic in $Y_i$ (step 4). By [lem-weil-pbc-monic-polynomial-nonzerodivisor] it is a nonzerodivisor on $C[Y_i]$, i.e. $f_{i+1}$ is a nonzerodivisor on $R_0/(f_1,\\dots,f_i)$. (iii) $R_0/(f_1,\\dots,f_c)=A\\neq0$, since $\\iota$ is injective (step 8) and $\\iota(1)=1\\neq0$. Hence $f_1,\\dots,f_c$ is a regular sequence in $k[X_1,\\dots,X_n]$.",
-   "uses": [
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-polynomial-ring-domain",
-    "lem-weil-pbc-monic-polynomial-nonzerodivisor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, lines 44548-44556 ('it is clear that P_1, ..., P_r is a regular sequence ... we see that P_1, ..., P_r is a regular sequence in k[x_1, ..., x_d, 1/h, Y_1, ..., Y_r]'), plus the first element hT - 1 of the presentation"
-   }
-  },
-  {
-   "text": "*The fraction field.* $A$ is an integral domain, since $\\iota$ embeds it in the field $K$. With $S=A\\setminus\\{0\\}$ and $S^{-1}A$ as in [def-weil-pbc-module-localization], the map $S^{-1}A\\to K$, $a/s\\mapsto\\iota(a)\\iota(s)^{-1}$, is well defined ($\\iota(s)\\neq0$ for $s\\in S$; if $u(ta-sb)=0$ with $u\\in S$, then $\\iota(u)\\neq0$ in the field $K$ gives $\\iota(t)\\iota(a)=\\iota(s)\\iota(b)$), a homomorphism of $k$-algebras, injective ($\\iota(a)\\iota(s)^{-1}=0$ forces $\\iota(a)=0$, so $a=0$), and surjective by (b).",
+   "text": "Function.Injective.isDomain pulls back the domain structure from K. IsFractionRing.liftAlgHom lifts the injection to an algebra homomorphism FractionRing A -> K. It is injective as a homomorphism from a field. Given z=iota(a)/iota(s), turn s!=0 into membership in nonZeroDivisors A and use Localization.mk a s as a preimage; IsFractionRing.lift_mk' proves its image is z. AlgEquiv.ofBijective gives the asserted equivalence, with the formula on LocalizedModule.mk (definitionally Localization.mk).",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 07BV, line 44529 ('a k subalgebra A \\subset K'); the fraction field statement as used in More on Algebra, proof of Lemma 07E1, lines 8580-8584 ('such that K is isomorphic to the fraction field of A')"
+    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-transcendence-basis",
-  "def-weil-algebraic-element",
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-tower-product-basis",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
-  "def-weil-ring-localization-away",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "def-weil-pbc-free-module",
+  "lem-weil-pbc-triangular-field-model-presentation",
+  "def-weil-pbc-triangular-field-model-equations",
+  "lem-weil-pbc-triangular-field-model-weak-regularity",
   "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-monic-polynomial-nonzerodivisor",
   "def-weil-pbc-module-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07BV (lemma-colimit-syntomic, line 44527), proof lines 44534-44559, first assertion, with E = {b_1,...,b_m}; details the source calls clear written out (freeness of B_i over D, injectivity of A -> K, the regular-sequence check including the first element hT - 1), with Fields Lemmas 09G1, 09GN, 09G9 (fields.tex)"
+  "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (lemma-localize-at-element). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent.",
+  "note": "N3 Lean assembly of construction steps 1-8, general weak-regularity step 9, and completely proved domain/fraction-field step 10. Unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -254,5 +177,15 @@
   "group": "M1",
   "result": "pass",
   "note": "k,K fields+Algebra; hfg = exists m b, adjoin k (range b) = top (node's k(b_1..b_m), eqv to (top).FG); x : Fin d -> K IsTranscendenceBasis; n c, c<=n, n-c=d, f.length=c, IsRegular on MvPolynomial (Fin n) k as E1 a94a7ab23; A = quotient by Ideal.ofList f; iota injective k-alg hom; fractions with s<>0; IsDomain A; FractionRing A ~=_k K with e(a/s)=iota a/iota s (LocalizedModule.mk = Localization.mk by rfl, nonZeroDivisors = A\\0 under IsDomain); #check names resolve to Mathlib roots; no hollow hypothesis"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
