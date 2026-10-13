@@ -1,0 +1,158 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualEvaluation|homObjFreeIso|ιMapBifunctor",
+   "results": "25 hits: Mathlib/CategoryTheory/GradedObject/Associator.lean, Mathlib/CategoryTheory/GradedObject/Associator.lean, Mathlib/CategoryTheory/GradedObject/Associator.lean, Mathlib/CategoryTheory/GradedObject/Associator.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Bifunctor.lean, Mathlib/CategoryTheory/GradedObject/Bifunctor.lean, Mathlib/CategoryTheory/GradedObject/Bifunctor.lean; no exact match for arbitrary-site finite-projective evaluation and bounded ordinary Hom/tensor assembly.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective sheaf module tensor dual evaluation isomorphism",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', FGModuleCat.FGModuleCatEvaluation_apply, FGModuleCat.FGModuleCatCoevaluation; no exact match for arbitrary-site finite-projective evaluation and bounded ordinary Hom/tensor assembly.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor internal Hom evaluation is an isomorphism for a finite projective sheaf of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dualizable object tensor internal hom canonical comparison isomorphism retract finite direct sum unit",
+   "results": "Second reading: Eight rigid tensor-Hom equivalences and evaluation/coevaluation identities; these require a specified exact pairing, which has not been constructed for the finite-free retract. No exact sheaf evaluation or bounded assembly theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Limits.biproduct.map",
+   "results": "Second reading: No hits. The finite biproduct argument still needs the specified sheaf Hom projections and tensor summand reindexing.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*[Ii]so|[Ii]so.*mapBifunctor|finite.*support.*[Hh]om",
+   "results": "Second reading: 17 hits: bifunctor flip, shift and associator isomorphisms. None gives the internal sheaf Hom product/total tensor evaluation comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, final finite-free and retract calculation; Tag 08DM, lemma-Rhom-strictly-perfect; the strictly perfect local evaluation calculation in the tensor-Hom step of finite duality",
+   "via": [
+    "lem-pc-strictly-perfect-ordinary-evaluation",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-pc-finite-projective-internal-hom-evaluation",
+ "title": "Canonical tensor-dual evaluation for a finite free retract",
+ "statement": "Let $(C,J)$ be a site, $R$ a sheaf of commutative rings, and suppose additive-group sheafification exists and $J$-local equivalences of additive-group presheaves are exactly locally bijective maps. Use the category of $R$-module sheaves [def-weil-sheaf-of-modules-category], its tensor product [def-pur-sheaf-tensor-product], internal Hom [def-pur-sheaf-hom] and canonical tensor-Hom adjunction [lem-pc-sheaf-modules-tensor-closed]. Let $E,B$ be module sheaves and assume there exist $m\\geq0$ and maps $i:E\\to R^{\\oplus m}$, $p:R^{\\oplus m}\\to E$ with $p\\circ i=1_E$. Put $E^\\vee=\\mathcal Hom(E,R)$. Then the canonical evaluation comparison $B\\otimes E^\\vee\\to\\mathcal Hom(E,B)$ sending $b\\otimes\\phi$ to $(e\\mapsto b\\phi(e))$ is an isomorphism. The map is the adjunct of the composite $E\\otimes(B\\otimes E^\\vee)\\to B\\otimes(E^\\vee\\otimes E)\\to B\\otimes R\\to B$ using symmetry, associativity, evaluation and the right unit action. No flatness or quasi-coherence is assumed of $B$.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "For E free of rank m, use the canonical finite-sum Hom identifications and coordinate equations of lem-sc-finite-free-internal-hom-exact (take the split sequence B --id--> B --> 0). Tensoring B with the free dual gives the finite coproduct of m copies of B. Evaluate the comparison on each basis vector: the j-th projection and i-th inclusion compose to id_B when i=j and zero otherwise. The finite biproduct identification therefore makes the comparison the identity, and supplies its inverse. This includes m=0.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition with p and i induces retractions on Hom(E,R) and Hom(E,B); their composites are identities because p composed with i is the identity on E. Naturality of the tensor-Hom equivalence makes the free comparison a map between these split idempotents. Its inverse commutes with the idempotents by composing the naturality equality with the free inverse. Project that inverse from the free Hom to B tensor the dual of E. Both composites are identities by the retraction equation.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-finite-free-internal-hom-exact"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FiniteProjectiveInternalHomEvaluation.lean",
+  "declaration": "SheafOfModules.isIso_moduleDualEvaluation_of_retract",
+  "statement": "theorem isIso_moduleDualEvaluation_of_retract (R : Sheaf J CommRingCat.{u}) (E B : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (hE : ∃ m : ℕ, ∃ (i : E ⟶ free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))) (p : free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m)) ⟶ E), i ≫ p = 𝟙 E) : IsIso (moduleDualEvaluation R E B)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13",
+  "declarations": [
+   "SheafOfModules.moduleDualEvaluation",
+   "SheafOfModules.isIso_moduleDualEvaluation_of_retract"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-632c3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T045517-L-125548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-632c3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T045517-L-125548",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, constructions and proof composition match the three nodes, source calculations, change record and report; compilation and reader-gate checks pass."
+ }
+}
