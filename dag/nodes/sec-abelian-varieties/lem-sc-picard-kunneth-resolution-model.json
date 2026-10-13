@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-picard-kunneth-resolution-model",
+ "kind": "statement",
+ "title": "Explicit scalar sections resolution models and their cohomology comparisons",
+ "statement": "Let k be a field and f:X -> Spec(k) a scheme morphism, and F an O_X-module. Fix the library injective resolution I of F using the recorded enough-injectives structure. Define K to be the global-sections complex of I followed by restriction of scalars along scalarMap f top, and define A=K extended by zero along the natural-number embedding into the integers. For every negative p, A^p is zero. In natural degree n the composite of the zero-extension homology isomorphism, the exact-scalar-restriction homology isomorphism and the inverse injective-resolution comparison gives a k-linear equivalence H^n(A) -> scalarCohomology f F n. No quasi-coherence, compactness or affine diagonal is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Cohomology, Tag 01DZ; replacement of the factor-model construction preceding Varieties equation 33.29.1.1"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Construct I with Mathlib injectiveResolution and the recorded enough-injectives instance. Apply globalSectionsComplex, restrictScalars termwise and extend by embeddingUpNat. These are actual constructions, not unspecified existence witnesses.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p<0 there is no natural number n with n=p in the integers. Apply Mathlib HomologicalComplex.isZero_extend_X. This is the delivered complete Lean proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose Mathlib extendHomologyIso, ShortComplex.mapHomologyIso for exact scalar restriction, and the inverse isoRightDerivedObj, and apply ModuleCat.Iso.toLinearEquiv. The delivered definition picardScalarModelEquiv constructs this comparison with no new proof holes.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Cohomology, Tag 01DZ; replacement of the factor-model construction preceding Varieties equation 33.29.1.1; resolution-model transport and linear-algebra details written by F4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar restriction of global sections of injective resolutions computes field linear scheme module cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict inferred"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendHomologyIso",
+   "results": "11 hits: HomologicalComplex.extendHomologyIso, HomologicalComplex.extendHomologyIso_hom_homologyι, HomologicalComplex.extendHomologyIso_inv_homologyι, HomologicalComplex.homologyπ_extendHomologyIso_hom, HomologicalComplex.homologyπ_extendHomologyIso_inv, HomologicalComplex.extendHomologyIso_hom_homologyι_assoc, HomologicalComplex.extendHomologyIso_inv_homologyι_assoc, HomologicalComplex.homologyπ_extendHomologyIso_hom_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the scheme-specific statement; useful generic homology constructions recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "extendHomologyIso|mapHomologyIso|isoRightDerivedObj",
+   "results": "18 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the scheme-specific statement; useful generic homology constructions recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardKunnethCechModels",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Cohomology, Tag 01DZ; replacement of the factor-model construction preceding Varieties equation 33.29.1.1",
+   "via": [
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardKunnethResolutionModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardScalarModel_negative",
+  "statement": "theorem picardScalarModel_negative (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules)\n    (p : ℤ) (hp : p < 0) : IsZero ((picardScalarModel f F).X p)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardScalarResolution",
+   "AlgebraicGeometry.Scheme.Modules.picardScalarResolutionComplex",
+   "AlgebraicGeometry.Scheme.Modules.picardScalarModel",
+   "AlgebraicGeometry.Scheme.Modules.picardScalarModel_negative",
+   "AlgebraicGeometry.Scheme.Modules.picardScalarModelEquiv"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T032959-L-3675494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T032959-L-3675494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

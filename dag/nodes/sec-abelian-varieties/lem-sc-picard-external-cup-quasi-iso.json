@@ -1,0 +1,201 @@
+{
+ "id": "lem-sc-picard-external-cup-quasi-iso",
+ "kind": "statement",
+ "title": "Geometric invertibility for every normalized external cup cochain map",
+ "statement": "Let k be a field, X,Y quasi-compact k-schemes with affine diagonals and F,G quasi-coherent modules. Use the scalar resolution models of [lem-sc-picard-kunneth-resolution-model]. For every given cochain map c:Tot(A tensor B) -> C satisfying IsPicardExternalCupCochain of [lem-sc-picard-external-cup-cochain], HomologicalComplex.homologyMap c n is an isomorphism in every natural degree n. No cochain map, model or factor equivalence is constructed or selected by this statement.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Tag 0BED proof after equation 33.29.1.1: exact coefficient sequences, two dimension-shifting inductions and acyclic Leray base case"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pc-cochain-complex-modules",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-external-cup-cochain"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine covers U of X and V of Y. Their product cover W by U_i x_{Spec(k)} V_j is finite and affine: products of affine opens are affine by lem-weil-pbc-fibre-product-affine-spectra. By lem-sc-picard-affine-diagonal-intersections the intersection of two affine opens of X (resp. Y) is affine, so by induction on the number of members every finite intersection U_{i_0..i_p} (resp. V_{j_0..j_p}) is affine, and W_{(i_0j_0)..(i_pj_p)} = U_{i_0..i_p} x_k V_{j_0..j_p} is affine. Refinement pullbacks (W refines pr_1^{-1}U and pr_2^{-1}V) and the signed Cech cup construction give the map Tot(Cech(U,F) tensor_k Cech(V,G)) \\to Cech(W,pr_1^*F tensor pr_2^*G).",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-coherent",
+    "def-pc-module-pullback",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-sc-picard-cech-cup-pullback-compat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Cech comparison theorem lem-sc-cech-comparison-map-iso-affine, together with its naturality, identifies those Cech cohomology groups with H^p(X,F), H^q(Y,G), and H^n(X x_k Y,pr_1^*F tensor pr_2^*G). The Cech cup compatibility lemma identifies the resulting map with pullback along the projections followed by the sheaf cup product. Use these comparisons only for the Cech proof; the fixed models use the explicit resolution comparisons of [lem-sc-picard-kunneth-resolution-model].",
+   "uses": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a short exact sequence 0 \\to F \\to F' \\to F'' \\to 0 of quasi-coherent modules, sections on every affine intersection U_{i_0..i_p} are exact by pqf-lem-affine-vanishing (Tag 01XB), and tensoring the resulting short exact sequence of k-vector spaces with any k-vector space is exact (k is a field). On the affine W_{(i_0j_0)..(i_pj_p)} = U_{i_0..i_p} x_k V_{j_0..j_p} the sections of pr_1^*F tensor pr_2^*G are F(U_{i_0..i_p}) tensor_k G(V_{j_0..j_p}), naturally in F and G, by lem-weil-pbc-module-pullback-affine-sections (sections of a pullback on affines are the base change of the sections), lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-quasi-coherent-tensor-product-affine-sections. Thus the Cech complexes and their tensor-total complexes form short exact sequences of complexes, and the map of Step 1 is a map of short exact sequences. The long exact cohomology sequences and the five lemma give a 2-out-of-3 principle: if the map of Step 1 is a quasi-isomorphism for two of F, F', F'' (with G fixed), it is one for the third; this is precisely the geometric comparison assertion. The same holds in the variable G.",
+   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-picard-cech-cup-pullback-compat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite quasi-coherent cohomological dimension to assign F the least nonnegative bound d such that H^p(X,F)=0 for p>d (thus the zero module also has bound 0). If d>0, embed F in an acyclic quasi-coherent F' and let F'' be its cokernel. The long exact sequence gives H^p(X,F'') = H^{p+1}(X,F) for p>0, so F'' has bound at most d-1. First prove the comparison for acyclic F and all G by the analogous induction on the bound for G, whose base has both modules acyclic. Then induct on the bound for F with arbitrary fixed G, using the two-out-of-three principle and the already proved acyclic case. The d=0 case includes modules whose entire cohomology vanishes.",
+   "uses": [
+    "lem-sc-picard-qcoh-finite-cd",
+    "lem-sc-picard-qcoh-universal-delta-embedding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Degree-zero case: H^p(X,F)=0 and H^q(Y,G)=0 for p,q>0. Put H = pr_1^*F tensor pr_2^*G. For every affine open V of Y, pr_2^{-1}(V) = X x_k V, and the cover U_V = (U_i x_k V) of X x_k V has affine finite intersections U_{i_0..i_p} x_k V by Step 1 and lem-weil-pbc-fibre-product-affine-spectra. By lem-sc-cech-comparison-map-iso-affine, H^q(X x_k V, H) is the cohomology of Cech(U_V,H), and as in Step 3 (lem-weil-pbc-module-pullback-affine-sections, lem-weil-pbc-quasi-coherent-tensor-product-affine-sections) Cech(U_V,H) = Cech(U,F) tensor_k G(V); tensoring over the field k is exact, so H^q(X x_k V,H) = H^q(Cech(U,F)) tensor_k G(V) = H^q(X,F) tensor_k G(V) (lem-sc-cech-comparison-map-iso-affine on X), which is 0 for q>0 and Gamma(X,F) tensor_k G(V) for q=0. By lem-weil-pbc-higher-direct-image-presheaf, R^q pr_{2,*}H is the sheaf associated to V \\mapsto H^q(X x_k V,H), with stalks the colimits of these groups over neighbourhoods of a point; the affine opens are cofinal among these, so R^q pr_{2,*}H = 0 for q>0. For q=0, choose a k-basis (e_s) of Gamma(X,F); the map from the direct sum of copies of G indexed by s to pr_{2,*}H, sending t in G(V) at index s to pr_1^*e_s tensor pr_2^*t, is on every affine V the map from the direct sum of the G(V) (lem-weil-pbc-qcqs-cohomology-direct-sum with p=0 on the affine, hence quasi-compact and quasi-separated, V) to Gamma(X,F) tensor_k G(V), an isomorphism; isomorphisms on a basis of opens give isomorphisms on stalks, so pr_{2,*}H = Gamma(X,F) tensor_k G.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the acyclic base case, Step 5 gives vanishing of the positive higher direct images under pr2 and identifies pr2-star H with Gamma(X,F) tensor_k G. Affine diagonal implies Y is quasi-separated, so qcqs direct-sum cohomology applies. Expanding Gamma(X,F) in a k-basis identifies H^p(Y,pr2-star H) with a direct sum of H^p(Y,G); it vanishes for p>0 and equals Gamma(X,F) tensor_k Gamma(Y,G) for p=0. The Leray spectral sequence therefore has only its (0,0) term, so the target Cech cohomology is concentrated in degree zero with this section-tensor identification. The tensor-total source is also concentrated in degree zero: split off the exact positive-degree parts of the two nonnegative vector-space complexes; these parts are contractible and remain contractible after tensoring with the signed differential. In degree zero the refinement/cup map is the affine section tensor isomorphism. Thus the map of complexes is a quasi-isomorphism in the base case and, by the short exact sequences and the two inductions, for all F and G. Transport this isomorphism to the fixed models using [lem-sc-picard-kunneth-resolution-model]. By [lem-sc-qcoh-cech-total-tensor-nat-iso] and surjectivity of the factor homology projections, tensor-cycle classes span the tensor-total homology. The IsPicardExternalCupCochain hypothesis identifies H(c) with the transported Cech map on these classes; linearity gives equality on all classes. Thus every natural-degree H(c) is an isomorphism. No map is chosen here.",
+   "uses": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-pc-leray-degenerate-sections",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-cech-comparison-map-naturality",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
+    "lem-sc-picard-external-cup-cochain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-pc-leray-degenerate-sections",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-cech-comparison-natural",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-qcoh-finite-cd",
+  "lem-sc-picard-qcoh-universal-delta-embedding",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-def-coherent",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Tag 0BED proof after equation 33.29.1.1: exact coefficient sequences, two dimension-shifting inductions and acyclic Leray base case; resolution-model transport and linear-algebra details written by F4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "External cup product cohomology quasi coherent modules on product schemes over a field is bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any normalized cochain realization of quasi coherent external cup on schemes with affine diagonal induces isomorphisms on tensor total homology",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the scheme-specific statement; useful generic homology constructions recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|externalCup|quasiIso",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the scheme-specific statement; useful generic homology constructions recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardKunnethCechModels",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Varieties Tag 0BED proof after equation 33.29.1.1: exact coefficient sequences, two dimension-shifting inductions and acyclic Leray base case",
+   "via": [
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCochain_isIso",
+  "statement": "theorem picardExternalCupCochain_isIso\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y]\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]\n    (c : picardExternalTotal f g F G ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))\n    (hc : IsPicardExternalCupCochain f g F G c) (n : ℕ) :\n    IsIso (HomologicalComplex.homologyMap c (n : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T032959-L-3675494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T032959-L-3675494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
