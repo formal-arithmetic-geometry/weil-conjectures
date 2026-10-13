@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
+/-! # Compatibility of descended finite Čech coefficient legs
+
+Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical Čech comparison.
+-/
 
 @[expose] public section
 universe u
@@ -17,28 +23,24 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+set_option linter.unusedVariables false in
 /-- The leg law for prescribed descended Cech coefficient maps.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
 Cech comparison. This is the leg part of the agent's explicit etale realization.
 (blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-leg).
 
-Proof: Use degreewise cochain-map extensionality and tuple-product extensionality,
-postcomposing with the invertible presheaf image of eNlim n t. Substitute first the
-formula for l k and then the transition formula for m a; the intermediate eNj k
-restriction cancels. Move restriction along gamma a past the unit, eG k inverse,
-and L's kth leg by naturality. Apply upperStarComp_hom_app_unit_app using the cone
-equation c.w a.op: the successive units for D(a) and the kth cone map combine into
-the unit for the jth cone map and the inverse-image composition comparison.
-Substitute hG into L.w a and conjugate by the eG isomorphisms. The adjacent eG hom
-and inverse cancel, leaving the jth leg in place of the composition comparison,
-pullback of φ a, eG k inverse, and kth leg. For the geometric maps, compare delta j
-with the iterated-pullback comparison followed by the pullback of gamma a and delta
-k. Their first projections to W0 agree by hγ, hδ, and the cone equation, and their
-structural projections to c.pt agree since all maps are over c.pt. The pullback
-universal property of Wlim identifies the maps. Functoriality combines their
-restrictions into restriction along delta j inverse. This is the prescribed
-component equation for l j. Cancel eNlim and use extensionality to finish. Empty K
-makes all tuple checks vacuous. This argument proves only transition-leg compatibility.
+Proof: Apply cochain-map extensionality in each degree and product extensionality
+at each tuple. Postcompose with the invertible presheaf image of eNlim. Substitute
+the prescribed equation for l k and then the equation for m a, yielding the tuple
+projection followed by F_j(eNj) and the composite of the scalar transition and
+scalar leg maps. Apply etale_limit_scalar_section_map_laws to the descended object
+W₀ n t, with the supplied gamma and delta comparisons and their first-projection
+equations. Its cocone law identifies that scalar composite with the scalar leg
+at j. Precompose this equality with the tuple projection and F_j(eNj). The
+prescribed equation for l j now gives the desired component equality. Cancel the
+invertible image of eNlim and use extensionality to finish. Empty K makes every
+tuple check vacuous. The supplied nerve projection equations are not needed for
+this compatibility assertion once the cochain maps and their formulas are given.
 -/
 theorem etale_limit_finite_cech_coefficient_leg
     {I : Type u} [Preorder I]
@@ -149,7 +151,28 @@ theorem etale_limit_finite_cech_coefficient_leg
               (op ((MorphismProperty.Over.pullback @Etale ⊤
                 (c.π.app (op j.val))).obj (Wj j n t))) ≫
             L.pt.obj.map (δ j n t).inv.op) →
-      (∀ (j k : J) (a : j ⟶ k), m j k a ≫ l k = l j) := by sorry
+      (∀ (j k : J) (a : j ⟶ k), m j k a ≫ l k = l j) := by
+  intro J B Blim Uj Vj fj W₀ pr₀ Wj Wlim Nj Nlim Pj Plim Cj CX
+    eNj eNlim γ δ hNj hNlim hγ hδ m l h j k a
+  rcases h with ⟨hm, hl⟩
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply Pi.hom_ext
+  intro t
+  change ((m j k a).f n ≫ (l k).f n) ≫ Pi.π (Plim n) t =
+    (l j).f n ≫ Pi.π (Plim n) t
+  apply (cancel_mono (L.pt.obj.map (eNlim n t).hom.op)).1
+  have hs := (etale_limit_scalar_section_map_laws D c F φ hidentity hcomposition
+    G eG hG L i₀ (W₀ n t)
+    (fun j k a ↦ γ j k a n t) (fun j ↦ δ j n t)
+    (fun j k a ↦ hγ j k a n t) (fun j ↦ hδ j n t)).2.2 j k a
+  simp only [Category.assoc]
+  rw [hl k n t, reassoc_of% (hm j k a n t), hl j n t]
+  dsimp only at hs
+  simp only [Category.assoc] at hs
+  simpa only [Wj, B, Category.assoc] using
+    congrArg (fun z ↦ Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫ z) hs
+
 
 end AlgebraicGeometry.Etale
 

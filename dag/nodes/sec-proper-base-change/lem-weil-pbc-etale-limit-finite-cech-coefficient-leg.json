@@ -20,32 +20,28 @@
  ],
  "proof": [
   {
-   "text": "Apply cochain-map extensionality degreewise, then product extensionality to the target tuple projections. The target isomorphism z has an invertible presheaf image, so it can be cancelled in every component calculation.",
+   "text": "Apply HomologicalComplex.hom_ext degreewise and Pi.hom_ext at each tuple. Express the degree terms as the products Plim. Postcompose each component equation with the invertible presheaf image of eNlim; cancellation recovers the original component equality. Substitute the prescribed formula for l k followed by the formula for m a, reassociating compositions.",
    "uses": [
     "def-weil-pbc-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use degreewise cochain-map extensionality and tuple-product extensionality, postcomposing with the invertible presheaf image of eNlim n t. Substitute first the formula for l k and then the transition formula for m a; the intermediate eNj k restriction cancels. Move restriction along gamma a past the unit, eG k inverse, and L's kth leg by naturality. Apply upperStarComp_hom_app_unit_app using the cone equation c.w a.op: the successive units for D(a) and the kth cone map combine into the unit for the jth cone map and the inverse-image composition comparison. Substitute hG into L.w a and conjugate by the eG isomorphisms. The adjacent eG hom and inverse cancel, leaving the jth leg in place of the composition comparison, pullback of φ a, eG k inverse, and kth leg. For the geometric maps, compare delta j with the iterated-pullback comparison followed by the pullback of gamma a and delta k. Their first projections to W0 agree by hγ, hδ, and the cone equation, and their structural projections to c.pt agree since all maps are over c.pt. The pullback universal property of Wlim identifies the maps. Functoriality combines their restrictions into restriction along delta j inverse. This is the prescribed component equation for l j. Cancel eNlim and use extensionality to finish. Empty K makes all tuple checks vacuous. This argument proves only transition-leg compatibility.",
+   "text": "For the fixed degree n and tuple t, apply etale_limit_scalar_section_map_laws to T0 = W0(n,t). Supply gamma(j,k,a,n,t), delta(j,n,t), and their given first-projection equations. Take its third conjunct: the scalar transition followed by the scalar kth leg equals the scalar jth leg. Precompose this equality with the tuple projection and the presheaf image of eNj(j,n,t). The prescribed formula for l j gives precisely the desired component equality. No nerve projection equation is needed, and the tuple argument remains vacuous if K is empty.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-etale-limit-scalar-section-map-laws"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
   "def-weil-pbc-cech-complex",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-etale-limit-scalar-section-map-laws"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP canonical Cech comparison, explicit leg component calculation using the proved unit coherence."
+  "place": "Tag 09YP canonical Cech comparison. Complete Lean proof by S3 using the existing scalar-section map laws on each descended nerve tuple and product/cochain-map extensionality."
  },
  "mathlib_searches": [
   {
@@ -125,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T060416-L-582578",
-  "kind": "interface",
+  "landing": "20261013T100123-L-2485987",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
