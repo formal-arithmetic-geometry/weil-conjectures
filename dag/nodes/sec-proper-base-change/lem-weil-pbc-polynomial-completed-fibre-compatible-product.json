@@ -15,9 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Polynomial coefficient extension is finite, by polyEquivTensor and base change of finite modules. Apply completion_finite_extension at q to get a finite product indexed by all primes over q.",
+   "text": "Polynomial coefficient extension is finite: use polyEquivTensor, tensor commutativity, and Module.Finite.base_change. Apply completion_finite_extension_decomposition at q to obtain finiteness of Q = q.primesOver B[X] and the B[X]-algebra equivalence C tensor B[X] with the product of completed localizations. The extra completed localized tensor equivalence of completion_finite_extension is not used.",
    "uses": [
-    "lem-weil-pbc-completion-finite-extension"
+    "lem-weil-pbc-completion-finite-extension-decomposition"
    ],
    "elementary": false
   },
@@ -30,30 +30,30 @@
    "elementary": false
   },
   {
-   "text": "The compatibility equation identifies the restricted polynomial algebra structures. Cancel both base changes and tensor the completion product equivalence with kappa(s); distribute tensor over the finite product.",
+   "text": "Equip L with the A[X]-algebra structure through kappa(r) and the B[X]-algebra structure through e. The equation he supplies the scalar tower and an A[X]-algebra equivalence er from kappa(s) to L. Compose cancelBaseChange, congr er, cancelBaseChange in reverse, commRight, tensor congr of the completion decomposition, and piRight. This gives the ring equivalence with the product of all s-fibres. The finite-product module equivalence of tensor-finite-product is used in its right-handed algebra form Algebra.TensorProduct.piRight; multiplicativity is built into that Mathlib equivalence.",
    "uses": [
     "lem-weil-pbc-tensor-cancel-base-change",
-    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+    "lem-weil-pbc-tensor-finite-product"
    ],
    "elementary": false
   },
   {
-   "text": "At a prime not containing s, an element of s outside the prime has zero image in kappa(s) and unit image in the completion, so the fibre has 1=0. Restrict to primes containing s, inserting zero in the inverse, and enumerate by Fin n. The empty retained set is allowed only through this isomorphism.",
+   "text": "For t in Q with s not contained in t, choose x in s outside t. IsLocalization.map_units and the completion algebraMap make x a unit in D(t). Its image in kappa(s) is zero, so includeRight carries that unit to zero in s.Fiber D(t). Hence zero equals one and this fibre is subsingleton. Restriction of products to U = {t in Q | s is contained in t} is injective by those subsingleton instances and surjective by extending by zero. Form its RingEquiv.ofBijective and reindex by (Fintype.equivFin U).symm. The inherited primesOver.isMaximal instances and the contraction calculation supply all ideal clauses. No nonemptiness is assumed for U.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-algebra-tensor-product-distributes-product",
-  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-completion-finite-extension-decomposition",
   "lem-weil-pbc-finite-algebra-is-integral",
   "lem-weil-pbc-integral-prime-over-maximal-maximal",
-  "lem-weil-pbc-tensor-cancel-base-change"
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-tensor-finite-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof, first paragraph"
+  "place": "Tag 07PU (lemma-another-helper-G-ring), first paragraph, with Mathlib tensor equivalences and an explicit restriction of zero factors; Lean proof by N4, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -130,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T015600-L-3022642",
-  "kind": "interface",
+  "landing": "20261013T034209-L-3767405",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
