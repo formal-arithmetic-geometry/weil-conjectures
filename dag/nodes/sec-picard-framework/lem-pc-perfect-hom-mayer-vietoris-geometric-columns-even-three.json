@@ -20,21 +20,41 @@
  ],
  "proof": [
   {
-   "text": "Apply the geometric outer-column recognition argument to the fixed outer index 3.",
+   "text": "For W=U and W=V, apply perfect_hom_open_colimit_local_comparison. Compactness is hU and hV.isCompact. The image containments follow from t.opensRange=U union V. Each canonical single-open group-colimit map therefore has the pinned local presentation; apply PerfectHomLocalMap.basic on the corresponding open.",
    "uses": [
-    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even"
+    "lem-pc-perfect-hom-open-colimit-local-comparison",
+    "def-pc-perfect-hom-local-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The definition of column 3 identifies its underlying group with ULift Hom(P,(HU(E) biprod HV(E))[0]). Split a morphism by composition with the shifted biproduct projections; the inverse sums its compositions with the shifted inclusions. Functor additivity and biprod.total prove the inverse equations. The map_hom2 formula and biprod.map_fst/map_snd prove compatibility with every transition and apex leg.",
+   "uses": [
+    "lem-pc-perfect-hom-mayer-vietoris-diagram",
+    "lem-pc-perfect-hom-triangle-row-presentations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Build the product cocone from the two local colimits using the stage splitting. Mathlib Types.FilteredColimit.isColimitOf recognizes it: choose representatives of the two coordinates and move them to a common stage for surjectivity; Types.FilteredColimit.isColimit_eq_iff identifies each coordinate at a later stage, and a common upper stage identifies both for injectivity. The unique colimit isomorphism gives a source equivalence pinned on every inclusion. Use PerfectHomLocalMap.basic on U and V, prod, and equiv with this source equivalence and the inverse apex splitting. Joint surjectivity of the underlying colimit inclusions and colimit.iota_desc identify the resulting map with the original column-3 comparison. The product-colimit and transport arguments are proved in full by the private helpers product_colimit_presentation and localMap_of_split_colimit in the delivered module.",
+   "uses": [
+    "def-pc-perfect-hom-local-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even"
+  "lem-pc-perfect-hom-open-colimit-local-comparison",
+  "def-pc-perfect-hom-local-map",
+  "lem-pc-perfect-hom-mayer-vietoris-diagram",
+  "lem-pc-perfect-hom-triangle-row-presentations"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "H4",
+  "group": "D4",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE"
+  "place": "Tag 09RE Mayer–Vietoris induction; cohomology.tex Tag 08BW; online tags checked 2026-10-14",
+  "note": "Constructive two-open product comparison and Mathlib filtered-colimit recognition; replaces the circular reference to the parent even-column theorem."
  },
  "mathlib_searches": [
   {
@@ -93,9 +113,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T201801-L-3973764",
+  "landing": "20261013T211057-L-389671",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
