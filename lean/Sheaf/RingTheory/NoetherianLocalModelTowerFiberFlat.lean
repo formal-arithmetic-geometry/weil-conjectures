@@ -7,8 +7,8 @@ module
 
 public import Sheaf.RingTheory.NoetherianLocalModelTower
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.ColimitEventuallyFlat
-import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
+import Sheaf.RingTheory.NoetherianLocalModelTowerFiberFlatStage
+import Sheaf.RingTheory.NoetherianLocalModelTowerFiberFlatPersistence
 
 /-!
 # Closed-fibre flatness eventually holds in a Noetherian local model tower
@@ -26,6 +26,7 @@ open scoped TensorProduct
 
 namespace Module
 
+set_option linter.style.haveILetI false in
 /-- Flatness of the limit closed fibre descends to a tail of the model tower.
 Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph, the quotient
 systems and the second application of Tag 00R6.
@@ -77,6 +78,15 @@ theorem NoetherianLocalModelTower.eventually_fiberFlat
       (X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))
         (IsLocalRing.maximalIdeal (X.R₀ j)))
       ((X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))
-        (IsLocalRing.maximalIdeal (X.R₀ j))) ⊗[X.S₀ j] X.N₀ j) := by sorry
+        (IsLocalRing.maximalIdeal (X.R₀ j))) ⊗[X.S₀ j] X.N₀ j) := by
+  letI := X.preorder
+  letI := X.commR
+  letI := X.commS
+  letI := X.localR
+  letI := X.algRS
+  letI := X.addN
+  letI := X.moduleS
+  obtain ⟨i, hi⟩ := X.exists_fiberFlat_stage h_fibre
+  refine ⟨i, fun j hij ↦ X.fiberFlat_of_le i j hij hi⟩
 
 end Module

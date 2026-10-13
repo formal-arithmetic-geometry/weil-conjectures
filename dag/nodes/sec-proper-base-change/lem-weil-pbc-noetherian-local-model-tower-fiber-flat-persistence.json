@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-model-tower-fiber-flat-persistence",
+ "kind": "statement",
+ "title": "Persistence of closed-fibre flatness along the tower",
+ "statement": "For a Noetherian local model tower, closed-fibre flatness at an index persists at every later index.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Closed-fibre flatness on a tail of a Noetherian local model tower"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding existence/persistence part of the proof of Tag 00R7.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Closed-fibre flatness on a tail of a Noetherian local model tower"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness of the closed fibre of a module descends to every sufficiently large stage of a directed Noetherian local model tower",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of the closed fibre of a module descends to every sufficiently large stage of a directed Noetherian local model tower",
+   "results": "AdicCompletion.flat_of_isNoetherian; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Module.flat_of_isLocalized_span; Module.flat_of_localized_maximal; Module.flat_of_isLocalized_maximal; Module.flat_of_localized_span; Module.FaithfullyFlat.iff_flat_and_proper_ideal; Algebra.Smooth.flat_of_isNoetherianRing",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(closedFiber|closed_fiber|fibre).*stage|fibre.*eventually|fiber.*eventually",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberFlat",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Closed-fibre flatness on a tail of a Noetherian local model tower",
+   "via": [
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberFlatPersistence",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerFiberFlatPersistence.lean",
+  "declaration": "Module.NoetherianLocalModelTower.fiberFlat_of_le",
+  "statement": "theorem NoetherianLocalModelTower.fiberFlat_of_le\n    {R : Type u} {S : Type v} {S' : Type w} {M : Type t}\n    [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]\n    [Algebra R S] [Algebra S S'] [Module S' M] [Module S M]\n    [IsScalarTower S S' M]\n    (X : NoetherianLocalModelTower R S S' M) :\n    letI := X.preorder\n    letI := X.commR\n    letI := X.commS\n    letI := X.localR\n    letI := X.algRS\n    letI := X.addN\n    letI := X.moduleS\n    ∀ (i j : X.ι), i ≤ j →\n      Module.Flat\n        (X.S₀ i ⧸ Ideal.map (algebraMap (X.R₀ i) (X.S₀ i))\n          (IsLocalRing.maximalIdeal (X.R₀ i)))\n        ((X.S₀ i ⧸ Ideal.map (algebraMap (X.R₀ i) (X.S₀ i))\n          (IsLocalRing.maximalIdeal (X.R₀ i))) ⊗[X.S₀ i] X.N₀ i) →\n      Module.Flat\n        (X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))\n          (IsLocalRing.maximalIdeal (X.R₀ j)))\n        ((X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))\n          (IsLocalRing.maximalIdeal (X.R₀ j))) ⊗[X.S₀ j] X.N₀ j)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T224512-L-1472241",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T224512-L-1472241",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
