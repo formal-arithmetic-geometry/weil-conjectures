@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-compact-coproduct-finite-thick-support",
+ "kind": "statement",
+ "title": "Compact maps into coproducts of shifts have finite thick support",
+ "statement": "Let C be triangulated with coproducts [def-weil-triangulated-category], E:I→C any family (not necessarily compact), i:J→I and m:J→Z. For a compact object K [def-pc-compact-object] every map K→the coproduct of E_{i(j)}[m(j)] factors through an object of the thick envelope [def-pc-thick-closure] of the coproduct of E_i over some finite subset S of I.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "def-pc-thick-closure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09SP, initial coproduct case"
+ },
+ "proof": [
+  {
+   "text": "For compact K [def-pc-compact-object], the map to the coproduct A_j = E_{i(j)}[m(j)] is the image of x in the direct sum of Hom groups. Let S be the image under i of the finite support of x and let Q be the coproduct of A_j over this finite support. The sum of the components x_j into Q followed by its canonical inclusion is the given map, by DirectSum.sum_support_of. The shared finite_thick_mono theorem constructs the inclusion and zero-on-extra-summands retraction between two finite generator coproducts, and applies retract closure and triangEnvelope minimality. Both consumers import this theorem instead of duplicating the proof.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every E_{i(j)} in the finite support is a retract of the unshifted sum over S, using its inclusion and projection. The thick envelope [def-pc-thick-closure] contains these generators and their shifts. It contains Q by finite-product closure and the isomorphism from the finite product to the finite coproduct. This also handles empty support.",
+   "uses": [
+    "def-pc-thick-closure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "def-pc-thick-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09SP, initial coproduct case; repair shares finite-support monotonicity with both consumers"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a compact object into a coproduct of shifts factors through a finite thick closure",
+   "results": "No match. Returned finite coproduct existence and derived-category truncation/factorization results, not compact finite thick support.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.triangEnvelope",
+   "results": "Remote Loogle did not recognize this identifier. Local source search found triangEnvelope_le_iff and closure under shifts/retracts, used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*thick|compact.*factor|triangEnvelope.*(coproduct|biproduct)",
+   "results": "No compact finite thick factorization in Mathlib or WeilConjectures. Local search located DirectSum.sum_support_of, ObjectProperty.prop_product and Triangle.coyoneda_exact₃.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a compact object to a coproduct of shifts of generators factors through a finite thick envelope",
+   "results": "Service unavailable: Internal Server Error; no search results returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactFactorThroughThick",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: factor the finite-stage map through finite thick closure; Tag 09SP, initial coproduct case",
+   "via": [
+    "lem-sc-supported-factor-through-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactCoproductFiniteThickSupport",
+  "file": "lean/Sheaf/CategoryTheory/CompactCoproductFiniteThickSupport.lean",
+  "declaration": "CategoryTheory.compact_coproduct_finite_thick_support",
+  "statement": "theorem compact_coproduct_finite_thick_support\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{w} C]\n    {I J : Type w} (E : I → C) (i : J → I) (m : J → ℤ)\n    (K : C) (hK : IsCompactObject K) (f : K ⟶ ∐ fun j : J ↦ (E (i j))⟦m j⟧) :\n    ∃ (S : Finset I) (Q : C) (a : K ⟶ Q)\n        (b : Q ⟶ ∐ fun j : J ↦ (E (i j))⟦m j⟧),\n      (ObjectProperty.singleton (∐ fun i : {i : I // i ∈ S} ↦ E i.val)).triangEnvelope Q ∧\n        a ≫ b = f",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

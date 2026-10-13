@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-compact-triangle-connecting-approximation",
+ "kind": "statement",
+ "title": "Finite thick approximation of the connecting component across one triangle",
+ "statement": "Let C be triangulated with coproducts [def-weil-triangulated-category], E:I→C a compact family [def-pc-compact-object], and T=(Z→Y→W→Z[1]) distinguished with Z a coproduct of shifts of the E_i. Suppose every map from every compact object to Y factors through an object in a finite thick envelope [def-pc-thick-closure] of the family. For any compact K and f:K→W there is K→Q→W with Q in such a finite thick envelope whose composite agrees with f after W→Z[1]. Equality before the connecting map is not asserted.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "def-pc-thick-closure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09SP, induction step through the cone construction, before lifting the difference; compactness closure is Lemma 13.37.2"
+ },
+ "proof": [
+  {
+   "text": "Use [lem-sc-compact-objects-thick] to install the triangulated and retract-closed property R of compact objects. The finite unshifted generator sum is compact by finite-product closure and the finite product/coproduct isomorphism. Thus its thick envelope lies in R by triangEnvelope_le_iff.",
+   "uses": [
+    "lem-sc-compact-objects-thick",
+    "def-pc-thick-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Shift the given isomorphism Z≅the coproduct of E_i[m], use the shift/coproduct comparison and shiftFunctorAdd, and apply [lem-sc-compact-coproduct-finite-thick-support] to f followed by the connecting morphism. Obtain K→Q₀→Z[1] in a finite thick envelope. Set F=Q₀[-1] and identify F[1] with Q₀. Fullness of the shift functor produces F→Z whose shift is the second factor. The first factor becomes g:K→F[1]. The resulting g followed by the shifted map is f followed by the connecting morphism. F stays in the finite thick envelope by shift closure and is compact.",
+   "uses": [
+    "lem-sc-compact-coproduct-finite-thick-support",
+    "lem-sc-compact-objects-thick",
+    "def-weil-triangulated-category",
+    "def-pc-thick-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Complete g to F→K'→K→F[1] by distinguished_cocone_triangle₂ [def-weil-triangulated-category]. By compactness closure [lem-sc-compact-objects-thick], K' is compact. The connecting square extends to a triangle morphism via complete_distinguished_triangle_morphism₂, giving K'→Y. Apply the assumed factorization property of Y to obtain K'→Q'→Y. Complete F→K'→Q' to a distinguished triangle F→Q'→Q→F[1]. Apply complete_distinguished_triangle_morphism twice to get K→Q→W. Their third commutative squares prove agreement with f after the connecting morphism. The union of the finite supports contains F and Q' in its thick envelope, since the smaller generator sums retract from the union sum. Closure under cones puts Q there.",
+   "uses": [
+    "lem-sc-compact-objects-thick",
+    "def-weil-triangulated-category",
+    "def-pc-thick-closure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compact-objects-thick",
+  "def-pc-thick-closure",
+  "lem-sc-compact-coproduct-finite-thick-support",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09SP, cone construction before exactness correction, now proved in Lean using compactness closure (Tag 09QH)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a compact object into a coproduct of shifts factors through a finite thick closure",
+   "results": "No match. Returned finite coproduct existence and derived-category truncation/factorization results, not compact finite thick support.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.triangEnvelope",
+   "results": "Remote Loogle did not recognize this identifier. Local source search found triangEnvelope_le_iff and closure under shifts/retracts, used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*thick|compact.*factor|triangEnvelope.*(coproduct|biproduct)",
+   "results": "No compact finite thick factorization in Mathlib or WeilConjectures. Local search located DirectSum.sum_support_of, ObjectProperty.prop_product and Triangle.coyoneda_exact₃.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a distinguished triangle whose first term is a coproduct of shifted compact generators, approximate a map from a compact object to the third term through a finite thick object with the same connecting component",
+   "results": "Service unavailable: Internal Server Error; no search results returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactFactorThroughThick",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: factor the finite-stage map through finite thick closure; Tag 09SP, induction step through the cone construction, before lifting the difference; compactness closure is Lemma 13.37.2",
+   "via": [
+    "lem-sc-supported-factor-through-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactTriangleConnectingApproximation",
+  "file": "lean/Sheaf/CategoryTheory/CompactTriangleConnectingApproximation.lean",
+  "declaration": "CategoryTheory.compact_triangle_connecting_approximation",
+  "statement": "theorem compact_triangle_connecting_approximation\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{w} C]\n    {I : Type w} (E : I → C) (hcompact : ∀ i : I, IsCompactObject (E i))\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    (hZ : ∃ (J : Type w) (i : J → I) (m : J → ℤ),\n      Nonempty (T.obj₁ ≅ ∐ fun j : J ↦ (E (i j))⟦m j⟧))\n    (hY : ∀ (K : C), IsCompactObject K → ∀ (f : K ⟶ T.obj₂),\n      ∃ (S : Finset I) (Q : C) (a : K ⟶ Q) (b : Q ⟶ T.obj₂),\n        (ObjectProperty.singleton (∐ fun i : {i : I // i ∈ S} ↦ E i.val)).triangEnvelope Q ∧\n          a ≫ b = f)\n    (K : C) (hK : IsCompactObject K) (f : K ⟶ T.obj₃) :\n    ∃ (S : Finset I) (Q : C) (a : K ⟶ Q) (b : Q ⟶ T.obj₃),\n      (ObjectProperty.singleton (∐ fun i : {i : I // i ∈ S} ↦ E i.val)).triangEnvelope Q ∧\n        (a ≫ b) ≫ T.mor₃ = f ≫ T.mor₃",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

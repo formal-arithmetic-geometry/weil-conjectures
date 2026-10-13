@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-compact-objects-thick",
+ "kind": "statement",
+ "title": "Compact objects form a thick subcategory",
+ "statement": "For a pretriangulated category with set-indexed coproducts [def-weil-triangulated-category], the object property of being compact [def-pc-compact-object] is triangulated (contains zero, is stable under integer shifts and under distinguished triangles) and stable under retracts. Compactness is for the indexing universe of the given coproducts.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09QH (Lemma 13.37.2), closure of compact objects"
+ },
+ "proof": [
+  {
+   "text": "The zero object is compact [def-pc-compact-object]: all its Hom groups vanish, so both the direct sum of Hom groups and Hom into any coproduct are zero. Shifts are compact by the shift-inverse adjunction, additive Hom equivalences and coproduct comparison, by importing the single proved compact_shift theorem from CompactCone [lem-sc-compact-cone].",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-triangulated-category",
+    "lem-sc-compact-cone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A retract K of L is compact when L is compact [def-pc-compact-object]. Precomposition with the inclusion and retraction gives retractions on the direct sums of Hom groups and on Hom into the coproduct. Naturality of the comparison makes these commute. Injectivity descends from L after precomposition with the retraction and cancellation by the inclusion; surjectivity lifts a map through L and precomposes its finite-supported preimage with the inclusion. Thus compactness is stable under retracts and consequently under isomorphisms. The comparison naturality theorem is imported from CompactCone, not proved again.",
+   "uses": [
+    "def-pc-compact-object",
+    "lem-sc-compact-cone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Closure under third terms of distinguished triangles is [lem-sc-compact-cone]. Together with shift closure, triangle rotation gives closure under middle terms, via ObjectProperty.IsTriangulatedClosed₂.of_isTriangulatedClosed₃. The zero, shift, and middle-term classes assemble into ObjectProperty.IsTriangulated; the already proved retract class gives the second conclusion.",
+   "uses": [
+    "lem-sc-compact-cone",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "def-weil-triangulated-category",
+  "lem-sc-compact-cone"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09QH (Lemma 13.37.2), closure of compact objects; all steps now proved in Lean; repair shares the shift and naturality proofs from CompactCone"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact objects of a triangulated category with coproducts are closed under shifts, retracts and distinguished triangles",
+   "results": "Returned generic ObjectProperty.IsTriangulatedClosed classes and constructors, not a theorem asserting that compact objects satisfy them.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact objects form a thick triangulated subcategory",
+   "results": "Service unavailable: Internal Server Error; no results returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(retract|shift|thick)|Compact.*(Retract|Shift|Thick)",
+   "results": "Sixteen hits about compact topological sets and metric thickenings; none for compact objects of additive categories.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactFactorThroughThick",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: factor the finite-stage map through finite thick closure; Tag 09QH (Lemma 13.37.2), closure of compact objects",
+   "via": [
+    "lem-sc-supported-factor-through-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactObjectsThick",
+  "file": "lean/Sheaf/CategoryTheory/CompactObjectsThick.lean",
+  "declaration": "CategoryTheory.compactObjects_isThick",
+  "statement": "theorem compactObjects_isThick\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [HasCoproducts.{w} C] :\n    ObjectProperty.IsTriangulated (fun K : C ↦ IsCompactObject K) ∧\n      ObjectProperty.IsStableUnderRetracts (fun K : C ↦ IsCompactObject K)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-compact-cone",
+ "kind": "statement",
+ "title": "Distinguished cones of compact objects are compact",
+ "statement": "Let C be a pretriangulated category with set-indexed coproducts [def-weil-triangulated-category]. If the first and second objects of a distinguished triangle are compact [def-pc-compact-object], then its third object is compact, with compactness and coproducts taken in the same indexing universe.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09QH (Lemma 13.37.2), closure of compact objects"
+ },
+ "proof": [
+  {
+   "text": "Shifts of a compact object [def-pc-compact-object] are compact. Use the adjunction of the shift equivalence with its inverse and the inverse-shift coproduct comparison. The componentwise Hom additive equivalences induce a direct-sum additive equivalence. Naturality identifies the shifted comparison with the original compactness comparison conjugated by these equivalences, proving bijectivity. This is the sole compact_shift proof, exposed for CompactObjectsThick to reuse.",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a distinguished triangle [def-weil-triangulated-category], Hom(-,A_j) is exact: a kernel map factors through the following triangle morphism by Mathlib Triangle.yoneda_exact₂; consecutive morphisms compose to zero. Apply this to the triangle and two rotations. Direct sums preserve this exactness: if an element maps to zero, each component is in the image; choose component preimages and sum them over its finite support. Conversely, the composite vanishes componentwise. This argument is fully proved by the private helpers triangle_hom_exact and directSum_exact.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare the direct-sum exact row on Hom(Y[1],A_j), Hom(X[1],A_j), Hom(Z,A_j), Hom(Y,A_j), Hom(X,A_j) with the Hom row into the coproduct of A_j. Precomposition commutes with the canonical comparisons, proved on single supported components. Four comparisons are bijective by compactness of X,Y and their shifts. Apply the five lemma [lem-weil-pbc-five-lemma], using its additive-group formulation AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective from Mathlib.Algebra.FiveLemma. The central comparison for Z is bijective for every family. The sole compact_comparison_naturality proof is exposed for CompactObjectsThick to reuse.",
+   "uses": [
+    "def-pc-compact-object",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09QH (Lemma 13.37.2), closure of compact objects; all steps now proved in Lean; repair exposes the existing shift and naturality helpers for reuse"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a triangulated category with coproducts, the cone of a morphism between compact objects is compact",
+   "results": "No compact-cone theorem. Hits included finite (bi)coproduct existence, homological functor kernels and generic distinguished-triangle existence.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cone of a morphism between compact objects in a triangulated category is compact",
+   "results": "Service unavailable: Internal Server Error; no results returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(cone|triangulated)|Compact.*(Cone|Triangulated)",
+   "results": "Three hits, all topological compactness of profinite limit/index cones; none for compact triangulated objects.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactFactorThroughThick",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: factor the finite-stage map through finite thick closure; Tag 09QH (Lemma 13.37.2), closure of compact objects",
+   "via": [
+    "lem-sc-supported-factor-through-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactCone",
+  "file": "lean/Sheaf/CategoryTheory/CompactCone.lean",
+  "declaration": "CategoryTheory.compact_cone",
+  "statement": "theorem compact_cone\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [HasCoproducts.{w} C]\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    (h₁ : IsCompactObject T.obj₁) (h₂ : IsCompactObject T.obj₂) :\n    IsCompactObject T.obj₃",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100109-L-2481432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
