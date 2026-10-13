@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-standard-single-flat-counit-localization-presentation-data",
+ "kind": "statement",
+ "title": "Local affine flat counit presentation data",
+ "statement": "Under the affine presentation hypothesis, for qcqs p:Y→B, relatively flat quasi-coherent M, g:A→B and a∈A, there exist affine opens S containing g(a), V containing a, and V≤g⁻¹(S), with a StandardSingleFlatCounitPresentation for p|S, M restricted to p⁻¹(S), and g.resLE S V. The bounded flat complex K lives on S and includes both identifications and the base-change equation. No global presentation on B is asserted.",
+ "stmt_deps": [
+  "def-pc-standard-single-flat-counit-presentation-on-open",
+  "def-pc-standard-single-flat-counit-presentation"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0DJ9, 06YB and 0D5S"
+ },
+ "proof": [
+  {
+   "text": "Choose affine neighborhoods S and V inside g⁻¹(S). Restrict p and M to p⁻¹(S); qcqs, quasi-coherence and relative flatness restrict. Apply the affine hypothesis on the top source open; transport across its isomorphism with the source, preserving the canonical mate equation. The result stays on S. Detailed proof in the Lean docstring.",
+   "uses": [
+    "def-pc-standard-single-flat-counit-presentation-on-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-single-flat-counit-presentation-on-open"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0DJ9, 06YB and 0D5S, affine localization and exact stalks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine open restriction of a relatively flat quasicoherent sheaf admits a bounded flat complex presentation of derived direct image compatible with base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no absence conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(counit|derived)|resLEStalkMap",
+   "results": "['Mathlib/AlgebraicGeometry/Restrict.lean', 'Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean']",
+   "date": "2026-10-14",
+   "verdict": "Restriction and stalk tools only; no local flat-counit presentation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a derived direct image to an affine open and exact module stalks identify the derived tensor counit with stalk scalar extension",
+   "results": "['AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc', 'AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso', 'AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp', 'AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk', 'AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux', 'AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply', 'AlgebraicGeometry.StructureSheaf.toPushforwardStalk', 'AlgebraicGeometry.stalkMap_toStalk']",
+   "date": "2026-10-14",
+   "verdict": "Restriction and stalk tools only; no local flat-counit presentation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"resLE\"",
+   "results": "['AlgebraicGeometry.Scheme.Hom.resLE_id', 'AlgebraicGeometry.Scheme.Hom.resLE', 'AlgebraicGeometry.Scheme.Hom.resLE_comp_ι', 'AlgebraicGeometry.Scheme.Hom.resLE_comp_ι_assoc', 'AlgebraicGeometry.Scheme.Hom.resLE_eq_morphismRestrict', 'AlgebraicGeometry.Scheme.Hom.map_resLE', 'AlgebraicGeometry.Scheme.Hom.map_resLE_assoc', 'AlgebraicGeometry.Scheme.Hom.resLE_congr']",
+   "date": "2026-10-14",
+   "verdict": "Restriction and stalk tools only; no local flat-counit presentation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationCompletion",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-flat-counit-localization",
+   "place": "localization proof: choose affine neighborhoods and restrict the presentation",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPresentationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitLocalizationPresentationData.lean",
+  "declaration": "AlgebraicGeometry.standardSingleFlatCounit_localization_presentation_data",
+  "statement": "theorem standardSingleFlatCounit_localization_presentation_data\n    (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)\n      [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]\n      (g₀ : A₀ ⟶ B₀), StandardSingleFlatCounitOnOpen p₀ g₀ ⊤)\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]\n    (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    ∃ (S : B.Opens) (V : A.Opens), g a ∈ S ∧ a ∈ V ∧\n      IsAffine S.toScheme ∧ IsAffine V.toScheme ∧\n      ∃ hVS : V ≤ g ⁻¹ᵁ S,\n        StandardSingleFlatCounitPresentation (p ∣_ S)\n          (M.restrict (p ⁻¹ᵁ S).ι) (g.resLE S V hVS)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8b1c4",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T234516-L-2164817",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8b1c4",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T234516-L-2164817",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile; original caller fails against changed completion as reported; adapted caller and direct importer compile; signatures, change record, nodes, report, and sorry declarations satisfy the review brief."
+ }
+}
