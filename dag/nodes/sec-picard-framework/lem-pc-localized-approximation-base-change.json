@@ -15,34 +15,35 @@
  ],
  "proof": [
   {
-   "text": "The contractions of q give compatible primes p_i,q_i. The induced local ring homomorphisms have a commuting square, since η is natural; this follows by localization extension uniqueness on the original numerators.",
+   "text": "Naturality identifies the contracted primes and gives the commuting square of canonical local ring maps (primeDiagramHom_naturality). Bundle the two maps to the localized target as algebra homomorphisms and construct t using Algebra.TensorProduct.productMap; its pure-tensor formula is definitional.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
    "elementary": true
   },
   {
-   "text": "For i→j localize B_i⊗_{A_i}A_j≃B_j first in the B_i factor away from q_i and then in the A_j factor away from p_j. Tensor-localization compatibility gives the tensor of the localized rings over A_i; since all elements away from p_i act invertibly, tensoring over A_i agrees with tensoring over (A_i)_{p_i}. Thus the tensor of the two localized rings is a localization of B_j at denominators avoiding q_j.",
-   "uses": [
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Further localize at the complement of q_j. The composite localization is (B_j)_{q_j}. Its preimage multiplicative set in the tensor of localized rings gives W and its canonical map gives t. Extension uniqueness proves the displayed formula on pure tensors, using the original transition tensor formula.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-tensor-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localize B_j⊗_{B_i}D_i≃D_j at the complement of q_j. Elements outside q_i map outside q_j, so this factors through (D_i)_{q_i}. Tensor-localization compatibility and tensor cancellation identify the domain with (B_j)_{q_j}⊗_{(B_i)_{q_i}}(D_i)_{q_i}. The original pure-tensor formula gives the required linear equivalence and its pure-tensor formula.",
+   "text": "For a single transition, construct the numerator map θ from B_i tensor over A_i with A_j to B_i,q_i tensor over A_i,p_i with A_j,p_j. The proved private lemma localizedTensor_isLocalization first applies IsLocalization.tensorProduct_tensorProduct to localize the left factor, then tensorProduct_tensorProduct_right to localize the right factor. Compose the two localizations and transport along IsLocalization.algebraTensorEquiv, which changes the tensor base from A_i to A_i,p_i without changing pure tensors. Thus θ is a localization at a submonoid M of the original tensor ring.",
    "uses": [
     "lem-weil-pbc-localization-tensor-over-base",
     "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-module-tensor-cancel-base-change"
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original tensor isomorphism e and its given formula imply t composed with θ equals the localization map B_j to B_j,q_j composed with e; verify equality on the two tensor inclusions. Transport the localization of B_j at q_j across e to obtain a localization of the original tensor at N=q_j-complement mapped by e inverse. Each element of M maps to a unit under θ and hence under t, so its image under e lies outside q_j. Thus M is contained in N. IsLocalization.isLocalization_of_submonoid_le now makes t a localization at θ(N); use this submonoid as W.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original module tensor isomorphism gives IsBaseChange for the transition map. The two module localization maps are base changes by IsLocalizedModule.isBaseChange. Compose the original base change with localization of the target using IsBaseChange.comp. The explicitly defined primeModuleMap, restricted to original numerators, agrees with this composite (primeModuleMap_mk at denominator one). Cancel localization of the source with IsBaseChange.of_comp. Its canonical equivalence IsBaseChange.equiv is the required localized tensor equivalence, and equiv_tmul gives precisely the stated formula. The private helper primeModuleMap_baseChange proves this for arbitrary compatible prime ideals, without ring-tensor, colimit, or finiteness hypotheses.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-tensor-product"
    ],
    "elementary": false
   }
@@ -51,12 +52,14 @@
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-localization-tensor-over-base",
   "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-module-tensor-cancel-base-change"
+  "lem-weil-pbc-localization-of-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "X2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02JO (1), first paragraph: localized system; Tag 00QX, clauses (5) and (6); source read online at https://stacks.math.columbia.edu/tag/02JO"
+  "place": "Tags 02JO (first proof paragraph), 00QX (5)-(6), 00DK, 00DL and 00D2, read online at https://stacks.math.columbia.edu; Lean proof uses Mathlib localization and IsBaseChange APIs."
  },
  "mathlib_searches": [
   {
@@ -139,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T132736-L-4151894",
-  "kind": "interface",
+  "landing": "20261013T141536-L-382147",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
