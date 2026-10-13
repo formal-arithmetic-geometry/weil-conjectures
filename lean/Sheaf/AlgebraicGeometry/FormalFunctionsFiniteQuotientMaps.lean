@@ -6,16 +6,9 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization
 
 /-! # Finite pullback of the local germ formula
 
@@ -31,24 +24,30 @@ open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
 namespace AlgebraicGeometry
 noncomputable section
 
+-- Compare cohomology h-maps by their interfaces, without unfolding chosen resolutions.
+attribute [local irreducible] Scheme.Modules.moduleCohomologyFMap
+
+-- The coherence hypothesis belongs to the existing interface; this compatibility is formal.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 400000 in
+-- Nested cohomology restrictions and resolution comparisons need extra elaboration heartbeats.
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.
 (blueprint: lem-weil-pbc-formal-functions-finite-quotient-maps)
 
-Proof: Choose an injective resolution of F' and open comparison data for the local
-base-change square. The local spectrum map is flat (02KH), as is its base change,
-so such data exist by the open-choice existence theorem. Apply the
-local germ formula on V to the representative xi. Restrict the h-map
-formalFunctionsFiniteFMap to the inverse image of f inverse V. Its adjunction equation
-says that composing it with the unit for the local base change is the unit for i_n.
-The restriction-unit square and cohomology composition therefore identify the resulting
-map with the finite-level pullback on xi. The section-class representative in the germ
-is independent of the open resolution comparisons: their augmentations identify
-them with the restriction of I, and the pinned section maps give the canonical
-cohomology comparison for that restriction. Equivalently, augmentation-preserving
-lifts are homotopic and induce the same cohomology map. Thus it equals the representative
-used by any prescribed finite-level open choices D. Substitution of the assumed formula
-for r gives exactly IsFormalFunctionsTheta, for every I, J, V, D and xi. No
+Proof: Fix the prescribed finite choices D and choose an injective resolution K of F'.
+The local spectrum map and its base change are flat, so the open-choice existence
+theorem gives local choices E₀. Set E to E₀ with its source field replaced by D.source.
+The psi, target and unit_square fields do not depend on source, so E is valid and the
+germ in the local comparison formula is definitionally the germ required by Theta.
+Apply the finite-open factorization theorem to E and D, obtaining an additive map t
+with its restriction and restricted-pullback equations. Apply t to ha on this germ.
+Its restriction equation identifies the left side with restriction after canonical
+finite pullback; its restricted-pullback equation identifies the right side with the
+finite restricted h-map applied to xi. Substitute hr at a(germ) and evaluate linear-map
+composition. This is the defining Theta equality for every I, J, V, hy, D and xi. No
 surjectivity of r or equivalence property of a is needed. For zero coefficients or
 empty fibre all maps are zero; in degree zero this is composition of section pullbacks.
 There is no quotient-system isomorphism or completed module in this argument. -/
@@ -61,7 +60,38 @@ theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]
       formalFunctionsLocalCohomology f y F p)
     (ha : IsFormalFunctionsLocalComparison f y F p a) :
-    IsFormalFunctionsTheta f y F p n (r.comp a) := by sorry
+    IsFormalFunctionsTheta f y F p n (r.comp a) := by
+  classical
+  have : Flat (Y.fromSpecStalk y) :=
+    (Scheme.fromSpecStalk_local_properties Y y).2.2.2.2.2
+  have : Flat (pullback.snd (Y.fromSpecStalk y) f) := inferInstance
+  have : EnoughInjectives (pullback (Y.fromSpecStalk y) f).Modules :=
+    Scheme.Modules.enoughInjectives _
+  intro I J V hy D xi
+  let K := injectiveResolution
+    ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)
+  obtain ⟨E₀⟩ := Scheme.Modules.flatBaseChangeMap_sections_choices
+    f (Y.fromSpecStalk y) F I K V
+  let E : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V :=
+    { E₀ with source := D.source }
+  obtain ⟨t, ht, htx⟩ := formalFunctions_finite_open_factorization f y F p n I K J V E D
+  have hl := ha I K V hy E xi
+  let rho := Scheme.Modules.moduleCohomologyRestriction
+    ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V))
+    ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F) p
+  have hrc (z : formalFunctionsLocalCohomology f y F p) :
+      rho (r z) = rho (formalFunctionsFinitePullback f y F p n z) :=
+    congrArg rho (hr z)
+  let rho' := Scheme.Modules.moduleCohomologyRestriction
+    ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V))
+    ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p
+  have hcomb (z : formalFunctionsLocalCohomology f y F p) :
+      rho (r z) = t (rho' z) := (hrc z).trans (ht z).symm
+  have hright := (congrArg t hl).trans (htx xi)
+  have hresult := (hcomb _).trans hright
+  simpa only [rho, LinearMap.comp_apply, E, Scheme.Modules.moduleCohomologyRestriction]
+    using hresult
+
 
 end
 end AlgebraicGeometry

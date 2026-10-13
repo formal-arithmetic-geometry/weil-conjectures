@@ -17,55 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Choose a resolution K of F′. The local-spectrum map c:Spec O_y→Y and its pullback g′ are flat, so for each neighbourhood V of y obtain local open choices E from the open-choice existence theorem. Fix arbitrary finite-level choices D and a class xi. E.source and D.source are augmentation-preserving identifications with the restriction of the same I; their pinned sections maps identify resolutionSectionClass with the same canonical class in R^p f_*F(V). This also follows by homotopy uniqueness of comparison maps. Hence the germ appearing in ha agrees with the germ in the desired Theta formula.",
+   "text": "For arbitrary I,J,V,hy,D,xi choose K resolving F′; enough injectives exists on every scheme. Flatness of the canonical local spectrum map and base change gives local open choices E₀. Set E={E₀ with source:=D.source}; its psi, target and unit_square are unaffected, and the two germ representatives are now definitionally identical. No resolution-independence theorem is needed.",
    "uses": [
-    "lem-weil-pbc-flat-base-change-open-choices-exist",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
     "lem-weil-pbc-spec-local-ring-canonical-morphism",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-weil-pbc-module-cohomology-fmap-functorial"
+    "lem-weil-pbc-flat-base-change-open-choices-exist",
+    "def-weil-pbc-flat-base-change-open-choices"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OD, finite-level identifications; Tags 089W, 01F7 and 01FB (read at https://stacks.math.columbia.edu/tag/02OD, /089W and /01FB)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let U=f inverse V, U′=g′ inverse U and W=i_n inverse U. The projection equality i′_n followed by g′=i_n identifies W with i′_n inverse U′. Restrict the finite h-map to W. Its adjunction equation together with the unit squares for E.psi and D.psi shows that composing the local pullback h-map with the restricted finite h-map equals D.psi. Use cohomology composition and the restriction-unit square to identify restriction to W after formalFunctionsFinitePullback with this same composite. Apply this identity to ha on the common germ; replace r by canonical pullback using hr. The result is exactly the defining equality for IsFormalFunctionsTheta, for every I,J,V,D,xi. No invertibility or existence theorem for a is needed. In degree zero these are section pullbacks; zero F or empty fibres give zero maps.",
+   "text": "Obtain t and its two equations from the finite-open factorization. Apply ha to I,K,V,hy,E,xi. Apply t to that equality. Replace t∘restriction on the left by finite restriction∘formalFunctionsFinitePullback using the first factorization equation; the second gives the finite restricted pullback on the right. Use hr at the local class a(germ) to replace finitePullback by r; linear-map composition evaluates to r(a(germ)). This proves the defining Theta equality for every I,J,V,hy,D,xi.",
    "uses": [
-    "def-weil-pbc-formal-functions-finite-pullback",
-    "def-pc-module-pullback",
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "lem-weil-pbc-formal-functions-finite-open-factorization",
     "def-weil-pbc-formal-functions-local-comparison",
     "def-weil-pbc-formal-fibre-cohomology",
+    "def-weil-pbc-formal-functions-finite-pullback",
     "def-weil-pbc-module-cohomology-fmap"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OD, finite-level identifications; Tags 089W, 01F7 and 01FB (read at https://stacks.math.columbia.edu/tag/02OD, /089W and /01FB)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
   "def-weil-pbc-flat-base-change-open-choices",
   "def-weil-pbc-formal-fibre-cohomology",
   "def-weil-pbc-formal-functions-finite-pullback",
   "def-weil-pbc-formal-functions-local-comparison",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-pc-module-pullback-adjunction",
   "lem-weil-pbc-flat-base-change-open-choices-exist",
-  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-formal-functions-finite-open-factorization",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
   "lem-weil-pbc-spec-local-ring-canonical-morphism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 02OD, finite-level identifications; Tags 089W, 01F7 and 01FB (read at https://stacks.math.columbia.edu/tag/02OD, /089W and /01FB); expanded canonical maps, unit equations and resolution-independence details from the cited proof."
+  "document": "literature/stacks-project/coherent.tex and cohomology.tex",
+  "place": "Tag 02OD, proof: c_n factors through c; Tags 01F7 and 01FB: composition and restriction of cohomology h-maps (read at https://stacks.math.columbia.edu/tag/02OD and /01FB). X3: choose the same source resolution in local and finite open data; combine the two finite-open equations with ha and hr."
  },
  "mathlib_searches": [
   {
@@ -168,13 +155,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "X-58bf1",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T184330-L-4014502",
+  "landing": "20261013T062536-L-736941",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG nodes; helper checked against its definitions and cited sources; both modules and the sole direct importer compiled cleanly; axiom checks showed only standard axioms and expected sorryAx."
  }
 }

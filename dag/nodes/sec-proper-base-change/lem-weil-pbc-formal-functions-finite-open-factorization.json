@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-formal-functions-finite-open-factorization",
+ "kind": "statement",
+ "title": "Finite pullback factors through open cohomology compatibly with restricted units",
+ "statement": "Let f:X→Y be any scheme morphism, y∈Y, F an O_X-module, p,n≥0, I an injective resolution of F, K one of F′=g′*F and J one of F_n=i_n*F, where g′:Spec O_y×_Y X→X and i_n:X_n→X [def-weil-pbc-formal-functions-finite-pullback,def-weil-pbc-formal-fibre-cohomology]. Let V⊆Y be any open, E local-base-change open choices and D finite-base-change open choices for I,K,J,V [def-weil-pbc-flat-base-change-open-choices]. Write U=f⁻¹V, U′=g′⁻¹U, W=i_n⁻¹U. There exists an additive map t:H^p(U′,F′|U′)→H^p(W,F_n|W) such that (1) for every z∈H^p(X′,F′), t(res_U′ z)=res_W(formalFunctionsFinitePullback z), and (2) for every xi∈H^p(U,F|U), t(moduleCohomologyFMap(g′|U′,E.psi,p)(xi))=moduleCohomologyFMap(i_n|W,D.psi,p)(xi) [def-weil-pbc-module-cohomology-fmap]. No germ, stalk comparison, properness, coherence or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex and cohomology.tex",
+  "place": "Tag 02OD, proof: c_n factors through c; Tags 01F7 and 01FB: composition and restriction of cohomology h-maps (read at https://stacks.math.columbia.edu/tag/02OD and /01FB)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Put g′=pullback.snd(c,f), j=formalFunctionsFiniteι, U=f⁻¹V, U′=g′⁻¹U, W=i_n⁻¹U. The proved projection identity j≫g′=i_n gives W=j⁻¹U′. Apply moduleCohomologyFMap_restriction to j and formalFunctionsFiniteFMap at U′. Transport the restricted target along W=j⁻¹U′, and take the induced cohomology map as t. Its restriction square gives t(res_U′ z)=res_W(formalFunctionsFinitePullback z) for every z.",
+   "uses": [
+    "def-weil-pbc-formal-functions-finite-pullback",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose formalFunctionsFiniteFMap under the specified tensorPullback adjunction; apply_symm_apply identifies its transpose with the i_n-unit, transported across the projection equality and pushforward composition. Restrict to W and substitute E.unit_square and D.unit_square. Both the composite of E.psi with the restricted finite h-map and D.psi transpose under the U-restriction adjunction to this same restricted i_n-unit. Naturality of pushforwardComp and pushforwardCongr gives the identifications, and injectivity of the restriction homEquiv gives equality of these h-maps. Apply moduleCohomologyFMap_comp and transport along the equality of their underlying scheme maps to obtain t(E.psi* xi)=D.psi* xi. The construction uses no stalk or germ, no hy, and no coherent/proper/Noetherian hypotheses. Degree zero is section-map composition; zero modules and empty opens give zero maps.",
+   "uses": [
+    "def-weil-pbc-formal-functions-finite-pullback",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex and cohomology.tex",
+  "place": "Tag 02OD, proof: c_n factors through c; Tags 01F7 and 01FB: composition and restriction of cohomology h-maps (read at https://stacks.math.columbia.edu/tag/02OD and /01FB). Expanded the omitted finite-neighbourhood verification into restriction and adjunction-unit identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology pullback commutes with restriction to open subsets and is independent of injective resolution choices",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback composed with a stalk germ comparison agrees with finite level pullback on representatives",
+   "results": [
+    "TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom",
+    "TopCat.Presheaf.germ_stalkPullbackInv"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Germ facts only; no cohomology open-factorization result."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|RestrictedResolutionSections|moduleCohomologyFMap_restriction|moduleCohomologyFMap_comp in Mathlib, lean/Sheaf and lean/WeilConjectures; blueprint_refs searches: resolution section class, cohomology pullback restriction, canonical cohomology",
+   "results": "No Mathlib or source-library match. Sheaf.ModuleCohomologyFMapFunctorial states separate composition/restriction tools. No existing blueprint node matches the combined restricted unit factorization.",
+   "date": "2026-10-13",
+   "verdict": "New lemma is the finite-map compatibility step, without the stalk/germ part of its parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleCohomology\", \"restriction\"",
+   "results": [],
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching indexed declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology map of a sheaf morphism over a composite scheme map agrees with composition after restricting both morphisms to inverse image open subsets",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.map_appLE_assoc",
+    "AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc",
+    "AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Second reading: scheme section identities only; not the finite-open cohomology statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientMaps",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Finite-level compatibility of the canonical stalk maps in the formal-functions input to the henselian idempotent lifting argument.",
+   "via": [
+    "lem-weil-pbc-formal-functions-finite-quotient-maps",
+    "lem-weil-pbc-formal-functions-finite-quotient-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteOpenFactorization.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_finite_open_factorization",
+  "statement": "theorem formalFunctions_finite_open_factorization {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (y : Y) (F : X.Modules) (p n : ℕ) (I : InjectiveResolution F)\n    (K : InjectiveResolution\n      ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))\n    (J : InjectiveResolution ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F))\n    (V : Y.Opens)\n    (E : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V)\n    (D : Scheme.Modules.FlatBaseChangeOpenChoices f (formalFibreBaseMap Y y n) F I J V) :\n    ∃ t : (forget₂ _ AddCommGrpCat.{u}).obj\n        ((RingedSpace.moduleCohomology\n          ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).toScheme.toRingedSpace p).obj\n          ((Scheme.Modules.restrictFunctor\n            ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).obj\n            ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))) →+\n      (forget₂ _ AddCommGrpCat.{u}).obj\n        ((RingedSpace.moduleCohomology\n          ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)).toScheme.toRingedSpace p).obj\n          ((Scheme.Modules.restrictFunctor ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).obj\n            ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F))),\n      (∀ z : formalFunctionsLocalCohomology f y F p,\n        t (Scheme.Modules.moduleCohomologyRestriction\n          ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V))\n          ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F) p z) =\n        Scheme.Modules.moduleCohomologyRestriction ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V))\n          ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F) p\n          (formalFunctionsFinitePullback f y F p n z)) ∧\n      (∀ xi : (forget₂ _ AddCommGrpCat.{u}).obj\n          ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n            ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)),\n        t (Scheme.Modules.moduleCohomologyFMap\n          ((pullback.snd (Y.fromSpecStalk y) f).resLE (f ⁻¹ᵁ V)\n            ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) E.psi p xi) =\n        Scheme.Modules.moduleCohomologyFMap ((formalFibreι f y n).resLE (f ⁻¹ᵁ V)\n          ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-58bf1",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T062536-L-736941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-58bf1",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T062536-L-736941",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG nodes; helper checked against its definitions and cited sources; both modules and the sole direct importer compiled cleanly; axiom checks showed only standard axioms and expected sorryAx."
+ }
+}
