@@ -53,10 +53,23 @@ Proof: restrict to affine base opens, apply an acyclic ordinary higher-image qua
 result, and identify the ordinary right-derived functor with `higherDirectImage`.
 
 (blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `sk-thm-picard-coherence`)
+
+Affine-local step (blueprint: new-higher-direct-image-affine-local-qcoherent): restrict to an affine
+base open and apply the ordinary right-derived quasi-coherence theorem. -/
+theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
+    ∀ U : T.affineOpens,
+      (((higherDirectImage f q).obj ℱ).over U.1).IsQuasicoherent := by
+  sorry
+
+/-- Quasi-coherence is local on affine opens of the base. -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
-  sorry
+  have hU : ∀ U : T.affineOpens, (((higherDirectImage f q).obj ℱ).over U.1).IsQuasicoherent :=
+    higherDirectImage_isQuasicoherent_on_affines f ℱ q
+  exact SheafOfModules.IsQuasicoherent.of_coversTop
+    ((higherDirectImage f q).obj ℱ) (fun U : T.affineOpens => U.1)
+    ((Opens.coversTop_iff _ _).mpr (iSup_affineOpens_eq_top T))
 
 end QuasiCoherence
 
