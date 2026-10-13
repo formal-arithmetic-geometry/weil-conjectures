@@ -10333,3 +10333,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: merged deliver/F4/Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusCompact (stage 3; reviewer PASS; first push; landing 20261013T004023-L-2490829 (interface); batch 20261013T004020; modules 2; new nodes 1)
 - 00:40 L: merged deliver/G3/Sheaf.CategoryTheory.ExtSignedDualHomology (stage 3; reviewer PASS; first push; landing 20261013T004023-L-2490945 (proof); batch 20261013T004020; modules 1; new nodes 0)
 - 00:40 L: merged deliver/H1/Sheaf.Topology.ContinuousOpenNormalStabilizer (stage 3; reviewer PASS; first push; landing 20261013T004024-L-2491046 (proof); batch 20261013T004020; modules 1; new nodes 0)
+- 00:40 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitBinaryZeroRestrictionRow (stage 3; reviewer PASS; first push; landing 20261013T004024-L-2491144 (interface); batch 20261013T004020; modules 2; new nodes 1)

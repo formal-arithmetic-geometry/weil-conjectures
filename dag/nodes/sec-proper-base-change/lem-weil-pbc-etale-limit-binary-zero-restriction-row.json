@@ -19,48 +19,38 @@
  ],
  "proof": [
   {
-   "text": "Pass to the directed cofinal tail J above i0. Transfer the two opens by e and pull back each open to the stages and limit. isLimitOpensCone and isAffineHom_π_app supply the restricted scheme limits and affine projections. Restricted transitions remain affine; qc opens have compact inverse images, and the intersection is compact on the quasi-separated union stage. Restrict coefficients and their transitions; inverse-image composition gives coherence and its left adjoint property preserves the sheaf colimit.",
+   "text": "Construct J={j | i₀≤j}, its directed structure and its inclusion t. For every i directedness gives k≥i,i₀, so t is final by Functor.final_of_exists_of_isFiltered. Apply the single-open comparison theorem separately to U and V, with O=U∪V and the allowed predicate of the row.",
    "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-limit-cone-affine-projections-opens",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-etale-inverse-image-restriction"
+    "lem-weil-pbc-etale-limit-single-open-comparison",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the degree-zero diagrams of the U and V restricted systems; form their product. Restriction naturality makes r natural and initial Mayer--Vietoris injectivity makes every r_j injective. The product of the two certified system comparisons, transported by filtered-product preservation, gives v4. Canonical cocone equations and hB give the square on each stage leg.",
+   "text": "Set K₄=K_U ⊞ K_V and r=biprod.lift r_U r_V. At every j the pulled-back opens cover D_j. Equality after r gives equality after both component restrictions by their object identifications; the initial injectivity assertion of etale_mayerVietoris_connecting_pullback, applied with identity scheme map and F_j, then gives equality in H_j.",
    "uses": [
-    "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-etale-mayer-vietoris-pullback",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The colimit functor on abelian-group diagrams is additive and preserves finite biproducts. Use Functor.mapBiprod followed by AddCommGrpCat.biprodIsoProd for ep:colim K₄≅colim K_U×colim K_V. Define v₄ as ep.hom followed by v_U×v_V. The iso, prod and comp certificate constructors certify v₄. The two projection identities for ep, colimit.ι_map, and biprod.lift_fst/snd reduce the required stage-leg equation to the two single-open equations; equality in the product concludes the proof. This avoids filtered-colimit/finite-limit commutation entirely.",
+   "uses": [
     "def-weil-pbc-stage-cohomology-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-stage-cohomology-comparison",
-  "lem-weil-pbc-cohomology-pullback-functorial",
   "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lem-weil-pbc-etale-mayer-vietoris-pullback",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-limit-cone-affine-projections-opens"
+  "lem-weil-pbc-etale-limit-single-open-comparison",
+  "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback"
  ],
  "proof_origin": {
   "by": "H2 stage 3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09YQ and 0A50; native restriction rows, before colimit descent. Source read at https://stacks.math.columbia.edu/tag/09YQ and https://stacks.math.columbia.edu/tag/0A50 because this clone has no source tex."
+  "place": "Tag 0A50 degree-zero injectivity and the single-open portion of Tag 09YQ. Binary assembly is proved in Lean using additivity of colim and finite biproducts."
  },
  "mathlib_searches": [
   {
@@ -153,12 +143,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "H2",
   "result": "pass",
-  "landing": "20261012T214708-L-1270623",
+  "landing": "20261013T004024-L-2491144",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
