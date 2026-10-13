@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineDerivedPushforwardConservative
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
 
 /-! # Affine pullback of a perfect generator
 
@@ -38,15 +37,18 @@ Source: Stacks Project, Tag 0BQT (blueprint: lem-pc-perfect-generator-pullback).
 
 Proof:
 1. By `lem-pc-derived-pullback-tensor-qcoh`, derived pullback preserves quasi-coherent
-cohomology. The adjunction `lem-pc-ringed-spaces-derived-adjoint-general` restricts to
-quasi-coherent derived categories: `lem-sc-finite-affine-derived-equivalence` ensures
-that affine derived pushforward preserves quasi-coherent cohomology. Thus shifted Hom
-from the pullback of M to E agrees with shifted Hom from M to the derived pushforward of E.
-2. If all the former Hom groups vanish, so do the latter. The generator hypothesis on M,
-namely the zero-detection criterion of `def-pc-generators`, gives Rg_*E = 0.
+cohomology. The adjunction `lem-pc-ringed-spaces-derived-adjoint` applies to the chosen
+scheme functors. The comparison in `lem-sc-finite-affine-derived-equivalence` transports
+quasi-coherence to the derived pushforward of E. The shift compatibility supplied by
+`def-pc-derived-pullback` and the adjunction identify Hom from the shifted pullback of M
+to E with Hom from the shifted M to the derived pushforward of E.
+2. If all the former Hom groups are subsingletons, so are the latter. The hypothesis
+`hgen` gives that the derived pushforward of E is zero.
 3. By `lem-sc-affine-derived-pushforward-conservative`, affine derived pushforward reflects
-isomorphisms. Apply this to 0 → E to deduce E = 0. Conversely, Hom into a zero object
-vanishes. This is precisely the generator criterion on the source. -/
+isomorphisms between quasi-coherent objects. The zero endomorphism of E becomes an
+isomorphism because its image has zero source and target. Thus it is itself invertible,
+forcing the identity of E to be zero. Conversely, Hom into a zero object is subsingleton.
+This is precisely the generator criterion on the source. -/
 theorem perfect_generator_pullback {X X' : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X'] [QuasiSeparatedSpace X']
@@ -62,6 +64,44 @@ theorem perfect_generator_pullback {X X' : Scheme.{u}}
       ∀ E : schemeDerivedQCohCategory X',
         IsZero E.obj ↔ ∀ n : ℤ,
           Subsingleton (((derivedPullback g).obj M.obj)⟦n⟧ ⟶ E.obj) := by
-  sorry
+  classical
+  have _ := hperfect
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, ⟨cs, ht⟩, _⟩ :=
+    Classical.choose_spec (exists_derivedPullback g)
+  let : (derivedPullback g).CommShift ℤ := cs
+  obtain ⟨adj⟩ := nonempty_derivedPullbackAdjunction g
+  constructor
+  · exact (derivedPullback_tensor_preserve_QCoh g).1 M.obj M.property
+  · intro E
+    constructor
+    · intro hE n
+      exact ⟨fun a b ↦ hE.eq_of_tgt a b⟩
+    · intro hE
+      let : HasDerivedCategory
+          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace g))) :=
+        HasDerivedCategory.standard _
+      obtain ⟨Φ, _, S, _, ⟨eΦ⟩⟩ := finite_affine_derived_equivalence g
+      have hRq : schemeDerivedQCohProperty X ((schemeDerivedDirectImage g).obj E.obj) := by
+        intro n
+        exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+          ((DerivedCategory.homologyFunctor _ n).mapIso (eΦ.app E))
+          ((S.obj (Φ.functor.obj E)).property n)
+      have hR : IsZero ((schemeDerivedDirectImage g).obj E.obj) := by
+        apply (hgen ⟨_, hRq⟩).mpr
+        intro n
+        let e := ((derivedPullback g).commShiftIso n).app M.obj
+        let h := (Iso.homCongr e.symm (Iso.refl E.obj)).trans
+          (adj.homEquiv (M.obj⟦n⟧) E.obj)
+        let : Subsingleton ((derivedPullback g ⋙
+            shiftFunctor (schemeDerivedCategory X') n).obj M.obj ⟶ E.obj) := hE n
+        exact h.symm.subsingleton
+      have : IsIso ((schemeDerivedDirectImage g).map (0 : E.obj ⟶ E.obj)) :=
+        hR.isIso hR _
+      have : IsIso (0 : E.obj ⟶ E.obj) :=
+        schemeDerivedDirectImage_isIso_of_affine g E.property E.property (0 : E.obj ⟶ E.obj)
+      apply (IsZero.iff_id_eq_zero E.obj).mpr
+      have h := IsIso.hom_inv_id (0 : E.obj ⟶ E.obj)
+      rw [zero_comp] at h
+      exact h.symm
 
 end AlgebraicGeometry

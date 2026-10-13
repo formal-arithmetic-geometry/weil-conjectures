@@ -30,53 +30,43 @@
  ],
  "proof": [
   {
-   "text": "Since M is an object of D_QCoh(X), its derived pullback Lg^*M lies in D_QCoh(X') [lem-pc-derived-pullback-tensor-qcoh], so Lg^*M is an object of the category for which the generator property is asserted. Because g is affine, the derived pullback/direct-image adjunction [lem-pc-ringed-spaces-derived-adjoint-general] restricts to the quasi-coherent derived categories (both are full subcategories of D(O_{X'}) and D(O_X)), with natural bijections Hom(Lg^*M[n], E) = Hom(M[n], Rg_*E) for E in D_QCoh(X'). The restriction is legitimate because the affine derived equivalence [lem-sc-finite-affine-derived-equivalence] identifies Rg_* with the restriction of the quasi-coherent equivalence and hence sends D_QCoh(X') to D_QCoh(X).",
+   "text": "Derived pullback preserves quasi-coherent cohomology by the stated tensor/pullback preservation lemma. The chosen derived pullback has a derived adjunction with derived direct image by nonempty_derivedPullbackAdjunction. The finite affine derived equivalence provides an object of D_QCoh(X) isomorphic to Rg_*E, so transport quasi-coherence along the induced cohomology isomorphisms.",
    "uses": [
     "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-finite-affine-derived-equivalence"
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-sc-finite-affine-derived-equivalence",
+    "def-pc-derived-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BQT, perfect-remark-pullback-generator, using the affine derived adjunction of Tag 079W"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume that Hom(Lg^*M[n], E)=0 for every integer n. By Step 1, Hom(M[n], Rg_*E)=0 for every n. Since M is a generator, the definition [def-pc-generators] implies Rg_*E=0: otherwise a nonzero shift of Rg_*E would admit a nonzero map from M.",
+   "text": "For an object E whose shifted Hom groups from the pulled-back M are all subsingletons, the adjunction and the commutation of derived pullback with shifts identify each corresponding Hom group from M to Rg_*E as subsingleton. The generator criterion hgen therefore gives Rg_*E is zero. The required shift compatibility is extracted from the chosen derived-pullback construction exists_derivedPullback.",
    "uses": [
-    "def-pc-generators"
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BQT, perfect-remark-pullback-generator, generator test"
-   }
+   "elementary": false
   },
   {
-   "text": "The morphism g is affine, so derived direct image is conservative by [lem-sc-affine-derived-pushforward-conservative]. Applied to the morphism 0\\to E, whose image Rg_*(0)\\to Rg_*E=0 is an isomorphism, this gives E=0. Therefore every object E detected by all shifted Hom groups from Lg^*M is zero, which is exactly that Lg^*M is a generator of D_QCoh(X') by [def-pc-generators].",
+   "text": "Affine derived pushforward reflects isomorphisms by the affine conservativity lemma. Applying this to the zero endomorphism of E shows the identity of E is zero, hence E is zero. The converse follows from uniqueness of morphisms to a zero object.",
    "uses": [
-    "lem-sc-affine-derived-pushforward-conservative",
-    "def-pc-generators"
+    "lem-sc-affine-derived-pushforward-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BQT, perfect-remark-pullback-generator, affine conservativity conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-ringed-spaces-derived-adjoint",
   "lem-sc-finite-affine-derived-equivalence",
-  "def-pc-generators",
+  "def-pc-derived-pullback",
   "lem-sc-affine-derived-pushforward-conservative"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0BQT, perfect-remark-pullback-generator"
+  "place": "Tag 0BQT, affine pullback of a perfect generator; formalized using derived adjunction and affine conservativity",
+  "group": "T4"
  },
  "mathlib_searches": [
   {
@@ -158,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T024049-L-3339564",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
