@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-split-top-differential-cancellation-properties",
+ "kind": "statement",
+ "title": "Flat quasi-coherent finite-presentation sheaves are closed under retracts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $M,N$ be $\\mathcal O_S$-modules [def-weil-sheaf-of-modules-category]. Suppose there are maps $i:M\\to N$ and $r:N\\to M$ with $r\\circ i=\\mathrm{id}_M$. If $N$ is flat over $\\mathrm{id}_S$ [def-pc-scheme-module-flat-over], quasi-coherent [pqf-def-coherent], and of finite presentation [lem-weil-pbc-quasi-coherent-finite-type-affine], then $M$ has all three properties.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01PC and 00NX; direct summands via Mathlib Module.Projective.of_split and Module.Flat.of_retract"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme-module-flat-over",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "proof": [
+  {
+   "text": "Identify M with the kernel of id_N - i∘r. The kernel theorem makes M quasi-coherent. On every affine pair U⊆V, apply the section-evaluation functor followed by restriction of scalars to the retraction; Module.Flat.of_retract transfers flatness over Γ(S,V).",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine finite-presentation criterion gives finite presentation of sections of N. At U=V its flatness and Module.Flat.projective_of_finitePresentation make these finite projective. Module.Projective.of_split transfers projectivity to sections of M; the surjective section retraction transfers finite generation. Module.finitePresentation_of_projective gives finite presentation of sections of M. Apply the affine criterion and locality on the cover by all affine opens.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01PC and 00NX; direct summands via Mathlib Module.Projective.of_split and Module.Flat.of_retract"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex with split epimorphism top differential is homotopy equivalent to a shorter complex whose terms are retracts of the original terms",
+   "results": "8 hits: CochainComplex.cm5b.homotopyEquiv, HomologicalComplex.homotopyCofiber.descEquiv, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId, CochainComplex.mappingCone.homotopyToZeroOfId, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, HomologicalComplex.homotopyCofiber.XIso",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "(homotopy.*truncLE|truncLE.*homotopy|of_retract)",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/Instances.lean, Mathlib/AlgebraicTopology/ModelCategory/Basic.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi-coherence finite presentation and flatness of a sheaf of modules are preserved by retracts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Retract",
+   "results": "12 hits: CategoryTheory.Retract, CategoryTheory.Retract.refl, CategoryTheory.Iso.retract, CategoryTheory.Retract.ofIso, CategoryTheory.Retract.i, CategoryTheory.Retract.r, CategoryTheory.Retract.instIsSplitEpiR, CategoryTheory.Retract.instIsSplitMonoI",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellation",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence proof part (a): top cohomology commutes with base change, so Nakayama permits shortening the bounded affine flat model degree by degree.",
+   "via": [
+    "lem-pc-split-top-differential-cancellation",
+    "lem-pc-affine-finite-presentation-flat-shortening-construction",
+    "lem-pc-affine-finite-presentation-flat-shortening",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTopDifferentialCancellationProperties.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.split_top_differential_cancellation_properties",
+  "statement": "theorem split_top_differential_cancellation_properties (S : Scheme.{u}) (M N : S.Modules) (h : Retract M N) (hflat : N.IsFlatOver (𝟙 S)) (hqc : N.IsQuasicoherent) (hfp : N.IsFinitePresentation) : M.IsFlatOver (𝟙 S) ∧ M.IsQuasicoherent ∧ M.IsFinitePresentation",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T005855-L-2606492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T005855-L-2606492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-split-top-differential-cancellation-homotopy",
+ "kind": "statement",
+ "title": "Canonical split top cancellation homotopy",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $B$ an integer-indexed cochain complex of $\\mathcal O_S$-modules [def-pc-cochain-complex-modules]. For $m\\in\\mathbb N$, suppose $B$ is supported in degrees at most $m+1$ and its differential $\\delta:B^m\\to B^{m+1}$ has a right inverse. The canonical truncation $\\tau_{\\le m}B$ (cycles in degree $m$, the original terms below $m$, and zero terms above $m$) is chain homotopy equivalent to $B$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 068V and 00MT; explicit categorical split identity-pair cancellation expanding the planned argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Take the canonical truncation at m. For a section σ of δ, the endomorphism id - σ∘δ factors through the cycles. This gives the inverse of the canonical inclusion, identity below m and zero above m. The differential-square equation proves the chain-map identities and the kernel equation gives inverse composed with inclusion equal to identity.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-minus-one family consisting of σ from m+1 to m and zero elsewhere contracts the complementary identity pair. Its boundary is σ∘δ in degree m, δ∘σ=id in degree m+1, and zero elsewhere. Above m+1 use the assumed zero terms. This proves the other inverse identity up to homotopy and constructs HomotopyEquiv.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 068V and 00MT; explicit categorical split identity-pair cancellation expanding the planned argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex with split epimorphism top differential is homotopy equivalent to a shorter complex whose terms are retracts of the original terms",
+   "results": "8 hits: CochainComplex.cm5b.homotopyEquiv, HomologicalComplex.homotopyCofiber.descEquiv, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId, CochainComplex.mappingCone.homotopyToZeroOfId, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, HomologicalComplex.homotopyCofiber.XIso",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "(homotopy.*truncLE|truncLE.*homotopy|of_retract)",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/Instances.lean, Mathlib/AlgebraicTopology/ModelCategory/Basic.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/LinearAlgebra/Basis/Exact.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi-coherence finite presentation and flatness of a sheaf of modules are preserved by retracts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Retract",
+   "results": "12 hits: CategoryTheory.Retract, CategoryTheory.Retract.refl, CategoryTheory.Iso.retract, CategoryTheory.Retract.ofIso, CategoryTheory.Retract.i, CategoryTheory.Retract.r, CategoryTheory.Retract.instIsSplitEpiR, CategoryTheory.Retract.instIsSplitMonoI",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellation",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence proof part (a): top cohomology commutes with base change, so Nakayama permits shortening the bounded affine flat model degree by degree.",
+   "via": [
+    "lem-pc-split-top-differential-cancellation",
+    "lem-pc-affine-finite-presentation-flat-shortening-construction",
+    "lem-pc-affine-finite-presentation-flat-shortening",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationHomotopy",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTopDifferentialCancellationHomotopy.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.split_top_differential_cancellation_homotopy",
+  "statement": "theorem split_top_differential_cancellation_homotopy (S : Scheme.{u}) (B : CochainComplex S.Modules ℤ) (m : ℕ) (hBle : B.IsStrictlyLE (m + 1 : ℕ)) (hsplit : IsSplitEpi (B.d (m : ℤ) (m + 1 : ℕ))) : Nonempty (HomotopyEquiv (B.truncLE m) B)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T005855-L-2606492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T005855-L-2606492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

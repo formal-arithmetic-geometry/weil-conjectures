@@ -17,37 +17,27 @@
  ],
  "proof": [
   {
-   "text": "Write δ = B.d m (m+1) and choose σ with δ ∘ σ = id. Construct D with ker δ in degree m, B.X j in degrees j < m, and zero above m. Factor the incoming differential into ker δ by the consecutive-differential equation. This gives a complex with support in [0,m]. Define inclusion i:D→B by kernel inclusion in degree m and identities below; define r:B→D using the factorization of id - σ ∘ δ into ker δ in degree m, identities below, and zero above.",
-   "uses": [
-    "def-pc-cochain-complex-modules"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Check i and r commute with each differential. At degree m-1 the equality follows from δ ∘ d = 0; at degree m it follows from the defining kernel equation and δ ∘ σ = id. All other equations are identities or maps involving zero objects. The composite r ∘ i is id_D. The degree-minus-one map equal to σ from degree m+1 to m and zero elsewhere has boundary id_B - i ∘ r: at degree m this is σ ∘ δ, at degree m+1 it is δ ∘ σ = id, and elsewhere it is zero. This gives a chain homotopy equivalence D→B, with inverse r.",
+   "text": "Use the actual canonical truncation D=B.truncLE m. It has the required two support bounds. In every degree construct a retract of B.X n: below m use truncLEXIso, at m use the split projection id - δ≫section δ to cycles and truncLEXIsoCycles, above m use the zero object.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "The changed term ker δ is quasi-coherent by the quasi-coherent kernel theorem. On each affine open its sections are a retract of the sections of B.X m, since id - σ ∘ δ factors through the kernel. Sections of B.X m are finite projective by the affine finite-presentation criterion and flatness over the identity. Retracts remain finite projective, hence finitely presented. The affine criterion gives finite presentation of the kernel sheaf. For flatness over id_S, evaluate the same retraction on every affine pair U⊆V in its defining condition and use Module.Flat.of_retract over Γ(S,V). The unchanged and zero terms have all three properties. Natural m ensures no negative-degree term is introduced, including m = 0.",
+   "text": "Apply the proved sheaf-retract properties theorem to every degree. Assemble its flatness, quasi-coherence and finite-presentation conclusions with the support bounds and the canonical truncation homotopy theorem.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
+    "lem-pc-split-top-differential-cancellation-properties",
+    "lem-pc-split-top-differential-cancellation-homotopy"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-quasi-coherent-module-kernel"
+  "lem-pc-split-top-differential-cancellation-properties",
+  "lem-pc-split-top-differential-cancellation-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 068V, 068U, 00NX and 00MT; explicit finite-projective split cancellation argument, expanded by F2"
+  "place": "Tags 068V and 00MT, explicit split cancellation using Mathlib canonical truncation; D4"
  },
  "mathlib_searches": [
   {
@@ -117,12 +107,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261012T225307-L-1804315",
+  "landing": "20261013T005855-L-2606492",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
