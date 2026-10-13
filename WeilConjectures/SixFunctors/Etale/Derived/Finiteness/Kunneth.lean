@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
@@ -114,9 +115,9 @@ omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 
 `Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`.
 
-It is the projection formula for `Rf_!` at finite coefficients
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`), transported along `Rf_! ≅ Rf_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
+The isomorphism is the projection map `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`,
+an isomorphism by `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_isProper`
+(`lem-kun-0f0g`); the invertibility of the exponent of `Λ` is not needed. -/
 theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ Y) [IsProper f]
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -124,12 +125,9 @@ theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ 
           ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E)).obj L ≅
       (R((f)_*[ModuleCat.{u + 1} Λ])).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) := by
-  obtain ⟨e⟩ := nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f E
-    (hasProjectionFormula_of_finite Λ f E)
-  let φ := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f
-  exact ⟨((derivedTensor (ModuleCat.{u + 1} Λ) Y).mapIso (φ.app E).symm).app L ≪≫ e.app L ≪≫
-    φ.app _⟩
+          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
+  have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ isAddTorsion_of_finite f
+  ⟨asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app E).app L)⟩
 
 end Kunneth
 
