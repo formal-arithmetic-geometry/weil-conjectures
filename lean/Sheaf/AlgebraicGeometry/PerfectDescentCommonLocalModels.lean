@@ -9,10 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectDescentOnOpen
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel
 
 /-! # Two local perfect models at a common stage
 
@@ -22,10 +19,13 @@ Source: Stacks Project, Tag 09RF, the choice of E_{U,i} and E_{V,i}.
 
 @[expose] public section
 
+
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 1000000 in
+-- Elaborating the two dependent stage-model families exceeds the default heartbeat budget.
 /-- Descend the two restrictions separately and move them to a common stage.
 This supplies no overlap isomorphism and no map into a derived direct image.
 Source: Stacks Project, Tag 09RF, first sentence of the two-open induction.
@@ -77,6 +77,46 @@ theorem perfect_descent_common_local_models
         Nonempty ((derivedPullback (g ∣_ U)).obj A ≅
           (schemeOpenRestriction X (g ⁻¹ᵁ U)).mapDerivedCategory.obj E) ∧
         Nonempty ((derivedPullback (g ∣_ V)).obj B ≅
-          (schemeOpenRestriction X (g ⁻¹ᵁ V)).mapDerivedCategory.obj E) := by sorry
+          (schemeOpenRestriction X (g ⁻¹ᵁ V)).mapDerivedCategory.obj E) := by
+  have hrange : IsCompact (Set.range f) := by
+    change IsCompact (f.opensRange : Set Xi)
+    rw [hf]
+    exact hW.union hV.isCompact
+  let : CompactSpace Z := by
+    rw [← isCompact_univ_iff]
+    apply f.isOpenEmbedding.isEmbedding.isCompact_iff.mpr
+    simpa only [Set.image_univ] using hrange
+  let : QuasiSeparatedSpace Xi := quasiSeparatedSpace_of_quasiSeparated s
+  let : QuasiCompact f := quasiCompact_of_compactSpace f
+  have hWr : W ≤ f.opensRange := by rw [hf]; exact le_sup_left
+  have hVr : V ≤ f.opensRange := by rw [hf]; exact le_sup_right
+  have stepW := perfect_descent_open_eventual_model.{u, w}
+    (R := R) (c := c) (i := i) (Xi := Xi) (s := s)
+    (W := W) (dW := dW) (Z := Z) (f := f) (hW := hWr) (E := E) (hE := hE)
+  have stepV := perfect_descent_open_eventual_model.{u, w}
+    (R := R) (c := c) (i := i) (Xi := Xi) (s := s)
+    (W := V) (dW := dV) (Z := Z) (f := f) (hW := hVr) (E := E) (hE := hE)
+  obtain ⟨jW, hiW, mW⟩ := stepW
+  obtain ⟨jV, hiV, mV⟩ := stepV
+  obtain ⟨k, hWk, hVk⟩ := IsDirected.directed (r := (· ≤ ·)) jW jV
+  let hik := hiW.trans hWk
+  let Y := pullback (f ≫ s) (Spec.map (R.map (homOfLE hik)))
+  let p : Y ⟶ Z := pullback.fst (f ≫ s) (Spec.map (R.map (homOfLE hik)))
+  let U := (p ≫ f) ⁻¹ᵁ W
+  let V' := (p ≫ f) ⁻¹ᵁ V
+  have hcover : U ⊔ V' = ⊤ := by
+    dsimp only [U, V']
+    rw [← Scheme.Hom.preimage_sup, hf.symm, Scheme.Hom.comp_preimage]
+    simp only [Scheme.Hom.preimage_opensRange, Scheme.Hom.preimage_top]
+  have hU : IsCompact (U : Set Y) := by
+    exact (p ≫ f).isCompact_preimage hW
+  have hV' : IsCompact (V' : Set Y) := by
+    exact (p ≫ f).isCompact_preimage hV.isCompact
+  refine ⟨k, hik, U, V', hcover, hU, hV', ?_⟩
+  have dataW := mW k hWk
+  have dataV := mV k hVk
+  obtain ⟨A, hA, eA⟩ := dataW
+  obtain ⟨B, hB, eB⟩ := dataV
+  exact ⟨A, B, hA, hB, eA, eB⟩
 
 end AlgebraicGeometry

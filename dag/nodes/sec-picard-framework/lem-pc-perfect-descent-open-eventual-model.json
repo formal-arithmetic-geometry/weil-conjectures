@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-perfect-descent-open-eventual-model",
+ "kind": "statement",
+ "title": "One-open perfect descent with models at all later stages",
+ "statement": "Let I be a directed preorder, R : I → CommRingCat a system of Noetherian rings, c a cocone, i an index, Xi a scheme and s : Xi → Spec R_i locally of finite presentation, quasi-compact and quasi-separated. Choose the shared derived categories [def-pc-derived-category]. Let W be an open of Xi with PerfectDescentOnOpen R c i Xi s W [def-pc-perfect-descent-on-open]. Let f : Z → Xi be an open immersion with W contained in its image and let E be perfect on X = Z times over Spec R_i Spec c.pt [def-pc-perfect-complex]. There exist j >= i such that for every k >= j, writing Y_k = Z times over Spec R_i Spec R_k, g_k : X → Y_k for the cocone base-change map, and U_k for the inverse image of W under Y_k → Z → Xi, a perfect object A_k on U_k has L(g_k restricted to U_k)* A_k isomorphic to the canonical exact open restriction of E to g_k inverse U_k [def-pc-derived-open-restriction-maps]. The statement has only one open and does not assert a cover or compactness.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Lemma 36.29.3, two-open induction: choose each local stage model and increase the index"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-descent-on-open",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Put O = f inverse W. The composite O.ι followed by f is an open immersion with image W: its image is f.opensRange intersect W, and W is contained in f.opensRange. Form its limit base change and the canonical map q to the limit base change of Z. Pull E back along q. This object is perfect by preservation of perfectness. Apply the descent hypothesis on W to this presentation and this object, obtaining j >= i, a perfect stage object and its comparison.",
+   "uses": [
+    "def-pc-perfect-descent-on-open",
+    "lem-pc-derived-pullback-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any k >= j, the canonical transition map from the k base change of O to its j base change pulls back the descended object to a perfect object. Identify the k base change of O with the inverse image U of W along the k stage projection followed by f, using the cartesian restriction square. Transport the pulled object along this isomorphism. The cocone identity and functoriality of R identify the composite map from the limit with the original j stage map. The derived pullback composition comparison transports the original comparison. Compatibility of derived pullback with exact open restriction identifies pullback along q with E restricted to g inverse U. This gives the required displayed isomorphism at each k.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-descent-on-open",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "two-open induction, separate descent and enlargement of each stage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes descend on an open subscheme and can be pulled to every later stage",
+   "results": "AffineTransitionLimit results for global sections and affine opens; no derived perfect descent model transport",
+   "verdict": "No exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+   "results": "Scheme.Hom.isCompact_preimage",
+   "verdict": "Proves only compactness of inverse-image opens, not perfect-model descent",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect_descent|eventual.*perfect|PerfectDescentOnOpen",
+   "results": "Mathlib has unrelated meromorphic preperfect results; library grep finds the existing descent predicate and two-open descent chain, but no eventual one-open model transport",
+   "verdict": "No exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given perfect descent on an open, models of a perfect restriction exist at every sufficiently late stage",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true,
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescentCommonLocalModels",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF, separate descent and enlargement of the local models",
+   "via": [
+    "lem-pc-perfect-descent-common-local-models",
+    "lem-pc-perfect-descent-compatible-local-data",
+    "lem-pc-perfect-descent-open-union",
+    "lem-pc-perfect-complex-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDescentOpenEventualModel.lean",
+  "declaration": "AlgebraicGeometry.perfect_descent_open_eventual_model",
+  "statement": "theorem perfect_descent_open_eventual_model\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]\n    (c : Cocone R) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (W : Xi.Opens) (dW : PerfectDescentOnOpen R c i Xi s W)\n    (Z : Scheme.{u}) (f : Z ⟶ Xi) [IsOpenImmersion f] (hW : W ≤ f.opensRange)\n    (E : schemeDerivedCategory (pullback (f ≫ s) (Spec.map (c.ι.app i))))\n    (hE : (pullback (f ≫ s) (Spec.map (c.ι.app i))).IsPerfect E) :\n    ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k),\n      let X := pullback (f ≫ s) (Spec.map (c.ι.app i))\n      let g := baseChangeMap (f ≫ s)\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app k))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))]))\n      let U := (pullback.fst (f ≫ s)\n        (Spec.map (R.map (homOfLE (hij.trans hjk)))) ≫ f) ⁻¹ᵁ W\n      ∃ A : schemeDerivedCategory U.toScheme, U.toScheme.IsPerfect A ∧\n        Nonempty ((derivedPullback (g ∣_ U)).obj A ≅\n          (schemeOpenRestriction X (g ⁻¹ᵁ U)).mapDerivedCategory.obj E)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
