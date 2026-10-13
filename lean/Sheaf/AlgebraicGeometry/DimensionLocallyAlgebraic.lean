@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import Sheaf.Topology.DimensionSupremumLocalDimensions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
@@ -59,6 +58,33 @@ theorem dimension_locally_algebraic {k : Type u} [Field k] (X : Scheme.{u})
     (∀ U : X.Opens, (U : Set X).Nonempty →
       topologicalKrullDim (U : Set X) = topologicalKrullDim X) ∧
     (∀ x : X, topologicalKrullDimAt x = topologicalKrullDim X) := by
-  sorry
+  have hred := reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism X
+  let i := X.nilradical.subschemeι
+  have hi : IsHomeomorph i :=
+    isHomeomorph_iff_isEmbedding_surjective.mpr ⟨i.isEmbedding, hred.2.2.1.1⟩
+  let e := hi.homeomorph i
+  have : IrreducibleSpace X.nilradical.subscheme := e.irreducibleSpace_iff.mpr inferInstance
+  have : IsReduced X.nilradical.subscheme := hred.1
+  have : IsIntegral X.nilradical.subscheme :=
+    (isIntegral_iff_irreducibleSpace_and_isReduced _).mpr ⟨inferInstance, inferInstance⟩
+  have hdim : topologicalKrullDim X.nilradical.subscheme = topologicalKrullDim X :=
+    hi.topologicalKrullDim_eq i
+  have hopen (U : X.Opens) (hU : (U : Set X).Nonempty) :
+      topologicalKrullDim (U : Set X) = topologicalKrullDim X := by
+    let V : X.nilradical.subscheme.Opens := U.comap ⟨i, i.continuous⟩
+    have : Nonempty V := by
+      obtain ⟨x, hx⟩ := hU
+      obtain ⟨y, hy⟩ := hi.surjective x
+      exact ⟨⟨y, by change i y ∈ U; rw [hy]; exact hx⟩⟩
+    have he : topologicalKrullDim (V : Set X.nilradical.subscheme) =
+        topologicalKrullDim (U : Set X) :=
+      (e.subtype (p := fun y ↦ y ∈ V) (q := fun x ↦ x ∈ U)
+        (fun _ ↦ Iff.rfl)).isHomeomorph.topologicalKrullDim_eq _
+    rw [← he, ← hdim]
+    exact topologicalKrullDim_opens_eq (i ≫ (X ↘ Spec (.of k))) V
+  refine ⟨hopen, fun x ↦ ?_⟩
+  apply topologicalKrullDimAt_eq_of_forall
+  intro U hx
+  exact hopen U ⟨x, hx⟩
 
 end AlgebraicGeometry

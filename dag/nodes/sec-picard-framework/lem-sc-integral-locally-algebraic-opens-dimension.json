@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-integral-locally-algebraic-opens-dimension",
+ "kind": "statement",
+ "title": "Nonempty opens of an integral locally algebraic scheme have its dimension",
+ "statement": "Let $k$ be a field and $X$ an integral scheme [def-pc-integral-scheme] with a locally finite type morphism $f:X\\to\\operatorname{Spec}k$ [def-weil-finite-type-morphism]. For every nonempty open $U\\subseteq X$, one has $\\dim U=\\dim X$, where the dimension is topological Krull dimension [def-kun-topological-krull-dimension] and $U$ has the subspace topology [def-kun-subspace-topology].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0A21 (lemma-dimension-locally-algebraic), proof of part (3); existing proved implementation: WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, lines 140-161, topologicalKrullDim_opens_eq"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonempty affine open V inside U by [lem-weil-pbc-affine-opens-basis]. Every nonempty affine open W has the same dimension as V by [lem-sc-integral-locally-algebraic-affine-opens-dimension]. The nonempty affine opens cover X. Every finite chain of irreducible closed subsets meets a member of that cover in its smallest term, and restriction preserves its strict inclusions. Thus the definition [def-kun-topological-krull-dimension] gives dim X <= dim V. The inclusion V subset U gives dim V <= dim U, and U subset X gives dim U <= dim X by [lem-weil-pbc-open-subspace-dimension-monotone]. Hence dim U = dim X. This is the complete already-proved source declaration topologicalKrullDim_opens_eq; no new Lean theorem or proof hole is introduced.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-integral-locally-algebraic-affine-opens-dimension",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-integral-locally-algebraic-affine-opens-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-open-subspace-dimension-monotone"
+ ],
+ "proof_origin": {
+  "kind": "existing Lean proof",
+  "by": "U2",
+  "date": "2026-10-13",
+  "note": "Statement and complete proof read in the adopted source module; attached rather than restated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonempty open subset of an integral scheme locally of finite type over a field has same Krull dimension",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible scheme locally of finite type over a field has the same dimension as every nonempty open subset",
+   "results": "Eight Mathlib hits, including isIntegral_iff_irreducibleSpace_and_isReduced, but no open dimension theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim",
+   "results": "Seven hits including IsHomeomorph.topologicalKrullDim_eq and subspace monotonicity; no algebraic geometry open equality.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim_opens_eq|IsAffineOpen.topologicalKrullDim_eq_of_isIntegral",
+   "results": "msearch grep returned zero Mathlib hits. Direct rg in lean/WeilConjectures and the source checkout found AlgebraicGeometry.topologicalKrullDim_opens_eq in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType, lines 140-161; statement and complete proof read.",
+   "verdict": "existing source theorem",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic",
+  "group": "U2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-jacobian-representability",
+   "place": "proof step (4), the dimension calculation for irreducible locally algebraic schemes, via the proof of lem-sc-dimension-locally-algebraic steps 2-5",
+   "via": [
+    "lem-sc-dimension-locally-algebraic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_opens_eq",
+  "statement": "theorem topologicalKrullDim_opens_eq {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [IsIntegral X] (U : X.Opens) [Nonempty U] : topologicalKrullDim (U : Set X) = topologicalKrullDim X",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T152020-L-954541",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T152020-L-954541",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
