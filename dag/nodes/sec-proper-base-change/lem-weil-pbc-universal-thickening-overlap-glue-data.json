@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-universal-thickening-overlap-glue-data",
+ "kind": "statement",
+ "title": "Local overlap and cocycle data for universal first order thickenings",
+ "statement": "Let $h:Z\\to X$ be a scheme morphism [def-weil-pbc-scheme-conventions], let $C$ be a universe-small open cover of $Z$ [def-weil-open-immersion], and for every $k\\in C.I_0$ let $i_k:C_k\\to Z'_k$ and $h'_k:Z'_k\\to X$ be a universal first order thickening of $h\\circ C.f_k$ [def-weil-pbc-universal-first-order-thickening]. There exist scheme glue data $D=(J,U,V,f,t,t')$ as in [lem-weil-pbc-glue-schemes], an equivalence $a:C.I_0\\simeq J$, and isomorphisms $b_k:Z'_k\\simeq U_{a(k)}$ with the following properties. For all $k,l$, $f_{a(k),a(l)}$ followed by $b_k^{-1}$ and $h'_k$ equals $t_{a(k),a(l)}$ followed by $f_{a(l),a(k)}$, $b_l^{-1}$ and $h'_l$. For all $k,l$ there is a morphism $s_{kl}:C_k\\times_Z C_l\\to V_{a(k),a(l)}$ [def-pc-fibre-product] such that $s_{kl}$ followed by $f_{a(k),a(l)}$ equals the first projection followed by $i_k,b_k$, and $s_{kl}$ followed by $t_{a(k),a(l)},f_{a(l),a(k)}$ equals the second projection followed by $i_l,b_l$. Finally for each $z\\in C_l$, $b_l(i_l(z))$ lies in the image of $f_{a(l),a(k)}$ if and only if $C.f_l(z)$ lies in the image of $C.f_k$. No glued scheme or covering maps into one are asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-glue-schemes"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+ },
+ "proof": [
+  {
+   "text": "For each pair k,l, take the source open (C.f k) inverse image of the range of C.f l. The unique open of the thickened chart with this inverse image exists by the open-pieces theorem. Over the whole base X its restriction is a universal first order thickening. The pullback of C.f k and C.f l is canonically isomorphic to this source open, so transport the restricted immersion and its universal property along this isomorphism. Use this open subscheme as V(k,l) and its inclusion as f(k,l). Its defining inverse-image equality gives the final pointwise clause.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+   }
+  },
+  {
+   "text": "Identify the source of V(l,k) with the same source pullback via pullback symmetry. Universal uniqueness gives an isomorphism t(k,l):V(k,l) to V(l,k), extending the identity of that source and commuting with the maps to X. These two commutative equations give the base equation and the two factorizations of the source map s. On the diagonal the overlap is the whole chart and uniqueness gives t(k,k)=identity; thus f(k,k) is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+   }
+  },
+  {
+   "text": "A point of V(k,l) lying also in the overlap with m has the same source point as its image under t(k,l), because every thickening is a homeomorphism and t fixes its source. Hence t restricts to the triple overlaps, giving t prime(k,l,m) from V(k,l) times over U(k) V(k,m) to V(l,m) times over U(l) V(l,k), and its second projection is the first projection followed by t(k,l). The restricted thickenings of the source triple intersection remain universal by the open-pieces theorem. The threefold composite of t prime and the identity are both maps over X extending its identity, so universal uniqueness equates them. These are exactly the factorization and cocycle fields of Scheme.GlueData. Set J=C.I0 and U(k)=Z prime(k); then a and b may be identities. The empty index type has empty glue data and all clauses are vacuous.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-glue-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universal-thickening-open-pieces",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-glue-schemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct scheme overlap gluing data from universal first order thickenings of an open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue schemes along open overlaps and characterize the intersection of two glued chart images",
+   "results": "Scheme.GlueData.ι_eq_iff, Scheme.GlueData.Rel, Scheme.GlueData.openCover_f and TopCat.GlueData.image_inter. These describe gluing from supplied overlaps; none constructs overlaps from universal thickenings. Read Mathlib/AlgebraicGeometry/Gluing.lean, GlueData and its pullback and pointwise APIs.",
+   "date": "2026-10-13",
+   "verdict": "no exact construction match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.GlueData",
+   "results": "unknown identifier Scheme.GlueData; zero hits",
+   "date": "2026-10-13",
+   "verdict": "unavailable for this identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData|thickening.*glue",
+   "results": "Mathlib gluing and relative gluing implementations; no universal-thickening overlap construction. Library rg found only the assigned theorem, its downstream consumers, the open-pieces theorem and universal uniqueness.",
+   "date": "2026-10-13",
+   "verdict": "no independent construction match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalThickeningCartesianAtlasCore",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential surjectivity: the canonical overlap isomorphisms and cocycle verification of the universal-thickening construction in Stacks 04F3; steps 1 and 2 of the cartesian atlas core.",
+   "via": [
+    "lem-weil-pbc-universal-thickening-cartesian-atlas-core",
+    "lem-weil-pbc-universal-thickening-cartesian-atlas",
+    "lem-weil-pbc-universal-first-order-thickening-glued-atlas",
+    "lem-weil-pbc-universal-first-order-thickening-affine-local",
+    "lem-weil-pbc-universal-first-order-thickening-exists-existence",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningOverlapGlueData",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningOverlapGlueData.lean",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_overlapGlueData",
+  "statement": "theorem universalFirstOrderThickening_overlapGlueData\n    {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})\n    (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)\n    (h' : ∀ k, Z' k ⟶ X)\n    (H : ∀ k, IsUniversalFirstOrderThickening (C.f k ≫ h) (i k) (h' k)) :\n    ∃ (D : Scheme.GlueData.{u}) (a : C.I₀ ≃ D.J)\n      (b : ∀ k, Z' k ≅ D.U (a k)),\n      (∀ k l, D.f (a k) (a l) ≫ (b k).inv ≫ h' k =\n        D.t (a k) (a l) ≫ D.f (a l) (a k) ≫ (b l).inv ≫ h' l) ∧\n      (∀ k l, ∃ s : pullback (C.f k) (C.f l) ⟶ D.V (a k, a l),\n        s ≫ D.f (a k) (a l) = pullback.fst _ _ ≫ i k ≫ (b k).hom ∧\n        s ≫ D.t (a k) (a l) ≫ D.f (a l) (a k) =\n          pullback.snd _ _ ≫ i l ≫ (b l).hom) ∧\n      ∀ k l (z : C.X l),\n        (b l).hom (i l z) ∈ Set.range (D.f (a l) (a k)) ↔\n          C.f l z ∈ Set.range (C.f k)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T072352-L-1120458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T072352-L-1120458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
