@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-picard-affine-structure-projective-model",
+ "kind": "statement",
+ "title": "PicardAffineStructureProjectiveModel",
+ "statement": "Given f:X→S flat proper locally finitely presented with universally isomorphic structure adjunction units, M an X-module, k:W→S and affine open U⊂W with M trivial after pullback to X×S U, there is a bounded complex P of finite projective R=Gamma(W,U)-modules representing the restricted R(f_W)_*(M_W[0]) under the explicit affine sheafification functor. For every commutative R-algebra B, B tensor P has zero negative homology and zeroth homology isomorphic to the free B-module B. Derived categories of scheme modules and localized-open modules are fixed as in [def-pc-derived-category]. No normalization of terms or differentials is asserted.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-affine-perfect-module-model",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BF2 (perfect base-change paragraph), 0B91, 08EB and 06Z0"
+ },
+ "proof": [
+  {
+   "text": "Use exact open restriction and base change to identify the restricted image with R(f_U)_* of the pulled-back M; use its given trivialization to replace M by O. O is finitely presented and relatively flat, so proper finite-presentation perfect direct-image base change applies.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport through the affine isoSpec and the localized-site over equivalence. The affine bounded-projective characterization gives P and its representation on the supplied U. Exact affine derived sheafification gives the stated derived comparison.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For R→B use Spec B→U→S. Perfect base change identifies scalar extension of P with the image of O on this further base change. A derived image of a sheaf in degree zero is connective. The universally isomorphic ordinary structure adjunction unit identifies its H0 with O_Spec B. The tilde/Gamma dictionary turns these into the displayed module homology conditions. This uses only the ordinary H0 identification of the flat-derived-structure-unit theorem, not its particular chosen arrow. The zero ring and empty affine have zero categories.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-flat-derived-structure-unit",
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-localized-derived-sheafification",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-flat-derived-structure-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0BF2 (perfect base-change paragraph), 0B91, 08EB and 06Z0; expansion of the original fixed-affine plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded projective complex universal rank one zeroth homology split degree zero",
+   "results": "Internal Server Error; search service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded projective complex universally connective rank one homology cancellation global",
+   "results": "Eight abstract projective-resolution, K-projectivity and Ext/Tor hits, no normalization statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; basic homological tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective|IsStrictlyGE.*projective|homology.*extendScalars",
+   "results": "LocalRing/Module.lean split-injection criterion; no complex normalization. Repository and blueprint searches find local models, no global normalization.",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Local residue split-injection tool is available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardAffineTargetNormalization",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2: affine projective representation before normalizing target complexes",
+   "via": [
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardAffineStructureProjectiveModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_affine_structure_projective_model",
+  "statement": "theorem picard_affine_structure_projective_model\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (M : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)\n    (U : W.Opens) (hU : IsAffineOpen U)\n    (htrivial : Nonempty\n      ((Modules.tensorPullback (pullback.fst f (U.ι ≫ k))).obj M ≅\n        SheafOfModules.unit (pullback f (U.ι ≫ k)).ringCatSheaf)) :\n    ∃ P : CochainComplex (ModuleCat.{v} (W.presheaf.obj (.op U))) ℤ,\n      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧\n      (∀ n : ℤ, Module.Finite (W.presheaf.obj (.op U)) (P.X n)) ∧\n      (∀ n : ℤ, Module.Projective (W.presheaf.obj (.op U)) (P.X n)) ∧\n      (∀ (B : Type v) [CommRing B] (φ : W.presheaf.obj (.op U) →+* B),\n        let PB := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P\n        (∀ i : ℤ, i < 0 → IsZero (PB.homology i)) ∧\n          Nonempty (PB.homology 0 ≅ ModuleCat.of B B)) ∧\n      Nonempty ((SheafOfModules.overFunctor.{v}\n        (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n            ((Modules.tensorPullback (pullback.fst f k)).obj M))) ≅\n        DerivedCategory.Q.obj\n          (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T151132-L-876547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T151132-L-876547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -25,26 +25,23 @@
  },
  "proof": [
   {
-   "text": "Use the trivialization and open base-change compatibility to identify the restricted image with R(f_U)_*O. Perfect base change makes it perfect and universally connective. Transfer to modules on the affine and obtain a bounded finite projective representative.",
+   "text": "Apply picard_affine_structure_projective_model to obtain P, boundedness, finite projectivity, universal H0/negative homology and the geometric derived comparison on U.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-localized-derived-sheafification"
+    "lem-sc-picard-affine-structure-projective-model"
    ],
    "elementary": false
   },
   {
-   "text": "Cancel negative terms successively. At the lowest term fibre connectiveness makes the differential injective on every residue field. Mathlib IsLocalRing.split_injective_iff_lTensor_residueField_injective gives a local splitting with locally free cokernel. The finitely presented cokernel is therefore finite projective on the affine; split it globally and cancel the contractible pair. Repeat finitely many times.",
+   "text": "Choose the standard module derived category. Apply universalH0_projective_normalization to P to obtain Q with explicit finite-free retracts, no negative terms, d0=0 and a derived P-to-Q isomorphism.",
    "uses": [
-    "lem-pc-perfect-affine-bounded-projective"
+    "lem-sc-universal-h0-projective-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "Represent the derived structure unit by a chain map. Universal H-zero comparison makes its cycle unimodular. Split off its unit summand, then apply the same residue split-injection criterion to the remaining degree-zero summand and cancel its contractible pair. Sheafify to obtain C and the derived isomorphism. The empty affine gives the zero complex.",
+   "text": "Sheafify Q by the existing affinePerfectSheafification. Transport each finite free module to the corresponding finite free localized sheaf using tildeFinsupp, restrictUnitIso and overEquivFunctorObjUnitIso. Map its retract equation to obtain strict perfectness. Zero-preserving sheafification gives the negative-term and d0 conditions. The full derived sheafification comparison transports P≅Q; compose its endpoint comparison isomorphisms with the geometric P-model isomorphism.",
    "uses": [
-    "lem-sc-flat-derived-structure-unit",
-    "lem-pc-perfect-affine-map-representative",
+    "lem-pc-affine-perfect-module-model",
     "lem-pc-affine-localized-derived-sheafification"
    ],
    "elementary": false
@@ -52,17 +49,16 @@
  ],
  "proof_deps": [
   "lem-pc-affine-localized-derived-sheafification",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-perfect-affine-map-representative",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-flat-derived-structure-unit"
+  "lem-pc-affine-perfect-module-model",
+  "lem-sc-picard-affine-structure-projective-model",
+  "lem-sc-universal-h0-projective-normalization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H1",
+  "group": "G1",
   "date": "2026-10-13",
-  "document": "Stacks Project, More on Morphisms",
-  "place": "Tag 0BF2; fixed-affine projective-target adaptation of the existing proof plan"
+  "document": "Stacks Project",
+  "place": "Tag 0BF2; geometric/projective normalization decomposition and explicit Lean sheafification glue"
  },
  "mathlib_searches": [
   {
@@ -138,10 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-48454",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T145120-L-696026",
-  "kind": "interface"
+  "landing": "20261013T151132-L-876547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
