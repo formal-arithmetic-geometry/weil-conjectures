@@ -12419,3 +12419,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:27 L: merged deliver/R3/Sheaf.AlgebraicGeometry.GenericFibreBirationalHypersurfaceModel (stage 3; reviewer PASS; first push; landing 20261013T122729-L-3633058 (interface); batch 20261013T122724; modules 3; new nodes 2)
 - 12:27 L: merged deliver/U3/Sheaf.Algebra.Homology.FiniteStripConeFiltration (stage 3; reviewer PASS; first push; landing 20261013T122729-L-3633230 (proof); batch 20261013T122724; modules 1; new nodes 2)
 - 12:27 L: merged deliver/X2/Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalRetraction (stage 3; reviewer PASS; first push; landing 20261013T122730-L-3633423 (interface); batch 20261013T122724; modules 3; new nodes 2)
+- 12:28 L: returned deliver/R3/Sheaf.Paper.CechCupPullbackCompat (reviewer RETURN: (reviewer X-ea0f0, head ea0f0f94d) H10: In lean/Sheaf/Paper/CechCupPullbackCompat.lean, optimize the newly added cechRef)
