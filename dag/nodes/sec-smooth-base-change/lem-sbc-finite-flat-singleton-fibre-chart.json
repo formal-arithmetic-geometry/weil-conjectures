@@ -18,17 +18,36 @@
  },
  "proof": [
   {
-   "text": "Apply 02LK to the finite, hence quasi-finite, morphism at x. After an etale\nbase neighbourhood T of f(x), select the finite open-and-closed piece Z containing\nan appropriate lift z of x and having only z above g(z). The map a to X and the\nmap b to Y are etale and the square commutes. Flatness is preserved by base\nchange and restriction; the schemes are locally Noetherian because etale maps\nare locally of finite type. For each w in Z, g is etale at w if and only if\nf is etale at a(w): the equation a f = g b and etale b identify the etale\nloci of g and a f, and etale localization on the source identifies the latter\nwith the inverse image of the etale locus of f. These loci are open, so being\netale at a point is expressed by the existence of the indicated open neighbourhood.\nNo ramification hypothesis or positive-dimension hypothesis is used.",
+   "text": "Finite f is locally quasi-finite, so the selected point is isolated in its fibre (Mathlib Scheme.Hom.quasiFiniteAt and QuasiFiniteAt.isClopen_singleton_asFiber). Apply exists_etale_finite_open_of_isolated_fiber_point to obtain an etale T over Y, an open V of the pullback, and z over x with a singleton fibre. Set Z=V, a=V.ι followed by pullback.fst and g=V.ι followed by pullback.snd. Base change and open restriction give Etale a and Flat g; finiteness is supplied by the theorem. LocallyOfFiniteType.isLocallyNoetherian applied to b and a gives the Noetherian assertions. The pullback condition gives af=gb; the supplied uniqueness over t and g(z)=t give uniqueness over g(z).",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-at-point-elementary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale source neighbourhood U for f at a(w), pull U back along a. The restriction of a is etale, so its composite with U.ι followed by f is etale. Rewrite this composite using af=gb and morphismRestrict_ι; cancel the etale b by Mathlib Etale.of_comp. This proves the corresponding neighbourhood assertion for g.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conversely, let B be an etale source neighbourhood for g at w. The map e=B.ι followed by a is etale and e followed by f is etale by af=gb. Its open image U contains a(w). Factor e through U using IsOpenImmersion.lift, giving an etale surjective q:B→U. Smooth.of_comp_of_flat_of_surjective descends smoothness of the composite to U.ι followed by f. The fibre of the finite f is locally discrete: the open singleton of f.asFiber(a(w)) gives the upper bound zero in the infimum defining topologicalKrullDimAt, and every neighbourhood is nonempty, giving the lower bound zero. Apply exists_etale_open_of_smooth_of_fibre_dimension_zero to shrink U to an etale neighbourhood of a(w).",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "V3",
-  "document": "Stacks Project",
-  "place": "Tags 02LK and 0BJH, etale localization and invariance of the etale locus"
+  "by": "C3",
+  "document": "Stacks Project and existing Lean library",
+  "place": "Tags 02LK and 0BJH; etale-locus equivalence via smooth source descent (05B5) and smooth zero-dimensional fibres (02G1, 02G2, 02GI). Lean proof reuses the localization and descent assembly of QuasiFiniteFlatCodimensionOneEtaleNeighbourhood below the unit level."
  },
  "mathlib_searches": [
   {
@@ -116,10 +135,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T054243-L-451120",
-  "kind": "interface",
+  "landing": "20261013T072340-L-1115514",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
