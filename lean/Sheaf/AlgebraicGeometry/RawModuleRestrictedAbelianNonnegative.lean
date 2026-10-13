@@ -1,6 +1,8 @@
 module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomComparison
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite
@@ -45,5 +47,23 @@ theorem exists_rawModule_restrictedAbelian_nonnegative
         (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op ≫ (e A).hom =
           (e B).hom ≫ restrictedOverCohomologyMap k
             ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
-            (q : ℤ) f U := by sorry
+            (q : ℤ) f U := by
+  obtain ⟨e, he⟩ := exists_rawModule_abelianHom_comparison Λ k G q U
+  obtain ⟨r, hr⟩ := exists_raw_restricted_cohomology_natural_iso S q U
+  let F := (sheafCompose _
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G
+  refine ⟨fun A ↦ e A ≪≫ r (A.hom ≫ k) (restrictedOverCoefficient F A), ?_⟩
+  intro A B f
+  apply AddCommGrpCat.ext
+  intro z
+  change (r (A.hom ≫ k) (restrictedOverCoefficient F A)).hom
+      ((e A).hom ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z)) =
+    restrictedOverCohomologyMap k F (q : ℤ) f U
+      ((r (B.hom ≫ k) (restrictedOverCoefficient F B)).hom ((e B).hom z))
+  rw [he]
+  exact (hr f.left (B.hom ≫ k) (A.hom ≫ k)
+    (by rw [← Category.assoc, Over.w])
+    (restrictedOverCoefficient F B) (restrictedOverCoefficient F A)
+    ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
+      (Over.w f).symm).inv.app F) ((e B).hom z)).symm
 end AlgebraicGeometry.Etale
