@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-derived-base-change-coefficient-naturality",
+ "kind": "lemma",
+ "title": "Naturality of canonical derived base change in its coefficient",
+ "statement": "Fix derived categories of modules for all schemes [def-pc-derived-category], a commutative square g′:X′→X, f′:X′→S′, f:X→S, g:S′→S with g′;f=f′;g [def-pc-scheme], and k:K→L in D(O_X). The canonical base-change maps [def-pc-derived-base-change-map] satisfy (Rf_*;Lg*)(k);BC_f(L)=BC_f(K);Rf′_*(Lg′*(k)) [def-pc-derived-direct-image, def-pc-derived-pullback]. No cartesian or geometric finiteness hypotheses are needed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY: the canonical base-change transformation"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For L⊣R, L′⊣R′, P,Q and e:P;L′≅L;Q, move P(R(k)) and R′(Q(k)) through the Hom equivalence by its left and right naturality. Naturality of e at R(k) and then naturality of the counit give equal transposes. This is the private mate_naturality lemma.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the exact pinned composition comparison c(f′,g);eqToIso(h inverse);c(g′,f) inverse and the canonical pullback adjunctions in the definition of schemeDerivedBaseChangeMap. Expand only the displayed comparison components and functor composition. The preceding mate identity is exactly the coefficient naturality equation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-affine-global-hom-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Explicit naturality calculation for the transformation of Remark 08HY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate under adjunctions of a natural pullback comparison is natural in its coefficient object",
+   "results": "mateEquiv and mateEquiv_apply and parametrized Hom-equivalence naturality are abstract building blocks; no existing theorem for schemeDerivedBaseChangeMap.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic has the Hom-equivalence naturality used in the proof; not the specified derived base-change equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left|homEquiv_naturality_right; mvBaseChangeOpenMap; base change restriction",
+   "results": "Mathlib Adjunction.Basic has abstract Hom-equivalence naturality. Project RelativeMVRestrictionFirst and RelativeMVRestrictionSecond use fibre-product opens and direct-image composition, not the exact-open components of this statement. No existing equation for mvBaseChangeOpenMap.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exact open restriction inverts the adjunction unit and canonical derived base change is natural in coefficient objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: coefficient naturality of its canonical components",
+   "via": [
+    "lem-pc-rf-mv-base-change-first-two-squares",
+    "lem-pc-rf-mv-triangle-naturality",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeNaturality.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedBaseChangeMap_naturality",
+  "statement": "theorem schemeDerivedBaseChangeMap_naturality\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g) {K L : schemeDerivedCategory X} (k : K ⟶ L) :\n    (schemeDerivedDirectImage f ⋙ derivedPullback g).map k ≫\n        schemeDerivedBaseChangeMap f f' g g' h L =\n      schemeDerivedBaseChangeMap f f' g g' h K ≫\n        (schemeDerivedDirectImage f').map ((derivedPullback g').map k)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and five delivered Lean modules with their DAG statements and proof records; all compile cleanly, the sole direct importer compiles, and all six public axiom probes show only propext, Classical.choice and Quot.sound."
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-rf-mv-open-base-change-unit",
+ "kind": "lemma",
+ "title": "Canonical open base-change components respect the open unit",
+ "statement": "Fix derived categories of modules for all schemes [def-pc-derived-category], q:X′→X [def-pc-scheme], K∈D(O_X), K′∈D(O_X′), and ψ:Lq* K→K′ [def-pc-derived-pullback]. For U⊆X, put U′=q⁻¹U, q_U:U′→U and use the canonical exact-open adjunctions A_U,A_U′ and pullback/restriction comparison b_U:Lq*;r_U′≅r_U;Lq_U* of [def-pc-rf-mv-base-change-components, def-pc-derived-open-restriction-maps]. Let β_U be BC(j_U,j_U′,q,q_U) at r_U K [def-pc-derived-base-change-map], followed by Rj_U′* of b_U inverse at K followed by r_U′(ψ) [def-pc-derived-direct-image]. Then Lq*(η_U(K));β_U=ψ;η_U′(K′). No covering, compactness or quasi-coherence hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 08BV; perfect.tex Tag 0DJ9 induction step; Tag 0D5S for the specified composition comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary adjunctions L⊣R and L′⊣R′, functors P,Q, and an isomorphism e:P;L′≅L;Q, define the mate at Y by β_Y=homEquiv′(e_RY;Q(ε_Y)). Naturality of homEquiv and e, followed by naturality of ε, proves P(R(k));β_Z=β_Y;R′(Q(k)). This is the private mate_naturality calculation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transpose P(η_K);β_LK;R′(e_K inverse;L′(ψ)) under L′⊣R′. Naturality of e moves P(η_K) through e, the triangle identity L(η_K);ε_LK=id cancels the middle pair, and e_K;e_K inverse=id cancels the comparison. The transpose is L′(ψ), whose mate is ψ;η′_K′. This is private mate_unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the preceding identity to the exact-open adjunctions using d=leftAdjointUniq and d′=leftAdjointUniq. Their unit equations identify η_exact with η_pullback;R(d). Mate naturality moves d through β. For b=P(d′ inverse);e;Q(d), the identity Q(d);b inverse=e inverse;d′ cancels d with its inverse. Naturality of d′ and its unit equation identify the final unit. This proves mate_unit_transport.",
+   "uses": [
+    "def-pc-rf-mv-base-change-components"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Instantiate e by c(j′,q);eqToIso(resLE_comp_ι inverse);c(q|U,j) inverse, using the exact same selected canonical pullback comparisons and canonical adjunctions as schemeDerivedBaseChangeMap. The definition of mvPullbackOpenRestrictionIso is P(d′ inverse);e;Q(d). Expanding only those composites gives mvOpenBaseChange_unit. No associativity coherence for triple pullbacks is used.",
+   "uses": [
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-derived-base-change-map",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Expanded mate calculation for Tags 08HY and 08BV, in the induction diagram of perfect.tex Tag 0DJ9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction mate of a pullback comparison commutes with units and restrictions",
+   "results": "ChosenPullbacksAlong unit_pullbackComp_hom and pullbackComp_hom_counit; underived sheaf pullbackComp and pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. No theorem for the specified derived open components.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit: the abstract transpose is the unit followed by the right adjoint of the morphism. Building block only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left|homEquiv_naturality_right; mvBaseChangeOpenMap; base change restriction",
+   "results": "Mathlib Adjunction.Basic has abstract Hom-equivalence naturality. Project RelativeMVRestrictionFirst and RelativeMVRestrictionSecond use fibre-product opens and direct-image composition, not the exact-open components of this statement. No existing equation for mvBaseChangeOpenMap.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change on sheaves commutes with the adjunction unit and restriction to nested open subschemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: single-open unit square",
+   "via": [
+    "lem-pc-rf-mv-base-change-first-two-squares",
+    "lem-pc-rf-mv-triangle-naturality",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeOpenUnit.lean",
+  "declaration": "AlgebraicGeometry.mvOpenBaseChange_unit",
+  "statement": "theorem mvOpenBaseChange_unit\n    {X X' : Scheme.{u}} (q : X' ⟶ X)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (ψ : (derivedPullback q).obj K ⟶ K') (U : X.Opens) :\n    (derivedPullback q).map ((mvOpenRestrictionAdjunction X U).unit.app K) ≫\n        schemeDerivedBaseChangeMap U.ι (q ⁻¹ᵁ U).ι q\n          (q.resLE U (q ⁻¹ᵁ U) le_rfl) (Scheme.Hom.resLE_comp_ι q le_rfl)\n          ((schemeOpenRestriction X U).mapDerivedCategory.obj K) ≫\n        (schemeDerivedDirectImage (q ⁻¹ᵁ U).ι).map\n          ((mvPullbackOpenRestrictionIso q U).inv.app K ≫\n            (schemeOpenRestriction X' (q ⁻¹ᵁ U)).mapDerivedCategory.map ψ) =\n      ψ ≫ (mvOpenRestrictionAdjunction X' (q ⁻¹ᵁ U)).unit.app K'",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and five delivered Lean modules with their DAG statements and proof records; all compile cleanly, the sole direct importer compiles, and all six public axiom probes show only propext, Classical.choice and Quot.sound."
+ }
+}

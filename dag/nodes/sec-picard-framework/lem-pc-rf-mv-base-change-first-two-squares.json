@@ -17,51 +17,33 @@
  ],
  "proof": [
   {
-   "text": "1. Use the derived adjunctions and composition comparisons occurring literally\n   in schemeDerivedBaseChangeMap. For each open W, the isomorphism\n   mvPullbackOpenRestrictionIso is the path through pullback of the two open\n   immersions, with their pullback/restriction adjoint comparisons at the ends.\n   The unit and counit equations of these comparisons are proved as\n   mvOpenPullbackIso_unit and mvOpenPullbackIso_counit. Thus transposing the\n   pasted open map gives restriction of the transpose of ψ; no bare existence\n   isomorphism is substituted in this calculation.",
+   "text": "Coefficient naturality of base change at each open unit, followed by mvOpenBaseChange_unit under Rf′_*, proves the full-f unit identity (private mvBaseChangeOpenMap_unit). Apply it to U and V. In private biprod_unit_square distribute composition over the diagonal sum, use lift_fst and lift_snd, insert these two unit identities, and reassemble the target lift using lift_eq and functor additivity.",
    "uses": [
-    "def-pc-derived-base-change-map",
+    "lem-pc-rf-mv-open-base-change-unit",
     "def-pc-rf-mv-base-change-components",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-derived-base-change-coefficient-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "2. Insert the adjunction unit on W on either side of that identity. The triangle\n   identities cancel its counit and naturality moves ψ through the remaining\n   unit. This proves F.map(unit_W) followed by the W component equals the\n   whole-space component followed by G.map(unit_W'). Prove it for U and V,\n   then assemble the two equalities using biproduct inclusion/projection laws.",
+   "text": "Apply mvBaseChangeOpenMap_restriction to the two inclusions U∩V→U and U∩V→V. In private biprod_restriction_square, expand desc into its two projection summands, map the sum and the negative, insert both restriction identities, and cancel the biproduct inclusion/projection pairs. Reassemble the target difference map. The derived pullback is additive since it is a left adjoint; derived direct images are additive right derived functors. No boundary assertion or choice of connecting map is used.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-rf-mv-base-change-components",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-rf-mv-open-base-change-restriction",
+    "def-pc-rf-mv-base-change-components"
    ],
-   "elementary": false
-  },
-  {
-   "text": "3. For W contained in U, expand schemeDerivedOpenDirectImageRestriction as\n   the mate of the restricted U counit. Apply the counit equation in step 1.\n   The two paths of pullback comparisons agree by the associativity law in\n   exists_derivedPullbackComposition; exact nested restriction has the same\n   underived composition. Naturality of the counit then gives the restriction\n   square, including its fixed canonical overlap identification. Apply this\n   separately to U intersect V contained in U and in V. Functor additivity\n   turns their pair of equalities into the difference square displayed here.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-rf-mv-base-change-components",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "4. The equations are natural in both objects and ψ since every step uses\n   natural transformations, their mates, and their composition laws. Affine\n   permanence supplies qcqs hypotheses if the calculation is made using\n   K-flat and K-injective representatives. No boundedness or flatness is used.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-rf-mv-base-change-components",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
   "def-pc-rf-mv-base-change-components",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-derived-base-change-coefficient-naturality",
+  "lem-pc-rf-mv-open-base-change-restriction",
+  "lem-pc-rf-mv-open-base-change-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ9 induction step; expanded with canonical mate calculations from Tags 08HY and 0D5S and short exact sequence naturality from Tags 08BV and 08HZ"
+  "place": "Tag 0DJ9 induction diagram: additive biproduct assembly from the two single-open canonical-mate identities"
  },
  "mathlib_searches": [
   {
@@ -141,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-a65fd",
-  "group": "C4",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T142853-L-496277",
+  "landing": "20261013T172656-L-2099698",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, canonical constructions and assembly with the four node records, change records and Stacks sources; compilation and axiom probes passed; direct importers: none."
+  "note": "independent Codex review: Matched the unchanged theorem signature and five delivered Lean modules with their DAG statements and proof records; all compile cleanly, the sole direct importer compiles, and all six public axiom probes show only propext, Classical.choice and Quot.sound."
  }
 }

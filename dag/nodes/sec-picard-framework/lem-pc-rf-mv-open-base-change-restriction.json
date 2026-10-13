@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-rf-mv-open-base-change-restriction",
+ "kind": "lemma",
+ "title": "Canonical open base-change components respect nested restriction",
+ "statement": "Fix derived categories of modules for all schemes [def-pc-derived-category], a commutative square g′:X′→X, f′:X′→S′, f:X→S, g:S′→S with g′;f=f′;g [def-pc-scheme], K∈D(O_X), K′∈D(O_X′), and ψ:Lg′*K→K′ [def-pc-derived-pullback]. Let W⊆U be opens, i:W→U their inclusion, and i′:g′⁻¹W→g′⁻¹U its inverse image. Use the fixed canonical exact-open adjunctions and define ρ_U,W by schemeDerivedOpenDirectImageRestriction [def-pc-derived-open-restriction-maps]. Put F=Rf_*;Lg*, G=Rf′_* and let a_U,a_W be the pasted components [def-pc-rf-mv-base-change-components, def-pc-derived-base-change-map, def-pc-derived-direct-image]. Then F(ρ_U,W(K));a_W=a_U;G(ρ_U′,W′(K′)). No covering, affine, compactness, quasi-coherence or cartesian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 08BV; perfect.tex Tag 0DJ9 induction step; Tag 0D5S for the specified composition comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Expand nested-open restriction as the smaller-open adjunction transpose of the larger-open counit transported through the exact restriction composition isomorphism. Naturality of that comparison and the left triangle identity show η_U;ρ_U,W=η_W. This is private open_restriction_unit.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction to U makes η_U invertible. Apply further overlap restriction, transport by schemeDerivedOpenRestrictionCompIso, apply pullback on W, and transport by mvPullbackOpenRestrictionIso. Thus restriction to W′ inverts Lq*(η_U).",
+   "uses": [
+    "lem-pc-scheme-derived-open-unit-restriction-iso",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any adjunction L⊣R, if L(u) is invertible, precomposition with u is injective on maps into R(T): transpose and cancel L(u). Apply this to the smaller inverse-image open. After precomposition with Lq*(η_U), one local-square path reduces to Lq*(η_W);β_W=ψ;η_W′, and the other to ψ;η_U′;ρ_U′,W′=ψ;η_W′. The local square follows by injectivity.",
+   "uses": [
+    "lem-pc-rf-mv-open-base-change-unit",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Coefficient naturality of BC_f at ρ_U,W reduces the full square to Rf′_* of the local square. Apply functoriality and reassociate. Equal or empty opens are included throughout.",
+   "uses": [
+    "lem-pc-derived-base-change-coefficient-naturality",
+    "def-pc-rf-mv-base-change-components"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-derived-base-change-coefficient-naturality",
+  "lem-pc-rf-mv-open-base-change-unit",
+  "lem-pc-scheme-derived-open-unit-restriction-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Unit uniqueness proof of the restriction square in Tags 08BV and 0DJ9; avoids triple-comparison coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction mate of a pullback comparison commutes with units and restrictions",
+   "results": "ChosenPullbacksAlong unit_pullbackComp_hom and pullbackComp_hom_counit; underived sheaf pullbackComp and pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. No theorem for the specified derived open components.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "CategoryTheory.Adjunction.homEquiv_unit: the abstract transpose is the unit followed by the right adjoint of the morphism. Building block only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left|homEquiv_naturality_right; mvBaseChangeOpenMap; base change restriction",
+   "results": "Mathlib Adjunction.Basic has abstract Hom-equivalence naturality. Project RelativeMVRestrictionFirst and RelativeMVRestrictionSecond use fibre-product opens and direct-image composition, not the exact-open components of this statement. No existing equation for mvBaseChangeOpenMap.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change on sheaves commutes with the adjunction unit and restriction to nested open subschemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: nested-open restriction square",
+   "via": [
+    "lem-pc-rf-mv-base-change-first-two-squares",
+    "lem-pc-rf-mv-triangle-naturality",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.mvBaseChangeOpenMap_restriction",
+  "statement": "theorem mvBaseChangeOpenMap_restriction\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (ψ : (derivedPullback g').obj K ⟶ K')\n    {W U : X.Opens} (i : W ⟶ U) :\n    (schemeDerivedDirectImage f ⋙ derivedPullback g).map\n        (schemeDerivedOpenDirectImageRestriction X i\n          (mvOpenRestrictionAdjunction X U) (mvOpenRestrictionAdjunction X W) K) ≫\n      mvBaseChangeOpenMap f f' g g' h K K' ψ W =\n    mvBaseChangeOpenMap f f' g g' h K K' ψ U ≫\n      (schemeDerivedDirectImage f').map\n        (schemeDerivedOpenDirectImageRestriction X' ((Opens.map g'.base).map i)\n          (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U))\n          (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ W)) K')",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and five delivered Lean modules with their DAG statements and proof records; all compile cleanly, the sole direct importer compiles, and all six public axiom probes show only propext, Classical.choice and Quot.sound."
+ }
+}

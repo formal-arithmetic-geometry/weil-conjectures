@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-scheme-derived-open-unit-restriction-iso",
+ "kind": "lemma",
+ "title": "Scheme open restriction inverts the unit of its derived right adjunction",
+ "statement": "Fix derived categories of modules for every scheme [def-pc-derived-category], a scheme X and an open U⊆X [def-pc-scheme]. Let r_U:D(O_X)→D(O_U) be the derived exact-open restriction [def-pc-derived-open-restriction-maps], Rj_U*:D(O_U)→D(O_X) the derived direct image [def-pc-derived-direct-image], and a any supplied adjunction r_U⊣Rj_U*. For every K∈D(O_X), r_U(a.unit_K) is an isomorphism. No derived-category instance on the intermediate over-site module category is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BS and 08FE, exact open restriction and extension by zero; the adjunction triple argument"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Let E be the equivalence from modules on the over-site of U to modules on U. Transport the exact extension-by-zero adjunction G₀⊣F₀ along E, obtaining G=E inverse;G₀ left adjoint to F=schemeOpenRestriction X U. Exactness passes through the equivalence.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The extension/restriction isomorphism G₀;F₀≅id, whiskered by E inverse and E and followed by E counit, gives G;F≅id. Derive the exact functors and localize the termwise adjunction, giving G_D⊣F_D. Derived composition, the derived image of the composite isomorphism and the derived identity comparison give G_D;F_D≅id.",
+   "uses": [
+    "lem-pc-open-extension-restriction-iso",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Adjunction.fullyFaithfulLOfCompIsoId makes G_D fully faithful. Apply Adjunction.Triple.fullyFaithfulEquiv to G_D⊣F_D⊣Rj_U* to make the right adjoint fully faithful. Its counit is invertible; the left triangle identity makes F_D of its unit invertible. This argument works for any supplied right adjunction and includes empty opens.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-open-extension-restriction-iso",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Transport to scheme modules before deriving; adjunction-triple proof of restricted-unit invertibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an adjoint triple, full faithfulness of the left adjoint implies full faithfulness of the right adjoint and the unit becomes invertible after applying the middle functor",
+   "results": "Adjunction.Triple.fullyFaithfulEquiv, Adjunction.fullyFaithfulLOfCompIsoId, and instIsIsoMapAppUnitOfFaithfulOfFull provide the abstract part. No theorem for the scheme exact-open functor with only scheme-derived-category instances.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv",
+   "results": "Mathlib.CategoryTheory.Adjunction.Triple, equivalence between full faithfulness of the two outer adjoints; used after constructing the scheme-derived adjoint triple.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulLOfCompIsoId|instIsIsoMapAppUnitOfFaithfulOfFull; blueprint in OpenExtensionRestrictionIso and OpenRestrictionAdjunctionExact",
+   "results": "Mathlib.CategoryTheory.Monad.Adjunction defines fullyFaithfulLOfCompIsoId. Project supplies exact extension adjunction and extension/restriction isomorphism; no scheme-derived restricted-unit theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exact open restriction inverts the adjunction unit and canonical derived base change is natural in coefficient objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: uniqueness after restriction to the smaller open",
+   "via": [
+    "lem-pc-rf-mv-base-change-first-two-squares",
+    "lem-pc-rf-mv-triangle-naturality",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestrictionUnitIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestrictionUnitIso.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedOpen_unit_isIso",
+  "statement": "theorem schemeDerivedOpen_unit_isIso (X : Scheme.{u}) (U : X.Opens)\n    (adj : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n    (K : schemeDerivedCategory X) :\n    IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map (adj.unit.app K))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cf5ee",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172656-L-2099698",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and five delivered Lean modules with their DAG statements and proof records; all compile cleanly, the sole direct importer compiles, and all six public axiom probes show only propext, Classical.choice and Quot.sound."
+ }
+}
