@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-direct-sum-square",
+ "kind": "statement",
+ "title": "Localized tensor comparison commutes with a K-flat direct sum",
+ "statement": "Let $R,A,B,C$ be commutative rings in universe $u$, with $R$-algebra structures on $A,B$ and an $E=A\\otimes_R B$-algebra structure on $C$. Assume $C$ is flat over $E$ and derived categories of $R,A,B$-modules [def-weil-abstract-derived-category]. Let $Q$ be an $A$-K-flat cochain complex, $N$ a $C$-cochain complex, $F$ termwise extension along $A\\to E\\to C$, and $t:F(Q)\\to N$. For any $u$-small family $U_j$ of $A$-K-flat complexes and arbitrary models $m_j$ of $U_j\\otimes_A Q$ and $m_S$ of $(\\bigoplus_j U_j)\\otimes_A Q$ [def-pc-base-derived-tensor-cohomology-model], fix an integer $i$. Write $\\alpha_j$ for $m_j.\\mathrm{localizedComparison}_i$ followed by $H^i(\\mu_F^{-1};F(U_j)\\otimes t)$, and $\\alpha_S$ for the corresponding map of the sum, as in [def-pc-localized-tensor-comparison-property]. There exist $C$-linear isomorphisms $e:\\bigoplus_j(C\\otimes_E m_j.\\mathrm{cohomology}_i)\\simeq C\\otimes_E m_S.\\mathrm{cohomology}_i$ and $d:\\bigoplus_j H^i(F(U_j)\\otimes_C N)\\simeq H^i(F(\\bigoplus_j U_j)\\otimes_C N)$ such that $(\\bigoplus_j\\alpha_j)d=e\\alpha_S$. No invertibility of any $\\alpha_j$, $\\alpha_S$, or $t$ is assumed, and the empty family is included. K-flat means that total tensor with every acyclic complex is acyclic.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1), tensor-transitivity computation; More on Algebra, Tag 0BYJ, lemma-triple-tensor-product"
+ },
+ "proof": [
+  {
+   "text": "Resolve the restrictions of U_j tensor Q over R K-flatly and sum these resolutions. Exactness of module sums makes the sum augmentation a quasi-isomorphism, and tensor commuting with sums makes the sum K-flat. Compute the universal R-to-B derived extension on these resolutions. The derived module direct-sum and homology-coproduct theorems identify its degree-i homology with the sum of summand homologies. Compare each supplied universal model with this common computation by uniqueness of counit-compatible derived functors. Naturality at multiplication by A lifts the B-linear comparison to E-linear maps as in the model-map theorem; their inverses are E-linear too. Thus the coproduct of the model cohomologies is isomorphic to the sum model cohomology. Extension from E to C is a left adjoint, so it preserves this coproduct and produces e.",
+   "uses": [
+    "lem-pc-base-derived-extension-resolution",
+    "lem-pc-derived-module-direct-sums",
+    "lem-pc-derived-module-homology-coproduct",
+    "lem-pc-base-derived-tensor-cohomology-model-map",
+    "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extension from A to C and total tensor with N preserve termwise coproducts. Exactness of module coproducts commutes with cycles, boundaries and homology. Combine these comparisons to obtain d. This works for unbounded complexes and needs no flatness of N or of A to C.",
+   "uses": [
+    "lem-pc-derived-module-homology-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the desired square to each coprojection. Naturality of the universal counit and of the ordinary tensor associator gives the ordinary comparison square. The model generator equations fix the coefficient-extension maps. Transpose through extension/restriction adjunction and use localized_eq to obtain the localized square. Naturality of the monoidal tensorator and tensoring with t gives the final comparison square. Coproduct extensionality proves the stated equation. For an empty index set all four objects are zero.",
+   "uses": [
+    "lem-pc-base-derived-tensor-cohomology-model-map",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Detailed coproduct specialization of the tensor-transitivity computation in Tag 0DJA(1), using Tag 0BYJ; written by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology and the canonical base change comparison commute with arbitrary direct sums of K-flat complexes",
+   "results": "Rep.torIso; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Rep.Tor_map; flatness characterization lemmas; CategoryTheory.Tor'_map_app; HomologicalComplex.HasGoodTensor₁₂. No model comparison square.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.map",
+   "results": "Sigma.map, Sigma.map_isIso and coproduct map identities. These provide the categorical gluing, not the model square.",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison.*coproduct|coproduct.*localizedComparison",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total tensor product of a family of K-flat complexes commutes with their direct sum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct",
+  "date": "2026-10-14",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "single-complex tensor inheritance, via coproduct closure: identify the comparison of a K-flat direct sum with the direct sum of the summand comparisons",
+   "via": [
+    "lem-pc-localized-tensor-comparison-closure-coproducts",
+    "lem-pc-localized-tensor-comparison-closure",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonDirectSumSquare.lean",
+  "declaration": "ModuleCat.exists_localizedTensorComparison_direct_sum_square",
+  "statement": "theorem exists_localizedTensorComparison_direct_sum_square\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    {I : Type u} (U : I → CochainComplex (ModuleCat.{u} A) ℤ)\n    (hU : ∀ j (V : CochainComplex (ModuleCat.{u} A) ℤ), V.Acyclic →\n      (CochainComplex.mapBifunctor V (U j) (curriedTensor _)).Acyclic)\n    (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (U j ⊗ Q) C)\n    (mS : BaseDerivedTensorCohomologyModel R A B ((∐ U) ⊗ Q) C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    let α := fun j ↦ (m j).localizedComparison i ≫ HomologicalComplex.homologyMap\n      ((Functor.Monoidal.μIso F (U j) Q).inv ≫ (F.obj (U j) ◁ t)) i\n    ∃ (e : (∐ fun j ↦ (extendScalars (algebraMap (A ⊗[R] B) C)).obj\n        ((m j).cohomology i)) ≅\n      (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mS.cohomology i))\n      (d : (∐ fun j ↦ (F.obj (U j) ⊗ N).homology i) ≅\n        (F.obj (∐ U) ⊗ N).homology i),\n      Limits.Sigma.map α ≫ d.hom = e.hom ≫\n        (mS.localizedComparison i ≫ HomologicalComplex.homologyMap\n          ((Functor.Monoidal.μIso F (∐ U) Q).inv ≫ (F.obj (∐ U) ◁ t)) i)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-derived-extension-resolution",
+  "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
+  "lem-pc-base-derived-tensor-cohomology-model-map",
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-module-homology-coproduct"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-03187",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T190135-L-3214267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-03187",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T190135-L-3214267",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signatures and section binders are byte-identical; delivered statements match their nodes, proof records match the Lean, both modules and the sole direct importer compile cleanly, and axioms are permitted with documented sorry dependencies."
+ }
+}

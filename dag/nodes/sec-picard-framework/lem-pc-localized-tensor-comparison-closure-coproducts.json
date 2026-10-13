@@ -14,22 +14,38 @@
  },
  "proof": [
   {
-   "text": "Fix a degree i. The universal derived counit, the canonical tensor associator\nand scalar-extension adjunction identify the displayed comparison for a K-flat\nrepresentative U with a natural degree-i comparison on D(A). The counit fixes\nthis map, so changing the derived model conjugates it by canonical isomorphisms.\nK-flat quasi-isomorphisms and their roofs give the same conjugation for a change\nof representative. Extension from A to C sends A-K-flat complexes to C-K-flat\ncomplexes: tensoring an acyclic C-complex with C tensor_A U is restriction of\nthat complex tensored over A with U. Thus the target is computed by derived\ntensor with N even when A to C is not flat.\nChoose K-flat representatives of the summands. Their direct sum is K-flat,\nsince tensor and direct sums commute and direct sums of exact sequences of\nmodules are exact. It represents their coproduct in D(A). Derived tensor over\nR with B, restriction of scalars, and cohomology preserve these sums. Extension\nfrom A tensor_R B to C preserves sums as a left adjoint, as do extension from\nA to C and tensor with N. Naturality identifies the comparison on this sum\nwith the direct sum of the comparisons on the summands in degree i. A direct\nsum of isomorphisms is an isomorphism (sum their inverses). Transport across\nthe unique coproduct isomorphism to S, and then across the model and\nrepresentative identifications above. This proves the assertion for every U,\nevery model and every i. For an empty family all objects and maps are zero.",
+   "text": "Choose K-flat representatives U_j of G_j by the proved source-library functorial flat resolution. Their coproduct is K-flat: total tensor preserves coproducts by BifunctorColimits, and coproducts of acyclic module complexes are acyclic by stability of quasi-isomorphisms under coproducts. Apply the derived module direct-sum theorem and transport its cocone along the representative isomorphisms. Uniqueness of colimits gives Q(sum U_j) isomorphic to S. These operations are implemented by the proved private helpers exists_kFlat_representative, acyclic_coproduct, and kFlat_coproduct.",
    "uses": [
-    "lem-pc-kflat-derived-tensor-associator",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose models m_j and mS by the existing nonempty model theorem. In degree i, apply the direct-sum comparison square. The hypotheses P(G_j) give IsIso for every summand map alpha_j. Mathlib Limits.Sigma.map_isIso makes Sigma.map alpha an isomorphism. The square and cancellation of its source isomorphism prove IsIso for the comparison of the sum.",
+   "uses": [
+    "lem-pc-localized-tensor-comparison-direct-sum-square",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "For any K-flat V representing S, compose its representative isomorphism with the inverse of Q(sum U_j) isomorphic to S. Apply the representative-square theorem to V and the K-flat sum. Rewrite its commuting square using the invertibility established for the sum, then cancel its target isomorphism with IsIso.of_isIso_comp_right. This is the required all-models, all-representatives, all-degrees predicate. Empty families are included throughout.",
+   "uses": [
+    "lem-pc-localized-tensor-comparison-representative-square"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-kflat-derived-tensor-associator"
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-localized-tensor-comparison-direct-sum-square",
+  "lem-pc-localized-tensor-comparison-representative-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), coproducts part of the localizing argument; model identification by the universal counit and Tag 0BYJ"
+  "place": "Tag 0DJA(1), tensor inheritance, specialized to coproducts; actual Lean reduction by C1 using direct-sum and representative squares"
  },
  "mathlib_searches": [
   {
@@ -137,17 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
+  "reviewer": "X-03187",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T181056-L-2599222",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "ModuleCat.localizedTensorComparisonProperty_closure_coproducts"
-  ],
-  "sorry_after": [
-   "ModuleCat.localizedTensorComparisonProperty_closure_coproducts_fixed_degree"
-  ]
+  "landing": "20261013T190135-L-3214267",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signatures and section binders are byte-identical; delivered statements match their nodes, proof records match the Lean, both modules and the sole direct importer compile cleanly, and axioms are permitted with documented sorry dependencies."
  }
 }
