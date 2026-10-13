@@ -15,36 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution of Y. Use the injective-resolution Ext/cohomology-class equivalence to compute derived Hom from L by Hom_C(L,I).",
+   "text": "Construct sourceExtMap by exact-functor transport on Ext followed by precomposition with a. First prove the Hom comparison bijective for every object using an injective presentation, an injective presentation of its cokernel, and exactness of V. This proves the degree-zero Ext comparison via mk₀.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove sourceExtMap bijective in all degrees by dimension shifting along an injective presentation. Identify Ext from B with right-derived additive Hom using nonempty_extFunctor_iso_rightDerivedHom; hac implies its positive-degree groups vanish on V(I). Naturality of Yoneda composition and transport of the short-exact Ext class give commuting right-exact sequences. Apply the Mathlib right-exact sequence comparison lemma and induction.",
    "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution"
+    "lem-sc-ext-right-derived-hom"
    ],
    "elementary": false
   },
   {
-   "text": "Exact V preserves the augmentation quasi-isomorphism. By the assumed Hom(B,-)-acyclicity of V(I), its Hom complex computes derived Hom from B. The acyclic-resolution comparison is the augmentation-compatible one.",
+   "text": "Use derivedSourceComparison_ext_compatibility to turn equality of the displayed derived images into equality of sourceExtMap images. The Ext comparison is injective by the preceding dimension-shifting argument. Apply Ext.homEquiv, cancel the shift comparison, and use faithfulness of the bounded-below inclusion to recover equality of the original morphisms. The compatibility lemma identifies the Ext map with the displayed derived map.",
    "uses": [
-    "lemma-weil-pbc-leray-acyclicity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The maps g↦a≫V(g) are additive bijections in each degree. Functoriality and associativity make them commute with differentials. They therefore identify cohomology, in particular injectively. The cocycle realization formula identifies this cohomology map with the displayed derived map: the single comparison identifies the source and V carries the augmentation and its inverse to the corresponding maps.",
-   "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution",
-    "lemma-weil-pbc-leray-acyclicity"
+    "lem-sbc-derived-source-comparison-ext-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ext-via-injective-resolution",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-sc-ext-right-derived-hom",
+  "lem-sbc-derived-source-comparison-ext-compatibility"
  ],
  "proof_origin": {
-  "by": "agent R1",
+  "by": "agent B2",
   "document": "Stacks Project",
-  "place": "Tag 03FD, first and second proof paragraphs; Tag 015E, augmentation-compatible acyclic-resolution computation; existing library computations and the explicit comparison reduction"
+  "place": "Tags 03FD and 015E; B2 Ext dimension-shifting proof using Mathlib right-exact sequences, ExtRightDerivedHom, and the split derived/Ext compatibility step",
+  "date": "2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -127,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "X-3054e",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T152019-L-954285",
+  "landing": "20261013T172650-L-2097784",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly, direct importer compiles against them, signatures and DAG statements agree, and all proofs use only permitted axioms."
  }
 }
