@@ -17,72 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Each A_i is finite type over Z, hence Noetherian. Each B_i is finite type over A_i, hence Noetherian; its finite D_i is finitely presented. Each A_i to B_i is finitely presented as well.",
+   "text": "Define U_i as the full flat locus of D_i localized at primes of B_i, restricted along η_i. Finite type over Z makes A_i Noetherian; finite type over A_i makes B_i Noetherian. Convert finite type of B_i to finite presentation and finiteness of D_i to finite presentation. The private proved module-action comparison localized_restrict_eq identifies the canonical localization action with Module.compHom. Apply Module.isOpen_setOf_flat_localizedModule to get openness. Membership supplies the flatness clause by definition.",
    "uses": [
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-sc-noetherian-finite-module-finite-presentation"
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-pbc-openness-of-flatness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), with tensor base-change identifications"
-   }
+   "elementary": false
   },
   {
-   "text": "At each prime of Y contract the prime to every approximation ring and localize. Localization-colimit and localization-tensor identifications give the local ring systems and their module colimit. The limit module is flat over the localized base. Apply the local Noetherian eventual-flatness criterion to obtain a stage flat at this contracted prime. The supplied abelian-group colimit and the canonical module comparisons give its localized module colimit directly, so no separate underlying-algebra-module colimit theorem is required. The local module action is the restriction along the localized base-ring map.",
+   "text": "For i<=j, install the algebra structures from η and the transition maps. Naturality of η proves the two scalar towers. Tensor symmetry turns the supplied B_i tensor_(A_i) A_j ring equivalence into an A_j-algebra equivalence. Its pure-tensor formula exhibits the square as Algebra.IsPushout. Apply Module.Flat.localizedModule_of_isPushout with the supplied module tensor equivalence. The proved module-action comparison rewrites both localized flatness assertions into membership of U_i and U_j; hence the inverse image of U_i lies in U_j.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "lem-pc-affine-flat-module-local-criterion",
-    "lem-weil-pbc-colimit-eventually-flat"
+    "lem-weil-pbc-flat-localized-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), first paragraph; Tag 00R6"
-   }
+   "elementary": false
   },
   {
-   "text": "Define U_i to be the flat locus of D_i over A_i. The stage algebra and module are finitely presented by step 1, so the flat locus is open. If i≤j and q_j contracts to q_i in U_i, use the canonical transition ring and module tensor comparisons: D_j localized at q_j is a further localization of A_j tensor_(A_i) (D_i localized at q_i). Base change preserves flatness over A_j, and localization of the top-module factor preserves it. Thus the inverse image of U_i is in U_j. Step 2 gives, for every q of S, one contracted stage prime in U_i. This is the requested pointwise cover; no compactness or unit-relation descent occurs here.",
+   "text": "For each prime q of S apply exists_flat_finiteType_approximation_point to the supplied approximation and hflat. Its stage is a member of U_i by definition, giving the cover. Return the full flat loci with their openness, flatness, persistence and cover proofs.",
    "uses": [
-    "lem-weil-pbc-openness-of-flatness",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-pc-affine-flat-module-local-criterion",
-    "lem-weil-pbc-flat-over-localization"
+    "lem-pc-finite-type-approximation-flat-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), second paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "lem-pc-affine-flat-module-local-criterion",
+  "lem-pc-finite-type-approximation-flat-point",
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-weil-pbc-colimit-eventually-flat",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "lem-weil-pbc-filtered-colimit-modules-criterion",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-flat-over-localization",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-flat-localized-module-base-change",
   "lem-weil-pbc-openness-of-flatness"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02JO (1), proof first paragraph and start of second paragraph, before compactness; read at https://stacks.math.columbia.edu/tag/02JO"
+  "place": "Tag 02JO (1), first two paragraphs. Openness and persistence proved using the supplied tensor comparisons; only pointwise eventual flatness remains split."
  },
  "mathlib_searches": [
   {
@@ -170,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T100054-L-2476383",
+  "landing": "20261013T113354-L-3187615",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

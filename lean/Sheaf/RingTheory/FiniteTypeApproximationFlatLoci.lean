@@ -14,9 +14,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Sheaf.RingTheory.ColimitEventuallyFlat
-import Sheaf.RingTheory.FlatModuleAtPrime
+import Sheaf.RingTheory.FiniteTypeApproximationFlatPoint
+import Sheaf.RingTheory.FlatLocalizedModuleBaseChange
 import Sheaf.RingTheory.OpenFlatLocus
 
 /-! # Flat loci in a finite-type approximation
@@ -33,6 +32,25 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
 namespace Algebra
+
+set_option linter.style.haveILetI false in
+private theorem localized_restrict_eq {R S M : Type*} [CommRing R] [CommRing S]
+    [AddCommGroup M] [Module S M] (f : R →+* S) (T : Submonoid S) :
+    letI := f.toAlgebra
+    letI : Module R M := Module.compHom M f
+    letI : IsScalarTower R S M := IsScalarTower.of_compHom _ _ _
+    (inferInstance : Module R (LocalizedModule T M)) =
+      Module.compHom (LocalizedModule T M) f := by
+  letI := f.toAlgebra
+  letI : Module R M := Module.compHom M f
+  letI : IsScalarTower R S M := IsScalarTower.of_compHom _ _ _
+  apply Module.ext'
+  intro r x
+  induction x using LocalizedModule.induction_on with
+  | h m t =>
+    change r • LocalizedModule.mk m t = f r • LocalizedModule.mk m t
+    rw [LocalizedModule.smul'_mk, LocalizedModule.smul'_mk]
+    rfl
 
 /-- Flat loci in a supplied approximation are open, persistent, and cover the limit.
 
@@ -121,6 +139,76 @@ theorem exists_flat_finiteType_approximation_loci
         Module.Flat (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i))) ∧
       (∀ (i j : Λ) (h : i ≤ j),
         PrimeSpectrum.comap (B.map (homOfLE h)).hom ⁻¹' U i ⊆ U j) ∧
-      (∀ q : PrimeSpectrum S, ∃ i, PrimeSpectrum.comap (κ.app i).hom q ∈ U i) := by sorry
+      (∀ q : PrimeSpectrum S, ∃ i, PrimeSpectrum.comap (κ.app i).hom q ∈ U i) := by
+  classical
+  let U : (i : Λ) → Set (PrimeSpectrum (B.obj i)) := fun i ↦
+    {q | letI : Module (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i)) :=
+        Module.compHom _ (η.app i).hom
+      Module.Flat (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i))}
+  refine ⟨U, ?_, ?_, ?_, ?_⟩
+  · intro i
+    let := (η.app i).hom.toAlgebra
+    let : Module (A.obj i) (D.obj i) := Module.compHom _ (η.app i).hom
+    have : IsScalarTower (A.obj i) (B.obj i) (D.obj i) :=
+      IsScalarTower.of_compHom _ _ _
+    have : Algebra.FiniteType ℤ (A.obj i) := hmodel.2.2.2.2.2.2.1 i
+    have : Algebra.FiniteType (A.obj i) (B.obj i) := hmodel.2.2.2.2.2.2.2.1 i
+    have : Module.Finite (B.obj i) (D.obj i) := hmodel.2.2.2.2.2.2.2.2.1 i
+    have : IsNoetherianRing (A.obj i) := Algebra.FiniteType.isNoetherianRing ℤ _
+    have : IsNoetherianRing (B.obj i) := Algebra.FiniteType.isNoetherianRing (A.obj i) _
+    have : Algebra.FinitePresentation (A.obj i) (B.obj i) :=
+      Algebra.FinitePresentation.of_finiteType.mp inferInstance
+    have : Module.FinitePresentation (B.obj i) (D.obj i) :=
+      Module.finitePresentation_of_finite _ _
+    have hU : U i = {q : PrimeSpectrum (B.obj i) | Module.Flat (A.obj i)
+        (LocalizedModule q.asIdeal.primeCompl (D.obj i))} := by
+      ext q
+      dsimp [U]
+      rw [← localized_restrict_eq (η.app i).hom q.asIdeal.primeCompl]
+    rw [hU]
+    exact Module.isOpen_setOf_flat_localizedModule
+      (R := A.obj i) (S := B.obj i) (M := D.obj i)
+  · intro i q hq
+    exact hq
+  · intro i j h q hq
+    let := (η.app i).hom.toAlgebra
+    let := (A.map (homOfLE h)).hom.toAlgebra
+    let := (η.app j).hom.toAlgebra
+    let := (B.map (homOfLE h)).hom.toAlgebra
+    let : Algebra (A.obj i) (B.obj j) :=
+      ((B.map (homOfLE h)).hom.comp (η.app i).hom).toAlgebra
+    have : IsScalarTower (A.obj i) (B.obj i) (B.obj j) :=
+      IsScalarTower.of_algebraMap_eq' rfl
+    have : IsScalarTower (A.obj i) (A.obj j) (B.obj j) :=
+      IsScalarTower.of_algebraMap_eq' (by
+        exact congrArg CommRingCat.Hom.hom (η.naturality (homOfLE h)).symm)
+    obtain ⟨e, he⟩ := hmodel.2.2.2.2.2.2.2.2.2.1 i j h
+    let e' : A.obj j ⊗[A.obj i] B.obj i ≃ₐ[A.obj j] B.obj j :=
+      { (Algebra.TensorProduct.comm (A.obj i) (A.obj j) (B.obj i)).toRingEquiv.trans e
+        with
+        commutes' := by
+          intro a
+          change e ((1 : B.obj i) ⊗ₜ[A.obj i] a) = (η.app j).hom a
+          rw [he, map_one, one_mul] }
+    have : Algebra.IsPushout (A.obj i) (A.obj j) (B.obj i) (B.obj j) := by
+      constructor
+      apply IsBaseChange.of_equiv e'.toLinearEquiv
+      intro b
+      change e (b ⊗ₜ[A.obj i] (1 : A.obj j)) = (B.map (homOfLE h)).hom b
+      rw [he, map_one, mul_one]
+    let : Module (A.obj i) (D.obj i) := Module.compHom _ (η.app i).hom
+    have : IsScalarTower (A.obj i) (B.obj i) (D.obj i) :=
+      IsScalarTower.of_compHom _ _ _
+    let : Module (A.obj j) (D.obj j) := Module.compHom _ (η.app j).hom
+    have : IsScalarTower (A.obj j) (B.obj j) (D.obj j) :=
+      IsScalarTower.of_compHom _ _ _
+    obtain ⟨eD, _⟩ := hmodel.2.2.2.2.2.2.2.2.2.2.1 i j h
+    dsimp [U] at hq ⊢
+    rw [← localized_restrict_eq (η.app i).hom] at hq
+    rw [← localized_restrict_eq (η.app j).hom]
+    exact Module.Flat.localizedModule_of_isPushout
+      (A := A.obj i) (R := A.obj j) eD q hq
+  · exact exists_flat_finiteType_approximation_point R S M A B η π κ D ν hmodel hflat
+
 
 end Algebra
