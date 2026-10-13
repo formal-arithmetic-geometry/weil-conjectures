@@ -16,42 +16,44 @@
  },
  "proof": [
   {
-   "text": "Work in standard localizations. Construct the projection map as the pullback/direct-image adjunction mate of the inverse tensorator followed by the counit. Give perfect I and its dual the exact pairing from lem-pc-perfect-tensor-hom-duality, and map that pairing by the monoidal pullback model. Apply lem-sc-monoidal-projection-conjugate: the canonical projection mate equals the conjugate of the invertible tensorator at the dual under the composite tensor and pullback adjunctions. Conjugation preserves isomorphisms, so the canonical projection map is invertible, without boundedness on P. Use the inverse projection map to define t0, with I on the left.",
+   "text": "Apply the monoidal-adjunction bridge for the exact transported pullback and specified direct image. Perfectness implies quasi-coherence, so lift I into D_QCoh(Y) and apply perfect_tensor_hom_duality to obtain an exact pairing I,J. The mate p of the inverse tensorator followed by the counit equals the conjugate of commTensorLeft at J, by monoidal_projection_conjugate; the latter is an isomorphism. Thus p is invertible.",
    "uses": [
+    "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+    "lem-sc-perfect-qcoherent",
     "lem-pc-perfect-tensor-hom-duality",
-    "def-pc-derived-pullback-monoidal-model",
-    "lem-pc-ringed-spaces-derived-adjoint-general",
     "lem-sc-monoidal-projection-conjugate"
    ],
    "elementary": false
   },
   {
-   "text": "For the canonical unit isomorphism e0, naturality of the mate in i and the monoidal unit identity give Rf*(j0)=t0;(i⊗id_Rf*P);λ_Rf*P. Transport this equality through the localization equivalences and conjugate by hF at R and P. Naturality of hF then gives the same equality for F(j0).",
-   "uses": [
-    "def-pc-derived-pullback-across-universes",
-    "def-pc-derived-direct-image",
-    "def-pc-derived-pullback-monoidal-model"
-   ],
-   "elementary": false
+   "text": "Set t0=inv p. Cancel p and transpose under the pullback adjunction. Hom-equivalence naturality, map_whiskerRight and map_leftUnitor reduce the identity to two instances of whisker_exchange and left-unitor naturality. This proves the factorization with the monoidal unit comparison e0. The Lean private helper projection_factorization contains the complete calculation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For arbitrary e set c=e0.inv;e.hom:1_X→1_X, and let d=λ_P.inv;(c⊗id_P);λ_P. Then j=j0;d by tensor bifunctoriality. Let t=t0;(id_I⊗F(d)). Naturality of tensoring by i and left-unitor naturality rewrite t;(i⊗id);λ as F(j0);F(d)=F(j). No map involving β or an adjunction F⊣a occurs.",
+   "text": "For arbitrary e define d=lambda_P.inv;(e0.inv;e.hom) tensor id;lambda_P.hom. Tensor bifunctoriality and cancellation show j=j0;d. Set t=t0;(id_I tensor R(d)); whisker_exchange and left-unitor naturality give the required ambient factorization. The proved helper projection_factorization_unit_change records this calculation.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let Q be the tensor object with its supplied quasi-coherence witness, and let j:Q to P be the full-subcategory morphism. Naturality of hF gives F(j)=hF_Q;R(j);hF_P.inv. Substitute the ambient factorization and define the final factor hF_Q;t;(id_I tensor hF_P.inv). Tensor interchange and left-unitor naturality prove the displayed equation.",
+   "uses": [
+    "def-pc-derived-direct-image"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-direct-image",
-  "def-pc-derived-pullback-across-universes",
-  "def-pc-derived-pullback-monoidal-model",
   "lem-pc-perfect-tensor-hom-duality",
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-monoidal-projection-conjugate"
+  "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+  "lem-sc-monoidal-projection-conjugate",
+  "lem-sc-perfect-qcoherent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E4G, Lemma 48.4.4, expanded into the two geometric steps by S1; read online at https://stacks.math.columbia.edu/tag/0E4G"
+  "place": "Tag 0E4G projection-formula paragraph, implemented by K1 with the strong-monoidal adjunction argument; ambient coherence calculations are proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -122,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T111921-L-3062264",
+  "landing": "20261013T115026-L-3324986",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

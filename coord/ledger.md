@@ -12318,3 +12318,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/J2/Sheaf.Algebra.FiniteRelationQuotientComparison (stage 3; reviewer PASS; first push; landing 20261013T115025-L-3324481 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/J3/Sheaf.RingTheory.DirectedTensorCoconesColimit (stage 3; reviewer PASS; first push; landing 20261013T115025-L-3324654 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/J4/Sheaf.AlgebraicGeometry.ClosedImmersionFixedDegreeVanishing (stage 3; reviewer PASS; first push; landing 20261013T115026-L-3324876 (interface); batch 20261013T115020; modules 3; new nodes 2)
+- 11:50 L: merged deliver/K1/Sheaf.AlgebraicGeometry.DerivedTensorPrecompositionProjection (stage 3; reviewer PASS; first push; landing 20261013T115026-L-3324986 (interface); batch 20261013T115020; modules 2; new nodes 1)
