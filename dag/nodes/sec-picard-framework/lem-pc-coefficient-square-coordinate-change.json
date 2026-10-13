@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-coefficient-square-coordinate-change",
+ "kind": "statement",
+ "title": "Changing coefficient-square coordinates",
+ "statement": "Let X,X′,A,Z,B,P_Z be schemes [def-pc-scheme], with g:X′→X, v:A→X, z:Z→X, t:B→A, s:B→X′, q_Z:P_Z→Z, p_Z:P_Z→X′, e:A→Z and b:B→P_Z. Assume ez=v, bq_Z=te, bp_Z=s, q_Zz=p_Zg and tv=sg. Take K∈D(X), K′∈D(X′) [def-pc-derived-category], φ:L_gK→K′ [def-pc-derived-pullback] and the fixed comparisons c [lem-pc-ringed-spaces-derived-pullback-composition]. Let φ_rect=c(t,v), transport tv=sg, c(s,g) inverse, L_sφ. Let φ_Z=c(q_Z,z), transport q_Zz=p_Zg, c(p_Z,g) inverse, L_p_Zφ. Then L_t applied to c(e,z).hom followed by transport ez=v, followed by φ_rect, equals c(t,e).hom at L_zK, transport te=bq_Z, c(b,q_Z) inverse at L_zK, L_bφ_Z, c(b,p_Z).hom at K′ and transport bp_Z=s. Coordinate arrows need not be isomorphisms. There is only one coefficient square, not an iterated restriction.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Lemma 20.27.2, derived pullback composition; formal associativity and naturality consequence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand both square maps. Apply associativity to (t,e,z) and\n(b,qz,z) to move the source comparison through the square equality hz;\nuse ht and hv to identify the composite morphisms. Apply associativity to\n(b,pz,g), then naturality at phi, to move the target comparison past the\ncoefficient morphism. Equality-transport naturality moves the transports to\nthe common composite. The rectangle equality and the transported square\nequality have the same endpoints, so proof irrelevance identifies them.\nThe forward and inverse comparisons cancel. Both sides now have the same\nsource comparison, the same equality transport and the same final pullback\nof phi. No cancellation of a coordinate arrow is used, so the assertion holds\nfor arbitrary arrows, including maps from empty schemes and zero coefficients.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Formal expansion of composition, associativity and naturality",
+  "group": "N1",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback natural comparison maps commute with pasting two commutative squares",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pasting commutative squares coefficient maps contravariant pseudofunctor composition natural isomorphism",
+   "results": "Pseudofunctor.isoMapOfCommSq and LocallyDiscreteOpToCat.pullHom_pullHom are relevant formal tools, but the chosen derived pullback comparisons are not packaged as a pseudofunctor. No one-line match.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(pasting|composition)|pseudofunctor",
+   "results": "Searched Mathlib and both project roots. Underived module pseudofunctors and base-change comparison identities exist; none packages these coefficient square laws for the fixed derived comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexNestedCoefficientCoherence",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Changing coefficient-square coordinates in nested restriction coordinates, a formal part of the source-open induction in Tag 0DJ9",
+   "via": [
+    "lem-pc-single-complex-nested-coefficient-coherence",
+    "lem-pc-single-complex-open-nested-comparison",
+    "lem-pc-single-complex-open-union",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientSquareCoordinateChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientSquareCoordinateChange.lean",
+  "declaration": "AlgebraicGeometry.coefficient_square_coordinate_change",
+  "statement": "theorem coefficient_square_coordinate_change\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' A Z B PZ : Scheme.{u}}\n    (g : X' ⟶ X) (v : A ⟶ X) (z : Z ⟶ X)\n    (t : B ⟶ A) (s : B ⟶ X') (qz : PZ ⟶ Z) (pz : PZ ⟶ X')\n    (e : A ⟶ Z) (b : B ⟶ PZ)\n    (hv : e ≫ z = v) (ht : b ≫ qz = t ≫ e) (hs : b ≫ pz = s)\n    (hz : qz ≫ z = pz ≫ g) (hrect : t ≫ v = s ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (phi : (derivedPullback g).obj K ⟶ K') :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let phiRect := (c t v).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hrect) ≫\n      (c s g).inv.app K ≫ (derivedPullback s).map phi\n    let phiZ := (c qz z).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hz) ≫\n      (c pz g).inv.app K ≫ (derivedPullback pz).map phi\n    (derivedPullback t).map ((c e z).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hv)) ≫ phiRect =\n      (c t e).hom.app ((derivedPullback z).obj K) ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj\n        ((derivedPullback z).obj K)) ht.symm) ≫\n      (c b qz).inv.app ((derivedPullback z).obj K) ≫\n      (derivedPullback b).map phiZ ≫ (c b pz).hom.app K' ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K') hs)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T125013-L-3838022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T125013-L-3838022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
