@@ -65,11 +65,13 @@ lemma total (n : ℤ) :
   have h₂ := mappingCone.id_X (𝟙 K) n (n + 1) rfl
   simp only [HomologicalComplex.add_f_apply, HomologicalComplex.comp_f,
     HomologicalComplex.id_f] at h₁
-  rw [← h₁]
+  have hι : (ι α).f n = α.f n ≫ (biprod.inl : L ⟶ obj (K := K) (L := L)).f n +
+      (mappingCone.inr (𝟙 K)).f n ≫ (biprod.inr : _ ⟶ obj (K := K) (L := L)).f n := by
+    simp [ι, biprod.lift_eq]
+  rw [← h₁, hι]
   conv_rhs => rw [← Category.id_comp ((biprod.inr : _ ⟶ obj (K := K) (L := L)).f n), ← h₂]
-  simp only [retr, complProj, complIncl, ι, biprod.lift_desc, HomologicalComplex.comp_f,
-    Preadditive.add_comp, Preadditive.comp_add, Preadditive.sub_comp, Category.assoc,
-    biprod.lift_fst, biprod.lift_snd, ← HomologicalComplex.comp_f]
+  simp only [retr, complProj, complIncl, biprod.lift_desc, Preadditive.add_comp,
+    Preadditive.comp_add, Preadditive.sub_comp, Category.assoc, ← HomologicalComplex.comp_f]
   abel
 
 end mappingCylinderFactorization
@@ -112,6 +114,7 @@ theorem exists_mappingCylinder_split_factorization :
     let h₁ := (h₀.compRight (biprod.inr : _ ⟶ obj (K := K) (L := L))).compLeft
       (biprod.snd : obj (K := K) (L := L) ⟶ _)
     let h₂ := Homotopy.add h₁ (Homotopy.refl (biprod.fst ≫ biprod.inl))
-    exact (Homotopy.ofEq (by simp)).trans (h₂.symm.trans (Homotopy.ofEq (by simp)))
+    exact (Homotopy.ofEq (by simp)).trans (h₂.symm.trans
+      (Homotopy.ofEq (by rw [Category.id_comp, add_comm]; exact biprod.total)))
 
 end CochainComplex
