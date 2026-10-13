@@ -13918,3 +13918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:45 L: merged deliver/J4/Sheaf.Topology.RingedModuleSkyscraper (stage 3; reviewer PASS; first push; landing 20261013T234513-L-2163898 (proof); batch 20261013T234502; modules 1; new nodes 0)
 - 23:45 L: merged deliver/K4/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261013T234514-L-2163999 (proof); batch 20261013T234502; modules 1; new nodes 0)
 - 23:45 L: merged deliver/K4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261013T234514-L-2164145 (proof); batch 20261013T234502; modules 1; new nodes 0)
+- 23:45 L: merged deliver/K4/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261013T234515-L-2164257 (proof); batch 20261013T234502; modules 1; new nodes 0)
