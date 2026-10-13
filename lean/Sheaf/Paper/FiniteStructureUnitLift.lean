@@ -14,6 +14,7 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
+import Sheaf.Paper.FiniteStructureUnitLiftExistence
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
@@ -124,6 +125,27 @@ theorem finite_structure_unit_lift
             (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U
           ((η.val.app (op U)).hom r) =
           (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom
-          (Ideal.Quotient.mk (I ^ (n + 1)))))).app U r) := by sorry
+          (Ideal.Quotient.mk (I ^ (n + 1)))))).app U r) := by
+  obtain ⟨η, hη⟩ := finite_structure_unit_lift_existence A I X f i hi hp c hc Yn fnY gn
+    hcart hw G hG hproper ψ hψ μ hcomm hμ
+  refine ⟨η, hη, ?_⟩
+  intro η' hη'
+  apply SheafOfModules.hom_ext
+  ext U
+  let V : X.Opens := unop U
+  let one : Γ(G, V) := (η.val.app U).hom (1 : Γ(X, V))
+  let one' : Γ(G, V) := (η'.val.app U).hom (1 : Γ(X, V))
+  have h1 := hη'.1 V one
+  have h2 := hη.1 V one'
+  have hc := hcomm V one one'
+  simp only [one, one'] at h1 h2
+  have heq : one' = one := by
+    calc
+      one' = μ.app V (tmulSection one one') := by symm; exact h2
+      _ = μ.app V (tmulSection one' one) := hc
+      _ = one := h1
+  change (η'.val.app U).hom (1 : Γ(X, V)) = (η.val.app U).hom (1 : Γ(X, V))
+  simpa [one, one'] using heq
+
 
 end AlgebraicGeometry
