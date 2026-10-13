@@ -2,7 +2,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.CategoryTheory.SiteCechComplex
-public import Mathlib.GroupTheory.Perm.Sign
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,6 +24,31 @@ theorem cechDifferential_repeated_decomposition (X : Scheme.{u}) {I : Type v}
         (-1 : ℤ) ^ (j : Fin (p + 2)).val •
           (F.map (S.indexMap t (j : Fin (p + 2)).succAbove).op)
             (c (t ∘ (j : Fin (p + 2)).succAbove)) := by
-  sorry
+  classical
+  let term (j : Fin (p + 2)) : F.obj (op (S.W (p + 1) t)) :=
+    (-1 : ℤ) ^ j.val • (F.map (S.indexMap t j.succAbove).op) (c (t ∘ j.succAbove))
+  change (∑ j, term j) = ∑ j : ({a, b} : Finset (Fin (p + 2))), term j
+  rw [Finset.sum_coe_sort]
+  symm
+  apply Finset.sum_subset (Finset.subset_univ _)
+  intro j _ hj
+  have hja : a ≠ j := by
+    intro h
+    subst j
+    exact hj (by simp)
+  have hjb : b ≠ j := by
+    intro h
+    subst j
+    exact hj (by simp)
+  obtain ⟨a', ha'⟩ := Fin.exists_succAbove_eq hja
+  obtain ⟨b', hb'⟩ := Fin.exists_succAbove_eq hjb
+  have hnon : ¬ Function.Injective (t ∘ j.succAbove) := by
+    intro hinj
+    have heq : a' = b' := hinj (by simpa [Function.comp_def, ha', hb'] using htab)
+    apply hab
+    rw [← ha', ← hb', heq]
+  dsimp only [term]
+  rw [hz _ hnon]
+  simp
 
 end AlgebraicGeometry.Scheme
