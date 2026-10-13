@@ -17,6 +17,7 @@ Source: upstream review #1428, recorded in coord/upstream-review-20261013.md.
 The upstream module `WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre` now
 provides `AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalk`. The former
 `isZero_of_isZero_stalks` declaration was a duplicate and has been retired.
+No local declaration callers need adaptation.
 -/
 
 @[expose] public section
