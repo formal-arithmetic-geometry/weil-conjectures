@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-power-series-finite-subfield-family",
+ "kind": "statement",
+ "title": "Construction of finite coefficient subrings with p-power intersection of fraction subfields",
+ "statement": "Let $p$ be prime, $k$ a field of characteristic $p$, and $n,m\\geq0$. Let $C$ be a domain equipped with a ring isomorphism $e:C\\cong k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_m]$ [def-weil-pbc-multivariate-power-series, def-weil-pbc-mv-polynomial-ring]. Let $K$ be a fraction field of $C$ [def-weil-pbc-localization-at-prime] of characteristic $p$. There exist an index set $I$, subrings $A_i\\subseteq C$, and subfields $F_i\\subseteq K$ containing the prime field $\\mathbf F_p$, such that (1) $C$ is finite as an $A_i$-module for every $i$ [def-weil-finitely-generated-module]; (2) the image of every $A_i$ under $C\\to K$ lies in $F_i$; (3) $K^p=\\{x^p:x\\in K\\}\\subseteq F_i$ for every $i$; (4) $K^p=\\bigcap_i F_i$; (5) for every $i,j$ there exists $l$ with $F_l\\subseteq F_i\\cap F_j$.",
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P5, construction of the finite coefficient subrings and their fraction subfields; Tag 07PH (lemma-find-D), coefficient-subfield paragraph"
+ },
+ "proof": [
+  {
+   "text": "Choose a p-basis t_i of k using Field.exists_p_basis. Index the family by finite subsets J of its index set I.",
+   "uses": [
+    "lem-weil-pbc-p-basis-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct k_J as the subfield closure of k^p together with the basis elements outside J. Construct B_J inside P=k[[x_1,...,x_n]][y_1,...,y_m] with carrier all polynomials whose coefficients are in k_J and whose nonzero coefficients have every x and y exponent divisible by p. Zero and one satisfy this condition. It is preserved by addition and negation. For multiplication expand the polynomial coefficient and then the power-series coefficient as two finite antidiagonal sums. Every summand is in k_J. If the sum is nonzero, some summand is nonzero, hence both its factors have p-divisible exponents, so their sums do too. This proves that B_J is a subring, with precisely the coefficient condition required by powerSeriesRingSubfields.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Give K its P-algebra structure by the composite P -> C -> K using e inverse; IsFractionRing.isFractionRing_iff_of_base_ringEquiv transfers the fraction-ring instance. Let K_J be the subfield closure of the image of B_J in K. Subfield.mem_closure_iff and Subring.closure_eq express its elements as quotients of two images of B_J. If the denominator in B_J is zero, the quotient is zero and can instead be written 0/1. Otherwise this is the exact quotient condition of powerSeriesRingSubfields; conversely such quotients are in the closure by closure under division.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply RingTheory.powerSeriesRingSubfields to the constructed k_J, B_J, K_J and the chosen p-basis. This supplies finiteness of P over B_J, containment of K^p in every K_J, equality of their intersection with K^p, and K_(J union Jprime) contained in both K_J and K_Jprime.",
+   "uses": [
+    "lem-weil-pbc-power-series-ring-subfields"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set A_J=e inverse(B_J), the subring comap. Restrict e inverse to a ring equivalence B_J -> A_J. Apply Module.Finite.of_equiv_equiv to this equivalence and e inverse to transfer finiteness from B_J -> P to A_J -> C. Every image of a in A_J is in K_J by the quotient representation e(a)/1.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each K_J contains the prime field: every a in F_p has a pth root in F_p by perfection, and the algebra map sends this root to a root in K; containment of K^p gives the claim. Use Subfield.toIntermediateField to obtain F_J over F_p. Its carrier is unchanged. IntermediateField.coe_iInf turns the set intersection equality into the intermediate-field infimum equality. The union of two finite subsets witnesses downward directedness. Return I prime=Finset I with the constructed A_J and F_J.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-p-basis-exists",
+  "lem-weil-pbc-power-series-ring-subfields"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P5, construction of the finite coefficient subrings and their fraction subfields; Tag 07PH (lemma-find-D), coefficient-subfield paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient subrings of polynomial rings over multivariate power series have fraction subfields whose intersection is the pth powers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct finite coefficient subrings of multivariate power series polynomial ring whose fraction subfields form a directed family intersecting in the pth powers",
+   "results": "PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, PowerSeries.fg_iff_of_isPrime, PowerSeries.isNoetherianRing, Ring.DirectLimit.Polynomial.exists_of, PowerSeries.instIsNoetherianRing, Ring.perfectionSubring, PowerSeries.not_isField, PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime; no construction-family match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subfield.mem_closure_iff",
+   "results": "Subfield.mem_closure_iff in Mathlib.Algebra.Field.Subfield.Basic; used for the quotient characterization, not the whole family theorem",
+   "date": "2026-10-13",
+   "verdict": "partial tool lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*finite.*subfield|coefficientSubring|powerSeriesRingSubfields",
+   "results": "Mathlib/RingTheory/Etale/Field.lean:101, a comment about unique lifts for finite subfields, not the requested construction",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.Derivation.PowerSeriesPolynomialDifferential",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07PH (lemma-find-D), choice of the finite coefficient subring in the coefficient-subfield paragraph; construction of the family used in step 1 of lem-weil-pbc-power-series-polynomial-nonzero-differential",
+   "via": [
+    "lem-weil-pbc-power-series-polynomial-nonzero-differential",
+    "lem-weil-pbc-finite-coefficient-detecting-derivation",
+    "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+    "lem-weil-pbc-helper-g-ring-char-p",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PowerSeriesFiniteSubfieldFamily",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesFiniteSubfieldFamily.lean",
+  "declaration": "RingTheory.exists_powerSeries_finite_subfield_family",
+  "statement": "theorem exists_powerSeries_finite_subfield_family\n    (p : ℕ) [Fact p.Prime]\n    (k : Type t) [Field k] [CharP k p] (n m : ℕ)\n    (C : Type u) [CommRing C] [IsDomain C]\n    (e : C ≃+* MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))\n    (K : Type v) [Field K] [CharP K p] [Algebra C K] [IsFractionRing C K] :\n    ∃ (ι : Type t) (A : ι → Subring C) (F : ι → IntermediateField (ZMod p) K),\n      (∀ i, Module.Finite (A i) C) ∧\n      (∀ i (a : A i), algebraMap C K a ∈ F i) ∧\n      (∀ i, Set.range (fun x : K => x ^ p) ⊆ (F i : Set K)) ∧\n      (Set.range (fun x : K => x ^ p) =\n        ((⨅ i, F i : IntermediateField (ZMod p) K) : Set K)) ∧\n      (∀ i j, ∃ l, F l ≤ F i ⊓ F j)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T095940-L-2454376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T095940-L-2454376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

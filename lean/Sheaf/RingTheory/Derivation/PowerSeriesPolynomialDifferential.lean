@@ -10,9 +10,12 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Sheaf.FieldTheory.ExistsPBasis
+
+import Mathlib.Algebra.CharP.Algebra
+import Sheaf.RingTheory.PowerSeriesFiniteSubfieldFamily
 import Sheaf.FieldTheory.IntersectionSubfieldsDifferentials
 import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
+import Sheaf.FieldTheory.ExistsPBasis
 import Sheaf.RingTheory.PowerSeriesRingSubfields
 
 /-!
@@ -62,6 +65,76 @@ theorem exists_finite_subring_nonzero_differential
     (z : M) (hz : ¬ ∃ x : M, x ^ p = z) :
     ∃ A : Subring C,
       letI : Algebra A M := ((algebraMap C M).comp A.subtype).toAlgebra
-      Module.Finite A C ∧ D A M z ≠ 0 := by sorry
+      Module.Finite A C ∧ D A M z ≠ 0 := by
+  classical
+  have : CharP K p := (algebraMap K M).charP (algebraMap K M).injective p
+  let _ : Algebra (ZMod p) K := ZMod.algebra (R := K) p
+  let _ : Algebra (ZMod p) M := ZMod.algebra (R := M) p
+  obtain ⟨ι, A, F, hfinite, himage, hpower, hinter, hdir⟩ :=
+    RingTheory.exists_powerSeries_finite_subfield_family p k n m C e K
+  have hM := (FieldTheory.intersection_subfields_differentials p K F
+    hpower hinter hdir).2 M
+  let T : ι → Subfield M := fun i => Subfield.closure
+    (Set.range (fun x : M => x ^ p) ∪ (algebraMap K M '' (F i : Set K)))
+  have hbase (i : ι) (a : ZMod p) : algebraMap (ZMod p) M a ∈ T i := by
+    apply Subfield.subset_closure
+    left
+    obtain ⟨b, hb⟩ := surjective_frobenius (ZMod p) p a
+    refine ⟨algebraMap (ZMod p) M b, ?_⟩
+    change (algebraMap (ZMod p) M b) ^ p = algebraMap (ZMod p) M a
+    rw [← map_pow]
+    exact congrArg (algebraMap (ZMod p) M) hb
+  let T' : ι → IntermediateField (ZMod p) M := fun i =>
+    (T i).toIntermediateField (hbase i)
+  have htpower : ∀ i, Set.range (fun x : M => x ^ p) ⊆ (T' i : Set M) := by
+    intro i x hx
+    exact Subfield.subset_closure (Or.inl hx)
+  have htinter : Set.range (fun x : M => x ^ p) =
+      ((⨅ i, T' i : IntermediateField (ZMod p) M) : Set M) := by
+    simpa only [IntermediateField.coe_iInf, T', T,
+      Subfield.coe_toIntermediateField] using hM
+  have htdir : ∀ i j, ∃ l, T' l ≤ T' i ⊓ T' j := by
+    intro i j
+    obtain ⟨l, hl⟩ := hdir i j
+    refine ⟨l, ?_⟩
+    have hle (i : ι) (hi : F l ≤ F i) : T l ≤ T i := by
+      apply Subfield.closure_mono
+      rintro x (hx | ⟨a, ha, rfl⟩)
+      · exact Or.inl hx
+      · exact Or.inr ⟨a, hi ha, rfl⟩
+    exact le_inf (hle i (le_trans hl inf_le_left))
+      (hle j (le_trans hl inf_le_right))
+  have hd : D (ZMod p) M z ≠ 0 := by
+    intro h
+    obtain ⟨x, hx⟩ := (D_eq_zero_iff_exists_pow_of_perfectField p (ZMod p) M z).mp h
+    exact hz ⟨x, hx.symm⟩
+  have hkernel := (FieldTheory.intersection_subfields_differentials.{w, t, w} p M T'
+    htpower htinter htdir).1
+  obtain ⟨i, hi⟩ : ∃ i, map (ZMod p) (T' i) M M (D (ZMod p) M z) ≠ 0 := by
+    by_contra h
+    apply hd
+    exact hkernel _ (by simpa using h)
+  have hdi : D (T' i) M z ≠ 0 := by
+    simpa only [map_D, Algebra.algebraMap_self, RingHom.id_apply] using hi
+  refine ⟨A i, ?_⟩
+  let _ : Algebra (A i) M := ((algebraMap C M).comp (A i).subtype).toAlgebra
+  refine ⟨hfinite i, ?_⟩
+  let f : A i →+* T' i :=
+    { toFun := fun a => ⟨algebraMap C M a, by
+        apply Subfield.subset_closure
+        right
+        exact ⟨algebraMap C K a, himage i a,
+          (IsScalarTower.algebraMap_apply C K M a).symm⟩⟩
+      map_zero' := Subtype.ext (map_zero ((algebraMap C M).comp (A i).subtype))
+      map_one' := Subtype.ext (map_one ((algebraMap C M).comp (A i).subtype))
+      map_add' := fun a b => Subtype.ext (map_add ((algebraMap C M).comp (A i).subtype) a b)
+      map_mul' := fun a b => Subtype.ext (map_mul ((algebraMap C M).comp (A i).subtype) a b) }
+  let _ : Algebra (A i) (T' i) := f.toAlgebra
+  have : IsScalarTower (A i) (T' i) M :=
+    IsScalarTower.of_algebraMap_eq (fun a => rfl)
+  intro hzero
+  apply hdi
+  have hh := congrArg (map (A i) (T' i) M M) hzero
+  simpa only [map_D, Algebra.algebraMap_self, RingHom.id_apply, map_zero] using hh
 
 end KaehlerDifferential
