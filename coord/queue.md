@@ -1,6 +1,6 @@
 # Work queue
 
-447 items; claim with `tools/claim.py next <group> [--stage N]`.
+448 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (417)
+## Stage 3: modules to prove (418)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -260,6 +260,9 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PerfectJumpLoci` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectTensorFiniteRelativeTor` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectUniversalH0BottomModel` | 20 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardExternalCupCochain` | 20 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft` | 20 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardH1BaseDescentLocalModel` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarModelCyclesRealization` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart` | 20 | 1 | proof |
@@ -315,7 +318,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.LocallyPrincipalSupportDimensionOne` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTestFiniteExtensionFlat` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic` | 21 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PrincipalCechBicomplexComparison` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PrincipalOpenSectionsRestrictionComparison` | 21 | 1 | proof |
@@ -362,7 +364,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PerfectStalkDerivedHomLift` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel` | 22 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardExternalCupRightExactLadder` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PrincipalCechHorizontalSquare` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperFlatRightAdjointOpenSupport` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMayerVietoris` | 22 | 1 | proof |
