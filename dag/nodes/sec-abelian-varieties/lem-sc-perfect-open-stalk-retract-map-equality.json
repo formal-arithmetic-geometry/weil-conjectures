@@ -14,29 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Restrict the splitting to Z and sandwich a-b into the finite free sheaf. The finite presentation internal-Hom stalk comparison identifies zero stalk maps with zero germs of local Hom sections, or equivalently with the finitely many zero germs of the sandwich matrix entries.",
+   "text": "Restrict the inclusion and retraction successively from U to V to Z, then transport to Z.toScheme.Modules through overEquiv. The overMapUnitIso and overEquivFunctorObjUnitIso comparisons identify the transported unit with the unit on Z. Preservation of the free coproduct gives mapFreeIso for the transported finite free sheaf. Functoriality transports the splitting identity. This constructs an inclusion i and a retraction p with i followed by p equal to the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the open module stalk functor and use faithfulness of restriction of scalars to obtain equality of the module stalk maps of E.map a and E.map b. Precompose with p, then with each free coproduct inclusion, and evaluate on the germ of global 1. StalkFunctor_map_germ_apply identifies the resulting equalities with equality of germs of the generator images.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-sc-open-module-stalk-functor",
-    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved private finite-free germ calculation exists_restrict_eq_of_free_germs_eq from FiniteFreeStalkMapEquality (the generator-intersection part of lem-pc-finite-free-stalk-map-eq-shrink). It applies germ_eq to the finite family of images and obtains one open Wprime in Z containing x on which p followed by E.map a and p followed by E.map b agree. Precompose with the restricted inclusion i and use the transported splitting identity to obtain equality of the restrictions of E.map a and E.map b. The finite-free calculation includes the empty basis.",
+   "uses": [
+    "lem-pc-finite-free-stalk-map-eq-shrink"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the scalar germ equality criterion to each matrix entry and intersect the finitely many neighbourhoods inside Z. All entries vanish there. Composing the zero sandwich map with the restricted splitting gives a=b. The empty matrix is the zero-retract case.",
-   "uses": [],
+   "text": "Take W to be the open-immersion image of Wprime in X. It contains x and lies in Z. The isoImage isomorphism, restriction composition, and restriction congruence transport equality to restriction along X.homOfLE hWZ. Restriction along the isoImage scheme isomorphism is faithful (the proved helper restrict_map_injective_of_isIso in FiniteFreeStalkMapEquality). Finally overMapCompOverEquiv transports this equality to the over-site restriction, where faithfulness of overEquiv gives the desired equality.",
+   "uses": [
+    "lem-pc-finite-free-stalk-map-eq-shrink"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
   "def-sc-open-module-stalk-functor",
-  "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+  "lem-pc-finite-free-stalk-map-eq-shrink"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Expansion of the finite-component calculation in Tags 09RE and 0BC7 (2), using Tag 01CP; the categorical and finite-support assembly is written in Lean by M4."
+  "place": "Tag 01CP, finite-type injectivity proof. V3 implements the finite-generator argument using the already proved finite-free germ calculation and categorical restriction comparisons; no internal-Hom comparison or finite-presentation theorem is required."
  },
  "mathlib_searches": [
   {
@@ -111,10 +122,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T100034-L-2470521",
-  "kind": "interface",
+  "landing": "20261013T111936-L-3068044",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
