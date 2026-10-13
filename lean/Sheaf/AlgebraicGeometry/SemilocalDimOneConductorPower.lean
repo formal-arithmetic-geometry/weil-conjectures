@@ -57,12 +57,12 @@ theorem semilocal_dim_one_conductor_power
     letI : Module.Finite B A := hfin
   set_option linter.style.haveILetI false in
     letI : IsFractionRing A K := hfrac
-  obtain ⟨r, hr, _⟩ := Subalgebra.exists_jacobson_pow_mul_mem_base hdim A
+  obtain ⟨r, hr, hconductor⟩ := Subalgebra.exists_jacobson_pow_mul_mem_base hdim A
   have hpow : a ^ r ∈
       (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))) ^ r :=
     Ideal.pow_mem_pow haJ r
   obtain ⟨b, hb⟩ := Subalgebra.exists_base_mul_mem_of_mem_map_jacobson_pow
-    hdim A (a ^ r) hpow ⟨(y : K), hym⟩
+    hdim A hconductor (a ^ r) hpow ⟨(y : K), hym⟩
   refine ⟨m * r, Nat.mul_pos hm hr, b, ?_⟩
   calc
     algebraMap B K b = (a : K) ^ r * (y : K) := hb

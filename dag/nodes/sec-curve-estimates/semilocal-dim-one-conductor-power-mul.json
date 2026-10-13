@@ -2,27 +2,24 @@
  "id": "semilocal-dim-one-conductor-power-mul",
  "kind": "statement",
  "title": "Ideal-power conductor multiplication",
- "statement": "For a finite intermediate B-subalgebra A of the fraction field K and z in (J(B)A)^r, every product z*a with a in A comes from B.",
+ "statement": "For a finite intermediate B-subalgebra A of the fraction field K, assume r satisfies the conductor property: for every b in J(B)^r and every a in A, the product b*a comes from B. Then for z in (J(B)A)^r and every a in A, the product z*a comes from B.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties Lemma 09N2, finite-conductor paragraph"
  },
  "proof": [
   {
-   "text": "Expand membership in the ideal power as finite sums of products of mapped Jacobson elements, apply the finite conductor theorem termwise, and sum the resulting base elements.",
-   "uses": [
-    "lem-sc-finite-integral-conductor"
-   ],
-   "elementary": false
+   "text": "Rewrite (map J(B))^r as map (J(B)^r) using Mathlib Ideal.map_pow. Its membership is membership in the ideal span of mapped base elements. Apply Submodule.span_induction, keeping the multiplier arbitrary. On generators apply the assumed conductor property; use the base-ring witnesses 0 and c+d for zero and addition. For t*z absorb t into the arbitrary multiplier and commute the factors.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-sc-finite-integral-conductor"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09N2"
+  "place": "Varieties Lemma 09N2, finite-conductor paragraph",
+  "note": "U3: corrected the missing suitable-exponent hypothesis and proved extension to the ideal map by Mathlib span induction."
  },
  "stmt_deps": [],
  "blueprint": {
@@ -39,7 +36,7 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteConductorMul",
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteConductorMul.lean",
   "declaration": "Subalgebra.exists_base_mul_mem_of_mem_map_jacobson_pow",
-  "statement": "theorem Subalgebra.exists_base_mul_mem_of_mem_map_jacobson_pow\n    {B : Type u} [CommRing B] [IsDomain B] [IsNoetherianRing B]\n    [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1)\n    {K : Type v} [Field K] [Algebra B K] [IsFractionRing B K]\n    (A : Subalgebra B K) [Module.Finite B A] [IsFractionRing A K]\n    {r : ℕ} (z : A)\n    (hz : z ∈ (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))) ^ r)\n    (a : A) : ∃ c : B, algebraMap B K c = (z : K) * (a : K)",
+  "statement": "theorem Subalgebra.exists_base_mul_mem_of_mem_map_jacobson_pow\n    {B : Type u} [CommRing B] [IsDomain B] [IsNoetherianRing B]\n    [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1)\n    {K : Type v} [Field K] [Algebra B K] [IsFractionRing B K]\n    (A : Subalgebra B K) [Module.Finite B A] [IsFractionRing A K]\n    {r : ℕ}\n    (hconductor : ∀ b : B, b ∈ (Ideal.jacobson (⊥ : Ideal B)) ^ r →\n      ∀ a : A, ∃ c : B, algebraMap B K c = algebraMap B K b * (a : K))\n    (z : A)\n    (hz : z ∈ (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))) ^ r)\n    (a : A) : ∃ c : B, algebraMap B K c = (z : K) * (a : K)",
   "branch": "sheaf-dag",
   "by": "H2",
   "date": "2026-10-13"
@@ -93,13 +90,42 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
+  "reviewer": "X-d41c7",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T225314-L-1807347",
+  "landing": "20261013T003201-L-2430156",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files and DAG records match the corrected Lean statements; both modules compile, the original caller fails for the reported forced-adaptation error, and the adapted caller compiles."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "U3 stage 2",
+  "old_statement": "For a finite intermediate B-subalgebra A of the fraction field K and z in (J(B)A)^r, every product z*a with a in A comes from B.",
+  "what": "STATEMENT-DISPUTED: the arbitrary exponent r is not a conductor exponent. At r=0 and z=1 the original would force A=image(B); the cusp local ring B=Q[t^2,t^3]_(t^2,t^3), A=B[t], K=Q(t), a=t is a counterexample. Add the base-ring conductor property for r, exactly the property of the suitable exponent in Stacks 09N2, already available at the caller.",
+  "source": {
+   "document": "literature/stacks-project/varieties.tex",
+   "place": "Varieties Lemma 09N2, finite-conductor paragraph"
+  },
+  "citers": [
+   {
+    "id": "semilocal-dim-one-conductor-power",
+    "holds": true,
+    "note": "The caller already obtains r with its conductor property from lem-sc-finite-integral-conductor. Retain that property and pass it to the corrected lemma; its conclusion and the caller statement are unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Expand membership in the ideal power as finite sums of products of mapped Jacobson elements, apply the finite conductor theorem termwise, and sum the resulting base elements.",
+    "uses": [
+     "lem-sc-finite-integral-conductor"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sc-finite-integral-conductor"
+  ]
  }
 }
