@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.StalkIso
 
@@ -47,13 +50,12 @@ The degree-one bound is derived along the blueprint argument from the boundary s
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+The boundary semicontinuity is the case of the affine line of
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`.
 
 ## TODO
 
-Prove the boundary semicontinuity
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`
-(`lem-wf-boundary-semicontinuity`) and the stalk formula at the origin
-(`lem-fd-stalk-at-origin`), which are stated with `sorry`.
+Prove the stalk formula at the origin (`lem-fd-stalk-at-origin`), which is stated with `sorry`.
 -/
 
 @[expose] public section
@@ -110,9 +112,38 @@ theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleE
         (D.directImage.compactlySupportedCohomology 2)) ∧
     ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((WeilComplex.homologySheaf r).obj
       ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).carrier) :=
-  -- TODO(adic): the case of `nonempty_equiv_stalk_homologySheaf_fourierTransform_origin` for
-  -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
-  sorry
+  by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible (𝔸(PUnit.{u + 1}; Spec (.of k₀)) ↘ _)
+  -- the stalk at the origin in degree `r` is `H_c^{r + 2}(𝔸¹, j_*M)`
+  have key (r : ℤ) : Nonempty ((((WeilComplex.homologySheaf r).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology (r + 1 + 1))) := by
+    obtain ⟨e₁⟩ := nonempty_equiv_stalk_homologySheaf_fourierTransform_origin ψ
+      D.middleExtension r
+    obtain ⟨e₂⟩ := WeilComplex.nonempty_equiv_compactlySupportedCohomology_shift
+      (WeilSheaf.toComplex.obj D.directImage) (r + 1)
+    exact ⟨e₁.trans e₂⟩
+  refine ⟨?_, ?_, fun r hr ↦ ?_⟩
+  · obtain ⟨e⟩ := key (-1)
+    norm_num at e
+    exact ⟨e⟩
+  · obtain ⟨e⟩ := key 0
+    norm_num at e
+    exact ⟨e⟩
+  · obtain ⟨e⟩ := key r
+    have hr' : r + 1 + 1 < 0 ∨ 2 < r + 1 + 1 ∨ r + 1 + 1 = 0 := by
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff, not_or] at hr
+      omega
+    have hs : Subsingleton (D.directImage.compactlySupportedCohomology (r + 1 + 1)).carrier := by
+      rcases hr' with h | h | h
+      · exact subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse (Or.inl h)
+      · exact subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse (Or.inr h)
+      · rw [h]
+        exact subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf D.lisse
+    exact e.toLinearEquiv.toEquiv.subsingleton
 
 namespace WeilSheaf.LisseOnDenseOpen
 
@@ -128,7 +159,7 @@ theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAl
     simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
   have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
     GeometricallyConnected.of_geometricallyIrreducible _
-  exact IsLisse.hasWeightsAtMost_directImage D.j D.isDominant.denseRange D.lisse hβ
+  exact WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse hβ
 
 /-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
 middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of

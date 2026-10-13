@@ -79,7 +79,8 @@ theorem frobeniusWeight_pow (qx : ℕ) (α : E) (n : ℕ) :
   simp only [frobeniusWeight, map_pow, norm_pow, Real.log_pow]
   ring
 
-/-- The weight of an inverse is the negative of the weight. -/
+/-- The weight of an inverse is the negative of the weight; in particular duality negates
+weights (blueprint `sk-r-real-linear`). -/
 theorem frobeniusWeight_inv (qx : ℕ) (α : E) :
     frobeniusWeight ι qx α⁻¹ = -frobeniusWeight ι qx α := by
   simp only [frobeniusWeight, map_inv₀, norm_inv, Real.log_inv]
@@ -330,8 +331,11 @@ theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) 
     exact Multiset.map_congr rfl fun t _ ↦ map_multiset_prod (starRingEnd ℂ) t
   rw [hE, hmap, hconj, hreal.map_conj_localEigenvalues ι x]
 
-/-- The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
-local eigenvalues of the dual are the inverses of those of `ρ` (`sk-p-linear-spectra`). -/
+/-- Blueprint `lem-tw-dual-negation`: Weight of the linear dual.
+
+The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
+local eigenvalues of the dual are the inverses of those of `ρ` (`sk-p-linear-spectra`), and
+inverses have the negative weight (`lem-tw-multiplicativity`). -/
 theorem IsPunctuallyPure.dual {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) :
     W.IsPunctuallyPure l ρ.dual ι (-w) := by
   intro x γ hγ

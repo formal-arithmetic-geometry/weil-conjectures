@@ -15,12 +15,15 @@ For a commutative ring `Λ` and a morphism of schemes `f : X ⟶ Y`, pulling bac
 `Λ`-modules commutes with taking the underlying abelian sheaf. Consequently the pullback map on
 global sections `Γ(Y, G) ⟶ Γ(X, f^* G)` is an isomorphism for `G` if and only if it is one for
 the underlying abelian sheaf of `G`.
+Constant sheaves also commute with taking the underlying abelian sheaf.
 
 ## Main definitions and results
 
 - `AlgebraicGeometry.Etale.upperStarForget₂Comparison`: the comparison map
   `f^* (forget₂ G) ⟶ forget₂ (f^* G)`, which is an isomorphism.
 - `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_iff_forget₂`.
+- `AlgebraicGeometry.Etale.constantSheafSheafComposeForget₂Iso`: constant sheaves commute with
+  forgetting the module structure.
 -/
 
 @[expose] public section
@@ -125,5 +128,22 @@ theorem isIso_globalSectionsUpperStarMap_iff_forget₂
   exact (isIso_iff_of_reflects_iso (((sheafSections _ _).obj (Opposite.op (⊤_ Y.Etale))).map
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app G))
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).symm
+
+/-- Constant sheaves commute with forgetting the module structure. -/
+noncomputable def constantSheafSheafComposeForget₂Iso :
+    constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+        sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) ≅
+      forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1} ⋙
+        constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+  haveI : Y.smallEtaleTopology.PreservesSheafification
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    Sheaf.preservesSheafification_of_adjunction _ (ModuleCat.forget₂CoinduceAdj Λ)
+  Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _
+    (sheafComposeNatIso Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+      (sheafificationAdjunction _ (ModuleCat.{u + 1} Λ))
+      (sheafificationAdjunction _ AddCommGrpCat.{u + 1})).symm ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)) _ ≪≫
+    Functor.associator _ _ _
 
 end AlgebraicGeometry.Etale

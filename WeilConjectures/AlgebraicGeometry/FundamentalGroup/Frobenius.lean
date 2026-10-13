@@ -13,7 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromyFrobenius
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingMonodromy
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorLifting
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
@@ -60,8 +64,6 @@ Frobenius has finitely many fixed points `J₀(𝔽_q)`
 
 - `AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_mapIso`: the monodromy of a transported
   torsor.
-- `AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_eq_one_of_section`: a torsor with a section
-  has trivial monodromy.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`: Frobenius-fixed
   compatible systems of `ℤ / ℓⁿ`-torsors on a curve over `𝔽̄_q` are trivial.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper`: the
@@ -204,23 +206,6 @@ lemma monodromy_mapIso (e : Y ≅ Y) (τ : FiniteEtale.mapIso e ⋙ fiber s ≅ 
   rw [t.fiber_map_vaddHom_monodromy s G (σ g)]
   exact (hσ P g x).symm
 
-/-- A torsor with a section has trivial monodromy: the point of the geometric fibre through the
-section is the image of the unique point of the geometric fibre of `Y` itself, which is fixed by
-`G`. -/
-lemma monodromy_eq_one_of_section (t : EtaleTorsor M Y) {σ : Y ⟶ t.P} (hσ : σ ≫ t.π = 𝟙 Y) :
-    t.monodromy s G = 1 := by
-  let T : Y.FiniteEtale := ⟨MorphismProperty.Over.mk ⊤ (𝟙 Y) inferInstance,
-    inferInstanceAs (IsFinite (𝟙 Y))⟩
-  let S : T ⟶ t.toFiniteEtale := ObjectProperty.homMk (MorphismProperty.Over.homMk σ hσ)
-  let x₀ : (fiber s).obj T := Over.homMk s (Category.comp_id s)
-  have hx₀ (g : G) : g • x₀ = x₀ := fiber_ext s <| by
-    rw [← Category.comp_id (g • x₀).left, ← Category.comp_id x₀.left]
-    exact (fiber_left_comp s (g • x₀)).trans (fiber_left_comp s x₀).symm
-  ext g
-  let x := (fiber s).map S x₀
-  refine congrArg Multiplicative.toAdd ((t.monodromy_eq_iff s G g x 0).mpr ?_)
-  rw [t.fiber_map_vaddHom_zero s, ← IsNaturalSMul.naturality g S x₀, hx₀]
-
 end Monodromy
 
 section Curve
@@ -246,7 +231,8 @@ module, at finite level (the isomorphisms (4.3) with `J[ℓⁿ](K̄) = Pic(C)[�
 Let `C₀` be a proper smooth geometrically connected curve over a finite field `K`, `C` its
 geometric fibre and `ℓ ≠ char K`. The cup product followed by the trace
 `H¹(C, ℤ / ℓⁿ) × H¹(C, μ_{ℓⁿ}) ⟶ H²(C, μ_{ℓⁿ}) = ℤ / ℓⁿ` is perfect (blueprint
-`lem-wf-curve-finite-level-pd`), and Kummer theory identifies `H¹(C, μ_{ℓⁿ})` with the
+`lem-wf-curve-finite-level-pd`, `AlgebraicGeometry.Scheme.EtaleTorsor.bijective_curvePairing`),
+and Kummer theory identifies `H¹(C, μ_{ℓⁿ})` with the
 `ℓⁿ`-torsion of `Pic(C)` (blueprint `lem-wf-curve-kummer-jacobian-tate-module`). In the torsor
 model of `H¹(C, ℤ / ℓⁿ)` this gives maps `Ψ n` from `ℤ / ℓⁿ`-torsors to characters of
 `Pic(C)[ℓⁿ]` such that
@@ -278,7 +264,64 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
           Ψ n t ⟨(l : ℤ) • (y : Additive p.geometricFiber.Pic),
             AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ =
           ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n)) (Ψ (n + 1) t' y) := by
-  sorry
+  have hl : l.Prime := Fact.out
+  let _ : Fintype K := Fintype.ofFinite K
+  let _ : p.geometricFiber.Over (Spec (.of (AlgebraicClosure K))) :=
+    ⟨p.geometricFiberToAlgebraicClosure⟩
+  have : SmoothOfRelativeDimension 1 (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd p _))
+  have : IsProper (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (IsProper (pullback.snd p _))
+  have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
+  have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected p
+  have : GeometricallyIntegral p := .of_geometricallyReduced_of_geometricallyIrreducible _
+  have : GeometricallyIntegral (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd p _))
+  obtain ⟨r, hr⟩ := exists_card_continuousMonoidHom_zmod_eq p l s G
+  -- `ℓ` is invertible in `K̄`
+  have hlK : (l : K) ≠ 0 := fun h ↦ (Fact.out : ringChar K ≠ l)
+    ((Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime K (ringChar K)) hl).1
+      ((ringChar.spec K l).1 h))
+  have hm (n : ℕ) : ((l ^ n : ℕ) : AlgebraicClosure K) ≠ 0 := by
+    rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
+    exact pow_ne_zero _ ((map_ne_zero _).2 hlK)
+  have hne (n : ℕ) : NeZero (l ^ n) := ⟨pow_ne_zero _ hl.ne_zero⟩
+  have heq (n : ℕ) : AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l : ℤ) ^ n) =
+      AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l ^ n : ℕ) : ℤ) := by
+    rw [Nat.cast_pow]
+  -- the geometric Galois Frobenius lies over the Frobenius of `Spec K̄`
+  have hf : p.geometricGaloisFrobenius.hom ≫
+      (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) =
+      (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) ≫ (specGeometricFrobenius K).hom :=
+    p.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure
+  have hincl (n : ℕ) (z : AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l ^ n : ℕ) : ℤ)) :
+      AddSubgroup.inclusion (heq n).le ⟨z.1, (heq n).ge z.2⟩ = z :=
+    Subtype.ext rfl
+  refine ⟨fun n t ↦ haveI := hne n
+    (t.picPairing (hm n)).comp (AddSubgroup.inclusion (heq n).le), fun n t h0 ↦ ?_,
+    fun n t₁ t₂ h ↦ ?_, fun n t y ↦ ?_, fun n t t' hmon y ↦ ?_⟩
+  · have := hne n
+    refine exists_section_of_picPairing_eq_zero s G (fun k _ ↦ hr k) (hm n) t ?_
+    ext z
+    have h1 := DFunLike.congr_fun h0 ⟨z.1, (heq n).ge z.2⟩
+    rw [AddMonoidHom.comp_apply, hincl] at h1
+    exact h1
+  · have := hne n
+    exact congrArg (fun φ ↦ φ.comp (AddSubgroup.inclusion (heq n).le))
+      (picPairing_eq_of_isIsomorphic (hm n) h)
+  · have := hne n
+    rw [AddMonoidHom.comp_apply, AddMonoidHom.comp_apply,
+      picPairing_transport p.geometricGaloisFrobenius.hom (specGeometricFrobenius K).hom hf
+        (hm n) t (t.mapIso p.geometricGaloisFrobenius) (𝟙 _) (Category.id_comp _).symm
+        (by rw [Category.comp_id, Category.id_comp]; rfl)]
+    exact congrArg _ (Subtype.ext rfl)
+  · have := hne n
+    have := hne (n + 1)
+    rw [AddMonoidHom.comp_apply, AddMonoidHom.comp_apply]
+    refine Eq.trans ?_ (picPairing_zsmul_of_monodromy s G (hm n) (hm (n + 1)) t t' hmon
+      (AddSubgroup.inclusion (heq (n + 1)).le y)
+      ((heq n).le (AddSubgroup.zsmul_mem_torsionBy_pow y.2)))
+    exact congrArg _ (Subtype.ext rfl)
 
 /-- Blueprint `lem-wf-proper-curve-compatible-h1-no-fixed`: No fixed compatible `H¹`-system on a
 proper curve.
@@ -379,7 +422,25 @@ theorem exists_pow_mul_monodromy_eq_zero
       ∀ g ∈ fixingSubgroup s (IsOpenImmersion.lift V.ι (p.geometricFiberMap c.i c.comm.symm)
           (by rwa [Scheme.Opens.range_ι])) G,
         ((l ^ v : ℕ) : ZMod (l ^ n)) * (T.monodromy s G g).toAdd.down = 0 := by
-  sorry
+  have hl : l.Prime := Fact.out
+  -- a power `Φ ^ m` fixing `z` kills the local monodromy through `Q - 1`, `Q = q ^ m`
+  obtain ⟨m, hm, hmon⟩ := exists_natCast_sub_one_mul_monodromy_eq_zero p c s G V hV z hz
+  have hQ : 2 ≤ Nat.card K ^ m :=
+    (Finite.one_lt_card (α := K)).trans_le (Nat.le_self_pow (by omega) _)
+  obtain ⟨v, hv⟩ := ZMod.exists_natCast_pow_mul_eq_zero_of_natCast_sub_one_mul_eq_zero hl hQ
+  refine ⟨v, fun n T hT g hg ↦ hv n _ ?_⟩
+  obtain ⟨ψ, hψπ, hψv⟩ := hT
+  have : NeZero (l ^ n) := ⟨pow_ne_zero _ hl.ne_zero⟩
+  -- `ℓ` is invertible in `K̄`
+  have hlK : (l : K) ≠ 0 := fun h ↦ (Fact.out : ringChar K ≠ l)
+    ((Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime K (ringChar K)) hl).1
+      ((ringChar.spec K l).1 h))
+  have hlK' : ((l ^ n : ℕ) : AlgebraicClosure K) ≠ 0 := by
+    rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
+    exact pow_ne_zero _ ((map_ne_zero _).2 hlK)
+  let ψ' : Aut T.P := ψ
+  exact hmon hlK' T (ψ' ^ m) (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' _ hψπ m)
+    (fun a ↦ (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' ψ' (hψv a).symm m).symm) g hg
 
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
 curve, the vanishing of the residue at one boundary point.

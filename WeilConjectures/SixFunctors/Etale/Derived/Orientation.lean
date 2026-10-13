@@ -258,7 +258,14 @@ noncomputable def ihomShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTo
 ```
   M⟦-n⟧ ⊗ᴸ T ≅ RHom(Λ_X⟦n⟧, M) ⊗ᴸ T ≅ RHom(Λ_X⟦n⟧, M ⊗ᴸ T) ≅ (M ⊗ᴸ T)⟦-n⟧,
 ```
-by `AlgebraicGeometry.Etale.ihomUnitShiftIso` and the twist interchange. -/
+by `AlgebraicGeometry.Etale.ihomUnitShiftIso` and the twist interchange.
+
+This identification is built ad hoc. It is not (yet) known to agree with the canonical
+commutation of `⊗ᴸ` with shifts (`AlgebraicGeometry.Etale.derivedTensorShiftIso`,
+`AlgebraicGeometry.Etale.commShiftDerivedTensorFlipObj`), since the coherence of the
+associator with shifts is not available. The shift compatibility
+`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift` is stated relative
+to this identification. -/
 noncomputable def shiftTensorIsoOfIsInvertible (n : ℤ)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     M⟦-n⟧ ⊗ T ≅ (M ⊗ T)⟦-n⟧ :=
@@ -432,7 +439,10 @@ Let `a : X ⟶ S` be a structure morphism admitting a compactification, let `o` 
 orientation of `a` of relative dimension `d`, and let `K` be perfect over `Λ_X`, i.e.
 dualizable. Substituting `ω_X ≅ Λ_X(d)[2d]` into `𝔻_X K = RHom_X(K, ω_X)` and interchanging
 the twist with the internal hom identifies the Verdier dual of `K` with the twisted, shifted
-coefficient dual: `𝔻_X K ≅ K^∨(d)[2d]`. -/
+coefficient dual: `𝔻_X K ≅ K^∨(d)[2d]`.
+
+When `[HasInvertibleExponent Λ X]` holds, the component `o.verdierDualIso.app (op K)` of `θ_f`
+is such an isomorphism. This statement needs no such hypothesis, because `K` is dualizable. -/
 theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
     Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K) ≅

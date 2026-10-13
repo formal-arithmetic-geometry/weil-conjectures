@@ -110,12 +110,12 @@ set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search through integral closures and quotients is slow
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
-`R` in `Ω` over a maximal ideal `m` of `R` with finite residue field. If the inertia group of `Q`
+`R` in `Ω` over a maximal ideal `m` of `R` with perfect residue field. If the inertia group of `Q`
 in `Gal(Ω / K)` fixes `ψ(T)` pointwise, then the prime `ψ⁻¹ Q` of `T` is unramified over `R`. -/
 theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
     [IsDedekindDomain T] [Algebra R T] [Module.Finite R T] [Module.IsTorsionFree R T]
     (ψ : T →ₐ[R] Ω) (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] (m : Ideal R)
-    [m.IsMaximal] [Q.LiesOver m] [Finite (R ⧸ m)]
+    [m.IsMaximal] [Q.LiesOver m] [PerfectField m.ResidueField]
     (hI : ∀ σ ∈ Q.inertia Gal(Ω/K), ∀ x, σ (ψ x) = ψ x) :
     (Q.comap (integralClosureMap ψ)).ramificationIdx R = 1 := by
   have : Algebra.IsIntegral R T := Algebra.IsIntegral.of_finite R T
@@ -231,16 +231,11 @@ theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
       (IntermediateField.mem_fixedField_iff _ _).1 (hσL' hxL') σ (Subgroup.mem_zpowers σ)
     change (τ x : Ω) = x
     rw [← hτ'M, ← hσM _ x.2, h1]
-  have hperf : PerfectField m.ResidueField := by
-    have : Finite m.ResidueField :=
-      Finite.of_surjective _ (Ideal.bijective_algebraMap_quotient_residueField m).2
-    exact PerfectField.ofFinite
   have : (P.under S).IsMaximal := Ideal.IsMaximal.of_liesOver_isMaximal (P.under S) m
   have hperfS : PerfectField (P.under S).ResidueField := by
-    have : Finite (S ⧸ P.under S) := Module.finite_of_finite (R ⧸ m)
-    have : Finite (P.under S).ResidueField :=
-      Finite.of_surjective _ (Ideal.bijective_algebraMap_quotient_residueField (P.under S)).2
-    exact PerfectField.ofFinite
+    let := Localization.AtPrime.algebraOfLiesOver m (P.under S)
+    have : Algebra.IsIntegral R S := Algebra.IsIntegral.of_finite R S
+    exact Algebra.IsAlgebraic.perfectField m.ResidueField
   have : Module.IsTorsionFree R TM := Module.isTorsionFree_iff_faithfulSMul.2
     ((faithfulSMul_iff_algebraMap_injective R TM).2 fun x y hxy ↦ hRΩ (by
       have h := congrArg iTB hxy
@@ -259,13 +254,13 @@ theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
 
 /-- **Covers on which inertia acts trivially are unramified.** Let `T` be a Dedekind domain finite
 over `R` with an `R`-algebra map to `Ω`, and `Q` a maximal ideal of the integral closure of `R`
-in `Ω` over a maximal ideal `m` of `R` with finite residue field. If the inertia group of `Q` in
+in `Ω` over a maximal ideal `m` of `R` with perfect residue field. If the inertia group of `Q` in
 `Gal(Ω / K)` fixes the image of every `R`-algebra map `T → Ω`, then every prime of `T` over `m` is
 unramified over `R`. -/
 theorem ramificationIdx_eq_one_of_forall_inertia {T : Type*} [CommRing T]
     [IsDedekindDomain T] [Algebra R T] [Module.Finite R T] [Module.IsTorsionFree R T]
     (ψ₀ : T →ₐ[R] Ω) (Q : Ideal (integralClosure R Ω)) [Q.IsMaximal] (m : Ideal R)
-    [m.IsMaximal] [Q.LiesOver m] [Finite (R ⧸ m)]
+    [m.IsMaximal] [Q.LiesOver m] [PerfectField m.ResidueField]
     (hI : ∀ σ ∈ Q.inertia Gal(Ω/K), ∀ (ψ : T →ₐ[R] Ω) (x : T), σ (ψ x) = ψ x)
     (𝔭 : Ideal T) [𝔭.IsPrime] [𝔭.LiesOver m] : 𝔭.ramificationIdx R = 1 := by
   have : Algebra.IsIntegral R T := Algebra.IsIntegral.of_finite R T
@@ -335,7 +330,8 @@ end Ring
 
 section Etale
 
-variable (m : Ideal R) [m.IsMaximal] [Finite (R ⧸ m)] (Q : Ideal (integralClosure R Ω))
+variable (m : Ideal R) [m.IsMaximal] [PerfectField m.ResidueField]
+  (Q : Ideal (integralClosure R Ω))
   [Q.IsMaximal] [Q.LiesOver m] (π : R) {R' : Type*} [CommRing R'] [Algebra R R']
   [IsLocalization.Away π R'] {A : Type*} [CommRing A] [IsDomain A] [Algebra R A]
   [Algebra R' A] [IsScalarTower R R' A] [Module.Finite R' A] [Algebra.Etale R' A]
@@ -517,10 +513,7 @@ theorem etale_integralClosure_of_forall_inertia (hπ : π ≠ 0)
   have : Algebra.FormallyUnramified R R' :=
     Algebra.FormallyUnramified.of_isLocalization (Submonoid.powers π)
   have : Algebra.FormallyUnramified R A := Algebra.FormallyUnramified.comp R R' A
-  have hperf : PerfectField m.ResidueField := by
-    have : Finite m.ResidueField :=
-      Finite.of_surjective _ (Ideal.bijective_algebraMap_quotient_residueField m).2
-    exact PerfectField.ofFinite
+  have hperf : PerfectField m.ResidueField := inferInstance
   -- `T` is unramified at every prime
   have hunr : Algebra.FormallyUnramified R T := by
     rw [Algebra.formallyUnramified_iff_forall]

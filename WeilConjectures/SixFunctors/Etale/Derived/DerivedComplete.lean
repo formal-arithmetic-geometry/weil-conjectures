@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 
@@ -78,6 +79,46 @@ local notation "Λ_(" X ", " Λ ")" =>
     (ModuleCat.{u + 1} Λ)) 0).obj
       ((constantSheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
 
+/-- `Rf_*` preserves the right orthogonal of the objects on which `ϖ` acts invertibly: a map
+`Z ⟶ Rf_* K` is the transpose of a map `Lf^* Z ⟶ K`, and `ϖ` acts invertibly on `Lf^* Z`, the
+derived pullback being `Λ`-linear. -/
+lemma rightOrthogonal_smulInvertible_rightDerivedLowerStar {Λ : Type (u + 1)} [CommRing Λ]
+    (ϖ : Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, Λ))
+    (hK : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal K) :
+    (_root_.DerivedCategory.smulInvertible Y.smallEtaleTopology ϖ).rightOrthogonal
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  intro Z g (hZ : IsIso (ϖ • 𝟙 Z))
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
+  have hZ' : IsIso (ϖ • 𝟙 ((L((f)^*[ModuleCat.{u + 1} Λ])).obj Z)) := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  have h := hK ((adj.homEquiv _ _).symm g) hZ'
+  rw [← (adj.homEquiv _ _).apply_symm_apply g, h, Adjunction.homEquiv_unit,
+    Functor.map_zero, Limits.comp_zero]
+
+/-- The coefficient dual `RHom(K, Λ_X)` lies in the right orthogonal of the objects on which `ϖ`
+acts invertibly as soon as `Λ_X` does: a map `Z ⟶ RHom(K, Λ_X)` is the transpose of a map
+`K ⊗ᴸ Z ⟶ Λ_X`, and `ϖ` acts invertibly on `K ⊗ᴸ Z`, the derived tensor product being
+`Λ`-linear. -/
+lemma rightOrthogonal_smulInvertible_coefficientDual {Λ : Type (u + 1)} [CommRing Λ]
+    (ϖ : Λ) {X : Scheme.{u}}
+    (hΛ : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal
+      Λ_(X, Λ)) (K : 𝐃(X, Λ)) :
+    (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal
+      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) := by
+  intro Z g (hZ : IsIso (ϖ • 𝟙 Z))
+  let e := singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) X
+  let adj := derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) (X := X) K
+  have hZ' : IsIso (ϖ • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj Z)) := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  have h : (adj.homEquiv _ _).symm g = 0 := by
+    have := hΛ ((adj.homEquiv _ _).symm g ≫ e.inv) hZ'
+    rw [← Category.comp_id ((adj.homEquiv _ _).symm g), ← e.inv_hom_id, ← Category.assoc,
+      this, Limits.zero_comp]
+  rw [← (adj.homEquiv _ _).apply_symm_apply g, h, Adjunction.homEquiv_unit,
+    Functor.map_zero, Limits.comp_zero]
+
 section General
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsDomain Λ] (I : Ideal Λ) (hI : I.IsPrincipal)
@@ -90,18 +131,18 @@ that are derived complete for `I` to derived complete objects of `D(Y_ét, Λ)`.
 theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete Y.smallEtaleTopology I
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  -- Proof sketch: by `derivedComplete_iff`, `hK` says that the cone `K ⟶ K ⊗ᴸ Λ/Iⁿ` is a
-  -- homotopy limit (its Milnor triangle is distinguished). `Rf_*` is triangulated and, being
-  -- right adjoint to `Lf^*`, preserves products, so by `IsHomotopyLimit.map` the image cone
-  -- `Rf_* K ⟶ Rf_*(K ⊗ᴸ Λ/Iⁿ)` is a homotopy limit. Each `Iⁿ` is principal, so
-  -- `nonempty_iso_reductionModIdeal_rightDerivedLowerStar` gives
-  -- `Rf_*(K ⊗ᴸ Λ/Iⁿ) ≅ Rf_* K ⊗ᴸ Λ/Iⁿ`, naturally in `n` (the isomorphisms are built from
-  -- the cones of multiplication by `πⁿ`, which are compatible along the projections
-  -- `Λ/Iⁿ⁺¹ → Λ/Iⁿ`). Transporting the homotopy limit along these isomorphisms gives the cone
-  -- `Rf_* K ⟶ Rf_* K ⊗ᴸ Λ/Iⁿ` (`IsHomotopyLimit.of_iso`), which is therefore a homotopy
-  -- limit.
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  -- For `I = 0` every object is derived complete. For `I = (ϖ)` with `ϖ ≠ 0`, derived
+  -- completeness is right orthogonality to the objects on which `ϖ` acts invertibly
+  -- (`derivedComplete_iff_rightOrthogonal`), and `Rf_*` preserves it by adjunction.
+  obtain ⟨ϖ, hϖI⟩ := hI.principal
+  by_cases h0 : ϖ = 0
+  · -- `I = 0`: every object is derived complete
+    obtain rfl : I = ⊥ := by rw [hϖI, h0, Ideal.span_singleton_eq_bot]
+    exact _root_.DerivedCategory.derivedComplete_bot _
+  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hK ⊢
+  exact rightOrthogonal_smulInvertible_rightDerivedLowerStar ϖ f K hK
 
 /-- **`Rf_!` preserves derived completeness.** For a principal ideal `I` of a domain `Λ` and
 `f : X ⟶ Y` admitting a compactification, `Rf_!` carries objects of `D(X_ét, Λ)` that are
@@ -136,17 +177,17 @@ theorem derivedComplete_coefficientDual {X : Scheme.{u}}
     (hΛ : DerivedCategory.derivedComplete X.smallEtaleTopology I Λ_(X, Λ)) (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete X.smallEtaleTopology I
-      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) :=
-  -- Proof sketch: `Λ_X` is the monoidal unit up to the isomorphism
-  -- `DerivedCategory.εSingleFunctorZero`, and derived completeness is invariant under
-  -- isomorphism. `RHom(K, –)` is triangulated and, being right adjoint to `K ⊗ᴸ –`, preserves
-  -- products, so it carries the homotopy limit `Λ_X ⟶ Λ_X ⊗ᴸ Λ/Iⁿ` given by `hΛ` to a
-  -- homotopy limit (`IsHomotopyLimit.map`). Since `Iⁿ = (πⁿ)` and `Λ/Iⁿ` is the
-  -- cone of `πⁿ : Λ → Λ`, the triangulated `Λ`-linear functor `RHom(K, –)` satisfies
-  -- `RHom(K, Λ_X ⊗ᴸ Λ/Iⁿ) ≅ RHom(K, Λ_X) ⊗ᴸ Λ/Iⁿ`, naturally in `n`; transporting the
-  -- homotopy limit along these isomorphisms shows that `K^∨` is derived complete. The
-  -- hypothesis `hK` is not needed by this argument.
-  sorry
+      ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) := by
+  -- For `I = 0` every object is derived complete. For `I = (ϖ)` with `ϖ ≠ 0`, derived
+  -- completeness is right orthogonality to the objects on which `ϖ` acts invertibly, which
+  -- passes from `Λ_X` to `RHom(K, Λ_X)` by adjunction. The hypothesis `hK` is not needed.
+  obtain ⟨ϖ, hϖI⟩ := hI.principal
+  by_cases h0 : ϖ = 0
+  · obtain rfl : I = ⊥ := by rw [hϖI, h0, Ideal.span_singleton_eq_bot]
+    exact _root_.DerivedCategory.derivedComplete_bot _
+  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hΛ ⊢
+  exact rightOrthogonal_smulInvertible_coefficientDual ϖ hΛ K
 
 end General
 
@@ -182,6 +223,7 @@ theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
   derivedComplete_rightDerivedLowerShriek _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) f K
     hK
 
+attribute [-instance] Shrink.instRing in
 /-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
 
 **The dual at the integral stage.** For `E` finite over `ℚ_ℓ` and a scheme `X` on which the
@@ -195,12 +237,7 @@ theorem derivedCompleteIntegral_coefficientDual {X : Scheme.{u}}
     DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
       ((DerivedCategory.coefficientDual
         (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X).obj (op K)) :=
-  -- This is `derivedComplete_coefficientDual _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E)
-  -- hΛ K hK`, which elaborates but times out in the kernel: the statement here carries the ring
-  -- instance `Shrink.instRing`, the instantiated general statement carries
-  -- `CommRing.toRing Shrink.instCommRing`, and the two have to be unfolded against each other
-  -- inside every monoidal and closed structure that `coefficientDual` depends on.
-  sorry
+  derivedComplete_coefficientDual _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) hΛ K hK
 
 end Integral
 

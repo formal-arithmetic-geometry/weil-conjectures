@@ -73,6 +73,27 @@ lemma homologyMap_eq_app_homology (β : 𝟭 C ⟶ 𝟭 C) {K : HomologicalCompl
   rw [← cancel_epi (K.homologyπ i), homologyπ_naturality, hc]
   exact (β.naturality (K.homologyπ i)).symm
 
+section CyclesMap
+
+variable {K L : HomologicalComplex C c} (φ : K ⟶ L)
+
+/-- A chain map commutes with the maps `K.toCycles i j : K.X i ⟶ K.cycles j`. -/
+@[reassoc]
+lemma toCycles_cyclesMap (i j : ι) :
+    K.toCycles i j ≫ cyclesMap φ j = φ.f i ≫ L.toCycles i j := by
+  rw [← cancel_mono (L.iCycles j)]
+  simp
+
+/-- `cyclesMap` commutes with the identifications `K.cycles a = K.cycles b` for `a = b`. -/
+lemma eqToHom_comp_cyclesMap {a b : ι}
+    (h : a = b) :
+    (eqToHom (by rw [h]) : K.cycles a ⟶ K.cycles b) ≫ cyclesMap φ b =
+      cyclesMap φ a ≫ (eqToHom (by rw [h]) : L.cycles a ⟶ L.cycles b) := by
+  subst h
+  simp
+
+end CyclesMap
+
 /-- For a projective object `P`, there are no nonzero morphisms `P ⟶ H_j(K)` if and only if
 every morphism `P ⟶ K_j` killed by the differential factors through the incoming
 differential. -/

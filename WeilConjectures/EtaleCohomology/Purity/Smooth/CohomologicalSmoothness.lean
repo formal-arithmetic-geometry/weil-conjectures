@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
@@ -18,23 +20,34 @@ and the formation of `Rf^!` commutes with base change.
 
 These are the inputs of both the deformation to the normal cone
 (`WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation`) and smooth purity
-(`WeilConjectures.EtaleCohomology.Purity.Smooth.Basic`).
+(`WeilConjectures.EtaleCohomology.Purity.Smooth.Basic`). The notion of a cohomologically smooth
+morphism and its structural properties are in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicallySmooth`.
 
 ## Implementation notes
 
-The blueprint asserts that each isomorphism below is *canonical*: `sk-prop-cohsm` (b) is about
-the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the projection formula. That map does not exist in
-the repository — the projection map itself is a TODO of
-`WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement records the existence
-of the isomorphism only, with a `TODO(unify)` marker.
+The three clauses of `sk-prop-cohsm` are read off from the orientation-free smooth duality of
+the ambient chapter, as in the proof of `thm-pur-cohomological-smoothness`: the locally constant
+rank-one shape of `ω_f` and the tensor formula
+(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`, `thm-asd-smooth-tensor`),
+and arbitrary base change for `Rf^!`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`,
+`prop-asd-smooth-base-change`). A locally constant sheaf with free rank-one stalks, placed in any
+degree, is invertible
+(`AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`).
+The canonical form of clause (b) is
+`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`.
 
 The statements carry `include d in`: they do not mention the relative dimension `d`, and
-without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dropped.
+without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dropped. They hold
+without the Tate twist datum and without separatedness (which is implied by the
+compactification), so these hypotheses are omitted.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isInvertible_dualizingComplex`
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`,
+  `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
 - `AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_constantComplex_of_etale`: `ω_e ≅ Λ_X`
   for `e` étale (`lem-pur-co-smooth-etale-locality`), hence `Re^! K ≅ Le^* K`
@@ -59,6 +72,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
 
+
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
@@ -67,9 +82,12 @@ include d in
 the form of cohomological smoothness that does not yet name the twist; smooth purity
 identifies `ω_f` with `Λ_X(d)[2d]`. -/
 theorem isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) :=
-  sorry
+    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
+  obtain ⟨L, _, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  exact DerivedCategory.isInvertible.of_iso e.symm
+    (isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf L hL _)
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
@@ -80,17 +98,30 @@ include d in
 
 Equivalently, `Rf^!` is `Lf^*` twisted by the invertible object `ω_f` of clause (a); this is
 what turns the computation of `ω_f` into a computation of `Rf^!` on all coefficients. The
-blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism. -/
--- TODO(unify): sk-prop-cohsm — state `IsIso φ_K` once the projection map is available.
+blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism, which
+is `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
-  sorry
+  nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
 
+omit [HasTateTwist Λ] [IsSeparated f] in
+include d in
+/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
+
+*Clause (b), the tensor formula, canonical form.* For `f` smooth of pure relative dimension `d`,
+the mate of the projection formula, `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`), is an isomorphism for every `K`. -/
+theorem isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (dualizingComplexTensorMap Λ f K) :=
+  (exists_dualizingComplex_iso_and_tensor Λ f d).choose_spec.2.2.2 K
+
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
@@ -108,7 +139,9 @@ include d in
 with `f` smooth and `f'` its base change along `g`, the formation of `Rf^!` commutes with base
 change. Applied to the diagonal square `W = X ×_Y X` this gives `ω_{p₁} ≅ Lp₂^* ω_f` and
 `ω_{p₂} ≅ Lp₁^* ω_f`, which is what makes the diagonal computation of the purity theorem
-possible. -/
+possible. For quasi-compact `f'` the canonical base change map is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`).
+-/
 theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : Scheme.{u}}
     {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] :
@@ -116,7 +149,7 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
         L((g')^*[ModuleCat.{u + 1} Λ]) ≅
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
         rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
-  sorry
+  nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
 

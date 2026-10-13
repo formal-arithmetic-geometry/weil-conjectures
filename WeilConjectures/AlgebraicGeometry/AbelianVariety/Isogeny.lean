@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
@@ -38,10 +39,15 @@ Multiplication by `n` is written `𝟙 A ^ n`, the `n`-th power of the identity 
 - `AlgebraicGeometry.IsIsogeny.isFinite`, `AlgebraicGeometry.IsIsogeny.flat`,
   `AlgebraicGeometry.IsIsogeny.finrank_eq`: an isogeny is finite flat of degree the order of
   its kernel.
+- `AlgebraicGeometry.IsIsogeny.isFiniteLocallyFreeOfDegree`: an isogeny of abelian varieties is
+  finite locally free of degree the order of its kernel.
 - `AlgebraicGeometry.isIsogeny_npow_id`, `AlgebraicGeometry.isogenyDegree_npow_id`:
   multiplication by `n` is an isogeny of degree `n ^ (2 * g)`.
 - `AlgebraicGeometry.finrank_npow_id`: multiplication by `n` is finite locally free of rank
   `n ^ (2 * g)`.
+- `AlgebraicGeometry.isFiniteLocallyFreeOfDegree_npow_id`,
+  `AlgebraicGeometry.singleton_mem_fppfPrecoverage_npow_id`: multiplication by `n` is finite
+  locally free of degree `n ^ (2 * g)`, and an fppf covering.
 - `AlgebraicGeometry.isFinite_torsionSubgroupScheme`,
   `AlgebraicGeometry.flat_torsionSubgroupScheme`,
   `AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`: `A[n]` is finite flat of order
@@ -308,6 +314,21 @@ theorem IsIsogeny.finrank_eq (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
   have := LocallyOfFiniteType.isLocallyNoetherian B.hom
   exact f.left.finrank_eq_of_fiberDegree_eq (IsIsogeny.fiberDegree_eq f) y
 
+/-- Blueprint `lem-sc-isogeny-degree`: The degree of an isogeny.
+
+An isogeny `f : A ⟶ B` of abelian varieties is finite locally free of degree the order of its
+kernel: it is finite (`AlgebraicGeometry.IsIsogeny.isFinite`), flat
+(`AlgebraicGeometry.IsIsogeny.flat`) and of finite presentation, and all of its fibres have
+degree `isogenyDegree f` (`AlgebraicGeometry.IsIsogeny.fiberDegree_eq`). -/
+theorem IsIsogeny.isFiniteLocallyFreeOfDegree (f : A ⟶ B) [IsIsogeny f] :
+    f.left.IsFiniteLocallyFreeOfDegree (isogenyDegree f) := by
+  have := IsIsogeny.isFinite f
+  have := IsIsogeny.flat f
+  have := LocallyOfFiniteType.isLocallyNoetherian B.hom
+  have : LocallyOfFinitePresentation f.left :=
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.mpr inferInstance
+  exact { fiberDegree_eq := IsIsogeny.fiberDegree_eq f }
+
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
 Let `A` be an abelian variety over `K` and let `0 < n`. Then `[n] : A ⟶ A` is a finite flat
@@ -383,10 +404,36 @@ theorem finrank_npow_id (n : ℕ) (hn : 0 < n) (y : A.left) :
   have := isIsogeny_npow_id (A := A) n hn
   rw [IsIsogeny.finrank_eq, isogenyDegree_npow_id n hn]
 
+/-- Blueprint `lem-sc-mult-n-finite-flat`: Multiplication by `n` is finite flat of degree
+`n ^ (2 * g)`.
+
+Multiplication by `0 < n` on an abelian variety of dimension `g` is finite locally free of
+degree `n ^ (2 * g)`: it is an isogeny of that degree (`AlgebraicGeometry.isogenyDegree_npow_id`),
+hence `AlgebraicGeometry.IsIsogeny.isFiniteLocallyFreeOfDegree` applies. -/
+theorem isFiniteLocallyFreeOfDegree_npow_id (n : ℕ) (hn : 0 < n) :
+    (𝟙 A ^ n).left.IsFiniteLocallyFreeOfDegree (n ^ (2 * IsAbelianVariety.dim A)) := by
+  have := isIsogeny_npow_id (A := A) n hn
+  exact isogenyDegree_npow_id (A := A) n hn ▸ IsIsogeny.isFiniteLocallyFreeOfDegree (𝟙 A ^ n)
+
+/-- Blueprint `lem-sc-isogeny-facts`, part (b): Basic facts about isogenies.
+
+Multiplication by `0 < n` on an abelian variety is an fppf covering: it is flat, locally of
+finite presentation (`AlgebraicGeometry.isFiniteLocallyFreeOfDegree_npow_id`) and surjective
+(`AlgebraicGeometry.surjective_npow_id`). -/
+theorem singleton_mem_fppfPrecoverage_npow_id (n : ℕ) (hn : 0 < n) :
+    Presieve.singleton (𝟙 A ^ n).left ∈ Scheme.fppfPrecoverage A.left := by
+  have := isFiniteLocallyFreeOfDegree_npow_id (A := A) n hn
+  have := surjective_npow_id A n hn
+  exact Scheme.Hom.singleton_mem_fppfPrecoverage _
+
 /-- Blueprint `sk-prop-av-divisible`: Surjectivity of multiplication by `n` on points.
 
 Let `A` be an abelian variety over an algebraically closed field `K` and `0 < n`. Then
-`[n] : A(K) ⟶ A(K)` is surjective: `A(K)` is a divisible abelian group. -/
+`[n] : A(K) ⟶ A(K)` is surjective: `A(K)` is a divisible abelian group.
+
+This is also blueprint `lem-sc-isogeny-surjective`. As `[n]` is finite and surjective, every
+`K`-point of `A` lifts along it (`AlgebraicGeometry.exists_comp_eq_of_isFinite_of_surjective`,
+blueprint `lem-sc-finite-flat-surj-points`). -/
 theorem surjective_npow_points [IsAlgClosed K] (n : ℕ) (hn : 0 < n) :
     Function.Surjective fun a : 𝟙_ (Over (Spec (.of K))) ⟶ A ↦ a ^ n := by
   have := isIsogeny_npow_id (A := A) n hn

@@ -5,11 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCupProduct
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 
 /-!
 # Associativity of the projection map for `Rf_!`
@@ -27,13 +25,10 @@ Rf_!K ⊗ᴸ (L ⊗ᴸ N) ----PF----> Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N)) --Rf_!(K �
 commutes, where `δ` is the tensor comparison of `Lf^*`
 (`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`).
 
-This is assembled from the associativity of the projection map of `Rg_*` for the proper part
-`g` of `c`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_assoc_of_tensorComparison`), of
-the projection isomorphism of the extension by zero `j_!` along its open part
-(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionMap_assoc_of_tensorComparison`),
-and of the monoidality of the composition isomorphism `Lg^* ⋙ Lj^* ≅ Lf^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_comp`).
+This is the associativity of the projection map of a composite
+(`CategoryTheory.Adjunction.compProjectionMap_associativity`) applied to `Rg_*` and the extension
+by zero `i_!`, using the monoidal coherence of their ingredients proved in
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal`.
 
 It is the formal input of the compatibility of the projection formula with finite reduction
 of the coefficients, blueprint `sk-prop-sf-pf-reduction`.
@@ -43,178 +38,32 @@ of the coefficients, blueprint `sk-prop-sf-pf-reduction`.
 
 universe u' u
 
-open CategoryTheory Category Limits MonoidalCategory Functor.OplaxMonoidal
+open CategoryTheory Category Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
-
-namespace AlgebraicGeometry
-
-open Scheme
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
-
-namespace Etale
-
-section LowerStar
-
-variable {X Y : Scheme.{u}} (p : X ⟶ Y)
-
-/-- **Associativity of the projection map of `Rp_*`.** For `M` on `X` and `L, N` on `Y`,
-```
-(Rp_*M ⊗ᴸ L) ⊗ᴸ N --π ▷ N--> Rp_*(M ⊗ᴸ Lp^*L) ⊗ᴸ N --π--> Rp_*((M ⊗ᴸ Lp^*L) ⊗ᴸ Lp^*N)
-        | α                                                        | Rp_* α
-        v                                                          v
-Rp_*M ⊗ᴸ (L ⊗ᴸ N) ---π---> Rp_*(M ⊗ᴸ Lp^*(L ⊗ᴸ N)) --Rp_*(M ◁ δ)--> Rp_*(M ⊗ᴸ (Lp^*L ⊗ᴸ Lp^*N))
-```
-commutes, `π` being `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`. -/
-lemma rightDerivedLowerStarProjectionMap_assoc_of_tensorComparison
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L N : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((rightDerivedLowerStarProjectionMap A p).app M).app L ▷ N ≫
-        ((rightDerivedLowerStarProjectionMap A p).app (M ⊗ L((p)^*[A]).obj L)).app N ≫
-          R((p)_*[A]).map (α_ M (L((p)^*[A]).obj L) (L((p)^*[A]).obj N)).hom =
-      (α_ (R((p)_*[A]).obj M) L N).hom ≫
-        ((rightDerivedLowerStarProjectionMap A p).app M).app (L ⊗ N) ≫
-          R((p)_*[A]).map (M ◁ ((leftDerivedUpperStarTensorComparison A p).app L).app N) :=
-  letI := leftDerivedUpperStarOplaxMonoidal A p
-  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_assoc_of_δ
-    (leftDerivedUpperStarTensorComparison A p) (fun _ _ ↦ rfl) M L N
-
-end LowerStar
-
-section OpenImmersion
-
-variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-
-/-- **Associativity of the projection map of `j_!`.** For an open immersion `j : U ⟶ X`, `K`
-on `U` and `M, M'` on `X`, the projection map `p : j_!(K ⊗ᴸ Lj^*M) ⟶ j_!K ⊗ᴸ M` of
-`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionMap` satisfies
-```
-j_!(K ⊗ᴸ Lj^*(M ⊗ᴸ M')) --j_!(K ◁ δ)--> j_!(K ⊗ᴸ (Lj^*M ⊗ᴸ Lj^*M'))
-        | p                                       | j_! α⁻¹ ≫ p ≫ p ▷ M'
-        v                                         v
-j_!K ⊗ᴸ (M ⊗ᴸ M') <-----------α---------- (j_!K ⊗ᴸ M) ⊗ᴸ M'
-``` -/
-lemma derivedOpenImmersionLowerShriekProjectionMap_assoc_of_tensorComparison
-    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
-    (M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    D((j)_!open[A]).map (K ◁ ((leftDerivedUpperStarTensorComparison A j).app M).app M') ≫
-        D((j)_!open[A]).map (α_ K (L((j)^*[A]).obj M) (L((j)^*[A]).obj M')).inv ≫
-        ((derivedOpenImmersionLowerShriekProjectionMap A j).app
-          (K ⊗ L((j)^*[A]).obj M)).app M' ≫
-        ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app M ▷ M' ≫
-        (α_ (D((j)_!open[A]).obj K) M M').hom =
-      ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app (M ⊗ M') := by
-  let := leftDerivedUpperStarOplaxMonoidal A j
-  have := isIso_leftDerivedUpperStarOplaxMonoidal_δ A j
-  refine (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
-    |>.projectionMap_assoc_of_projectionComparisonAssoc
-    (Adjunction.projectionComparisonAssoc_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A j)
-      fun Y Y' ↦ ?_) K M M'
-  have : inv (δ L((j)^*[A]) Y Y') = ((leftDerivedUpperStarTensorNatIso A j).inv.app Y).app Y' :=
-    IsIso.inv_eq_of_hom_inv_id (by
-      change ((leftDerivedUpperStarTensorNatIso A j).hom.app Y).app Y' ≫ _ = _
-      rw [← NatTrans.comp_app, Iso.hom_inv_id_app]
-      rfl)
-  rw [this]
-  rfl
-
-variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
-  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-  [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-
-/-- **Associativity of the projection isomorphism of `j_!`**, in the direction of the
-blueprint's projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`, the inverse `q` of
-`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`:
-```
-j_!K ⊗ᴸ (M ⊗ᴸ M') ------q------> j_!(K ⊗ᴸ Lj^*(M ⊗ᴸ M')) --j_!(K ◁ δ)--> j_!(K ⊗ᴸ (Lj^*M ⊗ᴸ Lj^*M'))
-        | α⁻¹                                                                ^ j_! α
-        v                                                                    |
-(j_!K ⊗ᴸ M) ⊗ᴸ M' --q ▷ M'--> j_!(K ⊗ᴸ Lj^*M) ⊗ᴸ M' ---q---> j_!((K ⊗ᴸ Lj^*M) ⊗ᴸ Lj^*M')
-``` -/
-lemma derivedOpenImmersionLowerShriekProjectionIso_inv_assoc
-    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
-    (M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app (M ⊗ M') ≫
-        D((j)_!open[A]).map (K ◁ ((leftDerivedUpperStarTensorComparison A j).app M).app M') =
-      (α_ (D((j)_!open[A]).obj K) M M').inv ≫
-        ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app M ▷ M' ≫
-        ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app
-          (K ⊗ L((j)^*[A]).obj M)).app M' ≫
-        D((j)_!open[A]).map (α_ K (L((j)^*[A]).obj M) (L((j)^*[A]).obj M')).hom := by
-  have hi (K M) : ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app M ≫
-      ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app M = 𝟙 _ := by
-    rw [← derivedOpenImmersionLowerShriekProjectionIso_hom, ← NatTrans.comp_app,
-      ← NatTrans.comp_app, Iso.hom_inv_id]
-    rfl
-  have h := derivedOpenImmersionLowerShriekProjectionMap_assoc_of_tensorComparison A j K M M'
-  rw [← cancel_epi (((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app (M ⊗ M')),
-    reassoc_of% (hi K (M ⊗ M'))]
-  conv_rhs => rw [← h]
-  simp only [assoc, Iso.hom_inv_id_assoc, ← comp_whiskerRight_assoc, hi, id_whiskerRight,
-    id_comp, reassoc_of% (hi _ M'), ← Functor.map_comp, Iso.inv_hom_id, comp_id,
-    CategoryTheory.Functor.map_id]
-
-end OpenImmersion
-
-end Etale
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-
-section Composition
-
-variable [Etale.UpperStarPreservesFlat A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
-
-/-- The isomorphism `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`
-is compatible with the tensor comparisons:
-```
-Li^*Lg^*(L ⊗ᴸ L') --Li^*δ--> Li^*(Lg^*L ⊗ᴸ Lg^*L') --δ--> Li^*Lg^*L ⊗ᴸ Li^*Lg^*L'
-       | ≅                                                       | ≅
-       v                                                         v
-Lf^*(L ⊗ᴸ L') -------------------δ-------------------------> Lf^*L ⊗ᴸ Lf^*L'
-``` -/
-lemma leftDerivedUpperStarCompactificationIso_hom_app_tensorComparison
-    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (leftDerivedUpperStarCompactificationIso A c).hom.app (L ⊗ L') ≫
-        ((leftDerivedUpperStarTensorComparison A f).app L).app L' =
-      L((c.i)^*[A]).map (((leftDerivedUpperStarTensorComparison A c.g).app L).app L') ≫
-        ((leftDerivedUpperStarTensorComparison A c.i).app _).app _ ≫
-        ((leftDerivedUpperStarCompactificationIso A c).hom.app L ⊗ₘ
-          (leftDerivedUpperStarCompactificationIso A c).hom.app L') := by
-  have e := leftDerivedUpperStarCompactificationIso_eq A c
-  have h := leftDerivedUpperStarTensorComparison_comp A c.i c.g f c.comm L L'
-  simp only [e, Iso.symm_hom]
-  rw [← cancel_epi
-    ((leftDerivedUpperStarComp A c.i c.g f c.comm).hom.app (L ⊗ L')), Iso.hom_inv_id_app_assoc,
-    ← reassoc_of% h, tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app,
-    id_tensorHom_id]
-  exact (comp_id _).symm
-
-variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+  {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- The projection map `PF_c` is the composite projection map of `Rg_*` and `j_!`. -/
+/-- The projection map `PF_c` is the projection map of the composite `Rg_* ∘ i_!`
+(`CategoryTheory.Adjunction.compProjectionMap`). -/
 lemma projectionMapOfCompactification_app_app_eq_compProjectionMap
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     ((projectionMapOfCompactification A c).app K).app L =
-      Adjunction.compProjectionMap (I := D((c.i)_!open[A])) (R := R((c.g)_*[A]))
-        (leftDerivedUpperStarCompactificationIso A c)
-        (fun M L ↦ ((rightDerivedLowerStarProjectionMap A c.g).app M).app L)
-        (fun K M ↦ ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app M) K L :=
+      (derivedUpperStarLowerStarAdjunction A c.g).compProjectionMap
+        (leftDerivedUpperStarTensorComparison A c.g) D((c.i)_!open[A])
+        (fun K N ↦ ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app N)
+        (fun L ↦ (leftDerivedUpperStarCompactificationIso A c).hom.app L) K L :=
   rfl
 
 /-- **Associativity of the projection map for `Rf_!`.** For a compactification `c` of
@@ -237,25 +86,16 @@ theorem projectionMapOfCompactification_assoc
       (α_ ((Rf_!(c)[A]).obj K) L N).hom ≫
         ((projectionMapOfCompactification A c).app K).app (L ⊗ N) ≫
         Rf_!(c)[A].map (K ◁ ((leftDerivedUpperStarTensorComparison A f).app L).app N) := by
-  have h := Adjunction.compProjectionMap_assoc (I := D((c.i)_!open[A])) (R := R((c.g)_*[A]))
-    (δi := fun M M' ↦ ((leftDerivedUpperStarTensorComparison A c.i).app M).app M')
-    (δg := fun M M' ↦ ((leftDerivedUpperStarTensorComparison A c.g).app M).app M')
-    (δf := fun M M' ↦ ((leftDerivedUpperStarTensorComparison A f).app M).app M')
-    (e := leftDerivedUpperStarCompactificationIso A c)
-    (πg := fun M L ↦ ((rightDerivedLowerStarProjectionMap A c.g).app M).app L)
-    (q := fun K M ↦ ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app M)
-    (leftDerivedUpperStarCompactificationIso_hom_app_tensorComparison A c)
-    (fun φ L ↦ rightDerivedLowerStarProjectionMap_naturality_left A c.g φ L)
-    (rightDerivedLowerStarProjectionMap_assoc_of_tensorComparison A c.g)
-    (fun φ M ↦ NatTrans.congr_app
-      ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.naturality φ) M)
-    (fun K _ _ φ ↦ ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).naturality φ)
-    (derivedOpenImmersionLowerShriekProjectionIso_inv_assoc A c.i) K L N
   rw [projectionMapOfCompactification_app_app_eq_compProjectionMap,
     projectionMapOfCompactification_app_app_eq_compProjectionMap,
     projectionMapOfCompactification_app_app_eq_compProjectionMap]
-  exact h
-
-end Composition
+  exact (derivedUpperStarLowerStarAdjunction A c.g).compProjectionMap_associativity _
+    (fun N N' ↦ ((leftDerivedUpperStarTensorComparison A c.i).app N).app N')
+    (fun L L' ↦ ((leftDerivedUpperStarTensorComparison A f).app L).app L')
+    (leftDerivedUpperStarTensorComparison_associativity A c.g)
+    (fun x N ↦ derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_left A c.i x N)
+    (fun K _ _ y ↦ derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_right A c.i K y)
+    (derivedOpenImmersionLowerShriekProjectionIso_inv_associativity A c.i)
+    (leftDerivedUpperStarCompactificationIso_hom_app_tensor A c) K L N
 
 end AlgebraicGeometry.Etale
