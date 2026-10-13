@@ -17,40 +17,32 @@
  ],
  "proof": [
   {
-   "text": "Finite-free retract terms of the bounded complex L are structure-ring flat; bounded-above flat complexes are K-flat. Restrict eK using exact monoidal open restriction, substitute eL for the first factor, and apply K-flat derived tensor comparison. Transport between the localized site and the open subscheme by the module equivalence to get the derived isomorphism from K|_U to the ordinary total tensor L tensor G|_U.",
+   "text": "Use strictPerfect_relativeTensor_roof_comparison to obtain the isomorphism of the two fixed base-ring complexes in the standard derived category. This isolates the local tensor calculation from the chain-map roof construction.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-kflat-derived-tensor-comparison"
+    "lem-pc-strict-perfect-relative-tensor-roof-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Scalar restriction is exact, commutes sectionwise with open restriction, and descends to the localization at quasi-isomorphisms. Hence the preceding derived isomorphism identifies the scalar restriction of K|_U with the explicitly defined T. In the homotopy category a right fraction represents this isomorphism. Its left leg is a quasi-isomorphism and its right leg becomes invertible, so homology shows that it also is a quasi-isomorphism. Representatives of the two homotopy classes give actual chain maps with the same homology maps. Quantify the common roof complex and its two legs existentially; no definition chooses them.",
+   "text": "Mathlib DerivedCategory.right_fac factors the derived isomorphism e.hom as inv(Q.map s) ≫ Q.map t, with Q.map s invertible. Multiply by Q.map s to obtain Q.map t = Q.map s ≫ e.hom, which is invertible. DerivedCategory.isIso_Q_map_iff_quasiIso gives QuasiIso s and QuasiIso t. Return the actual complex H and both actual chain maps. This is the fully proved private helper common_quasiIso_roof; it makes no choice of data in a definition.",
    "uses": [
-    "def-pc-strict-perfect-relative-tensor-complex",
     "def-pc-derived-category",
     "def-pc-quasi-iso-modules"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-derived-tensor-open-restriction-universes",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "def-pc-strict-perfect-relative-tensor-complex",
+  "lem-pc-strict-perfect-relative-tensor-roof-comparison",
   "def-pc-derived-category",
   "def-pc-quasi-iso-modules"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "W4",
+  "group": "D4",
   "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tags 0DJQ and 06YH, K-flat local tensor computation; Tag 05RT, saturated quasi-isomorphism multiplicative system and roofs; original proof steps 1 and 4; explicit stage-3 reduction of lem-pc-strict-perfect-relative-tensor-model"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 05RT; Mathlib.Algebra.Homology.DerivedCategory.Fractions, right_fac; Mathlib.Algebra.Homology.DerivedCategory.Basic, isIso_Q_map_iff_quasiIso. Local tensor calculation is isolated as a separate obligation."
  },
  "mathlib_searches": [
   {
@@ -138,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d5efe",
-  "group": "W4",
+  "reviewer": "COMPILER",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T115034-L-3327719",
+  "landing": "20261013T131947-L-4087175",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and delivered Lean declarations with their DAG nodes; checked the construction, support proof, two named deferred lemmas, change record and report; all four modules and the sole direct importer StrictPerfectTensorRelativeTorBound compile, with expected axioms only."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

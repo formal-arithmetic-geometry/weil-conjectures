@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorComplex
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.RelativeTensorRoofComparison
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # A relative tensor representative roof
 
@@ -28,6 +30,20 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] CategoryTheory.module_overFunctor_preservesZero
   Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem common_quasiIso_roof
+    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+    {K T : CochainComplex C ℤ} (e : DerivedCategory.Q.obj K ≅ DerivedCategory.Q.obj T) :
+    ∃ (H : CochainComplex C ℤ) (s : H ⟶ K) (t : H ⟶ T), QuasiIso s ∧ QuasiIso t := by
+  obtain ⟨H, s, hs, t, ht⟩ := DerivedCategory.right_fac e.hom
+  let := hs
+  have heq : DerivedCategory.Q.map t = DerivedCategory.Q.map s ≫ e.hom := by
+    rw [ht, ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
+  have htIso : IsIso (DerivedCategory.Q.map t) := by
+    rw [heq]
+    infer_instance
+  exact ⟨H, s, t, (DerivedCategory.isIso_Q_map_iff_quasiIso C s).1 hs,
+    (DerivedCategory.isIso_Q_map_iff_quasiIso C t).1 htIso⟩
 
 namespace AlgebraicGeometry.Scheme
 
@@ -78,6 +94,13 @@ theorem strictPerfect_relativeTensor_roof
                   (Modules.tensorPullbackRingMap f))).mapHomologicalComplex
               (ComplexShape.up ℤ)).obj K))
       (t : H ⟶ strictPerfectRelativeTensorComplex f U L G),
-      QuasiIso s ∧ QuasiIso t := by sorry
+      QuasiIso s ∧ QuasiIso t := by
+  let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf
+  let A := (sheafCompose (Opens.grothendieckTopology X)
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+  let C := SheafOfModules.{u} (A.over U)
+  let : HasDerivedCategory.{u + 1} C := HasDerivedCategory.standard C
+  obtain ⟨e⟩ := strictPerfect_relativeTensor_roof_comparison f E G K eK U L hL eL
+  exact common_quasiIso_roof (C := C) e
 
 end AlgebraicGeometry.Scheme

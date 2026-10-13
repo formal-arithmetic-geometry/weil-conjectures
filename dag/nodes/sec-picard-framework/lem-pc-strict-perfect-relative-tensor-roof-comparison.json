@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-strict-perfect-relative-tensor-roof-comparison",
+ "kind": "statement",
+ "title": "Derived isomorphism for the fixed local relative tensor complex",
+ "statement": "Let f:X→S be a morphism of schemes [def-pc-scheme], E an object of D(O_X) [def-pc-derived-category], and G,K cochain complexes of O_X-modules. Fix eK:QK≅E tensor-derived QG [def-pc-scheme-derived-tensor-structure]. Let U be an open subset, L a strictly perfect complex of O_X|_U-modules [def-pc-perfect-complex], and eL:E|_U≅QL. Put R=f inverse-image O_S and let A be its underlying ring sheaf. In the standard localization of complexes of A|_U-modules at quasi-isomorphisms [def-pc-quasi-iso-modules], the localization of (scalar restriction of K along R→O_X)|_U is isomorphic to the localization of strictPerfectRelativeTensorComplex f U L G [def-pc-strict-perfect-relative-tensor-complex]. This asserts only the local derived comparison, not the existence of a common complex or chain-map roof.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJQ, proof, local strict-perfect tensor calculation; Tag 06YH, derived tensor construction after K-flat resolutions; original roof node proof step 1 and the scalar-restriction part of step 2"
+ },
+ "stmt_deps": [
+  "def-pc-strict-perfect-relative-tensor-complex",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Finite-free retract terms of the bounded complex L are structure-ring flat; bounded-above flat complexes are K-flat. Restrict eK using exact monoidal open restriction, substitute eL for the first factor, and apply K-flat derived tensor comparison. Transport between the localized site and the open subscheme by the module equivalence to get the derived isomorphism from K|_U to the ordinary total tensor L tensor G|_U.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars along the base-ring map is exact: on the underlying sheaf of abelian groups it changes neither sections nor differentials, so it preserves cohomology. It therefore descends to the localizations at quasi-isomorphisms. Apply this functor to the local derived tensor comparison from the previous step. Open restriction and scalar restriction commute sectionwise, identifying its first endpoint with the displayed scalar-restricted K. By definition its second endpoint is the explicit relative tensor complex. Use the standard localization for A|_U, whose hom universe is u+1; no base-ring localization hypothesis is necessary.",
+   "uses": [
+    "def-pc-strict-perfect-relative-tensor-complex",
+    "def-pc-derived-category",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "def-pc-strict-perfect-relative-tensor-complex",
+  "def-pc-derived-category",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0DJQ, proof, local strict-perfect tensor calculation; Tag 06YH, derived tensor construction after K-flat resolutions; original roof node proof step 1 and the scalar-restriction part of step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor with a strictly perfect complex commutes with restriction to an open and restriction of scalars",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', LightCondensed monoidal instances, PresheafOfModules.Monoidal.tensorObj; none states this comparison",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctor",
+   "results": "12 hits: CochainComplex.mapBifunctor, ιMapBifunctor, shift comparison isomorphisms and naturality; none computes the relative derived tensor",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "strictPerfect|relativeTensor|restrictScalars",
+   "results": "25 hits, chiefly ring-theoretic restriction of scalars; direct rg in Mathlib sheaf modules and the project finds restriction-of-scalars functors but no fixed relative tensor derived comparison",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor with a strictly perfect complex commutes with restriction to an open and restriction of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Local relative Tor calculation: local strict-perfect tensor computes the derived tensor before choosing a roof (Tag 0DJQ, proof).",
+   "via": [
+    "lem-pc-strict-perfect-relative-tensor-roof",
+    "lem-pc-strict-perfect-relative-tensor-model",
+    "lem-pc-strict-perfect-tensor-relative-tor-bound",
+    "lem-pc-perfect-tensor-finite-relative-tor",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorRoof",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTensorRoofComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorRoofComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictPerfect_relativeTensor_roof_comparison",
+  "statement": "theorem strictPerfect_relativeTensor_roof_comparison\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X)\n    (G K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eK : DerivedCategory.Q.obj K ≅ E ⊗ DerivedCategory.Q.obj G)\n    (U : X.Opens)\n    (L : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hL : IsStrictlyPerfect X U L)\n    (eL : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj L) :\n    let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf\n    let A := (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R\n    letI : HasDerivedCategory.{u + 1} (SheafOfModules.{u} (A.over U)) :=\n      HasDerivedCategory.standard _\n    Nonempty\n      (DerivedCategory.Q.obj\n        (((SheafOfModules.overFunctor.{u} A U).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj\n          (((SheafOfModules.restrictScalars\n            ((sheafCompose (Opens.grothendieckTopology X)\n              (forget₂ CommRingCat.{u} RingCat.{u})).map\n                (Modules.tensorPullbackRingMap f))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K)) ≅\n        DerivedCategory.Q.obj (strictPerfectRelativeTensorComplex f U L G))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T131947-L-4087175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T131947-L-4087175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
