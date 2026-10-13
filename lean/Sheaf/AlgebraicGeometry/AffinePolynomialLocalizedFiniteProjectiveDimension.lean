@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
+import Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedTorOfStalkwise
+import Sheaf.RingTheory.LocalizedPolynomialFiniteProjectiveDimension
 
 /-! # Pointwise projective dimension from stalkwise finite Tor dimension
 
@@ -57,6 +59,42 @@ theorem affinePolynomial_localized_finiteProjectiveDimension_of_stalkwise
     ∀ p : PrimeSpectrum (MvPolynomial (Fin n) Γ(Y, U)), ∃ d : ℕ,
       HasProjectiveDimensionLE
         (((ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V))).localizedModule
-          p.asIdeal.primeCompl) d := by sorry
+          p.asIdeal.primeCompl) d := by
+  intro p
+  by_cases hker : RingHom.ker g ≤ p.asIdeal
+  · let R := MvPolynomial (Fin n) Γ(Y, U)
+    let M := (ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V))
+    have : IsNoetherianRing Γ(Y, U) := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+    let φ : ModuleCat.of R R ⟶ M :=
+      ModuleCat.semilinearMapAddEquiv g _ _ g.toSemilinearMap
+    have : Module.Finite R M := Module.Finite.of_surjective φ.hom hg
+    have : Module.Finite (Localization p.asIdeal.primeCompl)
+        (M.localizedModule p.asIdeal.primeCompl) :=
+      Module.Finite.of_isLocalizedModule p.asIdeal.primeCompl
+        (M.localizedModuleMkLinearMap _)
+    obtain ⟨d, hd⟩ :=
+      affinePolynomial_localized_finiteTorDimension_of_stalkwise_of_kernel_le
+        f hperfect U hU V hV e n g hg hcomp p hker
+    exact ModuleCat.localizedPolynomial_finiteProjectiveDimension_of_finiteTor
+      n p (M.localizedModule p.asIdeal.primeCompl) d hd
+  · obtain ⟨a, ha_ker, ha_p⟩ := SetLike.not_le_iff_exists.mp hker
+    let M := (ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V))
+    have ha_zero : ∀ m : M, a • m = 0 := by
+      intro m
+      change g a • m = 0
+      rw [RingHom.mem_ker.mp ha_ker, zero_smul]
+    have hsub : Subsingleton (M.localizedModule p.asIdeal.primeCompl) := by
+      rw [IsLocalizedModule.subsingleton_iff p.asIdeal.primeCompl
+        (M.localizedModuleMkLinearMap _)]
+      intro m
+      refine ⟨a, ?_, ?_⟩
+      · exact ha_p
+      · exact ha_zero m
+    have : Subsingleton (M.localizedModule p.asIdeal.primeCompl) := hsub
+    refine ⟨0, ?_⟩
+    have hz : IsZero (M.localizedModule p.asIdeal.primeCompl) :=
+      ModuleCat.isZero_iff_subsingleton.mpr hsub
+    have := hz.hasProjectiveDimensionLT_zero
+    infer_instance
 
 end AlgebraicGeometry

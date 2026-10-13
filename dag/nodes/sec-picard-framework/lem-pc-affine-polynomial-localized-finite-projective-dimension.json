@@ -16,54 +16,32 @@
  ],
  "proof": [
   {
-   "text": "A = Γ(Y,U) is Noetherian and R = A[t₁,...,tₙ] is Noetherian by the Hilbert basis theorem. The surjection g makes B = Γ(X,V) finite over R. Fix a prime q of R. If ker(g) is not contained in q, invert an element of ker(g) outside q: it is simultaneously invertible and annihilates B_q, so B_q = 0 and all its positive Ext groups vanish.",
+   "text": "Fix p and split on ker(g) ⊆ p. If containment fails, choose a ∈ ker(g) outside p. The action through g makes a annihilate the coordinate module. The localized-module subsingleton criterion makes the localization zero. A zero object has projective dimension at most zero.",
    "uses": [
-    "pqf-def-locnoeth",
-    "def-pc-scheme",
     "def-pc-ext"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
-   }
+   "elementary": true
   },
   {
-   "text": "Otherwise q corresponds to a prime of B and hence a point x of V. The affine stalk/localization isomorphisms identify B_q with O_{X,x}, and A_p with O_{Y,f(x)}, where p is the contraction of q to A. The equation g.comp C = f.appLE identifies the scalar actions with the stalk map. HasStalkwiseFiniteTorDimension supplies a finite Tor bound over A_p.",
+   "text": "For containment, the supported affine localized Tor bound gives a bound over A = Γ(Y,U). A is Noetherian since U is affine in a Noetherian scheme. The surjection g gives a surjective R-linear map R → M, so M is finite. Localization preserves finiteness. Apply the localized polynomial finite-Tor criterion to this finite R_p-module and the Tor bound to get the projective-dimension bound at p.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-perfect-morphism"
+    "lem-pc-affine-polynomial-localized-tor-of-stalkwise",
+    "lem-pc-localized-polynomial-finite-projective-dimension",
+    "pqf-def-locnoeth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
-   }
-  },
-  {
-   "text": "The map A_p → R_q is flat; each of its fibres is a localization of a polynomial ring over a field and has global dimension at most n. B_q[0] is pseudo-coherent by the Noetherian finite-module property. Tag 068X makes it perfect over R_q. In a finite free resolution, dimension shifting and the finite Tor bound make a high syzygy flat; it is finitely presented, hence projective. Truncation gives a finite projective resolution. Computing Ext using that resolution yields a natural d with HasProjectiveDimensionLE B_q d. No global bound is chosen here.",
-   "uses": [
-    "def-weil-pbc-finite-global-dimension",
-    "def-pc-ext"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ext",
-  "def-pc-perfect-morphism",
-  "def-pc-scheme",
-  "def-weil-pbc-finite-global-dimension",
+  "lem-pc-affine-polynomial-localized-tor-of-stalkwise",
+  "lem-pc-localized-polynomial-finite-projective-dimension",
   "pqf-def-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X; sources read online; Lean written by N3"
+  "place": "Tag 069C, (3) implies (1), using Tag 068X; Lean assembly and zero localization proof by Y3"
  },
  "mathlib_searches": [
   {
@@ -155,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T113349-L-3186297",
+  "landing": "20261013T123213-L-3679861",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
