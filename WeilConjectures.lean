@@ -1844,6 +1844,7 @@ public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.Module
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.BaseChange
