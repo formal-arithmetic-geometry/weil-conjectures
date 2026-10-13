@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Write p = i.1 and n = i.1 + i.2. The relation gives j.1 = p+r and\nj.1+j.2 = n+1. Since the target page is the cokernel of its boundary inclusion,\nhy0 factors y through the target graded boundary subobject. Pull back the image\nepimorphism defining this subobject, and the epimorphism onto the sum of the\nunquotiented boundary subobject with F^(p+r+1). The equality of target graded\nclasses then says, after pulling back the graded quotient epimorphism's kernel,\nthat dt is a sum of an incoming boundary and a term in F^(p+r+1). Pull back the\nimage epimorphism from F^((p+r)-r+1) = F^(p+1) defining that incoming boundary.\nOn the resulting epic cover e of A, obtain a morphism b into F^(p+1) with\nd(e t - b) in F^(p+r+1). Include b into F^p; this is possible since F is\nantitone. Thus e t - b factors through the unquotiented (r+1)-cycle intersection.\nIts graded projection factors through the image defining successor graded cycles,\ngiving z. The graded projection kills b, so z has exactly the same graded class\nas e x, by hx. Each cover is a pullback of an image or cokernel epimorphism and\nis epic in an abelian category; their finite composite e is epic. This proves\nthe displayed equality without projectivity or elementwise lifting.",
+   "text": "Factor y through the monic boundary inclusion using Abelian.monoLift and the page cokernel equation. Apply Subobject.exists_fac and surjective_up_to_refinements_of_epi to lift the graded boundary to V, the pullback of the incoming boundary sum with the higher filtration step. The difference from the given target representative is killed by the graded projection. Evaluate the exact cokernel sequence of complexes and apply exact_up_to_refinements to lift that difference to the higher filtration step. Lift the V representative along the proved epic Subobject.supDesc of the two ambient subobjects, then lift its incoming-boundary component along factorThruImageSubobject. Composing these four epic refinements yields etprime = db + c, with b in the source higher filtration step and c in the target higher filtration step. Set u = et - b followed by the inclusion. Its differential equals c, so u factors through the successor-cycle intersection and hence its graded image. The cokernel condition kills b in the source graded piece; hx identifies that image with ex. These steps are implemented by a proved private boundary-lift helper and the complete public proof.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
@@ -38,7 +38,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "S4 second reading: finite image/pullback subtraction argument from the displayed Z_r and B_r formulas; checked against https://stacks.math.columbia.edu/tag/012K"
+  "place": "Tag 012K displayed boundary and cycle formulas; H1 implements the finite refinement and subtraction argument using proved Mathlib and source-library subobject lemmas."
  },
  "mathlib_searches": [
   {
@@ -121,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T011935-L-2765978",
-  "kind": "interface",
+  "landing": "20261013T024035-L-3334639",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
