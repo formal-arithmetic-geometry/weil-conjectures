@@ -127,11 +127,11 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare` | 19 | 1 | proof |
-| `Sheaf.Paper.EtaleCENormalizedRepresentativeCohomology` | 19 | 1 | proof |
 | `Sheaf.Algebra.Homology.HomTensorReverseConstruction` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationDiagonalBlock` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift` | 20 | 1 | proof |
+| `Sheaf.Paper.EtaleCENormalizedRowRepresentatives` | 20 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 2 | proof |
 | `Sheaf.Algebra.Homology.HomTensorDifferentialSummandPure` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AlternatingCechSheafDifferentialInnerInverse` | 21 | 1 | proof |
@@ -146,8 +146,8 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardH1FixedModelComparison` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition` | 21 | 1 | proof |
+| `Sheaf.Paper.EtaleCERowOrdinaryComparison` | 21 | 1 | proof |
 | `Sheaf.RingTheory.ElementwiseFpModuleEquivDescent` | 21 | 1 | proof |
-| `Sheaf.RingTheory.TensorModelAlgebraStage` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalEvaluationOpenRestriction` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalTransfer` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExactSourceEvaluationOpenModels` | 22 | 1 | proof |
@@ -198,7 +198,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateRepresentatives` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumMateCompatibility` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ExternalSectionsOpenComparison` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HorizontalRectangleInverseMateFixedTransport` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.KoszulOpenAugmentationCechUnit` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.KoszulOpenSectionsUnit` | 25 | 1 | proof |
@@ -224,9 +223,9 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.AffineSpectrumComparisonSourceTransport` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BottomFreeChainDerivedSquare` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence` | 26 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ExternalOpenCoefficientNormalized` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExternalSectionsUnitMapLeft` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FieldHypersurfaceFunctionFieldModel` | 26 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCore` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.BoundaryLocalizedFiniteDetector` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel` | 26 | 1 | proof |
@@ -246,6 +245,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.AffineChartScalarTransport` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelFactorization` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSectionsSquareMatePathUnit` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatFibreDimensionNearZeroDimensionalStalk` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechTerms` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalRectangleSections` | 27 | 1 | proof |
