@@ -2,6 +2,8 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Algebra.Homology.ModuleRestrictionStalkComponents
+import Sheaf.Algebra.Homology.ModuleRestrictionStalkNaturality
 public import Mathlib.Topology.Sheaves.Module
 public import Mathlib.Geometry.RingedSpace.Stalks
 
@@ -54,6 +56,20 @@ theorem exists_moduleRestrictionStalk_morphism (X : RingedSpace.{u}) (W : Opens 
             ((SheafOfModules.overFunctor (moduleRings X) W).obj F)).val.presheaf
           V ⟨x, hx⟩ hV s) =
         TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) F.val.presheaf
-          (W.isOpenEmbedding.isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩ s := by sorry
+          (W.isOpenEmbedding.isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩ s := by
+  classical
+  obtain ⟨c, hc⟩ := exists_moduleRestrictionStalk_components X W x hx
+  let S := SheafOfModules.overFunctor.{u} (moduleRings X) W ⋙
+    (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙
+    RingedSpace.moduleStalkFunctor (X.restrict W.isOpenEmbedding) ⟨x, hx⟩ ⋙
+    ModuleCat.restrictScalars
+      (X.toPresheafedSpace.restrictStalkIso W.isOpenEmbedding ⟨x, hx⟩).inv.hom
+  let T := RingedSpace.moduleStalkFunctor X x
+  let n : S ⟶ T :=
+    { app := c
+      naturality := by
+        intro F G f
+        exact moduleRestrictionStalk_components_natural X W x hx c hc f }
+  exact ⟨n, hc⟩
 
 end AlgebraicGeometry
