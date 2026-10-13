@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizationCore
 
 /-! # Local-base presentation of a residue-triple colimit
 
@@ -59,6 +60,26 @@ theorem etaleResidueTriples_localized_isStrictHenselization
       (_ : Algebra (Localization.AtPrime p.asIdeal) C),
       (∀ r : R, algebraMap (Localization.AtPrime p.asIdeal) C
         (algebraMap R (Localization.AtPrime p.asIdeal) r) = b.hom r) ∧
-      Algebra.IsStrictHenselization (Localization.AtPrime p.asIdeal) L C := by sorry
+      Algebra.IsStrictHenselization (Localization.AtPrime p.asIdeal) L C := by
+  obtain ⟨L, iFL, iAL, iSL, iLA, iST, iAC, hmap, hstrict⟩ :=
+    etaleResidueTriples_localized_core R p K c hc C e
+  let : Field L := iFL
+  let : Algebra (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) L := iAL
+  let : IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) L := iSL
+  let : Algebra (Localization.AtPrime p.asIdeal) L := iLA
+  let : IsScalarTower (Localization.AtPrime p.asIdeal)
+      (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) L := iST
+  let : Algebra (Localization.AtPrime p.asIdeal) C := iAC
+  refine ⟨L, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, ?_, ?_⟩
+  · intro r
+    let t0 : EtaleResidueTriples R p K
+        (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K)) :=
+      ⟨R, 𝟙 R, inferInstance, p, by simp,
+        CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K), by simp⟩
+    rw [hmap r]
+    exact congrArg (fun f : R ⟶ C ↦ f.hom r)
+      (hbase t0)
+  · exact hstrict
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,123 @@
+{
+ "id": "new-lem-sbc-etale-triples-prime-localization-comparison",
+ "kind": "statement",
+ "title": "Ring-colimit comparison across prime localization with fixed algebra structures",
+ "statement": "Let $R$ be a commutative ring, $p\\in\\operatorname{Spec}(R)$, $A=R_p$ [def-weil-pbc-localization-at-prime], $K$ a field, and $\\chi:\\kappa_R(p)\\to K$ a field embedding, where scheme residue fields are as in [def-weil-residue-field]. Let $c$ be a universal cocone of the ring diagram of etale residue triples over $(R,p,K,\\chi)$ [def-weil-pbc-etale-residue-triples], $C$ a commutative ring, and $e:c.\\mathrm{pt}\\cong C$ a ring isomorphism. Fix $A$-algebra structures on $K$ and $C$. Let $q\\in\\operatorname{Spec}(A)$ and $\\psi:\\kappa_A(q)\\to K$ satisfy that evaluation $A\\to\\kappa_A(q)\\to K$ is the given $A$-algebra map. Assume its restriction along $R\\to A$ is evaluation $R\\to\\kappa_R(p)\\to K$, and the restriction of $A\\to C$ is $e\\circ c.\\iota(t_0)$ for the identity triple $t_0=(R,\\mathrm{id},p,\\chi)$. Then there is a natural transformation $\\iota$ from the local-base residue-triple ring diagram over $(A,q,K,\\psi)$ to the constant diagram at $C$, such that $(C,\\iota)$ is a universal ring cocone and for every local-base triple $t$ the composite $A\\xrightarrow{t.\\alpha}t.B\\xrightarrow{\\iota_t}C$ is the fixed $A$-algebra map. No separable-closure assumption is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 04GW, localization comparison in the pointed-etale presentation; Tag 00CR for principal localizations; Tags 01ZM and 07RP for objects, morphisms and equality descent"
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Express A as the filtered colimit of principal localizations R_s, for s outside p, using localization_colimit_principalLocalizations. In each R-triple B the corresponding pointed refinements B_s are again R-triples, and B localized at R outside p is their colimit.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the object, morphism and equality clauses of etale_finite_data_descent to the affine inverse system Spec R_s. Every pointed etale A-algebra descends to an etale R_s-algebra, with pointing obtained by restriction of its map to K. Descend morphisms at a common stage and descend relations at a later stage. Isomorphisms between descents are handled by descending both directions and the two inverse relations. The field map inverts all denominators, so pointing compatibility survives these restrictions and refinements.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The descent and principal-refinement constructions give inverse identifications of ring cocones over the R-triples and A-triples, preserving vertices and maps between vertices. Transport c and its universal property through these identifications and e to obtain the natural transformation with vertex C. Naturality at the identity triple gives agreement on R, and uniqueness of maps from a localization gives agreement with the fixed structural map on A. This proves the displayed base-map equations and ring-colimit property without a strict-henselization assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-etale-finite-data-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "document": "Stacks Project",
+  "place": "Tag 04GW, localization comparison in the pointed-etale presentation; Tag 00CR for principal localizations; Tags 01ZM and 07RP for objects, morphisms and equality descent",
+  "note": "Strictly smaller comparison obligation split in repair D2. Both algebra structures are supplied; no separable closure or strict henselization is constructed here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Prime localization preserves the colimit of pointed etale algebras",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the base ring at a prime preserves the colimit of etale algebras pointed in a field with kernel that prime",
+   "date": "2026-10-14",
+   "results": "Algebra.Etale.of_isLocalizationAway and Algebra.FormallyEtale.localization_map; neither compares ring colimits of pointed triples.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, Localization.AtPrime",
+   "date": "2026-10-14",
+   "results": "0 hits",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleResidueTriples.*localiz|localiz.*etaleResidueTriples",
+   "date": "2026-10-14",
+   "results": "msearch 0 hits; local rg finds the item and unrelated localization-at-the-triple-prime theorems, no base-change colimit comparison.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sbc-etale-triples-localized-core",
+   "place": "Localization comparison of the universal ring cocones"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComparison",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_comparison",
+  "statement": "theorem etaleResidueTriples_primeLocalization_comparison\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (c : Cocone (etaleResidueTriplesRingDiagram R p K χ)) (hc : IsColimit c)\n    (C : CommRingCat.{u}) (e : c.pt ≅ C)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    [Algebra (Localization.AtPrime p.asIdeal) C]\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (hC : ∀ r : R, algebraMap (Localization.AtPrime p.asIdeal) C\n      (algebraMap R (Localization.AtPrime p.asIdeal) r) =\n        (c.ι.app ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩ ≫ e.hom).hom r) :\n    ∃ (ι : etaleResidueTriplesRingDiagram\n        (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ ⟶\n        (Functor.const _).obj C),\n      Nonempty (IsColimit (Cocone.mk C ι)) ∧\n      ∀ t, t.α ≫ ι.app t =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) C)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T190151-L-3219893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T190151-L-3219893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

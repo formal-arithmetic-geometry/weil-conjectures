@@ -1,0 +1,124 @@
+{
+ "id": "new-lem-sbc-etale-triples-localized-core",
+ "kind": "statement",
+ "title": "Local-base strict henselization core from a residue-triple colimit",
+ "statement": "Let $R$ be a commutative ring, $p\\in\\operatorname{Spec}(R)$ and $K$ a separable closure of the scheme residue field $\\kappa(p)$ [def-weil-residue-field]. Write $\\chi:\\kappa(p)\\to K$ for its structural embedding. Let $c$ be a universal cocone of the ring diagram of etale residue triples over $(R,p,K,\\chi)$ [def-weil-pbc-etale-residue-triples]. Let $C$ be a commutative ring and $e:c.\\mathrm{pt}\\cong C$ a ring isomorphism. The identity triple $t_0$ is $(R,\\mathrm{id}_R,p,\\chi)$; put $b_0=e\\circ c.\\iota(t_0):R\\to C$ and $A=R_p$ [def-weil-pbc-localization-at-prime]. There exist a field $L$, a separable-closure structure on $L$ over $k_A=A/\\mathfrak m_A$, an $A$-algebra structure on $L$ compatible with $A\\to k_A\\to L$, and an $A$-algebra structure on $C$, such that the composite $R\\to A\\to C$ is $b_0$ and $C$ is a strict henselization of $A$ relative to $L$ in the pointed-etale colimit sense [def-sc-ring-strict-henselization].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 04GW, lemma-strict-henselization-different"
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "For each s outside p apply etaleResidueTriple_unit_refinement to the identity triple. Map the resulting unit along its cocone leg and e; cocone naturality proves that b0(s) is a unit. IsLocalization.lift explicitly constructs A to C and proves its restriction is b0.",
+   "uses": [
+    "lem-weil-pbc-etale-triple-unit-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take L=K. Spec.residueFieldIso R p identifies kappa(p) with the residue field of A. Compose its inverse with chi to define the residue-field algebra on K, and compose with the residue map to define A to K. Algebra.IsSeparable.of_equiv_equiv transports separability while separable closedness is unchanged. SpecToEquivOfField supplies the local point and residue embedding with evaluation A to K. Spec.algebraMap_residueFieldIso_inv proves restriction compatibility on R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply etaleResidueTriples_primeLocalization_comparison to the explicitly constructed A-algebra structures on K and C, obtaining a universal local-base ring cocone with vertex C and compatible A-structural maps.",
+   "uses": [
+    "new-lem-sbc-etale-triples-prime-localization-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etaleResidueTriples_colimit_isStrictHenselization to this cocone. Package L=K, its transported instances and the localization restriction formula to obtain exactly the displayed conclusion.",
+   "uses": [
+    "lem-sc-etale-triples-colimit-is-strict-henselization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-triple-unit-refinement",
+  "new-lem-sbc-etale-triples-prime-localization-comparison",
+  "lem-sc-etale-triples-colimit-is-strict-henselization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 04GW",
+  "note": "Repair D2: complete Lean proof constructs the localization and field structures, uses the strictly smaller ring-colimit localization comparison and then the existing local-base comparison theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue triple colimit localized strict henselization",
+   "results": "No exact match",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStrictHenselization Localization.AtPrime",
+   "results": "No exact match",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localized_isStrictHenselization",
+   "results": "No existing declaration",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-etale-triples-localized-strict-henselization"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizationCore",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesLocalizedStrictHenselizationCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_localized_core",
+  "statement": "theorem etaleResidueTriples_localized_core (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K] [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] (c : Cocone (etaleResidueTriplesRingDiagram R p K (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K)))) (hc : IsColimit c) (C : CommRingCat.{u}) (e : c.pt ≅ C) : ∃ (L : Type u) (_ : Field L) (_ : Algebra (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) L) (_ : IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) L) (_ : Algebra (Localization.AtPrime p.asIdeal) L) (_ : IsScalarTower (Localization.AtPrime p.asIdeal) (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)) L) (_ : Algebra (Localization.AtPrime p.asIdeal) C), (∀ r : R, algebraMap (Localization.AtPrime p.asIdeal) C (algebraMap R (Localization.AtPrime p.asIdeal) r) = (c.ι.app ⟨R, 𝟙 R, inferInstance, p, by simp, CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K), by simp⟩ ≫ e.hom).hom r) ∧ Algebra.IsStrictHenselization (Localization.AtPrime p.asIdeal) L C",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T190151-L-3219893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T190151-L-3219893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
