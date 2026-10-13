@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-complete-local-subideal",
+ "kind": "statement",
+ "title": "Completeness for subideals of the maximal ideal",
+ "statement": "Let R be a Noetherian local commutative ring [def-weil-pbc-noetherian-ring], complete for its maximal ideal [def-weil-pbc-adic-completion]. For every ideal I contained in the maximal ideal, R is I-adically complete.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00IP and 0317; the Cauchy-sequence argument written out using Krull intersection."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Krull intersection in Mathlib, IsHausdorff.of_le_jacobson, gives I-adic separatedness, since I is contained in the maximal ideal and hence in the Jacobson radical.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Any I-adic Cauchy sequence f is maximal-ideal-adic Cauchy by monotonicity of ideal powers. Completeness supplies a maximal-ideal-adic limit L.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each n use the finite module Q=R/I^n. For every k put t=max(n,k). The difference f(n)-f(t) is zero in Q. The class of f(t)-L lies in m^k Q. Hence the class of f(n)-L belongs to every m^k Q. Mathlib Krull intersection in the finite module Q makes it zero. This gives f(n)-L in I^n for every n and hence I-adic convergence.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 00IP and 0317; the Cauchy-sequence argument written out using Krull intersection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a complete Noetherian local ring is adically complete for any ideal contained in its maximal ideal",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a complete Noetherian local ring is adically complete for any ideal contained in its maximal ideal",
+   "date": "2026-10-14",
+   "results": "8 hits including IsAdic.isAdicComplete_iff and IsHausdorff.of_isLocalRing; none proves completeness for a smaller ideal.",
+   "verdict": "No exact Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete.*of_le|IsPrecomplete.*of_le",
+   "date": "2026-10-14",
+   "results": "No matching declaration in Mathlib; project library also searched.",
+   "verdict": "No public exact theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CompletePuncturedPrincipalFormalSections",
+  "date": "2026-10-14",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity across a regular special divisor; the depth-three punctured principal-quotient lifting input, Tags 0BLS (complete case), 0BM6, 09ZL, 0AVY, 0A02; full faithfulness of punctured principal-quotient restriction; Scalar formal sections on a depth-three complete local puncture; Completeness for subideals of the maximal ideal",
+   "via": [
+    "lem-sbc-completed-punctured-quotient-fully-faithful",
+    "lem-sbc-depth-three-completed-quotient-lift",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity",
+    "lem-sbc-complete-punctured-principal-formal-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompleteLocalSubideal",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalSubideal.lean",
+  "declaration": "IsAdicComplete.of_le_maximalIdeal",
+  "statement": "theorem IsAdicComplete.of_le_maximalIdeal\n    (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    [IsAdicComplete (IsLocalRing.maximalIdeal R) R]\n    (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) : IsAdicComplete I R",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-14"
+ },
+ "split_report": "N3: source, statement, searches and proof steps checked; see delivery report.",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T164049-L-1668469",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T164049-L-1668469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
