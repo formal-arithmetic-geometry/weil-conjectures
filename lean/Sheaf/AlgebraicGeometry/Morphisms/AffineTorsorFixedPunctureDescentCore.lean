@@ -6,6 +6,8 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureCompatibility
 
 @[expose] public section
 universe u
@@ -62,7 +64,18 @@ theorem affine_torsor_fixed_orbits
     let q := Spec.map (CommRingCat.ofHom (algebraMap H B))
     let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))
     ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,
-      θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by sorry
+      θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
+  dsimp
+  intro hEt hrot T t k hk δ hδ
+  obtain ⟨θ, _⟩ := affine_torsor_fixed_orbits_geometric
+    R H g ι C G ρ hρone hρmul hne p j hj m K d hd hEt hrot T t k hk δ hδ
+  refine ⟨θ, ?_⟩
+  let B := ∀ k : Fin m,
+      (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let q : Spec (CommRingCat.of B) ⟶ Spec H :=
+    Spec.map (CommRingCat.ofHom (algebraMap H B))
+  exact affine_torsor_fixed_orbits_compatibility (R := R) (H := H) (ι := ι)
+    (p := p) (B := B) (V := PrimeSpectrum.basicOpen (algebraMap H B (ι g))) θ q
 
 /-- Certified evidence for the dispute, using only Mathlib, not the theorem above. -/
 private theorem empty_fixed_ring_no_iso (X : Scheme) [Nonempty X] :

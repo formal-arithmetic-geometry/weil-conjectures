@@ -1,0 +1,98 @@
+{
+ "id": "lem-sbc-affine-torsor-fixed-puncture-compatibility",
+ "kind": "statement",
+ "title": "Fixed-orbit projection compatibility",
+ "statement": "The descended affine isomorphism has the required projection compatibility equation.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 0EYG"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The geometric construction and the functoriality of pullback give this step as described in the source argument.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H4",
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 0EYG",
+  "note": "Split from the fixed-orbit descent core."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale torsor descent invariant subalgebra principal open",
+   "results": "No direct match; geometric descent theorem is split off here.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Spec invariant subalgebra finite etale descent",
+   "results": "No direct match.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed_orbits invariant localization etale torsor",
+   "results": "No existing declaration found in Mathlib or WeilConjectures.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-fixed-puncture-descent-core",
+   "place": "fixed-orbit descent substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorFixedPunctureCompatibility.lean",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_fixed_orbits_compatibility",
+  "statement": "theorem affine_torsor_fixed_orbits_compatibility\n    {R H : CommRingCat.{u}} {ι : R →+* H}\n    {Y : Scheme.{u}} {p : Y ⟶ Spec R}\n    {B : Type u} [CommRing B] [Algebra H B]\n    {V : (Spec (CommRingCat.of B)).Opens}\n    (θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme)\n    (q : Spec (CommRingCat.of B) ⟶ Spec H) :\n    θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι))"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T181100-L-2600496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T181100-L-2600496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

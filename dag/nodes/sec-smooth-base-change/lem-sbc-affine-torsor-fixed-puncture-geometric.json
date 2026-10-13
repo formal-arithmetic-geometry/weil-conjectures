@@ -1,0 +1,98 @@
+{
+ "id": "lem-sbc-affine-torsor-fixed-puncture-geometric",
+ "kind": "statement",
+ "title": "Geometric fixed-orbit construction",
+ "statement": "The geometric fixed-orbit construction produces the candidate affine scheme isomorphism, without the projection compatibility equation.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 0EYG"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The geometric construction and the functoriality of pullback give this step as described in the source argument.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H4",
+  "document": "Stacks Project",
+  "place": "Tags 03SF and 0EYG",
+  "note": "Split from the fixed-orbit descent core."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale torsor descent invariant subalgebra principal open",
+   "results": "No direct match; geometric descent theorem is split off here.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Spec invariant subalgebra finite etale descent",
+   "results": "No direct match.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed_orbits invariant localization etale torsor",
+   "results": "No existing declaration found in Mathlib or WeilConjectures.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-fixed-puncture-descent-core",
+   "place": "fixed-orbit descent substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorFixedPunctureDescentGeometric.lean",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_fixed_orbits_geometric",
+  "statement": "theorem affine_torsor_fixed_orbits_geometric\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)\n    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    [Module.Finite H C] [Module.FaithfullyFlat H C]\n    (G : Type u) [Group G] [Finite G]\n    (ρ : G → C →ₐ[H] C)\n    (hρone : ρ 1 = AlgHom.id H C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (hne : algebraMap H C (ι g) ≠ 0)\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))\n    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    [IsFinite j] [Etale j]\n    (m : ℕ) (K : Fin m → Subgroup G) (d : ℕ) (hd : m ≤ d) :\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H C))\n    let V : (Spec (CommRingCat.of C)).Opens :=\n      PrimeSpectrum.basicOpen (algebraMap H C (ι g))\n    Etale (V.ι ≫ q) →\n    (∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),\n      a.comp (algebraMap H C) = b.comp (algebraMap H C) →\n      a (algebraMap H C (ι g)) ≠ 0 →\n      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) →\n    ∀ (T : Scheme.{u}) (t : T ⟶ Spec R) (k : V.toScheme ⟶ T),\n      k ≫ t = V.ι ≫ q ≫ Spec.map (CommRingCat.ofHom ι) →\n    ∀ (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t →\n    let B := ∀ k : Fin m,\n      (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)\n    let N := Spec (CommRingCat.of B)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H B))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))\n    ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme, True"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T181100-L-2600496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T181100-L-2600496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
