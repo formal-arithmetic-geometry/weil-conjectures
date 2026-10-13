@@ -13872,3 +13872,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/V1/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261013T231551-L-1823441 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/X3/Sheaf.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility (stage 3; reviewer PASS; first push; landing 20261013T231551-L-1823620 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/X3/Sheaf.AlgebraicGeometry.OpenCoverTensorRecoveryNormalization (stage 3; reviewer PASS; first push; landing 20261013T231552-L-1823735 (proof); batch 20261013T231527; modules 1; new nodes 0)
+- 23:15 L: merged deliver/X3/Sheaf.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence (stage 3; reviewer PASS; first push; landing 20261013T231552-L-1824010 (proof); batch 20261013T231527; modules 1; new nodes 0)
