@@ -37,74 +37,49 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (a finite affine cover).* By [pqf-def-locnoeth], $X$ has an affine open cover $(U_i)$ with $R_i=\\mathcal O_X(U_i)$ Noetherian; quasi-compactness of $X$ gives a finite subcover $U_1,\\ldots,U_r$ (also when $X=\\emptyset$, take $r=0$). Write $I_i=\\mathcal I(U_i)$, $M_i=\\mathcal F(U_i)$, and $N_i=\\mathcal G(U_i)\\subseteq M_i$. The quasi-coherent submodule $\\mathcal G$ of the coherent module $\\mathcal F$ is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2). Hence $M_i$ and $N_i$ are finitely generated $R_i$-modules by [lem-weil-pbc-quasi-coherent-finite-type-affine](a), and $I_i$ is an ideal of $R_i$. For every $t\\ge0$, [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1),(2) identifies $(\\mathcal I^t\\mathcal F)(U_i)=I_i^tM_i$ and $\\mathcal I^t$ as a quasi-coherent ideal (with $t=0$ by definition). Since the intersection is sectionwise, $(\\mathcal I^t\\mathcal F\\cap\\mathcal G)(U_i)=I_i^tM_i\\cap N_i$.",
+   "text": "Coherence gives quasi-coherence by isCoherent_iff_isQuasicoherent_and_isFiniteType. Apply the existing public coherent_affine_sections_finite theorem on each affine open to obtain Module.Finite for F(U). No copied restriction helper or finite generation of G(U) is needed.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Ideal.exists_pow_inf_eq_pow_smul to the image N_U of g(U) in F(U), obtaining k_U. Compactness gives a finite affine subcover s. Let c be Finset.sup s k, with zero for the empty cover. For k_U ≤ c ≤ n, apply the module equality at n and c; Submodule.mul_smul, pow_add and (n-c)+(c-k_U)=n-k_U give the equality at the common bound c.",
    "uses": [
     "pqf-def-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 01YA (lemma-Artin-Rees, line 2601): 'X has a finite covering by spectra of Noetherian rings'; the affine identifications use Schemes, Lemmas 01I8 and 01IC"
-   }
-  },
-  {
-   "text": "*Step 2 (one constant for the cover).* For each $i$, apply [lem-weil-pbc-artin-rees] to $R_i,I_i,M_i,N_i$. Choose $c_i\\ge0$ with $I_i^nM_i\\cap N_i=I_i^{n-c_i}(I_i^{c_i}M_i\\cap N_i)$ for $n\\ge c_i$. Put $c=\\max_i c_i$, with $c=0$ for the empty cover. This same $c$ works on every $U_i$: if $n\\ge c$, first apply the equality for $c_i$ at $c$ to obtain $I_i^cM_i\\cap N_i=I_i^{c-c_i}(I_i^{c_i}M_i\\cap N_i)$, then multiply by $I_i^{n-c}$. The product of powers is $I_i^{n-c_i}$, so the result equals $I_i^nM_i\\cap N_i$ by the equality for $c_i$ at $n$. This also covers $I_i=0$, $I_i=R_i$, $N_i=0$, and $c_i=0$.",
-   "uses": [
     "lem-weil-pbc-artin-rees"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 01YA (lemma-Artin-Rees, lines 2601-2604), reducing to Algebra, Lemma 00IN (lemma-Artin-Rees, line 12187) on a finite affine cover"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (the left-hand sheaf on the cover).* Put $\\mathcal H=\\mathcal I^c\\mathcal F\\cap\\mathcal G\\subseteq\\mathcal F$. The inclusion $\\mathcal I^c\\mathcal F\\to\\mathcal F$ is between quasi-coherent modules by Step 1. Its cokernel $\\mathcal Q=\\mathcal F/(\\mathcal I^c\\mathcal F)$ is quasi-coherent, and $\\mathcal Q(U_i)=M_i/I_i^cM_i$, by [lem-weil-pbc-quasi-coherent-module-cokernel-image](2),(3). The sectionwise kernel of the composite $\\mathcal G\\hookrightarrow\\mathcal F\\to\\mathcal Q$ is exactly $\\mathcal H$; it is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. Its sections on $U_i$ are $H_i=I_i^cM_i\\cap N_i$, since an element of $N_i$ maps to zero in $M_i/I_i^cM_i$ exactly when it lies in $I_i^cM_i$. Now [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1),(2) applies to $\\mathcal I^{n-c}$ and $\\mathcal H$ and yields $(\\mathcal I^{n-c}\\mathcal H)(U_i)=I_i^{n-c}H_i$ for every $n\\ge c$, including $n=c$ where the power is zero.",
+   "text": "The affine comparison converts this fixed-exponent module equality to range equality on every subopen of each covering affine. For arbitrary W use the cover W ∩ U. For a monomorphism, local section preimages are compatible by injectivity and naturality; the sheaf gluing axiom gives a global preimage. Apply this proved private range-locality lemma in both directions to descend the equality on W ∩ U to W.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-artin-rees-affine-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 01YA (lemma-Artin-Rees); the identification of the intersection with the quasi-coherent kernel expands its affine reduction using Schemes, Lemma 01IC (lemma-kernel-cokernel-quasi-coherent)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 (equality of subsheaves).* By Steps 1 and 3, on every $U_i$ the two submodules of $\\mathcal F|_{U_i}$ have sections $I_i^{n-c}(I_i^cM_i\\cap N_i)$ and $I_i^nM_i\\cap N_i$, respectively; Step 2 makes them equal for all $n\\ge c$. Both are quasi-coherent submodules: the left by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1) and Step 3, the right by the same kernel argument as Step 3 with $n$ replacing $c$. Their restrictions to $U_i$ remain quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits](2). On an affine scheme a quasi-coherent module is determined by its global-sections module [lem-weil-pbc-affine-tilde-gamma-adjunction](3), compatibly with the two inclusions into $\\mathcal F|_{U_i}$; hence the two subsheaves coincide on each $U_i$, and therefore on $X$. Finally $\\mathcal H\\subseteq\\mathcal G$ implies $\\mathcal I^{n-c}\\mathcal H\\subseteq\\mathcal I^{n-c}\\mathcal G$ by the multiplication-image definition [def-weil-pbc-coherent-formal-module](0), giving the stated inclusion after the equality.",
+   "text": "Apply formalModuleQuotient_factor to pullback.snd a g with both exponents n-c, where a is the inclusion I^c F → F. Its commutative square, followed by g, and pullback.condition identify the left-hand inclusion with a composite through I^(n-c) G. Evaluating at W and using the equality of the previous step yields the claimed range inclusion.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-formal-module-ideal-power-factor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 01YA (lemma-Artin-Rees, lines 2601-2604): the module equality on the finite affine cover yields the sheaf equality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
   "pqf-def-locnoeth",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "lem-weil-pbc-artin-rees",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-weil-pbc-coherent-formal-module"
+  "lem-weil-pbc-artin-rees-affine-comparison",
+  "lem-weil-pbc-formal-module-ideal-power-factor"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, proof of Lemma 01YA (lemma-Artin-Rees, lines 2601-2604); Algebra, Lemma 00IN (lemma-Artin-Rees)"
+  "by": "agent",
+  "agent": "U4",
+  "date": "2026-10-13",
+  "based_on": "Stacks 01YA affine-cover proof and 00IN; existing public coherent_affine_sections_finite supplies finite affine sections. Lean proof of finite-cover maximum, increasing the module bound, sheaf descent by unique local lifts, and ideal-product functoriality. Repair removes the duplicate private finite-type restriction helper."
  },
  "mathlib_searches": [
   {
@@ -185,5 +160,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T025310-L-3425522",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
