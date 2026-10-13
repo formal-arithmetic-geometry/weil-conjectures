@@ -12,6 +12,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
+import Sheaf.AlgebraicGeometry.FormalAffineMorphismRealization
+import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso
+
 /-! # Coherent model of the affine formal comparison
 
 Source: Stacks Project, Lemma 088B, base change to the completion and algebraization.
@@ -91,6 +94,13 @@ theorem formalComparison_completed_affine_model
           lim.map (Functor.whiskerRight α.hom
             (SheafOfModules.evaluation Y.ringCatSheaf (op U.1))) ≫ eD.hom =
           eA.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map
-            ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c) := by sorry
+            ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c) := by
+  intro U
+  obtain ⟨A, D, c, eA, eD, hs⟩ :=
+    formal_affine_morphism_realization J G
+      ((completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩) α U
+  have hc := formalComparison_completed_affine_restriction_isIso
+    J K f hV adj G F β h κ α hκ hα U A D c eA eD hs
+  exact ⟨A, D, c, hc, eA, eD, hs⟩
 
 end AlgebraicGeometry
