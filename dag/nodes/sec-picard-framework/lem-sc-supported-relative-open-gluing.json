@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-supported-relative-open-gluing",
+ "kind": "statement",
+ "title": "Supported perfect gluing using relative restriction functors",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $W,V\\subseteq X$ opens, $T\\subseteq X$ any subset, and $Y=W\\cup V$. Choose derived localizations [def-pc-derived-category] with common Hom universe $w$ on $X,W,V,W\\cap V,Y$ and all localized open sites of $W,V,Y$. Let $A\\in D(\\mathcal O_W)$ and $B\\in D(\\mathcal O_V)$ be perfect [def-pc-perfect-complex], with every cohomology stalk vanishing off $T$ in the respective opens. Let $L,J_W,J_V$ be direct restriction from $X$ to $Y,W,V$, and $P_W,P_V,S_W,S_V$ transported restrictions from $Y$ to $W,V$ and from $W,V$ to $W\\cap V$. Use canonical comparisons $k_W:L\\mathbin{\\ggg}P_W\\cong J_W$, $k_V:L\\mathbin{\\ggg}P_V\\cong J_V$, $s_W:J_W\\mathbin{\\ggg}S_W\\cong J_{W\\cap V}$ and $s_V:J_V\\mathbin{\\ggg}S_V\\cong J_{W\\cap V}$ [def-pc-derived-open-restriction-maps]. Given $c:S_W(A)\\cong S_V(B)$, $E\\in D(\\mathcal O_X)$, $a:A\\to J_W(E)$ and $b:B\\to J_V(E)$ satisfying $(s_W)_E\\circ S_W(a)=(s_V)_E\\circ S_V(b)\\circ c$, there exist a perfect $F\\in D(\\mathcal O_Y)$ with vanishing cohomology stalks on $Y\\setminus T$, a map $\\alpha:F\\to L(E)$, and isomorphisms $i_W:P_W(F)\\cong A$, $i_V:P_V(F)\\cong B$ satisfying $(k_W)_E\\circ P_W(\\alpha)=a\\circ i_W$ and $(k_V)_E\\circ P_V(\\alpha)=b\\circ i_V$. No affineness, quasi-compactness, or stabilization is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Two-open gluing paragraph, Tag 08DG; local perfectness Tag 08CM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Pull W and V back to opens of Y. They cover Y and their open subschemes and intersection are canonically isomorphic to W,V,W intersect V. The exact module over-equivalences and restriction composition comparisons transport A,B,c,E,a,b and the compatibility equation to these opens of Y. Obtain any needed fixed-universe localizations by [lem-pc-open-derived-localization-adjunction]. Apply [lem-sc-derived-open-gluing] on Y to obtain the glued object, local identifications and morphism. Transport them back to PW and PV to obtain the two stated equations.",
+   "uses": [
+    "lem-pc-open-derived-localization-adjunction",
+    "lem-sc-derived-open-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a point of Y choose W or V containing it. Transport a strictly perfect neighbourhood model of A or B through the corresponding open-scheme equivalence and the gluing isomorphism. Restricting its neighbourhood and preserving boundedness and finite-free retracts yields a model of F, hence perfectness by [def-pc-perfect-complex]. Exact restriction/homology and the restriction stalk isomorphism identify each homology stalk of F with that of A or B. Off T it is zero by the corresponding hypothesis. Empty members and empty Y obey the same covering argument.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-sc-derived-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Two-open construction; explicit relative restriction transport as detailed in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "supported perfect complex gluing on two opens relative to an ambient scheme",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect supported affine complex and lifted morphism compatible with stabilized restriction on overlap",
+   "results": "Eight generic complex restriction and lifting hits; none constructs affine supported overlap data or relative supported gluing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_open_gluing|supported.*perfect.*gluing|overMapCompOverEquiv",
+   "results": "Mathlib Modules/Sheaf.lean overMapCompOverEquiv compares transported restriction with scheme restriction. Local searches find the existing affine extension/map-lift and derived_open_gluing ingredients, but no combined statements with these relative interfaces.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedMapAffineUnionGluing",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Supported-map affine attachment before ambient extension",
+   "via": [
+    "lem-sc-supported-map-affine-union-gluing",
+    "lem-sc-supported-map-affine-attachment",
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedRelativeOpenGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedRelativeOpenGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_supported_relative_open_gluing",
+  "statement": "theorem exists_supported_relative_open_gluing\n    (X : Scheme.{u}) (W V : X.Opens) (T : Set X)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [∀ O : W.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over O))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [∀ O : V.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings V.toScheme.toRingedSpace).over O))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace))]\n    [∀ O : (W ⊔ V).toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (W ⊔ V).toScheme.toRingedSpace).over O))]\n    (A : schemeDerivedCategory W.toScheme) (B : schemeDerivedCategory V.toScheme)\n    (hA : IsPerfect W.toScheme A) (hB : IsPerfect V.toScheme B)\n    (hAT : ∀ (i : ℤ) (x : W.toScheme), x.val ∉ T →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj A).val.presheaf x)))\n    (hBT : ∀ (i : ℤ) (x : V.toScheme), x.val ∉ T →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) i).obj B).val.presheaf x))) :\n    let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory\n    let JW := (schemeOpenRestriction X W).mapDerivedCategory\n    let JV := (schemeOpenRestriction X V).mapDerivedCategory\n    let PW := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory\n    let PV := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory\n    let SW := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory\n    let SV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory\n    let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)\n    let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)\n    let sW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)\n    let sV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)\n    ∀ (c : SW.obj A ≅ SV.obj B) (E : schemeDerivedCategory X)\n      (a : A ⟶ JW.obj E) (b : B ⟶ JV.obj E),\n      SW.map a ≫ sW.hom.app E = c.hom ≫ SV.map b ≫ sV.hom.app E →\n      ∃ (F : schemeDerivedCategory (W ⊔ V).toScheme) (α : F ⟶ L.obj E),\n        IsPerfect (W ⊔ V).toScheme F ∧\n        (∀ (i : ℤ) (x : (W ⊔ V).toScheme), x.val ∉ T →\n          Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace)) i).obj F).val.presheaf\n              x))) ∧\n        ∃ (iW : PW.obj F ≅ A) (iV : PV.obj F ≅ B),\n          PW.map α ≫ kW.hom.app E = iW.hom ≫ a ∧\n          PV.map α ≫ kV.hom.app E = iV.hom ≫ b",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T045549-L-134127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T045549-L-134127",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

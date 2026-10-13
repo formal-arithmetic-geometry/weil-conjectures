@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-supported-affine-overlap-map",
+ "kind": "statement",
+ "title": "Supported affine member with a compatible stabilized overlap map",
+ "statement": "Let $X$ be a quasi-separated scheme [def-pc-scheme], $W\\subseteq X$ a quasi-compact open, $V\\subseteq X$ an affine open, and $T\\subseteq X$ closed with quasi-compact complement. Choose derived localizations [def-pc-derived-category] with common Hom universe $w$ on $X$ and all its localized open sites, on $W,V$ and all their localized open sites, and on $W\\cap V$. Let $E\\in D_{QCoh}(\\mathcal O_X)$, $R\\in D(\\mathcal O_X)$, and $\\beta:R\\to E$. Assume $R$ has strictly perfect neighbourhood models [def-pc-perfect-complex] at every point of $W$ and every cohomology stalk of $R$ vanishes on $W\\setminus T$. Let $J_W,J_V$ be direct derived restriction and $S_W,S_V$ transported restriction to $W\\cap V$, with canonical comparisons $k_W:J_W\\mathbin{\\ggg}S_W\\cong J_{W\\cap V}$ and $k_V:J_V\\mathbin{\\ggg}S_V\\cong J_{W\\cap V}$ [def-pc-derived-open-restriction-maps]. Put $A=J_W(R)\\oplus J_W(R)[1]$ and $a=J_W(\\beta)\\circ\\mathrm{pr}_1$. Then $A$ is perfect with vanishing cohomology stalks on $W\\setminus T$, and there exist $B\\in D(\\mathcal O_V)$, $b:B\\to J_V(E)$ and $c:S_W(A)\\cong S_V(B)$ such that $B$ is perfect with vanishing cohomology stalks on $V\\setminus T$ and $(k_W)_E\\circ S_W(a)=(k_V)_E\\circ S_V(b)\\circ c$. No object on the union is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Affine construction using Tags 08EK and 08EH before gluing"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the strictly perfect local models to W, intersecting their neighbourhoods with W and transporting their bounded finite-free retract data through the module over-equivalence. Biproducts and shifts of these models prove perfectness of A. Exact restriction/homology and restriction stalk comparisons prove its support on T intersect W. Restriction of E is quasi-coherent by [lem-pc-derived-open-restriction-qcoh-iff].",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport W intersect V to an open of V. Quasi-separatedness and IsCompact.inter_of_isOpen show it is compact, as is V intersect the complement of T. Pullback of T to V is closed. Apply [lem-sc-affine-perfect-support-extension] to the overlap restriction of R. Its resulting affine perfect supported source Q restricts to the stabilized overlap of R; exact biproduct and shift comparisons identify this with SW(A).",
+   "uses": [
+    "lem-sc-affine-perfect-support-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose Q on the overlap with the inverse stabilization identification, SW(a), and the canonical target comparison. Apply [lem-sc-affine-perfect-map-lift] on V; its new source B stays perfect and supported on T intersect V. The invertible overlap augmentation identifies SV(B) with SW(A). Take its inverse for c. The map-lifting equation, reassociated through the canonical restriction comparisons, gives SW(a) kW_E = c SV(b) kV_E.",
+   "uses": [
+    "lem-sc-affine-perfect-map-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-sc-affine-perfect-support-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Two-open construction; explicit relative restriction transport as detailed in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "supported perfect complex gluing on two opens relative to an ambient scheme",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect supported affine complex and lifted morphism compatible with stabilized restriction on overlap",
+   "results": "Eight generic complex restriction and lifting hits; none constructs affine supported overlap data or relative supported gluing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_open_gluing|supported.*perfect.*gluing|overMapCompOverEquiv",
+   "results": "Mathlib Modules/Sheaf.lean overMapCompOverEquiv compares transported restriction with scheme restriction. Local searches find the existing affine extension/map-lift and derived_open_gluing ingredients, but no combined statements with these relative interfaces.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedMapAffineUnionGluing",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Supported-map affine attachment before ambient extension",
+   "via": [
+    "lem-sc-supported-map-affine-union-gluing",
+    "lem-sc-supported-map-affine-attachment",
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedAffineOverlapMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedAffineOverlapMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_supported_affine_overlap_map",
+  "statement": "theorem exists_supported_affine_overlap_map\n    (X : Scheme.{u}) [QuasiSeparatedSpace X]\n    (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V)\n    (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ O : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [∀ O : W.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over O))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [∀ O : V.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings V.toScheme.toRingedSpace).over O))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))]\n    (E : schemeDerivedQCohCategory X)\n    (R : schemeDerivedCategory X) (β : R ⟶ E.obj)\n    (hR : (∀ x : X, x ∈ W → ∃ O : X.Opens, x ∈ O ∧\n        ∃ K : CochainComplex\n            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ,\n          IsStrictlyPerfect X O K ∧\n          Nonempty ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R ≅\n              DerivedCategory.Q.obj K)))\n    (hRT : (∀ (i : ℤ) (x : X), x ∈ W → x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R).val.presheaf x)))) :\n    let JW := (schemeOpenRestriction X W).mapDerivedCategory\n    let JV := (schemeOpenRestriction X V).mapDerivedCategory\n    let SW := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory\n    let SV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory\n    let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)\n    let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)\n    let A := JW.obj R ⊞ (JW.obj R)⟦(1 : ℤ)⟧\n    let a : A ⟶ JW.obj E.obj := biprod.fst ≫ JW.map β\n    IsPerfect W.toScheme A ∧\n      (∀ (i : ℤ) (x : W.toScheme), x.val ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj A).val.presheaf x))) ∧\n      ∃ (B : schemeDerivedCategory V.toScheme) (b : B ⟶ JV.obj E.obj)\n        (c : SW.obj A ≅ SV.obj B),\n        IsPerfect V.toScheme B ∧\n        (∀ (i : ℤ) (x : V.toScheme), x.val ∉ T →\n          Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) i).obj B).val.presheaf\n              x))) ∧\n        SW.map a ≫ kW.hom.app E.obj = c.hom ≫ SV.map b ≫ kV.hom.app E.obj",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T045549-L-134127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T045549-L-134127",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

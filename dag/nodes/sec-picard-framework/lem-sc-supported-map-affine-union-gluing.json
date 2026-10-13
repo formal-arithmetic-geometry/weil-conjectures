@@ -14,40 +14,37 @@
  ],
  "proof": [
   {
-   "text": "Use the local derived category transport [lem-pc-open-derived-localization-adjunction] on W, V and their intersection. Restrict the given strictly perfect models to W, transporting bounded terms and their finite-free retract data through Modules.overEquiv. Exact restriction preserves the cohomology stalks and therefore the support condition. Restriction of E has quasi-coherent cohomology by [lem-pc-derived-open-restriction-qcoh-iff].",
+   "text": "Choose fixed-universe derived localizations on W,V and W intersect V by [lem-pc-open-derived-localization-adjunction]. Apply [lem-sc-supported-affine-overlap-map] to the original R,beta. It supplies the perfect supported stabilized object A=R|W plus (R|W)[1], a=first projection then beta|W, the affine supported B,b and an overlap isomorphism with the exact compatible-map equation.",
    "uses": [
     "lem-pc-open-derived-localization-adjunction",
-    "def-pc-perfect-complex",
-    "lem-pc-derived-open-restriction-qcoh-iff"
+    "lem-sc-supported-affine-overlap-map"
    ],
    "elementary": false
   },
   {
-   "text": "Quasi-separatedness makes W intersect V compact and makes V intersect the open complement of T compact, by IsCompact.inter_of_isOpen. Closedness pulls back to V. Apply [lem-sc-affine-perfect-support-extension] on V to R restricted to W intersect V. It gives a supported perfect source restricting to the stabilization of R on the overlap. Compose the overlap isomorphism with first projection and the restricted beta.",
+   "text": "Apply [lem-sc-supported-relative-open-gluing] to A,B and this compatibility. Obtain F perfect and supported on T intersect Y, alpha:F to E|Y, and iW:F|W iso A satisfying P(alpha) kW_E=iW a. This step uses only a genuine local-data gluing theorem: its source objects and compatible maps are supplied by the preceding step.",
    "uses": [
-    "lem-sc-affine-perfect-support-extension"
+    "lem-sc-supported-relative-open-gluing"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-sc-affine-perfect-map-lift] to this overlap map on V. Replace the affine source by its perfect tensor augmentation, which is invertible on the overlap, and use its support-preservation assertion with T intersect V. Its lifted map and the first-projection map on W agree on W intersect V by the lifting equation.",
+   "text": "For U subset W subset Y, compose the two transported underived overlap restrictions. Cancel the W module over-equivalence unit and use the definitionally identical composition of overMap functors; deriving the resulting natural isomorphism and applying mapDerivedCategoryCompIso gives d:H iso P followed by Q, where Q restricts W to U. Compose d with the direct-restriction comparisons kW and kU of [def-pc-derived-open-restriction-maps] to obtain k:L followed by H iso J. Map iW by Q and postcompose the exact biproduct and shift comparisons and kU_R to construct e0:H(F) iso J(R) plus J(R)[1]. Naturality of d, functoriality of Q applied to the W map equation, the biproduct first-projection identity, and naturality of kU at beta give H(alpha) k_E=e0 firstProjection J(beta).",
    "uses": [
-    "lem-sc-affine-perfect-map-lift"
+    "def-pc-derived-open-restriction-maps"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply [lem-sc-derived-open-gluing] on the two-open cover of Y. Obtain F and alpha with the stated restrictions to W and V. At every point choose the strictly perfect model on one member of the cover; transport along the gluing isomorphism. The same local identifications give vanishing of cohomology stalks outside T. Restrict the W identification to U and compose the canonical biproduct and shift comparisons, giving e0 and the map equation with the canonical restriction comparison k. For a supplied c, put t = k.symm followed by c, a natural automorphism of J. Define e by postcomposing e0 with the biproduct of t at R and the shift of t at R. Its first projection is the first projection of e0 followed by t at R. Naturality of t on beta gives the displayed equation with c. No compatibility of c with shifts is assumed. This argument makes no extension to X.",
-   "uses": [
-    "lem-sc-derived-open-gluing"
-   ],
-   "elementary": false
+   "text": "Set t=k inverse followed by the supplied c, an automorphism of J. Postcompose e0 with the biproduct of t_R and its shift to obtain e. Its first projection equals e0 firstProjection t_R. Naturality of t at beta and k t=c then give H(alpha) c_E=e firstProjection J(beta). No shift compatibility for c is needed. Both comparison steps are proved in the private categorical helper stabilized_map_restriction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/09IM",
-  "place": "the two-open supported perfect gluing construction, before ambient extension; naturality transports the chosen comparison"
+  "place": "Two-open affine source construction followed by local gluing; P3 explicitly proves stabilization restriction and arbitrary comparison naturality"
  },
  "mathlib_searches": [
   {
@@ -115,11 +112,9 @@
  },
  "proof_deps": [
   "lem-pc-open-derived-localization-adjunction",
-  "def-pc-perfect-complex",
-  "lem-pc-derived-open-restriction-qcoh-iff",
-  "lem-sc-affine-perfect-support-extension",
-  "lem-sc-affine-perfect-map-lift",
-  "lem-sc-derived-open-gluing"
+  "lem-sc-supported-affine-overlap-map",
+  "lem-sc-supported-relative-open-gluing",
+  "def-pc-derived-open-restriction-maps"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -135,9 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T031558-L-3577148",
-  "kind": "interface"
+  "landing": "20261013T045549-L-134127",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
