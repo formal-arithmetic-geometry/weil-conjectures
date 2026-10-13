@@ -9,30 +9,37 @@
  },
  "proof": [
   {
-   "text": "Evaluate the concrete complex in degree n and identify its maps with the restriction and difference maps on sections over test opens.",
+   "text": "Apply the arbitrary-module pullback of the two transported restriction units to I.X n. The kernel fork of this pullback is the underived restriction/difference short complex, so Mathlib IsPullback.exact_shortComplex' and mono_shortComplex'_f give its exactness and monicity.",
    "uses": [
-    "def-pc-kinjective-mayer-vietoris-data",
-    "def-pc-derived-open-restriction-maps"
+    "lem-pc-open-module-image-gluing"
    ],
    "elementary": true
   },
   {
-   "text": "Use sheaf gluing for the kernel and injective restriction surjectivity for the cokernel, then transport the sectionwise result to sheaves.",
+   "text": "Give I.X n its supplied injectivity instance. The ordinary open-restriction adjunction unit is sectionwise surjective by injective_restriction_surjective and restrictAdjunction_unit_app_app, hence epic in presheaves and sheaves. The transported unit is its composite with the pushforward of the inverse overFunctorEquiv comparison, an isomorphism, so is epic too. The identity schemeOpenModuleImage_unit_restriction makes the composite of the larger-open unit with the overlap restriction the smaller-open unit. Epicity of the latter implies epicity of the overlap restriction. Composing the difference map with the left biproduct inclusion gives that overlap restriction; thus the difference map is epic. This argument does not require computing the mate on sections.",
    "uses": [
+    "def-pc-kinjective-mayer-vietoris-data",
     "lem-sc-ringed-space-injective-restriction-surjective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use HomologicalComplex.biprodXIso in degree n to construct an isomorphism from the evaluated concrete short complex to the underived pullback short complex. The two projection equations identify the first arrow with the pair of units. The two inclusion equations identify the second arrow with the overlap restrictions, retaining the minus sign on the V summand. Transfer short exactness along this explicit ShortComplex.isoMk.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-open-module-image-gluing",
   "def-pc-kinjective-mayer-vietoris-data",
-  "def-pc-derived-open-restriction-maps",
   "lem-sc-ringed-space-injective-restriction-surjective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 20.33.2, Tag 08BV"
+  "place": "Tag 08BV, degreewise short exactness. B3 stage 3: sheaf-gluing pullback split off; epicity proved via the ordinary adjunction unit and the existing unit-composition identity; evaluated biproduct comparison proved explicitly."
  },
  "mathlib_searches": [
   {
@@ -141,12 +148,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T203945-L-831157",
+  "landing": "20261013T003155-L-2428115",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
