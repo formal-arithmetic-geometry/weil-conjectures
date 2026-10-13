@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAuxCompatible
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAuxEpi
 
 @[expose] public section
 universe u
@@ -33,6 +35,12 @@ theorem etaleResidueTriples_primeLocalization_component_extension_unique_aux
       s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧
       β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
         (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ ∧
-      Epi β := by sorry
+      Epi β := by
+  obtain ⟨c, i, hα, hφ⟩ :=
+    etaleResidueTriples_primeLocalization_component_extension_compatible
+      R p K χ q ψ hψ hK t
+  exact ⟨c, i, hα, hφ,
+    etaleResidueTriples_primeLocalization_component_extension_epi
+      R p K χ q ψ hψ hK t c i hα hφ⟩
 
 end AlgebraicGeometry.Scheme
