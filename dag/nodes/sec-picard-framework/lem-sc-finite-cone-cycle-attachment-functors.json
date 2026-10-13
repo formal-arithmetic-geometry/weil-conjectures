@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-finite-cone-cycle-attachment-functors",
+ "kind": "statement",
+ "title": "Attach supplied finite free cone cycles detected by functors",
+ "statement": "Let $R$ and $B_j$ for $j\\in\\operatorname{Fin}(r)$ be commutative rings in the same universe. Let $L_j:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(B_j)$ be additive functors preserving epimorphisms. Let $f:F\\to C$ be a chain map of integer-indexed cochain complexes of $R$-modules (degree-one differentials square to zero), and $n,b\\in\\mathbb Z$ satisfy $n\\le b+1$. Assume $F^i=0$ for $i<n$ and $i>b$, and its terms are finite free. Put $D=\\operatorname{Cone}(f)$, with $D^i=F^{i+1}\\oplus C^i$ and differential $(-d_F,f+d_C)$. Assume $L_j(H^i(D))=0$ for $i\\ge n$. Let $P$ be a finite free $R$-module and $q:P\\to Z^{n-1}(D)$ a map to the kernel of the outgoing cone differential, such that every $L_j(\\pi\\circ q)$ is epic, where $\\pi\\circ q$ denotes the source-to-target composite $P\\to Z^{n-1}(D)\\to H^{n-1}(D)$. There are a complex $G$, a map $g:G\\to C$, and $\\tau:F\\to G$ such that $G$ is zero outside $[n-1,b]$, all terms of $G$ are finite free, $L_j(H^i(\\operatorname{Cone}(g)))=0$ for $i\\ge n-1$, $g\\tau=f$, and every $\\tau^i$ for $i\\ge n$ is invertible. No exactness or faithfulness of the detecting functors and no global epimorphism of $\\pi\\circ q$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, proof of lemma-lift-pseudo-coherent, cone-cycle attachment after the finite family is supplied; https://stacks.math.columbia.edu/tag/08EE"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Project the supplied cone cycles to obtain a:P to F^n and c:P to C^(n-1) with a d_F=0 and a f+c d_C=0. Let A be the single complex P in degree n, k:A to F induced by a, and let the degree-minus-one cochain -c have coboundary k f. Construct G=Cone(k), g=desc(k,-c,f), and tau=inr(k). The cone identities give tau g=f. The termwise biproducts of the single complex and F give the support and finite free bounds. In retained degrees the single term is zero, making tau invertible. This is the construction of the existing proved cone-cycle attachment, with the generator and vanishing hypotheses only used after functor application.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct t:Cone(f) to Cone(g) using tau and the identity on C. Its components in degrees at least n-1 are invertible, so homologyMap(t,i) is epic there. The images of the supplied cycles under t are boundaries of minus the new P-term, so q homologyProjection homologyMap(t,n-1)=0. Apply L_j: both L_j(q homologyProjection) and L_j(homologyMap(t,n-1)) are epic and their composite is zero. Thus the latter is zero and epic, making its target zero. In higher degrees L_j(homologyMap(t,i)) is epic with zero source by the hypothesis, making its target zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, proof of lemma-lift-pseudo-coherent, cone-cycle attachment after the finite family is supplied"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Attach finite free mapping cone cycles whose images generate homology after finitely many additive functors preserving epimorphisms",
+   "results": "8 hits, including CochainComplex.cm5b and DerivedCategory.left_fac_of_isStrictlyGE; none states attachment detected by functors.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.Epi",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finite_submodule_right_of_setFinite|exists_finiteFree_cone_cycle_attachment",
+   "results": "6 Mathlib hits, including TensorProduct.exists_finite_submodule_right_of_setFinite in Mathlib/LinearAlgebra/TensorProduct/Finiteness.lean:141. No simultaneous finite-free attachment theorem. The library FiniteConeCycleAttachment was read; its global epimorphism hypothesis does not give attachment after detecting functors.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Attach finite free mapping cone cycles whose images generate homology after finitely many additive functors preserving epimorphisms",
+   "results": "Service unavailable: Internal Server Error; no search results obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteLocalizationFreeStep",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EE affine pseudo-coherent lift in the proper-flat support argument: Tag 08EE, proof of lemma-lift-pseudo-coherent, cone-cycle attachment after the finite family is supplied",
+   "via": [
+    "lem-sc-finite-localization-free-step",
+    "lem-sc-finite-localization-free-model",
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteConeCycleAttachmentFunctors",
+  "file": "lean/Sheaf/RingTheory/FiniteConeCycleAttachmentFunctors.lean",
+  "declaration": "DerivedCategory.exists_finiteFree_cone_cycle_attachment_functors",
+  "statement": "theorem exists_finiteFree_cone_cycle_attachment_functors (R : Type u) [CommRing R]\n    (r : ℕ) (B : Fin r → Type u) [∀ j, CommRing (B j)]\n    (L : ∀ j, ModuleCat.{u} R ⥤ ModuleCat.{u} (B j))\n    [∀ j, (L j).Additive] [∀ j, (L j).PreservesEpimorphisms]\n    (C F : CochainComplex (ModuleCat.{u} R) ℤ) (f : F ⟶ C) (b n : ℤ)\n    (hn : n ≤ b + 1) (hlow : F.IsStrictlyGE n) (hupp : F.IsStrictlyLE b)\n    (hfree : ∀ i : ℤ, Module.Free R (F.X i) ∧ Module.Finite R (F.X i))\n    (hvan : ∀ j : Fin r, ∀ i : ℤ, n ≤ i →\n      IsZero ((L j).obj ((CochainComplex.mappingCone f).homology i)))\n    (P : ModuleCat.{u} R) [Module.Free R P] [Module.Finite R P]\n    (q : P ⟶ (CochainComplex.mappingCone f).cycles (n - 1))\n    (hq : ∀ j : Fin r,\n      Epi ((L j).map (q ≫ (CochainComplex.mappingCone f).homologyπ (n - 1)))) :\n    ∃ (G : CochainComplex (ModuleCat.{u} R) ℤ) (g : G ⟶ C) (j : F ⟶ G),\n      G.IsStrictlyGE (n - 1) ∧ G.IsStrictlyLE b ∧\n      (∀ i : ℤ, Module.Free R (G.X i) ∧ Module.Finite R (G.X i)) ∧\n      (∀ j : Fin r, ∀ i : ℤ, n - 1 ≤ i →\n        IsZero ((L j).obj ((CochainComplex.mappingCone g).homology i))) ∧\n      j ≫ g = f ∧ (∀ i : ℤ, n ≤ i → IsIso (j.f i))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T115022-L-3323486",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T115022-L-3323486",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
