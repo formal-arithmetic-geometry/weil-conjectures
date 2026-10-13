@@ -1,0 +1,160 @@
+{
+ "id": "lem-sp-cartan-eilenberg-cone-graded-split-injection",
+ "kind": "statement",
+ "title": "Normalized retained-column split injection",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], $K$ an integer-indexed cochain complex, $I$ a bicomplex with complex index in $\\mathbf Z$ and resolution index in $\\mathbf N$ [def-sp-double-complex-total], and $b\\in\\mathbf Z$. Put $J=((\\operatorname{mappedFunctor}(\\mathrm{id})(I))^{\\mathrm{flip}})$ using extension by zero [def-sp-cartan-eilenberg-presentation]. Let $\\epsilon:K\\to\\operatorname{Tot}(J)$ be a chain map, let $C=\\operatorname{Cone}(\\epsilon)$ [lem-pur-quasi-iso-cone-acyclic], and let $F$ be a decreasing subcomplex filtration of $C$ [def-sp-filtration]. Write $u_t:K^{t+1}\\to C^t$ and $v_t:\\operatorname{Tot}(J)^t\\to C^t$ for the cone inclusions. Assume that the degreewise image steps [def-sp-filtered-complex-subquotients] are $F^q C^t=(\\operatorname{im}(u_t)\\text{ if }q\\le t+1\\text{, else }0)+\\sum_{s=\\max(b,q)}^t\\operatorname{im}(J^{t-s,s}\\to\\operatorname{Tot}(J)^t\\xrightarrow{v_t} C^t)$, with an empty sum zero. Fix $p,m\\in\\mathbf Z$ with $p-1\\le m$, and write $G=(\\operatorname{gr}_F^p C)^m$ and $\\pi:(F^pC)^m\\to G$ for the quotient projection. Assume $I^{s,\\bullet}=0$ and $K^s=0$ for $s<b$. Let $a:K[0]\\to I$ be a bicomplex map, where $K[0]$ puts $K^s$ in resolution degree zero, and set $D=\\operatorname{Cone}(\\operatorname{extend}(a^p))^{m-p}$. There exists a morphism $w:D\\to G$ admitting a retraction $z:G\\to D$ with $z\\circ w=\\mathrm{id}_D$, such that (1) for each $r\\in\\mathbf N$ with $r+p=m$ there is a lift $l:I^{p,r}\\to(F^pC)^m$ of the actual diagonal inclusion into $C^m$, and $\\pi\\circ l$ equals the canonical extended-resolution inclusion into $D$ followed by $w$; (2) when $m+1=p$ there is a lift $l:K^p\\to(F^pC)^m$ of the cone source inclusion after its index identification, and $\\pi\\circ l$ equals the canonical extended-single source inclusion into $D$ followed by $w$. Both equalities use the canonical extension identifications. No assertion that $w\\circ z=\\mathrm{id}_G$ or that $w$ is epic is included.",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Homology, second filtration formula and section-double-complex and lemma-ss-double-complex, degree-zero terms; augmented cone refinement of parent step 1; canonical augmentation described in Tag 0133 (lemma-double-complex-gives-resolution)"
+ },
+ "proof": [
+  {
+   "text": "in degree m, project the ambient cone onto the complex-index-p summands.\nThe cone K summand is retained only when m+1=p; otherwise the corresponding\nextended-single source in the column cone is zero. On the total summand use\nits coproduct universal property to project onto index p, and identify this\nsummand with the extended resolution term. The projection kills every\ncolumn of index greater than p and the K summand present in step p+1.\nIt therefore descends from step p through the evaluated cokernel to a map u.\nFor each retained term, its ambient inclusion factors through step p since\nits image is one of the summands in the stipulated supremum. Below b that\nterm is zero, so use its unique zero map. The two resulting lifts, with\nextension identifications, define v by the degreewise cone biproduct.\nTheir quotient composites are the displayed normalization equations.\nThe ambient projection after each inclusion is identity. Thus v followed\nby u is identity, checked on the two cone coprojections. When m=p-1 the\nresolution term is zero; when m>=p the extended-single term is zero. These\ncases also cover p<b, when both retained terms vanish. No identity for u\nfollowed by v is asserted here: surjectivity is a separate generating-family\nargument.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Explicit augmented-cone refinement of the retained-column calculation; proof written by Q3 from the parent plan, Mathlib universal properties and the proved finite_sup_hom_ext pattern in DoubleComplexTotal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*(sup|biproduct)|biproduct.*quotient",
+   "results": "25 hits: Mathlib/Topology/Maps/OpenQuotient.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Colimits.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a direct sum by the remaining summands is isomorphic to the retained summand",
+   "results": "8 hits: Submodule.quotientEquivDirectSum, DirectSum.IsInternal.ofBijective_coeLinearMap_of_ne, DirectSum.IsInternal.ofBijective_coeLinearMap_of_mem_ne, DirectSum.decomposeLinearEquiv_symm_comp_lof, DirectSum.IsInternal.ofBijective_coeLinearMap_of_mem, quotient_prod_linearEquiv, DirectSum.IsInternal.ofBijective_coeLinearMap_same, Submodule.mk_quotientEquivOfIsCompl_apply",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subobject.quotient",
+   "results": "loogle: unknown identifier 'Subobject.quotient'",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Retained column inclusions of the quotient of an augmented cone column filtration are a jointly epimorphic family",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_sup_hom_ext|finite_sup_cokernel_iso|cone.*graded",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.imageSubobject, CategoryTheory.Subobject",
+   "results": "loogle: unknown identifier 'CategoryTheory.imageSubobject'",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms out of a quotient are determined by maps on generators of a finite supremum of image subobjects",
+   "results": "8 hits: CategoryTheory.Subobject.finset_sup_factors, CategoryTheory.Subobject.sup_factors_of_factors_right, CategoryTheory.Subobject.sup_factors_of_factors_left, CategoryTheory.Subobject.smallCoproductDesc, CategoryTheory.Subobject.sup, CategoryTheory.IsGrothendieckAbelian.subobjectMk_of_isColimit_eq_iSup, CategoryTheory.Subobject.sSup, CategoryTheory.Subobject.le_sSup",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergConeGradedNormalizedIso",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 2: canonical quasi-isomorphism from the augmented Cartan--Eilenberg resolution to its total; graded column-cone calculation in the finite-diagonal filtration.",
+   "via": [
+    "lem-sp-cartan-eilenberg-cone-graded-normalized-iso",
+    "lem-sp-cartan-eilenberg-cone-graded-short-complex-iso",
+    "lem-sp-cartan-eilenberg-cone-filtration-properties",
+    "lem-sp-cartan-eilenberg-cone-filtration",
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergConeGradedSplitInjection",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeGradedSplitInjection.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_graded_split_injection",
+  "statement": "theorem cartanEilenberg_cone_graded_split_injection\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    (K : CochainComplex A ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      K ⟶ I)\n    (b : ℤ)\n    (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s))\n    (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s))\n    (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (F : DecreasingFiltration (CochainComplex.mappingCone aug))\n    (hF : ∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject\n          ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero\n            (ComplexShape.up ℤ) (n - s) s n ≫\n              (CochainComplex.mappingCone.inr aug).f n)))\n    (p m : ℤ) (hm : p - 1 ≤ m) :\n    ∃ v : (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).X (m - p) ⟶\n        (F.gradedPiece p).X m,\n      (∃ u, v ≫ u = 𝟙 _) ∧\n  (∀ (r : ℕ) (h : (r : ℤ) + p = m),\n    ∃ l : (I.X p).X r ⟶ (F.step p : CochainComplex A ℤ).X m,\n      l ≫ (F.step p).arrow.f m =\n        (HomologicalComplex.extendXIso\n          (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X p))\n          ComplexShape.embeddingUpNat (i := r) (i' := m - p)\n          (by change (r : ℤ) = m - p; omega)).inv ≫\n        (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal\n          (ComplexShape.up ℤ) (m - p) p m (by change (m - p) + p = m; omega) ≫\n        (CochainComplex.mappingCone.inr aug).f m ∧\n      l ≫ (F.complexQuotientπ p (p + 1) (by omega)).f m =\n        (HomologicalComplex.extendXIso (I.X p) ComplexShape.embeddingUpNat\n          (i := r) (i' := m - p)\n          (by change (r : ℤ) = m - p; omega)).inv ≫\n        (CochainComplex.mappingCone.inr\n          (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).f (m - p) ≫\n        v) ∧\n  (∀ h : m + 1 = p,\n    ∃ l : K.X p ⟶ (F.step p : CochainComplex A ℤ).X m,\n      l ≫ (F.step p).arrow.f m =\n        (K.XIsoOfEq h.symm).hom ≫\n        (CochainComplex.mappingCone.inl aug).v (m + 1) m (by omega) ∧\n      l ≫ (F.complexQuotientπ p (p + 1) (by omega)).f m =\n        (HomologicalComplex.extendXIso ((CochainComplex.single₀ A).obj (K.X p))\n          ComplexShape.embeddingUpNat (i := 0) (i' := m - p + 1)\n          (by change (0 : ℤ) = m - p + 1; omega)).inv ≫\n        (CochainComplex.mappingCone.inl\n          (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).v\n          (m - p + 1) (m - p) (by omega) ≫ v)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T045555-L-135418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T045555-L-135418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

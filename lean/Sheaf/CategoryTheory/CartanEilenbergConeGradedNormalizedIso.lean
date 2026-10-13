@@ -8,6 +8,8 @@ module
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.CategoryTheory.CartanEilenbergConeGradedSplitInjection
+import Sheaf.CategoryTheory.CartanEilenbergConeGradedHomExt
 
 /-! # Normalized degreewise comparison for the Cartan--Eilenberg cone filtration
 
@@ -110,6 +112,28 @@ theorem cartanEilenberg_cone_graded_normalized_iso
     (p m : ℤ) (hm : p - 1 ≤ m) :
     ∃ e : (F.gradedPiece p).X m ≅ (CochainComplex.mappingCone
       (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).X (m - p),
-      CartanEilenbergConeGradedNormalized K I a aug F p m e := by sorry
+      CartanEilenbergConeGradedNormalized K I a aug F p m e := by
+  obtain ⟨v, ⟨u, hu⟩, hv⟩ := cartanEilenberg_cone_graded_split_injection
+    K I a b hIbelow hKbelow aug F hF p m hm
+  have : IsSplitMono v := IsSplitMono.mk' ⟨u, hu⟩
+  have : Epi v := by
+    constructor
+    intro T g h w
+    apply cartanEilenberg_cone_graded_hom_ext
+      K I b aug F hF p m hm T g h
+    · intro r hr l hl
+      obtain ⟨l', hl', hq⟩ := hv.1 r hr
+      have he : l = l' := (cancel_mono ((F.step p).arrow.f m)).1 (hl.trans hl'.symm)
+      subst l
+      simp only [← Category.assoc]
+      simp only [hq, Category.assoc, w]
+    · intro hk l hl
+      obtain ⟨l', hl', hq⟩ := hv.2 hk
+      have he : l = l' := (cancel_mono ((F.step p).arrow.f m)).1 (hl.trans hl'.symm)
+      subst l
+      simp only [← Category.assoc]
+      simp only [hq, Category.assoc, w]
+  have : IsIso v := isIso_of_mono_of_epi v
+  exact ⟨(asIso v).symm, hv⟩
 
 end CategoryTheory.Functor
