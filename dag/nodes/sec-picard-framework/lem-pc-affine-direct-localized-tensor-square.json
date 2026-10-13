@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-affine-direct-localized-tensor-square",
+ "kind": "statement",
+ "title": "Affine input/base localization with final coefficients already at the fourth stalk",
+ "statement": "Let R,A,R',A' be commutative rings with compatible maps forming the cartesian affine spectrum square [def-pc-affine-base-change-tilde-coordinates]. Let M be a complex of A-modules, P=tilde(M), i an integer, p a prime of A', D the fourth structure-sheaf stalk, and kappa:A'→D the canonical map. Equip D with the composite algebra over A⊗_R R'. For every universal cohomology model n of M⊗^L_R R' with final coefficients D [def-pc-base-derived-tensor-cohomology-model], let U=D⊗_(A⊗_R R') H_n^i and a:U→H^i(D⊗_A M) be its existing coefficient comparison, transported to kappa composed with phi_g'. Let l be the fixed local model's localizedComparison [def-pc-single-complex-base-change-stalk-condition]. There exists e:U≅source(l) such that every D-linear chain iso tau:D⊗_A M≅tensorComplex at p sending 1⊗x to 1⊗germ(x) satisfies a followed by H^i(tau) equals e followed by l. There is no scalar extension of ordinary A'-cohomology or K-flatness hypothesis here.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Tag 0DJ8, affine displayed localization identity and comparison compatibility; Tags 06Y6 and 01I9."
+ },
+ "stmt_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof": [
+  {
+   "text": "Identify the three other stalk rings with contracted prime localizations using the cartesian spectrum square. The termwise scalar-extension/stalk coordinates on Spec A identify localization of M with stalkComplex P, sending 1 tensor x to its germ.",
+   "uses": [
+    "lem-pc-affine-stalk-scalar-extension-coordinates",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply first-factor localization, then base and second-factor localization, with a common intermediate cohomology model. Transport the resulting local model to the fixed stalkComplex model through the termwise isomorphism and universal counits. The same K-flat resolutions realize either derived-category universe; the counit and coefficient-action equations identify the resulting tensor-linear source maps.",
+   "uses": [
+    "lem-pc-derived-tensor-first-localization-models",
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two localizedComparison equations. Their ordinary coefficient chain map sends 1 tensor x to 1 tensor its germ. ExtendScalars.hom_ext makes it equal to every specified tau; taking homology gives a followed by H(tau) equals e followed by l.",
+   "uses": [
+    "lem-pc-derived-tensor-first-localization-models",
+    "lem-pc-derived-tensor-base-second-localization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-stalk-scalar-extension-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-derived-tensor-first-localization-models",
+  "lem-pc-derived-tensor-base-second-localization-models",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Tag 0DJ8, affine displayed localization identity and comparison compatibility; Tags 06Y6 and 01I9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localization derived tensor comparison cohomology base change stalk affine",
+   "results": "8 hits, including StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom and ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc. These identify stalk modules but not derived cohomology comparisons.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.ExtendScalars.hom_ext",
+   "results": "1 hit: ModuleCat.ExtendScalars.hom_ext, proving equality of extension maps on 1 tensor x. Used in the proved generic model argument; it does not identify the local derived model.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|extendScalarsComp_hom_app_one_tmul",
+   "results": "5 hits for the scalar-composition pure-tensor API. Project rg found DerivedTensorFirstLocalizationModels, DerivedTensorBaseSecondLocalizationModels and DerivedTensorLocalizationCohomology. The first two keep a common derived-category universe; the last is restricted to a functorial resolution. None directly connects an arbitrary direct-D model to the fixed affine stalk model.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat extension scalars homology adjunction tensor comparison",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8, affine proof: the displayed localization of derived tensor cohomology and compatibility with the ordinary coefficient comparison.",
+   "via": [
+    "lem-pc-affine-scalar-localized-tensor-square",
+    "lem-pc-affine-localized-tensor-stalk-square",
+    "lem-pc-affine-base-change-ordinary-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineDirectLocalizedTensorSquare",
+  "file": "lean/Sheaf/Algebra/Homology/AffineDirectLocalizedTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.exists_affineDirectLocalizedTensorSquare",
+  "statement": "theorem exists_affineDirectLocalizedTensorSquare\n    (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']\n    [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R')]\n    (φg' : A →+* A') (φf' : R' →+* A')\n    (hφg' : (algebraMap (A ⊗[R] R') A').comp\n      (algebraMap A (A ⊗[R] R')) = φg')\n    (hφf' : (algebraMap (A ⊗[R] R') A').comp\n      Algebra.TensorProduct.includeRight.toRingHom = φf')\n    (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf'))\n      (Spec.map (CommRingCat.ofHom (algebraMap R A)))\n      (Spec.map (CommRingCat.ofHom (algebraMap R R'))))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (i : ℤ) :\n    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)\n    (p : PrimeSpectrum A') →\n      let f := Spec.map (CommRingCat.ofHom (algebraMap R A))\n      let f' := Spec.map (CommRingCat.ofHom φf')\n      let g := Spec.map (CommRingCat.ofHom (algebraMap R R'))\n      let g' := Spec.map (CommRingCat.ofHom φg')\n      letI := SingleComplexBaseChange.leftAlgebra f g' p\n      letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq p\n      letI := (SingleComplexBaseChange.tensorMap f f' g g' sq p).toAlgebra\n      letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' p))\n      letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' p))\n      let D : Type u := (Spec.structureSheaf A').presheaf.stalk p\n      let κ := (StructureSheaf.toStalk A' p).hom\n      letI : Algebra (A ⊗[R] R') D :=\n        (κ.comp (algebraMap (A ⊗[R] R') A')).toAlgebra\n      (n : ModuleCat.BaseDerivedTensorCohomologyModel R A R' M D) →\n      let C := ((ModuleCat.extendScalars (κ.comp φg')).mapHomologicalComplex (.up ℤ)).obj M\n      let U := affineBaseChangeTildeModule R A R' D M n i\n      let hφ : (algebraMap (A ⊗[R] R') D).comp\n          (algebraMap A (A ⊗[R] R')) = κ.comp φg' := by\n        change (κ.comp (algebraMap (A ⊗[R] R') A')).comp _ = _\n        rw [RingHom.comp_assoc, hφg']\n      let a := affineBaseChangeTildeModuleMap R A R' D M n (κ.comp φg') hφ i\n        (C.homology i) (Iso.refl _)\n      let ρ := (SingleComplexBaseChange.tensorMap f f' g g' sq p).comp\n        (algebraMap (SingleComplexBaseChange.A g' p)\n          (SingleComplexBaseChange.A g' p ⊗[SingleComplexBaseChange.R f g' p]\n            SingleComplexBaseChange.B f' p))\n      let l :=\n        (SingleComplexBaseChange.cohomologyModel f f' g g' sq p P).localizedComparison i\n      ∃ e : U ≅ (Arrow.mk l).left,\n        ∀ τ : C ≅\n            SingleComplexBaseChange.tensorComplex f f' g g' sq p P,\n          (∀ (j : ℤ) (x : M.X j),\n            τ.hom.f j ((1 : D) ⊗ₜ[A, κ.comp φg'] x) =\n              (1 : (Spec (.of A')).presheaf.stalk p) ⊗ₜ[SingleComplexBaseChange.A g' p, ρ]\n                (TopCat.Presheaf.germ (P.X j).val.presheaf ⊤ (g' p) trivial\n                  (tilde.toOpen (R := .of A) (M.X j) ⊤ x))) →\n          a ≫ HomologicalComplex.homologyMap τ.hom i = e.hom ≫ l",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T222408-L-1224553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T222408-L-1224553",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, report, permitted axioms, all four modules, and the direct importer match the stage-3 brief and compile successfully."
+ }
+}

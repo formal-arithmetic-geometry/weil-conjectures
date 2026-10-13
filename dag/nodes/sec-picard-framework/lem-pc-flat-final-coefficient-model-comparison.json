@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-flat-final-coefficient-model-comparison",
+ "kind": "statement",
+ "title": "Flat change of the final coefficient ring of universal tensor models",
+ "statement": "Let R,A,B,E,D be commutative rings, A and B R-algebras, E and D algebras over T=A⊗_R B. Let k:E→D be flat and compatible with their T-algebra maps. Let phi:A→E be the composite. For a complex M of A-modules and arbitrary universal tensor cohomology models m over E and n over D [def-pc-base-derived-tensor-cohomology-model], put C=E⊗_A M, CD=D⊗_A M, and F=extension along k. Their comparison maps aE and aD are the existing affine module maps [def-pc-affine-base-change-tilde-coordinates] with identity ordinary target. There exists e:F(E⊗_T H_m^i)≅D⊗_T H_n^i such that for every chain iso tau:F(C)≅CD fixing 1⊗(1⊗x) as 1⊗x, F(aE) followed by inverse exact F-homology and H(tau) equals e followed by aD. The two models use the same chosen derived-category instances on R and B; no geometry or localization of the input/base appears.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Tag 06Y6, uniqueness of derived tensor via universal counits; Tag 00HD, exact flat tensor. Explicit coefficient-model transport written by P1."
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-affine-base-change-tilde-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use leftDerivedNatIso for the universal counits. Conjugate its homology by the two cohomologyIso maps. Naturality at a times identity and cohomologyIso_smul show A-linearity as well as B-linearity; tensor induction lifts the isomorphism to T-modules. comparison_eq and the counit identity give s.hom followed by n.comparison equals m.comparison. This is fully proved in ordinaryModelComparisonIso. The private tensorAdditiveLift argument works for additive maps with both factor-action equations in an independent module universe, then specializes to the two B-linear morphisms.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend s first to E and then to D. Flatten the nested extension by extendScalarsComp and transport the equal T-to-D maps. The resulting e sends 1 tensor (1 tensor x) to 1 tensor s(x), by the explicit tensor formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the ordinary D-complex along equality of the coefficient maps and apply flatIteratedScalarExtension_homology_square to the two ordinaryToLocalized maps, their generator formulas and localized_eq equations. Postcompose with homology of the coefficient-map transport. This gives the claimed square.",
+   "uses": [
+    "lem-pc-flat-iterated-scalar-extension-homology-square",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-flat-iterated-scalar-extension-homology-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Tag 06Y6, uniqueness of derived tensor via universal counits; Tag 00HD, exact flat tensor. Explicit coefficient-model transport written by P1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat extension of scalars exact homology adjunction coefficient comparison commuting square",
+   "results": "8 hits, including Module.Flat.lTensor_shortComplex_exact and iff_lTensor_preserves_shortComplex_exact. These give exact tensor, not the iterated comparison square or model independence.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyMap_mapNatTrans",
+   "results": "0 hits: unknown identifier in the service. Local source has CategoryTheory.ShortComplex.homologyMap_mapNatTrans at PreservesHomology.lean:725.",
+   "date": "2026-10-14",
+   "verdict": "Service index does not resolve the qualified identifier; no absence claim."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|flatScalarExtensionHomologyAdjunct|localized_independence",
+   "results": "Mathlib ShortComplex/PreservesHomology.lean:725,922. Project rg found FlatScalarExtensionHomologyAdjunct (invertibility only), ScalarExtensionHomologySquare (one coefficient extension), and BaseDerivedTensorCohomologyModelIndependence (same final coefficient ring). Their statements do not supply the new iterated square.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat extension scalars homology adjunction tensor comparison",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8, affine proof: the displayed localization of derived tensor cohomology and compatibility with the ordinary coefficient comparison.",
+   "via": [
+    "lem-pc-affine-scalar-localized-tensor-square",
+    "lem-pc-affine-localized-tensor-stalk-square",
+    "lem-pc-affine-base-change-ordinary-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatFinalCoefficientModelComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FlatFinalCoefficientModelComparison.lean",
+  "declaration": "ModuleCat.exists_flatFinalCoefficientModelComparison",
+  "statement": "theorem exists_flatFinalCoefficientModelComparison\n    (R A B E D : Type u)\n    [CommRing R] [CommRing A] [CommRing B] [CommRing E] [CommRing D]\n    [Algebra R A] [Algebra R B]\n    [Algebra (A ⊗[R] B) E] [Algebra (A ⊗[R] B) D]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B)]\n    (k : E →+* D) (hk : k.Flat)\n    (hcoeff : k.comp (algebraMap (A ⊗[R] B) E) = algebraMap (A ⊗[R] B) D)\n    (phi : A →+* E)\n    (hphi : (algebraMap (A ⊗[R] B) E).comp\n      (algebraMap A (A ⊗[R] B)) = phi)\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (m : BaseDerivedTensorCohomologyModel R A B M E)\n    (n : BaseDerivedTensorCohomologyModel R A B M D) (i : ℤ) :\n    let C := ((extendScalars phi).mapHomologicalComplex (.up ℤ)).obj M\n    let CD := ((extendScalars (k.comp phi)).mapHomologicalComplex (.up ℤ)).obj M\n    let F := extendScalars k\n    letI := preservesFiniteLimits_extendScalars_of_flat hk\n    let aE := AlgebraicGeometry.affineBaseChangeTildeModuleMap R A B E M m phi hphi i\n      (C.homology i) (Iso.refl _)\n    let hphiD : (algebraMap (A ⊗[R] B) D).comp\n        (algebraMap A (A ⊗[R] B)) = k.comp phi := by rw [← hcoeff, RingHom.comp_assoc, hphi]\n    let aD := AlgebraicGeometry.affineBaseChangeTildeModuleMap R A B D M n\n      (k.comp phi) hphiD i (CD.homology i) (Iso.refl _)\n    ∃ e : F.obj (AlgebraicGeometry.affineBaseChangeTildeModule R A B E M m i) ≅\n        AlgebraicGeometry.affineBaseChangeTildeModule R A B D M n i,\n      ∀ tau : (F.mapHomologicalComplex (.up ℤ)).obj C ≅ CD,\n        (∀ (j : ℤ) (x : M.X j),\n          tau.hom.f j ((1 : D) ⊗ₜ[E, k] ((1 : E) ⊗ₜ[A, phi] x)) =\n            (1 : D) ⊗ₜ[A, k.comp phi] x) →\n        F.map aE ≫ ((C.sc i).mapHomologyIso F).inv ≫\n            HomologicalComplex.homologyMap tau.hom i = e.hom ≫ aD",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T222408-L-1224553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T222408-L-1224553",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, report, permitted axioms, all four modules, and the direct importer match the stage-3 brief and compile successfully."
+ }
+}

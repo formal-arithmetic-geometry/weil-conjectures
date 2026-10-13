@@ -5,9 +5,12 @@ Authors: SHEAF group S4
 -/
 module
 
-public import Sheaf.Algebra.Homology.AffineOrdinaryTensorStalkCoordinates
+public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+
+import Sheaf.Algebra.Homology.FlatFinalCoefficientModelComparison
+import Sheaf.Algebra.Homology.AffineDirectLocalizedTensorSquare
 
 /-! # AffineScalarLocalizedTensorSquare
 
@@ -32,23 +35,18 @@ stalk homology coordinates. Source: Stacks Project, Tag 0DJ8, affine displayed
 localization identity; Tags 06Y6, 01HV and 01I9.
 (blueprint: lem-pc-affine-scalar-localized-tensor-square).
 
-Proof: the cartesian spectrum square identifies A' with A tensor_R R'. Its fourth
-stalk D is the localization at p; the other three stalk rings are localizations
-at the contracted primes. Identify the stalk complex of tilde M with the
-localization of M, sending 1 tensor x to its germ. Compute the global and local
-base-derived tensors using K-flat resolutions. First localize the A-factor,
-then the base and second factor. Exact localization commutes with cohomology
-and tensor associativity identifies both extensions to D. The universal counit
-and coefficient-action equations transport the resulting source isomorphism to
-the supplied global model and the fixed local model, giving e. The same counit
-squares identify the localized comparison with extension of a0 followed by the
-inverse exact scalar-extension homology isomorphism. In the target chain
-coordinates both coefficient maps send 1 tensor (1 tensor x) to 1 tensor the
-germ of x. D-linearity and tensor generation therefore prove their equality for
-every tau with this formula. Taking homology gives the displayed square. No
-homology of the tilde of the ordinary target, nor a localization of U expressed
-as fractions, occurs here. The argument applies to zero complexes and identity
-localizations; the zero fourth ring has no primes. -/
+Proof: first change only the final coefficient ring from A' to its flat stalk D.
+exists_flatFinalCoefficientModelComparison constructs the source isomorphism
+from universal derived-model uniqueness, tensor associativity, and the flat
+iterated scalar-extension homology square. Next apply
+exists_affineDirectLocalizedTensorSquare to the resulting model over D, which
+localizes the input, base and second factor. The inverse scalar-associativity
+chain isomorphism flattens 1 tensor (1 tensor x) to 1 tensor x. Factor each
+supplied tau through it, use the generator formula to apply the direct square,
+and compose the two equations by functoriality of homology. All source
+isomorphisms are composed explicitly. This reduction does not require hM;
+the original hypothesis and statement are retained unchanged. Zero complexes
+and identity localizations use the same maps; the zero fourth ring has no primes. -/
 theorem exists_affineScalarLocalizedTensorSquare
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']
@@ -103,6 +101,56 @@ theorem exists_affineScalarLocalizedTensorSquare
                 (TopCat.Presheaf.germ (P.X j).val.presheaf ⊤ (g' p) trivial
                   (tilde.toOpen (R := .of A) (M.X j) ⊤ x))) →
           F.map a₀ ≫ ((C.sc i).mapHomologyIso F).inv ≫
-              HomologicalComplex.homologyMap τ.hom i = e.hom ≫ l := by sorry
+              HomologicalComplex.homologyMap τ.hom i = e.hom ≫ l := by
+  have _ := hM
+  dsimp only
+  intro p
+  let D : Type u := (Spec.structureSheaf A').presheaf.stalk p
+  let κ := (StructureSheaf.toStalk A' p).hom
+  let : Module ((structurePresheafInCommRingCat A').stalk p) D :=
+    inferInstanceAs (Module D D)
+  let F := ModuleCat.extendScalars κ
+  have hk : κ.Flat := RingHom.flat_algebraMap_iff.mpr
+    (IsLocalization.flat D p.asIdeal.primeCompl)
+  have : PreservesFiniteLimits F :=
+    ModuleCat.preservesFiniteLimits_extendScalars_of_flat hk
+  let : Algebra (A ⊗[R] R') D :=
+    (κ.comp (algebraMap (A ⊗[R] R') A')).toAlgebra
+  let n := ModuleCat.baseDerivedTensorCohomologyModel R A R' M D
+  let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
+  let CD := ((ModuleCat.extendScalars (κ.comp φg')).mapHomologicalComplex (.up ℤ)).obj M
+  let α : (F.mapHomologicalComplex (.up ℤ)).obj C ≅ CD :=
+    (Functor.mapHomologicalComplexCompIso
+      (ModuleCat.extendScalarsComp φg' κ).symm (.up ℤ)).app M
+  have hα (j : ℤ) (x : M.X j) :
+      α.hom.f j ((1 : D) ⊗ₜ[A', κ] ((1 : A') ⊗ₜ[A, φg'] x)) =
+        (1 : D) ⊗ₜ[A, κ.comp φg'] x := by
+    let e := (ModuleCat.extendScalarsComp φg' κ).app (M.X j)
+    have hx := ModuleCat.extendScalarsComp_hom_app_one_tmul φg' κ (M.X j) x
+    have hi := ConcreteCategory.congr_hom e.hom_inv_id
+      ((1 : D) ⊗ₜ[A, κ.comp φg'] x)
+    exact (congrArg (fun z ↦ e.inv z) hx).symm.trans hi
+  obtain ⟨e₁, hc⟩ := ModuleCat.exists_flatFinalCoefficientModelComparison
+    R A R' A' D κ hk rfl φg' hφg' M m n i
+  have hcα := hc α hα
+  obtain ⟨e₂, hl⟩ := exists_affineDirectLocalizedTensorSquare
+    R A R' A' φg' φf' hφg' hφf' sq M i p n
+  refine ⟨e₁ ≪≫ e₂, ?_⟩
+  intro τ hτ
+  let β := α.symm ≪≫ τ
+  have hβ (j : ℤ) (x : M.X j) :
+      β.hom.f j ((1 : D) ⊗ₜ[A, κ.comp φg'] x) =
+        τ.hom.f j ((1 : D) ⊗ₜ[A', κ] ((1 : A') ⊗ₜ[A, φg'] x)) := by
+    change τ.hom.f j (α.inv.f j _) = _
+    rw [← hα j x]
+    congr 1
+    let e := (HomologicalComplex.eval (ModuleCat.{u} D) (.up ℤ) j).mapIso α
+    exact e.toLinearEquiv.symm_apply_apply _
+  have hlβ := hl β (fun j x ↦ (hβ j x).trans (hτ j x))
+  have ht : α.hom ≫ β.hom = τ.hom := by simp [β]
+  rw [← ht, HomologicalComplex.homologyMap_comp]
+  simpa only [Category.assoc, Iso.trans_hom] using
+    (congrArg (fun k ↦ k ≫ HomologicalComplex.homologyMap β.hom i) hcα).trans
+      (by simpa only [Category.assoc] using congrArg (fun k ↦ e₁.hom ≫ k) hlβ)
 
 end AlgebraicGeometry

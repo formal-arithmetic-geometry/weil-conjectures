@@ -15,41 +15,37 @@
  ],
  "proof": [
   {
-   "text": "The cartesian spectrum square identifies A tensor_R R' with A'. Contract p to the other three rings; their stalk rings are the contracted prime localizations and their structure maps are the compatible localization maps. The termwise numerator-normalized tilde/stalk comparison identifies the first localized complex with the actual stalk complex of P. Apply first-factor localization followed by base and second-factor localization to base-derived cohomology models. Use the universal derived counit and coefficient-action equations to transport to the supplied global and fixed local models, including their derived-category universe instances. Extend to the fourth stalk ring and use tensor associativity to obtain the D-linear source isomorphism e.",
+   "text": "Change only the final coefficients from A' to its flat stalk D. Apply exists_flatFinalCoefficientModelComparison to the supplied model and the standard selected model over D. The derived source is unique up to the counit-compatible tensor-linear isomorphism constructed in that theorem.",
    "uses": [
-    "lem-pc-derived-tensor-first-localization-models",
-    "lem-pc-derived-tensor-base-second-localization-models",
-    "lem-pc-affine-stalk-scalar-extension-coordinates",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "def-pc-single-complex-base-change-stalk-condition"
+    "lem-pc-flat-final-coefficient-model-comparison",
+    "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "The localization comparison squares, and the models' localized_eq equations, identify the global ordinary comparison extended to D with the fixed local localizedComparison. Exact coefficient localization identifies the extended ordinary cohomology with the homology of F(C). The transported coefficient chain map sends 1 tensor (1 tensor x) to 1 tensor the germ of x. These nested tensors generate each degree over D, so every tau with this formula equals that transported chain map. Taking homology and substituting into the comparison squares gives F(a0) followed by inverse exact scalar-extension homology and H^i(tau) equal to e followed by l.",
+   "text": "Apply exists_affineDirectLocalizedTensorSquare to that model over D to localize the input, base and second factor. This supplies the second source isomorphism and the direct coefficient square.",
    "uses": [
-    "lem-pc-derived-tensor-first-localization-models",
-    "lem-pc-derived-tensor-base-second-localization-models",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-weil-pbc-localization-module-exact"
+    "lem-pc-affine-direct-localized-tensor-square"
    ],
    "elementary": false
+  },
+  {
+   "text": "The inverse extendScalarsComp chain iso alpha flattens 1 tensor (1 tensor x). Given tau, set beta=alpha.symm followed by tau. The inverse-iso identity proves beta's generator formula. Compose the two source isomorphisms. Functoriality of homology and associativity compose the two equations; alpha followed by beta equals tau. These are complete Lean proofs.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-tensor-first-localization-models",
-  "lem-pc-derived-tensor-base-second-localization-models",
-  "lem-pc-affine-stalk-scalar-extension-coordinates",
+  "lem-pc-flat-final-coefficient-model-comparison",
   "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-single-complex-base-change-stalk-condition",
-  "lem-weil-pbc-localization-module-exact"
+  "lem-pc-affine-direct-localized-tensor-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S4",
+  "group": "P1",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Tag 0DJ8, affine displayed localization identity and its compatibility with the comparison arrow; Tags 06Y6, 01HV and 01I9."
+  "place": "Affine displayed localization identity: separate final flat coefficients from localization of the input and base rings; tensor and homology composition implemented explicitly."
  },
  "mathlib_searches": [
   {
@@ -142,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S4",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T171515-L-1982714",
+  "landing": "20261013T222408-L-1224553",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, report, permitted axioms, all four modules, and the direct importer match the stage-3 brief and compile successfully."
  }
 }

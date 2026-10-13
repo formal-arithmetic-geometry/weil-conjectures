@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-flat-iterated-scalar-extension-homology-square",
+ "kind": "statement",
+ "title": "Iterating an adjoint tensor comparison through flat coefficients",
+ "statement": "Let A,T,E,D be commutative rings, f:A→T, c:T→E, d:T→D, k:E→D ring maps with k∘c=d and k flat [def-weil-pbc-flat-ring-map]. For a complex Q of A-modules [def-pc-cochain-complex-modules], put X=T⊗_A Q, XE=E⊗_A Q and XD=D⊗_A Q using these composites [def-weil-module-base-change]. Let S,N be T-modules, s:S≅N, a:S→H^i(X), b:N→H^i(X) with s followed by b equal to a. Let vE:X→c_*XE and vD:X→d_*XD send t⊗q to c(t)⊗q and d(t)⊗q. Let aE:E⊗_T S→H^i(XE) and aD:D⊗_T N→H^i(XD) be the adjoint transposes of H(vE)∘a and H(vD)∘b under exact restriction homology. Put F=extension along k. Suppose e:F(E⊗_T S)≅D⊗_T N sends 1⊗(1⊗x) to 1⊗s(x). For every chain iso tau:F(XE)≅XD sending 1⊗(1⊗q) to 1⊗q, F(aE) followed by inverse exact F-homology and H^i(tau) equals e followed by aD.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00HD",
+  "place": "Tag 00HD, lemma-flat, exact tensor; Tag 05G3, extension/restriction adjunction. Explicit homology-data naturality argument written by P1."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-module-base-change",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Flatness of k makes extension F exact, hence gives mapHomologyIso F on XE. Restriction along c,d,k is exact.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the adjunct chain map v of tau. ShortComplex.LeftHomologyMapData, with unit naturality on cycles and opcycles, proves that its homology map is the adjunct of inverse exact homology comparison followed by H(tau). Prove cycles and homology comparison composition for arbitrary categories with zero morphisms and zero-preserving homology-preserving functors F, G and their composite. For arbitrary left homology data h, the iterated and composite inclusions and projections agree; cancel their monic inclusion and epic homology projection to identify both canonical comparisons. Expanding the comparison isomorphisms with h and h.map F cancels the intermediate isomorphism after applying G. Specialize the homology composition identity at the forgetAdjunct call site to restriction of scalars followed by forgetting to abelian groups; naturality then rewrites each given adjunct equation. Tensor induction proves that vE followed by v after forgetting equals vD: on t tensor q use scalar linearity and k(c(t))=d(t). Apply homology, substitute s followed by b equals a, and use the nested-generator equation of e. Cancel the forgetful homology isomorphism, transpose through k, and use ExtendScalars.hom_ext through c to conclude. All steps and private helpers are proved in Lean from Mathlib.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/00HD",
+  "place": "Tag 00HD, lemma-flat, exact tensor; Tag 05G3, extension/restriction adjunction. Explicit homology-data naturality argument written by P1. Completed Lean proof using LeftHomologyMapData and faithful forgetful homology comparisons. Repair of C5: general comparison composition via arbitrary left homology data, with restriction/forgetting specialized only at the call site; no existing private helper exposed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat extension of scalars exact homology adjunction coefficient comparison commuting square",
+   "results": "8 hits, including Module.Flat.lTensor_shortComplex_exact and iff_lTensor_preserves_shortComplex_exact. These give exact tensor, not the iterated comparison square or model independence.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyMap_mapNatTrans",
+   "results": "0 hits: unknown identifier in the service. Local source has CategoryTheory.ShortComplex.homologyMap_mapNatTrans at PreservesHomology.lean:725.",
+   "date": "2026-10-14",
+   "verdict": "Service index does not resolve the qualified identifier; no absence claim."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|flatScalarExtensionHomologyAdjunct|localized_independence",
+   "results": "Mathlib ShortComplex/PreservesHomology.lean:725,922. Project rg found FlatScalarExtensionHomologyAdjunct (invertibility only), ScalarExtensionHomologySquare (one coefficient extension), and BaseDerivedTensorCohomologyModelIndependence (same final coefficient ring). Their statements do not supply the new iterated square.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat extension scalars homology adjunction tensor comparison",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8, affine proof: the displayed localization of derived tensor cohomology and compatibility with the ordinary coefficient comparison.",
+   "via": [
+    "lem-pc-affine-scalar-localized-tensor-square",
+    "lem-pc-affine-localized-tensor-stalk-square",
+    "lem-pc-affine-base-change-ordinary-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatIteratedScalarExtensionHomologySquare",
+  "file": "lean/Sheaf/Algebra/Homology/FlatIteratedScalarExtensionHomologySquare.lean",
+  "declaration": "ModuleCat.flatIteratedScalarExtension_homology_square",
+  "statement": "theorem flatIteratedScalarExtension_homology_square\n    (A T E D : Type u) [CommRing A] [CommRing T] [CommRing E] [CommRing D]\n    (f : A →+* T) (c : T →+* E) (d : T →+* D) (k : E →+* D)\n    (hk : k.Flat) (hcomp : k.comp c = d)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :\n    let X := ((extendScalars f).mapHomologicalComplex (.up ℤ)).obj Q\n    let XE := ((extendScalars (c.comp f)).mapHomologicalComplex (.up ℤ)).obj Q\n    let XD := ((extendScalars (d.comp f)).mapHomologicalComplex (.up ℤ)).obj Q\n    let F := extendScalars k\n    letI := preservesFiniteLimits_extendScalars_of_flat hk\n    ∀ (S N : ModuleCat.{u} T) (s : S ≅ N)\n      (a : S ⟶ X.homology i) (b : N ⟶ X.homology i),\n      s.hom ≫ b = a →\n      ∀ (vE : X ⟶ ((restrictScalars c).mapHomologicalComplex (.up ℤ)).obj XE)\n        (vD : X ⟶ ((restrictScalars d).mapHomologicalComplex (.up ℤ)).obj XD),\n      (∀ (j : ℤ) (t : T) (q : Q.X j),\n        vE.f j (t ⊗ₜ[A, f] q) = c t ⊗ₜ[A, c.comp f] q) →\n      (∀ (j : ℤ) (t : T) (q : Q.X j),\n        vD.f j (t ⊗ₜ[A, f] q) = d t ⊗ₜ[A, d.comp f] q) →\n      ∀ (aE : (extendScalars c).obj S ⟶ XE.homology i)\n        (aD : (extendScalars d).obj N ⟶ XD.homology i),\n      (extendRestrictScalarsAdj c).unit.app S ≫ (restrictScalars c).map aE =\n        a ≫ HomologicalComplex.homologyMap vE i ≫\n          ((XE.sc i).mapHomologyIso (restrictScalars c)).hom →\n      (extendRestrictScalarsAdj d).unit.app N ≫ (restrictScalars d).map aD =\n        b ≫ HomologicalComplex.homologyMap vD i ≫\n          ((XD.sc i).mapHomologyIso (restrictScalars d)).hom →\n      ∀ (e : F.obj ((extendScalars c).obj S) ≅ (extendScalars d).obj N),\n      (∀ x : S, e.hom ((1 : D) ⊗ₜ[E, k] ((1 : E) ⊗ₜ[T, c] x)) =\n        (1 : D) ⊗ₜ[T, d] (s.hom x)) →\n      ∀ tau : (F.mapHomologicalComplex (.up ℤ)).obj XE ≅ XD,\n      (∀ (j : ℤ) (x : Q.X j),\n        tau.hom.f j ((1 : D) ⊗ₜ[E, k] ((1 : E) ⊗ₜ[A, c.comp f] x)) =\n          (1 : D) ⊗ₜ[A, d.comp f] x) →\n      F.map aE ≫ ((XE.sc i).mapHomologyIso F).inv ≫\n        HomologicalComplex.homologyMap tau.hom i = e.hom ≫ aD",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T222408-L-1224553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1fd8b",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T222408-L-1224553",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, report, permitted axioms, all four modules, and the direct importer match the stage-3 brief and compile successfully."
+ }
+}
