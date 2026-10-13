@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-derived-pushforward-square-mate-unit",
+ "kind": "statement",
+ "title": "Sheaf direct-image square mate compatibility with derived units",
+ "statement": "For the cartesian square p:X×_R B→X, q:X×_R B→Spec B of f:X→Spec R and g:Spec B→Spec R, use the canonical derived pullback comparisons and the pinned pullback/direct-image adjunctions of [def-pc-derived-base-change-map] and [lem-pc-ringed-spaces-derived-pullback-composition]. There is an underived comparison e:p_*;f_* ≅ q_*;g_* acting as the identity on sections of the whole open. For every homotopy-category object J, its localization followed by the pasted units for q_*,g_* equals the pasted units for p_*,f_* followed by the conjugate δ of the canonical pullback square. The full equation is recorded in lean.statement. This statement has no affine sections functor or affine comparison t,b,v,r,z,d,s.",
+ "stmt_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, Remark 20.28.3; Tag 0D5T, Lemma 20.28.2, with the normalized derived adjunction and left-derived composition equations"
+ },
+ "proof": [
+  {
+   "text": "Construct e from the canonical underived pushforwardComp for p,f, transport along pullback.condition, and the inverse pushforwardComp for q,g. Each acts as identity on sections at the whole open; the scalar actions agree by functoriality of the structure maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transpose the defining left-derived composition factorization under the pinned derived adjunctions. Their Hom equivalence equations identify the two successive pullback counits with the two successive direct-image units. The underived pullback composition map is itself the conjugate of pushforwardComp, so the underived maps in this transposition combine to e. Naturality moves the individual derived units to form the pasted units. The universal properties extend the resulting mate equation from the defining factorization to every homotopy-category object. No derived unit is cancelled.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 0D5T; isolated sheaf-level calculation from step 1 of lem-pc-affine-sections-square-mate-path-unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor composition unit coherence with conjugate natural transformation under derived adjunctions",
+   "results": "Hits: CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedε_fac_app",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction unit/counit factorization; no exact sheaf square mate theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-13",
+   "verdict": "Generic conjugateEquiv and its isomorphism laws, not derived-unit compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*conjugate|conjugate.*derived|CompUnit_app",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "No matches for this query; other local searches found bounded-below and exact-functor mate tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor composition square mate compatibility unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSectionsSquareMatePathUnit",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1), canonical affine sections base change: sheaf square mate unit calculation before applying affine sections",
+   "via": [
+    "lem-pc-affine-sections-square-mate-path-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPushforwardSquareMateUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPushforwardSquareMateUnit.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedPushforwardSquareMateUnit",
+  "statement": "theorem exists_derivedPushforwardSquareMateUnit\n    {R B : CommRingCat.{u}} {X : Scheme.{u}}\n    (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :\n    let P₀ := RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom\n    let Q₀ := RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom\n    let F₀ := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let G₀ := RingedSpace.moduleDirectImage g.toLRSHom.toShHom\n    let RF := schemeDerivedDirectImage f\n    let RG := schemeDerivedDirectImage g\n    let a := fun {A D : Scheme.{u}} (h : A ⟶ D) ↦ canonicalPullbackAdjunction h\n    let p : ∀ {X Y Z : Scheme.{u}} (h : X ⟶ Y) (i : Y ⟶ Z),\n        derivedPullback i ⋙ derivedPullback h ≅ derivedPullback (h ≫ i) :=\n      @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let k := p (pullback.snd f g) g ≪≫\n      eqToIso (congrArg (fun h ↦ derivedPullback h)\n        (pullback.condition (f := f) (g := g)).symm) ≪≫\n      (p (pullback.fst f g) f).symm\n    let δ := conjugateEquiv ((a f).comp (a (pullback.fst f g)))\n      ((a g).comp (a (pullback.snd f g))) k.hom\n    ∃ e : P₀ ⋙ F₀ ≅ Q₀ ⋙ G₀,\n      (∀ (M : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))\n        (x : M.val.obj (op ⊤)), ((e.hom.app M).val.app (op ⊤)) x = x) ∧\n      ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (.up ℤ),\n        F₀.rightDerivedFunctorUnit.app ((P₀.mapHomotopyCategory (.up ℤ)).obj J) ≫\n          RF.map (P₀.rightDerivedFunctorUnit.app J) ≫\n          δ.app (DerivedCategory.Qh.obj J) =\n        DerivedCategory.Qh.map ((e.hom.mapHomotopyCategory (.up ℤ)).app J) ≫\n          G₀.rightDerivedFunctorUnit.app ((Q₀.mapHomotopyCategory (.up ℤ)).obj J) ≫\n          RG.map (Q₀.rightDerivedFunctorUnit.app J)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-91606",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T151136-L-878245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-91606",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T151136-L-878245",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the affine pasting proof with its recorded dependencies, and the remaining sheaf mate equation with the pinned adjunctions; both delivered modules and the sole direct importer compile cleanly, and axiom probes show only permitted axioms and expected sorryAx."
+ }
+}

@@ -14,40 +14,35 @@
  },
  "proof": [
   {
-   "text": "Form the canonical square pullback comparison. Apply the normalized derived-adjunction Hom equations and the defining left-derived composition factorization to its conjugate. This identifies its right-derived unit equation with the canonical composition of underived pushforwards around the square, using the normalized direct-image composition comparison.",
+   "text": "Obtain the identity-on-whole-sections underived square comparison e and the normalized sheaf-level mate unit equation.",
    "uses": [
-    "def-pc-affine-global-hom-base-change-map",
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-pc-derived-pushforward-square-mate-unit"
    ],
    "elementary": false
   },
   {
-   "text": "Whisker the mate unit equation by affine sections. Substitute hb, hr, hd and use naturality to move all units past the underived comparison maps. The exact restriction comparison identifies the terminal pasted unit with Unit(Γ_q;ρ) followed by affineBaseChangedSectionsDerivedIso.",
+   "text": "Apply the fully proved private sections_unit_pasting lemma. Its proof expands composite units with compUnit_app, uses comparison_unit_inv with hb and comparison_unit_hom with hr, applies derived affine sections to the sheaf mate unit equation, and moves the normalized affine sections unit past the underived square map by naturality. All these calculations are carried out with generic categories and functors before specialization to schemes.",
    "uses": [
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The underived section map obtained from t inverse, the pushforward square, v and z is identity on underlying elements by ht,hv,hz. The fibre-product condition identifies scalar actions. By hs and extensionality it is s. Map this equality to the homotopy and derived categories. No unit is cancelled and no injectivity is used.",
+   "text": "The private restriction_unit_pasting calculation uses exactCompUnit_fac for scalar restriction, hd and naturality of mapDerivedCategoryFactorsh to identify the terminal composite unit. The public proof constructs the composite underived comparison from t inverse, e, v and z. Extensionality and ht,he,hv,hz,hs show its hom equals s.hom. Substitute this equality into the unit-pasting formula, without cancelling any derived unit.",
    "uses": [
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-global-hom-base-change-map",
-  "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-ringed-spaces-derived-direct-image-composition"
+  "lem-pc-derived-pushforward-square-mate-unit",
+  "def-pc-affine-global-hom-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HY and 0D5T, with perfect.tex Tag 0AA7; the mate-path calculation before unit cancellation"
+  "place": "Tags 08HY and 0D5T, perfect.tex Tag 0AA7; sheaf mate separated from the proved affine sections pasting calculation (T2)"
  },
  "mathlib_searches": [
   {
@@ -125,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
+  "reviewer": "X-91606",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T125010-L-3836916",
+  "landing": "20261013T151136-L-878245",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the affine pasting proof with its recorded dependencies, and the remaining sheaf mate equation with the pinned adjunctions; both delivered modules and the sole direct importer compile cleanly, and axiom probes show only permitted axioms and expected sorryAx."
  }
 }
