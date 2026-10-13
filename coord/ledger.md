@@ -10948,3 +10948,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/X2/Sheaf.AlgebraicGeometry.AffinePrincipalSheafComplexTransport (stage 3; reviewer PASS; first push; landing 20261013T033011-L-3679574 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/X3/Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261013T033012-L-3679684 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/Y2/Sheaf.RingTheory.HenselianFiniteEtaleEquivalence (stage 3; reviewer PASS; first push; landing 20261013T033012-L-3679782 (interface); batch 20261013T032954; modules 3; new nodes 2)
+- 03:30 L: merged deliver/Y2/Sheaf.RingTheory.PowerSeriesFieldCohenFsAdic (stage 3; reviewer PASS; first push; landing 20261013T033012-L-3679940 (proof); batch 20261013T032954; modules 1; new nodes 0)

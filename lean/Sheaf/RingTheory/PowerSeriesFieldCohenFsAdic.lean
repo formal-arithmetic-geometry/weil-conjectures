@@ -7,10 +7,9 @@ module
 
 public import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
 public import Mathlib.Algebra.Algebra.ZMod
-import Sheaf.RingTheory.CohenRing
 import Sheaf.RingTheory.ExistsLiftOfFieldCharP
-import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-!
 # Adic formal smoothness of power series over fields and Cohen rings
@@ -37,6 +36,27 @@ universe u
 
 namespace MvPowerSeries
 
+private theorem complete_of_nilpotent {T : Type*} [CommRing T]
+    (a : Ideal T) (ha : IsNilpotent a) : IsAdicComplete a T := by
+  obtain ⟨N, hN⟩ := ha
+  refine { haus' := fun x hx ↦ ?_, prec' := fun f hf ↦ ⟨f N, fun m ↦ ?_⟩ }
+  · simpa [hN, SModEq.bot] using hx N
+  · by_cases hm : m ≤ N
+    · exact hf hm
+    · have hNm : N ≤ m := by omega
+      have heq : f N = f m := by
+        simpa [hN, SModEq.bot] using hf hNm
+      rw [heq]
+
+private theorem nilpotent_span {T : Type*} [CommRing T] {n : ℕ}
+    (t : Fin n → T) (ht : ∀ i, IsNilpotent (t i)) :
+    IsNilpotent (Ideal.span (Set.range t)) := by
+  apply (Ideal.FG.isNilpotent_iff_le_nilradical
+    (Submodule.fg_span (Set.finite_range t))).2
+  apply Ideal.span_le.mpr
+  rintro _ ⟨i, rfl⟩
+  exact mem_nilradical.mpr (ht i)
+
 /-- A power series ring over a characteristic-`p` field is adically formally smooth over `𝔽_p`.
 Source: Stacks Project, More on Algebra, Lemma Tag 07NL, clause (2).
 (blueprint: lem-weil-pbc-power-series-field-cohen-fs-adic)
@@ -56,6 +76,57 @@ theorem formallySmoothAdic_zmod (p : ℕ) [Fact (Nat.Prime p)]
     @Algebra.FormallySmoothAdic (ZMod p) (MvPowerSeries (Fin n) K) _ _
       ((C.comp (ZMod.castHom (dvd_refl p) K)).toAlgebra)
       (Ideal.span (Set.range (fun i : Fin n ↦ (X i : MvPowerSeries (Fin n) K)))) := by
-  sorry
+  classical
+  let : Algebra (ZMod p) (MvPowerSeries (Fin n) K) :=
+    (C.comp (ZMod.castHom (dvd_refl p) K)).toAlgebra
+  intro D _ _ J hJ g hg
+  obtain ⟨k, hk, hgk⟩ := hg
+  have hXk (i : Fin n) : g (X i) ^ k = 0 := by
+    rw [← map_pow]
+    apply hgk
+    exact Ideal.pow_mem_pow
+      (Ideal.subset_span (Set.mem_range_self i)) k
+  choose d hd using fun i : Fin n ↦ Ideal.Quotient.mk_surjective (g (X i))
+  have hdk (i : Fin n) : d i ^ k ∈ J := by
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    rw [map_pow, hd, hXk]
+  have hdn (i : Fin n) : IsNilpotent (d i) := by
+    refine ⟨k * 2, ?_⟩
+    have hm := Ideal.pow_mem_pow (hdk i) 2
+    rw [hJ] at hm
+    simpa only [Ideal.mem_bot, pow_mul] using hm
+  let a : Ideal D := Ideal.span (Set.range d)
+  have : IsAdicComplete a D := complete_of_nilpotent a (nilpotent_span d hdn)
+  have hpD : (p : D) = 0 := by
+    have h := congrArg (algebraMap (ZMod p) D) (ZMod.natCast_self p)
+    simpa only [map_natCast, map_zero] using h
+  obtain ⟨h, hh⟩ := RingHom.exists_lift_of_field_charP K D p
+    (Fact.out : Nat.Prime p).pos hpD J 2 (by omega) hJ (g.toRingHom.comp C)
+  obtain ⟨f, hfC, hfX, _, _⟩ := exists_ringHom_of_isAdicComplete a h n d
+    (fun i ↦ Ideal.subset_span ⟨i, rfl⟩)
+  let b : Ideal (D ⧸ J) := Ideal.span (Set.range (fun i : Fin n ↦ g (X i)))
+  have : IsAdicComplete b (D ⧸ J) := complete_of_nilpotent b
+    (nilpotent_span _ (fun i ↦ ⟨k, hXk i⟩))
+  obtain ⟨φ, _, _, _, huniq⟩ := exists_ringHom_of_isAdicComplete b
+    (g.toRingHom.comp C) n (fun i ↦ g (X i))
+    (fun i ↦ Ideal.subset_span ⟨i, rfl⟩)
+  have hqf : (Ideal.Quotient.mk J).comp f = g.toRingHom := by
+    apply (huniq _ ?_ ?_).trans (huniq g.toRingHom (fun _ ↦ rfl) (fun _ ↦ rfl)).symm
+    · intro r
+      change Ideal.Quotient.mk J (f (C r)) = g (C r)
+      rw [hfC]
+      exact RingHom.congr_fun hh r
+    · intro i
+      change Ideal.Quotient.mk J (f (X i)) = g (X i)
+      rw [hfX, hd]
+  let fₐ : MvPowerSeries (Fin n) K →ₐ[ZMod p] D :=
+    { toRingHom := f
+      commutes' := by
+        intro r
+        obtain ⟨z, rfl⟩ := ZMod.intCast_surjective r
+        simp }
+  refine ⟨fₐ, ?_⟩
+  ext F
+  exact RingHom.congr_fun hqf F
 
 end MvPowerSeries
