@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-constant-abelian-higher-image-filtered-colimit",
+ "kind": "statement",
+ "title": "Filtered continuity of constant abelian higher direct images at coefficient size",
+ "statement": "Let $h:Y\\to X$ be a quasi-compact quasi-separated morphism of schemes in universe $u$ [def-weil-pbc-scheme-conventions]. Let $q\\in\\mathbf N$ and let $I$ be a filtered category in $\\operatorname{Type}(u+1)$ [def-weil-pbc-category-colimit]. The functor from abelian groups in that universe to abelian sheaves on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] sending $A$ to $R^q h_*\\underline A$ preserves colimits of shape $I$. Here $\\underline A$ is the constant abelian sheaf on $Y_{\\mathrm{et}}$ [def-weil-pbc-constant-sheaf], and the higher image is the degree-q homology of the bounded-below derived direct image of $\\underline A$ placed in degree zero [def-weil-pbc-direct-image]. Preservation is for the cocone with the original mapped coprojections; no torsion assumption is imposed.",
+ "source": {
+  "document": "Stacks Project, etale-cohomology.tex and sites-cohomology.tex",
+  "place": "Tag 03Q5 (lemma-colimit), Tag 0739 (lemma-colim-works-over-collection), and Tag 03Q8 (lemma-higher-direct-images); filtered-union step 2 of lem-sbc-constant-module-higher-direct-image-cyclic-reduction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The constant-sheaf functor is the constant-presheaf functor followed by sheafification. Both are left adjoints, so preserve the coefficient colimit. This follows directly by composing their Hom adjunctions.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict to an affine etale object U of X. U is qcqs, and Y times_X U is qcqs by base-change permanence of h. Pullback of each constant coefficient is the constant coefficient on this scheme. All identifications are natural in the coefficient group.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficient-size filtered etale cohomology continuity to the constant sheaf diagram on each such qcqs pullback. This retains the given cocone vertex and its original mapped legs. The canonical comparison commutes with restrictions in U since it is induced by these coprojections.",
+   "uses": [
+    "lem-pbc-u2-sheafH-large-filtered-colimit-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural sheafified cohomology-presheaf formula for higher direct images. On the affine basis the preceding pointwise comparison is an isomorphism; sheafification is a left adjoint and transports the colimit. Restriction to the affine etale basis is an equivalence, so its inverse transports this colimit to the small etale site. This proves the stated functor preserves the original mapped cocone, not just an objectwise isomorphism.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-affine-etale-induced-sheaf-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-pbc-u2-sheafH-large-filtered-colimit-derived",
+  "lem-weil-pbc-affine-etale-induced-sheaf-equivalence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-constructible-pullback-constant",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, etale-cohomology.tex and sites-cohomology.tex",
+  "place": "Tag 03Q5 (lemma-colimit), Tag 0739 (lemma-colim-works-over-collection), and Tag 03Q8 (lemma-higher-direct-images); filtered-union step 2 of lem-sbc-constant-module-higher-direct-image-cyclic-reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of constant abelian sheaves along a quasi compact quasi separated morphism preserve large filtered colimits of coefficient groups",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits commute with higher direct images of constant abelian sheaves",
+   "results": "Eight hits about constantCommuteCompose, plus-sheafification comparisons and their compatibility; none is higher-direct-image continuity.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape.*higherDirectImage|constantAbelianHigherDirectImage",
+   "results": "No Mathlib occurrences. Repository HigherDirectImageLargeFilteredColimit gives module continuity but cannot be imported here: it reaches this item via EtaleFreeSheafDerivedSections and CohomologyPresheaf. Small-index continuity and torsion-only variants do not cover the coefficient-size index and d=0 simultaneously.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantModuleHigherDirectImageCyclicReduction",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "The filtered-union and sheafified cohomology-presheaf comparison in the extra constant-coefficient consequence, step 2 of lem-sbc-constant-module-higher-direct-image-cyclic-reduction.",
+   "via": [
+    "lem-sbc-constant-module-higher-direct-image-cyclic-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantAbelianHigherDirectImageFilteredColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantAbelianHigherDirectImageFilteredColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.preservesColimitsOfShape_constantAbelianHigherDirectImage",
+  "statement": "theorem preservesColimitsOfShape_constantAbelianHigherDirectImage\n    {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]\n    (q : ℕ) (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] :\n    PreservesColimitsOfShape I\n      (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        DerivedCategory.Plus.singleFunctor\n          (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙\n        rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h ⋙\n        DerivedCategory.Plus.homologyFunctor\n          (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T201739-L-3965589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T201739-L-3965589",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
