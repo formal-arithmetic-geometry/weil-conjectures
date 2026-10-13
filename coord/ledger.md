@@ -10351,3 +10351,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:43 L: merged deliver/C3/Sheaf.RingTheory.SyntomicPrincipalLocalizationHypotheses (stage 3; reviewer PASS; first push; landing 20261013T004332-L-2508417 (interface); batch 20261013T004330; modules 2; new nodes 1)
 - 00:43 L: merged deliver/D2/Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261013T004332-L-2508579 (interface); batch 20261013T004330; modules 2; new nodes 1)
 - 00:43 L: merged deliver/D4/Sheaf.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray (stage 3; reviewer PASS; first push; landing 20261013T004332-L-2508694 (proof); batch 20261013T004330; modules 1; new nodes 0)
+- 00:43 L: merged deliver/E1/Sheaf.AlgebraicGeometry.HomLocalKernelOfPresentation (stage 3; reviewer PASS; first push; landing 20261013T004333-L-2508796 (proof); batch 20261013T004330; modules 1; new nodes 0)

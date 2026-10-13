@@ -15,15 +15,16 @@
  ],
  "proof": [
   {
-   "text": "Set b to the cokernel projection followed by e.hom. The sequence a,b,0 is right exact. Identify the finite biproducts of the restricted unit with finite free modules and apply homObj_precomposition_exact on the slice site over V with target F.over V.",
+   "text": "On the slice site over V let R = X.sheaf.over V, M = F.over V, and H = (homFunctor R).flip.obj M. Install the symmetric monoidal closed structures and compare H with MonoidalClosed.internalHom.flip.obj M using ihom_obj and pre_app. The latter preserves equalizers, and preservesLimitsOfShape_of_natIso transfers this property to H. Apply CokernelCofork.IsColimit.ofπOp to the specified cokernel cofork, then isLimitForkMapOfIsLimit' to H. The resulting limiting fork gives H(cokernel a) isomorphic to kernel(H.map a.op); H.mapIso e.op identifies its source with Hom(G.over V,F.over V).",
    "uses": [
-    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-module-finite-type-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the proved upstream homObjFreeIso to identify the free-source Hom terms with finite biproducts of F.over V, reindexing ULift (Fin n) and ULift (Fin m). Transport the maps. The first map is monic and identifies its source with the kernel of the transported second map alpha.",
+   "text": "Use the proved upstream Functor.opMapBiproductIso and SheafOfModules.homObjUnitIso to identify the Hom objects out of the finite sums of restricted units with the sums of M indexed by Fin n and Fin m. Define alpha = hn.inv followed by H.map a.op followed by hm.hom. The square commutes by hn.hom_inv_id_assoc. kernel.mapIso transports the preceding kernel isomorphism to kernel alpha. No conversion to ULift-indexed free modules or coordinate formulas is needed.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-weil-sheaf-of-modules-category"
@@ -31,7 +32,7 @@
    "elementary": true
   },
   {
-   "text": "Use the proved upstream overHomObjIso to identify the source with (homObj G F).over V. Apply Mathlib Scheme.Modules.overEquiv V and overFunctorEquiv V; this equivalence preserves kernels and finite biproducts and identifies slice restriction with scheme restriction. Thus the transported alpha and kernel isomorphism have the stated types. Empty biproducts obey the same universal properties.",
+   "text": "Use the proved upstream overHomObjIso to identify the source with (homObj G F).over V. Let T = (overEquiv V).functor. T.mapBiproduct and the components of overFunctorEquiv identify T of each sum of M with the corresponding sum of F.restrict V.ι. Conjugate T.map alpha by these isomorphisms to define beta. PreservesKernel.iso and kernel.mapIso identify T(kernel alpha) with kernel beta. Compose with the inverse component of overFunctorEquiv at homObj G F to obtain the required scheme-restriction isomorphism. All constructions remain valid for m = 0, n = 0, and V empty.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-weil-sheaf-of-modules-category"
@@ -42,7 +43,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01CO (1), Lemma 01CQ, and proof of Lemma 01CP; Sites, Modules, Lemma 0E8H."
+  "place": "Modules, Lemma 01CO (1), Lemma 01CQ, proof of Lemma 01CP; Sites, Modules, Lemma 0E8H. Categorical implementation by E1 using the proved upstream monoidal closed structure and Mathlib cokernel/kernel universal properties."
  },
  "mathlib_searches": [
   {
@@ -114,8 +115,7 @@
  "proof_deps": [
   "def-pur-sheaf-hom",
   "def-weil-pbc-module-finite-type-presentation",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel"
+  "def-weil-sheaf-of-modules-category"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -128,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T214705-L-1269493",
-  "kind": "interface",
+  "landing": "20261013T004333-L-2508796",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
