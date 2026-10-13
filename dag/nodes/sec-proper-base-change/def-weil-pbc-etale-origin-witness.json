@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-etale-origin-witness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Explicit etale-origin witness",
@@ -13,14 +13,80 @@
   "place": "node def-weil-pbc-etale-origin-witness, order 1289"
  },
  "stmt_deps": [
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chosen etale origin of a bounded below pro-etale derived sheaf of modules is a bounded below etale complex L together with an isomorphism from its comparison inverse image to K",
+   "results": "LeanFinder returned StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.comp and other ring-theoretic etale declarations; none defines the chosen derived origin pair.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "chosen preimage of an object under a functor together with an isomorphism",
+   "results": "LeanSearch returned Internal Server Error; unavailable.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.EssImage",
+   "results": "Loogle reported unknown identifier CategoryTheory.Functor.EssImage; query spelling corrected in a later search.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleOrigin|etale.origin|proetale|pro.etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52 defines proetalePrecoverage; ElladicCohomology.lean concerns ell-adic sheaves; no explicit etale-origin witness.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor F from C to D and object Y of D the data of an object X of C and an isomorphism F X to Y",
+   "results": "LeanFinder returned CategoryTheory.Functor.essImage, essImage.witness, essImage.getIso, objPreimage and partial adjoint sources. Essential image is an existence predicate, not the type of all specified origin pairs.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "Loogle returned CategoryTheory.Functor.essImage, essImage.witness, essImage.getIso, EssSurj and related declarations in Mathlib.CategoryTheory.EssentialImage. These give existence and a noncanonical choice, not retained arbitrary input data.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def essImage|def witness|def getIso",
+   "results": "Read Mathlib/CategoryTheory/EssentialImage.lean:45 (essImage), :48 (witness), :56 (getIso). essImage is existential with Nonempty isomorphism; witness/getIso extract classical choices and do not define the type of specified pairs. The grep helper emitted malformed file fields when passed a single file; the actual lines were checked directly.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The type of lifts of an object Y along a functor F consists of pairs (X, e) where e is an isomorphism F.obj X to Y",
+   "results": "Returned Functor.IsHomLift, IsFibered, IsPreFibered, IsCartesian and related morphism-lifting declarations. Read FiberedCategory/HomLift.lean:54-55: IsHomLift is a proposition about a specified morphism, not the data of an object and an isomorphism to K. No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure.*(Lift|Preimage)|def.*(objPreimage|essImage)|IsoComma",
+   "results": "Returned EssentialImage.lean:45,48,56 and lift structures for commutative squares and pullbacks. Read EssentialImage.lean:38-57: essImage is existential and witness/getIso select from a proof. These do not retain an arbitrary specified origin pair. No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +107,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-etale-origin-witness",
+  "worker": "stage1",
+  "summary": "Repaired against the current side DAG: kept the retained pair definition verbatim and reused the reviewed pro-etale module node, which now explicitly defines both module derived categories and the termwise derived comparison inverse image for all finite rings. Replaced the two redundant commutative-coefficient dependencies by the existing general bounded-derived-subcategory definition, which supplies D+ on the etale side without narrowing the coefficient convention. Removed obsolete tool declarations for those dependencies. No new nodes, proof steps, existence theorem, or condensed/discrete identification.",
+  "blueprint": "The entire displayed pair (L, alpha) and the closing sentence retaining this data in def-weil-pbc-etale-origin-witness, order 1289. This definition supports the finite-level comparison branch without replacing any unit proof step."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-6b8c323dc",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-6b8c323dc (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements and cited sources. The retained pair matches master blueprint order 1289; the revised dependencies cover finite left-module coefficients without imposing commutativity. Checked edge cases, duplicate candidates, dependency cycles and the unit route. No condensed/discrete comparison theorem is inferred. Full checks recorded in review.md; no fixes needed."
+ }
 }
