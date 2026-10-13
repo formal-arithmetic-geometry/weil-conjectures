@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "The triangular maps have explicit inverses: $U_P^{-1}(a,b)=(a-u(b),b)$ and $U_Q^{-1}(c,e)=(c-v(e),e)$. Hence $L=U_P^{-1}D:Q\\to P$ satisfies $LC=\\mathrm{id}_P$, while $T=DU_Q^{-1}:Q\\to P$ satisfies $CT=\\mathrm{id}_Q$. Then $L=L(CT)=(LC)T=T$, so $C$ is an $R$-linear isomorphism $P\\cong Q$ with inverse $L=T$. This is the claimed $A_1\\oplus B_0\\cong B_1\\oplus A_0$.",
+   "text": "The formula for DC proves C injective: if C(x)=C(y), applying D and comparing second coordinates gives x₂=y₂; substituting this in the first-coordinate equality and cancelling the common off-diagonal term gives x₁=y₁. The formula for CD proves C surjective: for (c,e) in Q, D(c-v(e),e) maps under C to (c,e), where v(e)=φ₁(h(e))-h′(φ₀(e)). Mathlib LinearEquiv.ofBijective then gives the required linear equivalence. This is the explicit triangular-inverse argument of Stacks 00S3, without needing to identify a common left and right inverse.",
    "uses": [
     "def-weil-pbc-direct-sum-modules"
    ],
@@ -69,7 +69,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms), proof, lines 35721-35754"
+  "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms), proof, lines 35721-35754; step 3 implemented by injectivity and an explicit surjectivity witness"
  },
  "mathlib_searches": [
   {
@@ -160,5 +160,15 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100141-L-2491408",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -12000,3 +12000,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/T4/Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction (stage 3; reviewer PASS; first push; landing 20261013T100139-L-2490725 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/T4/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointOpenSupport (stage 3; reviewer PASS; first push; landing 20261013T100140-L-2491056 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/T4/Sheaf.AlgebraicGeometry.RestrictedAffineSingleCoherence (stage 3; reviewer PASS; first push; landing 20261013T100140-L-2491216 (interface); batch 20261013T095923; modules 5; new nodes 4)
+- 10:01 L: merged deliver/U1/Sheaf.Algebra.TwoTermHomotopyEquivalenceDirectSum (stage 3; reviewer PASS; first push; landing 20261013T100141-L-2491408 (proof); batch 20261013T095923; modules 1; new nodes 0)
