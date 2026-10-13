@@ -24,7 +24,7 @@ nth-power image: an nth power maps to zero modulo n; conversely, if the integer
 coordinate is n times z, choose an nth root of the P0 coordinate, and apply the inverse
 decomposition to the pair (z, root). The resulting class has nth power equal to the
 original class. The first isomorphism theorem now gives the required cokernel. -/
-theorem Scheme.Hom.pic_proper_ntorsion_coker
+theorem Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]
     (n : ℕ) (_hn : (n : k) ≠ 0) :
@@ -38,7 +38,7 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
       rw [← hP0]
       exact L.property)
     refine ⟨⟨M, by change M ∈ (P0 : Set C.Pic); rw [hP0]; exact hM⟩, ?_⟩
-    exact Subtype.ext hpow
+    simpa using Subtype.ext hpow
   let φ : C.Pic →* Multiplicative (ZMod n) :=
     (Int.castAddHom (ZMod n)).toMultiplicative.comp
       ((MonoidHom.fst (Multiplicative ℤ) P0).comp e.toMonoidHom)
@@ -73,4 +73,17 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
       · exact hM
   exact ⟨(QuotientGroup.quotientMulEquivOfEq hker).trans
     (QuotientGroup.quotientKerEquivOfSurjective φ hφ)⟩
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+/-- Compatibility alias for the canonical upstream declaration. -/
+theorem Scheme.Hom.pic_proper_ntorsion_coker
+    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
+    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]
+    (n : ℕ) (hn : (n : k) ≠ 0) :
+    Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
+      Multiplicative (ZMod n)) := by
+  exact Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient f n hn
+
 end AlgebraicGeometry
