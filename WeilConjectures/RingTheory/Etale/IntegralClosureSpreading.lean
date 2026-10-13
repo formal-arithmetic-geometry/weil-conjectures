@@ -152,7 +152,7 @@ omit [IsDomain R] [IsIntegrallyClosed R] [Algebra.Smooth R B] [IsNoetherianRing 
 include Bk in
 /-- Every element of `L` becomes, after multiplication by a nonzero element of `R`, an element of
 some finite `B`-subalgebra `L₀` of `L`. -/
-private lemma exists_subalgebra_finite :
+lemma exists_finite_subalgebra_mul_mem :
     ∃ L₀ : Subalgebra B L, Module.Finite B L₀ ∧
       ∀ l : L, ∃ a ∈ nonZeroDivisors R, algebraMap B L (algebraMap R B a) * l ∈ L₀ := by
   set M := Algebra.algebraMapSubmonoid B (nonZeroDivisors R)
@@ -305,7 +305,8 @@ theorem exists_etale_integralClosure_of_isLocalization :
     ∃ a ∈ nonZeroDivisors R, ∀ (B' L' : Type*) [CommRing B'] [CommRing L'] [Algebra B B']
       [IsLocalization.Away (algebraMap R B a) B'] [Algebra B' L'] [Algebra B L']
       [IsScalarTower B B' L'] (_ : L ≃ₐ[B] L'), Algebra.Etale B' (integralClosure B' L') := by
-  obtain ⟨L₀, hfin, hL₀⟩ := exists_subalgebra_finite (R := R) (B := B) (Bk := Bk) (L := L)
+  obtain ⟨L₀, hfin, hL₀⟩ :=
+    exists_finite_subalgebra_mul_mem (R := R) (B := B) (Bk := Bk) (L := L)
   have : FinitePresentation B L₀ := Algebra.FinitePresentation.of_finiteType.mp inferInstance
   set M := Algebra.algebraMapSubmonoid B (nonZeroDivisors R)
   have hunitL (a : R) (ha : a ∈ nonZeroDivisors R) :

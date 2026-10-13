@@ -51,6 +51,23 @@ lemma etale_of_etaleLocus_eq_top (h : f.etaleLocus = ⊤) : Etale f := by
   obtain ⟨U, hxU, hU⟩ := mem_etaleLocus.1 (h.ge (Set.mem_univ x))
   exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨U, hU⟩, hxU⟩
 
+/-- A morphism is étale on every open contained in its étale locus. -/
+lemma etale_of_le_etaleLocus {U : X.Opens} (hU : U ≤ f.etaleLocus) : Etale (U.ι ≫ f) := by
+  refine etale_of_etaleLocus_eq_top (top_unique fun x _ ↦ ?_)
+  obtain ⟨V, hxV, hV⟩ := mem_etaleLocus.1 (hU x.2)
+  refine mem_etaleLocus.2 ⟨U.ι ⁻¹ᵁ V, hxV, ?_⟩
+  have hr : Set.range ((U.ι ⁻¹ᵁ V).ι ≫ U.ι) ⊆ Set.range V.ι := by
+    rintro _ ⟨y, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    exact y.2
+  let g := IsOpenImmersion.lift V.ι _ hr
+  have hg : g ≫ V.ι = (U.ι ⁻¹ᵁ V).ι ≫ U.ι := IsOpenImmersion.lift_fac _ _ _
+  have : IsOpenImmersion g := by
+    have : IsOpenImmersion (g ≫ V.ι) := by rw [hg]; infer_instance
+    exact IsOpenImmersion.of_comp g V.ι
+  rw [← Category.assoc, ← hg, Category.assoc]
+  infer_instance
+
 /-- The étale locus of an étale morphism is everything. -/
 lemma etaleLocus_eq_top [Etale f] : f.etaleLocus = ⊤ :=
   top_unique fun _ _ ↦ mem_etaleLocus.2 ⟨⊤, trivial, inferInstance⟩

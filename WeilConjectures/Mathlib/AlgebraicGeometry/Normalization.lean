@@ -643,6 +643,37 @@ lemma etale_fromNormalization_of_isAffineOpen {U : S.Opens} (hU : IsAffineOpen U
   exact RingHom.Etale.respectsIso.1 _ (f.normalizationObjIso hU).symm.commRingCatIsoToRingEquiv
     (RingHom.etale_algebraMap.mpr h)
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Conversely to `AlgebraicGeometry.Scheme.Hom.etale_fromNormalization_of_isAffineOpen`, if the
+relative normalization `f.normalization ⟶ S` is étale over an affine open `U ⊆ S`, then the
+integral closure of `Γ(S, U)` in `Γ(X, f⁻¹ U)` is étale over `Γ(S, U)`. -/
+lemma etale_integralClosure_of_etale_fromNormalization {U : S.Opens} (hU : IsAffineOpen U)
+    (h : Etale ((f.fromNormalization ⁻¹ᵁ U).ι ≫ f.fromNormalization)) :
+    letI := (f.app U).hom.toAlgebra
+    Algebra.Etale Γ(S, U) (integralClosure Γ(S, U) Γ(X, f ⁻¹ᵁ U)) := by
+  have : IsAffine U := hU
+  have : IsAffine (f.fromNormalization ⁻¹ᵁ U) := hU.preimage _
+  rw [← Scheme.Hom.resLE_comp_ι f.fromNormalization (e := le_rfl)] at h
+  have h' : Etale (f.fromNormalization.resLE U _ le_rfl) := Etale.of_comp _ U.ι
+  rw [HasRingHomProperty.iff_of_isAffine (P := @Etale)] at h'
+  have : (RingHom.toMorphismProperty RingHom.Etale).RespectsIso :=
+    RingHom.toMorphismProperty_respectsIso_iff.mp RingHom.Etale.respectsIso
+  replace h' := (MorphismProperty.arrow_mk_iso_iff (RingHom.toMorphismProperty RingHom.Etale)
+    (arrowResLEAppIso f.fromNormalization U _ le_rfl)).mp h'
+  change RingHom.Etale (f.fromNormalization.appLE U _ le_rfl).hom at h'
+  rw [← Scheme.Hom.app_eq_appLE, fromNormalization_app _ hU] at h'
+  let := (f.app U).hom.toAlgebra
+  have := RingHom.Etale.respectsIso.1 _ (f.normalizationObjIso hU).commRingCatIsoToRingEquiv h'
+  have e : (f.normalizationObjIso hU).commRingCatIsoToRingEquiv.toRingHom.comp
+      (CommRingCat.ofHom (algebraMap Γ(S, U) (integralClosure Γ(S, U) Γ(X, f ⁻¹ᵁ U))) ≫
+        (f.normalizationObjIso hU).inv).hom =
+      algebraMap Γ(S, U) (integralClosure Γ(S, U) Γ(X, f ⁻¹ᵁ U)) := by
+    refine RingHom.ext fun x ↦ ?_
+    change (f.normalizationObjIso hU).hom ((f.normalizationObjIso hU).inv _) = _
+    exact CommRingCat.hom_inv_apply _ _
+  rw [e] at this
+  exact RingHom.etale_algebraMap.mp this
+
 end Hom
 
 end AlgebraicGeometry.Scheme
