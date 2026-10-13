@@ -102,7 +102,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {k : Type u} [Field k] {X : Scheme.{u
 finite biproduct of constructible étale sheaves of `Λ`-modules on a `k`-scheme
 `f : X ⟶ Spec k`. Then the assertions `C₁, C₂, C₅, C₇, C₈` hold for `H` if and only if they
 hold for every `Gₐ`. (blueprint: `lem-pbc-f1-prime-biproduct-unconditional`) -/
-theorem prime_biproduct_unconditional_iff (f : X ⟶ Spec (.of k)) {I : Type*} [Finite I]
+theorem prime_biproduct_unconditional_iff (f : X ⟶ Spec (.of k)) {I : Type} [Finite I]
     (G : I → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (e : H ≅ ⨁ G)
     (hGc : ∀ a, Scheme.IsConstructibleSheaf (G a)) (hHc : Scheme.IsConstructibleSheaf H) :
@@ -126,7 +126,9 @@ theorem prime_biproduct_unconditional_iff (f : X ⟶ Spec (.of k)) {I : Type*} [
       calc ∑ a, (e.hom ≫ biproduct.π G a) ≫ biproduct.ι G a ≫ e.inv
           = e.hom ≫ (∑ a, biproduct.π G a ≫ biproduct.ι G a) ≫ e.inv := by
             simp only [Preadditive.comp_sum, Preadditive.sum_comp, Category.assoc]
-        _ = 𝟙 H := by rw [biproduct.total, Category.id_comp, e.hom_inv_id]
+        _ = 𝟙 H := by
+          rw [show (∑ a, biproduct.π G a ≫ biproduct.ι G a) = 𝟙 _ from biproduct.total,
+            Category.id_comp, e.hom_inv_id]
     calc ∑ a, π a ≫ ι a
         = Φ.map (∑ a, (e.hom ≫ biproduct.π G a) ≫ biproduct.ι G a ≫ e.inv) := by
           rw [Φ.map_sum]
