@@ -1,0 +1,122 @@
+{
+ "id": "lem-r4-koszul-basic-open-exact",
+ "kind": "statement",
+ "title": "Exactness of the Koszul complex on a generator basic open",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbf N$, $f:\\mathrm{Fin}(r)\\to A$, $i\\in\\mathrm{Fin}(r)$ and $n\\in\\mathbf Z$. Extend the Koszul chain complex of [def-weil-pbc-koszul-complex] to cochain degrees $-q$, and sheafify it termwise on $X=\\operatorname{Spec}(A)$ [def-pc-scheme]. Its restriction as a complex of module sheaves [def-weil-sheaf-of-modules-category] to $D(f_i)$ is exact in degree $n$.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0663, lemma-homotopy-koszul; Tag 09IR, lemma-orthogonal-koszul-complex"
+ },
+ "proof": [
+  {
+   "text": "Exterior multiplication by the standard basis vector e_i gives a homotopy from multiplication by f_i to zero by the contraction identity d(e_i wedge x) + e_i wedge d(x) = f_i x.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On D(f_i), multiply this homotopy by the inverse of f_i in the structure sheaf. Sheafification and restriction preserve the homotopy identity. The identity is consequently null-homotopic, so all homology sheaves vanish and the complex is exact at n.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0663, lemma-homotopy-koszul; Tag 09IR, lemma-orthogonal-koszul-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex exact on basic open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex is exact on a basic open where a generator is invertible",
+   "results": "['exact_of_isLocalized_span', 'exact_of_localized_span', 'exact_of_localized_maximal', 'exact_of_isLocalized_maximal', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.Generators.H1Cotangent.exact_δ_map', 'IsLocalizedModule.map_exact', 'CategoryTheory.ProjectiveResolution.complex_exactAt_succ']",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*overFunctor|overFunctor.*acyclic|koszul.*[Aa]cyclic",
+   "results": "[]",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRestrictionZeroBase",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: Koszul complexes vanish on the basic-open complement",
+   "via": [
+    "lem-pc-koszul-restriction-zero-base",
+    "lem-pc-koszul-restriction-zero",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulBasicOpenExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulBasicOpenExact.lean",
+  "declaration": "AlgebraicGeometry.koszul_basicOpen_exact",
+  "statement": "theorem koszul_basicOpen_exact\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (i : Fin r) (n : ℤ) :\n    (((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace)\n      (PrimeSpectrum.basicOpen (f i))).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n        _ _ _ _ (tilde.functor (.of A))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A r f).extend\n          ComplexShape.embeddingDownNat))).ExactAt n",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T010620-L-2672815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T010620-L-2672815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

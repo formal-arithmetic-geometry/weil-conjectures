@@ -13,22 +13,27 @@
  },
  "proof": [
   {
-   "text": "On each basic open, multiplication by the corresponding generator is invertible and exterior multiplication by its inverse contracts the Koszul complex; the basic opens cover U and exact restriction preserves this vanishing.",
+   "text": "In each degree, apply basic-open Koszul exactness to every generator and glue exactness over their union U. This gives an acyclic complex after termwise restriction.",
    "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-pc-derived-category"
+    "lem-r4-koszul-basic-open-exact",
+    "lem-r4-open-cover-restriction-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "The zero map from the zero complex to the acyclic restricted complex is a quasi-isomorphism degreewise. Derived localization inverts it; transport the zero-object property along its resulting isomorphism, then along mapDerivedCategoryFactors to identify termwise restriction followed by localization with derived restriction of the original localization.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-koszul-complex",
-  "def-pc-derived-category"
+  "lem-r4-koszul-basic-open-exact",
+  "lem-r4-open-cover-restriction-exact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IR and More on Algebra, Tag 0663"
+  "place": "Tag 09IR, first displayed equality; local contraction Tag 0663; stalkwise exactness Tag 01AG"
  },
  "mathlib_searches": [
   {
@@ -92,12 +97,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261012T184252-L-4000667",
+  "landing": "20261013T010620-L-2672815",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
