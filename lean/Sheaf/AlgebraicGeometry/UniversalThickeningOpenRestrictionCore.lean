@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
-import Sheaf.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces
 
 @[expose] public section
 
@@ -25,6 +25,8 @@ theorem universalFirstOrderThickening_open_restriction_core
           i ⁻¹ᵁ V' = V ∧ V' ≤ h' ⁻¹ᵁ U ∧
           iV ≫ V'.ι = V.ι ≫ i ∧ hV' ≫ U.ι = V'.ι ≫ h' ∧
           iV ≫ hV' = hV ∧ IsUniversalFirstOrderThickening hV iV hV' := by
-  sorry
+  obtain ⟨V', hiV', hV'U, iV, hV, hV', hiV, hhV, hhV', HV⟩ :=
+    (universalFirstOrderThickening_open_pieces h).2.1 i h' H V U hVU
+  exact ⟨hV, hhV.symm, V', iV, hV', hiV', hV'U, hiV, hhV', HV.2.1, HV⟩
 
 end AlgebraicGeometry
