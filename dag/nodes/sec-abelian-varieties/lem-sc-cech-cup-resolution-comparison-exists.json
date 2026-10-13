@@ -1,0 +1,124 @@
+{
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKV",
+  "place": "Tags 0FKV (flasque-resolution paragraph), 01EQ (canonical comparison)"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data",
+  "def-sc-module-cech-comparison",
+  "def-sc-cech-cup-resolution-comparison-data"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flasque sheaf resolutions compute total Cech cohomology via a quasi-isomorphism from global sections and identify the augmentation with canonical Cech comparison",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g. No exact comparison-data or signed total Cech pairing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"QuasiIso\"",
+   "results": "0 hits; no hits. No exact comparison-data or signed total Cech pairing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlexanderWhitney|total.*pairing|flasque.*cech|cech.*flasque",
+   "results": "0 hits; no hits. No exact comparison-data or signed total Cech pairing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison from Cech cohomology to sheaf cohomology preserves cup products",
+   "results": "service unavailable: Internal Server Error; no mathematical verdict. Other search services and grep were used.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechCupResolutionRepresentatives",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-cup-resolution-representatives",
+   "place": "proof intermediate interface",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "lem-sc-cech-cup-resolution-comparison-exists",
+ "kind": "statement",
+ "title": "Existence of Cech comparison data",
+ "statement": "For any scheme X, family U of opens with supremum top, and arbitrary module sheaves F,G [def-sc-module-cup-resolution-data], there exists a computing sectionwise resolution pairing D together with CupCechResolutionComparison U data [def-sc-cech-cup-resolution-comparison-data] for its left, right and target resolutions. Each comparison has the specified restriction alpha and augmentation beta components, alpha a quasi-isomorphism, and an isomorphism from module cohomology to total homology identifying both global resolution classes and every canonical Cech comparison [def-sc-module-cech-comparison]. No quasi-coherence or degree hypothesis is imposed.",
+ "proof": [
+  {
+   "text": "Use moduleCup_godement_pairing to obtain nonnegative flasque resolutions and their augmentation-preserving pairing. Restrict to natural degrees as in the proof of exists_moduleCupResolutionPairing. Compare to injective resolutions over the augmentations; flasque global acyclicity and the acyclic-resolution comparison criterion give the computes fields. Retain the flasque terms when assembling D; existence of an arbitrary CupResolutionPairing alone does not assert these terms are flasque.",
+   "uses": [
+    "lem-sc-module-cup-godement-aw",
+    "lem-sc-module-cup-flasque-acyclicity",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define alpha by restrictions and beta by augmentation. Their cochain identities are the same restriction and augmentation identities used for moduleCechAlpha and moduleCechBeta. Flasque Cech acyclicity and first-quadrant comparison make alpha a quasi-isomorphism. Compose the inverse computing identification with H(alpha) to obtain iso. For the resolution comparison to D.I, its Cech total map commutes with alpha and beta. Its homology map is invertible because both alpha maps and the global comparison are. Use IsModuleCechComparison at D.I and cancel this map to obtain beta_class; alpha_class follows directly from the definition of iso.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-aw",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKV",
+  "place": "Tags 0FKV, 01EQ and 07MB; second reading aligned the proof plan with the stated interfaces",
+  "group": "N3",
+  "date": "2026-10-14"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechCupResolutionComparisonExists",
+  "file": "lean/Sheaf/Paper/CechCupResolutionComparisonExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cupCechResolutionComparison",
+  "statement": "theorem exists_cupCechResolutionComparison (X : Scheme.{v}) {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) (F G : X.Modules) :\n    ∃ D : CupResolutionPairing F G,\n      Nonempty (CupCechResolutionComparison U D.left) ∧\n      Nonempty (CupCechResolutionComparison U D.right) ∧\n      Nonempty (CupCechResolutionComparison U D.target)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T165646-L-1809724",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T165646-L-1809724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
