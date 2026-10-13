@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-connective-universal-h0-zero-differential",
+ "kind": "statement",
+ "title": "Cancelling the degree-zero complement in a connective universal rank-one complex",
+ "statement": "Let R be a commutative ring and P a bounded cochain complex of finite projective R-modules [def-pc-perfect-ring-complex] whose terms in negative degrees are zero. Assume H0 of its termwise scalar extension to every commutative R-algebra B is isomorphic to B. Then there is a bounded finite projective complex Q with zero negative terms and zero differential from degree zero to degree one, together with a homotopy equivalence P -> Q. No cancellation of a negative tail is requested.",
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BCC (minimal finite free model over a local ring), 00O0 (residue-injective finite projective maps), and 00NX; degree-zero part of the fixed-affine parent normalization"
+ },
+ "proof": [
+  {
+   "text": "At each prime localize P. Its terms become finite free, so it is pseudo-coherent. The residue homology dimensions are finite, zero in negative degrees, one in degree zero, and zero above the support bound. Apply the local-ring minimal-free-model theorem. Its resulting model is bounded, connective, with degree-zero term the local ring A. Bounded projective representatives of one derived object are homotopy equivalent, by the Mathlib homotopy/derived comparison.",
+   "uses": [
+    "lem-sc-perfect-local-pseudocoherent-free-model",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The A-algebra test identifies H0 of this model with A. With no negative term this is the kernel of A -> A^m. Its inclusion into A is multiplication by a non-zero-divisor c. Every coordinate of d(1) is killed by c, hence d=0. Thus H0 commutes with residue extension on the minimal model and, by the scalar-extended homotopy comparison, on the localization of P. Exact localization compares this with H0(P).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity test gives H0(P) = R up to isomorphism. Its canonical cycle inclusion j:R -> P^0 is residue-injective at every prime, by the preceding comparison. Apply the residue cokernel criterion and finite presentation/local-to-global projectivity to make coker(j) finite projective. Split j. On its complementary summand E, the differential E -> P^1 is residue-injective because the residue kernel of the full differential is exactly the R summand. Apply the same criterion to this restriction and split it too.",
+   "uses": [
+    "lem-pc-finite-projective-cokernel-localization",
+    "lem-weil-pbc-finite-projective-finitely-presented",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel E and its image in degree one using the inverse of that split injection as contracting homotopy. Degree zero becomes R with zero differential; degree one becomes the finite projective cokernel; all higher terms remain unchanged. Projection and inclusion are homotopy inverses. The bounds are enlarged by zero and one if necessary. Over the zero ring all maps are zero, so P itself works.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-projective-cokernel-localization",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0BCC (minimal finite free model over a local ring), 00O0 (residue-injective finite projective maps), and 00NX; degree-zero part of the fixed-affine parent normalization; fixed-affine adaptation written by U2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded complex finite projective modules universally vanishing negative homology cancel negative terms",
+   "results": "{\"t\": \"2026-10-13T15:16:27Z\", \"tool\": \"leansearch\", \"query\": \"bounded complex finite projective modules universally vanishing negative homology cancel negative terms\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "connective bounded complex finite projective modules whose zeroth homology is free of rank one after every scalar extension split off degree zero",
+   "results": "{\"t\": \"2026-10-13T15:19:26Z\", \"tool\": \"leanfinder\", \"query\": \"connective bounded complex finite projective modules whose zeroth homology is free of rank one after every scalar extension split off degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective\", \"Rep.standardComplex.x_projective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\"], \"digest\": \"6942e5dff10875e6\"}",
+   "date": "2026-10-13",
+   "verdict": "Basic tools only; no exact normalization or opcycles criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective|projective_of_localization_maximal|exists_comp_eq_id_of_projective",
+   "results": "{\"t\": \"2026-10-13T15:19:26Z\", \"tool\": \"grep\", \"query\": \"split_injective_iff_lTensor_residueField_injective|projective_of_localization_maximal|exists_comp_eq_id_of_projective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/Finiteness/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\"], \"digest\": \"3765213f8c59fbc0\"}",
+   "date": "2026-10-13",
+   "verdict": "Basic tools only; no exact normalization or opcycles criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UniversalH0ProjectiveNormalization",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2: cancel projective terms globally to normalize the fixed affine target; Cancelling the degree-zero complement in a connective universal rank-one complex",
+   "via": [
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ConnectiveUniversalH0ZeroDifferential",
+  "file": "lean/Sheaf/Algebra/Homology/ConnectiveUniversalH0ZeroDifferential.lean",
+  "declaration": "CochainComplex.connective_universalH0_zero_differential",
+  "statement": "theorem connective_universalH0_zero_differential\n    (R : Type v) [CommRing R]\n    (P : CochainComplex (ModuleCat.{v} R) ℤ)\n    (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hf : ∀ n : ℤ, Module.Finite R (P.X n))\n    (hp : ∀ n : ℤ, Module.Projective R (P.X n))\n    (hconnective : ∀ n : ℤ, n < 0 → IsZero (P.X n))\n    (hzero : ∀ (B : Type v) [CommRing B] (φ : R →+* B),\n      let PB := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P\n      Nonempty (PB.homology 0 ≅ ModuleCat.of B B)) :\n    ∃ Q : CochainComplex (ModuleCat.{v} R) ℤ,\n      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Q.X n)) ∧\n      (∀ n : ℤ, Module.Finite R (Q.X n)) ∧\n      (∀ n : ℤ, Module.Projective R (Q.X n)) ∧\n      (∀ n : ℤ, n < 0 → IsZero (Q.X n)) ∧\n      Q.d 0 1 = 0 ∧ Nonempty (HomotopyEquiv P Q)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153937-L-1124215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153937-L-1124215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

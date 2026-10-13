@@ -13,39 +13,40 @@
  },
  "proof": [
   {
-   "text": "Induct on the number of negative degrees in a finite support interval. At the bottom negative term residue homology vanishing makes the differential residue-injective. The finite-projective residue criterion gives a finite projective cokernel locally at each prime, hence globally since it is finitely presented. Split and cancel the contractible pair. Each cancellation is a homotopy equivalence preserved by every scalar extension; repeat to obtain a connective bounded projective complex.",
+   "text": "Apply universalConnective_projective_model to the negative-homology half of the universal hypothesis, producing a connective bounded finite projective complex C and a homotopy equivalence P -> C.",
    "uses": [
-    "lem-pc-finite-projective-cokernel-localization"
+    "lem-sc-universal-connective-projective-model"
    ],
    "elementary": false
   },
   {
-   "text": "At each prime choose a minimal finite free model on an affine neighbourhood (0BCD). Negative terms have rank zero, and its zeroth term has rank one. For A=R_f the universal H0 hypothesis identifies ker(d0:A→A^m) with A. The kernel inclusion is multiplication by a non-zero-divisor a. Since a times each coordinate of d0(1) is zero, d0=0, including over nonreduced rings. Bounded projective representatives of the same derived object are homotopy equivalent, and these equivalences survive residue scalar extension. Consequently H0 of the connective projective model commutes with residue base change. The identity base change gives H0≅R.",
+   "text": "Extension of scalars is additive because it is left adjoint to additive restriction. Map the homotopy equivalence through scalar extension and its homology isomorphism. Compose its inverse with the rank-one H0 isomorphism for P, obtaining the universal H0 hypothesis for C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply connective_universalH0_zero_differential to C, obtaining Q with zero negative terms and d0=0 and a homotopy equivalence C -> Q.",
    "uses": [
-    "lem-sc-perfect-finite-free-residue-model",
-    "lem-sc-perfect-universal-h0-bottom-model"
+    "lem-sc-connective-universal-h0-zero-differential"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a generator of H0=R. Its cycle defines a residue-split injection R→Q0 at every prime, so its cokernel is finite projective by the residue criterion. Split off R globally. The remaining degree-zero summand maps residue-injectively into degree one, again giving a finite projective cokernel. Split and cancel that contractible pair. The result is connective, d0=0, and homotopy equivalent to the original P. Finite projective modules are retracts of finite free modules. The zero ring is handled by the zero complex.",
-   "uses": [
-    "lem-pc-finite-projective-cokernel-localization"
-   ],
-   "elementary": false
+   "text": "For each finite projective term of Q apply Module.Finite.exists_comp_eq_id_of_projective. Transfer its Fin m function-module retraction through the linear equivalence with ULift(Fin m) finitely supported functions, and verify the composite on every element. Compose the two homotopy equivalences; its hom map is a quasi-isomorphism, so the derived localization yields the required isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-projective-cokernel-localization",
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-sc-perfect-universal-h0-bottom-model"
+  "lem-sc-universal-connective-projective-model",
+  "lem-sc-connective-universal-h0-zero-differential"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G1",
+  "group": "U2",
   "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tags 0BCD, 0BF2 and 00O0; finite-projective fixed-affine adaptation; expansion of the original fixed-affine plan"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 00O0, 00NX and 0BCC, fixed-affine normalization with actual good-truncation construction; Mathlib finite-projective retraction and homotopy comparison"
  },
  "mathlib_searches": [
   {
@@ -123,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T151132-L-876547",
+  "landing": "20261013T153937-L-1124215",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

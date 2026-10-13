@@ -11,6 +11,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.Projective
 
+import Sheaf.Algebra.Homology.UniversalConnectiveProjectiveModel
+import Sheaf.Algebra.Homology.ConnectiveUniversalH0ZeroDifferential
+import Mathlib.RingTheory.Finiteness.Projective
+import Mathlib.CategoryTheory.Adjunction.Additive
+
 /-! # Global normalization of a universally rank-one projective complex
 
 Source: Stacks Project, Tags 00O0, 0BCD and 0BF2 (projective affine adaptation).
@@ -80,6 +85,37 @@ theorem universalH0_projective_normalization
           (π : ModuleCat.of R (ULift.{v} (Fin m) →₀ R) ⟶ Q.X n),
           ι ≫ π = 𝟙 (Q.X n)) ∧
       (∀ n : ℤ, n < 0 → IsZero (Q.X n)) ∧ Q.d 0 1 = 0 ∧
-      Nonempty (DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) := by sorry
+      Nonempty (DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) := by
+  classical
+  obtain ⟨C, hCb, hCf, hCp, hCneg, ⟨ePC⟩⟩ :=
+    universalConnective_projective_model R P hb hf hp
+      (fun B _ φ ↦ (hbase B φ).1)
+  have hCzero (B : Type v) [CommRing B] (φ : R →+* B) :
+      Nonempty
+        ((((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj C).homology 0 ≅
+          ModuleCat.of B B) := by
+    have : (ModuleCat.extendScalars φ).Additive :=
+      (ModuleCat.extendRestrictScalarsAdj φ).left_adjoint_additive
+    let e := (ModuleCat.extendScalars φ).mapHomotopyEquiv ePC
+    exact ⟨(e.toHomologyIso 0).symm ≪≫ (hbase B φ).2.some⟩
+  obtain ⟨Q, hQb, hQf, hQp, hQneg, hQd, ⟨eCQ⟩⟩ :=
+    connective_universalH0_zero_differential R C hCb hCf hCp hCneg hCzero
+  refine ⟨Q, hQb, ?_, hQneg, hQd, ?_⟩
+  · intro n
+    let := hQf n
+    let := hQp n
+    obtain ⟨m, π, ι, _, _, hιπ⟩ :=
+      Module.Finite.exists_comp_eq_id_of_projective R (Q.X n)
+    let e : (ULift.{v} (Fin m) →₀ R) ≃ₗ[R] (Fin m → R) :=
+      (Finsupp.linearEquivFunOnFinite R R _).trans
+        (LinearEquiv.piCongrLeft R (fun _ ↦ R) Equiv.ulift)
+    refine ⟨m, ModuleCat.ofHom (e.symm.toLinearMap.comp ι),
+      ModuleCat.ofHom (π.comp e.toLinearMap), ?_⟩
+    ext x
+    change π (e (e.symm (ι x))) = x
+    simpa only [LinearEquiv.apply_symm_apply, LinearMap.comp_apply, LinearMap.id_apply]
+      using LinearMap.congr_fun hιπ x
+  · let e := ePC.trans eCQ
+    exact ⟨asIso (DerivedCategory.Q.map e.hom)⟩
 
 end CochainComplex

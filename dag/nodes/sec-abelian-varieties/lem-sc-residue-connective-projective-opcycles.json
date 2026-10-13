@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-residue-connective-projective-opcycles",
+ "kind": "statement",
+ "title": "Finite projectivity of zeroth opcycles from negative residue exactness",
+ "statement": "Let R be a commutative ring and P a bounded cochain complex of finite projective R-modules [def-pc-perfect-ring-complex]. Suppose for every prime ideal p of R that termwise extension of scalars to its residue field has zero homology in every negative degree. Then the canonical zeroth opcycles module, the cokernel of P^(-1) -> P^0, is finite and projective over R. No condition on H0 and no chosen replacement complex is involved.",
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00O0 (open loci for finite projective maps) and 00NX (finite projectivity); negative-tail cancellation in the parent node"
+ },
+ "proof": [
+  {
+   "text": "Choose a lower support bound a and induct on max(0,-a). For a >= 0 the incoming degree-zero differential is zero and opcycles is the finite projective term P^0. Otherwise the bottom differential is residue-injective: the incoming term is zero and residue homology vanishes in its negative degree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-finite-projective-cokernel-localization to the bottom differential at each prime. Its cokernel is finitely presented, since both terms are finitely presented. The resulting locally projective cokernel is locally flat, hence globally flat. Apply the finitely-presented-flat criterion to obtain global projectivity; finiteness follows from the quotient presentation.",
+   "uses": [
+    "lem-pc-finite-projective-cokernel-localization",
+    "lem-weil-pbc-finite-projective-finitely-presented",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Split the bottom injection and cancel the identity pair. Its inverse gives a contracting homotopy, so all residue extensions retain negative exactness. The support lower bound rises by one. If a < -1 the image of the differential into degree zero is unchanged; if a = -1 the new degree-zero term is the original opcycles. Apply induction and these identifications to conclude. The zero ring and empty support interval obey the same quotient calculation.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-projective-cokernel-localization",
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 00O0 (open loci for finite projective maps) and 00NX (finite projectivity); negative-tail cancellation in the parent node; fixed-affine adaptation written by U2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zeroth cokernel of a bounded finite projective complex with zero negative residue field homology is projective",
+   "results": "{\"t\": \"2026-10-13T15:24:25Z\", \"tool\": \"leansearch\", \"query\": \"zeroth cokernel of a bounded finite projective complex with zero negative residue field homology is projective\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zeroth opcycles of bounded finite projective complex exact in negative degrees after tensor with every residue field is finite projective",
+   "results": "{\"t\": \"2026-10-13T15:24:26Z\", \"tool\": \"leanfinder\", \"query\": \"zeroth opcycles of bounded finite projective complex exact in negative degrees after tensor with every residue field is finite projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ\", \"CategoryTheory.ProjectiveResolution.complex_exactAt_succ\", \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff\"], \"digest\": \"e899ae228ea88594\"}",
+   "date": "2026-10-13",
+   "verdict": "Basic tools only; no exact normalization or opcycles criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "opcycles|truncGE",
+   "results": "{\"t\": \"2026-10-13T15:24:26Z\", \"tool\": \"grep\", \"query\": \"opcycles|truncGE\", \"sub\": \"Algebra/Homology/Embedding\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/Basic.lean\", \"Mathlib/Algebra/Homology/Embedding/Basic.lean\", \"Mathlib/Algebra/Homology/Embedding/Basic.lean\"], \"digest\": \"a765c2282b3b558f\"}",
+   "date": "2026-10-13",
+   "verdict": "Basic tools only; no exact normalization or opcycles criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UniversalH0ProjectiveNormalization",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2: cancel projective terms globally to normalize the fixed affine target; Finite projectivity of zeroth opcycles from negative residue exactness",
+   "via": [
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ResidueConnectiveProjectiveOpcycles",
+  "file": "lean/Sheaf/Algebra/Homology/ResidueConnectiveProjectiveOpcycles.lean",
+  "declaration": "CochainComplex.residueConnective_projective_opcycles",
+  "statement": "theorem residueConnective_projective_opcycles\n    (R : Type v) [CommRing R]\n    (P : CochainComplex (ModuleCat.{v} R) ℤ)\n    (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hf : ∀ n : ℤ, Module.Finite R (P.X n))\n    (hp : ∀ n : ℤ, Module.Projective R (P.X n))\n    (hnegative : ∀ (p : Ideal R) [p.IsPrime],\n      let Pp := ((ModuleCat.extendScalars (algebraMap R p.ResidueField)).mapHomologicalComplex\n        (.up ℤ)).obj P\n      ∀ i : ℤ, i < 0 → IsZero (Pp.homology i)) :\n    Module.Finite R (P.opcycles 0) ∧ Module.Projective R (P.opcycles 0)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153937-L-1124215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T153937-L-1124215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
