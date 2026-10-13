@@ -3,6 +3,9 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.Data.ZMod.Basic
 public import Sheaf.RingTheory.CohenRing
+import Mathlib.RingTheory.Smooth.Quotient
+import Sheaf.RingTheory.CohenRingModPowFlat
+import Sheaf.RingTheory.ModPowFormallySmoothReduction
 
 @[expose] public section
 
@@ -33,6 +36,28 @@ theorem cohenRing_mod_pow_formallySmooth_step
     ∀ [Algebra (ZMod (p ^ (n + 1))) (Λ ⧸ Ideal.span {(p : Λ) ^ (n + 1)})],
       Algebra.FormallySmooth (ZMod (p ^ (n + 1)))
         (Λ ⧸ Ideal.span {(p : Λ) ^ (n + 1)}) := by
-  sorry
+  intro inst
+  let R := ZMod (p ^ (n + 1))
+  let S := Λ ⧸ Ideal.span {(p : Λ) ^ (n + 1)}
+  let f : R →+* S := algebraMap R S
+  let I : Ideal R := Ideal.span {((p : R) ^ n)}
+  let J : Ideal S := I.map f
+  have : Module.Flat R S := cohenRing_mod_pow_flat p Λ hΛ (n + 1)
+  have hsquare : I ^ 2 = ⊥ := by
+    rw [Ideal.span_singleton_pow, ← pow_mul, Ideal.span_singleton_eq_bot]
+    exact_mod_cast ZMod.natCast_pow_eq_zero_of_le p (show n + 1 ≤ n * 2 by omega)
+  have hq := modPow_formallySmooth_reduction p Λ n (n + 1) (by omega) ih
+  apply (RingHom.formallySmooth_algebraMap).mp
+  apply RingHom.FormallySmooth.of_flat_of_ker_eq_map_of_square_zero f
+    (RingHom.flat_algebraMap_iff.mpr inferInstance)
+    (Ideal.Quotient.mk I) (Ideal.Quotient.mk J)
+    (Ideal.quotientMap J f Ideal.le_comap_map)
+    Ideal.Quotient.mk_surjective Ideal.Quotient.mk_surjective
+  · ext x
+    rfl
+  · simpa only [Ideal.mk_ker] using hsquare
+  · simp only [Ideal.mk_ker]
+    rfl
+  · exact hq
 
 end IsDiscreteValuationRing

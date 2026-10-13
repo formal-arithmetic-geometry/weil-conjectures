@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-cohen-ring-mod-pow-flat",
+ "kind": "statement",
+ "title": "Prime-power quotients of a Cohen ring are flat",
+ "statement": "Let $p$ be a prime, let $\\Lambda$ be a Cohen ring [def-weil-pbc-cohen-ring], and let $n\\geq0$. For every algebra structure of $\\Lambda/(p^n)$ over $\\mathbf Z/p^n\\mathbf Z$, the module $\\Lambda/(p^n)$ is flat [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The Cohen-ring domain has characteristic zero: if the prime p vanished, its maximal ideal (p) would be zero and the DVR a field. If a different prime q vanished, Bezout for p and q would make p a unit in its maximal ideal. Therefore no prime vanishes, giving characteristic zero by Mathlib CharZero.charZero_iff_forall_prime_ne_zero.",
+   "uses": [
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  },
+  {
+   "text": "The integer action on the characteristic-zero domain is torsion-free. The PID torsion-free flatness instance gives Module.Flat ℤ Λ.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  },
+  {
+   "text": "Let I=(p^n) in ℤ and J=IΛ. Use Algebra.TensorProduct.quotIdealMapEquivQuotTensor and Module.Flat.baseChange to prove that Λ/J is flat over ℤ/I.",
+   "uses": [
+    "lem-weil-pbc-flat-module-quotient-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  },
+  {
+   "text": "Compute J=(p^n) in Λ. Transport flatness along Int.quotientSpanNatEquivZMod and Ideal.quotEquivOfEq. The resulting ring map equals any given ZMod-algebra map because both preserve integer casts and ZMod.intCast_surjective covers every element.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-module-quotient-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, ZMod",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No exact specialization; the proved lemma combines Mathlib results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a Cohen ring modulo p to the n is flat over integers modulo p to the n",
+   "results": "instCommRingBDeRhamPlus, PreTilt.instCommRing, AdicCompletion.flat_of_isNoetherian, PreTilt, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, BDeRhamPlus, PreTilt.instPerfectRing, BDeRham",
+   "date": "2026-10-13",
+   "verdict": "No exact specialization; the proved lemma combines Mathlib results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotients of a Cohen ring modulo powers of p are flat over ZMod p to that power.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "quotQuotEquivQuotOfLE|quotIdealMapEquivQuotTensor",
+   "results": "Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/TensorProduct/Quotient.lean, Mathlib/RingTheory/TensorProduct/Quotient.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact specialization; the proved lemma combines Mathlib results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CohenRingModPowFormallySmoothStep",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-step",
+   "place": "Step 1: flatness of the Cohen-ring prime-power quotient"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CohenRingModPowFlat",
+  "file": "lean/Sheaf/RingTheory/CohenRingModPowFlat.lean",
+  "declaration": "IsDiscreteValuationRing.cohenRing_mod_pow_flat",
+  "statement": "theorem cohenRing_mod_pow_flat\n    (p : ℕ) (Λ : Type u) [CommRing Λ] (hΛ : IsCohenRing p Λ) (n : ℕ)\n    [Algebra (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})] :\n    Module.Flat (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T015549-L-3018550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T015549-L-3018550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

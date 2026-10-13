@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-mod-pow-formally-smooth-reduction",
+ "kind": "statement",
+ "title": "Formal smoothness transported to the double prime-power quotient",
+ "statement": "Let $p,n,m$ be natural numbers with $n\\leq m$, let $\\Lambda$ be any commutative ring, put $R=\\operatorname{ZMod}(p^m)$ and $S=\\Lambda/(p^m)$, and fix an $R$-algebra structure on $S$. Suppose $\\Lambda/(p^n)$ is formally smooth [def-weil-pbc-formally-smooth-adic] over $\\operatorname{ZMod}(p^n)$ for every such algebra structure. Let $I=(p^n)\\subset R$ and $J=IS$. The induced ring homomorphism $R/I\\to S/J$ [def-weil-pbc-algebra-hom-quotient] is formally smooth.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Use q=ZMod.castHom from ZMod(p^m) to ZMod(p^n). It is surjective. Its kernel is I: write a class as an integer z and use ZMod.intCast_zmod_eq_zero_iff_dvd to express z as p^n times an integer; conversely q kills p^n. The first isomorphism theorem yields eR:R/I ≃ ZMod(p^n).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  },
+  {
+   "text": "Put K=(p^m) and L=(p^n) in Λ. The inequality n≤m gives K≤L. Since algebra maps preserve natural casts, J is the image of L in Λ/K. Apply DoubleQuot.quotQuotEquivQuotOfLE to obtain eS:S/J ≃ Λ/L.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  },
+  {
+   "text": "Construct g:ZMod(p^n) → Λ/L as the quotient lift of Int.castRingHom, composed with the inverse of Int.quotientSpanNatEquivZMod. The lift is well-defined because p^n belongs to L. Give Λ/L the algebra structure g.toAlgebra; the hypothesis makes g formally smooth.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  },
+  {
+   "text": "RingHom.FormallySmooth.of_bijective and comp show that eS inverse composed with g composed with eR is formally smooth. After precomposition with the surjective map R→R/I it agrees with the induced quotient map by RingHom.ext_zmod. Surjectivity gives equality of the two maps, and hence the conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0329 induction step; checked at https://stacks.math.columbia.edu/tag/0329"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness transports along the isomorphisms of quotients by nested prime power ideals.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DoubleQuot.quotQuotEquivQuotOfLE",
+   "results": "DoubleQuot.quotQuotEquivQuotOfLE, DoubleQuot.quotQuotEquivQuotOfLEₐ_toRingEquiv, DoubleQuot.quotQuotEquivQuotOfLEₐ_symm_toRingEquiv, DoubleQuot.quotQuotEquivQuotOfLE_quotQuotMk, DoubleQuot.coe_quotQuotEquivQuotOfLEₐ, DoubleQuot.quotQuotEquivQuotOfLE_symm_mk, DoubleQuot.coe_quotQuotEquivQuotOfLEₐ_symm, DoubleQuot.quotQuotEquivQuotOfLE_comp_quotQuotMk",
+   "date": "2026-10-13",
+   "verdict": "No exact specialization; the proved lemma combines Mathlib results"
+  },
+  {
+   "tool": "grep",
+   "query": "quotQuotEquivQuotOfLE|quotIdealMapEquivQuotTensor",
+   "results": "Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/TensorProduct/Quotient.lean, Mathlib/RingTheory/TensorProduct/Quotient.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact specialization; the proved lemma combines Mathlib results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CohenRingModPowFormallySmoothStep",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-step",
+   "place": "Step 2: quotient identifications and transport of the induction hypothesis"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ModPowFormallySmoothReduction",
+  "file": "lean/Sheaf/RingTheory/ModPowFormallySmoothReduction.lean",
+  "declaration": "modPow_formallySmooth_reduction",
+  "statement": "theorem modPow_formallySmooth_reduction\n    (p : ℕ) (Λ : Type u) [CommRing Λ] (n m : ℕ) (hnm : n ≤ m)\n    [Algebra (ZMod (p ^ m)) (Λ ⧸ Ideal.span {(p : Λ) ^ m})]\n    (ih : ∀ [Algebra (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})],\n      Algebra.FormallySmooth (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})) :\n    let I : Ideal (ZMod (p ^ m)) := Ideal.span {((p : ZMod (p ^ m)) ^ n)}\n    let J := I.map (algebraMap (ZMod (p ^ m)) (Λ ⧸ Ideal.span {(p : Λ) ^ m}))\n    (Ideal.quotientMap J\n      (algebraMap (ZMod (p ^ m)) (Λ ⧸ Ideal.span {(p : Λ) ^ m}))\n      Ideal.le_comap_map).FormallySmooth",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T015549-L-3018550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T015549-L-3018550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

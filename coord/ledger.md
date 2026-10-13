@@ -10534,3 +10534,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/E1/Sheaf.RingTheory.AdjoinSingletonSplittingCover (stage 3; reviewer PASS; first push; landing 20261013T015547-L-3018033 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:55 L: merged deliver/E2/Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenComparison (stage 3; reviewer PASS; first push; landing 20261013T015548-L-3018173 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ProperPerfectPreservesCompact (stage 3; reviewer PASS; first push; landing 20261013T015548-L-3018313 (interface); batch 20261013T015540; modules 3; new nodes 2)
+- 01:55 L: merged deliver/E3/Sheaf.RingTheory.CohenRingModPowFormallySmoothStep (stage 3; reviewer PASS; after a return; landing 20261013T015549-L-3018550 (interface); batch 20261013T015540; modules 3; new nodes 2)
