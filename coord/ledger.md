@@ -11090,3 +11090,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/B3/Sheaf.RingTheory.PolynomialCoefficientConormalInclusion (stage 3; reviewer PASS; first push; landing 20261013T045513-L-124719 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/B3/Sheaf.RingTheory.PthRootPresentationDifferentials (stage 3; reviewer PASS; first push; landing 20261013T045514-L-124840 (proof); batch 20261013T045507; modules 1; new nodes 1)
 - 04:55 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T045514-L-124945 (interface); batch 20261013T045507; modules 3; new nodes 2)
+- 04:55 L: merged deliver/C1/Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect (stage 3; reviewer PASS; first push; landing 20261013T045515-L-125056 (interface); batch 20261013T045507; modules 3; new nodes 2)
