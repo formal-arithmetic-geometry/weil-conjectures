@@ -9,12 +9,49 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.AlgebraicGeometry.FlatModuleDescent
 
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
+
+-- A strictly increasing auxiliary level makes the preorder antisymmetric without
+-- identifying any of its objects. Projection is surjective and final.
+private def FlatStageIndex (I : Type u) := I × ℕ
+
+private instance {I : Type u} [Preorder I] : PartialOrder (FlatStageIndex I) where
+  le a b := a = b ∨ (a.1 ≤ b.1 ∧ a.2 < b.2)
+  le_refl a := Or.inl rfl
+  le_trans a b c hab hbc := by
+    rcases hab with rfl | ⟨hab, hn⟩
+    · exact hbc
+    rcases hbc with rfl | ⟨hbc, hm⟩
+    · exact Or.inr ⟨hab, hn⟩
+    · exact Or.inr ⟨hab.trans hbc, hn.trans hm⟩
+  le_antisymm a b hab hba := by
+    rcases hab with h | ⟨_, hn⟩
+    · exact h
+    rcases hba with h | ⟨_, hm⟩
+    · exact h.symm
+    · exact False.elim (Nat.lt_asymm hn hm)
+
+private instance {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] :
+    IsDirectedOrder (FlatStageIndex I) where
+  directed a b := by
+    obtain ⟨k, ha, hb⟩ := exists_ge_ge a.1 b.1
+    refine ⟨(k, max a.2 b.2 + 1), Or.inr ⟨ha, ?_⟩, Or.inr ⟨hb, ?_⟩⟩
+    · exact Nat.lt_succ_of_le (le_max_left _ _)
+    · exact Nat.lt_succ_of_le (le_max_right _ _)
+
+private theorem flatStageProjection_mono {I : Type u} [Preorder I] :
+    Monotone (fun a : FlatStageIndex I ↦ a.1) := by
+  intro a b h
+  rcases h with rfl | h
+  · exact le_rfl
+  · exact h.1
 
 /-- Flatness at the limit descends to one canonical stage of a directed preorder.
 
@@ -50,6 +87,18 @@ theorem exists_isFlatOver_of_isPullback_limit_preorder_stage
       ((Scheme.Modules.tensorPullback
         (pullback.fst f (Spec.map (R.map (homOfLE hij))))).obj M).IsFlatOver
         (pullback.snd f (Spec.map (R.map (homOfLE hij)))) := by
-  sorry
+  let F : FlatStageIndex I ⥤ I := flatStageProjection_mono.functor
+  have : F.Final := flatStageProjection_mono.final_functor_iff.mpr
+    (fun k ↦ ⟨(k, 0), le_rfl⟩)
+  let c' : Cone ((F ⋙ R).op ⋙ Scheme.Spec) := c.whisker F.op
+  have hc' : IsLimit c' := (Functor.Initial.isLimitWhiskerEquiv F.op c).symm hc
+  let t : FlatStageIndex I := (i, 0)
+  let : IsAffine c'.pt := inferInstanceAs (IsAffine c.pt)
+  let : ∀ k : FlatStageIndex I, IsNoetherianRing ((F ⋙ R).obj k) :=
+    fun k ↦ inferInstanceAs (IsNoetherianRing (R.obj k.1))
+  obtain ⟨s, hts, hs⟩ := exists_eventually_isFlatOver_of_limit
+    (F ⋙ R) c' hc' t f M hflat
+  refine ⟨s.1, flatStageProjection_mono hts, ?_⟩
+  exact hs s le_rfl
 
 end AlgebraicGeometry

@@ -17,41 +17,34 @@
  },
  "proof": [
   {
-   "text": "The object i makes I nonempty and filtered. Choose a final functor F:J -> I from a nonempty directed partial order and t with i <= F(t). Pull back f and M to stage F(t), preserving finite presentation and hence quasi-coherence. Restrict the cone along the initial functor F.op; its vertex and limit property remain. Cartesian pasting, tensor-pullback composition and comparison identify the restricted limit module with the original one and transfer flatness.",
+   "text": "Construct J = I times the natural numbers, ordered by a = b or by a.first <= b.first and a.second < b.second. Equality gives reflexivity; transitivity follows from transitivity of <= and <; strict increase of the level rules out two opposite nonidentity inequalities, giving antisymmetry. A directed upper bound of the first coordinates with level max(a.second,b.second)+1 gives a directed upper bound in J. The projection p:J -> I is monotone and surjective. Mathlib Monotone.final_functor_iff proves its functor F final. Fix t = (i,0), so F(t) is definitionally i. This is a direct specialization of the directed replacement construction, with its properties proved locally; no choice of a module or new geometric object is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict R along F and c along F.op. By initiality of F.op and Mathlib Functor.Initial.isLimitWhiskerEquiv the restricted cone remains limiting, with exactly the same affine vertex. Its component at t is definitionally the component of c at i. All Noetherian hypotheses restrict pointwise. The finitely presented morphism f and module M are unchanged, and M is quasi-coherent by the existing IsFinitePresentation instance. Thus the original limit-flatness hypothesis is exactly the restricted hypothesis.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-initial-functor-limit",
-    "lem-pc-tensor-pullback-finite-presentation",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-pullback-model-flatness-comparison",
-    "def-pc-base-change"
+    "lem-weil-pbc-initial-functor-limit"
    ],
    "elementary": false
   },
   {
-   "text": "Apply partial-order flat-module descent to the pulled-back module and take one of its stages s >= t. Put j=F(s), so i <= j. Cartesian pasting and tensor-pullback composition identify the resulting stage module with the canonical pullback directly from i to j, and cartesian-model comparison transfers flatness. No propagation to later original stages is needed here.",
+   "text": "Apply partial-order eventual flat-module descent to F composed with R, the restricted cone, and t, f, M. Obtain s >= t and flatness at every stage above s. Specialize to s itself by reflexivity. Take j = F(s) and i <= j from monotonicity of the projection. By definition of functor composition and the thin-category morphisms, this stage is exactly the canonical base change required by the conclusion. No iterated pullback or cartesian-model comparison is used.",
    "uses": [
-    "lem-pc-flat-module-descent",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-pullback-model-flatness-comparison",
-    "def-pc-base-change"
+    "lem-pc-flat-module-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "lem-pc-flat-module-descent",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-pc-pullback-model-flatness-comparison",
-  "lem-pc-tensor-pullback-finite-presentation",
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-initial-functor-limit"
+  "lem-weil-pbc-initial-functor-limit",
+  "lem-pc-flat-module-descent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project, Tags 05LY, 0032, 0097, 01JX",
-  "place": "Final directed-poset reindexing and one-stage consequence of flat-module descent"
+  "by": "agent",
+  "document": "Stacks Project, Tags 0032 and 05LY; Mathlib.CategoryTheory.Filtered.Final",
+  "place": "Concrete directed partial-order replacement with a fixed preimage of i; initial reindexing; specialize eventual descent to its first stage",
+  "note": "X3 proves the auxiliary order and its final projection directly. The geometric flatness theorem remains the planned Tag 05LY dependency."
  },
  "mathlib_searches": [
   {
@@ -124,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "X-cb52f",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T121224-L-3506619",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T124319-L-3779094",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and node metadata match the stated target; compilation succeeds, and the direct importer Sheaf.AlgebraicGeometry.FlatModuleDescentPreorder also compiles against the delivered module."
  }
 }
