@@ -1,0 +1,149 @@
+{
+ "id": "lem-sbc-finite-free-local-field-factorization",
+ "kind": "statement",
+ "title": "Finite free local factorization of a finite field quotient-extension",
+ "statement": "Let A be a commutative local ring and K a field in Type u [def-pc-field-extension]. Let rho:A→K make K a finitely generated A-module [def-weil-finitely-generated-module] and have kernel the maximal ideal of A. There exist a commutative local A-algebra B in Type u, free [def-weil-pbc-free-module] and finitely generated as an A-module, with local structural map, and a surjective ring homomorphism beta:B→K satisfying beta composed with the structural map equals rho.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 07NE (https://stacks.math.columbia.edu/tag/07NE), maximal-ideal specialization; locality as in the first base change of Tag 0EYB"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-finitely-generated-module",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Induct on a finite set of A-module generators of K. Maintain a finite free local A-algebra B and a map beta:B→K with maximal kernel, factoring rho and containing the chosen elements in its image. The empty set uses B=A. At the next element x, K is finite over B by restriction of scalars, so x is integral. A monic relation proves that the evaluation kernel in B[T] is not the extension of the maximal ideal. Apply Polynomial.exists_monic_span_sup_map_eq to obtain a monic f whose ideal together with the extended maximal ideal is that kernel.",
+   "uses": [
+    "lem-weil-pbc-polynomial-monic-generator-mod-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form AdjoinRoot f and descend evaluation. Its kernel is the extended maximal ideal by the polynomial-kernel identity and surjectivity of the quotient map. The monic power basis makes it finite free over B. K is finite over this new algebra, so contraction of the zero maximal ideal of K makes the evaluation kernel maximal. Every other maximal ideal contracts to the maximal ideal of B; it contains the extended ideal and therefore equals it. This gives a local ring and local structural map.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose finite bases using Module.Free.trans and finite generating sets using Module.Finite.trans. Compose the local structural maps and evaluation maps; old elements remain in the image and the adjoined root supplies the next one. The finite induction ends with the original A-module generators all in the image. The image is an A-submodule because beta factors rho. It contains their span, which is all K, proving surjectivity. All quotients used have carrier Type u.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-polynomial-monic-generator-mod-maximal"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "V3",
+  "document": "Stacks Project",
+  "place": "Tag 07NE, finite tower of monic quotients; implemented by finite-generator induction using Mathlib polynomial-ideal generation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*residue|residue.*finite",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean; Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "verdict": "pieces only; no exact realization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.ResidueField, Module.Free",
+   "date": "2026-10-13",
+   "results": "IsLocalRing.split_injective_iff_lTensor_residueField_injective; Module.free_of_lTensor_residueField_injective; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+   "verdict": "pieces only; no exact realization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize a finite extension of a local ring residue field by a finite free local algebra",
+   "date": "2026-10-13",
+   "results": "IsLocalRing.ResidueField.finite_of_finite; IsLocalRing.ResidueField.finite_of_module_finite; IsLocalRing.instFiniteResidueField; RingHom.EssFiniteType.residueFieldMap; Algebra.instFiniteResidueFieldOfFormallyUnramified; Algebra.instFiniteResidueFieldOfQuasiFiniteAt; IsLocalRing.ResidueField.instAlgebra; Algebra.QuasiFinite.instFiniteResidueField",
+   "verdict": "pieces only; no exact realization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_monic_span_sup_map_eq|free_adjoinRoot|finite_adjoinRoot|isMaximal_comap_of_isIntegral_of_isMaximal",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/Ideal/MonicSpan.lean; Mathlib/RingTheory/IsAdjoinRoot.lean; Mathlib/RingTheory/IsAdjoinRoot.lean",
+   "verdict": "pieces only; no exact realization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension of the residue field of a local ring is realized by a finite free local algebra",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointFiniteFlatLift",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYB first base change: choose a finite flat local scheme realizing the finite residue-field extension; Tag 07NE supplies the finite free algebra",
+   "via": [
+    "lem-sbc-smooth-closed-point-finite-flat-lift",
+    "lem-sbc-smooth-closed-point-local-section",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteFreeLocalFieldFactorization",
+  "file": "lean/Sheaf/RingTheory/FiniteFreeLocalFieldFactorization.lean",
+  "declaration": "IsLocalRing.exists_finite_free_local_field_factorization",
+  "statement": "theorem exists_finite_free_local_field_factorization\n    (A K : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    (rho : A →+* K) (hfinite : rho.Finite)\n    (hker : RingHom.ker rho = maximalIdeal A) :\n    ∃ (B : Type u) (_ : CommRing B) (_ : IsLocalRing B) (_ : Algebra A B),\n      Module.Free A B ∧ Module.Finite A B ∧ IsLocalHom (algebraMap A B) ∧\n        ∃ beta : B →+* K, Function.Surjective beta ∧\n          beta.comp (algebraMap A B) = rho",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T100204-L-2498189",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T100204-L-2498189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
