@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-completed-frobenius-equivariance",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Completed proper base change is Frobenius-equivariant",
@@ -13,22 +13,57 @@
   "place": "node lemma-weil-pbc-completed-frobenius-equivariance, order 1340"
  },
  "stmt_deps": [
-  "def-weil-pbc-completed-frobenius-structures"
+  "def-weil-pbc-completed-frobenius-structures",
+  "def-weil-pbc-frobenius-tower-datum",
+  "lemma-weil-pbc-frobenius-product-cone-limit",
+  "lemma-weil-pbc-level-map-operator-naturality"
  ],
  "proof": [
   {
-   "text": "Using the displayed definitions and cancelling $s^{-1}s$ and $t^{-1}t$,\nthe left side is\n\n$$\ntW\\Theta_{A,\\infty}\\Phi_{Y'}(s),\n$$\n\nwhereas the right side is\n\n$$\nt\\Theta_{D,\\infty}\\Phi_{Y'}(W)\\Phi_{Y'}(s).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Write $\\Phi=\\Phi_{Y'}$. The formulas in [def-weil-pbc-completed-frobenius-structures] give, with right-to-left composition, $\\operatorname{Ex}^{\\mathrm{comp}}\\Theta_S=(tWs)(s^{-1}\\Theta_{A,\\infty}\\Phi(s))=tW\\Theta_{A,\\infty}\\Phi(s)$, since $ss^{-1}=1$. For the other composite, $\\Theta_T\\Phi(\\operatorname{Ex}^{\\mathrm{comp}})=t\\Theta_{D,\\infty}\\Phi(t^{-1})\\Phi(t)\\Phi(W)\\Phi(s)=t\\Theta_{D,\\infty}\\Phi(W)\\Phi(s)$, since a functor preserves composition and identities and $t^{-1}t=1$. Both composites have source $\\Phi S$ and target $T$.",
+   "uses": [
+    "def-weil-pbc-completed-frobenius-structures"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-frobenius-equivariance.md",
+    "place": "## Proof, first two displayed composites"
+   }
   },
   {
-   "text": "They are equal by the product-cone Frobenius equation. When every\n$\\Phi_Z$ is the identity, the four formulas defining $\\Theta_{Z,n}$ become\nthe endomorphisms induced from $\\vartheta_n$ and the equation just proved is\nthe fibrewise limit of the equations in operator naturality. This proves\nthe specialization statement without using it to type the genuine\nFrobenius case.",
-   "uses": [],
-   "elementary": null
+   "text": "The product-cone statement [lemma-weil-pbc-frobenius-product-cone-limit] gives $W\\Theta_{A,\\infty}=\\Theta_{D,\\infty}\\Phi_{Y′}(W)$. Precompose this equality with $\\Phi_{Y′}(s)$ and postcompose with $t$. This gives precisely the equality of the two composites in step 1.",
+   "uses": [
+    "lemma-weil-pbc-frobenius-product-cone-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-frobenius-equivariance.md",
+    "place": "## Proof, sentence “They are equal by the product-cone Frobenius equation.”"
+   }
+  },
+  {
+   "text": "Under the identity assumptions, the compatibility equation in [def-weil-pbc-frobenius-tower-datum] becomes $r_{n+1,n}\\vartheta_{n+1}=\\vartheta_nr_{n+1,n}$, so $\\vartheta_\\bullet$ is an ordinary compatible tower endomorphism. The formulas in [def-weil-pbc-frobenius-corner-structures] become $\\vartheta_{E,n}=L(g')^*\\vartheta_n$, $\\Theta_{B,n}=Lg^*Rf_*\\vartheta_n$, $\\Theta_{D,n}=Rf'_*L(g')^*\\vartheta_n$, $\\Theta_{A,n}=h_n^{-1}\\Theta_{B,n}h_n$, and $\\Theta_{C,n}=(h'_n)^{-1}\\Theta_{D,n}h'_n$. The equations of [lemma-weil-pbc-frobenius-level-rectangle] now read $h_n\\Theta_{A,n}=\\Theta_{B,n}h_n$, $v_n\\Theta_{A,n}=\\Theta_{C,n}v_n$, $h'_n\\Theta_{C,n}=\\Theta_{D,n}h'_n$, and $v'_n\\Theta_{B,n}=\\Theta_{D,n}v'_n$. Its composite assertion reads $(v'_nh_n)\\Theta_{A,n}=\\Theta_{D,n}(v'_nh_n)$, with the identical common map after replacing $v'_nh_n$ by $h'_nv_n$. These are the ordinary intertwining equations of [lemma-weil-pbc-level-map-operator-naturality]; that statement is used to identify their form, not to infer a global endomorphism of $K$ from the family $\\vartheta_n$. The displayed limit formula in [lemma-weil-pbc-frobenius-product-cone-limit] becomes $\\Theta_{Z,\\infty}=R\\varprojlim_n\\Theta_{Z,n}$, since the canonical comparison for the identity functor is identity; its equation becomes $W\\Theta_{A,\\infty}=\\Theta_{D,\\infty}W$. Conjugating by $s,t$ as in step 1 gives exactly ordinary operator naturality on the completed source and target. This identifies the finite and limit equations directly; it does not assume that an arbitrary family $\\vartheta_n$ is already the reduction of a chosen endomorphism of $K$. Without the identity assumptions, all maps retain source $\\Phi_Z$ of the relevant object, and none of these specializations is made.",
+   "uses": [
+    "def-weil-pbc-frobenius-tower-datum",
+    "def-weil-pbc-frobenius-corner-structures",
+    "lemma-weil-pbc-frobenius-level-rectangle",
+    "lemma-weil-pbc-level-map-operator-naturality",
+    "lemma-weil-pbc-frobenius-product-cone-limit",
+    "def-weil-pbc-completed-frobenius-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-frobenius-equivariance.md",
+    "place": "## Proof, final specialization paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-completed-frobenius-structures",
   "lemma-weil-pbc-frobenius-product-cone-limit",
+  "def-weil-pbc-frobenius-tower-datum",
+  "def-weil-pbc-frobenius-corner-structures",
+  "lemma-weil-pbc-frobenius-level-rectangle",
   "lemma-weil-pbc-level-map-operator-naturality"
  ],
  "proof_origin": {
@@ -36,9 +71,52 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-frobenius-equivariance.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completed proper base change Frobenius equivariance",
+   "results": "WittVector.IsocrystalEquiv.frob_equivariant, WittVector.IsocrystalHom.frob_equivariant (Mathlib/RingTheory/WittVector/Isocrystal); RingHom.map_frobeniusEquiv_symm (Mathlib/FieldTheory/Perfect), plus related Witt-vector/ring results.",
+   "date": "2026-10-14",
+   "verdict": "no match: these concern isocrystals or ring Frobenius, not completed sheaf base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport an equivariant morphism across two isomorphisms for an endofunctor",
+   "results": "CategoryTheory.Functor.mapActionCongr_hom, mapActionCongr; Action.isIso_hom_mk, mkIso, mkIso_hom_hom, resCongr_hom, resCongr, isIso_of_hom_isIso (Mathlib/CategoryTheory/Action/Basic).",
+   "date": "2026-10-14",
+   "verdict": "no match: monoid actions and their transport, not the completed comparison or general Weil type"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp (Mathlib.CategoryTheory.Functor.Basic); PresheafOfModules.map_comp, map_comp_assoc, mk; PresheafOfModulesOfCommRing.mk; AlgebraicGeometry.PresheafedSpace.map_comp_c_app.",
+   "date": "2026-10-14",
+   "verdict": "generic functoriality only; used as an elementary functor axiom, not an exact match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "completedBaseChange|WeilComplex|completed.*[Ff]robenius",
+   "results": "0 hits in Mathlib/.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed proper base change Frobenius equivariance",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|map_conj",
+   "results": "Mathlib/CategoryTheory/Functor/Basic.lean:49 Functor.map_comp, :56 attributes; other functor composition uses in CategoryTheory/Functor/. Read Basic.lean:38-60.",
+   "date": "2026-10-14",
+   "verdict": "generic functoriality only; not completed base-change equivariance"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +145,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-completed-frobenius-equivariance",
+  "worker": "stage1",
+  "summary": "Checked the source proof and all cited statements. Wrote the typed conjugation calculation with correct inverse order. Added direct references to the tower datum, finite corner formulas and finite Weil rectangle for the identity specialization, which the inherited three-citation split did not supply. Kept the statement and coefficient setting unchanged. No new nodes.",
+  "blueprint": "First two proof displays: step 1; product-cone equality sentence: step 2; final identity-specialization paragraph and four finite-corner formulas it invokes: step 3."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-14a3f9b25",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-14a3f9b25 (reviewer sub-agent of L); spot-checked: Core conjugation, typing, hypotheses, coefficient category, base-change composite, cited statements, edge cases, and source locations all check. One repairable DAG fault: the item statement explicitly invokes the product-cone limit and operator naturality, but stmt_deps omitted both existing nodes. Corrected JSON is under fixes/dag/nodes/sec-proper-base-change/lemma-weil-pbc-completed-frobenius-equivariance.json.; 1 file(s) fixed by the reviewer"
+ }
 }
