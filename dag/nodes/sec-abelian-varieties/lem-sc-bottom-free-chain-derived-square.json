@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-bottom-free-chain-derived-square",
+ "kind": "statement",
+ "title": "Derived square for termwise finite free pullback",
+ "statement": "Let T, X, Z, f, W, A, B, α, eA and eB be a specified bounded-above finite-free chart model as in the following sense: X,Z are derived objects [def-pc-derived-category] on a scheme T [def-pc-scheme]; A,B are bounded-above cochain complexes [def-pc-cochain-complex-modules] on W with finite free terms [def-weil-pbc-free-module]; eA:L(W.ι)*X≅Q(A) and eB:L(W.ι)*Z≅Q(B) identify L(W.ι)*(f) with Q(α) [def-pc-derived-pullback], but without choosing a cohomological degree. For g:T′→T put V=g⁻¹(W), and F=tensorPullback(g|_V) followed by the inverse module-site equivalence [def-pc-module-pullback]. Given additivity of F, put P=F(A), Q=F(B), β=F(α). Let R be exact restriction to the localized site over V. In its standard derived category there exist isomorphisms dP:Rᴰ(Lg*X)≅Q(P), dQ:Rᴰ(Lg*Z)≅Q(Q), satisfying Rᴰ(Lg*f)≫dQ.hom=dP.hom≫Q(β). This statement asserts the geometric comparison before applying any homology functor.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat computation 06YJ, bounded-above flatness 06YD, and composition 0D5S along the cartesian open square"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Set V=g inverse-image W and h=g.resLE W V (le_refl V). Define F explicitly as tensorPullback h followed by (Modules.overEquiv V).inverse. The tensor-pullback adjunction makes it right exact and hence additive; the equivalence is additive, so F is additive. Finite free terms are finite sums of the structure sheaf, hence flat. The bounded-above flat complexes A and B are K-flat. Use one left-derived counit ε for tensorPullback h; its components at A and B are invertible. If flatComplexDerivedPullback presents another counit, the unique isomorphism of left-derived functors transports its invertibility to ε. Naturality at α gives the termwise square.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-module-pullback",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Along the cartesian open square, compose the natural derived composition isomorphisms to identify L(V.ι)* Lg* with Lh* L(W.ι)*. Open immersion pullback is exact restriction, so its left-derived universal property identifies it with restriction.mapDerivedCategory. Map the given chart square through Lh*, then compose with the single counit at A and B. Finally transport through the exact inverse module-site equivalence and its mapDerivedCategoryFactors. This gives the derived square in the localized-site derived category, before applying homology.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat computation 06YJ, bounded-above flatness 06YD, and composition 0D5S along the cartesian open square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor commutes with homology on derived categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived pullback of bounded above finite free complexes restricted to an open",
+   "results": "Eight generic free-pullback naturality and pullback-composition hits; no geometric derived chart square.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctorFactors",
+   "results": "Eleven hits including homologyFunctorFactors_hom_naturality, used in the parent proof.",
+   "date": "2026-10-13",
+   "verdict": "Used homology factorization for the final step, no geometric square match."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorFactors|mapDerivedCategoryHomologyFunctorIso",
+   "results": "Mathlib homologyFunctorFactors; source-library mapDerivedCategoryHomologyFunctorIso in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-13",
+   "verdict": "Reused source-library exact homology comparison instead of a new lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BottomFreeChainPullbackComparison",
+  "group": "R2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-bottom-free-chain-pullback-comparison",
+   "place": "steps 1 and 2: geometric derived comparison, before homology"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BottomFreeChainDerivedSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/BottomFreeChainDerivedSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.bottomFreeChain_derived_square",
+  "statement": "theorem bottomFreeChain_derived_square\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (T : Scheme.{u}) (X Z : schemeDerivedCategory T) (f : X ⟶ Z)\n    (W : T.Opens)\n    (A B : CochainComplex\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) ℤ)\n    (hAbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (A.X i))\n    (hBbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (B.X i))\n    (hAfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (A.X i ≅ SheafOfModules.free\n      (R := moduleRings W.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (hBfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (B.X i ≅ SheafOfModules.free\n      (R := moduleRings W.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (α : A ⟶ B)\n    (eA : (derivedPullback W.ι).obj X ≅ DerivedCategory.Q.obj A)\n    (eB : (derivedPullback W.ι).obj Z ≅ DerivedCategory.Q.obj B)\n    (hsquare : (derivedPullback W.ι).map f ≫ eB.hom =\n      eA.hom ≫ DerivedCategory.Q.map α)\n    (T' : Scheme.{u}) (g : T' ⟶ T) :\n    let V := g ⁻¹ᵁ W\n    let F := Modules.tensorPullback (g.resLE W V (le_refl V)) ⋙\n      (Modules.overEquiv V).inverse\n    ∀ hF : F.Additive,\n      letI := hF\n      letI := HasDerivedCategory.standard\n        (SheafOfModules.{u} ((moduleRings T'.toRingedSpace).over V))\n      let R := SheafOfModules.overFunctor.{u} (moduleRings T'.toRingedSpace) V\n      let P := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj A\n      let Q := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj B\n      let β := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map α\n      ∃ (eP : R.mapDerivedCategory.obj ((derivedPullback g).obj X) ≅\n          DerivedCategory.Q.obj P)\n        (eQ : R.mapDerivedCategory.obj ((derivedPullback g).obj Z) ≅\n          DerivedCategory.Q.obj Q),\n        R.mapDerivedCategory.map ((derivedPullback g).map f) ≫ eQ.hom =\n          eP.hom ≫ DerivedCategory.Q.map β",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c978c",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T133747-L-44971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c978c",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T133747-L-44971",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures to their node records and the existing signature to the clone; checked the derived-square statement against Stacks 06YD, 06YJ and 0D5S. Both delivered modules and the sole direct importer compiled cleanly; axiom checks showed only standard axioms plus sorryAx from the named remaining theorem."
+ }
+}
