@@ -38,138 +38,66 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the powers $\\mathcal I^n$ on affine opens and on $U$).* By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1) every $\\mathcal I^n$ is a quasi-coherent sheaf of ideals ($\\mathcal I^0=\\mathcal O_X$ trivially), and $\\mathcal I^{n+1}\\subseteq\\mathcal I^n$: the image of $\\mathcal I\\otimes\\mathcal I^n\\to\\mathcal O_X$ consists of local sections that are locally sums of products $ab$ with $b\\in\\mathcal I^n$, which lie in the ideal sheaf $\\mathcal I^n$. Let $W\\subseteq X$ be an affine open, $A=\\mathcal O_X(W)$, identified with $\\operatorname{Spec}A$ by [lem-weil-pbc-affine-open-spec-points], and $I_W=\\mathcal I(W)$. Since $\\mathcal I|_W$ is of finite type, $I_W$ is a finitely generated ideal of $A$ [lem-weil-pbc-quasi-coherent-finite-type-affine](a), and $\\mathcal I^n(W)=I_W^n$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](2) is finitely generated; as the affine opens cover $X$ [def-pc-scheme], each $\\mathcal I^n$ is of finite type [lem-weil-pbc-quasi-coherent-finite-type-affine](c). By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine], $V(\\mathcal I)\\cap W=V(I_W)$, so $U\\cap W=\\{\\mathfrak p: I_W\\not\\subseteq\\mathfrak p\\}=\\bigcup_{f\\in I_W}D(f)$. If $W\\subseteq U$, then $I_W$ lies in no prime of $A$, so $I_W=A$ and $\\mathcal I^n(W)=A\\ni1$. For an arbitrary open $V\\subseteq U$, the affine opens $W\\subseteq V$ cover $V$ [def-pc-scheme]; the sections $1\\in\\mathcal I^n(W)$ agree on overlaps, so they glue in the sheaf $\\mathcal I^n$ to a section over $V$ whose image in $\\mathcal O_X(V)$ is $1$; as $\\mathcal I^n(V)\\subseteq\\mathcal O_X(V)$ is an ideal containing $1$, $\\mathcal I^n(V)=\\mathcal O_X(V)$. This proves the first assertion of the statement.",
+   "text": "Use ideal_power_complement to obtain U and all sectionwise power bijections. Prove monicity by induction on the recursive image construction and construct r by composing adjacent inclusions. Lift 1 uniquely using sectionwise bijectivity; cancellation by the mono power inclusions proves the identity and composition laws of r.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-    "def-pc-scheme"
+    "lem-weil-pbc-ideal-power-complement",
+    "lem-weil-pbc-ideal-module-product-stalk"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, first paragraph: '$\\mathcal I|_W=\\widetilde I$ for some finite type ideal $I\\subset A$' (written out)"
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
    }
   },
   {
-   "text": "*Step 2 (dictionary on an affine open).* Let $W$, $A$ be as in Step 1 and $\\mathcal G$ a quasi-coherent $\\mathcal O_X$-module with $N=\\mathcal G(W)$. (a) $\\mathcal G|_W$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2), so the counit $\\varepsilon:\\widetilde N\\to\\mathcal G|_W$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction](3) with $\\varepsilon_W\\circ\\tau_W=\\mathrm{id}_N$ (it corresponds to $\\mathrm{id}_N$ under (1) of that lemma). With [lem-weil-pbc-spec-module-tilde-sections] this gives: for $f\\in A$, every element of $\\mathcal G(D(f))$ is $f^{-k}x|_{D(f)}$ with $x\\in N$, and $x|_{D(f)}=0$ iff $f^mx=0$ for some $m$; i.e. $\\mathcal G(D(f))=N_f$, $x|_{D(f)}\\leftrightarrow x/1$, and $\\mathcal G|_W\\cong\\widetilde N$ compatibly with these identifications. (b) For a quasi-coherent $\\mathcal A$ and any quasi-coherent $\\mathcal G$, the map $\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal A|_W,\\mathcal G|_W)\\to\\operatorname{Hom}_A(\\mathcal A(W),\\mathcal G(W))$, $\\alpha\\mapsto\\alpha_W$, is bijective: composing with the isomorphism $\\varepsilon:\\widetilde{\\mathcal A(W)}\\to\\mathcal A|_W$ and applying the adjunction bijection $\\beta\\mapsto\\beta_W\\circ\\tau_W$ of [lem-weil-pbc-affine-tilde-gamma-adjunction](1) sends $\\alpha$ to $\\alpha_W\\circ\\varepsilon_W\\circ\\tau_W=\\alpha_W$. It is compatible with composition and with restriction along a sub-$\\mathcal O_X$-module $\\mathcal A'\\subseteq\\mathcal A$ ($(\\alpha|_{\\mathcal A'})_W=\\alpha_W|_{\\mathcal A'(W)}$).",
+   "text": "Construct the abelian-group diagram of Hom(P_n,F) with maps phi -> r_nm composed with phi, and its evaluation cocone. Naturality follows from r_nm(1_m)=1_n. Any colimit element has a representative at a stage. Apply eventual vanishing to a representative in the kernel; colimit.w makes its class zero. The additive zero-kernel criterion proves injectivity. The representative lemma is Mathlib Concrete.colimit_exists_rep, using the filtered-colimit preservation instance for the forgetful functor on AddCommGrpCat; no project module-elementwise lemma is used.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-open-spec-points"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, first paragraph: 'Write $\\mathcal F|_W=\\widetilde M$' and 'Restricting the first displayed map of the lemma to $W$ we obtain the first displayed map of Lemma 01PM' (written out)"
-   }
-  },
-  {
-   "text": "*Step 3 (the maps of (1) and their affine form).* For $\\varphi:\\mathcal I^n\\to\\mathcal F$ put $e_n(\\varphi)=\\varphi_U(1)\\in\\mathcal F(U)$ (Step 1). Since $1\\in\\mathcal I^{n+1}(U)\\subseteq\\mathcal I^n(U)$, $e_{n+1}(\\varphi|_{\\mathcal I^{n+1}})=\\varphi_U(1)=e_n(\\varphi)$: the $e_n$ are compatible with the transition maps and induce $e:\\varinjlim_n\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal I^n,\\mathcal F)\\to\\Gamma(U,\\mathcal F)$ [def-weil-pbc-category-colimit] (colimits of abelian groups). The same formula defines, for an affine open $W$ and $\\varphi:\\mathcal I^n|_W\\to\\mathcal F|_W$, the element $e^W_n(\\varphi)=\\varphi_{U\\cap W}(1)\\in\\mathcal F(U\\cap W)$, and $e_n(\\varphi)|_{U\\cap W}=e^W_n(\\varphi|_W)$ ($\\varphi$ commutes with restriction). Let $M=\\mathcal F(W)$ and $\\varphi^W=\\varphi_W:I_W^n\\to M$ (Step 1: $\\mathcal I^n(W)=I_W^n$). Claim: under $\\mathcal F|_W\\cong\\widetilde M$ (Step 2(a)), $e^W_n(\\varphi)=c_n(\\varphi^W)$, the element of [lem-weil-pbc-sections-over-quasi-compact-open-in-affine](1) for $A$, $I_W$, $M$. Indeed, $U\\cap W=\\bigcup_{f\\in I_W}D(f)$ (Step 1), and for $f\\in I_W$, by $\\mathcal O$-linearity and compatibility with restriction, $f^n|_{D(f)}\\cdot\\varphi_{D(f)}(1)=\\varphi_{D(f)}(f^n|_{D(f)})=\\varphi_W(f^n)|_{D(f)}$ in $\\mathcal F(D(f))=M_f$; as $f$ is invertible in $\\mathcal O_X(D(f))=A_f$, $\\varphi_{D(f)}(1)=\\varphi_W(f^n)/f^n=c_n(\\varphi^W)|_{D(f)}$; two sections of the sheaf $\\mathcal F$ agreeing on a cover agree. Finally $\\varphi\\mapsto\\varphi^W$ is a bijection $\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal I^n|_W,\\mathcal F|_W)\\to\\operatorname{Hom}_A(I_W^n,M)$ compatible with the transition maps (Step 2(b), $\\mathcal I^n$ quasi-coherent).",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-sections-over-quasi-compact-open-in-affine",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PM proof, the paragraph 'Next, we work out how to define this arrow in terms of algebra' ('We omit the verification that this description agrees with the one given above', written out) and 01PQ proof, first paragraph"
-   }
-  },
-  {
-   "text": "*Step 4 (part (1): injectivity).* As $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme] and the affine opens cover $X$ [def-pc-scheme], $X=W_1\\cup\\dots\\cup W_m$ with $W_j$ affine. By [lem-weil-pbc-filtered-colimit-modules-elementwise](1),(2) (the index set $n\\ge0$ is directed) an element of the colimit is the class of some $\\varphi:\\mathcal I^n\\to\\mathcal F$, and it is $0$ iff $\\varphi|_{\\mathcal I^N}=0$ for some $N\\ge n$; as $e$ is additive it suffices to show: $e_n(\\varphi)=0$ implies $\\varphi|_{\\mathcal I^N}=0$ for some $N$. If $e_n(\\varphi)=0$, then for each $j$, $c_n(\\varphi^{W_j})=e_n(\\varphi)|_{U\\cap W_j}=0$ (Step 3), so by the injectivity in [lem-weil-pbc-sections-over-quasi-compact-open-in-affine](1) and [lem-weil-pbc-filtered-colimit-modules-elementwise](2) there is $n_j\\ge n$ with $\\varphi^{W_j}|_{I_{W_j}^{n_j}}=0$. Put $N=\\max_jn_j$. Then $(\\varphi|_{\\mathcal I^N})|_{W_j}$ has $W_j$-component $\\varphi^{W_j}|_{I_{W_j}^N}=0$, so it is $0$ by the bijectivity of Step 2(b); by the uniqueness in [lem-weil-pbc-glue-sheaves-of-modules](1), $\\varphi|_{\\mathcal I^N}=0$. This proves (1).",
-   "uses": [
-    "def-weil-pbc-quasi-compact-scheme",
-    "def-pc-scheme",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-sections-over-quasi-compact-open-in-affine",
-    "lem-weil-pbc-glue-sheaves-of-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, first paragraph: 'Since we can cover $X$ by a finite number of affine opens this proves the first displayed map of the lemma is injective'"
-   }
-  },
-  {
-   "text": "*Step 5 (the subsheaves $\\mathcal F_n$ and the quotients).* $\\mathcal F_n$ is the subsheaf of sections annihilated by the quasi-coherent ideal $\\mathcal I^n$ of finite type (Step 1), defined by the same condition as in [lem-weil-pbc-sections-annihilated-by-ideal]; so it is a quasi-coherent sub-$\\mathcal O_X$-module (ibid. (1)) and for affine $W$, $\\mathcal F_n(W)=\\{x\\in M: I_W^nx=0\\}=M_n$ (ibid. (2), Step 1), $M=\\mathcal F(W)$ — this is the omitted 'details' of the source. $\\mathcal F_n\\subseteq\\mathcal F_{n+1}$ because $\\mathcal I^{n+1}(W')\\subseteq\\mathcal I^n(W')$; and for $W\\subseteq U$, taking $a=1\\in\\mathcal I^n(W)$ (Step 1) gives $\\mathcal F_n(W)=0$. Let $\\mathcal Q_n=\\mathcal F/\\mathcal F_n$ with $q_n:\\mathcal F\\to\\mathcal Q_n$; by [lem-weil-pbc-quasi-coherent-module-cokernel-image](2),(3) $\\mathcal Q_n$ is quasi-coherent and for affine $W$, $q_{n,W}$ is the projection $M\\to M/M_n=\\mathcal Q_n(W)$. Restriction to $U$ preserves colimits [lem-weil-pbc-module-restriction-open-immersion-colimits](1), so $q_n|_U$ is a cokernel of $\\mathcal F_n|_U\\to\\mathcal F|_U$, the zero map out of the zero module, hence an isomorphism [def-weil-pbc-category-colimit]. Since $q_{n+1}$ kills $\\mathcal F_n\\subseteq\\mathcal F_{n+1}$, it factors as $q_{n+1}=\\bar q\\circ q_n$ with $\\bar q:\\mathcal Q_n\\to\\mathcal Q_{n+1}$, which over affine $W$ is the projection $\\bar p_n:M/M_n\\to M/M_{n+1}$.",
-   "uses": [
-    "lem-weil-pbc-sections-annihilated-by-ideal",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, second paragraph: 'We have $\\mathcal F_n|_W=\\widetilde{M_n}$ where $M_n\\subset M$ is defined as in Lemma 01PM (details omitted)' (written out)"
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
    }
   },
   {
-   "text": "*Step 6 (the maps of (2) and the affine bijection).* For an open $W\\subseteq X$ and $\\psi:\\mathcal I^n|_W\\to\\mathcal Q_n|_W$ let $\\theta^W_n(\\psi)\\in\\mathcal F(U\\cap W)$ be the unique element with $q_{n,U\\cap W}(\\theta^W_n(\\psi))=\\psi_{U\\cap W}(1)$ (Step 5: $q_n$ is an isomorphism over $U$); $\\theta_n=\\theta^X_n$ is the map of (2), and $\\theta^W_n(\\psi)|_{U\\cap W'}=\\theta^{W'}_n(\\psi|_{W'})$ for $W'\\subseteq W$. Compatibility: $q_{n+1}(\\theta^W_n(\\psi))=\\bar q(\\psi(1))=(\\bar q\\circ\\psi|_{\\mathcal I^{n+1}})(1)$ over $U\\cap W$, so $\\theta^W_{n+1}(\\bar q\\circ\\psi|_{\\mathcal I^{n+1}})=\\theta^W_n(\\psi)$; this gives the induced maps $\\theta^W:\\varinjlim_n\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal I^n|_W,\\mathcal Q_n|_W)\\to\\mathcal F(U\\cap W)$. Now let $W$ be affine, $M=\\mathcal F(W)$ and $\\psi^W=\\psi_W:I_W^n\\to M/M_n$. Claim: $\\theta^W_n(\\psi)=c'_n(\\psi^W)$ of [lem-weil-pbc-sections-over-quasi-compact-open-in-affine](2) under $\\mathcal F|_W\\cong\\widetilde M$. For $f\\in I_W$ and $y\\in M$ with class $\\psi_W(f^n)$: $f^n\\psi_{D(f)}(1)=\\psi_W(f^n)|_{D(f)}=q_{n,D(f)}(y|_{D(f)})$, and $\\psi_{D(f)}(1)=q_{n,D(f)}(\\theta^W_n(\\psi)|_{D(f)})$; as $q_{n,D(f)}$ is injective ($D(f)\\subseteq U$), $f^n\\theta^W_n(\\psi)|_{D(f)}=y|_{D(f)}$, i.e. $\\theta^W_n(\\psi)|_{D(f)}=y/f^n$ in $M_f$ (Step 2(a)); the $D(f)$ cover $U\\cap W$ (Step 1). The map $\\psi\\mapsto\\psi^W$ is a bijection onto $\\operatorname{Hom}_A(I_W^n,M/M_n)$ compatible with the transition maps (Step 2(b) for the quasi-coherent $\\mathcal I^n$, $\\mathcal Q_n$; $\\bar q_W=\\bar p_n$ by Step 5). Hence by [lem-weil-pbc-sections-over-quasi-compact-open-in-affine](2), $\\theta^W$ is bijective for every affine open $W$, which is the bijection the source states for affine $W$.",
+   "text": "Under quasi-separatedness use ideal_power_annihilator_system. Construct q by cokernel.desc from the increasing annihilator inclusions; cokernel.π_desc proves its projection equation and epi cancellation proves its identity and composition laws.",
    "uses": [
-    "lem-weil-pbc-sections-over-quasi-compact-open-in-affine",
+    "lem-weil-pbc-ideal-power-annihilator-system",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, second paragraph: 'The lemma guarantees that we have a bijection $\\colim_n\\Hom_{\\mathcal O_W}(\\mathcal I^n|_W,(\\mathcal F/\\mathcal F_n)|_W)\\to\\Gamma(U\\cap W,\\mathcal F)$ for any such affine open $W$'"
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
    }
   },
   {
-   "text": "*Step 7 (part (2): injectivity).* Assume $X$ quasi-compact and quasi-separated. By [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings] there is a finite covering $X=W_1\\cup\\dots\\cup W_m$ by affine opens with every $W_j\\cap W_{j'}$ quasi-compact. Let $\\psi:\\mathcal I^n\\to\\mathcal Q_n$ with $\\theta_n(\\psi)=0$. Then $\\theta^{W_j}_n(\\psi|_{W_j})=\\theta_n(\\psi)|_{U\\cap W_j}=0$, so by the injectivity of $\\theta^{W_j}$ (Step 6) and [lem-weil-pbc-filtered-colimit-modules-elementwise](2) the image of $\\psi|_{W_j}$ at some level $n_j\\ge n$ (iterated transition maps $\\psi\\mapsto\\bar q\\circ\\psi|_{\\mathcal I^{n+1}}$, which commute with restriction to opens) is $0$. At $N=\\max_jn_j$ the image $\\psi^{(N)}$ of $\\psi$ satisfies $\\psi^{(N)}|_{W_j}=0$ for all $j$, so $\\psi^{(N)}=0$ by [lem-weil-pbc-glue-sheaves-of-modules](1); hence the class of $\\psi$ is $0$ [lem-weil-pbc-filtered-colimit-modules-elementwise](2), and the additive map $\\varinjlim_n\\operatorname{Hom}(\\mathcal I^n,\\mathcal Q_n)\\to\\Gamma(U,\\mathcal F)$ is injective.",
+   "text": "Construct the second Hom diagram with maps phi -> r_nm composed with phi and q_nm. Define its cocone by evaluation followed by the inverse of the bijective quotient projection on U. The projection equation and r_nm(1_m)=1_n prove naturality. Apply the quotient eventual-vanishing criterion to prove trivial kernel on colimit representatives, and apply the quotient lifting criterion to give a preimage class for every section. These prove bijectivity and all required formulas. The representative lemma is Mathlib Concrete.colimit_exists_rep, using the filtered-colimit preservation instance for the forgetful functor on AddCommGrpCat; no project module-elementwise lemma is used.",
    "uses": [
-    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "lem-weil-pbc-ideal-power-quotient-local-lifting",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, third paragraph: 'The injectivity follows immediately from the above and the finiteness of the covering'"
-   }
-  },
-  {
-   "text": "*Step 8 (part (2): surjectivity).* With $W_1,\\dots,W_m$ as in Step 7, each $W_j\\cap W_{j'}$ is a quasi-compact open, covered by the affine opens it contains [def-pc-scheme], hence by finitely many affine opens $W_{jj'k}$, $k=1,\\dots,m_{jj'}$. Let $s\\in\\Gamma(U,\\mathcal F)$. By the surjectivity of $\\theta^{W_j}$ (Step 6) and [lem-weil-pbc-filtered-colimit-modules-elementwise](1) there are $n_j$ and $\\psi_j:\\mathcal I^{n_j}|_{W_j}\\to\\mathcal Q_{n_j}|_{W_j}$ with $\\theta^{W_j}_{n_j}(\\psi_j)=s|_{U\\cap W_j}$. For each $(j,j',k)$, $\\psi_j|_{W_{jj'k}}$ and $\\psi_{j'}|_{W_{jj'k}}$ both map to $s|_{U\\cap W_{jj'k}}$ under $\\theta^{W_{jj'k}}$ (Step 6, compatibility with restriction), so by the injectivity of $\\theta^{W_{jj'k}}$ (Step 6) and [lem-weil-pbc-filtered-colimit-modules-elementwise](2) there is $n_{jj'k}\\ge\\max(n_j,n_{j'})$ at which their images agree. Let $n=\\max\\{n_j,n_{jj'k}\\}$ and $\\psi_j^{(n)}$ the image of $\\psi_j$ at level $n$; transition maps commute with restriction and preserve equality, so $\\psi_j^{(n)}$ and $\\psi_{j'}^{(n)}$ agree on every $W_{jj'k}$, hence on $W_j\\cap W_{j'}$ (uniqueness in [lem-weil-pbc-glue-sheaves-of-modules](1) for the cover $(W_{jj'k})_k$), and they glue to $\\psi:\\mathcal I^n\\to\\mathcal Q_n$ with $\\psi|_{W_j}=\\psi_j^{(n)}$ (ibid. (1)). Then $\\theta_n(\\psi)|_{U\\cap W_j}=\\theta^{W_j}_n(\\psi_j^{(n)})=\\theta^{W_j}_{n_j}(\\psi_j)=s|_{U\\cap W_j}$ (Step 6) for all $j$, and since the $U\\cap W_j$ cover $U$ and $\\mathcal F$ is a sheaf, $\\theta_n(\\psi)=s$. With Step 7 the map of (2) is bijective.",
-   "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-glue-sheaves-of-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties 01PQ proof, third paragraph: 'If $X$ is quasi-separated, then for each pair $j,j'$ we choose a finite affine open covering ... the $\\varphi_j$ glue as maps $\\mathcal I^n\\to\\mathcal F/\\mathcal F_n$ over $X$. This proves surjectivity of the map.'"
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "def-pc-scheme",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-ideal-power-complement",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-sections-over-quasi-compact-open-in-affine",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "lem-weil-pbc-sections-annihilated-by-ideal",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+  "lem-weil-pbc-ideal-power-annihilator-system",
+  "lem-weil-pbc-ideal-power-quotient-local-lifting"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PQ (lemma-sections-over-quasi-compact-open, line 4146) and its proof (lines 4174-4219), reducing to Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine, line 3941) on affine opens; the omitted details (F_n|_W = (M_n)~, the agreement of the sheaf map with the algebraic description of 01PM, the identification of Hom over an affine open) are written out in Steps 2, 3, 5 and 6"
+  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM. U1 Lean reduction: explicit diagrams, evaluation cocones, eventual vanishing and lifting; original affine sigma-injectivity statement is not used."
  },
  "mathlib_searches": [
   {
@@ -241,5 +169,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6b817",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T040802-L-3953370",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against unchanged existing signature, all five DAG records, source proofs, report, clean compilation and axiom audit."
  }
 }

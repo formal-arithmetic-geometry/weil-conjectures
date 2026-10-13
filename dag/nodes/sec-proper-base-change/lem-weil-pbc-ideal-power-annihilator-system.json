@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-ideal-power-annihilator-system",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'It is injective by Properties, Lemma 01PQ' and 'Hence by Properties, Lemma 01PQ we deduce that the top horizontal arrow ... is a bijection' (first part of the proof of 01YB); decomposition of 01PQ: Increasing ideal-power annihilator subsheaves and their quotient on a unit open",
+   "via": [
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Increasing ideal-power annihilator subsheaves and their quotient on a unit open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\iota:\\mathcal I\\hookrightarrow\\mathcal O_X$ a monomorphism of modules [def-weil-sheaf-of-modules-category], with $\\mathcal I$ quasi-coherent and of finite type [pqf-def-coherent]. Put $P_n=\\mathcal I^n$ with inclusion $j_n:P_n\\hookrightarrow\\mathcal O_X$ and $P_0=\\mathcal O_X$, using the recursive ideal powers of [lem-weil-pbc-ideal-module-product-stalk]. Let $\\mathcal F$ be quasi-coherent and $U$ an open such that every $j_n(W)$ is bijective for $W\\subseteq U$. For an $\\mathcal O_X$-module $\\mathcal F$ and any open $W$, say a section $s\\in\\mathcal F(W)$ is annihilated by $P_n$ if for every open $W\\prime\\subseteq W$ and every $b\\in P_n(W\\prime)$, the product $j_n(b)s|_{W\\prime}$ is zero. There exist modules $A_n$ and monomorphisms $a_n:A_n\\to\\mathcal F$, with $A_n$ quasi-coherent and image on each open exactly the sections annihilated by $P_n$. For $n\\le m$ there is $t:A_n\\to A_m$ with $a_m t=a_n$. For every $W\\subseteq U$, $A_n(W)=0$. The cokernel projection $\\pi_n:\\mathcal F\\to\\operatorname{coker}(a_n)$ [def-weil-pbc-category-colimit] restricts to an isomorphism on $U$ and induces a bijection on sections on every $W\\subseteq U$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-category-colimit",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual annihilator subsheaf by testing all ideal sections on every smaller open. Restrictions, addition and scalar multiplication preserve the condition; gluing follows by sheaf uniqueness for each local product. Affine-local finite generation and clearing denominators show this is quasi-coherent, as in 01PO.",
+   "uses": [
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "The power inclusions make the annihilator subsheaves increasing. On any W contained in U, lift 1 through j_n(W); the annihilation test on W gives s=0. Thus the restriction of A_n to U is zero.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "Restriction preserves cokernels. The projection is therefore an isomorphism on U, since it is the cokernel of a map out of the zero sheaf. Evaluating its restriction on each smaller open proves sectionwise bijectivity.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sections-annihilated-by-ideal",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of quasi coherent modules over complement of ideal powers quotient annihilator",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: Internal Server Error; no absence verdict from this service.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent annihilator subsheaf of finite type ideal powers quotient isomorphism on complement",
+   "date": "2026-10-13",
+   "results": "Module.support_quotient, localCohomology.isoSelfLERadical, Scheme.IdealSheafData.subschemeObjIso and ideal support results. None is the required sheaf-power evaluation or annihilator system statement.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|stalkFunctor_map_bijective",
+   "date": "2026-10-13",
+   "results": "Annihilator algebra and spreading-out results; direct rg of Topology/Sheaves/Stalks.lean gives app_bijective_of_stalkFunctor_map_bijective (lines 645-650), used in the proved complement lemma. No eventual-zero or quotient-lifting statement.",
+   "verdict": "Only lower-level ingredients; complement is proved from stalk lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerAnnihilatorSystem.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_power_annihilator_system",
+  "statement": "theorem ideal_power_annihilator_system {X : Scheme.{u}} {I : X.Modules} (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) (hbij : ∀ (n : ℕ) (W : X.Opens), W ≤ U → Function.Bijective ((idealSheafPower ι n).2.app W)) : ∃ (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F), (∀ n : ℕ, Mono (a n)) ∧ (∀ n : ℕ, (A n).IsQuasicoherent) ∧ (∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)), s ∈ Set.range ((a n).app W) ↔ ∀ (W' : X.Opens) (h : W' ≤ W) (b : Γ((idealSheafPower ι n).1, W')), (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom (F.presheaf.map (homOfLE h).op s) = 0) ∧ (∀ (n m : ℕ), n ≤ m → ∃ t : A n ⟶ A m, t ≫ a m = a n) ∧ (∀ (n : ℕ) (W : X.Opens), W ≤ U → Subsingleton Γ(A n, W)) ∧ (∀ n : ℕ, IsIso ((SheafOfModules.overFunctor X.ringCatSheaf U).map (cokernel.π (a n)))) ∧ (∀ (n : ℕ) (W : X.Opens), W ≤ U → Function.Bijective ((cokernel.π (a n)).app W))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6b817",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T040802-L-3953370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6b817",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T040802-L-3953370",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean against unchanged existing signature, all five DAG records, source proofs, report, clean compilation and axiom audit."
+ }
+}
