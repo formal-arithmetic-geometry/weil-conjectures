@@ -33,54 +33,48 @@
  ],
  "proof": [
   {
-   "text": "First suppose that $N$ is $I$-power torsion. The canonical map $c_N:N\\to N\\otimes_RS$, $n\\mapsto n\\otimes1$, is bijective by [lem-weil-pbc-torsion-module-flat-base-change-iso]. It is $R$-linear and natural in $N$. The scalar-extension adjunction [lem-weil-pbc-scalar-extension-hom] gives $\\operatorname{Hom}_S(K\\otimes_RS,N\\otimes_RS)\\cong\\operatorname{Hom}_R(K,N\\otimes_RS)$, sending an $S$-map $v$ to $k\\mapsto v(k\\otimes1)$. Composition with $c_N$ gives $\\operatorname{Hom}_R(K,N)\\cong\\operatorname{Hom}_R(K,N\\otimes_RS)$. Under these bijections, $u\\in\\operatorname{Hom}_R(K,N)$ goes to the unique $S$-map with value $c_N(u(k))=u(k)\\otimes1$ on $k\\otimes1$, namely $u\\otimes_RS$. Thus the asserted Hom map is bijective when the target is torsion.",
-   "uses": [
-    "lem-weil-pbc-torsion-module-flat-base-change-iso",
-    "lem-weil-pbc-scalar-extension-hom",
-    "def-weil-module-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), case N is I-power torsion; Algebra, Lemma 05DQ (lemma-adjoint-tensor-restrict)"
-   }
-  },
-  {
-   "text": "For arbitrary $N$ put $T=N[I^\\infty]=\\{n\\in N:I^mn=0\\text{ for some }m\\ge1\\}$, with inclusion $j:T\\hookrightarrow N$. Since $I$ is finitely generated, [lem-weil-pbc-torsion-submodule-flat-base-change-iso] says that $T\\to(N\\otimes_RS)[(IS)^\\infty]$, $n\\mapsto j(n)\\otimes1$, is bijective. The module $T$ is $I$-power torsion, so $c_T:T\\to T\\otimes_RS$ is bijective by [lem-weil-pbc-torsion-module-flat-base-change-iso]. The composite $(j\\otimes_RS)\\circ c_T$ equals the preceding map; therefore $j\\otimes_RS:T\\otimes_RS\\to N\\otimes_RS$ is injective and its image is exactly $(N\\otimes_RS)[(IS)^\\infty]$. Moreover $K\\otimes_RS$ is $(IS)$-power torsion: by the same torsion-module comparison every element is $k\\otimes1$ for some $k\\in K$, annihilated by $I^m$ for some $m$, hence by $(IS)^m$ as an $S$-module.",
+   "text": "Let c:N -> S tensor_R N be n -> 1 tensor n and t:N[I^infinity] -> (S tensor_R N)[I^infinity] its restriction. The torsion-submodule comparison [lem-weil-pbc-torsion-submodule-flat-base-change-iso] makes t bijective, hence an R-linear equivalence e. Every k in K belongs to K[I^infinity] by the torsion hypothesis, including exponent zero (then k=0). Every R-linear map carries ideal-power torsion elements to ideal-power torsion elements.",
    "uses": [
     "lem-weil-pbc-torsion-submodule-flat-base-change-iso",
-    "lem-weil-pbc-torsion-module-flat-base-change-iso",
     "def-weil-module-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), reduction through part (1) to N[I^infinity]"
+    "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), torsion-source case, using part (1) directly on the restriction k -> g(1 tensor k)"
    }
   },
   {
-   "text": "Every $R$-linear map $u:K\\to N$ has image in $T$: if $I^mk=0$, then $I^mu(k)=0$. Thus composition with $j$ gives a bijection $\\operatorname{Hom}_R(K,T)\\to\\operatorname{Hom}_R(K,N)$, with inverse by corestriction. Every $S$-linear map $v:K\\otimes_RS\\to N\\otimes_RS$ likewise has image in $(N\\otimes_RS)[(IS)^\\infty]$ because its source is torsion by step 2. As $j\\otimes_RS$ is injective with precisely this image (step 2), composition with it gives a bijection $\\operatorname{Hom}_S(K\\otimes_RS,T\\otimes_RS)\\to\\operatorname{Hom}_S(K\\otimes_RS,N\\otimes_RS)$. The square formed by these two bijections and the scalar-extension Hom maps commutes: $(j\\circ u)\\otimes_RS=(j\\otimes_RS)\\circ(u\\otimes_RS)$ on pure tensors. The top Hom map is bijective by step 1 with the torsion target $T$; hence the bottom map in the statement is bijective. Every comparison and factorization is natural in $K$ and $N$, since the torsion-submodule assignment and scalar extension commute with module maps.",
+   "text": "Injectivity: if f and h have equal scalar extensions, evaluation at 1 tensor k gives c(f(k))=c(h(k)) for every k. Both f(k) and h(k) lie in N[I^infinity], by linearity and torsion of k. Injectivity of t implies f(k)=h(k); extensionality gives f=h. In Lean this uses Ideal.primaryComponent_map_mem, subtype extensionality, and LinearMap.baseChange_tmul.",
    "uses": [
-    "def-weil-module-base-change",
-    "lem-weil-pbc-torsion-submodule-flat-base-change-iso"
+    "def-weil-module-base-change"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), case M is I-power torsion and final reduction"
+    "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), torsion-source case, using part (1) directly on the restriction k -> g(1 tensor k)"
+   }
+  },
+  {
+   "text": "Surjectivity: given an S-linear g:S tensor_R K -> S tensor_R N, restrict it along k -> 1 tensor k to an R-linear d. Its image is in (S tensor_R N)[I^infinity], since k is torsion and d is R-linear. Corestrict d to this submodule and compose with e inverse and the inclusion N[I^infinity] -> N, obtaining an R-linear f:K -> N. The inverse-equivalence law gives c(f(k))=d(k)=g(1 tensor k). On every pure tensor s tensor k, the scalar extension of f equals s times c(f(k)), hence s times g(1 tensor k)=g(s tensor k). Tensor-product extensionality proves f.baseChange S=g. Thus the original scalar-extension map is bijective. Naturality remains LinearMap.baseChange_comp. This directly uses part (1) on the restricted map and does not require the separately stated torsion-module comparison or an invocation of the scalar-extension adjunction.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), torsion-source case, using part (1) directly on the restriction k -> g(1 tensor k)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-torsion-module-flat-base-change-iso",
-  "lem-weil-pbc-scalar-extension-hom",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-torsion-submodule-flat-base-change-iso"
+  "lem-weil-pbc-torsion-submodule-flat-base-change-iso",
+  "def-weil-module-base-change"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2)"
+  "place": "More on Algebra, Lemma 05EC (lemma-neighbourhood-equivalence), proof of part (2), torsion-source case, using part (1) directly on the restriction k -> g(1 tensor k)",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -159,5 +153,15 @@
   "group": "N1",
   "result": "fix",
   "note": "flat RingHom.Flat on algebraMap; FG I; R/I->S/IS via Ideal.quotientMap bijective (as landed sibling CyclicExtensionFlatDescent); elementwise I^n-torsion K; bijectivity of LinearMap.baseChange S; dropped tautological naturality conjunct (= LinearMap.baseChange_comp)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T072409-L-1126086",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

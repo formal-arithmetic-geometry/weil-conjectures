@@ -9,7 +9,6 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
-import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
 
 /-!
 # Hom comparison for a torsion source along a flat neighbourhood
@@ -60,6 +59,42 @@ theorem baseChange_bijective_of_ideal_power_torsion
     (_hK : ∀ k : K, ∃ n : ℕ, ∀ r ∈ I ^ n, r • k = 0) :
     Function.Bijective (LinearMap.baseChange S : (K →ₗ[R] N) →
       (S ⊗[R] K →ₗ[S] S ⊗[R] N)) := by
-  sorry
+  classical
+  let c : N →ₗ[R] S ⊗[R] N := TensorProduct.mk R S N 1
+  let t := Ideal.primaryComponent.map I c
+  have ht : Function.Bijective t :=
+    Ideal.primaryComponent_baseChange_bijective I _hI _hflat _hquot N
+  have hmem (k : K) : k ∈ Ideal.primaryComponent K I := by
+    obtain ⟨n, hn⟩ := _hK k
+    exact (Ideal.primaryComponent_mem K I k).2
+      ⟨n, (Submodule.mem_torsionBySet_iff _ _).2 (fun r ↦ hn r r.property)⟩
+  constructor
+  · intro f g hfg
+    ext k
+    have hf := Ideal.primaryComponent_map_mem I f ⟨k, hmem k⟩
+    have hg := Ideal.primaryComponent_map_mem I g ⟨k, hmem k⟩
+    have heq : t ⟨f k, hf⟩ = t ⟨g k, hg⟩ := by
+      apply Subtype.ext
+      exact congrArg (fun l : S ⊗[R] K →ₗ[S] S ⊗[R] N ↦ l (1 ⊗ₜ[R] k)) hfg
+    exact congrArg Subtype.val (ht.1 heq)
+  · intro g
+    let d : K →ₗ[R] S ⊗[R] N :=
+      (g.restrictScalars R).comp (TensorProduct.mk R S K 1)
+    let d' : K →ₗ[R] Ideal.primaryComponent (S ⊗[R] N) I :=
+      d.codRestrict _ (fun k ↦ Ideal.primaryComponent_map_mem I d ⟨k, hmem k⟩)
+    let e := LinearEquiv.ofBijective t ht
+    let f : K →ₗ[R] N :=
+      (Ideal.primaryComponent N I).subtype.comp (e.symm.toLinearMap.comp d')
+    have hf (k : K) : c (f k) = d k := by
+      exact congrArg Subtype.val (e.apply_symm_apply (d' k))
+    refine ⟨f, ?_⟩
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro s k
+    calc
+      f.baseChange S (s ⊗ₜ[R] k) = s • c (f k) := by
+        simp [c, TensorProduct.smul_tmul']
+      _ = s • d k := congrArg (fun z ↦ s • z) (hf k)
+      _ = g (s ⊗ₜ[R] k) := by
+        simp [d, ← g.map_smul, TensorProduct.smul_tmul']
 
 end LinearMap
