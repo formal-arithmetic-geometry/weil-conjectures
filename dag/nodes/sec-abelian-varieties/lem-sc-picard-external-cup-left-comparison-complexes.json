@@ -1,0 +1,167 @@
+{
+ "id": "lem-sc-picard-external-cup-left-comparison-complexes",
+ "kind": "statement",
+ "title": "Short exact comparison complexes for external cup in the left coefficient",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ morphisms of quasi-compact schemes [def-pc-scheme] with affine diagonals. Let $S=(F\\to E\\to Q)$ be a short exact sequence [def-weil-pbc-exact-sequence] of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], and $G$ a quasi-coherent $\\mathcal O_Y$-module. For $M\\in\\{F,E,Q\\}$ let $T_M=\\operatorname{picardExternalTotal}(f,g,M,G)$ and $P_M=\\operatorname{picardScalarModel}(f\\circ\\operatorname{pr}_1,\\operatorname{pr}_1^*M\\otimes\\operatorname{pr}_2^*G)$ as in [lem-sc-picard-external-cup-cochain] and [lem-sc-picard-kunneth-resolution-model]. There exist normalized cochain maps $d_M:T_M\\to P_M$ (the normalization predicate of [lem-sc-picard-external-cup-cochain]), short exact sequences $A,B$ of integer cochain complexes of $k$-vector spaces, and a short-complex morphism $\\phi:A\\to B$. The terms of $A_2,A_3,B_2,B_3$ in negative degrees are zero. For every natural $n$ there are isomorphisms $a_j:H^n(A_j)\\cong H^n(T_{M_j})$ and $b_j:H^n(B_j)\\cong H^n(P_{M_j})$, where $(M_1,M_2,M_3)=(F,E,Q)$, satisfying $H^n(\\phi_j)\\,;\\,b_j=a_j\\,;\\,H^n(d_{M_j})$ for $j=1,2,3$. No specified comparison cochain maps, five-term rows, connecting morphisms, or invertibility hypotheses are inputs or conclusions.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth: short exact coefficient diagram following equation-kunneth-on-cech (33.29.1.1); source read at https://stacks.math.columbia.edu/tag/0BED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "pqf-def-coherent",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine covers U of X and V of Y. Finite intersections are affine by the affine-diagonal criterion. On these intersections quasi-coherent section sequences are short exact: kernels are sectionwise and the affine cokernel formula identifies quotient sections with the module cokernel. The product affine spectrum and pullback/tensor section formulas identify product-coefficient sections with factor section tensors. Field tensor is exact. Finite products over cover indices and finite sums in each total degree preserve exactness. Form the tensor-total Cech sequence A and the product Cech sequence B and extend both by zero to integers. Their negative terms are zero. Pullbacks of quasi-coherent modules are quasi-coherent. To pass from standard pullback to tensorPullback, use uniqueness of left adjoints to pushforward with exists_tensorPullbackAdjunction. Tensor-product quasi-coherence then makes each external product coefficient quasi-coherent, as needed by the affine comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exists_unique_cechRefinementMap for the two inverse-image-cover refinements to W. It is k-linear: its sectionwise adjunction unit and restrictions commute with multiplication by the scalar section from k. Use the explicit bilinear cechCupCochain and cechCupCochain_leibniz to obtain the map out of the signed tensor total complex. On each tuple, module morphisms commute with restriction and the tensor section map sends a tensor to the tensor of its images. Naturality of the pullback-adjunction unit proves the refinement coefficient square. These pointwise equalities give commutation with S.f and S.g, so the three components form a short-complex morphism phi:A to B. This constructs the cochain morphism, not a connecting square or five-term homology ladder.",
+   "uses": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "def-sc-cech-refinement-cochain-map",
+    "def-sc-cech-cup-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each natural degree and each coefficient, compose the canonical affine Cech comparison with the scalar-resolution-model comparison to obtain b_j. Scalar restriction preserves homology. Apply tensor Kunneth to the Cech and scalar factor models and the factor comparisons to obtain a_j. The refinement and cup comparison squares identify the transported homology component with externalCup on total cycles coming from pairs of factor cycles.",
+   "uses": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
+    "lem-sc-picard-cech-cup-pullback-compat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the three normalized scalar-model cochain maps d_j using picardExternalCupCochain_exists. For any pair of factor homology classes, lift them to cycles using the surjectivity of homology projections. Tensor Kunneth gives a total cycle and identifies its class with that elementary tensor. The normalization of d_j and the comparison squares give the same externalCup value. Pure tensors span each tensor summand and direct-sum inclusions span the direct sum, so linearity proves H(phi.tau_j) followed by b_j equals a_j followed by H(d_j). All comparisons exist in every natural degree; no invertibility of these maps or connecting-map statement is asserted.",
+   "uses": [
+    "lem-sc-picard-external-cup-cochain",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-cup-product",
+  "def-sc-cech-refinement-cochain-map",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "C4: Tag 0BED cochain short-exact diagram and its normalization transport; the long exact sequence is deliberately excluded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Short exact comparison complexes for external cup products of quasi coherent sheaves over a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of short exact Cech complexes realizing the external cup product for a short exact sequence of quasi coherent coefficients",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+   "date": "2026-10-13",
+   "verdict": "no matching comparison-complex construction"
+  },
+  {
+   "tool": "grep",
+   "query": "externalCup|IsPicardExternalCupCochain|cech.*shortExact",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no matching comparison-complex construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED short exact coefficient diagram following equation-kunneth-on-cech, used in the quasi-coherent Kunneth argument beneath theorem-of-cube. Only the cochain construction and model comparisons are isolated here.",
+   "via": [
+    "lem-sc-picard-external-cup-left-homology-ladder",
+    "lem-sc-picard-external-cup-shift-left",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupLeftComparisonComplexes.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_comparison_complexes",
+  "statement": "theorem picardExternalCup_left_comparison_complexes\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y]\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (S : ShortComplex X.Modules) (hS : S.ShortExact)\n    [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]\n    (G : Y.Modules) [G.IsQuasicoherent]\n :\n    ∃ (d1 : picardExternalTotal f g S.X₁ G ⟶\n        picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g S.X₁ G))\n      (d2 : picardExternalTotal f g S.X₂ G ⟶\n        picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g S.X₂ G))\n      (d3 : picardExternalTotal f g S.X₃ G ⟶\n        picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g S.X₃ G)),\n      IsPicardExternalCupCochain f g S.X₁ G d1 ∧\n      IsPicardExternalCupCochain f g S.X₂ G d2 ∧\n      IsPicardExternalCupCochain f g S.X₃ G d3 ∧\n      ∃ (A B : ShortComplex (CochainComplex (ModuleCat.{w} k) ℤ))\n        (hA : A.ShortExact) (hB : B.ShortExact) (φ : A ⟶ B),\n        (∀ p : ℤ, p < 0 →\n          IsZero (A.X₂.X p) ∧ IsZero (A.X₃.X p) ∧\n          IsZero (B.X₂.X p) ∧ IsZero (B.X₃.X p)) ∧\n        ∀ n : ℕ,\n          ∃ (a1 : A.X₁.homology (n : ℤ) ≅ (picardExternalTotal f g S.X₁ G).homology\n              (n : ℤ))\n            (a2 : A.X₂.homology (n : ℤ) ≅ (picardExternalTotal f g S.X₂ G).homology\n              (n : ℤ))\n            (a3 : A.X₃.homology (n : ℤ) ≅ (picardExternalTotal f g S.X₃ G).homology\n              (n : ℤ))\n            (b1 : B.X₁.homology (n : ℤ) ≅\n              (picardScalarModel (pullback.fst f g ≫ f)\n                (externalCupCoefficients f g S.X₁ G)).homology (n : ℤ))\n            (b2 : B.X₂.homology (n : ℤ) ≅\n              (picardScalarModel (pullback.fst f g ≫ f)\n                (externalCupCoefficients f g S.X₂ G)).homology (n : ℤ))\n            (b3 : B.X₃.homology (n : ℤ) ≅\n              (picardScalarModel (pullback.fst f g ≫ f)\n                (externalCupCoefficients f g S.X₃ G)).homology (n : ℤ)),\n            HomologicalComplex.homologyMap φ.τ₁ (n : ℤ) ≫ b1.hom =\n              a1.hom ≫ HomologicalComplex.homologyMap d1 (n : ℤ) ∧\n            HomologicalComplex.homologyMap φ.τ₂ (n : ℤ) ≫ b2.hom =\n              a2.hom ≫ HomologicalComplex.homologyMap d2 (n : ℤ) ∧\n            HomologicalComplex.homologyMap φ.τ₃ (n : ℤ) ≫ b3.hom =\n              a3.hom ≫ HomologicalComplex.homologyMap d3 (n : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T082335-L-1632272",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T082335-L-1632272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

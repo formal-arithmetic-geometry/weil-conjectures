@@ -17,68 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Choose finite affine covers of X and Y and the product cover. Affine diagonals give affine finite intersections. For the specified short exact coefficient sequence S, the affine cokernel and image formulas identify the sequences of sections on every intersection as short exact. Sections preserve kernels, and the cokernel projection is surjective on an affine open. The affine spectrum pullback, module pullback and tensor section formulas identify product-coefficient sections with factor section tensors. Over k every vector space is free and hence flat, so field tensor preserves these short exact sequences; the degreewise finite sums in totalization do as well.",
+   "text": "Apply lem-sc-picard-external-cup-left-comparison-complexes to the coefficient sequence S and G. Obtain normalized maps d1,d2,d3, short exact sequences A and B of complexes, their short-complex morphism psi, vanishing negative middle and quotient terms, and scalar-model comparison isomorphisms in every natural degree. No five-term ladder is assumed.",
    "uses": [
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+    "lem-sc-picard-external-cup-left-comparison-complexes"
    ],
    "elementary": false
   },
   {
-   "text": "The signed Cech refinement and cup formulas are natural in the left coefficient. Thus their three components for S form a morphism of the two short exact sequences of complexes just obtained. Apply the homology long exact sequence and its naturality, including the connecting-morphism square. This produces a commutative ladder of exact rows in k-modules. Scalar restriction is exact, since it leaves underlying additive groups and maps unchanged.",
+   "text": "Prove normalized_homology_eq: the homology maps of any two normalized external-cup cochain maps agree in natural degree n. Apply tensor_kunneth_nat to the two scalar models, using picardScalarModel_negative for nonnegative support. Precompose both maps with its linear equivalence. On each direct-sum summand, pure tensors span; lift the two factor homology elements to cycles via the surjective homology projections. The cycle formula provides z, and both normalizations give exactly the same externalCup expression. Injectivity of picardScalarModelEquiv implies equality on z. DirectSum.linearMap_ext and tensor extensionality prove equality of maps. Replace the maps d1,d2,d3 in the three comparison squares by the specified c,cE,cQ.",
    "uses": [
-    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
+    "lem-sc-picard-kunneth-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the six-term homology sequences of A and B at integer degrees i=n-1 and j=n. Their first term is H^i of the first coefficient; delete this term using ComposableArrows.delta-zero. Mathlib composableArrows5_exact gives exactness of both resulting five-term rows. Map them with delta-zero applied to mapComposableArrows5; its connecting square is delta_naturality. The middle objects are H^n(A.X1) and H^n(B.X1). Use the comparison isomorphisms and normalized_homology_eq to obtain the required central equality.",
+   "uses": [
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-long-exact-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "Compare affine Cech homology with module cohomology using the canonical affine comparison and its coefficient naturality, then with the fixed scalar resolution models. Tensor Kunneth identifies total homology with the direct sum of factor homology tensors. Lift each factor homology class to a cycle using the surjective homology projection. The tensor Kunneth cycle formula and the normalization of c, cE and cQ show that each specified homology map agrees with the transported Cech comparison on elementary tensors, hence on the whole source by linearity. These identifications give the central isomorphisms e1,e2 and the equality phi_2 followed by e2 = e1 followed by H(c). They identify the outer vertical maps with the corresponding homology maps of cE and cQ, up to isomorphisms.",
-   "uses": [
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-cech-comparison-natural",
-    "lem-sc-picard-cech-cup-pullback-compat",
-    "lem-sc-picard-kunneth-resolution-model",
-    "lem-sc-qcoh-cech-total-tensor-nat-iso",
-    "lem-sc-picard-external-cup-cochain"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For n>0 take the five-term segment E in degree n-1, Q in degree n-1, F in degree n, E in degree n, Q in degree n. For n=0 use two initial zero objects followed by F,E,Q in degree zero. Nonnegative support of the Cech complexes gives initial monicity and hence exactness of this padded row. Package both rows as ComposableArrows of length four and their vertical maps as phi. In the positive-degree segment, positions 0 and 3 are conjugates of H(cE), and positions 1 and 4 are conjugates of H(cQ). In the initial segment positions 0 and 1 are zero-object identities. Composition with isomorphisms preserves invertibility. Therefore the two outer-invertibility implications hold, without asserting invertibility of phi_2 or H(c). The zero-coefficient and empty-scheme cases use the same zero-object rows.",
+   "text": "For each natural r the comparison-square equality u followed by b equals a followed by H(cE), or H(cQ), transfers invertibility of H(cE) or H(cQ) to u by isIso_comp_right_iff. This proves invertibility of the current-degree outside arrows. When n is a successor, the preceding degree n-1 is natural, and the same proof gives the other two arrows. When n=0 the preceding degree is -1: homology is zero because the complex term is zero. IsZero.isIso proves any arrow between the two zero homology objects invertible. Combine the two separate outer-invertibility implications with the exact rows and central equality. No five lemma or central invertibility is used.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-cech-comparison-map-iso-affine",
-  "lem-sc-cech-comparison-map-naturality",
-  "lem-sc-cech-comparison-natural",
-  "lem-sc-picard-affine-diagonal-intersections",
-  "lem-sc-picard-cech-cup-pullback-compat",
-  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-external-cup-left-comparison-complexes",
   "lem-sc-picard-kunneth-resolution-model",
   "lem-sc-qcoh-cech-total-tensor-nat-iso",
   "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "E2: Tag 0BED short exact coefficient diagram, with explicit normalization and scalar-model transport; the five lemma is deliberately left to the parent Lean proof."
+  "place": "C4: Tag 0BED short-exact cochain diagram, isolated in the comparison-complex construction; explicit normalization uniqueness, Mathlib long-exact homology naturality, and outer-invertibility transfer in the delivered Lean proof."
  },
  "mathlib_searches": [
   {
@@ -160,9 +137,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T065059-L-896881",
-  "kind": "interface"
+  "landing": "20261013T082335-L-1632272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
