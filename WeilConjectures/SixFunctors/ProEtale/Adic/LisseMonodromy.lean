@@ -243,6 +243,46 @@ lemma IsEquivalenceAt.isIso_of_bijective {t : Spec (.of Ω) ⟶ Y} (hM : M.IsEqu
       hf', CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
     exact e.apply_symm_apply x
 
+/-- The identification of stalks along an equality of geometric points. -/
+lemma mono_eqToIso_hom_app {y z : Spec (.of Ω) ⟶ Y} (h : y = z) (G : LisseSheaf l Y) :
+    (M.mono (eqToIso (congrArg fiber h))).hom.app G =
+      (Sheaf.Γ _ _).map ((upperStarCongr _ h).hom.app G.obj.X) := by
+  subst h
+  simp [M.mono_refl, upperStarCongr]
+  rfl
+
+/-- Transport along the inverse path is the inverse transport. -/
+lemma mono_symm {y z : Spec (.of Ω) ⟶ Y} (τ : fiber y ≅ fiber z) :
+    M.mono τ.symm = (M.mono τ).symm := by
+  have h := M.mono_trans τ τ.symm
+  rw [Iso.self_symm_id, M.mono_refl] at h
+  ext1
+  exact (Iso.inv_ext (congrArg Iso.hom h).symm).symm
+
+/-- **Transport of a Frobenius-type operator along a path.** Let `s` be a geometric point with
+`s ≫ f = a ≫ s` for an endomorphism `f` of `Y` and an automorphism `a` of `Spec Ω`, and
+`ψ : f^* G ⟶ G`. The operator `G_s ≅ G_{a ≫ s} = G_{s ≫ f} = (f^* G)_s ⟶ G_s` is carried by the
+transport along a path `π : F_s ≅ F_t` to the transport along the loop
+`F_t ≅ F_s ≅ F_{a ≫ s} = F_{s ≫ f} ≅ F_{t ≫ f}` followed by `G_{t ≫ f} = (f^* G)_t ⟶ G_t`. -/
+theorem reparam_comp_upperStar_comp_mono (f : Y ⟶ Y) (a : Spec (.of Ω) ≅ Spec (.of Ω))
+    {s t : Spec (.of Ω) ⟶ Y} (hs : s ≫ f = a.hom ≫ s) (π : fiber s ≅ fiber t) (G : LisseSheaf l Y)
+    (ψ : G.upperStar l f ⟶ G) :
+    (M.mono (fiberReparamIso a s)).inv.app G ≫
+        (M.mono (eqToIso (congrArg fiber hs.symm))).hom.app G ≫
+        (upperStarStalkIso l f s G.obj.X).hom ≫ (lisseStalk l s).map ψ ≫ (M.mono π).hom.app G =
+      (M.mono π).hom.app G ≫
+        (M.mono (π.symm ≪≫ (fiberReparamIso a s).symm ≪≫ eqToIso (congrArg fiber hs.symm) ≪≫
+          pullbackPathIso f π)).hom.app G ≫
+        (upperStarStalkIso l f t G.obj.X).hom ≫ (lisseStalk l t).map ψ := by
+  have e₁ := M.mono_upperStar f π G
+  have e₂ : (M.mono π).hom.app _ ≫ (lisseStalk l t).map ψ =
+      (lisseStalk l s).map ψ ≫ (M.mono π).hom.app _ :=
+    ((M.mono π).hom.naturality _).symm
+  rw [M.mono_trans, M.mono_trans, M.mono_trans, M.mono_symm, M.mono_symm]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+    Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% e₁, e₂]
+
 end LisseMonodromy
 
 /-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
