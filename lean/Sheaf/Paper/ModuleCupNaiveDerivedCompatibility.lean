@@ -5,10 +5,12 @@ Authors: SHEAF group P3
 -/
 module
 
-public import Sheaf.Paper.ModuleCupResolutionData
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import Sheaf.Paper.ModuleCupKInjectiveTarget
 
 /-! # Naive/derived cup diagram for arbitrary module complexes
 
@@ -34,21 +36,28 @@ noncomputable section
 variable (X : Scheme.{u})
   [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
+local instance : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+  inferInstanceAs (CommRing Γ(X, ⊤))
+
 local instance : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-  SheafOfModules.monoidalCategory X.sheaf
+  SheafOfModules.monoidalCategory X.toRingedSpace.sheaf
 local instance : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-  SheafOfModules.symmetricCategory X.sheaf
+  SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
 
 local instance : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   hasColimitsOfSizeShrink.{0, 0, u} _
 
 local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-  Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
-  Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 local instance : Abelian.HasFunctorialFlatResolution
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   schemeModule_hasFunctorialFlatResolution X
+
+local instance mainCupSourceLax :
+    (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal :=
+  moduleCup_sourceLax X
 
 /-- The canonical comparison from termwise global sections to derived global sections.
 It is the unit of the right derived functor, transported from homotopy categories
@@ -60,13 +69,41 @@ def moduleCup_globalComparison
         (ComplexShape.up ℤ)).obj K) ⟶
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj
       (DerivedCategory.Q.obj K) :=
-  let S := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  (DerivedCategory.quotientCompQhIso
-    (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))).inv.app _ ≫
-    S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
-    S.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).hom.app K)
+  (moduleCup_comparisonNatTrans X).app K
 
+private theorem comparison_app
+    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
+    (moduleCup_comparisonNatTrans X).app K = moduleCup_globalComparison X K := by
+  rfl
+
+private theorem comparison_naturality
+    {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}
+    (f : K ⟶ L) :
+    DerivedCategory.Q.map
+        (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+          (ComplexShape.up ℤ)).map f) ≫ moduleCup_globalComparison X L =
+      moduleCup_globalComparison X K ≫
+        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map
+          (DerivedCategory.Q.map f) :=
+  (moduleCup_comparisonNatTrans X).naturality f
+
+attribute [local irreducible] Functor.rightDerivedFunctor
+  moduleCup_naiveMap moduleCup_naiveMapComponent
+  moduleCup_globalComparison moduleCup_comparisonNatTrans
+
+private theorem cancel_comparison
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B I : C} {W U V : D}
+    (a : W ⟶ F.obj A) (c : A ⟶ B) (q : B ⟶ I)
+    (b : W ⟶ U) (g : U ⟶ V) (βB : U ⟶ F.obj B) (βI : V ⟶ F.obj I)
+    [Mono (F.map q)]
+    (hc : a ≫ F.map (c ≫ q) = b ≫ g ≫ βI)
+    (hn : g ≫ βI = βB ≫ F.map q) : a ≫ F.map c = b ≫ βB := by
+  apply (cancel_mono (F.map q)).mp
+  simpa only [Functor.map_comp, Category.assoc, hn] using hc
+
+set_option maxHeartbeats 1000000 in
+-- Comparing the derived tensor instances and transported units needs this larger budget.
 /-- The six-object global specialization of the naive/derived cup diagram.
 Source: Stacks Project, Section 20.31, Lemma 20.31.3 and the following global
 specialization to (X,O_X) → (pt,Γ(X,O_X)).
@@ -108,7 +145,34 @@ theorem moduleCup_naive_derived_compatibility :
               μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫
               R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L) =
             Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫
-              DerivedCategory.Q.map ν ≫ moduleCup_globalComparison X (K ⊗ L) := by sorry
+              DerivedCategory.Q.map ν ≫ moduleCup_globalComparison X (K ⊗ L) := by
+  set_option backward.isDefEq.respectTransparency true in
+    let S := RingedSpace.globalSectionsFunctor X.toRingedSpace
+    let T := S.mapHomologicalComplex (ComplexShape.up ℤ)
+    let R := S.rightDerivedFunctor
+    obtain ⟨μ, hμ, hI⟩ := moduleCup_exists_kinjective_target_pairing X
+    refine ⟨μ, hμ, ?_⟩
+    intro K L
+    refine ⟨moduleCup_naiveMap X K L, moduleCup_naiveMap_summand X K L, ?_⟩
+    obtain ⟨I, hki, q, _, hq⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective (K ⊗ L)
+    let := hki
+    let := hq
+    have : IsIso (R.map (DerivedCategory.Q.map q)) := inferInstance
+    have hc := hI K L I q
+    rw [comparison_app X K, comparison_app X L, comparison_app X I] at hc
+    dsimp only [Functor.comp_obj] at hc
+    have hn := comparison_naturality X q
+    simpa only [Category.assoc] using
+      cancel_comparison R
+        ((moduleCup_globalComparison X K ⊗ₘ moduleCup_globalComparison X L) ≫
+          μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L))
+        (Functor.LaxMonoidal.μ DerivedCategory.Q K L) (DerivedCategory.Q.map q)
+        (Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫
+          DerivedCategory.Q.map (moduleCup_naiveMap X K L))
+        (DerivedCategory.Q.map (T.map q))
+        (moduleCup_globalComparison X (K ⊗ L)) (moduleCup_globalComparison X I)
+        (by
+          simpa only [DerivedCategory.Q.map_comp, Category.assoc] using hc) hn
 
 end
 end AlgebraicGeometry.Scheme.Modules

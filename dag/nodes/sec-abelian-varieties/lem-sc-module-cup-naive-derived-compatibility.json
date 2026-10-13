@@ -76,24 +76,30 @@
  ],
  "proof": [
   {
-   "text": "Construct the natural derived global cup by the derived pullback/direct-image adjunction for (X,O_X) → (pt,Γ(X,O_X)), using the tensor of counits. Build the naive cochain map on each tensor summand using tmulSection and the corresponding inclusion; signed Leibniz proves it is a cochain map. The canonical comparison arrows are right-derived units and the lax monoidal Q tensor maps, with quotientCompQhIso specifying their transport. Take adjoints of both outer composites in the six-object diagram. Naturality of derived-to-ordinary pullback and tensor comparisons reduces the equality to the ordinary adjunction formula for the naive cup. This is the polygon proof in Stacks Lemma 20.31.3 and its stated global specialization; no diagram equality is a hypothesis.",
+   "text": "Construct the naive cochain map by the degreewise tensor coproduct maps and lem-sc-module-cup-naive-map-chain. Its pure-tensor summand formula follows by applying Mathlib ι_mapBifunctorDesc to the section tensor maps.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-sc-ringed-space-module-cohomology"
+    "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the natural derived family and its calculation with every K-injective target from lem-sc-module-cup-kinjective-target. Choose a K-injective resolution q:K tensor L→I using prop-pur-kinjective-resolutions-exist. Apply that calculation to q. The comparison unit is a natural transformation, so Q(Tq) followed by β_I equals β_(K tensor L) followed by R(Qq). Functoriality and associativity therefore identify the calculated equality with the required equality postcomposed by R(Qq). The latter is an isomorphism since q is a quasi-isomorphism, so cancellation proves the required diagram.",
+   "uses": [
+    "lem-sc-module-cup-kinjective-target",
+    "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-sc-ringed-space-module-cohomology"
+  "lem-sc-module-cup-naive-map-chain",
+  "lem-sc-module-cup-kinjective-target",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
-  "by": "P3 stage-3 repair",
-  "document": "https://stacks.math.columbia.edu/tag/0FKU",
-  "place": "Cohomology of Sheaves, Section 20.31, Lemma 20.31.3 (naive/derived tensor compatibility), specialized to the morphism (X,O_X) → (pt,Γ(X,O_X))"
+  "by": "G4 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FP3",
+  "place": "global specialization, reduced to a concrete naive map and the K-injective-target calculation; naturality and resolution cancellation written in Lean"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -108,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-02feb",
-  "group": "P3",
+  "reviewer": "X-db1a8",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T100051-L-2475276",
+  "landing": "20261013T153500-L-1085119",
   "kind": "interface",
-  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+  "note": "independent Codex review: Delivered six-module set matches its DAG statements and report; all delivered modules and direct importer ModuleCupEqualDerivedMapsClass compile cleanly, with permitted sorryAx only through named open theorems."
  }
 }
