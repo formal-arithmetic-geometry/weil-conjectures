@@ -32,109 +32,35 @@
  ],
  "proof": [
   {
-   "text": "*A model of $K$.* By [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] $K/k$ has a finite transcendence basis $x_1,\\dots,x_d$. By [lem-weil-pbc-finitely-generated-field-complete-intersection-model] (Stacks 07BV and its proof, as the source's proof says) there are $n\\ge c\\ge0$ with $n-c=d$, a regular sequence $f_1,\\dots,f_c$ in $P=k[X_1,\\dots,X_n]$ and an injective $k$-algebra map $\\iota:A=P/I\\to K$, $I=(f_1,\\dots,f_c)$, such that $A$ is a domain and $\\iota$ induces a $k$-algebra isomorphism $S^{-1}A\\cong K$, $S=A\\setminus\\{0\\}$. We identify $K=S^{-1}A$ by it from now on. (The source computes $\\operatorname{trdeg}_kK=\\dim A=n-c$ via Algebra 00P0 and the dimension condition of a global complete intersection; the equality $n-c=d$ with $d$ the size of a transcendence basis is given directly by the construction of 07BV, $n=d+1+r$, $c=r+1$, so the dimension of $A$ is not needed: see step 7.)",
+   "text": "From finite field generation, use [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] to choose a finite transcendence basis, reindex it by Fin d, and enumerate a finite generating set by Fin m. Apply [lem-weil-pbc-finitely-generated-field-complete-intersection-model] to obtain n, c, f, c ≤ n, n - c = d, f.length = c, a domain A = k[X_1,...,X_n]/(f), and a k-algebra equivalence Frac(A) ≃ K.",
    "uses": [
     "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
     "lem-weil-pbc-finitely-generated-field-complete-intersection-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma 07E1, lines 8580-8584 (via Algebra Lemma 07BV, algebra.tex lines 44534-44559)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The naive cotangent complex of the presentation $\\alpha:P\\to A$.* Let $\\alpha:P\\to A$ be the quotient map, a presentation of $A$ over $k$ with kernel $I$, and $\\mathrm{NL}(\\alpha):I/I^2\\xrightarrow{\\mathrm d_\\alpha}A\\otimes_P\\Omega_{P/k}$, $g\\bmod I^2\\mapsto1\\otimes\\mathrm dg$, its naive cotangent complex [lem-weil-pbc-nl-presentation-h1-functoriality]. Since $f_1,\\dots,f_c$ is a regular sequence in $P$, $I/I^2$ is a free $A$-module with basis $\\bar f_1,\\dots,\\bar f_c$ [lem-weil-pbc-regular-sequence-conormal-free] (with $R=P$, $J=I$). $\\Omega_{P/k}$ is free on $\\mathrm dX_1,\\dots,\\mathrm dX_n$ with $\\mathrm dg=\\sum_i(\\partial g/\\partial X_i)\\mathrm dX_i$ [lem-weil-pbc-polynomial-ring-kahler-basis], so $A\\otimes_P\\Omega_{P/k}$ is free over $A$ on $1\\otimes\\mathrm dX_i$ [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] and $\\mathrm d_\\alpha(\\bar f_j)=\\sum_{i=1}^n\\alpha(\\partial f_j/\\partial X_i)\\,(1\\otimes\\mathrm dX_i)$. Hence $\\mathrm{NL}(\\alpha)$ is isomorphic to the complex $\\delta:A^{\\oplus c}\\to A^{\\oplus n}$ given by the matrix $\\bigl(\\alpha(\\partial f_j/\\partial X_i)\\bigr)_{i,j}$; in particular $H_1(\\mathrm{NL}(\\alpha))=\\ker\\mathrm d_\\alpha\\cong\\ker\\delta$ and $\\operatorname{coker}\\mathrm d_\\alpha\\cong\\operatorname{coker}\\delta$.",
+   "text": "Apply [lem-weil-pbc-complete-intersection-fraction-field-cotangent-model] to f and the fraction-field equivalence. It gives a K-linear map δ : K^c → K^n and K-linear equivalences H_1(L_{K/k}) ≃ ker δ and Ω_{K/k} ≃ coker δ. Submodules and quotients of finite-dimensional coordinate spaces are finite dimensional, so transport finiteness across these equivalences.",
    "uses": [
-    "lem-weil-pbc-nl-presentation-h1-functoriality",
-    "lem-weil-pbc-regular-sequence-conormal-free",
-    "lem-weil-pbc-polynomial-ring-kahler-basis",
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+    "lem-weil-pbc-complete-intersection-fraction-field-cotangent-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma 07E1, lines 8584-8590 (the displayed complex; I/I^2 free on the f_j by Algebra Lemma 00LN since the f_j form a regular sequence)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$H_0$: the cokernel is $\\Omega_{A/k}$.* Applying [lem-weil-pbc-jacobi-zariski-differential-maps] to $k\\to P$ and the ideal $\\mathfrak a=I$ (so $C=P/I=A$) gives the exact sequence $I/I^2\\xrightarrow{\\mathrm d_\\alpha}A\\otimes_P\\Omega_{P/k}\\to\\Omega_{A/k}\\to0$, $1\\otimes\\mathrm dg\\mapsto\\mathrm d\\alpha(g)$. So $\\Omega_{A/k}\\cong\\operatorname{coker}\\mathrm d_\\alpha\\cong\\operatorname{coker}\\delta$ as $A$-modules (step 2).",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma 07E1 (H_0 of NL is Omega, Algebra Section 00S0)"
-   }
-  },
-  {
-   "text": "*$H_1$: independence of the presentation.* Let $\\gamma:k[A]\\to A$, $[a]\\mapsto a$, be the canonical presentation, with kernel $I_A$. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $A\\otimes_{k[A]}\\Omega_{k[A]/k}$ is free on the $1\\otimes\\mathrm d[a]$ and $1\\otimes\\mathrm dg\\mapsto\\sum_a\\gamma(\\partial g/\\partial[a])\\mathrm d[a]$ identifies $\\mathrm{NL}(\\gamma)$ of [lem-weil-pbc-nl-presentation-h1-functoriality] with $\\mathrm{NL}_{A/k}$ of [def-weil-pbc-smooth-ring-map], so $H_1(\\mathrm{NL}(\\gamma))=H_1(L_{A/k})$. Let $\\varphi:P\\to k[A]$ be the $k$-algebra map with $X_i\\mapsto[\\alpha(X_i)]$ and $\\psi:k[A]\\to P$ the one with $[a]\\mapsto p_a$ for chosen $p_a\\in P$ with $\\alpha(p_a)=a$ (universal property of polynomial rings). Then $\\gamma\\circ\\varphi=\\alpha$ and $\\alpha\\circ\\psi=\\gamma$ (check on the variables), so $\\varphi$ and $\\psi$ are morphisms of presentations over the identity square of $k\\to A$, and so are $\\psi\\circ\\varphi$, $\\mathrm{id}_P$ (from $\\alpha$ to $\\alpha$) and $\\varphi\\circ\\psi$, $\\mathrm{id}_{k[A]}$ (from $\\gamma$ to $\\gamma$). By clauses (1) and (2) of [lem-weil-pbc-nl-presentation-h1-functoriality], $\\psi_*\\varphi_*=(\\psi\\varphi)_*=(\\mathrm{id}_P)_*=\\mathrm{id}$ and likewise $\\varphi_*\\psi_*=\\mathrm{id}$. So $\\varphi_*:H_1(\\mathrm{NL}(\\alpha))\\to H_1(L_{A/k})$ is an isomorphism of $A$-modules, and $H_1(L_{A/k})\\cong\\ker\\delta$ (step 2).",
-   "uses": [
-    "lem-weil-pbc-nl-presentation-h1-functoriality",
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00S1 (lemma-NL-homotopy, line 35274), (1), (2) and the final assertion (comparison with the canonical presentation), cited in the proof of More on Algebra 07E1 line 8590"
-   }
-  },
-  {
-   "text": "*Localization to $K$.* By [lem-weil-pbc-h1-cotangent-localization] (with $R=k$, $T=S$, $B=S^{-1}A=K$) $H_1(L_{K/k})\\cong S^{-1}H_1(L_{A/k})$, and by [lem-weil-pbc-kahler-differentials-localization] $\\Omega_{K/k}\\cong S^{-1}\\Omega_{A/k}$, both as $K$-modules. Localization at $S$ [def-weil-pbc-module-localization] is exact [lem-weil-pbc-localization-module-exact]: applied to the exact sequences $0\\to\\ker\\delta\\to A^{\\oplus c}\\xrightarrow{\\delta}A^{\\oplus n}$ and $A^{\\oplus c}\\xrightarrow{\\delta}A^{\\oplus n}\\to\\operatorname{coker}\\delta\\to0$ it gives $S^{-1}(\\ker\\delta)=\\ker(S^{-1}\\delta)$ and $S^{-1}(\\operatorname{coker}\\delta)=\\operatorname{coker}(S^{-1}\\delta)$. Since $S^{-1}(A^{\\oplus m})=K^{\\oplus m}$ and $S^{-1}\\delta=\\delta_K:K^{\\oplus c}\\to K^{\\oplus n}$ is the $K$-linear map with matrix $\\bigl(\\iota\\alpha(\\partial f_j/\\partial X_i)\\bigr)$, steps 3 and 4 give $K$-linear isomorphisms $H_1(L_{K/k})\\cong\\ker\\delta_K$ and $\\Omega_{K/k}\\cong\\operatorname{coker}\\delta_K$. (This is the source's statement that $\\mathrm{NL}_{K/k}$ is homotopy equivalent to $\\bigoplus_{j=1}^cK\\to\\bigoplus_{i=1}^nK\\,\\mathrm dx_i$, on homology, which is all that is used.)",
-   "uses": [
-    "lem-weil-pbc-h1-cotangent-localization",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-localization-module-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma 07E1, lines 8584-8592 (via Algebra Lemma 00S7, lemma-localize-NL, line 35692)"
-   }
-  },
-  {
-   "text": "*Counting dimensions.* $\\ker\\delta_K\\subseteq K^{\\oplus c}$ and $\\operatorname{coker}\\delta_K=K^{\\oplus n}/\\operatorname{Im}\\delta_K$ are finite dimensional, so by step 5 $\\Omega_{K/k}$ and $H_1(L_{K/k})$ are finite dimensional $K$-vector spaces. By rank–nullity [lem-weil-pbc-idempotent-charpoly-rank-nullity] for $\\delta_K$, $\\dim_K\\ker\\delta_K=c-\\dim_K\\operatorname{Im}\\delta_K$, and for the projection $K^{\\oplus n}\\to\\operatorname{coker}\\delta_K$ (surjective, kernel $\\operatorname{Im}\\delta_K$), $\\dim_K\\operatorname{coker}\\delta_K=n-\\dim_K\\operatorname{Im}\\delta_K$ (dimensions as in [def-weil-vector-space-dimension]). Subtracting, $\\dim_K\\Omega_{K/k}-\\dim_KH_1(L_{K/k})=n-c=d$ (step 1).",
+   "text": "Rank-nullity [lem-weil-pbc-idempotent-charpoly-rank-nullity] gives dim(range δ) + dim(ker δ) = c; the quotient dimension formula gives dim(coker δ) + dim(range δ) = n. With c ≤ n and n-c=d, cancellation in the natural numbers gives d + dim H_1 = dim Ω. The cardinality of the chosen transcendence basis equals trdeg [def-kun-transcendence-degree]. Cast the natural-number equality to Cardinal, obtaining the untruncated formula. A finite extension is algebraic and has transcendence degree zero; substitute zero and use injectivity of natural-number casts to obtain the final equality.",
    "uses": [
     "lem-weil-pbc-idempotent-charpoly-rank-nullity",
-    "def-weil-vector-space-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma 07E1, lines 8592-8597 ('which is n - c and we win')"
-   }
-  },
-  {
-   "text": "*Conclusion.* $d$ is the number of elements of a transcendence basis of $K/k$, so $d=\\operatorname{trdeg}_k(K)$, the transcendence degree being the cardinality of any transcendence basis [def-kun-transcendence-degree]; with step 6 this is the Cartier equality. If $K/k$ is finite, every $b\\in K$ is algebraic over $k$ ($1,b,\\dots,b^{N}$ are linearly dependent over $k$ for $N=[K:k]$), so the empty family is a transcendence basis [def-weil-pbc-transcendence-basis] (it is algebraically independent, and $K$ is algebraic over $k(\\emptyset)=k$), $\\operatorname{trdeg}_kK=0$ and $\\dim_K\\Omega_{K/k}=\\dim_KH_1(L_{K/k})<\\infty$.",
-   "uses": [
+    "def-weil-vector-space-dimension",
     "def-kun-transcendence-degree",
     "def-weil-pbc-transcendence-basis"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07E1 (lemma-cartier-equality, line 8573), proof lines 8580-8597"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
   "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
-  "lem-weil-pbc-regular-sequence-conormal-free",
-  "lem-weil-pbc-polynomial-ring-kahler-basis",
-  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "def-weil-pbc-smooth-ring-map",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-h1-cotangent-localization",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-complete-intersection-fraction-field-cotangent-model",
   "lem-weil-pbc-idempotent-charpoly-rank-nullity",
   "def-weil-vector-space-dimension",
   "def-kun-transcendence-degree",
@@ -143,7 +69,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 07E1 (lemma-cartier-equality), proof lines 8580-8597, with Algebra Lemmas 07BV (proof, lines 44534-44559), 00S1 (line 35274), 00S7 (line 35692) in algebra.tex; the count trdeg = n - c is read off the construction of 07BV instead of Algebra Lemma 00P0"
+  "place": "Tag 07E1, proof: the complete-intersection model and displayed two-term complex, followed by rank-nullity; V3 isolates the homology comparison as a separate statement."
  },
  "mathlib_searches": [
   {
@@ -234,7 +160,7 @@
   "module": "Sheaf.Paper.CartierEquality",
   "declaration": "cartier_equality",
   "file": "lean/Sheaf/Paper/CartierEquality.lean",
-  "statement": "theorem cartier_equality (k K : Type*) [Field k] [Field K] [Algebra k K] [Algebra.FiniteType k K] : Module.Finite K (KaehlerDifferential k K) ∧ Module.Finite K (Algebra.H1Cotangent k K) ∧ Algebra.trdeg k K + Module.finrank K (Algebra.H1Cotangent k K) = Module.finrank K (KaehlerDifferential k K) ∧ (FiniteDimensional k K → Module.finrank K (KaehlerDifferential k K) = Module.finrank K (Algebra.H1Cotangent k K))",
+  "statement": "theorem cartier_equality\n    (k K : Type*) [Field k] [Field K] [Algebra k K]\n    (hfg : (⊤ : IntermediateField k K).FG) :\n    Module.Finite K (KaehlerDifferential k K) ∧\n      Module.Finite K (Algebra.H1Cotangent k K) ∧\n      Algebra.trdeg k K + Module.finrank K (Algebra.H1Cotangent k K) =\n        Module.finrank K (KaehlerDifferential k K) ∧\n      (FiniteDimensional k K →\n        Module.finrank K (KaehlerDifferential k K) =\n          Module.finrank K (Algebra.H1Cotangent k K))",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
@@ -248,5 +174,15 @@
   "group": "F1",
   "result": "fix",
   "note": "k K fields, Algebra k K, FiniteType = f.g. extension; Module.Finite of KaehlerDifferential and H1Cotangent (Generators.self = canonical k[K]->K) = finite dim; trdeg + finrank H1 = finrank Omega in Cardinal (fixed: was toNat/truncated ℕ subtraction, weaker); FiniteDimensional k K -> finrank Omega = finrank H1"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2308a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040804-L-3953930",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered signatures match both nodes; the declared field-generation correction matches Stacks 07E1. Both modules and the direct importer compile cleanly; axioms and remaining holes meet stage-3 rules."
  }
 }

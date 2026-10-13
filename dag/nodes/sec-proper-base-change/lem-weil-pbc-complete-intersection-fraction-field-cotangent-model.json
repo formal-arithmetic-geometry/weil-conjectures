@@ -1,0 +1,182 @@
+{
+ "id": "lem-weil-pbc-complete-intersection-fraction-field-cotangent-model",
+ "kind": "statement",
+ "title": "Cotangent homology of a complete-intersection fraction field",
+ "statement": "Let $k,K$ be fields with a $k$-algebra structure on $K$, $n\\ge0$, $P=k[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], and $f=(f_1,\\ldots,f_c)$ a regular sequence in $P$ [def-weil-pbc-regular-sequence]. Put $I=(f)$ and $A=P/I$, and assume $A$ is a domain. Given a $k$-algebra isomorphism $e:\\operatorname{Frac}(A)\\cong K$, there exists a $K$-linear map $\\delta:K^c\\to K^n$ with $K$-linear isomorphisms $H_1(L_{K/k})\\cong\\ker\\delta$ and $\\Omega_{K/k}\\cong K^n/\\operatorname{im}\\delta$. The cotangent objects are those of [def-weil-pbc-smooth-ring-map] and [def-weil-pbc-kahler-differentials]; the fraction field is localization at all nonzero elements [def-weil-pbc-module-localization].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, proof of Tag 07E1 (lemma-cartier-equality), the displayed two-term complex and the reference to Algebra Tags 00S1 and 00S7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Write $c=\\operatorname{length}(f)$ and $\\alpha:P\\twoheadrightarrow A$ for the quotient. The classes of $f_1,\\ldots,f_c$ give an $A$-basis of $I/I^2$ by [lem-weil-pbc-regular-sequence-conormal-free]. The polynomial differentials $dX_i$ give a $P$-basis of $\\Omega_{P/k}$ and hence a base-changed $A$-basis of $A\\otimes_P\\Omega_{P/k}$ by [lem-weil-pbc-polynomial-ring-kahler-basis]. In these bases the conormal differential $g\\bmod I^2\\mapsto1\\otimes dg$ is an $A$-linear map $\\delta_A:A^c\\to A^n$ with entries $\\alpha(\\partial f_j/\\partial X_i)$. The kernel and cokernel of the differential are therefore isomorphic to those of $\\delta_A$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 07E1, lines 8584-8590 (the displayed complex; I/I^2 free on the f_j by Algebra Lemma 00LN since the f_j form a regular sequence)"
+   }
+  },
+  {
+   "text": "The exact conormal sequence [lem-weil-pbc-jacobi-zariski-differential-maps] is $I/I^2\\to A\\otimes_P\\Omega_{P/k}\\to\\Omega_{A/k}\\to0$. Its middle map is the same conormal differential, so $\\Omega_{A/k}\\cong\\operatorname{coker}\\delta_A$.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 07E1 (H_0 of NL is Omega, Algebra Section 00S0)"
+   }
+  },
+  {
+   "text": "For the first homology, use [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] to identify the complex of the canonical presentation $k[A]\\to A$ with the canonical naive cotangent complex. Lift each polynomial generator of $P$ to its image variable in $k[A]$, and lift every $a\\in A$ to a representative in $P$. These define morphisms of presentations in both directions, over the identity of $k\\to A$. By presentation functoriality [lem-weil-pbc-nl-presentation-h1-functoriality], any two such morphisms induce the same map on $H_1$, and the maps of identity and composition are identity and composition. The two induced maps on $H_1$ are thus inverse. It follows that $H_1(L_{A/k})\\cong\\ker\\delta_A$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-nl-presentation-h1-functoriality",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00S1 (lemma-NL-homotopy, line 35274), (1), (2) and the final assertion (comparison with the canonical presentation), cited in the proof of More on Algebra 07E1 line 8590"
+   }
+  },
+  {
+   "text": "Let $S=A\\setminus\\{0\\}$ and $F=S^{-1}A$. Exactness of localization [lem-weil-pbc-localization-module-exact] applied to the kernel and cokernel sequences of $\\delta_A$ identifies the localized kernel and cokernel with those of $\\delta_F:F^c\\to F^n$. The comparison theorems [lem-weil-pbc-h1-cotangent-localization] and [lem-weil-pbc-kahler-differentials-localization] identify these with $H_1(L_{F/k})$ and $\\Omega_{F/k}$. Transport scalars along the given $k$-algebra isomorphism $e:F\\cong K$. The resulting coordinate map $\\delta:K^c\\to K^n$ and the transported kernel and cokernel isomorphisms are $K$-linear and give the claim. No dimension calculation or transcendence basis is used.",
+   "uses": [
+    "lem-weil-pbc-h1-cotangent-localization",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 07E1, lines 8584-8592 (via Algebra Lemma 00S7, lemma-localize-NL, line 35692)"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E1, proof of the displayed complex, using Algebra Tags 00LN, 00S1, 00S7. Steps specialize the original Cartier node steps 2–5 to any specified complete-intersection fraction-field model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cotangent complex of fraction field of polynomial quotient by a regular sequence kernel cokernel finite free modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.tensorKerEquiv",
+   "results": "LinearMap.tensorKerEquiv, LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm, LinearMap.tensorKerEquiv_apply",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorH1CotangentOfIsLocalization|regularSequence_conormal_free",
+   "results": "Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CartierEquality",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Cartier equality subargument, proof steps 2–5: the displayed finite two-term cotangent complex after localization.",
+   "via": [
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent",
+  "file": "lean/Sheaf/RingTheory/FractionFieldCompleteIntersectionCotangent.lean",
+  "declaration": "Algebra.exists_fractionField_completeIntersection_cotangent_model",
+  "statement": "theorem exists_fractionField_completeIntersection_cotangent_model\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (n : ℕ) (f : List (MvPolynomial (Fin n) k))\n    (hreg : RingTheory.Sequence.IsRegular (MvPolynomial (Fin n) k) f)\n    [IsDomain (MvPolynomial (Fin n) k ⧸ Ideal.ofList f)]\n    (e : FractionRing (MvPolynomial (Fin n) k ⧸ Ideal.ofList f) ≃ₐ[k] K) :\n    ∃ δ : (Fin f.length → K) →ₗ[K] (Fin n → K),\n      Nonempty (H1Cotangent k K ≃ₗ[K] LinearMap.ker δ) ∧\n      Nonempty (KaehlerDifferential k K ≃ₗ[K] ((Fin n → K) ⧸ LinearMap.range δ))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-h1-cotangent-localization",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2308a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040804-L-3953930",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2308a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040804-L-3953930",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered signatures match both nodes; the declared field-generation correction matches Stacks 07E1. Both modules and the direct importer compile cleanly; axioms and remaining holes meet stage-3 rules."
+ }
+}
