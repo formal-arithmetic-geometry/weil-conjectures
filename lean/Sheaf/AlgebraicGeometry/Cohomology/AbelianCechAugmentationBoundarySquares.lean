@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
 public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionIso
 import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions
-import Mathlib.Algebra.Homology.HomologySequence
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechHorseshoeTotalBoundary
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionBoundary
 
 /-! # Boundary squares before taking the augmentation quotient
 
@@ -88,6 +89,33 @@ theorem abelianCechAugmentation_boundary_squares
       Sheaf.functorHδ hT q ≫ e₁.hom ≫
           HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) =
         e₃.hom ≫ HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ :=
-  by sorry
+  by
+    classical
+    obtain ⟨I₂, α, β, hα, hβ, hαβ, hrows⟩ :=
+      InjectiveResolution.exists_horseshoe_prescribed_resolutions T hT I₁ I₃
+    let F := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+      (CategoryTheory.evaluation _ _).obj (op (⊤ : X.Opens))
+    let S := (ShortComplex.mk α β hαβ).map (F.mapHomologicalComplex (.up ℕ))
+    have hS : S.ShortExact := by
+      apply HomologicalComplex.shortExact_of_degreewise_shortExact
+      intro n
+      have : Injective (((ShortComplex.mk α β hαβ).map
+          (HomologicalComplex.eval _ (.up ℕ) n)).X₁) := I₁.injective n
+      exact ((hrows n).1.splittingOfInjective.map F).shortExact
+    obtain ⟨δ, hbeta, halpha⟩ := abelianCechHorseshoe_total_boundary
+      T hT I₁ I₂ I₃ α β hαβ hα hβ (fun n ↦ (hrows n).1) hS U hg q
+    have he := abelianCechExtSection_boundary T hT I₁ I₂ I₃ α β hαβ hα hβ
+      (fun n ↦ (hrows n).1) hS q e₁ e₃ he₁ he₃
+    refine ⟨δ, hbeta, ?_⟩
+    calc
+      Sheaf.functorHδ hT q ≫ e₁.hom ≫
+          HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) =
+        (Sheaf.functorHδ hT q ≫ e₁.hom) ≫
+          HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) :=
+            (Category.assoc _ _ _).symm
+      _ = (e₃.hom ≫ hS.δ q (q + 1) rfl) ≫
+          HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) := by rw [he]
+      _ = e₃.hom ≫ HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ := by
+        rw [Category.assoc, halpha]
 
 end AlgebraicGeometry.Scheme.Modules

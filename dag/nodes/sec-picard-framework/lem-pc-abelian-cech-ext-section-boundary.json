@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-abelian-cech-ext-section-boundary",
+ "kind": "statement",
+ "title": "The Ext boundary is the prescribed horseshoe section boundary",
+ "statement": "Let $X$ be a scheme, $T=(F_1\\to F_2\\to F_3)$ a short exact sequence of abelian sheaves, and $I_j$ injective resolutions of $F_j$. Let $\\alpha:I_1\\to I_2$, $\\beta:I_2\\to I_3$ commute with the augmentations, satisfy $\\alpha\\beta=0$, and give short exact rows in every degree. Let $S$ be the global section sequence and assume it is short exact. Fix $q\\in\\mathbb N$ and isomorphisms $e_1:H^{q+1}(X,F_1)\\simeq H^{q+1}(\\Gamma(X,I_1))$, $e_3:H^q(X,F_3)\\simeq H^q(\\Gamma(X,I_3))$ satisfying the cocycle representative property of [lem-pc-abelian-cech-ext-section-iso]: every Ext class t has a cocycle a from the constant lifted integral sheaf and a section cycle z, with extMk(a)=t, adjunction evaluated on 1 equal to iCycles(z), and e(t)=homologyπ(z). Then $\\delta_{\\mathrm{Ext}}e_1=e_3\\delta_S$, where the left boundary is Sheaf.functorHδ and the right boundary is the homology connecting map of S. The section complexes are [def-pc-abelian-cech-comparison-construction]. No opens, covering, Cech complex or total complex occurs in this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0117",
+  "place": "Tag 0117, snake boundary formula; Tag 01EQ, resolution sections; Tags 05TE and 06XR, injective-resolution and Ext boundary identification"
+ },
+ "stmt_deps": [
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-pc-abelian-cech-ext-section-iso",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof": [
+  {
+   "text": "For a last Ext class choose the cocycle c and section cycle z3 from the representative hypothesis. Split the row in degree q, lift c to b and factor db through the monic first-row inclusion as a in degree q+1. The next differential of a is zero by the cochain-map equation and d squared equals zero. The resolution boundary formula identifies the Ext boundary of extMk(c) with extMk(a). Its standard-universe version is transported to the sheaf Ext universe by the canonical change-of-universe equivalence; this equivalence carries cocycle classes and their Yoneda products to the same classes and products.",
+   "uses": [
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-sheaf adjunction is natural in every row map and differential. Evaluating it at 1 carries the lift b and differential factor a to a lift and factor for the section boundary. The homology connecting formula therefore sends homologyπ(z3) to the section homology class y of a, with the same sign.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction",
+    "lem-weil-pbc-complex-ses-connecting-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the representative hypothesis for e1 to e1 inverse(y). Its representative has section class y by the inverse equation. Section-homology injectivity identifies its Ext class with extMk(a). Applying e1 then gives e1(extMk(a))=y. Substitute this and the e3 representative equation, and use extensionality of additive maps. This argument also applies in degree zero.",
+   "uses": [
+    "lem-pc-ext-section-injective",
+    "lem-pc-abelian-cech-ext-section-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-ext-resolution-derived-connecting",
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-weil-pbc-complex-ses-connecting-formula",
+  "lem-pc-ext-section-injective",
+  "lem-pc-abelian-cech-ext-section-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0117",
+  "place": "Tag 0117, snake boundary formula; Tag 01EQ, resolution sections; Tags 05TE and 06XR, injective-resolution and Ext boundary identification; explicit Lean specialization and cocycle details by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality connecting homomorphism homology short exact cochain complexes",
+   "results": "{\"t\": \"2026-10-13T03:41:21Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality connecting homomorphism homology short exact cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HomologySequence.δ_naturality_assoc\", \"HomologicalComplex.HomologySequence.δ_naturality\", \"DerivedCategory.HomologySequence.comp_δ_assoc\", \"CochainComplex.mappingCone.homologySequenceδ_triangleh\", \"DerivedCategory.HomologySequence.δ_comp_assoc\", \"CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc\", \"CochainComplex.homologySequenceδ_quotient_mapTriangle_obj\", \"CategoryTheory.ShortComplex.ShortExact.δ_eq'\"], \"digest\": \"e64d9b3b5396afc5\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.δ",
+   "results": "{\"t\": \"2026-10-13T03:41:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.ShortExact.δ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.δ\", \"CategoryTheory.ShortComplex.ShortExact.epi_δ\", \"CategoryTheory.ShortComplex.ShortExact.mono_δ\", \"CategoryTheory.ShortComplex.ShortExact.isIso_δ\", \"CategoryTheory.ShortComplex.ShortExact.homology_exact₁\", \"CategoryTheory.ShortComplex.ShortExact.homology_exact₃\", \"CategoryTheory.ShortComplex.ShortExact.comp_δ\", \"CategoryTheory.ShortComplex.ShortExact.δ_comp\"], \"digest\": \"96969ac7715fffae\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "δ_naturality|extMk.*δ|connecting",
+   "results": "{\"t\": \"2026-10-13T04:01:24Z\", \"tool\": \"grep\", \"query\": \"δ_naturality|extMk.*δ|connecting\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean\"], \"digest\": \"24fb014661185cad\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext boundary from injective resolution by lifting cocycle and differentiating",
+   "results": "{\"t\": \"2026-10-13T04:01:25Z\", \"tool\": \"leansearch\", \"query\": \"Ext boundary from injective resolution by lifting cocycle and differentiating\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total complex functor preserves degreewise split short exact sequences of first quadrant double complexes",
+   "results": "{\"t\": \"2026-10-13T04:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"Total complex functor preserves degreewise split short exact sequences of first quadrant double complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTrifunctor₁₂Obj\", \"HomologicalComplex.HasGoodTrifunctor₂₃Obj\", \"CochainComplex.instHasMapBifunctorObjIntShiftFunctor_1\", \"CochainComplex.instHasMapBifunctorObjIntShiftFunctor\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₂ShiftFunctor₁\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₁ShiftFunctor₂\", \"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₁\", \"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₂\"], \"digest\": \"847c58e6d63185a2\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBoundarySquares",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Separated-case Cech comparison: boundary compatibility of the two augmented resolution maps; Tag 0117, snake boundary formula; Tag 01EQ, resolution sections; Tags 05TE and 06XR, injective-resolution and Ext boundary identification",
+   "via": [
+    "lem-pc-abelian-cech-augmentation-boundary-squares",
+    "lem-pc-abelian-cech-comparison-boundary",
+    "lem-pc-cech-comparison-system-existence",
+    "lem-pc-cech-comparison-inverse-image",
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechExtSectionBoundary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.abelianCechExtSection_boundary",
+  "statement": "theorem abelianCechExtSection_boundary\n    {X : Scheme.{u}}\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (I₁ : InjectiveResolution T.X₁) (I₂ : InjectiveResolution T.X₂)\n    (I₃ : InjectiveResolution T.X₃)\n    (α : I₁.cocomplex ⟶ I₂.cocomplex) (β : I₂.cocomplex ⟶ I₃.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hα : I₁.ι ≫ α = (CochainComplex.single₀ _).map T.f ≫ I₂.ι)\n    (hβ : I₂.ι ≫ β = (CochainComplex.single₀ _).map T.g ≫ I₃.ι)\n    (hrows : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval _ (.up ℕ) n)).ShortExact)\n    (hS : ((ShortComplex.mk α β hαβ).map\n      ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj\n        (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))).ShortExact)\n    (q : ℕ)\n    (e₁ : (Sheaf.functorH (Opens.grothendieckTopology X) (q + 1)).obj T.X₁ ≅\n      (abelianCechSections I₁).homology (q + 1))\n    (e₃ : (Sheaf.functorH (Opens.grothendieckTopology X) q).obj T.X₃ ≅\n      (abelianCechSections I₃).homology q)\n    (he₁ : ∀ (t : (Sheaf.functorH (Opens.grothendieckTopology X) (q + 1)).obj T.X₁),\n      ∃ (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n          (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I₁.cocomplex.X (q + 1))\n        (ha : a ≫ I₁.cocomplex.d (q + 1) ((q + 1) + 1) = 0)\n        (z : (abelianCechSections I₁).cycles (q + 1)),\n        I₁.extMk a ((q + 1) + 1) rfl ha = t ∧\n        ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}\n          isTerminalTop).homEquiv _ _ a) (ULift.up 1) =\n            (abelianCechSections I₁).iCycles (q + 1) z ∧\n        e₁.hom t = (abelianCechSections I₁).homologyπ (q + 1) z)\n    (he₃ : ∀ (t : (Sheaf.functorH (Opens.grothendieckTopology X) q).obj T.X₃),\n      ∃ (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n          (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I₃.cocomplex.X q)\n        (ha : a ≫ I₃.cocomplex.d q (q + 1) = 0)\n        (z : (abelianCechSections I₃).cycles q),\n        I₃.extMk a (q + 1) rfl ha = t ∧\n        ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}\n          isTerminalTop).homEquiv _ _ a) (ULift.up 1) =\n            (abelianCechSections I₃).iCycles q z ∧\n        e₃.hom t = (abelianCechSections I₃).homologyπ q z) :\n    Sheaf.functorHδ hT q ≫ e₁.hom = e₃.hom ≫ hS.δ q (q + 1) rfl",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T045516-L-125386",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T045516-L-125386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

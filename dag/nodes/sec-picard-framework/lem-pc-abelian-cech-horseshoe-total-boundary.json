@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-abelian-cech-horseshoe-total-boundary",
+ "kind": "statement",
+ "title": "Total boundary naturality for a prescribed horseshoe",
+ "statement": "Let $X$ be a scheme and $T=(F_1\\to F_2\\to F_3)$ a short exact sequence of abelian sheaves. Let $I_j$ be injective resolutions of $F_j$, and let $\\alpha:I_1\\to I_2$, $\\beta:I_2\\to I_3$ commute with their augmentations and satisfy $\\alpha\\beta=0$. Assume the resolution sequence is short exact in every degree. Let $S$ be its image under global sections, and assume $S$ is short exact. For an arbitrary family $U_i$ of opens indexed by a type of the same universe as $X$, suppose $T.g$ is surjective on every intersection indexed by a tuple $\\mathrm{Fin}(k+1)\\to\\iota$. For every $q\\in\\mathbb N$, there is a map $\\delta:H^q(\\operatorname{Tot}(\\check C(U,I_3)))\\to H^{q+1}(\\operatorname{Tot}(\\check C(U,I_1)))$ such that $\\delta_{\\check C}H(\\beta_1)=H(\\beta_3)\\delta$ and $\\delta_SH(\\alpha_1)=H(\\alpha_3)\\delta$. The sections, total complexes and augmentation maps are those of [def-pc-abelian-cech-comparison-construction], and the connecting maps are those of [lem-weil-pbc-complex-ses-homology-long-exact]. No Ext identification or covering condition is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0117",
+  "place": "Tag 0117, functoriality of the cochain long exact sequence, applied to the alpha and beta augmentations of Tag 01EQ"
+ },
+ "stmt_deps": [
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof": [
+  {
+   "text": "Split each degreewise resolution row by injectivity of its first term. The Cech cochain functor is additive, so the displayed splitting equations remain true after applying it and evaluating in each Cech degree. Flipping gives a degreewise short exact sequence of double complexes.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In total degree n, evaluate along the finite set of pairs (p,q) with p+q=n and take its finite coproduct. In AddCommGrpCat this exact functor takes the double-complex short exact sequence to a short exact sequence. The resulting maps are definitionally the total maps. Degreewise detection gives a short exact sequence V of total complexes; let delta be its connecting map.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove alpha naturality by the naturality equation for presheaf restriction on each component, followed by the total inclusion equation. Prove beta naturality by evaluating the augmentation equations in degree zero, applying the Cech functor and then using the total inclusion equation. These equations give morphisms from the section and coefficient Cech sequences to V. Apply boundary naturality to each.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0117",
+  "place": "Tag 0117, functoriality of the cochain long exact sequence, applied to the alpha and beta augmentations of Tag 01EQ; explicit Lean specialization and cocycle details by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality connecting homomorphism homology short exact cochain complexes",
+   "results": "{\"t\": \"2026-10-13T03:41:21Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality connecting homomorphism homology short exact cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HomologySequence.δ_naturality_assoc\", \"HomologicalComplex.HomologySequence.δ_naturality\", \"DerivedCategory.HomologySequence.comp_δ_assoc\", \"CochainComplex.mappingCone.homologySequenceδ_triangleh\", \"DerivedCategory.HomologySequence.δ_comp_assoc\", \"CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc\", \"CochainComplex.homologySequenceδ_quotient_mapTriangle_obj\", \"CategoryTheory.ShortComplex.ShortExact.δ_eq'\"], \"digest\": \"e64d9b3b5396afc5\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.δ",
+   "results": "{\"t\": \"2026-10-13T03:41:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.ShortExact.δ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.δ\", \"CategoryTheory.ShortComplex.ShortExact.epi_δ\", \"CategoryTheory.ShortComplex.ShortExact.mono_δ\", \"CategoryTheory.ShortComplex.ShortExact.isIso_δ\", \"CategoryTheory.ShortComplex.ShortExact.homology_exact₁\", \"CategoryTheory.ShortComplex.ShortExact.homology_exact₃\", \"CategoryTheory.ShortComplex.ShortExact.comp_δ\", \"CategoryTheory.ShortComplex.ShortExact.δ_comp\"], \"digest\": \"96969ac7715fffae\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "δ_naturality|extMk.*δ|connecting",
+   "results": "{\"t\": \"2026-10-13T04:01:24Z\", \"tool\": \"grep\", \"query\": \"δ_naturality|extMk.*δ|connecting\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean\"], \"digest\": \"24fb014661185cad\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext boundary from injective resolution by lifting cocycle and differentiating",
+   "results": "{\"t\": \"2026-10-13T04:01:25Z\", \"tool\": \"leansearch\", \"query\": \"Ext boundary from injective resolution by lifting cocycle and differentiating\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total complex functor preserves degreewise split short exact sequences of first quadrant double complexes",
+   "results": "{\"t\": \"2026-10-13T04:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"Total complex functor preserves degreewise split short exact sequences of first quadrant double complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTrifunctor₁₂Obj\", \"HomologicalComplex.HasGoodTrifunctor₂₃Obj\", \"CochainComplex.instHasMapBifunctorObjIntShiftFunctor_1\", \"CochainComplex.instHasMapBifunctorObjIntShiftFunctor\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₂ShiftFunctor₁\", \"HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₁ShiftFunctor₂\", \"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₁\", \"HomologicalComplex₂.instHasTotalIntObjUpShiftFunctor₂\"], \"digest\": \"847c58e6d63185a2\"}",
+   "date": "2026-10-13",
+   "verdict": "generic homology/Ext tools only; no exact augmentation statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBoundarySquares",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Separated-case Cech comparison: boundary compatibility of the two augmented resolution maps; Tag 0117, functoriality of the cochain long exact sequence, applied to the alpha and beta augmentations of Tag 01EQ",
+   "via": [
+    "lem-pc-abelian-cech-augmentation-boundary-squares",
+    "lem-pc-abelian-cech-comparison-boundary",
+    "lem-pc-cech-comparison-system-existence",
+    "lem-pc-cech-comparison-inverse-image",
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechHorseshoeTotalBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechHorseshoeTotalBoundary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.abelianCechHorseshoe_total_boundary",
+  "statement": "theorem abelianCechHorseshoe_total_boundary\n    {X : Scheme.{u}}\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (I₁ : InjectiveResolution T.X₁) (I₂ : InjectiveResolution T.X₂)\n    (I₃ : InjectiveResolution T.X₃)\n    (α : I₁.cocomplex ⟶ I₂.cocomplex) (β : I₂.cocomplex ⟶ I₃.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (hα : I₁.ι ≫ α = (CochainComplex.single₀ _).map T.f ≫ I₂.ι)\n    (hβ : I₂.ι ≫ β = (CochainComplex.single₀ _).map T.g ≫ I₃.ι)\n    (hrows : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval _ (.up ℕ) n)).ShortExact)\n    (hS : ((ShortComplex.mk α β hαβ).map\n      ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj\n        (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))).ShortExact)\n    {ι : Type u} (U : ι → X.Opens)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l))))) (q : ℕ) :\n    ∃ (δ : ((abelianCechDouble U I₃).total (.up ℕ)).homology q ⟶\n        ((abelianCechDouble U I₁).total (.up ℕ)).homology (q + 1)),\n      TopCat.Sheaf.cechδ U hT hg q ≫\n          HomologicalComplex.homologyMap (abelianCechBeta U I₁) (q + 1) =\n        HomologicalComplex.homologyMap (abelianCechBeta U I₃) q ≫ δ ∧\n      hS.δ q (q + 1) rfl ≫\n          HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) =\n        HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T045516-L-125386",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T045516-L-125386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
