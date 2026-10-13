@@ -150,4 +150,83 @@ theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q
       Set.range_eq_univ.mpr fun x ↦ ⟨(σ W).inv x, Scheme.inv_hom_apply _ x⟩, Set.image_univ,
       Scheme.Opens.range_ι]
 
+/-- **Graphs commute with base change.** Let `p : U ⟶ Y`, `q : V ⟶ Y` with `q` finite étale and
+`i : Y₀ ⟶ Y`. Write `U₀ = U ×_Y Y₀`, `V₀ = V ×_Y Y₀` and `j : V₀ ×_{Y₀} U₀ ⟶ V ×_Y U` for the
+canonical map. Then the square formed by `j`, the projections to `U₀` and `U` and
+`U₀ ⟶ U` is cartesian, and for every `a : U ⟶ V` over `Y` the image of the graph of the base
+change `a₀ : U₀ ⟶ V₀` is the preimage under `j` of the image of the graph of `a`.
+
+(blueprint: `lem-weil-pbc-finite-etale-graph-base-change`) -/
+theorem Scheme.isPullback_graph_baseChange {Y Y₀ U V : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y)
+    [IsFinite q] [Etale q] (i : Y₀ ⟶ Y) :
+    IsPullback (pullback.map (pullback.snd q i) (pullback.snd p i) q p (pullback.fst q i)
+        (pullback.fst p i) i pullback.condition.symm pullback.condition.symm)
+      (pullback.snd (pullback.snd q i) (pullback.snd p i)) (pullback.snd q p)
+      (pullback.fst p i) ∧
+    ∀ (a : U ⟶ V) (ha : a ≫ q = p),
+      Set.range (pullback.lift (pullback.lift (pullback.fst p i ≫ a) (pullback.snd p i)
+          (by simp [ha, pullback.condition])) (𝟙 _) (by simp) :
+          pullback p i ⟶ pullback (pullback.snd q i) (pullback.snd p i)).base =
+        (pullback.map (pullback.snd q i) (pullback.snd p i) q p (pullback.fst q i)
+          (pullback.fst p i) i pullback.condition.symm pullback.condition.symm).base ⁻¹'
+          Set.range (pullback.lift a (𝟙 _) (by simpa using ha) : U ⟶ pullback q p).base := by
+  set p₀ := pullback.snd p i
+  set q₀ := pullback.snd q i
+  set j := pullback.map q₀ p₀ q p (pullback.fst q i) (pullback.fst p i) i
+    pullback.condition.symm pullback.condition.symm
+  have hprod : IsPullback j (pullback.snd q₀ p₀) (pullback.snd q p) (pullback.fst p i) := by
+    refine IsPullback.mk' (by simp [j]) ?_ ?_
+    · intro T m n h₁ h₂
+      apply pullback.hom_ext
+      · apply pullback.hom_ext
+        · simpa [j] using h₁ =≫ pullback.fst q p
+        · change m ≫ pullback.fst q₀ p₀ ≫ q₀ = n ≫ pullback.fst q₀ p₀ ≫ q₀
+          simpa only [Category.assoc, pullback.condition] using h₂ =≫ p₀
+      · exact h₂
+    · intro T a b hab
+      let c : T ⟶ pullback q i := pullback.lift (a ≫ pullback.fst q p) (b ≫ p₀) (by
+        rw [Category.assoc, pullback.condition, ← Category.assoc, hab]
+        simp [p₀, Category.assoc, pullback.condition])
+      let l : T ⟶ pullback q₀ p₀ := pullback.lift c b (by simp [c, q₀])
+      refine ⟨l, ?_, ?_⟩
+      · apply pullback.hom_ext <;> simp [l, j, c, hab]
+      · simp [l]
+  refine ⟨hprod, fun a ha ↦ ?_⟩
+  set s : U ⟶ pullback q p := pullback.lift a (𝟙 U) (by simpa using ha)
+  set s₀ : pullback p i ⟶ pullback q₀ p₀ := pullback.lift (pullback.lift (pullback.fst p i ≫ a)
+    p₀ (by simp [p₀, ha, pullback.condition])) (𝟙 _) (by simp [q₀])
+  have hs : s ≫ pullback.snd q p = 𝟙 U := by simp [s]
+  have hs₀ : s₀ ≫ pullback.snd q₀ p₀ = 𝟙 (pullback p i) := by simp [s₀]
+  have hsq : s₀ ≫ j = pullback.fst p i ≫ s := by
+    apply pullback.hom_ext <;> simp [s₀, j, s]
+  have houter : IsPullback (s₀ ≫ pullback.snd q₀ p₀) (pullback.fst p i)
+      (pullback.fst p i) (s ≫ pullback.snd q p) := by
+    rw [hs, hs₀]
+    exact IsPullback.of_horiz_isIso ⟨by simp⟩
+  have hsg : IsPullback (pullback.fst p i) s₀ s j := (houter.of_right hsq hprod.flip).flip
+  have : IsOpenImmersion s := (isOpenImmersion_and_isClosedImmersion_of_comp_eq_id _ _ hs).1
+  rw [← hsg.isoPullback_hom_snd, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+    Set.range_eq_univ.mpr hsg.isoPullback.hom.surjective, Set.image_univ]
+  exact IsOpenImmersion.range_pullbackSnd s j
+
+/-- **Ranks of clopen pieces of finite étale morphisms.** Let `q : X ⟶ S` be finite étale, let
+`(j, q₀, q, i)` be a cartesian square and let `W ⊆ X` be clopen. Then `q|_W` and `q₀|_{j⁻¹ W}`
+are finite étale, and the rank of the latter at `x` equals the rank of the former at `i x`.
+
+(blueprint: `lem-weil-pbc-finite-etale-clopen-restriction-rank`) -/
+theorem Scheme.finrank_restrict_isClopen_of_isPullback {X X₀ S S₀ : Scheme.{u}} (q : X ⟶ S)
+    [IsFinite q] [Etale q] (j : X₀ ⟶ X) (q₀ : X₀ ⟶ S₀) (i : S₀ ⟶ S) (h : IsPullback j q₀ q i)
+    (W : X.Opens) (hW : IsClosed (W : Set X)) :
+    IsFinite (W.ι ≫ q) ∧ Etale (W.ι ≫ q) ∧
+      IsFinite ((j ⁻¹ᵁ W).ι ≫ q₀) ∧ Etale ((j ⁻¹ᵁ W).ι ≫ q₀) ∧
+      ∀ x : S₀, ((j ⁻¹ᵁ W).ι ≫ q₀).finrank x = (W.ι ≫ q).finrank (i x) := by
+  have : IsClosedImmersion W.ι := .of_isPreimmersion _ (by simpa using hW)
+  have : IsFinite q₀ := MorphismProperty.of_isPullback h inferInstance
+  have : Etale q₀ := MorphismProperty.of_isPullback h inferInstance
+  have : IsClosedImmersion (j ⁻¹ᵁ W).ι :=
+    .of_isPreimmersion _ (by simpa using hW.preimage j.continuous)
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, fun x ↦ ?_⟩
+  exact Scheme.Hom.finrank_of_isPullback _ _ _ _
+    ((isPullback_morphismRestrict j W).paste_vert h) x
+
 end AlgebraicGeometry
