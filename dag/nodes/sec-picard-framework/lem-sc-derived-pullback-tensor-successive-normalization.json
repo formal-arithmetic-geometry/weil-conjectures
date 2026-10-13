@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-derived-pullback-tensor-successive-normalization",
+ "kind": "statement",
+ "title": "Successive derived tensor pullback route normalized on K-flat complexes",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let X,Y,Z be schemes [def-pc-scheme], f:X→Y and g:Y→Z. Use the recorded derived localizations [def-pc-derived-category], termwise tensor pullback [def-pc-module-pullback], shared counits [def-pc-single-complex-base-change-stalk-condition], and chosen derived composition comparison [lem-pc-ringed-spaces-derived-pullback-composition]. Let P,N be K-flat O_Z-complexes [def-pc-kflat-complex]. Let phi be a chain isomorphism from (fg)*Tot(P tensor N) to Tot((fg)*P tensor (fg)*N), whose map on every (p,q)-summand is the canonical ordinary tensorator [lem-weil-pbc-module-pullback-tensor] followed by the target summand inclusion, as in [def-pc-derived-pullback-tensor-comparison]. The successive derived tensor route Lf(tau_g);tau_f;(c_P tensor c_N), for the fixed normalized tensorators [lem-sc-mixed-hom-tensor-pullback-iso], followed by (epsilon_fg(P) tensor epsilon_fg(N));mu_X, equals Lf Lg(mu_Z);Lf(epsilon_g(Tot));epsilon_f(g*Tot);Qh(beta_Tot);Q(phi), where beta is the ordinary composition mate of pushforwardComp under the pinned adjunctions [lem-pc-module-pullback-adjunction]. No direct derived tensorator tau_fg is compared in this statement.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "def-pc-module-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 079U (lemma-pullback-tensor-product), Lemma 0D5S (lemma-derived-pullback-composition), and Remark 08HY (remark-base-change); the tensor triangle in the parent proof, expanded through ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Take the normalization equations for tau_g and tau_f. Tensor and termwise pullback preserve K-flatness, so these equations apply to P,N and to g*P,g*N. Naturality of tau_f moves epsilon_g(P),epsilon_g(N) to its inputs. Evaluate the leftDerivedLift factorization for c at P and N to rewrite its final composite-arrow counits as successive counits followed by localized ordinary composition maps.",
+   "uses": [
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining ordinary chain maps agree on each total-complex summand. Transpose the ordinary tensor/composition maps by the pinned adjunctions, and test on pure tensor sections. The unit formula for composition and the ordinary tensorator formula send both routes to the tensor of the same successive unit images. Tensor universality gives equality of module maps and joint epimorphy of summand inclusions gives equality of chain maps. The hypothesis on phi pins precisely the direct chain tensorator.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain equality. Naturality of the counits and localization tensor maps combines the normalizations from the first step into the displayed equality. No direct derived tensorator is used, and no final cancellation is included. Identity arrows, zero complexes, and empty schemes obey the same formulas.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Parent node steps 3 and successive-route portion of step 4; Tags 079U and 0D5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of tensor pullback composition and the canonical normalized tensor comparison",
+   "results": "Eight generic tensor/pullback component identities (Over.tensorHom_left_fst and related results); no normalized successive derived route equation.",
+   "date": "2026-10-14",
+   "verdict": "No exact match in the returned results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac_app",
+   "results": "CategoryTheory.Functor.leftDerived_fac_app, Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+   "date": "2026-10-14",
+   "verdict": "Supplies the counit factorization, but not the chain tensor composition calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived_fac_app|pullbackComp_tensor",
+   "results": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived and Derived.Adjunction; repository rg found ordinary PullbackTensorComposition and PicardTensorComposition.",
+   "date": "2026-10-14",
+   "verdict": "The ordinary adjoint pullback tensor lemma uses a different pullback/tensor interface; no exact normalized tensor-formula derived route declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composition comparison for derived pullback is compatible with the normalized tensorator on K-flat complexes",
+   "results": "Service unavailable: Internal Server Error; no results returned.",
+   "date": "2026-10-14",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat",
+  "date": "2026-10-14",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-pullback-composition-tensor-kflat",
+   "place": "Steps 3 and 4: ordinary tensor composition and normalization of the successive route",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorSuccessiveNormalization.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_tensor_successive_normalization",
+  "statement": "theorem derivedPullback_tensor_successive_normalization\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)\n    (hP : P.IsKFlat) (hN : N.IsKFlat)\n    (φ : ((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal Z P N) ≅\n      pullbackTensorTotal X\n        (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)\n        (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N))\n    (hφ :\n      letI := pullbackDescentModuleTensor Z\n      letI := pullbackDescentModuleTensor X\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor Z.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Z.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf\n      ∀ (p q n : ℤ) (h : p + q = n),\n        (Scheme.Modules.tensorPullback (f ≫ g)).map\n            (HomologicalComplex.ιMapBifunctor P N (curriedTensor _) (.up ℤ) p q n h) ≫\n          φ.hom.f n =\n        ((Classical.choose (Scheme.Modules.module_pullback_tensor (f ≫ g)))\n          (P.X p) (N.X q)).hom ≫\n          HomologicalComplex.ιMapBifunctor\n            (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)\n            (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)\n            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n            (.up ℤ) p q n h) :\n    let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),\n        derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=\n      fun a b ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition)))) a b\n    let H := (HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal Z P N)\n    let β := Functor.mapHomotopyCategoryCompIso\n      ((conjugateIsoEquiv\n        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))\n        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp\n          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm\n        (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)\n    ((derivedPullback f).map ((mixedHomTensorPullbackIso g).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)) ≫\n      (mixedHomTensorPullbackIso f).hom.app\n        ((derivedPullback g).obj (DerivedCategory.Q.obj P),\n          (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≫\n      ((c f g).hom.app (DerivedCategory.Q.obj P) ⊗ₘ\n        (c f g).hom.app (DerivedCategory.Q.obj N))) ≫\n      (((SingleComplexBaseChange.counit (f ≫ g)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ\n        (SingleComplexBaseChange.counit (f ≫ g)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫\n        pullbackTensorModelMap X\n          (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)\n          (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)) =\n    (derivedPullback f).map ((derivedPullback g).map (pullbackTensorModelMap Z P N)) ≫\n      (derivedPullback f).map ((SingleComplexBaseChange.counit g).app H) ≫\n      (SingleComplexBaseChange.counit f).app\n        (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫\n      DerivedCategory.Qh.map (β.hom.app H) ≫ DerivedCategory.Q.map φ.hom",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T190142-L-3216802",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T190142-L-3216802",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,40 +19,34 @@
  },
  "proof": [
   {
-   "text": "For K-flat P and N, their total tensor and all termwise pullbacks are K-flat. Therefore the localization tensor model maps and the shared left-derived counits used in the canonical tensor comparison equations are invertible. The counit in SingleComplexBaseChange is exactly the epsilon selected from exists_derivedPullbackComposition, not an independently chosen counit. Obtain the three normalization equations from the chosen mixedHomTensorPullbackIso.",
+   "text": "Use the fixed tensorator canonical property to obtain the composite-arrow chain isomorphism phi, its degreewise normalization, and the direct coordinate equation.",
    "uses": [
     "lem-sc-mixed-hom-tensor-pullback-iso",
-    "def-pc-derived-pullback-tensor-comparison",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pc-kflat-tensor-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let beta be the termwise pullback composition isomorphism, the inverse conjugate of pushforwardComp under the pinned tensor-pullback adjunctions. The leftDerivedLift equation characterizing the selected c yields, at each localized complex, c followed by the composite-arrow counit equals the g-counit mapped by Lf, followed by the f-counit at the termwise g-pullback and Q(beta). This is the standard left-derived factorization equation.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At ordinary module level compare f*(tau_g) followed by tau_f and beta_M tensor beta_N with beta_(M tensor N) followed by tau_(fg). Transpose under the successive pinned adjunctions, then use the sheaf tensor universal property to test on sections s tensor t. Each tau sends the unit image of s tensor t to the tensor of the unit images of s and t. By the conjugate definition of beta, beta followed by the composite-arrow unit equals the successive units followed by pushforwardComp. Thus both transposes are the tensor of the same successive unit sections. Injectivity of the adjunction Hom bijection and the sheaf tensor universal property give equality. Apply this degreewise on every (p,q)-summand of the total tensor complex; all maps preserve p and q, so the differential signs agree. The summand inclusions are jointly epimorphic, giving equality of chain maps.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-pc-module-pullback-adjunction",
     "def-pc-derived-pullback-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the chain-map equality. Naturality of c along the invertible source localization tensor map mu_Z(P,N) replaces c at QP tensor QN by its component at Q(Tot(P tensor N)). Naturality of the f-tensorator along epsilon_g(P), epsilon_g(N) replaces its inputs Lg QP,Lg QN by Q(g*P),Q(g*N). Postcompose both routes with epsilon_(fg)(P) tensor epsilon_(fg)(N) and the localization tensor map at the termwise composite pullbacks; all are invertible. Substitute the c-factorization at P,N and Tot(P tensor N), and the g-, f-, and fg-tensorator normalization equations. Naturality of the counits moves the chain comparison maps through these expressions. The resulting equation is the localized ordinary tensor/composition chain equality from step 3. Cancel the input localization map and the invertible output maps to obtain exactly the displayed triangle. No base-change morphism is cancelled and no representative is selected by a definition.",
+   "text": "Pullback preserves K-flatness of P. The shared counits at P,N and the localization tensor map on their composite-arrow pullbacks are invertible by the proved K-flat coordinate helpers of CanonicalPullbackTensorComparison. Postcompose both routes with their tensor counits and this model map; it can be cancelled.",
    "uses": [
-    "lem-sc-mixed-hom-tensor-pullback-iso",
-    "def-pc-derived-pullback-tensor-comparison",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
     "lem-pc-kflat-pullback-preservation",
-    "lem-pc-kflat-tensor-product"
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The successive route has the ordinary normalized value by derivedPullback_tensor_successive_normalization, using only the degreewise formula for phi. Evaluate the defining leftDerivedLift equation of the chosen c at the total tensor complex to obtain its shared-counit factorization.",
+   "uses": [
+    "lem-sc-derived-pullback-tensor-successive-normalization",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the direct route, postcompose the existing composite-arrow tensorator coordinate equation with c at QP tensor QN. Naturality of c along mu_Z moves c to the total tensor complex. Its counit factorization identifies this value with the successive-route normalization. Associativity combines the equalities and cancellation proves the unchanged triangle.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   }
@@ -60,16 +54,14 @@
  "proof_deps": [
   "def-pc-derived-pullback-tensor-comparison",
   "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-tensor-product",
-  "lem-pc-module-pullback-adjunction",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-mixed-hom-tensor-pullback-iso",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-sc-derived-pullback-tensor-successive-normalization",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "079U and 0D5S proofs; explicit unit and pure-tensor calculation expanding the parent node step."
+  "place": "Tags 079U and 0D5S: separate successive normalization from the direct tensorator coordinate equation; categorical cancellation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -156,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-edb84",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T172654-L-2099053",
+  "landing": "20261013T190142-L-3216802",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged square statement and definition, K-flat lemma, DAG records, and report; both delivered modules and direct importer MixedTensorPairingBaseChangeTransport compile cleanly, with only permitted axioms and expected sorryAx dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

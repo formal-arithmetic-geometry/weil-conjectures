@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
+import all Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization
 
 /-! # Tensor compatibility of derived pullback composition on K-flat complexes
 
@@ -24,6 +26,8 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
+set_option maxHeartbeats 400000 in
+-- The selected counits and tensor model maps have large dependent types.
 /-- The fixed composition comparison preserves the normalized tensorator on
 localized K-flat complexes.
 Source: Stacks Project, cohomology.tex, Lemma 079U and Remark 08HY;
@@ -75,6 +79,112 @@ theorem derivedPullbackComposition_tensor_kFlat
         (c f g).hom.app (DerivedCategory.Q.obj N)) =
     (c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫
       (mixedHomTensorPullbackIso (f ≫ g)).hom.app
-        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N) := by sorry
+        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N) := by
+  classical
+  let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),
+      derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=
+    fun a b ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition)))) a b
+  let H := (HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal Z P N)
+  let β := Functor.mapHomotopyCategoryCompIso
+    ((conjugateIsoEquiv
+      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
+      ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
+      (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)
+  have hτ : IsCanonicalPullbackTensorComparison (f ≫ g)
+      (fun K L ↦ (mixedHomTensorPullbackIso (f ≫ g)).hom.app (K, L)) :=
+    Classical.choose_spec (exists_mixedHomTensorPullbackIso.{u, w} (f ≫ g))
+  have hflat := hτ.1
+  have hmodels := hflat P N hP hN
+  rcases hmodels with ⟨φ, hφ, heq⟩
+  have hpull : CochainComplex.IsKFlat (R := X.sheaf)
+      (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P) := by
+    convert CochainComplex.isKFlat_pullback (f ≫ g).base X.sheaf Z.sheaf
+      ⟨(f ≫ g).c⟩ P hP using 1
+    with_unfolding_all rfl
+  have := counit_isIso (f ≫ g) P hP
+  have := counit_isIso (f ≫ g) N hN
+  have := modelMap_isIso X
+    (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)
+    (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N) hpull
+  apply (cancel_mono
+    (((SingleComplexBaseChange.counit (f ≫ g)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+      (SingleComplexBaseChange.counit (f ≫ g)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+      pullbackTensorModelMap X
+        (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)
+        (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N))).1
+  have hl := derivedPullback_tensor_successive_normalization f g P N hP hN φ hφ
+  have hc := (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))).1 f g
+  have : (derivedPullback (f ≫ g)).IsLeftDerivedFunctor
+      (SingleComplexBaseChange.counit (f ≫ g)) (HomotopyCategory.quasiIso _ (.up ℤ)) :=
+    (Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) (f ≫ g)
+  have fac : (c f g).hom.app (DerivedCategory.Q.obj (pullbackTensorTotal Z P N)) ≫
+      (SingleComplexBaseChange.counit (f ≫ g)).app H =
+    (derivedPullback f).map ((SingleComplexBaseChange.counit g).app H) ≫
+      (SingleComplexBaseChange.counit f).app
+        (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫
+      DerivedCategory.Qh.map (β.hom.app H) := by
+    let δ :=
+      (Functor.associator DerivedCategory.Qh (derivedPullback g) (derivedPullback f)).inv ≫
+        Functor.whiskerRight (SingleComplexBaseChange.counit g) (derivedPullback f) ≫
+        (Functor.associator _ DerivedCategory.Qh (derivedPullback f)).hom ≫
+        Functor.whiskerLeft _ (SingleComplexBaseChange.counit f) ≫
+        (Functor.associator _ _
+          (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))).inv ≫
+        Functor.whiskerRight β.hom
+          (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+    have hnat : Functor.whiskerLeft DerivedCategory.Qh (c f g).hom ≫
+        SingleComplexBaseChange.counit (f ≫ g) = δ := by
+      rw [show (c f g).hom = _ from hc]
+      exact Functor.leftDerived_fac (derivedPullback (f ≫ g))
+        (SingleComplexBaseChange.counit (f ≫ g)) (HomotopyCategory.quasiIso _ (.up ℤ))
+        (derivedPullback g ⋙ derivedPullback f) δ
+    have h := congrArg (fun t ↦ t.app H) hnat
+    dsimp only [δ, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.associator_hom_app] at h
+    simp only [Category.id_comp] at h
+    with_unfolding_all exact h
+  have nc := (c f g).hom.naturality (pullbackTensorModelMap Z P N)
+  dsimp only [Functor.comp_map] at nc
+  have hr := congrArg
+    (fun k ↦ (c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫ k)
+    heq
+  have hr' :
+      ((c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫
+        (mixedHomTensorPullbackIso (f ≫ g)).hom.app
+          (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)) ≫
+        (((SingleComplexBaseChange.counit (f ≫ g)).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+          (SingleComplexBaseChange.counit (f ≫ g)).app
+            ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+          pullbackTensorModelMap X
+            (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)
+            (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)) =
+      (derivedPullback f).map ((derivedPullback g).map (pullbackTensorModelMap Z P N)) ≫
+        (derivedPullback f).map ((SingleComplexBaseChange.counit g).app H) ≫
+        (SingleComplexBaseChange.counit f).app
+          (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj H) ≫
+        DerivedCategory.Qh.map (β.hom.app H) ≫ DerivedCategory.Q.map φ.hom := by
+    calc
+      _ = (c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫
+          ((derivedPullback (f ≫ g)).map (pullbackTensorModelMap Z P N) ≫
+            (SingleComplexBaseChange.counit (f ≫ g)).app H ≫
+              DerivedCategory.Q.map φ.hom) := by
+        exact (Category.assoc _ _ _).trans hr.symm
+      _ = ((derivedPullback f).map
+          ((derivedPullback g).map (pullbackTensorModelMap Z P N)) ≫
+          (c f g).hom.app (DerivedCategory.Q.obj (pullbackTensorTotal Z P N))) ≫
+            (SingleComplexBaseChange.counit (f ≫ g)).app H ≫
+              DerivedCategory.Q.map φ.hom := by
+        exact (Category.assoc _ _ _).symm.trans
+          (congrArg (fun k ↦ k ≫ (SingleComplexBaseChange.counit (f ≫ g)).app H ≫
+            DerivedCategory.Q.map φ.hom) nc.symm)
+      _ = _ := by rw [Category.assoc, reassoc_of% fac]
+  exact hl.trans hr'.symm
 
 end AlgebraicGeometry
