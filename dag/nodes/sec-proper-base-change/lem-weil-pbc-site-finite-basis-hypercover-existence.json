@@ -25,9 +25,80 @@
   "def-weil-pbc-formal-coproduct",
   "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix T. The category D=C/T has terminal object id_T, and a fibre product in D is the fibre product in C with its induced arrow to T: the universal property in C gives the unique arrow over T. Covering families in D are exactly families covering their target in C. Thus both finite B-cover hypotheses hold in D. Choose a finite B-cover K_0 of T; with only the identity operator it is a split 0-truncation (the nondegenerate indices are all of I_0). Its matching arrow to {id_T} is a covering by the componentwise convention in the item.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, first three proof paragraphs"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-limits-from-terminal-pullbacks], D has finite limits. Directly from [def-weil-pbc-formal-coproduct], the terminal family in SR(D) is {id_T}, and the pullback of (alpha,f):{A_i}-> {Z_k} and (beta,g):{B_j}-> {Z_k} is {A_i x_{Z_k} B_j}_{alpha(i)=k=beta(j)}: a map to it consists exactly of a pair of component maps with equal composite. This proves its universal property. For finite index sets this pullback has finite index set. Apply the same finite-limit lemma to the full subcategory of finite-index families, which has this terminal object and these pullbacks. Thus every finite boundary diagram on finite-index terms has a finite-index limit M, also a limit in SR(D), since the terminal and pullback universal properties just checked hold against arbitrary source families. No degree n+1 term is assumed here.",
+   "uses": [
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01G2, lemma-coprod-prod-SR, proof (3),(6) and the slice paragraph; Categories Tag 002O, lemma-finite-limits-exist"
+   }
+  },
+  {
+   "text": "Inductively suppose a split n-truncation K has finite B-terms and covering matching arrows in degrees 0 through n. Write the next matching limit from step 2 as M={W_h}_{h in H}, with H finite. For every h choose a finite B-cover {V_{h,j}->W_h}_{j in J_h}. Let V be their disjoint-union family and v:V->M its componentwise map. Apply [lem-weil-pbc-site-hypercover-finite-extension] in D: its explicitly defined split hypothesis is the induction invariant, and its boundary diagram is exactly this M. The resulting L extends K, with new nondegenerate terms V and degenerate copies of the U_{r,i} for r<=n. All components remain in B. The new index set is finite because H and every J_h and N_r are finite, and there are finitely many order-preserving surjections between the displayed finite ordered sets. The cited attachment theorem supplies all operators and their composition identities; no identity is inferred merely from choosing covers.",
+   "uses": [
+    "lem-weil-pbc-site-hypercover-finite-extension",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, construction of the extension"
+   }
+  },
+  {
+   "text": "For each h, the fibre of the new matching family over W_h contains its chosen finite B-cover, together with finitely many arrows from the prescribed degenerate copies. Starting with that cover, adjoin these arrows one at a time. At every stage the family is finite, all domains lie in B, and the adjoining hypothesis applies, so the final family is a cover of W_h. This includes H empty (there is then no covering condition to check) and an empty chosen cover (the same adjoining hypothesis still applies). Thus L has a covering matching arrow in degree n+1; the earlier arrows are unchanged because L restricts to K.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-hypercover-finite-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, paragraph proving K_{n+1}->K′_{n+1} is a covering"
+   }
+  },
+  {
+   "text": "Starting from step 1, recursively choose extensions by steps 2-4. Define K_q to be its permanent value at stage q, and define each operator [a]->[b] using any stage at least max(a,b); extensions agree exactly in lower degrees, so this is independent of the stage. For composable operators choose a stage containing all three degrees: the functor identity there proves their composition identity in K. The same argument proves identity operators. Every fixed degree has finite B-components and a covering matching arrow from its construction stage. The arrows to T give the augmentation to {id_T}; they commute with every operator because every construction was in C/T. Degree zero has matching object {id_T}, as required.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, conclusion of construction; Tag 01G5, definition-hypercovering"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-coproduct",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "lem-weil-pbc-site-hypercover-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tags 0DAV, 01G5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,15 +134,67 @@
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite limits of formal coproducts of a site with fibre products and finite index sets",
+   "results": "8 hits including extensiveTopology and finite-coproduct declarations; no matching-limit theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalCoproduct finite limits fibre products",
+   "results": "0 hits; unknown identifier FormalCoproduct",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FormalCoproduct|finite.*limit|fibre product Mathlib/CategoryTheory/Limits",
+   "results": "0 hits from msearch service",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite degreewise hypercover from finite covering basis",
+   "results": "service unavailable",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-affine-acyclic-hypercover",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "worker": "stage1",
+  "summary": "Construct finite matching limits directly from the terminal family and componentwise pullbacks; attach finite nondegenerate simplices by the categorical split-attachment lemma; prove covering by finite repeated adjoining and form the stable recursive union.",
+  "blueprint": "The four steps realize thm-weil-pbc-qbar proof paragraph 1, specifically the affine weakly contractible hypercover construction and its finite-cover variant (Tag 0DAV).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+    "why": "Generic finite-limit construction from a terminal object and pullbacks; the proper-base-change unit has no route node supplying this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-433c1cb2f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-433c1cb2f (reviewer sub-agent of L); spot-checked: Mathematics and edge cases pass. Repair false Tag 094K citations (the construction is Tag 0DAV), declare the off-unit finite-limit lemma as a tool use, and add created.by/created.date to the new node. Corrected DAG JSONs are in fixes/dag/nodes/sec-proper-base-change/; review.md records the full checks.; 2 file(s) fixed by the reviewer"
+ }
 }
