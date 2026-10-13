@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.RelativeTensorPullbackHomologyComparison
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.KFlatPullback
@@ -53,6 +54,19 @@ theorem exists_relativeTor_pullback_tensor_lower_bound
     (E : schemeDerivedCategory X) (hTor : HasFiniteTorDimensionOver f E) :
     ∃ a : ℤ, ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace),
       (E ⊗ (derivedPullback f).obj
-        ((DerivedCategory.singleFunctor _ 0).obj F)).IsGE a := by sorry
+        ((DerivedCategory.singleFunctor _ 0).obj F)).IsGE a := by
+  obtain ⟨K, ⟨eK⟩, P, hP, q, hq, a, b, hab, hbound⟩ := hTor
+  refine ⟨a, ?_⟩
+  intro F
+  apply (DerivedCategory.isGE_iff _ a).2
+  intro i hi
+  obtain ⟨e⟩ := relativeTensorPullback_homology_comparison f E K eK P hP q hq F i
+  have hz := hbound (TopCat.Sheaf.inverseImageModule f.base S.sheaf F) i (Or.inl hi)
+  have hz' := (SheafOfModules.toSheaf _).map_isZero hz
+  have ht := hz'.of_iso e
+  apply (CategoryTheory.Limits.IsZero.iff_id_eq_zero _).2
+  apply (SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).map_injective
+  rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_zero]
+  exact ht.eq_of_src (𝟙 _) 0
 
 end AlgebraicGeometry.Scheme

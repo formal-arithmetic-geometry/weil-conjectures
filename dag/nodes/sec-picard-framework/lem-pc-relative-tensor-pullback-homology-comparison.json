@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-relative-tensor-pullback-homology-comparison",
+ "kind": "statement",
+ "title": "Relative tensor-pullback homology comparison",
+ "statement": "Let f:X -> S be a morphism of schemes, with the fixed derived categories [def-pc-derived-category], derived pullback [def-pc-derived-pullback], and derived tensor [def-pc-scheme-derived-tensor-structure]. Let E be in D(O_X), K a complex of O_X-modules, and eK:Q(K) ≅ E. Put R=f-inverse O_S and restrict K along the tensor-pullback ring map [def-pc-module-pullback]. Let P be an R-module complex, K-flat [def-pc-kflat-complex], with a quasi-isomorphism q:P -> K restricted to R. For every O_S-module F, with inverse image [def-pc-topological-inverse-image-module], and every integer i, the underlying abelian sheaf of H^i(E tensor^L Lf*(F[0])) is isomorphic to the underlying abelian sheaf of H^i(Tot(P tensor_R f-inverse F[0])) [def-pc-tensor-complex-sheaves]. No finite Tor amplitude, boundedness, quasi-coherence, coherence or geometric assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Lemma 20.27.4, Tag 08DE; Tag 08EV, second displayed equality"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-topological-inverse-image-module",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Resolve F[0] by a bounded-above flat complex L, zero above zero. Termwise tensor pullback computes its derived pullback. Exact inverse image carries L to a K-flat resolution of the inverse-image module.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-inverse-image-exact-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an O_X K-flat resolution A of K. The K-flat derived tensor comparison computes E tensor Lf*(F[0]) by A tensor f*L. In each bidegree the balanced tensor identity A tensor over O_X (O_X tensor over f-inverse O_S f-inverse L) = A restricted to f-inverse O_S tensor f-inverse L commutes with the signed differentials. Direct-sum totalization gives the restricted complex comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-derived-tensor-comparison",
+    "def-pc-module-pullback",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since inverse-image L is K-flat, tensoring it with the quasi-isomorphism zigzag A restricted -> K restricted <- P gives quasi-isomorphisms: apply the tensor-cone identity and the defining acyclicity criterion for K-flatness. Since P is K-flat, its tensor with inverse-image L -> inverse-image F[0] is also a quasi-isomorphism. Exact restriction of scalars commutes with homology, as does the exact functor to abelian sheaves. Apply homology in degree i to the zigzag, the localization homology comparison, and eK. This yields the asserted abelian-sheaf isomorphism, independently of any Tor interval or bound.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-inverse-image-exact-kflat-resolution",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Lemma 20.27.4, Tag 08DE; Tag 08EV, second displayed equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with derived pullback equals relative derived tensor with inverse image for sheaves of modules",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of derived tensor with derived pullback agrees with homology of a K-flat restricted-scalars resolution tensor inverse-image module",
+   "results": "8 hits including Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact and Rep.torIso; ordinary modules or group representations, not the fixed sheaf derived pullback and relative tensor.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars",
+   "results": "25 Mathlib hits concern ordinary module tensor algebra. No hits in Mathlib/Algebra/Category/ModuleCat/Sheaf or Mathlib/Algebra/Homology/DerivedCategory. No imported blueprint match for 08DE or relative tensor. The parent states only the lower-bound consequence.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTorPullbackTensorLowerBound",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV, proof, second displayed equality, via Cohomology Lemma 20.27.4",
+   "via": [
+    "lem-pc-relative-tor-pullback-tensor-lower-bound",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTensorPullbackHomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorPullbackHomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeTensorPullback_homology_comparison",
+  "statement": "theorem relativeTensorPullback_homology_comparison {X S : Scheme.{u}} (f : X ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (eK : DerivedCategory.Q.obj K ≅ E) (P : CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf))) ℤ) (hP : CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P) (q : P ⟶ ((SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).map (Modules.tensorPullbackRingMap f))).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (hq : QuasiIso q) (F : SheafOfModules.{u} (moduleRings S.toRingedSpace)) (i : ℤ) : Nonempty ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj ((DerivedCategory.homologyFunctor _ i).obj (E ⊗ (derivedPullback f).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅ (SheafOfModules.toSheaf ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing f.base S.sheaf))).obj ((CochainComplex.mapBifunctor P ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj (TopCat.Sheaf.inverseImageModule f.base S.sheaf F)) (@curriedTensor _ _ (SheafOfModules.monoidalCategory (TopCat.Sheaf.inverseImageRing f.base S.sheaf)))).homology i))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095932-L-2452119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095932-L-2452119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
