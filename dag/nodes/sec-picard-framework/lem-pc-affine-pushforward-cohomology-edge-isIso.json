@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-affine-pushforward-cohomology-edge-isIso",
+ "kind": "statement",
+ "title": "Invertibility of normalized affine cohomology edge components",
+ "statement": "Let A and B be commutative rings, phi : B → A, i an integer, and assume the sheaf derived categories [def-pc-derived-category]. Put T_R = tilde and f = Spec(phi). Fix an ordinary comparison isomorphism sigma : res_phi ⋙ T_B ≅ T_A ⋙ f_*. Define q_(C,i) and b_(C,t) by the explicit derived-unit and tilde-cohomology-coordinate composites of [def-pc-derived-direct-image] and [def-pc-affine-base-change-tilde-coordinates], using sigma as the termwise comparison. Let alpha be any natural transformation T_B res_phi Gamma_A H^i → H^i Rf_* on D_QCoh(Spec A) [lem-pc-affine-derived-cohomology-presentation]. Assume q_(C,i) followed by H^i(Rf_*t) equals T_B res_phi(b_(C,t)) followed by alpha_L whenever C is an unbounded A-module complex and t : Q(T_A C) ≅ L has hom equal to eqToHom of an object equality. Then alpha_L is an isomorphism for every L. This is an invertibility implication, not an existence statement.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-affine-pushforward-comparison-coordinates"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "perfect.tex, lemma-affine-morphism-equivalence, cohomology display; lemma-application-nice-K-injective, bound-one truncation; affine derived equivalence (06Z0)."
+ },
+ "proof": [
+  {
+   "text": "The terms, differential cokernels, and cohomology sheaves of T_A C are quasi-coherent. On inverse images of affine opens higher cohomology vanishes. The unbounded bound-one truncation calculation of 08D4 identifies ordinary and derived pushforward of this complex via the actual derived unit. Thus H^i of that unit is invertible. Every preceding factor in q is invertible as well, so q is invertible.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-affine-open-sections-resolution-quasi-iso",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "def-pc-affine-base-change-tilde-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the identity representative the assumed normalization writes q as T_B res_phi(b) followed by alpha. The first factor is an isomorphism, hence alpha at Q(T_A C) is an isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The affine derived equivalence (06Z0) represents every L by some Q(T_A C). Naturality of alpha along that representative isomorphism writes alpha_L as a composite of the invertible representative component and two functor images of an isomorphism. Therefore alpha_L is invertible.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-affine-open-sections-resolution-quasi-iso",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "new-affine-qcoh-derived-equivalence-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "perfect.tex, lemma-affine-morphism-equivalence, cohomology display; lemma-application-nice-K-injective, bound-one truncation; affine derived equivalence (06Z0).",
+  "note": "Lean-facing refinement of the cited comparison argument; sources read online because the local literature checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine morphism natural cohomology edge map derived pushforward unbounded quasi coherent sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "existence of natural edge map from pushforward cohomology to cohomology derived pushforward for affine morphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-14",
+   "verdict": "no exact match; generic infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|rightDerivedFunctorUnit",
+   "results": "Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Topology/Sheaves/Abelian.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match; generic infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
+  "date": "2026-10-14",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3, affine cohomology comparison and its right-derived-unit normalization.",
+   "via": [
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePushforwardCohomologyEdgeIsIso.lean",
+  "declaration": "AlgebraicGeometry.affinePushforwardCohomologyEdge_isIso",
+  "statement": "theorem affinePushforwardCohomologyEdge_isIso\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))) :\n  ∀ (α : affineDerivedCohomologyModules A i ⋙\n      (ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B) ⟶\n    (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n      schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙\n      DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i),\n    (∀ (C : CochainComplex (ModuleCat.{u} A) ℤ)\n      (L : schemeDerivedQCohCategory (Spec (.of A)))\n      (t : DerivedCategory.Q.obj\n        (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L.obj),\n      (∃ h : DerivedCategory.Q.obj\n          (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C) = L.obj,\n        t.hom = eqToHom h) →\n      affinePushforwardCohomologyMapOfComparison A B φ σ C i ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map t.hom) =\n        (affinePushforwardTilde B).map ((ModuleCat.restrictScalars φ).map\n          (affinePushforwardRepresentativeCohomologyIso A C L.obj t i).hom) ≫ α.app L) →\n    ∀ L, IsIso (α.app L)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcd4f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T211116-L-396106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcd4f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T211116-L-396106",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, and Lean compilation match the recorded stage-3 proof and interface changes; all checks pass."
+ }
+}

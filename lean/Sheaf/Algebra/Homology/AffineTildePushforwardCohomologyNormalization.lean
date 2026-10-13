@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
+public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
+import Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeExists
+import Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso
 
 /-! # Normalized affine pushforward cohomology
 
@@ -84,67 +87,37 @@ def affineTildePushforwardComparison (A B : Type u) [CommRing A] [CommRing B]
     infer_instance
   exact asIso σ
 
+attribute [local irreducible] affineTildePushforwardComparison
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The actual map from ordinary module cohomology to derived affine pushforward.
 No object or map is chosen from an existence theorem. Source: Stacks, Tags 0AVW and 0DJ8.
 (blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
-def affineTildePushforwardCohomologyMap (A B : Type u) [CommRing A] [CommRing B]
+abbrev affineTildePushforwardCohomologyMap (A B : Type u) [CommRing A] [CommRing B]
     (φ : B →+* A) (C : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :
     (affineTildeFunctor B).obj ((ModuleCat.restrictScalars φ).obj (C.homology i)) ⟶
       (DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).obj
         ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).obj
           (DerivedCategory.Q.obj
-            (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C))) := by
-  let T := affineTildeFunctor A
-  let F := ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B
-  let P := Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ))
-  let : (affineTildeFunctor B).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : (affineTildeFunctor B).PreservesHomology := tilde_preservesHomology B
-  let : PreservesFiniteLimits (affineTildeFunctor B) :=
-    Functor.preservesFiniteLimits_of_preservesHomology (affineTildeFunctor B)
-  let : PreservesFiniteColimits (affineTildeFunctor B) :=
-    Functor.preservesFiniteColimits_of_preservesHomology (affineTildeFunctor B)
-  let : F.PreservesHomology := inferInstance
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : P.Additive := inferInstance
-  let D := (T.mapHomologicalComplex (.up ℤ)).obj C
-  let a : (F.mapHomologicalComplex (.up ℤ)).obj C ⟶
-      (P.mapHomologicalComplex (.up ℤ)).obj D :=
-    ((affineTildePushforwardComparison A B φ).hom.mapHomologicalComplex (.up ℤ)).app C
-  let H := DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i
-  let β := (RingedSpace.moduleDirectImage
-    (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit
-  exact ((C.sc i).mapHomologyIso F).inv ≫
-    ((DerivedCategory.homologyFunctorFactors _ i).app
-      ((F.mapHomologicalComplex (.up ℤ)).obj C)).inv ≫
-    H.map (DerivedCategory.Q.map a) ≫
-    H.map (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj D))
+            (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C))) :=
+  affinePushforwardCohomologyMapOfComparison A B φ
+    (affineTildePushforwardComparison A B φ) C i
 
 /-- Coordinates of the cohomology of any tilde representative.
 Source: Stacks Project, Tags 01I9 and 06Z0.
 (blueprint: lem-pc-affine-tilde-pushforward-cohomology-normalization). -/
-def affineTildeRepresentativeCohomologyIso (A : Type u) [CommRing A]
+abbrev affineTildeRepresentativeCohomologyIso (A : Type u) [CommRing A]
     (C : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : schemeDerivedCategory (Spec (.of A)))
     (t : DerivedCategory.Q.obj
       (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L) (i : ℤ) :
     C.homology i ≅ (moduleSpecΓFunctor (R := .of A)).obj
       ((DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).obj L) := by
-  let T := affineTildeFunctor A
-  let : T.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
-  let : T.PreservesHomology := tilde_preservesHomology A
-  let H := DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i
-  exact tilde.isoTop (R := .of A) (C.homology i) ≪≫
-    (moduleSpecΓFunctor (R := .of A)).mapIso
-      (((C.sc i).mapHomologyIso T).symm ≪≫
-        ((DerivedCategory.homologyFunctorFactors _ i).app
-          ((T.mapHomologicalComplex (.up ℤ)).obj C)).symm ≪≫ H.mapIso t)
+        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).obj L) :=
+  affinePushforwardRepresentativeCohomologyIso A C L t i
 
 /-- The normalization equation for a fixed representative.
 Source: Stacks Project, Tags 0AVW, 08D4 and 0DJ8.
@@ -229,7 +202,8 @@ theorem affineTildePushforwardCohomologyNormalization_extend
         (moduleSpecΓFunctor (R := .of A)).map
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i).map t.hom) := by
-    dsimp only [affineTildeRepresentativeCohomologyIso, Iso.trans_hom, Iso.symm_hom,
+    dsimp only [affineTildeRepresentativeCohomologyIso,
+      affinePushforwardRepresentativeCohomologyIso, Iso.trans_hom, Iso.symm_hom,
       Functor.mapIso_hom, Iso.refl_hom]
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
     simp only [CategoryTheory.Functor.map_comp, Category.assoc]
@@ -275,7 +249,14 @@ theorem affineTildePushforwardCohomologyNormalization_base
             (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i,
       ∀ C : CochainComplex (ModuleCat.{u} A) ℤ,
         affineTildePushforwardIdentityNormalization A B φ i d C := by
-  sorry
+  obtain ⟨α, hα⟩ := exists_affinePushforwardCohomologyEdge A B φ i
+    (affineTildePushforwardComparison A B φ)
+  have hcomponents := affinePushforwardCohomologyEdge_isIso A B φ i
+    (affineTildePushforwardComparison A B φ) α hα
+  have : IsIso α := (NatTrans.isIso_iff_isIso_app α).2 hcomponents
+  refine ⟨asIso α, ?_⟩
+  intro C L t ht
+  exact hα C L t ht
 
 /-- The affine cohomology presentation is normalized by the right-derived unit
 on all complexes of associated sheaves, and hence on every representative.

@@ -1,0 +1,101 @@
+{
+ "id": "def-pc-affine-pushforward-comparison-coordinates",
+ "kind": "definition",
+ "title": "Explicit cohomology coordinates for a supplied affine comparison",
+ "statement": "For commutative rings A and B, phi : B → A, associated sheaf T [lem-weil-pbc-affine-tilde-gamma-adjunction], and an ordinary natural isomorphism sigma : res_phi ⋙ T_B ≅ T_A ⋙ f_* with f=Spec(phi), define q_(C,i) on every unbounded A-module complex by inverse exact-homology comparison for res_phi ⋙ T_B, inverse Q/homology comparison, H^i(Q(sigma_C)), and H^i of the actual right-derived unit [def-pc-derived-direct-image]. For a representative t:Q(T_A C)≅L define b_(C,t):H^i(C)≅Gamma_A H^i(L) by the tilde unit, Gamma_A of the inverse exact-tilde homology comparison, inverse Q/homology comparison and H^i(t). These are explicit composites, with no witness selected from an existence theorem. The displayed associated sheaf abbreviation denotes precisely Mathlib tilde.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "def-pc-affine-base-change-tilde-coordinates"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "perfect.tex, lemma-affine-morphism-equivalence, cohomology display; lemma-application-nice-K-injective, bound-one truncation; affine derived equivalence (06Z0)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology coordinates tilde unit exact homology comparison ordinary pushforward derived unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tilde functor cohomology isomorphism homologyFunctorFactors",
+   "results": "DerivedCategory.homologyFunctorFactors; DerivedCategory.singleFunctorCompHomologyFunctorIso; DerivedCategory.homologyFunctorFactorsh; CochainComplex.isoHomologyπ₀_inv_naturality_assoc; CochainComplex.isoHomologyπ₀_inv_naturality; CochainComplex.HomComplex.homologyAddEquiv; CochainComplex.ConnectData.homologyIsoPos; CochainComplex.ConnectData.homologyIsoNeg",
+   "date": "2026-10-14",
+   "verdict": "generic constituent maps found; no supplied-comparison coordinate composite"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorFactors|isoTop",
+   "results": "Mathlib/Algebra/Quandle.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean; Mathlib/Algebra/Homology/HomotopyCategory.lean",
+   "date": "2026-10-14",
+   "verdict": "generic constituent maps found; no supplied-comparison coordinate composite"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
+  "date": "2026-10-14",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3, concrete affine cohomology comparison maps.",
+   "via": [
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization-base",
+    "lem-pc-affine-tilde-pushforward-cohomology-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePushforwardComparisonCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affinePushforwardCohomologyMapOfComparison",
+  "declarations": [
+   "AlgebraicGeometry.affinePushforwardTilde",
+   "AlgebraicGeometry.affinePushforwardTilde_preservesZero",
+   "AlgebraicGeometry.affinePushforwardCohomologyMapOfComparison",
+   "AlgebraicGeometry.affinePushforwardRepresentativeCohomologyIso"
+  ],
+  "statement": "def affinePushforwardCohomologyMapOfComparison (A B : Type u) [CommRing A] [CommRing B]\n    (φ : B →+* A)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ)))\n    (C : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :\n    (affinePushforwardTilde B).obj ((ModuleCat.restrictScalars φ).obj (C.homology i)) ⟶\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).obj\n        ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).obj\n          (DerivedCategory.Q.obj\n            (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcd4f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T211116-L-396106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcd4f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T211116-L-396106",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, and Lean compilation match the recorded stage-3 proof and interface changes; all checks pass."
+ }
+}
