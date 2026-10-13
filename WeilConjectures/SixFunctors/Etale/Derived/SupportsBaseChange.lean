@@ -190,8 +190,8 @@ theorem supportedProduct_baseChange (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i :
   rw [hP₁', derivedTensorHom_comp]
   erw [hψ₁, hψ₂]
   rw [← Functor.map_comp_assoc, hP₁, hτ]
-  erw [leftDerivedUpperStarTensorIso_hom_naturality_assoc, Iso.inv_hom_id_assoc]
-  rw [derivedTensorHom_comp]
+  rw [Iso.inv_comp_eq, ← derivedTensorHom_comp]
+  exact leftDerivedUpperStarTensorIso_hom_naturality_assoc A e _ _ _
 
 /-- **Base change of the cup product with supports.** Restricting a cup product with supports
 `α ∪ β` (`AlgebraicGeometry.Etale.cupWithSupports`) along `e : U' ⟶ U` gives the cup product of
