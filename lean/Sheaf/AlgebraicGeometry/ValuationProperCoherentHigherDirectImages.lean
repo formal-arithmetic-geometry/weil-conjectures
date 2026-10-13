@@ -8,12 +8,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.LeraySpectralSequence
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.RingTheory.CoherentRingPerfectComplexCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Mathlib.RingTheory.Ideal.Basis
+import Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric
 
 @[expose] public section
 
@@ -54,6 +51,25 @@ theorem finitePresentation_moduleCohomology_of_valuationRing
     Module.FinitePresentation A
       ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj
         ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F)) := by
-  sorry
+  classical
+  have hA : ∀ I : Ideal A, I.FG → Module.FinitePresentation A I := by
+    intro I hI
+    have : I.IsPrincipal := IsBezout.isPrincipal_of_FG I hI
+    by_cases hz : I = ⊥
+    · subst I
+      exact Module.FinitePresentation.of_subsingleton _
+    · have hg : Submodule.IsPrincipal.generator I ≠ 0 := by
+        intro h
+        exact hz ((Submodule.IsPrincipal.eq_bot_iff_generator_eq_zero I).mpr h)
+      have : Module.Free A I := by
+        rw [← Ideal.span_singleton_generator I]
+        exact Module.Free.of_basis (Ideal.basisSpanSingleton (Module.Basis.singleton Unit A) hg)
+      have : Module.Finite A I := Module.Finite.of_fg hI
+      exact Module.finitePresentation_of_projective A I
+  obtain ⟨P, hb, ht, ⟨e⟩⟩ :=
+    exists_finiteProjectiveComplex_model_moduleCohomology f d F q
+  have : Module.FinitePresentation A (P.homology (q : ℤ)) :=
+    CochainComplex.finitePresentation_homology_of_coherent hA P hb ht (q : ℤ)
+  exact Module.FinitePresentation.of_equiv e.symm.toLinearEquiv
 
 end AlgebraicGeometry.Scheme.Modules

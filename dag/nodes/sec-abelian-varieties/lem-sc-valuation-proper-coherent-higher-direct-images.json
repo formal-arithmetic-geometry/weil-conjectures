@@ -27,47 +27,28 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite affine trivializing cover of X (finite because f is of finite presentation). On each trivializing affine, F is a finite free module, so the local presentations glue to show that F is finitely presented. Since f is flat, O_X is flat over A; each such finite free F is therefore A-flat, and flatness is local on X, so F is flat over Spec(A). Apply [lem-pc-rf-perfect-base-change] to f and F. Its hypotheses are exactly properness and finite presentation of f, finite presentation of F, and flatness over the base, so E := Rf_*F is a perfect object of D(O_{Spec(A)}).",
+   "text": "Obtain a bounded finite projective A-module complex P with an A-linear isomorphism between the prescribed scalar-restricted cohomology module and H^q(P), using [lem-sc-valuation-proper-coherent-higher-direct-images-perfectness].",
    "uses": [
-    "def-amb-finite-locally-free-module",
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-valuation-proper-coherent-higher-direct-images-perfectness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.30.4, Tag 0B91, clause (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "A is coherent: by definition of a valuation ring every nonzero finitely generated ideal I of A is principal, I=aA with a\\neq0, and since A is a domain multiplication by a gives A\\cong aA, so I is free of rank one and hence finitely presented (Stacks, Algebra, Example 0EWV). Next, E=Rf_*F is perfect [def-pc-perfect-complex], so Spec(A) has an open covering (U_i) with E|_{U_i} strictly perfect. Since A is local, the only open subset of Spec(A) containing the closed point is Spec(A) itself, so some U_i equals Spec(A); thus E is strictly perfect on the affine Spec(A), and by the affine description in [def-pc-perfect-complex] (Tag 08EB) E\\cong\\widetilde{P^\\bullet} for a bounded complex P^\\bullet of finite projective A-modules. As M\\mapsto\\widetilde M is exact, R^qf_*F=H^q(E)\\cong\\widetilde{H^q(P^\\bullet)} [def-pc-derived-direct-image], a quasi-coherent sheaf on Spec(A). By [lem-sc-coherent-ring-perfect-complex-cohomology], applied to the coherent ring A, each H^q(P^\\bullet) is finitely presented over A. Finally F is quasi-coherent [def-amb-finite-locally-free-module], so the Leray spectral sequence [pqf-lem-leray] E_2^{p,q}=H^p(\\operatorname{Spec}(A),R^qf_*F)\\Rightarrow H^{p+q}(X,F) applies; its terms with p>0 vanish by [lem-pc-affine-vanishing] since R^qf_*F is quasi-coherent on the affine scheme Spec(A). Hence it degenerates and H^q(X,F)\\cong\\Gamma(\\operatorname{Spec}(A),R^qf_*F)=H^q(P^\\bullet), which is finitely presented over A for every q\\geq0.",
+   "text": "A valuation ring is Bezout. A finitely generated ideal I is principal. If I is zero it is finitely presented. Otherwise its nonzero generator yields a singleton basis by multiplication, so I is finite free and finitely presented. These are Mathlib IsBezout.isPrincipal_of_FG, Ideal.basisSpanSingleton and Module.finitePresentation_of_projective. Apply [lem-sc-coherent-ring-perfect-complex-cohomology] to P, its bounds and its finite projective terms, and transport finite presentation across the A-linear isomorphism with Module.FinitePresentation.of_equiv.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-derived-direct-image",
-    "lem-sc-coherent-ring-perfect-complex-cohomology",
-    "def-amb-finite-locally-free-module",
-    "pqf-lem-leray",
-    "lem-pc-affine-vanishing"
+    "lem-sc-coherent-ring-perfect-complex-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 0EX6 (cohomology over a coherent ring), with Algebra, Example 0EWV (valuation rings are coherent)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
-  "lem-pc-rf-perfect-base-change",
-  "def-pc-perfect-complex",
-  "def-pc-derived-direct-image",
-  "lem-sc-coherent-ring-perfect-complex-cohomology",
-  "pqf-lem-leray",
-  "lem-pc-affine-vanishing"
+  "lem-sc-valuation-proper-coherent-higher-direct-images-perfectness",
+  "lem-sc-coherent-ring-perfect-complex-cohomology"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/more-on-algebra.tex",
-  "place": "More on Algebra, Lemma 0EX8 proof using coherent valuation rings and perfect cohomology"
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 0EX8, general-case proof, using Algebra Example 0EWV and perfect-complex cohomology"
  },
  "mathlib_searches": [
   {
@@ -162,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T024036-L-3335024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
