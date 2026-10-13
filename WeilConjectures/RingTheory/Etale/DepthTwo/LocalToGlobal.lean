@@ -81,4 +81,39 @@ theorem etale_finite_of_span_eq_top (s : Set D) (hs : Ideal.span s = ⊤) {k : �
     rw [← Module.rankAtStalk_baseChange]
     exact (H g hgs).2.2 p'
 
+/-- **Finite étale base changes, locally.** If elements `h` of `B` with `B_h ⊗_B T₀` finite étale of
+rank at most `k` over `B_h` cover `Spec D` (through `B → D`), then `D ⊗_B T₀` is finite étale of
+rank at most `k` over `D`. -/
+theorem etale_finite_tensor_of_forall_isPrime {B D T₀ : Type u} [CommRing B] [CommRing D]
+    [CommRing T₀] [Algebra B D] [Algebra B T₀] {k : ℕ}
+    (H : ∀ Q : Ideal D, Q.IsPrime → ∃ h : B, algebraMap B D h ∉ Q ∧
+      Algebra.Etale (Localization.Away h) (Localization.Away h ⊗[B] T₀) ∧
+      Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] T₀) ∧
+      ∀ p, Module.rankAtStalk (R := Localization.Away h) (Localization.Away h ⊗[B] T₀) p ≤ k) :
+    Algebra.Etale D (D ⊗[B] T₀) ∧ Module.Finite D (D ⊗[B] T₀) ∧
+      ∀ p, Module.rankAtStalk (R := D) (D ⊗[B] T₀) p ≤ k := by
+  let s : Set D := {g | ∃ h : B, g = algebraMap B D h ∧
+    Algebra.Etale (Localization.Away h) (Localization.Away h ⊗[B] T₀) ∧
+    Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] T₀) ∧
+    ∀ p, Module.rankAtStalk (R := Localization.Away h) (Localization.Away h ⊗[B] T₀) p ≤ k}
+  have hs : Ideal.span s = ⊤ := by
+    by_contra hne
+    obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ hne
+    obtain ⟨h, hQ, hE⟩ := H m hm.isPrime
+    exact hQ (hle (Ideal.subset_span ⟨h, rfl, hE⟩))
+  refine etale_finite_of_span_eq_top s hs ?_
+  rintro _ ⟨h, rfl, hE, hF, hk⟩
+  let Bh := Localization.Away h
+  let Dg := Localization.Away (algebraMap B D h)
+  let : Algebra Bh Dg := (Localization.awayMap (algebraMap B D) h).toAlgebra
+  have : IsScalarTower B Bh Dg := IsScalarTower.of_algebraMap_eq fun b ↦ by
+    rw [RingHom.algebraMap_toAlgebra, Localization.awayMap, IsLocalization.Away.map,
+      IsLocalization.map_eq, IsScalarTower.algebraMap_apply B D Dg]
+  let e : Dg ⊗[Bh] (Bh ⊗[B] T₀) ≃ₐ[Dg] Dg ⊗[D] (D ⊗[B] T₀) :=
+    (Algebra.TensorProduct.cancelBaseChange B Bh Dg Dg T₀).trans
+      (Algebra.TensorProduct.cancelBaseChange B D Dg Dg T₀).symm
+  refine ⟨.of_equiv e, .equiv e.toLinearEquiv, fun p ↦ ?_⟩
+  rw [← Module.rankAtStalk_eq_of_equiv e.toLinearEquiv, Module.rankAtStalk_baseChange]
+  exact hk _
+
 end Algebra
