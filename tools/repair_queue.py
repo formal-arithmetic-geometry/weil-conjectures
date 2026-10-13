@@ -48,6 +48,12 @@ def stage(entry, tip, decisions, reason):
 
 def active(job):
     c = read(claim_path(job['item']))
+    if not c and job.get('state') in ('pending', 'running'):
+        # the delivery's claim was already closed when it landed (2026-10-13 18:30: both jobs of batch
+        # 20261013T095923 waited forever): the repair group claims the item itself, so no group takes it meanwhile
+        subprocess.run([sys.executable, str(ROOT / 'tools' / 'claim.py'), 'take', job['group'], job['item']],
+                       cwd=ROOT, capture_output=True, text=True)
+        c = read(claim_path(job['item']))
     return c.get('who') == job['group']
 
 def jobs(): return [read(p) for p in sorted(JOBS.glob('*.json'))] if JOBS.exists() else []
