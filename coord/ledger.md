@@ -13657,3 +13657,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:56 L: merged deliver/F3/Sheaf.AlgebraicGeometry.PerfectHomOpenColimitLocalComparison (stage 3; reviewer PASS; first push; landing 20261013T215604-L-898031 (proof); batch 20261013T215553; modules 1; new nodes 0)
 - 21:56 L: merged deliver/F3/Sheaf.RingTheory.EssentiallyFinitePresentationOverIntermediate (stage 3; reviewer PASS; first push; landing 20261013T215605-L-898160 (proof); batch 20261013T215553; modules 1; new nodes 0)
 - 21:56 L: merged deliver/F3/Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem (stage 3; reviewer PASS; first push; landing 20261013T215605-L-898310 (interface); batch 20261013T215553; modules 3; new nodes 2)
+- 21:56 L: merged deliver/F3/Sheaf.RingTheory.LocalRingColimitEssentiallyFiniteType (stage 3; reviewer PASS; first push; landing 20261013T215605-L-898442 (proof); batch 20261013T215553; modules 1; new nodes 0)
