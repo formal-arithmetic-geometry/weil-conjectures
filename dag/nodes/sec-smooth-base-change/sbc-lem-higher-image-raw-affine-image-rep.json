@@ -61,52 +61,47 @@
  "statement": "Under the scheme, coefficient, cofiltered-index, affine-transition, qcqs, and limiting-cone assumptions of [def-sbc-module-higher-image-transitions], let U be an affine etale object over S [def-weil-pbc-etale-site]. For each raw degree-q class z in the derived-Hom presheaf of the limit with coefficient c.pt^*G, there is a stage i and a raw class t at that stage whose image under the canonical raw-to-higher-image section comparison, followed by higherDirectImageOverMap(c_i), equals the raw-to-higher-image section associated to z. The raw presheaves use the free module sheaf on U and single complexes in [def-weil-pbc-derived-categories]. This is only an assertion about raw classes on affine objects; it says nothing about arbitrary higher-image sections or sheaf colimits.",
  "proof": [
   {
-   "text": "Choose a small directed final presentation of I^op; the opposite presentation is initial and preserves the scheme limit. Base change to U. Qcqs structure morphisms become qcqs schemes over affine U, and affine transitions remain affine. Composition of inverse images identifies the pulled-back coefficient diagram with the constant diagram of the limit coefficient sheaf. Connectedness identifies its colimit with that sheaf.",
+   "text": "Apply nonempty_higherDirectImageRaw_complex_presentation to obtain the presentation of the prescribed raw cocone in integer degree q. EtaleComplexCohomologyPresentation.isColimit eliminates its existential witnesses and applies nonempty_isColimit_etale_complex_cohomology, giving the colimit certificate. Thus complex continuity remains a dependency of this step.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify the raw derived-Hom groups with module cohomology of the base changes. Use injective module resolutions and their acyclicity for underlying abelian sections to compute the same cohomology in abelian sheaves. Apply complex continuity to degree-zero complexes, uniformly bounded below by zero. Surjectivity of the filtered abelian-group colimit produces a representative at a stage. Negative degrees have only zero classes, and a stage exists by cofilteredness.",
-   "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-sbc-higher-image-raw-complex-presentation",
+    "def-sbc-etale-complex-cohomology-presentation",
     "lem-weil-pbc-etale-cohomology-limit-complex-systems"
    ],
    "elementary": false
   },
   {
-   "text": "The raw comparison is defined by derived adjunction followed by homology and evaluation at the free-sheaf generator. Expand the unit-counit definition of higherDirectImageOverMap. Naturality of the unit moves the class across pullback; the triangle identity cancels the counit. Pullback composition, its single-functor comparison, and the homology shift comparison give exactly the section associated to the pulled-back raw class. Apply this identity to the stage representative.",
+   "text": "The forgetful functor on abelian groups preserves the filtered colimit, using preservesFilteredColimitsOfSize_shrink. Concrete.isColimit_exists_rep gives a stage and a class. Unop the stage and identify its cocone leg with higherDirectImageRawOverPullback using higherDirectImageRawOverPullbackHom_apply.",
    "uses": [
-    "def-sbc-module-higher-image-transitions",
-    "lem-weil-pbc-inverse-image-composition",
-    "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
+    "def-sbc-higher-image-raw-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply higherDirectImageRawOverPullback_comparison to the cone leg. Apply the limit comparison component to the raw representative equality, and compose with the symmetric pullback comparison equality. This gives the unchanged section equality.",
+   "uses": [
+    "sbc-lem-higher-image-raw-over-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-sbc-higher-image-raw-complex-presentation",
+  "def-sbc-etale-complex-cohomology-presentation",
   "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "def-sbc-module-higher-image-transitions",
-  "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
+  "def-sbc-higher-image-raw-diagram",
+  "sbc-lem-higher-image-raw-over-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "09Z1 cohomology comparison, specialized to fixed pulled-back module coefficients; module/abelian computation by 03FD and degree-zero continuity by 0EZM"
+  "place": "Tags 09Z1, 0EZM and 03Q8; existing raw complex presentation and raw-over comparison, with Mathlib Concrete.isColimit_exists_rep; Y3, 2026-10-13"
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep",
   "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawAffineImageRep.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_higher_image_raw_affine_image_rep",
-  "statement": "theorem exists_higher_image_raw_affine_image_rep (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)] (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c)) [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] (U : S.Etale) [IsAffine U.left] (z : (higherDirectImagePresheaf Λ (c.pt.hom ≫ k) q ((DerivedCategory.Plus.singleFunctor _ 0).obj (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))).obj (op U)) : ∃ (i : I) (t : (higherDirectImagePresheaf Λ ((D.obj i).hom ≫ k) q ((DerivedCategory.Plus.singleFunctor _ 0).obj ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).obj (op U)), ((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app (op U)) ((higherDirectImagePresheafToSheaf Λ ((D.obj i).hom ≫ k) q ((DerivedCategory.Plus.singleFunctor _ 0).obj ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app (op U) t) = (higherDirectImagePresheafToSheaf Λ (c.pt.hom ≫ k) q ((DerivedCategory.Plus.singleFunctor _ 0).obj (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app (op U) z",
+  "statement": "theorem exists_higher_image_raw_affine_image_rep\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W)\n    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)]\n    [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]\n    (U : S.Etale) [IsAffine U.left]\n    (z : (higherDirectImageRawOverPresheaf Λ k G q c.pt).obj (op U)) :\n    ∃ (i : I)\n      (t : (higherDirectImageRawOverPresheaf Λ k G q (D.obj i)).obj (op U)),\n      ((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app (op U))\n        ((higherDirectImageRawOverComparison Λ k G q (D.obj i)).app (op U) t) =\n      (higherDirectImageRawOverComparison Λ k G q c.pt).app (op U) z",
   "branch": "sheaf-dag",
   "by": "V2",
   "date": "2026-10-12"
@@ -122,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-70b81",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T112852-L-772694",
+  "landing": "20261013T145126-L-698155",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered files, DAG node, report, diffs, compilation, and forced-adaptation reader gate all agree and pass."
  }
 }

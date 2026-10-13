@@ -5,12 +5,13 @@ Authors: SHEAF group V2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Affine raw classes in the image of a stage
 
@@ -26,30 +27,28 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+attribute [local irreducible] higherDirectImageRawOverPullback
+  higherDirectImageOverMap higherDirectImagePresheafToSheaf upperStar lowerStar
+  DerivedCategory.Plus.homologyFunctor DerivedCategory.Plus.singleFunctors
+
+set_option backward.isDefEq.respectTransparency true in
 /-- A raw cohomology class on an affine etale object has the same associated
 higher-image section as a raw class at one stage. This says nothing about arbitrary
 higher-image sections, sheaf colimits, or the injectivity of the comparison.
 Source: Stacks Project, Tag 09Z1, the cohomology colimit in the proof; Tag 0EZM.
 (blueprint: sbc-lem-higher-image-raw-affine-image-rep).
 
-Proof: Replace the filtered opposite index by a small directed final poset.
-Its opposite is initial, so the reindexed underlying scheme cone is limiting.
-Base change it along the affine etale object U over S. The stages are qcqs:
-their maps to U are base changes of the qcqs composite structure maps to S.
-Their transitions are affine, and their limit is the pullback of the given limit.
-The coefficient sheaves are all inverse images of G. Composition of inverse
-images identifies their pullbacks to the limit with the fixed limit coefficient
-sheaf, with identity transitions. Its colimit is that sheaf because the filtered
-index is nonempty and connected. Put the coefficients in single complexes in
-degree zero, with common lower bound zero. Compute their underlying abelian
-cohomology by injective module resolutions, whose terms are acyclic for abelian
-sections (03FD), and apply complex continuity 0EZM. Thus the raw class over U
-comes from a raw class at a stage. Derived adjunction identifies the cohomology
-pullback with the transition defined by its unit and counit. Naturality of the
-unit, the triangle identity, and inverse-image composition identify the maps
-from these raw classes to higher-image sections with higherDirectImageOverMap.
-This gives the displayed equality. In negative degrees raw cohomology vanishes,
-so choose any stage and the zero class; the filtered index is nonempty. -/
+Proof: The existing raw complex presentation identifies the raw diagram and
+cocone with a uniformly bounded-below abelian etale complex system on the
+base-changed inverse system. Its isColimit consequence applies complex
+continuity in every integer degree. The forgetful functor from abelian groups
+to types preserves this filtered colimit, so the raw class z is the image of a
+class t at one stage. The existing raw-over pullback comparison identifies the
+section of that raw image with the section obtained from t by the canonical
+higher-image transition. Apply the limit raw-to-sheaf component to the raw
+representative equality, and compose the resulting equality with this canonical
+comparison. This proves the displayed section equality. No directed final
+reindexing, sheafification descent or separate negative-degree argument is needed. -/
 theorem exists_higher_image_raw_affine_image_rep
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -60,19 +59,25 @@ theorem exists_higher_image_raw_affine_image_rep
     (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))
     [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]
     (U : S.Etale) [IsAffine U.left]
-    (z : (higherDirectImagePresheaf Λ (c.pt.hom ≫ k) q
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))).obj (op U)) :
+    (z : (higherDirectImageRawOverPresheaf Λ k G q c.pt).obj (op U)) :
     ∃ (i : I)
-      (t : (higherDirectImagePresheaf Λ ((D.obj i).hom ≫ k) q
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).obj (op U)),
+      (t : (higherDirectImageRawOverPresheaf Λ k G q (D.obj i)).obj (op U)),
       ((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app (op U))
-        ((higherDirectImagePresheafToSheaf Λ ((D.obj i).hom ≫ k) q
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj
-            ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app (op U) t) =
-      (higherDirectImagePresheafToSheaf Λ (c.pt.hom ≫ k) q
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app (op U) z := by sorry
+        ((higherDirectImageRawOverComparison Λ k G q (D.obj i)).app (op U) t) =
+      (higherDirectImageRawOverComparison Λ k G q c.pt).app (op U) z := by
+  have s := nonempty_higherDirectImageRaw_complex_presentation Λ k G q D c hc U
+  obtain ⟨hB⟩ := s.isColimit
+  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+    (forget AddCommGrpCat.{u + 1})
+  obtain ⟨i, t, ht⟩ := Concrete.isColimit_exists_rep
+    (higherDirectImageRawDiagram Λ k G q D U) hB z
+  dsimp only [higherDirectImageRawDiagram, Functor.comp_obj, Functor.op_obj,
+    higherDirectImageRawOverFunctor] at t
+  have ht' := (higherDirectImageRawOverPullbackHom_apply Λ k G q
+    (c.π.app i.unop) U t).symm.trans ht
+  refine ⟨i.unop, t, ?_⟩
+  exact (higherDirectImageRawOverPullback_comparison Λ k G q
+    (A := c.pt) (B := D.obj i.unop) (c.π.app i.unop) U t).symm.trans
+    (congrArg ((higherDirectImageRawOverComparison Λ k G q c.pt).app (op U)) ht')
 
 end AlgebraicGeometry.Etale

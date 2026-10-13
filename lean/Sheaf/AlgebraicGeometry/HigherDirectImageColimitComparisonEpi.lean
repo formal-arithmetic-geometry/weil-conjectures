@@ -81,9 +81,7 @@ theorem epi_higher_image_colimit_comparison
     (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)
   let A := sheafCompose S.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
-  let τ := higherDirectImagePresheafToSheaf Λ (c.pt.hom ≫ k) q
-    ((DerivedCategory.Plus.singleFunctor _ 0).obj
-      (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))
+  let τ := higherDirectImageRawOverComparison Λ k G q c.pt
   have hτ : Presheaf.IsLocallySurjective S.smallEtaleTopology τ :=
     (isLocallyBijective_higherDirectImagePresheafToSheaf Λ _ _ _).2
   refine ⟨?_⟩
@@ -108,19 +106,13 @@ theorem epi_higher_image_colimit_comparison
       simpa only [hB, Category.assoc, Iso.inv_hom_id_assoc] using h
     have he := congrArg (fun f ↦ (f.hom.app
       (op ((Scheme.AffineEtale.Spec S).obj U.unop)))
-        ((higherDirectImagePresheafToSheaf Λ ((D.obj i).hom ≫ k) q
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj
-            ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app
-              (op ((Scheme.AffineEtale.Spec S).obj U.unop)) t)) hi
+        ((higherDirectImageRawOverComparison Λ k G q (D.obj i)).app
+          (op ((Scheme.AffineEtale.Spec S).obj U.unop)) t)) hi
     change (a'.hom.app _) (τ.app _ z) = (b'.hom.app _) (τ.app _ z)
     change (a'.hom.app _) (((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app _)
-      ((higherDirectImagePresheafToSheaf Λ ((D.obj i).hom ≫ k) q
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app _ t)) =
+      ((higherDirectImageRawOverComparison Λ k G q (D.obj i)).app _ t)) =
       (b'.hom.app _) (((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app _)
-        ((higherDirectImagePresheafToSheaf Λ ((D.obj i).hom ≫ k) q
-          ((DerivedCategory.Plus.singleFunctor _ 0).obj
-            ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))).app _ t)) at he
+        ((higherDirectImageRawOverComparison Λ k G q (D.obj i)).app _ t)) at he
     simpa only [Functor.op_obj, τ, ht] using he
   have heq : a' = b' := by
     apply (sheafCompose S.smallEtaleTopology (forget (ModuleCat.{u + 1} Λ))).map_injective
