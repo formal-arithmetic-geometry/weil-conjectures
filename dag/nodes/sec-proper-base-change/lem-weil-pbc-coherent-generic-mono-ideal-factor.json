@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-coherent-generic-mono-ideal-factor",
+ "kind": "statement",
+ "title": "An ideal multiple factors through a generic coherent inclusion",
+ "statement": "Let $X$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth]. Let $K,G$ be coherent $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category, pqf-def-coherent], let $a:K\\to G$ be a monomorphism and let $\\xi\\in X$ be a point at which the induced module-stalk map is bijective [def-weil-pbc-module-stalk]. There exist a quasi-coherent module $J$ and a monomorphism $\\iota:J\\to\\mathcal O_X$, surjective on the $\\xi$-stalk, and a morphism $\\psi:JG\\to K$ whose composite with $a$ equals the canonical inclusion $JG\\to G$ [lem-weil-pbc-ideal-module-product-stalk]. No integral closed subscheme or sum of ideals is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YL, third proof paragraph: the annihilating ideal multiple lies in the ideal-sum submodule. Use the annihilator ideal of the coherent cokernel (Tags 05JU and 05JV). Source read at https://stacks.math.columbia.edu/tag/01YL."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Form Q = coker(a). Coherent cokernel closure makes Q coherent. On the locally Noetherian scheme it is quasi-coherent and finite type.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk of the cokernel is the cokernel of the stalk map. Since a is surjective at ξ, Q has zero ξ-stalk. In particular ξ does not belong to its nonzero-stalk locus.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let H be the annihilator ideal of Q from scheme-theoretic support. It is quasi-coherent, its affine section ideals are the annihilators of the affine section modules of Q, and its closed support is precisely the nonzero-stalk locus of Q. The ideal zero-set stalk criterion therefore shows that H → O_X is surjective at ξ.",
+   "uses": [
+    "lem-weil-pbc-scheme-theoretic-support",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put J = H.toModules and ι = H.toModulesι. The product inclusion JG → G followed by q : G → Q is zero: on every affine open its image consists of sums of jg with j in the annihilator ideal of Q, and q(jg)=j q(g)=0. Vanishing on the affine basis implies global vanishing by sheaf separatedness. Lift JG → G to ker(q) by the kernel universal property. Since a is mono, its image is canonically K and ker(q)=im(a); compose the lift with this canonical isomorphism to obtain ψ with ψ ≫ a = idealModuleProductι ι G. This argument includes zero cokernels and does not use compactness.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YL, third proof paragraph: the annihilating ideal multiple lies in the ideal-sum submodule. Use the annihilator ideal of the coherent cokernel (Tags 05JU and 05JV). Source read at https://stacks.math.columbia.edu/tag/01YL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent subsheaf that agrees with a coherent sheaf at a stalk contains an ideal multiple with the ideal equal to the unit ideal at that stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent inclusion that is an isomorphism at a stalk contains the product of its target with a quasi coherent ideal with full stalk",
+   "results": "Eight hits, including IdealSheafData.subschemeObjIso, Scheme.Hom.stalkFunctor_toImage_injective, exists_lift_of_germInjective_aux, IdealSheafData.isLocalization_away, and ModuleCat.Tilde.stalkIso. None states annihilator factorization of an ideal-module product through a coherent mono.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|ideal.*(factor|[Cc]oherent) in Mathlib/AlgebraicGeometry/Modules and Mathlib/AlgebraicGeometry/IdealSheaf; blueprint searches annihilator, ideal multiple, 01YL",
+   "results": "Only the ideal sheaf construction comment in IdealSheaf/Basic.lean. No factorization theorem. No blueprint nodes matching annihilator, ideal multiple, or 01YL. Existing scheme-theoretic-support node supplies the annihilator only, not the factorization.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Tag 01YL, third paragraph: from the coherent cokernel to an ideal multiple contained in the ideal-sum lattice.",
+   "via": [
+    "lem-weil-pbc-coherent-ideal-patching-generic-embedding-core",
+    "lem-weil-pbc-coherent-ideal-patching-generic-embedding",
+    "lem-weil-pbc-coherent-ideal-patching-exact-sequence",
+    "lem-weil-pbc-coherent-property-integral-ideals-of-small-support",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentGenericMonoIdealFactor",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentGenericMonoIdealFactor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_generic_mono_ideal_factor",
+  "statement": "theorem coherent_generic_mono_ideal_factor\n    (X : Scheme.{u}) [IsLocallyNoetherian X]\n    {K G : X.Modules}\n    (hK : RingedSpace.IsCoherent X.toRingedSpace K)\n    (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (a : K ⟶ G) [Mono a] (ξ : X)\n    (ha : Function.Bijective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map a).hom) :\n    ∃ (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf),\n      Mono ι ∧ J.IsQuasicoherent ∧\n      Function.Surjective\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom ∧\n      ∃ (ψ : idealModuleProduct ι G ⟶ K), ψ ≫ a = idealModuleProductι ι G",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6953f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T022430-L-3220509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6953f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T022430-L-3220509",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged core signature and delivered proof with the node; matched the new factorization statement with its node and cited argument. Both delivered modules and both direct importers compile cleanly; axiom probes pass with sorryAx only for unfinished dependencies."
+ }
+}

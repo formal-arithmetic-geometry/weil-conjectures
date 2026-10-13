@@ -25,16 +25,47 @@
  ],
  "proof": [
   {
-   "text": "This intermediate statement is established by the corresponding geometric argument from Tag 01YL; the remaining proof is postponed to a dedicated worker.",
+   "text": "If i_*I is zero, choose r=1. Every projection from the specified biproduct has zero target, so its identity is zero by biproduct extensionality. This proves the zero alternative directly.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify i(genericPoint Z) with ξ using the equality of closures and uniqueness of generic points. Apply the generic-point ideal inclusion to G and transport the annihilation hypothesis. Obtain a mono α:i_*(A^{⊕r})→G invertible on a neighborhood W of ξ, hence bijective at ξ. Since G has nonzero ξ-stalk, r cannot be zero and A cannot be the zero ideal: in either case the source sum, its pushforward, and its ξ-stalk would be zero. Thus r≥1 and A≠0.",
+   "uses": [
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing common generic lattice lemma to I,A to obtain coherent K and monos b:K→i_*A, d:K→i_*I, both isomorphisms at ξ. Form L=K^{⊕r} and δ=d^{⊕r}:L→M. Use the right-adjoint pushforward biproduct comparison, followed by the biproduct-coproduct comparison, to identify (i_*A)^{⊕r} with i_*(A^{⊕r}); compose b^{⊕r} with this isomorphism and α to obtain a:L→G. Both a and δ are mono. Module stalks preserve finite limits by reflection through the forgetful functor to abelian groups and exactness of abelian sheaf stalks. Comparing stalk biproducts identifies each sum map with a biproduct of isomorphisms. Thus a and δ are bijective at ξ. Finite coherent-sum closure makes L coherent.",
+   "uses": [
+    "lem-pc-r2-integral-ideals-common-generic-lattice",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coherent_generic_mono_ideal_factor to a:L→G, obtaining J,ι and ψ:JG→L with ψa equal to the product inclusion. The product inclusion is mono, so ψ is mono. The ideal-product stalk formula gives the range of (JG)_ξ→G_ξ as the image ideal of ι_ξ times G_ξ. Since ι_ξ is surjective, that image ideal is the unit ideal, making the product stalk map surjective. For any m in L_ξ, lift a_ξ(m) through this product map; injectivity of a_ξ and ψ_ξ followed by a_ξ equal to the product map show the lift maps to m under ψ_ξ. Therefore ψ_ξ is surjective. Set τ=ψ followed by δ; composition proves that τ is mono and surjective at ξ.",
+   "uses": [
+    "lem-weil-pbc-coherent-generic-mono-ideal-factor",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-r2-integral-ideals-common-generic-lattice",
+  "lem-weil-pbc-coherent-generic-mono-ideal-factor",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01YL, lemma-property-irreducible-higher-rank-cohomological, third proof paragraph and final ideal intersection argument; Tag 01YE for the generic ideal inclusion. Read the source at https://stacks.math.columbia.edu/tag/01YL."
+  "place": "Adaptation of Tag 01YL, third paragraph and intersection argument, and Tag 01YE. The source was read on the Stacks website; the local coherent.tex is not available on this worker machine."
  },
  "mathlib_searches": [
   {
@@ -105,13 +136,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "X-6953f",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T234216-L-2124403",
+  "landing": "20261013T022430-L-3220509",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged core signature and delivered proof with the node; matched the new factorization statement with its node and cited argument. Both delivered modules and both direct importers compile cleanly; axiom probes pass with sorryAx only for unfinished dependencies."
  }
 }
