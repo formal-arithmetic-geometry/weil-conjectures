@@ -14,41 +14,52 @@
  },
  "proof": [
   {
-   "text": "Fix a point p, put J = I_p and M = (F_(m+n+1))_p. Use the stalk ideal-product and quotient descriptions. Downward induction identifies (F_(k+1))_p with M/J^(k+1)M for k <= m+n, respecting the reduction maps: the induction step is (M/J^(k+2)M)/J^(k+1)(M/J^(k+2)M) = M/J^(k+1)M since J^(k+2)M is contained in J^(k+1)M. At the top use J^(m+n+1)M = 0, the defining annihilation condition.",
+   "text": "Fix a stalk p and take the unit-stalk isomorphism e with its prescribed germ formula from ideal_module_product_stalk. Such an isomorphism is unique: every unit-stalk element is a germ, and two such maps agree on every germ. Consequently the power range and quotient formulas from that theorem use one common ideal J for all module objects. The range formula also holds for degree zero because the zero power inclusion is the identity and e is surjective.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
     "lem-weil-pbc-ideal-module-product-stalk"
    ],
    "elementary": false
   },
   {
-   "text": "If n>0, x belongs to the adjacent kernel, so its image reduces to zero in F_n. The preceding quotient identifications imply t_p belongs to J^n M; for n=0 use J^0 M = M. Thus a_p t_p belongs to J^(m+n)M. If m+n>0 it reduces to zero in the immediately preceding level. Equality can be checked on stalks, so the section a t is in the sectionwise kernel. The sectionwise kernel universal property supplies y. If m+n=0 take y=a t under the identity inclusion.",
+   "text": "For each r, the defining zero ideal product and the stalk range formula give J^(r+1) M_r=0. The successor transition is a quotient projection followed by the defining isomorphism. Exactness of stalk cokernels makes it surjective, and the compatible quotient linear equivalence identifies its kernel with J^(r+1) M_(r+1). Induct on k<=l to show ker(M_l -> M_k)=J^(k+1) M_l. For k=l, use the identity map and annihilation. For the induction step, Mathlib Submodule.comap_smul_top_of_surjective computes the preimage of J^(k+1) M_l under the last successor transition as J^(k+1) M_(l+1) plus its kernel J^(l+1) M_(l+1). The latter is contained in the former since k<=l, so the sum is just J^(k+1) M_(l+1).",
    "uses": [
-    "def-weil-pbc-formal-kernel-graded-pieces",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false
   },
   {
-   "text": "For representatives b and s satisfying the stated equations, equality of coefficient quotient classes gives b_p-a_p in J^(m+1). Equality of the reductions gives s_p-t_p in J^(n+1)M. Since b_p belongs to J^m and t_p belongs to J^n M, expand b_p s_p-a_p t_p = (b_p-a_p)t_p+b_p(s_p-t_p). Both summands belong to J^(m+n+1)M=0. Stalkwise equality implies equality of the two product sections. On the empty open, sheaf separation supplies equality, and the degree-zero kernel inclusion is the identity.",
+   "text": "For n>0, compose the reduction of t with the next reduction. The kernel condition for x makes this zero, so the composite-kernel formula gives t_p in J^n M_(m+n). For n=0, J^0 M is the whole module. The coefficient germ belongs to J^m by the power range formula. Mathlib ideal multiplication and scalar-action membership therefore place the product in J^(m+n) M_(m+n). In positive total degree this is the adjacent reduction kernel; its section image is zero by equality on stalks. The sectionwise kernel range theorem provides y. In total degree zero the kernel inclusion is the identity, so use the product section itself.",
    "uses": [
-    "lem-weil-pbc-ideal-module-product-stalk",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equality of coefficient quotient classes makes the difference of their germs lie in the stalk kernel of the cokernel projection. Stalk cokernel exactness and the ideal-product range formula identify this with J times the stalk of I^m. Map through the power inclusion and e: Submodule.map_smul'' and the power range formula identify the resulting range with J*J^m=J^(m+1). Equality of s and t after reduction likewise gives s_p-t_p in J^(n+1) M_(m+n). Expand b_p s_p-a_p t_p=(b_p-a_p)t_p+b_p(s_p-t_p). Each summand belongs to J^(m+n+1) M_(m+n), which is zero by annihilation. Equality on stalks proves equality of the product sections; sheaf separation also handles the empty open. No quotient representative or local section is chosen.",
+   "uses": [
     "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-module-stalk-exact",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
   "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-module-stalk-exact",
   "def-weil-pbc-formal-kernel-graded-pieces",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), associated graded construction; Section 0EHN (section-coherent-formal), defining quotient and annihilation conditions. Sources read online at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN. The stalk quotient induction and representative calculation are expanded by Q1."
+  "place": "Stacks Project, Lemma 087Z and Section 0EHN, defining annihilation and quotient conditions, read at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN. M1 formalized the finite-level stalk induction using preimages of ideal multiples, then the sectionwise kernel and representative-difference calculation. This expands the original plan without changing its route."
  },
  "mathlib_searches": [
   {
@@ -134,10 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T100056-L-2477111",
-  "kind": "interface",
+  "landing": "20261013T111902-L-3055886",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
