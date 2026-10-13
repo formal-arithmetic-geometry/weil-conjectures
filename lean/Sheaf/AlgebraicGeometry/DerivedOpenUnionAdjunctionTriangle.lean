@@ -6,6 +6,9 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedOpenUnionSESPresentation
+import Mathlib.CategoryTheory.Shift.Adjunction
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-! # Direct-image triangle on an arbitrary open union
 
@@ -19,6 +22,25 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Pretriangulated
 namespace AlgebraicGeometry
 
+private theorem transport_triangle
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (T : Triangle C) (hT : T ∈ distTriang C) {N A B : C}
+    (eN : T.obj₁ ≅ N) (eA : T.obj₂ ≅ A) (eB : T.obj₃ ≅ B)
+    (b : A ⟶ B) (hb : T.mor₂ ≫ eB.hom = eA.hom ≫ b) :
+    ∃ (d : N ⟶ A) (c : B ⟶ N⟦(1 : ℤ)⟧), Triangle.mk d b c ∈ distTriang C := by
+  let d := eN.inv ≫ T.mor₁ ≫ eA.hom
+  let c := eB.inv ≫ T.mor₃ ≫ eN.hom⟦(1 : ℤ)⟧'
+  refine ⟨d, c, isomorphic_distinguished T hT _ ?_⟩
+  refine (Triangle.isoMk _ _ eN eA eB ?_ hb ?_).symm
+  · change T.mor₁ ≫ eA.hom = eN.hom ≫ (eN.inv ≫ T.mor₁ ≫ eA.hom)
+    simp only [Iso.hom_inv_id_assoc]
+  · change T.mor₃ ≫ eN.hom⟦(1 : ℤ)⟧' =
+      eB.hom ≫ (eB.inv ≫ T.mor₃ ≫ eN.hom⟦(1 : ℤ)⟧')
+    simp only [Iso.hom_inv_id_assoc]
+
+set_option maxHeartbeats 800000 in
+-- Comparing localized right adjoints and their composite shift isomorphism.
 /-- The inverse rotation of the direct-image Mayer--Vietoris triangle, expressed using
 any right adjoints to localized derived restrictions. Its second arrow is constructed by transposing
 the two canonical restrictions of the union counit. This is geometric triangle data only: neither
@@ -74,6 +96,23 @@ theorem derived_open_union_adjunction_triangle
       ((adj V).homEquiv A ((R V).obj (E'⟦k⟧))
         (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β))
     ∃ (d : N ⟶ A) (c : B ⟶ N⟦(1 : ℤ)⟧),
-      Triangle.mk d b c ∈ distTriang (schemeDerivedCategory X) := by sorry
+      Triangle.mk d b c ∈ distTriang (schemeDerivedCategory X) := by
+  classical
+  dsimp only
+  let R := fun W : X.Opens ↦
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
+  let H := R (U ⊓ V) ⋙ G (U ⊓ V)
+  let := (adj (U ⊓ V)).rightAdjointCommShift ℤ
+  obtain ⟨S, eA, eB, eC, hS, hf⟩ :=
+    derived_open_union_ses_presentation X U V G adj (E'⟦k⟧)
+  let T := (DerivedCategory.triangleOfSES hS).invRotate
+  let eN : T.obj₁ ≅ H.obj (E'⟦k - 1⟧) :=
+    (shiftFunctor (schemeDerivedCategory X) (-1 : ℤ)).mapIso eC ≪≫
+      (H.commShiftIso (-1 : ℤ)).symm.app (E'⟦k⟧) ≪≫
+      H.mapIso ((shiftFunctorAdd' (schemeDerivedCategory X) k (-1) (k - 1)
+        (by omega)).symm.app E')
+  exact transport_triangle T
+    (inv_rot_of_distTriang _ (DerivedCategory.triangleOfSES_distinguished hS))
+    eN eA eB _ hf
 
 end AlgebraicGeometry

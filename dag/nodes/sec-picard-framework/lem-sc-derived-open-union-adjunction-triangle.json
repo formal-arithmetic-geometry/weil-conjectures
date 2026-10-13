@@ -15,44 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Put W=U union V and use [lem-pc-open-derived-localization-adjunction] to obtain derived localizations on W and all its opens in the given Hom universe. Restrict E′[k] to W. Use [prop-pur-kinjective-resolutions-exist] for a K-injective representative with injective terms. The inverse images of U and V cover W, so [lem-pc-kinjective-mayer-vietoris-presentation] gives the short exact complex, with its pair-of-units first arrow and the required direct-image comparisons. Apply [lem-weil-pbc-complex-ses-triangle] and inverse rotation.",
+   "text": "Apply [lem-sc-derived-open-union-ses-presentation] to E shifted by k. Obtain a short exact complex S whose three localized objects are the union, the biproduct and the overlap direct images, with its first localized arrow identified with the displayed b. Apply [lem-weil-pbc-complex-ses-triangle] and inverse rotation to obtain a distinguished triangle with first object Q(S.X3)[-1], second Q(S.X1), and third Q(S.X2).",
    "uses": [
-    "lem-pc-open-derived-localization-adjunction",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kinjective-mayer-vietoris-presentation",
+    "lem-sc-derived-open-union-ses-presentation",
     "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the right derived direct image from W to X. It preserves the triangle and commutes with integer shifts by [lem-pc-right-derived-functor-triangulated]. Identify each composite direct image with a right adjoint to the corresponding restriction on X: compose the adjunctions, identify their left adjoints using associativity of localized restriction and exact-functor localization comparisons [def-pc-derived-open-restriction-maps, lem-weil-pbc-exact-functor-derived-factorization], and use the unique isomorphism of right adjoints compatible with the adjunction. The shift comparison identifies the first vertex with G_(U intersection V)(R_(U intersection V)(E′[k-1])). Transport distinguishedness along these vertex isomorphisms.",
+   "text": "Exact restriction commutes with integer shifts [lem-weil-pbc-exact-functor-derived-factorization]. Mathlib Adjunction.rightAdjointCommShift gives a compatible shift comparison for the supplied overlap right adjoint. The composite R_overlap followed by G_overlap therefore commutes with shifts. Combine the shifted third-object comparison with this composite shift comparison and shift addition k+(-1)=k-1 to identify the first vertex with N. Transport the inverse-rotated triangle along this isomorphism and the other two presentation isomorphisms. Define d by precomposition with the inverse first-vertex isomorphism and postcomposition with the second-vertex isomorphism; define c similarly, shifting the first-vertex isomorphism by 1. The first and third triangle squares follow by cancellation of inverse isomorphisms, and the second square is the presentation equality. No further geometric assertion is used.",
    "uses": [
-    "lem-pc-right-derived-functor-triangulated",
-    "def-pc-derived-open-restriction-maps",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
-  },
-  {
-   "text": "The counit at R_W(E′[k]) is the transpose of identity on A. The canonical nested restriction comparison sends this counit to maps R_U A -> R_U(E′[k]) and R_V A -> R_V(E′[k]). Transposing back gives the U and V components of the transported unit arrow; thus this arrow is exactly the explicit biproduct lift b. This mate computation uses adjunction naturality and the two triangle identities, so it is unchanged on replacing canonical right adjoints by the supplied ones. On sections it is restriction from Z intersection W to Z intersection U and Z intersection V. Empty opens yield zero vertices, repeated opens yield a split triangle, and shift addition works for every integer k.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-open-restriction-maps",
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "lem-pc-open-derived-localization-adjunction",
-  "lem-pc-right-derived-functor-triangulated",
+  "lem-sc-derived-open-union-ses-presentation",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X3",
+  "group": "Q2",
   "date": "2026-10-13",
-  "note": "Expansion of Tag 08BV for the arbitrary union, with fixed localized-site right adjoints and an explicitly constructed restriction arrow. Source read at the Stacks tag and in cohomology.tex, lemma-exact-sequence-j-star."
+  "note": "Lean reduction to the short exact complex part of Tag 08BV. The SES triangle, inverse rotation, right-adjoint shift comparison, shift addition and all triangle-isomorphism squares are proved in Lean. The geometric presentation is one separate strictly intermediate theorem."
  },
  "mathlib_searches": [
   {
@@ -124,9 +111,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T100219-L-2502498",
+  "landing": "20261013T111913-L-3059562",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
