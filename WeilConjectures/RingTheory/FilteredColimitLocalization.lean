@@ -42,6 +42,8 @@ closed domains then so is `R_p`.
 
 @[expose] public section
 
+set_option backward.isDefEq.respectTransparency.types false
+
 universe u
 
 open CategoryTheory Limits Polynomial
