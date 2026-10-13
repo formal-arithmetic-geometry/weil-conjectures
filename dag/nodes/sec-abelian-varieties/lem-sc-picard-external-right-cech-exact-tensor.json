@@ -16,27 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Every tuple intersection on each factor is affine by repeated binary intersection, since tuples in Cech degree n have n+1 entries. Quasi-coherent sections of S on the right intersection are short exact by left exactness and H^1 vanishing of S.X₁.",
+   "text": "Use the affine relative diagonal criterion and induction on the positive tuple length to show that every right Cech intersection is affine. Identify the categorical product of opens with the infimum.",
    "uses": [
-    "lem-sc-picard-affine-diagonal-intersections",
-    "pqf-lem-affine-vanishing"
+    "lem-sc-picard-affine-diagonal-intersections"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor the degreewise section sequences with the fixed F cochains over k and sum over p+q=n. Tensor over a field is exact, as are finite products and sums of vector spaces. Extension by zero adds zero sequences in negative degrees. Apply degreewise short exactness of complexes. Empty tuple-index sets give zero terms.",
+   "text": "Forget the module action to get a short exact sequence of abelian sheaves. The quasi-coherent kernel is Cech-acyclic on affine opens by exactAt_cechComplex_basicOpen. Apply the proved wrapper surjective_app_of_cechAcyclicOnAffines for the topological Cech lifting criterion. Sections are injective and exact at the middle.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-affine-cech-complex",
+    "lem-pc-topological-ses-cech-sections-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar restriction retains these section functions. In each Cech degree, use product projections and ModuleCat.piIsoPi to assemble the coordinate lifts and prove injectivity, epicity, and middle exactness. The map-projection compatibility and degreewise criterion prove scalar Cech short exactness. The proof is the private picard_right_cech_sections_exact helper in the item module.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Apply the tensor bifunctor to the fixed left cochains and the scalar Cech short exact sequence. Evaluating the bicomplex twice gives tensorLeft on a short exact vector-space sequence. Every field module is flat, and Mathlib.RingTheory.Flat.CategoryTheory supplies finite-limit preservation, so ShortExact.map_of_exact applies. Degreewise detection twice proves bicomplex short exactness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply shortExact_extended_total to this bicomplex sequence. The bifunctor sends the identity in the fixed left argument to the identity; normalizing functor maps identifies the totalized and extended maps with those of picardRightTensorCechFunctor. The private tensor-total helpers implement this step. Finally apply tensor preservation to the scalar Cech exactness proved above.",
+   "uses": [
+    "lem-sp-first-quadrant-extended-total-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-picard-affine-diagonal-intersections",
-  "pqf-lem-affine-vanishing"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-affine-cech-complex",
+  "lem-pc-topological-ses-cech-sections-surjective",
+  "lem-sp-first-quadrant-extended-total-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, right-variable component of the coefficient diagram"
+  "place": "Tag 0BED, right-variable coefficient diagram; proved directly in the item module using closed affine Cech lifting machinery, Mathlib field flatness, and the proved first-quadrant extended-total exactness theorem."
  },
  "mathlib_searches": [
   {
@@ -110,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "X-03cfd",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T111915-L-3059923",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T124317-L-3778476",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean theorem with its node, proof dependencies, source and report; verified compilation of the delivery and direct importer and checked all six declarations' axioms."
  }
 }
