@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-koszul-cech-stage-lifting",
+ "kind": "statement",
+ "title": "Every Cech cochain lifts to one Koszul exponent",
+ "statement": "Let A be a commutative ring, r a natural number, f : Fin r → A, and F an integer-indexed complex of sheaves of modules on Spec(A), with every F.X q quasi-coherent. For the specified diagram and cocone [def-sc-koszul-cech-comparison-construction], every element y of degree n of the principal alternating Cech total [def-sc-principal-open-alternating-total] is the image of a degree-n element z at a single stage e : ℕ under the cocone leg, transported to the specified target by its point equality. No cycle condition is assumed.",
+ "stmt_deps": [
+  "def-sc-koszul-cech-comparison-construction",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D0 and 08D1, localization fraction map and finite total-degree diagonals; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
+ "proof": [
+  {
+   "text": "Transport the target through principalCechObjIso. For each nonempty subset J,\nput p = card(J)-1 and q = n-p. Quasi-coherence on Spec(A) identifies its section on\nD(g_J), where g_J is the product of the f_j, with the localization of global\nsections of F.X q. Write that section, after multiplication by the inverse of\nInt.negOnePow(p*q+p*(p-1)/2), as m_J/g_J^d_J. There are finitely many J, so choose\nE >= 1 and E >= d_J for all J. Replace m_J by g_J^(E-d_J) m_J. At stage e = E-1,\ndefine each linear map on the ordered exterior basis by these numerators. Terms\noutside the tail's finite support are zero. The free exterior bases therefore give\na homogeneous module Hom cochain, and koszulCechHomObjIso transports it to the\nspecified diagram. The cocone formula gives exactly the chosen sections: g_J is\ninvertible on D(g_J), so the formula can be divided by g_J^E. Transport back through\nprincipalCechObjIso. For r=0 the target has no coordinates, and the zero cochain at\nstage 0 suffices; for zero or nilpotent g_J its localized section module is zero.\nThis argument uses cochains, with no cycle or boundedness condition on F. Mathlib tools: Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent and isIso_fromTildeΓ_iff_isLocalizing identify restriction with localization; Module.Basis.exteriorPower on the standard Finsupp basis gives the ordered exterior coordinates. The formula and object transports are provided by the comparison construction; the specified exterior diagonal transition is supplied by the Koszul open system.",
+   "uses": [
+    "def-sc-koszul-cech-comparison-construction",
+    "def-sc-koszul-open-system",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-cech-comparison-construction",
+  "def-sc-koszul-open-system",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D0 and 08D1, localization fraction map and finite total-degree diagonals; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul to Cech localization map: every target element lifts to a stage, and a stage element in its kernel vanishes at a later stage",
+   "results": "HTTP Internal Server Error; service unavailable, no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite principal affine cover, every Cech cochain lifts to a Koszul Hom cochain at a single exponent and a Koszul cochain mapping to zero vanishes at a later exponent",
+   "results": "8 hits about single-component Hom cochains and differential shape, none about the specified Koszul cocone.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, Function.Bijective",
+   "results": "Generic ConcreteCategory.isIso_iff_bijective found, but no finite-stage lifting or kernel theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|Koszul|Cech|Čech in Mathlib/Algebra/Homology and Mathlib/AlgebraicGeometry/Modules; blueprint_refs.py search Koszul; project rg stage lifting and kernel",
+   "results": "Mathlib LocalCohomology mentions future Koszul/Cech descriptions; no specified cocone. No existing project statement fixes these finite-stage lifting or kernel conditions. Blueprint search returns completion and reconstruction statements, no match. Mathlib has the constituent affine localization and exterior basis tools.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulCechComparisonIsIso",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Koszul-to-alternating-Cech comparison: finite-stage lifting clause of the localization argument",
+   "via": [
+    "lem-sc-koszul-cech-comparison-is-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulCechStageLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCechStageLifting.lean",
+  "declaration": "AlgebraicGeometry.koszulCechCocone_stage_lifting",
+  "statement": "theorem koszulCechCocone_stage_lifting\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (F : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) (n : ℤ)\n    (y : ((principalCechFunctor r f).obj F).X n) :\n    ∃ (e : ℕ) (z : ((koszulCechHomDiagram A r f\n      (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)).obj\n        e).X n),\n      (((koszulCechCocone A r f F).ι.app e ≫\n        eqToHom (koszulCechCocone_exists A r f F).choose_spec.1).f n) z = y",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T031556-L-3576476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T031556-L-3576476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
