@@ -12,12 +12,12 @@
  ],
  "proof": [
   {
-   "text": "Put q i = j i followed by the inclusion of U i in S. Restrict W i to V(i,k) = the inverse image of U k under q i. Its map to S factors both through U i and through U k. Compatibility with i,k gives a factor of the latter map through j k, hence a map V(i,k) to W k over S. Its image lies in V(k,i), so it factors through that open restriction. Reversing i,k gives the inverse: after composition into S each composite is the original structure map, and q i and q k are monomorphisms. The same cancellation proves uniqueness.",
+   "text": "Write f_i = j_i followed by U_i inclusion. The private proved helper compatibleImmersion_openOverlap identifies W_i ×_S W_k with the restriction of W_i to f_i inverse image U_k. Compatibility applied to this restriction gives its map to W_k. The pullback universal property is proved explicitly: an arbitrary cone lifts through the open inclusion, and cancellation of f_k verifies its other component. Hence the pullback first projection is open and its range is precisely f_i inverse image U_k. These steps use Mathlib morphismRestrict_ι, IsOpenImmersion.lift and IsPullback.isoPullback.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "These unique isomorphisms restrict to the triple intersections and satisfy the cocycle identity, because both composites have the same map to S. The restriction maps V(i,k) to W i are open immersions. Apply scheme gluing (Tags 01JB and 01JC) to obtain Z with open charts e i from W i. The maps q i agree on the overlaps, so open-cover morphism gluing gives a map q from Z to S.",
+   "text": "The private proved helper exists_gluedMonoOpenAtlas uses the pullbacks W_i ×_S W_j as overlap schemes. Their first projections are open. Pullback symmetry gives transition maps; iterated pullback.lift gives the triple-overlap cyclic permutation. Cancel the monic composite of the two first projections and f_i to prove its cocycle identity. These fields define Scheme.GlueData. Its glued scheme and open charts are jointly surjective. Construct q by Multicoequalizer.desc on the compatible f_i, with compatibility equal to pullback.condition. Multicoequalizer.π_desc proves e_i followed by q = f_i, and GlueData.glue_condition gives equality of the two overlap maps into the gluing.",
    "uses": [
     "lem-weil-pbc-glue-schemes",
     "lem-weil-pbc-scheme-morphism-gluing"
@@ -25,7 +25,7 @@
    "elementary": false
   },
   {
-   "text": "The image of e i is the inverse image of U i under q. One inclusion follows from q composed with e i = q i. For the other, choose a chart e k containing a point z whose image under q lies in U i. Its preimage in W k belongs to V(k,i), whose comparison with V(i,k) identifies z with a point in the e i chart. Thus the two open subsets coincide. Since e i and the inclusion of U i are open immersions, this equality and the commutative square give the asserted Cartesian square (the universal property of an open restriction). For empty S the point-indexed family is empty; take the empty scheme for Z and its unique map to S, and the chart assertions are vacuous.",
+   "text": "For z with q(z) in U_i, choose a chart e_k and x with e_k(x)=z. The range formula for the overlap gives a point v of W_k ×_S W_i with first projection x. The overlap chart equality expresses z as e_i of the second projection of v. Thus q inverse image U_i lies in the range of e_i. Given a cone over U_i inclusion and q, lift its Z component through e_i using this range inclusion. Cancel U_i inclusion to prove the other triangle; cancel e_i for uniqueness. This explicitly gives PullbackCone.IsLimit.mk and the required IsPullback. The same construction treats empty S or empty patches without a nonemptiness assumption.",
    "uses": [],
    "elementary": false
   }
@@ -38,7 +38,7 @@
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDL",
   "place": "final paragraph, gluing characterized patches; Schemes Tags 01JB and 01JC",
-  "note": "The source omits the gluing details. This fills in only the geometric chart construction, separately from the predicate argument."
+  "note": "Complete compiling proof by R1: open overlap pullback identification, explicit Scheme.GlueData triple maps and cocycle, and chart saturation followed by the Cartesian universal property. Both local helpers are private and proved; no new unresolved statements."
  },
  "mathlib_searches": [
   {
@@ -123,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T060421-L-583888",
-  "kind": "interface",
+  "landing": "20261013T100107-L-2480774",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
