@@ -78,7 +78,74 @@ theorem additiveCechCoefficientMap_comm {X : Scheme.{u}} {ι : Type u} [Finite �
         ((etaleOpenCechResolutionDoubleComplex X (additiveCechOpenInclusion X) U I).flip.X
           0).d n m =
       (additiveCechCoefficientComplex U).d n m ≫ additiveCechCoefficientMap U I m := by
-  sorry
+  classical
+  let T := forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u} ⋙
+    AddCommGrpCat.uliftFunctor.{u + 1, u}
+  let P := presheafOver X.toSpecΓ (SheafOfModules.unit X.ringCatSheaf)
+  let i := additiveCechOpenInclusion X
+  let ρ : P ⋙ T ⟶ i.op ⋙ X.etaleAdditiveSheaf.obj :=
+    { app W := AddCommGrpCat.ofHom
+        { toFun := fun x ↦ ULift.up ((X.restrictFunctorΓ.inv.app W).hom x.down)
+          map_zero' := by
+            apply ULift.ext
+            change (X.restrictFunctorΓ.inv.app W).hom 0 = 0
+            exact map_zero _
+          map_add' := by
+            intro x y
+            apply ULift.ext
+            change (X.restrictFunctorΓ.inv.app W).hom (x.down + y.down) = _
+            exact map_add _ _ _ }
+      naturality W V f := by
+        ext x
+        apply ULift.ext
+        change (X.restrictFunctorΓ.inv.app V).hom ((X.presheaf.map f).hom x.down) =
+          (Scheme.Γ.map ((X.restrictFunctor.map f.unop).left).op).hom
+            ((X.restrictFunctorΓ.inv.app W).hom x.down)
+        exact ConcreteCategory.congr_hom (X.restrictFunctorΓ.inv.naturality f) x.down }
+  let σ := ρ ≫ Functor.whiskerLeft i.op (I.ι.f 0).hom
+  let e : (T.mapHomologicalComplex (.up ℕ)).obj ((cechComplexFunctor U).obj P) ≅
+      (cechComplexFunctor U).obj (P ⋙ T) :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun k ↦ PreservesProduct.iso T
+        (fun y : Fin (k + 1) → ι ↦ P.obj (op (∏ᶜ fun l ↦ U (y l))))) (by
+        rintro k _ rfl
+        apply Pi.hom_ext
+        intro y
+        change Fin (k + 2) → ι at y
+        simp only [Category.assoc, PreservesProduct.iso_hom]
+        change piComparison T _ ≫ ((cechComplexFunctor U).obj (P ⋙ T)).d k (k + 1) ≫
+            TopCat.Presheaf.cechComplexFunctorπ U (P ⋙ T) (k + 1) y =
+          T.map (((cechComplexFunctor U).obj P).d k (k + 1)) ≫ piComparison T _ ≫
+            TopCat.Presheaf.cechComplexFunctorπ U (P ⋙ T) (k + 1) y
+        rw [TopCat.Presheaf.cechComplexFunctor_d_π]
+        simp only [TopCat.Presheaf.cechComplexFunctorπ]
+        erw [piComparison_comp_π]
+        rw [← T.map_comp]
+        erw [TopCat.Presheaf.cechComplexFunctor_d_π]
+        simp only [Functor.map_sum, Functor.map_zsmul, Preadditive.comp_sum,
+          Preadditive.comp_zsmul]
+        apply Finset.sum_congr rfl
+        intro a _
+        erw [← Category.assoc, piComparison_comp_π]
+        rw [T.map_comp]
+        rfl)
+  let c := e.hom ≫ (cechComplexFunctor U).map σ
+  have hc (k : ℕ) : c.f k = additiveCechCoefficientMap U I k := by
+    apply Pi.hom_ext
+    intro y
+    change (e.hom.f k ≫ ((cechComplexFunctor U).map σ).f k) ≫
+      TopCat.Presheaf.cechComplexFunctorπ U (i.op ⋙ (I.cocomplex.X 0).obj) k y = _
+    rw [Category.assoc, TopCat.Presheaf.cechComplexFunctor_map_f_π]
+    change piComparison T _ ≫
+      (TopCat.Presheaf.cechComplexFunctorπ U (P ⋙ T) k y ≫ σ.app _) = _
+    rw [← Category.assoc]
+    erw [piComparison_comp_π, Pi.lift_π]
+    rfl
+  change additiveCechCoefficientMap U I n ≫
+      ((cechComplexFunctor U).obj (i.op ⋙ (I.cocomplex.X 0).obj)).d n m =
+    ((T.mapHomologicalComplex (.up ℕ)).obj ((cechComplexFunctor U).obj P)).d n m ≫
+      additiveCechCoefficientMap U I m
+  simpa only [hc] using c.comm n m
 
 
 /-- The resolution differential kills the fixed coefficient augmentation.

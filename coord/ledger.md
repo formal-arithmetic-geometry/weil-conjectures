@@ -12763,3 +12763,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineBasisKInjectiveSectionsPreservesHomology (stage 3; reviewer PASS; first push; landing 20261013T141528-L-379380 (interface); batch 20261013T141520; modules 2; new nodes 1)
 - 14:15 L: merged deliver/H2/Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveTerms (stage 3; reviewer PASS; first push; landing 20261013T141528-L-379489 (interface); batch 20261013T141520; modules 3; new nodes 2)
 - 14:15 L: merged deliver/J3/Sheaf.RingTheory.ComparisonTensorDiagrams (stage 3; reviewer PASS; first push; landing 20261013T141529-L-379658 (interface); batch 20261013T141520; modules 4; new nodes 3)
+- 14:15 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientMap (stage 3; reviewer PASS; first push; landing 20261013T141529-L-379792 (proof); batch 20261013T141520; modules 1; new nodes 0)
