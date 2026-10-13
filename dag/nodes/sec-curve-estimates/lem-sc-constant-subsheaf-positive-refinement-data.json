@@ -13,14 +13,14 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the i-th component of g on the canonical unit, defining s_i. Identify its image under ι and isoC with a locally constant integer function by the constant-sheaf comparison. Compactness gives finite range, and its fibres are compact opens in X, clopen in U_i. Index the nonzero fibres by Fin n with parent indices and take the zero fibre Z_i; their disjointness and union give the partition fields, including empty cases. Use the canonical description from local representatives of the sheafification unit, with values unique on nonempty overlaps by evaluation in an integer skyscraper; gluing on fibres makes this description compatible with the unit as well as restriction.",
+   "text": "Evaluate each coproduct component on its canonical unit to obtain s_i. Apply the unit-compatible comparison [lem-sc-constant-sheaf-locally-constant-unit-comparison] to its image under ι followed by isoC. For each integer value take the image in X of the corresponding fibre in U_i. Mathlib IsLocallyConstant.isClopen_fiber and IsClosed.isCompact show these fibres are compact opens; LocallyConstant.range_finite gives finite ranges. Index the nonzero fibres by the finite dependent sum of their parent index and nonzero value, and use Fintype.equivFin to reindex by Fin n. Equal-parent fibres are disjoint, the zero fibre is disjoint from nonzero fibres, and the fibre union is U_i, including empty domains and families. Naturality and unit compatibility identify the restriction of each image section with the constant unit of its fibre value.",
    "uses": [
-    "lem-sc-constant-sheaf-locally-constant-comparison"
+    "lem-sc-constant-sheaf-locally-constant-unit-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "For each nonzero fibre of value a, normalize the restricted section by the sign of a. The resulting section has positive image |a|. Integer multiplication by its restrictions defines a map from the constant presheaf to the restriction of K; sheafify it, apply extension by zero, and compose with the restriction counit to define f_j. The unit and counit formulas give the positive-value and signed restriction equations. On zero fibres, monicity of ι forces the section to vanish.",
+   "text": "The proved private helper extension_integer_section constructs from any section t over an open A a morphism j_A! Z → K whose canonical unit maps to t. Explicitly integer multiplication by restrictions of t is a constant-presheaf map into K restricted to A. Lift it using sheafifyLift, apply abelianOpenExtensionByZero and compose with abelianOpenCounit [def-sc-abelian-open-extension-by-zero]. The two toSheafify_sheafifyLift formulas, toSheafify_naturality and the direct-sum counit formula prove the unit equation. For a nonzero fibre value a, apply this construction to sign(a) times the restricted s_i. The integer identity sign(a)*a=natAbs(a) proves hv, and sign(a)^2=1 proves hsigned. On zero fibres, naturality and the comparison give zero image; injectivity of the monic map on sections proves hzero. Assemble all fields of PositiveRefinementData, without changing its signature.",
    "uses": [
     "def-sc-abelian-open-extension-by-zero"
    ],
@@ -29,12 +29,12 @@
  ],
  "proof_deps": [
   "def-sc-abelian-open-extension-by-zero",
-  "lem-sc-constant-sheaf-locally-constant-comparison"
+  "lem-sc-constant-sheaf-locally-constant-unit-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0A38",
-  "place": "First proof paragraph; explicit finite signed partition and unit-section construction."
+  "place": "First proof paragraph; Q3 formalizes all finite-fibre, sign-normalization and extension counit calculations, using the unit-compatible version of P3's proved comparison construction."
  },
  "mathlib_searches": [
   {
@@ -121,12 +121,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T230751-L-1906756",
+  "landing": "20261013T022425-L-3217703",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

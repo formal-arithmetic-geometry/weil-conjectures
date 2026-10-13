@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition 006W and Example 0081; source text read at https://stacks.math.columbia.edu/tag/006W and https://stacks.math.columbia.edu/tag/0081"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-locally-constant-maps-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Import all Sheaf.Topology.ConstantSheafLocallyConstantComparison and reuse its existing private abelian_underlying_isSheaf, abelian_section_ext, abelian_gluing, constantSheaf_unit_localSurj and unit_inj (the last already uses skyscraper_abelian_isSheaf). No helper is restated or reproved. Build the additive evaluation equivalences from these local representation, injectivity, separation and gluing results. The representative independence calculation gives hconst for each unit image. Retain hconst as well as the pointwise restriction equation in the public conclusion. Empty opens and unrelated universes are included.",
+   "uses": [
+    "lem-sc-constant-sheaf-locally-constant-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-constant-sheaf-locally-constant-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0081",
+  "place": "Definition 006W and Example 0081. Repair: reuse the existing private helpers through a proof-only import all; retain the evaluation construction and its hconst equation, without restating any helper."
+ },
+ "id": "lem-sc-constant-sheaf-locally-constant-unit-comparison",
+ "title": "Unit-compatible locally constant description of the constant abelian sheaf",
+ "statement": "Let X be a topological space and A an abelian group. Suppose abelian groups in the universe of A admit sheafification on the open site of X [def-weil-pbc-sites-and-cohomology, def-weil-pbc-sheafification]. Let A_X be the sheafification of the constant presheaf [def-weil-pbc-constant-sheaf], and let η be its sheafification unit. There exist additive equivalences e_U from A_X(U) to the locally constant maps from U to A [def-weil-pbc-locally-constant-maps-presheaf], for every open U, such that e_V(s restricted to V)(x)=e_U(s)(x) for every inclusion V into U, every section s over U, and every x in V. Moreover e_U(η_U(a))(x)=a for every a in A and every x in U. Empty opens and unrelated space and coefficient universes are included.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant abelian sheaf sections are naturally equivalent to locally constant functions and the sheafification unit corresponds to constant functions",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Service unavailable; no mathematical conclusion drawn."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSheafify\"",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.isIso_toSheafify, CategoryTheory.GrothendieckTopology.toSheafify, CategoryTheory.GrothendieckTopology.toSheafify_sheafifyLift, CategoryTheory.GrothendieckTopology.toSheafify_naturality, CategoryTheory.GrothendieckTopology.toSheafify_sheafifyLift_assoc, CategoryTheory.GrothendieckTopology.toSheafify_naturality_assoc, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv, CategoryTheory.GrothendieckTopology.whiskerRight_toSheafify_sheafifyCompIso_hom",
+   "verdict": "Sheafification and constant-sheaf construction APIs, but no unit-compatible additive comparison with locally constant maps on arbitrary topological open sites. Reuse the existing project proof and expose its already proved unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant|LocallyConstant|constantSheaf",
+   "date": "2026-10-13",
+   "results": "21 hits: Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "verdict": "Sheafification and constant-sheaf construction APIs, but no unit-compatible additive comparison with locally constant maps on arbitrary topological open sites. Reuse the existing project proof and expose its already proved unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafPositiveRefinementData",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "The subsheaf-of-constant-sheaf filtration step, Stacks 0A38 first proof paragraph: locally constant integer values on the generator domains. The comparison must identify the prescribed canonical unit sections.",
+   "via": [
+    "lem-sc-constant-subsheaf-positive-refinement-data",
+    "lem-sc-constant-subsheaf-positive-refinement",
+    "lem-sc-constant-subsheaf-positive-presentation",
+    "lem-sc-constant-subsheaf-unbounded-normalization",
+    "lem-sc-constant-subsheaf-normalized-completion",
+    "lem-sc-constant-subsheaf-lower-layer-generator",
+    "lem-sc-constant-subsheaf-peel-layer",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSheafLocallyConstantUnitComparison",
+  "file": "lean/Sheaf/Topology/ConstantSheafLocallyConstantUnitComparison.lean",
+  "declaration": "TopCat.constantSheaf_locallyConstant_unit_comparison",
+  "statement": "theorem constantSheaf_locallyConstant_unit_comparison\n    (X : TopCat.{u})\n    [HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{v}]\n    (A : Type v) [AddCommGroup A] :\n    ∃ e : ∀ U : Opens X,\n      AddEquiv (((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{v}).obj\n        (AddCommGrpCat.of A)).1.obj (op U)) (LocallyConstant U A),\n      (∀ (U V : Opens X) (hVU : V ≤ U) (s :\n        ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{v}).obj\n          (AddCommGrpCat.of A)).1.obj (op U)) (x : V),\n        e V (((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{v}).obj\n          (AddCommGrpCat.of A)).1.map (homOfLE hVU).op s) x =\n            e U s ⟨x.1, hVU x.2⟩) ∧\n      (∀ (U : Opens X) (a : A) (x : U),\n        e U ((toSheafify (Opens.grothendieckTopology X)\n          ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of A))).app (op U) a) x = a)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T022425-L-3217703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T022425-L-3217703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
