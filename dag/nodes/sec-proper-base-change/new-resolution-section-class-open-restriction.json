@@ -13,38 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Compute restriction of fixed-resolution sections using restrictedResolution_cohomology, and compose open inclusions using moduleCohomologyFMap functoriality. The canonical restriction-composition coefficient iso is the one in cohomologyOpenRestriction. Both restricted resolutions preserve the original augmentation; the components equations give termwise I(U) -> I(f inverse W).",
+   "text": "Eliminate U = f inverse V. Apply restrictedResolution_open_cohomology to I, the two inverse-image opens, R and R prime. Its termwise section restriction map equals restriction of the pushed complex K by componentwise reflexivity.",
    "uses": [
-    "lem-weil-pbc-restricted-resolution-cohomology",
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "new-restricted-resolution-open-cohomology",
     "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
   },
   {
-   "text": "Commute termwise section restriction with exact evaluation homology comparisons, then with sectionCohomologyTheta, and finally with the evaluated inverse of I.isoRightDerivedObj. Their naturality squares give the equality of normalized class maps.",
+   "text": "The proved private sectionClass_open_restriction lemma uses NatTrans.app_homology for the transformation between evaluations at V and W, followed by naturality of sectionCohomologyTheta. Compose the raw equality with the evaluation homology comparison and theta to obtain the unnormalized sectionClass restriction identity.",
    "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf",
     "def-weil-pbc-flat-base-change-open-choices"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The same complexes and composition identities handle equal or empty opens, the zero coefficient and p=0. No restriction map is inverted.",
+   "text": "Compose with Hom.app of I.isoRightDerivedObj inverse at W. Naturality of that sheaf morphism moves it across restriction. Apply ConcreteCategory.congr_hom to y; Iso.trans_refl eliminates the equality transport of sections after substitution.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-flat-base-change-open-choices",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
-  "lem-weil-pbc-restricted-resolution-cohomology"
+  "new-restricted-resolution-open-cohomology"
  ],
  "proof_origin": {
-  "by": "U3 following document",
+  "by": "G1 following document",
   "document": "https://stacks.math.columbia.edu/tag/01E4",
-  "place": "Lemma 20.7.3 and the restriction equation 20.7.1.1 (01E2); Remark 20.14.2 (01FB). Sources read on 2026-10-13."
+  "place": "Fixed-resolution proof of Lemma 20.7.3; reduction to arbitrary-open raw restriction (01E2 and 01FB), with evaluation/Theta and derived-resolution naturality proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -136,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-aa578",
-  "group": "U3",
+  "reviewer": "X-8db8f",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T155944-L-1306402",
+  "landing": "20261013T164047-L-1668050",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered declarations and proofs with their node statements, dependencies, source arguments, and report; all four modules and direct importer compile cleanly, with only permitted axioms and documented sorry dependencies."
+  "note": "independent Codex review: Delivered packet, base declarations, node fields, compilation, axioms, and both direct importers checked successfully."
  }
 }
