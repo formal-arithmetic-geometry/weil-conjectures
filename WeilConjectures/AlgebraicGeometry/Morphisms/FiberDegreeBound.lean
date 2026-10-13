@@ -70,7 +70,8 @@ theorem Scheme.Hom.fiberDegree_eq_nat_card_of_split_cofan {Z U : Scheme.{u}} (p 
   let s := U.fromSpecResidueField x
   let α (j : J) : Spec K ⟶ D j := s ≫ inv (i j ≫ p)
   have hα (j : J) : α j ≫ i j ≫ p = s := by simp [α]
-  let a (j : J) : Spec K ⟶ p.fiber x := pullback.lift (α j ≫ i j) (𝟙 _) (by simp [hα])
+  let a (j : J) : Spec K ⟶ p.fiber x :=
+    pullback.lift (α j ≫ i j) (𝟙 _) (by simp [hα, s])
   have ha₁ (j : J) : a j ≫ p.fiberι x = α j ≫ i j := pullback.lift_fst _ _ _
   have ha₂ (j : J) : a j ≫ p.fiberToSpecResidueField x = 𝟙 _ := pullback.lift_snd _ _ _
   have hpb (j : J) : IsPullback (a j) (α j) (p.fiberι x) (i j) := by
@@ -93,9 +94,9 @@ theorem Scheme.Hom.fiberDegree_eq_nat_card_of_split_cofan {Z U : Scheme.{u}} (p 
     have h1 : a j ≫ e.hom =
         Spec.map (CommRingCat.ofHom (Pi.evalRingHom (fun _ : J ↦ K) j)) :=
       hc'.comp_coconePointUniqueUpToIso_hom hSpec ⟨j⟩
-    rw [Cofan.mk_inj, reassoc_of% h1, ha₂, Iso.refl_hom, Spec.map_id, Category.comp_id,
-      ← Spec.map_comp]
-    convert Spec.map_id (CommRingCat.of K)
+    rw [cofan_mk_inj, reassoc_of% h1, ha₂, Iso.refl_hom, Spec.map_id, Category.comp_id,
+      ← Spec.map_comp, ← Spec.map_id]
+    congr 1
   rw [Scheme.Hom.fiberDegree]
   refine (Scheme.Hom.finrankΓ_eq_of_iso (p.fiberToSpecResidueField x) _ e (Iso.refl _) he).trans
     ?_
@@ -132,12 +133,12 @@ theorem finite_open_cover_degree_sum {k : Type u} [Field k] {T : Scheme.{u}}
     have := finite_sections_top_of_isFinite ((W i).ι ≫ t)
     rwa [Scheme.Hom.appLE_top_top] at this
   let r : Γ(T, ⊤) →ₐ[CommRingCat.of k] Π i, Γ(W i, ⊤) :=
-    Pi.algHom _ _ fun i ↦ { (W i).ι.appTop.hom with commutes' := fun _ ↦ rfl }
+    AlgHom.pi fun i ↦ { (W i).ι.appTop.hom with commutes' := fun _ ↦ rfl }
   have hr : Function.Injective r := by
     intro a b hab
     refine T.sheaf.eq_of_locally_eq' (fun i ↦ (W i).ι ''ᵁ ⊤) ⊤ (fun i ↦ homOfLE le_top) ?_ a b
       fun i ↦ congrFun hab i
-    simp [Scheme.Opens.ι_image_top, hW]
+    simp [hW]
   have hTfin : Module.Finite (CommRingCat.of k) Γ(T, ⊤) :=
     Module.Finite.of_injective r.toLinearMap hr
   refine ⟨?_, ?_⟩
