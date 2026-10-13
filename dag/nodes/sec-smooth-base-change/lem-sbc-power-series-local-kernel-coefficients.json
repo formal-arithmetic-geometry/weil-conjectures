@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-power-series-local-kernel-coefficients",
+ "kind": "lemma",
+ "title": "Local kernel-power membership kills low coefficients",
+ "statement": "Let A be a commutative ring, d,n natural numbers, B=A[[X_1,...,X_d]], z:Spec A to Spec B the constant-coefficient zero section, and V any open in Spec B. Write r:B to Gamma(V,O) for canonical restriction. For each x in z^{-1}(V), if the germ of r(b) belongs to the nth power of the kernel of the restricted zero-section stalk map, then every coefficient of b of total degree less than n has zero germ in the base stalk at x. Neither depth nor Noetherianity is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9 fixed-index calculation; canonical stalk identifications from the affine-scheme construction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical spectrum-stalk and open-restriction isomorphisms to identify the stalk arrow with the localization of constant coefficient. Naturality of the canonical affine section isomorphism and germ restriction identifies the germ of the restricted series with b/1.",
+   "uses": [
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coefficientwise localization to A_p[[X]] makes every denominator outside the zero-section prime invertible by its unit constant coefficient. Extend it to B_q; uniqueness of localization identifies constant coefficient after extension with the localized stalk map. Thus its kernel maps into the variables ideal (the coefficient criterion at order one). Comap-power monotonicity and the coefficient criterion at order n kill all low-degree coefficients. Translate back through the base stalk isomorphism.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "proof_origin": {
+  "kind": "agent-written",
+  "by": "T4",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9 fixed-index calculation; canonical stalk identifications from the affine-scheme construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let A be a commutative ring, d,n natural numbers, B=A[[X_1,...,X_d]], z:Spec A to Spec B the constant-coefficient zero section, and V any open in Spec B. Write r:B to Gamma(V,O) for canonical restriction. For each x in z^{-1}(V), if the germ of r(b) belongs to the nth power of the kernel of the restricted zero-section stalk map, then every coefficient of b of total degree less than n has zero germ in the base stalk at x. Neither depth nor Noetherianity is required.",
+   "results": "No exact match. Existing search found germ and localization APIs; the specialized comparison is proved here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.coeff, AlgebraicGeometry.Spec.stalkIso",
+   "results": "0 hits; canonical stalk transport and a localized power-series coefficient calculation are required",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured.*(germ|depth)|depth.*punctured|kernel.*coeff|coeff.*kernel",
+   "results": "0 hits in Mathlib/AlgebraicGeometry and Mathlib/RingTheory/MvPowerSeries; proved library tools found by separate searches.",
+   "date": "2026-10-13",
+   "verdict": "library tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local power series stalk kernel power membership implies that coefficients of lower degree vanish in the base stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedIdealDetection",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-power-series-punctured-ideal-detection",
+   "place": "Tag 0EY9 fixed-index calculation; canonical stalk identifications from the affine-scheme construction"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesLocalKernelCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesLocalKernelCoefficients.lean",
+  "declaration": "AlgebraicGeometry.Scheme.powerSeries_low_coeff_germ_eq_zero_of_kernel_pow",
+  "statement": "theorem powerSeries_low_coeff_germ_eq_zero_of_kernel_pow\n    (A : Type u) [CommRing A] (d : ℕ)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens) :\n    let z := Spec.map\n      (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))\n    let r := ((ΓSpecIso (.of (MvPowerSeries (Fin d) A))).inv ≫ V.ι.appTop).hom\n    ∀ (b : MvPowerSeries (Fin d) A) (n : ℕ) (x : (z ⁻¹ᵁ V).toScheme),\n      (V.toScheme.presheaf.Γgerm ((z ∣_ V) x)).hom (r b) ∈\n        (RingHom.ker ((z ∣_ V).stalkMap x).hom) ^ n →\n      ∀ E : Fin d →₀ ℕ, E.degree < n →\n        ((Spec (.of A)).presheaf.Γgerm ((z ⁻¹ᵁ V).ι x)).hom\n          ((ΓSpecIso (.of A)).inv.hom (MvPowerSeries.coeff E b)) = 0",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T151137-L-878408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T151137-L-878408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

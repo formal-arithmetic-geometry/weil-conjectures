@@ -15,36 +15,37 @@
  ],
  "proof": [
   {
-   "text": "For n=0 the conclusion is automatic. For n>0 use canonical localization coordinates for the zero-section stalk map and the open-immersion stalk isomorphisms. The kernel at x is I B_q: if constantCoeff(a) is killed in A_p, a constant series lifting a denominator outside p kills a modulo I. Localization commutes with powers and quotients. Thus the assumed memberships say that the section of the intersection of V with Spec(B/I^n) represented by b is zero in every stalk. A sheaf section zero at every stalk is zero.",
+   "text": "Transport the germ membership to the localized constant-coefficient map and then coefficientwise localize to A_p[[X]]. Denominators outside the zero-section prime have unit constant coefficient, so the localization extends. The kernel maps into the variables ideal, hence its nth power kills every coefficient of total degree less than n in A_p. The canonical stalk identifications give vanishing of the corresponding base coefficient germ.",
    "uses": [
-    "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-affine-open-stalk-localization"
+    "lem-sbc-power-series-local-kernel-coefficients"
    ],
    "elementary": false
   },
   {
-   "text": "The monomials of total degree less than n form an A-basis of B/I^n, via the explicit coefficient and finite-monomial-sum maps. The finite affine projection of the thickening to U identifies its direct-image module with the restriction of this finite free A-module. Depth-two Hartogs for O on Spec(A), followed by finite direct sums, identifies the sections with B/I^n through the canonical restriction map. Therefore the vanishing section implies that the quotient class of b is zero.",
+   "text": "For each low-degree coefficient, hV identifies the base points occurring in the hypothesis with every point away from the closed point. Punctured-function detection in a depth-two local ring makes that coefficient zero in A.",
    "uses": [
-    "lem-sbc-depth-two-hartogs-restriction"
+    "lem-sbc-depth-two-punctured-function-detection"
    ],
    "elementary": false
   },
   {
-   "text": "The kernel of B to B/I^n is I^n, so the vanishing quotient class proves b in I^n.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the proved combined-ideal coefficient criterion with base ideal zero. Its low-degree coefficient conditions are zero, so b belongs to the nth variables-ideal power. This includes n=0 without a separate case.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-depth-two-hartogs-restriction",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-spec-map-stalk-localization"
+  "lem-sbc-power-series-local-kernel-coefficients",
+  "lem-sbc-depth-two-punctured-function-detection",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
  ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "G1",
+  "kind": "agent-written",
+  "by": "T4",
   "document": "Stacks Project",
-  "place": "Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2), first displayed inverse-limit calculation at a fixed index, before taking the inverse limit; the subsequent comparison of rings"
+  "place": "Tag 0EY9 fixed-index comparison, proved coefficientwise using Tags 0311 and 00LL"
  },
  "mathlib_searches": [
   {
@@ -140,9 +141,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T143545-L-560515",
+  "landing": "20261013T151137-L-878408",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

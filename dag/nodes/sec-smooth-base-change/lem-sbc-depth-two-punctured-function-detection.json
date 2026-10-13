@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-depth-two-punctured-function-detection",
+ "kind": "lemma",
+ "title": "Detecting functions at punctured-spectrum germs",
+ "statement": "Let A be a Noetherian commutative local ring of depth at least two. If a in A has zero germ at each point of Spec A other than the closed point, under the canonical affine global-section identification, then a=0. Zero germs mean zero in the local rings, not merely residue fields.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0311 and 00LL: localization detection at associated primes and regular elements avoiding associated primes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The maximal ideal cannot be associated: an associated maximal ideal contains only zerodivisors, so every regular sequence in it is empty. Nakayama gives the properness required in the depth definition, and hence depth zero, contradicting the hypothesis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each associated prime p use the zero-germ assumption at its nonclosed point and the canonical stalk localization isomorphism to obtain a/1=0 in A_p. The localization zero criterion gives s outside p with s*a=0. Detection by localizations at associated primes gives a=0.",
+   "uses": [
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "kind": "agent-written",
+  "by": "T4",
+  "document": "Stacks Project",
+  "place": "Tags 0311 and 00LL: localization detection at associated primes and regular elements avoiding associated primes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let A be a Noetherian commutative local ring of depth at least two. If a in A has zero germ at each point of Spec A other than the closed point, under the canonical affine global-section identification, then a=0. Zero germs mean zero in the local rings, not merely residue fields.",
+   "results": "No exact match. Existing search found germ and localization APIs; the specialized comparison is proved here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Spec.stalkIso, IsLocalRing.depth",
+   "results": "0 hits; associated-prime localization detection exists as a proved library theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured.*(germ|depth)|depth.*punctured|kernel.*coeff|coeff.*kernel",
+   "results": "0 hits in Mathlib/AlgebraicGeometry and Mathlib/RingTheory/MvPowerSeries; proved library tools found by separate searches.",
+   "date": "2026-10-13",
+   "verdict": "library tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element of a noetherian local ring of positive depth is zero if its germs vanish away from the closed point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedIdealDetection",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-power-series-punctured-ideal-detection",
+   "place": "Tags 0311 and 00LL: localization detection at associated primes and regular elements avoiding associated primes"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPuncturedFunctionDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoPuncturedFunctionDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.eq_zero_of_depth_two_punctured_germs",
+  "statement": "theorem eq_zero_of_depth_two_punctured_germs\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (a : A)\n    (ha : ∀ x : Spec (.of A), x ≠ IsLocalRing.closedPoint A →\n      ((Spec (.of A)).presheaf.Γgerm x).hom ((ΓSpecIso (.of A)).inv.hom a) = 0) :\n    a = 0",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T151137-L-878408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T151137-L-878408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
