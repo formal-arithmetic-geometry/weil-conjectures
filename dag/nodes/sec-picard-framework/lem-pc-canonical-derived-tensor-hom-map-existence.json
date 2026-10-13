@@ -12,36 +12,26 @@
  ],
  "proof": [
   {
-   "text": "Reuse `homTensorDegreewiseMap_spec`, `homTensorDegreewiseMap_comm`, and\n`homTensorDegreewiseMap_natural` for the normalized degreewise construction,\ndifferential compatibility and functoriality. The global-cochain comparison\n`homComplex_global_cochains` identifies chain maps with degree-zero cocycles and\nhomotopies with degree-minus-one boundaries; hence this comparison gives precisely\nthe stated map on homotopy classes. The pure-tensor condition in the degreewise\nspecification agrees with `schemeTensorHomUncurryComponent` by the sheaf tensor-Hom\nadjunction and symmetry. Thus these existing lemmas supply the component calculation,\nincluding its normalization, rather than an arbitrary existential isomorphism.\n\nChoose K-flat complex representatives of K and L and the fixed K-injective\nreplacement I(M). A derived map to RHom(L,M) lifts to a homotopy class of maps into\nHom(L,I(M)), since this complex is K-injective for K-flat L. Lift that class to a\nchain map. Uncurry its components by the sheaf tensor-Hom adjunction and use tensor\nsymmetry to put P before L. The total-tensor differential and the Hom differential\nagree on each (p,q) summand, so these components define a chain map. Homotopic input\nmaps give homotopic uncurried maps by the same componentwise calculation. Transport\nits localization along the tensor model comparison and inverse resolution map.\nCommon K-flat resolutions and quasi-isomorphisms into K-injectives show independence\nof representatives; componentwise composition gives the three-variable naturality.\nFor an arbitrary L in the representative equation, replace L by a K-flat Lc.\nHom(-,I(M)) and P tensor - both invert this quasi-isomorphism; the componentwise\nconstruction commutes with it. Cancel the localized comparison to obtain the exact\nrepresentative equation for L. This constructs functions only; their inverse laws\nare not asserted here.",
+   "text": "Obtain the descended family and its representative equation and isomorphism transport from lem-pc-tensor-hom-uncurry-descent. Apply lem-pc-tensor-hom-uncurry-descent-naturality for arbitrary-morphism naturality. For each representative, take the explicitly constructed schemeTensorHomUncurry; its summand identity supplies the component clause and the descent equation supplies the localization clause. Combine the two clauses of IsCanonicalDerivedTensorHomMap.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-sc-hom-tensor-degreewise",
-    "lem-sc-hom-tensor-differential",
-    "lem-sc-hom-tensor-naturality",
-    "lem-pur-hom-complex-global-cochains"
+    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-pc-tensor-hom-uncurry-descent",
+    "lem-pc-tensor-hom-uncurry-descent-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-hom-tensor-degreewise",
-  "lem-sc-hom-tensor-differential",
-  "lem-sc-hom-tensor-naturality",
-  "lem-pur-hom-complex-global-cochains"
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-pc-tensor-hom-uncurry-descent",
+  "lem-pc-tensor-hom-uncurry-descent-naturality"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M4",
+  "group": "E3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DJ; explicit normalized uncurrying and inverse currying spelled out from the source argument"
+  "place": "Tag 08DJ; sites-cohomology.tex Tag 0A90; original argument split into explicit differential, descent and naturality steps"
  },
  "mathlib_searches": [
   {
@@ -129,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-924e0",
-  "group": "M4",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T011931-L-2764584",
+  "landing": "20261013T045523-L-127105",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with DAG statements, unchanged extracted definitions, source arguments, change record and report; compiled four delivery modules and all six direct importers; checked axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

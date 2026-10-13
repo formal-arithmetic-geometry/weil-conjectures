@@ -6,12 +6,8 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.Algebra.Homology.HomTensorDifferential
-import Sheaf.Algebra.Homology.HomTensorNaturality
-import Sheaf.Algebra.Homology.HomComplexGlobalCochains
+import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescent
+import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentNaturality
 
 /-! # Normalized derived tensor-Hom maps
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex, Tag 0A90.
@@ -62,6 +58,12 @@ theorem exists_canonicalDerivedTensorHomMap (X : Scheme.{uCD})
     ∃ t : ∀ K L M : schemeDerivedCategory X,
       (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
         X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),
-      IsCanonicalDerivedTensorHomMap X t := by sorry
+      IsCanonicalDerivedTensorHomMap X t := by
+  obtain ⟨t, ht, hi⟩ := exists_tensorHomUncurry_descent X
+  refine ⟨t, tensorHomUncurry_descent_natural X t ht hi, ?_⟩
+  intro P L M hP φ
+  refine ⟨schemeTensorHomUncurry X P L M φ, ?_, ht P L M hP φ⟩
+  intro p q n h h'
+  exact schemeTensorHomUncurry_component X P L M φ p q n h h'
 
 end AlgebraicGeometry
