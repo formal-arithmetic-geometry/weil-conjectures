@@ -14,26 +14,55 @@
  },
  "proof": [
   {
-   "text": "Forget to abelian presheaves and evaluate on an open B and a full tuple y.\nApply hd to identify the differential of D with the usual alternating face sum.\nExplicitly its y-coordinate in degree p+1 is the sum over j : Fin (p+2) of\n(-1)^j times the restriction of the degree-p coordinate at y composed with\nj.succAbove. On B take the family i ↦ W₀ ⟨i⟩ ⊓ B and coefficient presheaf\nM.presheaf. Its tuple intersection is canonically isomorphic to the chosen\nproduct (product W₀(y l)) times B: both are the infimum of the same opens.\nUse these canonical restriction isomorphisms to form the sectionwise cochains;\nthe face arrows and index-permutation arrows agree under them by uniqueness.\nFor an injective y there is exactly one permutation making its entries increasing;\nit is Tuple.sort applied to the underlying Fin r tuple. Thus the filtered sum in\nIsOrderedCechNaturalProjection is the signed extension of the ordered restriction.\nFor a noninjective y the filter is empty, so the value is zero. The product-to-\nintersection maps identify the chosen full products with the intersections; every\nrestriction composite agrees by uniqueness of arrows of opens. Apply\nsignedCechExtension_differential to the resulting sectionwise cochains. Its ordered\ncoordinates agree with the ordered coordinates of the differential of the original\ncochain, because each face of an increasing tuple is increasing and the signed\nextension is the identity there (signedCechExtension_increasing). Therefore d(cπs)\n= cπ(ds). Use hd again and the injectivity of e followed by all product coordinates\nto conclude equality of module-sheaf morphisms. When r = 0 or the degree exceeds r,\nthere are no increasing tuples and the same equality has both sides zero.",
+   "text": "Construct, on each base open B, the intersection model S.W(p,t) = inf_k (W(lift(t(k))) intersect B). Its projection to the chosen product times B is an isomorphism: its projections give the reverse containment. Transport all tuple coordinates by coefficient restriction along this actual map. The transported coordinates determine a section, because evaluation preserves the tuple product, e is an isomorphism, and each restriction map is an isomorphism. These constructions and injectivity are proved private helpers in the assigned module.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates",
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-ordered-cech-degreewise-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the finite filtered permutation sum with signedCechExtension. For an injective tuple, Tuple.unique_monotone shows that Tuple.sort is the only permutation passing the strict-increase filter; Finset.sum_eq_single reduces the sum to this term. For a repeated tuple no permutation passes the filter, since a strictly increasing reordered tuple is injective. Apply hQ, move coefficient restriction through the sum and integer multiples, and identify the two composites of restriction arrows by uniqueness in the poset of opens. Thus the transported Q is signed extension of ordered restriction.",
    "uses": [
     "lem-pc-ordered-cech-degreewise-projection",
-    "def-pc-ordered-cech-module-coordinates",
     "lem-pc-signed-cech-extension-differential"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose hd with each tuple projection and evaluate at B and a section. Use the already proved source-library theorem TopCat.Presheaf.cechComplexFunctor_d_π in WeilConjectures.Topology.Sheaves.CechComparison to expand the differential as the alternating face sum. Evaluation, composition and restriction preserve this finite sum and its integer multiples. For each face, the two coefficient restriction composites agree by uniqueness of arrows of opens. This proves the transported differential is S.differentialValue, without a new postponed statement.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-ordered-cech-degreewise-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply signedCechExtension_differential. Every face of an increasing tuple is increasing, since its index injection Fin.succAbove is strictly monotone. Apply signedCechExtension_increasing to each face to identify the ordered coordinates of the differential of a signed extension with those of the original cochain. Hence the transported differential commutes with the transported Q.",
+   "uses": [
+    "lem-pc-signed-cech-extension-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Modules.hom_ext and section extensionality. Injectivity of the transported coordinates reduces the required equality to the proved projection-transport, differential-transport and signed-projection identities. All statements quantify over every base open and every degree. Empty index families give no tuples, and repeated tuples are included in the zero branch; no cover, nonemptiness or local scalar hypothesis was added.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ordered-cech-module-coordinates",
+  "def-weil-pbc-site-cech-complex",
   "lem-pc-ordered-cech-degreewise-projection",
   "lem-pc-signed-cech-extension-differential"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "C1",
+  "agent": "F4",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 01FK and 01FM",
-  "note": "Explicit module-sheaf assembly and transport details written by C1; the source omits the proof of 01FK."
+  "place": "Tags 01FJ and 01FK (signed extension and ordered restriction), and 01FM (the map cπ)",
+  "note": "Original sectionwise route implemented completely in Lean. Differential expansion reuses the proved source-library cechComplexFunctor_d_π; all local constructions and transport lemmas are proved private helpers. No new sorry or node."
  },
  "mathlib_searches": [
   {
@@ -129,10 +158,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T082333-L-1631447",
-  "kind": "interface",
+  "landing": "20261013T095953-L-2458619",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
