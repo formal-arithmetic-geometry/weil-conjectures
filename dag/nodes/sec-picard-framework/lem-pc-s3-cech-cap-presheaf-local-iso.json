@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-s3-cech-cap-presheaf-local-iso",
+ "kind": "statement",
+ "title": "Intersection restriction is locally invertible after sheafification",
+ "statement": "Let X be a scheme, W an open of X, and P an arbitrary presheaf of O_X-modules. Let K_W(P)(V)=P(V intersect W), with scalars restricted from V, and let nu_P:P→K_W(P) be the restriction map. The morphism obtained from nu_P by module sheafification and restriction to W is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU, local insertion cancellation; Tag 01FM, increasing-tuple convention"
+ },
+ "proof": [
+  {
+   "text": "K_W(nu_P) is invertible because intersecting twice with W equals intersecting once. For a module sheaf M on W, the unit on the underlying presheaf of its direct image is invertible, since the inverse images of V and V intersect W in W coincide. Precomposition with nu_P therefore bijects maps K_W(P)→j_*M with maps P→j_*M: the inverse sends f to K_W(f) followed by the inverse unit on j_*M. Injectivity follows by applying K_W and cancelling K_W(nu_P), then using naturality and the invertible target unit. Use the composite sheafification–restriction adjunction to transfer this bijection to morphisms out of the image of nu_P. The coyoneda isomorphism criterion proves that image invertible.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU; explicit presheaf and adjunction adaptation by W2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local degree zero Cech contraction on a presheaf and sheafification restricted to an open",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero Cech augmentation exact singleton open",
+   "results": "8 results, including extraDegeneracyAugmentedCechNerve and opens sheaf-condition results; none states the explicit increasing-tuple identity or cap-unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isIso_of_coyoneda_map_bijective",
+   "results": "One generic Yoneda criterion, used to prove the cap-unit comparison; no specialized Cech identity.",
+   "date": "2026-10-13",
+   "verdict": "generic tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "cechCapPresheaf|degreeZero_identity|restrict.*sheafification|sheafification.*restrict",
+   "results": "No specialized cap-presheaf or degree-zero identity; generic sheafification adjunction and site compatibility found in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafDegreeZeroFactorization",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local degree-zero Cech factorization: presheaf insertion and restriction to a singleton open",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-degree-zero-factorization",
+    "lem-pc-s3-alternating-cech-sheaf-singleton-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechCapPresheafLocalIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechCapPresheafLocalIso.lean",
+  "declaration": "AlgebraicGeometry.cechCapPresheafUnit_local_isIso",
+  "statement": "theorem cechCapPresheafUnit_local_isIso {X : Scheme.{u}} (W : X.Opens)\n    (P : PresheafOfModules.{u} X.ringCatSheaf.obj) :\n    IsIso ((Scheme.Modules.restrictFunctor W.ι).map\n      ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map\n        ((cechCapPresheafUnit W).app P)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T133229-L-580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T133229-L-580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

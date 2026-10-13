@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-s3-alternating-cech-presheaf-degree-zero-identity",
+ "kind": "statement",
+ "title": "Degree-zero presheaf insertion identity",
+ "statement": "Let X be a scheme, U a family of opens indexed by Fin r, G an O_X-module sheaf, and i in Fin r. Put P0 and P1 equal to the degree-zero and degree-one intersection module presheaves of the alternating Cech construction, z:G.val→P0 its augmentation, and d:P0→P1 its differential. Let K(P)(V)=P(V intersect U i) with restricted scalars and nu:P→K(P) the restriction. There exist p:P0→K(G.val) and h:P1→K(P0) with nu_P0=d followed by h plus p followed by K(z).",
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-cech-cap-presheaf-local-iso"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU, local insertion cancellation; Tag 01FM, increasing-tuple convention"
+ },
+ "proof": [
+  {
+   "text": "Project p to singleton i, identifying its intersection with U i. In the singleton-j coordinate of h, use the increasing pair (i,j) with positive sign if i<j, the pair (j,i) with negative sign if j<i, and zero if j=i. Restrict pair sections to V intersect U i intersect U j and use the canonical intersection equalities. The maps are O(V)-linear and natural. In each coordinate, d followed by h is the j-coordinate restricted to U i minus the i-coordinate restricted to U j. The latter is the corresponding coordinate of p followed by K(z). Thus their sum is nu. When i=j, the first term vanishes and the augmentation term is the unit. Check all coordinates to obtain equality. No assumption that U covers X is needed. Empty opens and r=1 satisfy the same formulas, and r=0 has no i.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU; explicit presheaf and adjunction adaptation by W2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local degree zero Cech contraction on a presheaf and sheafification restricted to an open",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero Cech augmentation exact singleton open",
+   "results": "8 results, including extraDegeneracyAugmentedCechNerve and opens sheaf-condition results; none states the explicit increasing-tuple identity or cap-unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isIso_of_coyoneda_map_bijective",
+   "results": "One generic Yoneda criterion, used to prove the cap-unit comparison; no specialized Cech identity.",
+   "date": "2026-10-13",
+   "verdict": "generic tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "cechCapPresheaf|degreeZero_identity|restrict.*sheafification|sheafification.*restrict",
+   "results": "No specialized cap-presheaf or degree-zero identity; generic sheafification adjunction and site compatibility found in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafDegreeZeroFactorization",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local degree-zero Cech factorization: presheaf insertion and restriction to a singleton open",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-degree-zero-factorization",
+    "lem-pc-s3-alternating-cech-sheaf-singleton-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechPresheafDegreeZeroIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechPresheafDegreeZeroIdentity.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafPresheaf_degreeZero_identity",
+  "statement": "theorem alternatingCechSheafPresheaf_degreeZero_identity\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :\n    let K := cechCapPresheafFunctor (U i)\n    let P₀ := alternatingCechSheafPresheafTerms U G 0\n    let P₁ := alternatingCechSheafPresheafTerms U G 1\n    ∃ p : P₀ ⟶ K.obj G.val, ∃ h : P₁ ⟶ K.obj P₀,\n      (cechCapPresheafUnit (U i)).app P₀ =\n        alternatingCechSheafPresheafD U G 0 ≫ h +\n          p ≫ K.map (alternatingCechSheafPresheafZero U G)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T133229-L-580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T133229-L-580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
