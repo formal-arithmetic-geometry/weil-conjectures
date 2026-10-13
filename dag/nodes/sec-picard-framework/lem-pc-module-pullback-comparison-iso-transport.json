@@ -17,36 +17,50 @@
  ],
  "proof": [
   {
-   "text": "Pushforward along e is an exact equivalence inverse to pullback along e. Its localization is the recorded derived direct image, by the derived universal property. Underived tensor composition identifies e_*(a^*G) with p^*G. The equivalence commutes with the single functor, giving m.",
+   "text": "Construct the ordinary module equivalence e_*, e^{-1}_* using Scheme.Modules.pushforwardComp, pushforwardCongr, and pushforwardId. Exactness of an equivalence and Functor.rightDerivedFunctorIsoMapDerivedCategory identify the recorded schemeDerivedDirectImage e.hom with its exact derived functor, hence it is an equivalence. This uses the existing exact-functor factorization API, without requiring the separate scheme-isomorphism derived-equivalence existence theorem.",
    "uses": [
-    "lem-pc-scheme-iso-derived-equivalence",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-direct-image"
+    "def-pc-derived-direct-image",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Unpack hc as a left-derived counit epsilon. Postcompose with the equivalence e_* and with the tensor composition identification. Equivalences preserve the defining right Kan extension. Precompose with j.inv to obtain a witnessing left-derived counit for Lp^*. Evaluate at G[0] and compose with the single-complex identification to define d. Naturality and j.hom followed by j.inv = identity give the required equality. Any choice of j is absorbed in this counit.",
+   "text": "From e.hom followed by p equals a obtain e.inv followed by a equals p. Compose the tensorPullback a adjunction with the ordinary module equivalence adjunction. Pushforward composition identifies its right adjoint with pushforward p. Adjunction.leftAdjointUniq therefore gives k: tensorPullback a followed by e_* is naturally isomorphic to tensorPullback p. Functor.mapHomotopyCategoryCompIso k, the invertible rightDerivedFunctorUnit of exact e_*, and associators give t: (tensorPullback a on the homotopy category followed by Qh) followed by Re_* is naturally isomorphic to tensorPullback p on the homotopy category followed by Qh.",
    "uses": [
-    "def-pc-derived-module-base-change-map",
-    "def-pc-derived-pullback",
-    "lem-pc-scheme-iso-derived-equivalence"
+    "def-pc-module-pullback",
+    "def-pc-derived-direct-image",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Unpack the supplied comparison as a counit epsilon and its right Kan extension property. The proved private helper postcompose_rightKanExtension establishes that an equivalence preserves this property: RightExtension.postcompose₂ is CostructuredArrow.map₂ of equivalences with invertible comparison maps, so it is an equivalence and preserves terminal objects. Postcompose epsilon by Re_* to form alpha. Define epsilon_p as whiskerLeft Qh j.inv followed by alpha followed by t.hom. Functor.isRightKanExtension_iff_of_iso₂, applied to t and j, gives the right Kan extension property for epsilon_p, hence its left-derived-functor property.",
+   "uses": [
+    "def-pc-derived-module-base-change-map",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let S be G in degree zero in the homotopy category. Let b_a and b_p be Qh of the homotopy quotient of the singleMapHomologicalComplex isomorphisms. Define d as epsilon_p at S followed by b_p.hom, and m as Re_* applied to b_a inverse, followed by t at S and b_p. The comparison predicate is witnessed by epsilon_p. Substitute c = epsilon at S followed by b_a.hom; functoriality cancels b_a with its inverse, and j.hom with j.inv cancels in the definition of d. This gives the asserted equality for every supplied j, without flatness or nonemptiness hypotheses.",
+   "uses": [
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-direct-image",
   "def-pc-derived-module-base-change-map",
   "def-pc-derived-pullback",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-scheme-iso-derived-equivalence"
+  "def-pc-module-pullback",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Coordinate transport of the counit construction, with universal-property details supplied by R3",
-  "note": "Complete argument in module docstring; edge cases: zero G, empty schemes, identity e. Neither flatness nor invertibility of beta is used."
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Counit transport through an exact equivalence; Tags 0096 and 015F for the underived adjunction and exact derived functor; complete Lean proof by X2, 2026-10-13",
+  "note": "The ordinary composition identification is proved by adjoint uniqueness. No derived-pullback composition theorem or new holed lemma is used. The universal-property transport is proved using the equivalence of right-extension categories."
  },
  "mathlib_searches": [
   {
@@ -168,10 +182,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T024045-L-3338260",
-  "kind": "interface",
+  "landing": "20261013T045617-L-140660",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
