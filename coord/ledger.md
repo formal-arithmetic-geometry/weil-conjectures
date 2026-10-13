@@ -10801,3 +10801,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.TruncatedSectionConormalResidueKernel (stage 3; reviewer PASS; first push; landing 20261013T025258-L-3421819 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:52 L: merged deliver/D2/Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts (stage 3; reviewer PASS; first push; landing 20261013T025259-L-3421939 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:52 L: merged deliver/D3/Sheaf.RingTheory.FiniteConeCycleAttachment (stage 3; reviewer PASS; first push; landing 20261013T025259-L-3422045 (proof); batch 20261013T025255; modules 1; new nodes 0)
+- 02:53 L: merged deliver/F1/Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative (stage 3; reviewer PASS; first push; landing 20261013T025300-L-3422143 (interface); batch 20261013T025255; modules 3; new nodes 2)
