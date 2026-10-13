@@ -12612,3 +12612,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:19 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FlatFibreDimensionStrata (stage 3; reviewer PASS; first push; landing 20261013T131948-L-4087291 (interface); batch 20261013T131946; modules 4; new nodes 3)
 - 13:19 L: merged deliver/F4/Sheaf.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated (stage 3; reviewer PASS; first push; landing 20261013T131948-L-4087397 (interface); batch 20261013T131946; modules 2; new nodes 1)
 - 13:19 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffinePullbackChartTensorFlatStalks (stage 3; reviewer PASS; first push; landing 20261013T131948-L-4087533 (interface); batch 20261013T131946; modules 3; new nodes 2)
+- 13:19 L: merged deliver/M3/Sheaf.AlgebraicGeometry.TensorModelRestrictionComparisons (stage 3; reviewer PASS; first push; landing 20261013T131949-L-4087634 (interface); batch 20261013T131946; modules 3; new nodes 2)

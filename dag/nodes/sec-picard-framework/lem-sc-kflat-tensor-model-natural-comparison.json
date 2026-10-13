@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-kflat-tensor-model-natural-comparison",
+ "kind": "statement",
+ "title": "Natural localization tensor comparison with a fixed K-flat first model",
+ "statement": "Let X be a scheme [def-pc-scheme] with a chosen derived category [def-pc-derived-category] and its shared derived tensor [def-pc-scheme-derived-tensor-structure]. Let P be an integer-indexed K-flat complex of module sheaves [def-pc-kflat-complex]. There is a natural isomorphism of functors on all integer-indexed cochain complexes J from J↦Q(P) tensor Q(J) to J↦Q(Tot(P tensor J)) [def-pc-tensor-complex-sheaves]. No K-flatness or boundedness assumption on J is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YH, derived tensor computed using a K-flat first factor"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing K-flat bifunctor natural comparison to the constant singleton family P and the identity family of all cochain complexes. The K-flatness requirement on the first family is hP. Evaluate the resulting natural isomorphism at the unique singleton object. This is the displayed unary natural isomorphism; its second family remains arbitrary.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-derived-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YH; singleton specialization of kFlat_derivedTensor_comparison_natIso"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from tensor with a fixed K-flat complex to derived tensor of its localization",
+   "results": "Tor and mapDerivedCategoryFactorsh candidates; no fixed-model total-tensor natural isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "results": "Generic naturality of the lax monoidal tensor map, without the K-flat invertibility hypothesis.",
+   "date": "2026-10-13",
+   "verdict": "generic naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat_derivedTensor_comparison_natIso; map₂CochainComplex; derived tensor natural comparison in Mathlib, WeilConjectures and Sheaf",
+   "results": "The project already proves the bifunctor comparison in KFlatDerivedTensorComparison. This node is its fixed-first-model specialization, proved by singleton evaluation.",
+   "date": "2026-10-13",
+   "verdict": "specialize the existing project theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A K-flat first complex gives a natural derived tensor comparison for arbitrary second complexes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorModelRestrictionComparisons",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "fixed K-flat model comparison, step 1 of lem-sc-tensor-model-restriction-comparisons",
+   "via": [
+    "lem-sc-tensor-model-restriction-comparisons",
+    "lem-sc-tensor-model-restriction-adjunction",
+    "lem-sc-tensor-roof-transposition",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-affine-perfect-tensor-roof"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KFlatTensorModelNaturalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/KFlatTensorModelNaturalComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.kFlat_tensorModel_naturalComparison",
+  "statement": "theorem kFlat_tensorModel_naturalComparison (X : Scheme.{uX})\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := (SheafOfModules.tensorClosed X.sheaf).1.some\n    Nonempty\n      (DerivedCategory.Q ⋙ (curriedTensor (schemeDerivedCategory X)).obj\n        (DerivedCategory.Q.obj P) ≅\n        ((curriedTensor\n          (SheafOfModules.{uX} (moduleRings X.toRingedSpace))).map₂CochainComplex.obj P) ⋙\n            DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T131949-L-4087634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T131949-L-4087634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

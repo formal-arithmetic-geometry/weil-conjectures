@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-derived-restriction-tensor-hom-coherence",
+ "kind": "statement",
+ "title": "Derived tensor and Hom restriction comparisons compatible with evaluation",
+ "statement": "Let X be a scheme [def-pc-scheme] and U any open. Choose derived categories [def-pc-derived-category] of module sheaves on X, every over-site of X, and U, in a common localization universe. Let R be exact over-site restriction followed by the canonical over-site equivalence [lem-weil-pbc-module-restriction-open-immersion-colimits]. Use the shared derived tensor [def-pc-scheme-derived-tensor-structure], derived internal Hom H and H_U [def-pur-derived-internal-hom], and canonical tensor-Hom families e_X and e_U [def-pc-canonical-derived-tensor-hom-bijection]. There exist simultaneous families t(K,L):R(K tensor L)≅R(K) tensor R(L) and h(L,E):R(H(L,E))≅H_U(R(L),R(E)), for all derived objects K,L,E, satisfying R(a tensor b);t(K′,L′).hom=t(K,L).hom;(R(a) tensor R(b)) for every a:K→K′ and b:L→L′, and t(K,L).hom;e_U(R(ξ);h(L,E).hom)=R(e_X(ξ)) for every ξ:K→H(L,E). There is no chosen tensor model, boundedness or quasi-coherence hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pur-derived-internal-hom",
+  "def-pc-canonical-derived-tensor-hom-bijection"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079U, 08DL and 08DJ; evaluation after exact open restriction"
+ },
+ "proof": [
+  {
+   "text": "Construct the natural tensor restriction comparison from K-flat representatives. Restriction preserves K-flatness and total tensor; use localization factorization and descend naturality on complexes through roofs to all derived maps. For an open immersion ordinary restriction is exact and computes derived pullback; Tag 079U gives the bifunctorial comparison. Common K-flat resolutions identify different representatives, and naturality for inverse quasi-isomorphisms gives naturality for roofs.",
+   "uses": [
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-open-restriction-kflat-model",
+    "lem-pc-open-restriction-total-tensor",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the internal Hom comparison by restricting a K-injective representative of the second argument and using the termwise Hom complex comparison, transported through the canonical over-site equivalence to U.toScheme.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sc-hom-complex-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose both comparisons from the same local restriction maps. Restriction of uncurrying on each total tensor summand equals uncurrying after restriction. Hom from a K-flat complex into a K-injective is K-injective, so arbitrary derived maps into it have chain representatives modulo homotopy. Uncurrying respects homotopy; the defining representative equation and uniqueness of the canonical tensor-Hom family give the evaluation equality. Zero objects and the empty open require no exceptions.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-hom-complex-restrict-open",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "lem-pc-open-restriction-kflat-model",
+  "lem-pc-open-restriction-total-tensor",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-hom-complex-restrict-open",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079U, 08DL and 08DJ; evaluation after exact open restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and internal Hom commute coherently with restriction to an open subset",
+   "results": "Underived open restriction and global section formulas; no derived evaluation compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_1",
+   "results": "CategoryTheory.NatIso.naturality_1 is general categorical algebra; no derived restriction coherence.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom.*restrict|restrict.*tensorHom in Mathlib, WeilConjectures and Sheaf",
+   "results": "Underived tensorHomCurryApp naturality and tensorHom_restriction_of_local_scalar; existing derivedTensor_openRestriction_iso_universes and derivedInternalHom_restrict_open give separate object isomorphisms, not evaluation compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact open restriction has tensor and derived internal Hom comparison isomorphisms compatible with evaluation",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorModelRestrictionComparisons",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "simultaneous exact restriction tensor and Hom comparisons and evaluation square; steps 1-3 of lem-sc-tensor-model-restriction-comparisons",
+   "via": [
+    "lem-sc-tensor-model-restriction-comparisons",
+    "lem-sc-tensor-model-restriction-adjunction",
+    "lem-sc-tensor-roof-transposition",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-affine-perfect-tensor-roof"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedRestrictionTensorHomCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedRestrictionTensorHomCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_derivedRestriction_tensorHom_coherence",
+  "statement": "theorem exists_derivedRestriction_tensorHom_coherence\n    (X : Scheme.{uX}) (U : X.Opens)\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))] :\n    let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n      X.toRingedSpace.sheaf\n    let HU := derivedInternalHom (Opens.grothendieckTopology U.toScheme.toRingedSpace)\n      U.toScheme.toRingedSpace.sheaf\n    ∃ (t : ∀ K L : schemeDerivedCategory X, R.obj (K ⊗ L) ≅ R.obj K ⊗ R.obj L)\n      (h : ∀ L E, R.obj (H.obj (op L, E)) ≅ HU.obj (op (R.obj L), R.obj E)),\n      (∀ K K' L L' (a : K ⟶ K') (b : L ⟶ L'),\n        R.map (a ⊗ₘ b) ≫ (t K' L').hom =\n          (t K L).hom ≫ (R.map a ⊗ₘ R.map b)) ∧\n      (∀ K L E (ξ : K ⟶ H.obj (op L, E)),\n        (t K L).hom ≫ schemeDerivedTensorHomEquiv U.toScheme\n          (R.obj K) (R.obj L) (R.obj E) (R.map ξ ≫ (h L E).hom) =\n        R.map (schemeDerivedTensorHomEquiv X K L E ξ))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T131949-L-4087634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T131949-L-4087634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
