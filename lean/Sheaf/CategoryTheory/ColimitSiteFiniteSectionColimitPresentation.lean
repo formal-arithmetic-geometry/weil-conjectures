@@ -14,9 +14,8 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.ColimitSiteAbelianSectionDiagram
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import all Sheaf.CategoryTheory.ColimitSiteAbelianStageImageRefinement
+import Sheaf.CategoryTheory.ColimitSiteFiniteSectionComparisonBijective
 
 /-! # A section-colimit presentation with finite covering axioms
 
@@ -31,6 +30,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
+
+private theorem arrow_precomp
+    {A B C D : AddCommGrpCat.{u}} (f : A ⟶ B) (g : B ⟶ C) (h : B ⟶ D)
+    (w : Arrow.mk g = Arrow.mk h) : Arrow.mk (f ≫ g) = Arrow.mk (f ≫ h) := by
+  have hc : C = D := congrArg Arrow.right w
+  subst D
+  rw [(Arrow.mk_inj _ _).mp w]
 
 /-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
 and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
@@ -120,6 +126,83 @@ theorem colimit_site_finite_section_colimit_presentation
             (op X)) ∧
       (∀ a : Under j, e.app a ≫ c.ι.app a ≫ β.hom =
         ((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u}
-          (P j).toGrothendieck Q.toGrothendieck).unit.app H).hom.app (op X)) := by sorry
+          (P j).toGrothendieck Q.toGrothendieck).unit.app H).hom.app (op X)) := by
+  classical
+  let i := j
+  let G := H
+  let U := X
+  have ha : ∀ t : Under i, ∃ a : (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P
+    i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶
+      ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P
+        t.right).toGrothendieck Q.toGrothendieck).obj
+        ((sheafPullback (V.ι.app i).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck
+          Q.toGrothendieck).obj G), ∀ X : F.obj i,
+      Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u} (P
+        i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫ a.hom.app (op
+        ((F.map t.hom).toFunctor.obj X))) =
+      Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor AddCommGrpCat.{u} (P
+        i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X)) := by
+    intro t
+    exact exists_transition (P i).toGrothendieck (P t.right).toGrothendieck Q.toGrothendieck
+      (F.map t.hom).toFunctor (V.ι.app t.right).toFunctor (V.ι.app i).toFunctor
+      (congrArg Cat.Hom.toFunctor (V.w t.hom)) G
+  choose α hα using ha
+  have ht : ∀ (t t' : Under i) (b : t ⟶ t'), ∃ a :
+      (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P
+        t.right).toGrothendieck).obj G ⟶ ((F.map b.right).toFunctor.sheafPushforwardContinuous
+        AddCommGrpCat.{u} (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj
+        ((sheafPullback (F.map t'.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P
+          t'.right).toGrothendieck).obj G),
+      ∀ X : F.obj i,
+      Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u} (P
+        i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫ a.hom.app (op
+        ((F.map t.hom).toFunctor.obj X))) =
+      Arrow.mk (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor AddCommGrpCat.{u} (P
+        i).toGrothendieck (P t'.right).toGrothendieck).unit.app G).hom.app (op X)) := by
+    intro t t' b
+    apply exists_transition (P i).toGrothendieck (P t.right).toGrothendieck (P
+      t'.right).toGrothendieck
+      (F.map t.hom).toFunctor (F.map b.right).toFunctor (F.map t'.hom).toFunctor _ G
+    change (F.map t.hom ≫ F.map b.right).toFunctor = (F.map t'.hom).toFunctor
+    rw [← F.map_comp, Under.w b]
+  choose θ hθ using ht
+  obtain ⟨D, E, K, e, hK, hD⟩ :=
+    colimit_site_abelian_section_diagram J F P V Q i G α θ hα hθ U
+  let η (t : Under i) :=
+    ((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u}
+      (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op U)
+  let ε : (Functor.const (Under i)).obj (G.obj.obj (op U)) ⟶ D :=
+    { app := fun t ↦ η t ≫ (E t).inv
+      naturality := by
+        intro t t' b
+        change 𝟙 _ ≫ (η t' ≫ (E t').inv) = (η t ≫ (E t).inv) ≫ D.map b
+        rw [Category.id_comp]
+        apply (cancel_mono (E t').hom).mp
+        apply Arrow.mk_injective
+        have hw := arrow_precomp (η t ≫ (E t).inv) _ _ (hD t t' b)
+        simp only [Category.assoc, Iso.inv_hom_id_assoc] at hw
+        simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using
+          (hθ t t' b U).symm.trans hw }
+  have hε (t : Under i) : ε.app t ≫ (E t).hom = η t := by
+    dsimp [ε]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  have hunit (t : Under i) : ε.app t ≫ K.ι.app t ≫ e.hom =
+      ((sheafAdjunctionContinuous (V.ι.app i).toFunctor AddCommGrpCat.{u}
+        (P i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op U) := by
+    apply Arrow.mk_injective
+    have hw := arrow_precomp (ε.app t) _ _ (hK t)
+    simp only [← Category.assoc, hε] at hw
+    simpa only [Category.assoc] using hw.trans (hα t U)
+  have hbij := colimit_site_finite_section_comparison_bijective
+    J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback
+    i G α θ hα hθ U D E K e hK hD
+  have : IsIso ((forget AddCommGrpCat.{u}).map (colimit.desc D K)) :=
+    (isIso_iff_bijective _).mpr hbij
+  have : IsIso (colimit.desc D K) :=
+    isIso_of_reflects_iso (colimit.desc D K) (forget AddCommGrpCat.{u})
+  have hc : IsColimit K := (colimit.isColimit D).ofPointIso (i := by
+    change IsIso (colimit.desc D K)
+    infer_instance)
+  exact ⟨D, ε, K, e, E, ⟨hc⟩, hε, hunit⟩
 
 end CategoryTheory

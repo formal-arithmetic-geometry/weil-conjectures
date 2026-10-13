@@ -15,63 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Construct the canonical stage sheaf comparison maps by transposing the composite unit through each stage adjunction. Cocone naturality and Under.w identify the composite restriction functors. Uniqueness of adjuncts proves the unit equations. Apply [lem-weil-pbc-colimit-site-abelian-section-diagram] to get D, the stage object isomorphisms, the section cocone and its point isomorphism. Define e at each a as the source unit followed by the inverse stage object isomorphism. The unit and transition equations give naturality of e and its compatibility with every cocone leg.",
+   "text": "Reuse the existing proved private exists_transition helper from Sheaf.CategoryTheory.ColimitSiteAbelianStageImageRefinement through a proof-only import all; no duplicate sheaf_triangle_unit is declared. For every t in Under(j), transpose the V_j inverse-image unit through the F(t.hom) sheaf adjunction to obtain the sheaf map alpha_t. For every b:t to t-prime transpose the F(t-prime.hom) unit through the F(t.hom) adjunction to obtain theta_b. Cocone naturality and F.map_comp with Under.w give the required equalities of composite functors. The homEquiv inverse equation proves the Arrow unit equations. Apply the coherent abelian section diagram theorem to these maps, obtaining D, E, K and the point isomorphism beta. All of these maps are constructed using the proved adjunction and diagram declarations, without the new comparison theorem.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "lem-weil-pbc-colimit-site-abelian-section-diagram",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-colimit-site-abelian-stage-image-refinement"
    ],
    "elementary": false
   },
   {
-   "text": "Form presentations of a limit object Y by stages reached from i, including arrows from i and stage objects with image Y. Joint surjectivity of the object and arrow colimit legs supplies representatives. Filteredness moves any finite set of representatives to a common stage. Eventual equality in these same two supplied colimit cocones gives equality of endpoints and composites after further refinement, and equalizes parallel refinements. Thus the presentation category is filtered. The category above a fixed presentation is final by the common-refinement and equalizer criterion.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
-   ],
-   "elementary": false
+   "text": "Define epsilon_t as the F(t.hom) unit at X followed by E_t inverse. Precompose the diagram transition equation with epsilon_t. Cancel E_t inverse followed by E_t hom; the theta unit equation gives naturality of epsilon after cancelling E_t-prime hom. Precompose the cocone leg equation with epsilon_t; the alpha unit equation gives compatibility with the V_j unit. Heterogeneous Arrow equalities are precomposed by equality induction on their right endpoints. These are proved locally in Lean.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Take the filtered colimit of the inverse-image sections on presentations. Lift a restriction arrow to a common stage; eventual equality and naturality of the uniquely unit-characterized transition maps prove independence of the lift and the identity and composition restriction laws. These are a presheaf of abelian groups. Every Q cover lifts by hQ to a finite stage cover, and hVpullback preserves its covering pullbacks. Its sheaf equalizer is the filtered colimit of the finite stage equalizers. Filtered abelian group colimits commute with finite products and equalizers, so the presheaf is a sheaf; the empty-cover condition gives the zero group.",
+   "text": "Apply the finite section comparison bijectivity theorem to the supplied coherent maps, diagram and cocone. The forgetful functor sends colimit.desc D K to a bijective function, hence to an isomorphism. It reflects isomorphisms, so colimit.desc D K is an isomorphism. IsColimit.ofPointIso transports the standard group colimit universal property to K. Combine this with the constructed epsilon and its two unit equations to give the unchanged existential conclusion.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-finite-precoverage",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A map from this constructed sheaf to a sheaf H is a compatible family of stage sheaf maps. Apply each stage adjunction to identify this family with one map from G to restriction of H along V_i. The identity presentation and the unit define the reverse assignment. Adjunct uniqueness and the colimit universal property show the assignments are mutually inverse and natural in H. Uniqueness of the left adjoint therefore identifies the constructed sheaf with the canonical sheafPullback, compatibly with units. At V(j)(X), presentations obtained by carrying X forward are final, using common refinements and eventual equality. This identifies their section colimit with the section group of the canonical limit inverse image. Transport the universal property along the stage isomorphisms and the unit-compatible point isomorphism to prove IsColimit c. This step establishes the section formula, without extracting any eventual vanishing witness.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-colimit-site-finite-section-comparison-bijective"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
-  "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-colimit-site-abelian-section-diagram",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-colimit-site-abelian-stage-image-refinement",
+  "lem-weil-pbc-colimit-site-finite-section-comparison-bijective",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, section formula and adjunction argument, expanded to the finite precoverage hypotheses; abelian extension via Tag 03CO. This is steps 1-3 of the parent plus finality of the carried-forward object presentations, before the equality criterion."
+  "place": "Tag 0A35 compatible maps and section formula; H1 formalizes the adjunction maps, coherent diagram, natural source units and transport of the colimit property, leaving only supplied-data comparison bijectivity as a new theorem. Abelian extension: Tag 03CO. Repair: reuse exists_transition from the acyclic stage-image-refinement module instead of duplicating the private inverse-image helper."
  },
  "mathlib_searches": [
   {
@@ -190,13 +164,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-0d759",
-  "group": "M1",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T214710-L-1271191",
+  "landing": "20261013T000907-L-2281348",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures match both nodes verbatim; existing signature unchanged; proof and dependencies agree. Both delivered modules and the sole direct importer compile cleanly. Axioms are standard plus sorryAx from the documented structural hole. Section formula checked against Stacks https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; accepted as decomposition."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

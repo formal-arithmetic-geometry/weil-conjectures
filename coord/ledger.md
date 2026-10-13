@@ -10219,3 +10219,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:04 L: returned deliver/N2/Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient (reviewer RETURN: (reviewer X-9bd72, head 9bd729443) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Cl)
 - 00:09 L: merged deliver/C2/Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageGe (stage 3; reviewer PASS; first push; landing 20261013T000906-L-2281039 (interface); batch 20261013T000905; modules 2; new nodes 1)
 - 00:09 L: merged deliver/D4/Sheaf.AlgebraicGeometry.BasicPropertiesDegreeZero (stage 3; reviewer PASS; first push; landing 20261013T000906-L-2281223 (proof); batch 20261013T000905; modules 1; new nodes 0)
+- 00:09 L: merged deliver/H1/Sheaf.CategoryTheory.ColimitSiteFiniteSectionColimitPresentation (stage 3; reviewer PASS; after a return; landing 20261013T000907-L-2281348 (interface); batch 20261013T000905; modules 2; new nodes 1)
