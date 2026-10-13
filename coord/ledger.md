@@ -11033,3 +11033,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/R4/Sheaf.AlgebraicGeometry.PicardH1BaseDescentSectionLifting (stage 3; reviewer PASS; first push; landing 20261013T040759-L-3952259 (interface); batch 20261013T040738; modules 2; new nodes 1)
 - 04:08 L: merged deliver/S2/Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationDescentGluing (stage 3; reviewer PASS; first push; landing 20261013T040759-L-3952424 (interface); batch 20261013T040738; modules 2; new nodes 1)
 - 04:08 L: merged deliver/S2/Sheaf.RingTheory.PowerSeriesAdicEvaluation (stage 3; reviewer PASS; first push; landing 20261013T040800-L-3952634 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:08 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261013T040800-L-3952744 (interface); batch 20261013T040738; modules 2; new nodes 1)

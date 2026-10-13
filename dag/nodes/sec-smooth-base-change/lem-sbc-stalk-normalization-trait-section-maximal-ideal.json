@@ -15,17 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Minimality of s identifies the inverse image of U in Spec O_{S,s} with the\npunctured trait. Smoothness makes the closed fibre a regular effective Cartier divisor.\nThe order of G is invertible, so the generic torsor is tame along this divisor.\nLocalization and etale base change of integral closure identify the given pullback\nnormalization with the normalization in the tame charts of 0EYH. Such a chart is a\nfinite disjoint union of B[T]/(T^e-f), with e positive and invertible. Pull back the\nsection to the chart and localize over the closed trait point. The resulting trait\nring A' is an unramified DVR extension, and f maps to a uniformizer pi. The rational\npoint and the torsor action split the entire generic section fibre, also after this\nbase change. Each factor therefore has a root of T^e-pi in Frac(A'). Applying the\ninteger-valued valuation gives e*v(T)=1, so e=1. The chart factors are then B itself;\nin particular their local maximal ideals are generated from the base. This equality\ndescends under the faithfully flat etale local maps to the asserted equality of\nstalk ideals. Empty fibres have no point x to check.",
-   "uses": [],
+   "text": "Obtain the cyclic local chart data: a flat local map beta from the normalization stalk to a local ring D, a positive exponent e, a ramification coordinate t, and a root z of a uniformizer pi in a field with integer-valued order. The maximal ideal of D is J D + (t), and t^e lies in J D.",
+   "uses": [
+    "lem-sbc-stalk-normalization-trait-section-cyclic-data"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply the order homomorphism to z^e=pi. In additive notation this gives e ord(z)=1. Positivity of e forces ord(z)>0, so the integer ord(z) is at least one and e is at most one. Therefore e=1 and t lies in J D. The displayed generating formula gives m_D=J D. This arithmetic and ideal calculation is proved directly in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A flat local map of local rings is faithfully flat (Mathlib Module.FaithfullyFlat.of_flat_of_isLocalHom). Contract m_D=J D along beta. Faithful flatness gives (J D) cap B=J, and locality gives m_D cap B=m_B (Mathlib Ideal.comap_map_eq_self_of_faithfullyFlat and IsLocalRing.maximalIdeal_comap). Thus J=m_B, as required. This descent is proved directly in Lean.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-stalk-normalization-trait-section-cyclic-data"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "H1",
+  "by": "S3",
   "document": "Stacks Project",
-  "place": "Tags 0EYH and 0EYI(2), trait paragraph of 0EYJ"
+  "place": "Tags 0EYH and 0EYI(2); cyclic chart extraction followed by integer valuation and faithfully flat ideal contraction"
  },
  "mathlib_searches": [
   {
@@ -99,9 +113,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T022415-L-3213755",
+  "landing": "20261013T040800-L-3952744",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
