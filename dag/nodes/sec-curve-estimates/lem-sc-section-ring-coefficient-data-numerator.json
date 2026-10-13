@@ -15,26 +15,45 @@
  ],
  "proof": [
   {
-   "text": "Existence of a coefficient function satisfying the numerator equation.\nThe function is obtained by the local quotient construction of Stacks Tags 01N8 and 01NK.\n(blueprint: lem-sc-section-ring-coefficient-data-numerator)\n\nWrite e_n for the restriction of the degree-n*d component of s^n. The section-ring\nproduct is the tensor product transported by tensorPowAddIso. Restriction preserves\nthis product, so induction from hs, the unit generator, and IsFreeGenerator.tmulSection\nshows that each e_n is a free generator. For a numerator a of degree n*d, let r_n(a)\nbe the unique scalar with r_n(a) • e_n equal to its restriction to U.\nIf a/s^n = b/s^m, localization equality supplies k with\ns^k * (a*s^m - b*s^n) = 0. Restrict and use bilinearity to get\n(r_n(a) - r_m(b)) • e_(k+n+m) = 0. Injectivity of scalar multiplication\nby that free generator gives r_n(a) = r_m(b). Every fraction has such a\nrepresentative by Away.mk_surjective, so these coefficients descend to a function.\nIts numerator equation is the defining equation of r_n(a). This also works on the\nempty open: the scalar ring and section modules there are trivial.",
+   "text": "Use exists_sectionRing_veronese_fraction_equiv to identify the homogeneous localization with the section-fraction presentation for M = L.tensorPow d and the structure module. Its formula identifies each xi/s^n with the exponent-transported numerator, with the inverse left unitor inserting the structure-module tensor factor. This formula uniquely determines the equivalence on all fractions.",
    "uses": [
-    "def-sc-invertible-section-ring",
+    "lem-sc-section-ring-veronese-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the free-generator hypothesis using homOfGlobalSection_app_one. Apply exists_sectionFraction_restriction_map to M, the structure module, s.val d, and U. Compose this additive restriction-and-division map with the Veronese equivalence and unitSectionsEquiv U inverse to obtain the coefficient function c. Its tensor formula uniquely determines the map because tensoring with each power of the free generator is bijective.",
+   "uses": [
+    "lem-sc-p1-section-fraction-restriction-map",
     "def-sc-local-free-generator"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Prove ring_power_of by induction on n using pow_succ prime, DirectSum.of_mul_of, tensorPowMulIso, and the tensor-section formulas. The zero case is the graded unit. In the successor case the exponent cast is handled by a dependent equality of graded monoid elements. Extract the degree n*d component to obtain veroneseIso_power; naturality then gives the same identity after restriction to U.",
+   "uses": [
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the section-fraction restriction tensor formula to the Veronese image of xi. Apply the left unitor on U, turning tensoring with the structure-module section into scalar multiplication. Naturality moves restriction through the numerator transport; the inverse left unitor cancels with the left unitor. The power identity identifies the transported denominator with tensorPowSectionOne. Finally injectivity of the tensor-power isomorphism yields the exact numerator equation. This works for n=0 and empty U without additional hypotheses; positive degree is not used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-invertible-section-ring",
-  "def-sc-local-free-generator"
+  "lem-sc-section-ring-veronese-fractions",
+  "lem-sc-p1-section-fraction-restriction-map",
+  "def-sc-local-free-generator",
+  "def-sc-invertible-section-ring"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Reuse of the canonical fraction restriction map of Lemma 01PW and the Veronese presentation of Tag 0B5L; tensor comparison helpers follow the proved SectionRingLocalizationBijective argument."
  },
  "mathlib_searches": [
   {
@@ -108,10 +127,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T015547-L-3017854",
-  "kind": "interface",
+  "landing": "20261013T025301-L-3422538",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

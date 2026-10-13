@@ -10804,3 +10804,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/F1/Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative (stage 3; reviewer PASS; first push; landing 20261013T025300-L-3422143 (interface); batch 20261013T025255; modules 3; new nodes 2)
 - 02:53 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ScalarCohomologyPullbackSquare (stage 3; reviewer PASS; first push; landing 20261013T025300-L-3422276 (interface); batch 20261013T025255; modules 2; new nodes 1)
 - 02:53 L: merged deliver/F2/Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitFull (stage 3; reviewer PASS; first push; landing 20261013T025301-L-3422392 (interface); batch 20261013T025255; modules 2; new nodes 1)
+- 02:53 L: merged deliver/F2/Sheaf.AlgebraicGeometry.SectionRingCoefficientNumerator (stage 3; reviewer PASS; first push; landing 20261013T025301-L-3422538 (proof); batch 20261013T025255; modules 1; new nodes 0)
