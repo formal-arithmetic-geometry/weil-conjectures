@@ -1,0 +1,177 @@
+{
+ "id": "lem-pc-module-pullback-comparison-iso-transport",
+ "kind": "statement",
+ "title": "Transport of a module comparison through a scheme isomorphism",
+ "statement": "Choose derived categories of scheme modules [def-pc-derived-category] and additive tensor pullbacks [def-pc-module-pullback]. Let $a:Y\\to X$, $p:P\\to X$ be scheme maps [def-pc-scheme], and $e:Y\\cong P$ satisfy $e\\gg p=a$. Supply any natural isomorphism $j:La^*\\gg Re_*\\cong Lp^*$ [def-pc-derived-pullback, def-pc-derived-direct-image]. For $G\\in X.\\mathrm{Modules}$ let $c:La^*(G[0])\\to(a^*G)[0]$ satisfy IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map]. There exist $d:Lp^*(G[0])\\to(p^*G)[0]$ satisfying the same comparison predicate for $p,G$, and an isomorphism $m:Re_*((a^*G)[0])\\cong(p^*G)[0]$, with $Re_*(c)\\gg m=j_{G[0]}\\gg d$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tags 08HY (adjoint description), 0D5S (pullback composition), 0D5T (direct-image composition), and 06YJ (left-derived counit)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-module-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Pushforward along e is an exact equivalence inverse to pullback along e. Its localization is the recorded derived direct image, by the derived universal property. Underived tensor composition identifies e_*(a^*G) with p^*G. The equivalence commutes with the single functor, giving m.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-equivalence",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack hc as a left-derived counit epsilon. Postcompose with the equivalence e_* and with the tensor composition identification. Equivalences preserve the defining right Kan extension. Precompose with j.inv to obtain a witnessing left-derived counit for Lp^*. Evaluate at G[0] and compose with the single-complex identification to define d. Naturality and j.hom followed by j.inv = identity give the required equality. Any choice of j is absorbed in this counit.",
+   "uses": [
+    "def-pc-derived-module-base-change-map",
+    "def-pc-derived-pullback",
+    "lem-pc-scheme-iso-derived-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-scheme-iso-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Coordinate transport of the counit construction, with universal-property details supplied by R3",
+  "note": "Complete argument in module docstring; edge cases: zero G, empty schemes, identity e. Neither flatness nor invertibility of beta is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change naturality isomorphism cartesian square coordinate change",
+   "results": "8 hits: VectorBundleCore.coordChange_linear_comp, VectorPrebundle.coordChange_apply, VectorBundleCore.coordChange_comp, VectorPrebundle.mk_coordChange, Trivialization.coe_coordChangeL', Trivialization.coordChangeL_apply', Trivialization.coordChangeL_apply, Trivialization.coe_coordChangeL",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact scheme coordinate or module comparison transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(iso|Iso)|[Cc]oordinate.*[Bb]ase[Cc]hange",
+   "results": "25 hits: Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/GuitartExact/KanExtension.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact scheme coordinate or module comparison transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact scheme coordinate or module comparison transport statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback comparison transport through an isomorphism of schemes commutes with left derived counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isRightKanExtension.*(postcomp|iso)|single.*[Ee]quiv|derived.*[Mm]ate",
+   "results": "25 hits: Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/SingleObj.lean, Mathlib/CategoryTheory/SingleObj.lean, Mathlib/CategoryTheory/SingleObj.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact scheme coordinate or module comparison transport statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcompose a left derived functor counit with an equivalence and transport it across a natural isomorphism",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact scheme coordinate or module comparison transport statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate invariant under equivalences of base change squares",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-13",
+   "verdict": "Second reading: generic mate-composition and derived uniqueness infrastructure; no exact scheme coordinate or comparison transport theorem. Checked candidate signatures and local sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-13",
+   "verdict": "Second reading: generic mate-composition and derived uniqueness infrastructure; no exact scheme coordinate or comparison transport theorem. Checked candidate signatures and local sources."
+  },
+  {
+   "tool": "grep",
+   "query": "isRightKanExtension.*[Ee]quivalence|[Mm]ate|[Bb]eck",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "Second reading: generic mate-composition and derived uniqueness infrastructure; no exact scheme coordinate or comparison transport theorem. Checked candidate signatures and local sources."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonCompat",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1 local affine reduction: transport the restricted square through spectrum coordinates; Transport of a module comparison through a scheme isomorphism",
+   "via": [
+    "stage3-canonicalModuleBaseChange_iso_comparison_ab",
+    "lem-pc-canonical-module-base-change-iso-comparison",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackComparisonIsoTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackComparisonIsoTransport.lean",
+  "declaration": "AlgebraicGeometry.exists_modulePullbackComparison_iso_transport",
+  "statement": "theorem exists_modulePullbackComparison_iso_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (a : Y ⟶ Z), (Scheme.Modules.tensorPullback a).Additive]\n    {X Y P : Scheme.{u}} (a : Y ⟶ X) (p : P ⟶ X) (e : Y ≅ P)\n    (hp : e.hom ≫ p = a)\n    (j : derivedPullback a ⋙ schemeDerivedDirectImage e.hom ≅ derivedPullback p)\n    (G : X.Modules)\n    (c : (derivedPullback a).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback a).obj G))\n    (hc : IsDerivedModulePullbackComparison a G c) :\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G\n    let N := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings P.toRingedSpace)) 0).obj\n        ((Scheme.Modules.tensorPullback p).obj G)\n    ∃ d : (derivedPullback p).obj E ⟶ N,\n      IsDerivedModulePullbackComparison p G d ∧\n      ∃ m : (schemeDerivedDirectImage e.hom).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((Scheme.Modules.tensorPullback a).obj G)) ≅ N,\n        (schemeDerivedDirectImage e.hom).map c ≫ m.hom = j.hom.app E ≫ d",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T024045-L-3338260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T024045-L-3338260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
