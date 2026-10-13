@@ -11718,3 +11718,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/T4/Sheaf.AlgebraicGeometry.AffineFlatModuleDescent (stage 3; reviewer PASS; first push; landing 20261013T082415-L-1648810 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:24 L: merged deliver/U1/Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ (stage 3; reviewer PASS; first push; landing 20261013T082416-L-1648941 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:24 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionRootPresentation (stage 3; reviewer PASS; first push; landing 20261013T082416-L-1649049 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:24 L: merged deliver/U3/Sheaf.Algebra.ExtOneDirectSum (stage 3; reviewer PASS; first push; landing 20261013T082416-L-1649222 (proof); batch 20261013T082326; modules 1; new nodes 0)
