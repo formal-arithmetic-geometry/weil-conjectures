@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPunctures
 
 /-! # The pointed etale limit presentation of a punctured root chart
 
@@ -71,6 +73,18 @@ theorem punctured_root_limit_presentation
             let q := Spec.map (CommRingCat.ofHom (algebraMap S A))
             let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)
             ∃ d : V.toScheme ≅ D.obj j,
-              d.hom ≫ t.app j = V.ι ≫ q ≫ Spec.map a := by sorry
+              d.hom ≫ t.app j = V.ι ≫ q ≫ Spec.map a := by
+  classical
+  obtain ⟨I, cat, hI, F, c₀, a, e₀, hc₀, ha, hstage⟩ :=
+    pointed_etale_ring_colimit R barY y hy b hb
+  let := cat
+  let := hI
+  obtain ⟨D, c, t, hc, hD, e, he, hd⟩ :=
+    punctured_root_colimit_continuity R (strictHenselizationRing barY) f n b
+      I F c₀ (Classical.choice hc₀) a e₀ ha
+  refine ⟨I, cat, hI, D, c, t, hc, hD, e, he, ?_⟩
+  intro j
+  obtain ⟨het, z, hz⟩ := hstage (Opposite.op j)
+  exact ⟨F.obj (Opposite.op j), a.app (Opposite.op j), z, het, hz, hd j⟩
 
 end AlgebraicGeometry.Scheme

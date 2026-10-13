@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-pointed-etale-ring-colimit",
+ "kind": "statement",
+ "title": "Pointed etale ring-colimit presentation of strict henselization",
+ "statement": "Let R be a commutative ring and barY:Spec Omega -> Spec R a geometric point [def-weil-geometric-point] with image y. Let H be strictHenselizationRing barY [def-weil-pbc-strict-henselization-limit] and b:R -> H have spectrum equal to strictHenselizationStructuralMap barY [def-weil-pbc-strict-henselization-structural-map]. There are a small cofiltered category I, a ring diagram F:I^op -> CommRing, a colimit cocone c [def-weil-pbc-category-colimit], a natural family a_j:R -> F(j), and an isomorphism e:c.pt -> H, such that a_j;c.iota_j;e=b for every j. For every j, Spec(a_j) is etale [def-weil-etale-morphism] and has a point z_j over y [def-weil-affine-spectrum].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BSK (10.155.11, pointed etale colimit), 03Q9 (strict henselization as affine-neighbourhood limit)"
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the chosen small representative category, strictHenselizationDiagram and its canonical colimit cocone. strictHenselization_properties supplies cofilteredness. Take e to be the identity isomorphism.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the base-ring maps by Spec.preimage of the affine-global-section comparison followed by the neighbourhood structure map. GammaSpecIso_inv_naturality and the over-category equation prove naturality. Spec.map_injective and the characterization of strictHenselizationStructuralMap prove their composite with each colimit leg is b.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etaleness follows from the neighbourhood structure and the affine comparison isomorphism. Choose the zero prime of Omega, map it by the lift and the affine comparison, and use the over-category equality and hy to show the resulting point maps to y.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "document": "Stacks Project",
+  "place": "Tags 0BSK (10.155.11, pointed etale colimit), 03Q9 (strict henselization as affine-neighbourhood limit)",
+  "note": "Universal-property details written by the worker; the pointed presentation is fully proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization is a filtered colimit of affine pointed etale neighborhoods and polynomial root quotients and localization commute with it",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial root quotients and localization commute with filtered colimits of commutative rings",
+   "results": "8 hits, including Localization.awayEquivAdjoin and IsLocalization.adjoin_inv; no colimit theorem for the indicated root charts. AdjoinRoot queried with Loogle: definition and algebra structure, no continuity theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*colimit|colimit.*AdjoinRoot|localization.*colimit; strictHenselizationRing",
+   "results": "StrictHenselization supplies the coordinate-ring colimit and cofilteredness; StrictHenselizationStructuralMap supplies the leg formula. The exact pointed ring presentation is not named. Root colimit continuity is not stated; existing localization colimits concern localizations at primes or modules.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; existing structural declarations used for the proved pointed presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph of sbc-thm-spreading-finite-etale-galois: the pointed etale neighbourhood system before forming root charts; step 1 of lem-sbc-punctured-root-limit-presentation.",
+   "via": [
+    "lem-sbc-punctured-root-limit-presentation",
+    "lem-sbc-punctured-root-section-etale-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootLimitCone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pointed_etale_ring_colimit",
+  "statement": "theorem pointed_etale_ring_colimit (R : CommRingCat.{u}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R) (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y) (b : R ⟶ strictHenselizationRing barY) (hb : Spec.map b = strictHenselizationStructuralMap barY) : ∃ (I : Type u) (cat : Category.{u} I), letI := cat ∃ (_ : IsCofiltered I) (F : Iᵒᵖ ⥤ CommRingCat.{u}) (c : Cocone F) (a : (Functor.const Iᵒᵖ).obj R ⟶ F) (e : c.pt ≅ strictHenselizationRing barY), Nonempty (IsColimit c) ∧ (∀ j, a.app j ≫ c.ι.app j ≫ e.hom = b) ∧ ∀ j, Etale (Spec.map (a.app j)) ∧ ∃ z : Spec (F.obj j), (Spec.map (a.app j)) z = y",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T140829-L-317383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T140829-L-317383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
