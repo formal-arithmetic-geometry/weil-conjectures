@@ -15,17 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Pull phi back along the trait section tau. The point y lies above its closed\npoint, so the pullback has a point above y and that closed point (take a common\nextension of their residue fields). Its local ring A is an unramified DVR extension\nof the base trait. The structural equality for phi identifies rho(varpi0) in A\nwith the image varpi of the base uniformizer. Unramifiedness gives m_A=(varpi).\nTake the fraction field K and its nonzero uniformizer image as the unit pi. The\ngeneric morphism Spec K to S factors through its generic point and gives b.\nBase change alpha along Spec K: polynomial quotients and finite products commute\nwith field extension, so each factor is Spec K[T]/(T^(e k)-pi). A factor inclusion\nis an open immersion. The generic restriction of the concrete relative normalization\nis the original Z, since the finite etale cover is normal over the smooth generic\nfibre and normalization commutes with the relevant localization. The pullback squares\nhCeta and hpsi and the section equality hsj identify this generic restriction over\nSpec K with pullback Z.pi (b composed with seta). Compose the kth factor inclusion\nwith that isomorphism; both preserve the projection to Spec K, which is precisely\nthe displayed structural equality. This needs no rational point or splitting.\nA zero factor index set has no k; positive exponents exclude constant root polynomials.",
+   "text": "Use the pointed etale trait-lift lemma with hy followed by hx to obtain A, its injective trait map delta, the chart map iota, and the uniformizer delta(varpi0), with their commuting square.",
+   "uses": [
+    "lem-sbc-etale-trait-section-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct K=FractionRing A and pi=Units.mk0(algebraMap A K (delta varpi0)); irreducibility of a generator of the DVR maximal ideal and injectivity of the fraction-ring inclusion prove this image nonzero. Put theta=(algebraMap A K).comp iota. Its value on rho(varpi0) equals pi, and its scheme map followed by phi equals the generic trait map followed by tau.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The generic normalization comparison provides b and an isomorphism beta over Spec K from pullback n along the generic trait section to pullback Z.pi (b;seta). The product-chart base-change lemma supplies the kth open root factor. Rewrite its coefficient and base map using the established identities, compose its open immersion with beta.hom, and use both projection equalities to prove the displayed structural map identity.",
+   "uses": [
+    "lem-sbc-root-product-chart-base-change-factor",
+    "lem-sbc-trait-normalization-generic-section-comparison"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-etale-trait-section-lift",
+  "lem-sbc-root-product-chart-base-change-factor",
+  "lem-sbc-trait-normalization-generic-section-comparison"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "J4",
+  "by": "N1",
   "document": "Stacks Project",
-  "place": "Tag 0EYI, preliminary paragraph before parts (1) and (2); Tag 0EYJ, trait reduction"
+  "place": "Tags 0EYI and 0EYJ, decomposed into the etale trait lift and two proved generic comparisons"
  },
  "mathlib_searches": [
   {
@@ -108,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T100020-L-2466919",
+  "landing": "20261013T115430-L-3359427",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-root-product-chart-base-change-factor",
+ "kind": "statement",
+ "title": "Open factors after base change of a product root chart",
+ "statement": "Let n:N->L and phi:Spec R->L be scheme morphisms. Let f be in R, m a natural number, e:Fin m->N, and alpha:pullback n phi ~= Spec(product_k R[T]/(T^(e k)-f)) an isomorphism over Spec R. For any field K, ring map theta:R->K, and k:Fin m, there is an open immersion from Spec K[T]/(T^(e k)-theta(f)) into pullback n (Spec theta;phi), whose composite with the projection to Spec K is its canonical structural morphism. No positivity hypothesis on the exponents is necessary [def-weil-pbc-scheme-conventions, def-pc-fibre-product].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYI, preliminary root-chart base change calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Base change alpha along Spec theta. The pullback associativity isomorphism\nidentifies its source with pullback n (Spec theta followed by phi). On affine rings,\ntensor product commutes with finite products and polynomial quotients. The mapped\npolynomial is X^(e k)-C(theta f). Each product projection is the coordinate ring\nmap of an open and closed factor inclusion. Compose that inclusion with the\ninverse of the base-changed chart isomorphism. All maps are over Spec K, which gives\nthe displayed projection identity. The statement has no factors to check when m=0;\nno positivity hypothesis is needed for this affine base change.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "N1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYI, preliminary root-chart base change calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphism over a discrete valuation ring has a discrete valuation stalk above the closed point with the same uniformizer",
+   "results": "Etale locus lemmas and DVR TFAE; no pointed scheme trait lift found.",
+   "date": "2026-10-13",
+   "verdict": "No direct match for the remaining trait lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.tensorAlgEquiv",
+   "results": "AdjoinRoot.tensorAlgEquiv, tensorAlgEquiv_root, tensorAlgEquiv_of; used the equivalence in the root-chart proof.",
+   "date": "2026-10-13",
+   "verdict": "Useful algebraic ingredient, not the whole chart theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|AdjoinRoot.tensorAlgEquiv|pullbackSpecIso",
+   "results": "Found Hom.pullbackFromNormalizationIso and its projection identity in WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia, pullbackSpecIso in Mathlib.AlgebraicGeometry.Pullbacks, tensorAlgEquiv in Mathlib.RingTheory.AdjoinRoot.",
+   "date": "2026-10-13",
+   "verdict": "Used the proved normalization-over-open comparison and affine tensor-product pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining a polynomial root commutes with extension of the coefficient field and finite products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-trait-divisor-chart-section-generic-factor",
+   "place": "Tag 0EYI, preliminary root-chart base change calculation",
+   "via": [
+    "lem-sbc-trait-divisor-chart-section-generic-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootProductChartBaseChangeFactor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootProductChartBaseChangeFactor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rootProductChart_baseChange_factor",
+  "statement": "theorem rootProductChart_baseChange_factor {L N : Scheme.{u}} (n : N ⟶ L) (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R) (m : ℕ) (e : Fin m → ℕ) (α : pullback n φ ≅ Spec (CommRingCat.of (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) (hα : α.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) = pullback.snd n φ) (K : Type u) [Field K] (θ : R →+* K) (k : Fin m) : ∃ g : Spec (CommRingCat.of (AdjoinRoot ((Polynomial.X : Polynomial K) ^ e k - Polynomial.C (θ f)))) ⟶ pullback n (Spec.map (CommRingCat.ofHom θ) ≫ φ), IsOpenImmersion g ∧ g ≫ pullback.snd n (Spec.map (CommRingCat.ofHom θ) ≫ φ) = Spec.map (CommRingCat.ofHom (algebraMap K (AdjoinRoot ((Polynomial.X : Polynomial K) ^ e k - Polynomial.C (θ f)))))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T115430-L-3359427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T115430-L-3359427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,6 +17,10 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 public import Mathlib.RingTheory.AdjoinRoot
 
+import Sheaf.AlgebraicGeometry.Morphisms.EtaleTraitSectionLift
+import Sheaf.AlgebraicGeometry.Morphisms.RootProductChartBaseChangeFactor
+import Sheaf.AlgebraicGeometry.Morphisms.TraitNormalizationGenericSectionComparison
+
 /-! Generic section factors of a supplied trait-divisor chart. 
 Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
 (blueprint: lem-sbc-trait-divisor-chart-section-generic-factor)
@@ -106,6 +110,58 @@ theorem GaloisCover.trait_divisor_chart_section_generic_factor {S C : Scheme.{u}
               g ≫ pullback.snd Z.π (b ≫ sη) =
                 Spec.map (CommRingCat.ofHom (algebraMap K
                   (AdjoinRoot ((Polynomial.X : Polynomial K) ^ e k -
-                    Polynomial.C (π : K))))) := by sorry
+                    Polynomial.C (π : K))))) := by
+  classical
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr
+  dsimp only
+  intro hn x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e he α hα k
+  let a := S.fromSpecStalk s
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+    (pullback.fst c a)
+  let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=
+    pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])
+  have hτ : τ ≫ pullback.snd c a = 𝟙 _ := by simp [τ]
+  have hyτ : φ y = τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) := hy.trans hx
+  obtain ⟨A, hAd, hAv, δ, ι, hδ, hmax, hcoeff, hcomm⟩ :=
+    etale_trait_section_lift (S.presheaf.stalk s) (pullback.snd c a) τ hτ
+      R φ y hφ hyτ ρ hρ ϖ₀ hϖ₀
+  let := hAd
+  let := hAv
+  let K := FractionRing A
+  let ϖ := δ ϖ₀
+  have hϖ : ϖ ≠ 0 :=
+    ((IsDiscreteValuationRing.irreducible_iff_uniformizer ϖ).mpr hmax).ne_zero
+  have hϖK : algebraMap A K ϖ ≠ 0 :=
+    fun h ↦ hϖ ((IsFractionRing.injective A K) (h.trans (map_zero _).symm))
+  let π : Kˣ := Units.mk0 (algebraMap A K ϖ) hϖK
+  let θ : R →+* K := (algebraMap A K).comp ι
+  have hθ : θ (ρ ϖ₀) = (π : K) := by
+    change algebraMap A K (ι (ρ ϖ₀)) = algebraMap A K (δ ϖ₀)
+    rw [hcoeff]
+  obtain ⟨b, β, hβ⟩ :=
+    GaloisCover.trait_normalization_generic_section_comparison
+      hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
+      s hs hmin hdvr A hAd K inferInstance inferInstance inferInstance δ hδ
+  have hbase : Spec.map (CommRingCat.ofHom θ) ≫ φ =
+      Spec.map (CommRingCat.ofHom ((algebraMap A K).comp δ)) ≫ τ := by
+    rw [show Spec.map (CommRingCat.ofHom θ) =
+      Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫
+        Spec.map (CommRingCat.ofHom ι) by simp [θ, ← Spec.map_comp]]
+    rw [Category.assoc, hcomm]
+    simp only [← Category.assoc, ← Spec.map_comp]
+    rfl
+  have hfactor := rootProductChart_baseChange_factor n R φ (ρ ϖ₀)
+    m e α hα K θ k
+  rw [hθ, hbase] at hfactor
+  obtain ⟨g, hg, hw⟩ := hfactor
+  let : IsOpenImmersion g := hg
+  refine ⟨A, hAd, hAv, K, inferInstance, inferInstance, inferInstance, ϖ, π, b,
+    hmax, rfl, g ≫ β.hom, inferInstance, ?_⟩
+  rw [Category.assoc, hβ, hw]
+
 
 end AlgebraicGeometry.Scheme

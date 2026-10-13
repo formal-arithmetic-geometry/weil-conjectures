@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-etale-trait-section-lift",
+ "kind": "statement",
+ "title": "An unramified trait lift of a pointed etale chart",
+ "statement": "Let R be a domain DVR, L a scheme, p:L->Spec R and tau:Spec R->L a section of p. Let B be a commutative ring, phi:Spec B->L etale, and y a point of Spec B with phi(y)=tau(m_R). Let rho:R->B satisfy phi;p=Spec rho, and let varpi0 generate m_R. Then there exist a commutative ring A, a domain and DVR, maps delta:R->A and iota:B->A, such that delta is injective, m_A=(delta(varpi0)), iota(rho(varpi0))=delta(varpi0), and Spec iota;phi=Spec delta;tau [def-weil-pbc-scheme-conventions, def-pc-fibre-product].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Form Spec B times_L Spec R and choose a point above y and the closed point\nusing a common extension of their residue fields. Take its local ring A. The\nprojection to Spec B induces iota and that to Spec R induces delta. The projection\nto the trait is etale; its local ring at this point is a DVR, and the local map\ndelta is flat and injective. Its closed fibre is a field, so the maximal ideal of\nA is the extension of the maximal ideal of R. Thus delta(varpi0) generates it.\nThe equality phi followed by p = Spec rho and the pullback square give both the\ncommuting scheme maps and iota(rho(varpi0)) = delta(varpi0). These witnesses are\nused only in the existential proof, never to define an unspecified object.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "N1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphism over a discrete valuation ring has a discrete valuation stalk above the closed point with the same uniformizer",
+   "results": "Etale locus lemmas and DVR TFAE; no pointed scheme trait lift found.",
+   "date": "2026-10-13",
+   "verdict": "No direct match for the remaining trait lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.tensorAlgEquiv",
+   "results": "AdjoinRoot.tensorAlgEquiv, tensorAlgEquiv_root, tensorAlgEquiv_of; used the equivalence in the root-chart proof.",
+   "date": "2026-10-13",
+   "verdict": "Useful algebraic ingredient, not the whole chart theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|AdjoinRoot.tensorAlgEquiv|pullbackSpecIso",
+   "results": "Found Hom.pullbackFromNormalizationIso and its projection identity in WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia, pullbackSpecIso in Mathlib.AlgebraicGeometry.Pullbacks, tensorAlgEquiv in Mathlib.RingTheory.AdjoinRoot.",
+   "date": "2026-10-13",
+   "verdict": "Used the proved normalization-over-open comparison and affine tensor-product pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale local extension of a discrete valuation ring is a discrete valuation ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local ring at a closed fibre point of an etale scheme over a DVR is a DVR",
+   "results": "8 hits: Algebra.IsEtaleAt, exists_etale_of_isEtaleAt, mem_etaleLocus_iff, etaleLocus, Etale.of_isLocalization_Away, Etale.of_isLocalizationAway, instEtaleOfIsStandardEtale, IsDedekindDomainDvr.is_dvr_at_nonzero_prime. None supplies the compatible pointed scheme lift.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no direct replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsDiscreteValuationRing",
+   "results": "0 hits. An earlier query IsEtale, IsDiscreteValuationRing was invalid because IsEtale is not a known identifier; repeated with Algebra.Etale.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing.*[Ee]tale|[Ee]tale.*IsDiscreteValuationRing",
+   "results": "msearch: 0 hits. Also read lean/Sheaf/AlgebraicGeometry/LocalDvrBaseChange.lean search results and SmoothTraitSectionComponents.lean; these compare existing DVR stalks or fibre components, rather than construct this trait lift.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no duplicate found in Mathlib or the library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-trait-divisor-chart-section-generic-factor",
+   "place": "Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4)",
+   "via": [
+    "lem-sbc-trait-divisor-chart-section-generic-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.EtaleTraitSectionLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/EtaleTraitSectionLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_trait_section_lift",
+  "statement": "theorem etale_trait_section_lift (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] {L : Scheme.{u}} (p : L ⟶ Spec R) (τ : Spec R ⟶ L) (hτ : τ ≫ p = 𝟙 _) (B : CommRingCat.{u}) (φ : Spec B ⟶ L) (y : Spec B) (hφ : Etale φ) (hy : φ y = τ (IsLocalRing.closedPoint R)) (ρ : R →+* B) (hρ : φ ≫ p = Spec.map (CommRingCat.ofHom ρ)) (ϖ₀ : R) (hϖ₀ : IsLocalRing.maximalIdeal R = Ideal.span {ϖ₀}) : ∃ (A : CommRingCat.{u}) (_ : IsDomain A) (_ : IsDiscreteValuationRing A) (δ : R →+* A) (ι : B →+* A), Function.Injective δ ∧ IsLocalRing.maximalIdeal A = Ideal.span {δ ϖ₀} ∧ ι (ρ ϖ₀) = δ ϖ₀ ∧ Spec.map (CommRingCat.ofHom ι) ≫ φ = Spec.map (CommRingCat.ofHom δ) ≫ τ",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T115430-L-3359427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T115430-L-3359427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
