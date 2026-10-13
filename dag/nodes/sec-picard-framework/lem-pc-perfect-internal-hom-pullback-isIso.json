@@ -18,30 +18,47 @@
  },
  "proof": [
   {
-   "text": "Locally represent M by a bounded complex of finite projective modules.\nIts dual is perfect, and the tensor-Hom evaluation comparison identifies RHom(M,K)\nwith K tensor the dual of M, for arbitrary unbounded K. Equivalently use the exact\npairing and evaluation comparison of perfect_rhom_tensor_comparison.\nStrong monoidal derived pullback transports evaluation and coevaluation and both\ntriangle identities. The perfect-dual pullback comparison identifies the transported\ndual with the internal dual of Lg*M. The tensor-Hom evaluation comparison on the\nsource and target therefore identifies Lg*RHom(M,K) with RHom(Lg*M,Lg*K).\nTo identify the resulting isomorphism with the displayed arrow, apply the injective\ntensor-Hom equivalence on the target: its evaluation is pullback of evaluation,\nprecomposed with the inverse tensor comparison. The fixed canonical adjunctions\nhave exactly this evaluation normalization. Uniqueness of the canonical tensor\ncomparison identifies the supplied t with that of the monoidal pullback model.\nThus the displayed map is the constructed isomorphism and is invertible.",
+   "text": "Equip M with quasi-coherent cohomology by perfectness. Obtain the tensor-Hom bijections and their naturality on X. Apply perfect_rhom_tensor_comparison with both quasi-coherent inputs M, extracting its ExactPairing M D; the object K is not used in this step and is not assumed quasi-coherent.",
    "uses": [
-    "lem-pc-perfect-rhom-tensor-comparison",
-    "def-pc-derived-pullback-monoidal-model",
-    "def-pc-derived-pullback-tensor-comparison",
+    "lem-sc-perfect-qcoherent",
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-pc-perfect-rhom-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the forward comparison t.hom as the inverse tensorator of a CoreMonoidal structure m on derivedPullback g by canonicalPullbackTensor_monoidal_realization. Iso.ext applied to the inverse tensorator equation proves t.inv equals the monoidal tensorator. Install m.toMonoidal locally in the proof.",
+   "uses": [
+    "lem-pc-canonical-pullback-tensor-monoidal-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upstream theorem tensorRightAdjunction_counit_app expands the counit of tensorRightAdjunction M D as associator, evaluation, and right unitor. The proved private helper monoidal_rigid_counit uses ExactPairing.map and the monoidal map_associator, map_whiskerLeft and map_rightUnitor equations to show that applying the functor to this counit and precomposing by its tensorator equals the transported counit precomposed by the inverse tensorator whiskered by F M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved private helper monoidal_adjunct_isIso compares tensorRight D with the source internal-Hom functor and tensorRight (F D) with the target one using Adjunction.rightAdjointUniq. Apply the inverse target homEquiv to the proposed compatibility square; its left naturality, tensorator naturality, the rightAdjointUniq counit identities and monoidal_rigid_counit prove the square. Thus F(source identification) followed by the displayed mate equals inverse tensorator followed by target identification. These three maps are isomorphisms; IsIso.of_isIso_comp_left proves the displayed mate invertible. Apply this helper with the fixed canonicalTensorHomAdjunction on X and T and the pairing from step 1.",
+   "uses": [
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark 08I3, evaluation-defined comparison; Example 0FPC, perfect duality"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-perfect-qcoherent",
+  "lem-sc-derived-internal-hom-adjunction",
   "lem-pc-perfect-rhom-tensor-comparison",
-  "def-pc-derived-pullback-monoidal-model",
-  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-canonical-pullback-tensor-monoidal-realization",
   "def-pc-affine-global-hom-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "F4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Remark 08I3, evaluation-defined comparison; Example 0FPC, perfect duality; explicit normalization refinement of parent steps"
+  "place": "Remark 08I3 and Example 0FPC; categorical implementation using Mathlib rigid tensor adjunctions and uniqueness of right adjoints; canonical monoidal realization from existing node"
  },
  "blueprint": {
   "is": null,
@@ -114,10 +131,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T054240-L-450177",
-  "kind": "interface",
+  "landing": "20261013T082344-L-1635395",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

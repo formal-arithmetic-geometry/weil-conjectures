@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Invertibility of the evaluation-defined perfect internal-Hom pullback map
 
@@ -21,6 +24,64 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+private theorem monoidal_rigid_counit
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) [F.Monoidal] (M N K : C) [ExactPairing M N] :
+    Functor.LaxMonoidal.μ F (K ⊗ N) M ≫
+        F.map ((tensorRightAdjunction M N).counit.app K) =
+      (Functor.OplaxMonoidal.δ F K N ▷ F.obj M) ≫
+        (letI := ExactPairing.map F M N
+         (tensorRightAdjunction (F.obj M) (F.obj N)).counit.app (F.obj K)) := by
+  let := ExactPairing.map F M N
+  rw [tensorRightAdjunction_counit_app, tensorRightAdjunction_counit_app]
+  change _ = _ ≫ (α_ _ _ _).hom ≫
+    F.obj K ◁ (Functor.LaxMonoidal.μ F N M ≫ F.map (ExactPairing.evaluation M N) ≫
+      Functor.OplaxMonoidal.η F) ≫ (ρ_ _).hom
+  simp only [Functor.map_comp, Functor.Monoidal.map_associator,
+    Functor.Monoidal.map_whiskerLeft,
+    whiskerLeft_comp, Category.assoc, Functor.Monoidal.μ_δ_assoc]
+  rw [Functor.Monoidal.map_rightUnitor F K]
+  simp only [Functor.Monoidal.μ_δ_assoc]
+
+private theorem monoidal_adjunct_isIso
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) [F.Monoidal] (M N K : C) [ExactPairing M N]
+    (H : C ⥤ C) (J : D ⥤ D) (b : tensorRight M ⊣ H)
+    (c : tensorRight (F.obj M) ⊣ J) :
+    IsIso (c.homEquiv (F.obj (H.obj K)) (F.obj K)
+      (Functor.LaxMonoidal.μ F (H.obj K) M ≫ F.map (b.counit.app K))) := by
+  let := ExactPairing.map F M N
+  let s := (tensorRightAdjunction M N).rightAdjointUniq b
+  let s' := (tensorRightAdjunction (F.obj M) (F.obj N)).rightAdjointUniq c
+  let q := c.homEquiv (F.obj (H.obj K)) (F.obj K)
+    (Functor.LaxMonoidal.μ F (H.obj K) M ≫ F.map (b.counit.app K))
+  have h : F.map (s.hom.app K) ≫ q =
+      Functor.OplaxMonoidal.δ F K N ≫ s'.hom.app (F.obj K) := by
+    apply (c.homEquiv _ _).symm.injective
+    rw [c.homEquiv_naturality_left_symm, c.homEquiv_naturality_left_symm]
+    dsimp only [q]
+    rw [Equiv.symm_apply_apply]
+    change F.map (s.hom.app K) ▷ F.obj M ≫ _ =
+      Functor.OplaxMonoidal.δ F K N ▷ F.obj M ≫ _
+    rw [Functor.LaxMonoidal.μ_natural_left_assoc, ← F.map_comp]
+    dsimp only [s, s']
+    have hs := Adjunction.rightAdjointUniq_hom_app_counit
+      (tensorRightAdjunction M N) b K
+    change s.hom.app K ▷ M ≫ b.counit.app K = _ at hs
+    rw [hs]
+    have hs' := Adjunction.homEquiv_symm_rightAdjointUniq_hom_app
+      (tensorRightAdjunction (F.obj M) (F.obj N)) c (F.obj K)
+    change (c.homEquiv (F.obj K ⊗ F.obj N) (F.obj K)).symm
+      (s'.hom.app (F.obj K)) = _ at hs'
+    rw [hs']
+    exact monoidal_rigid_counit F M N K
+  have : IsIso (F.map (s.hom.app K) ≫ q) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (F.map (s.hom.app K)) q
+
+set_option maxHeartbeats 1600000 in
+-- Elaborating the shared derived tensor instances needs additional heartbeats.
 /-- Pullback of internal Hom from a perfect source commutes with internal Hom.
 This asserts invertibility of the evaluation-defined map, for the fixed normalized
 tensor-Hom adjunctions and a canonical pullback tensor comparison, rather than
@@ -29,20 +90,22 @@ existence of an unrelated isomorphism between the two objects.
 Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
 (blueprint: lem-pc-perfect-internal-hom-pullback-isIso).
 
-Proof: Locally represent M by a bounded complex of finite projective modules.
-Its dual is perfect, and the tensor-Hom evaluation comparison identifies RHom(M,K)
-with K tensor the dual of M, for arbitrary unbounded K. Equivalently use the exact
-pairing and evaluation comparison of perfect_rhom_tensor_comparison.
-Strong monoidal derived pullback transports evaluation and coevaluation and both
-triangle identities. The perfect-dual pullback comparison identifies the transported
-dual with the internal dual of Lg*M. The tensor-Hom evaluation comparison on the
-source and target therefore identifies Lg*RHom(M,K) with RHom(Lg*M,Lg*K).
-To identify the resulting isomorphism with the displayed arrow, apply the injective
-tensor-Hom equivalence on the target: its evaluation is pullback of evaluation,
-precomposed with the inverse tensor comparison. The fixed canonical adjunctions
-have exactly this evaluation normalization. Uniqueness of the canonical tensor
-comparison identifies the supplied t with that of the monoidal pullback model.
-Thus the displayed map is the constructed isomorphism and is invertible. -/
+Proof: Equip M with quasi-coherent cohomology using PerfectImpliesQCoh, and
+apply perfect_rhom_tensor_comparison with both inputs M to obtain an exact pairing
+of M with its perfect dual D. Realize the supplied canonical tensor comparison by
+canonicalPullbackTensor_monoidal_realization; its inverse is the monoidal tensorator.
+The upstream counit formula and two proved private helpers perform the remaining
+categorical calculation.
+The rigid tensor adjunction has counit associator followed by evaluation and the
+right unitor. A monoidal functor carries this counit to the transported pairing's
+counit after precomposition by its inverse tensorator. Uniqueness of right adjoints
+identifies both internal-Hom functors with tensoring by the respective duals.
+Naturality of the target adjunction and compatibility of these counits show that
+precomposing the displayed mate by the pulled-back source identification gives
+inverse tensorator followed by the target identification. All these maps are
+invertible, so cancellation proves the displayed mate invertible. This argument
+uses arbitrary adjunctions and arbitrary K, hence applies to the fixed normalized
+adjunctions without any quasi-coherence or boundedness assumption on K. -/
 theorem perfect_internalHom_pullback_isIso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -63,6 +126,28 @@ theorem perfect_internalHom_pullback_isIso
             ((derivedInternalHom (Opens.grothendieckTopology X)
               X.toRingedSpace.sheaf).obj (op M, K), M) ≫
           (derivedPullback g).map ((canonicalTensorHomAdjunction X M).counit.app K))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  exact (by
+    classical
+    obtain ⟨adj, _, adj', hadj, _, _, hadj'⟩ :=
+      scheme_derivedInternalHom_adjunction X
+    let P : schemeDerivedQCohCategory X :=
+      ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩
+    obtain ⟨D, _, _, _, _, _, _, _, _, _, _, _, _, _, _,
+      ⟨p, _, _⟩, _⟩ :=
+      perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
+    let := p
+    obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization g
+      (fun A B ↦ t.hom.app (A, B)) ht
+    let := m.toMonoidal
+    have htensor (A B : schemeDerivedCategory X) :
+        t.inv.app (A, B) = Functor.LaxMonoidal.μ (derivedPullback g) A B := by
+      have he : (m.μIso A B).symm = t.app (A, B) := Iso.ext (hm A B)
+      exact (congrArg Iso.inv he).symm
+    rw [htensor]
+    exact monoidal_adjunct_isIso (derivedPullback g) M D.obj K _ _
+      (canonicalTensorHomAdjunction X M)
+      (canonicalTensorHomAdjunction T ((derivedPullback g).obj M)))
 
 end AlgebraicGeometry
