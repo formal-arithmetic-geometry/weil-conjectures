@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-affine-quasicoherent",
+ "kind": "statement",
+ "title": "Quasi-coherence of the pushed-forward increasing-tuple sheaf terms",
+ "statement": "Let $A$ be a commutative ring, $f:X\\to\\operatorname{Spec} A$ separated, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$ a finite family of affine opens, and $G$ a quasi-coherent $\\mathcal O_X$-module. Each degree $i\\in\\mathbb Z$ of $f_*(\\operatorname{extend} C(U,G))$ [def-pc-s3-alternating-cech-sheaf-construction] is quasi-coherent. Neither a covering assumption nor boundedness of $G$ beyond being a module in degree zero is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01FM, 02KG and 02KH; termwise sheaf and affine comparison before cohomology"
+ },
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For nonnegative degree p, the existing term comparison identifies the constructed sheaf term with the finite product of open pushforwards. Every nonempty tuple intersection is affine: compose separated f with the terminal morphism of Spec A and use IsAffineOpen.iInf. Restriction preserves quasi-coherence, and pushforward from each affine intersection to Spec A is quasi-coherent by the qcqs-pushforward theorem (affine morphisms are quasi-compact and quasi-separated). The pushforward composition isomorphism transfers this property to each f_* j_t* term.",
+   "uses": [
+    "lem-pc-s3-alternating-cech-sheaf-terms",
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pushed-forward product is quasi-coherent: replace each quasi-coherent factor on Spec A by tilde of its global sections via the counit, and combine these using Pi.mapIso with the finite-product preservation isomorphism for the additive tilde functor. The resulting product is isomorphic to a tilde module, hence quasi-coherent. Transfer along pushforward of the extension-degree isomorphism, pushforward of the existing term comparison, and PreservesProduct.iso. For degrees outside the embedding image, use isZero_extend_X and preservation of zero objects; compare to tilde of the zero module, which is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-alternating-cech-sheaf-terms",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01FM, 02KG and 02KH, explicit interface reduction by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of the sheafified finite increasing tuple Cech complex agree with the complex of sections without a covering hypothesis",
+   "results": "Eight MayerVietorisSquare and general sheaf-condition hits; none compares this increasing-tuple sheafification complex.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"pushforward\"",
+   "results": "SheafOfModules.isQuasicoherent_pushforward and isQuasicoherent_pushforward_of_isLeftAdjoint; these are general site lemmas, not this affine Cech term assertion.",
+   "date": "2026-10-13",
+   "verdict": "partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "isQuasicoherent.*(pi|prod|pushforward)|[Cc]ech.*[Ss]ections",
+   "results": "Six matches: general pushforward lemmas in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean and an open restriction use in Mathlib/AlgebraicGeometry/Modules/Tilde.lean. No exact comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections identify the increasing tuple complex of module sheaves with the complex of sections",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The affine pushforward of the terms of a finite affine Cech complex of quasi coherent sheaves is quasi coherent",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluating a sheafified product of open direct images at the terminal open identifies its signed restriction complex with the module section complex",
+   "results": "Eight topological sheaf gluing and restriction-coordinate hits. None identifies the specified increasing-tuple sheafified module complex.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"IsIso\"",
+   "results": "Three sheafification counit isomorphism instances, including PresheafOfModules. These are component tools and do not give the differential-compatible comparison.",
+   "date": "2026-10-13",
+   "verdict": "second reading: component tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "eval.*(sheafification|pushforward)|((sheafification|pushforward).*(eval|sections))",
+   "results": "Seven matches, including SheafOfModules.pushforwardSections and bijective_pushforwardSections. No increasing-tuple complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafAffineComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Tags 02KG and 02KH, separated-case affine Cech comparison before cohomology; Tag 01FM, signed faces; parent augmented-construction proof step 3",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-affine-comparison",
+    "lem-pc-s3-affine-alternating-cech-augmented-construction",
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafAffineQuasicoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafAffineQuasicoherent.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafComplex_affineQuasicoherent",
+  "statement": "theorem alternatingCechSheafComplex_affineQuasicoherent {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f] {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i)) (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] (i : ℤ) : SheafOfModules.IsQuasicoherent.{u} ((((Scheme.Modules.pushforward f).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat)).X i)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T082341-L-1634350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T082341-L-1634350",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

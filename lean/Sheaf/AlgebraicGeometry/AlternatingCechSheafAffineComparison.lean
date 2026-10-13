@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AlternatingCechSheafConstruction
 public import Sheaf.AlgebraicGeometry.AffineAlternatingCechModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.AlternatingCechSheafAffineSections
+import Sheaf.AlgebraicGeometry.AlternatingCechSheafAffineQuasicoherent
 
 /-! # Affine direct image of the increasing-tuple sheaf complex
 
@@ -52,6 +54,24 @@ theorem alternatingCechSheafComplex_affineComparison
     Nonempty (((Scheme.Modules.pushforward f).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj
         ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat) ≅
-          affineAlternatingCechModel f U G) := by sorry
+          affineAlternatingCechModel f U G) := by
+  let : (moduleSpecΓFunctor (R := A)).Additive := ⟨by intros; rfl⟩
+  let L := ((Scheme.Modules.pushforward f).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+    ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat)
+  obtain ⟨e⟩ := alternatingCechSheafComplex_affineSections f U G
+  let (i : ℤ) : SheafOfModules.IsQuasicoherent.{u} (L.X i) :=
+    alternatingCechSheafComplex_affineQuasicoherent f U haffine G i
+  let c : ((tilde.functor A).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      (((moduleSpecΓFunctor (R := A)).mapHomologicalComplex (ComplexShape.up ℤ)).obj L) ≅ L :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun i ↦ asIso (L.X i).fromTildeΓ)
+      (fun i j _ ↦ (Scheme.Modules.fromTildeΓNatTrans.naturality (L.d i j)).symm)
+  exact ⟨c.symm ≪≫ ((tilde.functor A).mapHomologicalComplex
+    (ComplexShape.up ℤ)).mapIso e ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl
+      (ModuleCat.restrictScalars (((Scheme.ΓSpecIso A).inv ≫ f.appTop).hom) ⋙
+        tilde.functor A)) (ComplexShape.up ℤ)).app
+      ((alternatingCechComplex U G.presheafModuleCat).extend
+        ComplexShape.embeddingUpNat)⟩
 
 end AlgebraicGeometry
