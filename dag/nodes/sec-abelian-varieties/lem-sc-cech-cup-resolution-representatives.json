@@ -16,30 +16,42 @@
  },
  "proof": [
   {
-   "text": "Use the nonnegative Godement/flasque resolutions and augmentation-preserving sectionwise pairing [lem-sc-module-cup-godement-aw]. Their flasque terms are global-section acyclic [lem-sc-module-cup-flasque-acyclicity], so injective comparisons equip them with the computing class maps in CupResolutionPairing.",
+   "text": "Choose the explicitly constructed computing pairing with flasque terms. This is the original Godement/flasque route with flasqueness retained in the conclusion.",
    "uses": [
-    "lem-sc-module-cup-godement-aw",
-    "lem-sc-module-cup-flasque-acyclicity"
+    "lem-sc-cup-cech-flasque-pairing"
    ],
    "elementary": false
   },
   {
-   "text": "The alpha maps from global sections to total Cech complexes are quasi-isomorphisms for flasque resolutions. Lift the images of a,b to global cocycles a′,b′. The Leibniz identity makes the paired section a cocycle c′. In Tag 0FKV the alpha and augmentation beta maps preserve the signed cup pairing, so the three resulting cohomology classes agree with the canonical comparisons characterized in [lem-sc-cech-comparison-map-naturality]. The comparisons to injective resolutions identify them with the D-class maps.",
+   "text": "Apply the linear flasque comparison theorem to each of the three resolutions. Its alpha quasi-isomorphisms, together with surjectivity of homology projections, lift the beta images of a and b to actual global kernel cocycles a′ and b′. The canonical comparison clauses identify their D-class maps.",
    "uses": [
-    "lem-sc-cech-comparison-map-naturality"
+    "lem-sc-cup-cech-flasque-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use D.leibniz on a′ and b′ to construct the concrete kernel cocycle c′ with underlying section D.pair(p,q,top)(a′,b′). Both input differentials vanish, so bilinearity kills the two Leibniz terms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the signed total homology pairing. Its alpha formula expresses H(alpha)([c′]) as the product of the two lifted alpha classes. Replace those classes by the beta images using the lifting equalities, then apply the beta formula and hc to obtain H(beta)([c]). The target linear comparison identifies D.target.class(c′) with cFG([c]). Assemble the witnesses and the four required equations.",
+   "uses": [
+    "lem-sc-cup-cech-total-pairing",
+    "lem-sc-cup-cech-flasque-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-module-cup-godement-aw",
-  "lem-sc-module-cup-flasque-acyclicity",
-  "lem-sc-cech-comparison-map-naturality"
+  "lem-sc-cup-cech-flasque-comparison",
+  "lem-sc-cup-cech-flasque-pairing",
+  "lem-sc-cup-cech-total-pairing"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0FKV, Lemma 20.31.4; Godement/flasque resolution pairing and signed Cech comparison diagram"
+  "document": "https://stacks.math.columbia.edu/tag/0FKV",
+  "place": "Tag 0FKV flasque-resolution diagram and equation 07MB; S3 Lean implementation of lifting, Leibniz, the two axes and the three canonical class equations"
  },
  "mathlib_searches": [
   {
@@ -115,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c6cfc",
-  "group": "D4",
+  "reviewer": "COMPILER",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T161727-L-1459870",
+  "landing": "20261013T190153-L-3220739",
   "kind": "interface",
-  "note": "independent Codex review: Matched the proof, new theorem signatures, DAG records, sources, and report; existing signatures remain unchanged, all three delivered modules and all three direct importers compile cleanly, and axiom checks pass with recorded sorry dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
