@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-first-localization-cohomology-semilinear",
+ "kind": "statement",
+ "title": "Scalar compatibility of the canonical first-localization cohomology map",
+ "statement": "Let R,A,Aq,B,D be commutative rings in one universe, with R-algebra structures on A,Aq,B, an A-algebra structure on Aq compatible with R, and algebra structures from A tensor_R B and Aq tensor_R B to D. Assume the R- and B-module derived categories exist. Let Q be a complex of A-modules and L,K base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model] for Q and Aq tensor_A Q. Let uQ be an R-complex map whose degree-j component sends x to 1 tensor x. For i in Z let c be the B-linear cohomology map obtained by composing L.cohomologyIso(i), H^i of L.derived(uQ) followed by the unique universal-counit-compatible isomorphism L.derived -> K.derived, and K.cohomologyIso(i) inverse. For every e in A tensor_R B and x in L.cohomology(i), c(e*x)=phi(e)*c(x), where phi(a tensor b)=algebraMap(A,Aq)(a) tensor b. No localization hypothesis is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06Y6 and 0DJ8, derived change of rings and the affine cohomology localization identity"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "On the underlying R-complexes, the generator formula for uQ and tensor balancing intertwine multiplication by a with multiplication by algebraMap(A,Aq)(a). Apply the quotient, derived functor, and cohomology; naturality of the universal comparison and both cohomologyIso_smul fields give compatibility with a tensor 1.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-ring-tensor-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite c is B-linear. Decompose a tensor b as (a tensor 1)*(1 tensor b); apply the first-factor result and B-linearity. Tensor induction with additivity and zero proves the equation for every coefficient.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 06Y6 and 0DJ8; class-level consequences and explicit universal-counit model transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of cohomology has torsion kernel and every class is a fraction of an original class",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of map on derived tensor cohomology under localization consists of classes killed by a denominator",
+   "results": [
+    "Algebra.H1Cotangent.isLocalizedModule",
+    "LinearMap.toKerLocalized_isLocalizedModule",
+    "Algebra.tensorH1CotangentOfIsLocalization"
+   ],
+   "date": "2026-10-14",
+   "verdict": "Cotangent special cases and generic module localization; no arbitrary-model derived tensor result."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.surj",
+   "results": [
+    "IsLocalizedModule.surj",
+    "IsLocalizedModule.iso_symm_apply_aux"
+   ],
+   "date": "2026-10-14",
+   "verdict": "The ordinary-module localization interface, used to assemble the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(kernel|denominator)|cohomology.*(kernel|denominator); blueprint_refs search localization cohomology and scalar action",
+   "results": "No matching declaration for the derived cohomology map. No matching imported blueprint node. Existing FirstLocalizationMap imports the parent and cannot be used without a cycle.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate of either individual class-level criterion or the scalar-only lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstLocalizationCohomologyBaseChange",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine first-factor localization identity: Scalar compatibility of the canonical first-localization cohomology map",
+   "via": [
+    "lem-pc-first-localization-cohomology-base-change",
+    "lem-pc-first-localization-map",
+    "lem-pc-derived-tensor-first-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizationModelSemilinear",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizationModelSemilinear.lean",
+  "declaration": "RingTensorCohomology.localizationModelMap_smul",
+  "statement": "theorem localizationModelMap_smul (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel R Aq B ((extend A Aq).obj Q) D) (uQ : (restrict R A).obj Q ⟶ (restrict R Aq).obj ((extend A Aq).obj Q)) (huQ : ∀ (j : ℤ) (x : Q.X j), uQ.f j x = (1 : Aq) ⊗ₜ[A,algebraMap A Aq] x) (a : A ⊗[R] B) (x : L.cohomology i) : localizationModelMap R A Aq B D i Q L K uQ (a • x) = Algebra.TensorProduct.map (IsScalarTower.toAlgHom R A Aq) (AlgHom.id R B) a • localizationModelMap R A Aq B D i Q L K uQ x",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14",
+  "declarations": [
+   "RingTensorCohomology.localizationModelMap",
+   "RingTensorCohomology.localizationModelMap_smul"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T231532-L-1815968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T231532-L-1815968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

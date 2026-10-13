@@ -13,35 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Compute derived tensor with B using a K-flat R-resolution F of B[0]. The balanced model and its action-naturality theorem identify its commuting A and B actions with the coefficient action on cohomology. K-flatness of F preserves quasi-isomorphisms in Q, so Q need not be K-flat over R. The R-K-flat resolution need not carry a strict B-action: apply the balanced bifunctor to multiplication on B[0] in the second derived variable and transport through its computation isomorphism. Naturality in that variable makes localization commute with these endomorphisms; the action-naturality comparison identifies them with the B-linear derived tensor action.",
+   "text": "Define c by the displayed universal-counit comparison and use the scalar-compatibility theorem to bundle it as an A tensor_R B-linear map to the restriction of K.cohomology(i) along phi.",
    "uses": [
-    "lem-pc-balanced-derived-tensor-model",
-    "lem-pc-derived-tensor-action-naturality"
+    "lem-pc-first-localization-cohomology-semilinear"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Localization A -> Aq is flat and exact on modules. Extension preserves the direct sums of the tensor total complex and sends each differential to its extension. Tensor associativity gives an isomorphism between extension of the balanced total complex for Q and the balanced total complex for Aq tensor_A Q; its map on generators is induced by u. Exactness gives the corresponding cohomology isomorphism, including unbounded complexes because cohomology uses the adjacent differential kernel and image.",
+   "text": "Mathlib IsLocalization.tensorProduct_tensorProduct identifies Aq tensor_R B as the localization of A tensor_R B at the image T of S. IsLocalization.map_units gives the invertible denominator action. The denominator theorem proves the surj field of IsLocalizedModule T c; apply the kernel theorem to x-y to prove its exists_of_eq field.",
    "uses": [
-    "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-tensor-product"
+    "lem-pc-first-localization-cohomology-kernel",
+    "lem-pc-first-localization-cohomology-denominators"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compare the balanced models with the supplied L and K via the universal counits. Uniqueness of the counit-compatible derived-functor comparisons identifies the composite with zeta. The cohomologyIso_smul equations identify A-actions, B-linearity identifies B-actions, and tensor induction gives E-linearity. Transport the exact-localization cohomology isomorphism along these comparisons. Naturality applied to u gives e(1 tensor x)=c(x). Scalar-extension hom_ext proves uniqueness. For identity localization this is model comparison; for 0 in S, E_q and both extended modules are zero.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-derived-tensor-action-naturality"
-   ],
-   "elementary": false
+   "text": "Apply IsLocalizedModule.isBaseChange and IsBaseChange.equiv to get the Aq tensor_R B-linear equivalence, then toModuleIso. IsBaseChange.equiv_tmul at coefficient one gives exactly the displayed generator formula, by unfolding c.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0DJ8 and 06Y6; explicit transport to arbitrary universal-counit models"
+  "place": "Tags 06Y6 and 0DJ8, reduced to the separate torsion-kernel and denominator assertions and assembled with Mathlib module localization"
  },
  "mathlib_searches": [
   {
@@ -119,12 +114,9 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-balanced-derived-tensor-model",
-  "lem-pc-derived-tensor-action-naturality",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-localization-tensor-product"
+  "lem-pc-first-localization-cohomology-denominators",
+  "lem-pc-first-localization-cohomology-kernel",
+  "lem-pc-first-localization-cohomology-semilinear"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -140,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261013T131323-L-4032976",
+  "landing": "20261013T231532-L-1815968",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -7,6 +7,9 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.Homology.LocalizationModelKernel
+import Sheaf.Algebra.Homology.LocalizationModelDenominators
+import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Cohomology under localization of the first coefficient ring
 
@@ -87,6 +90,58 @@ theorem exists_firstLocalization_cohomology_baseChange
                 ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj
                   ((restrict R Aq).obj ((extend A Aq).obj Q))))) ≫
           (K.cohomologyIso i).inv) x := by
-  sorry
+  let φ := (Algebra.TensorProduct.map (IsScalarTower.toAlgHom R A Aq)
+    (AlgHom.id R B)).toRingHom
+  let : Algebra (A ⊗[R] B) (Aq ⊗[R] B) := φ.toAlgebra
+  have ht : IsScalarTower A (A ⊗[R] B) (Aq ⊗[R] B) := by
+    apply IsScalarTower.of_algebraMap_eq'
+    ext a
+    rw [RingHom.comp_apply, RingHom.algebraMap_toAlgebra]
+    simp [φ]
+  let := ht
+  let T := Algebra.algebraMapSubmonoid (A ⊗[R] B) S
+  have hloc : IsLocalization T (Aq ⊗[R] B) := by
+    apply IsLocalization.tensorProduct_tensorProduct R B S Aq
+    ext b
+    rw [RingHom.comp_apply, RingHom.algebraMap_toAlgebra]
+    simp [φ]
+  let := hloc
+  let N := (ModuleCat.restrictScalars φ).obj (K.cohomology i)
+  let : Module (Aq ⊗[R] B) N :=
+    inferInstanceAs (Module (Aq ⊗[R] B) (K.cohomology i))
+  let : IsScalarTower (A ⊗[R] B) (Aq ⊗[R] B) N :=
+    ⟨fun a b x ↦ mul_smul (φ a) b x⟩
+  let c := localizationModelMap R A Aq B D i Q L K uQ
+  let f : L.cohomology i →ₗ[A ⊗[R] B] N :=
+    { toFun := c
+      map_add' := c.hom.map_add
+      map_smul' := fun a x ↦ localizationModelMap_smul R A Aq B D i Q L K uQ huQ a x }
+  have hf : IsLocalizedModule T f := by
+    refine ⟨?_, ?_, ?_⟩
+    · intro s
+      simpa only [AlgHom.commutes] using
+        (IsLocalization.map_units (Aq ⊗[R] B) s).map
+        (Algebra.lsmul (A ⊗[R] B) (A := Aq ⊗[R] B) (A ⊗[R] B) N)
+    · intro y
+      obtain ⟨x, s, hs⟩ :=
+        localizationModelMap_denominators R A Aq B D S i Q L K uQ huQ y
+      refine ⟨⟨x, ⟨algebraMap A (A ⊗[R] B) s, ?_⟩⟩, ?_⟩
+      · exact ⟨s, s.property, rfl⟩
+      · simpa [f, c, N, φ, Algebra.TensorProduct.map_tmul] using hs
+    · intro x y hxy
+      have hz : c (x - y) = 0 := by
+        rw [map_sub, show c x = c y from hxy, sub_self]
+      obtain ⟨s, hs⟩ := localizationModelMap_kernel R A Aq B D S i Q L K uQ huQ
+        (x - y) hz
+      refine ⟨⟨algebraMap A (A ⊗[R] B) s, ?_⟩, ?_⟩
+      · exact ⟨s, s.property, rfl⟩
+      · exact sub_eq_zero.mp (by simpa [Submonoid.smul_def, smul_sub] using hs)
+  let := hf
+  let e := (IsLocalizedModule.isBaseChange T (Aq ⊗[R] B) f).equiv
+  refine ⟨e.toModuleIso, ?_⟩
+  intro x
+  change e ((1 : Aq ⊗[R] B) ⊗ₜ[A ⊗[R] B] x) = c x
+  simp only [e, IsBaseChange.equiv_tmul, one_smul]
+  rfl
 
 end RingTensorCohomology
