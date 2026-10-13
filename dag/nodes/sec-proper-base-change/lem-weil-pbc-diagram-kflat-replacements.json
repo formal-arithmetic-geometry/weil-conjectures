@@ -23,9 +23,57 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the small ringed diagram site $(\\mathcal D,\\mathcal O_{\\mathcal D})$ of [lem-weil-pbc-diagram-site-realization]. Under its exact module equivalence, the entire complex $M$ (including all $J$-transition maps and differentials) corresponds to one complex $\\widetilde M$ of $\\mathcal O_{\\mathcal D}$-modules. This is a single site, not separate sites for each diagram object.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-kflat-resolution] on $(\\mathcal D,\\mathcal O_{\\mathcal D})$ to obtain a degreewise epimorphic quasi-isomorphism $\\widetilde P\\to\\widetilde M$, with $\\widetilde P$ K-flat and with flat terms. Apply the exact equivalence of [lem-weil-pbc-diagram-site-realization] termwise to obtain one strict diagram morphism $P\\to M$. Exact evaluation sends each degreewise epimorphism to an epimorphism and commutes with kernels and cokernels, hence with cohomology; therefore $P(j)\\to M(j)$ is a quasi-isomorphism at every $j$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each $j$, apply [lem-weil-pbc-ringed-topos-kflat-pullback] to the evaluation morphism of topoi $e_j$ provided by [lem-weil-pbc-diagram-site-realization], with ring map $e_j^{-1}\\mathcal O_{\\mathcal D}=\\mathcal O$ the identity. Its module pullback is exactly evaluation, so $P(j)$ is K-flat with flat terms. Together with step 2 this proves all assertions about the strict replacement.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the given $u,c$ and map $\\alpha:P\\to Q$, apply [lem-weil-pbc-ringed-topos-kflat-pullback] to the ringed-topos morphism $(u,\\mathrm{id}_{u^{-1}\\mathcal O})$. This proves that $u^{-1}P(j)$ and $u^{-1}Q(j)$ are K-flat over $u^{-1}\\mathcal O$ (the required flat-term hypotheses are present). Inverse image on module sheaves is exact: it preserves kernels by finite-limit preservation, and cokernels because it is left adjoint to module direct image. It consequently commutes with cohomology, so $u^{-1}\\alpha(j)$ is a quasi-isomorphism. On the site $\\mathcal C'$, take $E$ to be the canonical additive extension-of-scalars functor $F\\mapsto F\\otimes_{u^{-1}\\mathcal O}\\mathcal O'$; its object and map formulas are exactly the tensor and change-of-rings maps of [def-pur-sheaf-tensor-product]. Thus the hypotheses of [lem-pur-change-of-rings-kflat-quasi-iso] hold for $u^{-1}\\alpha(j)$ and the ring map $c:u^{-1}\\mathcal O\\to\\mathcal O'$, and it gives a quasi-isomorphism $u^*\\alpha(j)$ for every $j$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every arrow $a:j\\to k$ of $J$, naturality of $\\alpha$ says $\\alpha(k)\\circ P(a)=Q(a)\\circ\\alpha(j)$. Applying the functor $u^*$ gives $(u^*\\alpha(k))\\circ(u^*P(a))=(u^*Q(a))\\circ(u^*\\alpha(j))$. Functoriality also preserves the identity, composition and differential equations. Thus the component quasi-isomorphisms of step 4 form the required strict diagram morphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "place": "Diagram-site construction followed by the ringed-site resolution theorem 06YS and the inverse-image/scalar-extension argument in the proof of 06YY.",
+  "document": "literature/stacks-project/sites-cohomology.tex"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,7 +147,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-weil-pbc-completed-pullback",
   "by": "worker",
@@ -118,5 +166,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-diagram-kflat-replacements",
+  "worker": "stage1",
+  "summary": "Prove strict replacement by the diagram-site module equivalence, the existing ringed-site K-flat resolution theorem, and ringed-topos pullback preservation for evaluation. Prove pullback invariance by exact inverse image, K-flat preservation and the existing change-of-rings theorem, with explicit naturality equations. Removed the new node that merely repeated the existence clause.",
+  "blueprint": "Realizes the ancestor's Detailed form first displayed functor: strict diagram resolving class and its preservation under levelwise inverse image.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "After exact inverse image and 0G7E establish the needed hypotheses on C\\prime, step 4 uses same-site extension-of-scalars preservation for a quasi-isomorphism between K-flat complexes. No proper-base-change-unit node gives this generic ringed-site theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-change-of-rings-kflat-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-9dc9631f4",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-9dc9631f4 (reviewer sub-agent of L); spot-checked: Read the full item, new nodes, DAG route, archived target source, and Stacks 06YS/0G7E/06YT/06YY sources. Mathematics and edge cases pass. Repair files add required created.by/date metadata to both new nodes and explicitly instantiate the additive extension-of-scalars functor in step 4, citing def-pur-sheaf-tensor-product.; 3 file(s) fixed by the reviewer"
  }
 }
