@@ -221,7 +221,7 @@ lemma rightDerivedLowerShriekOfCompactification_map_mapDerivedCategory_map_comp_
   dsimp at hn
   simp only [rightDerivedUpperShriekOfAdjunctionCounit, Adjunction.homEquiv_counit,
     Functor.map_comp, Category.assoc, Iso.app_hom]
-  rw [reassoc_of% hn]
+  exact (reassoc_of% hn) _
 
 /-- For `K'` and `L` bounded below, `g ↦ Rf_!(c) g ≫ ε_L` is a bijection
 `Hom(ν^* K', Rf^×(c) L) ≃ Hom(Rf_!(c) ν^* K', L)`. -/
@@ -317,7 +317,8 @@ lemma rightDerivedUpperShriekOfAdjunctionHomEquiv_naturality_left_symm
     (rightDerivedUpperShriekOfAdjunctionHomEquiv adj hG hK hL).symm (φ ≫ g) =
       (ProEtale.rightDerivedLowerShriekOfCompactification A c).map φ ≫
         (rightDerivedUpperShriekOfAdjunctionHomEquiv adj hG hK' hL).symm g := by
-  simp
+  rw [rightDerivedUpperShriekOfAdjunctionHomEquiv_symm_apply,
+    rightDerivedUpperShriekOfAdjunctionHomEquiv_symm_apply, Functor.map_comp, Category.assoc]
 
 /-- Naturality of the class adjunction in the target. -/
 lemma rightDerivedUpperShriekOfAdjunctionHomEquiv_naturality_right_symm
@@ -329,7 +330,9 @@ lemma rightDerivedUpperShriekOfAdjunctionHomEquiv_naturality_right_symm
     (rightDerivedUpperShriekOfAdjunctionHomEquiv adj hG hK hL').symm
         (g ≫ (rightDerivedUpperShriekOfAdjunction A adj).map φ) =
       (rightDerivedUpperShriekOfAdjunctionHomEquiv adj hG hK hL).symm g ≫ φ := by
-  simp [rightDerivedUpperShriekOfAdjunctionCounit_naturality adj hG hL hL']
+  rw [rightDerivedUpperShriekOfAdjunctionHomEquiv_symm_apply,
+    rightDerivedUpperShriekOfAdjunctionHomEquiv_symm_apply, Functor.map_comp, Category.assoc,
+    rightDerivedUpperShriekOfAdjunctionCounit_naturality adj hG hL hL', Category.assoc]
 
 /-- Naturality of the class adjunction in the target, forward direction. -/
 lemma rightDerivedUpperShriekOfAdjunctionHomEquiv_naturality_right
@@ -418,26 +421,30 @@ noncomputable def rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso
     (c d : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusEtaleOrigin (ModuleCat.{u + 1} Λ) c ≅
       rightDerivedLowerShriekOfCompactificationPlusEtaleOrigin (ModuleCat.{u + 1} Λ) d :=
-  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
-    (ObjectProperty.liftCompιIso _ _ _ ≪≫
-      rightDerivedLowerShriekOfCompactificationEtaleOriginIso Λ c d ≪≫
-      (ObjectProperty.liftCompιIso _ _ _).symm)
+  NatIso.ofComponents
+    (fun K ↦ ObjectProperty.isoMk _
+      ((rightDerivedLowerShriekOfCompactificationEtaleOriginIso Λ c d).app K))
+    (fun φ ↦ by
+      ext
+      exact (rightDerivedLowerShriekOfCompactificationEtaleOriginIso Λ c d).hom.naturality φ)
 
 @[simp]
 lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_hom_app_hom
     (c d : Compactification f)
     (K : (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).FullSubcategory) :
     ((rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c d).hom.app K).hom =
-      (rightDerivedLowerShriekOfCompactificationEtaleOriginIso Λ c d).hom.app K := by
-  simp [rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso,
-    Functor.FullyFaithful.whiskeringRight]
+      (rightDerivedLowerShriekOfCompactificationEtaleOriginIso Λ c d).hom.app K :=
+  rfl
 
 /-- The comparison of a compactification with itself is the identity. -/
 @[simp]
 lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_refl (c : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c c = Iso.refl _ := by
-  ext K : 3
-  simp
+  ext K : 2
+  ext
+  rw [rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_hom_app_hom,
+    rightDerivedLowerShriekOfCompactificationEtaleOriginIso_refl]
+  rfl
 
 /-- The cocycle condition for the comparisons of the compact-support functors. -/
 lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_trans
@@ -445,8 +452,11 @@ lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_trans
     rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c₁ c₂ ≪≫
         rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c₂ c₃ =
       rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c₁ c₃ := by
-  ext K : 3
-  simp [← rightDerivedLowerShriekOfCompactificationEtaleOriginIso_trans Λ c₁ c₂ c₃]
+  ext K : 2
+  ext
+  rw [rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_hom_app_hom Λ c₁ c₃,
+    ← rightDerivedLowerShriekOfCompactificationEtaleOriginIso_trans Λ c₁ c₂ c₃]
+  rfl
 
 variable [HasCompactification f] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
 
@@ -488,8 +498,9 @@ comparisons of the class exceptional adjoints. -/
 lemma classUpperShriekIso_trans (c₁ c₂ c₃ : Compactification f) :
     classUpperShriekIso Λ c₁ c₂ ≪≫ classUpperShriekIso Λ c₂ c₃ = classUpperShriekIso Λ c₁ c₃ := by
   ext : 1
-  simp only [classUpperShriekIso, Iso.trans_hom, conjugateIsoEquiv_apply_hom,
-    conjugateEquiv_comp, ← Iso.trans_hom,
+  rw [Iso.trans_hom]
+  simp only [classUpperShriekIso, conjugateIsoEquiv_apply_hom]
+  rw [conjugateEquiv_comp, ← Iso.trans_hom,
     rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_trans]
 
 /-- The units and counits of the class adjunctions are compatible with the compactification
@@ -511,6 +522,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y]
   {f : X ⟶ Y} [QuasiCompact f] [HasCompactification f]
   [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
+
+include aY
 
 /-- Blueprint `thm-sf-ambient-adjoint-class`: The exceptional adjoint on the bounded comparison
 class.
