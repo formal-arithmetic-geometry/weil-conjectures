@@ -34,97 +34,57 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (setup and reformulation).* For an open $W\\subseteq X$ write $W_U=u^{-1}(W)$, so $\\mathcal A(W)=\\mathcal O_U(W_U)$ and $(u_*\\mathcal F)(W)=\\mathcal F(W_U)$, with the $\\mathcal O_U(W_U)=\\mathcal A(W)$-module structure and the restriction maps of $\\mathcal F$ (the direct image of [def-pc-module-pullback]). The given isomorphism of $\\mathcal A$-modules $\\theta:u_*\\mathcal F\\cong\\mathcal M$ ([lem-weil-pbc-affine-module-correspondence] for its existence) carries sections generating as below to sections generating, in both directions, so $\\mathcal M$ is of finite type over $\\mathcal A$ iff $u_*\\mathcal F$ is; from now on $\\mathcal M=u_*\\mathcal F$, $\\mathcal M(W)=\\mathcal F(W_U)$. For an open $W$ and $s_1,\\dots,s_n\\in\\mathcal M(W)$ let $\\sigma_s:\\mathcal A|_W^{\\oplus n}\\to\\mathcal M|_W$, $(f_i)\\mapsto\\sum_if_is_i|$. An $\\mathcal A|_W$-linear map is an epimorphism in $\\Mod(\\mathcal A|_W)$ iff it is surjective as a map of sheaves, since the cokernel is the sheafification of the sectionwise cokernel [def-weil-sheaf-of-modules-category], which is zero iff every local section is locally in the image. So $\\sigma_s$ is an epimorphism iff for every open $W'\\subseteq W$ and $t\\in\\mathcal M(W')$ there is an open covering $W'=\\bigcup_kW'_k$ with $t|_{W'_k}=\\sum_if_{ik}s_i|_{W'_k}$, $f_{ik}\\in\\mathcal A(W'_k)$; we then say that the $s_i$ *generate $\\mathcal M|_W$ over $\\mathcal A|_W$*. By [def-weil-pbc-module-finite-type-presentation](1) for the ringed space $(X,\\mathcal A)$, $\\mathcal M$ is of finite type over $\\mathcal A$ iff every point of $X$ has an open neighbourhood $W$ with finitely many sections of $\\mathcal M(W)$ generating $\\mathcal M|_W$ over $\\mathcal A|_W$. If the $s_i$ generate $\\mathcal M|_W$ over $\\mathcal A|_W$ and $W_1\\subseteq W$ is open, the restrictions $s_i|_{W_1}$ generate $\\mathcal M|_{W_1}$ over $\\mathcal A|_{W_1}$ (an open $W'\\subseteq W_1$ is an open of $W$). Finally, for an affine open $V\\subseteq X$ the open $V_U$ is affine because $u$ is affine [pqf-def-affine-morphism]; put $B=\\mathcal A(V)=\\mathcal O_U(V_U)$. Every point of an open $W\\subseteq X$ lies in an affine open $V\\subseteq W$, the open subscheme $W$ being a scheme [def-pc-scheme].",
+   "text": "Transport finite type through the given isomorphism e by transporting local generators with GeneratingSections.ofEpi. A local finite generating cover of a module over any ring sheaf on X refines to affine opens: take the sigma-indexed family of affine subopens of its generating opens, restrict the families with overMap, and transport across overFunctorMap. This is the proved private helper affine_generators_cover.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-module-correspondence",
-    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-module-finite-type-presentation",
-    "pqf-def-affine-morphism",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
-   }
-  },
-  {
-   "text": "*Step 2 (generation over $\\mathcal A$ on an affine open gives generation of the sections).* Let $V\\subseteq X$ be an affine open, $B$ as in Step 1, and $s_1,\\dots,s_n\\in\\mathcal M(V)=\\mathcal F(V_U)$ generating $\\mathcal M|_V$ over $\\mathcal A|_V$. Then $\\mathcal F(V_U)=\\sum_iBs_i$. Proof: $V_U$ is an affine scheme; $\\mathcal F|_{V_U}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2); and, transported along $V_U\\cong\\operatorname{Spec}B$, $\\mathcal O_{V_U}^{\\oplus n}$ is quasi-coherent with $\\Gamma(V_U,\\mathcal O_{V_U}^{\\oplus n})=B^n$, the basis sections being the standard basis [lem-weil-pbc-spec-tilde-free-module]. Let $\\psi:\\mathcal O_{V_U}^{\\oplus n}\\to\\mathcal F|_{V_U}$, $(g_i)\\mapsto\\sum_ig_is_i|$, an $\\mathcal O_{V_U}$-linear map of quasi-coherent modules with $\\psi_{V_U}(B^n)=\\sum_iBs_i$. Let $t\\in\\mathcal F(V_U)=\\mathcal M(V)$. By generation there is an open covering $V=\\bigcup_kV_k$ with $t|_{V_k}=\\sum_if_{ik}s_i|_{V_k}$ and $f_{ik}\\in\\mathcal A(V_k)=\\mathcal O_U((V_k)_U)$; read in $\\mathcal F$ this says $t|_{(V_k)_U}=\\psi_{(V_k)_U}((f_{ik})_i)$, and the opens $(V_k)_U$ cover $V_U$. So $t$ is locally in the image of $\\psi$, i.e. $t\\in(\\operatorname{Im}\\psi)(V_U)$, and by [lem-weil-pbc-quasi-coherent-module-cokernel-image](3) (for the scheme $V_U$ and its affine open $V_U$) $(\\operatorname{Im}\\psi)(V_U)=\\psi_{V_U}(B^n)=\\sum_iBs_i$.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-spec-tilde-free-module",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
-   }
-  },
-  {
-   "text": "*Step 3 (generation of $\\mathcal F$ on $V_U$ gives generation over $\\mathcal A$ on $V$).* Let $V\\subseteq X$ be an affine open and $s_1,\\dots,s_n\\in\\mathcal M(V)=\\mathcal F(V_U)$ sections which generate the $\\mathcal O_{V_U}$-module $\\mathcal F|_{V_U}$ [def-weil-pbc-generating-sections] (on the scheme $V_U$). Then the $s_i$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$. Proof: with $\\psi$ as in Step 2, the hypothesis says that $\\psi$ is surjective as a map of sheaves, i.e. $\\operatorname{Im}\\psi=\\mathcal F|_{V_U}$. Let $W\\subseteq V$ be open and $t\\in\\mathcal M(W)=\\mathcal F(W_U)$. Every $x\\in W$ lies in an affine open $V'\\subseteq W$ (Step 1, [def-pc-scheme]), and $V'_U$ is an affine open of the scheme $V_U$ since $u$ is affine [pqf-def-affine-morphism]. By [lem-weil-pbc-quasi-coherent-module-cokernel-image](3) for the scheme $V_U$ and its affine open $V'_U$, $\\mathcal F(V'_U)=(\\operatorname{Im}\\psi)(V'_U)=\\psi_{V'_U}(\\mathcal O_U(V'_U)^n)$, so $t|_{V'_U}=\\sum_if_is_i|_{V'_U}$ with $f_i\\in\\mathcal O_U(V'_U)=\\mathcal A(V')$, which is the equation $t|_{V'}=\\sum_if_is_i|_{V'}$ in $\\mathcal M(V')$. These $V'$ cover $W$, so the $s_i$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$ (Step 1).",
-   "uses": [
-    "def-weil-pbc-generating-sections",
+    "def-weil-sheaf-of-modules-category",
     "def-pc-scheme",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
-   }
-  },
-  {
-   "text": "*Step 4 ($\\mathcal M$ of finite type over $\\mathcal A$ implies $\\mathcal F$ of finite type).* Let $y\\in U$ and $x=u(y)$. Choose an open $W\\ni x$ and $s_1,\\dots,s_n\\in\\mathcal M(W)$ generating $\\mathcal M|_W$ over $\\mathcal A|_W$, and an affine open $V$ with $x\\in V\\subseteq W$; the restrictions $s_i|_V$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$ (Step 1). By Step 2, $\\mathcal F(V_U)=\\sum_iB\\,s_i|_V$ is a finitely generated $B$-module [def-weil-finitely-generated-module], with $B=\\mathcal O_U(V_U)$ and $V_U$ an affine open of $U$ containing $y$. As $\\mathcal F$ is quasi-coherent, [lem-weil-pbc-quasi-coherent-finite-type-affine](a) (for the scheme $U$ and its affine open $V_U$) gives that $\\mathcal F|_{V_U}$ is of finite type, so $y$ has an open neighbourhood $V''\\subseteq V_U$ with a surjection $\\mathcal O_{V''}^{\\oplus m}\\to\\mathcal F|_{V''}$, which is the condition of [pqf-def-coherent] for $\\mathcal F$ at $y$. As $y$ was arbitrary, $\\mathcal F$ is of finite type.",
-   "uses": [
-    "def-weil-finitely-generated-module",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
     "pqf-def-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 5 ($\\mathcal F$ of finite type implies $\\mathcal M$ of finite type over $\\mathcal A$).* Let $x\\in X$ and $V\\ni x$ an affine open (Step 1). Since $\\mathcal F$ is quasi-coherent of finite type and $V_U$ is an affine open of $U$, [lem-weil-pbc-quasi-coherent-finite-type-affine](c) gives that $\\mathcal F(V_U)$ is a finitely generated $B$-module; choose generators $s_1,\\dots,s_n$. The $\\mathcal O_{V_U}$-module $\\mathcal F|_{V_U}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2) and of finite type (the restriction of a surjection $\\mathcal O_{W''}^{\\oplus m}\\to\\mathcal F|_{W''}$ to $W''\\cap V_U$ is still surjective as a map of sheaves), so by [lem-weil-pbc-affine-finite-type-generating-sections] (for the affine scheme $V_U$) the family $s_1,\\dots,s_n$, which generates $\\Gamma(V_U,\\mathcal F)=\\mathcal F(V_U)$, generates $\\mathcal F|_{V_U}$. By Step 3 the sections $s_i\\in\\mathcal M(V)$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$. As $x$ was arbitrary, $\\mathcal M$ is of finite type over $\\mathcal A$ by the reformulation of Step 1.",
+   "text": "On an affine V, prove that finite GeneratingSections of (f_*F).over V are equivalent to Module.Finite of F(f^{-1}V). In the forward direction the finite free sheaf has finite sections via freeSectionsLinearEquiv; the evaluation criterion makes its section map surjective, and Module.Finite.of_surjective finishes. In the reverse direction Module.Finite.exists_fin gives a finite spanning family at the terminal object of Over V. Restrict it along the unique maps to that object to define compatible sections. Their evaluation contains every spanning generator in its range by sectionsMap_freeHomEquiv_symm_freeSection, hence is surjective on terminal sections. The evaluation criterion makes it epi. This entire finite-generator equivalence is a proved private helper in the item.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "lem-weil-pbc-affine-pushforward-free-evaluation",
+    "def-weil-pbc-generating-sections",
     "def-weil-finitely-generated-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "If M is finite type, transport it to N=f_*F and refine its finite generating cover to affine q.X(i). The inverse images form an affine cover of U: lift cover membership at f(y), and use IsAffineOpen.preimage. The finite-generator equivalence makes all inverse-image section modules finite. The covering clause of quasicoherent_finite_type_affine makes F finite type.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If F is finite type, refine its own generating cover to affine opens. A finite global generating family implies finite type on each member by LocalGeneratorsData, so the affine criterion makes sections on those members finite. Its covering clause gives finite sections on every affine open of U. Apply this to the inverse image of every affine open V of X; the finite-generator equivalence supplies finite generators of N.over V. These affine opens cover X and the chosen finite families form LocalGeneratorsData for N. Shrink this data to the module universe to obtain N.IsFiniteType, and transport along e to M.IsFiniteType.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "lem-weil-pbc-affine-module-correspondence",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-module-finite-type-presentation",
-  "pqf-def-affine-morphism",
+  "def-weil-sheaf-of-modules-category",
   "def-pc-scheme",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-spec-tilde-free-module",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
   "pqf-def-coherent",
+  "lem-weil-pbc-affine-pushforward-free-evaluation",
   "def-weil-pbc-generating-sections",
   "def-weil-finitely-generated-module",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-affine-finite-type-generating-sections"
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291: the source states the finite-type clause with '(details omitted)'; the details are written by an agent, locally on affine opens of the target as in Properties, Lemma 01PB (properties-lemma-finite-type-module) and the affine-local check of Morphisms, Lemma 01SB."
+  "place": "E4 stage 3: complete Lean local-to-global argument for the omitted finite-type detail of Tag 0897, using the affine criterion (01PB). Only the finite-free evaluation criterion in original steps 2 and 3 is split off, as lem-weil-pbc-affine-pushforward-free-evaluation."
  },
  "mathlib_searches": [
   {
@@ -230,5 +190,15 @@
   "group": "J1",
   "result": "pass",
   "note": "IsAffineHom f; A = TopCat.Sheaf.pushforward of U.sheaf (via sheafCompose forget2, as landed correspondence); M : SheafOfModules AR with IsQuasicoherent; F : U.Modules IsQuasicoherent; e : R.obj F ≅ M with R the correspondence's pushforward (𝟙 AR, A-action kept); conclusion M.IsFiniteType ↔ F.IsFiniteType both resolve to SheafOfModules.IsFiniteType/IsQuasicoherent (#check); no new defs, no lets, single universe u"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ece56",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T054213-L-441846",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean statements with their nodes, the implemented proof with recorded dependencies, and the unchanged public signature with the clone; both delivered modules and both direct importers compile cleanly, and axiom checks pass for the documented decomposition."
  }
 }
