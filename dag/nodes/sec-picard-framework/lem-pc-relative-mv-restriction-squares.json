@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-relative-mv-restriction-squares",
+ "kind": "statement",
+ "title": "The canonical base-change components commute with both relative restriction maps",
+ "statement": "Let g′:X′→X, f′:X′→S′, f:X→S and g:S′→S form a cartesian square of schemes [def-pc-scheme, def-pc-base-change]. Let K∈D(O_X), K′∈D(O_X′), and φ:L(g′)K→K′ [def-pc-derived-category, def-pc-derived-pullback]. Let U,V be arbitrary opens of X, with no compactness, covering or quasi-coherence assumption. Use the canonical unit and difference maps and the local arrows αW and global arrow αX of [def-pc-relative-mv-maps]. Then the square between the source and target unit maps, with vertical components αX and αU⊕αV, commutes. The square between the source and target difference maps, with vertical components αU⊕αV and α(U∩V), also commutes. This asserts no distinguishedness or boundary compatibility.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), and 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), induction diagram"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof": [
+  {
+   "text": "Expand the canonical base-change map [def-pc-derived-base-change-map] and the units [def-pc-relative-mv-maps] under the pinned adjunctions. The unit and counit identities for the composite adjunction identify the relative unit on both paths. Naturality in φ gives the unit square. The canonical composition comparison [lem-pc-ringed-spaces-derived-pullback-composition] ensures that the pullback projection equality produces exactly the specified local comparison, rather than an arbitrary open-restriction isomorphism.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), and 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), induction diagram"
+   }
+  },
+  {
+   "text": "Expand the restriction as the mate of the restricted counit [def-pc-relative-mv-maps]. Naturality of the counit and associativity of the pinned pullback comparisons [lem-pc-ringed-spaces-derived-pullback-composition] give the square for each inclusion of the overlap into U and V. The pullback lift identities identify the two composites of scheme maps.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), and 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), induction diagram"
+   }
+  },
+  {
+   "text": "Use biproduct projection extensionality for the unit map and injection extensionality for the difference map. Composition distributes over the negative V restriction, so the two individual inclusion squares imply the displayed difference square.",
+   "uses": [
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), and 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), induction diagram"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), and 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), induction diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical relative Mayer Vietoris maps via derived adjunctions, commuting restriction squares, and compatible distinguished triangle boundaries",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical relative Mayer Vietoris maps via derived adjunctions, commuting restriction squares, and compatible distinguished triangle boundaries",
+   "results": "8 hits, including MayerVietorisSquare.shortComplex_f, shortComplex_g and shortComplex; these concern sheaves on sites, not the canonical scheme-derived comparisons and their boundaries.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|mayerVietoris|relativeMV",
+   "results": "15 hits in Mathlib/Topology/Sheaves/MayerVietoris.lean and CategoryTheory/Sites/MayerVietorisSquare.lean and SheafCohomology/MayerVietoris.lean; no canonical relative derived comparison. Blueprint searches for Mayer Vietoris, 08HZ and 08HY give 0 nodes. Local searches in both Lean roots find DerivedBaseChangeMayerVietoris, whose arbitrary chosen open comparison is not the pinned comparison required here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVCanonicalTriangles",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: the first two commuting squares, independently of constructing the connecting maps",
+   "via": [
+    "lem-pc-relative-mv-canonical-triangles",
+    "lem-pc-rf-single-complex-relative-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVRestrictionSquares.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_restriction_squares",
+  "statement": "theorem relativeMV_restriction_squares\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens) :\n    let a := relativeMVLocalArrow f f' g g' hpull K K' φ\n    let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ\n    relativeMVSourceFirst f g U V K ≫ biprod.map (a U).hom (a V).hom =\n      aX.hom ≫ relativeMVTargetFirst g' f' U V K' ∧\n    relativeMVSourceSecond f g U V K ≫ (a (U ⊓ V)).hom =\n      biprod.map (a U).hom (a V).hom ≫ relativeMVTargetSecond g' f' U V K'",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "split_report": {
+  "summary": "The canonical base-change components commute with both relative restriction maps",
+  "blueprint": "the first two commuting squares, independently of constructing the connecting maps"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T120801-L-3470190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T120801-L-3470190",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

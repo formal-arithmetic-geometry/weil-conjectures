@@ -10,7 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+import Sheaf.AlgebraicGeometry.RelativeMVBoundaryCompletion
+import Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares
 
 /-! # Canonically identified relative Mayer--Vietoris triangles
 
@@ -107,6 +108,23 @@ theorem relativeMV_canonicalTriangles
         t.hom₁ = aX.hom ∧
         t.hom₂ = biprod.map (a U).hom (a V).hom ∧
         t.hom₃ = (a (U ⊓ V)).hom := by
-  sorry
+  classical
+  let a := relativeMVLocalArrow f f' g g' hpull K K' φ
+  let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ
+  have h := relativeMV_boundary_completion f f' g g' hpull K K' φ hK hK'
+    U V hUqc hVqc hUVqc hcover
+  let δ := Classical.choose h
+  have h' := Classical.choose_spec h
+  let δ' := Classical.choose h'
+  have ht := Classical.choose_spec h'
+  have hs := relativeMV_restriction_squares f f' g g' hpull K K' φ U V
+  let t := Triangle.homMk
+    (Triangle.mk (relativeMVSourceFirst f g U V K) (relativeMVSourceSecond f g U V K) δ)
+    (Triangle.mk (relativeMVTargetFirst g' f' U V K')
+      (relativeMVTargetSecond g' f' U V K') δ')
+    aX.hom (biprod.map (a U).hom (a V).hom) (a (U ⊓ V)).hom hs.1 hs.2 ht.2.2
+  exact ⟨relativeMVSourceFirst f g U V K, relativeMVSourceSecond f g U V K, δ,
+    relativeMVTargetFirst g' f' U V K', relativeMVTargetSecond g' f' U V K', δ',
+    ht.1, ht.2.1, t, rfl, rfl, rfl⟩
 
 end AlgebraicGeometry
