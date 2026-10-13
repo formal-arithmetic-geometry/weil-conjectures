@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.CategoryTheory.CompactObject
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Small representatives of compact quasi-coherent derived objects
@@ -64,7 +66,7 @@ theorem noetherian_perfect_representatives (X : Scheme.{u}) [IsNoetherian X]
       (∀ s : S, Scheme.IsPerfect X (G s).obj) ∧
       ∀ P : schemeDerivedQCohCategory X, Scheme.IsPerfect X P.obj →
         ∃ s, Nonempty (P ≅ G s) := by
-  sorry
+  exact Scheme.exists_perfectComplex_representatives X
 
 /-- Perfect objects on a Noetherian scheme are compact in its QCoh derived category.
 Source: Stacks Project, Tag 09M1, the perfect-to-compact implication, using
@@ -79,7 +81,7 @@ theorem noetherian_perfect_compact (X : Scheme.{u}) [IsNoetherian X]
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
     ∀ (P : schemeDerivedQCohCategory X), Scheme.IsPerfect X P.obj → IsCompactObject P := by
-  sorry
+  exact perfectObjectCompact X
 
 /-- Compact objects of the quasi-coherent derived category have small representatives.
 Source: Stacks Project, Tags 09M1 and 09IS, and the set-of-representatives argument
