@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.Algebra.Homology.FiniteStripConeFiltrationGradedPoint
 import Sheaf.CategoryTheory.DegreewiseFiltration
 
 /-! # Vertical filtration of a finite-strip augmentation cone
@@ -347,7 +348,10 @@ theorem finite_strip_cone_filtration_graded
           (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
             (CochainComplex.mappingCone.inr b).f n) else ⊥)) :
       ∀ p n : ℤ, Nonempty ((F.gradedPiece p).homology n ≅
-        (CochainComplex.mappingCone (f p)).homology (n - p)) := by sorry
+        (CochainComplex.mappingCone (f p)).homology (n - p)) := by
+  intro p n
+  obtain ⟨e⟩ := finite_strip_cone_filtration_graded_point K r hsupport A a b hb f hf F hsteps p n
+  exact ⟨ShortComplex.homologyMapIso e⟩
 
 theorem finite_strip_cone_filtration
     {C : Type u} [Category.{v} C] [Abelian C]
