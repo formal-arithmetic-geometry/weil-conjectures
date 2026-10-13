@@ -21,29 +21,21 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "For each $s\\in S$, the fibre $f^{-1}(\\{s\\})$ is open because $S$ is discrete and $f$ is continuous. Thus the fibres form an open cover of the compact space $G$. For every $x\\in G$, choose an open subgroup $V_x$ with $xV_x\\subseteq f^{-1}(\\{f(x)\\})$, using that open subgroups form a neighbourhood basis at the identity in a profinite group: writing $G=\\lim_iG_i$ as a cofiltered limit of finite discrete groups (the definition of a profinite group), the sets $p_i^{-1}(p_i(y))$ for the projections $p_i:G\\to G_i$ form a basis of the topology because the limit is cofiltered, and $p_i^{-1}(p_i(e))=\\ker p_i$ is an open normal subgroup; apply this to the open neighbourhood $x^{-1}f^{-1}(\\{f(x)\\})$ of $e$. A finite subcover $x_1V_{x_1},\\ldots,x_rV_{x_r}$ exists. The intersection $V=\\bigcap_{i=1}^rV_{x_i}$ is open, and if $x\\in x_iV_{x_i}$ then $xV\\subseteq x_iV_{x_i}$, so $f(xv)=f(x)$ for all $x\\in G$ and $v\\in V$.",
+   "text": "For each x in G, let W_x = {a in G | f(xa) = f(x)}. This is an open neighbourhood of 1: it is the preimage of the open singleton {f(x)} under the continuous map a ↦ f(xa). Mathlib ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one supplies an open normal subgroup H_x contained in W_x. The open cosets x H_x cover G, since 1 belongs to H_x. Compactness (isCompact_univ.elim_finite_subcover) gives a finite set t of these cosets covering G. The set t is nonempty, since the cover contains 1.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JP, label definition-G-module-continuous; the profinite compactness argument supplied by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "An open subgroup $V$ of the compact group $G$ has finite index, since its cosets form a disjoint open cover of $G$, so the intersection of its finitely many conjugates, $U=\\bigcap_{i=1}^r g_iVg_i^{-1}$ over representatives of $G/V$, is open and normal and is contained in $V$. Therefore $f(xu)=f(x)$ for every $x\\in G$ and $u\\in U$, because the equality from the first step holds for every element of $V$.",
+   "text": "Let U be the finite infimum of the open normal subgroups H_y for y in t, formed with Finset.inf'. Then U is an open normal subgroup and U ≤ H_y for every y in t (Finset.inf'_le). Given x in G and a in U, choose y in t and b in H_y with x = yb. Both b and ba belong to H_y, hence f(yb) = f(y) = f(y(ba)). Associativity gives f(xa) = f(x). The neighbourhood subgroups are already normal, so no separate normal-core construction is needed.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JP, label definition-G-module-continuous; the open-normal-basis argument supplied by the agent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JP, label definition-G-module-continuous, and the profinite compactness/open-normal-basis argument"
+  "place": "Tag 04JP, label definition-G-module-continuous; compactness argument formalized using Mathlib.Topology.Algebra.ClopenNhdofOne (ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one), isCompact_univ.elim_finite_subcover and Finset.inf'"
  },
  "mathlib_searches": [
   {
@@ -122,5 +114,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T004024-L-2491046",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
