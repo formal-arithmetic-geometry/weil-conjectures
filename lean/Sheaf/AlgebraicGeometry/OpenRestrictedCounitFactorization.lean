@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition
+import Sheaf.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -35,5 +36,13 @@ theorem openRestricted_counit_factorization
         (counit (pullback.snd g' U.ι)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj
             (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P)) ≫
-        (openRestrictedTensorDerivedIso g' U P).inv := by sorry
+        (openRestrictedTensorDerivedIso g' U P).inv  := by
+  have h := openRestricted_counit_compatibility_aux g' U P
+  apply (cancel_epi ((derivedPullback (pullback.snd g' U.ι)).map
+    (openRestrictionRepresentativeIso U.ι P).hom)).1
+  rw [h]
+  simp only [← Category.assoc]
+  rw [← Functor.map_comp, Iso.hom_inv_id]
+  simp
+
 end AlgebraicGeometry.SingleComplexBaseChange
