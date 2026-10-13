@@ -13,15 +13,16 @@
  ],
  "proof": [
   {
-   "text": "Apply the product-projection map equation in homComplex_exists to b and I(c), at Hom degree p and source degree q with q+p=n. Precompose by a.f p and phi.f p. This identifies the projected transformed input with a.f p;phi.f p;pi;homObjMap(b.f q,I(c).f n).",
+   "text": "Use the componentwise map formula of homComplex_projections_exists (the proved small API for homComplex_exists) at Hom degree p and source degree q, with maps b and I(c). Reassociate and precompose by a.f p and phi.f p. The proved private helper comp_projection performs precisely this categorical reassociation. The chosen projections are definitionally the original projections, by proof irrelevance.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-model",
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the inverse sheaf tensor-Hom equivalence. Its three naturality equations identify the inverse image of the transformed projection with (b.f q tensor a.f p) followed by the original inverse image and I(c).f n. Naturality of the braiding moves this tensor map across the symmetry and reverses its order. Unfold the component definition to obtain exactly the asserted equality. This calculation is valid for all integer degrees; identities preserve the component and zero input maps yield zero.",
+   "text": "The proved private helper uncurry_natural applies the injectivity of the sheaf tensor-Hom equivalence, its three naturality equations, the internal-Hom composition law, and braiding naturality. This identifies the inverse image of the transformed projection with (a.f p tensor b.f q) followed by the braided original inverse image and I(c).f n. The private helper hom_uncurry_natural combines the projection equation from step 1 with this sheaf-level equality using congrArg and equality transitivity, for arbitrary complexes on a ringed site. Specialize it to X.sheaf and the fixed resolution I; the component definition gives exactly the unchanged public statement. No totalization, differential, localization or flatness lemma is used.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-model",
     "lem-pc-sheaf-modules-tensor-closed"
@@ -32,14 +33,15 @@
  "proof_deps": [
   "def-pc-canonical-derived-tensor-hom-model",
   "def-pur-hom-complex",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "A2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90, spelling out the single-component functoriality calculation from the source sheaf tensor-Hom naturality lemmas"
+  "place": "Tag 0A90, componentwise functoriality via the existing sheaf tensor-Hom naturality identities and the proved HomComplexProjections API; cohomology.tex Tag 08DJ."
  },
  "mathlib_searches": [
   {
@@ -126,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T100118-L-2484513",
-  "kind": "interface",
+  "landing": "20261013T125444-L-3874183",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
