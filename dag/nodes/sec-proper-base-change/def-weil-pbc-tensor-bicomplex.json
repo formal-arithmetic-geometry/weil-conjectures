@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Use Mathlib Functor.mapBifunctorHomologicalComplex with curriedTensor to construct the unsigned bicomplex; tensorBicomplex is only a compatibility abbreviation of its object. Its terms are P_p tensor Q_q, and its two differentials tensor the respective differential with the identity. Use the map of Functor.uncurry.obj applied to this bifunctor for a pair of chain maps (a,b); tensorBicomplexMap is only an abbreviation of this existing Mathlib map, with its return type inferred. Normalize only Functor.uncurry during elaboration with dsimp% so that existing callers retain their differential and map simplification API without any adaptation. The uncurrying map is definitionally the first-variable map followed by the second-variable map, hence its components are a_p tensor b_q. Retain mapHomologicalComplex followed by NatTrans.mapHomologicalComplex for chainTensorMap.",
+   "text": "Use Mathlib Functor.mapBifunctorHomologicalComplex with curriedTensor to construct the unsigned bicomplex; tensorBicomplex is only a compatibility abbreviation of its object. Its terms are P_p tensor Q_q, and its two differentials tensor the respective differential with the identity. Define tensorBicomplexMap as a compatibility abbreviation directly of the map of Functor.uncurry.obj applied to this bifunctor, without elaboration-time normalization. The uncurrying map is definitionally the first-variable map followed by the second-variable map, hence its components are a_p tensor b_q. The two cokernel naturality proofs use Mathlib Functor.uncurry_obj_map explicitly to expose this composition before applying the existing component lemmas. Retain mapHomologicalComplex followed by NatTrans.mapHomologicalComplex for chainTensorMap. No bespoke bicomplex or morphism data is constructed.",
    "uses": [
     "def-weil-pbc-chain-complex-tensor-module",
     "def-weil-pbc-module-tensor-product"
@@ -110,13 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "U1",
+  "reviewer": "X-28bdc",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T231547-L-1821537",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261013T234526-L-2168881",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean constructions with the node and Mathlib; verified unchanged targets and signatures, definitional equality with the old map, component formula, permitted axioms, clean delivery and importer compiles, and both original caller failures establishing minimal forced adaptations."
  }
 }

@@ -143,7 +143,7 @@ theorem tensorResolutionRowCokernelIso (R : Type u) [CommRing R] :
   rw [HomologicalComplex.p_opcyclesMap, Category.assoc,
     HomologicalComplex.p_descOpcycles]
   ext q : 1
-  simp only [HomologicalComplex.comp_f, tensorBicomplexMap,
+  simp only [HomologicalComplex.comp_f, tensorBicomplexMap, Functor.uncurry_obj_map,
     Functor.mapBifunctorHomologicalComplex_map_app_f_f,
     Functor.mapBifunctorHomologicalComplex_obj_map_f_f, curriedTensor_map_app,
     curriedTensor_obj_map, ← tensorHom_id, ← id_tensorHom, tensorHom_comp_tensorHom,

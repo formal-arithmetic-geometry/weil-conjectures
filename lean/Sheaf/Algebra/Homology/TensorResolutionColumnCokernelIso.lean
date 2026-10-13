@@ -121,6 +121,7 @@ theorem tensorResolutionColumnCokernelIso (R : Type u) [CommRing R] :
   simp only [HomologicalComplex.comp_f, columnAugmentation, chainTensorMap,
     Functor.mapHomologicalComplex_map_f, NatTrans.mapHomologicalComplex_app_f,
     Functor.flip_obj_map, curriedTensor_map_app, ← tensorHom_id, tensorBicomplexMap,
+    Functor.uncurry_obj_map,
     Functor.mapBifunctorHomologicalComplex_map_app_f_f,
     Functor.mapBifunctorHomologicalComplex_obj_map_f_f,
     flipFunctor_map_f_f, Functor.flip_map_app, curriedTensor_obj_map, ← id_tensorHom,

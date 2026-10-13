@@ -8,7 +8,6 @@ module
 public import Mathlib.Algebra.Homology.Bifunctor
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.Currying
-import Mathlib.Tactic.DSimpPercent
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 
 /-!
@@ -42,7 +41,7 @@ Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex) -/
 abbrev tensorBicomplexMap {P P' Q Q' : ChainComplex (ModuleCat.{u} R) ℕ}
     (a : P ⟶ P') (b : Q ⟶ Q') :=
-  dsimp% only [Functor.uncurry] (Functor.uncurry.obj
+  (Functor.uncurry.obj
     (Functor.mapBifunctorHomologicalComplex (curriedTensor (ModuleCat.{u} R))
       (.down ℕ) (.down ℕ))).map (X := (P, Q)) (Y := (P', Q')) (a, b)
 
