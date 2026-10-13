@@ -16,26 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Naturality of alpha and compatibility of its family imply equality of the alpha images of the two prescribed restrictions. Unique isomorphism of the composite and direct left adjoints identifies alpha with the cocone adjunction unit followed by an isomorphism, so that unit kills their difference.",
-   "uses": [],
-   "elementary": true
+   "text": "Naturality of alpha at gs and gr and compatibility hy identify the alpha images of the two restrictions x and z. Compare the composite adjunction with the direct adjunction by leftAdjointUniq; the unit equation hAlpha identifies alpha with the V_t unit followed by an isomorphism, so the V_t unit kills x minus z. This is proved by comparison_kernel_iff in the module. Repair: the transition existence helper is imported with import all from ColimitSiteAbelianStageImageRefinement, rather than duplicated. The local kernel-comparison helper is generalized in place to coefficients in AddCommGrpCat at universe max u v, assuming weak sheafification at S and R; the theorem uses its v = u specialization. The existing same-universe helper in SectionEventualEquality cannot be imported without a cycle.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-abelian-stage-image-refinement"
+   ],
+   "elementary": false
   },
   {
-   "text": "Independently construct the filtered presheaf of stage section colimits over presentations. Object and arrow colimits give filtered common refinements and lift restrictions. Every cover is a finite stage image and its covering pullbacks are preserved, so commutation of filtered abelian colimits with finite limits proves the sheaf equalizer. Transposing morphisms gives the inverse-image adjunction and identifies the section formula compatibly with its units. Equality of the difference with zero is witnessed at a later transition d.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the raw section-formula kernel bound to the sheaf A_t, source stage t.right and arbitrary stage object Z. It places x minus z in the supremum of the later adjunction-unit kernels.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-abelian-unit-kernel-bound"
+   ],
+   "elementary": false
   },
   {
-   "text": "Form the Under i object from t.hom followed by d. The supplied theta unit equation and unique isomorphism of composite left adjoints identify its kernel with the d-unit kernel. Additivity then proves the single required equality.",
+   "text": "Adjunction transposition constructs the comparison from one inverse image to a further composite inverse image, with its unit equation. Applying the equation to a section proves containment of the first source-unit kernel in the composite source-unit kernel. For two Under(t.right) objects filteredness gives a common successor, so the kernels are directed. AddSubgroup.mem_iSup_of_directed extracts an object a whose unit kills x minus z. Form tprime = Under.mk(t.hom composed with a.hom) and b = Under.homMk(a.hom). The same comparison_kernel_iff for theta identifies its kernel with the a-unit kernel. Additivity then gives the required equality.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-site-abelian-unit-kernel-bound",
+  "lem-weil-pbc-colimit-site-abelian-stage-image-refinement"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, independent raw section-colimit construction, unit identification, and a single eventual equality"
+  "place": "Tag 0A35: raw section-formula kernel bound, with adjunction comparison, directed source-unit kernels, and one Under transition proved in Lean by V3 Duplicate-helper repair: reuse the existing private transition theorem through import all; generalize the local comparison helper to larger coefficient universes."
  },
  "mathlib_searches": [
   {
@@ -115,9 +122,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T031531-L-3568592",
+  "landing": "20261013T054243-L-451253",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

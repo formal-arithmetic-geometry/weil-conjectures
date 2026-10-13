@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-colimit-site-abelian-unit-kernel-bound",
+ "kind": "statement",
+ "title": "Raw section-formula bound on the source-unit kernel",
+ "statement": "Let $J$ be a small filtered category and $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit]. Let $P_j$ be precoverages [def-weil-pbc-sites-and-cohomology] with isomorphism covers, finite indexed composition and base-change stability [def-weil-pbc-finite-precoverage], and covering pullbacks. All covering presieves are finite. Transitions map covers to covers, preserve covering pullbacks, and are continuous for the generated topologies. Let $V$ be a cocone whose object and arrow set cocones are colimits [def-weil-pbc-arrows-functor]. Let $Q$ be a precoverage on $V.pt$ with the same finite covering axioms and covering pullbacks, whose covers are exactly transported stage covers. Each $V_j$ is continuous and preserves covering pullbacks. For every $j\\in J$, abelian sheaf $H$ on $P_j$, and $X\\in F(j)$, let $\\eta_V:H(X)\\to (V_j^{-1}H)(V_jX)$ be the inverse-image adjunction unit on sections. For each $a:j\\to k$ let $\\eta_a:H(X)\\to (F(a)^{-1}H)(F(a)X)$ be the corresponding stage unit. Then the additive subgroup $\\ker\\eta_V$ is contained in $\\bigvee_{a\\in\\mathrm{Under}(j)}\\ker\\eta_a$ of $H(X)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), finite-cover matching equalizer and adjunction paragraphs; abelian interpretation in Tag 03CO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the limit and composite stage units through the source-stage adjunction to obtain alpha and theta with their unit equations. These are proved adjunction transposes, with no postponed construction. Repair: the transition existence helper is imported with import all from ColimitSiteAbelianStageImageRefinement, rather than duplicated.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-abelian-stage-image-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved abelian section-diagram construction at j, H and X to obtain D, E, K, e with their cocone and transition equations. Send x through the identity-stage unit and E inverse. The limit-unit equation and the cocone equation, transported by Arrow equality, show that this element has zero K image.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-abelian-section-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite section eventual zero to this element and the supplied section diagram. Its raw Kan-extension, sheaf and evaluation dependencies do not return to pairwise matching. The later D image is zero; the diagram and stage-unit equations therefore make the later source unit of x zero. Membership in that kernel implies membership in the supremum.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-finite-section-eventual-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-site-abelian-section-diagram",
+  "lem-weil-pbc-colimit-site-finite-section-eventual-zero",
+  "lem-weil-pbc-colimit-site-abelian-stage-image-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 section formula: prove the source-unit kernel bound from the abelian section diagram and acyclic finite-section eventual-zero theorem, using the existing adjunction-transpose helper and Arrow transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kernel of the inverse image unit of an abelian sheaf on a filtered colimit of finite-cover sites is contained in the supremum of later stage unit kernels",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of sheaf sections after pullback to a filtered colimit of sites is witnessed at a later stage",
+   "results": "Eight generic sheaf extensionality, covering-equalizer and amalgamation results; no varying-site source-unit kernel bound.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem returned."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*kernel|kernel.*unit",
+   "results": "No relevant Mathlib site inverse-image kernel formula. The current library supplies a proved abelian section diagram and an acyclic finite-section eventual-zero theorem; these are used to prove the bound. Finite unit zero detection uses the cyclic stage-image route.",
+   "date": "2026-10-13",
+   "verdict": "Use the existing acyclic Sheaf declarations, with adjunction transposition and Arrow transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubgroup.mem_iSup_of_directed",
+   "results": "Exact Mathlib directed-supremum membership theorem, used by the parent argument; no varying-site section formula.",
+   "date": "2026-10-13",
+   "verdict": "Use lattice membership in parent; prove the kernel bound using existing Sheaf nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the canonical sheaf inverse image unit vanishes after a transition in a filtered diagram of sites",
+   "results": "Eight results on sheafification, fibers and filtered sheaf colimits; none gives this varying-site unit-kernel bound.",
+   "date": "2026-10-13",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(kernel|eventual)|(kernel|eventual).*sheaf",
+   "results": "No hits in Mathlib/CategoryTheory/Sites.",
+   "date": "2026-10-13",
+   "verdict": "No direct replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteAbelianPairwiseEventualMatching",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Pairwise eventual matching proof step 2: raw source-stage section formula before extraction of a single transition",
+   "via": [
+    "lem-weil-pbc-colimit-site-abelian-pairwise-eventual-matching"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteAbelianUnitKernelBound",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteAbelianUnitKernelBound.lean",
+  "declaration": "CategoryTheory.colimit_site_abelian_unit_kernel_bound",
+  "statement": "theorem colimit_site_abelian_unit_kernel_bound\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]\n    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [Q.HasIsos] [Q.IsStableUnderFiniteComposition]\n    [Q.IsStableUnderFiniteBaseChange] [Q.HasPullbacks]\n    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R))\n    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →\n            ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n              PreservesLimit (cospan f g) (V.ι.app j).toFunctor))\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (j : J) (H : Sheaf (P j).toGrothendieck AddCommGrpCat.{u})\n    (X : F.obj j) :\n    (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u}\n      (P j).toGrothendieck Q.toGrothendieck).unit.app H).hom.app (op X)).hom.ker ≤\n      ⨆ a : Under j,\n        (((sheafAdjunctionContinuous (F.map a.hom).toFunctor AddCommGrpCat.{u}\n          (P j).toGrothendieck (P a.right).toGrothendieck).unit.app H).hom.app\n            (op X)).hom.ker",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T054243-L-451253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T054243-L-451253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
