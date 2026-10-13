@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-affine-stalk-scalar-extension-coordinates",
+ "kind": "statement",
+ "title": "Exact affine stalk homology in scalar-extension coordinates",
+ "statement": "Let A be a commutative ring, C a complex of A-modules, p a prime, and i an integer. Let D be the structure-sheaf stalk of Spec(A) at p, kappa:A to D its canonical map, F extension of scalars along kappa, N=tilde(C), and s the module stalk functor. There exists a D-linear chain isomorphism chi:F(C) to s(N), sending 1 tensor x to the germ of x in each degree. There also exist additive equivalences e(V):V_p to F(V), for every A-module V, such that for every A-linear a:V to H^i(C) and x in V_p, affineTildeHomologyLocalization(localize(a)(x)) equals H^i(chi) applied to the inverse exact scalar-extension homology isomorphism applied to F(a)(e(V)(x)). The homology localization map is the existing construction of [lem-pc-affine-ordinary-tensor-stalk-coordinates]. No derived tensor model or K-flatness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01I9",
+  "place": "Tags 01I9, 01HV and 01AG; functorial tilde localization and exact stalk homology in the affine argument of Tag 0DJ8."
+ },
+ "stmt_deps": [
+  "lem-pc-affine-ordinary-tensor-stalk-coordinates",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "The stalk ring is the prime localization and toStalk on tilde modules is a module localization. IsLocalizedModule.isBaseChange gives a stalk-ring-linear isomorphism from scalar extension to the stalk, with its numerator formula. Tensor generation and naturality of germs prove naturality. Apply these components to the differentials to construct chi. Use IsLocalizedModule.iso followed by the inverse scalar-extension/stalk isomorphism to construct e(V).",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the localization isomorphism (Mathlib IsLocalizedModule.map_iso_commute) and of the termwise scalar-extension/stalk isomorphism identifies the image of localize(a)(x) with its scalar-extension image. Exact tilde and exact stalks give their homology isomorphisms. Cancel the cycle inclusions and homology quotient maps to show that the homology isomorphism of a composite exact functor equals the composite homology isomorphisms. Apply Mathlib NatTrans.app_homology to the termwise natural isomorphism. This proves the homology square. Expanding affineTildeHomologyLocalization cancels the two inverse homologyFunctorFactors maps, leaving exactly the composite exact tilde/stalk homology map. Substitute the numerator naturality equality to obtain the claimed formula.",
+   "uses": [
+    "def-pc-affine-base-change-tilde-coordinates",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-affine-ordinary-tensor-stalk-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-pc-affine-base-change-tilde-coordinates",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-affine-ordinary-tensor-stalk-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/01I9",
+  "place": "Tags 01I9, 01HV and 01AG; functorial tilde localization and exact stalk homology in the affine argument of Tag 0DJ8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the sheaf associated to a module is naturally isomorphic to tensor with the localized ring and this commutes with cohomology",
+   "results": "Service unavailable: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization derived tensor cohomology canonical comparison stalk tilde complex",
+   "results": "ModuleCat.Tilde.stalkIso, localizationToStalk, toStalk_comp_stalkToFiberLinearMap, localizationToStalk_mk; these identify individual modules, not the homology square. A second query for derived tensor comparison naturality returned Tor_map and mapDerivedCategoryFactorsh_hom_app.",
+   "date": "2026-10-14",
+   "verdict": "Reuse individual localization and exact homology APIs; no combined square found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.iso",
+   "results": "IsLocalizedModule.iso, iso_mk_one, iso_apply_mk, map_iso_commute, LocalizedModule.coe_map_eq. Signatures inspected in Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "These supply the fraction coordinate and its naturality, not the derived tensor model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|mapHomologyIso|IsLocalizedModule.isBaseChange|equiv_tmul in Mathlib and lean/WeilConjectures and lean/Sheaf",
+   "results": "IsLocalizedModule.isBaseChange and IsBaseChange.equiv_tmul supply the termwise scalar-extension isomorphism. ShortComplex homologyMap_mapNatTrans and NatTrans.app_homology supply exact homology naturality. Sheaf derivedTensor_first_localization_models, derivedTensor_base_second_localization_models and derivedTensor_localization_cohomology supply the algebraic localization route, but no declaration directly connects the supplied affine model and the fixed stalk model with different derived-category universe instances.",
+   "date": "2026-10-14",
+   "verdict": "The exact coordinate argument is proved from these APIs; leave only the affine algebraic model transport square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineLocalizedTensorStalkSquare",
+  "date": "2026-10-14",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tags 01I9, 01HV and 01AG; functorial tilde localization and exact stalk homology in the affine argument of Tag 0DJ8.",
+   "via": [
+    "lem-pc-affine-localized-tensor-stalk-square",
+    "lem-pc-affine-base-change-ordinary-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineStalkScalarExtensionCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffineStalkScalarExtensionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_affineStalkScalarExtensionCoordinates",
+  "declarations": [
+   "AlgebraicGeometry.exists_affineStalkScalarExtensionCoordinates"
+  ],
+  "statement": "theorem exists_affineStalkScalarExtensionCoordinates\n    (A : Type u) [CommRing A] (C : CochainComplex (ModuleCat.{u} A) ℤ)\n    (p : PrimeSpectrum A) (i : ℤ) :\n    let D : Type u := (Spec.structureSheaf A).presheaf.stalk p\n    let κ := (StructureSheaf.toStalk A p).hom\n    let F := ModuleCat.extendScalars κ\n    letI := ModuleCat.preservesFiniteLimits_extendScalars_of_flat\n      (RingHom.flat_algebraMap_iff.mpr (IsLocalization.flat D p.asIdeal.primeCompl))\n    let N := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj C)\n    let s := RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p\n    ∃ χ : (F.mapHomologicalComplex (.up ℤ)).obj C ≅\n        (s.mapHomologicalComplex (.up ℤ)).obj N,\n      (∀ (j : ℤ) (x : C.X j), χ.hom.f j ((1 : D) ⊗ₜ[A, κ] x) =\n        TopCat.Presheaf.germ (N.X j).val.presheaf ⊤ p trivial\n          (tilde.toOpen (R := .of A) (C.X j) ⊤ x)) ∧\n      ∃ e : ∀ U : ModuleCat.{u} A,\n          LocalizedModule p.asIdeal.primeCompl U ≃+ F.obj U,\n        ∀ (U : ModuleCat.{u} A) (a : U ⟶ C.homology i) (x),\n          affineTildeHomologyLocalization A C p i\n              (LocalizedModule.map p.asIdeal.primeCompl a.hom x) =\n            HomologicalComplex.homologyMap χ.hom i\n              (((C.sc i).mapHomologyIso F).inv (F.map a (e U x)))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T171515-L-1982714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T171515-L-1982714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

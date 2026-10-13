@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.AffineOrdinaryTensorStalkCoordinates
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineStalkScalarExtensionCoordinates
+import Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare
 
 /-! # AffineLocalizedTensorStalkSquare
 
@@ -26,27 +28,25 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option linter.unusedVariables false in
 /-- The algebraic localization square before ordinary pullback target coordinates.
 Source: Stacks Project, Tag 0DJ8, displayed affine localization identity;
 Tags 06Y6, 01HV and 01I9.
 (blueprint: lem-pc-affine-localized-tensor-stalk-square).
 
-Proof: the cartesian spectrum square identifies the fourth ring with A tensor_R R'.
-Contract p to the other rings and identify their structure-sheaf stalks with the
-prime localizations. Localize an R-K-flat resolution computing the supplied model.
-Exact localization commutes with its cohomology. Tensor associativity and the
-universal derived counit identify the localized source with the source of the fixed
-stalk model, giving lU; the coefficient-action equations ensure tensor linearity.
-Transport the resolution comparison to M using the counit equations of both models.
-The equations defining localizedComparison identify this arrow with the localized
-ordinary tensor arrow a₀. Exact tilde and stalk homology give the target localization
-map affineTildeHomologyLocalization. The stipulated germ formula for τ identifies
-its termwise tensor map with the localized coefficient map, and hence identifies
-its homology map with the target of the resolution comparison square. Apply the
-localization comparison square to obtain the displayed equation. No derived sheaf
-homology target coordinate or affineTensorPullbackHomologyStalkIso is involved.
-The argument works in every degree and also for zero complexes or identity
-localizations; the zero fourth ring supplies no prime. -/
+Proof: exists_affineStalkScalarExtensionCoordinates supplies a chain isomorphism
+chi from scalar extension of C to the stalk of tilde C, its germ formula, and
+additive source coordinates e(U), natural for the map a0 into ordinary homology.
+Compose chi with the supplied tau. Its nested pure-tensor formula follows from
+the two germ formulas. Apply exists_affineScalarLocalizedTensorSquare to this
+algebraic chain isomorphism, obtaining the source isomorphism eU and the
+algebraic cohomology square. Define lU as e(U) followed by the additive equivalence
+of eU. Substitute the exact stalk homology naturality formula, and use
+homologyMap_comp to identify homology(chi followed by tau). Evaluation of the
+algebraic square at e(U)(x) gives the required equation. The scalar-extension
+coordinate argument is proved; the algebraic model-localization square is a
+separate named statement. The argument works for zero complexes and identity
+localizations; a zero fourth ring supplies no prime. -/
 theorem exists_affineLocalizedTensorStalkSquare
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']
@@ -107,6 +107,36 @@ theorem exists_affineLocalizedTensorStalkSquare
           ∀ x, HomologicalComplex.homologyMap τ.hom i
               (affineTildeHomologyLocalization A' C p i
                 (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x)) =
-            l (lU x) := by sorry
+            l (lU x)  := by
+  dsimp only
+  intro p τ hτ
+  let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
+  let U := affineBaseChangeTildeModule R A R' A' M m i
+  let a₀ := affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i
+    (C.homology i) (Iso.refl _)
+  let κ := (StructureSheaf.toStalk A' p).hom
+  let F := ModuleCat.extendScalars κ
+  have : PreservesFiniteLimits F :=
+    ModuleCat.preservesFiniteLimits_extendScalars_of_flat
+      (RingHom.flat_algebraMap_iff.mpr
+        (IsLocalization.flat ((Spec.structureSheaf A').presheaf.stalk p)
+          p.asIdeal.primeCompl))
+  obtain ⟨χ, hχ, e, hcoord⟩ :=
+    exists_affineStalkScalarExtensionCoordinates A' C p i
+  obtain ⟨eU, hsquare⟩ := exists_affineScalarLocalizedTensorSquare
+    R A R' A' φg' φf' hφg' hφf' sq M hM i m p
+  let τD := χ ≪≫ τ
+  have hs := hsquare τD (by
+    intro j x
+    change τ.hom.f j (χ.hom.f j _) = _
+    rw [hχ]
+    exact hτ j x)
+  refine ⟨(e U).trans eU.toLinearEquiv.toAddEquiv, ?_⟩
+  intro x
+  rw [hcoord U a₀ x]
+  have h := congrArg (fun a ↦ a (e U x)) hs
+  simp only [τD, Iso.trans_hom, HomologicalComplex.homologyMap_comp,
+    ModuleCat.comp_apply] at h
+  exact h
 
 end AlgebraicGeometry
