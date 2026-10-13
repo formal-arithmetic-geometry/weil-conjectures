@@ -12816,3 +12816,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:29 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange (stage 3; reviewer PASS; after a return; landing 20261013T142902-L-499585 (interface); batch 20261013T142848; modules 2; new nodes 1)
 - 14:29 L: merged deliver/R3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaClosed (stage 3; reviewer PASS; after a return; landing 20261013T142902-L-499815 (proof); batch 20261013T142848; modules 1; new nodes 0)
 - 14:29 L: merged deliver/R4/Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionDecomposition (stage 3; reviewer PASS; first push; landing 20261013T142902-L-499957 (interface); batch 20261013T142848; modules 3; new nodes 2)
+- 14:29 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaHomology (stage 3; reviewer PASS; first push; landing 20261013T142903-L-500103 (proof); batch 20261013T142848; modules 1; new nodes 0)

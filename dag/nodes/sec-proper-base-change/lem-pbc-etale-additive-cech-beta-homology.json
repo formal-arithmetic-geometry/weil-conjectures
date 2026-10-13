@@ -13,35 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Identify the lifted unit-module section coordinates with additive structural functions, compatibly with all restrictions. The resolution augmentation defines beta as a chain map into the total; its vertical differential vanishes. Forgetting scalars, lifting finite products and identity scalar restriction provide the source complex comparison.",
+   "text": "Apply exists_additiveCech_beta_quasiIso to obtain the actual lifted coefficient chain map q, its component equation with beta, and its quasi-isomorphism property. The cover and compactness hypotheses are retained in the statement but are not needed at this step.",
    "uses": [
-    "lem-sc-etale-tensor-unit-sections-natural"
+    "lem-pbc-additive-cech-beta-quasi-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Each tuple intersection is affine. Specialize the lifted finite Cech comparison to the singleton top cover of each affine intersection: the singleton Cech complex has zero positive homology (its differential alternates between zero and identity), hence the lifted structural sheaf has zero positive cohomology there. Degree zero is identified with structural sections by sheaf gluing. The section complex of the restricted injective resolution therefore has its coefficient augmentation as a quasi-isomorphism. Apply the first-quadrant augmentation criterion to the flipped double complex and compose with the signed flip-total isomorphism; the augmentation lands in resolution degree zero so its components remain beta. This retains the actual chain map rather than choosing the bare equivalence. Empty intersections and an empty covering yield zero groups.",
-   "uses": [
-    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
-    "lem-sc-first-quadrant-column-augmentation"
-   ],
-   "elementary": false
+   "text": "Let F be forgetting scalars followed by ULift. Mathlib ShortComplex.mapCyclesIso and mapHomologyIso applied to the degree-n short complex identify the cycles and homology of F(C) with F of the original cycles and homology. Exactness of the two functors supplies their preservation instances. The private helper mapHomologyIso_inv_π proves compatibility of these isomorphisms with homology projection, by expanding the left-homology-data comparison formulas.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The chain map sends cycles to cycles and boundaries to boundaries. Descending along the homology quotient yields the additive map b and the representative formula. Exact ULift and forgetting preserve homology, so the comparison shows b bijective. The cycle lift c is additive since inclusion of total cycles is injective.",
+   "text": "Define c by lifting with AddEquiv.ulift.symm, applying the inverse cycle comparison and cyclesMap q. Define b from AddEquiv.ulift.symm and the additive equivalence of the composite inverse homology comparison with isoOfQuasiIsoAt q n. This gives bijectivity. mapCyclesIso_hom_iCycles, cyclesMap_i and the component equation of q give the beta cycle formula. The private projection-compatibility helper and homologyπ_naturality give the representative formula. These categorical formulas work also in degree zero and for zero or empty complexes.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
-  "lem-sc-etale-tensor-unit-sections-natural",
-  "lem-sc-first-quadrant-column-augmentation"
+  "lem-pbc-additive-cech-beta-quasi-iso"
  ],
  "proof_origin": {
-  "by": "N1 worker",
+  "by": "S2 worker",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Explicit augmentation specialization of Tags 01FD, 03AW and 03P2."
+  "place": "Coefficient augmentation comparison, with Mathlib exact-functor cycle/homology transport."
  },
  "mathlib_searches": [
   {
@@ -146,10 +141,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T134402-L-96412",
-  "kind": "interface",
+  "landing": "20261013T142903-L-500103",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
