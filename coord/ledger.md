@@ -10856,3 +10856,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/E1/Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift (stage 3; reviewer PASS; first push; landing 20261013T031534-L-3569398 (interface); batch 20261013T031526; modules 4; new nodes 3)
 - 03:15 L: merged deliver/E2/Sheaf.AlgebraicGeometry.PrincipalQuotientUnitKernel (stage 3; reviewer PASS; first push; landing 20261013T031535-L-3569536 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/E3/Sheaf.RingTheory.SyntomicPrincipalLocalizationFibreTransport (stage 3; reviewer PASS; after a return; landing 20261013T031535-L-3569700 (proof); batch 20261013T031526; modules 1; new nodes 0)
+- 03:15 L: merged deliver/E4/Sheaf.RepresentationTheory.OpenStabilizerAdjunction (stage 3; reviewer PASS; first push; landing 20261013T031536-L-3569940 (proof); batch 20261013T031526; modules 1; new nodes 0)
