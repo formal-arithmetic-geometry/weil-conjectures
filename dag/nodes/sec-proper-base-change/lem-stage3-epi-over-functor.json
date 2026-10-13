@@ -1,0 +1,101 @@
+{
+ "id": "lem-stage3-epi-over-functor",
+ "kind": "statement",
+ "title": "Restriction to an over-site preserves epimorphisms of module sheaves",
+ "statement": "For a Grothendieck site with the stated sheafification hypotheses, if e : A ⟶ B is an epimorphism of sheaves of modules and U is an object of the site, then (overFunctor R U).map e is an epimorphism.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BY, local lifting criterion"
+ },
+ "proof": [
+  {
+   "text": "An epimorphism of sheaves is locally surjective. Every object of the over-site is a map to U, and pulling back the local covering and local lifts along that map gives local lifts there. The locally-surjective characterization of epimorphisms under WEqualsLocallyBijective therefore proves the restricted morphism epi.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BY, local lifting criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "epi overFunctor map sheaf modules",
+   "results": "No matching theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epi (overFunctor R U).map e",
+   "results": "No matching theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Epi ((SheafOfModules.overFunctor R U).map e)",
+   "results": "No matching theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "epi.*overFunctor",
+   "results": "No declaration found in Mathlib or WeilConjectures.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeEpiImage",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sheaf-finite-type-epi-image",
+   "place": "stage-3 decomposition"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EpiOverFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EpiOverFunctor.lean",
+  "declaration": "epi_overFunctor_map",
+  "statement": "theorem epi_overFunctor_map\n    {C : Type v} [Category.{v} C] {J : GrothendieckTopology C}\n    {R : Sheaf J RingCat.{u}}\n    [∀ U, HasSheafify (J.over U) AddCommGrpCat.{u}]\n    [∀ U, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}]\n    {A B : SheafOfModules.{u} R} (e : A ⟶ B) [Epi e] (U : C) :\n    Epi ((SheafOfModules.overFunctor R U).map e)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-15c5c",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T010611-L-2669366",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-15c5c",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T010611-L-2669366",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG records match the packet statements; all delivered modules and the direct importer compile, with only permitted sorryAx from epi_overFunctor_map."
+ }
+}

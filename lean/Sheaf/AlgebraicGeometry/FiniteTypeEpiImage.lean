@@ -2,13 +2,15 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.AlgebraicGeometry.EpiOverFunctor
 
 @[expose] public section
 
 universe u v
 
 open CategoryTheory CategoryTheory.Limits
+set_option linter.style.haveILetI false
+
 
 /-- Epimorphic images of finite type sheaves are finite type.
 Source: Stacks Project, Modules, Lemma 01B7 (blueprint: lem-weil-pbc-sheaf-finite-type-epi-image).
@@ -25,6 +27,21 @@ theorem sheaf_finiteType_of_epi
       AddCommGrpCat.{u}]
     {A B : SheafOfModules.{u} R} (e : A ⟶ B) [Epi e] :
     A.IsFiniteType → B.IsFiniteType := by
-  sorry
+  intro hA
+  obtain ⟨σ, hσ⟩ := hA.exists_localGeneratorsData
+  let τ : B.LocalGeneratorsData := {
+    I := σ.I
+    X := σ.X
+    coversTop := σ.coversTop
+    generators := fun i => by
+      letI := epi_overFunctor_map e (σ.X i)
+      exact (σ.generators i).ofEpi ((SheafOfModules.overFunctor R (σ.X i)).map e)
+  }
+  refine ⟨⟨τ, ?_⟩⟩
+  refine ⟨fun i => ?_⟩
+  dsimp [τ]
+  haveI : (σ.generators i).IsFiniteType := hσ.isFiniteType i
+  letI := epi_overFunctor_map e (σ.X i)
+  infer_instance
 
 end
