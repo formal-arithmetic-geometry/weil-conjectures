@@ -97,6 +97,7 @@ section
 variable {k : Type u} [Field k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
   [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y]
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *Acyclicity of the affine line*: for the projection `p : 𝔸¹_Y → Y` one has
