@@ -14,48 +14,43 @@
  },
  "proof": [
   {
-   "text": "Restrict N along the open inclusions of U, V and U intersection V into their union. Open restriction is exact and identifies with tensorPullback along these open immersions, so it preserves quasi-coherence and relative flatness. Apply hPU,hPV,hPUV to those three modules. Each presentation supplies a bounded-above termwise-flat complex, its direct-image isomorphism and its pinned counit equation. Bounded-flat K-flatness and counit_isIso_kFlat make the counit invertible. The direct-image isomorphism and the ordinary-pullback isomorphism then show that each of the three literal standardSingleBaseChangeMap arrows aU,aV,aUV is invertible.",
+   "text": "For any subopen T≤W, identify tensor pullback of N along Y.homOfLE with ordinary restriction by uniqueness of left adjoints. Restriction preserves quasi-coherence. For relative flatness, test on an affine open of T, map it to its affine image in W, and identify the scalar action using appLE_appIso_inv. Transfer this flatness through the module isomorphism. Apply the presentation hypothesis to the restricted module. Its bounded-above flat complex is K-flat, so the pinned counit is invertible and its factorization makes the literal comparison invertible. Do this for U,V,U intersection V.",
    "uses": [
     "def-pc-standard-single-flat-counit-presentation-on-open",
+    "def-pc-module-pullback",
     "lem-pc-bounded-above-flat-kflat",
     "lem-pc-isomorphism-pullback-counit"
    ],
    "elementary": false
   },
   {
-   "text": "Represent N[0] on the union and the ordinary pulled-back module in degree zero on its base change by K-injective complexes with injective terms. Use schemeKInjective_mayerVietoris_presentation for the induced open covers. Localize their short exact complexes using triangleOfSES. Apply the triangulated derived direct-image functors and derived pullback on the source side; transport all vertices by derived direct-image composition and the exact open-restriction identifications. Additivity makes the middle objects precisely aU.left biproduct aV.left and aU.right biproduct aV.right. This constructs the six displayed differentials and their distinguished triangles with no compactness assumption.",
+   "text": "Obtain a morphism m:P→P′ of short exact complexes with six localized vertex identifications and three conjugacy identities from standardSingle_union_ses_presentation. Conjugate Q(P.f), Q(P.g) and triangleOfSESδ by these identifications to define the six displayed differentials. Triangle.isoMk identifies the resulting triangles with triangleOfSES hP and triangleOfSES hP′. The Mathlib distinguishedness theorem and transport along these triangle isomorphisms prove both distinguishedness assertions.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kinjective-mayer-vietoris-presentation",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-pc-derived-direct-image-composition",
-    "def-pc-derived-pullback"
+    "new-pc-standard-single-union-ses-presentation",
+    "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the canonical single-module pullback map under the derived adjunction. Its restriction squares are the naturality squares of the sectionwise adjunction units; their difference gives the second square. The degreewise open counit identity schemeMVUnderivedOpenCounit_square identifies the relevant short exact cover comparison. Naturality of the short-exact boundary, followed by transposition back and shift compatibility, gives the third square. The resulting triangle morphism has first component a.hom. Pasting the canonical pullback and direct-image counits identifies its two member components with aU.hom,aV.hom, so its middle component is biprod.map of these maps; its overlap component is aUV.hom. Package this diagram together with the three isomorphism assertions from step 1.",
+   "text": "Conjugate DerivedCategory.triangleOfSES.map hP hP′ m by the two triangle isomorphisms. Its three components are the localized components of m conjugated by the six vertex identifications. The three presentation equations and inverse-hom cancellation identify them with the union comparison, the biproduct of the two member comparisons, and the overlap comparison. Naturality of the short exact boundary supplies the connecting square through triangleOfSES.map. Append the three isomorphism proofs from step 1.",
    "uses": [
-    "lem-pc-mayer-vietoris-underived-open-counit-square"
+    "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-standard-single-flat-counit-presentation-on-open",
+  "def-pc-module-pullback",
   "lem-pc-bounded-above-flat-kflat",
   "lem-pc-isomorphism-pullback-counit",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-pc-derived-direct-image-composition",
-  "def-pc-derived-pullback",
-  "lem-pc-mayer-vietoris-underived-open-counit-square"
+  "new-pc-standard-single-union-ses-presentation",
+  "lem-weil-pbc-complex-ses-triangle"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 0DJ9, 08BV and 08FE; C1 isolates the diagram construction from two-out-of-three and the supplied-complex factorization. Arbitrary opens use the general sheaf-module triangle of 08BV, not the quasi-coherent direct-image refinement."
+  "document": "Stacks Project and Mathlib",
+  "place": "Q4: Tag 0DJ9 induction diagram; flat-isomorphism step is proved, the short exact geometric comparison is isolated as new-pc-standard-single-union-ses-presentation; explicit transport of Mathlib triangleOfSES and triangleOfSES.map proves the triangle and connecting-square assembly."
  },
  "mathlib_searches": [
   {
@@ -146,9 +141,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T231531-L-1815631",
+  "landing": "20261013T234518-L-2165707",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
