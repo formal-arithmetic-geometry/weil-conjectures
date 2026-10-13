@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-smooth-augmentation-completion-power-series",
+ "kind": "statement",
+ "title": "Power-series coordinates on a smooth augmented algebra completion",
+ "statement": "Let $B$ be a commutative local ring and $C$ a smooth $B$-algebra [def-weil-pbc-smooth-ring-map]. Let $\\varepsilon:C\\to B$ be a $B$-algebra homomorphism, and put $I=\\ker\\varepsilon$. There exist $n\\geq0$ and a $B$-algebra isomorphism $e:\\widehat C_I\\xrightarrow{\\sim} B[[X_1,\\ldots,X_n]]$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series] such that for every $c\\in C$ the constant coefficient of $e(\\iota(c))$ equals $\\varepsilon(c)$, where $\\iota:C\\to\\widehat C_I$ is the completion map. No Noetherian assumption on $B$ or $C$ is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05D5, Lemma 10.139.4, its explicit substitution construction and augmentation quotient; local freeness specialized to a local coefficient ring"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Let I be the augmentation kernel. The split conormal sequence identifies I/I² with the differentials of C over B tensored with B through the augmentation. Smoothness makes it finite projective. A finite projective module over a local ring is free of finite rank n. Choose basis lifts f_i in I.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The substitutions X_i ↦ f_i define a B-algebra map from the power-series ring to the I-adic completion. It is an isomorphism modulo squared augmentation ideals. Products of the basis lifts generate each I^k/I^(k+1), so induction gives surjectivity on every truncated quotient. Formal smoothness lifts the inverse at level k to the next level. This lift sends I into the variables ideal, hence annihilates I^(k+1). Its composite with substitution sends each variable to itself plus a term of degree k. Subtracting these corrections gives an inverse to the composite, hence substitution is injective as well as surjective at the next level. The inverses of the substitution maps commute with truncation, so passage to inverse limits gives the required algebra isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse of the substitution isomorphism as e. On the quotient by the augmentation ideals substitution is the identity of B, so constant coefficient of e on the completion image of c is ε(c). The construction allows n = 0; if C = B and the augmentation is the identity, the zero-ideal completion is B and the empty-variable power-series ring is B. No Noetherian hypothesis is needed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "A4",
+  "document": "Stacks Project",
+  "place": "Tag 05D5, proof, with the augmentation compatibility made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebra with an augmentation over a local ring has completion isomorphic to a power series ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a smooth algebra along the kernel of a split augmentation over a local ring is a multivariate power series ring",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq and exists_mkₐ_comp_eq_of_isAdicComplete (Mathlib.RingTheory.Smooth.AdicCompletion); AdicCompletion.ofAlgEquiv (Mathlib.RingTheory.AdicCompletion.Algebra). These give lifts or completion of an already complete ring, not the requested power-series identification.",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*section|section.*completion|augmentation in Mathlib; adicCompletion|completion.*[Ii]so|powerSeries|MvPowerSeries in Mathlib/RingTheory/Smooth; 05D5 and augmentation in the project DAG",
+   "results": "Mathlib/RingTheory/Smooth/AdicCompletion has formal-smoothness lifting, but no power-series identification. No existing DAG node states the augmented completion identification; the assigned node contains it as its second proof step. blueprint_refs.py search 05D5 returned no blueprint match.",
+   "date": "2026-10-13",
+   "verdict": "no matching declaration or existing node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The smooth affine section algebra completion in the depth-two local computation; step 2 of lem-sbc-smooth-section-completion-chart",
+   "via": [
+    "lem-sbc-smooth-section-completion-chart",
+    "lem-sbc-smooth-section-power-series-chart",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.Smooth.AugmentationCompletionPowerSeries",
+  "file": "lean/Sheaf/RingTheory/Smooth/AugmentationCompletionPowerSeries.lean",
+  "declaration": "Algebra.exists_augmented_completion_powerSeries",
+  "statement": "theorem exists_augmented_completion_powerSeries (B C : Type u) [CommRing B] [IsLocalRing B] [CommRing C] [Algebra B C] [Smooth B C] (ε : C →ₐ[B] B) : ∃ (n : ℕ) (e : AdicCompletion (RingHom.ker ε.toRingHom) C ≃ₐ[B] MvPowerSeries (Fin n) B), ∀ c : C, MvPowerSeries.constantCoeff (e (algebraMap C (AdicCompletion (RingHom.ker ε.toRingHom) C) c)) = ε c",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T111836-L-3046893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T111836-L-3046893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

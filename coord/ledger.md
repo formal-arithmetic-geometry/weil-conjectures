@@ -12083,3 +12083,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/A2/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (stage 3; reviewer PASS; first push; landing 20261013T111835-L-3046278 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/A3/Sheaf.RingTheory.PopescuCoefficientRescaling (stage 3; reviewer PASS; first push; landing 20261013T111835-L-3046469 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange (stage 3; reviewer PASS; first push; landing 20261013T111836-L-3046711 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:18 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart (stage 3; reviewer PASS; first push; landing 20261013T111836-L-3046893 (interface); batch 20261013T111833; modules 2; new nodes 1)

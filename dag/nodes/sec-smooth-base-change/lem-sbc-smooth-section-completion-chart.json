@@ -17,17 +17,19 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood of s at the closed point. Its inverse image under s is all of Spec B, since an open containing the closed point of a local spectrum is the whole spectrum. Thus its smooth B-algebra C has an augmentation C to B splitting the structure map.",
+   "text": "Choose a spectrum affine open immersion i:Spec C→X whose range contains s at the closed point of Spec B. Every point of Spec B specializes to its closed point, so the open range contains the whole image of s. Lift s through i. Use full faithfulness of Spec to write i≫p as Spec φ and the lifted section as Spec ε. The section equation implies ε.comp φ = id, furnishing the B-algebra augmentation. Smoothness of i≫p makes C a smooth B-algebra.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the augmented smooth-completion power-series identification to obtain n and a B-algebra isomorphism e:AdicCompletion(ker ε) C ≃ B[[Fin n]], whose constant coefficient on the image of C is ε.",
+   "uses": [
+    "lem-sbc-smooth-augmentation-completion-power-series"
+   ],
    "elementary": false
   },
   {
-   "text": "Put I equal to the augmentation kernel. Tag 05D5 identifies I/I^2 with the pullback of the differentials module; it is finite projective over B and hence free. Choose lifts in I of a basis. The induced B-algebra map from the power-series ring to the I-adic completion is an isomorphism: it is an isomorphism modulo I^2; formal smoothness successively lifts the inverse modulo I^k; a map congruent to the identity modulo the next-highest power of the variables ideal is an automorphism, so the lifted inverse proves the induction. Take inverse limits. Evaluation at zero corresponds to the augmentation because all chosen lifts lie in I.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "C is Noetherian since it is finite type over B. The completion map is flat by Tag 00MB. Compose its spectrum map, transported along the B-algebra isomorphism, with the affine open immersion. The B-algebra structure gives the structure-map equality and the augmentation gives the equality of section morphisms. The proof includes rank zero.",
+   "text": "C is Noetherian by Algebra.FiniteType.isNoetherianRing B C. The completion map is flat by AdicCompletion.flat_of_isNoetherian and RingHom.flat_algebraMap_iff; composing with e preserves flatness by its bijectivity. Let f be this composite and t=Spec f≫i. Flatness of spectrum maps and the open immersion proves Flat t. The algebra-map tower and e.commutes give f.comp φ=C, so t≫p=Spec C. The augmentation equality gives constantCoeff.comp f=ε, so Spec constantCoeff≫t=s.",
    "uses": [
     "lem-weil-pbc-noetherian-completion-flat"
    ],
@@ -35,13 +37,14 @@
   }
  ],
  "proof_deps": [
+  "lem-sbc-smooth-augmentation-completion-power-series",
   "lem-weil-pbc-noetherian-completion-flat"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "R1",
+  "by": "A4",
   "document": "Stacks Project",
-  "place": "Tag 0EYB, completion paragraph; Tag 05D5 (smooth algebra with split augmentation); Tag 00MB (flatness of Noetherian completion)"
+  "place": "Tag 0EYB completion paragraph, Tag 05D5 algebraic identification, Tag 00MB flatness; geometric assembly in Lean"
  },
  "mathlib_searches": [
   {
@@ -123,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-57c3a",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T100108-L-2481022",
+  "landing": "20261013T111836-L-3046893",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged item signature and delivered proof match its node; both lower lemmas match their nodes and sources. Three delivered modules and direct importer ClosedFiberPowerSeriesTest compile cleanly; public imports remain available; axioms are permitted plus expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
