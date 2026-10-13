@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.ModuleCupGodementCodegeneracies
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.Paper.ModuleCupGodementIteratePairingsCanonicalCollapse
 
 /-! # Pairings of the canonical Godement iterates -/
 
@@ -49,7 +50,12 @@ theorem moduleCup_godement_iterate_pairings (X : Scheme.{u}) (F G : X.Modules) :
           p (n + 1) = p n ≫ moduleCup_godementInsert X (F ⊗ G) n i) ∧
       (∀ (n : ℕ) (i : Fin (n + 1)),
         (moduleCup_godementCollapse X F n i ⊗ₘ moduleCup_godementCollapse X G n i) ≫
-          p (n + 1) = p (n + 2) ≫ moduleCup_godementCollapse X (F ⊗ G) n i) := by sorry
+          p (n + 1) = p (n + 2) ≫ moduleCup_godementCollapse X (F ⊗ G) n i) := by
+  obtain ⟨β, p, hp0, hprec, hpδ⟩ :=
+    moduleCup_godement_iterate_pairings_canonical_exists X F G
+  have hpσ := moduleCup_godement_iterate_pairings_collapse_of_canonical
+    X F G β p hp0 hprec
+  exact ⟨p, hp0, hpδ, hpσ⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
