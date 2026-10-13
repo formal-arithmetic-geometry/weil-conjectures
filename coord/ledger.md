@@ -11490,3 +11490,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.PerfectSummand (reviewer RETURN: (the landing tools, head 88e3f33e7) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:23 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.PicardUniversalRankMatchResidueCriterion (reviewer RETURN: (the landing tools, head 84ed4e5b8) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:23 L: returned deliver/S2/Sheaf.RingTheory.QuasiFiniteLocusOpen (reviewer RETURN: (the landing tools, head 3b757c49a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
+- 07:23 L: returned deliver/S4/Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero (reviewer RETURN: (the landing tools, head 19ceed44f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
