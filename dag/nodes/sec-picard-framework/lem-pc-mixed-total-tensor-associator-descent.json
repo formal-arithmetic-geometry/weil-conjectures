@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-mixed-total-tensor-associator-descent",
+ "kind": "statement",
+ "title": "Descent of a natural mixed total tensor isomorphism through K-flat models",
+ "statement": "Let $R,A$ be commutative rings with an $R$-algebra structure on $A$. Let $C_A,C_R$ be the categories of unbounded cochain complexes of modules over these rings, and $D_A,D_R$ their derived categories [def-weil-abstract-derived-category]. Write $T(P,N)=\\operatorname{Tot}(P\\otimes_A N)$ and $S(N,F)=\\operatorname{Tot}(N\\otimes_R F)$ with its $A$-action through $N$ [def-pc-mixed-total-tensor]. Define $L_c(P,N,F)=S(T(P,N),F)$ and $U_c(P,N,F)=T(P,S(N,F))$. Let $J:(\\mathcal K_A\\times\\mathcal K_A)\\times\\mathcal K_R\\to(C_A\\times C_A)\\times C_R$ include the full subcategories of K-flat complexes [def-pc-module-kflat-complex], $Q:C_A\\to D_A$ be the quotient functor, and $Q_p$ apply the quotient in all three variables. For every natural isomorphism $\\alpha:L_c\\cong U_c$, there exist functors $L,U:(D_A\\times D_A)\\times D_R\\to D_A$, natural isomorphisms $\\beta_L:J L_c Q\\cong J Q_p L$ and $\\beta_U:J U_c Q\\cong J Q_p U$, and a natural isomorphism $\\gamma:L\\cong U$, satisfying $\\beta_{L,X};\\gamma_{Q_p(JX)}=Q(\\alpha_{JX});\\beta_{U,X}$ for every K-flat triple $X$.",
+ "stmt_deps": [
+  "def-pc-mixed-total-tensor",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYJ; Section 06Y5; https://stacks.math.columbia.edu/tag/0BYJ and https://stacks.math.columbia.edu/tag/06Y5"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "proof": [
+  {
+   "text": "For Lc restricted to K-flat triples, quasi-isomorphisms in either A-variable remain quasi-isomorphisms under T by K-flatness of the other factor, and then under S by clause (ii) of the mixed tensor preservation theorem, transported through the signed flip. Quasi-isomorphisms between K-flat R-complexes remain quasi-isomorphisms under S for any fixed T(P,N), by clause (i). Thus Q Lc inverts componentwise quasi-isomorphisms. Naturality of alpha gives the same property for Q Uc by conjugation. No K-flatness of S(N,F) or flatness of A over R is assumed.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For ModuleCat A and ModuleCat R, ModuleCat.hasFunctorialFlatResolution supplies functorial flat resolutions. Apply the source-library localizerMorphismKFlat.isLocalizedEquivalence_of_functorial_left_resolutions and the generic localization-composition criterion, as in the proved sheaf KFlatBifunctorIsoDescent implementation: each K-flat inclusion followed by Q is a localization at K-flat quasi-isomorphisms. This uses ordinary-module K-flatness, not the sheaf criterion. The product localization therefore lifts the two restricted functors and supplies betaL,betaU. Full faithfulness of precomposition with localization lifts the restricted alpha and its inverse, giving gamma and precisely its comparison equation. Equivalently curry and use Localization.lift₃NatIso.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYJ, expanded associativity proof and Section 06Y5 K-flat construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural associativity of total tensor complexes with mixed coefficient rings",
+   "results": "HomologicalComplex.mapBifunctorAssociator and its summand equation; no mixed natural chain isomorphism or derived descent package",
+   "date": "2026-10-13",
+   "verdict": "generalization for components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorAssociator, _ = _",
+   "results": "0 hits; bare-name query returns the component isomorphism",
+   "date": "2026-10-13",
+   "verdict": "no naturality or descent match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorAssociator.*natur|mixed.*Associator",
+   "results": "Only the internal differential proof at BifunctorAssociator.lean:804; GradedObject.Monoidal.associator_naturality treats the ordinary same-category tensor",
+   "date": "2026-10-13",
+   "verdict": "no mixed trifunctor naturality or descent match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of associativity isomorphism of total tensor complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator",
+  "group": "Q3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof step: single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA), using transitivity of tensor product; mixed total tensor associator descent",
+   "via": [
+    "lem-pc-kflat-derived-tensor-associator",
+    "lem-pc-derived-tensor-transitivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.MixedTotalTensorAssociatorDescent",
+  "file": "lean/Sheaf/Algebra/Homology/MixedTotalTensorAssociatorDescent.lean",
+  "declaration": "DerivedCategory.exists_mixedTotalTensorAssociator_descent",
+  "statement": "theorem exists_mixedTotalTensorAssociator_descent\n    (R A : Type u) [CommRing R] [CommRing A] [Algebra R A]\n    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{wR} (ModuleCat.{u} R)] :\n    let CA := CochainComplex (ModuleCat.{u} A) ℤ\n    let CR := CochainComplex (ModuleCat.{u} R) ℤ\n    let DA := DerivedCategory (ModuleCat.{u} A)\n    let DR := DerivedCategory (ModuleCat.{u} R)\n    let T := (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex\n    let S := ModuleCat.mixedTotalTensor (algebraMap R A)\n    let Lc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₁₂ T S))\n    let Uc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₂₃ T S))\n    let KA := CochainComplex.KFlat (ModuleCat.{u} A)\n    let KR := CochainComplex.KFlat (ModuleCat.{u} R)\n    let J : ((KA × KA) × KR) ⥤ ((CA × CA) × CR) :=\n      ((CochainComplex.ιKFlat (ModuleCat.{u} A)).prod\n        (CochainComplex.ιKFlat (ModuleCat.{u} A))).prod\n          (CochainComplex.ιKFlat (ModuleCat.{u} R))\n    let Qp : ((CA × CA) × CR) ⥤ ((DA × DA) × DR) :=\n      ((Q (C := ModuleCat.{u} A)).prod (Q (C := ModuleCat.{u} A))).prod\n        (Q (C := ModuleCat.{u} R))\n    ∀ α : Lc ≅ Uc,\n      ∃ (L U : ((DA × DA) × DR) ⥤ DA)\n        (βL : J ⋙ Lc ⋙ Q ≅ J ⋙ Qp ⋙ L)\n        (βU : J ⋙ Uc ⋙ Q ≅ J ⋙ Qp ⋙ U) (γ : L ≅ U),\n        (∀ X : (KA × KA) × KR,\n          (βL.hom.app X) ≫ γ.hom.app (Qp.obj (J.obj X)) =\n            Q.map (α.hom.app (J.obj X)) ≫ βU.hom.app X)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100102-L-2479267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100102-L-2479267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

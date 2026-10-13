@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-mixed-total-tensor-associator-naturality",
+ "kind": "statement",
+ "title": "Naturality of the canonical mixed total-complex associator",
+ "statement": "Let $R,A$ be commutative rings with an $R$-algebra structure on $A$. Let $T$ be total tensor over $A$ and $S$ mixed total tensor with the $A$-action on its first factor [def-pc-mixed-total-tensor]. For triples $X,Y$ of two unbounded $A$-complexes and one unbounded $R$-complex and a triple of chain maps $f:X\\to Y$, let $a_X$ denote the canonical chain associator obtained from the ordinary module associator by Mathlib's total bifunctor construction [lem-pc-kflat-total-tensor-associativity]. Set $L_c(X)=S(T(X_1,X_2),X_3)$ and $U_c(X)=T(X_1,S(X_2,X_3))$. Then $L_c(f);a_Y=a_X;U_c(f)$. No K-flatness or boundedness assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-mixed-total-tensor",
+  "lem-pc-kflat-total-tensor-associativity"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYJ; Section 06Y5; https://stacks.math.columbia.edu/tag/0BYJ and https://stacks.math.columbia.edu/tag/06Y5"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "proof": [
+  {
+   "text": "Construct the module rebracketing isomorphism, natural in the three modules, with extension of scalars in the R-module argument. Apply Mathlib mapBifunctorAssociator to obtain the chain isomorphism and its triple summand equation.",
+   "uses": [
+    "lem-pc-kflat-total-tensor-associativity",
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each degree the triple summand inclusions jointly determine maps, since tensoring with a fixed A-module preserves coproducts. Precompose the naturality equation with each summand inclusion. The chain maps act by their three degreewise components. The associator acts by ordinary rebracketing. Module associator naturality equates the resulting composites. Equality in every degree proves equality of chain maps. The construction already commutes with differentials; no boundedness is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-total-tensor-associativity",
+  "def-pc-mixed-total-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYJ, expanded associativity proof and Section 06Y5 K-flat construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural associativity of total tensor complexes with mixed coefficient rings",
+   "results": "HomologicalComplex.mapBifunctorAssociator and its summand equation; no mixed natural chain isomorphism or derived descent package",
+   "date": "2026-10-13",
+   "verdict": "generalization for components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorAssociator, _ = _",
+   "results": "0 hits; bare-name query returns the component isomorphism",
+   "date": "2026-10-13",
+   "verdict": "no naturality or descent match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorAssociator.*natur|mixed.*Associator",
+   "results": "Only the internal differential proof at BifunctorAssociator.lean:804; GradedObject.Monoidal.associator_naturality treats the ordinary same-category tensor",
+   "date": "2026-10-13",
+   "verdict": "no mixed trifunctor naturality or descent match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of associativity isomorphism of total tensor complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator",
+  "group": "Q3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof step: single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA), using transitivity of tensor product; mixed total tensor associator naturality",
+   "via": [
+    "lem-pc-kflat-derived-tensor-associator",
+    "lem-pc-derived-tensor-transitivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.MixedTotalTensorAssociatorNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/MixedTotalTensorAssociatorNaturality.lean",
+  "declaration": "DerivedCategory.mixedChainAssociator_naturality",
+  "statement": "theorem mixedChainAssociator_naturality :\n    let T := (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex\n    let S := ModuleCat.mixedTotalTensor (algebraMap R A)\n    let Lc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₁₂ T S))\n    let Uc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₂₃ T S))\n    ∀ X Y (f : X ⟶ Y),\n      Lc.map f ≫ (mixedChainAssociator R A Y.1.1 Y.1.2 Y.2).hom =\n        (mixedChainAssociator R A X.1.1 X.1.2 X.2).hom ≫ Uc.map f",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13",
+  "declarations": [
+   "DerivedCategory.mixedModuleAssociator",
+   "DerivedCategory.mixedChainAssociator",
+   "DerivedCategory.mixedChainAssociator_summand",
+   "DerivedCategory.mixedChainAssociator_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100102-L-2479267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100102-L-2479267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
