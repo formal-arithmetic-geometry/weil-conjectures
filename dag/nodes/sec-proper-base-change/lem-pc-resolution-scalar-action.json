@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-resolution-scalar-action",
+ "kind": "statement",
+ "title": "Multiplication on derived global sections",
+ "statement": "Let $X$ be a scheme, $M$ an $\\mathcal O_X$-module, $I$ an injective resolution of $M$ [def-sp-injective-resolutions], $p\\in\\mathbb N$, and $a\\in\\Gamma(X,\\mathcal O_X)$. For every $x\\in H^p_{\\mathrm{Mod}}(X,M)$ [pqf-def-cohomology], the map on cohomology induced by multiplication by $a$ on $M$ takes $x$ to $a x$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Tags 01E4 and 01E5; linearity of section complexes and their cohomology"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Multiplication by the global section termwise on an injective resolution lifts\nmultiplication on the resolved module, by naturality of multiplication. After global\nsections this is scalar multiplication on the complex. Homology preserves this scalar\nendomorphism, and naturality of the linear resolution comparison gives the result.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sp-derived-well-defined",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sp-derived-well-defined",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 01E4 and 01E5",
+  "place": "Explicit scalar endomorphism argument for the normalized section comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "results": "1 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "no exact section comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived global sections cohomology map induced by multiplication by scalar is scalar multiplication",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.Hom.app_smul, AlgebraicGeometry.Scheme.Modules.map_smul, CochainComplex.HomComplex.Cocycle.coe_smul, CochainComplex.HomComplex.Cocycle.instSMul, CochainComplex.HomComplex.Cocycle.coe_units_smul, CategoryTheory.sheafHomHasZSMul, CochainComplex.HomComplex.Cochain.units_smul_comp, CochainComplex.HomComplex.Cochain.comp_units_smul",
+   "date": "2026-10-13",
+   "verdict": "no exact section comparison statement"
+  },
+  {
+   "tool": "grep",
+   "query": "smulHom|map_smul",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact section comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homology map of a semilinear chain map is semilinear",
+   "results": "8 hits: CategoryTheory.ShortComplex.homologyMap'_smul, CategoryTheory.ShortComplex.homologyMap_smul, CategoryTheory.ShortComplex.HomologyMapData.smul, CategoryTheory.ShortComplex.leftHomologyMap'_smul, CategoryTheory.ShortComplex.leftHomologyMap_smul, CategoryTheory.ShortComplex.rightHomologyMap'_smul, CategoryTheory.ShortComplex.RightHomologyMapData.smul, CategoryTheory.ShortComplex.rightHomologyMap_smul",
+   "date": "2026-10-13",
+   "verdict": "no exact section comparison statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.homologyMap_smul",
+   "results": "1 hits: CategoryTheory.ShortComplex.homologyMap_smul",
+   "date": "2026-10-13",
+   "verdict": "no exact section comparison statement"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_hom_naturality",
+   "results": "3 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact section comparison statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homology of semilinear maps of complexes of modules preserves scalar multiplication",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local reduction in the flat base-change input to the formal-functions stalk comparison: normalized source and target cohomology identifications before choosing a lift. Source affine dictionary: normalized affine Leray edge before tensor extension. Tags 01E4 and 01E5; multiplication naturality of the cocycle-to-homology-sheaf map; scalar action on derived global sections",
+   "via": [
+    "lem-pc-resolution-section-scalar-map",
+    "new-affine-cohomology-section-equiv",
+    "new-flat-base-change-affine-source",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionScalarAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionScalarAction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomology_map_smulHom",
+  "statement": "theorem moduleCohomology_map_smulHom {X : Scheme.{u}} (M : X.Modules)\n    (I : InjectiveResolution M) (p : ℕ) (a : Γ(X, ⊤))\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj M) :\n    ((RingedSpace.moduleCohomology X.toRingedSpace p).map (M.smulHom a)).hom x = a • x",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100104-L-2479909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100104-L-2479909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

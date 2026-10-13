@@ -14,32 +14,24 @@
  ],
  "proof": [
   {
-   "text": "For a in Gamma(S,V), the canonical chart and GammaSpecIso cancel, so the displayed b is the section pullback along f followed by restriction to U. On R.resolution lift multiplication by b on M. Multiplication on the restricted original resolution gives another lift of the same endomorphism; the augmentation equation identifies them on M. The comparison theorem for injective resolutions makes these lifts homotopic, so they induce equal cohomology endomorphisms. R.components identifies their section-complex maps and naturality of isoRightDerivedObj identifies the derived endomorphism with C(mu_b).",
+   "text": "Apply moduleCohomology_map_smulHom to identify the cohomology endomorphism with multiplication by b. The linear module-valued isoRightDerivedObj preserves b. Apply resolutionSectionsHomology_scalar to transport b across the section homology comparison. Apply sectionCohomologyTheta and the inverse higher direct image resolution comparison; both are module morphisms on V and hence preserve multiplication by a. These identities compose to the claimed equality.",
    "uses": [
-    "def-weil-pbc-flat-base-change-open-choices",
-    "def-sp-injective-resolutions",
-    "lem-sp-derived-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On sections over V of the direct-image complex the endomorphism just described is multiplication by a. Exact evaluation and the homology comparison preserve that endomorphism. The presheaf module morphism sectionCohomologyTheta and the inverse sheaf-module resolution comparison are linear on V, hence preserve multiplication by a. Composing these identities gives c(C(mu_b)(x))=a*c(x). Degree zero is ordinary multiplication on sections, and empty opens or zero modules give the zero identity.",
-   "uses": [
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-sp-derived-well-defined"
+    "lem-pc-resolution-scalar-action",
+    "lem-pc-resolution-sections-homology-scalar",
+    "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-flat-base-change-open-choices",
-  "lem-sp-derived-well-defined"
+  "lem-pc-resolution-scalar-action",
+  "lem-pc-resolution-sections-homology-scalar",
+  "def-weil-pbc-flat-base-change-open-choices"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 01F4, 01XJ, 01E4 and 01E5",
-  "place": "Tags 01E4 and 01E5; multiplication naturality of the cocycle-to-homology-sheaf map; explicit normalization argument for the existing resolutionSectionClass definition"
+  "document": "Stacks Project, Tags 01E4 and 01E5",
+  "place": "Factor through module-valued derived scalar action, semilinear section homology transport, and the two linear final maps."
  },
  "mathlib_searches": [
   {
@@ -135,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T045521-L-126743",
+  "landing": "20261013T100104-L-2479909",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

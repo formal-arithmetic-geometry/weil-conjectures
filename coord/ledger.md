@@ -11943,3 +11943,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/Q3/Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator (stage 3; reviewer PASS; first push; landing 20261013T100102-L-2479267 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.GroupScheme.InvariantCoefficients (stage 3; reviewer PASS; first push; landing 20261013T100103-L-2479491 (proof); batch 20261013T095923; modules 1; new nodes 1)
 - 10:01 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare (stage 3; reviewer PASS; first push; landing 20261013T100104-L-2479691 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:01 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap (stage 3; reviewer PASS; first push; landing 20261013T100104-L-2479909 (interface); batch 20261013T095923; modules 3; new nodes 2)
