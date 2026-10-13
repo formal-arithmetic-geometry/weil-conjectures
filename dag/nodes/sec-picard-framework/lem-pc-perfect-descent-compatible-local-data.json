@@ -15,49 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Restrict E to the inverse images of W and V. The inverse-image opens give presentations into Xi of precisely W and V. Use the two descent hypotheses and preservation of perfectness under derived open pullback. Move both descended objects to a common later index using directedness, the coherent composition comparisons, and derivedPullback_preserve_perfect. Base change identifies these objects with perfect A and B on a two-open cover of the stage scheme.",
+   "text": "The image W union V is compact. The open embedding f reflects compactness of the whole source, so Z is compact. Since s has affine target and is quasi-separated, Xi is quasi-separated; quasiCompact_of_compactSpace therefore makes f quasi-compact. Composition with the open immersion f preserves local finite presentation, quasi-compactness and quasi-separatedness. These are the hypotheses needed for the eventual-compatibility lemma applied to t=f followed by s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply perfect_descent_common_local_models to dW, dV and E. Destructure the resulting common stage j, compact covering opens U,V, perfect local objects A,B and their two limit comparison isomorphisms.",
    "uses": [
-    "def-pc-perfect-descent-on-open",
-    "lem-pc-derived-pullback-perfect",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-pullback-open-restriction-universes"
+    "lem-pc-perfect-descent-common-local-models"
    ],
    "elementary": false
   },
   {
-   "text": "The stage scheme is finitely presented over its ring: its open in Xi is quasi-compact by compactness of W and affineness of V. Quasi-separatedness implies the intersection of the stage cover opens is quasi-compact; its open immersion is locally of finite presentation, so its structure map is finitely presented. Restrict A and B to this overlap. Apply perfect_descend_morphisms on a tail of the system to their limit comparison and choose an isomorphism lift; its equality clause stabilizes the two inverse equations. Identify the pullback of this overlap isomorphism e with the original comparison using the coherent composition maps.",
+   "text": "Apply perfect_local_models_eventually_compatible to t, j, the compact cover, the two perfect objects and their limit comparisons. It supplies k≥j with PerfectOpenGluingData for the canonical map indexed by i≤j≤k. Return k and the transitive inequality; the displayed map is definitionally the required canonical map.",
    "uses": [
-    "lem-pc-perfect-descend-morphisms",
-    "lem-pc-derived-pullback-perfect",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose the global derived adjunction and the canonical pullback/open-restriction comparisons. Derived direct image commutes with restriction to an open. Under these comparisons the local adjoints of the limit isomorphisms give a and b into the restrictions of Rg_*E. Adjunction naturality and the limit image of e identify the two overlap maps. The restricted counit formula recovers the original local comparison isomorphisms, so the two explicit IsIso clauses hold. These objects, maps and equations are exactly PerfectOpenGluingData, with no use of the global gluing theorem.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "def-pc-perfect-open-gluing-data"
+    "lem-pc-perfect-local-models-eventually-compatible"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-descent-on-open",
-  "def-pc-perfect-open-gluing-data",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-derived-pullback-perfect",
-  "lem-pc-perfect-descend-morphisms",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-perfect-descent-common-local-models",
+  "lem-pc-perfect-local-models-eventually-compatible"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RF, two-open induction, local objects and maps a, b, c before invoking Tag 08DG"
+  "place": "Tag 09RF, two-open induction: first choose common local stage models, then descend their overlap and take compatible adjoints"
  },
  "mathlib_searches": [
   {
@@ -168,9 +152,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T100144-L-2492201",
+  "landing": "20261013T123203-L-3675914",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

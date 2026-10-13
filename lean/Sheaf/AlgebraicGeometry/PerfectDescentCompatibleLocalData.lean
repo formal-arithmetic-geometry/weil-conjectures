@@ -8,11 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectDescentOnOpen
 public import Sheaf.AlgebraicGeometry.PerfectOpenGluingData
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.PerfectDescentCommonLocalModels
+import Sheaf.AlgebraicGeometry.PerfectLocalModelsEventuallyCompatible
 
 /-! # Compatible local descent data at a common finite stage
 
@@ -75,6 +72,25 @@ theorem perfect_descent_compatible_local_data
         (T' := Over.mk (Spec.map (c.ι.app i)))
         (Over.homMk (Spec.map (c.ι.app j))
           (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))
-      PerfectOpenGluingData g E := by sorry
+      PerfectOpenGluingData g E := by
+  have hrange : IsCompact (Set.range f) := by
+    change IsCompact (f.opensRange : Set Xi)
+    rw [hf]
+    exact hW.union hV.isCompact
+  have hZ : CompactSpace Z := by
+    rw [← isCompact_univ_iff]
+    apply f.isOpenEmbedding.isEmbedding.isCompact_iff.mpr
+    simpa only [Set.image_univ] using hrange
+  let : CompactSpace Z := hZ
+  let : QuasiSeparatedSpace Xi := quasiSeparatedSpace_of_quasiSeparated s
+  let : QuasiCompact f := quasiCompact_of_compactSpace f
+  let : LocallyOfFinitePresentation (f ≫ s) := inferInstance
+  let : QuasiCompact (f ≫ s) := inferInstance
+  let : QuasiSeparated (f ≫ s) := inferInstance
+  obtain ⟨j, hij, U, V, hcover, hU, hV, A, B, hA, hB, ⟨φU⟩, ⟨φV⟩⟩ :=
+    perfect_descent_common_local_models R c i Xi s W V hW hV dW dV Z f hf E hE
+  obtain ⟨k, hjk, hdata⟩ := perfect_local_models_eventually_compatible
+    R c hc i Z (f ≫ s) j hij U V hcover hU hV A B hA hB E φU φV
+  exact ⟨k, hij.trans hjk, hdata⟩
 
 end AlgebraicGeometry

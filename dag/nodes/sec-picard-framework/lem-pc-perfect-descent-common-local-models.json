@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-perfect-descent-common-local-models",
+ "kind": "statement",
+ "title": "Two local perfect models at a common stage",
+ "statement": "Let I be a directed preorder, R:I → CommRingCat a system of Noetherian rings, c a cocone, i an index, and s:Xi → Spec R_i locally of finite presentation, quasi-compact and quasi-separated. Choose shared derived module categories on schemes and their open localizations [def-pc-derived-category]. Let W,V be opens of Xi, W compact and V affine, with PerfectDescentOnOpen R c i Xi s W and PerfectDescentOnOpen R c i Xi s V [def-pc-perfect-descent-on-open]. Let f:Z → Xi be an open immersion with image W union V, t=f followed by s, and E a perfect complex on X=Z times_{R_i} c.pt [def-pc-perfect-complex]. Then some j≥i admits a two-open cover U,V of Y=Z times_{R_i} R_j with U and V compact, perfect objects A on U and B on V, and isomorphisms L(g_j|U)^*A ≅ E|_{g_j inverse U} and L(g_j|V)^*B ≅ E|_{g_j inverse V}, using canonical derived open restriction [def-pc-derived-open-restriction-maps] and the canonical base-change map g_j induced by c_j. No colimit proof, overlap isomorphism, or direct-image adjoint map is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, choice of the two local perfect stage objects in the two-open induction"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-descent-on-open",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Pull back W and V to Z and to its limit base change. Their inverse images cover, and the restricted presentations into Xi have precisely images W and V since the image of f is their union. Restriction preserves perfectness by the open pullback comparison and preservation of perfectness. Apply the two descent hypotheses separately to these restricted perfect objects.",
+   "uses": [
+    "def-pc-perfect-descent-on-open",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an upper bound of the two descent stages and pull both stage objects back there. Derived pullback preserves perfectness. Cartesian restriction identifications and the coherent pullback composition isomorphisms transport the two limit comparisons to exactly the displayed local pullback isomorphisms.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compact union W union V is the image of the open embedding f, so Z is compact. Xi is quasi-separated since s is quasi-separated over an affine base. Mathlib quasiCompact_of_compactSpace makes f quasi-compact. Thus f inverse W and f inverse V are compact. The stage projection to Z is affine, being the base change of a morphism of affine schemes, so its inverse-image opens are compact. Inverse image preserves joins and top, giving the cover.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-descent-on-open",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, choice of the two local perfect stage objects in the two-open induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on two opens descend to a common finite stage with local pullback isomorphisms",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage local-model or eventual overlap-compatibility theorem. Generic derived-category and adjunction tools do not state the geometric descent result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage local-model or eventual overlap-compatibility theorem. Generic derived-category and adjunction tools do not state the geometric descent result."
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectOpenGluingData|perfect_descent_compatible|perfect.*local.*model",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage local-model or eventual overlap-compatibility theorem. Generic derived-category and adjunction tools do not state the geometric descent result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of two local perfect complexes to a common index and eventual compatibility of their overlap isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescentCompatibleLocalData",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF, choice of the two local perfect stage objects in the two-open induction",
+   "via": [
+    "lem-pc-perfect-descent-compatible-local-data",
+    "lem-pc-perfect-descent-open-union",
+    "lem-pc-perfect-complex-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectDescentCommonLocalModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDescentCommonLocalModels.lean",
+  "declaration": "AlgebraicGeometry.perfect_descent_common_local_models",
+  "statement": "theorem perfect_descent_common_local_models\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]\n    (c : Cocone R) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (W V : Xi.Opens) (hW : IsCompact (W : Set Xi)) (hV : IsAffineOpen V)\n    (dW : PerfectDescentOnOpen R c i Xi s W)\n    (dV : PerfectDescentOnOpen R c i Xi s V)\n    (Z : Scheme.{u}) (f : Z ⟶ Xi) [IsOpenImmersion f] (hf : f.opensRange = W ⊔ V)\n    (E : schemeDerivedCategory (pullback (f ≫ s) (Spec.map (c.ι.app i))))\n    (hE : (pullback (f ≫ s) (Spec.map (c.ι.app i))).IsPerfect E) :\n    ∃ (j : I) (hij : i ≤ j),\n      let Y := pullback (f ≫ s) (Spec.map (R.map (homOfLE hij)))\n      let X := pullback (f ≫ s) (Spec.map (c.ι.app i))\n      let g := baseChangeMap (f ≫ s)\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app j))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))\n      ∃ (U V : Y.Opens), U ⊔ V = ⊤ ∧\n        IsCompact (U : Set Y) ∧ IsCompact (V : Set Y) ∧\n      ∃ (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme),\n        U.toScheme.IsPerfect A ∧ V.toScheme.IsPerfect B ∧\n        Nonempty ((derivedPullback (g ∣_ U)).obj A ≅\n          (schemeOpenRestriction X (g ⁻¹ᵁ U)).mapDerivedCategory.obj E) ∧\n        Nonempty ((derivedPullback (g ∣_ V)).obj B ≅\n          (schemeOpenRestriction X (g ⁻¹ᵁ V)).mapDerivedCategory.obj E)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T123203-L-3675914",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T123203-L-3675914",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
