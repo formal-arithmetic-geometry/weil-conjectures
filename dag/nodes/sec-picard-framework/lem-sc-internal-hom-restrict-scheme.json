@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-internal-hom-restrict-scheme",
+ "kind": "statement",
+ "title": "Internal Hom commutes naturally with scheme open restriction",
+ "statement": "Let Y be a scheme [def-pc-scheme] and U an open of Y. Let F be restriction of module sheaves to the open subscheme U. Internal Hom [def-pur-sheaf-hom] admits isomorphisms F(Hom(A,B)) ≅ Hom(FA,FB) for every pair of Y-module sheaves A,B, natural under precomposition A′ → A and postcomposition B → B′. No local freeness or finiteness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3, ordinary internal Hom restriction in its construction"
+ },
+ "proof": [
+  {
+   "text": "Restrict to the over-U site using overHomObjIso. Apply the over-open equivalence and the internal Hom comparison internalHom_overEquiv. Conjugate source and target using overFunctorEquiv U: the inverse comparison is used contravariantly in the first argument, and the forward comparison covariantly in the second argument. The two inverse identities follow from homObjMap composition and the component isomorphism identities.",
+   "uses": [
+    "lem-sc-internal-hom-over-equiv",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the naturality square for overHomObjIso_naturality with the naturality of internalHom_overEquiv, then the naturality of overFunctorEquiv. Associativity identifies the composite square with the required equation. This is a sheaf-level statement, with no complex or differential involved, and the same construction works on the empty open and zero sheaves.",
+   "uses": [
+    "lem-sc-internal-hom-over-equiv",
+    "lem-sc-internal-hom-over-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sc-internal-hom-over-equiv",
+  "lem-sc-internal-hom-over-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-13",
+  "description": "B3: proved by composing the existing over-site comparisons and the Mathlib natural isomorphism overFunctorEquiv."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of sheaves of modules commutes with restriction to an open subscheme naturally in both arguments",
+   "results": "Service unavailable: Internal Server Error. No search result or mathematical verdict was returned. The other search kinds and local source search were used.",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of internal Hom sheaves of modules along an open immersion natural in both arguments",
+   "results": "Eight hits on Scheme.Modules.restrictFunctor, restrict, restrict_map, restrictAdjunction and their component formulas; none is an internal-Hom comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": "Unknown identifier: the service does not index this upstream declaration.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homObj.*restrict|restrict.*homObj",
+   "results": "Mathlib msearch returned zero hits. Local searches found overHomObjIso, overHomObjIso_naturality and internalHom_overEquiv; these prove the present scheme restriction statement by transport, but do not already state it.",
+   "date": "2026-10-13",
+   "verdict": "use existing transport lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNaturalComponents",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-complex-restrict-scheme-natural-components",
+   "place": "factorwise restriction and compatibility with pre- and post-composition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InternalHomRestrictScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/InternalHomRestrictScheme.lean",
+  "declaration": "AlgebraicGeometry.internalHom_restrict_scheme",
+  "statement": "theorem internalHom_restrict_scheme {Y : Scheme.{u}} (U : Y.Opens) :\n    let F := Scheme.Modules.restrictFunctor U.ι\n    ∃ s : ∀ A B : Y.Modules,\n      F.obj (SheafOfModules.homObj (R := Y.toRingedSpace.sheaf) A B) ≅\n        SheafOfModules.homObj (R := U.toScheme.toRingedSpace.sheaf) (F.obj A) (F.obj B),\n      ∀ {A A' B B'} (f : A' ⟶ A) (g : B ⟶ B'),\n        F.map (SheafOfModules.homObjMap (R := Y.toRingedSpace.sheaf) f g) ≫\n            (s A' B').hom =\n          (s A B).hom ≫ SheafOfModules.homObjMap\n            (R := U.toScheme.toRingedSpace.sheaf) (F.map f) (F.map g)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aad55",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T190134-L-3214109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aad55",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T190134-L-3214109",
+  "kind": "interface",
+  "note": "independent Codex review: Both Lean statements match their nodes; the existing signature is unchanged, proof dependencies match the proofs, both delivered modules and direct importer compile cleanly, and axiom probes show only propext, Classical.choice, and Quot.sound."
+ }
+}

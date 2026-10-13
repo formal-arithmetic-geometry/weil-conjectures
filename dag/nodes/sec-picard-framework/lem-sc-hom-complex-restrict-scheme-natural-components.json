@@ -12,28 +12,46 @@
  },
  "proof": [
   {
-   "text": "Construct each chain isomorphism degreewise from restriction of local module maps and the product description of the Hom complex.",
+   "text": "Construct the natural internal-Hom comparison for Scheme.Modules.restrictFunctor U.ι from lem-sc-internal-hom-restrict-scheme. Restriction preserves integer-indexed products: reflect limits through the forgetful functor to presheaves for the over-U restriction, compose with the over-open equivalence, and transfer preservation along overFunctorEquiv U. Additivity follows from the restriction adjunction.",
    "uses": [
-    "lem-sc-hom-complex-restrict-open"
+    "lem-sc-internal-hom-restrict-scheme"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For every chain map of coefficient complexes, compare the composites after every product projection; both are restrictions of the same postcomposition map.",
-   "uses": [],
-   "elementary": false
+   "text": "Choose the product projections specified by homComplex_projections_exists on Y and U. In each degree and for each coefficient complex, use the source and target product universal properties and the factorwise internal-Hom isomorphisms to construct mutually inverse maps. Record their projection equations for arbitrary p+n=q.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-sc-internal-hom-restrict-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the two candidate differential composites with every target product projection. Expand both signed Hom differentials using homComplex_projections_exists. Additivity of restriction preserves the two summands and the integer-unit sign; the two-variable naturality of the factor comparisons identifies their pre- and post-composition terms. Product extensionality proves differential compatibility, and isoOfComponents assembles the degreewise isomorphisms.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-sc-internal-hom-restrict-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a coefficient chain map, use HomologicalComplex.hom_ext and the target product universal property. The projection specification identifies the Hom functor map as postcomposition in each factor. The projection equations for the constructed isomorphisms and naturality of the internal-Hom comparison identify the two composites. Thus the chosen chain isomorphisms are natural in the coefficient complex.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-sc-internal-hom-restrict-scheme"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-hom-complex-restrict-open"
+  "lem-sc-hom-complex-projections",
+  "lem-sc-internal-hom-restrict-scheme"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "T2",
-  "group": "T2",
+  "group": "B3",
   "date": "2026-10-13",
-  "document": "https://stacks.math.columbia.edu/tag/08DL",
-  "place": "Lemma 20.42.3"
+  "description": "B3: direct product construction over scheme module sheaves, including signed differential compatibility and coefficient naturality. The existing projection interface is named by a private proposition, re-expressed over an abstract site by a proved private conversion lemma, and used with explicit category and functor parameters inside the original theorem. This prevents repeated conversion of the concrete restriction and chosen Hom functor. Uses a proved sheaf-level transport lemma; does not use the objectwise open-restriction theorem."
  },
  "mathlib_searches": [
   {
@@ -100,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "X-aad55",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T150355-L-810807",
+  "landing": "20261013T190134-L-3214109",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Both Lean statements match their nodes; the existing signature is unchanged, proof dependencies match the proofs, both delivered modules and direct importer compile cleanly, and axiom probes show only propext, Classical.choice, and Quot.sound."
  }
 }
