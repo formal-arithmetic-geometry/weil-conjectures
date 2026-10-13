@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationaliz
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
@@ -369,21 +370,6 @@ theorem Etale.isIso_unit_app_boundedConstructibleIntegral
       (PadicAlgCl.maximalIdealShrink l E) Z).FullSubcategory) :
     IsIso (adj.unit.app Q) :=
   ObjectProperty.isIso_unit_app_of_lift h adj Q
-
-/-- The counit `i^* i_* ⟶ 𝟭` on sheaves of modules over the constant `ℓ`-adic sheaf is an
-isomorphism for a closed immersion `i`: its underlying map of sheaves of `ℚ̄_ℓ`-modules is the
-counit of `ProEtale.upperStarLowerStarAdjunction`
-(`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_counit`). -/
-instance ProEtale.isIso_adicUpperStarLowerStarAdjunction_counit :
-    IsIso (ProEtale.adicUpperStarLowerStarAdjunction l i).counit := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro N
-  have : IsIso ((ProEtale.adicUpperStarLowerStarAdjunction l i).counit.app N).hom := by
-    rw [ProEtale.adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_counit_app_hom]
-    infer_instance
-  have : IsIso ((ProEtale.AdicSheaf.forget Z).map
-      ((ProEtale.adicUpperStarLowerStarAdjunction l i).counit.app N)) := this
-  exact isIso_of_reflects_iso _ (ProEtale.AdicSheaf.forget Z)
 
 instance ProEtale.full_adicLowerStar : (ProEtale.adicLowerStar l i).Full :=
   (ProEtale.adicUpperStarLowerStarAdjunction l i).fullyFaithfulROfIsIsoCounit.full

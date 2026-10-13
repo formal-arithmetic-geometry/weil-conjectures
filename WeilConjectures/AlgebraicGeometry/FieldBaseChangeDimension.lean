@@ -98,4 +98,25 @@ theorem topologicalKrullDim_pullback_le {X Y : Scheme.{u}} (f : X ⟶ Y)
         IsHomeomorph.topologicalKrullDim_eq _ (f.fiberHomeo y).isHomeomorph
       _ ≤ topologicalKrullDim X := topologicalKrullDim_subspace_le _ _
 
+/-- **Dimension of a field-valued fibre.** For `f : X ⟶ Y` locally of finite type and
+`s : Spec K ⟶ Y` with `K` a field, lying over `y ∈ Y`, `dim (X ×_Y Spec K) ≤ dim f⁻¹(y)`:
+`X ×_Y Spec K` is the base change of the fibre `f⁻¹(y)` along `κ(y) → K`. -/
+theorem topologicalKrullDim_pullback_le_preimage {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [LocallyOfFiniteType f] {K : Type u} [Field K] (s : Spec (.of K) ⟶ Y) :
+    topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤
+      topologicalKrullDim (f ⁻¹' {s.base (IsLocalRing.closedPoint K)}) := by
+  obtain ⟨⟨y, t⟩, rfl⟩ := (Scheme.SpecToEquivOfField K Y).symm.surjective s
+  have hy : ((Scheme.SpecToEquivOfField K Y).symm ⟨y, t⟩).base (IsLocalRing.closedPoint K) = y := by
+    simp [Scheme.SpecToEquivOfField_symm_apply]
+  calc topologicalKrullDim (pullback f (Spec.map t ≫ Y.fromSpecResidueField y) : Scheme.{u})
+      _ = topologicalKrullDim (pullback (pullback.snd f (Y.fromSpecResidueField y)) (Spec.map t) :
+          Scheme) :=
+        (IsHomeomorph.topologicalKrullDim_eq _ (pullbackLeftPullbackSndIso f
+          (Y.fromSpecResidueField y) (Spec.map t)).hom.homeomorph.isHomeomorph).symm
+      _ ≤ topologicalKrullDim (f.fiber y) :=
+        topologicalKrullDim_pullback_le_of_field (k := Y.residueField y) _ _
+      _ = _ := by
+        rw [hy]
+        exact IsHomeomorph.topologicalKrullDim_eq _ (f.fiberHomeo y).isHomeomorph
+
 end AlgebraicGeometry
