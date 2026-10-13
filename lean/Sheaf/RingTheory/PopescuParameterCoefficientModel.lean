@@ -10,15 +10,9 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothBaseChange
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
 import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
+import Sheaf.RingTheory.PopescuRescaledCoefficientChart
+import Mathlib.RingTheory.RingHom.FaithfullyFlat
 
 /-!
 # Rescaled parameters and their Artinian coefficient model
@@ -33,6 +27,22 @@ set_option autoImplicit false
 
 universe u v w
 namespace Algebra
+
+private theorem kernel_pow_eq_kernel
+    {R : Type*} [CommRing R] {M : Type*} [AddCommGroup M] [Module R M]
+    (t : R) (h : ∀ x : M, t • x = 0 ↔ t ^ 2 • x = 0)
+    (n : ℕ) (hn : 0 < n) (x : M) : t ^ n • x = 0 ↔ t • x = 0 := by
+  induction n generalizing x with
+  | zero => omega
+  | succ n ih =>
+    cases n with
+    | zero => simp
+    | succ n =>
+      calc
+        t ^ (n + 1 + 1) • x = 0 ↔ t ^ (n + 1) • (t • x) = 0 := by
+          rw [pow_succ, mul_smul]
+        _ ↔ t • (t • x) = 0 := ih (by omega) (t • x)
+        _ ↔ t • x = 0 := by simpa [pow_two, mul_smul] using (h x).symm
 
 /-- Construct rescaled parameters and the coefficient model before solving the polynomial
 coefficient equations. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
@@ -142,6 +152,146 @@ theorem exists_popescu_parameter_coefficient_model
               (∀ x, b (MvPolynomial.C (f₀ x)) =
                 Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧
               (∀ ij, b (MvPolynomial.C (coeff ij)) =
-                Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by sorry
+                Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by
+  classical
+  obtain ⟨r, f, hf, _⟩ := FinitePresentation.out (R := k) (A := A)
+  let n₀ := N + d * (8 * c)
+  have hn₀ : 1 ≤ n₀ := by dsimp [n₀]; omega
+  let ρ : Fin r → Localization.AtPrime q.asIdeal ⧸
+      (q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^ n₀ :=
+    fun i ↦ Ideal.Quotient.mk _
+      (algebraMap Λ (Localization.AtPrime q.asIdeal) (α (f (MvPolynomial.X i))))
+  obtain ⟨m₀, φ₀, ψ₀, hψ₀, hideal₀, hflat₀, localP₀, artP₀, localB₀, artB₀,
+    D₀, ringD₀, algD₀, g₀, localD₀, artD₀, localAlgD₀, localg₀,
+    hsmooth₀, hgflat₀, hfactor₀, hinc₀⟩ :=
+    exists_essentiallySmooth_artinian_factorization_mod_prime_pow
+      k Λ p hp hreg q.asIdeal n₀ hn₀ (Finset.univ.image ρ)
+  let : CommRing D₀ := ringD₀
+  let : IsLocalRing D₀ := localD₀
+  let : IsArtinianRing D₀ := artD₀
+  let : Algebra _ D₀ := algD₀
+  let : IsLocalHom (algebraMap _ D₀) := localAlgD₀
+  let : IsLocalHom g₀ := localg₀
+  have hgenerators : ∀ i : Fin r, ρ i ∈ Set.range g₀ := by
+    intro i
+    exact hinc₀ _ (Finset.mem_image.mpr ⟨i, Finset.mem_univ i, rfl⟩)
+  obtain ⟨m, algR, towerkR, algSR, towerkSR, algSL, towerSRL, towerkSL,
+    ell, τ, heq, hτ, hq, hkerR, hkerΛ, n, hn, hbound, I₀, K,
+    hI₀, hK, hIK, D', ringD, localD, artD, algkD, algRE, algQE,
+    towerRQE, algSE, towerSRE, algkE, towerkSE, hsmooth,
+    towerkDE, f₀, g, u₀, δ, coeff, localB, localg, hgflat, hX, hcompat, hf₀, hcoeff⟩ :=
+    exists_popescu_rescaled_coefficient_chart p hp α q hreg N hN hpower d hd s a ha c hc
+      r f hf m₀ φ₀ ψ₀ hψ₀ hideal₀ hflat₀ D₀ g₀ hsmooth₀ hgflat₀ hfactor₀ hgenerators
+  let R := MvPolynomial (Fin m) k
+  let S := MvPolynomial (Fin d) k
+  let L := Localization.AtPrime q.asIdeal
+  let E := MvPolynomial (Fin d) D'
+  let : CommRing D' := ringD
+  let : IsLocalRing D' := localD
+  let : IsArtinianRing D' := artD
+  let : Algebra R Λ := algR
+  let : IsScalarTower k R Λ := towerkR
+  let : Algebra S R := algSR
+  let : IsScalarTower k S R := towerkSR
+  let : Algebra S Λ := algSL
+  let : IsScalarTower S R Λ := towerSRL
+  let : IsScalarTower k S Λ := towerkSL
+  let : Algebra k D' := algkD
+  let : Algebra R E := algRE
+  let : Algebra (R ⧸ I₀) E := algQE
+  let : IsScalarTower R (R ⧸ I₀) E := towerRQE
+  let : Algebra S E := algSE
+  let : IsScalarTower S R E := towerSRE
+  let : Algebra k E := algkE
+  let : IsScalarTower k S E := towerkSE
+  let : IsScalarTower k D' E := towerkDE
+  let : IsLocalRing (L ⧸ K) := localB
+  let : IsLocalHom g := localg
+  let π : Fin (d + 1) → R := fun i ↦ τ i ^ c
+  have hπ (i : Fin (d + 1)) : π i = 0 ∨
+      ∃ j : Fin d, π i = algebraMap S R (MvPolynomial.X j ^ c) := by
+    rcases hτ i with hzero | ⟨j, hj⟩
+    · left
+      simp [π, hzero, Nat.ne_of_gt hc]
+    · right
+      refine ⟨j, ?_⟩
+      exact (congrArg (fun z : R ↦ z ^ c) hj).trans
+        (map_pow (algebraMap S R) (MvPolynomial.X j) c).symm
+  have hπq (i : Fin (d + 1)) : algebraMap R Λ (π i) ∈ q.asIdeal := by
+    simpa only [π, map_pow] using q.asIdeal.pow_mem_of_mem (hq i) c hc
+  have hJR (i : Fin (d + 1)) :
+      Ideal.span {y : R | ∃ j : Fin (d + 1), j.val < i.val ∧ y = π j ^ 8} =
+      Ideal.span {y : R | ∃ j : Fin (d + 1), j.val < i.val ∧ y = τ j ^ (c * 8)} := by
+    congr 1
+    ext y
+    constructor
+    · rintro ⟨j, hj, rfl⟩
+      exact ⟨j, hj, (pow_mul (τ j) c 8).symm⟩
+    · rintro ⟨j, hj, rfl⟩
+      exact ⟨j, hj, pow_mul (τ j) c 8⟩
+  have hJΛ (i : Fin (d + 1)) :
+      Ideal.span {y : Λ | ∃ j : Fin (d + 1), j.val < i.val ∧
+        y = algebraMap R Λ (π j) ^ 8} =
+      Ideal.span {y : Λ | ∃ j : Fin (d + 1), j.val < i.val ∧
+        y = algebraMap R Λ (τ j) ^ (c * 8)} := by
+    congr 1
+    ext y
+    have hp (j : Fin (d + 1)) :
+        algebraMap R Λ (π j) ^ 8 = algebraMap R Λ (τ j) ^ (c * 8) := by
+      rw [show π j = τ j ^ c from rfl, map_pow, ← pow_mul]
+    constructor
+    · rintro ⟨j, hj, rfl⟩
+      exact ⟨j, hj, hp j⟩
+    · rintro ⟨j, hj, rfl⟩
+      exact ⟨j, hj, (hp j).symm⟩
+  have hπkerR (i : Fin (d + 1))
+      (x : R ⧸ Ideal.span {y | ∃ j : Fin (d + 1), j.val < i.val ∧ y = π j ^ 8}) :
+      π i • x = 0 ↔ π i ^ 2 • x = 0 := by
+    revert x
+    rw [hJR i]
+    intro x
+    change τ i ^ c • x = 0 ↔ (τ i ^ c) ^ 2 • x = 0
+    rw [← pow_mul]
+    exact (kernel_pow_eq_kernel (τ i) (hkerR i) c hc x).trans
+      (kernel_pow_eq_kernel (τ i) (hkerR i) (c * 2) (by omega) x).symm
+  have hπkerΛ (i : Fin (d + 1))
+      (x : Λ ⧸ Ideal.span {y | ∃ j : Fin (d + 1), j.val < i.val ∧
+        y = algebraMap R Λ (π j) ^ 8}) :
+      π i • x = 0 ↔ π i ^ 2 • x = 0 := by
+    revert x
+    rw [hJΛ i]
+    intro x
+    change τ i ^ c • x = 0 ↔ (τ i ^ c) ^ 2 • x = 0
+    rw [← pow_mul]
+    exact (kernel_pow_eq_kernel (τ i) (hkerΛ i) c hc x).trans
+      (kernel_pow_eq_kernel (τ i) (hkerΛ i) (c * 2) (by omega) x).symm
+  let ev : E →+* L ⧸ K := MvPolynomial.eval₂Hom g (fun i ↦ g (δ i : D'))
+  let b : E →ₐ[R] L ⧸ K := { ev with commutes' := hcompat }
+  have hinjg : Function.Injective g := by
+    let : Algebra D' (L ⧸ K) := g.toAlgebra
+    let : IsLocalHom (algebraMap D' (L ⧸ K)) := localg
+    have : Module.Flat D' (L ⧸ K) := hgflat
+    have : Module.FaithfullyFlat D' (L ⧸ K) :=
+      Module.FaithfullyFlat.of_flat_of_isLocalHom
+    exact FaithfulSMul.algebraMap_injective D' (L ⧸ K)
+  have hbC (z : D') : b (MvPolynomial.C z) = g z := by
+    exact MvPolynomial.eval₂Hom_C g _ z
+  refine ⟨m, algR, towerkR, algSR, towerkSR, algSL, towerSRL, towerkSL,
+    ell, π, heq, hπ, hπq, hπkerR, hπkerΛ, n, hn, ?_, I₀, K,
+    ?_, ?_, hIK, D', ringD, localD, artD, algkD, algRE, algQE,
+    towerRQE, algSE, towerSRE, algkE, towerkSE, hsmooth,
+    towerkDE, f₀, b, u₀, δ, coeff, ?_, hX, ?_, ?_, ?_⟩
+  · simpa only [π, ← pow_mul] using hbound
+  · simpa only [π, ← pow_mul] using hI₀
+  · simpa only [π, ← pow_mul] using hK
+  · intro x y hxy
+    apply hinjg
+    exact (hbC x).symm.trans (hxy.trans (hbC y))
+  · intro i
+    exact (MvPolynomial.eval₂Hom_X' g _ i).trans (hbC (δ i : D')).symm
+  · intro x
+    exact (hbC (f₀ x)).trans (hf₀ x)
+  · intro ij
+    exact (hbC (coeff ij)).trans (hcoeff ij)
 
 end Algebra

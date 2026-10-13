@@ -1,0 +1,206 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, items item-NP through item-choose-deltai, item-set-map-R, item-sixth-resolve, item-eighth-resolve, item-done"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-popescu-solution-modulo"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_match": null,
+ "status": "split",
+ "id": "lem-weil-pbc-popescu-rescaled-coefficient-chart",
+ "title": "Simultaneous rescaling of a given flat Artinian coefficient chart",
+ "statement": "Let k:Type u be a field of characteristic p>0, A:Type v a finitely presented commutative k-algebra, Λ:Type w a Noetherian geometrically regular commutative k-algebra, α:A→Λ a k-algebra homomorphism and q a prime of Λ. Let N>0 with m_(Λ_q)^N contained in the extension of α(singularIdeal k A), d the spanFinrank of m_(Λ_q), a:Fin s→A generators of singularIdeal k A, and c>0. All notions are those of the cited definition nodes. Set n₀=N+d(8c). Fix a surjective polynomial presentation f:k[z₁,…,zᵣ]→A and a flat polynomial chart φ₀:k[y₁,…,yₘ₀]→Λ. Its localized map ψ₀ is flat and the contracted prime extends to the maximal ideal of Λ_q. Suppose its prime-power quotient factors through a local Artinian ring D₀ by a local essentially smooth first map and a flat local second map g₀ to Λ_q/m^n₀, with the commuting quotient diagram and with every α(f(zᵢ)) in the image of g₀, as in [lem-weil-pbc-popescu-solution-modulo]. There exist finite polynomial rings S=k[X_i:i∈Fin d], R=k[Y_i:i∈Fin m], compatible scalar towers S→R→Λ, coefficients ell, and an unpowered parameter list τ:Fin(d+1)→R. The relations image(X_i)^(2N)=sum_j ell(i,j)α(a_j) hold. Every τ_i is zero or image(X_j), belongs to q after mapping, and multiplication by τ_i and τ_i² has identical kernels on R and Λ modulo preceding (8c)-th powers. For J=(τ_i^(8c)), Q=R_(q∩R) and L=Λ_q, there exist n>0, ideals I₀⊂R,K⊂L with m_L^n⊆JL, I₀Q⊆JQ, K⊆JL and I₀L⊆K. There is a local Artinian k-algebra D′ in Type(max u v), with E=D′[T_i], compatible R,R/I₀,S,k algebra structures, E essentially smooth over R/I₀, and scalar tower k→D′→E. There are f₀:A→D′, a flat local ring map g:D′→L/K where L/K is local, unscaled coefficients u₀(i), units δ(i) and coeff(i,j). The S-map sends X_i to C(u₀(i))T_i. Evaluation ev=eval₂Hom(g,i↦g(δ_i)) satisfies ev(algebraMap R E z)=image(z) in L/K. Furthermore g(f₀(x))=image(α(x)) and g(coeff(i,j))=image(ell(i,j)). No c-th-power kernel assertion and no injective polynomial-coefficient evaluation algebra homomorphism is asserted here. Definitions: geometric regularity [def-weil-pbc-g-ring], polynomial algebras [def-weil-pbc-mv-polynomial-ring], essentially smooth ring maps [def-weil-pbc-essentially-smooth-ring-map], prime localizations [def-weil-pbc-localization-at-prime], finite presentation [def-weil-pbc-finitely-presented-algebra], Noetherian rings [def-weil-pbc-noetherian-ring], singular ideals [def-weil-pbc-singular-ideal], and quotient algebra maps [def-weil-pbc-algebra-hom-quotient].",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuParameterCoefficientModel",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FJ, parameter rescaling and Artinian coefficient inclusion before the final item-done coefficient equation",
+   "via": [
+    "lem-weil-pbc-popescu-parameter-coefficient-model",
+    "lem-weil-pbc-popescu-parameter-coefficients",
+    "lem-weil-pbc-popescu-parameter-solution",
+    "lem-weil-pbc-popescu-char-p-preparation-global",
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Starting from the given flat polynomial chart and coefficient solution, use the flat height formula and regularity to choose polynomial representatives of a regular system of d parameters in its source and L. The finite presentation f and generator membership in D₀ give the factorization of A through D₀ by injectivity of the flat local coefficient map.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-field-regular-ring",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put R=k[y,t_0,...,t_(d-1)] and send X_i in S to u_i t_i. Permutations of the parameters are regular in P₀, so the u_i t_i form a regular sequence after inverting k[y] outside p. Successively apply regular-sequence powers and Ogoma on R/((u_jt_j)^e:j<i), multiplying u_i by elements outside p, to equalize the first and square kernels. Earlier equalities are unchanged and parameter generation is preserved.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-regular-sequence-polynomial-variables",
+    "lem-weil-pbc-regular-sequence-powers",
+    "lem-weil-pbc-ogoma",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inductively construct δ_i outside q and λ_ij in Λ inside an enlarged Artinian coefficient solution D′. Faithful-flat contraction writes u_i^N=sum a_j d_j in D′. Lift d_j into L and correct the error in m_L^(n-N), then multiply by u_i^N so u_i^(2N)=sum a_j w_j with the prescribed residue classes. Choose a common denominator s₀ with w_j=u_j/s₀, and s₁ outside q killing s₀u_i^(2N)-sum u_j a_j. Set s=s₀s₁ and μ_j=s^(2N-1)s₁u_j: then (su_i)^(2N)=sum μ_j a_j and μ_j/s^(2N)=w_j. Enlarge by 07FI to include a positive power of s, rescaling μ_j. Apply Ogoma on Λ/((δ_ju_j)^e:j<i) and enlarge again by 07FI to include a suitable power (s′)^q. Take δ_i=(s′)^q s and λ_ij=(s′)^(2Nq)μ_j. This gives the relation in Λ, equal first/square kernels, and coefficient membership, preserving earlier conditions.",
+   "uses": [
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-essentially-smooth-composition",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-regular-sequence-powers",
+    "lem-weil-pbc-ogoma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map R to Λ by t_i→δ_i. Append zero to the unpowered list τ_i=u_i t_i and set ell(i,j)=λ_ij and retain the equations (δ_i u_i)^(2N)=sum_j λ_ij α(a_j). Set I₀=p^nR and K=m_L^n. In Q=R_(q∩R), each t_i is a unit. The pigeonhole bounds m_L^(d(e-1)+1)⊆(u_i^e)L and p^(d(e-1)+1)Q⊆(u_i^e)Q prove I₀Q⊆JQ, K⊆JL and m_L^n⊆JL since n=N+de>0. The equality pL=m_L gives I₀L⊆K.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give E=D′[t_i] the R/I₀-algebra structure from the old coefficient chart and t_i↦t_i. Localization, polynomial base change and composition prove essential smoothness. Keep the flat local ring map g:D′→L/K. Locality makes the included δ_i units. The S-map sends X_i to C(u₀(i))t_i. The evaluation ring homomorphism ev=eval₂Hom(g,i↦g(δ_i)) agrees with the structural R-map after quotienting: check on coefficients and each old and added variable. The inclusions of A and ell give g(f₀(x)) and g(coeff(i,j)). Present the finite smooth coefficient algebras and transport their localizations to Type(max u v), then reindex the finite polynomial variable set as Fin m. Do not construct the evaluation as an R-algebra homomorphism or deduce its injectivity here.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "lem-weil-pbc-essentially-smooth-composition",
+    "lem-weil-pbc-essentially-smooth-base-change",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-sequence-polynomial-variables",
+  "lem-weil-pbc-regular-sequence-powers",
+  "lem-weil-pbc-ogoma",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-popescu-enlarge-solution-modulo",
+  "lem-weil-pbc-essentially-smooth-composition",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-essentially-smooth-base-change",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, items item-NP through item-choose-deltai, item-set-map-R, item-sixth-resolve, item-eighth-resolve, item-done"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Popescu simultaneous rescaling polynomial parameters including units and coefficients in an Artinian flat subalgebra",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rescaling regular local parameters polynomial algebra Artinian coefficient ring Popescu",
+   "date": "2026-10-13",
+   "results": "PowerSeries.weierstrassDistinguished_smul, PowerSeries.weierstrassDistinguished, PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.exists_isWeierstrassFactorization, PowerSeries.weierstrassDistinguished_mul, PowerSeries.weierstrassUnit_smul, PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, PowerSeries.algEquivQuotientWeierstrassDistinguished. No simultaneous rescaling construction.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval₂Hom",
+   "date": "2026-10-13",
+   "results": "MvPolynomial.eval₂Hom, MvPolynomial.eval₂Hom_X', MvPolynomial.eval₂Hom_zero', MvPolynomial.coe_eval₂Hom, MvPolynomial.eval₂Hom_zero, MvPolynomial.map_eq_eval₂Hom_C_comp, MvPolynomial.comp_eval₂Hom, MvPolynomial.eval₂Hom_C. No simultaneous rescaling construction.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pow_smul.*smul|ker.*pow.*ker",
+   "date": "2026-10-13",
+   "results": "Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean, Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean, Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean, Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean, Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean. No simultaneous rescaling construction.",
+   "verdict": "no match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuRescaledCoefficientChart",
+  "file": "lean/Sheaf/RingTheory/PopescuRescaledCoefficientChart.lean",
+  "declaration": "Algebra.exists_popescu_rescaled_coefficient_chart",
+  "statement": "theorem exists_popescu_rescaled_coefficient_chart\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    [FinitePresentation k A] [IsNoetherianRing Λ]\n    (p : ℕ) [CharP k p] (hp : 0 < p)\n    (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)\n    (hreg : IsGeometricallyRegular k Λ)\n    (N : ℕ) (hN : 0 < N)\n    (hpower : IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ N ≤\n      (Ideal.map α.toRingHom (singularIdeal k A)).map\n        (algebraMap Λ (Localization.AtPrime q.asIdeal)))\n    (d : ℕ) (hd : d =\n      (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)).spanFinrank)\n    (s : ℕ) (a : Fin s → A) (ha : Ideal.span (Set.range a) = singularIdeal k A)\n    (c : ℕ) (hc : 0 < c)\n    (r : ℕ) (f : MvPolynomial (Fin r) k →ₐ[k] A) (hf : Function.Surjective f)\n    (m₀ : ℕ) (φ₀ : MvPolynomial (Fin m₀) k →ₐ[k] Λ)\n    (ψ₀ : Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) →+*\n      Localization.AtPrime q.asIdeal)\n    (hψ₀ : ψ₀.comp (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom))) =\n      (algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom)\n    (hideal₀ : q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal)) =\n      (q.asIdeal.comap φ₀.toRingHom).map\n        ((algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom))\n    (hflat₀ : ψ₀.Flat)\n    (D₀ : Type (max u w)) [CommRing D₀] [IsLocalRing D₀] [IsArtinianRing D₀]\n    [Algebra (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n      ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^ (N + d * (8 * c))) D₀]\n    (g₀ : D₀ →+* Localization.AtPrime q.asIdeal ⧸\n      (q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^\n        (N + d * (8 * c)))\n    [IsLocalHom (algebraMap (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n      ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n          (N + d * (8 * c))) D₀)]\n    [IsLocalHom g₀]\n    (hsmooth₀ : EssentiallySmooth\n      (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n        ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n            (N + d * (8 * c))) D₀)\n    (hgflat₀ : g₀.Flat)\n    (hfactor₀ : (g₀.comp (algebraMap\n      (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n        ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n            (N + d * (8 * c))) D₀)).comp\n      (Ideal.Quotient.mk (((q.asIdeal.comap φ₀.toRingHom).map\n        (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n            (N + d * (8 * c)))) =\n      (Ideal.Quotient.mk ((q.asIdeal.map\n        (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^\n          (N + d * (8 * c)))).comp ψ₀)\n    (hinc₀ : ∀ i : Fin r, Ideal.Quotient.mk\n      ((q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^\n        (N + d * (8 * c)))\n      (algebraMap Λ (Localization.AtPrime q.asIdeal) (α (f (MvPolynomial.X i)))) ∈\n        Set.range g₀) :\n    let S := MvPolynomial (Fin d) k\n    ∃ (m : ℕ) (_ : Algebra (MvPolynomial (Fin m) k) Λ)\n      (_ : IsScalarTower k (MvPolynomial (Fin m) k) Λ)\n      (_ : Algebra S (MvPolynomial (Fin m) k))\n      (_ : IsScalarTower k S (MvPolynomial (Fin m) k))\n      (_ : Algebra S Λ) (_ : IsScalarTower S (MvPolynomial (Fin m) k) Λ)\n      (_ : IsScalarTower k S Λ)\n      (ell : Fin d × Fin s → Λ) (π : Fin (d + 1) → MvPolynomial (Fin m) k),\n      (∀ i, algebraMap S Λ (MvPolynomial.X i) ^ (2 * N) =\n        ∑ j : Fin s, ell (i, j) * α (a j)) ∧\n      (∀ i, π i = 0 ∨ ∃ j : Fin d,\n        π i = algebraMap S (MvPolynomial (Fin m) k) (MvPolynomial.X j)) ∧\n      (∀ i, algebraMap (MvPolynomial (Fin m) k) Λ (π i) ∈ q.asIdeal) ∧\n      (∀ (i : Fin (d + 1))\n        (x : MvPolynomial (Fin m) k ⧸ Ideal.span\n          {y | ∃ j : Fin (d + 1), j.val < i.val ∧ y = π j ^ (c * 8)}),\n        π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n      (∀ (i : Fin (d + 1))\n        (x : Λ ⧸ Ideal.span\n          {y | ∃ j : Fin (d + 1), j.val < i.val ∧\n            y = algebraMap (MvPolynomial (Fin m) k) Λ (π j) ^ (c * 8)}),\n        π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n    let R := MvPolynomial (Fin m) k\n    let J := Ideal.span (Set.range (fun i : Fin (d + 1) ↦ π i ^ (c * 8)))\n    let Q := Localization.AtPrime (q.asIdeal.under R)\n    let L := Localization.AtPrime q.asIdeal\n    letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal\n    let JQ := J.map (algebraMap R Q)\n    let JL := (J.map (algebraMap R Λ)).map (algebraMap Λ L)\n    ∃ (n : ℕ), 0 < n ∧ IsLocalRing.maximalIdeal L ^ n ≤ JL ∧\n      ∃ (I₀ : Ideal R) (K : Ideal L),\n        I₀.map (algebraMap R Q) ≤ JQ ∧ K ≤ JL ∧\n        (I₀.map (algebraMap R Q)).map (algebraMap Q L) ≤ K ∧\n        ∃ (D' : Type (max u v)) (_ : CommRing D')\n          (_ : IsLocalRing D') (_ : IsArtinianRing D') (_ : Algebra k D'),\n          let E := MvPolynomial (Fin d) D'\n          ∃ (_ : Algebra R E) (_ : Algebra (R ⧸ I₀) E)\n            (_ : IsScalarTower R (R ⧸ I₀) E)\n            (algSE : Algebra S E) (_ : IsScalarTower S R E)\n            (_ : Algebra k E) (_ : IsScalarTower k S E),\n            EssentiallySmooth (R ⧸ I₀) E ∧\n            ∃ (_ : IsScalarTower k D' E)\n              (f₀ : A →ₐ[k] D') (g : D' →+* L ⧸ K)\n              (u₀ : Fin d → D') (δ : Fin d → D'ˣ) (coeff : Fin d × Fin s → D'),\n              IsLocalRing (L ⧸ K) ∧ IsLocalHom g ∧ g.Flat ∧\n              (∀ i : Fin d, @algebraMap S E _ _ algSE (MvPolynomial.X (R := k) i) =\n                MvPolynomial.C (σ := Fin d) (u₀ i) * MvPolynomial.X (R := D') i) ∧\n              (∀ z : R, MvPolynomial.eval₂Hom g (fun i ↦ g (δ i : D'))\n                (algebraMap R E z) =\n                Ideal.Quotient.mk K (algebraMap Λ L (algebraMap R Λ z))) ∧\n              (∀ x, g (f₀ x) =\n                Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧\n              (∀ ij, g (coeff ij) =\n                Ideal.Quotient.mk K (algebraMap Λ L (ell ij)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T060431-L-586583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T060431-L-586583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
