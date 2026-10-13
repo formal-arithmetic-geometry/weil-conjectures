@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-good-element-cutting-parameter",
+ "kind": "statement",
+ "title": "Prime avoidance for an element good for a regular sequence and cutting a prescribed parameter",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], and let $M\\ne0$ be a finite $R$-module [def-weil-finitely-generated-module]. For any module $N$, its support is the set of primes $\\mathfrak p$ such that $N_{\\mathfrak p}\\ne0$ [def-weil-pbc-module-localization]; dimension is the supremum of prime-inclusion chain lengths. Let $n\\ge0$ be an integer with $\\dim\\operatorname{Supp}(M)=n+2$. Let $f_1,\\ldots,f_{n+2}\\in\\mathfrak m$ be an $M$-regular sequence [def-weil-pbc-regular-sequence]. Let $g\\in R$ satisfy $\\dim(\\operatorname{Supp}(M)\\cap V(g))=n+1$, where $V$ denotes the set of primes containing all listed elements. Then there is $x\\in\\mathfrak m$ such that $\\dim(\\operatorname{Supp}(M)\\cap V(x,f_1,\\ldots,f_i))=n+1-i$ for $0\\le i<n+2$, and $\\dim(\\operatorname{Supp}(M/xM)\\cap V(g))=n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00N5 (lemma-CM-one-g), proof paragraph choosing h simultaneously good and cutting Supp(M) intersect V(g); Tag 00DS (lemma-silly), prime avoidance; Tag 0B52, support dimension drop."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "For 0<=i<n+2 set Q_i=M/(f_1,...,f_i)M. The prefix is regular: use the regular-list append characterization and local Nakayama. The regular-sequence dimension formula, implemented by Module.supportDim_add_length_eq_supportDim_of_isRegular in Mathlib.RingTheory.KrullDimension.Regular, gives dim Supp(Q_i)=n+2-i. The support formula gives dim Supp(M/gM)=n+1. These dimensions are positive.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-support-dimension-quotient-element-equality",
+    "lem-weil-pbc-support-quotient-ideal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every finite module N of positive support dimension, the maximal ideal is not minimal over Ann(N). Indeed all support primes lie below the maximal ideal. If it were minimal, the support-annihilator characterization would force every support prime to equal it, making the support subsingleton and its dimension at most zero. This contradicts positivity; the argument is written in maximal_not_minimal_of_supportDim_pos.",
+   "uses": [
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The annihilators of the finitely many Q_i and of M/gM form a finite set of ideals. Each has finitely many minimal primes by Ideal.finite_minimalPrimes_of_isNoetherianRing, the ideal form of the finite-minimal-primes theorem (equivalently apply it to R/I). Their finite union consists of primes strictly below the maximal ideal by the preceding step. Finite prime avoidance supplies x in the maximal ideal outside them all. The finite-family argument is proved in exists_avoid_minimalPrimes.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal to each Q_i and to M/gM. Thus quotienting by x drops each displayed dimension by one. The support-quotient formula identifies Supp(Q_i/xQ_i) with Supp(M) intersect V(x,f_1,...,f_i), giving goodness, and identifies Supp((M/gM)/x(M/gM)) with Supp(M/xM) intersect V(g), giving dimension n. Cancellation in WithBot ENat supplies the displayed equalities, including n=0 and i=n+1.",
+   "uses": [
+    "lem-weil-pbc-support-dimension-quotient-element-equality",
+    "lem-weil-pbc-support-quotient-ideal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-support-dimension-quotient-element-equality",
+  "lem-weil-pbc-support-quotient-ideal-module",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "worker J2 stage 3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00N5 (lemma-CM-one-g), proof paragraph choosing h simultaneously good and cutting Supp(M) intersect V(g); Tag 00DS (lemma-silly), prime avoidance; Tag 0B52, support dimension drop."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite Cohen Macaulay module over a Noetherian local ring has a maximal regular sequence adapted to a parameter element",
+   "results": "IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, RingTheory.Sequence.isRegular_iff, IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, RingTheory.Sequence.isWeaklyRegular_iff_Fin, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.isWeaklyRegular_iff, RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.recIterModByRegularWithRing",
+   "date": "2026-10-12",
+   "verdict": "Mathlib building blocks found; no direct adapted-element theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.depth",
+   "results": "IsLocalRing.depth, IsLocalRing.depth_eq_top_of_subsingleton, IsLocalRing.depth_eq_of_iso, IsLocalRing.ideal_depth_le_depth, IsLocalRing.depth_eq_of_linearEquiv, IsLocalRing.depth_eq_sSup_length_isRegular",
+   "date": "2026-10-12",
+   "verdict": "Mathlib building blocks found; no direct adapted-element theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose a regular element on a Cohen Macaulay module which also decreases the dimension of support modulo a fixed parameter",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "support_quotSMulTop|exists.*good.*element",
+   "results": "Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/Support.lean",
+   "date": "2026-10-12",
+   "verdict": "Mathlib building blocks found; no direct adapted-element theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal",
+   "results": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal",
+   "date": "2026-10-13",
+   "verdict": "Mathlib building blocks found; no direct adapted-element theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CmModuleGoodElementSetup",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential-surjectivity algebra: auxiliary element in the proof of Tag 00N5",
+   "via": [
+    "lem-weil-pbc-cm-module-good-element-setup",
+    "lem-weil-pbc-cm-module-good-element-nonzerodivisor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.GoodElementCuttingParameter",
+  "file": "lean/Sheaf/RingTheory/GoodElementCuttingParameter.lean",
+  "declaration": "Module.exists_good_element_cutting_parameter",
+  "statement": "theorem exists_good_element_cutting_parameter\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]\n    (n : ℕ) (hM : supportDim R M = (((n + 2 : ℕ) : ℕ∞) : WithBot ℕ∞))\n    (fs : List R) (hlen : fs.length = n + 2)\n    (hmem : ∀ f ∈ fs, f ∈ IsLocalRing.maximalIdeal R)\n    (hreg : RingTheory.Sequence.IsRegular M fs)\n    (g : R)\n    (hcut : Order.krullDim (support R M ∩ PrimeSpectrum.zeroLocus ({g} : Set R) :\n      Set (PrimeSpectrum R)) = (((n + 1 : ℕ) : ℕ∞) : WithBot ℕ∞)) :\n    ∃ x : R, x ∈ IsLocalRing.maximalIdeal R ∧\n      (∀ i : ℕ, i < n + 2 →\n        Order.krullDim (support R M ∩\n          PrimeSpectrum.zeroLocus {r : R | r ∈ x :: fs.take i} : Set (PrimeSpectrum R)) =\n            (((n + 2 - i - 1 : ℕ) : ℕ∞) : WithBot ℕ∞)) ∧\n      Order.krullDim (support R (QuotSMulTop x M) ∩\n        PrimeSpectrum.zeroLocus ({g} : Set R) : Set (PrimeSpectrum R)) =\n          (((n : ℕ) : ℕ∞) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T011926-L-2762905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T011926-L-2762905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

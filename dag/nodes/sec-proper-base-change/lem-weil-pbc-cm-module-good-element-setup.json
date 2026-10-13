@@ -10,16 +10,54 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Choose a maximal regular sequence using the depth equality and obtain the auxiliary element by prime avoidance over the finitely many minimal primes of the relevant supports; the support-dimension equalities follow from the quotient-support and dimension-drop lemmas.",
-   "uses": [],
+   "text": "Finite local Krull dimension bounds supportDim M. The Cohen--Macaulay equality therefore makes depth a finite natural number d. The quotient M/gM is nonzero by Nakayama, so its support has nonnegative dimension. The given dimension equation forces d>=1 and, by cancellation in WithBot ENat, dim(Supp(M) intersect V(g))=d-1. This also excludes d=0.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-pbc-support-quotient-ideal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Nakayama selects the supremum branch in the definition of depth. The set of regular-sequence lengths contains zero, and a finite supremum in ENat is attained. Thus choose a maximal regular list fs in the maximal ideal, of length d. This is proved directly in exists_sequence_of_depth_eq.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on positive d, uniformly in the finite nonzero module. At d=1 the chosen regular list already works: goodness is required only at i=0, and is exactly the assumed cut dimension zero. At d=n+2 use the prime-avoidance lemma to choose x in the maximal ideal good for fs and satisfying dim(Supp(M/xM) intersect V(g))=n. The good-sequence theorem makes x regular and gives depth and support dimension n+1 for M/xM. Nakayama gives its nontriviality.",
+   "uses": [
+    "lem-weil-pbc-good-element-cutting-parameter",
+    "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply induction to M/xM and g to obtain qs. Prepend x to qs; the regular-cons equivalence proves regularity on M, the length is n+2, and all entries lie in the maximal ideal. At i=0 goodness is the original cut hypothesis. At i=j+1, the quotient-support formula identifies Supp(M) intersect V(g,(x::qs).take(j+1)) with Supp(M/xM) intersect V(g,qs.take j). Inductive goodness and natural-number subtraction give the required equality.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-support-quotient-ideal-module"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-support-quotient-ideal-module",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-good-element-cutting-parameter",
+  "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker J2 stage 3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00N5"
+  "place": "Tag 00N5 (lemma-CM-one-g), auxiliary prime avoidance and dimension induction; adapted-sequence conclusion assembled by worker J2 from this argument and Tag 00N4."
  },
  "mathlib_searches": [
   {
@@ -95,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T230751-L-1906859",
+  "landing": "20261013T011926-L-2762905",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
