@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
+import Sheaf.AlgebraicGeometry.MixedSectionsCompositionKInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Composition of normalized mixed Leray comparisons
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
@@ -59,6 +61,26 @@ theorem mixedSections_composition_coherence
         (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫
         (schemeGlobalScalarRestrictionCompIso f g).hom.app
           ((schemeDerivedGlobalSections X).obj F) := by
-  sorry
+  let A := schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ⋙
+    schemeDerivedGlobalSections Z
+  let B := schemeDerivedGlobalSections X ⋙ schemeGlobalScalarRestriction f ⋙
+    schemeGlobalScalarRestriction g
+  let α : A ⟶ B :=
+    Functor.whiskerLeft (schemeDerivedDirectImage f) (mixedGlobalSectionsDirectImageIso g).hom ≫
+      Functor.whiskerRight (mixedGlobalSectionsDirectImageIso f).hom
+        (schemeGlobalScalarRestriction g)
+  let β : A ⟶ B :=
+    Functor.whiskerRight (schemeNormalizedDirectImageCompIso f g).hom
+      (schemeDerivedGlobalSections Z) ≫
+      (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom ≫
+      Functor.whiskerLeft (schemeDerivedGlobalSections X)
+        (schemeGlobalScalarRestrictionCompIso f g).hom
+  change α.app F = β.app F
+  obtain ⟨I, hI, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective F
+  let e := eI ≪≫ ((DerivedCategory.quotientCompQhIso _).app I).symm
+  apply (cancel_mono (B.map e.hom)).1
+  rw [← α.naturality, ← β.naturality]
+  congr 1
+  exact mixedSections_composition_coherence_on_kInjective f g I
 
 end AlgebraicGeometry

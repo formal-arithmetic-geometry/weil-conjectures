@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-mixed-sections-composition-kinjective",
+ "kind": "statement",
+ "title": "Mixed Leray composition coherence on K-injective complexes",
+ "statement": "For schemes X,Y,Z [def-pc-scheme], composable morphisms f:X→Y, g:Y→Z, and an explicitly K-injective cochain complex I of O_X-modules, put F=Qh(quotient I) in D(O_X) [def-pc-derived-category]. With independent sheaf and module localization universes, c_h the normalized mixed Leray comparison [lem-sc-mixed-global-sections-direct-image-iso], e(f,g) the normalized direct-image composition comparison [lem-sc-derived-direct-image-square-mate] [lem-pc-ringed-spaces-derived-direct-image-composition], and s(f,g) scalar restriction along a composite [def-pc-global-hom-pullback-comparison], one has c_g(Rf_*F);S_g(c_f(F))=RΓ_Z(e(f,g)_F);c_(f;g)(F);s(f,g)_(RΓ_X F). This is only the K-injective unit calculation: it does not transport the equality to an arbitrary derived object.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-global-derived-rhom",
+  "lem-sc-derived-direct-image-square-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D5T and 0D5W, unit-normalization calculation on K-injective complexes; argument written by second reader from the stated unit equations. Primary sources https://stacks.math.columbia.edu/tag/0D5T and https://stacks.math.columbia.edu/tag/0D5W read 2026-10-13."
+ },
+ "proof": [
+  {
+   "text": "Precompose the equality with the pasted derived units for f_*, g_* and ΓZ. Naturality of c_g and the mixed Leray unit equations for g and f reduce the left path to factor_g;Sg(factor_f);SgSf(unit_ΓX). The normalized direct-image composition unit equation and the mixed unit equation for fg reduce the right path to factor_fg;Sfg(unit_ΓX);s(f,g). Scalar-composition naturality and Functor.mapDerivedCategoryCompIso_fach composed with mapDerivedCategoryNatIso_fach identify these paths: restrictScalarsComp' is identity on elements. The pasted unit is invertible because global sections is acyclic on (fg)_*I and unit_D(fg)(I) is invertible on K-injectives; the normalized composition equation identifies the two direct-image units with this unit followed by the inverse comparison. Cancel the pasted unit. No K-injective resolution transport is used here.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-global-hom-pullback-comparison",
+    "lem-pc-direct-image-global-sections-kinjective-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-pc-direct-image-global-sections-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-13",
+  "note": "Second reader isolates only the unit calculation on explicitly K-injective complexes. Arbitrary-derived-object transport is proved in the original module. A shorter scalar-factor identity and generic categorical pasting were proved in scratch, but concrete instantiation remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leray|rightDerivedFunctorCompUnit",
+   "results": "[]",
+   "date": "2026-10-13",
+   "verdict": "No exact mixed Leray composition theorem. Generic right-derived composition and sheafification compatibility only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived units of two direct images followed by global sections satisfy the pasted Leray unit equation",
+   "results": "['CategoryTheory.sheafComposeNatTrans_fac', 'CategoryTheory.sheafComposeIso_hom_fac', 'SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app', 'CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility', 'CategoryTheory.sheafComposeIso_inv_fac', 'CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val', 'CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit']",
+   "date": "2026-10-13",
+   "verdict": "No exact mixed Leray composition theorem. Generic right-derived composition and sheafification compatibility only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "['CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint', 'CategoryTheory.Functor.rightDerivedNatTrans_comp', 'CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc', 'CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp', 'CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison', 'CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison', 'CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app', 'CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc']",
+   "date": "2026-10-13",
+   "verdict": "No exact mixed Leray composition theorem. Generic right-derived composition and sheafification compatibility only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of normalized Leray derived global sections comparisons on K-injective complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedSectionsCompositionCoherence",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mixed-sections-composition-coherence",
+   "place": "Unit calculation on a K-injective representative, before transport to an arbitrary derived object"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedSectionsCompositionKInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedSectionsCompositionKInjective.lean",
+  "declaration": "AlgebraicGeometry.mixedSections_composition_coherence_on_kInjective",
+  "statement": "theorem mixedSections_composition_coherence_on_kInjective\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] :\n    let F := DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)\n    let e : schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ≅\n        schemeDerivedDirectImage (f ≫ g) :=\n      schemeNormalizedDirectImageCompIso f g\n    (mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F) ≫\n        (schemeGlobalScalarRestriction g).map\n          ((mixedGlobalSectionsDirectImageIso f).hom.app F) =\n      (schemeDerivedGlobalSections Z).map (e.hom.app F) ≫\n        (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫\n        (schemeGlobalScalarRestrictionCompIso f g).hom.app\n          ((schemeDerivedGlobalSections X).obj F)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T153937-L-1124063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T153937-L-1124063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
