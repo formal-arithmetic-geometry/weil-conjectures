@@ -1,0 +1,175 @@
+{
+ "id": "lem-pc-k2-leray-acyclic-additive-naturality",
+ "kind": "statement",
+ "title": "Additive Leray comparison natural under coefficient endomorphisms",
+ "statement": "Let $p:Y\\to X$ be a morphism of schemes [def-pc-scheme], with injective resolutions in the category of module sheaves [def-weil-sheaf-of-modules-category]. Let $F$ be a module sheaf on $Y$, and suppose $R^n p_*F=0$ for every $n>0$. For every $q\\geq0$, there is an additive equivalence $e:H^q(X,p_*F)\\simeq H^q(Y,F)$ [pqf-def-cohomology] such that for every module endomorphism $\\varphi:F\\to F$ and every $x\\in H^q(X,p_*F)$, $e(H^q(p_*\\varphi)(x))=H^q(\\varphi)(e(x))$. No scheme below $X$, restricted scalar action, or scalar-linearity assertion occurs in this statement.",
+ "source": {
+  "document": "Stacks Project, cohomology.tex and sites-cohomology.tex",
+  "place": "Tags 01F4 (1), 01EY and 03FD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Take an injective module resolution. Forgetting module coefficients is exact. Its terms are flasque abelian sheaves; sections of a short exact sequence beginning in a flasque sheaf are surjective on every open, and quotients of two flasque sheaves are flasque. The direct-image acyclicity criterion makes these terms direct-image acyclic. Acyclic resolutions compute abelian higher direct images, while the module resolution computes module higher direct images; forgetting commutes with direct image and homology. Hence positive module-image vanishing implies positive abelian-image vanishing.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-sc-zariski-flasque-quotient-sections",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the natural topological Leray edge to the underlying abelian sheaf. Positive higher direct images vanish by the preceding step, so the edge is an isomorphism in every degree.",
+   "uses": [
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafified free abelian representable at the terminal open is the constant integer sheaf: each open has exactly one map to the terminal open. Precomposition with this actual source isomorphism identifies terminal Ext cohomology with the ordinary H definition. Associativity of Ext composition proves its coefficient naturality. Compose both source-model identifications with the natural Leray edge; its naturality for every coefficient endomorphism is the displayed equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-leray-closed-pushforward-cohomology",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-zariski-flasque-quotient-sections",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "K2 stage 3 worker",
+  "document": "Stacks Project, cohomology.tex and sites-cohomology.tex",
+  "place": "Tags 01F4 (1), 01EY and 03FD",
+  "note": "The additive/naturality part of the original two-step Leray plan; the scalar promotion is proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural additive Leray cohomology comparison when positive higher direct images of a sheaf of modules vanish",
+   "results": {
+    "t": "2026-10-13T07:03:15Z",
+    "tool": "leansearch",
+    "query": "Natural additive Leray cohomology comparison when positive higher direct images of a sheaf of modules vanish",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a pushforward equals cohomology of a module if all positive higher direct images vanish",
+   "results": {
+    "t": "2026-10-13T05:47:37Z",
+    "tool": "leanfinder",
+    "query": "Cohomology of a pushforward equals cohomology of a module if all positive higher direct images vanish",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardNatIso",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom",
+     "SheafOfModules.pushforwardNatIso_hom",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforward_assoc",
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "SheafOfModules.pushforwardComp_hom_app_val_app"
+    ],
+    "digest": "f044dd2022ca1f59"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; inspected the returned declarations and searched the library. The existing topological Leray theorem needs coefficient-forgetting and Ext-source comparison glue."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Ll]eray|acyclic",
+   "results": {
+    "t": "2026-10-13T05:49:24Z",
+    "tool": "grep",
+    "query": "rightDerived.*[Cc]omp|[Ll]eray|acyclic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Tactic/Order.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean"
+    ],
+    "digest": "2688131a091dc0dd"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; inspected the returned declarations and searched the library. The existing topological Leray theorem needs coefficient-forgetting and Ext-source comparison glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof: the paragraphs defining L and G=pi_* L^n and applying relative Leray and projective finiteness; additive comparison and coefficient naturality before scalar promotion",
+   "via": [
+    "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+    "lem-pc-q2-chow-twist-finite-cohomology",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LerayAcyclicAdditiveNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayAcyclicAdditiveNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_H_pushforward_natural_of_higherDirectImage_vanishing",
+  "statement": "theorem exists_addEquiv_H_pushforward_natural_of_higherDirectImage_vanishing\n    {Y X : Scheme.{u}} (p : Y ⟶ X) [HasInjectiveResolutions Y.Modules]\n    (F : Y.Modules)\n    (hF : ∀ q : ℕ, 0 < q → IsZero ((higherDirectImage p q).obj F)) (q : ℕ) :\n    ∃ e : ((pushforward p).obj F).H q ≃+ F.H q,\n      ∀ (φ : F ⟶ F) (x : ((pushforward p).obj F).H q),\n        e (H.map ((pushforward p).map φ) q x) = H.map φ q (e x)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T100023-L-2467544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T100023-L-2467544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

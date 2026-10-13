@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.LerayAcyclicAdditiveNaturality
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Linear Leray comparison for an acyclic direct image
@@ -44,6 +45,18 @@ theorem nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing
       Module.compHom _ f.appTop.hom
     letI : Module Γ(T, ⊤) (F.H q) :=
       Module.compHom _ (p ≫ f).appTop.hom
-    Nonempty (((pushforward p).obj F).H q ≃ₗ[Γ(T, ⊤)] F.H q) := by sorry
+    Nonempty (((pushforward p).obj F).H q ≃ₗ[Γ(T, ⊤)] F.H q) := by
+  let : Module Γ(T, ⊤) (((pushforward p).obj F).H q) :=
+    Module.compHom _ f.appTop.hom
+  let : Module Γ(T, ⊤) (F.H q) := Module.compHom _ (p ≫ f).appTop.hom
+  obtain ⟨e, he⟩ :=
+    exists_addEquiv_H_pushforward_natural_of_higherDirectImage_vanishing p F hF q
+  refine ⟨{ toAddEquiv := e, map_smul' := ?_ }⟩
+  intro r x
+  change e (H.map (((pushforward p).obj F).smulHom (f.appTop r)) q x) =
+    H.map (F.smulHom ((p ≫ f).appTop r)) q (e x)
+  rw [← pushforward_map_smulHom]
+  simpa only [Scheme.Hom.comp_appTop, ConcreteCategory.comp_apply] using
+    he (F.smulHom (p.appTop (f.appTop r))) x
 
 end AlgebraicGeometry.Scheme.Modules
