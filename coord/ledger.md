@@ -13043,3 +13043,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: merged deliver/B4/Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification (stage 3; reviewer PASS; first push; landing 20261013T155929-L-1301024 (interface); batch 20261013T155927; modules 2; new nodes 1)
 - 15:59 L: merged deliver/C1/Sheaf.AlgebraicGeometry.OpenUnionModuleImagePullbackCore (stage 3; reviewer PASS; first push; landing 20261013T155929-L-1301174 (proof); batch 20261013T155927; modules 1; new nodes 0)
 - 15:59 L: merged deliver/C4/Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion (stage 3; reviewer PASS; first push; landing 20261013T155930-L-1301361 (interface); batch 20261013T155927; modules 2; new nodes 1)
+- 15:59 L: merged deliver/C4/Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociator (stage 3; reviewer PASS; first push; landing 20261013T155930-L-1301468 (interface); batch 20261013T155927; modules 2; new nodes 1)
