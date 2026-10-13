@@ -21,8 +21,8 @@ Consequently constructibility passes from a stratification to any refinement
 (`AlgebraicGeometry.Scheme.Stratification.Refines`,
 `Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar`), and two stratifications have
 a common refinement by intersecting the strata (`Stratification.inter`).
-(blueprint: `lemma-constructible-immersion-independence`, `def:constructible-refines`,
-`lemma:constructible-common-refinement`, `lemma:constructible-of-refines`)
+(blueprint: `lemma-constructible-immersion-independence`, `def-constructible-refines`,
+`lemma-constructible-common-refinement`, `lemma-constructible-of-refines`)
 
 -/
 
@@ -102,7 +102,7 @@ end Independence
 section Refines
 
 /-- A stratification `T` *refines* a stratification `S` if every stratum of `T` is contained
-in a stratum of `S`. (blueprint: `def:constructible-refines`) -/
+in a stratum of `S`. (blueprint: `def-constructible-refines`) -/
 def Stratification.Refines (T S : Stratification X) : Prop :=
   ∀ l, ∃ k, T.stratum l ⊆ S.stratum k
 
@@ -113,7 +113,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- **Constructibility passes to refinements**: if the pullbacks of `F` to the strata of `S`
 are finite locally constant and `T` refines `S`, the pullbacks of `F` to the strata of `T` are
-finite locally constant. (blueprint: `lemma:constructible-of-refines`) -/
+finite locally constant. (blueprint: `lemma-constructible-of-refines`) -/
 theorem Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar {T S : Stratification X}
     (hTS : T.Refines S) (F : Sheaf X.smallEtaleTopology A)
     (hS : ∀ k, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F)) (l) :
@@ -125,7 +125,8 @@ theorem Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar {T S : Str
   rw [T.range_immersion, S.range_immersion]
   exact hk
 
-/-- A sheaf is constructible with respect to a refinement of a witnessing stratification. -/
+/-- A sheaf is constructible with respect to a refinement of a witnessing stratification.
+(blueprint: `lemma-constructible-of-refines`) -/
 theorem IsConstructibleSheaf.of_refines {T S : Stratification X} (hTS : T.Refines S)
     (F : Sheaf X.smallEtaleTopology A)
     (hS : ∀ k, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion k)).obj F)) :
@@ -140,7 +141,7 @@ variable (S T : Stratification X)
 
 /-- **The common refinement of two stratifications**: the strata are the intersections
 `S.stratum k ∩ T.stratum l`, with the fibre products `S.domain k ×_X T.domain l` as schemes.
-(blueprint: `lemma:constructible-common-refinement`) -/
+(blueprint: `lemma-constructible-common-refinement`) -/
 @[simps n stratum domain immersion]
 def Stratification.inter : Stratification X where
   n := S.n * T.n
@@ -179,7 +180,7 @@ lemma Stratification.inter_refines_right : (S.inter T).Refines T :=
   fun k ↦ ⟨(finProdFinEquiv.symm k).2, Set.inter_subset_right⟩
 
 /-- **Two stratifications have a common refinement.**
-(blueprint: `lemma:constructible-common-refinement`) -/
+(blueprint: `lemma-constructible-common-refinement`) -/
 lemma Stratification.exists_refines : ∃ R : Stratification X, R.Refines S ∧ R.Refines T :=
   ⟨S.inter T, S.inter_refines_left T, S.inter_refines_right T⟩
 

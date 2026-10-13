@@ -138,7 +138,8 @@ for `φ : M_C ⟶ N_C` with `M` finitely generated and any object `T`, there is 
 `S` of `T` such that over every member `U` of `S` not covered by the empty sieve, the restriction
 of `φ` to
 `J.over U` is, through the canonical identifications `constantSheafOverHom`, the morphism of
-constant sheaves induced by a `Λ`-linear map `f : M ⟶ N`. -/
+constant sheaves induced by a `Λ`-linear map `f : M ⟶ N`.
+(blueprint: `lemma-constructible-hom-constant-locally`) -/
 theorem exists_mem_forall_exists_constantSheafOverHom_comp_map_eq (M N : ModuleCat.{v'} Λ)
     [Module.Finite Λ M]
     (φ : (constantSheaf J (ModuleCat.{v'} Λ)).obj M ⟶ (constantSheaf J (ModuleCat.{v'} Λ)).obj N) :
@@ -200,12 +201,14 @@ noncomputable def cokernelOverIso :
     (PreservesCokernel.iso (constantSheaf (J.over U) A) f).symm
 
 omit [PreservesFiniteColimits (J.overPullback A U)] in
-/-- The restriction of the kernel of `φ` to `J.over U` is constant. -/
+/-- The restriction of the kernel of `φ` to `J.over U` is constant.
+(blueprint: `lemma-constructible-hom-constant-locally`) -/
 lemma Sheaf.isConstant_kernel_over : ((kernel φ).over U).IsConstant (J.over U) :=
   Sheaf.isConstant_of_iso _ (kernelOverIso J A U f φ h)
 
 omit [PreservesFiniteLimits (constantSheaf (J.over U) A)] in
-/-- The restriction of the cokernel of `φ` to `J.over U` is constant. -/
+/-- The restriction of the cokernel of `φ` to `J.over U` is constant.
+(blueprint: `lemma-constructible-hom-constant-locally`) -/
 lemma Sheaf.isConstant_cokernel_over : ((cokernel φ).over U).IsConstant (J.over U) :=
   Sheaf.isConstant_of_iso _ (cokernelOverIso J A U f φ h)
 

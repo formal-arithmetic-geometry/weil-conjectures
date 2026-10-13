@@ -25,7 +25,7 @@ of a constructible sheaf on `Z` and the extension by zero `j_! G` of a construct
 `U` are constructible (`IsConstructibleSheaf.lowerStar_of_isClosedImmersion`,
 `IsConstructibleSheaf.openImmersionLowerShriek`): their pullbacks to the other member of the
 pair vanish, and a zero sheaf is constructible (`IsConstructibleSheaf.of_isZero`).
-(blueprint: `prop:constructible-open-closed`, `lemma:constructible-lowerStar-closed`,
+(blueprint: `prop-constructible-open-closed`, `lemma:constructible-lowerStar-closed`,
 `lemma:constructible-lowerShriek-open`)
 
 When the complement of an open immersion `j` is a finite set of closed points, the range of
@@ -187,7 +187,7 @@ variable {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsC
 include hij in
 /-- Stratifications of the members of a complementary pair `(j, i)` concatenate to a
 stratification of `X`: the strata are the images of the strata of `U` and of `Z`.
-(blueprint: `prop:constructible-open-closed`) -/
+(blueprint: `prop-constructible-open-closed`) -/
 def Stratification.openClosed (SU : Stratification U) (SZ : Stratification Z) :
     Stratification X where
   n := SU.n + SZ.n
@@ -258,7 +258,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 include hij in
 /-- **A sheaf is constructible if and only if its restrictions to the members of a
-complementary pair `(j, i)` are.** (blueprint: `prop:constructible-open-closed`) -/
+complementary pair `(j, i)` are.** (blueprint: `prop-constructible-open-closed`) -/
 theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
     IsConstructibleSheaf F ↔
       IsConstructibleSheaf ((Etale.upperStar A j).obj F) ∧
