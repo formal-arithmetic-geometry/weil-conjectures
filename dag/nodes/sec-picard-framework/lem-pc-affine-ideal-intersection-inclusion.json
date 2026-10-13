@@ -16,35 +16,48 @@
  ],
  "proof": [
   {
-   "text": "On U, the ideal powers and their multiplication images on F and G are quasi-coherent, and their section ranges identify with the ordinary ideal-power multiples, including power zero as the unit ideal.",
+   "text": "Prove quasi-coherence of an affine pushforward directly by the two principal-open localization conditions: preimages of basic opens are basic opens, and restriction scalars act via the section-ring map. For the closed subscheme defined by I this gives quasi-coherence of the pushed-forward structure module. Thus I.toModules, its kernel, is quasi-coherent. Tensor products and multiplication images are quasi-coherent by the tensor and image statements. Induct on the recursive power: zero is the unit sheaf, one is I, and subsequent powers are multiplication images. On affine sections the tensor comparison and affine image formula give range equal to the ideal multiple. Starting with range(I.toModules inclusion)=I(U), induction and range_comp give the power range I(U)^r. Applying the same multiplication calculation gives range(I^r M inclusion)=I(U)^r M(U), including r=0.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Realize the intersection as the kernel of G -> F/(I^m F). The kernel and quotient are quasi-coherent. On U the section module of this kernel is the inverse image under g(U) of I(U)^m F(U); its image in F(U) is the stated intersection. The affine exact sheaf comparison identifies the inclusion into F with the inclusion of this section submodule.",
-   "uses": [
+    "pqf-lem-qcoh-principal-open-criterion",
+    "lem-weil-pbc-affine-module-basic-open-localization",
     "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
     "lem-weil-pbc-quasi-coherent-module-cokernel-image"
    ],
    "elementary": false
   },
   {
-   "text": "The algebraic inclusion defines a linear factorization through the image of I(U)^n G(U). Under the affine module/sheaf correspondence from Tags 01I8 and 01IC this gives a factorization of the corresponding subsheaf inclusions. Restrict it to W. Sections in the two ranges define a section of the pullback intersection by its universal property. Applying the factorization gives a section of I^n G mapping to the original section. Thus the required range inclusion holds, including empty opens and zero exponents.",
+   "text": "Form the pullback of I^m F -> F and G -> F. Its section range in F is the intersection of the two section ranges because evaluation preserves pullbacks. It is quasi-coherent: identify the pullback with the kernel of the map from the binary direct sum to F, given by the first inclusion minus g.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the assumed submodule inclusion and the affine power-product range calculation to lift the image of every affine section of this pullback through I^n G -> F. Explicitly the inclusion supplies a section t in I(U)^n G(U); the range formula supplies its preimage b in I^n G(U), and composing b with g gives the original section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a morphism from a quasi-coherent module vanishing on U, cover any W <= U by basic opens D(f). A section on D(f) becomes the restriction of a section on U after multiplication by f^k. Naturality makes f^k times its image zero. Since f is a unit on D(f), its image is zero. Sheaf separatedness then gives vanishing on W. Apply this to the pullback inclusion composed with the cokernel of the mono I^n G -> F.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel of this cokernel is the Abelian image. Since I^n G -> F is mono, its factorization through that image is an isomorphism. Applying its inverse to the kernel-section lift gives a section of I^n G over W mapping to the original section. Combine with the pullback section-range equality to obtain the required inclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "Q2",
+  "agent": "U2",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 01YA, 01I8 and 01IC",
-  "place": "Fixed-exponent affine inclusion specialization of the geometric comparison in the proof of 01YA; no Artin-Rees or uniform bound used."
+  "document": "Stacks Project, Tags 01YA, 01I8 and 01IC; existing upstream basic-open localization lemmas",
+  "place": "Affine tensor/image calculation, direct localization proof of affine pushforward quasi-coherence, recursive power induction, pullback intersection, and basic-open vanishing argument. Adapts proved private helper arguments from ArtinReesAffineComparison and the localization proof from DirectImage.AffineMorphism without importing either module."
  },
  "mathlib_searches": [
   {
@@ -112,9 +125,12 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "pqf-lem-qcoh-principal-open-criterion",
+  "lem-weil-pbc-affine-module-basic-open-localization",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -130,10 +146,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T100058-L-2477997",
-  "kind": "interface",
+  "landing": "20261013T111931-L-3066332",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
