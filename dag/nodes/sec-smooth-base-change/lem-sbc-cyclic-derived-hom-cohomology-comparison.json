@@ -1,0 +1,158 @@
+{
+ "id": "lem-sbc-cyclic-derived-hom-cohomology-comparison",
+ "kind": "statement",
+ "title": "Cyclic geometric cohomology detects zero restrictions of free-representable derived Hom",
+ "statement": "Let $h:Y\\to X$ be a morphism of schemes [def-pc-scheme], and let $e,q\\in\\mathbf N$. On the small etale site [def-weil-pbc-etale-site], let $\\mathbf Z[W]$ denote the sheafification [def-weil-pbc-sheafification] of the free abelian presheaf on the representable of $W\\to X$, and let $P(W)=\\operatorname{Hom}_{D^+(Y_{et})}((h^*\\mathbf Z[W])[0],\\underline{\\mathbf Z/e}_Y[0][q])$, with restriction by precomposition; inverse image and derived categories are [def-weil-pbc-inverse-image] and [def-weil-pbc-derived-categories]. Constant sheaves and cohomology are [def-weil-pbc-constant-sheaf] and [def-weil-pbc-etale-cohomology]. For every etale $W\\to X$, there is an additive equivalence $E_W:P(W)\\simeq H^q(Y\\times_X W,\\mathbf Z/e)$ such that, for every etale $V\\to X$, arrow $v:V\\to W$ over $X$, and $\\xi\\in P(W)$, if the cohomology pullback of $E_W(\\xi)$ along $Y\\times_X V\\to Y\\times_X W$ is zero (in the pulled-back coefficient sheaf), then $P(v)(\\xi)=0$. There is no affinity or local-vanishing hypothesis; $\\mathbf Z/0$ means $\\mathbf Z$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8 restricted cohomology presheaf and Tag 072W; free-representable interpretation in the docstring and restriction section of lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/FreeSheaf.lean"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Write Z[W] for the sheafification of the free abelian presheaf on the etale representable W. The sheafification/free-abelian/Yoneda adjunction corepresents G(W). Apply the inverse-image/direct-image adjunction to identify maps from h^* Z[W] to G with G(Y times_X W). Thus h^* Z[W] is the free abelian represented sheaf on that etale Y-scheme, naturally in W.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let T=Y times_X W and let r:T to Y be its etale projection. Extension by zero r_! is exact and left adjoint to restriction r^*. The same corepresenting property identifies r_! Z_T with the free represented sheaf on T. Derived adjunction therefore identifies Hom((h^* Z[W])[0],F[0][q]) with Ext^q(Z_T,r^*F)=H^q(T,r^*F). For F the constant sheaf Z/e on Y, the canonical constant-sheaf pullback isomorphism identifies r^*F with Z/e on T. Compose the additive identifications to obtain E. The fully faithful D+ inclusion identifies these Hom groups with the derived Hom used in the statement.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arrow v:V to W over X, the corepresenting adjunctions send precomposition with Z[v] to restriction along the induced fibre-product arrow T_V to T_W. Their adjunction units are natural, so applying the exact restriction functor to an Ext representative gives precisely cohomologyMap along pullback.map h V.hom h W.hom (id Y) v.left (id X). The coefficient comparison then identifies its value with E_V of P.map v.op. Changing from the other pullback factor order uses the canonical pullback symmetry. The coefficient map is an isomorphism and the additive equivalence E_V reflects zero. Hence vanishing of the displayed geometric cohomology pullback implies P.map v.op is zero. This remains true for e=0, q=0, empty schemes, and identity arrows.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-etale-restriction-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent C2",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 072W; free-sheaf adjunction, exact etale extension by zero, and naturality of cohomology restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from free abelian representable etale sheaves is cohomology on the represented scheme naturally under restriction",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from pullback of free abelian representable etale sheaf equals cohomology on fiber product naturally under restriction",
+   "results": "8 hits including SheafOfModules.pullbackObjFreeIso, freeFunctorCompPullbackIso, sheafHomSectionsEquiv_symm_apply_coe_apply; none compares the required abelian derived Hom and geometric Sheaf.H with restrictions",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, _ ≃+ _",
+   "results": "6 hits, Sheaf.H.equiv₀ and degree-zero naturality, plus degree-zero long-exact-sequence equivalence; none in arbitrary degree with free representables",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeSheaf.*cohomology|cohomology.*freeSheaf|abelian.*[Cc]ohomology.*[Ee]quiv",
+   "results": "0 Mathlib hits. Direct reading of Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean lines 32-35 finds computing cohomology of a restricted sheaf from the free representable listed as TODO. The module-coefficient source FreeSheaf.lean gives the analogous object comparison, not this abelian-coefficient restriction criterion. RawRestrictedCohomologyNaturalIso compares derived sections and is natural in h, not in the etale object W.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "The identification of the restricted cohomology presheaf, including its restriction maps; first step of lem-sbc-cyclic-higher-direct-image-local-vanishing",
+   "via": [
+    "lem-sbc-cyclic-higher-direct-image-local-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CyclicDerivedHomCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CyclicDerivedHomCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cyclicDerivedHom_cohomology_comparison",
+  "statement": "theorem exists_cyclicDerivedHom_cohomology_comparison {X Y : Scheme.{u}}\n    (h : Y ⟶ X) (e q : ℕ) :\n    let P := (uliftYoneda.{u + 1} ⋙\n      (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙\n      presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n      upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙\n        preadditiveYoneda.obj\n          (((DerivedCategory.Plus.singleFunctor _ 0).obj (Y.constantZMod e))⟦(q : ℤ)⟧)\n    ∀ W : X.Etale,\n      ∃ E : P.obj (op W) ≃+ Sheaf.H ((pullback h W.hom).constantZMod e) q,\n        ∀ (V : X.Etale) (v : V ⟶ W) (ξ : P.obj (op W)),\n          cohomologyMap\n            (pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp)\n              (by simp)) _ q (E ξ) = 0 → P.map v.op ξ = 0",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1ba83",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T201739-L-3965810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1ba83",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T201739-L-3965810",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing signatures are unchanged, DAG/report/change records agree, imports are used, and the sole remaining sorry is a named theorem with source and proof documentation."
+ }
+}

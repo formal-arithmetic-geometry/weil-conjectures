@@ -16,38 +16,40 @@
  ],
  "proof": [
   {
-   "text": "By 03Q8 identify the higher direct image with the sheafified cohomology presheaf. Restrictions agree with cohomologyMap followed by the constant-coefficient comparison, which preserves zero.",
+   "text": "Use the free-representable derived-Hom presheaf P from the abelian higher-direct-image sheafification comparison. For every affine etale object A, use the cyclic comparison to send a raw class to H^q(Y times_X A,Z/e); its zero-restriction implication turns the covering supplied by H into zero restrictions of the raw class.",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf"
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-sbc-cyclic-derived-hom-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Affine opens cover every etale object. Restrict a class to this affine cover and apply the hypothesized cover on each affine object; composition of covers shows that every presheaf section is locally zero.",
+   "text": "For an arbitrary etale W and raw class xi, cover W by W.left.affineCover. Over each point choose a chart a:A to W and apply the previous step to P.map a.op xi. Compose a with an arrow b:B to A from its annihilating cover. Functoriality gives P.map (b comp a).op xi=0 and the composite hits the chosen point. Hence the equalizer sieve of xi and zero is jointly surjective, and therefore covering in the small etale topology.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
-    "def-weil-pbc-etale-site"
+    "def-weil-pbc-etale-site",
+    "lem-sbc-cyclic-derived-hom-cohomology-comparison"
    ],
    "elementary": true
   },
   {
-   "text": "Every section of the sheafification locally comes from the presheaf. Refine that cover to kill those representatives. Separatedness then forces the section to be zero. All section groups vanish, so the sheaf and its isomorphic higher direct image are zero. Only the local-representative (local-surjectivity) clause of the cited node is used, at the adequate value universe Type (u+1). Its unrestricted-universe local-injectivity clause is disputed and is not used; Mathlib Presheaf.isLocallySurjective_toSheafify′ (CategoryTheory/Sites/LocallySurjective.lean:308-315) supplies the needed clause for abelian sheafification directly.",
+   "text": "The covering equalizer sieve is contained in the image sieve of the zero endomorphism of P, so that endomorphism is locally surjective. Mathlib Presheaf.isLocallySurjective_presheafToSheaf_map_iff transfers local surjectivity to the sheafified zero endomorphism. Sheafification is additive, so that endomorphism is zero. Mathlib Sheaf.isLocallySurjective_iff_epi′ makes it epi; IsZero.of_epi_zero implies the associated sheaf is zero. Transport across nonempty_higherDirectImage_iso_sheafification_abelian_single. The value universe is u+1, which contains both site universes.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "sbc-lem-higher-direct-image-presheaf"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
+  "lem-sbc-cyclic-derived-hom-cohomology-comparison",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-site-sheafification-sections-local",
   "sbc-lem-higher-direct-image-presheaf"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
-  "place": "Existing declaration docstring, the local-vanishing argument for Z/e on the affine etale basis; formalized as a separate step by Q1."
+  "by": "agent C2",
+  "document": "Stacks Project",
+  "place": "Tag 03Q8; affine-cover refinement and Mathlib local-surjectivity/epimorphism criteria for the zero endomorphism after sheafification"
  },
  "mathlib_searches": [
   {
@@ -124,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-dccd0",
-  "group": "Q1",
+  "reviewer": "X-1ba83",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T070548-L-3475998",
+  "landing": "20261013T201739-L-3965810",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean proofs and signatures with all four nodes, the declared definition changes and downstream users; compilation, axiom checks, API conversion checks, and the C1 citation repair pass."
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing signatures are unchanged, DAG/report/change records agree, imports are used, and the sole remaining sorry is a named theorem with source and proof documentation."
  }
 }
