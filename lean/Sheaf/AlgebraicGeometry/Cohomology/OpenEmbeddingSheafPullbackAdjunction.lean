@@ -1,6 +1,6 @@
 module
 public import Mathlib.Topology.Sheaves.Abelian
-public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackMonomorphisms
 
 /-! Auxiliary extension-by-zero adjunction for open embeddings. -/
 @[expose] public section
@@ -21,4 +21,17 @@ theorem Topology.isOpenEmbedding_sheafPullback_adjunction
     ∃ L : X.Sheaf AddCommGrpCat.{u} ⥤ Y.Sheaf AddCommGrpCat.{u},
       Nonempty L.PreservesMonomorphisms ∧
         Nonempty (L ⊣ TopCat.Sheaf.pullback AddCommGrpCat.{u} f) := by
-  sorry
+  let G := hf.functor
+  have := hf.functor_isContinuous
+  let L := G.sheafPullback AddCommGrpCat.{u} (Opens.grothendieckTopology X)
+    (Opens.grothendieckTopology Y)
+  have hL : L.PreservesMonomorphisms := by
+    exact Topology.isOpenEmbedding_sheafPullback_preservesMonomorphisms f hf
+  refine ⟨L, ⟨hL⟩, ?_⟩
+  let adj := G.sheafAdjunctionContinuous AddCommGrpCat.{u}
+    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
+  have e : G.sheafPushforwardContinuous AddCommGrpCat.{u}
+      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y) ≅
+      TopCat.Sheaf.pullback AddCommGrpCat.{u} f :=
+    (Topology.IsOpenEmbedding.sheafPullbackIso AddCommGrpCat.{u} hf).symm
+  exact ⟨adj.ofNatIsoRight e⟩

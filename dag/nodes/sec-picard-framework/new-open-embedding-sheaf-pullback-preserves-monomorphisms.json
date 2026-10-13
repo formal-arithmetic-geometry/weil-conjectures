@@ -1,0 +1,108 @@
+{
+ "id": "new-open-embedding-sheaf-pullback-preserves-monomorphisms",
+ "kind": "statement",
+ "title": "Open embedding sheaf pullback preserves monomorphisms",
+ "statement": "For an open embedding f : X → Y, the sheaf pullback functor constructed by sheafified left Kan extension along the open-subspace functor preserves monomorphisms of AddCommGrp-valued sheaves.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/03DJ",
+  "place": "Sectionwise direct sums preserve injections and sheafification in abelian groups is exact."
+ },
+ "proof": [
+  {
+   "text": "For an open V in Y, the pointwise left Kan extension is the colimit over opens W in X satisfying V ⊆ f(W). If V is not contained in the open image of f this category is empty, and the colimit in abelian groups is zero. Otherwise f⁻¹(V) is terminal in this opposite-inclusion indexing category and the colimit is F(f⁻¹(V)), naturally in F. Therefore this left Kan extension preserves sectionwise monomorphisms.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf inclusion and abelian sheafification preserve monomorphisms. Compose these functors with the left Kan extension, and transport monomorphism preservation along Functor.sheafPullbackConstruction.sheafPullbackIso to the chosen sheafPullback.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/03DJ",
+  "place": "Localized-site extension by zero specialized to the open image; pointwise Kan colimit description and exact sheafification. D3 second reading supplies the empty/terminal indexing-category argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left Kan extension preserves monomorphisms along open inclusion sheaf abelian groups",
+   "date": "2026-10-13",
+   "results": "Returned sheaf mono_iff_presheaf_mono and stalkFunctor_preserves_mono, but no extension-by-zero preservation theorem for the open embedding functor.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesMonomorphisms\"",
+   "date": "2026-10-13",
+   "results": "0 hits.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lanEvaluationIsoColim|extensionByZero|extension_by_zero",
+   "date": "2026-10-13",
+   "results": "Mathlib Functor.lanEvaluationIsoColim supplies the pointwise colimit formula. Library site_extensionByZero_exact is proved for Over.forget on a localized precoverage, and zariski_extensionByZero_exact specializes it to schemes. Neither directly states preservation for hf.functor; transport through the equivalence of Opens X with opens below the image remains. No exact TopCat declaration found.",
+   "verdict": "related proved results, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero preserves monomorphisms of abelian sheaves along an open embedding",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error. Logged by msearch.py; no search verdict asserted."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackAdjunction",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-open-embedding-sheaf-pullback-adjunction",
+   "place": "Mono-preservation step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackMonomorphisms",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/OpenEmbeddingSheafPullbackMonomorphisms.lean",
+  "declaration": "Topology.isOpenEmbedding_sheafPullback_preservesMonomorphisms",
+  "statement": "theorem Topology.isOpenEmbedding_sheafPullback_preservesMonomorphisms\n    {X Y : TopCat.{u}} (f : X ⟶ Y) (hf : Topology.IsOpenEmbedding f) :\n    (let G := hf.functor\n     haveI := hf.functor_isContinuous\n     G.sheafPullback AddCommGrpCat.{u} (Opens.grothendieckTopology X)\n       (Opens.grothendieckTopology Y)).PreservesMonomorphisms",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fbb3f",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T010612-L-2669946",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fbb3f",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T010612-L-2669946",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proof matched the DAG; remaining lemma matched Stacks 03DI/03DJ; both delivered modules and sole direct importer compiled cleanly; axioms contain only the permitted three plus sorryAx from the named remaining lemma."
+ }
+}
