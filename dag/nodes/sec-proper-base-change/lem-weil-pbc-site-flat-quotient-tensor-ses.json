@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-completed-pullback",
-   "place": "Detailed form, first displayed strict-tower pullback functor: 0G7E proof, both paragraphs: flatness of the resolution kernels; tensor exactness behind 0G7B.",
+   "place": "Detailed form, first displayed strict-tower pullback functor: tensor exactness behind 0G7B and flatness of the resolution kernels in 0G7E.",
    "via": [
     "lem-weil-pbc-ringed-topos-kflat-pullback",
     "lem-weil-pbc-diagram-kflat-replacements"
@@ -24,81 +24,144 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "flat.*[Ss]hort|[Ss]hort.*flat|[Ff]lat.*[Kk]ernel",
-   "results": "{\"top\": [], \"note\": \"\", \"n_hits\": 0, \"ok\": true}",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ordinary modules over a single ring, site functor flatness, or the construction of sheaf pullback; none states this arbitrary ringed-topos or sheaf-complex assertion"
+   "text": "By [lem-pc-sheaf-modules-tensor-closed], tensoring is additive and has a right adjoint in each variable. It preserves cokernels: under the adjunction, maps out of the tensor of a cokernel correspond exactly to maps out of the original middle object annihilating the original first map. Thus tensoring is right exact. The same cited statement gives the natural symmetry $X\\otimes Y\\cong Y\\otimes X$; its naturality identifies the maps in the two tensor orientations, so the exactness defining flatness can be used in either variable. Apply [lem-pc-sites-modules-functorial-flat-cover] to $N$ to obtain an epimorphism $P\\to N$ with $P$ flat, and put $Q=\\ker(P\\to N)$. Hence $0\\to Q\\to P\\to N\\to0$ is short exact in the abelian category of module sheaves.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-sites-modules-functorial-flat-cover",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EX (sites-modules-lemma-flat-tor-zero), proof of (2)"
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "Tensoring short exact sequence of sheaves with flat quotient is exact and kernel is flat",
-   "results": "{\"top\": [], \"note\": \"service unavailable: Internal Server Error\", \"n_hits\": 0, \"ok\": false}",
+   "text": "Form the tensor diagram whose rows are $F\\otimes Q\\to G\\otimes Q\\to H\\otimes Q\\to0$, $0\\to F\\otimes P\\to G\\otimes P\\to H\\otimes P\\to0$, and $F\\otimes N\\to G\\otimes N\\to H\\otimes N\\to0$. The first and third rows and all columns are right exact by step 1. The middle row is short exact because $P$ is flat; the map $H\\otimes Q\\to H\\otimes P$ is mono because $H$ is flat, using the natural tensor symmetry of [lem-pc-sheaf-modules-tensor-closed]. Here is the left-injectivity chase, written with generalized elements: for $x$ in the kernel of $F\\otimes N\\to G\\otimes N$, lift $x$ to $a$ in $F\\otimes P$. The image of $a$ lifts from $b$ in $G\\otimes Q$. The image of $b$ in $H\\otimes Q$ is zero, since its image in $H\\otimes P$ is zero and that vertical map is mono. Lift $b$ from $c$ in $F\\otimes Q$. Subtract the image of $c$ from $a$; its image in $G\\otimes P$ vanishes, so the middle-row mono makes the difference zero. Thus $x=0$. Each lift means pullback along the indicated epimorphism, which is again epi in an abelian category; equality after these epic refinements implies equality before them. This is the explicit snake-lemma chase of 03EX, valid without assuming enough points or sectionwise surjectivity. Together with right exactness it proves the first assertion.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EX (sites-modules-lemma-flat-tor-zero), proof of (2)"
+   }
+  },
+  {
+   "text": "Now assume $G$ is flat and let $U\\to V$ be any monomorphism of module sheaves. Step 2 gives monomorphisms $F\\otimes U\\to G\\otimes U$ and $F\\otimes V\\to G\\otimes V$. The composite $F\\otimes U\\to G\\otimes U\\to G\\otimes V$ is mono because $G$ is flat, using the natural tensor symmetry of [lem-pc-sheaf-modules-tensor-closed]. It also factors as $F\\otimes U\\to F\\otimes V\\to G\\otimes V$, so $F\\otimes U\\to F\\otimes V$ is mono. Thus tensoring with $F$ preserves all monomorphisms and is right exact by step 1. For an arbitrary short exact sequence, right exactness gives image equal to kernel and epimorphy of the last map, and preservation of its first mono gives left exactness. It is therefore exact, proving flatness of $F$ by its definition.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EY (sites-modules-lemma-flat-ses), part (2): explicit monomorphism test in place of its snake-lemma test on exact complexes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-functorial-flat-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EX and 03EY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a short exact sequence of sheaves with flat quotient is exact and kernel is flat",
+   "results": "{\"t\": \"2026-10-13T23:30:12Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a short exact sequence of sheaves with flat quotient is exact and kernel is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\"], \"digest\": \"561b52ddba0a0d99\"}",
    "date": "2026-10-14",
-   "verdict": "unavailable"
+   "verdict": "no match: ordinary Module.Flat and abelian-instance results do not state tensor exactness with flat quotient for arbitrary module sheaves"
   },
   {
    "tool": "loogle",
    "query": "Module.Flat, ShortComplex.Exact",
-   "results": "{\"top\": [], \"note\": \"loogle: unknown identifier 'ShortComplex.Exact'\", \"n_hits\": 0, \"ok\": true}",
+   "results": "{\"t\": \"2026-10-13T23:30:12Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, ShortComplex.Exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ShortComplex.Exact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
    "verdict": "invalid pattern: loogle: unknown identifier 'ShortComplex.Exact'"
   },
   {
-   "tool": "leanfinder",
-   "query": "Short exact sequence of sheaf modules with flat quotient stays exact after tensoring and flat middle term implies flat kernel",
-   "results": "{\"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact\"], \"note\": \"\", \"n_hits\": 8, \"ok\": true}",
+   "tool": "grep",
+   "query": "flat.*[Ss]hort|[Ss]hort.*flat|flat.*ker",
+   "results": "{\"t\": \"2026-10-13T23:30:12Z\", \"tool\": \"grep\", \"query\": \"flat.*[Ss]hort|[Ss]hort.*flat|flat.*ker\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-14",
-   "verdict": "no match: hits concern ordinary modules over a single ring, site functor flatness, or the construction of sheaf pullback; none states this arbitrary ringed-topos or sheaf-complex assertion"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Flat sheaves of modules are closed under kernels of surjections between flat sheaves",
-   "results": "{\"top\": [\"Module.Flat.of_forall_exists_factorization\", \"SheafOfModules.instAbelian\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.ker_lTensor_eq\", \"Module.Flat.iff_forall_exists_factorization\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.FaithfullyFlat\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"note\": \"\", \"n_hits\": 8, \"ok\": true}",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ordinary modules over a single ring, site functor flatness, or the construction of sheaf pullback; none states this arbitrary ringed-topos or sheaf-complex assertion"
+   "verdict": "no match: ordinary Module.Flat and abelian-instance results do not state tensor exactness with flat quotient for arbitrary module sheaves"
   },
   {
    "tool": "loogle",
    "query": "Module.Flat, CategoryTheory.ShortComplex.Exact",
-   "results": "{\"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"note\": \"\", \"n_hits\": 4, \"ok\": true}",
+   "results": "{\"t\": \"2026-10-13T23:35:49Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, CategoryTheory.ShortComplex.Exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"6b234ecd045c0fec\"}",
    "date": "2026-10-14",
-   "verdict": "no match: hits concern ordinary modules over a single ring, site functor flatness, or the construction of sheaf pullback; none states this arbitrary ringed-topos or sheaf-complex assertion"
-  },
-  {
-   "tool": "grep",
-   "query": "flat.*[Ss]hort|[Ss]hort.*flat|flat.*ker",
-   "results": "{\"top\": [\"Mathlib/RingTheory/Flat/IsBaseChange.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\"], \"note\": \"\", \"n_hits\": 13, \"ok\": true}",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern ordinary modules over a single ring, site functor flatness, or the construction of sheaf pullback; none states this arbitrary ringed-topos or sheaf-complex assertion"
+   "verdict": "no match: ordinary Module.Flat and abelian-instance results do not state tensor exactness with flat quotient for arbitrary module sheaves"
   },
   {
    "tool": "leanfinder",
-   "query": "Tensoring a short exact sequence of module sheaves with flat cokernel is exact for every tensor factor",
-   "results": "{\"t\": \"2026-10-13T22:28:38Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a short exact sequence of module sheaves with flat cokernel is exact for every tensor factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"20b24e2a217c8287\"}",
+   "query": "Kernel of an epimorphism between flat module sheaves is flat on any ringed site",
+   "results": "{\"t\": \"2026-10-13T23:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel of an epimorphism between flat module sheaves is flat on any ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"Module.Flat.ker_lTensor_eq\", \"PresheafOfModules.instIsNormalMonoCategory\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"47eaeb09b4bfa375\"}",
    "date": "2026-10-14",
-   "verdict": "no match: ordinary-module flat tensor-factor declarations do not assert this arbitrary-site module-sheaf result"
+   "verdict": "no match: ordinary Module.Flat and abelian-instance results do not state tensor exactness with flat quotient for arbitrary module sheaves"
   },
   {
    "tool": "grep",
-   "query": "SheafOfModules.*(flat|exact)|KFlat|K_flat|pureAcyclic",
-   "results": "{\"t\": \"2026-10-13T22:29:25Z\", \"tool\": \"grep\", \"query\": \"SheafOfModules.*(flat|exact)|KFlat|K_flat|pureAcyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"338da79c78580824\"}",
+   "query": "SheafOfModules.*(flat|exact)|flat.*ker",
+   "results": "{\"t\": \"2026-10-13T23:35:50Z\", \"tool\": \"grep\", \"query\": \"SheafOfModules.*(flat|exact)|flat.*ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/RingTheory/Flat/IsBaseChange.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\"], \"digest\": \"5f0e1acc78cabf16\"}",
    "date": "2026-10-14",
-   "verdict": "no match: ordinary-module flat tensor-factor declarations do not assert this arbitrary-site module-sheaf result"
+   "verdict": "no match: ordinary Module.Flat and abelian-instance results do not state tensor exactness with flat quotient for arbitrary module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor a short exact sequence of module sheaves with flat cokernel",
+   "results": "{\"t\": \"2026-10-13T23:35:50Z\", \"tool\": \"leansearch\", \"query\": \"Tensor a short exact sequence of module sheaves with flat cokernel\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topos-kflat-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "worker": "stage1",
+  "summary": "Follow 03EX using an existing functorial flat cover and sheaf tensor-Hom adjunction; write out the entire diagram chase rather than citing an uncited snake lemma. Prove 03EY(2) by the explicit monomorphism test for the flat kernel. Corrected the invalid use of flatness of a sheaf as sectionwise presheaf flatness and the incorrect constant-coefficient sheaf infrastructure citation. No new nodes.",
+  "blueprint": "Realizes def-weil-pbc-completed-pullback detailed form, first displayed strict-tower pullback functor: tensor exactness behind 0G7B and flatness of resolution kernels in 0G7E.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic symmetric-monoidal closed tensor structure and right-exactness for module sheaves; the proper-base-change unit supplies no same-unit tensor-Hom construction."
+   },
+   {
+    "node": "lem-pc-sites-modules-functorial-flat-cover",
+    "why": "Generic epimorphic flat cover for an arbitrary module sheaf N, needed to form P → N; no node on this unit supplies flat covers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-functorial-flat-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-7595b2535",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-7595b2535 (reviewer sub-agent of L); spot-checked: Full mathematical review passes against Stacks 03EX(2) and 03EY(2), including hypotheses, diagram chase, coefficient category, target master source, route, and edge cases. Repairable faults: created.item named another delivery, and split_report omitted required tool_uses for the two off-unit generic lemmas. Corrected DAG JSON is under fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-site-flat-quotient-tensor-ses.json.; 1 file(s) fixed by the reviewer"
+ }
 }
