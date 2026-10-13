@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-etale-limit-affine-stage-eventual-zero-tail",
+ "kind": "statement",
+ "title": "Finite-stage detection on affine tail",
+ "statement": "Under the hypotheses of lem-weil-pbc-etale-limit-affine-stage-eventual-zero, for i₀ ≤ i, every class at i whose comparison image is zero vanishes at a later stage.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), cofinal-tail reduction; categories.tex Tag 04AX (section-directed-colimits) for eventual equality. Source statements checked at https://stacks.math.columbia.edu/tag/09YQ and https://stacks.math.columbia.edu/tag/04AX on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply affine-stage eventual-zero comparison to the cofinal affine tail.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-affine-eventual-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ, cofinal-tail reduction of affine-stage continuity, followed by Tag 04AX eventual equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a filtered colimit of abelian groups, an element at a stage maps to zero if and only if its transition to some later stage is zero",
+   "date": "2026-10-13",
+   "results": "AddGrpCat.FilteredColimits.colimit_zero_eq; CategoryTheory.Limits.Concrete.colimit_rep_eq_zero; ModuleCat.FilteredColimits.colimit_zero_eq; AddGrpCat.FilteredColimits.G.mk_eq; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit; AddCommGrpCat.FilteredColimits.colimitAddCommGroup; AddMonCat.FilteredColimits.colimit_zero_eq; AddCommGrpCat.FilteredColimits.colimit",
+   "verdict": "No existing single-affine-stage kernel-detection theorem; filtered-colimit equality is available in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"eq_iff\"",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff'; CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff; CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists; CategoryTheory.Limits.CofanTypes.inj_apply_eq_iff_of_isColimit; CategoryTheory.Limits.Cofan.inj_apply_eq_iff_of_isColimit; CategoryTheory.Limits.IsColimit.eq_iff'; CategoryTheory.Limits.IsColimit.eq_iff",
+   "verdict": "No existing single-affine-stage kernel-detection theorem; filtered-colimit equality is available in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(affine.*stage|eventual.*zero)|affine.*stage.*cohomology",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "No existing single-affine-stage kernel-detection theorem; filtered-colimit equality is available in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A class at an affine stage of a directed inverse system of schemes that becomes zero in limit etale cohomology vanishes at a later stage",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology class vanishes at a finite later index over an inverse limit with affine transition maps",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, exists_appTop_map_eq_zero_of_isLimit, exists_app_map_eq_zero_of_isLimit; other hits concerned cotangent or derived cohomology.",
+   "verdict": "Second reader: these concern structure-sheaf sections, not arbitrary abelian etale cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit_rep_eq_zero\"",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.Concrete.colimit_rep_eq_zero (ModuleCat R).",
+   "verdict": "Second reader: an algebraic colimit equality criterion, not the geometric one-affine-stage comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "eventual_zero|eq_zero.*isLimit|vanish|zero.*stage in lean/Sheaf/AlgebraicGeometry/EtaleLimit*, lean/WeilConjectures/AlgebraicGeometry, lean/WeilConjectures/SixFunctors/Etale",
+   "date": "2026-10-13",
+   "results": "EtaleLimitAffineEventualZero requires all stages affine. EtaleLimitAffineDegreeZeroKernel only handles degree zero and all stages affine. EtaleLimitBinaryEventualZero uses binary-open comparison hypotheses. No existing single-affine-stage eventual-zero theorem.",
+   "verdict": "Second reader: none is an exact replacement; the missing step remains cofinal-tail reindexing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The continuity invocation in Tag 0A51: detection of zero by restricting to the affine cofinal tail.",
+   "via": [
+    "lem-weil-pbc-etale-limit-cohomology-affine-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitAffineStageEventualZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_affine_stage_eventual_zero_tail",
+  "statement": "theorem etale_limit_affine_stage_eventual_zero_tail\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L) (p : ℕ)\n    (H : I ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) p))\n    (hH : ∀ (i j : I) (f : i ⟶ j), H.map f =\n      (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) p) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map (φ f) p) ≫ (eH j).inv)\n    (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt p))\n    (hB : ∀ i : I, B.ι.app i ≫ eB.hom =\n      (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p))\n    (i₀ : I) [IsAffine (D.obj (op i₀))] :\n    ∀ (i : I) (_hi : i₀ ≤ i) (x : H.obj i), (B.ι.app i).hom x = 0 →\n      ∃ (j : I) (f : i ⟶ j), (H.map f).hom x = 0",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-etale-limit-affine-eventual-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T054246-L-452096",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T054246-L-452096",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
