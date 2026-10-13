@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-derived-tensor-hom-sections-unit",
+ "kind": "statement",
+ "title": "Tensor-unit normalization of derived Hom sections",
+ "statement": "Let X be a scheme [def-pc-scheme] with its module derived category D [def-pc-derived-category], tensor unit 1 and tensor product [def-pc-scheme-derived-tensor-structure], internal Hom H [def-pur-derived-internal-hom], and zeroth hypercohomology Q [def-pur-ringed-site-zeroth-hypercohomology]. Let q(A,K,L):Hom(A,H(K,L)) ≃ Hom(A tensor K,L) satisfy IsCanonicalDerivedTensorHom [def-pc-canonical-derived-tensor-hom-bijection]. There exist additive equivalences gamma(A):Q(A) ≃ Hom(1,A) natural covariantly in A, and e(P):Q(H(P)) ≃ Hom(P1,P2) natural on D^op times D. Their naturality equations are gamma(B)(Q(f)(x))=gamma(A)(x);f and e(P-prime)(Q(H(f))(x))=unop(f1);e(P)(x);f2. For every K,L and x in Q(H(K,L)), e(K,L)(x)=lambda_K^{-1};q(1,K,L)(gamma(H(K,L))(x)). No scheme morphism, pullback functor, direct image or adjunction is involved.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pur-derived-internal-hom",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pc-canonical-derived-tensor-hom-bijection"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom) and 08JA (global Hom identification); representative identification in original parent proof step 2, specialized to the tensor unit. Checked at the official Stacks tag pages."
+ },
+ "proof": [
+  {
+   "text": "Naturality of q in its first variable expresses q(A,K,L)(f) as (f tensor identity);q(H(K,L),K,L)(identity). The shared derived tensor is additive in each variable, so this formula proves q preserves addition. Its given bijection therefore upgrades to an additive equivalence (private qAdd).",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For K=unit, precomposition with the inverse right unitor defines unitHom(A,B):Hom(A,H(unit,B)) equiv Hom(A,B). Naturality of q and of the right unitor prove naturality of unitHom in both variables (unitHom_left and unitHom_right). Define B -> H(unit,B) as unitHom(B,B) inverse applied to identity_B, and H(unit,B) -> B as unitHom(H(unit,B),B) applied to identity. The two naturality equations prove the inverse identities and naturality of this explicit unitIso. There is no selection from an existence theorem.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take a natural additive global-Hom family e0 from rhom_global_sections. Apply Q to unitIso(B), obtaining an additive equivalence Q(B) equiv Q(H(unit,B)), and follow it by e0(unit,B). This constructs gamma(B):Q(B) equiv Hom(unit,B). Naturality of unitIso and of e0 proves naturality of gamma. This uses the stated existential naturality, not naturality of an arbitrary family.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define e(K,L) as gamma(H(K,L)), followed by qAdd(unit,K,L), followed by precomposition with the inverse left unitor. This is an additive equivalence and satisfies the normalization equation by its definition. Naturality of gamma moves the Q(H(f)) input to composition by H(f). The given naturality of q then gives (identity tensor unop(f1));q(gamma(x));f2. Naturality of the inverse left unitor turns this into unop(f1);e(K,L)(x);f2. These constructions and equations are fully proved in sectionsUnitReduction. Specialize to the derived module category, installing its existing MonoidalPreadditive structure; the representative half of the canonical predicate is unused.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pur-rhom-global-sections",
+  "def-pur-ringed-site-zeroth-hypercohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W2",
+  "date": "2026-10-14",
+  "note": "Fully proved categorical construction from the existing natural rhom_global_sections family. Naturality of tensor-Hom supplies the unit internal-Hom isomorphism and additive uncurrying; no representative compatibility hole is introduced. Source results 08JA and 08DJ read at the official Stacks pages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth hypercohomology is represented by the tensor unit, compatible with tensor Hom adjunction",
+   "results": "groupCohomology.cochainsIso₀; CochainComplex.toSingle₀Equiv_apply; CochainComplex.fromSingle₀Equiv_apply_coe; CochainComplex.toSingle₀Equiv; groupCohomology.cochainsIso₁; groupCohomology.inhomogeneousCochainsIso; CochainComplex.HomComplex.Cochain.toSingleEquiv; CochainComplex.HomComplex.Cochain.fromSingleEquiv",
+   "date": "2026-10-14",
+   "verdict": "Related APIs only; no tensor-unit-normalized sections identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-14",
+   "verdict": "Related APIs only; no tensor-unit-normalized sections identification."
+  },
+  {
+   "tool": "grep",
+   "query": "rhom_global_sections|unit.*[Hh]om|[Hh]om.*unit",
+   "results": "Mathlib/NumberTheory/LucasLehmer.lean; Mathlib/NumberTheory/Wilson.lean; Mathlib/NumberTheory/Wilson.lean; Mathlib/NumberTheory/DirichletCharacter/Basic.lean; Mathlib/NumberTheory/DirichletCharacter/Basic.lean; Mathlib/NumberTheory/DirichletCharacter/Basic.lean; Mathlib/NumberTheory/DirichletCharacter/Basic.lean; Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Related APIs only; no tensor-unit-normalized sections identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth hypercohomology of modules on a ringed site is naturally isomorphic to derived morphisms from the tensor unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "grep",
+   "query": "rhom_global_sections; tensorHom at unit; HomCongr; MonoidalPreadditive; unit internal Hom",
+   "results": "The library has the natural existential CategoryTheory.rhom_global_sections; Mathlib has Iso.homCongr, rightUnitor_inv_naturality, leftUnitor_inv_naturality and MonoidalPreadditive.add_whiskerRight. Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation shows how to install DerivedCategory.monoidalPreadditive. These supply the fully proved construction, but no existing normalized unit-sections theorem was found.",
+   "date": "2026-10-14",
+   "verdict": "Construct the normalized unit-sections theorem from the existing natural global-Hom family and categorical API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackEvaluationSections",
+  "date": "2026-10-14",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Global Hom comparison in the finite-duality case; original evaluation-sections proof step 2 and unit specialization of its step 3",
+   "via": [
+    "lem-pc-derived-pullback-evaluation-sections",
+    "lem-pc-derived-internal-hom-pullback-mate-sections",
+    "lem-pc-derived-internal-hom-pullback-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorHomSectionsUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorHomSectionsUnit.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedTensorHom_sections_unit",
+  "statement": "theorem exists_derivedTensorHom_sections_unit (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (q : ∀ A K L : schemeDerivedCategory X,\n      (A ⟶ (derivedInternalHom (Opens.grothendieckTopology X)\n        X.toRingedSpace.sheaf).obj (op K, L)) ≃ (A ⊗ K ⟶ L))\n    (hq : IsCanonicalDerivedTensorHom X q) :\n    ∃ (γ : ∀ A : schemeDerivedCategory X,\n        (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n          X.toRingedSpace.sheaf).obj A ≃+ (𝟙_ (schemeDerivedCategory X) ⟶ A))\n      (e : ∀ P : (schemeDerivedCategory X)ᵒᵖ × schemeDerivedCategory X,\n        (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n          X.toRingedSpace.sheaf).obj\n          ((derivedInternalHom (Opens.grothendieckTopology X)\n            X.toRingedSpace.sheaf).obj P) ≃+ (P.1.unop ⟶ P.2)),\n      (∀ (A B : schemeDerivedCategory X) (f : A ⟶ B)\n          (x : (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n            X.toRingedSpace.sheaf).obj A),\n        γ B ((ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n          X.toRingedSpace.sheaf).map f x) = γ A x ≫ f) ∧\n      (∀ (P P' : (schemeDerivedCategory X)ᵒᵖ × schemeDerivedCategory X) (f : P ⟶ P')\n          (x : (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n            X.toRingedSpace.sheaf).obj\n              ((derivedInternalHom (Opens.grothendieckTopology X)\n                X.toRingedSpace.sheaf).obj P)),\n        e P' ((ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n          X.toRingedSpace.sheaf).map\n            ((derivedInternalHom (Opens.grothendieckTopology X)\n              X.toRingedSpace.sheaf).map f) x) = f.1.unop ≫ e P x ≫ f.2) ∧\n      (∀ (K L : schemeDerivedCategory X)\n          (x : (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X)\n            X.toRingedSpace.sheaf).obj\n              ((derivedInternalHom (Opens.grothendieckTopology X)\n                X.toRingedSpace.sheaf).obj (op K, L))),\n        e (op K, L) x = (λ_ K).inv ≫ q _ K L (γ _ x))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T215616-L-902930",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T215616-L-902930",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

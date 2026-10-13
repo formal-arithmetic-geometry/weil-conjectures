@@ -13679,3 +13679,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:56 L: merged deliver/U2/Sheaf.AlgebraicGeometry.LocalKFlatTensorRoof (stage 3; reviewer PASS; first push; landing 20261013T215614-L-902228 (proof); batch 20261013T215553; modules 1; new nodes 0)
 - 21:56 L: merged deliver/U4/Sheaf.Algebra.Homology.BaseDerivedTensorRingTransport (stage 3; reviewer PASS; after a return; landing 20261013T215615-L-902456 (interface); batch 20261013T215553; modules 3; new nodes 2)
 - 21:56 L: merged deliver/V2/Sheaf.Algebra.Homology.HomologyEvaluationRestrictionComparison (stage 3; reviewer PASS; first push; landing 20261013T215615-L-902675 (interface); batch 20261013T215553; modules 2; new nodes 1)
+- 21:56 L: merged deliver/W2/Sheaf.AlgebraicGeometry.DerivedPullbackEvaluationSections (stage 3; reviewer PASS; first push; landing 20261013T215616-L-902930 (interface); batch 20261013T215553; modules 2; new nodes 1)
