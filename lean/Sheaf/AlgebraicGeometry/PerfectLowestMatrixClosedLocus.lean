@@ -11,9 +11,11 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.AlgebraicGeometry.PerfectJumpLoci
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.PerfectLowestMatrixCharts
+import Sheaf.AlgebraicGeometry.LocalClosedLocusGluing
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The lowest matrix-zero closed locus
 
@@ -30,6 +32,68 @@ open CategoryTheory CategoryTheory.Limits
 set_option autoImplicit false
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem pullbackHomology_restrict_iso
+    [∀ T : Scheme.{u}, HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    {S T : Scheme.{u}} (E : schemeDerivedCategory S) (a : ℤ)
+    (h : T ⟶ S) (V : T.Opens) :
+    Nonempty ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) a).obj
+        ((derivedPullback (V.ι ≫ h)).obj E) ≅
+      (Modules.restrictFunctor V.ι).obj
+        ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
+            ((derivedPullback h).obj E))) := by
+  obtain ⟨_, _, _, c, _⟩ := exists_derivedPullbackComposition.{u, w}
+  obtain ⟨e⟩ := Modules.nonempty_homology_derivedOpenPullback_iso_restrict
+    V ((derivedPullback h).obj E) a
+  exact ⟨(DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) a).mapIso
+      ((c V.ι h).app E).symm ≪≫ e⟩
+
+private theorem pullbackHomology_rank_restrict
+    [∀ T : Scheme.{u}, HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    {S T : Scheme.{u}} (E : schemeDerivedCategory S) (a : ℤ) (r : ℕ)
+    (h : T ⟶ S) (V : T.Opens)
+    (hfree : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
+          ((derivedPullback h).obj E)) r) :
+    SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) a).obj
+          ((derivedPullback (V.ι ≫ h)).obj E)) r := by
+  obtain ⟨e⟩ := pullbackHomology_restrict_iso E a h V
+  let := hfree
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso e.symm
+
+private theorem pullbackHomology_rank_of_locally
+    [∀ T : Scheme.{u}, HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
+    {S T : Scheme.{u}} (E : schemeDerivedCategory S) (a : ℤ) (r : ℕ)
+    (h : T ⟶ S)
+    (hlocal : ∀ x : T, ∃ V : T.Opens, x ∈ V ∧
+      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+        ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) a).obj
+            ((derivedPullback (V.ι ≫ h)).obj E)) r) :
+    SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
+          ((derivedPullback h).obj E)) r := by
+  classical
+  choose V hx hfree using hlocal
+  apply Modules.isFiniteLocallyFreeOfRank_of_iSup_eq_top _ V
+  · apply eq_top_iff.mpr
+    intro x _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hx x⟩
+  · intro x
+    obtain ⟨e⟩ := pullbackHomology_restrict_iso E a h (V x)
+    let := hfree x
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso e
+
 
 /-- On an open where the lowest fibre rank is at most `r`, the matrix-zero locus
 is a finitely presented closed immersion representing rank-`r` lowest cohomology.
@@ -76,6 +140,25 @@ theorem exists_perfectLowestMatrixClosedLocus
           SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
             ((DerivedCategory.homologyFunctor
               (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
-                ((derivedPullback (h ≫ U.ι)).obj E)) r) := by sorry
+                ((derivedPullback (h ≫ U.ι)).obj E)) r) := by
+  let P : ∀ T : Scheme.{u}, (T ⟶ U.toScheme) → Prop := fun T h ↦
+    SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
+          ((derivedPullback (h ≫ U.ι)).obj E)) r
+  have hrestrict : ∀ (T : Scheme.{u}) (h : T ⟶ U.toScheme) (V : T.Opens),
+      P T h → P V.toScheme (V.ι ≫ h) := by
+    intro T h V hfree
+    simpa only [P, Category.assoc] using
+      pullbackHomology_rank_restrict E a r (h ≫ U.ι) V hfree
+  have hlocal : ∀ (T : Scheme.{u}) (h : T ⟶ U.toScheme),
+      (∀ x : T, ∃ V : T.Opens, x ∈ V ∧ P V.toScheme (V.ι ≫ h)) → P T h := by
+    intro T h hfree
+    apply pullbackHomology_rank_of_locally E a r (h ≫ U.ι)
+    simpa only [P, Category.assoc] using hfree
+  have hcharts := exists_perfectLowestMatrixCharts S E hE a b hamp r U hU
+  obtain ⟨Z, i, hi, hfp, hfactor⟩ :=
+    exists_closedLocus_of_local_charts U.toScheme P hrestrict hlocal hcharts
+  exact ⟨Z, i, hi, hfp, hfactor⟩
 
 end AlgebraicGeometry.Scheme

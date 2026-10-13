@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-local-closed-locus-gluing",
+ "kind": "statement",
+ "title": "Gluing local closed representatives of a source-local predicate",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Assign a proposition $P(T,h)$ to every scheme $T$ and morphism $h:T\\to X$. Assume that $P(T,h)$ implies $P(V,h\\circ\\iota_V)$ for every open subscheme $V\\subseteq T$ [def-weil-open-immersion]. Assume that $P(T,h)$ holds if every point of $T$ has an open neighbourhood $V$ with $P(V,h\\circ\\iota_V)$. Finally, assume that each point $x\\in X$ has an open neighbourhood $U$ and a closed immersion $i:Z_U\\to U$ [def-weil-closed-immersion], locally of finite presentation [def-sbc-locally-finite-presentation], such that for every scheme $T$ and $h:T\\to U$, factorization through $i$ is equivalent to $P(T,\\iota_U\\circ h)$. Then there is a closed immersion $q:Z\\to X$ locally of finite presentation such that, for every scheme $T$ and $h:T\\to X$, factorization through $q$ is equivalent to $P(T,h)$. Stability under arbitrary base change is not assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "final gluing paragraph (details omitted there), expanded using Schemes Tags 01JB and 01JC"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose local representatives at all points. Put F_x=i_x composed with the chart inclusion, a monomorphism. Let V_xy=F_x^{-1}(U_y), open in Z_x. Applying the local factorization criterion to the identity shows P(F_x). Restriction stability and the criterion on U_y give a lift from V_xy into Z_y. Its image lies in V_yx, so lift it into that open. The resulting transition maps commute with F_x. On self-overlaps V_xx=Z_x. All transition identities follow by cancellation of these monomorphisms. Construct the triple-overlap pullback lifts; cancellation gives the cocycle.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Scheme.GlueData to this explicit cocycle. Its glued object and jointly surjective open chart inclusions give a morphism q to X by Multicoequalizer.desc. Its inverse image of U_x equals the range of the x-th glued chart: a point from another chart lying over U_x is moved by the transition map. IsOpenImmersion.isPullback identifies the local representative with the pullback of q to U_x. Closed immersion and local finite presentation follow from Mathlib IsZariskiLocalAtTarget.of_openCover and these pullback identifications.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a factor T->Z->X, each point of T has an open neighbourhood whose map into Z lifts into a glued chart. The local representing criterion gives P on this neighbourhood; source locality gives P on T. Conversely pull a map satisfying P back to the inverse images of all U_x. Restriction stability and local criteria give lifts into local representatives, hence into Z. Since q is a monomorphism they agree on overlaps. Cover.glueMorphisms and Cover.hom_ext produce the global lift and its factorization identity. The same construction works for empty X and T; source locality implies P for the empty source.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-glue-schemes",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "final gluing paragraph (details omitted there), expanded using Schemes Tags 01JB and 01JC",
+  "note": "Spells out the stated local step, including the source-locality and empty-scheme cases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A property of maps into a scheme is represented by a closed subscheme if locally on the target it is represented by closed subschemes and is local on the source",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue locally representing closed subschemes for a predicate local on the source",
+   "results": "Scheme.LocalRepresentability.glueData, Scheme.GlueData.gluedScheme, Scheme.GlueData, IsZariskiLocalAtSource.sigmaDesc. No direct theorem with this predicate, open-restriction stability and closed finite-presentation conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFreeOfRank.*restrict|ClosedImmersion.*glue; rg Scheme.GlueData and IdealSheaf source; gluing closed subschemes in whole blueprint",
+   "results": "Mathlib supplies Scheme.GlueData and Cover.glueMorphisms; source library has IdealSheafData.exists_comap_ι_eq but it requires affine-local compatible ideals already constructed. Existing LocalImmersionLocus requires stability under arbitrary base change and concludes only IsImmersion. No exact result for the needed hypotheses and conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLowestMatrixClosedLocus",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct locally closed loci of finite locally free degree-zero direct images; final gluing paragraph (details omitted there), expanded using Schemes Tags 01JB and 01JC",
+   "via": [
+    "lem-sc-perfect-lowest-matrix-closed-locus",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalClosedLocusGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalClosedLocusGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_closedLocus_of_local_charts",
+  "statement": "theorem exists_closedLocus_of_local_charts\n    (X : Scheme.{u}) (P : ∀ T : Scheme.{u}, (T ⟶ X) → Prop)\n    (hrestrict : ∀ (T : Scheme.{u}) (h : T ⟶ X) (V : T.Opens),\n      P T h → P V.toScheme (V.ι ≫ h))\n    (hlocal : ∀ (T : Scheme.{u}) (h : T ⟶ X),\n      (∀ x : T, ∃ V : T.Opens, x ∈ V ∧ P V.toScheme (V.ι ≫ h)) → P T h)\n    (hcharts : ∀ x : X, ∃ V : X.Opens, x ∈ V ∧\n      ∃ (Z : Scheme.{u}) (i : Z ⟶ V.toScheme),\n        IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧\n        (∀ (T : Scheme.{u}) (h : T ⟶ V.toScheme),\n          (∃ g : T ⟶ Z, g ≫ i = h) ↔ P T (h ≫ V.ι))) :\n    ∃ (Z : Scheme.{u}) (i : Z ⟶ X),\n      IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧\n      (∀ (T : Scheme.{u}) (h : T ⟶ X),\n        (∃ g : T ⟶ Z, g ≫ i = h) ↔ P T h)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T060422-L-584448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T060422-L-584448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
