@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-tensor-coefficient-cone-boundary",
+ "kind": "statement",
+ "title": "Ordinary tensor coefficient maps commute with the concrete cone boundary",
+ "statement": "For commutative rings A,C and a ring homomorphism rho:A to C, let F be termwise scalar extension. Let Q be any A-cochain complex, N any C-cochain complex and t:F(Q) to N a chain map. For f:P1 to P2 of arbitrary A-cochain complexes let P3 be its mapping cone and H the fixed-second-factor total tensor functor with Q. Put a(V)=mu_F(V,Q)^(-1) followed by F(V) tensor t. Then the boundary of F(H(coneTriangle(f))) followed by H^(i+1)(a(P1)) equals H^i(a(P3)) followed by the boundary of tensorConeTriangle(rho,f,N) [lem-pc-tensor-cone-five-term-exact], for every integer i. No derived model, exactness, flatness, or K-flatness hypothesis occurs.",
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-tensor-cone-five-term-exact"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Exact derived change of rings and its universal counit; Tag 0BYJ for the ordinary tensor comparison. Expansion of the parent cone-row proof."
+ },
+ "proof": [
+  {
+   "text": "Apply the upstream instance HomologicalComplex.commShift_mapBifunctorComparisonNatTrans_flipApp to the oplax scalar-extension tensorator. Compose with the shift-compatible natural transformation induced by t. Its components are precisely a(V). Its naturality and NatTrans.shift_app_comm provide a morphism between the two concrete triangles. Functor.homologySequenceδ_naturality gives the boundary equation; unfold homologySequenceδ and shiftMap to identify homologyδOfTriangle. This first-variable shift identification has no additional homogeneous sign.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-tensor-cone-five-term-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-tensor-cone-five-term-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Expansion of the parent cone-row proof; universal counit compatibility and ordinary tensor shift compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal derived scalar extension counit induces a morphism of long exact cohomology sequences for every distinguished triangle",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of exact functors induces commuting connecting homology maps of mapping cone triangles",
+   "results": "Actual hits: CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.comp_homologySequenceδ_assoc, CategoryTheory.Functor.homologySequence_comp, CochainComplex.mappingCone.map_δ, CategoryTheory.Functor.homologySequence_comp_assoc, CategoryTheory.Functor.homologySequenceδ_naturality_assoc, CategoryTheory.Functor.homologySequenceδ_comp_assoc, CategoryTheory.Functor.homologySequenceδ_naturality. Generic ingredients; no specialized universal-model triangle-row theorem.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.homologySequenceδ_naturality",
+   "results": "Actual hits: CategoryTheory.Functor.homologySequenceδ_naturality. Generic ingredients; no specialized universal-model triangle-row theorem.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyδOfTriangle|leftDerived.*IsTriangulated|counit.*CommShift",
+   "results": "Actual hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean. Generic ingredients; no specialized universal-model triangle-row theorem.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonConeRows",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tensor comparison proof, steps 2--4: exact base-change source sequence and compatibility with the concrete cone boundary.",
+   "via": [
+    "lem-pc-localized-tensor-comparison-cone-rows"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorCoefficientConeBoundary",
+  "file": "lean/Sheaf/Algebra/Homology/TensorCoefficientConeBoundary.lean",
+  "declaration": "ModuleCat.tensorCoefficient_cone_boundary",
+  "statement": "theorem tensorCoefficient_cone_boundary\n    (A C : Type u) [CommRing A] [CommRing C] (ρ : A →+* C)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ)\n    (t : ((extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj Q ⟶ N)\n    (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂) (i : ℤ) :\n    let F := (extendScalars ρ).mapHomologicalComplex (.up ℤ)\n    let H := (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex.flip.obj Q\n    let T := F.mapTriangle.obj (H.mapTriangle.obj (CochainComplex.mappingCone.triangle f))\n    let a := fun V ↦ (Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)\n    CochainComplex.homologyδOfTriangle T i (i + 1) ≫\n        HomologicalComplex.homologyMap (a P₁) (i + 1) =\n      HomologicalComplex.homologyMap (a (CochainComplex.mappingCone f)) i ≫\n        CochainComplex.homologyδOfTriangle (tensorConeTriangle ρ f N) i (i + 1)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T211118-L-396354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T211118-L-396354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

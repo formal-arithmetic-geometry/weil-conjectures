@@ -10,8 +10,9 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Sheaf.Algebra.Homology.TensorConeFiveTermExact
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyTriangleRows
+import Sheaf.Algebra.Homology.TensorCoefficientConeBoundary
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated
 
 /-! # Exact tensor-comparison rows for a chain-level mapping cone
 
@@ -37,6 +38,9 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedVariables false in
 /-- The two cohomology rows for a K-flat chain map and its actual mapping cone
 have an exact source row, and the coefficient comparison commutes with all
 four row arrows.
@@ -103,6 +107,54 @@ theorem exists_localizedTensorComparison_cone_rows
       s₀ ≫ cmp P₂ m₂ i = cmp P₁ m₁ i ≫ d₀ ∧
       s₁ ≫ cmp P₃ m₃ i = cmp P₂ m₂ i ≫ d₁ ∧
       s₂ ≫ cmp P₁ m₁ (i + 1) = cmp P₃ m₃ i ≫ d₂ ∧
-      s₃ ≫ cmp P₂ m₂ (i + 1) = cmp P₁ m₁ (i + 1) ≫ d₃ := by sorry
+      s₃ ≫ cmp P₂ m₂ (i + 1) = cmp P₁ m₁ (i + 1) ≫ d₃ := by
+  clear hQ hK₁ hK₂
+  dsimp only
+  let ρ := (algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))
+  let F := (extendScalars ρ).mapHomologicalComplex (.up ℤ)
+  let H := (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex.flip.obj Q
+  let T := H.mapTriangle.obj (CochainComplex.mappingCone.triangle f)
+  let a := fun V ↦ (Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)
+  have hT : DerivedCategory.Q.mapTriangle.obj T ∈
+      Pretriangulated.distinguishedTriangles := by
+    let e : T ≅ CochainComplex.mappingCone.triangle (f ▷ Q) :=
+      CochainComplex.map₂CochainComplexFlipObjMapMappingConeTriangleIso
+        (curriedTensor (ModuleCat.{u} A)) f Q
+    exact Pretriangulated.isomorphic_distinguished _
+      (DerivedCategory.mappingCone_triangle_distinguished (f ▷ Q)) _
+      (DerivedCategory.Q.mapTriangle.mapIso e)
+  obtain ⟨s₀, s₁, s₂, s₃, hs, w₀, w₁, w₂, w₃⟩ :=
+    exists_baseDerivedTensorCohomologyModel_triangle_rows
+      R A B C hC T hT m₁ m₂ m₃ i
+  change s₀ ≫ m₂.localizedComparison i = m₁.localizedComparison i ≫
+    HomologicalComplex.homologyMap (F.map (f ▷ Q)) i at w₀
+  change s₁ ≫ m₃.localizedComparison i = m₂.localizedComparison i ≫
+    HomologicalComplex.homologyMap (F.map (CochainComplex.mappingCone.inr f ▷ Q)) i at w₁
+  change s₃ ≫ m₂.localizedComparison (i + 1) = m₁.localizedComparison (i + 1) ≫
+    HomologicalComplex.homologyMap (F.map (f ▷ Q)) (i + 1) at w₃
+  have naturality {U V : CochainComplex (ModuleCat.{u} A) ℤ} (g : U ⟶ V) (j : ℤ) :
+      HomologicalComplex.homologyMap (F.map (g ▷ Q)) j ≫
+          HomologicalComplex.homologyMap (a V) j =
+        HomologicalComplex.homologyMap (a U) j ≫
+          HomologicalComplex.homologyMap (F.map g ▷ N) j := by
+    rw [← HomologicalComplex.homologyMap_comp, ← HomologicalComplex.homologyMap_comp]
+    congr 1
+    dsimp only [a]
+    symm
+    rw [Category.assoc, whisker_exchange, ← Category.assoc]
+    change (Functor.OplaxMonoidal.δ F U Q ≫ F.map g ▷ F.obj Q) ≫ _ = _
+    rw [Functor.OplaxMonoidal.δ_natural_left]
+    rfl
+  have boundary := tensorCoefficient_cone_boundary A C ρ Q N t P₁ P₂ f i
+  refine ⟨s₀, s₁, s₂, s₃, hs, ?_, ?_, ?_, ?_⟩
+  · change s₀ ≫ (m₂.localizedComparison i ≫ _) = _
+    rw [← Category.assoc, w₀, Category.assoc, naturality f i, Category.assoc]
+  · change s₁ ≫ (m₃.localizedComparison i ≫ _) = _
+    rw [← Category.assoc, w₁, Category.assoc,
+      naturality (CochainComplex.mappingCone.inr f) i, Category.assoc]
+  · change s₂ ≫ (m₁.localizedComparison (i + 1) ≫ _) = _
+    rw [← Category.assoc, w₂, Category.assoc, boundary, Category.assoc]
+  · change s₃ ≫ (m₂.localizedComparison (i + 1) ≫ _) = _
+    rw [← Category.assoc, w₃, Category.assoc, naturality f (i + 1), Category.assoc]
 
 end ModuleCat
