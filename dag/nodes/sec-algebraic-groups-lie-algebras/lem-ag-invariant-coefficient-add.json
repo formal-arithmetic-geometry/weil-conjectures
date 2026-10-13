@@ -1,0 +1,125 @@
+{
+ "id": "lem-ag-invariant-coefficient-add",
+ "kind": "statement",
+ "title": "Additivity of invariant infinitesimal coefficients",
+ "statement": "For an arbitrary scheme $S$ and group scheme $G/S$ [def-sc-group-scheme], let $v,w$ be points over the dual-number thickening $S[\\epsilon]$ [def-sc-dual-numbers] reducing to the identity. For every open $U$ of $G$, define $D_v(U)$ by the $\\epsilon$ coefficient of the comorphism of $(g,\\epsilon)\\mapsto g v(\\epsilon)$; the inverse image of $U$ is $U$, so this is an additive endomorphism of $\\Gamma(U,\\mathcal O_G)$. Then $D_{vw}=D_v+D_w$ on every open. No affine, field, smoothness or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Construct the right translation of the universal point explicitly from the projection G[epsilon] to G and the pullback of v along G to S. Its zero section is the identity, so its comorphism is a + epsilon D_v(a) on each open.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associativity identifies translation by v*w with the successive translations by v and w over the same parameter. Their lifts fix epsilon. Composing a + epsilon D_v(a) and a + epsilon D_w(a) adds the two coefficients, since the cross term has epsilon squared. Take the coefficients on every open.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2 worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Derivation, ⁅_, _⁆",
+   "digest": "9516dcbeb13dedac",
+   "date": "2026-10-13",
+   "results": "Hits: Derivation.bracket_eq_fun, Derivation.commutator_apply, Derivation.commutator_coe_linear_map, LieRinehartAlgebra.anchor_apply, LeftInvariantDerivation.commutator_coe_derivation. No scheme coefficient bridge.",
+   "verdict": "no exact scheme match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group scheme Lie algebra mixed commutator bracket invariant derivations arbitrary base scheme",
+   "digest": "3f81c0574c811490",
+   "date": "2026-10-13",
+   "results": "Hits: LieDerivation.commutator_apply, LieDerivation.lie_apply, LieDerivation.instBracket, LieDerivation.commutator_coe_linear_map, Derivation.instBracket, Derivation.instLieRing, Derivation.instLieAlgebra, LieDerivation.leibniz_lie. No scheme coefficient bridge.",
+   "verdict": "no exact scheme match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*[Dd]erivation|invariant.*[Dd]erivation",
+   "digest": "107af9676308a754",
+   "date": "2026-10-13",
+   "results": "Hits: Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/GroupLieAlgebra.lean, Mathlib/Geometry/Manifold/GroupLieAlgebra.lean. No scheme coefficient bridge.",
+   "verdict": "no exact scheme match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal right translation identifies tangent vectors with additive invariant derivations and the mixed group commutator with their operator commutator",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Invariant-extension paragraph: addition of coefficients under multiplication of tangent points.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.InvariantCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/InvariantCoefficients.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.invariantCoefficient_mul",
+  "statement": "theorem invariantCoefficient_mul (v w : infPoints G) :\n    invariantCoefficient G (v * w) = invariantCoefficient G v + invariantCoefficient G w",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

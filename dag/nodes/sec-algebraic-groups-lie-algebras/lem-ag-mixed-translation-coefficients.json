@@ -1,0 +1,125 @@
+{
+ "id": "lem-ag-mixed-translation-coefficients",
+ "kind": "statement",
+ "title": "Mixed commutator coefficients of universal right translation",
+ "statement": "For an arbitrary scheme $S$ and group scheme $G/S$ [def-sc-group-scheme], let $v,w,t$ be points over $S[\\eta]$ [def-sc-dual-numbers] reducing to the identity. Define $D_v(U)$ to be the $\\eta$ coefficient of the comorphism of right translation by $v$ on the universal point of $G$, as an additive endomorphism of $\\Gamma(U,\\mathcal O_G)$ for every open $U$. If the lift of $t$ by $\\eta\\mapsto\\epsilon\\delta$ equals $v_\\epsilon w_\\delta v_\\epsilon^{-1}w_\\delta^{-1}$, then $D_t=D_v D_w-D_w D_v$, with multiplication the composition of additive endomorphisms. No affine, field, smoothness or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Pull right translations back to G[epsilon][delta]. Their comorphisms act coefficientwise as 1+epsilon D_v and 1+delta D_w and fix both parameters. Their inverses are 1-epsilon D_v and 1-delta D_w, because the corresponding parameter squares vanish.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the four operators in the order of the stated group commutator. The surviving mixed coefficient is D_v D_w-D_w D_v. The assumed equality of points identifies this map with translation by t pulled back through eta=epsilon delta, whose mixed coefficient is D_t. Equality of section maps gives the equality on all opens.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2 worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Derivation, ⁅_, _⁆",
+   "digest": "9516dcbeb13dedac",
+   "date": "2026-10-13",
+   "results": "Hits: Derivation.bracket_eq_fun, Derivation.commutator_apply, Derivation.commutator_coe_linear_map, LieRinehartAlgebra.anchor_apply, LeftInvariantDerivation.commutator_coe_derivation. No scheme coefficient bridge.",
+   "verdict": "no exact scheme match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group scheme Lie algebra mixed commutator bracket invariant derivations arbitrary base scheme",
+   "digest": "3f81c0574c811490",
+   "date": "2026-10-13",
+   "results": "Hits: LieDerivation.commutator_apply, LieDerivation.lie_apply, LieDerivation.instBracket, LieDerivation.commutator_coe_linear_map, Derivation.instBracket, Derivation.instLieRing, Derivation.instLieAlgebra, LieDerivation.leibniz_lie. No scheme coefficient bridge.",
+   "verdict": "no exact scheme match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*[Dd]erivation|invariant.*[Dd]erivation",
+   "digest": "107af9676308a754",
+   "date": "2026-10-13",
+   "results": "Hits: Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean, Mathlib/Geometry/Manifold/GroupLieAlgebra.lean, Mathlib/Geometry/Manifold/GroupLieAlgebra.lean. No scheme coefficient bridge.",
+   "verdict": "no exact scheme match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal right translation identifies tangent vectors with additive invariant derivations and the mixed group commutator with their operator commutator",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Mixed-commutator paragraph: identify the coefficient with the commutator of invariant operators.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MixedTranslationCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MixedTranslationCoefficients.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.invariantCoefficient_of_mixed_commutator",
+  "statement": "theorem invariantCoefficient_of_mixed_commutator (v w t : infPoints G)\n    (h : Scheme.dualNumbersMulOver S ≫ t.1 =\n      (Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1) *\n        (Scheme.dualNumbersProjεOver S ≫ v.1)⁻¹ *\n          (Scheme.dualNumbersProjδOver S ≫ w.1)⁻¹) :\n    invariantCoefficient G t =\n      invariantCoefficient G v * invariantCoefficient G w -\n        invariantCoefficient G w * invariantCoefficient G v",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

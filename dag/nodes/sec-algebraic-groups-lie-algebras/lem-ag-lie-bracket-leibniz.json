@@ -13,36 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Put v = (lieEquiv G).symm x. Base change v along G → S and right-multiply the\nuniversal point of G by this infinitesimal point. The resulting automorphism of G[ε]\nreduces to the identity, so on every open its comorphism has the unique form\nf ↦ f + ε D_x(f). Multiplicativity makes D_x a relative derivation; restriction of\ncomorphisms makes these derivations agree on overlaps. Associativity of multiplication\nmakes D_x left invariant. Evaluation at the identity recovers x, so x ↦ D_x is\ninjective. The product of two such automorphisms with the same ε has coefficient\nD_x + D_y, since ε² = 0. The identity has coefficient zero. Together with\nlieEquiv_mul and lieEquiv_one this gives D_(x+y) = D_x + D_y and D_0 = 0.",
+   "text": "Use the explicit invariant coefficient operator of infinitesimal right translation. Its injectivity is proved by equality of all section comorphisms, followed by restriction to the identity section, recovering the tangent point. Its identity coefficient is proved zero. Under lieEquiv, multiplication of infinitesimal points becomes addition, so the coefficient map of Lie(G) is additive.",
    "uses": [
-    "def-sc-group-scheme",
-    "def-sc-dual-numbers"
+    "lem-ag-invariant-coefficient-add"
    ],
    "elementary": false
   },
   {
-   "text": "For independent ε and δ the pullback of right multiplication by the commutator is\n(1+εD_x)(1+δD_y)(1-εD_x)(1-δD_y)\n= 1 + εδ(D_x D_y - D_y D_x). Here the derivations act coefficientwise, killing\nε and δ; the inverse formulas use ε² = δ² = 0. The definition of infBracket and\nmixedEquiv, followed by evaluation at the identity, therefore identifies\nD_⁅x,y⁆ with D_x D_y - D_y D_x. These constructions are on the structure sheaf:\nno affineness, smoothness, or characteristic restriction is used.",
+   "text": "Apply the mixed coefficient comparison to the defining equality of mixedEquiv and infBracket. This identifies the coefficient of the bracket with the commutator in the associative ring of families of additive endomorphisms of sections.",
    "uses": [
-    "def-sc-group-scheme",
-    "def-sc-dual-numbers"
+    "lem-ag-mixed-translation-coefficients"
    ],
    "elementary": false
   },
   {
-   "text": "Write A = D_x, B = D_y, C = D_z and use associative composition. The left\nside becomes ABC - ACB - BCA + CBA. The two terms on the right expand to\nABC - BAC - CAB + CBA and BAC - BCA - ACB + CAB. Adding cancels BAC and CAB\nwith their negatives and gives precisely the left side. Thus the associated\nderivations agree, and injectivity of the invariant extension proves the identity.",
+   "text": "Expand A(BC-CB)-(BC-CB)A and compare with (AB-BA)C-C(AB-BA)+B(AC-CA)-(AC-CA)B. Associativity and cancellation make the expressions equal. Injectivity of the coefficient map gives the original Lie(G) equality. These calculations are checked by rw and noncomm_ring in Lean.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-group-scheme",
-  "def-sc-dual-numbers"
+  "lem-ag-invariant-coefficient-add",
+  "lem-ag-mixed-translation-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "Q2 worker",
+  "agent": "T2 worker",
   "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
-  "place": "Expanded proof of the original LieRing field; coefficient and invariant-derivation argument, not a quotation from the matrix-only blueprint."
+  "place": "Compiling reduction through explicitly constructed invariant coefficient operators; faithfulness and identity coefficient proved directly; associative-ring calculations checked in Lean."
  },
  "mathlib_searches": [
   {
@@ -120,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-31d79",
-  "group": "Q2",
+  "reviewer": "COMPILER",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T022424-L-3217454",
+  "landing": "20261013T082415-L-1648546",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with the baseline, four obligation nodes, change record, report, and earlier return; delivery and all three direct importers compile cleanly, signatures agree, and axiom probes show only permitted dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

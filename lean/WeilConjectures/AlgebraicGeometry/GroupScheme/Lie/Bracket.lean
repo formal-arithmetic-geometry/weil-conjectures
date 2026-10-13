@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Lie.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
+import Sheaf.AlgebraicGeometry.GroupScheme.MixedTranslationCoefficients
+import Mathlib.Tactic.NoncommRing
 
 /-!
 # The bracket on the Lie algebra of a group scheme
@@ -274,6 +276,33 @@ theorem lie_def (x y : Lie G) :
     ⁅x, y⁆ = lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y)) :=
   rfl
 
+private noncomputable def lieCoefficient (x : Lie G) :
+    ∀ U : G.left.Opens, AddMonoid.End Γ(G.left, U) :=
+  invariantCoefficient G ((lieEquiv G).symm x)
+
+private theorem lieCoefficient_injective : Function.Injective (lieCoefficient G) :=
+  (invariantCoefficient_faithful_additive G).1.comp (lieEquiv G).symm.injective
+
+private theorem lieCoefficient_add (x y : Lie G) :
+    lieCoefficient G (x + y) = lieCoefficient G x + lieCoefficient G y := by
+  unfold lieCoefficient
+  rw [lieEquiv_symm_add]
+  exact (invariantCoefficient_faithful_additive G).2.1 _ _
+
+private theorem lieCoefficient_zero : lieCoefficient G 0 = 0 := by
+  have h : (lieEquiv G).symm 0 = 1 :=
+    (lieEquiv G).injective (by rw [Equiv.apply_symm_apply, lieEquiv_one])
+  exact (congrArg (invariantCoefficient G) h).trans
+    (invariantCoefficient_faithful_additive G).2.2
+
+private theorem lieCoefficient_bracket (x y : Lie G) :
+    lieCoefficient G ⁅x, y⁆ =
+      lieCoefficient G x * lieCoefficient G y - lieCoefficient G y * lieCoefficient G x := by
+  unfold lieCoefficient
+  rw [lie_def, Equiv.symm_apply_apply]
+  apply invariantCoefficient_of_mixed_commutator
+  exact congrArg Subtype.val ((mixedEquiv G).apply_symm_apply _)
+
 /-- The mixed-commutator bracket is additive in its first argument.
 Source: the Lie-ring paragraph of
 `WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean`, blueprint `sk-d-tangent`.
@@ -299,7 +328,11 @@ Now expand (D_x + D_y)D_z - D_z(D_x + D_y). Distributivity gives
 the right-hand side. Injectivity of the invariant extension proves the equality.
 (blueprint: lem-ag-lie-bracket-add) -/
 theorem lieBracket_add (x y z : Lie G) :
-    ⁅x + y, z⁆ = ⁅x, z⁆ + ⁅y, z⁆ := by sorry
+    ⁅x + y, z⁆ = ⁅x, z⁆ + ⁅y, z⁆ := by
+  apply lieCoefficient_injective G
+  rw [lieCoefficient_add, lieCoefficient_bracket, lieCoefficient_bracket,
+    lieCoefficient_bracket, lieCoefficient_add]
+  noncomm_ring
 
 /-- The mixed-commutator bracket is additive in its second argument.
 Source: the Lie-ring paragraph of
@@ -326,7 +359,11 @@ Now expand D_x(D_y + D_z) - (D_y + D_z)D_x. Distributivity gives
 the right-hand side. Injectivity of the invariant extension proves the equality.
 (blueprint: lem-ag-lie-bracket-add-right) -/
 theorem lieBracket_add_right (x y z : Lie G) :
-    ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆ := by sorry
+    ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆ := by
+  apply lieCoefficient_injective G
+  rw [lieCoefficient_add, lieCoefficient_bracket, lieCoefficient_bracket,
+    lieCoefficient_bracket, lieCoefficient_add]
+  noncomm_ring
 
 /-- The mixed-commutator bracket is alternating, in every characteristic.
 Source: the Lie-ring paragraph of
@@ -353,7 +390,9 @@ Injectivity of the invariant extension proves the equality. This uses subtractio
 of an expression from itself, with no division by two, and also applies in characteristic two.
 (blueprint: lem-ag-lie-bracket-self) -/
 theorem lieBracket_self (x : Lie G) :
-    ⁅x, x⁆ = 0 := by sorry
+    ⁅x, x⁆ = 0 := by
+  apply lieCoefficient_injective G
+  rw [lieCoefficient_bracket, lieCoefficient_zero, sub_self]
 
 /-- The mixed-commutator bracket satisfies the derivation form of the Jacobi identity.
 Source: the Lie-ring paragraph of
@@ -382,7 +421,10 @@ with their negatives and gives precisely the left side. Thus the associated
 derivations agree, and injectivity of the invariant extension proves the identity.
 (blueprint: lem-ag-lie-bracket-leibniz) -/
 theorem lieBracket_leibniz (x y z : Lie G) :
-    ⁅x, ⁅y, z⁆⁆ = ⁅⁅x, y⁆, z⁆ + ⁅y, ⁅x, z⁆⁆ := by sorry
+    ⁅x, ⁅y, z⁆⁆ = ⁅⁅x, y⁆, z⁆ + ⁅y, ⁅x, z⁆⁆ := by
+  apply lieCoefficient_injective G
+  simp only [lieCoefficient_add, lieCoefficient_bracket]
+  noncomm_ring
 
 /-- `Lie(G)` is a Lie ring: the bracket is biadditive, alternating and satisfies the Jacobi
 identity, as the commutator of derivations of `𝒪_G`. (blueprint: `sk-d-tangent`) -/
