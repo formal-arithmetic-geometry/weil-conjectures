@@ -1,0 +1,95 @@
+{
+ "id": "def-sbc-affine-torsor-equivariant-algebra",
+ "kind": "definition",
+ "title": "Equivariant algebra on the split components",
+ "statement": "Let H and C be commutative rings, C an H-algebra, G a group, rho:G -> End_H(C) a family, d a natural number, and alpha:G -> Perm(Fin d) a group homomorphism. The equivariant algebra is the explicitly constructed H-subalgebra of functions f:Fin d -> C such that rho(a)(f(i))=f(alpha(a)(i)) for every a and i, implemented as the intersection of the equalizers of rho(a) composed with evaluation at i and evaluation at alpha(a)(i).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, split covers and finite group actions; equalizer construction"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF, split covers and finite group actions; equalizer construction",
+  "note": "Formalized construction and proof written by E3; the geometric descent reduction remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra of equivariant functions on finite group set as product of stabilizer invariant rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivariant functions algebra product stabilizer invariants; split finite etale torsor descent",
+   "results": "FixedPoints.subalgebra, Algebra.IsInvariant, PreGaloisCategory.has_decomp_connected_components and fiberIsoQuotientStabilizer are ingredients, not this identification.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*function|fixed.*orbit|fixedPointsCoordFamilyEquiv|DescentDatum",
+   "results": "Mathlib GroupAction orbit quotient and cardinality lemmas; source TotallySplit fixedPointsCoordFamilyEquiv treats coordinate invariants without the semilinear action; source DescentAlgebra.descendedEquiv supplies affine descent, not the split-cover identification. Blueprint searches for equivariant functions and stabilizer found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: connected affine torsor and fixed-ring descent, separating descent of the split algebra from its orbit decomposition",
+   "via": [
+    "lem-sbc-affine-torsor-fixed-puncture-descent",
+    "lem-sbc-affine-torsor-fixed-puncture-descent-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorEquivariantAlgebra.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineTorsorEquivariantAlgebra",
+  "statement": "def affineTorsorEquivariantAlgebra (H C : Type u) [CommRing H] [CommRing C] [Algebra H C] (G : Type u) [Group G] (ρ : G → C →ₐ[H] C) (d : ℕ) (α : G →* Equiv.Perm (Fin d)) : Subalgebra H (Fin d → C)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-68474",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T222402-L-1222531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-68474",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T222402-L-1222531",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and adapted-parent signatures are preserved, the declared core interface repair and forced adaptation match the diffs, DAG/report records agree, and only the documented geometric descent sorry remains."
+ }
+}

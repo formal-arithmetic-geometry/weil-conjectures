@@ -15,24 +15,22 @@
  ],
  "proof": [
   {
-   "text": "Write h=iota(g). Finite faithful flatness of C over H makes its principal\nopen V a finite faithfully flat cover of D(h). The etale hypothesis and the\nunique-rotation condition on field-valued points identify the finite etale\nmap from the disjoint union of G copies of V to V times_D(h) V with an\nisomorphism: it is bijective on all geometric fibres. Since C is a domain and\nh is nonzero, V is nonempty and connected. Pull the given splitting on T back\nalong k. The associativity of pullbacks and universality of scheme coproducts\ngive d copies of V, with their original projection to V. The torsor descent\ndatum permutes these copies, since every map between connected copies over V\nis specified by its index. The cocycle identity is a G-action on Fin d.\nEnumerate its finitely many orbits by Fin m, choose one representative from\neach orbit, and take its stabilizer K. Effective finite etale descent\nidentifies the corresponding component with V/K. On affine rings this is\nSpec of the K-invariants of C[1/h]. The action fixes h. If a/h^r is invariant,\nthen rho(zeta)(a)-a vanishes after localization for each zeta in K; since C\nis a domain and h is nonzero, it already vanishes in C. Thus invariants\ncommute with this localization. The finite coproduct of these spectra is the\nprincipal open D(h) in Spec of the product of the unlocalized fixed rings.\nAll identifications are over H, giving the stated projection equation. For\nd=0 the orbit set is empty and the product is the zero ring, with empty Spec.\nFor the trivial group the torsor is an isomorphism, and this is the original\nsplit cover. No normality or regularity is required for this descent step.",
+   "text": "Apply affine_torsor_fixed_orbits, which chooses the actual descent stabilizers and returns m<=d with the isomorphism and projection equation. Forget only the unused cardinal bound; the parent statement remains identical.",
    "uses": [
-    "lem-fet-galois-category",
-    "thm-galois-abstract-equivalence"
+    "lem-sbc-affine-torsor-fixed-puncture-descent-core"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-fet-galois-category",
-  "thm-galois-abstract-equivalence"
+  "lem-sbc-affine-torsor-fixed-puncture-descent-core"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "T4",
+  "group": "E3",
   "document": "Stacks Project",
-  "place": "Tag 03SF, finite etale Galois covers and finite group sets; Tag 0EYG, normal-domain and intermediate-field paragraphs",
-  "note": "The detailed argument is written in the theorem docstring; this is a strictly smaller step of the orbit descent argument."
+  "place": "Tags 03SF, 023R and 0245",
+  "note": "Forced proof adaptation only; signature and visibility unchanged."
  },
  "mathlib_searches": [
   {
@@ -113,15 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "X-68474",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T161726-L-1459565",
+  "landing": "20261013T222402-L-1222531",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.affine_torsor_fixed_puncture_descent"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered files compile cleanly; target and adapted-parent signatures are preserved, the declared core interface repair and forced adaptation match the diffs, DAG/report records agree, and only the documented geometric descent sorry remains."
  }
 }

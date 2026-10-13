@@ -2,7 +2,7 @@
  "id": "lem-sbc-affine-torsor-fixed-puncture-descent-core",
  "kind": "statement",
  "title": "Fixed-orbit affine torsor descent step",
- "statement": "Under the finite faithfully flat affine torsor hypotheses, after choosing finitely many orbit representatives and stabilizers bounded by the number of split components, the corresponding fixed-ring principal-open scheme is isomorphic to the base change.",
+ "statement": "Under the finite faithfully flat affine torsor hypotheses and a splitting of the finite etale cover into d components on T, there exist m <= d and the actual orbit stabilizers K(k) such that the corresponding fixed-ring product principal-open scheme is isomorphic over Spec H to the base-changed cover. The orbit data are chosen existentially from the descent action, never supplied arbitrarily.",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 03SF and Tag 0EYG"
@@ -10,24 +10,30 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the geometric construction theorem to obtain the candidate isomorphism, then apply the projection compatibility theorem to its map.",
+   "text": "Apply affine_torsor_equivariant_descent to obtain the actual action alpha on Fin d and an isomorphism over Spec H to the principal open in the algebra of equivariant functions.",
    "uses": [
-    "lem-sbc-affine-torsor-fixed-puncture-geometric",
-    "lem-sbc-affine-torsor-fixed-puncture-compatibility"
+    "lem-sbc-affine-torsor-equivariant-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the completely proved affine_torsor_equivariant_orbit_product to obtain m<=d, actual stabilizers K, and an H-algebra equivalence with their fixed-ring product. Apply Spec to the inverse ring equivalence, restrict it using SpecMap_preimage_basicOpen and Scheme.Hom.preimageIso, and compose with the descent isomorphism. The algebra equivalence commutes with algebraMap, and Over.w gives the required projection compatibility.",
+   "uses": [
+    "lem-sbc-affine-torsor-equivariant-orbit-product"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-torsor-fixed-puncture-geometric",
-  "lem-sbc-affine-torsor-fixed-puncture-compatibility"
+  "lem-sbc-affine-torsor-equivariant-descent",
+  "lem-sbc-affine-torsor-equivariant-orbit-product"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "H4",
+  "by": "agent",
+  "group": "E3",
   "document": "Stacks Project",
-  "place": "Tags 03SF and 0EYG",
-  "note": "Decomposed into geometric construction and compatibility steps."
+  "place": "Tags 03SF, 023R and 0245",
+  "note": "Corrects the arbitrary-orbit interface. Complete Lean composition; the algebraic orbit decomposition is proved and only geometric descent remains open."
  },
  "mathlib_searches": [
   {
@@ -69,11 +75,11 @@
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorFixedPunctureDescentCore.lean",
-  "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-14",
   "declaration": "AlgebraicGeometry.Scheme.affine_torsor_fixed_orbits",
-  "statement": "theorem affine_torsor_fixed_orbits\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)\n    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    [Module.Finite H C] [Module.FaithfullyFlat H C]\n    (G : Type u) [Group G] [Finite G]\n    (ρ : G → C →ₐ[H] C)\n    (hρone : ρ 1 = AlgHom.id H C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (hne : algebraMap H C (ι g) ≠ 0)\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))\n    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    [IsFinite j] [Etale j]\n    (m : ℕ) (K : Fin m → Subgroup G) (d : ℕ) (hd : m ≤ d) :\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H C))\n    let V : (Spec (CommRingCat.of C)).Opens :=\n      PrimeSpectrum.basicOpen (algebraMap H C (ι g))\n    Etale (V.ι ≫ q) →\n    (∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),\n      a.comp (algebraMap H C) = b.comp (algebraMap H C) →\n      a (algebraMap H C (ι g)) ≠ 0 →\n      ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) →\n    ∀ (T : Scheme.{u}) (t : T ⟶ Spec R) (k : V.toScheme ⟶ T),\n      k ≫ t = V.ι ≫ q ≫ Spec.map (CommRingCat.ofHom ι) →\n    ∀ (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t →\n    let B := ∀ k : Fin m,\n      (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)\n    let N := Spec (CommRingCat.of B)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H B))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))\n    ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,\n      θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι))"
+  "statement": "theorem affine_torsor_fixed_orbits (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C] [Module.Finite H C] [Module.FaithfullyFlat H C] (G : Type u) [Group G] [Finite G] (ρ : G → C →ₐ[H] C) (hρone : ρ 1 = AlgHom.id H C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (hne : algebraMap H C (ι g) ≠ 0) {Y : Scheme.{u}} (p : Y ⟶ Spec R) (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g)) (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p) [IsFinite j] [Etale j] (d : ℕ) : let q := Spec.map (CommRingCat.ofHom (algebraMap H C)) let V : (Spec (CommRingCat.of C)).Opens := PrimeSpectrum.basicOpen (algebraMap H C (ι g)) Etale (V.ι ≫ q) → (∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω), a.comp (algebraMap H C) = b.comp (algebraMap H C) → a (algebraMap H C (ι g)) ≠ 0 → ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) → ∀ (T : Scheme.{u}) (t : T ⟶ Spec R) (k : V.toScheme ⟶ T), k ≫ t = V.ι ≫ q ≫ Spec.map (CommRingCat.ofHom ι) → ∀ (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T), δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t → ∃ (m : ℕ) (K : Fin m → Subgroup G), m ≤ d ∧ let B := ∀ k : Fin m, (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C) let N := Spec (CommRingCat.of B) let q := Spec.map (CommRingCat.ofHom (algebraMap H B)) let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g)) ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme, θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
  },
  "created": {
   "by": "worker",
@@ -94,11 +100,36 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H4",
+  "reviewer": "X-68474",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T181100-L-2600496",
+  "landing": "20261013T222402-L-1222531",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly; target and adapted-parent signatures are preserved, the declared core interface repair and forced adaptation match the diffs, DAG/report records agree, and only the documented geometric descent sorry remains."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "E3 stage 2",
+  "old_statement": "Under the finite faithfully flat affine torsor hypotheses, after choosing finitely many orbit representatives and stabilizers bounded by the number of split components, the corresponding fixed-ring principal-open scheme is isomorphic to the base change.",
+  "what": "Arbitrary m and K are invalid: m=0 with the degree-one identity cover over Q yields empty fixed-ring spectrum for a nonempty base change. Choose m,K from the actual descent action existentially and retain the source bound m<=d. Preserve the checked counterexample to the former interface.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 03SF: actual finite group orbits and stabilizers"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Apply the geometric construction theorem to obtain the candidate isomorphism, then apply the projection compatibility theorem to its map.",
+    "uses": [
+     "lem-sbc-affine-torsor-fixed-puncture-geometric",
+     "lem-sbc-affine-torsor-fixed-puncture-compatibility"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sbc-affine-torsor-fixed-puncture-geometric",
+   "lem-sbc-affine-torsor-fixed-puncture-compatibility"
+  ]
  }
 }

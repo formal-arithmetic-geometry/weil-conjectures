@@ -90,10 +90,8 @@ theorem affine_torsor_fixed_puncture_descent
         pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
   dsimp
   intro hEt hrot T t k hk d δ hδ
-  obtain ⟨m, Kp, hd, hKp⟩ := affine_torsor_orbit_data d
-  let K : Fin m → Subgroup G := fun _ => ⊥
-  obtain ⟨θ, hθ⟩ := affine_torsor_fixed_orbits
-    R H g ι C G ρ hρone hρmul hne p j hj m K d hd hEt hrot T t k hk δ hδ
+  obtain ⟨m, K, _hmd, θ, hθ⟩ := affine_torsor_fixed_orbits
+    R H g ι C G ρ hρone hρmul hne p j hj d hEt hrot T t k hk δ hδ
   exact ⟨m, K, θ, hθ⟩
 
 end AlgebraicGeometry.Scheme

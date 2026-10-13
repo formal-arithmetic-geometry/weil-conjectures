@@ -1,0 +1,108 @@
+{
+ "id": "lem-sbc-affine-torsor-equivariant-orbit-product",
+ "kind": "statement",
+ "title": "Equivariant algebra as product of stabilizer fixed rings",
+ "statement": "Let H and C be commutative rings in one universe with C an H-algebra. Let G be a group and rho:G -> End_H(C) satisfy rho(1)=id and rho(ab)=rho(a) composed with rho(b). Let d be a natural number and alpha:G -> Perm(Fin d) a homomorphism. There exist m <= d and subgroups K(k) of G for k:Fin m such that the equivariant algebra [def-sbc-affine-torsor-equivariant-algebra] is H-algebra isomorphic to the product of the fixed subalgebras C^(K(k)), each defined by the intersection of equalizers of rho(zeta) and id. No geometry, localization, finite-group or domain hypotheses are required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, classification by finite group sets; elementary orbit-stabilizer algebra argument"
+ },
+ "stmt_deps": [
+  "def-sbc-affine-torsor-equivariant-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual orbit quotient of the action alpha, enumerate it by Fin m using Fintype.equivFin, choose Quotient.out as each representative, and define K(k) as its stabilizer. Surjectivity of the quotient map gives m<=d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation at representatives lands in the stabilizer fixed rings. To extend a family b, choose t(i) sending the representative of the orbit of i to i, and put f(i)=rho(t(i))(b(orbit(i))). If a and a-prime send the representative to the same point, a-prime inverse times a is in its stabilizer, so the values agree by the action law. This proves equivariance and that extension inverts evaluation. Pointwise operations give an H-algebra homomorphism; AlgEquiv.ofBijective produces the equivalence. The Lean proof is complete and uses only Mathlib.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF, classification by finite group sets; elementary orbit-stabilizer algebra argument",
+  "note": "Formalized construction and proof written by E3; the geometric descent reduction remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra of equivariant functions on finite group set as product of stabilizer invariant rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivariant functions algebra product stabilizer invariants; split finite etale torsor descent",
+   "results": "FixedPoints.subalgebra, Algebra.IsInvariant, PreGaloisCategory.has_decomp_connected_components and fiberIsoQuotientStabilizer are ingredients, not this identification.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*function|fixed.*orbit|fixedPointsCoordFamilyEquiv|DescentDatum",
+   "results": "Mathlib GroupAction orbit quotient and cardinality lemmas; source TotallySplit fixedPointsCoordFamilyEquiv treats coordinate invariants without the semilinear action; source DescentAlgebra.descendedEquiv supplies affine descent, not the split-cover identification. Blueprint searches for equivariant functions and stabilizer found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: connected affine torsor and fixed-ring descent, separating descent of the split algebra from its orbit decomposition",
+   "via": [
+    "lem-sbc-affine-torsor-fixed-puncture-descent",
+    "lem-sbc-affine-torsor-fixed-puncture-descent-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantOrbitProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorEquivariantOrbitProduct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_equivariant_orbit_product",
+  "statement": "theorem affine_torsor_equivariant_orbit_product (H C : Type u) [CommRing H] [CommRing C] [Algebra H C] (G : Type u) [Group G] (ρ : G → C →ₐ[H] C) (_hρone : ρ 1 = AlgHom.id H C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (d : ℕ) (α : G →* Equiv.Perm (Fin d)) : ∃ (m : ℕ) (K : Fin m → Subgroup G), m ≤ d ∧ Nonempty ((affineTorsorEquivariantAlgebra H C G ρ d α) ≃ₐ[H] (∀ k : Fin m, (⨅ ζ : K k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-68474",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T222402-L-1222531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-68474",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T222402-L-1222531",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and adapted-parent signatures are preserved, the declared core interface repair and forced adaptation match the diffs, DAG/report records agree, and only the documented geometric descent sorry remains."
+ }
+}

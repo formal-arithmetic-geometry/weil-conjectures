@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-affine-torsor-equivariant-descent",
+ "kind": "statement",
+ "title": "Descent to the whole equivariant function algebra",
+ "statement": "Let R and H be commutative rings in one universe u, g an element of R, and iota:R -> H a ring homomorphism. Let C be a commutative H-algebra which is a domain, finite and faithfully flat over H. Let G be a finite group and rho:G -> End_H(C) satisfy rho(1)=id and rho(ab)=rho(a) composed with rho(b). Set h=algebraMap(H,C)(iota(g)), assume h is nonzero, and put V=D(h) in Spec C and q:Spec C -> Spec H. Assume V -> Spec H is etale. Assume that for every field Omega in universe u and ring maps a,b:C -> Omega agreeing on H, if a(h) is nonzero then there exists a unique zeta in G with a composed with rho(zeta)=b. Let j:Y -> D(g) in Spec R be finite etale and let p:Y -> Spec R be its composite with the open inclusion. Let d be a natural number, t:T -> Spec R a morphism, and k:V -> T a morphism satisfying t composed with k=(Spec iota) composed with q restricted to V. Suppose delta:Y times_(Spec R) T -> coproduct_(Fin d) T is an isomorphism over T. Then there exists a group homomorphism alpha:G -> Perm(Fin d) such that, for A=affineTorsorEquivariantAlgebra(H,C,G,rho,d,alpha) [def-sbc-affine-torsor-equivariant-algebra], Y times_(Spec R) Spec H is isomorphic over Spec H to D(algebraMap(H,A)(iota(g))) in Spec A. The structural map of this principal open is induced by algebraMap(H,A).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03SF (finite Galois covers), 023R (fpqc descent of quasi-coherent sheaves), 0245 (affine morphisms descend); injective localization in a domain"
+ },
+ "stmt_deps": [
+  "def-sbc-affine-torsor-equivariant-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Proof: put h=ι(g). Faithful flatness makes D(h) in Spec C a surjective finite\nflat cover of D(h) in Spec H. It is etale by assumption, and the unique-rotation\nhypothesis makes the map from G copies of this cover to its self-fibre-product\nan isomorphism: both are finite etale and it is bijective on geometric fibres.\nPull δ back along k to split Y over D(h) in Spec C into d components. This\nprincipal open is nonempty and connected since C is a domain and h is nonzero.\nThe descent datum therefore permutes the components, and the cocycle law gives\nα : G →* Perm(Fin d), with the convention ρ a (f i)=f(α a i).\nAffine faithfully flat descent identifies the descended algebra with these\nequivariant functions in C[1/h]. They equal the localization of the explicitly\nconstructed equivariant algebra in C: clear denominators simultaneously in the\nfinite product, and use injectivity of C → C[1/h] to remove every factor of h\nfrom the equivariance equations. All algebra maps fix H, so the identification\nis in Over(Spec H). If d=0 both sides are empty. No orbit representatives,\nstabilizers, or product of fixed rings are asserted by this step.",
+   "uses": [
+    "lem-fet-galois-category",
+    "lem-galois-flat-algebra-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fet-galois-category",
+  "lem-galois-flat-algebra-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "document": "Stacks Project",
+  "place": "Tags 03SF (finite Galois covers), 023R (fpqc descent of quasi-coherent sheaves), 0245 (affine morphisms descend); injective localization in a domain",
+  "note": "Formalized construction and proof written by E3; the geometric descent reduction remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra of equivariant functions on finite group set as product of stabilizer invariant rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivariant functions algebra product stabilizer invariants; split finite etale torsor descent",
+   "results": "FixedPoints.subalgebra, Algebra.IsInvariant, PreGaloisCategory.has_decomp_connected_components and fiberIsoQuotientStabilizer are ingredients, not this identification.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*function|fixed.*orbit|fixedPointsCoordFamilyEquiv|DescentDatum",
+   "results": "Mathlib GroupAction orbit quotient and cardinality lemmas; source TotallySplit fixedPointsCoordFamilyEquiv treats coordinate invariants without the semilinear action; source DescentAlgebra.descendedEquiv supplies affine descent, not the split-cover identification. Blueprint searches for equivariant functions and stabilizer found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: connected affine torsor and fixed-ring descent, separating descent of the split algebra from its orbit decomposition",
+   "via": [
+    "lem-sbc-affine-torsor-fixed-puncture-descent",
+    "lem-sbc-affine-torsor-fixed-puncture-descent-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorEquivariantDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_equivariant_descent",
+  "statement": "theorem affine_torsor_equivariant_descent (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C] [Module.Finite H C] [Module.FaithfullyFlat H C] (G : Type u) [Group G] [Finite G] (ρ : G → C →ₐ[H] C) (hρone : ρ 1 = AlgHom.id H C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (hne : algebraMap H C (ι g) ≠ 0) {Y : Scheme.{u}} (p : Y ⟶ Spec R) (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g)) (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p) [IsFinite j] [Etale j] (d : ℕ) : let q := Spec.map (CommRingCat.ofHom (algebraMap H C)) let V : (Spec (CommRingCat.of C)).Opens := PrimeSpectrum.basicOpen (algebraMap H C (ι g)) Etale (V.ι ≫ q) → (∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω), a.comp (algebraMap H C) = b.comp (algebraMap H C) → a (algebraMap H C (ι g)) ≠ 0 → ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) → ∀ (T : Scheme.{u}) (t : T ⟶ Spec R) (k : V.toScheme ⟶ T), k ≫ t = V.ι ≫ q ≫ Spec.map (CommRingCat.ofHom ι) → ∀ (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T), δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t → ∃ α : G →* Equiv.Perm (Fin d), let A := affineTorsorEquivariantAlgebra H C G ρ d α let V : (Spec (CommRingCat.of A)).Opens := PrimeSpectrum.basicOpen (algebraMap H A (ι g)) Nonempty (Over.mk (pullback.snd p (Spec.map (CommRingCat.ofHom ι))) ≅ Over.mk (V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H A))))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-68474",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T222402-L-1222531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-68474",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T222402-L-1222531",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and adapted-parent signatures are preserved, the declared core interface repair and forced adaptation match the diffs, DAG/report records agree, and only the documented geometric descent sorry remains."
+ }
+}
