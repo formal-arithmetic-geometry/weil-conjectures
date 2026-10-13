@@ -14,7 +14,10 @@ public import Mathlib.Algebra.Regular.SMul
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
-import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescent
+import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorProperties
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-! # Descent of a root-split cover to fixed subalgebras
 
@@ -35,28 +38,25 @@ namespace AlgebraicGeometry.Scheme
 Source: Stacks Project, Tag 0EYG, strict local and normal-domain paragraphs.
 (blueprint: lem-sbc-strict-local-root-orbit-descent)
 
-Proof: Put h=iota(g), C=H[t]/(t^n-h), and U=D(h). The monic relation makes C
-finite free over H. Its closed fibre has just one prime because h is in the
-maximal ideal, so C is local and strictly henselian. The equation t^n=h and
-regularity of h show that t is a nonzerodivisor. The quotient by t is H/(h),
-which is regular local; hence C is regular local and a normal domain. Thus
-D(h) in Spec C is connected. Hensel lift the n distinct residue roots of X^n-1;
-they give a cyclic group mu_n(H) of order n acting by t to zeta*t. After
-inverting h this is a connected finite etale torsor over U. Base change the
-given splitting along iota, using associativity of pullbacks and compatibility
-of the monic root algebra with base change. Its descent datum permutes the d
-connected copies of the torsor. Partition Fin d into the finitely many orbits,
-number them by Fin m and choose a representative in each. Let K(k) be its
-stabilizer in mu_n(H). The descended component is the quotient of the torsor
-by K(k). On affine rings its coordinate algebra is (C[1/h])^K(k). Localization
-at the invariant element h commutes with invariants: a fixed fraction has a
-fixed numerator since C is a domain and h is nonzero. Consequently this ring
-is (C^K(k))[1/h]. The components together are the spectrum of the product of
-these localized rings. Finite products commute with this localization, giving
-exactly D(h) in Spec(product C^K(k)). The torsor descent and ring maps are over
-H, so their composition satisfies the projection equation. If d=0, the orbit
-set and product are empty and give the empty scheme. No claim identifying an
-invariant algebra with another root algebra is made here. -/
+Proof: Put h=iota(g) and C=H[t]/(t^n-h). Apply the strict-local root torsor
+properties to obtain the domain property, etaleness of its puncture, and unique
+rotations between field-valued points over H. The monic relation makes C finite
+and faithfully flat over H. Regular-local-domain makes H a domain. Multiplication
+regularity implies h is nonzero, and the positive-degree relation makes H to C
+injective, so its image is nonzero too. The roots of unity form a finite group.
+Checking on t proves that the identity rotation is the identity homomorphism and
+that rotations compose according to multiplication of roots of unity.
+Evaluate the root of A=R[T]/(T^n-g) at t in C, and its constants via iota. Since
+t^n=h, this defines a ring homomorphism phi:A to C. It carries g to h and so
+Spec(phi) restricts to k:D(h) in Spec C to D(g) in Spec A. Functoriality of Spec
+and the equation on constants show that k is over Spec R. Apply the general
+affine-torsor fixed-puncture descent lemma to this map k and the original splitting.
+It supplies m, stabilizers K(k), and an isomorphism with the puncture in the spectrum
+of their fixed-ring product. Its fixed subalgebras are definitionally rootFixedAlgebra;
+its projection equation is exactly the desired one. The two imported lemmas isolate
+the local torsor properties and general orbit descent, without identifying any
+invariant algebra with an intermediate root algebra. The empty splitting d=0 is
+included by the general descent lemma's empty-product case. -/
 theorem strict_local_root_orbit_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     [IsStrictlyHenselianLocalRing H] [IsRegularLocalRing H]
@@ -80,6 +80,79 @@ theorem strict_local_root_orbit_descent
         let q := Spec.map (CommRingCat.ofHom (algebraMap H B))
         let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))
         ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,
-          θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by sorry
+          θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
+  classical
+  dsimp only
+  let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)
+  let C := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C (ι g))
+  let qR := Spec.map (CommRingCat.ofHom (algebraMap R A))
+  let VR : (Spec (CommRingCat.of A)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap R A g)
+  let qH := Spec.map (CommRingCat.ofHom (algebraMap H C))
+  let VH : (Spec (CommRingCat.of C)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H C (ι g))
+  intro δ hδ
+  have hnH : 0 < n ∧ IsUnit (n : H) :=
+    ⟨hn.1, by simpa using hn.2.map ι⟩
+  obtain ⟨hdom, het, hfiber⟩ :=
+    strict_local_root_torsor_properties H (ι g) hg hgm n hnH
+  have : IsDomain C := hdom
+  have : NeZero n := ⟨hn.1.ne'⟩
+  have hmonic : ((Polynomial.X : Polynomial H) ^ n - Polynomial.C (ι g)).Monic :=
+    Polynomial.monic_X_pow_sub_C (ι g) hn.1.ne'
+  have hdeg : ((Polynomial.X : Polynomial H) ^ n - Polynomial.C (ι g)).degree ≠ 0 := by
+    rw [Polynomial.degree_X_pow_sub_C hn.1]
+    exact_mod_cast hn.1.ne'
+  have : Module.Finite H C := hmonic.finite_adjoinRoot
+  have : Module.FaithfullyFlat H C := AdjoinRoot.faithfullyFlat_of_monic hmonic hdeg
+  have hh : ι g ≠ 0 := by
+    intro h
+    have h01 : (0 : H) = 1 := hg (by simp [h])
+    exact zero_ne_one h01
+  have hne : algebraMap H C (ι g) ≠ 0 := by
+    exact fun h ↦ hh (AdjoinRoot.of.injective_of_degree_ne_zero hdeg
+      (h.trans (map_zero _).symm))
+  have hone : rootRotation H (ι g) n 1 = AlgHom.id H C := by
+    apply AdjoinRoot.algHom_ext
+    simp [rootRotation, AdjoinRoot.liftAlgHom_root]
+    rfl
+  have hmul (a b : rootsOfUnity n H) :
+      rootRotation H (ι g) n (a * b) =
+        (rootRotation H (ι g) n a).comp (rootRotation H (ι g) n b) := by
+    apply AdjoinRoot.algHom_ext
+    simp only [rootRotation, AdjoinRoot.liftAlgHom_root, AlgHom.comp_apply,
+      map_mul, AlgHom.commutes, Subgroup.coe_mul, Units.val_mul]
+    ring
+  have hroot : AdjoinRoot.root
+      ((Polynomial.X : Polynomial H) ^ n - Polynomial.C (ι g)) ^ n =
+        algebraMap H C (ι g) := by
+    have h := AdjoinRoot.eval₂_root
+      ((Polynomial.X : Polynomial H) ^ n - Polynomial.C (ι g))
+    simpa [sub_eq_zero, ← AdjoinRoot.algebraMap_eq] using h
+  let φ : A →+* C := AdjoinRoot.lift ((algebraMap H C).comp ι)
+    (AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ n - Polynomial.C (ι g))) (by
+      simpa only [Polynomial.eval₂_sub, Polynomial.eval₂_pow, Polynomial.eval₂_X,
+        Polynomial.eval₂_C, RingHom.comp_apply, sub_eq_zero] using hroot)
+  have hφ (r : R) : φ (algebraMap R A r) = algebraMap H C (ι r) :=
+    AdjoinRoot.lift_of _
+  let f := Spec.map (CommRingCat.ofHom φ)
+  have hpre : VH ≤ f ⁻¹ᵁ VR := by
+    change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤
+      Spec.map (CommRingCat.ofHom φ) ⁻¹ᵁ PrimeSpectrum.basicOpen (algebraMap R A g)
+    rw [SpecMap_preimage_basicOpen, CommRingCat.ofHom_apply, hφ]
+  let k : VH.toScheme ⟶ VR.toScheme := f.resLE VR VH hpre
+  have hbase : f ≫ qR = qH ≫ Spec.map (CommRingCat.ofHom ι) := by
+    dsimp [f, qR, qH]
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext r
+    exact hφ r
+  have hk : k ≫ (VR.ι ≫ qR) =
+      VH.ι ≫ qH ≫ Spec.map (CommRingCat.ofHom ι) := by
+    rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hbase]
+  obtain ⟨m, K, θ, hθ⟩ := affine_torsor_fixed_puncture_descent
+    R H g ι C (rootsOfUnity n H) (rootRotation H (ι g) n) hone hmul hne
+    p j hj het hfiber VR.toScheme (VR.ι ≫ qR) k hk d δ hδ
+  exact ⟨m, K, θ, hθ⟩
 
 end AlgebraicGeometry.Scheme
