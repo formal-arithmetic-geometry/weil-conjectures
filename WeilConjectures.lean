@@ -594,7 +594,6 @@ public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
-public import WeilConjectures.CategoryTheory.Abelian.FiniteFiltration
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
@@ -796,8 +795,6 @@ public import WeilConjectures.CategoryTheory.SpectralSequence.LowDegree
 public import WeilConjectures.CategoryTheory.SpectralSequence.Vanishing
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
-public import WeilConjectures.CategoryTheory.StageSystem.Preadditive
-public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
