@@ -10327,3 +10327,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: returned deliver/Y3/Sheaf.CategoryTheory.FinitePageImageQuotient (reviewer RETURN: (the landing tools, head accf70ee2) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 00:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.DerivedQCohCompactDetection (stage 3; reviewer PASS; first push; landing 20261013T004021-L-2490242 (proof); batch 20261013T004020; modules 1; new nodes 0)
 - 00:40 L: merged deliver/A4/Sheaf.AlgebraicGeometry.AffineSectionCoverTwistGeneration (stage 3; reviewer PASS; first push; landing 20261013T004021-L-2490379 (proof); batch 20261013T004020; modules 1; new nodes 0)
+- 00:40 L: merged deliver/C2/Sheaf.RingTheory.SyntomicEquationCountComparison (stage 3; reviewer PASS; first push; landing 20261013T004022-L-2490477 (interface); batch 20261013T004020; modules 3; new nodes 2)

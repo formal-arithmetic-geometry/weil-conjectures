@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.LciConormalFreeRankCodimension
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import Sheaf.RingTheory.SyntomicEquationCountComparisonCore
+import Sheaf.RingTheory.SyntomicEquationCountComparisonDimension
 
 /-!
 # An equation-count comparison quotient at a syntomic prime
@@ -71,6 +71,10 @@ theorem exists_equationCount_comparison_of_syntomicAtPrime
         topologicalKrullDimAt
           (PrimeSpectrum.preimageEquivFiber R T
             ((q.comap π.toRingHom).comap (algebraMap R T))
-            ⟨q.comap π.toRingHom, rfl⟩) = (n - c : ℕ) := by sorry
+            ⟨q.comap π.toRingHom, rfl⟩) = (n - c : ℕ) := by
+  obtain ⟨n, c, f, π, u, hsurj, hu, hbij, hle⟩ :=
+    exists_equationCount_comparison_core q hfp hflat hci
+  refine ⟨n, c, f, π, u, hsurj, hu, hbij, hle, ?_⟩
+  exact equationCount_comparison_dimension q π u hsurj hu hbij hle
 
 end Algebra
