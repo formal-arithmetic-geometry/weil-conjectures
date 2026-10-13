@@ -18,39 +18,56 @@
  ],
  "proof": [
   {
-   "text": "Replace b by max(a,b). Extend any test sheaf on an affine open by open pushforward; its restriction is the original sheaf. Exact restriction commutes with tensor and homology, so the global Tor tests imply the same tests on that affine. A perfect local module representative satisfies the affine Tor-amplitude criterion. Tensor it with the residue field to get zero cohomology in every degree below a, hence zero Betti numbers there. This is the flat-representative pullback argument of Stacks 09U8, specialized to residue morphisms. No b>=a assumption is needed after enlarging b.",
+   "text": "Unpack each K-flat witness of schemeDerivedTensorCohomologyVanishes. Use the K-flat derived tensor comparison, the singleFunctorIsoCompQ isomorphism, and homologyFunctorFactors to obtain zero homology of E tensor F[0]. By the two t-structure characterizations this is categorical Tor amplitude in [a,b]. The category of structure-sheaf modules has its recorded symmetric closed tensor, Grothendieck structure and functorial flat resolutions. Apply the existing general source flat-model theorem to obtain P representing E, flat and strictly supported in [a,b]; it does not require a <= b.",
    "uses": [
-    "lem-pc-affine-tor-amplitude-criterion",
     "def-pc-derived-tensor-cohomology-vanishes",
-    "def-pc-derived-pullback"
+    "lem-pc-kflat-derived-tensor-comparison",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-sc-source-tor-amplitude-flat-model"
    ],
    "elementary": false
   },
   {
-   "text": "The residue-field test and derived composition identify the degree-a cohomology of the fibre of Lh*E as rank-r locally free on Spec kappa(t). A nonempty member of its trivializing open cover equals this one-point spectrum, so the sheaf is free of rank r. Its sections, with scalars transported along GammaSpecIso, have dimension r. Since perfect objects are pseudo-coherent, apply the base-change clause of the jump-loci theorem to identify this dimension with beta_a(E,h(t)).",
+   "text": "At h(t), apply flatComplexDerivedPullback to P along the residue morphism. Compose the canonical quotientCompQhIso and mapHomotopyCategoryFactors comparisons with Q(P) ≅ E to identify the derived residue pullback with Q of the termwise pullback Q. For i<a, P.X i is zero, hence Q.X i and Q.homology i are zero. homologyFunctorFactors transports this to zero derived homology. Evaluation and restriction of scalars preserve zero objects, giving zero derivedFiberCohomology. ModuleCat.subsingleton_of_isZero and Module.finrank_zero_of_subsingleton yield the required zero Betti number.",
    "uses": [
-    "lem-sc-perfect-jump-loci",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-perfect-complex",
-    "def-amb-finite-locally-free-module"
+    "lem-pc-flat-complex-derived-pullback",
+    "def-sc-derived-fiber-betti"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use exists_derivedPullbackComposition at the residue morphism of t and h; its degree-a homology isomorphism transports hres(t) to a rank-r finite locally free sheaf representing the fibre cohomology of Lh*E. On Spec kappa(t), choose a point and a member of the trivializing open cover containing it. Every point equals this point, so that open is top. isoFreeOfRestrictIso gives a global free-sheaf isomorphism. The proved finrank_moduleSpecΓFunctor_obj_free gives finrank r, including r=0.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-amb-finite-locally-free-module",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedFiberCohomology_baseChange_iso to E, h, a, and t. Its ModuleCat isomorphism preserves finrank. With the algebra structure induced by h.residueFieldMap t, Module.finrank_baseChange says extension of fields preserves the original finrank, without a finiteness hypothesis. Thus the Betti number of Lh*E at t equals that of E at h(t). Combine this equality with the rank-r sections calculation and the zero Betti numbers proved above. The perfectness hypothesis is unused; the original interface is unchanged.",
+   "uses": [
+    "lem-sc-derived-fiber-cohomology-base-change"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-amb-finite-locally-free-module",
-  "def-pc-derived-pullback",
   "def-pc-derived-tensor-cohomology-vanishes",
-  "def-pc-perfect-complex",
-  "lem-pc-affine-tor-amplitude-criterion",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-derived-fiber-betti",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-kflat-derived-tensor-comparison",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-perfect-jump-loci"
+  "lem-sc-derived-fiber-cohomology-base-change",
+  "lem-sc-source-tor-amplitude-flat-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0BDL",
-  "place": "First paragraph; Tag 0BDI base-change formula, Tag 09U8 Tor amplitude under pullback, Tag 08E9 affine criterion",
-  "note": "M3 expanded the cited argument and checked the Lean combination locally."
+  "document": "Stacks Project, Tags 09U8, 08CI and 0BDI; lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "09U8 proof via bounded flat models; 0BDI base-change proof; existing generic flat-model theorem",
+  "note": "K2 wrote and compiled the complete Lean proof using the global flat-model route, avoiding affine models and the semicontinuity/constructibility clauses."
  },
  "mathlib_searches": [
   {
@@ -144,10 +161,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T100032-L-2470097",
-  "kind": "interface",
+  "landing": "20261013T111900-L-3055374",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
