@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-k3-affine-hom-comparison-finite-free",
+ "kind": "statement",
+ "title": "Finite-basis inverse for a natural Hom comparison",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an affine open, A=Gamma(Y,U), and T any additive functor from A-modules to module sheaves on U. Suppose c(M,N):T(Hom_A(M,N)) -> internalHom(T(M),T(N)) [def-pur-sheaf-hom] is natural under precomposition by all source maps and c(A,N) is an isomorphism for every N. Then c(M,N) is an isomorphism for every finite free A-module M [def-weil-pbc-free-module] and every coefficient module N.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-free-module"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01HV",
+  "place": "lemma-spec-sheaves, clauses (4)-(5) and functoriality; Tag 0BQZ, lemma-regular-immersion-ext, finite free Hom coefficient map"
+ },
+ "proof": [
+  {
+   "text": "Choose a finite basis of M. Its inclusion maps inc_i:A -> M and coordinate projections proj_i:M -> A satisfy sum_i proj_i >> inc_i = id_M. Precomposition L in associated Hom and H in sheaf Hom are additive contravariant operations, so they carry this decomposition to identity decompositions.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define d = sum_i H(inc_i) >> inverse(c(A,N)) >> L(proj_i). Naturality for inc_i proves c(M,N) >> d = id; naturality for proj_i proves d >> c(M,N) = id. In both cases cancel the rank-one component and use the sum identity. An empty basis has empty sums and is covered by exactly the same identities.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Codex",
+  "group": "K3",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/01HV",
+   "place": "lemma-spec-sheaves, clauses (4)-(5) and functoriality; Tag 0BQZ, lemma-regular-immersion-ext, finite free Hom coefficient map"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical associated-sheaf Hom comparison natural in both arguments; additive natural transformation invertible on finite free sources",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf Hom canonical comparison finite free natural in both modules",
+   "results": "Eight free-sheaf map and freeHomEquiv results; none constructs the tilde-to-internal-Hom comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.isIso_app_of_isIso",
+   "results": "Unknown identifier; read isIso_app_coconePt_of_preservesColimit separately as a generic alternative.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObj|HomComparison in Mathlib/AlgebraicGeometry/Modules and Mathlib/Algebra/Category/ModuleCat/Sheaf; homObjSectionsEquiv|homObjFreeIso in library",
+   "results": "No Mathlib internal Hom comparison. Read source InternalHom, InternalHomFree, HomObjSections, AffineHom, and tilde adjunction. Source rank-one and additivity API supports the finite-basis proof; no arbitrary-coefficient comparison family found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteFreeCoefficientComparisons",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-free affine Hom coefficient calculation: construction and naturality, then finite-basis invertibility.",
+   "via": [
+    "lem-sc-affine-finite-free-coefficient-comparisons",
+    "new-g3-affine-koszul-signed-dual-coefficient-square",
+    "lem-sc-affine-koszul-hom-coefficient-complex-square",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineHomComparisonFiniteFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineHomComparisonFiniteFree.lean",
+  "declaration": "AlgebraicGeometry.affine_hom_comparison_isIso_of_finite_free",
+  "statement": "theorem affine_hom_comparison_isIso_of_finite_free\n    {Y : Scheme.{u}} (U : Y.affineOpens)\n    (T : ModuleCat.{u} Γ(Y, U.1) ⥤ U.1.toScheme.Modules)\n    (hT : T.Additive)\n    (c : ∀ (M N : ModuleCat.{u} Γ(Y, U.1)),\n      T.obj (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) ⟶\n        SheafOfModules.homObj (R := U.1.toScheme.toRingedSpace.sheaf)\n          (T.obj M) (T.obj N))\n    (hpre : ∀ (M M' N : ModuleCat.{u} Γ(Y, U.1)) (f : M' ⟶ M),\n      c M N ≫ SheafOfModules.homObjMap (R := U.1.toScheme.toRingedSpace.sheaf)\n        (T.map f) (𝟙 (T.obj N)) =\n      T.map (ModuleCat.ofHom (Linear.leftComp Γ(Y, U.1) N f)) ≫ c M' N)\n    (hunit : ∀ N : ModuleCat.{u} Γ(Y, U.1),\n      IsIso (c (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) N))\n    (M N : ModuleCat.{u} Γ(Y, U.1))\n    [Module.Free Γ(Y, U.1) M] [Module.Finite Γ(Y, U.1) M] : IsIso (c M N)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T165643-L-1808678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T165643-L-1808678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

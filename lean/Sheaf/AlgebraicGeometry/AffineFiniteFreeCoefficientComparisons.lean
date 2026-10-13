@@ -9,6 +9,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+import Sheaf.AlgebraicGeometry.AffineHomComparisonMaps
+import Sheaf.AlgebraicGeometry.AffineHomComparisonFiniteFree
 
 /-! # Finite-free affine Hom comparisons with coefficients
 
@@ -59,6 +61,28 @@ theorem affine_finite_free_coefficient_comparisons
         SheafOfModules.homObjMap (R := U.1.toScheme.toRingedSpace.sheaf)
           (𝟙 (T.obj (K.X q))) (T.map g) ≫ (e q N').hom =
         (e q N).hom ≫ T.map (ModuleCat.ofHom (Linear.rightComp A (K.X q) g))) := by
-  sorry
+  classical
+  dsimp only
+  let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
+  have hT : T.Additive := by
+    have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive := ⟨by intros; rfl⟩
+    infer_instance
+  obtain ⟨c, hpre, hpost, hunit⟩ := exists_affine_hom_comparison_maps U
+  have hc (q : ℕ) (N : ModuleCat.{u} Γ(Y, U.1)) : IsIso (c (K.X q) N) := by
+    have := hfree q
+    have := hfinite q
+    exact affine_hom_comparison_isIso_of_finite_free U T hT c hpre hunit (K.X q) N
+  have := hc
+  refine ⟨fun q N ↦ (asIso (c (K.X q) N)).symm, ?_, ?_⟩
+  · intro q N
+    apply (cancel_mono (c (K.X (q + 1)) N)).1
+    simp only [Iso.symm_hom, asIso_inv, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [← hpre (K.X q) (K.X (q + 1)) N (K.d (q + 1) q)]
+    simp
+  · intro q N N' g
+    apply (cancel_mono (c (K.X q) N')).1
+    simp only [Iso.symm_hom, asIso_inv, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [← hpost (K.X q) N N' g]
+    simp
 
 end AlgebraicGeometry

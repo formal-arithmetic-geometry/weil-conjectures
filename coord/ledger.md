@@ -13194,3 +13194,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: merged deliver/H2/Sheaf.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare (stage 3; reviewer PASS; first push; landing 20261013T165641-L-1808140 (proof); batch 20261013T165635; modules 1; new nodes 0)
 - 16:56 L: merged deliver/H4/Sheaf.AlgebraicGeometry.DerivedPullbackTranslatedUnitKFlatCones (stage 3; reviewer PASS; first push; landing 20261013T165642-L-1808292 (interface); batch 20261013T165635; modules 2; new nodes 1)
 - 16:56 L: merged deliver/J1/Sheaf.AlgebraicGeometry.OpenSectionsOrdinaryStructureClass (stage 3; reviewer PASS; first push; landing 20261013T165642-L-1808541 (proof); batch 20261013T165635; modules 1; new nodes 0)
+- 16:56 L: merged deliver/K3/Sheaf.AlgebraicGeometry.AffineFiniteFreeCoefficientComparisons (stage 3; reviewer PASS; first push; landing 20261013T165643-L-1808678 (interface); batch 20261013T165635; modules 3; new nodes 2)
