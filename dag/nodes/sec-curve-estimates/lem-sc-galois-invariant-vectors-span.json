@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-galois-invariant-vectors-span",
+ "kind": "statement",
+ "title": "Invariant vectors span for a locally constant matrix Galois cocycle",
+ "statement": "Let K be a field, S its separable closure, n any natural number, and b : Gal(S/K) → GL_n(S) locally constant satisfying b(g) g(b(h)) = b(gh). The S-linear span in S^n of the vectors v satisfying b(g) g(v) = v for every g is all of S^n.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, injectivity via invariant-basis descent"
+ },
+ "proof": [
+  {
+   "text": "Use the proved open-normal right-stabilizer theorem and the normal Krull neighbourhood basis to choose a finite Galois intermediate field L through whose restriction map q the values of b factor. Choose lifts s of automorphisms of L. No descent of b entries is required.",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the additive semilinear operators T_g(v)=b(g)g(v). Verify composition from the cocycle law and T_1=id. On each standard vector e_i, T_g(e_i) depends only on q(g). Weighted sums A(a,i)=sum_sigma sigma(a) T_(s sigma)(e_i), for a in L, are invariant by semilinearity and left-multiplication reindexing.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If e_i is outside the S-span W of invariant vectors, Mathlib Submodule.exists_le_ker_of_notMem supplies a functional vanishing on W but not on e_i. Its values on all A(a,i) give a relation among distinct embeddings L into S. Mathlib linearIndependent_monoidHom makes every coefficient zero; the identity coefficient is f(e_i), a contradiction. Expand every vector as a sum of scalar multiples of standard vectors to conclude W=top.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-functions-open-stabilizer"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, invariant-basis descent; weighted-averaging implementation adapted from Field.matrixDescentInvariants_span by the second reader U2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally constant general linear Galois cocycle invariant vectors span",
+   "results": "Only scalar Hilbert 90 and continuous-cohomology infrastructure; no exact matrix span theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; use infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.mulVec",
+   "results": "Matrix.mulVec_apply_eq_sum and matrix extensionality lemmas; no invariant spanning theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*span|Hilbert90|exists_fun_fin_finrank_span_eq",
+   "results": "Scalar Hilbert 90; generic spanning-set extraction in Dimension.StrongRankCondition. No existing project declaration matching the span theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois invariant vectors for a matrix cocycle span the vector space",
+   "results": "UNAVAILABLE: service returned Internal Server Error. LeanFinder, Loogle, and source grep were used instead.",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilinear Galois descent fixed vectors generate vector space",
+   "results": "Fixed field infrastructure only; no matching vector spanning declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.span, LinearIndependent",
+   "results": "Linear independence and span infrastructure; no Galois vector descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*[Dd]escent|fixed.*vectors|invariant.*basis",
+   "results": "No exact Mathlib match. Project source review finds the proved matrixDescentInvariants_span for a conjugation action, whose weighted-averaging proof is adapted to vectors here.",
+   "date": "2026-10-13",
+   "verdict": "adapt proved related argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.GaloisMatrixHilbert90Normalized",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-galois-matrix-hilbert90-normalized"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.GaloisInvariantVectorsSpan",
+  "file": "lean/Sheaf/FieldTheory/GaloisInvariantVectorsSpan.lean",
+  "declaration": "Field.galois_invariant_vectors_span",
+  "statement": "theorem galois_invariant_vectors_span (K : Type u) [Field K] (n : ℕ)\n    (b : Gal(SeparableClosure K/K) →\n      Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))\n    (hb : IsLocallyConstant b)\n    (hcoc : ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = b (g * h)) :\n    Submodule.span (SeparableClosure K)\n      {v : Fin n → SeparableClosure K | ∀ g, (b g).val.mulVec (g ∘ v) = v} = ⊤",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T022432-L-3221761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T022432-L-3221761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

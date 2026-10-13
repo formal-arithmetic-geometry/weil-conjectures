@@ -1,0 +1,100 @@
+{
+ "id": "lem-sc-spanning-set-unit-matrix",
+ "kind": "statement",
+ "title": "A spanning set contains the columns of a unit matrix",
+ "statement": "For any field F, natural number n, and set s ⊆ F^n whose F-linear span is F^n, there exists t in GL_n(F) such that every column of t belongs to s.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, injectivity via invariant-basis descent"
+ },
+ "proof": [
+  {
+   "text": "Apply Mathlib Submodule.exists_fun_fin_finrank_span_eq to extract a linearly independent spanning family from s. Its index has size n because the span is top and finrank F (Fin n → F) = n. Form its basis B. Relative to the standard basis E, E.toMatrix B and B.toMatrix E are mutually inverse by Module.Basis.toMatrix_mul_toMatrix_flip. Their unit matrix has precisely the vectors of B as columns, hence columns in s.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, finite Galois averaging and extraction of a basis"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a spanning set in a finite dimensional vector space contains a basis",
+   "results": "Basis extraction infrastructure found; Submodule.exists_fun_fin_finrank_span_eq and Basis.toMatrix_mul_toMatrix_flip suffice.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; use infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.mulVec",
+   "results": "Matrix.mulVec_apply_eq_sum and matrix extensionality lemmas; no invariant spanning theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*span|Hilbert90|exists_fun_fin_finrank_span_eq",
+   "results": "Scalar Hilbert 90; generic spanning-set extraction in Dimension.StrongRankCondition. No existing project declaration matching the span theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A spanning subset of a finite dimensional vector space contains a basis",
+   "results": "UNAVAILABLE: service returned Internal Server Error. LeanFinder, Loogle, and source grep were used instead.",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.GaloisMatrixHilbert90Normalized",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-galois-matrix-hilbert90-normalized"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.SpanningSetUnitMatrix",
+  "file": "lean/Sheaf/FieldTheory/SpanningSetUnitMatrix.lean",
+  "declaration": "Matrix.exists_unit_matrix_columns_mem",
+  "statement": "theorem exists_unit_matrix_columns_mem (F : Type u) [Field F] (n : ℕ)\n    (s : Set (Fin n → F)) (hs : Submodule.span F s = ⊤) :\n    ∃ t : GeneralLinearGroup (Fin n) F, ∀ j, (fun i ↦ t.val i j) ∈ s",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T022432-L-3221761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T022432-L-3221761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
