@@ -13,36 +13,44 @@
  ],
  "proof": [
   {
-   "text": "Exactness of tilde identifies the kernel and cokernel of its map with tilde of the module kernel and cokernel. The affine section/tilde equivalence and the ideal-product formula identify the zero module products by I^t with zero ideal-power products of those sheaves.",
+   "text": "Use the existing private theorem AlgebraicGeometry.tilde_preservesKernel from Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison, made available by a proof-only import all. That theorem proves kernel preservation by lifting the quasi-coherent kernel fork and reflecting its limit; no duplicate proof is introduced here. Restriction along the affine scheme isomorphism preserves limits; its natural comparison with pullback transfers this preservation to pullback. Both tilde and pullback are left adjoints and preserve cokernels. Thus the sheaf kernel and cokernel, also after postcomposition with epsilon, are isomorphic respectively to L of the algebraic kernel and quotient by the range, using ModuleCat.kernelIsoKer, ModuleCat.cokernelIsoRangeQuotient, PreservesKernel.iso, PreservesCokernel.iso, kernelCompMono and cokernelCompIsIso.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-ideal-power-product-zero-affine-cover"
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-module-restriction-open-immersion-limits"
    ],
    "elementary": false
   },
   {
-   "text": "Pullback along the canonical scheme isomorphism is exact and transports the ideal of global sections to J. Postcomposition with ε changes kernel and cokernel only by isomorphism. Transfer the two zero products along these isomorphisms; the argument also handles exponent zero and the empty scheme.",
+   "text": "For any A-module M compute the global sections of L(M): restrict back along X.isoSpec.inv, replace pullback by restriction, and use restrictFunctorComp, restrictFunctorCongr and restrictFunctorId to identify this sheaf with tilde(M). Compose tilde.isoTop with this comparison on global sections and sectionsRestrictFromSpecLinearEquiv for the top affine open. The equality IsAffineOpen.fromSpec_top supplies the final chart identification. This yields an A-linear equivalence M with Gamma(X,L(M)), without a choice of arbitrary data. The two associated sheaves are quasi-coherent by quasi-coherence of tilde and pullback, and so are their isomorphic kernel and cokernel.",
    "uses": [
-    "lem-weil-pbc-module-pullback-ideal-power-product-image"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose these linear equivalences with evaluation of the kernel and cokernel isomorphisms. A linear equivalence preserves the annihilator (LinearEquiv.annihilator_eq). Apply idealPowerProduct_isZero_iff_affine_cover to the singleton cover consisting of the top affine open. The assumed two annihilator inequalities therefore give the two zero ideal-power products. No positivity or finiteness assumption is used, and the same singleton cover is valid for the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-ideal-power-product-zero-affine-cover",
-  "lem-weil-pbc-module-pullback-ideal-power-product-image"
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), affine construction; the component comparisons are written out in the Lean docstring"
+  "place": "Tag 0889(1), affine construction, using exact tilde/global-sections equivalence of Schemes Tag 01IB; implemented via singleton affine annihilator detection; returned-duplicate repair reuses the existing tilde_preservesKernel via import all"
  },
  "mathlib_searches": [
   {
@@ -137,10 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T062529-L-735202",
-  "kind": "interface",
+  "landing": "20261013T082341-L-1634071",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
