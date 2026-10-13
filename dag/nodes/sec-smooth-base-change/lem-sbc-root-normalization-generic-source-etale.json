@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-root-normalization-generic-source-etale",
+ "kind": "statement",
+ "title": "Generic source etaleness after root normalization",
+ "statement": "With the hypotheses of the root normalization construction, every point of the finite relative normalization lying over the generic point of the root divisor has a source open neighbourhood on which the normalization morphism is etale.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EB and 0BRM, and Tag 0EYG root-extension paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-root-algebra-regular-at-root"
+ ],
+ "proof": [
+  {
+   "text": "The root algebra is Noetherian and regular at every prime containing the root coordinate, by the regular root-algebra theorem. The generic-point calculation identifies the root divisor and the finite normalization points above it.",
+   "uses": [
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each generic torsor component, the Galois ramification indices divide the group order and the residue extensions are tame because the group order is invertible. Abhyankar’s lemma for the group-order root gives ramification index one and separable residue fields, hence the finite normalization is etale at each point above the generic divisor point.",
+   "uses": [
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etaleness is open on a finite morphism over a locally Noetherian scheme, yielding a source open neighbourhood at each normalization point.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-root-algebra-regular-at-root",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "B2",
+  "document": "Stacks Project",
+  "place": "Tags 09EB, 0BRM, and 0EYG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Abhyankar lemma finite root normalization etale generic divisor",
+   "date": "2026-10-14",
+   "results": "service unavailable",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite normalization etale at generic divisor point",
+   "date": "2026-10-14",
+   "results": "No exact theorem; existing root regularity theorem used",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|generic_source_etale",
+   "date": "2026-10-14",
+   "results": "No exact theorem in Mathlib or library",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-strict-hensel-root-normalization-generic-etale",
+   "place": "generic etaleness proof step",
+   "via": [
+    "lem-sbc-root-normalization-generic-source-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationGenericSourceEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.root_normalization_generic_source_etale",
+  "statement": "theorem GaloisCover.root_normalization_generic_source_etale\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H)\n    (hG : IsUnit (Nat.card G : H)) (hg : IsSMulRegular H (b.hom f))\n    [IsDomain (H ⧸ Ideal.span {b.hom f})] :\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    (∀ (Q : Ideal A) (hQ : Q.IsPrime),\n      letI := hQ\n      AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) ∈ Q →\n        IsRegularLocalRing (Localization.AtPrime Q)) →\n    ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ x : a.normalization, a.fromNormalization x = j η →\n        ∃ E : a.normalization.Opens, x ∈ E ∧ Etale (E.ι ≫ a.fromNormalization)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T172650-L-2097646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

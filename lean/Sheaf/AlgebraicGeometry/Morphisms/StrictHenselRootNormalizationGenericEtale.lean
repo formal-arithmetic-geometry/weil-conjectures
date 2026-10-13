@@ -20,6 +20,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
 import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
 
 /-! # Properties of the explicit root-cover normalization
 Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH. -/
@@ -28,6 +29,50 @@ Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH. -/
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+-- Finiteness lets source-local etaleness around the whole fibre give a target open.
+private theorem etale_shrink_of_fibre_source_opens {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsFinite f] (y : Y)
+    (h : ∀ x : X, f x = y → ∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f)) :
+    ∃ W : Y.Opens, y ∈ W ∧ Etale (f ∣_ W) := by
+  classical
+  let E : X.Opens := ⨆ V : {V : X.Opens // Etale (V.ι ≫ f)}, V.val
+  let W : Y.Opens := ⟨(f '' (E : Set X)ᶜ)ᶜ,
+    (f.isClosedMap _ E.isOpen.isClosed_compl).isOpen_compl⟩
+  have hy : y ∈ W := by
+    rintro ⟨x, hx, hxy⟩
+    obtain ⟨V, hxV, hV⟩ := h x hxy
+    apply hx
+    exact (le_iSup (fun V : {V : X.Opens // Etale (V.ι ≫ f)} ↦ V.val)
+      ⟨V, hV⟩) hxV
+  have hle : f ⁻¹ᵁ W ≤ E := by
+    intro x hx
+    by_contra hxE
+    exact hx ⟨x, hxE, rfl⟩
+  let g := f ∣_ W
+  have hlocal (x : (f ⁻¹ᵁ W).toScheme) :
+      ∃ V : (f ⁻¹ᵁ W).toScheme.Opens, x ∈ V ∧ Etale (V.ι ≫ g) := by
+    have hxE : (f ⁻¹ᵁ W).ι x ∈ E := hle x.property
+    obtain ⟨V, hxV⟩ := (TopologicalSpace.Opens.mem_iSup.mp hxE)
+    let T := (f ⁻¹ᵁ W).ι ⁻¹ᵁ V.val
+    have hT : Etale (T.ι ≫ (f ⁻¹ᵁ W).ι ≫ f) := by
+      have hcomp : T.ι ≫ (f ⁻¹ᵁ W).ι ≫ f =
+          ((f ⁻¹ᵁ W).ι ∣_ V.val) ≫ V.val.ι ≫ f := by
+        simp only [← Category.assoc, morphismRestrict_ι]
+        rfl
+      rw [hcomp]
+      let : Etale (V.val.ι ≫ f) := V.property
+      infer_instance
+    have hT' : Etale ((T.ι ≫ g) ≫ W.ι) := by
+      simpa only [Category.assoc, g, morphismRestrict_ι] using hT
+    let := hT'
+    exact ⟨T, hxV, AlgebraicGeometry.Etale.of_comp (T.ι ≫ g) W.ι⟩
+  choose V hxV hV using hlocal
+  have htop : (⨆ x, V x) = ⊤ := by
+    apply top_le_iff.mp
+    intro x _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩
+  exact ⟨W, hy, IsZariskiLocalAtSource.of_iSup_eq_top V htop hV⟩
 
 /-- Abhyankar's lemma gives an etale neighborhood of the divisor generic point
 for the already finite, explicitly constructed relative normalization.
@@ -79,6 +124,35 @@ theorem GaloisCover.strict_hensel_root_normalization_generic_etale
       IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →
       (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →
       ∀ (η : D), IsGenericPoint η Set.univ →
-      ∃ (O : N.Opens), j η ∈ O ∧ Etale (a.fromNormalization ∣_ O) := by sorry
+      ∃ (O : N.Opens), j η ∈ O ∧ Etale (a.fromNormalization ∣_ O) := by
+  dsimp only
+  intro hg hN hp he hn D j hD hDi hj hV η hη
+  have hQ := strictHenselization_regular_divisor_quotient R f barY b hb hg
+  have : IsNoetherianRing (strictHenselizationRing barY) := hQ.1
+  have : IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := hQ.2.1
+  have : IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := hQ.2.2
+  let : Algebra R (strictHenselizationRing barY) := b.hom.toAlgebra
+  have : Module.Flat R (strictHenselizationRing barY) :=
+    strictHenselization_structural_ringHom_flat R barY b hb
+  have hgreg : IsSMulRegular (strictHenselizationRing barY) (b.hom f) := hf.of_flat
+  have hG' : IsUnit (Nat.card G : strictHenselizationRing barY) := by
+    simpa only [map_natCast] using hG.map b.hom
+  have hroot (Q : Ideal (AdjoinRoot
+      ((Polynomial.X : Polynomial (strictHenselizationRing barY)) ^ Nat.card G -
+        Polynomial.C (b.hom f)))) (hQp : Q.IsPrime) :
+      AdjoinRoot.root ((Polynomial.X : Polynomial (strictHenselizationRing barY)) ^
+        Nat.card G - Polynomial.C (b.hom f)) ∈ Q →
+      IsRegularLocalRing (Localization.AtPrime Q) := by
+    have := hQp
+    exact AdjoinRoot.isRegularLocalRing_atPrime_of_root_mem
+      (strictHenselizationRing barY) (b.hom f) hgreg (Nat.card G)
+      (Nat.card_pos) Q
+  have := hN
+  have := hp
+  have := hn
+  apply etale_shrink_of_fibre_source_opens _ (j η)
+  exact W.root_normalization_generic_source_etale i G R φ f β hβ
+    (strictHenselizationRing barY) b hG' hgreg hroot hN hp he hn D j hD hDi hj hV η hη
+
 
 end AlgebraicGeometry.Scheme

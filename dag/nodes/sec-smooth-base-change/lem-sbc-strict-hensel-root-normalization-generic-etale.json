@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "The regular-divisor quotient theorem gives a regular local domain H/(g), and structural flatness makes g regular. In the root algebra, t^|G|=g and A/(t)=H/(g). Regularity along the root and the domain quotient make the generic divisor local ring a DVR, with uniformizer t and root ramification index |G|. The supplied reduced integral Cartier divisor has the same support as the root divisor, so j(eta) is this divisor generic point.",
+   "text": "The strict henselization regular-divisor quotient and structural flatness give the required regularity and regularity of b(f). The root-algebra theorem supplies regular local rings at primes containing the root coordinate, using invertibility of the group order.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient",
     "lem-sbc-affine-strict-henselization-structural-flat",
@@ -32,15 +32,16 @@
    "elementary": false
   },
   {
-   "text": "Identify the original cover over D(f) through beta and base change to H. For each connected generic torsor component its Galois group is a stabilizer subgroup of G. The degree formula 09EB makes its ramification and residue degrees divide the stabilizer order and hence |G|. Invertibility excludes wild ramification and inseparable residue degrees. Apply Abhyankar 0BRM to the root extension whose index is |G|: the normalized component extensions have ramification index one and separable residue extensions, hence are etale over the DVR. The relative normalization is therefore etale above j(eta).",
+   "text": "Apply the generic source-etaleness theorem to the concrete root normalization. It gives a source open neighbourhood of each normalization point over j(eta), with the exact finite-fibre hypotheses of the target.",
    "uses": [
+    "lem-sbc-root-normalization-generic-source-etale",
     "def-sbc-normal-dominant-galois",
     "lem-weil-pbc-relative-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "The assumed finite normalization over the Noetherian N is finitely presented. Its nonetale locus is closed, and its image under the finite structural morphism is closed and misses j(eta). Let O be the complement of that image. It contains j(eta) and the whole restriction of a^nu to O is etale.",
+   "text": "Finiteness of the morphism lets source-local etaleness over the finite fibre be shrunk to a target open neighbourhood by the finite-source Zariski-locality argument. This yields the required O containing j(eta).",
    "uses": [
     "def-weil-finite-integral-morphism",
     "def-weil-etale-morphism"
@@ -55,14 +56,15 @@
   "lem-sbc-affine-strict-henselization-structural-flat",
   "lem-sbc-root-algebra-regular-at-root",
   "lem-sbc-strict-hensel-regular-divisor-quotient",
-  "lem-weil-pbc-relative-normalization"
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-root-normalization-generic-source-etale"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "B4",
+  "group": "B2",
   "document": "Stacks Project and Mathlib",
-  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), and 0EYG (pione-lemma-abhyankar-one-divisor), group-order root computation; finite-presentation openness of etaleness."
+  "place": "Tags 09EB, 0BRM, and 0EYG; finite-source openness of etaleness."
  },
  "mathlib_searches": [
   {
@@ -139,9 +141,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T160708-L-1370738",
+  "landing": "20261013T172650-L-2097646",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
