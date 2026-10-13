@@ -12062,3 +12062,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts (stage 3; reviewer PASS; first push; landing 20261013T100220-L-2502659 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:02 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PerfectSupportAffineModuleModel (stage 3; reviewer PASS; first push; landing 20261013T100220-L-2502922 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:02 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal (stage 3; reviewer PASS; first push; landing 20261013T100221-L-2503096 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:02 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackNaturality (stage 3; reviewer PASS; first push; landing 20261013T100222-L-2503249 (interface); batch 20261013T095923; modules 3; new nodes 2)

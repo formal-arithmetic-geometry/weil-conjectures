@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare
+import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare
 import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
@@ -24,28 +27,23 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 open Modules
 
+set_option maxHeartbeats 800000 in
+-- Comparing the independent Ext instances exceeds the default elaboration heartbeat budget.
 /-- The explicit comparison map, rather than an arbitrary family of equivalences,
 intertwines the two structure-sheaf pullback operations.
 Source: Stacks Project, Tag 01F7, cohomology-equation-functorial and
 cohomology-equation-choice; Tag 03FD, lemma-cohomology-modules-abelian-agree.
 (blueprint: new-sc-scalar-unit-pullback-naturality).
 
-Proof: Compute module cohomology using injective unit-module resolutions. Forget these
-resolutions to abelian sheaves; they are acyclic for sections by Tag 03FD. Evaluation at 1
-identifies the module Hom complex with its sections complex. The defining cocycle formula
-for moduleExtEquiv, followed by forgetting and precomposition with the integer-unit class,
-identifies scalarUnitAbelianComparison with this same sections-complex comparison.
-For a morphism a, lift the adjoint structure-sheaf map through resolutions as in Tag 01F7;
-if its pushforward resolution is not injective, first resolve that pushforward too, and
-invert the resulting quasi-isomorphism on sections. Restriction to k-scalars does not
-change the additive sections. The scalar inverse-image Ext map followed by the tensor
-coefficient map computes the map induced by this lift. The adjunction equation for
-tensorPullbackObjUnitToUnit identifies the coefficient map with the structure-sheaf map.
-After forgetting scalars, the inverse-image Ext map and the integer constant-sheaf
-comparison defining structureSheafCohomologyPullback compute the same lift. Hence both
-sides are the same class in the target sections complex. Independence of the lift up to
-homotopy gives the equality for every x. For zero cohomology, including the empty scheme
-and affine schemes, the equality specializes to equality of the unique zero class. -/
+Proof: Factor each explicit module-to-abelian comparison through scalar Ext.
+Use coefficient naturality to move the tensor-unit coefficient map into Ext, and
+cancel the cohomology-to-Ext equivalence with its inverse in the pullback formula.
+The underlying abelian pullback square identifies the two coefficient maps and
+the integer-unit classes. Apply naturality of Ext for this square of exact functors,
+whose scalar Ext universes are u+1 and abelian Ext universes are u. Associativity
+of Yoneda composition combines the unit and coefficient identities. The result
+is the defining Ext formula for structureSheafCohomologyPullback. No injective
+acyclicity assertion is needed for this algebraic reduction. -/
 theorem scalar_unit_cohomology_pullback_naturality (k : Type u) [Field k]
     {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g)
@@ -54,6 +52,39 @@ theorem scalar_unit_cohomology_pullback_naturality (k : Type u) [Field k]
       (scalarCohomologyMap g (tensorPullbackObjUnitToUnit a) 1
         (scalarCohomologyPullback f g a h (SheafOfModules.unit X.ringCatSheaf) 1 x)) =
       structureSheafCohomologyPullback a 1 (scalarUnitAbelianComparison X x) := by
-  sorry
+  -- The two independent Ext universes require repeated comparison-instance elaboration.
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+    let : MonoidalCategory (KSheaf X k) := Sheaf.monoidalCategory _ _
+    let : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
+    let : HasExt.{u + 1} (KSheaf X k) := HasExt.standard _
+    let : HasExt.{u + 1} (KSheaf Y k) := HasExt.standard _
+    rw [scalar_unit_abelian_ext_factorization k g,
+      scalar_unit_abelian_ext_factorization k f, scalarCohomologyExtEquiv_map]
+    unfold scalarCohomologyPullback
+    rw [AddEquiv.apply_symm_apply]
+    obtain ⟨c, hcunit, hccoeff⟩ := scalar_abelian_pullback_square k f g a h
+    let z := scalarCohomologyExtEquiv f (SheafOfModules.unit X.ringCatSheaf) 1 x
+    change scalarAbelianExtComparison k Y _ 1
+        ((((Abelian.Ext.mk₀ (scalarInverseUnitIso a).inv).comp
+          (z.mapExactFunctor (scalarInverseImage a)) (zero_add 1)).comp
+          (Abelian.Ext.mk₀ (scalarPullbackCoefficient f g a h _)) (add_zero 1)).comp
+          (Abelian.Ext.mk₀ (scalarHom g (tensorPullbackObjUnitToUnit a))) (add_zero 1)) = _
+    unfold scalarAbelianExtComparison
+    simp only [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀]
+    simp only [Abelian.Ext.comp_assoc_of_third_deg_zero, Abelian.Ext.mk₀_comp_mk₀]
+    rw [← Functor.map_comp, hccoeff]
+    rw [← Abelian.Ext.mk₀_comp_mk₀]
+    rw [← Abelian.Ext.comp_assoc_of_third_deg_zero
+      ((z.mapExactFunctor (scalarInverseImage a)).mapExactFunctor (scalarAbelianForget k Y))]
+    erw [Abelian.Ext.mapExactFunctor_square.{u + 1, u + 1, u, u} (scalarInverseImage a)
+      (scalarAbelianForget k X) (scalarAbelianForget k Y)
+      (scalarAbelianInverseImage a) c 1 z]
+    simp only [← Abelian.Ext.comp_assoc_of_third_deg_zero,
+      ← Abelian.Ext.comp_assoc_of_second_deg_zero]
+    erw [hcunit]
+    rw [scalarAbelianStructurePullback_apply]
+    rw [Abelian.Ext.mapExactFunctor_comp,
+      Abelian.Ext.comp_assoc_of_second_deg_zero]
 
 end AlgebraicGeometry.Scheme
