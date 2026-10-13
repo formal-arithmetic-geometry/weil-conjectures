@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks. Foundational input: strict-tower-homotopy-limit.",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict tower homotopy limit",
+ "statement": "Let $\\mathcal C$ be a small site, $\\mathcal O$ a sheaf of commutative rings, and $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. Let $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A)$, whose objects are strict inverse sequences and whose exactness is levelwise. On its derived category [def-weil-abstract-derived-category], total right derived inverse limit is computed by taking a K-injective tower resolution and then termwise inverse limit [def-pur-kinjective-complex]. This gives an exact functor $R\\lim:D(\\operatorname{Tow}(\\mathcal A))\\to D(\\mathcal A)$. For every strict tower complex $X_\\bullet$ there is a natural distinguished triangle $R\\lim X_\\bullet\\to\\prod_n^D X_n\\xrightarrow{1-s}\\prod_n^D X_n\\to(R\\lim X_\\bullet)[1]$ [def-weil-derived-limit], where $\\prod^D$ is the product in $D(\\mathcal A)$ and the $n$-th component of $s$ is transition followed by projection to $n+1$. In particular, if for every $n$ some transition $X_m\\to X_n$, $m\\geq n$, is zero in $D(\\mathcal A)$, then $R\\lim X_\\bullet=0$. If $v:X_\\bullet\\to Y_\\bullet$ is a strict map of tower complexes whose tower of mapping cones has that property, then the canonical map $R\\lim(v)$ is an isomorphism. No exactness of countable products in $\\mathcal A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940 (section-derived-limits), in particular Tag 0941 (lemma-derived-limit-is-ok); the proof works for modules using the constant pullback ring sheaf on the tower site. Pro-zero consequence: the finite geometric-series inverse of 1-s, or Tag 0H9L (more-algebra-lemma-pro-isomorphism-Rlim) in more-algebra.tex, applied to the zero tower. Strict functoriality uses the total derived functor on the tower site."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-weil-derived-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of strict towers of sheaves in a Grothendieck abelian category is a homotopy limit and a strict map which is a pro isomorphism induces an isomorphism of derived limits",
+   "results": "CategoryTheory.GrothendieckTopology.diagramCompIso, CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_plusFunctor, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj, Condensed.hasExactLimitsOfShape, CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived limit of a pro zero tower vanishes homotopy limit Roos triangle in derived category of sheaves",
+   "results": "CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.isZero_Tor'_succ_of_projective, CochainComplex.mappingCone.isZero_X_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.triangleOfSESIso",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimit\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimit|pro.isomorphism|[Pp]ro.?zero",
+   "results": "Mathlib/Algebra/Algebra/Prod.lean, Mathlib/Algebra/Algebra/Prod.lean, Mathlib/Algebra/Ring/Prod.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/BicartesianSq.lean, Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean, Mathlib/CategoryTheory/Limits/Constructions/ZeroObjects.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro isomorphic strict towers give isomorphic derived inverse limits in Grothendieck abelian categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck abelian category the total derived inverse limit of a countable diagram fits in the product one minus shift triangle",
+   "results": "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.triangleOfSESIso, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_inv_hom₁, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁",
+   "date": "2026-10-14",
+   "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

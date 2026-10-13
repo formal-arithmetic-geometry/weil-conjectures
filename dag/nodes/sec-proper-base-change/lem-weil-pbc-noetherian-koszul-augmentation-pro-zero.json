@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks. Foundational input: noetherian-koszul-procomparison.",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Noetherian koszul procomparison",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $a_1,\\ldots,a_r\\in A$ a finite list, and $I=(a_1,\\ldots,a_r)$. Let $Q_m(A)=\\bigotimes_{j=1}^r[A\\xrightarrow{a_j^m}A]$ in degrees $[-r,0]$, with transition multiplication by $a_j$ in degree $-1$ and identity in degree $0$ in each factor. Here tensor products are total tensor products of ordinary $A$-module complexes: degree $q$ is the direct sum over tuples of degrees with sum $q$, and the differential has the usual sign $(-1)^{p_1+\\cdots+p_{j-1}}$ on the differential of factor $j$. Equivalently, this is [def-pc-tensor-complex-sheaves] on the one-object site with only the identity covering and constant ring $A$. The degree-zero quotient maps define a strict morphism of towers $\\epsilon_m:Q_m(A)\\to A/I^m[0]$ of complexes of $A$-modules. In $D(A)$ [def-weil-abstract-derived-category], the tower of its mapping cones is pro-zero: for every $m\\geq1$ there is $k\\geq m$ such that the induced transition $\\operatorname{Cone}(\\epsilon_k)\\to\\operatorname{Cone}(\\epsilon_m)$ is the zero morphism in $D(A)$. Mapping cones and their transition maps are those of the strict commutative squares of complexes.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0921 (lemma-sequence-Koszul-complexes), with the cofinal ideals (a_1^m,...,a_r^m) and I^m in the proof of Tag 0922 (proposition-noetherian-naive-completion-is-completion); zero cone transitions follow from Tags 0G3B/0G3C in derived.tex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring the inverse system of Koszul complexes on powers of generators is pro isomorphic to the quotient ring system",
+   "results": "localCohomology.isoSelfLERadical, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, Ideal.powQuotPowSuccEquivMapMkPowSuccPow, Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.piEquivFin",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ideals are weakly proregular Koszul homology inverse systems vanish",
+   "results": "IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, localCohomology.isoSelfLERadical, localCohomology.ideal_powers_initial, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, IsHausdorff.of_isLocalRing, IsHausdorff.of_isTorsionFree, Ideal.instIsNoetherianCotangentOfSubtypeMem, Ideal.exists_pow_inf_eq_pow_smul",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]roregular|[Pp]ro.?zero|[Kk]oszul",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/Algebra/Algebra/Prod.lean, Mathlib/Algebra/Algebra/Prod.lean, Mathlib/Algebra/Ring/Prod.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul complexes over Noetherian rings are pro isomorphic to quotients by generator powers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homology of Koszul complexes for powers of a Noetherian ideal forms an eventually zero inverse system",
+   "results": "Hausdorffification, localCohomology, localCohomology.isoSelfLERadical, IsAdicComplete, AdicCompletion.map_exact, localCohomology.ofSelfLERadical, Hausdorffification.instIsHausdorff, AdicCompletion",
+   "date": "2026-10-14",
+   "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

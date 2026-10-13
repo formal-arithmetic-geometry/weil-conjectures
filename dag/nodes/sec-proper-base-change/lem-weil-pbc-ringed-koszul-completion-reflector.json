@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-completion-reflector",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks. Foundational input: ringed-koszul-reflector.",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ringed koszul reflector",
+ "statement": "Let $\\mathcal C$ be a small site with a sheaf of commutative rings $\\mathcal O$, and let $b_1,\\ldots,b_r$ be global sections (the finite list may be empty). Put $\\mathcal J=(b_1,\\ldots,b_r)\\mathcal O$. For $N\\in D(\\mathcal O)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], let $Q_m=\\bigotimes_{j=1}^r[\\mathcal O\\xrightarrow{b_j^m}\\mathcal O]$ in degrees $[-r,0]$ [def-pc-tensor-complex-sheaves], with transition multiplication by $b_j$ in degree $-1$ and identity in degree $0$ in each factor. Interpret $R\\lim$ on the strict tower $N\\otimes^L Q_m$ as the total right derived inverse limit, computed by a K-injective resolution of strict towers [def-pur-kinjective-complex, def-weil-derived-limit]. The degree-zero maps $\\mathcal O\\to Q_m$ induce $\\eta_N:N\\to R\\lim_m(N\\otimes^L_{\\mathcal O}Q_m)$. The latter object is locally derived $\\mathcal J$-complete: for every $U$ and $f\\in\\mathcal J(U)$, its restriction has zero derived internal Hom from $\\mathcal O_U[1/f]$ [def-pur-derived-internal-hom], where localization means sheafified sectionwise localization. For every object $L$ satisfying this local condition, composition with $\\eta_N$ gives a bijection $\\operatorname{Hom}(R\\lim_m(N\\otimes^L Q_m),L)\\to\\operatorname{Hom}(N,L)$. Consequently $\\eta_N$ is an isomorphism if and only if $N$ satisfies this local condition. The construction and its unit are natural in $N$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); the local completeness condition is Tag 0999 (definition-derived-complete)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex",
+  "def-weil-derived-limit",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of sheaves of modules for finitely generated ideal is the derived inverse limit of tensor products with Koszul complexes",
+   "results": "localCohomology.diagram, AdicCompletion.ofTensorProduct, localCohomology, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, localCohomology.ofDiagram, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.module",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul tower computes left adjoint reflector to locally derived complete complexes on ringed sites",
+   "results": "CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion by Koszul complex tower on a ringed site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of Koszul complexes is the localization reflector onto adically complete sheaves of modules",
+   "results": "localCohomology, localCohomology.diagram, BDeRhamPlus, Hausdorffification.of, localCohomology.ofDiagram, AdicCompletion, AdicCompletion.ofLinearEquiv, Hausdorffification",
+   "date": "2026-10-14",
+   "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
