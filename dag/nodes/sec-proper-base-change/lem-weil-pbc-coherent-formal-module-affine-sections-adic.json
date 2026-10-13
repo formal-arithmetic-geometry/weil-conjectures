@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Spec A is locally Noetherian, so each coherent F_n is quasi-coherent of finite type. Its affine global sections are finite.",
+   "text": "Spec A is locally Noetherian. Apply isCoherent_iff_isQuasicoherent_and_isFiniteType to each F_n. Reuse the proved finite_sections_of_finiteType helper from QuasicoherentFiniteTypeAffine via a proof-only import all to obtain finite global sections over Gamma(Spec A,O). Apply finite_sections_top_of_finite to transport finiteness to A.",
    "uses": [
     "pqf-def-locnoeth",
     "pqf-lem-coherent-ft-locnoeth",
@@ -25,15 +25,16 @@
    "elementary": false
   },
   {
-   "text": "The affine ideal-product formula identifies the sections of J^(n+1)F_n with I^(n+1)T_n, and identifies the kernel of the quotient projection with I^(n+1) times sections. The product is zero at level n by the formal-system condition. The same formula gives surjectivity for the quotient of F_(n+1).",
+   "text": "The ideal-times-quasi-coherent affine theorem gives quasi-coherence of positive sheaf powers and identifies the range of their inclusions with J(U)^(n+1). Reuse its proved multiplication_range and product_qc helpers via a proof-only import all: the powered inclusion multiplied by M has range J(U)^(n+1) times M(U), and its product object is quasi-coherent. The quasi-coherent cokernel/image theorem gives surjectivity of the quotient projection and identifies its kernel with that product range. At level n the formal-system zero-product condition makes the inclusion zero, so the calculated range is zero.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "def-weil-pbc-coherent-formal-module"
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
    ],
    "elementary": false
   },
   {
-   "text": "Apply global sections to the defining isomorphism F_(n+1)/J^(n+1)F_(n+1) = F_n. Its invertible map preserves surjectivity and the kernel of the quotient projection. Transport the ideal along Gamma(Spec A,O)=A; the specified equality J=ofIdealTop(I) identifies it with I and all its powers.",
+   "text": "On the top affine open, hJ and ideal_top_ofIdealTop identify J(U) with the extension of I along GammaSpecIso.inv. Ideal.map_pow and Submodule.restrictScalars_map_smul_eq identify the product submodule after restricting scalars with I^(n+1) times the A-section module; smul_top_eq verifies the scalar tower. Apply sections to the defining quotient isomorphism e. Its linear equivalence is surjective and sends a section to zero exactly when the section is zero. Rewrite the transition by quotientProjection composed with e; combine quotient surjectivity and the calculated kernel to obtain both transition conclusions.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "def-weil-pbc-coherent-formal-module"
@@ -47,13 +48,14 @@
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
   "lem-weil-pbc-affine-tilde-gamma-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R3",
+  "group": "J1",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W, proof, first paragraph reducing coherent formal sheaves to finite module towers; explicit categorical and scalar glue by R3, following the source argument"
+  "place": "Lemma 087W, proof, first paragraph (read at https://stacks.math.columbia.edu/tag/087W); explicit scalar restriction and quotient-isomorphism transport; second reading reuses the existing finite-section helper from QuasicoherentFiniteTypeAffine and product/multiplication-range helpers from IdealTimesQuasiCoherentAffineSections instead of duplicating their proofs."
  },
  "mathlib_searches": [
   {
@@ -193,10 +195,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T002358-L-2376819",
-  "kind": "interface",
+  "landing": "20261013T034206-L-3766544",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
