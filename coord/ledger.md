@@ -13326,3 +13326,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/P1/Sheaf.AlgebraicGeometry.AffineBasisDualMatrix (stage 3; reviewer PASS; first push; landing 20261013T181118-L-2605901 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/P1/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingAffineSectionsComparison (stage 3; reviewer PASS; first push; landing 20261013T181118-L-2606090 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:11 L: merged deliver/R4/Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyContinuity (stage 3; reviewer PASS; first push; landing 20261013T181119-L-2606294 (proof); batch 20261013T181050; modules 1; new nodes 0)
+- 18:11 L: merged deliver/R4/Sheaf.AlgebraicGeometry.SelfTorConormalDualChart (stage 3; reviewer PASS; after a return; landing 20261013T181120-L-2606540 (interface); batch 20261013T181050; modules 4; new nodes 3)

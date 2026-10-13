@@ -1,0 +1,123 @@
+{
+ "id": "new-r4-self-tor-conormal-regular-iso",
+ "kind": "statement",
+ "title": "The normalized comparison for a Koszul-regular quotient is invertible",
+ "statement": "Let A be a commutative ring, I an ideal, n,r natural numbers, and f:Fin r -> A a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] with span(range f)=I. Then the unique normalized map selfTorConormalComparison A I n [new-r4-self-tor-conormal-comparison] from the nth exterior conormal module to Tor_n^A(A/I,A/I) is an isomorphism of A-modules, including n=0, r=0, and I=A.",
+ "stmt_deps": [
+  "new-r4-self-tor-conormal-comparison",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "lemma-divided-powers-on-tor; Tags 062I and 06YH for conormal and derived tensor"
+ },
+ "proof": [
+  {
+   "text": "Use the Koszul projective resolution of A/I. Tensor with A/I, so every differential coefficient vanishes and homology is the degree-n term.",
+   "uses": [
+    "new-j3-koszul-projective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the conormal basis indexed by f. Its nth exterior basis corresponds to the increasing Koszul wedges in the tensor resolution.",
+   "uses": [
+    "lem-sc-koszul-conormal-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining normalization of the canonical map sends each of these wedges to that Koszul homology class. It is the composite of the exterior basis, zero-differential homology, and resolution Tor isomorphisms.",
+   "uses": [
+    "new-r4-self-tor-conormal-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-conormal-basis",
+  "new-j3-koszul-projective-resolution",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "R4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/09PQ",
+   "place": "lemma-divided-powers-on-tor; Tags 062I and 06YH for conormal and derived tensor"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical exterior power of the conormal module maps to self Tor and is an isomorphism for a Koszul regular quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical alternating product of degree one Tor classes gives exterior power of conormal to self Tor comparison",
+   "results": "8 hits: tensorKaehlerQuotKerSqEquiv, Algebra.H1Cotangent.δ, exteriorPower.toTensorPower, tensorKaehlerQuotKerSqEquiv_tmul_D, tensorKaehlerQuotKerSqEquiv_symm_tmul_D, ModuleCat.exteriorPower.functor, Algebra.Extension.cotangentComplex, ModuleCat.exteriorPower",
+   "date": "2026-10-14",
+   "verdict": "no exact comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b.*exterior|exterior.*\\bTor\\b|\\bTor\\b.*[Kk]oszul|[Kk]oszul.*\\bTor\\b",
+   "results": "0 hits: none",
+   "date": "2026-10-14",
+   "verdict": "no exact comparison theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorConormalDualChart",
+  "date": "2026-10-14",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-self-tor-conormal-dual-chart",
+   "place": "The normalized comparison for a Koszul-regular quotient is invertible",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SelfTorConormalRegularIso",
+  "file": "lean/Sheaf/RingTheory/SelfTorConormalRegularIso.lean",
+  "declaration": "AlgebraicGeometry.selfTorConormalComparison_isIso",
+  "statement": "theorem selfTorConormalComparison_isIso (A : Type u) [CommRing A]\n    (I : Ideal A) (n r : ℕ) (f : Fin r → A)\n    (hf : Ideal.span (Set.range f) = I) (hreg : RingTheory.Sequence.IsKoszulRegular f) :\n    IsIso (selfTorConormalComparison A I n)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T181120-L-2606540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T181120-L-2606540",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

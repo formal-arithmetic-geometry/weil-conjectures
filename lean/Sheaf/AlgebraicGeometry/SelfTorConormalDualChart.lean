@@ -13,6 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.SelfTorConormalDualChartIso
+import Sheaf.RingTheory.SelfTorConormalRegularIso
 
 /-! # The dual exterior-to-self-Tor comparison
 
@@ -72,6 +74,15 @@ theorem selfTor_conormal_dual_chart
           Ideal.span (Set.range f) = i.ker.ideal U ∧
             RingTheory.Sequence.IsKoszulRegular f),
         IsIso (((Scheme.Modules.restrictFunctor V.ι).map (Scheme.Modules.dualMap τ)).over
-          (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))) := by sorry
+          (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))) := by
+  obtain ⟨τ, hτ⟩ := selfTor_conormal_dual_chart_iso i n
+  refine ⟨τ, ?_⟩
+  intro V U hU
+  obtain ⟨r, f, hf, hreg⟩ := hU
+  have hc := selfTorConormalComparison_isIso (Γ(Y, U.1) : Type u)
+    (i.ker.ideal U) n r f hf hreg
+  obtain ⟨a, b, hab⟩ := hτ V U
+  rw [hab]
+  infer_instance
 
 end AlgebraicGeometry
