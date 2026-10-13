@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-spectrum-structure-restriction-comparison",
+ "kind": "statement",
+ "title": "Spectrum structure-object and full restriction comparisons",
+ "statement": "Let A be a commutative ring in universe u, X a scheme [def-pc-scheme], s:Spec(A) ≅ X, U an open of X, and V an open of Spec(A) with V=s⁻¹(U). Choose derived localizations [def-pc-derived-category] in morphism universe w on X, Spec(A), all their localized open sites, and U as an open subscheme. Suppose e:D(O_Spec(A)) ≌ D(O_X) has a localization comparison he identifying e.functor with termwise pushforward along s.hom. Let S be koszulOpenStructure A [def-sc-koszul-open-system] and T=O_X[0] [def-pc-tensor-complex-sheaves]. There exist a chosen derived localization on V as an open subscheme in universe w, an equivalence G:D(O_V) ≌ D(O_U), an isomorphism e.functor(S) ≅ Q_X(T), and a natural isomorphism e.functor ⋙ R_X,U ≅ R_Spec(A),V ⋙ G.functor. Here each R is localization of SheafOfModules.overFunctor followed by Modules.overEquiv. No compactness, perfect object, quasi-coherent object, Koszul tail or Hom-colimit assertion is assumed or concluded.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DC (equation-comparison, the structure object); formal transport proof written from Mathlib Algebra/Homology/Embedding/Extend.lean:295, Algebra/Homology/Additive.lean:270, AlgebraicGeometry/Modules/Tilde.lean:421, AlgebraicGeometry/Modules/Sheaf.lean:399, and the project derived restriction square"
+ },
+ "proof": [
+  {
+   "text": "Identify V with the inverse image of U using the supplied equality. Modules.overEquiv V is an exact equivalence from module sheaves on the localized site to module sheaves on its open subscheme. Apply the fully proved hasDerivedCategory_of_equivalence helper of the localization-transport module to its inverse, obtaining a chosen localization in the same morphism universe. This only supplies category data via the universal property of localization, not an arbitrary complex or object.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-localizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply HomologicalComplex.extendSingleIso to the extended single A[0]. Map the isomorphism by the termwise tilde functor, then compose singleMapHomologicalComplex with the single-complex functor applied to tildeSelf. This identifies the representing complex of koszulOpenStructure with O_Spec(A)[0]. The module-sheaf pushforward equivalence along s is identified with restriction along s.inv by Adjunction.leftAdjointUniq. Its unit object is identified with O_X by Modules.restrictUnitIso. Apply singleMapHomologicalComplex once more and the single-complex functor to this unit isomorphism. Map by localization and compose with he evaluated on O_Spec(A)[0]. The resulting q has source e.functor(koszulOpenStructure A) and target Q_X(O_X[0]).",
+   "uses": [
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing derived restriction-square theorem to obtain eO between the localized-site derived categories and hO: e.functor composed with localized restriction on X is isomorphic to localized restriction on the spectrum composed with eO. Localize Modules.overEquiv V and Modules.overEquiv U to equivalences dV and dU. Define G as dV.inverse followed by eO.functor followed by dU.functor. Whisker hO with dU.functor and use mapDerivedCategoryCompIso to compare the full restriction on X with its two localized factors. Compare full restriction on the spectrum followed by G with spectrum localized restriction followed by eO and dU, using mapDerivedCategoryCompIso, functor associators and dV.unitIso.symm. Composing the first comparison with the inverse of the second yields the asserted natural isomorphism. All comparisons are functorial and involve only equivalences, hence remain valid for empty opens and the zero ring.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-restriction-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-iso-derived-localizations",
+  "def-sc-koszul-open-system",
+  "lem-pc-scheme-iso-derived-restriction-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DC (equation-comparison, the structure object); formal transport proof written from Mathlib Algebra/Homology/Embedding/Extend.lean:295, Algebra/Homology/Additive.lean:270, AlgebraicGeometry/Modules/Tilde.lean:421, AlgebraicGeometry/Modules/Sheaf.lean:399, and the project derived restriction square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scheme isomorphism derived restriction equivalence preserves structure sheaf single complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme isomorphism identifies the structure sheaf and commutes with derived restriction to an open subscheme",
+   "results": "8 hits: AlgebraicGeometry.instIsIsoSchemeMorphismRestrict, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.ofRestrict_appIso, AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, AlgebraicGeometry.Scheme.Hom.preimageIso, AlgebraicGeometry.Scheme.Hom.preimageIso_hom_ι; constituent tools only, no exact statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictUnitIso|singleMapHomologicalComplex|extendSingleIso",
+   "results": "22 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/Embedding/Extend.lean, Mathlib/Algebra/Homology/Embedding/Extend.lean; constituent tools only, no exact statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulSectionColimit",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Structure-complex and restriction-functor comparisons in steps 3 and 4 of the transported affine Koszul Hom-colimit proof.",
+   "via": [
+    "lem-sc-affine-koszul-section-colimit",
+    "lem-sc-affine-koszul-section-roof",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-affine-perfect-tensor-roof"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SpectrumStructureRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpectrumStructureRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_spectrum_structure_restriction_comparison",
+  "statement": "theorem exists_spectrum_structure_restriction_comparison (A : Type u) [CommRing A] (X : Scheme.{u}) (s : Spec (.of A) ≅ X) (U : X.Opens) (V : (Spec (.of A)).Opens) (hV : s.hom ⁻¹ᵁ U = V) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (e : schemeDerivedCategory (Spec (.of A)) ≌ schemeDerivedCategory X) (he : DerivedCategory.Q ⋙ e.functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ _ _ (SheafOfModules.pushforward s.hom.toRingCatSheafHom) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) : letI := SheafOfModules.monoidalCategory X.sheaf letI := (SheafOfModules.tensorClosed X.sheaf).1.some let T := HomologicalComplex.tensorUnit (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ) ∃ hV : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)), letI := hV ∃ G : DerivedCategory (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) ≌ DerivedCategory (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)), Nonempty (e.functor.obj (koszulOpenStructure A) ≅ DerivedCategory.Q.obj T) ∧ Nonempty (e.functor ⋙ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory ≅ ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) V) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V)) (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) (Modules.overEquiv V)).mapDerivedCategory ⋙ G.functor)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T113354-L-3187852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T113354-L-3187852",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
