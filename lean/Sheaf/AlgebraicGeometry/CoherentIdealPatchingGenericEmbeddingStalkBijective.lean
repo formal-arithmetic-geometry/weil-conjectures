@@ -1,12 +1,14 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore
+import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option linter.unusedVariables false in
 /-- The factorization supplied by the core construction is bijective at the generic
 stalk once its stalk map is known to be surjective. Source: Stacks Project, Tag 01YL,
 final paragraph.
@@ -31,7 +33,15 @@ theorem coherent_ideal_patching_generic_embedding_stalk_bijective
     (hι : Function.Surjective
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom) :
     Function.Bijective
-      ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom := by sorry
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom := by
+  have : Mono τ := hτ
+  have : Mono τ.val := Functor.map_mono (SheafOfModules.forget _) τ
+  refine ⟨?_, hτsurj⟩
+  change Function.Injective (RingedSpace.stalkAddMap X.toRingedSpace ξ τ)
+  dsimp only [RingedSpace.stalkAddMap]
+  apply TopCat.Presheaf.stalkFunctor_map_injective_of_app_injective
+  intro U
+  exact PresheafOfModules.injective_of_mono τ.val (Opposite.op U)
 
 
 end AlgebraicGeometry.Scheme.Modules
