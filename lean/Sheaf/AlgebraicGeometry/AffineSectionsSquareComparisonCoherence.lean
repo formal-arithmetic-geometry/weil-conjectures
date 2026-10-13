@@ -6,6 +6,9 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
+import Sheaf.AlgebraicGeometry.AffineSectionsSquareMatePathUnit
+import all Sheaf.AlgebraicGeometry.AffineSectionsPushforwardNormalization
+import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 
 /-! # Coherence of normalized affine sections comparisons
 
@@ -146,6 +149,67 @@ theorem affineSections_square_comparison_coherence
         r.hom.app ((schemeDerivedDirectImage (pullback.snd f g)).obj F) ≫
         (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory.map
           (d.hom.app F) =
-      b.hom.app ((schemeDerivedDirectImage (pullback.fst f g)).obj F) ≫ c.hom.app F := by sorry
+      b.hom.app ((schemeDerivedDirectImage (pullback.fst f g)).obj F) ≫ c.hom.app F := by
+  classical
+  dsimp only
+  let a := fun {A D : Scheme.{u}} (h : A ⟶ D) ↦ canonicalPullbackAdjunction h
+  let p := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))
+  let k := p (pullback.snd f g) g ≪≫
+    eqToIso (congrArg (fun h ↦ derivedPullback h) (pullback.condition (f := f) (g := g)).symm) ≪≫
+      (p (pullback.fst f g) f).symm
+  let δ := conjugateEquiv ((a f).comp (a (pullback.fst f g)))
+    ((a g).comp (a (pullback.snd f g))) k.hom
+  let P := schemeDerivedDirectImage (pullback.fst f g)
+  let Q := schemeDerivedDirectImage (pullback.snd f g)
+  let Γ := affineDerivedGlobalSections (𝟙 (Spec R))
+  let T := affineDerivedGlobalSections (pullback.snd f g)
+  let ρ := (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory
+  let α : P ⋙ schemeDerivedDirectImage f ⋙ Γ ⟶
+      T ⋙ ρ :=
+    Functor.whiskerRight δ Γ ≫ Functor.whiskerLeft Q r.hom ≫
+      Functor.whiskerRight d.hom ρ
+  let β : P ⋙ schemeDerivedDirectImage f ⋙ Γ ⟶
+      T ⋙ ρ :=
+    Functor.whiskerLeft P b.hom ≫ c.hom
+  change α.app F = β.app F
+  suffices h : α = β by exact NatTrans.congr_app h F
+  have hI (I : CochainComplex
+      (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) ℤ)
+      [I.IsKInjective] :
+      α.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) =
+      β.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) := by
+    let J := (HomotopyCategory.quotient _ (.up ℤ)).obj I
+    let H := RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom
+    let G := affineGlobalSections f
+    have hG : IsIso (G.rightDerivedFunctorUnit.app
+        ((H.mapHomotopyCategory (.up ℤ)).obj J)) :=
+      exactComp_unit_isIso (RingedSpace.globalSectionsFunctor X.toRingedSpace)
+        (affineGlobalSectionsRestriction f) _
+        (isIso_directImage_globalSections_unit_on_kInjective (pullback.fst f g) I)
+    have hH : IsIso (H.rightDerivedFunctorUnit.app J) := inferInstance
+    have hU : IsIso ((Functor.rightDerivedFunctorCompUnit H G).app J) := by
+      dsimp [Functor.rightDerivedFunctorCompUnit]
+      infer_instance
+    let U := (Functor.rightDerivedFunctorCompUnit H G).app J ≫
+      (affineGlobalSectionsDerivedIso f).hom.app (P.obj (DerivedCategory.Qh.obj J)) ≫
+      b.inv.app (P.obj (DerivedCategory.Qh.obj J))
+    have : IsIso U := by dsimp [U]; infer_instance
+    apply (cancel_epi U).mp
+    have hleft := affineSections_square_mate_path_unit f g t b ht hb z d hz hd
+      v r hv hr s hs J
+    change U ≫ α.app (DerivedCategory.Qh.obj J) = U ≫ β.app (DerivedCategory.Qh.obj J)
+    dsimp only [U, α, β, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app]
+    simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using hleft.trans (hc J).symm
+  apply NatTrans.ext
+  funext E
+  obtain ⟨J, ⟨e⟩⟩ := Functor.EssSurj.mem_essImage
+    (F := HomotopyCategory.KInjectives.Qh) E
+  obtain ⟨I, hKI, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
+  rw [← cancel_epi ((P ⋙ schemeDerivedDirectImage f ⋙ Γ).map e.hom),
+    α.naturality, β.naturality]
+  exact congrArg (fun h ↦ h ≫ (T ⋙ ρ).map e.hom) (hI I)
+
 
 end AlgebraicGeometry

@@ -19,44 +19,43 @@
  },
  "proof": [
   {
-   "text": "For the fibre-product square form k: Lg*;Lf' * ≅ Lf*;Lp* by the fixed derived-pullback composition comparisons and pullback.condition. Let δ: Rp*;Rf* → Rf' *;Rg* be its conjugate under the pinned composite adjunctions. The normalized derived-adjunction Hom-equivalence equation and the left-derived characterization of the composition comparisons identify δ with the right-derived map induced by the identity-on-sections underived pushforward square.",
+   "text": "Define the two natural transformations α and β whose components are the two claimed paths. It suffices to show equality on localized K-injective complexes, since the inclusion of K-injectives followed by Qh is essentially surjective.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Choose a K-injective representative J of F. Direct-image and direct-image/global-sections acyclicity, followed by exact restriction of scalars, make the pasted unit of p_*;f_*;Γ_R at J invertible. Precompose both sides with this unit. Use the pinned unit equation for δ, then hb,hc on the p,f path and hr,hd on the f',g path. Naturality of derived units and the exact-restriction comparison equations reduce the two sides to localization of the two underived sections comparisons.",
+   "text": "For a K-injective I, direct-image global-sections acyclicity and exact scalar restriction give invertibility of the affine sections unit on p_*I. Together with invertibility of the p_* unit on I, the composite right-derived unit is invertible. Compose it with affineGlobalSectionsDerivedIso and b inverse to obtain an epimorphism U.",
    "uses": [
-    "lem-pc-ringed-space-direct-image-kinjective-acyclic",
     "lem-pc-direct-image-global-sections-kinjective-acyclic",
-    "def-pc-affine-global-hom-base-change-map"
+    "lem-pc-affine-sections-pushforward-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "The underived composites are equal on every section because ht,hz,hv,hs make each comparison the identity on elements; the fibre-product condition identifies their scalar actions. Cancel the invertible pasted unit at J. Every F is isomorphic to a localized K-injective representative, so naturality of all comparisons transports the identity to every F. Identity squares give the composition unit law and F=0 gives equality of zero maps.",
+   "text": "Precompose both paths with U. The mate-path unit formula rewrites U;α to Qh(s);Unit(Γ_q;ρ);affineBaseChangedSectionsDerivedIso. On U;β, cancel b inverse against b, and use hc to obtain the same expression. Cancel the epimorphism U.",
    "uses": [
-    "def-pc-affine-global-hom-base-change-map"
+    "lem-pc-affine-sections-square-mate-path-unit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Choose an isomorphism from a localized K-injective representative to an arbitrary derived object. Naturality of α and β and cancellation of the image of that isomorphism transport the equality. Evaluate α=β at F.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-global-hom-base-change-map",
-  "def-pc-derived-base-change-map",
-  "lem-pc-direct-image-global-sections-kinjective-acyclic",
-  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-affine-sections-pushforward-normalization",
+  "lem-pc-affine-sections-square-mate-path-unit",
+  "lem-pc-direct-image-global-sections-kinjective-acyclic"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction; isolated normalization part of the unit-square argument"
+  "place": "Tags 0D5T and 08HY; perfect.tex Tag 0AA7; one-sided unit formula plus cancellation and K-injective naturality transport"
  },
  "blueprint": {
   "is": null,
@@ -127,9 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T113350-L-3186398",
-  "kind": "interface"
+  "landing": "20261013T125010-L-3836916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
