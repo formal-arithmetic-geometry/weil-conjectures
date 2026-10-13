@@ -11052,3 +11052,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.OpenPerfectModelTransport (stage 3; reviewer PASS; first push; landing 20261013T040807-L-3954862 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:09 L: returned deliver/A2/Sheaf.Algebra.Homology.HomTensorDegreewise (reviewer RETURN: (reviewer X-d5a87, head d5a8792cb) A (packet mechanical finding d; brief points 2 and 8): In coord/changes/HomTensorDegr)
 - 04:22 L: returned deliver/R3/Sheaf.Paper.SectionsOverQuasiCompactOpen (reviewer RETURN: (reviewer X-c4c20, head c4c209b0b) E2/H3 (review point 4): lean/Sheaf/Paper/SectionsOverQuasiCompactOpen.lean retains th)
+- 04:26 L: returned deliver/E1/Sheaf.AlgebraicGeometry.ClosedImmersionSerreVanishing (reviewer RETURN: (reviewer X-3b543, head 3b5430dd6) the reviewer passed it, but the landing failed: ce.cechComplexFunctorπ_monomialCechTo)
