@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedDataExists
 
 /-! # Unshifted restriction of a representing pullback Hom cocone
 
@@ -69,6 +70,37 @@ def perfectHomOpenRestrictionMap
 end
 
 noncomputable section
+
+/-- The restricted stage and limit equivalences are the explicit restriction maps.
+The proof transports the original representing equivalences across the canonical
+open restriction and pullback composition comparisons. Naturality of the
+adjunction equivalences gives the stage equation, and the identical argument for
+the cocone apex gives the limit equation. This is the mate calculation for the
+comparison used in `perfectHomOpenRestrictionMap`.
+(blueprint: lem-pc-perfect-hom-open-restricted-data-pinned). -/
+theorem perfect_hom_open_restricted_data_pinned
+    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
+    {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i))
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (B : Y.Opens) (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
+    (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y)
+    (d : Cocone F)
+    (h : PerfectHomPushPullData R c s Q F d)
+    (hB : PerfectHomPushPullData R c (B.ι ≫ s)
+      ((schemeMVDerivedRestriction Y B).obj Q)
+      (F ⋙ schemeMVDerivedRestriction Y B)
+      ((schemeMVDerivedRestriction Y B).mapCocone d)) :
+    (∀ (j : Set.Ici i) (M : schemeDerivedCategory Y) (f : M ⟶ F.obj j),
+      hB.stageEquiv j ((schemeMVDerivedRestriction Y B).obj M)
+          ((schemeMVDerivedRestriction Y B).map f) =
+        perfectHomOpenRestrictionMap s B
+          (Spec.map (R.map (homOfLE j.property))) a (h.stageEquiv j M f)) ∧
+    (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),
+      hB.limitEquiv ((schemeMVDerivedRestriction Y B).obj M)
+          ((schemeMVDerivedRestriction Y B).map f) =
+        perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a
+          (h.limitEquiv M f)) := by sorry
 
 /-- Exact open restriction carries a representing pullback Hom cocone to a representing
 cocone for the restricted base scheme. There is no shift or outer open direct image
@@ -171,7 +203,10 @@ theorem perfect_hom_open_restricted_data
       (∀ (M : schemeDerivedCategory Y) (f : M ⟶ d.pt),
         hB.limitEquiv (L.obj M) (L.map f) =
           perfectHomOpenRestrictionMap s B (Spec.map (c.ι.app i)) a (h.limitEquiv M f)) := by
-  sorry
+  classical
+  let L := schemeMVDerivedRestriction Y B
+  obtain ⟨hB⟩ := perfect_hom_open_restricted_data_exists R c s B Q F d h
+  exact ⟨hB, perfect_hom_open_restricted_data_pinned R c s B a Q F d h hB⟩
 
 end
 end AlgebraicGeometry
