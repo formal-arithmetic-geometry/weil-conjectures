@@ -10959,7 +10959,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:42 L: merged deliver/C2/Sheaf.AlgebraicGeometry.KoszulOpenConeComparison (stage 3; reviewer PASS; first push; landing 20261013T034202-L-3765379 (proof); batch 20261013T034159; modules 1; new nodes 0)
 - 03:42 L: merged deliver/D3/Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftRaw (stage 3; reviewer PASS; after a return; landing 20261013T034203-L-3765583 (interface); batch 20261013T034159; modules 2; new nodes 0; change records: coord/changes/torsionControlled_completion_hom_lift_raw.md)
 - 03:42 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison (stage 3; reviewer PASS; first push; landing 20261013T034204-L-3765828 (interface); batch 20261013T034159; modules 4; new nodes 3)
-- 03:42 L: merged deliver/G3/Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective (stage 3; reviewer PASS; first push; landing 20261013T034204-L-3765981 (proof); batch 20261013T034159; modules 1; new nodes 0)
 - 03:42 L: merged deliver/G3/Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestrictionConormal (stage 3; reviewer PASS; after a return; landing 20261013T034205-L-3766125 (interface); batch 20261013T034159; modules 2; new nodes 1)
 - 03:42 L: merged deliver/G4/Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso (stage 3; reviewer PASS; first push; landing 20261013T034206-L-3766344 (proof); batch 20261013T034159; modules 1; new nodes 0)
 - 03:42 L: merged deliver/J1/Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineSectionsAdic (stage 3; reviewer PASS; after a return; landing 20261013T034206-L-3766544 (proof); batch 20261013T034159; modules 1; new nodes 0)
@@ -10980,3 +10979,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:46 L: returned deliver/D3/Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility (reviewer RETURN: (reviewer X-aba00, head aba00207f) F: Correct the import-visibility claims. In coord/changes/strictLocalFibreRestriction)
 - 03:50 L: returned deliver/U3/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility (reviewer RETURN: (reviewer X-96860, head 968609027) E2 / review point 4: the retained grothendieckDevissage_secondAdicSystem_lift_compati)
 - 03:52 L: returned deliver/N1/Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource (reviewer RETURN: (reviewer X-c2414, head c241447eb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Abeli)
+
+- 11:52 L: batch 20261013T034159 dependency take-out

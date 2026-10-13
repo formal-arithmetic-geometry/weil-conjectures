@@ -1,114 +1,110 @@
 {
- "id": "lem-pur-localized-hom-complex-cycles-bijective",
- "kind": "statement",
- "title": "Bijectivity of the localized cycle component function",
- "statement": "For C,J,R,U,L,I and zero-preserving slice restriction as in [def-pur-hom-complex], let S be the evaluated Hom complex with chosen projections pi. Every function f from S.cycles 0 to chain maps res(L) → res(I) satisfying the projection formula on every cycle, degree and slice object is bijective. The existence of such a function is not asserted here.",
- "stmt_deps": [
-  "def-pur-hom-complex"
- ],
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)"
- },
- "proof": [
-  {
-   "text": "section evaluation preserves the product cone supplied by\nhomComplex_exists: forgetful functors for sheaves and modules preserve limits,\nand evaluation of presheaves preserves limits. Its degree-zero projections\ntherefore identify sections with arbitrary families of internal-Hom sections.\nFor injectivity, equality of the chain maps f z and f z' implies equality of\nall components on all objects of the slice. The formula gives equality of the\nprojected internal-Hom sections. The evaluated product projections are jointly\ninjective, so the included cycles agree. The cycle inclusion is monic, hence\ninjective in abelian groups, giving z = z'. For surjectivity, take a chain map g.\nView its components as internal-Hom sections at U and assemble them into a\nsection x using the evaluated degree-zero product universal property. The\nchain-map equations and the degree-zero differential formula make every\ndegree-one projection of d x zero. Joint injectivity of these projections gives\nd x = 0. The kernel universal property of iCycles supplies a cycle z with\nincluded value x. The prescribed formula shows f z and g have equal components\non every slice object, so extensionality of natural transformations, sheaf\nmorphisms, and complex morphisms gives f z = g. No boundedness or finite-support\nassumption is used; products are indexed by all integers.",
-   "uses": [
+  "id": "lem-pur-localized-hom-complex-cycles-bijective",
+  "kind": "statement",
+  "title": "Bijectivity of the localized cycle component function",
+  "statement": "For C,J,R,U,L,I and zero-preserving slice restriction as in [def-pur-hom-complex], let S be the evaluated Hom complex with chosen projections pi. Every function f from S.cycles 0 to chain maps res(L) → res(I) satisfying the projection formula on every cycle, degree and slice object is bijective. The existence of such a function is not asserted here.",
+  "stmt_deps": [
     "def-pur-hom-complex"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pur-hom-complex"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X construction preceding 0A8Y; detailed second-reader separation into forward construction and kernel/product bijectivity"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "zero cocycles Hom complex equivalence chain maps",
-   "results": "Cocycle.homOf_f, Cocycle.ofHom, Cocycle.ofHom_homOf_eq_self in Mathlib.Algebra.Homology.HomotopyCategory.HomComplex. These handle ordinary Hom groups, not sectionwise sheaf products.",
-   "date": "2026-10-13",
-   "verdict": "No exact localized match."
-  },
-  {
-   "tool": "loogle",
-   "query": "Equiv.ofBijective",
-   "results": "Equiv.ofBijective, Equiv.ofBijective_apply: used in the parent reduction, do not prove the sheaf product comparison.",
-   "date": "2026-10-13",
-   "verdict": "Generic assembly tool only."
-  },
-  {
-   "tool": "grep",
-   "query": "cycles.*Hom|hom.*cycles; localizedHomComplex_cycles_(forward|bijective)|canonical.*cycle|cycle.*projection",
-   "results": "Generic group cohomology kernels and the existing LocalizedHomComplexCycles target; no independent sectionwise comparison. InternalHom.lean supplies homObj and homObjMap; Sheaf/Limits.lean supplies evaluationPreservesLimitsOfShape.",
-   "date": "2026-10-13",
-   "verdict": "No duplicate of either new statement."
-  },
-  {
-   "tool": "leansearch",
-   "query": "sections of internal Hom sheaves evaluated on an object correspond to chain maps from degree zero cocycles",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Algebra.Homology.LocalizedHomComplexCycles",
-  "date": "2026-10-13",
-  "group": "F1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pur-localized-hom-complex-cycles-aux",
-   "place": "forward construction and bijectivity parts of the existing proof",
-   "via": [
-    "lem-pur-localized-hom-complex-cycles-aux"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexCyclesBijective.lean",
-  "declaration": "CategoryTheory.localizedHomComplex_cycles_bijective",
-  "statement": "theorem localizedHomComplex_cycles_bijective\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    letI := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    ∀ f : S.cycles 0 → (res.obj L ⟶ res.obj I),\n      (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),\n        ((f z).f p).val.app W =\n          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) →\n      Function.Bijective f",
-  "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "X-d73a9",
-  "group": "F1",
-  "result": "pass",
-  "landing": "20261013T003156-L-2428452",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "G3",
-  "result": "pass",
-  "landing": "20261013T034204-L-3765981",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.localizedHomComplex_cycles_bijective"
   ],
-  "sorry_after": []
- }
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)"
+  },
+  "proof": [
+    {
+      "text": "section evaluation preserves the product cone supplied by\nhomComplex_exists: forgetful functors for sheaves and modules preserve limits,\nand evaluation of presheaves preserves limits. Its degree-zero projections\ntherefore identify sections with arbitrary families of internal-Hom sections.\nFor injectivity, equality of the chain maps f z and f z' implies equality of\nall components on all objects of the slice. The formula gives equality of the\nprojected internal-Hom sections. The evaluated product projections are jointly\ninjective, so the included cycles agree. The cycle inclusion is monic, hence\ninjective in abelian groups, giving z = z'. For surjectivity, take a chain map g.\nView its components as internal-Hom sections at U and assemble them into a\nsection x using the evaluated degree-zero product universal property. The\nchain-map equations and the degree-zero differential formula make every\ndegree-one projection of d x zero. Joint injectivity of these projections gives\nd x = 0. The kernel universal property of iCycles supplies a cycle z with\nincluded value x. The prescribed formula shows f z and g have equal components\non every slice object, so extensionality of natural transformations, sheaf\nmorphisms, and complex morphisms gives f z = g. No boundedness or finite-support\nassumption is used; products are indexed by all integers.",
+      "uses": [
+        "def-pur-hom-complex"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-pur-hom-complex"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X construction preceding 0A8Y; detailed second-reader separation into forward construction and kernel/product bijectivity"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "zero cocycles Hom complex equivalence chain maps",
+      "results": "Cocycle.homOf_f, Cocycle.ofHom, Cocycle.ofHom_homOf_eq_self in Mathlib.Algebra.Homology.HomotopyCategory.HomComplex. These handle ordinary Hom groups, not sectionwise sheaf products.",
+      "date": "2026-10-13",
+      "verdict": "No exact localized match."
+    },
+    {
+      "tool": "loogle",
+      "query": "Equiv.ofBijective",
+      "results": "Equiv.ofBijective, Equiv.ofBijective_apply: used in the parent reduction, do not prove the sheaf product comparison.",
+      "date": "2026-10-13",
+      "verdict": "Generic assembly tool only."
+    },
+    {
+      "tool": "grep",
+      "query": "cycles.*Hom|hom.*cycles; localizedHomComplex_cycles_(forward|bijective)|canonical.*cycle|cycle.*projection",
+      "results": "Generic group cohomology kernels and the existing LocalizedHomComplexCycles target; no independent sectionwise comparison. InternalHom.lean supplies homObj and homObjMap; Sheaf/Limits.lean supplies evaluationPreservesLimitsOfShape.",
+      "date": "2026-10-13",
+      "verdict": "No duplicate of either new statement."
+    },
+    {
+      "tool": "leansearch",
+      "query": "sections of internal Hom sheaves evaluated on an object correspond to chain maps from degree zero cocycles",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Algebra.Homology.LocalizedHomComplexCycles",
+    "date": "2026-10-13",
+    "group": "F1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pur-localized-hom-complex-cycles-aux",
+      "place": "forward construction and bijectivity parts of the existing proof",
+      "via": [
+        "lem-pur-localized-hom-complex-cycles-aux"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective",
+    "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexCyclesBijective.lean",
+    "declaration": "CategoryTheory.localizedHomComplex_cycles_bijective",
+    "statement": "theorem localizedHomComplex_cycles_bijective\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    letI := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    ∀ f : S.cycles 0 → (res.obj L ⟶ res.obj I),\n      (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),\n        ((f z).f p).val.app W =\n          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) →\n      Function.Bijective f",
+    "branch": "sheaf-dag",
+    "by": "F1",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "X-d73a9",
+    "group": "F1",
+    "result": "pass",
+    "landing": "20261013T003156-L-2428452",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "X-d73a9",
+    "group": "F1",
+    "result": "pass",
+    "landing": "20261013T003156-L-2428452",
+    "kind": "interface",
+    "note": "independent Codex review: Matched delivered Lean signatures, proof dependencies and remaining-hole arguments with their DAG nodes and Stacks 0A8X; compilation and axiom checks passed."
+  }
 }
