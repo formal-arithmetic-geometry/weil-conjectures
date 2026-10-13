@@ -27,35 +27,21 @@
  ],
  "proof": [
   {
-   "text": "Choose an upper bound $N$ for the degrees in which $E^\\bullet$ is nonzero. In each bidegree, the component of the total Hom differential is the signed sum of the differential of $A^\\bullet$ and precomposition with the differential of $E^\\bullet$. By [lem-sc-finite-free-internal-hom-exact], applying $\\mathcal H om(E^p,-)$ to every short exact sequence of cycles and boundaries in the acyclic complex $A^\\bullet$ is exact; in coordinates this is the exactness of finite direct sums of sheaves.",
+   "text": "Choose the bounds N and M from the hypotheses. For each degree p choose its finite free isomorphism. For every q apply [lem-sc-finite-free-internal-hom-exact-sequence] to E^p and the exact short complex A.sc q, whose exactness is hAacyclic q. This supplies the exact internal-Hom column in every bidegree. Apply [lem-sc-bounded-hom-exact-columns] to these columns and the chosen bounds to conclude acyclicity of the total Hom complex.",
    "uses": [
-    "lem-sc-finite-free-internal-hom-exact"
+    "lem-sc-finite-free-internal-hom-exact-sequence",
+    "lem-sc-bounded-hom-exact-columns"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8, Lemma 20.51.4, case (2), finite locally free Hom calculation"
-   }
-  },
-  {
-   "text": "Since acyclicity of $\\mathcal H om^\\bullet(E^\\bullet,A^\\bullet)$ concerns its cohomology sheaves [def-pc-acyclic-complex-modules], it suffices to show that every section $z$ of degree $m$ with $d(z)=0$, over an object $V$ of the site, is locally a boundary. Choose a lower bound $M$ with $A^q=0$ for $q<M$. By [def-pur-hom-complex], $z=(z^p)_p$ with $z^p:E^p\\to A^{p+m}$, and $z^p=0$ unless $M-m\\le p\\le N$, so only finitely many components occur. We seek $h=(h^p)_p$ of degree $m-1$, $h^p:E^p\\to A^{p+m-1}$, with $d(h)^p=d_A h^p+(-1)^m h^{p+1}d_E=z^p$ for all $p$. Put $h^p=0$ for $p>N$ and descend. At stage $p$ the obstruction $w^p=z^p-(-1)^m h^{p+1}d_E:E^p\\to A^{p+m}$ satisfies $d_A w^p=0$: this follows from the degree-$p$ component of $d(z)=0$, namely $d_A z^p=(-1)^m z^{p+1}d_E$, together with the equation already achieved at $p+1$. Since $A^\\bullet$ is acyclic, $0\\to B^{p+m-1}\\to A^{p+m-1}\\to B^{p+m}\\to0$ and the identification of cycles with boundaries $Z^{p+m}=B^{p+m}$ are exact; by Step 1, $\\mathcal H om(E^p,-)$ preserves the surjection $A^{p+m-1}\\to B^{p+m}$, so after passing to a covering of $V$ there is $h^p$ with $d_A h^p=w^p$. For $p<M-m+1$ one may take $h^p=0$ (its target vanishes), so only finitely many refinements of the covering are needed. On the final covering, $d(h)=z$. Hence every cocycle section is locally a boundary, so all cohomology sheaves of the total sheaf Hom complex vanish and the complex is acyclic.",
-   "uses": [
-    "lem-sc-finite-free-internal-hom-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8, Lemma 20.51.4, case (2), bounded-above locally free Hom calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-finite-free-internal-hom-exact"
+  "lem-sc-finite-free-internal-hom-exact-sequence",
+  "lem-sc-bounded-hom-exact-columns"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0GM8 (Lemma 20.51.4), case (2)"
+  "by": "agent",
+  "description": "P2 implemented the column-exactness and finite descending-totalization decomposition in Lean; the original statement and the unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -141,5 +127,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T045548-L-133665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

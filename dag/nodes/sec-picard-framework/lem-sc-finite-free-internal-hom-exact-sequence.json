@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-finite-free-internal-hom-exact-sequence",
+ "kind": "statement",
+ "title": "Finite-free internal Hom preserves exact sequences in arbitrary universes",
+ "statement": "Let $(\\mathcal C,J,\\mathcal O)$ be a ringed site [def-pur-sheaf-hom]. Let $P$ be a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] with a specified isomorphism $P\\cong\\mathcal O^{\\oplus r}$ for a natural number $r$. Let $S=(S_1\\xrightarrow{f}S_2\\xrightarrow{g}S_3)$ be a short complex with $gf=0$ that is exact at $S_2$; no injectivity of $f$ or surjectivity of $g$ is required. Then postcomposition defines a short complex $\\mathcal Hom(P,S_1)\\to\\mathcal Hom(P,S_2)\\to\\mathcal Hom(P,S_3)$ exact at its middle term. The site object universe, site morphism universe, and module-section universe may be different; internal Hom has the maximum of these universes.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM8 via Tag 0GM7, case (2); explicit finite-free Hom calculation"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "choose the displayed finite free basis. On each localized site, evaluate a linear map on its basis to identify internal Hom with a finite product of the target module, with the necessary universe lift. Under this identification both maps become coordinatewise maps. Finite products preserve exact sequences in module sheaves: a cycle is a finite tuple of cycles; exactness of the original sequence supplies a local preimage of each coordinate. Refine the finitely many coverings together and assemble these preimages into the tuple giving a boundary. The universe lift changes neither the underlying sections nor this local exactness criterion. For rank zero, all three internal Homs are zero and the assertion is immediate.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "P2 made the two steps of the existing bounded-above finite-free Hom proof plan explicit, preserving the signed descending local lifting route. Tags 0GM8/0GM7 supply the application; the detailed proof here is agent-written."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free internal Hom functor preserves exactness of sheaves of modules with arbitrary universes",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact",
+   "results": "loogle: unknown identifier 'ShortComplex.Exact'",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObj.*[Ee]xact|[Aa]cyclic.*homComplex",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free internal Hom sheaf exactness and bounded total Hom acyclicity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "parenthetical Ext-vanishing proof, bounded-above locally free Hom calculation",
+   "via": [
+    "lem-sc-bounded-above-finite-free-hom-acyclic",
+    "lem-sc-derived-hom-finite-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteFreeInternalHomExactSequence",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeInternalHomExactSequence.lean",
+  "declaration": "CochainComplex.finiteFree_internalHom_exact_sequence",
+  "statement": "theorem finiteFree_internalHom_exact_sequence {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})] [HasWeakSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasWeakSheafify J AddCommGrpCat.{max u v w}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}] {R : Sheaf J CommRingCat.{w}} (P : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) (r : ℕ) (e : P ≅ SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R) (ULift.{w} (Fin r))) (S : ShortComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))) (hS : S.Exact) : ∃ hz : SheafOfModules.homObjMap (𝟙 P) S.f ≫ SheafOfModules.homObjMap (𝟙 P) S.g = 0, (ShortComplex.mk (SheafOfModules.homObjMap (𝟙 P) S.f) (SheafOfModules.homObjMap (𝟙 P) S.g) hz).Exact",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T045548-L-133665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T045548-L-133665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

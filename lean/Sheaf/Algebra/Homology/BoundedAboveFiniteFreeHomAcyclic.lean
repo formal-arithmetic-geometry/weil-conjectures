@@ -9,7 +9,8 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Sheaf.Algebra.Homology.FiniteFreeInternalHomExactSequence
+import Sheaf.Algebra.Homology.BoundedHomExactColumns
 
 /-! # Hom from bounded-above finite free complexes preserves bounded-below acyclicity
 
@@ -64,6 +65,11 @@ theorem acyclic_homComplex_of_boundedAbove_finiteFree
       (ULift.{w} (Fin r))))
     (hAbounded : ∃ M : ℤ, ∀ q : ℤ, q < M → IsZero (A.X q))
     (hAacyclic : A.Acyclic) : (CategoryTheory.homComplex E A).Acyclic := by
-  sorry
+  obtain ⟨N, hN⟩ := hEbounded
+  obtain ⟨M, hM⟩ := hAbounded
+  apply acyclic_homComplex_of_bounded_exact_columns E A N M hN hM
+  intro p q
+  obtain ⟨r, ⟨e⟩⟩ := hEfree p
+  exact finiteFree_internalHom_exact_sequence (E.X p) r e (A.sc q) (hAacyclic q)
 
 end CochainComplex
