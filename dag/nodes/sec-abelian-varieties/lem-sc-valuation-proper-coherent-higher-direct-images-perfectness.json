@@ -13,40 +13,69 @@
  ],
  "proof": [
   {
-   "text": "Finite local freeness makes F finitely presented and quasi-coherent. Flatness of f makes each finite free local presentation relatively flat, hence F is flat over the affine base. Apply [lem-pc-rf-perfect-base-change] to obtain a perfect derived direct image.",
+   "text": "Convert constant-rank local freeness to finite local freeness. On each pair of affine opens, sections of F are projective by [lem-pc-finite-flat-affine-sections-projective], hence flat over the source section ring. Flatness of f and Module.Flat.trans give relative flatness. The finite-presentation instance follows from finite local freeness. Use standard derived localizations; tensor pullback is additive because its adjunction makes it right exact. Apply the perfectness clause of [lem-pc-rf-perfect-base-change] to E = Rf_*(F[0]).",
    "uses": [
     "def-amb-finite-locally-free-module",
+    "lem-pc-finite-flat-affine-sections-projective",
+    "def-pc-derived-direct-image",
+    "def-pc-module-pullback",
     "lem-pc-rf-perfect-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "On the affine base, represent the perfect object by a bounded complex of finite projective A-modules, using [lem-pc-perfect-affine-bounded-projective] (Tag 08EB). Associated sheaves are exact, so [def-pc-derived-direct-image] identifies higher direct images with the associated sheaves of the complex homology. Their higher cohomology on Spec A vanishes by [lem-pc-affine-vanishing]. The edge map of [pqf-lem-leray] identifies H^q(X,F) with their global sections. For the module-valued Leray construction use [lem-weil-pbc-module-pushforward-injective-acyclic]: the direct image of an injective resolution is acyclic for module sections. The composite section complex is Gamma(X,I) with scalars restricted along f.appTop, as a sectionwise identity commuting with differentials. Hence resolution comparison and the edge map are linear over Gamma(Spec A); restrict scalars along GammaSpecIso.inv. This yields the requested A-linear homology isomorphism. The zero complex handles empty X and rank-zero F.",
+   "text": "Apply [lem-sc-perfect-qcoherent] to E. Regard E as an object of D_QCoh and apply [lem-pc-perfect-affine-bounded-projective]. Unpack a bounded finite projective A-complex P and E isomorphic to Q(tilde(P)); combine the two termwise finiteness and projectivity predicates.",
    "uses": [
     "def-pc-perfect-complex",
-    "def-pc-derived-direct-image",
-    "lem-pc-affine-vanishing",
-    "pqf-lem-leray",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-weil-pbc-module-pushforward-injective-acyclic"
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-affine-bounded-projective"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the natural additive edge of [lem-pc-leray-degenerate-sections]. Its vanishing hypothesis is [lem-pc-affine-higher-direct-image-cohomology-vanishing]. For a section a of the base, specialize naturality to F.smulHom(f.appTop a). The source-library rightDerived_map_app_eq applied to module sections identifies the source endomorphism with scalar multiplication; higherDirectImage_map_smulHom and smulHom_app_top_apply identify the target endomorphism with multiplication by a. Thus the additive edge is linear over the base section ring. Bundle it as a module morphism and use its bijectivity to obtain an isomorphism.",
+   "uses": [
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-affine-higher-direct-image-cohomology-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that tilde preserves kernels: by [lem-weil-pbc-quasi-coherent-module-kernel] the kernel of a morphism of associated sheaves is quasi-coherent. Its counit from [lem-weil-pbc-affine-tilde-gamma-adjunction] is invertible. Full faithfulness lifts that kernel fork to A-modules and reflects its limiting property. Since tilde is an additive left adjoint, it also preserves colimits, hence homology. Apply homology to the model isomorphism, then homologyFunctorFactors and mapHomologicalComplexHomologyIso, to identify H^q(E) with tilde(H^q(P)). The single-object cohomology comparison following [src-right-derived-functor-plus-compatibility] identifies H^q(E) with the ordinary right-derived module direct image.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the module Leray isomorphism along GammaSpecIso.inv. The scalar-restriction composition isomorphism identifies its source with the exact action specified in the statement. Evaluation followed by this restriction agrees with moduleSpecGammaFunctor: its extra terminal-object restriction is the identity on the ring, so the identity on the section carrier is a linear equivalence. Compose with sections of the derived homology comparisons and the inverse unit tilde.toTildeGammaNatIso from [lem-weil-pbc-affine-tilde-gamma-adjunction]. This produces the required A-linear homology isomorphism. The argument has no nonemptiness or positive-rank assumption and works in degree zero and above the complex bounds.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-amb-finite-locally-free-module",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
   "lem-pc-rf-perfect-base-change",
   "def-pc-perfect-complex",
-  "def-pc-derived-direct-image",
-  "lem-pc-affine-vanishing",
-  "pqf-lem-leray",
+  "lem-sc-perfect-qcoherent",
   "lem-pc-perfect-affine-bounded-projective",
-  "lem-weil-pbc-module-pushforward-injective-acyclic"
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-affine-higher-direct-image-cohomology-vanishing",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0B91(2), 08EB and the affine Leray edge comparison (01F2)"
+  "place": "Tags 0B91(2), 08EB; Cohomology of Sheaves Tags 01F2 and 01F4(2); scalar-compatible edge and exact tilde comparisons written in Lean by H3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -123,10 +152,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T024036-L-3335024",
-  "kind": "interface",
+  "landing": "20261013T054220-L-443756",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
