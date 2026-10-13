@@ -1,12 +1,35 @@
 module
 public import Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystemData
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleCoefficientProductEmbeddingCompatibility
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+private theorem etaleCoefficientProductEmbedding_mono
+    {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
+    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
+    (φ : ∀ {i j : I} (f : i ⟶ j),
+      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)
+    (hidentity : ∀ i : I, φ (𝟙 i) =
+      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
+        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))
+    (i : I) : Mono (etaleCoefficientProductEmbedding D F φ i) := by
+  have : IsIso (D.map (𝟙 i).op) := by
+    have h : D.map (𝟙 i).op = 𝟙 (D.obj (op i)) := D.map_id (op i)
+    rw [h]
+    infer_instance
+  have : Mono (φ (𝟙 i) ≫ Injective.ι (F i)) := by
+    rw [hidentity]
+    infer_instance
+  have : Mono (etaleCoefficientProductEmbedding D F φ i ≫ Pi.π _ ⟨i, 𝟙 i⟩) := by
+    dsimp [etaleCoefficientProductEmbedding]
+    rw [Pi.lift_π]
+    infer_instance
+  exact mono_of_mono (etaleCoefficientProductEmbedding D F φ i) (Pi.π _ ⟨i, 𝟙 i⟩)
+
+set_option linter.unusedVariables false in
 /-- The explicit outgoing-arrow product admits compatible transitions and embeddings.
 Source: Stacks Project, Tag 0EXZ, product/direct-image construction.
 (blueprint: lem-weil-pbc-etale-coefficient-injective-system-embedding).
@@ -55,6 +78,10 @@ theorem etale_coefficient_injective_system_embedding
       (∀ i : I, Mono (ai i)) ∧
       (∀ (i j : I) (f : i ⟶ j),
         φ f ≫ ai j = (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).map (ai i) ≫ ψ f)
-    := by sorry
+    := by
+  obtain ⟨hid, hcomp⟩ := etale_coefficient_product_transition_laws D F
+  exact ⟨etaleCoefficientProductTransition D F, hid, hcomp,
+    etaleCoefficientProductEmbedding D F φ, etaleCoefficientProductEmbedding_mono D F φ hidentity,
+    etale_coefficient_product_embedding_compatibility D F φ hcomposition⟩
 
 end AlgebraicGeometry.Etale
