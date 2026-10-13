@@ -1,6 +1,6 @@
 # Work queue
 
-505 items; claim with `tools/claim.py next <group> [--stage N]`.
+506 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (475)
+## Stage 3: modules to prove (476)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -182,6 +182,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Algebra.Homology.HomTensorDegreewise` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.HomTensorDifferentialComponent` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries` | 18 | 1 | proof |
+| `Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModuleFiniteType` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyColimit` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionKernels` | 18 | 1 | proof |
