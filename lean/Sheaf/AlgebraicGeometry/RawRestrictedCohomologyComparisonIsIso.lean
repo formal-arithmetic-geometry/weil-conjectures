@@ -6,6 +6,7 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvaluationIsIso
 
 /-! # Invertibility of the restricted derived-Hom evaluation map
 
@@ -46,6 +47,17 @@ sections adjunction. For empty V both the sections complex and the raw Hom
 complex vanish; the same computation applies without a nonemptiness assumption. -/
 theorem isIso_rawRestrictedCohomologyComparison {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
-    IsIso (rawRestrictedCohomologyComparison h p F U) := by sorry
+    IsIso (rawRestrictedCohomologyComparison h p F U) := by
+  let W := (MorphismProperty.Over.pullback @Etale ⊤ h).obj U
+  let A := (upperStar AddCommGrpCat.{v + 1} h).obj
+    (RawRestrictedComparison.freeSheaf S U)
+  let x := (RawRestrictedComparison.zeroIso W A).inv
+    (RawRestrictedComparison.generator h U)
+  let T := RawRestrictedComparison.sectionsFunctor W ⋙
+    DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0
+  have he : IsIso (RawRestrictedComparison.Evaluation.evaluate T x) :=
+    isIso_rawRestrictedCohomologyComparisonEvaluation h p F U
+  dsimp [rawRestrictedCohomologyComparison, W, A, x, T]
+  infer_instance
 
 end AlgebraicGeometry.Etale

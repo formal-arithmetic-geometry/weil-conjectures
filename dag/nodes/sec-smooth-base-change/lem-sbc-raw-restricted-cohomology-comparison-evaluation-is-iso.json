@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the raw restricted evaluation map",
+ "statement": "The evaluation morphism from derived Hom classes to zeroth derived sections of the restricted pullback, before the explicit shift identification, is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8 and Cohomology on Sites Tags 072W, 0BKV and 0D6F"
+ },
+ "proof": [
+  {
+   "text": "Choose a bounded-below injective resolution of F; restriction preserves injectives by exact extension by zero, and the derived Yoneda and sections adjunctions identify homotopy classes with cohomology classes. Evaluation at the represented identity is this bijection.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "worker D2",
+  "document": "Stacks Project",
+  "place": "Tag 03Q8 and cited restriction lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived Yoneda evaluation isomorphism restricted sections",
+   "results": "No complete theorem found",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (Evaluation.evaluate)",
+   "results": "No complete theorem found",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rawRestrictedCohomologyComparison evaluation",
+   "results": "No existing proof found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+   "place": "derived Yoneda evaluation step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvaluationIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedCohomologyComparisonEvaluationIsIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_rawRestrictedCohomologyComparisonEvaluation",
+  "statement": "theorem isIso_rawRestrictedCohomologyComparisonEvaluation {S Y : Scheme.{v}} (h : Y ⟶ S) (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) : IsIso (let W := (MorphismProperty.Over.pullback @Etale ⊤ h).obj U let A := (upperStar AddCommGrpCat.{v + 1} h).obj (RawRestrictedComparison.freeSheaf S U) let x := (RawRestrictedComparison.zeroIso W A).inv (RawRestrictedComparison.generator h U) let T := RawRestrictedComparison.sectionsFunctor W ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0 RawRestrictedComparison.Evaluation.evaluate T x : AddCommGrpCat.of ((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar AddCommGrpCat.{v + 1} h).obj (RawRestrictedComparison.freeSheaf S U)) ⟶ ((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧) ⟶ (RawRestrictedComparison.sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U) ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).obj (((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T004332-L-2508579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T004332-L-2508579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
