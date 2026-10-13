@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.PicardOrdinaryRawCoordinates
 
 /-! # Scalar coordinates for ordinary pulled-back cycles
 
@@ -70,6 +69,25 @@ theorem picard_ordinary_scalar_coordinates
           b (picardOrdinaryModelRestriction W U K (picardResidueLift W w V hwV)
             V.ι (W.fromSpecResidueField w) (W.homOfLE hVU) p
             (picardResidueLift_comp W w V hwV) hs x.val) =
-              W.evaluation V w hwV a := by sorry
+              W.evaluation V w hwV a := by
+  dsimp
+  obtain ⟨b, b1, c, c1, hb, hc, hres⟩ :=
+    picard_ordinary_raw_coordinates W w U hwU hU m d K hK e0 e1 hd
+  refine ⟨b, ?_, ?_⟩
+  · intro f
+    change f ≫ (Modules.tensorPullback (picardResidueLift W w U hwU)).map
+      ((Modules.overEquiv U).functor.map (K.d 0 1)) = 0
+    apply b1.injective
+    rw [hb, map_zero]
+    ext i
+    simp [hdw]
+  · intro V hwV hVU hs a ha
+    refine ⟨⟨(c V hVU).symm a, ?_⟩, ?_⟩
+    · change (c V hVU).symm a ≫ (Modules.tensorPullback (W.homOfLE hVU)).map
+        ((Modules.overEquiv U).functor.map (K.d 0 1)) = 0
+      apply (c1 V hVU).injective
+      rw [hc, map_zero]
+      simpa using ha
+    · simpa using hres V hwV hVU hs ((c V hVU).symm a)
 
 end AlgebraicGeometry.Scheme
