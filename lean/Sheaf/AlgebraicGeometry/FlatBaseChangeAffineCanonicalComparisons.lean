@@ -9,16 +9,12 @@ public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.TensorPullback
-
 /-! # Canonical affine section comparisons before flat base change
 
 Source: Stacks Project, Tags 02KH (affine dictionary paragraph), 01XJ, 01XK,
@@ -34,6 +30,10 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
+set_option maxHeartbeats 1200000 in
+-- Explicit homology transports need more elaboration than the default budget.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical source and target affine comparisons, compatible with the cohomological
 pullback. This asserts no invertibility of the cohomological base-change map and needs
 no flatness of either projection. The additive comparison is existential here; it is
@@ -112,5 +112,54 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
             (D.targetClass p
               (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                 ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (e0.symm xi)))) := by
-  sorry
+  classical
+  dsimp only
+  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
+  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
+  let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F
+  let : ∀ G : S.Modules, Module Γ(S, V)
+      Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
+    fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
+  obtain ⟨c, hc, hs, ht, _⟩ :=
+    Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
+  have target :=
+    Scheme.Modules.exists_flatBaseChange_target_leray_comparison
+      f g F I J p V W hV hW eVW D
+  obtain ⟨E, hE, htarget⟩ := target
+  obtain ⟨eH, heH, b0, hb0⟩ := htarget
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  have edge :=
+    Scheme.Modules.exists_affine_cohomology_section_equiv f F I p V hV D.source E hE
+  obtain ⟨e, he⟩ := edge
+  have hP : P.IsQuasicoherent := by
+    exact ordinaryHigherImage_isQuasicoherent f F inferInstance p
+  let k : (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) →ₗ[Γ(S', W)]
+      Γ((Scheme.Modules.tensorPullback g).obj P, W) :=
+    { toFun := fun t ↦ c P hP ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm t)
+      map_add' := by intro t t'; simp
+      map_smul' := by
+        intro b t
+        simpa only [LinearEquiv.apply_symm_apply, RingHom.id_apply] using
+          hs P hP b ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm t) }
+  let t : (Γ(S', W) ⊗[Γ(S, V)] Scheme.Modules.HOver h N p) ≃ₗ[Γ(S', W)]
+      (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) :=
+    TensorProduct.AlgebraTensorModule.congr (LinearEquiv.refl Γ(S', W) Γ(S', W)) e
+  have hk : Function.Bijective (k.comp t.toLinearMap) :=
+    (hc P hP).comp
+      ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm.bijective.comp t.bijective)
+  refine ⟨eH, LinearEquiv.ofBijective (k.comp t.toLinearMap) hk, b0, ?_, ?_⟩
+  · intro s xi
+    change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
+    have he' : e xi = D.sourceClass p (eH.symm xi) := by
+      rw [heH]
+      exact he xi
+    exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
+      ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op
+        (Scheme.Modules.Hom.app
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
+          V z)) he')
+  · dsimp only at hb0
+    exact hb0
 end AlgebraicGeometry

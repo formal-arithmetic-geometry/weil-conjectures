@@ -17,75 +17,49 @@
  ],
  "proof": [
   {
-   "text": "Identify open-immersion pullback and restriction, preserving the adjunction units. Compare derived module cohomology and Ext cohomology using the common section complex of a module injective resolution, with forgotten injectives acyclic for sections. This yields e0; naturality for multiplication by sections gives A-linearity. The augmentation and components equations in D.source pin the resolution comparison on cocycles.",
+   "text": "Apply the target Leray comparison to obtain a natural source family E, additive e0 with its explicit equality to E transported by restrictFunctorIsoPullback, and target linear equivalence b0 with compatibility on e0.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-sc-module-cohomology-source-comparison",
-    "lem-sc-module-abelian-zariski-cohomology",
+    "new-flat-base-change-target-leray-comparison",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_affine_cohomology_section_equiv to D.source and E, using its naturality. This gives the A-linear equivalence e from HOver(h,N,p) to Gamma(P,V). Rewrite by the explicit equality defining e0 to obtain its normalization as D.sourceClass composed with e0 inverse.",
+   "uses": [
+    "new-affine-cohomology-section-equiv",
     "def-weil-pbc-flat-base-change-open-choices"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The higher direct images of F are quasi-coherent for qcqs f. Affine vanishing on V makes the cocycle-normalized Leray edge an isomorphism. On the source section complex this edge is D.sourceClass by the higher-direct-image presheaf comparison. Tensor its A-linear identification with B and use the affine pullback section formula. Its unit formula gives the required pure-tensor normalization of the B-linear equivalence a0. No flatness is used.",
+   "text": "P is quasi-coherent. Apply exists_tensorPullback_affine_sections to g,V,W and P. Swap the tensor factors and use its scalar equation to build the B-linear map k. Its bijectivity follows from the affine section theorem and the tensor commutation equivalence. Extend e by B using TensorProduct.AlgebraTensorModule.congr and compose with k. LinearEquiv.ofBijective makes this the required a0. Its pure-tensor formula follows by substitution of the normalization of e into the affine pullback unit formula.",
    "uses": [
     "lem-pc-ordinary-higher-image-quasi-coherent",
-    "lem-pc-affine-vanishing",
-    "lem-pc-leray-degenerate-sections",
-    "lem-weil-pbc-higher-direct-image-presheaf",
     "lem-weil-pbc-module-pullback-affine-sections"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The affine chart square identifies U_B with the inverse image of W under f prime; pullback composition identifies N_B with the restriction of g prime pullback F. The morphism f prime remains qcqs and the pulled-back module is quasi-coherent. Apply the same module/abelian comparison, affine vanishing and cocycle-normalized Leray edge on W to obtain the B-linear equivalence b0.",
+   "text": "The target compatibility from the first step uses precisely the selected e0. Supply it as the second conjunct and assemble e0,a0,b0 and the two normalization formulas.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-pc-module-pullback",
-    "lem-pc-ordinary-higher-image-quasi-coherent",
-    "lem-pc-affine-vanishing",
-    "lem-pc-leray-degenerate-sections",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-sc-module-abelian-zariski-cohomology"
+    "new-flat-base-change-target-leray-comparison"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Compute the maps defining moduleCohomologyFMap(D.psi) and H.baseChangeLinear on the common section complexes. Both are induced by the pullback coefficient unit: D.unit_square and composition unit equations identify the coefficient maps. Augmentation-preserving resolution comparisons are homotopic and give the same cohomology map. D.components identifies the restrictions to W termwise. The cocycle formulas for the Leray edges now give exactly the b0 compatibility. Scalar multiplication commutes with these maps. This compares maps only; invertibility of H.baseChange is neither used nor asserted.",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-pc-flat-cohomology-comparison",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-sc-module-abelian-zariski-cohomology",
-    "lem-pc-leray-degenerate-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The common-complex constructions include the zero complex and empty opens. In degree zero the same formulas are those of the augmentations; no positive-degree argument or nonempty choice was used.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-pc-flat-cohomology-comparison",
-  "def-pc-module-pullback",
   "def-weil-pbc-flat-base-change-open-choices",
-  "def-weil-pbc-module-cohomology-fmap",
-  "lem-pc-affine-vanishing",
-  "lem-pc-leray-degenerate-sections",
   "lem-pc-ordinary-higher-image-quasi-coherent",
-  "lem-sc-module-abelian-zariski-cohomology",
-  "lem-sc-module-cohomology-source-comparison",
-  "lem-weil-pbc-higher-direct-image-presheaf",
   "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "new-affine-cohomology-section-equiv",
+  "new-flat-base-change-target-leray-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project, Tags 02KH, 01XJ, 01XK, 01E4 and 03FD",
-  "place": "Canonical affine comparisons and common-section-complex compatibility, steps 1–2 of new-flat-base-change-affine-target; no flat base-change isomorphism."
+  "by": "agent",
+  "document": "Stacks Project, Tags 02KH, 01XK, 01E4 and 03FD",
+  "place": "Lean reduction: construct the source scalar-extension equivalence explicitly from the existing normalized affine Leray equivalence and affine pullback sections; isolate only the target chart and common-complex normalization."
  },
  "mathlib_searches": [
   {
@@ -172,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T034213-L-3768487",
+  "landing": "20261013T100031-L-2469575",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
