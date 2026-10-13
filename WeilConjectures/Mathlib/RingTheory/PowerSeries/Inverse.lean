@@ -20,6 +20,7 @@ Finite products of power series congruent to `1` modulo `X ^ n` are congruent to
 - `PowerSeries.X_pow_dvd_prod_sub_one`
 - `PowerSeries.X_pow_dvd_prod_sub_prod_of_subset`
 - `PowerSeries.X_pow_dvd_inv_sub_inv`
+- `PowerSeries.map_inv`
 -/
 
 @[expose] public section
@@ -57,5 +58,15 @@ theorem X_pow_dvd_inv_sub_inv {k : Type*} [Field k] {f g : k⟦X⟧} {n : ℕ}
     linear_combination g⁻¹ * h₁ - f⁻¹ * h₂
   rw [this, dvd_neg]
   exact Dvd.dvd.mul_left h _
+
+/-- Over fields, mapping a power series along a ring homomorphism commutes with inversion. -/
+theorem map_inv {k k' : Type*} [Field k] [Field k'] (f : k →+* k') (φ : k⟦X⟧) :
+    map f φ⁻¹ = (map f φ)⁻¹ := by
+  have hc : constantCoeff (map f φ) = f (constantCoeff φ) := by
+    rw [← coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_zero_eq_constantCoeff_apply]
+  by_cases h : constantCoeff φ = 0
+  · rw [inv_eq_zero.2 h, map_zero, eq_comm, inv_eq_zero, hc, h, map_zero]
+  · rw [eq_inv_iff_mul_eq_one (by rwa [hc, map_ne_zero]), ← map_mul,
+      PowerSeries.inv_mul_cancel _ h, map_one]
 
 end PowerSeries
