@@ -5,8 +5,8 @@
  },
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW and Tag 08D4"
+  "document": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraCanonicalComparisonIdentification.lean",
+  "place": "M3: affine cycle-class epi and boundary exactness, cokernel preservation, then a fully proved generic adjunction mate calculation."
  },
  "mathlib_searches": [
   {
@@ -58,17 +58,29 @@
  ],
  "proof": [
   {
-   "text": "The affine sections edge map is canonical and equals the mate defining affineAlgebraCounitHomologyComparison; the unbounded affine truncation argument proves it invertible in every degree.",
+   "text": "Direct image is a right adjoint, hence preserves the kernel of the outgoing differential. Apply the affine cycle-class epimorphy and boundary exactness lemmas to the chosen left homology data in degree n. Exactness plus epimorphy makes the pushed class projection a cokernel, so direct image preserves this left homology data. Mathlib then supplies the fixed canonical homology isomorphism.",
    "uses": [
-    "lem-pc-affine-morphism-hi",
-    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+    "new-affine-algebra-kinjective-cycle-class-epi",
+    "new-affine-algebra-kinjective-boundary-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private generic lemma comparison_of_preserved_left_homology computes homology of the termwise counit using LeftHomologyMapData with counit components on cycles and homology. Naturality gives its three compatibility equations. The mapHomologyIso_eq formula identifies the exact left-adjoint homology comparison. Apply the inverse adjunction bijection: cancellation of this exact comparison gives precisely the defining homEquiv formula of affineAlgebraCounitHomologyComparison. Thus the fixed isomorphism hom is the canonical mate, with no new existence choice.",
+   "uses": [
+    "def-sc-affine-algebra-counit-homology-comparison",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-morphism-hi",
-  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+  "new-affine-algebra-kinjective-cycle-class-epi",
+  "new-affine-algebra-kinjective-boundary-exactness",
+  "def-sc-affine-algebra-counit-homology-comparison",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "lean": {
   "existing": false,
@@ -94,9 +106,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T054229-L-446457",
+  "landing": "20261013T065111-L-899462",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

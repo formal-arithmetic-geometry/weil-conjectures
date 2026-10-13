@@ -1,0 +1,160 @@
+{
+ "id": "new-affine-algebra-kinjective-cycle-class-epi",
+ "kind": "statement",
+ "title": "Surjectivity of affine K-injective cycle classes",
+ "statement": "Let f:X\\to Y be affine and I a K-injective cochain complex of O_X-modules with quasi-coherent cohomology in every integer degree. Write F=g_* for direct image to modules over f_*O_X, where g is the direct-image-algebra morphism. For n in Z and the left part h of the chosen homology data of I.sc n, the pushed cycle-class projection F(h.pi):F(h.K) -> F(h.H) is an epimorphism. No left adjoint or adjunction is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof, canonical cohomology calculation; Tag 08D4, N=1 truncation argument; Tag 08BS, restriction of K-injectives to opens"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open V in Y its inverse image U is affine. Restrict the quasi-coherent cohomology modules to U. Affine vanishing, transported from the source H model to module right-derived sections, gives R^p Gamma(U,-)=0 on these modules for p>0. Sections commute with countable products because sections are evaluation of the underlying sheaf, whose limits are computed sectionwise.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set A=tau_{<=n}I and B=tau_{>=n}A=H^n(I)[-n]. Left exactness of derived sections makes H^n(RGamma(A)) -> H^n(RGamma(I)) invertible, since the upper tail starts in degree n+1. Apply the unbounded bound with N=1 to the lower tail tau_{<=n-1}I. Its derived sections vanish in degrees n and n+1, so the truncation triangle makes H^n(RGamma(A)) -> H^n(RGamma(B)) invertible. The derived single-object identification and the degree-zero right-derived-functor isomorphism identify the latter object with Gamma(U,H^n(I)).",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to U preserves K-injectivity by exact extension by zero and its restriction adjunction (Tag 08BS). Identify the preceding map with the actual cycle-class map. The natural comparison Gamma(K) -> RGamma(QK) is invertible for K=I: compare I to its K-injective resolution; a quasi-isomorphism between K-injectives is a homotopy equivalence and sections preserve homotopies. Sections preserve kernels, so Gamma(A) -> Gamma(I) induces an isomorphism on H^n. The natural comparison square for A -> I therefore makes Gamma(A) -> RGamma(A) invertible on H^n. In the square for A -> B, Gamma(B) -> RGamma(B) is the canonical bottom-degree identification. The degree-n component of A -> B is the quotient of cycles by boundaries, so commutativity identifies the composite isomorphism with the raw class map. The left homology data is a kernel followed by its cokernel; their uniqueness identifies its pi with that raw map. No arbitrary comparison isomorphism is chosen.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Surjectivity of the raw comparison on each affine open gives a cycle representative of every section of H^n(I) on U. Hence the pushed projection is sectionwise surjective on an affine-open basis, thus locally surjective and epi as an f_*O_X-module sheaf. Empty opens, zero complexes and all degrees satisfy the same assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-sp-derived-functor-single-identification",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-k-injective-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Canonical cycle calculation expanding the omitted detail in Tag 0AVW using Tag 08D4; read from the official Stacks tag pages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For affine morphism and K injective complex with quasicoherent cohomology the pushed cycle class projection is epimorphic and its kernel consists of pushed boundaries",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine morphism K injective complex quasicoherent cohomology cycle class map surjective boundaries exact",
+   "results": "Generic K-injective, injective-resolution, and exactness declarations only; no affine cycle-class surjectivity or boundary exactness theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+   "results": "Exact.gIsCokernel is the generic assembly tool: it requires both exactness and an epi, and supplies neither affine assertion.",
+   "date": "2026-10-13",
+   "verdict": "no affine match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLeftHomologyOf|cycle.*(epi|exact)|boundary.*exact in lean/Sheaf, lean/WeilConjectures and Mathlib/Algebra/Homology",
+   "results": "Generic pointwise homology preservation and the abstract cokernel API; no affine K-injective cycle-class epi or boundary exactness statement. Whole-blueprint searches cycle class and cycle-class return no matches; boundary search yields unrelated boundary geometry.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraCanonicalComparisonIdentification",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: canonical affine cohomology calculation; cycle-class surjectivity and kernel-boundary identification",
+   "via": [
+    "new-affine-algebra-canonical-comparison-identification",
+    "lem-sc-affine-algebra-counit-homology-comparison-isIso",
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraKInjectiveCycleClassEpi.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_kinjective_cycle_class_epi",
+  "statement": "theorem affine_algebra_kinjective_cycle_class_epi\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] (hI : ∀ n : ℤ, (I.homology n).IsQuasicoherent) (n : ℤ) :\n    Epi ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).map\n      (I.sc n).homologyData.left.π)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T065111-L-899462",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T065111-L-899462",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

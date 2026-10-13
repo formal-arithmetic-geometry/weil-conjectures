@@ -5,6 +5,9 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
 
+import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi
+import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveBoundaryExactness
+
 /-! # Identification of the canonical affine cohomology comparison
 
 Source: Stacks Project, Tags 0AVW and 08D4.
@@ -14,6 +17,67 @@ Source: Stacks Project, Tags 0AVW and 08D4.
 universe v
 open CategoryTheory
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem comparison_of_preserved_left_homology
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (F : C ⥤ D) [F.Additive] (P : D ⥤ C) [P.Additive]
+    [Limits.PreservesFiniteLimits P] [Limits.PreservesFiniteColimits P]
+    (a : P ⊣ F) (I : CochainComplex C ℤ) (n : ℤ)
+    [F.PreservesLeftHomologyOf (I.sc n)] :
+    ∃ e : ((F.mapHomologicalComplex (.up ℤ)).obj I).homology n ≅ F.obj (I.homology n),
+      e.hom = a.homEquiv _ _
+        ((P.mapHomologicalComplexHomologyIso (.up ℤ) n).inv.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj I) ≫
+          HomologicalComplex.homologyMap ((a.mapHomologicalComplex (.up ℤ)).counit.app I) n) := by
+  let S := I.sc n
+  let h := S.homologyData.left
+  let e := S.mapHomologyIso F
+  let ψ : ShortComplex.LeftHomologyMapData (S.mapNatTrans a.counit)
+      ((h.map F).map P) h :=
+    { φK := a.counit.app h.K
+      φH := a.counit.app h.H
+      commi := (a.counit.naturality h.i).symm
+      commf' := by simp
+      commπ := by exact a.counit.naturality h.π }
+  have hhid : h.homologyIso = Iso.refl S.homology := by
+    ext
+    dsimp [h, ShortComplex.LeftHomologyData.homologyIso,
+      ShortComplex.leftHomologyIso, ShortComplex.LeftHomologyData.leftHomologyIso,
+      ShortComplex.leftHomologyMapIso']
+    simp only [← ShortComplex.leftHomologyMap'_comp, Category.comp_id,
+      ShortComplex.leftHomologyMap'_id]
+    rfl
+  have hfac := ψ.homologyMap_eq
+  dsimp only [ψ] at hfac
+  rw [hhid] at hfac
+  simp only [Iso.refl_inv] at hfac
+  refine ⟨e, ?_⟩
+  apply (a.homEquiv _ _).symm.injective
+  erw [Equiv.symm_apply_apply, Adjunction.homEquiv_symm_apply]
+  change P.map e.hom ≫ a.counit.app (I.homology n) = _
+  have hc : HomologicalComplex.homologyMap
+      ((a.mapHomologicalComplex (.up ℤ)).counit.app I) n =
+      (P.mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        P.map e.hom ≫ a.counit.app (I.homology n) := by
+    have hsc : ShortComplex.homologyMap (S.mapNatTrans a.counit) =
+        ((S.map F).mapHomologyIso P).hom ≫ P.map e.hom ≫ a.counit.app S.homology := by
+      rw [(h.map F).mapHomologyIso_eq P]
+      simpa [e, h, ShortComplex.mapHomologyIso, ShortComplex.homology] using hfac
+    simpa [Functor.mapHomologicalComplexHomologyIso,
+      Functor.mapHomologicalComplexCompShortComplexFunctorIso,
+      HomologicalComplex.homologyFunctorIso, ShortComplex.homologyFunctorIso,
+      HomologicalComplex.homologyMap, Adjunction.mapHomologicalComplex, S,
+      ShortComplex.homologyFunctor, HomologicalComplex.homology,
+      HomologicalComplex.shortComplexFunctor, HomologicalComplex.shortComplexFunctor',
+      ShortComplex.mapNatTrans, HomologicalComplex.sc,
+      Functor.mapHomologicalComplex, ShortComplex.map,
+      Functor.mapShortComplex] using hsc
+  rw [hc]
+  simp
 
 /-- The affine K-injective cohomology comparison witness can be chosen to be the
 canonical comparison used by the counit construction.
@@ -39,6 +103,22 @@ theorem affine_algebra_kinjective_canonical_comparison_identification
           (toDirectImageAlgebraSpace f)).mapHomologicalComplex (.up ℤ)).obj I).homology n ≅
         (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).obj (I.homology n),
       e.hom = affineAlgebraCounitHomologyComparison f P a I n := by
-  sorry
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)
+  let S := I.sc n
+  let h := S.homologyData.left
+  have : Limits.PreservesLimitsOfSize.{0, 0} F := a.rightAdjoint_preservesLimits
+  have : Limits.PreservesFiniteLimits F := inferInstance
+  have hepi : Epi (F.map h.π) := affine_algebra_kinjective_cycle_class_epi f I hI n
+  let B := (ShortComplex.mk h.f' h.π h.f'_π).map F
+  have : Epi B.g := hepi
+  have hex : B.Exact := affine_algebra_kinjective_boundary_exactness f I hI n
+  have hpres : h.IsPreservedBy F :=
+    { g := inferInstance
+      f' := by
+        apply Limits.preservesColimit_of_preserves_colimit_cocone h.hπ
+        exact (Limits.isColimitMapCoconeCoforkEquiv' F h.wπ).symm hex.gIsCokernel }
+  let := hpres
+  let := Functor.PreservesLeftHomologyOf.mk' F h
+  exact comparison_of_preserved_left_homology F P a I n
 
 end AlgebraicGeometry
