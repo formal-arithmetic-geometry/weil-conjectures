@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-clopen-rank-stratum-module-projector",
+ "kind": "statement",
+ "title": "Characteristic rank-stratum idempotent on direct-image-algebra module sheaves",
+ "statement": "Let i: Z → Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], let A = i_*O_Z and g_* be module direct image to A-modules [def-sc-direct-image-algebra-derived-category, def-pc-ringed-spaces-derived-direct-image]. Let r: Z → ℕ be locally constant and U_k its clopen rank strata [def-sc-locally-ranked-exterior-complex]. For every q there is a natural endomorphism η of the identity functor on all A-module sheaves such that η² = η and, for every k and every O_{U_k}-module F, η on g_*j_{k,*}F is the identity if k=q and zero otherwise. There is no finiteness assumption on the image of r.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EE; agent-written expansion of steps 1--2 of lem-sc-clopen-rank-strata-homology-lift, as explained in its Lean docstring"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose the unique characteristic idempotent e of U_q using the scheme clopen-idempotent correspondence. On an open V of Y use multiplication by e restricted to i⁻¹(V).",
+   "uses": [
+    "lem-weil-pbc-scheme-clopen-idempotent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commutativity makes multiplication module-linear. Restrictions and all module morphisms commute with this multiplication. Idempotence of e gives η²=η. These equalities are checked on every section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The scalar action on g_*j_{k,*}F is restriction further to U_k∩i⁻¹(V). Section extensionality by germs identifies this restriction with 1 for k=q, and 0 for k≠q. This proves the two asserted morphism equalities, including empty strata.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EE and the rank-idempotent expansion of the original lifting docstring",
+  "note": "Fully implemented in Lean by S4; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a global section of a commutative ring sheaf gives a natural endomorphism of module sheaves",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentComplete.idempotents_split",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact clopen module or derived projector theorem; the proof uses the existing categorical and sheaf APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*[Ii]dempotent|[Ii]dempotent.*[Hh]omology|[Hh]omology.*[Ii]dempotent",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact clopen module or derived projector theorem; the proof uses the existing categorical and sheaf APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-clopen-rank-strata-homology-lift",
+   "place": "Rank-idempotent multiplication and splitting in the existing lifting proof in words",
+   "via": [
+    "lem-sc-clopen-rank-strata-formality",
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClopenRankStratumModuleProjector",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStratumModuleProjector.lean",
+  "declaration": "AlgebraicGeometry.clopenRankStratum_module_projector",
+  "statement": "theorem clopenRankStratum_module_projector\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (r : LocallyConstant Z ℕ) (q : ℕ) :\n    ∃ η : 𝟭 (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) ⟶\n        𝟭 (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))),\n      η ≫ η = η ∧\n      ∀ (k : ℕ) (F : (Scheme.Modules.exteriorRankOpen r k).toScheme.Modules),\n        η.app ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj\n          ((Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r k).ι).obj F)) =\n        if k = q then 𝟙 _ else 0",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f1fce",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678377",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f1fce",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678377",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, the recorded statement correction, unchanged lifting signature, and report; three modules and ClopenRankStrataFormality compile cleanly, with only permitted axioms."
+ }
+}

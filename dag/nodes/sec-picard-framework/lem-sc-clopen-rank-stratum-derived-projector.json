@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-clopen-rank-stratum-derived-projector",
+ "kind": "statement",
+ "title": "The retract of a derived module cut out by one rank stratum",
+ "statement": "Let i: Z → Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], A=i_*O_Z, and g_* the module direct image [def-sc-direct-image-algebra-derived-category, def-pc-ringed-spaces-derived-direct-image]. Choose D(A) [def-pc-derived-category]. Let r: Z → ℕ be locally constant with strata U_k [def-sc-locally-ranked-exterior-complex], fix q, and let K lie in D(A). There exist L in D(A), ι: L → K and π: K → L with ι≫π=id_L. For any m,k and module F on U_k, if k≠q and H^m(K)≅g_*j_{k,*}F, then H^m(L)=0. For every m,F on U_q and morphism a:g_*j_{q,*}F→H^m(K), one has a≫H^m(π)≫H^m(ι)=a. No concentration hypothesis or finite-image assumption on r is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EE; agent-written expansion of steps 1--2 of lem-sc-clopen-rank-strata-homology-lift, as explained in its Lean docstring"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply the module projector theorem to obtain the natural idempotent η with its support identities.",
+   "uses": [
+    "lem-sc-clopen-rank-stratum-module-projector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a cochain representative P of K through the localization Q. The components η(P^m) form a chain idempotent p. The abelian category of cochain complexes is idempotent complete. Split p into j:R→P and t:P→R, with j≫t=id_R and t≫j=p. Applying Q and transporting through Q(P)≅K gives L, ι and π. This is the existing Mathlib idempotents_split theorem, used inside a completely proved private helper.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality through the cycles inclusion and homology projection proves homologyMap(p,m)=η(H^m(P)). The homologyFunctorFactors isomorphism and naturality transport this identity through Q and the representative isomorphism, giving H^m(π)≫H^m(ι)=η(H^m(K)).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For homology supported on U_k with k≠q, naturality through its support isomorphism gives η(H^m(K))=0. The retract identity on homology then implies id_{H^m(L)}=0. For any map from U_q, naturality and η=id on the source give the required fixed-map identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-clopen-rank-stratum-module-projector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EE and the rank-idempotent expansion of the original lifting docstring",
+  "note": "Fully implemented in Lean by S4; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a global section of a commutative ring sheaf gives a natural endomorphism of module sheaves",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentComplete.idempotents_split",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact clopen module or derived projector theorem; the proof uses the existing categorical and sheaf APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*[Ii]dempotent|[Ii]dempotent.*[Hh]omology|[Hh]omology.*[Ii]dempotent",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact clopen module or derived projector theorem; the proof uses the existing categorical and sheaf APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-clopen-rank-strata-homology-lift",
+   "place": "Rank-idempotent multiplication and splitting in the existing lifting proof in words",
+   "via": [
+    "lem-sc-clopen-rank-strata-formality",
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClopenRankStratumDerivedProjector",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStratumDerivedProjector.lean",
+  "declaration": "AlgebraicGeometry.clopenRankStratum_derived_projector",
+  "statement": "theorem clopenRankStratum_derived_projector\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ) (q : ℕ)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i)))) :\n    ∃ (L : DerivedCategory\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n      (ι : L ⟶ K) (π : K ⟶ L),\n      ι ≫ π = 𝟙 L ∧\n      (∀ (m : ℤ) (k : ℕ)\n        (F : (Scheme.Modules.exteriorRankOpen r k).toScheme.Modules),\n        k ≠ q → Nonempty ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅\n          (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj\n            ((Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r k).ι).obj F)) →\n        IsZero ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj L)) ∧\n      (∀ (m : ℤ) (F : (Scheme.Modules.exteriorRankOpen r q).toScheme.Modules)\n        (a : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj\n            ((Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r q).ι).obj F) ⟶\n          (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K),\n        a ≫ (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).map π ≫\n          (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).map ι = a)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f1fce",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678377",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f1fce",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678377",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, the recorded statement correction, unchanged lifting signature, and report; three modules and ClopenRankStrataFormality compile cleanly, with only permitted axioms."
+ }
+}

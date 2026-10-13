@@ -12,36 +12,42 @@
  },
  "kind": "statement",
  "title": "Clopen rank stratum homology presentation",
- "statement": "In the clopen rank-stratum situation of lem-sc-clopen-rank-strata-homology-lift, for K and n there exists an isomorphism e from the n-th homology of K placed in degree n to K whose induced map under the canonical single-complex homology identification is the identity.",
+ "statement": "Let i: Z → Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], A=i_*O_Z with module direct image g_* [def-sc-direct-image-algebra-derived-category, def-pc-ringed-spaces-derived-direct-image], and choose D(A) [def-pc-derived-category]. Let r: Z → ℕ be locally constant with strata U_q [def-sc-locally-ranked-exterior-complex], E_q arbitrary module sheaves on U_q, and T^m=j_{m,*}E_m for m≥0, T^m=0 for m<0. Let K lie in D(A) and n in ℤ. Assume H^m(K)≅g_*T^m for every m≠n. There exists a retract L of K, with maps ι:L→K and π:K→L satisfying ι≫π=id_L, such that H^m(L)=0 for every m≠n and every map a:g_*T^n→H^n(K) satisfies a≫H^n(π)≫H^n(ι)=a. Thus it is the rank-n retract L, rather than all of K, that has a single-degree homology presentation.",
  "source": {
   "document": "literature/blueprint/slopmaster2/",
   "place": "expanded proof of lem-sc-clopen-rank-strata-homology-lift, idempotent splitting and truncation"
  },
  "stmt_deps": [
-  "def-sc-locally-ranked-exterior-complex",
-  "lem-weil-pbc-scheme-clopen-idempotent",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
   "def-sc-direct-image-algebra-derived-category",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-sf-derived-concentrated-single",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
  ],
  "proof": [
   {
-   "text": "Split K by the characteristic idempotent of the rank-n clopen stratum. The complementary summand has zero homology in every degree by the hypotheses on the other strata, while the image summand has only its n-th homology. Canonical truncation identifies this summand with the n-th homology placed in degree n; composing with the inclusion gives e, and naturality gives the identity equation.",
+   "text": "For nonnegative n take the derived projector for q=n.toNat. For nonnegative m≠n, m.toNat≠q and the prescribed support isomorphism imply H^m(L)=0. For negative m the prescribed T^m is zero; homology of K is zero and its retract homology is zero. The fixed-map clause follows from T^n=j_{q,*}E_q.",
    "uses": [
-    "lem-weil-pbc-scheme-clopen-idempotent",
-    "lem-sf-derived-concentrated-single"
+    "lem-sc-clopen-rank-stratum-derived-projector"
    ],
    "elementary": false
+  },
+  {
+   "text": "For negative n, T^n=0. Take L=0 and both maps zero. The retract identity follows from id_0=0, homology of zero is zero, and all maps from the zero source agree.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-scheme-clopen-idempotent",
-  "lem-sf-derived-concentrated-single"
+  "lem-sc-clopen-rank-stratum-derived-projector"
  ],
  "proof_origin": {
   "by": "agent",
-  "note": "Stage-3 decomposition of the geometric idempotent/truncation argument."
+  "agent": "S4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EE and the rank-idempotent expansion of the original lifting docstring",
+  "note": "Repairs the false claim that the complementary summand of K is acyclic. The retract construction is fully proved."
  },
  "mathlib_searches": [
   {
@@ -94,20 +100,59 @@
   "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
   "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
   "declaration": "AlgebraicGeometry.clopenRankStrata_homology_presentation",
-  "statement": "theorem clopenRankStrata_homology_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i)))] (r : LocallyConstant Z ℕ) (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules) (T : ℤ → Z.Modules) (hT : ∀ n : ℤ, T n = if 0 ≤ n then (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj (E n.toNat) else 0) (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i)))) (n : ℤ) (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅ (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m))) : ∃ e : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) ≅ K, (DerivedCategory.singleFunctorCompHomologyFunctorIso (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).inv.app ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) ≫ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map e.hom = 𝟙 _",
+  "statement": "theorem clopenRankStrata_homology_presentation\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (n : ℤ)\n    (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m))) :\n    ∃ (L : DerivedCategory\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n      (ι : L ⟶ K) (π : K ⟶ L),\n      ι ≫ π = 𝟙 L ∧\n      (∀ m : ℤ, m ≠ n → IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj L)) ∧\n      (∀ a : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n) ⟶\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K,\n        a ≫ (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map π ≫\n          (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map ι = a)",
   "branch": "sheaf-dag",
-  "by": "N4",
+  "by": "S4",
   "date": "2026-10-13"
  },
  "reviewed_lean": null,
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
+  "reviewer": "X-f1fce",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T234222-L-2126079",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T033007-L-3678377",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, the recorded statement correction, unchanged lifting signature, and report; three modules and ClopenRankStrataFormality compile cleanly, with only permitted axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "S4 stage 2",
+  "old_statement": "In the clopen rank-stratum situation of lem-sc-clopen-rank-strata-homology-lift, for K and n there exists an isomorphism e from the n-th homology of K placed in degree n to K whose induced map under the canonical single-complex homology identification is the identity.",
+  "old_stmt_deps": [
+   "def-sc-locally-ranked-exterior-complex",
+   "lem-weil-pbc-scheme-clopen-idempotent",
+   "def-sc-direct-image-algebra-derived-category",
+   "def-pc-ringed-spaces-derived-direct-image",
+   "lem-sf-derived-concentrated-single",
+   "def-pc-derived-category"
+  ],
+  "old_proof": [
+   {
+    "text": "Split K by the characteristic idempotent of the rank-n clopen stratum. The complementary summand has zero homology in every degree by the hypotheses on the other strata, while the image summand has only its n-th homology. Canonical truncation identifies this summand with the n-th homology placed in degree n; composing with the inclusion gives e, and naturality gives the identity equation.",
+    "uses": [
+     "lem-weil-pbc-scheme-clopen-idempotent",
+     "lem-sf-derived-concentrated-single"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-scheme-clopen-idempotent",
+   "lem-sf-derived-concentrated-single"
+  ],
+  "what": "STATEMENT-DISPUTED: the old conclusion was false. Take Z=Y=Spec(k), i=id, r constantly 0, E_0=O_Z, T^0=O_Z and all other T zero, K=O_Z in degree 0 and n=-1. The hypotheses hold but H^-1(K)=0, so its single complex cannot be isomorphic to nonzero K. Replace the false whole-object presentation with a concentrated retract and the fixed-map identity, the actual steps the lifting argument needs. No hypothesis has been added and the lifting theorem is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tag 00EE rank-idempotent splitting, followed by derived.tex Tag 08J5 on the image summand only"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-clopen-rank-strata-homology-lift",
+    "holds": true,
+    "note": "The lifting conclusion and every hypothesis stay unchanged. Its proof now factors a through H^n(π), lifts to the concentrated retract via the existing Mathlib t-structure theorem, and composes with ι; the fixed-map identity proves the required homology equation."
+   }
+  ]
  }
 }
