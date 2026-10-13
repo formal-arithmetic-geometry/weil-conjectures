@@ -6,7 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientSystem
 /-! # Base change and the restricted coefficient complex system
 
 Source: Stacks Project, Tag 09Z1 proof and Tag 0EZM.
@@ -21,6 +21,51 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.style.longLine false in
+/-- Stage-arrow naturality for the concrete restricted coefficient witnesses.
+The proof expands the degree-zero single-complex transition and the canonical restricted map;
+the two inverse-image composition comparisons coincide, and cohomology functoriality gives
+the equality. (blueprint: lem-sbc-restricted-affine-natural-coefficient-system-stage)
+-
+Source: Stacks Project, Tag 09Z1; this is the stage-transition clause of the
+restricted single-complex construction. (blueprint: 
+    lem-sbc-restricted-affine-natural-coefficient-system-stage)
+-/
+theorem restricted_affine_stage_naturality {S : Scheme.{v}} {I : Type v} [Preorder I]
+    [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D)
+    (hc : IsLimit ((Over.forget S).mapCone c))
+    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)
+    (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app 
+    (F i)))
+    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))
+      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ 
+    (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))
+    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))
+    (hH : ∀ {i j : I} (f : i ⟶ j),
+    H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map 
+    f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ 
+    (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)
+    [HasColimit H] (p : ℕ) (U : S.Etale) [IsAffine U.left]
+    (D' : Iᵒᵖ ⥤ Scheme.{v}) (c' : Cone D')
+    (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
+    (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),
+    ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K 
+    i) ⟶ K j)
+    (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
+    (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{v + 1} (c'.π.app 
+    i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i))
+    (L : Cocone G) (r : ∀ i : Iᵒᵖ,
+    rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅ (cohomology 
+    AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj (DerivedCategory.Q.obj (K i))) :
+    ∀ {i j : I} (f : i ⟶ j),
+      (r (op i)).hom ≫ rawAffineComplexPullback (p : ℤ) (D'.map f.op) (K (op i)) ≫ (cohomology 
+    AddCommGrpCat.{v + 1} (D'.obj (op j)) (p : ℤ)).map (DerivedCategory.Q.map (ψ f.op)) = 
+    rawAffineRestrictedCohomologyMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom 
+    (Over.w (D.map f.op)) p (F i) (F j) (φ f) U ≫ (r (op j)).hom := by sorry
+
+set_option linter.unusedVariables false in
 /-- Construct the base-changed schemes and their degree-zero coefficient complexes,
 including the coefficient colimit and its restriction comparisons.
 Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object;
@@ -145,6 +190,13 @@ theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}
           (DerivedCategory.Q.map (ψ f.op)) =
       rawAffineRestrictedCohomologyMap (D.map f.op).left
         (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p
-        (F i) (F j) (φ f) U ≫ (r (op j)).hom) := by sorry
+        (F i) (F j) (φ f) U ≫ (r (op j)).hom) := by
+  obtain ⟨D', c', hc', compact, qs, affine, K, ψ, hid, hcomp, hbelow,
+    G, eG, hG, L, hL, hbelowL, r, rL, hr⟩ :=
+    exists_restricted_affine_coefficient_system D c hc F φ hφid hφcomp H eH hH p U
+  refine ⟨D', c', hc', compact, qs, affine, K, ψ, hid, hcomp, hbelow,
+    G, eG, hG, L, hL, hbelowL, r, rL, hr, ?_⟩
+  exact restricted_affine_stage_naturality D c hc F φ hφid hφcomp H eH hH p U
+    D' c' K ψ G eG L r
 
 end AlgebraicGeometry.Etale

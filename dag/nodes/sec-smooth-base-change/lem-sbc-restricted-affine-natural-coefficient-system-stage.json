@@ -1,0 +1,102 @@
+{
+ "id": "lem-sbc-restricted-affine-natural-coefficient-system-stage",
+ "kind": "statement",
+ "title": "Stage transition equation for restricted affine complexes",
+ "statement": "For the concrete restricted affine coefficient witnesses, the stage cohomology comparison intertwines the complex transition with the canonical restricted cohomology map.",
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "affine restriction stage transition"
+ },
+ "proof": [
+  {
+   "text": "Expand the degree-zero single-complex transition and the canonical restricted map; the two inverse-image composition comparisons coincide, and cohomology functoriality gives the equality.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09Z1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stage naturality equation for restricted affine cohomology complexes",
+   "results": "no exact match",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restricted affine coefficient stage naturality",
+   "results": "no exact match",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.isZero_single_obj_X",
+   "results": "mathlib declaration found",
+   "verdict": "used for surrounding construction"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexSingleFunctor",
+   "results": "mathlib declarations found",
+   "verdict": "used by construction"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-restricted-affine-natural-coefficient-system",
+   "place": "stage-arrow clause"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineNaturalCoefficientSystem.lean",
+  "declaration": "AlgebraicGeometry.Etale.restricted_affine_stage_naturality",
+  "statement": "theorem restricted_affine_stage_naturality {S : Scheme.{v}} {I : Type v} [Preorder I]\n    [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D)\n    (hc : IsLimit ((Over.forget S).mapCone c))\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app \n    (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ \n    (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j),\n    H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map \n    f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ \n    (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ) (U : S.Etale) [IsAffine U.left]\n    (D' : Iᵒᵖ ⥤ Scheme.{v}) (c' : Cone D')\n    (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),\n    ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K \n    i) ⟶ K j)\n    (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{v + 1} (c'.π.app \n    i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i))\n    (L : Cocone G) (r : ∀ i : Iᵒᵖ,\n    rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅ (cohomology \n    AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj (DerivedCategory.Q.obj (K i))) :\n    ∀ {i j : I} (f : i ⟶ j),\n      (r (op i)).hom ≫ rawAffineComplexPullback (p : ℤ) (D'.map f.op) (K (op i)) ≫ (cohomology \n    AddCommGrpCat.{v + 1} (D'.obj (op j)) (p : ℤ)).map (DerivedCategory.Q.map (ψ f.op)) = \n    rawAffineRestrictedCohomologyMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom \n    (Over.w (D.map f.op)) p (F i) (F j) (φ f) U ≫ (r (op j)).hom",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T164047-L-1667806",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T164047-L-1667806",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
