@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import Sheaf.AlgebraicGeometry.LocalFinitelyPresentedImmersionLocus
+import Sheaf.AlgebraicGeometry.PicardSingleRankUnrestrictedPerfectChart
+import Sheaf.AlgebraicGeometry.PicardSingleRankSourceLocal
 
 /-! # A finitely presented locus for one universal direct-image rank condition
 
@@ -71,6 +72,27 @@ theorem exists_picardUniversalSingleRankLocus_finitePresentation
     ∃ (W : Scheme.{u}) (j : W ⟶ S),
       IsImmersion j ∧ LocallyOfFinitePresentation j ∧
       ∀ {T : Scheme.{u}} (g : T ⟶ S),
-        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalSingleRankMatch f E F g := by sorry
+        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalSingleRankMatch f E F g := by
+  let : ∀ T : Scheme.{u}, HasDerivedCategory
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) :=
+    fun T ↦ HasDerivedCategory.standard _
+  let : ∀ (T : Scheme.{u}) (U : T.Opens), HasDerivedCategory
+      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U)) :=
+    fun T U ↦ HasDerivedCategory.standard _
+  apply exists_localFinitelyPresentedImmersionLocus S
+    (fun g ↦ PicardUniversalSingleRankMatch f E F g)
+  · intro T T' g h hg T'' k t
+    convert hg (k ≫ h) t using 1
+    congr! 8
+  · intro T g hlocal
+    exact picardUniversalSingleRankMatch_of_source_local f E F g hlocal
+  · intro s
+    obtain ⟨U, hs, K, b, r, hK, hamp, hmatch⟩ :=
+      exists_picardSingleRankUnrestrictedPerfectChart f E F s
+    obtain ⟨W, j, hj, hjfp, _, hfactor, _, _⟩ :=
+      exists_perfectLowestCohomologyLocus U.toScheme K hK 0 b hamp r
+    refine ⟨U, hs, W, j, hj, hjfp, ?_⟩
+    intro T g
+    exact (hfactor T g).trans (hmatch T g).symm
 
 end AlgebraicGeometry.Scheme

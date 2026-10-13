@@ -13,47 +13,47 @@
  },
  "proof": [
   {
-   "text": "The clopen rank-r locus X_r of E and its complement have clopen images because f is open and closed. In V=f(X), define S_r=V minus f(X minus X_r). These disjoint clopen components are precisely the nonempty homogeneous-rank fibres. A mixed fibre has an open neighbourhood in the images of two distinct rank loci, meeting none of the S_r. The complement of V is clopen and has empty inverse image. The residue-field tests in the single-image condition force every test map into the union of these homogeneous and empty components; two distinct ranks persist after field extension.",
+   "text": "Choose standard derived category models. The single-rank predicate is preserved by precomposition: apply its universal quantifier to the composite and reassociate the three morphisms.",
    "uses": [
     "def-sc-picard-universal-single-rank-match"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing theorem that the single-rank predicate is source local.",
+   "uses": [
+    "lem-sc-picard-single-rank-source-local"
    ],
    "elementary": false
   },
   {
-   "text": "On each S_r, F is finitely presented and relatively flat. The perfect direct-image/base-change theorem gives perfect Rf_*F with arbitrary derived base change. Its derived pullbacks have no negative cohomology. A finite strictly perfect model therefore locally has Tor amplitude [0,b].",
+   "text": "At each point obtain an unrestricted perfect chart, covering homogeneous, empty and mixed fibres. Apply the lowest-cohomology locus theorem in degree zero at the chart rank. Compose its representing equivalence with the inverse chart comparison to give a local immersion representing the single-rank predicate, retaining local finite presentation.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-picard-single-rank-unrestricted-perfect-chart",
+    "lem-sc-perfect-h0-locally-closed"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the universal lowest-cohomology locus theorem in degree zero and rank r. The H^0 derived-base-change comparison identifies its universal fixed-rank condition with the ordinary direct image of F after every further base change. Reference E has rank r on the entire inverse image. Nonempty fibres make every local reference-rank witness equal r by stalk rank, so local finite freeness is exactly the single-image condition, also for nonreduced tests.",
+   "text": "Apply the locally finitely presented immersion gluing theorem to this predicate and its local representatives. This gives the asserted global immersion, local finite presentation and full factorization criterion.",
    "uses": [
-    "lem-sc-perfect-h0-locally-closed",
-    "lem-sc-finite-locally-free-stalk-finrank",
-    "def-sc-picard-universal-single-rank-match"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The chart immersions agree uniquely on overlaps, and these identifications satisfy the cocycle condition because immersions are monomorphisms. Glue them on each S_r and take their disjoint union with the empty-fibre component. The union is locally an immersion over S, or empty near mixed fibres, and local finite presentation is local on the target. Test factors glue uniquely. On empty fibres both F direct image and its restrictions are zero, and the reference rank clause is vacuous, so rank zero works. Empty test schemes are vacuous; rank zero on nonempty fibres is covered by the same lowest-cohomology construction.",
-   "uses": [
-    "def-sc-picard-universal-single-rank-match"
+    "lem-sc-local-finitely-presented-immersion-locus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-picard-universal-single-rank-match",
-  "lem-pc-rf-perfect-base-change",
+  "lem-sc-local-finitely-presented-immersion-locus",
   "lem-sc-perfect-h0-locally-closed",
-  "lem-sc-finite-locally-free-stalk-finrank"
+  "lem-sc-picard-single-rank-source-local",
+  "lem-sc-picard-single-rank-unrestricted-perfect-chart"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 0BDP (first three proof paragraphs), 0B91 and 0BDL; the homogeneous-fibre and empty-fibre decomposition is the adaptation explicitly given in the parent node lem-sc-picard-universal-rank-match-locus-lfp-core.",
-  "note": "X2 adaptation of the parent construction; the unit route is unchanged."
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs, Tags 0B91 and 0BDL; unrestricted chart isolates the homogeneous/empty/mixed-fibre argument",
+  "note": "G4 compiling reduction: lowest-cohomology representation and finite-presentation gluing combined in Lean; local chart is the only added hole."
  },
  "mathlib_searches": [
   {
@@ -126,9 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T082425-L-1651966",
-  "kind": "interface"
+  "landing": "20261013T095958-L-2460214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

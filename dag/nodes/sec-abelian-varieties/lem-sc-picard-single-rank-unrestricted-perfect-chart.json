@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-picard-single-rank-unrestricted-perfect-chart",
+ "kind": "statement",
+ "title": "Unrestricted perfect charts for one universal direct-image rank condition",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation. Let $E,F$ be finite locally free modules on $X$ [def-amb-finite-locally-free-module]. Use derived categories of the scheme module categories and their open over-sites in one universe [def-pc-derived-category]. For every $s\\in S$ there exist an open neighbourhood $U$, a perfect object $K$ on $U$ [def-pc-perfect-complex], $b\\in\\mathbf Z$, and $r\\in\\mathbf N$ such that $H^i(K\\otimes^{\\mathbf L}M)=0$ for every module $M$ when $i<0$ or $b<i$ [def-pc-derived-tensor-cohomology-vanishes]. For every $g:T\\to U$, the single-rank predicate $R_1(f,E,F,g\\circ\\iota_U)$ [def-sc-picard-universal-single-rank-match] holds if and only if, for every $h:T'\\to T$, $H^0(L(g\\circ h)^*K)$ is finite locally free of rank $r$ [def-pc-derived-pullback]. This statement constructs the local complex and comparison, not a representing subscheme. No structure-sheaf unit or connected-fibre hypothesis is imposed; on empty and mixed-fibre neighbourhoods the complex may be the actual zero complex, with rank zero and rank one respectively.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs; Tag 0B91(2); homogeneous, empty and mixed-fibre adaptation in proof steps 1-3 of lem-sc-picard-universal-single-rank-locus-lfp"
+ },
+ "stmt_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-sc-picard-universal-single-rank-match",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The clopen rank loci X_r of E have open and closed images: flat local finite presentation makes f open, and properness makes f closed. The image V=f(X) is clopen. For a nonempty homogeneous fibre of rank r, the clopen neighbourhood V minus f(X minus X_r) contains only nonempty fibres of this rank.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On this neighbourhood finite local freeness makes F finitely presented and relatively flat. Tag 0B91 gives perfect Rf_*F and arbitrary derived base change. Its pullbacks have no negative cohomology. Shrink near s to a finite strictly perfect model of Tor amplitude [0,b]. Degree-zero derived base change identifies all its pulled-back H^0 sheaves with the ordinary direct images in the predicate. The reference E has rank r on all inverse images. In any local witness its rank equals r by invariant basis number on a stalk of a nonempty fibre. Locality of rank-r freeness proves the equivalence in both directions, including nonreduced tests and rank zero.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex",
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "def-sc-picard-universal-single-rank-match"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If s has empty fibre, take U=S minus V. All pullback fibres and direct images are empty and zero respectively. The reference clause is vacuous. Take the actual zero derived object K, b=0 and r=0: both sides hold on every test scheme.",
+   "uses": [
+    "def-sc-picard-universal-single-rank-match",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the fibre at s has two different ranks a and c, take the intersection of the images of X_a and X_c as U. Every fibre over U contains both ranks. They persist after residue-field extension, so a nonempty test scheme cannot satisfy the reference clause, tested at one of its residue-field points. Thus the predicate holds exactly for empty tests. Take the actual zero derived object K, b=0 and r=1: its pulled-back H^0 is zero, which is rank one exactly on an empty scheme, since the residue field at any point of a nonempty scheme is nonzero.",
+   "uses": [
+    "def-sc-picard-universal-single-rank-match",
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These three cases exhaust all fibres. The zero objects in the last two cases are perfect and have the stated vanishing. No complex is chosen from an undetermined existence claim. Empty tests have vacuous covers, so their module sheaves have every finite rank and both equivalences include them.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-perfect-complex",
+  "def-sc-picard-universal-single-rank-match",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs; Tag 0B91(2); homogeneous, empty and mixed-fibre adaptation in proof steps 1-3 of lem-sc-picard-universal-single-rank-locus-lfp",
+  "note": "G4 compiling reduction; source adaptation specified explicitly. Unit route unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rank.*locus|locus.*rank",
+   "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Localization/Free.lean; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local perfect complex charts for universal direct image rank without connected fibres",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local perfect complex charts for universal direct image rank without connected fibres",
+   "results": "Hits: Module.isLocallyConstant_rankAtStalk, Manifold.LiftSourceTargetPropertyAt, Module.isLocallyConstant_rankAtStalk_freeLocus, ChartedSpace.locallyConnectedSpace, Manifold.LiftSourceTargetPropertyAt.localPresentationAt, Manifold.IsLocalSourceTargetProperty, Manifold.LocalPresentationAt.property, StructureGroupoid.LocalInvariantProp.liftPropWithinAt_indep_chart_target; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocusFinitePresentation",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "first three proof paragraphs; Tag 0B91(2); homogeneous, empty and mixed-fibre adaptation in proof steps 1-3 of lem-sc-picard-universal-single-rank-locus-lfp",
+   "via": [
+    "lem-sc-picard-universal-single-rank-locus-lfp",
+    "lem-sc-picard-universal-rank-match-locus-lfp-core",
+    "lem-sc-picard-universal-rank-match-locus-lfp-iso",
+    "lem-sc-picard-universal-rank-match-locus-lfp",
+    "lem-sc-picard-universal-rank-match-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardSingleRankUnrestrictedPerfectChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardSingleRankUnrestrictedPerfectChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_picardSingleRankUnrestrictedPerfectChart",
+  "statement": "theorem exists_picardSingleRankUnrestrictedPerfectChart [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [∀ (T : Scheme.{u}) (U : T.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))] {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (E F : X.Modules) [E.IsFiniteLocallyFree] [F.IsFiniteLocallyFree] (s : S) : ∃ U : S.Opens, s ∈ U ∧ ∃ (K : schemeDerivedCategory U.toScheme) (b : ℤ) (r : ℕ), IsPerfect U.toScheme K ∧ (∀ M : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace), ∀ i : ℤ, i < 0 ∨ b < i → schemeDerivedTensorCohomologyVanishes U.toScheme K M i) ∧ ∀ (T : Scheme.{u}) (g : T ⟶ U.toScheme), PicardUniversalSingleRankMatch f E F (g ≫ U.ι) ↔ ∀ (T' : Scheme.{u}) (h : T' ⟶ T), SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) 0).obj ((derivedPullback (h ≫ g)).obj K)) r",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T095958-L-2460214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T095958-L-2460214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

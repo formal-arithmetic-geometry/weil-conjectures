@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-local-finitely-presented-immersion-locus",
+ "kind": "statement",
+ "title": "Gluing locally finitely presented immersion representatives",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. For each morphism $g:T\\to S$ let $P(g)$ be a proposition. Suppose $P(g)$ implies $P(g\\circ h)$ for every $h:T'\\to T$, and suppose $P(g)$ holds whenever every point of $T$ has an open neighbourhood $V$ with $P(g\\circ\\iota_V)$. Assume that for each $s\\in S$ there exist an open neighbourhood $U$, a scheme $W_U$, and an immersion locally of finite presentation $j_U:W_U\\to U$ representing the predicate: for all $g:T\\to U$, $g$ factors through $j_U$ if and only if $P(\\iota_U\\circ g)$. Then there exist a scheme $W$ and an immersion locally of finite presentation $j:W\\to S$ with, for all $g:T\\to S$, $g$ factors through $j$ if and only if $P(g)$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "final proof paragraph: local characterized loci glue; Schemes Tags 01JB and 01JC"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Forget the local finite-presentation witnesses and apply the existing local immersion locus theorem to P, hbase, hsource and the remaining local witnesses. Obtain an immersion q:Z to S with its global representing equivalence. This reuses all gluing and factorization from the existing theorem rather than duplicating its private helper.",
+   "uses": [
+    "lem-sc-local-immersion-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the original locally finitely presented representatives j_i:W_i to U_i. For each i let A be the pullback of q along U_i inclusion. The global representing equivalence gives P on A from its first projection, and the local equivalence gives a:A to W_i over U_i. Applying the local equivalence to the identity on W_i gives P(j_i followed by inclusion); the global equivalence yields b:W_i to Z. Lift b and j_i to c:W_i to A. Cancel the monomorphisms j_i and the second pullback projection to prove c followed by a and a followed by c are identities. These are explicit Lean calculations using pullback lift and cancel_mono, and identify the two representatives without any gluing helper.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The second pullback projection equals a followed by j_i. Since a is an isomorphism, composition stability gives local finite presentation of this projection. Form the point-indexed open cover U_i and apply Mathlib IsZariskiLocalAtTarget.of_openCover for LocallyOfFinitePresentation. Return q with its original immersion and representing criterion. The point-indexed cover is vacuous for empty S, handled by the same locality theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-local-immersion-locus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "final proof paragraph: local characterized loci glue; Schemes Tags 01JB and 01JC",
+  "note": "G4 repair: reuse exists_localImmersionLocus for representability and all gluing. Identify its pullbacks with the given local representatives via universal properties and monomorphy, then descend local finite presentation by Mathlib target locality. No duplicated private helper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Gluing locally finitely presented immersions representing a source local predicate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing locally finitely presented immersions representing a source local predicate",
+   "results": "Hits: AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued, AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open, AlgebraicGeometry.Scheme.GlueData.instIsOpenImmersionCommRingCatFPresheafedSpaceToPresheafedSpaceGlueDataToSheafedSpaceGlueDataToLocallyRingedSpaceGlueData, AlgebraicGeometry.PresheafedSpace.GlueData.f_open, AlgebraicGeometry.Scheme.GlueData.f_open, AlgebraicGeometry.Scheme.GlueData.instIsOpenImmersionFLocallyRingedSpaceToLocallyRingedSpaceGlueData, AlgebraicGeometry.Scheme.GlueData.instIsOpenImmersionCommRingCatFSheafedSpaceToSheafedSpaceGlueDataToLocallyRingedSpaceGlueData, AlgebraicGeometry.Scheme.GlueData.instIsOpenImmersionιLocallyRingedSpaceToLocallyRingedSpaceGlueData; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*[Ii]mmersion|[Ii]mmersion.*glue|[Ll]ocal.*[Ll]ocus",
+   "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/LocalRing/Pullback.lean, Mathlib/RingTheory/LocalRing/Pullback.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocusFinitePresentation",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, application of Tag 0BDP: fix the reference bundle rank, construct the two degree-zero direct-image rank loci and intersect them",
+   "via": [
+    "lem-sc-picard-universal-single-rank-locus-lfp",
+    "lem-sc-picard-universal-rank-match-locus-lfp-core",
+    "lem-sc-picard-universal-rank-match-locus-lfp-iso",
+    "lem-sc-picard-universal-rank-match-locus-lfp",
+    "lem-sc-picard-universal-rank-match-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalFinitelyPresentedImmersionLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalFinitelyPresentedImmersionLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_localFinitelyPresentedImmersionLocus",
+  "statement": "theorem exists_localFinitelyPresentedImmersionLocus (S : Scheme.{u}) (P : ∀ {T : Scheme.{u}}, (T ⟶ S) → Prop) (hbase : ∀ {T T' : Scheme.{u}} (g : T ⟶ S) (h : T' ⟶ T), P g → P (h ≫ g)) (hsource : ∀ {T : Scheme.{u}} (g : T ⟶ S), (∀ t : T, ∃ V : T.Opens, t ∈ V ∧ P (V.ι ≫ g)) → P g) (hlocal : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ (W : Scheme.{u}) (j : W ⟶ U.toScheme), IsImmersion j ∧ LocallyOfFinitePresentation j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ U.toScheme), (∃ h : T ⟶ W, h ≫ j = g) ↔ P (g ≫ U.ι)) : ∃ (W : Scheme.{u}) (j : W ⟶ S), IsImmersion j ∧ LocallyOfFinitePresentation j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ h : T ⟶ W, h ≫ j = g) ↔ P g",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T095958-L-2460214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T095958-L-2460214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
