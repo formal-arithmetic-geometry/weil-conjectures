@@ -185,9 +185,12 @@ variable {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsC
   [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
 include hij in
-/-- Stratifications of the members of a complementary pair `(j, i)` concatenate to a
-stratification of `X`: the strata are the images of the strata of `U` and of `Z`.
-(blueprint: `prop:constructible-open-closed`) -/
+/-- Blueprint `prop-constructible-open-closed`, first assertion: stratifications of the members
+of a complementary pair `(j, i)` concatenate to a stratification of `X`: the strata are the
+images of the strata of `U` and of `Z`. The open immersion `j` is assumed quasi-compact (its
+range retrocompact), so that the images of constructible strata are constructible: this is
+implicit in the blueprint, whose constructible subsets are meant in the sense of a
+quasi-compact quasi-separated (e.g. Noetherian) scheme, where it is automatic. -/
 def Stratification.openClosed (SU : Stratification U) (SZ : Stratification Z) :
     Stratification X where
   n := SU.n + SZ.n
@@ -257,8 +260,9 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 include hij in
-/-- **A sheaf is constructible if and only if its restrictions to the members of a
-complementary pair `(j, i)` are.** (blueprint: `prop:constructible-open-closed`) -/
+/-- Blueprint `prop-constructible-open-closed`: **A sheaf is constructible if and only if its
+restrictions to the members of a complementary pair `(j, i)` are**, for `j` quasi-compact (see
+`AlgebraicGeometry.Scheme.Stratification.openClosed`). -/
 theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
     IsConstructibleSheaf F ↔
       IsConstructibleSheaf ((Etale.upperStar A j).obj F) ∧
