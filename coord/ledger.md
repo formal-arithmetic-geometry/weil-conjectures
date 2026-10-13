@@ -10816,3 +10816,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/K2/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalGlobalTransferPointwise (stage 3; reviewer PASS; after a return; landing 20261013T025304-L-3423652 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:53 L: merged deliver/M1/Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage (stage 3; reviewer PASS; first push; landing 20261013T025305-L-3423777 (interface); batch 20261013T025255; modules 4; new nodes 3)
 - 02:53 L: merged deliver/M3/Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonNormalization (stage 3; reviewer PASS; first push; landing 20261013T025305-L-3423877 (proof); batch 20261013T025255; modules 1; new nodes 0)
+- 02:53 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen (stage 3; reviewer PASS; first push; landing 20261013T025306-L-3424045 (proof); batch 20261013T025255; modules 1; new nodes 0)
