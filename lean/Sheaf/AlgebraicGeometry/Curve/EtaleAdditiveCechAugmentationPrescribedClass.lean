@@ -6,7 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaMap
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackChainTransfer
 
 /-! # Čech augmentation compatibility for a prescribed target class
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1.
@@ -100,6 +101,53 @@ theorem etaleAdditiveCech_augmentation_prescribed_class
         ((cechOver Y.toSpecΓ V
           (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') ∧
       (additiveCechTotal V J).homologyπ n tα' =
-        (additiveCechTotal V J).homologyπ n tβ' := by sorry
+        (additiveCechTotal V J).homologyπ n tβ' := by
+  obtain ⟨f, t, hf, htβ, hc⟩ :=
+    exists_additiveCech_pullback_chain_transfer g U V hinter I J cX cY n
+  obtain ⟨a, ha⟩ := exists_additiveCech_alpha_map V J
+  let fs := HomologicalComplex.cyclesMap f n s
+  let ta := HomologicalComplex.cyclesMap t n tα
+  let tb := HomologicalComplex.cyclesMap t n tβ
+  let as' := HomologicalComplex.cyclesMap a n s'
+  have hiα : (additiveCechTotal V J).iCycles n ta =
+      additiveCechAlpha V J n ((additiveCechGlobal J).iCycles n fs) := by
+    change (HomologicalComplex.cyclesMap t n ≫ (additiveCechTotal V J).iCycles n) tα = _
+    rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply, hα]
+    rw [← ConcreteCategory.comp_apply, hf, ConcreteCategory.comp_apply]
+    congr 1
+    change _ = (HomologicalComplex.cyclesMap f n ≫ (additiveCechGlobal J).iCycles n) s
+    rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply]
+  have hiβ : (additiveCechTotal V J).iCycles n tb = additiveCechBeta V J n
+      ((cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') := by
+    change (HomologicalComplex.cyclesMap t n ≫ (additiveCechTotal V J).iCycles n) tβ = _
+    rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply, hβ]
+    exact htβ _ _ hcoords
+  have ht : (additiveCechTotal V J).homologyπ n ta =
+      (additiveCechTotal V J).homologyπ n tb := by
+    change (HomologicalComplex.cyclesMap t n ≫ (additiveCechTotal V J).homologyπ n) tα =
+      (HomologicalComplex.cyclesMap t n ≫ (additiveCechTotal V J).homologyπ n) tβ
+    rw [← HomologicalComplex.homologyπ_naturality, ConcreteCategory.comp_apply,
+      ConcreteCategory.comp_apply, heq]
+  have hs : (additiveCechGlobal J).homologyπ n s' =
+      (additiveCechGlobal J).homologyπ n fs := by
+    apply (cY.globalEquiv n).injective
+    change _ = cY.globalEquiv n
+      ((HomologicalComplex.cyclesMap f n ≫ (additiveCechGlobal J).homologyπ n) s)
+    rw [← HomologicalComplex.homologyπ_naturality, ConcreteCategory.comp_apply, hc]
+    exact hclass
+  have hia : (additiveCechTotal V J).iCycles n as' =
+      additiveCechAlpha V J n ((additiveCechGlobal J).iCycles n s') := by
+    change (HomologicalComplex.cyclesMap a n ≫ (additiveCechTotal V J).iCycles n) s' = _
+    rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply, ha]
+  have hta : HomologicalComplex.cyclesMap a n fs = ta := by
+    apply (AddCommGrpCat.mono_iff_injective ((additiveCechTotal V J).iCycles n)).mp
+      inferInstance
+    change (HomologicalComplex.cyclesMap a n ≫ (additiveCechTotal V J).iCycles n) fs = _
+    rw [HomologicalComplex.cyclesMap_i, ConcreteCategory.comp_apply, ha, hiα]
+  refine ⟨as', tb, hia, hiβ, ?_⟩
+  change (HomologicalComplex.cyclesMap a n ≫ (additiveCechTotal V J).homologyπ n) s' = _
+  rw [← HomologicalComplex.homologyπ_naturality, ConcreteCategory.comp_apply, hs]
+  rw [← ConcreteCategory.comp_apply, HomologicalComplex.homologyπ_naturality,
+    ConcreteCategory.comp_apply, hta, ht]
 
 end AlgebraicGeometry.Scheme.Modules

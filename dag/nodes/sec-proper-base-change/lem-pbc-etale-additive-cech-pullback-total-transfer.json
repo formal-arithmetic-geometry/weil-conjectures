@@ -1,0 +1,158 @@
+{
+ "id": "lem-pbc-etale-additive-cech-pullback-total-transfer",
+ "kind": "statement",
+ "title": "Tuple restriction of an augmented comparison into a Cech total map",
+ "statement": "Let $g:Y\\to X$ be a scheme map [def-pc-scheme], $\\iota$ finite, and $U_i\\subset X,V_i\\subset Y$ open families with inclusions $\\bigcap_l V_{y(l)}\\subset g^{-1}(\\bigcap_l U_{y(l)})$ for every tuple. Let $I,J$ resolve the lifted additive structure sheaves [def-sp-injective-resolutions,def-sc-etale-additive-structure-restriction], and let $\\alpha:I\\to g_*J$ [def-weil-pbc-direct-image] be a cochain map whose degree-zero augmentation equals the structural coefficient map followed by $g_*(\\iota_J^0)$. Let $T$ be its explicit terminal section transfer [def-weil-pbc-etale-resolution-section-transfer]. For each $n\\geq0$ there is a cochain map $t:T_{U,I}\\to T_{V,J}$ between the Cech total complexes [def-pbc-etale-additive-cech-normalization] with $t^n\\alpha_{U,n}=\\alpha_{V,n}T^n$ and the following beta equation: for every pair of ordinary unit-module Cech cochains $x,x\\prime$ [lem-pc-flat-cech-base-change] in degree $n$ whose tuple coordinates are structural pullbacks followed by the given tuple restrictions, $t^n\\beta_{U,n}(x)=\\beta_{V,n}(x\\prime)$. No homology class, canonical equivalence, cycle, covering or affine hypothesis is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, explicit tuple restriction maps of double complexes and the commuting augmented diagram in its proof; Tag 03P2, structural-function coefficient sections. Only chain-map compatibility is claimed, without inversion of an augmentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-resolution-section-transfer"
+ ],
+ "proof": [
+  {
+   "text": "For each tuple let A_y and B_y be the products of the source and target opens. Compose the open-subscheme map B_y -> g^{-1}(A_y) from hinter with openSectionPullback to obtain k_y:B_y -> g.Etale(A_y). Define each (p,q) coordinate by source projection, evaluation of α^q at A_y, and restriction along k_y. The square under deletion of an entry commutes by pullback projection extensionality. Section-transfer naturality and the alternating sum give the horizontal equation; α.comm and naturality of the J differential give the vertical equation. Flip and totalize: bidegrees, hence signs, are preserved. The same pullback square with the terminal objects and section-transfer naturality give the alpha equation.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization",
+    "def-weil-pbc-etale-resolution-section-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of J.ι and the supplied augmentation equation identify each resolution-degree-zero coordinate with the structural coefficient map followed by J.ι at B_y. The inverse restrictFunctorΓ isomorphism in beta identifies module sections with functions on the open subscheme; its naturality identifies restriction along hinter, and structural pullback on these functions is unitToPushforwardObjUnit. Lift by ULift and apply the supplied coordinate equality. Product projection extensionality and total summand inclusion naturality give the beta equation. Empty products and empty intersections introduce no assumption; degree zero uses the same equations.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization",
+    "def-sc-etale-additive-structure-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof_origin": {
+  "by": "S4 worker (agent-written Lean argument)",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, explicit tuple restriction maps of double complexes and the commuting augmented diagram in its proof; Tag 03P2, structural-function coefficient sections. Only chain-map compatibility is claimed, without inversion of an augmentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Cech augmentation under morphism of sheaves and pullback of open families",
+   "results": "{\"t\": \"2026-10-13T12:56:48Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of Cech augmentation under morphism of sheaves and pullback of open families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.GrothendieckTopology.diagramPullback\", \"TopCat.Sheaf.interUnionPullbackConeLift_right\", \"TopCat.Sheaf.interUnionPullbackConeLift_left\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"CategoryTheory.GrothendieckTopology.diagramPullback_app\", \"CategoryTheory.PresheafHom.IsSheafFor.app_cond\", \"CategoryTheory.regularTopology.mapToEqualizer_eq_comp\"], \"digest\": \"30fa53f949de29c8\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic augmentation and homology APIs; no exact theorem for these explicit additive Cech components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ_naturality\"",
+   "results": "{\"t\": \"2026-10-13T12:57:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"homology\\u03c0_naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.leftHomology\\u03c0_naturality\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0_naturality'\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0_naturality'_assoc\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0_naturality_assoc\", \"CategoryTheory.ShortComplex.homology\\u03c0_naturality\", \"CategoryTheory.ShortComplex.homology\\u03c0_naturality_assoc\", \"HomologicalComplex.homology\\u03c0_naturality\", \"HomologicalComplex.homology\\u03c0_naturality_assoc\"], \"digest\": \"a56b297ff1d6ac2f\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic augmentation and homology APIs; no exact theorem for these explicit additive Cech components."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(augment|refin)|cyclesMap_i",
+   "results": "{\"t\": \"2026-10-13T12:57:19Z\", \"tool\": \"grep\", \"query\": \"cech.*(augment|refin)|cyclesMap_i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"digest\": \"1424df7a7f8bb40e\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic augmentation and homology APIs; no exact theorem for these explicit additive Cech components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global section restriction augmentation into the Cech total complex is a cochain map",
+   "results": "{\"t\": \"2026-10-13T12:58:56Z\", \"tool\": \"leansearch\", \"query\": \"The global section restriction augmentation into the Cech total complex is a cochain map\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation preserving chain map from an exact inverse image resolution into an injective resolution",
+   "results": "{\"t\": \"2026-10-13T13:02:54Z\", \"tool\": \"leanfinder\", \"query\": \"Augmentation preserving chain map from an exact inverse image resolution into an injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.descFSucc\", \"CategoryTheory.InjectiveResolution.descFOne\", \"CategoryTheory.InjectiveResolution.desc\", \"CategoryTheory.InjectiveResolution.descFZero\", \"CategoryTheory.InjectiveResolution.\\u03b9'\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroZero\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap\", \"CategoryTheory.InjectiveResolution.Hom.\\u03b9_comp_hom\"], \"digest\": \"a71efa1c259bd250\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic augmentation and homology APIs; no exact theorem for these explicit additive Cech components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"desc\"",
+   "results": "{\"t\": \"2026-10-13T13:02:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"InjectiveResolution\\\", \\\"desc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.descFZero\", \"CategoryTheory.InjectiveResolution.descFOne\", \"CategoryTheory.InjectiveResolution.desc\", \"CategoryTheory.InjectiveResolution.descIdHomotopy\", \"CategoryTheory.InjectiveResolution.descCompHomotopy\", \"CategoryTheory.InjectiveResolution.descFOne_zero_comm\", \"CategoryTheory.InjectiveResolution.desc_commutes\", \"CategoryTheory.InjectiveResolution.desc_commutes_zero\"], \"digest\": \"8fa07c4b8e1d9424\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic augmentation and homology APIs; no exact theorem for these explicit additive Cech components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationPrescribedClass",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison: transport the equal augmentation classes after choosing the prescribed target global class. Lemma 20.15.1, explicit tuple restriction maps of double complexes and the commuting augmented diagram in its proof; Tag 03P2, structural-function coefficient sections. Only chain-map compatibility is claimed, without inversion of an augmentation.",
+   "via": [
+    "lem-pbc-etale-additive-cech-augmentation-prescribed-class",
+    "lem-pbc-etale-additive-cech-augmentation-transfer",
+    "lem-pbc-etale-additive-cech-normalized-inverse-image",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechPullbackTotalTransfer.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_additiveCech_pullback_total_transfer",
+  "statement": "theorem exists_additiveCech_pullback_total_transfer\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (J : InjectiveResolution Y.etaleAdditiveSheaf)\n    (α : I.cocomplex ⟶\n      ((Etale.lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex\n        (.up ℕ)).obj J.cocomplex)\n    (hα : I.ι.f 0 ≫ α.f 0 = Scheme.etaleAdditiveSheafToLowerStar g ≫\n      (Etale.lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0))\n    (n : ℕ) :\n    ∃ t : additiveCechTotal U I ⟶ additiveCechTotal V J,\n      (additiveCechAlpha U I n ≫ t.f n =\n        (Etale.globalResolutionSectionTransfer g I.cocomplex J.cocomplex α).f n ≫\n        additiveCechAlpha V J n) ∧\n      (∀ (x : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).X n)\n        (x' : (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).X n),\n        (∀ y : Fin (n + 1) → ι,\n            cechCoordinate Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf) n y\n                x' =\n              (show Y.Modules from SheafOfModules.unit Y.ringCatSheaf).presheaf.map\n                (homOfLE (hinter n y)).op\n                ((SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom).val.app\n                  (op (⨅ l, U (y l)))\n                  (cechCoordinate X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf) n y\n                    x))) → t.f n (additiveCechBeta U I n x) = additiveCechBeta V J n x')",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T133747-L-45072",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T133747-L-45072",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
