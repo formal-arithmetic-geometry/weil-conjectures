@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisDiagram
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
 public import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
+import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumnsEven
+import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumnsOdd
 
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
@@ -89,6 +91,22 @@ theorem perfect_hom_mayerVietoris_geometric_columns
           ((A.diagram F h.stageQCoh ⋙ perfectHomTriangleRowFunctor Y P).flip.obj r)
           ⟨(perfectHomTriangleRow Y P (A.cocone F d h.stageQCoh h.limitQCoh).pt).obj r,
             (perfectHomTriangleRowCoconeMap Y P (A.diagram F h.stageQCoh)
-              (A.cocone F d h.stageQCoh h.limitQCoh)).app r⟩) := by sorry
+              (A.cocone F d h.stageQCoh h.limitQCoh)).app r⟩) := by
+  intro r hr
+  have cases : r.val = 0 ∨ r.val = 1 ∨ r.val = 2 ∨ r.val = 3 ∨ r.val = 4 := by omega
+  rcases cases with h0 | h1 | h2 | h3 | h4
+  · apply perfect_hom_mayerVietoris_geometric_columns_even R c i X s₀ U V hU hV Y t ht s hs
+      P Q hP hQ F d h A r
+    exact Or.inl h0
+  · apply perfect_hom_mayerVietoris_geometric_columns_odd R c i X s₀ U V hU hV Y t ht s hs
+      P Q hP hQ F d h A r
+    exact Or.inl h1
+  · omega
+  · apply perfect_hom_mayerVietoris_geometric_columns_even R c i X s₀ U V hU hV Y t ht s hs
+      P Q hP hQ F d h A r
+    exact Or.inr h3
+  · apply perfect_hom_mayerVietoris_geometric_columns_odd R c i X s₀ U V hU hV Y t ht s hs
+      P Q hP hQ F d h A r
+    exact Or.inr h4
 
 end AlgebraicGeometry

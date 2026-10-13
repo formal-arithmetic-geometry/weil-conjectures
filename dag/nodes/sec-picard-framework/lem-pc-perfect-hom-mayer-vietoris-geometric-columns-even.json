@@ -1,0 +1,108 @@
+{
+ "id": "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-hom-mayer-vietoris-geometric-columns",
+   "place": "Fixed even outer columns",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local recognition of the even geometric outer columns",
+ "statement": "The outer-column recognition statement of lem-pc-perfect-hom-mayer-vietoris-geometric-columns restricted to indices 0 and 3.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer–Vietoris induction step"
+ },
+ "stmt_deps": [
+  "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+ ],
+ "proof": [
+  {
+   "text": "The full geometric recognition argument applies to the fixed outer indices 0 and 3, using the representing cocone, open adjunction, and local comparison constructors.",
+   "uses": [
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris outer Hom column recognition fixed parity",
+   "results": "No exact packaged geometric recognition theorem found.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "PerfectHomLocalMap",
+   "results": "Existing local-map constructors only.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect_hom_mayerVietoris_geometric_columns",
+   "results": "Only the parent statement and these fixed-column declarations.",
+   "verdict": "no existing match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisColumns",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisGeometricColumnsEven",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomMayerVietorisGeometricColumnsEven.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_mayerVietoris_geometric_columns_even",
+  "declarations": [
+   "AlgebraicGeometry.perfect_hom_mayerVietoris_geometric_columns_even"
+  ],
+  "statement": "theorem perfect_hom_mayerVietoris_geometric_columns_even\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V)\n    (Y : Scheme.{u}) (t : Y ⟶ X) [IsOpenImmersion t]\n    (ht : t.opensRange = U ⊔ V)\n    (s : Y ⟶ Spec (R.obj i)) (hs : s = t ≫ s₀)\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ W : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))]\n    (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q)\n    (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F)\n    (h : PerfectHomPushPullData R c s Q F d)\n    (A : PerfectHomMVFamily Y (t ⁻¹ᵁ U) (t ⁻¹ᵁ V)) :\n    ∀ (r : Fin 5), r.val = 0 ∨ r.val = 3 →\n      PerfectHomLocalMap R c i X s₀ U V\n        (colimit.desc\n          ((A.diagram F h.stageQCoh ⋙ perfectHomTriangleRowFunctor Y P).flip.obj r)\n          ⟨(perfectHomTriangleRow Y P (A.cocone F d h.stageQCoh h.limitQCoh).pt).obj r,\n            (perfectHomTriangleRowCoconeMap Y P (A.diagram F h.stageQCoh)\n              (A.cocone F d h.stageQCoh h.limitQCoh)).app r⟩)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T190141-L-3216494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T190141-L-3216494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
