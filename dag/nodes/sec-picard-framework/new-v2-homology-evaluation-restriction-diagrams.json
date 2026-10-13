@@ -1,0 +1,137 @@
+{
+ "id": "new-v2-homology-evaluation-restriction-diagrams",
+ "kind": "statement",
+ "title": "Projection and homology compatible restriction comparisons for cycle evaluation",
+ "statement": "Let X be a scheme and T,J integer cochain complexes of X-modules [new-b2-homology-evaluation-definitions]. For opens V of X and W of V, let F be restriction to V followed by restriction to the site over W, A=F(T), K=F(J), P=Hom(T,J) and Q=Hom(A,K) [def-pur-hom-complex]. Write ev=P.iCycles(n);pi;Hom(T.iCycles(-n),1), and ev'=Q.iCycles(n);pi';Hom(A.iCycles(-n),1), with the fixed projections [lem-sc-hom-complex-projections]. There exist isomorphisms a:F(H^n(P))->H^n(Q), b:F(Hom(H^(-n)(T),H^0(J)))->Hom(H^(-n)(A),H^0(K)), c:F(Z^n(P))->Z^n(Q), s:F(Hom(Z^(-n)(T),Z^0(J)))->Hom(Z^(-n)(A),Z^0(K)), t:F(Hom(Z^(-n)(T),J^0))->Hom(Z^(-n)(A),K^0), and v:F(Hom(Z^(-n)(T),H^0(J)))->Hom(Z^(-n)(A),H^0(K)) [def-pur-sheaf-hom]. They satisfy the five equations F(ev);t=c;ev', F(Hom(1,J.iCycles(0)));t=s;Hom(1,K.iCycles(0)), F(Hom(1,J.homologyPi(0)));v=s;Hom(1,K.homologyPi(0)), F(P.homologyPi(n));a=c;Q.homologyPi(n), and F(Hom(T.homologyPi(-n),1));v=b;Hom(A.homologyPi(-n),1). No evaluation morphism on homology is assumed or constructed.",
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "section-hom-complexes: product terms and signed differential. Tag 08DL: restriction comparison construction. This refines steps 1 and 2 of new-e3-homology-evaluation-restriction-comparison."
+ },
+ "proof": [
+  {
+   "text": "Use the natural internal-Hom comparisons for localization, the open-site equivalence and the natural isomorphism overFunctorEquiv for V to obtain a natural comparison F(Hom(M,N)) ≅ Hom(F(M),F(N)). F preserves the integer-indexed products: over restriction is precomposition on underlying sheaves, where products are computed sectionwise, and the open-site equivalence preserves limits. The two limiting fans of fixed Hom projections therefore determine a degreewise isomorphism F(P) -> Q carrying each projection to this factor comparison. Check the differential identity after every projection. The signed two-term formula, additivity of F and naturality for pre- and postcomposition give equality, hence a chain isomorphism.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-sc-internal-hom-over-equiv",
+    "lem-sc-internal-hom-over-naturality",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to an over site preserves finite limits and finite colimits, as expressed by moduleOverFunctor_limits_proof and moduleOverFunctor_colimits_proof in the cited node; combine this with overFunctorEquiv and the open-site equivalence to see that F is exact. Its cycle and homology comparisons, followed by those of the preceding chain isomorphism, give c and a. Naturality of the cycle-to-homology quotient under these universal-property comparisons gives F(P.homologyPi(n));a=c;Q.homologyPi(n). Apply the same exact comparisons to T and J and combine them with the internal-Hom comparison to define s,t,v,b. Internal-Hom naturality yields the inclusion and two quotient squares. The projection identity of the chain isomorphism and the cycle inclusion naturality yield the raw evaluation square. This is valid for zero complexes and empty opens, since all isomorphisms and equations are universal-property comparisons.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-internal-hom-over-equiv",
+    "lem-sc-internal-hom-over-naturality",
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2",
+  "date": "2026-10-14",
+  "description": "Steps 1 and 2 of the parent plan with all five needed naturality squares stated explicitly; source universal-property constructions expanded by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaf Hom complexes commutes with homology and evaluation on cycles",
+   "date": "2026-10-14",
+   "results": "Eight results; restrictionCyclesIso_hom_iCycles and related shape-embedding restrictions, but no sheaf restriction comparison.",
+   "verdict": "No exact match; these restrict complex indices rather than a ringed site."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyFunctorIso",
+   "date": "2026-10-14",
+   "results": "HomologicalComplex.homologyFunctorIso, homologyFunctorIso_hom_app, homologyFunctorIso_inv_app.",
+   "verdict": "Identifies homology with short-complex homology; does not give evaluation-compatible restriction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyEvaluation.*restrict|overHomObjIso|homComplex_restrict",
+   "date": "2026-10-14",
+   "results": "msearch grep: 0 Mathlib hits. Repository rg found abstract HomComplexRestrictOpen/Scheme isomorphisms and InternalHomOverNaturality; no theorem with the five comparison equations.",
+   "verdict": "No exact match; abstract isomorphisms lack compatibility with chosen product projections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaf module Hom complexes preserves cycle evaluation and homology projections",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluationRestrictionComparison",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation: restriction compatibility for the Hom cycle evaluation, steps 1 and 2 of the parent comparison.",
+   "via": [
+    "new-e3-homology-evaluation-restriction-comparison",
+    "new-b2-homology-evaluation-local-iso-core",
+    "new-b2-homology-evaluation-local-iso",
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationRestrictionDiagrams",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationRestrictionDiagrams.lean",
+  "declaration": "CategoryTheory.homologyEvaluation_restriction_diagrams",
+  "statement": "theorem homologyEvaluation_restriction_diagrams (X : Scheme.{u}) (T J : CochainComplex X.Modules ℤ) (n : ℤ) (V : X.Opens) (W : V.toScheme.Opens) : let F := Scheme.Modules.restrictFunctor V.ι ⋙ SheafOfModules.overFunctor V.toScheme.ringCatSheaf W let P := homComplex (R := X.sheaf) T J let A := (moduleOpenOverComplexFunctor X V W).obj T let K := (moduleOpenOverComplexFunctor X V W).obj J let Q := homComplex (R := V.toScheme.sheaf.over W) A K let π := (Classical.choose (homComplex_projections_exists (R := V.toScheme.sheaf.over W))) A K n (-n) 0 (by omega) ∃ a : F.obj (P.homology n) ≅ Q.homology n, ∃ b : F.obj (SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0)) ≅ SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (A.homology (-n)) (K.homology 0), ∃ c : F.obj (P.cycles n) ≅ Q.cycles n, ∃ s : F.obj (SheafOfModules.homObj (R := X.sheaf) (T.cycles (-n)) (J.cycles 0)) ≅ SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (A.cycles (-n)) (K.cycles 0), ∃ t : F.obj (SheafOfModules.homObj (R := X.sheaf) (T.cycles (-n)) (J.X 0)) ≅ SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (A.cycles (-n)) (K.X 0), ∃ v : F.obj (SheafOfModules.homObj (R := X.sheaf) (T.cycles (-n)) (J.homology 0)) ≅ SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (A.cycles (-n)) (K.homology 0), F.map (P.iCycles n ≫ homologyEvaluationProjection X T J n ≫ SheafOfModules.homObjMap (R := X.sheaf) (T.iCycles (-n)) (𝟙 _)) ≫ t.hom = c.hom ≫ Q.iCycles n ≫ π ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) (A.iCycles (-n)) (𝟙 _) ∧ F.map (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 _) (J.iCycles 0)) ≫ t.hom = s.hom ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) (𝟙 _) (K.iCycles 0) ∧ F.map (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 _) (J.homologyπ 0)) ≫ v.hom = s.hom ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) (𝟙 _) (K.homologyπ 0) ∧ F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n ∧ F.map (SheafOfModules.homObjMap (R := X.sheaf) (T.homologyπ (-n)) (𝟙 _)) ≫ v.hom = b.hom ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-internal-hom-over-equiv",
+  "lem-sc-internal-hom-over-naturality",
+  "new-b2-homology-evaluation-definitions"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T215615-L-902675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T215615-L-902675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

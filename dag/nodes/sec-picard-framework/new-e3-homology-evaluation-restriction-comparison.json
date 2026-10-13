@@ -30,49 +30,40 @@
  ],
  "proof": [
   {
-   "text": "Write A=F(T), K=F(J), Q=Hom(A,K), with F the two-step restriction. Construct the Hom comparison degreewise from fixed product projections and the natural local-map internal-Hom identifications. Use preservation of products by restriction and by the open equivalence. Checking each projection with the Hom differential equation gives a chain isomorphism whose projections preserve evaluation, not merely an abstract isomorphism of complexes.",
-   "uses": [
-    "lem-sc-hom-complex-restrict-open",
-    "lem-sc-hom-complex-restrict-scheme",
-    "lem-sc-internal-hom-over-equiv",
-    "lem-sc-hom-complex-projections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction is exact: overFunctor preserves finite limits and colimits, and overEquiv is an equivalence. Apply the homology comparison to the preceding chain isomorphism to obtain a. Use the local internal-Hom comparison and the homology comparisons for T,J to obtain b. Set g=a.inv followed by F(e) followed by b.hom, so the asserted square holds by cancellation.",
-   "uses": [
-    "lem-sc-derived-hom-mayer-vietoris",
-    "lem-sc-internal-hom-over-equiv",
-    "def-pur-sheaf-hom",
-    "new-b2-homology-evaluation-definitions"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict the degree-n projection to Q-cycles and A-cycles. The Hom differential evaluated on these cycles vanishes in K degree one. The kernel universal property gives a morphism d to Hom(A-cycles,K-cycles) and the first identity. Evaluate the second identity on each local pair of cycles. The projection-compatible restriction comparison carries this pair to ambient cycles, and he identifies its g-value with the K-homology class of the constructed K-cycle. Internal-Hom extensionality and sheaf separatedness prove the identity. Empty opens and zero complexes use exactly the same construction.",
+   "text": "First construct the ambient cycle pairing d0 directly. Compose the fixed degree-n product projection with the inclusions of Hom cycles and source cycles. Apply the Hom differential formula in degree (-n,1); the source-cycle differential is zero, so the evaluation is killed by the target differential. Uncurry via tensorHomEquiv, lift through the kernel defining target cycles, and curry back. This proves the inclusion identity. At each open U and local cycles phi,z, its value b satisfies exactly the premise of IsHomologyEvaluation. Apply he to obtain the homology identity at the identity slice. Restrict phi to each slice object and use naturality of local linear maps to extend this to every slice component. Sheaf and module-morphism extensionality prove the ambient homology identity.",
    "uses": [
     "lem-sc-hom-complex-projections",
+    "new-b2-homology-evaluation-definitions",
     "def-pur-sheaf-hom",
-    "new-b2-homology-evaluation-definitions"
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false
+  },
+  {
+   "text": "Obtain the six restriction isomorphisms a,b,c,s,t,v and their five compatibility equations from the restriction-diagram lemma. This lemma is independent of e and of IsHomologyEvaluation and records only the canonical comparison data.",
+   "uses": [
+    "new-v2-homology-evaluation-restriction-diagrams"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved generic transport_cycle_pairing lemma. It defines g=a.inv;F(e);b.hom and d=c.inv;F(d0);s.hom. Rewrite d followed by target cycle inclusion using the second comparison square, F(d0;inclusion)=F(raw evaluation), then the first square and c.inv;c.hom=1. For the homology identity similarly use the third square and the ambient identity; use the fifth square for source homology and the fourth square in the form c.inv;F(P.homologyPi)=Q.homologyPi;a.inv. Associativity gives the asserted formula. Finally a.hom;a.inv=1 gives the square for F(e). The helper is proved for arbitrary categories and functors to avoid repeatedly unfolding the concrete sheaf types.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
-  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-pc-sheaf-modules-tensor-closed",
   "lem-sc-hom-complex-projections",
-  "lem-sc-hom-complex-restrict-open",
-  "lem-sc-hom-complex-restrict-scheme",
-  "lem-sc-internal-hom-over-equiv",
-  "new-b2-homology-evaluation-definitions"
+  "new-b2-homology-evaluation-definitions",
+  "new-v2-homology-evaluation-restriction-diagrams"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "E3 second reader",
+  "by": "worker",
+  "agent": "V2",
   "date": "2026-10-14",
-  "description": "Strict subargument of roof comparison, replacing a false universal square; expanded from the cited Hom differential and restriction constructions."
+  "description": "Ambient kernel lift and conversion of the local representative hypothesis are proved in Lean. Restriction comparison data are split into one strict subargument without any evaluation morphism. Generic categorical transport completes the original theorem."
  },
  "mathlib_searches": [
   {
@@ -139,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T211057-L-389969",
+  "landing": "20261013T215615-L-902675",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
