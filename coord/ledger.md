@@ -13208,3 +13208,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapSurjective (stage 3; reviewer PASS; first push; landing 20261013T165647-L-1810221 (interface); batch 20261013T165635; modules 2; new nodes 1)
 - 16:56 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates (stage 3; reviewer PASS; first push; landing 20261013T165648-L-1810328 (proof); batch 20261013T165635; modules 1; new nodes 1)
 - 16:56 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.MixedSectionsCompositionKInjective (stage 3; reviewer PASS; first push; landing 20261013T165648-L-1810468 (interface); batch 20261013T165635; modules 3; new nodes 2)
+- 16:56 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison (stage 3; reviewer PASS; first push; landing 20261013T165649-L-1810710 (interface); batch 20261013T165635; modules 4; new nodes 3)
