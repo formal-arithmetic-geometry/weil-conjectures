@@ -1,0 +1,143 @@
+{
+ "id": "def-weil-pbc-popescu-localized-polynomial-image",
+ "kind": "definition",
+ "title": "Explicit localized polynomial image in a local algebra",
+ "statement": "Let $k$ be a field, $B$ a commutative local $k$-algebra, $A_0\\subseteq B$ a $k$-subalgebra, and $x\\in B$. Define $\\theta:A_0[T]\\to B$ by inclusion on coefficients and $T\\mapsto x$. Put $P=\\theta^{-1}(\\mathfrak m_B)$, which is prime. The localized polynomial image is $A=\\operatorname{im}(A_0[T]_P\\to B)$ [def-weil-pbc-localization-at-prime], where evaluation extends because every polynomial outside $P$ has unit image. This specifies the subalgebra itself, rather than an unspecified witness. It is local, contains $A_0$ and $x$, and is essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra] whenever $A_0$ is.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI, transcendental case: localization of the polynomial evaluation map and its image; admissibility from Tag 07FH. Sources read at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The complement of P consists precisely of polynomials whose evaluations are units. Extend evaluation by the localization universal property and take its k-algebra range. Constants show A₀ ≤ A and T shows x ∈ A. A is a nontrivial quotient of the local ring A₀[T]_P, so is local.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If A₀ is essentially of finite type over k, compose its structure map with the polynomial extension and localization; both are essentially of finite type. The surjection to the image preserves essential finite type.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI, transcendental case; explicit localization image, with the fibre flatness argument of Tag 00MP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An Artinian local flat subalgebra enlarged by adjoining a transcendental residue and localizing remains flat and Artinian",
+   "results": "Algebra.QuasiFinite.instIsArtinianRingFiber; IsArtinianRing.localization_artinian; IsArtinianRing.instLocalization; instFlatAtPrime; RingHom.Flat.ofLocalizationPrime; Algebra.Smooth.flat_of_isNoetherianRing; RingHom.Flat.localRingHom; Algebra.HasGoingDown.of_flat",
+   "date": "2026-10-13",
+   "verdict": "No single declaration for the explicit image with the required properties; use the listed Mathlib constituents."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.lift, IsUnit",
+   "results": "IsLocalization.lift; IsLocalization.lift_comp; IsLocalization.lift_eq; IsLocalization.lift_unique; IsLocalization.lift_injective_iff; IsLocalization.lift_mk'_spec; IsLocalization.lift_surjective_iff; IsLocalization.lift_mk'",
+   "date": "2026-10-13",
+   "verdict": "No single declaration for the explicit image with the required properties; use the listed Mathlib constituents."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*adjoin|adjoin.*residue",
+   "results": "Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory/LocalRing/Etale.lean",
+   "date": "2026-10-13",
+   "verdict": "No single declaration for the explicit image with the required properties; use the listed Mathlib constituents."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localize a polynomial ring over an Artinian local ring at the extended maximal ideal and evaluate at a transcendental residue",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuTranscendentalResidueEnlargement",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07FI transcendental case: evaluation, localization and its image in the Artinian ambient algebra",
+   "via": [
+    "lem-weil-pbc-popescu-transcendental-residue-enlargement",
+    "lem-weil-pbc-popescu-unscaled-unit-basis",
+    "lem-weil-pbc-popescu-denominator-basis-enlargement",
+    "lem-weil-pbc-popescu-quotient-basis-enlargement",
+    "lem-weil-pbc-popescu-solution-modulo-choose",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuLocalizedPolynomialImage",
+  "file": "lean/Sheaf/RingTheory/PopescuLocalizedPolynomialImage.lean",
+  "declaration": "Algebra.popescuLocalizedPolynomialImage",
+  "statement": "def popescuLocalizedPolynomialImage (A₀ : Subalgebra k B) (x : B) :\n    Subalgebra k B",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13",
+  "declarations": [
+   "Algebra.popescuPolynomialEval",
+   "Algebra.popescuPolynomialPrime",
+   "Algebra.popescuLocalizedPolynomialMap",
+   "Algebra.popescuLocalizedPolynomialImage",
+   "Algebra.popescuLocalizedPolynomialMap_algebraMap",
+   "Algebra.le_popescuLocalizedPolynomialImage",
+   "Algebra.mem_popescuLocalizedPolynomialImage",
+   "Algebra.essFiniteType_popescuLocalizedPolynomialImage"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142857-L-497922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142857-L-497922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

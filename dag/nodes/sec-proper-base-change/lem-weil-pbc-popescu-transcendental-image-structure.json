@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-popescu-transcendental-image-structure",
+ "kind": "statement",
+ "title": "Artinianity and flatness of the explicit transcendental image",
+ "statement": "Let $k$ be a field and $B$ an Artinian local commutative $k$-algebra. Let $A_0\\subseteq B$ be a local admissible subalgebra [def-weil-pbc-popescu-admissible-subalgebra] relative to $\\mathfrak m_B$, with local inclusion. Give $K=B/\\mathfrak m_B$ the structure of an $F_0=A_0/\\mathfrak m_{A_0}$-algebra compatible with the $k$-scalar tower and with residues of every element of $A_0$. Let $x\\in B$ have transcendental residue over $F_0$ [def-weil-algebraic-element]. For the explicit image $A$ [def-weil-pbc-popescu-localized-polynomial-image], $A$ is Artinian, its inclusion into $B$ is flat [def-weil-pbc-flat-ring-map], and $\\mathfrak m_A B=\\mathfrak m_B$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI, transcendental case: localization of the polynomial evaluation map and its image; admissibility from Tag 07FH. Sources read at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-localized-polynomial-image",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Reduction of θ factors as the residue coefficient map followed by evaluation at α. Transcendence makes the latter injective. The polynomial coefficient-map kernel is m₀[T], so P=m₀[T]. The Noetherian localization D=A₀[T]_P has maximal ideal m₀D; this ideal is nilpotent. The Artinian iff nilpotent maximal ideal criterion in Mathlib gives Artinianity of D. Its image A is a quotient of D, hence Artinian. Surjectivity D→A and ideal-map composition give m_A B=m₀B=m_B.",
+   "uses": [
+    "def-weil-pbc-popescu-localized-polynomial-image",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every homomorphism from an Artinian local ring to a nontrivial ring reflects units: a nonunit in the source is nilpotent, so cannot have unit image. Thus A₀→D and D→B are local. The quotient D/m₀D is a field because m₀D=m_D. Its tensor fibre with B is a vector space, therefore free and flat. Admissibility gives flatness of B over A₀; apply the Noetherian fibre criterion with R=A₀, S=D, S′=M=B to prove flatness of B over D.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-vector-space-free",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-criterion-flatness-fibre-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local flat evaluation map D→B is faithfully flat. Mathlib gives faithful scalar action, hence injectivity of its algebra map. The range restriction D→A is now bijective. Its inverse is flat; composing that inverse with D→B proves flatness of A→B.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-popescu-localized-polynomial-image",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-vector-space-free",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI, transcendental case; explicit localization image, with the fibre flatness argument of Tag 00MP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An Artinian local flat subalgebra enlarged by adjoining a transcendental residue and localizing remains flat and Artinian",
+   "results": "Algebra.QuasiFinite.instIsArtinianRingFiber; IsArtinianRing.localization_artinian; IsArtinianRing.instLocalization; instFlatAtPrime; RingHom.Flat.ofLocalizationPrime; Algebra.Smooth.flat_of_isNoetherianRing; RingHom.Flat.localRingHom; Algebra.HasGoingDown.of_flat",
+   "date": "2026-10-13",
+   "verdict": "No single declaration for the explicit image with the required properties; use the listed Mathlib constituents."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.lift, IsUnit",
+   "results": "IsLocalization.lift; IsLocalization.lift_comp; IsLocalization.lift_eq; IsLocalization.lift_unique; IsLocalization.lift_injective_iff; IsLocalization.lift_mk'_spec; IsLocalization.lift_surjective_iff; IsLocalization.lift_mk'",
+   "date": "2026-10-13",
+   "verdict": "No single declaration for the explicit image with the required properties; use the listed Mathlib constituents."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*adjoin|adjoin.*residue",
+   "results": "Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory/LocalRing/Etale.lean",
+   "date": "2026-10-13",
+   "verdict": "No single declaration for the explicit image with the required properties; use the listed Mathlib constituents."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localize a polynomial ring over an Artinian local ring at the extended maximal ideal and evaluate at a transcendental residue",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuTranscendentalResidueEnlargement",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07FI transcendental case: evaluation, localization and its image in the Artinian ambient algebra",
+   "via": [
+    "lem-weil-pbc-popescu-transcendental-residue-enlargement",
+    "lem-weil-pbc-popescu-unscaled-unit-basis",
+    "lem-weil-pbc-popescu-denominator-basis-enlargement",
+    "lem-weil-pbc-popescu-quotient-basis-enlargement",
+    "lem-weil-pbc-popescu-solution-modulo-choose",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuTranscendentalImageStructure",
+  "file": "lean/Sheaf/RingTheory/PopescuTranscendentalImageStructure.lean",
+  "declaration": "Algebra.popescu_transcendental_image_structure",
+  "statement": "theorem popescu_transcendental_image_structure\n    (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B]\n    [IsArtinianRing B] [IsLocalRing B]\n    (A₀ : Subalgebra k B) [IsLocalRing A₀]\n    (hA₀ : A₀.IsPopescuAdmissible (IsLocalRing.maximalIdeal B))\n    (x : B) [IsLocalHom A₀.val]\n    [Algebra (IsLocalRing.ResidueField A₀) (IsLocalRing.ResidueField B)]\n    [IsScalarTower k (IsLocalRing.ResidueField A₀) (IsLocalRing.ResidueField B)]\n    (hmap : ∀ a₀ : A₀, algebraMap (IsLocalRing.ResidueField A₀)\n      (IsLocalRing.ResidueField B) (IsLocalRing.residue A₀ a₀) =\n        IsLocalRing.residue B (a₀ : B))\n    (hα : Transcendental (IsLocalRing.ResidueField A₀) (IsLocalRing.residue B x)) :\n    IsArtinianRing (popescuLocalizedPolynomialImage A₀ x) ∧\n      (popescuLocalizedPolynomialImage A₀ x).val.toRingHom.Flat ∧\n      (IsLocalRing.maximalIdeal (popescuLocalizedPolynomialImage A₀ x)).map\n        (popescuLocalizedPolynomialImage A₀ x).val.toRingHom =\n          IsLocalRing.maximalIdeal B",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142857-L-497922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142857-L-497922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
