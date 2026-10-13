@@ -14,39 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Transport F through the inverse of Modules.overEquiv U. Apply the actual extension-by-zero presheaf followed by module sheafification, termwise on complexes and then on the derived category. Exactness and the adjunction in [lem-sc-derived-open-restriction-adjunction-exact] induce a derived adjunction. The adjoint of alpha is beta from this concrete ambient source R to E.",
+   "text": "Compose the inverse of Modules.overEquiv U with the actual exact extension-by-zero functor of [lem-sc-derived-open-restriction-adjunction-exact]. Compose the adjunction with the inverse equivalence adjunction. The natural isomorphism of [lem-pc-open-extension-restriction-iso], whiskered with the equivalence functors, gives left-adjoint followed by restriction isomorphic to the identity. Apply the degreewise adjunction to cochain complexes and descend it through DerivedCategory.Q using Mathlib Adjunction.localization. Functor.mapDerivedCategoryCompIso, mapDerivedCategoryNatIso and mapDerivedCategoryIdIso give the same composite isomorphism in the derived categories. Mathlib fullyFaithfulLOfCompIsoId makes the derived left adjoint fully faithful, hence its adjunction unit is invertible. Define R as that concrete functor applied to F and beta as the adjoint transpose of alpha. Let e be the inverse unit component. Cancel the unit in homEquiv_unit to obtain the restriction equation.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact"
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-open-extension-restriction-iso"
    ],
    "elementary": false
   },
   {
-   "text": "The unit is invertible: the stalk comparison and germ formulas of [lem-sc-module-extension-by-zero-stalk-maps] identify it with the identity on every stalk in U. Equivalently use [lem-pc-open-extension-restriction-iso]. Apply mapDerivedCategoryCompIso, mapDerivedCategoryNatIso and mapDerivedCategoryIdIso to the natural isomorphism and compose with the equivalence comparisons. Its inverse is e : R restricted to U isomorphic to F. The adjunction unit equation gives beta restricted to U = e.hom followed by alpha.",
+   "text": "Apply [lem-sc-open-perfect-model-transport] to R, F, the original perfectness hypothesis, and the restriction isomorphism e. This supplies precisely the local strictly perfect representatives at points of U; there is no condition outside U.",
    "uses": [
-    "lem-pc-open-extension-restriction-iso",
-    "lem-sc-module-extension-by-zero-stalk-maps"
+    "lem-sc-open-perfect-model-transport"
    ],
    "elementary": false
   },
   {
-   "text": "For x in U, take a local strictly perfect model K of F on an open O of U. Regard O as an open of X contained in U; the localized module sites are canonically equivalent. Transport K termwise through that equivalence. Its bounded terms remain bounded since equivalences preserve zero objects. For each finite-free retract transport its inclusion and projection and identify the finite free objects by the coproduct comparison and the unit-module isomorphism. Functoriality preserves their retract equation. The iterated restriction comparison transports the model isomorphism, giving the displayed ambient local perfectness. Exactness makes derived homology equal to the functor applied to homology; the interior stalk comparison of [lem-sc-module-extension-by-zero-stalk-maps] gives support. No conclusion is asserted away from U.",
-   "uses": [
-    "def-pc-perfect-complex",
-    "lem-sc-module-extension-by-zero-stalk-maps"
-   ],
-   "elementary": false
+   "text": "For each i and x in U, apply homology to e. Functor.mapDerivedCategoryHomologyFunctorIso compares exact restriction of homology with homology of restriction. Forget modules to abelian presheaves and apply the stalk functor. Modules.overFunctorEquiv U and Modules.restrictStalkNatIso U.ι identify the stalk of the restricted homology with its ambient stalk. Their composite gives an additive equivalence between the ambient homology stalk and that of F at the corresponding point. Transport hFT along this equivalence using subsingleton_congr. This needs only the interior restriction comparison, not the extension-by-zero stalk-map theorem.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
   "lem-pc-open-extension-restriction-iso",
-  "lem-sc-module-extension-by-zero-stalk-maps",
-  "def-pc-perfect-complex"
+  "lem-sc-open-perfect-model-transport"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08BT",
-  "place": "Tag 08BT, exact derived extension-by-zero adjunction; Tag 00A7 (4), unit on the open; Tag 09IM, initial object before the first affine attachment"
+  "place": "Tag 08BT and Tag 00A7 (4); explicit degreewise adjunction localized by Mathlib, with local perfectness split off and stalk support proved via restriction comparisons"
  },
  "mathlib_searches": [
   {
@@ -115,12 +111,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T234224-L-2126666",
+  "landing": "20261013T031554-L-3575602",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

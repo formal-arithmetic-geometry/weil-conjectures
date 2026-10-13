@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-open-perfect-model-transport",
+ "kind": "statement",
+ "title": "Transport a perfect model from an open subscheme to an ambient open",
+ "statement": "Let X be a scheme [def-pc-scheme] and U an open. Choose derived categories [def-pc-derived-category] of structure-sheaf modules on X, on each localized open site of X, on U, and on each localized open site of U, all in morphism universe w. Let R in D(O_X), F in D(O_U), and let F be perfect [def-pc-perfect-complex]. Given an isomorphism e from R restricted to U (localized restriction followed by Modules.overEquiv U) to F, for every x in U there are an open neighbourhood O in X and a strictly perfect complex K on the localized module site over O such that R restricted to O is isomorphic to Q(K). There is no condition on R outside U.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08CM",
+  "place": "Definition 08CM (local perfect representatives), Definition 08C4 (strict perfectness); Tag 08DW (restriction of derived complexes)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "At x in U apply [def-pc-perfect-complex] to F to choose an open V of the open subscheme, a strictly perfect complex K on its localized site, and a derived model isomorphism. Define O = U.ι image V. The open immersion makes O an open neighbourhood of x in X.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use U.ι.isoImage V to identify V.toScheme and O.toScheme. Compose Modules.overEquiv V, module restriction along the inverse of this scheme isomorphism, and (Modules.overEquiv O).inverse. Restriction along an isomorphism is an equivalence, by restrictFunctorComp, restrictFunctorCongr and restrictFunctorId. This is an exact additive equivalence A between the two localized module categories. Its unit-module comparison is the composite of sheafOfModulesEquivOverUnit, Modules.restrictUnitIso and sheafOfModulesEquivOverInverseUnit. Coproduct preservation identifies A of a finite free module with the corresponding finite free module.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply A termwise to K. A.map_isZero preserves the chosen degree bounds. For a retract pair i,p, compose A.map i and A.map p with the finite-free comparison and its inverse; the identity equation follows from Functor.map_comp, Functor.map_id and Iso.hom_inv_id. These are exactly the two clauses of IsStrictlyPerfect.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity Scheme.Opens.isoImage_ι_inv_ι followed by U.ι identifies the composite of the three open immersions with O.ι. Modules.restrictFunctorComp and overFunctorEquiv give the corresponding restriction-composition natural isomorphism. Derive this comparison using mapDerivedCategoryNatIso and mapDerivedCategoryCompIso. Restrict e to V, then apply A to it and to the given model isomorphism. Finally compose with A.mapDerivedCategoryFactors to obtain R restricted to O isomorphic to Q of the transported complex. Return O, that complex, the strict-perfectness proof and this isomorphism.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08CM",
+  "place": "Definition 08CM and Definition 08C4, applied to the canonical identification of an open of U with its image in X; explicit localized-site transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived object whose restriction to an open subscheme is perfect has a strictly perfect model near every point of that open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "results": "Actual search returned 1 hits: AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv. No theorem transports a perfect model back from an open subscheme; these are comparison ingredients.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafOfModulesEquivOver|isoImage_ι_inv_ι",
+   "results": "Actual search returned 8 hits: Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Birational/Composition.lean. No theorem transports a perfect model back from an open subscheme; these are comparison ingredients.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Step 3 of lem-sc-supported-map-initial-ambient-lift: transport local strictly perfect models",
+   "via": [
+    "lem-sc-supported-map-initial-ambient-lift",
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPerfectModelTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPerfectModelTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.local_perfect_of_openRestriction_iso",
+  "statement": "theorem local_perfect_of_openRestriction_iso\n    (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (R : schemeDerivedCategory X)\n    (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F)\n    (e : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory.obj R ≅ F) :\n    ∀ x : X, x ∈ U → ∃ O : X.Opens, x ∈ O ∧\n        ∃ K : CochainComplex\n            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ,\n          IsStrictlyPerfect X O K ∧\n          Nonempty ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R ≅\n              DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T031554-L-3575602",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T031554-L-3575602",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
