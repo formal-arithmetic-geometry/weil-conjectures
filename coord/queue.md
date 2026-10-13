@@ -181,7 +181,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackMate` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeExchange` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison` | 22 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.NewBaseOpenMateFactorization` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardBaseChangeFactorization` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardConnectiveModelComparison` | 22 | 1 | proof |
@@ -196,6 +195,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.AffineSectionLinearMapExtension` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent` | 23 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.HorizontalDualityMatePasting` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.KoszulOpenAugmentedIdentityClass` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.KoszulOpenStructureEvaluation` | 23 | 1 | proof |
