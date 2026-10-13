@@ -17,41 +17,65 @@
  ],
  "proof": [
   {
-   "text": "On each affine open the power ideal and H have finite section modules over the Noetherian section ring. The affine tensor comparison identifies tensor sections, which are finite. Quasi-coherence and finite type give coherence of T.",
+   "text": "Put J=I^n as IdealSheafData and T=J.toModules tensor H. Coherence makes H quasi-coherent by the locally Noetherian coherence criterion. The private ideal-qc helper realizes J.toModules as the kernel of the structure-sheaf map to the closed-subscheme pushforward; qcqs pushforward preserves quasi-coherence, and the quasi-coherent kernel theorem gives quasi-coherence of J.toModules. The affine tensor theorem gives quasi-coherence of T and surjectivity of its tensor section comparison.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "pqf-lem-coherent-ft-locnoeth"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The coherent kernel criterion gives coherence of K=ker(mu), hence its quasi-coherence.",
-   "uses": [
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "pqf-lem-coherent-ft-locnoeth"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a in I(U)^n and a tensor z=sum b_j tensor h_j in K(U), balancing gives a*z=a tensor sum b_j*h_j=0. The kernel inclusion is injective. The affine product formula and the recursive-power range formula identify I^n K with zero on an affine basis, hence globally. For n=0 the tensor multiplication is a unit isomorphism and K=0.",
-   "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
     "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an affine U, the section ring is Noetherian. Compose the section inclusion of J with unitSectionsEquiv.symm to get an injective linear map into that ring. Module.Finite.of_injective makes the sections of J finite, and coherent_affine_sections_finite makes the sections of H finite. Mathlib Module.Finite.tensorProduct and Module.Finite.of_surjective applied to tensorSectionsMap make the sections of T finite. Apply the affine-cover finite-type criterion on all affine opens, then the locally Noetherian coherence criterion to obtain coherence of T.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing quasi-coherent kernel theorem applied to the multiplication map mu:T to H gives quasi-coherence of K=kernel(mu). This uses only quasi-coherence, without requiring coherent-kernel closure.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For sections a,b of J and h of H on any open U, injectivity of the ideal inclusion and commutativity in O_X(U) give i(a) b=i(b) a. Bilinearity of tmulSection therefore gives i(a) times (b tensor h)=a tensor (i(b) h). Multiplication on pure tensors is mu(b tensor h)=i(b) h. These are the private helper ideal_tensor_balancing and the local equation hmu in the Lean proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Fix an affine U and r in I(U)^n. Since (I^n).ideal U=I.ideal U ^ n, range_toModulesι_app supplies a section a of J with i(a)=r. Let L_a:H(U) to T(U) be h mapped to a tensor h. Tensor induction and balancing give r z=L_a(mu(z)) for all sections z of T, using surjectivity of the affine tensor comparison. For k in K(U), the kernel condition gives mu(kappa(k))=0, and linearity and injectivity of kappa imply r k=0. The private multiplication-range helper identifies the product inclusion range with the multiplication range via Abelian.imageIsoImage and the affine image theorem, then computes that range by tensor induction as range(i) times the full module. Induction on recursive powers gives quasi-coherence and inclusion range I(U)^n. Therefore multiplication from the recursive power tensor K is zero on pure tensors and hence on all affine sections. Sheaf separatedness on the affine basis makes this map globally zero. Its image inclusion is zero by cancellation of the epimorphic factorThruImage, and a zero monomorphism has zero source. This proves the stated zero product, including n=0, zero and unit ideals, zero modules and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "pqf-lem-pushforward-qcoh"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
   "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "pqf-lem-coherent-ft-locnoeth"
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-pushforward-qcoh"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "R2",
+  "date": "2026-10-13",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tags 01YA and 01YB; omitted balancing and image-identification details expanded by E1"
+  "place": "Tag 01YB, tensor multiplication kernel preceding the second Artin-Rees application; expanded balancing and recursive-power image argument. Coherence uses Tags 01XZ and 01PB. Qcqs pushforward uses 01LC and affine image sections use 01IC. The initially planned ideal-times and affine-zero criterion imports are not used because their current source closure reaches this item through ClosedImmersion and the proper-cohomology route."
  },
  "mathlib_searches": [
   {
@@ -166,10 +190,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T082338-L-1633312",
-  "kind": "interface",
+  "landing": "20261013T100111-L-2481961",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
