@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-section-cohomology-principal-torsion",
+ "kind": "statement",
+ "title": "Power torsion in the raw resolution restriction kernel",
+ "statement": "Let f:X→T be a quasi-compact quasi-separated scheme morphism [def-pc-scheme, def-pc-morphism-conventions], F a quasi-coherent module [pqf-def-coherent], I an injective resolution of F, q a natural number, W an affine open of T and a in Γ(T,W). Let K=f_*I and P=sectionCohomologyPresheaf(K,q) [def-weil-pbc-flat-base-change-open-choices]. Write res:P(W)→P(D(a)) for its canonical restriction. For every x in P(W), if res(x)=0 then there is n≥0 with a^n x=0. This asserts no lifting of classes in P(D(a)).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09MR",
+  "place": "Lemma 30.17.3, tensor-unit specialization, torsion part; Tag 01E4, Lemma 20.7.3, section complexes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [
+  {
+   "text": "Set Y=f⁻¹W and b=f^♯a. The affineness of W and qcqs hypotheses on f give a qcqs scheme Y. The restriction of F is quasi-coherent and that of I is injective. The sections of the restricted resolution on Y and D(b)=f⁻¹D(a) are the section complexes K(W) and K(D(a)). Taking homology identifies their cohomology with P(W) and P(D(a)). These degreewise identifications commute with restriction and multiplication by functions, so their homology identifications do also.",
+   "uses": [
+    "def-pc-morphism-conventions",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply invertS_cohomology on Y with tensor unit and section b. Its canonical equation at exponent zero identifies the image of [0,x] with restriction of x. The hypothesis makes this image zero, so injectivity of the comparison makes [0,x]=0 in the fraction presentation.",
+   "uses": [
+    "lem-sc-invert-s-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomologyFraction_eventually_zero at numerator index zero. It gives a later tensor transition killing x. Under the tensor-unit identifications this transition is multiplication by b^n. Transporting through the section-complex identification gives a^n x=0. For a=0 take n=1; for unit a restriction is an isomorphism and n=0 works. Degree zero, empty W and zero coefficients are included.",
+   "uses": [
+    "lem-sc-cohomology-fraction-eventually-zero",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-sc-invert-s-cohomology",
+  "lem-sc-cohomology-fraction-eventually-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09MR",
+  "place": "Lemma 30.17.3 and Tag 01E4; explicit extraction of the torsion part by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology presheaf of injective resolution principal open restriction power denominators kernel torsion",
+   "results": "msearch.py: service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a quasi coherent sheaf on a principal open is the localization of cohomology",
+   "results": "ModuleCat.Tilde.exists_const, const, isLocallyFraction; Scheme.preservesLocalization_toOpensFunctor; StructureSheaf.locally_const_basicOpen; CategoryTheory.Sheaf.H. None supplies raw resolution cohomology denominator lifting or its kernel criterion.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.Away",
+   "results": "IsLocalizedModule.Away and local properties of modules, not raw section cohomology. Read Mathlib.Algebra.Module.LocalizedModule.Away.mk_of_addCommGroup: it combines invertibility, denominator lifting and kernel torsion; it does not prove either cohomological assertion.",
+   "date": "2026-10-13",
+   "verdict": "generic algebra criterion only"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionCohomologyPresheaf; cohomology localization, fractions, torsion and denominators in lean/Sheaf, lean/WeilConjectures and Mathlib/AlgebraicGeometry; principal torsion/denominator and raw cohomology in dag/nodes",
+   "results": "HigherImageCohomologyPresheafLocalization calls the item, so cannot be imported. HigherDirectImageSectionDenominators and HigherDirectImageSectionTorsion concern sheafified values and also depend on the item. InvertSCOhomology gives an additive fraction comparison on a qcqs scheme; CohomologyFractionEventuallyZero gives its numerator zero criterion. Neither states either raw cohomology bridge. Mathlib supplies RingedSpace.isUnit_res_basicOpen and IsUnit.smul_bijective for the invertibility part. No duplicate lower statement found.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; existing comparison and fraction zero criterion retained"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Raw cohomology localization, torsion part of the tensor-unit specialization of 09MR, in the higher-image denominator argument.",
+   "via": [
+    "lem-pc-section-cohomology-principal-localization",
+    "lem-pc-higher-direct-image-section-denominators",
+    "new-higher-direct-image-affine-local-qcoherent",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyPrincipalTorsion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionCohomologyPresheaf_pow_annihilates",
+  "statement": "theorem sectionCohomologyPresheaf_pow_annihilates {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) [QuasiCompact f] [QuasiSeparated f]\n    [F.IsQuasicoherent] (I : InjectiveResolution F) (q : ℕ)\n    (W : T.Opens) (hW : IsAffineOpen W) (a : Γ(T, W)) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    ∀ x : P.obj (op W), (P.map (homOfLE (T.basicOpen_le a)).op).hom x = 0 →\n      ∃ n : ℕ, a ^ n • x = 0",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

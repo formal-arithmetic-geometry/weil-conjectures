@@ -10,7 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Module.LocalizedModule.Away
-import Sheaf.AlgebraicGeometry.InvertSCOhomology
+import Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalDenominators
+import Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalTorsion
 
 /-! # Principal localization of the cohomology presheaf
 
@@ -54,6 +55,18 @@ theorem sectionCohomologyPresheaf_isLocalized_away {X T : Scheme.{u}}
     let P := sectionCohomologyPresheaf K q
     let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=
       Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom
-    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom := by sorry
+    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom := by
+  dsimp only
+  let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+  let P := sectionCohomologyPresheaf K q
+  let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=
+    Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom
+  apply IsLocalizedModule.Away.mk_of_addCommGroup
+  · apply (Module.End.isUnit_iff _).mpr
+    change Function.Bijective (fun x : P.obj (op (T.basicOpen a)) ↦
+      (T.presheaf.map (homOfLE (T.basicOpen_le a)).op a) • x)
+    exact (T.toRingedSpace.isUnit_res_basicOpen a).smul_bijective
+  · exact sectionCohomologyPresheaf_pow_lifts f F I q W hW a
+  · exact sectionCohomologyPresheaf_pow_annihilates f F I q W hW a
 
 end AlgebraicGeometry.Scheme.Modules
