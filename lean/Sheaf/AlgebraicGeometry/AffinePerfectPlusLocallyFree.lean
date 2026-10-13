@@ -8,10 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift
-import Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree
+import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.PerfectHomGap
-import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import Sheaf.AlgebraicGeometry.AffinePerfectTruncationTriangle
 
 /-! # Extending perfect complexes after adjoining a shifted locally free sheaf
 
@@ -32,6 +34,28 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem qc_single (Y : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (M : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (hM : M.IsQuasicoherent)
+    (n : ℤ) : schemeDerivedQCohProperty Y ((DerivedCategory.singleFunctor _ n).obj M) := by
+  have hzero : IsZero
+      (SheafOfModules.free (R := moduleRings Y.toRingedSpace) PEmpty.{u + 1}) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (SheafOfModules.freeHomEquiv _).injective
+    funext i
+    exact PEmpty.elim i
+  have : (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).ContainsZero :=
+    ⟨⟨_, hzero, SheafOfModules.isQuasicoherent_free PEmpty.{u + 1}⟩⟩
+  intro j
+  by_cases hj : j = n
+  · subst j
+    exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ n).app M).symm hM
+  · apply (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_isZero
+    rcases lt_or_gt_of_ne hj with hj | hj
+    · exact DerivedCategory.isZero_of_isGE _ n j hj
+    · exact DerivedCategory.isZero_of_isLE _ n j hj
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A perfect object on a quasi-compact open of an affine scheme extends after adjoining
@@ -77,7 +101,46 @@ theorem exists_perfect_lift_plus_finiteLocallyFree
               (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
               (Modules.overEquiv U)).mapDerivedCategory.obj P ≅
             ((DerivedCategory.singleFunctor
-              (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj M)⟦-r⟧ ⊞ F) :=
-  sorry
+              (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj M)⟦-r⟧ ⊞ F) := by
+  let : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  let : QuasiSeparatedSpace U.toScheme := U.ι.isOpenEmbedding.quasiSeparatedSpace
+  obtain ⟨a, b, hab, hgap⟩ := exists_subsingleton_hom_of_isPerfect U.toScheme F hF
+  have hpc : IsPseudoCoherent U.toScheme F := by
+    intro x
+    obtain ⟨V, hxV, K, hK, e⟩ := hF x
+    obtain ⟨W, hxW, _, _, L, ⟨c, d, hb⟩, hf, he⟩ :=
+      exists_finiteFree_refinement_of_isStrictlyPerfect U.toScheme F V K hK e x hxV
+    exact ⟨W, hxW, L, ⟨d, fun n hn ↦ hb n (Or.inr hn)⟩, hf, he⟩
+  obtain ⟨K, hbounded, hfree, hrep⟩ :=
+    exists_boundedAbove_finiteFree_lift X U hU F hpc
+  obtain ⟨N, hN⟩ :=
+    exists_low_perfect_truncation_triangle X U hU F hF K hbounded hfree hrep
+  let r : ℤ := min N a
+  obtain ⟨M, hM, P, hP, i, p, δ, hT⟩ := hN r (min_le_left _ _)
+  let := hM
+  let C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
+  let e : ((DerivedCategory.singleFunctor C r).obj M)⟦(1 : ℤ)⟧ ≅
+      (DerivedCategory.singleFunctor C (r - 1)).obj M :=
+    ((DerivedCategory.singleFunctors C).shiftIso 1 (r - 1) r (by omega)).app M
+  have hqc : schemeDerivedQCohProperty U.toScheme
+      (((DerivedCategory.singleFunctor C r).obj M)⟦(1 : ℤ)⟧) := by
+    intro j
+    exact (SheafOfModules.isQuasicoherent (moduleRings U.toScheme.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor C j).mapIso e).symm
+      (qc_single U.toScheme M inferInstance (r - 1) j)
+  have hz : ∀ j : ℤ, a ≤ j → j ≤ b →
+      IsZero ((DerivedCategory.homologyFunctor C j).obj
+        (((DerivedCategory.singleFunctor C r).obj M)⟦(1 : ℤ)⟧)) := by
+    intro j haj _
+    apply IsZero.of_iso (DerivedCategory.isZero_of_isLE
+      ((DerivedCategory.singleFunctor C (r - 1)).obj M) (r - 1) j (by
+        dsimp [r]
+        omega))
+    exact (DerivedCategory.homologyFunctor C j).mapIso e
+  have hδ : δ = 0 := (hgap _ hqc hz).elim _ _
+  obtain ⟨eP, _⟩ := Pretriangulated.exists_iso_binaryBiproduct_of_distTriang
+    (Pretriangulated.Triangle.mk i p δ) hT hδ
+  refine ⟨r, M, hM, P, hP, ⟨eP ≪≫ biprod.mapIso ?_ (Iso.refl F)⟩⟩
+  exact (((DerivedCategory.singleFunctors C).shiftIso (-r) r 0 (by omega)).app M).symm
 
 end AlgebraicGeometry.Scheme

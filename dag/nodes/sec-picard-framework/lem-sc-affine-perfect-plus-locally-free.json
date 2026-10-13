@@ -26,59 +26,47 @@
  ],
  "proof": [
   {
-   "text": "By perfectness and [lem-pc-perfect-pseudo-coherent-locally-finite-tor], F is pseudo-coherent and each point of U has a neighbourhood with a finite Tor-amplitude interval. Since U is quasi-compact, choose a finite such cover and take the minimum of its lower bounds and the maximum of its upper bounds; locality of derived tensor products then gives one interval [a,b] valid on all of U. Apply [lem-sc-affine-pseudo-coherent-lift] to obtain a bounded-above complex P^\\bullet of finite free \\mathcal O_X-modules whose restriction represents F.",
+   "text": "Use [lem-pc-strictly-perfect-finite-free-refinement] on each perfect local model and forget its lower bound. This proves pseudo-coherence directly. Apply [lem-sc-affine-pseudo-coherent-lift] to obtain a bounded-above finite-free sheaf complex K on X and an isomorphism of its restriction with F.",
    "uses": [
-    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-pc-strictly-perfect-finite-free-refinement",
     "lem-sc-affine-pseudo-coherent-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, first paragraph: pseudo-coherence and Lemma 08EE"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose r below the lower Tor-amplitude bound a. Put K = Im(P^{r-1} \\to P^r); since H^i(F)=0 for i<a, on U the sheaf \\widetilde K|_U is the kernel of \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U. The truncation-kernel statement [lem-sc-affine-truncation-kernel-finite-locally-free] gives that \\widetilde K|_U is finite locally free. The complex Q=(\\widetilde K|_U \\to \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U \\to ...), with \\widetilde K|_U in degree r-1, is strictly perfect and represents F, while P=(P^r \\to P^{r+1} \\to ...) is bounded, finite free, and hence perfect on X. The stupid truncation \\sigma_{\\ge r}Q=P|_U gives a distinguished triangle P|_U \\to F \\to (\\widetilde K|_U)[1-r] \\to (P|_U)[1] (Stacks prints the shift as [-r-1]; with \\widetilde K|_U in degree r-1 the correct shift is [1-r]).",
+   "text": "The open U is quasi-compact by hypothesis and quasi-separated as an open of an affine scheme. Apply [lem-sc-perfect-ext-bounded-qcoh-vanishing] to F to get a cohomology gap [a,b]. Apply [lem-sc-affine-perfect-low-truncation-triangle] to the supplied K and its representation of F to obtain N and the low triangles. Choose r=min(N,a), so r<=N and r-1<a, and obtain a finite locally free M, perfect P on X, and triangle M[-r] -> P|U -> F -> M[1-r].",
    "uses": [
-    "lem-sc-affine-truncation-kernel-finite-locally-free"
+    "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+    "lem-sc-affine-perfect-low-truncation-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, truncation at r and the displayed distinguished triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-perfect-ext-bounded-qcoh-vanishing] applied on the quasi-compact separated scheme U to the perfect object F, there are integers a'\\le b' such that Hom(F,L)=0 for every L in D_QCoh(\\mathcal O_U) with H^i(L)=0 for i in [a',b']. The object (\\widetilde K|_U)[1-r] is a quasi-coherent sheaf placed in degree r-1, so choosing r with r-1<a' (in addition to r<a) gives Hom(F,(\\widetilde K|_U)[1-r])=0. Thus the connecting map F \\to (\\widetilde K|_U)[1-r] in the triangle is zero.",
+   "text": "A finite locally free sheaf is quasi-coherent. A single complex on such a sheaf is in D_QCoh: its cohomology is M in its single degree and zero elsewhere. The shift isomorphism identifies M[1-r] with the single complex in degree r-1, which is strictly below a. Its cohomology vanishes throughout [a,b]. Hence the gap theorem makes Hom(F,M[1-r]) a subsingleton and the triangle third map is zero.",
    "uses": [
     "lem-sc-perfect-ext-bounded-qcoh-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, final sentence invoking Lemma 09M4"
-   }
+   "elementary": true
   },
   {
-   "text": "A distinguished triangle A\\to B\\to C\\to A[1] whose map B\\to C is zero splits: A\\cong B\\oplus C[-1] (the split-triangle lemma, Stacks Derived Categories, Lemma derived-lemma-split). Hence P|_U \\cong (\\widetilde K|_U)[-r] \\oplus F. Therefore the perfect object P of D(\\mathcal O_X) restricts to \\mathcal F[-r]\\oplus F with \\mathcal F=\\widetilde K|_U finite locally free, which is the assertion with this r (Stacks writes [-r-2] here, an inherited shift typo; the conclusion is existential in r).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, final sentence: apply Derived Categories, Lemma 4.11 (split triangle)"
-   }
+   "text": "Apply [lem-pc-derived-zero-third-split], Mathlib exists_iso_binaryBiproduct_of_distTriang, to this distinguished triangle. It gives P|U isomorphic to the biproduct of the single complex M in degree r and F. The single functor shift isomorphism identifies the first term with M[0][-r]; map this isomorphism through the biproduct and use the witnesses r,M,P.",
+   "uses": [
+    "lem-pc-derived-zero-third-split"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-strictly-perfect-finite-free-refinement",
   "lem-sc-affine-pseudo-coherent-lift",
-  "lem-sc-affine-truncation-kernel-finite-locally-free",
-  "lem-sc-perfect-ext-bounded-qcoh-vanishing"
+  "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+  "lem-sc-affine-perfect-low-truncation-triangle",
+  "lem-pc-derived-zero-third-split"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08ED (Lemma 36.13.7)"
+  "place": "Tag 08EG, proof of Lemma 36.13.6; low truncation construction split off, vanishing and Mathlib splitting formalized by D2 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -156,5 +144,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T045519-L-126179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-affine-perfect-low-truncation-triangle",
+ "kind": "statement",
+ "title": "Arbitrarily low perfect truncation triangles from an affine finite-free lift",
+ "statement": "Let X be an affine scheme [def-pc-scheme], U a quasi-compact open subscheme, and F a perfect object of D(O_U) [def-pc-derived-category, def-pc-perfect-complex]. Suppose K is a bounded-above complex of finite free O_X-modules and its derived restriction is isomorphic to F. There exists an integer N such that for every integer r<=N there are a finite locally free O_U-module M [def-sc-finite-locally-free-sheaf], a perfect object P of D(O_X), and a distinguished triangle M[-r] -> P|U -> F -> M[1-r]. The third map is not asserted to vanish.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EG, Lemma 36.13.6, proof through the stupid-truncation triangle, inverse rotated; with M in degree r-1 the quotient is M[1-r]"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Perfectness gives locally finite Tor dimension by [lem-pc-perfect-pseudo-coherent-locally-finite-tor]. Take finitely many Tor-amplitude neighbourhoods covering the quasi-compact U and their minimum lower bound a and maximum upper bound b. Locality of derived tensor cohomology gives a common interval [a,b]. View the supplied finite-free sheaf complex K on X as an A-module complex P for A = Gamma(X,O_X): termwise affine tilde/sections identifies the finite-free terms and their differentials by [lem-weil-pbc-affine-tilde-gamma-adjunction]. The representation on U is the given hrep. Set N=a-1.",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EG, Lemma 36.13.6, proof through the stupid-truncation triangle, inverse rotated; with M in degree r-1 the quotient is M[1-r]"
+   }
+  },
+  {
+   "text": "For r <= N, we have r<a. Define the module image of P^(r-1) -> P^r, and let M be its associated sheaf restricted to U. Apply [lem-sc-affine-truncation-kernel-finite-locally-free] to the module complex P and the common Tor interval: M is finite locally free and identifies with the kernel of the next differential on U. Since the complex is exact below a, replacing its degrees below r by M in degree r-1 gives a complex Q representing F.",
+   "uses": [
+    "lem-sc-affine-truncation-kernel-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EG, Lemma 36.13.6, proof through the stupid-truncation triangle, inverse rotated; with M in degree r-1 the quotient is M[1-r]"
+   }
+  },
+  {
+   "text": "Let T be the stupid tail of P in degrees at least r, associated back to X. Bounded-aboveness and the lower cutoff make T bounded finite free, so its derived image is perfect. Degreewise there is a short exact sequence T|U -> Q -> M[1-r]. Apply the distinguished-triangle construction for short exact complexes [lem-weil-pbc-complex-ses-triangle] and inverse-rotate. This gives M[-r] -> T|U -> F -> M[1-r]. The single functor shift isomorphism identifies M[-r] with the single complex in degree r, yielding the asserted morphisms and distinguished triangle. This construction works for every r<=N, without asserting that its third map vanishes.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EG, Lemma 36.13.6, proof through the stupid-truncation triangle, inverse rotated; with M in degree r-1 the quotient is M[1-r]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-affine-truncation-kernel-finite-locally-free",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EG, Lemma 36.13.6, proof through the stupid-truncation triangle, inverse rotated; with M in degree r-1 the quotient is M[1-r]"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect object on a quasi compact open of an affine scheme has arbitrarily low truncation triangles with finite locally free first term and perfect middle term extending to the affine scheme",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect object on a quasi compact open of an affine scheme has arbitrarily low truncation triangles with finite locally free first term and perfect middle term extending to the affine scheme",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE and related t-structure representation lemmas; these do not produce finite locally free truncation terms or an ambient perfect tail.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "singleFunctor, singleFunctorIsoCompQ, singleFunctorCompHomologyFunctorIso and other generic single-complex declarations; no affine perfect truncation construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncation.*finiteLocallyFree|finiteLocallyFree.*truncation",
+   "results": "No Mathlib matches. Project searches find AffineTruncationKernelFiniteLocallyFree, which supplies the kernel property but not a distinguished triangle or perfect ambient tail. Blueprint search for truncation finite locally free finds no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: extension of an open perfect complex, finite-free lift and low truncation before the splitting argument",
+   "via": [
+    "lem-sc-affine-perfect-plus-locally-free",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectTruncationTriangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectTruncationTriangle.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_low_perfect_truncation_triangle",
+  "statement": "theorem exists_low_perfect_truncation_triangle\n    (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F)\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hbounded : ∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (K.X i))\n    (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (K.X i ≅ SheafOfModules.free\n      (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin r))))\n    (hrep : Nonempty\n      (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Modules.overEquiv U)).mapDerivedCategory.obj (DerivedCategory.Q.obj K) ≅ F)) :\n    ∃ N : ℤ, ∀ r : ℤ, r ≤ N →\n      ∃ M : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace),\n        M.IsFiniteLocallyFree ∧ ∃ P : schemeDerivedCategory X, IsPerfect X P ∧\n          ∃ (i : (DerivedCategory.singleFunctor _ r).obj M ⟶\n              ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n                Equivalence.functor\n                  (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n                  (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n                  (Modules.overEquiv U)).mapDerivedCategory.obj P)\n            (p : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n                Equivalence.functor\n                  (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n                  (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n                  (Modules.overEquiv U)).mapDerivedCategory.obj P ⟶ F)\n            (δ : F ⟶ ((DerivedCategory.singleFunctor _ r).obj M)⟦(1 : ℤ)⟧),\n            Triangle.mk i p δ ∈ distTriang (schemeDerivedCategory U.toScheme)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T045519-L-126179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T045519-L-126179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
