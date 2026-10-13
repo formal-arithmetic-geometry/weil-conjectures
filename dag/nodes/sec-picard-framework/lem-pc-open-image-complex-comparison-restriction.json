@@ -18,34 +18,46 @@
  ],
  "proof": [
   {
-   "text": "For the canonical derived adjunctions, localize the mate formula defining schemeOpenModuleImageRestriction. Apply the derived-unit and derived-counit factorization identities to its transpose. K-injectivity of the restrictions, proved in the construction node, identifies the direct-image computation components. The factorization equations of mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify the localized nested restriction isomorphism with schemeDerivedOpenRestrictionCompIso. The localized mate is therefore exactly the displayed derived mate.",
+   "text": "Apply Mathlib Adjunction.homEquiv_naturality_left and homEquiv_id directly to the supplied derived W-adjunction. The intervening composite is the identity by transported_left_triangle: naturality of schemeDerivedOpenRestrictionCompIso inverse moves the U-unit past the comparison, after which Functor.map_comp and the supplied U-adjunction left_triangle_components cancel the U-unit and counit. This private helper involves only one adjunction and proves the transported left triangle, not the duplicated two-adjunction unit_comp_mate theorem. Neither supplied adjunction needs to be canonical.",
    "uses": [
-    "def-pc-open-image-complex-comparison-iso",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The underived open pushforward for U is fully faithful (Mathlib Scheme.Modules.pushforward Full and Faithful). Therefore the U-restriction of its transported unit is an isomorphism by Adjunction isIso of L.map unit. Restrict further along i and conjugate by schemeOpenRestrictionCompIso to show that W-restriction of the U-unit is an isomorphism. Degreewise this gives an isomorphism of restricted complexes via HomologicalComplex.Hom.isIso_of_components. Mathlib NatIso.isIso_map_iff applied to mapDerivedCategoryFactors transports its localization to show D(L_W)(Q(eta_U)) is an isomorphism. These are the proved private isIso_smaller_restriction_unit, isIso_exact_localized_map and isIso_smaller_derived_unit helpers.",
+   "uses": [
     "def-pc-derived-open-restriction-maps",
     "def-pc-kinjective-mayer-vietoris-data"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Normalize to the supplied adjunctions using beta_A=rightAdjointUniq. The identities eta_supplied=eta_canonical beta_A and L_A(beta_A) epsilon_supplied=epsilon_canonical, substituted in the mate formula, yield beta_U rho_supplied=rho_canonical beta_W by naturality of beta_W. Postcomposing the canonical computation comparisons with beta_U and beta_W gives the assertion. The proof is valid for equal or empty opens; it needs no cover or termwise injectivity.",
+   "text": "For maps into a right-adjoint object, precomposition by u is injective whenever L(u) is epi: apply the inverse adjunction homEquiv, use homEquiv_naturality_left_symm, and cancel L(u). Apply this with u=Q(eta_U) and the supplied W-adjunction, using the preceding isomorphism. It suffices to prove the comparison equation after precomposing by Q(eta_U).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The concrete termwise restriction carries eta_U to eta_W by schemeOpenModuleImage_unit_restriction in every degree. Apply Q and use schemeOpenModuleImageComplexComparison_unit for U and W. The left composite becomes the W derived unit, and the right composite is the U derived unit followed by the derived mate. The first step equates these, completing the cancellation argument without any new unproved statements.",
    "uses": [
-    "def-pc-open-image-complex-comparison-iso",
+    "def-pc-kinjective-mayer-vietoris-data",
+    "lem-pc-open-image-complex-comparison-unit",
     "def-pc-derived-open-restriction-maps"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-open-image-complex-comparison-iso",
   "def-pc-derived-open-restriction-maps",
-  "def-pc-kinjective-mayer-vietoris-data"
+  "def-pc-kinjective-mayer-vietoris-data",
+  "lem-pc-open-image-complex-comparison-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "X3",
+  "agent": "C3",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 08BV (lemma-exact-sequence-j-star), first proof paragraph and displayed restriction/direct-image sequence; Tag 08BS (lemma-restrict-K-injective-to-open)",
-  "note": "Spells out localization and adjunction compatibility in the original node plan."
+  "note": "Shorter unit-cancellation proof. Open restriction of the larger unit is invertible; equality of maps into the smaller right adjoint follows from the already proved unit comparison. No derived-counit localization or rightAdjointUniq normalization calculation is required here. Repair of the duplicate-theorem return: removed unit_comp_mate, using Mathlib homEquiv_naturality_left and homEquiv_id directly with a strictly smaller transported-left-triangle helper. The source module unit_comp_mate is private and cannot be imported by name; no other module or interface was changed. Second reading removes isIso_map_of_natIso in favor of Mathlib NatIso.isIso_map_iff."
  },
  "mathlib_searches": [
   {
@@ -123,13 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T220530-L-1396973",
-  "kind": "interface",
+  "landing": "20261013T045518-L-125894",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
