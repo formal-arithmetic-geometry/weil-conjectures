@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-finite-localization-free-step",
+ "kind": "statement",
+ "title": "One compatible descending step at finitely many localizations",
+ "statement": "Let $A$ be a commutative ring, $M$ a cochain complex of $A$-modules, $f_j$ a finite family of ring elements, and $b,n\\in\\mathbb Z$ with $n\\le b+1$. Fix derived categories [def-pc-derived-category] over $A_{f_j}$ and suppose $Q(M_{f_j})$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex] for every $j$. Let $\\alpha:F\\to M$ be a chain map, with $F^i=0$ for $i<n$ and $i>b$, and every $F^i$ a finitely generated free $A$-module. Suppose $H^i(\\alpha_{f_j})$ is invertible for $i>n$ and surjective for $i=n$. There are $G$, $\\beta:G\\to M$, and $\\tau:F\\to G$, such that $G^i=0$ for $i<n-1$ and $i>b$, every $G^i$ is finite free, $H^i(\\beta_{f_j})$ is invertible for $i>n-1$ and surjective for $i=n-1$, $\\tau\\beta=\\alpha$, and $\\tau^i$ is invertible for $i\\ge n$. Neither a unit-ideal condition on the family nor global cohomology vanishing is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Form the localized mapping cones. The cohomology exact sequence and the isomorphism/epimorphism hypotheses make their cohomology zero in degrees at least n. Localized F is bounded finite free. Truncate the bounded above finite free models supplied by pseudo-coherence of localized M. Apply the cone pseudo-coherence statement at m=n-1, and then finite top cohomology, to obtain finite localized cone cohomology in n-1.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sc-cone-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of the finitely many localizations choose generators and cycle representatives in degree n-1. Express a representative as x/f_j^a. Since d(x)/1=0, there is c with f_j^c d(x)=0. The global cycle f_j^c x has localized class equal to the original generator times the unit f_j^(a+c). Take the direct sum of the finite free modules on all these representatives. Its map to cone cycles surjects onto cohomology at every specified localization; no global generation is claimed.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Split each cone cycle into its F^n and M^(n-1) components. The cycle equation gives the square-zero equation and the chain-map equation with the mapping-cone sign. Adjoin the finite free module in degree n-1, keep the old terms in degrees at least n, and use zero terms below n-1. This gives G, beta and an inclusion tau with tau followed by beta equal to alpha. The inclusion components in retained degrees are invertible. The cone cohomology sequence proves the improved isomorphism and epimorphism assertions. Since n-1<=b, the upper bound b is unchanged. Empty families and zero localizations contribute empty sets of generators.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite free bounded complex mapping to a pseudo coherent complex by adjoining one lower term to improve localized cohomology isomorphisms and surjectivity",
+   "results": "8 hits: CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, HomologicalComplex.extend_exactAt, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, QuasiIsoAt",
+   "results": "10 hits: CochainComplex.quasiIsoAt₀_iff, CochainComplex.quasiIsoAt_shift_iff, CochainComplex.instQuasiIsoAtIntιTruncLE, CochainComplex.instQuasiIsoAtIntπTruncGE, CochainComplex.quasiIsoAt_ιTruncLE, CochainComplex.quasiIsoAt_πTruncGE, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.quasiIso_truncLEMap_iff",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*(cone|cycle)|cone.*finite.*free",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a finite free bounded complex mapping to a pseudo coherent complex by adjoining one lower term to improve localized cohomology isomorphisms and surjectivity",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteLocalizationFreeModel",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "affine pseudo-coherent lift in the proper-flat support proof: the one-degree cone construction in Tag 08EE, corresponding to steps 2 and 3 of lem-sc-finite-localization-free-model",
+   "via": [
+    "lem-sc-finite-localization-free-model",
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteLocalizationFreeStep",
+  "file": "lean/Sheaf/RingTheory/FiniteLocalizationFreeStep.lean",
+  "declaration": "DerivedCategory.exists_finite_localization_free_step",
+  "statement": "theorem exists_finite_localization_free_step (A : Type u) [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : ℕ) (f : Fin r → A) [∀ j : Fin r, HasDerivedCategory.{w} (ModuleCat.{u} (Localization.Away (f j)))] (hlocal : ∀ j : Fin r, IsPseudoCoherent (Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).obj M))) (b n : ℤ) (hn : n ≤ b + 1) (F : CochainComplex (ModuleCat.{u} A) ℤ) (α : F ⟶ M) (hupper : F.IsStrictlyLE b) (hlower : F.IsStrictlyGE n) (hfinite : ∀ i : ℤ, Module.Free A (F.X i) ∧ Module.Finite A (F.X i)) (hiso : ∀ j : Fin r, ∀ i : ℤ, n < i → QuasiIsoAt ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map α) i) (hepi : ∀ j : Fin r, Epi (HomologicalComplex.homologyMap ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map α) n)) : ∃ (G : CochainComplex (ModuleCat.{u} A) ℤ) (β : G ⟶ M), G.IsStrictlyLE b ∧ G.IsStrictlyGE (n - 1) ∧ (∀ i : ℤ, Module.Free A (G.X i) ∧ Module.Finite A (G.X i)) ∧ (∀ j : Fin r, ∀ i : ℤ, n - 1 < i → QuasiIsoAt ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map β) i) ∧ (∀ j : Fin r, Epi (HomologicalComplex.homologyMap ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map β) (n - 1))) ∧ ∃ τ : F ⟶ G, τ ≫ β = α ∧ ∀ i : ℤ, n ≤ i → IsIso (τ.f i)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100223-L-2503751",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100223-L-2503751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

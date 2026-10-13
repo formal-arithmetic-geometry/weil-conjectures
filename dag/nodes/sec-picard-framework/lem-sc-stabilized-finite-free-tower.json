@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-stabilized-finite-free-tower",
+ "kind": "statement",
+ "title": "Assembly of a locally improving finite free tower",
+ "statement": "Let $A$ be a commutative ring, $M$ a cochain complex of $A$-modules, $(f_j)$ a finite family of elements, and $b\\in\\mathbb Z$. Let $F_k$ be complexes indexed by $k\\in\\mathbb N$, with chain maps $\\alpha_k:F_k\\to M$ and $\\tau_k:F_k\\to F_{k+1}$ such that $\\tau_k\\alpha_{k+1}=\\alpha_k$. Each $F_k$ is zero above $b$ and has finitely generated free terms. Suppose $\\tau_k^i$ is invertible whenever $b+1-k\\le i$, and $H^i((\\alpha_k)_{f_j})$ is invertible whenever $b+1-k<i$. Then there is a complex $E$, zero above $b$ and termwise finite free, and a chain map $\\gamma:E\\to M$ such that $H^i(\\gamma_{f_j})$ is invertible for every $i,j$. The localizations are extension of scalars to $A_{f_j}$. No pseudo-coherence, unit ideal, or global quasi-isomorphism hypothesis is made.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use Functor.ofSequence on the transitions. For every degree i and k with b+1-k<=i, induct on the later index to prove each composite from k invertible in degree i. Apply Mathlib Functor.IsEventuallyConstantFrom.hasColimit to each evaluated diagram. Mathlib HomologicalComplexLimits constructs the degreewise colimit complex E, and the maps alpha form a cocone inducing gamma:E to M.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit shows the inclusion from stage k is invertible in degree i whenever b+1-k<=i. Take k=(b+1-i).toNat. Transport Module.Free and Module.Finite using the linear equivalence of this component isomorphism, and transport termwise vanishing above b. This gives the required upper bound and finite free terms.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For cohomology in degree i take k=(b+2-i).toNat. The localized stage inclusion is invertible in i-1,i,i+1, because localization preserves isomorphisms. Apply ShortComplex.quasiIso_of_epi_of_isIso_of_mono to its three-term short complex to get QuasiIsoAt at i. The colimit factorization gives inclusion followed by gamma=alpha_k. Since alpha_k is a localized quasi-isomorphism in degree i, quasiIsoAt_of_comp_left gives the same for gamma. Apply quasiIso_iff in all degrees.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of cochain complexes with eventually isomorphic transition maps in each degree has a degreewise stabilized complex and its homology stabilizes",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.isLE_iff, CochainComplex.cm5b, CochainComplex.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isLE, CochainComplex.isGE_iff, CochainComplex.isZero_of_isGE",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEventuallyConstantFrom",
+   "results": "12 hits: CategoryTheory.Functor.IsEventuallyConstantFrom, CategoryTheory.IsFiltered.IsEventuallyConstant.exists_isEventuallyConstantFrom, CategoryTheory.IsFiltered.IsEventuallyConstant.mk, CategoryTheory.Functor.IsEventuallyConstantFrom.cocone, CategoryTheory.Functor.IsEventuallyConstantFrom.hasColimit, CategoryTheory.Functor.IsEventuallyConstantFrom.postcomp, CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_ι_of_isColimit|IsEventuallyConstantFrom|HasColimitEval",
+   "results": "4 hits: Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequence of cochain complexes with eventually isomorphic transition maps in each degree has a degreewise stabilized complex and its homology stabilizes",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteLocalizationFreeModel",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "affine pseudo-coherent lift in the proper-flat support proof: assembly of compatible descending approximations in Tag 08EE, step 4 of lem-sc-finite-localization-free-model",
+   "via": [
+    "lem-sc-finite-localization-free-model",
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.StabilizedFiniteFreeTower",
+  "file": "lean/Sheaf/RingTheory/StabilizedFiniteFreeTower.lean",
+  "declaration": "DerivedCategory.exists_model_of_stabilized_finite_free_tower",
+  "statement": "theorem exists_model_of_stabilized_finite_free_tower (A : Type u) [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : ℕ) (f : Fin r → A) (b : ℤ) (F : ℕ → CochainComplex (ModuleCat.{u} A) ℤ) (α : ∀ k : ℕ, F k ⟶ M) (τ : ∀ k : ℕ, F k ⟶ F (k + 1)) (hupper : ∀ k : ℕ, (F k).IsStrictlyLE b) (hfinite : ∀ k : ℕ, ∀ i : ℤ, Module.Free A ((F k).X i) ∧ Module.Finite A ((F k).X i)) (hcomm : ∀ k : ℕ, τ k ≫ α (k + 1) = α k) (hstable : ∀ k : ℕ, ∀ i : ℤ, b + 1 - (k : ℤ) ≤ i → IsIso ((τ k).f i)) (hiso : ∀ k : ℕ, ∀ j : Fin r, ∀ i : ℤ, b + 1 - (k : ℤ) < i → QuasiIsoAt ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map (α k)) i) : ∃ (E : CochainComplex (ModuleCat.{u} A) ℤ), E.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free A (E.X i) ∧ Module.Finite A (E.X i)) ∧ ∃ γ : E ⟶ M, ∀ j : Fin r, QuasiIso ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j)))) (ComplexShape.up ℤ)).map γ)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100223-L-2503751",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100223-L-2503751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12064,3 +12064,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal (stage 3; reviewer PASS; first push; landing 20261013T100221-L-2503096 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:02 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackNaturality (stage 3; reviewer PASS; first push; landing 20261013T100222-L-2503249 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:02 L: merged deliver/X3/Sheaf.CategoryTheory.DerivedCategory.BoundedProjectiveHomPowerTorsion (stage 3; reviewer PASS; first push; landing 20261013T100222-L-2503480 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:02 L: merged deliver/X3/Sheaf.RingTheory.FiniteLocalizationFreeModel (stage 3; reviewer PASS; first push; landing 20261013T100223-L-2503751 (interface); batch 20261013T095923; modules 3; new nodes 2)
