@@ -114,6 +114,12 @@ theorem finite_structure_product_exists_core
           (Scheme.Modules.pushforward (fnY n)).map
             (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) =
         (c n).hom.app G ≫ (ψ n).hom) :
-    Nonempty (G ⊗ G ⟶ G) := by sorry
+    ∃ μ : G ⊗ G ⟶ G, ∀ (n : ℕ) (U : X.Opens),
+      let a : Γ(G, U) → Γ(Yn n, (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U) :=
+        fun x ↦ (Scheme.Modules.finiteStructureAdjoint
+        (pullback.fst f (Spec.map (CommRingCat.ofHom
+          (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U x
+      ∀ (x y : Γ(G, U)), a (μ.app U (tmulSection x y)) = a x * a y := by sorry
 
 end AlgebraicGeometry
