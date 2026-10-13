@@ -11426,3 +11426,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: returned deliver/M3/Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology (reviewer RETURN: (reviewer X-925c0, head 925c0d899) H10: lean/Sheaf/AlgebraicGeometry/RHomSupportedQuasiCoherentPseudoPartQCCohomology.le)
 
 - 14:38 L: batch 20261013T062512 dependency take-out
+- 06:42 L: returned deliver/C2/Sheaf.AlgebraicGeometry.ClosedStructureIdealProductIso (reviewer RETURN: (reviewer X-233d1, head 233d190a3) the reviewer passed it, but the landing failed: : Sheaf.AlgebraicGeometry.ClosedStruc)
