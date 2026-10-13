@@ -11324,3 +11324,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ArtinReesAffineComparison (stage 3; reviewer PASS; after a return; landing 20261013T054246-L-451998 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero (stage 3; reviewer PASS; first push; landing 20261013T054246-L-452096 (proof); batch 20261013T054206; modules 1; new nodes 1)
 - 05:43 L: returned deliver/U2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (reviewer RETURN: (reviewer X-b1b7d, head b1b7d2e45) H4 — Duplicate library statement (roles/lead.md §4.5; review point 5): sectionRingVer)
+- 05:45 L: returned deliver/V1/Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality (reviewer RETURN: (reviewer X-4d817, head 4d817af8f) H3 / brief point 6: sbc-lem-higher-image-raw-over-restriction still states arbitrary )
