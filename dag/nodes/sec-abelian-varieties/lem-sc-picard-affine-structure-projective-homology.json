@@ -1,0 +1,159 @@
+{
+ "id": "lem-sc-picard-affine-structure-projective-homology",
+ "kind": "statement",
+ "title": "Picard affine structure projective homology",
+ "statement": "Let f:X→S be flat, proper and locally of finite presentation, with the ordinary tensor-pullback adjunction structure unit an isomorphism after every base change T→S. Let M, k:W→S and affine U⊂W have M trivial on X×S U. Let P be a bounded complex of projective R=Gamma(W,U)-modules, and assume its termwise affinePerfectSheafification represents on the localized U-site the restriction of R(pullback.snd f k)_*((pullback.fst f k)^*M[0]). For every commutative R-algebra B with structure map φ, the ordinary termwise extension PB=(ModuleCat.extendScalars φ).mapHomologicalComplex(P) has IsZero homology in every integer degree i<0 and H0 isomorphic to ModuleCat.of B B. Use the supplied derived categories on all schemes and localized open sites; termwise finiteness is not required.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-affine-perfect-module-model",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BF2 (perfect base-change paragraph), 0B91, 08EB and 06Z0"
+ },
+ "proof": [
+  {
+   "text": "Use the representing isomorphism and exact open restriction to identify the derived object of P with R(f_U)_*O. For R→B, apply proper relatively flat base change to Spec B→U→S. Bounded projective terms are K-flat, so ordinary termwise extension computes this derived scalar extension and represents R(f_B)_*O.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A right derived direct image of a degree-zero sheaf is connective, and H0 is the ordinary direct image. Apply the universal structure-unit hypothesis at Spec B→S to identify that ordinary image with O_Spec B, using the degree-zero structure-image dictionary.",
+   "uses": [
+    "lem-sc-flat-derived-structure-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact affine tilde/Gamma equivalence identifies homology of the representing scalar-extended complex with those homology sheaves, reflects zero objects, and sends O_Spec B to the free B-module B. This proves both clauses. Over the zero ring all modules are zero.",
+   "uses": [
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-localized-derived-sheafification",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-flat-derived-structure-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0; second-reader reduction of the fixed-affine projective-model argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(homology|[Zz]ero)|homology.*extendScalars|isPerfect",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact statement. General categorical tools only; the scheme-specific transport and comparisons remain necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, HomologicalComplex.homology",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact statement. General categorical tools only; the scheme-specific transport and comparisons remain necessary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex of quasicoherent sheaves on an affine scheme is represented by a bounded complex of finitely generated projective modules",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.isKProjective_iff_leftOrthogonal, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+   "date": "2026-10-13",
+   "verdict": "No exact statement. General categorical tools only; the scheme-specific transport and comparisons remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedZeroIsoSelf|homologyRightDerivedFunctorObjSingleFunctorIso|isKFlat_of",
+   "results": "5 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement. General categorical tools only; the scheme-specific transport and comparisons remain necessary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived proper pushforward of a relatively flat sheaf commutes with arbitrary base change and its zeroth cohomology is the ordinary pushforward",
+   "results": "8 hits: SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-13",
+   "verdict": "No exact statement. General categorical tools only; the scheme-specific transport and comparisons remain necessary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme a perfect derived direct image of a flat finitely presented sheaf has a bounded finite projective module model compatible with scalar extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveModel",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-affine-structure-projective-model",
+   "place": "The homology step of the affine projective-model argument",
+   "via": [
+    "lem-sc-picard-affine-structure-projective-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardAffineStructureProjectiveHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_affine_structure_projective_homology",
+  "statement": "theorem picard_affine_structure_projective_homology\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (M : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)\n    (U : W.Opens) (hU : IsAffineOpen U)\n    (htrivial : Nonempty\n      ((Modules.tensorPullback (pullback.fst f (U.ι ≫ k))).obj M ≅\n        SheafOfModules.unit (pullback f (U.ι ≫ k)).ringCatSheaf))\n    (P : CochainComplex (ModuleCat.{v} (W.presheaf.obj (.op U))) ℤ)\n    (hb : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)))\n    (hp : (∀ n : ℤ, Module.Projective (W.presheaf.obj (.op U)) (P.X n)))\n    (hrep : Nonempty ((SheafOfModules.overFunctor.{v}\n        (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n            ((Modules.tensorPullback (pullback.fst f k)).obj M))) ≅\n        DerivedCategory.Q.obj\n          (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj P))) :\n    (∀ (B : Type v) [CommRing B] (φ : W.presheaf.obj (.op U) →+* B),\n        let PB := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P\n        (∀ i : ℤ, i < 0 → IsZero (PB.homology i)) ∧\n          Nonempty (PB.homology 0 ≅ ModuleCat.of B B))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T153220-L-1059242",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T153220-L-1059242",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

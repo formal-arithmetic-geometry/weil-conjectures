@@ -12,6 +12,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveRepresentation
+import Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveHomology
 
 /-! # The unnormalized affine structure-image model
 
@@ -78,6 +80,11 @@ theorem picard_affine_structure_projective_model
             (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
             ((Modules.tensorPullback (pullback.fst f k)).obj M))) ≅
         DerivedCategory.Q.obj
-          (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj P)) := by sorry
+          (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj P)) := by
+  obtain ⟨P, hb, hf, hp, hrep⟩ :=
+    picard_affine_structure_projective_representation f M W k U hU htrivial
+  exact ⟨P, hb, hf, hp,
+    picard_affine_structure_projective_homology f hO M W k U hU htrivial P hb hp hrep,
+    hrep⟩
 
 end AlgebraicGeometry.Scheme
