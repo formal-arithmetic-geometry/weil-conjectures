@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-completion-localized-algebra-finite-quotients",
+ "kind": "statement",
+ "title": "Finite-quotient product comparison and cofinal local ideals",
+ "statement": "Let R be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], S a finite commutative R-algebra [def-weil-finitely-generated-module], and p a prime ideal. Set A = R_p [def-weil-pbc-localization-at-prime], B = A\\otimes_R S [def-weil-module-base-change], J = pB, and Q = {q prime in S : q contracts to p}. For each q in Q let psi_q : B\\to S_q be an S-algebra map agreeing on r\\otimes 1 with the canonical localized map R_p\\to S_q. Write K_q = J S_q for the image ideal along psi_q and M_q for the maximal ideal of S_q. Then K_q is contained in M_q and there exists an integer c >= 1 with M_q^c contained in K_q. For every integer n >= 0, the canonical ring map B/J^n\\to\\prod_{q\\in Q} S_q/K_q^n induced by the psi_q is bijective.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, quotient product equality in the proof; Tags 00JA, 00CT and 0394 for its algebraic ingredients"
+ },
+ "proof": [
+  {
+   "text": "Identify B as the localization of S at the images of R minus p. Its maximal ideals above pA correspond to Q and its localizations are S_q. The prescribed values of psi on A and its S-algebra property identify it with the canonical maps on pure tensors, hence everywhere.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n > 0, A/(pA)^n is Artinian local. The quotient B/J^n is finite over this ring, so its spectrum is finite discrete. The product-of-localizations isomorphism and localization of quotients give precisely the displayed finite-quotient product map. For n = 0 both sides are zero rings; an empty Q is also covered.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "S is Noetherian because it is finite over R, and S_q is Noetherian by localization. The special fibre at q is a localization of the finite-dimensional algebra B/(pA)B, hence Artinian local. Its only prime is its maximal ideal. Thus K_q is contained in M_q and its radical equals M_q. Finite generation of M_q and the radical-power lemma give M_q^c contained in K_q; increasing c to c+1 ensures c >= 1.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-product-of-localizations-at-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, finite-level algebraic part preceding passage to the inverse limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite algebra over a local Noetherian ring the quotient by a power of the maximal ideal is the product of localized quotients and the extended ideal contains a power of each local maximal ideal",
+   "results": "IsLocalRing.finite_quotient_iff requires a finite residue field; Ideal.finite_quotient_pow concerns cardinal finiteness; DedekindDomain quotient comparison results require a Dedekind domain. No exact statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.map, Function.Bijective",
+   "results": "Ideal.comap_map_of_bijective and maximal-ideal transport results assume an already bijective map; they do not prove the localized finite-quotient product comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*(pi|product)|pi.*quotient|radical.*pow; toPiLocalizationEquiv|localization.*quot|exists_pow_le",
+   "results": "MaximalSpectrum.toPiLocalizationEquiv is the Artinian product ingredient; Localization.Ideal has the quotient-localization instance; Ideal.exists_pow_le_of_le_radical_of_fg gives cofinal powers. lean/Sheaf and upstream have no combined finite-quotient comparison. FiniteAfterCompletion has the completion comparison but is not a finite-quotient theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial ingredients; no duplicate statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite algebra localized at a prime the quotient by each power of the base ideal is canonically the product of its localized quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionLocalizedAlgebraProductSurjective",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completion-localized-algebra-product-surjective",
+   "place": "algebraic finite-quotient comparison and cofinal ideal bounds, before inverse-limit construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionLocalizedAlgebraFiniteQuotients",
+  "file": "lean/Sheaf/RingTheory/CompletionLocalizedAlgebraFiniteQuotients.lean",
+  "declaration": "AdicCompletion.completion_localizedAlgebra_finite_quotients",
+  "statement": "theorem completion_localizedAlgebra_finite_quotients\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    ∀ (ψ : ∀ q : Q, B →ₐ[S] Localization.AtPrime q.1),\n      (∀ (q : Q) (r : A), ψ q (r ⊗ₜ[R] (1 : S)) =\n        Localization.localRingHom p q.1 (algebraMap R S)\n          (Ideal.LiesOver.over (P := q.1) (p := p)) r) →\n      let K := fun q : Q ↦ J.map (ψ q).toRingHom\n      (∀ q : Q, K q ≤ IsLocalRing.maximalIdeal (Localization.AtPrime q.1) ∧\n        ∃ c : ℕ, 1 ≤ c ∧\n          (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ c ≤ K q) ∧\n      ∀ n : ℕ, Function.Bijective\n        (RingHom.pi (fun q : Q ↦\n          Ideal.quotientMap ((K q) ^ n) (ψ q).toRingHom (by\n            rw [← Ideal.map_le_iff_le_comap, Ideal.map_pow])) :\n          (B ⧸ J ^ n) →+* (∀ q : Q, Localization.AtPrime q.1 ⧸ (K q) ^ n))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T002012-L-2359254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T002012-L-2359254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

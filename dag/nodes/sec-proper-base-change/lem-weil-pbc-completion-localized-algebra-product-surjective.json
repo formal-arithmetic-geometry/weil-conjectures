@@ -16,50 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Put A = R_p and B = A tensor_R S. B is finite over the Noetherian local ring A. The finitely many primes over m correspond to Q and have local rings S_q. For n > 0 the Artinian ring B/m^n B is canonically the product of the S_q/m^n S_q by Tags 00JA and 00CT. The isomorphisms commute with reduction because their maps are induced by the same localization maps at every level. The S-algebra property of psi and its prescribed values on r tensor 1 determine the localization maps on all pure tensors and hence on B.",
+   "text": "Use the finite-quotient comparison to obtain the canonical bijections B/J^n to the products S_q/K_q^n and cofinal bounds M_q^c <= K_q <= M_q.",
    "uses": [
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-localization-at-prime-of-quotient"
+    "lem-weil-pbc-completion-localized-algebra-finite-quotients"
    ],
    "elementary": false
   },
   {
-   "text": "In each S_q the m S_q-adic and maximal-ideal-adic filtrations are cofinal: m S_q is contained in q S_q, and finite generation plus radical equality gives (q S_q)^t contained in m S_q. Tag 0394 gives the canonical comparison of completions, induced by the identity on S_q.",
+   "text": "Apply changeIdealCompletionRing with d = 1 to compare each K_q-adic completion with the maximal-ideal completion; its component formula determines the equivalence uniquely.",
    "uses": [
-    "lem-weil-pbc-finite-after-completion"
+    "lem-weil-pbc-change-ideal-completion"
    ],
    "elementary": false
   },
   {
-   "text": "Given a tuple in the maximal-ideal completions, use these comparisons to obtain m-adic sequences in all factors. At each positive n apply the inverse quotient product isomorphism to their coordinates. These preimages commute with reduction by uniqueness, hence define an element of the m-adic completion of B. The n = 0 coordinate belongs to the zero quotient.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The prescribed level equation for g identifies its value on the compatible preimage sequence with the chosen tuple, first in every quotient and then by completion extensionality. If Q is empty, choose zero. No comparison with a tensor product of the completed base is used.",
+   "text": "Invert the finite-quotient bijections on the coordinates of the transported tuple. The quotient maps commute with reductions by their formula on representatives. Injectivity proves the inverse coordinates compatible. liftRingHom constructs their inverse-limit element x. The stipulated equation for g and the comparison component formula identify every coordinate of g x with the tuple; ext_eval_a proves equality. This includes exponent zero and the empty product.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-after-completion",
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-product-of-localizations-at-maximal"
+  "lem-weil-pbc-change-ideal-completion",
+  "lem-weil-pbc-completion-localized-algebra-finite-quotients"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 07N9, localized-algebra inverse-limit product, before the completed tensor comparison"
+  "place": "Tag 07N9: finite-quotient product comparison, proved change-of-ideal comparison, and explicit inverse-limit construction"
  },
  "mathlib_searches": [
   {
@@ -171,12 +154,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T223403-L-1635893",
+  "landing": "20261013T002012-L-2359254",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
