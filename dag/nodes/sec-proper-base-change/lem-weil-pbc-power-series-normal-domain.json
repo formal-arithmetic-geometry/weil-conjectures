@@ -60,12 +60,24 @@
    }
   },
   {
-   "text": "Claim: if $v\\in\\operatorname{Frac}(R[[x]])$ is nonzero and integral over $R[[x]]$, and $\\tilde\\iota(v)=c_nx^n+c_{n+1}x^{n+1}+\\cdots$ with $c_n\\ne0$, then $n\\ge0$ and $c_n\\in R$. Proof. Since $R[[x]]$ is a domain (step 1), [lem-weil-pbc-almost-integral-integral] (1) applied to $R[[x]]$ shows that $v$ is almost integral over $R[[x]]$ [def-weil-pbc-almost-integral]: there is a nonzero $h\\in R[[x]]$ with $hv^e\\in R[[x]]$ for all $e\\ge0$. Write $\\iota(h)=b_mx^m+b_{m+1}x^{m+1}+\\cdots$ with $m\\ge0$, $b_i\\in R$, $b_m\\ne0$. By the product formula of [def-weil-pbc-laurent-series], the coefficient of $\\tilde\\iota(hv^e)=\\iota(h)\\tilde\\iota(v)^e$ in degree $k<m+ne$ is $0$ and in degree $m+ne$ is $b_mc_n^e$, which is nonzero because $K$ is a field; so $\\tilde\\iota(hv^e)$ has order $m+ne$ and lowest coefficient $b_mc_n^e$. As $hv^e\\in R[[x]]$, $\\tilde\\iota(hv^e)=\\iota(hv^e)$ lies in the image of $\\iota$ (step 2), so $m+ne\\ge0$ and $b_mc_n^e\\in R$ for every $e\\ge0$. If $n<0$ then $m+ne<0$ for $e=m+1$, a contradiction; hence $n\\ge0$. The relation $b_mc_n^e\\in R$ for all $e\\ge0$ with $b_m\\in R\\setminus\\{0\\}$ says that $c_n\\in K$ is almost integral over $R$ [def-weil-pbc-almost-integral]; since $R$ is Noetherian [def-weil-pbc-noetherian-ring], [lem-weil-pbc-almost-integral-integral] (2) shows that $c_n$ is integral over $R$, and since $R$ is a normal domain [def-weil-pbc-normal-ring], $c_n\\in R$.",
+   "text": "The image of an integral w under the lift j is integral over K[[x]] by IsIntegral.map_of_comp_eq. Mathlib PowerSeries.instUniqueFactorizationMonoid (PowerSeries/Inverse.lean:285) and UniqueFactorizationMonoid.instIsIntegrallyClosed (Polynomial/RationalRoot.lean:139) supply normality of K[[x]]; this is the field power-series specialization of the normality tool [lem-weil-pbc-pid-noetherian-normal]. LaurentSeries.instIsFractionRingPowerSeries (LaurentSeries.lean:298) identifies K((x)) as its fraction field. IsIntegrallyClosed.algebraMap_eq_of_integral therefore gives a power series f over K whose Laurent image is j(w). This replaces the negative-order calculation by existing proved Mathlib instances.",
    "uses": [
-    "lem-weil-pbc-power-series-domain",
+    "def-weil-pbc-laurent-series",
+    "lem-weil-pbc-laurent-series-field",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8149-8174, statement and proof (Laurent series over the fraction field, Lemma almost-integral)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-almost-integral-integral] to obtain a nonzero h in R[[x]] with h*w^e in R[[x]] for every e. Apply j and use injectivity of the power-series inclusion to transport this witness to f. To prove the lowest-coefficient claim, suppose the coefficients of f below n vanish, and factor f=X^n*g using PowerSeries.X_pow_dvd_iff. Write m=order(h) and h=X^m*h.divXPowOrder. Expanding h*f^e factors out X^(m+n*e); its coefficient in that degree equals b*(coeff n f)^e, where b=coeff m h is nonzero. Every such coefficient is the coefficient of a power series over R, so coeff n f is almost integral over R [def-weil-pbc-almost-integral]. Noetherianity and [lem-weil-pbc-almost-integral-integral] make it integral, and [def-weil-pbc-normal-ring] gives a preimage in R. This is proved by the private helper coeff_almostIntegral, including the case coeff n f=0.",
+   "uses": [
     "lem-weil-pbc-almost-integral-integral",
     "def-weil-pbc-almost-integral",
-    "def-weil-pbc-laurent-series",
     "def-weil-pbc-noetherian-ring",
     "def-weil-pbc-normal-ring"
    ],
@@ -76,10 +88,12 @@
    }
   },
   {
-   "text": "Let $w\\in\\operatorname{Frac}(R[[x]])$ be integral over $R[[x]]$ and write $\\tilde\\iota(w)=\\sum_ia_ix^i$ ($a_i\\in K$). We show by induction on $N\\ge0$ the statement $P(N)$: $a_i=0$ for all $i<0$ and $a_i\\in R$ for $0\\le i<N$. $P(0)$: if $w=0$ there is nothing to show; otherwise the claim of step 3 applied to $v=w$ gives that the order of $\\tilde\\iota(w)$ is $\\ge0$. $P(N)\\Rightarrow P(N+1)$: by $P(N)$, $p=\\sum_{0\\le i<N}a_ix^i$ is an element of $R[[x]]$ (a polynomial with coefficients in $R$), and $\\tilde\\iota(p)=\\iota(p)=\\sum_{0\\le i<N}a_ix^i$. Every element of $R[[x]]$ is integral over $R[[x]]$ and the elements of $\\operatorname{Frac}(R[[x]])$ integral over $R[[x]]$ form a subring [def-weil-pbc-integral-closure], so $w'=w-p$ is integral over $R[[x]]$, and $\\tilde\\iota(w')=\\sum_{i\\ge N}a_ix^i$. If $a_N=0$, then $a_N\\in R$. If $a_N\\ne0$, then $w'\\neq0$ ($\\tilde\\iota$ is injective) and $\\tilde\\iota(w')=a_Nx^N+a_{N+1}x^{N+1}+\\cdots$ has order $N$ and lowest coefficient $a_N$, so step 3 applied to $v=w'$ gives $a_N\\in R$. In both cases $P(N+1)$ holds.",
+   "text": "Strongly induct on n. For i<n choose preimages r_i in R supplied by the induction hypotheses, and put p=sum_{i<n} r_i X^i. The series f-map(p) has zero coefficients below n and its n-th coefficient equals that of f. The subalgebra completeIntegralClosure from [def-weil-pbc-almost-integral] contains both f and map(p), hence their difference. Apply the lowest-coefficient calculation of the preceding step, convert almost integrality to integrality over the Noetherian R, and use normality. This proves that every coefficient of f has a preimage in R (private helper coeff_mem_range). Only proved preimage statements are used in the choices.",
    "uses": [
-    "def-weil-pbc-integral-closure",
-    "def-weil-pbc-laurent-series"
+    "def-weil-pbc-almost-integral",
+    "lem-weil-pbc-almost-integral-integral",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false,
    "source": {
@@ -88,7 +102,7 @@
    }
   },
   {
-   "text": "By step 4, $a_i=0$ for $i<0$ and $a_i\\in R$ for all $i\\ge0$, so $f=\\sum_{i\\ge0}a_ix^i\\in R[[x]]$ and $\\iota(f)=\\tilde\\iota(w)$, i.e. $\\tilde\\iota(f)=\\tilde\\iota(w)$. Since $\\tilde\\iota$ is injective (step 2), $w=f\\in R[[x]]$. With step 1, $R[[x]]$ is a Noetherian integral domain integrally closed in its field of fractions, i.e. a Noetherian normal domain [def-weil-pbc-normal-ring].",
+   "text": "Choose r_n in R with algebraMap(r_n)=coeff n f and form g=PowerSeries.mk(r_n). Coefficientwise extensionality proves map(g)=f. Its Laurent image is j(w), and injectivity of j gives algebraMap(g)=w. Together with Noetherianity and the domain instance this proves the required conjunction.",
    "uses": [
     "lem-weil-pbc-fraction-field-lift",
     "def-weil-pbc-normal-ring"
@@ -107,15 +121,15 @@
   "def-weil-pbc-laurent-series",
   "lem-weil-pbc-laurent-series-field",
   "lem-weil-pbc-fraction-field-lift",
+  "lem-weil-pbc-pid-noetherian-normal",
   "lem-weil-pbc-almost-integral-integral",
   "def-weil-pbc-almost-integral",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-integral-closure"
+  "def-weil-pbc-noetherian-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), proof, lines 8155-8174"
+  "place": "Adaptation by M1 of Stacks Tag 0BI0: field power-series normality handles negative Laurent exponents; the almost-integral coefficient calculation and induction are proved directly in Lean (2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -195,5 +209,15 @@
   "group": "C1",
   "result": "fix",
   "note": "R:Type u CommRing; IsNoetherianRing R = Noetherian; IsDomain+IsIntegrallyClosed R = normal domain (STATE NORMAL RING); R[[x]] = PowerSeries R (one variable); conclusions IsNoetherianRing/IsDomain/IsIntegrallyClosed (PowerSeries R) = Noetherian, domain, integral fraction-field elements lie in R[[x]]; no extra hypothesis or clause"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045541-L-132247",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
