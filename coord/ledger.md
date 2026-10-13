@@ -12779,3 +12779,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/U4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationDiagonalBlock (stage 3; reviewer PASS; first push; landing 20261013T141535-L-381811 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/W4/Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelFactorization (stage 3; reviewer PASS; first push; landing 20261013T141535-L-382002 (interface); batch 20261013T141520; modules 3; new nodes 2)
 - 14:15 L: merged deliver/X2/Sheaf.RingTheory.LocalizedApproximationBaseChange (stage 3; reviewer PASS; first push; landing 20261013T141536-L-382147 (proof); batch 20261013T141520; modules 1; new nodes 0)
+- 14:15 L: merged deliver/X3/Sheaf.FieldTheory.TriangularFieldModelReconstructionBijective (stage 3; reviewer PASS; first push; landing 20261013T141536-L-382256 (interface); batch 20261013T141520; modules 3; new nodes 2)

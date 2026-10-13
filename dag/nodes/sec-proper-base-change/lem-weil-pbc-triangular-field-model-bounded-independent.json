@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-triangular-field-model-bounded-independent",
+ "kind": "statement",
+ "title": "Bounded monomial independent",
+ "statement": "Let k be a field, d,m natural numbers, h in R=k[X_0,...,X_{d-1}], and p_i a monic polynomial over k[X_0,...,X_{d+i}] of natural degree e_i. Let Q be the simultaneous quotient by hT-1 and the triangular p_i, and D=Localization.Away h. Suppose psi:D→ₐ[k]Q agrees on R with the canonical renamed quotient map. If c is a D-valued function on the bounded exponent tuples and the sum over a of psi(c(a)) times product_i [Y_i]^(a_i) is zero in Q, then c is identically zero. Zero h, zero degrees, and m=0 are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Proof: First identify the quotient of the first d+1 variables by hT-1 with\nD=k[X][1/h], using the localization presentation. Agreement on k[X] determines\npsi uniquely, including the inverse of h. Split off the last tower variable,\nand identify the simultaneous quotient with the quotient of the previous\nstage's polynomial ring by the mapped last monic relation. The universal maps\nsend each variable to its class; their composites fix every variable and the\ncoefficient ring. Over a nonzero previous stage, mapping preserves the leading\ncoefficient one and degree e_i. Uniqueness of remainder upon division by this\nmonic polynomial says all coefficients of a vanishing bounded expansion in\nthe last variable vanish. Induction applies the same assertion to their bounded\nexpansions in earlier variables, giving c(a)=0 for every tuple a. For m=0 this\nis injectivity of the localization identification. If h=0 the coefficient ring\nis zero. If an e_i=0 the exponent set is empty and every coefficient function\nis zero; hence the assertion remains true. No field evaluation is used.",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-pbc-triangular-field-model-equations",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-tower-product-basis",
+    "def-weil-pbc-free-module",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-tower-product-basis",
+  "def-weil-pbc-free-module",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expanded monic-division argument of the parent node, following Tags 07BV and 08JZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A triangular monic quotient has a basis of bounded monomials over the localization of its coefficient ring",
+   "results": "AdjoinRoot.powerBasisAux', IsAdjoinRootMonic.basis, AdjoinRoot.powerBasis'.",
+   "date": "2026-10-13",
+   "verdict": "Single-variable ingredients only, not simultaneous triangular quotient reconstruction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.smulTower",
+   "results": "Module.Basis.smulTower and apply/repr lemmas.",
+   "date": "2026-10-13",
+   "verdict": "Combines bases but does not identify successive and simultaneous quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*(basis|normal)|reconstruction_bijective",
+   "results": "msearch Mathlib only found GramSchmidt unrelated results. rg on lean/WeilConjectures and lean/Sheaf found TriangularFieldModelLocalizedNormalForm but no structural reconstruction statement.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate reconstruction-bijectivity declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simultaneous quotient by triangular monic polynomials has bounded monomials as a basis",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true,
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.TriangularFieldModelReconstructionBijective",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-triangular-field-model-reconstruction-bijective",
+   "place": "Uniqueness of coefficients"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TriangularFieldModelBoundedIndependent",
+  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelBoundedIndependent.lean",
+  "declaration": "FieldTheory.triangularFieldModel_bounded_independent",
+  "statement": "theorem triangularFieldModel_bounded_independent\n    (k : Type u) [Field k] (d m : ℕ) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (e : Fin m → ℕ) (hp : ∀ i, (p i).Monic)\n    (he : ∀ i, (p i).natDegree = e i)\n    (psi : Localization.Away h →ₐ[k]\n      (MvPolynomial (Fin (d + 1 + m)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d m h p)))\n    (hpsi : ∀ r : MvPolynomial (Fin d) k,\n      psi (algebraMap _ (Localization.Away h) r) = Ideal.Quotient.mk _\n        (MvPolynomial.rename (fun j : Fin d ↦\n          (⟨j.val, by omega⟩ : Fin (d + 1 + m))) r))\n    (c : (((i : Fin m) → Fin (e i)) → Localization.Away h))\n    (hc : (∑ a : ((i : Fin m) → Fin (e i)),\n        psi (c a) * (∏ i : Fin m,\n          (Ideal.Quotient.mk _ (MvPolynomial.X\n            (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + m)))) ^ (a i).val)) = 0) : c = 0",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T141536-L-382256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T141536-L-382256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

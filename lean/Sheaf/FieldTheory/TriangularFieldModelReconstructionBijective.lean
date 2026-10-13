@@ -9,6 +9,8 @@ public import Sheaf.FieldTheory.TriangularFieldModelEquations
 public import Mathlib.Algebra.Polynomial.Monic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.FieldTheory.TriangularFieldModelBoundedIndependent
+import Sheaf.FieldTheory.TriangularFieldModelBoundedSpanning
 
 /-! # Reconstruction from bounded monomials in a triangular quotient
 
@@ -64,6 +66,31 @@ theorem triangularFieldModel_reconstruction_bijective
         ((((i : Fin m) → Fin (e i)) → Localization.Away h) →ₗ[k]
           (MvPolynomial (Fin (d + 1 + m)) k ⧸
             Ideal.ofList (triangularFieldModelEquations k d m h p)))) := by
-  sorry
+  classical
+  let L := (∑ a : ((i : Fin m) → Fin (e i)),
+    (LinearMap.mulRight k (∏ i : Fin m,
+      (Ideal.Quotient.mk _ (MvPolynomial.X
+        (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + m)))) ^ (a i).val)).comp
+          (psi.toLinearMap.comp (LinearMap.proj a)) :
+      ((((i : Fin m) → Fin (e i)) → Localization.Away h) →ₗ[k]
+        (MvPolynomial (Fin (d + 1 + m)) k ⧸
+          Ideal.ofList (triangularFieldModelEquations k d m h p))))
+  have hL (c : ((i : Fin m) → Fin (e i)) → Localization.Away h) :
+      L c = ∑ a : ((i : Fin m) → Fin (e i)),
+        psi (c a) * (∏ i : Fin m,
+          (Ideal.Quotient.mk _ (MvPolynomial.X
+            (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + m)))) ^ (a i).val) := by
+    simp only [L, LinearMap.sum_apply, LinearMap.comp_apply,
+      LinearMap.mulRight_apply, LinearMap.proj_apply, AlgHom.toLinearMap_apply]
+  change Function.Bijective L
+  constructor
+  · intro c c' heq
+    have hz : L (c - c') = 0 := by rw [map_sub, heq, sub_self]
+    have hc : c - c' = 0 := triangularFieldModel_bounded_independent
+      k d m h p e hp he psi hpsi (c - c') (by rwa [hL] at hz)
+    exact sub_eq_zero.mp hc
+  · intro q
+    obtain ⟨c, hc⟩ := triangularFieldModel_bounded_spanning k d m h p e hp he psi hpsi q
+    exact ⟨c, (hL c).trans hc⟩
 
 end FieldTheory
