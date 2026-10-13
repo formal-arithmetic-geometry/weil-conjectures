@@ -7,13 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons
 
 /-! # The local ordinary model of canonical derived evaluation
 
@@ -28,6 +23,10 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Conversion between the localized carrier and the Hom carrier needs extra elaboration steps.
 /-- The restricted canonical adjunct is the localization of ordinary evaluation,
 with the source and target comparison isomorphisms included in the commuting square.
 This assertion does not say that the evaluation chain map is invertible.
@@ -86,6 +85,23 @@ theorem strictlyPerfect_evaluation_local_model (X : Scheme.{u})
         ∃ a : R.obj (N ⊗ D) ≅ DerivedCategory.Q.obj (localEvaluationTensor X U P F),
           ∃ b : R.obj (H.obj (op K, N)) ≅
               DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F),
-            R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by sorry
+            R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by
+  classical
+  let R := (SheafOfModules.overFunctor.{u}
+    (moduleRings X.toRingedSpace) U).mapDerivedCategory
+  let Q := DerivedCategory.Q.{w}
+    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+  let F := Q.objPreimage (R.obj N)
+  let eN : R.obj N ≅ Q.obj F := (Q.objObjPreimageIso (R.obj N)).symm
+  let f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F :=
+    { f := localEvaluationDegreeMap X U P F
+      comm' := fun n m h ↦ localEvaluationDegreeMap_comm X U P F n m h }
+  have hf : IsLocalOrdinaryEvaluation X U P F f := by
+    intro p q n r h
+    exact localEvaluationDegreeMap_formula X U P F p q n r h
+  obtain ⟨eK⟩ := hP
+  obtain ⟨a, b, hab⟩ := exists_strictlyPerfect_evaluation_comparisons
+    X K N U P F hstrict eK eN f hf
+  exact ⟨F, ⟨eN⟩, f, hf, a, b, hab⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,158 @@
+{
+ "id": "lem-pc-ordinary-evaluation-differential",
+ "kind": "statement",
+ "title": "Differential compatibility of the constructed ordinary evaluation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open, and $P,F$ arbitrary cochain complexes of $\\mathcal O_U$-modules. Put $D_P=\\mathcal Hom^\\bullet(P,\\mathcal O_U[0])$ [def-pur-hom-complex] and $T=\\operatorname{Tot}(F\\otimes D_P)$ [def-pc-tensor-complex-sheaves]. Define $E^n:T^n\\to\\mathcal Hom^n(P,F)$ by the coproduct and product universal properties: its $(p,q)$ tensor summand followed by the Hom projection indexed by $r$ is the ordinary evaluation component of [lem-pc-strictly-perfect-ordinary-evaluation], zero unless $r+q=0$, and otherwise the currying of evaluation on $P^r$ followed by the unit action on $F^p$. Then for every $m=n+1$, $E^n d_{\\mathcal Hom}^{n,m}=d_T^{n,m}E^m$. No strict perfectness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, ordinary complex evaluation; section-hom-complexes, differential formula"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-strictly-perfect-ordinary-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified product-limit projections of the Hom complex to lift the maps to every internal-Hom factor. Descend the resulting maps out of the total-tensor coproduct. These are real graded maps E^n; the two universal properties prove their prescribed summand/projection formula.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-strictly-perfect-ordinary-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Check E^n;d_H=d_T;E^(n+1) after precomposition with each summand F^p tensor Hom(P,O[0])^q and projection to the factor indexed by r. Use the product and coproduct hom-ext principles. Expand d_T=d_F tensor 1+(-1)^p 1 tensor d_dual and d_H=d_F composed with the map minus (-1)^(p+q) precomposition with d_P.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the sheaf tensor-Hom bijection and of the unit action identifies the d_F contributions. Since O[0] has zero differential, d_dual(phi)=-(-1)^q phi composed with d_P. The tensor sign multiplies this by (-1)^p, giving the required -(-1)^(p+q). For r+q=0 only the d_F contributions remain; for r+q=-1 only the d_P contributions remain; all other projected contributions are zero. Proof irrelevance identifies the degree transports. Thus every projected summand agrees. Empty opens and zero complexes give zero maps by the same formulas.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-hom-complex",
+    "lem-pc-strictly-perfect-ordinary-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-strictly-perfect-ordinary-evaluation",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, ordinary complex evaluation; section-hom-complexes, differential formula",
+  "description": "Detailed reduction of the cited Stacks proof, read online at its stable tags; the local literature checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The evaluation map from tensor of complex with dual complex to the internal Hom complex is a chain map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a chain map from tensor with dual Hom complex to Hom complex by evaluation",
+   "results": "Hits: ModuleCat.ihom_coev_app, ModuleCat.ihom_ev_app, HomologicalComplex.tensorHom, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply, HomologicalComplex.ιTensorObj, ModuleCat.monoidalClosedHomEquiv, CharacterModule.uncurry, ModuleCat.monoidalClosed_uncurry. No theorem with the required sheaf-complex evaluation statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom.*[Ee]val|[Ee]val.*tensorHom|mapBifunctorDesc",
+   "results": "Hits: Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/Bifunctor.lean. No theorem with the required sheaf-complex evaluation statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationModel",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, ordinary complex models and comparison; Tag 08DM, lemma-Rhom-strictly-perfect; Tag 08DL, lemma-restriction-RHom-to-U; the strictly perfect local evaluation calculation in the tensor-Hom step of finite duality; the ordinary evaluation chain-map identity, step 4 of the local model proof",
+   "via": [
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationDifferential.lean",
+  "declaration": "AlgebraicGeometry.localEvaluationDegreeMap_comm",
+  "declarations": [
+   "AlgebraicGeometry.homComplexProductLimit_exists",
+   "AlgebraicGeometry.homComplexProductLift",
+   "AlgebraicGeometry.homComplexProductLift_proj",
+   "AlgebraicGeometry.localEvaluationDegreeMap",
+   "AlgebraicGeometry.localEvaluationDegreeMap_formula",
+   "AlgebraicGeometry.localEvaluationDegreeMap_comm"
+  ],
+  "statement": "theorem localEvaluationDegreeMap_comm (X : Scheme.{u}) (U : X.Opens) (P F : CochainComplex (localEvaluationModules X U) ℤ) (n m : ℤ) (_h : (ComplexShape.up ℤ).Rel n m) : localEvaluationDegreeMap X U P F n ≫ (homComplex (R := X.sheaf.over U) P F).d n m = (localEvaluationTensor X U P F).d n m ≫ localEvaluationDegreeMap X U P F m",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T015558-L-3021820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T015558-L-3021820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
