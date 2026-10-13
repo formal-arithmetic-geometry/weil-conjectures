@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-picard-direct-image-base-change-iso",
+ "kind": "statement",
+ "title": "Transport of invertibility to the non-iterated fibre product",
+ "statement": "Let f:X→S, j:W→S, h:T→W be scheme morphisms [def-pc-scheme] and M an O_X-module. Let β_M be the canonical non-iterated direct-image map constructed in [lem-sc-picard-canonical-base-change-comparisons]. If the canonical cartesian base-change map for p_W:X_W→W and h, applied to q_W^*M, is invertible [lem-weil-pbc-module-base-change-map-open-restriction], then β_M is invertible. No rank or flatness assumption is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Canonical base-change construction, with pullback composition from Tags 0096 and 0097 and full inverse-image isomorphic open squares from Tag 00A0."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For a square and an isomorphism e of its top-right object, apply the open-square isomorphism theorem to the square with top e and bottom the identity. Its full inverse-image hypothesis holds because e is surjective. Paste it to the original square. If the original base-change map is invertible, every factor in the pasting formula is invertible, and so is the outer base-change map.",
+   "uses": [
+    "lem-weil-pbc-module-open-square-isiso",
+    "lem-weil-pbc-module-base-change-map-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the pullback squares defining X_W and its further pullback along h. The inverse of the resulting isoPullback is e:X_T≅X_W×_W T. Its second projection is p_T. Its first projection equals the explicit v by pullback.hom_ext and the two projection identities. Apply the first step to transport invertibility to the square with top v. Compose with pushforward of the explicit tensor-composition and equality isomorphisms, which are invertible.",
+   "uses": [
+    "lem-sc-picard-canonical-base-change-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-open-square-isiso",
+  "lem-weil-pbc-module-base-change-map-pasting",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Canonical base-change construction, with pullback composition from Tags 0096 and 0097 and full inverse-image isomorphic open squares from Tag 00A0.",
+  "note": "The source motivates the claim; the omitted categorical glue is expanded in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism comparison of module sheaf base change maps under isomorphic Cartesian squares",
+   "results": "Service unavailable: Internal Server Error. No verdict from this unavailable service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback dual comparison obtained by transposing pulled evaluation is an isomorphism for a finite locally free sheaf; module base change maps are invariant under isomorphic Cartesian squares",
+   "results": "pullbackObjFreeIso and freeFunctorCompPullbackIso; related free-module naturality lemmas. No matching theorem for the explicit canonical comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the existing library monoidal and mate lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "picardCupProduct|picardDirectImageBaseChange|picardTensorDualComparison|uncurry_pre_app|curry_evaluation|moduleBaseChangeMap_pasting",
+   "results": "Library search found PicardCupProductMap, ModuleBaseChangeMapPasting and ModuleBaseChangeOpenSquareIso. Mathlib has uncurry_pre_app and tensor naturality. WeilConjectures has curry_evaluation, exactPairingOfIsIso and ExactPairing.map. The earlier PullbackDualFiniteLocallyFree only states existence of an unspecified dual isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "Use these actual declarations; no duplicate canonical-map lemma was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductBaseChange",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: penultimate paragraph, compatibility with arbitrary base change; final paragraph, degree-zero cup product and its evaluation formula",
+   "via": [
+    "lem-sc-picard-cup-product-base-change-square",
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDirectImageBaseChangeIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDirectImageBaseChangeIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardDirectImageBaseChangeMap_isIso",
+  "statement": "theorem picardDirectImageBaseChangeMap_isIso\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules)\n    (hbc : IsIso (Modules.moduleBaseChangeMap (pullback.snd f j)\n      (pullback.snd (pullback.snd f j) h) h (pullback.fst (pullback.snd f j) h)\n      pullback.condition ((Modules.tensorPullback (pullback.fst f j)).obj M))) :\n    IsIso (Modules.picardDirectImageBaseChangeMap f j h M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T054220-L-443854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T054220-L-443854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

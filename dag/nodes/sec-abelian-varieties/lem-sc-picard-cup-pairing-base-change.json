@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-picard-cup-pairing-base-change",
+ "kind": "statement",
+ "title": "Canonical base-change compatibility of the degree-zero cup pairing",
+ "statement": "Let f:X→S, j:W→S and h:T→W be scheme morphisms [def-pc-scheme] and E any O_X-module. Assume the tensor-pullback adjunction units at O_W and O_T for p_W and p_T are invertible [lem-pc-module-pullback-adjunction]. Let φ_W,φ_T be the explicit cup transposes [def-sc-picard-cup-product-map], and β_E,β_(E^∨) the specified direct-image base-change maps [lem-sc-picard-canonical-base-change-comparisons]. Then (β_E⊗β_(E^∨)) followed by uncurry φ_T equals the tensor-comparison inverse followed by h^*(uncurry φ_W) and the unit comparison h^*O_W≅O_T. No invertibility of β, rank condition or finite local freeness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Final two proof paragraphs: arbitrary base change and the degree-zero cup pairing; categorical transpose glue expanded here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Expand picardCupProductMap and cancel uncurry with curry. Both pairings are the explicit picardPushforwardPairing formed from the pulled evaluation of E and dual E.",
+   "uses": [
+    "def-sc-picard-cup-product-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the adjoint along p_T of both sides. Expand the canonical base-change maps as mates of the top pullback unit, followed by the specified tensor-composition comparison. Naturality of the unit and counit and their triangle identities identify each base-change map followed by the p_T counit with the pullback of the p_W counit. The two adjoints are the same evaluation pulled to X_T and applied to these two counits. Tensor-comparison naturality and associativity commute all comparison maps. The structure-unit comparison is compatible because its section formula is m mapped to 1 tensor m; inverse units are compatible by invertibility. Injectivity of the adjunction Hom equivalence proves the displayed pairing equality. The calculation applies to zero objects and empty schemes, and uses no flatness.",
+   "uses": [
+    "lem-sc-picard-canonical-base-change-comparisons",
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-module-base-change-map-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-weil-pbc-module-base-change-map-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Final two proof paragraphs: arbitrary base change and the degree-zero cup pairing; categorical transpose glue expanded here.",
+  "note": "The source motivates the claim; the omitted categorical glue is expanded in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism comparison of module sheaf base change maps under isomorphic Cartesian squares",
+   "results": "Service unavailable: Internal Server Error. No verdict from this unavailable service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback dual comparison obtained by transposing pulled evaluation is an isomorphism for a finite locally free sheaf; module base change maps are invariant under isomorphic Cartesian squares",
+   "results": "pullbackObjFreeIso and freeFunctorCompPullbackIso; related free-module naturality lemmas. No matching theorem for the explicit canonical comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the existing library monoidal and mate lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "picardCupProduct|picardDirectImageBaseChange|picardTensorDualComparison|uncurry_pre_app|curry_evaluation|moduleBaseChangeMap_pasting",
+   "results": "Library search found PicardCupProductMap, ModuleBaseChangeMapPasting and ModuleBaseChangeOpenSquareIso. Mathlib has uncurry_pre_app and tensor naturality. WeilConjectures has curry_evaluation, exactPairingOfIsIso and ExactPairing.map. The earlier PullbackDualFiniteLocallyFree only states existence of an unspecified dual isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "Use these actual declarations; no duplicate canonical-map lemma was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductBaseChange",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: penultimate paragraph, compatibility with arbitrary base change; final paragraph, degree-zero cup product and its evaluation formula",
+   "via": [
+    "lem-sc-picard-cup-product-base-change-square",
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCupPairingBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCupPairingBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardCupPairing_baseChange",
+  "statement": "theorem picardCupPairing_baseChange\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (E : X.Modules)\n    (j : W ⟶ S) (h : T ⟶ W)\n    (hO : IsIso ((Classical.choose\n      (Modules.exists_tensorPullbackAdjunction (pullback.snd f j))).unit.app\n        (SheafOfModules.unit W.ringCatSheaf)))\n    (hOT : IsIso ((Classical.choose\n      (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).unit.app\n        (SheafOfModules.unit T.ringCatSheaf))) :\n    ((Modules.picardDirectImageBaseChangeMap f j h E) ⊗ₘ\n        (Modules.picardDirectImageBaseChangeMap f j h (Modules.dual E))) ≫\n      MonoidalClosed.uncurry (picardCupProductMap f E (h ≫ j) hOT) =\n    (Modules.picardTensorObjIso h\n      ((Modules.pushforward (pullback.snd f j)).obj\n        ((Modules.tensorPullback (pullback.fst f j)).obj E))\n      ((Modules.pushforward (pullback.snd f j)).obj\n        ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E)))).inv ≫\n      (Modules.tensorPullback h).map (MonoidalClosed.uncurry (picardCupProductMap f E j hO)) ≫\n        (Modules.picardTensorUnitIso h).hom",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T054220-L-443854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T054220-L-443854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

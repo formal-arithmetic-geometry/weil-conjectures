@@ -7,8 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardCupProductMap
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
-import Sheaf.AlgebraicGeometry.PullbackDualFiniteLocallyFree
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
+import Sheaf.AlgebraicGeometry.PicardDirectImageBaseChangeIso
+import Sheaf.AlgebraicGeometry.PicardTensorDualComparisonIso
+import Sheaf.AlgebraicGeometry.PicardCupPairingBaseChange
 
 /-! # Base change of the degree-zero cup-product transpose
 
@@ -70,6 +71,20 @@ theorem picardCupProduct_baseChange_square
         Modules.dual ((Modules.pushforward (pullback.snd f (h ≫ j))).obj
           ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E))),
       (Modules.tensorPullback h).map (picardCupProductMap f E j hO) ≫ b.hom =
-        a.hom ≫ picardCupProductMap f E (h ≫ j) hOT := by sorry
+        a.hom ≫ picardCupProductMap f E (h ≫ j) hOT := by
+  let N := (Modules.pushforward (pullback.snd f j)).obj
+    ((Modules.tensorPullback (pullback.fst f j)).obj E)
+  have : N.IsFiniteLocallyFree := hR.1
+  have hc : IsIso (Modules.picardDirectImageBaseChangeMap f j h E) :=
+    picardDirectImageBaseChangeMap_isIso f j h E (hR.2.2 h).1
+  have ha : IsIso (Modules.picardDirectImageBaseChangeMap f j h (Modules.dual E)) :=
+    picardDirectImageBaseChangeMap_isIso f j h (Modules.dual E) (hR.2.2 h).2
+  have hd : IsIso (Modules.picardTensorDualComparison h N) :=
+    picardTensorDualComparison_isIso h N
+  exact Modules.picardBaseChangeSquare_of_pairings h _ _ _ _
+    (picardCupProductMap f E j hO) (picardCupProductMap f E (h ≫ j) hOT)
+    (Modules.picardDirectImageBaseChangeMap f j h E)
+    (Modules.picardDirectImageBaseChangeMap f j h (Modules.dual E))
+    (picardCupPairing_baseChange f E j h hO hOT)
 
 end AlgebraicGeometry.Scheme

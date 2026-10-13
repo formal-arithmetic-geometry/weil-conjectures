@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-picard-tensor-dual-comparison-iso",
+ "kind": "statement",
+ "title": "Invertibility of the specified tensor-pullback dual comparison",
+ "statement": "For a morphism h:T→W of schemes [def-pc-scheme] and a finite locally free O_W-module M [def-sc-finite-locally-free-sheaf], the morphism δ_M:P_h(M^∨)→(P_hM)^∨ defined by transposing pulled internal-Hom evaluation in [lem-sc-picard-canonical-base-change-comparisons] is invertible. This is an assertion about that specified morphism, not existence of an arbitrary isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FNV",
+  "place": "Finite locally free duality via the dual-tensor-Hom isomorphism and evaluation; transport of that duality by the monoidal pullback functor."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite the closed comparison ihomUnitTensorToIhom M M as the sheaf dualTensorHom comparison, using the existing equality theorem. Its finite-locally-free IsIso instance gives the canonical exactPairingOfIsIso, with evaluation equal to internal-Hom evaluation.",
+   "uses": [
+    "lem-ag-dual-tensor-hom-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the monoidal structure of ordinary pullback along picardTensorComparison and map this exact pairing by ExactPairing.map. The transpose of the resulting evaluation is an isomorphism by curry_evaluation. Compose its target with internal Hom of the unit automorphism formed from the inverse transported unit map and picardTensorUnitIso. Currying naturality identifies this invertible composite with δ_M. Expand transport_μ and picardTensorObjIso to verify that identification. This covers empty schemes and rank zero.",
+   "uses": [
+    "lem-sc-picard-canonical-base-change-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-dual-tensor-hom-comparison",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0FNV",
+  "place": "Finite locally free duality via the dual-tensor-Hom isomorphism and evaluation; transport of that duality by the monoidal pullback functor.",
+  "note": "The source motivates the claim; the omitted categorical glue is expanded in the proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism comparison of module sheaf base change maps under isomorphic Cartesian squares",
+   "results": "Service unavailable: Internal Server Error. No verdict from this unavailable service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback dual comparison obtained by transposing pulled evaluation is an isomorphism for a finite locally free sheaf; module base change maps are invariant under isomorphic Cartesian squares",
+   "results": "pullbackObjFreeIso and freeFunctorCompPullbackIso; related free-module naturality lemmas. No matching theorem for the explicit canonical comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the existing library monoidal and mate lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "picardCupProduct|picardDirectImageBaseChange|picardTensorDualComparison|uncurry_pre_app|curry_evaluation|moduleBaseChangeMap_pasting",
+   "results": "Library search found PicardCupProductMap, ModuleBaseChangeMapPasting and ModuleBaseChangeOpenSquareIso. Mathlib has uncurry_pre_app and tensor naturality. WeilConjectures has curry_evaluation, exactPairingOfIsIso and ExactPairing.map. The earlier PullbackDualFiniteLocallyFree only states existence of an unspecified dual isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "Use these actual declarations; no duplicate canonical-map lemma was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductBaseChange",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: penultimate paragraph, compatibility with arbitrary base change; final paragraph, degree-zero cup product and its evaluation formula",
+   "via": [
+    "lem-sc-picard-cup-product-base-change-square",
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTensorDualComparisonIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTensorDualComparisonIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardTensorDualComparison_isIso",
+  "statement": "theorem picardTensorDualComparison_isIso {W T : Scheme.{u}} (h : T ⟶ W)\n    (M : W.Modules) [M.IsFiniteLocallyFree] :\n    IsIso (Modules.picardTensorDualComparison h M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T054220-L-443854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T054220-L-443854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
