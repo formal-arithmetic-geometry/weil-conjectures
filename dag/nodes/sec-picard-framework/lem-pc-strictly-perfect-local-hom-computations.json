@@ -1,0 +1,162 @@
+{
+ "id": "lem-pc-strictly-perfect-local-hom-computations",
+ "kind": "statement",
+ "title": "Exact Hom and K-flat ordinary dual for a strictly perfect local complex",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open, and $P$ a cochain complex of $\\mathcal O_U$-modules that is strictly perfect [def-pc-perfect-complex]. Use the actual Hom complex [def-pur-hom-complex] and the ordinary unit $S=\\mathcal O_U[0]$, dual $D_P=\\mathcal Hom^\\bullet(P,S)$ and tensor models of [def-pc-ordinary-evaluation-data]. Then for all arbitrary complexes $M,M'$ and every quasi-isomorphism $t:M\\to M'$ [def-pc-quasi-iso-modules], the actual induced map $\\mathcal Hom^\\bullet(P,t)$ is a quasi-isomorphism. Moreover $D_P$ is K-flat [def-pc-kflat-complex], meaning that $\\operatorname{Tot}(F\\otimes D_P)$ is acyclic for every acyclic $F$. No bound is imposed on $M,M'$ or $F$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pur-hom-complex",
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DM, lemma-Rhom-strictly-perfect, bounded Hom calculation; Tag 08DQ, lemma-dual-perfect-complex, final finite-free retract evaluation calculation"
+ },
+ "proof": [
+  {
+   "text": "For each term A=P^n choose a finite free retract A -> B -> A. Internal Hom from B preserves short exact sequences by finiteFreeInternalHomExact. Precomposition with the projection and inclusion gives a retract of the Hom short complex for A from that for B. Its homology is a retract of zero, so it is zero; its first and second arrows are retracts of a monomorphism and an epimorphism. Thus it is short exact. These arguments are the private proved helpers shortExact_of_retract and exact_homObj_of_finiteFree_retract.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the bounds on P and the exact-term conclusion of step 1 in quasiIso_homComplex_map_of_bounded_exact_terms. This proves preservation of all quasi-isomorphisms by the actual Hom(P,-) functor.",
+   "uses": [
+    "lem-pc-bounded-exact-term-hom-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let F be acyclic. The zero complex Z is acyclic, hence 0:Z -> F is a quasi-isomorphism. Each product factor in each term of Hom(P,Z) is zero, because the target term of Z is zero. The Hom product limit detects equality with zero, so Hom(P,Z) is acyclic. Apply step 2 to 0:Z -> F; quasiIso_iff_acyclic then makes Hom(P,F) acyclic.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct f:Tot(F tensor D_P) -> Hom(P,F) with localEvaluationDegreeMap and its differential identity; localEvaluationDegreeMap_formula supplies the specified ordinary evaluation predicate. Every degree is invertible by isIso_localOrdinaryEvaluation_degree. HomologicalComplex.Hom.isIso_of_components gives an isomorphism of complexes.",
+   "uses": [
+    "lem-pc-ordinary-evaluation-differential",
+    "lem-pc-strictly-perfect-ordinary-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport exactness in each degree of Hom(P,F) through the inverse chain isomorphism from step 4. This proves acyclicity of Tot(F tensor D_P) for every acyclic F, which is the definition of K-flatness.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-ordinary-evaluation-differential",
+  "lem-pc-strictly-perfect-ordinary-evaluation",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DM, lemma-Rhom-strictly-perfect, bounded Hom calculation; Tag 08DQ, lemma-dual-perfect-complex, final finite-free retract evaluation calculation",
+  "description": "X2 read Stacks tags online (the local literature checkout has no cohomology.tex); the proof below separates representative computations from ordinary evaluation invertibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from a bounded complex of finite projective sheaves preserves quasi-isomorphisms and its ordinary dual is K-flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary Hom dual of a bounded complex of finite projective sheaves is K-flat",
+   "results": "8 hits: CochainComplex.isKProjective_of_op, CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CochainComplex.isKProjective_iff_leftOrthogonal; no matching local sheaf-complex theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isKFlat.*dual|dual.*isKFlat|homComplex.*quasiIso|quasiIso.*homComplex",
+   "results": "0 hits: ; no matching local sheaf-complex theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalRetraction",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; local ordinary models in Stacks 08DQ, below the unit route.",
+   "via": [
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictlyPerfectLocalHomComputations",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyPerfectLocalHomComputations.lean",
+  "declaration": "AlgebraicGeometry.strictlyPerfect_localHom_computations",
+  "statement": "theorem strictlyPerfect_localHom_computations (X : Scheme.{u}) (U : X.Opens)\n    (P : CochainComplex (localEvaluationModules X U) ℤ)\n    (hstrict : Scheme.IsStrictlyPerfect X U P) :\n    (∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),\n      QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t)) ∧\n      (localEvaluationDual X U P).IsKFlat",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T122730-L-3633423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T122730-L-3633423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
