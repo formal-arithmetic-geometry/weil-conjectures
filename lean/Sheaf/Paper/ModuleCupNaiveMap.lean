@@ -74,6 +74,46 @@ def moduleCup_naiveMapComponent
       (RingedSpace.globalSectionsFunctor X.toRingedSpace).map
         (HomologicalComplex.ιTensorObj K L i j n h))
 
+@[reassoc]
+private theorem sectionTensorMap_natural_left
+    {M M' N : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (f : M ⟶ M') :
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace).map f ▷
+        (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N ≫
+      moduleCup_sectionTensorMap X M' N =
+        moduleCup_sectionTensorMap X M N ≫
+          (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (f ▷ N) := by
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext'
+  intro x y
+  exact (whiskerRight_app_tmulSection f x y).symm
+
+@[reassoc]
+private theorem sectionTensorMap_natural_right
+    {M N N' : SheafOfModules.{u} (moduleRings X.toRingedSpace)} (g : N ⟶ N') :
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M ◁
+        (RingedSpace.globalSectionsFunctor X.toRingedSpace).map g ≫
+      moduleCup_sectionTensorMap X M N' =
+        moduleCup_sectionTensorMap X M N ≫
+          (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (M ◁ g) := by
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext'
+  intro x y
+  exact (whiskerLeft_app_tmulSection g x y).symm
+
+private theorem naiveMapComponent_summand
+    (K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (i j n : ℤ) (h : i + j = n) :
+    let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+      (ComplexShape.up ℤ)
+    HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n h ≫
+      moduleCup_naiveMapComponent X K L n =
+        moduleCup_sectionTensorMap X (K.X i) (L.X j) ≫
+          (RingedSpace.globalSectionsFunctor X.toRingedSpace).map
+            (HomologicalComplex.ιTensorObj K L i j n h) := by
+  exact HomologicalComplex.ι_mapBifunctorDesc _ i j h
+
+set_option maxHeartbeats 2000000 in
+-- Rewriting tensor summands unfolds the two induced monoidal structures.
 /-- The summandwise section tensor maps commute with the total differentials.
 Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
 (blueprint: lem-sc-module-cup-naive-map-chain)
@@ -90,7 +130,35 @@ theorem moduleCup_naiveMap_comm
     let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
       (ComplexShape.up ℤ)
     (T.obj K ⊗ T.obj L).d n m ≫ moduleCup_naiveMapComponent X K L m =
-      moduleCup_naiveMapComponent X K L n ≫ (T.obj (K ⊗ L)).d n m := by sorry
+      moduleCup_naiveMapComponent X K L n ≫ (T.obj (K ⊗ L)).d n m := by
+  let S := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let T := S.mapHomologicalComplex (ComplexShape.up ℤ)
+  change (T.obj K ⊗ T.obj L).d n m ≫ _ = _ ≫ S.map ((K ⊗ L).d n m)
+  by_cases hnm : n + 1 = m
+  · apply HomologicalComplex.mapBifunctor.hom_ext
+    intro i j hij
+    change i + j = n at hij
+    change HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n hij ≫ _ =
+      HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n hij ≫ _
+    rw [← Category.assoc, CochainComplex.ιTensorObj_d _ _ i j n m hij hnm]
+    rw [Preadditive.add_comp, Linear.units_smul_comp]
+    simp only [Category.assoc]
+    rw [naiveMapComponent_summand X K L (i + 1) j m (by omega),
+      naiveMapComponent_summand X K L i (j + 1) m (by omega)]
+    conv_rhs => rw [← Category.assoc, naiveMapComponent_summand X K L i j n hij]
+    rw [Category.assoc, ← S.map_comp, CochainComplex.ιTensorObj_d K L i j n m hij hnm]
+    simp only [Functor.map_add, Functor.map_units_smul, Functor.map_comp,
+      Preadditive.comp_add, Linear.comp_units_smul]
+    apply congrArg₂ (· + ·)
+    · exact sectionTensorMap_natural_left_assoc X (K.d i (i + 1))
+          (S.map (HomologicalComplex.ιTensorObj K L (i + 1) j m (by omega)))
+    · apply congrArg (fun f ↦ i.negOnePow • f)
+      exact sectionTensorMap_natural_right_assoc X (L.d j (j + 1))
+          (S.map (HomologicalComplex.ιTensorObj K L i (j + 1) m (by omega)))
+  · have hn : ¬ (ComplexShape.up ℤ).Rel n m := hnm
+    rw [(T.obj K ⊗ T.obj L).shape n m hn, (K ⊗ L).shape n m hn]
+    simp
+
 
 /-- The actual naive section tensor cochain map.
 Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
