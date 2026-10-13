@@ -15,40 +15,40 @@
  },
  "proof": [
   {
-   "text": "The K-flat R-restriction P of Q computes its derived extension to B with its identity resolution. Thus the universal derived counit is invertible at P. This is the ordinary-module instance of the K-flat derived change-of-rings argument.",
+   "text": "Apply scalarExtensionCounit_isIso_of_kFlat to the R-restriction of Q, hK, and the universal pair (M.derived,M.counit).",
    "uses": [
-    "lem-pur-derived-change-of-rings"
+    "lem-pc-kflat-scalar-extension-counit"
    ],
    "elementary": false
   },
   {
-   "text": "The other factors in comparison_eq are the cohomology presentation isomorphism, the derived and homotopy homology factor isomorphisms, and homology of ordinaryIso. They are all invertible. Restriction of scalars to B therefore sends comparison i to an isomorphism. Restriction reflects isomorphisms, because the underlying map is bijective, so comparison i is invertible.",
+   "text": "Rewrite comparison_eq. All factors on its right are isomorphisms: the cohomology presentation, homology of the counit, both homology factor identifications, and homology of ordinaryIso. Cancel the restriction homology isomorphism on the left with IsIso.of_isIso_comp_right. Restriction of scalars reflects isomorphisms, so comparison i is an isomorphism.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "D is E-flat, so scalar extension is exact. Applying it to the cycles and boundaries exact sequences gives the canonical isomorphism from the D-extension of ordinary cohomology to cohomology of the D-extended ordinary complex.",
+   "text": "Apply flatScalarExtensionHomologyAdjunct_isIso with f:A→E, g:E→D, hD, ordinaryToLocalized, and ordinaryToLocalized_tmul. The adjunct t of its cohomology map is invertible.",
    "uses": [
-    "lem-weil-pbc-flat-tensor-exact"
+    "lem-pc-flat-scalar-extension-homology-adjunct"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor associativity identifies the extension of E tensor over A Q with D tensor over A Q, commuting with differentials. Its pure-tensor map agrees with ordinaryToLocalized_tmul. Consequently localized_eq and the scalar-extension adjunction identify localizedComparison i with extension of comparison i followed by this exact homology comparison and associativity. Each factor is an isomorphism.",
+   "text": "Injectivity and left naturality of the scalar-extension adjunction homEquiv, together with localized_eq, identify localizedComparison i with extension of comparison i followed by the preceding adjunct. Both factors are isomorphisms, so their composite is an isomorphism.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-flat-scalar-extension-homology-adjunct"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "J1",
+  "group": "G2",
   "date": "2026-10-13",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A1D, lemma-base-change-tensor, the stalkwise check of Tag 0DJ8 (1); More on Algebra Tag 06Y6, lemma-derived-base-change; detailed Lean argument/reduction by J1"
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, with Tag 00HD exactness and Tag 0A1D stalk computation; complete Lean counit and adjunction/homology-data argument"
  },
  "mathlib_searches": [
   {
@@ -118,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T045533-L-129766",
+  "landing": "20261013T072349-L-1119368",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

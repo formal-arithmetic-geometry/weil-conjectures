@@ -8,6 +8,8 @@ public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import Sheaf.Algebra.Homology.FlatScalarExtensionHomologyAdjunct
 
 /-! # Localized base-derived tensor comparison for K-flat complexes
 
@@ -50,6 +52,45 @@ theorem localizedComparison_isIso_of_kFlat_flat
         (MonoidalCategory.curriedTensor _)).Acyclic)
     (hD : Module.Flat (A ⊗[R] B) D)
     (M : BaseDerivedTensorCohomologyModel R A B Q D) :
-    ∀ i : ℤ, IsIso (M.localizedComparison i) := by sorry
+    ∀ i : ℤ, IsIso (M.localizedComparison i) := by
+  intro i
+  have hc := scalarExtensionCounit_isIso_of_kFlat (algebraMap R B) _ hK
+    M.derived M.counit M.universal
+  have he : IsIso
+      ((restrictScalars Algebra.TensorProduct.includeRight.toRingHom).map
+        (M.comparison i) ≫
+        (((((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex
+          (.up ℤ)).obj Q).sc i).mapHomologyIso
+          (restrictScalars Algebra.TensorProduct.includeRight.toRingHom)).inv) := by
+    rw [M.comparison_eq i]
+    infer_instance
+  have hm : IsIso ((restrictScalars Algebra.TensorProduct.includeRight.toRingHom).map
+      (M.comparison i)) := by
+    exact IsIso.of_isIso_comp_right _
+      (((((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex
+        (.up ℤ)).obj Q).sc i).mapHomologyIso
+        (restrictScalars Algebra.TensorProduct.includeRight.toRingHom)).inv
+  have : IsIso (M.comparison i) :=
+    isIso_of_reflects_iso _ (restrictScalars Algebra.TensorProduct.includeRight.toRingHom)
+  let adj := extendRestrictScalarsAdj (algebraMap (A ⊗[R] B) D)
+  let t := HomologicalComplex.homologyMap M.ordinaryToLocalized i ≫
+    (((((extendScalars ((algebraMap (A ⊗[R] B) D).comp
+      (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q).sc i
+      ).mapHomologyIso (restrictScalars (algebraMap (A ⊗[R] B) D))).hom
+  have ht : IsIso ((adj.homEquiv _ _).symm t) :=
+    flatScalarExtensionHomologyAdjunct_isIso
+      (algebraMap A (A ⊗[R] B)) (algebraMap (A ⊗[R] B) D) rfl hD Q
+      M.ordinaryToLocalized M.ordinaryToLocalized_tmul i
+  have hloc : M.localizedComparison i =
+      (extendScalars (algebraMap (A ⊗[R] B) D)).map (M.comparison i) ≫
+        (adj.homEquiv _ _).symm t := by
+    apply (adj.homEquiv _ _).injective
+    rw [adj.homEquiv_naturality_left]
+    dsimp only [HomologicalComplex.homology] at *
+    rw [Equiv.apply_symm_apply]
+    change adj.unit.app _ ≫ _ = _
+    exact M.localized_eq i
+  rw [hloc]
+  infer_instance
 
 end ModuleCat

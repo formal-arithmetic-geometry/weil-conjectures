@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-kflat-scalar-extension-counit",
+ "kind": "statement",
+ "title": "Universal scalar extension counit on K-flat module complexes",
+ "statement": "Let R and B be commutative rings, f:R\\to B a ring homomorphism, and P an unbounded cochain complex of R-modules [def-pc-cochain-complex-modules]. Suppose P is K-flat [def-pc-module-kflat-complex]: its total tensor with any acyclic R-complex is acyclic. Let LF:D(R)\\to D(B) be any universal total left derived functor [def-weil-abstract-derived-category] of termwise extension of scalars along f [def-weil-module-base-change], with counit ε on K(R). Then ε at the homotopy image of P is an isomorphism. No flatness of f or boundedness of P is assumed.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tags 064L and 06Y4; derived.tex Tag 06XN. Official Stacks pages read online because this remote clone omits the literature sources."
+ },
+ "proof": [
+  {
+   "text": "Use CochainComplex.kFlat_of_acyclic_tensor from KFlatScalarExtensionDerivedIso, imported with import all, to convert the acyclic-tensor hypothesis to the source-library kFlat predicate. This reuses the existing proved conversion rather than copying its proof.",
+   "uses": [
+    "lem-sc-kflat-scalar-extension-derived-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing CochainComplex.scalarExtension_quasiIso_of_kFlat from KFlatScalarExtensionDerivedIso, imported with import all. It states exactly that scalar extension preserves quasi-isomorphisms between K-flat complexes. Its mixed-tensor and degree-zero identification proof is reused, not duplicated.",
+   "uses": [
+    "lem-sc-kflat-scalar-extension-derived-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the source-library Functor.isLeftDerivedFunctor_iff_isIso_app_of_kFlat for extendScalars f. Its only functor-specific instance, PreservesKFlatQuasiIso, is supplied by the preceding existing scalar-extension lemma. ModuleCat.hasFunctorialFlatResolution and exact countable colimits supply its ambient hypotheses. Apply the forward implication to the given hLF and the K-flat conversion of hP. This directly proves the given counit component invertible without constructing another universal pair.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-sc-kflat-scalar-extension-derived-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kflat-scalar-extension-derived-iso",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tags 064L and 06Y4; derived.tex Tag 06XN. Official Stacks pages read online because this remote clone omits the literature sources.; explicit Lean proof by G2; returned-delivery repair: reuse the existing private scalar-extension and K-flat conversion lemmas via import all; fresh second reading: use the existing upstream universal-counit characterization directly, pruning the explicit resolving-class construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K flat complex scalar extension universal left derived functor counit isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat complex universal left derived extension scalars counit is isomorphism",
+   "results": "8 hits: CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|kFlat_quotient_obj_iff|mixedTensor_kFlat_quasiIso",
+   "results": "14 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatBaseDerivedTensorComparison",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The stalkwise K-flat tensor computation of Tag 0A1D/0DJ8, via steps of lem-pc-flat-base-derived-tensor-comparison.",
+   "via": [
+    "lem-pc-flat-base-derived-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KFlatScalarExtensionCounit",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatScalarExtensionCounit.lean",
+  "declaration": "ModuleCat.scalarExtensionCounit_isIso_of_kFlat",
+  "statement": "theorem scalarExtensionCounit_isIso_of_kFlat\n    {R B : Type u} [CommRing R] [CommRing B] (f : R →+* B)\n    [HasDerivedCategory.{w} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B)]\n    (P : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hP : ∀ L : CochainComplex (ModuleCat.{u} R) ℤ, L.Acyclic →\n      (CochainComplex.mapBifunctor L P (MonoidalCategory.curriedTensor _)).Acyclic)\n    (LF : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))\n    (ε : DerivedCategory.Qh ⋙ LF ⟶\n      (extendScalars f).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hLF : LF.IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))) :\n    IsIso (ε.app ((HomotopyCategory.quotient _ _).obj P))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T072349-L-1119368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T072349-L-1119368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
