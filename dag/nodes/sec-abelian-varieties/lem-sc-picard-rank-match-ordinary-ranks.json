@@ -1,0 +1,178 @@
+{
+ "id": "lem-sc-picard-rank-match-ordinary-ranks",
+ "kind": "statement",
+ "title": "Ordinary uniform ranks for iterated Picard direct images",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation [def-pc-scheme], $E$ a finite locally free module [def-amb-finite-locally-free-module], $g:T\\to S$, and assume $R(f,E,g)$ [def-sc-picard-universal-rank-match]. Let $F=E$ or $E^\\vee$, $p=\\operatorname{pr}_2:X\\times_S T\\to T$, $G=\\operatorname{pr}_1^*F$ and $M=p_*G$, using tensor pullback [def-pc-module-pullback] and ordinary pushforward [lem-pc-module-pullback-adjunction]. Then $M$ is finite locally free. Moreover, every $s\\in T$ has an open neighbourhood $U$ and $r\\in\\mathbb N$ such that for every $k:Y\\to U$, $p_{k\\iota,*}v_{k\\iota}^*G$ is finite locally free of rank $r$, where $p_{k\\iota},v_{k\\iota}$ are the projections of $(X\\times_S T)\\times_T Y$. This only compares ordinary objects and asserts no invertibility of any canonical map.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "steps 1 and 2: identity tests, nonempty-fibre rank propagation, and iterated ordinary images"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-sc-picard-universal-rank-match",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply R to the identity of T. Use identity and composition of tensor pullbacks and the isomorphism of fibre products induced by id_T followed by g=g to identify its first two rank tests with restrictions of M. Fixed-rank local frames on these neighbourhoods give finite local freeness of M.",
+   "uses": [
+    "def-sc-picard-universal-rank-match",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At s retain an identity-test neighbourhood V and rank r. Separate its empty-fibre and nonempty-fibre parts. The empty-fibre locus is clopen by properness and flat finite presentation; on that part all direct images after further base change are zero, so choose rank zero.",
+   "uses": [
+    "lem-sc-picard-fiber-rank-clopen"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the nonempty-fibre part apply R after every k:Y to V at each y. The third rank tests have ranks r and n on the same pulled-back E. A point of the fibre after a common residue-field extension makes the local ring nonzero, and comparison of the two finite free frames gives r=n. Equivalently the existing stalk-finrank comparison supplies this rank equality for the ordinary source and target. The dual frames have the same rank. This gives rank r on each test neighbourhood.",
+   "uses": [
+    "def-sc-picard-universal-rank-match",
+    "lem-sc-picard-base-change-stalk-finrank-eq",
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical isomorphism from the iterated fibre product to X times_S Y and tensor-pullback composition identify its direct image with the further test in R. Transport the local rank-r frames and glue using locality of fixed-rank finite local freeness. Empty Y is vacuous and zero rank uses empty frames.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-sc-picard-universal-rank-match",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "lem-sc-picard-base-change-stalk-finrank-eq",
+  "lem-sc-picard-fiber-rank-clopen"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "steps 1 and 2: identity tests, nonempty-fibre rank propagation, and iterated ordinary images",
+  "note": "B3 expands the indicated step of the existing truncation-data argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect derived direct image finite locally free degree zero canonical base change truncation",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallySmooth.of_perfectField, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctorCompHomologyFunctorIso\"",
+   "results": "1 hits: DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalDirectImageH0Unit|canonicalDegreeZeroMateSquare|rightDerived.*[Nn]eg",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary direct image universal local fixed rank finite locally free Picard",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tensor pullback base change mate degree zero cohomology right derived unit",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, SheafOfModules.conjugateEquiv_pullbackId_hom, CategoryTheory.ExponentiableMorphism.ev_coev, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorDegreeZeroMateSquare|picardRankMatch_ordinary_ranks",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical tensor pullback base change degree zero mate square finite locally free",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally constant rank of locally free direct image under all scheme base changes",
+   "results": "Module.isLocallyConstant_rankAtStalk and Module.rankAtStalk_baseChange found; neither includes ordinary scheme direct images or the universal rank predicate",
+   "date": "2026-10-13",
+   "verdict": "second reader: ingredients only, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Tag 0BDP third paragraph, omitted canonical base-change detail; truncation-data steps 1 and 2: identity tests, nonempty-fibre rank propagation, and iterated ordinary images",
+   "via": [
+    "lem-sc-picard-rank-match-derived-truncation-data",
+    "lem-sc-picard-base-change-stalk-surjective",
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardRankMatchOrdinaryRanks",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardRankMatchOrdinaryRanks.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_ordinary_ranks",
+  "statement": "theorem picardRankMatch_ordinary_ranks {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) :\n    let G := (Modules.tensorPullback (pullback.fst f g)).obj F\n    let M := (Modules.pushforward (pullback.snd f g)).obj G\n    M.IsFiniteLocallyFree ∧\n      ∀ s : T, ∃ U : T.Opens, s ∈ U ∧ ∃ r : ℕ,\n        ∀ (Y : Scheme.{u}) (k : Y ⟶ U.toScheme),\n          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n            ((Modules.pushforward (pullback.snd (pullback.snd f g) (k ≫ U.ι))).obj\n              ((Modules.tensorPullback (pullback.fst (pullback.snd f g) (k ≫ U.ι))).obj G))\n            r",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T062516-L-731308",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T062516-L-731308",
+  "kind": "interface"
+ }
+}
