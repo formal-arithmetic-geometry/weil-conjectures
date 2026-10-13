@@ -9,12 +9,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
-import Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime
-import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.DepthInSES
-import Sheaf.RingTheory.DepthLeDimAssociatedPrime
-import Sheaf.RingTheory.SerreConditions
 import Sheaf.RingTheory.SerreCriterionNormal
+import Sheaf.RingTheory.SerreS2RegularQuotientAssociatedHeight
 
 /-!
 # Associated primes of principal quotients of normal domains
@@ -63,6 +59,28 @@ theorem height_eq_one_of_mem_associatedPrimes_quotient_span
     {a : A} (ha : a ≠ 0) {p : Ideal A}
     (hp : p ∈ associatedPrimes A (A ⧸ Ideal.span {a})) :
     p.height = 1 := by
-  sorry
+  let : p.IsPrime := hp.isPrime
+  have hS : Ring.IsSerreS A 2 := (Ring.serreCriterionNormal A).mp (by
+    intro q hq
+    exact ⟨inferInstance,
+      isIntegrallyClosed_of_isLocalization (Localization.AtPrime q) q.primeCompl
+        q.primeCompl_le_nonZeroDivisors⟩) |>.2
+  have hupper : p.height ≤ 1 :=
+    height_le_one_of_mem_associatedPrimes_regular_quotient hS a
+      (mem_nonZeroDivisors_iff_ne_zero.mpr ha) p hp
+  have hamem : a ∈ p := by
+    apply hp.annihilator_le
+    rw [Submodule.mem_annihilator]
+    intro y hy
+    obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective y
+    change Ideal.Quotient.mk (Ideal.span {a}) (a * b) = 0
+    rw [Ideal.Quotient.eq_zero_iff_mem]
+    exact Ideal.mul_mem_right b _ (Ideal.mem_span_singleton_self a)
+  have hpbot : p ≠ ⊥ := by
+    intro h
+    rw [h, Ideal.mem_bot] at hamem
+    exact ha hamem
+  exact le_antisymm hupper
+    (Order.one_le_iff_ne_zero.mpr (Ideal.height_eq_zero_iff_eq_bot.not.mpr hpbot))
 
 end Ideal

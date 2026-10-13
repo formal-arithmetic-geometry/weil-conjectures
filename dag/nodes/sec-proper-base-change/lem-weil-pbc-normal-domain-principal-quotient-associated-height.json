@@ -14,99 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Notation and lower bound. Let $\\mathfrak p$ be an associated prime of $A/aA$, so $\\mathfrak p=\\operatorname{Ann}_A(\\bar c)$ for some nonzero $\\bar c\\in A/aA$. Since $a\\bar c=0$ in $A/aA$ we have $a\\in\\mathfrak p$, and $a\\neq0$, so $(0)\\subsetneq\\mathfrak p$; as $A$ is a domain, $(0)$ is a prime ideal, and $(0)\\subsetneq\\mathfrak p$ is a chain of length one ending at $\\mathfrak p$. It remains to show there is no strict chain of primes of length $\\ge2$ ending at $\\mathfrak p$.",
+   "text": "For every prime q, Mathlib gives that A_q is a domain and is integrally closed. Apply the forward implication of Serre criterion normal and retain its S2 conclusion.",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since A is a domain and a is nonzero, a is a nonzerodivisor. Apply the existing S2 regular quotient associated-height theorem to obtain height(p) at most one. This packages the localization and depth argument of the original steps 3 through 6.",
+   "uses": [
+    "lem-weil-pbc-serre-s2-regular-quotient-associated-height"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The element a annihilates every quotient element: lift it to b in A and observe that ab belongs to the principal ideal (a). Association implies containment of the module annihilator in p, hence a belongs to p. As a is nonzero, p is not the zero ideal. Mathlib height_eq_zero_iff_eq_bot for domains gives height(p) nonzero, hence at least one. Antisymmetry with the upper bound gives height(p)=1.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T (lemma-normal-domain-intersection-localizations-height-1), proof of (1), last sentence: 'which have height 1 as a is not zero'"
-   }
-  },
-  {
-   "text": "$A$ has $(S_2)$. Let $A_{\\mathfrak q}$ be the localization at any prime $\\mathfrak q$; by [lem-weil-pbc-localization-normal-domain] it is a normal domain, so $A$ is a normal ring in the sense of [def-weil-pbc-normal-ring]. $A$ is Noetherian, so Serre's criterion [lem-weil-pbc-serre-criterion-normal] gives that $A$ has $(R_1)$ and $(S_2)$ [def-weil-pbc-serre-conditions-rk-sk]; in particular $\\operatorname{depth}(A_{\\mathfrak p})\\ge\\min\\{2,\\dim(A_{\\mathfrak p})\\}$.",
-   "uses": [
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-serre-criterion-normal",
-    "def-weil-pbc-serre-conditions-rk-sk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T, proof of (1), first sentence: 'By Lemma 031S (lemma-criterion-normal) we see that R has (S_2)'"
-   }
-  },
-  {
-   "text": "The localized short exact sequence. Since $A$ is a domain and $a\\neq0$, multiplication by $a$ is injective, so $0\\to A\\xrightarrow{a}A\\to A/aA\\to0$ is an exact sequence of $A$-modules. Localizing at $T=A\\setminus\\mathfrak p$ keeps it exact [lem-weil-pbc-localization-module-exact] (applied at the three spots), giving the exact sequence $0\\to A_{\\mathfrak p}\\xrightarrow{a}A_{\\mathfrak p}\\to M\\to0$ of $A_{\\mathfrak p}$-modules with $M:=(A/aA)_{\\mathfrak p}$ [def-weil-pbc-module-localization]. Here $A_{\\mathfrak p}$ is a Noetherian [lem-weil-pbc-localization-noetherian] local ring with maximal ideal $\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]; the three modules are finite (the middle ones free of rank one, $M$ a quotient of $A_{\\mathfrak p}$); $A_{\\mathfrak p}\\neq0$; and $M\\cong A_{\\mathfrak p}/aA_{\\mathfrak p}\\neq0$ because $a\\in\\mathfrak pA_{\\mathfrak p}$ is not a unit, so $1\\notin aA_{\\mathfrak p}$.",
-   "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T, proof of (1), second sentence: 'Hence for any nonzero element a in R we see that R/aR has (S_1) (use Lemma 00LX (lemma-depth-in-ses) for example)' -- the short exact sequence 0 -> R -> R -> R/aR -> 0 localized at p"
-   }
-  },
-  {
-   "text": "$(S_1)$ for $A/aA$ at $\\mathfrak p$. By [lem-weil-pbc-depth-in-ses] (2) applied over the Noetherian local ring $A_{\\mathfrak p}$ to the sequence of step 3, $\\operatorname{depth}(M)\\ge\\min\\{\\operatorname{depth}(A_{\\mathfrak p}),\\operatorname{depth}(A_{\\mathfrak p})-1\\}=\\operatorname{depth}(A_{\\mathfrak p})-1$ [def-weil-pbc-depth]. So if $\\dim(A_{\\mathfrak p})\\ge2$, then $\\operatorname{depth}(A_{\\mathfrak p})\\ge2$ by step 2, and $\\operatorname{depth}(M)\\ge1$.",
-   "uses": [
-    "lem-weil-pbc-depth-in-ses",
-    "def-weil-pbc-depth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T, proof of (1), second sentence ((S_2) for R gives (S_1) for R/aR via Tag 00LX lemma-depth-in-ses, part (2))"
-   }
-  },
-  {
-   "text": "An associated prime gives depth zero. Since $\\operatorname{Ann}_A(\\bar c)=\\mathfrak p$, [lem-weil-pbc-associated-prime-localize-at-prime] (with $T=A$, $P=A/aA$, $\\mathfrak q=\\mathfrak p$) gives $\\operatorname{Ann}_{A_{\\mathfrak p}}(\\bar c/1)=\\mathfrak pA_{\\mathfrak p}$, so the maximal ideal $\\mathfrak pA_{\\mathfrak p}$ is an associated prime of the finite $A_{\\mathfrak p}$-module $M$. By [lem-weil-pbc-depth-le-dim-associated-prime] over the Noetherian local ring $A_{\\mathfrak p}$, $\\operatorname{depth}(M)\\le\\dim(A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p})=0$, the quotient being a field, whose only prime is $(0)$ [def-weil-pbc-krull-dimension-ring]. Hence $\\operatorname{depth}(M)=0$.",
-   "uses": [
-    "lem-weil-pbc-associated-prime-localize-at-prime",
-    "lem-weil-pbc-depth-le-dim-associated-prime",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T, proof of (1), third sentence: 'Hence R/aR has no embedded primes (Lemma 031Q lemma-criterion-no-embedded-primes)'; the argument used is the proof of 031Q, direction (2) => (1): p R_p is associated to M_p (Tag 0310 lemma-associated-primes-localize), hence depth(M_p) = 0 (Tag 00LD lemma-ideal-nonzerodivisor)"
-   }
-  },
-  {
-   "text": "Conclusion. Steps 4 and 5 give $\\dim(A_{\\mathfrak p})\\le1$. By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(A_{\\mathfrak p})$ is the supremum of the lengths $t$ of strict chains $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_t$ of primes of $A$ with $\\mathfrak p_t\\subseteq\\mathfrak p$; in particular there is no strict chain of length $\\ge2$ ending at $\\mathfrak p$. With step 1, $\\mathfrak p$ has height one.",
-   "uses": [
-    "lem-weil-pbc-localization-dimension-chains-below-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T, proof of (1), fourth sentence: 'We conclude the associated primes of R/aR are exactly the minimal primes p over (a), which have height 1 as a is not zero (Lemma 00KV lemma-minimal-over-1)'; here the height bound is read off at p directly from steps 4-5, so neither the passage to minimal primes over (a) nor Krull's principal ideal theorem 00KV is needed"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-normal-domain",
-  "def-weil-pbc-normal-ring",
   "lem-weil-pbc-serre-criterion-normal",
-  "def-weil-pbc-serre-conditions-rk-sk",
-  "lem-weil-pbc-localization-module-exact",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-depth-in-ses",
-  "def-weil-pbc-depth",
-  "lem-weil-pbc-associated-prime-localize-at-prime",
-  "lem-weil-pbc-depth-le-dim-associated-prime",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-localization-dimension-chains-below-prime"
+  "lem-weil-pbc-serre-s2-regular-quotient-associated-height"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 031T (lemma-normal-domain-intersection-localizations-height-1), proof of (1), with Tags 031S (lemma-criterion-normal), 00LX (lemma-depth-in-ses), 031Q (lemma-criterion-no-embedded-primes, proof of the direction (S_1) => no embedded primes, via 0310 and 00LD); the source's final passage through minimal primes over (a) and 00KV (lemma-minimal-over-1) is replaced by reading the height bound off the depth inequality at the given associated prime"
+  "place": "Tag 031T, proof of (1), using Tag 031S for S2; the existing S2 regular quotient associated-height theorem packages the localized regular-element depth argument. Lower bound uses nonzero a in p and Mathlib Ideal.height_eq_zero_iff_eq_bot."
  },
  "mathlib_searches": [
   {
@@ -216,5 +150,15 @@
   "group": "F1",
   "result": "pass",
   "note": "A: CommRing+IsDomain+IsIntegrallyClosed (NORMAL RING domain form)+IsNoetherianRing; a≠0; A/aA = A ⧸ Ideal.span {a}; associated prime = associatedPrimes (isAssociatedPrime_iff under Noetherian = prime colon ⊥ {x}, x≠0 forced by primality); p.height = 1 ⇔ (0)⊊p and no longer chain (height_eq_primeHeight=Order.height); spellings match landed AnalyticallyUnramifiedPrincipalCriterion and the parallel fractional sibling"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T002011-L-2358999",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
