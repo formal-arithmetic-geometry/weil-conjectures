@@ -12843,3 +12843,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:35 L: merged deliver/J2/Sheaf.AlgebraicGeometry.PurelyInseparableGenericBaseSpread (stage 3; reviewer PASS; first push; landing 20261013T143546-L-560991 (proof); batch 20261013T143541; modules 1; new nodes 0)
 - 14:35 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalMap (stage 3; reviewer PASS; first push; landing 20261013T143547-L-561102 (proof); batch 20261013T143541; modules 1; new nodes 0)
 - 14:35 L: merged deliver/K1/Sheaf.AlgebraicGeometry.FieldHypersurfaceIntegralPresentation (stage 3; reviewer PASS; first push; landing 20261013T143547-L-561249 (proof); batch 20261013T143541; modules 1; new nodes 0)
+- 14:35 L: merged deliver/K1/Sheaf.AlgebraicGeometry.GenericFibreDominantField (stage 3; reviewer PASS; first push; landing 20261013T143547-L-561399 (proof); batch 20261013T143541; modules 1; new nodes 0)
