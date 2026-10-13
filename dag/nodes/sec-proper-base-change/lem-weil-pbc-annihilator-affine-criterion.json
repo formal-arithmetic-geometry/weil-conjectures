@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-annihilator-affine-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the Tag 01PO input, Affine criterion for local ideal annihilation",
+   "via": [
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine criterion for local ideal annihilation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $J$ quasi-coherent ideal sheaf data [def-sbc-ideal-sheaf-powers], $F$ any sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $U$ an affine open and $s\\in F(U)$. Then $a(s|_V)=0$ for every open $V\\subseteq U$ and $a\\in J(V)$ if and only if $as=0$ for every $a\\in J(U)$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "For an affine W contained in U, J(W) is the extension of J(U) along restriction (IdealSheafData.map_ideal). The ideal of scalars killing s restricted to W contains every restricted section of J(U); by the ideal map/comap adjunction it contains J(W).",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+   }
+  },
+  {
+   "text": "For any V contained in U, cover V by all affine W contained in V. Naturality of the ideal inclusion and its image formula show that a in J(V) restricts into J(W). Thus each restriction of a times s restricted to V is zero. Separatedness gives zero on V. Conversely apply local annihilation with V=U and identity restriction.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lean realization of Tag 01PO, with the sheaf construction and affine criterion written out and the omitted stalk lifting argument expanded; official source read online because this clone has no literature source files."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "on affine opens sections killed by ideal sections are locally killed by the ideal sheaf",
+   "results": "unavailable: Internal Server Error; no absence verdict assigned",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent ideal restriction to smaller affine open is extended ideal",
+   "results": "IdealSheafData.map_ideal (Mathlib.AlgebraicGeometry.IdealSheaf.Basic) is the extension input; no complete local-annihilation criterion.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilat|torsionBy",
+   "results": "Only ring/module annihilator results, no module-sheaf annihilator construction. Additional focused reads: Presheaf/Submodule.lean, Sheaf.lean, Modules/Sheaf.lean, Modules/Tilde.lean, IdealSheaf/Basic.lean and Stalks.lean.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AnnihilatorAffineCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AnnihilatorAffineCriterion.lean",
+  "declaration": "AlgebraicGeometry.annihilator_affine_criterion",
+  "statement": "theorem annihilator_affine_criterion (X : Scheme.{u}) (J : X.IdealSheafData)\n    (F : X.Modules) (U : X.affineOpens) (s : Γ(F, U.1)) :\n    (∀ (V : X.Opens) (h : V ≤ U.1), ∀ a ∈ J.idealOfOpens V,\n      a • F.presheaf.map (homOfLE h).op s = 0) ↔ ∀ a ∈ J.ideal U, a • s = 0",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T022408-L-3211188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T022408-L-3211188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

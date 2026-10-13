@@ -10,9 +10,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.AnnihilatorSubsheaf
+import Sheaf.AlgebraicGeometry.AnnihilatorAffineCriterion
+import Sheaf.AlgebraicGeometry.AnnihilatorQuasicoherent
+import Sheaf.AlgebraicGeometry.AnnihilatorStalkLocalLift
 
 /-! # The subsheaf of sections annihilated by an ideal
 
@@ -29,6 +30,20 @@ open scoped AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+private theorem annihilator_stalkMap_germ (X : Scheme.{u}) {G F : X.Modules}
+    (ι : G ⟶ F) (x : X) (U : X.Opens) (hx : x ∈ U) (t : Γ(G, U)) :
+    ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom
+        (G.presheaf.germ U x hx t) = F.presheaf.germ U x hx (ι.app U t) := by
+  exact TopCat.Presheaf.stalkFunctor_map_germ_apply U x hx ι.mapPresheaf t
+
+private theorem annihilator_stalkMap_injective (X : Scheme.{u}) {G F : X.Modules}
+    (ι : G ⟶ F) [Mono ι] (x : X) :
+    Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom := by
+  have : Mono ι.val := (SheafOfModules.forget X.ringCatSheaf).map_mono ι
+  have hm := (RingedSpace.module_stalk_exact X.toRingedSpace ι).1
+    (fun U ↦ PresheafOfModules.injective_of_mono ι.val (op U)) x
+  exact (ModuleCat.mono_iff_injective _).mp hm
+
 /-- The subsheaf of sections annihilated by a quasi-coherent ideal of finite type.
 Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP
 (blueprint: lem-weil-pbc-sections-annihilated-by-ideal).
@@ -44,28 +59,21 @@ the ideal stalk through all germs of ideal sections: every element of `J_x` is s
 germ, and its image in `𝒪_{X,x}` is the germ of the section. The stalk maps of both
 inclusions are injective.
 
-Proof (the five steps of the node):
-1. Restrictions, sums and scalar multiples preserve local annihilation. Compatible
-sections glue in `F`, and the product with any local ideal section vanishes on a
-cover and hence vanishes. This gives a subsheaf of modules (def-weil-sheaf-of-modules-category).
-2. On an affine open write `F = M~` and `I = I~` using the affine tilde/Gamma
-adjunction (lem-weil-pbc-affine-tilde-gamma-adjunction). The ideal has finitely many
-generators by lem-weil-pbc-quasi-coherent-finite-type-affine. On principal opens,
-sections are localizations (lem-weil-pbc-spec-module-tilde-sections). Global
-annihilation implies local annihilation, and the converse takes `V = U`.
-3. Put `M' = {m : I m = 0}`. If `m/f^n` is killed by the localized ideal, clear
-the denominator for each ideal generator, then take a common power of `f`.
-This proves `(M')_f = {z : I_f z = 0}` (def-weil-pbc-module-localization-away).
-For the empty generator family take exponent zero.
-4. These identifications commute with restrictions on principal opens, a basis
-(def-weil-affine-spectrum), and identify `G` with `(M')~` locally. Hence `G` is
-quasi-coherent (pqf-def-coherent, lem-weil-pbc-spec-module-tilde-sections).
-5. At a prime, use stalk localization (lem-weil-pbc-spec-tilde-stalk-localization,
-lem-weil-pbc-affine-open-stalk-localization, def-weil-pbc-module-localization).
-Clear one denominator outside the prime for each generator and multiply them;
-the numerator then lies in `M'`. The empty product is one. Exactness of stalks
-(lem-weil-pbc-module-stalk-exact) makes both inclusion stalk maps injective.
-Germs and their scalar action are those of def-weil-pbc-module-stalk.
+Proof:
+1. `exists_annihilator_subsheaf` constructs the submodule presheaf explicitly and
+proves gluing by separatedness of F. Its inclusion is sectionwise injective.
+2. `annihilator_affine_criterion` identifies the affine image by ideal extension
+along restriction and separatedness on an affine cover. This step needs neither
+finite type of the ideal nor quasi-coherence of F.
+3. `annihilator_subsheaf_quasicoherent` supplies quasi-coherence from the affine
+image formula, using the finite-generator principal-open localization argument.
+4. `RingedSpace.module_stalk_exact` makes both inclusion stalk maps injective.
+A germ from G is annihilated by every ideal germ: intersect the two representative
+opens, restrict the ideal section there, and apply the sectionwise image formula.
+5. `annihilator_stalk_local_lift` gives a locally annihilated representative of an
+annihilated stalk element. Lift that representative through the sectionwise image
+formula and take its germ. The quasi-coherence and local-lifting inputs remain
+separate named theorems whose proofs are open.
 -/
 theorem sections_annihilated_by_ideal
     (X : Scheme.{u}) (J : X.IdealSheafData) [J.toModules.IsFiniteType]
@@ -86,6 +94,42 @@ theorem sections_annihilated_by_ideal
           s ∈ Set.range ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom ↔
             ∀ (U : X.Opens) (hx : x ∈ U), ∀ a ∈ J.idealOfOpens U,
               X.presheaf.germ U x hx a • s = 0) := by
-  sorry
+  obtain ⟨G, ι, hmono, himage⟩ := exists_annihilator_subsheaf X J F
+  have : Mono ι := hmono
+  have haffine : ∀ (U : X.affineOpens) (s : Γ(F, U.1)),
+      s ∈ Set.range (ι.app U.1) ↔ ∀ a ∈ J.ideal U, a • s = 0 := by
+    intro U s
+    exact (himage U.1 s).trans (annihilator_affine_criterion X J F U s)
+  refine ⟨G, ι, hmono, annihilator_subsheaf_quasicoherent X J F G ι haffine,
+    himage, haffine, ?_⟩
+  intro x
+  refine ⟨annihilator_stalkMap_injective X J.toModulesι x,
+    annihilator_stalkMap_injective X ι x, ?_⟩
+  intro s
+  constructor
+  · rintro ⟨q, rfl⟩ U hx a ha
+    obtain ⟨V, hxV, t, rfl⟩ := G.presheaf.exists_germ_eq q
+    rw [annihilator_stalkMap_germ]
+    have hlocal := (himage V (ι.app V t)).mp ⟨t, rfl⟩
+    have ha' : X.presheaf.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op a ∈
+        J.idealOfOpens (U ⊓ V) := by
+      change a ∈ (J.idealOfOpens U : Set Γ(X, U)) at ha
+      rw [← J.range_toModulesι_app_eq_idealOfOpens] at ha
+      obtain ⟨b, rfl⟩ := ha
+      change _ ∈ (J.idealOfOpens (U ⊓ V) : Set Γ(X, U ⊓ V))
+      rw [← J.range_toModulesι_app_eq_idealOfOpens]
+      refine ⟨J.toModules.presheaf.map (homOfLE inf_le_left).op b, ?_⟩
+      exact ConcreteCategory.congr_hom
+        (J.toModulesι.mapPresheaf.naturality (homOfLE inf_le_left).op) b
+    have hxUV : x ∈ U ⊓ V := ⟨hx, hxV⟩
+    rw [← X.presheaf.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) x hxUV a,
+      ← F.presheaf.germ_res_apply (homOfLE inf_le_right : U ⊓ V ⟶ V) x hxUV]
+    erw [← PresheafOfModules.germ_smul (R := X.presheaf) F.val]
+    rw [hlocal (U ⊓ V) inf_le_right _ ha', map_zero]
+  · intro hs
+    obtain ⟨U, hx, t, ht, hlocal⟩ := annihilator_stalk_local_lift X J F x s hs
+    obtain ⟨q, hq⟩ := (himage U t).mpr hlocal
+    refine ⟨G.presheaf.germ U x hx q, ?_⟩
+    rw [annihilator_stalkMap_germ, hq, ht]
 
 end AlgebraicGeometry

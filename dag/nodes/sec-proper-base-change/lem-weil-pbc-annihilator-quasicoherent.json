@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-annihilator-quasicoherent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the Tag 01PO input, Quasi-coherence from the affine annihilator image",
+   "via": [
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-coherence from the affine annihilator image",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $J$ quasi-coherent ideal sheaf data of finite type [def-sbc-ideal-sheaf-powers], and $F$ a quasi-coherent module sheaf [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $G$ be a module sheaf and $\\iota:G\\to F$ a monomorphism. Assume that for every affine open $U$, the image of $\\iota(U)$ consists exactly of the sections $s$ killed by every $a\\in J(U)$. Then $G$ is quasi-coherent.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-ideal-sheaf-powers",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open write F as M tilde and the ideal as I tilde. Finite type gives finitely many generators of I. Set M prime to the submodule killed by I. The assumed affine image formula identifies G(U) with M prime and identifies G(D(f)) with the annihilator of I_f in M_f.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+   }
+  },
+  {
+   "text": "Localization of the inclusion M prime into M is injective. For m/f^n killed by I_f, clear a power of f for each generator of I, then take the maximum exponent e. The numerator f^e m is in M prime and m/f^n is its fraction with denominator f^(n+e). For the empty generator family choose e=0. Thus the localized inclusion has precisely the required annihilator image.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+   }
+  },
+  {
+   "text": "The image identifications commute with restrictions because all inclusions into F do. They uniquely identify G with M prime tilde on the principal-open basis, and hence on the affine open. Every point has an affine neighborhood, so G is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-affine-spectrum",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 01PO (lemma-sections-annihilated-by-ideal), proof; read at https://stacks.math.columbia.edu/tag/01PO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-affine-spectrum",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lean realization of Tag 01PO, with the sheaf construction and affine criterion written out and the omitted stalk lifting argument expanded; official source read online because this clone has no literature source files."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type ideal annihilator subsheaf of a quasi-coherent sheaf is quasi-coherent",
+   "results": "unavailable: Internal Server Error; no absence verdict assigned",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherence of submodule sheaf annihilated by finite type ideal",
+   "results": "IsFiniteType and IsQuasicoherent constructors; no annihilator subsheaf quasi-coherence theorem.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilat|torsionBy",
+   "results": "Only ring/module annihilator results, no module-sheaf annihilator construction. Additional focused reads: Presheaf/Submodule.lean, Sheaf.lean, Modules/Sheaf.lean, Modules/Tilde.lean, IdealSheaf/Basic.lean and Stalks.lean.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AnnihilatorQuasicoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AnnihilatorQuasicoherent.lean",
+  "declaration": "AlgebraicGeometry.annihilator_subsheaf_quasicoherent",
+  "statement": "theorem annihilator_subsheaf_quasicoherent (X : Scheme.{u}) (J : X.IdealSheafData)\n    [J.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent]\n    (G : X.Modules) (ι : G ⟶ F) [Mono ι]\n    (himage : ∀ (U : X.affineOpens) (s : Γ(F, U.1)),\n      s ∈ Set.range (ι.app U.1) ↔ ∀ a ∈ J.ideal U, a • s = 0) :\n    G.IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T022408-L-3211188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T022408-L-3211188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
