@@ -1,0 +1,127 @@
+{
+ "id": "new-closed-structure-tensor-projection-stalk",
+ "kind": "statement",
+ "title": "Stalk calculation for a map with the closed-structure tensor section formula",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme], let M be an O_Y-module sheaf, and set B=i_*O_Z. Let α:M tensor B→i_*i^*M be a module map, using the sheaf tensor [def-pur-sheaf-tensor-product] and tensor pullback [def-pc-module-pullback]. Assume that for each open U of Y, section s of M on U and section r of O_Z on i⁻¹U, α(s tensor r)=r times η_M(s), where η is the canonical tensor-pullback/pushforward adjunction unit [lem-pc-module-pullback-adjunction]. Then the map induced by α on the underlying abelian-group stalk at any point x of Y is an isomorphism. No naturality in M is assumed, and no map is constructed by this assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu",
+  "place": "Tags 08KS, 01CB, 0098 and 00AE: closed-pushforward and tensor/pullback stalk computations, with the section formula specifying the comparison map"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "At x=i(z), use tensor stalks, closed-pushforward stalks, and pullback stalks to identify the source with M_x tensor over O_Y,x O_Z,z and the target with O_Z,z tensor over O_Y,x M_x. Take germs of the section formula. The pullback unit has germ 1 tensor m. Represent the two germs on a common open neighbourhood (the closed-embedding neighbourhood cofinality allows the O_Z section to be represented over i⁻¹U). The map sends m tensor r to r tensor m. Pure tensors generate, so this is the scalar-extension symmetry isomorphism.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x outside the closed image, the closed-pushforward stalk theorem makes both i_*O_Z and i_*i^*M have zero stalk. The tensor-stalk isomorphism makes the source zero; the unique map between zero abelian groups is an isomorphism. This covers the remaining points.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex, second reader H1",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu",
+   "place": "Tags 08KS, 01CB, 0098 and 00AE: closed-pushforward and tensor/pullback stalk computations, with the section formula specifying the comparison map"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a sheaf of modules tensored with the direct image of the structure sheaf to the direct image of its pullback is invertible on stalks for a closed immersion if it sends a tensor of sections to the product with the pullback unit",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion inferred. Other search kinds and source grep were used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projectionMap",
+   "results": "msearch: 0 hits. Additional rg source inspection found tensor_bilinear_universal, private tensor_hom_ext and the existing tensor/pullback/closed-pushforward stalk comparisons, but no matching local criterion.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural tensor projection map for direct image of modules using adjunction unit",
+   "results": "8 generic ModuleCat adjunction, scalar-extension and internal-Hom lemmas; no sheaf projection-stalk comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkFunctor\", \"IsIso\"",
+   "results": "Found TopCat.Presheaf.isIso_of_stalkFunctor_map_iso and its variants, used to assemble the local result in the original theorem. They do not prove the local computation.",
+   "date": "2026-10-14",
+   "verdict": "criterion used, local computation absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedStructureTensorProjection",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-closed-structure-tensor-projection",
+   "place": "step 2: local computation for a specified section-pairing map; construction and naturality are proved in the original module",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedStructureTensorProjectionStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedStructureTensorProjectionStalk.lean",
+  "declaration": "AlgebraicGeometry.closedStructure_projection_stalk_isIso",
+  "statement": "theorem closedStructure_projection_stalk_isIso\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (M : Y.Modules)\n    (α : M ⊗ (pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) ⟶\n      (pushforward i).obj ((tensorPullback i).obj M))\n    (hα : ∀ (U : Y.Opens) (s : Γ(M, U))\n      (r : Γ((pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf), U)),\n      α.app U (tmulSection s r) = (show Γ(Z, i ⁻¹ᵁ U) from r) •\n        (show Γ((tensorPullback i).obj M, i ⁻¹ᵁ U) from\n          ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app M).app U s))\n    (x : Y) :\n    IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map α.mapPresheaf)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T234511-L-2163028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T234511-L-2163028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
