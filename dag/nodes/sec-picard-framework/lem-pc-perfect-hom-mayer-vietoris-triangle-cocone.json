@@ -1,0 +1,178 @@
+{
+ "id": "lem-pc-perfect-hom-mayer-vietoris-triangle-cocone",
+ "kind": "statement",
+ "title": "Coherent geometric Mayer–Vietoris triangle cocone before applying Hom",
+ "statement": "Let I be a directed preorder and R:I→CommRing a diagram with colimit cocone c and witness hc. Fix i∈I, a scheme X [def-pc-scheme], and a locally finitely presented qcqs map s₀:X→Spec(R_i). Suppose the fixed-universe derived category D(O_Z) [def-pc-derived-category] exists for every scheme Z. Let U,V be opens of X, U compact and V affine. Let t:Y→X be an open immersion with range U∪V, and s:Y→Spec(R_i) equal to t≫s₀, locally finitely presented and qcqs. Suppose the localized module-site derived categories on every open of Y exist. Let P,Q be perfect objects [def-pc-perfect-complex] of D(O_Y). There exist a tail-indexed functor D of distinguished triangles in the fixed category D(O_Y), a cocone d with distinguished apex, stage equivalences e_j from ULift Hom(P,(D_j)₁[0]) to Hom(P_j,Q_j), and a limit equivalence b of the analogous Hom groups. Postcomposition by the zero-shift first component of a transition is identified by e with perfectStageMap; postcomposition by the zero-shift first component of a cocone leg is identified with perfectLimitMap [lem-pc-perfect-hom-transport]. Apply the actual canonical five-term Hom row functor [lem-pc-perfect-hom-triangle-row-presentations] to this cocone. For its four noncentral columns, the induced group-colimit comparison has PerfectHomLocalMap(R,c,i,X,s₀,U,V,-) [def-pc-perfect-hom-local-map]. This statement supplies triangle data and geometric comparison equations, but no group-row complex or short-complex presentation witnesses.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 09RE and 08BW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "def-pc-perfect-hom-local-map",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-perfect-hom-triangle-row-presentations"
+ ],
+ "proof": [
+  {
+   "text": "Pull U,V back to Y and each stage and limit scheme. The cover is exhaustive since t has range U∪V. The schemes are qcqs over affine bases; compactness of the cover and quasi-separatedness give compact overlaps. Pullback and restriction preserve the strictly perfect local models. Shifts remain perfect, and perfect objects have quasi-coherent cohomology.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-localized-pullback-perfect-model",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-perfect-thick-closure",
+    "lem-sc-perfect-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "Construct the K-injective Mayer–Vietoris distinguished triangle of Q at each stage and at the limit. Push these triangles to Y using the triangulated derived direct image of the projection. Their first objects are the direct images of the stage pullbacks of Q. No Hom row or short-complex presentation is constructed at this step.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "For a transition apply the unit Q_j→Rh_*Lh*Q_j and Mayer–Vietoris naturality, including the boundary. The direct-image comparison must be the lift pinned by its derivation unit, not an arbitrary choice of an isomorphism. Uniqueness of the derived lift proves its identity and composition equations, since the underived direct-image comparisons have those equations. This gives a functor D of distinguished triangles in D(O_Y) and a cocone d with distinguished apex. Stage and limit Hom adjunctions, followed by the zero-shift comparison, give e and b. The adjunct of f followed by the unit is pullback(f) followed by pullback of the unit and the counit; the triangle identity cancels the last two factors. Counit-pinned pullback composition comparisons then give exactly perfectStageMap and perfectLimitMap as the two stated formulas.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
+   }
+  },
+  {
+   "text": "Apply the canonical Hom row construction to D and d. The outer columns identify by open adjunction with Hom of the restricted perfect pairs, with Q shifted by -1 in the first two columns. Use perfect_hom_stage_colimit for their set diagrams. Underlying-set preservation of filtered group colimits and finite-product preservation identify the intersection column comparisons with basic local comparisons and the two-open columns with products. Transport by the adjunction and shift equivalences using PerfectHomLocalMap.equiv. Empty opens give zero local groups. Neither filtered-colimit exactness nor local continuity is asserted.",
+   "uses": [
+    "lem-pc-perfect-hom-stage-colimit",
+    "def-pc-perfect-hom-local-comparison",
+    "def-pc-perfect-hom-local-map",
+    "lem-pc-perfect-hom-triangle-row-presentations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-perfect-hom-local-comparison",
+  "def-pc-perfect-hom-local-map",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-localized-pullback-perfect-model",
+  "lem-pc-perfect-hom-stage-colimit",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-perfect-hom-triangle-row-presentations",
+  "lem-pc-perfect-thick-closure",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 09RE and 08BW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent cocone of derived Mayer Vietoris triangles over an inverse system of schemes with canonical Hom transport",
+   "results": "Service returned Internal Server Error. No match verdict was available.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocone of Mayer Vietoris distinguished triangles pushed along an inverse system of schemes",
+   "results": "Eight results concerned sheaf Mayer–Vietoris squares or scheme gluing. No derived triangle cocone with pinned Hom transport.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.homologySequenceδ_naturality",
+   "results": "Found the boundary naturality theorem in Mathlib.CategoryTheory.Triangulated.HomologicalFunctor.",
+   "verdict": "used in functor construction",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "mayerVietoris.*naturality|homologySequenceδ_naturality",
+   "results": "Mathlib boundary naturality found. Local source searches found schemeDerived_mayerVietoris_naturality and directImage, but no coherent stage triangle cocone.",
+   "verdict": "no packaged cocone; use stated geometric dependencies",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRowsCore",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris induction step: geometric triangle cocone and additive Hom row presentations",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-stage-rows-core",
+    "lem-pc-perfect-hom-mayer-vietoris-stage-rows"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomMayerVietorisTriangleCocone.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_mayerVietoris_triangle_cocone",
+  "statement": "theorem perfect_hom_mayerVietoris_triangle_cocone {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) (Y : Scheme.{u}) (t : Y ⟶ X) [IsOpenImmersion t] (ht : t.opensRange = U ⊔ V) (s : Y ⟶ Spec (R.obj i)) (hs : s = t ≫ s₀) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q) : ∃ (D : Set.Ici i ⥤ Triangle (schemeDerivedCategory Y)) (d : Cocone D), (∀ j, D.obj j ∈ distTriang (schemeDerivedCategory Y)) ∧ d.pt ∈ distTriang (schemeDerivedCategory Y) ∧ ∃ (e : ∀ j : Set.Ici i, ULift.{u} (P ⟶ (D.obj j).obj₁⟦(0 : ℤ)⟧) ≃ ((derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q)) (b : ULift.{u} (P ⟶ d.pt.obj₁⟦(0 : ℤ)⟧) ≃ ((derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj P ⟶ (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Q)), (∀ (j k : Set.Ici i) (hjk : j ≤ k) (f : ULift.{u} (P ⟶ (D.obj j).obj₁⟦(0 : ℤ)⟧)), e k ⟨f.down ≫ (D.map (homOfLE hjk)).hom₁⟦(0 : ℤ)⟧'⟩ = perfectStageMap R s j.property hjk (e j f)) ∧ (∀ (j : Set.Ici i) (f : ULift.{u} (P ⟶ (D.obj j).obj₁⟦(0 : ℤ)⟧)), b ⟨f.down ≫ (d.ι.app j).hom₁⟦(0 : ℤ)⟧'⟩ = perfectLimitMap R c s j.property (e j f)) ∧ ∀ (r : Fin 5), r.val ≠ 2 → PerfectHomLocalMap R c i X s₀ U V (colimit.desc ((D ⋙ perfectHomTriangleRowFunctor Y P).flip.obj r) ⟨(perfectHomTriangleRow Y P d.pt).obj r, (perfectHomTriangleRowCoconeMap Y P D d).app r⟩)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1e30d",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T151702-L-924504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1e30d",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T151702-L-924504",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three delivered Lean modules with their DAG statements and proof records; existing signature and public imports are unchanged, all modules compile cleanly, and axioms are standard except for the explicitly reported geometric sorry."
+ }
+}

@@ -10,13 +10,8 @@ public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
-import Sheaf.AlgebraicGeometry.PerfectThickClosure
-import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
-import Sheaf.AlgebraicGeometry.PerfectHomStageColimit
+import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone
+import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
 
 /-! # The geometric diagram before taking the exact filtered colimit
 
@@ -106,6 +101,30 @@ theorem perfect_hom_mayerVietoris_stage_rows_core
         PerfectHomLocalMap R c i X s₀ U V
           (colimit.desc (S.obj' 3) ⟨B.obj' 3, κ.app ⟨3, by decide⟩⟩) ∧
         PerfectHomLocalMap R c i X s₀ U V
-          (colimit.desc (S.obj' 4) ⟨B.obj' 4, κ.app ⟨4, by decide⟩⟩) := by sorry
+          (colimit.desc (S.obj' 4) ⟨B.obj' 4, κ.app ⟨4, by decide⟩⟩) := by
+  obtain ⟨D, d, hD, hd, e, b, he, hb, hlocal⟩ :=
+    perfect_hom_mayerVietoris_triangle_cocone R c hc i X s₀ U V hU hV Y t ht s hs P Q hP hQ
+  let S : ComposableArrows (Set.Ici i ⥤ AddCommGrpCat.{max u w}) 4 :=
+    (D ⋙ perfectHomTriangleRowFunctor Y P).flip
+  let B := perfectHomTriangleRow Y P d.pt
+  let κ := perfectHomTriangleRowCoconeMap Y P D d
+  obtain ⟨hB, hpresB⟩ := perfectHomTriangleRow_presentations Y P d.pt hd
+  have hS : S.IsComplex := by
+    constructor
+    intro r hr
+    apply NatTrans.ext
+    funext j
+    obtain ⟨hj, _⟩ := perfectHomTriangleRow_presentations Y P (D.obj j) (hD j)
+    exact hj.zero r hr
+  refine ⟨S, B, κ, e, b, hS, hB, ?_, ?_, he, hb,
+    hlocal ⟨0, by decide⟩ (by decide), hlocal ⟨1, by decide⟩ (by decide),
+    hlocal ⟨3, by decide⟩ (by decide), hlocal ⟨4, by decide⟩ (by decide)⟩
+  · intro r hr j
+    obtain ⟨hj, hpres⟩ := perfectHomTriangleRow_presentations Y P (D.obj j) (hD j)
+    obtain ⟨T, hT, eT⟩ := hpres r hr
+    exact ⟨Y, P, T, hT, eT⟩
+  · intro r hr
+    obtain ⟨T, hT, eT⟩ := hpresB r hr
+    exact ⟨Y, P, T, hT, eT⟩
 
 end AlgebraicGeometry

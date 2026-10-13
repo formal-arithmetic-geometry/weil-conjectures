@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-perfect-hom-triangle-row-presentations",
+ "kind": "statement",
+ "title": "Canonical five-term additive Hom row and its three triangle presentations",
+ "statement": "Let Z be a scheme [def-pc-scheme] with its derived category D(O_Z) [def-pc-derived-category] in a fixed morphism universe w, M an object, and T a distinguished triangle. Form the five-term row with objects Hom(M,T₂[-1]), Hom(M,T₃[-1]), Hom(M,T₁[0]), Hom(M,T₂[0]), Hom(M,T₃[0]), enlarged by ULift to universe max(u,w); its maps are the shifted second triangle map, the canonical connecting map from -1 to 0, and the zero-shift first and second triangle maps. This construction is functorial in triangle morphisms and sends a cocone of triangles to a morphism of rows. The row is a complex, and each of its three consecutive short complexes is isomorphic to the ULift of additive Hom(M,-) of a distinguished triangle in D(O_Z).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0149; Tag 08BW uses this Hom sequence; explicit Mathlib HomologicalFunctor window isomorphisms"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical five-term row from the maps (F.shift -1)(T.mor₂), the homologySequenceδ from -1 to 0, and (F.shift 0)(T.mor₁), (F.shift 0)(T.mor₂), then apply the additive ULift functor. Triangle morphisms give the five components; homologySequenceδ_naturality supplies the boundary square. Their componentwise identity and composition laws define a functor. Whisker a triangle cocone by this functor, use constComp, and flip the two indices to obtain the row cocone map. All are actual constructions, with no chosen existence witness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The three zero composites are comp_homologySequenceδ, homologySequenceδ_comp, and homologySequence_comp; map their identities by ULift. The first short complex is identified with the additive Hom image of T.rotate shifted by -1. Use shiftIso 1 (-1) 0 on the third term to identify the boundary, then isoShift and the sign on the second term to identify Hom of the shifted distinguished triangle. The second window uses T.invRotate shifted by zero and the negative of shiftIso (-1) 0 (-1) on the first term. Its boundary equation is shiftIso_hom_app_comp_shiftMap_of_add_eq_zero. The third window uses T shifted by zero. Rotation, inverse rotation, and shifting preserve distinguishedness. Map these short-complex isomorphisms by ULift. Finite case analysis on r+2≤4 supplies all three windows. These are the explicit isomorphisms of the Mathlib proofs of homologySequence_exact₁,₂,₃, not an inference from exactness to a triangle presentation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q4",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0149; Tag 08BW uses this Hom sequence; explicit Mathlib HomologicalFunctor window isomorphisms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A distinguished triangle gives three consecutive Hom short complexes by rotation and shifts",
+   "results": "Service returned Internal Server Error. No match verdict was available.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Five term covariant Hom sequence from a distinguished triangle natural in diagrams",
+   "results": "Found Functor.homologySequenceComposableArrows₅ and general triangle morphism completion/exactness lemmas. No packaged three-window presentation statement.",
+   "verdict": "generic tools used",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.homologySequenceδ_naturality",
+   "results": "Found the boundary naturality theorem in Mathlib.CategoryTheory.Triangulated.HomologicalFunctor.",
+   "verdict": "used in functor construction",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homologySequenceComposableArrows₅|homologySequenceδ.*naturality",
+   "results": "Six hits, including the five-arrow sequence and boundary naturality. Read the short-complex isomorphisms in the proofs of homologySequence_exact₁,₂,₃.",
+   "verdict": "tools; their isomorphisms adapted directly",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRowsCore",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris induction step: geometric triangle cocone and additive Hom row presentations",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-stage-rows-core",
+    "lem-pc-perfect-hom-mayer-vietoris-stage-rows"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomTriangleRow",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomTriangleRow.lean",
+  "declaration": "AlgebraicGeometry.perfectHomTriangleRow_presentations",
+  "statement": "theorem perfectHomTriangleRow_presentations (Z : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (M : schemeDerivedCategory Z) (T : Triangle (schemeDerivedCategory Z)) (hT : T ∈ distTriang (schemeDerivedCategory Z)) : ∃ h : (perfectHomTriangleRow Z M T).IsComplex, ∀ (r : ℕ) (hr : r + 2 ≤ 4), ∃ (T' : Triangle (schemeDerivedCategory Z)) (hT' : T' ∈ distTriang (schemeDerivedCategory Z)), Nonempty (((perfectHomTriangleRow Z M T).sc h r hr) ≅ (shortComplexOfDistTriangle T' hT').map ((preadditiveCoyoneda.obj (Opposite.op M)) ⋙ AddCommGrpCat.uliftFunctor.{u}))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.perfectHomTriangleRow",
+   "AlgebraicGeometry.perfectHomTriangleRowFunctor",
+   "AlgebraicGeometry.perfectHomTriangleRowCoconeMap",
+   "AlgebraicGeometry.perfectHomTriangleRow_presentations"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1e30d",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T151702-L-924504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1e30d",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T151702-L-924504",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three delivered Lean modules with their DAG statements and proof records; existing signature and public imports are unchanged, all modules compile cleanly, and axioms are standard except for the explicitly reported geometric sorry."
+ }
+}
