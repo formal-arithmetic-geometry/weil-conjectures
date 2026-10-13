@@ -20,26 +20,45 @@
  ],
  "proof": [
   {
-   "text": "Finite local trivializations of E show that the rank of its stalk at each point is locally constant: at a trivializing neighbourhood O^n the rank is n, and ranks agree on overlaps by reducing to the residue field. Thus the rank-r subset A and its complement B in X are open and closed. On X_s tensor pullback retains rank at stalks by extension of residue fields; every point over s lifts to the fibre, since its residue field is a field extension of kappa(s). Hence E_s has constant rank r iff s is not in f(B), also for an empty fibre.",
+   "text": "Define A_r as the set of points x admitting an open neighbourhood U on which E.restrict U has fixed rank r. Finite local frames (Modules.exists_mem_over_iso_free) give every point such a neighbourhood for some n. On intersections restrict both fixed-rank modules and apply finiteLocallyFreeOfRank_stalk_finrank at the common point to obtain r=n. Thus A_r is open by its definition, and every point outside A_r has a fixed-rank-n neighbourhood disjoint from A_r. Its complement B_r is therefore open too. No global rank function or finite set of ranks is needed.",
    "uses": [
     "def-sc-finite-locally-free-sheaf",
-    "def-pc-module-pullback",
-    "def-weil-residue-field"
+    "def-amb-finite-locally-free-module",
+    "lem-sc-finite-locally-free-stalk-finrank"
    ],
    "elementary": false
   },
   {
-   "text": "Flat local finite presentation makes f open, and properness makes it closed. The images f(B) and f(X) are therefore open and closed. Their complements are respectively the constant-r fibre locus and the empty-fibre locus. The images of distinct rank loci need not be disjoint, and the proof assumes neither connectedness nor surjectivity.",
+   "text": "For any g:Y→X, the canonical restriction-pullback isomorphism identifies (g*E)|g⁻¹U with (g|U)*(E|U). If g*E has rank r, choose a local rank n for E at g(y); the restriction has ranks r and n at y, so the stalk-finrank theorem gives r=n and g(y) lies in A_r. Conversely if all g(y) lie in A_r, the inverse images of their rank-r neighbourhoods cover Y; pullback preserves fixed rank and the local gluing theorem gives rank r globally. Identify tensorPullback with Modules.pullback by uniqueness of left adjoints of Modules.pushforward, using nonempty_tensorPullbackAdjunction. The empty Y case is included by the empty covering.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-amb-finite-locally-free-module",
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q:X_s→X, Scheme.Pullback.range_fst and Scheme.range_fromSpecResidueField identify range q with f⁻¹{s}. The preceding criterion consequently identifies the fixed-rank fibre locus with S minus f(B_r). Scheme.isEmpty_pullback_iff and the same singleton-range formula identify the empty-fibre locus with S minus range f. These set equalities also handle mixed-rank and empty fibres without any connectedness or surjectivity assumption.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib UniversallyOpen.of_flat makes f open from flatness and local finite presentation. Properness makes f closed. Hence range f and f(B_r) are clopen, by applying the open-map and closed-map image properties to the clopen whole space and to B_r. Taking complements in the two set equalities proves both clauses.",
    "uses": [
     "def-weil-flat-morphism",
     "def-sbc-locally-finite-presentation",
     "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-finite-locally-free-sheaf",
+  "def-amb-finite-locally-free-module",
+  "lem-sc-finite-locally-free-stalk-finrank",
   "def-pc-module-pullback",
   "def-weil-residue-field",
   "def-weil-flat-morphism",
@@ -50,7 +69,7 @@
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
   "place": "First proof paragraph, open-and-closed rank decomposition; apply the same open/closed image argument without connectedness",
-  "note": "Stage-3 specialization of the cited literature with empty fibres and disconnected fibres retained."
+  "note": "W2 stage-3 Lean proof: local frame-rank loci, overlap rank uniqueness via the existing stalk-finrank theorem, restriction/pullback compatibility and fixed-rank locality, followed by the two complement-of-image identities. The unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -125,10 +144,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T024038-L-3335821",
-  "kind": "interface",
+  "landing": "20261013T040805-L-3954149",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
