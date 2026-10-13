@@ -47,44 +47,48 @@
  },
  "proof": [
   {
-   "text": "For each component of X_Omega choose an affine open U of X whose base change meets it. The coordinate ring of U is finite type over k; its Omega base change is noetherian. The minimal prime defining the restricted component has finitely many generators, each a finite sum of tensors. Collect their Omega coefficients for the finite family of components. Their generated intermediate field L is finite over k because Omega/k is algebraic. Every automorphism fixing L preserves each chosen chart and its defining ideal, so fixes the closure of the restricted component, the entire component.",
+   "text": "For a component C of X_Omega, let U be the complement of the other finitely many components. Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton gives closure(U)=C. Hence U is nonempty and open. Choose an affine open V contained in U using lem-weil-pbc-affine-opens-basis. It is compact by IsAffineOpen.isCompact. Since V is a nonempty open subset of the irreducible closed set C, subset_closure_inter_of_isPreirreducible_of_isOpen gives closure(V)=C. Apply lem-weil-pbc-galois-base-change-qc-open-descends to V. Its finite intermediate field fixes V under every automorphism fixing that field; the induced map is a homeomorphism, so Homeomorph.image_closure shows it fixes C. This is the proved private helper component_finite_stabilizer; it uses no locally-finite-type assumption.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-algebraic-generators-finite-extension"
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-galois-base-change-qc-open-descends",
+    "lem-weil-pbc-separable-closure-exists-galois"
    ],
    "elementary": false
   },
   {
-   "text": "Omega/L is Galois: it is algebraic and separable, and is normal since Omega is a separable closure. Apply Galois descent of invariant closed subsets (Stacks Tag 038B, the existing declaration AlgebraicGeometry.exists_closed_subset_of_galois_invariant) over L to X_L. It gives a closed subset for each component with exactly that inverse image. No maximality of the descended subset is asserted.",
-   "uses": [
-    "lem-weil-pbc-galois-invariant-closed-subset-descends"
-   ],
-   "elementary": false
+   "text": "Induct on the finite set of components. For the empty family use the bottom intermediate field. At an insertion take the compositum of the previous field and the field for the new component. Mathlib IntermediateField.finiteDimensional_sup supplies finiteness. An automorphism fixing the compositum fixes both subfields, so the induction hypothesis and the new component stabilizer apply. The proved private helper components_finite_stabilizer implements this induction.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Field extension is faithfully flat, so the projection is surjective. The projection-compatible pullback tower isomorphism identifies Y with X_Omega, preserving irreducible components and their finiteness. For empty X use the bottom field.",
+   "text": "Write g=Spec(L/k), gprime=Spec(Omega/L), and gOmega=Spec(Omega/k). The scalar-tower identity gives gprime followed by g=gOmega. The pullbackLeftPullbackSndIso followed by pullback.congrHom gives e:Y isomorphic to X_Omega. Its two projection identities and pullback.hom_ext prove that the Omega/L action on Y intertwines with the restricted Omega/k action on X_Omega. An isomorphism is a homeomorphism; preimage_mem_irreducibleComponents applied to its inverse maps each component of Y to a component of X_Omega. Set.image_injective makes this map injective, so the finite image proves finiteness of components of Y, as in finite_components_homeomorph.",
    "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "lem-weil-pbc-surjective-base-change",
     "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The spectrum of a field is nonempty and has exactly one point, hence Spec(Omega/L) is surjective. Stability of surjectivity under base change gives surjectivity of p:Y to X_L. For a component C of Y, its image under e is fixed by every Omega/L automorphism, since the restriction fixes L pointwise. The intertwining identity and injectivity of e on subsets give invariance of C. Omega/L is Galois by IsGalois.tower_top_intermediateField. Apply exists_closed_subset_of_galois_invariant over L to the closed set C to obtain the required closed subset A with p inverse-image A=C.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-galois-invariant-closed-subset-descends"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-algebraic-generators-finite-extension",
-  "lem-weil-pbc-galois-invariant-closed-subset-descends",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-galois-base-change-qc-open-descends",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-surjective-base-change",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "lem-weil-pbc-galois-invariant-closed-subset-descends"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 04KZ (1),(2), 038B, and 054R proof; https://stacks.math.columbia.edu/tag/04KZ and https://stacks.math.columbia.edu/tag/038B"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 04KU and 038B; Mathlib/Topology/Irreducible.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, and pullback pasting; compact-open shortcut formalized by M4, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -135,11 +139,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e65f2",
-  "group": "E1",
+  "reviewer": "COMPILER",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T024032-L-3333733",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three nodes, cited dependencies, Stacks 04KZ/038B/054R, and the earlier return; compilation and axiom checks pass. This remains a decomposition with one documented geometric sorry."
+  "landing": "20261013T040752-L-3950134",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
