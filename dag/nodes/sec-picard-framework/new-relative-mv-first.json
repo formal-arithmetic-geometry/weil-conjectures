@@ -16,24 +16,46 @@
  ],
  "proof": [
   {
-   "text": "Transpose the two paths under the adjunction for the inverse-image open\nfollowed by f'. Expand base change as the transpose of the pulled-back counit.\nThe unit of the composite adjunction and the right-adjoint mate defining\nrelativeMVImageComp cancel by the triangle identities. The pullback composition\ncoherence identifies the two remaining comparisons, using the pullback\nprojection equality. Naturality of the counit moves the object map φ through\nthe comparison. Both paths therefore have the same transpose. This works for\nall opens, including the empty open, and for arbitrary φ.",
+   "text": "Transpose the relative unit under the adjunction for j followed by f. By the defining right-adjoint mate equation for relativeMVImageComp, its transpose is relativeMVComp(j,f) inverse followed by Lj of the counit for f. Naturality and the triangle identity for j cancel its unit. This is the private unit_counit calculation, valid for any scheme morphism j.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the identity coefficient map, transpose the source and target paths under the adjunction for the inverse-image open followed by f prime. Expand the base-change map using its counit definition. Naturality of the square comparison and the relative-unit transpose put the source into its local-square counit formula and the target into its global-square counit formula (private source_counit and target_counit).",
    "uses": [
     "def-pc-derived-base-change-map",
-    "def-pc-relative-mv-maps",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply coefficient_square_pasting to g, f, W inclusion, f prime, g prime, and the two open pullback projections, with the identity coefficient map on Lg(Rf K). The pullback condition and hpull.w give its square and rectangle equalities. Invert the resulting comparison identity by precomposing with the inverse comparison factors and postcomposing with the global square factor. Naturality of the open pullback comparison moves the counit through it, identifying the two path transposes. Injectivity of the adjunction Hom equivalence proves the identity-coefficient square.",
+   "uses": [
+    "lem-pc-coefficient-square-pasting",
+    "def-pc-relative-mv-maps"
    ],
    "elementary": false
+  },
+  {
+   "text": "Factor the arbitrary local coefficient map as the identity-coefficient local map followed by direct image of the pulled-back coefficient map. Naturality of the relative unit moves that coefficient map to the global factor. Associativity and preservation of identity maps finish the required square. The argument uses no assumptions on the open, so includes empty and full opens and arbitrary coefficient maps.",
+   "uses": [
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-base-change-map",
   "def-pc-relative-mv-maps",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-coefficient-square-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HY (remark-base-change), 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris); individual naturality step of lem-pc-relative-mv-restriction-squares."
+  "place": "Tags 08HY and 08HZ; counit and mate calculations by D4, with the proved coefficient-square-pasting comparison identity (Tag 0D5S)."
  },
  "status": "split",
  "created": {
@@ -112,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T125445-L-3874447",
-  "kind": "interface",
+  "landing": "20261013T143544-L-560355",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
