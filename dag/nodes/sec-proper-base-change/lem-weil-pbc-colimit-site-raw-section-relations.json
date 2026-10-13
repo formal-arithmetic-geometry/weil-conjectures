@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-colimit-site-raw-section-relations",
+ "kind": "statement",
+ "title": "Eventual equality of raw Kan section representatives",
+ "statement": "Let $J,F,V,P,Q,i,G,U,A_t,U_t,\\theta,B,\\beta,D,E$ have the following data.\n$J$ is small and filtered, $F:J\\to\\mathbf{Cat}$ and $V$ is a cocone with\nset-colimit object and arrow cocones [def-weil-pbc-category-colimit]\n[def-weil-pbc-arrows-functor]. The $P_j$ and $Q$ are precoverages with\ncontinuous transition functors and cocone legs [def-weil-pbc-sites-and-cohomology].\n$G$ is a set-valued sheaf on $F(i)$, $U\\in F(i)$,\n$A_t=(F(t))^{-1}G$ and $U_t=F(t)(U)$ for $t\\in(i\\downarrow J)$.\n$\\theta_b:A_t\\to F(b)_*A_{t'}$ preserves the adjunction units.\n$B:(i\\downarrow J)\\to\\operatorname{PSh}(V)$ has left Kan units\n$\\beta_t:A_t\\to V_t^*B_t$ with $[\\beta_t B(b)]=[\\theta_b\\beta_{t'}]$\nas arrows at each stage object. $D:(i\\downarrow J)\\to\\mathbf{Sets}$\nhas isomorphisms $E_t:D_t\\simeq A_t(U_t)$ with\n$[E_t\\theta_b]=[D(b)E_{t'}]$.\nFor $Y=V_i(U)$ let $\\kappa_t:D_t\\to(\\operatorname{colim}B)(Y)$\nbe the composite of $E_t$, $\\beta_t$, the colimit coprojection, and transport\nalong $V_t(U_t)=Y$. If $\\kappa_t(x)=\\kappa_{t'}(x')$, there are\n$r\\in(i\\downarrow J)$ and arrows $b:t\\to r$, $b':t'\\to r$\nwith $D(b)(x)=D(b')(x')$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "First the adjunction hom-equivalence and htheta determine theta_b\nuniquely: its adjoint is the unit at t' after the canonical functor transports.\nInjectivity of this hom-equivalence gives theta_id = id and compatibility of\ntheta with composition, with the same transports. Thus sections can be moved\nthrough successive refinements without changing their eventual value.\n\nEvaluate the outer presheaf colimit at Y = V_i(U). Its filtered-set equality\ncriterion moves the two given representatives to B_k(Y) for a common object\nk of Under i. The equations hbeta_map, hm and hkappa identify them with the\nbeta_k unit representatives of their transported sections at U_k = F(k.hom)(U).\nThe pointwise left Kan formula identifies B_k(Y) with the set colimit whose\ngenerators are triples (W, f, s), where W lies in F(k.right), f : Y -> V_k(W),\nand s is a section at W. Equality of two generators in a set colimit means a\nfinite zigzag of generating relations. A relation from h : W -> W' identifies\n(W, f, A_k.map(h.op)(s')) with (W', f followed by V_k(h), s').\n\nLift the finitely many f arrows to one later stage r, using surjectivity of\nthe arrow colimit. The object-colimit equality criterion aligns their sources\nwith U_r and their targets with the forward images of the W. Refine again so\nthe arrow-colimit equality criterion enforces every triangle from the zigzag\nand makes the endpoint arrows the identities of U_r. Equalize the finitely\nmany competing stage maps, including those out of i, so all these choices\nuse one arrow k -> r in Under i. Finite repetition preserves all earlier\nequations because the transition functors preserve equality and composition.\n\nSend (W, f, s) to the section obtained by applying theta_(k,r) to s and\nrestricting along the chosen lift g : U_r -> F(k -> r)(W). Each generating\nrelation has equal images: naturality of theta moves restriction by h through\ntheta, and the lifted triangle identifies g followed by F(k -> r)(h) with\nthe next lifted arrow. Both orientations of a relation preserve equality, so\ninduction along the zigzag equates its endpoint sections. The identity\nendpoint arrows and composition compatibility of theta identify these with\nthe sections obtained from the original x and x' at stage r. Finally hm and\nthe injectivity of (E r).hom give D.map b x = D.map b' x'. This proves only\nthe eventual equality criterion; no representative-existence or comparison\nisomorphism is used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a filtered colimit of left Kan extensions along a filtered colimit of categories is the filtered colimit of sections at a stage object",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.lanEvaluationIsoColim, CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension, CategoryTheory.Functor.pointwiseLeftKanExtension_obj, CategoryTheory.Functor.leftKanExtensionObjIsoColimit, CategoryTheory.Functor.pointwiseLeftKanExtensionUnit_app, CategoryTheory.Functor.pointwiseLeftKanExtension_map, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit, CategoryTheory.Functor.pointwiseLeftKanExtension",
+   "verdict": "generic results only; no varying-category section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.Functor.isLeftKanExtensionId, CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit, CategoryTheory.Functor.IsLeftKanExtension, CategoryTheory.Functor.HasLeftKanExtension.mk, CategoryTheory.Functor.coconeOfIsLeftKanExtension, CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence, CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence', CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension",
+   "verdict": "generic results only; no varying-category section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Kk]an|[Kk]an.*filtered|raw_section",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "generic results only; no varying-category section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elements and equality of filtered colimits of left Kan extensions evaluated on objects represented at a stage",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of unit generators in a left Kan extension becomes equality after transporting along a filtered diagram of categories",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Functor.leftKanExtensionUnique_hom, CategoryTheory.Functor.leftKanExtension_hom_ext, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.hom_ext', CategoryTheory.Functor.leftKanExtension_hom_ext_iff, CategoryTheory.Functor.leftKanExtensionUnique, CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtension_map_leftKanExtensionObjIsoColimit_hom, CategoryTheory.Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit, CategoryTheory.Functor.lanUnit",
+   "verdict": "independent second reading: generic Kan uniqueness and set-colimit tools; no varying-category section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff",
+   "date": "2026-10-13",
+   "results": "1 hits: CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff",
+   "verdict": "independent second reading: generic Kan uniqueness and set-colimit tools; no varying-category section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*(relation|zigzag)|eq.*colimit|lan.*[Ee]valuation",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/WithTerminal/Cone.lean, Mathlib/CategoryTheory/WithTerminal/Cone.lean",
+   "verdict": "independent second reading: generic Kan uniqueness and set-colimit tools; no varying-category section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftKanExtension.*[Ee]quiv|[Cc]olimit.*[Gg]enerator|[Cc]olimit.*[Zz]igzag",
+   "date": "2026-10-13",
+   "results": "7 hits: Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/IsConnected.lean, Mathlib/CategoryTheory/Limits/IsConnected.lean",
+   "verdict": "second reader: generic pointwise Kan and set-colimit results; no comparison for varying stage categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a filtered diagram of categories, equality between representatives in the presheaf left Kan extension is witnessed by a finite chain of relations at a common later stage",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered, CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered', CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit, CategoryTheory.Presieve.extend_agrees, CategoryTheory.Presieve.extension_iff_amalgamation, CategoryTheory.Presieve.Arrows.Compatible.exists_familyOfElements, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, CategoryTheory.Limits.IndObjectPresentation.hI",
+   "verdict": "second reader: generic pointwise Kan and set-colimit results; no comparison for varying stage categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt, CategoryTheory.Functor.LeftExtension.instSubsingletonIsPointwiseLeftKanExtensionAt, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.hasPointwiseLeftKanExtensionAt, CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionAtOfIso', CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionAtEquivOfIso', CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionAtEquivOfIso, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isIso_hom_app",
+   "verdict": "second reader: generic pointwise Kan and set-colimit results; no comparison for varying stage categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawSectionCompatibility",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-raw-section-presentation",
+   "place": "Tag 0A35 section construction: independence of choices by lifting finite chains of Kan relations",
+   "via": [
+    "lem-weil-pbc-colimit-site-raw-section-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteRawSectionRelations",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteRawSectionRelations.lean",
+  "declaration": "CategoryTheory.raw_section_relations",
+  "statement": "theorem raw_section_relations\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck (Type u))\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor (Type u)\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor (Type u)\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (∀ X : F.obj i,\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app\n                                G).hom.app (op X) ≫\n                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app\n                                G).hom.app (op X))))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ Type u))\n    (β : ∀ t : Under i,\n      ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶\n        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' b).hom.app (op X) ≫\n        (β t').app (op ((F.map b.right).toFunctor.obj X))))\n    (U : F.obj i)\n    (D : Under i ⥤ Type u)\n    (E : ∀ t : Under i, D.obj t ≅ ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj\n          (op ((F.map t.hom).toFunctor.obj U)))\n    (hm : ∀ (t t' : Under i) (b : t ⟶ t'),\n      Arrow.mk ((E t).hom ≫\n        (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) =\n      Arrow.mk (D.map b ≫ (E t').hom))\n    (κ : ∀ t : Under i,\n      D.obj t ⟶ (colimit B).obj (op ((V.ι.app i).toFunctor.obj U)))\n    (hκ : ∀ t : Under i,\n        ∃ e : (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =\n            (V.ι.app i).toFunctor.obj U,\n          κ t =\n            (E t).hom ≫ (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫\n              (colimit.ι B t).app\n                (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))) ≫\n              eqToHom (congrArg (fun X => (colimit B).obj (op X)) e)) :\n    ∀ (t t' : Under i) (x : D.obj t) (x' : D.obj t'),\n      κ t x = κ t' x' →\n        ∃ (r : Under i) (b : t ⟶ r) (b' : t' ⟶ r), D.map b x = D.map b' x'",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T015543-L-3016460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T015543-L-3016460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
