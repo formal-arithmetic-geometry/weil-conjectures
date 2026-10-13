@@ -14,55 +14,70 @@
  ],
  "proof": [
   {
-   "text": "The projection square sends a representative x to its class modulo F^{p+1} in T. Its homology class vanishes if and only if, after pulling back along an epimorphism, x = dy + f with y in F^{p-r+1} and f in F^{p+1}. This follows by lifting a boundary through the degreewise quotient projection and then lifting the difference through its kernel.",
+   "text": "The supplied projection square and the cycle lift equation imply g ≫ cyclesMap(phi) ≫ T.iCycles = R.arrow followed by the inclusion F^p → F^(p-r+1) and the quotient projection to T. This follows from cyclesMap_i and evaluating the projection square in degree n.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
    }
   },
   {
-   "text": "Since x and f lie in F^p, dy lies in F^p intersect d(F^{p-r+1}). The displayed decomposition is exactly membership of the graded image in B_r. Conversely membership in B_r lifts after an epimorphism to such a decomposition and gives zero in homology of T.",
+   "text": "For B ≤ Z, the kernel of coker(B → Z) is the pullback of B along Z.arrow. Indeed, a morphism a into Z is killed by this cokernel iff it lifts through B → Z (the abelian mono-cokernel kernel property), iff a ≫ Z.arrow factors through B. Pulling back along z and using the supplied equation for z identifies the first kernel with the pullback of B along R.arrow followed by the graded projection.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
    }
   },
   {
-   "text": "The kernel of the cokernel projection Z_r to Z_r/B_r is B_r, as B_r to Z_r is mono. Pulling this kernel back along z, and the vanishing condition for homology back along g, gives the same subobject of R. Epimorphic refinements descend these inclusions, so the argument applies to any abelian category.",
+   "text": "Apply the boundary pullback calculation [lem-sp-filtered-complex-boundary-pullback] and then pull back along R.arrow. It identifies the first kernel with the pullback of ker(T.pOpcycles n) along the representative map R → T^n.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundary-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
+   }
+  },
+  {
+   "text": "Kernels are unchanged after postcomposition by the mono T.homologyι n. Homology projection naturality and homology_π_ι identify the second map followed by this mono with g ≫ cyclesMap(phi) ≫ T.iCycles n ≫ T.pOpcycles n. The first step identifies this composite with the representative map R → T^n followed by pOpcycles. Pullback of a kernel is the kernel of the composite (pullback_equalizer). Consequently the two kernels coincide.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
    }
   }
  ],
  "proof_deps": [
   "def-sp-abelian",
   "def-sp-filtration",
-  "def-sp-filtered-complex-subquotients"
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-boundary-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K",
-  "note": "Categorical expansion of the cycle-boundary formulas; the source webpage was inspected."
+  "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+  "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3",
+  "note": "D3 formalizes the categorical calculation through the fully proved boundary-pullback lemma, cokernel kernels, pullback_equalizer and homology naturality. All Lean signatures are unchanged."
  },
  "mathlib_searches": [
   {
@@ -143,12 +158,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T231632-L-1961315",
+  "landing": "20261013T024031-L-3333461",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

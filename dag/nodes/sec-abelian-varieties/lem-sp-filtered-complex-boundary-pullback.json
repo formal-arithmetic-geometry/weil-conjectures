@@ -1,0 +1,169 @@
+{
+ "id": "lem-sp-filtered-complex-boundary-pullback",
+ "kind": "statement",
+ "title": "Pullback of quotient boundaries to a filtration step",
+ "statement": "Let C be an abelian category [def-sp-abelian], K an integer-indexed cochain complex and F a decreasing filtration by subcomplexes [def-sp-filtration], with quotient complexes and boundary subobjects as in [def-sp-filtered-complex-subquotients]. For integers p,n,r with p-r+1 ≤ p, put T=F^(p-r+1)K/F^(p+1)K. The inverse image of ker(T.pOpcycles n) under the degree-n map F^pK → T equals the inverse image of B_r^(p,n) under the graded projection F^pK^n → gr^pK^n. No representative object, cycle lift, comparison morphism or B_r ≤ Z_r hypothesis is required.",
+ "source": {
+  "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+  "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Put A = F^(p-r+1), P = F^p and N = F^(p+1), with N ≤ P ≤ A. Evaluation of the exact sequence N → A → A/N at each degree is exact and the quotient projections are epic, since evaluation preserves kernels and cokernels. For any x:X → P^n whose image in opcycles of A/N vanishes, the cokernel refinement theorem lifts its quotient image to an incoming differential. Lift the incoming element along A^(n-1) → (A/N)^(n-1) after an epimorphism. The difference x-dy is killed by the quotient map, so degreewise exactness lifts it to N^n after a further epimorphism. Hence x = dy+f locally on the composite epimorphic refinement. Degreewise monomorphisms follow from evaluation preserving monos, using its map-mono instance.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
+   }
+  },
+  {
+   "text": "Set D = P^n intersect d(A^(n-1)) and V = D + N^n as subobjects of K^n. In the decomposition x=dy+f, f factors through N^n and hence P^n. Therefore dy=x-f factors through P^n and through the image d(A^(n-1)), so through D. The decomposition factors through V. This factorization descends along the composite epimorphism: a morphism factors through the mono V.arrow iff its composite with cokernel(V.arrow) vanishes, and epimorphisms cancel. Conversely, lift a factorization through V along the epic map D ⊞ N^n → V; lift the D component along the epic map onto the image of the incoming differential. Cancel the inclusion A^n → K^n to obtain x=dy+f in A^n. The differential term dies in opcycles, and the N term dies in A/N. Cancel the refinement epimorphism. This proves the vanishing/factorization equivalence for every generalized element x.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
+   }
+  },
+  {
+   "text": "Let W be the pullback of V to P^n, and q:P^n → (P/N)^n the graded projection. Degreewise exactness identifies ker q with the image of N^n → P^n, which is contained in W. For an epimorphism q and a subobject W containing its kernel, pullback(q(W))=W. To prove this, the projection onto coker W.arrow vanishes on ker q, so descends to c on the quotient. The image q(W) is killed by c (cancel its epic image factorization); pulling it back then factors through W by the mono-cokernel kernel property. The opposite inclusion is the image/pullback adjunction. Here q(W) is complexBoundaries by its definition. Image pushforward of an image is computed by exists_obj_top and exists_obj_comp from the existing source-library API.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
+   }
+  },
+  {
+   "text": "The vanishing/factorization equivalence identifies the pullback of ker pOpcycles(A/N) under P^n → (A/N)^n with W. Test the two inclusions on the arrows of the corresponding subobjects, using pullback_factors_iff and kernelSubobject_factors_iff. The saturation equality of the preceding step identifies the pullback of complexBoundaries under q with W as well. Hence the two pullbacks are equal.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+    "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+  "place": "Tag 012K, displayed formula for B_r before Lemma 12.24.2; categorical expansion by D3",
+  "note": "Expanded the displayed boundary formula categorically with epimorphic refinements; proved in Lean, no sorry. Repair: degreewise monos use evaluation map instances directly; image calculations reuse Subobject.exists_obj_top and Subobject.exists_obj_comp, with no duplicate private lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pull back boundaries of a quotient cochain complex along a subcomplex inclusion to obtain the intersection with the image of the incoming differential plus the kernel of the quotient projection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category pull back boundaries of a filtered quotient complex to a filtration step",
+   "results": "CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.hf; HomologicalComplex.image_to_eq_image; CategoryTheory.ShortComplex.SnakeInput.L₀X₂ToP_comp_pullback_snd; CategoryTheory.ShortComplex.SnakeInput.φ₁; CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.epi_f; CategoryTheory.ShortComplex.SnakeInput.snd_δ; AlgebraicTopology.NormalizedMooreComplex.objD; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic categorical and homological-complex APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*exists|filteredComplex.*kernel",
+   "results": "Mathlib/CategoryTheory/Subobject/MonoOver.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/Geometry/RingedSpace/OpenImmersion.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/ChosenPullback.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/ChosenPullback.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/ChosenPullback.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/ChosenPullback.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic categorical and homological-complex APIs only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredComplexRepresentativeKernels",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3, filtered-complex cycle-boundary calculation: pullback of quotient boundaries",
+   "via": [
+    "lem-sp-filtered-complex-representative-kernels",
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "lem-sp-filtered-complex-ZB-description"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredComplexBoundaryPullback",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredComplexBoundaryPullback.lean",
+  "declaration": "CategoryTheory.DecreasingFiltration.filteredComplex_boundary_pullback",
+  "statement": "theorem filteredComplex_boundary_pullback (F : DecreasingFiltration K)\n    (p n r : ℤ) (ha : p - r + 1 ≤ p) :\n    let ht := ha.trans (Int.le_add_one (show p ≤ p from le_rfl))\n    let T := F.complexQuotient (p - r + 1) (p + 1) ht\n    (Subobject.pullback\n      ((Subobject.ofLE (F.step p) (F.step (p - r + 1)) (F.antitone_step ha)).f n ≫\n        (F.complexQuotientπ (p - r + 1) (p + 1) ht).f n)).obj\n      (kernelSubobject (T.pOpcycles n)) =\n    (Subobject.pullback\n      ((F.complexQuotientπ p (p + 1) (Int.le_add_one (show p ≤ p from le_rfl))).f n)).obj\n      (F.complexBoundaries p n r)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T024031-L-3333461",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T024031-L-3333461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
