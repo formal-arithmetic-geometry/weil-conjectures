@@ -10,22 +10,48 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Follow the finite-level pullback square and apply the closed-immersion unit quotient theorem, transporting along the canonical pullback and adjunction identifications.",
+   "text": "Use the finite map closedness and the same pasted pullback square. Its canonical pullback isomorphism, ker_comp_of_isIso, and clause (1) of quotientBaseChange_closedImmersion_ideal identify its kernel with the extension of formalFibreIdeal. Clause (2), quotientBaseChange_extendedIdeal_mul_pow, identifies this ideal with the (n+1)-st power of J.",
    "uses": [
-    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-formal-functions-finite-sheaf-quotient-closed",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing private Scheme.Modules.power_mono and Scheme.Modules.power_subobject lemmas from IdealPowerProductRestrictionZero, imported with import all, to identify the recursive idealSheafPower inclusion with (J^(n+1)).toModulesι as subobjects. Whiskering their subobject isomorphism with the arbitrary F gives equal multiplication-image subobjects. Subobject.isoOfMkEqMk and cokernel.mapIso produce a quotient isomorphism compatible with quotient projections. This is the fully proved private power_quotient_iso argument; no affine separatedness, range factorization or power-subobject proof is duplicated locally.",
+   "uses": [
+    "lem-weil-pbc-ideal-power-product-restriction-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply closedImmersion_unit_quotient to the finite map and F prime. Its isomorphic quotient map gives an isomorphism from the cokernel of multiplication by the kernel ideal to pushforward of tensorPullback of F prime. Transport the previous quotient comparison by the kernel equality; its projection followed by this isomorphism is the closed-immersion adjunction unit.",
+   "uses": [
     "lem-weil-pbc-closed-immersion-unit-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the chosen tensorPullback adjunction for the local projection with the adjunction used in the closed-immersion unit theorem. Use pushforwardCongr for formalFunctionsFiniteι_snd and pushforwardComp to identify its right adjoint with pushforward along formalFibreι. The conjugateIsoEquiv of this right-adjoint isomorphism supplies the tensor-pullback comparison. Mathlib unit_conjugateEquiv_symm and injectivity of the local-projection Hom equivalence prove the precise unit equation defining formalFunctionsFiniteFMap, without assuming two separately chosen adjunctions coincide. Compose the quotient isomorphism, the closed-immersion quotient isomorphism, and the pushforward of this comparison. Their three projection equations, with associativity, give the required equation.",
+   "uses": [
+    "def-weil-pbc-formal-functions-finite-pullback",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-formal-functions-finite-sheaf-quotient-closed",
   "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
-  "lem-weil-pbc-closed-immersion-unit-quotient"
+  "lem-weil-pbc-ideal-power-product-restriction-zero",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tags 02OD and 04CJ (1)"
+  "by": "C1 stage-3 worker",
+  "document": "Stacks Project; existing library declarations and Mathlib",
+  "place": "Tags 02OD, 04CJ (1), 01I8 and 01IC; explicit categorical transport by conjugateIsoEquiv and cokernel.mapIso"
  },
  "mathlib_searches": [
   {
@@ -90,17 +116,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T015623-L-3029995",
+  "landing": "20261013T040742-L-3946969",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.formalFunctionsFinite_sheaf_quotient_iso",
-   "AlgebraicGeometry.formalFunctionsFiniteι_isClosedImmersion"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.formalFunctionsFinite_sheaf_quotient_iso"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

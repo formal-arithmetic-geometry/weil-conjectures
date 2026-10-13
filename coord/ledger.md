@@ -10992,3 +10992,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/A3/Sheaf.RingTheory.RegularFiberKernelParameterLift (stage 3; reviewer PASS; first push; landing 20261013T040740-L-3946497 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks (stage 3; reviewer PASS; first push; landing 20261013T040741-L-3946677 (interface); batch 20261013T040738; modules 3; new nodes 2)
 - 04:07 L: merged deliver/B4/Sheaf.RingTheory.PopescuPartialChartPolynomial (stage 3; reviewer PASS; after a return; landing 20261013T040741-L-3946840 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:07 L: merged deliver/C1/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (stage 3; reviewer PASS; after a return; landing 20261013T040742-L-3946969 (proof); batch 20261013T040738; modules 1; new nodes 0)
