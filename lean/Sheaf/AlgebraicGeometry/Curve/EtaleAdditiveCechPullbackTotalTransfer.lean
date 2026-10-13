@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalBeta
 
 /-! # Augmentation-preserving pullback maps of the additive Čech complexes
 Source: Stacks Project, Tags 01FD, 01FB and 03P2.
@@ -78,6 +79,9 @@ theorem exists_additiveCech_pullback_total_transfer
                 ((SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom).val.app
                   (op (⨅ l, U (y l)))
                   (cechCoordinate X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf) n y
-                    x))) → t.f n (additiveCechBeta U I n x) = additiveCechBeta V J n x') := by sorry
+                    x))) → t.f n (additiveCechBeta U I n x) = additiveCechBeta V J n x') := by
+  obtain ⟨t, hmap, ht⟩ := exists_additiveCech_pullback_total_map g U V hinter I J α n
+  refine ⟨t, ht, ?_⟩
+  exact additiveCech_pullback_total_beta g U V hinter I J α hα n t hmap
 
 end AlgebraicGeometry.Scheme.Modules

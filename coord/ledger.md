@@ -12736,3 +12736,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: merged deliver/R4/Sheaf.Algebra.Homology.AffineTensorCohomologyScalarParts (stage 3; reviewer PASS; first push; landing 20261013T140824-L-315821 (proof); batch 20261013T140810; modules 1; new nodes 0)
 - 14:08 L: merged deliver/R4/Sheaf.Paper.ModuleCupGodementCosimplicialInput (stage 3; reviewer PASS; first push; landing 20261013T140825-L-315952 (interface); batch 20261013T140810; modules 6; new nodes 5)
 - 14:08 L: merged deliver/S2/Sheaf.AlgebraicGeometry.AffineModelStalkPresentation (stage 3; reviewer PASS; first push; landing 20261013T140825-L-316058 (interface); batch 20261013T140810; modules 2; new nodes 1)
+- 14:08 L: merged deliver/S4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalTransfer (stage 3; reviewer PASS; first push; landing 20261013T140826-L-316196 (interface); batch 20261013T140810; modules 3; new nodes 2)

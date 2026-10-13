@@ -19,29 +19,26 @@
  ],
  "proof": [
   {
-   "text": "For each tuple let A_y and B_y be the products of the source and target opens. Compose the open-subscheme map B_y -> g^{-1}(A_y) from hinter with openSectionPullback to obtain k_y:B_y -> g.Etale(A_y). Define each (p,q) coordinate by source projection, evaluation of α^q at A_y, and restriction along k_y. The square under deletion of an entry commutes by pullback projection extensionality. Section-transfer naturality and the alternating sum give the horizontal equation; α.comm and naturality of the J differential give the vertical equation. Flip and totalize: bidegrees, hence signs, are preserved. The same pullback square with the terminal objects and section-transfer naturality give the alpha equation.",
+   "text": "Apply exists_additiveCech_pullback_total_map to obtain a map t, its explicit summand specification hmap, and the alpha square ht. This uses no coefficient augmentation equation.",
    "uses": [
-    "def-pbc-etale-additive-cech-normalization",
-    "def-weil-pbc-etale-resolution-section-transfer"
+    "lem-pbc-etale-additive-cech-pullback-total-map"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of J.ι and the supplied augmentation equation identify each resolution-degree-zero coordinate with the structural coefficient map followed by J.ι at B_y. The inverse restrictFunctorΓ isomorphism in beta identifies module sections with functions on the open subscheme; its naturality identifies restriction along hinter, and structural pullback on these functions is unitToPushforwardObjUnit. Lift by ULift and apply the supplied coordinate equality. Product projection extensionality and total summand inclusion naturality give the beta equation. Empty products and empty intersections introduce no assumption; degree zero uses the same equations.",
+   "text": "Apply additiveCech_pullback_total_beta to the same t, its specification hmap, and the supplied augmentation equation hα. Pair the resulting beta compatibility with ht under the existential witness t.",
    "uses": [
-    "def-pbc-etale-additive-cech-normalization",
-    "def-sc-etale-additive-structure-restriction"
+    "lem-pbc-etale-additive-cech-pullback-total-beta"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pbc-etale-additive-cech-normalization",
-  "def-weil-pbc-etale-resolution-section-transfer",
-  "def-sc-etale-additive-structure-restriction"
+  "lem-pbc-etale-additive-cech-pullback-total-map",
+  "lem-pbc-etale-additive-cech-pullback-total-beta"
  ],
  "proof_origin": {
-  "by": "S4 worker (agent-written Lean argument)",
+  "by": "S4 second reader (corrected decomposition of the cited tuple-map argument)",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
   "place": "Lemma 20.15.1, explicit tuple restriction maps of double complexes and the commuting augmented diagram in its proof; Tag 03P2, structural-function coefficient sections. Only chain-map compatibility is claimed, without inversion of an augmentation."
  },
@@ -151,7 +148,7 @@
   "reviewer": "COMPILER",
   "group": "S4",
   "result": "pass",
-  "landing": "20261013T133747-L-45072",
+  "landing": "20261013T140826-L-316196",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

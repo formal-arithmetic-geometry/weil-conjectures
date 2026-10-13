@@ -1,0 +1,120 @@
+{
+ "id": "lem-pbc-etale-additive-cech-pullback-total-map",
+ "kind": "statement",
+ "title": "Tuple restriction total map",
+ "statement": "Let g:Y → X be a scheme morphism, ι a finite index type, U and V indexed open families with all tuple inclusions hinter, I and J injective resolutions of the lifted additive structure sheaves, and α:I → g_*J a cochain map [def-pbc-etale-additive-cech-normalization, def-weil-pbc-etale-resolution-section-transfer]. Define each tuple pullback map by inclusion of the target product open into the inverse image source product open, followed by openSectionPullback. Define each bidegree map by source product projection followed by resolutionSectionTransfer at that tuple map. For each n there exists a total cochain map t whose composite with every total summand inclusion (p,q) is this bidegree map followed by the target summand inclusion, and which commutes with the alpha augmentation in degree n. No coefficient augmentation or beta compatibility is assumed or concluded.",
+ "stmt_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-weil-pbc-etale-resolution-section-transfer"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, explicit double-complex maps"
+ },
+ "proof": [
+  {
+   "text": "Construct the tuple pullback and bidegree maps by the explicit definitions in Lean. The square for every tuple deletion commutes by equality of the two pullback projections; resolutionSectionTransfer_naturality gives commutation with each face and hence the alternating horizontal differential. The section transfer chain-map equation gives the vertical differential equation. Totalize the resulting double-complex map; ιTotal_map gives the specification on all summands. The square with terminal etale objects commutes by the same projection calculation and gives the alpha equation. This is a map construction without hα or beta compatibility; all summand equations determine t uniquely.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization",
+    "def-weil-pbc-etale-resolution-section-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-weil-pbc-etale-resolution-section-transfer"
+ ],
+ "proof_origin": {
+  "by": "S4 second reader (agent-written Lean specialization of the cited construction)",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of double complexes induced by restriction to smaller open sets and morphisms of coefficient sheaves",
+   "results": "{\"t\": \"2026-10-13T13:59:58Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms of double complexes induced by restriction to smaller open sets and morphisms of coefficient sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restrictionMap_f'\", \"TopCat.Presheaf.map_restrict\", \"HomologicalComplex.restrictionMap\", \"HomologicalComplex.restrictionMap_f\", \"HomologicalComplex.restrictionMap_comp\", \"CategoryTheory.Sheaf.ΓRes_map\", \"HomologicalComplex.restrictionMap_f'_assoc\", \"ModuleCat.Tilde.toOpen_res\"], \"digest\": \"f0b19b63ffcbee73\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic restriction maps and total inclusion naturality; no existing theorem with the explicit additive etale tuple pullback and beta normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ιTotal_map\"",
+   "results": "{\"t\": \"2026-10-13T14:00:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"ιTotal_map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomologicalComplex₂.ιTotal_map\", \"HomologicalComplex₂.ιTotal_map_assoc\"], \"digest\": \"2cf66f76ccc60eb8\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic restriction maps and total inclusion naturality; no existing theorem with the explicit additive etale tuple pullback and beta normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(cech|Cech)|cech.*(transfer|Transfer)",
+   "results": "{\"t\": \"2026-10-13T14:00:36Z\", \"tool\": \"grep\", \"query\": \"pullback.*(cech|Cech)|cech.*(transfer|Transfer)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic restriction maps and total inclusion naturality; no existing theorem with the explicit additive etale tuple pullback and beta normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of additive etale coefficient resolutions induces a map on Cech double complexes under pullback of open sets and preserves the coefficient augmentation",
+   "results": "{\"t\": \"2026-10-13T14:05:47Z\", \"tool\": \"leansearch\", \"query\": \"A map of additive etale coefficient resolutions induces a map on Cech double complexes under pullback of open sets and preserves the coefficient augmentation\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalTransfer",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-etale-additive-cech-pullback-total-transfer",
+   "place": "intermediate decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechPullbackTotalMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_additiveCech_pullback_total_map",
+  "statement": "theorem exists_additiveCech_pullback_total_map\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (J : InjectiveResolution Y.etaleAdditiveSheaf)\n    (α : I.cocomplex ⟶\n      ((Etale.lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex\n        (.up ℕ)).obj J.cocomplex) (n : ℕ) :\n    ∃ t : additiveCechTotal U I ⟶ additiveCechTotal V J,\n      IsAdditiveCechPullbackTotalMap g U V hinter I J α t ∧\n      (additiveCechAlpha U I n ≫ t.f n =\n        (Etale.globalResolutionSectionTransfer g I.cocomplex J.cocomplex α).f n ≫\n          additiveCechAlpha V J n)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T140826-L-316196",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T140826-L-316196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
