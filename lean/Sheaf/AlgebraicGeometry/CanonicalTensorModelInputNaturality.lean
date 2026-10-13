@@ -48,5 +48,21 @@ theorem tensorModelMap_input_natural (X : Scheme.{u})
         pullbackTensorModelMap X P' L =
       pullbackTensorModelMap X P L ≫
         DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap f (𝟙 L)
-          (curriedTensor _) (.up ℤ))  := by sorry
+          (curriedTensor _) (.up ℤ))  := by
+  dsimp only
+  let := pullbackDescentModuleTensor X
+  let := moduleSymmetric X
+  have := modulePreadditive X
+  let := moduleClosed X
+  have := moduleGrothendieck X
+  have := moduleResolutions X
+  have := moduleDerivedMonoidal X
+  let := pullbackDescentQLax X
+  change (DerivedCategory.Q.map f ⊗ₘ 𝟙 _) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Q P' L =
+    Functor.LaxMonoidal.μ DerivedCategory.Q P L ≫
+      DerivedCategory.Q.map (f ⊗ₘ 𝟙 L)
+  have h := Functor.LaxMonoidal.μ_natural DerivedCategory.Q f (𝟙 L)
+  rw [CategoryTheory.Functor.map_id] at h
+  exact h
 end AlgebraicGeometry
