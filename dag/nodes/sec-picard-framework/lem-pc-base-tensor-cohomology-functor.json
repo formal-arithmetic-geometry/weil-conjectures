@@ -1,0 +1,138 @@
+{
+ "id": "lem-pc-base-tensor-cohomology-functor",
+ "kind": "statement",
+ "title": "Functorial ordinary base-derived tensor cohomology",
+ "statement": "Let R, A, B, C be commutative rings in universe u, A and B R-algebras, and C an E=A tensor_R B algebra. Assume derived categories for modules over R and B [def-weil-abstract-derived-category]. For every A-complex P [def-pc-cochain-complex-modules], let m(P) be its canonical BaseDerivedTensorCohomologyModel R A B P C [def-pc-base-derived-tensor-cohomology-model]. Fix an integer i. There are a functor H from all A-module cochain complexes to E-modules, a natural transformation sigma from H to degree-i homology of ordinary extension A-to-E, and isomorphisms e(P):m(P).cohomology(i) to H(P), such that H inverts every quasi-isomorphism and e(P).hom followed by sigma(P) equals m(P).comparison(i). No extension of the source from E to C, tensor with a second complex, or localized comparison is asserted.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 0BYJ, functorial associativity."
+ },
+ "proof": [
+  {
+   "text": "For each chain map apply lem-pc-base-derived-tensor-cohomology-model-map. The target universal counit identifies its derived transformation with the canonical leftDerivedNatTrans induced by the identity. The model-map equation and faithful B-restriction, followed by cancellation of cohomologyIso, determine the E-linear map uniquely. Use these uniquely determined maps between the actual canonical model cohomology objects.",
+   "uses": [
+    "lem-pc-base-derived-tensor-cohomology-model-map",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identities leftDerivedNatTrans_id and leftDerivedNatTrans_comp and naturality show the chosen maps obey the functor laws after faithful restriction. Exact A-to-R restriction preserves quasi-isomorphisms. Derived localization, the model derived functor and homology preserve the resulting isomorphisms; the canonical comparison of universal derived functors is invertible. The model-map equation and reflection by restriction prove H inverts quasi-isomorphisms. Take e to be the identity isomorphism of the model cohomology object.",
+   "uses": [
+    "lem-pc-base-derived-tensor-cohomology-model-map",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use model.comparison as the components of sigma. Check naturality of model.ordinaryIso on 1 tensor p, then extend by tensor induction. Restrict the proposed comparison square to B and compose with the inverse restriction homology isomorphism. Rewrite comparison_eq and the model-map equation. Apply counit compatibility and counit naturality, naturality of the derived and homotopy homology factorization isomorphisms, and the ordinaryIso square. Faithfulness and cancellation prove the E-linear comparison square, hence sigma is natural. The component equation is identity composition.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-base-derived-tensor-cohomology-model-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-derived-tensor-cohomology-model-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 0BYJ, functorial associativity.",
+  "note": "Proof written from existing model-map and universal-counit declarations; official Stacks pages read online because this clone has no literature sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived extension of scalars from R to B as a functor on A complexes with A tensor R B action and natural counit",
+   "results": "Eight representation-theoretic Tor and Ext hits; no exact unbounded cohomology functor with tensor-algebra action and canonical universal-model components.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedNatTrans",
+   "results": "Zero hits; service reports unknown identifier Functor.leftDerivedNatTrans.",
+   "date": "2026-10-14",
+   "verdict": "No exact match in the search service; its source was read locally."
+  },
+  {
+   "tool": "grep",
+   "query": "baseDerivedTensorCohomologyModelMap|leftDerivedNatTrans_comp",
+   "results": "One Mathlib hit: CategoryTheory/Functor/Derived/LeftDerived.lean, leftDerivedNatTrans_comp at line 122. Repository search found the proved exists_baseDerivedTensorCohomologyModelMap; use it to construct maps, and Mathlib universal comparison identities to verify the laws.",
+   "date": "2026-10-14",
+   "verdict": "Use the existing model-map declaration and Mathlib universal derived-functor identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial derived extension cohomology on A complexes with tensor algebra scalar action",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Naturality of the ordinary derived tensor coefficient comparison used before the K-flat tensor/localization argument; canonical model cohomology with its tensor-algebra action.",
+   "via": [
+    "lem-pc-kflat-localized-tensor-comparison-natural",
+    "lem-pc-localized-tensor-comparison-derived-arrow",
+    "lem-pc-localized-tensor-comparison-closure-retracts-core",
+    "lem-pc-localized-tensor-comparison-closure-retracts",
+    "lem-pc-localized-tensor-comparison-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorCohomologyFunctor",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorCohomologyFunctor.lean",
+  "declaration": "ModuleCat.exists_baseTensorCohomologyFunctor",
+  "statement": "theorem exists_baseTensorCohomologyFunctor (i : ℤ) :\n    let m := fun P : CochainComplex (ModuleCat.{u} A) ℤ ↦\n      baseDerivedTensorCohomologyModel R A B P C\n    let E := (extendScalars.{u, u, u} (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n      (.up ℤ)\n    ∃ (H : CochainComplex (ModuleCat.{u} A) ℤ ⥤ ModuleCat.{u} (A ⊗[R] B))\n      (σ : H ⟶ E ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{u} (A ⊗[R] B))\n        (.up ℤ) i)\n      (e : ∀ P : CochainComplex (ModuleCat.{u} A) ℤ, (m P).cohomology i ≅ H.obj P),\n      (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).IsInvertedBy H ∧\n      ∀ P : CochainComplex (ModuleCat.{u} A) ℤ,\n        (e P).hom ≫ σ.app P = (m P).comparison i",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b1969",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T211117-L-396248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b1969",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T211117-L-396248",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proofs with both node records, unchanged existing signature, dependencies, change record, and report; both modules and the direct importer compile cleanly, and all four proved declarations use only the three permitted axioms."
+ }
+}
