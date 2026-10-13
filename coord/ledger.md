@@ -12430,3 +12430,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/G4/Sheaf.AlgebraicGeometry.CoefficientTargetTensorInjective (stage 3; reviewer PASS; first push; landing 20261013T123205-L-3676586 (interface); batch 20261013T123200; modules 2; new nodes 1)
 - 12:32 L: merged deliver/H3/Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionLifting (stage 3; reviewer PASS; first push; landing 20261013T123205-L-3676734 (interface); batch 20261013T123200; modules 2; new nodes 1)
 - 12:32 L: merged deliver/J2/Sheaf.AlgebraicGeometry.AffineOpenSupportedModelExists (stage 3; reviewer PASS; first push; landing 20261013T123206-L-3676921 (proof); batch 20261013T123200; modules 1; new nodes 0)
+- 12:32 L: merged deliver/J4/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration (stage 3; reviewer PASS; first push; landing 20261013T123206-L-3677079 (interface); batch 20261013T123200; modules 3; new nodes 2)

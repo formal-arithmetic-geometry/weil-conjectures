@@ -9,6 +9,12 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Order.Hom.Basic
 
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients
+import Sheaf.AlgebraicGeometry.AffineIntersectionQuotientsStalk
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+
 /-! # Affine intersection-filtration models for stabilized kernel stalks
 
 Source: Stacks Project, Lemmas 087W and 087X, affine calculation for claim (a).
@@ -87,6 +93,32 @@ theorem coherentFormalModule_kernel_affine_stalk_filtration
               (∀ r : ℕ, φ (K ^ r • (⊤ : Submodule R L)) =
                 J ^ r • (⊤ : Submodule (X.presheaf.stalk x) M)) ∧
               (∀ m : ℕ, LinearMap.ker (p m) =
-                φ ((K ^ (m + 1) • (⊤ : Submodule R N)).comap L.subtype)) := by sorry
+                φ ((K ^ (m + 1) • (⊤ : Submodule R N)).comap L.subtype)) := by
+  obtain ⟨N, hN, L, q, hq, ht, hk⟩ :=
+    coherentFormalModule_kernel_affine_section_quotients I F H α c S j hc hS U
+  have hqc (m : ℕ) : (S.obj (op m)).IsQuasicoherent := by
+    have : (F.obj.obj (op (m + c))).IsQuasicoherent :=
+      ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+        (F.property.1 (m + c))).1
+    have : (F.obj.obj (op m)).IsQuasicoherent :=
+      ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+        (F.property.1 m)).1
+    have : (H.obj.obj (op (m + c))).IsQuasicoherent :=
+      ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+        (H.property.1 (m + c))).1
+    have := Scheme.Modules.isQuasicoherent_kernel (α.hom.app (op (m + c)))
+    let f := kernel.ι (α.hom.app (op (m + c))) ≫
+      F.obj.map (homOfLE (Nat.le_add_right m c)).op
+    have him := Scheme.Modules.quasiCoherent_cokernel_image f
+    obtain ⟨a, _⟩ := hS m
+    exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso a.symm
+      him.2.2.2.2.2.2.2.1
+  refine ⟨N, hN, L, ?_⟩
+  intro x hx e he
+  exact affine_intersection_quotients_stalk I S U
+    (AdicCompletion (I.ideal U) Γ(X, U.1)) (ModuleCat.of _ L)
+    (fun m ↦ (((I.ideal U).map (algebraMap Γ(X, U.1)
+      (AdicCompletion (I.ideal U) Γ(X, U.1)))) ^ (m + 1) •
+        (⊤ : Submodule _ N)).comap L.subtype) q hqc hq ht hk x hx e he
 
 end AlgebraicGeometry

@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-affine-section-quotients",
+ "kind": "statement",
+ "title": "Affine section quotients of stabilized coherent formal kernels",
+ "statement": "Let $X$ be a Noetherian scheme, $I$ a quasi-coherent ideal sheaf, and $F,H$ coherent formal modules with a morphism $\\alpha:F\\to H$ [def-weil-pbc-coherent-formal-module]. Let $c\\in\\mathbf N$, $S:\\mathbf N^{\\mathrm{op}}\\to\\operatorname{Mod}(\\mathcal O_X)$ and $j:S\\to F$ be a natural transformation. Suppose for all $l\\ge m+c$ the image subobject of $\\ker(\\alpha_l)\\to F_m$ equals the image at $m+c$, and for every $m$ there is an isomorphism from $S_m$ to this image whose composite with its inclusion in $F_m$ is $j_m$. For an affine open $U$, put $A=\\Gamma(U,\\mathcal O_X)$, $R=\\widehat A_{I(U)}$ [def-weil-pbc-adic-completion], and $K=I(U)R$. There exist a finite $R$-module $N$, an $R$-submodule $L\\subseteq N$, and $A$-linear maps $q_m:L|_A\\to\\Gamma(U,S_m)$, all surjective, such that $S(b\\to a)(U)(q_b(z))=q_a(z)$ for every $a\\le b$, and $q_m(z)=0$ if and only if $z\\in K^{m+1}N$. No stalk or localization assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine description of K prime_m for claim (a), using Lemma 087W; read at https://stacks.math.columbia.edu/tag/087X and https://stacks.math.columbia.edu/tag/087W"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Restrict F, H, and alpha to the affine open U, preserving their formal-module conditions, and transport to Spec A via the affine chart. Apply the affine formal-module equivalence to obtain finite completed modules N and P, a completed-linear f:N -> P, and natural A-linear surjective projections with ideal-power kernels. Put L=ker(f).",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion is Noetherian. The reduced-kernel image bound applied to f supplies a. For every m, compare the stabilized image at m+c with that at l=max(m+c,m+a); hc identifies these subobjects, while the bound identifies the latter with the image of L in N/K^(m+1)N. Affine sections preserve the kernel and image calculation. Via hS define q_m on the restriction of scalars of L. It is A-linear and surjective and has zero criterion L.subtype(z) in K^(m+1)N.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "new-adic-kernel-image-bound",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of j equates the two composites from L to F_a(U). Each j_a is monic by hS, hence injective on sections. Cancel it to obtain S(b->a)(U)(q_b(z))=q_a(z), for every a<=b. This only uses the projections and identifications constructed in the previous two steps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "new-adic-kernel-image-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine description of K prime_m for claim (a), using Lemma 087W; read at https://stacks.math.columbia.edu/tag/087X and https://stacks.math.columbia.edu/tag/087W"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stabilized kernel affine sections intersection ideal powers completed module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stabilized kernels of finite adic modules are quotients of the kernel by intersection with ideal powers",
+   "results": "8 hits: AdicCompletion.submodule, Hausdorffification, AdicCompletion.of_apply, AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.transitionMap, AdicCompletion, Submodule.factorPowSucc; no theorem of the whole required statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*filtration|filtration.*stalk",
+   "results": "0 hits: ; no theorem of the whole required statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 0GS2 essential-surjectivity route, coherent formal kernel construction; Stacks 087X affine identification of stabilized kernel images before the Artin-Rees bound on the kernel; affine section quotient identification before localization",
+   "via": [
+    "lem-weil-pbc-formal-kernel-stalk-presentation",
+    "lem-weil-pbc-formal-kernel-quotient-transition-exact-bound",
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+    "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+    "lem-weil-pbc-formal-kernel-quotient-aux",
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-formal-kernel-affine-stalk-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelAffineSectionQuotients.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_affine_section_quotients",
+  "statement": "theorem coherentFormalModule_kernel_affine_section_quotients\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m))\n    (U : X.affineOpens) :\n    let A := Γ(X, U.1)\n    let R := AdicCompletion (I.ideal U) A\n    let K := (I.ideal U).map (algebraMap A R)\n    ∃ N : ModuleCat.{u} R, Module.Finite R N ∧\n      ∃ L : Submodule R N,\n        ∃ q : ∀ m : ℕ,\n          ((ModuleCat.restrictScalars (algebraMap A R)).obj (ModuleCat.of R L))\n            →ₗ[A] Γ(S.obj (op m), U.1),\n          (∀ m : ℕ, Function.Surjective (q m)) ∧\n          (∀ (a b : ℕ) (h : a ≤ b) (z : L),\n            (S.map (homOfLE h).op).app U.1 (q b z) = q a z) ∧\n          (∀ (m : ℕ) (z : L), q m z = 0 ↔\n            L.subtype z ∈ K ^ (m + 1) • (⊤ : Submodule R N))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

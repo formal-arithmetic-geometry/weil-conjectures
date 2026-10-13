@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-affine-intersection-quotients-stalk",
+ "kind": "statement",
+ "title": "Localization of affine quotient systems with a prescribed kernel filtration",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a quasi-coherent ideal sheaf [def-sbc-ideal-sheaf-powers], $U$ an affine open, and $S:\\mathbf N^{\\mathrm{op}}\\to\\operatorname{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] an inverse system with every $S_m$ quasi-coherent [pqf-def-coherent]. Put $A=\\Gamma(U,\\mathcal O_X)$. Let $R$ be any commutative $A$-algebra, $K=I(U)R$, $L$ any $R$-module, and $D_m\\subseteq L$ any family of $R$-submodules. Suppose $A$-linear surjections $q_m:L|_A\\to\\Gamma(U,S_m)$ satisfy $S(b\\to a)(U)q_b=q_a$ for all $a\\le b$ and $q_m(z)=0\\iff z\\in D_m$. For every $x\\in U$ and every germ-compatible isomorphism $e$ from the unit module's stalk to $\\mathcal O_{X,x}$, let $J$ be the range of the ideal stalk inclusion followed by $e$ [def-weil-pbc-module-stalk]. There exist an $\\mathcal O_{X,x}$-module $M$, compatible surjective linear maps $p_m:M\\to(S_m)_x$, and an order homomorphism $\\phi:\\operatorname{Sub}_R(L)\\to\\operatorname{Sub}_{\\mathcal O_{X,x}}(M)$, such that $\\phi(K^rL)=J^rM$ for every $r\\ge0$, and $\\ker(p_m)=\\phi(D_m)$ for every $m$. No finiteness, Noetherian, completion, or formal-module hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01IC (lemma-kernel-cokernel-quasi-coherent), 01I8 (lemma-widetilde-constructions), and 00CS (proposition-localization-exact); read at the corresponding Stacks tag pages"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Let B=O_(X,x), the localization of A at the prime corresponding to x. Construct M=B tensor_A (L restricted to A). The affine tilde/global-sections adjunction identifies S_m restricted to U with tilde(Gamma(U,S_m)), naturally in m, and the tilde stalk is the localization. Localizing q_m therefore defines p_m. Germ naturality transports ht to the required stalk transition equation.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization preserves surjectivity (lift a numerator) and exactness. Apply exactness to D_m -> L -> Gamma(U,S_m), using the given section zero criterion, to identify ker(p_m). Define phi(Q) to be the localized image of the A-scalar restriction of Q in M; functoriality for inclusions makes this an order homomorphism. Thus ker(p_m)=phi(D_m).",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars identifies K^r L with I(U)^r L: expand products of extended ideal generators and absorb R coefficients into L. This is valid also for r=0. Localization preserves these products. The affine ideal section calculation and ideal-product stalk theorem, with the germ-compatible unit identification e, identify the localized ideal with J. Hence phi(K^r L)=J^r M.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01IC (lemma-kernel-cokernel-quasi-coherent), 01I8 (lemma-widetilde-constructions), and 00CS (proposition-localization-exact); read at the corresponding Stacks tag pages"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization submodule quotient kernel stalk quasi coherent sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localize compatible surjective maps of quasi coherent affine sections with specified kernels to obtain stalk quotient filtration",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk', ModuleCat.Tilde.localizationToStalk_mk, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor; no theorem of the whole required statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*filtration|filtration.*stalk",
+   "results": "0 hits: ; no theorem of the whole required statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 0GS2 essential-surjectivity route, coherent formal kernel construction; Stacks 087X affine identification of stabilized kernel images before the Artin-Rees bound on the kernel; localization of the section quotient and ideal-power filtration",
+   "via": [
+    "lem-weil-pbc-formal-kernel-stalk-presentation",
+    "lem-weil-pbc-formal-kernel-quotient-transition-exact-bound",
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+    "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+    "lem-weil-pbc-formal-kernel-quotient-aux",
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-formal-kernel-affine-stalk-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineIntersectionQuotientsStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineIntersectionQuotientsStalk.lean",
+  "declaration": "AlgebraicGeometry.affine_intersection_quotients_stalk",
+  "statement": "theorem affine_intersection_quotients_stalk\n    {X : Scheme.{u}} (I : X.IdealSheafData) (S : ℕᵒᵖ ⥤ X.Modules)\n    (U : X.affineOpens)\n    (R : Type u) [CommRing R] [Algebra Γ(X, U.1) R]\n    (L : ModuleCat.{u} R) (D : ℕ → Submodule R L)\n    (q : ∀ m : ℕ,\n      ((ModuleCat.restrictScalars (algebraMap Γ(X, U.1) R)).obj L)\n        →ₗ[Γ(X, U.1)] Γ(S.obj (op m), U.1))\n    (hqc : ∀ m : ℕ, (S.obj (op m)).IsQuasicoherent)\n    (hq : ∀ m : ℕ, Function.Surjective (q m))\n    (ht : ∀ (a b : ℕ) (h : a ≤ b) (z : L),\n      (S.map (homOfLE h).op).app U.1 (q b z) = q a z)\n    (hk : ∀ (m : ℕ) (z : L), q m z = 0 ↔ z ∈ D m)\n    (x : X) (hx : x ∈ U.1)\n    (e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n        (SheafOfModules.unit X.ringCatSheaf) ≅\n        ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x))\n    (he : ∀ (V : X.Opens) (hx : x ∈ V) (r : Γ(X, V)),\n      e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n        V x hx r) = X.presheaf.germ V x hx r) :\n    let K := (I.ideal U).map (algebraMap Γ(X, U.1) R)\n    let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n    let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n    ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n      ∃ p : ∀ m : ℕ, M →ₗ[X.presheaf.stalk x] T.obj (S.obj (op m)),\n        (∀ m : ℕ, Function.Surjective (p m)) ∧\n        (∀ (a b : ℕ) (h : a ≤ b) (z : M),\n          (T.map (S.map (homOfLE h).op)).hom (p b z) = p a z) ∧\n        ∃ φ : Submodule R L →o Submodule (X.presheaf.stalk x) M,\n          (∀ r : ℕ, φ (K ^ r • (⊤ : Submodule R L)) =\n            J ^ r • (⊤ : Submodule (X.presheaf.stalk x) M)) ∧\n          (∀ m : ℕ, LinearMap.ker (p m) =\n            φ (D m))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
