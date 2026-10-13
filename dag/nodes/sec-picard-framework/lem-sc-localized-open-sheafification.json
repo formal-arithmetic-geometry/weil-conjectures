@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-localized-open-sheafification",
+ "kind": "statement",
+ "title": "Sheafification commutes with localized open-site transport",
+ "statement": "Let X be a scheme [def-pc-scheme] and U an open. Write E for Scheme.Modules.overEquiv U, P for precomposition of presheaves of modules with the inverse equivalence of open sites, a for module sheafification on the localized site, and b for module sheafification on U.toScheme [def-weil-presheaf-modules-sheafification]. Coefficients on the localized site are the structure sheaf restricted over U; coefficients on U.toScheme are its structure sheaf. There is a natural isomorphism a followed by E ≅ P followed by b. This concerns all presheaves of modules and involves no tensor product.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "Sheafification step in the localized-open-site construction; proof details supplied by W4 using the universal property of sheafification and uniqueness of left adjoints"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Precompose presheaf modules with the inverse equivalence of open sites; inverse precomposition, with the unit and counit of the site equivalence, gives an inverse functor. Coefficients identify with the structure sheaf of U by restriction. Covering sieves correspond, so these functors preserve and reflect the sheaf condition. On sheaves this is precisely Scheme.Modules.overEquiv U.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the module sheafification adjunction on the localized site with the sheaf transport adjunction. Compose the presheaf transport adjunction with the module sheafification adjunction on U. Both right adjoints are inverse transport followed by the forgetful functor, by the sectionwise definition of transport. Their natural identification and uniqueness of left adjoints produce the displayed natural isomorphism. No tensor product is used.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent W4",
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "The source omits the pullback tensor proof. This proves its sheafification-transport step by the two adjunctions and uniqueness of left adjoints."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper-flat support argument: derived tensor of local perfect models; module-tensor portion of localized open restriction, step 1 of lem-sc-localized-open-kflat-tensor-restriction; sheafification compatibility with the equivalence of localized open sites",
+   "via": [
+    "lem-sc-localized-open-tensor-equivalence",
+    "lem-sc-localized-open-kflat-tensor-restriction",
+    "lem-sc-strict-perfect-tensor-local-comparison",
+    "lem-sc-perfect-derived-tensor-perfect",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedOpenSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedOpenSheafification.lean",
+  "declaration": "AlgebraicGeometry.exists_localizedOpen_sheafification_iso",
+  "statement": "theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :\n    Nonempty (\n      PresheafOfModules.sheafification.{u}\n          (R := (moduleRings X.toRingedSpace).over U)\n          (𝟙 ((moduleRings X.toRingedSpace).over U).obj) ⋙\n          (Scheme.Modules.overEquiv U).functor ≅\n        PresheafOfModules.pushforward₀OfCommRingCat\n          (TopologicalSpace.Opens.overEquivalence U).inverse (X.sheaf.over U).obj ⋙\n          PresheafOfModules.sheafification.{u}\n            (R₀ := (moduleRings U.toScheme.toRingedSpace).obj)\n            (R := moduleRings U.toScheme.toRingedSpace)\n            (𝟙 (moduleRings U.toScheme.toRingedSpace).obj))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of presheaves of modules commutes with transport along an equivalence of open sites",
+   "results": "CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Equivalence.transportSheafificationAdjunction, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationCompForgetCompToPresheaf, CategoryTheory.Equivalence.hasSheafify, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact module-sheaf transport comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.sheafificationCompPullback",
+   "results": "SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact module-sheaf transport comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*[Ee]quiv|[Ee]quiv.*sheafification",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact module-sheaf transport comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification commutes with the localized open site equivalence for presheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "status": "unavailable",
+   "verdict": "unavailable"
+  }
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T140828-L-317094",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T140828-L-317094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
