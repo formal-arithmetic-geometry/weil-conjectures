@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-square-zero-relative-section-kernel-ideal",
+ "kind": "statement",
+ "title": "The relative restriction kernel ideal is square-zero",
+ "statement": "For a scheme X and ideal sheaves J ≤ I with I*I ≤ J, the kernel ideal of the section restriction map from the J-subscheme etale structure presheaf to the pullback along the inclusion of the I-subscheme has square-zero product on every etale object V.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-gm-torsor"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim"
+ },
+ "proof": [
+  {
+   "text": "Compute on affine charts: the kernel is I/J, whose square is zero by I*I ≤ J; etale base change preserves the inclusion and the sheaf condition glues it.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "square-zero kernel ideal of ring homomorphism",
+   "results": [
+    "RingHom.ker",
+    "Ideal.mul_le"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No direct result."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.mul_le RingHom.ker",
+   "results": [
+    "Ideal.mul_le",
+    "RingHom.mem_ker"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Partial ring infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative restriction kernel ideal square zero for nested ideal sheaves",
+   "results": {
+    "ok": false,
+    "note": "service unavailable"
+   },
+   "date": "2026-10-13",
+   "verdict": "No direct result."
+  },
+  {
+   "tool": "grep",
+   "query": "square-zero relative section kernel",
+   "results": [],
+   "date": "2026-10-13",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernel",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-square-zero-relative-section-kernel",
+   "place": "decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernelIdeal",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SquareZeroRelativeSectionKernelIdeal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeSectionKernel_ker_mul_le_bot",
+  "statement": "theorem relativeSectionKernel_ker_mul_le_bot (X : Scheme.{u}) (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J) (V : J.subscheme.Etaleᵒᵖ) : RingHom.ker ((etaleStructurePresheafToPullback (IdealSheafData.inclusion hJI)).app V).hom * RingHom.ker ((etaleStructurePresheafToPullback (IdealSheafData.inclusion hJI)).app V).hom ≤ ⊥",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T010617-L-2671755",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T010617-L-2671755",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
