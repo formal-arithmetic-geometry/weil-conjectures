@@ -13,16 +13,15 @@
  ],
  "proof": [
   {
-   "text": "Compose exact restriction R and exact extension by zero J to obtain the exact additive endofunctor F = R followed by J on modules on X. Choose a complex P representing K. Set L = Q(F(P)) and apply Q to the chain map with components the sheaf counit epsilon(P^m), then compose with Q(P) -> K to define b. Exactness identifies H^m(L) with F(H^m(K)). The induced homology map of b is the sheaf counit, by naturality on cycles and their homology quotients. No new derived-category instance on the open is needed.",
+   "text": "Compose exact restriction R and exact extension by zero J from open_restriction_adjunction_exact to form F. Finite-limit preservation gives additivity. Choose a complex P representing K using the essential surjectivity of DerivedCategory.Q. Set L = Q(F(P)) and b = Q(epsilon(P)) followed by Q(P) -> K. Mathlib ShortComplex.mapHomologyIso and DerivedCategory.homologyFunctorFactors identify H^m(L) with F(H^m(K)); ShortComplex.homologyMap_mapNatTrans and counit naturality identify H^m(b) with epsilon under this comparison.",
    "uses": [
     "lem-sc-derived-open-restriction-adjunction-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The stalk formula for the open-extension counit identifies stalks on U and gives zero stalks off U. Hence hlocal forces F(H^m(K)) to vanish for m different from n, and hsource makes epsilon(S) invertible. Define c as epsilon(S) inverse, F(a), and the inverse homology comparison. Naturality of epsilon gives c followed by H^n(b) equal to a.",
+   "text": "Use open_extension_counit_stalk on the underlying abelian stalks. On U the counit stalk is invertible, and off U its source is zero. For m different from n, hlocal implies every underlying stalk of F(H^m(K)) is zero. Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero and faithfulness of the module forgetful functor show that sheaf is zero. Similarly hsource makes all stalk maps of epsilon(S) invertible; Mathlib TopCat.Presheaf.isIso_of_stalkFunctor_map_iso and reflection by the module forgetful functor make epsilon(S) invertible. Define c as epsilon(S) inverse, F(a), and the inverse comparison. Counit naturality and cancellation of these comparisons give c followed by H^n(b) = a.",
    "uses": [
-    "lem-weil-pbc-module-stalk-exact",
     "lem-sc-open-extension-counit-stalk"
    ],
    "elementary": false
@@ -30,17 +29,16 @@
  ],
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-weil-pbc-module-stalk-exact",
   "lem-sc-open-extension-counit-stalk"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "W2",
+  "agent": "K4",
   "based_on": {
    "document": "literature/stacks-project/cohomology.tex",
    "place": "Tags 08BS and 08BT"
   },
-  "note": "Local extension-by-zero approximation; deliberately does not assert a global presentation of K. Agent expansion of the cited exact adjunction and the existing item proof plan. Blueprint search for extension by zero found no matching O_X-module approximation theorem."
+  "note": "Complete Lean proof of the existing two-step plan. Stalkwise zero and isomorphism detection use Mathlib directly, pruning the ModuleStalkExact dependency; no new holes or interface changes."
  },
  "mathlib_searches": [
   {
@@ -114,10 +112,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T031557-L-3576749",
-  "kind": "interface",
+  "landing": "20261013T072355-L-1121813",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
