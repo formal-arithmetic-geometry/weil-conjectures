@@ -44,6 +44,6 @@ theorem isMPseudoCoherent_cone
     (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R))) :
     IsMPseudoCoherent (m + 1) T.obj₁ →
       IsMPseudoCoherent m T.obj₂ → IsMPseudoCoherent m T.obj₃ := by
-  sorry
+  exact (isMPseudoCoherent_of_distinguished_triangle R m T hT).1
 
 end CategoryTheory
