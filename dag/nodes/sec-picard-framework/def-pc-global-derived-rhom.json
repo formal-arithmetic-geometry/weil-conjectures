@@ -24,9 +24,39 @@
   "def-pur-derived-internal-hom",
   "def-pc-ringed-spaces-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use lem-pc-point-module-evaluation-equivalence for the pushforward ringed space globalSectionsPoint X. Its carrier is PUnit, so it has a Unique instance. Evaluation is an equivalence G; take G.asEquivalence, whose forward functor is G.",
+   "uses": [
+    "lem-pc-point-module-evaluation-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let F be moduleDirectImage(toGlobalSectionsPoint X). The structure-ring map of this morphism is the identity and the inverse image of the whole point is X, so F followed by point evaluation G is naturally isomorphic to globalSectionsFunctor X.toRingedSpace. Both components are the identity linear map; naturality is reflexivity. Apply the existing library exact-postcomposition isomorphism Functor.rightDerivedFunctorCompMapDerivedCategoryIso F G, then rightDerivedFunctorNatIso of this underived comparison. This gives RF followed by G.mapDerivedCategory isomorphic to schemeDerivedGlobalSections X, proving the point comparison.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-point-module-evaluation-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-isomorphism s:K -> I with I K-injective, Q.map s is an isomorphism. Apply schemeDerivedGlobalSections X to asIso(Q.map s), and compose with the existing library Functor.rightDerivedFunctorObjQIso for globalSectionsFunctor X.toRingedSpace at I. This proves the resolution computation. Global derived Hom remains the composite of internal derived Hom with the same global-sections derived functor.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-point-module-evaluation-equivalence",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology, Tag 0B6A; WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory and KInjective",
+  "place": "Complete Lean proof using exact postcomposition and K-injective right-derived-functor computation; the one-point evaluation equivalence is proved by explicit construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -114,5 +144,15 @@
   "group": "N1",
   "result": "fix",
   "note": "X : Scheme; D(O_X) = schemeDerivedCategory; A = (moduleRings X).obj.obj (op ⊤); RΓ = rightDerivedFunctor of RingedSpace.globalSectionsFunctor into D(A), tied to Rp_* (derivedModuleDirectImage toGlobalSectionsPoint) by an equivalence whose functor is point evaluation; K-injective computation; RHom_X = derivedInternalHom (Opens site, X.sheaf) ⋙ RΓ on D(O_X)ᵒᵖ × D(O_X). FIX: removed three global instances from sorried theorems and the separate exactness theorems (STATE RΓ line), folded the point equivalence into the comparison theorem (exactness from the equivalence), dropped the extra affine/Ab definitions (one form)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T031552-L-3574460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-point-module-evaluation-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Global RHom complexes used in the generator comparison: the identification of module sheaves on (pt, Gamma(X,O_X)) with Gamma(X,O_X)-modules, made precise in schemeDerivedGlobalSections_point_comparison, step 1.",
+   "via": [
+    "def-pc-global-derived-rhom",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Evaluation equivalence for modules on a one-point ringed space",
+ "statement": "Let (Y, O_Y) be a ringed space whose underlying space has exactly one point. Put A = Gamma(Y,O_Y). For the category Mod(O_Y) of sheaves of modules [def-weil-sheaf-of-modules-category], evaluation on the whole space Gamma(Y,-) [def-sc-ringed-space-module-cohomology] is an equivalence Mod(O_Y) -> Mod(A). No nonzero-ring hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 009A (4) and 006U; Section 20.44, Tag 0B6A, one-point module identification used for derived global sections."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Every open of a singleton is the whole space or the empty open. The sheaf condition for the empty cover makes the underlying abelian group of a module sheaf on the empty open terminal, hence zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a module M over A = Gamma(Y,O_Y), construct the presheaf with sections PLift(x in U) -> M, where x is the unique point. For each proof x in U, the inclusion Y into U transports the O_Y(U)-action to A and then to M. Restrictions precompose membership proofs. The scalar compatibility follows from functoriality of the ring restriction maps. On a covering, choose a member containing x when the union contains x. Compatibility on intersections identifies the values there, giving a unique gluing. If the union excludes x, all section functions have empty domain and the gluing is unique. This is a module sheaf, and evaluation at the unique membership proof gives an A-linear isomorphism of its global sections with M, proving essential surjectivity.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given an A-linear map between the global sections of two module sheaves, extend it by the same map on the whole space and zero on the empty open. For a restriction between whole-space opens, naturality is the identity restriction law. If the target open is empty, its module is zero by step 1, so naturality holds. The remaining opposite-direction case is impossible. Thus evaluation is full. If two module-sheaf morphisms have equal global components, they agree on the whole space and on the empty open by its zero module, hence are equal; evaluation is faithful. Together with step 2 this proves IsEquivalence.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 009A (4), 006U and 0B6A",
+  "place": "Explicit one-point module sheaf construction and full/faithful/essentially-surjective evaluation proof, written and compiled by T4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a one point ringed space are equivalent to modules over its global ring",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the whole space is an equivalence for sheaves of modules on a singleton ringed space",
+   "results": "Sheaf.ΓObjEquivHom, SheafOfModules.unitHomEquiv, typeEquiv_inverse_obj, evalEquiv, Sheaf.ΓObjEquivSections and condensed-module singleton identifications; none identifies variable-ring module sheaves on a singleton ringed space.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "Generic IsEquivalence, asEquivalence and isEquivalence_of_iso infrastructure; no point module evaluation theorem.",
+   "date": "2026-10-13",
+   "verdict": "generic infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*IsEquivalence|IsEquivalence.*evaluation in Mathlib, and equivalence|Equivalence|IsEquivalence in Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "No point evaluation equivalence. Read Sheaf.lean, Presheaf.lean, SheafCondition/Sites.lean and UniqueGluing.lean; these supply evaluation, module-presheaf constructors, empty-section terminality and gluing. Blueprint search modules on a point gave zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalDerivedHom",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PointModuleEvaluationEquivalence",
+  "file": "lean/Sheaf/Topology/PointModuleEvaluationEquivalence.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.globalSectionsFunctor_isEquivalence_of_unique",
+  "statement": "theorem globalSectionsFunctor_isEquivalence_of_unique :\n    (globalSectionsFunctor Y).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T031552-L-3574460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T031552-L-3574460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

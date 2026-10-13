@@ -10,6 +10,9 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Sheaf.Topology.PointModuleEvaluationEquivalence
 
 /-!
 # Global derived Hom on a scheme
@@ -95,7 +98,21 @@ theorem schemeDerivedGlobalSections_point_comparison (X : Scheme.{u})
       Nonempty (e.functor ≅ RingedSpace.globalSectionsFunctor (globalSectionsPoint X)) ∧
       Nonempty (RingedSpace.derivedModuleDirectImage (toGlobalSectionsPoint X) ⋙
         e.functor.mapDerivedCategory ≅ schemeDerivedGlobalSections X) := by
-  sorry
+  let G : SheafOfModules.{u} (moduleRings (globalSectionsPoint X)) ⥤
+      ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+    RingedSpace.globalSectionsFunctor (globalSectionsPoint X)
+  let : Unique (globalSectionsPoint X) := inferInstanceAs (Unique PUnit.{u + 1})
+  have : G.IsEquivalence :=
+    RingedSpace.globalSectionsFunctor_isEquivalence_of_unique (globalSectionsPoint X)
+  let e := G.asEquivalence
+  refine ⟨e, ⟨Iso.refl _⟩, ?_⟩
+  let F := RingedSpace.moduleDirectImage (toGlobalSectionsPoint X)
+  have h : F ⋙ G ≅ RingedSpace.globalSectionsFunctor X.toRingedSpace :=
+    NatIso.ofComponents (fun M ↦
+      { hom := ModuleCat.ofHom LinearMap.id
+        inv := ModuleCat.ofHom LinearMap.id }) (by intros; rfl)
+  exact ⟨(F.rightDerivedFunctorCompMapDerivedCategoryIso G).symm ≪≫
+    Functor.rightDerivedFunctorNatIso h⟩
 
 /-- Any K-injective resolution K → I computes RΓ(X,K) by Γ(X,I).
 Source: Stacks, Tag 0B6A (blueprint: def-pc-global-derived-rhom).
@@ -112,7 +129,8 @@ theorem schemeDerivedGlobalSections_computed_by_resolution (X : Scheme.{u})
       DerivedCategory.Q.obj
         (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj I)) := by
-  sorry
+  exact ⟨(schemeDerivedGlobalSections X).mapIso (asIso (DerivedCategory.Q.map s)) ≪≫
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorObjQIso I⟩
 
 /-- Global derived Hom: RΓ(X,R𝓗om(P,Q)) in D(O_X(X)), contravariant in P and
 covariant in Q, encoded as a functor from D(O_X)ᵒᵖ × D(O_X).
