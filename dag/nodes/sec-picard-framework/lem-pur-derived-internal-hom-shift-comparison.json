@@ -12,39 +12,30 @@
  ],
  "proof": [
   {
-   "text": "Represent P by L and Q by a K-injective I, using functorial K-injective resolutions. The representative comparison identifies RHom(P,Q) with Q(Hom(L,I)). Shifts of I are K-injective by shifting the acyclic test complex in the defining null-homotopy condition.",
+   "text": "For fixed P,m,n, curry derivedInternalHom in the second variable. Split the output shift n-m as shift n followed by shift -m using Mathlib shiftFunctorAdd'. Whisker the right-argument comparison by shift -m; then whisker the left-argument comparison by shift n. Compose these three natural isomorphisms. Its Q component identifies RHom(P,Q)[n-m] with RHom(P[m],Q[n]).",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom"
+    "lem-pur-derived-internal-hom-shift-left",
+    "lem-pur-derived-internal-hom-shift-right"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For integers m,n,k, identify Hom(L,I)[n-m]^k with Hom(L[m],I[n])^k by reindexing r=p+m and multiplying the p-th component by (-1)^(m*k). The two differential formulas differ by (-1)^m; multiplying in consecutive degrees compensates for this factor. Reindexing backwards and applying the same sign is the inverse. Each map is a sheaf-module map and the construction commutes with postcomposition.",
+   "text": "Choose the one-variable natural isomorphisms inside the existential proof and take components of their composite. Naturality of the composite at q is definitionally the required displayed square. No coherence in P,m,n beyond this square is required.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-pur-derived-internal-hom-shift-left",
+    "lem-pur-derived-internal-hom-shift-right"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Localize the chain isomorphism and transport through the representative comparisons. Maps between K-injective representatives compute derived morphisms; homotopic choices induce equal localized Hom-complex maps. Quasi-isomorphism invariance allows resolution changes, and postcomposition naturality of the signed reindexing yields shifted(RHom(P,q)) followed by e_Qprime = e_Q followed by RHom(P[m],q[n]).",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "lem-pur-rhom-well-defined",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-internal-hom-shift-right"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Sections 21.34 and 21.35; explicit signed reindexing of the Hom-complex differential"
+  "place": "One-variable signed shift comparisons followed by Mathlib shiftFunctorAdd' and naturality of the composed natural isomorphism; formal composition proved by D2."
  },
  "mathlib_searches": [
   {
@@ -123,7 +114,7 @@
   "module": "Sheaf.Algebra.Homology.DerivedInternalHomShiftComparison",
   "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomShiftComparison.lean",
   "declaration": "CategoryTheory.derivedInternalHom_shift_comparison",
-  "statement": "theorem derivedInternalHom_shift_comparison\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] :\n    ∃ e : ∀ (P Q : DerivedCategory (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (m n : ℤ),\n      ((derivedInternalHom J R).obj (op P, Q))⟦n - m⟧ ≅\n        (derivedInternalHom J R).obj (op (P⟦m⟧), Q⟦n⟧),\n      ∀ (P Q Q' : DerivedCategory (SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n        (m n : ℤ) (q : Q ⟶ Q'),\n        ((derivedInternalHom J R).map ((𝟙 P).op, q))⟦n - m⟧' ≫\n            (e P Q' m n).hom =\n          (e P Q m n).hom ≫\n            (derivedInternalHom J R).map ((𝟙 (P⟦m⟧)).op, q⟦n⟧')",
+  "statement": "theorem derivedInternalHom_shift_comparison\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] :\n    ∃ e : ∀ (P Q : DerivedCategory (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (m n : ℤ),\n      ((derivedInternalHom.{u, w} (C := C) J R).obj (op P, Q))⟦n - m⟧ ≅\n        (derivedInternalHom.{u, w} (C := C) J R).obj (op (P⟦m⟧), Q⟦n⟧),\n      ∀ (P Q Q' : DerivedCategory (SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))\n        (m n : ℤ) (q : Q ⟶ Q'),\n        ((derivedInternalHom.{u, w} (C := C) J R).map ((𝟙 P).op, q))⟦n - m⟧' ≫\n            (e P Q' m n).hom =\n          (e P Q m n).hom ≫\n            (derivedInternalHom.{u, w} (C := C) J R).map ((𝟙 (P⟦m⟧)).op, q⟦n⟧')",
   "branch": "sheaf-dag",
   "by": "T4",
   "date": "2026-10-13"
@@ -141,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "X-b0d17",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T111930-L-3065680",
+  "landing": "20261013T125007-L-3835621",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules compile cleanly, downstream importer compiles, target and existing declaration interfaces remain equivalent, DAG/report/change records agree, and only documented lower sorries remain with allowed axioms."
  }
 }

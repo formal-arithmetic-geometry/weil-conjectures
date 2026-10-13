@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-derived-internal-hom-shift-left",
+ "kind": "statement",
+ "title": "Left-argument shift comparison for internal derived Hom",
+ "statement": "On a small ringed site (C,R), with the unbounded derived category D(R) and the internal derived Hom of [def-pur-derived-internal-hom], fix P in D(R) and m in Z. Write F_P(Q)=RHom(P,Q), with morphisms RHom(id_P,q). There is a natural isomorphism F_P followed by shift(-m) to F_(P[m]). No boundedness or K-flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 21.34 and 21.35, Hom-complex differential and representative computation (Tags 0A8X and 08JA); signed shift calculation in step 2 of lem-sc-global-hom-shifted-hypercohomology"
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Represent P by a complex L, and compute the second variable using the functorial K-injective resolution and the natural representative comparison for internal derived Hom.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct Hom(L,I)[-m] ≅ Hom(L[m],I) degreewise. In degree k, the p-th output is (-1)^(m*k) times input component p+m. The inverse reindexes backwards and has the same sign. The source postcomposition differential has factor (-1)^m, while its precomposition term has coefficient -(-1)^k. The target postcomposition coefficient is 1 and its precomposition coefficient is -(-1)^(k+m). The adjacent-degree scalar ratio (-1)^m gives the chain identity. Componentwise postcomposition commutes with this construction, so it is natural in I.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived localization and its compatibility with shifts. The representative comparisons and quasi-isomorphism invariance transport the comparison to derived objects. Maps between K-injective representatives are represented by chain maps modulo homotopy; homotopies are preserved by precomposition with L, so the localized comparison is natural for all derived maps.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 21.34 and 21.35: one-variable specialization of the signed shift calculation in lem-pur-derived-internal-hom-shift-comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of sheaf complexes commutes with shift naturally",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom shift in first or second argument natural isomorphism",
+   "results": "Eight results: generic derived functor CommShift, ShiftedHom.opEquiv, and HomComplex shift APIs. None is a shift comparison of the sheaf-valued internal Hom.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shiftFunctorCompIso\"",
+   "results": "Generic shiftFunctorCompIsoId API. Read shiftFunctorAdd and shiftFunctorAdd' in Shift.Basic; these combine shifts but supply no internal Hom comparison.",
+   "date": "2026-10-13",
+   "verdict": "generic composition tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*[Ii]so|[Ii]so.*shift|homComplex.*shift|shift.*homComplex in lean/WeilConjectures/Algebra/Homology, lean/Sheaf/Algebra/Homology and Mathlib/Algebra/Homology/HomotopyCategory",
+   "results": "Only ordinary HomComplex cochains and generic shift APIs. DerivedInternalHom has representative comparisons but no shift theorem. The simultaneous shift comparison is the parent being reduced.",
+   "date": "2026-10-13",
+   "verdict": "no one-variable internal derived Hom comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomShiftComparison",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-derived-internal-hom-shift-comparison",
+   "place": "Left-argument part of the signed shift comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHomShiftLeft",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomShiftLeft.lean",
+  "declaration": "CategoryTheory.derivedInternalHom_shift_left",
+  "statement": "theorem derivedInternalHom_shift_left\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]\n    (P : DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (m : ℤ) :\n    Nonempty (\n      ((Functor.curry.obj (derivedInternalHom.{u, w} (C := C) J R)).obj (op P) ⋙\n        shiftFunctor _ (-m)) ≅\n      ((Functor.curry.obj (derivedInternalHom.{u, w} (C := C) J R)).obj (op (P⟦m⟧))))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b0d17",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T125007-L-3835621",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b0d17",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T125007-L-3835621",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly, downstream importer compiles, target and existing declaration interfaces remain equivalent, DAG/report/change records agree, and only documented lower sorries remain with allowed axioms."
+ }
+}
