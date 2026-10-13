@@ -6,9 +6,8 @@ module
 
 public import Sheaf.Paper.EtaleCETotalSections
 public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
-import Sheaf.CategoryTheory.ExtCoefficientCocycle
-import Sheaf.AlgebraicGeometry.ExtPullbackHomComplex
-import Sheaf.AlgebraicGeometry.ConstantSheafPullbackTranspose
+import Sheaf.Paper.EtaleRowExtHomologySquare
+import Sheaf.Paper.EtaleRowSectionsEvaluationSquare
 
 /-! # Ordinary comparison before removing extension by zero
 
@@ -22,96 +21,6 @@ universe uNatural v w w'
 open CategoryTheory CategoryTheory.Limits CochainComplex HomComplex Abelian
 namespace AlgebraicGeometry.Etale
 open Scheme
-
-private theorem homologyMap_apply_of_data
-    {S T : ShortComplex AddCommGrpCat.{v}} [S.HasHomology] [T.HasHomology]
-    (f : S ⟶ T) (hS : S.LeftHomologyData) (hT : T.LeftHomologyData)
-    (γ : ShortComplex.LeftHomologyMapData f hS hT) (x : hS.K) :
-    (ShortComplex.homologyMap f) (hS.homologyIso.inv (hS.π x)) =
-      hT.homologyIso.inv (hT.π (γ.φK x)) := by
-  have hm : hS.homologyIso.inv ≫ ShortComplex.homologyMap f =
-      γ.φH ≫ hT.homologyIso.inv := by
-    rw [γ.homologyMap_eq]
-    simp only [Iso.inv_hom_id_assoc]
-  have hπ := ConcreteCategory.congr_hom γ.commπ x
-  simp only [ConcreteCategory.comp_apply] at hπ
-  have hh := ConcreteCategory.congr_hom hm (hS.π x)
-  simp only [ConcreteCategory.comp_apply] at hh
-  exact hh.trans (congrArg (fun z ↦ hT.homologyIso.inv z) hπ)
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-private theorem homologyMap_mk
-    {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v} D]
-    [Preadditive C] [Preadditive D]
-    {K L : CochainComplex C ℤ} {K' L' : CochainComplex D ℤ}
-    (c : HomComplex K L ⟶ HomComplex K' L') (n : ℤ)
-    (x : Cocycle K L n) (y : Cocycle K' L' n)
-    (h : (c.f n) (x : Cochain K L n) = (y : Cochain K' L' n)) :
-    HomologicalComplex.homologyMap c n ((leftHomologyData K L n).homologyIso.inv
-      (CohomologyClass.mk x)) =
-      (leftHomologyData K' L' n).homologyIso.inv (CohomologyClass.mk y) := by
-  let γ := ShortComplex.leftHomologyMapData
-    ((HomologicalComplex.shortComplexFunctor _ _ n).map c)
-    (leftHomologyData K L n) (leftHomologyData K' L' n)
-  have hK : γ.φK x = y := by
-    apply Cocycle.ext
-    have hh := ConcreteCategory.congr_hom γ.commi x
-    change ((show Cocycle K' L' n from γ.φK x) : Cochain K' L' n) =
-      (c.f n) (x : Cochain K L n) at hh
-    exact hh.trans h
-  have hh := homologyMap_apply_of_data
-    ((HomologicalComplex.shortComplexFunctor _ _ n).map c)
-    (leftHomologyData K L n) (leftHomologyData K' L' n) γ x
-  change HomologicalComplex.homologyMap c n
-      ((leftHomologyData K L n).homologyIso.inv (CohomologyClass.mk x)) =
-    (leftHomologyData K' L' n).homologyIso.inv (CohomologyClass.mk (γ.φK x)) at hh
-  simpa only [hK] using hh
-
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-private theorem ext_homComplex_naturality
-    {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v} D]
-    [Abelian C] [Abelian D] [HasExt.{v} C] [HasExt.{v} D]
-    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    {A B : C} {A' B' : D} (α : A' ⟶ L.obj A)
-    (R : InjectiveResolution B) (R' : InjectiveResolution B') (v : L.obj B ⟶ B')
-    (φ : (L.mapHomologicalComplex (.up ℤ)).obj R.cochainComplex ⟶ R'.cochainComplex)
-    (hφ : Nonempty (Homotopy
-      ((L.mapHomologicalComplex (.up ℤ)).map R.ι' ≫ φ)
-      ((HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).hom.app B ≫
-        (singleFunctor D 0).map v ≫ R'.ι')))
-    (q : ℕ) (e : Abelian.Ext A B q) :
-    HomologicalComplex.homologyMap (SheafPullbackResolution.homPullbackMap L α _ _ φ) (q : ℤ)
-      ((leftHomologyData _ R.cochainComplex (q : ℤ)).homologyIso.inv
-        (R.extEquivCohomologyClass e)) =
-    (leftHomologyData _ R'.cochainComplex (q : ℤ)).homologyIso.inv
-      (R'.extEquivCohomologyClass
-        (((Abelian.Ext.mk₀ α).comp (e.mapExactFunctor L) (zero_add q)).comp
-          (Abelian.Ext.mk₀ v) (add_zero q))) := by
-  obtain ⟨x, hx⟩ := CohomologyClass.mk_surjective (R.extEquivCohomologyClass e)
-  have he : e = R.extEquivCohomologyClass.symm (.mk x) := by
-    rw [hx, Equiv.symm_apply_apply]
-  subst e
-  obtain ⟨a, ha, rfl⟩ := Cocycle.fromSingleMk_surjective x (q : ℤ)
-    (zero_add (q : ℤ)) ((q : ℤ) + 1) rfl
-  have ha' : (α ≫ L.map a ≫ φ.f (q : ℤ)) ≫
-      R'.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0 := by
-    have hc := φ.comm (q : ℤ) ((q : ℤ) + 1)
-    dsimp only [Functor.mapHomologicalComplex_obj_d] at hc
-    simp only [Category.assoc, hc, ← L.map_comp_assoc, ha, L.map_zero,
-      zero_comp, comp_zero]
-  have hr := InjectiveResolution.ext_mapExactFunctor_coefficient_cocycle L α R R' v φ hφ q a ha ha'
-  rw [Equiv.apply_symm_apply, hr, Equiv.apply_symm_apply]
-  apply homologyMap_mk
-  change Cochain.fromSingleMk
-    (α ≫ L.map (Cochain.fromSingleEquiv (zero_add (q : ℤ))
-      (Cochain.fromSingleMk a (zero_add (q : ℤ)))) ≫ φ.f (q : ℤ)) (zero_add (q : ℤ)) =
-    Cochain.fromSingleMk (α ≫ L.map a ≫ φ.f (q : ℤ)) (zero_add (q : ℤ))
-  rw [Cochain.fromSingleEquiv_fromSingleMk]
-
-
 
 /-- Apply the sections unit and an integer-indexed comparison.
 Source: Stacks Project, Tag 015K; evaluation maps in Tags 01F9 and 01FA.
@@ -144,17 +53,14 @@ noncomputable def ceExtendedRowMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (upperStar AddCommGrpCat.{uNatural + 1} f)).hom ≫
     HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat
 
-private lemma sectionsEquiv_naturality (X : Scheme.{uNatural})
-    {F F' : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}} (f : F ⟶ F')
-    (a : SheafPullbackResolution.ZSheaf X ⟶ F) :
-    SheafPullbackResolution.sectionsEquiv X F' (a ≫ f) =
-      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).map f
-        (SheafPullbackResolution.sectionsEquiv X F a) := by
-  dsimp only [SheafPullbackResolution.sectionsEquiv, AddEquiv.trans_apply,
-    Adjunction.homAddEquiv_apply]
-  rw [Adjunction.homEquiv_naturality_right]
-  rfl
+set_option backward.isDefEq.respectTransparency false in
+private lemma map_square {C : Type w} {D : Type w'}
+    [Category.{v} C] [Category.{v} D] (F : C ⥤ D)
+    {A B A' B' : C} {c : A ⟶ A'} {s : A ⟶ B} {s' : A' ⟶ B'} {b : B ⟶ B'}
+    (h : c ≫ s' = s ≫ b) : F.map c ≫ F.map s' = F.map s ≫ F.map b := by
+  rw [← F.map_comp, h, F.map_comp]
 
+set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The integer-indexed sections map computes the coefficient and pullback map on Ext.
 Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9 and 01FA) and 08J6.
@@ -193,6 +99,45 @@ theorem ceIntegerSectionsIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
       (SheafPullbackResolution.classSectionsIso X R.cochainComplex (p : ℤ)).inv ≫
         (R.extAddEquivCohomologyClass
       (X := SheafPullbackResolution.ZSheaf X) (n := p)).toAddCommGrpIso.inv ≫
-        AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) := by sorry
+        AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) := by
+  let L := upperStar AddCommGrpCat.{uNatural + 1} f
+  let α := (upperStarConstantSheafIso AddCommGrpCat.{uNatural + 1} f).inv.app
+    (AddCommGrpCat.of (ULift.{uNatural + 1} ℤ))
+  let c := SheafPullbackResolution.homPullbackMap L α
+    R.cochainComplex R'.cochainComplex ψ
+  have hc := ceComplexSectionsSquare f (K := R.cochainComplex)
+    (K' := R'.cochainComplex) ψ
+  change c ≫ (SheafPullbackResolution.complexSectionsIso Y R'.cochainComplex).hom =
+    (SheafPullbackResolution.complexSectionsIso X R.cochainComplex).hom ≫
+      ceIntegerSectionsMap f ψ at hc
+  have hh := map_square
+    (HomologicalComplex.homologyFunctor AddCommGrpCat (.up ℤ) (p : ℤ)) hc
+  simp only [HomologicalComplex.homologyFunctor_map] at hh
+  have he := ceExtHomologySquare f G G' R R' v ψ hψ p
+  have hf :
+      R.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫
+        (SheafPullbackResolution.classSectionsIso X R.cochainComplex (p : ℤ)).hom ≫
+        HomologicalComplex.homologyMap (ceIntegerSectionsMap f ψ) (p : ℤ) =
+      AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) ≫
+        R'.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫
+        (SheafPullbackResolution.classSectionsIso Y R'.cochainComplex (p : ℤ)).hom := by
+    change R.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫
+      (leftHomologyData _ R.cochainComplex (p : ℤ)).homologyIso.inv ≫
+      HomologicalComplex.homologyMap
+        (SheafPullbackResolution.complexSectionsIso X R.cochainComplex).hom (p : ℤ) ≫
+      HomologicalComplex.homologyMap (ceIntegerSectionsMap f ψ) (p : ℤ) =
+        AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) ≫
+          R'.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫
+          (leftHomologyData _ R'.cochainComplex (p : ℤ)).homologyIso.inv ≫
+          HomologicalComplex.homologyMap
+            (SheafPullbackResolution.complexSectionsIso Y R'.cochainComplex).hom (p : ℤ)
+    erw [← hh]
+    simpa only [Category.assoc] using congrArg
+      (fun z ↦ z ≫ HomologicalComplex.homologyMap
+        (SheafPullbackResolution.complexSectionsIso Y R'.cochainComplex).hom (p : ℤ)) he
+  rw [Iso.eq_inv_comp, ← Category.assoc, Iso.eq_inv_comp]
+  simp only [← Category.assoc]
+  rw [Iso.comp_inv_eq, Iso.comp_inv_eq]
+  simpa only [Category.assoc] using hf
 
 end AlgebraicGeometry.Etale

@@ -18,38 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Represent each Ext class by a cohomology class and then a single cocycle. The chain-map equation makes α;f*(a);ψ a cocycle. Apply the exact-functor coefficient formula; left homology map data and the quotient projection descend the cocycle formula to Hom-complex homology.",
+   "text": "Use ceExtHomologySquare for the coefficient-and-pullback map on unevaluated Hom-complex homology, for arbitrary resolutions and the supplied augmentation equality. This step does not evaluate sections.",
    "uses": [
-    "lem-weil-pbc-ext-coefficient-cocycle",
-    "lem-weil-pbc-ext-pullback-hom-complex"
+    "lem-weil-pbc-row-ext-homology-square"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the constant-sheaf pullback comparison using constantSheaf_pullback_transpose. The explicit naturality equation for ΓNatIsoSheafSections, postcomposed with the terminal-section and target Γ comparisons, identifies the global-sections adjunction unit with ceSectionsUnit. Evaluate at 1 and use adjunction naturality in the target sheaf to handle ψ. The fromSingleMk component formulas give the complexSectionsIso square.",
+   "text": "Apply ceComplexSectionsSquare to the supplied integer-indexed comparison. This is the degreewise constant-integer-sheaf evaluation square, independent of injectivity and the augmentation condition.",
    "uses": [
-    "lem-weil-pbc-constant-sheaf-pullback-transpose",
+    "lem-weil-pbc-row-sections-evaluation-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the homology functor to ceComplexSectionsSquare using map_square. Compose the Ext/Hom-complex square with evaluated homology, reassociate, and unfold classSectionsIso. Cancel the four comparison isomorphisms using Iso.eq_inv_comp and Iso.comp_inv_eq to obtain the inverse-oriented equation.",
+   "uses": [
     "def-weil-pbc-ext-resolution-sections-iso"
    ],
    "elementary": false
-  },
-  {
-   "text": "Apply the homology functor to the evaluation square. Apply the proved generic ext_homComplex_naturality with the homotopy obtained from the supplied augmentation equality. This gives the forward square for the Ext/resolution equivalence followed by classSectionsIso. Use Iso.eq_inv_comp twice, the forward equality with reassociation, and the hom-inverse identities to obtain the stated inverse-oriented equation.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ext-coefficient-cocycle",
-  "lem-weil-pbc-ext-pullback-hom-complex",
-  "lem-weil-pbc-constant-sheaf-pullback-transpose",
+  "lem-weil-pbc-row-ext-homology-square",
+  "lem-weil-pbc-row-sections-evaluation-square",
   "def-weil-pbc-ext-resolution-sections-iso"
  ],
  "proof_origin": {
-  "by": "C3 stage-3 worker and independent second reader",
+  "by": "U2 stage-3 worker",
   "document": "Stacks Project",
-  "place": "Cocycle evaluation and extension-by-zero steps of lem-weil-pbc-ce-row-ordinary-naturality",
-  "note": "Named remaining integer-indexed evaluation square. Its complete docstring argument uses the proved coefficient-cocycle and Hom-complex calculations, constant-sheaf transposition, and Γ/terminal-sections naturality. Extension-by-zero and nonnegative homology transport are independently proved in the parent and extension modules."
+  "place": "Tags 06XR, 01F8 (01F9/01FA), 08J6; original integer-indexed row proof",
+  "note": "Decomposition into two strictly earlier squares, followed by a complete Lean homology and isomorphism-cancellation argument. No extension-by-zero or unit route bypassed."
  },
  "mathlib_searches": [
   {
@@ -141,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-32d3d",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T160709-L-1371142",
+  "landing": "20261013T190159-L-3222964",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes; public interfaces are unchanged, removed helpers were private, and all delivered modules compile cleanly. Axiom checks show only standard axioms, plus sorryAx in the parent from the documented, strictly earlier evaluation square."
  }
 }

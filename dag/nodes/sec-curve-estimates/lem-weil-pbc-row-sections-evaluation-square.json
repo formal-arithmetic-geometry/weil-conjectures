@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-row-sections-evaluation-square",
+ "kind": "statement",
+ "title": "Evaluation square for integer-indexed sections",
+ "statement": "Let $f:Y\\to X$ be a scheme morphism [def-weil-pbc-scheme-conventions], $K,K′$ integer-indexed complexes of abelian étale sheaves on $X,Y$ [def-weil-pbc-etale-sheaves], and $\\psi:f^*K\\to K′$ a chain map. Put $\\alpha=(f^*\\underline{\\mathbb Z}\\simeq\\underline{\\mathbb Z})^{-1}$ and let $c$ be the Hom-complex map taking a degree-$n$ cochain $a$ to $\\alpha;f^*(a);\\psi^n$ [lem-weil-pbc-ext-pullback-hom-complex]. If $s_X,s_Y$ are the evaluation-at-one complex isomorphisms [def-weil-pbc-ext-resolution-sections-iso] and $\\eta$ is the global-sections unit, then $c;s_Y=s_X;(\\eta_K;\\Gamma(Y,\\psi))$. No injectivity or augmentation condition is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 015K, 01F9 and 01FA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "lem-weil-pbc-constant-sheaf-pullback-transpose",
+  "lem-weil-pbc-ext-pullback-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Expand complexSectionsIso and homPullbackMap on an arbitrary cochain. The fromSingleMk component formula reduces both sides to evaluation of α;L(a);ψ.",
+   "uses": [
+    "lem-weil-pbc-ext-pullback-hom-complex",
+    "lem-weil-pbc-constant-sheaf-pullback-transpose",
+    "def-weil-pbc-ext-resolution-sections-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use adjunction naturality for sectionsEquiv and postcomposition by ψ; the resulting component equality is the displayed square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-pullback-hom-complex",
+  "lem-weil-pbc-constant-sheaf-pullback-transpose",
+  "def-weil-pbc-ext-resolution-sections-iso"
+ ],
+ "proof_origin": {
+  "by": "U2 stage-3 worker",
+  "document": "Stacks Project",
+  "place": "Tags 015K, 01F9, 01FA",
+  "note": "Intermediate evaluation square for the parent naturality argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at one on constant integer sheaves commutes with pullback and global sections",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at one on constant integer sheaves commutes with pullback and global sections",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Sheaf.ΓNatIsoSheafSections, CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm, CategoryTheory.sheafSectionsNatIsoEvaluation_hom_app, ModuleCat.Tilde.res_const, LightCondensed.underlying_map, Condensed.underlying_map, AlgebraicGeometry.StructureSheaf.comap_const",
+   "verdict": "Component tools only; no full pullback evaluation square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap_comp\"",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.ShortComplex.leftHomologyMap_comp, CategoryTheory.ShortComplex.leftHomologyMap_comp_assoc, CategoryTheory.ShortComplex.rightHomologyMap_comp, CategoryTheory.ShortComplex.homologyMap_comp, CategoryTheory.ShortComplex.comp_homologyMap_comp, CategoryTheory.ShortComplex.comp_homologyMap_comp_assoc, HomologicalComplex.homologyMap_comp, HomologicalComplex.homologyMap_comp_assoc",
+   "verdict": "Component tools only; no full pullback evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSectionsUpperStarMap|lowerStarCompGlobalSectionsIso",
+   "date": "2026-10-13",
+   "results": "No results.",
+   "verdict": "Component tools only; no full pullback evaluation square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleRowIntegerSections",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercohomology-uniform-bound",
+   "place": "Ordinary integer-row comparison, degreewise sections evaluation (parent step 2).",
+   "via": [
+    "lem-weil-pbc-row-integer-sections",
+    "lem-weil-pbc-ce-row-ordinary-naturality",
+    "lem-weil-pbc-ce-normalized-representative-cohomology",
+    "lem-weil-pbc-ce-prescribed-normalized-first-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleRowSectionsEvaluationSquare",
+  "file": "lean/Sheaf/Paper/EtaleRowSectionsEvaluationSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.ceComplexSectionsSquare",
+  "statement": "theorem ceComplexSectionsSquare {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    {K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}\n    {K' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}\n    (ψ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (.up ℤ)).obj K ⟶ K') :\n    SheafPullbackResolution.homPullbackMap (upperStar AddCommGrpCat.{uNatural + 1} f)\n        ((upperStarConstantSheafIso AddCommGrpCat.{uNatural + 1} f).inv.app\n          (AddCommGrpCat.of (ULift.{uNatural + 1} ℤ))) K K' ψ ≫\n        (SheafPullbackResolution.complexSectionsIso Y K').hom =\n      (SheafPullbackResolution.complexSectionsIso X K).hom ≫\n        ((NatTrans.mapHomologicalComplex (ceSectionsUnit f) (.up ℤ)).app K ≫\n          ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex\n            (.up ℤ)).map ψ)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d3d",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T190159-L-3222964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d3d",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T190159-L-3222964",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes; public interfaces are unchanged, removed helpers were private, and all delivered modules compile cleanly. Axiom checks show only standard axioms, plus sorryAx in the parent from the documented, strictly earlier evaluation square."
+ }
+}

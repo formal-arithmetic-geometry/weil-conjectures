@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-row-ext-homology-square",
+ "kind": "statement",
+ "title": "Coefficient and pullback square on unevaluated Hom-complex homology",
+ "statement": "Let $f:Y\\to X$ be a scheme morphism [def-weil-pbc-scheme-conventions], $G$ and $G^{\\prime}$ abelian etale sheaves on $X$ and $Y$ [def-weil-pbc-etale-sheaves], and $R,R^{\\prime}$ arbitrary injective resolutions [def-sp-injective-resolutions]. Let $L=f^{-1}$ [def-weil-pbc-inverse-image], $v:LG\\to G^{\\prime}$, and $\\psi:LR\\to R^{\\prime}$ an integer-indexed chain map commuting with augmentations via $v$. Let $\\alpha:\\mathbb Z_Y\\to L\\mathbb Z_X$ be the inverse constant-sheaf comparison, with $\\mathbb Z_X$ and the evaluation-independent resolution class comparison as in [def-weil-pbc-ext-resolution-sections-iso]. Let $c$ be the map of Hom complexes [lem-weil-pbc-ext-pullback-hom-complex] sending a degree-$n$ cochain $a$ to $\\alpha;L(a);\\psi^n$. For $p\\in\\mathbb N$, the Ext/resolution class equivalence followed by the inverse class-to-Hom-homology isomorphism and $H^p(c)$ equals $H^p(v)\\circ\\operatorname{cohomologyMap}(f,G,p)$ [def-weil-pbc-cohomology-pullback] followed by the target Ext/resolution class equivalence and its inverse class-to-Hom-homology isomorphism. This statement is before sections evaluation: it contains no global-sections complex or comparison to its homology.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06XR, 01F8 (equations 01F9 and 01FA), and 08J6; step 1 of lem-weil-pbc-row-integer-sections"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "lem-weil-pbc-ext-pullback-hom-complex",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Represent an Ext class by a resolution cohomology class and then a single cocycle a. The chain-map equation for ψ and exact inverse image show α;L(a);ψ is a cocycle. Homotopy.ofEq of the augmentation equality supplies the comparison homotopy. Apply the individual coefficient-cocycle formula to identify its Ext class with precomposition by α, exact-functor pullback, and postcomposition by v.",
+   "uses": [
+    "lem-weil-pbc-ext-coefficient-cocycle",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the map of short complexes induced by c, take left homology map data γ. Its inclusion equation identifies γ on cocycles with c, and its quotient equation π;γ_H=γ_K;π sends the class of a to the class of α;L(a);ψ. Transport through the chosen left homology isomorphisms. Surjectivity of CohomologyClass.mk and Cocycle.fromSingleMk extends this calculation to every Ext class. The definition of c is homPullbackMap, so no sections evaluation is used.",
+   "uses": [
+    "lem-weil-pbc-ext-pullback-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the coefficient-map and pullback formulas Sheaf.H.map_apply and cohomologyMap_apply. Abelian-group morphism extensionality turns the pointwise cocycle calculation into the stated forward square. The degree-zero and zero-object cases obey these same formulas.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-coefficient-cocycle",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-ext-pullback-hom-complex",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "U2 stage-3 worker",
+  "document": "Stacks Project",
+  "place": "Tags 06XR, 01F8 (01F9/01FA), 08J6",
+  "note": "Split off the unevaluated Hom-complex square from step 1. The evaluation square is a separate intermediate item; their categorical combination is proved in the parent. The existing chosen-resolution square does not have arbitrary R,R′ or v."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor and coefficient map on cohomology of Hom complexes of arbitrary injective resolutions",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext to Hom complex homology naturality for arbitrary injective resolutions and exact functor with coefficient morphism",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.extMk_hom",
+   "verdict": "No complete square for arbitrary resolutions and coefficient map. ExtPullback_homComplex covers chosen resolutions without the coefficient map; ExtCoefficientCocycle is the needed individual-cocycle dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extAddEquivCohomologyClass\"",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass_symm_apply",
+   "verdict": "No complete square for arbitrary resolutions and coefficient map. ExtPullback_homComplex covers chosen resolutions without the coefficient map; ExtCoefficientCocycle is the needed individual-cocycle dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "ext.*homComplex.*naturality|extPullback_homComplex",
+   "date": "2026-10-13",
+   "results": "No Mathlib hits. Local rg also inspected ExtPullbackHomComplex and ExtCoefficientCocycle.",
+   "verdict": "No complete square for arbitrary resolutions and coefficient map. ExtPullback_homComplex covers chosen resolutions without the coefficient map; ExtCoefficientCocycle is the needed individual-cocycle dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleRowIntegerSections",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercohomology-uniform-bound",
+   "place": "Step 1 of the integer-indexed sections square: coefficient and pullback naturality on unevaluated Hom-complex homology.",
+   "via": [
+    "lem-weil-pbc-row-integer-sections",
+    "lem-weil-pbc-ce-row-ordinary-naturality",
+    "lem-weil-pbc-ce-normalized-representative-cohomology",
+    "lem-weil-pbc-ce-prescribed-normalized-first-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleRowExtHomologySquare",
+  "file": "lean/Sheaf/Paper/EtaleRowExtHomologySquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.ceExtHomologySquare",
+  "statement": "theorem ceExtHomologySquare {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})\n    (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})\n    (R : InjectiveResolution G) (R' : InjectiveResolution G')\n    (v : (upperStar AddCommGrpCat.{uNatural + 1} f).obj G ⟶ G')\n    (ψ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj R.cochainComplex ⟶ R'.cochainComplex)\n    (hψ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n        (ComplexShape.up ℤ)).map R.ι' ≫ ψ =\n      (HomologicalComplex.singleMapHomologicalComplex\n        (upperStar AddCommGrpCat.{uNatural + 1} f) (ComplexShape.up ℤ) 0).hom.app G ≫\n      (CochainComplex.singleFunctor _ 0).map v ≫ R'.ι')\n    (p : ℕ) :\n    R.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫\n        (leftHomologyData _ R.cochainComplex (p : ℤ)).homologyIso.inv ≫\n        HomologicalComplex.homologyMap\n          (SheafPullbackResolution.homPullbackMap\n            (upperStar AddCommGrpCat.{uNatural + 1} f)\n            ((upperStarConstantSheafIso AddCommGrpCat.{uNatural + 1} f).inv.app\n              (AddCommGrpCat.of (ULift.{uNatural + 1} ℤ)))\n            R.cochainComplex R'.cochainComplex ψ) (p : ℤ) =\n      AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) ≫\n        R'.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫\n        (leftHomologyData _ R'.cochainComplex (p : ℤ)).homologyIso.inv",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d3d",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T190159-L-3222964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d3d",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T190159-L-3222964",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes; public interfaces are unchanged, removed helpers were private, and all delivered modules compile cleanly. Axiom checks show only standard axioms, plus sorryAx in the parent from the documented, strictly earlier evaluation square."
+ }
+}
