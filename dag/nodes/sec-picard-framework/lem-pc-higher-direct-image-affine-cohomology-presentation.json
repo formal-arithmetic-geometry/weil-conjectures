@@ -15,24 +15,20 @@
  ],
  "proof": [
   {
-   "text": "For each coefficient module M choose an injective resolution I. Open restriction is exact and carries I to an injective resolution on U (01E1). Through overFunctorEquiv, the resolution is a resolution of Scheme.Modules.restrictFunctor U.ι applied to M. The restrictAppIso at top identifies its global sections complex with the sections of I over U; forgetting scalars is exact, so the resulting homology is the underlying additive group of H^p(U,M|U).",
+   "text": "Apply the coefficient-natural comparison lemma. For N choose an injective resolution I, set K=f_*I, and let T be canonical theta followed by the inverse resolution comparison. The comparison lemma identifies c_V(N) with an isomorphism e_V followed by T(V).",
    "uses": [
-    "lem-sc-ringed-space-restrict-injective-resolution",
-    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-higher-direct-image-coefficient-comparison",
     "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "This section complex is also the evaluation at V of f_*I. Map its homology through sectionCohomologyTheta, then through the inverse of I.isoRightDerivedObj f_* p. This defines c_V(M). Lift every coefficient map to a map of the chosen resolutions. The restricted lift preserves the augmentation; isoRightDerivedObj_hom_naturality, naturality of mapHomologyIso, and the adjunction unit/counit identities show that the displayed maps commute with this lift. Homotopic lifts give identical homology maps, yielding a natural transformation on coefficient modules.",
-   "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false
+   "text": "For maps a,b out of R^p f_*N with equal composites on affine opens, cancel e_V on every affine open. This gives equality of the affine components of the underlying additive presheaf maps T followed by a and T followed by b. The affine opens form a basis (Scheme.isBasis_affineOpens). Mathlib TopCat.Sheaf.hom_ext, with target the underlying additive sheaf of Q, extends this equality to equality of presheaf morphisms. Faithfulness of PresheafOfModules.toPresheaf gives equality of module-presheaf morphisms. This avoids any construction of stalk representatives.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The comparison of the cohomology presheaf with R^p f_*N is an isomorphism on stalks. Each germ is the image of a class on a neighborhood; restrict that class to an affine sub-neighborhood using the restriction compatibility in the higher-direct-image presheaf lemma. The assumed equality of composites with c_V(N) gives equality after applying a and b to this germ. Since all germs have such representatives, a and b agree on all stalks. For a section over W, equal stalk images at every point of W imply local equality and hence equality by sheaf uniqueness, proving a=b. For empty Y there are no germs and uniqueness is vacuous; p=0 uses the same resolution maps.",
+   "text": "Apply the unique factorization clause of higherDirectImagePresheaf to the common module-presheaf map. Functor.map_comp and associativity show that both a and b satisfy the defining equation. Uniqueness gives a=d and b=d, hence a=b.",
    "uses": [
     "lem-weil-pbc-higher-direct-image-presheaf"
    ],
@@ -40,17 +36,16 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-ringed-space-restrict-injective-resolution",
-  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-higher-direct-image-coefficient-comparison",
   "def-sp-injective-resolutions",
   "lem-weil-pbc-higher-direct-image-presheaf"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "U2",
+  "group": "A2",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 01E1 and 01E4",
-  "place": "Coefficient-natural form of the cohomology-presheaf description and its affine-basis detection consequence"
+  "document": "Stacks Project, Tags 01E1 and 01E4; Mathlib basis extensionality",
+  "place": "Coefficient comparison plus affine-basis extensionality and the existing cohomology-presheaf universal property"
  },
  "mathlib_searches": [
   {
@@ -131,12 +126,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T212724-L-1131877",
+  "landing": "20261013T040739-L-3946199",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

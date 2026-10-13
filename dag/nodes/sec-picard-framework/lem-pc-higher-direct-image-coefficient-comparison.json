@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-higher-direct-image-coefficient-comparison",
+ "kind": "statement",
+ "title": "Coefficient-natural higher-direct-image comparison with a resolution formula",
+ "statement": "Let f:X→Y be any morphism of schemes [def-pc-scheme], p∈ℕ, and put U=f⁻¹(V) for an open V of Y. Use module cohomology and ordinary higher direct image [pqf-def-cohomology], and module restriction [lem-weil-pbc-module-restriction-open-immersion-colimits]. There exist natural transformations in O_X-modules c_V:H^p(U,(-)|_U), with its scalar action forgotten, →Γ(V,R^p f_*(-)). For every O_X-module N [def-weil-sheaf-of-modules-category], every injective resolution I of N [def-sp-injective-resolutions], and every V, put K=f_*I. There is an isomorphism of additive groups e:H^p(U,N|_U)→(sectionCohomologyPresheaf K p)(V). The component c_V(N) equals e.hom followed by the value at V of sectionCohomologyTheta K p, and then of the underlying module map (I.isoRightDerivedObj f_* p).inv. There is no affine-basis morphism detection assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3 and Lemma 20.7.1 (01E1); coefficient naturality of the resolution comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient module M choose an injective resolution I. Open restriction is exact and carries I to an injective resolution on U (01E1). Through overFunctorEquiv, the resolution is a resolution of Scheme.Modules.restrictFunctor U.ι applied to M. The restrictAppIso at top identifies its global sections complex with the sections of I over U; forgetting scalars is exact, so the resulting homology is the underlying additive group of H^p(U,M|U).",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "This section complex is also the evaluation at V of f_*I. Map its homology through sectionCohomologyTheta, then through the inverse of I.isoRightDerivedObj f_* p. This defines c_V(M). Lift every coefficient map to a map of the chosen resolutions. The restricted lift preserves the augmentation; isoRightDerivedObj_hom_naturality, naturality of mapHomologyIso, and the adjunction unit/counit identities show that the displayed maps commute with this lift. Homotopic lifts give identical homology maps, yielding a natural transformation on coefficient modules. The isomorphism e in the conclusion is the composite of the restricted-resolution homology isomorphism and exact evaluation at V; by construction c_V(N) equals e.hom followed by canonical theta and the inverse resolution comparison. This formula holds for any I because augmentation-preserving resolution comparisons are homotopy equivalences.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 01E1 and 01E4",
+  "place": "Formal decomposition of steps 1 and 2 of the affine-cohomology presentation, retaining the canonical resolution formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor of composition with exact functor preserves injective objects natural isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image cohomology presheaf natural comparison to sections and restriction to opens",
+   "results": "8 hits: global section restriction naturality and dense-subsite hom ext; no module cohomology coefficient comparison with resolution formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTopologicalBasis\", \"ext\"",
+   "results": "0 hits; no specialized coefficient comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionCohomologyTheta|higherDirectImage.*presentation; restriction and rightDerived comparisons in both roots",
+   "results": "Existing HigherDirectImagePresheaf supplies theta and universal property; OpenModuleCohomologyComparison constructs only objectwise comparison with abelian cohomology. No existing coefficient-natural transformation with the required module-resolution component formula. Blueprint searches for higher direct image and 01E1 found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction functor preserving injectives compares derived sections on an open with cohomology of restricted modules naturally in the module",
+   "results": "Second reading: eight hits on section restriction and module sheafification; no coefficient-natural derived comparison with the required resolution formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"iso\"",
+   "results": "Second reading: twelve generic localization-derived-functor comparison hits, including rightDerivedNatIso and LocalizerMorphism.rightDerivedFunctorComparison; none supplies the displayed module-resolution component formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*comp|comp.*rightDerived; moduleCohomology, sectionCohomologyTheta, overEquiv in lean/Sheaf and lean/WeilConjectures",
+   "results": "Second reading: generic derived comparisons and objectwise OpenModuleCohomologyComparison; ModuleCohomologyTopComparison treats the top open only. HigherDirectImagePresheaf proves the universal property but not this restriction/coefficient comparison. No duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ second-page reduction to direct sums of module sheaves; coefficient-natural cohomology comparison in steps 1 and 2 of the affine presentation",
+   "via": [
+    "lem-pc-higher-direct-image-affine-cohomology-presentation",
+    "lem-pc-module-higher-direct-image-coproduct-epi",
+    "lem-pc-truncated-direct-image-second-page-coproduct-epi",
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.higherDirectImage_coefficient_comparison",
+  "statement": "theorem higherDirectImage_coefficient_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) :\n    ∃ c : ∀ V : Y.Opens,\n      Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n        RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n          forget₂ (ModuleCat.{u}\n            ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n              AddCommGrpCat.{u} ⟶\n      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙\n        RingedSpace.openModuleSections Y.toRingedSpace V,\n      ∀ (N : X.Modules) (I : InjectiveResolution\n        (show SheafOfModules (moduleRings X.toRingedSpace) from N)) (V : Y.Opens),\n        let K := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex\n        ∃ e :\n          ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n            RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n              forget₂ (ModuleCat.{u}\n                ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n                  AddCommGrpCat.{u}).obj N) ≅\n            (Scheme.Modules.sectionCohomologyPresheaf K p).presheaf.obj (Opposite.op V),\n          (c V).app N = e.hom ≫\n            ((PresheafOfModules.toPresheaf (moduleRings Y.toRingedSpace).obj).map\n              (Scheme.Modules.sectionCohomologyTheta K p ≫\n                (SheafOfModules.forget (moduleRings Y.toRingedSpace)).map\n                  (I.isoRightDerivedObj\n                    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p).inv)).app\n                      (Opposite.op V)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T040739-L-3946199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T040739-L-3946199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
