@@ -17,51 +17,54 @@
  ],
  "proof": [
   {
-   "text": "Put W = f^{-1}(V) and B = O_U(W). W is affine. A|V sends an open Vprime to O_U(f^{-1}(Vprime)). For finite I the free A|V-module has sections A(Vprime)^I, with the usual basis. The direct image of the free O_W-module has these same sections and restrictions: finite direct sums are finite products, and pushforward preserves products. Thus their canonical basis comparison is an isomorphism. The chosen sections s define the O_W-linear evaluation psi: O_W^I -> F|W, and its direct image is the specified A|V-linear evaluation phi.",
+   "text": "Restrict scalars along O_X -> f_* O_U on the over-site of V and transport with Scheme.Modules.overEquiv V to O_V-modules. This functor T changes no underlying abelian sheaf under scalar restriction. Its action on morphisms preserves and reflects epimorphisms: the faithful forgetful functors to abelian sheaves preserve epimorphisms, and their maps of the same morphism are definitionally identical. The over-site equivalence also preserves and reflects epimorphisms. At the top open of V, the corresponding over-site object is Over.mk(id_V), giving exactly the sections map in the statement. These comparisons are proved explicitly by epi_restrictScalars_iff and the terminal-object calculation in Lean.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-generating-sections",
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The transported target is the restriction to V of the ordinary O_X-module f_*F. It is quasi-coherent by affine pushforward quasi-coherence and restriction along an open immersion. Likewise the transported unit A|V is the restriction of f_*O_U and is quasi-coherent. T is additive by the componentwise formula for its map, so Mathlib preservesFiniteCoproductsOfAdditive and PreservesCoproduct.iso identify the transported finite free source with the finite coproduct of its transported units. Coproducts of quasi-coherent modules are quasi-coherent; therefore source and target of T(phi) are quasi-coherent. The finite coproduct comparison uses the given Finite I instance, including the empty case.",
    "uses": [
     "pqf-def-affine-morphism",
-    "def-pc-module-pullback",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-spec-tilde-free-module",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
    ],
    "elementary": false
   },
   {
-   "text": "Suppose phi is epi. For t in F(W) = (f_*F)(V), the local-surjectivity description of a generating evaluation supplies a covering V = union Vk and finite coefficient vectors in A(Vk)^I lifting the restriction of t. The preimages f^{-1}(Vk) cover W, and the same coefficient vectors lift t locally through psi. Hence t belongs to the sheaf image of psi on W. Both source and target of psi are quasi-coherent. The affine image formula identifies its sheaf image sections on W with the range of psi_W, so t has a global lift in B^I. By the basis comparison, phi_V is surjective.",
+   "text": "If phi is epi, so is psi=T(phi). Its abelian image inclusion is then an isomorphism; hence its map on global sections of V is surjective. Apply the affine image formula in quasiCoherent_cokernel_image to identify the range of this inclusion on the top affine open of V with the range of psi. Thus psi is surjective on global sections, and the top-open comparison gives the required surjectivity for phi.",
    "uses": [
-    "def-weil-pbc-generating-sections",
     "lem-weil-pbc-quasi-coherent-module-cokernel-image"
    ],
    "elementary": false
   },
   {
-   "text": "Conversely suppose phi_V is surjective. The basis comparison says psi_W: B^I -> F(W) is surjective. The quasi-coherent affine tilde/Gamma correspondence identifies psi with the tilde of this module map, and tilde preserves cokernels, so psi is epi. For each affine Vprime contained in V, its preimage Wprime is affine. The affine image formula for psi gives surjectivity of psi on Wprime. The coefficients of each lift are O_U(Wprime)^I = A(Vprime)^I, so the basis comparison gives a lift through phi on Vprime. Affine Vprime form a basis of V. Thus every section on an arbitrary open inside V locally lifts through phi; phi is epi.",
+   "text": "Conversely, surjectivity of phi at Over.mk(id_V) is surjectivity of psi on the top open of V. The one-member affine cover {top} covers the affine scheme V. Apply epi_of_surjective_app to psi, whose target is quasi-coherent, and that cover to get Epi psi. Reflection of epimorphisms by the scalar-restriction and over-site transport gives Epi phi.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "pqf-def-affine-morphism",
-    "def-pc-scheme",
-    "def-weil-pbc-generating-sections"
+    "lem-weil-pbc-quasicoherent-epi-affine-cover"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-def-affine-morphism",
-  "def-pc-module-pullback",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-spec-tilde-free-module",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "def-weil-pbc-generating-sections",
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "def-pc-scheme"
+  "lem-weil-pbc-quasicoherent-epi-affine-cover"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
-  "place": "Tag 0897 (coherent-lemma-graded-finiteness), proof, omitted finite-type detail; Tag 01SB (morphisms-lemma-affine-equivalence-modules), affine-local equivalence; Tag 01IC, exactness of tilde and quasi-coherent images. This is the finite-free evaluation argument of steps 2 and 3 of lem-weil-pbc-affine-module-finite-type."
+  "place": "J1 scalar-restriction proof of the finite-free affine evaluation argument of Tags 01SB and 01IC: affine pushforward quasi-coherence, finite coproduct closure, affine image formula, and the affine-cover epimorphism criterion. The over-site and scalar-restriction comparisons are proved explicitly in Lean."
  },
  "mathlib_searches": [
   {
@@ -156,11 +159,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-ece56",
-  "group": "E4",
+  "reviewer": "COMPILER",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T054213-L-441846",
-  "kind": "interface",
-  "note": "independent Codex review: Matched both Lean statements with their nodes, the implemented proof with recorded dependencies, and the unchanged public signature with the clone; both delivered modules and both direct importers compile cleanly, and axiom checks pass for the documented decomposition."
+  "landing": "20261013T065106-L-898380",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

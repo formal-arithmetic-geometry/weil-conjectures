@@ -11446,3 +11446,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:51 L: merged deliver/H2/Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk (stage 3; reviewer PASS; first push; landing 20261013T065104-L-897997 (interface); batch 20261013T065054; modules 2; new nodes 1)
 - 06:51 L: merged deliver/H3/Sheaf.AlgebraicGeometry.CechSheafLocalPositiveSections (stage 3; reviewer PASS; first push; landing 20261013T065105-L-898101 (interface); batch 20261013T065054; modules 2; new nodes 1)
 - 06:51 L: merged deliver/H3/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionChartGenericFactor (stage 3; reviewer PASS; first push; landing 20261013T065106-L-898259 (interface); batch 20261013T065054; modules 2; new nodes 1)
+- 06:51 L: merged deliver/J1/Sheaf.AlgebraicGeometry.AffinePushforwardFreeEvaluation (stage 3; reviewer PASS; first push; landing 20261013T065106-L-898380 (proof); batch 20261013T065054; modules 1; new nodes 0)
