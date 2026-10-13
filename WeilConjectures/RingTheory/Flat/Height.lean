@@ -34,11 +34,7 @@ variable {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
 /-- The contraction of a prime `Q` of the fibre ring `p.Fiber S` to `S` lies over `p`. -/
 lemma Fiber.comap_includeRight_liesOver (p : Ideal R) [p.IsPrime] (Q : Ideal (p.Fiber S))
     [Q.IsPrime] : (Q.comap (includeRight : S →ₐ[R] p.Fiber S)).LiesOver p := by
-  refine ⟨?_⟩
-  rw [Q.over_def p, Ideal.under, Ideal.under, Ideal.comap_comap]
-  congr 1
-  ext r
-  simp [Algebra.algebraMap_eq_smul_one, TensorProduct.smul_tmul]
+  infer_instance
 
 /-- **Height formula at a prime of the fibre ring.** Let `R → S` be a flat map of noetherian rings,
 `p` a prime of `R`, `Q` a prime of the fibre ring `p.Fiber S = κ(p) ⊗[R] S` and `q` its contraction
@@ -50,7 +46,7 @@ theorem height_comap_includeRight_eq_height_add [IsNoetherianRing R] [IsNoetheri
   have := Fiber.comap_includeRight_liesOver p Q
   let Rp := Localization.AtPrime p
   let Sq := Localization.AtPrime q
-  letI := Localization.AtPrime.algebraOfLiesOver p q
+  let := Localization.AtPrime.algebraOfLiesOver p q
   have hloc : IsLocalHom (algebraMap Rp Sq) :=
     inferInstanceAs (IsLocalHom (Localization.localRingHom p q (algebraMap R S) _))
   have : (maximalIdeal Sq).LiesOver (maximalIdeal Rp) :=
@@ -59,10 +55,10 @@ theorem height_comap_includeRight_eq_height_add [IsNoetherianRing R] [IsNoetheri
     (maximalIdeal Sq)
   set I := (maximalIdeal Rp).map (algebraMap Rp Sq)
   have hI : I = p.map (algebraMap R Sq) := by
+    change (maximalIdeal (Localization (p.primeCompl))).map (algebraMap Rp Sq) = _
     rw [← Localization.AtPrime.map_eq_maximalIdeal, Ideal.map_map,
       ← IsScalarTower.algebraMap_eq]
   have hIle : I ≤ maximalIdeal Sq := by
-    rw [Ideal.map_le_iff_le_comap]
     exact ((local_hom_TFAE (algebraMap Rp Sq)).out 0 2 rfl rfl).mp hloc
   have : Nontrivial (Sq ⧸ I) :=
     Ideal.Quotient.nontrivial_iff.mpr (ne_top_of_le_ne_top (maximalIdeal.isMaximal Sq).ne_top hIle)
