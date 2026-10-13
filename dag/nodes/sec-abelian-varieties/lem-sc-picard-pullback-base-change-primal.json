@@ -13,12 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Use finite local frames and the projection formula to identify both sides with h-pullback of N; the adjoint-defined map is the identity under these identifications.",
+   "text": "Apply the finite-locally-free unit theorem to N at g and to h* N at h ≫ g. Finite local freeness of h* N follows from the proved Modules.isFiniteLocallyFree_pullback instance (WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent), transported by Adjunction.leftAdjointUniq from abstract pullback to tensorPullback.",
    "uses": [
-    "lem-sc-finite-locally-free-tensor-unit",
-    "lem-weil-pbc-module-base-change-map-open-restriction"
+    "lem-sc-finite-locally-free-tensor-unit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Paste the two pullback squares with IsPullback.paste_horiz and use isoPullback to identify their iterated pullback with pullback f (h ≫ g). Construct the pushforward equivalence along this scheme isomorphism from pushforwardComp, pushforwardCongr and pushforwardId. Its adjunction unit is invertible. The composite-unit formula and unit_conjugateEquiv_symm transport the unit isomorphism from the single pullback to the iterated pullback.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the adjoint of h*η_p followed by moduleBaseChangeMap at p* N. Naturality of homEquiv and its inverse cancel the defining transpose. Apply Mathlib unit_conjugateEquiv_symm to the pushforward-square isomorphism and the two composite adjunctions: the result equals η_p′ followed by the pushforward of the pullback-comparison isomorphism. Both units and the comparison are invertible, so cancellation proves invertibility of moduleBaseChangeMap at p* N.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply moduleBaseChangeMap_naturality to the supplied isomorphism e. All functor images of e are invertible, so cancellation transports the result from p* N to the pulled-back E.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,9 +44,12 @@
   "lem-weil-pbc-module-base-change-map-open-restriction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "projection-formula paragraph"
+  "place": "projection-formula paragraph, with Tag 01E8; canonical-map compatibility proved by Mathlib unit_conjugateEquiv_symm",
+  "note": "The finite-local-frame work remains in the existing finite-unit theorem. All pullback-isomorphism transport and canonical-map compatibility are proved private helpers, with no new holes."
  },
  "mathlib_searches": [
   {
@@ -86,13 +107,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-89604",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T220525-L-1395345",
+  "landing": "20261013T002356-L-2376358",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, change record, report, compilation, and both direct importers match the stage-3 review requirements."
  }
 }
