@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.LocalMapPairCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FinitePresentationTestMapZeroEventually
+public import Sheaf.AlgebraicGeometry.LocalMapPairDefect
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual compatibility for one pair of local maps
@@ -27,27 +28,54 @@ namespace AlgebraicGeometry
 attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.openCoverTensorPullbackComparison
 
-/-- One pair of recovered local maps satisfies the overlap equation at every
-sufficiently late stage. No finiteness assumption on the cover is required.
+/-- At a sufficiently late stage, the two composites in the pairwise square
+have a common value on every universal test. This is the overlap-defect
+construction; its proof uses quasi-compactness and finite-presentation
+vanishing on the overlap.
 Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
-(blueprint: lem-pc-fp-local-map-pair-eventually).
+(blueprint: lem-pc-fp-local-map-pair-defect-zero). -/
+theorem finitePresentation_local_map_pair_eventually_defect_zero
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
+    (R : I ⥤ CommRingCat.{u})
+    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
+    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
+    [QuasiSeparated f]
+    (k : I) (hik : i ≤ k)
+    (F G : (pullback f (Spec.map (R.map (homOfLE hik)))).Modules)
+    (hF : F.IsFinitePresentation) (hFq : F.IsQuasicoherent)
+    (hG : G.IsFinitePresentation) (hGq : G.IsQuasicoherent)
+    (U₀ : (pullback f (Spec.map (R.map (homOfLE hik)))).OpenCover.{u})
+    (a b : U₀.I₀) [IsAffine (U₀.X a)] [IsAffine (U₀.X b)]
+    (δ : (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj F ⟶
+      (Scheme.Modules.tensorPullback (overlapLimitMap R c f hik)).obj G)
+    (r₀ : ∀ x, (Scheme.Modules.pullback (U₀.f x)).obj F ⟶
+      (Scheme.Modules.pullback (U₀.f x)).obj G)
+    (hr : ∀ x,
+      let p := overlapLimitMap R c f hik
+      let e := Scheme.Modules.openCoverTensorPullbackComparison p U₀ x
+      e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom p x)).map (r₀ x) ≫
+        e.hom.app G = (Scheme.Modules.pullback ((U₀.pullback₁ p).f x)).map δ) :
+    ∃ (l : I) (_hkl : k ≤ l), ∀ (m : I) (hkm : k ≤ m), l ≤ m →
+      let q := baseChangeMap f
+        (T := Over.mk (Spec.map (R.map (homOfLE hik))))
+        (T' := Over.mk (Spec.map (R.map (homOfLE (hik.trans hkm)))))
+        (Over.homMk (Spec.map (R.map (homOfLE hkm)))
+          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
+      let U := U₀.pullback₁ q
+      let Q := modulesPseudofunctor.toDescentData U.f
+      let C := Scheme.Modules.tensorPullback q
+      let r : ∀ x, (Q.obj (C.obj F)).obj x ⟶ (Q.obj (C.obj G)).obj x := fun x ↦
+        let e := Scheme.Modules.openCoverTensorPullbackComparison q U₀ x
+        e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom q x)).map (r₀ x) ≫
+          e.hom.app G
+      Pseudofunctor.DescentData.PairDefectZero r a b := by sorry
 
-Proof: Let W be the fibre product of the two affine cover members over X_k.
-Quasi-separatedness makes W quasi-compact. On W subtract the two composites
-in the descent-morphism compatibility square. The source and target are ordinary
-pullbacks of F and G, hence finitely presented and quasi-coherent. On the inverse
-limit, conjugation by the canonical restriction comparisons identifies this
-square with the compatibility square for the restrictions of δ. That square
-commutes by functoriality. Thus the defect has zero limit pullback. Apply
-finitePresentation_test_map_zero_eventually to W and this defect. At any later
-stage the defect still vanishes, because pullback preserves zero. Every test
-scheme mapping to the two later cover members maps to W and factors through
-its base change at the vanishing stage. Pull back the zero equation along this
-factorization and conjugate by the ordinary pullback composition comparisons
-and tensor restriction comparisons. Naturality gives exactly the equation below.
-Empty overlaps have a unique map, zero modules cause no exception, and the pair
-may have equal indices. The proof does not require a finite cover or a common
-bound for multiple pairs. -/
+
+set_option linter.unusedVariables false in
+/-- One pair of recovered local maps satisfies the overlap equation at every
+sufficiently late stage.
+Source: Stacks Project, Tag 01ZR (3), first proof by Zariski gluing.
+(blueprint: lem-pc-fp-local-map-pair-eventually). -/
 theorem finitePresentation_local_map_pair_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})
@@ -82,6 +110,11 @@ theorem finitePresentation_local_map_pair_eventually
         let e := Scheme.Modules.openCoverTensorPullbackComparison q U₀ x
         e.inv.app F ≫ (Scheme.Modules.pullback (U₀.pullbackHom q x)).map (r₀ x) ≫
           e.hom.app G
-      Pseudofunctor.DescentData.PairCompatibility r a b := by sorry
+      Pseudofunctor.DescentData.PairCompatibility r a b := by
+  obtain ⟨l, hkl, h⟩ := finitePresentation_local_map_pair_eventually_defect_zero
+    R c hc i f k hik F G hF hFq hG hGq U₀ a b δ r₀ hr
+  exact ⟨l, hkl, fun m hkm hlm =>
+    CategoryTheory.Pseudofunctor.DescentData.pairCompatibility_of_pairDefectZero
+      _ _ _ (h m hkm hlm)⟩
 
 end AlgebraicGeometry

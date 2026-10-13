@@ -18,35 +18,28 @@
  },
  "proof": [
   {
-   "text": "On the fibre product W of the two affine cover members subtract the two composites in the descent-morphism square. W is quasi-compact by quasi-separatedness. The source and target are pullbacks of F and G, hence finitely presented and quasi-coherent.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Pull this defect to the limit. Naturality of the ordinary pullback composition comparisons and the tensor restriction comparisons identifies the transported component maps with restrictions of the same global map δ by the recovery equations. Its descent-morphism square commutes, so the limit defect is zero.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Apply finitePresentation_test_map_zero_eventually to W, its map to X_k, and the defect. The structural map W to Spec(R_k) is quasi-compact, since W is quasi-compact and Spec(R_k) is affine. This supplies a stage l at which the pullback of the defect is zero.",
+   "text": "Apply finitePresentation_local_map_pair_eventually_defect_zero to obtain a stage at which the fixed pairwise overlap defect has a common value on every test scheme.",
    "uses": [
-    "lem-pc-fp-test-map-zero-eventually"
+    "lem-pc-fp-local-map-pair-defect-zero"
    ],
    "elementary": false
   },
   {
-   "text": "For any m at least l and any test scheme mapping to the two pulled-back cover members at m, the universal property gives a map to W and then to W times_{X_k} X_l. Pull back the zero defect along this map. Naturality of the ordinary pullback composition comparisons and the tensor restriction comparisons gives the stated compatibility equation for the specified pair.",
-   "uses": [],
+   "text": "Convert the common-value defect to the required pairwise compatibility equation using pairCompatibility_of_pairDefectZero, preserving the same stage and all later-stage hypotheses.",
+   "uses": [
+    "def-pc-local-map-pair-defect-zero"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-test-map-zero-eventually"
+  "lem-pc-fp-local-map-pair-defect-zero",
+  "def-pc-local-map-pair-defect-zero"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof by Zariski gluing; single-pair defect calculation written by F2"
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3); defect reduction and algebraic conversion written by J1"
  },
  "mathlib_searches": [
   {
@@ -133,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e2580",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T215603-L-897579",
+  "landing": "20261013T231536-L-1817626",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules and nodes match the recorded statements; extended compilation succeeds, axioms are permitted, direct importer compiles, and no interface or mechanical violations found."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
