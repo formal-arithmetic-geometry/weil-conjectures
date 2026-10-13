@@ -13461,3 +13461,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/E1/Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningSectionsLift (stage 3; reviewer PASS; first push; landing 20261013T201744-L-3967437 (interface); batch 20261013T201736; modules 2; new nodes 1)
 - 20:17 L: merged deliver/E1/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingPrime (stage 3; reviewer PASS; first push; landing 20261013T201744-L-3967541 (interface); batch 20261013T201736; modules 2; new nodes 1)
 - 20:17 L: merged deliver/E1/Sheaf.AlgebraicGeometry.SelfTorCompatibleAffineMaps (stage 3; reviewer PASS; first push; landing 20261013T201745-L-3967702 (interface); batch 20261013T201736; modules 2; new nodes 1)
+- 20:17 L: merged deliver/E3/Sheaf.AlgebraicGeometry.DerivedDirectImageKInjectiveShiftComparisonAux (stage 3; reviewer PASS; first push; landing 20261013T201745-L-3967870 (proof); batch 20261013T201736; modules 1; new nodes 0)
