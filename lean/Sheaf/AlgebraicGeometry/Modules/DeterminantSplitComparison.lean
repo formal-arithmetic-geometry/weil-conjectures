@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.LinearAlgebra.ExteriorTopDirectSum
+import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps
+import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective
 import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal
 
 /-!
@@ -85,13 +87,21 @@ theorem determinant_split_comparison_exists {X : Scheme.{v}}
           d Z (hZW.trans hW)
             ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
               (homOfLE hZW).op y)) := by
+  classical
+  obtain ⟨d₀, ⟨hd₀, hn⟩, _⟩ :=
+    determinant_split_linear_maps_exists S r₁ r₂ r₃ hr U e hf hg l hl
   intro x hx
-  obtain ⟨V, hVU, hxV, d, hd⟩ :=
-    determinant_split_comparison_local S r₁ r₂ r₃ hr U e hf hg l hl x hx
-  refine ⟨V, hVU, hxV, d, hd, ?_⟩
-  apply determinant_split_comparison_restriction S r₁ r₂ r₃ hr V d
-    (fun W hW b j ↦ l W (hW.trans hVU) (b j))
-  intro W hW a b
-  exact hd W hW a b
+  obtain ⟨V, hVU, hxV, hbij⟩ :=
+    determinant_split_linear_maps_locally_bijective S r₁ r₂ r₃ hr U e hf hg l hl d₀ hd₀ x hx
+  let d := fun W hW ↦ LinearEquiv.ofBijective (d₀ W (hW.trans hVU)) (hbij W hW)
+  refine ⟨V, hVU, hxV, d, ?_, ?_⟩
+  · intro W hW a b
+    exact hd₀ W (hW.trans hVU) a b
+  · apply determinant_split_comparison_restriction S r₁ r₂ r₃ hr V d
+      (fun W hW ↦ d₀ W (hW.trans hVU))
+    · intro W Z hW hZW y
+      exact hn W Z (hW.trans hVU) hZW y
+    · intro W hW y
+      rfl
 
 end AlgebraicGeometry.Scheme.Modules

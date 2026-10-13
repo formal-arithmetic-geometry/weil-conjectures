@@ -15,29 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Apply determinant_split_comparison_local to obtain a neighborhood V and a family d satisfying the wedge formula.",
+   "text": "Construct the unique natural linear family d₀ on U and retain both its wedge formula and its restriction compatibility.",
    "uses": [
-    "new-determinant-split-local"
+    "lem-sc-split-determinant-linear-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Apply determinant_split_comparison_restriction to the same family, with c given by the supplied lifts l restricted to V; its generator hypothesis is exactly the formula from the local theorem.",
+   "text": "Choose a common chart V containing x on which each given linear map is bijective. Convert these same maps to equivalences using LinearEquiv.ofBijective; their forward functions and wedge formulas are unchanged.",
    "uses": [
-    "new-determinant-split-restriction",
-    "new-determinant-split-local"
+    "lem-sc-split-determinant-linear-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the corrected restriction theorem to d and the restriction of d₀ to V. Its naturality is the retained hn, and the pointwise equality is definitional.",
+   "uses": [
+    "new-determinant-split-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-determinant-split-local",
+  "lem-sc-split-determinant-linear-maps",
+  "lem-sc-split-determinant-linear-bijective",
   "new-determinant-split-restriction"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "blueprint determinant paragraph",
-  "place": "local construction, reduced to the two split statements"
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph; retain naturality while converting the original linear maps into equivalences"
  },
  "mathlib_searches": [
   {
@@ -114,13 +121,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S3",
+  "reviewer": "X-ddc35",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T225329-L-1812904",
+  "landing": "20261013T072409-L-1126183",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all five Lean declarations with their nodes and proof routes; verified the recorded statement correction, unchanged target/caller signatures, minimal forced adaptation, clean compilation of all four modules and direct importers DeterminantSplitComparison and DeterminantWedgeMorphismSplit, original caller failure, and expected axioms."
  }
 }

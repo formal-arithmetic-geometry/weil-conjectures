@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-split-determinant-linear-maps",
+ "kind": "statement",
+ "title": "DeterminantSplitLinearMaps",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $A\\xrightarrow{f}B\\xrightarrow{g}C$ a short complex of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $n=r+s$ and assume $A$ is finite locally free of rank $r$ [def-amb-finite-locally-free-module]. Let $U$ be open and $e:B|_U\\simeq A|_U\\oplus C|_U$ satisfy $ef|_U=\\mathrm{inl}$ and $\\mathrm{pr}_2e=g|_U$. For each $W\\subseteq U$ let $l_W:C(W)\\to B(W)$ be any function with $g_W l_W=\\mathrm{id}$. Exterior powers mean [def-sc-sheaf-exterior-power]. There is exactly one family of $\\mathcal O_X(W)$-linear maps $d_W:(\\bigwedge^r A\\otimes\\bigwedge^s C)(W)\\to(\\bigwedge^n B)(W)$ commuting with every restriction $W\\supseteq Z$, and satisfying $d_W((\\bigwedge a_i)\\otimes(\\bigwedge b_j))=\\bigwedge(f(a_i),l_W(b_j))$ for all tuples $a\\in A(W)^r$ and $b\\in C(W)^s$, first the $r$ included entries then the $s$ lifted entries, reindexed using $n=r+s$. No rank hypothesis on $C$ or invertibility conclusion is asserted.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-amb-finite-locally-free-module",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "On U use the linear second-summand inclusion followed by e inverse. Construct the wedge morphism by exterior and tensor universal properties and sheafification, and transport it to the original restricted exterior and tensor sheaves. Evaluate on each subopen W.",
+   "uses": [
+    "lem-sc-exterior-sheaf-wedge-map",
+    "lem-sc-exterior-sheaf-restrict-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The difference of an arbitrary lift and the canonical lift lies in the first summand. Multilinearity expands the change of lifts into terms with r+1 first-summand factors, all zero by rank vanishing. This proves the formula for arbitrary lifts.",
+   "uses": [
+    "new-j1-exterior-sheaf-rank-wedge-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality comes from the constructed sheaf morphism. For uniqueness locally express sections as sums of pure wedges and their tensors using the sheafification units, compare on these generators, then use separatedness. This includes empty opens, zero rings, and r=0 or s=0.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power",
+  "lem-sc-exterior-sheaf-restrict-iso",
+  "lem-sc-exterior-sheaf-wedge-map",
+  "new-j1-exterior-sheaf-rank-wedge-zero"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "top exterior power of a split exact sequence of locally free sheaves, determinant isomorphism",
+   "results": "ModuleCat.exteriorPower.iso₁; Submodule.mulExact_unitsToPic_mapAlgebra; exteriorPower.oneEquiv_naturality; exteriorPower.pairingDual_ιMulti_ιMulti; ModuleCat.exteriorPower.natIso₁; ModuleCat.exteriorPower.iso₀; ModuleCat.exteriorPower.iso₁_hom_naturality_assoc; ModuleCat.exteriorPower.iso₁_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level match; related exterior algebra lemmas only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ιMulti\", \"append\"",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level match; related exterior algebra lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorSheaf.*(split|lift)|ιMulti.*append|topDirectSum",
+   "results": "Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level match; related exterior algebra lemmas only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "linear map on determinant sheaves from wedges of lifts in a split sequence and local bijectivity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts",
+   "via": [
+    "new-determinant-split-local",
+    "lem-sc-determinant-split-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitLinearMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_linear_maps_exists",
+  "statement": "theorem determinant_split_linear_maps_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∃! (d : ∀ (W : X.Opens), W ≤ U →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W hW (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ddc35",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072409-L-1126183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ddc35",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072409-L-1126183",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean declarations with their nodes and proof routes; verified the recorded statement correction, unchanged target/caller signatures, minimal forced adaptation, clean compilation of all four modules and direct importers DeterminantSplitComparison and DeterminantWedgeMorphismSplit, original caller failure, and expected axioms."
+ }
+}

@@ -2,7 +2,7 @@
  "id": "new-determinant-split-restriction",
  "kind": "statement",
  "title": "new-determinant-split-restriction",
- "statement": "theorem determinant_split_comparison_restriction {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (c : ∀ (W : X.Opens), W ≤ V →\n      (Fin r₃ → S.X₃.val.obj (op W)) → Fin r₃ → S.X₂.val.obj (op W))\n    (hd : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n      (b : Fin r₃ → S.X₃.val.obj (op W)),\n      d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n        (exteriorSheafSection S.X₃ r₃ W b)) =\n      exteriorSheafSection S.X₂ r₂ W\n        (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n          (fun j ↦ c W hW b j) (Fin.cast hr i))) :\n    ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n        d Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y) ",
+ "statement": "theorem determinant_split_comparison_restriction {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (_hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (d₀ : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (hn : ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d₀ W hW y) =\n        d₀ Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y))\n    (hd : ∀ W hW y, d W hW y = d₀ W hW y) :\n    ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n        d Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y)",
  "source": {
   "document": "blueprint determinant paragraph",
   "place": "local construction"
@@ -12,16 +12,16 @@
  ],
  "proof": [
   {
-   "text": "Construct the local comparison and verify its generator formula.",
+   "text": "For every W, Z and section y, substitute the assumed pointwise equality of d with the natural linear family d₀ on both sides. The resulting equation is exactly the naturality hypothesis hn. No generation or lift compatibility argument is needed.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "blueprint determinant paragraph",
-  "place": "local construction"
+  "place": "local construction; naturality preserved when linear maps are converted to equal equivalences, repair of reviewer X-3eef1"
  },
  "mathlib_searches": [
   {
@@ -70,7 +70,7 @@
   "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal",
   "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitComparisonLocal.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_comparison_restriction",
-  "statement": "theorem determinant_split_comparison_restriction {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (c : ∀ (W : X.Opens), W ≤ V →\n      (Fin r₃ → S.X₃.val.obj (op W)) → Fin r₃ → S.X₂.val.obj (op W))\n    (hd : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n      (b : Fin r₃ → S.X₃.val.obj (op W)),\n      d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n        (exteriorSheafSection S.X₃ r₃ W b)) =\n      exteriorSheafSection S.X₂ r₂ W\n        (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n          (fun j ↦ c W hW b j) (Fin.cast hr i))) :\n    ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n        d Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y) ",
+  "statement": "theorem determinant_split_comparison_restriction {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (_hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (d₀ : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (hn : ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d₀ W hW y) =\n        d₀ Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y))\n    (hd : ∀ W hW y, d W hW y = d₀ W hW y) :\n    ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n        d Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y)",
   "branch": "sheaf-dag",
   "by": "S3",
   "date": "2026-10-13"
@@ -86,13 +86,37 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S3",
+  "reviewer": "X-ddc35",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T225329-L-1812904",
+  "landing": "20261013T072409-L-1126183",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all five Lean declarations with their nodes and proof routes; verified the recorded statement correction, unchanged target/caller signatures, minimal forced adaptation, clean compilation of all four modules and direct importers DeterminantSplitComparison and DeterminantWedgeMorphismSplit, original caller failure, and expected axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "V1 stage 2",
+  "old_statement": "theorem determinant_split_comparison_restriction {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →\n      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n        ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))\n    (c : ∀ (W : X.Opens), W ≤ V →\n      (Fin r₃ → S.X₃.val.obj (op W)) → Fin r₃ → S.X₂.val.obj (op W))\n    (hd : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n      (b : Fin r₃ → S.X₃.val.obj (op W)),\n      d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n        (exteriorSheafSection S.X₃ r₃ W b)) =\n      exteriorSheafSection S.X₂ r₂ W\n        (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n          (fun j ↦ c W hW b j) (Fin.cast hr i))) :\n    ∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n      (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n        d Z (hZW.trans hW)\n          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n            (homOfLE hZW).op y) ",
+  "what": "The old arbitrary tuple family c does not imply restriction compatibility: on Spec(Q[t]) with ranks (0,1,1), take d_X=id and d_W=2 id for proper subopens, and c_W=d_W. Replace c and its generator equation by a natural linear family d₀ and pointwise equality d=d₀. The corrected theorem is proved by substitution; the caller retains the naturality provided by the linear construction.",
+  "source": {
+   "document": "blueprint determinant paragraph",
+   "place": "local construction"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-determinant-split-comparison",
+    "holds": true,
+    "note": "The statement is unchanged. Its proof now retains the natural linear maps and uses their pointwise equality with the converted equivalences."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Construct the local comparison and verify its generator formula.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }
