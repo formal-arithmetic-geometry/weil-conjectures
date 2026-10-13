@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.LocalCohomology
+import Sheaf.Algebra.Homology.LocalCohomologyDerivedTorsion
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion
 
 /-! # PuncturedHOneLocalCohomologyComparison
 
@@ -43,6 +45,13 @@ theorem punctured_h_one_subsingleton_of_local_cohomology_vanishing
     (hzero : Subsingleton ((localCohomology (IsLocalRing.maximalIdeal R) 2).obj
       ((ModuleCat.of R R : ModuleCat.{u} R))).carrier) :
     Subsingleton (Modules.H (X := W.toScheme)
-      (SheafOfModules.unit W.toScheme.ringCatSheaf) 1) := by sorry
+      (SheafOfModules.unit W.toScheme.ringCatSheaf) 1) := by
+  obtain ⟨e⟩ := ModuleCat.nonempty_localCohomology_iso_derived_torsion
+    (IsLocalRing.maximalIdeal R) (IsLocalRing.maximalIdeal R).fg_of_isNoetherianRing
+    (ModuleCat.of R R : ModuleCat.{u} R) 2
+  obtain ⟨d⟩ := nonempty_punctured_h_one_addEquiv_derived_torsion R W hW
+  refine ⟨fun x y ↦ d.injective ?_⟩
+  apply e.toLinearEquiv.symm.injective
+  exact hzero.elim _ _
 
 end AlgebraicGeometry.Scheme

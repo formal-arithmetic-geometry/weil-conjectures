@@ -13,16 +13,36 @@
  ],
  "proof": [
   {
-   "text": "Put X = Spec R and m = the maximal ideal. Any prime containing m is\nm, so V(m) consists precisely of the closed point. The hypothesis hW thus\nidentifies W with X minus V(m). Apply the affine comparison of 0BK0 to the\nfinite R-module R and its associated structure sheaf. The localization long\nexact sequence, together with positive-degree acyclicity of that sheaf on\nX, identifies H^1(W, O_W) with H^2_{V(m)}(X, O_X). For the finitely generated\nideal m, the latter is the ideal local cohomology H^2_m(R), computed as the\nfiltered colimit of Ext^2_R(R/m^n, R), as in Mathlib's localCohomology. The\nunderlying additive sheaf of the unit structure module is O_W, so the\nleft group is precisely Modules.H in the conclusion. Transport hzero along\nthis additive equivalence. If W is empty its positive cohomology is zero,\nand the same comparison still applies. No depth hypothesis is used here.",
-   "uses": [],
+   "text": "Apply the Ext-colimit versus derived-torsion comparison in degree two to the finitely generated maximal ideal and the module R.",
+   "uses": [
+    "lem-sbc-local-cohomology-derived-torsion"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply puncture localization to identify the first cohomology of the unit structure module with the same degree-two derived-torsion module.",
+   "uses": [
+    "lem-sbc-punctured-h-one-derived-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two classes x,y, apply injectivity of the puncture equivalence and then injectivity of the inverse algebraic isomorphism. Their images in localCohomology coincide by the given Subsingleton hypothesis.",
+   "uses": [
+    "lem-sbc-local-cohomology-derived-torsion",
+    "lem-sbc-punctured-h-one-derived-torsion"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-local-cohomology-derived-torsion",
+  "lem-sbc-punctured-h-one-derived-torsion"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 0BK0"
+  "place": "Tag 0954 (Ext-colimit versus derived torsion), Tags 0BK0 and 0A6T (puncture localization); assembled in Lean by T1"
  },
  "mathlib_searches": [
   {
@@ -113,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T201800-L-3973322",
+  "landing": "20261013T211115-L-395453",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
