@@ -26,48 +26,40 @@
  ],
  "proof": [
   {
-   "text": "Choose K-flat resolutions $P\\to M$ over $A$ and $F\\to R'$ over $R$. By [lem-pc-balanced-derived-tensor-model], $C=P\\otimes_R F$ represents $M\\otimes_R^{\\mathbf L}R'$ in $D(A)$, multiplication by elements of $R'$ gives commuting endomorphisms in $D(A)$ and hence an $A\\otimes_R R'$-module structure on each $H^i(C)$, and the construction is independent of the resolutions up to canonical isomorphism and functorial in $M$. The $A$-action is that of $C$ as a complex of $A$-modules: multiplication by $a$ on $P$ tensored with $1_F$, which is compatible under $P\\to M$ with multiplication by $a$ on $M$, so it induces the corresponding endomorphism of $M$ in $D(A)$.",
+   "text": "Apply [lem-pc-balanced-derived-tensor-model] to obtain T, its counit alpha, the unique specified model isomorphisms, the coefficient ring maps rho, and the pure-tensor cohomology actions. Choose these witnesses inside the theorem proof; no new definition chooses data from an unproved existence theorem.",
    "uses": [
     "lem-pc-balanced-derived-tensor-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, K-flat model and functoriality paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $C=\\operatorname{Tot}(F\\otimes_R P)$ and apply [lem-pc-derived-tensor-second-factor-functor] to the exact functors $-\\otimes_R^{\\mathbf L}N:D(R)\\to D(A)$ for the $A$-complexes $N=P$ and $N=M$. The action of $b\\in R'$ is the value of this functor on the morphism of $R'$ in $D(R)$ given by multiplication by $b$; by clause (2) the canonical isomorphisms between the models for two K-flat resolutions $F,F'$ of $R'$ are those of a functor, so they commute with these values, and they are $A$-linear because they are morphisms in $D(A)$. By clause (3), a chain map $u:N\\to N'$ of $A$-complexes gives a natural transformation represented by $\\operatorname{Tot}(1_F\\otimes u)$, which is a quasi-isomorphism when $u$ is; taking $u$ the resolution $P\\to M$, or a map $P\\to P'$ over $M$ between two K-flat resolutions, shows that the identifications of $C$ with $M\\otimes_R^{\\mathbf L}R'$ and between choices of $P$ commute with the action of $b$ (naturality in the first variable) and of $a$ (compatibility with composition, $u$ being $A$-linear). Hence all these isomorphisms are $A\\otimes_R R'$-linear on cohomology, and clause (3) for a chain map $M\\to M'$ gives naturality in $M$.",
-   "uses": [
-    "lem-pc-derived-tensor-second-factor-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6 (lemma-derived-base-change), independence of choices and functoriality"
-   }
+   "text": "For a chain map g, the naturality square of T.map(Q.map(g)) commutes with each second-factor multiplication. Apply homology. Since its map is A-linear, the pure-tensor action formula gives tensor-ring linearity for a tensor a tensor b; tensor induction proves it for every scalar.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply clause (2) of [lem-pc-derived-tensor-transitivity] with $B=R'$, $T=C=A\\otimes_R R'$, $K=M$, $P_K=P$, $Q=F$, $K'=P\\otimes_A T$ (a complex of $T$-modules representing $M\\otimes_A^{\\mathbf L}T$, since $P$ is K-flat over $A$) and $\\psi$ the identity. The comparison morphism $c_M:M\\otimes_R^{\\mathbf L}R'\\to M\\otimes_A^{\\mathbf L}T$ is then represented by $P\\otimes_R F\\to P\\otimes_R R'=P\\otimes_A T$, the chain map induced by $F\\to R'$ followed by the associativity identification (the last map to $P\\otimes_A C$ being the identity), and $\\varphi_M=c_M$ commutes with the action of every $b\\in R'$, so each $H^i(c_M)$ is $A\\otimes_R R'$-linear. By Step 2 this holds for every choice of $P$ and $F$ under the canonical identifications.",
-   "uses": [
-    "lem-pc-derived-tensor-transitivity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, equation comparison-map"
-   }
+   "text": "For the specified model isomorphism e, cancel the invertible K-flat counit. The naturality equation of alpha, A-linearity of the resolution q, functoriality of T, and naturality of T.map(Q.map(q)) prove the first-factor scalar equation. Transfer the cohomology module structure along the additive equivalence of H(e); its linearity is the inverse-equivalence identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At E=R-prime[0], let v be the component of T.map(Q.map(q)) and put c=v inverse followed by alpha_P at E. The quasi-isomorphism q makes v invertible. Cancel the counit at F, use the defining equation of e, and apply naturality of T.map(Q.map(q)) and alpha to f to show e followed by c equals Q(P tensor f). The same naturality squares for multiplication by b show rho_M(b) followed by c equals c followed by the target multiplication.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the target, the additive composite of single complexes, underived total tensor, localization and homology sends the multiplication ring map of R-prime to A-linear endomorphisms. Its restriction to R is the A-scalar map: check extension of scalars on tensors 1 tensor x and the total complex on its summand inclusions; use the natural homology comparison with ordinary complex homology to preserve scalars. The algebra tensor universal property gives the target cohomology module with the required pure-tensor formula. A-linearity of H(c), its second-ring equivariance, and tensor induction establish the final linearity clause.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-balanced-derived-tensor-model",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pc-derived-tensor-transitivity"
+  "lem-pc-balanced-derived-tensor-model"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y6 (lemma-derived-base-change)"
+  "place": "Tag 06Y6 and Section 06Y5 comparison-map construction; G2 Lean proof from the balanced-model package using counit naturality and the algebra tensor universal property"
  },
  "mathlib_searches": [
   {
@@ -147,5 +139,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T082345-L-1635646",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
