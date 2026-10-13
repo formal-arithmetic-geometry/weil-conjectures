@@ -1,0 +1,179 @@
+{
+ "id": "lem-pc-coherent-open-map-tensor-extension",
+ "kind": "statement",
+ "title": "Tensor extension of a coherent local morphism",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $I$ a quasi-coherent ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], $H$ a coherent module and $F$ a quasi-coherent module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $U$ be an open with $V(I)=X\\setminus U$, and let $\\varphi:H|_U\\to F|_U$. For some $n\\geq0$ there is $\\beta:I^n\\otimes H\\to F$ [def-pur-sheaf-tensor-product] such that $\\beta|_U=\\varphi\\circ(\\mu_n)|_U$, where $\\mu_n:I^n\\otimes H\\to H$ is multiplication and $I^n$ is the ideal-sheaf-data power, including the unit ideal at zero [lem-weil-pbc-ideal-module-product-stalk]. Thus multiplication on $U$ is followed by $\\varphi$. No descent through the multiplication image is asserted.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (coherent-lemma-homs-over-open), structure-module case and internal-Hom/tensor-Hom paragraphs before the kernel argument."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "A coherent H is finitely presented on X, so internal Hom(H,F) is quasi-coherent and its U-sections identify with maps H|U -> F|U.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a section of a quasi-coherent module on U, extend its finite-type image to a finite-type quasi-coherent submodule on X. It is coherent. Stabilize its I-power torsion using Noetherian ACC; Artin-Rees gives a high ideal product disjoint from this torsion and unchanged on U. Apply the sections comparison to this torsion-free module; a colimit representative gives a map I^n into internal Hom recovering the section.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-coherent-artin-rees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensor-Hom adjunction. Evaluation on U gives beta|U = mu_n|U followed by phi. The support criterion identifies the specified U; the affine power formula identifies ideal-data powers with recursive powers. Naturality of overFunctorEquiv gives the restriction equation.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-hom-adjunction",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-artin-rees",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-module-tensor-hom-adjunction",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-sections-annihilated-by-ideal",
+  "lem-weil-pbc-sections-over-quasi-compact-open",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (coherent-lemma-homs-over-open), structure-module case and internal-Hom/tensor-Hom paragraphs before the kernel argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homs_over_open|tensor.*extension",
+   "results": {
+    "t": "2026-10-13T05:57:19Z",
+    "tool": "grep",
+    "query": "homs_over_open|tensor.*extension",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching tensor extension theorem; local section and localization results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a coherent sheaf on an open complement extends from an ideal power tensor the sheaf",
+   "results": {
+    "t": "2026-10-13T05:57:20Z",
+    "tool": "leansearch",
+    "query": "A morphism from a coherent sheaf on an open complement extends from an ideal power tensor the sheaf",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a coherent sheaf on an open complement extends from an ideal power tensor the sheaf",
+   "results": {
+    "t": "2026-10-13T05:57:20Z",
+    "tool": "leanfinder",
+    "query": "A morphism from a coherent sheaf on an open complement extends from an ideal power tensor the sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.exists_const",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+     "ModuleCat.Tilde.res_const",
+     "localCohomology",
+     "ModuleCat.Tilde.toOpen",
+     "AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+     "ModuleCat.Tilde.sectionsSubmodule",
+     "localCohomology.ofSelfLERadical"
+    ],
+    "digest": "6d342ce071ca297e"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching tensor extension theorem; local section and localization results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedStructureAmbientIdealExtension",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "The ambient ideal-power extension in the integral ideal devissage: the tensor extension part of 01YB.",
+   "via": [
+    "lem-pc-closed-structure-ambient-ideal-extension",
+    "lem-pc-local-closed-ideal-map-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentOpenMapTensorExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_open_map_tensor_extension",
+  "statement": "theorem coherent_open_map_tensor_extension\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (H F : X.Modules)\n    (hH : RingedSpace.IsCoherent X.toRingedSpace H) [F.IsQuasicoherent]\n    (U : X.Opens) (hI : (I.support : Set X) = (U : Set X)ᶜ)\n    (φ : (restrictFunctor U.ι).obj H ⟶ (restrictFunctor U.ι).obj F) :\n    letI : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf\n    ∃ (n : ℕ) (β : (I ^ n).toModules ⊗ H ⟶ F),\n      (restrictFunctor U.ι).map β =\n        (restrictFunctor U.ι).map ((I ^ n).toModulesι ▷ H ≫ (λ_ H).hom) ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T062535-L-736731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T062535-L-736731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
