@@ -20,40 +20,37 @@
  },
  "proof": [
   {
-   "text": "On each affine U use the quotient presentation of the closed chart and sheafify a projective quotient resolution. Compare the resulting bounded-above flat cochain resolution with a K-flat representative of the fixed tensor; tensor with the quotient and take degree minus n homology. The ideal annihilates that homology, so tensor pullback gives the associated Tor sheaf, furnishing t_U.",
+   "text": "Apply exists_selfTor_conormal_wedge_chart on every affine chart and choose the family s with its top ideal-wedge normalization. Apply exists_selfTor_target_basic_localization for the target family t and its localization equation on explicit algebraic Tor elements.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-t2-self-tor-conormal-wedge-chart",
+    "new-t2-self-tor-target-basic-localization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine conormal sections theorem with identity ring coordinates. Its unit equation identifies each ideal class with its pulled-back kernel section. Exterior universal properties, restriction of exterior sheaves, and localization produce s_U. Use these resolution and conormal coordinates in every chart.",
-   "uses": [
-    "lem-sc-affine-open-kernel-conormal-sections",
-    "lem-sc-exterior-sheaf-restrict-iso"
-   ],
-   "elementary": false
+   "text": "For b on U and V contained in U, exterior_section_map and naturality of the original tensor-pullback unit identify the wedge of the restricted unit sections with the restriction of its wedge on U. Naturality of s_U gives conormal_wedge_coordinate_restrict. Rewrite its top value by the source normalization; also normalize s_V on the restricted tuple.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For V=D(f) in U and an ideal tuple b defined on U, let g be its included tuple in I_U. Lift its Koszul quotient augmentation to the projective resolution on U. After tensoring with A/I its top wedge is a cycle; selfTorConormalComparison_spec identifies its homology image with c_U of the conormal wedge. Localize this augmentation and cycle at f. Flat localization preserves the resolution and its quotient-tensored homology. Compare the localized projective resolution with the one chosen on V over the quotient augmentation; the corresponding Koszul lifts are homotopic and have equal homology images. Normalize again over A_f to identify that image with c_V of g/1. The sheafified augmentation/K-flat comparison identifies the two images in the fixed Q, and the source unit equations identify the displayed input wedges. This is only the localization calculation for a tuple on U: no denominator clearing for arbitrary ideal sections of V and no sheaf separatedness are used. The empty tuple is the quotient unit. Empty charts and zero quotients have unique sections.",
+   "text": "Expand the component of the composite phi. Naturality of T_U(c_U) moves that map past restriction. selfTorAffineSection_map identifies its value on the explicit source section with the explicit section of c_U(w_U(b)); the same lemma handles V. The target localization equation now gives the exact requested equality. The chart families, hypotheses and conclusion stay unchanged.",
    "uses": [
-    "new-r4-self-tor-conormal-comparison"
+    "new-t2-self-tor-affine-section"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-open-kernel-conormal-sections",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-exterior-sheaf-restrict-iso",
-  "new-r4-self-tor-conormal-comparison"
+  "new-t2-self-tor-conormal-wedge-chart",
+  "new-t2-self-tor-target-basic-localization",
+  "new-t2-self-tor-affine-section"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "U4",
+  "agent": "T2",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/09PQ",
-  "place": "Coordinate construction and augmented Koszul normalization under one flat principal localization; no general affine descent."
+  "place": "Decomposition into source-chart normalization and target algebraic-image localization, assembled by proved restriction/unit and affine-section naturality."
  },
  "mathlib_searches": [
   {
@@ -149,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T224523-L-1477062",
+  "landing": "20261013T231546-L-1821225",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

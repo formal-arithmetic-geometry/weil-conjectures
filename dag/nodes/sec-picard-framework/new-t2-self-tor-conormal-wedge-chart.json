@@ -1,0 +1,158 @@
+{
+ "id": "new-t2-self-tor-conormal-wedge-chart",
+ "kind": "statement",
+ "title": "Conormal exterior chart coordinates preserve the pure ideal wedge",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], $n\\in\\mathbf N$, and $U$ an affine open [def-weil-affine-spectrum]. Set $A=\\Gamma(Y,U)$, $I=i.\\ker.\\operatorname{ideal}(U)$ [def-sbc-closed-immersion-ideal-sheaf], $N=i^*(i.\\ker)$ [def-pc-module-pullback], $E=\\bigwedge^n N$ [def-sc-sheaf-exterior-power], $M=\\bigwedge^n_{A/I}(I/I^2)$ regarded as an $A$-module [new-r4-self-tor-conormal-comparison], and $F_U$ as in [new-t2-self-tor-affine-section]. There is an isomorphism $s_U:E|_{i^{-1}U}\\simeq (F_U M)|_{i^{-1}U}$. For every $b:\\operatorname{Fin}(n)\\to\\Gamma(U,i.\\ker)$, its top component sends the wedge of the canonical pullback-unit images of $b_j$ [lem-pc-module-pullback-adjunction] to $\\gamma_U^M(\\bigwedge_j[\\operatorname{incl}(b_j)])$, with $\\gamma$ and the algebraic wedge the explicit constructions of [new-t2-self-tor-affine-section]. There is no derived category, Tor module, or localization compatibility in this statement.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-closed-immersion",
+  "def-sc-sheaf-exterior-power",
+  "new-r4-self-tor-conormal-comparison",
+  "new-t2-self-tor-affine-section"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01R3",
+  "place": "Parent step 2: source coordinates only, before applying selfTorConormalComparison; Stacks Tag 01R3 (1)-(2), with Tag 0096 for the unit."
+ },
+ "proof": [
+  {
+   "text": "Apply affine_conormal_sections in identity ring coordinates to the closed inverse-image chart. It makes N quasi-coherent and identifies its top sections with I/I², with the pullback-unit equation.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize this section equivalence as the associated-module sheaf isomorphism on the affine closed chart. Surjectivity of A to the closed chart section ring with kernel I upgrades the A-linear conormal section equivalence to A/I-linearity through the canonical quotient ring identification. Take the exterior alternating maps over A/I; on each principal open, localization of the exterior module identifies the associated exterior sheaf with the exterior of the associated module. Compose with exteriorSheaf_restrict_iso. The equality on pure wedges follows from the conormal unit equation and the explicit tilde/pullback section construction. Empty charts, n=0, zero quotients and nonregular ideals use the same constructions.",
+   "uses": [
+    "lem-sc-exterior-sheaf-restrict-iso",
+    "new-t2-self-tor-affine-section"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-exterior-sheaf-restrict-iso",
+  "lem-weil-pbc-affine-conormal-sections",
+  "new-t2-self-tor-affine-section"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/01R3",
+  "place": "Parent step 2: source coordinates only, before applying selfTorConormalComparison; Stacks Tag 01R3 (1)-(2), with Tag 0096 for the unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "selfTor.*(local|coord)|conormal.*(wedge|tilde)",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem for these explicit chart coordinates; algebraic quotient and localization tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exterior conormal sheaf coordinates self Tor compatible with affine principal localization",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal_basicOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.const",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem for these explicit chart coordinates; algebraic quotient and localization tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Cotangent",
+   "results": "Ideal.Cotangent, Ideal.instAddCommGroupCotangent, Ideal.instInhabitedCotangent, Ideal.instSMulCotangentOfAlgebra, Ideal.instModuleCotangentOfAlgebra, Ideal.instModuleQuotientCotangent, Ideal.cotangent_subsingleton_iff, Ideal.isTorsionBySet_cotangent",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem for these explicit chart coordinates; algebraic quotient and localization tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated sheaf exterior conormal coordinates preserve the pullback adjunction unit and normalized self Tor maps commute with localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior power of a quasi coherent conormal module on an affine closed chart equals the associated exterior module with the pullback unit equation",
+   "results": "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, Algebra.Extension.cotangentComplex_mk, tensorKaehlerQuotKerSqEquiv, Derivation.liftKaehlerDifferential_apply, KaehlerDifferential.D_tensorProductTo, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, KaehlerDifferential.quotKerTotalEquiv",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem for these explicit chart coordinates; algebraic quotient and localization tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorBasicIdealWedgeCoordinates",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent step 2: source coordinates only, before applying selfTorConormalComparison; Stacks Tag 01R3 (1)-(2), with Tag 0096 for the unit.",
+   "via": [
+    "new-u4-self-tor-basic-ideal-wedge-coordinates",
+    "new-e3-self-tor-ideal-wedge-coordinates",
+    "new-h3-self-tor-local-wedge-coordinates",
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalWedgeChart.lean",
+  "declaration": "AlgebraicGeometry.exists_selfTor_conormal_wedge_chart",
+  "statement": "theorem exists_selfTor_conormal_wedge_chart\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorSheaf N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ s : E.over (i ⁻¹ᵁ U.1) ≅ (T.obj M).over (i ⁻¹ᵁ U.1),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        s.hom.val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))\n            (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ U.1)\n              (fun j ↦ ((Classical.choose\n                (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n                  i.ker.toModules).val.app (op U.1) (b j))) =\n          selfTorAffineSection i U M (selfTorIdealWedge i U n b)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T231546-L-1821225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T231546-L-1821225",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
