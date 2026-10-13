@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-principal-open-cech-subset-row-primitive",
+ "kind": "statement",
+ "title": "Positive-degree subset Cech row primitive with zero extension",
+ "statement": "Let A be a commutative ring, X=\\operatorname{Spec}(A) [def-pc-scheme], r a natural number, f:\\operatorname{Fin}(r)\\to A, and D_S=D(\\prod_{i\\in S}f_i). Let J be an integer-indexed cochain complex of structure-sheaf modules [def-pc-cochain-complex-modules]. Supply the inclusions D_S\\subseteq D_{S\\setminus\\{j\\}} and arithmetic transports he for deletion, as in the subset differential. Fix n\\in\\mathbf Z and k\\geq1, with J^{n+1-k} injective [def-sp-injective-resolutions]. For every family c_S\\in\\Gamma(D_S,J^{n+2-|S|}), indexed by nonempty subsets, assume its signed restriction sum is zero on every subset of size k+2, with deletion sign (-1)^{|\\{i\\in S:i<j\\}|} and empty deletions zero. There exists a family b_S\\in\\Gamma(D_S,J^{n+1-|S|}) that is zero unless |S|=k, and whose signed restriction sum on every subset of size k+1 equals c_S, using he at degree n for the primitive and at degree n+1 for the cocycle. No differential of J or total complex is involved.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01EP and 01FM; Tag 08C1, first paragraph, positive horizontal row exactness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Set q=n+1-k. Restrict c to subsets of cardinality k+1 and transport each coefficient along n+2-(k+1)=q. For a subset of size k+2, deleting any element leaves size k+1, and he at degree n+1 identifies both the source and target coefficients with J.X q. Thus the assumed equation is exactly the alternating restriction cocycle equation in degree k. No coordinate of c at another cardinality is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let V be the union of D(f i), covered by those opens. Apply injective module open-cover Cech acyclicity to J.X q in degree k>0, and the alternating comparison (applied on V) to obtain exactness for strictly increasing tuples. Identify each such tuple with its finite range, and its intersection with the basic open of the product. Omitting its j-th entry erases that element; its position j is the number of smaller elements. The isomorphism therefore preserves the displayed signed restriction sum. Exactness provides a primitive on the subsets of cardinality k. For the alternating comparison, regard V as an open subscheme and restrict the underlying abelian presheaf to its opens: both the full and the ordered cochains identify sectionwise with those for the same opens inside X. Full-complex vanishing comes from the injective sheaf on X, so no injectivity assumption on its underlying abelian sheaf is required. Integer sign multiplication equals multiplication by the corresponding sign in A.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this primitive to J.X (n+1-card S) on subsets of size k and extend it by zero on all other nonempty subsets. Arithmetic and proof irrelevance identify the resulting eqToHom with he at degree n. Its signed horizontal differential on size k+1 is c. If k+1>r the cochain is empty and the zero primitive works; if k=r-1 (with k>0) the outgoing cocycle condition is vacuous but exactness still applies at the last nonzero degree. Empty or coinciding basic opens are allowed in the open-cover theorem. For r=0 there are no nonempty subsets.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-pc-alternating-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01EP and 01FM; Tag 08C1, first paragraph, positive horizontal row exactness"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "positive degree exactness injective sheaf finite subset Cech row primitive",
+   "results": "CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, Profinite.NobelingProof.succ_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.InjectiveResolution.exact_succ, CategoryTheory.InjectiveResolution.exact₀",
+   "date": "2026-10-13",
+   "verdict": "No subset Cech exactness theorem; only generic exactness results or unrelated Stone-Cech match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "injective sheaf alternating Cech complex cocycle has primitive",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(exact|primitive)|subset.*[Cc]ech",
+   "results": "Mathlib/Topology/Separation/CompletelyRegular.lean",
+   "date": "2026-10-13",
+   "verdict": "No subset Cech exactness theorem; only generic exactness results or unrelated Stone-Cech match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flasque presheaf alternating cochains finite cover positive degree exact",
+   "results": "MayerVietorisSquare.shortComplex_exact; generic injective-resolution and supported-complex exactness results",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no finite subset-coordinate primitive theorem; the upstream flasque full-tuple theorem still needs the alternating and coordinate conversions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.orderIsoOfFin",
+   "results": "Finset.orderIsoOfFin, Finset.coe_orderIsoOfFin_apply, Finset.orderIsoOfFin_symm_apply",
+   "date": "2026-10-13",
+   "verdict": "Second reading: supplies increasing enumeration, not row exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "exactAt_cechComplex|exactAt_cechComplex_iff|isFlasque_of_injective; subset|primitive in PrincipalOpenCech modules",
+   "results": "WeilConjectures.Topology.Sheaves.CechFlasque.exactAt_cechComplex_of_isFlasque; WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque.isFlasque_of_injective; Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion basicOpen_finset_prod and principalSubsetTuple; no subset row primitive",
+   "date": "2026-10-13",
+   "verdict": "Second reading: upstream exactness is for all tuples. Existing subset insertion is in a total complex; neither directly proves this horizontal row statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechColumnStep",
+  "group": "P2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Principal-open Cech comparison: the positive horizontal row exactness in the finite augmented row argument",
+   "via": [
+    "lem-sc-principal-open-cech-column-step",
+    "lem-sc-principal-open-cech-injective-terms",
+    "lem-sc-principal-open-cech-homology-injective",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetRowPrimitive.lean",
+  "declaration": "AlgebraicGeometry.principalOpenCech_subset_row_primitive",
+  "statement": "theorem principalOpenCech_subset_row_primitive\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀ (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (n : ℤ) (k : ℕ), 1 ≤ k → Injective (J.X (n + 1 - (k : ℤ))) →\n      ∀ c : (∀ S : {S : Finset (Fin r) // S.Nonempty},\n        (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val))),\n      (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 2 →\n        (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property (n + 1))))).hom.app\n                    (op (D (S.val.erase j.val))) (c ⟨S.val.erase j.val, h⟩))\n          else 0) = 0) →\n      ∃ b : (∀ S : {S : Finset (Fin r) // S.Nonempty},\n        (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj\n          (op (D S.val))),\n        (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card ≠ k → b S = 0) ∧\n        (∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 1 →\n          (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) (b ⟨S.val.erase j.val, h⟩))\n          else 0) = c S)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T153935-L-1123629",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T153935-L-1123629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

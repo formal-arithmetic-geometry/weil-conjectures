@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive
 
 /-! # Single-column cancellation in subset Čech coordinates
 
@@ -80,6 +81,57 @@ theorem principalOpenCech_column_step
         (∀ S : {S : Finset (Fin r) // S.Nonempty},
           1 < S.val.card → (τ (n + 1)).hom (T.d n (n + 1) t) S = 0) →
         ∃ u : T.X (n - 1), ∀ S : {S : Finset (Fin r) // S.Nonempty},
-          k < S.val.card → (τ n).hom (t - T.d (n - 1) n u) S = 0 := by sorry
+          k < S.val.card → (τ n).hom (t - T.d (n - 1) n u) S = 0 := by
+  classical
+  dsimp
+  intro T τ hle he hdiff n k hk hInject t htop hdt
+  obtain ⟨m, rfl⟩ : ∃ m : ℤ, n = m + 1 := ⟨n - 1, by omega⟩
+  rw [Int.add_sub_cancel]
+  have hclosed : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = k + 2 →
+      (∑ j : S.val, if h : (S.val.erase j.val).Nonempty then
+            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •
+              (modulesSpecToSheaf.obj (J.X ((m + 1) + 1 + 1 - (S.val.card : ℤ)))).obj.map
+                (homOfLE (hle S.val j.val)).op
+                ((modulesSpecToSheaf.map
+                  (eqToHom (congrArg J.X (he S.val j.val j.property (m + 1))))).hom.app
+                    (op (PrimeSpectrum.basicOpen (∏ i ∈ S.val.erase j.val, f i)))
+                      ((τ (m + 1)).hom t ⟨S.val.erase j.val, h⟩))
+          else 0) = 0 := by
+    intro S hS
+    have htS := htop S (by omega)
+    have hdS := hdt S (by omega)
+    have hh := hdiff (m + 1) t S
+    rw [htS, map_zero, smul_zero, zero_add, hdS] at hh
+    exact hh.symm
+  obtain ⟨b, hbSupport, hbRow⟩ :=
+    principalOpenCech_subset_row_primitive A r f J hle he m k hk hInject
+      ((τ (m + 1)).hom t) hclosed
+  let u : T.X m := (τ m).inv b
+  have hu : (τ m).hom u = b := by
+    exact ConcreteCategory.congr_hom (Iso.inv_hom_id (τ m)) b
+  refine ⟨u, ?_⟩
+  intro S hS
+  have hd := hdiff m u S
+  rw [hu] at hd
+  have hbS : b S = 0 := hbSupport S (by omega)
+  rw [hbS, map_zero, smul_zero, zero_add] at hd
+  have hdS : (τ (m + 1)).hom (T.d m (m + 1) u) S = (τ (m + 1)).hom t S := by
+    by_cases heq : S.val.card = k + 1
+    · exact hd.trans (hbRow S heq)
+    · have hlarge : k + 1 < S.val.card := by omega
+      rw [htop S hlarge]
+      rw [hd]
+      apply Finset.sum_eq_zero
+      intro j hj
+      split_ifs with hjnon
+      · rw [hbSupport ⟨S.val.erase j.val, hjnon⟩ (by
+          have hecard := Finset.card_erase_of_mem j.property
+          change (S.val.erase j.val).card ≠ k
+          omega), map_zero, map_zero, smul_zero]
+      · rfl
+  rw [map_sub]
+  change (τ (m + 1)).hom t S - (τ (m + 1)).hom (T.d m (m + 1) u) S = 0
+  exact sub_eq_zero.mpr hdS.symm
+
 
 end AlgebraicGeometry
