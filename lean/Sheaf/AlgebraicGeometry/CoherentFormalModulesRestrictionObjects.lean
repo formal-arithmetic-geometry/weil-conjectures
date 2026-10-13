@@ -1,14 +1,16 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group G4
+Authors: SHEAF groups G4 and G3
 -/
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.IdealPowerProductRestrictionZero
+import all Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Termwise restriction of coherent formal modules
 
@@ -42,7 +44,27 @@ theorem coherentFormalModules_restriction_objects {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     (F : CoherentFormalModule X I) :
     IsCoherentFormalModule (I.comap U.ι)
-      (F.obj ⋙ Scheme.Modules.restrictFunctor U.ι) := by sorry
+      (F.obj ⋙ Scheme.Modules.restrictFunctor U.ι) := by
+  let R := Scheme.Modules.restrictFunctor U.ι
+  have hqc (n : ℕ) : (F.obj.obj (op n)).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp (F.property.1 n)).1
+  refine ⟨?_, ?_, ?_⟩
+  · intro n
+    exact (coherent_module_local_on_open_cover X (F.obj.obj (op n)) PUnit
+      (fun _ ↦ ⊤) (by simp)).1 (F.property.1 n) U
+  · intro n
+    have := hqc n
+    exact (Scheme.Modules.idealPowerProduct_restrict_isZero_iff I
+      (F.obj.obj (op n)) U (n + 1)).mp (R.map_isZero (F.property.2.1 n))
+  · intro n
+    have := hqc (n + 1)
+    let a := restrictionQuotientIso I (F.obj.obj (op (n + 1))) U (n + 1)
+    have ha := restrictionQuotientIso_π I (F.obj.obj (op (n + 1))) U (n + 1)
+    obtain ⟨e, he⟩ := F.property.2.2 n
+    refine ⟨a ≪≫ R.mapIso e, ?_⟩
+    change formalModuleQuotientπ (I.comap U.ι) (n + 1) (R.obj _) ≫
+      (a.hom ≫ R.map e.hom) = R.map _
+    rw [← Category.assoc, ha, ← R.map_comp, he]
 
 /-- Restriction uses the actual termwise restricted inverse system and morphisms.
 The preceding theorem supplies only its object-property proof.

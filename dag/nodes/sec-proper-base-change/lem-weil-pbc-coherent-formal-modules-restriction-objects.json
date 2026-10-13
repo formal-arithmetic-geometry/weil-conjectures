@@ -13,51 +13,45 @@
  ],
  "proof": [
   {
-   "text": "Restriction preserves coherence of every level by coherence on open subsets.",
+   "text": "For each level, extract quasi-coherence from its coherence using the locally Noetherian coherence criterion. Restrict coherence using the restriction half of coherent_module_local_on_open_cover, instantiated with the singleton cover by the whole scheme.",
    "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-coherent-module-local-on-open-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
-   }
+   "elementary": false
   },
   {
-   "text": "On affine opens, ideal powers and multiplication images restrict to powers and products of the comapped ideal; they have the same local generators. Hence the ideal-power annihilation condition is preserved.",
+   "text": "Restriction preserves zero objects by its left adjunction. Apply idealPowerProduct_restrict_isZero_iff at level n and exponent n+1 to the restriction of the original annihilation proof.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
-   }
-  },
-  {
-   "text": "Restriction preserves the cokernel defining each quotient. Compose the resulting canonical quotient comparison with the restriction of the given transition isomorphism. The quotient projection equation follows from naturality, giving the third object condition.",
-   "uses": [
+    "lem-weil-pbc-ideal-power-product-restriction-zero",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved private restrictionQuotientIso and restrictionQuotientIso_π of TorsionControlledFormalRestriction. They construct the canonical restricted ideal-power quotient comparison and its projection equation from image equality and cokernel comparisons. Compose that isomorphism with the restriction of the given transition isomorphism, reassociate, rewrite by the projection equation and functor.map_comp, then apply the original transition equation. No local image or quotient comparison is re-proved.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-formal-restriction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-weil-pbc-coherent-module-local-on-open-cover",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-ideal-power-product-restriction-zero",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-weil-pbc-coherent-formal-module"
+  "lem-weil-pbc-torsion-controlled-formal-restriction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+  "place": "G3 stage 3 second reading: Stacks Lemma 087X (2). Reuse coherence locality, ideal-power annihilation restriction, and the already constructed quotient comparison with projection equation from TorsionControlledFormalRestriction. All local duplicate comparison helpers removed; unchanged formal-module object predicate assembled directly, with no new sorry."
  },
  "mathlib_searches": [
   {
@@ -129,13 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T225312-L-1806258",
-  "kind": "interface",
+  "landing": "20261013T040746-L-3948483",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
