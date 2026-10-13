@@ -13624,3 +13624,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:39 L: returned deliver/D2/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality (reviewer RETURN: (reviewer X-b71dc, head b71dce185) 1. E5/G1, brief §4: In lean/Sheaf/AlgebraicGeometry/DerivedPullbackKFlatCounitShiftDa)
 
 - 05:40 L: batch 20261013T211049 dependency take-out
+- 21:41 L: returned deliver/R3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-a498c, head a498cd05c) H10: Add the forced adaptation in lean/Sheaf/AlgebraicGeometry/AffineGlobalHomBaseCha)
