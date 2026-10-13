@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-derived-open-intersection-essential-image",
+ "kind": "statement",
+ "title": "Restricted open direct images belong to the overlap direct-image essential image",
+ "statement": "Let X be a scheme [def-pc-scheme], O,P,W opens with W = O ∩ P, and iO : W → O the inclusion. Fix derived module categories on X,O,P,W in one morphism universe [def-pc-derived-category]. Let S : D(W) → D(O) be any right adjoint of canonical exact derived overlap restriction along iO [def-pc-derived-open-restriction-maps]. For every B in D(P), the restriction to O of RjP_* B [def-pc-derived-direct-image] lies in the essential image of S, meaning that there exists M in D(W) and an isomorphism S(M) ≅ (RjP_* B)|O.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+ },
+ "proof": [
+  {
+   "text": "Put V = P.ι⁻¹(O) in P and g = P.ι restricted to O. The open-image equality P.ι(V) = P ∩ O = W supplies q : V ≅ W by P.ι.isoImage V followed by X.isoOfEq. Its defining identity gives q⁻¹ followed by g equal to k = X.homOfLE(leOfHom iO), by cancellation of the mono O.ι. These are Mathlib image/preimage and open-isomorphism identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08FE",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+   }
+  },
+  {
+   "text": "Construct the exact module-sheaf equivalence e from pushforward along q and q⁻¹, using pushforwardComp, pushforwardCongr, and pushforwardId for its unit and counit. Uniqueness of left adjoints identifies e.functor with restrictFunctor q⁻¹. The restriction composition comparison and q⁻¹ ≫ g = k identify restrictFunctor g followed by e.functor with schemeOpenOverlapRestriction X iO. The latter is exact; reflecting finite limits and colimits through e shows restrictFunctor g is exact. Derive this comparison and e to obtain E : D(V) ≌ D(W) and r_g ⋙ E.functor ≅ overlap restriction. Derive the open adjunction r_g ⊣ Rg_* and compose it with E.toAdjunction; transporting its left adjoint through the comparison gives a right adjoint E.inverse ⋙ Rg_* to overlap restriction. Adjunction.rightAdjointUniq gives its canonical isomorphism j to S.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08FE",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+   }
+  },
+  {
+   "text": "Apply schemeDerivedDirectImage_openRestriction to P.ι and O. It gives bc : RjP_* ⋙ rO ≅ rV ⋙ Rg_*. Put M = rV(B) and choose E.functor(M) as the essential-image preimage. The inverse of j at E.functor(M), then Rg_* of E.unitIso⁻¹ at M, then bc⁻¹ at B is the required isomorphism S(E.functor(M)) ≅ rO(RjP_* B). V uses HasDerivedCategory.standard internally; the restriction theorem and derived equivalence retain its morphism universe separately from the four stated categories. No unproved existence result supplies data.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08FE",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a derived open direct image belongs to essential image of direct image from intersection",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:59:06Z\", \"tool\": \"leansearch\", \"query\": \"restriction of a derived open direct image belongs to essential image of direct image from intersection\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of a derived open direct image belongs to essential image of direct image from intersection",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"restriction of a derived open direct image belongs to essential image of direct image from intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ι_image_homOfLE_le_ι_image\", \"TopologicalSpace.Opens.functor_map_eq_inf\", \"AlgebraicGeometry.coe_opensRestrict_apply_coe\", \"AlgebraicGeometry.Scheme.opensRange_homOfLE\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor_map_homOfLE\", \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"AlgebraicGeometry.Scheme.Hom.image_preimage_eq_opensRange_inf\", \"AlgebraicGeometry.Scheme.Opens.ι_image_le\"], \"digest\": \"395d2bda889e0448\"}",
+   "verdict": "No exact theorem for the required derived statement."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage|rightAdjointUniq",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:59:07Z\", \"tool\": \"grep\", \"query\": \"essImage|rightAdjointUniq\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"e103f3245d446313\"}",
+   "verdict": "No exact theorem for the required derived statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "first assertion: local split restrictions in the derived two-open gluing construction",
+   "via": [
+    "lem-sc-derived-open-intersection-mate-iso",
+    "lem-sc-derived-open-difference-diagram",
+    "lem-sc-derived-open-gluing-objects",
+    "lem-sc-derived-open-gluing",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenIntersectionEssentialImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenIntersectionEssentialImage.lean",
+  "declaration": "AlgebraicGeometry.derived_open_intersection_mem_essImage",
+  "statement": "theorem derived_open_intersection_mem_essImage\n    (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (iO : W ⟶ O)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings O.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings P.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    (S : schemeDerivedCategory W.toScheme ⥤ schemeDerivedCategory O.toScheme)\n    (adj : (schemeOpenOverlapRestriction X iO).mapDerivedCategory ⊣ S)\n    (B : schemeDerivedCategory P.toScheme) :\n    S.essImage ((schemeOpenRestriction X O).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage P.ι).obj B))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100225-L-2504416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100225-L-2504416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

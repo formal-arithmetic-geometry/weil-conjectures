@@ -12067,3 +12067,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/X3/Sheaf.RingTheory.FiniteLocalizationFreeModel (stage 3; reviewer PASS; first push; landing 20261013T100223-L-2503751 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:02 L: merged deliver/Y2/Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology (stage 3; reviewer PASS; first push; landing 20261013T100224-L-2504027 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:02 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel (stage 3; reviewer PASS; first push; landing 20261013T100224-L-2504251 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:02 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso (stage 3; reviewer PASS; first push; landing 20261013T100225-L-2504416 (interface); batch 20261013T095923; modules 3; new nodes 2)

@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-derived-open-intersection-iso-detection",
+ "kind": "statement",
+ "title": "Restriction to an open intersection detects isomorphisms between open direct images",
+ "statement": "Let X be a scheme [def-pc-scheme], let O,P,W be opens with W = O ∩ P, and fix derived module categories on X,O,P,W with one morphism universe [def-pc-derived-category]. Write rO and rW for canonical exact derived restriction [def-pc-derived-open-restriction-maps], and JP = RjP_*, JW = RjW_* for derived direct images [def-pc-derived-direct-image]. For any B in D(P), C in D(W) and morphism f : JP(B) → JW(C), if rW(f) is an isomorphism then rO(f) is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+ },
+ "proof": [
+  {
+   "text": "Let iO : W → O be the inclusion. Scheme.Modules.overMapCompOverEquiv and the over-equivalence counit identify transported overlap restriction with restriction along k = X.homOfLE(leOfHom iO). Transport Scheme.Modules.restrictAdjunction k along this isomorphism and derive it using Adjunction.mapDerivedCategoryRightDerivedAdjunction, giving L ⊣ Rk_*. Underived open direct image is fully faithful by its invertible counit and preserves K-injectives because L is exact; the source-library full_rightDerivedFunctor and faithful_rightDerivedFunctor instances give full faithfulness of Rk_*.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08FE",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+   }
+  },
+  {
+   "text": "Apply the essential-image theorem to P,W and then to W,W. The second application is valid since W ≤ O and hence W = O ∩ W. Both rO(JP B) and rO(JW C) lie in the essential image of Rk_*.",
+   "uses": [
+    "lem-sc-derived-open-intersection-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08FE",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+   }
+  },
+  {
+   "text": "The adjunction unit at both objects is invertible by Adjunction.isIso_unit_app_iff_mem_essImage. The canonical derived nested-restriction comparison transports the hypothesis IsIso(rW(f)) into IsIso(L(rO(f))). Naturality of the unit expresses rO(f) followed by its target unit as its source unit followed by Rk_*(L(rO(f))). All factors on the latter side are invertible, so cancel the target unit to prove IsIso(rO(f)).",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08FE",
+    "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sc-derived-open-intersection-essential-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE (lemma-restrict-direct-image-open), used in the local identification of Tag 08DG (lemma-glue)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction to intersection detects isomorphisms between derived direct images of open immersions",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:36:12Z\", \"tool\": \"leanfinder\", \"query\": \"restriction to intersection detects isomorphisms between derived direct images of open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isIso_of_subset\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app\", \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.c_iso'\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_hom_c_app\", \"AlgebraicGeometry.Scheme.Hom.appIso\"], \"digest\": \"8ddd6ad2e6334da6\"}",
+   "verdict": "No exact theorem for the required derived statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.isIso_of_map_isIso",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:36:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.isIso_of_map_isIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.isIso_of_map_isIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No exact theorem for the required derived statement."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*reflect|reflect.*intersection",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:36:13Z\", \"tool\": \"grep\", \"query\": \"intersection.*reflect|reflect.*intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No exact theorem for the required derived statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived restriction to open intersection reflects isomorphisms between direct images",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T08:44:18Z\", \"tool\": \"leansearch\", \"query\": \"derived restriction to open intersection reflects isomorphisms between direct images\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "first assertion: local split restrictions in the derived two-open gluing construction",
+   "via": [
+    "lem-sc-derived-open-intersection-mate-iso",
+    "lem-sc-derived-open-difference-diagram",
+    "lem-sc-derived-open-gluing-objects",
+    "lem-sc-derived-open-gluing",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenIntersectionIsoDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenIntersectionIsoDetection.lean",
+  "declaration": "AlgebraicGeometry.derived_open_intersection_isIso_of_restriction",
+  "statement": "theorem derived_open_intersection_isIso_of_restriction\n    (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings O.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings P.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    (B : schemeDerivedCategory P.toScheme) (C : schemeDerivedCategory W.toScheme)\n    (f : (schemeDerivedDirectImage P.ι).obj B ⟶ (schemeDerivedDirectImage W.ι).obj C)\n    (hf : IsIso ((schemeOpenRestriction X W).mapDerivedCategory.map f)) :\n    IsIso ((schemeOpenRestriction X O).mapDerivedCategory.map f)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100225-L-2504416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100225-L-2504416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

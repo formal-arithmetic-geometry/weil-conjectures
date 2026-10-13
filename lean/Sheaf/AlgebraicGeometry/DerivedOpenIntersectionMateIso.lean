@@ -6,7 +6,8 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedOpenIntersectionIsoDetection
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 /-! # The restriction mate for the intersection of two opens
 
@@ -27,6 +28,23 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem open_counit_isIso
+    (X : Scheme.{u}) (U : X.Opens)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    (adj : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι) :
+    IsIso adj.counit := by
+  let G := RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom
+  let a : schemeOpenRestriction X U ⊣ G :=
+    (Scheme.Modules.restrictAdjunction U.ι).ofNatIsoLeft
+      (Scheme.Modules.overFunctorEquiv U).symm
+  have : G.PreservesKInjectiveComplexes := a.preservesKInjectiveComplexes
+  have : G.Full :=
+    (Scheme.Modules.restrictAdjunction U.ι).fullyFaithfulROfIsIsoCounit.full
+  have : G.Faithful :=
+    (Scheme.Modules.restrictAdjunction U.ι).fullyFaithfulROfIsIsoCounit.faithful
+  exact Adjunction.counit_isIso_of_R_fully_faithful adj
+
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
@@ -40,18 +58,19 @@ Source: Stacks Project, Cohomology, Tag 08FE and the split restriction calculati
 in the proof of Tag 08DG.
 (blueprint: lem-sc-derived-open-intersection-mate-iso).
 
-Proof: write W = O ∩ P. For a K-injective complex I representing B on P,
-restriction to W is K-injective by Tag 08BS. Both (RjP_* B)|O and
-(RjW_*(B|W))|O are therefore computed by direct image to O of I|W,
-by Tag 08FE. On an open T of O both complexes have sections I(T ∩ P).
-The displayed mate is the identity under these identifications: its adjoint
-is the restriction of the P counit, transported through the canonical
-composition comparison. This follows sectionwise from the restriction
-counit and its triangle identity; deriving preserves the equality.
-Thus it is an isomorphism. Changing either adjunction on the fixed pair
-of functors conjugates the mate by natural automorphisms of the right
-adjoints and does not affect invertibility. This also handles empty opens
-and the empty intersection, when the corresponding complexes are zero. -/
+Proof: open direct image is fully faithful on the derived category, since its
+underived functor is fully faithful and preserves K-injective complexes as the
+right adjoint of exact restriction. Thus the counits of the supplied adjP and
+adjW are invertible, for any adjunctions on these fixed functors. Let f be the
+specified mate. The inverse law of adjW.homEquiv identifies rW.map(f) followed
+by the W counit with eP.inv followed by sP.map of the P counit. Both factors
+on the latter side are invertible; cancelling the W counit proves rW.map(f)
+invertible. Tag 08FE puts both source and target restricted to O in the
+essential image of derived direct image from W to O. Restriction to W reflects
+isomorphisms between these objects by full faithfulness and naturality of the
+adjunction unit, as proved by derived_open_intersection_isIso_of_restriction.
+Applying that theorem to f proves the stated conclusion. Empty opens and the
+empty intersection are included without a covering assumption. -/
 theorem derived_open_intersection_mate_isIso
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (i : W ⟶ P)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -65,6 +84,24 @@ theorem derived_open_intersection_mate_isIso
     let eP := schemeDerivedOpenRestrictionCompIso X i;
     IsIso ((schemeOpenRestriction X O).mapDerivedCategory.map
       ((adjW.homEquiv ((schemeDerivedDirectImage P.ι).obj B) (sP.obj B))
-        (eP.inv.app _ ≫ sP.map (adjP.counit.app B)))) := by sorry
+        (eP.inv.app _ ≫ sP.map (adjP.counit.app B)))) := by
+  dsimp only
+  have := open_counit_isIso X P adjP
+  have := open_counit_isIso X W adjW
+  let sP := (schemeOpenOverlapRestriction X i).mapDerivedCategory
+  let eP := schemeDerivedOpenRestrictionCompIso X i
+  let f := (adjW.homEquiv ((schemeDerivedDirectImage P.ι).obj B) (sP.obj B))
+    (eP.inv.app _ ≫ sP.map (adjP.counit.app B))
+  have hcomp : (schemeOpenRestriction X W).mapDerivedCategory.map f ≫
+      adjW.counit.app (sP.obj B) =
+        eP.inv.app _ ≫ sP.map (adjP.counit.app B) := by
+    exact (adjW.homEquiv _ _).symm_apply_apply _
+  have : IsIso ((schemeOpenRestriction X W).mapDerivedCategory.map f ≫
+      adjW.counit.app (sP.obj B)) := by
+    rw [hcomp]
+    infer_instance
+  have hf : IsIso ((schemeOpenRestriction X W).mapDerivedCategory.map f) :=
+    IsIso.of_isIso_comp_right _ (adjW.counit.app (sP.obj B))
+  exact derived_open_intersection_isIso_of_restriction X O P W hW B (sP.obj B) f hf
 
 end AlgebraicGeometry
