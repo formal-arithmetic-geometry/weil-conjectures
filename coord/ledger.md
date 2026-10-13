@@ -13436,3 +13436,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:53 L: returned deliver/E1/Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition (reviewer RETURN: (reviewer X-e5fdb, head e5fdb65ea) C4/C5/C6: In dag/nodes/sec-abelian-varieties/lem-sc-canonical-termwise-single-map-fac)
 
 - 03:54 L: batch 20261013T190131 dependency take-out
+- 19:55 L: returned deliver/XRdbb7091a3d1839f4/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-19b4c, head 19b4c1a81) d: The unheld adaptation violates signature preservation, and this delivery changes i)
