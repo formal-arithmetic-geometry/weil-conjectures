@@ -1,0 +1,101 @@
+{
+ "id": "lem-pc-second-localization-iso-aux-isIso",
+ "kind": "statement",
+ "title": "Invertibility of a characterized second localization map",
+ "statement": "For the rings and models of lem-pc-second-localization-iso, every characterized coefficient map is an isomorphism.",
+ "stmt_deps": [
+  "lem-pc-second-localization-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine localization identity"
+ },
+ "proof": [
+  {
+   "text": "Use the same flat resolution and comparison as in the existence step. Localization makes every denominator of B a unit after extension to Bp, so the comparison is an isomorphism on localized homology. Tensor associativity transports its inverse to D; the generator formula and IsSecondLocalizationMap.ext identify the transported map with the given characterized map, proving it is an isomorphism.",
+   "uses": [
+    "lem-pc-second-localization-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-second-localization-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of a morphism between extended cohomology modules under localization",
+   "results": "No exact declaration found; only ordinary tensor localization results.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization derived tensor cohomology IsIso",
+   "results": "No exact match for the model-level characterized map.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondLocalization.*(hom|IsIso)",
+   "results": "Only the target map predicate and this split interface occur in lean/Sheaf.",
+   "date": "2026-10-14",
+   "verdict": "no existing declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SecondLocalizationIso",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-second-localization-iso",
+   "place": "split during stage 3"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SecondLocalizationIsoAux",
+  "file": "lean/Sheaf/Algebra/Homology/SecondLocalizationIsoAux.lean",
+  "declaration": "RingTensorCohomology.secondLocalization_hom_isIso",
+  "statement": "theorem secondLocalization_hom_isIso\n    (T : Submonoid B) [IsLocalization T Bp] (hflat : (algebraMap B Bp).Flat) (i : ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D)\n    (f : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ⟶\n      (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).obj (K.cohomology i))\n    (hf : IsSecondLocalizationMap R A B Bp D hflat Q L K i f) : IsIso f",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T224516-L-1474124",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T224516-L-1474124",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
