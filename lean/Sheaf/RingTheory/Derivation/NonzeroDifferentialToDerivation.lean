@@ -1,6 +1,7 @@
 module
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Derivation.Basic
+import Mathlib.LinearAlgebra.Dual.Lemmas
 /-!
 # Detecting nonzero differentials by derivations
 
@@ -25,4 +26,5 @@ theorem exists_derivation_of_nonzero_kahler_differential
     (p : ℕ) [Fact p.Prime] (M : Type u) [Field M] [CharP M p] [Algebra (ZMod p) M]
     (f : M) (h : KaehlerDifferential.D (ZMod p) M f ≠ 0) :
     ∃ D : Derivation ℤ M M, D f ≠ 0 := by
-  sorry
+  obtain ⟨φ, hφ⟩ := Module.Projective.exists_dual_ne_zero M h
+  exact ⟨(φ.compDer (KaehlerDifferential.D (ZMod p) M)).restrictScalars ℤ, hφ⟩
