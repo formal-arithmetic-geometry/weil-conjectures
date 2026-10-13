@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-weil-pbc-four-corners",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-pbc-level-map-corners"
+  ]
  },
  "kind": "definition",
  "title": "Four finite-level corners",
- "statement": "Let $\\square$ be cartesian [def-weil-pbc-cartesian-square] with $f$ proper,\nlet $K$ be derived $I$-complete in the sense of the adic coefficient datum,\nput $K_n=K\\otimes_A^LP_n$, and put\n$$\n E=Lg'^*K,\n \\qquad E_n=Lg_n'^*K_n\n       \\xleftarrow{\\sim}E\\otimes_A^LP_n.\n$$\nDefine four objects of $D(Y'_{\\Proet},P_n)$:\n$$\n \\begin{aligned}\n  A_n&=Lg_n^*((Rf_*K)\\otimes_A^LP_n),&\n  B_n&=Lg_n^*Rf_*K_n,\\\\\n  C_n&=(Rf'_*E)\\otimes_A^LP_n,&\n  D_n&=Rf'_*E_n.\n \\end{aligned}\n$$",
+ "statement": "Use the adic coefficient datum [def-weil-pbc-adic-coefficient-datum]: $A$ is Noetherian, $I=(a_1,\\ldots,a_r)$, $A/I$ is torsion, and $P_n=A/I^n$ is finite as a set and perfect over $A$ for every $n\\geq1$. On a scheme $T$, the coefficient sheaves are $(P_n)_T$ and $A_T=\\varprojlim_n(P_n)_T$, and $D(T_{\\Proet},A)=D(\\operatorname{Mod}(T_{\\Proet},A_T))$. All tensors with $P_n$ below mean derived extension of scalars along $A_T\\to(P_n)_T$ [lem-pur-derived-change-of-rings], so their values are objects over $(P_n)_T$.\n\nLet $\\square$ be the cartesian square [def-weil-pbc-cartesian-square]\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\nwith $f$ proper. For every arrow $u:U\\to V$ of the square, specialize [lem-weil-pbc-profinite-coefficient-inverse-image] to the finite ring tower $Q_n=P_n=A/I^n$. This supplies specified ring isomorphisms\n$$\n c_u:u^{-1}A_V\\xrightarrow{\\sim}A_U,\\qquad\n c_{u,n}:u^{-1}(P_n)_V\\xrightarrow{\\sim}(P_n)_U,\n$$\ncompatible with the projections $\\pi_{T,n}:A_T\\to(P_n)_T$, the quotient transitions, and composition of arrows. Explicitly $\\pi_{U,n}c_u=c_{u,n}u^{-1}\\pi_{V,n}$. These are the coefficient identifications used for the ordinary ringed-coefficient derived operations of [def-weil-pbc-proetale-operations], at both integral and finite level. Let $K\\in D(X_{\\Proet},A)$ be derived $I$-complete [def-weil-pbc-intrinsic-completion]. For $n\\geq1$, a subscript $n$ on a pullback or direct image indicates coefficients $(P_n)_T$. Put\n$$\n K_n=K\\otimes_A^LP_n,\\qquad E=L(g')^*K,\n \\qquad E_n=L(g'_n)^*K_n.\n$$\nWith these coefficient identifications, ordinary module pullback is exact [def-weil-pbc-proetale-operations] and sends the coefficient module $(P_n)_X$ to $(P_n)_{X'}$, with its $A_{X'}$-action through $\\pi_{X',n}$ by the displayed compatibility. Thus its derived pullback has the same identification, concentrated in degree zero. Apply the canonical ordinary pullback/tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $K$ and $(P_n)_X$. Together with the finite coefficient identification $c_{g',n}$ this identifies\n$$\n E\\otimes_A^LP_n\\xrightarrow{\\sim}E_n.\n$$\nThe comparison is taken in $D(X'_{\\Proet},P_n)$, retaining the quotient-coefficient action of derived extension of scalars: choose a K-flat representative $Q$ of $K$ with flat terms [lem-pc-kflat-resolution]. Its pullback $(g')^*Q$ is K-flat with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and computes $E$ by [def-weil-pbc-proetale-operations]. Both derived extensions of scalars are therefore computed by the displayed ordinary tensors [lem-pur-derived-change-of-rings]. On these representatives the comparison is the natural tensor map\n$$\n (g')^*Q\\otimes_{A_{X'}}(P_n)_{X'}\\ \\cong\\ (g'_n)^*(Q\\otimes_{A_X}(P_n)_X),\n$$\nwhich is $(P_n)_{X'}$-linear because $c_{g'}$ and $c_{g',n}$ commute with the coefficient projections. For the quotient map $P_{n+1}\\to P_n$, both composites with this tensor comparison send a local pure tensor $q\\otimes p$ to the pullback of $q$ tensored with the quotient image of $p$. Equality on pure tensors gives equality of the sheaf maps, hence of the induced derived comparisons. Define four objects of $D(Y'_{\\Proet},P_n)$:\n$$\n\\begin{aligned}\n A_n&=Lg_n^*((Rf_*K)\\otimes_A^LP_n),&\n B_n&=Lg_n^*Rf_{*,n}K_n,\\\\\n C_n&=(Rf'_*E)\\otimes_A^LP_n,&\n D_n&=Rf'_{*,n}E_n.\n\\end{aligned}\n$$\nHere $E$ is the ordinary pullback; no completed pullback is used in these four objects.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-four-corners.md",
   "place": "node def-weil-pbc-four-corners, order 1342",
@@ -36,15 +38,62 @@
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-pc-kflat-resolution"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Four derived finite coefficient objects in a proper cartesian square of pro-etale topoi, obtained by pullback, direct image and reduction modulo powers of an ideal",
+   "results": "Hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, Algebra.FormallyEtale.instForallOfFinite, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.rightDerived",
+   "results": "Hits:  (none). ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "grep",
+   "query": "fourCorners|four.corners|ProEtale|completedPullback",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction modulo an ideal and pullback direct image in a pro-etale proper base change square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback commutes with extension of coefficient rings on ringed topoi, reducing a sheaf complex modulo an ideal before or after inverse image",
+   "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Tt]ensor|[Tt]ensor.*baseChange|pullback.*[Tt]ensor",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean. ",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the ringed-topos derived tensor comparison or the four-corner construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -80,5 +129,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-four-corners",
+  "worker": "stage1",
+  "summary": "Repaired C4/E1 by supplying compatible completed and finite coefficient inverse-image identifications through a general finite-ring-tower lemma. Explicitly specialized these to every square arrow, checked the coefficient-projection equation, and used exact identified-coefficient pullback to identify the derived pullback of P_n. The tensor comparison now retains its finite-ring action. Four objects and all hypotheses are preserved. Two new statement-only nodes; no definition proof steps.",
+  "blueprint": "The displayed K_n, ordinary E, E_n and four formulas; the coefficient identifications needed by the ordinary operations and the canonical E reduction are explicit inputs, with their compatibility equations."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-39513fc89",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-39513fc89 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full. Stacks 07A4/0G7E support the tensor theorem; 098T/097N/04D3/01YW support the profinite coefficient comparison. Four-corner formulas, coefficient actions, transition compatibility and edge cases check out. Corrected two incomplete new-node metadata records. review.md records source checks and the unresolved target-level condensed-category/base-change comparison; the seeded route is not certified.; 2 file(s) fixed by the reviewer"
+ }
 }

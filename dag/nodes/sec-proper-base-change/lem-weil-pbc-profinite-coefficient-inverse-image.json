@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-profinite-coefficient-inverse-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "statement: coefficient identifications required to define ordinary E = L(g′)*K and identify its finite reduction with E_n",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compatible inverse image of profinite coefficient sheaves",
+ "statement": "Let $u:U\\to V$ be any morphism of schemes [def-pc-scheme], with small pro-etale sites and their universe convention [def-weil-pbc-proetale-site], and inverse image $u^{-1}$ [def-weil-proetale-inverse-image]. Let $(Q_n,t_n:Q_{n+1}\\to Q_n)_{n\\geq1}$ be a countable inverse system of finite commutative rings with unital ring maps, all in the chosen universe. For $T=U,V$, let $(Q_n)_T$ be the constant ring sheaf [def-weil-pbc-constant-sheaf], equivalently the sheafification [def-weil-pbc-sheafification] of $W\\mapsto\\operatorname{Cont}(\\pi_0(|W|),Q_n)$ with $Q_n$ discrete, and put $R_T=\\varprojlim_n(Q_n)_T$, with projections $\\pi_{T,n}:R_T\\to(Q_n)_T$. There are canonical isomorphisms of sheaves of rings\n$$\n c_{u,n}:u^{-1}(Q_n)_V\\xrightarrow{\\sim}(Q_n)_U,\\qquad\n c_u:u^{-1}R_V\\xrightarrow{\\sim}R_U.\n$$\nHere $c_{u,n}$ is adjoint to the map $(Q_n)_V\\to u_*(Q_n)_U$ sending each constant section $q$ to the same constant section $q$ on the base-changed object. The map $c_u$ is the unique map whose $n$-th projection is $c_{u,n}\\circ u^{-1}\\pi_{V,n}$; this canonical comparison is an isomorphism, not merely a map to a limit. These identifications satisfy\n$$\n \\pi_{U,n}\\circ c_u=c_{u,n}\\circ u^{-1}\\pi_{V,n},\\qquad\n (t_n)_U\\circ c_{u,n+1}=c_{u,n}\\circ u^{-1}(t_n)_V.\n$$\nThey are natural in morphisms of inverse systems of finite rings and compatible with identities and composition of scheme morphisms, under the canonical identifications of composite inverse images.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 098T, label lemma-morphism-big-small (2), and Tag 097N, label lemma-ind-etale-implies; with literature/stacks-project/sites.tex, Tag 04D3, label lemma-pullback-representable-sheaf, and literature/stacks-project/limits.tex, Tag 01YW, label lemma-directed-inverse-system-affine-schemes-has-limit",
+  "note": "Coefficient-system consequence assembled from these results, not a verbatim theorem of a single tag. The representable finite-disjoint-union and affine-limit argument is recorded in the worker report."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on small pro-etale sites preserves a sheaf of profinite coefficient rings given as an inverse limit of finite constant ring sheaves",
+   "results": "8 hits; recorded top hits: LightCondensed.ofSheafForgetLightProfinite_val, LightCondMod.ofSheafLightProfinite, Condensed.ofSheafForgetProfinite, CondensedMod.ofSheafProfinite, Condensed.isSheafProfinite, LightCondensed.ofSheafForgetLightProfinite, LightCondensed.ofSheafLightProfinite_val, Condensed.lanSheafProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed sheaf constructors, sequential-limit epimorphisms, affine scheme limit facts, and ordinary module pullback ingredients do not state compatible inverse-image identifications for finite-ring towers on scheme pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of schemes pulls back representable sheaves associated to inverse systems of finite disjoint unions and hence preserves completed constant finite coefficient sheaves",
+   "results": "8 hits; recorded top hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', LightCondMod.ofSheafLightProfinite, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed sheaf constructors, sequential-limit epimorphisms, affine scheme limit facts, and ordinary module pullback ingredients do not state compatible inverse-image identifications for finite-ring towers on scheme pro-etale sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.limit",
+   "results": "2 hits; recorded top hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed sheaf constructors, sequential-limit epimorphisms, affine scheme limit facts, and ordinary module pullback ingredients do not state compatible inverse-image identifications for finite-ring towers on scheme pro-etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|[Pp]rofinite.*[Ss]heaf|[Ss]heaf.*[Pp]rofinite",
+   "results": "25 hits; recorded top hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed sheaf constructors, sequential-limit epimorphisms, affine scheme limit facts, and ordinary module pullback ingredients do not state compatible inverse-image identifications for finite-ring towers on scheme pro-etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|inverseImage|completed|limit",
+   "results": "25 hits; recorded top hits: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean; subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed sheaf constructors, sequential-limit epimorphisms, affine scheme limit facts, and ordinary module pullback ingredients do not state compatible inverse-image identifications for finite-ring towers on scheme pro-etale sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a completed constant coefficient ring on the pro-etale site commutes with finite quotient ring reductions",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the locally constant profinite ring sheaf under arbitrary base change of schemes is an isomorphism",
+   "results": "8 hits; top: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits; top: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(monoidal|tensor)|inverseImage.*(limit|constant)",
+   "results": "25 hits; top: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "def-weil-pbc-four-corners",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
