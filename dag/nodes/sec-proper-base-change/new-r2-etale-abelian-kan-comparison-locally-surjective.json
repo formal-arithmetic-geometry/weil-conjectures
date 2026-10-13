@@ -15,34 +15,54 @@
  ],
  "proof": [
   {
-   "text": "Sheafify P. The sheafification unit is locally surjective by the local sheafification section theorem. Base change preserves finite limits; hence its comma categories are filtered and their underlying set colimits carry the abelian operations of F. Sheafification transports addition, zero, and inverse and their identities. The resulting abelian sheaf is the abelian inverse image with its composite unit. For the coefficient-universe comparison, use the small basis of affine etale finite-presentation maps into affine opens. Every etale object is covered by these and their fibre products have covers in the same basis. The Kan and plus constructions on that basis use small diagrams in Type (u+1); lifting commutes with these finite limits and filtered colimits. Extend by descent on covering families. The abelian compatibility and its adjunction are the mathematical assertion of lem-weil-pbc-etale-inverse-image-algebraic-structures; its currently recorded Lean specialization has larger carriers, so it cannot be applied directly to F. The small affine basis is used to construct the same adjunction in the present coefficient universe, not to choose arbitrary data from that unproved specialization.",
+   "text": "Prove finite-limit preservation of the large set inverse image by composing the inclusion, the opposite-base-change Kan extension, and sheafification. Base change is representably flat; AB5OfSize_of_univLE provides the appropriate exact filtered colimits of types. Apply etaleInverseImageAbelianLift_hom to obtain the large abelian/set comparison ea and its hom-set equation. No ring operations are needed.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
     "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
    ],
    "elementary": false
   },
   {
-   "text": "Uniqueness of left adjoints to the fixed pushforward compares this abelian inverse image to the supplied H. The comparison is an isomorphism and respects the supplied unit. On underlying lifted presheaves its composite with the sheafification unit equals q, since both have the same composite with the Kan unit and a Kan extension determines that morphism uniquely. Local surjectivity of the sheafification unit is preserved by the isomorphism. Empty etale objects have the empty covering sieve.",
+   "text": "For each small abelian sheaf G, apply Scheme.etale_setPullback_small to its underlying small set sheaf. The comparison ea injects each section group of the large abelian inverse image of ULift(G) into this small set. Thus each section group is small. Construct a small abelian presheaf using Shrink and transport every restriction map with Shrink.addEquiv. The resulting lifted presheaf is isomorphic to the original large abelian sheaf; reflection of the sheaf condition gives a small abelian sheaf. This is the private proved helper smallAbelianSheaf_essImage. Consequently the lifted large inverse-image functor takes values in the essential image of the fully faithful coefficient ULift functor.",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-etale-inverse-image-small-universe",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Functor.essImage.liftFunctor to restrict the large abelian inverse image to small abelian sheaves, with its canonical comparison e. Restrict the large adjunction along the fully faithful coefficient ULift functors; right pushforward commutes definitionally with ULift. Adjunction.leftAdjointUniq compares this restricted left adjoint L with the supplied H. Compose ea inverse, e inverse and this adjoint comparison to obtain the underlying-set sheaf isomorphism d from the large set inverse image to ULift(H(F)). The large hom-set compatibility, map_restrictFullyFaithful_unit_app and unit_leftAdjointUniq_hom_app prove that d carries the large set unit to the lifted supplied unit.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the unit of the constructed set adjunction as the Kan unit followed by the whiskered sheafification unit; this is the private proved helper etaleSetPullback_unit_hom, using Adjunction.map_restrictFullyFaithful_unit_app and Adjunction.comp_unit_app. The preceding unit equality and Functor.leftKanExtension_hom_ext identify the given concrete Kan comparison with toSheafify followed by d.hom.hom. Mathlib Presheaf.isLocallySurjective_toSheafify' supplies local surjectivity of the set sheafification unit; the underlying map of d is an isomorphism, hence locally surjective. Composition proves the conclusion. This includes empty objects automatically and does not choose explicit covering families.",
+   "uses": [
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "def-weil-pbc-sheafification",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+  "lem-weil-pbc-etale-inverse-image-small-universe",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/00YV",
-  "place": "Proposition 7.44.3, abelian inverse image compatible with underlying sets; Tag 09XN, local representatives; Sites Tag 00WK, local surjectivity of sheafification"
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Proposition 00YV (abelian inverse image), Tag 00WK (sheafification unit); existing lem-weil-pbc-etale-inverse-image-small-universe proof using 03Q1(3), 03PU and 03PT replaces the affine-basis universe-comparison route."
  },
  "mathlib_searches": [
   {
@@ -134,10 +154,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T131328-L-4034968",
-  "kind": "interface",
+  "landing": "20261013T141521-L-377471",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

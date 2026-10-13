@@ -12745,3 +12745,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame (stage 3; reviewer PASS; first push; landing 20261013T140828-L-317229 (interface); batch 20261013T140810; modules 2; new nodes 1)
 - 14:08 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentation (stage 3; reviewer PASS; first push; landing 20261013T140829-L-317383 (interface); batch 20261013T140810; modules 3; new nodes 2)
 - 14:10 L: returned deliver/X3/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-a3499, head a3499c3ab) E1 (review point 4): categorical colimits alone do not justify elementwise descent ac)
+- 14:15 L: merged deliver/A3/Sheaf.Paper.EtaleAbelianKanComparisonLocallySurjective (stage 3; reviewer PASS; first push; landing 20261013T141521-L-377471 (proof); batch 20261013T141520; modules 1; new nodes 0)
