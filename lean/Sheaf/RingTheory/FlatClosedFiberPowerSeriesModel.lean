@@ -10,6 +10,8 @@ public import Sheaf.RingTheory.CohenRing
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.ClosedFiberEquationRemoval
+import Sheaf.RingTheory.FlatClosedFiberKernelRigidity
 
 /-! # Removing the equations of a regular closed fibre
 
@@ -98,6 +100,16 @@ theorem exists_flat_closedFiber_powerSeries_model
              Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :
                maximalIdeal R ≤ L.comap (algebraMap R T))
            Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)
-             ((maximalIdeal T).map (Ideal.Quotient.mk L))) := by sorry
+             ((maximalIdeal T).map (Ideal.Quotient.mk L))) := by
+  dsimp only
+  intro hsmooth
+  obtain ⟨m', hT, v, j, hv, hj, hcomm', hker, y, hparams, hsmooth'⟩ :=
+    exists_closedFiber_equation_removal A B f ΛR ΛS n m q b i
+      hq hb hcomm t z ht hz hcoeff hsmooth
+  let := hT
+  let := hj
+  have hker' : RingHom.ker v = (RingHom.ker q).map j :=
+    ker_eq_map_of_flat_of_ker_le_maximal q f hflat j v hq hv hcomm' hker
+  exact ⟨m', hT, v, j, hv, hj, hcomm', hker', y, hparams, hsmooth'⟩
 
 end RingHom

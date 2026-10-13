@@ -19,69 +19,28 @@
  ],
  "proof": [
   {
-   "text": "Use the given compatible Cohen presentation R -> S, R -> A, S -> B of Tag 07NN. The coefficient hypotheses make these complete power-series rings over fields or Cohen rings. The parameters t of R extend to parameters of S. The surjection R -> A identifies residue fields. No completeness assumption on A or B is needed after this presentation.",
+   "text": "Construct a regular local power-series quotient model T with the commuting surjective presentation, the required remaining parameters and the smooth closed fibre, but only the fibre-level kernel containment ker v contained in m_R T. This step uses no flatness of f.",
    "uses": [
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-quotient-local-structure"
+    "lem-weil-pbc-closed-fibre-equation-removal"
    ],
    "elementary": false
   },
   {
-   "text": "The closed fibre of B is regular by Tag 07EL, since it is adically formally smooth over the residue field. The closed fibre of S is regular by the parameter quotient theorem. Tag 00NR gives generators of the kernel between these fibres which extend to parameters. Lift them to ker(S -> B): subtract an element of m_R S from each lift, using surjectivity onto m_A B. Their cotangent classes together with those of t are independent; extend to a basis, and apply Nakayama to obtain parameters of S.",
+   "text": "Apply the flat-target kernel rigidity theorem to q,f,j,v. It upgrades the fibre-level kernel containment to ker v=(ker q)T. Assemble the original existential conclusion with the parameter and smoothness witnesses from the first step.",
    "uses": [
-    "lem-weil-pbc-surjective-image-noetherian",
-    "lem-weil-pbc-quotient-local-structure",
-    "lem-weil-pbc-fs-adic-field-geometrically-regular",
-    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-regular-local-cotangent-dimension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Quotient S by these lifted equations. Tag 07NM identifies the quotient with a power-series ring T over the same coefficients, retaining the images of t as parameters (and retaining p in the Cohen case). The map T -> B is surjective. The parameter regular-sequence criterion and Tag 07DY give flatness of R -> T. The induced map of closed fibres is an isomorphism, so the fibre of T has the given formal smoothness.",
-   "uses": [
-    "lem-weil-pbc-power-series-parameter-quotient",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-flat-over-regular",
-    "def-weil-pbc-formally-smooth-adic"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Set D = T/(ker(R -> A))T = T tensor_R A. The induced map D -> B is surjective. Both sides are A-flat, by base change and the hypothesis. Tensor its kernel sequence with the residue field: flatness of B gives left exactness, and the fibre isomorphism shows that the kernel modulo m_A is zero. D is Noetherian local, being a proper quotient of T. Its kernel is finitely generated and m_A D lies in its maximal ideal; Nakayama gives zero kernel. Thus ker(T -> B) = (ker(R -> A))T, as asserted. The zero-dimensional and empty-equation cases use empty parameter lists and zero ideals.",
-   "uses": [
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-surjective-image-noetherian",
-    "lem-weil-pbc-quotient-local-structure"
+    "lem-weil-pbc-flat-closed-fibre-kernel-rigidity"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-weil-pbc-quotient-local-structure",
-  "lem-weil-pbc-surjective-image-noetherian",
-  "lem-weil-pbc-fs-adic-field-geometrically-regular",
-  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-regular-local-cotangent-dimension",
-  "lem-weil-pbc-power-series-parameter-quotient",
-  "lem-weil-pbc-flat-over-regular",
-  "def-weil-pbc-formally-smooth-adic",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-flat-quotient-tensor-injective"
+  "lem-weil-pbc-closed-fibre-equation-removal",
+  "lem-weil-pbc-flat-closed-fibre-kernel-rigidity"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07NQ, proof of (2) implies (3), compatible diagram through S tensor_R A -> B; Tags 07NN and 07NM"
+  "place": "Tag 07NQ, proof of (2) implies (3), compatible presentation through the displayed isomorphism S tensor_R A -> B; read at https://stacks.math.columbia.edu/tag/07NQ.",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -162,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T045602-L-137260",
+  "landing": "20261013T062524-L-733515",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
