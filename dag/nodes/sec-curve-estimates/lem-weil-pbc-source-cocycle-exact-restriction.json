@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-source-cocycle-exact-restriction",
+ "kind": "statement",
+ "title": "Restriction of a single-source cocycle through exact strict-local functors",
+ "statement": "Let $S$ be a scheme, $s$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization structural map, $K$ a bounded-below derived abelian etale sheaf, $L$ any cochain complex, $r:K\\cong QL$, $n\\in\\mathbf Z$, $W$ etale over $S$, and $f:\\mathbf Z[W]\\to L^n$ a cycle. Let $\\tau:\\operatorname{sections}_W\\to g^{-1}\\circ\\Gamma(S_{(s)},-)$ be any natural transformation. Use [def-weil-pbc-strict-local-injective-source-comparison] for the free-source Hom complex and degreewise evaluation, [def-weil-pbc-strict-henselization-restriction] for exact strict-local global sections, and [lem-weil-pbc-source-localized-cocycle-homology] for the constructed homology section (its definition does not require K-injectivity). Apply homology to the evaluated Hom-complex class, localize its degreewise image under $\\tau$, factor exact global sections and inverse image through localization, transport by $r^{-1}$, and commute exact global sections with homology. The resulting element equals $\\tau$ applied to the homology section of $f$, followed by the bounded-below exact-inverse-image homology comparison. No K-injectivity, stalk, or base-change mate is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-source-localized-cocycle-homology"
+ ],
+ "proof": [
+  {
+   "text": "evaluate the single-source cocycle degreewise using sourceFreeSectionsComplexIso. Its class in the sections complex is the image of the Hom-complex class under the homology functor. Apply the natural transformation degreewise. Its naturality with respect to the cycle inclusion and homology projection identifies the restricted cycle with the image of the homology section. Exact inverse image and strict-local global sections preserve kernels and cokernels, hence identify this projection with the homology projection of the mapped complex. The quotient localization factorization is natural in the complex map; cancel its inverse with the homology factorization. The exact-functor homology comparisons are natural in r inverse, so transport along r gives precisely the displayed composite. Boundaries map to boundaries; thus the calculation descends to cohomology. Zero cycles and all integer degrees obey the same calculation. The transformation is arbitrary, so no stalk comparison is used.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "def-weil-pbc-strict-henselization-restriction",
+    "lem-weil-pbc-source-localized-cocycle-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-source-localized-cocycle-homology"
+ ],
+ "proof_origin": {
+  "by": "agent V3, explicit compatibility calculation from the cited constructions",
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a single complex cohomology evaluation equals the map induced on homology",
+   "results": "CochainComplex.HomComplex.leftHomologyData'_π, CochainComplex.HomComplex.leftHomologyData'_H_coe, CochainComplex.HomComplex.leftHomologyData_H_coe, CochainComplex.HomComplex.leftHomologyData'_i, CochainComplex.HomComplex.homologyAddEquiv, CochainComplex.HomComplex.leftHomologyData_i_hom_apply, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.leftHomologyData_π_hom_apply",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryHomologyFunctorIso\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyComparison|sourceLocalizedSectionsIso_germ",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology of a map from a single complex equals the homology class of its cocycle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "HomologyMapData.natTransApp|singleFunctorCompHomologyFunctorIso|liftCycles_comp",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation from sections to an exact functor commutes with homology of cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between additive functors compatible with cycles homology comparison maps",
+   "results": "CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality, CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality_assoc, CategoryTheory.NatTrans.app_homology, CategoryTheory.ShortComplex.mapCyclesIso_inv_naturality, CategoryTheory.ShortComplex.LeftHomologyData.map_cyclesMap', CategoryTheory.ShortComplex.mapCyclesIso_inv_naturality_assoc, CategoryTheory.ShortComplex.mapCyclesIso_hom_iCycles, CategoryTheory.ShortComplex.homologyMap_mapNatTrans",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison",
+   "via": [
+    "lem-weil-pbc-strict-local-localized-hom-germ",
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceCocycleExactRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceCocycleExactRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.sourceCocycleExactRestriction",
+  "statement": "theorem sourceCocycleExactRestriction {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) (W : S.Etale) (τ : (sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj (op W) ⟶ upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) ⋙ Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}) (f : (strictLocalFreeSheaf S.smallEtaleTopology).obj W ⟶ L.X n) (hf : f ≫ L.d n (n + 1) = 0) : let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1} letI := strictHenselization_globalSections_preservesFiniteColimits s let c := CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf) let C := (U.mapHomologicalComplex (.up ℤ)).obj L let a := (NatTrans.mapHomologicalComplex τ (.up ℤ)).app L let x := ((HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map (sourceFreeSectionsComplexIso W L).hom) ((leftHomologyData ((CochainComplex.singleFunctor _ 0).obj ((strictLocalFreeSheaf S.smallEtaleTopology).obj W)) L n).homologyIso.inv c) (((DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map (DerivedCategory.Q.map a ≫ G.mapDerivedCategoryFactors.inv.app C ≫ G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.inv.app L ≫ U.mapDerivedCategory.map r.inv)) ≫ (G.mapDerivedCategoryHomologyFunctorIso n).inv.app (U.mapDerivedCategory.obj K.obj)) x : G.obj ((DerivedCategory.Plus.homologyFunctor _ n).obj (U.mapDerivedCategoryPlus.obj K))) = (G.map ((U.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app K)) (τ.app ((DerivedCategory.Plus.homologyFunctor _ n).obj K) (sourceCocycleHomologySection K L r n W f hf))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040803-L-3953831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040803-L-3953831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

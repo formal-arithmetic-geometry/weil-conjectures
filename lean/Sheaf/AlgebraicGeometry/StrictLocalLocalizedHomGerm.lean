@@ -6,6 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+import Sheaf.AlgebraicGeometry.SourceCocycleExactRestriction
 
 /-! # Localized Hom classes and restriction of a complex on the base
 
@@ -127,6 +128,31 @@ Source: Stacks Project, Tag 03Q9, restriction of the complex to the strict local
           (U.mapDerivedCategoryFactors.inv.app L ≫ U.mapDerivedCategory.map r.inv)) ≫
     (G.mapDerivedCategoryHomologyFunctorIso n).inv.app (U.mapDerivedCategory.obj K.obj)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
+    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
+    (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
+    (n : ℤ) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
+    (strictLocalCohomologySourceLegs s K n).app (op i) =
+      (strictLocalCohomologyGermMap K n).app (op ((strictLocalNeighbourhoods s).obj i)) ≫
+        strictHenselizationSectionRestriction s
+          ((DerivedCategory.Plus.homologyFunctor _ n).obj K) i ≫
+        (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+          AddCommGrpCat.{v + 1}).map
+          (((upperStar AddCommGrpCat.{v + 1}
+            (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlusHomologyFunctorIso
+              n).hom.app K) := by
+  classical
+  dsimp only [strictLocalCohomologySourceLegs, strictLocalCohomologySourceIso,
+    Iso.trans_hom, Functor.mapIso_hom]
+  erw [(Scheme.pointSmallEtale s).toPresheafFiber_naturality_assoc]
+  have hr := (Classical.choose_spec (existsUnique_strictHenselizationStalkRestriction s
+    ((DerivedCategory.Plus.homologyFunctor _ n).obj K))).1 i
+  change _ ≫ ( _ ≫ Classical.choose _ ) ≫ _ = _ at ⊢
+  erw [hr]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
 /-- Localizing Hom into a K-injective representative and then restricting its sections
 computes the canonical cohomology germ leg. This is a statement only about a complex on
 S; it has no direct-image functor, pullback square, mate, or fibre cohomology.
@@ -157,6 +183,53 @@ theorem sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
     (strictLocalCohomologySourceLegs s K n).app (op i) =
       (sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫
-        strictLocalComplexSectionRestriction s K L r n i := by sorry
+        strictLocalComplexSectionRestriction s K L r n i := by
+  rw [sourceLeg_eq_sectionRestriction]
+  ext β
+  let W := (strictLocalNeighbourhoods s).obj i
+  let A := (strictLocalFreeSheaf S.smallEtaleTopology).obj W
+  let e := sourcePlusHomIso A K L r n ≪≫ (sourceClassDerivedHomIso A L n).symm
+  have heval (c : CohomologyClass ((CochainComplex.singleFunctor _ 0).obj A) L n) :
+      (sourceLocalizedSectionsIso K L r n W).hom (e.inv c) =
+        ((HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
+          (sourceFreeSectionsComplexIso W L).hom)
+          ((leftHomologyData ((CochainComplex.singleFunctor _ 0).obj A) L n).homologyIso.inv
+            c) := by
+    unfold sourceLocalizedSectionsIso
+    change (e ≪≫ (leftHomologyData ((CochainComplex.singleFunctor _ 0).obj A)
+      L n).homologyIso.symm ≪≫
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).mapIso
+        (sourceFreeSectionsComplexIso W L)).hom (e.inv c) = _
+    simp only [Iso.trans_hom, ConcreteCategory.comp_apply]
+    have hcancel : e.hom (e.inv c) = c := by
+      simpa only [ConcreteCategory.comp_apply, ConcreteCategory.id_apply] using
+        ConcreteCategory.congr_hom e.inv_hom_id c
+    rw [hcancel]
+    rfl
+  obtain ⟨c, hc⟩ := (ConcreteCategory.bijective_of_isIso e.inv).2 β
+  obtain ⟨z, rfl⟩ := CohomologyClass.mk_surjective c
+  obtain ⟨f, hf, rfl⟩ := Cocycle.fromSingleMk_surjective z n (zero_add n) (n + 1) rfl
+  subst β
+  change _ = (strictLocalComplexSectionRestriction s K L r n i)
+    ((sourceLocalizedSectionsIso K L r n W).hom (e.inv _))
+  rw [heval]
+  change ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+    AddCommGrpCat.{v + 1}).map
+      (((upperStar AddCommGrpCat.{v + 1}
+        (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlusHomologyFunctorIso
+          n).hom.app K))
+    ((strictHenselizationSectionRestriction s
+      ((DerivedCategory.Plus.homologyFunctor _ n).obj K) i)
+      ((strictLocalCohomologyGermMap K n).app (op W)
+        ((sourcePlusHomIso A K L r n).inv
+          ((sourceClassDerivedHomIso A L n).hom
+            (CohomologyClass.mk
+              (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)))))) = _
+  erw [sourceLocalizedCocycleHomology K L r n W f hf]
+  have h := sourceCocycleExactRestriction s K L r n W
+    (strictLocalSectionRestrictionNat s i) f hf
+  dsimp only at h
+  simp only [strictLocalSectionRestrictionNat, strictLocalComplexSectionRestriction] at h ⊢
+  exact h.symm
 
 end AlgebraicGeometry.Etale

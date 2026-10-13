@@ -16,26 +16,25 @@
  ],
  "proof": [
   {
-   "text": "K-injective localization represents every derived Hom class by a cocycle modulo homotopy. The bounded-below single and shift comparisons and free-generator evaluation identify this quotient with cohomology of L(V_i).",
+   "text": "Move the canonical derived-sections comparison across the presheaf germ by toPresheafFiber_naturality. Use the characterizing equation of the chosen unique stalk restriction to express the source leg as the germ-comparison component, the neighbourhood section restriction, and the exact-inverse-image homology comparison. This is the proved private helper sourceLeg_eq_sectionRestriction.",
+   "uses": [
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use surjectivity of the inverse composite of sourcePlusHomIso and sourceClassDerivedHomIso to represent an arbitrary derived Hom element by a CohomologyClass. Use mk_surjective and Cocycle.fromSingleMk_surjective to represent it by an actual single-source cycle f. Cancellation of the Hom isomorphisms proves heval, expressing sourceLocalizedSectionsIso on this element as the evaluated Hom-complex homology class.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The canonical derived Hom to homology map sends this cocycle to its homology section. Naturality of the presheaf fibre moves that map across the neighbourhood germ. Apply the characterizing equation of the unique strict-henselization stalk restriction to replace that germ by restriction of the same section.",
+   "text": "Apply sourceLocalizedCocycleHomology to identify the germ-comparison component with the homology section of f. Apply sourceCocycleExactRestriction with the proved natural transformation strictLocalSectionRestrictionNat. Its two sides are precisely the section-restriction side and strictLocalComplexSectionRestriction of the evaluated Hom-complex class. Symmetry gives the required equality for every derived Hom element, and extensionality gives the morphism equality.",
    "uses": [
-    "def-weil-pbc-canonical-derived-cohomology-germs",
-    "def-weil-pbc-strict-henselization-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact inverse image and exact strict-local sections commute with homology. Their localization factorizations therefore identify the restricted section with the class of the degreewise restricted cocycle. Boundaries remain boundaries, so the identity descends to cohomology. Naturality of the quotient, shift and homology comparisons transports it along r, giving E_i b_i in every integer degree.",
-   "uses": [
-    "def-weil-pbc-strict-local-injective-source-comparison",
-    "def-weil-pbc-canonical-derived-cohomology-germs",
-    "def-weil-pbc-strict-henselization-restriction"
+    "lem-weil-pbc-source-localized-cocycle-homology",
+    "lem-weil-pbc-source-cocycle-exact-restriction"
    ],
    "elementary": false
   }
@@ -43,12 +42,14 @@
  "proof_deps": [
   "def-weil-pbc-canonical-derived-cohomology-germs",
   "def-weil-pbc-strict-henselization-restriction",
-  "def-weil-pbc-strict-local-injective-source-comparison"
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "lem-weil-pbc-source-cocycle-exact-restriction",
+  "lem-weil-pbc-source-localized-cocycle-homology"
  ],
  "proof_origin": {
-  "by": "agent J3, explicit compatibility argument from the cited constructions",
+  "by": "agent V3, compiled cocycle reduction and direct germ naturality calculation",
   "document": "Stacks Project",
-  "place": "Tags 03Q8 and 03Q9; cohomology of a K-injective complex and the canonical neighbourhood restriction"
+  "place": "Tags 03Q8 and 03Q9; decomposed into base-site cocycle evaluation and exact restriction of a cocycle"
  },
  "mathlib_searches": [
   {
@@ -106,7 +107,7 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean",
   "declaration": "AlgebraicGeometry.Etale.sourceLocalizedSectionsIso_germ",
-  "statement": "theorem sourceLocalizedSectionsIso_germ {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ)\n    (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :\n    (strictLocalCohomologySourceLegs s K n).app (op i) =\n      (sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫\n        strictLocalComplexSectionRestriction s K L r n i",
+  "statement": "theorem sourceLocalizedSectionsIso_germ {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) : (strictLocalCohomologySourceLegs s K n).app (op i) = (sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫ strictLocalComplexSectionRestriction s K L r n i",
   "branch": "sheaf-dag",
   "by": "J3",
   "date": "2026-10-13",
@@ -129,12 +130,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T225316-L-1808247",
+  "landing": "20261013T040803-L-3953831",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

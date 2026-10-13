@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-source-localized-cocycle-homology",
+ "kind": "statement",
+ "title": "Localized single-source cocycle evaluated on the cohomology sheaf",
+ "statement": "Let $S$ be a scheme, $K$ a bounded-below derived abelian etale sheaf, $L$ a K-injective cochain complex, $r:K\\cong QL$, $n\\in\\mathbf Z$, $W$ an etale neighbourhood, and $f:\\mathbf Z[W]\\to L^n$ a cycle. Use the free sheaf, localization and bounded-below Hom identifications of [def-weil-pbc-strict-local-injective-source-comparison], and the canonical germ comparison of [def-weil-pbc-canonical-derived-cohomology-germs]. The canonical germ comparison evaluated on the localized class of $f$, transported by the inverse bounded-below Hom identification, equals evaluation of $f$ lifted to cycles and then projected to $H^n(L)$, transported through the homology localization factorization and $H^n(r^{-1})$. This is equality of sections over $W$, without taking stalks or restricting to a strict henselization.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q8 and its complex-cohomology reference; free-source cocycle computation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-canonical-derived-cohomology-germs"
+ ],
+ "proof": [
+  {
+   "text": "the localization isomorphism sends the class of the single-source cocycle to its chain map into the shifted complex, then applies the quotient and shift comparison. Degree-zero homology of that map is the map on cycles followed by the homology quotient. The single-complex homology identification removes the source single complex. The homology shift comparison identifies the target with degree n homology of L. Naturality of the localization factorization and the homology shift comparison transports this equality along r inverse. Evaluation of the resulting sheaf morphism at the free generator is sourceFreeSectionsEquiv, giving the displayed section. This works for every integer n; zero cocycles give zero sections and boundaries give zero homology sections.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "def-weil-pbc-canonical-derived-cohomology-germs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-canonical-derived-cohomology-germs"
+ ],
+ "proof_origin": {
+  "by": "agent V3, explicit compatibility calculation from the cited constructions",
+  "document": "Stacks Project",
+  "place": "Tag 03Q8 and its complex-cohomology reference; free-source cocycle computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a single complex cohomology evaluation equals the map induced on homology",
+   "results": "CochainComplex.HomComplex.leftHomologyData'_π, CochainComplex.HomComplex.leftHomologyData'_H_coe, CochainComplex.HomComplex.leftHomologyData_H_coe, CochainComplex.HomComplex.leftHomologyData'_i, CochainComplex.HomComplex.homologyAddEquiv, CochainComplex.HomComplex.leftHomologyData_i_hom_apply, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.leftHomologyData_π_hom_apply",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryHomologyFunctorIso\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyComparison|sourceLocalizedSectionsIso_germ",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology of a map from a single complex equals the homology class of its cocycle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "HomologyMapData.natTransApp|singleFunctorCompHomologyFunctorIso|liftCycles_comp",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/Refinements.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation from sections to an exact functor commutes with homology of cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between additive functors compatible with cycles homology comparison maps",
+   "results": "CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality, CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality_assoc, CategoryTheory.NatTrans.app_homology, CategoryTheory.ShortComplex.mapCyclesIso_inv_naturality, CategoryTheory.ShortComplex.LeftHomologyData.map_cyclesMap', CategoryTheory.ShortComplex.mapCyclesIso_inv_naturality_assoc, CategoryTheory.ShortComplex.mapCyclesIso_hom_iCycles, CategoryTheory.ShortComplex.homologyMap_mapNatTrans",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and localization infrastructure; no equality for these explicit sheaf and derived-category comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Tag 03Q8 and its complex-cohomology reference; free-source cocycle computation",
+   "via": [
+    "lem-weil-pbc-strict-local-localized-hom-germ",
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceLocalizedCocycleHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceLocalizedCocycleHomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.sourceLocalizedCocycleHomology",
+  "statement": "theorem sourceLocalizedCocycleHomology {S : Scheme.{v}} (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) (W : S.Etale) (f : (strictLocalFreeSheaf S.smallEtaleTopology).obj W ⟶ L.X n) (hf : f ≫ L.d n (n + 1) = 0) : (strictLocalCohomologyGermMap K n).app (op W) ((sourcePlusHomIso ((strictLocalFreeSheaf S.smallEtaleTopology).obj W) K L r n).inv ((sourceClassDerivedHomIso ((strictLocalFreeSheaf S.smallEtaleTopology).obj W) L n).hom (CohomologyClass.mk (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)))) = sourceCocycleHomologySection K L r n W f hf",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sourceCocycleHomologySection",
+   "AlgebraicGeometry.Etale.sourceLocalizedCocycleHomology"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040803-L-3953831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T040803-L-3953831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
