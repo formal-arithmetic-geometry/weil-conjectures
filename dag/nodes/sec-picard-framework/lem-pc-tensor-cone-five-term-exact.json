@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-tensor-cone-five-term-exact",
+ "kind": "statement",
+ "title": "Exact five-term target row of the extended tensored cone",
+ "statement": "Let ρ:A→C be a homomorphism of commutative rings in universe u, f:P1→P2 a chain map of integer-indexed A-module complexes, and N any C-module complex. Define tensorConeTriangle(ρ,f,N) by applying termwise extension along ρ and total tensor with N to the actual mappingCone(f) triangle. The five-term row H^i(T1)→H^i(T2)→H^i(T3)→H^(i+1)(T1)→H^(i+1)(T2), whose third arrow is CochainComplex.homologyδOfTriangle and whose other arrows are the indicated homology maps of T.mor1,T.mor2, is exact at all three interior terms. Neither ρ nor N nor the Pj need be flat or K-flat.",
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Exact tensor on the homotopy category in the proof; parent diagram step 3, proved directly by chain cone identifications and Mathlib homology exactness."
+ },
+ "proof": [
+  {
+   "text": "Construct tensorConeTriangle as the composite mapTriangle functor applied to the actual cone triangle. CochainComplex.mappingCone.mapTriangleIso identifies scalar extension of this triangle with the cone of the extended f. The source-library map₂CochainComplexFlipObjMapMappingConeTriangleIso identifies its tensor with N with the cone of F(f) tensor N.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose HasDerivedCategory.standard locally only to use the homology API. The derived image of this concrete triangle is distinguished by the cone-triangle theorem and the displayed triangle isomorphism. Apply Mathlib CochainComplex.homologyMap_exact₂_of_distTriang, exact₃_of_distTriang and exact₁_of_distTriang. Assemble the three consecutive exact short complexes using ComposableArrows.exact_of_δ₀.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Exact tensor on the homotopy category in the proof; parent diagram step 3, proved directly by chain cone identifications and Mathlib homology exactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a chain map f of module complexes the homology of its cone triangle after scalar extension and tensoring with any complex forms an exact five term sequence",
+   "results": "DerivedCategory.HomologySequence.exact₁, exact₂, exact₃ and homologySequenceComposableArrows₅_exact. These are used to prove the concrete five-term specialization.",
+   "date": "2026-10-14",
+   "verdict": "No direct matching specialized theorem; existing ingredients used or named in the proof plan."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.homologyMap_exact₃_of_distTriang",
+   "results": "One match; used with exact₁ and exact₂ after exhibiting the concrete triangle as a cone.",
+   "date": "2026-10-14",
+   "verdict": "No direct matching specialized theorem; existing ingredients used or named in the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_exact.*_of_distTriang|map₂CochainComplexFlipObjMapMappingConeTriangleIso",
+   "results": "Mathlib exact₁, exact₂, exact₃ and source-library tensor-cone triangle isomorphism. No direct concrete scalar-extension/tensor five-term theorem.",
+   "date": "2026-10-14",
+   "verdict": "No direct matching specialized theorem; existing ingredients used or named in the proof plan."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact five term homology sequence of a tensor mapping cone triangle",
+   "results": "service unavailable: Internal Server Error or HTTP 502",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonTriangleFiveTermDiagram",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tensor comparison proof: construction of the target exact cohomology sequence before the five lemma.",
+   "via": [
+    "lem-pc-localized-tensor-comparison-triangle-five-term-diagram",
+    "lem-pc-localized-tensor-comparison-closure-triangles-core",
+    "lem-pc-localized-tensor-comparison-closure-triangles",
+    "lem-pc-localized-tensor-comparison-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorConeFiveTermExact",
+  "file": "lean/Sheaf/Algebra/Homology/TensorConeFiveTermExact.lean",
+  "declaration": "ModuleCat.tensorConeTriangle_five_term_exact",
+  "statement": "theorem tensorConeTriangle_five_term_exact (i : ℤ) :\n    let T := tensorConeTriangle ρ f N\n    (ComposableArrows.mk₄ (HomologicalComplex.homologyMap T.mor₁ i)\n      (HomologicalComplex.homologyMap T.mor₂ i)\n      (CochainComplex.homologyδOfTriangle T i (i + 1))\n      (HomologicalComplex.homologyMap T.mor₁ (i + 1))).Exact",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T201741-L-3966401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T201741-L-3966401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

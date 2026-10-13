@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-cone-rows",
+ "kind": "statement",
+ "title": "Exact localized source row and comparison squares for a K-flat cone",
+ "statement": "Use the rings R,A,B,C, scalar-extension F, K-flat Q, coefficient complex N and chain map t:F(Q)→N of the parent diagram. Assume C is flat over E=A tensor_R B. Let f:P1→P2 be an actual chain map of K-flat A-complexes and P3=mappingCone(f), with arbitrary base-derived tensor cohomology models m1,m2,m3 of P1 tensor Q, P2 tensor Q and P3 tensor Q [def-pc-base-derived-tensor-cohomology-model]. Put c(P,m,j)=m.localizedComparison(j) followed by H^j(μ_F(P,Q)^(-1);F(P) tensor t). For every i there exist four maps s0,s1,s2,s3 between the localized model cohomologies of P1,P2,P3 at i and P1,P2 at i+1, forming an exact five-term source row. Set d0=H^i(F(f) tensor N), d1=H^i(F(inr f) tensor N), d3=H^(i+1)(F(f) tensor N), and fix d2 to homologyδOfTriangle(tensorConeTriangle(F,f,N),i,i+1) [lem-pc-tensor-cone-five-term-exact]. The four squares s0;c(P2,i)=c(P1,i);d0, s1;c(P3,i)=c(P2,i);d1, s2;c(P1,i+1)=c(P3,i);d2, s3;c(P2,i+1)=c(P1,i+1);d3 commute. This statement does not assert target exactness (proved separately), choose unrelated target rows, or require invertible comparisons.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "def-pc-module-kflat-complex",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-tensor-cone-five-term-exact"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Exact derived tensor and its universal counit, with Tag 0BYJ and Tag 0DJA(1); parent diagram steps 2 and 4. The cone summand compatibility is the explicit agent expansion of those steps."
+ },
+ "proof": [
+  {
+   "text": "Tensor the actual cone triangle of f with Q, restrict to R and derive extension to B. The exact fixed-second-factor derived tensor functor supplies its long cohomology sequence. The commuting A-action makes this E-linear. Compare the arbitrary universal derived functors in m1,m2,m3 with a common one by counit uniqueness; multiplication-by-a naturality makes the model identifications E-linear. Extend this sequence to C; flatness preserves its exactness and gives s0,s1,s2,s3.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the coefficient comparison, use the universal counit, scalar-extension unit and canonical monoidal tensorator followed by t. Their naturality gives the squares for f and inr(f). Use comparison_eq and localized_eq to identify these maps with the displayed cmp composites.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the cone summands, the coefficient map acts on P2 and shifted P1 and commutes with the projection to P1[1]. The source tensor-shift identification and the explicitly constructed target triangle have the same Koszul signs on this summand. The projection square therefore yields the homology boundary square with the fixed d2, not an unspecified connecting arrow. Repeating first-arrow naturality in degree i+1 gives the fourth square.",
+   "uses": [
+    "lem-pc-tensor-cone-five-term-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
+  "lem-pc-tensor-cone-five-term-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Exact derived tensor and its universal counit, with Tag 0BYJ and Tag 0DJA(1); parent diagram steps 2 and 4. The cone summand compatibility is the explicit agent expansion of those steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The universal derived base change counit and a coefficient chain map form a morphism of long exact homology sequences of a mapping cone, with flat scalar extension of the source",
+   "results": "Generic homologySequenceδ_quotient_mapTriangle_obj and cone boundary results. No specialized result with E-linear universal model sources and the specified localized comparisons.",
+   "date": "2026-10-14",
+   "verdict": "No direct matching specialized theorem; existing ingredients used or named in the proof plan."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.homologySequenceδ_naturality",
+   "results": "One generic triangle-morphism naturality result; it requires constructing the compatible comparison triangle first.",
+   "date": "2026-10-14",
+   "verdict": "No direct matching specialized theorem; existing ingredients used or named in the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|homologySequenceδ_naturality",
+   "results": "Read BaseDerivedTensorCohomologyModel, its independence theorem, LocalizedTensorComparisonRepresentativeSquare, and Mathlib homological functor naturality. Existing representative squares concern derived isomorphisms, not arbitrary chain maps or cone boundaries.",
+   "date": "2026-10-14",
+   "verdict": "No direct matching specialized theorem; existing ingredients used or named in the proof plan."
+  },
+  {
+   "tool": "leansearch",
+   "query": "universal derived base change counit commutes with connecting homomorphisms for a mapping cone",
+   "results": "service unavailable: Internal Server Error or HTTP 502",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonTriangleFiveTermDiagram",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tensor comparison proof: localized source exactness and compatibility with the cone connecting map, before the five lemma.",
+   "via": [
+    "lem-pc-localized-tensor-comparison-triangle-five-term-diagram",
+    "lem-pc-localized-tensor-comparison-closure-triangles-core",
+    "lem-pc-localized-tensor-comparison-closure-triangles",
+    "lem-pc-localized-tensor-comparison-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonConeRows",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonConeRows.lean",
+  "declaration": "ModuleCat.exists_localizedTensorComparison_cone_rows",
+  "statement": "theorem exists_localizedTensorComparison_cone_rows\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂)\n    (hK₁ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V P₁ (curriedTensor _)).Acyclic)\n    (hK₂ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V P₂ (curriedTensor _)).Acyclic)\n    (m₁ : BaseDerivedTensorCohomologyModel R A B (P₁ ⊗ Q) C)\n    (m₂ : BaseDerivedTensorCohomologyModel R A B (P₂ ⊗ Q) C)\n    (m₃ : BaseDerivedTensorCohomologyModel R A B (CochainComplex.mappingCone f ⊗ Q) C)\n    (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    let E := extendScalars (algebraMap (A ⊗[R] B) C)\n    let P₃ := CochainComplex.mappingCone f\n    let cmp := fun (V : CochainComplex (ModuleCat.{u} A) ℤ)\n      (m : BaseDerivedTensorCohomologyModel R A B (V ⊗ Q) C) (j : ℤ) ↦\n        m.localizedComparison j ≫ HomologicalComplex.homologyMap\n          ((Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)) j\n    let d₀ := HomologicalComplex.homologyMap (F.map f ▷ N) i\n    let d₁ := HomologicalComplex.homologyMap (F.map (CochainComplex.mappingCone.inr f) ▷ N) i\n    let d₂ := CochainComplex.homologyδOfTriangle\n      (tensorConeTriangle\n        ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))) f N) i (i + 1)\n    let d₃ := HomologicalComplex.homologyMap (F.map f ▷ N) (i + 1)\n    ∃ (s₀ : E.obj (m₁.cohomology i) ⟶ E.obj (m₂.cohomology i))\n      (s₁ : E.obj (m₂.cohomology i) ⟶ E.obj (m₃.cohomology i))\n      (s₂ : E.obj (m₃.cohomology i) ⟶ E.obj (m₁.cohomology (i + 1)))\n      (s₃ : E.obj (m₁.cohomology (i + 1)) ⟶ E.obj (m₂.cohomology (i + 1))),\n      (ComposableArrows.mk₄ s₀ s₁ s₂ s₃).Exact ∧\n      s₀ ≫ cmp P₂ m₂ i = cmp P₁ m₁ i ≫ d₀ ∧\n      s₁ ≫ cmp P₃ m₃ i = cmp P₂ m₂ i ≫ d₁ ∧\n      s₂ ≫ cmp P₁ m₁ (i + 1) = cmp P₃ m₃ i ≫ d₂ ∧\n      s₃ ≫ cmp P₂ m₂ (i + 1) = cmp P₁ m₁ (i + 1) ≫ d₃",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T201741-L-3966401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T201741-L-3966401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

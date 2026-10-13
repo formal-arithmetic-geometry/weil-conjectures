@@ -16,59 +16,47 @@
  },
  "proof": [
   {
-   "text": "Present the distinguished triangle by a cone of a map between K-flat complexes, using a roof and replacement of its apex. Its cone is K-flat. Tensor with Q; hQ ensures that this construction computes derived tensor and is invariant under its quasi-isomorphisms.",
+   "text": "Apply the proved K-flat cone triangle presentation. Choose the three base-derived models locally in the existential proof using nonempty_baseDerivedTensorCohomologyModel.",
    "uses": [
-    "def-pc-module-kflat-complex",
-    "lem-pc-derived-tensor-second-factor-functor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict the tensor triangle to R and apply derived extension to B. The exact fixed-second-factor tensor functor gives the cohomology sequence; the commuting A-action makes it E=A tensor_R B-linear. Flatness of C over E preserves exactness after extending this sequence to C. The base-derived model identifies its source modules with the displayed ones.",
-   "uses": [
-    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-kflat-cone-triangle-presentation",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply derived extension from A to C and tensor with N to the cone triangle. Extension preserves K-flatness, so ordinary F(Pj) tensor N computes the values even for arbitrary N. Taking cohomology gives the second exact sequence.",
+   "text": "Apply the cone-row interface to get the exact source row and its four comparison squares. Its target boundary is explicitly fixed to homologyδOfTriangle of tensorConeTriangle, and the proved target exactness theorem supplies the other exact row.",
    "uses": [
-    "lem-pc-kflat-extension-of-scalars",
-    "lem-pc-derived-tensor-second-factor-functor"
+    "lem-pc-localized-tensor-comparison-cone-rows",
+    "lem-pc-tensor-cone-five-term-exact"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Construct the comparison from the universal counit, scalar-extension unit, tensor associator and t. On the two cone summands these degree-zero coefficient maps commute with inclusion and projection. The tensor-shift Koszul signs occur identically on both sides of the projection square. Thus the comparisons commute with the connecting map as well as the first two triangle arrows. Taking cohomology and truncating to P1 at i, P2 at i, P3 at i, P1 at i+1, P2 at i+1 yields a morphism phi between exact five-term rows.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-kflat-derived-tensor-associator"
-   ],
-   "elementary": false
+   "text": "Construct S,D with ComposableArrows.mk₄ and φ with homMk₄ from the five actual cone comparison maps and four squares. Its components are definitionally those maps.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Use the representative comparison squares to transport the five vertical arrows from the cone presentation to the prescribed U1, U2 and U. The source and target isomorphisms form isomorphisms in the arrow category. Universal model independence ensures these identifications work for the prescribed m1, m2 and mU, including all degrees. There is no assertion that any vertical arrow is invertible.",
+   "text": "Project the triangle presentation isomorphism to its three vertices and compose with the prescribed representative isomorphisms. Apply the representative-square theorem in the five needed degrees and turn each commuting square into Arrow.isoMk. This includes arbitrary prescribed models; it does not transport arbitrary exact rows.",
    "uses": [
-    "lem-pc-localized-tensor-comparison-representative-square",
-    "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
+    "lem-pc-localized-tensor-comparison-representative-square"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-kflat-complex",
-  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-cone-triangle-presentation",
   "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-kflat-derived-tensor-associator",
-  "lem-pc-localized-tensor-comparison-representative-square",
-  "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
+  "lem-pc-localized-tensor-comparison-cone-rows",
+  "lem-pc-tensor-cone-five-term-exact",
+  "lem-pc-localized-tensor-comparison-representative-square"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 06Y6 and 0BYJ; cone/connecting-map expansion of the parent core proof"
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Parent cone plan: K-flat presentation and target exactness fully proved; source cone exactness and comparison squares isolated, then homMk₄ and five Arrow.isoMk transports."
  },
  "mathlib_searches": [
   {
@@ -142,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T190145-L-3217659",
+  "landing": "20261013T201741-L-3966401",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
