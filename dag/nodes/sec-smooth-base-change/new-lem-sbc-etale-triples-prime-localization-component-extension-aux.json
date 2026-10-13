@@ -1,0 +1,95 @@
+{
+ "id": "new-lem-sbc-etale-triples-prime-localization-component-extension-aux",
+ "kind": "statement",
+ "title": "Affine model and factorization data for a component extension",
+ "statement": "Under the hypotheses of the component extension theorem, there exist a global pointed etale triple c, a compatible map i : c.B → t.B, a ring map b : t.B → V extending η.app c, and a factorization through i for every compatible map β : s.B → t.B.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-residue-triples"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW"
+ },
+ "proof": [
+  {
+   "text": "Descend the finitely presented etale affine t.B to a principal localization, restrict the pointing, extend the cocone leg across the localization, and descend compatible morphisms to obtain the factorization.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Affine model and morphism descent",
+  "group": "K3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization extension and category factorization",
+   "results": "No direct theorem found",
+   "date": "2026-10-14",
+   "verdict": "No match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.ringHom_ext",
+   "results": "Generic extensionality only",
+   "date": "2026-10-14",
+   "verdict": "Insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "etale finite presentation descent",
+   "results": "Generic descent declarations only",
+   "date": "2026-10-14",
+   "verdict": "Insufficient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionExists",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "strict logical substatement",
+  "via": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAux",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPrimeLocalizationComponentExtensionAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_primeLocalization_component_extension_aux",
+  "statement": "theorem etaleResidueTriples_primeLocalization_component_extension_aux\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (q : Spec (CommRingCat.of (Localization.AtPrime p.asIdeal)))\n    (ψ : (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).residueField q ⟶\n      CommRingCat.of K)\n    [Algebra (Localization.AtPrime p.asIdeal) K]\n    (hψ : (ΓSpecIso (CommRingCat.of (Localization.AtPrime p.asIdeal))).inv ≫\n      (Spec (CommRingCat.of (Localization.AtPrime p.asIdeal))).Γevaluation q ≫ ψ =\n        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K))\n    (hK : CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫\n      CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) K) =\n        (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ)\n    (V : CommRingCat.{u})\n    (η : etaleResidueTriplesRingDiagram R p K χ ⟶ (Functor.const _).obj V)\n    (t : EtaleResidueTriples (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ) :\n    ∃ (c : EtaleResidueTriples R p K χ) (i : c.B ⟶ t.B),\n      c.α ≫ i = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α ∧\n      i ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n        (ΓSpecIso c.B).inv ≫ (Spec c.B).Γevaluation c.q ≫ c.φ ∧\n      ∃ b : t.B ⟶ V,\n        i ≫ b = η.app c ∧\n        ∀ (s : EtaleResidueTriples R p K χ) (β : s.B ⟶ t.B),\n          s.α ≫ β = CommRingCat.ofHom (algebraMap R (Localization.AtPrime p.asIdeal)) ≫ t.α →\n          β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =\n            (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ →\n          ∃ a : c ⟶ s,\n            (etaleResidueTriplesRingDiagram R p K χ).map a ≫ β = i ∧\n            ∀ (f g : s.B ⟶ V),\n              (etaleResidueTriplesRingDiagram R p K χ).map a ≫ f =\n                (etaleResidueTriplesRingDiagram R p K χ).map a ≫ g → f = g",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T224512-L-1472069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T224512-L-1472069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
