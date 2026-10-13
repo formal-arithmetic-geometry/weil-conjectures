@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-strict-perfect-tensor-local-cohomology",
+ "kind": "statement",
+ "title": "Local cohomology calculation for a strictly perfect tensor",
+ "statement": "Let X be a locally Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth], U an open, E an object of D(O_X) [def-pc-derived-category], and K a strictly perfect complex on the over-site of U [def-pc-perfect-complex]. Assume an isomorphism E|_U = Q(K) and specified termwise bounds [a,b] for K. Let G be a complex of O_X-modules with termwise bounds [c,d] and coherent terms [pqf-def-coherent]. For every integer i the restriction to the open subscheme U of H^i(E tensor^L Q(G)) [def-pc-scheme-derived-tensor-structure] [lem-weil-pbc-module-restriction-open-immersion-colimits] is coherent, and is zero if i<a+c or b+d<i. Only this fixed U and fixed K are used; no global perfectness or compactness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJQ",
+  "place": "perfect.tex, label lemma-tensor-perfect (0DJQ), proof local calculation; coherent.tex, label lemma-coherent-abelian-Noetherian (01Y0)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "pqf-def-locnoeth",
+  "def-pc-perfect-complex",
+  "pqf-def-coherent",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Transport K to P on the open subscheme by Modules.overEquiv U. The equivalence preserves zero objects and finite coproducts and identifies the units. Apply it to each finite-free retraction, then compose with the coproduct unit comparison. The retract equation follows from functoriality. The transported complex retains the specified bounds [a,b]. Each term is flat: install tensorClosed and apply the existing public ObjectProperty.flat_coproduct to copies of the unit, then ObjectProperty.flat_of_retract directly at the transported-term call site. No duplicate scheme-specific flat_retract helper is declared.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply bounded-above flat implies K-flat to P. Restrict G through the over functor followed by the equivalence, obtaining N. Restriction preserves its [c,d] bounds. Coherent restriction gives coherent terms on the open subscheme; overFunctorEquiv and isomorphism invariance identify these with the terms of N.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the standard derived localization on the open subscheme, independently of the over-site localization universe. mapDerivedCategoryCompIso and mapDerivedCategoryFactors transport e to Q(P). Use the open-restriction derived-tensor comparison and the K-flat tensor comparison to identify restricted E tensor Q(G) with Q(Tot(P tensor N)). The exact-functor homology comparison and homologyFunctorFactors give the explicit isomorphism from the restriction of each global homology sheaf to the ordinary total homology.",
+   "uses": [
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-kflat-derived-tensor-comparison",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Outside [a+c,b+d], for p+q=i either p lies outside [a,b] or q lies outside [c,d], by integer arithmetic. A tensor summand is zero by tensorLeft or tensorRight preserving zero objects. HomologicalComplex.mapBifunctor.hom_ext then makes the identity of the total term zero. The short-complex zero-middle-term homology lemma makes its homology zero.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the coherent-total-term lemma to P and N. For the short complex in degree i, kernel closure makes its cycles coherent. The incoming differential factors through this kernel; cokernel closure makes the cokernel of this factorization coherent. ShortComplex.homologyIsoCokernelLift identifies that cokernel with homology. Transport the coherent and zero properties across the homology isomorphism.",
+   "uses": [
+    "lem-pc-finite-retract-tensor-complex-terms",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "def-pc-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-finite-retract-tensor-complex-terms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJQ",
+  "place": "perfect.tex, label lemma-tensor-perfect (0DJQ), proof local calculation; coherent.tex, label lemma-coherent-abelian-Noetherian (01Y0); explicit Lean assembly using existing comparison and closure declarations; repair removes duplicate private flat_retract and uses the public general flatness lemmas directly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local strictly perfect complex tensor a bounded coherent complex has coherent cohomology and vanishes outside the sum of their degree intervals",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local strictly perfect complex tensor a bounded coherent complex has coherent cohomology and vanishes outside the sum of their degree intervals",
+   "results": "Only abstract support and projective/injective single-complex lemmas; none about this scheme-local tensor.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictlyPerfect|tensor.*coherent|coherent.*homology",
+   "results": "No matches in the pinned Mathlib search. Related project modules were read; none states this local calculation or the coherent-total-term assertion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian case: bounded coherent cohomology of E tensor G, local tensor calculation before applying the direct-image criterion",
+   "via": [
+    "lem-pc-perfect-tensor-bounded-coherent",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectTensorLocalCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictPerfect_tensor_local_cohomology",
+  "statement": "theorem strictPerfect_tensor_local_cohomology\n    {X : Scheme.{u}} [IsLocallyNoetherian X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X)\n    (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect X U K)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a b c d : ℤ)\n    (hKb : ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n))\n    (hGb : ∀ n : ℤ, n < c ∨ d < n → IsZero (G.X n))\n    (hGcoherent : ∀ n : ℤ, RingedSpace.IsCoherent X.toRingedSpace (G.X n)) :\n    ∀ i : ℤ,\n      (i < a + c ∨ b + d < i →\n        IsZero ((Modules.restrictFunctor U.ι).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj\n              (E ⊗ DerivedCategory.Q.obj G)))) ∧\n      RingedSpace.IsCoherent U.toScheme.toRingedSpace\n        ((Modules.restrictFunctor U.ι).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj\n              (E ⊗ DerivedCategory.Q.obj G)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T054216-L-442706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T054216-L-442706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

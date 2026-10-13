@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-finite-retract-tensor-complex-terms",
+ "kind": "statement",
+ "title": "Coherent terms of a finite-projective total tensor",
+ "statement": "Let X be a locally Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth]. Let P and N be cochain complexes of O_X-modules [def-weil-sheaf-of-modules-category]. Suppose P^n is zero outside a fixed integer interval [a,b], and for every n there are maps P^n to O_X^m and O_X^m to P^n whose composite on P^n is the identity, for some finite rank m. Suppose every term of N is coherent [pqf-def-coherent], without any boundedness assumption on N. Then every term of the signed direct-sum total complex Tot(P tensor N) [def-pur-sheaf-tensor-product] [def-pc-tensor-complex-sheaves] is coherent.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJQ",
+  "place": "perfect.tex, label lemma-tensor-perfect (0DJQ), displayed finite sum in its proof; coherent.tex, label lemma-coherent-abelian-Noetherian (01Y0)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "In total degree i the coproduct summands are P^p tensor N^q for p+q=i. By the [a,b] bounds of P, all summands with p outside this finite integer interval are zero, since tensorRight preserves zero objects. Delete these summands by the coproduct universal property. For each of the remaining finitely many p there is exactly one q=i-p.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the given finite-free retraction of P^p with N^q. Tensor preserves the splitting equation. Distribution over finite coproducts, the tensor-unit isomorphism and the definition of the free module identify the ambient tensor with a finite direct sum of N^q. This finite sum is coherent. Its retract is coherent: the splitting identifies the retract with the kernel of identity minus the split idempotent on the ambient coherent module. Kernel closure and isomorphism invariance therefore give coherence of each summand.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surviving sum is finite, so finite-sum closure and isomorphism invariance imply that the total degree-i term is coherent. If a>b every summand is zero and the total is zero, hence coherent. Empty schemes and zero ranks are included. No bound on N is needed because the fixed equation p+q=i already determines q.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJQ",
+  "place": "perfect.tex, label lemma-tensor-perfect (0DJQ), displayed finite sum in its proof; coherent.tex, label lemma-coherent-abelian-Noetherian (01Y0); explicit Lean assembly using existing comparison and closure declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total tensor of a bounded complex of finite projective module sheaves and any termwise coherent complex has coherent terms",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total tensor of a bounded complex of finite projective module sheaves and any termwise coherent complex has coherent terms",
+   "results": "Only light-condensed internal projectivity and abstract good-tensor instances; no coherent-total-term theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherent|coherent.*tensor|tensor.*coherent",
+   "results": "No matches in the pinned Mathlib search. Related project modules were read; none states this local calculation or the coherent-total-term assertion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian case: bounded coherent cohomology of E tensor G, local tensor calculation before applying the direct-image criterion",
+   "via": [
+    "lem-pc-perfect-tensor-bounded-coherent",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteRetractTensorComplexTerms",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRetractTensorComplexTerms.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteRetract_tensorComplex_coherent_terms",
+  "statement": "theorem finiteRetract_tensorComplex_coherent_terms\n    {X : Scheme.{u}} [IsLocallyNoetherian X]\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a b : ℤ)\n    (hPbounds : ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hPfree : ∀ n : ℤ, ∃ m : ℕ,\n      ∃ (ι : P.X n ⟶ SheafOfModules.free\n          (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin m)))\n        (π : SheafOfModules.free\n          (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin m)) ⟶ P.X n),\n        ι ≫ π = 𝟙 (P.X n))\n    (hNcoherent : ∀ n : ℤ, RingedSpace.IsCoherent X.toRingedSpace (N.X n)) :\n    ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace\n        ((CochainComplex.mapBifunctor P N (curriedTensor _)).X i)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T054216-L-442706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T054216-L-442706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

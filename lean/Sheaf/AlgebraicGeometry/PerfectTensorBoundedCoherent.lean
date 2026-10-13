@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalCohomology
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.Data.Finset.Max
 
 /-! # Bounded coherent cohomology of a perfect tensor
 
@@ -58,6 +62,47 @@ theorem perfect_tensor_bounded_coherent
     (∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace
       ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj
-            (E ⊗ DerivedCategory.Q.obj G))) := by sorry
+            (E ⊗ DerivedCategory.Q.obj G))) := by
+  classical
+  obtain ⟨c, d, hGbounds⟩ := hGb
+  choose U hx K hK e using hE
+  choose a b hKbounds using fun x ↦ (hK x).1
+  have hlocal (x : X) (i : ℤ) :=
+    strictPerfect_tensor_local_cohomology (U x) E (K x) (hK x) (e x).some
+      G (a x) (b x) c d (hKbounds x) hGbounds hGcoherent i
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
+    (fun x ↦ (U x : Set X)) (fun x ↦ (U x).isOpen) (by
+      intro x _
+      exact Set.mem_iUnion.mpr ⟨x, hx x⟩)
+  let V : s → X.Opens := fun x ↦ U x.1
+  have hcover : ⨆ x : s, V x = ⊤ := by
+    apply eq_top_iff.mpr
+    intro x _
+    have hxcover := hs (Set.mem_univ x)
+    simp only [Set.mem_iUnion, SetLike.mem_coe, exists_prop] at hxcover
+    obtain ⟨y, hy, hxy⟩ := hxcover
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨y, hy⟩, hxy⟩
+  let lower := insert 0 (s.image fun x ↦ a x + c)
+  let upper := insert 0 (s.image fun x ↦ b x + d)
+  have hlow : lower.Nonempty := ⟨0, Finset.mem_insert_self _ _⟩
+  have hupp : upper.Nonempty := ⟨0, Finset.mem_insert_self _ _⟩
+  let lo := lower.min' hlow
+  let hi := upper.max' hupp
+  constructor
+  · refine ⟨lo, hi, ?_⟩
+    intro i hout
+    apply Modules.isZero_of_iSup_eq_top _ V hcover
+    intro x
+    have hla : lo ≤ a x.1 + c := lower.min'_le _
+      (Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ x.2))
+    have hbu : b x.1 + d ≤ hi := upper.le_max' _
+      (Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ x.2))
+    apply (hlocal x.1 i).1
+    rcases hout with hout | hout
+    · exact Or.inl (hout.trans_le hla)
+    · exact Or.inr (hbu.trans_lt hout)
+  · intro i
+    exact (coherent_module_local_on_open_cover X _ s V hcover).2
+      (fun x ↦ (hlocal x.1 i).2)
 
 end AlgebraicGeometry.Scheme
