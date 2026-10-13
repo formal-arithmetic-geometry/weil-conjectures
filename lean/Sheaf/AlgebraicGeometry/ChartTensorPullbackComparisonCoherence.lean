@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComposition
 
 /-! # Coherence of chart pullback comparisons
 
@@ -73,6 +74,40 @@ theorem chart_tensor_pullback_comparison_coherence
       d.inv.app ((Scheme.Modules.pullback (U.f a)).obj F) ≫
         (Scheme.Modules.pullback v).map (t₀.hom.app F) ≫
         b.hom.app ((Scheme.Modules.tensorPullback q₀).obj F) ≫
-        (Scheme.Modules.pullback (V.f a)).map (e.hom.app F) := by sorry
+        (Scheme.Modules.pullback (V.f a)).map (e.hom.app F) := by
+  classical
+  dsimp only
+  intro v hv₁ hv₂ d hd b hb
+  subst d b
+  -- The projection equations force v to be the canonical chart isomorphism.
+  let s : ((U.pullback₁ q).pullback₁ p).X a ≅ (U.pullback₁ q₀).X a :=
+    pullbackRightPullbackFstIso q (U.f a) p ≪≫ pullback.congrHom w rfl
+  have hs₁ : s.hom ≫ (U.pullback₁ q₀).f a = ((U.pullback₁ q).pullback₁ p).f a := by
+    change ((pullbackRightPullbackFstIso q (U.f a) p).hom ≫
+      (pullback.congrHom w rfl).hom) ≫ pullback.fst q₀ (U.f a) =
+        pullback.fst p (pullback.fst q (U.f a))
+    simp
+  have hs₂ : s.hom ≫ U.pullbackHom q₀ a =
+      Scheme.Cover.pullbackHom (U.pullback₁ q) p a ≫ U.pullbackHom q a := by
+    change ((pullbackRightPullbackFstIso q (U.f a) p).hom ≫
+      (pullback.congrHom w rfl).hom) ≫ pullback.snd q₀ (U.f a) =
+        pullback.snd p (pullback.fst q (U.f a)) ≫ pullback.snd q (U.f a)
+    simp
+  have hvs : v = s.hom := by
+    apply pullback.hom_ext
+    · exact hv₁.trans hs₁.symm
+    · exact hv₂.trans hs₂.symm
+  subst v
+  -- Reuse the composition square, then move the ordinary comparison to the other side.
+  have h := Scheme.Modules.openCoverTensorPullbackComparison_composition
+    q p q₀ w U a s hs₁ hs₂ F
+  dsimp only at h
+  rw [← cancel_epi
+    ((Scheme.Modules.pullbackComp s.hom (U.pullbackHom q₀ a) ≪≫
+      Scheme.Modules.pullbackCongr hs₂ ≪≫
+      (Scheme.Modules.pullbackComp (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)
+        (U.pullbackHom q a)).symm).hom.app
+          ((Scheme.Modules.pullback (U.f a)).obj F))]
+  simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using h.symm
 
 end AlgebraicGeometry

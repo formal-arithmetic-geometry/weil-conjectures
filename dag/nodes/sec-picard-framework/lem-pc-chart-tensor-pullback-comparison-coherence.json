@@ -15,40 +15,41 @@
  },
  "proof": [
   {
-   "text": "Substitute the two supplied equalities identifying d and b with their canonical compositions of pullbackComp and pullbackCongr. The refinement v and its two projection equations remain supplied data.",
-   "uses": [],
+   "text": "Substitute the supplied equalities for d and b. Construct the canonical isomorphism s from the iterated chart to the direct chart as pullbackRightPullbackFstIso q (U.f a) p followed by pullback.congrHom w rfl. The Mathlib projection identities give both projection equations for s.hom.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
    "elementary": true
   },
   {
-   "text": "For each triangle arrow f write αf for the pinned leftAdjointUniq from tensorPullback f to ordinary pullback f. The mate definition of e identifies e with αq₀ followed by the inverse ordinary compositor (pullbackComp p q followed by pullbackCongr w), followed by the inverse αq and αp whiskered in the two factors. Each open-cover comparison is its ordinary composition path followed by the inverse αf whiskered with chart restriction. This follows by taking mates, using the pullback adjunction and the defining pushforward composition comparisons.",
+   "text": "The supplied map v and s.hom have the same first and second projections by hv₁, hv₂ and the equations just proved. Pullback hom-extensionality gives v=s.hom; substitute this equality. No invertibility hypothesis on v is added.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-tensor-pullback-composition-iso",
-    "def-pc-open-cover-tensor-pullback-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Substitute these descriptions. Ordinary pullback associativity (or leftAdjointCompIso_assoc after passing to pushforward mates) identifies the path through v,W.f(a),q₀ with the path through the two iterated chart projections and U.f(a). The two pullback-lift projection equations identify the composite scheme morphisms.",
-   "uses": [
-    "lem-sc-left-adjoint-composition-iso-associativity",
     "def-pc-fibre-product"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved openCoverTensorPullbackComparison_composition to s, its two projection equations and F. It identifies the direct-chart comparison path with d.hom followed by the iterated-chart path, for the same canonical definitions of d and b.",
+   "uses": [
+    "lem-pc-open-cover-tensor-pullback-composition",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
    "elementary": false
   },
   {
-   "text": "Equality induction identifies the pullbackCongr transports. Cancel adjacent inverse α comparisons and evaluate the resulting natural-transformation equality at F. This gives exactly the displayed objectwise identity. No recovery equation or morphism transport is used.",
+   "text": "Reverse this equality and cancel the isomorphism component d.hom.app (pullback (U.f a).obj F). The identity d.hom.app _ followed by d.inv.app _ equals the identity, and associativity of composition yields exactly the claimed formula.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
+  "group": "R2",
   "date": "2026-10-14",
-  "document": "Stacks Project and Mathlib",
-  "place": "Tags 0095 and 0096; pullback pseudofunctor and adjunction mate associativity",
-  "note": "Second reader replaced a rejected restatement by just the one-object comparison-path identity from the original proof plan."
+  "document": "Mathlib and the proved library composition square",
+  "place": "Mathlib pullbackRightPullbackFstIso, pullback.congrHom, pullback.hom_ext; Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComposition.openCoverTensorPullbackComparison_composition",
+  "note": "Reuse the existing composition square after proving the arbitrary supplied refinement is the canonical chart isomorphism; cancel the ordinary comparison. The unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -112,8 +113,7 @@
   "def-pc-fibre-product",
   "def-pc-open-cover-tensor-pullback-comparison",
   "def-pc-tensor-pullback-composition-iso",
-  "lem-pc-module-pullback-adjunction",
-  "lem-sc-left-adjoint-composition-iso-associativity"
+  "lem-pc-open-cover-tensor-pullback-composition"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -129,10 +129,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T215610-L-900272",
-  "kind": "interface",
+  "landing": "20261013T222411-L-1225826",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
