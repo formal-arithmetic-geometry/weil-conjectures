@@ -11606,3 +11606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift (stage 3; reviewer PASS; first push; landing 20261013T082330-L-1630429 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/B2/Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom (stage 3; reviewer PASS; first push; landing 20261013T082330-L-1630580 (interface); batch 20261013T082326; modules 4; new nodes 3)
 - 08:23 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso (stage 3; reviewer PASS; after a return; landing 20261013T082330-L-1630728 (interface); batch 20261013T082326; modules 4; new nodes 3)
+- 08:23 L: merged deliver/B3/Sheaf.RingTheory.KoszulExtRoofRepresentatives (stage 3; reviewer PASS; after a return; landing 20261013T082331-L-1630885 (interface); batch 20261013T082326; modules 2; new nodes 1)

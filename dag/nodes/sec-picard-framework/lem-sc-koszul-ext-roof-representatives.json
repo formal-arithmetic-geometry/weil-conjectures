@@ -14,34 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Construct the quotient augmentation q of K explicitly: q_0 is I.mkQ after exteriorPower.zeroEquiv, and q_n=0 for n>0. The degree-one boundary has image I because f generates I. Koszul-regularity kills positive homology; finite exterior bases make every K_n projective. Thus K with q is a projective resolution P. Use the construction recorded by new-j3-koszul-projective-resolution, not an arbitrary augmentation chosen from its existence statement. Extend K along embeddingDownNat to E and q to epsilon0. E has zero positive-degree terms and projective nonpositive terms (zero terms are projective), hence is strictly bounded above by 0 and K-projective by lem-sc-bounded-above-projective-kprojective. Equivalently the natural-number extension instance in HomotopyCategory/KProjective.lean:126 gives this directly.",
+   "text": "Construct q_0=I.mkQ after zeroEquiv and zero higher components. Contraction in degree one is Finsupp.linearCombination f, whose range is span(range f)=I. Thus q kills the first boundary and its short complex is exact with surjective quotient map. The cokernel property gives the degree-zero homology isomorphism, and hreg makes positive-degree homology zero. Extend the resulting quasi-isomorphism along embeddingDownNat to the explicitly normalized epsilon0. This is the complete Lean proof in normalized_augmentation, adapted from the already proved exists_koszul_quotient_augmentation without importing its cyclic module. The degree-one computation specializes contractLeft_exterior_one_formula, proved for an arbitrary A-module M and linear functional phi, not only the finite free sequence functional.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "def-weil-pbc-koszul-regular-sequence",
     "def-weil-pbc-koszul-complex",
-    "lem-sc-bounded-above-projective-kprojective"
+    "def-weil-pbc-koszul-regular-sequence",
+    "lem-sc-module-homology-quotient-formulas"
    ],
    "elementary": false
   },
   {
-   "text": "Put T=single(A,0), L=koszulDualComplex A r f. In degree n>=0 define e_n(c) to be c.v(-n,0), transported by E.extendXIso.inv and singleObjXSelf.hom; in negative degree both sides are zero. Cochain.toSingleEquiv and its inverse toSingleMk give inverse maps. Cochain.delta_toSingleMk says e_(n+1)(delta c)=(-1)^(n+1) e_n(c) composed with d_(n+1,n), exactly L.d. The maps are A-linear by componentwise evaluation. Let Z be the degree-r cocycles and B the subgroup of coboundaries. Let ZL=ker(L.d r (r+1)), and BL be the range of the incoming differential corestricted to ZL (zero for r=0). The differential equation restricts e_r to a bijection Z to ZL and identifies B with BL, since e_(r-1) is surjective when r>0; degree -1 cochains are zero when r=0. Define on the quotient F([c])=L.homologyPi((L.sc r).moduleCatCyclesIso.inv(e_r(c))). It is well defined since c-c-prime in B gives e_r(c-c-prime) in BL. If F([c])=0 then e_r(c) is in BL by moduleCatHomologyIso and its projection equation, hence c is in B, proving injectivity. Every homology class lifts to ZL via its quotient presentation and then along e_r, proving surjectivity. F is additive and respects A-scalars because e_r and the cycles/projection maps do. Compose F with P.extEquivCohomologyClass to define d on Ext. This is the explicit normalized quotient construction; no information is taken from the existence-only signed-dual equivalence. To establish A-linearity of the Ext leg, represent a class by c. The roof formula and Abelian.Ext.smul_hom identify the roof of a*c with a times the roof of c (Q and the shift maps are A-linear). Injectivity of Ext.homLinearEquiv gives P.extEquivCohomologyClass(a*x)=[a*c], so d(a*x)=a*d(x).",
+   "text": "Use [lem-sc-koszul-derived-dual-evaluation] for e from derived maps Q(E) -> Q(A[-r]) to signed-dual homology. Define c by Linear.homCongr using the inverse of asIso(Q(epsilon0)) as the source isomorphism and the displayed single shift as the target isomorphism. Then d=Ext.homLinearEquiv followed by c followed by e is A-linear. Any epsilon with the displayed quotient equation equals epsilon0: cancel the degree-zero source and target isomorphisms and use to_single_hom_ext.",
    "uses": [
-    "lem-sc-projective-ext-cocycle-roof-formulas",
-    "lem-sc-hom-single-cocycle-component-formulas",
-    "lem-sc-hom-cocycle-homotopy-quotient-formulas",
-    "lem-sc-module-homology-quotient-formulas",
-    "def-sc-koszul-dual-complex",
-    "def-pc-ext"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply P.extMk_surjective to x in degree r to get a:K_r to A with a composed with d_(r+1,r) zero. Form c=Cocycle.toSingleMk of the transported a. Let z be Cocycle.equivHomShift.symm c followed by the inverse single-complex shift identification to single(A,-r), and y=(L.sc r).moduleCatCyclesIso.inv(e_r(c)). Cochain.toSingleMk_v and the shift component formula show that iCycles(y) is exactly extendXIso.inv followed by z.f(-r) and singleObjXSelf.hom, with no discretionary sign. P.extEquivCohomologyClass_extMk and extMk_hom (equivalently extEquivCohomologyClass_symm_mk_hom) say x.hom is inv(Q epsilon0) followed by Q z and the specified derived single shift inverse; the singleFunctorIsoCompQ conjugations are the identifications in Ext.homLinearEquiv. By the definition of F on quotient classes, d(x)=homologyPi(y). For any epsilon satisfying the displayed quotient equation, equality with epsilon0 holds in degree zero and to_single_hom_ext makes it equality of complex maps. Substitution yields all three required equations for that epsilon. For r=0 the incoming Hom term is zero; for A/I=0 both quotient presentations are zero. No determinant comparison is involved.",
-   "uses": [
-    "lem-sc-projective-ext-cocycle-roof-formulas",
-    "lem-sc-hom-single-cocycle-component-formulas",
-    "lem-sc-module-homology-quotient-formulas",
+    "lem-sc-koszul-derived-dual-evaluation",
+    "def-pc-ext",
     "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exterior basis [lem-weil-pbc-exterior-power-free-basis] makes E K-projective [lem-sc-bounded-above-projective-kprojective]. By [lem-pc-ring-derived-map-representative] and fullness of the homotopy quotient, lift c(x.hom) to Q(z). For every n>r the exterior basis has empty index type. Therefore every differential into dual degree n, from any degree i, is zero; specialize n=r+1 and i=r for the cycle construction. Lift the component evaluation of z into cycles using moduleCatCyclesIso.inv, and apply [lem-sc-koszul-derived-dual-evaluation] to get d(x)=homologyPi(y). Applying c.symm to Q(z)=c(x.hom) gives x.hom=inv(Q(epsilon0)) followed by Q(z) followed by the specified shift inverse. Injectivity of Ext.homLinearEquiv gives the exact roof equation. Replace epsilon by its proved equality with epsilon0. The zero-degree and zero-quotient cases are included.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pc-ring-derived-map-representative",
+    "lem-sc-module-homology-quotient-formulas",
+    "lem-sc-koszul-derived-dual-evaluation",
+    "def-pc-ext",
+    "def-sc-koszul-dual-complex"
    ],
    "elementary": false
   }
@@ -52,17 +51,16 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-koszul-complex",
   "def-weil-pbc-koszul-regular-sequence",
+  "lem-pc-ring-derived-map-representative",
   "lem-sc-bounded-above-projective-kprojective",
-  "lem-sc-hom-cocycle-homotopy-quotient-formulas",
-  "lem-sc-hom-single-cocycle-component-formulas",
+  "lem-sc-koszul-derived-dual-evaluation",
   "lem-sc-module-homology-quotient-formulas",
-  "lem-sc-projective-ext-cocycle-roof-formulas",
-  "new-j3-koszul-projective-resolution"
+  "lem-weil-pbc-exterior-power-free-basis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-  "place": "Repair of X-06699 C3/C4: explicit evaluation on cocycles, boundary-compatible quotient construction, and actual Mathlib Ext roof formulas; no normalization inferred from Nonempty of an equivalence."
+  "place": "B3 complete Lean proof: explicit normalized quotient augmentation and uniqueness, K-projective derived-map lifting, top cycle construction, and the fully proved augmentation-free signed-dual evaluation comparison. Repair: generalized degree-one contraction to arbitrary modules and functionals, and dual differential vanishing to all target degrees above rank."
  },
  "mathlib_searches": [
   {
@@ -138,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b4752",
-  "group": "A4",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T045510-L-124009",
+  "landing": "20261013T082331-L-1630885",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

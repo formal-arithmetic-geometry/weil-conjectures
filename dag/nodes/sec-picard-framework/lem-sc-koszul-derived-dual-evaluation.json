@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-koszul-derived-dual-evaluation",
+ "kind": "statement",
+ "title": "Signed Koszul dual homology and evaluated derived morphisms",
+ "statement": "Let $A$ be a commutative ring, $r\\geq 0$, and $f:\\operatorname{Fin}(r)\\to A$. Let $K=K_A(f)$ [def-weil-pbc-koszul-complex], $E$ its integer extension with $K_n$ in degree $-n$, and $L$ its signed dual [def-sc-koszul-dual-complex]. In the derived category of $A$-modules [def-weil-abstract-derived-category] there exists an $A$-linear equivalence $e:\\operatorname{Hom}(Q(E),Q(A[-r]))\\cong H^r(L)$ such that for every complex map $z:E\\to A[-r]$ and every cycle $y$ of $L$ in degree $r$ whose image under the cycle inclusion is the degree $-r$ component of $z$ transported to $\\operatorname{Hom}_A(K_r,A)$ by extendXIso.inv and singleObjXSelf.hom, one has $e(Q(z))=\\operatorname{homologyPi}(y)$. There is no ideal, regularity or augmentation hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, local computation by the Hom complex of the finite free Koszul complex; component and quotient details supplied by Mathlib HomComplexSingle, HomComplexCohomology and DerivedCategory/KProjective"
+ },
+ "stmt_deps": [
+  "def-sc-koszul-dual-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Give each term of K its exterior basis [lem-weil-pbc-exterior-power-free-basis]. Its integer extension E is K-projective by the natural-number extension instance of [lem-sc-bounded-above-projective-kprojective]. The comparison [lem-pc-ring-derived-map-representative] identifies derived morphisms from E with homotopy classes of complex maps.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put T=single(A,-r) and S=L.sc r. For each x in ker(S.g), the outgoing signed differential equation and the unit sign imply d_(r+1,r) followed by x.val equals zero. Transport x.val by extendXIso.hom and form the degree-zero cocycle C(x)=Cocycle.toSingleMk with target T, using the extend_d_eq equation. Its actual complex map is Cocycle.homOf(C(x)). Define F(x)=Q.map of this map. Component evaluation and single-map extensionality prove additivity and A-linearity. Every derived map lifts to z by K-projectivity; Cocycle.toSingleMk_surjective applied to Cocycle.ofHom(z) and transport back to K_r produce x. Its cycle condition follows from the chain-map equation returned by Cocycle.toSingleMk_surjective, transported by extend_d_eq and cancellation of extendXIso.hom; the signed dual differential is the unit sign times this zero composite. Hence F(x)=Q(z). Thus F is surjective.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sc-hom-single-cocycle-component-formulas",
+    "lem-pc-ring-derived-map-representative",
+    "def-sc-koszul-dual-complex",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove Q.map(z)=0 iff z is null-homotopic, by Qh_map_bijective injectivity and the quotientCompQhIso naturality equation. Cochain.equivHomotopy and mem_coboundaries_iff then give Q.map(Cocycle.homOf(C(x)))=0 iff C(x) is a coboundary. By Cocycle.toSingleMk_mem_coboundaries_iff this means x.val is precomposition by the differential from K_r to K_(r-1). For r>0 transport the witness using extendXIso in degree r-1. Multiply it by (-1)^r to obtain a signed-dual boundary; conversely a signed-dual boundary gives a cochain witness by the same sign, since its square is 1. For r=0 the witness has source E^1=0, hence x.val=0, and S.f is zero by the shape identity. In all cases ker(F)=range(S.moduleCatToCycles). These are the concrete single-target cocycle and homotopy-quotient formulas.",
+   "uses": [
+    "lem-sc-hom-single-cocycle-component-formulas",
+    "lem-sc-hom-cocycle-homotopy-quotient-formulas"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form q=F.quotKerEquivOfSurjective, identify ker(F) with range(S.moduleCatToCycles) by the proved equality, and use S.moduleCatHomologyIso.toLinearEquiv to define d:H^r(L) -> Hom_D(Q(E),Q(T)); take e=d.symm. For a supplied y with the evaluation of z, let x=S.moduleCatCyclesIso.hom(y). moduleCatCyclesIso_hom_i identifies x.val with the supplied evaluation, so single-map extensionality proves Cocycle.homOf(C(x))=z. The projection identity pi_moduleCatCyclesIso_hom identifies the image of homologyPi(y) with the quotient class of x. The quotient-equivalence projection formula gives d(homologyPi(y))=F(x)=Q(z). Injectivity of d and d.apply_symm_apply give the required e(Q(z))=homologyPi(y).",
+   "uses": [
+    "lem-sc-module-homology-quotient-formulas",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-dual-complex",
+  "def-weil-pbc-koszul-complex",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-hom-cocycle-homotopy-quotient-formulas",
+  "lem-sc-hom-single-cocycle-component-formulas",
+  "lem-sc-module-homology-quotient-formulas",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "B3 complete Lean proof: linear map from the kernel to derived morphisms, surjectivity via K-projectivity, kernel=image via single-target coboundary formulas, and quotient projection compatibility. Repair: the lifting helper is generalized to every K-projective complex. No top-differential vanishing helper is used: lifted functionals are cycles directly by their chain-map equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom in derived category from a finite projective Koszul complex to a single module is cohomology of its signed dual, with component evaluation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom in derived category from a finite projective Koszul complex to a single module is cohomology of its signed dual, with component evaluation",
+   "results": "Eight projective/injective Ext cohomology results, including extEquivCohomologyClass and extMk_hom. No evaluated Koszul derived-map comparison, and the projective-resolution statements require an augmentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*homology|Koszul.*Hom|Qh_map_bijective",
+   "results": "Eleven matches: Qh_map_bijective in DerivedCategory/KProjective.lean:43 and KInjective counterparts; no Koszul evaluated dual-homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulExtRoofRepresentatives",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Diagonal Koszul calculation in the derived sheaf Hom computation: evaluated comparison with the signed dual before choosing the quotient augmentation.",
+   "via": [
+    "lem-sc-koszul-ext-roof-representatives",
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulDerivedDualEvaluation",
+  "file": "lean/Sheaf/RingTheory/KoszulDerivedDualEvaluation.lean",
+  "declaration": "ExteriorAlgebra.exists_koszul_derived_dual_evaluation",
+  "statement": "theorem exists_koszul_derived_dual_evaluation\n    (A : Type u) [CommRing A] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]\n    (r : ℕ) (f : Fin r → A) :\n    ∃ e : (DerivedCategory.Q.obj\n        ((koszulComplex A r f).extend ComplexShape.embeddingDownNat) ⟶\n          DerivedCategory.Q.obj\n            ((CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj\n              (ModuleCat.of A A))) ≃ₗ[A] (koszulDualComplex A r f).homology r,\n      ∀ z : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n          (CochainComplex.singleFunctor (ModuleCat A) (-(r : ℤ))).obj\n            (ModuleCat.of A A),\n        ∀ y : (koszulDualComplex A r f).cycles r,\n          (koszulDualComplex A r f).iCycles r y =\n            ((koszulComplex A r f).extendXIso\n              ComplexShape.embeddingDownNat (i := r) rfl).inv ≫ z.f (-(r : ℤ)) ≫\n                (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))\n                  (ModuleCat.of A A)).hom →\n          e (DerivedCategory.Q.map z) = (koszulDualComplex A r f).homologyπ r y",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T082331-L-1630885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T082331-L-1630885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
