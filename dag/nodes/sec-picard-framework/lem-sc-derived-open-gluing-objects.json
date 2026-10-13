@@ -13,40 +13,53 @@
  ],
  "proof": [
   {
-   "text": "Let j_U, j_V, j_W be the open immersions of U, V and W=U\\cap V into X, with derived direct images Rj_{U,*}, Rj_{V,*}, Rj_{W,*} as in [lem-pc-restrict-derived-direct-image-open]. Form the morphism Rj_{U,*}A\\oplus Rj_{V,*}B\\to Rj_{W,*}(B|_W) whose V component is minus the restriction map and whose U component is the restriction map Rj_{U,*}A\\to Rj_{W,*}(A|_W) followed by Rj_{W,*}c. By the triangulated structure of the derived category [def-weil-abstract-derived-category] (applied to the abelian category of \\mathcal O_X-modules) it sits in a distinguished triangle F\\to Rj_{U,*}A\\oplus Rj_{V,*}B\\to Rj_{W,*}(B|_W)\\to F[1]; this defines F.",
+   "text": "Use [lem-sc-derived-open-difference-diagram] to use the explicit middle E=RjU_*A⊕RjV_*B and last D=RjW_*(sV B), and construct the difference arrow d, projections pU,pV, counit k, local invertible block maps and overlap difference identity. Complete d to a distinguished triangle F→E→D→F[1] using Mathlib Pretriangulated.distinguished_cocone_triangle₁ from [def-weil-abstract-derived-category].",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-derived-open-difference-diagram",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DG (Lemma 20.45.1), proof"
+    "place": "Tag 08DG, difference arrow before completing a distinguished triangle; Tag 08FE, restrictions of its direct-image summands"
    }
   },
   {
-   "text": "Restrict the triangle to U. By [lem-pc-restrict-derived-direct-image-open] (Tag 08FE) applied to f=j_V and the open U (so f^{-1}U=W and g=j:W\\to U), to f=j_W and U (g=j), and to f=j_U and U (g=\\mathrm{id}_U), the restriction to U of the V pushforward and of the W pushforward are both canonically Rj_*(B|_W), and the restriction of the U pushforward is A. Under these identifications, the second arrow is the difference of the map induced by c and the identity on the pushforward from U∩V, so its projection to the second summand is an isomorphism and has a section. The cone triangle of [def-weil-abstract-derived-category] for a morphism with such a section is isomorphic to the triangle with first term A; hence F|_U≅A. Restricting to V gives F|_V≅B by the same displayed split-cone calculation with the two summands interchanged. Under these identifications, the two component maps on U∩V are c and the identity, so the transition isomorphism is c.",
+   "text": "Restrict the distinguished triangle to U and V using the exact functors and comparisons of [def-pc-derived-open-restriction-maps]. The private proved helper isIso_fiber_projection maps each restricted triangle to the distinguished binary biproduct triangle with middle component (p,r(d)) and last component identity. TR3 and the two-isomorphism lemma imply its first component is invertible; composing its first square with biprod.fst identifies that component with r(f);p. Take these two invertible projections as iU and iV.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-derived-open-restriction-maps",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DG (Lemma 20.45.1), proof"
+    "place": "Tag 08DG, difference arrow before completing a distinguished triangle; Tag 08FE, restrictions of its direct-image summands"
+   }
+  },
+  {
+   "text": "The private proved helper compatible_of_difference precomposes the difference identity by rW(f). Naturality of eU and eV changes its two terms into the restricted projections on F. A distinguished triangle has f;d=0; exact restriction maps preserve composition and zero. Hence their difference is zero, which gives exactly the required equality after converting the projections to asIso.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG, difference arrow before completing a distinguished triangle; Tag 08FE, restrictions of its direct-image summands"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-restrict-derived-direct-image-open",
-  "def-weil-abstract-derived-category"
+  "lem-sc-derived-open-difference-diagram",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P2",
+  "group": "S2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DG; first assertion, constructed by the triangle and split restrictions (steps 1-2 of lem-sc-derived-open-gluing)"
+  "place": "Tag 08DG, difference arrow before completing a distinguished triangle; Tag 08FE, restrictions of its direct-image summands"
  },
  "mathlib_searches": [
   {
@@ -118,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T040756-L-3951170",
+  "landing": "20261013T060425-L-585284",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
