@@ -6,6 +6,9 @@ Authors: SHEAF group D3
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionMapInjective
+import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionProducts
+import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionMapTmul
 /-!
 # Affine sections of the ring-sheaf pushout
 
@@ -63,6 +66,27 @@ theorem affine_pushout_ring_affine_sections [IsAffineHom f]
       (t.hom.app (op (f ⁻¹ᵁ V))).hom.comp ((adj.unit.app A).hom.app (op V)).hom
     IsPushout (f.app V) (f.app V) (b.hom.app (op (f ⁻¹ᵁ V)))
       (CommRingCat.ofHom δ) := by
-  sorry
+  classical
+  dsimp only
+  let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
+  let q := affinePushoutSectionMap f B b t hpushout V
+  have hsurj : Function.Surjective q.hom := by
+    intro z
+    obtain ⟨l, hl⟩ := affinePushoutSection_products f B b t hpushout V hV z
+    refine ⟨(l.map fun x ↦ x.1 ⊗ₜ[Γ(X, V)] x.2).sum, ?_⟩
+    rw [map_list_sum]
+    simp only [q, List.map_map, Function.comp_def]
+    simp_rw [affinePushoutSectionMap_tmul f B b t hpushout V]
+    exact hl.symm
+  have hinj : Function.Injective q.hom :=
+    affinePushoutSectionMap_injective f B b t hpushout V hV
+  let e := (RingEquiv.ofBijective q.hom ⟨hinj, hsurj⟩).toCommRingCatIso
+  let ht := CommRingCat.isPushout_tensorProduct
+    Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V)
+  apply ht.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) e
+  · rfl
+  · rfl
+  · exact ht.inl_desc _ _ (affinePushoutSection_comm f B b t hpushout V)
+  · exact ht.inr_desc _ _ (affinePushoutSection_comm f B b t hpushout V)
 end
 end AlgebraicGeometry.Scheme.Modules

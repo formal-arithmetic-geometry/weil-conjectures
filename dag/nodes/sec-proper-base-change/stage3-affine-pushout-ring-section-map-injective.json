@@ -1,0 +1,136 @@
+{
+ "id": "stage3-affine-pushout-ring-section-map-injective",
+ "kind": "statement",
+ "title": "Injectivity of the canonical affine tensor section map",
+ "statement": "Let f:U → X be a morphism of schemes. Put A=f_*O_U, ρ:O_X → A its structure map, IA=f⁻¹A, r₀:f⁻¹O_X → O_U its adjoint structure map, and t₀=f⁻¹ρ. Let B be a commutative-ring sheaf on U, b:O_U → B and t:IA → B making a pushout of r₀ and t₀. For an open V of X put W=f⁻¹V, D=Γ(X,V), C=Γ(U,W), and δ=t_W ∘ η_{A,V}:C → B(W). Assume f is affine and V is affine. The constructed q of [stage3-affine-pushout-ring-section-map] is injective.",
+ "stmt_deps": [
+  "stage3-affine-pushout-ring-section-map"
+ ],
+ "source": {
+  "document": "Stacks Project, Morphisms and Schemes",
+  "place": "Tag 01SB affine reduction; Tags 01I9, 01IA and 01HV for affine pullback sections"
+ },
+ "proof": [
+  {
+   "text": "Apply quasi-coherent pushforward to the regular O_U-module: the regular A-module restricted to O_X is f_*O_U and is quasi-coherent.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize pushout scalar-extension cancellation to the regular A-module. Inverse image of its underlying additive sheaf, with the action determined by the unit, is the regular inverse-image algebra module. Extension along t has inverse maps z tensor a ↦ z*t(a) and z ↦ z tensor 1; balancing makes them inverse, also after sheafification. Thus the underlying O_U-module of B is identified with tensorPullback(f_*O_U), compatibly with its unit.",
+   "uses": [
+    "lem-weil-pbc-affine-module-tensor-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since W is affine, the affine pullback section comparison is a linear bijection C tensor_D C → B(W), after swapping factors. Unit compatibility sends 1 tensor d to δ(d); O_U-linearity sends c tensor d to b(c)δ(d). Tensor induction and the proved pure-tensor formula identify this additive map with q. Injectivity of the linear comparison implies injectivity of q, without asserting its surjectivity.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "stage3-affine-pushout-ring-section-map",
+    "stage3-affine-pushout-ring-section-map-tmul"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-tensor-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "pqf-lem-pushforward-qcoh",
+  "stage3-affine-pushout-ring-section-map",
+  "stage3-affine-pushout-ring-section-map-tmul"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 01SB, 01I9, 01IA, 01HV",
+  "place": "Tag 01SB affine reduction, expanded regular-module argument and elementary ring tensor calculation: Injectivity of the canonical affine tensor section map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine sections of a pushout algebra sheaf: tensor kernel vanishes and products of the two ring maps generate all sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injectivity and surjectivity of the canonical tensor ring map on affine sections of a sheaf tensor product",
+   "results": "Neighbouring results: Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.specTargetImageFactorization_app_injective; no affine ring-sheaf section map kernel or product-generation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*tensor|tensor.*sheaf",
+   "results": "Neighbouring results: Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean, Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean; no affine ring-sheaf section map kernel or product-generation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushoutRingAffineSections",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence steps 4–7: affine tensor computation and invertibility; canonical unit map on an affine base open (01SB key algebra observation); affine tensor unit section calculation: affine identifications and diagonal balancing-relation quotient, before proving bijectivity; affine section presentation steps 1 and 2 only: pushout ring and first tensor module with its two actions, before extension by epsilon; ring section presentation: affine ring pushout comparison, before the counit triangle and pure-tensor generation; affine ring-section calculation: Injectivity of the canonical affine tensor section map",
+   "via": [
+    "stage3-affine-pushout-ring-affine-sections",
+    "lem-weil-pbc-affine-pushout-ring-section-presentation",
+    "lem-weil-pbc-affine-pushout-first-tensor-sections",
+    "lem-weil-pbc-affine-tensor-unit-section-presentation",
+    "lem-weil-pbc-affine-module-tensor-unit-sections",
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePushoutRingSectionMapInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushoutRingSectionMapInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affinePushoutSectionMap_injective",
+  "statement": "theorem affinePushoutSectionMap_injective [IsAffineHom f] (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : TopCat.Sheaf.inverseImageRing f.base ((TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj U.sheaf) ⟶ B) (hpushout : IsPushout (tensorPullbackRingMap f) ((TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map (show X.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj U.sheaf from ⟨f.c⟩)) b t) (V : X.Opens) (hV : IsAffineOpen V) : letI : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra Function.Injective (affinePushoutSectionMap f B b t hpushout V).hom",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T015616-L-3027546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T015616-L-3027546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

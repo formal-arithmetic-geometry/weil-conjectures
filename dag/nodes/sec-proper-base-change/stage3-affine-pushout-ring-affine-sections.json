@@ -10,42 +10,43 @@
  },
  "proof": [
   {
-   "text": "For A=f_*O_U, the restricted-scalar regular A-module is f_*O_U as an O_X-module. It is quasi-coherent since affine f is quasi-compact and quasi-separated and O_U is quasi-coherent.",
+   "text": "Construct the section tensor ring map q by its universal property. The inverse-image adjunction unit and sheaf pushout equation prove the section square commutes. The resulting q(c tensor d)=b(c)δ(d) formula is proved in Lean.",
    "uses": [
-    "pqf-lem-pushforward-qcoh"
+    "stage3-affine-pushout-ring-section-map",
+    "stage3-affine-pushout-ring-section-comm",
+    "stage3-affine-pushout-ring-section-map-tmul"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Specialize pushout scalar-extension cancellation to the regular A-module. Inverse image of the regular module is the regular inverse-image algebra module, and extending it along t is the regular B-module by x tensor a ↦ x*t(a), with inverse x ↦ x tensor 1. The comparison identifies this module with tensor pullback of the restricted-scalar A-module, with its canonical unit.",
+   "text": "Use finite product generation to lift any section to the sum of its displayed pure tensors. map_list_sum and the pure-tensor formula prove surjectivity.",
    "uses": [
-    "lem-weil-pbc-affine-module-tensor-base-change"
+    "stage3-affine-pushout-ring-section-products",
+    "stage3-affine-pushout-ring-section-map-tmul"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The inverse image W of affine V is affine. Apply the affine module sections comparison and swap tensor factors: B(W) is C tensor_D C. The unit comparison gives 1 tensor d ↦ δ(d); first-factor scalar linearity gives c tensor d ↦ b(c)δ(d). These maps are multiplicative since they are the ring-tensor comparison before sheafification, and that comparison respects the sheafification unit. Hence the section comparison is a ring isomorphism respecting both ring legs.",
+   "text": "Combine the independently stated injectivity with that surjectivity to form RingEquiv.ofBijective. Transport CommRingCat.isPushout_tensorProduct across its categorical isomorphism, using inl_desc and inr_desc for the two section legs.",
    "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-module-tensor-base-change"
+    "stage3-affine-pushout-ring-section-map-injective",
+    "stage3-affine-pushout-ring-section-map",
+    "stage3-affine-pushout-ring-section-comm"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Transport CommRingCat.isPushout_tensorProduct through that ring isomorphism. This yields exactly the section ring pushout stated here, including the zero ring and empty open.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-module-tensor-base-change",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "pqf-lem-pushforward-qcoh"
+  "stage3-affine-pushout-ring-section-comm",
+  "stage3-affine-pushout-ring-section-map",
+  "stage3-affine-pushout-ring-section-map-injective",
+  "stage3-affine-pushout-ring-section-map-tmul",
+  "stage3-affine-pushout-ring-section-products"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Morphisms",
-  "place": "Tag 01SB, affine reduction in the proof; ring comparison assembled from the module comparison"
+  "document": "Stacks Project, Morphisms, Tag 01SB; Mathlib commutative-ring tensor pushout",
+  "place": "Explicit section map, finite-product surjectivity reduction and independent injectivity; decomposition into two strictly weaker obligations."
  },
  "mathlib_searches": [
   {
@@ -133,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f79ee",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T000423-L-2252069",
+  "landing": "20261013T015616-L-3027546",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem and new affine-section pushout lemma with their nodes and source argument; both delivered modules and direct importer Sheaf.AlgebraicGeometry.AffinePushoutFirstTensorSections compile cleanly; axioms are the allowed three plus sorryAx from the named remaining obligation; interface flag is indentation only."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
