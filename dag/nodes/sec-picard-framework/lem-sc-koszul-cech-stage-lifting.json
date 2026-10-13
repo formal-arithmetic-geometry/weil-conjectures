@@ -13,10 +13,24 @@
  },
  "proof": [
   {
-   "text": "Transport the target through principalCechObjIso. For each nonempty subset J,\nput p = card(J)-1 and q = n-p. Quasi-coherence on Spec(A) identifies its section on\nD(g_J), where g_J is the product of the f_j, with the localization of global\nsections of F.X q. Write that section, after multiplication by the inverse of\nInt.negOnePow(p*q+p*(p-1)/2), as m_J/g_J^d_J. There are finitely many J, so choose\nE >= 1 and E >= d_J for all J. Replace m_J by g_J^(E-d_J) m_J. At stage e = E-1,\ndefine each linear map on the ordered exterior basis by these numerators. Terms\noutside the tail's finite support are zero. The free exterior bases therefore give\na homogeneous module Hom cochain, and koszulCechHomObjIso transports it to the\nspecified diagram. The cocone formula gives exactly the chosen sections: g_J is\ninvertible on D(g_J), so the formula can be divided by g_J^E. Transport back through\nprincipalCechObjIso. For r=0 the target has no coordinates, and the zero cochain at\nstage 0 suffices; for zero or nilpotent g_J its localized section module is zero.\nThis argument uses cochains, with no cycle or boundedness condition on F. Mathlib tools: Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent and isIso_fromTildeΓ_iff_isLocalizing identify restriction with localization; Module.Basis.exteriorPower on the standard Finsupp basis gives the ordered exterior coordinates. The formula and object transports are provided by the comparison construction; the specified exterior diagonal transition is supplied by the Koszul open system.",
+   "text": "Transport y through principalCechObjIso. The private finite_affine_denominators lemma uses Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent and isIso_fromTildeΓ_iff_isLocalizing, then IsLocalizedModule.Away.surj for each signed component. Take the finite supremum of the denominator exponents and increase smaller numerators by the remaining power, obtaining one exponent e+1 for all nonempty subsets, including the empty index type when r=0.",
+   "uses": [
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private koszul_basis_values lemma uses the exterior power of Finsupp.basisSingleOne. In source degree p<=0 use the extension isomorphism at (-p).toNat and Basis.constr with the prescribed numerator for each subset of cardinality (-p).toNat+1, transported along its target-degree equality. In source degree p>0 use zero. Cochain.mk forms the Hom cochain; exteriorPower.basis_apply and Basis.constr_basis verify its values on every koszulCechBasis.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the constructed Hom cochain back by koszulCechHomObjIso.inv. Apply injectivity of principalCechObjIso.hom degreewise and function extensionality on subsets. Multiply by the common product power, which is injective on principal-open sections by Scheme.Modules.isSMulRegular_of_le_basicOpen and IsSMulRegular.pow. The specified equation of koszulCechCocone_exists and the exterior-basis value identify this product with the signed restriction of the numerator. The denominator equation and commuting scalar actions cancel the sign by inv_smul_smul. No cycle condition, boundedness, or arbitrary object choice is used.",
    "uses": [
     "def-sc-koszul-cech-comparison-construction",
-    "def-sc-koszul-open-system",
     "def-sc-principal-open-alternating-total"
    ],
    "elementary": false
@@ -30,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08D0 and 08D1, localization fraction map and finite total-degree diagonals; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+  "place": "Tags 08D0 and 08D1: common affine denominators, exterior-basis Hom cochains, and injective denominator cancellation; complete Lean proof by J4, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -119,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T031556-L-3576476",
-  "kind": "interface",
+  "landing": "20261013T082351-L-1638176",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
