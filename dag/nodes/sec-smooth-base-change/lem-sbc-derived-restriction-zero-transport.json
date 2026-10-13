@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-derived-restriction-zero-transport",
+ "kind": "statement",
+ "title": "Restriction triangle and coefficient transport in degree zero",
+ "statement": "Let $S,Y,Y'$ be schemes, $a:Y'\\to Y$, $h:Y\\to S$, $h':Y'\\to S$ with $a\\gg h=h'$, and $U\\to S$ etale. Let $G,G'$ be abelian etale sheaves on $Y,Y'$ and $\\psi:a^*G\\to G'$. Put $W=U\\times_S Y$, $W'=U\\times_S Y'$, let $q:W'\\to W$ be the induced map, and $r:W\\to Y$, $r':W'\\to Y'$ the projections [def-sbc-raw-affine-restricted-cohomology]. Put $L=r^*$, $Q=q^*$, and $R=\\Gamma(W',-)$ [def-weil-pbc-inverse-image]. Let $b:D(L)(G[0])\\cong(LG)[0]$ include the bounded-below inclusion comparison, let $c=D(Q)(b.\\mathrm{hom})\\gg c_{Q,LG}.\\mathrm{hom}$ with the exact single comparison, and let $z:H^0R\\Gamma(W',(QLG)[0])\\cong\\Gamma(W',QLG)$ be the single right-derived homology comparison followed by the zeroth right-derived comparison [def-sbc-raw-restricted-cohomology-comparison-map]. Let $e:D(r^*)D(q^*)\\cong D(a^*)D(r'^*)$ be the derived image of $\\mathrm{upperStarComp}(q,r)^{-1}$ followed by $\\mathrm{upperStarComp}(r',a)$, using $r'\\gg a=q\\gg r$ and the derived exact-functor composition comparisons [lem-weil-pbc-inverse-image-composition]. Let $T_{h'}$ denote restricted derived sections followed by $H^0$. Then $H^0R\\Gamma(W',e_{G[0]})\\gg T_{h'}(c_{a,G}.\\mathrm{hom}\\gg\\psi[0])\\gg\\mathrm{zeroIso}(W',G').\\mathrm{hom}=H^0R\\Gamma(W',c)\\gg z.\\mathrm{hom}\\gg\\Gamma(W',\\psi_{\\mathrm{res}})$, where $\\psi_{\\mathrm{res}}$ is the explicit restricted coefficient map of [def-sbc-raw-affine-restricted-cohomology]. This is restriction and coefficient coherence only; no derived adjunction unit or derived section pullback occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07A6",
+  "place": "Cohomology on Sites, lemma-adjoint (07A6); lemma-unbounded-cohomology-of-open (0D6F); specialization of the parent derived-section square proof to its zero comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sbc-raw-restricted-cohomology-comparison-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand the derived restriction isomorphism into its three factors.\nThe localization factorization of mapDerivedCategoryCompIso identifies each\ncomposition factor on a single complex with its underived composition factor.\nThe factorization of mapDerivedCategoryNatIso identifies the middle factor with\nthe single of the upperStarComp comparison. The singleFunctorιIso and exact\nsingle comparisons cancel between adjacent factors. After these cancellations\nthe resulting map of single complexes is the single of\nrawAffineRestrictedCoefficient. Apply derived sections and zeroth homology.\nNaturality of the right-derived single homology comparison, followed by\nnaturality of rightDerivedZeroIsoSelf, gives the section map of that coefficient\nmorphism. The remaining outer single comparisons are exactly those displayed\nin zeroIso. This uses no invertibility of the coefficient map and also applies\nto the empty scheme.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-raw-affine-restricted-cohomology",
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sbc-raw-restricted-cohomology-comparison-map"
+ ],
+ "proof_origin": {
+  "by": "agent G2",
+  "document": "Stacks Project and parent node proof step 2",
+  "place": "Separated degree-zero adjunction/Leray calculation and restriction/coefficient coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived exact functor composition single comparison and zeroth right derived functor naturality",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image derived restriction composition on single sheaves and zeroth homology",
+   "results": "8 hits including DerivedCategory.singleFunctorCompHomologyFunctorIso and embedding restriction homology comparisons. No exact derived restriction/coefficient identity.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*single|single.*mapDerivedCategory",
+   "results": "10 hits including mapDerivedCategorySingleFunctor and mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app. No complete restriction triangle identity.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Derived section pullback and the single/shift comparisons; parent proof step 2. Stacks Tags 07A6 (derived adjunction), 0D6F (restriction of derived sections), 03Q8 (restricted cohomology presentation). The parent zero comparison, proof step 2: Restriction triangle and coefficient transport in degree zero.",
+   "via": [
+    "lem-sbc-restricted-derived-section-zero-comparison",
+    "lem-sbc-restricted-derived-evaluation-pullback",
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedRestrictionZeroTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedRestrictionZeroTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.derivedRestriction_zero_transport",
+  "statement": "theorem derivedRestriction_zero_transport {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')\n    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (G' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (ψ : (upperStar AddCommGrpCat.{v + 1} a).obj G ⟶ G') (U : S.Etale) :\n    (let e : D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)) ⋙\n        D(upperStar AddCommGrpCat.{v + 1} (rawAffineRestrictedMap a h h' w U)) ≅\n      D(upperStar AddCommGrpCat.{v + 1} a) ⋙\n        D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h')) := by\n      let q := rawAffineRestrictedMap a h h' w U\n      let r := Limits.pullback.snd U.hom h\n      let r' := Limits.pullback.snd U.hom h'\n      have hw : r' ≫ a = q ≫ r := by simp [q, r, r', rawAffineRestrictedMap]\n      exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n        Functor.mapDerivedCategoryNatIso ((upperStarComp AddCommGrpCat.{v + 1} q r).symm ≪≫\n          upperStarComp AddCommGrpCat.{v + 1} r' a (q ≫ r) hw.symm) ≪≫\n        Functor.mapDerivedCategoryCompIso _ _\n    let W := (MorphismProperty.Over.pullback @Etale ⊤ h).obj U\n    let W' := (MorphismProperty.Over.pullback @Etale ⊤ h').obj U\n    let L := upperStar AddCommGrpCat.{v + 1} W.hom\n    let Q := upperStar AddCommGrpCat.{v + 1} (rawAffineRestrictedMap a h h' w U)\n    let R := Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1}\n    let b := L.mapDerivedCategory.mapIso\n        ((DerivedCategory.Plus.singleFunctorιIso _ 0).app G) ≪≫\n      (L.mapDerivedCategorySingleFunctor 0).app G\n    let c := Q.mapDerivedCategory.map b.hom ≫\n      (Q.mapDerivedCategorySingleFunctor 0).hom.app (L.obj G)\n    let z := R.homologyRightDerivedFunctorObjSingleFunctorIso (Q.obj (L.obj G)) 0 ≪≫\n      R.rightDerivedZeroIsoSelf.app (Q.obj (L.obj G))\n    (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n        (R.rightDerivedFunctor.map (e.hom.app\n          (DerivedCategory.Plus.ι.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) ≫\n      (sectionsFunctor W' ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n        (((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryPlusSingleFunctor 0).hom.app G ≫\n          (DerivedCategory.Plus.singleFunctor _ 0).map ψ) ≫ (zeroIso W' G').hom =\n      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n        (R.rightDerivedFunctor.map c) ≫ z.hom ≫\n          R.map (rawAffineRestrictedCoefficient a h h' w G G' ψ U))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T095956-L-2459696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T095956-L-2459696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

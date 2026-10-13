@@ -6,6 +6,8 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import Sheaf.AlgebraicGeometry.DerivedSectionPullbackZero
+import Sheaf.AlgebraicGeometry.DerivedRestrictionZeroTransport
 import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -116,6 +118,20 @@ theorem restrictedSectionPullback_zero {S Y Y' : Scheme.{v}}
           ((upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)).obj G) ≫
         (Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1}).map
           (rawAffineRestrictedCoefficient a h h' w G G' ψ U) ≫
-        (zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) G').inv := by sorry
+        (zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) G').inv := by
+  apply (cancel_mono
+    (zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) G').hom).mp
+  have ht := derivedRestriction_zero_transport a h h' w G G' ψ U
+  have hp := derivedSectionPullback_zero
+    ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U)
+    (rawAffineRestrictedMap a h h' w U) G
+  dsimp only at ht hp
+  dsimp only [restrictedSectionPullback, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, NatTrans.comp_app]
+  rw [Functor.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  erw [ht]
+  erw [← Category.assoc, ← Category.assoc, hp]
+  exact Category.assoc _ _ _
 
 end AlgebraicGeometry.Etale.RawRestrictedComparison
