@@ -3,41 +3,162 @@
  "blueprint": {
   "is": "lem-weil-pbc-basis-derived-detection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Derived sections on the basis detect isomorphisms",
- "statement": "Let $X$ be affine. A morphism between bounded-below complexes of pro-etale\nmodule sheaves is an isomorphism if its derived sections on every\n$W\\in\\mathcal B_X$ are isomorphisms.",
+ "statement": "Let $X$ be an affine scheme and $R$ a commutative ring. Use the small skeleton and universes of the small pro-etale site $X_{\\mathrm{proet}}$ and the constant sheaf of rings $R_X$ of [def-weil-pbc-proetale-site]. Put $\\mathcal A=\\operatorname{Mod}(R_X)$, the category of sheaves of $R_X$-modules [def-weil-sheaf-of-modules-category], and let $D^+(\\mathcal A)$ be its bounded-below derived category [def-weil-abstract-derived-category], [def-weil-pbc-bounded-derived-subcategories]. Let $\\mathcal B_X$ be the affine ind-etale subsite of [def-weil-pbc-ind-etale-basis]. For $W\\in\\mathcal B_X$, write $R\\Gamma(W,-)$ for the right derived evaluation functor: represent an object by a bounded-below complex $I^\\bullet$ of injective objects of $\\mathcal A$ and take $\\Gamma(W,I^\\bullet)$ in $D^+(R_X(W)\\text{-}\\operatorname{Mod})$. Equivalently it is derived global sections after restriction to $W_{\\mathrm{proet}}$ [lem-weil-pbc-proetale-restriction-injectives]. If $u:K\\to L$ is a morphism in $D^+(\\mathcal A)$ and $R\\Gamma(W,u)$ is an isomorphism for every $W\\in\\mathcal B_X$, then $u$ is an isomorphism in $D^+(\\mathcal A)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
   "place": "node lem-weil-pbc-basis-derived-detection, order 1288"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-ind-etale-basis"
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "proof": [
   {
-   "text": "Take the cone in the ordinary derived category and represent it by a\nbounded-below injective complex $J^\\bullet$. By\n[lem-weil-pbc-proetale-restriction-injectives], $\\Gamma(W,J^\\bullet)$\ncomputes its derived sections on $W$. Its cohomology sheaf in degree $n$ is\nthe sheafification of the presheaf $W\\mapsto H^n\\Gamma(W,J^\\bullet)$: kernels\nare computed objectwise, and cokernels are then sheafified. All these groups\nare zero on the basis by hypothesis, so [lem-weil-pbc-ind-etale-basis] makes\nevery cohomology sheaf zero. The cone is zero and the morphism is an\nisomorphism.",
+   "text": "Work on the chosen small skeleton of $X_{\\mathrm{proet}}$. Its coefficient sheaf $R_X$ is commutative, so $\\mathcal A=\\operatorname{Mod}(R_X)$ is Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian] and has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] to $K$ and $L$ to obtain bounded-below complexes of injectives $I^\\bullet,J^\\bullet$ and isomorphisms $QI\\simeq K$, $QJ\\simeq L$. Both complexes are K-injective. By [lem-weil-pbc-kinjective-hom-derived], the conjugate of $u$ is represented by a homotopy class, hence by a chain map $a:I^\\bullet\\to J^\\bullet$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070I (lemma-K-injective), 070J; ringed-site input: sites-cohomology.tex, Section 07A5"
+   }
+  },
+  {
+   "text": "For each $W\\in\\mathcal B_X$, [lem-weil-pbc-proetale-restriction-injectives] identifies derived evaluation with derived global sections on the localized site. Since restriction preserves injectives, $\\Gamma(W,I^\\bullet)$ and $\\Gamma(W,J^\\bullet)$ compute these objects and $\\Gamma(W,a)$ computes their morphism. By hypothesis its localized image is an isomorphism. Applying [lem-weil-pbc-derived-plus-iso-on-cohomology] in the abelian category of $R_X(W)$-modules shows that $H^n\\Gamma(W,a)$ is an isomorphism for every integer $n$. Thus $\\Gamma(W,a)$ is a quasi-isomorphism.",
    "uses": [
     "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-ind-etale-basis"
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
+    "place": "Proof: restriction-injectives sentence; derived.tex Tag 05RT, cohomology detects derived isomorphisms"
+   }
+  },
+  {
+   "text": "Let $C^\\bullet=C(a)$ be the ordinary mapping cone, so $C^n=J^n\\oplus I^{n+1}$ and $d_C=\\left(\\begin{smallmatrix}d_J&a\\\\0&-d_I\\end{smallmatrix}\\right)$ as in [def-weil-abstract-derived-category]. Evaluation preserves this finite direct sum and each displayed map, so $\\Gamma(W,C)=C(\\Gamma(W,a))$ as complexes. Apply [lem-pur-quasi-iso-cone-acyclic] to $\\Gamma(W,a)$ in the abelian category of $R_X(W)$-modules. Step 2 gives $H^n\\Gamma(W,C)=0$ for every $W\\in\\mathcal B_X$ and every $n$. No exactness of evaluation on sheaves is asserted here.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), mapping cone construction; blueprint Proof: take the cone"
+   }
+  },
+  {
+   "text": "Regard $C^\\bullet$ as a complex of presheaves of $R_X$-modules and set $P_n(U)=H^n(C^\\bullet(U))$. Presheaf kernels and cokernels are objectwise, so $P_n=\\ker d^n/\\operatorname{im}d^{n-1}$ in presheaves. By exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact], sheafifying this quotient gives the quotient of the sheafified kernel by the sheafified image. Since every $C^i$ is already a sheaf, this is exactly $\\mathcal H^n(C)$, hence $P_n^\\#\\simeq\\mathcal H^n(C)$. This is the explicit kernel-image calculation of Stacks 0BKV, applied to this complex; it does not claim $\\mathcal H^n(C)(U)=P_n(U)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV (lemma-sheafification-cohomology), kernel-image calculation; sites-modules.tex Tag 03EI (lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "Fix $n$. Step 3 gives $P_n(W)=0$ for every basis object. For any sheaf of $R_X$-modules $F$ and presheaf morphism $b:P_n\\to F$, any $U$ and $x\\in P_n(U)$, cover $U$ by basis objects using [lem-weil-pbc-ind-etale-basis]. On every member $W$ of that cover, $b_U(x)|_W=b_W(x|_W)=0$. The uniqueness part of the sheaf axiom gives $b_U(x)=0$. Thus every $b$ is zero. By the sheafification adjunction of [def-weil-presheaf-modules-sheafification], applied with $F=P_n^\\#$, both the identity and zero endomorphisms of $P_n^\\#$ correspond to its zero unit map. They are equal, so $P_n^\\#=0$. Step 4 implies $\\mathcal H^n(C)=0$ for all $n$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
+    "place": "Proof: all these groups are zero on the basis, so every cohomology sheaf is zero; adjunction and sheaf separation supply the details"
+   }
+  },
+  {
+   "text": "Now $C(a)$ is acyclic as a complex in $\\mathcal A$. Apply [lem-pur-quasi-iso-cone-acyclic] in $\\mathcal A$ to conclude that $a$ is a quasi-isomorphism. The localization $Q$ inverts quasi-isomorphisms by [def-weil-abstract-derived-category], hence $Q(a)$ is an isomorphism. Conjugating back by $QI\\simeq K$ and $QJ\\simeq L$ proves that $u$ is an isomorphism.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic) and Definition 05RU (definition-unbounded-derived-category); blueprint Proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-ind-etale-basis"
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-ind-etale-basis",
+  "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-basis-derived-detection.md",
-  "place": "## Proof"
+  "place": "Proof, expanded using Stacks Tags 013K, 070I, 070J, 05RT, 03EI and the kernel-image calculation in 0BKV"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections on a covering basis of a Grothendieck site jointly detect isomorphisms in the bounded below derived category of sheaves of modules",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.isQuasicoherent, DerivedCategory.exists_iso_Q_obj_of_isGE, SheafOfModules.IsQuasicoherent, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.Sheaf.instIsGrothendieckAbelian, SheafOfModules.LocalGeneratorsData, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-14",
+   "verdict": "no match for derived evaluation on the pro-etale basis; generic derived isomorphism/cohomology and sheafification results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isIso\"",
+   "results": "7 hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.Plus.isIso_iff, HomotopyCategory.Plus.instIsIsoAppOfInjectiveXIntAsHomologicalComplexUpHomotopicObjPlus, CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι",
+   "date": "2026-10-14",
+   "verdict": "no match for derived evaluation on the pro-etale basis; generic derived isomorphism/cohomology and sheafification results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff|sheafification.*homology|homology.*sheafification",
+   "results": "6 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for derived evaluation on the pro-etale basis; generic derived isomorphism/cohomology and sheafification results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global sections on a basis detect isomorphisms of complexes of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology sheaf of a derived complex on a ringed site is the sheafification of the presheaf of hypercohomology on objects",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.plusPlusSheaf_obj_val, SheafOfModules.instAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁",
+   "date": "2026-10-14",
+   "verdict": "no match for derived evaluation on the pro-etale basis; generic derived isomorphism/cohomology and sheafification results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-isomorphism of complexes of sheaves can be detected by derived evaluation on all objects of a basis for the topology",
+   "results": "8 hits: DerivedCategory.isIso_Q_map_iff_quasiIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomotopyCategory.homologyFunctor_inverts_quasiIso, HomologicalComplex.homologyFunctor_inverts_quasiIso, HomotopyCategory.quotient_map_mem_quasiIso_iff, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+   "date": "2026-10-14",
+   "verdict": "no match for derived evaluation on the pro-etale basis; generic derived isomorphism/cohomology and sheafification results are reused through existing DAG nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +187,34 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-basis-derived-detection",
+  "worker": "stage1",
+  "summary": "Made the ambient bounded-below derived category and unrestricted constant commutative coefficients explicit; expanded the cone argument into six steps using existing nodes only. Replaced an implicit sheafification-on-basis inference by an explicit sheaf-separation and adjunction argument. Searched source and Mathlib; no attachment and no new node.",
+  "blueprint": "Proof: injective representation (step 1), derived evaluation (step 2), cone (step 3), cohomology as sheafified presheaf (step 4), basis vanishing (step 5), cone criterion and localization (step 6).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site Grothendieck theorem supplies injective existence for the pro-etale site; no theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion in any abelian category, used for evaluated complexes and sheaf complexes; no theorem of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-5392b3de2",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-5392b3de2 (reviewer sub-agent of L); spot-checked: Reviewed the sole item and all cited nodes and sources, checked all six proof steps, edge cases, duplicate candidates, tool uses, exact target morphisms, and coefficient categories. Wrote review.md; no repair needed."
+ }
 }
