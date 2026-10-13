@@ -16,12 +16,15 @@
  },
  "proof": [
   {
-   "text": "The constant-sheaf adjunction at terminal V followed by evaluation at 1 identifies Hom from the constant lifted integers with evaluation at V, additively and naturally. Apply it to each term of an injective resolution.",
-   "uses": [],
-   "elementary": true
+   "text": "Use the explicit constant-integer-sheaf complexEvaluationIso from the derived-evaluation module. Its degreewise evaluationEquiv_naturality proves commutation with every coefficient chain map, using the generic proved postMap helper from the Ext-derived comparison module.",
+   "uses": [
+    "new-sheaf-cohomology-derived-evaluation",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
   },
   {
-   "text": "Compute standard large Ext using the Hom complex of the injective resolution and right-derived evaluation using its section complex. Lift the section complex to the Hom universe, take homology, and lower via the exact ULift functor.",
+   "text": "Compose Ext-to-cohomology-class, the homology of the complex evaluation isomorphism, preservation of homology by ULift, and the injective-resolution computation of right-derived evaluation. All data are explicit constructions, with the standard large HasExt instance.",
    "uses": [
     "lem-weil-pbc-ext-via-injective-resolution",
     "new-sheaf-cohomology-derived-evaluation"
@@ -29,25 +32,26 @@
    "elementary": false
   },
   {
-   "text": "Use comparison chain maps lifting every F -> G. Naturality of the adjunction and of the resolution computations makes the component equivalences commute with these maps. Homotopic lifts give the same homology map. The existing resolution-evaluation theorem supplies only endomorphism naturality; the cross-object argument is the remaining statement here.",
+   "text": "Lift each coefficient morphism with InjectiveResolution.desc. The proved generic extClass_naturality and homologyClass_naturality helpers in the Ext-derived comparison module, followed by mapHomologyIso_hom_naturality and isoRightDerivedObjCochainComplex_inv_naturality, give naturality of this composite. Apply ULift.down and package the simultaneous family.",
    "uses": [
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "lem-weil-pbc-ext-via-injective-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ext-via-injective-resolution",
-  "new-sheaf-cohomology-derived-evaluation",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "new-sheaf-cohomology-derived-evaluation"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N3",
+  "group": "N1",
   "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/06XP",
   "place": "Lemma 13.27.2(1); cohomology definition Tag 01FT and natural comparison maps of injective resolutions",
-  "note": "Second-reader repair: explicit injective-resolution argument; not naturality of arbitrary equivalences."
+  "note": "Independent second reading: removed arbitrary-family naturality and both new holes. Explicit resolution comparison and its naturality are proved using existing generic helper declarations; no statement or definition changes."
  },
  "mathlib_searches": [
   {
@@ -123,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T232902-L-2042789",
-  "kind": "interface",
+  "landing": "20261013T015603-L-3023459",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
