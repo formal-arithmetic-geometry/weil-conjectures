@@ -19,42 +19,33 @@
  },
  "proof": [
   {
-   "text": "Restrict to U and identify the extended ideal with J₀. Pull G termwise along g and F along q. Coherent formal pullback and compatibility of completion with pullback give β₀ by composition of pullbacks. The object equalities specify the actual pullbacks.",
+   "text": "Construct the coherent pullback objects G₀,F₀ with the exact object equalities, coherence of D, flatness of the chart-completion map, and equality of the extended ideal.",
    "uses": [
-    "lem-weil-pbc-formal-systems-pullback"
+    "lem-weil-pbc-completed-affine-pullback-objects"
    ],
    "elementary": false
   },
   {
-   "text": "The Noetherian ring B has flat completion. Base change of proper f to Noetherian S remains proper; proper coherent direct image gives coherence of p_*F₀. Degree-zero flat base change identifies p_*F₀ with g*f_*F, naturally at all quotient projections.",
+   "text": "Apply the generic flat transport square theorem to these objects. It constructs adjR, β₀, κ₀, δ and the quotient and unit compatibility squares, without taking α as input.",
    "uses": [
-    "lem-weil-pbc-noetherian-completion-flat",
-    "lem-weil-pbc-flat-base-change-resolution-iso",
-    "lem-weil-pbc-flat-base-change-map-sections",
-    "lem-pc-coherent-hi"
+    "lem-weil-pbc-formal-comparison-flat-transport-square"
    ],
    "elementary": false
   },
   {
-   "text": "Complete the pushforward isomorphism and compose with completion-pullback to obtain δ. Define α₀ as pulled-back α followed by δ inverse. Transport κ by the flat comparisons for quotient pushforwards. Naturality at quotient projections gives hκ₀; base-change compatibility with units gives hα₀. Compare supplied and chosen adjunctions by uniqueness of left adjoints and absorb their invertible pullback automorphism into β₀. This leaves δ and α₀ unchanged and gives the last diagram equation.",
-   "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-flat-base-change-map-sections"
-   ],
-   "elementary": false
+   "text": "Define α₀ to have underlying map eqToHom(hG) ⋅ g*α ⋅ δ.inv. The inverse law proves α₀δ=eqToHom(hG)g*α. At each term substitute κ₀=δ g*κ t and cancel δ.inv δ. Functoriality and hα convert the result into the supplied unit square; hence α₀κ₀=η^{adjR}p_*β₀. Package the objects and both equations.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-coherent-hi",
-  "lem-weil-pbc-flat-base-change-map-sections",
-  "lem-weil-pbc-flat-base-change-resolution-iso",
-  "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-noetherian-completion-flat"
+  "lem-weil-pbc-completed-affine-pullback-objects",
+  "lem-weil-pbc-formal-comparison-flat-transport-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/088B",
-  "place": "Completed-base change paragraph, explicit interfaces and glue by G3"
+  "place": "Completed-base change paragraph: geometric objects and flat squares separated; alpha transport and diagram glue proved by J1"
  },
  "mathlib_searches": [
   {
@@ -131,9 +122,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T113341-L-3183231",
+  "landing": "20261013T124310-L-3776321",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
