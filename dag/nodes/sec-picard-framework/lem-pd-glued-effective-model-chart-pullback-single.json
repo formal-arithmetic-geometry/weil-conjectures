@@ -2,7 +2,7 @@
  "id": "lem-pd-glued-effective-model-chart-pullback-single",
  "kind": "statement",
  "title": "Cartesianity of one glued model chart",
- "statement": "For a fixed chart i, the local cartesian and open-cover data imply that its square in the glued model is cartesian.",
+ "statement": "For a fixed chart i, a commuting square of scheme open immersions is cartesian if the inverse image of the range of its target chart jᵢ under q₀ is the source open Uᵢ. In the local effective-model setting, assume this inverse-image equality in addition to the local cartesian and target-cover data [lem-pd-glued-effective-model-charts].",
  "source": {
   "document": "Stacks Project",
   "place": "Descent, Tag 0AP4, chart-square verification"
@@ -12,16 +12,20 @@
  ],
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: no proof exists under these hypotheses. The two-component example has j identity and q₀ the fold map; a pullback would force the first-component inclusion to be an isomorphism. The original application of the core was invalid because the core itself was false. After repairing the core, the missing inverse-image equality must be established from descended overlap compatibility upstream before this statement can be repaired.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply the corrected core chart criterion with the supplied inverse-image equality, open immersion, and commutativity. Obtain a limit cone. Apply IsPullback.of_isLimit to its limit witness to recover the cartesian square.",
+   "uses": [
+    "lem-pd-glued-effective-model-chart-pullback-single-core"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pd-glued-effective-model-chart-pullback-single-core"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "Y3 compiled counterexample and report",
-  "place": "scratchpad/Counterexample.lean, single_statement_false"
+  "document": "Mathlib.AlgebraicGeometry.OpenImmersion and the corrected local core",
+  "place": "IsOpenImmersion.isPullback; glued_model_chart_pullback_core; IsPullback.of_isLimit"
  },
  "mathlib_searches": [
   {
@@ -84,7 +88,7 @@
   "module": "Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle",
   "file": "lean/Sheaf/AlgebraicGeometry/GluedEffectiveModelChartPullbackSingle.lean",
   "declaration": "CategoryTheory.Over.DescentDatum.glued_model_chart_pullback_single",
-  "statement": "theorem glued_model_chart_pullback_single\n    {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)\n    (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left)\n    (j : ∀ i, (W i).left ⟶ W₀.left)\n    (i : I)\n    (hcart : IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hopen : ∀ i, IsOpenImmersion (j i))\n    (hcover : ∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w)\n    (hover : ∀ i, j i ≫ W₀.hom = (W i).hom)\n    (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀) :\n    IsPullback (q i) (U i).ι (j i) q₀",
+  "statement": "theorem glued_model_chart_pullback_single\n    {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)\n    (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left)\n    (j : ∀ i, (W i).left ⟶ W₀.left)\n    (i : I)\n    (hcart : IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hopen : ∀ i, IsOpenImmersion (j i))\n    (hcover : ∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w)\n    (hover : ∀ i, j i ≫ W₀.hom = (W i).hom)\n    (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀)\n    (hpreimage : q₀ ⁻¹ᵁ (j i).opensRange = U i) :\n    IsPullback (q i) (U i).ι (j i) q₀",
   "branch": "sheaf-dag",
   "by": "S1",
   "date": "2026-10-13"
@@ -102,11 +106,30 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-808d3",
-  "group": "Y3",
+  "reviewer": "X-1f36a",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T115954-L-3404111",
+  "landing": "20261013T201805-L-3975293",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module, DAG nodes, change record, and report matched against the review packet, baseline declarations, and successful lcompile checks"
+  "note": "independent Codex review: Delivered modules, corrected theorem, forced caller adaptation, node metadata, report, compilation, and axiom probes match the stage-3 requirements."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "N4 stage 2",
+  "old_statement": "For a fixed chart i, the local cartesian and open-cover data imply that its square in the glued model is cartesian.",
+  "what": "The original assertion is false (the two-component example already checked by Y3). Require q₀⁻¹(range jᵢ)=Uᵢ explicitly and prove this corrected local criterion. The unheld caller retains its signature and is forced back to a disputed sorry. This is a statement repair, not a proof of the old assertion.",
+  "source": {
+   "document": "Mathlib.AlgebraicGeometry.OpenImmersion",
+   "place": "IsOpenImmersion.isPullback; inverse-image hypothesis"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "STATEMENT-DISPUTED: no proof exists under these hypotheses. The two-component example has j identity and q₀ the fold map; a pullback would force the first-component inclusion to be an isomorphism. The original application of the core was invalid because the core itself was false. After repairing the core, the missing inverse-image equality must be established from descended overlap compatibility upstream before this statement can be repaired.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }

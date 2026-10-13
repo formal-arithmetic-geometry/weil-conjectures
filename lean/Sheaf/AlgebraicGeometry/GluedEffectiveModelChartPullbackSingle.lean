@@ -10,16 +10,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
-/- STATEMENT-DISPUTED: The hypotheses do not specify the descended overlaps or cover V.
-Take X = Y = W₀ = Spec k, p = identity, V = Spec k ⨿ Spec k over X by the fold map,
-I a singleton, U its first component, W the identity object over Y, q the component
-isomorphism, q₀ the fold map, and j the identity. All hypotheses hold. The conclusion
-would make U.ι an isomorphism (a pullback of j = identity), although it misses the
-second component. Even adding a cover of V and cartesianity for all charts is
-insufficient: use two indices for the two components and let both j be identity.
-The specified data permit identifying disjoint source charts in the target.
-See report.md for the hypothesis-by-hypothesis check and compiled counterexample. -/
-
 /-- Core open-immersion pullback step with the necessary inverse-image condition.
 
 Source: Mathlib's `IsOpenImmersion.isPullback`, the universal property of an open
@@ -48,14 +38,13 @@ theorem glued_model_chart_pullback_core
       (by simpa only [Scheme.Opens.opensRange_ι] using hpreimage)
   exact h.isLimit'
 
-/-- STATEMENT-DISPUTED: the inverse image of a target chart need not be the source chart.
+/-- The chart square is cartesian when its inverse image is the specified source open.
 
-Source: Stacks Project, Tag 0AP4, chart-square verification. The intended argument
-identifies `q₀ ⁻¹ᵁ (j i).opensRange` with `U i`, then applies the universal property
-of open subschemes, as proved in `glued_model_chart_pullback_core`. The displayed
-hypotheses do not imply that identification: the two-component counterexample above
-satisfies them all. Thus there is no valid proof in words for this statement as written;
-the missing compatibility of descended overlaps must be supplied upstream.
+Source: Mathlib's `IsOpenImmersion.isPullback`, the universal property of an open
+subscheme (Stacks Project, Tag 01IN). Apply `glued_model_chart_pullback_core` to the
+commuting square and the inverse-image equality, then recover `IsPullback` from
+its limit cone. The open-cover and local-cartesian hypotheses alone do not imply
+this equality; it must be established from the descended overlap construction.
 (blueprint: lem-pd-glued-effective-model-chart-pullback-single) -/
 theorem glued_model_chart_pullback_single
     {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
@@ -68,8 +57,12 @@ theorem glued_model_chart_pullback_single
     (hopen : ∀ i, IsOpenImmersion (j i))
     (hcover : ∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w)
     (hover : ∀ i, j i ≫ W₀.hom = (W i).hom)
-    (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀) :
+    (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀)
+    (hpreimage : q₀ ⁻¹ᵁ (j i).opensRange = U i) :
     IsPullback (q i) (U i).ι (j i) q₀ := by
-  sorry
+  have _ := hcover
+  obtain ⟨hlimit⟩ := glued_model_chart_pullback_core U W q W₀ q₀ j i hcart
+    (hopen i) (hover i) (hcomm i) hpreimage
+  exact IsPullback.of_isLimit hlimit
 
 end CategoryTheory.Over.DescentDatum
