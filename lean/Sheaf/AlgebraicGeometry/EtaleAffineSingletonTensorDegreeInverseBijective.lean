@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeKernel
+import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeSurjective
 
 @[expose] public section
 
@@ -26,7 +28,14 @@ theorem singletonTensorDegreeComparisonHom_bijective
     (f : (singletonTensorAmitsur X F U W g).X n ⟶
       (singletonTensorCech X F U W g).X n)
     (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f) :
-    Function.Bijective (AddCommGrpCat.Hom.hom f) := by sorry
+    Function.Bijective (AddCommGrpCat.Hom.hom f) := by
+  have hk := singletonTensorDegreeComparisonHom_kernel X F U W g hU hW n f hf
+  have hs := singletonTensorDegreeComparisonHom_surjective X F U W g hU hW n f hf
+  refine ⟨?_, hs⟩
+  intro x y hxy
+  have hzero : (AddCommGrpCat.Hom.hom f) (x - y) = 0 := by
+    rw [map_sub, hxy, sub_self]
+  exact sub_eq_zero.mp (hk (x - y) hzero)
 
 end
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,162 @@
+{
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "new-etale-affine-singleton-tensor-degree-surjective",
+ "title": "A normalized affine singleton comparison lifts every target section.",
+ "statement": "Let $X$ be a scheme, $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module, $u:U\\to X$ and $w:W\\to X$ affine objects of the small etale site, $g:W\\to U$ an $X$-morphism, and $n\\in\\mathbf N$. Let $f$ be an additive homomorphism from degree $n$ of the lifted Amitsur complex to degree $n$ of the singleton tensor-section Cech complex, satisfying the pure-tensor normalization [new-etale-affine-singleton-tensor-degree-comparison-hom-normalization]. Then for every target element $y$ there is a source element $x$ with $f(x)=y$.",
+ "stmt_deps": [
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, affine tensor calculation, using Tags 01I4, 01JQ, 01I9, 01IA"
+ },
+ "proof": [
+  {
+   "text": "Put A=Gamma(U,O), B=Gamma(W,O), M=Gamma(U,u*F), and P equal to the product of n+1 copies of W over U. Iterate the binary affine fibre-product spectrum formula. The projection equations identify the indexed tensor inclusions with pullbacks along P to W. Thus P is affine and its ring of sections is the indexed tensor power of B over A.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback u*F is quasi-coherent. Compare tensor pullback with ordinary pullback by uniqueness of left adjoints to the same pushforward, and transport this property along that isomorphism. Apply affine pullback sections to P to U and this coefficient module. Compose with the unit-normalized composition isomorphism used to define the etale tensor-section restriction. Tensoring the ring identification with M produces an additive equivalence E to Gamma(P,P*F), whose value on m tensor tprod(b) is the product of the projection pullbacks of b_i times the normalized restriction of m.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let q be evaluation at the unique outer Cech index followed by ULift.down. The normalization gives q(f(ULift.up t))=E(t) on pure generators. TensorProduct.induction_on reduces equality to pure tensors; PiTensorProduct.induction_on on the second factor reduces further to scalar multiples of indexed pure tensors. Additivity handles sums and the tensor balancing relation moves the scalar to the coefficient, so normalization applies to every remaining generator.",
+   "uses": [
+    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For y in the target, put t=E.symm(q(y)). The preceding equality gives q(f(ULift.up t))=q(y). Evaluation at the unique outer index is an isomorphism, by productUniqueIso, and ULift.down is injective. Hence q is injective and f(ULift.up t)=y.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 03P2 affine calculation, expanded with tensor induction and the affine sections formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global sections of iterated affine fibre products tensor powers quasi coherent pullback",
+   "results": "Eight hits, including pullbackSpecIso; no complete section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no complete comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.ofBijective",
+   "results": "AddEquiv.ofBijective and its application lemmas.",
+   "date": "2026-10-13",
+   "verdict": "no complete comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor sections indexed product",
+   "results": "No match.",
+   "date": "2026-10-13",
+   "verdict": "no complete comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "additive comparison from tensor products to sections of an affine pullback is bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injectivity of tensor comparison map for quasi coherent sheaf sections over affine schemes",
+   "results": "Eight hits: toImage_app_injective, sheafification constructor injectivity, invertible-module cancellation and flat tensor injectivity; none identifies the normalized singleton comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.ker_eq_bot",
+   "results": "AddMonoidHom.ker_eq_bot: already assumes injectivity; does not prove the geometric kernel calculation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*(kernel|surjective)|affine.*tensor.*comparison",
+   "results": "25 hits about singleton sets, cyclotomic extensions and scalar rings; none about this comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeInverseBijective",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Affine proof: identify the singleton tensor-section Cech complex with the Amitsur complex; fixed-degree injectivity and target-section lifting.",
+   "via": [
+    "new-etale-affine-singleton-tensor-amitsur",
+    "new-etale-affine-singleton-tensor-degree-comparison",
+    "new-etale-affine-singleton-tensor-degree-comparison-inverse",
+    "new-etale-affine-singleton-tensor-degree-comparison-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonTensorDegreeSurjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singletonTensorDegreeComparisonHom_surjective",
+  "statement": "theorem singletonTensorDegreeComparisonHom_surjective\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)\n    (n : ℕ)\n    (f : (singletonTensorAmitsur X F U W g).X n ⟶\n      (singletonTensorCech X F U W g).X n)\n    (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f) :\n    Function.Surjective (AddCommGrpCat.Hom.hom f)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T065102-L-897499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T065102-L-897499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
