@@ -13,20 +13,24 @@
  ],
  "proof": [
   {
-   "text": "Substitute p+q=n. Use tensor-product and Cech coordinate extensionality. The degree-map inclusion equation and the prescribed front/back formula identify each target coordinate. Naturality of the pullback units, presheaf composition, and compatibility of tensor sections with restriction identify successive restrictions.",
+   "text": "Substitute p+q=n. Use picardExternalCechCupDegreeMaps_ι and the Mathlib tensor-total formulas d_eq, ι_D₁, ι_D₂, d₁_eq and d₂_eq to reduce to pure tensors. Coproduct descent gives the two bidegree maps in degree p+q+1, with coefficient 1 on the first differential and (-1)^p on the second.",
    "uses": [
-    "lem-sc-picard-external-cech-cup-bidegree",
+    "def-sc-picard-external-right-cech-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify scalar Cech cochains and ordinary module Cech cochains via their common section coordinates. The alternating-face formula proves this additive equivalence commutes with d; substitution proves its compatibility with degree casts. Define the pull of a cochain along either projection using the canonical tensor-pullback adjunction unit on each projected tuple, followed by restriction to the product intersection. Expand d as an alternating face sum, use additivity, apply naturality of the unit, and compose restrictions termwise to prove this pull operation commutes with d.",
+   "uses": [
     "def-sc-picard-external-right-cech-models",
-    "lem-pc-module-pullback-adjunction",
-    "def-sc-cech-cup-product"
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the alternating face sums. Front terms j=0,...,p have sign (-1)^j. The final front term of sign (-1)^(p+1) equals the first back term of sign (-1)^p, so they cancel. Remaining back terms r=1,...,q+1 have sign (-1)^(p+r) and give target faces p+1,...,p+q+1. The tensor-total inclusion differential has these two summands, using Mathlib HomologicalComplex.mapBifunctor.ι_D₁, ι_D₂, d₁_eq and d₂_eq. Extensionality concludes. This is valid for p=0, q=0, characteristic two, empty index families, and zero coefficients.",
+   "text": "The specified bidegree coordinate formula, and composition of restrictions along front and back face intersections, identify each l(a tensor b) after forgetting scalars with the ordinary Cech cup of the two pulled cochains. Apply the already-proved cechCupCochain_leibniz on the product scheme, then replace the pulled differentials using the preceding step and transport degrees through the additive equivalence. Its injectivity and tensor-product extensionality conclude the inclusion identity. This works in degree zero, characteristic two, empty index families and for zero coefficients.",
    "uses": [
     "lem-sc-picard-external-cech-cup-bidegree",
-    "def-sc-picard-external-right-cech-models",
     "def-sc-cech-cup-product"
    ],
    "elementary": false
@@ -41,7 +45,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/07MB",
-  "place": "signed Alexander--Whitney face calculation"
+  "place": "Alexander--Whitney Leibniz identity, reused via cechCupCochain_leibniz; pullback compatibility proved from adjunction naturality"
  },
  "mathlib_searches": [
   {
@@ -124,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c08ea",
-  "group": "Y3",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T154359-L-1164031",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered modules and downstream importer compiled successfully; target and existing signatures preserved, relocation documented, node metadata agrees, and the sole remaining sorry is named with a complete proof plan."
+  "landing": "20261013T162408-L-1518522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
