@@ -50,6 +50,21 @@ theorem adjunction_transfer_functorial_injective_embeddings
       (∀ B : D, jD.app B = adj.unit.app B ≫ u.map (j.app (v.obj B))) ∧
         (∀ B : D, Mono (jD.app B)) ∧
           (∀ B : D, Injective ((v ⋙ J ⋙ u).obj B)) := by
-  sorry
+  let jD : 𝟭 D ⟶ v ⋙ J ⋙ u :=
+    { app := fun B ↦ adj.unit.app B ≫ u.map (j.app (v.obj B))
+      naturality := fun B B' f ↦ by
+        dsimp
+        rw [← Category.assoc, ← adj.unit_naturality f, Category.assoc,
+          ← u.map_comp, (show v.map f ≫ j.app (v.obj B') =
+            j.app (v.obj B) ≫ J.map (v.map f) from j.naturality (v.map f)),
+          u.map_comp, Category.assoc] }
+  refine ⟨jD, fun B ↦ rfl, ?_, ?_⟩
+  · intro B
+    have := hjmono (v.obj B)
+    change Mono (adj.unit.app B ≫ u.map (j.app (v.obj B)))
+    simpa only [adj.homEquiv_unit] using
+      (inferInstance : Mono (adj.homEquiv B (J.obj (v.obj B)) (j.app (v.obj B))))
+  · intro B
+    exact adj.map_injective _ (hjinj (v.obj B))
 
 end CategoryTheory
