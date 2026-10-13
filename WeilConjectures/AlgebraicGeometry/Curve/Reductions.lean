@@ -80,6 +80,35 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
   sorry
 
+/-- **Pullback maps on cohomology and filtered colimits.** Let `g : Y ⟶ X` be a morphism of
+quasi-compact quasi-separated schemes and `c` a colimit cocone of a filtered diagram `D` of
+abelian étale sheaves on `X`. If the pullback maps `Hᵠ(X, D_j) ⟶ Hᵠ(Y, g^* D_j)` are bijective
+for every `j`, then so is `Hᵠ(X, colim D) ⟶ Hᵠ(Y, g^* colim D)`: both sides are the filtered
+colimits of the corresponding groups (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`),
+`g^*` preserving colimits. (blueprint: `lemma-weil-pbc-curve-filtered-cohomology`, naturality) -/
+theorem Etale.bijective_cohomologyMap_of_isColimit {X Y : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (g : Y ⟶ X) {J : Type w}
+    [Category.{w'} J] [IsFiltered J] {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {c : Cocone D} (hc : IsColimit c) (q : ℕ)
+    (hD : ∀ j, Function.Bijective (cohomologyMap g (D.obj j) q)) :
+    Function.Bijective (cohomologyMap g c.pt q) := by
+  have : (g)^*[AddCommGrpCat.{u + 1}].IsLeftAdjoint :=
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).isLeftAdjoint
+  have hc' : IsColimit ((g)^*[AddCommGrpCat.{u + 1}].mapCocone c) := isColimitOfPreserves _ hc
+  obtain ⟨hX₁, -⟩ := Scheme.H_map_isColimit_of_isFiltered X hc q
+  obtain ⟨hY₁, hY₂⟩ := Scheme.H_map_isColimit_of_isFiltered Y hc' q
+  refine ⟨(injective_iff_map_eq_zero _).2 fun x hx ↦ ?_, fun x' ↦ ?_⟩
+  · obtain ⟨j, y, rfl⟩ := hX₁ x
+    erw [cohomologyMap_map] at hx
+    obtain ⟨j', φ, hφ⟩ := hY₂ j _ hx
+    have : Sheaf.H.map (D.map φ) q y = 0 := (hD j').1 (by
+      rw [cohomologyMap_map, map_zero]
+      exact hφ)
+    rw [← c.w φ, Sheaf.H.map_comp_apply, this, map_zero]
+  · obtain ⟨j, y', rfl⟩ := hY₁ x'
+    obtain ⟨y, rfl⟩ := (hD j).2 y'
+    exact ⟨Sheaf.H.map (c.ι.app j) q y, cohomologyMap_map _ _ _ _⟩
+
 /-! ### Dimension zero -/
 
 /-- **Field extension in dimension zero.** Let `k ⊆ k'` be algebraically closed fields, `C` a
