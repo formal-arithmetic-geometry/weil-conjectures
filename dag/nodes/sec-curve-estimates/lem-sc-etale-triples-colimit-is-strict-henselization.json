@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-etale-triples-colimit-is-strict-henselization",
+ "kind": "statement",
+ "title": "Colimit of residue triples is the strict henselization",
+ "statement": "Let $R$ be a local commutative ring and $K$ a separable closure of $R/\\mathfrak m_R$, regarded as an $R$-algebra through $R/\\mathfrak m_R$. Let $p\\in\\operatorname{Spec}R$ and $\\chi:\\kappa(p)\\to K$ be a field map whose composite with evaluation $R\\to\\kappa(p)$ is the prescribed $R$-algebra map to $K$. Let $c$ be a universal colimit cocone of the etale residue triples [def-weil-pbc-etale-residue-triples] relative to $(p,K,\\chi)$. Give its vertex $C=c.\\mathrm{pt}$ an $R$-algebra structure such that every composite $R\\to S\\to C$ through a triple is its structural map. Then $C$ is a strict henselization of $R$ relative to $K$ [def-sc-ring-strict-henselization].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GW, proof of Lemma 10.155.11: the filtered colimit of triples equals the strict henselization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-residue-triples",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Construct tripleAsPointed by evaluation at the prime followed by the residue embedding. Conversely apply SpecToEquivOfField to B → K to define the prime and embedding of pointedAsTriple. The compatibility with R forces its prime over p. Both constructions retain the ring and the structural R-map. Construct morphisms in each direction from the same ring maps, since the two commutativity conditions are exactly the under-over equations.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-pbc-etale-residue-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define a CommAlgCat R cocone d on pointed etale algebras using the legs of c at pointedAsTriple; h_rho proves these are algebra maps. For any competing cocone k, tripleAsPointed gives a ring cocone k-prime. Descend it by hc. This ring map respects R by evaluating hc.fac at the identity triple. The identity ring maps between the two round-trip constructions prove factorization using k.w and hc.fac, and uniqueness using c.w and hc.hom_ext. Thus d is universal with vertex c.pt; its identity algebra isomorphism witnesses the defining predicate.",
+   "uses": [
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GW, pointed-algebra interpretation, explicit transport of the universal cocone"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of pointed etale residue triples is strict henselization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit of pointed etale residue triples satisfies strict henselization universal property",
+   "results": "Eight hits, including AlgebraicGeometry.Scheme.residue_descResidueField, Scheme.descResidueField, StandardEtalePair results and HenselianLocalRing.TFAE; no strict-henselization colimit comparison. Local source grep additionally finds SpecToEquivOfField.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictHenselization|SpecToEquivOfField",
+   "results": "Mathlib has SpecToEquivOfField but no strict henselization declaration",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleTripleToStrictHenselizationCompletionFlat",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proof of the boundary stalk calculation: strict henselization at the missing closed point, via the pointed etale colimit presentation",
+   "via": [
+    "lem-sc-etale-triple-to-sh-completion-flat",
+    "lem-sc-strict-henselization-dvr",
+    "lem-sc-open-curve-boundary-higher-direct-image-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesStrictHenselization",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesStrictHenselization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_colimit_isStrictHenselization",
+  "statement": "theorem etaleResidueTriples_colimit_isStrictHenselization (R : CommRingCat.{u}) [IsLocalRing R] (p : Spec R) (K : Type u) [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] (χ : (Spec R).residueField p ⟶ CommRingCat.of K) (hχ : (ΓSpecIso R).inv ≫ (Spec R).Γevaluation p ≫ χ = CommRingCat.ofHom (algebraMap R K)) (c : Cocone (etaleResidueTriplesRingDiagram R p K χ)) (hc : IsColimit c) [Algebra R c.pt] (hρ : ∀ t, t.α ≫ c.ι.app t = CommRingCat.ofHom (algebraMap R c.pt)) : Algebra.IsStrictHenselization R K c.pt",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-67294",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T162413-L-1520411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-67294",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T162413-L-1520411",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, proofs, imports and DAG records; both modules compile cleanly and both public theorems use only standard axioms. Direct importers: none."
+ }
+}

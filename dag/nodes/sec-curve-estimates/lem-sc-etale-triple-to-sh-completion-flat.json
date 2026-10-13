@@ -27,59 +27,34 @@
  ],
  "proof": [
   {
-   "text": "Fix a triple (S,q,phi) in the filtered category. The per-triple strict-henselization identification [lem-sc-etale-triple-strict-henselization-identification] identifies the colimit C with the strict henselization A^{\\mathrm{sh}} of the local ring A=S_q, carrying the maximal ideal qA to mC. Hence it identifies the completion of A^{\\mathrm{sh}} at qA^{\\mathrm{sh}} with the displayed completion C-hat.",
+   "text": "Transport the separable closure from the scheme residue field to R/m_R using the residue-field map of stalkClosedPointIso. The residue-field map commutes with evaluation, so the structural R-map to K is exactly the prescribed composite. Apply the proved colimit comparison [lem-sc-etale-triples-colimit-is-strict-henselization] with c.pt given the algebra structure rho. It yields IsStrictHenselization R K c.pt.",
    "uses": [
-    "lem-sc-etale-triple-strict-henselization-identification"
+    "lem-sc-etale-triples-colimit-is-strict-henselization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'; strict-henselization construction and the preceding henselization-triples identification"
-   }
+   "elementary": false
   },
   {
-   "text": "The etale map Spec S \\to Spec R is locally of finite presentation by the definition of etale morphisms [def-weil-etale-morphism], so the affine finite-presentation lemma [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes S a finite-type R-algebra. Thus S is Noetherian because R is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. Localizing at q preserves Noetherianity [lem-weil-pbc-localization-noetherian], hence A=S_q is a Noetherian local ring. The strict-henselization completion flatness-over-the-base statement [lem-sc-strict-henselization-completion-flat-over-base] applied to A says that A \\to (A^{\\mathrm{sh}})^\\wedge is flat.",
+   "text": "The maximal-ideal completion of the strict henselization is flat over R by the existing strict-henselization completion theorem. The displayed map is flat over t.B because t.B is etale, hence formally unramified and essentially of finite type, so flatness descends by Algebra.FormallyUnramified.flat_of_restrictScalars.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-sc-strict-henselization-completion-flat-over-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
-   }
-  },
-  {
-   "text": "The localization map S \\to A=S_q is flat [lem-weil-pbc-localization-flat]. Composing it with the flat map A \\to (A^{sh})-hat from the previous step is flat by [lem-weil-pbc-flat-ring-map-comp]. Under the completion identification of Step 1, this composite is exactly the canonical map S \\to C-hat, so that map is flat.",
-   "uses": [
-    "lem-weil-pbc-localization-flat",
     "lem-sc-strict-henselization-completion-flat-over-base",
-    "lem-weil-pbc-flat-ring-map-comp"
+    "lem-sc-unramified-flat-of-base-flat",
+    "def-weil-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-triple-strict-henselization-identification",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
   "lem-sc-strict-henselization-completion-flat-over-base",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-flat-ring-map-comp"
+  "lem-sc-unramified-flat-of-base-flat",
+  "def-weil-etale-morphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "W3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
+  "place": "Tag 06LJ(c), shorter scalar-restriction route using the proved Mathlib unramified flatness theorem"
  },
  "mathlib_searches": [
   {
@@ -173,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-67294",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T162413-L-1520411",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, proofs, imports and DAG records; both modules compile cleanly and both public theorems use only standard axioms. Direct importers: none."
  }
 }
