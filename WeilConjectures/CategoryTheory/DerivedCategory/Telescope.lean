@@ -77,6 +77,7 @@ noncomputable def telescopeShift : s.pt ⟶ s.pt :=
   Cofan.IsColimit.desc hs fun n ↦ X.map (homOfLE (Nat.le_add_right n 1)) ≫ s.inj (n + 1)
 
 omit [Preadditive C] in
+/-- The shift maps the summand `Xₙ` to the summand `Xₙ₊₁` by the transition morphism. -/
 @[reassoc (attr := simp)]
 lemma inj_telescopeShift (n : ℕ) :
     s.inj n ≫ telescopeShift hs = X.map (homOfLE (Nat.le_add_right n 1)) ≫ s.inj (n + 1) :=
@@ -87,6 +88,7 @@ noncomputable def telescopeDesc : s.pt ⟶ c.pt :=
   Cofan.IsColimit.desc hs c.ι.app
 
 omit [Preadditive C] in
+/-- The morphism `∐ₙ Xₙ ⟶ L` restricts to the legs of the cocone. -/
 @[reassoc (attr := simp)]
 lemma inj_telescopeDesc (n : ℕ) : s.inj n ≫ telescopeDesc hs c = c.ι.app n :=
   Cofan.IsColimit.fac hs _ n
@@ -110,9 +112,11 @@ variable {hs c} (N : ℕ) (hN : ∀ n, N ≤ n → IsIso (c.ι.app n))
 noncomputable def telescopeTransition (n k : ℕ) : X.obj n ⟶ X.obj k :=
   if h : n ≤ k then X.map (homOfLE h) else 0
 
+/-- The transition morphism `Xₙ ⟶ Xₙ` is the identity. -/
 lemma telescopeTransition_self (n : ℕ) : telescopeTransition (X := X) n n = 𝟙 _ := by
   simp [telescopeTransition]
 
+/-- Composing the transition morphism `Xₙ ⟶ Xₖ` with `Xₖ ⟶ Xₖ₊₁` gives `Xₙ ⟶ Xₖ₊₁`. -/
 @[reassoc]
 lemma telescopeTransition_comp {n k : ℕ} (h : n ≤ k) :
     telescopeTransition (X := X) n k ≫ X.map (homOfLE (Nat.le_add_right k 1)) =
@@ -121,6 +125,7 @@ lemma telescopeTransition_comp {n k : ℕ} (h : n ≤ k) :
     ← X.map_comp]
   rfl
 
+/-- Composing `Xₙ ⟶ Xₙ₊₁` with the transition morphism `Xₙ₊₁ ⟶ Xₖ` gives `Xₙ ⟶ Xₖ`. -/
 @[reassoc]
 lemma map_comp_telescopeTransition {n k : ℕ} (h : n + 1 ≤ k) :
     X.map (homOfLE (Nat.le_add_right n 1)) ≫ telescopeTransition (n + 1) k =
@@ -129,6 +134,7 @@ lemma map_comp_telescopeTransition {n k : ℕ} (h : n + 1 ≤ k) :
     ← X.map_comp]
   rfl
 
+/-- The transition morphisms are compatible with the legs of the cocone. -/
 lemma telescopeTransition_comp_ι {n k : ℕ} (h : n ≤ k) :
     telescopeTransition (X := X) n k ≫ c.ι.app k = c.ι.app n := by
   simp [telescopeTransition, dif_pos h]
@@ -138,13 +144,16 @@ include hN in
 noncomputable def telescopeInv (k : ℕ) : c.pt ⟶ X.obj k :=
   if h : N ≤ k then haveI := hN k h; inv (c.ι.app k) else 0
 
+/-- `telescopeInv` is a right inverse of the legs from the index `N` on. -/
 @[reassoc]
 lemma ι_telescopeInv {k : ℕ} (h : N ≤ k) : c.ι.app k ≫ telescopeInv N hN k = 𝟙 _ := by
   simp [telescopeInv, dif_pos h]
 
+/-- `telescopeInv` is a left inverse of the legs from the index `N` on. -/
 lemma telescopeInv_ι {k : ℕ} (h : N ≤ k) : telescopeInv N hN k ≫ c.ι.app k = 𝟙 _ := by
   simp [telescopeInv, dif_pos h]
 
+/-- The inverses of the legs are compatible with the transition morphisms. -/
 @[reassoc]
 lemma telescopeInv_comp_map {k : ℕ} (h : N ≤ k) :
     telescopeInv N hN k ≫ X.map (homOfLE (Nat.le_add_right k 1)) = telescopeInv N hN (k + 1) := by
@@ -158,11 +167,13 @@ noncomputable def telescopeRetractionApp (n : ℕ) : X.obj n ⟶ s.pt :=
   ∑ k ∈ Finset.Ico n N, telescopeTransition n k ≫ s.inj k -
     ∑ k ∈ Finset.Ico N n, c.ι.app n ≫ telescopeInv N hN k ≫ s.inj k
 
+/-- The component of the retraction on a summand `Xₙ` with `n ≤ N`. -/
 lemma telescopeRetractionApp_of_le {n : ℕ} (h : n ≤ N) :
     telescopeRetractionApp (s := s) N hN n =
       ∑ k ∈ Finset.Ico n N, telescopeTransition n k ≫ s.inj k := by
   simp [telescopeRetractionApp, Finset.Ico_eq_empty_of_le h]
 
+/-- The component of the retraction on a summand `Xₙ` with `N ≤ n`. -/
 lemma telescopeRetractionApp_of_ge {n : ℕ} (h : N ≤ n) :
     telescopeRetractionApp (s := s) N hN n =
       -∑ k ∈ Finset.Ico N n, c.ι.app n ≫ telescopeInv N hN k ≫ s.inj k := by
@@ -173,11 +184,13 @@ variable (hs) in
 noncomputable def telescopeRetraction : s.pt ⟶ s.pt :=
   Cofan.IsColimit.desc hs (telescopeRetractionApp N hN)
 
+/-- The retraction restricted to the summand `Xₙ`. -/
 @[reassoc (attr := simp)]
 lemma inj_telescopeRetraction (n : ℕ) :
     s.inj n ≫ telescopeRetraction hs N hN = telescopeRetractionApp N hN n :=
   Cofan.IsColimit.fac hs _ n
 
+/-- The retraction is a left inverse of `𝟙 - shift`. -/
 lemma telescope_f_r : (𝟙 _ - telescopeShift hs) ≫ telescopeRetraction hs N hN = 𝟙 _ := by
   refine Cofan.IsColimit.hom_ext hs _ _ fun n ↦ ?_
   simp only [Preadditive.comp_sub, comp_id, Preadditive.sub_comp, id_comp,
@@ -194,6 +207,8 @@ lemma telescope_f_r : (𝟙 _ - telescopeShift hs) ≫ telescopeRetraction hs N 
     rw [Finset.sum_Ico_succ_top h, ι_telescopeInv_assoc N hN h]
     abel
 
+/-- The retraction of `𝟙 - shift` and the section `L ≅ X_N ⟶ ∐ₙ Xₙ` of the projection split the
+telescope. -/
 lemma telescope_id :
     telescopeRetraction hs N hN ≫ (𝟙 _ - telescopeShift hs) +
       telescopeDesc hs c ≫ telescopeInv N hN N ≫ s.inj N = 𝟙 _ := by

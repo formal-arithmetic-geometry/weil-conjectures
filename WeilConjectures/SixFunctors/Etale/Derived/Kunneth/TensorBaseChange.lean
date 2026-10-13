@@ -163,6 +163,7 @@ noncomputable def tensorBaseChangeCounit :
     (Functor.leftUnitor L((e)^*[A])).hom
 
 omit [UpperStarPreservesFlat A] in
+/-- The components of `AlgebraicGeometry.Etale.tensorBaseChangeCounit`. -/
 @[simp]
 lemma tensorBaseChangeCounit_app (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
     (tensorBaseChangeCounit A h e f' g w).app F = tensorBaseChangeCounitApp A h e f' g w F := by
@@ -196,6 +197,8 @@ noncomputable def tensorBaseChangeMapRight (M : DerivedCategory (Sheaf X'.smallE
   naturality F F' ψ := by
     simpa using tensorBaseChangeMap_naturality A h e f' g w (𝟙 M) ψ
 
+/-- The base change map, as a natural transformation in `M`, is the composite of the unit of
+`Lh^* ⊣ Rh_*`, the tensor comparison of `Lh^*` and `Rh_*` of the counit morphism. -/
 lemma tensorBaseChangeMapLeft_eq (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
     tensorBaseChangeMapLeft A h e f' g w F =
       (Functor.rightUnitor ((-⊗ᴸ-(X')[A]).flip.obj (L((f')^*[A]).obj (R((g)_*[A]).obj F)))).inv ≫
@@ -227,6 +230,8 @@ instance commShift_tensorBaseChangeMapLeft
   rw [tensorBaseChangeMapLeft_eq]
   infer_instance
 
+/-- The base change map, as a natural transformation in `F`, is the composite of the unit of
+`Lh^* ⊣ Rh_*`, the tensor comparison of `Lh^*` and `Rh_*` of the counit morphism. -/
 lemma tensorBaseChangeMapRight_eq (M : DerivedCategory (Sheaf X'.smallEtaleTopology A)) :
     tensorBaseChangeMapRight A h e f' g w M =
       (Functor.rightUnitor (R((g)_*[A]) ⋙ L((f')^*[A]) ⋙ (-⊗ᴸ-(X')[A]).obj M)).inv ≫

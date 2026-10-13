@@ -443,8 +443,7 @@ theorem isIso_tensorBaseChangeMap [Finite Λ] {K : Type u} [Field K]
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
-      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
-    by
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) := by
   have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
   -- the schemes `X'`, `Y`, `T` and `S'` are of finite type over `K`, hence locally Noetherian
   have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback sq₁ ‹LocallyOfFiniteType a›
