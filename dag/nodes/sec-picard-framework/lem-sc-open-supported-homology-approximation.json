@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-open-supported-homology-approximation",
+ "kind": "statement",
+ "title": "Open supported homology approximation",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space (a topological space with a sheaf of commutative rings), $U\\subseteq X$ an open subset, and $S$ a sheaf of $\\mathcal O_X$-modules. Let $K\\in D(\\mathcal O_X)$ be an object of the derived category [def-weil-abstract-derived-category], and let $n\\in\\mathbf Z$. Suppose $S_x=0$ for every $x\\notin U$, where stalks are those of [def-pc-module-stalk-functor], and suppose $(H^m(K))_x=0$ for all $m\\ne n$ and $x\\in U$. Then there are $L\\in D(\\mathcal O_X)$ and $b:L\\to K$ such that $H^m(L)=0$ for all $m\\ne n$ and every module sheaf morphism $a:S\\to H^n(K)$ factors as $H^n(b)\\circ c$, for some $c:S\\to H^n(L)$. No isomorphism $L\\cong K$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BS and 08BT"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Compose exact restriction R and exact extension by zero J to obtain the exact additive endofunctor F = R followed by J on modules on X. Choose a complex P representing K. Set L = Q(F(P)) and apply Q to the chain map with components the sheaf counit epsilon(P^m), then compose with Q(P) -> K to define b. Exactness identifies H^m(L) with F(H^m(K)). The induced homology map of b is the sheaf counit, by naturality on cycles and their homology quotients. No new derived-category instance on the open is needed.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk formula for the open-extension counit identifies stalks on U and gives zero stalks off U. Hence hlocal forces F(H^m(K)) to vanish for m different from n, and hsource makes epsilon(S) invertible. Define c as epsilon(S) inverse, F(a), and the inverse homology comparison. Naturality of epsilon gives c followed by H^n(b) equal to a.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-sc-open-extension-counit-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sc-open-extension-counit-stalk"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "W2",
+  "based_on": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 08BS and 08BT"
+  },
+  "note": "Local extension-by-zero approximation; deliberately does not assert a global presentation of K. Agent expansion of the cited exact adjunction and the existing item proof plan. Blueprint search for extension by zero found no matching O_X-module approximation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory homology exact functor",
+   "results": "Mathlib provides exact derived functors and single-complex t-structure, but no support-sensitive approximation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact extension by zero of a restriction provides a concentrated derived approximation and factors maps from supported sheaves on homology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object in the derived category with homology only in one degree is isomorphic to its homology placed in that degree",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE supplies the single-degree step, but not an open-supported approximation.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "rank-support reconstruction step 2: exact restriction and extension-by-zero counit",
+   "via": [
+    "lem-sc-closed-immersion-rank-strata-scalar-homology-lift",
+    "lem-sc-closed-immersion-rank-strata-scalar-formality",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenSupportedHomologyApproximation",
+  "file": "lean/Sheaf/Algebra/Homology/OpenSupportedHomologyApproximation.lean",
+  "declaration": "AlgebraicGeometry.open_supported_homology_approximation",
+  "statement": "theorem open_supported_homology_approximation (X : RingedSpace.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]\n    (U : Opens X) (S : SheafOfModules.{u} (moduleRings X))\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (n : ℤ)\n    (hsource : ∀ x : X, x ∉ U → IsZero ((RingedSpace.moduleStalkFunctor X x).obj S))\n    (hlocal : ∀ m : ℤ, m ≠ n → ∀ x : X, x ∈ U →\n      IsZero ((RingedSpace.moduleStalkFunctor X x).obj\n        ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) m).obj K))) :\n    ∃ (L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (b : L ⟶ K),\n      (∀ m : ℤ, m ≠ n → IsZero\n        ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) m).obj L)) ∧\n      ∀ a : S ⟶ (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X)) n).obj K,\n        ∃ c : S ⟶ (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X)) n).obj L,\n          c ≫ (DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X)) n).map b = a",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T031557-L-3576749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T031557-L-3576749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

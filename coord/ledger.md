@@ -10896,3 +10896,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/V1/Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison (stage 3; reviewer PASS; first push; landing 20261013T031555-L-3576083 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ProperPerfectTransportCompact (stage 3; reviewer PASS; first push; landing 20261013T031555-L-3576244 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/V4/Sheaf.AlgebraicGeometry.KoszulCechComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261013T031556-L-3576476 (interface); batch 20261013T031526; modules 3; new nodes 2)
+- 03:15 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift (stage 3; reviewer PASS; first push; landing 20261013T031557-L-3576749 (interface); batch 20261013T031526; modules 2; new nodes 1)

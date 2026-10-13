@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.OpenSupportedHomologyApproximation
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Lifting scalar maps from one closed rank support
 
@@ -24,6 +25,57 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject
 
 namespace AlgebraicGeometry
+
+private theorem single_lift_of_concentrated
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory.{w} C]
+    (n : ℤ) (S : C) (L : DerivedCategory C)
+    (hL : ∀ m : ℤ, m ≠ n → IsZero ((DerivedCategory.homologyFunctor C m).obj L))
+    (a : S ⟶ (DerivedCategory.homologyFunctor C n).obj L) :
+    ∃ f : (DerivedCategory.singleFunctor C n).obj S ⟶ L,
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app S ≫
+        (DerivedCategory.homologyFunctor C n).map f = a := by
+  have : L.IsGE n := (DerivedCategory.isGE_iff L n).mpr
+    (fun m hm ↦ hL m (ne_of_lt hm))
+  have : L.IsLE n := (DerivedCategory.isLE_iff L n).mpr
+    (fun m hm ↦ hL m (ne_of_gt hm))
+  obtain ⟨B, ⟨e⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE L n
+  let H := DerivedCategory.homologyFunctor C n
+  let F := DerivedCategory.singleFunctor C n
+  let η := DerivedCategory.singleFunctorCompHomologyFunctorIso C n
+  let d : S ⟶ B := a ≫ H.map e.hom ≫ η.hom.app B
+  refine ⟨F.map d ≫ e.inv, ?_⟩
+  rw [Functor.map_comp, ← Category.assoc]
+  have hd := η.inv.naturality d
+  simp only [Functor.comp_map, Functor.id_map] at hd
+  change (η.inv.app S ≫ H.map (F.map d)) ≫ H.map e.inv = a
+  rw [← hd]
+  simp only [d, Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [← H.map_comp, e.hom_inv_id, H.map_id, Category.comp_id]
+
+private theorem rank_term_stalk_zero
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
+    (r : LocallyConstant Z ℕ) (q : ℕ)
+    (E : (Scheme.Modules.exteriorRankOpen r q).toScheme.Modules)
+    (y : Y) (hy : y ∉ i.base '' {z | r z = q}) :
+    IsZero ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
+      ((Scheme.Modules.pushforward i).obj
+        ((Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r q).ι).obj E))) := by
+  let j := (Scheme.Modules.exteriorRankOpen r q).ι
+  have hj : Topology.IsClosedEmbedding j.base :=
+    Topology.IsClosedEmbedding.subtypeVal (r.isLocallyConstant.isClosed_fiber q)
+  have hij : Topology.IsClosedEmbedding (j ≫ i).base := i.isClosedEmbedding.comp hj
+  have hy' : y ∉ Set.range (j ≫ i).base := by
+    rintro ⟨z, hz⟩
+    exact hy ⟨z.val, z.property, hz⟩
+  have hs := (closedImmersion_pushforward_stalks (j ≫ i) hij E).1 y hy'
+  have hz : IsZero ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
+      ((Scheme.Modules.pushforward (j ≫ i)).obj E)) := by
+    have : Subsingleton ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
+        ((Scheme.Modules.pushforward (j ≫ i)).obj E)) := hs
+    exact ModuleCat.isZero_of_subsingleton _
+  exact hz.of_iso ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapIso
+    ((Scheme.Modules.pushforwardComp j i).app E))
+
 
 /-- A scalar map from one closed rank support lifts to the derived object when
 its other cohomology degrees are supported on the other rank strata.
@@ -74,6 +126,56 @@ theorem closedImmersion_rankStrata_scalar_homology_lift
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).inv.app
           ((Scheme.Modules.pushforward i).obj (T n)) ≫
         (DerivedCategory.homologyFunctor
-          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).map f = a := by sorry
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).map f = a := by
+  by_cases hn : 0 ≤ n
+  · let V : TopologicalSpace.Opens Y.toRingedSpace :=
+      ⟨(i.base '' {z | r z ≠ n.toNat})ᶜ,
+        (i.isClosedEmbedding.isClosedMap _
+          (r.isLocallyConstant.isOpen_fiber n.toNat).isClosed_compl).isOpen_compl⟩
+    have hsource : ∀ y : Y, y ∉ V →
+        IsZero ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
+          ((Scheme.Modules.pushforward i).obj (T n))) := by
+      intro y hy
+      rw [hT n, if_pos hn]
+      apply rank_term_stalk_zero i r n.toNat (E n.toNat) y
+      rintro ⟨z, hz, rfl⟩
+      apply hy
+      change i.base z ∉ i.base '' {z | r z ≠ n.toNat}
+      rintro ⟨z', hz', heq⟩
+      exact hz' ((i.isClosedEmbedding.injective heq) ▸ hz)
+    have hlocal : ∀ m : ℤ, m ≠ n → ∀ y : Y, y ∈ V →
+        IsZero ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) m).obj K)) := by
+      intro m hm y hy
+      obtain ⟨e⟩ := hother m hm
+      apply IsZero.of_iso _ ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapIso e)
+      by_cases hm0 : 0 ≤ m
+      · rw [hT m, if_pos hm0]
+        apply rank_term_stalk_zero i r m.toNat (E m.toNat) y
+        rintro ⟨z, hz, heq⟩
+        apply hy
+        refine ⟨z, ?_, heq⟩
+        change r z ≠ n.toNat
+        intro hz'
+        apply hm
+        have hnat : m.toNat = n.toNat := hz.symm.trans hz'
+        omega
+      · rw [hT m, if_neg hm0]
+        exact (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map_isZero
+          ((Scheme.Modules.pushforward i).map_isZero (isZero_zero _))
+    obtain ⟨L, b, hL, hfactor⟩ := open_supported_homology_approximation
+      Y.toRingedSpace V ((Scheme.Modules.pushforward i).obj (T n)) K n hsource hlocal
+    obtain ⟨c, hc⟩ := hfactor a
+    obtain ⟨g, hg⟩ := single_lift_of_concentrated n _ L hL c
+    refine ⟨g ≫ b, ?_⟩
+    rw [Functor.map_comp, ← Category.assoc, hg, hc]
+  · have hzero : IsZero ((Scheme.Modules.pushforward i).obj (T n)) := by
+      rw [hT n, if_neg hn]
+      exact (Scheme.Modules.pushforward i).map_isZero (isZero_zero _)
+    refine ⟨0, ?_⟩
+    rw [Functor.map_zero, comp_zero]
+    exact hzero.eq_of_src _ _
+
 
 end AlgebraicGeometry
