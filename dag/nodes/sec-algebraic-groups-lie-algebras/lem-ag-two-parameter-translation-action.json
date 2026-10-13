@@ -13,31 +13,50 @@
  ],
  "proof": [
   {
-   "text": "Base change right translation by v to the double dual-number thickening. Its reduction is the identity and its epsilon coefficient on constants is D_v by construction. Being over the parameter scheme it fixes epsilon and delta, hence on four components it is the explicit epsilonSectionAction. Similarly translation by w is deltaSectionAction. The inverse operators use -D_v and -D_w, since epsilon squared and delta squared are zero.",
+   "text": "Construct the parameter-preserving lift of right translation to G[epsilon][delta] by applying Scheme.isPullback_dualNumbersProj twice. Its composite with the two projections is the original right translation, and its composite with G.hom[epsilon][delta] is that structure morphism. The two pullback universal properties also give extensionality for such endomorphisms. These are the proved private liftedTwoParameterTranslation, projection, parameter, and double_hom_ext helpers.",
    "uses": [
-    "def-sc-group-scheme",
-    "def-sc-dual-numbers"
+    "lem-ag-dual-numbers-projection-pullback",
+    "def-sc-group-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "Associativity of the group law identifies right translation by v_epsilon w_delta v_epsilon^{-1} w_delta^{-1} with successive right translations by the four factors. Contravariance orders their section operators with epsilonSectionAction D_v outermost. All underlying maps are identity since v and w reduce to the identity. Apply the composite to the constant section a on any open U. This proves the full double-dual-number section equality; no mixed coefficient is extracted.",
+   "text": "Let p be the universal point and k the parameter morphism. A lifted translation F_z satisfies F_z composed with p = p*(k composed with z), and F_z composed with k = k. Precomposition preserves multiplication and multiplication is associative. Double pullback extensionality therefore gives F_z composed with F_t = F_(z*t). For epsilon and delta points, factoring their underlying translations through the corresponding projection to G[epsilon] identifies their pullback on constant functions with the one-parameter right-translation pullback. Reduction of the latter is the identity and its second coefficient is invariantCoefficient by definition.",
    "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers",
+    "lem-ag-dual-numbers-projection-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The structure-map equation fixes epsilon and delta on global sections: the double dual-number extension of G.hom sends each parameter to itself. Restriction naturality proves this on each open. Write an arbitrary double dual number as the sum of its four constant coefficients times 1, epsilon, delta, and epsilon*delta. The ring-homomorphism laws, the constant-function formulas, and the fixed-parameter equations give epsilonSectionAction for an epsilon lift and deltaSectionAction for a delta lift, on every section, not only constants. This is proved by four_coefficients, epsilon_formula, delta_formula, and their geometric applications.",
+   "uses": [
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Additivity and the zero coefficient of the identity give D_(v inverse) = -D_v by applying invariantCoefficient_mul to v*v inverse. Precomposition with either parameter projection preserves inverses. Apply the composition law successively to the four lifted factors. Scheme.Hom.appLE_comp_appLE gives contravariant composition on sections, with the epsilon action of v outermost. The double projection sends a to inl(inl(a)); its composite with the lifted word is the explicit twoParameterRightTranslation. Compose the four single-factor formulas and substitute the two inverse-coefficient identities. Proof irrelevance makes the equality independent of the supplied open-inclusion proof e.",
+   "uses": [
+    "lem-ag-invariant-coefficient-add",
     "def-sc-group-scheme",
     "def-sc-dual-numbers"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-ag-dual-numbers-projection-pullback",
   "def-sc-group-scheme",
-  "def-sc-dual-numbers"
+  "def-sc-dual-numbers",
+  "lem-ag-invariant-coefficient-add"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E4 worker",
+  "agent": "M4 worker",
   "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
-  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+  "place": "Invariant-extension and mixed-coefficient steps, implemented using the existing dual-number pullback and coefficient-addition theorems; all local geometric and ring-theoretic glue is proved."
  },
  "mathlib_searches": [
   {
@@ -133,11 +152,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
+  "reviewer": "X-d090b",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T095945-L-2456151",
+  "landing": "20261013T123547-L-3711979",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, Challenge theorem, change record, report, and direct importer compiled and matched against the repository version"
  }
 }
