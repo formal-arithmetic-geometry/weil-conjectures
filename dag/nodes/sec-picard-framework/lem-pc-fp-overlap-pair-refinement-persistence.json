@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-fp-overlap-pair-refinement-persistence",
+ "kind": "statement",
+ "title": "Preservation of a pair square under stage refinement",
+ "statement": "Let X,Y,Yprime,Z be schemes [def-pc-scheme], U an open cover of X, and q:Y -> X, qprime:Yprime -> X, r:Yprime -> Y with r followed by q equal to qprime. Let p:Z -> Y, pprime:Z -> Yprime, t:Z -> X satisfy p followed by q=t, pprime followed by qprime=t, and pprime followed by r=p. Fix modules N_a on U_a, a module M on Z, and isomorphisms from t-pullbacks of N_a to the restrictions of M [def-pc-base-change]. If a pair map on the q-pulled cover commutes with the transition of M on the p-limit overlap, using the canonical iterated comparisons [def-pc-local-overlap-transitions, def-pc-overlap-pair-canonical-comparisons], then there is a pair map on the qprime-pulled cover commuting on the pprime-limit overlap, using the corresponding canonical comparisons. No finite presentation, quasi-coherence, affineness or directed limit assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR, first proof, successive restrictions; Mathlib Pseudofunctor.DescentData pullFunctor composition comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Map each later chart to the earlier one by overlapRefinementHom U q qprime r. Pull the given map back along the induced universal overlap map and conjugate by pullback composition and equality-of-arrow isomorphisms to put its source and target into the prescribed later chart modules. The equation pprime followed by r=p induces a map of the later limit overlaps to the earlier limit overlaps. Pull back the given commuting square along it. Naturality of the pseudofunctor composition comparisons and the pentagon identify the pulled component isomorphisms with the canonical iterated comparisons for qprime and pprime. Composition for pullHom identifies the middle map with pullback of the constructed later map. Naturality of the restriction descent datum of M gives exactly the later commuting square. Universal pullback maps and isomorphisms also handle empty charts and overlaps.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR, first proof, successive restrictions; Mathlib Pseudofunctor.DescentData pullFunctor composition comparisons; explicit expansion of the original pair-map plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of a morphism of finitely presented quasi coherent sheaves to a finite stage, and compatibility of iterated pullback squares under refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between finitely presented quasicoherent sheaves on a quasi compact overlap descends to one stage of an inverse limit of schemes",
+   "results": "Hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+   "date": "2026-10-13",
+   "verdict": "No matching one-stage pair descent or refinement-square theorem; inspected the available descent/pullHom API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.pullFunctor",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.pullFunctor, CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj, CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_inverse, CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso",
+   "date": "2026-10-13",
+   "verdict": "No matching one-stage pair descent or refinement-square theorem; inspected the available descent/pullHom API."
+  },
+  {
+   "tool": "grep",
+   "query": "pullHom.*comp|pullFunctor.*(comp|iso)",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
+   "date": "2026-10-13",
+   "verdict": "No matching one-stage pair descent or refinement-square theorem; inspected the available descent/pullHom API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR, first proof, successive restrictions; Mathlib Pseudofunctor.DescentData pullFunctor composition comparisons",
+   "via": [
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapPairRefinementPersistence.lean",
+  "declaration": "AlgebraicGeometry.overlap_pair_map_refinement_persistence",
+  "statement": "theorem overlap_pair_map_refinement_persistence\n    {X Y Y' Z : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (q' : Y' ⟶ X) (r : Y' ⟶ Y) (hr : r ≫ q = q')\n    (p : Z ⟶ Y) (p' : Z ⟶ Y') (t : Z ⟶ X)\n    (h : p ≫ q = t) (h' : p' ≫ q' = t) (hp : p' ≫ r = p)\n    (N : (a : U.I₀) → (U.X a).Modules) (M : Z.Modules)\n    (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f a)).obj M)\n    (a b : U.I₀) :\n    let V := U.pullback₁ q\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    let W := V.pullback₁ p\n    let D := (modulesPseudofunctor.toDescentData W.f).obj M\n    let ε := overlapIteratedComparison U q p t h N M e\n    (∃ φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b),\n      overlapPairSquare V A p D ε a b φ) →\n    let V' := U.pullback₁ q'\n    let A' := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q' d)).obj (N d)\n    let W' := V'.pullback₁ p'\n    let D' := (modulesPseudofunctor.toDescentData W'.f).obj M\n    let ε' := overlapIteratedComparison U q' p' t h' N M e\n    ∃ φ' : (Scheme.Modules.pullback (pullback.fst (V'.f a) (V'.f b))).obj (A' a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).obj (A' b),\n      overlapPairSquare V' A' p' D' ε' a b φ'",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-267a0",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T163539-L-1621406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-267a0",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T163539-L-1621406",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the node statements and compile, including both direct downstream importers against the relocated interfaces."
+ }
+}

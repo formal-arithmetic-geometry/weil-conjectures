@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-fp-overlap-pair-single-stage",
+ "kind": "statement",
+ "title": "One-stage lifting of a fixed pair map",
+ "statement": "Let I be a directed preorder, R a diagram of Noetherian rings, c an affine limit cone of Spec(R), and f: Xi -> Spec(R_i) quasi-compact, quasi-separated and locally finitely presented [def-pc-scheme, def-pc-morphism-conventions, def-pc-base-change]. Fix j >= i and a finite affine open cover U of the base change Xj. On each chart take a finitely presented quasi-coherent module N_d [pqf-def-coherent]. Take a module M on the limit base change and isomorphisms e_d from the limit pullbacks of N_d to the restrictions of M. For fixed indices a,b, there exists k >= j and a map on the overlap of the pullbacks of U_a and U_b to Xk whose limit pullback commutes with the transition of M under the canonical iterated chart comparisons [def-pc-local-overlap-transitions, def-pc-overlap-pair-canonical-comparisons]. This asserts the square only at k, with no persistence conclusion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR (2), first proof, lifting and gluing for one pair; Tag 05N7 (2), (3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Quasi-separatedness makes the intersection of the two affine charts quasi-compact and quasi-separated. Choose finite affine covers of this overlap and of its refinement intersections. Conjugate the restrictions of the transition of M by e_a and e_b. Their coordinate rings at the limit are the directed colimits of the stage rings; quasi-coherent pullback is scalar extension. The map clause of affine finite-presentation descent lifts each map; its equality clause makes these lifts agree on all refinement intersections at a common stage. Glue by sheaf locality. Transport along the canonical chart maps and pullback-composition comparisons to obtain the stated square at that single stage. An empty overlap has its unique map. Use the partial-order quotient of the nonempty tail above j for a preorder.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons",
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons",
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR (2), first proof, lifting and gluing for one pair; Tag 05N7 (2), (3); explicit expansion of the original pair-map plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of a morphism of finitely presented quasi coherent sheaves to a finite stage, and compatibility of iterated pullback squares under refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between finitely presented quasicoherent sheaves on a quasi compact overlap descends to one stage of an inverse limit of schemes",
+   "results": "Hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+   "date": "2026-10-13",
+   "verdict": "No matching one-stage pair descent or refinement-square theorem; inspected the available descent/pullHom API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.pullFunctor",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.pullFunctor, CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj, CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_inverse, CategoryTheory.Pseudofunctor.DescentData.pullFunctorCompIso, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso",
+   "date": "2026-10-13",
+   "verdict": "No matching one-stage pair descent or refinement-square theorem; inspected the available descent/pullHom API."
+  },
+  {
+   "tool": "grep",
+   "query": "pullHom.*comp|pullFunctor.*(comp|iso)",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
+   "date": "2026-10-13",
+   "verdict": "No matching one-stage pair descent or refinement-square theorem; inspected the available descent/pullHom API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR (2), first proof, lifting and gluing for one pair; Tag 05N7 (2), (3)",
+   "via": [
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairSingleStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapPairSingleStage.lean",
+  "declaration": "AlgebraicGeometry.exists_overlap_pair_map_at_stage",
+  "statement": "theorem exists_overlap_pair_map_at_stage\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [Finite U.I₀] [∀ a, IsAffine (U.X a)]\n    (N : (a : U.I₀) → (U.X a).Modules)\n    (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent)\n    (M : (pullback f (c.π.app (op i))).Modules)\n    (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom\n      (baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) a)).obj (N a) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ (baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))).f a)).obj M)\n    (a b : U.I₀) :\n    ∃ (k : I) (hjk : j ≤ k),\n      let q := overlapStageMap R f hij hjk\n      let V := U.pullback₁ q\n      let p := overlapLimitMap R c f (hij.trans hjk)\n      let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n      let W := V.pullback₁ p\n      let D := (modulesPseudofunctor.toDescentData W.f).obj M\n      let ε := overlapIteratedComparison U q p (overlapLimitMap R c f hij)\n        (by\n          dsimp only [p, q, overlapLimitMap, overlapStageMap]\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op) N M e\n      ∃ φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶\n          (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b),\n        overlapPairSquare V A p D ε a b φ",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-267a0",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T163539-L-1621406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-267a0",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T163539-L-1621406",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the node statements and compile, including both direct downstream importers against the relocated interfaces."
+ }
+}

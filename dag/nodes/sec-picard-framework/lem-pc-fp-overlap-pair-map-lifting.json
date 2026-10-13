@@ -16,28 +16,32 @@
  ],
  "proof": [
   {
-   "text": "The pairwise overlap of the two affine charts is quasi-compact and quasi-separated: the ambient stage scheme is quasi-separated, and open subschemes inherit quasi-separatedness. Choose a finite affine cover of this overlap and finite affine covers of the pairwise refinement intersections. Conjugate the limit restriction transition of M by e_a and e_b. Identify the limit coordinate rings with the directed colimits of the stage coordinate rings and quasi-coherent pullback with scalar extension. The map clause of affine finite-presentation descent lifts the comparison on each affine chart. The equality clause, applied on the finitely many refinement intersections, makes those maps agree at one common later stage. Glue them to the single map on the pairwise overlap.",
+   "text": "Lift the fixed pair at one stage k using exists_overlap_pair_map_at_stage. This is precisely the geometric lifting-and-gluing step, without persistence.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-overlap-pair-single-stage"
    ],
    "elementary": false
   },
   {
-   "text": "After that stage, pull the glued map back to any subsequent stage. Successive pullback isomorphisms identify its limit pullback with the original conjugated comparison. The universal map from each iterated limit chart to the original limit chart, and pullback of the specified e_d, give exactly the canonical epsilon_d in the statement. Thus the square on the universal limit overlap is preserved at every later stage. For an empty overlap use the unique module map. A directed preorder is reduced to the partial-order quotient of its nonempty tail above j.",
+   "text": "For any later l, use overlapStageMap R f (hij.trans hjk) hkl as the refinement map. overlapStageMap_comp and overlapLimitMap_stage_comp verify its three commutative triangles. Apply overlap_pair_map_refinement_persistence to the square at k; the comparisons in its conclusion are definitionally the prescribed comparisons at l.",
    "uses": [
-    "def-pc-local-overlap-transitions"
+    "lem-pc-fp-overlap-pair-refinement-persistence",
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine",
-  "def-pc-local-overlap-transitions"
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons",
+  "lem-pc-fp-overlap-pair-refinement-persistence",
+  "lem-pc-fp-overlap-pair-single-stage"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Expansion of Tag 01ZR first proof, restricted to a single pairwise overlap; Tag 05N7 (2) and (3), read at https://stacks.math.columbia.edu/tag/01ZR and https://stacks.math.columbia.edu/tag/05N7"
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "First proof, fixed-pair lifting followed by successive restriction; two explicit intermediate steps"
  },
  "mathlib_searches": [
   {
@@ -103,12 +107,6 @@
   "by": "G4",
   "date": "2026-10-13",
   "declarations": [
-   "CategoryTheory.Pseudofunctor.overlapPairBaseChangeHom",
-   "CategoryTheory.Pseudofunctor.overlapPairBaseChangeSquare",
-   "AlgebraicGeometry.overlapLimitMap_stage_comp",
-   "AlgebraicGeometry.overlapIteratedChartHom",
-   "AlgebraicGeometry.overlapIteratedComparison",
-   "AlgebraicGeometry.overlapPairSquare",
    "AlgebraicGeometry.exists_finitePresentation_overlap_pair_map_lifting"
   ]
  },
@@ -125,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G4",
+  "reviewer": "X-267a0",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T142857-L-498116",
+  "landing": "20261013T163539-L-1621406",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the node statements and compile, including both direct downstream importers against the relocated interfaces."
  }
 }
