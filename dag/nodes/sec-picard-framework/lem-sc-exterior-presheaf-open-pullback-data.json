@@ -12,7 +12,19 @@
  ],
  "proof": [
   {
-   "text": "Construct the component maps on pure wedges using the open immersion section isomorphisms and transport of scalars. The exterior-power universal property gives linear maps and inverse maps; checking the defining formulas on pure wedges gives the naturality equation.",
+   "text": "Define restriction of arbitrary module presheaves to image opens, with scalar transport through the inverse of the open immersion section isomorphisms. Construct its adjunction to presheaf pushforward explicitly: the unit is restriction along image(preimage(V)) <= V and the counit uses preimage(image(V)) = V. Check linearity using Scheme.Hom.app_appIso_inv and Scheme.Hom.appIso_inv_app_presheafMap, and naturality and both triangle identities using presheaf identity and composition laws. Adjunction.leftAdjointUniq identifies this explicit restriction with PresheafOfModules.pullback.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For any commutative-ring isomorphism R ≅ S and R-module A, construct mutually inverse maps between the S-scalar transport of the exterior power over R and the exterior power over S of the transported module. Construct each alternating map on tuples and extend it by exteriorPower.alternatingMapLinearEquiv. The ring-isomorphism identities give the requisite scalar laws. Pure-wedge formulas and exteriorPower.ιMulti_span show that the two composites are identities; use span induction to retain pure-wedge extensionality after scalar transport.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply these component isomorphisms to the section modules of M. Test naturality on pure wedges: exteriorSheafRestriction_existsUnique sends each tuple to the wedge of its restricted sections, and both scalar-transport maps preserve that tuple formula. Thus naturality reduces to the defining restriction formula of M.restrict. Assemble a presheaf isomorphism using PresheafOfModules.isoMk, compose with the adjunction comparison, and evaluate it at each open to obtain the requested family and naturality equation.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
@@ -23,9 +35,10 @@
   "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
-  "by": "W3",
+  "by": "M2",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph"
+  "place": "Proof of (*), determinant paragraph",
+  "note": "The existing component-map route is implemented completely in Lean. The presheaf adjunction follows the formulas of Mathlib AlgebraicGeometry.Scheme.Modules.restrictAdjunction; scalar transport uses the exterior-power universal property and pure-wedge span. All local helpers are proved."
  },
  "mathlib_searches": [
   {
@@ -104,13 +117,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T231643-L-1964527",
-  "kind": "interface",
+  "landing": "20261013T024039-L-3336055",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
