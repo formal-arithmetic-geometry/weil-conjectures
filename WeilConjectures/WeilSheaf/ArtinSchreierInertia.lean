@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Germ
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FactorGerm
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.StalkFunctor
 
@@ -202,13 +202,13 @@ lemma affineLine.Γ_map_artinSchreierEval_splitSection (ψ : AddChar k₀ (Padic
 transformation `σ̄_c` of `ĀS`, which is the pullback of global sections of `ĀS^* ĀS_* ℚ̄_ℓ`
 along `σ̄_c`, multiplies the split section by `ψ(-c)`. -/
 lemma affineLine.germ_artinSchreierSplitSection (ψ : AddChar k₀ (PadicAlgCl l)) (c : k₀) :
-    (ProEtale.germ (WeilCoefficients.{u} l)
+    (ProEtale.factorGerm (WeilCoefficients.{u} l)
         (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
         (affineLine.artinSchreierSheaf k₀ l)).hom (affineLine.artinSchreierSplitSection l ψ) =
       ULift.up (ψ (-c)) • affineLine.artinSchreierSplitSection l ψ := by
   set g := (affineLine.geometricTranslationIso k₀ c).hom
   have hg := affineLine.geometricTranslation_comp_artinSchreierMap k₀ c
-  have key (d : k₀) : ProEtale.germ (WeilCoefficients.{u} l) hg
+  have key (d : k₀) : ProEtale.factorGerm (WeilCoefficients.{u} l) hg
       (affineLine.artinSchreierSheaf k₀ l) ≫
         (Sheaf.Γ _ _).map (affineLine.artinSchreierEval l (c + d)) =
       (Sheaf.Γ _ _).map (affineLine.artinSchreierEval l d) ≫
@@ -217,7 +217,7 @@ lemma affineLine.germ_artinSchreierSplitSection (ψ : AddChar k₀ (PadicAlgCl l
     have n := (ProEtale.globalSectionsToUpperStar (WeilCoefficients.{u} l) g).naturality
       (affineLine.artinSchreierEval l d)
     simp only [Functor.comp_map] at n
-    rw [ProEtale.germ, Category.assoc, ← Functor.map_comp,
+    rw [ProEtale.factorGerm, Category.assoc, ← Functor.map_comp,
       affineLine.upperStarFactor_inv_app_comp_artinSchreierEval, Functor.map_comp,
       reassoc_of% n]
   refine affineLine.eq_of_globalSections_artinSchreierEval fun d' ↦ ?_

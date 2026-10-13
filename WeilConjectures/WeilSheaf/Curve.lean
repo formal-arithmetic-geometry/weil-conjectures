@@ -9,7 +9,12 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
+public import WeilConjectures.WeilSheaf.CurveTopCohomology
+public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Finiteness
+public import WeilConjectures.WeilSheaf.LFunction
+public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
 # Compactly supported cohomology of a lisse Weil sheaf on an affine curve
@@ -21,7 +26,9 @@ connected curve `U`, which is not proper.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero`
+- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero`: `H_c⁰ = 0`.
+- `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`: the Euler product of the
+  `L`-function is `det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²)`.
 -/
 
 @[expose] public section
@@ -124,6 +131,61 @@ theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]
   have : IsNoetherian (U ↘ Spec (CommRingCat.of k₀)).geometricFiber := ⟨⟩
   obtain ⟨x, z, hz, hxz⟩ := exists_specializes_notMem_range_of_isProper i q 0
   exact ProEtale.IsAdicLisseSheaf.isZero_globalSections_adicOpenImmersionLowerShriek i hF hz hxz
+
+/-- The compactly supported cohomology of a lisse Weil sheaf on a smooth geometrically
+connected affine curve vanishes outside degrees `1` and `2`. -/
+theorem subsingleton_compactlySupportedCohomology_of_notMem [IsAffine U]
+    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
+    (hF : F.IsLisse) {i : ℤ} (hi : i ∉ ({1, 2} : Finset ℤ)) :
+    Subsingleton (F.compactlySupportedCohomology i).carrier := by
+  rw [Finset.mem_insert, Finset.mem_singleton] at hi
+  obtain rfl | hi' : i = 0 ∨ i < 0 ∨ 2 < i := by omega
+  · exact subsingleton_compactlySupportedCohomology_zero F hF
+  · exact subsingleton_compactlySupportedCohomology_of_isAffine F hi'
+
+open PowerSeries in
+/-- Blueprint `cor-rp-euler-product`: Euler product of the `L`-function of a lisse sheaf.
+
+Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
+Then, as power series in `T`,
+
+`∏_{x ∈ |U₀|} det (1 - F_x T ^ {e_x} ∣ ℱ_x̄)⁻¹ = det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²)`,
+
+the product over the closed points being locally finite: for every `n`, the coefficient of
+`T ^ n` of the finite product over any finite set `s` of closed points containing those of
+degree at most `n` is the coefficient of `T ^ n` of the right-hand side. This is the
+Euler-product form of the trace formula (`thm-trf-l-function-euler-product`) for `ℱ` placed in
+degree zero, whose compactly supported cohomology is concentrated in degrees `0, 1, 2`, together
+with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`). -/
+theorem coeff_prod_inv_localPolynomial_stalk_eq [IsAffine U]
+    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
+    (hF : F.IsLisse) (n : ℕ) (s : Finset U.finitePoints)
+    (hs : ∀ x : U.finitePoints, (U ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≤ n → x ∈ s) :
+    coeff n (∏ x ∈ s, (((F.stalk x).localPolynomial.comp
+        (Polynomial.X ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) : Polynomial _) :
+          (PadicAlgCl l)⟦X⟧)⁻¹) =
+      coeff n (((F.compactlySupportedCohomology 1).localPolynomial : (PadicAlgCl l)⟦X⟧) *
+        ((F.compactlySupportedCohomology 2).localPolynomial : (PadicAlgCl l)⟦X⟧)⁻¹) := by
+  rw [coeff_prod_inv_localPolynomial_stalk F
+    (fun i hi ↦ subsingleton_compactlySupportedCohomology_of_notMem F hF hi) n s hs,
+    LinearMap.alternatingCharpolyRevProd, Finset.prod_pair (by decide), if_neg (by decide),
+    if_pos (by decide), pow_one, Polynomial.comp_X, Polynomial.comp_X]
+  congr 1
+  simp only [FrobeniusModule.localPolynomial]
+  have h₁ : constantCoeff
+      ((F.compactlySupportedCohomology 1).frobeniusEnd.charpolyRev : (PadicAlgCl l)⟦X⟧) ≠ 0 := by
+    rw [← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe,
+      LinearMap.coeff_zero_charpolyRev]
+    exact one_ne_zero
+  have h₂ : constantCoeff
+      ((F.compactlySupportedCohomology 2).frobeniusEnd.charpolyRev : (PadicAlgCl l)⟦X⟧) ≠ 0 := by
+    rw [← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe,
+      LinearMap.coeff_zero_charpolyRev]
+    exact one_ne_zero
+  rw [PowerSeries.inv_eq_iff_mul_eq_one (by simp), mul_mul_mul_comm,
+    PowerSeries.mul_inv_cancel _ h₁, PowerSeries.inv_mul_cancel _ h₂, one_mul]
 
 end WeilSheaf
 

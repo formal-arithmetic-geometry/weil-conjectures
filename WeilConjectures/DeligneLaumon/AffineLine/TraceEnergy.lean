@@ -16,7 +16,8 @@ public import Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.RingTheory.PowerSeries.PiTopology
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.EulerProduct
@@ -28,7 +29,7 @@ public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
-public import WeilConjectures.WeilSheaf.Semicontinuity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 public import WeilConjectures.PointCountFiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
@@ -826,9 +827,11 @@ theorem exists_boundaryEnergy_le (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDense
   classical
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
     simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
   -- boundary semicontinuity: `j_*M` has weights at most `w` everywhere
   have hJ : D.directImage.HasWeightsAtMost ι w :=
-    hasWeightsAtMost_directImage_of_curve D.j D.sheaf D.lisse h
+    WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse h
   -- the boundary is a finite set of closed points
   have : Nonempty (affineLine k₀) :=
     ⟨(AffineSpace.homOfVector (𝟙 (Spec (CommRingCat.of k₀))) 0).base (IsLocalRing.closedPoint k₀)⟩

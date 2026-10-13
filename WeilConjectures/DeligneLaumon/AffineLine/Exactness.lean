@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
-public import WeilConjectures.WeilSheaf.DirectImageStalk
+public import WeilConjectures.WeilSheaf.DirectImageStalkMap
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.LowerStarTriangulated
 public import WeilConjectures.WeilSheaf.Semicontinuity

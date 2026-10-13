@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 
 /-!

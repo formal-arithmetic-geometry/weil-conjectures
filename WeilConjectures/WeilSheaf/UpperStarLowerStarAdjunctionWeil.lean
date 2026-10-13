@@ -12,16 +12,13 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 /-!
-# The adjunction `φ^* ⊣ φ_*` of Weil sheaves
+# Composition of pullbacks and pushforwards of Weil sheaves
 
-The adjunction `φ^* ⊣ φ_*` of pro-étale Weil sheaves
-(`AlgebraicGeometry.ProEtaleWeilSheaf.upperStarLowerStarAdjunction`) restricts to Weil sheaves.
-Along an open immersion its counit is invertible. Composing adjunctions, the pullback along a
-composite is the composite of the pullbacks.
+The pushforward of Weil sheaves is left exact, and pushforwards compose. Composing adjunctions,
+the pullback along a composite is the composite of the pullbacks.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilSheaf.upperStarLowerStarAdjunction`: `φ^* ⊣ φ_*` on Weil sheaves.
 - `AlgebraicGeometry.WeilSheaf.lowerStarCompIso`: `φ_* ⋙ ψ_* ≅ (φ ≫ ψ)_*`.
 - `AlgebraicGeometry.WeilSheaf.upperStarCompIso`: `(φ ≫ ψ)^* ≅ ψ^* ⋙ φ^*`.
 -/
@@ -122,30 +119,6 @@ noncomputable def lowerStarCompιIso :
 instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     PreservesFiniteLimits (WeilSheaf.lowerStar (k₀ := k₀) (l := l) φ) :=
   preservesFiniteLimits_of_comp_ι _ (ProEtaleWeilSheaf.lowerStar k₀ l φ) (lowerStarCompιIso φ)
-
-/-- **The adjunction `φ^* ⊣ φ_*` of Weil sheaves**, restricted from the adjunction of pro-étale
-Weil sheaves. -/
-noncomputable def upperStarLowerStarAdjunction :
-    WeilSheaf.upperStar (k₀ := k₀) (l := l) φ ⊣ WeilSheaf.lowerStar φ :=
-  (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l φ).restrictFullyFaithful
-    (WeilSheaf.objectProperty k₀ l Y).fullyFaithfulι
-    (WeilSheaf.objectProperty k₀ l X).fullyFaithfulι (upperStarCompιIso φ).symm
-    (lowerStarCompιIso φ).symm
-
-/-- Along an open immersion `j`, the counit `j^* j_* ⟶ 𝟭` of Weil sheaves is an isomorphism: the
-direct image `j_*` is fully faithful, as `j^* j_* ≅ 𝟭`
-(`AlgebraicGeometry.WeilSheaf.lowerStarCompUpperStarIso`). -/
-instance isIso_upperStarLowerStarAdjunction_counit [IsOpenImmersion φ] :
-    IsIso (upperStarLowerStarAdjunction (k₀ := k₀) (l := l) φ).counit := by
-  let h := (upperStarLowerStarAdjunction (k₀ := k₀) (l := l) φ).fullyFaithfulROfCompIsoId
-    (lowerStarCompUpperStarIso φ)
-  have := h.full
-  have := h.faithful
-  infer_instance
-
-instance isIso_upperStarLowerStarAdjunction_counit_app [IsOpenImmersion φ]
-    (F : WeilSheaf k₀ l X) : IsIso ((upperStarLowerStarAdjunction φ).counit.app F) :=
-  inferInstance
 
 end
 

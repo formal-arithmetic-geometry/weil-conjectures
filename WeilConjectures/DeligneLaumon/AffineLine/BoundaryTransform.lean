@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LowerShriekPackage

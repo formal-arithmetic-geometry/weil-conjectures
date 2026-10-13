@@ -13,7 +13,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.LowerStarTriangulated
-public import WeilConjectures.WeilSheaf.DirectImageStalk
+public import WeilConjectures.WeilSheaf.DirectImageStalkMap
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.TraceFunction

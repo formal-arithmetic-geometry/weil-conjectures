@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.PointCountFiber
 public import WeilConjectures.WeilSheaf.FourierTrace
-public import WeilConjectures.WeilSheaf.Semicontinuity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
@@ -186,8 +186,10 @@ theorem hasWeightsAtMost_boundarySheaf {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     (h : D.sheaf.HasWeightsAtMost ι w) : D.boundarySheaf.HasWeightsAtMost ι w := by
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
     simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
   exact HasWeightsAtMost.of_epi (cokernel.π _)
-    (hasWeightsAtMost_directImage_of_curve D.j D.sheaf D.lisse h)
+    (WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse h)
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The values of an additive character of a finite field have absolute value one: they are
