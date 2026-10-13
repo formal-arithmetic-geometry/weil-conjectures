@@ -14,11 +14,11 @@
  },
  "proof_origin": {
   "by": "agent",
-  "group": "V3",
+  "group": "R3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0DJ8, 06Z0 and 06Y6",
-  "note": "Source consulted at the official Stacks tags; separates affine module computation from representative independence."
+  "place": "equation-bc (Tag 0DJ7), before Tag 0DJ8; derived change of rings Tag 06Y6",
+  "note": "Use existing source transport and pullback naturality. Prove the change between the two exact-stalk cohomology conventions by Mathlib localization of a natural isomorphism. No new holes or interface changes."
  },
  "mathlib_searches": [
   {
@@ -73,28 +73,41 @@
  ],
  "proof": [
   {
-   "text": "Apply exact stalks to eQ followed by eP inverse and the unique counit-compatible derived scalar-extension comparison to obtain an isomorphism of base-derived cohomology. The cohomologyIso_smul equations respect the tensor-algebra action, so extension to the fourth ring gives t.",
+   "text": "Apply exists_comparisonSourceIso to a=eQ followed by eP inverse. It supplies the tensor-algebra-linear isomorphism e between model cohomologies with the specified underlying derived transport. Extend e to the fourth stalk ring and forget scalars to obtain the additive equivalence t.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-affine-derived-cohomology-presentation"
+    "lem-pc-stalk-comparison-source-transport",
+    "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   },
   {
-   "text": "Use comparison_eq, localized_eq and counit naturality to commute the comparison square. The tensor-stalk identification and exact representative comparison identify its common target with stalk cohomology of Lg'^*K, giving rQ=rP∘t.",
+   "text": "Apply comparisonIntoPullback_naturality to Q,P,a,e and the supplied K-flatness and invertible counits. This gives the commuting square into derived-stalk cohomology of pullback.",
    "uses": [
-    "def-pc-affine-base-change-into-pullback",
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-pc-affine-derived-cohomology-presentation"
+    "lem-pc-stalk-comparison-pullback-naturality"
    ],
    "elementary": false
+  },
+  {
+   "text": "At every complex on X prime, compose comparisonStalkHomologyIso with affineRepresentativeStalkIso inverse. Naturality of these two isomorphisms gives a natural isomorphism after precomposition with Q. Mathlib Localization.liftNatIso descends it to an isomorphism delta between derived-stalk cohomology and the stalk of derived cohomology; liftNatTrans_app computes its components at Q(N). Naturality of delta along counit inverse followed by pullback(eN) rewrites affineBaseChangeIntoPullback(N) as comparisonIntoPullback(N), followed by derived-stalk cohomology of pullback(eN), followed by delta at pullback(K). This is proved in the private helper and hnormal; no new hole is used.",
+   "uses": [
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-affine-derived-cohomology-presentation",
+    "def-pc-affine-base-change-into-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the naturality square with cohomology of pullback(eP) and delta at pullback(K). Functoriality and eP inverse followed by eP equal to identity give pullback(a) followed by pullback(eP)=pullback(eQ). Substitute both normalization identities. The resulting morphism identity rQ=extension(e.hom) followed by rP evaluated at x is exactly the required equation for t.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-base-change-into-pullback",
-  "def-pc-base-derived-tensor-cohomology-model",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-affine-derived-cohomology-presentation"
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-stalk-comparison-source-transport"
  ],
  "blueprint": {
   "is": null,
@@ -130,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-87b5c",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T130037-L-3924354",
-  "kind": "interface",
-  "note": "independent Codex review: Lean signatures, unchanged definition body, and proof route match the DAG and change record; remaining lemmas agree with [Stacks 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8). All four delivered modules and direct importer Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel compile cleanly; axioms conform."
+  "landing": "20261013T141532-L-380928",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
