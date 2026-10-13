@@ -31,79 +31,40 @@
  ],
  "proof": [
   {
-   "text": "*$S$ is a finitely generated $R$-algebra.* By [lem-weil-pbc-etale-ring-map-iff-etale-affine] (direction 'only if'), since $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is étale [def-weil-etale-morphism], $R\\to S$ is an étale ring map in the sense of Algebra, Definition 00U1; in particular $S$ is a finitely presented $R$-algebra: $S\\cong R[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$ as $R$-algebras for some $n,m\\ge0$. The images $s_1,\\dots,s_n\\in S$ of $x_1,\\dots,x_n$ then generate $S$ as an $R$-algebra, i.e. $R[x_1,\\dots,x_n]\\to S$, $x_i\\mapsto s_i$ [def-weil-pbc-mv-polynomial-ring], is surjective; so $R\\to S$ is of finite type, which is the standing hypothesis of [def-weil-pbc-ring-map-quasi-finite-at-prime]. (Stacks: 'By definition $R\\to S$ is of finite type.')",
+   "text": "Apply AlgebraicGeometry.HasRingHomProperty.Spec_iff (Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean:360-364) to the etale Spec morphism, then RingHom.etale_algebraMap (Mathlib/RingTheory/RingHom/Etale.lean:37-38). This gives Algebra.Etale R S. Its finitePresentation instance gives FiniteType and EssFiniteType; its formallyEtale instance gives FormallyUnramified.",
    "uses": [
     "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "def-weil-etale-morphism",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+    "def-weil-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00U5 (lemma-etale-quasi-finite, line 39456), proof, first sentence"
-   }
+   "elementary": true
   },
   {
-   "text": "*The fibre is étale over $\\kappa(\\mathfrak p)$.* Let $\\mathfrak q\\subset S$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, $\\varphi:R\\to S$ the given map, with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$, an $R$-algebra, and fibre ring $F=S\\otimes_R\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime], with $j:S\\to F$, $s\\mapsto s\\otimes1$. Apply [lem-weil-pbc-etale-ring-base-change] to $R\\to A:=S$ (étale by hypothesis) and $R\\to\\kappa(\\mathfrak p)$: the morphism $\\operatorname{Spec}(\\kappa(\\mathfrak p)\\otimes_RS)\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$ induced by $\\lambda\\mapsto\\lambda\\otimes1$ is étale [def-weil-etale-morphism]. So $C:=\\kappa(\\mathfrak p)\\otimes_RS$, a $\\kappa(\\mathfrak p)$-algebra via $\\lambda\\mapsto\\lambda\\otimes1$, satisfies the hypothesis of [lem-weil-pbc-etale-algebra-over-field-product] with $k=\\kappa(\\mathfrak p)$. (Stacks: 'the fibre ring $S\\otimes_R\\kappa(\\mathfrak p)$ is étale over $\\kappa(\\mathfrak p)$', i.e. Algebra, Lemma 00U2 (2), base change of an étale ring map.)",
+   "text": "The Mathlib instance in RingTheory/Unramified/LocalStructure.lean:330-333 gives Algebra.QuasiFinite R S from EssFiniteType and FormallyUnramified. For every prime p, Algebra.QuasiFinite.finite_fiber makes p.Fiber S finite over p.ResidueField; the instance in RingTheory/QuasiFinite/Basic.lean:77-78 makes that ring Artinian. Its prime spectrum therefore has the discrete topology. These are already proved Mathlib instances, so no product-of-fields theorem is needed.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-etale-ring-base-change",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-algebra-over-field-product"
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00U5 (lemma-etale-quasi-finite, line 39456), proof, second sentence; Algebra, Lemma 00U2 (lemma-etale) (2)"
-   }
+   "elementary": true
   },
   {
-   "text": "*The fibre is a finite product of finite separable extensions, hence a finite discrete space.* By [lem-weil-pbc-etale-algebra-over-field-product] (Algebra, Lemma 00U3) applied to $k=\\kappa(\\mathfrak p)$ and $C$ of step 2 there are $n\\ge0$, fields $L_1,\\dots,L_n$ which are finite separable extensions of $\\kappa(\\mathfrak p)$ [def-pc-field-extension], [def-weil-pbc-separable-algebraic-extension], and an isomorphism of $\\kappa(\\mathfrak p)$-algebras $\\kappa(\\mathfrak p)\\otimes_RS\\cong L_1\\times\\cdots\\times L_n$. The swap $\\tau:S\\otimes_R\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p)\\otimes_RS$, $s\\otimes\\lambda\\mapsto\\lambda\\otimes s$, is an isomorphism of rings (its inverse is the swap in the other direction; both are well defined since $(s,\\lambda)\\mapsto\\lambda\\otimes s$ is $R$-bilinear) and of $\\kappa(\\mathfrak p)$-algebras, so composing gives a ring isomorphism $\\theta:F\\to L_1\\times\\cdots\\times L_n$. By [lem-weil-pbc-spec-finite-product-fields] (2) the space $\\operatorname{Spec}(L_1\\times\\cdots\\times L_n)$ is discrete. The isomorphism $\\theta$ induces the morphism $\\operatorname{Spec}\\theta$ [def-weil-affine-spectrum], whose inverse is $\\operatorname{Spec}(\\theta^{-1})$ by functoriality, so on underlying spaces $\\mathfrak Q\\mapsto\\theta^{-1}(\\mathfrak Q)$ is a homeomorphism $\\operatorname{Spec}(L_1\\times\\cdots\\times L_n)\\to\\operatorname{Spec}F$. Hence $\\operatorname{Spec}F$ is discrete: every one-point subset of $\\operatorname{Spec}F$ is open. (Stacks: 'and hence a finite product of fields finite separable over $\\kappa(\\mathfrak p)$, in particular finite over $\\kappa(\\mathfrak p)$'.)",
+   "text": "Choose the inferred FiniteType witness. For arbitrary q, unfold Algebra.IsQuasiFiniteAtPrime. The definition already uses PrimeSpectrum.preimageHomeomorphFiber to construct the corresponding fibre prime. The whole fibre spectrum is discrete by the preceding step, so isOpen_discrete proves its singleton open. This proves the unchanged conclusion, including empty spectra and the zero ring.",
    "uses": [
-    "lem-weil-pbc-etale-algebra-over-field-product",
-    "def-pc-field-extension",
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-spec-finite-product-fields",
-    "def-weil-affine-spectrum"
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00U5 (lemma-etale-quasi-finite, line 39456), proof, second sentence; Algebra, Lemma 00U3 (lemma-etale-over-field)"
-   }
-  },
-  {
-   "text": "*Conclusion.* By [lem-weil-pbc-fibre-ring-primes-bijection] (applied to $\\varphi:R\\to S$ and $\\mathfrak p$) there is a unique prime $\\overline{\\mathfrak q}$ of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$, the prime of $F$ corresponding to $\\mathfrak q$ in [def-weil-pbc-ring-map-quasi-finite-at-prime]. By step 3 the singleton $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}F=\\operatorname{Spec}(S\\otimes_R\\kappa(\\mathfrak p))$, i.e. $\\overline{\\mathfrak q}$ is an isolated point. Since $R\\to S$ is of finite type (step 1), this is exactly the definition [def-weil-pbc-ring-map-quasi-finite-at-prime]: $R\\to S$ is quasi-finite at $\\mathfrak q$. As $\\mathfrak q$ was arbitrary, $R\\to S$ is quasi-finite at every prime of $S$. (Stacks concludes with Algebra, Lemma 00PM (lemma-quasi-finite), via finiteness of the fibre over $\\kappa(\\mathfrak p)$, i.e. condition (2)/(3) of 00PK; the definition used here is the isolated-point condition (1) of 00PK, which step 3 gives directly from the discreteness of the whole fibre, so the equivalence of 00PK and Lemma 00PM are not needed.)",
-   "uses": [
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00U5 (lemma-etale-quasi-finite, line 39456), proof, last sentence (Lemma 00PM, lemma-quasi-finite, line 30265, replaced by the definition's isolated-point condition)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "def-weil-etale-morphism",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-etale-algebra-over-field-product",
-  "def-pc-field-extension",
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-spec-finite-product-fields",
-  "def-weil-affine-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "lem-weil-pbc-fibre-ring-primes-bijection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "T3 stage 3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00U5 (lemma-etale-quasi-finite, line 39456) and its proof, with Lemmas 00U2 (2) and 00U3 for the fibre"
+  "place": "Lemma 00U5, finite-type and finite residue-field fibres; shorter Lean implementation through Mathlib Unramified/LocalStructure.lean:330-333 and QuasiFinite/Basic.lean:77-78, followed by unfolding the isolated-fibre-prime definition."
  },
  "mathlib_searches": [
   {
@@ -219,5 +180,15 @@
   "group": "K1",
   "result": "pass",
   "note": "R S : Type u commutative rings, arbitrary ring map via algebraMap; Etale (Spec.map (ofHom algebraMap)) = def-weil-etale-morphism on Spec of the map; conclusion ∃ FiniteType (algebra generation) then ∀ q : PrimeSpectrum S, recorded Algebra.IsQuasiFiniteAtPrime (isolated fibre prime); no extra hypotheses; zero rings OK; common universe forced by Spec.map"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T111928-L-3064780",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
