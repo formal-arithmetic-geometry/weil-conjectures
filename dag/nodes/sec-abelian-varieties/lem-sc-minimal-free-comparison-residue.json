@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-minimal-free-comparison-residue",
+ "kind": "statement",
+ "title": "Comparison maps of minimal free models are isomorphisms after reduction",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring. Let $K\\in D(R)$ [def-weil-abstract-derived-category] be pseudo-coherent [def-pc-ring-pseudo-coherent-complex], and let $C_0^\\bullet$ be the bounded above finite free representative selected by its pseudo-coherence witness. Put $d_i=\\dim_\\kappa H^i(C_0^\\bullet\\otimes_R\\kappa)$. Let $F^\\bullet,G^\\bullet$ be bounded above complexes representing $K$, with $F^i\\cong G^i\\cong R^{\\oplus d_i}$ for every $i$. Then there is a chain map $\\beta:F^\\bullet\\to G^\\bullet$ such that each $\\beta^i\\otimes_R\\kappa$ is an isomorphism of $\\kappa$-modules.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field; proof checked at https://stacks.math.columbia.edu/tag/0BCC (current numbering Lemma 15.77.6)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Every bounded above free representative is K-projective. Apply [lem-pc-ring-derived-map-representative] in both directions and use injectivity to show the composites are identities in the homotopy category. HomotopyCategory.homotopyEquivOfIso gives homotopy equivalences between $C_0$ and either representative, and between $F$ and $G$.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extension of scalars is additive by its adjunction with restriction of scalars. Functor.mapHomotopyEquiv therefore transports all these homotopy equivalences to the residue field; they induce homology isomorphisms. TensorProduct finite base change and finrank_baseChange give finite terms of dimension $d_i$ in the reduced representatives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a complex $C$ over a field with finite terms, the cycle inclusion is injective and the homology projection is surjective, so $\\dim H^i(C)\\leq\\dim Z^i(C)\\leq\\dim C^i$. Equality of the outside dimensions makes the cycle inclusion surjective by LinearMap.injective_iff_surjective_of_finrank_eq_finrank. Cancel this epimorphism in $iCycles\\gg d=0$ to show every differential is zero. Apply this to both reductions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The reduced comparison from the homotopy equivalence is a quasi-isomorphism. With all differentials zero, the cycle inclusions and homology projections are isomorphisms. Their naturality identifies each comparison component with an isomorphism on homology, so it is an isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-13",
+  "note": "Lean realization of the proof of Stacks Tag 0BCC; the source was read on the official Stacks website. The detailed projectivity, dimension and Nakayama glue is expanded by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every complex of vector spaces is quasi-isomorphic to its cohomology with zero differentials",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo-coherent derived complex over a local ring has a unique minimal finite free representative whose ranks are residue field cohomology dimensions",
+   "results": "Eight results, about smooth cotangent modules, projective dimension and local-ring cotangent dimension; no minimal free complex theorem. Loogle HomotopyEquiv finds homotopy equivalence and homology isomorphism APIs.",
+   "date": "2026-10-13",
+   "verdict": "no direct match; useful tools found"
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*complex|complex.*minimal; finrank_le_finrank_of_injective|Qh_map_bijective|factorThru_comp",
+   "results": "No minimal-complex theorem. Found projective factorization, K-projective morphism bijections, and dimension inequalities. Searched all DAG and blueprint nodes: the zero-differential coproduct lemma is different, and no duplicate of either new statement was found.",
+   "date": "2026-10-13",
+   "verdict": "no direct match; composed the found tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MinimalFreeModel",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; minimal free model proof: Comparison maps of minimal free models are isomorphisms after reduction",
+   "via": [
+    "lem-sc-perfect-local-pseudocoherent-free-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MinimalFreeComparison",
+  "file": "lean/Sheaf/RingTheory/MinimalFreeComparison.lean",
+  "declaration": "DerivedCategory.exists_minimalFree_comparison_residue",
+  "statement": "theorem exists_minimalFree_comparison_residue {R : Type u} [CommRing R] [IsLocalRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (d : ℤ → ℕ) (hd : ∀ i : ℤ, d i = Module.finrank (IsLocalRing.ResidueField R) ((((ModuleCat.extendScalars (IsLocalRing.residue R)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) (F G : CochainComplex (ModuleCat.{max u v} R) ℤ) (hFbound : ∃ b : ℤ, F.IsStrictlyLE b) (hGbound : ∃ b : ℤ, G.IsStrictlyLE b) (hF : Nonempty (Q.obj F ≅ K)) (hG : Nonempty (Q.obj G ≅ K)) (hFterms : ∀ i : ℤ, Nonempty (F.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R)))) (hGterms : ∀ i : ℤ, Nonempty (G.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R)))) : ∃ β : F ⟶ G, ∀ i : ℤ, IsIso ((ModuleCat.extendScalars (IsLocalRing.residue R)).map (β.f i))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T045557-L-136150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T045557-L-136150",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

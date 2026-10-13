@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-residue-cohomology-zero-complex",
+ "kind": "statement",
+ "title": "A zero-differential cohomology model over a field",
+ "statement": "Let $\\kappa$ be a field, $C^\\bullet,E^\\bullet$ cochain complexes of $\\kappa$-vector spaces, and $d:\\mathbf Z\\to\\mathbf N$. Suppose each $H^i(C^\\bullet)$ is finite dimensional of dimension $d_i$, each differential of $E^\\bullet$ is zero, and $E^i\\cong\\kappa^{\\oplus d_i}$. Then there exists a quasi-isomorphism $E^\\bullet\\to C^\\bullet$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field; proof checked at https://stacks.math.columbia.edu/tag/0BCC (current numbering Lemma 15.77.6)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The prescribed term isomorphisms give finite dimensionality of $E^i$ and equality of its dimension with that of $H^i(C)$. Choose an isomorphism $e_i:E^i\\to H^i(C)$ by equality of finite dimensions (Mathlib FiniteDimensional.nonempty_linearEquiv_of_finrank_eq).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Over a field $E^i$ is projective. Lift $e_i$ through the epimorphism $Z^i(C)\\to H^i(C)$ using Projective.factorThru, obtaining $s_i:E^i\\to Z^i(C)$. The composites with the cycle inclusions give a chain map: its images are cycles and the source differentials vanish.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a zero-differential complex, both the cycle inclusion and homology projection are isomorphisms. Naturality of the homology projection and factorThru_comp identify the induced homology map with $e_i$. Hence the chain map is a quasi-isomorphism in every degree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-13",
+  "note": "Lean realization of the proof of Stacks Tag 0BCC; the source was read on the official Stacks website. The detailed projectivity, dimension and Nakayama glue is expanded by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every complex of vector spaces is quasi-isomorphic to its cohomology with zero differentials",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo-coherent derived complex over a local ring has a unique minimal finite free representative whose ranks are residue field cohomology dimensions",
+   "results": "Eight results, about smooth cotangent modules, projective dimension and local-ring cotangent dimension; no minimal free complex theorem. Loogle HomotopyEquiv finds homotopy equivalence and homology isomorphism APIs.",
+   "date": "2026-10-13",
+   "verdict": "no direct match; useful tools found"
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*complex|complex.*minimal; finrank_le_finrank_of_injective|Qh_map_bijective|factorThru_comp",
+   "results": "No minimal-complex theorem. Found projective factorization, K-projective morphism bijections, and dimension inequalities. Searched all DAG and blueprint nodes: the zero-differential coproduct lemma is different, and no duplicate of either new statement was found.",
+   "date": "2026-10-13",
+   "verdict": "no direct match; composed the found tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MinimalFreeModel",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; minimal free model proof: A zero-differential cohomology model over a field",
+   "via": [
+    "lem-sc-perfect-local-pseudocoherent-free-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ResidueCohomologySplit",
+  "file": "lean/Sheaf/RingTheory/ResidueCohomologySplit.lean",
+  "declaration": "CochainComplex.exists_quasiIso_from_zeroDifferential",
+  "statement": "theorem exists_quasiIso_from_zeroDifferential {κ : Type u} [Field κ] (C E : CochainComplex (ModuleCat.{max u v} κ) ℤ) (d : ℤ → ℕ) (hfinite : ∀ i : ℤ, Module.Finite κ (C.homology i)) (hd : ∀ i : ℤ, d i = Module.finrank κ (C.homology i)) (hzero : ∀ i j : ℤ, E.d i j = 0) (hterms : ∀ i : ℤ, Nonempty (E.X i ≅ ModuleCat.of κ (ULift.{v} (Fin (d i) → κ)))) : ∃ φ : E ⟶ C, QuasiIso φ",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T045557-L-136150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T045557-L-136150",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
