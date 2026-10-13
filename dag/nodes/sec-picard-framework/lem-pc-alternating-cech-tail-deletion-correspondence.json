@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-alternating-cech-tail-deletion-correspondence",
+ "kind": "statement",
+ "title": "Unsigned labelled-tail deletion correspondence",
+ "statement": "Let $I$ be a linearly ordered type, $p\\in\\mathbb N$, $n=p+2$, and $t:\\operatorname{Fin}(n)\\to I$. Use the stable sorts, partial sorts, and junction maps of [def-pc-alternating-cech-sorting-operators]. Write $q_{\\sigma,\\tau,a}=\\operatorname{cechJunction}(\\sigma,\\tau,a)$ and $\\delta_j=j.\\operatorname{succAbove}$ for the increasing map omitting $j$. Let $O_t$ be the set of quadruples $(\\sigma,a,\\tau,r)$, with $\\sigma,\\tau\\in S_n$, $a\\in\\operatorname{Fin}(n)$, $r\\in\\operatorname{Fin}(n+1)$, such that $\\sigma$ stably sorts $t$, $\\tau$ partially sorts $\\sigma$ with prefix length $a$, $q_{\\sigma,\\tau,a}(r)\\ne\\sigma(a)$, and $r\\ge a$. Let $D_t$ be the set of quadruples $(j,\\rho,b,\\eta)$, with $j\\in\\operatorname{Fin}(n)$, $\\rho,\\eta\\in S_{n-1}$, $b\\in\\operatorname{Fin}(n-1)$, such that $\\rho$ stably sorts $t\\circ\\delta_j$, $\\eta$ partially sorts $\\rho$ with prefix length $b$, and it is not the case that $t(j)<t(\\delta_j(\\rho(b)))$ or that $t(j)=t(\\delta_j(\\rho(b)))$ and $j<\\delta_j(\\rho(b))$. Then there exists an equivalence $e:O_t\\simeq D_t$ such that for every $x=(\\sigma,a,\\tau,r)$, writing $e(x)=(j,\\rho,b,\\eta)$, there exists $k\\in\\operatorname{Fin}(n)$ with\n$$k+1=r,\\qquad \\tau(k)=j,\\qquad \\tau\\circ\\delta_k=\\delta_j\\circ\\eta,\\qquad a=b,\\qquad q_{\\sigma,\\tau,a}\\circ\\delta_r=\\delta_j\\circ q_{\\rho,\\eta,b}.$$\nThe position equality $a=b$ is an equality of natural-number values. This statement concerns only finite indices and maps; it has no coefficients or cochain values.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification; unsigned tail-deletion part; https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Order labels by the strict lexicographic order (t i,i). The stable sort is uniquely the increasing listing in this order. A partial sort is uniquely the prescribed prefix followed by the complementary labels in original-label order. For an outgoing index, q(a)=sigma(a), so the nonjunction condition and r>=a imply r>a. Put k=r-1 and j=tau(k). Since k>=a, j is outside the sorted prefix; since it differs from sigma(a), its stable rank is strictly after a. Remove j from sigma at its stable rank and from tau at k, renumbering surviving labels through the increasing map delta_j. The resulting permutations rho and eta have the same prefix length b=a, which lies in Fin(n-1) because there is a later stable rank. Rho is the stable sort of the restricted tuple, eta has its fixed prefix and increasing complementary tail, and j follows the retained junction in lexicographic order. Thus the incoming filter holds. Restricting tau gives tau composed with delta_k equals delta_j composed with eta. Checking positions up to a and after a separately in the junction formula gives q composed with delta_r equals delta_j composed with the restricted junction.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an incoming index (j,rho,b,eta), the original junction label differs from j. The negated before condition therefore means j is strictly after that junction in lexicographic order. Insert j at its stable rank in the lifted stable sort rho, giving sigma. Lift the prefix of eta through delta_j and insert j into its increasing complementary tail at its original-label rank k, giving tau. Set a=b and r=k+1. The prefix is unchanged, k>=a, and tau(k)=j differs from sigma(a), so the outgoing filter holds. Restriction removes exactly the inserted positions; conversely reinsertion recovers the original stable and tail orders. The two operations are inverse because each order gives a unique insertion rank. This yields e and every asserted identity. When a=n-1 the outgoing filter is empty, since the only unused tail label is the junction. For p=0, the construction involves two original labels and one surviving label. Equal t-values cause no ties in the lexicographic label order; an empty I admits no input tuple.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S2",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.1, unsigned part of the omitted verification",
+  "note": "Explicit deletion/insertion proof written by S2; no sign calculation is included."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bijection between stable sorting permutations with a deleted tail label and sorting permutations of the remaining labels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bijection between stable sorting permutations with a deleted tail label and sorting permutations of the remaining labels",
+   "results": "Equiv.Perm.decomposeFin, Tuple.sort, Tuple.sort_perm, Tuple.bubble_sort_induction', Tuple.comp_perm_comp_sort_eq_comp_sort, Tuple.graphEquiv₂_apply, Fin.insertNthOrderIso_symm_apply, List.getElem_permutations'Aux",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechStableSort|cechPartialSort|stable.*sort.*delet|sort.*succAbove",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailCancellation",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Ordered Cech contraction in lem-pc-projective-space-cohomology-bound: unsigned deletion/insertion of a label in the tail of equation 20.23.6.1, preserving the junction map.",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-tail-cancellation",
+    "lem-pc-alternating-cech-first-sorting-nonjunction-cancellation",
+    "lem-pc-alternating-cech-first-sorting-boundary",
+    "lem-pc-alternating-cech-first-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechTailDeletionCorrespondence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechTailDeletionCorrespondence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechTailDeletionCorrespondence",
+  "statement": "theorem cechTailDeletionCorrespondence {I : Type v} [LinearOrder I] (p : ℕ)\n    (t : Fin (p + 2) → I) :\n    ∃ e : cechTailOutgoingIndex p t ≃ cechTailIncomingIndex p t,\n      ∀ x, ∃ k : Fin (p + 2),\n        k.val + 1 = x.val.2.2.2.val ∧\n        x.val.2.2.1 k = (e x).val.1 ∧\n        (∀ z, x.val.2.2.1 (k.succAbove z) =\n          (e x).val.1.succAbove ((e x).val.2.2.2 z)) ∧\n        x.val.2.1.val = (e x).val.2.2.1.val ∧\n        cechJunction x.val.1 x.val.2.2.1 x.val.2.1 ∘ x.val.2.2.2.succAbove =\n          (e x).val.1.succAbove ∘\n            cechJunction (e x).val.2.1 (e x).val.2.2.2 (e x).val.2.2.1",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T000047-L-2232313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T000047-L-2232313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

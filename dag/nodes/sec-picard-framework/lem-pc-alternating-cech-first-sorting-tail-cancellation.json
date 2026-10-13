@@ -12,21 +12,35 @@
  ],
  "proof": [
   {
-   "text": "Order labels j by (t j, j); the sorting filters then pick unique\npermutations. In a filtered outgoing nonjunction term with a ≤ r, equality\nr = a is impossible because the junction map takes a to σ a. Hence r > a.\nRemove j = τ (r - 1), restrict the two permutations, and renumber remaining\nlabels increasingly. The prefix length stays b = a. The removed label is\noutside the sorted prefix and differs from the junction, so it follows the\njunction in the pair order. The restricted junction is exactly the outgoing\njunction with entry r deleted, as a map to original labels. Conversely, for\nan incoming label j following the junction, insert it in the stable sort at\nits stable rank and in the partial sort's increasing tail at its original-label\nrank. The induced outgoing deletion has r > a and removes a nonjunction\nlabel. These constructions are inverse. The restricted permutation τ' has\nsign τ' = (-1)^(r-1+j) sign τ, by moving the removed position r-1 and its\nlabel j to the end before restricting. The incoming coefficient is therefore\n(-1)^(j+a+r-1+j) sign τ, the negative of (-1)^(a+r) sign τ.\nSum along the bijection: each pair has the same f argument and opposite\ninteger coefficients. Distinct original labels make the pair order strict,\nincluding when all values of t agree. The last prefix has no tail deletions\nexcept the excluded junction occurrence; empty I has no input tuple.",
+   "text": "Apply the unsigned tail-deletion correspondence to the tuple t. It gives an equivalence of the filtered outgoing and incoming indices, a position k with r=k+1 and tau(k)=j, the restriction identity for the partial permutation, equality of prefix lengths a=b, and equality of deleted junction maps.",
    "uses": [
-    "def-pc-alternating-cech-sorting-operators"
+    "lem-pc-alternating-cech-tail-deletion-correspondence"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Fin.signed_face_permutation to tau at k. The face identity and injectivity of j.succAbove show its induced permutation equals the incoming eta. Its sign identity is (-1)^j sign(eta)=sign(tau)(-1)^k. Using a=b and r=k+1, pow_succ and ring arithmetic show the outgoing and incoming integer coefficients add to zero. The equal junction maps make their f arguments equal, so add_smul gives termwise cancellation.",
+   "uses": [
+    "lem-pc-signed-face-permutation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Flatten each nested finite sum over the product type and convert its if-filter to a sum over the corresponding subtype (Finset.sum_filter and Finset.sum_subtype). Reindex the incoming sum by the equivalence, combine the two sums, and apply the termwise cancellation. No hypothesis on f is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-alternating-cech-sorting-operators"
+  "lem-pc-alternating-cech-tail-deletion-correspondence",
+  "lem-pc-signed-face-permutation"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3",
+  "agent": "S2",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, equation 20.23.6.1; explicit tail labelled-deletion proof of the omitted computation"
+  "place": "Tag 01FM, equation 20.23.6.1, tail part of the omitted verification",
+  "note": "Lean reduction to unsigned label correspondence; the sign and finite-sum parts are fully proved using the already proved signed-face lemma."
  },
  "mathlib_searches": [
   {
@@ -99,12 +113,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T230755-L-1907977",
+  "landing": "20261013T000047-L-2232313",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
