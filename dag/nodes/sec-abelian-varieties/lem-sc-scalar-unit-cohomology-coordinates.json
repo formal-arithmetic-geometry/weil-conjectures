@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-scalar-unit-cohomology-coordinates",
+ "kind": "statement",
+ "title": "Normalized scalar coordinates on zeroth unit-module cohomology",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme over $k$ with structure morphism $f$ [def-weil-scheme-over-base], and suppose $k\\to\\Gamma(X,\\mathcal O_X)$ is bijective. Use the restricted-scalar cohomology [def-sc-field-linear-module-cohomology-operations]. Let $u_X\\in H_k^0(X,\\mathcal O_X)$ be the image of the section $1$ under the canonical map from global sections to zeroth right-derived global sections [def-sc-ringed-space-module-cohomology]. There exists a $k$-linear equivalence $d:H_k^0(X,\\mathcal O_X)\\simeq k$ such that $d^{-1}(r)=r u_X$ for every $r\\in k$. The class $u_X$ is constructed using the named natural transformation to the zeroth right derived functor, not chosen from an existence theorem.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, zeroth derived sections; Tag 0BED, degree-zero scalar sections in the external cup maps"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Module-sheaf evaluation at the terminal open preserves finite limits by Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits. Enough injectives gives the canonical rightDerivedZeroIsoSelf from zeroth derived evaluation to evaluation.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict this isomorphism along the structure ring map and compose with the inverse of the linear equivalence of sections induced by its bijectivity. Its inverse sends r to the image of the section scalarMap(r). By linearity and scalarMap(1)=1 this is r times the explicitly constructed class of 1.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent K4",
+  "document": "Stacks Project, Tags 0BED, 03FD, 01DZ, 01F7",
+  "place": "Tag 01DZ, zeroth derived sections; Tag 0BED, degree-zero scalar sections in the external cup maps; details of the reduction written by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology external cup products are balanced over the base field and cup with degree zero unit is pullback",
+   "results": "Eight hits on sheaf H, nonabelian and group cohomology, and sheaf pullback free modules; none states the scalar balance or unit comparison for these operations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology cup product with the unit degree zero class equals pullback",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarUnitCohomology|externalCup|scalar_unit_cohomology_coordinates",
+   "results": "Zero Mathlib matches. Local library search found the field-linear operations and module-abelian coefficient naturality, not their unit-cup compatibility or normalized scalar coordinates.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of Tag 0BF3, the Kunneth degree-one argument on the special fibre: identify the two external cup summands with scalar multiples of projection pullbacks; Tag 01DZ, zeroth derived sections; Tag 0BED, degree-zero scalar sections in the external cup maps",
+   "via": [
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarUnitCohomologyCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalar_unit_cohomology_coordinates",
+  "statement": "theorem scalar_unit_cohomology_coordinates {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (h : Function.Bijective (scalarMap f ⊤)) :\n    ∃ d : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 0 ≃ₗ[k] k,\n      ∀ r : k, d.symm r = r • scalarUnitCohomologyClass f",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.scalarUnitCohomologyClass",
+   "AlgebraicGeometry.Scheme.Modules.scalar_unit_cohomology_coordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T011930-L-2764104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T011930-L-2764104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

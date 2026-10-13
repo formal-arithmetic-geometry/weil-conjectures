@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-picard-external-cup-unit-comparison",
+ "kind": "statement",
+ "title": "Unit-class external cup products compare with projection pullbacks",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X,Y$ be schemes over $k$ with structure morphisms $f,g$ [def-weil-scheme-over-base]. Let $P=X\\times_k Y$ [def-pc-fibre-product], $F=\\mathcal O_X$, $G=\\mathcal O_Y$, and $E=p_X^*F\\otimes p_Y^*G$, using the restricted-scalar external cup operations [def-sc-field-linear-module-cohomology-operations]. Let $u_X,u_Y$ be the explicitly constructed degree-zero classes of the sections $1$ [lem-sc-scalar-unit-cohomology-coordinates]. There exist additive equivalences $e_X:H_k^1(X,F)\\simeq H^1(X,\\mathcal O_X)$, $e_Y:H_k^1(Y,G)\\simeq H^1(Y,\\mathcal O_Y)$ and $e_P:H_k^1(P,E)\\simeq H^1(P,\\mathcal O_P)$ such that $e_P(a\\boxtimes u_Y)=p_X^*(e_X(a))$ for every $a\\in H_k^1(X,F)$ and $e_P(u_X\\boxtimes b)=p_Y^*(e_Y(b))$ for every $b\\in H_k^1(Y,G)$. The abelian groups and pullbacks are the recorded structure-sheaf cohomology [def-sc-structure-sheaf-cohomology-pullback]. There is no bijectivity hypothesis on global structure ring maps.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 0BED, external cup maps preceding varieties-equation-kunneth-on-cech; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; specialization to the class of 1"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pc-fibre-product",
+  "lem-sc-scalar-unit-cohomology-coordinates",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the common injective-module sections complex and its abelian acyclic-resolution comparison on X and Y. The constant-integer sheaf adjunction identifies terminal-open cohomology with Sheaf.H, giving eX and eY. On P the tensor-pullback unit isomorphisms followed by the tensor unitor identify E with the structure sheaf; compose coefficient cohomology with the abelian comparison to obtain eP.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical degree-zero comparison sends the section 1 to its augmented resolution cocycle. The projection coefficient maps preserve 1 by their adjunction-unit formulas. For a computing tensor pairing, multiplication by the pulled-back cocycle 1 is the identity after the unit coefficient identification. Thus external cup with uY or uX induces precisely projection pullback on the common sections complex, with no sign since one degree is zero.",
+   "uses": [
+    "lem-sc-scalar-unit-cohomology-coordinates",
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cohomology-cup-product",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the structure-sheaf map to resolutions as in the functoriality construction of Tag 01F7. The exact-inverse-image Ext map defining the abelian pullback computes the same map. Independence of lifts up to homotopy gives the two equalities for the same eP. This comparison uses no spanning or Kunneth isomorphism assertion.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-sc-scalar-unit-cohomology-coordinates",
+  "def-sc-module-cohomology-cup-product"
+ ],
+ "proof_origin": {
+  "by": "agent K4",
+  "document": "Stacks Project, Tags 0BED, 03FD, 01DZ, 01F7",
+  "place": "Tag 0BED, external cup maps preceding varieties-equation-kunneth-on-cech; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; specialization to the class of 1; details of the reduction written by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology external cup products are balanced over the base field and cup with degree zero unit is pullback",
+   "results": "Eight hits on sheaf H, nonabelian and group cohomology, and sheaf pullback free modules; none states the scalar balance or unit comparison for these operations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology cup product with the unit degree zero class equals pullback",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarUnitCohomology|externalCup|scalar_unit_cohomology_coordinates",
+   "results": "Zero Mathlib matches. Local library search found the field-linear operations and module-abelian coefficient naturality, not their unit-cup compatibility or normalized scalar coordinates.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of Tag 0BF3, the Kunneth degree-one argument on the special fibre: identify the two external cup summands with scalar multiples of projection pullbacks; Tag 0BED, external cup maps preceding varieties-equation-kunneth-on-cech; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; specialization to the class of 1",
+   "via": [
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupUnitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupUnitComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_external_cup_unit_comparison",
+  "statement": "theorem picard_external_cup_unit_comparison (k : Type u) [Field k] (X Y : Scheme.{u})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) :\n    let F := SheafOfModules.unit X.ringCatSheaf\n    let G := SheafOfModules.unit Y.ringCatSheaf\n    ∃ (eX : scalarCohomology f F 1 ≃+ Sheaf.H (structureSheafAb X) 1)\n      (eY : scalarCohomology g G 1 ≃+ Sheaf.H (structureSheafAb Y) 1)\n      (eP : scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) 1\n        ≃+ Sheaf.H (structureSheafAb (pullback f g)) 1),\n      (∀ a : scalarCohomology f F 1,\n        eP (externalCup f g F G 1 0 a (scalarUnitCohomologyClass g)) =\n          structureSheafCohomologyPullback (pullback.fst f g) 1 (eX a)) ∧\n      (∀ b : scalarCohomology g G 1,\n        eP (externalCup f g F G 0 1 (scalarUnitCohomologyClass f) b) =\n          structureSheafCohomologyPullback (pullback.snd f g) 1 (eY b))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T011930-L-2764104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T011930-L-2764104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

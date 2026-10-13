@@ -7,7 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
+import Sheaf.AlgebraicGeometry.ExternalCupScalarBalance
+import Sheaf.AlgebraicGeometry.PicardExternalCupUnitComparison
 
 /-! # Scalar normalization of external cup products with unit coefficients
 
@@ -69,6 +71,32 @@ theorem picard_external_cup_scalar_comparison (k : Type u) [Field k] (X Y : Sche
       (∀ (a : scalarCohomology f F 0) (b : scalarCohomology g G 1),
         eP (externalCup f g F G 0 1 a b) =
           structureSheafCohomologyPullback (pullback.snd f g) 1 (eY (dX a • b))) := by
-  sorry
+  obtain ⟨dX, hdX⟩ := scalar_unit_cohomology_coordinates f hX
+  obtain ⟨dY, hdY⟩ := scalar_unit_cohomology_coordinates g hY
+  obtain ⟨eX, eY, eP, heX, heY⟩ := picard_external_cup_unit_comparison k X Y f g
+  refine ⟨eX, eY, eP, dX, dY, ?_, ?_⟩
+  · intro a b
+    have hb : b = dY b • scalarUnitCohomologyClass g := by
+      exact (dY.symm_apply_apply b).symm.trans (hdY (dY b))
+    calc
+      eP (externalCup f g _ _ 1 0 a b) =
+          eP (externalCup f g _ _ 1 0 a (dY b • scalarUnitCohomologyClass g)) := by
+            exact congrArg (fun b' ↦ eP (externalCup f g _ _ 1 0 a b')) hb
+      _ = eP (externalCup f g _ _ 1 0 (dY b • a) (scalarUnitCohomologyClass g)) := by
+            exact congrArg eP (external_cup_scalar_balance f g _ _ 1 0 (dY b) a _)
+      _ = structureSheafCohomologyPullback (pullback.fst f g) 1 (eX (dY b • a)) :=
+        heX (dY b • a)
+  · intro a b
+    have ha : a = dX a • scalarUnitCohomologyClass f := by
+      exact (dX.symm_apply_apply a).symm.trans (hdX (dX a))
+    calc
+      eP (externalCup f g _ _ 0 1 a b) =
+          eP (externalCup f g _ _ 0 1 (dX a • scalarUnitCohomologyClass f) b) := by
+            exact congrArg (fun a' ↦ eP (externalCup f g _ _ 0 1 a' b)) ha
+      _ = eP (externalCup f g _ _ 0 1 (scalarUnitCohomologyClass f) (dX a • b)) := by
+            exact congrArg eP
+              (external_cup_scalar_balance f g _ _ 0 1 (dX a) _ b).symm
+      _ = structureSheafCohomologyPullback (pullback.snd f g) 1 (eY (dX a • b)) :=
+        heY (dX a • b)
 
 end AlgebraicGeometry.Scheme
