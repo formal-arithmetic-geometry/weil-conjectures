@@ -10,17 +10,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the pinned Mathlib ProjectiveResolution.extAddEquivCohomologyClass, which gives Ext as cocycles modulo coboundaries from P.cochainComplex to Y[0]. This is an existing comparison, not the old right-derived Ext functor of Mathlib.CategoryTheory.Abelian.Ext.",
+   "text": "Set S=L.sc n. Evaluate a cycle x in ker(S.g) by e_n. The differential identity hd and invertibility of (-1)^(n+1) show d_(n+1) composed with e_n(x) vanishes. Define F(x)=P.extMk(e_n(x)); add_extMk proves additivity, and Ext.smul_eq_comp_mk₀ together with extMk_comp_mk₀ proves A-linearity. The term isomorphism e_n and extMk_surjective prove that F is surjective.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Evaluate degree-n cochains at the sole possible component P_n -> Y via Cochain.toSingleEquiv and P.cochainComplexXIso. Cochain.δ_toSingleMk gives differential (-1)^(n+1) times precomposition with d_(n+1). The term isomorphisms e and equation hd identify cycles and boundaries with those of L, so induce an additive quotient equivalence. At n=0 the preceding component is zero since P.cochainComplex is zero in positive degrees. Explicitly send a cocycle to e_n inverse applied to its evaluated component. In the other direction apply e_n to an L-cycle and insert it with Cochain.toSingleMk in degree -n. Equation hd proves the cocycle condition and identifies the images of the preceding differential in both directions; hence these inverse linear maps descend to inverse maps on homology.",
+   "text": "Identify ker F with range S.moduleCatToCycles. In degree p+1, extMk_eq_zero_iff says F(x)=0 precisely when e_(p+1)(x)=d_(p+1) composed with g. Its preimage boundary is d_L of e_p inverse applied to (-1)^(p+1) times g: hd and the square of the sign being 1 prove this formula. Conversely hd sends every L-boundary to a coboundary, with the sign absorbed in g. In degree zero, S.f=0 by the complex shape. The private proved helper extMk_zero_iff applies extEquivCohomologyClass and Cocycle.toSingleMk_mem_coboundaries_iff; the possible preceding target component is P.cochainComplex.X 1, a zero object since the resolution is strictly LE 0, so the Ext class vanishes exactly when its representing map vanishes. Thus ker F is zero in degree zero as required.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Represent every Ext class as P.extMk g using extMk_surjective. Ext.smul_eq_comp_mk₀ and extMk_comp_mk₀ identify a times that class with extMk of g followed by a times id_Y, namely a*g. Evaluation, e, and the quotient maps are linear, so the additive equivalence preserves scalars and gives the stated linear equivalence.",
+   "text": "Apply LinearMap.quotKerEquivOfSurjective to F. Rewrite its kernel as the range of S.moduleCatToCycles by the preceding equality, then use S.moduleCatHomologyIso, the pinned Mathlib linear identification of homology with the kernel/image quotient. Reverse the first quotient equivalence and compose to obtain Ext^n(X,Y) linearly equivalent to L.homology n.",
    "uses": [],
    "elementary": true
   }
@@ -29,7 +29,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-  "place": "Lemma 48.15.5, total Hom computation, generalized to any projective resolution; Mathlib ProjectiveResolution.extAddEquivCohomologyClass and Cochain.delta_toSingleMk; local algebra and the Mathlib component formulas expanded by the second reader"
+  "place": "Total Hom computation, implemented using the pinned Mathlib ProjectiveResolution.extMk API, degree-zero cocycle comparison, and ShortComplex.moduleCatHomologyIso; G3 stage 3"
  },
  "mathlib_searches": [
   {
@@ -101,13 +101,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T234219-L-2125260",
-  "kind": "interface",
+  "landing": "20261013T004023-L-2490945",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

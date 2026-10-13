@@ -10331,3 +10331,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: merged deliver/D3/Sheaf.CategoryTheory.ColimitSiteAbelianFiniteFamilyStabilization (stage 3; reviewer PASS; first push; landing 20261013T004022-L-2490577 (interface); batch 20261013T004020; modules 2; new nodes 1)
 - 00:40 L: merged deliver/F1/Sheaf.RingTheory.PopescuReductionPresentationFromFactor (stage 3; reviewer PASS; after a return; landing 20261013T004023-L-2490730 (proof); batch 20261013T004020; modules 1; new nodes 0)
 - 00:40 L: merged deliver/F4/Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusCompact (stage 3; reviewer PASS; first push; landing 20261013T004023-L-2490829 (interface); batch 20261013T004020; modules 2; new nodes 1)
+- 00:40 L: merged deliver/G3/Sheaf.CategoryTheory.ExtSignedDualHomology (stage 3; reviewer PASS; first push; landing 20261013T004023-L-2490945 (proof); batch 20261013T004020; modules 1; new nodes 0)
