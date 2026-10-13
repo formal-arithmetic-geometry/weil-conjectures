@@ -1,0 +1,102 @@
+{
+ "id": "lem-sc-global-tensor-pullback-mates-isiso",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Global tensor pullback mates are isomorphisms",
+ "statement": "For a scheme X and an adjunction P ⊣ Γ(X,-), the mate of the global-sections unit map and the mates of the section tensor maps under the adjunction are isomorphisms.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01CA",
+  "place": "Modules Lemma 17.16.4"
+ },
+ "stmt_deps": [
+  "lem-sc-module-cup-naive-map-chain"
+ ],
+ "proof": [
+  {
+   "text": "Identify the adjunction with inverse image from the global-sections point and compute the unit and tensor mates on local pure tensors; the explicit maps have inverses given by inserting 1 and multiplying coefficients, so they are isomorphisms. Transport along the unique isomorphism of left adjoints to obtain the assertion for P.",
+   "uses": [
+    "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-naive-map-chain"
+ ],
+ "proof_origin": {
+  "by": "D4 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01CA",
+  "place": "Modules Lemma 17.16.4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monoidal adjunction oplax structure isomorphism mate components",
+   "results": "No exact matching theorem found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor.Monoidal.ofOplaxMonoidal IsIso oplax tensor",
+   "results": "Found the generic construction used by the proof; no specialized global-sections theorem.",
+   "date": "2026-10-14",
+   "verdict": "supporting result"
+  },
+  {
+   "tool": "grep",
+   "query": "global sections tensor lax monoidal adjunction mate isomorphism",
+   "results": "No duplicate declaration in lean/Sheaf or Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-global-tensor-pullback-monoidal-normalization",
+   "place": "mate isomorphism step",
+   "via": [
+    "lem-sc-global-tensor-pullback-oplax-isiso"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalTensorPullbackMatesIsIso",
+  "file": "lean/Sheaf/Paper/GlobalTensorPullbackMatesIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.globalTensorPullback_mates_isIso",
+  "statement": "theorem globalTensorPullback_mates_isIso\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace) :\n    IsIso ((adj.homEquiv (𝟙_ _) (𝟙_ _)).symm\n      (ModuleCat.ofHom (unitSectionsEquiv (X := X) ⊤).toLinearMap)) ∧\n    ∀ A B : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)),\n      IsIso ((adj.homEquiv _ _).symm\n        ((adj.unit.app A ⊗ₘ adj.unit.app B) ≫\n          moduleCup_sectionTensorMap X (P.obj A) (P.obj B)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3c44d",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190137-L-3215064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3c44d",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190137-L-3215064",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, node records, report, proofs, and direct importer matched the review rules; all files compiled successfully, including the importer."
+ }
+}

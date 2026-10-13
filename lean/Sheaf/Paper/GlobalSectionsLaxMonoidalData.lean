@@ -1,0 +1,67 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group E4
+-/
+module
+public import Sheaf.Paper.ModuleCupNaiveMap
+/-! # Tensor-counit normalization of the global pullback
+
+Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
+
+@[expose] public section
+universe u
+set_option autoImplicit false
+set_option linter.style.longLine false
+set_option linter.style.haveILetI false
+set_option linter.unusedVariables false
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+open AlgebraicGeometry TopologicalSpace
+namespace AlgebraicGeometry.Scheme.Modules
+noncomputable section
+variable (X : Scheme.{u})
+local instance globalSectionsLaxDataCommRing :
+    CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+  inferInstanceAs (CommRing Γ(X, ⊤))
+local instance globalSectionsLaxDataMonoidal :
+    MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  SheafOfModules.monoidalCategory X.toRingedSpace.sheaf
+local instance globalSectionsLaxDataSymmetric :
+    SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
+local instance globalSectionsLaxDataColimits :
+    HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  hasColimitsOfSizeShrink.{0, 0, u} _
+local instance globalSectionsLaxDataPreadditive :
+    MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
+local instance globalSectionsLaxDataClosed :
+    MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
+/-- The canonical lax structure has the concrete unit and tensor maps.
+Source: Stacks, Section 17.16 (Tag 01CA), the sheaf tensor construction;
+WeilConjectures.AlgebraicGeometry.Modules.TensorSection, the section tensor identities.
+(blueprint: lem-sc-global-sections-lax-monoidal-data)
+Proof: choose the unit map induced by unitSectionsEquiv and the tensorator induced
+by the bilinear pairing tmulSection. Naturality in either argument follows by applying
+whiskerRight_app_tmulSection and whiskerLeft_app_tmulSection to pure tensors.
+The associativity diagram agrees on every triple of pure tensors by
+associator_hom_app_tmulSection: both sides give the nested tensor section with
+parentheses changed by the sheaf associator. The left and right unit diagrams agree
+on pure tensors by leftUnitor_hom_app_tmulSection and rightUnitor_hom_app_tmulSection:
+both sides send r tensor s (respectively s tensor r) to r times s.
+TensorProduct.ext' and ModuleCat.hom_ext extend these identities to all morphisms,
+so the prescribed maps define a lax monoidal structure. Its unit and tensorator
+are the required maps by construction. The same equations hold for zero modules
+and the empty scheme; no injectivity or surjectivity of the tensorator is asserted. -/
+theorem globalSectionsFunctor_laxMonoidal_data
+    :
+    ∃ lax : (RingedSpace.globalSectionsFunctor X.toRingedSpace).LaxMonoidal,
+      letI := lax
+      Functor.LaxMonoidal.ε (RingedSpace.globalSectionsFunctor X.toRingedSpace) =
+          ModuleCat.ofHom (unitSectionsEquiv (X := X) ⊤).toLinearMap ∧
+      ∀ M N, Functor.LaxMonoidal.μ (RingedSpace.globalSectionsFunctor X.toRingedSpace) M N =
+          moduleCup_sectionTensorMap X M N := by sorry
+
+end
+end AlgebraicGeometry.Scheme.Modules

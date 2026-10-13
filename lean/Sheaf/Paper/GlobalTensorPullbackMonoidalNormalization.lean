@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 public import Sheaf.Paper.ModuleCupNaiveMap
 public import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Paper.GlobalSectionsLaxMonoidalData
+import Sheaf.Paper.GlobalTensorPullbackOplaxIsIso
 /-! # Tensor-counit normalization of the global pullback
 
 Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
@@ -14,6 +16,10 @@ Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
 @[expose] public section
 universe u
 set_option autoImplicit false
+set_option linter.style.longLine false
+set_option linter.style.haveILetI false
+set_option linter.unusedVariables false
+set_option linter.unusedSectionVars false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
@@ -78,6 +84,19 @@ theorem globalTensorPullback_monoidal_normalization
             ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)
             ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N) ≫
           P.map (moduleCup_sectionTensorMap X M N) ≫ adj.counit.app (M ⊗ N) =
-        adj.counit.app M ⊗ₘ adj.counit.app N := by sorry
+        adj.counit.app M ⊗ₘ adj.counit.app N := by
+  obtain ⟨lax, hε, hμ⟩ := globalSectionsFunctor_laxMonoidal_data X
+  letI := lax
+  let oplax : P.OplaxMonoidal := adj.leftAdjointOplaxMonoidal
+  letI := oplax
+  obtain ⟨hη, hδ⟩ := globalTensorPullback_oplax_isIso X P adj lax hε hμ
+  letI : IsIso (adj.leftAdjointOplaxMonoidal.η) := hη
+  letI : ∀ A B, IsIso (adj.leftAdjointOplaxMonoidal.δ A B) := hδ
+  let mon : P.Monoidal := Functor.Monoidal.ofOplaxMonoidal P
+  refine ⟨mon, ?_⟩
+  intro M N
+  change inv (oplax.δ _ _) ≫ _ ≫ _ = _
+  rw [← hμ M N, adj.map_μ_comp_counit_app_tensor]
+  simp
 end
 end AlgebraicGeometry.Scheme.Modules

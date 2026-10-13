@@ -1,0 +1,102 @@
+{
+ "id": "lem-sc-global-tensor-pullback-oplax-isiso",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Oplax mate components are isomorphisms",
+ "statement": "For a scheme X, a left adjoint P to global sections, and a chosen lax monoidal structure on global sections whose unit and tensor maps are the concrete section maps, the oplax monoidal structure transported to P by the adjunction has isomorphism unit and tensor components.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/079U",
+  "place": "Modules Lemma 17.16.4"
+ },
+ "stmt_deps": [
+  "lem-sc-global-tensor-pullback-mates-isiso"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the left-adjoint oplax structure and rewrite its unit and tensor components using the prescribed concrete unit and tensor maps; apply the isomorphism assertions for the corresponding adjunction mates.",
+   "uses": [
+    "lem-sc-global-tensor-pullback-mates-isiso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-global-tensor-pullback-mates-isiso"
+ ],
+ "proof_origin": {
+  "by": "D4 second reader; unfolding Mathlib Adjunction.leftAdjointOplaxMonoidal",
+  "document": "https://stacks.math.columbia.edu/tag/079U",
+  "place": "Modules Lemma 17.16.4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monoidal adjunction oplax structure isomorphism mate components",
+   "results": "No exact matching theorem found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor.Monoidal.ofOplaxMonoidal IsIso oplax tensor",
+   "results": "Found the generic construction used by the proof; no specialized global-sections theorem.",
+   "date": "2026-10-14",
+   "verdict": "supporting result"
+  },
+  {
+   "tool": "grep",
+   "query": "global sections tensor lax monoidal adjunction mate isomorphism",
+   "results": "No duplicate declaration in lean/Sheaf or Mathlib.",
+   "date": "2026-10-14",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-global-tensor-pullback-monoidal-normalization",
+   "place": "transport step",
+   "via": [
+    "lem-sc-global-tensor-pullback-mates-isiso"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalTensorPullbackOplaxIsIso",
+  "file": "lean/Sheaf/Paper/GlobalTensorPullbackOplaxIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.globalTensorPullback_oplax_isIso",
+  "statement": "theorem globalTensorPullback_oplax_isIso\n    (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace)\n    (lax : (RingedSpace.globalSectionsFunctor X.toRingedSpace).LaxMonoidal)\n    (hε : Functor.LaxMonoidal.ε (RingedSpace.globalSectionsFunctor X.toRingedSpace) =\n      ModuleCat.ofHom (unitSectionsEquiv (X := X) ⊤).toLinearMap)\n    (hμ : ∀ M N, Functor.LaxMonoidal.μ (RingedSpace.globalSectionsFunctor X.toRingedSpace) M N =\n      moduleCup_sectionTensorMap X M N) :\n    IsIso (adj.leftAdjointOplaxMonoidal.η) ∧\n      (∀ A B, IsIso (adj.leftAdjointOplaxMonoidal.δ A B))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3c44d",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190137-L-3215064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3c44d",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190137-L-3215064",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, node records, report, proofs, and direct importer matched the review rules; all files compiled successfully, including the importer."
+ }
+}
