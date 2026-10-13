@@ -11044,3 +11044,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: merged deliver/V3/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261013T040804-L-3953930 (interface); batch 20261013T040738; modules 2; new nodes 1; change records: coord/changes/cartier-equality-field-generation.md)
 - 04:08 L: merged deliver/V4/Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningGluedAtlas (stage 3; reviewer PASS; first push; landing 20261013T040804-L-3954036 (interface); batch 20261013T040738; modules 2; new nodes 1)
 - 04:08 L: merged deliver/W2/Sheaf.AlgebraicGeometry.PicardFiberRankClopen (stage 3; reviewer PASS; first push; landing 20261013T040805-L-3954149 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:08 L: merged deliver/W3/Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsMap (stage 3; reviewer PASS; first push; landing 20261013T040805-L-3954297 (proof); batch 20261013T040738; modules 1; new nodes 0)
