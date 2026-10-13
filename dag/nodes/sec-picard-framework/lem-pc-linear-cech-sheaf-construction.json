@@ -14,36 +14,53 @@
  },
  "proof": [
   {
-   "text": "For each open W construct P(W) as the pushforward of F.over W along Over.star W, with ring restriction along prod.snd. On B its sections are F(W product B) with scalars restricted from O_X(B). For W contained in Z, use the restriction map F(Z product B) -> F(W product B). Functoriality of F and of the structure sheaf proves naturality in B, local scalar compatibility, and the identity and composition laws, yielding P on opposite opens.",
+   "text": "Use the actual intersection sheaf functor, complex D = cechModuleSheafComplex U F, and degree-zero restriction a = cechModuleSheafAugmentation₀ U F of [def-pc-cech-module-sheaf-functor]. The proved cechModuleSheafAugmentation₀_comp_d gives a followed by the first differential equal to zero. These are explicit constructions, not objects chosen from an unproved existence statement.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "def-pc-cech-module-sheaf-functor"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply cechComplexFunctor U to P. Products of module sheaves are computed on sections, and restriction of scalars preserves products. Their product comparison isomorphisms give the natural e_p. Each comparison commutes with every face restriction by its projection equations; taking the alternating sum gives the displayed differential identity. The restriction maps F -> P(product of a singleton) assemble into a degree-zero product map; the two restrictions to every double intersection are equal, so its first differential is zero. The universal property of single_0 gives the augmentation, and the product projection equations give the required degree-zero coordinate formula.",
+   "text": "Construct the canonical comparisons privately, as in CechModuleSheafComparison, retaining their explicit projection equation. Write G for the forgetful functor to presheaves of global modules. On B, G(P(W)) restricts scalars first from global functions to B and then along prod.snd to W product B. ModuleCat.restrictScalarsComp'App identifies this with direct scalar restriction to W product B. The two ring maps coincide by functoriality and thinness of opens. Its underlying map is the identity, so it is natural in B and W. Evaluation of G is evaluation of module sheaves followed by restriction of scalars, both preserving products. Thus asIso(piComparison G) followed by Pi.mapIso of these scalar identifications defines e_p. The private intersectionProductComparison_hom_π proves the projection identity for arbitrary families of opens using piComparison_comp_π and Pi.mapIso_hom_π; specializing it to the Cech family identifies its y-coordinate with G of the module-sheaf product projection followed by the scalar identification.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
+    "def-pc-cech-module-sheaf-functor",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The categorical product of a finite family of opens is canonically isomorphic to its infimum, since both are greatest lower bounds. Transport P along this isomorphism and compare Over W with opens of the open subscheme W to identify P(W) with j_W,*(F restricted to W). Taking the product of these isomorphisms gives the termwise open-direct-image description. On B, each coordinate of e_p is a module-sheaf product projection followed by the above section identification for P(W), so local scalar multiplication becomes restriction along prod.snd, giving exactly the displayed scalar equation. Neither construction nor these identities use covering or exactness; empty index families use empty products.",
+   "text": "The product comparisons are natural on opposite formal coproducts: project each side to y and use piComparison_comp_π, Pi.lift_π and functoriality of G. Whisker this natural isomorphism by the formal Cech object and compose with the functorial scalar comparison. The private cechModuleSheafDegreeIso_naturality proves compatibility with every simplex morphism between arbitrary degrees (also codegeneracies); specialization to each simplex coface gives coface compatibility; its degree components are exactly the e_p constructed above. Expand both differentials by CochainComplex.of_d and AlternatingCofaceMapComplex.objD. Additivity of G, map_sum and map_zsmul transfer the finite alternating sums, proving the differential identity. Project G(a) followed by e_0 to y; the projection equation and Pi.lift_π reduce it to the over-site adjunction unit, whose section map is F.map prod.snd.op.",
    "uses": [
+    "def-pc-cech-module-sheaf-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend a to epsilon using CochainComplex.fromSingle₀Equiv and a followed by d equal to zero. fromSingle₀Equiv_symm_apply_f_zero and the singleObjXSelf inverse equation give singleObjXSelf.inv followed by epsilon.f 0 = a. Substitution transfers the preceding augmentation coordinate equation to epsilon.",
+   "uses": [
+    "def-pc-cech-module-sheaf-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply cechModuleSheafComplex_term_iso of [lem-pc-cech-module-sheaf-terms] in every degree for the product of open direct images. For the last clause, evaluate the canonical projection equation on a section t: the y-coordinate of e_p(t) is the module-sheaf product projection evaluated on B. That projection is O_X(B)-linear by the definition of a module-sheaf morphism, so map_smul gives its value on a times s. The action on the intersection sheaf is definitionally restriction along prod.snd, and the scalar identification has identity underlying map. Substituting the coordinate identities for a times s and s gives the required formula. Package D, epsilon, e, differential compatibility, augmentation coordinates, term isomorphisms and local scalar compatibility. Empty index types are handled by the same categorical products and vacuous coordinate formulas; no cover, affine or finite-index hypothesis is used.",
+   "uses": [
+    "lem-pc-cech-module-sheaf-terms",
+    "def-pc-cech-module-sheaf-functor",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-cech-module-sheaf-functor",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-site-cech-complex"
+  "lem-pc-cech-module-sheaf-terms"
  ],
  "proof_origin": {
-  "by": "worker S3",
+  "by": "worker H1",
   "document": "Weil conjectures blueprint and Stacks Project",
-  "place": "lem-pc-cech-resolution, displayed complex and proof paragraph 1; Stacks Tag 02FU, construction of the sheaf Cech complex before the exactness argument; sectionwise details and no-cover construction written by S3"
+  "place": "lem-pc-cech-resolution, displayed complex and proof paragraph 1; Stacks Tag 02FU, construction of the sheaf Cech complex before the exactness argument; Lean proof uses the existing CechModuleSheafFunctor and CechModuleSheafTerms, and retains the canonical private product comparisons from CechModuleSheafComparison to prove local scalar compatibility; repair generalizes projection compatibility to arbitrary families of opens and coface compatibility to all simplex morphisms"
  },
  "mathlib_searches": [
   {
@@ -131,10 +148,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T054237-L-449145",
-  "kind": "interface",
+  "landing": "20261013T072350-L-1119724",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
