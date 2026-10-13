@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "sbc-thm-bounded-below-derived-smooth-base-change",
-   "place": "Upstream master declaration AlgebraicGeometry.Etale.isIso_baseChange_of_smooth_of_ring_order_invertible; target specialization and comparison with the blueprint theorem",
+   "place": "Proof, final sentence: detection on cohomology sheaves gives the displayed bounded-below exchange isomorphism; this node specializes its allowable-torsion input to arbitrary ModuleCat coefficients satisfying the ring-order hypothesis.",
    "via": []
   },
   "same_as": []
@@ -18,18 +18,140 @@
   "commit": "b26b15768858de9275b5b0f39420241c76652bfa"
  },
  "stmt_deps": [
-  "sbc-thm-bounded-below-derived-smooth-base-change",
-  "sbc-thm-smooth-base-change"
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Fix an arbitrary $K\\in D^+(\\operatorname{Sheaf}(X_{\\mathrm{et}},\\operatorname{ModuleCat}\\Lambda))$. Use [lem-weil-pbc-etale-constant-ring-module-equivalence] on each of the four schemes to realize module-valued sheaves as modules over the constant ring sheaf, retaining their underlying abelian presheaves. This equivalence is additive because it leaves the abelian presheaves and maps unchanged. Transporting the universal properties of kernels and cokernels through its Hom bijections shows that it and its inverse are exact. Termwise application therefore preserves cohomology and quasi-isomorphisms; the termwise inverse and the equivalence unit and counit descend through localization, giving inverse equivalences of the bounded-below derived categories of [def-weil-pbc-derived-categories]. Direct image in both encodings evaluates at $W\\times_Y X$, by [def-weil-pbc-direct-image], so the equivalence identifies direct images. It also preserves injective objects: extension of a map across a monomorphism transports through the Hom bijections and the exact inverse equivalence. Thus transporting a bounded-below injective representative in the computation of [def-weil-pbc-direct-image] identifies the derived direct images, naturally in the complex. The derived inverse images are termwise inverse images by [def-weil-pbc-derived-inverse-image], so their comparison descends from the sheaf comparison. Transporting the Hom adjunction of [def-weil-pbc-inverse-image] identifies inverse images with their units and counits: the image of the identity under the transported Hom bijection is precisely the unit (and similarly the counit). Thus the three factors of the upstream definition, unit insertion, the pullback-square comparison, and counit contraction, identify with the explicit three factors of [def-weil-pbc-derived-exchange]; the square comparison is obtained from the same composition identity $g\\circ f'=f\\circ g'$. We may therefore use the constant-ring encoding without changing the base-change arrow.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; coefficient-ring specialization of its displayed bounded-below exchange isomorphism"
+   }
+  },
+  {
+   "text": "Let $A=\\operatorname{For}K$. By [lem-weil-pbc-exchange-forget-coefficients], forgetting is exact on these bounded-below derived categories and $H^i(A)=\\operatorname{For}H^i(K)$. Put $n=\\operatorname{addOrderOf}(1_\\Lambda)$: the least positive integer killing $1_\\Lambda$ if one exists, and zero otherwise. In either case $n1_\\Lambda=0$, so every $\\Lambda$-module element $m$ satisfies $nm=(n1_\\Lambda)m=0$. This remains true of every geometric stalk by its colimit-of-sections definition [def-weil-pbc-geometric-stalks]. The hypothesis with $a=1_\\Lambda$ says $n$ is a unit in $\\Gamma(Y,\\mathcal O_Y)$. If $n=0$ and there were a geometric point $s:\\operatorname{Spec}\\Omega\\to X$, the scheme morphism $f\\circ s$ would induce a unital ring map $\\Gamma(Y,\\mathcal O_Y)\\to\\Omega$ [def-pc-scheme], taking this unit to zero in a field, an impossibility. Thus in that case there are no geometric stalks to test. If $n>0$, every stalk element has finite order dividing $n$. For each prime divisor $p$ of $n$, write $n=pr$; if $v$ is an inverse of $n$ in the global section ring, then $rv$ is an inverse of $p$. Consequently every stalk of every $H^i(A)$ is torsion with prime divisors in the set $\\mathcal P$ of primes invertible on $Y$. By [sbc-def-derived-categories-with-allowable-torsion], $A\\in D^+_{\\mathcal P\\text{-tor}}(X_{\\mathrm{et}})$.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "def-weil-pbc-geometric-stalks",
+    "def-pc-scheme",
+    "sbc-def-derived-categories-with-allowable-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; coefficient-ring specialization of its displayed bounded-below exchange isomorphism"
+   }
+  },
+  {
+   "text": "Apply [sbc-thm-bounded-below-derived-smooth-base-change] to $A$. To compare square names, its $(S,T,X,Y;f,g,h,e)$ are respectively our $(Y,X,Y',X';g,f,f',g')$. Thus its smooth side is our $g$, its quasi-compact quasi-separated side is our $f$, and its allowable primes are precisely those invertible on our $Y$. Its source is $A$ on our $X$ and its exchange morphism has endpoints $Lg^*Rf_*A$ and $Rf'_*Lg'^*A$ on our $Y'$. Its displayed exchange morphism is therefore an isomorphism. The current cited statement correctly puts it on its $X_{\\Et}$, namely our $Y\\prime_{\\Et}$. The square and its arrow assignments are the display of [sbc-thm-smooth-base-change]. The identification sentence in [sbc-def-base-change-map] identifies this $\\operatorname{BC}_{f,g}$ with [def-weil-pbc-derived-exchange] after exchanging vertical and horizontal sides, so this is the abelian exchange arrow used in step 4. We use that explicit identification, not the ill-typed first composite in the map definition disclosed in the report.",
+   "uses": [
+    "sbc-thm-bounded-below-derived-smooth-base-change",
+    "sbc-thm-smooth-base-change",
+    "sbc-def-base-change-map",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; coefficient-ring specialization of its displayed bounded-below exchange isomorphism"
+   }
+  },
+  {
+   "text": "Under the inverse-image and derived-direct-image comparisons in clauses (1) and (2) of [lem-weil-pbc-exchange-forget-coefficients], clause (3) identifies the forgotten actual module exchange arrow with the abelian exchange arrow just proved invertible. Its final assertion reflects invertibility, so the component $\\operatorname{BC}^{\\Lambda}_\\square(K)$ of the upstream natural transformation is an isomorphism. The arrow is the unit-square-counit mate identified in step 1, rather than an independently chosen isomorphism between its endpoints.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; coefficient-ring specialization of its displayed bounded-below exchange isomorphism"
+   }
+  },
+  {
+   "text": "Write $\\alpha=\\operatorname{BC}^{\\Lambda}_\\square$. Since $K$ was arbitrary, define the inverse transformation componentwise by $\\beta_K=\\alpha_K^{-1}$. For any morphism $t:K\\to L$, naturality $F(t)\\alpha_L=\\alpha_K G(t)$, in diagrammatic composition order, gives $G(t)\\beta_L=\\beta_K F(t)$ after multiplication by the two inverses. This proves naturality of $\\beta$. The identities $\\alpha_K\\beta_K=1$ and $\\beta_K\\alpha_K=1$ hold componentwise, hence as transformations. Therefore $\\alpha$ is an isomorphism of functors, exactly the upstream conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; coefficient-ring specialization of its displayed bounded-below exchange isomorphism"
+   }
+  }
+ ],
  "proof_deps": [
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-pbc-geometric-stalks",
+  "def-pc-scheme",
+  "sbc-def-derived-categories-with-allowable-torsion",
   "sbc-thm-bounded-below-derived-smooth-base-change",
-  "sbc-thm-smooth-base-change"
+  "sbc-thm-smooth-base-change",
+  "sbc-def-base-change-map"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+  "place": "Proof; coefficient-ring specialization of its displayed bounded-below exchange isomorphism",
+  "note": "Coefficient specialization written explicitly; follows the existing bounded-below smooth-base-change route and Stacks Tags 0EYU, 0D6J, 07A7 for geometry and coefficient comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for bounded below derived etale sheaves of modules over a torsion commutative ring",
+   "results": "Hits: KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.comp, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; read search output: ring algebra base change and normalization, not derived etale sheaf exchange.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth; read search output: ring algebra base change and normalization, not derived etale sheaf exchange.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*smooth|smooth.*baseChange",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean; read search output: ring algebra base change and normalization, not derived etale sheaf exchange.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale cohomology smooth pullback commutes with derived direct image for torsion coefficients",
+   "results": "Hits: KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.Scheme.Modules.pullbackComp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc; read search output: ring algebra base change and normalization, not derived etale sheaf exchange.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change for derived etale cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "launcher",
@@ -50,5 +172,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "nt-target-etale-smooth-ring",
+  "worker": "stage1",
+  "summary": "No attachment exists. Reused the bounded-below allowable-torsion theorem and the existing constant-ring module equivalence and coefficient-forgetting exchange lemma. Derived the torsion condition from addOrderOf(1), including the zero-order and empty-scheme cases, matched the exact upstream mate, and wrote out the natural inverse. No new nodes. Target statement unchanged. Resumed review makes exactness, injective preservation and derived transport explicit and adds the existing derived-inverse-image definition as a citation.",
+  "blueprint": "The bounded-below ancestor displayed exchange isomorphism and its Proof paragraph are used in step 3; steps 1, 2, 4, 5 explicitly specialize coefficients and pass from components to the upstream functor isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "why": "Generic coefficient-encoding equivalence, not a replacement of the smooth-base-change route; the smooth unit has no such equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic comparison and conservativity for the actual derived exchange arrow for arbitrary coefficients, needed to pass from the abelian blueprint to ModuleCat; no smooth unit statement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-4d7e98a55",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-4d7e98a55 (reviewer sub-agent of L); spot-checked: Reviewed the target, all cited statements, unit/chapter route, exact master Smooth.lean and MorphismDefs construction, source passages, edge cases, hypotheses, coefficient equivalence, exchange-map identification, and all five proof steps. No new nodes or duplicates; no mathematical or citation faults found. Full review written to review.md."
  }
 }
