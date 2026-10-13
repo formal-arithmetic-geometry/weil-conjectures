@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-qcqs-projection-mate-affine-descent",
+ "kind": "statement",
+ "title": "Affine descent of the supplied derived projection mate",
+ "statement": "Use the derived categories [def-pc-derived-category], their canonical K-flat tensor [def-pc-scheme-derived-tensor-structure], derived pullback [def-pc-derived-pullback] and direct image [def-pc-derived-direct-image] of schemes [def-pc-scheme]. For a morphism f, an adjunction p:Lf^*\\dashv Rf_* with counit \\epsilon and a natural isomorphism t:Lf^*(-\\otimes^L-)\\simeq Lf^*(-)\\otimes^L Lf^*(-), write \\pi_{p,t}(M,L) for the adjunction transpose of t_{M,Rf_*L} followed by 1_{Lf^*M}\\otimes\\epsilon_L. Fix scheme universe u. Assume that for every commutative ring A of universe u, every quasi-compact quasi-separated Z of universe u, every quasi-compact quasi-separated g:Z\\to\\operatorname{Spec} A, every p,t as above and every N\\in D_{QCoh}(\\operatorname{Spec} A), E\\in D_{QCoh}(Z), the mate \\pi_{p,t}(N,E) is invertible in all choices of the two derived localizations with morphism universe u+1. Then for every quasi-compact quasi-separated X,Y of universe u, every quasi-compact quasi-separated f:X\\to Y, all derived localizations in any common morphism universe w, every p,t and M\\in D_{QCoh}(Y), L\\in D_{QCoh}(X), the mate \\pi_{p,t}(M,L) is invertible.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EU, lemma-cohomology-base-change"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Cover Y by affine opens V and identify each with Spec Gamma(V,O). The preimage U is quasi-compact by quasi-compactness of f and quasi-separated by quasi-separatedness of X. Exact open restriction is a localization with fully faithful derived right adjoint; compute its counit on a K-injective resolution, where restriction followed by open direct image returns the restricted complex.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two tensor-pullback bifunctors factor through restriction to V and U, using the natural restriction comparisons. Descend the supplied t by evaluation on the fully faithful right adjoints and the localization counits. Transport p likewise; the restricted counit formula for its Hom equivalence identifies the restricted projection mate with the descended mate.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Canonical equivalences between choices of localization transport the same K-flat tensor, pullback, direct image and their comparisons to morphism universe u+1. Transport also along V isomorphic to Spec Gamma(V,O). Apply the assumed affine case. Exact restriction preserves quasi-coherent cohomology, so all hypotheses on the restricted objects hold.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invertibility is detected by cohomology and then by restriction of those sheaves to the affine open cover. Apply the sheaf-module open-cover detection theorem in every cohomological degree. The empty cover for an empty target gives the zero category.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EU, lemma-cohomology-base-change",
+  "note": "F1: the relevant step of the existing supplied-mate plan, including arbitrary p and t."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula derived quasi coherent schemes affine open cover locality",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived categories natural transformations descent localization open restriction projection formula",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.leftDerivedNatTrans_fac; no exact matching scheme projection-mate result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*coversTop|localization.*[Nn]atTrans|[Nn]atTrans.*localization",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/Topology/Sheaves/CommRingCat.lean; no exact matching scheme projection-mate result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCqsDerivedProjectionMate",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0A9Q Hom chain, fourth equality: the derived projection formula; projection formula affine reduction, generators and closure",
+   "via": [
+    "lem-pc-qcqs-derived-projection-mate",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-global-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCqsProjectionMateAffineDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCqsProjectionMateAffineDescent.lean",
+  "declaration": "AlgebraicGeometry.qcqsProjectionMate_of_affine",
+  "statement": "theorem qcqsProjectionMate_of_affine (haffine : ∀ (A : Type u) [CommRing A] (Z : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z] [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (g : Z ⟶ Spec (.of A)) [QuasiCompact g] [QuasiSeparated g] (q : derivedPullback g ⊣ schemeDerivedDirectImage g) (s : tensor (schemeDerivedCategory (Spec (.of A))) ⋙ derivedPullback g ≅ (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory Z)) (N : schemeDerivedQCohCategory (Spec (.of A))) (E : schemeDerivedQCohCategory Z), IsIso (q.homEquiv (N.obj ⊗ (schemeDerivedDirectImage g).obj E.obj) ((derivedPullback g).obj N.obj ⊗ E.obj) (s.hom.app (N.obj, (schemeDerivedDirectImage g).obj E.obj) ≫ (𝟙 ((derivedPullback g).obj N.obj) ⊗ₘ q.counit.app E.obj)))) (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (p : derivedPullback f ⊣ schemeDerivedDirectImage f) (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅ (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X)) (M : schemeDerivedQCohCategory Y) (L : schemeDerivedQCohCategory X) : IsIso (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj) ((derivedPullback f).obj M.obj ⊗ L.obj) (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫ (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095947-L-2456698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095947-L-2456698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

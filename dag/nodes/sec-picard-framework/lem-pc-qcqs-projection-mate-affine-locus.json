@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-qcqs-projection-mate-affine-locus",
+ "kind": "statement",
+ "title": "Closure properties of the all-shifts affine projection-mate locus",
+ "statement": "Use the derived categories [def-pc-derived-category], their canonical K-flat tensor [def-pc-scheme-derived-tensor-structure], derived pullback [def-pc-derived-pullback] and direct image [def-pc-derived-direct-image] of schemes [def-pc-scheme]. For a morphism f, an adjunction p:Lf^*\\dashv Rf_* with counit \\epsilon and a natural isomorphism t:Lf^*(-\\otimes^L-)\\simeq Lf^*(-)\\otimes^L Lf^*(-), write \\pi_{p,t}(M,L) for the adjunction transpose of t_{M,Rf_*L} followed by 1_{Lf^*M}\\otimes\\epsilon_L. Let A be a commutative ring, Y=\\operatorname{Spec} A, X a quasi-compact quasi-separated scheme and f:X\\to Y a quasi-compact quasi-separated morphism, with p,t as above and L\\in D_{QCoh}(X). Let e:D(A)\\simeq D_{QCoh}(Y) be an equivalence whose composite with the ambient inclusion is triangulated for a compatible shift structure. The localization universe for D(A) may differ from the one for the two scheme derived categories. Define P(K) to mean: for every n\\in\\mathbf Z, every M\\in D_{QCoh}(Y) and every isomorphism e(K[n])\\simeq M in the ambient derived category, \\pi_{p,t}(M,L) is invertible. Then P is closed under all coproducts indexed in the module universe, the third vertex of any distinguished triangle with its first two vertices in P, and retracts.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EU, lemma-cohomology-base-change"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural mate transformation in M from naturality of t, the counit and the adjunction Hom equivalence. Exactness of the K-flat tensor and pullback and of derived direct image makes both functors exact. Compose with the given triangulated ambient realization of e.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence e preserves coproducts and the quasi-coherent inclusion preserves ambient sums. Pullback preserves coproducts by p. Tensor preserves them and the quasi-coherent pullback/tensor outputs allow qcqs direct-image coproduct preservation. Thus a component on a sum is the sum of its invertible components; apply this after every shift.",
+   "uses": [
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-sc-derived-tensor-right-coproducts",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-canonical-derived-tensor-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each shift of a distinguished triangle, apply all ambient Hom(T,-) functors to both exact image sequences. Naturality at the triangle maps and the connecting maps provides the commuting vertical maps at F(K[n]), without requiring t to commute with an independently chosen shift comparison. The five lemma and Yoneda give invertibility at the third vertex for every shift. Explicitly the five vertices are Hom(T,F(A[n])), Hom(T,F(B[n])), Hom(T,F(C[n])), Hom(T,F(A[n+1])), Hom(T,F(B[n+1])), and likewise for the second functor. The first, second, fourth and fifth vertical maps are bijective by P(A) and P(B), so the ordinary five lemma gives the middle bijection. This is a formal exact-sequence argument once exactness in the first step is supplied.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A retract induces a retract of the arrows by naturality, so an invertible component gives invertibility on the retract. Isomorphism transport follows from naturality, and the quantified isomorphisms in P are composed with this transport. The empty coproduct has zero vertices.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-direct-image",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-canonical-derived-tensor-qcoh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EU, lemma-cohomology-base-change",
+  "note": "F1: the relevant step of the existing supplied-mate plan, including arbitrary p and t."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural transformation between derived exact functors isomorphism locus coproducts distinguished triangles generators",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism locus natural transformation exact triangulated functors coproducts retracts",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁, CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂, DerivedCategory.triangleOfSESIso, CategoryTheory.Functor.map_distinguished_exact, CochainComplex.mappingCone.mapTrianglehIso; no exact matching scheme projection-mate result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "retractArrowApp|isIso.*[Tt]riangle|[Tt]riangle.*isIso",
+   "results": "25 hits: Mathlib/Algebra/Homology/LeftResolution/Reduced.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean; no exact matching scheme projection-mate result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCqsDerivedProjectionMate",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0A9Q Hom chain, fourth equality: the derived projection formula; projection formula affine reduction, generators and closure",
+   "via": [
+    "lem-pc-qcqs-derived-projection-mate",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-global-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCqsProjectionMateAffineLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCqsProjectionMateAffineLocus.lean",
+  "declaration": "AlgebraicGeometry.qcqsProjectionMate_affineLocus_closed",
+  "statement": "theorem qcqsProjectionMate_affineLocus_closed (htri : ∃ (_h : (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ), (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).IsTriangulated) : let P : ObjectProperty (DerivedCategory (ModuleCat.{u} A)) := fun K ↦ ∀ (M : schemeDerivedQCohCategory (Spec (.of A))) (n : ℤ), Nonempty ((e.functor.obj (K⟦n⟧)).obj ≅ M.obj) → IsIso (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj) ((derivedPullback f).obj M.obj ⊗ L.obj) (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫ (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj))); (∀ {I : Type u} (F : I → DerivedCategory (ModuleCat.{u} A)) (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i, F i ⟶ S), IsColimit (Cofan.mk S ι) → (∀ i, P (F i)) → P S) ∧ (∀ T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} A)), T ∈ Pretriangulated.distinguishedTriangles → P T.obj₁ → P T.obj₂ → P T.obj₃) ∧ (∀ {K N : DerivedCategory (ModuleCat.{u} A)}, Retract K N → P N → P K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095947-L-2456698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095947-L-2456698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

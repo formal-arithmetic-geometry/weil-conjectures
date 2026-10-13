@@ -16,32 +16,29 @@
  ],
  "proof": [
   {
-   "text": "Write pi(M,L) for the displayed mate; it is natural by t, counit and Hom-equivalence naturality. Use the open-cover isomorphism detection of [lem-pc-projection-locality]. Restriction to an open is a localization with fully faithful derived right adjoint. Pullback and tensor commute with restriction by [lem-pc-affine-derived-pullback-tensor-tilde], and direct image does so by [lem-pc-restrict-derived-direct-image-open]. The bifunctors underlying t descend through these localizations; transport t by evaluation on the right adjoints and the localization counit, and transport p likewise. The restricted mate is the mate for the transported p and t. This is descent of the arbitrary supplied comparison, not an identification with the canonical comparison.",
+   "text": "Apply affine descent for the supplied mate. It suffices to prove the result for Z mapping to Spec A in standard localization universe u+1.",
    "uses": [
-    "lem-pc-projection-locality",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-qcqs-projection-mate-affine-descent"
    ],
    "elementary": false
   },
   {
-   "text": "On an affine target Spec A, [lem-pc-affine-qcoh-derived-equivalence] identifies the test object M with an A-module complex. Pullback preserves coproducts by its left adjunction, tensor does so by [lem-sc-derived-tensor-right-coproducts], and R preserves the required quasi-coherent coproducts by [lem-pc-derived-direct-image-preserves-direct-sums]. The pullback and tensor objects stay quasi-coherent by [lem-pc-derived-pullback-tensor-qcoh] and [lem-pc-canonical-derived-tensor-qcoh].",
+   "text": "Choose the standard module derived localization. Use the affine quasi-coherent equivalence e, with its triangulated ambient realization and its identification of shifted A with the shifted structure sheaf. Define the all-shifts, isomorphism-invariant locus P on D(A). Its coproduct, triangle and retract closure are supplied by the affine locus theorem.",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-sc-derived-tensor-right-coproducts",
-    "lem-pc-derived-direct-image-preserves-direct-sums",
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-canonical-derived-tensor-qcoh"
+    "lem-pc-qcqs-projection-mate-affine-locus"
    ],
    "elementary": false
   },
   {
-   "text": "For a shifted free rank-one module, identify F(M tensor B) and F(M) tensor F(B) with shifted F(B). The supplied natural isomorphism t then gives a natural automorphism of shifted F. Its adjunction mate is a natural automorphism of shifted R: the adjunction conjugate of t inverse is the inverse, by the two triangle identities. Consequently the projection components on all shifted free generators are invertible. For the canonical comparison this is the usual counit triangle calculation in the final sentence of Tag 08EU. This calculation must be made for the supplied t, which the parent does not assume canonical.",
-   "uses": [],
-   "elementary": true
+   "text": "For every shifted free generator ULift A[m] and every additional shift n, use ULift.moduleEquiv and shiftFunctorAdd to identify the double shift with A[m+n]. Map this isomorphism under e and the ambient inclusion, then use the affine equivalence unit identification and the supplied object isomorphism in P. The shifted-unit mate theorem proves membership in P.",
+   "uses": [
+    "lem-pc-qcqs-projection-mate-shifted-unit"
+   ],
+   "elementary": false
   },
   {
-   "text": "Fix L and use the property P(M) that pi(M[n],L) is invertible for every integer n. Apply [lem-pc-derived-module-free-generation]. Coproduct preservation gives coproduct closure, and retract closure is formal. For a distinguished triangle and all its shifts, apply Hom(T,-) for every ambient T to the two exact image functors. Naturality at the triangle arrows and connecting arrows gives a diagram of exact sequences whose vertical maps are pi at each shifted vertex. If P holds for two vertices, the five lemma proves it for the third, then Yoneda detects invertibility. This needs no assumption that t commutes with a chosen shift comparison. The shifted-unit calculation proves P on every generator. Open-cover detection completes the argument; zero objects and empty schemes cause no exception.",
+   "text": "Apply derivedModuleFreeGeneration to e.inverse(M), with the proved generator condition and the three closure conditions. Evaluate its resulting P membership at M and shift zero. The required ambient object isomorphism is e applied to shiftFunctorZero followed by the equivalence counit, mapped under the inclusion.",
    "uses": [
     "lem-pc-derived-module-free-generation"
    ],
@@ -49,21 +46,17 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-projection-locality",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-qcqs-projection-mate-affine-descent",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-sc-derived-tensor-right-coproducts",
-  "lem-pc-derived-direct-image-preserves-direct-sums",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-canonical-derived-tensor-qcoh",
+  "lem-pc-qcqs-projection-mate-affine-locus",
+  "lem-pc-qcqs-projection-mate-shifted-unit",
   "lem-pc-derived-module-free-generation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EU, lemma-cohomology-base-change; fourth Hom equality of duality.tex Tag 0A9Q, lemma-iso-on-RSheafHom",
-  "note": "G3: Tag 08EU projection argument formulated for the fixed mate used in Tag 0A9Q; the supplied tensor comparison remains a parameter as in the parent Lean statement."
+  "place": "Tag 08EU, lemma-cohomology-base-change",
+  "note": "F1: compiling affine-generation reduction. Three strictly intermediate obligations remain: affine descent, shifted-unit components, and closure of the all-shifts locus. ULift/shift/equivalence transport and the free-generation application are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -170,9 +163,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T082346-L-1636200",
+  "landing": "20261013T095947-L-2456698",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
