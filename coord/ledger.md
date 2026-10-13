@@ -10995,3 +10995,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/C1/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (stage 3; reviewer PASS; after a return; landing 20261013T040742-L-3946969 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/C4/Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence (stage 3; reviewer PASS; first push; landing 20261013T040742-L-3947067 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/D2/Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent (stage 3; reviewer PASS; first push; landing 20261013T040742-L-3947226 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:07 L: merged deliver/D2/Sheaf.RingTheory.PowerSeriesParameterPerturbation (stage 3; reviewer PASS; first push; landing 20261013T040743-L-3947339 (proof); batch 20261013T040738; modules 1; new nodes 0)

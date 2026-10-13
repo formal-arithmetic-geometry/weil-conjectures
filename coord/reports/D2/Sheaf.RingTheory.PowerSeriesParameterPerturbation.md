@@ -1,0 +1,115 @@
+## What changed
+
+Proved `MvPowerSeries.exists_power_series_parameter_perturbation` in
+`Sheaf.RingTheory.PowerSeriesParameterPerturbation`, preserving its signature and
+existing documentation. Seven proved private helpers handle variable membership,
+continuity, the maximal-ideal decomposition, coefficient ideal images, locality
+of coefficient rings, and extraction of regularity/completeness/dimension.
+
+The proof constructs deletion and inclusion with Mathlib `killCompl` and `rename`,
+constructs the perturbed lift with the existing adic-evaluation theorem, proves
+its composite is the original map, and proves both clauses of the regular-system
+of-parameters definition. Added the proof-only import
+`Mathlib.RingTheory.MvPowerSeries.Inverse` for the constant-coefficient unit criterion
+and the local-ring instance. All three original proof-dependency imports are used.
+Updated the item's node proof to describe the compiled argument; its statement,
+Lean signature, and proof dependencies stay unchanged. No other modules changed.
+
+## Proved and sorry left
+
+Closed the one original hole:
+`MvPowerSeries.exists_power_series_parameter_perturbation`
+(node `lem-weil-pbc-power-series-parameter-perturbation`).
+No `sorry` remains in the delivered module, and no holes were added or split off.
+This proves the item from existing declarations, including
+`MvPowerSeries.exists_unique_adic_evaluation`, whose proof remains an existing
+upstream obligation in `Sheaf.RingTheory.PowerSeriesAdicEvaluation`; it does not
+claim that the entire transitive argument is axiom-free already.
+
+The complete file compiles locally without warnings. The proof treats c=0 and
+c≠0 explicitly for coefficient ideals and dimension and works uniformly with
+n=0 and e=0; Fin.addCases and List.ofFn require no positive-variable hypotheses.
+Every chosen map is either explicitly constructed or uniquely determined by the
+adic-evaluation theorem's coefficient/variable/continuity clauses.
+
+## No longer needed
+
+None of the original imports, proof-dependency nodes, or modules was pruned:
+all three stated dependencies and the parameter definition are used. The explicit
+quotient equivalence and reindexing of a subtype are unnecessary for deletion:
+Mathlib's embedding `Fin.natAddEmb` gives the required map directly. The
+quotient-variables module is still needed for its constant-coefficient kernel
+clause. Trial proof imports `Mathlib.RingTheory.LocalRing.RingHom.Basic` and
+`Mathlib.Data.Fin.Embedding` were removed because the retained imports already
+provide their declarations; neither was in the original module.
+
+## Where the brief, the DAG or earlier work was wrong
+
+No statement or unit-route correction was needed. The implementation proves
+locality of h from locality of pi h=phi via `isLocalHom_of_comp`, avoiding the
+DAG's separate source-generator argument for locality. It supplies continuity
+by `Ideal.map_pow` instead of expanding monomials. The source's final perturbation
+paragraph was checked at https://stacks.math.columbia.edu/tag/07NN; the local
+copy of more-algebra.tex is absent on this machine. The original docstring and
+statement remain unchanged.
+
+## Second reading by D2
+
+1. **Visible interface: pass.** Read the complete delivered file and compared it
+   with the repository using `diff -u`. The existing theorem signature is byte
+   for byte identical (also checked by extracting the text before `:= by`), as
+   are its docstring, universes, visibility, and all existing public imports.
+   The only added import is proof-only `Mathlib.RingTheory.MvPowerSeries.Inverse`;
+   all seven new helpers are private proved theorems. No definitions, other
+   modules, or change records are delivered. Read the final paragraph of
+   [Stacks 07NN](https://stacks.math.columbia.edu/tag/07NN): the construction here
+   preserves coefficients, adds independent Y variables to the variable images,
+   and deletes them again, as that paragraph requires.
+
+2. **Proof and data: pass.** Compiled the delivered file through `lcompile.py`
+   without errors or warnings (3.2 seconds). A separate scratch copy with
+   `#print axioms MvPowerSeries.exists_power_series_parameter_perturbation`
+   compiled and reported only `propext`, `Classical.choice`, `Quot.sound`, and
+   the permitted upstream `sorryAx`. The delivered source contains no `sorry`
+   or forbidden declaration mechanism. The maps pi and iota are explicit
+   `killCompl` and `rename` constructions; z is `List.ofFn`. The adic-evaluation
+   statement was read in full: its uniqueness clause determines each chosen
+   evaluation map by constants, variables, and continuity. No arbitrary data
+   is taken from a mere unproved existence assertion.
+
+3. **Split statements: pass, none.** There are no split-off statements, new
+   public statements, new nodes, or additional holes. Read each private helper:
+   the ideal-power continuity argument is valid for N=0, the field coefficient
+   ideal is zero, and the Cohen coefficient ideal is generated by c. Checked
+   the incompatible field/DVR cases in the dimension helper. For n=0 or e=0,
+   the variable-membership obligations are vacuous and the empty lists have
+   the required lengths; the Cohen case with n=e=0 retains the single entry c.
+
+4. **Route and pruning: pass.** Read all three dependency statements and the
+   regular-system-of-parameters definition. Regularity/completeness/dimension
+   use the field/Cohen theorem; the maximal-ideal decomposition uses the
+   constant-coefficient kernel clause of `quotient_first_variables`; the lift
+   and composite identity use adic evaluation and its uniqueness. Locality of
+   h follows from `isLocalHom_of_comp`, and generation follows by subtracting
+   iota(phi(X_i)) from h(X_i), then `Fin.addCases`; the last goal is precisely
+   the list-length clause of the definition. Independent searches in lean/,
+   upstream RingTheory, and Mathlib MvPowerSeries found no shorter public
+   theorem. LeanFinder's maximal-ideal search returned only a univariate field
+   formula and the multivariate local-ring instance, neither replacing the
+   general decomposition. Loogle's kernel search was unavailable, not a
+   negative result. The analogous upstream helpers are private. Each retained
+   proof import is used; Inverse supplies the unit criterion and local-ring
+   instance. Every old proof dependency remains used, so `## No longer needed`
+   is complete. Read `dag/units/sk-thm-p1.json`, including `realized`: this
+   auxiliary node realizes no unit-level step, and its unchanged dependency
+   route bypasses no unit.
+
+5. **DAG: pass.** Compared the node JSON with the repository. Only `proof` and
+   `proof_origin` differ; the statement, Lean signature record, `proof_deps`,
+   chapter, and unit are unchanged. The four updated steps agree with the
+   actual proof, including the kernel computation in the second step and
+   the ideal-power continuity and composite-locality arguments in the third.
+   Their cited-node union equals `proof_deps`. No new-node requirements apply.
+
+Second reading changed only this report, adding the independent review and
+its verification evidence. No Lean or DAG repair was needed.
