@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-morphism-tuple",
+ "kind": "statement",
+ "title": "A canonical morphism sends each element to a compatible formal glueing tuple",
+ "statement": "Let R,S be commutative rings, phi:R→S any ring map, t a natural number and f:Fin(t)→R. Let M,N be R-modules [def-weil-module-base-change, def-weil-pbc-module-localization-away], and X,Y formal glueing data [def-weil-pbc-formal-glueing-data] with the canonical prime, chart, comparison and swap components for M and N respectively, as bundled equalities and HEqs. Let z:X→Y be a morphism. Let p:S tensor_R M→S tensor_R N be S-linear and c_i:M_fi→N_fi be R-linear, identified by HEq with the prime and chart components of z. Put eta(n)=1 tensor n. Write eta_fi for its localized map, and rho_i,rho_j for the canonical maps into N_(fi*fj). Then for every m in M the tuple (p(1 tensor m),(c_i(m/1))_i) is in the kernel of beta, where beta(y,(s_i))=((y/1-eta_fi(s_i))_i,(rho_i(s_i)-rho_j(s_j))_(i,j)). No flatness or quotient-isomorphism hypothesis is required, and no existence of a preimage in N is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 05EL, morphisms and the canonical functor; equation glueing-complex preceding Lemma 05EK. Read at https://stacks.math.columbia.edu/tag/05EL and https://stacks.math.columbia.edu/tag/05EK because the local TeX is absent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof": [
+  {
+   "text": "Transport the prime and chart maps of z along the equalities identifying X and Y with canonical objects. Restriction of the canonical R_f-module chart gives its original R-module structure by algebraMap_smul. The supplied HEqs identify the transported maps with p and c_i, and the structural maps with compare and swap.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For m in M, evaluate prime compatibility at (1 tensor m)/1. The comparison formula sends this to 1 tensor (m/1), and base change of c_i sends that to 1 tensor c_i(m/1). The localized eta map on c_i(m/1) has the same image under comparison: this follows on n/1 from the comparison formula, and on every fraction from the localization universal property. Injectivity of compare therefore gives equality of the localized prime value and localized eta(c_i(m/1)). Every first component of beta vanishes.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate chart compatibility at (m/1)/1. The swap fixes this element, giving swap(n_i/1)=n_j/1, where n_i=c_i(m/1). Write n_i=x/f_i^a and n_j=y/f_j^b. The swap formula gives (x/1)/f_i^a=(y/f_j^b)/1. Clearing the outer denominator and then the inner denominator gives c,d with f_j^d f_i^c (f_j^b x-f_i^a y)=0 in N. In N_(fi*fj), the two canonical images have difference with numerator f_i^b f_j^a(f_j^b x-f_i^a y) and denominator (f_i*f_j)^(a+b). Multiplication by (f_i*f_j)^(c+d) annihilates the numerator, so the difference is zero. This proves every overlap component of beta vanishes without cancellation in N.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extensionality of the product and of the two indexed families combines the zero component equations into beta(p(1 tensor m),(c_i(m/1))_i)=0. Empty indexed families and zero denominators are included by the same equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-formal-glueing-canonical-maps",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "C4 spells out the kernel calculation implicit in Remark 05EL; denominator clearing follows steps 2–3 of the parent morphism-lifting node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of formal glueing data sends a module element to a compatible tuple in the kernel of the glueing complex",
+   "results": "UNAVAILABLE: Internal Server Error; not evidence of absence. Used LeanFinder, Loogle and source grep instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible pair of maps on scalar extension and localized modules descends to a linear map by formal glueing",
+   "results": "IsLocalizedModule.mapExtendScalars, lift and map; generic localization and scalar extension only, no canonical morphism kernel calculation.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.ext",
+   "results": "IsLocalizedModule.ext: available universal-property uniqueness lemma, not the compatible-tuple statement.",
+   "verdict": "tool only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "formal[Gg]lu|canonical_map_surjective|compatible.*[Mm]ap in Mathlib; rg FormalGlueing in lean/Sheaf/RingTheory and lean/WeilConjectures/RingTheory; blueprint_refs.py search compatible tuple / 05EL",
+   "results": "Mathlib hits concern generic localization, adic completion and unrelated gluing. Existing project modules give exactness and canonical-map formulas, not this kernel calculation. Whole blueprint searches give zero matches.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingMorphismLifting",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Formal-glueing morphism lifting: compatibility of the component tuple, steps 2–3 of lem-weil-pbc-formal-glueing-morphism-lifting, on the 05ER equivalence branch.",
+   "via": [
+    "lem-weil-pbc-formal-glueing-morphism-lifting",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingMorphismTuple",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingMorphismTuple.lean",
+  "declaration": "FormalGlueing.canonical_tuple_compatible",
+  "statement": "theorem canonical_tuple_compatible {R : Type u} {S : Type v}\n    [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)\n    (M N : ModuleCat.{max u v w} R)\n    (X Y : Data.{u, v, max u v w} φ f)\n    (hX : X.M' = extend φ M ∧\n      (∀ i, X.M i = ModuleCat.of (Localization.Away (f i))\n        (LocalizedModule.Away (f i) M)) ∧\n      (∀ i, HEq (X.alpha i).toLinearMap (compare φ (f i) M)) ∧\n      (∀ i j, HEq (X.alpha_overlap i j).toLinearMap (swap (f i) (f j) M)))\n    (hY : Y.M' = extend φ N ∧\n      (∀ i, Y.M i = ModuleCat.of (Localization.Away (f i))\n        (LocalizedModule.Away (f i) N)) ∧\n      (∀ i, HEq (Y.alpha i).toLinearMap (compare φ (f i) N)) ∧\n      (∀ i j, HEq (Y.alpha_overlap i j).toLinearMap (swap (f i) (f j) N)))\n    (z : X ⟶ Y)\n    (p : extend φ M →ₗ[S] extend φ N)\n    (c : ∀ i, localize (f i) M →ₗ[R] localize (f i) N)\n    (hp : HEq z.prime p) (hc : ∀ i, HEq (z.chart i) (c i)) :\n    letI : Algebra R S := φ.toAlgebra\n    let η : N →ₗ[R] S ⊗[R] N := TensorProduct.mk R S N 1\n    let ρ := fun (a h : R) (ha : a ∣ h) ↦\n      IsLocalizedModule.lift (Submonoid.powers a)\n        (LocalizedModule.mkLinearMap (Submonoid.powers a) N)\n        (LocalizedModule.mkLinearMap (Submonoid.powers h) N)\n        (RingTheory.localizationAway_map_units_of_dvd (M := N) a h ha)\n    let β : (S ⊗[R] N) × (∀ i : Fin t, LocalizedModule.Away (f i) N) →\n        (∀ i : Fin t, LocalizedModule.Away (f i) (S ⊗[R] N)) ×\n          (∀ i j : Fin t, LocalizedModule.Away (f i * f j) N) :=\n      fun q ↦\n        (fun i ↦ LocalizedModule.mkLinearMap (Submonoid.powers (f i)) (S ⊗[R] N) q.1 -\n          IsLocalizedModule.map (Submonoid.powers (f i))\n            (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) N)\n            (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) (S ⊗[R] N)) η (q.2 i),\n         fun i j ↦ ρ (f i) (f i * f j) (dvd_mul_right (f i) (f j)) (q.2 i) -\n          ρ (f j) (f i * f j) (dvd_mul_left (f j) (f i)) (q.2 j))\n    ∀ m : M, β (p ((1 : S) ⊗ₜ[R] m), fun i ↦ c i (LocalizedModule.mk m 1)) = 0",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T111839-L-3048355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T111839-L-3048355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
