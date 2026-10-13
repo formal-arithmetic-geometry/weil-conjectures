@@ -19,101 +19,25 @@
  ],
  "proof": [
   {
-   "text": "Geometric regularity makes L=Λ_q regular local, so d=spanFinrank(m_L)=dim L. Put e=8c and n=N+de. Apply 07FH to the images of finite algebra generators of A in L/m_L^n. This yields a polynomial map k[y]→Λ, prime p, a flat local P₀=k[y]_p→L with pL=m_L, and an essentially smooth local Artinian solution D₀ over P₀/p^n flat locally over L/m_L^n. Faithful flatness makes its map injective; therefore A maps into D₀. The flat height formula gives dim P₀=d; choose u_i in p giving parameters in P₀ and L.",
+   "text": "Apply the coefficient construction to α,q,N,d,a,c. Unpack its polynomial algebra structures, coefficients ell and μ, parameter list, ideal bounds, Artinian algebra E and coefficient map b.",
    "uses": [
-    "lem-weil-pbc-popescu-solution-modulo",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-flat-height-formula",
-    "lem-weil-pbc-field-regular-ring",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-regular-ring-smooth-ascent",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-popescu-parameter-coefficients"
    ],
    "elementary": false
   },
   {
-   "text": "Put R=k[y,t_0,...,t_(d-1)] and send X_i in S to u_i t_i. Permutations of the parameters are regular in P₀, so the u_i t_i form a regular sequence after inverting k[y] outside p. Successively apply regular-sequence powers and Ogoma on R/((u_jt_j)^e:j<i), multiplying u_i by elements outside p, to equalize the first and square kernels. Earlier equalities are unchanged and parameter generation is preserved.",
-   "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-regular-sequence-polynomial-variables",
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-ogoma",
-    "def-weil-pbc-regular-sequence"
-   ],
-   "elementary": false
+   "text": "Evaluate the presentation polynomial ring with coefficients α, x_i→image(X_i) in Λ and z_ij→ell(i,j). The coefficient equations kill each relation. Since the relations span the kernel of the surjective presentation evaluation, descend to B. The coefficient restriction is α, and polynomial extensionality with hval proves the descended map η is S-linear. Repeat with coefficients f and z_ij→μ(i,j) to construct θ:B→E over S. These are the proved private helpers exists_presentation_lift and exists_standardizer_map, using Mathlib kernel descent.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Inductively construct δ_i outside q and λ_ij in Λ inside an enlarged Artinian coefficient solution D′. Faithful-flat contraction writes u_i^N=sum a_j d_j in D′. Lift d_j into L and correct the error in m_L^(n-N), then multiply by u_i^N so u_i^(2N)=sum a_j w_j with the prescribed residue classes. Choose a common denominator s₀ with w_j=u_j/s₀, and s₁ outside q killing s₀u_i^(2N)-sum u_j a_j. Set s=s₀s₁ and μ_j=s^(2N-1)s₁u_j: then (su_i)^(2N)=sum μ_j a_j and μ_j/s^(2N)=w_j. Enlarge by 07FI to include a positive power of s, rescaling μ_j. Apply Ogoma on Λ/((δ_ju_j)^e:j<i) and enlarge again by 07FI to include a suitable power (s′)^q. Take δ_i=(s′)^q s and λ_ij=(s′)^(2Nq)μ_j. This gives the relation in Λ, equal first/square kernels, and coefficient membership, preserving earlier conditions.",
-   "uses": [
-    "lem-weil-pbc-popescu-enlarge-solution-modulo",
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-ogoma"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Map R to Λ by t_i→δ_i. The displayed presentation P defines η:B→Λ over S, using α on A, x_i→δ_i u_i and z_ij→λ_ij. Set I₀=p^nR and K=m_L^n. In Q=R_(q∩R), the t_i are units. The pigeonhole bounds m_L^(d(e-1)+1)⊆(u_i^e)L and p^(d(e-1)+1)Q⊆(u_i^e)Q show I₀Q⊆JQ, K⊆JL and m_L^n⊆JL, because n=N+de>0. The equality pL=m_L gives I₀L⊆K.",
-   "uses": [
-    "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-regular-local-generators-regular-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Set E=D′[t]. The map R/I₀→(P₀/p^n)[t] is localization, hence essentially smooth. Base change and composition make E essentially smooth over R/I₀. Use P to define θ:B→E: send A to D′, x_i to u_i t_i, and z_ij to bar(λ_ij)t_i^(2N)bar(δ_i)^(-2N). The bar(δ_i) are units by locality of D′→L/K. After factoring t_i^(2N), each relation is zero because the faithfully flat coefficient map is injective and (δ_i u_i)^(2N)=sum a_j λ_ij. Evaluation at δ_i followed by D′→L/K defines b:E→L/K. The two composites agree on A and on every generator of P, hence on B. This step constructs maps on B only, with no improved presentation or tensor factorization.",
-   "uses": [
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-essentially-smooth-base-change",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the parameter list (u_it_i)^c and append zero. Equality of the first and second kernels implies by induction that every positive power has the same kernel; this gives both required kernel conditions for the c-th powers, whose eighth powers are (u_it_i)^e. The appended zero leaves J unchanged and satisfies both conditions. When d=0, m_L=0 and n=N>0, so all containments still hold. Finite polynomial presentations of the smooth models for D′, followed by transporting their multiplicative subsets and localizing, give D′ in Type(max u v). Reindex the finite y,t variable set as Fin m, transporting structures, ideals and maps.",
-   "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": false
+   "text": "The composites B→E→L/K and B→Λ→L→L/K agree on A by b(f(x))=image(α(x)), on each x_i by S-linearity, and on every z_ij by b(μ(i,j))=image(ell(i,j)). The presentation evaluation is surjective, so polynomial extensionality implies equality on all B (proved helper presentation_ringHom_ext). Package η, θ and this equality with the parameter data and ideal bounds.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-popescu-solution-modulo",
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
-  "lem-weil-pbc-flat-height-formula",
-  "lem-weil-pbc-field-regular-ring",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-regular-ring-smooth-ascent",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-weil-pbc-regular-sequence-polynomial-variables",
-  "lem-weil-pbc-regular-sequence-powers",
-  "lem-weil-pbc-ogoma",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-popescu-enlarge-solution-modulo",
-  "lem-weil-pbc-essentially-smooth-composition",
-  "def-weil-pbc-algebra-hom-quotient",
-  "def-weil-pbc-essentially-smooth-ring-map",
-  "lem-weil-pbc-essentially-smooth-base-change",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-mv-polynomial-ring"
+  "lem-weil-pbc-popescu-parameter-coefficients"
  ],
  "proof_origin": {
   "by": "document",
@@ -191,12 +115,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T211612-L-1056327",
+  "landing": "20261013T022411-L-3212108",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
