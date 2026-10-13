@@ -579,6 +579,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
+public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
@@ -745,6 +746,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 public import WeilConjectures.CategoryTheory.Sites.CechSpectralSequence
+public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.Sites.EquivariantEvaluation
@@ -1753,6 +1755,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FibreSections
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FiniteLowerStarLift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
@@ -1955,12 +1958,14 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.DisjointUnion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalars
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsExact
