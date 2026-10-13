@@ -1,5 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -26,5 +27,20 @@ theorem picardUniversalRankMatchLocus_exists_finitePresentation_iso
       (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g) :
     ∃ (W' : Scheme.{u}) (j' : W' ⟶ S) (e : W ≅ W'),
       LocallyOfFinitePresentation j' ∧ e.hom ≫ j' = j := by
-  sorry
+  obtain ⟨W', j', hj', hfp, hchar'⟩ :=
+    exists_picardUniversalRankMatchLocus_finitePresentation_core f E
+  have : IsImmersion j := hj
+  have : IsImmersion j' := hj'
+  obtain ⟨a, ha⟩ := (hchar' j).mpr ((hchar j).mp ⟨𝟙 W, Category.id_comp j⟩)
+  obtain ⟨b, hb⟩ := (hchar j').mpr ((hchar' j').mp ⟨𝟙 W', Category.id_comp j'⟩)
+  let e : W ≅ W' :=
+    { hom := a
+      inv := b
+      hom_inv_id := by
+        apply (cancel_mono j).mp
+        simp only [Category.assoc, hb, ha, Category.id_comp]
+      inv_hom_id := by
+        apply (cancel_mono j').mp
+        simp only [Category.assoc, ha, hb, Category.id_comp] }
+  exact ⟨W', j', e, hfp, ha⟩
 end AlgebraicGeometry.Scheme
