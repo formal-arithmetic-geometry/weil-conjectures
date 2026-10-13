@@ -12750,3 +12750,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationPostcomposition (stage 3; reviewer PASS; first push; landing 20261013T141522-L-377824 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationPrecomposition (stage 3; reviewer PASS; first push; landing 20261013T141522-L-377983 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CoefficientTargetScalarSpan (stage 3; reviewer PASS; first push; landing 20261013T141523-L-378080 (interface); batch 20261013T141520; modules 2; new nodes 1)
+- 14:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts (stage 3; reviewer PASS; first push; landing 20261013T141523-L-378249 (interface); batch 20261013T141520; modules 3; new nodes 2)

@@ -13,17 +13,29 @@
  ],
  "proof": [
   {
-   "text": "Set A=R[T]/(T^n-g), h=algebraMap R A g and S=A[1/h], with φ the composite\nR→A→S. The standard affine basic-open isomorphism identifies Spec S with V=D(h).\nOver U=D(g), the monic root polynomial gives a finite free cover of positive rank n.\nIts root is invertible, and n*T^(n-1) is invertible, so V→U is finite etale.\nPositive finite free rank makes this map surjective. Since g∉y.asIdeal, the point y\nbelongs to U; choose a point z of Spec S mapping to y. The composite Spec S→U→Spec R\nis etale, and φ(g) is a unit by construction. Transport the supplied δ along\nSpec S≅V to identify Y×_{Spec R}Spec S with d disjoint copies of Spec S, over Spec S.\nThus no descent of Y and no further local splitting is needed.\n\nEvaluation at φ(g) identifies S[T]/(T-φ(g)) with S as an S-algebra, with inverse\nthe algebra map. The finite product of these isomorphisms and the fact that Spec\nsends finite products to disjoint unions identify the displayed root-product\nspectrum with d copies of Spec S. The image of φ(g) remains a unit in the product,\nso its basic open is the whole spectrum. Compose with the transported δ. All maps\ncommute with the structure map to Spec S, proving the projection identity.\nIf d=0 the product is the zero ring and both sides are empty. Neither regularity\nnor a nonzerodivisor assumption is used. This is a root-split specialization of\nStacks 0EYG's off-divisor branch; its given splitting permits the shorter route.\n",
-   "uses": [],
+   "text": "Choose an affine chart of the punctured root cover containing a lift of y. This supplies S, phi, z and e together with etaleness, the point equation, unit property and compatibility over Spec R.",
+   "uses": [
+    "lem-sbc-root-split-away-localization-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply chart transport to the prescribed delta and its projection identity, using e and its compatibility. Package the resulting gamma with the chart properties.",
+   "uses": [
+    "lem-sbc-root-split-away-transport-chart"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-root-split-away-localization-point",
+  "lem-sbc-root-split-away-transport-chart"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "K3",
+  "by": "C1",
   "document": "Stacks Project",
-  "place": "0EYG off-divisor branch specialized to the supplied splitting: use the affine punctured root cover itself as the neighborhood."
+  "place": "Tag 0EYG off-divisor branch specialized to the supplied splitting; decomposition into pointed root chart and transport"
  },
  "mathlib_searches": [
   {
@@ -100,9 +112,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T133745-L-44394",
+  "landing": "20261013T141523-L-378249",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Algebra.Pi
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
 
 /-!
 # Degree-one root charts away from the divisor
@@ -24,6 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 /-- A root-split cover has only degree-one charts near a point off the divisor.
 
 Source: Stacks Project, Tag 0EYG, first proof paragraph; Tags 02LA, 02VN and 04HN.
@@ -75,6 +78,12 @@ theorem root_split_cover_away_divisor_charts
           (algebraMap S (∀ k : Fin d,
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))) (φ g))
         ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by sorry
+          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by
+  dsimp
+  intro δ hδ
+  obtain ⟨S, φ, z, e, he, hφ, hz, hunit⟩ :=
+    root_split_away_localization_point R g n hn y hy
+  obtain ⟨γ, hγ⟩ := root_split_away_transport_chart R g n p d S φ hunit e he δ hδ
+  exact ⟨S, φ, z, hφ, hz, hunit, γ, hγ⟩
 
 end AlgebraicGeometry.Scheme

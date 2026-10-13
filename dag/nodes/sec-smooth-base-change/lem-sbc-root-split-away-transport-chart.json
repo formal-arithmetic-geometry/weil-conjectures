@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-root-split-away-transport-chart",
+ "kind": "statement",
+ "title": "Transport a prescribed splitting through an affine root-cover isomorphism",
+ "statement": "Let p:Y to Spec R, g in R, n,d natural numbers, S a commutative ring, phi:R to S with phi(g) a unit. Put A=R[T]/(T^n-g), q:Spec A to Spec R and V=D(algebraMap R A g). Given e:Spec S isomorphic to V with e;inclusion;q=Spec phi, and delta:Y times V isomorphic to d disjoint copies of V over V (def-pc-fibre-product), there is gamma:Y times Spec S isomorphic to D(phi(g)) in Spec of the product indexed by Fin d of S[T]/(T-phi(g)), over Spec S. Spectra use def-weil-pbc-scheme-conventions. No point, etaleness or positivity hypothesis is needed for this transport.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, off-divisor branch; standard localization and degree-one root algebra calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Transport the pullback and each coproduct summand along e; the compatibility equations preserve the second projection. Evaluation T at phi(g) identifies each degree-one adjoin-root algebra with S over S. Spec of the finite product is the coproduct of spectra, including the empty-index zero-ring case. The image of the unit phi(g) is a unit, making the basic open the entire product spectrum. Compose these isomorphisms; all commute with the structure map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG off-divisor branch, specialized to the supplied root splitting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine basic open punctured monic root cover etale surjective and coproduct of affine schemes finite product of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible derivative root polynomial finite etale cover nonzero fibres and degree one adjoin root evaluation",
+   "results": "8 hits: StandardEtalePresentation.hasMap, StandardEtalePair.hasMap_X, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, StandardEtalePair.HasMap, Algebra.IsStandardEtale, StandardEtalePair.HasMap.isUnit_derivative_f, StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpenIsoSpec|is[Aa]ffineOpen_basicOpen|[Pp]rod|[Cc]oproduct",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, Polynomial.X - Polynomial.C _",
+   "results": "2 hits: AdjoinRoot.mul_div_root_cancel, Polynomial.X_sub_C_mul_removeFactor",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no full statement"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-cover-away-divisor-charts",
+   "place": "Transport a prescribed splitting through an affine root-cover isomorphism"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitAwayTransportChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_split_away_transport_chart",
+  "statement": "theorem root_split_away_transport_chart\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) {Y : Scheme.{u}}\n    (p : Y ⟶ Spec R) (d : ℕ) (S : CommRingCat.{u}) (φ : R →+* S)\n    (hunit : IsUnit (φ g)) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (e : Spec S ≅ V.toScheme),\n      e.hom ≫ V.ι ≫ q = Spec.map (CommRingCat.ofHom φ) →\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    let N := Spec (CommRingCat.of (∀ _k : Fin d,\n      AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))))\n    let q := Spec.map (CommRingCat.ofHom\n      (algebraMap S (∀ _k : Fin d,\n        AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g)))))\n    let V : N.Opens := PrimeSpectrum.basicOpen\n      (algebraMap S (∀ _k : Fin d,\n        AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))) (φ g))\n    ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,\n      γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T141523-L-378249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T141523-L-378249",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

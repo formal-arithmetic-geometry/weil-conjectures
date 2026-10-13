@@ -1,0 +1,104 @@
+{
+ "id": "lem-sbc-root-split-away-localization-point",
+ "kind": "statement",
+ "title": "Affine pointed etale chart of the punctured root cover",
+ "statement": "For R, g, positive n invertible in R and y in Spec R off g, put A=R[T]/(T^n-g), q:Spec A to Spec R and V=D(algebraMap R A g). There exist S, phi:R to S, z in Spec S and an isomorphism e:Spec S to V over Spec R such that Spec phi is etale, maps z to y, and phi(g) is a unit. Scheme and spectrum conventions are those of def-weil-pbc-scheme-conventions.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, off-divisor branch; standard localization and degree-one root algebra calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Take the explicitly constructed ring S=A[1/g]. The standard affine basic-open isomorphism gives e and the over-base identity. Over D(g) the root algebra is finite free of rank n>0, and the root and n are units, so the derivative is a unit and the cover is etale. Its residue-field fibres are nonzero finite-dimensional algebras, hence have prime ideals, proving surjectivity and providing z over y. The localization makes phi(g) a unit.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG off-divisor branch, specialized to the supplied root splitting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine basic open punctured monic root cover etale surjective and coproduct of affine schemes finite product of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible derivative root polynomial finite etale cover nonzero fibres and degree one adjoin root evaluation",
+   "results": "8 hits: StandardEtalePresentation.hasMap, StandardEtalePair.hasMap_X, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, StandardEtalePair.HasMap, Algebra.IsStandardEtale, StandardEtalePair.HasMap.isUnit_derivative_f, StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpenIsoSpec|is[Aa]ffineOpen_basicOpen|[Pp]rod|[Cc]oproduct",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, Polynomial.X - Polynomial.C _",
+   "results": "2 hits: AdjoinRoot.mul_div_root_cancel, Polynomial.X_sub_C_mul_removeFactor",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no full statement"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-cover-away-divisor-charts",
+   "place": "Affine pointed etale chart of the punctured root cover"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitAwayLocalizationPoint.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_split_away_localization_point",
+  "statement": "theorem root_split_away_localization_point\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    (y : Spec R) (hy : g ∉ y.asIdeal) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (z : Spec S) (e : Spec S ≅ V.toScheme),\n      e.hom ≫ V.ι ≫ q = Spec.map (CommRingCat.ofHom φ) ∧\n      Etale (Spec.map (CommRingCat.ofHom φ)) ∧\n      (Spec.map (CommRingCat.ofHom φ)) z = y ∧ IsUnit (φ g)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T141523-L-378249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T141523-L-378249",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
