@@ -26,42 +26,38 @@
  ],
  "proof": [
   {
-   "text": "For each i, C_i is perfect by induction. C_0=E is perfect. C_i sits in a distinguished triangle C_{i-1}\\xrightarrow{g_i}C_{i-1}\\to C_i\\to C_{i-1}[1] whose first two terms are perfect, so [lem-pc-perfect-two-out-of-three] implies C_i is perfect.",
+   "text": "Induct over Fin (s+1). The initial object is perfect by hE. At the successor apply the first clause of isPerfect_two_out_of_three to the scalar distinguished triangle and use the induction hypothesis for both copies of its input.",
    "uses": [
     "lem-pc-perfect-two-out-of-three"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Restriction to an open is a triangulated functor, so each C_j|_{D(g_i)} is a cone of multiplication by g_j on C_{j-1}|_{D(g_i)}. Since g_i is a unit on D(g_i), multiplication by g_i on C_{i-1}|_{D(g_i)} is an isomorphism, so C_i|_{D(g_i)}=0 (cone of an isomorphism is zero, Stacks Tag 05QR). For j>i, by induction C_j|_{D(g_i)} is a cone of an endomorphism of the zero object, hence zero (Tag 05QR again). Thus C_s|_{D(g_i)}=0 for every i, and since X\\setminus T=\\bigcup_i D(g_i), all cohomology sheaves of C_s vanish on X\\setminus T.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
-   }
+   "text": "Induct over k with the invariant: at every x belonging to some D(g_i) with i.val < k.val, every cohomology stalk of C_k is subsingleton. At k=0 the inequality is impossible. At the successor, if i=k use the unit branch of scalar_cone_stalk_vanishing. Otherwise i<k and the induction hypothesis supplies its acyclic-input branch. At k=Fin.last s every i in Fin s meets the inequality.",
+   "uses": [
+    "lem-sc-scalar-cone-stalk-vanishing"
+   ],
+   "elementary": false
   },
   {
-   "text": "We show by induction on i that C_i|_U\\cong\\bigoplus_{j=0}^{i+1}F[j]^{\\oplus\\binom{i+1}{j}}; i=0 is the hypothesis E|_U\\cong F\\oplus F[1]. Multiplication by g_i is a natural endomorphism of the identity functor of D(\\mathcal O_U), so it commutes with isomorphisms, shifts and finite direct sums; since it is zero on F, it is zero on C_{i-1}|_U\\cong\\bigoplus_j F[j]^{\\oplus\\binom{i}{j}}. Restriction to U preserves distinguished triangles, so C_i|_U is a cone of the zero endomorphism of K=C_{i-1}|_U. The triangle K\\xrightarrow{0}K\\to K\\oplus K[1]\\to K[1] is distinguished, being the direct sum (Stacks Tag 05QS) of the rotated triangles K\\to0\\to K[1]\\to K[1] and 0\\to K\\to K\\to0 (Tag 05QR), so C_i|_U\\cong K\\oplus K[1] by uniqueness of cones. Pascal's rule \\binom{i}{j}+\\binom{i}{j-1}=\\binom{i+1}{j} gives the multiplicities. For i=s this is C_s|_U\\cong\\bigoplus_{j=0}^{s+1}F[j]^{\\oplus\\binom{s+1}{j}}.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
-   }
+   "text": "Write R for the specified derived restriction. Inductively identify R(C_k) with the binomial sum B_(k.val+1)(F). The initial isomorphism is the supplied R(C_0) isomorphic to F plus F[1], followed by the initial clause of binomial_shift_biproduct. For a successor use restricted_scalar_cone_split with the finite binomial index type and shift function p mapped to p.1.val. Map the induction isomorphism across the binary biproduct and its shift, then compose with the Pascal clause of binomial_shift_biproduct. At Fin.last s this is the required formula.",
+   "uses": [
+    "lem-sc-restricted-scalar-cone-split",
+    "lem-sc-binomial-shift-biproduct"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-two-out-of-three"
+  "lem-pc-perfect-two-out-of-three",
+  "lem-sc-scalar-cone-stalk-vanishing",
+  "lem-sc-restricted-scalar-cone-split",
+  "lem-sc-binomial-shift-biproduct"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
+  "place": "Tag 08EK, cone construction; finite-index inductions and explicit binomial reindexing"
  },
  "mathlib_searches": [
   {
@@ -148,5 +144,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T045550-L-134365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

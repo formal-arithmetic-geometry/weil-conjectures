@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-binomial-shift-biproduct",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: take successive cones of multiplication by generators of T to obtain a perfect complex supported on T",
+   "via": [
+    "lem-sc-affine-support-iterated-cones",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pascal identity for binomial sums of shifts",
+ "statement": "Let Y be a scheme [def-pc-scheme] and F\\in D(\\mathcal O_Y) [def-pc-derived-category]. Put B_n(F)=\\bigoplus_{(j,c)\\in\\coprod_{j=0}^n\\operatorname{Fin}(\\binom n j)}F[j]. Then F\\oplus F[1]\\cong B_1(F), and B_n(F)\\oplus B_n(F)[1]\\cong B_{n+1}(F) for every n\\ge0.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The index set of B_0 is a singleton and the zero-shift isomorphism identifies B_0 with F. For the successor formula construct the following map from two copies of the index set of B_n to that of B_{n+1}: send an unshifted (j,c) to (j,c), and a shifted (j,c) to (j+1, choose(n,j+1)+c). Pascal's identity makes both maps well-defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
+   }
+  },
+  {
+   "text": "The unshifted entries in target degree j occupy positions below choose(n,j), and the shifted entries occupy the rest. These intervals are disjoint. Invert the map by comparing the target copy number with choose(n,j): the first case has j<=n, and the second has j>0 and comes from j-1. This proves bijectivity, including j=0, j=n+1, and n=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
+   }
+  },
+  {
+   "text": "The shift functor preserves finite biproducts. Distribute it across B_n, identify F[j][1] with F[j+1] using the shift-addition isomorphism, concatenate the two biproducts via their inclusions and projections, and reindex along the preceding bijection. This gives the successor formula. Taking n=0 and using B_0 isomorphic to F gives the initial formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK (Lemma 36.13.10), cone construction; triangulated consequences in Tags 05QR, 05QS, 05QT; explicit single-step formulation and glue"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Binomial multiplicity biproduct of shifted objects satisfies Pascal identity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Biproduct of shifts with binomial multiplicities plus its shift is isomorphic to the next binomial biproduct by Pascal identity",
+   "results": "CategoryTheory.Biprod.gaussian'; CategoryTheory.Biprod.gaussian; CategoryTheory.Biprod.unipotentLower; CategoryTheory.Biprod.unipotentUpper; CochainComplex.shiftFunctorAdd'; CategoryTheory.Limits.biproductBiproductIso; CategoryTheory.Limits.biproductBiproductIso_hom; CategoryTheory.shiftFunctorCompIsoId_add'_hom_app",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "biproduct.*(whiskerEquiv|Unique|sum)|choose_succ_succ",
+   "results": "Mathlib/Algebra/Group/ForwardDiff.lean; Mathlib/Algebra/Polynomial/Derivative.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean; Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean; Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean; Mathlib/CategoryTheory/Preadditive/Mat.lean; Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean; Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSupportIteratedCones",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BinomialShiftBiproduct",
+  "declaration": "AlgebraicGeometry.Scheme.binomial_shift_biproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/BinomialShiftBiproduct.lean",
+  "statement": "theorem binomial_shift_biproduct (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (F : schemeDerivedCategory Y) : Nonempty (F ⊞ F⟦(1 : ℤ)⟧ ≅ biproduct (fun p : (j : Fin 2) × Fin (Nat.choose 1 j.val) ↦ F⟦(p.1.val : ℤ)⟧)) ∧ (∀ n : ℕ, Nonempty ((biproduct (fun p : (j : Fin (n + 1)) × Fin (Nat.choose n j.val) ↦ F⟦(p.1.val : ℤ)⟧)) ⊞ (biproduct (fun p : (j : Fin (n + 1)) × Fin (Nat.choose n j.val) ↦ F⟦(p.1.val : ℤ)⟧))⟦(1 : ℤ)⟧ ≅ biproduct (fun p : (j : Fin (n + 2)) × Fin (Nat.choose (n + 1) j.val) ↦ F⟦(p.1.val : ℤ)⟧)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T045550-L-134365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T045550-L-134365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

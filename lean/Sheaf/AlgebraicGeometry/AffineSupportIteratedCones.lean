@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Data.Nat.Choose.Basic
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
+import Sheaf.AlgebraicGeometry.ScalarConeStalkVanishing
+import Sheaf.AlgebraicGeometry.RestrictedScalarConeSplit
+import Sheaf.AlgebraicGeometry.BinomialShiftBiproduct
 
 /-! # Affine support from successive cones
 
@@ -93,6 +96,63 @@ theorem affine_support_iterated_cones (X : Scheme.{u}) [IsAffine X]
             (Modules.overEquiv U)).mapDerivedCategory.obj (C (Fin.last s)) ≅
           biproduct (fun p : (j : Fin (s + 2)) × Fin (Nat.choose (s + 1) j.val) ↦
             F⟦(p.1.val : ℤ)⟧))) := by
-  sorry
+  have hperfect : ∀ i : Fin (s + 1), IsPerfect X (C i) := by
+    intro i
+    induction i using Fin.induction with
+    | zero => exact hE
+    | succ i ih =>
+      exact (isPerfect_two_out_of_three X _ (hcone i)).1 ih ih
+  refine ⟨hperfect (Fin.last s), ?_, ?_⟩
+  · have hsupport : ∀ k : Fin (s + 1), ∀ x : X,
+        (∃ i : Fin s, i.val < k.val ∧ x ∈ X.basicOpen ((g i).val (op ⊤))) →
+        ∀ n : ℤ, Subsingleton (↑(TopCat.Presheaf.stalk
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj (C k)).val.presheaf x)) := by
+      intro k
+      induction k using Fin.induction with
+      | zero =>
+        intro x hx
+        obtain ⟨i, hi, _⟩ := hx
+        simp at hi
+      | succ k ih =>
+        intro x hx
+        obtain ⟨i, hi, hx⟩ := hx
+        apply scalar_cone_stalk_vanishing X (g k) (C k.castSucc) (C k.succ)
+          (b k) (d k) (hcone k) x
+        by_cases hik : i = k
+        · subst i
+          exact Or.inl hx
+        · exact Or.inr (ih x ⟨i, by
+            have : i.val ≠ k.val := fun h ↦ hik (Fin.ext h)
+            simp only [Fin.val_succ, Fin.val_castSucc] at hi ⊢
+            omega, hx⟩)
+    intro n x hx
+    obtain ⟨i, hi⟩ := hx
+    exact hsupport (Fin.last s) x ⟨i, i.isLt, hi⟩ n
+  · intro _ F _ hF g' hg hzero
+    let R := ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Modules.overEquiv U)).mapDerivedCategory
+    have hsplit : ∀ k : Fin (s + 1), Nonempty
+        (R.obj (C k) ≅ biproduct
+          (fun p : (j : Fin (k.val + 2)) × Fin (Nat.choose (k.val + 1) j.val) ↦
+            F⟦(p.1.val : ℤ)⟧)) := by
+      intro k
+      induction k using Fin.induction with
+      | zero =>
+        obtain ⟨e⟩ := hF
+        obtain ⟨e₀⟩ := (binomial_shift_biproduct U.toScheme F).1
+        exact ⟨e ≪≫ e₀⟩
+      | succ k ih =>
+        obtain ⟨e⟩ := ih
+        obtain ⟨econe⟩ := restricted_scalar_cone_split X U (g k) (g' k) (hg k)
+          (C k.castSucc) (C k.succ) (b k) (d k) (hcone k) F (hzero k)
+          ((j : Fin (k.val + 2)) × Fin (Nat.choose (k.val + 1) j.val))
+          (fun p ↦ (p.1.val : ℤ)) ⟨e⟩
+        obtain ⟨epascal⟩ := (binomial_shift_biproduct U.toScheme F).2 (k.val + 1)
+        exact ⟨econe ≪≫ biprod.mapIso e ((shiftFunctor _ (1 : ℤ)).mapIso e) ≪≫ epascal⟩
+    exact hsplit (Fin.last s)
 
 end AlgebraicGeometry.Scheme

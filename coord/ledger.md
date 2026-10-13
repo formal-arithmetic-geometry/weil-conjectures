@@ -11149,3 +11149,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/P2/Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension (stage 3; reviewer PASS; first push; landing 20261013T045548-L-133804 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/P3/Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks (stage 3; reviewer PASS; first push; landing 20261013T045549-L-133990 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/P3/Sheaf.AlgebraicGeometry.SupportedMapAffineUnionGluing (stage 3; reviewer PASS; first push; landing 20261013T045549-L-134127 (interface); batch 20261013T045507; modules 3; new nodes 2)
+- 04:55 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.AffineSupportIteratedCones (stage 3; reviewer PASS; first push; landing 20261013T045550-L-134365 (interface); batch 20261013T045507; modules 4; new nodes 3)
