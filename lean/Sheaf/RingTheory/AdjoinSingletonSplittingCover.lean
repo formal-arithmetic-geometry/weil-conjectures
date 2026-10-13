@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
+import Sheaf.RingTheory.AdjoinSingletonSplittingPolynomialCover
+import Mathlib.RingTheory.Ideal.Operations
+
 /-! # Splitting cover before constructing the normal principal open
 Source: Stacks Project, Algebra, Tag 0334, Step 5. -/
 
@@ -60,4 +63,22 @@ theorem exists_adjoin_singleton_splitting_cover
                 Algebra.adjoin R' ({z} : Set K')) -
                 algebraMap R' (Algebra.adjoin R' ({z} : Set K')) r ∈
                 q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))
-                  (Localization M)) := by sorry
+                  (Localization M)) := by
+  obtain ⟨R', K', hCR, hDom, hNorm, hField, hAlg, hFrac, hNag, z, M, hM,
+      hA, hinj, hfin, d, roots, hd, hpoly⟩ :=
+    exists_adjoin_singleton_splitting_polynomial_cover R K hR x m
+  let : CommRing R' := hCR
+  let : IsDomain R' := hDom
+  let : IsIntegrallyClosed R' := hNorm
+  let : Field K' := hField
+  let : Algebra R' K' := hAlg
+  let : IsFractionRing R' K' := hFrac
+  refine ⟨R', K', hCR, hDom, hNorm, hField, hAlg, hFrac, hNag, z, M, hM, hA,
+    hinj, hfin, ?_⟩
+  intro q hq
+  obtain ⟨hmax, hprod⟩ := hpoly q
+  refine ⟨hmax, ?_⟩
+  have : (q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))
+    (Localization M))).IsPrime := hmax.isPrime
+  obtain ⟨i, _, hi⟩ := Ideal.IsPrime.prod_mem_iff.mp hprod
+  exact ⟨roots i, hi⟩
