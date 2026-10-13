@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-mixed-affine-extension-unit-normalization",
+ "kind": "statement",
+ "title": "Mixed affine extension source unit normalization",
+ "statement": "Let $g:T\\to S$ be a scheme morphism [def-pc-scheme], with $S$ affine and independent module and sheaf derived universes [def-pc-derived-category]. Let $F$ be tilde followed by restriction through the canonical spectrum chart [lem-weil-pbc-affine-tilde-gamma-adjunction], $H=\\Gamma_S$ [def-sc-ringed-space-module-cohomology], $E$ ordinary extension and $R$ scalar restriction. For a K-flat complex $P$ [def-pc-module-kflat-complex], set $C=F(P)$ and $X=H(C)$. There exists a source isomorphism $a:LE(R\\Gamma_S(Q C))\\cong Q(E X)$ [lem-sc-mixed-global-extension-adjunction] such that for every module complex $Z$ over $\\Gamma(T,\\top)$ and every chain map $f:E X\\to Z$, $s_C;\\operatorname{homEquiv}(a;Q(f))=Q(\\eta_E(X);R(f));r_Z$, where $s_C$ is mixedSectionsComplexUnit and $r_Z$ is the inverse exact restriction factor. This statement has no pullback or Leray term.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (affine derived sections unit), 08DV and 08DW(2) (K-flat pullback model), 0AA7 (canonical scalar-extension transpose), 0D5T (normalized Leray comparison)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-module-kflat-complex",
+  "lem-sc-mixed-global-extension-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The affine tilde unit identifies H(F(P)) with P, so extension has an invertible left-derived counit on this K-flat complex.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the extension adjunction by left-adjoint uniqueness; define a as inverse extension of the sections unit followed by the counit.",
+   "uses": [
+    "lem-sc-mixed-global-extension-adjunction",
+    "lem-sc-mixed-affine-chart-sections-complex-unit-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedη_fac_app, postcompose with f, and use naturality of the exact restriction comparison to obtain the formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-sc-mixed-affine-chart-sections-complex-unit-isIso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (affine derived sections unit), 08DV and 08DW(2) (K-flat pullback model), 0AA7 (canonical scalar-extension transpose), 0D5T (normalized Leray comparison); explicit ordinary-adjunction and localization calculation; explicit Lean proof in delivered module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordinary to derived global sections unit on an unbounded affine chart complex and compatibility with extension and pullback adjunction units",
+   "results": "Unavailable: service returned Internal Server Error; independently searched LeanFinder, Loogle and sources instead.",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport right derived functor unit along exact equivalence affine global sections",
+   "results": "Found exact-functor factors and affine scheme equivalence, but no chart unit or either mixed normalization statement.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Generic hom-equivalence naturality only; used in the parent reduction, does not supply the affine models.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompUnit|mapDerivedCategoryFactors|unit_leftAdjointUniq",
+   "results": "Exact derived factors, their naturality, and adjunction uniqueness formulas; no duplicate of any new statement. Also read AffineExtensionModelUnit, AffineTildeDerivedSectionsUnitIsIso, and AffineKFlatPullbackChartComparison: they give components or spectrum-only formulas, not the arbitrary affine-chart normalization.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedAffineSectionsChartModelFactorization",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 affine identification of beta; chart model factorization step 2",
+   "via": [
+    "lem-sc-mixed-affine-sections-kflat-comparison-isIso",
+    "lem-sc-mixed-affine-sections-pullback-mate",
+    "lem-sc-proper-flat-image-global-hom-base-change-isIso",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsExtensionUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsExtensionUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.exists_mixedAffineSections_extension_unit_normalization",
+  "statement": "theorem exists_mixedAffineSections_extension_unit_normalization\n    {S T : Scheme.{u}} [IsAffine S] (g : T ⟶ S) :\n    let F : ModuleCat.{u} Γ(S, ⊤) ⥤\n        SheafOfModules.{u} (moduleRings S.toRingedSpace) :=\n      tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ\n    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace\n    let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom\n    let R := ModuleCat.restrictScalars.{u} g.appTop.hom\n    ∀ [F.Additive] [H.Additive] [E.Additive]\n      (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)\n      (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P),\n    let C := (F.mapHomologicalComplex (.up ℤ)).obj P\n    let X := ((F ⋙ H).mapHomologicalComplex (.up ℤ)).obj P\n    ∃ a : (mixedGlobalExtension g).obj\n        ((schemeDerivedGlobalSections S).obj (DerivedCategory.Q.obj C)) ≅\n      DerivedCategory.Q.obj (((F ⋙ H ⋙ E).mapHomologicalComplex (.up ℤ)).obj P),\n    ∀ (Z : CochainComplex (ModuleCat.{u} Γ(T, ⊤)) ℤ)\n      (f : ((E.mapHomologicalComplex (.up ℤ)).obj X) ⟶ Z),\n      mixedSectionsComplexUnit S C ≫\n          (mixedGlobalExtensionAdjunction g).homEquiv _ _\n            (a.hom ≫ DerivedCategory.Q.map f) =\n        DerivedCategory.Q.map\n          (((ModuleCat.extendRestrictScalarsAdj g.appTop.hom).mapHomologicalComplex\n            (.up ℤ)).unit.app X ≫\n              (R.mapHomologicalComplex (.up ℤ)).map f) ≫\n          R.mapDerivedCategoryFactors.inv.app Z",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T151133-L-877075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T151133-L-877075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
