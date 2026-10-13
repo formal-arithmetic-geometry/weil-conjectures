@@ -1786,6 +1786,7 @@ public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
 public import WeilConjectures.RingTheory.Etale.DepthTwo.LocalToGlobal
