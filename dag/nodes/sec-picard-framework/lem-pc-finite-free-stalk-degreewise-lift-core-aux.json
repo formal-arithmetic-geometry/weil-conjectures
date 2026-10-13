@@ -15,22 +15,32 @@
  },
  "proof": [
   {
-   "text": "Choose the finitely many local neighbourhoods for degrees in I, intersect them, and transport each representative along restriction and pullback composition. For degrees outside I use the supplied top-open witnesses. Naturality of stalkRestrictionComplexIso preserves each equation.",
+   "text": "For an open U containing y and degree n, let E(U,n) mean that the prescribed stalk map t(n) has a representative on U with the displayed comparison equation. If V <= U contains y, restrict a representative g along Y.homOfLE and conjugate by the restriction-composition isomorphism C. Apply stalkRestrictionComplexIso_map_subopen, substitute the equation for g, and cancel the inverse/hom component pairs of the comparisons at U. This proves E(U,n) implies E(V,n).",
    "uses": [
-    "def-pc-derived-pullback",
+    "lem-pc-stalk-restriction-subopen-compatibility",
     "def-pc-stalk-restriction-complex-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "Induct on a finite set J of degrees to combine its local witnesses. For the empty set take the top open. For insert a J, combine the inductive neighbourhood U for J with a local neighbourhood V for a by taking U inf V, which contains y. The shrinking implication of step 1 transports the representative for a from V and all representatives for J from U to this intersection. Apply this induction to I and hlocal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the resulting U, retain the witnesses for degrees in I. For n outside I, take the supplied top-open witness from hout and apply the shrinking implication of step 1 along U <= top. This supplies the representative on U for every degree.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
+  "lem-pc-stalk-restriction-subopen-compatibility",
   "def-pc-stalk-restriction-complex-iso"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "finite intersection step"
+  "place": "finite intersection step; Lean induction and comparison cancellation by T3, using the existing subopen compatibility theorem"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -103,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T234217-L-2124511",
-  "kind": "interface",
+  "landing": "20261013T001616-L-2331157",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
