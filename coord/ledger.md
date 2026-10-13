@@ -11792,3 +11792,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/A3/Sheaf.FieldTheory.TriangularFieldModelPresentation (stage 3; reviewer PASS; first push; landing 20261013T095927-L-2450347 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 09:59 L: merged deliver/A3/Sheaf.FieldTheory.TriangularFieldModelWeakRegularity (stage 3; reviewer PASS; first push; landing 20261013T095927-L-2450558 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 09:59 L: merged deliver/A4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferentialSummand (stage 3; reviewer PASS; first push; landing 20261013T095928-L-2450805 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 09:59 L: merged deliver/A4/Sheaf.RingTheory.ArtinianCoefficientEventualFlatness (stage 3; reviewer PASS; after a return; landing 20261013T095929-L-2451039 (proof); batch 20261013T095923; modules 1; new nodes 0)
