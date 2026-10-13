@@ -1,0 +1,126 @@
+{
+ "id": "lem-pbc-etale-additive-cech-resolution-transfer",
+ "kind": "statement",
+ "title": "Transfer of additive Cech augmentations between resolutions",
+ "statement": "Let X be any scheme, U any family of opens, I and J injective resolutions of its lifted additive structure sheaf, cI and cJ canonical resolution section comparisons [def-weil-pbc-etale-resolution-section-canonical-comparison], and n a nonnegative degree. For the complexes and augmentations [def-pbc-etale-additive-cech-normalization], there exist cochain maps f:global(I)->global(J) and t:total(U,I)->total(U,J) such that alpha_I followed by t in degree n equals f in degree n followed by alpha_J. For every ordinary unit Cech cochain x, t sends beta_I(x) to beta_J(x). For every global homology class x, cJ(f_*(x))=cI(x). No covering, finiteness, affineness or separatedness assumption is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, augmented double-complex diagram; Tag 03P2, Theorem 59.22.4, separated affine-cover argument."
+ },
+ "stmt_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Lift the identity of the additive structure sheaf using InjectiveResolution.desc. Evaluate the lift for f. Apply the Cech functor termwise, flip the indices and totalize to define t. The total-map inclusion equation and presheaf naturality on each tuple prove the alpha square. Projection to every tuple and the equality I.augmentation followed by the lift = J.augmentation prove the beta square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent a global homology class by a cycle using the epi homology quotient. The Hom-to-sections adjunction represents this cycle as a cocycle a. Naturality of that adjunction represents its image by a followed by the lift. Apply the defining canonical cocycle formulas for cI and cJ, and InjectiveResolution.extMk_comp_mk₀ for the identity lift. The identity Ext class acts identically, yielding the canonical equality. These arguments apply to empty covers and degree zero without modification.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "W2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Explicit cycle-level specialization of the augmentation diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech augmented double complex injective resolution comparison on homology",
+   "results": "UNAVAILABLE: service Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech augmentation of injective resolution induces an isomorphism on homology",
+   "results": "Eight hits on injective resolution quasi-isomorphisms and right-derived comparisons; no explicit additive Cech alpha/beta homology equivalences or normalized resolution-transfer assertion.",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution and homology-map APIs, no exact replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ_naturality\"",
+   "results": "Eight hits, including HomologicalComplex.homologyπ_naturality in Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex.",
+   "date": "2026-10-13",
+   "verdict": "Naturality suffices for transferring cycle classes, not augmentation quasi-isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Aa]ugment|[Aa]ugment.*[Cc]ech; blueprint augmentation and 01FD",
+   "results": "Mathlib: 19 hits on augmented nerves and extra degeneracies. Project: EtaleOpenCechResolutionTotal and EtaleOpenCechInjectiveAugmentation give the unnormalized total equivalence and row quasi-isomorphism. Blueprint: four augmentation hits, none for 01FD; no matching explicit normalized statement.",
+   "date": "2026-10-13",
+   "verdict": "Reuse row acyclicity and total-complex tools; actual augmentation formulas require new statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedExistence",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Existence of augmentation-normalized additive etale Cech edges. Identity lift between injective resolutions.",
+   "via": [
+    "lem-pbc-etale-additive-cech-normalized-existence",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechResolutionTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechResolutionTransfer.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_additiveCech_resolution_transfer",
+  "statement": "theorem exists_additiveCech_resolution_transfer\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)\n    (I J : InjectiveResolution X.etaleAdditiveSheaf)\n    (cI : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf I)\n    (cJ : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf J)\n    (n : ℕ) :\n    ∃ f : additiveCechGlobal I ⟶ additiveCechGlobal J,\n    ∃ t : additiveCechTotal U I ⟶ additiveCechTotal U J,\n      (additiveCechAlpha U I n ≫ t.f n = f.f n ≫ additiveCechAlpha U J n) ∧\n      (∀ x, t.f n (additiveCechBeta U I n x) = additiveCechBeta U J n x) ∧\n      (∀ x, cJ.globalEquiv n (HomologicalComplex.homologyMap f n x) =\n        cI.globalEquiv n x)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T125015-L-3838736",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T125015-L-3838736",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

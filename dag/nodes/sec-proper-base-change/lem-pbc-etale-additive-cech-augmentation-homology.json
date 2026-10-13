@@ -1,0 +1,142 @@
+{
+ "id": "lem-pbc-etale-additive-cech-augmentation-homology",
+ "kind": "statement",
+ "title": "Homology of the explicit additive Cech augmentations",
+ "statement": "Let X be a quasi-compact separated scheme and U a finite open covering with every positive-length tuple intersection affine. Let I be any injective resolution of the lifted additive structure sheaf and n a nonnegative degree. Using the global, total and ordinary unit Cech complexes and alpha/beta components of [def-pbc-etale-additive-cech-normalization], there exist additive equivalences p from global resolution homology to total homology and q from ordinary unit Cech homology to total homology. Every global cycle and every ordinary Cech cycle has a total cycle whose underlying cochain is respectively its alpha or beta image. For any such lifted cycle t, p sends the global cycle class to [t], respectively q sends the Cech cycle class to [t]. These conditions determine both equivalences uniquely and make no assertion about Ext or independence of resolutions.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, augmented double-complex diagram; Tag 03P2, Theorem 59.22.4, separated affine-cover argument."
+ },
+ "stmt_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Construct alpha as the global-section restriction cochain map into Cech degree zero. The image has zero horizontal differential, while its vertical differential commutes with restriction. Apply injective Cech row acyclicity and the first-quadrant augmentation criterion to show alpha is a quasi-isomorphism. The total has finite diagonals, including degree zero.",
+   "uses": [
+    "lem-sc-etale-open-cech-injective-augmentation",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct beta by lifting structural-function coordinates and applying the resolution augmentation in degree zero. The unit tensor section coordinates commute with restrictions; the vertical differential is zero and the horizontal one is the Cech differential. The affine-acyclicity and lifted finite-product argument of the finite Cech comparison shows beta is a quasi-isomorphism. Unlike that theorem this keeps the actual augmentation maps rather than its bare Nonempty equivalence. Apply the first-quadrant criterion after flipping the double complex, and lower the lifted homology using exact additive ULift and identity scalar restriction.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural",
+    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the homology equivalences induced by these explicit chain maps. Chain-map compatibility supplies lifts of every cycle. Homology-map naturality gives the two representative formulas. The epi homology quotient and these formulas determine p and q uniquely. Empty covers force an empty scheme, and all relevant section groups are zero; empty intersections also give zero groups.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-open-cech-injective-augmentation",
+  "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+  "lem-sc-etale-tensor-unit-sections-natural",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "W2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Explicit cycle-level specialization of the augmentation diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech augmented double complex injective resolution comparison on homology",
+   "results": "UNAVAILABLE: service Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech augmentation of injective resolution induces an isomorphism on homology",
+   "results": "Eight hits on injective resolution quasi-isomorphisms and right-derived comparisons; no explicit additive Cech alpha/beta homology equivalences or normalized resolution-transfer assertion.",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution and homology-map APIs, no exact replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ_naturality\"",
+   "results": "Eight hits, including HomologicalComplex.homologyπ_naturality in Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex.",
+   "date": "2026-10-13",
+   "verdict": "Naturality suffices for transferring cycle classes, not augmentation quasi-isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Aa]ugment|[Aa]ugment.*[Cc]ech; blueprint augmentation and 01FD",
+   "results": "Mathlib: 19 hits on augmented nerves and extra degeneracies. Project: EtaleOpenCechResolutionTotal and EtaleOpenCechInjectiveAugmentation give the unnormalized total equivalence and row quasi-isomorphism. Blueprint: four augmentation hits, none for 01FD; no matching explicit normalized statement.",
+   "date": "2026-10-13",
+   "verdict": "Reuse row acyclicity and total-complex tools; actual augmentation formulas require new statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedExistence",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Existence of augmentation-normalized additive etale Cech edges. Explicit augmentation homology.",
+   "via": [
+    "lem-pbc-etale-additive-cech-normalized-existence",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechAugmentationHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_additiveCech_augmentation_homology",
+  "statement": "theorem exists_additiveCech_augmentation_homology\n    (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hcover : iSup U = ⊤)\n    (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :\n    ∃ p : (additiveCechGlobal I).homology n ≃+ (additiveCechTotal U I).homology n,\n    ∃ q : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homology n ≃+\n      (additiveCechTotal U I).homology n,\n      (∀ s : (additiveCechGlobal I).cycles n,\n        ∃ t : (additiveCechTotal U I).cycles n,\n          (additiveCechTotal U I).iCycles n t =\n            additiveCechAlpha U I n ((additiveCechGlobal I).iCycles n s)) ∧\n      (∀ z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n,\n        ∃ t : (additiveCechTotal U I).cycles n,\n          (additiveCechTotal U I).iCycles n t = additiveCechBeta U I n\n            ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z)) ∧\n      (∀ (s : (additiveCechGlobal I).cycles n) (t : (additiveCechTotal U I).cycles n),\n        (additiveCechTotal U I).iCycles n t =\n          additiveCechAlpha U I n ((additiveCechGlobal I).iCycles n s) →\n        p ((additiveCechGlobal I).homologyπ n s) =\n          (additiveCechTotal U I).homologyπ n t) ∧\n      (∀ (z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n)\n        (t : (additiveCechTotal U I).cycles n),\n        (additiveCechTotal U I).iCycles n t = additiveCechBeta U I n\n          ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z) →\n        q ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z) =\n          (additiveCechTotal U I).homologyπ n t)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T125015-L-3838736",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T125015-L-3838736",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
