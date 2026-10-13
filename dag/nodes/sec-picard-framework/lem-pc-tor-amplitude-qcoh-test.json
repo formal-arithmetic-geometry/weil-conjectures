@@ -27,52 +27,49 @@
  ],
  "proof": [
   {
-   "text": "Let U be affine open in X and j:U\\to X its inclusion. Since X is quasi-separated, j is quasi-compact and separated, so pushforward sends every quasi-coherent O_U-module to a quasi-coherent O_X-module [pqf-lem-pushforward-qcoh]. Thus every quasi-coherent module on U is the restriction of a quasi-coherent module on X (take j_*G and use j^*j_*G = G for an open immersion). Restriction of derived tensor to an open [lem-pc-affine-derived-pullback-tensor-tilde, part (1)] gives (E tensor^L_{O_X} j_*G)|_U = E|_U tensor^L_{O_U} G, and restriction to U is exact, so commutes with cohomology sheaves. Restricting the assumed vanishing to U therefore gives H^i(E|_U tensor^L G)=0 for every quasi-coherent G on U and i outside [a,b]. Note also that E|_U lies in D_QCoh(O_U), since restrictions of quasi-coherent cohomology sheaves are quasi-coherent.",
+   "text": "Choose standard derived localizations independently on each open subscheme. Reuse tensor_vanishes_iff from the existing TorAmplitudeOpenLocal module through a proof-only import all. Its proved K-flat resolution and tensor comparisons identify the existential vanishing predicate with zero cohomology of the actual derived tensor.",
    "uses": [
+    "lem-pc-tor-amplitude-open-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an affine open U, exact derived restriction preserves quasi-coherent cohomology by the open-restriction criterion. An affine scheme is compact, so its inclusion into quasi-separated X is quasi-compact; its open immersion is quasi-separated. Push a quasi-coherent module F on U to X, where it remains quasi-coherent. Apply the global test hypothesis and restrict its zero cohomology. The open tensor comparison, exact cohomology comparison, single-functor comparison and the open-immersion counit identify the result with the local derived tensor against F. Thus all local quasi-coherent test modules satisfy the same bounds.",
+   "uses": [
+    "lem-pc-derived-open-restriction-qcoh-iff",
     "pqf-lem-pushforward-qcoh",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-derived-tensor-open-restriction-universes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), proof, paragraph beginning 'Let U subset X be an affine open'"
-   }
+   "elementary": false
   },
   {
-   "text": "Write U = Spec(A). By [lem-pc-affine-qcoh-derived-equivalence], E|_U is isomorphic to \\widetilde{M^bullet} for a complex M^bullet of A-modules. For each A-module N, [lem-pc-affine-derived-pullback-tensor-tilde, part (3)] gives E|_U tensor^L_{O_U} N~ = (M^bullet tensor_A^L N)~; since the associated-sheaf functor is exact and an A-module P is zero when P~ is zero, the preceding step applied to G = N~ says that H^i(M^bullet tensor_A^L N)=0 for i outside [a,b]. Hence M^bullet has Tor amplitude in [a,b]. The affine Tor-amplitude criterion [lem-pc-affine-tor-amplitude-criterion] then gives that E|_U has Tor amplitude in [a,b], that is H^i(E|_U tensor^L H)=0 for every O_U-module H and i outside [a,b].",
+   "text": "Apply the proved affine quasi-coherent Tor-amplitude detection theorem to the restricted object. This supplies vanishing for every module on each affine open.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-affine-tor-amplitude-criterion"
+    "lem-pc-affine-qcoh-tor-amplitude-detection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), proof, final paragraph invoking Lemma 36.10.4 (Tag 08E9)"
-   }
+   "elementary": false
   },
   {
-   "text": "For any O_X-module G, restriction of derived tensor to U [lem-pc-affine-derived-pullback-tensor-tilde, part (1)] identifies (E tensor^L_{O_X} G)|_U with E|_U tensor^L_{O_U} G|_U. Step 2 makes the latter cohomology vanish outside [a,b] on every affine open U. Since a sheaf vanishes when all its restrictions to the opens of an affine open cover vanish, H^i(E tensor^L G)=0 for i outside [a,b]. This is the asserted Tor amplitude. (The quasi-separated hypothesis is used only in step 1.)",
+   "text": "Fix a global module G and a degree outside the interval. The open tensor and exact cohomology comparisons transport local vanishing for G restricted to U to zero restrictions of the global tensor cohomology. Mathlib iSup_affineOpens_eq_top gives the cover, and the proved source Scheme.Modules.isZero_of_iSup_eq_top detects zero from these restrictions. The K-flat vanishing equivalence yields the original existential predicate.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-derived-tensor-open-restriction-universes"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-tor-amplitude-open-local",
+  "lem-pc-derived-open-restriction-qcoh-iff",
   "pqf-lem-pushforward-qcoh",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-affine-tor-amplitude-criterion"
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "lem-pc-affine-qcoh-tor-amplitude-detection"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma 36.10.6 (Tag 08EA), implication (2) => (1); source packet unavailable locally"
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/08EA",
+  "place": "Proof of implication (2) implies (1); exact derived restrictions with independent localization universes, and affine flat-model computation",
+  "group": "J4",
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -177,5 +174,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da6b4",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677236",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG/report records matched against the packet, node statements, repository declarations, and direct importers; all compiled and axioms were permitted."
  }
 }

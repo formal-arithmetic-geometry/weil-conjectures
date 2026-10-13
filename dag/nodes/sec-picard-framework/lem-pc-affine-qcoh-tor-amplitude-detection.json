@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-affine-qcoh-tor-amplitude-detection",
+ "kind": "statement",
+ "title": "Quasi-coherent modules detect Tor amplitude on affine schemes",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], let $E$ be an object of $D(\\mathcal O_X)$ with quasi-coherent cohomology [def-pc-derived-category], and let $a\\le b$ be integers. Suppose $H^i(E\\otimes^{\\mathbf L}_{\\mathcal O_X}F)=0$ for every quasi-coherent $\\mathcal O_X$-module $F$ [pqf-def-coherent] and every integer $i<a$ or $b<i$, with vanishing as in [def-pc-derived-tensor-cohomology-vanishes]. Then the same vanishing holds for every $\\mathcal O_X$-module $G$, without a quasi-coherence hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EA",
+  "place": "Proof, affine paragraph using Tag 06Z0 and Tag 08E9; Tag 08E9 proof using the bounded flat-model criterion of Tag 0654"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing affine module-complex representative theorem to obtain M with E isomorphic to Q(C(M)), where C is tilde followed by exact restriction along the canonical spectrum chart. Tilde is fully faithful and a left adjoint. Reuse tilde_preservesKernel from AffineDerivedTildeHomologyComparison through a proof-only import all; this existing proof lifts the quasi-coherent kernel fork through full faithfulness. Hence C is exact. Restriction along the chart has a left inverse by restriction-composition and the isomorphism identities, so C is faithful.",
+   "uses": [
+    "lem-pc-affine-module-complex-representative",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve M by a module K-flat complex P. For every module N, C(N) is quasi-coherent. Apply the hypothesis to C(N). Reuse tensor_vanishes_iff from TorAmplitudeOpenLocal through a proof-only import all to identify this vanishing with zero homology of the derived tensor. The single-complex comparison and the affine derived tensor chart comparison identify this tensor with Q(C(Tot(P tensor N[0]))). Exactness of C identifies its homology with C of the module homology. Faithfulness reflects zero identity maps, hence the module homology vanishes. The K-flat module tensor model and the IsGE/IsLE cohomology criteria establish module Tor amplitude [a,b].",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-affine-derived-tensor-chart-comparison",
+    "lem-pc-tor-amplitude-open-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the bounded flat-model criterion to M, obtaining a flat complex B with zero terms outside [a,b] and an isomorphism Q(M) to Q(B). Exactness of C transports this isomorphism to a representing isomorphism Q(C(B)) to E. B is K-flat because it is bounded above and flat; tilde and open restriction preserve K-flatness, so C(B) is a sheaf K-flat representative.",
+   "uses": [
+    "lem-pc-module-tor-amplitude-flat-model",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-kflat-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any sheaf G, the total tensor C(B) tensor G[0] is isomorphic to the termwise tensor-right complex. Its degree i term is zero whenever i is outside [a,b], since additive C and tensor-right preserve zero objects. Zero degree-i term implies exactness at i and zero homology. C(B), its K-flatness, and the representing isomorphism give the required vanishing witness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-module-complex-representative",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-affine-derived-tensor-chart-comparison",
+  "lem-pc-tor-amplitude-open-local",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-kflat-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/08E9",
+  "place": "Affine tilde/flat-model proof, implemented for the canonical spectrum chart without identifying X definitionally with Spec A; repair reuses the existing private kernel-preservation theorem instead of duplicating it"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a complex with quasi coherent cohomology can be tested on quasi coherent sheaves",
+   "results": "Eight derived-category t-structure hits, including isGE_iff and isLE_iff; no affine sheaf Tor-amplitude detector.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "torAmplitudeIn",
+   "results": "No hits; unknown identifier torAmplitudeIn.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCoherent_tests|torAmplitude.*quasi",
+   "results": "No Mathlib hits. Local rg found the existing global item and AffineTorAmplitudeCriterion; the latter tests all sheaves, so its converse cannot be applied directly to quasi-coherent tests. Its proof provides the computation used here.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme quasi coherent sheaves detect Tor amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV proof sentence invoking Tag 08EA to test finite Tor dimension on quasi-coherent modules; affine paragraph of the latter proof",
+   "via": [
+    "lem-pc-tor-amplitude-qcoh-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineQCohTorAmplitudeDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineQCohTorAmplitudeDetection.lean",
+  "declaration": "AlgebraicGeometry.affineQCoh_torAmplitude_detection",
+  "statement": "theorem affineQCoh_torAmplitude_detection (X : Scheme.{u}) [IsAffine X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)\n    (a b : ℤ) (hab : a ≤ b)\n    (h : ∀ F : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n      F.IsQuasicoherent → ∀ i : ℤ, i < a ∨ b < i →\n        schemeDerivedTensorCohomologyVanishes X E F i) :\n    ∀ G : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n      ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X E G i",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da6b4",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da6b4",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T123206-L-3677236",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG/report records matched against the packet, node statements, repository declarations, and direct importers; all compiled and axioms were permitted."
+ }
+}
