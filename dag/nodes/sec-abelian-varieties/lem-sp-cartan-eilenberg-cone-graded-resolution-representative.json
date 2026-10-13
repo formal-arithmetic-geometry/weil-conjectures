@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-cartan-eilenberg-cone-graded-resolution-representative",
+ "kind": "statement",
+ "title": "Graded differential on retained resolution representatives",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], $K$ an integer-indexed cochain complex, and $I$ a bicomplex with complex index in $\\mathbf Z$ and resolution index in $\\mathbf N$ [def-sp-double-complex-total]. Set $J$ equal to the identity-mapped, resolution-extended-by-zero, flipped bicomplex [def-sp-cartan-eilenberg-presentation]. Let $\\epsilon:K\\to\\operatorname{Tot}(J)$ be a chain map and $C=\\operatorname{Cone}(\\epsilon)$ [lem-pur-quasi-iso-cone-acyclic]. Let $F$ be a decreasing subcomplex filtration of $C$ [def-sp-filtration], and write $i_{p,n}:(F^pC)^n\\to C^n$ and $q_{p,n}:(F^pC)^n\\to G_p^n$ for its inclusion and graded quotient projection, where $G_p=F^pC/F^{p+1}C$ [def-sp-filtered-complex-subquotients]. Write $u_n:K^{n+1}\\to C^n$ and $v_n:\\operatorname{Tot}(J)^n\\to C^n$ for the cone inclusions, $j_{r,s,n}:J^{r,s}\\to\\operatorname{Tot}(J)^n$ for the diagonal inclusion when $r+s=n$, and $j^0_{r,s,n}$ for that inclusion extended by zero when $r+s\\ne n$. Fix $b\\in\\mathbf Z$, and assume for every $q,n$ that $F^qC^n=(\\operatorname{im}(u_n)\\text{ if }q\\le n+1,\\text{ else }0)+\\sum_{s=\\max(b,q)}^n\\operatorname{im}(j^0_{n-s,s,n}v_n)$. Each extension identification $E_{s,r,t}:(I^{s,\\bullet}\\text{ extended by zero})^t\\cong I^{s,r}$ is the canonical one for $t=r$. Assume $I^{s,\\bullet}=0$ for $s<b$. Let $p,m,m'\\in\\mathbf Z$, $r\\in\\mathbf N$, $r+p=m$ and $m+1=m'$. Suppose $l:I^{p,r}\\to(F^pC)^m$ and $l':I^{p,r+1}\\to(F^pC)^{m'}$ satisfy $li_{p,m}=E_{p,r,m-p}^{-1}j_{m-p,p,m}v_m$ and $l'i_{p,m'}=E_{p,r+1,m'-p}^{-1}j_{m'-p,p,m'}v_{m'}$. Then $lq_{p,m}d_{G_p}^{m,m'}=d_{I^{p,\\bullet}}^{r,r+1}l'q_{p,m'}$. This concerns specified lifts of the resolution summands and assumes no comparison isomorphism.",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Second filtration and Lemma 12.25.1; canonical augmentation in Tag 0133, label lemma-double-complex-gives-resolution; explicit augmented-cone retained-summand refinement of the parent proof"
+ },
+ "proof": [
+  {
+   "text": "If p<b, evaluation of the zero column shows that the source I^{p,r} is zero, so both morphisms vanish. Otherwise r+p=m implies p+1≤m+1. The (m-p,p+1) summand inclusion belongs to F^{p+1}C^{m+1} by the finite image-supremum formula. Factor it through the monic next-step inclusion using its image subobject.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the monic inclusion of F^pC^{m+1} to compute the step differential on l. The right cone inclusion is a chain map. Expand the total differential as D₁+D₂ on the diagonal inclusion. The resolution part has coefficient 1; the complex-index part has coefficient (-1)^{m-p}. The extension differential formula and the equation for l' identify the first part with d_I followed by l'. The second part is the signed horizontal differential followed by the next-step factorization from step 1. Canonical extension identifications at equal indices agree by equality elimination and proof irrelevance.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use chain compatibility of q to replace l q d_G by l d_step q. The next-step inclusion followed by q is zero by the cokernel relation, so the horizontal term vanishes. The remaining term is d_I l' q, as asserted.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "R2 Lean expansion of the retained-summand calculation in the parent node, using Mathlib cone and total differential formulas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "differential induced on a column filtration quotient of a mapping cone",
+   "results": "{\"t\": \"2026-10-13T04:45:01Z\", \"tool\": \"leansearch\", \"query\": \"differential induced on a column filtration quotient of a mapping cone\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "differential of mapping cone commutes with maps specified on the two summands",
+   "results": "{\"t\": \"2026-10-13T04:29:11Z\", \"tool\": \"leanfinder\", \"query\": \"differential of mapping cone commutes with maps specified on the two summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.inr_f_d\", \"CochainComplex.mappingCone.inl_v_d\", \"CochainComplex.mappingCone.d_snd_v\", \"CochainComplex.mappingCone.δ_descCochain\", \"CochainComplex.mappingCone.d_snd_v'\", \"CochainComplex.mappingCone.desc_f\", \"CochainComplex.mappingCone.δ_inl\", \"CochainComplex.mappingCone.ofHom_desc\"], \"digest\": \"2a3396fac50ba18b\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: generic cone and total differential identities used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "ι_D₁|inl_v_d|inr_f_d",
+   "results": "{\"t\": \"2026-10-13T04:41:11Z\", \"tool\": \"grep\", \"query\": \"ι_D₁|inl_v_d|inr_f_d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\"], \"digest\": \"4362a51063b8ff84\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: generic cone and total differential identities used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergConeGradedNormalizedDifferential",
+  "group": "R2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 2: canonical quasi-isomorphism from the augmented Cartan--Eilenberg resolution to its total; graded column-cone calculation in the finite-diagonal filtration.",
+   "via": [
+    "lem-sp-cartan-eilenberg-cone-graded-normalized-differential",
+    "lem-sp-cartan-eilenberg-cone-graded-short-complex-iso",
+    "lem-sp-cartan-eilenberg-cone-filtration-properties",
+    "lem-sp-cartan-eilenberg-cone-filtration",
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergConeGradedResolutionRepresentative",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeGradedResolutionRepresentative.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_graded_resolution_representative",
+  "statement": "theorem cartanEilenberg_cone_graded_resolution_representative\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    (K : CochainComplex A ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (b : ℤ)\n    (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s))\n    (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (F : DecreasingFiltration (CochainComplex.mappingCone aug))\n    (hF : ∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject\n          ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero\n            (ComplexShape.up ℤ) (n - s) s n ≫\n              (CochainComplex.mappingCone.inr aug).f n)))\n    (p m m' : ℤ) (r : ℕ) (hr : (r : ℤ) + p = m) (hmm' : m + 1 = m')\n    (l : (I.X p).X r ⟶ (F.step p : CochainComplex A ℤ).X m)\n    (l' : (I.X p).X (r + 1) ⟶ (F.step p : CochainComplex A ℤ).X m')\n    (hl : l ≫ (F.step p).arrow.f m =\n      (HomologicalComplex.extendXIso\n        (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X p))\n        ComplexShape.embeddingUpNat (i := r) (i' := m - p)\n        (by change (r : ℤ) = m - p; omega)).inv ≫\n      (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal\n        (ComplexShape.up ℤ) (m - p) p m (by change (m - p) + p = m; omega) ≫\n      (CochainComplex.mappingCone.inr aug).f m)\n    (hl' : l' ≫ (F.step p).arrow.f m' =\n      (HomologicalComplex.extendXIso\n        (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X p))\n        ComplexShape.embeddingUpNat (i := r + 1) (i' := m' - p)\n        (by change ((r + 1 : ℕ) : ℤ) = m' - p; push_cast; omega)).inv ≫\n      (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal\n        (ComplexShape.up ℤ) (m' - p) p m' (by change (m' - p) + p = m'; omega) ≫\n      (CochainComplex.mappingCone.inr aug).f m') :\n    l ≫ (F.complexQuotientπ p (p + 1) (by omega)).f m ≫\n        (F.gradedPiece p).d m m' =\n      (I.X p).d r (r + 1) ≫ l' ≫\n        (F.complexQuotientπ p (p + 1) (by omega)).f m'",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T054235-L-448627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T054235-L-448627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
