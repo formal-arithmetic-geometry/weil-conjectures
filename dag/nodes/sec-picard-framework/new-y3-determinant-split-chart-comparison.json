@@ -1,0 +1,141 @@
+{
+ "id": "new-y3-determinant-split-chart-comparison",
+ "kind": "statement",
+ "title": "Common free-chart section comparisons for a split module sequence",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $A\\xrightarrow{f}B\\xrightarrow{g}C$ a short complex of module sheaves [def-weil-sheaf-of-modules-category]. Assume $A,C$ finite locally free of ranks $r,s$ [def-amb-finite-locally-free-module]. Let $U$ be open with a splitting $e:B|_U\\simeq A|_U\\oplus C|_U$ such that $ef=\\mathrm{inl}$ and $\\mathrm{pr}_2e=g$. Exterior sheaves are the sheafifications of algebraic exterior powers [def-sc-sheaf-exterior-power]. Every $x\\in U$ admits $x\\in V\\subseteq U$ such that, on every $W\\subseteq V$, there are bases of $A(W),C(W)$ indexed by $\\mathrm{Fin}(r),\\mathrm{Fin}(s)$ and a linear equivalence $e_W:B(W)\\simeq A(W)\\times C(W)$ with $e_W(f_W(a))=(a,0)$ and $\\mathrm{pr}_2e_W=g_W$. The sheafification unit $\\bigwedge^{r+s}B(W)\\to(\\bigwedge^{r+s}B)(W)$ is bijective. So is the composite from $\\bigwedge^r A(W)\\otimes\\bigwedge^s C(W)$ to $(\\bigwedge^r A\\otimes\\bigwedge^s C)(W)$ of the tensor of the two exterior sheafification units and the canonical tensorSectionsMap. No lift function or determinant map is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-amb-finite-locally-free-module",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Choose members of the finite locally free rank covers of A and C containing x and intersect them with U. Restrict both free frames to this intersection V. Evaluation at W inside V identifies sections of these frames with functions Fin r and Fin s into O_X(W), so supplies the bases a and c. Transport the restricted sheaf splitting through overEquiv U and evaluate it on Over.mk(W to U). Evaluation preserves binary biproducts; compose with ModuleCat.biprodIsoProd. Evaluating the two compatibility equations gives the asserted formulas for eW. The middle restricted sheaf is free of rank r+s, by the sum of the two frames and finSumFinEquiv.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exteriorSheaf_local_free_comparison to the three free frames. This identifies the algebraic exterior powers on every W inside V with the exterior sheaf sections by the actual sheafification unit. In particular the middle unit qB is bijective. The outside top exterior sheaves have singleton wedge bases, so are isomorphic over V to the unit sheaf.",
+   "uses": [
+    "lem-sc-exterior-sheaf-local-free-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a free generator of the third top exterior sheaf on V using its unit isomorphism. On each W inside V the algebraic tensor map z to z tensor that restricted generator is bijective by TensorProduct.bijective_tmul_right_of_bijective_smul, while z to tmulSection z generator is bijective by IsFreeGenerator.bijective_tmulSection_right. Since their composite square commutes by tensorSectionsMap_tmul, tensorSectionsMap is bijective. Both outside exterior units are bijective; TensorProduct.map of their associated linear equivalences is bijective. Compose to obtain the asserted bijectivity of qT. Rank zero gives a singleton empty-wedge basis, and zero rings and empty opens require no additional hypothesis.",
+   "uses": [
+    "lem-sc-exterior-sheaf-local-free-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-weil-pbc-free-module",
+  "lem-sc-exterior-sheaf-local-free-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Y3 expansion of step 1 of lem-sc-split-determinant-linear-bijective, using the proved local exterior comparison and free-generator tensor API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free sheaves exterior power tensor product sectionwise comparison bijective on a trivializing open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf exterior power tensor section comparison bijective on a common trivializing open",
+   "results": "PresheafOfModules.homEquivOfIsLocallyBijective; PresheafOfModules.homEquivOfIsLocallyBijective_apply; PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply; SheafOfModules.bijective_pushforwardSections; SheafOfModules.freeHomEquiv; SheafOfModules.freeHomEquiv_freeMap; exists_bijective_map_powers; SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-13",
+   "verdict": "No exact common-chart splitting and exterior/tensor unit comparison; existing exterior comparison supplies part of the argument."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSectionsMap.*bijective|exists_isFreeGenerator_of_iso|exteriorSheaf_local_free_comparison",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No exact common-chart splitting and exterior/tensor unit comparison; existing exterior comparison supplies part of the argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map, Function.Bijective",
+   "results": "TensorProduct.map_bijective",
+   "date": "2026-10-13",
+   "verdict": "Component comparison only, not the common-chart theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts",
+   "via": [
+    "lem-sc-split-determinant-linear-bijective",
+    "new-determinant-split-local",
+    "lem-sc-determinant-split-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitChartComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_chart_comparison",
+  "statement": "theorem determinant_split_chart_comparison {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r s : ℕ)\n    [S.X₁.IsFiniteLocallyFreeOfRank r] [S.X₃.IsFiniteLocallyFreeOfRank s]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∀ (W : X.Opens), W ≤ V →\n        ∃ (a : Module.Basis (Fin r) (X.presheaf.obj (op W)) (S.X₁.val.obj (op W)))\n          (c : Module.Basis (Fin s) (X.presheaf.obj (op W)) (S.X₃.val.obj (op W)))\n          (eW : S.X₂.val.obj (op W) ≃ₗ[X.presheaf.obj (op W)]\n            (S.X₁.val.obj (op W) × S.X₃.val.obj (op W))),\n          (∀ z, eW (S.f.val.app (op W) z) = (z, 0)) ∧\n          (∀ z, (eW z).2 = S.g.val.app (op W) z) ∧\n          Function.Bijective\n            (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app\n              (exteriorSheafPresheaf S.X₂ (r + s))).app (op W)) ∧\n          Function.Bijective\n            ((tensorSectionsMap (exteriorSheaf S.X₁ r) (exteriorSheaf S.X₃ s) W).comp\n              (TensorProduct.map (R := X.presheaf.obj (op W))\n                (R₂ := X.presheaf.obj (op W)) (σ₁₂ := RingHom.id _)\n                (((PresheafOfModules.sheafificationAdjunction\n                  (𝟙 X.ringCatSheaf.obj)).unit.app\n                  (exteriorSheafPresheaf S.X₁ r)).app (op W)).hom\n                (((PresheafOfModules.sheafificationAdjunction\n                  (𝟙 X.ringCatSheaf.obj)).unit.app\n                  (exteriorSheafPresheaf S.X₃ s)).app (op W)).hom))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-75fec",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T100230-L-2505776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-75fec",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T100230-L-2505776",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof routes with both DAG nodes, checked unchanged interfaces, chart-comparison edge cases, reports, clean compilation of both modules and both direct importers, and expected axioms."
+ }
+}

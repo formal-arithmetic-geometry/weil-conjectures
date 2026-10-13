@@ -15,36 +15,25 @@
  ],
  "proof": [
   {
-   "text": "Refine U by a common free chart V for A and C. On each W inside V their section modules have bases of sizes r and s, and e identifies B(W) with their product. The exterior sheafification units and tensor comparison identify the section modules with their algebraic exterior powers and tensor product.",
+   "text": "Apply the common free-chart comparison to obtain outside section bases, the section splitting eW, and bijectivity of the middle exterior unit and outside tensor comparison. Transport the given d along these actual comparisons. Its formula transports to the algebraic wedge formula.",
    "uses": [
-    "lem-sc-exterior-sheaf-local-free-comparison"
+    "new-y3-determinant-split-chart-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Replace the given lifts by the canonical second-summand lifts in the wedge formula; the difference expands into wedges with too many first-summand entries, hence vanishes.",
-   "uses": [
-    "new-j1-exterior-sheaf-rank-wedge-zero"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The transported given linear map equals the inverse top-direct-sum equivalence on tensors of pure wedges. These span, so the maps are equal; conclude bijectivity. Empty blocks and zero rings are included in the basis argument.",
-   "uses": [
-    "lem-sc-exterior-top-direct-sum"
-   ],
-   "elementary": false
+   "text": "Extend the given lifts of the quotient basis vectors linearly using Basis.constr. Its composite with g is the identity, checked on this basis. The map f.coprod t from A(W) times C(W) to B(W) is bijective: under eW it is the triangular map (a,c) to (a+pr1(eW(t(c))),c), whose inverse subtracts the same first coordinate. Thus the product of the two outside bases, mapped along this equivalence, is a basis of B(W). The given d sends the tensor of the two top basis wedges to the top wedge of this middle basis, by its assumed formula evaluated only on the basis tuples. The top exterior bases and their tensor product are singleton bases, including empty blocks and zero rings. Basis.ext identifies the transported d with their basis linear equivalence; hence d is bijective after composing the comparisons. No lift-independence or direct-sum exterior lemma is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-exterior-sheaf-local-free-comparison",
-  "lem-sc-exterior-top-direct-sum",
-  "new-j1-exterior-sheaf-rank-wedge-zero"
+  "new-y3-determinant-split-chart-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts"
+  "place": "Y3 stage-3 reduction: common-chart comparison followed by a proved triangular splitting from lifts of quotient basis vectors and a singleton exterior-basis comparison."
  },
  "mathlib_searches": [
   {
@@ -121,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-ddc35",
-  "group": "V1",
+  "reviewer": "X-75fec",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T072409-L-1126183",
+  "landing": "20261013T100230-L-2505776",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean declarations with their nodes and proof routes; verified the recorded statement correction, unchanged target/caller signatures, minimal forced adaptation, clean compilation of all four modules and direct importers DeterminantSplitComparison and DeterminantWedgeMorphismSplit, original caller failure, and expected axioms."
+  "note": "independent Codex review: Matched delivered Lean signatures and proof routes with both DAG nodes, checked unchanged interfaces, chart-comparison edge cases, reports, clean compilation of both modules and both direct importers, and expected axioms."
  }
 }
