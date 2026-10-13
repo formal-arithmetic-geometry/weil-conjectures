@@ -15,40 +15,61 @@
  ],
  "proof": [
   {
-   "text": "Choose small-Hom models on X and its opens using K-injective resolutions. Localization equivalences preserve quasi-coherence, compactness, Hom sets, and isomorphisms. Work in these models; Noetherian X is qcqs.",
+   "text": "Noetherian X is quasi-compact and quasi-separated. Apply schemeDerivedQCoh_compactlyGenerated in the given Hom universe to obtain the inherited triangulated structure and a universe-u family E of compact objects whose coproduct is a weak generator. Use derivedQCohDirectSums X for the statement's coproduct instance; coproduct-existence instances are propositions, so the compact-generation witness supplies the same compactness and generation predicates. No change of derived model is needed.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-derived-category-locally-small"
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-derived-qcoh-direct-sums"
    ],
    "elementary": false
   },
   {
-   "text": "Complete g to a distinguished triangle A -> B -> C -> A[1]. Its cone has quasi-coherent cohomology by exactness. Every shift of a perfect object is perfect and compact. Hom bijections from these shifts and the long exact Hom sequence give Hom(P[n],C)=0 for all perfect P and integers n.",
+   "text": "Shifts preserve compactness. For K compact and integer n, the adjunction of shiftEquiv C n identifies each Hom(K[n],A_j) additively with Hom(K,A_j[-n]). Its inverse functor preserves coproducts. Naturality and the sigmaComparison isomorphism give a commutative square between the two direct-sum comparison maps, with horizontal additive equivalences, proving bijectivity for K[n]. The private compact_shift helper proves this directly from the compact-object definition and Mathlib's shift-equivalence, additive-adjunction and coproduct APIs.",
    "uses": [
-    "lem-pc-perfect-object-compact"
+    "def-pc-compact-object",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let g:A -> B satisfy the hypothesis. Shift adjunction identifies Hom(P,A[n]) -> Hom(P,B[n]) induced by g[n] with Hom(P[-n],A) -> Hom(P[-n],B) induced by g, conjugated by the two Hom equivalences. Since P[-n] is compact, this map is bijective. This is the proved hbijshift calculation.",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Complete g to the distinguished triangle A -> B -> D -> A[1] in D_QCoh(X). For compact P and a:P -> D, its composite with the connecting map is zero: after g[1] it is zero by consecutive-composition vanishing, and injectivity of Hom(P,g[1]) cancels g[1]. Exactness at D (Triangle.coyoneda_exact₃, the rotated covariant exactness lemma) factors a through b:P -> B. Surjectivity of Hom(P,g) lifts b through A, so a=0 by g followed by B -> D being zero. Thus all maps from compact P to D vanish.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The objects Q satisfying Hom(Q[n],C)=0 for every n form a class closed under isomorphisms, shifts, cones by exactness, retracts, and coproducts by the universal property. Perfect generation identifies this class with all of D_QCoh(X). Hence the identity of C vanishes and C is zero. Exactness gives bijectivity of Hom(T,g) for every T, and Yoneda makes g invertible. Transfer back. This also covers the empty scheme.",
+   "text": "For each generator E_i and n, shift adjunction sends a:E_i -> D[n] to a map E_i[-n] -> D, which vanishes by the preceding step and compactness of shifts. The additive adjunction sends zero to zero, hence a=0. Coproduct extensionality therefore makes every map from the coproduct of E to any D[n] zero. If D were nonzero the weak-generator hypothesis would supply such a nonzero map, a contradiction. Thus D is zero. Apply Mathlib Triangle.isZero₃_iff_isIso₁ to the distinguished triangle to conclude IsIso g. Neither nonemptiness of the generator index nor of X is used.",
    "uses": [
-    "lem-pc-derived-qcoh-perfect-generation"
+    "def-pc-generators",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-category-locally-small",
-  "lem-pc-derived-qcoh-perfect-generation",
-  "lem-pc-perfect-object-compact",
-  "prop-pur-kinjective-resolutions-exist"
+  "def-pc-compact-object",
+  "def-pc-generators",
+  "def-weil-triangulated-category",
+  "lem-pc-derived-qcoh-compact-generation",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-weil-pbc-hom-into-triangle-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "R1",
-  "document": "https://stacks.math.columbia.edu/tag/09IS",
-  "place": "Tag 09IS (perfect-theorem-bondal-van-den-Bergh); compactness Tag 09M1; detection step of Tag 0A9R",
-  "note": "Source argument with explicit localization transport to the arbitrary given derived models."
+  "agent": "A3",
+  "document": "https://stacks.math.columbia.edu/tag/0A9R",
+  "place": "Detection step using Tags 09IS and 09M1; formal cone argument from Mathlib Triangulated.Pretriangulated",
+  "note": "Reuse the library compact-generation theorem in the original derived model; shift compactness and all cone/adjunction calculations are proved in the item, with no new holes."
  },
  "mathlib_searches": [
   {
@@ -117,13 +138,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T225326-L-1811926",
-  "kind": "interface",
+  "landing": "20261013T004021-L-2490242",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
