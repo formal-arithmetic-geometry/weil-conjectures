@@ -12,6 +12,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Limits of towers of complexes with surjective transitions are homotopy limits
@@ -96,23 +97,6 @@ lemma quasiIso_limMap [HasExactLimitsOfShape J C] {F₁ F₂ : J ⥤ Homological
 
 end HomologicalComplex
 
-namespace CategoryTheory.Limits
-
-/-- A fan isomorphic, factor by factor and at the cone point, to a limit fan is a limit fan. -/
-noncomputable def Fan.IsLimit.ofIsos {C : Type*} [Category* C] {J : Type*} {f g : J → C}
-    {P : Fan f} (hP : IsLimit P) (e : ∀ j, f j ≅ g j) {pt : C} (ept : pt ≅ P.pt)
-    (π : ∀ j, pt ⟶ g j) (hπ : ∀ j, ept.hom ≫ P.proj j ≫ (e j).hom = π j) :
-    IsLimit (Fan.mk pt π) :=
-  Fan.IsLimit.mk _
-    (fun s ↦ Fan.IsLimit.lift hP (fun j ↦ s.proj j ≫ (e j).inv) ≫ ept.inv)
-    (fun s j ↦ by simp [← hπ j])
-    (fun s m hm ↦ by
-      rw [← cancel_mono ept.hom, assoc, Iso.inv_hom_id, comp_id]
-      refine Fan.IsLimit.hom_ext hP _ _ fun j ↦ ?_
-      simp [← hm j, ← hπ j])
-
-end CategoryTheory.Limits
-
 namespace DerivedCategory
 
 open Abelian
@@ -137,10 +121,10 @@ noncomputable def isLimitFanQOfIsKInjective [HasLimitsOfShape (Discrete J) C]
     ((isLimitMapConeFanMkEquiv _ _ _).symm hK)
   let hQh := isLimitMapConeFanMkEquiv _ _ _
     (isLimitOfPreserves HomotopyCategory.KInjectives.Qh hF')
-  refine Fan.IsLimit.ofIsos hQh (fun j ↦ (quotientCompQhIso C).app (I j))
-    ((quotientCompQhIso C).app (∏ᶜ I)).symm _ fun j ↦ ?_
-  exact ((quotientCompQhIso C).app (∏ᶜ I)).inv_comp_eq.2
-    ((quotientCompQhIso C).hom.naturality (Pi.π I j))
+  refine Fan.IsLimit.ofIsos hQh (fun j ↦ ((quotientCompQhIso C).app (I j)).symm)
+    ((quotientCompQhIso C).app (∏ᶜ I)).symm fun j ↦ ?_
+  rw [Iso.symm_hom, Iso.symm_hom, Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
+  exact (quotientCompQhIso C).hom.naturality (Pi.π I j)
 
 /-- If products of shape `J` are exact, the localization functor `Q` to the derived category
 sends products of complexes to products. -/
@@ -153,8 +137,8 @@ noncomputable def isLimitFanQ [HasLimitsOfShape (Discrete J) C]
         fun j ↦ i j.as).app j) := hi j.as
   have : QuasiIso (Limits.Pi.map i) := HomologicalComplex.quasiIso_limMap _
   refine Fan.IsLimit.ofIsos (isLimitFanQOfIsKInjective I)
-    (fun j ↦ (asIso (Q.map (i j))).symm) (asIso (Q.map (Limits.Pi.map i))) _ fun j ↦ ?_
-  simp [← Functor.map_comp_assoc]
+    (fun j ↦ asIso (Q.map (i j))) (asIso (Q.map (Limits.Pi.map i))) fun j ↦ ?_
+  simp [← Functor.map_comp]
 
 instance [HasLimitsOfShape (Discrete J) C] [HasExactLimitsOfShape (Discrete J) C] :
     PreservesLimitsOfShape (Discrete J) (Q (C := C)) :=

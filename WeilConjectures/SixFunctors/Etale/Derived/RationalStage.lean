@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationRecollement
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
 
 /-!
@@ -211,7 +212,8 @@ theorem rationalization_transport {Y : Scheme.{u}}
             (Rationalization.mapFac
               (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E))) G).hom.app L =
           (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map (τ.app L) :=
-  ⟨inferInstance, Rationalization.mapNatTrans _ τ, Rationalization.mapNatTrans_app _ τ⟩
+  ⟨inferInstance, Rationalization.mapNatTrans _ τ, fun L ↦ by
+    rw [Rationalization.mapFac_hom_naturality, Iso.inv_hom_id_app_assoc]⟩
 
 end Etale.DerivedCategory
 

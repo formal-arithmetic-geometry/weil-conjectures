@@ -33,8 +33,6 @@ localization of `R`-modules at `M`, hence a base change from `R` to `A`.
 - `CategoryTheory.Rationalization.functor_linear`, `CategoryTheory.Rationalization.linear_map` :
   `R`-linear functors between rationalizations, in particular those induced by `R`-linear
   triangulated functors, are `A`-linear.
-- `CategoryTheory.Rationalization.mapNatTrans` : a natural transformation between `R`-linear
-  triangulated functors induces one between the functors induced on rationalizations.
 - `CategoryTheory.Rationalization.isEquivalence_toKaroubi` : if the rationalization is
   idempotent complete, it is equivalent to its Karoubi envelope.
 -/
@@ -157,38 +155,6 @@ lemma exists_eq_inv_pow_smul_map (A : Type w') [Field A] [Algebra R A] [IsLocali
   have hne : algebraMap R A ϖ ≠ 0 := (IsLocalization.map_units A ⟨ϖ, hϖM⟩).ne_zero
   rw [← h, ← algebraMap_smul A, smul_smul, map_pow, inv_pow, inv_mul_cancel₀ (pow_ne_zero _ hne),
     one_smul]
-
-section NatTrans
-
-variable (M) {F G : C ⥤ D} [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R]
-  [G.CommShift ℤ] [G.IsTriangulated] [G.Linear R]
-
-omit [∀ n : ℤ, (shiftFunctor C n).Linear R] [IsTriangulated C]
-  [∀ n : ℤ, (shiftFunctor D n).Linear R] [IsTriangulated D]
-  [G.CommShift ℤ] [G.IsTriangulated] [G.Linear R] in
-/-- The isomorphism exhibiting `CategoryTheory.Rationalization.map M F` as a lifting of
-`F ⋙ Q M D` is `CategoryTheory.Rationalization.mapFac`. -/
-lemma liftingIso_map :
-    Localization.Lifting.iso (Q M C) (W M C) (F ⋙ Q M D) (map M F) = mapFac M F :=
-  rfl
-
-/-- A natural transformation `τ : F ⟶ G` between `R`-linear triangulated functors induces a
-natural transformation between the functors induced on rationalizations. -/
-noncomputable def mapNatTrans (τ : F ⟶ G) : map M F ⟶ map M G :=
-  Localization.liftNatTrans (Q M C) (W M C) (F ⋙ Q M D) (G ⋙ Q M D) (map M F) (map M G)
-    (Functor.whiskerRight τ (Q M D))
-
-omit [∀ n : ℤ, (shiftFunctor C n).Linear R] [IsTriangulated C]
-  [∀ n : ℤ, (shiftFunctor D n).Linear R] [IsTriangulated D] in
-/-- The natural transformation induced on rationalizations is compatible with the original one
-along `CategoryTheory.Rationalization.mapFac`. -/
-@[reassoc]
-lemma mapNatTrans_app (τ : F ⟶ G) (X : C) :
-    (mapFac M F).inv.app X ≫ (mapNatTrans M τ).app ((Q M C).obj X) ≫ (mapFac M G).hom.app X =
-      (Q M D).map (τ.app X) := by
-  simp [mapNatTrans, liftingIso_map]
-
-end NatTrans
 
 /-- An idempotent complete category `C'` (for instance the rationalization, or a full
 subcategory of it, when it is idempotent complete) is equivalent to its Karoubi envelope through
