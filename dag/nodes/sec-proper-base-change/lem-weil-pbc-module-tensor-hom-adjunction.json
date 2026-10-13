@@ -37,121 +37,66 @@
  ],
  "proof": [
   {
-   "text": "(Conventions.) The opens of $X$ with open coverings form a site, $\\mathcal O_X$ is a sheaf of commutative rings on it, and its ring of global sections is $\\mathcal O_X(X)$; so the definitions [def-weil-sheaf-of-modules-category], [def-pur-sheaf-tensor-product], [def-pur-sheaf-hom], [def-pur-sheaf-modules-hom-module], [def-weil-presheaf-modules-sheafification] apply. Write $\\mathcal A\\otimes_p\\mathcal G$ for the presheaf tensor product, $(\\mathcal A\\otimes_p\\mathcal G)(W)=\\mathcal A(W)\\otimes_{\\mathcal O_X(W)}\\mathcal G(W)$, whose restriction along $W'\\subseteq W$ sends $a\\otimes g$ to $a|_{W'}\\otimes g|_{W'}$, and $t:\\mathcal A\\otimes_p\\mathcal G\\to\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G$ for the sheafification map, an $\\mathcal O_X$-linear map of presheaves of modules with components $t_W$. For $\\eta\\in\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)(W)$ the components $\\eta_{W'}$ ($W'\\subseteq W$) are $\\mathcal O_X(W')$-linear and commute with restriction ($\\eta_{W''}(g|_{W''})=\\eta_{W'}(g)|_{W''}$ for $W''\\subseteq W'$); the restriction of $\\eta$ to $W_1\\subseteq W$ has components $(\\eta|_{W_1})_{W'}=\\eta_{W'}$ ($W'\\subseteq W_1$); and $f\\in\\mathcal O_X(W)$ acts by $(f\\eta)_{W'}=f|_{W'}\\,\\eta_{W'}$, sums being taken componentwise. For $s\\in\\mathcal O_X(X)$ and a morphism $\\chi$ of $\\mathcal O_X$-modules, $(s\\chi)_W=s|_W\\,\\chi_W$.",
+   "text": "Construct the correspondence as a composite of fullyFaithfulForget.homEquiv, the inverse of PresheafOfModules.homObjEquiv G.val A.val F.val, precomposition with the inverse presheaf braiding, the inverse sheafification adjunction homEquiv, and precomposition with tensorObjIsoSheafification.hom. This is an actual equivalence, so both inverse laws and bijectivity are inherited from the proved equivalences; no choice from existence is used.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
     "def-pur-sheaf-hom",
-    "def-pur-sheaf-modules-hom-module",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01CN (lemma-internal-hom, line 3534), 'in particular' clause; proof: 'the analogue of Algebra, Lemma 00DE (algebra.tex line 1906)', written out on sections"
-   }
-  },
-  {
-   "text": "(From $\\varphi$ to a map of presheaves, on each open: Algebra 00DE.) Let $\\varphi:\\mathcal A\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ be $\\mathcal O_X$-linear and $W$ open. The map $c_W:\\mathcal A(W)\\to\\operatorname{Hom}_{\\mathcal O_X(W)}(\\mathcal G(W),\\mathcal F(W))$, $a\\mapsto(\\varphi_W(a))_W$, is well defined since each $(\\varphi_W(a))_W$ is $\\mathcal O_X(W)$-linear, and is $\\mathcal O_X(W)$-linear: $\\varphi_W$ is $\\mathcal O_X(W)$-linear, and by step 1 $(f\\eta+\\eta')_W=f\\,\\eta_W+\\eta'_W$. By [lem-weil-pbc-module-tensor-hom-currying] (with $R=\\mathcal O_X(W)$, $M=\\mathcal A(W)$, $N=\\mathcal G(W)$, $P=\\mathcal F(W)$) there is a unique $\\mathcal O_X(W)$-linear $\\psi_W:\\mathcal A(W)\\otimes_{\\mathcal O_X(W)}\\mathcal G(W)\\to\\mathcal F(W)$ with $\\psi_W(a\\otimes g)=(\\varphi_W(a))_W(g)$.",
-   "uses": [
-    "lem-weil-pbc-module-tensor-hom-currying",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DE (lemma-hom-from-tensor-product, line 1906) and its proof, applied on the sections over $W$ (Modules 01CN, proof)"
-   }
-  },
-  {
-   "text": "($\\psi=(\\psi_W)_W$ is a morphism of presheaves of $\\mathcal O_X$-modules $\\mathcal A\\otimes_p\\mathcal G\\to\\mathcal F$.) Each $\\psi_W$ is $\\mathcal O_X(W)$-linear by step 2. For $W'\\subseteq W$, $a\\in\\mathcal A(W)$, $g\\in\\mathcal G(W)$: $\\psi_{W'}(a|_{W'}\\otimes g|_{W'})=(\\varphi_{W'}(a|_{W'}))_{W'}(g|_{W'})=((\\varphi_W(a))|_{W'})_{W'}(g|_{W'})=(\\varphi_W(a))_{W'}(g|_{W'})=((\\varphi_W(a))_W(g))|_{W'}=\\psi_W(a\\otimes g)|_{W'}$, using in turn that $\\varphi$ commutes with restriction, the formula $(\\eta|_{W'})_{W'}=\\eta_{W'}$ and the naturality of $\\eta=\\varphi_W(a)$ (step 1). So the two maps $\\mathcal A(W)\\otimes\\mathcal G(W)\\to\\mathcal F(W')$, $x\\mapsto\\psi_{W'}(x|_{W'})$ and $x\\mapsto\\psi_W(x)|_{W'}$, both additive and $\\mathcal O_X(W)$-linear for the $\\mathcal O_X(W)$-module structure on $\\mathcal F(W')$ through $\\mathcal O_X(W)\\to\\mathcal O_X(W')$, agree on all $a\\otimes g$, hence are equal by the uniqueness clause of [lem-weil-pbc-module-tensor-hom-currying]. Thus $\\psi$ is a morphism of presheaves of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification].",
-   "uses": [
-    "lem-weil-pbc-module-tensor-hom-currying",
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DE (lemma-hom-from-tensor-product, line 1906) and its proof, applied on the sections over $W$ (Modules 01CN, proof)"
-   }
-  },
-  {
-   "text": "(From a map of presheaves back to $\\varphi$.) Let $\\psi:\\mathcal A\\otimes_p\\mathcal G\\to\\mathcal F$ be a morphism of presheaves of $\\mathcal O_X$-modules. For $W$ open and $a\\in\\mathcal A(W)$ define $\\varphi_W(a)$ by $(\\varphi_W(a))_{W'}(g)=\\psi_{W'}(a|_{W'}\\otimes g)$ for $W'\\subseteq W$, $g\\in\\mathcal G(W')$. Each component is $\\mathcal O_X(W')$-linear in $g$ ($\\psi_{W'}$ is linear and $\\otimes$ is linear in the second factor); for $W''\\subseteq W'$, $\\psi_{W''}(a|_{W''}\\otimes g|_{W''})=\\psi_{W'}(a|_{W'}\\otimes g)|_{W''}$ by the naturality of $\\psi$ and the restriction rule of $\\mathcal A\\otimes_p\\mathcal G$; so $\\varphi_W(a)\\in\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal G|_W,\\mathcal F|_W)=\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)(W)$. The map $\\varphi_W$ is $\\mathcal O_X(W)$-linear: $(\\varphi_W(fa+a'))_{W'}(g)=\\psi_{W'}(f|_{W'}a|_{W'}\\otimes g+a'|_{W'}\\otimes g)=f|_{W'}(\\varphi_W(a))_{W'}(g)+(\\varphi_W(a'))_{W'}(g)=(f\\varphi_W(a)+\\varphi_W(a'))_{W'}(g)$ by step 1. It commutes with restriction to $W_1\\subseteq W$: $(\\varphi_{W_1}(a|_{W_1}))_{W'}(g)=\\psi_{W'}(a|_{W'}\\otimes g)=(\\varphi_W(a))_{W'}(g)=((\\varphi_W(a))|_{W_1})_{W'}(g)$ for $W'\\subseteq W_1$. So $\\varphi:\\mathcal A\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ is $\\mathcal O_X$-linear.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DE (lemma-hom-from-tensor-product, line 1906) and its proof, applied on the sections over $W$ (Modules 01CN, proof)"
-   }
-  },
-  {
-   "text": "(Steps 2–3 and step 4 are mutually inverse.) Starting from $\\varphi$, let $\\psi$ be as in steps 2–3 and $\\varphi'$ as in step 4: $(\\varphi'_W(a))_{W'}(g)=\\psi_{W'}(a|_{W'}\\otimes g)=(\\varphi_{W'}(a|_{W'}))_{W'}(g)=(\\varphi_W(a))_{W'}(g)$ by the computation of step 3, so $\\varphi'=\\varphi$. Starting from $\\psi$, let $\\varphi$ be as in step 4 and $\\psi'$ as in steps 2–3: $\\psi'_W(a\\otimes g)=(\\varphi_W(a))_W(g)=\\psi_W(a|_W\\otimes g)=\\psi_W(a\\otimes g)$, so $\\psi'_W=\\psi_W$ by the uniqueness clause of [lem-weil-pbc-module-tensor-hom-currying]. Hence $\\varphi\\mapsto\\psi$ is a bijection from $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal A,\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F))$ onto the set of morphisms of presheaves of $\\mathcal O_X$-modules $\\mathcal A\\otimes_p\\mathcal G\\to\\mathcal F$, and $\\psi$ is the unique such morphism with $\\psi_W(a\\otimes g)=(\\varphi_W(a))_W(g)$ for all $W,a,g$ (uniqueness again by [lem-weil-pbc-module-tensor-hom-currying] on each $W$).",
-   "uses": [
-    "lem-weil-pbc-module-tensor-hom-currying",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DE (lemma-hom-from-tensor-product, line 1906) and its proof, applied on the sections over $W$ (Modules 01CN, proof)"
-   }
-  },
-  {
-   "text": "(Sheafification.) $\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G$ is the sheafification of $\\mathcal A\\otimes_p\\mathcal G$ with map $t$ [def-pur-sheaf-tensor-product], and $\\mathcal F$ is a sheaf of $\\mathcal O_X$-modules; by the universal property of sheafification of presheaves of modules [def-weil-presheaf-modules-sheafification], $\\chi\\mapsto\\chi\\circ t$ is a bijection from $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G,\\mathcal F)$ onto the morphisms of presheaves of $\\mathcal O_X$-modules $\\mathcal A\\otimes_p\\mathcal G\\to\\mathcal F$. Given $\\varphi$, let $\\tilde\\varphi$ be the unique morphism with $\\tilde\\varphi\\circ t=\\psi$ ($\\psi$ from step 2); then $\\tilde\\varphi_W(t_W(a\\otimes g))=\\psi_W(a\\otimes g)=(\\varphi_W(a))_W(g)$. If $\\chi$ is any $\\mathcal O_X$-linear map with $\\chi_W(t_W(a\\otimes g))=(\\varphi_W(a))_W(g)$ for all $W,a,g$, then $\\chi\\circ t$ is a morphism of presheaves of modules with the formula of step 5, so $\\chi\\circ t=\\psi$ by the uniqueness in step 5, and $\\chi=\\tilde\\varphi$ by the uniqueness in the universal property. The map $\\varphi\\mapsto\\tilde\\varphi$ is the composite of the bijection of step 5 and the inverse of $\\chi\\mapsto\\chi\\circ t$, hence a bijection $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal A,\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F))\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G,\\mathcal F)$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Section 01CA (section-tensor-product: $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ is the sheafification of the presheaf tensor product) with the universal property of sheafification of presheaves of modules; Modules 01CN, proof"
-   }
-  },
-  {
-   "text": "($\\mathcal O_X(X)$-linearity.) Let $s\\in\\mathcal O_X(X)$ and $\\varphi_1,\\varphi_2$ as above. The $\\mathcal O_X$-linear map $\\chi=s\\tilde\\varphi_1+\\tilde\\varphi_2$ [def-pur-sheaf-modules-hom-module] satisfies $\\chi_W(t_W(a\\otimes g))=s|_W(\\varphi_{1,W}(a))_W(g)+(\\varphi_{2,W}(a))_W(g)=(s|_W\\varphi_{1,W}(a)+\\varphi_{2,W}(a))_W(g)=((s\\varphi_1+\\varphi_2)_W(a))_W(g)$, by the formula of step 6, the action $(f\\eta)_W=f\\,\\eta_W$ of step 1, and $(s\\varphi_1)_W(a)=s|_W\\varphi_{1,W}(a)$ [def-pur-sheaf-modules-hom-module]. By the uniqueness in step 6, $\\chi=\\widetilde{s\\varphi_1+\\varphi_2}$; so $\\varphi\\mapsto\\tilde\\varphi$ is $\\mathcal O_X(X)$-linear, hence an isomorphism of $\\mathcal O_X(X)$-modules.",
-   "uses": [
-    "def-pur-sheaf-modules-hom-module",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01CN (lemma-internal-hom, line 3534), 'in particular' clause; proof: 'the analogue of Algebra, Lemma 00DE (algebra.tex line 1906)', written out on sections"
-   }
-  },
-  {
-   "text": "(Naturality in $\\mathcal A$.) Let $\\alpha:\\mathcal A'\\to\\mathcal A$ be $\\mathcal O_X$-linear, with $t':\\mathcal A'\\otimes_p\\mathcal G\\to\\mathcal A'\\otimes_{\\mathcal O_X}\\mathcal G$ the sheafification map. The maps $\\alpha_W\\otimes\\mathrm{id}:\\mathcal A'(W)\\otimes\\mathcal G(W)\\to\\mathcal A(W)\\otimes\\mathcal G(W)$ (defined by [lem-weil-pbc-module-tensor-hom-currying]) form a morphism of presheaves of modules $\\alpha\\otimes_p\\mathrm{id}$ (checked on pure tensors as in step 3), and $\\alpha\\otimes\\mathrm{id}_{\\mathcal G}$ is the morphism of sheafifications it induces, i.e. the unique $\\mathcal O_X$-linear map with $(\\alpha\\otimes\\mathrm{id}_{\\mathcal G})\\circ t'=t\\circ(\\alpha\\otimes_p\\mathrm{id})$ [def-weil-presheaf-modules-sheafification]. Then $(\\tilde\\varphi\\circ(\\alpha\\otimes\\mathrm{id}_{\\mathcal G}))_W(t'_W(a'\\otimes g))=\\tilde\\varphi_W(t_W(\\alpha_W(a')\\otimes g))=(\\varphi_W(\\alpha_W(a')))_W(g)=((\\varphi\\circ\\alpha)_W(a'))_W(g)$ by step 6, so by the uniqueness in step 6 (applied to $\\mathcal A'$ and $\\varphi\\circ\\alpha$), $\\widetilde{\\varphi\\circ\\alpha}=\\tilde\\varphi\\circ(\\alpha\\otimes\\mathrm{id}_{\\mathcal G})$.",
-   "uses": [
     "lem-weil-pbc-module-tensor-hom-currying",
     "def-weil-presheaf-modules-sheafification",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Section 01CA (section-tensor-product: $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ is the sheafification of the presheaf tensor product) with the universal property of sheafification of presheaves of modules; Modules 01CN, proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the sheafification adjunction apply_symm_apply identity on a pure tensor. Cancel tensorObjIsoSheafification.inv followed by .hom using inv_hom_id. Presheaf braiding swaps the two tensor factors, and tensorHomUncurry evaluates the local internal-Hom section. This proves correspondence_eval, exactly the displayed evaluation formula.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-tensor-hom-currying",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For pure_tensor_ext, cancel the epimorphism tensorObjIsoSheafification.inv, apply injectivity of the sheafification adjunction homEquiv, and use Adjunction.homEquiv_unit. PresheafOfModules.hom_ext and ModuleCat.MonoidalCategory.tensor_ext reduce equality to all pure tensors. The evaluation formula then gives the requested uniqueness.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-tensor-hom-currying"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove correspondence_add and correspondence_smul using pure_tensor_ext and correspondence_eval. Addition is componentwise. For scalar compatibility, homModule acts by postcomposition with sectionsSMul; use sectionsSMul_app_apply, smul_app and overSections_coe_apply, with identity restriction at Over.mk (identity). Bundle the equivalence and these two equalities as a LinearEquiv.",
+   "uses": [
+    "def-pur-sheaf-modules-hom-module",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For correspondence_natural, whiskerRight_tensorObjIsoSheafification_hom from the proved source MonoidalClosed module gives naturality of the tensor comparison. Combine it with naturality of the sheafification unit to show that alpha tensor identity carries the image of a pure tensor to the image of alpha(a) tensor g. Apply pure_tensor_ext and correspondence_eval. Finally supply the LinearEquiv family, evaluation, uniqueness, and this naturality to the unchanged existential statement.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
   "def-pur-sheaf-hom",
-  "def-pur-sheaf-modules-hom-module",
+  "lem-weil-pbc-module-tensor-hom-currying",
   "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-module-tensor-hom-currying"
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-modules-hom-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01CN (lemma-internal-hom, line 3534), whose proof says it is the analogue of Algebra, Lemma 00DE (algebra.tex line 1906) and is omitted; written out here following the proof of 00DE on the sections over each open, plus the definition of the tensor product as a sheafification (Modules, Section 01CA) and the universal property of sheafification"
+  "place": "Modules, Lemma 01CN, via Algebra 00DE and tensor-product sheafification in Section 01CA; implemented by G4 using the already proved presheaf equivalence and sheaf tensor comparison in the source library."
  },
  "mathlib_searches": [
   {
@@ -224,5 +169,15 @@
   "group": "F1",
   "result": "fix",
   "note": "ringed space X,R; A,G,F SheafOfModules; A⊗G now source monoidalCategory R with t_W = tensorObjIsoSheafification.inv ∘ sheafification unit; Hom = homObj; existence+uniqueness of ψ with ψ_W(t_W(a⊗g))=(φ_W a)_W g; e A LinearEquiv over sectionsSubring via homModule; naturality e A'(α≫φ)=(α⊗ₘ𝟙 G)≫e A φ; FIX removed let P/S/T/evaluates/R₀ binders"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-63172",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T031540-L-3570916",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Tensor-Hom theorem with its node, proof dependencies, change record and report; verified compilation, axioms and all four direct importers."
  }
 }
