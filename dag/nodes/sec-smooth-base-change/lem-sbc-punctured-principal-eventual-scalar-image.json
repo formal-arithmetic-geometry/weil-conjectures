@@ -1,0 +1,168 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "0H3E (Example 20.39.3, finite-stage pro-zero cone comparison), 0BK0 (Lemma 51.8.2) and 0AVY (Lemma 47.11.1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-scheme-conventions",
+  "lem-sbc-finite-etale-adic-sections-transfer"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity across a regular special divisor; the depth-three punctured principal-quotient lifting input, Tags 0BLS (complete case), 0BM6, 09ZL, 0AVY, 0A02; full faithfulness of punctured principal-quotient restriction; Scalar formal sections on a depth-three complete local puncture; Principal formal sections as an element of the adic completion; finite-stage Finite scalar lifts of compatible principal puncture sections; finite-stage pro-zero cokernel comparison",
+   "via": [
+    "lem-sbc-punctured-principal-completion-comparison",
+    "lem-sbc-completed-punctured-quotient-fully-faithful",
+    "lem-sbc-depth-three-completed-quotient-lift",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity",
+    "lem-sbc-complete-punctured-principal-formal-sections",
+    "lem-sbc-punctured-principal-finite-level-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "lem-sbc-punctured-principal-eventual-scalar-image",
+ "title": "Eventual scalar image of punctured principal restriction",
+ "statement": "Let R be a Noetherian commutative local ring [def-weil-pbc-noetherian-ring] of depth at least three [def-weil-pbc-depth], g in its maximal ideal, and W its punctured spectrum [def-weil-pbc-scheme-conventions]. For the quotient map f:R to R/(g) and every n, there is a finite gap k such that every section on openThickening f W (n+k) [lem-sbc-finite-etale-adic-sections-transfer] restricts to the scalar image of R at level n. Restriction is the recursively composed k consecutive openThickeningTransition.appTop maps, with identity at k=0. The gap is independent of the section, and no compatible infinite family is assumed.",
+ "proof": [
+  {
+   "text": "Depth at least three implies depth at least two. Use canonical depth-two Hartogs restriction [lem-sbc-depth-two-puncture-global-sections] to identify Gamma(W,O_W) with R. Tags 0AVY and 0BK0 identify H^1(W,O_W) with H^2_m(R), which vanishes under depth three.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "lem-sbc-depth-two-puncture-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put F=O_W. The ascending ideals Ann_R(g^j) stabilize because R is Noetherian. Their restrictions identify with F[g^j], since localization is exact. Choose c which both bounds the stabilization index and annihilates the stabilized torsion sheaf. Form E_j=[F --g^j--> F] in degrees -1,0. Its transition to E_(j-1) is g in degree -1 and the identity in degree 0. The natural map E_j to F/g^j F has cone F[g^j][2]. A sufficiently long transition of these cones is zero. This is the pro-isomorphism explicitly stated in 0H3E.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived global sections to this pro-isomorphism and then degree-zero cohomology. Zero error transitions stay zero after derived global sections; the long exact sequences show that both the kernels and cokernels of the induced cohomology maps form pro-zero systems (enlarge the bound to accommodate both adjacent connecting maps). Since H^1(W,F)=0, H^0(R Gamma(W,E_j)) is exactly Gamma(W,F)/g^j Gamma(W,F)=R/g^j R, by the triangle for multiplication by g. The induced comparison is the canonical scalar quotient restriction.",
+   "uses": [
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel I of R to R/(g) equals (g), and I^j=(g^j). Under the second pullback projection, the structure sheaf on openThickening f W n pushes forward to F/g^(n+1)F. The quotient maps induce the stated transitions. Naturality of GammaSpecIso and the pullback square identify the scalar comparison with GammaSpecIso.inv followed by (openThickeningMap f W n composed with W.ι).appTop.",
+   "uses": [
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel comparison is pro-zero by the preceding steps. For each n choose m=n+k at which its transition to n is zero. Every section at m therefore has scalar restriction at n. This does not require an infinite family. The recursive restriction is exactly the composite of quotient transitions. For g=0 use k=0 and Hartogs; for nilpotent g take m beyond the nilpotence exponent.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions",
+  "lem-sbc-depth-two-puncture-global-sections",
+  "lem-sbc-finite-etale-adic-sections-transfer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Finite-stage cokernel consequence of 0H3E and the depth comparison in 0BK0 and 0AVY; the first four steps of the parent proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "eventually image quotient sections punctured spectrum depth local cohomology",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, localCohomology.isoSelfLERadical, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, ModuleCat.Tilde.exists_const, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, LocalizedModule.exists_subsingleton_away. ",
+   "verdict": "The hits provide general local cohomology or cofiltered-system infrastructure, not the punctured finite-stage scalar image statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localCohomology\"",
+   "date": "2026-10-14",
+   "results": "12 hits: localCohomology.SelfLERadical, localCohomology.instCategorySelfLERadical, localCohomology.SelfLERadical.inhabited, localCohomology.idealPowersToSelfLERadical, localCohomology, localCohomology.ofSelfLERadical, localCohomology.ideal_powers_initial, localCohomology.SelfLERadical.cast. ",
+   "verdict": "The hits provide general local cohomology or cofiltered-system infrastructure, not the punctured finite-stage scalar image statement."
+  },
+  {
+   "tool": "grep",
+   "query": "proZero|pro_zero|eventual.*section|section.*eventual",
+   "date": "2026-10-14",
+   "results": "14 hits: Mathlib/Topology/Order/LocalExtr.lean, Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/Analysis/CStarAlgebra/ApproximateUnit.lean. ",
+   "verdict": "The hits provide general local cohomology or cofiltered-system infrastructure, not the punctured finite-stage scalar image statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrictions from sufficiently high principal quotient thickenings of a punctured local spectrum of depth three lie in the image of scalars",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalFiniteLevelLift",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalEventualScalarImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedPrincipalEventualScalarImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_principal_eventual_scalar_image",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.puncturedPrincipalSectionRestriction",
+   "AlgebraicGeometry.Scheme.punctured_principal_eventual_scalar_image"
+  ],
+  "statement": "theorem punctured_principal_eventual_scalar_image\n    (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)\n    (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := R) R)\n    (W : (Spec (.of R)).Opens)\n    (hW : ∀ x : Spec (.of R), x ∈ W ↔ x ≠ IsLocalRing.closedPoint R) :\n    let f := Ideal.Quotient.mk (Ideal.span {g})\n    ∀ n, ∃ k : ℕ,\n      ∀ t : Γ(FiniteEtale.Adic.openThickening f W (n + k), ⊤), ∃ a : R,\n        ((ΓSpecIso (.of R)).inv ≫\n          (FiniteEtale.Adic.openThickeningMap f W n ≫ W.ι).appTop) a =\n            puncturedPrincipalSectionRestriction f W n k t",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T181122-L-2607134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T181122-L-2607134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalEventualScalarImage
 
 /-! # Finite-level scalar lifts of compatible punctured principal sections
 
@@ -56,6 +57,23 @@ theorem punctured_principal_finite_level_lift
         (s (n + 1)) = s n) →
       ∀ n, ∃ a : R,
         ((ΓSpecIso (.of R)).inv ≫
-          (FiniteEtale.Adic.openThickeningMap f W n ≫ W.ι).appTop) a = s n := by sorry
+          (FiniteEtale.Adic.openThickeningMap f W n ≫ W.ι).appTop) a = s n := by
+  dsimp only
+  intro s hs n
+  obtain ⟨k, hk⟩ := punctured_principal_eventual_scalar_image R g hg hdepth W hW n
+  have hcompat (k : ℕ) :
+      puncturedPrincipalSectionRestriction (Ideal.Quotient.mk (Ideal.span {g}))
+        W n k (s (n + k)) = s n := by
+    induction k with
+    | zero => rfl
+    | succ k ih =>
+      change puncturedPrincipalSectionRestriction (Ideal.Quotient.mk (Ideal.span {g}))
+        W n k ((FiniteEtale.Adic.openThickeningTransition
+          (Ideal.Quotient.mk (Ideal.span {g})) W (n + k)).appTop
+            (s (n + k + 1))) = s n
+      rw [hs (n + k)]
+      exact ih
+  obtain ⟨a, ha⟩ := hk (s (n + k))
+  exact ⟨a, ha.trans (hcompat k)⟩
 
 end AlgebraicGeometry.Scheme
