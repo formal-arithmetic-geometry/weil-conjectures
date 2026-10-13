@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-module-cup-derived-homology-tensor",
+ "kind": "statement",
+ "title": "Natural tensor pairing on derived module homology with cycle normalization",
+ "statement": "For a commutative ring k in universe u and a chosen derived category of ModuleCat k in universe u, use derived homology [def-weil-derived-category-cohomology-functor] and the K-flat derived monoidal tensor for modules as in the generic construction [lem-sc-source-kflat-tensor-left-triangulated]. There is a family of k-bilinear maps from H^p(A) and H^q(B) to H^(p+q)(A tensor-derived B), for arbitrary derived objects A,B and nonnegative p,q. It is natural in both objects. For arbitrary integer cochain complexes K,L and cycles a,b in degrees p,q, there is a total tensor cycle z whose component is the (p,q)-summand inclusion of a tensor b. Applying H^(p+q) of the lax localization comparison to the family evaluated on the localized classes of a,b gives the localized class of z. Localized cycle class is the inverse homologyFunctorFactors component applied to homology projection. This is precisely Nonempty CupDerivedHomologyTensor k.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/068G",
+  "place": "Section 15.64, equation-simple-tor-product; Tag 0FKU first paragraphs and proof of Lemma 20.31.1"
+ },
+ "stmt_deps": [
+  "def-weil-derived-category-cohomology-functor",
+  "lem-sc-source-kflat-tensor-left-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Represent H^p(A) by morphisms from the shifted rank-one free module k[-p]. Projectivity of k identifies these morphisms bijectively with homology, including for unbounded A. Tensor representing maps, precompose with the canonical shifted-unit tensor identification and transport back to homology. Additivity and k-linearity give the required bilinear family; composition gives its naturality. Use the natural linear equivalence and its explicit cocycle formula of lem-sc-module-cup-homology-representability, and the normalized isomorphism e of lem-sc-module-cup-shifted-unit-tensor.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "lem-sc-module-cup-homology-representability",
+    "lem-sc-module-cup-shifted-unit-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For complexes K,L, take the single-complex maps with components the supplied cycles. Their tensor followed by the lax localization comparison is the localization of the tensor of these maps. Its degree p+q component is exactly the tensor summand of a tensor b. The signed Leibniz rule makes it a cycle. The homology factorization of Q identifies its class with the asserted on_cycles value. This includes p=0, q=0, zero complexes, and zero cycles. The representative compatibility is exactly the generator formula and Q(h) identity in lem-sc-module-cup-shifted-unit-tensor, followed by the on_cycles clause of lem-sc-module-cup-homology-representability.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "lem-sc-module-cup-homology-representability",
+    "lem-sc-module-cup-shifted-unit-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-category-cohomology-functor",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-sc-module-cup-homology-representability",
+  "lem-sc-module-cup-shifted-unit-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/068G",
+  "place": "Section 15.64, equation-simple-tor-product; Tag 0FKU first paragraphs and proof of Lemma 20.31.1",
+  "note": "N4 made the indicated source argument precise for the existing resolution-data definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of derived tensor product and comparison of acyclic resolution cup product classes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural bilinear map from homology of derived module complexes to homology of their derived tensor product normalized on tensor cocycles",
+   "results": "Eight hits about Tor, group homology and HomComplex cohomology; none states a natural tensor on derived homology with localization normalization.",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived global sections homology canonical identification with injective resolution cohomology class",
+   "results": "InjectiveResolution.extEquivCohomologyClass and its representative lemmas give related Ext infrastructure, but not CupAcyclicResolution.class comparison.",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "homologyFunctorFactors and twelve homology and exact-sequence declarations; no tensor product or computing-resolution evaluation. Additional searches for Functor.homologyRightDerivedFunctorObjSingleFunctorIso and tensor_homology_pairing returned unknown identifier.",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyRightDerivedFunctorObjSingleFunctorIso|homologyFunctorFactors|tensor.*homology|homology.*tensor in Mathlib/Algebra/Homology/DerivedCategory and Mathlib/CategoryTheory/Abelian/Injective; local moduleCup and CupAcyclicResolution.class searches",
+   "results": "Mathlib homologyFunctorFactors and naturality found. Source-library homologyRightDerivedFunctorObjSingleFunctorIso proves existence of the cohomology iso, but not the resolution-class formula. TensorHomologyPairing proves ordinary complex tensor pairing. ModuleCupRealizationEvaluation depends on the assigned item and cannot be imported. No exact match for the new statements.",
+   "date": "2026-10-14",
+   "verdict": "no exact matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupEqualDerivedMapsClass",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "General theorem of cube cohomological cup construction: comparison of products computed with acyclic resolutions; Natural tensor pairing on derived module homology with cycle normalization",
+   "via": [
+    "lem-sc-module-cup-equal-derived-maps-class",
+    "lem-sc-module-cup-realization-evaluation",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupDerivedHomologyTensor",
+  "file": "lean/Sheaf/Paper/ModuleCupDerivedHomologyTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cupDerivedHomologyTensor",
+  "statement": "theorem exists_cupDerivedHomologyTensor : Nonempty (CupDerivedHomologyTensor k)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8e299",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T215608-L-899333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8e299",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T215608-L-899333",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof with its node, all five new lemmas with their nodes and sources, and the repaired citations; all six delivered modules and direct importer Sheaf.Paper.ModuleCupRealizationEvaluation compile cleanly; axioms are standard plus sorryAx from remaining theorem dependencies."
+ }
+}

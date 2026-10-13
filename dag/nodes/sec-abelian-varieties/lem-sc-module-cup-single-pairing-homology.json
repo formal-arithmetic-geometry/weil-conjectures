@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-module-cup-single-pairing-homology",
+ "kind": "statement",
+ "title": "One realized pairing evaluated through the derived global cup diagram",
+ "statement": "Let X be a scheme with the indicated module-sheaf derived category, V a natural normalized derived module homology tensor family [lem-sc-module-cup-derived-homology-tensor], and J a resolution-class comparison [lem-sc-module-cup-derived-class-comparison]. Let mu be any natural global derived pairing satisfying the six-object naive/derived diagram and tensor summand formula [lem-sc-module-cup-naive-derived-compatibility]. Let D be one computing resolution pairing of F,G [def-sc-module-cup-resolution-data], with t realizing it [def-sc-module-cup-realization-complex-data]. For nonnegative p,q and cycles a,b,c with c.val = D.pair p q top a.val b.val, J.equiv applied to D.target.class c equals H^(p+q) of mu(F[0],G[0]) followed by RΓ(D.derivedMap t), evaluated on V.pair of J.equiv of the two input classes. No second resolution or equality of input classes or derived morphisms is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Lemma 20.31.3 and the global cohomology diagram immediately following it"
+ },
+ "stmt_deps": [
+  "lem-sc-module-cup-derived-homology-tensor",
+  "lem-sc-module-cup-derived-class-comparison",
+  "lem-sc-module-cup-naive-derived-compatibility",
+  "def-sc-module-cup-resolution-data",
+  "def-sc-module-cup-realization-complex-data"
+ ],
+ "proof": [
+  {
+   "text": "Lift all three natural-degree cycles by J.on_cycles. Apply the supplied six-object diagram to D.left.integerComplex and D.right.integerComplex, postcomposing by RΓ(Q(t)) and RΓ(inv target augmentation). Naturality of the comparison moves Q(t) across it, and naturality of mu moves the input augmentation maps. Cancel localized augmentation inverses to identify the transported bottom morphism with mu on F[0],G[0] followed by RΓ(D.derivedMap t).",
+   "uses": [
+    "lem-sc-module-cup-derived-class-comparison",
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cup-realization-complex-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply V.natural to the input comparisons and V.on_cycles to the lifted cycles. The summand formula for the naive cochain map and D.Realizes t say that its image, after the target extension isomorphism, has component D.pair p q top a.val b.val. By hc this is c.val. Injectivity of the extension iso and the cycle inclusion identifies it with the lifted c. Naturality of homology projection and localization homology factorization identifies the upper value with J.equiv(D.target.class c); J.on_cycles identifies the bottom input values with the two transported input classes. The argument includes degree zero and zero cycles.",
+   "uses": [
+    "lem-sc-module-cup-derived-homology-tensor",
+    "lem-sc-module-cup-derived-class-comparison",
+    "def-sc-module-cup-resolution-data",
+    "def-sc-module-cup-realization-complex-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-derived-class-comparison",
+  "lem-sc-module-cup-naive-derived-compatibility",
+  "def-sc-module-cup-realization-complex-data",
+  "lem-sc-module-cup-derived-homology-tensor",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Lemma 20.31.3 and the global cohomology diagram immediately following it",
+  "note": "N4 made the indicated source argument precise for the existing resolution-data definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of derived tensor product and comparison of acyclic resolution cup product classes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural bilinear map from homology of derived module complexes to homology of their derived tensor product normalized on tensor cocycles",
+   "results": "Eight hits about Tor, group homology and HomComplex cohomology; none states a natural tensor on derived homology with localization normalization.",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived global sections homology canonical identification with injective resolution cohomology class",
+   "results": "InjectiveResolution.extEquivCohomologyClass and its representative lemmas give related Ext infrastructure, but not CupAcyclicResolution.class comparison.",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "homologyFunctorFactors and twelve homology and exact-sequence declarations; no tensor product or computing-resolution evaluation. Additional searches for Functor.homologyRightDerivedFunctorObjSingleFunctorIso and tensor_homology_pairing returned unknown identifier.",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyRightDerivedFunctorObjSingleFunctorIso|homologyFunctorFactors|tensor.*homology|homology.*tensor in Mathlib/Algebra/Homology/DerivedCategory and Mathlib/CategoryTheory/Abelian/Injective; local moduleCup and CupAcyclicResolution.class searches",
+   "results": "Mathlib homologyFunctorFactors and naturality found. Source-library homologyRightDerivedFunctorObjSingleFunctorIso proves existence of the cohomology iso, but not the resolution-class formula. TensorHomologyPairing proves ordinary complex tensor pairing. ModuleCupRealizationEvaluation depends on the assigned item and cannot be imported. No exact match for the new statements.",
+   "date": "2026-10-14",
+   "verdict": "no exact matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupEqualDerivedMapsClass",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "General theorem of cube cohomological cup construction: comparison of products computed with acyclic resolutions; One realized pairing evaluated through the derived global cup diagram",
+   "via": [
+    "lem-sc-module-cup-equal-derived-maps-class",
+    "lem-sc-module-cup-realization-evaluation",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupSinglePairingHomology",
+  "file": "lean/Sheaf/Paper/ModuleCupSinglePairingHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_single_pairing_homology",
+  "statement": "theorem moduleCup_single_pairing_homology\n    (V : CupDerivedHomologyTensor Γ(X, ⊤)) (J : CupDerivedClassComparison X)\n    (μ : ∀ A B : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n    (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj A ⊗\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj B ⟶\n        (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (A ⊗ B))\n    (hnatural : ∀ (A A' B B' : DerivedCategory\n    (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (f : A ⟶ A') (g : B ⟶ B'),\n    ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map f ⊗ₘ\n      (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map g) ≫\n        μ A' B' = μ A B ≫\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map (f ⊗ₘ g))\n    (hdiagram : ∀ K L : CochainComplex\n    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,\n    let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    let R := (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor\n    ∃ ν : T.obj K ⊗ T.obj L ⟶ T.obj (K ⊗ L),\n      (∀ (i j n : ℤ) (h : i + j = n) (x : Γ(K.X i, ⊤)) (y : Γ(L.X j, ⊤)),\n        (ν.f n).hom\n            ((HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n h).hom\n              (TensorProduct.tmul Γ(X, ⊤) x y)) =\n          (HomologicalComplex.ιTensorObj K L i j n h).val.app (op ⊤)\n            (tmulSection x y)) ∧\n      (moduleCup_globalComparison X K ⊗ₘ moduleCup_globalComparison X L) ≫\n          μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫\n          R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L) =\n        Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫\n          DerivedCategory.Q.map ν ≫ moduleCup_globalComparison X (K ⊗ L))\n    {F G : X.Modules}\n    (D : CupResolutionPairing F G)\n    (t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex)\n    (ht : D.Realizes t) (p q : ℕ)\n    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)\n    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K)\n    (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K)\n    (hc : c.val = D.pair p q ⊤ a.val b.val) :\n    J.equiv (F ⊗ G) (p + q) (D.target.class (p + q) c) =\n      (DerivedCategory.homologyFunctor (ModuleCat.{u} Γ(X, ⊤)) ((p + q : ℕ) : ℤ)).map\n        (μ ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map\n            (D.derivedMap t))\n        (V.pair (cupDerivedSections X F) (cupDerivedSections X G) p q\n          (J.equiv F p (D.left.class p a)) (J.equiv G q (D.right.class q b)))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8e299",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T215608-L-899333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8e299",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T215608-L-899333",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof with its node, all five new lemmas with their nodes and sources, and the repaired citations; all six delivered modules and direct importer Sheaf.Paper.ModuleCupRealizationEvaluation compile cleanly; axioms are standard plus sorryAx from remaining theorem dependencies."
+ }
+}
