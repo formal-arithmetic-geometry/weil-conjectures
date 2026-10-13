@@ -16,37 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Intersect finite free trivializing neighbourhoods at x. Write the inverse of the stalk map as a finite matrix of germs. Represent all its entries by sections and intersect their finitely many domains.",
+   "text": "Extend the inverse of the module-stalk map to a morphism on a neighbourhood U. Its two composites with the restricted original map equal the identity on germs, by the two inverse identities of the stalk isomorphism.",
    "uses": [
-    "def-sc-finite-locally-free-sheaf",
+    "lem-sc-finite-locally-free-stalk-hom-lift",
     "def-pc-module-stalk-functor"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Each entry of the two inverse identities holds as a germ, so the germ equality criterion gives a smaller neighbourhood where it holds as a section. Intersect the finitely many neighbourhoods. The matrix of sections gives a sheaf morphism inverse to the restricted map, since free inclusions and projections determine a morphism. Empty ranks give empty lists of equations.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For the open immersion U into W, restriction is naturally isomorphic to tensor pullback, since both are left adjoints of the same pushforward. Naturality transports invertibility to the tensorPullback map in the conclusion.",
+   "text": "Apply the shrinking equality theorem to both composites, using finite local freeness of M and N respectively. Intersect the two resulting neighbourhoods. Restriction composition transports both equalities to this common open and gives a two-sided inverse.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-weil-open-immersion"
+    "lem-sc-finite-locally-free-stalk-hom-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare restriction and tensor pullback using uniqueness of left adjoints to pushforward. Naturality transports the resulting isomorphism to tensorPullback.",
+   "uses": [
+    "def-pc-module-pullback"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-finite-locally-free-sheaf",
+  "lem-sc-finite-locally-free-stalk-hom-lift",
   "def-pc-module-stalk-functor",
-  "def-pc-module-pullback",
-  "def-weil-open-immersion"
+  "lem-sc-finite-locally-free-stalk-hom-equality",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/05GF",
-  "place": "Explicit stalk formulation of the matrix argument in steps 1 and 2 of lem-sc-finite-locally-free-map-iso-locus-pullback"
+  "place": "T3 Lean proof: extend the stalk inverse, shrink its two inverse identities, and compare left adjoints."
  },
  "mathlib_searches": [
   {
@@ -142,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T004027-L-2492171",
+  "landing": "20261013T045606-L-137994",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -11174,3 +11174,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/T2/Sheaf.AlgebraicGeometry.PrincipalCechFiniteColumnModel (stage 3; reviewer PASS; first push; landing 20261013T045604-L-137640 (interface); batch 20261013T045507; modules 4; new nodes 3)
 - 04:56 L: merged deliver/T2/Sheaf.Paper.CechCupProduct (stage 3; reviewer PASS; first push; landing 20261013T045605-L-137768 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/T3/Sheaf.Algebra.Category.ModuleCat.AdicTowerFreeKernelCorrection (stage 3; reviewer PASS; first push; landing 20261013T045605-L-137882 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:56 L: merged deliver/T3/Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood (stage 3; reviewer PASS; after a return; landing 20261013T045606-L-137994 (interface); batch 20261013T045507; modules 3; new nodes 2)

@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-finite-locally-free-stalk-hom-lift",
+ "kind": "statement",
+ "title": "Extending a linear map from a finite locally free stalk",
+ "statement": "Let $W$ be a scheme [def-pc-scheme], $M,N$ sheaves of $\\mathcal O_W$-modules [def-weil-sheaf-of-modules-category], with $M$ finite locally free [def-sc-finite-locally-free-sheaf], and $x\\in W$. Every $\\mathcal O_{W,x}$-linear map $t:M_x\\to N_x$ on stalks [def-pc-module-stalk-functor] extends to a morphism $f:M|_U\\to N|_U$ on an open $U$ containing $x$. Precisely, for every open $V$ of $U$ containing $x$ and section $m$ of $M|_U$ on $V$, the germ in $N_x$ of $f(m)$ equals $t$ of the germ of $m$. No finiteness condition is imposed on $N$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05GF",
+  "place": "Lemma 10.79.2, label lemma-map-between-finitely-presented; finite generator and finite relation argument specialized to a free frame"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite free frame of M on C containing x. Reuse the private coordinate constructions and sum_coordinate_basis theorem from Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank via a proof-only import all: every germ is the sum of its coordinates times the basis germs. These helpers allow an arbitrary finite index type and do not require constant rank on the whole scheme.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-finite-locally-free-sheaf",
+    "def-pc-module-stalk-functor",
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the images under t of the finitely many basis germs by sections of N. Intersect their domains with C and restrict these sections to U. Form the morphism as the finite sum of each restricted coordinate projection followed by the unit morphism given by the selected section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On every smaller open V containing x, evaluate this finite sum and take germs. Germs commute with sums and scalar multiplication; the selected germs equal the t-images of the basis germs. Linearity of t and the coordinate expansion prove the required equality. Empty frames give the zero map and no equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor",
+  "lem-sc-finite-locally-free-stalk-finrank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/05GF",
+  "place": "Finite free sheaf version of the finite generator/relations argument, expanded and proved in Lean by T3; coordinate constructions and expansion reused from FiniteLocallyFreeStalkFinrank rather than duplicated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every linear map from the stalk of a finite locally free sheaf extends to a morphism near the point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every linear map from the stalk of a finite locally free sheaf to another module sheaf stalk extends to a sheaf morphism near the point",
+   "results": "8 hits: ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.localizationToStalk, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.toOpen",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; germ representation and equality lemmas are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.exists_le_germ_eq",
+   "results": "1 hits: TopCat.Presheaf.exists_le_germ_eq",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; germ representation and equality lemmas are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*hom.*lift|exists.*stalk.*map|exists_le_germ_eq",
+   "results": "3 hits: Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; germ representation and equality lemmas are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Universal locally closed Picard locus, determinant isomorphism open (Stacks 0BDP, final sentence): A vector bundle stalk inverse extends to an open neighbourhood; stalk inverse extension, lifting the inverse",
+   "via": [
+    "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+    "lem-sc-finite-locally-free-map-iso-locus-pullback",
+    "lem-sc-finite-locally-free-map-iso-open",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeStalkHomLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_stalk_hom_lift",
+  "statement": "theorem exists_restrict_stalk_hom_lift\n    {W : Scheme.{u}} (M N : W.Modules) [M.IsFiniteLocallyFree] (x : W)\n    (t : (RingedSpace.moduleStalkFunctor W.toRingedSpace x).obj M ⟶\n      (RingedSpace.moduleStalkFunctor W.toRingedSpace x).obj N) :\n    ∃ (U : W.Opens) (hxU : x ∈ U)\n      (f : (restrictFunctor U.ι).obj M ⟶ (restrictFunctor U.ι).obj N),\n      ∀ (V : U.toScheme.Opens) (hxV : (⟨x, hxU⟩ : U.toScheme) ∈ V)\n        (m : Γ((restrictFunctor U.ι).obj M, V)),\n        N.presheaf.germ (U.ι ''ᵁ V) x ⟨⟨x, hxU⟩, hxV, rfl⟩ (Hom.app f V m) =\n          t (M.presheaf.germ (U.ι ''ᵁ V) x ⟨⟨x, hxU⟩, hxV, rfl⟩ m)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-137994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-137994",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
