@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.IsTensorProduct
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.RingTheory.TensorModelComparisonDiagram
+import Sheaf.RingTheory.FilteredPushoutBijectiveStage
 
 /-! # A tensor model at one finite stage
 
@@ -91,6 +93,43 @@ theorem exists_tensor_model_algebra_stage
            letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
            ∃ hPQ : IsScalarTower P Q E,
              letI := hPQ
-             Algebra.IsPushout P D Q E) := by sorry
+             Algebra.IsPushout P D Q E) := by
+  classical
+  obtain ⟨r, hir, aPs, D, E, α, d, b, cD, cE, g, hD, hE,
+      hfilt, hcomm, hbij, hfp, htrans, hleft, hright⟩ :=
+    exists_tensor_model_comparison_diagram F c hc f P Q aP e he
+  let := hfilt
+  obtain ⟨j, hj⟩ := CommRingCat.exists_bijective_stage_of_filtered_pushouts
+    D E α cD cE hD hE g hcomm hbij hfp htrans
+  let hik := hir.trans j.property
+  let := (F.map (homOfLE hik)).hom.toAlgebra
+  let := aPs j
+  let ek := (d j).symm.trans ((RingEquiv.ofBijective (α.app j).hom hj).trans (b j))
+  let qk := ek.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom
+  refine ⟨j.val, hik, qk, ?_, ?_⟩
+  · exact hright j
+  · let Aₖ := (F.obj j.val : Type v) ⊗[F.obj i] A
+    let Bₖ := (F.obj j.val : Type v) ⊗[F.obj i] B
+    let fk : Aₖ →+* Bₖ :=
+      (Algebra.TensorProduct.map (AlgHom.id (F.obj j.val) (F.obj j.val)) f).toRingHom
+    let : Algebra Aₖ Bₖ := fk.toAlgebra
+    let : Algebra Q Bₖ := qk.toAlgebra
+    refine ⟨aPs j, ?_⟩
+    let : Algebra P Bₖ := (fk.comp (algebraMap P Aₖ)).toAlgebra
+    let : IsScalarTower P Aₖ Bₖ := .of_algebraMap_eq fun _ ↦ rfl
+    have hL : ek.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom = fk := hleft j
+    have hPQ : IsScalarTower P Q Bₖ := .of_algebraMap_eq fun p ↦ by
+      change fk (algebraMap P Aₖ p) = ek (1 ⊗ₜ[P] algebraMap P Q p)
+      rw [← RingHom.congr_fun hL]
+      change ek (algebraMap P Aₖ p ⊗ₜ[P] 1) = _
+      rw [Algebra.TensorProduct.tmul_one_eq_one_tmul]
+    refine ⟨hPQ, ?_⟩
+    let := hPQ
+    let ekA : Aₖ ⊗[P] Q ≃ₐ[Aₖ] Bₖ :=
+      { ek with commutes' := fun a ↦ RingHom.congr_fun hL a }
+    let : Algebra Q (Aₖ ⊗[P] Q) := Algebra.TensorProduct.rightAlgebra
+    apply Algebra.IsPushout.of_equiv ekA
+    rfl
+
 
 end AlgebraicGeometry
