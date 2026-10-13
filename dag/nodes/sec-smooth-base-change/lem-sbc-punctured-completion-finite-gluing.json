@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-punctured-completion-finite-gluing",
+ "kind": "statement",
+ "title": "Finite gluing across completion with both prescribed restrictions",
+ "statement": "Let A be a Noetherian local ring [def-weil-pbc-noetherian-ring], U its punctured spectrum [def-weil-pbc-scheme-conventions], q:Y→U finite [def-weil-finite-integral-morphism]. Let C be its maximal-ideal completion [def-weil-pbc-adic-completion], c:Spec C→Spec A and W=c⁻¹(U). Given a finite s:E→Spec C and an isomorphism Y×_U W≅s⁻¹(W) over W [def-pc-fibre-product], there exists a finite r:F→Spec A with isomorphisms Y≅r⁻¹(U) over U and F×_Spec(A) Spec C≅E over Spec C.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH; More on Algebra, Proposition 15.91.16 and Remark 15.91.20"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose generators f_i of the maximal ideal. Their principal opens cover U. Write q over D(f_i) as Spec B_i and E as Spec B′. The supplied isomorphism identifies the localizations of B′ with B_i tensored with C, compatibly with the overlap maps of q. This is an object of the finite module gluing category for A→C and the f_i. Apply More on Algebra, Proposition 15.91.16 to obtain a finite A-module B. Transfer multiplication and unit using full faithfulness (Remark 15.91.20); faithfulness verifies the algebra identities.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set F=Spec B. The comparison maps give compatible local isomorphisms over D(f_i), hence an isomorphism Y≅r⁻¹(U) over U. The comparison with B′ gives F×_Spec(A) Spec C≅E over Spec C. The base compatibility gives the two morphism equalities. The zero algebra handles empty covers. This construction uses no depth, flatness, or etaleness assumption.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "S2",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH; More on Algebra, Proposition 15.91.16 and Remark 15.91.20"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers of punctured local spectra lift from a principal quotient at depth three",
+   "results": "8 hits: ['Algebra.exists_etale_of_isEtaleAt', 'Algebra.IsEtaleAt', 'Algebra.etaleLocus', 'StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot', 'Algebra.mem_etaleLocus_iff', 'Algebra.basicOpen_subset_etaleLocus_iff', 'Algebra.basicOpen_subset_etaleLocus_iff_etale', 'StandardEtalePair.instFormallyEtaleRing']",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem: the hits address etale loci or ordinary open gluing, not completion gluing and punctured full faithfulness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers over a complete local ring lift from a principal quotient; finite algebra gluing with maximal ideal completion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "completion|gluing",
+   "results": "25 hits: ['Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean', 'Mathlib/AlgebraicGeometry/Gluing.lean', 'Mathlib/AlgebraicGeometry/Gluing.lean', 'Mathlib/AlgebraicGeometry/Gluing.lean', 'Mathlib/AlgebraicGeometry/Gluing.lean', 'Mathlib/AlgebraicGeometry/Gluing.lean', 'Mathlib/AlgebraicGeometry/Modules/Tilde.lean']",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem: the hits address etale loci or ordinary open gluing, not completion gluing and punctured full faithfulness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedFiniteFlatModel",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity across a regular special divisor; the depth-three punctured principal-quotient lifting input, Tag 0BLH; More on Algebra, Proposition 15.91.16 and Remark 15.91.20",
+   "via": [
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFiniteGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionFiniteGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_model_of_completed_model",
+  "statement": "theorem exists_finite_model_of_completed_model\n    (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]\n    (U : (Spec (.of A)).Opens)\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} (q : Y ⟶ U.toScheme) [IsFinite q]\n    (E : Scheme.{u}) (s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))) [IsFinite s]\n    (hext :\n      let c := Spec.map (CommRingCat.ofHom\n        (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)))\n      let W := c ⁻¹ᵁ U\n      ∃ e : pullback q (c ∣_ U) ≅ (s ⁻¹ᵁ W).toScheme,\n        e.hom ≫ s ∣_ W = pullback.snd q (c ∣_ U)) :\n    ∃ (F : Scheme.{u}) (r : F ⟶ Spec (.of A)), IsFinite r ∧\n      (∃ e : Y ≅ (r ⁻¹ᵁ U).toScheme, e.hom ≫ r ∣_ U = q) ∧\n      ∃ e : pullback r (Spec.map (CommRingCat.ofHom\n          (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)))) ≅ E,\n        e.hom ≫ s = pullback.snd r (Spec.map (CommRingCat.ofHom\n          (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T152440-L-992627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T152440-L-992627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

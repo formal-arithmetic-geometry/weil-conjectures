@@ -18,43 +18,41 @@
  },
  "proof": [
   {
-   "text": "Depth at least three kills H¹_m(A) and H²_m(A) (0AVY). Identify the inverse image of U with the punctured quotient spectrum using injectivity of the quotient map and preservation of the closed point.",
+   "text": "Lift the given quotient cover to a finite etale completed model, together with its isomorphism to the completed punctured cover.",
    "uses": [
-    "def-weil-pbc-depth",
-    "def-weil-pbc-scheme-conventions"
+    "lem-sbc-depth-three-completed-quotient-lift"
    ],
    "elementary": false
   },
   {
-   "text": "After faithfully flat completion, the ring is henselian along (f). Lift the given quotient cover by 09ZL and identify its punctured restriction with the completed q by full faithfulness 0BM6.",
+   "text": "Apply finite completion gluing, retaining both the isomorphism over U and the identification of the completed finite model with the lifted cover.",
+   "uses": [
+    "lem-sbc-punctured-completion-finite-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib AdicCompletion.flat_of_isNoetherian and algebraMap_isLocalHom_of_fg show that A→C is flat and local, hence faithfully flat by Module.FaithfullyFlat.of_flat_of_isLocalHom. The corresponding affine scheme map is flat, surjective and quasi-compact. Transfer etaleness across the completed model isomorphism and descend it with MorphismProperty.of_pullback_snd_of_descendsAlong and Mathlib LocalFlatDescent. Etaleness implies flatness, and base change gives the required etale principal quotient. Retain the gluing isomorphism over U.",
    "uses": [
     "def-weil-pbc-adic-completion",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply finite algebra gluing 0BLH to the completed lift and the original q. Flatness of the completed lift descends to the glued finite model. Its principal quotient becomes the etale lifted quotient after completion, so quotient etaleness also descends. Gluing supplies the isomorphism over U. The zero algebra handles the empty cover.",
-   "uses": [
     "def-weil-flat-morphism",
     "def-weil-etale-morphism"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-depth",
-  "def-weil-pbc-scheme-conventions",
+  "lem-sbc-depth-three-completed-quotient-lift",
+  "lem-sbc-punctured-completion-finite-gluing",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-henselian-terminology",
   "def-weil-flat-morphism",
   "def-weil-etale-morphism"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "C1",
+  "by": "S2",
   "document": "Stacks Project",
-  "place": "Tags 0BLS, 0BLL, 0BLH, 0BM6, 09ZL, 0AVY"
+  "place": "Tags 0BLS and 0BLL: completed lifting, finite gluing (0BLH), followed by Mathlib fpqc descent of etaleness"
  },
  "mathlib_searches": [
   {
@@ -122,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T145723-L-750314",
+  "landing": "20261013T152440-L-992627",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
