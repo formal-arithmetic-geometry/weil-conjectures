@@ -16,23 +16,36 @@
  },
  "proof": [
   {
-   "text": "Evaluate the defining leftDerivedLift equation of the pinned c(i,s) at the homotopy class of P. Whisker with the quotient of complexes. Naturality of quotientCompQhIso and mapHomotopyCategoryFactors identifies the three counits with picardTermwiseCounit. The underived composition comparison on complexes is the inverse of w. Precompose with c(i,s).inv and postcompose with Q(w.hom); cancellation of these comparison isomorphisms yields the stated equality. No counit is canceled.",
+   "text": "Evaluate the defining leftDerivedLift identity for the pinned composition comparison at the homotopy class of P, using Mathlib Functor.leftDerived_fac_app.",
    "uses": [
-    "def-sc-picard-termwise-models",
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand picardTermwiseCounit through the quotient of complexes; all quotient comparison components are identities, and functors preserve identity maps. Identify the inverse tensorPullbackCompositionIso with the conjugate of pushforwardComp and map that comparison to homotopy complexes. This identifies the remaining underived comparison with the inverse of picardTermwiseModelRestrictionIso.",
+   "uses": [
+    "def-sc-picard-termwise-models",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Iso.inv_comp_eq to cancel the derived composition comparison, substitute the proved factorization, and cancel b.hom followed by b.inv using Functor.map_comp. No counit is inverted or canceled.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
   "def-sc-picard-termwise-models",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "def-pc-tensor-pullback-composition-iso"
  ],
  "proof_origin": {
-  "by": "agent N4",
+  "by": "agent V3, independent second reading",
   "document": "Stacks Project",
   "place": "Tags 06YJ and 0D5S",
-  "description": "Only the two-morphism counit factorization on a complex; the original item separately proves naturality in e and triple-composition coherence."
+  "description": "Direct evaluation of the pinned left-derived-lift equation, transport through the homotopy quotient, and cancellation of the two comparison isomorphisms. No new unproved factorization theorem."
  },
  "mathlib_searches": [
   {
@@ -126,11 +139,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
+  "reviewer": "X-23f59",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T163539-L-1621249",
+  "landing": "20261013T201811-L-3977963",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and proof with the node, dependency declarations, change record and report; delivery and sole direct importer compile cleanly; axiom probe reports only propext, Classical.choice and Quot.sound."
  }
 }
