@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-affine-top-tensor-sections",
+ "kind": "statement",
+ "title": "Whole-scheme affine tensor sections",
+ "statement": "Let $A,B$ be affine schemes, $f:B\\to A$ a scheme morphism, and $G$ a quasi-coherent $\\mathcal O_A$-module [lem-weil-pbc-module-pullback-affine-sections]. Give $\\Gamma(B,\\mathcal O_B)$ its algebra structure over $\\Gamma(A,\\mathcal O_A)$ through $f^\\sharp$. There is a bijective additive map from $\\Gamma(A,G)\\otimes_{\\Gamma(A,\\mathcal O_A)}\\Gamma(B,\\mathcal O_B)$ to $\\Gamma(B,f^*G)$, taking $m\\otimes b$ to $b$ times the global-section unit pullback of $m$ [lem-sc-etale-qcoherent-presheaf-functorial].",
+ "stmt_deps": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I9, lemma-widetilde-pullback; 01IA, lemma-quasi-coherent-affine; whole-scheme specialization of the affine pullback sections comparison."
+ },
+ "proof": [
+  {
+   "text": "apply exists_tensorPullback_affine_sections to the affine opens consisting of\nall of A and B. The inclusion into the inverse image of the whole scheme is automatic.\nThe induced ring map appLE is appTop: its extra restriction is the identity presheaf\nmap. Specialize the family of linear maps to G and forget its scalar structure to\nobtain an additive map. Bijectivity is the bijectivity clause of that comparison.\nThe pure-tensor clause says that m tensor b maps to b times the adjunction unit of m,\nrestricted from the inverse image of top to top. This is exactly tensorSectionsUnit.\nThe proof uses no nonemptiness: the zero module and empty affine schemes are included.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01I9, lemma-widetilde-pullback; 01IA, lemma-quasi-coherent-affine; whole-scheme specialization of the affine pullback sections comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global sections quasi coherent pullback affine schemes tensor product equivalence",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base",
+   "date": "2026-10-13",
+   "verdict": "no complete match; declarations inspected"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.ofBijective",
+   "results": "Hits: AddEquiv.ofBijective, AddEquiv.ofBijective_apply, AddEquiv.ofBijective_apply_symm_apply",
+   "date": "2026-10-13",
+   "verdict": "no complete match; declarations inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*sections|sections.*tensorPullback",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no complete match; declarations inspected"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections affine scheme quasi coherent pullback tensor unit formula",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Affine tensor calculation for normalized coefficient sections: Whole-scheme affine tensor sections",
+   "via": [
+    "new-etale-affine-tensor-sections-equiv"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTopTensorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTopTensorSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affineTopTensorSections",
+  "statement": "theorem exists_affineTopTensorSections {A B : Scheme.{u}} (f : B ⟶ A)\n    (G : A.Modules) (hG : G.IsQuasicoherent) (hA : IsAffine A) (hB : IsAffine B) :\n    letI : Algebra Γ(A, ⊤) Γ(B, ⊤) := f.appTop.hom.toAlgebra\n    ∃ d : (Γ(G, ⊤) ⊗[Γ(A, ⊤)] Γ(B, ⊤)) →+\n      Γ((Modules.tensorPullback f).obj G, ⊤),\n      Function.Bijective d ∧ ∀ (m : Γ(G, ⊤)) (b : Γ(B, ⊤)),\n        d (m ⊗ₜ[Γ(A, ⊤)] b) = b • Modules.tensorSectionsUnit f G m",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef34a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T143550-L-562444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef34a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T143550-L-562444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean declarations and proofs with their DAG nodes; existing signature unchanged, delivery and both direct importers compile cleanly, and axiom checks show only permitted axioms."
+ }
+}

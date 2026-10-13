@@ -15,26 +15,26 @@
  },
  "proof": [
   {
-   "text": "Proof: compare tensorPullback U.hom with ordinary pullback through the unique\nisomorphism of left adjoints to pushforward U.hom.  Ordinary pullback preserves\nquasi-coherence, so the tensor pullback of F is quasi-coherent.  Apply the affine\npullback sections formula to a.left on the whole affine schemes U and V.  Its\npure-tensor formula is c(m tensor b) = b times the adjunction-unit pullback of m.\nCompose with the global-sections isomorphism induced by tensorSectionsComp,\nthen transport along a.w.  Both are linear for functions on V.  The definition\nof etaleTensorSectionsRestriction therefore gives the displayed equation.\nThe affine sections map is bijective, and the composition and equality transports\nare isomorphisms, giving an additive equivalence.  This argument includes the\nzero module and empty affine schemes.",
+   "text": "Transport quasi-coherence from ordinary pullback to tensorPullback U.hom using uniqueness of left adjoints. Apply exists_affineTopTensorSections to a.left and G = tensorPullback U.hom F, then compose its bijective additive map with the normalized etale section transport equivalence. For pure tensors, use congrArg on the affine formula and the transport scalar equation.",
    "uses": [
     "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
+    "def-pc-module-pullback",
+    "lem-sc-affine-top-tensor-sections",
+    "lem-sc-etale-tensor-sections-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-pc-module-pullback-adjunction",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-sc-etale-qcoherent-presheaf-functorial"
+  "def-pc-module-pullback",
+  "lem-sc-affine-top-tensor-sections",
+  "lem-sc-etale-tensor-sections-transport"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 03P2 affine calculation expanded using the cited geometric lemmas"
+  "place": "Tags 01I9, 01IA and 03DR; whole-scheme affine specialization followed by normalized section transport"
  },
  "mathlib_searches": [
   {
@@ -108,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-ef34a",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T095930-L-2451490",
+  "landing": "20261013T143550-L-562444",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean declarations and proofs with their DAG nodes; existing signature unchanged, delivery and both direct importers compile cleanly, and axiom checks show only permitted axioms."
  }
 }

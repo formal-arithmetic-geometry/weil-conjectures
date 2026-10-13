@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-etale-tensor-sections-transport",
+ "kind": "statement",
+ "title": "Normalized transport of tensor-pullback sections",
+ "statement": "Let $X$ be a scheme, $F$ an $\\mathcal O_X$-module, $U,V$ objects of its small etale site and $a:V\\to U$ an $X$-morphism. Use the tensor pullbacks, adjunction unit on global sections $a^*$ and normalized restriction $\\rho_a$ of [lem-sc-etale-qcoherent-presheaf-functorial]. There is an additive equivalence $e:\\Gamma(V,a^*U^*F)\\cong\\Gamma(V,V^*F)$ such that $e(b\\,a^*m)=b\\,\\rho_a(m)$ for every $m\\in\\Gamma(U,U^*F)$ and $b\\in\\Gamma(V,\\mathcal O_V)$. No affine or quasi-coherence hypothesis is required.",
+ "stmt_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03DR, equation-quasi-coherent-presheaf: restriction through the canonical composition isomorphism of pullbacks"
+ },
+ "proof": [
+  {
+   "text": "Construct sectionsEquiv for an arbitrary module isomorphism k by evaluating k.hom and k.inv at the whole scheme. The two inverse identities follow by evaluating k.hom_inv_id and k.inv_hom_id, and scalar compatibility is Hom.app_smul. For an arbitrary family L of module functors, composition comparisons c and additive unit maps eta, form k = (c a.left U.hom).app F followed by eqToIso along a.w. Use sectionsEquiv_smul and sectionsEquiv_apply to prove its scalar-unit equation; evaluation of the composite module morphism is the composite of the section maps. All these steps are completely proved in Lean with abstract module objects, including the zero module and empty schemes.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the proved family calculation to tensorPullback, tensorSectionsComp and tensorSectionsUnit. Prove restriction_eq as the definitional equality of additive maps, then rewrite that map equality inside the proved result. This gives precisely etaleTensorSectionsRestriction in the equation without repeatedly normalizing the concrete scalar-module data. No new hypothesis, unproved transport equation, or remaining hole is introduced.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 03DR, equation-quasi-coherent-presheaf; complete generic section-equivalence construction and scalar equation, specialized through an explicit equality of restriction maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of composition of scheme module morphisms on global sections preserves scalar multiplication",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.Hom.comp_app, AlgebraicGeometry.Scheme.Modules.Hom.app_smul, AlgebraicGeometry.Scheme.Modules.map_smul, SheafOfModules.sectionsMap_comp, SheafOfModules.comp_val, AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.Scheme.Hom.comp_appTop_assoc, AlgebraicGeometry.Scheme.comp_appTop_assoc",
+   "date": "2026-10-13",
+   "verdict": "no complete match; source signatures read"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.Hom.app_smul",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.Hom.app_smul",
+   "date": "2026-10-13",
+   "verdict": "no complete match; source signatures read"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorSectionsRestriction.*apply|tensorSectionsUnit.*apply",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no complete match; source signatures read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unit normalized tensor pullback restriction section composition formula",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Affine tensor calculation for normalized coefficient sections: transport from iterated pullback to the target object",
+   "via": [
+    "new-etale-affine-tensor-sections-equiv"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_etaleTensorSectionsTransport",
+  "statement": "theorem exists_etaleTensorSectionsTransport {X : Scheme.{u}} (F : X.Modules)\n    {U V : X.Etale} (a : V ⟶ U) :\n    ∃ e : Γ((tensorPullback a.left).obj ((tensorPullback U.hom).obj F), ⊤) ≃+\n      Γ((tensorPullback V.hom).obj F, ⊤),\n      ∀ (m : Γ((tensorPullback U.hom).obj F, ⊤)) (b : Γ(V.left, ⊤)),\n        e (b • tensorSectionsUnit a.left ((tensorPullback U.hom).obj F) m) =\n          b • etaleTensorSectionsRestriction F a m",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef34a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T143550-L-562444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef34a",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T143550-L-562444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean declarations and proofs with their DAG nodes; existing signature unchanged, delivery and both direct importers compile cleanly, and axiom checks show only permitted axioms."
+ }
+}
