@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-mixed-global-hom-base-change-exchange",
+ "kind": "statement",
+ "title": "Mixed-universe global Hom base-change exchange",
+ "statement": "For arbitrary scheme maps f:X→Y and g:Y′→Y and M,N∈D(X), the mixed-universe global Hom pullback/direct-image comparisons satisfy the exchange square: pull back Hom(M,N), transport its scalar action by the canonical scalar-square iso, apply direct-image Hom, and precompose in the first Hom entry by β_M; this equals direct-image Hom followed by the pullback comparison and postcomposition by β_N. Here β is the canonical derived base-change mate. No invertibility or counit-square hypothesis is imposed, and the sheaf and module localization universes are independent. Comparisons are those of [lem-sc-flat-affine-global-hom-comparison, lem-sc-mixed-hom-direct-image-comparison, lem-sc-mixed-global-sections-direct-image-iso].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, lemma-more-base-change, final commutative diagrams; evaluation-mate comparisons of Tags 08I3 and 0B6I"
+ },
+ "stmt_deps": [
+  "lem-sc-flat-affine-global-hom-comparison",
+  "lem-sc-mixed-global-hom-adjunction-isIso",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand the pullback and direct-image Hom comparisons as evaluation mates. Transpose both paths under the canonical tensor-Hom and pullback/direct-image bijections. Expand the base-change mate as the canonical pullback composition isomorphism followed by the counit. Counit naturality and the triangle identity identify the two tensor-evaluation composites. On K-flat representatives the tensorators respect composition since both are ordinary tensor pullback; their localization equations transport the equality. Leray respects composition by uniqueness of the right-derived comparison with the same unit, giving exactly the canonical scalar square. This gives the exchange identity with β_M in the first entry and β_N in the second.",
+   "uses": [
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-sc-mixed-hom-direct-image-comparison",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sc-mixed-hom-direct-image-comparison",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, final compatibility diagrams; Tags 08I3 and 0B6I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived global Hom base change adjunction evaluation mate proper flat perfect",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; CategoryTheory.ExponentiableMorphism.coev_naturality; LightCondensed.ihomPoints_symm_comp; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.bijection; CategoryTheory.ExponentiableMorphism.coev_ev_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_counit\"",
+   "results": "CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global Hom base change perfect complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom.*baseChange|internalHomMate|conjugateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeCounitTransport",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mixed-global-hom-base-change-counit-transport",
+   "place": "Tag 0AA8, final compatibility diagrams; Tags 08I3 and 0B6I",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedGlobalHomBaseChangeExchange.lean",
+  "declaration": "AlgebraicGeometry.mixedGlobalHom_baseChange_exchange",
+  "statement": "theorem mixedGlobalHom_baseChange_exchange\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (M N : schemeDerivedCategory X) :\n    (schemeGlobalScalarRestriction f).map\n        (mixedGlobalHomPullbackComparison (pullback.fst f g) M N) ≫\n      (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition).hom.app\n          ((schemeGlobalDerivedHom (pullback f g)).obj\n            (op ((derivedPullback (pullback.fst f g)).obj M),\n              (derivedPullback (pullback.fst f g)).obj N)) ≫\n      (schemeGlobalScalarRestriction g).map\n        (mixedGlobalHomDirectImageMap (pullback.snd f g)\n          ((derivedPullback (pullback.fst f g)).obj M)\n          ((derivedPullback (pullback.fst f g)).obj N)) ≫\n      (schemeGlobalScalarRestriction g).map\n        ((schemeGlobalDerivedHom Y').map\n          (X := (op ((schemeDerivedDirectImage (pullback.snd f g)).obj\n            ((derivedPullback (pullback.fst f g)).obj M)),\n            (schemeDerivedDirectImage (pullback.snd f g)).obj\n              ((derivedPullback (pullback.fst f g)).obj N)))\n          (Y := (op ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj M)),\n            (schemeDerivedDirectImage (pullback.snd f g)).obj\n              ((derivedPullback (pullback.fst f g)).obj N)))\n          ((schemeDerivedBaseChangeMap f (pullback.snd f g) g\n            (pullback.fst f g) pullback.condition M).op, 𝟙 _)) =\n    mixedGlobalHomDirectImageMap f M N ≫\n      mixedGlobalHomPullbackComparison g\n        ((schemeDerivedDirectImage f).obj M) ((schemeDerivedDirectImage f).obj N) ≫\n      (schemeGlobalScalarRestriction g).map\n        ((schemeGlobalDerivedHom Y').map\n          ((𝟙 _).op, schemeDerivedBaseChangeMap f (pullback.snd f g) g\n            (pullback.fst f g) pullback.condition N))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T113345-L-3184745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T113345-L-3184745",
+  "kind": "interface"
+ }
+}
