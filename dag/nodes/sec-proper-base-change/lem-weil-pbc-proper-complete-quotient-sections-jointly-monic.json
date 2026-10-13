@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-proper-complete-quotient-sections-jointly-monic",
+ "kind": "statement",
+ "title": "Proper coherent sections separated by all infinitesimal quotient projections",
+ "statement": "Let $A$ be Noetherian, complete for $I$ [def-weil-pbc-adically-complete-ring], let $J$ be the ideal sheaf of $I$ on $S=\\operatorname{Spec}A$, and let $p:Z\\to S$ be proper [def-weil-proper-morphism]. Let $F$ be coherent on $Z$ [pqf-def-coherent]. For any $A$-module $M$ and maps $a,b:M\\to\\Gamma(S,p_*F)$, if for each $n\\geq0$ their composites with $\\Gamma(p_*\\pi^F_{n+1})$ into $\\Gamma(S,p_*(F/(J\\mathcal O_Z)^{n+1}F))$ agree, then $a=b$ [def-weil-pbc-coherent-formal-module].",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/087U",
+  "place": "Degree zero: injectivity of the canonical sections map to the inverse limit"
+ },
+ "proof": [
+  {
+   "text": "Define the natural isomorphism t between sections of pushforward over A and globalSectionsFunctor on Z followed by restriction along GammaSpecIso inverse composed with p.appTop. Its underlying additive-group map is identity, and scalar compatibility and naturality both hold by rfl. Apply globalSections_formalFunctions_complete_base to obtain the canonical isomorphism e with all quotient projections.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-complete-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the monomorphism t(F).hom followed by e.hom. Apply limit.hom_ext and write an index as op n. Replace e.hom followed by that projection using its equation. Naturality of t rewrites both expressions as a and b followed by the pushed-forward quotient map and t on its target. Postcompose the given equality at n with that t component.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-functions-complete-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/087U",
+  "place": "Degree zero: injectivity of the canonical sections map to the inverse limit; Lean proof and glue by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules over an adically complete affine base algebraize, and a formal pullback isomorphism on a proper scheme lifts compatibly with quotient projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete Noetherian ring coherent formal sheaves on Spec algebraize and completion of coherent sheaves on a proper scheme is fully faithful",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor, AlgebraicGeometry.AffineScheme.forgetToScheme_full, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.AffineScheme.Spec_full, AlgebraicGeometry.Spec.fullyFaithful, AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace, AlgebraicGeometry.Spec.full",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.moduleSpecΓFunctor",
+   "results": "8 hits: AlgebraicGeometry.moduleSpecΓFunctor, AlgebraicGeometry.tilde.adjunction, AlgebraicGeometry.Scheme.Modules.fromTildeΓNatTrans, AlgebraicGeometry.tilde.toTildeΓNatIso, AlgebraicGeometry.instIsIsoFunctorModuleCatCarrierUnitModulesSpecAdjunction, AlgebraicGeometry.tildeEquiv_unitIso, AlgebraicGeometry.tildeEquiv_inverse, AlgebraicGeometry.tildeEquiv_counitIso_hom_app_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*complete|complete.*formal",
+   "results": "12 hits: Mathlib/RingTheory/LaurentSeries.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ChangeOrigin.lean, Mathlib/Analysis/Analytic/ChangeOrigin.lean, Mathlib/Analysis/Analytic/Basic.lean, Mathlib/Analysis/Analytic/Basic.lean, Mathlib/Analysis/Analytic/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraization",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+   "place": "Degree zero: injectivity of the canonical sections map to the inverse limit",
+   "via": [
+    "lem-weil-pbc-formal-comparison-complete-base-algebraization",
+    "lem-weil-pbc-formal-comparison-completed-affine-adjunction-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperCompleteQuotientSectionsJointlyMonic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperCompleteQuotientSectionsJointlyMonic.lean",
+  "declaration": "AlgebraicGeometry.proper_complete_quotient_sections_jointly_monic",
+  "statement": "theorem proper_complete_quotient_sections_jointly_monic\n    {A : Type u} [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    {Z : Scheme.{u}} (p : Z ⟶ Spec (CommRingCat.of A)) [IsProper p]\n    (F : CoherentModules Z) {M : ModuleCat.{u} A}\n    (a b : M ⟶ (moduleSpecΓFunctor (R := CommRingCat.of A)).obj\n      ((Scheme.Modules.pushforward p).obj F.obj))\n    (hab : ∀ n : ℕ,\n      a ≫ (moduleSpecΓFunctor (R := CommRingCat.of A)).map\n        ((Scheme.Modules.pushforward p).map\n          (formalModuleQuotientπ (J.comap p) (n + 1) F.obj)) =\n      b ≫ (moduleSpecΓFunctor (R := CommRingCat.of A)).map\n        ((Scheme.Modules.pushforward p).map\n          (formalModuleQuotientπ (J.comap p) (n + 1) F.obj))) : a = b",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111946-L-3071106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111946-L-3071106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

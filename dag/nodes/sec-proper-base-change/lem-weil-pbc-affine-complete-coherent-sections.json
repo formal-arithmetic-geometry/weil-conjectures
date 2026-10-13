@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-affine-complete-coherent-sections",
+ "kind": "statement",
+ "title": "Canonical complete-affine sections limit of a coherent module",
+ "statement": "Let $A$ be Noetherian, complete for $I$ [def-weil-pbc-adically-complete-ring], and let $J$ be the ideal sheaf of $I$ on $S=\\operatorname{Spec}A$. For any coherent module $H$ on $S$ [pqf-def-coherent], there is an $A$-linear isomorphism $s:\\Gamma(S,H)\\simeq\\varprojlim_n\\Gamma(S,H/J^{n+1}H)$ whose composite with every projection is $\\Gamma(\\pi^H_{n+1})$ [def-weil-pbc-coherent-formal-module].",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/087U",
+  "place": "Degree zero for the identity proper morphism of Spec A"
+ },
+ "proof": [
+  {
+   "text": "Apply globalSections_formalFunctions_complete_base to the proper identity of Spec A and H. Rewrite ideal-sheaf comap_id. The globalSectionsFunctor followed by restriction along GammaSpecIso inverse and appTop of the identity is definitionally moduleSpecGammaFunctor; explicitly prove this functor equality by rfl and rewrite the existential theorem. Its isomorphism and projection equations give precisely the assertion.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-complete-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-functions-complete-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/087U",
+  "place": "Degree zero for the identity proper morphism of Spec A; Lean proof and glue by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules over an adically complete affine base algebraize, and a formal pullback isomorphism on a proper scheme lifts compatibly with quotient projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete Noetherian ring coherent formal sheaves on Spec algebraize and completion of coherent sheaves on a proper scheme is fully faithful",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor, AlgebraicGeometry.AffineScheme.forgetToScheme_full, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.AffineScheme.Spec_full, AlgebraicGeometry.Spec.fullyFaithful, AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace, AlgebraicGeometry.Spec.full",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.moduleSpecΓFunctor",
+   "results": "8 hits: AlgebraicGeometry.moduleSpecΓFunctor, AlgebraicGeometry.tilde.adjunction, AlgebraicGeometry.Scheme.Modules.fromTildeΓNatTrans, AlgebraicGeometry.tilde.toTildeΓNatIso, AlgebraicGeometry.instIsIsoFunctorModuleCatCarrierUnitModulesSpecAdjunction, AlgebraicGeometry.tildeEquiv_unitIso, AlgebraicGeometry.tildeEquiv_inverse, AlgebraicGeometry.tildeEquiv_counitIso_hom_app_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*complete|complete.*formal",
+   "results": "12 hits: Mathlib/RingTheory/LaurentSeries.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ChangeOrigin.lean, Mathlib/Analysis/Analytic/ChangeOrigin.lean, Mathlib/Analysis/Analytic/Basic.lean, Mathlib/Analysis/Analytic/Basic.lean, Mathlib/Analysis/Analytic/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraization",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+   "place": "Degree zero for the identity proper morphism of Spec A",
+   "via": [
+    "lem-weil-pbc-formal-comparison-complete-base-algebraization",
+    "lem-weil-pbc-formal-comparison-completed-affine-adjunction-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCompleteCoherentSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCompleteCoherentSections.lean",
+  "declaration": "AlgebraicGeometry.affine_complete_coherent_sections",
+  "statement": "theorem affine_complete_coherent_sections\n    {A : Type u} [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    (H : CoherentModules (Spec (CommRingCat.of A))) :\n    ∃ e : (moduleSpecΓFunctor (R := CommRingCat.of A)).obj H.obj ≅\n        limit (formalCompletionSystem J H.obj ⋙ moduleSpecΓFunctor (R := CommRingCat.of A)),\n      ∀ n : ℕ, e.hom ≫ limit.π\n          (formalCompletionSystem J H.obj ⋙ moduleSpecΓFunctor (R := CommRingCat.of A))\n          (op n) =\n        (moduleSpecΓFunctor (R := CommRingCat.of A)).map\n          (formalModuleQuotientπ J (n + 1) H.obj)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111946-L-3071106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111946-L-3071106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

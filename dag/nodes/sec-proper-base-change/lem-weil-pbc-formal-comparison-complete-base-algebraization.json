@@ -16,39 +16,36 @@
  },
  "proof": [
   {
-   "text": "Apply the affine formal-module equivalence to G. Completeness identifies the completion of A with A, so the finite limit module defines a coherent sheaf A0 with formal completion isomorphic to G, and its limit cone identifies sections.",
+   "text": "Apply formalComparison_algebraization_quotient_lift to obtain A0, a formal isomorphism e:G to completion(A0), and the lifted pullback isomorphism b with canonical quotient compatibility.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-formal-comparison-algebraization-quotient-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback is coherent and commutes with completion. Thus beta becomes an isomorphism between completions of p star A0 and F. Full faithfulness of proper completion lifts it and its inverse; injectivity on Hom makes the lifted composites identities, giving b.",
+   "text": "Apply affine_complete_coherent_sections to A0 and the supplied coherent pushforward of F. Transport the first canonical section-limit isomorphism along e to get eA; invert the second to get eD. Its projection equations give the explicit components of eA inverse and eD inverse.",
    "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-formal-completion-fully-faithful-proper"
+    "lem-weil-pbc-affine-complete-coherent-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The affine limit cone for the completion of p_*F gives eD. Quotient naturality of the supplied unit and of b, together with hAlpha, makes the two candidate limit maps equal after the limit of kappa. Formal functions identifies that last map as invertible. Cancel it to prove the square.",
+   "text": "Precompose the square with eA inverse. Apply proper_complete_quotient_sections_jointly_monic: it suffices to compare every pushed-forward quotient projection. hKappa, the eD equation, limMap_pi, the eA equation, and hAlpha rewrite the left side. Naturality of the supplied adjunction unit with respect to pi followed by e inverse, followed by the quotient-lift equation, gives the right side. This works for any supplied adjunction, including twisted units.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-theorem-formal-functions"
+    "lem-weil-pbc-proper-complete-quotient-sections-jointly-monic"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-formal-completion-fully-faithful-proper",
-  "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-theorem-formal-functions"
+  "lem-weil-pbc-formal-comparison-algebraization-quotient-lift",
+  "lem-weil-pbc-affine-complete-coherent-sections",
+  "lem-weil-pbc-proper-complete-quotient-sections-jointly-monic"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/088B",
-  "place": "Proof, final complete-affine-base paragraph algebraizing G and lifting beta; Tags 087W and 0883; explicit Lean interfaces and glue by S3"
+  "place": "Final complete-base paragraph; explicit canonical quotient compatibility, section completeness, and categorical combination by Y2. Separation uses Tag 087U, degree zero."
  },
  "mathlib_searches": [
   {
@@ -127,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T100123-L-2486255",
+  "landing": "20261013T111946-L-3071106",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-formal-comparison-algebraization-quotient-lift",
+ "kind": "statement",
+ "title": "Algebraization of a formal pullback isomorphism with canonical quotient compatibility",
+ "statement": "Let $A$ be Noetherian and complete for $I$ [def-weil-pbc-adically-complete-ring], let $S=\\operatorname{Spec}A$, and let $J$ be the ideal sheaf associated to $I$. Let $p:Z\\to S$ be proper [def-weil-proper-morphism], let $G$ be a coherent formal $J$-system and $F$ a coherent module on $Z$ [def-weil-pbc-coherent-formal-module, pqf-def-coherent]. Given $\\beta:p^*G\\simeq F^\\wedge$ [def-pc-module-pullback], there are a coherent $A_0$ on $S$, an isomorphism $e:G\\simeq A_0^\\wedge$, and $b:p^*A_0\\simeq F$ such that for every positive level $n$, $p^*(\\pi^{A_0}_n)p^*(e_n^{-1})\\beta_n=b\\pi^F_n$. The projections are the actual sheaf quotient maps.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Final complete-base paragraph, algebraizing G and lifting beta; Tags 087W and 0883"
+ },
+ "proof": [
+  {
+   "text": "Take the finite completed module E(G) supplied by coherentFormalModules_affine. Restrict scalars to A and take its tilde H. AdicCompletion.ofLinearEquiv makes the completion finite over A; Module.Finite.trans makes the restricted module finite over A. The tilde top-section isomorphism and quasicoherent_finite_type_affine give finite type; isCoherent_iff_isQuasicoherent_and_isFiniteType makes H coherent. Set A0=H. The unit of E followed by its inverse-system comparison gives e.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use coherent_pullback and the canonical completionPullbackIso from FormalSystemsPullback. Compose that comparison with the pullback of e inverse and beta, giving an isomorphism q between completions of p* A0 and F. Proper completion is bijective on every Hom; register full and faithful and use preimageIso to lift q to b. The image of b.hom under completion is q.hom.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel defining formalCompletionMap gives pi followed by completion(b)=b followed by pi. Substitute the image equality and expand q. powerQuotientIso_pi identifies pi followed by the canonical pullback comparison with p*(pi). Reassociate to obtain the stated equation.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-formal-completion-fully-faithful-proper",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Final complete-base paragraph, algebraizing G and lifting beta; Tags 087W and 0883; Lean proof and glue by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules over an adically complete affine base algebraize, and a formal pullback isomorphism on a proper scheme lifts compatibly with quotient projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete Noetherian ring coherent formal sheaves on Spec algebraize and completion of coherent sheaves on a proper scheme is fully faithful",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor, AlgebraicGeometry.AffineScheme.forgetToScheme_full, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.AffineScheme.Spec_full, AlgebraicGeometry.Spec.fullyFaithful, AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace, AlgebraicGeometry.Spec.full",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.moduleSpecΓFunctor",
+   "results": "8 hits: AlgebraicGeometry.moduleSpecΓFunctor, AlgebraicGeometry.tilde.adjunction, AlgebraicGeometry.Scheme.Modules.fromTildeΓNatTrans, AlgebraicGeometry.tilde.toTildeΓNatIso, AlgebraicGeometry.instIsIsoFunctorModuleCatCarrierUnitModulesSpecAdjunction, AlgebraicGeometry.tildeEquiv_unitIso, AlgebraicGeometry.tildeEquiv_inverse, AlgebraicGeometry.tildeEquiv_counitIso_hom_app_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*complete|complete.*formal",
+   "results": "12 hits: Mathlib/RingTheory/LaurentSeries.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ConvergenceRadius.lean, Mathlib/Analysis/Analytic/ChangeOrigin.lean, Mathlib/Analysis/Analytic/ChangeOrigin.lean, Mathlib/Analysis/Analytic/Basic.lean, Mathlib/Analysis/Analytic/Basic.lean, Mathlib/Analysis/Analytic/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact result; existing library declarations and elementary categorical glue used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraization",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+   "place": "Final complete-base paragraph, algebraizing G and lifting beta; Tags 087W and 0883",
+   "via": [
+    "lem-weil-pbc-formal-comparison-complete-base-algebraization",
+    "lem-weil-pbc-formal-comparison-completed-affine-adjunction-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalComparisonAlgebraizationQuotientLift.lean",
+  "declaration": "AlgebraicGeometry.formalComparison_algebraization_quotient_lift",
+  "statement": "theorem formalComparison_algebraization_quotient_lift\n    {A : Type u} [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    {Z : Scheme.{u}} (p : Z ⟶ Spec (CommRingCat.of A)) [IsProper p]\n    (G : CoherentFormalModule (Spec (CommRingCat.of A)) J) (F : CoherentModules Z)\n    (β : G.obj ⋙ Scheme.Modules.tensorPullback p ≅\n      formalCompletionSystem (J.comap p) F.obj) :\n    ∃ (A₀ : CoherentModules (Spec (CommRingCat.of A)))\n      (e : G.obj ≅ formalCompletionSystem J A₀.obj)\n      (b : (Scheme.Modules.tensorPullback p).obj A₀.obj ≅ F.obj),\n      ∀ n : ℕ,\n        (Scheme.Modules.tensorPullback p).map (formalModuleQuotientπ J (n + 1) A₀.obj) ≫\n          (Scheme.Modules.tensorPullback p).map (e.inv.app (op n)) ≫ β.hom.app (op n) =\n        b.hom ≫ formalModuleQuotientπ (J.comap p) (n + 1) F.obj",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111946-L-3071106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T111946-L-3071106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

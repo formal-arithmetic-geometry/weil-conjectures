@@ -12,6 +12,10 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
+import Sheaf.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift
+import Sheaf.AlgebraicGeometry.AffineCompleteCoherentSections
+import Sheaf.AlgebraicGeometry.ProperCompleteQuotientSectionsJointlyMonic
+
 /-! # Algebraization of the comparison over a complete affine base
 
 Source: Stacks Project, Tag 088B, final complete-base paragraph; Tags 087W and 0883.
@@ -24,6 +28,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Over a complete Noetherian affine base the formal comparison is the completion
 of an algebraic adjunction map, followed by the pushforward of an isomorphism.
 
@@ -41,10 +47,12 @@ identity, and injectivity of completion forces the composites to be identities.
 Naturality of the supplied adjunction unit with respect to quotient projections
 identifies its completed map with the degreewise units appearing in hAlpha.
 Coherence of p* A0 follows from tensor pullback over a Noetherian scheme. The affine
-limit cones for A0 and p_* F give the displayed section isomorphisms. Formal functions
-identifies the inverse limit of kappa with an isomorphism. Its composites with alpha
-and with the completed adjunction map agree at every level by hAlpha and naturality
-of quotient projections. Cancel that inverse-limit isomorphism to obtain the square.
+limit cones for A0 and p_* F give the displayed section isomorphisms. Degree-zero
+formal functions on the proper scheme makes all pushed-forward
+quotient section projections jointly monic. Precompose the claimed square with
+the inverse of eA and test it on those projections. The equations hKappa and
+hAlpha, the limit projection equations, and naturality of the supplied adjunction
+unit reduce it to the quotient compatibility of b. Cancel the inverse of eA.
 No isomorphism of p over any open is needed. For a zero ring the schemes and modules
 are empty/zero, and the same equivalence and cancellation argument apply. -/
 theorem formalComparison_complete_base_algebraization
@@ -83,6 +91,72 @@ theorem formalComparison_complete_base_algebraization
         (moduleSpecΓFunctor (R := CommRingCat.of A))) ≫ eD.hom =
       eA.hom ≫ (moduleSpecΓFunctor (R := CommRingCat.of A)).map
         (adj.unit.app A₀.obj ≫ (Scheme.Modules.pushforward p).map b.hom) := by
-  sorry
+  obtain ⟨A₀, e, b, hb⟩ :=
+    formalComparison_algebraization_quotient_lift I J hJ p G F β
+  obtain ⟨sA, hsA⟩ := affine_complete_coherent_sections I J hJ A₀
+  obtain ⟨sD, hsD⟩ := affine_complete_coherent_sections I J hJ
+    ⟨(Scheme.Modules.pushforward p).obj F.obj, h⟩
+  let Γ := moduleSpecΓFunctor (R := CommRingCat.of A)
+  let eG := HasLimit.isoOfNatIso (Functor.isoWhiskerRight e Γ)
+  let eA := eG ≪≫ sA.symm
+  refine ⟨A₀, b, eA, sD.symm, ?_⟩
+  apply (cancel_epi eA.inv).1
+  simp only [Iso.inv_hom_id_assoc]
+  apply proper_complete_quotient_sections_jointly_monic I J hJ p F
+  intro n
+  have heA : eA.inv ≫ limit.π (G.obj ⋙ Γ) (op n) =
+      Γ.map (formalModuleQuotientπ J (n + 1) A₀.obj) ≫
+        Γ.map (e.inv.app (op n)) := by
+    dsimp only [eA, eG, Iso.trans_inv, Iso.symm_inv]
+    rw [Category.assoc, HasLimit.isoOfNatIso_inv_π, ← Category.assoc, hsA]
+    rfl
+  have hq := congrArg Γ.map (hKappa n)
+  rw [Γ.map_comp] at hq
+  have hα := congrArg Γ.map (hAlpha n)
+  rw [Γ.map_comp, Γ.map_comp] at hα
+  have hn := adj.unit.naturality
+    (formalModuleQuotientπ J (n + 1) A₀.obj ≫ e.inv.app (op n))
+  change (formalModuleQuotientπ J (n + 1) A₀.obj ≫ e.inv.app (op n)) ≫
+      adj.unit.app (G.obj.obj (op n)) =
+    adj.unit.app A₀.obj ≫ (Scheme.Modules.pushforward p).map
+      ((Scheme.Modules.tensorPullback p).map
+        (formalModuleQuotientπ J (n + 1) A₀.obj ≫ e.inv.app (op n))) at hn
+  have hn' : (formalModuleQuotientπ J (n + 1) A₀.obj ≫ e.inv.app (op n)) ≫
+      (adj.unit.app (G.obj.obj (op n)) ≫
+        (Scheme.Modules.pushforward p).map (β.hom.app (op n))) =
+    (adj.unit.app A₀.obj ≫ (Scheme.Modules.pushforward p).map b.hom) ≫
+      (Scheme.Modules.pushforward p).map
+        (formalModuleQuotientπ (J.comap p) (n + 1) F.obj) := by
+    rw [← Category.assoc, hn, Category.assoc, ← Functor.map_comp,
+      Functor.map_comp (Scheme.Modules.tensorPullback p), Category.assoc, hb n,
+      Functor.map_comp, Category.assoc]
+  calc
+    _ = eA.inv ≫ lim.map (Functor.whiskerRight α.hom Γ) ≫
+        sD.inv ≫ Γ.map (formalModuleQuotientπ J (n + 1)
+          ((Scheme.Modules.pushforward p).obj F.obj)) ≫ Γ.map (κ.app (op n)) := by
+      simp only [Category.assoc, hq]
+      rfl
+    _ = eA.inv ≫ lim.map (Functor.whiskerRight α.hom Γ) ≫
+        limit.π (formalCompletionSystem J
+          ((Scheme.Modules.pushforward p).obj F.obj) ⋙ Γ) (op n) ≫
+          Γ.map (κ.app (op n)) := by
+      rw [← hsD n]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc]
+      rfl
+    _ = (eA.inv ≫ limit.π (G.obj ⋙ Γ) (op n)) ≫
+        Γ.map (α.hom.app (op n)) ≫ Γ.map (κ.app (op n)) := by
+      change eA.inv ≫ limMap (Functor.whiskerRight α.hom Γ) ≫ _ ≫ _ = _
+      have ht := limMap_π (Functor.whiskerRight α.hom Γ) (op n)
+      simpa only [Category.assoc, Functor.whiskerRight_app, completion,
+        ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj,
+        formalCompletionFunctor] using
+        congrArg (fun t ↦ eA.inv ≫ t ≫ Γ.map (κ.app (op n))) ht
+    _ = Γ.map (formalModuleQuotientπ J (n + 1) A₀.obj) ≫
+        Γ.map (e.inv.app (op n)) ≫ Γ.map (adj.unit.app (G.obj.obj (op n))) ≫
+          Γ.map ((Scheme.Modules.pushforward p).map (β.hom.app (op n))) := by
+      rw [heA]
+      simp only [Category.assoc, hα]
+    _ = _ := by
+      simpa only [Functor.map_comp, Category.assoc] using congrArg Γ.map hn'
 
 end AlgebraicGeometry
