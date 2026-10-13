@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-affine-bilinear-extension",
+ "kind": "statement",
+ "title": "Extension of natural bilinear operations from the affine basis",
+ "statement": "Let $X$ be a scheme and $M,N,P$ sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For every affine open $V$ suppose that $\\beta_V:M(V)\\times N(V)\\to P(V)$ is $\\mathcal O_X(V)$-bilinear, and suppose these maps commute with restriction between affine opens. There exist $\\mathcal O_X(U)$-bilinear maps $\\mu_U:M(U)\\times N(U)\\to P(U)$ for all opens $U$, commuting with every restriction and agreeing with $\\beta_V$ on each affine open $V$. No quasi-coherence or separation hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0072",
+  "place": "Sheaves on Spaces, Definition 6.9.1 (0072), equalizer/sheaf axiom; applied to the affine-basis gluing step of the associated graded construction implicit in Cohomology of Schemes Lemma 087Z."
+ },
+ "proof": [
+  {
+   "text": "For U and sections a,b, form beta_V(a|V,b|V) on all affine opens V contained in U. On an intersection of two such opens compare their restrictions on every affine open W in that intersection. Naturality of beta and composition of restriction maps identify both with beta_W(a|W,b|W). Sheaf separatedness on the affine basis proves equality on the whole intersection. The sheaf gluing axiom then gives a section on U with exactly these affine restrictions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose these uniquely characterized glued sections as g(U,a,b). Compare g(U,a,b+b′) with g(U,a,b)+g(U,a,b′) on the affine basis; affine bilinearity proves equality. Do the same for addition in the first variable and scalar multiplication in either variable, using semilinearity of module restrictions. Package the resulting identities as curried linear maps mu_U.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For V contained in U compare the restriction of g(U,a,b) with g(V,a|V,b|V) on each affine W contained in V. Both have affine restriction beta_W(a|W,b|W), hence are equal. Taking U affine and its identity inclusion proves agreement with beta_U. The empty cover handles empty opens. No assumption that intersections of affine opens are affine is used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0072",
+  "place": "Sheaves on Spaces, Definition 6.9.1 (0072), equalizer/sheaf axiom; applied to the affine-basis gluing step of the associated graded construction implicit in Cohomology of Schemes Lemma 087Z.; detailed Lean proof by F2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bilinear maps of sheaves extend from a basis of affine open sets",
+   "results": "msearch returned Internal Server Error; no verdict on absence.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear maps between sheaves of modules extend uniquely from an affine basis to all open sets",
+   "results": "Eight hits including Scheme.Modules.hom_ext and TopCat.Sheaf.hom_ext; none is this bilinear extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictHomEquivHom\"",
+   "results": "TopCat.Sheaf.restrictHomEquivHom extends ordinary presheaf morphisms into sheaves. Bilinearity and module scalar compatibility still require proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "bilinear|restrictHomEquivHom|extend_hom_app",
+   "results": "Mathlib Topology/Sheaves/SheafCondition/Sites has ordinary basis-extension maps; local searches of both module roots have tensor/sheafification bilinear extensions but no affine-basis bilinear extension.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible sectionwise operations on a basis extend to a morphism of sheaves, linear in each argument",
+   "results": "Second reader: Eight hits concern section maps and sheafification scalar compatibility; none extends bilinear operations from affine opens.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftQ₂\"",
+   "results": "Second reader: Found LinearMap.liftQ₂ and liftQ₂_mk, used in the affine proof. These are algebraic descent tools, not affine-basis sheaf extension.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*(bilinear|linear)|bilinear.*basis|quotient.*multiplication",
+   "results": "Second reader: No hits in Topology/Sheaves. Local library searches found tensor and sheafification extension theorems, but no affine-basis bilinear extension.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedMultiplication",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The affine-basis gluing of the associated graded ideal algebra in the graded-kernel construction used in finite etale lifting, as isolated in parent multiplication node step 2.",
+   "via": [
+    "lem-weil-pbc-formal-associated-graded-multiplication",
+    "lem-weil-pbc-formal-associated-graded-algebra-exists",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBilinearExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBilinearExtension.lean",
+  "declaration": "AlgebraicGeometry.affineBilinear_extension",
+  "statement": "theorem affineBilinear_extension {X : Scheme.{u}} (M N P : X.Modules)\n    (beta : ∀ V : X.affineOpens,\n      M.val.obj (op V.1) →ₗ[Γ(X, V.1)] N.val.obj (op V.1) →ₗ[Γ(X, V.1)]\n        P.val.obj (op V.1))\n    (hbeta : ∀ (V W : X.affineOpens) (h : W.1 ≤ V.1)\n      (a : M.val.obj (op V.1)) (b : N.val.obj (op V.1)),\n      P.val.map (homOfLE h).op (beta V a b) =\n        beta W (M.val.map (homOfLE h).op a) (N.val.map (homOfLE h).op b)) :\n    ∃ mu : ∀ U : X.Opens,\n      M.val.obj (op U) →ₗ[Γ(X, U)] N.val.obj (op U) →ₗ[Γ(X, U)] P.val.obj (op U),\n      (∀ (U V : X.Opens) (h : V ≤ U)\n        (a : M.val.obj (op U)) (b : N.val.obj (op U)),\n        P.val.map (homOfLE h).op (mu U a b) =\n          mu V (M.val.map (homOfLE h).op a) (N.val.map (homOfLE h).op b)) ∧\n      (∀ (V : X.affineOpens) (a : M.val.obj (op V.1)) (b : N.val.obj (op V.1)),\n        mu V.1 a b = beta V a b)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095951-L-2458037",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095951-L-2458037",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

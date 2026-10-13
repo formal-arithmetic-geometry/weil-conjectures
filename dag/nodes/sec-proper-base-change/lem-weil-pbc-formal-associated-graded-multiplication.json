@@ -12,28 +12,39 @@
  },
  "proof": [
   {
-   "text": "On every affine open identify the positive power section ranges with ideal powers and the quotient sections with their module quotients, using the affine product/quotient theorem. For degree zero the power inclusion is the identity. Products land in degree m+n; changing representatives by the next ideal powers changes their product by the next ideal power. Thus multiplication descends bilinearly.",
+   "text": "For each pair m,n take the natural affine bilinear multiplication with its representative formula. Apply the proved affine-basis bilinear extension theorem to the three graded pieces, obtaining a natural family mu on every open with exactly the original affine values.",
+   "uses": [
+    "lem-weil-pbc-formal-associated-graded-affine-multiplication",
+    "lem-weil-pbc-affine-bilinear-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing public formalPolynomial_power_injective theorem for sectionwise injectivity of every power inclusion. Reuse the affine construction module's proved power_affine_range and power_affine_product helpers. Their affine ranges are I(V)^r, including r=0 by the identity inclusion. Hence products of restricted power sections admit unique local lifts. Mathlib PresheafOfModules.naturality_apply and ring multiplication identify their images with the restriction of the global ring product.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Inclusions, quotient projections and ring multiplication commute with restrictions. Locally lift both quotient sections on affine covers and glue the independent local products; check equality on affine refinements of overlaps. The sheaf condition gives unique glued sections. This proves bilinearity and naturality. For actual power sections, the ring product locally lifts to the target power inclusion. That inclusion is monic by induction on ideal powers, so the lifts agree and glue to c. The quotient identity holds locally and hence globally. Empty opens, the zero and unit ideals, and zero degrees follow by the same argument.",
+   "text": "Index all affine opens V contained in U and choose those local product lifts. On an overlap their images are the same restriction of the global ring product by functoriality; injectivity on that overlap proves equality of the lifts. Glue by the module sheaf axiom, then use separatedness to check the image of the glued c is the prescribed ring product. Restrict the desired quotient identity to each affine V, use naturality of mu and all quotient projections, and apply the affine representative identity to the restrictions of a,b,c. Sheaf separatedness gives the global identity. Empty opens are covered by the same gluing argument. Reuse the extension module's single shared affine-separatedness theorem to check equality of sections, instead of repeating its proof.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-formal-associated-graded-affine-multiplication"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-formal-associated-graded-affine-multiplication",
+  "lem-weil-pbc-affine-bilinear-extension",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z, construction of its associated graded algebra; affine descent and representative-independence expanded from the parent node, retaining its route."
+  "place": "Original affine multiplication and sheaf gluing route, now implemented in Lean by F2 using Mathlib bilinear quotient descent and unique gluing; no unit-level route change. Returned duplicate-helper repair: share the proved helpers through existing proof-only imports, rather than proving them twice. Current second reading removes the additional duplicate injectivity and naturality helpers, using the existing public formalPolynomial_power_injective and Mathlib naturality_apply directly."
  },
  "mathlib_searches": [
   {
@@ -132,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T045528-L-128616",
+  "landing": "20261013T095951-L-2458037",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

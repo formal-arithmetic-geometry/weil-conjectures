@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-formal-associated-graded-affine-multiplication",
+ "kind": "statement",
+ "title": "Affine associated graded quotient multiplication",
+ "statement": "Let $X$ be a scheme, $I$ a quasi-coherent ideal sheaf, and $m,n$ natural numbers. Write $B_r=I^r/I^{r+1}$ and $\\pi_r$ for the pieces and projections [def-weil-pbc-formal-kernel-graded-pieces]. There exist $\\mathcal O_X(V)$-bilinear maps $\\beta_V:B_m(V)\\times B_n(V)\\to B_{m+n}(V)$ on all affine opens $V$, compatible with restriction between affine opens. For every $a\\in I^m(V)$, $b\\in I^n(V)$ and $c\\in I^{m+n}(V)$ whose structure-ring inclusion is the product of the inclusions of $a,b$, one has $\\beta_V(\\pi_m(a),\\pi_n(b))=\\pi_{m+n}(c)$. This statement is only on the affine basis and asserts no algebra laws.",
+ "stmt_deps": [
+  "def-weil-pbc-formal-kernel-graded-pieces"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/087Z",
+  "place": "Cohomology of Schemes, Lemma 30.23.8 (087Z), the associated graded algebra appearing in its statement and affine reduction in its proof; affine tensor and quotient identifications from Schemes Tags 01I8 and 01IC."
+ },
+ "proof": [
+  {
+   "text": "Use the existing public formalPolynomial_power_injective theorem for the monic ideal inclusion; it gives injectivity on every open and includes degree zero. This is an elementary specialization of the already proved general power-inclusion lemma, not a use of polynomial evaluation or finite generation. The affine product/quotient theorem gives the power range I(V)^r for positive r; for r=0 the inclusion is the identity and its range is the unit ideal. Use the existing public affine product/quotient theorem directly for quasi-coherence of positive powers, and the existing unit quasi-coherence theorem for degree zero. The affine quotient clause then gives surjectivity of each quotient projection.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine quotient theorem says pi_r(a)=0 exactly when a belongs to I(V) times the whole power module. Map this submodule through the injective power inclusion. The submodule image formula for ideal scalar multiplication identifies its image with I(V) times I(V)^r = I(V)^(r+1). Injectivity gives the converse membership implication. Hence pi_r(a)=0 iff the structure-ring inclusion of a lies in I(V)^(r+1).",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Products of inclusions of a,b belong to I(V)^m I(V)^n = I(V)^(m+n); choose their unique lift prod(a,b) through the target power inclusion. Injectivity and the ring distributive/scalar identities prove bilinearity. Compose with pi_(m+n). If a lies in ker pi_m, the inclusion of its product with b lies in I(V)^(m+n+1), so the output is zero by the preceding kernel calculation. The same holds for ker pi_n in the second variable. Apply Mathlib LinearMap.liftQ₂ and the surjective first-isomorphism equivalences to get beta_V. Its formula on representatives follows from liftQ₂_mk and injectivity of the product lift.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift arbitrary quotient inputs on V by surjectivity of pi_m and pi_n. Choose their product lift c. Naturality of the three projections rewrites the restricted identity as one on the restricted power sections. The restricted c includes to the product of the restricted inputs by naturality of the inclusions and multiplicativity of structure-ring restriction. Apply the representative formula on W. All computations include zero degrees, zero and unit ideals, and empty affine opens.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/087Z",
+  "place": "Cohomology of Schemes, Lemma 30.23.8 (087Z), the associated graded algebra appearing in its statement and affine reduction in its proof; affine tensor and quotient identifications from Schemes Tags 01I8 and 01IC.; detailed Lean proof by F2. Second reading reuses formalPolynomial_power_injective and Mathlib PresheafOfModules.naturality_apply, removing the duplicate power_injective and app_restrict declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multiplication on quotients of powers of an ideal sheaf defines its associated graded algebra",
+   "results": "msearch returned Internal Server Error; no verdict on absence.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear multiplication on successive quotients of powers of an ideal sheaf, natural in open sets",
+   "results": "Eight hits concern local cohomology and ideal quotient transition maps; no affine quotient-sheaf multiplication.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.mkQ, LinearMap",
+   "results": "mkQ_surjective, linearMap_qext and liftQ_mkQ are quotient tools, not the desired ideal-sheaf theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|AssociatedGraded|bilinear.*quotient",
+   "results": "msearch found Mathlib/LinearAlgebra/Quotient/Bilinear.lean, providing LinearMap.liftQ₂. Library searches found no earlier associated-graded multiplication independent of the parent. Used liftQ₂ rather than introducing an algebraic descent hole.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product of two powers of a quasi-coherent ideal induces a pairing of their successive quotient modules on affine schemes",
+   "results": "Second reader: Eight hits concern closed subscheme gluing, power quotient inclusions and transition maps. None constructs the asserted natural pairing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftQ₂\"",
+   "results": "Second reader: Found LinearMap.liftQ₂ and liftQ₂_mk; the proof already uses these to descend both inputs.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "associated.*graded|graded.*ideal|quotient.*bilinear",
+   "results": "Second reader: Seven hits in RingTheory concern homogeneous ideals and graded homomorphisms, not multiplication of successive ideal-sheaf quotients. Local library searches found only the parent and downstream uses.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedMultiplication",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The affine construction of the associated graded ideal algebra in the graded-kernel argument used in finite etale lifting, as isolated in parent multiplication node step 1.",
+   "via": [
+    "lem-weil-pbc-formal-associated-graded-multiplication",
+    "lem-weil-pbc-formal-associated-graded-algebra-exists",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedAffineMultiplication",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalAssociatedGradedAffineMultiplication.lean",
+  "declaration": "AlgebraicGeometry.formalAssociatedGraded_affine_multiplication_exists",
+  "statement": "theorem formalAssociatedGraded_affine_multiplication_exists {X : Scheme.{u}}\n    (I : X.IdealSheafData) (m n : ℕ) :\n    ∃ beta : ∀ V : X.affineOpens,\n      (formalAssociatedGradedPiece I m).val.obj (op V.1) →ₗ[Γ(X, V.1)]\n        (formalAssociatedGradedPiece I n).val.obj (op V.1) →ₗ[Γ(X, V.1)]\n          (formalAssociatedGradedPiece I (m + n)).val.obj (op V.1),\n      (∀ (V W : X.affineOpens) (h : W.1 ≤ V.1)\n        (a : (formalAssociatedGradedPiece I m).val.obj (op V.1))\n        (b : (formalAssociatedGradedPiece I n).val.obj (op V.1)),\n        (formalAssociatedGradedPiece I (m + n)).val.map (homOfLE h).op (beta V a b) =\n          beta W ((formalAssociatedGradedPiece I m).val.map (homOfLE h).op a)\n            ((formalAssociatedGradedPiece I n).val.map (homOfLE h).op b)) ∧\n      (∀ (V : X.affineOpens)\n        (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op V.1))\n        (b : (Scheme.idealSheafPower I.toModulesι n).1.val.obj (op V.1))\n        (c : (Scheme.idealSheafPower I.toModulesι (m + n)).1.val.obj (op V.1)),\n        (Scheme.idealSheafPower I.toModulesι (m + n)).2.val.app (op V.1) c =\n          (@id Γ(X, V.1) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op V.1) a)) *\n            (@id Γ(X, V.1) ((Scheme.idealSheafPower I.toModulesι n).2.val.app (op V.1) b)) →\n        beta V ((formalAssociatedGradedπ I m).val.app (op V.1) a)\n          ((formalAssociatedGradedπ I n).val.app (op V.1) b) =\n            (formalAssociatedGradedπ I (m + n)).val.app (op V.1) c)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095951-L-2458037",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095951-L-2458037",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
