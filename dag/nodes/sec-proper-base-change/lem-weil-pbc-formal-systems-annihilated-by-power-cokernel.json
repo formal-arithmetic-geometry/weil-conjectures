@@ -30,24 +30,50 @@
  ],
  "proof": [
   {
-   "text": "Apply the affine reduction argument to prove the cokernel component on every level.",
+   "text": "On each affine open, coherence implies quasi-coherence. The defining transition factors as an ideal-power quotient projection followed by an isomorphism. Quasi-coherent affine cokernel sections make each transition surjective; quasi-coherence of its source ideal product follows from tensor and image closure. Mathlib Concrete.surjective_π_app_zero_of_surjective_map, applied to the initial shifted diagram m ↦ n+m, makes the canonical limit projection onto every level surjective. This is implemented by the proved private lemmas projection_surjective, product_qc and formal_projection_surjective.",
    "uses": [
-    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Remark 0888, finite affine-cover argument"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For b in K(U)^t and y in G_n(U), lift y to z in the inverse limit. The cokernel hypothesis says bz is in the range of the limit map, say bz=alpha_U(x). Naturality of limit projections gives by=alpha_n(U)(projection_n(x)). The level cokernel projection therefore kills by. Its affine surjectivity proves b annihilates every section of the level cokernel. No kernel-annihilation hypothesis or reduction-modulo-an-ideal theorem is needed. For the unchanged conclusion use K(U)^(2t) ≤ K(U)^t.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Affine ideal-power sections identify the scalar of each section of K^(2t) with an element of K(U)^(2t). The affine tensor-sections map is surjective, and on elementary tensors the multiplication morphism sends j tensor s to j*s. Tensor induction therefore shows the multiplication morphism vanishes on affine sections of every cover member. This is the first part of the proved private lemma product_zero_on_affine_cover.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source of the multiplication morphism is quasi-coherent. On each affine cover member, restrict and apply the already proved source-library Scheme.Modules.hom_ext_of_isAffine to deduce vanishing of the restricted morphism. Scheme.Modules.hom_eq_zero_of_restrict glues this to global vanishing, including the empty cover on the empty scheme. Cancel factorThruImage and use IsZero.of_mono_eq_zero on image.ι: the image defining the ideal-module product is zero. This completes the proved private lemma product_zero_on_affine_cover.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Remark 0888"
+  "place": "D4 stage 3: shorter cokernel-only argument for Remark 0888, implication (3) => (1), using surjective sequential limit projections and affine quasi-coherent cokernel sections. Original statement and unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -111,14 +137,14 @@
   "date": "2026-10-13"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "X-f12ec",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261012T223411-L-1638856",
+  "landing": "20261013T003155-L-2428349",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature matched the node and repository baseline; proof dependencies and pruning matched the Lean proof; delivery and sole direct importer compiled cleanly; all five axiom probes used only permitted axioms."
  },
  "reviewed": {
   "date": "2026-10-12",
