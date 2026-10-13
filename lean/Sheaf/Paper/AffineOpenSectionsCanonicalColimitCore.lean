@@ -2,6 +2,10 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.Paper.AffineOpenSectionsDescent
+import Sheaf.Paper.AffineOpenSectionsZeroDetection
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
@@ -35,4 +39,26 @@ theorem affineOpenSections_canonical_colimit_core
           exact hp j))
         (by exact pullback.lift_snd _ _ _)).op) :
     Nonempty (IsColimit (Cocone.mk _ ν₀)) := by
-  sorry
+  classical
+  let U := forget AddCommGrpCat.{u + 1}
+  let C := Cocone.mk _ ν₀
+  -- The underlying type colimit is determined by representatives and eventual equality.
+  have hdescent := affineOpenSections_descent D c p hp hc H hH F ν₀ hν₀
+  have hzero := affineOpenSections_zero_detection D c p hp hc H hH F ν₀ hν₀
+  have ht : IsColimit (U.mapCocone C) := by
+    apply Types.FilteredColimit.isColimitOf'
+    · intro t
+      obtain ⟨j, s, hs⟩ := hdescent t
+      exact ⟨op j, s, hs.symm⟩
+    · intro j a b hab
+      have habzero : ν₀.app j (a - b) = 0 := by
+        change ν₀.app j a = ν₀.app j b at hab
+        simpa only [map_sub, sub_eq_zero] using hab
+      obtain ⟨k, f, hf⟩ := hzero j.unop (a - b) habzero
+      refine ⟨op k, f.op, ?_⟩
+      change F.obj.map (D.map f).op a = F.obj.map (D.map f).op b
+      simpa only [map_sub, sub_eq_zero] using hf
+  -- Forgetting additive groups preserves filtered colimits and reflects isomorphisms.
+  let : ReflectsColimit (D.op ⋙ F.obj) U :=
+    reflectsColimit_of_reflectsIsomorphisms _ U
+  exact ⟨isColimitOfReflects U ht⟩

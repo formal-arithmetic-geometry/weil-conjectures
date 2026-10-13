@@ -9,16 +9,33 @@
  },
  "proof": [
   {
-   "text": "Apply affine-site continuity over the cofiltered inverse system of affine open subschemes and identify its canonical restriction maps with the supplied component formula.",
+   "text": "Use affine-open-sections-descent for surjectivity of the underlying type cocone.",
+   "uses": [
+    "affine-open-sections-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If two sections a,b at one stage have equal images, the group homomorphism nu sends a-b to zero. Apply affine-open-sections-zero-detection to a-b. The restriction homomorphism sends a-b to zero exactly when the restrictions of a and b are equal.",
+   "uses": [
+    "affine-open-sections-zero-detection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.Limits.Types.FilteredColimit.isColimitOf' to the underlying cocone with these two properties. The forgetful functor from AddCommGrpCat preserves filtered colimits and reflects isomorphisms; reflectsColimit_of_reflectsIsomorphisms and isColimitOfReflects lift the result to additive groups.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "affine-open-sections-descent",
+  "affine-open-sections-zero-detection"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03Q6",
-  "place": "Lemma 59.51.5"
+  "place": "Degree-zero continuity reduced to representative descent and eventual zero, combined with Mathlib filtered-colimit recognition"
  },
  "mathlib_searches": [
   {
@@ -91,12 +108,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261012T225322-L-1810580",
+  "landing": "20261013T072349-L-1119523",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
