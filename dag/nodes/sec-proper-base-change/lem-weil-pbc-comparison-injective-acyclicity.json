@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-comparison-injective-acyclicity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Acyclicity of the pulled-back etale injectives",
@@ -21,58 +21,225 @@
  "stmt_deps": [
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-ind-etale-basis",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-proetale-modules",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-ind-etale-basis] and [lem-weil-pbc-cech-criterion], it\nsuffices to prove positive Cech vanishing on every finite basis covering\n$\\{V_a\\to U\\}$. There are two separate limits in this calculation.",
+   "text": "Put $M=\\nu_X^*I$. By [lem-weil-pbc-ind-etale-basis], the basis $\\mathcal B_X$ is closed under fibre products and every covering of its objects has a finite basis refinement. The second assertion of [lem-weil-pbc-cech-criterion] therefore reduces derived evaluation vanishing to $\\check H^q(\\{V_a\\to U\\},M)=0$ for every finite basis covering and $q>0$. We prove this simultaneously for all $U$ and coverings, not just the terminal object $X$.",
    "uses": [
     "lem-weil-pbc-ind-etale-basis",
     "lem-weil-pbc-cech-criterion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U (lemma-affine-vanishing), first paragraph; Tag 03F9 (sites-cohomology-lemma-cech-vanish-collection)"
+   }
   },
   {
-   "text": "First write each $V_a$ as a limit of affine etale finite-presentation\n$U$-schemes, using the stability lemma for ind-etale algebras. Every finite\nchoice of stages still covers $U$. As in the proof of\n[lem-weil-pbc-comparison-sections], section continuity on all finite\nintersections writes the Cech complex of [def-weil-pbc-cover-cech] as the\nfiltered colimit of those for these etale coverings of $U$. Exactness of\nfiltered colimits gives the same identity on Cech cohomology.",
+   "text": "Fix such a covering, indexed by $1\\le a\\le m$. If $m=0$, joint surjectivity forces $U=\\varnothing$, and every positive degree term of its Cech complex is the zero module. Otherwise $V_a$ and $U$ are affine ind-etale over $X$. By [lem-weil-pbc-ind-etale-stability], the map $V_a\\to U$ is ind-etale. By [def-weil-pbc-ind-etale-algebra], choose $V_a=\\varprojlim_{j\\in J_a}V_{a,j}$ with $V_{a,j}\\to U$ affine etale of finite presentation and affine transition maps. Use the product directed set $J=\\prod_aJ_a$: it is directed because upper bounds can be chosen separately in its finitely many factors. For each $j$, the family $\\mathcal V_j=\\{V_{a,j_a}\\to U\\}_a$ covers $U$: a point of $U$ lifts to some $V_a$ by the original covering and hence maps to a point of $V_{a,j_a}$. Its arrows are etale, so joint surjectivity is precisely the etale covering condition [def-weil-pbc-etale-site]. Every $V_{a,j_a}\\to X$ is ind-etale by composition stability.",
    "uses": [
-    "lem-weil-pbc-comparison-sections",
-    "def-weil-pbc-cover-cech"
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-etale-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, second paragraph, presentations and product directed set"
+   }
   },
   {
-   "text": "Second, fix one such finite etale covering $\\{W_a\\to U\\}$, and write\n$U=\\varprojlim_iU_i$ with $U_i$ affine etale over $X$. The covering descends\nto a finite etale covering $\\{W_{a,i}\\to U_i\\}$ at a sufficiently late stage,\nby the descent of finite-presentation data at an inverse limit; all its\nfinite intersections descend by base change. The same section continuity and\nexactness of filtered colimits give\n\n$$\n \\check H^q(\\{W_a\\to U\\},\\nu_X^*I)\n =\\varinjlim_i\\check H^q(\\{W_{a,i}\\to U_i\\},I).\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "On the right every term is an etale object over $X$; the identification of\nits sections with those of $I$ is [lem-weil-pbc-comparison-sections].\nInjectivity of $I$ and the first assertion of\n[lem-weil-pbc-cech-criterion] make the right side zero for $q>0$. Both limits\ntherefore give zero, and the criterion proves the claimed derived vanishing.\nThe identification with cohomology on $U_{\\Proet}$ is\n[lem-weil-pbc-proetale-restriction-injectives]. This supplies the geometric\nstep in [Stacks Project, Tag\n099U](https://stacks.math.columbia.edu/tag/099U) without assuming it as part\nof the site comparison.",
+   "text": "For a tuple $\\alpha=(a_0,\\ldots,a_p)$ set $T_\\alpha=V_{a_0}\\times_U\\cdots\\times_U V_{a_p}$ and $T_{\\alpha,j}=V_{a_0,j_{a_0}}\\times_U\\cdots\\times_U V_{a_p,j_{a_p}}$. These are affine basis objects by base-change and composition stability [lem-weil-pbc-ind-etale-stability]. Moreover $T_\\alpha=\\varprojlim_j T_{\\alpha,j}$: a morphism from a test scheme into the right side is a compatible family of tuples of morphisms into the factors with the same composite to $U$; taking each factor's limit gives exactly a tuple defining a morphism to $T_\\alpha$, and reversing this construction is inverse. This also proves compatibility with every projection deleting a factor. Repeated entries in $\\alpha$ cause no problem: the diagonal stage choices are cofinal, since any finite collection of stages in one $J_a$ has an upper bound. The $T_{\\alpha,j}$ and their transitions are affine. In particular they are qcqs by [lem-weil-pbc-affine-scheme-qcqs].",
    "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, second paragraph, displayed equality of inverse limits and fibre products"
+   }
+  },
+  {
+   "text": "Fix an initial $j_0\\in J$ and restrict to $j\\ge j_0$, a cofinal directed tail. Apply the terminal-object case of [lem-weil-pbc-etale-section-continuity] to the inverse system $T_{\\alpha,j}$, with coefficient sheaf $I|_{T_{\\alpha,j_0}}$. Its pullbacks are $I|_{T_{\\alpha,j}}$ and $I|_{T_\\alpha}$ by [lem-weil-pbc-inverse-image-composition]. Here these symbols denote scheme inverse image, not restriction along a morphism that is etale over $X$. The hypotheses hold because all stages are affine qcqs and transitions are affine. By [lem-weil-pbc-comparison-sections], each of these basis objects has $M(T)=\\Gamma(T_{\\Et},I|_T)$; hence $M(T_\\alpha)=\\varinjlim_j M(T_{\\alpha,j})$. The continuity theorem is used on underlying abelian section groups only; no assertion that $I$ is injective as an abelian sheaf is made. All displayed maps respect the scalar actions because inverse-image units, restriction, and their composition isomorphisms do. They commute with the face maps: for each factor-deleting projection, the unit's naturality square is commutative, and the composition isomorphism identifies both composites with inverse image along the same scheme morphism. Thus the section identifications preserve the actual Cech differentials.",
+   "uses": [
+    "lem-weil-pbc-etale-section-continuity",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-comparison-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, second paragraph; Tag 099S (lemma-limit-pullback); etale-cohomology.tex Tag 03Q6, degree zero"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-cover-cech], degree $p$ is the product over the finite set $\\{1,\\ldots,m\\}^{p+1}$. [lem-weil-pbc-filtered-colimits-commute-finite-limits] commutes this finite product with the section colimit of step 4. Since those maps commute with all faces, they give an isomorphism of cochain complexes $\\check C^\\bullet(\\{V_a\\to U\\},M)=\\varinjlim_{j\\in J}\\check C^\\bullet(\\mathcal V_j,M)$. [lem-weil-pbc-filtered-colimit-abelian-groups-exact] gives $\\check H^q(\\{V_a\\to U\\},M)=\\varinjlim_j\\check H^q(\\mathcal V_j,M)$. Explicitly, exact colimit preserves $0\\to Z_j^q\\to C_j^q\\to B_j^{q+1}\\to0$ and $0\\to B_j^q\\to Z_j^q\\to H_j^q\\to0$, so the colimit cycles and boundaries are the cycles and boundaries of the colimit complex, and their quotient is the colimit of the quotients. It remains to show vanishing for each finite affine etale covering of $U$.",
+   "uses": [
+    "def-weil-pbc-cover-cech",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, second paragraph, first displayed Cech-colimit formula; algebra.tex Tag 00DB (lemma-directed-colimit-exact)"
+   }
+  },
+  {
+   "text": "Fix a finite affine etale covering $\\mathcal W=\\{W_a\\to U\\}$. Present $U=\\varprojlim_i U_i$ with $U_i$ affine etale of finite presentation over $X$ and affine transitions [def-weil-pbc-ind-etale-algebra]. The arrows $W_a\\to U$ are of finite presentation: their sources are affine and their target affine, hence qcqs, and etale implies locally finite presentation [lem-weil-pbc-affine-scheme-qcqs, lem-weil-pbc-qcqs-morphism-permanence]. Apply the object clause of [lem-weil-pbc-etale-finite-data-descent] separately to the finitely many $W_a/U$, and take a common upper bound $i_0$ for their model stages. Base change preserves etaleness and finite presentation [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-qcqs-morphism-permanence]. Keep the target model equal to the terminal $U_{i_0}$ itself: the descended diagram has vertices $U_{i_0}$ and $W_{a,i_0}$, arrows their structure morphisms, and no additional relations. Its limit identification at the terminal vertex is the canonical identity of $U$, so its limit arrows are the original covering $W_a\\to U$. The covering clause of [lem-weil-pbc-etale-finite-data-descent] now gives a cofinal tail on which $W_{a,i}\\to U_i$ covers $U_i$. Each $W_{a,i}$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence]. Its transitions are affine by [lem-weil-pbc-affine-morphism-permanence], and its limit is $W_a$ by the same universal-property argument as step 3. Since $W_a$ is affine, [lem-weil-pbc-limit-affine-stage] makes $W_{a,i}$ affine for all sufficiently large $i$. Choose one upper bound for these finitely many stages and the covering stage. All subsequent families are finite affine etale coverings of $U_i$. Their iterated intersections $T_{\\alpha,i}$ are formed by base change and satisfy $T_\\alpha=T_{\\alpha,i}\\times_{U_i}U$; no descent of an infinite Cech diagram is needed.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-limit-affine-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, third paragraph; limits.tex Tags 01ZM, 01Z6 (lemma-limit-affine), 07RP and 07RR, as exposed by the cited descent node"
+   }
+  },
+  {
+   "text": "For each $\\alpha$ apply [lem-weil-pbc-etale-section-continuity] over the affine system $U_i$, with coefficient $I|_{U_{i_0}}$ and the etale finite-presentation object $T_{\\alpha,i_0}$. The intersection is etale by the fibre-product assertion of [def-weil-pbc-etale-site]. It is of finite presentation: if $U_{i_0}=\\operatorname{Spec}A$ and each $W_{a,i_0}=\\operatorname{Spec}(A[x_a]/(r_a))$ has finite generator and relation lists, their iterated fibre product has coordinate ring $A[(x_{a_0},\\ldots,x_{a_p})]/(r_{a_0},\\ldots,r_{a_p})$, with distinct copies of the lists for repeated indices. This is again a finite presentation; its base changes retain finite presentation by [lem-weil-pbc-qcqs-morphism-permanence]. The inverse-image composition isomorphism [lem-weil-pbc-inverse-image-composition] gives coefficient $I|_U$ at the limit. Since $T_\\alpha$ is a basis object, [lem-weil-pbc-comparison-sections] identifies its section group with $M(T_\\alpha)$. Since each $U_i\\to X$ is etale, [lem-weil-pbc-etale-inverse-image-restriction] identifies $(I|_{U_i})(T_{\\alpha,i})$ with $I(T_{\\alpha,i})$, including the restriction maps. Thus $M(T_\\alpha)=\\varinjlim_i I(T_{\\alpha,i})$. Write $d_{r,i}:T_{\\alpha,i}\\to T_{\\alpha\\setminus r,i}$ for deletion of the $r$th factor, and $d_r$ for its limit. Write $\\theta_{\\alpha,i}:I(T_{\\alpha,i})\\to M(T_\\alpha)$ for the continuity map, including the coefficient identifications just specified. The unit naturality square on the two objects $T_{\\alpha,i}$ and $T_{\\alpha\\setminus r,i}$ says $\\theta_{\\alpha,i}\\circ I(d_{r,i})=M(d_r)\\circ\\theta_{\\alpha\\setminus r,i}$. The composition isomorphism identifies both coefficient pullbacks with inverse image along the same composite to $X$, and the etale restriction isomorphism identifies the stage maps with $I(d_{r,i})$. Taking colimits gives this equality for each face, and summing with signs $(-1)^r$ gives commutation with the Cech differential.",
+   "uses": [
+    "lem-weil-pbc-etale-section-continuity",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-comparison-sections",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, third paragraph, second displayed Cech-colimit formula; Tag 099S; topologies.tex Tag 021I as recorded in the etale restriction node"
+   }
+  },
+  {
+   "text": "Use the degreewise finite products in [def-weil-pbc-cover-cech] and [lem-weil-pbc-filtered-colimits-commute-finite-limits] on step 7, then the cycle/boundary calculation of step 5 with [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. This gives $\\check H^q(\\mathcal W,M)=\\varinjlim_i\\check H^q(\\{W_{a,i}\\to U_i\\},I)$. On $X_{\\Et}$ the affine objects and finite affine etale covers satisfy the basis/intersection/refinement hypotheses by [new-etale-finite-affine-cech-basis]. Every $U_i$ and $W_{a,i}$ is affine etale over $X$; hence each family is a finite basis covering. The first assertion of [lem-weil-pbc-cech-criterion] applies to $I$, injective in the etale module category, and kills every summand for $q>0$. We do not require $I|_U$ to be injective or the underlying abelian sheaf of $I$ to be injective.",
+   "uses": [
+    "def-weil-pbc-cover-cech",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "new-etale-finite-affine-cech-basis",
+    "lem-weil-pbc-cech-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, final paragraph; Tag 03AW (sites-cohomology-lemma-injective-trivial-cech), module version supplied by the cited criterion"
+   }
+  },
+  {
+   "text": "Step 8 proves $\\check H^q(\\mathcal V_j,M)=0$ for every $j$ in step 5. Its first colimit therefore vanishes for every finite basis covering, including the empty case from step 2. The second assertion of [lem-weil-pbc-cech-criterion], with the basis properties established in step 1, gives zero derived evaluation on every $U\\in\\mathcal B_X$. The map $U\\to X$ is weakly etale by [lem-weil-pbc-ind-etale-stability]. [lem-weil-pbc-proetale-restriction-injectives] therefore identifies that derived evaluation with $H^q(U_{\\Proet},M|_U)$, proving exactly the claimed vanishing.",
+   "uses": [
     "lem-weil-pbc-cech-criterion",
+    "lem-weil-pbc-ind-etale-stability",
     "lem-weil-pbc-proetale-restriction-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099U, final paragraph, application of Tag 03F9; restriction to the pro-etale slice"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ind-etale-basis",
   "lem-weil-pbc-cech-criterion",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-comparison-sections",
   "def-weil-pbc-cover-cech",
-  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
   "lem-weil-pbc-etale-finite-data-descent",
-  "lem-weil-pbc-etale-section-continuity",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "new-etale-finite-affine-cech-basis",
+  "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-injective-acyclicity.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U (lemma-affine-vanishing), full two-limit proof; constant-coefficient module version via lem-weil-pbc-cech-criterion"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an injective etale module sheaf has vanishing higher pro etale cohomology on affine ind etale schemes",
+   "results": "Algebra.Extension.cotangentComplex_injective_iff, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.formallyEtale_iff, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state comparison-pullback acyclicity on affine ind-etale objects"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?[eé]tale|comparisonUpperStar|ind.?[eé]tale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state comparison-pullback acyclicity on affine ind-etale objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of an injective etale sheaf is acyclic on every affine ind etale object of the pro etale site",
+   "results": "no hits; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Injective",
+   "results": "no hits; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-14",
+   "verdict": "invalid unqualified-name query; superseded by qualified CategoryTheory.Sheaf.H search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale site comparison inverse image sends injective sheaves to sheaves acyclic for sections on the affine basis",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale.forget, CategoryTheory.Presheaf.isLocallyInjective_forget_iff, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, CategoryTheory.Presheaf.isLocallyInjective_forget",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state comparison-pullback acyclicity on affine ind-etale objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.functorH_obj_coe, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat, CategoryTheory.Sheaf.H.map, CategoryTheory.Sheaf.H.equiv₀, CategoryTheory.Sheaf.functorH_map, CategoryTheory.Sheaf.H.map_id_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state comparison-pullback acyclicity on affine ind-etale objects"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Aa]cyclic|[Aa]cyclic.*comparison|[Ii]njective.*[Pp]roetale|[Pp]roetale.*[Ii]njective",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no comparison/proetale injective acyclicity declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher sheaf cohomology vanishes for the inverse image of an injective sheaf under the morphism from the proetale to the etale topos on affine inverse limits",
+   "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isKInjective_of_injective, Algebra.Extension.cotangentComplex_injective_iff, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p",
+   "date": "2026-10-14",
+   "verdict": "no match: derived vanishing for injectives on their own category and K-injective facts do not prove comparison inverse-image acyclicity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -114,5 +281,49 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-comparison-injective-acyclicity",
+  "worker": "stage1",
+  "summary": "Expanded the two inverse-limit calculations of Stacks 099U into nine steps, retained module injectivity rather than assuming abelian injectivity, supplied explicit continuity and covering descent citations and eventual affineness, checked naturality against Cech faces, and reused only existing DAG nodes. Statement unchanged; fixed constant coefficient conventions are recorded by statement dependencies. No exact project attachment or Mathlib match found.",
+  "blueprint": "All four paragraphs of the imported proof: paragraph 1 -> step 1; first limit paragraph -> steps 2-5; second limit paragraph -> steps 6-7; final vanishing and restriction paragraph -> steps 8-9.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-section-continuity",
+    "why": "Generic Continuity of sections at an inverse limit used exactly for its stated conclusion in the two-limit argument of Stacks 099U; it supplies a tool, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic Inverse images along a composite: the canonical isomorphism compatible with the units used exactly for its stated conclusion in the two-limit argument of Stacks 099U; it supplies a tool, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-data-descent",
+    "why": "Generic Finite-presentation data at an inverse limit used exactly for its stated conclusion in the two-limit argument of Stacks 099U; it supplies a tool, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction used exactly for its stated conclusion in the two-limit argument of Stacks 099U; it supplies a tool, not a replacement of any unit step."
+   },
+   {
+    "node": "new-etale-finite-affine-cech-basis",
+    "why": "Generic Finite affine etale covers are cofinal and stable under intersections used exactly for its stated conclusion in the two-limit argument of Stacks 099U; it supplies a tool, not a replacement of any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "new-etale-finite-affine-cech-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-fe02c5a5c",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-fe02c5a5c (reviewer sub-agent of L); spot-checked: Read the complete item, all 27 dependency statements, blueprint route, report, and cited local sources. All nine steps correctly establish the two-limit Čech vanishing argument for finite discrete module coefficients. Covering descent, eventual affineness, face-map compatibility, and slice cohomology identification are justified. No new nodes, duplicate restatements, target weakening, or item dependency cycle. Accepted five declared generic tool uses; detailed checks and inherited unrelated DAG defects recorded in review.md."
+ }
 }
