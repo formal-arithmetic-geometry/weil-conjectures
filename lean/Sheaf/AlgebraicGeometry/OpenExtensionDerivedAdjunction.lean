@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction
 
 /-! Derived extension adjunction transported across the over-site equivalence.
 Source: Stacks Project, Tags 08BS and 08BT.
@@ -23,6 +24,7 @@ local instance openExtensionProjectionStandardDerivedAdj (X : Scheme.{u}) (U : X
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
+set_option linter.unusedVariables false in
 /-- The derived extension-by-zero adjunction after transporting the open over-site to `U`.
 Source: Stacks Project, Tags 08BS and 08BT.
 (blueprint: lem-pc-open-extension-derived-adjunction).
@@ -42,7 +44,13 @@ theorem exists_openExtension_derivedAdjunction (X : Scheme.{u})
       (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E
     ∃ J : schemeDerivedCategory U.toScheme ⥤ schemeDerivedCategory X,
       ∃ adj : J ⊣ R, True := by
-  sorry
+  let e₀ : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
+    Scheme.Modules.overEquiv U
+  let e := e₀.mapDerivedCategory
+  let a₀ := derived_open_shriek_adjunction X.toRingedSpace U
+  let a₁ : e.inverse ⊣ e.functor := e.symm.toAdjunction
+  refine ⟨_, a₁.comp a₀.some, trivial⟩
 
 end
 end AlgebraicGeometry
