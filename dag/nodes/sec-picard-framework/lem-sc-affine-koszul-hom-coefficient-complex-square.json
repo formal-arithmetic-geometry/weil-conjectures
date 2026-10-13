@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Tag 0BQZ displayed Hom complex coefficient map; Tag 01HV Lemma 26.5.4(4)-(5), functorial basic-open localization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-koszul-complex",
+  "def-pur-hom-complex",
+  "def-sc-koszul-dual-complex",
+  "new-j3-koszul-quotient-coefficient-complex"
+ ],
+ "proof": [
+  {
+   "text": "Substitute hH, which identifies the supplied functor with Hom(E,-). For either coefficient module M = A or A/I, project the product defining\nHom(E,M[0]) in degree k to the factor of source degree -k. All other factors\nhave zero target. The product lift with this component and zero in the others\nis the inverse. For k >= 0, the canonical extension term is wedge^k(A^n).\nIts exterior-power basis is finite. On a basic open D(g), a map from its\nassociated sheaf to tilde(M) is uniquely specified by its values on that basis,\nwhich lie in M_g. A finite tuple of such values is precisely the localization\nof Hom_A(wedge^k(A^n),M). These coordinate isomorphisms commute with restriction\nbecause each basis value localizes, so they glue to sheaf isomorphisms. For\nk < 0, the source term and the extended dual term are zero, giving the unique\nisomorphism. Under these identifications the Hom differential is signed\nprecomposition: its target contribution vanishes and its source contribution\nis -(-1)^k times precomposition by the Koszul boundary. At k >= 0 this is\n(-1)^(k+1), the sign of both recorded dual differentials. At the boundary\nfrom degree -1 to 0 both maps are zero. Thus the isomorphisms form chain\nisomorphisms. Postcomposition with the coefficient quotient reduces each\nbasis value modulo I; this is exactly koszulCoefficientReductionDegree, so\nthe square commutes in every degree and hence as complex morphisms. This\ncalculation is natural in the coefficients and does not take homology or\nassume regularity. For n = 0 only degree zero survives; for k > n the exterior\nbasis is empty. Zero rings, I = top, and empty charts give zero objects.",
+   "uses": [
+    "lem-sc-hom-complex-to-single",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "new-j3-koszul-quotient-coefficient-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-to-single",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "new-j3-koszul-quotient-coefficient-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "D2",
+  "group": "D2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "displayed Hom-complex coefficient map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafifying a finite free Hom complex is natural in its coefficient module",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of sheafified dual Koszul complex natural in quotient coefficients",
+   "results": "Eight hits involving representation Ext, sheaf generators and local cohomology; none provides affine Hom coefficient naturality.",
+   "date": "2026-10-13",
+   "verdict": "No match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*tilde|tilde.*homComplex|coefficient.*complex.*iso",
+   "results": "msearch grep found zero hits. Repository finite-free comparison has only structure-sheaf coefficients; affine quotient iso gives no coefficient map square.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "proof steps 2-3, finite-free coordinate calculation before homology",
+   "via": [
+    "lem-sc-affine-koszul-coefficient-hom-coordinates",
+    "new-k1-koszul-ext-coefficient-affine-model",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-affine-koszul-hom-coefficient-complex-square",
+ "title": "Affine Koszul Hom coefficient complex square",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulHomCoefficientComplexSquare.lean",
+  "declaration": "AlgebraicGeometry.affine_koszul_hom_coefficient_complex_square",
+  "statement": "theorem affine_koszul_hom_coefficient_complex_square\n    {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))\n    (n : ℕ) (f : Fin n → Γ(Y, U.1))\n    (H : CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ ⥤\n      CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ)\n    (hH : H =\n      let A := (Γ(Y, U.1) : Type u)\n      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n      let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n      (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)) :\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let TC := T.mapHomologicalComplex (ComplexShape.up ℤ)\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    ∃ (cO : H.obj (S.obj (T.obj (ModuleCat.of A A))) ≅\n        TC.obj ((ExteriorAlgebra.koszulDualComplex A n f).extend\n          ComplexShape.embeddingUpNat))\n      (cQ : H.obj (S.obj (T.obj (ModuleCat.of A (A ⧸ I)))) ≅\n        TC.obj ((ExteriorAlgebra.koszulQuotientDualComplex A I n f).extend\n          ComplexShape.embeddingUpNat)),\n      H.map (S.map (T.map (ModuleCat.ofHom I.mkQ))) ≫ cQ.hom =\n        cO.hom ≫ TC.map (HomologicalComplex.extendMap\n          (ExteriorAlgebra.koszulCoefficientReduction A I n f)\n          ComplexShape.embeddingUpNat)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "statement": "Let Y be a scheme, U an affine open, A=Γ(Y,U), I any ideal of A, n a natural number and f:Fin n → A any sequence. Set T=tilde followed by chart transport, TC its termwise complex functor, E=TC of the integer extension of the Koszul chain complex, H=Hom(E,-), and S the coefficient single functor in degree zero. There are complex isomorphisms H(S(T(A))) ≅ TC of the extension of koszulDualComplex and H(S(T(A/I))) ≅ TC of the extension of koszulQuotientDualComplex. They intertwine H(S(T(A→A/I))) with TC of the extended koszulCoefficientReduction. No closed immersion, homology, or regularity is assumed. Schemes use [def-pc-scheme], T uses [lem-weil-pbc-spec-module-tilde-sections], and the chain and Hom complexes are [def-weil-pbc-koszul-complex] and [def-pur-hom-complex]. The dual complexes and their coefficient morphism are the constructions of [def-sc-koszul-dual-complex] and [new-j3-koszul-quotient-coefficient-complex]. The functor H is provided as a parameter with equality hH to the specified Hom(E,-) functor; this is an identical functor, not an additional hypothesis on the geometry.",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T145116-L-694762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T145116-L-694762",
+  "kind": "interface"
+ }
+}

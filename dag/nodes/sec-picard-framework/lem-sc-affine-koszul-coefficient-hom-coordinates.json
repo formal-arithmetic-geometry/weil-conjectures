@@ -1,157 +1,137 @@
 {
-  "id": "lem-sc-affine-koszul-coefficient-hom-coordinates",
-  "kind": "statement",
-  "title": "Underived affine Koszul Hom coefficient square",
-  "statement": "Let i:Z -> Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], U an affine open, A=Gamma(Y,U), I=ker(i)(U) [def-sbc-closed-immersion-ideal-sheaf], n,m natural numbers, and f:Fin n -> A ANY sequence. Let T be tilde followed by chart transport [lem-weil-pbc-spec-module-tilde-sections], E the termwise T-image of K_A(f) extended to nonpositive integer cochain degrees [def-weil-pbc-koszul-complex], R restriction to U, and B=i_*O_Z. Let a:O_Y -> B be the actual adjunction-unit coefficient map, as specified by ha. Then there are isomorphisms from H^m(Hom_U(E,(R O_Y)[0])) and H^m(Hom_U(E,(R B)[0])) [def-pur-hom-complex] to T of the natural-number dual Koszul homology with A and A/I coefficients, respectively [def-sc-koszul-dual-complex, new-j3-koszul-quotient-coefficient-complex], intertwining the map induced by R(a) with T of the recorded homology coefficient reduction. No Koszul regularity, generation of I by f, resolution, or derived category is assumed.",
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-pbc-koszul-complex",
-    "def-pur-hom-complex",
-    "def-sc-koszul-dual-complex",
-    "new-j3-koszul-quotient-coefficient-complex"
-  ],
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-    "place": "Lemma 48.15.5, proof, displayed morphism Hom(K,O_Y) -> Hom(K,O_X); Tag 01HV for exact tilde"
+ "id": "lem-sc-affine-koszul-coefficient-hom-coordinates",
+ "kind": "statement",
+ "title": "Underived affine Koszul Hom coefficient square",
+ "statement": "Let i:Z -> Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], U an affine open, A=Gamma(Y,U), I=ker(i)(U) [def-sbc-closed-immersion-ideal-sheaf], n,m natural numbers, and f:Fin n -> A ANY sequence. Let T be tilde followed by chart transport [lem-weil-pbc-spec-module-tilde-sections], E the termwise T-image of K_A(f) extended to nonpositive integer cochain degrees [def-weil-pbc-koszul-complex], R restriction to U, and B=i_*O_Z. Let a:O_Y -> B be the actual adjunction-unit coefficient map, as specified by ha. Then there are isomorphisms from H^m(Hom_U(E,(R O_Y)[0])) and H^m(Hom_U(E,(R B)[0])) [def-pur-hom-complex] to T of the natural-number dual Koszul homology with A and A/I coefficients, respectively [def-sc-koszul-dual-complex, new-j3-koszul-quotient-coefficient-complex], intertwining the map induced by R(a) with T of the recorded homology coefficient reduction. No Koszul regularity, generation of I by f, resolution, or derived category is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-koszul-complex",
+  "def-pur-hom-complex",
+  "def-sc-koszul-dual-complex",
+  "new-j3-koszul-quotient-coefficient-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, proof, displayed morphism Hom(K,O_Y) -> Hom(K,O_X); Tag 01HV for exact tilde"
+ },
+ "proof": [
+  {
+   "text": "Identify the restricted coefficient morphism with A → A/I by the affine closed-immersion coefficient square.",
+   "uses": [
+    "lem-sc-affine-closed-immersion-coefficient-square"
+   ],
+   "elementary": false
   },
-  "proof": [
-    {
-      "text": "Identify the restricted pushforward B with T(A/I) through the affine quotient presentation. Construct the identification on basic opens by the localized quotient map; this identifies the specified adjunction unit with A_g -> (A/I)_g, including its module action.",
-      "uses": [
-        "lem-sc-affine-quotient-restricted-iso"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Hom into a coefficient single complex is the signed sheaf dual. Its degree k factor is Hom(E^(-k),coefficient). The exterior-power basis identifies these internal Homs with tilde of module Hom with the same coefficient. Localization of values commutes with the quotient map, so these identifications are natural for a.",
-      "uses": [
-        "lem-sc-hom-complex-to-single",
-        "lem-weil-pbc-exterior-power-free-basis"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The target differential is zero, and the source contribution is -(-1)^k times precomposition, exactly (-1)^(k+1) times the Koszul boundary. Thus the identifications give a commuting square of integer cochain complexes with the extension of the two recorded dual complexes and their reduction map.",
-      "uses": [
-        "new-j3-koszul-quotient-coefficient-complex"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Exactness of tilde and chart transport gives natural homology isomorphisms for this square. Compose with the extension homology isomorphisms at m and use their naturality to get the asserted square. The empty sequence, zero ring, empty chart and m>n require no exception.",
-      "uses": [
-        "lem-sc-tilde-preserves-finite-limits"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-affine-quotient-restricted-iso",
-    "lem-sc-hom-complex-to-single",
-    "lem-weil-pbc-exterior-power-free-basis",
-    "new-j3-koszul-quotient-coefficient-complex",
-    "lem-sc-tilde-preserves-finite-limits"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "agent": "E1",
-    "group": "E1",
-    "date": "2026-10-13",
-    "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-    "place": "Lemma 48.15.5, proof, displayed morphism Hom(K,O_Y) -> Hom(K,O_X); Tag 01HV for exact tilde",
-    "note": "Stage-3 decomposition into a generic natural derived comparison and a purely underived coordinate computation."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Sheafifying Hom from a finite free Koszul complex commutes naturally with quotient coefficients",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-13",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Koszul Hom complex on affine scheme coefficient reduction modulo an ideal commutes with sheafification",
-      "results": "8 hits: Scheme.IdealSheafData.isLocalization_away, ideal_le_ker_glueDataObjι, subschemeObjIso, subschemeι_app, glueDataObjι_ι, glueDataObjHom, ker_glueDataObjι_appTop, Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp.",
-      "date": "2026-10-13",
-      "verdict": "No Hom-complex coefficient square."
-    },
-    {
-      "tool": "loogle",
-      "query": "HomologicalComplex.extendHomologyIso",
-      "results": "11 hits, including extendHomologyIso and extendHomologyIso_hom_naturality. These handle the final index-extension comparison only.",
-      "date": "2026-10-13",
-      "verdict": "Useful components, no assembled sheaf coefficient square."
-    },
-    {
-      "tool": "grep",
-      "query": "koszul.*(Hom|hom|tilde)|homComplex.*tilde|tilde.*homComplex",
-      "results": "Local AffineKoszulHomComplexIso and AffineKoszulHomCoordinates compute only structure-sheaf coefficients. AffineQuotientRestrictedIso gives an objectwise quotient identification. None gives the quotient coefficient square. Blueprint search for Koszul coefficient found no match.",
-      "date": "2026-10-13",
-      "verdict": "No existing exact match."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel",
-    "date": "2026-10-13",
-    "group": "E1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "new-j3-koszul-ext-coefficient-stalk-model",
-      "place": "Underived finite free Hom coefficient calculation and exact homology transport in the proof of the affine coefficient square",
-      "via": [
-        "new-k1-koszul-ext-coefficient-affine-model",
-        "new-j3-koszul-ext-coefficient-stalk-model",
-        "lem-sc-koszul-ext-coefficient-stalk-iso",
-        "lem-sc-koszul-ext-constant-rank-top",
-        "lem-sc-koszul-regular-immersion-ext-pullback",
-        "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
-        "lem-sc-koszul-regular-immersion-ext-sheaf",
-        "lem-sc-koszul-regular-immersion-derived-hom",
-        "lem-sc-smooth-proper-diagonal-koszul-dual",
-        "lem-sc-smooth-proper-relative-dualizing-general"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates",
-    "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulCoefficientHomCoordinates.lean",
-    "declaration": "AlgebraicGeometry.affine_koszul_coefficient_hom_coordinates",
-    "statement": "theorem affine_koszul_coefficient_hom_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.affineOpens) (n m : ℕ) (f : Fin n → Γ(Y, U.1))\n    (a : SheafOfModules.unit Y.ringCatSheaf ⟶\n      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫\n      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let R := Scheme.Modules.restrictFunctor U.1.ι\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n    let H := (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)\n    let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules\n      (ComplexShape.up ℤ) (m : ℤ)\n    let P := (ExteriorAlgebra.koszulDualComplex A n f).homology m\n    let Q := (ExteriorAlgebra.koszulQuotientDualComplex A (i.ker.ideal U) n f).homology m\n    let q := HomologicalComplex.homologyMap\n      (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m\n    ∃ (eF : D.obj (H.obj (S.obj (R.obj (SheafOfModules.unit Y.ringCatSheaf)))) ≅ T.obj P)\n      (eG : D.obj (H.obj (S.obj (R.obj B))) ≅ T.obj Q),\n      D.map (H.map (S.map (R.map a))) ≫ eG.hom = eF.hom ≫ T.map q",
-    "branch": "sheaf-dag",
-    "by": "E1",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "E1",
-    "result": "pass",
-    "landing": "20261013T130750-L-3986173",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "E1",
-    "result": "pass",
-    "landing": "20261013T130750-L-3986173",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Use the proved homology coefficient square for the finite free Koszul complex. Map the first square through single, Hom and homology, and compose vertically with the homology coefficient square. The proved generic transport_coefficient_square gives the isomorphisms and the required morphism equality. Specialize the auxiliary Hom functor parameter by reflexivity.",
+   "uses": [
+    "lem-sc-affine-koszul-hom-coefficient-homology-square"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-closed-immersion-coefficient-square",
+  "lem-sc-affine-koszul-hom-coefficient-homology-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "D2",
+  "group": "D2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "displayed Hom-complex map and Tag 01HV exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafifying Hom from a finite free Koszul complex commutes naturally with quotient coefficients",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul Hom complex on affine scheme coefficient reduction modulo an ideal commutes with sheafification",
+   "results": "8 hits: Scheme.IdealSheafData.isLocalization_away, ideal_le_ker_glueDataObjι, subschemeObjIso, subschemeι_app, glueDataObjι_ι, glueDataObjHom, ker_glueDataObjι_appTop, Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp.",
+   "date": "2026-10-13",
+   "verdict": "No Hom-complex coefficient square."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendHomologyIso",
+   "results": "11 hits, including extendHomologyIso and extendHomologyIso_hom_naturality. These handle the final index-extension comparison only.",
+   "date": "2026-10-13",
+   "verdict": "Useful components, no assembled sheaf coefficient square."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(Hom|hom|tilde)|homComplex.*tilde|tilde.*homComplex",
+   "results": "Local AffineKoszulHomComplexIso and AffineKoszulHomCoordinates compute only structure-sheaf coefficients. AffineQuotientRestrictedIso gives an objectwise quotient identification. None gives the quotient coefficient square. Blueprint search for Koszul coefficient found no match.",
+   "date": "2026-10-13",
+   "verdict": "No existing exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "Underived finite free Hom coefficient calculation and exact homology transport in the proof of the affine coefficient square",
+   "via": [
+    "new-k1-koszul-ext-coefficient-affine-model",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulCoefficientHomCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affine_koszul_coefficient_hom_coordinates",
+  "statement": "theorem affine_koszul_coefficient_hom_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.affineOpens) (n m : ℕ) (f : Fin n → Γ(Y, U.1))\n    (a : SheafOfModules.unit Y.ringCatSheaf ⟶\n      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫\n      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let R := Scheme.Modules.restrictFunctor U.1.ι\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n    let H := (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)\n    let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules\n      (ComplexShape.up ℤ) (m : ℤ)\n    let P := (ExteriorAlgebra.koszulDualComplex A n f).homology m\n    let Q := (ExteriorAlgebra.koszulQuotientDualComplex A (i.ker.ideal U) n f).homology m\n    let q := HomologicalComplex.homologyMap\n      (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m\n    ∃ (eF : D.obj (H.obj (S.obj (R.obj (SheafOfModules.unit Y.ringCatSheaf)))) ≅ T.obj P)\n      (eG : D.obj (H.obj (S.obj (R.obj B))) ≅ T.obj Q),\n      D.map (H.map (S.map (R.map a))) ≫ eG.hom = eF.hom ≫ T.map q",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130750-L-3986173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T145116-L-694762",
+  "kind": "interface"
+ }
 }
