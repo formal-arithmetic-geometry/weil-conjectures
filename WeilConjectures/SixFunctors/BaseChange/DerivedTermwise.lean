@@ -29,24 +29,13 @@ namespace AlgebraicGeometry
 
 open Etale
 
-/-- A morphism in the homotopy category between K-injective complexes is an isomorphism as soon
-as its image in the derived category is. -/
-private lemma isIso_of_isIso_Qh_map {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
-    {I L : CochainComplex C ℤ} [I.IsKInjective] [L.IsKInjective]
-    (f : (HomotopyCategory.quotient C (.up ℤ)).obj I ⟶
-      (HomotopyCategory.quotient C (.up ℤ)).obj L)
-    [IsIso (DerivedCategory.Qh.map f)] : IsIso f := by
-  obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective _ I).2
-    (inv (DerivedCategory.Qh.map f))
-  refine ⟨g, (CochainComplex.IsKInjective.Qh_map_bijective _ I).1 ?_,
-    (CochainComplex.IsKInjective.Qh_map_bijective _ L).1 ?_⟩ <;> simp [hg]
-
 /-- **The derived base change map on K-injective representatives.** Let `K` be a bounded below
 complex of étale sheaves on `X`, isomorphic in `D(X)` to a K-injective complex `I` via `s`, and
-let `j : g'^* I ⟶ J` be a quasi-isomorphism to a K-injective complex `J` on `X'`. The
-comparisons `h = (h₁, h₂)` of `I` and `J` with the chosen injective representatives `P` of `K`
-and `P'` of `g'^* K` are unique, and they are isomorphisms in the homotopy categories. Through
-the induced isomorphisms `χ : f_* I ≅ R f_* K` and `χ' : f'_* J ≅ R f'_* g'^* K`, the square
+let `j : g'^* I ⟶ J` be a quasi-isomorphism to a K-injective complex `J` on `X'`. Let
+`h = (h₁, h₂)` be the canonical comparisons of `I` and `J` with the chosen injective
+representatives `P` of `K` and `P'` of `g'^* K` (the homotopy classes compatible with `s` and
+with `j`). Through the induced identifications `χ : f_* I ⟶ R f_* K` and
+`χ' : f'_* J ⟶ R f'_* g'^* K`, the square
 ```
   g^* f_* I ------e------> f'_* J
       |                      |
@@ -91,9 +80,6 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise
     let ex₀ := (NatTrans.mapHomologicalComplex
       (Etale.baseChangeMap B sq.toCommSq) (.up ℤ)).app I
     let e := ex₀ ≫ (F'.mapHomologicalComplex (.up ℤ)).map j
-    (∃! h : ((q.obj I ⟶ P.obj) × (q'.obj J ⟶ P'.obj)),
-      s.hom ≫ DerivedCategory.Qh.map h.1 = ρ ∧
-      t ≫ DerivedCategory.Qh.map h.2 = ρ') ∧
     ∀ h : ((q.obj I ⟶ P.obj) × (q'.obj J ⟶ P'.obj)),
       s.hom ≫ DerivedCategory.Qh.map h.1 = ρ →
       t ≫ DerivedCategory.Qh.map h.2 = ρ' →
@@ -105,48 +91,11 @@ lemma Etale.derivedBaseChangeMapPlus_eq_termwise
           F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))
       let σsrc := G.mapDerivedCategoryFactorsh.inv.app
         ((F.mapHomotopyCategory (.up ℤ)).obj (q.obj I)) ≫ G.mapDerivedCategory.map χ
-      IsIso h.1 ∧ IsIso h.2 ∧ IsIso χ ∧ IsIso χ' ∧ IsIso σsrc ∧
       σsrc ≫ DerivedCategory.Plus.ι.map
           ((Etale.derivedBaseChangeMapPlus B sq.toCommSq).app K) =
         DerivedCategory.Qh.map (qY.map e) ≫ χ' := by
-  intro B C C' q q' qY F F' G G' E E' K' P P' ρ ρ' t ex₀ e
-  have hP : CochainComplex.IsKInjective P.obj.as := by dsimp only [P]; infer_instance
+  intro B C C' q q' qY F F' G G' E E' K' P P' ρ ρ' t ex₀ e h h₁ h₂ χ χ' σsrc
   have hP' : CochainComplex.IsKInjective P'.obj.as := by dsimp only [P']; infer_instance
-  have bij₁ := CochainComplex.IsKInjective.Qh_map_bijective (q.obj I) P.obj.as
-  have bij₂ := CochainComplex.IsKInjective.Qh_map_bijective (q'.obj J) P'.obj.as
-  have : IsIso (DerivedCategory.Qh.map (q'.map j)) :=
-    (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C') j).2 inferInstance
-  have : IsIso t := by dsimp only [t]; infer_instance
-  refine ⟨?_, fun h h₁ h₂ ↦ ?_⟩
-  · obtain ⟨a, ha⟩ := bij₁.2 (inv s.hom ≫ ρ)
-    obtain ⟨b, hb⟩ := bij₂.2 (inv t ≫ ρ')
-    refine ⟨(a, b), ⟨?_, ?_⟩, fun h ⟨h₁, h₂⟩ ↦
-      Prod.ext (bij₁.1 ?_) (bij₂.1 ?_)⟩
-    · simp [ha]
-    · simp [hb]
-    · rw [ha, ← h₁]; simp
-    · rw [hb, ← h₂]; simp
-  intro χ χ' σsrc
-  have : IsIso ρ := by dsimp only [ρ]; infer_instance
-  have : IsIso ρ' := by dsimp only [ρ']; infer_instance
-  have : IsIso h.1 := by
-    have : IsIso (DerivedCategory.Qh.map h.1) := by
-      rw [show DerivedCategory.Qh.map h.1 = inv s.hom ≫ ρ by rw [← h₁]; simp]
-      infer_instance
-    exact isIso_of_isIso_Qh_map (I := I) (L := P.obj.as) h.1
-  have : IsIso h.2 := by
-    have : IsIso (DerivedCategory.Qh.map h.2) := by
-      rw [show DerivedCategory.Qh.map h.2 = inv t ≫ ρ' by rw [← h₂]; simp]
-      infer_instance
-    exact isIso_of_isIso_Qh_map (I := J) (L := P'.obj.as) h.2
-  have : IsIso χ := by
-    have : IsIso (F.rightDerivedFunctorPlusUnit.app P) := by dsimp only [P]; infer_instance
-    dsimp only [χ]; infer_instance
-  have : IsIso χ' := by
-    have : IsIso (F'.rightDerivedFunctorPlusUnit.app P') := by dsimp only [P']; infer_instance
-    dsimp only [χ']; infer_instance
-  have : IsIso σsrc := by dsimp only [σsrc]; infer_instance
-  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
   -- the comparison `φ : g'^* P ⟶ P'` of the injective representatives of `g'^* K`
   let c := E.counitIso.hom.app K
   let c' := E'.counitIso.hom.app K'
