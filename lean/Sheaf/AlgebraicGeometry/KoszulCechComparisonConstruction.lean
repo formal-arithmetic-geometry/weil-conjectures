@@ -78,14 +78,17 @@ Proof: a nonempty finite set has positive cardinality, so truncated subtraction 
 card(J)-1+1 = card(J). -/
 theorem koszulCech_basis_card (J : Finset (Fin r)) (hJ : J.Nonempty) :
     J.card = J.card - 1 + 1 := by
-  sorry
+  have h : 0 < J.card := Finset.card_pos.mpr hJ
+  omega
 
 /-- The extended tail degree attached to the subset J.
 Source: Stacks, Tag 08D0 (blueprint: def-sc-koszul-cech-comparison-construction).
 Proof: card(J)>0, so negating card(J)-1 gives 1-card(J) in integer degrees. -/
 theorem koszulCech_basis_degree (J : Finset (Fin r)) (hJ : J.Nonempty) :
     ComplexShape.embeddingDownNat.f (J.card - 1) = 1 - (J.card : ℤ) := by
-  sorry
+  simp only [ComplexShape.embeddingDownNat_f]
+  have h : 0 < J.card := Finset.card_pos.mpr hJ
+  omega
 
 /-- The ordered exterior basis vector in the Koszul tail, transported by extension.
 Source: Stacks, Tag 08D0 (blueprint: def-sc-koszul-cech-comparison-construction). -/
@@ -101,7 +104,7 @@ Source: Stacks, Tag 08D1 (blueprint: def-sc-koszul-cech-comparison-construction)
 Proof: rearrange addition in ℤ. -/
 theorem koszulCech_evaluation_degree (J : Finset (Fin r)) (n : ℤ) :
     1 - (J.card : ℤ) + n = n + 1 - (J.card : ℤ) := by
-  sorry
+  ring
 
 variable (F : CochainComplex
   (SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
