@@ -2398,6 +2398,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerSh
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Projection
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.ProjectionPullback
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Finiteness
