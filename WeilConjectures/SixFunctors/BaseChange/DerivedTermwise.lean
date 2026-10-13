@@ -35,7 +35,7 @@ comparison maps are unique in the homotopy category and are homotopy equivalence
 
 - `AlgebraicGeometry.Etale.existsUnique_derivedBaseChangeMapPlus_comparison`: the comparison
   maps `I ⟶ P` and `J ⟶ P'` exist and are unique.
-- `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_termwise`: the comparison maps are
+- `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_eq_termwise`: the comparison maps are
   isomorphisms, and the derived base change map on `K` agrees with the termwise one.
 
 (blueprint: `lem-weil-pbc-derived-exchange-termwise`)
@@ -117,7 +117,7 @@ identifications `χ : f_* I ≅ Rf_* K`, `χ' : f'_* J ≅ Rf'_* (g'^* K)` and
   g^* Rf_* K --(base change)--> Rf'_* g'^* K
 ```
 commutes. (blueprint: `lem-weil-pbc-derived-exchange-termwise`) -/
-lemma Etale.derivedBaseChangeMapPlus_termwise (sq : CommSq g' f' f g)
+lemma Etale.derivedBaseChangeMapPlus_eq_termwise (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A))
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [I.IsKInjective]
     (s : DerivedCategory.Plus.ι.obj K ≅
