@@ -26,41 +26,53 @@
  ],
  "proof": [
   {
-   "text": "Pseudo-coherence is local and passes to open subsets by [def-pur-pseudo-coherent-complex], so it suffices to work on an affine open $U=\\operatorname{Spec}(R)$ of $X$, where $K|_U\\cong L|_U\\oplus M|_U$ and $K|_U$ is pseudo-coherent. First, all three objects lie in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$: locally $K|_U$ is quasi-isomorphic to a bounded-above complex of finite free modules, whose cohomology sheaves are quasi-coherent, so each $H^i(K|_U)$ is quasi-coherent; $H^i(L|_U)$ and $H^i(M|_U)$ are direct summands of $H^i(K|_U)$, i.e. images of idempotent endomorphisms of a quasi-coherent module, hence quasi-coherent (elementary). By the equivalence $D(R)\\to D_{\\mathrm{QCoh}}(\\mathcal O_U)$ of [lem-pc-affine-qcoh-derived-equivalence] choose complexes $P^\\bullet,Q^\\bullet$ of $R$-modules with $L|_U\\cong\\widetilde{P^\\bullet}$ and $M|_U\\cong\\widetilde{Q^\\bullet}$; as the functor is additive, $K|_U\\cong\\widetilde{P^\\bullet\\oplus Q^\\bullet}$. By [lem-pc-affine-pseudo-coherent-criterion] applied to $P^\\bullet\\oplus Q^\\bullet$, the complex $P^\\bullet\\oplus Q^\\bullet$ is quasi-isomorphic to a bounded-above complex of finite free $R$-modules. The last clause of [lem-pc-ring-pseudo-coherent-summand] gives the same for $P^\\bullet$ and $Q^\\bullet$, and [lem-pc-affine-pseudo-coherent-criterion] again shows that $L|_U$ and $M|_U$ are pseudo-coherent.",
-   "uses": [
-    "def-pur-pseudo-coherent-complex",
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-pseudo-coherent-criterion",
-    "lem-pc-ring-pseudo-coherent-summand"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CE, reduction from the scheme statement to affine module complexes"
-   }
-  },
-  {
-   "text": "The bounded-above finite-free representatives obtained on each affine U witness that L and M are pseudo-coherent on X by the local definition [def-pur-pseudo-coherent-complex]. The argument applies independently to both summands, and the zero-summand cases are immediate.",
+   "text": "For each point x, unpack [def-pur-pseudo-coherent-complex] to get an open U and a bounded-above finite-free complex P representing K there. Refine to an affine V containing x. Apply overMap termwise: map_isZero preserves the upper support bound, and sigmaComparison with overMapUnitIso preserves finite-free terms. The mapDerivedCategoryNatIso, mapDerivedCategoryCompIso and mapDerivedCategoryFactors comparisons give the representing isomorphism on V.",
    "uses": [
     "def-pur-pseudo-coherent-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CE, conclusion of lemma-summands-pseudo-coherent"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use the actual affine sheafification functor F_V recorded in [lem-pc-affine-perfect-module-model]. Restriction along isoSpec is an equivalence, overEquiv.inverse is an equivalence, and tilde is fully faithful [lem-weil-pbc-affine-tilde-gamma-adjunction], so F_V is fully faithful. For every degree choose the explicit finite free module of the given rank; [lem-weil-pbc-spec-tilde-free-module] and transport of the unit identify its sheafification with P in that degree. Lift each differential by F_V.preimage, and prove the shape and square-zero equations by F_V.map_injective. These component isomorphisms give an actual complex isomorphism F_V(A) ≅ P. Full faithfulness also reflects the zero terms above the bound; A is bounded above and finite free.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map K ≅ L ⊕ M through derived open restriction and its mapBiprod isomorphism. Combine with the model from the preceding step and apply [lem-pc-affine-derived-summand-models] to obtain a sheafification functor G, module preimages C,D of the two restrictions, and Q(A) ≅ C ⊕ D. The explicit A witnesses [def-pc-ring-pseudo-coherent-complex] for C ⊕ D. Apply the final clause of [lem-pc-ring-pseudo-coherent-summand] to get finite-free bounded-above models of C and D.",
+   "uses": [
+    "lem-pc-affine-derived-summand-models",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-ring-pseudo-coherent-summand"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify each resulting model termwise using F_V. map_isZero gives the upper bound; reindex a finite chosen module basis by ULift(Fin r) and use [lem-weil-pbc-spec-tilde-free-module] and the affine free-module comparison for its terms. Compose the summand-preimage isomorphism with G.mapIso of the model isomorphism and the natural comparison at that complex. This is the required local witness for [def-pur-pseudo-coherent-complex]. Projecting the two witnesses at each x gives the conclusion. Empty X is vacuous and zero summands require no special hypotheses.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-pseudo-coherent-complex",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-perfect-module-model",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-pc-affine-derived-summand-models",
+  "def-pc-ring-pseudo-coherent-complex",
   "lem-pc-ring-pseudo-coherent-summand"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08CE, with the affine module lemma Tag 064X"
+  "place": "Tag 08CE, affine reduction via the ring statement Tag 064X; explicit affine finite-free construction and counit-retract lifting avoid the global affine pseudo-coherence criterion",
+  "group": "N3"
  },
  "mathlib_searches": [
   {
@@ -152,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T100041-L-2472796",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
