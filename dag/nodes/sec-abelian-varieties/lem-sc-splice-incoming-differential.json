@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-splice-incoming-differential",
+ "kind": "statement",
+ "title": "Splicing a prescribed differential and comparison into a lower-supported complex",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], $F:\\mathcal A\\to\\mathcal B$ an additive functor, $C,E$ integer-indexed cochain complexes [def-weil-abstract-derived-category], and $q:F(C)\\to E$ a morphism. Let $n$ be an integer and assume $C^i$ is zero for every $i<n$. Given $M\\in\\mathcal A$, a map $d:M\\to C^n$ with $dd_C^n=0$ and $M\\to C^n\\to C^{n+1}$ exact, an isomorphism $e:F(M)\\cong E^{n-1}$, and $F(d)q^n=e d_E^{n-1}$, there exist a cochain complex $D$, a morphism $f:C\\to D$ and $q':F(D)\\to E$. Their properties are: $D^{n-1}=M$ and $D^i=C^i$ for every other $i$; $f^i$ is an isomorphism for $i\\ge n$; $F(f)q'=q$; $(q')^{n-1}$ is an isomorphism; for $i\\ge n$, if $q^i$ is an isomorphism then $(q')^i$ is one; $D$ is exact at $n$; and for every $i>n$, exactness of $C$ at $i$ implies exactness of $D$ at $i$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC9, lemma-lift-acyclic-complex, proof, second paragraph, extension of the diagram by the constructed next term; read at https://stacks.math.columbia.edu/tag/0BC9"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Set k=n-1 and replace only C^k by M. Use the prescribed differential out of M and zero into it; transport every other old differential along the term equalities. CochainComplex.of constructs D. The square-zero equation is the supplied equation in degree k, the old equation elsewhere, or a composite with zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct f with zero component at k and identity transports elsewhere, using ofHom. The lower support makes its special commutative squares automatic. Construct q' with e at k and transported q components elsewhere. The supplied square proves commutativity at k, the preceding square has zero source, and all other squares are those of q. Verify F(f)q'=q degreewise, and infer the comparison and inclusion isomorphisms from their component formulas.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply exactAt_iff' and transport exactness at n through an explicit ShortComplex.isoMk from the three changed terms to M -> C^n -> C^(n+1). For i>n construct an isomorphism between the old and new three-term short complexes; exact_iff_of_iso transfers exactness. The term formula is definitional.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC9, lemma-lift-acyclic-complex, proof, second paragraph, extension of the diagram by the constructed next term; detailed Lean proof written by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "splice a prescribed differential into a cochain complex with a compatible comparison",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "splice a morphism into the leftmost term of a cochain complex with an additive comparison functor",
+   "results": "CochainComplex.HomComplex.Cochain.fromSingleMk, CochainComplex.HomComplex.Cochain.toSingleMk, CochainComplex.HomComplex.Cochain.fromSingleMk_v, CochainComplex.ConnectData.map_f, CochainComplex.mappingCone.descCochain, CochainComplex.ofHom, CochainComplex.ConnectData.map, CochainComplex.HomComplex.Cochain.ofHoms",
+   "verdict": "no exact match; use the listed Mathlib building blocks",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "splittingOfProjective|biprodIsoProd|liftFromProjective|abbrev ofHom",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Category/BoolRing.lean",
+   "verdict": "no exact match; use the listed Mathlib building blocks",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AcyclicLiftTailExtension",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BC9, lemma-lift-acyclic-complex, proof, second paragraph, extension of the diagram by the constructed next term",
+   "via": [
+    "lem-sc-acyclic-lift-tail-extension",
+    "lem-sc-complex-lift-acyclic-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SpliceIncomingDifferential",
+  "file": "lean/Sheaf/Algebra/Homology/SpliceIncomingDifferential.lean",
+  "declaration": "CochainComplex.exists_spliceIncomingDifferential",
+  "statement": "theorem exists_spliceIncomingDifferential\n    {A : Type u₁} [Category.{v₁} A] [Abelian A]\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    (F : A ⥤ B) [F.Additive]\n    (C : CochainComplex A ℤ) (E : CochainComplex B ℤ)\n    (q : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj C ⟶ E)\n    (n : ℤ) (hlower : C.IsStrictlyGE n)\n    (M : A) (d : M ⟶ C.X n) (hd : d ≫ C.d n (n + 1) = 0)\n    (hexact : (ShortComplex.mk d (C.d n (n + 1)) hd).Exact)\n    (e : F.obj M ≅ E.X (n - 1))\n    (hcomm : F.map d ≫ q.f n = e.hom ≫ E.d (n - 1) n) :\n    ∃ D : CochainComplex A ℤ,\n      ∃ f : C ⟶ D,\n        ∃ q' : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj D ⟶ E,\n          (∀ i, D.X i = if i = n - 1 then M else C.X i) ∧\n          (∀ i, n ≤ i → IsIso (f.f i)) ∧\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map f ≫ q' = q ∧\n          IsIso (q'.f (n - 1)) ∧\n          (∀ i, n ≤ i → IsIso (q.f i) → IsIso (q'.f i)) ∧\n          D.ExactAt n ∧\n          (∀ i, n < i → C.ExactAt i → D.ExactAt i)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T100216-L-2501788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T100216-L-2501788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-acyclic-lift-split-cycles",
+ "kind": "statement",
+ "title": "Split cycles of a finite projective exact tail",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, and $\\mathcal P$ a class of $R$-modules whose members are projective and such that $M_1,M_{12}\\in\\mathcal P$ and $M_{12}\\cong M_1\\oplus M_2$ imply $M_2\\in\\mathcal P$. Let $C$ be an integer-indexed cochain complex in the abelian category of $R$-modules [def-weil-abstract-derived-category], zero in degrees greater than an integer $b$, with all terms in $\\mathcal P$, and exact in degrees greater than an integer $n$. There exist an $R$-module $Z\\in\\mathcal P$ and a monomorphism $\\iota:Z\\to C^n$ with $\\iota d^n=0$ such that $Z\\to C^n\\to C^{n+1}$ is exact. Moreover, writing $F=(R/I)\\otimes_R-$, the map $F\\iota$ is monic and the sequence $FZ\\to FC^n\\to FC^{n+1}$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC9, lemma-lift-acyclic-complex, proof, first paragraph: splitting the finite projective tail; read at https://stacks.math.columbia.edu/tag/0BC9"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the summand condition with the explicit zero module PUnit to prove zero membership and invariance under isomorphism, using LinearEquiv.prodUnique and prodComm.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For every i construct the cycle sequence Z^i -> C^i -> Z^(i+1). The kernel universal property and the monic inclusion of the next cycles make it exact. Exactness at i+1 makes its outgoing arrow epic via epi_toCycles and cyclesIsoSc'. Descend by natural-number induction on an upper-bound distance. At distance zero iCyclesIso identifies cycles with the term. At the successor split the short exact sequence with splittingOfProjective, use isoBinaryBiproduct, biprod.braiding and ModuleCat.biprodIsoProd, and apply the summand hypothesis.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "At n and n+1 obtain the two splittings. Their images under extension of scalars remain splittings by ShortComplex.Splitting.map. Thus the mapped inclusion at n+1 is monic. Transfer exactness of the mapped split cycle sequence at n to the sequence with outgoing arrow F(d^n), using exact_iff_of_epi_of_isIso_of_mono. Return the cycle object and its original and mapped kernel properties.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC9, lemma-lift-acyclic-complex, proof, first paragraph: splitting the finite projective tail; detailed Lean proof written by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "split cycles of a bounded above exact complex of projective modules",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cycles of a bounded above projective complex exact above its left endpoint are projective direct summands",
+   "results": "CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.hasHomology, CategoryTheory.ProjectiveResolution.complex_exactAt_succ, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.projective",
+   "verdict": "no exact match; use the listed Mathlib building blocks",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "splittingOfProjective|biprodIsoProd|liftFromProjective|abbrev ofHom",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Category/BoolRing.lean",
+   "verdict": "no exact match; use the listed Mathlib building blocks",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AcyclicLiftTailExtension",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BC9, lemma-lift-acyclic-complex, proof, first paragraph: splitting the finite projective tail",
+   "via": [
+    "lem-sc-acyclic-lift-tail-extension",
+    "lem-sc-complex-lift-acyclic-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AcyclicLiftSplitCycles",
+  "file": "lean/Sheaf/Algebra/Homology/AcyclicLiftSplitCycles.lean",
+  "declaration": "CochainComplex.exists_acyclicLift_splitCycles",
+  "statement": "theorem exists_acyclicLift_splitCycles\n    (R : Type u) [CommRing R] (I : Ideal R)\n    (P : ModuleCat.{max u v} R → Prop)\n    (hprojective : ∀ M, P M → Projective M)\n    (hsummand : ∀ M₁ M₂ M₁₂ : ModuleCat.{max u v} R,\n      P M₁ → P M₁₂ → Nonempty (M₁₂ ≅ ModuleCat.of R (M₁ × M₂)) → P M₂)\n    (C : CochainComplex (ModuleCat.{max u v} R) ℤ)\n    (b n : ℤ) (hupper : C.IsStrictlyLE b)\n    (hP : ∀ i, P (C.X i)) (hexact : ∀ i, n < i → C.ExactAt i) :\n    ∃ Z : ModuleCat.{max u v} R, P Z ∧\n      ∃ ι : Z ⟶ C.X n, ∃ hz : ι ≫ C.d n (n + 1) = 0,\n        ∃ hzF : (ModuleCat.extendScalars (Ideal.Quotient.mk I)).map ι ≫\n          (ModuleCat.extendScalars (Ideal.Quotient.mk I)).map (C.d n (n + 1)) = 0,\n          Mono ι ∧ (ShortComplex.mk ι (C.d n (n + 1)) hz).Exact ∧\n          Mono ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map ι) ∧\n          (ShortComplex.mk\n            ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map ι)\n            ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map (C.d n (n + 1)))\n            hzF).Exact",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T100216-L-2501788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T100216-L-2501788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
