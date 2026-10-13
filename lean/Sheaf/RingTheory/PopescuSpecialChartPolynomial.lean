@@ -6,6 +6,8 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
+import Sheaf.RingTheory.PopescuSpecialChartInjective
+import Sheaf.RingTheory.PopescuSpecialChartSurjective
 
 /-! # Polynomial model of a prepared lifting chart
 
@@ -56,6 +58,11 @@ theorem popescu_special_chart_polynomial (R : Type a) (Cbar : Type c)
     Nonempty (MvPolynomial (d.E k)
       (Localization.Away (Ideal.Quotient.mk
         (Ideal.span ({algebraMap R Cbar π} : Set Cbar)) (d.ε (d.reduced (d.a k))))) ≃ₐ[C₀]
-      Localization.Away (c (d.ε (d.reduced (d.a k))))) := by sorry
+      Localization.Away (c (d.ε (d.reduced (d.a k))))) := by
+  let C₀ := Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar)
+  let := cmod.toAlgebra
+  exact ⟨AlgEquiv.ofBijective (popescu_special_chart_map R Cbar π d c cmod hcmod k)
+    ⟨popescu_special_chart_map_injective R Cbar π d hd c cmod hc hcmod k,
+      popescu_special_chart_map_surjective R Cbar π d c cmod hc hcmod k⟩⟩
 
 end Algebra
