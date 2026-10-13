@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-flat-affine-global-hom-comparison",
+ "kind": "statement",
+ "title": "Flat affine scalar-extension comparison for global Hom",
+ "statement": "Let $X,Y,Y\\prime$ be schemes [def-weil-pbc-scheme-conventions], with $X$ quasi-compact quasi-separated and $Y,Y\\prime$ affine. Let $f:X\\to Y$ be flat [def-weil-flat-morphism] and $g:Y\\prime\\to Y$. Set $X\\prime=X\\times_Y Y\\prime$ [def-pc-fibre-product]. For perfect $M$ [def-pc-perfect-complex] and $N\\in D_{QCoh}(X)$ [def-pc-derived-category], the canonical scalar-extension transpose $L(-\\otimes_{\\Gamma(Y)}\\Gamma(Y\\prime))RHom_X(M,N)\\to RHom_{X\\prime}(Lg_X^*M,Lg_X^*N)$ [def-pc-global-derived-rhom, def-pc-global-hom-pullback-comparison] is invertible. The transpose uses the evaluation-mate pullback comparison, normalized Leray isomorphism, and scalar-square identification. The module and sheaf localization universes may be chosen independently.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AA7, lemma-affine-morphism-and-hom-out-of-perfect, case (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom",
+  "def-weil-flat-morphism",
+  "def-pc-perfect-complex",
+  "def-pc-fibre-product",
+  "def-pc-global-hom-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine bases with spectra via the canonical affine isomorphisms. Flatness gives stalkwise Tor independence. Apply the affine Hom-out-of-perfect theorem.",
+   "uses": [
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the extension/restriction adjunction through the global-ring isomorphisms. The normalized Leray units and canonical tensor comparison, normalized to the shared SingleComplexBaseChange.counit rather than an existential model counit, identify the resulting transpose with the displayed comparison.",
+   "uses": [
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-sc-mixed-global-extension-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-morphism-hom-out-of-perfect",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-13",
+  "note": "Flat affine Hom-out-of-perfect argument with independent localization universes. Repair H5/E4 replaces the raw model tensorator by a canonical-comparison/K-flat invertibility proof normalized to the shared counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of global derived Hom from a perfect complex commutes with flat affine base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars global RHom base change comparison for flat morphism and perfect complexes",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; CategoryTheory.Abelian.Ext.mapExactFunctor; comonadicExtendScalars; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; Module.Flat.isBaseChange",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "GlobalDerivedHom.*shift|global.*[Hh]om.*[Ee]quiv",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\"",
+   "results": "CategoryTheory.ShortComplex.leftHomologyFunctor; CategoryTheory.ShortComplex.leftHomologyFunctor_obj; CategoryTheory.ShortComplex.leftHomologyFunctor_map; CategoryTheory.ShortComplex.rightHomologyFunctor; CategoryTheory.ShortComplex.rightHomologyFunctor_obj; CategoryTheory.ShortComplex.rightHomologyFunctor_map; CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso; CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso; no global RHom base-change or shifted sheaf-Hom statement",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction proper pushforward perfect complex commutes base change global Hom comparison",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper base change auxiliary argument, Tag 0AA8: Tag 0AA7, lemma-affine-morphism-and-hom-out-of-perfect, case (1)",
+   "via": [
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatAffineGlobalHomComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatAffineGlobalHomComparison.lean",
+  "declaration": "AlgebraicGeometry.mixedAffineGlobalHomBaseChangeMap_isIso",
+  "statement": "theorem mixedAffineGlobalHomBaseChangeMap_isIso\n    {X Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y']\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (f : X ⟶ Y) (g : Y' ⟶ Y) [Flat f]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (M N : schemeDerivedQCohCategory X) (hM : Scheme.IsPerfect X M.obj) :\n    IsIso (mixedAffineGlobalHomBaseChangeMap f g M.obj N.obj)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072410-L-1126384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072410-L-1126384",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature, cancellation proof, six new nodes and three remaining obligations with their Lean declarations and sources; all seven modules and the sole direct importer compile cleanly, and axiom checks agree with recorded dependencies."
+ }
+}

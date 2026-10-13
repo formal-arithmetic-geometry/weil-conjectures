@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-proper-flat-global-hom-composite-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the composite scalar-extended Hom comparison",
+ "statement": "Let $Y,Y\\prime$ be affine and $X,Y,Y\\prime$ quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions]. Let $f:X\\to Y$ be proper, flat, and locally of finite presentation [def-weil-proper-morphism, def-weil-flat-morphism], and $g:Y\\prime\\to Y$. For right adjoints $a,a\\prime$ to the quasi-coherent derived direct images and invertible canonical direct-image base change, let $c:Lg_X^*a(K)\\to a\\prime(Lg^*K)$ be the canonical mate [def-sc-duality-equation-base-change-map]. For perfect $M$ and $K\\in D_{QCoh}(Y)$ [def-pc-perfect-complex, def-pc-derived-category], the composite of the scalar-extended global Hom pullback comparison of [lem-sc-flat-affine-global-hom-comparison] with $RHom_{X\\prime}(Lg_X^*M,c)$, restricted to $\\Gamma(Y\\prime)$, is invertible. This is invertibility of the composite, before cancelling its first factor. Module and sheaf localization universes are independent.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, equation duality-equation-iso, right-hand-side comparisons and final compatibility diagram"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom",
+  "def-weil-flat-morphism",
+  "def-pc-perfect-complex",
+  "def-pc-fibre-product",
+  "def-pc-global-hom-pullback-comparison",
+  "def-weil-proper-morphism",
+  "def-sc-duality-equation-base-change-map",
+  "lem-sc-flat-affine-global-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply proper-support perfect direct image to M tensored with the structure sheaf concentrated in degree zero. Properness supplies support; flatness and finite presentation supply the other hypotheses. Thus Rf_*M is perfect.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar-extend the global Hom adjunction for f, apply perfect RHom base change on Y, Hom of beta inverse at M, and the inverse global Hom adjunction for f prime. All four factors are invertible.",
+   "uses": [
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-base-change-rhom-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The flat-precomposition compatibility equates the transpose of this four-factor map with the transpose of the stated composite. Derived-unit and K-flat equations allow independent localization universes. Injectivity of the adjunction Hom equivalence gives equality and hence invertibility.",
+   "uses": [
+    "lem-sc-flat-precompose-pus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-change-rhom-perfect",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-sc-flat-precompose-pus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, equation duality-equation-iso, right-hand-side comparisons and final compatibility diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of global derived Hom from a perfect complex commutes with flat affine base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars global RHom base change comparison for flat morphism and perfect complexes",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; CategoryTheory.Abelian.Ext.mapExactFunctor; comonadicExtendScalars; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; Module.Flat.isBaseChange",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "GlobalDerivedHom.*shift|global.*[Hh]om.*[Ee]quiv",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\"",
+   "results": "CategoryTheory.ShortComplex.leftHomologyFunctor; CategoryTheory.ShortComplex.leftHomologyFunctor_obj; CategoryTheory.ShortComplex.leftHomologyFunctor_map; CategoryTheory.ShortComplex.rightHomologyFunctor; CategoryTheory.ShortComplex.rightHomologyFunctor_obj; CategoryTheory.ShortComplex.rightHomologyFunctor_map; CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso; CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso; no global RHom base-change or shifted sheaf-Hom statement",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction proper pushforward perfect complex commutes base change global Hom comparison",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper base change auxiliary argument, Tag 0AA8: Tag 0AA8, equation duality-equation-iso, right-hand-side comparisons and final compatibility diagram",
+   "via": [
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatGlobalHomCompositeIso.lean",
+  "declaration": "AlgebraicGeometry.properFlatGlobalHomComposite_isIso",
+  "statement": "theorem properFlatGlobalHomComposite_isIso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {X Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y']\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y)\n    [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory Y' ⥤\n      schemeDerivedQCohCategory (pullback f g))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)\n      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty Y').lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n        (pullback.fst f g) pullback.condition E.obj))\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K : schemeDerivedQCohCategory Y)\n    (M : schemeDerivedQCohCategory X) (hM : Scheme.IsPerfect X M.obj)\n    : IsIso (mixedAffineGlobalHomBaseChangeMap f g M.obj (a.obj K).obj ≫\n      (schemeGlobalScalarRestriction (pullback.snd f g)).map\n        ((schemeGlobalDerivedHom (pullback f g)).map\n          (X := (op ((derivedPullback (pullback.fst f g)).obj M.obj),\n            (derivedPullback (pullback.fst f g)).obj (a.obj K).obj))\n          (Y := (op ((derivedPullback (pullback.fst f g)).obj M.obj),\n            (a'.obj (((schemeDerivedQCohProperty Y').lift\n              ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback g)\n              (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1\n                E.obj E.property)).obj K)).obj))\n          ((𝟙 ((derivedPullback (pullback.fst f g)).obj M.obj)).op,\n            (dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K).hom)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072410-L-1126384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T072410-L-1126384",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature, cancellation proof, six new nodes and three remaining obligations with their Lean declarations and sources; all seven modules and the sole direct importer compile cleanly, and axiom checks agree with recorded dependencies."
+ }
+}

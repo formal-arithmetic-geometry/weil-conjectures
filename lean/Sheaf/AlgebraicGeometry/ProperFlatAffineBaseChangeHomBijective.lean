@@ -9,11 +9,9 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
-import Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect
-import Sheaf.AlgebraicGeometry.FlatPrecomposePus
-import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
+
+import Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso
+import Sheaf.AlgebraicGeometry.RestrictedGlobalHomShiftedEquiv
 
 /-! # Hom comparison for affine proper flat duality base change
 
@@ -24,6 +22,8 @@ Source: Stacks Project, Tag 0AA8, equation duality-equation-iso and its compatib
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
@@ -79,6 +79,28 @@ theorem proper_flat_rightAdjoint_affine_baseChange_hom_bijective
       ((derivedPullback (pullback.fst f g)).obj M.obj)⟦m⟧ ⟶
         ((derivedPullback (pullback.fst f g)).obj (a.obj K).obj)⟦n⟧ ↦
       t ≫ (dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K).hom⟦n⟧') := by
-  sorry
+  let : ∀ (R : Type u) [Ring R], HasDerivedCategory.{u + 1} (ModuleCat.{u} R) :=
+    fun R _ ↦ HasDerivedCategory.standard (ModuleCat.{u} R)
+  let P := (derivedPullback (pullback.fst f g)).obj M.obj
+  let Q := (derivedPullback (pullback.fst f g)).obj (a.obj K).obj
+  let c := (dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K).hom
+  let H := schemeGlobalDerivedHom (pullback f g)
+  let S := schemeGlobalScalarRestriction (pullback.snd f g)
+  let α := mixedAffineGlobalHomBaseChangeMap f g M.obj (a.obj K).obj
+  let h := S.map (H.map (X := (Opposite.op P, Q)) (Y := (Opposite.op P, _)) ((𝟙 P).op, c))
+  have : IsIso α := mixedAffineGlobalHomBaseChangeMap_isIso f g M (a.obj K) hM
+  have : IsIso (α ≫ h) := properFlatGlobalHomComposite_isIso g f a a' adjf adjf' hβ K M hM
+  have : IsIso h := IsIso.of_isIso_comp_left α h
+  obtain ⟨e, he⟩ := restrictedGlobalHom_shiftedHom_equiv (pullback.snd f g)
+  let F := DerivedCategory.homologyFunctor
+    (ModuleCat.{u} ((moduleRings Y'.toRingedSpace).obj.obj (Opposite.op ⊤))) (n - m)
+  have : IsIso (F.map h) := inferInstance
+  have hb := ConcreteCategory.bijective_of_isIso (F.map h)
+  have bij := ((e P _ m n).bijective.comp hb).comp (e P Q m n).symm.bijective
+  convert bij using 1
+  funext t
+  simpa only [Function.comp_apply, AddEquiv.coe_toEquiv, F, h, H, S, c,
+    AddEquiv.apply_symm_apply] using
+    (he P Q _ m n c ((e P Q m n).symm t)).symm
 
 end AlgebraicGeometry

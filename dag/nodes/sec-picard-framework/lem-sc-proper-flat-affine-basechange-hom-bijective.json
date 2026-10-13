@@ -19,45 +19,36 @@
  ],
  "proof": [
   {
-   "text": "Identify affine schemes with spectra. Flatness gives stalkwise Tor independence, so the affine Hom-out-of-perfect comparison is invertible.",
+   "text": "Apply the flat affine scalar-extension comparison to M and a(K), obtaining invertibility of alpha.",
    "uses": [
-    "lem-pc-affine-morphism-hom-out-of-perfect"
+    "lem-sc-flat-affine-global-hom-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply proper-support perfect direct image to M and the structure sheaf concentrated in degree zero. Flatness, finite presentation, and properness imply that Rf_*M is perfect.",
+   "text": "The right-adjoint composite comparison gives invertibility of alpha followed by restricted global Hom of c.",
    "uses": [
-    "lem-pc-proper-support-perfect-direct-image"
+    "lem-sc-proper-flat-global-hom-composite-isIso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply both global Hom adjunctions, perfect RHom base change, and the assumed base-change inverse. Flat-precomposition compatibility identifies their composite with RHom of the canonical mate map.",
+   "text": "Cancel the invertible alpha. Apply degree n-m cohomology, which preserves isomorphisms. The natural shifted-Hom equivalences conjugate this bijection to postcomposition with c[n].",
    "uses": [
-    "lem-pc-global-hom-adjunction",
-    "lem-pc-base-change-rhom-perfect",
-    "lem-sc-flat-precompose-pus"
+    "lem-sc-restricted-global-hom-shifted-equiv"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Taking degree n-m cohomology of that canonical isomorphism and using the natural global RHom/shifted-Hom identification gives exactly composition with c[n].",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-morphism-hom-out-of-perfect",
-  "lem-pc-proper-support-perfect-direct-image",
-  "lem-pc-global-hom-adjunction",
-  "lem-pc-base-change-rhom-perfect",
-  "lem-sc-flat-precompose-pus"
+  "lem-sc-flat-affine-global-hom-comparison",
+  "lem-sc-proper-flat-global-hom-composite-isIso",
+  "lem-sc-restricted-global-hom-shifted-equiv"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AA8, equation duality-equation-iso, RHom comparisons and final compatibility diagram"
+  "place": "Tag 0AA8: cancellation of the two global Hom comparison maps and shifted cohomology"
  },
  "mathlib_searches": [
   {
@@ -142,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-f26bb",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T022433-L-3222259",
+  "landing": "20261013T072410-L-1126384",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged item signature, cancellation proof, six new nodes and three remaining obligations with their Lean declarations and sources; all seven modules and the sole direct importer compile cleanly, and axiom checks agree with recorded dependencies."
  }
 }
