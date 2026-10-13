@@ -12,14 +12,12 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison
 import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 
 /-! # Affine perfect models and geometric chain-map comparison
 
@@ -33,6 +31,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the affine models and their chosen derived-category comparisons needs this budget.
+set_option backward.isDefEq.respectTransparency false in
 /-- Affine finite-projective models with scalar/geometric Hom equivalences.
 Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation; Tags 08EB,
 06Z0 and 08DW.
@@ -123,6 +124,29 @@ theorem exists_affinePerfectChainGeometricModels
               E K f)) =
             perfectLimitMap R c s j.val.property
               (stage j (DerivedCategory.Q.map f))) := by
-  sorry
+  let B := Scheme.Γ.obj (.op Y)
+  let t : Spec B ≅ Y := Y.isoSpec.symm
+  obtain ⟨e, ⟨he⟩⟩ := Scheme.exists_scheme_iso_derived_equivalence t
+  classical
+  let hopen := Classical.choice
+    (Scheme.exists_scheme_iso_derived_localizations t).choose_spec
+  let : ∀ U : (Spec B).Opens, HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings (Spec B).toRingedSpace).over U)) := hopen
+  have hP' := Scheme.scheme_iso_derived_inverse_preserves_perfect t e he P hP
+  have hQ' := Scheme.scheme_iso_derived_inverse_preserves_perfect t e he Q hQ
+  let P' : schemeDerivedQCohCategory (Spec B) :=
+    ⟨e.inverse.obj P, schemeDerivedQCohProperty_of_isPerfect (Spec B) _ hP'⟩
+  let Q' : schemeDerivedQCohCategory (Spec B) :=
+    ⟨e.inverse.obj Q, schemeDerivedQCohProperty_of_isPerfect (Spec B) _ hQ'⟩
+  let : ∀ U : (Spec (.of B)).Opens, HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings (Spec (.of B)).toRingedSpace).over U)) := hopen
+  obtain ⟨E₀, hbE, hfE, hpE, ⟨hPE⟩⟩ :=
+    (perfect_iff_affine_bounded_projective B P').mp hP'
+  obtain ⟨K₀, hbK, hfK, hpK, ⟨hQK⟩⟩ :=
+    (perfect_iff_affine_bounded_projective B Q').mp hQ'
+  obtain ⟨F, r, hE, hK, stage, limit, hs, hl⟩ :=
+    exists_affineSpecifiedModelChainComparison R c hc i Y s t e he P Q E₀ K₀
+      ⟨hbE, fun n ↦ ⟨hfE n, hpE n⟩⟩ ⟨hbK, fun n ↦ ⟨hfK n, hpK n⟩⟩ hPE hQK
+  exact ⟨F, _, _, hE, hK, stage, limit, hs, hl⟩
 
 end AlgebraicGeometry
