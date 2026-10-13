@@ -15,36 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Unop the coproduct cocone defining total degree -n. It is a product cone. The bijection (p,q) with p+q=-n to p, with inverse p↦(p,-p-n), and the given isomorphisms e identify its factors with Hom(E^p,A^(p+n)). The product universal property of homComplex_exists gives isomorphisms of these degree objects, without boundedness.",
+   "text": "Obtain the product projections and their limiting and differential specifications from homComplex_projections_exists. Construct the signed degree map as the unop of K.totalDesc, whose (p,q) component is e_(p,q) followed by the opposite of the Hom projection multiplied by (p*n+p*(p+1)/2).negOnePow. Construct the inverse by Fan.IsLimit.lift, using the total coprojection at (p,-(p+n)), the inverse of e, and the same sign. The total coprojection identity and product projection identity prove both composites are identities; the square of every integer unit is one. This gives degreewise isomorphisms with the stated signed projection formula, without boundedness.",
    "uses": [
+    "lem-sc-hom-complex-projections",
     "def-sp-double-complex-total",
-    "def-pur-hom-complex",
     "def-pur-sheaf-hom"
    ],
    "elementary": false
   },
   {
-   "text": "Multiply coordinate p in degree n by the unit (-1)^(p*n+p*(p+1)/2). The integer p*(p+1) is even also for negative p. The sign ratio on increasing n is (-1)^p, while the ratio between coordinates (p+1,n) and (p,n+1) is (-1)^(n+1). The opposite total differential has horizontal coefficient 1 and vertical coefficient (-1)^p. Thus after unop and reversing degrees the two given differential formulas agree with the Hom differential d_A f-(-1)^n f d_E. Verify on each product projection, using the signed differential clause of homComplex_exists.",
+   "text": "Check differential compatibility after unop every total coprojection. Expand the total differential using ι_D₁, ι_D₂, d₁_eq and d₂_eq. Apply the signed projection formulas and unop the hypotheses h₁,h₂. Expand the Hom differential using homComplex_projections_exists. The coefficients agree because the triangular integer expression satisfies (p+1)*(p+2)/2 = p*(p+1)/2+p+1, proved by ring and omega over all integers, and negOnePow_add and negOnePow_succ give the horizontal and vertical sign identities. The remaining additive equality is abel. Total.hom_ext proves the differential square.",
    "uses": [
-    "def-sp-double-complex-total",
-    "def-pur-hom-complex"
+    "lem-sc-hom-complex-projections",
+    "def-sp-double-complex-total"
    ],
    "elementary": false
   },
   {
-   "text": "The degreewise isomorphisms in degrees n-1,n,n+1 and their differential compatibility form a short-complex isomorphism from the Hom short complex at n to the unop of the total short complex at -n. Its inverse is induced by inverse degree isomorphisms. Empty and zero products satisfy the same universal property, so no separate nonemptiness condition is needed.",
+   "text": "Use ShortComplex.isoMk on the degree isomorphisms at n-1,n,n+1 and the two differential squares. Transport from explicitly indexed short complexes to canonical sc by HomologicalComplex.isoSc' and the opposite short-complex functor. This gives the asserted isomorphism at n, including zero and unbounded complexes.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
   "def-pur-sheaf-hom",
-  "def-sp-double-complex-total"
+  "def-sp-double-complex-total",
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
-  "description": "V3 coordinate reindexing and sign calculation for the product Hom differential specified in Section 0A8X. This isolates a comparison only; it does not assume or establish exactness of the columns."
+  "description": "Q2: complete Lean universal-property construction of signed degree isomorphisms, integer sign identities, differential compatibility and ShortComplex.isoMk assembly; original source and statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -122,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-74ce6",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T100202-L-2497602",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, proof route, comparison signs, and dependencies with both nodes; both modules and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus the documented comparison sorryAx."
+  "landing": "20261013T113351-L-3186674",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
