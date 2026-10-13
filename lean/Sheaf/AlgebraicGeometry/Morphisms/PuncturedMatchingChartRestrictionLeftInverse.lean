@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionRingEquiv
 
 @[expose] public section
 
@@ -34,6 +35,8 @@ theorem puncturedMatching_chart_restriction_leftInverse
     let ψ := (D.puncturedMap ∣_ W).appTop.hom
     ∃ g : Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) →+* Γ(W.toScheme, ⊤),
       ∀ b : D.matchingRing, g (ψ (ρ b)) = ρ b := by
-  sorry
+  dsimp only
+  obtain ⟨e, he⟩ := puncturedMatching_chart_restriction_ringEquiv hU D f hf
+  exact ⟨e.toRingHom, he⟩
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
