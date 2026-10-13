@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNonnegative
+import Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNegative
 
 /-! # Raw module Hom and restricted abelian cohomology
 
@@ -61,6 +62,11 @@ theorem exists_rawModule_restrictedAbelian_natural_iso
         (higherDirectImageRawOverFunctor Λ k G q U).map f.op ≫ (e A).hom =
           (e B).hom ≫ restrictedOverCohomologyMap k
             ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
-            q f U := by sorry
+            q f U := by
+  classical
+  by_cases hq : 0 ≤ q
+  · obtain ⟨p, rfl⟩ := Int.eq_ofNat_of_zero_le hq
+    exact exists_rawModule_restrictedAbelian_nonnegative Λ k G p U
+  · exact exists_rawModule_restrictedAbelian_negative Λ k G q U (lt_of_not_ge hq)
 
 end AlgebraicGeometry.Etale
