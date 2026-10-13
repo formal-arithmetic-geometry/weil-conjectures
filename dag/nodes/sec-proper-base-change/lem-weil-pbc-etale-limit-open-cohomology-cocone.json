@@ -20,37 +20,44 @@
  },
  "proof": [
   {
-   "text": "Construct the diagram of inverse-image opens and restrict the coefficients. The identity and composition laws follow by inverse-image identity and composition coherence applied to the supplied laws.",
+   "text": "Construct the inverse-image open scheme diagram locally. Cancel each monomorphic open inclusion to prove its identity and composition laws from the laws of D. Transport the supplied coefficient identity along D.map_id and the restricted scheme identity. The left and right unit coherences of upperStarComp cancel the original identity coefficient, leaving the unit coefficient on the restricted sheaf. Cohomology identity functoriality proves the identity law for tailOpenCohomologyMap.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict and reindex the diagram G and its cocone L. Identify the pullbacks using the commuting projection squares; coefficient naturality gives the arrow formula.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the canonical cohomology-diagram construction to this restricted system in degree zero. Transport the coefficient identification of the cocone point; its arrows and legs are the explicitly constructed square coefficients.",
-   "uses": [
-    "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
+    "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand the restricted coefficient for a composite and substitute hcomposition. Apply squareUpperStarIso_paste_vert_hom at F_j; naturality of the square comparison moves the first coefficient map across the second square. Functoriality and cancellation of upperStarComp inverse/hom factors give the restricted coefficient composition equation. Cohomology pullback composition and coefficient naturality prove the composition law for tailOpenCohomologyMap.",
+   "uses": [
+    "lem-weil-pbc-square-iso-pasting",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the cocone equation L.w with eG_j.inv, substitute hG and cancel eG_j.inv/eG_j.hom. This gives the original coefficient leg equation. Cancel the stage-open inclusion and use c.w to prove that the restricted projection at j is the restricted projection at k followed by the restricted transition. Paste the transition and projection squares using squareUpperStarIso_paste_vert_hom. Apply the coefficient leg equation, cohomology composition and coefficient naturality to obtain tailOpenCohomologyMap(f) followed by tailOpenCohomologyLeg(k) equals tailOpenCohomologyLeg(j).",
+   "uses": [
+    "lem-weil-pbc-square-iso-pasting",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define K with the explicit restricted cohomology groups and transition maps; use the identity and composition laws just proved as its functor fields. Define the natural transformation to the constant limit-open group with the displayed legs and their naturality equation. Choose eK_j to be identity isomorphisms; the required conjugation and leg formulas follow from identity composition.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-square-iso-pasting"
  ],
  "proof_origin": {
-  "by": "H4 stage-3 worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09YQ and 01F7; sources read online. Algebraic diagram and cocone portion of the parent proof, without geometric hypotheses."
+  "by": "E2 stage-3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 09YQ, 01F7 and 03CB, read online. Direct functor/cocone construction using the existing proved arguments in EtaleOpenSquareDiagramIdentity, TailOpenCohomologyArrowLaws and TailOpenCohomologyLegNaturality as private helpers to avoid import cycles; square pasting from the source library."
  },
  "status": "split",
  "created": {
@@ -151,10 +158,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T022416-L-3214597",
-  "kind": "interface",
+  "landing": "20261013T160710-L-1371252",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

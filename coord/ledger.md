@@ -13091,3 +13091,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:07 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootTameNormalization (stage 3; reviewer PASS; after a return; landing 20261013T160708-L-1370738 (interface); batch 20261013T160705; modules 3; new nodes 2)
 - 16:07 L: merged deliver/C1/Sheaf.RingTheory.StrictHenselizationTriplesPresentation (stage 3; reviewer PASS; first push; landing 20261013T160709-L-1370984 (proof); batch 20261013T160705; modules 1; new nodes 0)
 - 16:07 L: merged deliver/C3/Sheaf.Paper.EtaleCERowOrdinaryComparison (stage 3; reviewer PASS; first push; landing 20261013T160709-L-1371142 (interface); batch 20261013T160705; modules 4; new nodes 3)
+- 16:07 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone (stage 3; reviewer PASS; first push; landing 20261013T160710-L-1371252 (proof); batch 20261013T160705; modules 1; new nodes 0)
