@@ -17,58 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Every open-immersion presentation Y of U is affine. Perfect complexes have quasi-coherent cohomology. Use the affine bounded-projective criterion and the affine derived equivalence to represent both by bounded finite-projective complexes of modules over the coordinate ring of Y.",
+   "text": "For an open-immersion presentation t:Y to X of U, Y is isomorphic to the affine scheme U, hence affine. Unfold PerfectHomContinuityOn and apply the affine perfect Hom presentation to each perfect pair on Y. This supplies bounded finite-projective module complexes and the two compatible Hom equivalences, without assuming continuity.",
    "uses": [
     "def-pc-perfect-hom-continuity-on",
-    "lem-sc-perfect-qcoherent",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-pc-affine-perfect-hom-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
-   }
+   "elementary": false
   },
   {
-   "text": "The base changes of Y have rings B_i tensor over R_i with R_j and c.pt; tensor extension preserves colimits. Since the model complexes have flat terms, affine derived pullback is ordinary scalar extension. Its natural tilde comparison identifies the Hom transport with the canonical conjugated maps, using counit-pinned composition coherence.",
+   "text": "Apply affine_perfect_hom_colimit to the supplied ring diagram and models. Its bijectivity, followed by injectivity and surjectivity of e, gives bijectivity of colimit.desc H d.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-affine-perfect-hom-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply affine_perfect_hom_colimit to the identified module-derived Hom diagram. A common upper bound proves that every tail is cofinal, giving a representative above each j0. Injectivity and the filtered-set equality criterion give equality at some later k, and composition coherence propagates equality for all l at least k.",
+   "text": "For a limit morphism, lift its inverse image under limit to colimit H and represent it at a stage j by the filtered-set representative lemma. Choose a common upper bound of j and the requested j0. The cocone equation and hlimit show its image is the original morphism.",
    "uses": [
-    "lem-pc-affine-perfect-hom-colimit",
-    "lem-pc-perfect-hom-transport"
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For two morphisms with equal limit images, hlimit and the injectivity of limit and colimit.desc make their representatives equal in colimit H. The filtered-set equality criterion gives equality at a common stage k. Since the index is a preorder its two arrows from j are equal. For every l above k, apply H(j to l)=H(k to l) composed with H(j to k) to the equality, then use hstage and the stage equivalences to obtain the required perfectStageMap equality.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-perfect-hom-continuity-on",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
   "lem-pc-affine-perfect-hom-colimit",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-perfect-qcoherent"
+  "lem-pc-affine-perfect-hom-presentation",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE, affine case; local literature copy absent, online source checked"
+  "place": "Tag 09RE, affine case; H4 formal reduction to the sheaf/module presentation, existing ring theorem and Mathlib filtered-set criteria"
  },
  "mathlib_searches": [
   {
@@ -147,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T095935-L-2452929",
+  "landing": "20261013T115024-L-3324174",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
