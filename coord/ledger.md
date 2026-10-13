@@ -13156,3 +13156,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:35 L: merged deliver/J2/Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison (stage 3; reviewer PASS; first push; landing 20261013T163536-L-1620267 (proof); batch 20261013T163531; modules 1; new nodes 0)
 - 16:35 L: merged deliver/J3/Sheaf.AlgebraicGeometry.PrincipalOpenCechSingletonAugmentationComponent (stage 3; reviewer PASS; first push; landing 20261013T163536-L-1620367 (proof); batch 20261013T163531; modules 1; new nodes 0)
 - 16:35 L: merged deliver/K1/Sheaf.RingTheory.StrictHenselizationComparison (stage 3; reviewer PASS; first push; landing 20261013T163537-L-1620518 (interface); batch 20261013T163531; modules 3; new nodes 2)
+- 16:35 L: merged deliver/K2/Sheaf.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore (stage 3; reviewer PASS; first push; landing 20261013T163537-L-1620674 (proof); batch 20261013T163531; modules 1; new nodes 0)
