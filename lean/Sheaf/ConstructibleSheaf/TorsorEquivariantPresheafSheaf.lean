@@ -10,7 +10,10 @@ public import Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf
 /-!
 # Compatibility import for equivariant locally constant sections
 
-The sheaf theorem has a single implementation in `TorsorEquivariantModuleIsSheaf`.
+The scalar-restricted sheaf theorem has a single implementation in
+`TorsorEquivariantModuleIsSheaf`. This public import makes
+`AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf` available
+to callers without a second declaration or gluing proof.
 (blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
 -/
 

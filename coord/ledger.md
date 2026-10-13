@@ -13790,3 +13790,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:45 L: merged deliver/N2/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261013T224517-L-1474380 (proof); batch 20261013T224504; modules 1; new nodes 0; change records: coord/changes/map-extend-homology.md)
 - 22:45 L: merged deliver/P2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUnique (stage 3; reviewer PASS; first push; landing 20261013T224517-L-1474527 (interface); batch 20261013T224504; modules 2; new nodes 1)
 - 22:45 L: merged deliver/R1/Sheaf.Algebra.Homology.KInjectiveProducts (stage 3; reviewer PASS; first push; landing 20261013T224518-L-1474695 (proof); batch 20261013T224504; modules 1; new nodes 0)
+- 22:45 L: merged deliver/R4/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261013T224518-L-1474863 (proof); batch 20261013T224504; modules 1; new nodes 0)
