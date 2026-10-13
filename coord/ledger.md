@@ -13441,3 +13441,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:06 L: returned deliver/M1/Sheaf.Paper.CechRefinementResolutionBeta (reviewer RETURN: (reviewer X-20216, head 20216302b) A — stages/3-proving-and-pruning.md §4 forbids splitting a proof to meet the compiler)
 
 - 04:08 L: batch 20261013T190131 dependency take-out
+- 20:13 L: returned deliver/F1/Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientCore (reviewer RETURN: (reviewer X-af9c9, head af9c90aa2) C1: In dag/nodes/sec-smooth-base-change/lem-sbc-pointed-etale-quotient-final.json, pr)
