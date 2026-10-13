@@ -14,35 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Use the equivalence between pointed etale algebras and etale residue triples: the prime is the kernel of S → K and its residue embedding is the induced map on the fraction field of S/q. Translate the local residue field R/m to the scheme residue field at the maximal ideal via the canonical field isomorphism. This translation preserves the chosen map from R to K.",
+   "text": "Use the given pointed-etale colimit cocone c, its IsColimit proof hc, and the identity isomorphism on c.pt to prove Algebra.IsStrictHenselization R K c.pt directly from its definition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Algebra.strictHenselization_completion_flat_over_base to this strict henselization. Convert flatness of the algebra map into Module.Flat R B, where B is the completion at the extended maximal ideal, using RingHom.flat_algebraMap_iff.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-sc-strict-henselization-completion-flat-over-base"
    ],
    "elementary": false
   },
   {
-   "text": "Transport c along this equivalence and forget its R-algebra structure. The underlying ring cocone is a colimit: the nonempty filtered diagram gives the base action on any ring cocone from any one coprojection; filteredness makes it independent of that choice, and the ring descent is therefore an algebra descent. Structural compatibility of each coprojection gives hρ in the triple flatness lemma.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply etaleTriple_to_strictHenselization_completion_flat to the transported cocone and the triple of t. The structural map is algebraMap R c.pt, so its extended ideal is exactly m_R c.pt. The forgetful equivalence retains the same ring and coprojection, identifying the resulting map with the displayed composite.",
-   "uses": [
-    "lem-sc-etale-triple-to-sh-completion-flat"
-   ],
-   "elementary": false
+   "text": "Let S be the underlying R-algebra of t and let f : S →ₐ[R] B be the coprojection followed by completion. Its commutes equation supplies IsScalarTower R S B for the S-action induced by f. The property of t supplies Etale R S, hence FormallyUnramified R S and Algebra.FiniteType R S. Apply the already-proved Mathlib theorem Algebra.FormallyUnramified.flat_of_restrictScalars (Mathlib/RingTheory/Unramified/Finite.lean) to Module.Flat R B, obtaining Module.Flat S B. This is f.toRingHom.Flat by definition, and f.toRingHom is definitionally the displayed composite.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-sc-etale-triple-to-sh-completion-flat"
+  "lem-sc-strict-henselization-completion-flat-over-base"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06LJ, proof of (c), paragraph beginning To finish the proof of (c); presentation bridge written by W3 from the cited construction"
+  "place": "Tag 06LJ, proof of (c); shorter stage-flatness argument written by T4 using the existing base-flatness theorem and Mathlib Algebra.FormallyUnramified.flat_of_restrictScalars (Iversen I.2.7)"
  },
  "mathlib_searches": [
   {
@@ -124,16 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T155946-L-1307408",
+  "landing": "20261013T161322-L-1424403",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Algebra.pointedEtale_completion_stage_flat"
-  ],
-  "sorry_after": [
-   "Algebra.pointedEtale_completion_stage_flat_factors"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
