@@ -7,26 +7,41 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use the universal structure-pushforward isomorphism to obtain connected fibres. The locally constant rank of E is constant on each fibre; openness of the flat finite-presentation morphism and closedness of the proper morphism give open-and-closed strata S_r on whose inverse images E has rank r. Fix this rank before constructing either direct-image locus.",
-   "uses": [],
-   "elementary": false
+   "text": "The dual of E is finite locally free by the source library Modules.IsFiniteLocallyFree.dual. Apply the single-image representability theorem to the reference E twice: first with F=E, then with F=E dual. This gives immersions j1:W1→S and j2:W2→S representing the two separate universal local rank conditions.",
+   "uses": [
+    "lem-sc-picard-universal-single-rank-locus"
+   ],
+   "elementary": true
   },
   {
-   "text": "On each S_r, proper flat cohomology and base change give perfect nonnegative direct-image complexes for E and its dual. Construct their lowest-cohomology rank-r loci, both with the same fixed rank r, and take their fibre product. The pulled-back E has rank r under every further base change by construction, so this immersion represents all three clauses of the corrected core condition.",
+   "text": "Let W be the fibre product W1×_S W2 and j its first projection followed by j1. The first projection is the base change of j2, so j is an immersion by Mathlib stability under base change and composition.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Conversely the third clause fixes the bundle rank r locally, and the two universal direct-image clauses give local factorizations through the two rank-r loci. Uniqueness for immersions glues these maps. Assemble the loci over the disjoint open-and-closed base strata; empty test schemes cause no exception.",
-   "uses": [],
-   "elementary": false
+   "text": "Unfold the universal common-rank predicate and project its witnesses to obtain each single-image condition. The converse is [lem-sc-picard-universal-rank-match-conjunction], which refines the independent neighbourhoods and identifies their ranks using E.",
+   "uses": [
+    "lem-sc-picard-universal-rank-match-conjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A factor through W gives factors through each Wi by composing with its projections. Conversely the two single-image conditions give maps a:T→W1 and b:T→W2 with a≫j1=g=b≫j2. Their pullback lift is a factor through j. These constructions prove the equivalence for every test g, including the empty scheme.",
+   "uses": [
+    "lem-sc-picard-universal-single-rank-locus",
+    "lem-sc-picard-universal-rank-match-conjunction"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-picard-universal-single-rank-locus",
+  "lem-sc-picard-universal-rank-match-conjunction"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "G3 repair of E2: rank stratification before the two lowest-cohomology loci"
+  "place": "Q4: the single-image loci of the first three proof paragraphs, intersected by the actual categorical pullback; common rank witnesses synchronized separately"
  },
  "mathlib_searches": [
   {
@@ -94,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8e87f",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T024034-L-3334430",
+  "landing": "20261013T034210-L-3767686",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered abbreviation, theorem signatures, proofs and node records with the recorded repair and Stacks Tags 0BDP/0BDL; delivered module and unchanged direct importer compile cleanly, with expected axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

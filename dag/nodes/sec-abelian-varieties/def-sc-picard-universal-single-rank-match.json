@@ -1,0 +1,103 @@
+{
+ "id": "def-sc-picard-universal-single-rank-match",
+ "kind": "definition",
+ "title": "Universal rank matching for one direct image relative to a reference bundle",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes [def-pc-scheme], and $E,F$ be $\\mathcal O_X$-modules. For $k:Y\\to S$, let $p_k:X\\times_S Y\\to Y$ and $q_k:X\\times_S Y\\to X$ be the projections. Define $R_1(f,E,F,g)$ to mean that for every $h:T\\prime\\to T$ and $t\\in T\\prime$ there are an open neighbourhood $U$ of $t$ and $r\\in\\mathbb N$ such that both $(p_{hg,*}q_{hg}^*F)|_U$ and $q_{U\\to T\\prime\\to T\\to S}^*E$ are finite locally free of rank $r$ [def-amb-finite-locally-free-module]. Pullback is the tensor pullback [def-pc-module-pullback] and direct image is ordinary module pushforward [lem-pc-module-pullback-adjunction]. This imposes one direct-image rank condition, with E fixing its rank.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs: one of the two rank conditions with the bundle rank fixed first"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs: one of the two rank conditions with the bundle rank fixed first",
+  "note": "Q4 spells out the single-image construction and local synchronization implicit in the first three proof paragraphs; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal lowest cohomology rank locus of a perfect complex on a scheme is an immersion",
+   "results": "Search service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion represents equality of ranks of a locally free sheaf and its direct image; uniqueness of local rank at nonempty stalks",
+   "results": "Immersion stability and algebraic Module.rankAtStalk results; no scheme single-direct-image rank locus or common-neighbourhood predicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*[Ll]ocus|[Ll]ocus.*rank; finite.*locally.*free.*rank; rank_eq|rank_unique",
+   "results": "Mathlib has ring-module rank/free loci and immersion stability. The library has PerfectLowestCohomologyLocus and finiteLocallyFreeOfRank_stalk_finrank, but no single-image locus relative to a reference bundle or synchronization theorem. Whole blueprint search for rank match/rank locus/single direct image rank returned no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCoreRank",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: Tag 0BDP, rank decomposition and intersection of the two lowest-cohomology rank loci",
+   "via": [
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalSingleRankMatch.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PicardUniversalSingleRankMatch",
+  "statement": "def PicardUniversalSingleRankMatch {X S T : Scheme.{u}} (f : X ⟶ S) (E F : X.Modules) (g : T ⟶ S) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T034210-L-3767686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T034210-L-3767686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

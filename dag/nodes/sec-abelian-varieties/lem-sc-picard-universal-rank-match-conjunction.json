@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-picard-universal-rank-match-conjunction",
+ "kind": "statement",
+ "title": "Synchronize single-image rank witnesses on a common neighbourhood",
+ "statement": "Let f:X\\to S be a morphism of schemes, E a finite locally free module on X, and g:T\\to S. Assume the structure-sheaf adjunction unit is an isomorphism after every base change [lem-pc-module-pullback-adjunction]. If R_1(f,E,E,g) and R_1(f,E,E^\\vee,g) both hold [def-sc-picard-universal-single-rank-match], then R(f,E,g) holds [def-sc-picard-universal-rank-match]. Thus the ranks and neighbourhoods in the two assumptions can be synchronized; no representing scheme is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first and third proof paragraphs: the two single-image loci use the same rank of E"
+ },
+ "stmt_deps": [
+  "def-sc-picard-universal-single-rank-match",
+  "def-sc-picard-universal-rank-match",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For each h:T\\prime\\to T and t in T\\prime, obtain neighbourhoods U,V with ranks r,s from the two R_1 assumptions [def-sc-picard-universal-single-rank-match]. Let W=U intersection V, which contains t. Pullback along W→U and W→V preserves finite local freeness of fixed rank. Tensor pullback composition and the pullback projection squares identify the restricted reference modules with the same pullback of E to X_W.",
+   "uses": [
+    "def-sc-picard-universal-single-rank-match",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the universal structure-sheaf unit to Spec kappa(t)→T\\prime→T→S. The fibre cannot be empty, since an empty fibre has zero structure sheaf and zero direct image, whereas the unit is an isomorphism from the nonzero residue-field structure sheaf. Thus X_W has a point over t. At that point the one reference module has both ranks r and s. The stalk-finrank theorem [lem-sc-finite-locally-free-stalk-finrank] gives r=s.",
+   "uses": [
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After replacing s by r, the two restricted direct images and E on X_W have rank r. The neighbourhood W and this rank provide all three clauses of [def-sc-picard-universal-rank-match]. Repeat for every h and t. Empty test schemes have no points to check and rank zero requires no separate case.",
+   "uses": [
+    "def-sc-picard-universal-rank-match"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-picard-universal-rank-match",
+  "def-sc-picard-universal-single-rank-match",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-finite-locally-free-stalk-finrank"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first and third proof paragraphs: the two single-image loci use the same rank of E",
+  "note": "Q4 spells out the single-image construction and local synchronization implicit in the first three proof paragraphs; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal lowest cohomology rank locus of a perfect complex on a scheme is an immersion",
+   "results": "Search service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion represents equality of ranks of a locally free sheaf and its direct image; uniqueness of local rank at nonempty stalks",
+   "results": "Immersion stability and algebraic Module.rankAtStalk results; no scheme single-direct-image rank locus or common-neighbourhood predicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*[Ll]ocus|[Ll]ocus.*rank; finite.*locally.*free.*rank; rank_eq|rank_unique",
+   "results": "Mathlib has ring-module rank/free loci and immersion stability. The library has PerfectLowestCohomologyLocus and finiteLocallyFreeOfRank_stalk_finrank, but no single-image locus relative to a reference bundle or synchronization theorem. Whole blueprint search for rank match/rank locus/single direct image rank returned no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCoreRank",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: Tag 0BDP, rank decomposition and intersection of the two lowest-cohomology rank loci",
+   "via": [
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchConjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalRankMatchConjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardUniversalRankMatch_of_singleRankMatch",
+  "statement": "theorem picardUniversalRankMatch_of_singleRankMatch {X S T : Scheme.{u}} (f : X ⟶ S) (hO : ∀ {T' : Scheme.{u}} (g' : T' ⟶ S), IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd f g'))).unit.app (SheafOfModules.unit T'.ringCatSheaf))) (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S) (hE : PicardUniversalSingleRankMatch f E E g) (hdual : PicardUniversalSingleRankMatch f E (Modules.dual E) g) : PicardUniversalRankMatch f E g",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T034210-L-3767686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T034210-L-3767686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

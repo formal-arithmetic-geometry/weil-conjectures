@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-picard-universal-single-rank-locus",
+ "kind": "statement",
+ "title": "An immersion representing a single direct-image rank condition",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation. Assume the structure-sheaf adjunction unit $\\mathcal O_T\\to p_*p^*\\mathcal O_T$ is an isomorphism for every base change $g:T\\to S$ [lem-pc-module-pullback-adjunction]. Let E and F be finite locally free modules on X. There exist a scheme W and an immersion j:W\\to S such that, for every test g:T\\to S, g factors through j if and only if R_1(f,E,F,g) holds [def-sc-picard-universal-single-rank-match]. The conclusion concerns only F, not an additional direct image of its dual.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs: apply Tag 0BDL to one direct image on the reference bundle rank strata"
+ },
+ "stmt_deps": [
+  "def-sc-picard-universal-single-rank-match",
+  "lem-pc-module-pullback-adjunction",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "The universal structure-sheaf unit gives H^0(X_s,O)=kappa(s). Hence X_s is nonempty, and any decomposition into two nonempty clopen pieces would yield a nontrivial idempotent, so X_s is connected. The rank of E is locally constant and thus constant on each fibre. Flat local finite presentation makes f open and properness makes it closed. Its clopen rank loci have disjoint clopen images S_r covering S. E has rank r on the inverse image of S_r; the clopen rank-locus argument is [lem-sc-picard-fiber-rank-clopen].",
+   "uses": [
+    "lem-sc-picard-fiber-rank-clopen"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each S_r the finite locally free F is finitely presented and flat over the base. Apply [lem-pc-rf-perfect-base-change] to obtain perfect Rf_*F with arbitrary derived base change. H^0 of each derived pullback is the ordinary direct image p_*q^*F. All derived fibres have no negative cohomology; a finite strictly perfect model locally has Tor-amplitude [0,b] for some b.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-perfect-h0-locally-closed] with a=0 and the fixed rank r. It supplies an immersion characterized by universal rank-r freeness of the one ordinary direct image. In R_1 any local witness rank equals r, since E has rank r on the whole inverse image and every fibre is nonempty. Restriction preserves rank, and fixed-rank finite local freeness is local on the test scheme. Thus its condition is equivalent to this universal rank-r condition.",
+   "uses": [
+    "lem-sc-perfect-h0-locally-closed",
+    "def-sc-picard-universal-single-rank-match"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On overlapping neighbourhoods the immersions represent the same functor. Since immersions are monomorphisms, their unique identifications agree on triple overlaps and glue. The clopen strata are disjoint, so their union also glues to an immersion over S. Test morphisms factor precisely when R_1 holds: its witnesses give local factors and uniqueness glues them. On the empty test scheme both criteria hold without points; r=0 uses the same construction.",
+   "uses": [
+    "def-sc-picard-universal-single-rank-match"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-universal-single-rank-match",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-h0-locally-closed",
+  "lem-sc-picard-fiber-rank-clopen"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs: apply Tag 0BDL to one direct image on the reference bundle rank strata",
+  "note": "Q4 spells out the single-image construction and local synchronization implicit in the first three proof paragraphs; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal lowest cohomology rank locus of a perfect complex on a scheme is an immersion",
+   "results": "Search service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion represents equality of ranks of a locally free sheaf and its direct image; uniqueness of local rank at nonempty stalks",
+   "results": "Immersion stability and algebraic Module.rankAtStalk results; no scheme single-direct-image rank locus or common-neighbourhood predicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*[Ll]ocus|[Ll]ocus.*rank; finite.*locally.*free.*rank; rank_eq|rank_unique",
+   "results": "Mathlib has ring-module rank/free loci and immersion stability. The library has PerfectLowestCohomologyLocus and finiteLocallyFreeOfRank_stalk_finrank, but no single-image locus relative to a reference bundle or synchronization theorem. Whole blueprint search for rank match/rank locus/single direct image rank returned no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCoreRank",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: Tag 0BDP, rank decomposition and intersection of the two lowest-cohomology rank loci",
+   "via": [
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalSingleRankLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_picardUniversalSingleRankLocus",
+  "statement": "theorem exists_picardUniversalSingleRankLocus {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E F : X.Modules) [E.IsFiniteLocallyFree] [F.IsFiniteLocallyFree] : ∃ (W : Scheme.{u}) (j : W ⟶ S), IsImmersion j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalSingleRankMatch f E F g",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T034210-L-3767686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T034210-L-3767686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
