@@ -10,6 +10,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.Algebra.Category.ModuleCat.Descent
+import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
 
 /-!
 # Ring tensor cohomology and its comparison map
@@ -120,7 +121,36 @@ such quasi-isomorphisms, so every cohomology map is invertible.
 theorem spanLeft_isIso (i : ℤ) :
     IsIso (Functor.whiskerRight (spanLeft R A B)
       (HomologicalComplex.homologyFunctor (ModuleCat.{u} B) (.up ℤ) i)) := by
-  sorry
+  apply (NatTrans.isIso_iff_isIso_app _).2
+  intro M
+  let f := (restrict R A).map ((augmentation A).app M)
+  have hA : QuasiIso ((augmentation A).app M) := by
+    dsimp [augmentation]
+    infer_instance
+  have : QuasiIso f := by
+    dsimp [f, restrict]
+    infer_instance
+  have hR (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+      QuasiIso ((augmentation R).app K) := by
+    dsimp [augmentation]
+    infer_instance
+  have : QuasiIso ((resolution R).map f) := by
+    have := hR ((restrict R A).obj ((resolution A).obj M))
+    have := hR ((restrict R A).obj M)
+    rw [← quasiIso_iff_comp_right _ ((augmentation R).app _)]
+    rw [(augmentation R).naturality f]
+    change QuasiIso ((augmentation R).app _ ≫ f)
+    infer_instance
+  have hk (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+      (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat
+        ((resolution R).obj K) :=
+    (flatResolution R).kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K
+  have : QuasiIso ((extend R B).map ((resolution R).map f)) :=
+    CochainComplex.scalarExtension_quasiIso_of_kFlat
+      (algebraMap R B) _ inferInstance (hk _) (hk _)
+  change IsIso (HomologicalComplex.homologyMap
+    ((extend R B).map ((resolution R).map f)) i)
+  infer_instance
 
 /-- Cohomology of the canonical comparison morphism, Stacks Tag 06Y6, comparison-map.
 (blueprint: def-pc-ring-tensor-cohomology) -/

@@ -13,9 +13,35 @@
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 06Y6 (Derived change of rings) and Tor independence, equation comparison-map; K-flat resolutions and flat cohomology base change"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The augmentation of the chosen A-resolution is a quasi-isomorphism. Exact restriction of scalars preserves it. Naturality of the R-resolution augmentation and quasiIso_iff_comp_right show that resolving this restricted map gives a quasi-isomorphism; both its endpoints are K-flat by LeftResolution.kFlat_resolutionFunctor_obj.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing proved helper CochainComplex.scalarExtension_quasiIso_of_kFlat from KFlatScalarExtensionDerivedIso (accessible with a proof-only import all). It sends the resolved restricted augmentation, a quasi-isomorphism between K-flat R-complexes, to a quasi-isomorphism after termwise extension to B. This uses the map-specific scalar-extension part of the cited module, not its existence of an unspecified homology equivalence.",
+   "uses": [
+    "lem-sc-kflat-scalar-extension-derived-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every A-complex M the left span component is exactly this scalar-extended map. Its homology map in every integer degree is invertible. NatTrans.isIso_iff_isIso_app gives invertibility of the homology natural transformation, permitting the unchanged comparison definition. All other constructions remain unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kflat-scalar-extension-derived-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 064L; augmentation naturality and reuse of the scalar-extension quasi-isomorphism helper in KFlatScalarExtensionDerivedIso",
+  "group": "A3",
+  "date": "2026-10-13"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -122,5 +148,15 @@
   "group": "J1",
   "result": "fix",
   "note": "Not a corrected item (statement unchanged): park correction realised by EXTRA NODE (A) def-pc-ring-tensor-cohomology instead of citing the unstated second-factor-functor/action-naturality. Matched: R,A,B,C commutative rings with R->A, R->B, R->B->C (Algebra+IsScalarTower), S Submonoid B, IsLocalization S C, hflat RingHom.Flat; M unbounded CochainComplex (ModuleCat A), i:Z; source = H^i(B ox_R F_R(UM)) = H^i(M ox^L_R B); baseChangeMap = inverse flat homology iso then extendScalarsComp.symm, i.e. x ox c |-> c*phi(x); conjuncts: IsIso, naturality in f, A-action a.id_M (C- and B-linearity by ModuleCat C), comparison square; comparison = inv H(spanLeft) >> H(spanRight) = Stacks equation-comparison-map (A-K-flat rep, R-K-flat resolution of its restriction) read in more-algebra.tex. Citer lem-pc-derived-tensor-localization-cohomology (R_p, A_q, R'_p -> R'_p') holds. FIX: new node cites def-weil-module-base-change (termwise extendScalars), 'reduced' spelled out; def-pc-module-kflat-complex not citable (merged after the delivery's base 4b7cefd65)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T082328-L-1629850",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
