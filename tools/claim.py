@@ -309,6 +309,8 @@ def main() -> int:
         n = min(n, LIMIT - len(held_by(who)))
         got = 0
         parked = set(stage2_abandonments()) - parked_resolved()
+        rp = WORK / 'repairs.txt'
+        listed_repairs = {l.split()[0] for l in rp.read_text().splitlines() if l.strip() and not l.lstrip().startswith('#')} if rp.exists() else set()
         skip = abandoned_recently(who)   # launcher's finding, 2026-10-10 15:30 UTC: C1 abandoned one item 29 times in half an
         repair_items = [p.stem for p in sorted((WORK / 'repair-notes').glob('*.json'))
                         if repair_note(p.stem).get('state') == 'released'] if stage in (None, '3') else []
@@ -317,7 +319,9 @@ def main() -> int:
                 break
             if m in skip:
                 continue
-            if sorries(m) == 0 and m not in repair_items:  # finished since the queue was written
+            if sorries(m) == 0 and m not in repair_items and m not in listed_repairs:  # finished since the queue was written
+                # (an item of coord/repairs.txt is a repair even without a `sorry`: a false statement, a duplicate,
+                # undetermined data; 2026-10-14 all 25 queued repairs were skipped here and nobody could claim them)
                 continue
             if node_finished(m) and repair_note(m).get('state') != 'released':  # a DAG node split, matched or Lean-attached since the queue was written (stale queue.tsv)
                 continue
