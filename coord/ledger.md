@@ -13236,3 +13236,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: merged deliver/T4/Sheaf.RingTheory.PrincipalCokernelProjectiveDescent (stage 3; reviewer PASS; first push; landing 20261013T171516-L-1982904 (proof); batch 20261013T171508; modules 1; new nodes 0)
 - 17:15 L: merged deliver/U1/Sheaf.CategoryTheory.GrothendieckDerivedBrownRetractData (stage 3; reviewer PASS; first push; landing 20261013T171516-L-1983142 (interface); batch 20261013T171508; modules 2; new nodes 1)
 - 17:15 L: merged deliver/U1/Sheaf.Paper.CechCupPullbackCompat (stage 3; reviewer PASS; first push; landing 20261013T171517-L-1983273 (interface); batch 20261013T171508; modules 3; new nodes 2)
+- 17:15 L: merged deliver/U4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalCompletionComparison (stage 3; reviewer PASS; first push; landing 20261013T171517-L-1983452 (interface); batch 20261013T171508; modules 3; new nodes 2)
