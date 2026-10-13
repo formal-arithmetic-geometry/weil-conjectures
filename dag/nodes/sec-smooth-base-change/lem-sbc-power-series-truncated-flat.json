@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-power-series-truncated-flat",
+ "kind": "statement",
+ "title": "Flatness of the constants map to a truncated power-series algebra",
+ "statement": "For any commutative ring A and d,n ≥ 0, put B=A[[X_1,...,X_d]] [def-weil-pbc-multivariate-power-series] and I=ker(constantCoeff). The composite A -> B -> B/I^(n+1), given by constants and the quotient map, is flat [def-weil-pbc-flat-ring-map]. No local or Noetherian hypothesis is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed calculation at a fixed index: finite monomial algebra calculation; coefficient criterion from Remark 032C."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use quotient_first_variables_kernels to identify I with the variables ideal. Specialize power_series_mem_combined_ideal_pow_iff to the zero base ideal. Its positive powers are zero, so membership in I^(n+1) is equivalent to vanishing of every coefficient of total degree below n+1.",
+   "uses": [
+    "lem-weil-pbc-power-series-kernels",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exponents E of total degree below n+1 form a finite type by Finsupp.finite_of_degree_lt. Define an A-linear map E -> A to B by summing the associated monomials, then compose with Ideal.Quotient.mkₐ. The surviving coefficients of that sum recover the input coordinates by coeff_monomial_same and coeff_monomial_ne.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Equality of quotient classes means the difference belongs to I^(n+1), hence all coordinate differences vanish: this proves injectivity. For surjectivity, take the surviving coefficients of any representative; subtracting their finite monomial sum leaves all these coefficients zero, hence an element of I^(n+1). LinearEquiv.ofBijective identifies the quotient with the finite free module E -> A. Apply Module.Flat.of_linearEquiv and RingHom.flat_algebraMap_iff. The same formulas cover d=0, n=0, the zero ring and rings with nilpotents.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-kernels"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "R1",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed calculation at a fixed index: finite monomial algebra calculation; coefficient criterion from Remark 032C.; agent-formalized assembly of existing coefficient and depth lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "truncated multivariate power series quotient finite free flat constants map; boundary stalk depth of punctured truncated power series quotient",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat; IsLocalRing.depth",
+   "results": "Generic flat-map lemmas found. Depth results use a newer ModuleCat-valued definition, not the project definition. No matching truncated flatness or boundary-depth result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries.*[Ff]lat|[Ff]lat.*MvPowerSeries|depth.*thickening|thickening.*depth",
+   "results": "No exact Mathlib result. Project searches found PowerSeriesCombinedIdealCoefficients, PowerSeriesQuotientVariables and FlatLocalDepthFormula, all used. Blueprint searches for truncated flat and thickening boundary depth found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constants homomorphism from a commutative ring to truncated multivariate power series is flat",
+   "results": "8 hits, including RingHom.flat_algebraMap_iff and trunc_C/trunc'_C. None supplies quotient flatness; the algebra-map equivalence is used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite-index scalar comparison in Tag 0EY9; Tag 0EY9, first displayed calculation at a fixed index: finite monomial algebra calculation; coefficient criterion from Remark 032C.",
+   "via": [
+    "lem-sbc-power-series-punctured-thickening-restriction-iso",
+    "lem-sbc-power-series-punctured-thickening-restriction",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTruncatedFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesTruncatedFlat.lean",
+  "declaration": "MvPowerSeries.truncated_constants_flat",
+  "statement": "theorem truncated_constants_flat (A : Type u) [CommRing A] (d n : ℕ) :\n    ((Ideal.Quotient.mk\n      ((RingHom.ker (constantCoeff (σ := Fin d) (R := A))) ^ (n + 1))).comp\n        (C (σ := Fin d) (R := A))).Flat",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-kernels"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T160711-L-1371977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T160711-L-1371977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

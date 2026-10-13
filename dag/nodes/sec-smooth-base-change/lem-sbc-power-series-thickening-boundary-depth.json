@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-power-series-thickening-boundary-depth",
+ "kind": "statement",
+ "title": "Depth two at the boundary of a finite power-series thickening",
+ "statement": "Let A be a Noetherian local ring [def-weil-pbc-noetherian-ring] with depth A ≥ 2 [def-weil-pbc-depth], let d,n ≥ 0, put B=A[[X_1,...,X_d]] [def-weil-pbc-multivariate-power-series], I=ker(constantCoeff), Q=B/I^(n+1). Let V be an open of Spec B whose inverse image under the zero section Spec A -> Spec B is Spec A minus its closed point [def-weil-pbc-scheme-conventions]. For the quotient morphism q:Spec Q -> Spec B, every stalk of Spec Q at a point outside q inverse-image V has depth at least two.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, finite-index punctured thickening calculation; Tag 0337, flat local depth formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Let k:B -> Q be the quotient map, c:A -> B the constants map, and t:Spec Q -> Spec A the morphism induced by k comp c. Apply truncated_constants_flat and Flat.SpecMap_iff to make t flat.",
+   "uses": [
+    "lem-sbc-power-series-truncated-flat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A prime y of Q contracts to a prime containing I: for b in I, b^(n+1) maps to zero under k, so primality forces b into the contracted prime. Surjectivity of constantCoeff and range_comap_of_surjective give x in Spec A with z x=q y. Composing with constants shows t y=x since constantCoeff comp C is the identity. The condition on V therefore forces t y to be the closed point when y is outside q inverse-image V.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "stalkClosedPointIso identifies A with the stalk of Spec A at its closed point. Apply the flat local depth formula to its inverse ring isomorphism, using RingHom.Flat.of_bijective and IsLocalHom.of_surjective; this bounds the base-stalk depth below by depth A. The same formula applied to t.stalkMap y, flat by Flat.stalkMap, bounds the quotient-stalk depth below by that base depth. The fibre-depth terms are nonnegative, so le_self_add gives the two inequalities. MvPowerSeries.isNoetherianRing and quotient Noetherianity supply all Noetherian instances. This also covers d=0 and n=0.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-power-series-truncated-flat",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "R1",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, finite-index punctured thickening calculation; Tag 0337, flat local depth formula.; agent-formalized assembly of existing coefficient and depth lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "truncated multivariate power series quotient finite free flat constants map; boundary stalk depth of punctured truncated power series quotient",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat; IsLocalRing.depth",
+   "results": "Generic flat-map lemmas found. Depth results use a newer ModuleCat-valued definition, not the project definition. No matching truncated flatness or boundary-depth result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries.*[Ff]lat|[Ff]lat.*MvPowerSeries|depth.*thickening|thickening.*depth",
+   "results": "No exact Mathlib result. Project searches found PowerSeriesCombinedIdealCoefficients, PowerSeriesQuotientVariables and FlatLocalDepthFormula, all used. Blueprint searches for truncated flat and thickening boundary depth found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The boundary stalks of a finite power series thickening over a depth two local ring have depth at least two",
+   "results": "8 unrelated power-series and Weierstrass results; no boundary depth comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite-index scalar comparison in Tag 0EY9; Tag 0EY9, finite-index punctured thickening calculation; Tag 0337, flat local depth formula.",
+   "via": [
+    "lem-sbc-power-series-punctured-thickening-restriction-iso",
+    "lem-sbc-power-series-punctured-thickening-restriction",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesThickeningBoundaryDepth",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesThickeningBoundaryDepth.lean",
+  "declaration": "AlgebraicGeometry.Scheme.powerSeries_thickening_boundary_depth",
+  "statement": "theorem powerSeries_thickening_boundary_depth\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (n : ℕ) :\n    let Q := FiniteEtale.Adic.base\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n\n    let q := FiniteEtale.Adic.baseMap\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n\n    ∀ y : Q, y ∉ q ⁻¹ᵁ V →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := Q.presheaf.stalk y) (Q.presheaf.stalk y)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T160711-L-1371977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T160711-L-1371977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
