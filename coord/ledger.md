@@ -12637,3 +12637,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:27 L: merged deliver/V4/Sheaf.AlgebraicGeometry.ProjectionMateAffineChartCertificate (stage 3; reviewer PASS; first push; landing 20261013T132737-L-4152442 (interface); batch 20261013T132734; modules 3; new nodes 2)
 - 13:27 L: merged deliver/W2/Sheaf.AlgebraicGeometry.RestrictedAffineSingleTransitionLaws (stage 3; reviewer PASS; first push; landing 20261013T132738-L-4152544 (interface); batch 20261013T132734; modules 3; new nodes 2)
 - 13:27 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffineFiniteFreeDualComplexComparison (stage 3; reviewer PASS; first push; landing 20261013T132738-L-4152706 (interface); batch 20261013T132734; modules 2; new nodes 1)
+- 13:32 L: returned deliver/C4/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris (reviewer RETURN: (reviewer X-00326, head 003264342) H4 (duplicate definition; stages/3-proving-and-pruning.md §3): In lean/Sheaf/Algebrai)
