@@ -1823,7 +1823,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Finite
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
