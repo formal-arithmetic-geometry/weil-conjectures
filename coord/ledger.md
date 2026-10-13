@@ -13797,7 +13797,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:45 L: merged deliver/T2/Sheaf.AlgebraicGeometry.EtaleLimitConeRestrictionNaturality (stage 3; reviewer PASS; after a return; landing 20261013T224520-L-1475604 (interface); batch 20261013T224504; modules 1; new nodes 0; change records: coord/changes/etale-limit-cone-restriction-local-transparency.md)
 - 22:45 L: merged deliver/T2/Sheaf.AlgebraicGeometry.OpenStalkRepresentativeCoherence (stage 3; reviewer PASS; first push; landing 20261013T224520-L-1475817 (proof); batch 20261013T224504; modules 1; new nodes 0)
 - 22:45 L: merged deliver/T3/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261013T224521-L-1475959 (interface); batch 20261013T224504; modules 1; new nodes 0; change records: coord/changes/remove-sheaf-zero-stalks-duplicate.md)
-- 22:45 L: merged deliver/T3/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261013T224521-L-1476161 (interface); batch 20261013T224504; modules 3; new nodes 2; change records: coord/changes/CechCupResolutionTotalPairing-new-module.md)
 - 22:45 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology (stage 3; reviewer PASS; first push; landing 20261013T224522-L-1476302 (interface); batch 20261013T224504; modules 5; new nodes 4)
 - 22:45 L: merged deliver/T4/Sheaf.RingTheory.KoszulConormalCycleRelations (stage 3; reviewer PASS; after a return; landing 20261013T224522-L-1476511 (interface); batch 20261013T224504; modules 2; new nodes 1)
 - 22:45 L: merged deliver/U3/Sheaf.RingTheory.PointedEtaleQuotientFinal (stage 3; reviewer PASS; first push; landing 20261013T224522-L-1476732 (interface); batch 20261013T224504; modules 7; new nodes 6)
@@ -13814,3 +13813,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:01 L: returned deliver/J4/Sheaf.AlgebraicGeometry.OpenPinnedTargetCounitTriangle (reviewer RETURN: (reviewer X-a2df0, head a2df062a6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Op)
 - 23:07 L: returned deliver/S4/Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore (reviewer RETURN: (reviewer X-7431e, head 7431eaa43) D4: both new nodes cite the existing item node lem-pc-perfect-overlap-transition-comp)
 - 23:07 L: returned deliver/C1/Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility (reviewer RETURN: (reviewer X-5d940, head 5d9408cdd) E2: All three new component statements are false. Counterexample: set X = X' = S = S')
+
+- 07:08 L: batch 20261013T224504 dependency take-out
