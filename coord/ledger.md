@@ -13543,3 +13543,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:45 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-275d6, head 275d6b9ba) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Gl)
 
 - 04:46 L: batch 20261013T201736 dependency take-out
+- 20:46 L: returned deliver/P2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (reviewer RETURN: (reviewer X-4e578, head 4e578dd70) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Trian)
