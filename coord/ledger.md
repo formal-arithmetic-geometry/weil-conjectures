@@ -12489,3 +12489,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/N4/Sheaf.AlgebraicGeometry.KoszulOpenAugmentedIdentityClass (stage 3; reviewer PASS; first push; landing 20261013T124314-L-3777460 (proof); batch 20261013T124305; modules 1; new nodes 0)
 - 12:43 L: merged deliver/P4/Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting (stage 3; reviewer PASS; first push; landing 20261013T124314-L-3777614 (interface); batch 20261013T124305; modules 3; new nodes 2)
 - 12:43 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.AffineBasisSectionsDerivedUnit (stage 3; reviewer PASS; first push; landing 20261013T124315-L-3777742 (interface); batch 20261013T124305; modules 3; new nodes 2)
+- 12:43 L: merged deliver/S1/Sheaf.Algebra.Homology.PerfectRingHomTensorDifferential (stage 3; reviewer PASS; first push; landing 20261013T124315-L-3777841 (interface); batch 20261013T124305; modules 3; new nodes 2)

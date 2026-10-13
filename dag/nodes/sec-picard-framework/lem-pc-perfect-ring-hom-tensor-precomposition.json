@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-perfect-ring-hom-tensor-precomposition",
+ "kind": "statement",
+ "title": "Signed tensor-dual evaluation: precomposition term",
+ "statement": "Let $A$ be a commutative ring and $P,Q$ arbitrary cochain complexes on its bottom-topology one-object ringed site [def-pc-perfect-rhom-base-change-map]. Let $D=\\operatorname{Hom}^{\\bullet}(P,A[0])$ [lem-pc-perfect-ring-dual-term-flat], $T=\\operatorname{Tot}(D\\otimes Q)$ [def-pc-tensor-complex-sheaves], and $H=\\operatorname{Hom}^{\\bullet}(P,Q)$ [def-pur-hom-complex]. Fix $n\\in\\mathbf Z$ and maps $a:T^n\\to H^n$, $b:T^{n+1}\\to H^{n+1}$ satisfying the signed evaluation conditions [lem-pc-perfect-ring-hom-tensor-degrees] in their respective degrees. Write $\\iota_{r,s}$ for the tensor summand inclusion, $d_1,d_2:D^r\\otimes Q^s\\to T^{n+1}$ for the first and signed second tensor summand differentials, and $\\pi_{k,p}$ for the Hom product projection. For every $r,s,p\\in\\mathbf Z$ with $r+s=n$, $d_1 b\\pi_{n+1,p}=-(-1)^n\\iota_{r,s}a\\pi_{n,p+1}\\operatorname{Hom}(d_P^{p,p+1},1)$, where the projection at $(n,p+1)$ has target $\\operatorname{Hom}(P^{p+1},Q^{p+(n+1)})$ using the equality $(p+1)+n=p+(n+1)$. No boundedness, finiteness, projectivity, or invertibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "def-pur-hom-complex",
+  "lem-pc-perfect-ring-dual-term-flat",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "expand the first tensor summand differential as d_D tensor id\nfollowed by the (r+1,s) inclusion, where D=Hom(P,A[0]). If p differs from\n-r-1, both sides vanish by the off-diagonal clauses (the original map\nis tested at p+1). If p=-r-1, the Hom differential formula for D gives\nd_D(lambda)(x)=-(-1)^r lambda(d_P(x)); the postcomposition term is zero\nbecause the differential of A[0] is zero. The degree n+1 normalization\ntherefore evaluates the left side as\n-(-1)^(r+(r+1)*s) lambda(d_P(x)) y. The degree n normalization followed\nby precomposition evaluates the right side as\n-(-1)^(n+r*s) lambda(d_P(x)) y. Since n=r+s the exponents are equal.\nThe canonical degree-zero single-complex isomorphism and the Q-degree\ntransports commute with these evaluations by naturality and proof\nirrelevance. Extend the calculation by bilinearity and the sheafification\nadjunction, and use evaluation at the unique slice object to detect\nequality of internal Hom morphisms. No finite support, projectivity,\nor bounds are used. Zero rings and modules and all integer degrees obey\nthe same calculation.",
+   "uses": [
+    "lem-pc-perfect-ring-hom-tensor-degrees",
+    "def-pur-hom-complex",
+    "lem-pc-perfect-ring-dual-term-flat",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "def-pur-hom-complex",
+  "lem-pc-perfect-ring-dual-term-flat",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)",
+  "note": "Expanded one of the two separate component calculations in the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed evaluation from the dual of a cochain complex tensor another complex intertwines the second tensor differential and postcomposition",
+   "date": "2026-10-13",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-13T10:21:41Z\", \"tool\": \"leansearch\", \"query\": \"Signed evaluation from the dual of a cochain complex tensor another complex intertwines the second tensor differential and postcomposition\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on the dual of a cochain complex intertwines the dual differential and signed precomposition",
+   "date": "2026-10-13",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-13T10:21:41Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on the dual of a cochain complex intertwines the dual differential and signed precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.\\u03b4\", \"CochainComplex.HomComplex.\\u03b4_v\", \"CochainComplex.HomComplex.\\u03b4_hom_apply\", \"CochainComplex.HomComplex.Cochain.ofHom_v_comp_d\", \"CochainComplex.HomComplex.Cochain.d_comp_ofHom_v\", \"CochainComplex.HomComplex.\\u03b4_hom\", \"CochainComplex.HomComplex.Cochain.ofHoms_v_comp_d\", \"CochainComplex.HomComplex.Cochain.d_comp_ofHoms_v\"], \"digest\": \"d454c56fc0797990\"}",
+   "verdict": "No exact normalized sheaf tensor-dual component identity."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorDual.*postcomposition|tensorDual.*precomposition|dual.*differential",
+   "date": "2026-10-13",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-13T10:21:41Z\", \"tool\": \"grep\", \"query\": \"tensorDual.*postcomposition|tensorDual.*precomposition|dual.*differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No exact normalized sheaf tensor-dual component identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectRingHomTensorDifferential",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 proof through 0AA7 (1), expanded 0A6A (1): Finite-projective Hom is tensor with the explicit dual; differential sign calculation of the finite-projective tensor-Hom comparison; separate precomposition term",
+   "via": [
+    "lem-pc-perfect-ring-hom-tensor-differential",
+    "lem-pc-perfect-ring-hom-tensor-dual-iso",
+    "lem-pc-perfect-ring-hom-kflat",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PerfectRingHomTensorPrecomposition",
+  "file": "lean/Sheaf/Algebra/Homology/PerfectRingHomTensorPrecomposition.lean",
+  "declaration": "CategoryTheory.perfectRingHom_tensorDual_precomposition",
+  "statement": "theorem perfectRingHom_tensorDual_precomposition {A : Type u} [CommRing A]\n    (P Q : CochainComplex (RingSiteModules A) ℤ) (n : ℤ) :\n    letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)\n    ∀ (a : (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _)).X n ⟶\n        (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n)\n      (b : (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _)).X (n + 1) ⟶\n        (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X (n + 1)),\n      PerfectRingHomTensorDegreeCondition P Q n a →\n      PerfectRingHomTensorDegreeCondition P Q (n + 1) b →\n      ∀ (r s p : ℤ) (h : r + s = n),\n      HomologicalComplex.mapBifunctor.d₁ (perfectRingDual P) Q (curriedTensor _)\n          (ComplexShape.up ℤ) r s (n + 1) ≫ b ≫ ringHomComplexProjection P Q (n + 1) p =\n        -n.negOnePow • (CochainComplex.ιMapBifunctor (perfectRingDual P) Q\n          (curriedTensor _) r s n h ≫ a ≫\n            (homComplex_exists.{u, u, u, u}\n              (R := CochainComplex.onePointRingSheaf A)).choose_spec.choose\n              P Q n (p + 1) (p + (n + 1)) (by omega) ≫\n            SheafOfModules.homObjMap (R := CochainComplex.onePointRingSheaf A)\n              (P.d p (p + 1)) (𝟙 (Q.X (p + (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T124315-L-3777841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T124315-L-3777841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

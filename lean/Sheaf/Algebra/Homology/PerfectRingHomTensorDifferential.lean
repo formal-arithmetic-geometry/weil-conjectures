@@ -1,11 +1,13 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group K4
+Authors: SHEAF group K4, SHEAF group S1
 -/
 module
 
 public import Sheaf.Algebra.Homology.PerfectRingHomTensorDegrees
+import Sheaf.Algebra.Homology.PerfectRingHomTensorPostcomposition
+import Sheaf.Algebra.Homology.PerfectRingHomTensorPrecomposition
 
 /-! # Differential compatibility of signed tensor-dual evaluation
 
@@ -20,6 +22,48 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace CategoryTheory
 
+private theorem tensorHom_comm_of_components
+    {C : Type*} [Category C] [Preadditive C]
+    (D Q : CochainComplex C ℤ) (F : C ⥤ C ⥤ C)
+    [F.PreservesZeroMorphisms] [∀ M, (F.obj M).PreservesZeroMorphisms]
+    [CochainComplex.HasMapBifunctor D Q F]
+    (H : CochainComplex C ℤ) (X Y : ℤ → ℤ → C)
+    (π : ∀ n p, H.X n ⟶ X n p) (ρ : ∀ n p, H.X n ⟶ Y n p)
+    (post : ∀ n p, X n p ⟶ X (n + 1) p)
+    (pre : ∀ n p, Y n p ⟶ X (n + 1) p)
+    (f : ∀ n, (CochainComplex.mapBifunctor D Q F).X n ⟶ H.X n)
+    (hπ : ∀ n, Nonempty (IsLimit (Fan.mk (H.X n) (π n))))
+    (hd : ∀ n p, H.d n (n + 1) ≫ π (n + 1) p =
+      π n p ≫ post n p - n.negOnePow • (ρ n p ≫ pre n p))
+    (hpre : ∀ n r s (h : r + s = n) p,
+      HomologicalComplex.mapBifunctor.d₁ D Q F (.up ℤ) r s (n + 1) ≫
+          f (n + 1) ≫ π (n + 1) p =
+        -n.negOnePow • (CochainComplex.ιMapBifunctor D Q F r s n h ≫
+          f n ≫ ρ n p ≫ pre n p))
+    (hpost : ∀ n r s (h : r + s = n) p,
+      HomologicalComplex.mapBifunctor.d₂ D Q F (.up ℤ) r s (n + 1) ≫
+          f (n + 1) ≫ π (n + 1) p =
+        CochainComplex.ιMapBifunctor D Q F r s n h ≫ f n ≫ π n p ≫ post n p) :
+    ∀ n m, (ComplexShape.up ℤ).Rel n m →
+      f n ≫ H.d n m = (CochainComplex.mapBifunctor D Q F).d n m ≫ f m := by
+  intro n m hnm
+  have hm : n + 1 = m := hnm
+  subst m
+  apply HomologicalComplex.mapBifunctor.hom_ext (K₁ := D) (K₂ := Q) (F := F)
+    (c := ComplexShape.up ℤ)
+  intro r s hrs
+  apply Fan.IsLimit.hom_ext (Classical.choice (hπ (n + 1)))
+  intro p
+  simp only [fan_mk_proj, Category.assoc]
+  rw [hd n p, HomologicalComplex.mapBifunctor.d_eq D Q F (.up ℤ) n (n + 1)]
+  simp only [Preadditive.comp_add, Preadditive.add_comp,
+    HomologicalComplex.mapBifunctor.ι_D₁_assoc,
+    HomologicalComplex.mapBifunctor.ι_D₂_assoc]
+  rw [hpre n r s hrs p, hpost n r s hrs p]
+  simp only [Preadditive.comp_sub, Linear.comp_units_smul, Units.neg_smul]
+  abel
+
+set_option backward.isDefEq.respectTransparency true in
 /-- Any family with the signed evaluation formula commutes with the differentials.
 There are no boundedness, projectivity, finiteness, or invertibility assumptions.
 Source: Stacks Project, More on Algebra, Tags 0A6A (1) and 0ATK (1), expanded
@@ -53,6 +97,37 @@ theorem perfectRingHom_tensorDual_degree_comm {A : Type u} [CommRing A]
       ∀ n m : ℤ, (ComplexShape.up ℤ).Rel n m →
         f n ≫ (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).d n m =
           (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _)).d n m ≫
-            f m := by sorry
+            f m := by
+  classical
+  let := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
+  intro f hf
+  let H := homComplex (R := CochainComplex.onePointRingSheaf A) P Q
+  let X := fun n p : ℤ ↦ SheafOfModules.homObj
+    (R := CochainComplex.onePointRingSheaf A) (P.X p) (Q.X (p + n))
+  let Y := fun n p : ℤ ↦ SheafOfModules.homObj
+    (R := CochainComplex.onePointRingSheaf A) (P.X (p + 1)) (Q.X (p + (n + 1)))
+  let ρ : ∀ n p : ℤ, H.X n ⟶ Y n p := fun n p ↦
+    (homComplex_exists.{u, u, u, u}
+      (R := CochainComplex.onePointRingSheaf A)).choose_spec.choose
+        P Q n (p + 1) (p + (n + 1)) (by omega)
+  apply tensorHom_comm_of_components (perfectRingDual P) Q
+    (curriedTensor (RingSiteModules A)) H X Y (ringHomComplexProjection P Q) ρ
+    (fun n p ↦ SheafOfModules.homObjMap (R := CochainComplex.onePointRingSheaf A)
+      (𝟙 (P.X p)) (Q.d (p + n) (p + (n + 1))))
+    (fun n p ↦ SheafOfModules.homObjMap (R := CochainComplex.onePointRingSheaf A)
+      (P.d p (p + 1)) (𝟙 (Q.X (p + (n + 1))))) f
+  · intro n
+    exact (homComplex_exists.{u, u, u, u}
+      (R := CochainComplex.onePointRingSheaf A)).choose_spec.choose_spec.1 P Q n
+  · intro n p
+    exact (homComplex_exists.{u, u, u, u}
+      (R := CochainComplex.onePointRingSheaf A)).choose_spec.choose_spec.2.1
+        P Q n (n + 1) p (p + (n + 1)) (p + n) (p + 1) rfl rfl rfl (by omega)
+  · intro n r s hrs p
+    exact perfectRingHom_tensorDual_precomposition P Q n (f n) (f (n + 1))
+      (hf n) (hf (n + 1)) r s p hrs
+  · intro n r s hrs p
+    exact perfectRingHom_tensorDual_postcomposition P Q n (f n) (f (n + 1))
+      (hf n) (hf (n + 1)) r s p hrs
 
 end CategoryTheory
