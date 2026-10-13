@@ -8,11 +8,12 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
+import Mathlib.Algebra.Homology.SingleHomology
+import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction
-import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
-import Sheaf.Topology.ClosedImmersionPushforwardExact
+import Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology
+import Sheaf.AlgebraicGeometry.SelfTorPushforwardHomology
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
 /-! # Resolutions and global self-Ext/self-Tor identifications
@@ -26,6 +27,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- Choose augmented resolutions and identify their global self-Ext/self-Tor homology.
 
 Source: Stacks Project, Tag 06YS (K-flat resolutions), Tag 079P (K-injective resolutions),
@@ -79,6 +81,42 @@ theorem exists_selfExt_tor_resolution_core
       (eG : (Scheme.Modules.tensorPullback i).obj G ≅
         (homComplex (R := Z.sheaf) T J).homology (n : ℤ))
       (eQ : Q ≅ T.homology (-(n : ℤ))), True := by
-  sorry
+  classical
+  dsimp
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction i
+  have hAdd : (Scheme.Modules.tensorPullback i).Additive := adj.left_adjoint_additive
+  obtain ⟨P, a, hP, hflat, ha, _⟩ := CochainComplex.exists_isKFlatResolution
+    (R := Y.sheaf) ((HomologicalComplex.single Y.Modules (.up ℤ) 0).obj B)
+  obtain ⟨_, _, I, η, hI⟩ :=
+    SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
+      (Opens.grothendieckTopology Z) Z.sheaf
+  let O := (HomologicalComplex.single Z.Modules (.up ℤ) 0).obj
+    (SheafOfModules.unit Z.ringCatSheaf)
+  let J := I.obj O
+  let b := η.app O
+  obtain ⟨hb, hKI, _⟩ := hI O
+  have : QuasiIso b := hb
+  have hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k) := by
+    intro k hk
+    exact (HomologicalComplex.isZero_single_obj_homology (.up ℤ) 0
+      (SheafOfModules.unit Z.ringCatSheaf) k hk).of_iso
+        (isoOfQuasiIsoAt b k).symm
+  let e0 : J.homology 0 ≅ SheafOfModules.unit Z.ringCatSheaf :=
+    (isoOfQuasiIsoAt b 0).symm ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 _
+  refine ⟨hAdd, P, J, a, b, ⟨ha, hP⟩, hflat, hb, hKI, hJ, e0, ?_⟩
+  let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
+  obtain ⟨g⟩ := nonempty_selfExt_pushforward_homology i P J a b ⟨ha, hP⟩ hb hKI (n : ℤ)
+  obtain ⟨q⟩ := nonempty_selfTor_pushforward_homology i P a ⟨ha, hP⟩ (-(n : ℤ))
+  let e : Scheme.Modules.tensorPullback i ⊣ Scheme.Modules.pushforward i :=
+    Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)
+  have hc : ∀ N : Z.Modules, IsIso (e.counit.app N) :=
+    (closedImmersion_pushforward_fullyFaithful i).1
+  let eG := (Scheme.Modules.tensorPullback i).mapIso g ≪≫
+    asIso (e.counit.app ((homComplex (R := Z.sheaf) T J).homology (n : ℤ)))
+  let eQ := (Scheme.Modules.tensorPullback i).mapIso q ≪≫
+    asIso (e.counit.app (T.homology (-(n : ℤ))))
+  exact ⟨eG, eQ, trivial⟩
 
 end AlgebraicGeometry

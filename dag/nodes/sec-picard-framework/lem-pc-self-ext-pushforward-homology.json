@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-self-ext-pushforward-homology",
+ "kind": "statement",
+ "title": "Self-Ext homology as pushforward of a fixed Hom-complex",
+ "statement": "For schemes Z and Y [def-pc-scheme], a closed immersion i:Z -> Y [def-weil-closed-immersion], and any supplied derived category on Y [def-pc-derived-category], let B=i_*O_Z and S be the degree-zero single functor. Let P on Y and J on Z be integer-indexed cochain complexes [def-pc-cochain-complex-modules], with a K-flat resolution a:P -> B[0] [def-pc-kflat-complex, def-pc-quasi-iso-modules] and a quasi-isomorphism b:O_Z[0] -> J [def-pc-quasi-iso-modules], where J is K-injective [def-pur-kinjective-complex]. Assume the tensor pullback functor i* [def-pc-module-pullback] is additive and put T=i*P termwise. For every integer k, there is an isomorphism H^k(RHom_Y(S(B),S(B))) [def-pur-derived-internal-hom] with i_*H^k(Hom(T,J)) [def-pur-hom-complex]. It uses the actual supplied localization on Y and does not require a chosen derived category on Z in its statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DH",
+  "place": "Cohomology, Section 20.42 (08DH), tensor/internal-Hom adjunction (08DJ), the pullback evaluation mate (08I3), and Modules Lemma 17.13.4 (08KS). Representative and exact-pushforward part of step 2 of new-j3-self-ext-tor-core."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-quasi-iso-modules",
+  "def-pc-scheme",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "In standard derived localizations, a identifies Q(P) with B[0]. Apply the K-flat representative comparison for derived pullback to identify Li*(B[0]) with Q(T). The augmentation b identifies Q(J) with O_Z[0].",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Closed immersion pushforward is exact. Identify the source space with its closed image and apply closed-subset exactness after forgetting scalars. The forgetful functor reflects exactness, so this is exactness on modules. Consequently Ri*(O_Z[0]) is B[0] and H^k(Ri*L) is i_*H^k(L).",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the internal-Hom pullback/direct-image adjunction to B[0] and O_Z[0]. Use the representatives from step 1 and the K-injectivity of J to identify RHom_Z(Li*(B[0]),O_Z[0]) with Q(Hom(T,J)). Take degree-k homology and compose with the exact-pushforward comparison from step 2. Transport along localization equivalences on Y to the supplied universe w, using internal-Hom and homology comparisons. These identify exactly the displayed objects, while the actual T and J stay fixed.",
+   "uses": [
+    "lem-pc-derived-internal-hom-pullback-adjunction",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pur-derived-internal-hom",
+  "lem-pc-derived-internal-hom-pullback-adjunction",
+  "lem-sc-closed-immersion-pushforward-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "J4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/08DH",
+   "place": "Cohomology, Section 20.42 (08DH), tensor/internal-Hom adjunction (08DJ), the pullback evaluation mate (08I3), and Modules Lemma 17.13.4 (08KS). Representative and exact-pushforward part of step 2 of new-j3-self-ext-tor-core."
+  },
+  "note": "Split representative-comparison glue from the existing sourced proof plan. Identity immersion, empty schemes and arbitrary integer degrees checked in words."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes the cohomology of derived internal Hom of the pushed forward structure sheaf is pushforward of Hom of a pulled back K flat resolution with a K injective resolution",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict inferred from this service failure.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of a K flat resolution and K injective resolution computes derived internal Hom and derived tensor for a closed immersion",
+   "results": "LeanFinder returned eight declarations about monoidal closed categories, underived restrictions, Tor functors and flat morphisms; none identifies the displayed derived self-Ext sheaf with pushforward of Hom-complex homology.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "selfExt|selfTor|self_ext|self_tor|pushforward.*homology|homology.*pushforward",
+   "results": "rg on lean/WeilConjectures, lean/Sheaf and Mathlib/AlgebraicGeometry found only the existing joint self-Ext/Tor model, its core hole, local Koszul comparisons and stalk/cohomology comparisons. The generic internal-Hom representative theorem is already available in DerivedInternalHom; none of these statements supplies this fixed-resolution pushforward identification.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfExtTorResolutionCore",
+  "date": "2026-10-14",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-self-ext-tor-core",
+   "place": "step 2: Self-Ext homology as pushforward of a fixed Hom-complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfExtPushforwardHomology.lean",
+  "declaration": "AlgebraicGeometry.nonempty_selfExt_pushforward_homology",
+  "statement": "theorem nonempty_selfExt_pushforward_homology {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] [(Scheme.Modules.tensorPullback i).Additive] (P : CochainComplex Y.Modules ℤ) (J : CochainComplex Z.Modules ℤ) (a : P ⟶ (HomologicalComplex.single Y.Modules (.up ℤ) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))) (b : (HomologicalComplex.single Z.Modules (.up ℤ) 0).obj (SheafOfModules.unit Z.ringCatSheaf) ⟶ J) (hP : CochainComplex.IsKFlatResolution (R := Y.sheaf) a) (hb : QuasiIso b) (hJ : J.IsKInjective) (k : ℤ) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P Nonempty (((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (H.obj (op (S.obj B), S.obj B))) ≅ (Scheme.Modules.pushforward i).obj ((homComplex (R := Z.sheaf) T J).homology k))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T201757-L-3972256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T201757-L-3972256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

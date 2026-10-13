@@ -32,7 +32,7 @@
  },
  "proof": [
   {
-   "text": "Choose a K-flat resolution a:P -> B[0] with flat terms, and a K-injective resolution b:O_Z[0] -> J. Retain the quasi-isomorphisms and resolution properties. Tensor pullback is additive by its adjunction with pushforward. Define T as its termwise application to P, representing Li*B. The quasi-isomorphism b identifies H^0(J) with O_Z and makes other homology zero.",
+   "text": "Obtain a K-flat resolution P of B[0] with flat terms from exists_isKFlatResolution. Obtain the functorial K-injective resolution of O_Z[0] from grothendieckAbelian_and_functorial_kInjective_resolutions. Tensor pullback is additive by its adjunction with the additive pushforward. Define T as its termwise application to P. Homology of the quasi-isomorphism b and Mathlib homology of a single complex give the vanishing hJ and the degree-zero isomorphism e0.",
    "uses": [
     "lem-pc-kflat-resolution",
     "prop-pur-kinjective-resolutions-exist"
@@ -40,33 +40,31 @@
    "elementary": false
   },
   {
-   "text": "Test the internal Hom against an arbitrary derived object A. Tensor-Hom adjunction, derived pullback/direct-image adjunction and tensor comparison give the natural Yoneda isomorphism RHom_Y(B,i_*O_Z) = Ri_*RHom_Z(Li*B,O_Z). Since J is K-injective the right-hand internal Hom is represented by Hom(T,J). Closed-immersion pushforward is exact, so homology commutes with it; its fully faithful adjunction has invertible ordinary tensor-pullback counit. These yield eG. The qcqs projection formula for O_Z and the quasi-coherent B identifies B tensor^L B with i_*Li*B, since a closed immersion is affine, quasi-compact and quasi-separated. Exact pushforward and the same counit in degree -n give eQ. Transport these representative calculations to the supplied localization on Y without changing its universe.",
+   "text": "Apply the two fixed-resolution comparisons in arbitrary integer degrees to obtain G isomorphic to i_*H^n(Hom(T,J)) and H^(-n)(B[0] tensor^L B[0]) isomorphic to i_*H^(-n)(T). Apply ordinary tensor pullback to these isomorphisms, then compose with the invertible closed-immersion counit. This constructs eG and eQ for the same P and J chosen in step 1. Return the resolutions, their augmentations, flat terms, quasi-isomorphisms, K-injectivity, homology vanishing and these three isomorphisms.",
    "uses": [
-    "lem-pc-derived-internal-hom-pullback-adjunction",
-    "lem-pc-qcqs-derived-projection-iso-universes",
-    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-pc-self-ext-pushforward-homology",
+    "lem-pc-self-tor-pushforward-homology",
     "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-internal-hom-pullback-adjunction",
   "lem-pc-kflat-resolution",
-  "lem-pc-qcqs-derived-projection-iso-universes",
-  "lem-sc-closed-immersion-pushforward-exact",
+  "lem-pc-self-ext-pushforward-homology",
+  "lem-pc-self-tor-pushforward-homology",
   "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "B2",
+  "agent": "J4",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext, together with tags 08DH, 08I3, 08KS and 068G for the derived pullback, internal Hom and tensor identifications."
   },
-  "note": "B2 returned-delivery repair: augmented global resolutions followed by their local chart model."
+  "note": "Complete Lean construction of resolutions, J homology and counit composition; the two separate fixed-resolution pushforward comparisons remain as new sourced items."
  },
  "mathlib_searches": [
   {
@@ -130,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d645b",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T190134-L-3213959",
+  "landing": "20261013T201757-L-3972256",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet, unchanged target signature, clean compilation, importer gate, permitted axioms, DAG, and report requirements."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
