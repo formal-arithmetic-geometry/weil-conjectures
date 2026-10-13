@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.FourierTrace
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
@@ -26,8 +26,6 @@ energy at level `n` by `qⁿ`.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilComplex.traceFunction_congr`: invariance of trace functions under
-  isomorphism.
 - `AlgebraicGeometry.WeilSheaf.traceFunction_shift_toComplex`: `t_{F[1]} = -t_F`.
 - `AlgebraicGeometry.WeilComplex.traceEnergy`: the trace energy of a Weil complex.
 - `AlgebraicGeometry.WeilComplex.traceEnergy_fourierTransform`: the Plancherel identity.
@@ -46,16 +44,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 section
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- Isomorphic Weil complexes have the same trace function: their cohomology sheaves are
-isomorphic. -/
-theorem WeilComplex.traceFunction_congr {K L : WeilComplex k₀ l X} (e : K ≅ L) (n : ℕ)
-    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    K.traceFunction n x = L.traceFunction n x := by
-  rw [traceFunction, traceFunction]
-  congr 1
-  ext j
-  rw [WeilSheaf.traceFunction_congr ((homologySheaf j).mapIso e)]
 
 /-- The trace function of a Weil sheaf placed in degree `0` and shifted by one is the negative
 of the trace function of the sheaf: the only cohomology sheaf is `𝓗⁻¹(F[1]) ≅ F`, in odd
@@ -98,7 +86,20 @@ The nontriviality of `ψ`, implicit in the blueprint, is needed for the orthogon
 characters `y ↦ ψ(Tr(xy))`. (blueprint: `cor-fd-plancherel`, subsection `sk-cor-plancherel`) -/
 theorem WeilComplex.traceEnergy_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : 1 ≤ n) :
-    ((fourierTransform ψ).obj K).traceEnergy ι n = (Nat.card k₀ : ℝ) ^ n * K.traceEnergy ι n :=
-  sorry
+    ((fourierTransform ψ).obj K).traceEnergy ι n = (Nat.card k₀ : ℝ) ^ n * K.traceEnergy ι n := by
+  have hn' : n ≠ 0 := Nat.one_le_iff_ne_zero.1 hn
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  let := Fintype.ofFinite (FiniteField.galoisExtension k₀ n)
+  have h (L : WeilComplex k₀ l (affineLine k₀)) :
+      L.traceEnergy ι n = ∑ x, ‖ι (L.affineLineTraceFunction n x)‖ ^ 2 := by
+    rw [traceEnergy, ← finsum_comp_equiv (AffineSpace.fieldPointsEquiv k₀ _).symm,
+      finsum_eq_sum_of_fintype]
+    rfl
+  rw [h, h]
+  simp_rw [traceFunction_fourierTransform ψ K hn', map_neg, norm_neg]
+  rw [FiniteField.sum_norm_sq_fourierTransform ι hψ, ← Nat.card_eq_fintype_card,
+    FiniteField.nat_card_galoisExtension k₀ n hn']
+  push_cast
+  rfl
 
 end AlgebraicGeometry
