@@ -1,0 +1,107 @@
+{
+ "id": "lem-g2-grothendieck-derived-localization-brown-data",
+ "kind": "statement",
+ "title": "Localization model and Brown representation before splitting the unit",
+ "statement": "Let A be an abelian category of objects in Type uA and morphisms in Type vA, Grothendieck relative to w, with a chosen w-Hom derived category D(A) and coproducts indexed by Type max(w,vA,vH). Let H : D(A)^op → AddCommGrpCat.{vH} be homological and preserve discrete limits indexed by that same universe. There exist a category B of object universe max(uA,vA,max(w,vH)+1) and Hom universe max(w,vH), functors L : B → D(A) and R : D(A) → B, an adjunction L left adjoint to R with invertible counit, and an object E of B naturally representing L.op followed by the underlying set functor of H and ULift.{w}. This assertion provides no split unit and no retract in D(A).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F5X",
+  "place": "injectives-lemma-brown, first paragraph (using derived Gabriel-Popescu, Tag 0F5V)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use Gabriel-Popescu and its derived form (Stacks Tag 0F5V) to obtain the exact derived localization L with fully faithful right adjoint R and invertible counit. Use modules in universe max(w,vH), and lift objects to the stated larger object universe if necessary.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Because L is an exact left adjoint, the pullback H L is homological and sends coproducts to products. The free rank-one module compactly generates the module derived category. Apply [lem-pc-brown-cohomological-representability] with the universe transfer [lem-pc-brown-representability-universe-transfer] to obtain the natural representation. Lift underlying sets to the common universe max(w,vH). The given larger discrete-limit hypothesis includes the sums required by this construction.",
+   "uses": [
+    "lem-pc-brown-cohomological-representability",
+    "lem-pc-brown-representability-universe-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-brown-cohomological-representability",
+  "lem-pc-brown-representability-universe-transfer"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0F5X",
+  "place": "injectives-lemma-brown, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Gabriel Popescu derived localization and Brown representability of a cohomological functor pulled back to module complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability localization fully faithful derived right adjoint split unit",
+   "results": "Hits: CategoryTheory.Localization.LeftBousfield.isLocalization, CategoryTheory.Adjunction.isLocalization', CategoryTheory.Adjunction.isLocalization, CategoryTheory.Localization.LeftBousfield.W_adj_unit_app, CategoryTheory.ObjectProperty.isLocalization_isLocal, CategoryTheory.Adjunction.isLocalization_leftAdjoint, CategoryTheory.Adjunction.isLocalization_rightAdjoint', CategoryTheory.Adjunction.isLocalization_rightAdjoint; no matching derived localization and pulled-back representation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "brown|Brown|GabrielPopescu",
+   "results": "Hits: Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean; no matching derived localization and pulled-back representation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckDerivedBrownRetract",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-grothendieck-derived-brown-retract",
+   "place": "First paragraph: localization model and representation of H L, before the unit triangle",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckDerivedBrownRetractData",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckDerivedBrownRetractData.lean",
+  "declaration": "CategoryTheory.grothendieckDerived_localization_brown_data",
+  "statement": "theorem grothendieckDerived_localization_brown_data\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)]\n    (H : (DerivedCategory A)ᵒᵖ ⥤ AddCommGrpCat.{vH}) [H.IsHomological]\n    (hH : ∀ I : Type (max w vA vH), PreservesLimitsOfShape (Discrete I) H) :\n    ∃ (B : Type (max uA vA ((max w vH) + 1))) (cB : Category.{max w vH} B),\n      letI := cB\n      ∃ (L : B ⥤ DerivedCategory A) (R : DerivedCategory A ⥤ B)\n        (adj : L ⊣ R), IsIso adj.counit ∧\n        ∃ E : B, Nonempty (uliftYoneda.{vH}.obj E ≅\n          L.op ⋙ H ⋙ forget AddCommGrpCat ⋙ uliftFunctor.{w})",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T163535-L-1619990",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T163535-L-1619990",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

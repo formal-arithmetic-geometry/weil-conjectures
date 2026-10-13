@@ -13151,3 +13151,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:35 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique (stage 3; reviewer PASS; first push; landing 20261013T163534-L-1619560 (proof); batch 20261013T163531; modules 1; new nodes 0)
 - 16:35 L: merged deliver/E4/Sheaf.Paper.ModuleCupGlobalTensorComparison (stage 3; reviewer PASS; first push; landing 20261013T163534-L-1619665 (proof); batch 20261013T163531; modules 1; new nodes 0)
 - 16:35 L: merged deliver/F4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit (stage 3; reviewer PASS; first push; landing 20261013T163535-L-1619838 (interface); batch 20261013T163531; modules 2; new nodes 1)
+- 16:35 L: merged deliver/G2/Sheaf.CategoryTheory.GrothendieckDerivedBrownRetract (stage 3; reviewer PASS; first push; landing 20261013T163535-L-1619990 (interface); batch 20261013T163531; modules 2; new nodes 1)
