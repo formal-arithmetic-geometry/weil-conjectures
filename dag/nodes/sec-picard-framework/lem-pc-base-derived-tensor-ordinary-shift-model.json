@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-base-derived-tensor-ordinary-shift-model",
+ "kind": "statement",
+ "title": "Transport of the ordinary derived tensor comparison",
+ "statement": "Let R,A,B,C be commutative rings in one universe, with A and B R-algebras and C an E=A tensor_R B algebra, and derived categories of R- and B-modules. Let K,L be A-module cochain complexes, n,i integers, e:L ≅ K[-n], and mK a model of K as in [def-pc-base-derived-tensor-cohomology-model]. Put F_E equal to termwise extension A→E and let eOrd:H^(i+n)(F_E L) ≅ H^i(F_E K) be the isomorphism from F_E(e), its canonical shift isomorphism and the prescribed homology shift. There exist a model mL of L and an E-linear isomorphism eT:mL.cohomology(i+n) ≅ mK.cohomology(i) such that mL.comparison(i+n) followed by eOrd equals eT followed by mK.comparison(i). No localized comparison square or isomorphism of a comparison is asserted.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 06Y6 (derived extension is exact), 08IB (affine ordinary comparison), 05SU (derived shifts), 0DJA(1) (tensor inheritance); shift compatibility here is an agent-written algebraic ingredient, not a verbatim assertion of Tag 0DJA"
+ },
+ "proof": [
+  {
+   "text": "Keep mK.derived and mK.counit. Its IsLeftDerivedFunctor universal property is the right Kan property. Apply the coherent right Kan extension shift theorem to termwise extension on homotopy categories followed by Qh, and to Qh. This gives integer-shift isomorphisms on the supplied derived functor and shift compatibility of its counit. The input and ordinary tensor functors commute with shifts by the additive mapHomologicalComplex/mapHomotopyCategory shift structures.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every j set the new E-cohomology object to mK.cohomology(j-n). Restrict e to R, pass to homotopy and derived categories, apply the derived shift isomorphism and the homology shift isomorphism, then compose with mK.cohomologyIso(j-n) to define cohomologyIso for L. Naturality of this composite for multiplication by a in A, together with mK.cohomologyIso_smul, proves its required scalar-action equation. The existing B-linearity supplies the other tensor factor. The reindexing equality (i+n)-n=i gives eT.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport ordinaryIso from K through the restrictions of e, ordinary scalar-extension shift maps, and cohomology reindexing. On pure tensors these maps apply e termwise and its inverse; the generator formula is preserved. Set comparison(j) to mK.comparison(j-n) followed by the inverse ordinary homology shift. The counit shift equation, naturality of restriction/homology, and mK.comparison_eq give the required comparison_eq for this map. In degree i+n cancellation of the ordinary homology shift proves the displayed ordinary comparison square.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pur-right-kan-extension-coherent-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct ordinaryToLocalized on a pure tensor a tensor x as g(a) tensor x: transpose the unit of extension along g composed with f, using the restriction-composition isomorphism. Transpose comparison followed by homology of this map and the restriction/homology isomorphism under extension/restriction along g to define localizedComparison. The adjunction inverse identities give localized_eq. Fill every model field with these constructions. No compatibility of localizedComparison with shifts is used or asserted in this lemma.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pur-right-kan-extension-coherent-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 06Y6 (derived extension is exact), 08IB (affine ordinary comparison), 05SU (derived shifts), 0DJA(1) (tensor inheritance); shift compatibility here is an agent-written algebraic ingredient, not a verbatim assertion of Tag 0DJA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor of additive functor commutes with shift canonical comparison",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived functor commutes with shifts counit compatible homology comparison",
+   "results": "Eight hits for exact-functor derived categories and their shift instances; no transport of BaseDerivedTensorCohomologyModel.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso_hom_naturality",
+   "results": "Remote Loogle does not know the qualified identifier. Local source has the lemma in Mathlib.Algebra.Homology.ShortComplex.PreservesHomology.",
+   "date": "2026-10-14",
+   "verdict": "local signature checked"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*model|model.*shift|mapHomologicalComplexHomologyIso_hom_app_shiftIso|rightKanExtension_coherentShift",
+   "results": "No ordinary derived-model shift transport in Sheaf or WeilConjectures. Found the proved coherent right Kan shift theorem in Sheaf.CategoryTheory.RightKanExtensionCoherentShift and the generic exact-functor homology shift lemma in WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence; read both signatures and proofs.",
+   "date": "2026-10-14",
+   "verdict": "generic closed ingredients only; no specialized transport or coefficient-map square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquareData",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tensor inheritance in the single-complex base-change criterion: transport of the ordinary derived comparison in the shift reduction (Tag 0DJA(1)).",
+   "via": [
+    "lem-pc-localized-tensor-comparison-shift-square-data",
+    "lem-pc-localized-tensor-comparison-shift-square",
+    "lem-pc-localized-tensor-comparison-shift-component",
+    "lem-pc-localized-tensor-comparison-shift",
+    "lem-pc-localized-tensor-comparison-generators",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree",
+    "lem-pc-localized-tensor-comparison-inheritance"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryShiftModel",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorOrdinaryShiftModel.lean",
+  "declaration": "ModuleCat.exists_baseDerivedTensor_ordinary_shift_model",
+  "statement": "theorem exists_baseDerivedTensor_ordinary_shift_model\n    (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)\n    (mK : BaseDerivedTensorCohomologyModel R A B K C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u} (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n      (.up ℤ)\n    let eH := (HomologicalComplex.homologyFunctor (ModuleCat.{u} (A ⊗[R] B))\n      (.up ℤ) (i + n)).mapIso (F.mapIso e ≪≫ (F.commShiftIso (-n)).app K) ≪≫\n      (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} (A ⊗[R] B)) (-n) (i + n) i\n        (by omega)).app (F.obj K)\n    ∃ (mL : BaseDerivedTensorCohomologyModel R A B L C)\n      (eT : mL.cohomology (i + n) ≅ mK.cohomology i),\n      mL.comparison (i + n) ≫ eH.hom = eT.hom ≫ mK.comparison i",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

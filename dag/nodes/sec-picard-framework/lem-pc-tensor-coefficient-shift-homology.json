@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-tensor-coefficient-shift-homology",
+ "kind": "statement",
+ "title": "Shift compatibility of the ordinary coefficient map",
+ "statement": "Let A,E,C be commutative rings in one universe, f:A→E and g:E→C ring maps, K,L A-module cochain complexes, n,i integers and e:L ≅ K[-n]. Let tauK:F_E K→G_E(F_C K) and tauL:F_E L→G_E(F_C L) send a ⊗ x to g(a) ⊗ x in every degree (a in E), where F_E,F_C extend along f,g∘f and G_E restricts along g. Let eE and eC be the prescribed ordinary homology shift isomorphisms from e at degree i+n to degree i, and let muK,muL be restriction/homology isomorphisms. Then H^(i+n)(tauL) followed by muL and G(eC) equals eE followed by H^i(tauK) and muK. No derived categories, cohomology actions, models or localized comparison maps are assumed.",
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 08IB, affine ordinary coefficient map; Tag 05G3, extension of scalars; Tag 0DJA(1), tensor inheritance; shift compatibility here is an agent-written algebraic ingredient, not a verbatim assertion of Tag 0DJA"
+ },
+ "proof": [
+  {
+   "text": "Let F_E and F_C be termwise extension along f and g∘f, G restriction along g, and G_E its termwise functor. Form the prescribed complex shift isomorphisms cE and cC from e. Put cG=G_E(cC) followed by the canonical restriction shift isomorphism. HomologicalComplex.Hom.ext and ExtendScalars.hom_ext reduce tauL followed by cG = cE followed by tauK[-n] to pure tensors. The generator formulas hL,hK and ExtendScalars.map_tmul prove the equality. The proved ModuleCat.extendScalars_additive instance supplied by the model module gives the canonical extension shift maps used in the statement.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use G.mapHomologicalComplexHomologyIso for the exact restriction functor G. Unfold its definition to identify its components with (Q.sc j).mapHomologyIso G. The proved upstream lemma CategoryTheory.Functor.mapHomologicalComplexHomologyIso_hom_app_shiftIso, in WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence, gives compatibility with the prescribed homology shift. Cancel homology of the inverse restriction shift map to orient this compatibility in the needed direction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of G.mapHomologicalComplexHomologyIso moves restriction/homology past cC. Substitute its shift compatibility, combine the homology maps by HE.map_comp, and substitute the complex square from step 1. Naturality of CochainComplex.ShiftSequence.shiftIso for tauK moves its shifted homology map past the shift isomorphism. Category associativity yields precisely the displayed coefficient square. The Lean proof is complete; no derived-model transport is imported or used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 08IB, affine ordinary coefficient map; Tag 05G3, extension of scalars; Tag 0DJA(1), tensor inheritance; shift compatibility here is an agent-written algebraic ingredient, not a verbatim assertion of Tag 0DJA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor of additive functor commutes with shift canonical comparison",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived functor commutes with shifts counit compatible homology comparison",
+   "results": "Eight hits for exact-functor derived categories and their shift instances; no transport of BaseDerivedTensorCohomologyModel.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso_hom_naturality",
+   "results": "Remote Loogle does not know the qualified identifier. Local source has the lemma in Mathlib.Algebra.Homology.ShortComplex.PreservesHomology.",
+   "date": "2026-10-14",
+   "verdict": "local signature checked"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*model|model.*shift|mapHomologicalComplexHomologyIso_hom_app_shiftIso|rightKanExtension_coherentShift",
+   "results": "No ordinary derived-model shift transport in Sheaf or WeilConjectures. Found the proved coherent right Kan shift theorem in Sheaf.CategoryTheory.RightKanExtensionCoherentShift and the generic exact-functor homology shift lemma in WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence; read both signatures and proofs.",
+   "date": "2026-10-14",
+   "verdict": "generic closed ingredients only; no specialized transport or coefficient-map square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquareData",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tensor inheritance in the single-complex base-change criterion: termwise coefficient-map square in the shift reduction (Tag 0DJA(1)).",
+   "via": [
+    "lem-pc-localized-tensor-comparison-shift-square-data",
+    "lem-pc-localized-tensor-comparison-shift-square",
+    "lem-pc-localized-tensor-comparison-shift-component",
+    "lem-pc-localized-tensor-comparison-shift",
+    "lem-pc-localized-tensor-comparison-generators",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree",
+    "lem-pc-localized-tensor-comparison-inheritance"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorCoefficientShiftHomology",
+  "file": "lean/Sheaf/Algebra/Homology/TensorCoefficientShiftHomology.lean",
+  "declaration": "ModuleCat.tensorCoefficient_shift_homology",
+  "statement": "theorem tensorCoefficient_shift_homology\n    (f : A →+* E) (g : E →+* C)\n    (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)\n    (τK : ((extendScalars f).mapHomologicalComplex (.up ℤ)).obj K ⟶\n      ((restrictScalars g).mapHomologicalComplex (.up ℤ)).obj\n        (((extendScalars (g.comp f)).mapHomologicalComplex (.up ℤ)).obj K))\n    (τL : ((extendScalars f).mapHomologicalComplex (.up ℤ)).obj L ⟶\n      ((restrictScalars g).mapHomologicalComplex (.up ℤ)).obj\n        (((extendScalars (g.comp f)).mapHomologicalComplex (.up ℤ)).obj L))\n    (hK : ∀ (j : ℤ) (a : E) (x : K.X j),\n      τK.f j (a ⊗ₜ[A,f] x) = g a ⊗ₜ[A,g.comp f] x)\n    (hL : ∀ (j : ℤ) (a : E) (x : L.X j),\n      τL.f j (a ⊗ₜ[A,f] x) = g a ⊗ₜ[A,g.comp f] x) (i : ℤ) :\n    let FE := (extendScalars.{u, u, u} f).mapHomologicalComplex (.up ℤ)\n    let FC := (extendScalars.{u, u, u} (g.comp f)).mapHomologicalComplex (.up ℤ)\n    let G := restrictScalars.{u} g\n    let eE := (HomologicalComplex.homologyFunctor (ModuleCat.{u} E) (.up ℤ)\n      (i + n)).mapIso (FE.mapIso e ≪≫ (FE.commShiftIso (-n)).app K) ≪≫\n      (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} E) (-n) (i + n) i\n        (by omega)).app (FE.obj K)\n    let eC := (HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ)\n      (i + n)).mapIso (FC.mapIso e ≪≫ (FC.commShiftIso (-n)).app K) ≪≫\n      (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} C) (-n) (i + n) i\n        (by omega)).app (FC.obj K)\n    HomologicalComplex.homologyMap τL (i + n) ≫\n        ((FC.obj L).sc (i + n) |>.mapHomologyIso G).hom ≫ G.map eC.hom =\n      eE.hom ≫ HomologicalComplex.homologyMap τK i ≫\n        ((FC.obj K).sc i |>.mapHomologyIso G).hom",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

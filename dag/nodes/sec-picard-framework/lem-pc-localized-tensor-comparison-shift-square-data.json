@@ -12,20 +12,37 @@
  },
  "proof": [
   {
-   "text": "Retain mK.derived, mK.counit and mK.universal. The additive scalar extension functor commutes with shifts; uniqueness in the derived universal property supplies its counit-compatible derived shift comparison. Reindex mK.cohomology by j-n. Use restriction of e and the derived and cohomology shift comparisons to construct cohomologyIso; naturality in multiplication by A proves cohomologyIso_smul. Transport ordinaryIso using e and the scalar-extension shift map, and construct ordinaryToLocalized by its coefficient formula. Define comparison by the counit equation and localizedComparison by extension/restriction adjunction. These explicit constructions give all model fields and the prescribed homology square. At j=i+n the source reindexing gives eS. No arbitrary model-existence witness is chosen.",
+   "text": "Apply the ordinary-shift-model transport theorem to obtain mL, an E-cohomology isomorphism eT and its ordinary comparison square. Define eS by applying extension E→C to eT.",
    "uses": [
+    "lem-pc-base-derived-tensor-ordinary-shift-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coefficient shift homology theorem to mK.ordinaryToLocalized and mL.ordinaryToLocalized with their two generator formulas. This gives the square for the homology of the coefficient maps followed by restriction/homology and the prescribed eH.",
+   "uses": [
+    "lem-pc-tensor-coefficient-shift-homology",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "The extension/restriction adjunction hom equivalence is injective. Naturality on its source and target and the two models localized_eq equations identify the desired forward square with the ordinary comparison square composed with the coefficient square. Rewrite those squares and reassociate to prove eS.hom followed by mK.localizedComparison = mL.localizedComparison followed by eH.hom. Precompose by eS.inv and cancel eS.inv followed by eS.hom to get the original statement.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model"
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-derived-tensor-ordinary-shift-model",
+  "lem-pc-tensor-coefficient-shift-homology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 06Y6 and 08IB; integer shifts as in Tag 0DJA(1)"
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6, 08IB, 0DJA(1): ordinary derived-model transport, a fully proved coefficient shift square, and explicit adjunction assembly; one strict remaining intermediate theorem"
  },
  "mathlib_searches": [
   {
@@ -99,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T201814-L-3979105",
+  "landing": "20261013T211100-L-390831",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
