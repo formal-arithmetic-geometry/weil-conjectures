@@ -86,6 +86,71 @@ Proof:
 13. If `χ|_U = 0`, its image is coherent supported in `V(𝓘)`, killed by some `𝓘ᵗ`
     (lem-weil-pbc-coherent-support-power-ideal-kills), so `χ` vanishes on `𝓘ⁿ⁺ᵗ𝓖`
     (injectivity). -/
+structure CoherentHomsOverOpenData {X : Scheme.{u}} [IsLocallyNoetherian X]
+    [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) where
+  U : X.Opens
+  r : ∀ (n m : ℕ), n ≤ m →
+    (idealModuleProduct (idealSheafPower I.toModulesι m).2 G ⟶
+      idealModuleProduct (idealSheafPower I.toModulesι n).2 G)
+  hU : ∀ x : X, x ∈ U ↔ Function.Surjective
+    ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map I.toModulesι).hom
+  hW : ∀ (W : X.Opens), W ≤ U → Function.Bijective (I.toModulesι.app W)
+  hIso : ∀ n : ℕ, IsIso ((SheafOfModules.overFunctor X.ringCatSheaf U).map
+    (idealModuleProductι (idealSheafPower I.toModulesι n).2 G))
+  hcomp : ∀ (n m : ℕ) (h : n ≤ m),
+    r n m h ≫ idealModuleProductι (idealSheafPower I.toModulesι n).2 G =
+      idealModuleProductι (idealSheafPower I.toModulesι m).2 G
+  hcolim : ∃ (D : ℕ ⥤ AddCommGrpCat.{u})
+    (e : ∀ n : ℕ, D.obj n ≅
+      AddCommGrpCat.of (idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F))
+    (c : D ⟶ (Functor.const ℕ).obj
+      (AddCommGrpCat.of ((SheafOfModules.overFunctor X.ringCatSheaf U).obj G ⟶
+        (SheafOfModules.overFunctor X.ringCatSheaf U).obj F))),
+    (∀ (n m : ℕ) (h : n ≤ m)
+      (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F),
+      (e m).hom (D.map (homOfLE h) ((e n).inv χ)) = r n m h ≫ χ) ∧
+    (∀ (n : ℕ) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F),
+      (SheafOfModules.overFunctor X.ringCatSheaf U).map
+          (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫
+        c.app n ((e n).inv χ) =
+      (SheafOfModules.overFunctor X.ringCatSheaf U).map χ) ∧
+    Function.Bijective (colimit.desc D ⟨_, c⟩)
+
+/-- The structural data exists (the geometric part of Lemma 01YB).
+Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
+The proof follows Steps 1--11 and 13 of the displayed proof above: construct the
+complement and transition maps, establish the coherence and finiteness facts,
+apply the sections-over-a-quasi-compact-open result to obtain the cocone and its
+bijective colimit map, and use the support-power-ideal argument for injectivity.
+These constructions are packaged in `CoherentHomsOverOpenData`; no arbitrary
+witness is chosen. (blueprint: lem-weil-pbc-coherent-homs-over-open-data) -/
+theorem coherent_homs_over_open_data {X : Scheme.{u}} [IsLocallyNoetherian X]
+    [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]
+    (hG : RingedSpace.IsCoherent X.toRingedSpace G) :
+    Nonempty (CoherentHomsOverOpenData I F G) := by
+  sorry
+
+/-- The extension clause follows from the structural data in Lemma 01YB.
+Source: Stacks Project, Cohomology of Schemes, Lemma 01YB.
+Given `d.hcolim`, use surjectivity of its colimit map to represent any morphism
+on `d.U` by a colimit class. The filtered colimit of the groups `D.obj n` is
+represented by an element at some finite stage; the cocone compatibility in
+`d.hcolim` identifies that representative with the restriction of a map from
+`idealModuleProduct (idealSheafPower I n) G`, giving the required `n` and `χ`.
+This step uses no additional geometric assertion.
+(blueprint: lem-weil-pbc-coherent-homs-over-open-extension) -/
+theorem coherent_homs_over_open_extension {X : Scheme.{u}} [IsLocallyNoetherian X]
+    [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]
+    (hG : RingedSpace.IsCoherent X.toRingedSpace G)
+    (d : CoherentHomsOverOpenData I F G) :
+    ∀ ψ : (SheafOfModules.overFunctor X.ringCatSheaf d.U).obj G ⟶
+        (SheafOfModules.overFunctor X.ringCatSheaf d.U).obj F,
+      ∃ (n : ℕ) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F),
+        (SheafOfModules.overFunctor X.ringCatSheaf d.U).map
+            (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫ ψ =
+          (SheafOfModules.overFunctor X.ringCatSheaf d.U).map χ := by
+  sorry
+
 theorem coherent_homs_over_open {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules)
     [F.IsQuasicoherent] (hG : RingedSpace.IsCoherent X.toRingedSpace G) :
@@ -122,6 +187,8 @@ theorem coherent_homs_over_open {X : Scheme.{u}} [IsLocallyNoetherian X]
           (SheafOfModules.overFunctor X.ringCatSheaf U).map
               (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫ ψ =
             (SheafOfModules.overFunctor X.ringCatSheaf U).map χ := by
-  sorry
+  obtain ⟨d⟩ := coherent_homs_over_open_data I F G hG
+  refine ⟨d.U, d.r, d.hU, d.hW, d.hIso, d.hcomp, d.hcolim, ?_⟩
+  exact coherent_homs_over_open_extension I F G hG d
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-coherent-homs-over-open-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-homs-over-open",
+   "place": "stage-3 decomposition of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Extension clause from structural coherent homomorphism data",
+ "statement": "Given the structural data of Lemma 01YB, every morphism on the open complement extends from some ideal power times G.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YB (label lemma-homs-over-open); its proof uses Properties lemma-sections-over-quasi-compact-open, lemma-quasi-coherent-colimit-finite-type, Lemmas 01Y8 (lemma-acc-coherent), Artin-Rees (lemma-Artin-Rees) and the quasi-coherence of the sheaf Hom from a finitely presented module"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the surjectivity of the colimit map in d.hcolim to ψ. The elementwise description of filtered colimits gives a stage n and a representative χ; the cocone compatibility clause in d.hcolim identifies its image with the restriction of χ.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-coherent-homs-over-open-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YB proof, final in-particular clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-coherent-homs-over-open-data"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YB (label lemma-homs-over-open, line 2621) and its proof (lines 2649-2743); the two places the source omits (I^nK = 0, injectivity of the first arrow) are written out by the agent in Steps 10 and 13, and the map, the restrictions to U and the finiteness facts (Steps 1, 2) are made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homomorphisms on complement of closed subscheme are colimit of homomorphisms from I^n times module, Noetherian scheme",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom, Scheme.Modules.instHasColimits (Mathlib.AlgebraicGeometry.Modules.Sheaf), localCohomology.ofDiagram, localCohomology.hasColimitDiagram (Mathlib.Algebra.Homology.LocalCohomology), SheafOfModules.Presentation.isColimit, AdicCompletion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit over n of Hom from I^n M to N is isomorphic to Hom on the open complement of V(I), Deligne formula, Noetherian",
+   "results": "localCohomology.isoSelfLERadical, localCohomology.ofDiagram, localCohomology.hasColimitDiagram (Mathlib.Algebra.Homology.LocalCohomology), exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux (Morphisms.QuasiSeparated), ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-10",
+   "verdict": "no match (local cohomology of rings via Ext, not sheaf Hom over an open)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'pow.*Hom|Hom.*pow' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; rg -ni 'coherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "none; no coherent modules and no products of ideal sheaves with modules in Scheme.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentHomsOverOpen",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentHomsOverOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentHomsOverOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coherent_homs_over_open_extension",
+  "statement": "theorem coherent_homs_over_open_extension {X : Scheme.{u}} [IsLocallyNoetherian X]\n    [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]\n    (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (d : CoherentHomsOverOpenData I F G) :\n    ∀ ψ : (SheafOfModules.overFunctor X.ringCatSheaf d.U).obj G ⟶\n        (SheafOfModules.overFunctor X.ringCatSheaf d.U).obj F,\n      ∃ (n : ℕ) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F),\n        (SheafOfModules.overFunctor X.ringCatSheaf d.U).map\n            (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫ ψ =\n          (SheafOfModules.overFunctor X.ringCatSheaf d.U).map χ",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T011922-L-2761679",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T011922-L-2761679",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
