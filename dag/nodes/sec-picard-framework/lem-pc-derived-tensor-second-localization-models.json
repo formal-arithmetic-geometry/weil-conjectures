@@ -13,24 +13,26 @@
  ],
  "proof": [
   {
-   "text": "Proof: compute the derived tensor using a K-flat R-resolution of Q. Since\nB -> Bp is a localization, it is flat, and extending its B-tensor complex\ncommutes with homology. The ordinary scalar-extension associator identifies\nthe resulting complex with the Bp-tensor of the same resolution. The maps\ncommute with multiplication by A and Bp, hence are tensor-algebra linear.\nTensor associativity identifies their further extensions to D. Naturality\nof flat homology base change proves naturality for chain maps and for scalar\nactions. Apply it to the augmentation of the resolution to prove the comparison\nsquare. Transport through the unique counit-compatible identifications of\nleft-derived functors to the specified models; their cohomology action equations\npreserve A-linearity. Faithful restriction to B and Bp proves the square for the\ncharacterized g and h. Pure tensors generate each term of the ordinary complex,\nso every tau with the prescribed formula equals the associator used here.",
+   "text": "Use localization flatness from Mathlib. For each Q,L,K choose the isomorphism of exists_secondLocalization_iso; its generator characterization determines its hom uniquely by IsSecondLocalizationMap.ext. Apply secondLocalization_comparison and secondLocalization_naturality to these characterized isomorphisms, then combine the two clauses.",
    "uses": [
-    "lem-pc-derived-tensor-flat-second-localization",
     "lem-weil-pbc-localization-flat",
-    "def-pc-base-derived-tensor-cohomology-model"
+    "lem-pc-second-localization-iso",
+    "lem-pc-second-localization-comparison",
+    "lem-pc-second-localization-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-tensor-flat-second-localization",
   "lem-weil-pbc-localization-flat",
-  "def-pc-base-derived-tensor-cohomology-model"
+  "lem-pc-second-localization-iso",
+  "lem-pc-second-localization-comparison",
+  "lem-pc-second-localization-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8 affine localization identity; More on Algebra Tag 06Y6; model transport expanded by G1"
+  "place": "Tag 0DJ8 affine localization identity; split coefficient map construction, invertibility, comparison and naturality by P1"
  },
  "mathlib_searches": [
   {
@@ -109,9 +111,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T125009-L-3836642",
+  "landing": "20261013T143550-L-562149",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

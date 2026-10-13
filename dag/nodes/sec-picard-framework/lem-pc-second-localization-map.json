@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-second-localization-map",
+ "title": "Canonical generator characterization of second localization",
+ "statement": "For commutative rings R,A,B,Bp,D with R-algebras A,B,Bp, compatible B-algebra Bp and compatible tensor-algebra coefficient maps to D, use the BaseDerivedTensorCohomologyModel conventions and derived categories of modules in a common universe. Define the derived coefficient map and its D-linear generator characterization using exact extension along a flat map B to Bp. The coefficient map is the adjoint transpose of the source cohomologyIso, inverse flat derived homology isomorphism, homology of the derived lift of the ordinary scalar-extension associator, and inverse target cohomologyIso. The predicate fixes the image of 1 tensor x for every x. This determines a D-linear map uniquely.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct flat homology comparison by lifting the exact ordinary homology isomorphism through derived localization. Derive the ordinary associator using leftDerivedLift and the target universal counit. Compose the source cohomology isomorphism, flat homology isomorphism, homology of the derived lift and inverse target cohomology isomorphism, and transpose by extension/restriction adjunction. Define the generator predicate by this actual coefficient map. Equality of predicates gives equality of morphisms by ExtendScalars.hom_ext.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8; More on Algebra Tag 06Y6; arbitrary-model transport expanded by P1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor cohomology change of localized base and flat second factor localization",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.moduleTensorEquiv and algebraTensorEquiv cover ordinary tensors only, not model cohomology with comparison and naturality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived tensor products commutes with localization of the base ring and of the second factor",
+   "results": "Cotangent cohomology and Tor declarations, no arbitrary complex/model interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|tensor).*(base|second).*localization",
+   "results": "Ordinary tensor localization base change only. Existing DerivedTensorFlatSecondLocalization uses resolution/source models, not arbitrary BaseDerivedTensorCohomologyModel.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorSecondLocalizationModels",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-tensor-second-localization-models",
+   "place": "Canonical generator characterization of second localization"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SecondLocalizationMap",
+  "file": "lean/Sheaf/Algebra/Homology/SecondLocalizationMap.lean",
+  "declaration": "RingTensorCohomology.IsSecondLocalizationMap",
+  "statement": "def IsSecondLocalizationMap\n    (hflat : (algebraMap B Bp).Flat)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D) (i : ℤ)\n    (e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ⟶\n      (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).obj (K.cohomology i)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "declarations": [
+   "RingTensorCohomology.flatDerivedHomologyIso",
+   "RingTensorCohomology.secondLocalizationDerivedMap",
+   "RingTensorCohomology.secondLocalizationCohomologyMap",
+   "RingTensorCohomology.IsSecondLocalizationMap",
+   "RingTensorCohomology.IsSecondLocalizationMap.ext"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T143550-L-562149",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T143550-L-562149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

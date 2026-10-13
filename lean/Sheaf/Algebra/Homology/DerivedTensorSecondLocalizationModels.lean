@@ -7,6 +7,10 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.Homology.SecondLocalizationIso
+import Sheaf.Algebra.Homology.SecondLocalizationComparison
+import Sheaf.Algebra.Homology.SecondLocalizationNaturality
+import Mathlib.RingTheory.Flat.Localization
 /-! # Localizing the base and second factor of a derived tensor
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
@@ -124,6 +128,25 @@ theorem derivedTensor_second_localization_models
             (e Q' L' K').hom =
           (e Q L K).hom ≫
             (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).map h) := by
-  sorry
+  classical
+  have hflat : (algebraMap B Bp).Flat := by
+    exact RingHom.flat_algebraMap_iff.mpr (IsLocalization.flat Bp T)
+  have hex (Q : CochainComplex (ModuleCat.{u} A) ℤ)
+      (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
+      (K : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D) :=
+    exists_secondLocalization_iso R A B Bp D T hflat i Q L K
+  let e := fun Q L K ↦ (hex Q L K).choose
+  have he (Q : CochainComplex (ModuleCat.{u} A) ℤ)
+      (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
+      (K : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D) :
+      IsSecondLocalizationMap R A B Bp D hflat Q L K i (e Q L K).hom :=
+    (hex Q L K).choose_spec
+  refine ⟨e, ?_, ?_⟩
+  · intro Q L K τ hτ
+    exact secondLocalization_comparison R A B Bp D hflat i Q L K (e Q L K)
+      (he Q L K) τ hτ
+  · intro Q Q' f L K L' K' δ ε g h hδ hg hε hh
+    exact secondLocalization_naturality R A B Bp D hflat i Q Q' f L K L' K' δ ε g h
+      (e Q L K) (e Q' L' K') (he Q L K) (he Q' L' K') hδ hg hε hh
 
 end RingTensorCohomology

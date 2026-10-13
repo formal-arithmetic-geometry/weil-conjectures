@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-second-localization-naturality",
+ "title": "Naturality of the characterized second localization",
+ "statement": "For commutative rings R,A,B,Bp,D with R-algebras A,B,Bp, compatible B-algebra Bp and compatible tensor-algebra coefficient maps to D, assume the map B to Bp is flat. Let i be an integer and Q a cochain complex of A-modules. Use the models of [def-pc-base-derived-tensor-cohomology-model], the scalar-extension conventions of [def-pc-ring-tensor-cohomology], and derived categories of modules in a common universe. The characterization is IsSecondLocalizationMap of [lem-pc-second-localization-map], for the given flatness proof. For a chain map Q to Q-prime and counit-compatible derived model transformations delta and epsilon, every pair of characterized isomorphisms commutes with the cohomology maps g and h characterized by cohomologyIso. Namely D-extension of g followed by e-prime equals e followed by D-extension of h.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology",
+  "lem-pc-second-localization-map"
+ ],
+ "proof": [
+  {
+   "text": "leftDerived_ext applied to the target model K' proves that the derived\nlift for L followed by epsilon equals delta extended to Bp followed by the\nlift for L'. Their composites with K'.counit agree by the two given counit\ncompatibilities and naturality of the ordinary associator. Naturality of each\nderived lift with respect to the image of f gives the full commuting derived\nsquare. Apply homology and naturality of flatDerivedHomologyIso, then conjugate\nby cohomologyIso. The characterizations of g and h give equality of the\nunderlying B-linear maps. On a generator 1 tensor x the two formulas he and he'\nand ExtendScalars.map_tmul identify the D-linear composites with this equality.\nExtendScalars.hom_ext proves equality of the maps. This works for arbitrary\nflat B to Bp and uses no localization or flatness of D. Zero maps, identity\nmaps and zero rings obey the same equations.",
+   "uses": [
+    "lem-pc-second-localization-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-second-localization-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8; More on Algebra Tag 06Y6; arbitrary-model transport expanded by P1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor cohomology change of localized base and flat second factor localization",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.moduleTensorEquiv and algebraTensorEquiv cover ordinary tensors only, not model cohomology with comparison and naturality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived tensor products commutes with localization of the base ring and of the second factor",
+   "results": "Cotangent cohomology and Tor declarations, no arbitrary complex/model interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|tensor).*(base|second).*localization",
+   "results": "Ordinary tensor localization base change only. Existing DerivedTensorFlatSecondLocalization uses resolution/source models, not arbitrary BaseDerivedTensorCohomologyModel.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorSecondLocalizationModels",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-tensor-second-localization-models",
+   "place": "Naturality of the characterized second localization"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SecondLocalizationNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/SecondLocalizationNaturality.lean",
+  "declaration": "RingTensorCohomology.secondLocalization_naturality",
+  "statement": "theorem secondLocalization_naturality (hflat : (algebraMap B Bp).Flat) (i : ℤ)\n    (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')\n          (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n          (K : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D)\n          (L' : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q' D)\n          (K' : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q' D)\n          (δ : L.derived ⟶ L'.derived) (ε : K.derived ⟶ K'.derived)\n          (g : L.cohomology i ⟶ L'.cohomology i)\n          (h : K.cohomology i ⟶ K'.cohomology i)\n    (e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ≅\n      (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).obj (K.cohomology i))\n    (e' : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L'.cohomology i) ≅\n      (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).obj (K'.cohomology i))\n    (he : IsSecondLocalizationMap R A B Bp D hflat Q L K i e.hom)\n    (he' : IsSecondLocalizationMap R A B Bp D hflat Q' L' K' i e'.hom) :\n        Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) δ ≫\n            L'.counit = L.counit →\n        (ModuleCat.restrictScalars.{u}\n          (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map g ≫\n              (L'.cohomologyIso i).hom =\n          (L.cohomologyIso i).hom ≫\n            (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n              (L.derived.map (DerivedCategory.Qh.map\n                ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n                  ((restrict R A).map f)))) ≫\n            (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n              (δ.app (DerivedCategory.Qh.obj\n                ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n                  ((restrict R A).obj Q')))) →\n        Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) ε ≫\n            K'.counit = K.counit →\n        (ModuleCat.restrictScalars.{u}\n          (Algebra.TensorProduct.includeRight : Bp →ₐ[R] A ⊗[R] Bp).toRingHom).map h ≫\n              (K'.cohomologyIso i).hom =\n          (K.cohomologyIso i).hom ≫\n            (DerivedCategory.homologyFunctor (ModuleCat.{u} Bp) i).map\n              (K.derived.map (DerivedCategory.Qh.map\n                ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n                  ((restrict R A).map f)))) ≫\n            (DerivedCategory.homologyFunctor (ModuleCat.{u} Bp) i).map\n              (ε.app (DerivedCategory.Qh.obj\n                ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n                  ((restrict R A).obj Q')))) →\n        (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).map g ≫\n            e'.hom =\n          e.hom ≫\n            (ModuleCat.extendScalars (algebraMap (A ⊗[R] Bp) D)).map h",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T143550-L-562149",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T143550-L-562149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
