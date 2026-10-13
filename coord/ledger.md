@@ -11865,3 +11865,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/J2/Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeSurjective (stage 3; reviewer PASS; first push; landing 20261013T100013-L-2464855 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/J2/WeilConjectures.AlgebraicGeometry.Cohomology.Projective (stage 3; reviewer PASS; after a return; landing 20261013T100014-L-2465154 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension (stage 3; reviewer PASS; after a return; landing 20261013T100015-L-2465275 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:00 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness (stage 3; reviewer PASS; first push; landing 20261013T100015-L-2465426 (interface); batch 20261013T095923; modules 3; new nodes 2)

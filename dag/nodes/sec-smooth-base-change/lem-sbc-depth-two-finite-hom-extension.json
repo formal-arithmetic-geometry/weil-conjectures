@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-depth-two-finite-hom-extension",
+ "kind": "statement",
+ "title": "Extension of open morphisms from a finite depth-two source",
+ "statement": "Let $L$ be a locally Noetherian scheme and $U\\subset L$ an open [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring]. Let $r:F\\to L$ be finite and $p:E\\to L$ affine [def-weil-finite-integral-morphism, def-weil-affine-morphism]. Assume $\\operatorname{depth}\\mathcal O_{F,z}\\geq2$ for every $z$ with $r(z)\\notin U$ [def-weil-pbc-depth]. Let $a:F\\times_L U\\to E\\times_L U$ be a morphism over $U$. There is an $L$-morphism $f:F\\to E$ satisfying $\\iota_F f=a\\iota_E$, where $\\iota_F$ and $\\iota_E$ are the inclusions of these open subschemes.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY6, converse in the proof of (2); Tags 0AUK, 0E9I and 01SA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The coherent finite structure algebra r_*O_F has boundary stalk depth at least two: on an affine chart localize the finite algebra at the base point and apply the finite-local-algebra depth formula of Stacks Tag 0AUK to the source local rings above it. The empty fibre gives the zero module, of infinite depth. Hartogs then makes the canonical map r_*O_F -> j_*((r_*O_F)|_U) invertible. This restriction map preserves products and scalars, so its inverse also preserves them.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given open morphism induces an algebra map (p_*O_E)|_U -> (r_*O_F)|_U. Adjunction and the inverse Hartogs map extend it to p_*O_E -> r_*O_F. The affine-target structure algebra correspondence supplies f over L. Restricting this algebra map gives the original map by the adjunction identities, hence faithfulness over U gives the required restriction equality.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J3",
+  "document": "Stacks Project",
+  "place": "Tag 0EY6 converse of (2), separating extension and equality of morphisms using Tags 0AUK, 0E9I and 01SA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite schemes of depth at least two on the complement of an open are determined by their restrictions to the open",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Opens.exists_toScheme, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.Opens.forall_toScheme, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.instLocallyOfFiniteTypeResLE, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.OpenCover.ext_elem; no depth-two hom extension or equality theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*(hom|morphism)|Hartogs|hartogs",
+   "results": "0 hits: ; no depth-two hom extension or equality theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a finite scheme with depth two outside an open to an affine scheme extend uniquely from that open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.resLE",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Hom.resLE_id, AlgebraicGeometry.Scheme.Hom.resLE, AlgebraicGeometry.Scheme.Hom.resLE_comp_ι, AlgebraicGeometry.Scheme.Hom.resLE_comp_ι_assoc, AlgebraicGeometry.Scheme.Hom.resLE_eq_morphismRestrict, AlgebraicGeometry.Scheme.Hom.map_resLE, AlgebraicGeometry.Scheme.Hom.map_resLE_assoc, AlgebraicGeometry.Scheme.Hom.resLE_congr; no depth-two hom extension or equality theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two paragraph of sbc-thm-spreading-finite-etale-galois: the unique finite extension having depth at least two along the complement (0EY6). Extension of open morphisms from a finite depth-two source.",
+   "via": [
+    "lem-sbc-depth-two-finite-extension-uniqueness",
+    "lem-sbc-power-series-test-finite-extension-flat",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoFiniteHomExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_hom_of_finite_depth_two",
+  "statement": "theorem exists_hom_of_finite_depth_two\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    {F E : Scheme.{u}} (r : F ⟶ L) (p : E ⟶ L) [IsFinite r] [IsAffineHom p]\n    (hF : ∀ z : F, r z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk z) (F.presheaf.stalk z))\n    (a : (r ⁻¹ᵁ U).toScheme ⟶ (p ⁻¹ᵁ U).toScheme)\n    (ha : a ≫ p ∣_ U = r ∣_ U) :\n    ∃ f : F ⟶ E, f ≫ p = r ∧ (r ⁻¹ᵁ U).ι ≫ f = a ≫ (p ⁻¹ᵁ U).ι",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100015-L-2465426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100015-L-2465426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

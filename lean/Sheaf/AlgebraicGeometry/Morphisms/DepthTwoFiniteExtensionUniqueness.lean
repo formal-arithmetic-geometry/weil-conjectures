@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomExtension
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomEquality
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-!
@@ -54,6 +56,21 @@ theorem iso_of_finite_depth_two_extensions
       (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z))
     (e : (p ⁻¹ᵁ U).toScheme ≅ (r ⁻¹ᵁ U).toScheme)
     (he : e.hom ≫ r ∣_ U = p ∣_ U) :
-    ∃ i : F ≅ E, i.hom ≫ p = r := by sorry
+    ∃ i : F ≅ E, i.hom ≫ p = r := by
+  have hei : e.inv ≫ p ∣_ U = r ∣_ U := by
+    rw [← he, ← Category.assoc, e.inv_hom_id, Category.id_comp]
+  obtain ⟨f, hf, hfu⟩ := exists_hom_of_finite_depth_two U r p hF e.inv hei
+  obtain ⟨g, hg, hgu⟩ := exists_hom_of_finite_depth_two U p r hE e.hom he
+  have hfg : f ≫ g = 𝟙 F := by
+    apply hom_eq_of_finite_depth_two U r r hF
+      (f ≫ g) (𝟙 F) (by rw [Category.assoc, hg, hf]) (by simp)
+    rw [← Category.assoc, hfu, Category.assoc, hgu, ← Category.assoc]
+    simp
+  have hgf : g ≫ f = 𝟙 E := by
+    apply hom_eq_of_finite_depth_two U p p hE
+      (g ≫ f) (𝟙 E) (by rw [Category.assoc, hf, hg]) (by simp)
+    rw [← Category.assoc, hgu, Category.assoc, hfu, ← Category.assoc]
+    simp
+  exact ⟨⟨f, g, hfg, hgf⟩, hf⟩
 
 end AlgebraicGeometry.Scheme
