@@ -11966,3 +11966,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.CanonicalSingleBaseChangeComparison (stage 3; reviewer PASS; first push; landing 20261013T100118-L-2484206 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation (stage 3; reviewer PASS; first push; landing 20261013T100118-L-2484513 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent (stage 3; reviewer PASS; after a return; landing 20261013T100119-L-2484691 (interface); batch 20261013T095923; modules 5; new nodes 4)
+- 10:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Modules.ExteriorTensorStalkKernelSpan (stage 3; reviewer PASS; first push; landing 20261013T100120-L-2485042 (interface); batch 20261013T095923; modules 3; new nodes 2)

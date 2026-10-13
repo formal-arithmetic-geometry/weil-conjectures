@@ -14,33 +14,32 @@
  ],
  "proof": [
   {
-   "text": "Exactness on stalks identifies C_x with B_x/im(f_x). Apply the alternating multilinear presentation of exterior powers. Wedges with an entry in im(f_x) vanish in the quotient. Conversely, modding out by their span makes a wedge independent of all quotient representatives, by expansion of one changed entry at a time, so this quotient has the universal property of the exterior power of C_x. Thus these wedges generate its kernel.",
+   "text": "Map the short exact sequence by the module-to-abelian-sheaf forgetful functor, using lem-weil-pbc-module-sheaves-colimits-forgetful for finite limits and colimits, and then by the exact abelian stalk functor. This gives range(f_x)=ker(g_x) and surjectivity of g_x. Obtain exterior stalk comparisons from lem-sc-exterior-sheaf-stalk-comparison and compose the tensor stalk comparison of lem-pc-ringed-space-module-stalk-tensor with their tensor product.",
    "uses": [
-    "def-sc-sheaf-exterior-power",
-    "def-weil-pbc-module-stalk"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sc-exterior-sheaf-stalk-comparison",
+    "lem-pc-ringed-space-module-stalk-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor with the r-th exterior power of A_x. Right exactness of tensor products and spanning by pure wedges give the analogous tensor kernel generators. Stalks commute with the finite-sum, finite-tuple exterior and tensor presentations. On generators, the assumed formula for q gives precisely this tensor quotient map. Hence its stalk kernel is spanned by these relation tensors.",
+   "text": "Check that the transported q_x is id tensor exteriorPower.map s g_x. Apply TensorProduct.ext, exteriorPower.linearMap_ext and AlternatingMap.ext in both factors. Represent the two finite tuples on a common neighborhood by induction on their lengths using exists_le_germ_eq. The formula hq, the stalk-map germ formula and the two comparison formulas identify both maps on these generators. Apply lem-sc-exterior-tensor-quotient-kernel-algebra to the transported kernel element.",
    "uses": [
-    "def-sc-sheaf-exterior-power",
-    "def-weil-pbc-module-stalk"
+    "lem-sc-exterior-tensor-quotient-kernel-algebra"
    ],
    "elementary": false
   },
   {
-   "text": "Each relation tensor contains finitely many stalk entries and a preimage under f_x for its distinguished entry. Choose representatives on a common neighborhood of x. Equality of germs allows a further shrink so that c_j=f(d) holds for sections. Their tensor is then a section of Q(V), and its germ is the relation tensor. These germs therefore generate the stalk kernel inside Q_x. The empty wedge handles r=0, and a zero stalk ring has only zero modules.",
-   "uses": [
-    "def-sc-sheaf-exterior-power",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false
+   "text": "Induct on membership in the algebraic relation span. Represent the preimage d, then the a and c tuples on successively smaller neighborhoods. Replace c_j by f(d) on the last neighborhood. Its germ remains c_j by naturality of the stalk map and the generator equality. This yields a genuine sectionwise relation without a further equality-of-germs shrinking step. The tensor comparison sends its germ to the given algebraic generator. Thus its inverse lies in the defining stalk span. Linearity handles zero, addition and scalar multiplication. Apply this to the transported kernel element and cancel the comparison with its inverse.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-sheaf-exterior-power",
-  "def-weil-pbc-module-stalk"
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-sc-exterior-sheaf-stalk-comparison",
+  "lem-sc-exterior-tensor-quotient-kernel-algebra",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
@@ -150,9 +149,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T065111-L-899633",
+  "landing": "20261013T100120-L-2485042",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
