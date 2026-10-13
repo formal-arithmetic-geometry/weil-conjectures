@@ -40,54 +40,38 @@
  ],
  "proof": [
   {
-   "text": "Construct the actual annihilator subsheaf by testing all ideal sections on every smaller open. Restrictions, addition and scalar multiplication preserve the condition; gluing follows by sheaf uniqueness for each local product. Affine-local finite generation and clearing denominators show this is quasi-coherent, as in 01PO.",
+   "text": "Construct idealAnnihilatorSections as the submodule of sections killed by every ideal-power section on every smaller open, and idealAnnihilatorPresheaf using restriction. Prove gluing by separatedness of F after intersecting with the gluing cover; naturality of the power inclusion restricts each ideal section. Use ideal_power_annihilator_quasicoherent for quasi-coherence. The inclusion is sectionwise a subtype inclusion, hence mono, and its image is the defining local annihilation condition.",
    "uses": [
-    "lem-weil-pbc-sections-annihilated-by-ideal",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-ideal-power-annihilator-quasicoherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
+   "elementary": false
   },
   {
-   "text": "The power inclusions make the annihilator subsheaves increasing. On any W contained in U, lift 1 through j_n(W); the annihilation test on W gives s=0. Thus the restriction of A_n to U is zero.",
+   "text": "Prove directly by induction on n ≤ m that the annihilator submodule presheaves are increasing. The reflexive case is reflexivity of inclusion. In each successor step, precompose the annihilation test section by the map from power m+1 to power m: ι for m=0, and idealModuleProductι for m>0. The recursive power definition identifies the resulting scalar with the higher-power scalar. Transitivity gives the desired submodule inclusion; homOfLE gives the required morphism. On W contained in U, lift 1 through the power inclusion. The annihilation equation on W forces every section of A_n to be zero. No general power-factor existence theorem is introduced or used.",
    "uses": [
     "lem-weil-pbc-ideal-module-product-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
+   "elementary": true
   },
   {
-   "text": "Restriction preserves cokernels. The projection is therefore an isomorphism on U, since it is the cokernel of a map out of the zero sheaf. Evaluating its restriction on each smaller open proves sectionwise bijectivity.",
+   "text": "Every stalk of A_n at a point of U vanishes: represent a germ, intersect its representative open with U, and use the sectionwise vanishing. Stalk exactness identifies the kernel of the cokernel projection with the image of this zero stalk, and also makes the projection surjective. Therefore the projection is bijective on stalks over any W contained in U; sheaf stalk detection gives bijectivity on W. The map under overFunctor is consequently sectionwise bijective, hence mono and epi as a presheaf-module map, hence an isomorphism; the forgetful functor reflects isomorphisms.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-stalk-exact",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sections-annihilated-by-ideal",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-ideal-power-annihilator-quasicoherent",
   "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-stalk-exact",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+  "place": "Tags 01PO and 01PQ; F3 formalizes the construction and uses stalk exactness for the quotient clause"
  },
  "mathlib_searches": [
   {
@@ -154,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-6b817",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T040802-L-3953370",
+  "landing": "20261013T060416-L-582679",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean against unchanged existing signature, all five DAG records, source proofs, report, clean compilation and axiom audit."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

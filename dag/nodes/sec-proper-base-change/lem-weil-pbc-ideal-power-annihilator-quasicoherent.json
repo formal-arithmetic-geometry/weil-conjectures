@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-ideal-power-annihilator-quasicoherent",
+ "kind": "statement",
+ "title": "Quasi-coherence of the canonical annihilator of an ideal power",
+ "statement": "Let X be a scheme [def-pc-scheme], I and F sheaves of O_X-modules [def-weil-sheaf-of-modules-category], and ι : I → O_X a monomorphism. Assume I is quasi-coherent of finite type and F is quasi-coherent [pqf-def-coherent]. For n ≥ 0 let j_n : P_n → O_X be the recursive power inclusion [lem-weil-pbc-ideal-module-product-stalk]. Define A_n(W) as the submodule of s in F(W) such that for every V ⊆ W and b in P_n(V), j_n(b) times s restricted to V is zero. This restriction-stable family is a sheaf by gluing in F and testing products locally. Its inclusion is the actual subtype inclusion. Then this explicitly constructed sheaf A_n is quasi-coherent.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PO, proof of clause (1), applied to powers in Lemma 01PQ"
+ },
+ "proof": [
+  {
+   "text": "On every affine open identify the ideal power with a finitely generated ideal J and F with the sheaf of a module M. The canonical annihilator has affine sections N = {m | J m = 0}. Localization of N is exactly the annihilator of the localized ideal: one inclusion is immediate, and for the other, finitely many generators and clearing denominators provide one common power of the denominator. These identifications on affine opens prove quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PO, proof of clause (1), applied to powers in Lemma 01PQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent annihilator subsheaf finite type ideal",
+   "date": "2026-10-13",
+   "results": "No exact existing theorem for this module inclusion formulation.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "cokernel.π, IsIso",
+   "date": "2026-10-13",
+   "results": "The service did not recognize cokernel.π; no absence verdict from this query. Local source search found only the zero-map cokernel isomorphism instance.",
+   "verdict": "Unavailable identifier; no exact match established."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|cokernel.*isIso",
+   "date": "2026-10-13",
+   "results": "Mathlib annihilator results concern modules and ideals. Local project search found annihilator_subsheaf_quasicoherent and sections_annihilated_by_ideal, both formulated for IdealSheafData rather than arbitrary module inclusions. No reverse conversion was found.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "annihilator subsheaf of a finite type quasi coherent ideal is quasi coherent",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict from this service.",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorSystem",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ideal-power-annihilator-system",
+   "place": "step 1: quasi-coherence of the explicitly constructed annihilator"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorQuasicoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerAnnihilatorQuasicoherent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_power_annihilator_quasicoherent",
+  "statement": "theorem ideal_power_annihilator_quasicoherent {X : Scheme.{u}} {I : X.Modules} (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) : (idealAnnihilator (idealSheafPower ι n).2 F).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.idealAnnihilatorSections",
+   "AlgebraicGeometry.Scheme.idealAnnihilatorPresheaf",
+   "AlgebraicGeometry.Scheme.idealAnnihilatorPresheaf_isSheaf",
+   "AlgebraicGeometry.Scheme.idealAnnihilator",
+   "AlgebraicGeometry.Scheme.idealAnnihilatorι",
+   "AlgebraicGeometry.Scheme.ideal_power_annihilator_quasicoherent"
+  ]
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T060416-L-582679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T060416-L-582679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
