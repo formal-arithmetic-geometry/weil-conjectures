@@ -10662,3 +10662,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafExactness (stage 3; reviewer PASS; first push; landing 20261013T022414-L-3213487 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/G4/Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction (stage 3; reviewer PASS; first push; landing 20261013T022415-L-3213622 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionUnramified (stage 3; reviewer PASS; first push; landing 20261013T022415-L-3213755 (interface); batch 20261013T022404; modules 4; new nodes 3)
+- 02:24 L: merged deliver/H1/Sheaf.RingTheory.PopescuFlatCoordinatesSetup (stage 3; reviewer PASS; first push; landing 20261013T022415-L-3213986 (proof); batch 20261013T022404; modules 1; new nodes 0)
