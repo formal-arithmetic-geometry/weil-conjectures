@@ -20,17 +20,47 @@
  ],
  "proof": [
   {
-   "text": "The fibre is locally of finite type over the residue field. Closedness\nof x therefore makes its residue extension finite. Realize that extension\nby a finite flat local extension A to A' (07NE), and use the smooth etale\nslice (057G) to obtain, after a further flat local base change, a section\nthrough x. The new local base is Noetherian and has depth at least two by\nthe flat local depth formula (0337). Choose a smooth affine chart through\nthe section point and complete in the section ideal. Tag 05D5 identifies\nthe result with A'[[x_1,...,x_d]], and 00MB makes the completion map flat.\nThe inverse image of U contains every point away from the closed base\npoint. If d is zero, the section point is generic in its closed fibre;\nfibrewise density then puts it in U, contradicting hout. If d is positive,\nthe prime m(A') times the power-series ring maps to a generic point of the\nclosed fibre and thus belongs to the inverse image of U. Tag 0EYA extends\nthe finite etale restriction to a finite etale cover of the completion.\nSmoothness and 0337 give depth at least two on the target boundary. The\nboundary depth of E identifies the supplied p with the unique depth-two\nfinite extension (0EY6(2)); that identification commutes with the two flat\nbase changes and completion (0EY6(a),(b)). Thus the completed p is flat.\nCompletion localized at the section point is faithfully flat, since the\nsection ideal is contained in its maximal ideal. Descent of flatness gives\nflatness of every local ring map over x, including the specified z.\nThe finite flat local extensions used above are faithfully flat, so the\nsame descent gives the assertion before those base changes. Empty E has\nno z; no global flat locus argument is used in this local statement.",
-   "uses": [],
+   "text": "Construct a flat power-series test t:T to L through the given closed boundary point, with positive number of variables, base depth at least two, and the two required conditions on the inverse image of U. This construction uses no finite cover.",
+   "uses": [
+    "lem-sbc-closed-fiber-power-series-test"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Restrict the pullback square over U. Mathlib Hom.isPullback_resLE and stability of Etale under base change show that the finite pullback r:E times_L T to T is etale over t inverse image U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The first projection E times_L T to E is flat. Its stalk maps are flat and local. Both source and target stalk rings are Noetherian. Apply the flat local depth formula to show that the depth of each boundary stalk of the pullback is at least the depth of its image stalk on E, hence at least two.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the power-series finite-extension flatness theorem to r, using the open conditions supplied by the test construction and the boundary depth just proved.",
+   "uses": [
+    "lem-sbc-power-series-test-finite-extension-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pick b in T mapping to the closed fibre point. Pullback.exists_preimage_pullback lifts z and b to a point w of E times_L T. The first-projection stalk map at w is flat and local, hence faithfully flat. The stalk map of the composite to L is flat since it also factors through the flat map r and the flat test t. Faithfully flat descent proves flatness of p.stalkMap z: tensor an injective linear map with the target stalk, then with the faithfully flat pullback stalk, use flatness of the composite and tensor associativity, and reflect injectivity. This descent is fully written in Lean using Mathlib tensor-injectivity criteria.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-closed-fiber-power-series-test",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-power-series-test-finite-extension-flat"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G2",
+  "by": "U3",
   "document": "Stacks Project",
-  "place": "Tag 0EYB (pione-lemma-purity-smooth-over-depth2), proof from the choice of a closed point through formal completion and descent; Tags 0EY6(2),(a),(b), 07NE, 057G, 05D5, 00MB, 0EYA and 0337"
+  "place": "Tag 0EYB, closed-point completion argument; Tag 0337 for boundary depth under flat base change; faithfully flat descent written in Lean"
  },
  "mathlib_searches": [
   {
@@ -122,9 +152,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T045529-L-128912",
+  "landing": "20261013T062533-L-736380",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
