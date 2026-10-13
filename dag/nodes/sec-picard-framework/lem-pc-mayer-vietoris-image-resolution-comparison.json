@@ -1,0 +1,103 @@
+{
+ "id": "lem-pc-mayer-vietoris-image-resolution-comparison",
+ "kind": "statement",
+ "title": "Comparison of direct-image Mayer–Vietoris resolution sequences",
+ "statement": "For a scheme morphism and open cover, the fixed K-injective resolutions admit a morphism of concrete Mayer–Vietoris short complexes whose first and intersection components are the recorded normalized direct-image comparisons.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": " Tags 08BV"
+ },
+ "stmt_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the comparison on the fixed K-injective resolutions and use naturality of the right-derived unit and sectionwise open restriction comparison.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "M1",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": " Tags 08BV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Comparison of direct-image Mayer–Vietoris resolution sequences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of direct-image Mayer–Vietoris resolution sequences",
+   "results": "No exact match",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeMV_image_resolution_comparison",
+   "results": "No prior declaration found",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageBoundary",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-mayer-vietoris-direct-image-boundary",
+   "place": "proof steps 1–4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisImageResolutionComparison.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_image_resolution_comparison",
+  "statement": "theorem schemeMV_image_resolution_comparison\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    [(schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))\n      (schemeMVResolution X E)).IsKInjective] :\n    let I := schemeMVResolution X E\n    let J := schemeMVResolution Y ((schemeDerivedDirectImage h).obj E)\n    let S := schemeMayerVietorisComplex X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) I\n    let T := schemeMayerVietorisComplex Y U V J\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    ∃ m : S.map F ⟶ T,\n      (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom I).hom ≫\n          DerivedCategory.Q.map m.τ₁ ≫\n          (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).hom =\n        (schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).hom ∧\n      (schemeDerivedDirectImage h).map\n          (((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))) ⋙\n              schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι).map\n              (schemeMVResolutionIso X E).inv ≫\n            (schemeOpenModuleImageComplexComparison X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I\n              (schemeMVAdjunction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)))).inv) ≫\n          (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n            (schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I)).hom ≫\n          DerivedCategory.Q.map m.τ₃ =\n        (schemeMVOpenComparison h (U ⊓ V) E).hom ≫\n          (((schemeMVDerivedRestriction Y (U ⊓ V)) ⋙\n              schemeDerivedDirectImage (U ⊓ V).ι).map\n              (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).inv ≫\n            (schemeOpenModuleImageComplexComparison Y (U ⊓ V) J\n              (schemeMVAdjunction Y (U ⊓ V))).inv)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T181112-L-2604325",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T181112-L-2604325",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
