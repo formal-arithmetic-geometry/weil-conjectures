@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-principal-prime-quotient-fraction-finite",
+ "kind": "statement",
+ "title": "Finite quotient fraction fields above a principal prime",
+ "statement": "Let R be a Noetherian domain, S a domain over R, and K and L their fraction fields, with compatible maps R -> K -> L and R -> S -> L. Assume L is finite-dimensional over K. Let Q be a prime of S whose contraction is the principal ideal xR. Then the canonical extension FractionRing(S/Q) over FractionRing(R/(Q contraction)) is finite-dimensional. Neither integrality nor normality nor an N-2 hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 032P, the application of Tag 031F and identification of prime residue fields (steps 4-5 of the parent); x=0 uses finite-dimensional domains over a field"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "If x=0, localize S by the nonzero elements of R. This is a K-subalgebra of L, hence finite-dimensional and a domain, so a field. Since Q avoids these denominators, its localization is a prime of this field and is zero; injectivity of localization forces Q=0. The quotient fraction fields then identify compatibly with K and L.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If x is nonzero, the prime xR has height one. The principal ideal height theorem bounds its height by one; the chain (0) < xR bounds it below. Therefore R_(xR) is a one-dimensional Noetherian local domain.",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical local map R_(xR) -> S_Q is injective; its maximal ideal contracts to the base maximal ideal. The fraction fields remain K and L. Apply Tag 031F to this map to get finite-dimensionality of kappa(Q) over kappa(xR).",
+   "uses": [
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A prime residue field is a fraction field of its quotient domain. The canonical equivalences with FractionRing(R/(Q contraction)) and FractionRing(S/Q) commute with the field map, since they agree on R and the quotient generators. Transport finite-dimensionality across these equivalences.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-prime-residue-field-algebra"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 032P, the application of Tag 031F and identification of prime residue fields (steps 4-5 of the parent); x=0 uses finite-dimensional domains over a field"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of fraction fields residue field extension at a prime contracting to a principal prime finite dimensional",
+   "results": "; Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instFiniteResidueField, IsLocalRing.ResidueField.finite_of_finite, instIsAlgebraicResidueFieldOfIsIntegral, IsLocalRing.ResidueField.finite_of_module_finite, Algebra.QuasiFinite.instResidueField, instIsSeparableResidueFieldOfQuotientIdeal, instIsFractionRingQuotientIdealResidueField",
+   "date": "2026-10-13",
+   "verdict": "No matching complete theorem; relevant basic lemmas used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*finite|finite.*residue",
+   "results": "; Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/Topology/Algebra/Ring/Compact.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+   "date": "2026-10-13",
+   "verdict": "No matching complete theorem; relevant basic lemmas used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite extension of fraction fields the residue extension above a principal prime is finite dimensional",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TateRootClosureQuotientFinite",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Tag 032P, the application of Tag 031F and identification of prime residue fields (steps 4-5 of the parent); x=0 uses finite-dimensional domains over a field",
+   "via": [
+    "lem-weil-pbc-tate-root-closure-quotient-finite",
+    "lem-weil-pbc-tate-purely-inseparable-closure-quotient-finite",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrincipalPrimeQuotientFractionFinite",
+  "file": "lean/Sheaf/RingTheory/PrincipalPrimeQuotientFractionFinite.lean",
+  "declaration": "principal_prime_quotient_fraction_finite",
+  "statement": "theorem principal_prime_quotient_fraction_finite\n    (R : Type uR) (S : Type uS) (K : Type uK) (L : Type uL)\n    [CommRing R] [IsDomain R] [IsNoetherianRing R]\n    [CommRing S] [IsDomain S] [Algebra R S]\n    [Field K] [Field L] [Algebra R K] [IsFractionRing R K]\n    [Algebra S L] [IsFractionRing S L] [Algebra K L] [Algebra R L]\n    [IsScalarTower R K L] [IsScalarTower R S L] [FiniteDimensional K L]\n    (x : R) (Q : Ideal S) [Q.IsPrime]\n    (hcontract : Q.comap (algebraMap R S) = Ideal.span ({x} : Set R)) :\n    letI : FaithfulSMul (R ⧸ Q.comap (algebraMap R S)) (S ⧸ Q) :=\n      (faithfulSMul_iff_algebraMap_injective _ _).mpr Ideal.algebraMap_quotient_injective\n    FiniteDimensional (FractionRing (R ⧸ Q.comap (algebraMap R S)))\n      (FractionRing (S ⧸ Q))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T100126-L-2487203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T100126-L-2487203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
