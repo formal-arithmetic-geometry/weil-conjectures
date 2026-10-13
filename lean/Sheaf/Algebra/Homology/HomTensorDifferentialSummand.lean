@@ -1,8 +1,8 @@
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.HomTensorSummandLocalizedExt
+import Sheaf.Algebra.Homology.HomTensorDifferentialSummandPure
 
 /-!
 # Three-term expansion of the iterated Hom differential
@@ -67,6 +67,10 @@ theorem homTensorDegreewiseMap_iteratedDifferential_summand
         homTensorProjection R T M n (t + 1) (t + (n + 1)) (by omega) ≫
           SheafOfModules.homObjMap (R := R)
             (HomologicalComplex.mapBifunctor.d₂ K L (curriedTensor Mod)
-              (ComplexShape.up ℤ) p q (t + 1)) (𝟙 (M.X (t + (n + 1))))) := by sorry
+              (ComplexShape.up ℤ) p q (t + 1)) (𝟙 (M.X (t + (n + 1))))) := by
+  let := SheafOfModules.monoidalCategory R
+  apply homTensorSummandLocalized_ext R (K.X p) (L.X q)
+  intro U s W x y
+  exact homTensorDifferential_summand_pure R K L M n t p q h U s W x y
 
 end CategoryTheory

@@ -12349,3 +12349,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStalkPresentation (stage 3; reviewer PASS; first push; landing 20261013T115432-L-3360226 (interface); batch 20261013T115429; modules 2; new nodes 1)
 - 11:57 L: merged deliver/M3/Sheaf.AlgebraicGeometry.NewBaseOpenMateFactorization (stage 3; reviewer PASS; first push; landing 20261013T115711-L-3380335 (interface); batch 20261013T115709; modules 2; new nodes 1)
 - 11:59 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality (stage 3; reviewer PASS; first push; landing 20261013T115952-L-3403422 (proof); batch 20261013T115950; modules 1; new nodes 0)
+- 11:59 L: merged deliver/K4/Sheaf.Algebra.Homology.HomTensorDifferentialSummand (stage 3; reviewer PASS; after a return; landing 20261013T115952-L-3403537 (interface); batch 20261013T115950; modules 3; new nodes 2)

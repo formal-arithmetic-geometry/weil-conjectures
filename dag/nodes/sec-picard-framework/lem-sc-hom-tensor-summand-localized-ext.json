@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-hom-tensor-summand-localized-ext",
+ "kind": "statement",
+ "title": "Localized pure-tensor extensionality for a sheaf tensor",
+ "statement": "Let C be a site, R a sheaf of commutative rings, and A,B,N,X sheaves of R-modules [def-pur-sheaf-hom, def-pur-sheaf-tensor-product]. Let sigma(A,B) be the canonical map from the sectionwise presheaf tensor to the underlying sheaf tensor [def-sc-hom-tensor-degreewise-equation]. If a,b:X→internalHom(A tensor B,N) have equal values at sigma(x tensor y), for every source section s over U, localized object W→U and sections x of A and y of B over W, then a=b. This statement concerns a single tensor, with no total-complex coproduct or differential.",
+ "stmt_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-hom-tensor-degreewise-equation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor product (Tag 03EK), Lemma sites-modules-lemma-internal-hom-tensor (Tag 03EO), tensor-Hom and sheafification universal properties"
+ },
+ "proof": [
+  {
+   "text": "Construct the presheaf tensor-Hom equivalence by sectionwise currying and evaluation at the identity localized object. Its two composites are identities by tensor and natural-transformation extensionality. Transpose a and b, using symmetry, to maps A tensor B→internalHom(X,N); the transposition is injective.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the transposed maps with the inverse tensor-to-sheafification comparison, then use the sheafification adjunction to test them on the presheaf tensor. Test each sectionwise map on pure tensors. The remaining internal Hom section is tested on localized source sections. Naturality of sigma identifies restriction of sigma(x tensor y) with sigma of the restricted x tensor restricted y. Apply the hypothesis at that further localized object and use injectivity of the transposition.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-sc-hom-tensor-degreewise-equation",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sc-hom-tensor-degreewise-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), referring to Tag 0A5Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from a sheaf tensor is determined by evaluations on localized pure tensors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying iterated internal Hom differential on tensor cochain complexes",
+   "results": "CochainComplex.HomComplex.δ_v, δ_comp, δ_hom_apply, δ_single are external cochains; no sheaf internal Hom tensor summand evaluation or extensionality theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Int.negOnePow_add",
+   "results": "Int.negOnePow_add in Mathlib.Algebra.Ring.NegOnePow gives the integer sign identity.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homTensor.*(ext|Differential)|negOnePow_add",
+   "results": "Mathlib has sign addition identities and external cochain formulas; no exact sheaf summand calculation. Local rg found HomTensorLocalizedExt for total tensor terms, whose transposition proof supplies the generic tensor-summand extensionality proof; the differential component and total theorems depend on the assigned summand and cannot be imported.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDifferentialSummand",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-differential",
+   "place": "Localized pure-tensor extensionality for a sheaf tensor",
+   "via": [
+    "lem-sc-hom-tensor-iterated-differential-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorSummandLocalizedExt",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorSummandLocalizedExt.lean",
+  "declaration": "CategoryTheory.homTensorSummandLocalized_ext",
+  "statement": "theorem homTensorSummandLocalized_ext (A B N X : Mod) :\n    letI := SheafOfModules.monoidalCategory R\n    ∀ (a b : X ⟶ SheafOfModules.homObj (R := R) (A ⊗ B) N),\n      (∀ (U : Cᵒᵖ) (s : X.val.obj U) (W : (Over U.unop)ᵒᵖ)\n        (x : A.val.obj (op W.unop.left)) (y : B.val.obj (op W.unop.left)),\n        (((a.val.app U).hom s).app W).hom\n          (((homTensorSectionMap R A B).app (op W.unop.left)).hom\n            (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)) =\n        (((b.val.app U).hom s).app W).hom\n          (((homTensorSectionMap R A B).app (op W.unop.left)).hom\n            (x ⊗ₜ[R.obj.obj (op W.unop.left)] y))) → a = b",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T115952-L-3403537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T115952-L-3403537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
