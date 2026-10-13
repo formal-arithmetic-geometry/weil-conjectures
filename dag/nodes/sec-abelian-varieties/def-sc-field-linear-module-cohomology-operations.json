@@ -32,10 +32,15 @@
    "text": "H3 partial proof: scalarRestriction_linear follows from the module restriction scalar law and composition of the structure-ring maps. scalarPresheaf_isSheaf follows by forgetting to abelian groups and reflecting sheafhood. scalarFunctor_preservesFiniteLimits follows from sectionwise evaluation and restriction of scalars, then reflection by sheafToPresheaf. The inverse-image functor is additive by its adjunction to additive pushforward; left Kan extension along the flat opens map and sheafification preserve finite limits; the left adjunction preserves finite colimits. Tensoring on the left preserves finite limits sectionwise over the field, followed by sheafification and Sheaf.tensorLeftIso; monoidal closedness gives finite colimits. The braiding transfers these results to right tensoring. The tensor coefficient formula follows from the sheafification adjunction, the monoidal tensor comparison and evaluation on a pure tensor. Six existing named obligations remain open: exists_moduleExtEquiv, exists_scalarPullbackCoefficient, scalarCohomologyExtMap_add, scalarCohomologyExtMap_bijective, scalarCohomologyExtMap_smul, scalarFunctor_preservesFiniteColimits. All statements and definition bodies are unchanged.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "D2 partial proof: scalarFunctor_preservesFiniteColimits is obtained by composing with the forgetful functor from k-module sheaves to abelian sheaves. This forgetful functor preserves sheafification because local injectivity and local surjectivity depend only on the underlying functions; the sheafification adjunction then proves finite-colimit preservation. The composite is definitionally SheafOfModules.toSheaf, whose colimit preservation is already proved upstream. Reflect finite colimits through the conservative forgetful functor. scalarCohomologyExtMap_add follows by additivity of moduleExtEquiv, Ext.mapExactFunctor_add and Ext.comp_add. For exists_scalarPullbackCoefficient, prove scalarMap compatibility using naturality of a.app and the equality a composed with f equals g. Equip the sectionwise tensor-pullback unit with these k-linear maps and its existing naturality, obtaining a map into scalar direct image. Transpose it by the inverse-image/direct-image adjunction, and evaluate apply_symm_apply to obtain the exact sectionwise characterization. Three original obligations remain: exists_moduleExtEquiv, scalarCohomologyExtMap_smul, scalarCohomologyExtMap_bijective. No statements, definitions or unit routes change.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
- "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only. K1 stage-3 second reading: sectionwise functor laws; partial proof. H3 stage-3 partial proof using Mathlib sheaf reflection, adjunction additivity, flat Kan extension, field tensor exactness, reflective monoidal closedness, and the monoidal sheafification comparison.",
+ "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only. K1 stage-3 second reading: sectionwise functor laws; partial proof. H3 stage-3 partial proof using Mathlib sheaf reflection, adjunction additivity, flat Kan extension, field tensor exactness, reflective monoidal closedness, and the monoidal sheafification comparison. D2 stage-3 partial proof: underlying abelian sheaf colimit preservation and reflection, Ext additivity, and the explicit adjoint k-linear tensor-pullback unit.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -188,11 +193,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-38efb",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T054220-L-443657",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered module and node/report checked against repository, compiled successfully with all 14 direct importers, and proved declarations use only permitted axioms."
+  "landing": "20261013T072341-L-1115999",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
