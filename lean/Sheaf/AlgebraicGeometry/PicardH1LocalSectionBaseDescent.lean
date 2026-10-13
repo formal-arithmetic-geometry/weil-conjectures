@@ -13,13 +13,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.RingTheory.FiniteFreeMapResidueLocalization
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescentGenerator
 
 /-! # Local fibre-generator lifting after descent of the pullback bundles
 
@@ -30,6 +26,7 @@ Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0.
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
@@ -110,6 +107,13 @@ theorem picard_h1_local_section_of_base_descent {X S : Scheme.{v}} (f : X ⟶ S)
         ∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),
           (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →
             x ∈ Modules.nonvanishingLocus
-              ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) σ := by sorry
+              ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) σ := by
+  obtain ⟨V, hwV, σ, hσ⟩ := picard_h1_local_section_of_base_descent_generator
+    f Xi fi ui hui hO hOi L W k w s hw hLi hLs hH
+  haveI : ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L).IsInvertible :=
+    ((Modules.invertible_pullback_tensor (pullback.fst f (V.ι ≫ k))).1 L).2
+  refine ⟨V, hwV, σ, ?_⟩
+  intro x hx
+  exact (Modules.mem_nonvanishingLocus_iff_generatesAt _ _ _).2 (hσ x hx)
 
 end AlgebraicGeometry.Scheme

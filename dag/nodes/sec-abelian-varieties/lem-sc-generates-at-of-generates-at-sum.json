@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-generates-at-of-generates-at-sum",
+ "kind": "statement",
+ "title": "A generating sum of pulled-back sections has a generating summand downstairs",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], $g:X\\to Y$ a scheme morphism, and $M$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. Let $\\iota$ be any type, $s\\subset\\iota$ a finite set, $a:\\iota\\to\\Gamma(X,\\mathcal O_X)$, $\\sigma:\\iota\\to\\Gamma(Y,M)$, and $y\\in X$. Write $g^*\\sigma_r\\in\\Gamma(X,g^*M)$ for the global pullback section, obtained from the pullback adjunction unit and restriction from $g^{-1}(Y)$ to the top open [def-pc-module-pullback, lem-pc-module-pullback-adjunction]. If $\\sum_{r\\in s} a_r\\,g^*\\sigma_r$ is a local free generator at $y$ [def-sc-local-free-generator, def-sc-section-generating-locus], then there exists $r\\in s$ such that $\\sigma_r$ is a local free generator at $g(y)$. There are no quasi-compactness, field, flatness, or nonempty-index hypotheses.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-local-free-generator",
+  "def-sc-section-generating-locus"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/FieldBaseChange.lean",
+  "place": "lines 77-113, exists_generatesAt_of_generatesAt_sum; local coefficient criterion (Stacks Modules Tag 01CY)"
+ },
+ "proof": [
+  {
+   "text": "Choose an open W containing g(y) and a free generator e of M on W, using invertibility. For every r, write the restriction of sigma r uniquely as f r times e. The pullback of e freely generates on g inverse W. Restricting the given sum to that open gives b times this pulled-back generator, where b is the sum over r in s of the restricted a r times g.app W (f r). These are the coefficient and pullback identities used in the existing Lean proof.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-local-free-generator",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local coefficient criterion for a free generator shows that generation of the sum at y puts y in the basic open D(b). The basic open of a finite sum is contained in the union of the basic opens of its summands; the basic open of each product is contained in D(g.app W (f r)). Thus some r in s satisfies y in D(g.app W (f r)). This also covers s empty: D(0) is empty, so the hypothesis is impossible.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image identity for basic opens gives g(y) in D(f r). Apply the local coefficient criterion in the converse direction to sigma r restricted to W = f r times e. It follows that sigma r generates M at g(y); together with r in s this is the asserted witness. All steps are implemented in the attached existing, sorry-free theorem; no new Lean declaration is introduced.",
+   "uses": [
+    "def-sc-section-generating-locus",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator",
+  "def-pc-module-pullback",
+  "def-sc-section-generating-locus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/FieldBaseChange.lean",
+  "place": "proof of exists_generatesAt_of_generatesAt_sum, lines 81-113"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If a finite linear combination of pulled-back sections of an invertible sheaf generates at a point, some original section generates at its image",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_generatesAt_of_generatesAt_sum",
+   "results": "Unknown identifier in the search index; zero hits.",
+   "verdict": "Reuse the existing source declaration.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_generatesAt_of_generatesAt_sum|linear combination.*pullback.*generat",
+   "results": "Mathlib grep: zero hits. Local repository search finds the complete proved lemma at Modules/FieldBaseChange.lean:77 and no DAG node for it.",
+   "verdict": "Attach a new DAG record to the existing source-library theorem, without duplicating it.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-h1-local-section-base-descent",
+   "place": "The perfect-complex argument through d = 0",
+   "via": [
+    "lem-sc-picard-h1-local-section-base-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_generatesAt_of_generatesAt_sum",
+  "statement": "lemma exists_generatesAt_of_generatesAt_sum [SheafOfModules.IsInvertible.{u, u, u} M]\n    {ι : Type*} (s : Finset ι) (a : ι → Γ(X, ⊤)) (σ : ι → Γ(M, ⊤)) {y : X}\n    (h : GeneratesAt (∑ r ∈ s, a r • pullbackTopSection g (σ r)) y) :\n    ∃ r ∈ s, GeneratesAt (σ r) (g y)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13",
+  "note": "Existing declaration, not duplicated. In namespace AlgebraicGeometry.Scheme.Modules with universe u and section variables {X Y : Scheme.{u}} (g : X ⟶ Y) {M : Y.Modules}; all section binders are part of the complete type. pullbackTopSection is the actual source-library pullback, compared with tensorPullback by adjunction uniqueness in the consuming theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs and dependencies with their DAG records and Stacks Tag 0BF2 (https://stacks.math.columbia.edu/tag/0BF2); existing signatures are unchanged, all five modules and the sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx for the two documented holes."
+ }
+}

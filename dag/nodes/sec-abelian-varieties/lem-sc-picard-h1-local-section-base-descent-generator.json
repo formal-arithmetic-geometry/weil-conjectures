@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-picard-h1-local-section-base-descent-generator",
+ "kind": "statement",
+ "title": "Local generator lifting after H1 descent",
+ "statement": "Let $f:X\\to S$ and $f_i:X_i\\to S$ for $i\\in\\operatorname{Fin}(n)$ be flat, proper morphisms locally of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], with morphisms $u_i:X_i\\to X$ satisfying $u_i f=f_i$. Assume that their structure pushforwards are universally the structure module, expressed by invertibility of the canonical unit maps after every base change [def-pc-base-change, def-pc-module-pullback]. Let $L$ be invertible on $X$ [def-sc-invertible-module], let $k:W\\to S$ be an immersion, and let $w\\in W$, $s\\in S$ satisfy $k(w)=s$ [def-weil-residue-field]. Assume that each pullback of $u_i^*L$ to $X_i\\times_S W$ is isomorphic to the pullback of a finite locally free module on $W$, and that $L$ on $X\\times_S\\operatorname{Spec}\\kappa(s)$ is isomorphic to the pullback of a finite locally free module on $\\operatorname{Spec}\\kappa(s)$ [def-amb-finite-locally-free-module]. If the joint canonical structure-sheaf cohomology map $H^1(X_s,\\mathcal O)\\to\\prod_i H^1(X_{i,s},\\mathcal O)$ is injective [def-sc-structure-sheaf-cohomology-pullback], then there is an open $V\\subset W$ containing $w$, and a global section $\\sigma$ of the pullback of $L$ on $X\\times_S V$, such that for every point $x$ over $(w,w\\in V)$ there is an open neighbourhood $U$ of $x$ on which $\\sigma|_U$ is a free generator [def-sc-section-generating-locus, def-sc-local-free-generator].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, proof after replacing S by the intersection, through d = 0 and lifting the fibre generator; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Apply fibre-generator existence to f, its universal structure-pushforward condition and hLs, obtaining a section tau of the pullback of L to X times_S Spec kappa(w) generating at every point. This does not use any comparison family or H1 injectivity.",
+   "uses": [
+    "lem-sc-picard-h1-base-descent-fibre-generator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply local lifting to this particular tau, obtaining V, the fibre inclusion j surjective onto the marked fibre, the pullback-comparison isomorphism e, and a section sigma whose transported pullback is tau.",
+   "uses": [
+    "lem-sc-picard-h1-base-descent-section-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain invertibility of the pullback of L. For each point x over w, select y with j(y)=x and apply tensorPullback_generatesAt_reflects to the restriction equation and the generation of tau at y.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-tensor-pullback-generator-reflection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-h1-base-descent-fibre-generator",
+  "lem-sc-picard-h1-base-descent-section-lifting",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-tensor-pullback-generator-reflection"
+ ],
+ "proof_origin": {
+  "by": "J1 worker repair",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2: separate fibre triviality from section lifting, then reflect generation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "section of invertible module freely generates on marked fibre after H1 injectivity",
+   "results": "No exact match; search service unavailable for this specialized statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper flat family H1 injective lift fibre generator section",
+   "results": "No exact match in available declarations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard_h1_local_section|degree-zero generator",
+   "results": "Only the blueprint module and this auxiliary declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-h1-local-section-base-descent",
+   "place": "The perfect-complex argument through d = 0",
+   "via": [
+    "lem-sc-picard-h1-local-section-base-descent"
+   ]
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescentGenerator",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1LocalSectionBaseDescentGenerator.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_local_section_of_base_descent_generator",
+  "statement": "theorem picard_h1_local_section_of_base_descent_generator {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (hOi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd (fi i) g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (hLi : ∀ i, ∃ (N : W.Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n        ((Modules.tensorPullback (ui i)).obj L) ≅\n        (Modules.tensorPullback (pullback.snd (fi i) k)).obj N))\n    (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n        (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N))\n    (hH : Function.Injective (fun x :\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1 ↦ fun i ↦\n      structureSheafCohomologyPullback\n        (((Over.pullback (S.fromSpecResidueField s)).map\n          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 x)) :\n    ∃ (V : W.Opens) (hwV : w ∈ V),\n      ∃ σ : Γ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L, ⊤),\n        ∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),\n          (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →\n            Modules.GeneratesAt σ x",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-amb-finite-locally-free-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-sc-section-generating-locus",
+  "def-sc-local-free-generator"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs and dependencies with their DAG records and Stacks Tag 0BF2 (https://stacks.math.columbia.edu/tag/0BF2); existing signatures are unchanged, all five modules and the sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx for the two documented holes."
+ }
+}

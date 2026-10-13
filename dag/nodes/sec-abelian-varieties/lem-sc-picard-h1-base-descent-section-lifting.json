@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-picard-h1-base-descent-section-lifting",
+ "kind": "statement",
+ "title": "Local lifting of an arbitrary marked-fibre section",
+ "statement": "Let $f:X\\to S$ and $f_i:X_i\\to S$ for $i\\in\\operatorname{Fin}(n)$ be flat, proper morphisms locally of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], with morphisms $u_i:X_i\\to X$ satisfying $u_i f=f_i$. Assume that their structure pushforwards are universally the structure module, expressed by invertibility of the canonical unit maps after every base change [def-pc-base-change, def-pc-module-pullback]. Let $L$ be invertible on $X$ [def-sc-invertible-module], let $k:W\\to S$ be an immersion, and let $w\\in W$, $s\\in S$ satisfy $k(w)=s$ [def-weil-residue-field]. Assume that each pullback of $u_i^*L$ to $X_i\\times_S W$ is isomorphic to the pullback of a finite locally free module on $W$, and that $L$ on $X\\times_S\\operatorname{Spec}\\kappa(s)$ is isomorphic to the pullback of a finite locally free module on $\\operatorname{Spec}\\kappa(s)$ [def-amb-finite-locally-free-module]. If the joint canonical structure-sheaf cohomology map $H^1(X_s,\\mathcal O)\\to\\prod_i H^1(X_{i,s},\\mathcal O)$ is injective [def-sc-structure-sheaf-cohomology-pullback], then every global section $\\tau$ of $L_Y$ on $Y=X\\times_S\\operatorname{Spec}\\kappa(w)$, with base map $\\operatorname{Spec}\\kappa(w)\\to W\\to S$, admits the following lifting data. There are an open $V\\subset W$ containing $w$, a morphism $j:Y\\to X_V=X\\times_S V$ hitting every point of $X_V$ over $(w,w\\in V)$, an isomorphism $e:j^*L_V\\cong L_Y$, and a section $\\sigma\\in\\Gamma(X_V,L_V)$ whose canonical pullback section along $j$, transported by $e$, equals $\\tau$ [def-pc-base-change, def-pc-module-pullback, lem-pc-module-pullback-adjunction]. The neighbourhood may depend on $\\tau$. No local-generation condition is asserted.",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-amb-finite-locally-free-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, proof after replacing S by the intersection, through d = 0 and lifting the fibre generator; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Base change to W, identify marked residue fields, and trivialize the finite locally free modules descended from the target bundles after faithfully flat descent shows that they have rank one. The fibre bundle is trivial by hLs.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "def-weil-residue-field",
+    "def-sc-invertible-module",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use perfect direct-image base change and finite-free residue models for the source and all targets. Represent pullback maps by chain maps; invert their degree-zero maps and a nonzero maximal minor of the joint degree-one map. In degree-one rank zero no minor is required, including the empty-family case. Target degree-zero differentials vanish after the trivial target generators span the rank-one terms; the chain-map identities and joint degree-one injectivity force the source differential to vanish.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-pc-finite-free-map-residue-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the scalar coefficient of the prescribed tau in the degree-zero term by additionally inverting its denominator, nonzero at w. Identify the marked residue fibres of V and W to obtain j, which hits every point over w. Pullback composition gives e, and the canonical adjunction unit computes section restriction, giving the displayed equality.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-finite-free-map-residue-localization",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "J1 worker repair",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, fibre triviality and perfect-complex argument; Modules Tag 01CY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local lifting of arbitrary sections of a trivial invertible module on a fibre from H1 injectivity",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module trivial on a marked fibre has a fibre generator; sections lift locally when joint H1 is injective",
+   "results": "Eight algebraic Picard-group hits, including CommRing.Pic.mk_eq_one_iff_free; no scheme section-lifting result.",
+   "verdict": "No exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.GeneratesAt",
+   "results": "Unknown identifier in the search index.",
+   "verdict": "No indexed match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "local_section_of_base_descent|exists_generatesAt_of_generatesAt_sum",
+   "results": "msearch Mathlib grep had no hits. Local source search found exists_generatesAt_of_generatesAt_sum in Modules.FieldBaseChange; used to prove the generic reflection lemma.",
+   "verdict": "Use the source-library generation reflection result; geometric fibre triviality and lifting still require separate statements.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-h1-local-section-base-descent",
+   "place": "The perfect-complex argument through d = 0",
+   "via": [
+    "lem-sc-picard-h1-local-section-base-descent"
+   ]
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardH1BaseDescentSectionLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1BaseDescentSectionLifting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_base_descent_section_lifting",
+  "statement": "theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (hOi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd (fi i) g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (hLi : ∀ i, ∃ (N : W.Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n        ((Modules.tensorPullback (ui i)).obj L) ≅\n        (Modules.tensorPullback (pullback.snd (fi i) k)).obj N))\n    (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n        (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N))\n    (hH : Function.Injective (fun x :\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1 ↦ fun i ↦\n      structureSheafCohomologyPullback\n        (((Over.pullback (S.fromSpecResidueField s)).map\n          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 x)) :\n    ∀ τ : Γ((Modules.tensorPullback\n      (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L, ⊤),\n    ∃ (V : W.Opens) (hwV : w ∈ V),\n      ∃ j : pullback f (W.fromSpecResidueField w ≫ k) ⟶ pullback f (V.ι ≫ k),\n        (∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),\n          (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →\n            ∃ y, j y = x) ∧\n        ∃ e : (Modules.tensorPullback j).obj\n          ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) ≅\n          (Modules.tensorPullback (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L,\n            ∃ σ : Γ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L, ⊤),\n              e.hom.app ⊤\n                (((Modules.tensorPullback j).obj\n                  ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).presheaf.map\n                    (homOfLE j.preimage_top.ge).op\n                      (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app\n                        ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app\n                          (Opposite.op ⊤) σ)) = τ",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs and dependencies with their DAG records and Stacks Tag 0BF2 (https://stacks.math.columbia.edu/tag/0BF2); existing signatures are unchanged, all five modules and the sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx for the two documented holes."
+ }
+}

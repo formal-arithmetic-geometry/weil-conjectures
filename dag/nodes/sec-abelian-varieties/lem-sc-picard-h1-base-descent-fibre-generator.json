@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-picard-h1-base-descent-fibre-generator",
+ "kind": "statement",
+ "title": "A generator on the descended marked fibre",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation]. Assume that for every base change $T\\to S$, the canonical structure-module adjunction unit for the second projection is an isomorphism [def-pc-base-change, def-pc-module-pullback, lem-pc-module-pullback-adjunction]. Let $L$ be invertible on $X$ [def-sc-invertible-module], $k:W\\to S$ an immersion, and $w\\in W$, $s\\in S$ with $k(w)=s$ [def-weil-residue-field]. Suppose that the pullback of $L$ to $X\\times_S\\operatorname{Spec}\\kappa(s)$ is isomorphic to the pullback of a finite locally free module on $\\operatorname{Spec}\\kappa(s)$ [def-amb-finite-locally-free-module]. On $Y=X\\times_S\\operatorname{Spec}\\kappa(w)$, using the map $\\operatorname{Spec}\\kappa(w)\\to W\\to S$, there exists a global section $\\tau$ of the pullback of $L$ which generates at every point of $Y$: around each point its restriction is a free generator [def-sc-section-generating-locus, def-sc-local-free-generator].",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-amb-finite-locally-free-module",
+  "def-sc-section-generating-locus",
+  "def-sc-local-free-generator"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, proof after replacing S by the intersection, through d = 0 and lifting the fibre generator; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Identify the residue fields at w and s via the immersion. Transport the finite locally free fibre descent isomorphism. Universal structure pushforward makes the fibre morphism surjective, so invertibility of the pullback forces the descended module to have rank one over the residue field. Choose its basis and transport its pullback through the descent isomorphism; it is a free generator at every fibre point.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-amb-finite-locally-free-module",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module",
+  "def-sc-local-free-generator"
+ ],
+ "proof_origin": {
+  "by": "J1 worker repair",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, fibre triviality and perfect-complex argument; Modules Tag 01CY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local lifting of arbitrary sections of a trivial invertible module on a fibre from H1 injectivity",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module trivial on a marked fibre has a fibre generator; sections lift locally when joint H1 is injective",
+   "results": "Eight algebraic Picard-group hits, including CommRing.Pic.mk_eq_one_iff_free; no scheme section-lifting result.",
+   "verdict": "No exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.GeneratesAt",
+   "results": "Unknown identifier in the search index.",
+   "verdict": "No indexed match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "local_section_of_base_descent|exists_generatesAt_of_generatesAt_sum",
+   "results": "msearch Mathlib grep had no hits. Local source search found exists_generatesAt_of_generatesAt_sum in Modules.FieldBaseChange; used to prove the generic reflection lemma.",
+   "verdict": "Use the source-library generation reflection result; geometric fibre triviality and lifting still require separate statements.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-h1-local-section-base-descent",
+   "place": "The perfect-complex argument through d = 0",
+   "via": [
+    "lem-sc-picard-h1-local-section-base-descent"
+   ]
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardH1BaseDescentFibreGenerator",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1BaseDescentFibreGenerator.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_base_descent_fibre_generator",
+  "statement": "theorem picard_h1_base_descent_fibre_generator {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n        (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N)) :\n    ∃ τ : Γ((Modules.tensorPullback\n      (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L, ⊤),\n      ∀ y : (pullback f (W.fromSpecResidueField w ≫ k) : Scheme.{v}),\n        Modules.GeneratesAt τ y",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs and dependencies with their DAG records and Stacks Tag 0BF2 (https://stacks.math.columbia.edu/tag/0BF2); existing signatures are unchanged, all five modules and the sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx for the two documented holes."
+ }
+}

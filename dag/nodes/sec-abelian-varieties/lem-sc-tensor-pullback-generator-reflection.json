@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-tensor-pullback-generator-reflection",
+ "kind": "statement",
+ "title": "Tensor pullback reflects section generation",
+ "statement": "Let $j:Y\\to Z$ be any scheme morphism, $M$ an invertible module on $Z$ [def-sc-invertible-module], $N$ a module on $Y$, and $e:j^*M\\cong N$ [def-pc-module-pullback]. Let $\\sigma\\in\\Gamma(Z,M)$ and $\\tau\\in\\Gamma(Y,N)$ satisfy $e(j^*\\sigma)=\\tau$, where the pullback section is given by the tensor-pullback adjunction unit and restriction from $j^{-1}(Z)$ to the top open [lem-pc-module-pullback-adjunction]. For any $y\\in Y$, if $\\tau$ is a local free generator at $y$, then $\\sigma$ is a local free generator at $j(y)$ [def-sc-section-generating-locus, def-sc-local-free-generator].",
+ "stmt_deps": [
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-section-generating-locus",
+  "def-sc-local-free-generator"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/FieldBaseChange.lean",
+  "place": "exists_generatesAt_of_generatesAt_sum; Stacks Modules Tag 01CY"
+ },
+ "proof": [
+  {
+   "text": "Transport generation through the inverse of e. Uniqueness of left adjoints compares tensor pullback to the source library pullback, compatibly with the adjunction units. Transport generation through this comparison. Apply the source library exists_generatesAt_of_generatesAt_sum (Modules.FieldBaseChange) to the singleton family with coefficient one, obtaining generation of sigma at j(y). The proof of that source lemma uses the local coefficient criterion and preimage_basicOpen.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-sc-section-generating-locus",
+    "def-sc-local-free-generator",
+    "lem-sc-generates-at-of-generates-at-sum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-sc-section-generating-locus",
+  "def-sc-local-free-generator",
+  "lem-sc-generates-at-of-generates-at-sum"
+ ],
+ "proof_origin": {
+  "by": "J1 worker repair",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, fibre triviality and perfect-complex argument; Modules Tag 01CY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local lifting of arbitrary sections of a trivial invertible module on a fibre from H1 injectivity",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module trivial on a marked fibre has a fibre generator; sections lift locally when joint H1 is injective",
+   "results": "Eight algebraic Picard-group hits, including CommRing.Pic.mk_eq_one_iff_free; no scheme section-lifting result.",
+   "verdict": "No exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.GeneratesAt",
+   "results": "Unknown identifier in the search index.",
+   "verdict": "No indexed match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "local_section_of_base_descent|exists_generatesAt_of_generatesAt_sum",
+   "results": "msearch Mathlib grep had no hits. Local source search found exists_generatesAt_of_generatesAt_sum in Modules.FieldBaseChange; used to prove the generic reflection lemma.",
+   "verdict": "Use the source-library generation reflection result; geometric fibre triviality and lifting still require separate statements.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-h1-local-section-base-descent",
+   "place": "The perfect-complex argument through d = 0",
+   "via": [
+    "lem-sc-picard-h1-local-section-base-descent"
+   ]
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackGeneratorReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackGeneratorReflection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullback_generatesAt_reflects",
+  "statement": "theorem tensorPullback_generatesAt_reflects {Y Z : Scheme.{v}} (j : Y ⟶ Z)\n    (M : Z.Modules) [M.IsInvertible] (N : Y.Modules)\n    (e : (tensorPullback j).obj M ≅ N) (σ : Γ(M, ⊤)) (τ : Γ(N, ⊤))\n    (hστ : e.hom.app ⊤\n      (((tensorPullback j).obj M).presheaf.map (homOfLE j.preimage_top.ge).op\n        (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app M).val.app\n          (op ⊤) σ)) = τ)\n    (y : Y) (hτ : GeneratesAt τ y) : GeneratesAt σ (j y)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74813",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T022417-L-3214746",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations, proofs and dependencies with their DAG records and Stacks Tag 0BF2 (https://stacks.math.columbia.edu/tag/0BF2); existing signatures are unchanged, all five modules and the sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx for the two documented holes."
+ }
+}
