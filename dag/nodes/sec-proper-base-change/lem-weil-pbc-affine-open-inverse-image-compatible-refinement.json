@@ -19,44 +19,38 @@
  ],
  "proof": [
   {
-   "text": "For every ordered pair b,b′ form the affine overlap V_b×_{D(j)}V_b′ and take the difference of the two restricted sections. Unit naturality makes its inverse-image unit zero: both terms are restrictions of t along the same terminal arrow. Localize H(F) to the base-changed overlap. The localization adjunction composed with hH, with the canonical pullback-composition comparison on its right adjoint, is the inverse-image adjunction there. Thus the zero-neighbourhood theorem supplies an open in this overlap containing the image of its limit pullback on which the difference restricts to zero.",
+   "text": "For each ordered pair of indices apply pair_eventual_agreement to the two sections and their common terminal inverse-image section. This produces one stage and a test-object equality criterion for each pair.",
    "uses": [
-    "lem-weil-pbc-etale-section-zero-neighbourhood",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-affine-open-inverse-image-compatible-refinement-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "On the cofiltered tail over j, base-change each overlap along the stage maps. These affine schemes have affine transition maps and are compact; their cone with point the limit pullback of the overlap is limiting by the pullback universal property. Apply the eventual containment theorem to its agreement open, obtaining a stage killing the overlap difference. There are finitely many ordered pairs. Cofilteredness supplies a common refinement and equalizes their arrows to j; pulling back zero restrictions preserves zero. For B empty use k=j and f=id.",
+   "text": "Apply Mathlib IsCofiltered.wideCospan to the finite family of arrows to j. This gives a common stage k, a map f:k→j and maps to every pair stage commuting with those arrows. This also works for the empty family.",
    "uses": [
-    "lem-weil-pbc-limit-image-contained-in-open",
-    "lem-weil-pbc-cartesian-square-pasting",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Use the actual pullbacks V′_b=V_b×_{D(j)}D(k), with v′ and γ their projections, and π′=p*(γ) followed by π. Base-change stability gives the stage cover. Canonical pullback comparisons and the fact that p factors through the open monomorphism D(k) identify the limit cover with the original cover, so π′ covers T. The projection equations give the displayed commutative square. Every pair of arrows with equal composites factors through the pairwise overlap, and restricting its zero difference proves compatibility. Empty overlaps have unique sections, including zero-coefficient and singleton cases.",
+   "text": "At this fixed k and f apply refinement_data. For two test arrows with equal composites to D(k), compose their maps to the original V objects with the covering projections. The refinement-square equations and the wide-cospan equations put them under the equality criterion for that pair. Presheaf functoriality rewrites that equality as the required compatibility of restricted sections.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-affine-open-inverse-image-compatible-refinement-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-section-zero-neighbourhood",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-limit-image-contained-in-open",
+  "lem-weil-pbc-affine-open-inverse-image-compatible-refinement-compatibility",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-etale-base-change-continuous"
+  "lem-weil-pbc-affine-open-inverse-image-compatible-refinement-data"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "E2",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/09XM",
-  "place": "Specialization of the cited local-section and finite-descent arguments to the affine open system with a supplied adjunction"
+  "place": "Finite wide-cospan assembly of pairwise eventual agreement, followed by pullback cover refinement; follows the three original proof steps."
  },
  "mathlib_searches": [
   {
@@ -115,7 +109,7 @@
   "declaration": "affineOpenSections_inverse_image_compatible_refinement",
   "statement": "theorem affineOpenSections_inverse_image_compatible_refinement\n    {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]\n    (D : J ⥤ X.Etale)\n    [∀ j, IsAffine (D.obj j).left] [∀ j, IsOpenImmersion (D.obj j).hom]\n    (c : Cone (D ⋙ Scheme.Etale.forget X ⋙ Over.forget X))\n    (p : c.pt ⟶ X) (hp : ∀ j, c.π.app j ≫ (D.obj j).hom = p)\n    (hc : IsLimit c)\n    (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n      Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hH : H ⊣ p.Etale.sheafPushforwardContinuous\n      AddCommGrpCat.{u + 1} X.smallEtaleTopology c.pt.smallEtaleTopology)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (t : (H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))\n    (j : J) (B : Type (u + 1)) [Finite B]\n    (V : B → X.Etale) (v : ∀ b, V b ⟶ D.obj j)\n    (s : ∀ b, F.obj.obj (op (V b)))\n    (π : ∀ b, p.Etale.obj (V b) ⟶ Scheme.Etale.mk (𝟙 c.pt))\n    (hV : ∀ b, IsAffine (V b).left)\n    (hv : Sieve.ofArrows V v ∈ X.smallEtaleTopology (D.obj j))\n    (hπ : Sieve.ofArrows (fun b ↦ p.Etale.obj (V b)) π ∈\n      c.pt.smallEtaleTopology (Scheme.Etale.mk (𝟙 c.pt)))\n    (hs : ∀ b, (H.obj F).obj.map (π b).op t =\n      (hH.unit.app F).hom.app (op (V b)) (s b)) :\n    ∃ (k : J) (f : k ⟶ j) (V' : B → X.Etale)\n      (v' : ∀ b, V' b ⟶ D.obj k) (γ : ∀ b, V' b ⟶ V b)\n      (π' : ∀ b, p.Etale.obj (V' b) ⟶ Scheme.Etale.mk (𝟙 c.pt)),\n      (∀ b, v' b ≫ D.map f = γ b ≫ v b) ∧\n      Sieve.ofArrows V' v' ∈ X.smallEtaleTopology (D.obj k) ∧\n      Sieve.ofArrows (fun b ↦ p.Etale.obj (V' b)) π' ∈\n        c.pt.smallEtaleTopology (Scheme.Etale.mk (𝟙 c.pt)) ∧\n      (∀ b, p.Etale.map (γ b) ≫ π b = π' b) ∧\n      ∀ ⦃W : X.Etale⦄ ⦃b b' : B⦄ (a : W ⟶ V' b) (a' : W ⟶ V' b'),\n        a ≫ v' b = a' ≫ v' b' →\n        F.obj.map a.op (F.obj.map (γ b).op (s b)) =\n          F.obj.map a'.op (F.obj.map (γ b').op (s b'))",
   "branch": "sheaf-dag",
-  "by": "W4",
+  "by": "E2",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -132,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T111942-L-3069942",
+  "landing": "20261013T123203-L-3676058",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

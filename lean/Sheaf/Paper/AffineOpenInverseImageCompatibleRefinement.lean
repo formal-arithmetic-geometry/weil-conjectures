@@ -8,6 +8,9 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.Paper.AffineOpenInverseImageRefinementData
+import Sheaf.Paper.AffineOpenSectionsEventualCompatibility
+import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Eventual agreement of a finite family of local unit lifts -/
 
@@ -71,4 +74,30 @@ theorem affineOpenSections_inverse_image_compatible_refinement
       ∀ ⦃W : X.Etale⦄ ⦃b b' : B⦄ (a : W ⟶ V' b) (a' : W ⟶ V' b'),
         a ≫ v' b = a' ≫ v' b' →
         F.obj.map a.op (F.obj.map (γ b).op (s b)) =
-          F.obj.map a'.op (F.obj.map (γ b').op (s b')) := by sorry
+          F.obj.map a'.op (F.obj.map (γ b').op (s b')) := by
+  classical
+  have hpair : ∀ z : B × B, ∃ (k : J) (f : k ⟶ j),
+      ∀ (U : X.Etale) (a : U ⟶ V z.1) (a' : U ⟶ V z.2) (q : U ⟶ D.obj k),
+        a ≫ v z.1 = q ≫ D.map f → a' ≫ v z.2 = q ≫ D.map f →
+        F.obj.map a.op (s z.1) = F.obj.map a'.op (s z.2) := by
+    intro z
+    exact affineOpenSections_pair_eventual_agreement D c p hp hc H hH F t j
+      (V z.1) (V z.2) (v z.1) (v z.2) (s z.1) (s z.2)
+      (π z.1) (π z.2) (hV z.1) (hV z.2) (hs z.1) (hs z.2)
+  choose kp fp heq using hpair
+  obtain ⟨k, f, g, hg⟩ := IsCofiltered.wideCospan fp
+  obtain ⟨V', v', γ, π', hsq, hcover, hlimit, hπ'⟩ :=
+    affineOpenSections_refinement_data D c p hp j k f B V v π hv hπ
+  refine ⟨k, f, V', v', γ, π', hsq, hcover, hlimit, hπ', ?_⟩
+  intro W b b' a a' haa'
+  have hleft : (a ≫ γ b) ≫ v b =
+      (a ≫ v' b ≫ D.map (g (b, b'))) ≫ D.map (fp (b, b')) := by
+    simp only [Category.assoc, ← hsq b, ← D.map_comp, hg]
+  have hright : (a' ≫ γ b') ≫ v b' =
+      (a ≫ v' b ≫ D.map (g (b, b'))) ≫ D.map (fp (b, b')) := by
+    simp only [Category.assoc, ← hsq b', ← D.map_comp, hg]
+    simpa only [Category.assoc] using congrArg (fun q ↦ q ≫ D.map f) haa'.symm
+  have h := heq (b, b') W (a ≫ γ b) (a' ≫ γ b')
+    (a ≫ v' b ≫ D.map (g (b, b'))) hleft hright
+  simpa only [op_comp, F.obj.map_comp, ConcreteCategory.comp_apply] using h
+

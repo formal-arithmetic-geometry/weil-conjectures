@@ -12424,3 +12424,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/A3/Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeExchange (stage 3; reviewer PASS; first push; landing 20261013T123202-L-3675525 (interface); batch 20261013T123200; modules 3; new nodes 2)
 - 12:32 L: merged deliver/C3/Sheaf.AlgebraicGeometry.CoefficientSourceAffineTensorPresentation (stage 3; reviewer PASS; first push; landing 20261013T123202-L-3675704 (proof); batch 20261013T123200; modules 1; new nodes 0)
 - 12:32 L: merged deliver/D4/Sheaf.AlgebraicGeometry.PerfectDescentCompatibleLocalData (stage 3; reviewer PASS; first push; landing 20261013T123203-L-3675914 (interface); batch 20261013T123200; modules 3; new nodes 2)
+- 12:32 L: merged deliver/E2/Sheaf.Paper.AffineOpenInverseImageCompatibleRefinement (stage 3; reviewer PASS; first push; landing 20261013T123203-L-3676058 (interface); batch 20261013T123200; modules 3; new nodes 2)
