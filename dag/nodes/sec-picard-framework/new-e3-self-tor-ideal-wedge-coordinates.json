@@ -20,40 +20,39 @@
  },
  "proof": [
   {
-   "text": "On each affine U use the quotient presentation of the closed chart and sheafify a projective quotient resolution. Compare the resulting bounded-above flat cochain resolution with a K-flat representative of the fixed tensor; tensor with the quotient and take degree minus n homology. The ideal annihilates that homology, so tensor pullback gives the associated Tor sheaf, furnishing t_U.",
+   "text": "Obtain shared source and target coordinates satisfying the normalized principal-localization equation for restrictions of ideal tuples defined on the larger affine chart.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-u4-self-tor-basic-ideal-wedge-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine conormal sections theorem with identity ring coordinates. Its unit equation identifies each ideal class with its pulled-back kernel section. Exterior universal properties, restriction of exterior sheaves, and localization produce s_U. Use these resolution and conormal coordinates in every chart.",
+   "text": "The ideal module is the kernel of the structure-module map to the closed-subscheme pushforward. Structure modules are quasi-coherent, as is their closed pushforward; kernels preserve quasi-coherence. On V=D(f) in U apply the affine denominator theorem to each ideal section b_j of V, obtaining a_j on U and m_j with a_j|V=f^m_j b_j. The pullback unit is linear through i.app(V), so its images satisfy the same equation. The image of f|V in O_Z(i^-1 V) is a unit. Express each unit image of b_j as its inverse m_j-th power times the unit image of a_j|V. Exterior multilinearity extracts the product of these inverse powers. Linearity of the two chart maps and the equation from the preceding step therefore give agreement for every ideal tuple on a principal open.",
    "uses": [
-    "lem-sc-affine-open-kernel-conormal-sections",
-    "lem-sc-exterior-sheaf-restrict-iso"
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-affine-module-basic-open-localization"
    ],
    "elementary": false
   },
   {
-   "text": "For each ideal tuple b on V, refine V by principal opens of U and then V. The same restricted ideal tuple supplies the Koszul augmentation in both localized quotient presentations. Flat localization preserves augmented quotient resolutions and homology. Apply the normalized comparison to its wedge cycle and use independence of lifts and resolution comparison to identify both classes in Q. The unit-normalized source coordinates identify the displayed wedges with those same ideal classes. Separatedness gives equality on O_V. Only ideal tuples are tested; no local generation of arbitrary conormal sections occurs. The empty tuple gives the quotient unit.",
-   "uses": [
-    "new-r4-self-tor-conormal-comparison"
-   ],
-   "elementary": false
+   "text": "For arbitrary affine V⊆U and an ideal tuple on V, at each point of i^-1 V use Mathlib exists_basicOpen_le_affine_inter to find one open W that is principal in both U and V. Restrict the tuple from V to W. Naturality of the pullback unit and the exterior-sheafification unit identifies its wedge with restriction of the original wedge. Naturality of each chart map identifies restriction of its output with its component over i^-1 W. Apply the preceding principal-open equation for (W,U) and (W,V); both values equal that of the single shared chart map φ_W. Sheaf separatedness (section_ext) on Q gives the equality over the full inverse image of V. Empty inverse images are handled by the same extensionality; n=0 by empty products and empty tuples.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-open-kernel-conormal-sections",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-exterior-sheaf-restrict-iso",
-  "new-r4-self-tor-conormal-comparison"
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "new-u4-self-tor-basic-ideal-wedge-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3",
+  "agent": "U4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/09PQ",
-  "place": "Tags 09PQ, 01R3 and 06YH; parent proof steps 1-3 through agreement on lifted ideal tuples, before local generation and multilinear extension."
+  "place": "Principal-localization normalization reduced to a new node; Lean proves ideal denominator clearing, exterior multilinearity, naturality and separatedness over common principal affine refinements."
  },
  "mathlib_searches": [
   {
@@ -141,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T222403-L-1222902",
+  "landing": "20261013T224523-L-1477062",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

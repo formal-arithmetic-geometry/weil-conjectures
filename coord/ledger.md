@@ -13802,3 +13802,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:45 L: merged deliver/T4/Sheaf.RingTheory.KoszulConormalCycleRelations (stage 3; reviewer PASS; after a return; landing 20261013T224522-L-1476511 (interface); batch 20261013T224504; modules 2; new nodes 1)
 - 22:45 L: merged deliver/U3/Sheaf.RingTheory.PointedEtaleQuotientFinal (stage 3; reviewer PASS; first push; landing 20261013T224522-L-1476732 (interface); batch 20261013T224504; modules 7; new nodes 6)
 - 22:45 L: merged deliver/U4/Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquare (stage 3; reviewer PASS; first push; landing 20261013T224523-L-1476909 (interface); batch 20261013T224504; modules 2; new nodes 1)
+- 22:45 L: merged deliver/U4/Sheaf.AlgebraicGeometry.SelfTorIdealWedgeCoordinates (stage 3; reviewer PASS; first push; landing 20261013T224523-L-1477062 (interface); batch 20261013T224504; modules 2; new nodes 1)
