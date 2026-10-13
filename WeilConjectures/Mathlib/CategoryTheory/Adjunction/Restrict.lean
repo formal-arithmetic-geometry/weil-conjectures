@@ -122,6 +122,7 @@ lemma map_restrictFullyFaithful_ofNatIsoLeft_counit_app (adj : L ‚ä£ R) (e : L ‚
 end Adjunction
 
 end CategoryTheory
+
 universe v v' u u'
 
 open CategoryTheory
