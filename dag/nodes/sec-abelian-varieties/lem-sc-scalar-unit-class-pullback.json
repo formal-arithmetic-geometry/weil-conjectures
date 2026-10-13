@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-scalar-unit-class-pullback",
+ "kind": "statement",
+ "title": "Structure-sheaf pullback preserves the degree-zero class of one",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$ schemes over $k$ [def-weil-scheme-over-base], and $t:Y\\to X$ satisfy $t\\circ f=g$. Let $u_X,u_Y$ be the canonical degree-zero classes of one [lem-sc-scalar-unit-cohomology-coordinates]. With scalar cohomology pullback [def-sc-field-linear-module-cohomology-operations] and the adjoint structure-sheaf coefficient map $\\epsilon_t:t^*\\mathcal O_X\\to\\mathcal O_Y$ [lem-weil-pbc-module-pullback-structure-sheaf], one has $(\\epsilon_t)_*t^*u_X=u_Y$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, section-cup-product, Lemma 20.31.1 (Tag 0FKU); Tag 01F7; Modules, Tags 0096 and 01CA"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-scalar-unit-cohomology-coordinates",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "In degree zero the injective-resolution comparison is the usual identification\nof derived global sections with sections. Evaluation at one identifies the image of\nthe augmented section one under scalarCohomologyExtEquiv with mk₀ of\nscalarUnitMorphism. Inverse image preserves degree-zero Ext classes. Under the\ninverse-image/direct-image adjunction, scalarPullbackCoefficient is characterized\nby the tensor-pullback adjunction unit on sections. Compose with the adjoint map\ntensorPullbackObjUnitToUnit: the tensor-pullback adjunction identity makes this the\nstructure-sheaf ring map. That ring map takes one to one. The constant-sheaf\nadjunction, evaluated at the terminal open, now identifies the composite with the\nscalar-unit morphism on the destination; scalarInverseUnitIso is precisely the\nconstant-unit identification in this adjunction. Naturality of the cohomology-to-Ext\ncomparison in the coefficient map converts this morphism equality to the displayed\ncohomology equality. This also holds on the empty scheme, where all sections vanish.",
+   "uses": [
+    "lem-sc-scalar-unit-cohomology-coordinates",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sc-scalar-cohomology-ext-coefficient-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scalar-unit-cohomology-coordinates",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-scalar-cohomology-ext-coefficient-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent A3, second reader",
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 0FKU and 01F7; specialization of the tensor and functoriality formulas to the section one"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology cup product with the section 1 is the identity under the tensor unit isomorphism",
+   "results": "Returned 8 hits: CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, groupCohomology.cocyclesMap_id, groupCohomology.mapCocycles₁_one, groupCohomology.cocycles₂_map_one_fst, groupCohomology.H1Map_id, groupCohomology.map_id, groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom, groupCohomology.map_one_of_isMulCocycle₁. No matching scalar sheaf cohomology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mk₀_comp|comp_mk₀|mapExactFunctor_mk₀",
+   "results": "Returned 25 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean. No matching scalar sheaf cohomology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree zero cohomology class of one is preserved by pullback of structure sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the degree zero cohomology class of the constant section one is one",
+   "results": "Returned 8 hits: groupCohomology.cocycles₁IsoOfIsTrivial_inv_hom_apply_coe, groupCohomology.H1IsoOfIsTrivial_inv_apply, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, groupCohomology.H0IsoOfIsTrivial_inv_apply, CategoryTheory.PresheafOfGroups.instOneH1, groupCohomology.cocyclesMk₀_eq, groupCohomology.mapCocycles₁_one, groupCohomology.cocycles₁_map_one. No matching scalar sheaf cohomology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_unit_class_pullback|scalar_cup_unit_identities|scalarUnitCohomologyClass|cup.*(one|unit)",
+   "results": "Searched lean/Sheaf/AlgebraicGeometry/Scalar*, lean/WeilConjectures/AlgebraicGeometry/Modules, Mathlib DerivedCategory/Ext and Sites/SheafCohomology. Only the definition of scalarUnitCohomologyClass and the bijective-scalar-map coordinate theorem occur. No existing unit or pullback identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExternalCupUnitCoefficientIdentities",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of Tag 0BF3, the Kunneth degree-one argument on the special fibre: identify the two external cup summands with scalar multiples of projection pullbacks; Tag 0BED, external cup maps preceding varieties-equation-kunneth-on-cech; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; specialization to the class of 1",
+   "via": [
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarUnitClassPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarUnitClassPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalar_unit_class_pullback",
+  "statement": "theorem scalar_unit_class_pullback (k : Type u) [Field k]\n    (X Y : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k))\n    (g : Y ⟶ Spec (CommRingCat.of k)) (t : Y ⟶ X) (h : t ≫ f = g) :\n    scalarCohomologyMap g (tensorPullbackObjUnitToUnit t) 0\n      (scalarCohomologyPullback f g t h (SheafOfModules.unit X.ringCatSheaf) 0\n        (scalarUnitCohomologyClass f)) = scalarUnitCohomologyClass g",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T054208-L-440456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T054208-L-440456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

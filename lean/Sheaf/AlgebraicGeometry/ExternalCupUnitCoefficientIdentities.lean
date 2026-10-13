@@ -7,7 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.Paper.ModuleCohomologyCupProduct
+import Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality
+import Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities
+import Sheaf.AlgebraicGeometry.ScalarUnitClassPullback
 
 /-! # External cup with one after identifying the unit coefficients
 
@@ -64,6 +66,31 @@ theorem external_cup_unit_coefficient_identities (k : Type u) [Field k]
           (externalCup f g F G 0 1 (scalarUnitCohomologyClass f) b) =
         scalarCohomologyMap p (tensorPullbackObjUnitToUnit (pullback.snd f g)) 1
           (scalarCohomologyPullback g p (pullback.snd f g) pullback.condition.symm G 1 b)) := by
-  sorry
+  dsimp only
+  let P := CategoryTheory.Limits.pullback f g
+  let p := pullback.fst f g ≫ f
+  let U := SheafOfModules.unit P.ringCatSheaf
+  let ex := tensorPullbackObjUnitToUnit (pullback.fst f g)
+  let ey := tensorPullbackObjUnitToUnit (pullback.snd f g)
+  have map_comp {M N Q : P.Modules} (v : M ⟶ N) (w : N ⟶ Q)
+      (n : ℕ) (x : scalarCohomology p M n) :
+      scalarCohomologyMap p (v ≫ w) n x =
+        scalarCohomologyMap p w n (scalarCohomologyMap p v n x) := by
+    simp only [scalarCohomologyMap, Functor.map_comp, ModuleCat.hom_comp,
+      LinearMap.comp_apply]
+  obtain ⟨huR, huL⟩ := scalar_cup_unit_identities k P p
+  constructor
+  · intro a
+    unfold externalCup
+    rw [map_comp]
+    erw [scalarCup_coefficient_naturality k P p _ _ U U ex ey 1 0]
+    rw [scalar_unit_class_pullback k Y P g p (pullback.snd f g) pullback.condition.symm]
+    exact huR _
+  · intro b
+    unfold externalCup
+    rw [map_comp]
+    erw [scalarCup_coefficient_naturality k P p _ _ U U ex ey 0 1]
+    rw [scalar_unit_class_pullback k X P f p (pullback.fst f g) rfl]
+    exact huL _
 
 end AlgebraicGeometry.Scheme.Modules

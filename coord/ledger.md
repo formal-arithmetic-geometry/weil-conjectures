@@ -11226,3 +11226,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: returned deliver/Y2/Sheaf.AlgebraicGeometry.PicardExternalCupCochain (reviewer RETURN: (the landing tools, head b2c98acbe) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 05:42 L: merged deliver/A2/Sheaf.Algebra.Homology.HomTensorSummandRestriction (stage 3; reviewer PASS; first push; landing 20261013T054207-L-440173 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/A2/Sheaf.AlgebraicGeometry.PicardH1BaseDescentCyclePresentation (stage 3; reviewer PASS; first push; landing 20261013T054208-L-440350 (interface); batch 20261013T054206; modules 3; new nodes 2)
+- 05:42 L: merged deliver/A3/Sheaf.AlgebraicGeometry.ExternalCupUnitCoefficientIdentities (stage 3; reviewer PASS; first push; landing 20261013T054208-L-440456 (interface); batch 20261013T054206; modules 3; new nodes 2)
