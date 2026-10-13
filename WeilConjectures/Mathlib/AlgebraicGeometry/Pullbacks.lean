@@ -275,6 +275,20 @@ lemma Scheme.Pullback.opensRange_openCoverOfLeftRight_f {X Y Z : Scheme.{u}}
     Scheme.Pullback.openCoverOfLeftRight_f]
   rfl
 
+/-- A variant of `AlgebraicGeometry.Scheme.isPullback_of_openCover` in which the pullbacks of the
+cover are given by arbitrary pullback squares. -/
+lemma Scheme.isPullback_of_openCover_of_isPullback {W Y Z X' : Scheme.{u}}
+    (fWX : W ⟶ X') (fWY : W ⟶ Y) (fXZ : X' ⟶ Z) (fYZ : Y ⟶ Z) (𝒰 : X'.OpenCover)
+    (W' : 𝒰.I₀ → Scheme.{u}) (a : ∀ i, W' i ⟶ W) (b : ∀ i, W' i ⟶ 𝒰.X i)
+    (ha : ∀ i, IsPullback (a i) (b i) fWX (𝒰.f i))
+    (H : ∀ i, IsPullback (b i) (a i ≫ fWY) (𝒰.f i ≫ fXZ) fYZ) :
+    IsPullback fWX fWY fXZ fYZ := by
+  refine Scheme.isPullback_of_openCover fWX fWY fXZ fYZ 𝒰 fun i ↦ ?_
+  refine (H i).of_iso (ha i).isoPullback (Iso.refl _) (Iso.refl _)
+    (Iso.refl _) ?_ ?_ (by simp) (by simp)
+  · simp [Scheme.Cover.pullbackHom]
+  · exact (Category.comp_id _).trans (congrArg (· ≫ fWY) (ha i).isoPullback_hom_fst.symm)
+
 end AlgebraicGeometry
 
 noncomputable section
