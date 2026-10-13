@@ -11936,3 +11936,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.CoherentHomsOverOpen (stage 3; reviewer PASS; first push; landing 20261013T100058-L-2477826 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.CoherentKernelIdealIntersectionBound (stage 3; reviewer PASS; after a return; landing 20261013T100058-L-2477997 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.FinitePresentationSourceStalk (stage 3; reviewer PASS; first push; landing 20261013T100059-L-2478229 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:01 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.KoszulOpenHomChainEvaluation (stage 3; reviewer PASS; first push; landing 20261013T100100-L-2478410 (interface); batch 20261013T095923; modules 3; new nodes 2)

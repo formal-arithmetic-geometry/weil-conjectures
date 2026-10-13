@@ -6,7 +6,9 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives
-import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
+import Sheaf.AlgebraicGeometry.KoszulOpenHomIdentityEvaluation
+import Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
+import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
 import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
@@ -24,6 +26,9 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 1000000 in
+-- Derived restriction and nested homology functors require extra elaboration steps.
 /-- Evaluation at one is natural and agrees with the fraction comparison on chain maps.
 The statement concerns chain maps into F; it does not identify arbitrary stage derived
 maps with Hom-complex homology, nor does it transport F to another derived object.
@@ -89,6 +94,45 @@ theorem koszulOpenHom_chain_evaluation
               (koszulCechHomDiagram A r f
                 (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F)) e))
                   (koszulOpenHomStageClass A r f F e t)) := by
-  sorry
+  classical
+  dsimp only
+  let F₀ := SheafOfModules.overFunctor.{u}
+    (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)
+  let G₀ := Equivalence.functor
+    (C := SheafOfModules.{u}
+      ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
+    (D := SheafOfModules.{u}
+      (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
+    (Scheme.Modules.overEquiv (koszulOpen A r f))
+  let R := (F₀ ⋙ G₀).mapDerivedCategory
+  obtain ⟨b, hb, hid⟩ := koszulOpenHom_identity_evaluation.{u, w, v} A r f
+  refine ⟨b, hb, ?_⟩
+  intro F _hF e t ψ hψ
+  have hi : IsIso (F₀.mapDerivedCategory.map (koszulOpenUnit A r f e)) := by
+    have h := (affine_perfect_koszul_principal_unit A r f (e + 1)
+      (Nat.le_add_left 1 e)).2
+    have hU : (⨆ i : Fin r, (Spec (.of A)).basicOpen
+        ((Scheme.ΓSpecIso (.of A)).inv (f i))) = koszulOpen A r f := by
+      unfold koszulOpen
+      congr 1
+      funext i
+      exact basicOpen_eq_of_affine (R := .of A) (f i)
+    rw [hU] at h
+    exact h
+  have hiso : IsIso (R.map (koszulOpenUnit A r f e)) := by
+    apply (NatIso.isIso_map_iff (Functor.mapDerivedCategoryCompIso F₀ G₀) _).2
+    change IsIso (G₀.mapDerivedCategory.map
+      (F₀.mapDerivedCategory.map (koszulOpenUnit A r f e)))
+    infer_instance
+  let v := inv (R.map (koszulOpenUnit A r f e))
+  have hv : R.map (koszulOpenUnit A r f e) ≫ v = 𝟙 _ := IsIso.hom_inv_id _
+  have hfac : ψ = v ≫ R.map (DerivedCategory.Q.map t) := by
+    rw [← hψ, ← Category.assoc, IsIso.inv_hom_id, Category.id_comp]
+  rw [hfac, hb, hid e v hv]
+  have hn := koszulOpenHom_chain_class_naturality.{u, w, v} A r f
+    (koszulOpenSheafComplex A r f e) F e (𝟙 _) t
+  rw [Category.id_comp] at hn
+  convert hn using 1
+  congr 1
 
 end AlgebraicGeometry
