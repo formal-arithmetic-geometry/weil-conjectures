@@ -13758,3 +13758,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:36 L: returned deliver/V2/Sheaf.AlgebraicGeometry.MayerVietorisDirectImageChainSquares (reviewer RETURN: (reviewer X-db428, head db4288e27) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ma)
 
 - 06:38 L: batch 20261013T222357 dependency take-out
+- 22:39 L: returned deliver/A2/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization (reviewer RETURN: (reviewer X-e94b6, head e94b62e62) H10 / compile check f: SchemeOrdinaryEvaluationLocalization.lean timed out twice at 6)
