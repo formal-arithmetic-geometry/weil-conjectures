@@ -25,10 +25,9 @@
  ],
  "proof": [
   {
-   "text": "Set I=ker q. Surjectivity gives A ≅ R/I, and the tensor-quotient isomorphism identifies C with T/IT. Locality implies I lies in m_R and IT lies in m_T. Quotient completeness yields the Noetherian complete local structure and maximal ideal formula.",
+   "text": "Let I=ker(R→A). Locality puts I in m_R and its extension in m_T, so T/IT is nonzero. The quotient-kernel algebra equivalence and tensor-quotient equivalence identify T/IT with C=T tensor_R A (lem-weil-pbc-tensor-quotient-base-change). Surjectivity of T→C then gives a local Noetherian ring and m_T C=m_C by Mathlib IsLocalRing.of_surjective', isNoetherianRing_of_surjective, and map_maximalIdeal_of_surjective.",
    "uses": [
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-complete-local-quotient"
+    "lem-weil-pbc-tensor-quotient-base-change"
    ],
    "elementary": false,
    "source": {
@@ -37,7 +36,18 @@
    }
   },
   {
-   "text": "A surjective local map carries m_R onto m_A. Therefore A → C is local, m_A C is the image of m_R T, and quotienting C by m_A C gives T/m_R T. Compose with e. Lift each a in A to r in R and use compatibility of e to check A-linearity of the ring isomorphism.",
+   "text": "Since T→C is surjective, C is a finite T-module. Apply lem-weil-pbc-finite-module-complete-over-complete-noetherian to m_T and C. Mathlib IsAdicComplete.map_algebraMap_iff and m_T C=m_C identify this with m_C-adic completeness. To prove A→C local, lift a to r∈R; if its image is a unit, locality of T→C and R→T makes r a unit, hence a is a unit.",
+   "uses": [
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument"
+   }
+  },
+  {
+   "text": "Give E its induced R-algebra structure. Compose T→T/m_R T with e and tensor this R-algebra map with A→E to obtain an A-algebra map F:C→E, F(t tensor a)=e(t mod m_R T) times a. Compatibility he checks the R-algebra relation, and the formula on 1 tensor a checks A-linearity. The composite T→C→E is e after the quotient map and is surjective, hence F is surjective. As T→C is surjective, ker F is the image of its pullback to T, namely m_R T. The equality q(m_R)=m_A and equality of the two maps R→C identify this image with m_A C. Apply the quotient-kernel algebra equivalence to F and transport along this ideal equality to get C/m_A C ≅ E. This is the proved private closed-fibre helper; it does not assume Noetherianity or completeness.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -48,12 +58,12 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-complete-local-quotient"
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument"
+  "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument; completeness implemented by the finite-module argument of Algebra 031B and 00MA (3)"
  },
  "mathlib_searches": [
   {
@@ -124,13 +134,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T211617-L-1058216",
-  "kind": "interface",
+  "landing": "20261013T022431-L-3221109",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
