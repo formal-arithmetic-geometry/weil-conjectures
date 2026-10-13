@@ -16,14 +16,21 @@
  ],
  "proof": [
   {
-   "text": "Obtain the bounded structural model from the structural-core theorem.",
+   "text": "Choose standard derived localizations. On the specified affine open construct a nonnegative bounded flat quasi-coherent Cech model D computing every cartesian base change and representing a perfect object.",
    "uses": [
-    "lem-pc-proper-flat-bounded-presentation-structural-core"
+    "lem-pc-proper-flat-affine-cech-perfect-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the base-change bridge to obtain negative-homology vanishing and the higher-direct-image comparison, then assemble all conjunctions.",
+   "text": "Obtain a bounded flat quasi-coherent finitely presented replacement C and a quasi-isomorphism C to D from perfectness on the affine base.",
+   "uses": [
+    "lem-pc-affine-perfect-flat-model-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the repaired comparison theorem to transfer negative vanishing and the higher-direct-image comparisons from D to C; retain all structural properties and assemble the existential witness.",
    "uses": [
     "lem-pc-proper-flat-bounded-presentation-comparison-core"
    ],
@@ -31,13 +38,14 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-flat-bounded-presentation-structural-core",
+  "lem-pc-affine-perfect-flat-model-replacement",
+  "lem-pc-proper-flat-affine-cech-perfect-model",
   "lem-pc-proper-flat-bounded-presentation-comparison-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0B91(2), 0A1H and 08EB; source read online; affine bounded-model specialization written by Y2"
+  "place": "Tags 0A1D, 0B91(2), 08EB, 06YD and 06YJ; forced repair of the missing model identification, compiled by T2"
  },
  "mathlib_searches": [
   {
@@ -113,13 +121,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-a2dc6",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T215152-L-1303227",
+  "landing": "20261013T010621-L-2673236",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: All four Lean signatures match their delivered nodes; targets and caller signature are unchanged. Four modules and the direct importer compile cleanly; the original caller fails as reported, confirming the necessary adaptation. Axioms are permitted, with sorryAx inherited from open dependencies."
  }
 }

@@ -8,7 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelCore
+import Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel
+import Sheaf.AlgebraicGeometry.AffinePerfectFlatModelReplacement
 import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange
 
 /-! # Bounded perfect cohomology models before lower truncation -/
@@ -61,10 +62,18 @@ theorem exists_proper_flat_boundedPresentation_model {X T : Scheme.{u}}
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅
           (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
-  obtain ⟨C, a, b, hge, hle, hflat, hqc, hfp⟩ :=
-    exists_proper_flat_boundedPresentation_model_core f F hF U hU
-  obtain ⟨hneg, hcomp⟩ := proper_flat_boundedPresentation_model_baseChange
-    f F hF U hU C a b hge hle hflat hqc hfp
-  exact ⟨C, a, b, hge, hle, hflat, hqc, hfp, hneg, hcomp⟩
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+  let : ∀ V : U.toScheme.Opens, HasDerivedCategory.{u + 1}
+      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V)) :=
+    fun _ ↦ HasDerivedCategory.standard _
+  obtain ⟨D, d, hDge, hDle, hDflat, hDqc, hperfect, hcomp⟩ :=
+    exists_proper_flat_affine_cech_perfect_model f F hF U hU
+  obtain ⟨C, a, b, hge, hle, hflat, hqc, hfp, e, he⟩ :=
+    exists_affine_perfect_flat_model_replacement U.toScheme hU D d
+      hDle hDqc hperfect
+  obtain ⟨hneg, hcompare⟩ := proper_flat_boundedPresentation_model_baseChange
+    f F U C D b d hle hDge hDle hflat hDflat e he hcomp
+  exact ⟨C, a, b, hge, hle, hflat, hqc, hfp, hneg, hcompare⟩
 
 end AlgebraicGeometry.Scheme.Modules

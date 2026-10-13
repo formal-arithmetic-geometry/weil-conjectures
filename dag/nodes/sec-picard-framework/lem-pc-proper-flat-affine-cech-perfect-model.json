@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-proper-flat-affine-cech-perfect-model",
+ "kind": "statement",
+ "title": "Perfect flat Cech model on a specified affine open",
+ "statement": "Let $f:X\\to T$ be proper, locally of finite presentation and quasi-compact, with injective resolutions in $X.\\mathrm{Modules}$, and let $F$ be a finitely presented $\\mathcal O_X$-module flat over $f$ [def-pc-scheme, def-pc-morphism-conventions]. Fix an affine open $U$ of $T$ and derived localizations for $U$ and its localized open sites [def-pc-derived-category]. There exist a cochain complex $D$ of $\\mathcal O_U$-modules [def-pc-cochain-complex-modules] and a natural $d$ such that $D$ is strictly zero outside $[0,d]$, every term is flat over the identity of $U$ and quasi-coherent, and its derived image is perfect [def-pc-perfect-complex]. In every cartesian square $X'\\to X$ over $T'\\to U\\to T$, with injective resolutions in $X'.\\mathrm{Modules}$, $H^q(g^*D)$ is isomorphic to $R^qf'_*(g'^*F)$ for every natural $q$ [def-pc-base-change, def-pc-derived-direct-image]. No termwise finite-presentation conclusion is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01XB (coherent-lemma-quasi-coherent-affine-cohomology-zero), 0A1D (perfect-lemma-base-change-tensor), 0B91(2) (perfect-lemma-flat-proper-perfect-direct-image-general), and proof of 0A1H"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-perfect-complex",
+  "def-pc-base-change",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Take a finite affine cover of the inverse image of U. Properness gives separatedness, so finite intersections are affine. Form the alternating finite section complex and associate sheaves over U. It is zero in negative degrees and above the number of cover members; relative flatness gives flat sections and associated quasi-coherent terms.",
+   "uses": [
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine acyclicity and Cech comparison identify its derived object with the restricted direct image of F. Proper perfect direct image makes this object perfect.",
+   "uses": [
+    "lem-pc-cech-computes",
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine new bases, sections on base-changed affine intersections are tensors, so the alternating section complex and differential commute with base change. Cech comparison gives the required higher-direct-image isomorphisms. For nonaffine bases the canonical comparisons on affine opens glue; transport from the standard fibre product to any cartesian square. Use the zero complex for empty inverse image.",
+   "uses": [
+    "lem-pc-flat-affine-base-change-sections",
+    "lem-pc-cech-computes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-cech-computes",
+  "lem-pc-flat-affine-base-change-sections",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01XB (coherent-lemma-quasi-coherent-affine-cohomology-zero), 0A1D (perfect-lemma-base-change-tensor), 0B91(2) (perfect-lemma-flat-proper-perfect-direct-image-general), and proof of 0A1H; specialization and glue expanded by T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper morphism and a relatively flat finitely presented sheaf admit a finite affine Cech complex computing all base changes and representing a perfect derived object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism and a relatively flat finitely presented sheaf admit a bounded nonnegative affine Cech complex computing higher direct images after every base change and representing a perfect derived object",
+   "results": "8 hits: CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the stated scheme-model construction"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*baseChange|baseChange.*Cech|perfect.*directImage",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the stated scheme-model construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): the finite affine flat Cech model and its bounded perfect replacement, keeping their chain-level comparison",
+   "via": [
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatAffineCechPerfectModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_proper_flat_affine_cech_perfect_model",
+  "statement": "theorem exists_proper_flat_affine_cech_perfect_model {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation] (hF : F.IsFlatOver f) (U : T.Opens) (hU : IsAffine U.toScheme) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] : ∃ (D : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), D.IsStrictlyGE 0 ∧ D.IsStrictlyLE d ∧ (∀ n : ℤ, (D.X n).IsFlatOver (𝟙 U.toScheme)) ∧ (∀ n : ℤ, (D.X n).IsQuasicoherent) ∧ U.toScheme.IsPerfect ((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))).obj D) ∧ ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj D).homology q ≅ (higherDirectImage f' q).obj ((Modules.pullback g').obj F))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a2dc6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T010621-L-2673236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a2dc6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T010621-L-2673236",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their delivered nodes; targets and caller signature are unchanged. Four modules and the direct importer compile cleanly; the original caller fails as reported, confirming the necessary adaptation. Axioms are permitted, with sorryAx inherited from open dependencies."
+ }
+}

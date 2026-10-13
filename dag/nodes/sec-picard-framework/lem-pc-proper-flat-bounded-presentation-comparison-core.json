@@ -2,24 +2,49 @@
  "id": "lem-pc-proper-flat-bounded-presentation-comparison-core",
  "kind": "statement",
  "title": "Base-change comparison for the bounded proper flat model",
- "statement": "For a bounded termwise flat quasi-coherent finitely presented model produced by the proper direct-image construction, negative homology vanishes after pullback and nonnegative homology identifies with higher direct images.",
+ "statement": "Let $f:X\\to T$ be a scheme morphism, $F$ an $\\mathcal O_X$-module [def-pc-scheme, def-pc-derived-direct-image], and $U$ an open of $T$. Let $C,D$ be cochain complexes of $\\mathcal O_U$-modules [def-pc-cochain-complex-modules], strictly zero above natural degrees $b,d$ respectively, with all terms flat over the identity of $U$ [def-pc-morphism-conventions]. Suppose $D$ is strictly zero below zero, and a quasi-isomorphism $e:C\\to D$ is supplied. Suppose every cartesian base change $X'\\to X$ over $T'\\to U\\to T$, with injective resolutions in $X'.\\mathrm{Modules}$, identifies $H^q(g^*D)$ with $R^q f'_*(g'^*F)$ for every natural $q$ [def-pc-base-change, def-pc-derived-direct-image]. Then every pullback $g^*C$ has zero negative homology, and in every such cartesian square its nonnegative homology is isomorphic to $R^q f'_*(g'^*F)$.",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 0B91(2), 0A1H and 08EB"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "def-pc-derived-direct-image"
+ ],
  "proof": [
   {
-   "text": "Apply derived base change for bounded flat complexes and identify homology with higher direct images.",
-   "uses": [],
+   "text": "Convert flatness over the identity to tensor-exact sheaf flatness and apply bounded-above flatness to make both C and D K-flat.",
+   "uses": [
+    "lem-pc-affine-flat-module-tensor-flat",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Identify tensor pullback with ordinary pullback by uniqueness of left adjoints. Apply preservation of quasi-isomorphisms between K-flat complexes and transport along the resulting natural arrow isomorphism.",
+   "uses": [
+    "lem-pc-tensor-pullback-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i < 0, the i-th term of D is zero, so its ordinary pullback has zero i-th homology. Transport along the homology isomorphism induced by the pulled-back e. For natural q compose that isomorphism with the supplied comparison for D. These are Mathlib isoOfQuasiIsoAt and ShortComplex.isZero_homology_of_isZero_X2.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-affine-flat-module-tensor-flat",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-tensor-pullback-kflat-quasi-iso"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0B91(2), 0A1H and 08EB"
+  "place": "Tags 06YD, 06YJ and 0A1D; categorical transport written and compiled by T2"
  },
  "mathlib_searches": [
   {
@@ -79,7 +104,7 @@
   "module": "Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange",
   "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatBoundedPresentationModelBaseChange.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.proper_flat_boundedPresentation_model_baseChange",
-  "statement": "theorem proper_flat_boundedPresentation_model_baseChange\n    {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules)\n    [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]\n    [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation]\n    (hF : F.IsFlatOver f) (U : T.Opens) (hU : IsAffine U.toScheme)\n    (C : CochainComplex U.toScheme.Modules ℤ) (a : ℤ) (b : ℕ)\n    (hge : C.IsStrictlyGE a) (hle : C.IsStrictlyLE b)\n    (hflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme))\n    (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)\n    (hfp : ∀ n : ℤ, (C.X n).IsFinitePresentation) :\n      (∀ {S : Scheme.{u}} (g : S ⟶ U.toScheme) (i : ℤ), i < 0 →\n        IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology i)) ∧\n      (∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,\n        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅\n          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)))",
+  "statement": "theorem proper_flat_boundedPresentation_model_baseChange {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) (U : T.Opens) (C D : CochainComplex U.toScheme.Modules ℤ) (b d : ℕ) (hCle : C.IsStrictlyLE b) (hDge : D.IsStrictlyGE 0) (hDle : D.IsStrictlyLE d) (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme)) (hDflat : ∀ n : ℤ, (D.X n).IsFlatOver (𝟙 U.toScheme)) (e : C ⟶ D) (he : QuasiIso e) (hcomp : ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj D).homology q ≅ (higherDirectImage f' q).obj ((Modules.pullback g').obj F))) : (∀ {S : Scheme.{u}} (g : S ⟶ U.toScheme) (i : ℤ), i < 0 → IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology i)) ∧ (∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅ (higherDirectImage f' q).obj ((Modules.pullback g').obj F)))",
   "branch": "sheaf-dag",
   "by": "B2",
   "date": "2026-10-13"
@@ -95,19 +120,39 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-27d39",
-  "group": "A2",
+  "reviewer": "X-a2dc6",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T225254-L-1799666",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module and direct importer compile cleanly; unchanged theorem signature matches the node, and the reported counterexample validates STATEMENT-DISPUTED.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.proper_flat_boundedPresentation_model_baseChange"
+  "landing": "20261013T010621-L-2673236",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their delivered nodes; targets and caller signature are unchanged. Four modules and the direct importer compile cleanly; the original caller fails as reported, confirming the necessary adaptation. Axioms are permitted, with sorryAx inherited from open dependencies."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "T2 stage 2",
+  "old_statement": "For a bounded termwise flat quasi-coherent finitely presented model produced by the proper direct-image construction, negative homology vanishes after pullback and nonnegative homology identifies with higher direct images.",
+  "what": "The old signature quantified over an arbitrary bounded flat finitely presented complex without identifying it with a cohomology model. A nonzero finite free module in degree -1 contradicts the negative clause; the zero complex contradicts degree zero for f=id and F=O. Require a quasi-isomorphism to an actual nonnegative model, and prove transport. The caller must construct the model and its comparison together.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tags 06YD, 06YJ, 0A1D, 0B91(2), 08EB"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-proper-flat-bounded-presentation-model",
+    "holds": true,
+    "note": "The unchanged bounded-model existence statement is proved by a Cech model, a perfect replacement mapping to that model, and this transport theorem; its proof and imports are adapted in this delivery."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.proper_flat_boundedPresentation_model_baseChange"
-  ]
+  "old_stmt_deps": [],
+  "old_proof": [
+   {
+    "text": "Apply derived base change for bounded flat complexes and identify homology with higher direct images.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }

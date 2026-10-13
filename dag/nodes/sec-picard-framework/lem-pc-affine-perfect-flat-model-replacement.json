@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-affine-perfect-flat-model-replacement",
+ "kind": "statement",
+ "title": "Affine perfect replacement with a quasi-isomorphism",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], with derived localizations for its module category and each localized open site [def-pc-derived-category]. Let $D$ be a cochain complex of $\\mathcal O_Y$-modules [def-pc-cochain-complex-modules], strictly zero above a natural degree $d$, whose terms are quasi-coherent. Suppose its derived image is perfect [def-pc-perfect-complex]. Then there exist a complex $C$, an integer $a$, a natural $b$, and a quasi-isomorphism $e:C\\to D$ such that $C$ is strictly zero outside $[a,b]$ and every term is quasi-coherent, finitely presented and flat over the identity of $Y$ [def-pc-morphism-conventions]. No comparison with higher direct images is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08EB (perfect-lemma-perfect-affine), 0656 (Definition 15.76.1), 0647 (derived-lemma-morphisms-lift), and 01IB (schemes-lemma-spec-sheaves)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-perfect-complex",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine scheme with the spectrum of its global sections. The quasi-coherent complex D corresponds to its complex of sections under the affine derived equivalence. Perfectness supplies a bounded finite-projective ring representative.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A bounded projective complex is K-projective. Represent its derived isomorphism to the section complex by a chain map using bijectivity on homotopy morphisms; invertibility of its derived image implies that this map is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact associated sheaves termwise, transport back along the affine chart, and compose with the quasi-coherent counit to D. Bounds transfer termwise. Finite-projective modules are direct summands of finite free modules, so their associated sheaves are flat, quasi-coherent and finitely presented. Enlarge the upper integer bound to a natural number. For empty Y or zero D the zero complex suffices.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 08EB (perfect-lemma-perfect-affine), 0656 (Definition 15.76.1), 0647 (derived-lemma-morphisms-lift), and 01IB (schemes-lemma-spec-sheaves); specialization and glue expanded by T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex on an affine scheme has a bounded finite projective replacement and a quasi-isomorphism to the original complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on an affine scheme admits a bounded finite projective complex with a quasi-isomorphism to a given quasi-coherent complex",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.IsKProjective.leftOrthogonal",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the stated scheme-model construction"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*bounded|bounded.*projective",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean, Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the stated scheme-model construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): the finite affine flat Cech model and its bounded perfect replacement, keeping their chain-level comparison",
+   "via": [
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectFlatModelReplacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectFlatModelReplacement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_perfect_flat_model_replacement",
+  "statement": "theorem exists_affine_perfect_flat_model_replacement (Y : Scheme.{u}) (hY : IsAffine Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ V : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))] (D : CochainComplex Y.Modules ℤ) (d : ℕ) (hDle : D.IsStrictlyLE d) (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent) (hperfect : Y.IsPerfect ((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).obj D)) : ∃ (C : CochainComplex Y.Modules ℤ) (a : ℤ) (b : ℕ), C.IsStrictlyGE a ∧ C.IsStrictlyLE b ∧ (∀ n : ℤ, (C.X n).IsFlatOver (𝟙 Y)) ∧ (∀ n : ℤ, (C.X n).IsQuasicoherent) ∧ (∀ n : ℤ, (C.X n).IsFinitePresentation) ∧ ∃ e : C ⟶ D, QuasiIso e",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a2dc6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T010621-L-2673236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a2dc6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T010621-L-2673236",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their delivered nodes; targets and caller signature are unchanged. Four modules and the direct importer compile cleanly; the original caller fails as reported, confirming the necessary adaptation. Axioms are permitted, with sorryAx inherited from open dependencies."
+ }
+}
