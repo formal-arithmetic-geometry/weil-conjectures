@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.EtaleCERowOrdinaryComparison
 public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+import Sheaf.Paper.EtaleCENormalizedRowPresentations
+import Sheaf.Paper.EtaleCERowCyclesNaturality
 
 /-! # Normalized CE pages and signed row representatives
 
@@ -20,6 +22,7 @@ universe uNatural
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the prescribed presentation, normalized pages and signed row families together.
 /-- Prescribed CE presentations with signed comparisons to the actual sections-row homology.
@@ -166,6 +169,41 @@ theorem exists_etaleCE_normalized_row_representatives
             (e X K p q).hom ≫ HomologicalComplex.homologyMap
               (ceRowSectionsMap f (φ.f q)) p =
           z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫
-            (e Y L p q).hom := by sorry
+            (e Y L p q).hom := by
+  classical
+  obtain ⟨P, δ, j, hI, hn, he⟩ := exists_etaleCE_normalized_row_presentations
+    I a hbelow hrows hterms hhorizontal hquasi
+  refine ⟨P, δ, j, fun X K p q ↦ (P X K).signedRowComparison p q, hI, hn, he, ?_⟩
+  intro X Y f K L v D D' φ hφ u hu b A p q x y z z' hxy hz hz'
+  have hc := etaleCE_row_cycles_naturality f K L D D' φ u hu A p q x y z z' hxy hz hz'
+  have hsrc := D.rowComparison_projection p q
+  have htgt := D'.rowComparison_projection p q
+  change z ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫
+    (D.signedRowComparison p q).hom ≫
+      HomologicalComplex.homologyMap (ceRowSectionsMap f (φ.f q)) p =
+    z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫
+      (D'.signedRowComparison p q).hom
+  dsimp only [EtaleTermwiseHypercohomology.signedRowComparison, Preadditive.smul_iso_hom]
+  simp only [Linear.comp_units_smul, Linear.units_smul_comp]
+  congr 1
+  calc
+    _ = (z ≫ (D.rowCyclesIso p q).inv) ≫
+        (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj (D.I.X q)).homologyπ p ≫
+        HomologicalComplex.homologyMap (ceRowSectionsMap f (φ.f q)) p := by
+      simpa only [Category.assoc] using congrArg
+        (fun t ↦ z ≫ t ≫ HomologicalComplex.homologyMap (ceRowSectionsMap f (φ.f q)) p)
+        hsrc
+    _ = (z ≫ (D.rowCyclesIso p q).inv ≫
+        HomologicalComplex.cyclesMap (ceRowSectionsMap f (φ.f q)) p) ≫
+        (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj (D'.I.X q)).homologyπ p := by
+      rw [HomologicalComplex.homologyπ_naturality]
+      simp only [Category.assoc]
+    _ = (z' ≫ (D'.rowCyclesIso p q).inv) ≫
+        (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj (D'.I.X q)).homologyπ p := by rw [hc]
+    _ = _ := by
+      simpa only [Category.assoc] using (congrArg (fun t ↦ z' ≫ t) htgt).symm
 
 end AlgebraicGeometry.Etale

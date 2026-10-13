@@ -1,0 +1,126 @@
+{
+ "id": "def-weil-pbc-ce-canonical-row-comparison",
+ "kind": "definition",
+ "title": "Canonical normalized CE row comparison",
+ "statement": "For every termwise hypercohomology presentation D and p,q, the canonical first-page row comparison is the unique quotient comparison normalized by the diagonal row-cycle inclusion and row homology projection.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 0130 and 012K; normalized CE pages and diagonal row representatives"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-second-filtration-row-cycle-comparison",
+  "lem-sp-second-filtration-row-graded-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the proved secondFiltration_row_cycle_comparison to global sections and the presentation filtration. Define rowComparison, rowCycleStep and rowCycleClass as its witnesses. Their three equations are the corresponding choose_spec fields. Monicity of the filtration and cycle inclusions fixes the two lifts; the row-cycle comparison identifies the latter with the hom of the graded-cycle isomorphism, making it invertible. Define rowCyclesIso by asIso. Precompose the quotient equation by this inverse to prove rowComparison_projection. Finally define signedRowComparison by the invertible scalar (-1)^(pq). No witness is chosen from an unproved existence theorem.",
+   "uses": [
+    "lem-sp-second-filtration-row-cycle-comparison",
+    "lem-sp-second-filtration-row-graded-cycles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-second-filtration-row-cycle-comparison",
+  "lem-sp-second-filtration-row-graded-cycles"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 015J, 015K and 012K",
+  "place": "Normalized CE pages and signed row representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical normalized first page of a Cartan Eilenberg resolution and naturality of row cycles under a diagonal compatible total map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Cartan Eilenberg spectral sequence first page row homology representative naturality",
+   "date": "2026-10-13",
+   "results": "Eight hits including HomologicalComplex.homologyπ_naturality, its assoc version, opcyclesToCycles_naturality and homology-sequence naturality; none constructs normalized CE presentations or the diagonal representative equation.",
+   "verdict": "Use homologyπ_naturality for the final calculation; the existing library row-cycle comparison is the shorter route to canonical row data."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "date": "2026-10-13",
+   "results": "One hit, HomologicalComplex.homologyπ_naturality.",
+   "verdict": "Used in the target proof after the row-cycle equation."
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration.*[Nn]atural|row.*representative",
+   "date": "2026-10-13",
+   "results": "Mathlib: one unrelated Subobject.representative_arrow hit. Local rg finds SecondFiltrationRowCycleComparison, SecondFiltrationRowGradedCycles, SecondFiltrationSignedFirstPage and SecondFiltrationRowCohomology.",
+   "verdict": "Reuse proved canonical row constructions; no exact presentation-naturality statement found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCENormalizedRowRepresentatives",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ce-normalized-row-representatives",
+   "place": "decomposition of normalized CE row representatives",
+   "via": [
+    "lem-weil-pbc-ce-normalized-row-representatives"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCECanonicalRowComparison",
+  "file": "lean/Sheaf/Paper/EtaleCECanonicalRowComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowComparison",
+  "statement": "def rowComparison (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :\n    filteredComplexPageObject D.sectionsTotal D.L 1 (q, (p : ℤ)) ≅\n      (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj (D.I.X q)).homology p",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowComparison",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCycleStep",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCycleClass",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCycleStep_arrow",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCycleClass_arrow",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCycleClass_comparison",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCycleClass_isIso",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowCyclesIso",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.signedRowComparison",
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.rowComparison_projection"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T142852-L-496113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T142852-L-496113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

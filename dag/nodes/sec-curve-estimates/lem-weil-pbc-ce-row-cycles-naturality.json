@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-ce-row-cycles-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized CE row cycles",
+ "statement": "Let f:Y→X be a scheme map, K,L bounded-below complexes and D,Dprime termwise hypercohomology presentations [def-weil-pbc-termwise-hypercohomology-presentation]. Let phi be a rowwise inverse-image chain map and u a sheaf-total map satisfying the diagonal-summand compatibility equation. Set b=totalSectionsIso.hom followed by ceSectionsLift f u and the inverse target comparison [lem-weil-pbc-ce-total-sections-comparison]. For any object A, p natural and q integer, filtered representatives x,y in degree q+p related by b and graded cycle maps z,zprime projecting to x,y satisfy z followed by the inverse rowCyclesIso [def-weil-pbc-ce-canonical-row-comparison] and cyclesMap(ceRowSectionsMap f (phi.f q)) equals zprime followed by the inverse target rowCyclesIso. This is an equality on cycles, before homology; no coefficient map or augmentation compatibility is assumed.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 0130 and 012K; normalized CE pages and diagonal row representatives"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-ce-canonical-row-comparison",
+  "lem-weil-pbc-ce-row-ordinary-naturality",
+  "lem-weil-pbc-ce-total-sections-comparison"
+ ],
+ "proof": [
+  {
+   "text": "In degree q+p the second step is the finite sum of diagonal summands with complex index at least q. The quotient by the next step leaves precisely the row term of index q and resolution degree p. The canonical graded row comparison identifies the cycle subobjects with row cycles, and is normalized by the diagonal inclusion.",
+   "uses": [
+    "lem-sp-second-filtration-row-graded-cycles",
+    "def-weil-pbc-ce-canonical-row-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the equality relating x and y onto the surviving diagonal summand. Transport the given u summand equation using totalSectionsIso_formula and ceSectionsUnit naturality. This gives the degree-p map of ceRowSectionsMap f (phi.f q). The equations for z and zprime identify the same projections with their cycle-subobject inclusions. Monicity of the target row iCycles then proves the equality of cycles after the inverse canonical cycle comparisons. All other summands die in the quotient, and extension by zero kills negative resolution terms. The argument applies to p=0, empty diagonals and zero rows.",
+   "uses": [
+    "lem-weil-pbc-ce-total-sections-comparison",
+    "lem-weil-pbc-ce-row-ordinary-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ce-canonical-row-comparison",
+  "lem-sp-second-filtration-row-graded-cycles",
+  "lem-weil-pbc-ce-row-ordinary-naturality",
+  "lem-weil-pbc-ce-total-sections-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 015J, 015K and 012K",
+  "place": "Normalized CE pages and signed row representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical normalized first page of a Cartan Eilenberg resolution and naturality of row cycles under a diagonal compatible total map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Cartan Eilenberg spectral sequence first page row homology representative naturality",
+   "date": "2026-10-13",
+   "results": "Eight hits including HomologicalComplex.homologyπ_naturality, its assoc version, opcyclesToCycles_naturality and homology-sequence naturality; none constructs normalized CE presentations or the diagonal representative equation.",
+   "verdict": "Use homologyπ_naturality for the final calculation; the existing library row-cycle comparison is the shorter route to canonical row data."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "date": "2026-10-13",
+   "results": "One hit, HomologicalComplex.homologyπ_naturality.",
+   "verdict": "Used in the target proof after the row-cycle equation."
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration.*[Nn]atural|row.*representative",
+   "date": "2026-10-13",
+   "results": "Mathlib: one unrelated Subobject.representative_arrow hit. Local rg finds SecondFiltrationRowCycleComparison, SecondFiltrationRowGradedCycles, SecondFiltrationSignedFirstPage and SecondFiltrationRowCohomology.",
+   "verdict": "Reuse proved canonical row constructions; no exact presentation-naturality statement found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCENormalizedRowRepresentatives",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ce-normalized-row-representatives",
+   "place": "decomposition of normalized CE row representatives",
+   "via": [
+    "lem-weil-pbc-ce-normalized-row-representatives"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCERowCyclesNaturality",
+  "file": "lean/Sheaf/Paper/EtaleCERowCyclesNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleCE_row_cycles_naturality",
+  "statement": "theorem etaleCE_row_cycles_naturality\n    {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n    (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n    (D : EtaleTermwiseHypercohomology X K)\n    (D' : EtaleTermwiseHypercohomology Y L)\n    (φ : (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℕ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.I ⟶ D'.I)\n    (u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj D.sheafTotal ⟶ D'.sheafTotal)\n    (hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),\n        (upperStar AddCommGrpCat.{uNatural + 1} f).map\n            ((HomologicalComplex.extendXIso\n              (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj (D.I.X q))\n              ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫\n                (((CartanEilenbergPresentation.mappedFunctor\n                  (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj\n                    D.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h) ≫ u.f n =\n          (φ.f q).f m ≫\n            (HomologicalComplex.extendXIso\n              (((𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj (D'.I.X q))\n              ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫\n                (((CartanEilenbergPresentation.mappedFunctor\n                  (𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj\n                    D'.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h) :\n      let b := D.totalSectionsIso.hom ≫ ceSectionsLift f u ≫ D'.totalSectionsIso.inv\n      ∀ (A : AddCommGrpCat.{uNatural + 1}) (p : ℕ) (q : ℤ)\n        (x : A ⟶ (D.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ).X\n          (q + (p : ℤ)))\n        (y : A ⟶ (D'.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ).X\n          (q + (p : ℤ)))\n        (z : A ⟶ (D.L.complexCycles q (q + (p : ℤ)) 1 : AddCommGrpCat.{uNatural + 1}))\n        (z' : A ⟶ (D'.L.complexCycles q (q + (p : ℤ)) 1 : AddCommGrpCat.{uNatural + 1})),\n        x ≫ (D.L.step q).arrow.f (q + (p : ℤ)) ≫ b.f (q + (p : ℤ)) =\n          y ≫ (D'.L.step q).arrow.f (q + (p : ℤ)) →\n        z ≫ (D.L.complexCycles q (q + (p : ℤ)) 1).arrow =\n          x ≫ (D.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) →\n        z' ≫ (D'.L.complexCycles q (q + (p : ℤ)) 1).arrow =\n          y ≫ (D'.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) →\n        z ≫ (D.rowCyclesIso p q).inv ≫ HomologicalComplex.cyclesMap\n            (ceRowSectionsMap f (φ.f q)) p =\n          z' ≫ (D'.rowCyclesIso p q).inv",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T142852-L-496113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T142852-L-496113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
