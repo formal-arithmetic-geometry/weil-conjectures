@@ -2,9 +2,9 @@
  "kind": "statement",
  "proof_origin": {
   "by": "agent",
-  "group": "A3",
+  "group": "H2",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "087W affine finite-level reduction and 087X restriction; transport to an arbitrary affine open"
+  "place": "Lemma 087W affine finite-level argument, using affine section formulas directly on V; no restriction/Spec transport"
  },
  "mathlib_match": null,
  "status": "split",
@@ -37,23 +37,34 @@
  ],
  "proof": [
   {
-   "text": "Restrict the formal module to V; the restriction-object theorem gives its coherent formal object conditions. Identify V with Spec Γ(X,V), transporting the ideal to that associated with I(V).",
+   "text": "Coherence implies quasi-coherence and finite type on the locally Noetherian scheme X. Apply the proved affine finite-section helper in the finite-type affine criterion to each level on V.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine finite-level sections theorem. The restriction and affine-scheme section comparisons are linear isomorphisms, natural in the level. They transport finite generation and annihilation and conjugate each successor map. Thus surjectivity and the ideal-multiple kernel formula transport to the original sections on V. No limiting cone or projection formula is used.",
+   "text": "The affine ideal-product theorem supplies quasi-coherence and the section range of each positive ideal power. Its proved multiplication_range helper identifies the power-product inclusion range with I(V)^(n+1) times the module sections. At level n the inclusion has zero source, hence zero range, giving annihilation.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-module-affine-sections-adic"
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved product_qc helper gives quasi-coherence of the power product. Apply the affine cokernel-image theorem to its inclusion into level n+1: the quotient projection is surjective and has kernel the inclusion range. The defining formal quotient isomorphism conjugates this projection to the successor section map. Its section linear equivalence is surjective and reflects zero, which proves surjectivity and equality of kernels.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
-  "lem-weil-pbc-coherent-formal-module-affine-sections-adic"
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
  ],
  "mathlib_searches": [
   {
@@ -108,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T015542-L-3016235",
-  "kind": "interface",
+  "landing": "20261013T031541-L-3571160",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
