@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-closure-coproducts",
+ "kind": "statement",
+ "title": "Localized tensor comparison closure: Coproduct",
+ "statement": "Let R,A,B,C be commutative rings in universe u, A and B be R-algebras, E=A tensor_R B, and C an E-algebra flat over E. Assume derived categories of R-, A- and B-modules. Let Q be an A-K-flat cochain complex, N a C-cochain complex, F termwise extension along A to E to C, and t:F(Q) to N a chain map. Let P be the all-representatives, all-models, all-degrees comparison predicate of [def-pc-localized-tensor-comparison-property]. For any I in universe u and G:I to D(A), every coproduct cocone with vertex S has P(S) if P(G(i)) for every i. This includes the empty coproduct. No invertibility of t or of the comparison for Q is assumed.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-abstract-derived-category",
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1); Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "Fix a degree i. The universal derived counit, the canonical tensor associator\nand scalar-extension adjunction identify the displayed comparison for a K-flat\nrepresentative U with a natural degree-i comparison on D(A). The counit fixes\nthis map, so changing the derived model conjugates it by canonical isomorphisms.\nK-flat quasi-isomorphisms and their roofs give the same conjugation for a change\nof representative. Extension from A to C sends A-K-flat complexes to C-K-flat\ncomplexes: tensoring an acyclic C-complex with C tensor_A U is restriction of\nthat complex tensored over A with U. Thus the target is computed by derived\ntensor with N even when A to C is not flat.\nChoose K-flat representatives of the summands. Their direct sum is K-flat,\nsince tensor and direct sums commute and direct sums of exact sequences of\nmodules are exact. It represents their coproduct in D(A). Derived tensor over\nR with B, restriction of scalars, and cohomology preserve these sums. Extension\nfrom A tensor_R B to C preserves sums as a left adjoint, as do extension from\nA to C and tensor with N. Naturality identifies the comparison on this sum\nwith the direct sum of the comparisons on the summands in degree i. A direct\nsum of isomorphisms is an isomorphism (sum their inverses). Transport across\nthe unique coproduct isomorphism to S, and then across the model and\nrepresentative identifications above. This proves the assertion for every U,\nevery model and every i. For an empty family all objects and maps are zero.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-associator",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-kflat-derived-tensor-associator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), coproducts part of the localizing argument; model identification by the universal counit and Tag 0BYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kFlat|[Kk]Flat",
+   "results": "No matches.",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars preserves K-flat complexes and tensoring a quasi-isomorphism with a K-flat complex preserves quasi-isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.QuasiIso, HomologicalComplex.homologyMap",
+   "results": "loogle: unknown identifier 'HomologicalComplex.QuasiIso'",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|generator",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory of the derived category of modules closed under arbitrary coproducts distinguished triangles and retracts and containing shifts of the ring contains every object",
+   "results": "DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsLE; DerivedCategory.TStructure.t; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty",
+   "results": "CategoryTheory.ObjectProperty; CategoryTheory.ObjectProperty.Nonempty; CategoryTheory.ObjectProperty.singleton; CategoryTheory.ObjectProperty.Is; CategoryTheory.ObjectProperty.pair; CategoryTheory.ObjectProperty.ofObj; CategoryTheory.ObjectProperty.arbitrary; CategoryTheory.ObjectProperty.nonempty_of_prop",
+   "date": "2026-10-14",
+   "verdict": "No exact match for specialized localized comparison predicates, their generators or closure."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*retract|isIso.*retract|homology.*coproduct|coproduct.*homology",
+   "results": "Mathlib/CategoryTheory/EpiMono.lean; Mathlib/CategoryTheory/MorphismProperty/Retract.lean; Mathlib/CategoryTheory/MorphismProperty/Retract.lean; Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Second-reader search: general categorical tools exist, but no specialized all-models localized comparison closure theorem. The missing work is construction and identification of the natural comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between exact functors on a derived category is an isomorphism on a class closed under direct sums, distinguished triangles and direct summands",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-14",
+   "verdict": "Second-reader search: general categorical tools exist, but no specialized all-models localized comparison closure theorem. The missing work is construction and identification of the natural comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Retract, CategoryTheory.IsIso",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "Second-reader search: general categorical tools exist, but no specialized all-models localized comparison closure theorem. The missing work is construction and identification of the natural comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosure",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-localized-tensor-comparison-closure",
+   "place": "component split for stage-3 proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonClosureCoproduct.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_closure_coproducts",
+  "statement": "theorem localizedTensorComparisonProperty_closure_coproducts\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    ∀ {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))\n      (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i, G i ⟶ S),\n      CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.Cofan.mk S ι) →\n      (∀ i, localizedTensorComparisonProperty R A B C Q N t (G i)) →\n      localizedTensorComparisonProperty R A B C Q N t S",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172655-L-2099351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172655-L-2099351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

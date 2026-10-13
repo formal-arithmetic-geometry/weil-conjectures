@@ -8,7 +8,9 @@ module
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.CategoryTheory.Retract
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangle
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetract
 
 /-! # Closure of the localized tensor comparison predicate
 
@@ -73,6 +75,10 @@ theorem localizedTensorComparisonProperty_closure
       (∀ i : I, P (G i)) → P S) ∧
     (∀ T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} A)),
       T ∈ Pretriangulated.distinguishedTriangles → P T.obj₁ → P T.obj₂ → P T.obj₃) ∧
-    (∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y → P Y → P X) := by sorry
+    (∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y → P Y → P X) := by
+  dsimp
+  exact ⟨localizedTensorComparisonProperty_closure_coproducts R A B C Q N t hC hQ,
+    localizedTensorComparisonProperty_closure_triangles R A B C Q N t hC hQ,
+    localizedTensorComparisonProperty_closure_retracts R A B C Q N t hC hQ⟩
 
 end ModuleCat
