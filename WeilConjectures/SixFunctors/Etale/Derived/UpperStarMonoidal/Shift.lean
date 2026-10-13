@@ -37,7 +37,7 @@ namespace Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-open DerivedCategory
+open _root_.DerivedCategory
 
 /-- The counit `Qh ⋙ Lg^* ⟶ g^* ⋙ Qh` of the derived pullback commutes with the shifts. -/
 instance commShift_leftDerivedFunctorCounit_upperStar :
