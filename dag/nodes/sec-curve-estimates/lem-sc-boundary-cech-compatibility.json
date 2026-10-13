@@ -32,52 +32,48 @@
  ],
  "proof": [
   {
-   "text": "Choose a monomorphism A \\to I into an injective O_X-module by [lem-weil-pbc-scheme-modules-enough-injectives]. Injectivity extends this map across A \\to B to a morphism phi:B \\to I. With Q = coker(A \\to I), the map B \\to I induces psi:C \\to Q and (id_A, phi, psi) is a morphism from 0 \\to A \\to B \\to C \\to 0 to 0 \\to A \\to I \\to Q \\to 0. Naturality of the connecting maps in the universal delta-functor [lem-weil-pbc-right-derived-universal-delta-functor] gives partial_B(s) = partial_I(psi(s)).",
+   "text": "Embed B (rather than only A) into an injective I using lem-weil-pbc-scheme-modules-enough-injectives and the proved Mathlib Injective.under/Injective.ι construction. Put a = f composed with this embedding phi, and T = ShortComplex.mk a (cokernel.π a) (cokernel.condition a). Both f and phi are monic, so a is monic; exact_of_g_is_cokernel applied to cokernelIsCokernel and the epimorphism cokernel.π make T short exact. Exact.desc for the original sequence constructs psi:C to coker(a), satisfying g composed with psi = phi composed with T.g. This gives the short-complex morphism (id_A, phi, psi). All selected injective data come from the proved enough-injectives theorem.",
    "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
+    "lem-weil-pbc-scheme-modules-enough-injectives"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015B (lemma-higher-derived-functors), naturality of the connecting morphisms; Cohomology of Schemes Lemma 09MS setup"
+    "place": "Lemma 015B (lemma-higher-derived-functors), injective embeddings; Mathlib.CategoryTheory.Preadditive.Injective.Basic and Mathlib.Algebra.Homology.ShortComplex.Exact"
    }
   },
   {
-   "text": "The sections phi(t_i) are local lifts of psi(s) in I. Since phi restricts to the chosen inclusion A \\to I, their pairwise differences are the image in I of t_{i_1}-t_{i_0}; hence the A-valued Cech cocycle for the original sequence and the one for the injective sequence are the same under A \\to I. This uses only restriction compatibility and subtraction of sections.",
+   "text": "The canonical derived-triangle boundary is natural for this morphism. In the private proved helper singleTrianglePlus_comm₃, apply the faithful inclusion of D⁺ into D and its shift comparison to the third square of Mathlib ShortExact.singleTriangle.map. The private rightDerived_boundary_naturality helper applies the right derived functor to the resulting triangle morphism and invokes lem-weil-pbc-derived-cohomology-ladder, then transports along the natural single-object/right-derived comparison isomorphisms. Specializing this proved calculation to global sections gives boundary_naturality for the exact moduleCohomologyBoundary defined in the statement. Naturality of toRightDerivedZero converts the input section psi(s); the map on A is the identity, so partial_T(psi(s)) = partial_S(s). No arbitrary universal delta-functor boundary is substituted for the recorded triangle boundary.",
    "uses": [
-    "def-weil-pbc-site-cech-complex"
+    "lem-weil-pbc-derived-cohomology-ladder"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015B (lemma-higher-derived-functors), naturality; Mathlib.CategoryTheory.Triangulated.HomologicalFunctor homologySequenceδ_naturality and Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle singleTriangle.map"
    }
   },
   {
-   "text": "Apply the injective-middle comparison statement [lem-sc-boundary-cech-injective-middle] to 0 \\to A \\to I \\to Q \\to 0, q = psi(s), and the local lifts phi(t_i). It identifies c_A([t_{i_1}-t_{i_0}]) with partial_I(psi(s)). Step 1 identifies this class with partial_B(s), so c_A([t_{i_1}-t_{i_0}]) = partial_B(s), with the positive sign fixed by the differential convention in [def-weil-pbc-site-cech-complex].",
+   "text": "Set q = psi(s) and x_i = phi(t_i). The equation g composed with psi = phi composed with T.g, the given lift equations, and restriction naturality show that x_i lifts q. Apply lem-sc-boundary-cech-injective-middle to T, q and x_i with the unchanged comparison c and hc; T.X₁ is definitionally A. This supplies a cycle z and its boundary comparison. To recover the original component equation, apply phi on the overlap: T.f is f composed with phi, phi preserves subtraction, and restriction naturality identifies the two right-hand differences. Evaluation of the monomorphism phi is injective on sections, so cancel it. Compose the injective-middle boundary equality with the naturality equality of the preceding step to finish.",
    "uses": [
-    "lem-sc-boundary-cech-injective-middle",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "def-weil-pbc-site-cech-complex"
+    "lem-sc-boundary-cech-injective-middle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EQ (cohomology-lemma-cech-cohomology), proof via beta followed by alpha^{-1}; Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
+    "place": "Lemma 01EQ (cohomology-lemma-cech-cohomology) with Lemma 01EP; Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-cech-complex",
   "lem-weil-pbc-scheme-modules-enough-injectives",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-derived-cohomology-ladder",
   "lem-sc-boundary-cech-injective-middle"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph, with the injective reduction and comparison map from Lemmas 01EQ and 01EP"
+  "place": "Lemma 0B8S local-lift description, reduced to Lemmas 01EQ and 01EP by embedding the middle module into an injective; naturality proved directly from the canonical derived triangle using Mathlib singleTriangle.map and homologySequenceδ_naturality"
  },
  "mathlib_searches": [
   {
@@ -172,5 +168,15 @@
   "reviewer": "Z2-bcc",
   "group": "Z2",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T113347-L-3185703",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
