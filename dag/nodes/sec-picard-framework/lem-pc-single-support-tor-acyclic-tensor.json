@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-single-support-tor-acyclic-tensor",
+ "kind": "statement",
+ "title": "One-term Tor-acyclic K-flat tensor comparison",
+ "statement": "Let R be a commutative ring and B a commutative R-algebra. Let Q be a cochain complex of R-modules supported only in one degree k, meaning Q^n is zero whenever n is not k. Suppose Tor_i^R(Q^k,B)=0 for every positive integer i [def-weil-pbc-tor-modules]. For every K-flat R-complex P [def-pc-module-kflat-complex] and quasi-isomorphism f:P\\to Q, the termwise tensor map f\\otimes_R B:P\\otimes_R B\\to Q\\otimes_R B is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XY",
+  "place": "Section 15.60, Lemmas 15.60.7, 15.60.9, 15.60.12 and Definition 15.60.13; parent Tag 08IB final affine calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Since Q is supported only in degree k, identify it with the single complex on Q^k: the degree-k component is identity, other components are the unique zero-object isomorphisms, and every differential is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take a projective resolution of Q^k and reindex its i-th term in cochain degree k-i. Its augmentation is a quasi-isomorphism to Q. It is bounded above with flat terms, so is K-flat [lem-pc-module-bounded-flat-kflat]. After tensoring its homology in degree k-i is Tor_i(Q^k,B) [def-weil-pbc-tor-modules]. In degree k the augmentation is the Tor-zero isomorphism by right exactness; below k use the stated positive Tor vanishing, and above k both sides vanish. Thus the tensor augmentation is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the specified arbitrary resolution f:P -> Q, compare it and the projective resolution via a common K-flat refinement in the homotopy category (the cofiltered resolution comparison from Tag 06XY). Its transition maps remain quasi-isomorphisms after tensoring, by [lem-pc-mixed-tensor-kflat-quasi-iso] specialized to the identity ring map and the single complex B in degree zero, identifying the mixed tensor with ordinary tensor. Their augmentation square commutes up to homotopy; tensor preserves this homotopy, and two-out-of-three gives the claim for f. No boundedness of P is used.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "def-weil-pbc-tor-modules",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06XY",
+  "place": "Section 15.60, Lemmas 15.60.7, 15.60.9, 15.60.12 and Definition 15.60.13; parent Tag 08IB final affine calculation; detailed module-specialized expansion of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor acyclic module projective resolution tensor augmentation quasi isomorphism; derived tensor comparison for split exact sequences",
+   "results": "Service returned Internal Server Error for both queries.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor K flat resolution one term complex Tor vanishing augmentation; derived tensor comparison middle complex split short exact sequence",
+   "results": "One-term results: isZero_Tor'_succ_of_projective and module flatness criteria, neither covers a general Tor-acyclic module. Gluing results: HomologySequence.quasiIso_τ₃ and mappingCone.quasiIso_descShortComplex; neither supplies the K-flat comparison ladder.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*single|single.*Tor|quasiIso_tensor_of_stupid_tail|quasiIso_tensor_of_single_support in Mathlib/Algebra/Homology and Mathlib/CategoryTheory; library and whole-blueprint searches",
+   "results": "No one-term Tor-acyclic comparison or K-flat-resolution stupid-tail gluing theorem. Whole-blueprint searches Tor-independent complex and stupid comparison both return zero.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AVW case (1): Tor independence identifies the base-derived tensor with the pullback tensor at each stalk; One-term Tor-acyclic K-flat tensor comparison",
+   "via": [
+    "lem-pc-termwise-tor-acyclic-derived-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-projective-complex-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SingleSupportTorAcyclicTensor",
+  "file": "lean/Sheaf/Algebra/Homology/SingleSupportTorAcyclicTensor.lean",
+  "declaration": "CochainComplex.quasiIso_tensor_of_single_support_tor_acyclic",
+  "statement": "theorem quasiIso_tensor_of_single_support_tor_acyclic\n    {R : Type u} [CommRing R] {B : Type u} [CommRing B] [Algebra R B]\n    (Q : CochainComplex (ModuleCat.{u} R) ℤ) (k : ℤ)\n    (hsupport : ∀ n : ℤ, n ≠ k → IsZero (Q.X n))\n    (hTor : ∀ i : ℕ, 0 < i →\n      IsZero (((Tor' (ModuleCat.{u} R) i).obj (Q.X k)).obj (ModuleCat.of R B)))\n    (P : CochainComplex.KFlat (ModuleCat.{u} R)) (f : P.obj ⟶ Q)\n    (hf : QuasiIso f) :\n    QuasiIso ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R B)).mapHomologicalComplex\n      (ComplexShape.up ℤ)).map f)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T082328-L-1629957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T082328-L-1629957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

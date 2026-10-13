@@ -24,69 +24,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a and b with Q^n=0 outside [a,b]. For each n between a and b let sigma_{>=n}Q be the stupid truncation retaining Q^r for r>=n and putting zero below n. There is a degreewise split short exact sequence of complexes 0 \\to sigma_{>=n+1}Q \\to sigma_{>=n}Q \\to Q^n[-n] \\to 0. This is obtained directly from the definitions: the first map is the inclusion, the second is projection to degree n, and the differential on the quotient is zero. The Tor-acyclicity hypothesis is inherited by every truncation term.",
+   "text": "Choose a,b for the support and d=(b-a).toNat. Then b <= a+d even if b<a, so Q is supported in [a,a+d]. Prove the comparison universally over such Q and every K-flat resolution by induction on the natural number d. For d=0 the complex is supported only in degree a and the one-term theorem [lem-pc-single-support-tor-acyclic-tensor] applies to the hypothesis at a.",
    "uses": [
-    "def-weil-pbc-tor-modules"
+    "lem-pc-single-support-tor-acyclic-tensor"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: finite stupid-truncation induction"
-   }
+   "elementary": false
   },
   {
-   "text": "Notation for the derived tensor: apply [lem-pur-derived-change-of-rings] to the one-point site with the ring map R\\to B. It gives an exact functor -\\otimes_R^{\\mathbf L}B:D(R)\\to D(B), the left derived functor of the termwise tensor K(R)\\to D(B), G\\mapsto G\\otimes_R B, computed by K-flat resolutions; the canonical map \\tau_G:G\\otimes_R^{\\mathbf L}B\\to G\\otimes_R B of the statement is the map induced by any K-flat resolution P\\to G, namely P\\otimes_R B\\to G\\otimes_R B. Restriction of scalars to R does not change cohomology, so it does not matter whether the comparison is read in D(B) or D(R). Base case: Q has one nonzero term, Q=Q^n[-n]. Choose a projective (hence flat) resolution F_\\bullet\\to Q^n and regard it, shifted, as a complex P concentrated in degrees at most n; P\\to Q is a quasi-isomorphism and P is K-flat by [lem-pc-module-bounded-flat-kflat]. Then \\tau_Q is P\\otimes_R B\\to Q^n[-n]\\otimes_R B, and H^{n-i}(P\\otimes_R B)=Tor_i^R(Q^n,B) by [def-weil-pbc-tor-modules], with H^n mapping isomorphically to Q^n\\otimes_R B (Tor_0=M\\otimes N, right exactness). The hypothesis Tor_i^R(Q^n,B)=0 for i>0 says precisely that \\tau_Q is a quasi-isomorphism. The case Q=0 is trivial.",
+   "text": "For a successor width let T=sigma_{>=a+1}Q. Its support lies in [a+1,a+1+d]. Below a+1 its terms are zero, hence projective, and their positive Tor vanishes. In every remaining degree its term is canonically isomorphic to Q^n. Apply the left-derived tensor functor defining Tor [def-weil-pbc-tor-modules] to this isomorphism to transport vanishing. The induction hypothesis therefore gives the comparison for T for every K-flat resolution. The single complex Q^a[-a] has its comparison by [lem-pc-single-support-tor-acyclic-tensor], transporting the Tor hypothesis through its degree-a isomorphism. Apply [lem-pc-tensor-comparison-stupid-tail] to the two universally quantified comparisons to obtain the comparison for Q.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-module-bounded-flat-kflat",
-    "def-weil-pbc-tor-modules"
+    "def-weil-pbc-tor-modules",
+    "lem-pc-single-support-tor-acyclic-tensor",
+    "lem-pc-tensor-comparison-stupid-tail"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: one-term base case"
-   }
+   "elementary": false
   },
   {
-   "text": "Induction on the number of n with Q^n\\neq0 (equivalently, descending n from b to a), the base case being the previous step. Put Q'=\\sigma_{\\ge n+1}Q, Q''=Q^n[-n] and Q=\\sigma_{\\ge n}Q, so 0\\to Q'\\to Q\\to Q''\\to0 is degreewise split (Step 1) and Q' has fewer nonzero terms. Its connecting map is the chain map c:Q''\\to Q'[1] given by d^n:Q^n\\to Q^{n+1} (up to the usual sign), so in K(R) it gives the triangle T: Q'\\to Q\\to Q''\\xrightarrow{c}Q'[1], which is the distinguished triangle of [lem-weil-pbc-complex-ses-triangle] after passing to D(R). Apply the two functors F_1=-\\otimes_R^{\\mathbf L}B and F_2=(termwise -\\otimes_R B) from K(R) to D(B). F_1T is distinguished because -\\otimes_R^{\\mathbf L}B is exact [lem-pur-derived-change-of-rings]. F_2T is Q'\\otimes B\\to Q\\otimes B\\to Q''\\otimes B\\xrightarrow{c\\otimes1}Q'[1]\\otimes B, the triangle of the degreewise split (hence exact) sequence 0\\to Q'\\otimes_RB\\to Q\\otimes_RB\\to Q''\\otimes_RB\\to0 with connecting map c\\otimes1 [lem-weil-pbc-complex-ses-triangle], so it is distinguished. The comparison \\tau is natural in G\\in K(R) and compatible with the shift, since for a K-flat resolution P\\to G the shift P[1]\\to G[1] is a K-flat resolution and (P\\otimes_RB)[1]=P[1]\\otimes_RB termwise; hence (\\tau_{Q'},\\tau_Q,\\tau_{Q''}) is a morphism of triangles F_1T\\to F_2T [lem-weil-pbc-commshift-nattrans-triangle-morphism]. By [lem-weil-pbc-derived-cohomology-ladder] it induces a morphism between the two long exact cohomology sequences. In the five-term segment H^{i-1}(Q'')\\to H^i(Q')\\to H^i(Q)\\to H^i(Q'')\\to H^{i+1}(Q') (with -\\otimes^{\\mathbf L}B above and -\\otimes B below) the four outer vertical maps are isomorphisms, by the induction hypothesis for Q' and the base case for Q'', so H^i(\\tau_Q) is an isomorphism by [lem-weil-pbc-five-lemma] in the abelian category of B-modules. Thus \\tau_{\\sigma_{\\ge n}Q} is a quasi-isomorphism, and at n=a this is \\tau_Q for the original Q.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-    "lem-weil-pbc-derived-cohomology-ladder",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: induction using truncation short exact sequences"
-   }
-  },
-  {
-   "text": "The map shown to be a quasi-isomorphism in the induction is \\tau_Q, the canonical map Q\\otimes_R^{\\mathbf L}B\\to Q\\otimes_RB of [lem-pur-derived-change-of-rings]; a quasi-isomorphism induces isomorphisms on all cohomology modules, giving H^i(Q\\otimes_R^{\\mathbf L}B)\\cong H^i(Q\\otimes_RB) for every i.",
-   "uses": [
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
-   }
+   "text": "Apply the interval induction to the original bounds. Its quasi-isomorphism gives an IsIso homologyMap in each degree by the standard QuasiIso instance in Mathlib.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-tor-modules",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-weil-pbc-five-lemma"
+  "lem-pc-single-support-tor-acyclic-tensor",
+  "lem-pc-tensor-comparison-stupid-tail"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08IB, lemma-compare-base-change"
+  "document": "https://stacks.math.columbia.edu/tag/06XY",
+  "place": "Finite interval induction implementing the parent stupid-truncation plan; the one-term calculation and triangle gluing are separate stated items. Tag 08IB supplies the Tor comparison motivation, not the finite induction itself."
  },
  "mathlib_searches": [
   {
@@ -210,5 +177,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T082328-L-1629957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

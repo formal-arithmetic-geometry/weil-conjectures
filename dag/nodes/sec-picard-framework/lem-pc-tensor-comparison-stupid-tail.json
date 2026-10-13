@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-tensor-comparison-stupid-tail",
+ "kind": "statement",
+ "title": "Gluing K-flat tensor comparisons along a stupid tail",
+ "statement": "Let R be a commutative ring and B a commutative R-algebra. Let Q be a cochain complex of R-modules and k an integer with Q^n=0 for n<k. Set T=\\sigma_{\\ge k+1}Q (the stupid truncation) and S=Q^k[-k] (the one-term complex). Suppose that for each of S and T, every quasi-isomorphism g:F\\to S or g:F\\to T with F K-flat [def-pc-module-kflat-complex] remains a quasi-isomorphism after termwise tensoring with B. Then for every K-flat P and quasi-isomorphism f:P\\to Q, the termwise tensor map f\\otimes_R B is a quasi-isomorphism. No upper bound or Tor hypothesis is imposed on Q.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XY",
+  "place": "Section 15.60, Lemmas 15.60.7, 15.60.9, 15.60.12 and Definition 15.60.13; parent Tag 08IB final affine calculation"
+ },
+ "stmt_deps": [
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put T=sigma_{>=k+1}Q and S=Q^k[-k]. Since Q vanishes below k, the inclusion T -> Q and the projection Q -> S form a degreewise split short exact sequence. Its connecting map S -> T[1] is d^k with the shift sign. Tensoring with B preserves the split term sequences and gives the corresponding distinguished triangle [lem-weil-pbc-complex-ses-triangle].",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K(R), termwise tensor followed by localization is triangulated. K-flat objects form a resolving class: use the functorial flat resolutions of ordinary ModuleCat in the source KFlat library. Quasi-isomorphisms between them remain invertible after tensoring by [lem-pc-mixed-tensor-kflat-quasi-iso] for the identity ring map and B[0]. Apply the generic [lem-pur-left-derived-from-kflat-class] to obtain the exact derived tensor and its comparison counit, computed on every K-flat resolution. Shifts of resolutions and the termwise tensor-shift identifications make this counit shift-compatible. Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to obtain a morphism from the derived-tensor triangle of T,Q,S to the ordinary-tensor triangle of the same split sequence.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypotheses give isomorphisms for all cohomology maps on T and S. The triangle morphism gives a cohomology ladder [lem-weil-pbc-derived-cohomology-ladder]. In each five-term segment the four outer vertical maps are isomorphisms; [lem-weil-pbc-five-lemma] gives the middle isomorphism. Model independence identifies the middle comparison with the image of the specified f tensor B, so it is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06XY",
+  "place": "Section 15.60, Lemmas 15.60.7, 15.60.9, 15.60.12 and Definition 15.60.13; parent Tag 08IB final affine calculation; detailed module-specialized expansion of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor acyclic module projective resolution tensor augmentation quasi isomorphism; derived tensor comparison for split exact sequences",
+   "results": "Service returned Internal Server Error for both queries.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor K flat resolution one term complex Tor vanishing augmentation; derived tensor comparison middle complex split short exact sequence",
+   "results": "One-term results: isZero_Tor'_succ_of_projective and module flatness criteria, neither covers a general Tor-acyclic module. Gluing results: HomologySequence.quasiIso_τ₃ and mappingCone.quasiIso_descShortComplex; neither supplies the K-flat comparison ladder.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*single|single.*Tor|quasiIso_tensor_of_stupid_tail|quasiIso_tensor_of_single_support in Mathlib/Algebra/Homology and Mathlib/CategoryTheory; library and whole-blueprint searches",
+   "results": "No one-term Tor-acyclic comparison or K-flat-resolution stupid-tail gluing theorem. Whole-blueprint searches Tor-independent complex and stupid comparison both return zero.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AVW case (1): Tor independence identifies the base-derived tensor with the pullback tensor at each stalk; Gluing K-flat tensor comparisons along a stupid tail",
+   "via": [
+    "lem-pc-termwise-tor-acyclic-derived-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-projective-complex-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorComparisonStupidTail",
+  "file": "lean/Sheaf/Algebra/Homology/TensorComparisonStupidTail.lean",
+  "declaration": "CochainComplex.quasiIso_tensor_of_stupid_tail",
+  "statement": "theorem quasiIso_tensor_of_stupid_tail\n    {R : Type u} [CommRing R] {B : Type u} [CommRing B] [Algebra R B]\n    (Q : CochainComplex (ModuleCat.{u} R) ℤ) (k : ℤ)\n    (hbelow : ∀ n : ℤ, n < k → IsZero (Q.X n))\n    (hsingle : ∀ (P : CochainComplex.KFlat (ModuleCat.{u} R))\n      (f : P.obj ⟶ (HomologicalComplex.single (ModuleCat.{u} R)\n        (ComplexShape.up ℤ) k).obj (Q.X k)), QuasiIso f →\n      QuasiIso ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R B)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).map f))\n    (htail : ∀ (P : CochainComplex.KFlat (ModuleCat.{u} R))\n      (f : P.obj ⟶ Q.stupidTrunc (ComplexShape.embeddingUpIntGE (k + 1))), QuasiIso f →\n      QuasiIso ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R B)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).map f))\n    (P : CochainComplex.KFlat (ModuleCat.{u} R)) (f : P.obj ⟶ Q)\n    (hf : QuasiIso f) :\n    QuasiIso ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R B)).mapHomologicalComplex\n      (ComplexShape.up ℤ)).map f)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T082328-L-1629957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T082328-L-1629957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
