@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitNormalization
+import Sheaf.Algebra.Homology.KFlatClosure
 
 /-! # Translated-unit comparison on K-flat mapping cones
 
@@ -74,6 +76,41 @@ theorem exists_derivedPullback_translatedUnit_kFlat_cones
                 ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) T.obj₁) ≪≫
               tensorIso e (Iso.refl _) ≪≫
               schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj T.obj₁)).hom) ∈
-          distTriang (schemeDerivedCategory Z) := by sorry
+          distTriang (schemeDerivedCategory Z) := by
+  let E := Scheme.Modules.tensorPullback f
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction f
+  let : E.IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
+  let : E.Additive := CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ E
+    (by
+      rw [CategoryTheory.rightExactFunctor_iff]
+      infer_instance)
+  obtain ⟨e, ε, hε, he⟩ := exists_derivedPullback_kFlat_cone_counit_normalization f
+  refine ⟨e, ?_⟩
+  intro P Q p hP hQ
+  let C := CochainComplex.mappingCone.triangleh p
+  let W := (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Z)).mapTriangle.obj C
+  have hcone : W ∈ distTriang (schemeDerivedCategory Z) := by
+    apply Functor.map_distinguished
+    exact HomotopyCategory.mappingCone_triangleh_distinguished p
+  have hP' := hε P hP
+  have hQ' := hε Q hQ
+  have hC' := hε (CochainComplex.mappingCone p)
+    (CochainComplex.isKFlat_mappingCone p hP hQ)
+  change IsIso (ε.app C.obj₁) at hP'
+  change IsIso (ε.app C.obj₂) at hQ'
+  change IsIso (ε.app C.obj₃) at hC'
+  let := hP'
+  let := hQ'
+  let := hC'
+  apply CategoryTheory.Pretriangulated.isomorphic_distinguished _ hcone _
+  refine Triangle.isoMk _ W (asIso (ε.app C.obj₁)) (asIso (ε.app C.obj₂))
+    (asIso (ε.app C.obj₃)) ?_ ?_ ?_
+  · exact ε.naturality C.mor₁
+  · exact ε.naturality C.mor₂
+  · simpa only [C, W, Triangle.mk_mor₃, asIso_hom, Category.assoc] using
+      (he P Q p hP hQ).symm
 
 end AlgebraicGeometry
