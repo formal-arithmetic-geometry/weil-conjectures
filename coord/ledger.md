@@ -10250,3 +10250,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:16 L: merged deliver/T3/Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftAux (stage 3; reviewer PASS; first push; landing 20261013T001616-L-2331157 (proof); batch 20261013T001612; modules 1; new nodes 0)
 - 00:16 L: merged deliver/U4/Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated (stage 3; reviewer PASS; first push; landing 20261013T001617-L-2331371 (interface); batch 20261013T001612; modules 3; new nodes 2)
 - 00:16 L: merged deliver/V3/Sheaf.CategoryTheory.TruncationAbutmentCoconeAux (stage 3; reviewer PASS; first push; landing 20261013T001617-L-2331558 (proof); batch 20261013T001612; modules 1; new nodes 0)
+- 00:16 L: merged deliver/W3/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIrreducibleSupport (stage 3; reviewer PASS; first push; landing 20261013T001618-L-2331747 (interface); batch 20261013T001612; modules 3; new nodes 2)

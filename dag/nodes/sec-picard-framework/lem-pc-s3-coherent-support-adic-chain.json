@@ -1,0 +1,199 @@
+{
+ "id": "lem-pc-s3-coherent-support-adic-chain",
+ "kind": "statement",
+ "title": "Finite adic chain with generic-annihilated quotients",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], $T$ a closed subset with generic point $\\xi$, and $F$ a coherent module [pqf-def-coherent, def-weil-sheaf-of-modules-category] with support $T$, where support uses the module stalks [def-weil-pbc-module-stalk]. There exist $n\\in\\mathbb N$ and modules $P(k)$ for $k\\in\\mathbb N$ with $P(0)=F$, $P(n)$ zero, and $P(k)$ coherent for $k\\leq n$. For every $k<n$ there is a short exact sequence $0\\to P(k+1)\\to P(k)\\to G_k\\to0$ with $G_k$ coherent, supported in $T$, and its stalk at $\\xi$ annihilated by the maximal ideal of $\\mathcal O_{X,\\xi}$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01YF, irreducible-support ideal-power and final generic-point paragraphs; Tag 01YE for the generic ideal inclusion. Read online at https://stacks.math.columbia.edu/tag/01YF and https://stacks.math.columbia.edu/tag/01YE."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Take the actual vanishing ideal J of T. Its proper-stalk locus is T, so support containment and coherent_support_power_ideal_kills give n with J^n F zero. No arbitrary object is defined by choosing this witness.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-coherent-support-power-ideal-kills"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For positive t set P(t) to the actual image idealModuleProduct of J^t acting on F, and b(t) to its image inclusion. Quasi-coherence of the ideal (source-library isQuasicoherent_toModules, HilbertPolynomial), tensor products and images proves quasi-coherence of powers and products by induction. Quasi-coherence of F follows from its assumed coherence via the finite-type criterion; the coherent-submodule criterion proves coherence of every P(t), and coherent cokernel closure proves coherence of each successive quotient. Set P(0) literally to F and use the canonical isomorphism at zero. After n extend P by zero.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply formalModuleQuotient_factor to the identity of F and t <= t+1, obtaining f:P(t+1) -> P(t) with f b(t)=b(t+1). Both image inclusions are monic, hence f is monic and its cokernel sequence is short exact. Outside T the stalk of F is zero. Injectivity of the stalk of b(t) makes the stalk of P(t) zero, and surjectivity of the stalk cokernel projection makes the quotient stalk zero. Stalk injectivity is proved for arbitrary ringed spaces from module_stalk_exact, rather than duplicating the private scheme-level lemma.",
+   "uses": [
+    "lem-weil-pbc-formal-module-ideal-power-factor",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the image I of J at the generic point with the maximal ideal. A germ of a J-section has zero residue at the generic point and is a nonunit. Conversely represent a nonunit germ by f on U. Its basic open does not contain the generic point; specialization then excludes every point of T from that basic open. Thus f vanishes on T intersect U and is a section of J, giving the required germ lift. This is the private generic_ideal_range proof, using the pointwise description of the reduced vanishing ideal and Mathlib basic-open and generic-point specialization lemmas.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal-product stalk theorem identifies the range of b(t) with I^t times F_xi for positive t. At zero b(0) is the image inclusion of the left unitor, hence an isomorphism and has full range. Lift a quotient germ to y in P(t)_xi. If a is in I, the image of a*y in F_xi belongs to I^(t+1) F_xi, so it lifts along b(t+1) to z. Injectivity of b(t)_xi implies f_xi(z)=a*y. The cokernel projection kills f_xi(z), proving maximal-ideal annihilation of the quotient.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the finite chain, the zero terminal object, its coherent terms and the coherent generic-annihilated cokernel sequences. No integral filtration is asserted here.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "W3",
+  "date": "2026-10-13",
+  "based_on": "Construction subproblem extracted from the literal Stacks 01YF proof, not a restatement of an existing filtration theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite filtration of a coherent sheaf by powers of the ideal of its support with residue field generic stalk quotients",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "localCohomology.isoSelfLERadical",
+     "Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge",
+     "localCohomology",
+     "Ideal.Filtration.Stable.exists_pow_smul_eq",
+     "localCohomology.ofSelfLERadical",
+     "Ideal.Filtration.submodule_fg_iff_stable",
+     "Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge",
+     "localCohomology.ideal_powers_initial"
+    ],
+    "note": ""
+   },
+   "verdict": "No exact sheaf construction theorem; only ring filtrations, ideal data or categorical short-complex components.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.ShortComplex",
+     "CategoryTheory.ShortComplex.X₁",
+     "CategoryTheory.ShortComplex.X₂",
+     "CategoryTheory.ShortComplex.X₃",
+     "CategoryTheory.ShortComplex.instCategory",
+     "CategoryTheory.ShortComplex.Hom",
+     "CategoryTheory.ShortComplex.instHasZeroMorphisms",
+     "CategoryTheory.ShortComplex.Hom.id"
+    ],
+    "note": ""
+   },
+   "verdict": "No exact sheaf construction theorem; only ring filtrations, ideal data or categorical short-complex components.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*chain|coherent.*generic.*extension|generic.*coherent.*filtration",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "Mathlib/Tactic/Order.lean"
+    ],
+    "note": ""
+   },
+   "verdict": "No exact sheaf construction theorem; only ring filtrations, ideal data or categorical short-complex components.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite coherent ideal-power chain with generic maximal-ideal-annihilated successive quotient sheaves",
+   "results": {
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": []
+   },
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIrreducibleSupport",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-s3-irreducible-support-filtration-step",
+   "place": "irreducible-support construction subproblem"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentSupportAdicChain",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSupportAdicChain.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_support_adic_chain",
+  "statement": "theorem coherent_support_adic_chain\n    (X : Scheme.{u}) [IsNoetherian X]\n    (T : TopologicalSpace.Closeds X) (ξ : X)\n    (hξ : IsGenericPoint ξ (T : Set X))\n    (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (hSupp : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} = (T : Set X)) :\n    ∃ (n : ℕ) (P : ℕ → X.Modules), P 0 = F ∧ IsZero (P n) ∧\n      (∀ k, k ≤ n → RingedSpace.IsCoherent X.toRingedSpace (P k)) ∧\n      ∀ k, k < n → ∃ (G : X.Modules) (f : P (k + 1) ⟶ P k) (g : P k ⟶ G)\n        (w : f ≫ g = 0), (ShortComplex.mk f g w).ShortExact ∧\n        RingedSpace.IsCoherent X.toRingedSpace G ∧\n        {x : X | ¬ Subsingleton (G.presheaf.stalk x)} ⊆ (T : Set X) ∧\n        (∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk ξ),\n          ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G, a • m = 0)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T001618-L-2331747",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T001618-L-2331747",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

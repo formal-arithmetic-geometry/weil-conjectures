@@ -18,22 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Apply the J-adic reduction. For each coherent graded quotient supported in T, use hsmaller if its support is proper. Otherwise use the generic-annihilated step with the supplied hsmaller. Its ideal-sum inclusion and smaller-support cokernel give the filtration by coherent extension. Concatenate the graded filtrations; the zero power endpoint has the length-zero filtration.",
+   "text": "Obtain the finite coherent adic chain and generic-annihilated coherent graded quotients.",
    "uses": [
-    "lem-weil-pbc-coherent-integral-filtration-adic-reduction",
-    "lem-weil-pbc-coherent-integral-filtration-generic-step"
+    "lem-pc-s3-coherent-support-adic-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a graded quotient with proper support apply hsmaller. In the full-support case obtain the generic short exact sequence, apply hsmaller to its smaller-support cokernel, then concatenate with the filtered source.",
+   "uses": [
+    "lem-pc-s3-coherent-generic-filtered-extension",
+    "lem-weil-pbc-coherent-integral-filtration-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the terminal zero object its length-zero filtration, using zero-object coherence. Descending induction through the finite adic chain concatenates the filtered graded quotients, and P(0)=F identifies the initial object.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-coherent-integral-filtration-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-integral-filtration-adic-reduction",
-  "lem-weil-pbc-coherent-integral-filtration-generic-step"
+  "lem-pc-s3-coherent-generic-filtered-extension",
+  "lem-pc-s3-coherent-support-adic-chain",
+  "lem-weil-pbc-coherent-integral-filtration-extension",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 01YF, ideal-power and generic-inclusion paragraphs, using Tags 01Y9 and 01YE"
+  "by": "worker",
+  "agent": "W3",
+  "date": "2026-10-13",
+  "based_on": "Second reading replaced two exact duplicates of existing cyclic filtration theorems by construction subproblems. Support splitting, the zero base case, descending induction and short-exact concatenation are proved in the item."
  },
  "mathlib_searches": [
   {
@@ -117,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T223411-L-1639003",
+  "landing": "20261013T001618-L-2331747",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
