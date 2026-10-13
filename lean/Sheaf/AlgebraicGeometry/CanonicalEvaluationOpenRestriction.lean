@@ -6,14 +6,8 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
-import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
-import Sheaf.Algebra.Homology.HomComplexRestrictOpen
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.OpenRestrictionClosedMonoidal
 
 /-! # Open restriction of canonical derived evaluation
 
@@ -46,6 +40,91 @@ local instance restrictionEvaluationStandardDerived (X : Scheme.{u}) (U : X.Open
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem closedMonoidal_evaluation
+    {C : Type*} {B : Type*} [Category C] [Category B]
+    [MonoidalCategory C] [MonoidalCategory B]
+    (R : C ⥤ B) [R.Monoidal] (H : Cᵒᵖ × C ⥤ C) (J : Bᵒᵖ × B ⥤ B)
+    (e : ∀ A K N : C, (A ⟶ H.obj (op K, N)) ≃ (A ⊗ K ⟶ N))
+    (f : ∀ A K N : B, (A ⟶ J.obj (op K, N)) ≃ (A ⊗ K ⟶ N))
+    (hf : ∀ A A' K N N' (a : A' ⟶ A) (c : N ⟶ N')
+      (ξ : A ⟶ J.obj (op K, N)),
+      f A' K N' (a ≫ ξ ≫ J.map ((𝟙 K).op, c)) =
+        (a ⊗ₘ 𝟙 K) ≫ f A K N ξ ≫ c)
+    (h : ∀ K N, R.obj (H.obj (op K, N)) ≅ J.obj (op (R.obj K), R.obj N))
+    (hh : ∀ A K N (ξ : A ⟶ H.obj (op K, N)),
+      f (R.obj A) (R.obj K) (R.obj N) (R.map ξ ≫ (h K N).hom) =
+        (Functor.Monoidal.μIso R A K).hom ≫ R.map (e A K N ξ)) (K N : C) :
+    let D := H.obj (op K, 𝟙_ C)
+    let DU := J.obj (op (R.obj K), 𝟙_ B)
+    let g := (e (N ⊗ D) K N).symm
+      ((α_ N D K).hom ≫ N ◁ (e D K (𝟙_ C) (𝟙 D)) ≫ (ρ_ N).hom)
+    let gU := (f (R.obj N ⊗ DU) (R.obj K) (R.obj N)).symm
+      ((α_ (R.obj N) DU (R.obj K)).hom ≫
+        R.obj N ◁ (f DU (R.obj K) (𝟙_ B) (𝟙 DU)) ≫ (ρ_ (R.obj N)).hom)
+    ∃ a : R.obj (N ⊗ D) ≅ R.obj N ⊗ DU,
+      ∃ b : R.obj (H.obj (op K, N)) ≅ J.obj (op (R.obj K), R.obj N),
+        R.map g ≫ b.hom = a.hom ≫ gU := by
+  classical
+  dsimp only
+  let D := H.obj (op K, 𝟙_ C)
+  let DU := J.obj (op (R.obj K), 𝟙_ B)
+  let u : R.obj (𝟙_ C) ≅ 𝟙_ B := (Functor.Monoidal.εIso R).symm
+  let d : R.obj D ≅ DU := h K (𝟙_ C) ≪≫
+    J.mapIso ((Iso.refl (op (R.obj K))).prod u)
+  let a : R.obj (N ⊗ D) ≅ R.obj N ⊗ DU :=
+    (Functor.Monoidal.μIso R N D).symm ≪≫ tensorIso (Iso.refl _) d
+  let ev := e D K (𝟙_ C) (𝟙 D)
+  let evU := f DU (R.obj K) (𝟙_ B) (𝟙 DU)
+  have hid (Y : B) :
+      J.map (X := (op (R.obj K), Y)) (Y := (op (R.obj K), Y))
+        ((𝟙 (R.obj K)).op, 𝟙 Y) = 𝟙 (J.obj (op (R.obj K), Y)) := by
+    rw [op_id, ← prod_id']
+    exact J.map_id _
+  have hd : d.hom ▷ R.obj K ≫ evU =
+      (Functor.Monoidal.μIso R D K).hom ≫ R.map ev ≫ u.hom := by
+    have h₁ := hf DU (R.obj D) (R.obj K) (𝟙_ B) (𝟙_ B) d.hom (𝟙 _) (𝟙 DU)
+    have h₂ := hf (R.obj D) (R.obj D)
+      (R.obj K) (R.obj (𝟙_ C)) (𝟙_ B) (𝟙 _) u.hom (h K (𝟙_ C)).hom
+    simp only [hid, Category.comp_id, tensorHom_id] at h₁
+    simp only [Category.id_comp, tensorHom_id, id_whiskerRight] at h₂
+    rw [← h₁]
+    change f _ _ _ ((h K (𝟙_ C)).hom ≫ J.map ((𝟙 (R.obj K)).op, u.hom)) = _
+    rw [h₂]
+    have h₃ := hh D K (𝟙_ C) (𝟙 D)
+    simp only [R.map_id, Category.id_comp] at h₃
+    rw [h₃]
+    simp [ev]
+  refine ⟨a, h K N, ?_⟩
+  apply (f _ _ _).injective
+  rw [hh]
+  have hn := hf (R.obj N ⊗ DU) (R.obj (N ⊗ D)) (R.obj K)
+    (R.obj N) (R.obj N) a.hom (𝟙 _)
+    ((f (R.obj N ⊗ DU) (R.obj K) (R.obj N)).symm
+      ((α_ (R.obj N) DU (R.obj K)).hom ≫ R.obj N ◁ evU ≫ (ρ_ (R.obj N)).hom))
+  simp only [hid, Category.comp_id, Equiv.apply_symm_apply] at hn
+  rw [hn]
+  simp only [Equiv.apply_symm_apply, Functor.map_comp]
+  change (Functor.Monoidal.μIso R (N ⊗ D) K).hom ≫
+    R.map (α_ N D K).hom ≫ R.map (N ◁ ev) ≫ R.map (ρ_ N).hom =
+    (a.hom ⊗ₘ 𝟙 (R.obj K)) ≫ (α_ (R.obj N) DU (R.obj K)).hom ≫
+      R.obj N ◁ evU ≫ (ρ_ (R.obj N)).hom
+  simp only [a, Iso.trans_hom, Iso.symm_hom, tensorIso_hom, Iso.refl_hom,
+    id_tensorHom, tensorHom_id, comp_whiskerRight, Category.assoc]
+  rw [associator_naturality_middle_assoc, ← whiskerLeft_comp_assoc, hd]
+  simp only [whiskerLeft_comp, Category.assoc]
+  simp only [Functor.Monoidal.μIso_hom, Functor.Monoidal.μIso_inv,
+    u, Iso.symm_hom, Functor.Monoidal.εIso_inv]
+  rw [Functor.Monoidal.map_associator]
+  simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
+  rw [← Functor.LaxMonoidal.μ_natural_right_assoc,
+    Functor.Monoidal.map_rightUnitor]
+  simp
+
+
+set_option maxHeartbeats 1000000 in
+-- Elaborating the mixed-universe sheaf tensor comparisons needs extra heartbeats.
 /-- Restriction preserves the canonical derived evaluation arrow, including its
 source and target comparisons. This is independent of any ordinary complex model.
 
@@ -100,6 +179,13 @@ theorem exists_canonicalEvaluation_open_restriction (X : Scheme.{u})
           (𝟙_ (schemeDerivedCategory U.toScheme)) (𝟙 DU)) ≫ (ρ_ NU).hom)
     ∃ a : R.obj (N ⊗ D) ≅ NU ⊗ DU,
       ∃ b : R.obj (H.obj (op K, N)) ≅ HU.obj (op KU, NU),
-        R.map g ≫ b.hom = a.hom ≫ gU := by sorry
+        R.map g ≫ b.hom = a.hom ≫ gU := by
+  obtain ⟨m, h, hh⟩ := exists_openRestriction_closedMonoidal X U
+  let := m
+  exact closedMonoidal_evaluation _ _ _ (schemeDerivedTensorHomEquiv X)
+    (schemeDerivedTensorHomEquiv U.toScheme)
+    (fun A A' K N N' a c ξ ↦
+      (Classical.choose_spec (exists_canonicalDerivedTensorHom U.toScheme)).1
+        A A' K K N N' a (𝟙 K) c ξ) h hh K N
 
 end AlgebraicGeometry
