@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-localizing-principal-cover-gluing",
+ "kind": "statement",
+ "title": "Unique gluing for a localizing module presheaf on a principal affine cover",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $P$ a presheaf of $\\mathcal O_T$-modules [def-weil-sheaf-of-modules-category], and $W$ an affine open. Assume for every $a\\in\\Gamma(T,W)$ the restriction $P(W)\\to P(D(a))$, with scalars restricted to $\\Gamma(T,W)$, is module localization at powers of $a$. Let $s\\subseteq\\Gamma(T,W)$ satisfy $W=\\bigcup_{a\\in s}D(a)$. Every family of elements in $P(D(a))$ compatible under restriction to every affine open mapping into two cover members has a unique amalgamation in $P(W)$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01HV",
+  "place": "Schemes, Lemma 01HV, label lemma-spec-sheaves, (2), (4), (5); associated module sheaf and its localization sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use localization linear equivalences to the principal sections of the associated module sheaf. Bundle both overlap restriction maps as linear maps over Gamma(T,W). Localization extensionality gives naturality because the endomorphism given by multiplication by ab is a unit, and therefore so are multiplication by a and b. All maps agree on the original module.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine span criterion converts the cover to a cover of Spec Gamma(T,W). Transfer the matching family, glue in the associated module sheaf, and use its bijective global constant-section map to recover an element of P(W). Naturality gives the amalgamation equations; injectivity of the localization equivalences and uniqueness of sheaf gluing give uniqueness. The zero ring and empty covers are covered by the same argument.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tag 01HV; Mathlib StructureSheaf and localized-module universal properties",
+  "place": "Explicit Lean proof of the principal-cover portion of the item plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of modules whose restrictions to principal affine opens are localizations satisfies the sheaf condition on the affine basis",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization; AlgebraicGeometry.isLocalization_away_of_isAffine; AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen; AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen; AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen; AlgebraicGeometry.Γ_restrict_isLocalization; AlgebraicGeometry.Scheme.affineBasisCoverRing; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-13",
+   "verdict": "Tools only; proof assembled explicitly"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.Away",
+   "results": "IsLocalizedModule.Away; Module.eq_zero_of_isLocalized_span; Submodule.eq_bot_of_isLocalized₀_span; Submodule.eq_top_of_isLocalized₀_span; Submodule.eq_of_isLocalized₀_span; Module.eq_of_isLocalized_span; Submodule.le_of_isLocalized_span; Submodule.mem_of_isLocalized_span",
+   "date": "2026-10-13",
+   "verdict": "Tools only; proof assembled explicitly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique gluing for a presheaf of modules on principal opens of an affine scheme when its restriction maps are module localizations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isSheafFor.*(localiz|principal)|localiz.*isSheafFor",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "Tools only; proof assembled explicitly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineLocalizingPresheafBasisSheaf",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Proof of clause (1), quasi-coherence: principal-open localization gives unique gluing, before affine-basis extension and sheafification.",
+   "via": [
+    "lem-pc-affine-localizing-presheaf-basis-sheaf",
+    "lem-pc-affine-localizing-presheaf-sheafification",
+    "lem-pc-higher-direct-image-section-torsion",
+    "new-higher-direct-image-affine-local-qcoherent",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizingPrincipalCoverGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizingPrincipalCoverGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isSheafFor_principalCover_of_localizing",
+  "statement": "theorem isSheafFor_principalCover_of_localizing\n    (T : Scheme.{u}) (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)\n    (W : T.affineOpens)\n    (hP : ∀ a : Γ(T, W.1),\n      IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom)\n    (s : Set Γ(T, W.1)) (hs : (⨆ a : s, T.basicOpen a.val) = W.val) :\n    Presieve.IsSheafFor\n      ((((Subtype.mono_coe T.affineOpens).functor).op ⋙ P.presheaf) ⋙\n        CategoryTheory.forget AddCommGrpCat.{u})\n      (Presieve.ofArrows (fun a : s ↦ T.affineBasicOpen (U := W) a.val)\n        (fun a ↦ homOfLE (T.affineBasicOpen_le a.val)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T082411-L-1646994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T082411-L-1646994",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
