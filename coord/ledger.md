@@ -10894,3 +10894,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/U3/Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift (stage 3; reviewer PASS; first push; landing 20261013T031554-L-3575602 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ProjectionComparisonTriangles (stage 3; reviewer PASS; first push; landing 20261013T031554-L-3575936 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/V1/Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison (stage 3; reviewer PASS; first push; landing 20261013T031555-L-3576083 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ProperPerfectTransportCompact (stage 3; reviewer PASS; first push; landing 20261013T031555-L-3576244 (proof); batch 20261013T031526; modules 1; new nodes 0)

@@ -17,24 +17,60 @@
  ],
  "proof": [
   {
-   "text": "Apply proper perfect direct-image perfectness, perfect-object compactness, and transport along the comparison isomorphism.",
+   "text": "For each stalk use lem-weil-pbc-tor-symmetry to identify Tor'(M,N) with Tor'(N,M). Apply NatTrans.leftDerived to tensorLeftIsoTensorRight M to identify Tor(M,N) with Tor'(N,M). Compose the two isomorphisms and transport the given vanishing, obtaining HasStalkwiseFiniteTorDimension f without changing its pointwise bounds.",
    "uses": [
-    "lem-pc-proper-perfect-direct-image-perfect",
-    "lem-pc-perfect-object-compact"
+    "lem-weil-pbc-tor-symmetry",
+    "def-pc-perfect-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-perfect-noetherian-cohomology to P to obtain bounded coherent cohomology. For each cohomology sheaf, pqf-lem-coherent-ft-locnoeth gives quasi-coherence and finite type, and lem-weil-pbc-finite-type-module-support-closed makes its nonzero-stalk locus closed. Use the vanishingIdeal reduced closed subscheme of this locus as the explicit proper-support witness: its closed immersion composed with the proper f is proper.",
+   "uses": [
+    "lem-pc-perfect-noetherian-cohomology",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "def-weil-proper-morphism"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply lem-pc-perfect-relative-finite-tor with the converted stalkwise condition and hP. Properness supplies local finite type and Noetherian X supplies compactness. Apply lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect, whose independent source and target derived universes match wX and wY, to the bounds, coherence, support witnesses and relative Tor dimension. This gives perfection of the ambient derived direct image of P.",
+   "uses": [
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate eR on P and map this isomorphism through derived restriction to each open in the perfect cover of the direct image. Compose with its strictly perfect representative isomorphism to obtain Scheme.IsPerfect Y (R.obj P). Apply lem-pc-perfect-object-compact with the canonical derivedQCohDirectSums Y coproduct instance.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-object-compact"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-perfect-direct-image-perfect",
-  "lem-pc-perfect-object-compact"
+  "def-pc-perfect-complex",
+  "def-pc-perfect-morphism",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-proper-morphism",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "lem-pc-perfect-noetherian-cohomology",
+  "lem-pc-perfect-object-compact",
+  "lem-pc-perfect-relative-finite-tor",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-tor-symmetry",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3",
-  "document": "https://stacks.math.columbia.edu/tag/0A9R",
-  "place": "Tags 09M1, 0B6G, 0A9R",
-  "note": "Strict intermediate part of target proof."
+  "agent": "V2",
+  "document": "https://stacks.math.columbia.edu/tag/0B6G",
+  "place": "Tag 0B6G via Tag 08EV; Tor convention comparison via Tag 00M3; compactness via Tag 09M1",
+  "note": "Compiled proof using existing declarations; checks the hypotheses of the mixed-universe criterion instead of using the single-universe wrapper."
  },
  "mathlib_searches": [
   {
@@ -106,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T015548-L-3018313",
-  "kind": "interface",
+  "landing": "20261013T031555-L-3576244",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
