@@ -10234,3 +10234,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:12 L: merged deliver/J4/Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations (stage 3; reviewer PASS; after a return; landing 20261013T001226-L-2305393 (proof); batch 20261013T001224; modules 1; new nodes 0)
 - 00:12 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ProjectiveLineTwistProductMorphism (stage 3; reviewer PASS; first push; landing 20261013T001226-L-2305494 (proof); batch 20261013T001224; modules 1; new nodes 0)
 - 00:12 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.GradedSerreVanishing (stage 3; reviewer PASS; first push; landing 20261013T001227-L-2305647 (interface); batch 20261013T001224; modules 2; new nodes 1)
+- 00:12 L: merged deliver/R2/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotient (stage 3; reviewer PASS; first push; landing 20261013T001227-L-2305847 (proof); batch 20261013T001224; modules 1; new nodes 0)

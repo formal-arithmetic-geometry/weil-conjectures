@@ -21,6 +21,15 @@ under the stabilized-image equality supplied by claims (a)--(b).
 The proof is deferred to the corresponding DAG node.
 (blueprint: lem-weil-pbc-formal-kernel-quotient-aux).
 -/
+-- STATEMENT-DISPUTED: image stabilization does not supply the Artin--Rees bound
+-- for the kernel inside the source. Take X = Spec Z, I = (2), F_n = Z/2^(n+1),
+-- H_n = Z/2, and alpha the reduction. The termwise kernels form S with
+-- S_n = 2Z/2^(n+1)Z; their transitions are surjective, so hc and hS hold for c = 0.
+-- Every S_n is annihilated by 2^(n+1), hence its indicated quotient is S_n itself.
+-- The conclusion would give K_0 = 0 and K_1 = Z/2. But the defining comparison
+-- K_1 / 2K_1 = K_0 would identify Z/2 with 0, a contradiction.
+-- Stacks 087X chooses c for BOTH image stabilization and the inclusion
+-- ker(f) intersect I^r M <= I^(r-c) ker(f); only the first is assumed here.
 theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)
