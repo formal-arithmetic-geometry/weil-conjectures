@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-strict-local-sections-unit-leray",
+ "kind": "statement",
+ "title": "Derived sections unit followed by Leray on a representative",
+ "statement": "For t:Y→S_s^sh, any complex D of abelian sheaves on Y, a bounded-below derived object T and any r:Q(D)→T, exact strict-local sections of the direct-image unit, transported to the bounded-below derived functor and followed by Leray, equal Q of the underived direct-image/global-sections comparison followed by the derived global-sections unit at D and transport by r. Neither acyclicity of D nor invertibility of r is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "expand the exact sections comparison and the bounded-below/unbounded\nright-derived compatibility. Their defining unit compatibilities identify their\ncomposite with the inverse exact-to-right-derived sections comparison.\nNaturality moves the map from Q(D) to T through the Leray isomorphism. Expand\nLeray as the inverse derived composition isomorphism followed by the derived\nunderived sections isomorphism. The composition unit factorization now gives\nthe sections unit at D preceded by the localized underived sections isomorphism.\nNaturality of the sections unit and quotient/localization isomorphisms accounts\nfor the displayed transport r. This calculation never inverts the direct-image\nunit or the sections unit at D; it holds for zero and nonacyclic complexes. The exactness input is strictHenselization_globalSections_preservesFiniteColimits. The other steps use the proved generic source interfaces Functor.rightDerived_ext, rightDerivedNatTrans_fac, rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac, rightDerivedFunctorIsoMapDerivedCategory_hom_fac and the definition of rightDerivedLowerStarCompRightDerivedGlobalSectionsIso, not derivedLeray_comp.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent K1",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph; formal unit calculation from the proved source derived-composition and exact-derived comparison interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change computed on injective complexes and Leray global sections unit",
+   "results": "Hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac'",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMapPlus.*fac|rightDerivedFunctorCompUnit",
+   "results": "No hits.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived mate of an exact pullback square on a bounded below injective representative is the underived base change map followed by the target derived direct image unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Leray derived global sections composition isomorphism carries the direct image unit followed by exact global sections comparison to the derived global sections unit on any complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeLeray",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Tag 03Q9, final injective-complex paragraph",
+   "via": [
+    "lem-weil-pbc-strict-local-derived-exchange-leray",
+    "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction",
+    "lem-weil-pbc-strict-local-complex-sections-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSectionsUnitLeray",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSectionsUnitLeray.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalSections_unit_leray",
+  "statement": "theorem strictLocalSections_unit_leray {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {Y : Scheme.{v}} (t : Y ⟶ Scheme.strictHenselizationScheme s)\n    (D : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (T : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (r : DerivedCategory.Q.obj D ⟶ T.obj) :\n    let F := lowerStar AddCommGrpCat.{v + 1} t\n    let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n      AddCommGrpCat.{v + 1}\n    let H := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}\n    have := strictHenselization_globalSections_preservesFiniteColimits s\n    let V := F.rightDerivedFunctorPlus.obj T\n    let ℓ := DerivedCategory.Plus.ι.map\n        (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app V) ≫\n      G.rightDerivedFunctorPlusCompatibility.hom.app V ≫\n      G.rightDerivedFunctor.map (F.rightDerivedFunctorPlusCompatibility.hom.app T) ≫\n      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{v + 1}\n        t).hom.app T.obj\n    G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      G.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso _).inv.app\n        ((F.mapHomologicalComplex (.up ℤ)).obj D)) ≫\n      G.mapDerivedCategory.map\n        (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D)) ≫\n      G.mapDerivedCategory.map\n        (F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D)) ≫\n      G.mapDerivedCategory.map (F.rightDerivedFunctor.map r) ≫\n      G.mapDerivedCategory.map (F.rightDerivedFunctorPlusCompatibility.inv.app T) ≫ ℓ =\n    DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex\n      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} t).hom (.up ℤ)).app D) ≫\n      (DerivedCategory.quotientCompQhIso AddCommGrpCat.{v + 1}).inv.app\n        ((H.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      H.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D) ≫\n      H.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫\n      H.rightDerivedFunctor.map r",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T082352-L-1638635",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T082352-L-1638635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

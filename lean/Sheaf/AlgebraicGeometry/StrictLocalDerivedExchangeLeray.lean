@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.InjectiveExchangeRepresentative
+import Sheaf.AlgebraicGeometry.StrictLocalSectionsUnitLeray
 
 /-! # Derived exchange and Leray before taking homology
 
@@ -101,6 +103,45 @@ theorem strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X ⟶ S)
       (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctor.map
         ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫
       (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctor.map
-        (P.mapDerivedCategoryFactors.inv.app M ≫ P.mapDerivedCategory.map q.inv) := by sorry
+        (P.mapDerivedCategoryFactors.inv.app M ≫ P.mapDerivedCategory.map q.inv) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  set_option backward.defeqAttrib.useBackward true in
+  exact (by
+    dsimp (config := { failIfUnchanged := false }) only
+    have := strictHenselization_globalSections_preservesFiniteColimits s
+    let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+    let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
+    let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
+    let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+      AddCommGrpCat.{v + 1}
+    let P := upperStar AddCommGrpCat.{v + 1}
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
+    let F := lowerStar AddCommGrpCat.{v + 1}
+      (pullback.snd f (Scheme.strictHenselizationStructuralMap s))
+    let D := (P.mapHomologicalComplex (.up ℤ)).obj M
+    let a : (U.mapHomologicalComplex (.up ℤ)).obj L ⟶
+        (F.mapHomologicalComplex (.up ℤ)).obj D := (NatTrans.mapHomologicalComplex
+      (baseChangeMap AddCommGrpCat.{v + 1}
+        (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq)
+      (.up ℤ)).app M
+    have he := congrArg G.mapDerivedCategory.map (injectiveExchange_representative f s K J q)
+    simp only [G.mapDerivedCategory.map_comp] at he
+    erw [G.mapDerivedCategory.map_comp, Category.assoc]
+    erw [reassoc_of% he]
+    have hn := G.mapDerivedCategoryFactors.inv.naturality a
+    dsimp only [Functor.comp_map] at hn
+    erw [← reassoc_of% hn]
+    have hl := strictLocalSections_unit_leray s
+      (pullback.snd f (Scheme.strictHenselizationStructuralMap s)) D
+      (P.mapDerivedCategoryPlus.obj K)
+      (P.mapDerivedCategoryFactors.inv.app M ≫ P.mapDerivedCategory.map q.inv)
+    dsimp (config := { failIfUnchanged := false }) only at hl
+    have hl' := congrArg
+      (fun z ↦ DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map a) ≫ z) hl
+    refine hl'.trans ?_
+    simp only [← DerivedCategory.Q.map_comp_assoc]
+    congr 1
+  )
 
 end AlgebraicGeometry.Etale
