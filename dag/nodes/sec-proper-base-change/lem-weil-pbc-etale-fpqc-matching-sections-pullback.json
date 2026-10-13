@@ -16,21 +16,22 @@
  },
  "proof": [
   {
-   "text": "The commuting pair defines l=(a,b):Z -> T_i times_S T_j, with projections a and b.",
+   "text": "Define the displayed terminal section map by the inverse-image unit, restriction along (a,id), and the chosen composition isomorphism. Identify sections at the identity object of each intermediate scheme with sections at the base change of the identity object of S, using the isomorphism given by the second projection of the pullback of id_S. Unit and composition-isomorphism naturality show that this identification conjugates the terminal section map to etaleSetSectionComparison. The two restriction maps agree by pullback.hom_ext: their projections to the intermediate scheme and the new base are equal.",
    "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply inverse image along l to the given overlap equality, then restrict to the identity etale object of Z. Naturality in sheaf morphisms moves the composition isomorphisms through the unit, and naturality in site objects moves the terminal restrictions through it. Associativity of the chosen composition isomorphisms and their unit equation combine successive pullbacks into the pullbacks along l followed by the two projections. The presheaf composition law combines the remaining restrictions.",
-   "uses": [
+    "def-pc-fibre-product",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
   },
   {
-   "text": "Both resulting fibre-product maps have first projection a (respectively b) and second projection id_Z, so pullback uniqueness identifies them with the displayed maps. Substitute the projection equations and eliminate equality to obtain exactly the transport along a g_i=b g_j, including its direction.",
+   "text": "Apply etaleSetSectionComparisonComposition to two successive triangle maps, and conjugate by the terminal section isomorphisms just described. Cancel the final isomorphism. This proves functoriality of the displayed terminal section map; heterogeneous equality accounts for the equality of composite structure morphisms given by Category.assoc.",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For j,k and a commuting cone a,b, let l=pullback.lift a b hab. Convert hcompat j k to heterogeneous equality and apply the terminal section map along l to both sides, using pullback.condition to identify the two base structure morphisms. Use the functoriality from the preceding step on each side. Substitute pullback.lift_fst and pullback.lift_snd to recover the maps along a and b. Convert heterogeneous equality back to precisely Eq.mp along hab.symm. Congruence and equality elimination are explicit private proved helpers; no extra hypothesis is introduced.",
    "uses": [
     "def-pc-fibre-product"
    ],
@@ -39,12 +40,13 @@
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-section-comparison-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09XN (lemma-describe-pullback), paragraph Let V: because s_i and s_j agree; Sites Tags 03CB and 03CC; detailed Lean glue by A3"
+  "place": "Tag 09XN, paragraph Let V; Sites Tags 03CB and 03CC. Lean proof by C1 using the existing section-comparison composition calculation, terminal pullback isomorphisms and the fibre-product universal property."
  },
  "mathlib_searches": [
   {
@@ -118,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T214704-L-1269142",
-  "kind": "interface",
+  "landing": "20261013T000422-L-2251724",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
