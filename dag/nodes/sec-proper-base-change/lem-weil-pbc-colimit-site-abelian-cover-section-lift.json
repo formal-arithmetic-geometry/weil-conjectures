@@ -15,34 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Use hQ to present R by a stage cover. Move its stage above i by filteredness and hcover; the covering presieve is finite by hfinite. For each covering member, x supplies a section of the generated subgroup. Expand it into a finite additive expression in generators. There are finitely many expressions in total.",
+   "text": "Present R by a stage covering presieve using hQ. Use a common stage of i and this stage, transport the presieve by hcover, and evaluate cocone naturality on its target. The private cover_above lemma proves that its transported cocone image is exactly R; map_comp_presieve and transported_map_presieve justify the presieve equation.",
    "uses": [
-    "def-weil-pbc-colimit-site-abelian-stage-image",
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For each generating restriction r, use surjectivity of the arrow colimit to lift it. Move its representative and the section stage together with the covering stage to a common stage. Eventual equality in the object colimit aligns both endpoints with the forward images of the prescribed cover source and generator source. Compose the lifted arrow with these endpoint transports. Eventual equality and filteredness impose all finitely many choices and endpoint equations at once. The resulting cocone images are precisely the original restriction arrows.",
+   "text": "The stage presieve T0 has a finite uncurry type by hfinite. Index its source objects and the given image-family sections by this type. Apply the proved finite-object section-lift theorem to obtain a refinement in Under i and representatives over all forward source images simultaneously.",
    "uses": [
-    "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-colimit-site-abelian-finite-object-section-lift",
+    "def-weil-pbc-colimit-site-abelian-stage-image"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the direct stage unit through the preceding stage adjunction to obtain transition maps between inverse images. Uniqueness of adjuncts proves their composition law and that alpha after transition equals the old alpha by h-alpha. Naturality along the lifted restriction arrows gives representatives of the generators, and additivity gives representatives of their sums and negatives at the common stage.",
+   "text": "Map T0 by the refinement functor. It remains covering by hcover. Evaluate V.w on W0 for the target equality; transported_map_presieve and transport_presieve_mem show every image arrow belongs to R. For each actual member of this image presieve, eliminate its map membership in a Prop-valued existence proof to obtain a representative. Functor.congr_hom gives the arrow transport formula. family_transport proves transport of the original section, and family_congr identifies values at equal arrows, without any compatibility hypothesis. Classical choice selects one section per actual member; duplicate representatives are harmless. Return the stage cover, target equality, membership map, section family and image equations.",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "def-weil-pbc-arrows-functor"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the cover using hcover. For each actual arrow of its image presieve choose one of the indexed representatives. Duplicate indices have the same prescribed target value x, so this still satisfies every alpha-image equation. The transported cover and this family satisfy the conclusion. An empty cover has the empty family and requires no section equations. No compatibility or gluing is used.",
-   "uses": [],
    "elementary": true
   }
  ],
@@ -51,14 +43,12 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-colimit-site-abelian-stage-image",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-colimit-site-abelian-finite-object-section-lift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, general-object presentation and finite-cover paragraphs; Tag 03CO for abelian coefficients. Expanded individual-representative part of the parent plan."
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), general-object presentation and finite-cover paragraph; Tag 03CO for additive coefficients. N4 formalizes the original route via the proved finite-object lifting lemma and explicit presieve/family transports."
  },
  "mathlib_searches": [
   {
@@ -138,12 +128,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261012T234216-L-2124111",
+  "landing": "20261013T011933-L-2765378",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -10475,3 +10475,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/N2/Sheaf.AlgebraicGeometry.CoherentIteratedSliceRelations (stage 3; reviewer PASS; after a return; landing 20261013T011932-L-2765005 (proof); batch 20261013T011921; modules 1; new nodes 0)
 - 01:19 L: merged deliver/N3/Sheaf.AlgebraicGeometry.FlatBaseChangeAffineDictionary (stage 3; reviewer PASS; first push; landing 20261013T011932-L-2765102 (interface); batch 20261013T011921; modules 3; new nodes 2)
 - 01:19 L: merged deliver/N3/Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian (stage 3; reviewer PASS; first push; landing 20261013T011933-L-2765211 (proof); batch 20261013T011921; modules 1; new nodes 0)
+- 01:19 L: merged deliver/N4/Sheaf.CategoryTheory.ColimitSiteAbelianCoverSectionLift (stage 3; reviewer PASS; first push; landing 20261013T011933-L-2765378 (interface); batch 20261013T011921; modules 2; new nodes 1)
