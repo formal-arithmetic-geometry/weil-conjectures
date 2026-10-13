@@ -11433,3 +11433,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:50 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Morphisms.TraitGenericRootModel (stage 3; reviewer PASS; first push; landing 20261013T065056-L-896098 (interface); batch 20261013T065054; modules 3; new nodes 2)
 - 06:50 L: merged deliver/A3/Sheaf.AlgebraicGeometry.SupportedRelativeOpenGluing (stage 3; reviewer PASS; first push; landing 20261013T065057-L-896205 (interface); batch 20261013T065054; modules 2; new nodes 1)
 - 06:50 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight (stage 3; reviewer PASS; first push; landing 20261013T065057-L-896327 (interface); batch 20261013T065054; modules 3; new nodes 2)
+- 06:50 L: merged deliver/D3/Sheaf.Paper.AffinePerfectKoszulPrincipalUnitPerfect (stage 3; reviewer PASS; first push; landing 20261013T065058-L-896555 (proof); batch 20261013T065054; modules 1; new nodes 0)
