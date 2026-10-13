@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono
+import Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEpi
 
 /-! # Unbounded section comparison from affine-basis acyclicity
 
@@ -58,6 +60,49 @@ theorem affineBasisSections_isIso_derivedUnit
     letI : S.Additive := inferInstanceAs
       ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙
         PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)
-    IsIso (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj F)) := by sorry
+    IsIso (S.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj F)) := by
+  dsimp
+  let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)
+  let : S.Additive := inferInstanceAs
+    ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙
+      PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)
+  let : IsGrothendieckAbelian.{u} X.Modules :=
+    RingedSpace.moduleGrothendieckAbelian X.toRingedSpace
+  obtain ⟨J, hJ, i, _, hi⟩ :=
+    CategoryTheory.Abelian.HasKInjectiveResolutions.exists_isKInjective F
+  let := hJ
+  let := hi
+  have hS : QuasiIso ((S.mapHomologicalComplex (ComplexShape.up ℤ)).map i) := by
+    apply (quasiIso_iff _).mpr
+    intro n
+    apply (quasiIsoAt_iff_isIso_homologyMap _ n).mpr
+    let := affineBasisSections_resolution_homology_mono X V hV F J i
+      hterms hcokernels hhomology n
+    let := affineBasisSections_resolution_homology_epi X V hV F J i
+      hterms hcokernels hhomology n
+    exact isIso_of_mono_of_epi _
+  let Q := HomotopyCategory.quotient
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)
+  have hQi : IsIso (DerivedCategory.Qh.map (Q.map i)) := by
+    apply (DerivedCategory.isIso_Qh_map_iff _).mpr
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hi
+  have hSi : IsIso (((S.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+      DerivedCategory.Qh).map (Q.map i))) := by
+    change IsIso (DerivedCategory.Qh.map
+      ((S.mapHomotopyCategory (ComplexShape.up ℤ)).map (Q.map i)))
+    apply (DerivedCategory.isIso_Qh_map_iff _).mpr
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).mpr hS
+  let := hQi
+  let := hSi
+  have : IsIso ((DerivedCategory.Qh ⋙ S.rightDerivedFunctor).map (Q.map i)) := by
+    change IsIso (S.rightDerivedFunctor.map (DerivedCategory.Qh.map (Q.map i)))
+    infer_instance
+  have hnat := S.rightDerivedFunctorUnit.naturality (Q.map i)
+  have hcomp : IsIso (S.rightDerivedFunctorUnit.app (Q.obj F) ≫
+      (DerivedCategory.Qh ⋙ S.rightDerivedFunctor).map (Q.map i)) := by
+    rw [← hnat]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((DerivedCategory.Qh ⋙ S.rightDerivedFunctor).map (Q.map i))
 
 end AlgebraicGeometry

@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-affine-basis-sections-resolution-homology-mono",
+ "kind": "statement",
+ "title": "Mono part of affine-basis section resolution comparison",
+ "statement": "Let X be a scheme [def-pc-scheme], V an affine open, and F,J integer-indexed complexes of module sheaves [def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category]. Suppose J is K-injective [def-pur-kinjective-complex] and i:F → J is a quasi-isomorphism. For every affine W contained in V, assume all positive cohomology groups [def-sc-sheaf-cohomology-functor] of each term of F, each differential cokernel of F, and each cohomology sheaf of F restricted to W vanish. For every integer n, the map H^n(Γ(V,F)) → H^n(Γ(V,J)) induced by i is a monomorphism of O_X(V)-modules. The section complexes are formed by termwise native module evaluation. Empty V is allowed; no boundedness or quasi-coherence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C2, lemma-alternating-cech-complex-complex-ss, singleton cover; Tag 071B, lemma-K-injective. Source TeX read in sandbox scratchpad/cohomology.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-kinjective-complex",
+  "def-sc-sheaf-cohomology-functor"
+ ],
+ "proof": [
+  {
+   "text": "Restrict F and its K-injective resolution J to V. Affine opens contained in V form a basis, restriction is exact, and restriction preserves K-injectivity. The singleton alternating Cech complex is the section complex.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the bounded-below acyclic Cech comparison to each good truncation tau_ge(-m) of F. Its bottom term is the specified differential cokernel; all other terms are original terms, so the term and cokernel vanishing hypotheses verify the acyclicity required for this comparison.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The cohomology-sheaf vanishing supplies the compatible tower resolution of Tag 071B, as used in Tag 08C2. Its section complexes have degreewise surjective transition maps. The degree-n homology of the singleton section complexes of truncations is eventually constant, since degrees n-1 through n+1 eventually stabilize. The first derived limit vanishes and the Milnor sequence identifies the limit homology with this stable value.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-derived-limit-eventually-iso",
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the tower resolution with J over F. The K-injective Hom comparison gives mutually inverse homotopy classes of comparison maps, and their composites with F agree with the resolution maps up to homotopy. Additive evaluation preserves these homotopies. Injective module sheaves are flasque and section-acyclic for the underlying abelian sheaf; exact conservative forgetting to abelian groups reflects the desired homology assertion. Empty V gives zero section complexes.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-injective-module-sheaf-H-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A class mapping to zero in the resolution maps to zero in the stable truncation homology and is thus already zero in the original section homology. This is injectivity of the homology map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-limit-eventually-iso",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-injective-module-sheaf-H-acyclic",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C2 singleton-cover proof, extracting the mono part of the degreewise homology comparison; Tag 071B for the compatible tower."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine basis acyclicity for terms differential cokernels and cohomology computes unbounded sections using K-injective resolutions",
+   "results": "{\"t\": \"2026-10-13T12:06:30Z\", \"tool\": \"leansearch\", \"query\": \"Affine basis acyclicity for terms differential cokernels and cohomology computes unbounded sections using K-injective resolutions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\"",
+   "results": "{\"t\": \"2026-10-13T12:03:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"homologyMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.LeftHomologyMapData.id\", \"CategoryTheory.ShortComplex.LeftHomologyMapData\", \"CategoryTheory.ShortComplex.leftHomologyMapIso\", \"CategoryTheory.ShortComplex.leftHomologyMapIso'\", \"CategoryTheory.ShortComplex.leftHomologyMapData\", \"CategoryTheory.ShortComplex.LeftHomologyMapData.instInhabited\", \"CategoryTheory.ShortComplex.LeftHomologyMapData.instSubsingleton\", \"CategoryTheory.ShortComplex.LeftHomologyMapData.instUnique\"], \"digest\": \"0a4163822f6fe310\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnit|quasiIso_iff_isIso",
+   "results": "{\"t\": \"2026-10-13T12:03:59Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorUnit|quasiIso_iff_isIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean\", \"Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean\", \"Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean\", \"Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean\", \"Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean\", \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\"], \"digest\": \"85b53d20e4ef448b\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections on an affine basis of a complex with acyclic terms cokernels and homology compare to a K-injective resolution in every cohomology degree",
+   "results": "{\"t\": \"2026-10-13T12:04:00Z\", \"tool\": \"leanfinder\", \"query\": \"Sections on an affine basis of a complex with acyclic terms cokernels and homology compare to a K-injective resolution in every cohomology degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.hasHomology\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.instQuasiIsoInt\\u03b9'\", \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\"], \"digest\": \"5a690d65b2e4f243\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBasisSectionsDerivedUnit",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Degreewise mono part of the unbounded section comparison in the proof of lem-sc-affine-basis-sections-derived-unit",
+   "via": [
+    "lem-sc-affine-open-sections-resolution-quasi-iso",
+    "lem-sc-qcoh-alternating-cech-resolution-quasi-iso",
+    "lem-sc-affine-basis-sections-derived-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisSectionsResolutionHomologyMono.lean",
+  "declaration": "AlgebraicGeometry.affineBasisSections_resolution_homology_mono",
+  "statement": "theorem affineBasisSections_resolution_homology_mono\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    (F J : CochainComplex X.Modules ℤ) [J.IsKInjective]\n    (i : F ⟶ J) [QuasiIso i]\n    (hterms : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.X n).restrict W.ι).H (q + 1)))\n    (hcokernels : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((cokernel (F.d (n - 1) n)).restrict W.ι).H (q + 1)))\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1))) (n : ℤ) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    Mono (HomologicalComplex.homologyMap\n      ((S.mapHomologicalComplex (ComplexShape.up ℤ)).map i) n)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T124315-L-3777742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T124315-L-3777742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
