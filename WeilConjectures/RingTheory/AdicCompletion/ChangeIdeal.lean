@@ -32,7 +32,8 @@ completions of an `A`-module `M` are canonically isomorphic, compatibly with the
 
 namespace AdicCompletion
 
-variable {A M : Type*} [CommRing A] [AddCommGroup M] [Module A M] {I J : Ideal A} {c d : ℕ}
+variable {A : Type*} [CommRing A] {I J : Ideal A} {M : Type*} [AddCommGroup M] [Module A M]
+  {c d : ℕ}
 
 lemma pow_mul_smul_top_le (h : J ^ d ≤ I) (k : ℕ) :
     (J ^ (d * k) • ⊤ : Submodule A M) ≤ I ^ k • ⊤ :=
@@ -64,8 +65,8 @@ lemma changeIdealMap_val (h : J ^ d ≤ I) (x : AdicCompletion J M) (k : ℕ) :
 lemma changeIdealMap_of (h : J ^ d ≤ I) (x : M) :
     changeIdealMap I J M h (of J M x) = of I M x := by
   ext k
-  rw [changeIdealMap_val, of_apply, of_apply, Submodule.mkQ_apply, Submodule.mkQ_apply,
-    Submodule.factor_mk]
+  rw [changeIdealMap_val, of_apply, of_apply]
+  rfl
 
 lemma changeIdealMap_comp_changeIdealMap (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hcd : 1 ≤ c * d)
     (x : AdicCompletion J M) :
@@ -87,7 +88,7 @@ inverse `(yₖ)ₖ ↦ (y_{cn} mod J^n M)ₙ`; it satisfies `θ ∘ ι_J = ι_I`
 (blueprint: `lem-weil-pbc-change-ideal-completion`) -/
 noncomputable def changeIdealCompletion (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 : 1 ≤ c)
     (hd1 : 1 ≤ d) : AdicCompletion J M ≃ₗ[A] AdicCompletion I M :=
-  LinearEquiv.ofLinear (changeIdealMap I J M hd) (changeIdealMap J I M hc)
+  LinearEquiv.ofLinearMap (changeIdealMap I J M hd) (changeIdealMap J I M hc)
     (LinearMap.ext fun y ↦ changeIdealMap_comp_changeIdealMap hd hc
       (Nat.one_le_iff_ne_zero.2 (Nat.mul_ne_zero (by omega) (by omega))) y)
     (LinearMap.ext fun x ↦ changeIdealMap_comp_changeIdealMap hc hd
@@ -126,10 +127,13 @@ noncomputable def changeIdealCompletionRingEquiv (hc : I ^ c ≤ J) (hd : J ^ d 
   __ := changeIdealCompletion (M := A) hc hd hc1 hd1
   map_mul' x y := by
     ext k
-    simp only [LinearEquiv.coe_toEquiv, Equiv.toFun_as_coe, LinearEquiv.coe_coe,
-      changeIdealCompletion_apply, changeIdealMap_val, val_mul]
-    rw [Submodule.factor_eq_factor, Submodule.factor_eq_factor, Submodule.factor_eq_factor,
-      map_mul]
+    change (changeIdealMap I J A hd (x * y)).val k =
+      (changeIdealMap I J A hd x * changeIdealMap I J A hd y).val k
+    rw [val_mul, changeIdealMap_val, changeIdealMap_val, changeIdealMap_val, val_mul]
+    obtain ⟨a, ha⟩ := Submodule.Quotient.mk_surjective _ (x.val (d * k))
+    obtain ⟨b, hb⟩ := Submodule.Quotient.mk_surjective _ (y.val (d * k))
+    rw [← ha, ← hb]
+    rfl
 
 lemma changeIdealCompletionRingEquiv_apply (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 : 1 ≤ c)
     (hd1 : 1 ≤ d) (x : AdicCompletion J A) :
