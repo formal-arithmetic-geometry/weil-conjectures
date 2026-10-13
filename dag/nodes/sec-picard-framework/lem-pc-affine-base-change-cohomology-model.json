@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-affine-base-change-cohomology-model",
+ "kind": "statement",
+ "title": "Degreewise affine base-change comparison and its canonical prime-localization square",
+ "statement": "Let R,A,R',A' be commutative rings and let f:R→A, g:R→R', g':A→A', f':R'→A' be ring maps whose Spec square is cartesian [def-pc-base-change, def-pc-scheme]. Let K in D_QCoh(Spec A), K' in D_QCoh(Spec A') [def-pc-derived-category], and phi:L(g')^*K→K' [def-pc-derived-pullback]. Supply K-flat coordinates c for phi [def-pc-single-complex-base-change-stalk-condition]. For each integer i, write b for the canonical derived comparison followed by Rf'_*phi [def-pc-derived-base-change-map, def-pc-derived-direct-image], H for degree-i cohomology, and F for restriction of A'-modules to R' followed by tilde [lem-weil-pbc-spec-module-tilde-sections]. There exist A'-modules U,V, an A'-linear map a:U→V, and isomorphisms eU:F(U)≅H(Lg^*Rf_*K), eV:F(V)≅H(Rf'_*K'), such that eU ∘ H(b)=F(a) ∘ eV (composition in diagram order). For every prime p of A', there exist additive equivalences from U_p,V_p [def-weil-pbc-module-localization] to the source and target of the canonical stalkComparison(c,p,i), making lV(a_p(x))=stalkComparison(c,p,i)(lU(x)) for all x. No invertibility condition on the stalk comparisons is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine proof: cohomology A′-linearity and displayed localization identity; equation-bc preceding Tag 0DJ8"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Represent K and K′ by affine module complexes using [lem-pc-affine-qcoh-derived-equivalence]. Compute affine pullback by [lem-pc-affine-derived-pullback-tensor-tilde], direct image by restriction of scalars, and preserve quasi-coherent cohomology using [lem-pc-derived-direct-image-preserves-qcoh]. The canonical derived adjunction/counit construction [def-pc-derived-base-change-map] identifies the composite b with the module tensor comparison followed by the morphism induced by phi. In degree i, [lem-pc-affine-derived-base-change-comparison-map] gives its tensor-algebra action and linearity. Transport across the canonical tensor-product identification with A′. Let U,V,a be these actual cohomology modules and linear map. Exact tilde gives eU,eV and the commuting cohomology square.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "def-pc-derived-base-change-map",
+    "lem-pc-affine-derived-base-change-comparison-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At p in Spec A′ use the source localization identity of [lem-pc-affine-derived-base-change-comparison-map]. Exact localization [lem-weil-pbc-localization-module-exact] commutes with target cohomology. Tilde stalks are module localizations [lem-weil-pbc-spec-tilde-stalk-localization]. The affine tensor/pullback identification identifies the localized comparison with the canonical tensor-stalk comparison. For the supplied K-flat coordinates c, exact stalks applied to c.e and c.e′ induce the representative cohomology isomorphisms. Their compatibility follows from the derived tensor model universal counit equations [def-pc-base-derived-tensor-cohomology-model] and c.represents [def-pc-single-complex-base-change-stalk-condition]. Forget scalar actions to obtain the additive equivalences lU,lV; naturality gives lV(a_p x)=stalkComparison(c,p,i)(lU x).",
+   "uses": [
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-base-change-map",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-affine-derived-base-change-comparison-map",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine proof: cohomology A′-linearity and displayed localization identity; equation-bc preceding Tag 0DJ8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In affine derived base change the cohomology comparison is a map of tensor algebra modules and its localizations are the canonical stalk comparisons",
+   "results": "Service unavailable: Internal Server Error. Search attempted; no verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the derived base change morphism for a cartesian square of affine schemes is a tensor algebra linear map whose prime localizations are the canonical stalk comparisons",
+   "results": "Eight hits: cotangent cohomology localization and Scheme.Pullback.Triplet tensor identities; none states this comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Ss]talk|[Bb]ase[Cc]hange.*[Cc]ohomology",
+   "results": "Ordinary affine morphism and cotangent base change only. Also searched Sheaf and WeilConjectures: module localization formulas exist but no canonical geometric degreewise square. Blueprint search for base change cohomology and 0DJ8 found no imported duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SingleComplexAffineBaseChange",
+  "group": "C4",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof of Tag 0DJ9: affine case, where the stalkwise condition is equivalent to the derived module base-change isomorphism; degreewise identifications and localized comparison square",
+   "via": [
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeCohomologyModel.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeCohomologyModel",
+  "statement": "theorem exists_affineBaseChangeCohomologyModel [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φg))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (K' : schemeDerivedCategory (Spec (.of A'))) (hK' : schemeDerivedQCohProperty (Spec (.of A')) K') (φ : (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K ⟶ K') (c : SingleComplexBaseChange.Coordinates (Spec.map (CommRingCat.ofHom φg')) K K' φ) (i : ℤ) : let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R') let H := DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i let b := schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq.w K ≫ (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).map φ ∃ (U V : ModuleCat.{u} A') (a : U ⟶ V) (eU : F.obj U ≅ H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom φg))).obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf))).obj K))) (eV : F.obj V ≅ H.obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).obj K')), eU.hom ≫ H.map b = F.map a ≫ eV.hom ∧ ∀ p : PrimeSpectrum A', let t := SingleComplexBaseChange.stalkComparison (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq c p i ∃ (lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk t).left) (lV : LocalizedModule p.asIdeal.primeCompl V ≃+ (Arrow.mk t).right), ∀ x, lV (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = t (lU x)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T082335-L-1632118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T082335-L-1632118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

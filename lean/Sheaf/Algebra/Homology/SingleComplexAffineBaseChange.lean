@@ -7,11 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel
+import Mathlib.RingTheory.LocalProperties.Exactness
 
 /-! # The affine single-complex base-change criterion
 
@@ -83,6 +80,41 @@ theorem singleComplexAffineBaseChange
         (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg))
         (Spec.map (CommRingCat.ofHom φg')) sq.w K ≫
       (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).map φ) := by
-  sorry
+  obtain ⟨c⟩ := SingleComplexBaseChange.nonempty_coordinates
+    (Spec.map (CommRingCat.ofHom φg')) K K' φ
+  apply (_root_.DerivedCategory.isIso_iff _ _).mpr
+  intro i
+  obtain ⟨U, V, a, eU, eV, hcomm, hlocal⟩ :=
+    exists_affineBaseChangeCohomologyModel R A R' A' φf φg φg' φf' sq K hK K' hK' φ c i
+  have ha : IsIso a := by
+    apply (ConcreteCategory.isIso_iff_bijective a).mpr
+    apply bijective_of_localized_maximal a.hom
+    intro J hJ
+    let p : PrimeSpectrum A' := ⟨J, inferInstance⟩
+    obtain ⟨lU, lV, hl⟩ := hlocal p
+    have ht := (ConcreteCategory.isIso_iff_bijective _).mp (h_stalk c p i)
+    have hb : Function.Bijective
+        (fun x ↦ lV (LocalizedModule.map J.primeCompl a.hom x)) := by
+      have heq : (fun x ↦ lV (LocalizedModule.map J.primeCompl a.hom x)) =
+          (fun x ↦ SingleComplexBaseChange.stalkComparison
+            (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
+            (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg'))
+            sq c p i (lU x)) := funext hl
+      rw [heq]
+      exact ht.comp lU.bijective
+    refine ⟨fun x y h ↦ hb.injective (congrArg lV h), ?_⟩
+    intro y
+    obtain ⟨x, hx⟩ := hb.surjective (lV y)
+    exact ⟨x, lV.injective hx⟩
+  have he : IsIso (eU.hom ≫
+      (DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i).map
+        (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom φf))
+          (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg))
+          (Spec.map (CommRingCat.ofHom φg')) sq.w K ≫
+          (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).map φ)) := by
+    rw [hcomm]
+    infer_instance
+  exact (isIso_comp_left_iff eU.hom _).mp he
 
 end AlgebraicGeometry

@@ -28,73 +28,38 @@
  ],
  "proof": [
   {
-   "text": "Write the affine cartesian square as S=Spec(R), X=Spec(A), S'=Spec(R') and X'=Spec(A') with A'=A\\otimes_R R'. Under the affine quasi-coherent derived equivalence, K and K' correspond to complexes M^\\bullet of A-modules and N^\\bullet of A'-modules, and the derived direct images and pullbacks in the comparison map correspond to derived module tensors. Thus the comparison is represented by the composite M^\\bullet\\otimes_R^\\mathbf L R'\\to M^\\bullet\\otimes_A^\\mathbf L A'\\to N^\\bullet in D(R').",
+   "text": "Choose existing K-flat coordinates for phi from [def-pc-single-complex-base-change-stalk-condition]. For each degree i, apply [lem-pc-affine-base-change-cohomology-model] to obtain U,V,a, cohomology identifications, and additive localization identifications commuting with the stalk comparison.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-derived-direct-image-preserves-qcoh",
-    "lem-pc-affine-derived-base-change-comparison-map"
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-affine-base-change-cohomology-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ8, proof after affine reduction: affine identifications and the displayed module comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "The given morphism L(g')^*K\\to K' corresponds to a morphism M^\\bullet\\otimes_A^{\\mathbf L}A'\\to N^\\bullet in D(A'), so its maps on cohomology are A'-linear. Composing it with the comparison morphism c:M^\\bullet\\otimes_R^{\\mathbf L}R'\\to M^\\bullet\\otimes_A^{\\mathbf L}A' [lem-pc-affine-derived-base-change-comparison-map], whose cohomology maps H^i(c) are A'-linear by that statement, and taking cohomology gives an A'-linear map H^i(M^\\bullet\\otimes_R^\\mathbf L R')\\to H^i(N^\\bullet) for every i.",
+   "text": "For every maximal ideal J of A′, regard J as a prime. The hypothesis makes its stalk comparison bijective. Compose with the additive source equivalence to obtain bijectivity of lV after a_J; cancel the target additive equivalence to deduce bijectivity of a_J. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to a, so it is an isomorphism of A′-modules.",
    "uses": [
-    "def-pc-derived-category",
-    "lem-pc-affine-derived-base-change-comparison-map"
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ8 affine proof: 'Equivalently, it is that for all i ...'"
-   }
+   "elementary": false
   },
   {
-   "text": "At a compatible prime x'=\\mathfrak q' of A', with images x=\\mathfrak q of A and s'=\\mathfrak p' of R', s=\\mathfrak p of R, localize the A'-linear map of Step 2 at \\mathfrak q' (apply -\\otimes_{A'}A'_{\\mathfrak q'}). For the first arrow, the localization identities and compatibility of [lem-pc-affine-derived-base-change-comparison-map] identify H^i(c)\\otimes_{A'}A'_{\\mathfrak q'} with H^i(M^\\bullet_{\\mathfrak q}\\otimes^\\mathbf L_{R_{\\mathfrak p}}R'_{\\mathfrak p'})\\otimes_{A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}}A'_{\\mathfrak q'}\\to H^i(M^\\bullet_{\\mathfrak q}\\otimes^\\mathbf L_{A_{\\mathfrak q}}A'_{\\mathfrak q'}); no model of M^\\bullet\\otimes_R^{\\mathbf L}R' as a complex of A'-modules is used. For the second arrow, both P^\\bullet\\otimes_A A' (the model of that statement) and N^\\bullet are complexes of A'-modules, and localization at A'\\setminus\\mathfrak q' is exact [lem-weil-pbc-localization-module-exact], so it commutes with kernels and images of differentials and preserves quasi-isomorphisms; hence H^i(C)_{\\mathfrak q'}\\cong H^i(C_{\\mathfrak q'}) for C=P^\\bullet\\otimes_A A',N^\\bullet, and the localized second arrow is H^i of the localization M^\\bullet_{\\mathfrak q}\\otimes^\\mathbf L_{A_{\\mathfrak q}}A'_{\\mathfrak q'}\\to N^\\bullet_{\\mathfrak q'} of the given morphism. Under the affine identifications of stalks with localizations [lem-weil-pbc-spec-tilde-stalk-localization] and of derived pullback with derived tensor [lem-pc-affine-derived-pullback-tensor-tilde], K_x=M^\\bullet_{\\mathfrak q}, K'_{x'}=N^\\bullet_{\\mathfrak q'}, \\mathcal O_{S,s}=R_{\\mathfrak p}, \\mathcal O_{S',s'}=R'_{\\mathfrak p'}, \\mathcal O_{X,x}=A_{\\mathfrak q}, \\mathcal O_{X',x'}=A'_{\\mathfrak q'}, so the localized map is the canonical stalk map of the hypothesis.",
+   "text": "Restriction of scalars and tilde preserve this isomorphism. The commuting cohomology square identifies eU.hom followed by H^i(b) with F(a) followed by eV.hom, an isomorphism; cancel eU.hom. Thus H^i(b) is an isomorphism in every degree. The derived-category cohomology criterion DerivedCategory.isIso_iff [def-weil-abstract-derived-category] shows b is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-affine-derived-base-change-comparison-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ8 affine proof: localization identity immediately before 'we see that these two conditions are equivalent'"
-   }
-  },
-  {
-   "text": "The stalk hypothesis therefore says that the map H^i(M^\\bullet\\otimes_R^\\mathbf L R')\\to H^i(N^\\bullet) is bijective after localization at every maximal ideal of A' (maximal ideals are primes and are included among the compatible primes). By the module localization criterion [lem-weil-pbc-linear-map-bijective-at-maximal-localizations], this cohomology map is bijective for every i. Hence the displayed map of complexes is a quasi-isomorphism, so the comparison morphism in D(R') is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ8 affine proof: conclusion via Algebra, Lemma 00HN and cohomology"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
   "def-weil-abstract-derived-category",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-affine-derived-base-change-comparison-map",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-derived-direct-image-preserves-qcoh",
-  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-spec-tilde-stalk-localization"
+  "lem-pc-affine-base-change-cohomology-model",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8, proof after affine reduction in Lemma single-complex-base-change-condition"
+  "place": "Tag 0DJ8, affine proof: cohomology A′-linearity and displayed localization identity; equation-bc preceding Tag 0DJ8"
  },
  "mathlib_searches": [
   {
@@ -208,5 +173,15 @@
   "group": "T1",
   "result": "fix",
   "note": "module-only formulation (model L, localized model comparison, conclusion in ModuleCat D(B)) dropped the node's geometric K, K' in D_QCoh, L(g')^*K->K', stalk map and pullback/direct-image comparison and absorbed proof step 1; restated as affine case of the qcqs family: IsPullback of Spec.map squares, schemeDerivedQCohProperty K/K', phi, StalkCondition, IsIso(schemeDerivedBaseChangeMap ≫ Rf'_* phi); no conjuncts, no let/letI/inline instances; added module stmt_deps reverted; reverted the delivery's statement correction of the item (stmt_deps kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T082335-L-1632118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
