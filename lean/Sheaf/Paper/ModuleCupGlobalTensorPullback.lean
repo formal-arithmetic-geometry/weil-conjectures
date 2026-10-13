@@ -12,8 +12,8 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
-import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute
+import Sheaf.Paper.GlobalTensorPullbackUnderivedData
+import Sheaf.Paper.GlobalTensorPullbackDerivedData
 
 /-! # Global ringed-space pullback comparisons
 
@@ -176,7 +176,17 @@ theorem globalRingedSpace_derivedTensor_pullback_comparison :
             (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ)).kFlat M →
               moduleCup_globalTensorDiagram X P L α δ
                 ((HomotopyCategory.quotient _ _).obj K)
-                ((HomotopyCategory.quotient _ _).obj M) := by sorry
+                ((HomotopyCategory.quotient _ _).obj M) := by
+  obtain ⟨e, he, P, hP, hm, hadd, mon, adj, hcounit⟩ :=
+    exists_globalTensorPullback_underived_data X
+  let := hadd
+  let := mon
+  let := adj.isLeftAdjoint
+  obtain ⟨L, α, hL, habs, hflat, δ, hδ, hflatδ⟩ :=
+    exists_globalTensorPullback_derived_data X e he P hP hm
+  exact ⟨e, he, P, hP, hm, hadd, mon, adj, hcounit,
+    L, α, hL, habs, hflat, δ, hδ, hflatδ⟩
+
 
 end
 end AlgebraicGeometry.Scheme.Modules

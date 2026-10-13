@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-global-tensor-pullback-monoidal-normalization",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Strong tensor constraint compatible with the global counit",
+ "statement": "For a scheme X, an evaluation equivalence e from modules on its global sections point to Γ(X,O_X)-modules, an additive functor P given on objects and maps by inverse image of e.inverse followed by change of rings along toGlobalSectionsPoint X, and any adjunction P ⊣ Γ(X,-), there exists a strong monoidal structure on P whose tensor constraint composed with P of the concrete section tensor map and the counit at M tensor N equals the tensor of the counits at M and N for every pair of O_X-modules. The point, inverse image, change of rings and section tensor map are those of def-pc-global-derived-rhom, lem-pc-kflat-pullback-preservation and lem-sc-module-cup-naive-map-chain.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/079U",
+  "place": "Modules Lemma 17.16.4 (cited by 079U); Tags 008A/008Y for the pullback adjunction; Tag 0FKU for the section tensor map"
+ },
+ "stmt_deps": [
+  "def-pc-global-derived-rhom",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-sc-module-cup-naive-map-chain"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete inverse-image and extension-of-scalars formulas to construct a tensor constraint. On local generators it multiplies the two O_X coefficients; its inverse, associativity, and unit identities follow from the corresponding tensor identities. Transport this constraint across point evaluation and the prescribed object/map equations to P. The evaluation counit identity holds on pure tensor generators, and linearity plus sheafification extends it to every section. For the given adjunction, transport the constraint through the unique isomorphism between left adjoints of the same right adjoint; compatibility of the isomorphism with counits preserves the equation. This also treats zero modules and the empty scheme.",
+   "uses": [
+    "def-pc-global-derived-rhom",
+    "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-derived-rhom",
+  "lem-sc-module-cup-naive-map-chain"
+ ],
+ "proof_origin": {
+  "by": "E4 worker following Stacks with explicit categorical transport",
+  "document": "https://stacks.math.columbia.edu/tag/079U",
+  "place": "Modules Lemma 17.16.4 (cited by 079U); Tags 008A/008Y for the pullback adjunction; Tag 0FKU for the section tensor map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint on sheaves of modules has an absolute left derived tensor comparison through K flat resolutions",
+   "results": "Service returned Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived strong monoidal functor K-flat pullback tensor comparison; tensor constraint counit global sections",
+   "results": "Found sheaf pullback adjunction/free-module comparisons and flat tensor characterizations, but no matching normalized global tensor theorem. Ordinary pullback is already available as RingedSpace.exists_tensorModulePullback. The missing global comparisons are not stated.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*counit|counit.*tensor; leftDerived.*Monoidal|Monoidal.*leftDerived; globalSectionsFunctor_isEquivalence_of_unique; blueprint_refs search tensor pullback and global sections point",
+   "results": "Mathlib Adjunction.map_μ_comp_counit_app_tensor supplies a generic counit identity but requires compatible monoidal adjunction data. PointModuleEvaluationEquivalence supplies evaluation equivalence. WeilConjectures LeftDerivedFunctor.Monoidal requires exactness and cannot apply to arbitrary global pullback. Blueprint searches returned no exact duplicate.",
+   "date": "2026-10-14",
+   "verdict": "supporting results, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGlobalTensorPullback",
+  "date": "2026-10-14",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "global cup pairing: Strong tensor constraint compatible with the global counit",
+   "via": [
+    "lem-sc-module-cup-global-tensor-pullback",
+    "lem-sc-module-cup-kinjective-target",
+    "lem-sc-module-cup-naive-derived-compatibility",
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization",
+  "file": "lean/Sheaf/Paper/GlobalTensorPullbackMonoidalNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.globalTensorPullback_monoidal_normalization",
+  "statement": "theorem globalTensorPullback_monoidal_normalization\n    (e : SheafOfModules.{u} (moduleRings (globalSectionsPoint X)) ≌\n        ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n      (he : Nonempty (e.functor ≅ RingedSpace.globalSectionsFunctor (globalSectionsPoint X)))\n      (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤\n        SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (h : ∀ M, P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base\n          X.toRingedSpace.sheaf (globalSectionsPoint X).sheaf\n            ⟨(toGlobalSectionsPoint X).hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule (toGlobalSectionsPoint X).hom.base\n          (globalSectionsPoint X).sheaf (e.inverse.obj M)))\n      (hm : ∀ {M N} (a : M ⟶ N), P.map a = eqToHom (h M) ≫\n        SheafOfModules.changeOfRingsHom.{u, u, u}\n          (CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base\n            X.toRingedSpace.sheaf (globalSectionsPoint X).sheaf\n              ⟨(toGlobalSectionsPoint X).hom.c⟩)\n          (TopCat.Sheaf.inverseImageModule (toGlobalSectionsPoint X).hom.base\n            (globalSectionsPoint X).sheaf (e.inverse.obj M))\n          (TopCat.Sheaf.inverseImageModuleMap (toGlobalSectionsPoint X).hom.base\n            (globalSectionsPoint X).sheaf (e.inverse.obj M) (e.inverse.map a)) ≫\n          eqToHom (h N).symm)\n    [P.Additive]\n    (adj : P ⊣ RingedSpace.globalSectionsFunctor X.toRingedSpace) :\n    ∃ mon : P.Monoidal,\n      letI := mon\n      ∀ M N : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n        Functor.LaxMonoidal.μ P\n            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj M)\n            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj N) ≫\n          P.map (moduleCup_sectionTensorMap X M N) ≫ adj.counit.app (M ⊗ N) =\n        adj.counit.app M ⊗ₘ adj.counit.app N",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T162409-L-1518989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T162409-L-1518989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
