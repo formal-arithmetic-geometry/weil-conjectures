@@ -10956,3 +10956,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: returned deliver/C3/Sheaf.AlgebraicGeometry.TorsionControlledAffineAlgebraization (reviewer RETURN: (the landing tools, head e0ca7e57b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 03:41 L: returned deliver/R4/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq (reviewer RETURN: (the landing tools, head 65a306945) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 03:42 L: merged deliver/A4/Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor (stage 3; reviewer PASS; first push; landing 20261013T034201-L-3765196 (interface); batch 20261013T034159; modules 2; new nodes 1)
+- 03:42 L: merged deliver/C2/Sheaf.AlgebraicGeometry.KoszulOpenConeComparison (stage 3; reviewer PASS; first push; landing 20261013T034202-L-3765379 (proof); batch 20261013T034159; modules 1; new nodes 0)
