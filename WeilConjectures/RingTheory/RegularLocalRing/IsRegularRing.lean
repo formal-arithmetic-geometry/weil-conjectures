@@ -32,12 +32,12 @@ universe u
 
 open IsLocalRing CategoryTheory
 
-namespace IsRegularLocalRing
-
 variable {R : Type u} [CommRing R]
 
+namespace Ideal
+
 /-- The map `R ⧸ p → κ(p)` is a localization at `R \ p` as `R`-modules. -/
-instance isLocalizedModule_residueField (p : Ideal R) [p.IsPrime] :
+instance isLocalizedModule_quotient_residueField (p : Ideal R) [p.IsPrime] :
     IsLocalizedModule p.primeCompl
       (IsScalarTower.toAlgHom R (R ⧸ p) p.ResidueField).toLinearMap := by
   rw [isLocalizedModule_iff_isLocalization]
@@ -55,6 +55,10 @@ instance isLocalizedModule_residueField (p : Ideal R) [p.IsPrime] :
       exact ⟨a, ha, rfl⟩
   rw [this]
   infer_instance
+
+end Ideal
+
+namespace IsRegularLocalRing
 
 /-- **Localizations of regular local rings are regular** [Stacks 00OE]. -/
 theorem isRegularLocalRing_localization [IsRegularLocalRing R] (p : Ideal R) [p.IsPrime] :
