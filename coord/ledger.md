@@ -11261,3 +11261,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/J2/Sheaf.AlgebraicGeometry.AnnihilatorStalkLocalLift (stage 3; reviewer PASS; after a return; landing 20261013T054221-L-444004 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/J2/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineModel (stage 3; reviewer PASS; first push; landing 20261013T054221-L-444102 (interface); batch 20261013T054206; modules 3; new nodes 2)
 - 05:42 L: merged deliver/J3/Sheaf.RingTheory.DirectedUnionSubringsFlatModule (stage 3; reviewer PASS; first push; landing 20261013T054222-L-444220 (proof); batch 20261013T054206; modules 1; new nodes 0)
+- 05:42 L: merged deliver/K1/Sheaf.AlgebraicGeometry.SourceCocycleExactRestriction (stage 3; reviewer PASS; first push; landing 20261013T054222-L-444364 (proof); batch 20261013T054206; modules 1; new nodes 0)

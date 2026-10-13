@@ -14,13 +14,27 @@
  ],
  "proof": [
   {
-   "text": "evaluate the single-source cocycle degreewise using sourceFreeSectionsComplexIso. Its class in the sections complex is the image of the Hom-complex class under the homology functor. Apply the natural transformation degreewise. Its naturality with respect to the cycle inclusion and homology projection identifies the restricted cycle with the image of the homology section. Exact inverse image and strict-local global sections preserve kernels and cokernels, hence identify this projection with the homology projection of the mapped complex. The quotient localization factorization is natural in the complex map; cancel its inverse with the homology factorization. The exact-functor homology comparisons are natural in r inverse, so transport along r gives precisely the displayed composite. Boundaries map to boundaries; thus the calculation descends to cohomology. Zero cycles and all integer degrees obey the same calculation. The transformation is arbitrary, so no stalk comparison is used.",
+   "text": "Compute the cocycle class using leftHomologyData.π_comp_homologyIso_inv. Apply the chain map given by sourceFreeSectionsComplexIso followed by the degreewise transformation τ. For an exact functor, ShortComplex.LeftHomologyData.homologyπ_comp_homologyIso_hom and mapHomologyIso_eq identify the mapped homology projection with the mapped original projection after mapCyclesIso. Apply this for inverse image U and strict-local sections G. The composite cycle inclusion is G.map (U.map (L.iCycles n)); it is monic. Cancel this inclusion to identify the mapped cycle with τ applied to free-generator evaluation of L.liftCycles f. This follows from cyclesMap_i, cyclesIso_inv_comp_iCycles, Cochain.fromSingleEquiv_fromSingleMk and naturality of τ for L.iCycles n. Naturality for L.homologyπ n now gives the restriction identity before localization.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
-    "def-weil-pbc-strict-henselization-restriction",
-    "lem-weil-pbc-source-localized-cocycle-homology"
+    "def-weil-pbc-strict-henselization-restriction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove the generic exact-functor transport identity: the inverse homology localization factorization, followed by homology of F.mapDerivedCategoryFactors.inv and F.mapDerivedCategory.map t, then the inverse derived homology comparison, equals the complex homology comparison followed by F.map of the original localized homology transport. Use naturality of mapDerivedCategoryHomologyFunctorIso.inv at t, cancel its hom component, and apply mapDerivedCategoryHomologyFunctorIso_hom_app_Q. Apply this identity first to G and then to U, postcomposing the latter identity with its hom comparison. Naturality of homologyFunctorFactors.inv for the degreewise transformation τ removes Q.map from that map.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded-below homology comparison is the unbounded comparison restricted along the inclusion, since mapDerivedCategoryPlusCompatibility is Iso.refl. Substitute the restriction calculation of step 1 into the transport calculation of step 2. Use naturality of τ for b = homologyFunctorFactors.inv.app L followed by Hⁿ(r.inv), and sourceFreeSectionsEquiv_comp, to obtain the explicitly constructed sourceCocycleHomologySection. No K-injectivity or localized-cocycle comparison theorem is used, only the definition of that section.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "lem-weil-pbc-source-localized-cocycle-homology"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -29,9 +43,9 @@
   "lem-weil-pbc-source-localized-cocycle-homology"
  ],
  "proof_origin": {
-  "by": "agent V3, explicit compatibility calculation from the cited constructions",
+  "by": "agent K1, complete Lean proof from cycle projections and exact-functor naturality",
   "document": "Stacks Project",
-  "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison"
+  "place": "Tags 03Q9 (theorem-higher-direct-images), final paragraph, and 03QO (lemma-vanishing-etale-cohomology-strictly-henselian); explicit compatibility of the cited constructions"
  },
  "mathlib_searches": [
   {
@@ -129,10 +143,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T040803-L-3953831",
-  "kind": "interface",
+  "landing": "20261013T054222-L-444364",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
