@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-fibre-product"
+ ],
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "lem-sbc-power-series-punctured-finite-model",
+ "title": "Finite coefficient model of a cover over the punctured power-series base",
+ "statement": "Let $B$ be a Noetherian local ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth], $n>0$, $T=\\operatorname{Spec}(B[[X_1,\\ldots,X_n]])$ [def-weil-affine-spectrum, def-weil-pbc-multivariate-power-series], and $t:T\\to\\operatorname{Spec}B$ the constants-induced morphism. Let $V\\subsetneq T$ be open, containing every point whose contraction is not the closed point of $\\operatorname{Spec}B$ [def-weil-pbc-scheme-conventions]. Let $p:E\\to T$ be finite and etale over $V$ [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Write $U$ for the complement of the closed point in $\\operatorname{Spec}B$ and $W=t^{-1}U$. There exist a finite $g:Y\\to\\operatorname{Spec}B$, with depth at least two at all source stalks above the complement of $U$, and an isomorphism $E|_W\\cong(Y\\times_{\\operatorname{Spec}B}T)|_W$ over $W$ [def-pc-fibre-product]. No depth hypothesis on $E$ outside $V$, no isomorphism over all of $T$, and no etaleness of $g$ is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYA, paragraphs constructing W0 and C0 and their comparison over U times_X Y; Tags 0EY9 and 0EY6"
+ },
+ "proof": [
+  {
+   "text": "The zero section s = Spec constantCoeff has inverse image of V equal to U. Points of U are included by haway, since t composed with s is the identity. The closed point maps to the closed point of the local power-series spectrum; every open containing that point is the whole spectrum, which contradicts properness of V. Pull p restricted to V back along the zero section restricted to U to get the finite etale cover W0 of U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The boundary of U is the closed point of Spec B. Its stalk is B, so has depth at least two. Apply the finite depth-two extension theorem to W0 -> U to obtain a finite g:Y -> Spec B, the stated boundary depth, and a restriction isomorphism over U.",
+   "uses": [
+    "lem-sbc-depth-two-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On W = t inverse U, the covers p restricted to W and the pullback of W0 are finite etale and restrict to the same cover on the zero section U. Apply the fully faithful restriction argument of Tag 0EY9: with I the variables ideal, the sections on U of each truncated polynomial algebra are B[X]/I^k by depth-two Hartogs; their inverse limit is the complete power-series ring. The constants inclusion is flat by the polynomial-adic completion equivalence and flatness of Noetherian completion; the flat local depth formula gives depth at least two at every point outside W. Apply depth-two Hartogs restriction to the structure module on the power-series spectrum to identify its sections with those on W. Thus the sections of W and of its formal completion agree, and finite locally free coherent sheaves are fully faithfully detected by completion (Tag 0EKP). Etale covers of the nilpotent thickenings are uniquely determined by their restriction to U (Tag 0EL8). Hence the section comparison isomorphism and its inverse lift to W, and faithfulness makes the composites identities. Compose this with the pullback of the extension isomorphism over U to obtain e and its equation over W. This works for the empty cover as well.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-finite-extension",
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0EYA and 0EY9, comparison over the punctured base; finite coefficient extension by 0EY6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale power series cover on inverse image of punctured local spectrum has finite coefficient model",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite depth two extension over power series ring descends to coefficient ring",
+   "results": "8 hits, all commutative-algebra results on univariate power series (ideals, Noetherian rings, Weierstrass factorization); no scheme comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "power.series.*(etale|tensor)|depth.*base.change",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two local computation: finite etale covers agree on the punctured zero section, hence over the inverse image of the punctured coefficient spectrum.",
+   "via": [
+    "lem-sbc-power-series-depth-two-base-change",
+    "lem-sbc-power-series-finite-etale-extension",
+    "lem-sbc-power-series-test-finite-extension-flat",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedFiniteModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_power_series_punctured_finite_model",
+  "statement": "theorem exists_power_series_punctured_finite_model\n    (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)\n    (n : ℕ) (hn : 0 < n)\n    (V : (Spec (.of (MvPowerSeries (Fin n) B))).Opens) (hproper : V ≠ ⊤)\n    (haway : ∀ v, (Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n)))) v ≠\n      IsLocalRing.closedPoint B → v ∈ V)\n    {E : Scheme.{u}} (p : E ⟶ Spec (.of (MvPowerSeries (Fin n) B)))\n    [IsFinite p] [Etale (p ∣_ V)]\n    (U : (Spec (.of B)).Opens)\n    (hU : ∀ x, x ∈ U ↔ x ≠ IsLocalRing.closedPoint B) :\n    let t := Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n) (R := B)))\n    let W := t ⁻¹ᵁ U\n    ∃ (Y : Scheme.{u}) (g : Y ⟶ Spec (.of B)), IsFinite g ∧\n      (∀ z : Y, g z ∉ U →\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := Y.presheaf.stalk z) (Y.presheaf.stalk z)) ∧\n      ∃ e : (p ⁻¹ᵁ W).toScheme ≅ ((Limits.pullback.snd g t) ⁻¹ᵁ W).toScheme,\n        e.hom ≫ (Limits.pullback.snd g t) ∣_ W = p ∣_ W",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T111836-L-3046711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T111836-L-3046711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
