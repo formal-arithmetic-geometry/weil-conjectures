@@ -14,42 +14,48 @@
  ],
  "proof": [
   {
-   "text": "Identify opens of the subspace U with pairs (W, W ⊆ U). This gives an equivalence with Opens(X)/U: the forward map sends an open of U to its image, which is open in X since U is open, and the inverse takes the subspace intersection. The inclusion morphisms and union-cover conditions agree. The ring sheaf has values R(W) and the module restriction has values P(W). Thus the associated equivalence of module categories identifies termwise overFunctor with ordinary restriction to the open subspace.",
+   "text": "Regard the pair (X,R) as a ringed space. Let V be overFunctor on modules and let L be the explicitly constructed extension-by-zero presheaf followed by module sheafification. Apply [lem-sc-derived-open-restriction-adjunction-exact] to obtain finite-limit and finite-colimit preservation for both functors and an adjunction L left adjoint to V. The component of its unit is invertible by [lem-sc-module-extension-by-zero-unit-isiso]. Applying L termwise to any acyclic localized test complex F produces an acyclic global complex G; the unit components, natural in the differentials, give F isomorphic to V(G).",
    "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-module-extension-by-zero-unit-isiso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the comparison V(Tot(G tensor P)) isomorphic to Tot(V(G) tensor V(P)). The natural module tensor comparison [lem-pc-open-localized-tensor-natural] gives the isomorphism in each bidegree. Its naturality with respect to the differential in each factor yields an isomorphism of bicomplexes. The functor V is additive and preserves coproducts (it is pushforward along the cocontinuous slice-forgetful functor with identity ring map). Apply the source-library HomologicalComplex2.mapTotalIso and the total functor to that bicomplex isomorphism. This commutes with the signed differential and infinite direct sums and works for unbounded complexes. The additive tensor structures used in this assembly are supplied by [lem-pc-sheaf-modules-tensor-closed].",
+   "uses": [
+    "lem-pc-open-localized-tensor-natural",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves",
     "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold [def-pc-kflat-complex] and introduce an arbitrary acyclic localized test complex F. K-flatness of P makes Tot(G tensor P) acyclic. Exactness of V from the first step makes its restriction acyclic. Transport this acyclicity through the total-tensor comparison from the second step, and then through tensoring the unit complex isomorphism F isomorphic to V(G) with V(P). This proves the defining test for F. For an empty open the same exact functors and invertible unit apply, with no points or nonzero assumptions.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-module-extension-by-zero-unit-isiso"
    ],
    "elementary": true
-  },
-  {
-   "text": "For x in U, neighborhoods contained in U are cofinal among neighborhoods in X at x: replace any neighborhood W by W ∩ U. The same transition maps identify the stalk ring and each stalk module of the restriction with the original stalks. These identifications commute with differentials, tensor products and direct sums. By the forward stalk K-flat criterion the stalk complex of P at x is K-flat, so the restricted stalk complex is K-flat as well.",
-   "uses": [
-    "lem-pc-kflat-stalk-criterion",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the reverse stalk criterion on the open subspace. Transport along the module-category equivalence from the first step, which identifies all acyclic test complexes and their total tensors, to conclude K-flatness on the localized site. If U is empty there are no stalks and the criterion is vacuous.",
-   "uses": [
-    "lem-pc-kflat-stalk-criterion",
-    "def-pc-kflat-complex",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "def-pur-localized-ringed-site",
-  "lem-pc-kflat-stalk-criterion"
+  "lem-pc-open-localized-tensor-natural",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-module-extension-by-zero-unit-isiso"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F2",
+  "group": "E3",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 06YB (cohomology-lemma-check-K-flat-stalks), applied to the open subspace; Tag 03DH (sites-modules-section-localize); localized-site formulation and Lean assembly by F2"
+  "place": "Tags 03DI (extension-by-zero construction), 03DJ (exactness), 00A7 (invertible open extension unit), and 01CD (tensor restriction); direct acyclic-test proof using exact extension by zero and natural totalization, assembled in Lean by E3."
  },
  "mathlib_searches": [
   {
@@ -131,10 +137,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T121840-L-3558238",
-  "kind": "interface",
+  "landing": "20261013T141524-L-378527",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
