@@ -14,32 +14,28 @@
  },
  "proof": [
   {
-   "text": "At K-flat complexes P, T, U, compute the two first-factor shift-one and inverse-associator composites on each total-tensor summand (p,q,r). Both use the inverse module associator and replace p by p+1, with no extra scalar. The differential coefficients are -1, (-1)^p, (-1)^(p+q) on both sides, because translating the target coefficients 1, (-1)^(p+1), (-1)^(p+1+q) negates them. Summand extensionality gives equality of chain maps.",
+   "text": "Prove the homogeneous-summand total-complex coherence using lem-sc-total-tensor-shift-one-associator. This part is fully proved in Lean, without K-flatness.",
    "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-sc-total-tensor-shift-one-associator"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the chain-map equality. K-flatness makes tensor localization comparisons invertible. Use the lax monoidal associativity identity to replace localized complex associators with derived associators, and the localization shift squares defining the canonical tensor shift to replace the two complex shift comparisons. Cancel these invertible maps. The result is only at Q(P), Q(T), Q(U) and only for shift one; no transport or integer induction is asserted.",
+   "text": "Apply the two independent normalization formulas of lem-sc-scheme-tensor-shift-localization-normalization. Install its IsIso target comparison, postcompose both forward derived routes by that comparison, rewrite the two normalizations and the proved complex equality, and cancel the comparison. Precompose and postcompose by the appropriate associator isomorphisms to turn this forward square into the unchanged inverse-associator statement. All cancellation and the combination of parts are proved in Lean.",
    "uses": [
-    "def-pc-scheme-derived-tensor-structure",
-    "def-sc-scheme-canonical-tensor-shift",
-    "def-pc-kflat-complex"
+    "lem-sc-scheme-tensor-shift-localization-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-derived-tensor-structure",
-  "def-sc-scheme-canonical-tensor-shift",
-  "def-pc-kflat-complex"
+  "lem-sc-total-tensor-shift-one-associator",
+  "lem-sc-scheme-tensor-shift-localization-normalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Explicit homogeneous-summand expansion of the parent node representative calculation, restricted to shift one; 06YH supplies the derived tensor construction, not an abstract associator compatibility theorem."
+  "place": "Representative-complex plan: summand coherence proved; independent localization normalizations isolated; comparison cancellation and conversion to the inverse-associator square proved by H1."
  },
  "mathlib_searches": [
   {
@@ -120,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T155930-L-1301468",
+  "landing": "20261013T171511-L-1981206",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
