@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-product-section",
+ "kind": "statement",
+ "title": "Unique formal kernel product section for fixed inputs",
+ "statement": "Let $X$ be a Noetherian scheme, $\\mathcal I$ a quasi-coherent ideal sheaf, and $F=(\\mathcal F_r)_{r\\geq 1}$ a coherent formal module [def-weil-pbc-coherent-formal-module]. Write $B_m=\\mathcal I^m/\\mathcal I^{m+1}$, $K_0=\\mathcal F_1$, $K_n=\\ker(\\mathcal F_{n+1}\\to\\mathcal F_n)$ for $n>0$, with projections $\\pi_m$ and inclusions $\\iota_n$ [def-weil-pbc-formal-kernel-graded-pieces], in sheaves of modules [def-weil-sheaf-of-modules-category]. Fix $m,n\\geq0$, an open $U$, $a\\in B_m(U)$, and $x\\in K_n(U)$. There is a unique $y\\in K_{m+n}(U)$ such that for every $V\\subseteq U$, every $a^{\\prime}\\in\\mathcal I^m(V)$ with $\\pi_m(a^{\\prime})=a|_V$, and every $t\\in\\mathcal F_{m+n+1}(V)$ whose reduction to $\\mathcal F_{n+1}(V)$ equals $\\iota_n(x|_V)$, one has $\\iota_{m+n}(y|_V)=a^{\\prime}t$. This asserts a product for two fixed sections, without any linearity or compatibility between different input pairs.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), its associated graded construction, and Section 0EHN; expanded local-lift argument. Source read at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN."
+ },
+ "proof": [
+  {
+   "text": "At every stalk, use the ideal-product, power, and quotient descriptions and induct on the distance between levels to identify the reduction from F_(r+1) to F_(n+1), r>=n, with quotient by I^(n+1). Quotienting by a larger ideal power and then by a smaller one has the same result as the latter quotient alone. Thus all transitions are sheaf epimorphisms.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Locally lift the fixed coefficient a to a prime in I^m and the inclusion of the fixed kernel section x to t in F_(m+n+1). For n>0, t reduces to zero in F_n, so lies in I^n F_(m+n+1); for n=0 use I^0 F=F. The product a prime times t lies in I^(m+n) F_(m+n+1), and therefore has a unique preimage in K_(m+n), using the identity inclusion if m+n=0. Replacing t by an element of I^(n+1) F, or a prime by an element of I^(m+1), changes this product by I^(m+n+1) F=0. The same argument works after any restriction.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Independence of representatives and injectivity of the kernel inclusion make these local preimages agree on overlaps. Glue them by the sheaf axiom. For representatives on an arbitrary smaller open, compare with the original representatives locally on its intersections with the cover; independence and sheaf separation give the required equation there. If y and z both satisfy all these equations, locally lift the two fixed inputs near each point; their restricted inclusions both equal the same product. Injectivity of the kernel inclusion and sheaf separation imply y=z. For the empty open the empty cover gives uniqueness; zero degrees use the identity inclusion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-formal-kernel-graded-pieces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Expanded fixed-section construction from the associated graded module argument of Lemma 087Z and the quotient conditions of Section 0EHN; sources read online at tags 087Z and 0EHN by A2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bilinear action of associated graded ideal on kernels of a coherent formal module",
+   "results": "Eight filtration and adic-completion hits, including Ideal.Filtration.submodule, IsModuleFiltration.toGradedSMul and AdicCompletion.submodule; none states a sheaf product section with a local representative formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique section obtained by multiplying local lifts from an associated graded ideal and a formal module kernel",
+   "results": "Service unavailable: Internal Server Error. No absence verdict is claimed for this search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "product.section|product_section|local.*representative|bilinear.*descent; formalKernel|formal.*bilinear|bilinear.*formal",
+   "results": "Searched the formal modules, both library roots, and Mathlib LinearAlgebra/Quotient/Bilinear.lean. Found the existing action existence and its associativity proof, but no product-section construction. Blueprint search kernel product section found zero matching imported nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.mk₂",
+   "results": "Found LinearMap.mk₂ and its application formula; these package the four linearity identities, but do not construct the product section.",
+   "date": "2026-10-13",
+   "verdict": "useful for assembly, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalKernelBilinearActionExists",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Associated graded kernel construction in finite etale lifting: existence, independence and gluing of one product section, prior to the bilinear laws.",
+   "via": [
+    "lem-weil-pbc-formal-kernel-bilinear-action-exists",
+    "lem-weil-pbc-formal-kernel-graded-action-exists",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalKernelProductSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelProductSection.lean",
+  "declaration": "AlgebraicGeometry.formalKernel_product_section_existsUnique",
+  "statement": "theorem formalKernel_product_section_existsUnique {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F : CoherentFormalModule X I) (m n : ℕ) (U : X.Opens)\n    (a : (formalAssociatedGradedPiece I m).val.obj (op U))\n    (x : (formalKernelPiece F n).val.obj (op U)) :\n    ∃! y : (formalKernelPiece F (m + n)).val.obj (op U),\n      ∀ (V : X.Opens) (h : V ≤ U)\n        (a' : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op V))\n        (t : (F.obj.obj (op (m + n))).val.obj (op V)),\n        (formalAssociatedGradedπ I m).val.app (op V) a' =\n          (formalAssociatedGradedPiece I m).val.map (homOfLE h).op a →\n        (F.obj.map (homOfLE (Nat.le_add_left n m)).op).val.app (op V) t =\n          (formalKernelι F n).val.app (op V)\n            ((formalKernelPiece F n).val.map (homOfLE h).op x) →\n        (formalKernelι F (m + n)).val.app (op V)\n          ((formalKernelPiece F (m + n)).val.map (homOfLE h).op y) =\n            (@id Γ(X, V)\n              ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op V) a')) • t",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T072337-L-1114530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T072337-L-1114530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

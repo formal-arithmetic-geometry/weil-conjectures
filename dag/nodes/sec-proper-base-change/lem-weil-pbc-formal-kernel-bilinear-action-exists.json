@@ -14,26 +14,30 @@
  },
  "proof": [
   {
-   "text": "At each stalk use the ideal-product and quotient descriptions to induct through the adjacent quotient identifications of F. For r >= n >= 1 the reduction F_r to F_n is quotient by I^n. Its kernel is I^n F_r, and every transition is a sheaf epimorphism. The case of quotienting first by a higher power and then by a lower power is the usual iterated quotient identity.",
+   "text": "For each fixed m,n,U,a,x, choose the unique output section of the product-section lemma. Its full local representative equations determine the choice uniquely. Restriction preserves these equations by presheaf functoriality, so uniqueness proves restriction compatibility. Taking the identity restriction proves the formula for any given global representative and lift.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-ideal-module-product-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Lift a section of B_m locally to a in I^m and lift the inclusion of x in K_n locally to t in F_(m+n+1). For n>0, t reduces to zero in F_n and thus lies locally in I^n F_(m+n+1); for n=0 use I^0 F=F. Its product a t lies in I^(m+n) F_(m+n+1), so reduces to zero in F_(m+n) and factors uniquely through K_(m+n). The degree-zero case uses the identity inclusion. Changing t by I^(n+1), or a by I^(m+1), changes a t by I^(m+n+1) F_(m+n+1)=0.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-formal-kernel-product-section",
     "def-weil-pbc-formal-kernel-graded-pieces",
-    "lem-weil-pbc-ideal-module-product-stalk"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   },
   {
-   "text": "Independence makes the local outputs agree on overlaps, so glue them using the sheaf axiom. Simultaneous local lifts show additivity and scalar linearity in both variables; the same construction commutes with restriction. If a lift t already exists on U, use its restrictions on the cover. Sheaf uniqueness then gives the displayed formula on U, without requiring arbitrary global sections to lift. Empty opens and zero modules give the unique section.",
+   "text": "Reuse the proved private formal_transition_epi and local_lifts_three helpers from FormalKernelBilinearActionAssociative through a proof-only import all. These helpers establish epimorphic formal transitions and simultaneous local lifts of three sections, without using the associativity theorem itself. Coefficient projections are cokernel projections and also epis.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-formal-kernel-bilinear-action-associative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the four linearity identities locally. For left additivity use two coefficient lifts and one kernel lift; for right additivity use one coefficient lift and two kernel lifts. Their sums lift the summed inputs. For scalar laws restrict the scalar and multiply the corresponding lift by it. Apply the product formula, linearity of the component maps and scalar distributivity, associativity and commutativity. The existing private kernel_inclusion_injective helper from FormalKernelBilinearActionAssociative proves injectivity on sections, so these calculations prove the local identities. Sheaf separation proves each identity on U, including the empty cover. LinearMap.mk₂ packages them into bilinear maps; the previously proved naturality and representative formula finish.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-product-section",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-formal-kernel-bilinear-action-associative"
    ],
    "elementary": false
   }
@@ -42,12 +46,13 @@
   "def-weil-pbc-coherent-formal-module",
   "def-weil-pbc-formal-kernel-graded-pieces",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ideal-module-product-stalk"
+  "lem-weil-pbc-formal-kernel-product-section",
+  "lem-weil-pbc-formal-kernel-bilinear-action-associative"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), its associated graded construction, and Section 0EHN; expanded local-lift argument. Source read at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN. Details expanded by K2; the associativity proof is checked by Lean."
+  "place": "Lemma 087Z and Section 0EHN: A2 separates the uniquely characterized product section from bilinearity and naturality. All assembly steps are proved in Lean; the fixed-section construction remains the one new item. Repair: reuse the four private lifting and inclusion helpers from FormalKernelBilinearActionAssociative with import all; no associativity theorem is applied and no helper is reproved."
  },
  "mathlib_searches": [
   {
@@ -118,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T045537-L-130855",
+  "landing": "20261013T072337-L-1114530",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
