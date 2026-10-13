@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
-public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGenerationStub
+public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
@@ -756,8 +756,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed {X : Scheme.{u}}
         |>.preservesColimitsOfShape
     inferInstance
   have hτ : IsIso (Functor.whiskerLeft (constantFunctor Λ (Spec (.of k))) τ) := by
-    refine DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self_stub
-      (constantFunctor Λ (Spec (.of k)) ⋙ _) (constantFunctor Λ (Spec (.of k)) ⋙ _)
+    refine DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self (T := DerivedCategory _)
       (Functor.whiskerLeft (constantFunctor Λ (Spec (.of k))) τ) ?_
     dsimp only [Functor.whiskerLeft_app]
     have hunit : IsIso (τ.app (𝟙_ _)) :=

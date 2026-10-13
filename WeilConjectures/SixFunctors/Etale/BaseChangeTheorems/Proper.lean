@@ -11,6 +11,11 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimensionFamily
 
 /-!
 
@@ -55,6 +60,8 @@ base-change transformation itself is an isomorphism of functors.
 - `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`: for a torsion
   coefficient ring, the base-change transformation of a proper cartesian square is an
   isomorphism of functors.
+- `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`: the same
+  on the unbounded derived categories.
 
 ## References
 
@@ -167,6 +174,73 @@ theorem Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTors
       (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X hΛ K)
   exact NatIso.isIso_of_isIso_app _
 
+section FiniteCohomologicalDimension
+
+open scoped AlgebraicGeometry.Etale
+
+open ZeroObject
+
+/-- **Geometric points detect zero sheaves**: an étale sheaf of `Λ`-modules on `Y` whose
+pullbacks to all the geometric points `Spec Ω ⟶ Y`, `Ω` the algebraic closure of a residue
+field of `Y`, vanish is zero
+(`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective` applied to
+`M ⟶ 0`). -/
+theorem Etale.isZero_of_forall_isZero_upperStar_algClosurePoint {T : Scheme.{u}}
+    (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (H : ∀ t : T, IsZero ((T.algClosurePoint t)^*[ModuleCat.{u + 1} Λ].obj M)) :
+    IsZero M := by
+  have hz : IsZero (0 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := isZero_zero _
+  have : IsIso (hz.from_ M) := by
+    refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
+      (fun t ↦ T.algClosurePoint t)
+      (fun t ↦ ⟨t, IsLocalRing.closedPoint _, Scheme.algClosurePoint_base _ _ _⟩) _
+      fun t ↦ ?_
+    have hz' : IsZero ((T.algClosurePoint t)^*[ModuleCat.{u + 1} Λ].obj 0) :=
+      Functor.map_isZero _ hz
+    exact ⟨⟨hz'.to_ _, (H t).eq_of_src _ _, hz'.eq_of_src _ _⟩⟩
+  exact IsZero.of_iso hz (asIso (hz.from_ M))
+
+/-- **Proper pushforward has pointwise finite cohomological dimension** for a coefficient ring
+`Λ` which is torsion as an additive group: for `f : X ⟶ Y` proper and a point `y` of `Y`, there
+is `d` such that `t^* R^q f_* G = 0` for every `q > d` and every étale sheaf `G` of `Λ`-modules on
+`X`, where `t : Spec Ω ⟶ Y` is the geometric point at `y` and `R^q f_*` is the classical right
+derived functor.
+
+By proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`)
+`t^* R^q f_* G ≅ R^q h_* (G|)` for the geometric fibre `h : X ×_Y Spec Ω ⟶ Spec Ω`, which is
+proper over the algebraically closed field `Ω`, hence of some finite dimension `e`
+(`AlgebraicGeometry.exists_topologicalKrullDim_le`); one takes `d = 2e`
+(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`). -/
+theorem Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper (hΛ : IsAddTorsion Λ)
+    {S T : Scheme.{u}} (p : S ⟶ T) [IsProper p] (t : T) :
+    ∃ d : ℕ, ∀ (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
+      IsZero ((T.algClosurePoint t)^*[ModuleCat.{u + 1} Λ].obj
+        (((p)_*[ModuleCat.{u + 1} Λ]).rightDerived q |>.obj G)) := by
+  let x := T.algClosurePoint t
+  let sq := IsPullback.of_hasPullback p x
+  have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ hΛ sq
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
+  have : IsProper (pullback.snd p x) := MorphismProperty.pullback_snd _ _ inferInstance
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (pullback.snd p x)
+  refine ⟨2 * d, fun G q hq ↦ ?_⟩
+  have hvan := Etale.isZero_higherDirectImage_of_two_mul_lt hΛ (pullback.snd p x)
+    (pullback.snd p x) (𝟙 _) (Category.comp_id _) d hd
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst p x)).obj G) q (by omega)
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  refine IsZero.of_iso hvan
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapIso
+        ((p)_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorPlusObjSingleFunctorIso G q).symm ≪≫
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapDerivedCategoryPlusHomologyFunctorIso q).app
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus.obj K) ≪≫
+      (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+        (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)) ≪≫
+      (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd p x)).rightDerivedFunctorPlus.mapIso
+          (((Etale.upperStar (ModuleCat.{u + 1} Λ)
+            (pullback.fst p x)).mapDerivedCategoryPlusSingleFunctor 0).app G)))
+
+end FiniteCohomologicalDimension
+
 /-- **Proper base change on the unbounded derived categories**: if the coefficient ring `Λ` is
 torsion as an additive group, then for a cartesian square with `f` proper the derived base
 change map
@@ -174,13 +248,30 @@ change map
 `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`
 
 on the unbounded derived categories `D(-_ét, Λ)` is an isomorphism. This is the unbounded
-upgrade of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`. It
-holds because the question is local on `Y`, and over a quasi-compact open of `Y` the proper
-map `f` has bounded fibre dimension, so `Rf_*` has finite cohomological dimension on torsion
-sheaves and the bounded below statement passes to unbounded complexes. -/
+upgrade of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`.
+
+At each geometric point of `Y'` the higher direct images along the proper map `f'` vanish above
+twice the dimension of the fibre
+(`AlgebraicGeometry.Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper`), so `f'_*`
+sends exact complexes of `f'_*`-acyclic sheaves to exact complexes. Representing an object by a
+K-injective complex `J` with injective terms, `g'^* J` is a complex of `f'_*`-acyclic sheaves by
+the bounded below theorem, and the derived base change map at `J` is the termwise underived base
+change map (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isIso_baseChangeMap`), an
+isomorphism by `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`. -/
 theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
     [IsProper f] (sq : IsPullback g' f' f g) :
-    IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  sorry
+    IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
+  have : IsProper f' := MorphismProperty.of_isPullback sq inferInstance
+  have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
+    Etale.isIso_baseChangeMap_of_isProper Λ sq
+  refine Etale.isIso_derivedBaseChangeMap_of_isIso_baseChangeMap _ sq.toCommSq
+    (fun M hM hM' ↦ ?_) (fun I _ ↦ ?_)
+  · choose d hd using Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper Λ hΛ f'
+    exact hM.map_of_rightAcyclic_of_forall_isZero_of_family _
+      (fun y ↦ Etale.upperStar (ModuleCat.{u + 1} Λ) (Y'.algClosurePoint y))
+      (Etale.isZero_of_forall_isZero_upperStar_algClosurePoint Λ) d hd hM'
+  · have : IsTorsionModuleSheaf I := .of_isTorsion hΛ _
+    exact (Etale.HasTorsionBaseChange.hasInjectiveAcyclicity Λ f
+      (Etale.hasTorsionBaseChange_of_isProper Λ f)).rightAcyclic Λ sq I
 
 end AlgebraicGeometry
