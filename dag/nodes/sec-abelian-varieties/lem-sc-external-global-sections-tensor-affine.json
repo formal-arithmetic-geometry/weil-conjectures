@@ -16,32 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical affine charts of X and Y and the spectrum fibre-product formula to identify the product with Spec(A tensor_k B), where A=Gamma(X,O) and B=Gamma(Y,O). The affine pullback comparisons identify projection-pullback sections with scalar extensions of M=Gamma(X,F) and N=Gamma(Y,G). The affine sheaf-tensor comparison identifies external coefficient sections with their tensor product over A tensor_k B.",
+   "text": "The affine fibre-product coordinate-ring computation is used in its equivalent pushout form: Mathlib isPushout_appTop_of_isPullback applied to the canonical square. Transport the base ring along Scheme.ΓSpecIso and use CommRingCat.isPushout_iff_isPushout to obtain Algebra.IsPushout k A B C, for A=Gamma(X,O), B=Gamma(Y,O), C=Gamma(X times_k Y,O). The scalarMap composition formulas, the pullback condition, and the top-open appLE formulas give the two scalar towers.",
    "uses": [
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+    "def-sc-scalar-global-sections-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The balanced map (m tensor b) tensor (a tensor n) -> (a*m) tensor (b*n) is inverse to m tensor n -> (m tensor 1) tensor (1 tensor n). Check balance over A, B and A tensor_k B, and use tensor induction for the inverse identities. The pure-tensor formulas of the affine comparisons show that the resulting inverse map is the canonical external section map. Tensor induction gives equality for all tensors. These identities include zero rings, empty affine schemes and zero modules.",
+   "text": "Apply exists_tensorPullback_affine_sections at the top affine opens to both projections. Swap the tensor factors in each comparison, use its recorded C-linearity to make it C-linear, and use its bijectivity to obtain C-linear equivalences C tensor_A M to projection-pullback sections and C tensor_B N to the other projection-pullback sections. Their images of 1 tensor s are tensorPullbackTopSection, using PresheafOfModules.presheaf_map_apply_coe to compare restriction maps.",
    "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private externalTensorAlgebraEquiv composes tensor commutativity, AlgebraTensorModule.cancelBaseChange A C C, tensor congruence with Algebra.IsPushout.cancelBaseChange k A B C N, tensor commutativity over A, and AlgebraTensorModule.cancelBaseChange k A A. This is an equivalence from (C tensor_A M) tensor_C (C tensor_B N) to M tensor_k N. The standard pure-tensor equations show it sends (1 tensor s) tensor (1 tensor t) to s tensor t. Invert it and tensor the two pullback-section equivalences to obtain the additive equivalence of ordinary section tensor modules, with the prescribed pure-tensor formula. All constructions and equations are Mathlib equivalences, so zero rings and zero modules require no separate assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport quasi-coherence from ordinary pullback to tensorPullback using uniqueness of left adjoints to pushforward. The quasi-coherent affine tensor-section comparison at the top of the affine product is bijective. Compose it with the additive equivalence from the preceding steps. Its pure-tensor formula is definitionally externalGlobalSectionsTensor, and tensor induction proves equality on arbitrary tensors. Bijectivity follows by composition.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
     "def-sc-scalar-global-sections-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-module-pullback",
   "def-sc-scalar-global-sections-comparison",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
   "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED; explicit affine algebra or symmetry verification for the canonical degree-zero maps"
+  "place": "Tag 0BED, lemma-kunneth affine case; M2 implements the affine coordinate-ring step by Mathlib isPushout_appTop_of_isPullback and the module identity by IsPushout.cancelBaseChange, with canonical pure-tensor formulas."
  },
  "mathlib_searches": [
   {
@@ -162,10 +179,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T113348-L-3185949",
-  "kind": "interface",
+  "landing": "20261013T123209-L-3678049",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

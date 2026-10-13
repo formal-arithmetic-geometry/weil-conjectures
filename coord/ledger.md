@@ -12436,3 +12436,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/K2/Sheaf.AlgebraicGeometry.TorsionCommonOpenComparisonMap (stage 3; reviewer PASS; first push; landing 20261013T123207-L-3677530 (interface); batch 20261013T123200; modules 3; new nodes 2)
 - 12:32 L: merged deliver/K4/Sheaf.RingTheory.PBasisComplementMonomialBasis (stage 3; reviewer PASS; first push; landing 20261013T123208-L-3677678 (interface); batch 20261013T123200; modules 3; new nodes 2)
 - 12:32 L: merged deliver/M1/Sheaf.Paper.BoundaryHorseshoeRepresentative (stage 3; reviewer PASS; first push; landing 20261013T123208-L-3677880 (interface); batch 20261013T123200; modules 3; new nodes 2)
+- 12:32 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffine (stage 3; reviewer PASS; first push; landing 20261013T123209-L-3678049 (proof); batch 20261013T123200; modules 1; new nodes 0)
