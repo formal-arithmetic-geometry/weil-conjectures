@@ -25,6 +25,14 @@
  ],
  "proof": [
   {
+   "text": "Use [lem-sc-strict-henselization-triples-presentation] to express the given pointed-algebra strict henselization C as a residue-triple ring colimit at the maximal ideal. Compare it with the local cocone of [lem-weil-pbc-strict-henselization-triples] using uniqueness of colimits; the resulting ring equivalence preserves Krull dimension.",
+   "uses": [
+    "lem-sc-strict-henselization-triples-presentation",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
    "text": "The canonical map $R\\to R^{\\mathrm{sh}}$ is a local ring map, faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Therefore [lem-sc-faithfully-flat-local-dimension] gives $\\dim R\\le\\dim R^{\\mathrm{sh}}$.",
    "uses": [
     "lem-sc-strict-henselization-faithfully-flat",
@@ -37,7 +45,7 @@
    }
   },
   {
-   "text": "Write $\\mathfrak m$ for the maximal ideal of $R$. By [lem-weil-pbc-strict-henselization-triples] applied with $\\mathfrak p=\\mathfrak m$ (so $R_{\\mathfrak p}=R$), $R^{\\mathrm{sh}}=C=\\varinjlim S$ is a filtered colimit over triples $(S,\\mathfrak q,\\phi)$ with $R\\to S$ etale and $\\mathfrak q$ over $\\mathfrak m$, and $\\mathfrak m_C=\\ker\\psi$ where $\\psi|_S$ is $S\\to\\kappa(\\mathfrak q)\\to K$; hence the contraction of $\\mathfrak m_C$ to $S$ is $\\mathfrak q$. Let $\\mathfrak Q_0\\subsetneq\\dots\\subsetneq\\mathfrak Q_n$ be a chain of primes of $C$. By [lem-sc-filtered-colimit-prime-chain-dimension] there is a stage $(S,\\mathfrak q,\\phi)$ in which the contractions form a strictly increasing chain; all of them lie in the contraction $\\mathfrak q$ of $\\mathfrak m_C\\supseteq\\mathfrak Q_n$, so they give a chain of length $n$ in $S_{\\mathfrak q}$ and $n\\le\\dim S_{\\mathfrak q}$. By [lem-sc-etale-local-dimension] applied to $R\\to S$ and $\\mathfrak q$ (lying over $\\mathfrak m$), $\\dim S_{\\mathfrak q}=\\dim R_{\\mathfrak m}=\\dim R$. Hence $n\\le\\dim R$ for every chain, so $\\dim R^{\\mathrm{sh}}\\le\\dim R$.",
+   "text": "Write $\\mathfrak m$ for the maximal ideal of $R$. By [lem-weil-pbc-strict-henselization-triples] applied with $\\mathfrak p=\\mathfrak m$ (so $R_{\\mathfrak p}=R$), $R^{\\mathrm{sh}}=C=\\varinjlim S$ is a filtered colimit over triples $(S,\\mathfrak q,\\phi)$ with $R\\to S$ etale and $\\mathfrak q$ over $\\mathfrak m$, and $\\mathfrak m_C=\\ker\\psi$ where $\\psi|_S$ is $S\\to\\kappa(\\mathfrak q)\\to K$; hence the contraction of $\\mathfrak m_C$ to $S$ is $\\mathfrak q$. Let $\\mathfrak Q_0\\subsetneq\\dots\\subsetneq\\mathfrak Q_n$ be a chain of primes of $C$. By [lem-sc-filtered-colimit-prime-chain-dimension] there is a stage $(S,\\mathfrak q,\\phi)$ in which the contractions form a strictly increasing chain; all of them lie in the contraction $\\mathfrak q$ of $\\mathfrak m_C\\supseteq\\mathfrak Q_n$, so they give a chain of length $n$ in $S_{\\mathfrak q}$ and $n\\le\\dim S_{\\mathfrak q}$. By [lem-sc-etale-local-dimension] applied to $R\\to S$ and $\\mathfrak q$ (lying over $\\mathfrak m$), $\\dim S_{\\mathfrak q}=\\dim R_{\\mathfrak m}=\\dim R$. Hence $n\\le\\dim R$ for every chain, so $\\dim R^{\\mathrm{sh}}\\le\\dim R$. For the size requirement, embed triples fully faithfully into pointed affine etale rings, use essential smallness of the affine etale site, and whisker the cocone by the equivalence from its small skeleton. The finite chain lemma applies to this small filtered diagram. Its contracted chains lie below the contraction of the maximal ideal; the localization prime-spectrum order isomorphism produces chains of exactly the original length. The kernel calculation for evaluation into K identifies this contraction with the pointed prime.",
    "uses": [
     "lem-weil-pbc-strict-henselization-triples",
     "lem-sc-filtered-colimit-prime-chain-dimension",
@@ -55,12 +63,13 @@
   "lem-weil-pbc-strict-henselization-triples",
   "lem-sc-faithfully-flat-local-dimension",
   "lem-sc-filtered-colimit-prime-chain-dimension",
-  "lem-sc-etale-local-dimension"
+  "lem-sc-etale-local-dimension",
+  "lem-sc-strict-henselization-triples-presentation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 06LK (Lemma 45.7), proof"
+  "place": "Tag 06LK, original lower and upper bounds implemented in Lean by M4; Tag 04GW presentation comparison"
  },
  "mathlib_searches": [
   {
@@ -164,5 +173,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d3e27",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T181115-L-2604958",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proof and unchanged signature against the node, recorded dependencies, source, report, and interface checks; both direct importers compiled against the delivery."
  }
 }
