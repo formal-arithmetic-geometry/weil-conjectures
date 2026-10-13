@@ -10,11 +10,28 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The statement is the corresponding finite-free cone construction/local pseudo-coherence substep of Tag 066D.",
+   "text": "Unpack the finite-free approximation to show monotonicity: m-pseudo-coherent implies n-pseudo-coherent when m ≤ n. If m < n, the cohomology map at n is an isomorphism and hence an epimorphism. This is the proved private helper pseudoCoherent_mono.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each localization, use IsLocalization.flat and Module.Flat.lTensor_preserves_injective_linearMap to show extension of scalars preserves monomorphisms; its preservation of cokernels implies preservation of homology. Transport the global vanishing hypothesis with mapHomologyIso and homologyFunctorFactors. Apply finite_homology_of_isMPseudoCoherent to the localized complex at n and transport finiteness through these isomorphisms and LocalizedModule.equivTensorProduct. Finally apply Module.Finite.of_localizationSpan to obtain finite generation of M.homology n. All transports and the descent are proved in finite_top_of_local.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-flat",
     "lem-sc-finite-cohomology",
     "lem-weil-pbc-module-finite-of-localization-span",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Module.Finite.exists_fin' to choose a surjection from a finite free module onto M.homology n. Lift it through M.homologyπ n by Projective.factorThru. Define E as the single complex in degree n on this free module and define its chain map a into M by mkHomFromSingle using the lift into cycles. Prove its strict upper and lower bounds and termwise finite freeness. The cycles/homology naturality equations identify the composite on degree-n homology with the chosen surjection, so the induced homology map is epi. This construction is the proved private helper exists_top_approximation; it uses only proved Mathlib results.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define N explicitly as CochainComplex.mappingCone a and take its image triangle under Q; mappingCone_triangle_distinguished proves it distinguished. E is m-pseudo-coherent with itself and the identity as witness. For j > n-1, E has zero cohomology at j+1. At j=n, the epimorphism on top cohomology makes the second map zero by HomologySequence.epi_homologyMap_mor₁_iff; at j>n its source is zero by hypothesis. HomologySequence.exact₃ then implies the cone cohomology at j is zero.",
+   "uses": [
     "def-weil-abstract-derived-category",
     "lem-sf-derived-homology-long-exact"
    ],
@@ -22,7 +39,7 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-flat",
   "lem-sc-finite-cohomology",
   "lem-weil-pbc-module-finite-of-localization-span",
   "def-weil-abstract-derived-category",
@@ -31,7 +48,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 066D, proof, second and third paragraphs"
+  "place": "Tag 066D, second and third proof paragraphs; Lean construction and homology transports completed by C4, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -95,13 +112,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261012T223402-L-1635539",
-  "kind": "interface",
+  "landing": "20261013T010612-L-2669812",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
