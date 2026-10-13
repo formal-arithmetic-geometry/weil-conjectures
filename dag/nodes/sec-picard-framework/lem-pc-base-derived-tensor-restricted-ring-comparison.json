@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-base-derived-tensor-restricted-ring-comparison",
+ "kind": "statement",
+ "title": "Restricted derived tensor counit comparison under coefficient equivalences",
+ "statement": "Let R0,A0,B0,C0 and R,A,B,C be commutative rings in one universe, with the two base algebra diagrams and tensor-algebra maps to C0 and C. Choose possibly distinct morphism universes for the two derived categories [def-weil-abstract-derived-category], input complexes Q0,Q and their base-derived tensor cohomology models M,N [def-pc-base-derived-tensor-cohomology-model]. Suppose eR,eA,eB are compatible coefficient ring equivalences, and q identifies Q0 with Q restricted along eA. Fix a tensor-ring equivalence eE sending a tensor b to eA(a) tensor eB(b), and fix an ordinary tensor chain isomorphism s sending r tensor x to eE(r) tensor q(x). In each degree i there is a B0-linear isomorphism kB from M.cohomology(i) restricted along includeRight to N.cohomology(i) restricted first along includeRight and then eB. It intertwines multiplication by a tensor 1 with multiplication by eA(a) tensor 1. On each element x, N.comparison applied to kB(x), followed by the inverse exact-restriction homology isomorphism along eE, equals homology(s) applied to M.comparison(x). This conclusion neither constructs eE or s nor asserts tensor-algebra linearity of kB; those are proved by the caller. No flatness, comparison invertibility, or compatibility of maps to C0,C is required.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1, independence of derived tensor choices; coefficient-equivalence refinement, with localization uniqueness as in Stacks Section 13.11 (Tag 05RR)."
+ },
+ "proof": [
+  {
+   "text": "Restriction along eR, eB and their inverses gives exact inverse module equivalences. Apply them termwise to homotopy categories. They preserve quasi-isomorphisms, so the localization universal property extends them to inverse equivalences of the chosen derived categories, including when the morphism universes differ. Ordinary scalar extension commutes with these equivalences: the maps and inverses send b tensor x to eB(b) tensor x in the transported coordinates, and tensor induction proves the inverse laws and naturality.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the first model's universal left-derived functor and counit through these equivalences. Their inverses transport right Kan extensions back, so universality is preserved. The ordinary scalar-extension identification from step 1 identifies the underived functors. Uniqueness of universal left-derived functors therefore supplies a counit-compatible natural isomorphism to the second model's derived functor. Evaluate at the restricted input complex, use the image of q, apply B-cohomology and conjugate by the cohomologyIso maps. This constructs the B0-linear isomorphism kB and its inverse.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the derived identification and q at multiplication by a, followed by the two cohomologyIso_smul equations, gives the includeLeft scalar identity. Substitute comparison_eq in both models. Counit compatibility and naturality of the derived and homotopy homology factorization isomorphisms give the ordinary comparison square after restriction to B0. On generators ordinaryIso_tmul and the supplied formula for s identify its ordinary-complex component. Exact restriction homology naturality supplies the displayed inverse mapHomologyIso. Equality of the resulting underlying functions gives the pointwise square. The maps to the fourth rings do not occur; flatness and invertibility of the comparison maps are never used.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1, independence of derived tensor choices; coefficient-equivalence refinement, with localization uniqueness as in Stacks Section 13.11 (Tag 05RR).",
+  "note": "Steps 2 and the derived-cohomology part of step 3 of the parent plan; the ring/ordinary chain construction and tensor-algebra linearity are proved in the caller."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal left derived tensor functor commutes with compatible ring isomorphisms and cohomology",
+   "results": "Service unavailable: Internal Server Error.",
+   "available": false,
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology comparison transport under compatible ring equivalences",
+   "results": "groupCohomologyIsoExt, Rep.torIso, groupHomologyIsoTor and low-degree representation-theory cohomology formulas; no compatible coefficient-equivalence statement for universal tensor models.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.mapRingHom",
+   "results": "mapRingHom, mapRingHom_tmul and its includeLeft/includeRight composition formulas in Mathlib.RingTheory.TensorProduct.Maps.",
+   "verdict": "These prove ordinary tensor-ring transport, not the restricted derived counit comparison.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "mapRingHom_tmul|IsLeftDerivedFunctor.*iso; restrictScalarsEquivalenceOfRingEquiv|mapDerivedCategory|leftDerivedUnique",
+   "results": "Mathlib has restrictScalarsEquivalenceOfRingEquiv, mapDerivedCategory with two morphism universes, and leftDerivedUnique. Existing BaseDerivedTensorModelQuasiIsoOrdinaryComparison is for fixed coefficient rings and a common morphism universe. RingIsoNaturality imports the current item and is cyclic. No restricted coefficient-transport theorem exists in either library root. Blueprint search for derived tensor ring isomorphism found no matching imported node.",
+   "verdict": "Generic tools exist, but assembling the coefficient and universal-counit transport is a remaining part of the argument.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison",
+  "date": "2026-10-14",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Coefficient transport of the ordinary derived comparison, universal derived-functor identification and its cohomology/counit naturality.",
+   "via": [
+    "lem-pc-base-derived-tensor-ordinary-ring-comparison",
+    "lem-pc-base-derived-tensor-ring-transport",
+    "lem-pc-single-complex-open-ordinary-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorRestrictedRingComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorRestrictedRingComparison.lean",
+  "declaration": "ModuleCat.exists_baseDerivedTensor_restricted_ring_comparison",
+  "statement": "theorem exists_baseDerivedTensor_restricted_ring_comparison\n    {R₀ A₀ B₀ C₀ R A B C : Type u}\n    [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]\n    [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R₀ A₀] [Algebra R₀ B₀] [Algebra (A₀ ⊗[R₀] B₀) C₀]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R₀)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (Q₀ : CochainComplex (ModuleCat.{u} A₀) ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (M : BaseDerivedTensorCohomologyModel R₀ A₀ B₀ Q₀ C₀)\n    (N : BaseDerivedTensorCohomologyModel R A B Q C)\n    (eR : R₀ ≃+* R) (eA : A₀ ≃+* A) (eB : B₀ ≃+* B)\n    (hRA : eA.toRingHom.comp (algebraMap R₀ A₀) =\n      (algebraMap R A).comp eR.toRingHom)\n    (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =\n      (algebraMap R B).comp eR.toRingHom)\n    (q : Q₀ ≅ ((restrictScalars.{u} eA.toRingHom).mapHomologicalComplex (.up ℤ)).obj Q)\n    (eE : (A₀ ⊗[R₀] B₀) ≃+* (A ⊗[R] B))\n    (heE : ∀ (a : A₀) (b : B₀), eE (a ⊗ₜ[R₀] b) = eA a ⊗ₜ[R] eB b)\n    (s : ((extendScalars (algebraMap A₀ (A₀ ⊗[R₀] B₀))).mapHomologicalComplex\n        (.up ℤ)).obj Q₀ ≅\n      ((restrictScalars.{u} eE.toRingHom).mapHomologicalComplex (.up ℤ)).obj\n        (((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n          (.up ℤ)).obj Q))\n    (hs : ∀ (j : ℤ) (r : A₀ ⊗[R₀] B₀) (x : Q₀.X j),\n      s.hom.f j (r ⊗ₜ[A₀,algebraMap A₀ (A₀ ⊗[R₀] B₀)] x) =\n        eE r ⊗ₜ[A,algebraMap A (A ⊗[R] B)] (show Q.X j from q.hom.f j x))\n    (i : ℤ) :\n    let K := ((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n      (.up ℤ)).obj Q\n    ∃ kB : (restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).obj\n        (M.cohomology i) ≅\n      (restrictScalars.{u} eB.toRingHom).obj\n        ((restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).obj\n          (N.cohomology i)),\n      (∀ (a : A₀) (x : M.cohomology i),\n        kB.hom ((Algebra.TensorProduct.includeLeft (S := R₀) a : A₀ ⊗[R₀] B₀) • x) =\n          (Algebra.TensorProduct.includeLeft (S := R) (eA a) : A ⊗[R] B) •\n            (show N.cohomology i from kB.hom x)) ∧\n      ∀ x : M.cohomology i,\n        ((K.sc i).mapHomologyIso (restrictScalars.{u} eE.toRingHom)).inv\n            (N.comparison i (show N.cohomology i from kB.hom x)) =\n          HomologicalComplex.homologyMap s.hom i (M.comparison i x)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T222405-L-1223738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T222405-L-1223738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

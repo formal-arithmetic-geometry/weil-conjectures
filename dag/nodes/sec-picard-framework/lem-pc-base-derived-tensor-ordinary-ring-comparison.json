@@ -13,37 +13,41 @@
  },
  "proof": [
   {
-   "text": "Compatible eR,eA,eB give a tensor-ring isomorphism eE by the tensor universal property. Tensor the chain isomorphism q to obtain s with the stated generator formula. Both inverse formulas follow on pure tensors and extend by tensor induction.",
+   "text": "Construct forward and inverse tensor-ring maps with Algebra.TensorProduct.mapRingHom, using compatibility and its inverse. Tensor induction and mapRingHom_tmul prove both inverse laws; this yields eE with the prescribed pure-tensor formula.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Restriction along the coefficient isomorphisms gives exact equivalences of module and homotopy categories and their localizations. Use localization uniqueness also when the two morphism universes differ. Transport the universal left-derived functor and its counit through these equivalences; universality and uniqueness give its counit-compatible identification with the second model.",
+   "text": "For any compatible scalar ring equivalences, construct termwise scalar-extension isomorphisms using semilinear LinearEquiv structures and TensorProduct.congr. Tensor induction proves linearity for the target coefficient ring. In each degree use q's component; test the differential square on 1 tensor x via ExtendScalars.hom_ext. The generator formula and q.hom.comm close it. HomologicalComplex.Hom.isoOfComponents assembles s.",
    "uses": [
-    "def-weil-abstract-derived-category",
     "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-base-derived-tensor-restricted-ring-comparison to the eE and s just constructed. It supplies kB, its compatibility with a tensor 1, and the underlying ordinary comparison square.",
+   "uses": [
+    "lem-pc-base-derived-tensor-restricted-ring-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply homology and conjugate by the two cohomologyIso maps. Naturality for multiplication by A and the cohomologyIso_smul identities give compatibility with a tensor 1; B-linearity gives compatibility with 1 tensor b. Tensor induction gives eE-semilinearity of both directions, hence the module isomorphism k. Apply comparison_eq and the counit compatibility to get the ordinary comparison square; ordinaryIso_tmul identifies the two ordinary tensor coordinates on generators.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model"
-   ],
-   "elementary": false
+   "text": "Take the additive equivalence underlying kB. Its B0-linearity gives compatibility with 1 tensor b. Write a tensor b as (a tensor 1)(1 tensor b); multiplication of scalar actions and the two compatibilities give eE-semilinearity on pure tensors. Zero and addition cases finish tensor induction. LinearEquiv.ofBijective with the restricted target action makes it an E0-linear equivalence, hence the desired ModuleCat isomorphism k. Extensionality turns the pointwise comparison identity into the required morphism equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
-  "def-weil-abstract-derived-category"
+  "lem-pc-base-derived-tensor-restricted-ring-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U4",
+  "group": "K1",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06Y6",
-  "place": "Lemma 15.61.1, independence of choices and universal derived change of rings; coefficient-equivalence and two-universe refinement of the item ordinary-comparison plan.",
-  "note": "Refinement below the coefficient-transport node; the fixed unit route is unchanged."
+  "place": "Lemma 15.61.1, independence of derived tensor choices; coefficient-equivalence refinement, with localization uniqueness as in Stacks Section 13.11 (Tag 05RR).",
+  "note": "Ring and ordinary-complex transport and tensor-algebra linearity are now proved directly from Mathlib. Only the restricted derived transport step is deferred; the fixed unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -121,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T215615-L-902456",
+  "landing": "20261013T222405-L-1223738",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
