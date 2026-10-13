@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! The degreewise split exact sequence of an exhaustive split filtration. -/
 
@@ -46,6 +48,92 @@ theorem filteredTelescope_comp_zero {A : Type u} [CommRing A]
   intro n
   simp [filteredTelescopeMap, filteredTelescopeAugmentation, Preadditive.sub_comp,
     Category.assoc, hcompat]
+
+/-- A recursive finite-sum retraction of identity minus successor. -/
+private theorem telescope_retraction {C : Type*} [Category C] [Preadditive C]
+    (F : ℕ → C) (D : C) (j : ∀ n, F n ⟶ D)
+    (hD : IsColimit (Cofan.mk D j)) (step : ∀ n, F n ⟶ F (n + 1))
+    (a : D ⟶ D) (ha : ∀ n, j n ≫ a = j n - step n ≫ j (n + 1))
+    (hsplit : ∀ n, ∃ r : F (n + 1) ⟶ F n, step n ≫ r = 𝟙 (F n)) :
+    ∃ l : D ⟶ D, a ≫ l = 𝟙 D := by
+  classical
+  choose r hr using hsplit
+  let t : ∀ n, F n ⟶ D := fun n ↦
+    Nat.rec (motive := fun n ↦ F n ⟶ D) 0 (fun n t ↦ r n ≫ (t - j n)) n
+  let l : D ⟶ D := Cofan.IsColimit.desc hD t
+  refine ⟨l, Cofan.IsColimit.hom_ext hD _ _ (fun n ↦ ?_)⟩
+  change j n ≫ (a ≫ l) = j n ≫ 𝟙 D
+  rw [← Category.assoc, ha, Preadditive.sub_comp, Category.assoc]
+  rw [show j n ≫ l = t n from Cofan.IsColimit.fac hD t n,
+    show j (n + 1) ≫ l = t (n + 1) from Cofan.IsColimit.fac hD t (n + 1)]
+  simp only [Category.comp_id]
+  change t n - step n ≫ (r n ≫ (t n - j n)) = j n
+  rw [← Category.assoc, hr, Category.id_comp]
+  exact sub_sub_cancel _ _
+
+/-- Exhaustive monic stages identify the augmentation as the cokernel of the telescope. -/
+private theorem telescope_exact {A : Type u} [CommRing A]
+    (P D : ModuleCat.{max u v} A) (F : ℕ → ModuleCat.{max u v} A)
+    (j : ∀ n, F n ⟶ D) (hD : IsColimit (Cofan.mk D j))
+    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))
+    (hmono : ∀ n, Mono (ι n))
+    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)
+    (hexhaustive : ∀ x : P, ∃ n y, ι n y = x)
+    (a : D ⟶ D) (b : D ⟶ P) (hab : a ≫ b = 0)
+    (ha : ∀ n, j n ≫ a = j n - step n ≫ j (n + 1))
+    (hb : ∀ n, j n ≫ b = ι n) :
+    (ShortComplex.mk a b hab).Exact := by
+  let E : ℕ ⥤ ModuleCat.{max u v} A := Functor.ofSequence step
+  let c : Cocone E :=
+    { pt := P
+      ι := NatTrans.ofSequence ι (by
+        intro n
+        simpa [E, Functor.ofSequence_map_homOfLE_succ] using hcompat n) }
+  have : PreservesColimitsOfSize.{0, 0}
+      (forget₂ (ModuleCat.{max u v} A) AddCommGrpCat.{max u v}) :=
+    ModuleCat.forget₂PreservesColimitsOfSize.{max u v, u, 0, 0} (R := A)
+  have : PreservesFilteredColimitsOfSize.{0, 0} (forget AddCommGrpCat.{max u v}) :=
+    preservesSmallestFilteredColimits_of_preservesFilteredColimits.{max u v, max u v} _
+  have : PreservesFilteredColimitsOfSize.{0, 0} (forget (ModuleCat.{max u v} A)) :=
+    comp_preservesFilteredColimits
+      (forget₂ (ModuleCat.{max u v} A) AddCommGrpCat.{max u v})
+      (forget AddCommGrpCat.{max u v})
+  have : ReflectsColimit E (forget (ModuleCat.{max u v} A)) :=
+    reflectsColimit_of_reflectsIsomorphisms E _
+  have hc : IsColimit c := by
+    apply isColimitOfReflects (forget (ModuleCat.{max u v} A))
+    apply Types.FilteredColimit.isColimitOf'
+    · intro x
+      obtain ⟨n, y, hy⟩ := hexhaustive x
+      exact ⟨n, y, hy.symm⟩
+    · intro n x y h
+      have hxy : x = y := (ModuleCat.mono_iff_injective (ι n)).mp (hmono n) h
+      exact ⟨n, 𝟙 n, by simp [hxy]⟩
+  have hcok : IsColimit (CokernelCofork.ofπ b hab) := by
+    let cone (s : CokernelCofork a) : Cocone E :=
+      { pt := s.pt
+        ι := NatTrans.ofSequence (fun n ↦ j n ≫ s.π) (by
+          intro n
+          have hz := congrArg (fun z ↦ j n ≫ z) s.condition
+          rw [← Category.assoc, ha, Preadditive.sub_comp, Category.assoc] at hz
+          simp only [comp_zero] at hz
+          simpa [E, Functor.ofSequence_map_homOfLE_succ] using
+            (sub_eq_zero.mp hz).symm) }
+    refine Cofork.IsColimit.mk _ (fun s ↦ hc.desc (cone s)) ?_ ?_
+    · intro s
+      apply Cofan.IsColimit.hom_ext hD
+      intro n
+      change j n ≫ (b ≫ hc.desc (cone s)) = j n ≫ s.π
+      rw [← Category.assoc, hb]
+      exact hc.fac (cone s) n
+    · intro s m hm
+      apply hc.hom_ext
+      intro n
+      have hn := congrArg (fun z ↦ j n ≫ z) hm
+      change j n ≫ (b ≫ m) = j n ≫ s.π at hn
+      rw [← Category.assoc, hb] at hn
+      exact hn.trans (hc.fac (cone s) n).symm
+  exact (ShortComplex.mk a b hab).exact_of_g_is_cokernel hcok
 
 /-- The explicitly constructed telescope sequence is split exact in each degree.
 Source: Stacks Project, Tags 09KL--09KM, admissible telescope sequence.
@@ -106,6 +194,41 @@ theorem filteredTelescope_degreewise_splitting {A : Type u} [CommRing A]
         (filteredTelescopeAugmentation P F ι)
         (filteredTelescope_comp_zero P F ι step hcompat)).map
           (HomologicalComplex.eval (ModuleCat.{max u v} A) (.up ℤ) k)).Splitting) := by
-  sorry
+  intro k
+  let ev := HomologicalComplex.eval (ModuleCat.{max u v} A) (.up ℤ) k
+  let D := (∐ F).X k
+  let G : ℕ → ModuleCat.{max u v} A := fun n ↦ (F n).X k
+  let j : ∀ n, G n ⟶ D := fun n ↦ (Sigma.ι F n).f k
+  have hD : IsColimit (Cofan.mk D j) :=
+    (Cofan.isColimitMapCoconeEquiv ev F (Cofan.mk _ (Sigma.ι F)))
+      (isColimitOfPreserves ev (coproductIsCoproduct F))
+  let a := (filteredTelescopeMap F step).f k
+  let b := (filteredTelescopeAugmentation P F ι).f k
+  have ha : ∀ n, j n ≫ a = j n - (step n).f k ≫ j (n + 1) := by
+    intro n
+    have h := Sigma.ι_desc
+      (fun n ↦ Sigma.ι F n - step n ≫ Sigma.ι F (n + 1)) n
+    exact congrArg (fun f ↦ f.f k) h
+  have hb : ∀ n, j n ≫ b = (ι n).f k := by
+    intro n
+    exact congrArg (fun f ↦ f.f k) (Sigma.ι_desc ι n)
+  have hab : a ≫ b = 0 := congrArg (fun f ↦ f.f k)
+    (filteredTelescope_comp_zero P F ι step hcompat)
+  have hi : ∀ n, Mono ((ι n).f k) := by
+    intro n
+    have := hmono n
+    exact inferInstance
+  have he := telescope_exact (P.X k) D G j hD (fun n ↦ (ι n).f k)
+    (fun n ↦ (step n).f k) hi
+    (fun n ↦ congrArg (fun f ↦ f.f k) (hcompat n)) (hexhaustive k) a b hab ha hb
+  obtain ⟨l, hl⟩ := telescope_retraction G D j hD (fun n ↦ (step n).f k)
+    a ha (fun n ↦ hsplit n k)
+  have hep : Epi b := by
+    apply (ModuleCat.epi_iff_surjective b).mpr
+    intro x
+    obtain ⟨n, y, hy⟩ := hexhaustive k x
+    refine ⟨j n y, ?_⟩
+    exact (congrArg (fun f ↦ f y) (hb n)).trans hy
+  exact ⟨ShortComplex.Splitting.ofExactOfRetraction _ he l hl hep⟩
 
 end CochainComplex
