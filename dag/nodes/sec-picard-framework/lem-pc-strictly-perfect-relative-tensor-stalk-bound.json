@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+ "kind": "statement",
+ "title": "Explicit relative tensor stalk bound for a strictly perfect local model",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], $f:X\\to Y$ any morphism, $K$ a complex of $\\mathcal O_X$-modules, $V\\subseteq X$ open, and $L$ a strictly perfect complex of $\\mathcal O_V$-modules [def-pc-perfect-complex]. Assume the restriction of $QK$ to $V$ is isomorphic to $QL$ in $D(\\mathcal O_V)$ [def-pc-derived-category]. Let $r,s\\in\\mathbf Z$ be such that $L^t=0$ for $t<r$ or $s<t$, with no order hypothesis on $r,s$. Fix $y\\in V$ and $d\\geq0$, and suppose $\\operatorname{Tor}^{\\mathcal O_{Y,f(y)}}_j(\\mathcal O_{X,y},M)=0$ for every module $M$ and every $j>d$, using the actual stalk map. Let $P$ be a K-flat complex of $f^{-1}\\mathcal O_Y$-modules [def-pc-kflat-complex] and $q:P\\to K$ restricted along $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$ a quasi-isomorphism [def-pc-quasi-iso-modules]. For every $f^{-1}\\mathcal O_Y$-module sheaf $F$ and every $i<r-d$ or $s<i$, the underlying abelian-group stalk at $y$ of $H^i(\\operatorname{Tot}(P\\otimes F[0]))$ [def-pc-tensor-complex-sheaves] is zero. Derived categories of the global and open-restriction module categories are assumed available.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Take the stalk of each retraction exhibiting a term of L as a direct summand of a finite free structure module. Scalar restriction preserves those retractions. Additivity and retract invariance of Tor give amplitude [-d,0] for each restricted term. The finite filtration of L by degree has successive quotients its terms in their original degrees t, of amplitude [t-d,t]. The long exact cohomology sequence of derived tensor and induction over the nonzero degrees give amplitude [r-d,s]. If r>s, every term is zero and the conclusion holds in every degree.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G"
+   }
+  },
+  {
+   "text": "Because y lies in V, exact restriction and stalks send the representative isomorphism to an isomorphism between the stalk derived objects of K and L. Apply the K-flat stalk criterion to the ringed space with ring sheaf f inverse image O_Y. The given quasi-isomorphism identifies the K-flat stalk of P with the scalar-restricted stalk of K. A common K-flat replacement of the local model, and K-flat tensor quasi-isomorphism invariance transported from the one-point-site module presentation, identify their derived tensor homology. Exactness of stalks and the stalk-total-tensor isomorphism identify this with the displayed abelian-group stalk. The amplitude from the first step gives its vanishing.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-quasi-iso-modules",
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-kflat-tensor-quasi-iso",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-stalk-tensor-complex",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-perfect-complex",
+  "def-pc-quasi-iso-modules",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-kflat-tensor-quasi-iso",
+  "lem-pc-stalk-tensor-complex",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G; source checked online; proof expanded by B3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective B modules in degrees r to s has Tor amplitude r minus d to s over A when B has Tor dimension d over A",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of projective B modules in degrees r to s has Tor amplitude r minus d to s over A if B has Tor dimension at most d over A",
+   "results": "8 hits: CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.hasProjectiveDimensionLT_iff, CategoryTheory.HasProjectiveDimensionLT.mk', DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.projectiveDimension_le_iff, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.amplitude|tor.dimension|Tor.*IsZero",
+   "results": "9 hits: Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/HomologicalComplexLimits.lean, Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRelativeTensorLocallyBounded",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Relative finite Tor part of the proper perfect pushforward argument descending from lem-sc-finite-duality; steps 2 and 3 of lem-pc-perfect-relative-tensor-locally-bounded (bounded-model amplitude and identification with the prescribed K-flat representative).",
+   "via": [
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictlyPerfectRelativeTensorStalkBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyPerfectRelativeTensorStalkBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictlyPerfect_relativeTensor_stalk_bound",
+  "statement": "theorem strictlyPerfect_relativeTensor_stalk_bound\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (V : X.Opens)\n    (L : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ)\n    (hL : IsStrictlyPerfect X V L)\n    (eL : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj K) ≅ DerivedCategory.Q.obj L))\n    (r s : ℤ) (hdegrees : ∀ t : ℤ, t < r ∨ s < t → IsZero (L.X t))\n    (y : X) (hy : y ∈ V) (d : ℕ)\n    (hTor : ∀ M : ModuleCat.{u} (Y.presheaf.stalk (f y)),\n      ∀ j : ℕ, d < j →\n        IsZero (((Tor' (ModuleCat.{u} (Y.presheaf.stalk (f y))) j).obj\n          ((ModuleCat.restrictScalars (f.stalkMap y).hom).obj\n            (ModuleCat.of (X.presheaf.stalk y) (X.presheaf.stalk y)))).obj M))\n    (P : CochainComplex (SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj\n        (TopCat.Sheaf.inverseImageRing f.base Y.sheaf))) ℤ)\n    (hP : CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base Y.sheaf) P)\n    (q : P ⟶ ((SheafOfModules.restrictScalars\n      ((sheafCompose (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).map\n          (Modules.tensorPullbackRingMap f))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K) (hq : QuasiIso q) :\n    ∀ F : SheafOfModules.{u} ((sheafCompose\n          (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj\n            (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)),\n        ∀ i : ℤ, i < r - (d : ℤ) ∨ s < i →\n          IsZero ((TopCat.Sheaf.forget AddCommGrpCat.{u} X.carrier ⋙\n            TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).obj\n              ((SheafOfModules.toSheaf _).obj\n                ((CochainComplex.mapBifunctor P\n                  ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n                  (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory\n                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i)))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045513-L-124618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045513-L-124618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

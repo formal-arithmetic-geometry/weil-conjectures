@@ -11086,3 +11086,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffinePerfectSectionsProjectiveModel (stage 3; reviewer PASS; first push; landing 20261013T045511-L-124133 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/B2/Sheaf.AlgebraicGeometry.FiniteTypeKernelLocalGenerators (stage 3; reviewer PASS; after a return; landing 20261013T045512-L-124292 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/B3/Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T045512-L-124453 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:55 L: merged deliver/B3/Sheaf.AlgebraicGeometry.PerfectRelativeTensorLocallyBounded (stage 3; reviewer PASS; first push; landing 20261013T045513-L-124618 (interface); batch 20261013T045507; modules 3; new nodes 2)

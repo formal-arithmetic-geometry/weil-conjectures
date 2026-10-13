@@ -18,58 +18,36 @@
  ],
  "proof": [
   {
-   "text": "A locally finite type morphism to a Noetherian scheme is pseudo-coherent. Tag 069C applies to the stalkwise hypothesis [def-pc-perfect-morphism], giving around each point an open neighbourhood on which the structure sheaf has Tor amplitude [-d,0] over the inverse-image structure sheaf. Its proof uses a finite polynomial presentation, pseudo-coherence over that polynomial ring, and the finite global dimension of its fibres to turn stalkwise perfectness into perfectness on an open neighbourhood. This is the essential geometric step; no compactness is assumed.",
+   "text": "At the chosen point x, apply [lem-pc-stalk-tor-dimension-locally-uniform] to obtain U containing x and a natural d bounding the structure stalk Tor dimension at every y in U, independently of the test module.",
    "uses": [
-    "def-pc-perfect-morphism"
+    "lem-pc-stalk-tor-dimension-locally-uniform"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
-   }
+   "elementary": false
   },
   {
-   "text": "Intersect that neighbourhood with a strictly perfect neighbourhood for E [def-pc-perfect-complex]. Choose [r,s] containing the degrees of the bounded model. Each term is a retract of a finite free structure module and therefore has Tor amplitude [-d,0] after scalar restriction. The finite filtration by terms, with quotients the terms shifted into their respective degrees, gives amplitude [r-d,s] for the entire complex by the long exact sequences of tensor cohomology. Enlarge the endpoints if necessary so the interval is ordered. The neighbourhood and interval are independent of the test module.",
+   "text": "Unpack IsPerfect at x to obtain V containing x, a strictly perfect model L, and an isomorphism from E restricted to V to QL. Unpack the boundedness part of IsStrictlyPerfect to obtain r,s and vanishing terms outside [r,s]. Map the given representative isomorphism QK ≅ E through the restriction derived functor and compose with the local model isomorphism.",
    "uses": [
     "def-pc-perfect-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
-   }
+   "elementary": true
   },
   {
-   "text": "The prescribed quasi-isomorphism q from K-flat P [def-pc-kflat-complex, def-pc-quasi-iso-modules] computes the scalar-restricted derived tensor of K, hence that of E through the given representative isomorphism. Apply the K-flat stalk criterion [lem-pc-kflat-stalk-criterion] to the ringed space (X,f⁻¹O_Y) to obtain K-flat stalk complexes. At each stalk, compare to a common K-flat replacement of the scalar-restricted bounded model. K-flat model independence [lem-pc-kflat-tensor-quasi-iso] (transported from the one-point-site module presentation), exactness of restriction and stalks, and stalk compatibility with total tensor identify its tensor homology stalks with those of the local bounded model. They therefore vanish in every degree outside the chosen interval. For a zero local model use [0,0]; an empty scheme has no points to check.",
+   "text": "Choose the neighbourhood U intersect V and endpoints a = min (r-d) s, b = s. They are ordered, even for a zero model or r>s. A point y of this intersection is in U and V. Apply [lem-pc-strictly-perfect-relative-tensor-stalk-bound] using the bound at y and the local model. If i<a, then i<r-d by min_le_left; if b<i, then s<i. This proves the required tensor-homology stalk vanishing for all F and i.",
    "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-quasi-iso-modules",
-    "lem-pc-kflat-tensor-quasi-iso",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-stalk-tensor-complex",
-    "lem-pc-kflat-stalk-criterion"
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
   "def-pc-perfect-complex",
-  "def-pc-perfect-morphism",
-  "def-pc-quasi-iso-modules",
-  "lem-pc-kflat-stalk-criterion",
-  "lem-pc-kflat-tensor-quasi-iso",
-  "lem-pc-stalk-tensor-complex",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-pc-stalk-tor-dimension-locally-uniform",
+  "lem-pc-strictly-perfect-relative-tensor-stalk-bound"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Expanded local part of Tags 069C and 0B6G, checked against their online text; local checkout of literature is absent"
+  "place": "B3 Lean reduction of the original three steps from Tags 069C and 0B6G; local uniform geometric bound and pointwise bounded-model comparison split into two named intermediate statements; neighbourhood intersection and endpoint selection are proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -150,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T034201-L-3765196",
+  "landing": "20261013T045513-L-124618",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

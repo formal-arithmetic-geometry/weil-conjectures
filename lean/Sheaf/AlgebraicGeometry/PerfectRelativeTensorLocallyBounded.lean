@@ -13,6 +13,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.AlgebraicGeometry.StalkTorDimensionLocallyUniform
+import Sheaf.AlgebraicGeometry.StrictlyPerfectRelativeTensorStalkBound
 
 /-! # Local relative Tor bounds for perfect complexes
 
@@ -84,6 +86,24 @@ theorem perfect_relativeTensor_locally_bounded
                 ((CochainComplex.mapBifunctor P
                   ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)
                   (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory
-                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i))) := by sorry
+                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i))) := by
+  intro x
+  obtain ⟨U, hxU, d, hU⟩ := stalkTorDimension_locally_uniform f hperfect x
+  obtain ⟨V, hxV, L, hL, ⟨eL⟩⟩ := hE x
+  obtain ⟨r, s, hdegrees⟩ := hL.1
+  obtain ⟨eK⟩ := e
+  have eKL : Nonempty ((SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj
+        (DerivedCategory.Q.obj K) ≅ DerivedCategory.Q.obj L) :=
+    ⟨((SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) V).mapDerivedCategory.mapIso eK) ≪≫ eL⟩
+  refine ⟨U ⊓ V, ⟨hxU, hxV⟩, min (r - (d : ℤ)) s, s, min_le_right _ _, ?_⟩
+  intro F i hi y hy
+  apply strictlyPerfect_relativeTensor_stalk_bound f K V L hL eKL r s hdegrees
+    y hy.2 d (hU y hy.1) P hP q hq F i
+  rcases hi with hi | hi
+  · exact Or.inl (lt_of_lt_of_le hi (min_le_left _ _))
+  · exact Or.inr hi
+
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-stalk-tor-dimension-locally-uniform",
+ "kind": "statement",
+ "title": "Stalkwise Tor dimensions are locally uniformly bounded",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], with $Y$ Noetherian [pqf-def-locnoeth], and $f:X\\to Y$ locally of finite type. Suppose that every source local ring has finite Tor dimension over its target local ring [def-pc-perfect-morphism]. For every $x\\in X$ there are an open $U\\subseteq X$ with $x\\in U$ and an integer $d\\geq0$ such that for every $y\\in U$, every $\\mathcal O_{Y,f(y)}$-module $M$, and every integer $j>d$, $\\operatorname{Tor}^{\\mathcal O_{Y,f(y)}}_j(\\mathcal O_{X,y},M)=0$. The module structure uses the stalk homomorphism of $f$; the same $d$ works for all $y\\in U$ and all $M$. No quasi-compactness of $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-perfect-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Around the point choose affine source and target neighbourhoods with source algebra B of finite type over the Noetherian target algebra A. Present B as a quotient of a finite polynomial algebra over A. Noetherianity makes B pseudo-coherent over this polynomial algebra. Use the stalkwise finite Tor hypothesis at primes of B. At polynomial primes not meeting the support the localized B-module is zero; at all others its Tor dimension over the corresponding A-localization is finite. Polynomial fibres have finite global dimension, so the localized B-modules are perfect over the localized polynomial algebras. The local criterion for pseudo-coherent modules yields a perfect polynomial module, hence a perfect ring map A to B. This is Tag 069C, implication (3) to (1).",
+   "uses": [
+    "def-pc-perfect-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C"
+   }
+  },
+  {
+   "text": "A perfect ring map gives a finite Tor bound d for B over A. Localizing at source and image primes preserves this bound. Thus every stalk in the chosen affine source neighbourhood has the same Tor vanishing above d for all target-stalk modules. This is Tag 069C, implication (1) to (2), or its stalk formulation via Tag 09U9. There is no point to check on an empty scheme; no finite cover of the entire source is used.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C; source checked online; proof expanded by B3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism to a Noetherian scheme with finite Tor dimension at each stalk has a Tor dimension bound uniform on a neighborhood of every point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform local Tor dimension of finite type morphism over Noetherian scheme",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.locallyOfFiniteType_iff",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|tor.amplitude|tor.dimension",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRelativeTensorLocallyBounded",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Relative finite Tor part of the proper perfect pushforward argument descending from lem-sc-finite-duality; step 1 of lem-pc-perfect-relative-tensor-locally-bounded (Tag 069C, stalkwise finite Tor dimension to a uniform neighbourhood bound).",
+   "via": [
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkTorDimensionLocallyUniform",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkTorDimensionLocallyUniform.lean",
+  "declaration": "AlgebraicGeometry.stalkTorDimension_locally_uniform",
+  "statement": "theorem stalkTorDimension_locally_uniform\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (f : X ⟶ Y) [LocallyOfFiniteType f]\n    (hperfect : HasStalkwiseFiniteTorDimension f) :\n    ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ d : ℕ,\n      ∀ y : X, y ∈ U → ∀ M : ModuleCat.{u} (Y.presheaf.stalk (f y)),\n        ∀ j : ℕ, d < j →\n          IsZero (((Tor' (ModuleCat.{u} (Y.presheaf.stalk (f y))) j).obj\n            ((ModuleCat.restrictScalars (f.stalkMap y).hom).obj\n              (ModuleCat.of (X.presheaf.stalk y) (X.presheaf.stalk y)))).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045513-L-124618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045513-L-124618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
