@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.RingTheory.FinitePresentationComparisonSystem
+import Sheaf.RingTheory.FilteredPushoutBijectiveStage
 
 /-! # A finitely presented comparison model reaches a stage -/
 
@@ -69,6 +71,15 @@ theorem exists_finitePresentation_model_stage
             (Algebra.TensorProduct.includeLeftRingHom (R := P)
               (A := ↥(F.obj i) ⊗[F.obj i₀] B₀) (B := Q)) =
             (Algebra.TensorProduct.map (Algebra.ofId (F.obj i) (F.obj i)) φ₀).toRingHom := by
-  sorry
+  classical
+  obtain ⟨i, hi, aPs, D, E, α, d, c, cD, cE, f, hD, hE,
+      hfilt, hcomm, hbij, hfpα, hpush, hcompat⟩ :=
+    exists_finitePresentation_comparison_system F i₀ B₀ C₀ φ₀ hfp P Q aP e he
+  let := hfilt
+  obtain ⟨j, hj⟩ := CommRingCat.exists_bijective_stage_of_filtered_pushouts
+    D E α cD cE hD hE f hcomm hbij hfpα hpush
+  refine ⟨j.val, hi.trans j.property, aPs j, ?_⟩
+  let eᵢ := (d j).symm.trans ((RingEquiv.ofBijective (α.app j).hom hj).trans (c j))
+  exact ⟨eᵢ, hcompat j⟩
 
 end RingHom

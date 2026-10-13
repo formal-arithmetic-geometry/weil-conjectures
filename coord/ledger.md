@@ -11110,3 +11110,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous (stage 3; reviewer PASS; first push; landing 20261013T045523-L-127334 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PicardExternalCupQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T045524-L-127495 (interface); batch 20261013T045507; modules 4; new nodes 3)
 - 04:55 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PicardFiberDirectImageRankConstructible (stage 3; reviewer PASS; first push; landing 20261013T045524-L-127606 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:55 L: merged deliver/F1/Sheaf.RingTheory.FinitePresentationModelStage (stage 3; reviewer PASS; first push; landing 20261013T045525-L-127760 (interface); batch 20261013T045507; modules 3; new nodes 2)

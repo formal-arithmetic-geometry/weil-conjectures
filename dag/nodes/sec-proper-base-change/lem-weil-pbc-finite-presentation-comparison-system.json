@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-comparison-system",
+ "kind": "statement",
+ "title": "The comparison map descends in a filtered system of finitely presented pushout maps",
+ "statement": "With the directed ring diagram F, i₀, the A₀-algebras B₀,C₀, finitely presented map φ₀, rings P,Q, P finitely presented over Z, Q finitely presented over P, P-algebra structure on B = (colim F) tensor_A₀ B₀, and compatible comparison isomorphism B tensor_P Q ≅ (colim F) tensor_A₀ C₀ as in the model-stage statement [def-weil-pbc-category-colimit, def-weil-pbc-finitely-presented-algebra], there is i ≥ i₀ such that on J = {j | i ≤ j} one can give every Bⱼ = F(j) tensor_A₀ B₀ a P-algebra structure and construct ring diagrams D,E with natural transformation α, ring equivalences dⱼ : D(j) ≅ Bⱼ tensor_P Q and cⱼ : E(j) ≅ F(j) tensor_A₀ C₀, colimit cocones cD,cE, and a bijective colimit comparison f. J is filtered; αⱼ followed by the target coprojection equals the source coprojection followed by f; every αⱼ is finitely presented; every transition square of α is a pushout. Under dⱼ,cⱼ, αⱼ composed with the left inclusion is id_F(j) tensor φ₀. The statement asserts no bijectivity or inverse for αⱼ at any stage.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (lemma-flat-finite-presentation-limit-flat), proof of (3), comparison maps Ψ; Tags 00QO (lemma-characterize-finite-presentation) and 05N9 (lemma-colimit-fp-algebras) (2), (3). Sources checked online at https://stacks.math.columbia.edu/tag/02JO and https://stacks.math.columbia.edu/tag/05N9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "On upper sets, construct the B and C ring tensor diagrams. Representatives and eventual equality come from the directed base-change elementwise theorem. Define the ring colimit universal map by representatives; eventual equality makes it well defined, and computing sums and products at common upper bounds makes it a ring homomorphism. This identifies the colimits with B and C.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor P → B over Z through a B stage, and transport its P-structure to later stages. The comparison induces Q → C as a P-algebra map. Factor this through a later C stage over P by finite presentation. Its restriction to P equals the chosen B-to-C map, by the factorization over P.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the tensor universal property to construct ψⱼ on pure tensors b tensor q, and verify naturality and left-inclusion compatibility on pure tensors. Tensor cancellation identifies transition squares with base-change pushouts. Base change of φ₀ makes Cⱼ finitely presented over Bⱼ; base change of P → Q makes Bⱼ tensor_P Q finitely presented over Bⱼ. Finite-type cancellation (RingHom.FinitePresentation.of_comp_finiteType) makes ψⱼ finitely presented.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor products commute with these colimits by the universal property: compatible maps out correspond to compatible pairs of algebra maps agreeing on P. The source colimit is B tensor_P Q. The comparison on this colimit equals e on the B and Q inclusions, so is bijective. Lift rings into the common universe and conjugate all maps by the canonical ULift ring equivalences.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
+  "place": "Construction made explicit from the cited Stacks proof; bijectivity argument formalized directly from Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented comparison tensor ring homomorphism descends together with filtered pushout systems of base change rings",
+   "results": "Hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.CodescendsAlong.algebraMap_tensorProduct, RingHom.CodescendsAlong.includeRight, RingHom.CodescendsAlong.mk, Algebra.FinitePresentation.baseChange, RingHom.finitePresentation_isStableUnderBaseChange, CommRingCat.isPushout_tensorProduct, instFinitePresentationTensorProduct",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented comparison tensor ring homomorphism descends together with filtered pushout systems of base change rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*system|exists.*finitePresentation.*model|exists.*map.*finitePresentation.*colimit",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct compatible tensor product algebra maps at finite stages from a finitely presented integer algebra and a finitely presented relative algebra over a directed ring colimit",
+   "results": "Independent second reading: factorization, eventual equality, categorical presentability and tensor-model component lemmas only; no exact theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FinitePresentationModelStage",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules'); algebra comparison-map descent in Tag 02JO (3)",
+   "via": [
+    "lem-weil-pbc-finite-presentation-model-stage",
+    "lem-weil-pbc-colimit-flat-ring-map-stage",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FinitePresentationComparisonSystem",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationComparisonSystem.lean",
+  "declaration": "RingHom.exists_finitePresentation_comparison_system",
+  "statement": "theorem exists_finitePresentation_comparison_system\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v}) [HasColimit F]\n    (i₀ : I) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀]\n    [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]\n    (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hfp : φ₀.toRingHom.FinitePresentation)\n    (P Q : Type y) [CommRing P] [CommRing Q] [Algebra P Q]\n    [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q]\n    (aP : letI := (colimit.ι F i₀).hom.toAlgebra\n      Algebra P (↥(colimit F) ⊗[F.obj i₀] B₀))\n    (e : letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := aP\n      (↥(colimit F) ⊗[F.obj i₀] B₀) ⊗[P] Q ≃+* (↥(colimit F) ⊗[F.obj i₀] C₀))\n    (he : letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := aP\n      e.toRingHom.comp\n        (Algebra.TensorProduct.includeLeftRingHom (R := P)\n          (A := ↥(colimit F) ⊗[F.obj i₀] B₀) (B := Q)) =\n        (Algebra.TensorProduct.map (Algebra.ofId ↥(colimit F) ↥(colimit F)) φ₀).toRingHom) :\n    ∃ (i : I) (hi : i₀ ≤ i),\n      let J := {j : I // i ≤ j}\n      ∃ (aPs : ∀ j : J,\n          letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n          Algebra P (↥(F.obj j.val) ⊗[F.obj i₀] B₀)),\n        ∃ (D E : J ⥤ CommRingCat.{max v w x y}) (α : D ⟶ E),\n          ∃ (d : ∀ j : J,\n              letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n              letI := aPs j\n              ↥(D.obj j) ≃+* (↥(F.obj j.val) ⊗[F.obj i₀] B₀) ⊗[P] Q),\n            ∃ (c : ∀ j : J,\n                letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n                ↥(E.obj j) ≃+* (↥(F.obj j.val) ⊗[F.obj i₀] C₀)),\n              ∃ (cD : Cocone D) (cE : Cocone E) (f : cD.pt ⟶ cE.pt),\n                ∃ (_hD : IsColimit cD) (_hE : IsColimit cE), IsFiltered J ∧\n                (∀ j, α.app j ≫ cE.ι.app j = cD.ι.app j ≫ f) ∧\n                Function.Bijective f ∧\n                (∀ j, (α.app j).hom.FinitePresentation) ∧\n                (∀ {j k} (r : j ⟶ k), IsPushout (α.app j) (D.map r)\n                  (E.map r) (α.app k)) ∧\n                (∀ j : J,\n                  letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n                  letI := aPs j\n                  ((c j).toRingHom.comp ((α.app j).hom.comp (d j).symm.toRingHom)).comp\n                    (Algebra.TensorProduct.includeLeftRingHom (R := P)\n                      (A := ↥(F.obj j.val) ⊗[F.obj i₀] B₀) (B := Q)) =\n                    (Algebra.TensorProduct.map (Algebra.ofId (F.obj j.val) (F.obj j.val))\n                      φ₀).toRingHom)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T045525-L-127760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T045525-L-127760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
