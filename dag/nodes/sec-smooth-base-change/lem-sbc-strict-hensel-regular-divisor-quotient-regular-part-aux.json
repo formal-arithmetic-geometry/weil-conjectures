@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part-aux",
+ "kind": "statement",
+ "title": "Noetherianity and local regularity of strict hensel divisor quotient",
+ "statement": "The strict henselization divisor quotient is Noetherian and all its prime localizations are regular local.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 05WS and 06LN"
+ },
+ "stmt_deps": [
+  "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part"
+ ],
+ "proof": [
+  {
+   "text": "Identify the quotient with the strict henselization of the localization of R/(f) at the image of the geometric point (Tags 05WS and 06LN). Since R/(f) is regular, its localizations are regular local and strict henselization preserves this property and Noetherianity. The nonunit hypothesis places the divisor in the selected prime, yielding the asserted family for every prime of the quotient.",
+   "uses": [
+    "lem-sc-strict-henselization-regular"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-regular"
+ ],
+ "proof_origin": {
+  "by": "Y3",
+  "document": "Stacks Project",
+  "place": "Tags 05WS and 06LN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization quotient regular Noetherian",
+   "date": "2026-10-14",
+   "results": "No exact theorem found in the library or Mathlib.",
+   "verdict": "Use the stated Stacks result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsRegularRing IsRegularLocalRing Localization.AtPrime",
+   "date": "2026-10-14",
+   "results": "Generic regular-local constructors only; no strict henselization quotient theorem.",
+   "verdict": "The auxiliary statement is required."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing R IsRegularLocalRing",
+   "date": "2026-10-14",
+   "results": "No exact quotient-preservation match.",
+   "verdict": "No shorter library theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization quotient regular ring",
+   "date": "2026-10-14",
+   "results": "Service search found no exact theorem.",
+   "verdict": "No shorter result available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part",
+   "place": "proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientRegularAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_divisor_quotient_noetherian_and_local_regular",
+  "statement": "theorem strictHenselizationRing_divisor_quotient_noetherian_and_local_regular\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsNoetherianRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧\n      ∀ (p : Ideal (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}))\n        [p.IsPrime],\n        IsRegularLocalRing (Localization.AtPrime p)",
+  "by": "Y3",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T162414-L-1520594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T162414-L-1520594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

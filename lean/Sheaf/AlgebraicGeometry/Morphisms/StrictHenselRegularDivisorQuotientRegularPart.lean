@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularAux
 
 /-! Regularity component of the canonical strict henselization divisor quotient. -/
 
@@ -29,6 +30,12 @@ theorem strictHenselizationRing_regular_divisor_quotient_part
     (hb : Spec.map b = strictHenselizationStructuralMap barY)
     (hg : ¬ IsUnit (b.hom f)) :
     IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-  sorry
+  let H := strictHenselizationRing barY ⧸ Ideal.span {b.hom f}
+  obtain ⟨_, hloc⟩ :=
+    strictHenselizationRing_divisor_quotient_noetherian_and_local_regular
+      R f barY b hb hg
+  let _ : ∀ (p : Ideal H) [p.IsPrime],
+      IsRegularLocalRing (Localization.AtPrime p) := hloc
+  exact ⟨fun p hp => hloc p⟩
 
 end AlgebraicGeometry.Scheme
