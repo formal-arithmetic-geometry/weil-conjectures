@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-ordered-cech-module-retraction",
+ "kind": "statement",
+ "title": "Split ordered restriction for module sheaves",
+ "statement": "Let $X',T'$ be schemes and $f':X'\\to T'$ a morphism. Let $M$ be a module sheaf on $X'$ [def-weil-sheaf-of-modules-category], and $W_i$, $i\\in\\operatorname{Fin}(r)$, any finite family of opens. Let $K$ be an integer cochain complex of module sheaves on $T'$ with zero negative terms. Suppose for all nonnegative $p$ and opens $B\\subset T'$ there are additive equivalences $a_{p,B}:\\Gamma(B,K^p)\\simeq\\prod_t\\Gamma((\\bigcap_lW_{t(l)})\\cap(f')^{-1}B,M)$ indexed by increasing $(p+1)$-tuples [def-sc-alternating-cech-total-complex]. Assume these equivalences commute with restrictions of $B$, take multiplication by $b\\in\\Gamma(B,\\mathcal O_{T'})$ to multiplication by the restriction of $(f')^*b$ on each coordinate, and intertwine $d_K$ with the signed face-restriction sum. Let $D$ be a nonnegative cochain complex of module sheaves on $X'$. Suppose its terms, after forgetting to presheaves of global-ring modules, are identified by natural isomorphisms $e_p$ with the usual all-tuple Cech terms of $W,M$. Assume $e$ intertwines differentials, and each coordinate on an open $C\\subset X'$ takes multiplication by $b\\in\\Gamma(C,\\mathcal O_{X'})$ to multiplication by its restriction to $(\\bigcap_lW_{y(l)})\\cap C$. Let $L=(f'_*D)^{\\mathrm{ext}}$ and let $q$ be its ordered coordinate maps [def-pc-ordered-cech-module-coordinates]. There exist cochain maps $R:L\\to K$ and $I:K\\to L$ of module sheaves such that $R\\circ I=\\mathrm{id}_K$ and $a_{p,B,t}(R(s))=q_{p,B,t}(s)$ for every nonnegative degree, base open, section and increasing tuple. No covering assumption is made.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-alternating-cech-total-complex",
+  "def-pc-ordered-cech-module-coordinates"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 01FJ and 01FK; Coherence part (a), restriction to increasing tuples and signed extension; comparison proof steps 1 and 2"
+ },
+ "proof": [
+  {
+   "text": "Evaluate e on inverse-image opens. Define R sectionwise by the inverse of a applied to the ordered coordinates q. The proved coordinate naturality and local scalar identity, with hn and hl, show that R is natural and locally linear. The face equations ha and hd identify its differential equation: deletion of an increasing entry is the corresponding usual Cech face, and the two intersection restriction composites are the unique maps between the same opens.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define I on sections by signed extension of a-coordinates. A distinct tuple is transported from its unique sorted increasing tuple, multiplied by the sorting sign; a repeated tuple has value zero. Use the inverse of e and the inverse of the product-intersection isomorphisms to return to D. SignedCechExtension_differential gives stability under the differential: for distinct tuples its permutation law matches the ordered differential, while repeated tuple faces cancel in pairs. The inputs ha and hd transport this equation to I.",
+   "uses": [
+    "lem-pc-signed-cech-extension-differential",
+    "def-pc-ordered-cech-module-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All extension components consist of restrictions and integer multiples. Their scalar and restriction equations follow from hl, hlinear and naturality of e. Signed extension is identity on increasing tuples. Thus injectivity of a gives R after I equal to identity, and the defining equation of R gives its displayed coordinate formula. Put components in negative degrees equal to zero; hK and extension by zero make the chain equations there automatic. Empty families and empty coefficient opens require no exceptional choices.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordered-cech-module-coordinates",
+  "lem-pc-signed-cech-extension-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K2",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 01FJ and 01FK",
+  "note": "Module-sheaf assembly of the cited explicit restrictions and sorting formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordered Cech restriction split retraction and locally linear sorting null homotopy",
+   "results": "Service unavailable: Internal Server Error, reported by msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Cech complex of module sheaves homotopy equivalent to all tuple Cech complex",
+   "results": "DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex compares a different normalized complex. No ordered module-sheaf retraction or natural locally linear sorting theorem. The signed-extension query returned general sheaf restrictions and unrelated Nobeling lemmas.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv; PartialOrder.isIso_iff_eq",
+   "results": "Generic homotopy-equivalence constructors and the poset isomorphism criterion. These prove the assembly and the coordinate transport, but not the module-sheaf sorting comparison.",
+   "date": "2026-10-13",
+   "verdict": "only generic components"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Hh]omotopy|[Hh]omotopy.*[Cc]ech|[Ss]igned.*[Ee]xtension in Mathlib sites and algebraic geometry; ordered Cech in the blueprint",
+   "results": "No matching module-sheaf comparison. Sheaf has SignedCechExtension and both sorting identities for additive cochains; these lack naturality and local scalar assembly. blueprint_refs.py searches 01FM, ordered Cech, signed extension and intersection product returned no blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrderedCechModuleComparison",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence part (a), restriction to increasing tuples and signed extension; comparison proof steps 1 and 2",
+   "via": [
+    "lem-pc-ordered-cech-module-comparison",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrderedCechModuleRetraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrderedCechModuleRetraction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.orderedCech_module_retraction",
+  "statement": "theorem orderedCech_module_retraction {X' T' : Scheme.{u}} (f' : X' ⟶ T')\n    (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (K : CochainComplex T'.Modules ℤ) (hK : K.IsStrictlyGE 0)\n    (a : ∀ (p : ℕ) (B : T'.Opens),\n      Γ(K.X (p : ℤ), B) ≃+\n        (∀ t : Fin (p + 1) ↪o Fin r,\n          Γ(M, alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t ⊓ f' ⁻¹ᵁ B)))\n    (hn : ∀ (p : ℕ) {B C : T'.Opens} (i : B ⟶ C)\n        (s : Γ(K.X (p : ℤ), C)) (t : Fin (p + 1) ↪o Fin r),\n      a p B ((K.X (p : ℤ)).presheaf.map i.op s) t =\n        M.presheaf.map (homOfLE (inf_le_inf le_rfl\n          ((TopologicalSpace.Opens.map f'.base).map i).le)).op (a p C s t))\n    (hl : ∀ (p : ℕ) (B : T'.Opens) (b : Γ(T', B))\n        (s : Γ(K.X (p : ℤ), B)) (t : Fin (p + 1) ↪o Fin r),\n      a p B (b • s) t =\n        X'.presheaf.map (homOfLE (show\n          alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t ⊓ f' ⁻¹ᵁ B ≤ f' ⁻¹ᵁ B\n            from inf_le_right)).op (f'.app B b) • a p B s t)\n    (ha : ∀ (p : ℕ) (B : T'.Opens) (s : Γ(K.X (p : ℤ), B))\n        (t : Fin (p + 2) ↪o Fin r),\n      a (p + 1) B ((K.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).app B s) t =\n        ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •\n          M.presheaf.map (homOfLE (inf_le_inf\n            (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op\n              (a p B s ((Fin.succAboveOrderEmb j).trans t)))\n    (D : CochainComplex X'.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor W₀).obj\n          ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor W₀).obj\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).d p (p + 1))\n    (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X'.Opens),\n        let c : Γ(D.X p, B) → Γ(M, (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ULift.{u} (Fin r) ↦\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n                M.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ W₀ (y l)))) y).app (op B) s\n        ∀ (a : Γ(X', B)) (s : Γ(D.X p, B)),\n          c (a • s) = X'.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B ⟶ B).op a • c s) :\n    ∃ (rmap : ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend\n      ComplexShape.embeddingUpNat) ⟶ K) (imap : K\n        ⟶ ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend\n      ComplexShape.embeddingUpNat)),\n      imap ≫ rmap = 𝟙 K ∧\n      ∀ (p : ℕ) (B : T'.Opens) (s : Γ(\n        ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend\n      ComplexShape.embeddingUpNat).X (p : ℤ), B))\n        (t : Fin (p + 1) ↪o Fin r),\n        a p B ((rmap.f (p : ℤ)).app B s) t =\n          orderedCechModuleCoordinate f' M W₀ D e p B t s",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T054224-L-444913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T054224-L-444913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

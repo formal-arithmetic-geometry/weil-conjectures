@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Homology.Homotopy
+import Sheaf.AlgebraicGeometry.OrderedCechModuleRetraction
+import Sheaf.AlgebraicGeometry.OrderedCechModuleKernelNullHomotopic
 
 /-! # Ordered versus usual Čech complexes of module sheaves
 
@@ -107,6 +109,31 @@ theorem orderedCech_module_comparison {X' T' : Scheme.{u}} (f' : X' ⟶ T')
             (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B ⟶ B).op a • c s) :
     Nonempty (HomotopyEquiv K
       ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend
-        ComplexShape.embeddingUpNat)) := by sorry
+        ComplexShape.embeddingUpNat)) := by
+  obtain ⟨rmap, imap, hi, hr⟩ :=
+    orderedCech_module_retraction f' M W₀ K hK a hn hl ha D e hd hlinear
+  let L := (((Modules.pushforward f').mapHomologicalComplex _).obj D).extend
+    ComplexShape.embeddingUpNat
+  let g : L ⟶ L := rmap ≫ imap - 𝟙 L
+  have hgr : g ≫ rmap = 0 := by
+    dsimp only [g]
+    rw [Preadditive.sub_comp, Category.assoc, hi, Category.comp_id,
+      Category.id_comp, sub_self]
+  have hg : ∀ (p : ℕ) (B : T'.Opens) (s : Γ(L.X (p : ℤ), B))
+      (t : Fin (p + 1) ↪o Fin r),
+      orderedCechModuleCoordinate f' M W₀ D e p B t ((g.f (p : ℤ)).app B s) = 0 := by
+    intro p B s t
+    rw [← hr]
+    have hz := congrArg (fun k : L ⟶ K ↦ (k.f (p : ℤ)).app B s) hgr
+    have hzero : (rmap.f (p : ℤ)).app B ((g.f (p : ℤ)).app B s) = 0 := by
+      simpa using hz
+    rw [hzero, map_zero]
+    rfl
+  obtain ⟨h⟩ := orderedCech_module_kernel_nullHomotopic f' M W₀ D e hd hlinear g hg
+  exact ⟨{
+    hom := imap
+    inv := rmap
+    homotopyHomInvId := Homotopy.ofEq hi
+    homotopyInvHomId := Homotopy.equivSubZero.symm h }⟩
 
 end AlgebraicGeometry.Scheme.Modules
