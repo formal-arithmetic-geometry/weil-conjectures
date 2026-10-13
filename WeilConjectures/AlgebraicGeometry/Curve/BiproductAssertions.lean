@@ -40,13 +40,14 @@ variable {ι : Type*} [Fintype ι] {A A' : Type*} [AddCommGroup A] [AddCommGroup
 /-- An abelian group which is a finite sum of subsingleton groups is a subsingleton. -/
 lemma subsingleton_of_sum_comp_eq (h : ∀ x, ∑ a, i a (p a x) = x)
     [∀ a, Subsingleton (B a)] : Subsingleton A :=
-  ⟨fun x y ↦ by rw [← h x, ← h y, Subsingleton.elim (p _ x) (p _ y)]⟩
+  ⟨fun x y ↦ (h x).symm.trans <| (Finset.sum_congr rfl fun a _ ↦ by
+    rw [Subsingleton.elim (p a x) (p a y)]).trans (h y)⟩
 
 /-- An abelian group which is a finite sum of finite groups is finite. -/
 lemma finite_of_sum_comp_eq (h : ∀ x, ∑ a, i a (p a x) = x) [∀ a, Finite (B a)] : Finite A :=
-  Finite.of_injective (fun x a ↦ p a x) fun x y hxy ↦ by
-    rw [← h x, ← h y]
-    exact Finset.sum_congr rfl fun a _ ↦ by rw [congrFun hxy a]
+  Finite.of_injective (fun x a ↦ p a x) fun x y hxy ↦
+    (h x).symm.trans <| (Finset.sum_congr rfl fun a _ ↦ by
+      rw [show p a x = p a y from congrFun hxy a]).trans (h y)
 
 variable {p i}
 
@@ -93,6 +94,8 @@ namespace IsCurve
 
 open Etale
 
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 variable {Λ : Type (u + 1)} [CommRing Λ] {k : Type u} [Field k] {X : Scheme.{u}}
 
 /-- **Finite biproduct equivalence for unconditional curve assertions.** Let `H ≅ ⨁ₐ Gₐ` be a
@@ -120,9 +123,15 @@ theorem prime_biproduct_unconditional_iff (f : X ⟶ Spec (.of k)) {I : Type*} [
       CategoryTheory.Functor.map_id]
   have htot : ∑ a, π a ≫ ι a = 𝟙 _ := by
     have h : ∑ a, (e.hom ≫ biproduct.π G a) ≫ biproduct.ι G a ≫ e.inv = 𝟙 H := by
-      simp_rw [Category.assoc, ← Preadditive.comp_sum, ← Category.assoc,
-        ← Preadditive.sum_comp, biproduct.total, Category.id_comp, e.hom_inv_id]
-    simp only [π, ι, ← Φ.map_comp, ← Φ.map_sum, h, CategoryTheory.Functor.map_id]
+      calc ∑ a, (e.hom ≫ biproduct.π G a) ≫ biproduct.ι G a ≫ e.inv
+          = e.hom ≫ (∑ a, biproduct.π G a ≫ biproduct.ι G a) ≫ e.inv := by
+            simp only [Preadditive.comp_sum, Preadditive.sum_comp, Category.assoc]
+        _ = 𝟙 H := by rw [biproduct.total, Category.id_comp, e.hom_inv_id]
+    calc ∑ a, π a ≫ ι a
+        = Φ.map (∑ a, (e.hom ≫ biproduct.π G a) ≫ biproduct.ι G a ≫ e.inv) := by
+          rw [Φ.map_sum]
+          exact Finset.sum_congr rfl fun a _ ↦ (Φ.map_comp _ _).symm
+      _ = 𝟙 _ := by rw [h, CategoryTheory.Functor.map_id]
   have hsum (q : ℕ) (x : Sheaf.H (Φ.obj H) q) :
       ∑ a, Sheaf.H.map (ι a) q (Sheaf.H.map (π a) q x) = x := by
     simp only [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_sum_apply, htot, Sheaf.H.map_id_apply]
