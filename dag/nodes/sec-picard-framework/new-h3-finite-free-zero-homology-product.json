@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Using the fixed projections and the Hom differential formula, hzero identifies the Hom complex with the coordinatewise product of the translated Hom(E.X p,K) complexes. Outside the interval of hsupp, Hom from the zero source is zero, so the product is equivalent to a finite product.",
+   "text": "Let P=Hom(E,K) and F_p=Hom(E.X p,-). The chosen projections of homComplex_projections_exists and hzero give coordinate short-complex morphisms τ_p from P.sc n to F_p applied to K.sc'(p+prev n,p+n,p+next n). Their three components are exactly the fixed projections. ShortComplex.isLimitOfIsLimitπ and the three chosen degreewise product limits show that these τ_p form a limiting fan of short complexes. The proof of homObj_isZero_left checks on sections that internal Hom from a zero source is zero, so the three objects of every coordinate short complex are zero outside the finite support interval.",
    "uses": [
     "lem-sc-hom-complex-projections",
     "def-pur-hom-complex",
@@ -25,7 +25,7 @@
    "elementary": false
   },
   {
-   "text": "Choose each given finite-free basis. finiteFreeInternalHomExact identifies the coordinate functor Hom(E.X p,-) with a finite sum of identities, naturally in its argument, and proves its short-exactness. It preserves kernels and cokernels and hence the cycles, boundaries and homology of each translated complex. Finite products are finite biproducts in the abelian category of sheaves of modules and preserve those kernels and cokernels. The resulting coordinate quotient maps g therefore form a limiting fan.",
+   "text": "Use finiteFreeInternalHomExact with a chosen finite-free isomorphism for each E.X p. The internal-Hom functor is additive, as checked on sections. Functor.exact_tfae converts its preservation of short exact sequences into PreservesHomology. To apply the additive ShortComplex.homologyFunctor to the preceding fan, the proved private helper map_finiteSupport_fan first restricts it to Finset.Icc a b, extending any test fan by zero projections outside the interval. This restriction is limiting by uniqueness of maps to zero objects. Mathlib preservesFiniteProductsOfAdditive preserves its finite product; the image of a zero object is zero, so the resulting fan extends back to a limiting fan over all integers. Reindex K.sc' by K.isoSc' and use ShortComplex.mapHomologyIso to identify each coordinate with Hom(E.X p,H^(p+n)(K)). The proved helper fan_postcompose_iso transports the fan along these coordinate isomorphisms, defining g and proving its product property.",
    "uses": [
     "lem-sc-finite-free-internal-hom-exact",
     "def-weil-sheaf-of-modules-category"
@@ -33,7 +33,7 @@
    "elementary": false
   },
   {
-   "text": "Hom(E.X p,iCycles_K q) is a kernel inclusion, hence monic. Thus any supplied cycle lift d of the ambient projection is the unique lift obtained in the kernel calculation. Its composite with Hom(id,homologyπ_K q) is the coordinate cokernel quotient map. By the homology cokernel property it equals homologyπ_P n followed by g. Transport along p+n=q gives the stated proof-indexed coordinates.",
+   "text": "For an additive homology-preserving functor F and a short-complex morphism φ:T→S.map F, the proved helper exactHomologyMap_cycle_eq identifies any cycle lift d with cyclesMap φ followed by S.mapCyclesIso F: both have the same composite with F.map S.iCycles, which is monic because F preserves finite limits. The identities mapCyclesIso_eq, mapHomologyIso_eq, and LeftHomologyData.homologyπ_comp_homologyIso_hom prove compatibility of the two comparison isomorphisms with the quotient map. ShortComplex.homologyπ_naturality then yields the desired equation. Apply this helper to τ_p followed by the inverse of the mapped K.isoSc'. Its middle component is precisely the chosen projection, and homologyMap_comp identifies its homology map with the constructed g. Finally substitute q=p+n using the supplied equality.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-pur-hom-complex"
@@ -43,13 +43,13 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "H3",
+  "agent": "E1",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "finite-free Hom calculation, expanded using Tag 0A8X"
   },
-  "description": "General product-homology calculation expanding steps 1 and the exactness/product part of step 2 of the assigned node; follows finite-free Hom and finite biproduct exactness."
+  "description": "Complete Lean realization of the finite-free zero-differential Hom product calculation, using finite-support preservation by the additive short-complex homology functor and the exact-functor homology comparison. All helpers are proved; no new holes or changed interfaces."
  },
  "mathlib_searches": [
   {
@@ -135,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-91ed9",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T211105-L-392518",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T222401-L-1222209",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the packet's node statement and proof metadata to the delivered Lean module; delivered files compile cleanly, theorem axioms are allowed, and an importing module successfully infers the additive instance."
  }
 }
