@@ -11166,3 +11166,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/S1/Sheaf.AlgebraicGeometry.EpiOverFunctor (stage 3; reviewer PASS; first push; landing 20261013T045559-L-136613 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointDirectSums (stage 3; reviewer PASS; first push; landing 20261013T045600-L-136724 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:56 L: merged deliver/S2/Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapSurjective (stage 3; reviewer PASS; first push; landing 20261013T045600-L-136850 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:56 L: merged deliver/S3/Sheaf.AlgebraicGeometry.AffineProjectiveSectionsSheafification (stage 3; reviewer PASS; after a return; landing 20261013T045601-L-136962 (proof); batch 20261013T045507; modules 1; new nodes 0)

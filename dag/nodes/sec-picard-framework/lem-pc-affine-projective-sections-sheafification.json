@@ -13,17 +13,32 @@
  ],
  "proof": [
   {
-   "text": "Apply exact associated sheaves and restriction along the affine chart to q. Apply the quasi-coherent counit to each term of D; its naturality in the differentials yields a chain isomorphism from the associated ordinary section complex to D. Compose with the sheafified q to obtain e, a quasi-isomorphism.",
+   "text": "The proved quasi-coherent kernel theorem makes the kernel of tilde(f) quasi-coherent. Its affine counit is invertible. Lift this kernel inclusion and its zero-composition equation through full faithfulness of tilde, and use the counit isomorphism to identify the mapped fork with the kernel fork. Full faithfulness reflects the limit. Thus tilde preserves kernels; its additive left-adjoint structure gives finite colimits, so it preserves homology and quasi-isomorphisms. Restriction along the affine chart is exact, so the composite F also preserves the quasi-isomorphism q. The private helper tilde_preservesFiniteLimits generalizes the kernel-preservation argument to preservation of all finite limits, using Functor.preservesFiniteLimits_of_preservesKernels. The main theorem uses this stronger exactness interface directly. The kernel-only private helper in AffineDerivedTildeHomologyComparison cannot be imported by its source name; no duplicate kernel-preservation declaration is introduced.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Each finite projective term is a retract of a finite free A-module. Tilde and chart restriction transport that splitting to a finite free structure-module on Y. Thus each term is quasi-coherent and finitely presented. On an affine open U its section module is a finite projective Gamma(U,O)-module, hence flat. If U is contained in an affine V, Gamma(U,O) is flat over Gamma(V,O), and transitivity proves the required sectionwise flatness with the canonical restriction action. This includes rank zero and the zero ring.",
+   "text": "The canonical linear equivalence sectionsRestrictFromSpecLinearEquiv on the top affine open identifies restriction along the inverse affine chart followed by moduleSpecΓFunctor with evaluation at top. Naturality follows from the presheaf naturality equation; this gives affineSectionsIso. Whisker its inverse with F, then the ordinary affine counit with the chart restrictions, then the natural restriction-composition and identity isomorphisms. The resulting natural transformation from evaluation followed by F to the identity has invertible components on quasi-coherent objects. Apply mapHomologicalComplex to it and compose with mapHomologicalComplexIdIso. Every component is invertible by hDqc, so HomologicalComplex.Hom.isIso_of_components gives a chain isomorphism. Compose the image of q with this chain isomorphism to obtain the asserted quasi-isomorphism C to D.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every projective term P.X n is flat. Apply flatOver_affineAssociatedModule, and transfer its sectionwise flatness through restrictFunctorIsoPullback. For each affine pair V,U, the evaluation of this isomorphism is a linear equivalence also after restriction of scalars along the identity appLE map. Module.Flat.of_linearEquiv therefore gives exactly the required IsFlatOver predicate for C.X n.",
    "uses": [
     "lem-pc-affine-associated-module-flat-over"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite projectivity gives Module.FinitePresentation by Module.finitePresentation_of_projective. Choose its finite generators and finite relations, and use presentationTilde to construct a finite global presentation of the associated sheaf. Presentation.isFinitePresentation makes this sheaf finitely presented, and isFinitePresentation_restrictFunctor transports that property along the chart. Quasi-coherence follows separately from the tilde quasi-coherence instance and isQuasicoherent_restrictFunctor. Zero modules, the empty affine open and the zero ring require no case exclusions.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-finitely-presented",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
   }
@@ -31,13 +46,14 @@
  "kind": "statement",
  "proof_deps": [
   "lem-pc-affine-associated-module-flat-over",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent S3",
   "document": "Stacks Project",
-  "place": "Tags 01IB (schemes-lemma-spec-sheaves) and 08EB (perfect-lemma-perfect-affine); affine sectionwise flatness as in Tags 01I9 and 00HT; specialization and chain-level glue by S4"
+  "place": "Tags 01IB and 00NX; sectionwise flatness from Tags 01I9 and 00HT via the proved associated-module-flat-over theorem; explicit chain-level chart/counit glue written by S3, with the helper generalized in place to finite-limit preservation; the kernel-only helper in AffineDerivedTildeHomologyComparison is private and inaccessible to importers."
  },
  "mathlib_searches": [
   {
@@ -117,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T024049-L-3339203",
-  "kind": "interface",
+  "landing": "20261013T045601-L-136962",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
