@@ -10320,3 +10320,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:37 L: returned deliver/Y2/Sheaf.LinearAlgebra.SymmetricAlgebra.Graded (reviewer RETURN: (reviewer X-62526, head 625260282) H8/E5: In lean/Sheaf/LinearAlgebra/SymmetricAlgebra/Graded.lean, replace the entire g)
 - 00:40 L: returned deliver/C3/Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounits (reviewer RETURN: (the landing tools, head 61b30b660) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:40 L: returned deliver/G3/Sheaf.RingTheory.PopescuSpecialChartPolynomial (reviewer RETURN: (the landing tools, head 7ae4d59f8) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
+- 00:40 L: returned deliver/N2/Sheaf.AlgebraicGeometry.CoherentIteratedSliceRelations (reviewer RETURN: (the landing tools, head 85d82f7aa) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
