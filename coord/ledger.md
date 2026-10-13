@@ -12222,3 +12222,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent (stage 3; reviewer PASS; first push; landing 20261013T111933-L-3066783 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/U3/Sheaf.AlgebraicGeometry.PerfectOpenStalkReverseComponentsLift (stage 3; reviewer PASS; first push; landing 20261013T111933-L-3067006 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/U3/Sheaf.FieldTheory.PthRootNotMemPreviousAdjoin (stage 3; reviewer PASS; first push; landing 20261013T111934-L-3067152 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization (stage 3; reviewer PASS; first push; landing 20261013T111934-L-3067282 (proof); batch 20261013T111833; modules 1; new nodes 0)

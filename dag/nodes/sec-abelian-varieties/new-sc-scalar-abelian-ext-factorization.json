@@ -13,27 +13,44 @@
  },
  "proof": [
   {
-   "text": "Unfold the two explicit comparison maps. Forgetting the k-action after\nrestricting scalars is the module-to-abelian functor on objects and morphisms.\nExact-functor composition therefore identifies their Ext maps, with independent\nExt universes. Move the scalar-unit precomposition through the forgetful Ext map.\nUnder the constant-integer sections adjunction the composite of its integer-unit\nclass with the forgotten scalarUnitMorphism is the section scalarMap f top 1.\nThis is 1 because scalarMap is a ring homomorphism. It is precisely the unit class\nin scalarUnitAbelianComparison. Associativity of Yoneda composition gives the\nfactorization. No inverse-image functor, morphism of schemes, or bijectivity of\nscalarUnitAbelianComparison is used. For a zero class or an empty scheme the same\nadditive formulas give zero on both sides.",
+   "text": "Evaluate the forgotten scalar-unit degree-zero class using Sheaf.H.equiv₀_naturality. Cancel constantScalarUnitIso.hom followed by its inverse, and apply the constant-sheaf adjunction homEquiv apply_symm_apply identity. The result is scalarUnitLinear f 1 = scalarMap f top 1 = 1, the integer-unit section defining scalarUnitAbelianComparison.",
    "uses": [
     "new-sc-scalar-unit-comparison-family",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply mapExactFunctor_square to scalarFunctor f, the module-to-abelian functor, scalarAbelianForget, and the identity functor, with the definitionally reflexive functor isomorphism. Apply exactFunctorIdentityComparison to remove the identity Ext map. This identifies forgetting after restriction of scalars with directly forgetting the module action, despite their different Ext universes.",
+   "uses": [
     "def-sc-field-linear-module-cohomology-operations",
-    "lem-pc-ext-exact-functor-square"
+    "lem-pc-ext-exact-functor-square",
+    "lem-weil-pbc-ext-exact-functor-identity-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Unfold scalarCohomologyExtEquiv, scalarCohomologyExtMap, and scalarExtMap. Use Mathlib Ext.mapExactFunctor_comp and Ext.mapExactFunctor_mk₀, then the preceding functor-map equality. Apply Ext.comp_assoc and the degree-zero unit equality to obtain the factorization.",
+   "uses": [
+    "new-sc-scalar-unit-comparison-family",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "new-sc-scalar-unit-comparison-family",
   "def-sc-field-linear-module-cohomology-operations",
-  "lem-pc-ext-exact-functor-square"
+  "lem-pc-ext-exact-functor-square",
+  "lem-weil-pbc-ext-exact-functor-identity-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X3",
+  "group": "U4",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 03FD, 01F7, 0096",
-  "place": "Tag 03FD; constant-sheaf adjunction; exact-functor Ext composition",
-  "note": "Specialized to the explicit Lean definitions; strict part of the parent argument."
+  "document": "Stacks Project, sites-cohomology.tex; cohomology.tex; sheaves.tex",
+  "place": "Tag 03FD; constant-sheaf adjunction; exact-functor Ext composition; official tag pages read on 2026-10-13",
+  "note": "Complete Lean proof: constant-sheaf adjunction evaluation, exact-functor square and identity comparison, then Yoneda associativity. No new holes."
  },
  "mathlib_searches": [
   {
@@ -116,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T100222-L-2503249",
-  "kind": "interface",
+  "landing": "20261013T111934-L-3067282",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
