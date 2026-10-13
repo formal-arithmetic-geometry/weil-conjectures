@@ -10,17 +10,52 @@
  },
  "proof": [
   {
-   "text": "The statement follows from the Noetherian affine-local derived-category and perfect-complex arguments described in the module docstring.",
-   "uses": [],
+   "text": "Install derivedQCohDirectSums X. The supported quasi-coherent property with support Set.univ supplies the triangulated structure on D_QCoh(X); the support condition is vacuous. Quasi-coherent cohomology is invariant under isomorphism, by applying homology to the isomorphism. Install schemeDerivedQCohClosedUnderCoproducts for every universe-u index, so the explicitly supplied ambient sums belong to the full subcategory.",
+   "uses": [
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-sc-supported-qcoh-triangulated",
+    "lem-pc-derived-qcoh-closed-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply supported_derived_generated_perfect with excluded open empty. It gives a perfect generator G and, for the given P, a tower starting at zero, whose successive cones are sums of shifts of G, and the final telescope triangle. G is compact by perfectObjectCompact.",
+   "uses": [
+    "lem-sc-supported-derived-generated-perfect",
+    "lem-pc-perfect-object-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compact_generator_ambient_thick to this supplied tower, with compact objects G and P. It places P.obj in the ambient triangulated envelope of the singleton G.obj. The explicit tower avoids any assumption on the relative sizes of the Hom and coproduct universes.",
+   "uses": [
+    "lem-sc-compact-generator-ambient-thick"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use perfect_thick_closure to supply shifts, two-out-of-three and biproduct summands. The proved private helper perfect_thick_property packages these as a triangulated property stable under retracts. Isomorphism invariance follows by composing each local representative with restriction of the isomorphism. For a retract E of F, complete its split monomorphism to a triangle; the last arrow is zero, so F is isomorphic to E plus its cone. Biprod-summand closure gives perfectness of E. Zero is a retract of G. Mathlib ObjectProperty.triangEnvelope_le_iff then makes the singleton envelope of G lie in perfectSubcategory X; apply this inclusion to P.obj.",
+   "uses": [
+    "lem-pc-perfect-thick-closure"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-perfect-object-compact",
+  "lem-pc-perfect-thick-closure",
+  "lem-sc-compact-generator-ambient-thick",
+  "lem-sc-supported-derived-generated-perfect",
+  "lem-sc-supported-qcoh-triangulated"
+ ],
  "proof_origin": {
   "by": "worker",
-  "agent": "Codex",
+  "group": "B3",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/09M1",
-  "place": "Tag 09M1"
+  "place": "Alternative compact-generator proof using Tags 09SN, 094A and 09SP, and the existing perfect thick-closure theorem."
  },
  "mathlib_searches": [
   {
@@ -86,17 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T015549-L-3018711",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.compact_isPerfect_of_isNoetherian",
-   "AlgebraicGeometry.noetherian_open_derived_categories_exists"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.compact_isPerfect_of_isNoetherian"
-  ]
+  "landing": "20261013T045512-L-124453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

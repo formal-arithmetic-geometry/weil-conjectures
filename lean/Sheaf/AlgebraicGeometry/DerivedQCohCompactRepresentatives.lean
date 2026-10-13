@@ -12,6 +12,11 @@ import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.PerfectThickClosure
+import Sheaf.CategoryTheory.CompactGeneratorAmbientThick
 
 /-! # Small representatives of compact quasi-coherent derived objects
 
@@ -37,20 +42,107 @@ theorem noetherian_open_derived_categories_exists (X : Scheme.{u}) [IsNoetherian
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))) := by
   exact nonempty_derivedOpenLocalization X
 
+/-- Perfectness is unchanged by an isomorphism of ambient derived objects. -/
+private theorem perfect_of_iso (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    {E F : schemeDerivedCategory X} (e : E ≅ F) (hE : Scheme.IsPerfect X E) :
+    Scheme.IsPerfect X F := by
+  intro x
+  obtain ⟨U, hx, K, hK, ⟨eK⟩⟩ := hE x
+  exact ⟨U, hx, K, hK, ⟨((SheafOfModules.overFunctor
+    (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso e.symm) ≪≫ eK⟩⟩
+
+/-- The concrete perfect-complex closure theorem supplies Mathlib's thick-property API. -/
+private theorem perfect_thick_property (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    (G : schemeDerivedCategory X) (hG : Scheme.IsPerfect X G) :
+    (Scheme.perfectSubcategory X).IsTriangulated ∧
+      (Scheme.perfectSubcategory X).IsStableUnderRetracts := by
+  let : Zero (schemeDerivedCategory X) := HasZeroObject.zero' (schemeDerivedCategory X)
+  obtain ⟨htri, hsum, hshift, _⟩ := Scheme.perfect_thick_closure.{u, w, u} X
+  let Q := Scheme.perfectSubcategory X
+  have hiso : Q.IsClosedUnderIsomorphisms := by
+    constructor
+    intro E F e hE
+    exact perfect_of_iso X e hE
+  let := hiso
+  have hret : Q.IsStableUnderRetracts := by
+    constructor
+    intro E F r hF
+    obtain ⟨Z, a, b, ht⟩ := Pretriangulated.distinguished_cocone_triangle r.i
+    let T := Pretriangulated.Triangle.mk r.i a b
+    have hb : T.mor₃ = 0 :=
+      T.mor₃_eq_zero_of_mono₁ ht (show Mono r.i from inferInstance)
+    obtain ⟨e, _, _⟩ := Pretriangulated.exists_iso_binaryBiproduct_of_distTriang T ht hb
+    exact (hsum E Z (perfect_of_iso X e hF)).1
+  let := hret
+  have hzero : Q.ContainsZero :=
+    ⟨0, isZero_zero _, Q.prop_of_retract ((isZero_zero _).retract G) hG⟩
+  let := hzero
+  have hsh : Q.IsStableUnderShift ℤ := by
+    constructor
+    intro n
+    exact ObjectProperty.IsStableUnderShiftBy.mk (fun E hE ↦ hshift E n hE)
+  let := hsh
+  have hcone : Q.IsTriangulatedClosed₂ := by
+    apply ObjectProperty.IsTriangulatedClosed₂.mk'
+    intro T ht h₁ h₃
+    exact (htri T ht).2.2 h₁ h₃
+  let := hcone
+  exact ⟨ObjectProperty.IsTriangulated.mk, hret⟩
+
 /-- Compact objects in the quasi-coherent derived category are perfect.
 Source: Stacks Project, Tag 09M1, converse direction of
 `perfect-proposition-compact-is-perfect`; restriction to affine opens and the
 finite-projective criterion reduce compactness to perfectness.
 (blueprint: lem-sc-derived-qcoh-compact-is-perfect)
-The proof uses the coproduct-preserving right adjoint to restriction and the
-affine equivalence with the derived category of modules. -/
+Proof: Use the existing perfect supported generator with empty excluded open to obtain
+an explicit generator telescope for P. Compactness factors the identity through a finite
+thick construction from that generator. Perfectness is closed under shifts, triangles
+and retracts, so the ambient thick envelope consists of perfect objects. The retract
+closure is derived from the split-triangle biproduct decomposition, and the zero object
+is a retract of the perfect generator. This route does not require comparing open models. -/
 theorem compact_isPerfect_of_isNoetherian (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hOpen : ∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
     ∀ P : schemeDerivedQCohCategory X, IsCompactObject P → Scheme.IsPerfect X P.obj := by
-  sorry
+  let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+  dsimp only
+  intro P hP
+  have hqc : (schemeDerivedQCohProperty X).IsTriangulated := by
+    simpa using supported_qcoh_isTriangulated X Set.univ
+  let := hqc
+  have hqciso : (schemeDerivedQCohProperty X).IsClosedUnderIsomorphisms := by
+    constructor
+    intro E F e hE n
+    exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).mapIso e) (hE n)
+  let := hqciso
+  let (I : Type u) :
+      (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) :=
+    schemeDerivedQCohClosedUnderCoproducts X I
+  obtain ⟨G, hG, _, hbuild⟩ := supported_derived_generated_perfect X ⊥ (by simp)
+  obtain ⟨K, t, hzero, hsteps, S, ⟨hS⟩, s, q, r, hs, hT⟩ := hbuild P (by simp)
+  have hmem := compact_generator_ambient_thick (schemeDerivedQCohProperty X) G
+    (perfectObjectCompact X G hG) P hP K t hzero hsteps S hS s q r hs hT
+  obtain ⟨hperftri, hperfretract⟩ := perfect_thick_property X G.obj hG
+  let := hperftri
+  let := hperfretract
+  have hle : (ObjectProperty.singleton G.obj).triangEnvelope ≤
+      Scheme.perfectSubcategory X :=
+    (ObjectProperty.triangEnvelope_le_iff _).2 (by
+      intro E hE
+      rw [ObjectProperty.singleton_iff] at hE
+      subst E
+      exact hG)
+  exact hle P.obj hmem
 
 /-- Noetherian schemes have a universe-small family of perfect representatives.
 Source: Stacks Project, Tags 08EB and 09M1, together with the finite affine
