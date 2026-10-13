@@ -161,6 +161,7 @@ theorem termwise_product_isKInjective_and_isLimit
     exact mapProduct DerivedCategory.Qh (Discrete.functor I ⋙ q) (q.mapCone P) hq
       (fun X ↦ IsKInjective.Qh_map_bijective X P.pt)
       (fun X j ↦ IsKInjective.Qh_map_bijective X (I j.as))
-  exact ⟨hPI, ⟨IsLimit.mapConeEquiv (DerivedCategory.quotientCompQhIso C) hd⟩⟩
+  refine ⟨hPI, ?_⟩
+  exact ⟨IsLimit.mapConeEquiv (DerivedCategory.quotientCompQhIso C) hd⟩
 
 end CochainComplex
