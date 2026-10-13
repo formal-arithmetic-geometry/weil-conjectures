@@ -12,17 +12,19 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Geometrically integral morphisms
 
+An irreducible space is connected, so a geometrically irreducible morphism, and in particular a
+geometrically integral one, is geometrically connected.
+
 A flat morphism with geometrically reduced (resp. integral) fibres followed by a morphism locally
 of finite type with geometrically reduced (resp. integral) fibres has geometrically reduced
 (resp. integral) fibres. In particular a product of two geometrically integral schemes of finite
-type over a field is geometrically integral. An irreducible space is connected, so a geometrically
-irreducible morphism, and in particular a geometrically integral one, is geometrically connected.
+type over a field is geometrically integral.
 
 ## Main statements
 
+- `AlgebraicGeometry.GeometricallyIntegral.geometricallyConnected`
 - `AlgebraicGeometry.GeometricallyReduced.comp_of_flat`
 - `AlgebraicGeometry.GeometricallyIntegral.comp_of_flat`
-- `AlgebraicGeometry.GeometricallyIntegral.geometricallyConnected`
 -/
 
 @[expose] public section
@@ -33,7 +35,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-section Connected
+section GeometricallyConnected
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
@@ -50,7 +52,9 @@ lemma GeometricallyIntegral.geometricallyConnected [GeometricallyIntegral f] :
     GeometricallyConnected f :=
   GeometricallyIrreducible.geometricallyConnected f
 
-end Connected
+end GeometricallyConnected
+
+section Comp
 
 variable {X Y Z : Scheme.{u}}
 
@@ -76,5 +80,7 @@ theorem GeometricallyIntegral.comp_of_flat (f : X ⟶ Y) (g : Y ⟶ Z) [Geometri
   have := GeometricallyReduced.comp_of_flat f g
   have := GeometricallyIrreducible.comp f g
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
+
+end Comp
 
 end AlgebraicGeometry

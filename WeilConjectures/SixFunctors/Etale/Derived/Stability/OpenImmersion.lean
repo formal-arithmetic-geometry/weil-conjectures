@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.TorSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Finite.Exact
 
@@ -64,7 +65,7 @@ theorem isConstructibleSheaf_homology_tensor_singleFunctor {X : Scheme.{u}}
     IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ r).obj
       (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
-  sorry
+  isConstructibleSheaf_torSheaf Λ F G r
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.

@@ -73,7 +73,6 @@ lemma homologyMap_eq_app_homology (β : 𝟭 C ⟶ 𝟭 C) {K : HomologicalCompl
   rw [← cancel_epi (K.homologyπ i), homologyπ_naturality, hc]
   exact (β.naturality (K.homologyπ i)).symm
 
-
 section CyclesMap
 
 variable {K L : HomologicalComplex C c} (φ : K ⟶ L)

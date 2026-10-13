@@ -9,12 +9,14 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.Curve.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
@@ -86,8 +88,30 @@ The input is that `U` has an ample invertible sheaf (Stacks `0A25`). -/
 theorem IsCurve.exists_projectiveClosure (p : U ⟶ Spec (.of K)) [IsCurve p] [IsIntegral U] :
     ∃ (n : Type u) (_ : Finite n) (X : Scheme.{u}) (ι : X ⟶ ℙ(n; Spec (.of K))) (j : U ⟶ X),
       IsClosedImmersion ι ∧ IsOpenImmersion j ∧ IsIntegral X ∧ DenseRange j.base ∧
-      j ≫ ι ≫ (ℙ(n; Spec (.of K)) ↘ Spec (.of K)) = p :=
-  sorry
+      j ≫ ι ≫ (ℙ(n; Spec (.of K)) ↘ Spec (.of K)) = p := by
+  -- an ample coordinate cover of `U` gives an immersion `f : U ⟶ ℙ(n; Spec K)`
+  obtain ⟨β, hβ, 𝒟, h𝒟⟩ := IsCurve.exists_coordinateCover p
+  obtain ⟨n, hn, f, hf, hfp⟩ := 𝒟.exists_isImmersion p h𝒟
+  -- `f` is quasi-compact, so it factors through its scheme-theoretic image as an open immersion
+  have : IsLocallyNoetherian ℙ(n; Spec (.of K)) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ℙ(n; Spec (.of K)) ↘ Spec (.of K))
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace U := (quasiCompact_iff_compactSpace p).mp inferInstance
+  have : QuasiCompact f := by
+    rw [← f.liftCoborder_ι]
+    infer_instance
+  have : IsOpenImmersion f.toImage := inferInstance
+  -- the scheme-theoretic image is integral
+  have : IsReduced f.image := IsSchemeTheoreticallyDominant.isReduced f.toImage
+  have : IrreducibleSpace f.image := by
+    rw [irreducibleSpace_def]
+    have h := (IrreducibleSpace.isIrreducible_univ U).image f.toImage.base
+      f.toImage.base.hom.continuous.continuousOn
+    rw [Set.image_univ] at h
+    simpa [f.toImage.denseRange.closure_range] using h.closure
+  have : IsIntegral f.image := isIntegral_of_irreducibleSpace_of_isReduced _
+  exact ⟨n, hn, f.image, f.imageι, f.toImage, inferInstance, inferInstance, inferInstance,
+    f.toImage.denseRange, by rw [f.toImage_imageι_assoc, hfp]⟩
 
 /-- The smooth proper completion of a smooth geometrically connected curve `U` over a perfect
 field `K`: there is a compactification `c` of `p : U ⟶ Spec K` whose ambient scheme `c.Z` is an

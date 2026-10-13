@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Leray
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
 
@@ -213,21 +213,6 @@ lemma sectionsHigherDirectImageZeroAddEquiv_naturality (𝒢 : X.Modules)
 end Comparison
 
 section RightDerivedGlobalSections
-
-variable (X) in
-/-- The global sections functor `X.Modules ⥤ Ab`. -/
-noncomputable def globalSectionsFunctor : X.Modules ⥤ Ab.{u} :=
-  Modules.toPresheaf X ⋙ (CategoryTheory.evaluation _ _).obj (Opposite.op ⊤)
-
-instance : (globalSectionsFunctor X).Additive where
-  map_add := rfl
-
-instance : PreservesFiniteLimits (globalSectionsFunctor X) :=
-  have : PreservesFiniteLimits (SheafOfModules.evaluation X.ringCatSheaf (Opposite.op ⊤) ⋙
-      forget₂ (ModuleCat Γ(X, ⊤)) Ab) := comp_preservesFiniteLimits _ _
-  preservesFiniteLimits_of_natIso (Iso.refl _ :
-    SheafOfModules.evaluation X.ringCatSheaf (Opposite.op ⊤) ⋙ forget₂ (ModuleCat Γ(X, ⊤)) Ab ≅
-      globalSectionsFunctor X)
 
 /-- In the complex of global sections of `K`, the image of `Γ(Kⁿ)` among the cocycles of degree
 `n + 1` is the subgroup of coboundaries. -/

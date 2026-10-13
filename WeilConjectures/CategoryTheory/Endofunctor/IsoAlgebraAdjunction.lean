@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 
 /-!
@@ -18,9 +19,14 @@ compatible with the transported structure morphisms, and the transports
 `IsoAlgebra.mapOfNatIso eL ⊣ IsoAlgebra.mapOfNatIso eR` are again adjoint
 (`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`).
 
+If `F` and `G` are equivalences, the mate of `eL⁻¹` is an isomorphism
+(`CategoryTheory.Endofunctor.IsoAlgebra.mateIso`), so every `eL` lifts `L ⊣ R`.
+
 ## Main declarations
 
 - `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`: the lifted adjunction.
+- `CategoryTheory.Endofunctor.IsoAlgebra.mateIso`: the mate of `eL⁻¹`, an isomorphism when `F`
+  and `G` are equivalences.
 -/
 
 @[expose] public section
@@ -107,5 +113,82 @@ lemma mapOfNatIsoAdjunction_unit_app_hom_f (K : IsoAlgebra F) :
 lemma mapOfNatIsoAdjunction_counit_app_hom_f (M : IsoAlgebra G) :
     ((mapOfNatIsoAdjunction adj eL eR h).counit.app M).hom.f = adj.counit.app M.carrier :=
   rfl
+
+/-- The forgetful functor maps the unit of the lifted adjunction to the unit of `L ⊣ R`. -/
+lemma forget_map_mapOfNatIsoAdjunction_unit_app (K : IsoAlgebra F) :
+    (forget F).map ((mapOfNatIsoAdjunction adj eL eR h).unit.app K) = adj.unit.app K.carrier :=
+  rfl
+
+/-- The forgetful functor maps the counit of the lifted adjunction to the counit of `L ⊣ R`. -/
+lemma forget_map_mapOfNatIsoAdjunction_counit_app (M : IsoAlgebra G) :
+    (forget G).map ((mapOfNatIsoAdjunction adj eL eR h).counit.app M) =
+      adj.counit.app M.carrier :=
+  rfl
+
+/-- If the counit of `L ⊣ R` is an isomorphism, so is the counit of the lifted adjunction. -/
+instance isIso_mapOfNatIsoAdjunction_counit [IsIso adj.counit] :
+    IsIso (mapOfNatIsoAdjunction adj eL eR h).counit := by
+  have (M : IsoAlgebra G) : IsIso ((mapOfNatIsoAdjunction adj eL eR h).counit.app M) := by
+    have : IsIso ((forget G).map ((mapOfNatIsoAdjunction adj eL eR h).counit.app M)) := by
+      rw [forget_map_mapOfNatIsoAdjunction_counit_app]
+      exact NatIso.isIso_app_of_isIso adj.counit _
+    exact isIso_of_reflects_iso _ (forget G)
+  exact NatIso.isIso_of_isIso_app _
+
+/-- If the unit of `L ⊣ R` is an isomorphism, so is the unit of the lifted adjunction. -/
+instance isIso_mapOfNatIsoAdjunction_unit [IsIso adj.unit] :
+    IsIso (mapOfNatIsoAdjunction adj eL eR h).unit := by
+  have (K : IsoAlgebra F) : IsIso ((mapOfNatIsoAdjunction adj eL eR h).unit.app K) := by
+    have : IsIso ((forget F).map ((mapOfNatIsoAdjunction adj eL eR h).unit.app K)) := by
+      rw [forget_map_mapOfNatIsoAdjunction_unit_app]
+      exact NatIso.isIso_app_of_isIso adj.unit _
+    exact isIso_of_reflects_iso _ (forget F)
+  exact NatIso.isIso_of_isIso_app _
+
+section Equivalence
+
+variable [F.IsEquivalence] [G.IsEquivalence]
+
+/-- If `F` and `G` are equivalences, the mate `R ⋙ F ⟶ G ⋙ R` of `eL⁻¹` is an isomorphism: its
+mate along the adjunctions `F ⊣ F⁻¹` and `G ⊣ G⁻¹` is the conjugate of `eL⁻¹`
+(`CategoryTheory.iterated_mateEquiv_conjugateEquiv`), an isomorphism, and the units and counits
+of these adjunctions are isomorphisms. -/
+instance isIso_mateEquiv : IsIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans := by
+  have hγ : IsIso (mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction
+      (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv))).natTrans := by
+    erw [iterated_mateEquiv_conjugateEquiv adj adj F.asEquivalence.toAdjunction
+      G.asEquivalence.toAdjunction (TwoSquare.mk _ _ _ _ eL.inv)]
+    exact conjugateEquiv_iso _ _ (α := (eL.inv : F ⋙ L ⟶ L ⋙ G))
+  set β := mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)
+  set γ := mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction β
+  have hβ : β = (mateEquiv G.asEquivalence.toAdjunction F.asEquivalence.toAdjunction).symm γ :=
+    ((mateEquiv _ _).symm_apply_apply β).symm
+  have (Y : D) : IsIso (β.natTrans.app Y) := by
+    rw [hβ]
+    have : ∀ Z, IsIso (γ.natTrans.app Z) := fun Z ↦ @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hγ Z
+    simp only [mateEquiv_symm_apply, TwoSquare.mk, NatTrans.comp_app, Functor.comp_obj,
+      Functor.id_obj, Functor.leftUnitor_inv_app, Functor.whiskerRight_app,
+      Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
+      Functor.rightUnitor_hom_app, Category.id_comp, Category.comp_id, Functor.map_id,
+      Equivalence.toAdjunction_unit, Equivalence.toAdjunction_counit]
+    have h1 : IsIso ((R ⋙ F.asEquivalence.functor).map (G.asEquivalence.unit.app Y)) :=
+      inferInstance
+    have h2 : IsIso (F.asEquivalence.counit.app (R.obj (G.asEquivalence.functor.obj Y))) :=
+      inferInstance
+    repeat' refine IsIso.comp_isIso' ?_ ?_
+    all_goals first | exact IsIso.id _ | exact h1 | exact h2 | exact Functor.map_isIso _ _
+  exact NatIso.isIso_of_isIso_app _
+
+/-- If `F` and `G` are equivalences, the mate `R ⋙ F ≅ G ⋙ R` of `eL⁻¹`. Its hom is the mate
+of `eL⁻¹` by definition, so `L ⊣ R` lifts along `eL` and `mateIso adj eL`
+(`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`). -/
+noncomputable def mateIso : R ⋙ F ≅ G ⋙ R :=
+  asIso (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans
+
+lemma mateEquiv_natTrans_eq_mateIso_hom :
+    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = (mateIso adj eL).hom :=
+  rfl
+
+end Equivalence
 
 end CategoryTheory.Endofunctor.IsoAlgebra

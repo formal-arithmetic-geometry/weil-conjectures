@@ -5,7 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.AlgebraicGeometry.FinitePresentationModel
 
 /-!
 
@@ -19,8 +19,9 @@ file packages the selections made in the blueprint as definitions:
   with affine transition maps whose limit is separated over `S`, a selected stage from which on
   every model is separated over `S` (blueprint: `def-nagata-fixed-base-separated-stage`);
 - `AlgebraicGeometry.Scheme.Hom.separatedFPEnvelope`: for a separated morphism `f : X ⟶ S` of
-  finite type between qcqs schemes, the model of a selected finite-presentation approximation of
-  `f` at the selected separated stage, together with the closed immersion
+  finite type between qcqs schemes, the model of the finite presentation model system of
+  `f` (`AlgebraicGeometry.Scheme.Hom.finitePresentationApproximation`) at the selected separated
+  stage, together with the closed immersion
   `AlgebraicGeometry.Scheme.Hom.toSeparatedFPEnvelope` and the structure morphism
   `AlgebraicGeometry.Scheme.Hom.separatedFPEnvelopeHom`
   (blueprint: `def-nagata-finite-type-closed-in-fp`).
@@ -76,17 +77,11 @@ end SeparatedStage
 namespace Scheme.Hom
 
 variable {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace X]
-  [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFiniteType f] [QuasiCompact f]
-
-/-- A selected finite-presentation approximation `FP(X/S)` of a morphism of finite type between
-quasi-compact quasi-separated schemes (Stacks Project Tag 09ZQ), chosen from
-`AlgebraicGeometry.Scheme.Hom.nonempty_finitePresentationApproximation`. -/
-noncomputable def finitePresentationApproximation : f.FinitePresentationApproximation :=
-  Classical.choice f.nonempty_finitePresentationApproximation
+  [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFiniteType f]
 
 variable [IsSeparated f]
 
-/-- The index of the selected finite-presentation approximation used to start the separated
+/-- The index of the finite presentation model system used to start the separated
 stage selection: any index works, and we choose one. -/
 noncomputable def finitePresentationApproximationIndex : f.finitePresentationApproximation.I :=
   Classical.choice (IsCofiltered.nonempty (C := f.finitePresentationApproximation.I))
@@ -100,7 +95,7 @@ instance isSeparated_π_app_p_app_finitePresentationApproximationIndex :
   rw [f.finitePresentationApproximation.w]
   infer_instance
 
-/-- The selected separated stage `α_sep^{X/S}` of the selected finite-presentation approximation
+/-- The selected separated stage `α_sep^{X/S}` of the finite presentation model system
 of `f` (blueprint: `def-nagata-finite-type-closed-in-fp`). -/
 noncomputable def separatedFPEnvelopeIndex : f.finitePresentationApproximation.I :=
   Scheme.separatedStage f.finitePresentationApproximation.isLimit

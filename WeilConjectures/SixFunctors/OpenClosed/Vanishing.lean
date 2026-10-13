@@ -64,7 +64,8 @@ variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j]
 open Etale
 
 omit [HasSmallSiteSheafify A] in
-/-- **`j^* i_* H` vanishes** when the ranges of `j` and `i` are disjoint. Its sections over
+/-- Blueprint `lemma-openclosed-vanishing-lowerstar`: **`j^* i_* H` vanishes** when the ranges
+of `j` and `i` are disjoint. Its sections over
 `T : U.Etale` are `H(T ×_X Z) = H(∅)`, hence terminal, hence zero. This is
 `AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` transported along
 `AlgebraicGeometry.Etale.upperStarIsoOpenImmersionRestriction`. -/
@@ -76,7 +77,8 @@ lemma Etale.isZero_upperStar_lowerStar_of_disjoint_range
     ((Etale.upperStarIsoOpenImmersionRestriction A j).app ((i)_*[A].obj H))
 
 omit [HasSmallSiteSheafify A] in
-/-- **`i^* j_! G` vanishes** when the ranges of `j` and `i` are disjoint. No section of
+/-- Blueprint `lemma-openclosed-vanishing-lowershriek`: **`i^* j_! G` vanishes** when the
+ranges of `j` and `i` are disjoint. No section of
 `i^* j_! G` is ever computed: the adjunctions `i^* ⊣ i_*` and `j_! ⊣ j^*` turn
 `Hom(i^* j_! G, H)` into `Hom(G, j^* i_* H)`, which is a singleton by
 `AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range`. So `i^* j_! G` is

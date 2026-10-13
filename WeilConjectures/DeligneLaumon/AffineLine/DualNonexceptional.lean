@@ -68,7 +68,7 @@ theorem isNonexceptional_dual (D : LisseOnDenseOpen k₀ l) {ψ : AddChar k₀ (
   let jbar := Scheme.Hom.geometricFiberMap D.j (comp_over D.j (Spec (CommRingCat.of k₀)))
   let sa := affineLine.geometricSMul k₀ a
   have hL : ProEtale.IsAdicLisseSheaf ((sa)^*ᵃ[l].obj (artinSchreier ψ⁻¹ 1).obj.carrier) :=
-    (isLisse_artinSchreier ψ⁻¹ 1).upperStar sa
+    ProEtale.IsAdicLisseSheaf.upperStar sa (isLisse_artinSchreier ψ⁻¹ 1)
   obtain ⟨B', i', p', hB', hi', hp'⟩ :=
     D.lisse.exists_constituent_of_constituent_dual hB (hL.upperStar jbar) i p
   obtain ⟨E⟩ := nonempty_iso_dual_artinSchreier ψ⁻¹ (1 : k₀)

@@ -879,19 +879,6 @@ theorem inr_mul_self (c : k) : (inr c : DualNumber k) * inr c = 0 := by
 noncomputable abbrev tangentScale (c : k) : pointsKer G aug₁ →* pointsKer G (aug₁ (k := k)) :=
   tangentMap (A := DualNumber k) (π := aug₁) (inr c) (inr_mul_self c) (by simp)
 
-theorem dualNumbersScaleOver_comp_dualNumbersToSpecOver (c : k) :
-    Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv c) ≫
-        dualNumbersToSpecOver =
-      dualNumbersToSpecOver ≫
-        (Spec.map (CommRingCat.ofHom (DualNumber.liftElem (R := k) (inr c)
-          (inr_mul_self c)).toRingHom)).asOver (Spec (.of k)) := by
-  ext1
-  have e : DualNumber.liftElem (R := k) (inr c) (inr_mul_self c) = DualNumber.scale c := by
-    ext <;> simp [DualNumber.liftElem_apply, algebraMap_eq_inl]
-  simp only [Over.comp_left, Scheme.dualNumbersScaleOver_left, dualNumbersToSpecOver,
-    Over.homMk_left, e]
-  exact Scheme.dualNumbersScale_comp_dualNumbersToSpec (.of k) c
-
 theorem lieEquivTangent_smul (c : k) (x : Lie G) :
     lieEquivTangent G (c • x) = tangentScale c (lieEquivTangent G x) := by
   apply Subtype.ext
@@ -899,13 +886,14 @@ theorem lieEquivTangent_smul (c : k) (x : Lie G) :
     points.map G _ (inv dualNumbersToSpecOver ≫ ((lieEquiv G).symm x).1)
   rw [lieEquiv_symm_smul, points.map]
   change inv dualNumbersToSpecOver ≫ Scheme.dualNumbersScaleOver _ _ ≫ _ = _
+  have e : DualNumber.liftElem (R := k) (inr c) (inr_mul_self c) = DualNumber.scale c := by
+    ext <;> simp [DualNumber.liftElem_apply, algebraMap_eq_inl]
   have key : inv dualNumbersToSpecOver ≫
       Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv c) =
       (Spec.map (CommRingCat.ofHom (DualNumber.liftElem (R := k) (inr c)
         (inr_mul_self c)).toRingHom)).asOver (Spec (.of k)) ≫ inv dualNumbersToSpecOver := by
-    rw [IsIso.inv_comp_eq, ← Category.assoc, ← dualNumbersScaleOver_comp_dualNumbersToSpecOver,
-      Category.assoc,
-      IsIso.hom_inv_id, Category.comp_id]
+    rw [e, IsIso.inv_comp_eq, ← Category.assoc, ← dualNumbersScaleOver_comp_dualNumbersToSpecOver,
+      Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rw [← Category.assoc, key, Category.assoc]
 
 theorem tangentBracket_tangentScale (c : k) (v w : pointsKer G aug₁) :

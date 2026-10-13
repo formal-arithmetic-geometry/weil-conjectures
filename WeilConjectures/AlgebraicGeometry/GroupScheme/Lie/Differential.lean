@@ -116,6 +116,13 @@ theorem lieEquivTangent_differential (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
     lieEquivTangent H (differential f x) = kerPost f (lieEquivTangent G x) :=
   lieEquivTangent_infPointsMap f x
 
+/-- The tangent point of the image of a tangent vector under a homomorphism is the image of its
+tangent point. -/
+theorem tangentPoint_differential (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
+    tangentPoint (differential f x) = tangentPoint x ≫ f := by
+  simp only [tangentPoint, differential_apply, Equiv.symm_apply_apply,
+    coe_infPointsEquivTangentGroup_apply, coe_infPointsMap_apply, Category.assoc]
+
 theorem differential_congr {f g : G ⟶ H} [IsMonHom f] [IsMonHom g] (e : f = g) :
     differential f = differential g := by
   subst e; rfl

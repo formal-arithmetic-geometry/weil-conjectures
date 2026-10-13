@@ -22,8 +22,8 @@ specialises the general theory of `WeilConjectures.AlgebraicGeometry.GroupScheme
 `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie` to these groups, in the language
 of Hopf ideals used by the weight arguments: the differentials `Lie(V(J)) → Lie(V(I))` of the
 closed immersions, the Lie algebra clauses of Cartier's theorem for the *reduced* identity
-component `V(identityComponent I)`, the group–Lie comparison for invariant subspaces on the
-matrices `zeroLocus I k`, and the Lie algebra of the *reduced* centre `V(center I)`.
+component `V(identityComponent I)`, and the matrix description of the tangent vectors
+`1 + εX` of `V(I)`.
 
 Everything that holds for an arbitrary group scheme is stated there, for an arbitrary group scheme;
 what remains here is specific to the reduced identity component and the reduced centre, which this
@@ -41,10 +41,6 @@ development only has in Hopf-ideal form, and to the matrix description of the po
   closed subgroup `V(J) ⊆ V(I)` contains the commutators of `V(I)`, then the Lie algebra of `V(J)`,
   and of its identity component, contains the brackets of the Lie algebra of `V(I)`, respectively of
   its identity component.
-- `AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent`,
-  `AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators`: the
-  central–geometric product `G° = Z(G°)° H°` for such a pair with `G°` acting semisimply on `kⁿ`,
-  as a morphism of group schemes and on `k`-points.
 - `AlgebraicGeometry.GeneralLinearGroup.lieAlgebraMap_identityComponent_bijective`,
   `AlgebraicGeometry.GeneralLinearGroup.finrank_lie_eq_ringKrullDim`: the Lie algebra only sees
   the reduced identity component and has the dimension of the group (Cartier's theorem).
@@ -56,16 +52,17 @@ development only has in Hopf-ideal form, and to the matrix description of the po
   are the dual of the cotangent space `𝔪/𝔪²` of `k[GL_n] ⧸ I` at the identity.
 - `AlgebraicGeometry.GeneralLinearGroup.eq_of_le_of_bijective_lieAlgebraMap`: a closed subgroup
   of a connected matrix group with the same Lie algebra is the whole group.
-- `AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant`,
-  `AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_center`: the group–Lie comparison.
+The group–Lie comparison (`sk-p-comparison`) and the central–geometric product (`sk-p-product`)
+for these groups are in
+`WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison` and
+`WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product`.
 
 ## Blueprint
 
 - `sk-d-tangent`: the Lie algebra of an algebraic group as its tangent space at the identity.
 - `sk-i-cartier`: the Lie algebra clauses of Cartier's theorem.
-- `sk-p-comparison`: invariant subspaces and the centre, for the group and for its Lie algebra.
-- `sk-i-restriction`, `sk-p-product`: pairs `V(J) ⊆ V(I)` with `⁅V(I), V(I)⁆ ⊆ V(J)`, and the
-  central–geometric product.
+- `sk-i-restriction`: pairs `V(J) ⊆ V(I)` with `⁅V(I), V(I)⁆ ⊆ V(J)`.
+- `sk-p-product`: the multiplication morphism `Z(G°)° × H° ⟶ G°`.
 -/
 
 @[expose] public section
@@ -400,67 +397,6 @@ theorem eq_of_le_of_bijective_lieAlgebraMap [IsAlgClosed k] [CharZero k] (hconn 
 
 end Cartier
 
-section Comparison
-
-variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
-  {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] {m : Type u} [Fintype m] [DecidableEq m]
-
-/-- The group–Lie comparison for invariant subspaces, for a connected closed subgroup `V(I)` of
-`GL_n` over an algebraically closed field of characteristic zero, on the matrices of
-`zeroLocus I k`: a subspace is stable under `V(I)(k)` acting by a rational representation `r` if
-and only if it is stable under the differential of `r`. This is
-`AlgebraicGeometry.GeneralLinearGroup.RationalHom.invariant_iff_differential_invariant` for
-`V(I)`, which is reduced and connected since `I` is connected. (blueprint: `sk-p-comparison`) -/
-theorem invariant_iff_differential_invariant [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
-    (r : RationalHom (subgroupScheme I) m) [IsMonHom r] (U : Submodule k (m → k)) :
-    (∀ g : zeroLocus I k,
-        U ≤ U.comap (Matrix.toLin' (r.points k (zeroLocusMulEquiv I k g)))) ↔
-      ∀ X : GrpObj.Lie (subgroupScheme I), U ≤ U.comap (Matrix.toLin' (r.differential X)) :=
-  haveI := isReduced_subgroupScheme I hconn.isRadical
-  haveI := connectedSpace_subgroupScheme I hconn
-  (zeroLocusMulEquiv I k).surjective.forall.symm.trans
-    (r.invariant_iff_differential_invariant U)
-
-/-- The Lie algebra of the reduced centre of a reduced `G = V(I)` over an algebraically closed
-field is contained in the centre of the Lie algebra of `G`: the reduced centre is central
-scheme-theoretically (`central_subgroupSchemeHom_le_center`), so this is
-`AlgebraicGeometry.GrpObj.range_differential_le_center`. (blueprint: `sk-p-comparison`) -/
-theorem range_lieAlgebraMap_center_le [IsAlgClosed k] (hI : I.IsRadical) :
-    (lieAlgebraMap (le_center I)).range ≤
-      (LieAlgebra.center k (GrpObj.Lie (subgroupScheme I)) : LieSubalgebra k _) :=
-  GrpObj.range_differential_le_center _ fun _ a b ↦ central_subgroupSchemeHom_le_center I hI a b
-
-/-- In characteristic zero, the centre of the Lie algebra of a connected group `G = V(I)` is
-contained in the Lie algebra of the reduced centre `V(center I)`.
-
-Proof sketch (not formalised): the centre of a connected `G` is the kernel of the adjoint
-representation `Ad : G → GL(Lie G)`, whose differential is `ad`; in characteristic zero the Lie
-algebra of the kernel is the kernel `𝔷(Lie G)` of the differential, and the scheme-theoretic
-centre is reduced, hence is `V(center I)`. (blueprint: `sk-p-comparison`) -/
-theorem le_range_lieAlgebraMap_center [IsAlgClosed k] [CharZero k] (_hconn : IsConnected I) :
-    (LieAlgebra.center k (GrpObj.Lie (subgroupScheme I)) : LieSubalgebra k _) ≤
-      (lieAlgebraMap (le_center I)).range := by
-  sorry
-
-/-- The group–Lie comparison for the centre: over an algebraically closed field of characteristic
-zero, the Lie algebra of the centre of a connected algebraic group is the centre of its Lie
-algebra. (blueprint: `sk-p-comparison`) -/
-theorem range_lieAlgebraMap_center [IsAlgClosed k] [CharZero k] (hconn : IsConnected I) :
-    (lieAlgebraMap (le_center I)).range =
-      (LieAlgebra.center k (GrpObj.Lie (subgroupScheme I)) : LieSubalgebra k _) :=
-  le_antisymm (range_lieAlgebraMap_center_le hconn.isRadical) (le_range_lieAlgebraMap_center hconn)
-
-/-- The Lie algebra of the identity component of the centre of a connected algebraic group is the
-centre of its Lie algebra, in characteristic zero: the differential of `Z(G)° ⟶ G` has as range the
-centre of `Lie(G)`. (blueprint: `sk-p-comparison`) -/
-theorem range_lieAlgebraMap_identityComponent_center [IsAlgClosed k] [CharZero k]
-    (hconn : IsConnected I) :
-    (lieAlgebraMap ((le_center I).trans (le_identityComponent (center I)))).range =
-      (LieAlgebra.center k (GrpObj.Lie (subgroupScheme I)) : LieSubalgebra k _) := by
-  sorry
-
-end Comparison
-
 /-! ### Pairs of closed subgroup schemes with commutative quotient
 
 Let `H = V(J) ⊆ G = V(I)` be closed subgroup schemes of `GL_n`, `I ≤ J`, such that the inclusion
@@ -516,42 +452,6 @@ noncomputable def mulCenterIdentityComponent (h : I ≤ J) :
   (subgroupSchemeHom ((le_center _).trans (le_identityComponent _)) ⊗ₘ
       subgroupSchemeHom (identityComponent_mono I h)) ≫
     μ[subgroupScheme (identityComponent I)]
-
-variable [CharZero k]
-
-/-- **The central–geometric product.** Let `H = V(J) ⊆ G = V(I)` be closed subgroups of `GL_n` over
-an algebraically closed field of characteristic zero such that `H` contains the commutators of `G`
-and `G°` acts semisimply on `kⁿ`. Then `G° = Z(G°)° H°`: the multiplication morphism
-`Z(G°)° × H° ⟶ G°` is surjective.
-
-Proof sketch (not formalised): the Lie algebra `𝔤 = Lie G° ⊆ 𝔤𝔩_n` is a faithful semisimple Lie
-representation, so `𝔤 = 𝔷(𝔤) + [𝔤, 𝔤]`; the brackets lie in `Lie H°`
-(`lie_mem_range_lieAlgebraMap_identityComponent`) and `𝔷(𝔤) = Lie Z(G°)°`
-(`range_lieAlgebraMap_identityComponent_center`), so `𝔤 = Lie Z(G°)° + Lie H°`. The multiplication
-morphism is a homomorphism because `Z(G°)°` is central, so its image is closed
-(`AlgebraicGeometry.isClosed_range_of_isMonHom`) and connected, and its Lie algebra is `𝔤`; by
-Cartier's theorem it has the dimension of `G°`, hence is all of `G°`
-(`AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq`). (blueprint: `sk-p-product`) -/
-theorem surjective_mulCenterIdentityComponent (h : I ≤ J)
-    [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
-    [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))] :
-    Function.Surjective (mulCenterIdentityComponent h).left.base := by
-  sorry
-
-/-- The central–geometric product on `k`-points: every point of `G°` is a product `t h` of a point
-`t` of `Z(G°)°` and a point `h` of `H°`. Proof sketch (not formalised): a `k`-point of `G°` lifts
-along the surjective multiplication morphism to a `k`-point of `Z(G°)° × H°`
-(`AlgebraicGeometry.exists_points_comp_eq_of_surjective`), whose two projections are `t` and `h`.
-(blueprint: `sk-p-product`) -/
-theorem exists_mul_eq_of_containsCommutators (h : I ≤ J)
-    [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
-    [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))]
-    (g : points (subgroupScheme (identityComponent I)) k) :
-    ∃ (t : points (subgroupScheme (identityComponent (center (identityComponent I)))) k)
-      (x : points (subgroupScheme (identityComponent J)) k),
-      t ≫ subgroupSchemeHom ((le_center _).trans (le_identityComponent _)) *
-        x ≫ subgroupSchemeHom (identityComponent_mono I h) = g := by
-  sorry
 
 end Pair
 
