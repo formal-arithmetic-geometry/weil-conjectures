@@ -11737,3 +11737,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/W3/Sheaf.AlgebraicGeometry.PicardCupPairingBaseChange (stage 3; reviewer PASS; first push; landing 20261013T082423-L-1651346 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:24 L: merged deliver/W4/Sheaf.Algebra.Homology.PerfectRingHomKFlat (stage 3; reviewer PASS; first push; landing 20261013T082423-L-1651496 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:24 L: merged deliver/W4/Sheaf.AlgebraicGeometry.FiniteFlatProperSupportDescent (stage 3; reviewer PASS; first push; landing 20261013T082424-L-1651614 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:24 L: merged deliver/W4/Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection (stage 3; reviewer PASS; first push; landing 20261013T082424-L-1651717 (interface); batch 20261013T082326; modules 2; new nodes 3)

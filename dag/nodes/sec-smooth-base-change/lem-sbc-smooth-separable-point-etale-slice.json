@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-smooth-separable-point-etale-slice",
+ "kind": "statement",
+ "title": "Etale slice through a separable point of a smooth morphism",
+ "statement": "Let f:X\\to S be smooth [def-sbc-smooth-morphisms] and x a point of X [def-weil-pbc-scheme-conventions] such that the residue-field map \\kappa(f(x))\\to\\kappa(x) is etale (finite separable). There are an affine scheme Z, a morphism i:Z\\to X and z\\in Z with i(z)=x and i followed by f etale.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 057G; existing source proof in WeilConjectures.AlgebraicGeometry.Morphisms.Slicing, Smooth.exists_etale_comp_of_etale_residueFieldMap"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Attach the existing proved declaration, not a new Lean statement. Its proof takes the smooth etale normal form to affine space, constructs an etale slice of affine space at the finite separable point, and pulls that slice back to X. The exact declaration and proof were read in Slicing.lean:184-210.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "W4",
+  "document": "Stacks Project",
+  "place": "Tag 057G; existing source proof in WeilConjectures.AlgebraicGeometry.Morphisms.Slicing, Smooth.exists_etale_comp_of_etale_residueFieldMap"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth morphism finite separable residue point etale slice",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth morphism finite separable residue point etale slice",
+   "results": "No exact Mathlib match; existing source theorem Smooth.exists_etale_comp_of_etale_residueFieldMap, proved at Slicing.lean:184.",
+   "date": "2026-10-13",
+   "verdict": "existing source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_comp_of_etale_residueFieldMap in Mathlib and lean/WeilConjectures",
+   "results": "No exact Mathlib match; existing source theorem Smooth.exists_etale_comp_of_etale_residueFieldMap, proved at Slicing.lean:184.",
+   "date": "2026-10-13",
+   "verdict": "existing source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 057G; existing source proof in WeilConjectures.AlgebraicGeometry.Morphisms.Slicing, Smooth.exists_etale_comp_of_etale_residueFieldMap",
+   "via": [
+    "lem-sbc-smooth-closed-point-local-section",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Slicing",
+  "declaration": "AlgebraicGeometry.Smooth.exists_etale_comp_of_etale_residueFieldMap",
+  "statement": "theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S)\n    [Smooth f] {x : X} (hx : (f.residueFieldMap x).hom.Etale) :\n    ∃ (Z : Scheme.{u}) (ι : Z ⟶ X) (z : Z), IsAffine Z ∧ Etale (ι ≫ f) ∧ ι z = x",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082424-L-1651717",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082424-L-1651717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
