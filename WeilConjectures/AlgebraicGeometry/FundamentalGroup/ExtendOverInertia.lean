@@ -228,7 +228,7 @@ lemma genericPointLift_comp : genericPointLift j ≫ j = C.fromSpecFunctionField
 
 variable (hW : IsAffineOpen W) [Nonempty W] [IsDedekindDomain Γ(C, W)]
   (ϖ : Γ(C, W)) (hϖ : ϖ ≠ 0) (hWU : j.opensRange ⊓ W = C.basicOpen ϖ)
-  (m : Ideal Γ(C, W)) [m.IsMaximal] [Finite (Γ(C, W) ⧸ m)]
+  (m : Ideal Γ(C, W)) [m.IsMaximal] [PerfectField m.ResidueField]
   (hϖm : ∀ p : Ideal Γ(C, W), p.IsPrime → ϖ ∈ p → p = m)
   {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
   [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω] [IsSepClosed Ω]

@@ -54,7 +54,7 @@ open scoped ENNReal NNReal
 
 namespace PowerSeries
 
-/-- Blueprint `sk-d-real-series`: Radius of a formal series.
+/-- Blueprint `sk-d-real-series`, `d-real-series`: Radius of a formal series.
 
 The radius of convergence `R(f) ∈ ℝ≥0∞` of a formal power series `f = ∑ aₙ Tⁿ ∈ 𝕜⟦X⟧` over a
 nontrivially normed field `𝕜`.
@@ -70,7 +70,7 @@ bounded, and boundedness of `‖aₙ‖ rⁿ` for one `r` is equivalent to summa
 noncomputable def radius {𝕜 : Type*} [NontriviallyNormedField 𝕜] (f : 𝕜⟦X⟧) : ℝ≥0∞ :=
   (FormalMultilinearSeries.ofScalars 𝕜 fun n ↦ coeff n f).radius
 
-/-- Blueprint `sk-d-real-series`: Radius of a formal series.
+/-- Blueprint `sk-d-real-series`, `d-real-series`: Radius of a formal series.
 
 A formal power series `f = ∑ aₙ Tⁿ ∈ ℂ⟦X⟧` has nonnegative coefficients if every `aₙ` is a
 nonnegative real number. These are the series for which the coefficientwise comparison

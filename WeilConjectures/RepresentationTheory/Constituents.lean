@@ -25,6 +25,8 @@ are constituents of its graded pieces, and it is compatible with tensor products
 
 ## Main results
 
+- `Subrepresentation.exists_subquotient_equiv_of_chain`: an irreducible subquotient of a
+  representation with a finite filtration is a subquotient of one of the graded pieces.
 - `Representation.ConstituentsLE.of_exact`: constituents of the middle of a short exact sequence.
 - `Representation.ConstituentsLE.of_chain`: constituents of a representation with a finite
   filtration are constituents of the graded pieces.
@@ -68,6 +70,76 @@ theorem exact_subtype_mkQ (U : Subrepresentation ρ) : Function.Exact U.subtype 
   rw [Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
   exact ⟨fun hy ↦ ⟨⟨y, hy⟩, rfl⟩, by rintro ⟨y, rfl⟩; exact y.2⟩
 
+/-- Every irreducible subquotient `S / U` of `ρ` with `S ≤ F n`, for a chain of
+subrepresentations `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n`, is equivalent to a subquotient of one of the steps
+`F (i + 1) / F i`. -/
+theorem exists_subquotient_equiv_of_chain {n : ℕ} {F : ℕ → Subrepresentation ρ}
+    (h0 : F 0 = ⊥) (hF : ∀ i < n, F i ≤ F (i + 1)) {U S : Subrepresentation ρ} (hS : S ≤ F n)
+    (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ i < n, ∃ U' S' : Subrepresentation ((F (i + 1)).subquotient (F i)),
+      Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  induction n generalizing U S with
+  | zero =>
+    have := inf_lt_of_isIrreducible hirr
+    rw [h0, le_bot_iff] at hS
+    subst hS
+    exact absurd this (by simp)
+  | succ n ih =>
+    by_cases h : F n ⊓ S ≤ U
+    · -- the subquotient survives in `F (n + 1) / F n`
+      let π : (F (n + 1)).toRepresentation.IntertwiningMap ((F (n + 1)).subquotient (F n)) :=
+        ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+      let ι : (F (n + 1)).toRepresentation.IntertwiningMap ρ := ⟨Submodule.subtype _, fun _ ↦ rfl⟩
+      let e₁ : ((comap ι S).subquotient (comap ι U)).Equiv (S.subquotient U) :=
+        subquotientEquivOfIntertwiningMap ι (fun _ hx ↦ hx) (fun _ _ hx ↦ hx) (fun _ _ hx ↦ hx)
+          fun y hy ↦ ⟨⟨y, hS hy⟩, hy, (congrArg (· ∈ U) (sub_self y)).mpr U.toSubmodule.zero_mem⟩
+      have hinj (x) (hxS : x ∈ comap ι S) (hx : π x ∈ map π (comap ι U ⊓ comap ι S)) :
+          x ∈ comap ι U := by
+        obtain ⟨u, hu, hux⟩ := mem_map.1 hx
+        have hxu : ((x - u : (F (n + 1)).toSubmodule) : V) ∈ F n := by
+          have : π (x - u) = 0 := by rw [map_sub, hux, sub_self]
+          exact (Submodule.Quotient.mk_eq_zero
+            ((F n).toSubmodule.comap (F (n + 1)).toSubmodule.subtype)).1 this
+        have hxuS : ((x - u : (F (n + 1)).toSubmodule) : V) ∈ S :=
+          S.toSubmodule.sub_mem hxS (mem_inf.1 hu).2
+        have hu' : (u : V) ∈ U := (mem_inf.1 hu).1
+        have := U.toSubmodule.add_mem (h (mem_inf.2 ⟨hxu, hxuS⟩)) hu'
+        rwa [Submodule.coe_sub, sub_add_cancel] at this
+      let e₂ : ((comap ι S).subquotient (comap ι U)).Equiv
+          ((map π (comap ι S)).subquotient (map π (comap ι U ⊓ comap ι S))) :=
+        subquotientEquivOfIntertwiningMap π (fun x hx ↦ mem_map.2 ⟨x, hx, rfl⟩)
+          (fun x hxS hxU ↦ mem_map.2 ⟨x, mem_inf.2 ⟨hxU, hxS⟩, rfl⟩) hinj fun y hy ↦ by
+            obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
+            exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩
+      exact ⟨n, Nat.lt_succ_self n, _, _, ⟨e₂.symm.trans e₁⟩⟩
+    · -- the subquotient comes from `F n`
+      let e : ((F n ⊓ S).subquotient U).Equiv (S.subquotient U) :=
+        subquotientEquivOfIntertwiningMap (.id ρ) (fun _ hx ↦ (mem_inf.1 hx).2) (fun _ _ hx ↦ hx)
+          (fun _ _ hx ↦ hx) fun y hy ↦ exists_mem_inf_sub_mem_of_isIrreducible hirr h hy
+      obtain ⟨i, hi, U', S', ⟨e'⟩⟩ := ih (fun i hi ↦ hF i (by omega)) inf_le_left
+        (e.isIrreducible_iff.2 hirr)
+      exact ⟨i, by omega, U', S', ⟨e'.trans e⟩⟩
+
+/-- Every irreducible subquotient `S / U` of `ρ` with `S ≤ P 0`, for a decreasing chain of
+subrepresentations `P 0 ≥ P 1 ≥ ⋯ ≥ P n = 0`, is equivalent to a subquotient of one of the steps
+`P j / P (j + 1)`. -/
+theorem exists_subquotient_equiv_of_antitone_chain {n : ℕ} {P : ℕ → Subrepresentation ρ}
+    (hn : P n = ⊥) (hP : ∀ j < n, P (j + 1) ≤ P j) {U S : Subrepresentation ρ} (hS : S ≤ P 0)
+    (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ j < n, ∃ U' S' : Subrepresentation ((P j).subquotient (P (j + 1))),
+      Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  obtain ⟨i, hi, U', S', ⟨e⟩⟩ := exists_subquotient_equiv_of_chain (F := fun i ↦ P (n - i))
+    (n := n) (by rw [Nat.sub_zero, hn]) (fun i hi ↦ by
+      have h : n - i = n - (i + 1) + 1 := by omega
+      rw [h]
+      exact hP _ (by omega)) (by rwa [Nat.sub_self]) hirr
+  have key (a b : ℕ) (ha : a = n - (i + 1)) (hb : b = n - i) :
+      ∃ U' S' : Subrepresentation ((P a).subquotient (P b)),
+        Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+    subst ha hb
+    exact ⟨U', S', ⟨e⟩⟩
+  exact ⟨n - (i + 1), by omega, key _ _ rfl (by omega)⟩
+
 end Subrepresentation
 
 namespace Representation
@@ -98,17 +170,9 @@ theorem trans (h₁ : ConstituentsLE ρ σ) (h₂ : ConstituentsLE σ τ) : Cons
 
 /-- The constituents of `ρ` are constituents of `σ` if `ρ` embeds into `σ`. -/
 theorem of_injective (f : ρ.IntertwiningMap σ) (hf : Function.Injective f) :
-    ConstituentsLE ρ σ := fun U S h ↦ by
-  let e := Subrepresentation.subquotientEquivOfIntertwiningMap f (U := U) (S := S)
-    (U' := Subrepresentation.map f U) (S' := Subrepresentation.map f S)
-    (fun x hx ↦ ⟨x, hx, rfl⟩) (fun x _ hx ↦ ⟨x, hx, rfl⟩)
-    (fun x _ hx ↦ by
-      obtain ⟨y, hy, hyx⟩ := Subrepresentation.mem_map.1 hx
-      exact hf hyx ▸ hy)
-    fun y hy ↦ by
-      obtain ⟨x, hx, rfl⟩ := Subrepresentation.mem_map.1 hy
-      exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩
-  exact ⟨_, _, e.isIrreducible_iff.1 h, ⟨e⟩⟩
+    ConstituentsLE ρ σ := fun U S h ↦
+  let e := (Subrepresentation.subquotientMapEquiv f hf U S).symm
+  ⟨_, _, e.isIrreducible_iff.1 h, ⟨e⟩⟩
 
 /-- The constituents of `σ` are constituents of `ρ` if `σ` is a quotient of `ρ`. -/
 theorem of_surjective (f : ρ.IntertwiningMap σ) (hf : Function.Surjective f) :
@@ -175,33 +239,11 @@ decreasing filtration by subrepresentations, every constituent of `ρ` is a cons
 the graded pieces `F_j ⧸ F_{j+1}`. (blueprint: `lem-mg-filtration-refinement`) -/
 theorem of_chain (F : ℕ → Subrepresentation ρ) (hF : ∀ j, F (j + 1) ≤ F j) (h0 : F 0 = ⊤)
     {m : ℕ} (hm : F m = ⊥) (h : ∀ j < m, ConstituentsLE ((F j).subquotient (F (j + 1))) τ) :
-    ConstituentsLE ρ τ := by
-  -- the constituents of the subrepresentation `F j`, by downward induction on `j`
-  have key (i : ℕ) (hi : i ≤ m) : ConstituentsLE (F (m - i)).toRepresentation τ := by
-    induction i with
-    | zero =>
-      rw [Nat.sub_zero, hm]
-      have : Subsingleton (⊥ : Subrepresentation ρ).toSubmodule :=
-        Submodule.subsingleton_iff_eq_bot.2 rfl
-      exact of_subsingleton _ τ
-    | succ i ih =>
-      set j := m - (i + 1)
-      have hj : m - i = j + 1 := by omega
-      have ih := ih (by omega)
-      rw [hj] at ih
-      -- the inclusion `F (j + 1) → F j` and the quotient `F j → F j / F (j + 1)`
-      let incl : (F (j + 1)).toRepresentation.IntertwiningMap (F j).toRepresentation :=
-        ⟨Submodule.inclusion (hF j), fun _ ↦ rfl⟩
-      let quot : (F j).toRepresentation.IntertwiningMap ((F j).subquotient (F (j + 1))) :=
-        ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
-      refine of_exact incl quot (fun y ↦ ?_) ih (h j (by omega))
-      change Submodule.mkQ _ y = 0 ↔ _
-      rw [Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
-      exact ⟨fun hy ↦ ⟨⟨y, hy⟩, rfl⟩, by rintro ⟨y, rfl⟩; exact y.2⟩
-  have h := key m le_rfl
-  rw [Nat.sub_self, h0] at h
-  exact (of_equiv ((Subrepresentation.topSubquotientBotEquiv ρ).symm.trans
-    (Subrepresentation.subquotientBotEquiv ⊤))).trans h
+    ConstituentsLE ρ τ := fun U S hirr ↦ by
+  obtain ⟨j, hj, U', S', ⟨e⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_antitone_chain hm
+    (fun j _ ↦ hF j) (h0 ▸ le_top) hirr
+  obtain ⟨U'', S'', h'', ⟨e'⟩⟩ := h j hj U' S' (e.isIrreducible_iff.2 hirr)
+  exact ⟨U'', S'', h'', ⟨e.symm.trans e'⟩⟩
 
 /-- An equivalence `ρ ≅ ρ'` induces `ρ ⊗ σ ≅ ρ' ⊗ σ`. -/
 noncomputable def _root_.Representation.Equiv.rTensor {V₁ : Type*} [AddCommGroup V₁] [Module k V₁]

@@ -41,6 +41,9 @@ universe u
 
 open CategoryTheory Limits
 
+/- Through `Mathlib.AlgebraicGeometry.Group.Affine`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
 
 namespace AlgebraicGeometry
 
