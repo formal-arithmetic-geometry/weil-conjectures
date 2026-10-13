@@ -73,8 +73,10 @@ lemma Etale.isFiniteLocallyConstantSheaf_upperStar_ι_of_le {X : Scheme.{u}} {U 
     (h : U ≤ V) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf ((V.ι)^*[ModuleCat.{u + 1} Λ].obj F)] :
     Scheme.IsFiniteLocallyConstantSheaf ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F) := by
-  have := Scheme.IsFiniteLocallyConstantSheaf.upperStar (X.homOfLE h)
-    ((V.ι)^*[ModuleCat.{u + 1} Λ].obj F)
+  have : Scheme.IsFiniteLocallyConstantSheaf (((V.ι)^*[ModuleCat.{u + 1} Λ] ⋙
+      (X.homOfLE h)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+    Scheme.IsFiniteLocallyConstantSheaf.upperStar (X.homOfLE h)
+      ((V.ι)^*[ModuleCat.{u + 1} Λ].obj F)
   exact Scheme.IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStarComp
     (ModuleCat.{u + 1} Λ) (X.homOfLE h) V.ι U.ι (Scheme.homOfLE_ι _ _).symm).app F).symm
 
@@ -83,12 +85,13 @@ constructible étale sheaves of `Λ`-modules and the eight assertions hold for e
 hold for `H`: the cohomology of `H` and its pullback maps are the finite sums of those of the
 `Gₐ`, and the coefficient hypotheses pass from `H` to its subsheaves `Gₐ`. -/
 theorem IsCurve.Assertions.of_iso_biproduct {k : Type u} [Field k] {X : Scheme.{u}}
-    {f : X ⟶ Spec (.of k)} {I : Type} [Fintype I]
+    {f : X ⟶ Spec (.of k)} {I : Type} [Finite I]
     {G : I → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : H ≅ ⨁ G)
     (hGc : ∀ a, Scheme.IsConstructibleSheaf (G a)) (hG : ∀ a, IsCurve.Assertions Λ f (G a)) :
     IsCurve.Assertions Λ f H := by
   classical
+  have := Fintype.ofFinite I
   set Φ := sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
   let π (a : I) : H ⟶ G a := e.hom ≫ biproduct.π G a
@@ -107,7 +110,7 @@ theorem IsCurve.Assertions.of_iso_biproduct {k : Type u} [Field k] {X : Scheme.{
       ∑ a, Sheaf.H.map ((g)^*[AddCommGrpCat.{u + 1}].map (Φ.map (ι a))) q
         (Sheaf.H.map ((g)^*[AddCommGrpCat.{u + 1}].map (Φ.map (π a))) q x) = x := by
     simp only [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_sum_apply, ← Functor.map_comp,
-      ← Functor.map_sum, htot', CategoryTheory.Functor.map_id, Sheaf.H.map_id_apply]
+      ← Functor.map_sum, htot, CategoryTheory.Functor.map_id, Sheaf.H.map_id_apply]
   have hsub (q : ℕ) (h : ∀ a, Subsingleton (Sheaf.H (Φ.obj (G a)) q)) :
       Subsingleton (Sheaf.H (Φ.obj H) q) :=
     AddMonoidHom.subsingleton_of_sum_comp_eq (fun a ↦ Sheaf.H.map (Φ.map (π a)) q)
@@ -257,7 +260,47 @@ noncomputable def Etale.biproductIsoLowerShriekUpperStar {X : Scheme.{u}} {n : �
     (⨆ a, U a).ι).counit.app _)).symm ≪≫ (((⨆ a, U a).ι)_!open[ModuleCat.{u + 1} Λ]).mapIso
       (asIso (((⨆ a, U a).ι)^*[ModuleCat.{u + 1} Λ].map (Etale.biproductDescCounit U F)))
 
+/-- In a family of pairwise disjoint irreducible open pieces, the connected component of a point
+of a piece inside the union of all pieces is that piece. -/
+lemma connectedComponentIn_eq_of_isIrreducible_piece {X : Type*} [TopologicalSpace X] {n : ℕ}
+    (V : Fin n → TopologicalSpace.Opens X)
+    (hV : Pairwise fun a b ↦ Disjoint (V a : Set X) (V b))
+    (hirr : ∀ a, IsIrreducible (V a : Set X)) (a : Fin n) {x : X} (hx : x ∈ (V a : Set X)) :
+    connectedComponentIn (⋃ b, (V b : Set X)) x = V a := by
+  classical
+  refine subset_antisymm ?_ ((hirr a).isConnected.isPreconnected.subset_connectedComponentIn hx
+    (Set.subset_iUnion (fun b ↦ (V b : Set X)) a))
+  refine isPreconnected_connectedComponentIn.subset_left_of_subset_union (V a).isOpen
+    (isOpen_biUnion (s := {b | b ≠ a}) fun b _ ↦ (V b).isOpen) ?_
+    ((connectedComponentIn_subset _ _).trans fun y hy ↦ ?_)
+    ⟨x, mem_connectedComponentIn (Set.mem_iUnion.2 ⟨a, hx⟩), hx⟩
+  · exact Set.disjoint_iUnion₂_right.2 fun b hb ↦ hV (Ne.symm hb)
+  · obtain ⟨b, hb⟩ := Set.mem_iUnion.1 hy
+    by_cases h : b = a
+    · exact .inl (h ▸ hb)
+    · exact .inr (Set.mem_biUnion h hb)
+
+/-- **Irreducible pieces of the lisse locus.** A constructible sheaf on a curve is finite locally
+constant on the union of finitely many pairwise disjoint irreducible opens with dense union. -/
+lemma IsCurve.exists_isIrreducible_pieces_isFiniteLocallyConstantSheaf {k : Type u} [Field k]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsConstructibleSheaf F] :
+    ∃ (n : ℕ) (V : Fin n → X.Opens), Dense (⋃ a, (V a : Set X)) ∧
+      Pairwise (fun a b ↦ Disjoint (V a : Set X) (V b)) ∧ (∀ a, IsIrreducible (V a : Set X)) ∧
+      Scheme.IsFiniteLocallyConstantSheaf (((⨆ a, V a).ι)^*[ModuleCat.{u + 1} Λ].obj F) := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := {}
+  obtain ⟨U, hU, hflc⟩ := Scheme.IsConstructibleSheaf.exists_dense_open F
+  obtain ⟨n, V, hVo, hVU, hV, hirr, hd⟩ := hU.exists_isIrreducible_pieces U.isOpen
+  refine ⟨n, fun a ↦ ⟨V a, hVo a⟩, hd, hV, hirr, ?_⟩
+  have : Scheme.IsFiniteLocallyConstantSheaf ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F) := hflc
+  exact Etale.isFiniteLocallyConstantSheaf_upperStar_ι_of_le
+    (U := ⨆ a, (⟨V a, hVo a⟩ : X.Opens)) (iSup_le fun a ↦ hVU a) F
+
 end Helpers
+
+attribute [local instance] Abelian.hasFiniteBiproducts
 
 /-- **Dense-open localisation reduction.** Let `X` be a reduced curve over an algebraically
 closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime `r`, over a
@@ -276,8 +319,17 @@ theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u}
       (∀ x ∈ (U : Set X), IsIrreducible (connectedComponentIn (U : Set X) x)) ∧
       Scheme.IsFiniteLocallyConstantSheaf ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F) ∧
       (IsCurve.Assertions Λ f F ↔ IsCurve.Assertions Λ f
-        ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
-  sorry
+        ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F))) := by
+  obtain ⟨n, V, hd, hV, hirr, hflc⟩ :=
+    IsCurve.exists_isIrreducible_pieces_isFiniteLocallyConstantSheaf f F
+  have hd' : Dense ((⨆ a, V a : X.Opens) : Set X) := by
+    rwa [TopologicalSpace.Opens.coe_iSup]
+  refine ⟨⨆ a, V a, hd', fun x hx ↦ ?_, hflc,
+    IsCurve.assertions_iff_openImmersionLowerShriek_of_dense Λ f r F hF _ hd'⟩
+  rw [TopologicalSpace.Opens.coe_iSup] at hx ⊢
+  obtain ⟨a, ha⟩ := Set.mem_iUnion.1 hx
+  rw [connectedComponentIn_eq_of_isIrreducible_piece V hV hirr a ha]
+  exact hirr a
 
 /-- **Dense-open localisation, componentwise.** Let `C` be a reduced curve over an
 algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime
@@ -298,7 +350,52 @@ theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : 
       topologicalKrullDim ↥(⋃ a, (U a : Set C))ᶜ ≤ 0 ∧
       (∀ a, Scheme.IsFiniteLocallyConstantSheaf (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F)) ∧
       (IsCurve.Assertions Λ f F ↔ ∀ a, IsCurve.Assertions Λ f
-        (((U a).ι)_!open[ModuleCat.{u + 1} Λ].obj (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
-  sorry
+        (((U a).ι)_!open[ModuleCat.{u + 1} Λ].obj (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F))) := by
+  classical
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian C := {}
+  obtain ⟨n, V, hd, hV, hirr, hflc⟩ :=
+    IsCurve.exists_isIrreducible_pieces_isFiniteLocallyConstantSheaf f F
+  have hd' : Dense ((⨆ a, V a : C.Opens) : Set C) := by
+    rwa [TopologicalSpace.Opens.coe_iSup]
+  refine ⟨n, V, hd, hV, hirr, ?_, fun a ↦ ?_, ?_⟩
+  · rw [← TopologicalSpace.Opens.coe_iSup]
+    exact (⨆ a, V a).isOpen.topologicalKrullDim_compl_le_zero (IsCurve.krullDim_le_one f) hd'
+  · exact Etale.isFiniteLocallyConstantSheaf_upperStar_ι_of_le (le_iSup V a) F
+  set A := ModuleCat.{u + 1} Λ
+  set e := Etale.biproductIsoLowerShriekUpperStar V hV F
+  rw [IsCurve.assertions_iff_openImmersionLowerShriek_of_dense Λ f r F hF _ hd',
+    ← IsCurve.assertions_iff_of_iso (f := f) e]
+  set G : Fin n → Sheaf C.smallEtaleTopology A :=
+    fun a ↦ ((V a).ι)_!open[A].obj (((V a).ι)^*[A].obj F)
+  have hcons (W : C.Opens) :
+      Scheme.IsConstructibleSheaf ((W.ι)_!open[A].obj ((W.ι)^*[A].obj F)) := by
+    have : TopologicalSpace.NoetherianSpace W := W.ι.isOpenEmbedding.isInducing.noetherianSpace
+    have : QuasiCompact W.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+    have : Scheme.IsConstructibleSheaf ((W.ι)^*[A].obj F) :=
+      Scheme.IsConstructibleSheaf.upperStar _ _
+    exact Scheme.IsConstructibleSheaf.openImmersionLowerShriek W.ι W.closedComplement
+      (by rw [W.range_closedComplement, Scheme.Opens.range_ι]) _
+  have hkill (W : C.Opens) : r • 𝟙 ((W.ι)_!open[A].obj ((W.ι)^*[A].obj F)) = 0 :=
+    Etale.nsmul_id_obj_eq_zero _ (Etale.nsmul_id_obj_eq_zero _ hF)
+  have hHc : Scheme.IsConstructibleSheaf (⨁ G) := by
+    have := hcons (⨆ a, V a)
+    exact Scheme.IsConstructibleSheaf.of_iso e.symm
+  have hH : r • 𝟙 (⨁ G) = 0 := Preadditive.nsmul_id_eq_zero_of_mono e.hom (hkill _)
+  refine ⟨fun h a ↦ ?_, fun h ↦ IsCurve.Assertions.of_iso_biproduct (Iso.refl _)
+    (fun a ↦ hcons (V a)) h⟩
+  refine h.of_retract (biproduct.ι G a) (biproduct.π G a) (biproduct.ι_π_self G a)
+    (fun p hp ↦ ?_) (fun _ ↦ hHc) (fun hinv ↦ ?_)
+  · by_cases hz : IsZero (G a)
+    · exact .inr hz
+    · exact .inl (Scheme.IsPrimaryTorsionSheaf.of_nsmul_id_eq_zero hH
+        (Scheme.IsPrimaryTorsionSheaf.dvd_of_nsmul_id_eq_zero Fact.out (hkill (V a)) hp hz))
+  · by_cases hz : IsZero (G a)
+    · exact .inr hz
+    · exact .inl (Scheme.IsTorsionSheafOfInvertibleOrder.of_nsmul_id_eq_zero _
+        (Fact.out : r.Prime).pos hH
+        (Scheme.IsTorsionSheafOfInvertibleOrder.isUnit_of_nsmul_id_eq_zero
+          (Spec (.of k)) Fact.out (hkill (V a)) hz))
 
 end AlgebraicGeometry
