@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-closure-retracts-core",
+ "kind": "statement",
+ "title": "Localized tensor comparison retract component",
+ "statement": "Under the hypotheses of localized tensor comparison closure, if X is a retract of Y and Y satisfies the predicate, then each fixed representative/model/degree comparison for X is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "lem-pc-localized-tensor-comparison-closure-retracts"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), retract argument"
+ },
+ "proof": [
+  {
+   "text": "Apply functoriality of source and target comparisons to the retract maps and use the retract identities; the comparison for X is a retract of that for Y in the arrow category.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-kflat-derived-tensor-associator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-kflat-derived-tensor-associator"
+ ],
+ "proof_origin": {
+  "by": "J2",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), retract component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Retract IsIso arrow category",
+   "results": "Searched Mathlib/CategoryTheory for retract and IsIso lemmas; only generic retract infrastructure found, with no specialized comparison theorem.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Retract X Y IsIso",
+   "results": "No direct Loogle hit for the specialized localized comparison component.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized tensor comparison retract isomorphism",
+   "results": "No exact existing declaration found in the local library.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetract",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-localized-tensor-comparison-closure-retracts",
+   "place": "component split"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonClosureRetractCore.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_retract_core",
+  "statement": "theorem localizedTensorComparisonProperty_retract_core\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    {X Y : DerivedCategory (ModuleCat.{u} A)} (hXY : Retract X Y)\n    (hY : localizedTensorComparisonProperty R A B C Q N t Y) :\n    ∀ (U : CochainComplex (ModuleCat.{u} A) ℤ),\n    Nonempty (DerivedCategory.Q.obj U ≅ X) →\n    (∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic) →\n    ∀ (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ),\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T181102-L-2601300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T181102-L-2601300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

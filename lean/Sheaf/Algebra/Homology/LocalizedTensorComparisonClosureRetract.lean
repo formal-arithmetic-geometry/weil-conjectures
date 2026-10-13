@@ -3,7 +3,7 @@ module
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.CategoryTheory.Retract
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore
 
 @[expose] public section
 
@@ -52,6 +52,8 @@ theorem localizedTensorComparisonProperty_closure_retracts
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :
     ∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y →
       localizedTensorComparisonProperty R A B C Q N t Y →
-      localizedTensorComparisonProperty R A B C Q N t X := by sorry
+      localizedTensorComparisonProperty R A B C Q N t X := by
+  intro X Y hXY hY
+  exact localizedTensorComparisonProperty_retract_core R A B C Q N t hC hQ hXY hY
 
 end ModuleCat
