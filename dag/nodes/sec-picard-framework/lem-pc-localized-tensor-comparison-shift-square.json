@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), shift specialization; tensor associativity Tag 0BYJ"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-localized-tensor-comparison-shift-square",
+ "title": "Localized tensor comparison inverse-shift conjugacy square",
+ "statement": "Let R,A,B,C be commutative rings in one universe, A and B R-algebras, C an algebra over E=A tensor_R B, and fix derived categories of R-, A- and B-modules. Let F be termwise extension from A to C. Fix A-complexes U,Q, a C-complex N and a map t:F(Q) to N. Given a base-derived tensor cohomology model mU of U tensor Q, integers n and i, there exist a model mV of U[-n] tensor Q, a C-linear source isomorphism eS: C tensor_E mV.cohomology(i+n) to C tensor_E mU.cohomology(i), and a target isomorphism eT: H^(i+n)(F(U[-n]) tensor_C N) to H^i(F(U) tensor_C N), such that the degree-i localized comparison followed by H^i(mu_F(U,Q)^(-1) then F(U) tensor t) equals eS^(-1), followed by the corresponding degree-(i+n) comparison for U[-n], followed by eT. No K-flatness or invertibility hypothesis is imposed. Models and comparisons are those of [def-pc-base-derived-tensor-cohomology-model]; the coefficient map and tensor conventions are those of [def-pc-localized-tensor-comparison-property].",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), explicit inverse-shift comparison transport"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShift",
+  "date": "2026-10-14",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tensor inheritance, shift comparison transport square",
+   "via": [
+    "lem-pc-localized-tensor-comparison-shift-component",
+    "lem-pc-localized-tensor-comparison-shift",
+    "lem-pc-localized-tensor-comparison-generators",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree",
+    "lem-pc-localized-tensor-comparison-inheritance"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural cohomology shift square for the counit of a left derived extension of scalars functor",
+   "results": "Eight hits including derived adjunction counit and exact-functor shift instances; none supplies the base-derived tensor cohomology model conjugacy.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorShift₁Iso",
+   "results": "The first-variable total tensor shift isomorphism and naturality lemmas exist in Mathlib.Algebra.Homology.BifunctorShift; they do not transport our cohomology model.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology comparison for a left derived functor commutes with integer shifts",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*square|shift.*cohomology.*model and shift.*counit|counit.*shift|commShift in homology and derived-functor modules",
+   "results": "No specialized model transport in Sheaf or WeilConjectures. Mathlib tensor shift and cohomology shift maps are available; no single specialized conjugacy theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof": [
+  {
+   "text": "Use CochainComplex.mapBifunctorShift₁Iso on U,Q at -n, and the additive scalar-extension shift isomorphisms, to identify U[-n] tensor Q with (U tensor Q)[-n] and its scalar extensions. Retain mU.derived, mU.counit and mU.universal. Uniqueness of the total left derived functor supplies its shift comparison compatible with the counit. Reindex mU.cohomology by j -> j-n and use this derived shift comparison to define the cohomologyIso for the new complex. Naturality in multiplication by a in A and B-linearity preserve the E-action and prove cohomologyIso_smul.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport ordinaryIso and ordinaryToLocalized through the scalar-extension shift isomorphisms and the tensor shift isomorphism. Their generator formulas are unchanged. Define comparison using comparison_eq, with the transported cohomologyIso and counit. Naturality under multiplication by A shows it is E-linear. Define localizedComparison by extension/restriction adjunction; its unit identity is localized_eq. These constructions give the model mV; no arbitrary model existence witness is selected.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At j=i+n the cohomology shift comparison identifies the reindexed E-cohomology with mU.cohomology i; apply extension to C to obtain eS. Apply the cohomology shift map to the first-variable tensor shift and the scalar-extension shift map to obtain eT. Naturality of tensor shift in t and compatibility with the monoidal comparison of F give the target square. Counit shift compatibility, comparison_eq and transposition through localized_eq give the source square. Compose the two squares and cancel inverse shift isomorphisms to get the stated conjugacy. The first-variable tensor shift has no extra signs. For n=0 these are the zero-shift comparisons; for zero complexes or t=0 the same naturality equations apply.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquare",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonShiftSquare.lean",
+  "declaration": "ModuleCat.exists_localizedTensorComparison_shift_square",
+  "statement": "theorem exists_localizedTensorComparison_shift_square\n    (U : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ)\n    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∃ (mV : BaseDerivedTensorCohomologyModel R A B ((U⟦-n⟧) ⊗ Q) C)\n      (eS : (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mV.cohomology (i + n)) ≅\n        (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mU.cohomology i))\n      (eT : (F.obj (U⟦-n⟧) ⊗ N).homology (i + n) ≅ (F.obj U ⊗ N).homology i),\n    mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i =\n    eS.inv ≫ (mV.localizedComparison (i + n) ≫ HomologicalComplex.homologyMap\n      ((Functor.Monoidal.μIso F (U⟦-n⟧) Q).inv ≫ (F.obj (U⟦-n⟧) ◁ t)) (i + n)) ≫\n        eT.hom",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T190153-L-3220602",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T190153-L-3220602",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

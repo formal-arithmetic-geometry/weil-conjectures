@@ -13,22 +13,27 @@
  },
  "proof": [
   {
-   "text": "Shift U by -n to a K-flat representative of X, transport the model and comparison square through the canonical tensor, scalar-extension and cohomology shift isomorphisms, and apply hX to the unshifted representative. Naturality and the comparison_eq/localized_eq identities identify the transported isomorphism with the displayed composite.",
+   "text": "Apply DerivedCategory.Q.commShiftIso(-n), shift the representative isomorphism Q(U) ~= X[n] by -n and cancel n+(-n) to prove that U[-n] represents X. For an acyclic test V, mapBifunctorShift₂Iso identifies V tensor U[-n] with (V tensor U)[-n]; the homology shift isomorphism transports the degreewise exactness supplied by hK. Thus U[-n] is K-flat.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse-shift conjugacy square to the supplied mU and degree i. Obtain mV, eS, eT and the equality of comparison arrows. Apply hX to the now verified representative U[-n], its K-flatness, mV and degree i+n. Rewrite the required arrow using the conjugacy equality; it is a composite of eS.inv, this invertible arrow and eT.hom. IsIso is closed under composition.",
    "uses": [
-    "def-pc-localized-tensor-comparison-property",
-    "def-pc-base-derived-tensor-cohomology-model"
+    "lem-pc-localized-tensor-comparison-shift-square",
+    "def-pc-localized-tensor-comparison-property"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-localized-tensor-comparison-property",
-  "def-pc-base-derived-tensor-cohomology-model"
+  "lem-pc-localized-tensor-comparison-shift-square",
+  "def-pc-localized-tensor-comparison-property"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), shift transport"
+  "place": "Tag 0DJA(1), inverse-shift representative and explicit conjugacy square"
  },
  "mathlib_searches": [
   {
@@ -101,10 +106,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T181103-L-2601655",
-  "kind": "proof",
+  "landing": "20261013T190153-L-3220602",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

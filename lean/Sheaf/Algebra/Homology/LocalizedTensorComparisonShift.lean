@@ -6,6 +6,7 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquare
 
 /-! # Shift stability of localized tensor comparison
 
@@ -53,7 +54,29 @@ theorem localizedTensorComparisonProperty_shift_component
       ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
         (.up ℤ)
     IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
-      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by sorry
+      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by
+  obtain ⟨eU⟩ := hU
+  have hV : Nonempty (DerivedCategory.Q.obj (U⟦-n⟧) ≅ X) := ⟨
+    (DerivedCategory.Q.commShiftIso (-n)).app U ≪≫
+      (shiftFunctor _ (-n)).mapIso eU ≪≫
+      (shiftFunctorCompIsoId _ n (-n) (add_neg_cancel n)).app X⟩
+  have hVK : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
+      (CochainComplex.mapBifunctor V (U⟦-n⟧) (curriedTensor _)).Acyclic := by
+    intro V hV j
+    apply HomologicalComplex.ExactAt.of_iso _
+      (CochainComplex.mapBifunctorShift₂Iso V U (curriedTensor _) (-n)).symm
+    rw [HomologicalComplex.exactAt_iff_isZero_homology]
+    exact (hK V hV (-n + j)).isZero_homology.of_iso
+      ((CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} A)
+        (-n) j (-n + j) rfl).app
+          (CochainComplex.mapBifunctor V U (curriedTensor _)))
+  obtain ⟨mV, eS, eT, heq⟩ :=
+    exists_localizedTensorComparison_shift_square R A B C Q N t U n mU i
+  have hi := hX (U⟦-n⟧) hV hVK mV (i + n)
+  change IsIso (_ ≫ _) at hi ⊢
+  rw [heq]
+  infer_instance
+
 
 /-- Localized tensor comparison in all degrees is preserved by integer shifts.
 Source: Stacks Project, Tag 0DJA(1), reindexing the cohomological comparison.
