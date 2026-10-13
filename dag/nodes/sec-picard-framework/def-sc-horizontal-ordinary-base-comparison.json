@@ -1,0 +1,119 @@
+{
+ "id": "def-sc-horizontal-ordinary-base-comparison",
+ "kind": "definition",
+ "title": "horizontalOrdinaryBaseComparison",
+ "statement": "Let g:S→Y and h:T→S be scheme morphisms. On the derived QCoh categories [def-pc-derived-category] define horizontalOrdinaryBaseComparison g h:qcPullback g⋙qcPullback h≅qcPullback(h≫g) to be horizontalMateComp h g [lem-sc-horizontal-duality-mate-comparisons], with the functors written using the QCoh restriction names [lem-sc-duality-base-change-inverse-square-mate].",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Remark 20.28.5 (0ATM), Remark 20.28.3 (08HY), Lemma 20.27.2 (0D5S); fixed comparisons used in Lemma 48.5.2 (0ATR)"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "stmt_deps": [
+  "lem-sc-horizontal-duality-mate-comparisons",
+  "lem-sc-duality-base-change-inverse-square-mate",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use horizontalMateComp h g itself. The QCoh restriction functor names in the displayed signature are definitionally equal to the horizontal names, so no additional factors or transfer construction enter this definition.",
+   "uses": [
+    "lem-sc-horizontal-duality-mate-comparisons",
+    "lem-sc-duality-base-change-inverse-square-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-duality-base-change-inverse-square-mate",
+  "lem-sc-horizontal-duality-mate-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Explicit fixed comparisons and the omitted verification of 0ATM before inversion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived ordinary base change commutes with horizontal pasting before invertibility assumptions",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change horizontal pasting under fixed pullback and direct image comparisons",
+   "results": "PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc and Over.pullbackComp.",
+   "verdict": "These are underived comparison families, not the pinned derived QCoh transfer identity.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*pasting|conjugate.*unit",
+   "results": "Mathlib Adjunction.Mates supplies conjugateEquiv_counit; local source supplies DerivedBaseChangeHorizontalPasting and DerivedBaseChangePasting. No fixed QCoh transfer identity was found.",
+   "verdict": "Generic categorical tools exist; the scheme restriction and fixed transfer remain to be proved.",
+   "date": "2026-10-14"
+  }
+ ],
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HorizontalOrdinaryInverseFixedPasting",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0ATR final reduction: fixed ordinary comparison construction and forward pasting before inversion.",
+   "via": [
+    "lem-sc-horizontal-ordinary-inverse-fixed-pasting",
+    "lem-sc-horizontal-inverse-square-fixed-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/HorizontalOrdinaryForwardFixedPasting.lean",
+  "declaration": "AlgebraicGeometry.horizontalOrdinaryBaseComparison",
+  "statement": "def horizontalOrdinaryBaseComparison\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {Y S T : Scheme.{u}} (g : S ⟶ Y) (h : T ⟶ S) :\n    qcPullback g ⋙ qcPullback h ≅ qcPullback (h ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-95829",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T215558-L-895607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-95829",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T215558-L-895607",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with DAG statements, original comparison constructions and Stacks sources; all delivered modules and the downstream importer compile cleanly, original caller fails as reported, forced edits preserve signatures, and axiom checks pass with sorryAx only from open dependencies."
+ }
+}

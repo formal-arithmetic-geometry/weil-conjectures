@@ -119,6 +119,43 @@ private theorem fixed_transport_mate
 
 
 
+private theorem horizontalOrdinaryTransfer_eq
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {P Q Z : Scheme.{u}}
+    [CompactSpace P] [QuasiSeparatedSpace P] [CompactSpace Q] [QuasiSeparatedSpace Q]
+    [CompactSpace Z] [QuasiSeparatedSpace Z]
+    (e : P ≅ Q) (q : Q ⟶ Z) (p : P ⟶ Z)
+    [QuasiCompact q] [QuasiSeparated q] [QuasiCompact p] [QuasiSeparated p]
+    (hp : e.hom ≫ q = p) :
+    horizontalOrdinaryTransfer e q p hp =
+    (let ev := horizontalMateEquivalence e
+  let ri := (horizontalMateAdjunction e.hom).rightAdjointUniq ev.toAdjunction
+  let li := eqToIso (congrArg qcDirectImage hp.symm) ≪≫
+    horizontalMatePushComp e.hom q ≪≫
+    Functor.isoWhiskerRight ri (horizontalMatePushforward q)
+  .mk _ _ _ _ <|
+    (Functor.isoWhiskerLeft (horizontalMatePullback e.hom) li).hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight ev.unitIso.inv (horizontalMatePushforward q) ≫
+      (Functor.leftUnitor (horizontalMatePushforward q)).hom ≫
+      (Functor.rightUnitor (horizontalMatePushforward q)).inv) := by rfl
+
+private theorem horizontalOrdinaryUpperComparison_eq
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {X Y S T : Scheme.{u}} (f : X ⟶ Y) (g : S ⟶ Y) (h : T ⟶ S) :
+    horizontalOrdinaryUpperComparison f g h =
+    (horizontalMateComp (pullback.fst (pullback.snd f g) h) (pullback.fst f g) ≪≫
+    eqToIso (congrArg horizontalMatePullback
+      (pullbackLeftPullbackSndIso_hom_fst f g h).symm) ≪≫
+    (horizontalMateComp (pullbackLeftPullbackSndIso f g h).hom
+      (pullback.fst f (h ≫ g))).symm) := by rfl
+
+private theorem horizontalOrdinaryBaseComparison_eq
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {Y S T : Scheme.{u}} (g : S ⟶ Y) (h : T ⟶ S) :
+    horizontalOrdinaryBaseComparison g h =
+    (horizontalMateComp h g) := by rfl
+
 /-- The pasted inverse ordinary square agrees with the rectangle inverse square,
 after changing its upper projection and base pullback by the pinned comparisons.
 This statement involves no right adjoint to the bottom direct image.
@@ -213,7 +250,8 @@ theorem horizontal_inverse_square_fixed_pasting
       (pullback.snd f (h ≫ g)) (pullback.snd (pullback.snd f g) h)
       (pullbackLeftPullbackSndIso_hom_snd f g h) c d adjc adjd
     have ho := horizontal_ordinary_inverse_fixed_pasting g f hβ h hβh hβ₂ E
-    simp only [s, r, κ, τ, σ, ← hk, TwoSquare.mk] at ho ⊢
+    simp only [horizontalOrdinaryTransfer_eq, horizontalOrdinaryUpperComparison_eq,
+      horizontalOrdinaryBaseComparison_eq, s, r, κ, τ, σ, ← hk, TwoSquare.mk] at ho ⊢
     convert ho using 1
     rfl
 

@@ -22,41 +22,41 @@
  ],
  "proof": [
   {
-   "text": "Transpose the pasted forward ordinary square and the outer ordinary square under the pinned pullback/direct-image adjunction for p. Substitute the counit definition of ordinary base change. Naturality moves the first counit through the second square, and the middle projection adjunction triangle cancels the inserted unit and counit. Associativity of the pinned pullback composition family identifies the base chain h,g and the upper chain v₂,v₁. The two projection equations for e identify the scheme morphisms and their equality transports. Thus the two transposes coincide.",
+   "text": "Apply horizontal_ordinary_forward_fixed_pasting to the explicitly constructed upper comparison and transfer square, with their defining equalities. This supplies bβ=γAk before any invertibility assumption.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-sc-horizontal-ordinary-forward-fixed-pasting",
+    "def-sc-horizontal-ordinary-transfer",
+    "def-sc-horizontal-ordinary-upper-comparison",
+    "def-sc-horizontal-ordinary-base-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The direct-image composition comparison is the conjugate of the fixed pullback comparison. Right-adjoint uniqueness identifies R(e) with inverse pullback for the explicitly constructed equivalence ev. Its inverse unit gives exactly π after the projection equation. Injectivity of the adjunction Hom equivalence proves the ambient equation; faithfulness of the QCoh inclusions proves the displayed equation. No ordinary base-change map is inverted.",
+   "text": "Reflect the three ordinary component isomorphisms through the fully faithful QCoh inclusions. The private qc_inverse_cancel lemma gives both inverse equations for each qcInverseBaseChange component. The horizontal component formula, functoriality of composition, and the two inner inverse equations give σγ=id; the outer inverse equation gives βτ=id.",
    "uses": [
-    "lem-sc-horizontal-duality-mate-comparisons",
     "lem-sc-duality-base-change-inverse-square-mate"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Reflect the three assumed component isomorphisms along the fully faithful QCoh inclusions. Multiply forward pasting on the left by the inverse pasted square and on the right by the inverse outer square. Naturality and functoriality of inverses identify the inverse pasted square with the horizontal paste σ. Associativity gives the displayed equation. All inverses are justified by the stated assumptions; no adjoint to either projection direct image is used.",
-   "uses": [
-    "lem-sc-duality-base-change-inverse-square-mate"
-   ],
-   "elementary": false
+   "text": "Multiply bβ=γAk on the left by σ and on the right by τ. The equations σγ=id and βτ=id give Akτ=σb. The categorical identity for pasting with an identity bottom functor identifies kτ with (τ≫ₕk).app, yielding the stated equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-horizontal-duality-mate-comparisons",
-  "lem-sc-duality-base-change-inverse-square-mate"
+  "def-sc-horizontal-ordinary-base-comparison",
+  "def-sc-horizontal-ordinary-transfer",
+  "def-sc-horizontal-ordinary-upper-comparison",
+  "lem-sc-duality-base-change-inverse-square-mate",
+  "lem-sc-horizontal-ordinary-forward-fixed-pasting"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "T2",
+  "agent": "D2",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Ordinary geometric part of Tag 0ATR final reduction, by the forward composition verification of Tag 0ATM and inversion."
+  "place": "Forward fixed ordinary pasting (0ATM), followed by explicit categorical inverse cancellation."
  },
  "mathlib_searches": [
   {
@@ -105,7 +105,7 @@
   "module": "Sheaf.AlgebraicGeometry.HorizontalOrdinaryInverseFixedPasting",
   "file": "lean/Sheaf/AlgebraicGeometry/HorizontalOrdinaryInverseFixedPasting.lean",
   "declaration": "AlgebraicGeometry.horizontal_ordinary_inverse_fixed_pasting",
-  "statement": "theorem horizontal_ordinary_inverse_fixed_pasting\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' Z : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (h : Z ⟶ Y')\n    (hβh : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)\n        (pullback.fst f (h ≫ g)) pullback.condition E.obj))\n    (hβ₂ : ∀ E : schemeDerivedQCohCategory (pullback f g),\n      IsIso (schemeDerivedBaseChangeMap (pullback.snd f g)\n        (pullback.snd (pullback.snd f g) h) h\n        (pullback.fst (pullback.snd f g) h) pullback.condition E.obj)) :\n    letI : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))\n    letI : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)\n    let s := horizontalMateComp (pullback.fst (pullback.snd f g) h) (pullback.fst f g) ≪≫\n      eqToIso (congrArg horizontalMatePullback\n        (pullbackLeftPullbackSndIso_hom_fst f g h).symm) ≪≫\n      (horizontalMateComp (pullbackLeftPullbackSndIso f g h).hom\n        (pullback.fst f (h ≫ g))).symm\n    let e := pullbackLeftPullbackSndIso f g h\n    let ev := horizontalMateEquivalence e\n    let q := pullback.snd f (h ≫ g)\n    let p := pullback.snd (pullback.snd f g) h\n    let ri := (horizontalMateAdjunction e.hom).rightAdjointUniq ev.toAdjunction\n    let li := eqToIso (congrArg qcDirectImage\n        (pullbackLeftPullbackSndIso_hom_snd f g h).symm) ≪≫\n      horizontalMatePushComp e.hom q ≪≫\n      Functor.isoWhiskerRight ri (horizontalMatePushforward q)\n    let k : TwoSquare (horizontalMatePullback e.hom)\n        (horizontalMatePushforward q) (horizontalMatePushforward p)\n        (𝟭 (schemeDerivedQCohCategory Z)) :=\n      .mk _ _ _ _ <|\n        (Functor.isoWhiskerLeft (horizontalMatePullback e.hom) li).hom ≫\n          (Functor.associator _ _ _).inv ≫\n          Functor.whiskerRight ev.unitIso.inv (horizontalMatePushforward q) ≫\n          (Functor.leftUnitor (horizontalMatePushforward q)).hom ≫\n          (Functor.rightUnitor (horizontalMatePushforward q)).inv\n    let τ := qcInverseBaseChange f (h ≫ g) hβh\n    let σ := qcInverseBaseChange f g hβ ≫ₕ\n      @qcInverseBaseChange _ (pullback f g) Y' Z _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _ h hβ₂\n    ∀ E : schemeDerivedQCohCategory X,\n      (horizontalMatePushforward (pullback.snd (pullback.snd f g) h)).map\n          (s.hom.app E) ≫ (τ ≫ₕ k).app E =\n        σ.app E ≫ (horizontalMateComp h g).hom.app\n          ((horizontalMatePushforward f).obj E)",
+  "statement": "theorem horizontal_ordinary_inverse_fixed_pasting\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' Z : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (h : Z ⟶ Y')\n    (hβh : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)\n        (pullback.fst f (h ≫ g)) pullback.condition E.obj))\n    (hβ₂ : ∀ E : schemeDerivedQCohCategory (pullback f g),\n      IsIso (schemeDerivedBaseChangeMap (pullback.snd f g)\n        (pullback.snd (pullback.snd f g) h) h\n        (pullback.fst (pullback.snd f g) h) pullback.condition E.obj)) :\n    letI : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))\n    letI : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)\n    let s := horizontalOrdinaryUpperComparison f g h\n    let e := pullbackLeftPullbackSndIso f g h\n    let q := pullback.snd f (h ≫ g)\n    let p := pullback.snd (pullback.snd f g) h\n    let k := horizontalOrdinaryTransfer e q p (pullbackLeftPullbackSndIso_hom_snd f g h)\n    let τ := qcInverseBaseChange f (h ≫ g) hβh\n    let σ := qcInverseBaseChange f g hβ ≫ₕ\n      @qcInverseBaseChange _ (pullback f g) Y' Z _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _ h hβ₂\n    ∀ E : schemeDerivedQCohCategory X,\n      (qcDirectImage (pullback.snd (pullback.snd f g) h)).map\n          (s.hom.app E) ≫ (τ ≫ₕ k).app E =\n        σ.app E ≫ (horizontalOrdinaryBaseComparison g h).hom.app\n          ((qcDirectImage f).obj E)",
   "branch": "sheaf-dag",
   "by": "T2",
   "date": "2026-10-14"
@@ -123,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "X-95829",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T190154-L-3221033",
+  "landing": "20261013T215558-L-895607",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean with DAG statements, original comparison constructions and Stacks sources; all delivered modules and the downstream importer compile cleanly, original caller fails as reported, forced edits preserve signatures, and axiom checks pass with sorryAx only from open dependencies."
  }
 }
