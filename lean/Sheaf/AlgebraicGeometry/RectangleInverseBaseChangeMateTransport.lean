@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RectangleOrdinaryPastingComparisons
 
 /-! # Transport the rectangle to the pasted ordinary base-change square
 
@@ -43,6 +42,50 @@ noncomputable def successiveBaseChangeSourceIso
   (comp k (pullback.fst f (h ≫ g))).app E ≪≫
     eqToIso (congrArg (fun v ↦ (derivedPullback v).obj E) hk) ≪≫
     ((comp (pullback.fst (pullback.snd f g) h) (pullback.fst f g)).app E).symm
+
+private theorem mate_comparison
+    {C D E J T : Type*}
+    [Category C] [Category D] [Category E] [Category J] [Category T]
+    {F : C ⥤ D} {a : D ⥤ C} {P : E ⥤ T} {c : T ⥤ E}
+    {Q : J ⥤ T} {d : T ⥤ J} {L : E ⥤ J}
+    {U : C ⥤ E} {V : C ⥤ J} {B H : D ⥤ T}
+    (af : F ⊣ a) (ac : P ⊣ c) (ad : Q ⊣ d)
+    (s : U ⋙ L ≅ V) (p : L ⋙ Q ≅ P) (b : B ≅ H) (t : c ⋙ L ≅ d)
+    (α : TwoSquare U F P B) (δ : TwoSquare V F Q H)
+    (ht : ∀ Z : T, Q.map (t.hom.app Z) ≫ ad.counit.app Z =
+      p.hom.app (c.obj Z) ≫ ac.counit.app Z)
+    (hα : ∀ Z : C, Q.map (s.hom.app Z) ≫ δ.natTrans.app Z =
+      p.hom.app (U.obj Z) ≫ α.natTrans.app Z ≫ b.hom.app (F.obj Z))
+    (K : D) :
+    L.map ((mateEquiv af ac α).app K) ≫ t.hom.app (B.obj K) ≫
+        d.map (b.hom.app K) =
+      s.hom.app (a.obj K) ≫ (mateEquiv af ad δ).app K := by
+  let m : U.obj (a.obj K) ⟶ c.obj (B.obj K) := (mateEquiv af ac α).app K
+  let n : V.obj (a.obj K) ⟶ d.obj (H.obj K) := (mateEquiv af ad δ).app K
+  have hm : P.map m ≫ ac.counit.app (B.obj K) =
+      α.natTrans.app (a.obj K) ≫ B.map (af.counit.app K) := mateEquiv_counit af ac α K
+  have hn : Q.map n ≫ ad.counit.app (H.obj K) =
+      δ.natTrans.app (a.obj K) ≫ H.map (af.counit.app K) := mateEquiv_counit af ad δ K
+  have hp : Q.map (L.map m) ≫ p.hom.app (c.obj (B.obj K)) =
+      p.hom.app (U.obj (a.obj K)) ≫ P.map m := p.hom.naturality m
+  have hb : B.map (af.counit.app K) ≫ b.hom.app K =
+      b.hom.app (F.obj (a.obj K)) ≫ H.map (af.counit.app K) :=
+    b.hom.naturality (af.counit.app K)
+  have hc : Q.map (d.map (b.hom.app K)) ≫ ad.counit.app (H.obj K) =
+      ad.counit.app (B.obj K) ≫ b.hom.app K := ad.counit.naturality _
+  change L.map m ≫ t.hom.app (B.obj K) ≫ d.map (b.hom.app K) =
+    s.hom.app (a.obj K) ≫ n
+  apply (ad.homEquiv _ _).symm.injective
+  change Q.map (L.map m ≫ t.hom.app (B.obj K) ≫ d.map (b.hom.app K)) ≫
+      ad.counit.app (H.obj K) =
+    Q.map (s.hom.app (a.obj K) ≫ n) ≫ ad.counit.app (H.obj K)
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hc, ← Category.assoc (Q.map (t.hom.app (B.obj K))), ht]
+  simp only [Category.assoc]
+  rw [← Category.assoc (Q.map (L.map m)), hp]
+  simp only [Category.assoc]
+  rw [reassoc_of% hm, hn]
+  rw [hb, ← reassoc_of% hα]
 
 /-- Transport the rectangle mate to the mate of the pasted inverse ordinary square.
 This comparison has no middle right adjoint and asserts no factorization of second mates.
@@ -121,6 +164,27 @@ theorem rectangle_inverseBaseChange_mate_transport
       ((mateEquiv adja adjd (α ≫ₕ δ)).app K))
     ∃ e₂ : G.right ≅ M.right,
       G.hom ≫ e₂.hom =
-        (successiveBaseChangeSourceIso f g h k hk₁ (a.obj K).obj).hom ≫ M.hom := by sorry
+        (successiveBaseChangeSourceIso f g h k hk₁ (a.obj K).obj).hom ≫ M.hom  := by
+  classical
+  intro G α δ M
+  obtain ⟨s, p, b, t, ht, hα, hs⟩ :=
+    rectangle_ordinary_pasting_comparisons f g h c d adjc adjd hβ hβS hβI k hk₁ hk₂
+  let I := (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι
+  let e₂ := I.mapIso
+    (t.app ((qcPullback (h ≫ g)).obj K) ≪≫
+      d.mapIso (b.app K))
+  refine ⟨e₂, ?_⟩
+  have he := mate_comparison adja adjc adjd s p b t
+    (qcInverseBaseChange f (h ≫ g) hβ) (α ≫ₕ δ) ht hα K
+  have hh := I.congr_map he
+  simp only [Functor.map_comp] at hh
+  rw [← dualityEquationBaseChangeMap_eq_inverseSquareMate
+    f (h ≫ g) a c adja adjc hβ K] at hh
+  have hsource : I.map (s.hom.app (a.obj K)) =
+      (successiveBaseChangeSourceIso f g h k hk₁ (a.obj K).obj).hom := by
+    exact hs (a.obj K)
+  rw [hsource] at hh
+  change G.hom ≫ e₂.hom = _ at hh
+  exact hh
 
 end AlgebraicGeometry

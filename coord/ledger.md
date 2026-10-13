@@ -12640,3 +12640,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:32 L: returned deliver/C4/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris (reviewer RETURN: (reviewer X-00326, head 003264342) H4 (duplicate definition; stages/3-proving-and-pruning.md §3): In lean/Sheaf/Algebrai)
 - 13:32 L: merged deliver/A4/Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono (stage 3; reviewer PASS; first push; landing 20261013T133223-L-4192519 (interface); batch 20261013T133222; modules 2; new nodes 1)
 - 13:32 L: merged deliver/F1/Sheaf.RingTheory.PopescuCoefficientStep (stage 3; reviewer PASS; first push; landing 20261013T133224-L-4192628 (interface); batch 20261013T133222; modules 2; new nodes 1)
+- 13:32 L: merged deliver/F2/Sheaf.AlgebraicGeometry.RectangleInverseBaseChangeMateTransport (stage 3; reviewer PASS; first push; landing 20261013T133224-L-4192731 (interface); batch 20261013T133222; modules 2; new nodes 1)
