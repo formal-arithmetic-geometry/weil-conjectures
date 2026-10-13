@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-tensor-hom-evaluation-naturality",
+ "kind": "statement",
+ "title": "Naturality of localized identity evaluation",
+ "statement": "Let X be a scheme with a chosen derived category. For complexes L,M,L',M', let H(L,M)=RHom(QL,QM), and let j(L,M):H(L,M)≅QHom(L,I(M)) be the fixed resolution comparison of [def-pc-canonical-derived-tensor-hom-model]. Define E(L,M):H(L,M) tensor QL → QM as (j.hom tensor identity) followed by the tensor localization model map of [def-pc-derived-pullback-tensor-comparison], the localized identity uncurrying of [lem-pc-tensor-hom-uncurry-differential], and the inverse localized resolution augmentation. For derived isomorphisms b:QL≅QL' and c:QM≅QM', (RHom(b.hom,c.inv) tensor identity QL) followed by E(L,M) equals (identity H(L',M') tensor b.hom) followed by E(L',M') followed by c.inv. No flatness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DJ; sites-cohomology.tex Tags 0A90 and 0A96; https://stacks.math.columbia.edu/tag/08DJ, https://stacks.math.columbia.edu/tag/0A90, https://stacks.math.columbia.edu/tag/0A96 (read online)"
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-model",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-tensor-hom-uncurry-differential"
+ ],
+ "proof": [
+  {
+   "text": "Resolve L and L prime by K-flat complexes and use fixed K-injective target resolutions. Compute comparison roofs and derived morphisms into Hom on homotopy classes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each tensor summand evaluation commutes with precomposition and postcomposition by tensor-Hom adjunction and Hom projection naturality. Coproduct extensionality gives the chain identities. Uncurrying degree-minus-one cochains preserves homotopies by the signed differential formula.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-sc-hom-complex-projections",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize these identities. Naturality of the tensor model, internal-Hom resolution comparison and augmentation identifies the composites with E. Cancel quasi-isomorphisms in the roofs. Hom into the injective resolution and derived tensor invert the K-flat resolutions, yielding the square for arbitrary L and L prime.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-model",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections",
+  "lem-pur-hom-complex-global-cochains",
+  "def-pc-canonical-derived-tensor-hom-model",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 08DJ, 0A90, 0A96; extracted evaluation square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation for derived tensor product and internal Hom",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized tensor Hom evaluation commutes with isomorphisms between derived representatives",
+   "results": "Localization.Monoidal.tensorBifunctorIso, tensor_comp and Tor maps",
+   "date": "2026-10-13",
+   "verdict": "no normalized sheaf Hom evaluation square"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ_natural",
+   "results": "identifier unknown to service; declaration found in Mathlib source",
+   "date": "2026-10-13",
+   "verdict": "generic tensor model naturality; specialization is the second node"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural_left|μ_natural; blueprint evaluation and tensor-hom search",
+   "results": "MonoidalClosed.uncurry_natural_left and Functor.LaxMonoidal.μ_natural. Blueprint evaluation results concern other dualities or coefficients.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate normalized evaluation square; μ_natural specializes to tensor model input naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-hom-uncurry-descent",
+   "place": "Independence of representatives: evaluation square in L and M",
+   "via": [
+    "lem-pc-tensor-hom-uncurry-normalized-comparison",
+    "lem-pc-tensor-hom-uncurry-descent-extension",
+    "lem-pc-canonical-derived-tensor-hom-map-existence",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomEvaluationNaturality.lean",
+  "declaration": "AlgebraicGeometry.tensorHomEvaluation_natural",
+  "statement": "theorem tensorHomEvaluation_natural (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (L M L' M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (b : DerivedCategory.Q.obj L ≅ DerivedCategory.Q.obj L')\n    (c : DerivedCategory.Q.obj M ≅ DerivedCategory.Q.obj M') :\n    letI := schemeDerivedTensorMonoidal X\n    let E := fun L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ↦\n      ((schemeDerivedInternalHomResolutionIso X L M).hom ⊗ₘ\n          𝟙 (DerivedCategory.Q.obj L)) ≫\n        pullbackTensorModelMap X (homComplex (R := X.sheaf) L\n          ((schemeHomKInjectiveResolution X).obj M)) L ≫\n        DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫\n        schemeHomResolutionInverse X M\n    ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map\n        (b.hom.op, c.inv) ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫ E L M =\n      (𝟙 _ ⊗ₘ b.hom) ≫ E L' M' ≫ c.inv",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095950-L-2457790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T095950-L-2457790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
