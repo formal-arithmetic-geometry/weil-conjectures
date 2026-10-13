@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-open-immersion-tensor-vanishing-test",
+ "kind": "statement",
+ "title": "A direct-image test for tensor vanishing under an open immersion",
+ "statement": "Let $j:Y\\to X$ be an open immersion of schemes [def-pc-scheme]. Let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], let $G$ be an $\\mathcal O_Y$-module [def-weil-sheaf-of-modules-category], and let $i\\in\\mathbf Z$. If $H^i(E\\otimes^{\\mathbf L}j_*G)=0$ in the K-flat-model sense [def-pc-derived-tensor-cohomology-vanishes], then $H^i(R(E)\\otimes^{\\mathbf L}G)=0$, where $R$ is the functor on derived categories induced by exact module restriction along $j$ [lem-weil-pbc-module-restriction-open-immersion-colimits]. The source and target derived categories may use independent localization universes. No quasi-coherence or boundedness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product, proof of (1), locality of the derived tensor calculation; cohomology.tex Tag 06YC, lemma-pullback-K-flat"
+ },
+ "proof": [
+  {
+   "text": "Unpack the K-flat representative C and representing isomorphism in the hypothesis. Tensor pullback preserves K-flatness by the pullback preservation theorem. Identify tensor pullback with restriction R by uniqueness of left adjoints to j_*. Transport K-flatness along the termwise isomorphism, using functoriality of total tensor. The exact-functor localization comparison gives Q(R(C)) isomorphic to R(E), even with independent localization universes.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the proved strong monoidal structure of module pullback to R through restrictFunctorIsoPullback. Compose its inverse tensorator R(F tensor j_*G) ≅ R(F) tensor R(j_*G) with the open-immersion counit R(j_*G) ≅ G. Naturality of the inverse tensorator and whisker exchange prove naturality in F. This yields a natural isomorphism tensorRight(j_*G) followed by R ≅ R followed by tensorRight(G).",
+   "uses": [
+    "lem-pc-adjoint-module-pullback-monoidal",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved source-library CochainComplex.mapBifunctorSingle₂Iso (WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle, lines 137–141) to identify tensor with a degree-zero sheaf with termwise tensor. Map the natural isomorphism of the preceding step to complexes by NatIso.mapHomologicalComplex. Compose with the two bifunctor-single comparisons to identify R(C tensor j_*G[0]) with R(C) tensor G[0]. Exact restriction preserves zero objects and commutes with homology by Functor.mapHomologicalComplexHomologyIso. Apply these to the hypothesis and transport through the complex isomorphism. Together with the K-flatness and representing isomorphism of step 1 this supplies the conclusion.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DX, proof of (1), exact open locality; explicit formal proof using K-flat pullback, the monoidal restriction counit and the source bifunctor-single comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion restriction of tensor cohomology vanishing against the direct image gives tensor cohomology vanishing on the open",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictFunctorAdjCounitIso\"",
+   "results": "One hit: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso in Mathlib.AlgebraicGeometry.Modules.Sheaf. Supplies the counit comparison but not the derived tensor vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorAdjCounitIso|openImmersion_tensor_vanishing_test",
+   "results": "Two hits in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, lines 416 and 435, for the counit and its isomorphism instance; no derived tensor vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineLocalSheafificationTorAmplitude",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support argument: a perfect generator and its cone have locally finite Tor dimension; transfer a local Tor interval to an affine module model",
+   "via": [
+    "lem-pc-affine-local-sheafification-tor-amplitude"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenImmersionTensorVanishingTest",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImmersionTensorVanishingTest.lean",
+  "declaration": "AlgebraicGeometry.openImmersion_tensor_vanishing_test",
+  "statement": "theorem openImmersion_tensor_vanishing_test {X Y : Scheme.{u}} (j : Y ⟶ X)\n    [IsOpenImmersion j]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    (G : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (i : ℤ)\n    (h : schemeDerivedTensorCohomologyVanishes X E ((Scheme.Modules.pushforward j).obj G) i) :\n    let R : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings Y.toRingedSpace) := Scheme.Modules.restrictFunctor j\n    letI : R.Additive := ⟨by intros; rfl⟩\n    letI : PreservesFiniteLimits R := by\n      dsimp [R, Scheme.Modules.restrictFunctor]\n      infer_instance\n    letI : PreservesFiniteColimits R := by\n      let H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n          SheafOfModules.{u} (moduleRings X.toRingedSpace) := Scheme.Modules.pushforward j\n      have adj : R ⊣ H := Scheme.Modules.restrictAdjunction j\n      have : R.IsLeftAdjoint := adj.isLeftAdjoint\n      infer_instance\n    schemeDerivedTensorCohomologyVanishes Y (R.mapDerivedCategory.obj E) G i",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-pc-kflat-pullback-preservation",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-module-pullback",
+  "lem-pc-adjoint-module-pullback-monoidal",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9bed2",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T113355-L-3188004",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9bed2",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T113355-L-3188004",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match their nodes; existing signature unchanged. Both modules and the sole direct importer compile cleanly. Axiom checks show only propext, Classical.choice, and Quot.sound."
+ }
+}
