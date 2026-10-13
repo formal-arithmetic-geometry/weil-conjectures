@@ -72,10 +72,23 @@
  },
  "proof": [
   {
-   "text": "Expand the open square comparisons. Naturality moves open pullback comparisons through adjacent functors; cancel inverse open comparisons. Apply associativity of the pinned composition comparisons to j,U inclusion,f; U prime inclusion,g prime,f; f prime restricted,V prime inclusion,g; and j,f restricted,V inclusion. The commuting cube equations identify all total morphisms. Equality transports agree by proof irrelevance. Cancel the remaining composition comparisons to obtain the displayed identity, without any nonempty or boundedness assumption.",
+   "text": "Use the associativity clause of the exact composition family selected in exists_derivedPullbackComposition. Extend each two-arrow comparison by an equality transport to a named composite; substituting those named composites and cancelling the associativity transport proves the componentwise three-arrow identity.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the six paths j,U inclusion,f; j,f restricted,V inclusion; f prime restricted,g restricted,V inclusion; U prime inclusion,g prime,f; U prime inclusion,f prime,g; and f prime restricted,V prime inclusion,g, transport their total composite to j followed by U inclusion followed by f using the five commuting-face equalities. Postcompose both cube paths by the invertible comparison from the U prime inclusion,g prime,f path to this total pullback. Apply the preceding three-arrow identity on each path and cancel successive comparison inverses. Both sides become f prime restricted pullback of the g restricted,V inclusion comparison followed by the comparison into the same total pullback.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the pinned square comparison with the componentwise transported composition comparison. Expand each constructed open square into inverse open comparison, the ordinary pullback square, and the terminal open comparison. Cancel the open comparisons on U and V prime. Naturality moves the remaining inverse open comparison on V to the front of the restricted square and the open comparison on U prime to the end of the outer square. Precompose and postcompose the ordinary cube identity from the preceding step by these common factors. This proves the displayed identity for every object, including zero objects and empty opens.",
    "uses": [
     "def-pc-t2-open-pullback-square-iso",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-t2-open-square-comparison"
    ],
    "elementary": false
@@ -83,13 +96,13 @@
  ],
  "proof_deps": [
   "def-pc-t2-open-pullback-square-iso",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-t2-open-square-comparison"
+  "def-pc-t2-open-square-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5S (lemma-derived-pullback-composition), associativity, applied to the open restrictions in Tag 0DJ9 first paragraph"
+  "place": "Tag 0D5S (lemma-derived-pullback-composition), componentwise associativity and functoriality applied to Tag 0DJ9 first paragraph; Lean calculation by E2"
  },
  "blueprint": {
   "is": null,
@@ -129,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8be00",
-  "group": "T2",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T161321-L-1424247",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declarations remain unchanged, interface importers compile, proofs and DAG/report metadata satisfy the stage-3 review rules."
+  "landing": "20261013T164047-L-1667704",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
