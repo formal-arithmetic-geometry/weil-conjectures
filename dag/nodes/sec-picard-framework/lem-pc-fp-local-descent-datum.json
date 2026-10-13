@@ -15,27 +15,27 @@
  },
  "proof": [
   {
-   "text": "On a finite affine cover of Xi (or Xj for fixed models), identify base changes of coordinate rings with tensor products and the limit ring with their directed colimit. Apply the affine finite-presentation descent theorem to the local objects or maps. For a preorder pass to its partial-order quotient; the fixed i provides nonemptiness. Lift finite generators, relation matrices, and maps at a common later stage.",
+   "text": "Apply local object lifting to obtain a finite affine cover U at stage j with local finitely presented quasi-coherent models N and componentwise pullback comparisons to M. Choose the comparisons within the proof, and apply eventual overlap compatibility for these supplied models. Obtain k >= j, the pulled-back cover V, descent data D with components isomorphic to the pulled-back N, and a compatible comparison morphism eta with invertible components.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-local-object-models",
+    "lem-pc-fp-local-overlap-models"
    ],
    "elementary": false
   },
   {
-   "text": "For module data, cover pairwise, refinement, and triple overlaps by finitely many affines. Lift comparisons and inverses; use the equality clause to descend inverse identities, refinement agreement, and cocycles. Glue comparisons on each overlap to define D and its pullback isomorphism to the restriction of M. Only local modules and transitions are built.",
-   "uses": [
-    "lem-pc-fp-module-map-descent-affine"
-   ],
-   "elementary": false
+   "text": "The base-change map Xk -> Xj is affine because it is the base change of Spec(Rk) -> Spec(Rj). Thus the finite pullback cover V is affine. Pullback preserves finite presentation and quasi-coherence, and invariance under the supplied component isomorphisms gives those properties for D. Build an isomorphism of descent data from asIso(eta.hom a) using DescentData.isoMk and eta.comm. The index i <= k is the transitive composite of i <= j and j <= k.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-fp-local-object-models",
+  "lem-pc-fp-local-overlap-models"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR, first proof; details of the finite overlap construction expanded by H3 following the parent node"
+  "place": "P2 Lean assembly of the two parts of Tag 01ZR first proof; finite affine pullback, preservation of module properties, and componentwise iso construction"
  },
  "mathlib_searches": [
   {
@@ -104,11 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1df3a",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T100005-L-2462316",
+  "landing": "20261013T111909-L-3058153",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered statements and proofs with their nodes and Stacks 01ZR/05N7; verified original-signature equivalence, four modules and both direct importers compile cleanly, and axioms are permitted with the two documented theorem holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

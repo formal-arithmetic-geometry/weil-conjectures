@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationLocalObjectModels
+import Sheaf.AlgebraicGeometry.FinitePresentationLocalOverlapModels
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Local finite-presentation descent data
 
@@ -24,6 +26,16 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private theorem nonempty_descentData_iso_of_components
+    {X : Scheme.{u}} {A : Type u} {Y : A → Scheme.{u}} {v : ∀ a, Y a ⟶ X}
+    {D E : modulesPseudofunctor.DescentData v} (η : D ⟶ E)
+    (hη : ∀ a, IsIso (η.hom a)) : Nonempty (D ≅ E) := by
+  have : ∀ a, IsIso (η.hom a) := hη
+  exact ⟨Pseudofunctor.DescentData.isoMk (fun a ↦ asIso (η.hom a))
+    (by
+      intro Z t a b f₁ f₂ hf₁ hf₂
+      exact η.comm t f₁ f₂ hf₁ hf₂)⟩
 
 /-- Local modules and their overlap identifications descend to one finite stage.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, general case.
@@ -65,6 +77,41 @@ theorem exists_finitePresentation_local_descent_datum
           (p := p) (α := fun a ↦ a) (p' := fun a ↦ U.pullbackHom p a)
           (fun a ↦ U.pullbackHom_map p a)).obj D ≅
           (modulesPseudofunctor.toDescentData (U.pullback₁ p).f).obj M) := by
-  sorry
+  classical
+  obtain ⟨j, hij, U, hfin, haff, N, hN, hNq, he⟩ :=
+    exists_finitePresentation_local_object_models R c hc i f M hM hMq
+  have : Finite U.I₀ := hfin
+  have : ∀ a, IsAffine (U.X a) := haff
+  let e := fun a ↦ (he a).some
+  obtain ⟨k, hjk, hlocal⟩ :=
+    exists_finitePresentation_local_overlap_models R c hc i f j hij U N hN hNq M e
+  let g : Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))) ⟶
+      Over.mk (Spec.map (R.map (homOfLE hij))) :=
+    Over.homMk (Spec.map (R.map (homOfLE hjk)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)
+  let q := baseChangeMap f g
+  let V : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} :=
+        U.pullback₁ q
+  dsimp only at hlocal
+  obtain ⟨D, hD, η, hη⟩ := hlocal
+  have hq : IsAffineHom q :=
+    MorphismProperty.of_isPullback (isPullback_baseChangeMap f g).flip
+      (by
+        change IsAffineHom (Spec.map (R.map (homOfLE hjk)))
+        infer_instance)
+  have hV : ∀ a, IsAffine (V.X a) := by
+    intro a
+    change IsAffine (pullback q (U.f a))
+    infer_instance
+  refine ⟨k, hij.trans hjk, V, hfin, hV, D, ?_, ?_, ?_⟩
+  · intro a
+    obtain ⟨ea⟩ := hD a
+    have : (N a).IsFinitePresentation := hN a
+    exact Scheme.Modules.isFinitePresentation_of_iso ea.symm
+  · intro a
+    obtain ⟨ea⟩ := hD a
+    have : (N a).IsQuasicoherent := hNq a
+    exact isQuasicoherent_of_iso ea.symm
+  · exact nonempty_descentData_iso_of_components η hη
 
 end AlgebraicGeometry
