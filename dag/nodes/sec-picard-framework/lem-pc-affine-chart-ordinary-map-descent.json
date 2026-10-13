@@ -17,36 +17,35 @@
  },
  "proof": [
   {
-   "text": "Restrict to the upper tail of j and its partial-order quotient. Pull back the selected affine chart to each stage and to the cone vertex. Affine base change and pullback pasting identify these affine schemes with the base changes of the fixed chart over Spec R(j). Their coordinate rings are the chart ring tensored with the base rings, and the limit chart ring is their filtered colimit. Quasi-coherent sheaves identify with modules over these rings, finite presentation passes to global sections, and ordinary sheaf pullback identifies with scalar extension.",
+   "text": "Construct the partial-order quotient of the upper tail above j. It is nonempty (the class of j) and directed (send a common upper bound of two representatives to its class). Form F as global sections of the explicitly defined chart pullback diagram reindexed by the representative functor. The modules P,Q are literally sections of ordinary pullbacks at the starting representative. Their finite presentation follows from stability under ordinary pullback and finitePresentation_sections_of_isFinitePresentation on the affine starting chart.",
    "uses": [
-    "def-pc-fibre-product",
-    "pqf-def-coherent",
-    "def-pc-chart-ordinary-map-recovery"
+    "lem-weil-pbc-finite-presentation-affine-sections",
+    "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the map clause of finitePresentation_descent_directedColimit to the fixed chart modules. Its pure-tensor normalization identifies the resulting comparison with ordinary pullback composition. Transport the stage map back through the fully faithful affine sheaf functor. Pull back its recovery equation along the canonical pullback lift v. The second projection of v gives d and the displayed equality. The upper tail is nonempty because it contains j; quotienting equivalent indices preserves the diagram colimit. Empty charts and zero modules require no exception.",
+   "text": "Use affine_chart_ordinary_hom_comparison to obtain the affine Hom equivalence alpha and the compatible stage Hom equivalences beta. Apply the map clause of finitePresentation_descent_directedColimit to alpha inverse of psi, with the proven finite-presentation hypotheses. Obtain a quotient index x, the algebraic stage map s, and normalized composition isomorphisms satisfying the algebraic square. The comparison theorem transports that square to chartOrdinaryMapRecovery at the representative k of x. Applying alpha to its inverse recovers psi, closing the goal.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine",
-    "def-pc-fibre-product"
+    "lem-pc-affine-chart-ordinary-hom-comparison",
+    "lem-pc-fp-module-map-descent-affine"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-chart-ordinary-map-recovery",
   "def-pc-fibre-product",
+  "lem-pc-affine-chart-ordinary-hom-comparison",
   "lem-pc-fp-module-map-descent-affine",
-  "pqf-def-coherent"
+  "lem-weil-pbc-finite-presentation-affine-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F4",
+  "group": "R1",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 01ZR, affine first proof, and 05N7 (2)",
-  "note": "Source tags read online; explicit pullback comparison normalization expanded by F4."
+  "place": "Tags 01ZR first affine proof and 05N7 (2)",
+  "note": "Actual Lean reduction: explicit chart rings and modules, finite presentation of sections, algebraic map descent, and a separate geometric Hom comparison. No arbitrary ring or module model selected from an unproved existence theorem."
  },
  "mathlib_searches": [
   {
@@ -119,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-2d627",
-  "group": "F4",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T201748-L-3969017",
+  "landing": "20261013T211111-L-394181",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile without warnings; axiom checks match the two reported sorry lemmas."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.ChartOrdinaryMapRecovery
 import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.AffineChartOrdinaryHomComparison
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Ordinary Hom descent on an affine chart
 
@@ -22,6 +25,21 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+private theorem ordinaryChartBaseModule_finitePresentation
+    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (j : I)
+    {A : Scheme.{u}} [IsAffine A] (g : A ⟶ Spec (R.obj j))
+    (M : A.Modules) (hM : M.IsFinitePresentation) :
+    Module.FinitePresentation ((ordinaryChartRings R j g).obj (ordinaryChartStart j))
+      (ordinaryChartBaseModule R j g M) := by
+  let k := (ordinaryChartRep j).obj (ordinaryChartStart j)
+  let r := Spec.map (R.map (homOfLE k.property))
+  let P := (Scheme.Modules.pullback (pullback.snd r g)).obj M
+  have : M.IsFinitePresentation := hM
+  have : IsAffine (pullback r g) := inferInstance
+  have : P.IsFinitePresentation := by dsimp [P]; infer_instance
+  exact Scheme.Modules.finitePresentation_sections_of_isFinitePresentation P
+    (isAffineOpen_top (pullback r g))
 
 /-- Ordinary pullback maps of two fixed modules on one affine chart descend.
 Source: Stacks Project, Tag 01ZR, affine proof; Tag 05N7 (2).
@@ -83,6 +101,42 @@ theorem affine_chart_ordinary_map_descent
         simpa using c.w (homOfLE hjk).op
       ∃ s : (Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶
           (Scheme.Modules.pullback (U.pullbackHom q a)).obj N,
-        chartOrdinaryMapRecovery q p q₀ w U a M N ψ s := by sorry
+        chartOrdinaryMapRecovery q p q₀ w U a M N ψ s := by
+  classical
+  let T := {k : I // j ≤ k}
+  let H := ordinaryChartRep j
+  let J := OrdinaryChartTail I j
+  let t := ordinaryChartStart j
+  have : Nonempty J := ⟨t⟩
+  have : IsDirected J (· ≤ ·) := ⟨fun x y ↦ by
+    obtain ⟨k, hxk, hyk⟩ := exists_ge_ge (H.obj x).val (H.obj y).val
+    let z : T := ⟨k, (H.obj x).property.trans hxk⟩
+    refine ⟨toAntisymmetrization (· ≤ ·) z, ?_, ?_⟩
+    · have h : H.obj x ≤ z := hxk
+      change ofAntisymmetrization (· ≤ ·) x ≤ z at h
+      simpa only [toAntisymmetrization_ofAntisymmetrization] using
+        toAntisymmetrization_mono h
+    · have h : H.obj y ≤ z := hyk
+      change ofAntisymmetrization (· ≤ ·) y ≤ z at h
+      simpa only [toAntisymmetrization_ofAntisymmetrization] using
+        toAntisymmetrization_mono h⟩
+  let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))
+  let F := ordinaryChartRings R j g
+  let P := ordinaryChartBaseModule R j g M
+  let Q := ordinaryChartBaseModule R j g N
+  have : IsAffine (U.X a) := ha
+  have hP : Module.FinitePresentation (F.obj t) P :=
+    ordinaryChartBaseModule_finitePresentation R j g M hM
+  have hQ : Module.FinitePresentation (F.obj t) Q :=
+    ordinaryChartBaseModule_finitePresentation R j g N hN
+  obtain ⟨α, hα⟩ := affine_chart_ordinary_hom_comparison R c hc i f j hij U a ha
+    M N hMq hNq
+  let φ := α.symm ψ
+  obtain ⟨x, htx, s, eP, eQ, heP, heQ, hs⟩ :=
+    (ModuleCat.finitePresentation_descent_directedColimit.{u, u, u, u} F).2.1
+      t P Q hP hQ φ
+  obtain ⟨β, hβ⟩ := hα x htx
+  refine ⟨(H.obj x).val, (H.obj x).property, β s, ?_⟩
+  simpa only [φ, Equiv.apply_symm_apply] using hβ φ s eP eQ heP heQ hs
 
 end AlgebraicGeometry
