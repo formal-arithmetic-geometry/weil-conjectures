@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-artinian-lifting-finite-kernel",
+ "kind": "statement",
+ "title": "Length-one Artinian lifting extends across a finite kernel",
+ "statement": "Let $R,A$ be commutative rings in $\\mathrm{Type}\\ u$, with an $R$-algebra structure on $A$, and let $q$ be a prime ideal of $A$. Suppose every surjective ring map $\\psi:E\\to F$ between Artinian local commutative rings in $\\mathrm{Type}(\\max(u,v))$, with $\\operatorname{length}_E(\\ker\\psi)=1$ [def-weil-pbc-module-length], has the following lifting property: for maps $\\rho:R\\to E$ and $a:A\\to F$ satisfying $a\\circ(R\\to A)=\\psi\\circ\\rho$ and $a^{-1}(\\mathfrak m_F)=q$, there exists $a\\prime:A\\to E$ with $\\psi\\circ a\\prime=a$ and $a\\prime\\circ(R\\to A)=\\rho$. Then the same lifting conclusion holds for every surjection $\\varphi:B\\prime\\to B$ of Artinian local commutative rings in $\\mathrm{Type}\\ u$, without a length-one hypothesis on its kernel. Here Artinian means descending chains of ideals stabilize, and local means there is exactly one maximal ideal; all rings are nonzero. The maps to be lifted have the same two compatibility conditions.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), filtration of I_N and successive application of condition (4); read https://stacks.math.columbia.edu/tag/02HT on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Transport any length-one test between rings in Type u to Type(max u v) using the ULift ring equivalences. Their surjective inverses transfer the Artinian and local structures. The map from the lifted kernel to the original kernel taking down is a bijective semilinear map along the surjective ring equivalence, so LinearMap.isSimpleModule_iff_of_bijective and Module.length_eq_one_iff preserve the length-one hypothesis. Compose rho and a with the up maps, apply the assumed test, and compose the lift with down. The two equations follow by applying down to the lifted equations. This is the local liftSmall proof.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_ideal_filtration_length_one to ker phi in B'. The adjacent inequalities imply monotonicity of the chain. Surjectivity of phi implies it is local, so its kernel lies in the maximal ideal. Every filtration ideal therefore lies in the maximal ideal and is proper. All quotients B'/F_i are nonzero Artinian local rings. Define pi_i:B'/F_i -> B by descending phi and rho_i:R -> B'/F_i by composing rho with the quotient.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For I<=J, send J to the kernel of B'/I -> B'/J by x -> its residue class modulo I. This B'-linear map is surjective: choose a representative of a kernel element; the vanishing modulo J means that representative is in J. Its kernel is the inverse image of I under J -> B'. LinearMap.quotKerEquivOfSurjective identifies J/I with the quotient-map kernel as B'-modules. LinearEquiv.length_eq and Module.length_eq_of_surjective along B' -> B'/I give the required kernel length one over B'/I. This is proved in private factor_kernel_length.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Fin.reverseInduction on the filtration index to construct a_i:A -> B'/F_i with pi_i composed with a_i equal to a and a_i composed with R -> A equal to rho_i. At the last index pi_i is bijective by the first isomorphism theorem, so take its inverse composed with a; injectivity checks the R-equation. At a successor, the quotient map has kernel length one by the preceding calculation. Its target map a_i has inverse image maximal ideal q because pi_i is local and pi_i composed with a_i equals a. Apply liftSmall; composition with pi_i gives the induction invariant at the preceding index. At index zero identify B'/F_0 with B' via the quotient-by-zero equivalence, obtaining both final equations. The zero-kernel case allows an empty filtration and needs no special exclusion.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 02HT, finite filtration of the Artinian kernel. The Lean proof includes the restriction-of-scalars and ULift details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Length one Artinian local lifting tests imply lifting maps across surjections of Artinian local rings",
+   "results": "IsArtinianRing.localization_surjective, Function.Surjective.isArtinianRing, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient, IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient, isArtinianRing_iff_isNilpotent_maximalIdeal, isArtinian_of_surjective_algebraMap, isArtinianRing_iff_isFiniteLength",
+   "date": "2026-10-13",
+   "verdict": "No exact general finite-kernel lifting theorem. Mathlib supplies Artinian quotient instances, length invariance, and localization tools."
+  },
+  {
+   "tool": "grep",
+   "query": "length.*ker|ker.*length",
+   "results": "Mathlib/RingTheory/Length.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact general finite-kernel lifting theorem. Mathlib supplies Artinian quotient instances, length invariance, and localization tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Length one Artinian local lifting tests imply lifting maps across surjections of Artinian local rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArtinianLiftingTruncatedSection",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, the Artinian smoothness criterion used for etale infinitesimal neighbourhoods; specifically step 2 of lem-weil-pbc-artinian-lifting-truncated-section, the descending length-one filtration induction",
+   "via": [
+    "lem-weil-pbc-artinian-lifting-truncated-section",
+    "lem-weil-pbc-artinian-lifting-conormal-mod-maximal",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting-reverse",
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ArtinianLiftingFiniteKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinianLiftingFiniteKernel.lean",
+  "declaration": "Algebra.artinian_lifting_finite_kernel",
+  "statement": "theorem artinian_lifting_finite_kernel\n    {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]\n    (q : Ideal A) [q.IsPrime]\n    (hlift : ∀ (B' B : Type (max u v)) [CommRing B'] [CommRing B]\n      [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B]\n      (φ : B' →+* B), Function.Surjective φ → Module.length B' (RingHom.ker φ) = 1 →\n      ∀ (ρ : R →+* B') (a : A →+* B),\n        a.comp (algebraMap R A) = φ.comp ρ →\n          Ideal.comap a (IsLocalRing.maximalIdeal B) = q →\n        ∃ a' : A →+* B', φ.comp a' = a ∧ a'.comp (algebraMap R A) = ρ)\n    (B' B : Type u) [CommRing B'] [CommRing B]\n    [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B]\n    (φ : B' →+* B) (hφ : Function.Surjective φ)\n    (ρ : R →+* B') (a : A →+* B)\n    (hcomm : a.comp (algebraMap R A) = φ.comp ρ)\n    (hq : Ideal.comap a (IsLocalRing.maximalIdeal B) = q) :\n    ∃ a' : A →+* B', φ.comp a' = a ∧ a'.comp (algebraMap R A) = ρ",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T015618-L-3028260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T015618-L-3028260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

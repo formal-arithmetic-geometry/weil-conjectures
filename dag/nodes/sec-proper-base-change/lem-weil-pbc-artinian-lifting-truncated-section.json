@@ -14,24 +14,22 @@
  ],
  "proof": [
   {
-   "text": "The surjection C -> S pulls the maximal ideal of S back to m and maps m onto it. Therefore J is contained in m. For N >= 1 the ideals J^2 + m^N and J + m^N lie in m and contain m^N. Apply the Noetherian local quotient Artinian lemma to obtain nonzero Artinian local rings E and F. The canonical surjection E -> F has square-zero kernel, and F is S/n^N, so A -> F pulls the maximal ideal back to q.",
+   "text": "Let C=P.Ring, S=A_q, m=maximalIdeal C, I=J^2+m^N and L=J+m^N. The surjective map C -> S is local, so J lies in m. Both I and L lie in m and contain m^N. Their quotients are nonzero local Noetherian rings. The maximal ideal of each is the image of m; Ideal.map_pow and Ideal.map_eq_bot_iff_le_ker show its N-th power is zero. Mathlib isArtinianRing_iff_isNilpotent_maximalIdeal then gives both Artinian structures directly, without the minimal-prime quotient lemma.",
    "uses": [
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend C -> C/L along the surjection f:C -> S using AlgHom.liftOfSurjective to obtain t:S -> C/L. This is surjective because the quotient map C -> C/L is. Consequently it is local, and a=t composed with A -> S pulls the maximal ideal back to q. Apply artinian_lifting_finite_kernel to the quotient map phi:C/I -> C/L, with the structural R-map, to obtain a lift a':A -> C/I preserving both commuting equations.",
+   "uses": [
+    "lem-weil-pbc-artinian-lifting-finite-kernel",
     "def-weil-pbc-localization-at-prime"
    ],
    "elementary": false
   },
   {
-   "text": "Filter K = ker(E -> F) by ideals with length-one successive quotients, using exists_ideal_filtration_length_one. For 0 = K_0 <= ... <= K_r = K, the kernel of E/K_i -> E/K_(i+1) is K_(i+1)/K_i. Its length over E/K_i equals its length over E, since restriction along the surjective map identifies submodule lattices. The quotients are nonzero Artinian local since each K_i lies in the maximal ideal. Descending induction applies hlift at each step, preserving R compatibility and inverse image maximal ideal q, and yields A -> E over R.",
-   "uses": [
-    "lem-weil-pbc-artinian-ideal-length-one-filtration",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-    "def-weil-pbc-module-length"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The lift A -> E pulls the maximal ideal back to q. The local ring unit criterion makes every element outside q a unit in E, so localization extends the map to S. This extension maps n into the maximal ideal of E, whose N-th power vanishes. It therefore factors through S/n^N = F. Composing the factor with E -> F gives the identity: it agrees on A, hence on S by localization uniqueness and then on F by surjectivity. Thus it is an R-algebra section.",
+   "text": "The inverse image maximal ideal under a' remains q since phi is a surjective local map. Elements outside q therefore map to units by the local-ring unit criterion. IsLocalization.lift extends a' to b:S -> C/I. Localization uniqueness proves phi composed with b equals t. R compatibility of a' and the scalar-tower equality make b an R-algebra homomorphism.",
    "uses": [
     "lem-weil-pbc-local-ring-unit-criterion",
     "def-weil-pbc-localization-at-prime"
@@ -39,22 +37,21 @@
    "elementary": false
   },
   {
-   "text": "Transport each Artinian quotient used for hlift to Type (max u v) by ULift ring equivalences. Surjectivity, local and Artinian structures, length and commuting equations are preserved, and the lifts transport back. N = 1 and J = 0 give identity quotient maps.",
+   "text": "Because phi composed with b is the local map t, b is local. Thus g=b composed with f maps m into the maximal ideal of C/I, whose N-th power is zero. Ideal.map_pow implies m^N lies in ker g; J lies there because f kills J. Hence g kills L and Ideal.Quotient.liftₐ gives sigma:C/L -> C/I. On every quotient representative x, phi(sigma(x))=phi(b(f(x)))=t(f(x))=x. Quotient surjectivity proves the section equation. Every part of this descent is implemented in the main module.",
    "uses": [],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-artinian-lifting-finite-kernel",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-artinian-ideal-length-one-filtration",
-  "def-weil-pbc-module-length",
   "lem-weil-pbc-local-ring-unit-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1); online text at https://stacks.math.columbia.edu/tag/02HT read 2026-10-13"
+  "place": "Algebra, Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1); read https://stacks.math.columbia.edu/tag/02HT on 2026-10-13. Quotient properties and localization descent implemented directly using Mathlib."
  },
  "mathlib_searches": [
   {
@@ -129,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T000043-L-2231073",
+  "landing": "20261013T015618-L-3028260",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
