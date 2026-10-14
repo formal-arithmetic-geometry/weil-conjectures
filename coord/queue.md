@@ -1,6 +1,6 @@
 # Work queue
 
-47 items; claim with `tools/claim.py next <group> [--stage N]`.
+48 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (47)
+## Stage 3: modules to prove (48)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -53,6 +53,7 @@
 | `Sheaf.AlgebraicGeometry.FlatTelescopeModelShiftGauge` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization` | 36 | 1 | proof |
+| `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects` | 40 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 42 | 1 | proof |
