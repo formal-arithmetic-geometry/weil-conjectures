@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-weil-pbc-intrinsic-completion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Intrinsic derived completion",
- "statement": "For $m\\geq1$, let\n\n$$\n Q_m=K(A_T;a_1^m,\\dots,a_r^m)\n   =\\bigotimes_{j=1}^r[A_T\\xrightarrow{a_j^m}A_T]\n$$\n\nin cohomological degrees $[-r,0]$. For each factor define a chain map\n\n$$\n [A_T\\xrightarrow{a_j^{m+1}}A_T]\n \\longrightarrow[A_T\\xrightarrow{a_j^m}A_T]\n$$\n\nwhose degree $-1$ component is multiplication by $a_j$ and whose degree $0$\ncomponent is the identity. Their tensor product is a chain map\n$q_{m+1,m}:Q_{m+1}\\to Q_m$; the composites $q_{m+2,m}=q_{m+1,m}q_{m+2,m+1}$\nmake $(Q_m)_m$ a strict tower.\n\nFor a functorial K-flat representative $QK$, the complexes\n$QK\\otimes_{A_T}Q_m$ form an object of $D(\\operatorname{Tow}_{A}(T))$. Define\n\n$$\n K^{\\wedge}_{\\mathrm{Kos}}\n   =\\Rlim_m(QK\\otimes_{A_T}Q_m).\n$$\n\nThe compatible degree-zero maps $A_T\\to Q_m$ define $K\\to\nK^{\\wedge}_{\\mathrm{Kos}}$. The object $K$ is derived $I$-complete if this\nmap is an isomorphism.\n\nDerived completeness here is the condition\n$K\\xrightarrow{\\sim}\\Rlim(K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$ of\nStacks Project, Lemma 61.20.1 (Tag\n[099M](https://stacks.math.columbia.edu/tag/099M), Section 61.20, Tag\n[099L](https://stacks.math.columbia.edu/tag/099L)): the Stacks entry assumes\na Noetherian ring $\\Lambda$ and an ideal $I$, and presents the completion as\nthe left adjoint of $D_{comp}(\\mathcal C,\\Lambda)\\subset D(\\mathcal\nC,\\Lambda)$, whereas the form used here is the Koszul model $Q_m$ over\n$A=\\mathcal O_E$, $I=(\\varpi)$, whose agreement with the quotient-tower form\nof 61.20.1 is [prop-weil-pbc-koszul-reconstruction].",
+ "statement": "Let $T$ be a scheme, $A$ a commutative Noetherian ring, and $I=(a_1,\\ldots,a_r)$ a finitely generated ideal. Assume $A/I$ is torsion as an additive group and each $A/I^n$ for $n\\geq1$ is finite and perfect over $A$. Use the small pro-etale site, the completed coefficient sheaf $A_T=\\varprojlim_n(A/I^n)_T$, and the category $D(T_{\\Proet},A)=D(\\Mod(A_T))$ of [def-weil-pbc-adic-coefficient-datum]. The action of $a_j$ on $A_T$ is induced by its compatible residues in $A/I^n$. Let $K\\in D(\\Mod(A_T))$ and let $C$ be a cochain complex representing it.\n\nFor $m\\geq1$, let\n\n$$\n Q_m=K(A_T;a_1^m,\\dots,a_r^m)\n   =\\bigotimes_{j=1}^r[A_T\\xrightarrow{a_j^m}A_T]\n$$\n\nin cohomological degrees $[-r,0]$. For each factor define a chain map\n\n$$\n [A_T\\xrightarrow{a_j^{m+1}}A_T]\n \\longrightarrow[A_T\\xrightarrow{a_j^m}A_T]\n$$\n\nwhose degree $-1$ component is multiplication by $a_j$ and whose degree $0$\ncomponent is the identity. Their tensor product is a chain map\n$q_{m+1,m}:Q_{m+1}\\to Q_m$; the composites $q_{m+2,m}=q_{m+1,m}q_{m+2,m+1}$\nmake $(Q_m)_m$ a strict tower.\n\nUse the total sheaf tensor complex of [def-pc-tensor-complex-sheaves] to set $M_m(C)=C\\otimes_{A_T}Q_m$, with transitions $t_m=1_C\\otimes q_{m+1,m}$. This is a strict tower of complexes, hence a complex in $\\operatorname{Tow}_A(T)$ of [def-weil-pbc-adic-coefficient-datum]. Define the product complex $B(C)=\\prod_{m\\geq1}M_m(C)$ termwise and the chain map\n$$\n f_C:B(C)\\longrightarrow B(C),\\qquad (z_m)_m\\longmapsto(z_m-t_mz_{m+1})_m.\n$$\nCountable products are exact by [lem-weil-proetale-countable-products-exact] and represent derived products by [lem-weil-derived-limit-products-core]. Define a cochain complex $F(C)$ by\n$$\n F(C)^i=B(C)^i\\oplus B(C)^{i-1},\\qquad\n d_{F(C)}^i(x,y)=(d_Bx,f_Cx-d_By).\n$$\nThis is the explicit mapping-fiber model for the sequential derived inverse limit of [def-weil-pbc-derived-inverse-limit]. Define $K^{\\wedge}_{\\mathrm{Kos}}$ to be its image in $D(\\Mod(A_T))$; thus the notation\n$$\n K^{\\wedge}_{\\mathrm{Kos}}=\\Rlim_m(C\\otimes_{A_T}Q_m)\n$$\nuses this specified complex model.\n\nLet $\\iota_m:A_T[0]\\to Q_m$ be the inclusion in degree zero, and let $u_C:C\\to B(C)$ have components $1_C\\otimes\\iota_m$. Define the completion map $\\eta_K:K\\to K^{\\wedge}_{\\mathrm{Kos}}$ as the image of the chain map\n$$\n C\\longrightarrow F(C),\\qquad c\\longmapsto(u_C(c),0).\n$$\nCall $K$ derived $I$-complete if $\\eta_K$ is an isomorphism. These constructions are read on the derived category by inverting quasi-isomorphisms of representatives, using the localization of [def-weil-abstract-derived-category].\n\nFor constant coefficients on an arbitrary site $\\mathcal C$, Stacks Tag 099M (proetale.tex, lemma-naive-completion), in Tag 099L (section-derived-completion-noetherian), identifies derived completion for a Noetherian ring $\\Lambda$ with $R\\lim_n(K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$. That theorem is context for the definition; comparison of the completed-coefficient Koszul tower above with the completed-coefficient quotient tower is a separate assertion, not part of this definition.\n",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-intrinsic-completion.md",
   "place": "node def-weil-pbc-intrinsic-completion, order 1247",
@@ -23,16 +23,69 @@
   ]
  },
  "stmt_deps": [
-  "prop-weil-pbc-koszul-reconstruction",
   "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit"
+  "def-weil-pbc-derived-inverse-limit",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "intrinsic derived completion via Koszul complexes and derived inverse limit",
+   "results": "8 hits: localCohomology.diagram, DerivedCategory.Q, BDeRhamPlus, CategoryTheory.Functor.leftDerived, localCohomology, CategoryTheory.Functor.rightDerived, HomologicalComplexUpToQuasiIso.Q, DerivedCategory; none states this sheaf-theoretic Koszul completion definition",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Koszul, DerivedCategory, inverse limit",
+   "results": "0 hits; loogle: unknown identifier Koszul",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*completion|derived.*complete (Mathlib/)",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived completion defined by inverse limit of Koszul complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.?complete|koszul",
+   "results": "1 hits: Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion and general cofiber constructions do not state the sheaf Koszul completion with its specified map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a complex by a mapping fiber of identity minus shift on products of finite free complexes",
+   "results": "8 hits: HomologicalComplex.evalCompCoyonedaCorepresentative, HomologicalComplex.homotopyCofiber.X, HomologicalComplex.homotopyCofiber, HomologicalComplex.cylinder, ComplexShape.Embedding.HasLift, HomologicalComplex.mkHomToSingle_f, HomologicalComplex.homotopyCofiber.sndX, HomologicalComplex.homotopyCofiber_X",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion and general cofiber constructions do not state the sheaf Koszul completion with its specified map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\"",
+   "results": "12 hits: AdicCompletion, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, AdicCompletion.instAdd, AdicCompletion.instAddCommGroup, AdicCompletion.instNeg, AdicCompletion.instSub, AdicCompletion.instZero",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary completion and general cofiber constructions do not state the sheaf Koszul completion with its specified map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -60,5 +113,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-intrinsic-completion",
+  "worker": "stage1",
+  "summary": "Definition with no new nodes. Second reading repairs the unsupported functorial K-flat representative and unspecified map to a Roos-triangle object by an explicit mapping-fiber complex and completion chain map. Exact products and finite Koszul factors make the construction descend through quasi-isomorphisms. Stacks constant-coefficient comparison is context only; the downstream reconstruction theorem is not a definition dependency.",
+  "blueprint": "Entire definition at order 1247: retain Koszul complexes and factor transition maps; specify the tensor tower, mapping-fiber realization of its derived inverse limit and completion map; separate the final comparison theorem from the definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-a20b15af6",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-a20b15af6 (reviewer sub-agent of L); spot-checked: Read the full definition, report, cited statements, unit/chapter route, and cited source locations. Verified Koszul transitions, fiber signs, completion map, descent through quasi-isomorphisms, and small cases. No new nodes or repairs. Completed, constant, and condensed coefficient categories remain distinct; downstream comparison theorems are not certified. Detailed checks are in review.md."
+ }
 }
