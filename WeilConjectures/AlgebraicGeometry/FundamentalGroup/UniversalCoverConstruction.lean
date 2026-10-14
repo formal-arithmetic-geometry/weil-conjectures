@@ -280,6 +280,166 @@ theorem bijective_fiber (P : Y.FiniteEtale) :
   ⟨fun f₁ f₂ h ↦ Subtype.ext (eq_of_pt_comp_eq y P f₁.2 f₂.2 (congrArg CommaMorphism.left h)),
     fun x ↦ ⟨⟨toObj y P x, toObj_hom y P x⟩, fiber_ext y (pt_toObj y P x)⟩⟩
 
+
+section Transport
+
+variable {y} {z w : Spec (.of K) ⟶ Y}
+
+/-- The transport `Ỹ_y ⟶ Ỹ_z` along a path `τ : F_y ≅ F_z`: its component at `(A, a)` is the
+`Y`-morphism `Ỹ_y ⟶ A` corresponding to `τ⁻¹ a`. -/
+noncomputable def transportHom (τ : fiber y ≅ fiber z) : cover y ⟶ cover z :=
+  limit.lift (diagram z)
+    { pt := cover y
+      π :=
+        { app j := toObj y ((obj z).obj j) (τ.inv.app _ (point z j))
+          naturality j j' f := (Category.id_comp _).trans (by
+            change _ = toObj y _ _ ≫ ((obj z).map f).hom.left
+            rw [toObj_comp, ← map_point z f]
+            congr 1
+            exact ConcreteCategory.congr_hom (τ.inv.naturality ((obj z).map f)) _) } }
+
+/-- The transport along `τ` followed by the `Y`-morphism corresponding to `x ∈ F_z(P)` is the
+`Y`-morphism corresponding to `τ⁻¹ x ∈ F_y(P)`. -/
+@[reassoc (attr := simp)]
+lemma transportHom_toObj (τ : fiber y ≅ fiber z) (P : Y.FiniteEtale) (x : (fiber z).obj P) :
+    transportHom τ ≫ toObj z P x = toObj y P (τ.inv.app P x) := by
+  obtain ⟨j, g, rfl⟩ := exists_hom_point z P x
+  rw [← π_comp_eq_toObj z j g, ← Category.assoc, transportHom, limit.lift_π]
+  change toObj y _ _ ≫ g.hom.left = _
+  rw [toObj_comp]
+  congr 1
+  exact (ConcreteCategory.congr_hom (τ.inv.naturality g) _).symm
+
+@[reassoc (attr := simp)]
+lemma transportHom_proj (τ : fiber y ≅ fiber z) : transportHom τ ≫ proj z = proj y := by
+  rw [proj, ← Category.assoc, transportHom, limit.lift_π]
+  exact toObj_hom y _ _
+
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- `τ⁻¹ (τ x) = x`. -/
+lemma inv_app_hom_app (τ : fiber y ≅ fiber z) (P : Y.FiniteEtale) (x : (fiber y).obj P) :
+    τ.inv.app P (τ.hom.app P x) = x :=
+  ConcreteCategory.congr_hom (τ.hom_inv_id_app P) x
+
+/-- The transport isomorphism `Ỹ_y ≅ Ỹ_z` along a path `τ : F_y ≅ F_z`. -/
+@[simps]
+noncomputable def transport (τ : fiber y ≅ fiber z) : cover y ≅ cover z where
+  hom := transportHom τ
+  inv := transportHom τ.symm
+  hom_inv_id := hom_ext y fun P x ↦ by
+    rw [Category.assoc, transportHom_toObj, transportHom_toObj, Category.id_comp]
+    congr 1
+    exact inv_app_hom_app τ P x
+  inv_hom_id := hom_ext z fun P x ↦ by
+    rw [Category.assoc, transportHom_toObj, transportHom_toObj, Category.id_comp]
+    congr 1
+    exact inv_app_hom_app τ.symm P x
+
+lemma transport_refl (y : Spec (.of K) ⟶ Y) : transport (Iso.refl (fiber y)) = Iso.refl _ :=
+  Iso.ext (hom_ext y fun P x ↦ by
+    rw [transport_hom, transportHom_toObj, Iso.refl_hom, Category.id_comp]
+    rfl)
+
+lemma transport_trans (τ : fiber y ≅ fiber z) (τ' : fiber z ≅ fiber w) :
+    transport (τ ≪≫ τ') = transport τ ≪≫ transport τ' :=
+  Iso.ext (hom_ext w fun P x ↦ by
+    rw [transport_hom, Iso.trans_hom, transport_hom, transport_hom, Category.assoc,
+      transportHom_toObj, transportHom_toObj, transportHom_toObj]
+    rfl)
+
+/-- The transport along the reparametrisation path `F_{a ≫ y} ≅ F_y` sends the point over
+`a ≫ y` to the reparametrised point `a ≫ ỹ`. -/
+lemma pt_transport_reparam (a : Spec (.of K) ≅ Spec (.of K)) (y : Spec (.of K) ⟶ Y) :
+    pt (a.hom ≫ y) ≫ (transport (fiberReparamIso a y)).hom = a.hom ≫ pt y :=
+  hom_ext y fun P x ↦ by
+    rw [Category.assoc, transport_hom, transportHom_toObj, pt_toObj, Category.assoc, pt_toObj,
+      fiberReparamIso_inv_app_left]
+
+end Transport
+
+section Map
+
+variable (f : Y ⟶ Y)
+
+/-- The point `(x, y)` of `f^* P` over `y` corresponding to a point `x` of `P` over `y ≫ f`. -/
+noncomputable abbrev pullbackPoint (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale)
+    (x : (fiber (y ≫ f)).obj P) : (fiber y).obj ((FiniteEtale.pullback f).obj P) :=
+  (pullbackFiberIso f y).inv.app P x
+
+/-- The projection `f^* P = P ×_{Y,f} Y ⟶ P`. -/
+noncomputable abbrev pullbackFst (P : Y.FiniteEtale) :
+    ((FiniteEtale.pullback f).obj P).obj.left ⟶ P.obj.left :=
+  Limits.pullback.fst P.obj.hom f
+
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+@[reassoc]
+lemma pullback_map_pullbackFst {P Q : Y.FiniteEtale} (g : P ⟶ Q) :
+    ((FiniteEtale.pullback f).map g).hom.left ≫ pullbackFst f Q = pullbackFst f P ≫ g.hom.left :=
+  by simp [pullbackFst]
+
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+@[reassoc]
+lemma pullbackFst_hom (P : Y.FiniteEtale) :
+    pullbackFst f P ≫ P.obj.hom = ((FiniteEtale.pullback f).obj P).obj.hom ≫ f :=
+  Limits.pullback.condition
+
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+@[reassoc (attr := simp)]
+lemma pullbackPoint_left_pullbackFst (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale)
+    (x : (fiber (y ≫ f)).obj P) : (pullbackPoint f y P x).left ≫ pullbackFst f P = x.left := by
+  rw [pullbackPoint, pullbackFiberIso_inv_app_left]
+  exact Limits.pullback.lift_fst _ _ _
+
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+lemma pullbackPoint_naturality (y : Spec (.of K) ⟶ Y) {P Q : Y.FiniteEtale} (g : P ⟶ Q)
+    (x : (fiber (y ≫ f)).obj P) :
+    (fiber y).map ((FiniteEtale.pullback f).map g) (pullbackPoint f y P x) =
+      pullbackPoint f y Q ((fiber (y ≫ f)).map g x) :=
+  (ConcreteCategory.congr_hom ((pullbackFiberIso f y).inv.naturality g) x).symm
+
+/-- The morphism `Ỹ_y ⟶ Ỹ_{y ≫ f}` over an endomorphism `f` of `Y`: its component at
+`(A, a)` is the `Y`-morphism `Ỹ_y ⟶ f^* A` corresponding to `(a, y)`, followed by
+`f^* A ⟶ A`. -/
+noncomputable def map (y : Spec (.of K) ⟶ Y) : cover y ⟶ cover (y ≫ f) :=
+  limit.lift (diagram (y ≫ f))
+    { pt := cover y
+      π :=
+        { app j := toObj y _ (pullbackPoint f y _ (point (y ≫ f) j)) ≫ pullbackFst f _
+          naturality j j' g := (Category.id_comp _).trans (by
+            change _ = (toObj y _ _ ≫ pullbackFst f _) ≫ ((obj (y ≫ f)).map g).hom.left
+            rw [Category.assoc, ← pullback_map_pullbackFst, toObj_comp_assoc,
+              pullbackPoint_naturality, map_point]) } }
+
+/-- `map f y` followed by the `Y`-morphism corresponding to `x ∈ F_{y ≫ f}(P)` is the
+`Y`-morphism `Ỹ_y ⟶ f^* P` corresponding to `(x, y)`, followed by `f^* P ⟶ P`. -/
+@[reassoc (attr := simp)]
+lemma map_toObj (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale) (x : (fiber (y ≫ f)).obj P) :
+    map f y ≫ toObj (y ≫ f) P x = toObj y _ (pullbackPoint f y P x) ≫ pullbackFst f P := by
+  obtain ⟨j, g, rfl⟩ := exists_hom_point (y ≫ f) P x
+  rw [← π_comp_eq_toObj (y ≫ f) j g, ← Category.assoc, map, limit.lift_π]
+  change (toObj y _ _ ≫ pullbackFst f _) ≫ g.hom.left = _
+  rw [Category.assoc, ← pullback_map_pullbackFst, toObj_comp_assoc, pullbackPoint_naturality]
+
+lemma map_proj (y : Spec (.of K) ⟶ Y) : map f y ≫ proj (y ≫ f) = proj y ≫ f := by
+  rw [proj, ← Category.assoc, map, limit.lift_π]
+  change (toObj y _ _ ≫ pullbackFst f _) ≫ p (y ≫ f) _ = _
+  rw [Category.assoc, pullbackFst_hom, toObj_hom_assoc]
+
+lemma pt_map (y : Spec (.of K) ⟶ Y) : pt y ≫ map f y = pt (y ≫ f) :=
+  hom_ext (y ≫ f) fun P x ↦ by
+    rw [Category.assoc, map_toObj, pt_toObj_assoc, pullbackPoint_left_pullbackFst, pt_toObj]
+
+lemma map_transport {y z : Spec (.of K) ⟶ Y} (τ : fiber y ≅ fiber z) :
+    map f y ≫ (transport (pullbackPathIso f τ)).hom = (transport τ).hom ≫ map f z :=
+  hom_ext (z ≫ f) fun P x ↦ by
+    rw [Category.assoc, transport_hom, transportHom_toObj, map_toObj, Category.assoc,
+      transport_hom, map_toObj, transportHom_toObj_assoc]
+    congr 2
+    simp only [pullbackPathIso, pullbackPoint, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, FintypeCat.comp_apply]
+    exact ConcreteCategory.congr_hom ((pullbackFiberIso f y).hom_inv_id_app P) _
+end Map
+
 end QCQS
 
 end AlgebraicGeometry.Scheme.UniversalCover
