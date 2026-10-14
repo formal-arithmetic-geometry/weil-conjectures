@@ -84,12 +84,12 @@ lemma stalkFrobTransport_hom_app
 
 section UnitStalk
 
-variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (M : LisseMonodromy l Y Ω)
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] (M : LisseMonodromy l Y Ω)
 
 omit [Finite K] [Fact (ringChar K ≠ l)] in
 /-- The transport along a loop acts trivially on the stalk of the constant sheaf `ℚ̄_ℓ`: it
 fixes the restriction of the unit global section, which spans this line. -/
-lemma mono_hom_app_unit {y : Spec (.of Ω) ⟶ Y} (g : fiber y ≅ fiber y) :
+lemma mono_hom_app_unit {y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (g : fiber y ≅ fiber y) :
     (M.mono g).hom.app (LisseSheaf.unit l) = 𝟙 _ :=
   WeilCoefficients.eq_id_of_finrank_eq_one _
     (finrank_globalSections_upperStar_adicConstantSheaf y) _
@@ -99,7 +99,7 @@ lemma mono_hom_app_unit {y : Spec (.of Ω) ⟶ Y} (g : fiber y ≅ fiber y) :
 end UnitStalk
 
 variable [IsCurve (C ↘ Spec (.of K))] {W : WeilGroup (C ↘ Spec (.of K))}
-  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber (AlgebraicClosure K))
+  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K)
   {B : BasePointData W}
 
 /-- The Frobenius `Φ` of the stalk of a lisse Weil sheaf `F` at the base point is the transport

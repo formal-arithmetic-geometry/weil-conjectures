@@ -39,19 +39,8 @@ open ProEtale Scheme.FiniteEtale
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
   {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))]
   {W : WeilGroup (C ↘ Spec (.of K))}
-  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber (AlgebraicClosure K))
+  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K)
   {B : BasePointData W}
-
-omit [Finite K] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))] in
-/-- Transport along the path given by an equality of geometric points is the identification of
-the stalks. -/
-lemma mono_eqToIso_hom_app {y z : Spec (.of (AlgebraicClosure K)) ⟶
-    (C ↘ Spec (.of K)).geometricFiber} (h : y = z) (G : LisseSheaf l _) :
-    (M.mono (eqToIso (congrArg fiber h))).hom.app G =
-      (Sheaf.Γ _ _).map ((upperStarCongr _ h).hom.app G.obj.X) := by
-  subst h
-  simp [M.mono_refl, upperStarCongr]
-  rfl
 
 /-- The iterated Weil structure `φ_m : (Frᵐ)^* ℱ ≅ ℱ` as an isomorphism of lisse sheaves. -/
 noncomputable def _root_.AlgebraicGeometry.WeilSheaf.lisseFrobPowStr (F : WeilSheaf K l C)
@@ -134,7 +123,7 @@ theorem frobPowStalk_comp_frobStalkIso (F : WeilSheaf K l C) (hF : F.IsLisse) (m
   have n₃ := M.mono_upperStar (Fr ^ m).hom B.frobPath (F.toLisse hF)
   -- `φ_{m+1} = φ ∘ Fr^* φ_m`
   have n₄ := F.upperStarFactor_hom_app_comp_frobeniusPowStr_succ m e
-  have hE := mono_eqToIso_hom_app M (show (B.t ≫ Fr.hom) ≫ (Fr ^ m).hom =
+  have hE := M.mono_eqToIso_hom_app (show (B.t ≫ Fr.hom) ≫ (Fr ^ m).hom =
     B.t ≫ (Fr ^ (m + 1)).hom by rw [Category.assoc, e]) (F.toLisse hF)
   have hC := Γ_map_upperStarComp_comp (l := l) B.t Fr.hom (Fr ^ m).hom e F.obj.carrier.X
   simp only [frobPowStalk, frobStalkIso, M.mono_trans, Iso.trans_hom, NatTrans.comp_app,
@@ -164,8 +153,15 @@ lemma upperStar_id_coherence {S P : Scheme.{u}} (t : S ⟶ P) {g : P ⟶ P} (p :
     (h : t = t ≫ g) (X : Sheaf (Scheme.ProEt.topology P) (WeilCoefficients.{u} l)) :
     (upperStarCongr _ h).hom.app X ≫ (upperStarComp _ t g).hom.app X ≫
         (t)^*[_].map ((upperStarCongr _ p).hom.app X ≫ (upperStarId _ P).hom.app X) = 𝟙 _ := by
-  subst p
-  simp [upperStarComp_id_right, upperStarCongr]
+  have n := upperStarCongr_hom_app_comp_upperStarComp_hom_app' (WeilCoefficients.{u} l) t p X
+  rw [Functor.map_comp, ← reassoc_of% n, upperStarComp_id_right]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app, Category.id_comp,
+    Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.comp_obj, Functor.id_obj]
+  simp only [CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [← NatTrans.comp_app, ← NatTrans.comp_app, ← Iso.trans_hom, ← Iso.trans_hom,
+    upperStarCongr_trans, upperStarCongr_trans]
+  simp [upperStarCongr]
 
 /-- `Ψ_0(β_0)` is the identity: `φ_0` is the identification `(𝟙)^* ≅ 𝟭`. -/
 theorem frobPowStalk_zero (F : WeilSheaf K l C) (hF : F.IsLisse) :
@@ -180,7 +176,7 @@ theorem frobPowStalk_zero (F : WeilSheaf K l C) (hF : F.IsLisse) :
     rw [WeilSheaf.lisseFrobPowStr_hom_hom]
   simp only [frobPowStalk, h₀, h₂, F.frobeniusPowStr_zero p, upperStarStalkIso,
     Functor.mapIso_hom, Iso.app_hom, Functor.map_comp]
-  rw [mono_eqToIso_hom_app M h]
+  rw [M.mono_eqToIso_hom_app h]
   simp only [← Functor.map_comp, Category.assoc]
   erw [upperStar_id_coherence (l := l) B.t p h]
   exact CategoryTheory.Functor.map_id _ _
@@ -203,78 +199,116 @@ theorem frobPowStalk_frobPathPow (F : WeilSheaf K l C) (hF : F.IsLisse) (m : ℕ
       CategoryTheory.Functor.map_comp, ModuleCat.hom_comp, ih, pow_succ']
     rfl
 
-omit [Finite K] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))] in
-/-- Transport along the inverse path is the inverse transport. -/
-lemma mono_symm {y z : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber}
-    (τ : fiber y ≅ fiber z) : M.mono τ.symm = (M.mono τ).symm := by
-  have h := M.mono_trans τ τ.symm
-  rw [Iso.self_symm_id, M.mono_refl] at h
-  ext1
-  exact (Iso.inv_ext (congrArg Iso.hom h).symm).symm
-
-omit [Finite K] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))] in
-/-- The identification of stalks along an equality of geometric points is `eqToHom`. -/
-lemma Γ_map_upperStarCongr_hom_app {y z : Spec (.of (AlgebraicClosure K)) ⟶
-    (C ↘ Spec (.of K)).geometricFiber} (h : y = z)
-    (G : Sheaf (Scheme.ProEt.topology (C ↘ Spec (.of K)).geometricFiber)
-      (WeilCoefficients.{u} l)) :
-    (Sheaf.Γ _ _).map ((upperStarCongr _ h).hom.app G) =
-      eqToHom (congrArg (fun y ↦ (stalkFunctor l y).obj G) h) := by
+omit [IsCurve (C ↘ Spec (.of K))] in
+/-- The identification of stalks of a Weil sheaf along an equality of geometric points. -/
+lemma eqToIso_stalkObj_hom (F : WeilSheaf K l C) (hF : F.IsLisse)
+    {y z : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber} (h : y = z) :
+    (eqToIso (congrArg F.stalkObj h)).hom =
+      (Sheaf.Γ _ _).map ((upperStarCongr _ h).hom.app (F.toLisse hF).obj.X) := by
   subst h
   simp [upperStarCongr]
+  rfl
 
-/-- Transport along a path `π : F_xb ≅ F_t` intertwines the local Frobenius at a closed point
-`x` of degree `m` with `Ψ_m` of the local Frobenius loop. -/
-theorem mono_comp_frobPowStalk_frobeniusLoop (F : WeilSheaf K l C) (hF : F.IsLisse)
-    (x : C.finitePoints)
-    (π : fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) ≅ fiber B.t) :
-    ((F.stalkObjSpecFrobeniusPowIso _ _).symm ≪≫ eqToIso (congrArg F.stalkObj
-        ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-          x).symm) ≪≫ F.stalkObjFrobeniusPowIso _ _).hom ≫ (M.mono π).hom.app (F.toLisse hF) =
+omit [IsCurve (C ↘ Spec (.of K))] in
+/-- The isomorphism `ℱ_{s ≫ Frᵐ} ≅ ℱ_s` of the iterated Weil structure, through
+`ℱ_{s ≫ Frᵐ} = ((Frᵐ)^* ℱ)_s`. -/
+lemma stalkObjFrobeniusPowIso_hom_eq (F : WeilSheaf K l C) (hF : F.IsLisse) (m : ℕ)
+    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) :
+    (F.stalkObjFrobeniusPowIso m s).hom =
+      (upperStarStalkIso l ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom s
+        (F.toLisse hF).obj.X).hom ≫ (stalkFunctor l s).map (F.frobeniusPowStr m) := by
+  simp only [WeilSheaf.stalkObjFrobeniusPowIso, upperStarStalkIso, Functor.mapIso_hom,
+    Iso.trans_hom, Iso.app_hom, Functor.map_comp, WeilSheaf.frobeniusPowStr]
+  rfl
+
+omit [IsCurve (C ↘ Spec (.of K))] in
+/-- The reparametrisation of the stalk of a Weil sheaf is that of its underlying lisse sheaf. -/
+lemma stalkObjSpecFrobeniusPowIso_eq (F : WeilSheaf K l C) (hF : F.IsLisse) (m : ℕ)
+    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) :
+    F.stalkObjSpecFrobeniusPowIso m s =
+      reparamStalkIso l (specGeometricFrobenius K ^ m) s (F.toLisse hF).obj.X :=
+  rfl
+
+/-- The loop `F_t ≅ F_s ≅ F_{σᵐ ≫ s} = F_{s ≫ Frᵐ} ≅ F_{t ≫ Frᵐ}` at a geometric point `s` with
+`s ≫ Frᵐ = σᵐ ≫ s`, for a path `π : F_s ≅ F_t`. For a closed point this is
+`AlgebraicGeometry.WeilGroup.BasePointData.frobeniusLoop`. -/
+noncomputable def frobeniusLoopAt
+    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) (m : ℕ)
+    (hs : s ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius K ^ m).hom ≫ s) (π : fiber s ≅ fiber B.t) :
+    fiber B.t ≅ fiber (B.t ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom) :=
+  π.symm ≪≫ (fiberReparamIso (specGeometricFrobenius K ^ m) s).symm ≪≫
+    eqToIso (congrArg fiber hs.symm) ≪≫
+    pullbackPathIso ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom π
+
+/-- Transport along a path `π : F_s ≅ F_t` intertwines the operator
+`ℱ_s ≅ ℱ_{σᵐ ≫ s} = ℱ_{s ≫ Frᵐ} = ((Frᵐ)^* ℱ)_s ⟶ ℱ_s` of the iterated Weil structure with `Ψ_m`
+of the loop `frobeniusLoopAt`. -/
+theorem mono_comp_frobPowStalk_frobeniusLoopAt (F : WeilSheaf K l C) (hF : F.IsLisse)
+    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) (m : ℕ)
+    (hs : s ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius K ^ m).hom ≫ s) (π : fiber s ≅ fiber B.t) :
+    (M.mono (fiberReparamIso (specGeometricFrobenius K ^ m) s)).inv.app (F.toLisse hF) ≫
+        (M.mono (eqToIso (congrArg fiber hs.symm))).hom.app (F.toLisse hF) ≫
+        (upperStarStalkIso l ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom s
+          F.obj.carrier.X).hom ≫
+        (lisseStalk l s).map (F.lisseFrobPowStr hF m).hom ≫ (M.mono π).hom.app (F.toLisse hF) =
       (M.mono π).hom.app (F.toLisse hF) ≫
-        frobPowStalk M B F hF _ (B.frobeniusLoop x π) := by
-  have hx := (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow x
-  let xb := (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x
-  let m := (C ↘ Spec (.of K)).degreeOver x.1
-  let Fr := (C ↘ Spec (.of K)).geometricGaloisFrobenius
-  let R := fiberReparamIso (specGeometricFrobenius K ^ m) xb
-  have hloop : π ≪≫ B.frobeniusLoop x π = R.symm ≪≫ eqToIso (congrArg fiber hx.symm) ≪≫
-      pullbackPathIso (Fr ^ m).hom π := by
-    rw [BasePointData.frobeniusLoop, Iso.self_symm_id_assoc]
-  have e₁ := M.mono_upperStar (Fr ^ m).hom π (F.toLisse hF)
-  have e₂ : (M.mono π).hom.app _ ≫ (lisseStalk l B.t).map (F.lisseFrobPowStr hF m).hom =
-      (lisseStalk l xb).map (F.lisseFrobPowStr hF m).hom ≫ (M.mono π).hom.app _ :=
-    ((M.mono π).hom.naturality _).symm
-  have e₃ := M.mono_reparam (specGeometricFrobenius K ^ m) xb (F.toLisse hF)
-  have e₄ := mono_eqToIso_hom_app M hx.symm (F.toLisse hF)
-  have e₅ : (lisseStalk l xb).map (F.lisseFrobPowStr hF m).hom =
-      (Sheaf.Γ _ _).map ((xb)^*[_].map (F.frobeniusPowStr m)) := by
-    change (Sheaf.Γ _ _).map ((xb)^*[_].map (F.lisseFrobPowStr hF m).hom.hom.hom) = _
-    rw [WeilSheaf.lisseFrobPowStr_hom_hom]
-  have key : (M.mono π).hom.app (F.toLisse hF) ≫ frobPowStalk M B F hF _ (B.frobeniusLoop x π) =
-      (M.mono R.symm).hom.app (F.toLisse hF) ≫
-        (M.mono (eqToIso (congrArg fiber hx.symm))).hom.app (F.toLisse hF) ≫
-        (upperStarStalkIso l (Fr ^ m).hom xb F.obj.carrier.X).hom ≫
-        (lisseStalk l xb).map (F.lisseFrobPowStr hF m).hom ≫ (M.mono π).hom.app (F.toLisse hF) := by
-    have h₀ := congrArg (fun τ ↦ (M.mono τ).hom.app (F.toLisse hF)) hloop
-    simp only [M.mono_trans, Iso.trans_hom, NatTrans.comp_app] at h₀
-    simp only [frobPowStalk, ← Category.assoc]
-    rw [h₀]
-    simp only [Category.assoc]
-    rw [reassoc_of% e₁, e₂]
-  have hmain : ((F.stalkObjSpecFrobeniusPowIso _ _).symm ≪≫ eqToIso (congrArg F.stalkObj hx.symm) ≪≫
-      F.stalkObjFrobeniusPowIso _ _).hom =
-      (M.mono R.symm).hom.app (F.toLisse hF) ≫
-        (M.mono (eqToIso (congrArg fiber hx.symm))).hom.app (F.toLisse hF) ≫
-        (upperStarStalkIso l (Fr ^ m).hom xb F.obj.carrier.X).hom ≫
-        (lisseStalk l xb).map (F.lisseFrobPowStr hF m).hom := by
-    have e₃' : (M.mono R).app (F.toLisse hF) = F.stalkObjSpecFrobeniusPowIso m xb := Iso.ext e₃
-    rw [mono_symm, Iso.symm_hom, ← Iso.app_inv, e₃', e₄, Γ_map_upperStarCongr_hom_app, e₅]
-    simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, WeilSheaf.stalkObjFrobeniusPowIso,
-      upperStarStalkIso, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp, Category.assoc,
-      WeilSheaf.frobeniusPowStr]
-    rfl
-  rw [key, hmain]
-  simp only [Category.assoc]
+        frobPowStalk M B F hF m (frobeniusLoopAt s m hs π) := by
+  rw [frobPowStalk, frobeniusLoopAt]
+  exact M.reparam_comp_upperStar_comp_mono _ _ hs π _ _
 
+omit [Finite K] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))] in
+/-- The `ℚ̄_ℓ`-linear map underlying a morphism of `WeilCoefficients`. -/
+lemma toModuleCat_map_hom_apply {A A' : WeilCoefficients.{u} l} (f : A ⟶ A') (x : A) :
+    ((WeilCoefficients.toModuleCat l).map f).hom x = f.hom x :=
+  rfl
+
+omit [IsCurve (C ↘ Spec (.of K))] in
+/-- The Frobenius of the stalk at a geometric point `s` with `s ≫ Frᵐ = σᵐ ≫ s`, on the
+underlying sheaves: the reparametrisation `ℱ_s ≅ ℱ_{σᵐ ≫ s}`, the identification
+`ℱ_{σᵐ ≫ s} = ℱ_{s ≫ Frᵐ} = ((Frᵐ)^* ℱ)_s` and the stalk of `φ_m`. -/
+theorem stalkAt_frobenius_apply (F : WeilSheaf K l C) (hF : F.IsLisse)
+    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) (m : ℕ)
+    (hs : s ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius K ^ m).hom ≫ s) (v : (F.stalkAt s m hs).carrier) :
+    (F.stalkAt s m hs).frobenius v =
+      ((WeilCoefficients.toModuleCat l).map ((stalkFunctor l s).map
+        (F.lisseFrobPowStr hF m).hom.hom.hom)).hom
+      (((WeilCoefficients.toModuleCat l).map (upperStarStalkIso l
+        ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom s (F.toLisse hF).obj.X).hom).hom
+        (((WeilCoefficients.toModuleCat l).map
+          ((Sheaf.Γ _ _).map ((upperStarCongr _ hs.symm).hom.app (F.toLisse hF).obj.X))).hom
+          (((WeilCoefficients.toModuleCat l).map
+            (reparamStalkIso l (specGeometricFrobenius K ^ m) s (F.toLisse hF).obj.X).inv).hom
+              v))) := by
+  rw [show (F.stalkAt s m hs).frobenius = WeilCoefficients.linearEquivOfIso
+      ((F.stalkObjSpecFrobeniusPowIso m s).symm ≪≫ eqToIso (congrArg F.stalkObj hs.symm) ≪≫
+        F.stalkObjFrobeniusPowIso m s) from rfl]
+  erw [show ∀ e : F.stalkObj s ≅ F.stalkObj s, WeilCoefficients.linearEquivOfIso e v =
+      ((WeilCoefficients.toModuleCat l).map e.hom).hom v from fun _ ↦ rfl]
+  rw [Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, eqToIso_stalkObj_hom F hF hs.symm,
+    stalkObjFrobeniusPowIso_hom_eq F hF, stalkObjSpecFrobeniusPowIso_eq F hF,
+    WeilSheaf.lisseFrobPowStr_hom_hom, CategoryTheory.Functor.map_comp,
+    CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp, ModuleCat.hom_comp,
+    ModuleCat.hom_comp, ModuleCat.hom_comp, LinearMap.comp_apply, LinearMap.comp_apply,
+    LinearMap.comp_apply]
+  rfl
+
+/-- **The local Frobenius transported to the base point**: transport along a path
+`π : F_s ≅ F_t` carries the Frobenius of the stalk at a geometric point `s` with
+`s ≫ Frᵐ = σᵐ ≫ s` to `Ψ_m` of the loop `frobeniusLoopAt`. -/
+theorem monoLinear_stalkAt_frobenius (F : WeilSheaf K l C) (hF : F.IsLisse)
+    (s : Spec (.of (AlgebraicClosure K)) ⟶ (C ↘ Spec (.of K)).geometricFiber) (m : ℕ)
+    (hs : s ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius K ^ m).hom ≫ s) (π : fiber s ≅ fiber B.t)
+    (v : (F.stalkAt s m hs).carrier) :
+    M.monoLinear π (F.toLisse hF) ((F.stalkAt s m hs).frobenius v) =
+      ((WeilCoefficients.toModuleCat l).map
+        (frobPowStalk M B F hF m (frobeniusLoopAt s m hs π))).hom (M.monoLinear π _ v) := by
+  rw [stalkAt_frobenius_apply F hF, ← M.reparam_upperStar_apply _ (specGeometricFrobenius K ^ m) hs
+    (F.toLisse hF) (F.lisseFrobPowStr hF m).hom v,
+    M.reparam_comp_upperStar_comp_mono_apply _ _ hs π (F.toLisse hF) (F.lisseFrobPowStr hF m).hom v,
+    frobPowStalk, frobeniusLoopAt,
+    M.mono_comp_upperStar_comp_apply]
 end AlgebraicGeometry.WeilGroup

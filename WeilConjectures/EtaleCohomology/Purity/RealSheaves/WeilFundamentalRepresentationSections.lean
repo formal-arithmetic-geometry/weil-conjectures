@@ -28,28 +28,27 @@ namespace AlgebraicGeometry.ProEtale.LisseMonodromy
 
 open Scheme.FiniteEtale
 
-variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}} {Ω : Type u} [Field Ω]
   (M : LisseMonodromy l Y Ω)
 
 /-- The restriction `Γ(Y, G) → G_t` of global sections of a lisse sheaf to its stalk at a
 geometric point `t`, as a `ℚ̄_ℓ`-linear map. -/
-noncomputable def sectionsRes (t : Spec (.of Ω) ⟶ Y) (G : LisseSheaf l Y) :
+noncomputable def sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) :
     (WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj G.obj.X)
       →ₗ[PadicAlgCl l] StalkSpace t G :=
   ((WeilCoefficients.toModuleCat l).map ((globalSectionsToUpperStar _ t).app G.obj.X)).hom
 
 /-- Restrictions of global sections are invariant under the monodromy. -/
-lemma rep_sectionsRes (t : Spec (.of Ω) ⟶ Y) (G : LisseSheaf l Y) (g : Aut (fiber t)) (a) :
+lemma rep_sectionsRes (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) (g : Aut (fiber t)) (a) :
     M.rep t G g (sectionsRes t G a) = sectionsRes t G a := by
   have h := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom a)
     (M.mono_globalSections g G)
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h
 
-omit [IsSepClosed Ω] in
 /-- The restriction of the global section `v(1)` of a morphism `v : ℚ̄_ℓ ⟶ G` is the image of the
 restriction of the unit section under the stalk of `v`. -/
-lemma sectionsRes_globalSectionOfModHom (t : Spec (.of Ω) ⟶ Y) (G : LisseSheaf l Y)
+lemma sectionsRes_globalSectionOfModHom (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y)
     (v : LisseSheaf.unit l ⟶ G) :
     sectionsRes t G (globalSectionOfModHom v.hom) =
       ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map v)).hom
@@ -63,22 +62,20 @@ lemma sectionsRes_globalSectionOfModHom (t : Spec (.of Ω) ⟶ Y) (G : LisseShea
   simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
   exact h
 
-omit [IsSepClosed Ω] in
 /-- The restriction of the unit section to the stalk of `ℚ̄_ℓ` is nonzero. -/
-lemma sectionsRes_one_ne_zero (t : Spec (.of Ω) ⟶ Y) :
+lemma sectionsRes_one_ne_zero (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
     sectionsRes t (LisseSheaf.unit l) (oneGlobalSection Y) ≠ 0 :=
   globalSectionsToUpperStar_oneGlobalSection_ne_zero t
 
-omit [IsSepClosed Ω] in
 /-- The restriction of the unit section spans the stalk of `ℚ̄_ℓ`. -/
-lemma exists_smul_sectionsRes_one (t : Spec (.of Ω) ⟶ Y) (x : StalkSpace t (LisseSheaf.unit l)) :
+lemma exists_smul_sectionsRes_one (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (x : StalkSpace t (LisseSheaf.unit l)) :
     ∃ c : PadicAlgCl l, c • sectionsRes t (LisseSheaf.unit l) (oneGlobalSection Y) = x :=
   (finrank_eq_one_iff_of_nonzero' (K := PadicAlgCl l)
     (V := StalkSpace t (LisseSheaf.unit l)) _ (sectionsRes_one_ne_zero t)).1
     (finrank_globalSections_upperStar_adicConstantSheaf t) x
 
 /-- The monodromy acts trivially on the stalk of `ℚ̄_ℓ`. -/
-lemma rep_unit (t : Spec (.of Ω) ⟶ Y) (g : Aut (fiber t))
+lemma rep_unit (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber t))
     (x : StalkSpace t (LisseSheaf.unit l)) : M.rep t (LisseSheaf.unit l) g x = x := by
   obtain ⟨c, rfl⟩ := exists_smul_sectionsRes_one t x
   rw [map_smul, rep_sectionsRes]
@@ -87,7 +84,7 @@ variable {M}
 
 /-- Restriction of global sections of a lisse sheaf to the stalk at `t` is injective, if the
 monodromy at `t` is an equivalence. -/
-lemma sectionsRes_injective {t : Spec (.of Ω) ⟶ Y} (hM : M.IsEquivalenceAt t)
+lemma sectionsRes_injective {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hM : M.IsEquivalenceAt t)
     (G : LisseSheaf l Y) : Function.Injective (sectionsRes t G) := by
   intro a a' h
   obtain ⟨v, rfl⟩ := (bijective_globalSectionOfModHom G.obj).2 a
@@ -103,7 +100,7 @@ lemma sectionsRes_injective {t : Spec (.of Ω) ⟶ Y} (hM : M.IsEquivalenceAt t)
 
 /-- Every monodromy-invariant vector of the stalk at `t` is the restriction of a global section, if
 the monodromy at `t` is an equivalence. -/
-lemma exists_sectionsRes_eq {t : Spec (.of Ω) ⟶ Y} (hM : M.IsEquivalenceAt t)
+lemma exists_sectionsRes_eq {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y} (hM : M.IsEquivalenceAt t)
     (G : LisseSheaf l Y) (w : StalkSpace t G) (hw : ∀ g, M.rep t G g w = w) :
     ∃ a, sectionsRes t G a = w := by
   obtain ⟨ℓ, hℓ⟩ := Module.Projective.exists_dual_eq_one (PadicAlgCl l)
@@ -126,7 +123,7 @@ open ProEtale Scheme.FiniteEtale
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
   {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)] [IsCurve (C ↘ Spec (.of K))]
   {W : WeilGroup (C ↘ Spec (.of K))}
-  {M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber (AlgebraicClosure K)}
+  {M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K}
   {B : BasePointData W} (D : WeilMonodromyData B)
 
 omit [IsCurve (C ↘ Spec (.of K))] [Fact (ringChar K ≠ l)] in

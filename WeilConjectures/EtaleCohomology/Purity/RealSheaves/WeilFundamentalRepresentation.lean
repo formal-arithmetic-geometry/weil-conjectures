@@ -82,7 +82,7 @@ end WeilSheaf
 namespace WeilGroup
 
 variable [IsCurve (C ↘ Spec (.of K))] {W : WeilGroup (C ↘ Spec (.of K))}
-  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber (AlgebraicClosure K))
+  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K)
   (B : BasePointData W)
 
 /-- The Frobenius `Φ : ℱ_t ≅ ℱ_t` of the Weil fundamental representation
@@ -238,7 +238,7 @@ end WeilSheaf
 namespace WeilGroup
 
 variable [IsCurve (C ↘ Spec (.of K))] {W : WeilGroup (C ↘ Spec (.of K))}
-  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber (AlgebraicClosure K))
+  (M : LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K)
   {B : BasePointData W}
 
 /-- The Frobenius of the stalks is natural in the lisse Weil sheaf. -/
