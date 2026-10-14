@@ -9,7 +9,7 @@
     "lem-weil-constant-coefficient-objects-constructible"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stalks of a constant sheaf on the pro-etale site",
@@ -23,9 +23,68 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-proetale-geometric-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P(U)=M$ with identity restrictions, and put $O(U)=\\Lambda$ with identity restrictions. The module sheafification interface, applied to the constant presheaf of rings $O$ and its module presheaf $P$, identifies the underlying abelian sheaf of $\\underline M_Y$ with the abelian sheafification $P^\\#$, and identifies its unit with $P\\to P^\\#$. Its scalar action extends the original multiplication $(a,m)\\mapsto am$. This is precisely the constant module sheaf in the statement, not a completed or condensed coefficient object.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "Let $I=\\mathcal N_{\\bar y}^{\\mathrm{op}}$ be the pointed-neighbourhood index category. The geometric stalk definition supplies its smallness in the larger universe and its filteredness; it is nonempty, containing $(Y,\\bar y)$. Thus it is connected: any two objects have a common receiving object, yielding a zigzag. The restricted presheaf diagram $P$ is constant with value the additive group of $M$. The constant-connected-diagram lemma identifies its colimit with $M$; in particular the coprojection at $(Y,\\bar y)$ is an isomorphism.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F6B (lemma-cofinal-etale); constant-diagram universal property as in Mathlib Limits/Connected.lean:83"
+   }
+  },
+  {
+   "text": "Apply preservation of geometric stalks by abelian sheafification to $P$: the map $\\varinjlim_I P(U)\\to\\varinjlim_I P^\\#(U)$ induced by the actual unit is an additive isomorphism. By Step 1 the latter colimit is the additive group of $(\\underline M_Y)_{\\bar y}$. Composing with the coprojection of Step 2 sends $m$ to the class of its unit image at $(Y,\\bar y)$, exactly the canonical map specified in the statement. This proves additive bijectivity without presupposing that ordinary geometric points detect every pro-etale sheaf.",
+   "uses": [
+    "lem-cbc-proetale-sheafification-geometric-stalk",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8 (lemma-point-pushforward-sheaf), clause (3), with proetale.tex Tags 0F6B and 0F6C"
+   }
+  },
+  {
+   "text": "Give the stalk its $\\Lambda$-action by restriction of scalars along the ring homomorphism $\\Lambda\\to(\\Lambda_Y)_{\\bar y}$ sending $a$ to the germ of $\\theta_O(a)$ at $(Y,\\bar y)$. For $a\\in\\Lambda$ and $m\\in M$, represent the scalar and module germ at the same object $(Y,\\bar y)$. Compatibility of the sheafification action with the presheaf action gives $\\theta(am)=\\theta_O(a)\\theta(m)$ there, so passing to germs gives $c(am)=a c(m)$. The common-refinement definition of the stalk action is exactly this action. Hence the additive bijection $c$ of Step 3 is $\\Lambda$-linear. Its inverse is linear: if $c(m)=t$, then $c(am)=at$, so $c^{-1}(at)=a c^{-1}(t)$; if $c(m)=t$ and $c(n)=u$, additivity of $c$ gives $c(m+n)=t+u$, hence $c^{-1}(t+u)=m+n=c^{-1}(t)+c^{-1}(u)$, and $c^{-1}(0)=0$ because $c(0)=0$. This is the required module isomorphism. For finite $M$, bijectivity gives a finite underlying set at every geometric point (and also preserves finite generation if finite is used in that module sense).",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); action and inverse verified on representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-cbc-proetale-sheafification-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0F6B, 0F6C and geometric-point paragraph before 0993; sites.tex Tag 00Y8(3); sites-modules.tex Tag 03CY"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,10 +99,52 @@
    "results": "Proetale.lean defines `Scheme.ProEt` and `ProEt.topology`; no stalks or points on it",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of the constant sheaf on the pro etale site of a scheme is the original module",
+   "results": "{\"t\": \"2026-10-14T09:37:42Z\", \"tool\": \"leanfinder\", \"query\": \"The geometric stalk of the constant sheaf on the pro etale site of a scheme is the original module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"ModuleCat.Tilde.toOpen_germ_apply\", \"ModuleCat.Tilde.stalkIso\", \"smoothSheafCommRing.ι_forgetStalk_hom_apply\", \"smoothSheafCommRing.ι_forgetStalk_hom\", \"ModuleCat.Tilde.toOpen_germ\"], \"digest\": \"aa1833a6544c6b0f\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for geometric pro-etale stalks: generic site-point fibers assume a constructed point, and tilde-module stalks are localizations, not constant-sheaf stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"sheafFiber\"",
+   "results": "{\"t\": \"2026-10-14T09:37:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"constantSheaf\\\", \\\"sheafFiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for geometric pro-etale stalks: generic site-point fibers assume a constructed point, and tilde-module stalks are localizations, not constant-sheaf stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|presheafToSheafCompSheafFiberIso",
+   "results": "{\"t\": \"2026-10-14T09:37:43Z\", \"tool\": \"grep\", \"query\": \"constantSheaf|presheafToSheafCompSheafFiberIso\", \"sub\": \"CategoryTheory/Sites/Point\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\"], \"digest\": \"93cb7b0a8390cd09\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for geometric pro-etale stalks: generic site-point fibers assume a constructed point, and tilde-module stalks are localizations, not constant-sheaf stalks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a constant sheaf at a geometric point of a pro etale site equals its value",
+   "results": "{\"t\": \"2026-10-14T09:37:43Z\", \"tool\": \"leansearch\", \"query\": \"The stalk of a constant sheaf at a geometric point of a pro etale site equals its value\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fiber at a point of a site of the sheafification of a constant presheaf is its constant value",
+   "results": "{\"t\": \"2026-10-14T09:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"The fiber at a point of a site of the sheafification of a constant presheaf is its constant value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.sheafFiber\", \"CategoryTheory.Sheaf.IsConstant\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply\", \"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.isConstant_iff_forget\", \"CategoryTheory.Sheaf.isConstant_of_forget\", \"TopCat.Presheaf.toType_isSheaf\"], \"digest\": \"4c5c5eb029a1afbf\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for geometric pro-etale stalks: generic site-point fibers assume a constructed point, and tilde-module stalks are localizations, not constant-sheaf stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(stalk|fiber)|constant.*sheafFiber",
+   "results": "{\"t\": \"2026-10-14T09:38:10Z\", \"tool\": \"grep\", \"query\": \"proetale.*(stalk|fiber)|constant.*sheafFiber\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match for geometric pro-etale stalks: generic site-point fibers assume a constructed point, and tilde-module stalks are localizations, not constant-sheaf stalks"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +164,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-proetale-constant-sheaf-stalk",
+  "worker": "stage1",
+  "summary": "Reused the reviewed geometric-stalk and sheafification-stalk nodes and the existing constant-colimit and module-sheafification Mathlib leaves; established the specified canonical map and its scalar compatibility. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the constant coefficient stalk ingredient of def-weil-ordinary-compact-cohomology, statement coefficient-object clause, through lem-weil-constant-coefficient-objects-constructible; the unit has no proof steps to replace."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-5d8294e02",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-5d8294e02 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route in full. Stacks 0F6B, 0F6C, 00Y8(3), and 03CY support the canonical germ isomorphism and scalar compatibility. Edge cases, duplicate candidates, and dependency cycles checked. No repairs or new nodes; accepted generic tool uses recorded in review.md. No discrete-to-condensed comparison or target weakening certified."
+ }
 }
