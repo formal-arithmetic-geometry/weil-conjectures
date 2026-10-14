@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-one-variable-field-cd",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "One-variable fields over a separably closed field",
@@ -17,17 +17,61 @@
  ],
  "proof": [
   {
-   "text": "The field $F(x)$ is the filtered union of\n$F[x,1/h]$, for nonzero $h\\in F[x]$.\nEach corresponding scheme is an affine curve.\nThe algebraic closure $\\overline F/F$ is purely inseparable,\nso its base change preserves the etale topos by\n[thm-weil-pbc-universal-homeomorphism-invariance].\nOver $\\overline F$ the bound is one by\n[lem-sc-arbitrary-curve-cd].\nUse [lem-sc-cd-affine-limit] to pass to the fraction field.",
+   "text": "Index by finite subsets $S\\subset F[x]\\setminus\\{0\\}$ ordered by inclusion, and put $h_S=\\prod_{h\\in S}h$ (empty product $1$) and $X_S=\\operatorname{Spec}F[x,1/h_S]$. For $S\\subset T$, the inclusion of localizations gives a transition map $X_T\\to X_S$. Every fraction $a/b\\in F(x)$ belongs to the stage $S=\\{b\\}$, so the filtered colimit of these rings is $F(x)$; by [lem-weil-pbc-spec-colimit-limit] (which also makes every transition map affine) $\\varprojlim_S X_S=\\operatorname{Spec}F(x)$. Each stage is affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
+    "place": "## Proof, first two sentences"
+   }
+  },
+  {
+   "text": "Write $L=\\overline F$. In characteristic zero every irreducible polynomial is separable, hence linear over the separably closed field $F$, so $L=F$. In characteristic $p>0$, the minimal polynomial of any $a\\in L$ has the form $g(T^{p^r})$ with $g$ irreducible and separable; $g$ is linear, so $a^{p^r}\\in F$. Here is the universal-homeomorphism check from [def-weil-universal-homeomorphism]: for any $F$-algebra $R$, the map $R\\to B=R\\otimes_F L$ is injective (extend $1$ to an $F$-basis of $L$), and each $b\\in B$ has a power $b^{p^n}\\in R$, by choosing one exponent for its finitely many coefficients in $L$. A prime $P\\subset R$ therefore has exactly one prime above it, namely $Q_P=\\{b\\in B:b^{p^n}\\in P\\text{ for an exponent with }b^{p^n}\\in R\\}$: independence of exponent and the ideal and prime properties follow by taking a common exponent and using Frobenius and primality of $P$. Under this bijection $D_B(b)$ corresponds to $D_R(b^{p^n})$, so it is a homeomorphism. Checking on affine opens of an arbitrary base change proves that $\\operatorname{Spec}L\\to\\operatorname{Spec}F$, and consequently $X_S\\times_F\\operatorname{Spec}L\\to X_S$, are universal homeomorphisms. By [thm-weil-pbc-universal-homeomorphism-invariance] their pullback equivalences preserve cohomology. On abelian sheaves these equivalences are exact and preserve torsion (a torsion sheaf is the filtered union of the kernels of multiplication by $n!$, and an additive equivalence preserves those kernels and their colimit); thus vanishing for every torsion sheaf in degrees $q>1$ is equivalent on the two schemes, as in [def-sc-etale-torsion-cd].",
    "uses": [
     "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lem-sc-arbitrary-curve-cd",
-    "lem-sc-cd-affine-limit"
+    "def-sc-etale-torsion-cd",
+    "def-weil-universal-homeomorphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
+    "place": "## Proof, algebraic-closure and universal-homeomorphism sentences"
+   }
+  },
+  {
+   "text": "The base change of $X_S$ is $\\operatorname{Spec}L[x,1/h_S]$. Since $F\\to L$ is injective, $h_S$ stays nonzero. This algebra is generated over $L$ by $x$ and $1/h_S$, so the scheme is of finite type; it is separated since the diagonal of an affine scheme over a field is induced by the surjective multiplication map $A\\otimes_L A\\to A$. The Euclidean domain $L[x]$ has only the zero prime and maximal nonzero primes, so localization has dimension at most one. Hence all hypotheses of [lem-sc-arbitrary-curve-cd] hold with $e=1$, giving $\\operatorname{cd}_{\\rm tor}(X_S\\times_F\\operatorname{Spec}L)\\leq1$. Step 2 gives $\\operatorname{cd}_{\\rm tor}(X_S)\\leq1$, in the sense of [def-sc-etale-torsion-cd].",
+   "uses": [
+    "lem-sc-arbitrary-curve-cd",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
+    "place": "## Proof, “Over F̄ the bound is one ...”"
+   }
+  },
+  {
+   "text": "The finite-subset index is filtered (use $S\\cup T$), every $X_S$ is quasi-compact and quasi-separated, and every transition map is affine, as checked in step 1. Step 3 gives the uniform bound $c=1$. Thus [lem-sc-cd-affine-limit] applies to $\\varprojlim_S X_S=\\operatorname{Spec}F(x)$ and gives $\\operatorname{cd}_{\\rm tor}(\\operatorname{Spec}F(x))\\leq1$, which is precisely the asserted field bound by [def-sc-etale-torsion-cd].",
+   "uses": [
+    "lem-sc-cd-affine-limit",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
+    "place": "## Proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-affine-scheme-qcqs",
   "thm-weil-pbc-universal-homeomorphism-invariance",
+  "def-sc-etale-torsion-cd",
+  "def-weil-universal-homeomorphism",
   "lem-sc-arbitrary-curve-cd",
   "lem-sc-cd-affine-limit"
  ],
@@ -36,9 +80,38 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomological dimension torsion of rational function field over separably closed field",
+   "results": "functionField_iff (Mathlib/NumberTheory/FunctionField); RatFunc.finrank_ratFunc_ratFunc and RatFunc.rank_ratFunc_ratFunc (Mathlib/FieldTheory/RatFunc/Basic); Field.finInsepDegree and Field.insepDegree (Mathlib/FieldTheory/SeparableClosure); no cohomological-dimension theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cd_tor, cohomological dimension, separably closed field rational function field",
+   "results": "0 hits; unknown identifier cd_tor",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological dimension|cd_tor|Etale.*cohomology in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "torsion étale cohomological dimension of F(x) for separably closed F",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +136,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sc-one-variable-field-cd",
+  "worker": "stage1",
+  "summary": "Audited the imported one-paragraph route. No new nodes were needed: the localization/inverse-limit description is elementary, while the three substantive inputs are existing nodes. Expanded the proof into four steps, made the universal-homeomorphism transfer and the affine-curve hypotheses explicit, and added the required Mathlib search record. Second reading supplied the prime-ideal and basic-open argument for universal homeomorphisms, an explicit filtered index and all curve/limit hypotheses; corrected citation quotations.",
+  "blueprint": "Realizes the entire proof paragraph of the blueprint node: localization stages, purely inseparable algebraic-closure base change, the affine-curve bound, and passage to the fraction field via lem-sc-cd-affine-limit.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic invariance of the etale topos and cohomology under a universal homeomorphism is needed for the purely inseparable algebraic-closure base change. The blueprint itself cites this tool from sk-prop-cd, and sk-prop-sf-cbc has no statement supplying it. This is a proposal for the maintainer, not an accepted top-level tool_uses record."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-fbecd3719",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-fbecd3719 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected two missing C1 citations in step 1 and cleared the incorrect unit realization of compact-support base change. All four proof steps preserve the separably closed hypothesis and arbitrary locally torsion étale coefficients. Accepted universal-homeomorphism invariance as a generic tool. Corrected JSON files and concrete checks are in fixes/ and review.md; pre-existing transitive DAG defects are documented.; 2 file(s) fixed by the reviewer"
+ }
 }
