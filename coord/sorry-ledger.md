@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **836**, closure **17**, holes in definitions **5**, definitions with undetermined data **2** (closure **0**).
+Holes now: library **833**, closure **16**, holes in definitions **4**, definitions with undetermined data **2** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -12,7 +12,6 @@ Definitions with holes (def/instance/structure field):
 - `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup::<anonymous:instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I))>` (instance, line 411)
 - `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie::AlgebraicGeometry.GeneralLinearGroup.toMatrixLieHom` (def, line 110)
 - `WeilConjectures.RingTheory.ProEtale.ClosedLift::Algebra.ClosedLift.isFiltered_index` (instance, line 142)
-- `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar::AlgebraicGeometry.Etale.isIso_derivedOpenImmersionLowerShriekToLowerStar` (instance, line 89)
 
 Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):
 
@@ -22,23 +21,23 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 | root | library | closure |
 |---|---:|---:|
 | Sheaf | 620 | 14 |
-| WeilConjectures | 216 | 3 |
+| WeilConjectures | 213 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2175 | 87 | 2088 | 5 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 2117 | 85 | 2032 | 5 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 2178 | 87 | 2091 | 5 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 2120 | 85 | 2035 | 5 | 1 |
 | 660345513 (Application of proof-dependency imports) | closure | 1979 | 14 | 1965 | 4 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3362 |
+| proved | 3365 |
 | decomposed | 48 |
-| moved | 3894 |
+| moved | 3896 |
 | pruned | 119 |
-| other | 465 |
+| other | 466 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -57,14 +56,14 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | D2 | 128 | 126 | 86 | 40 | 59/128 (46.1%) |
 | D3 | 96 | 101 | 66 | 35 | 47/96 (49.0%) |
 | D4 | 50 | 45 | 41 | 4 | 25/50 (50.0%) |
-| E1 | 142 | 157 | 102 | 55 | 78/142 (54.9%) |
+| E1 | 143 | 158 | 103 | 55 | 79/143 (55.2%) |
 | E2 | 108 | 105 | 81 | 24 | 56/108 (51.9%) |
 | E3 | 104 | 99 | 85 | 14 | 56/104 (53.8%) |
 | E4 | 37 | 37 | 26 | 11 | 19/37 (51.4%) |
 | F1 | 134 | 135 | 103 | 32 | 69/134 (51.5%) |
 | F2 | 133 | 134 | 98 | 36 | 61/133 (45.9%) |
 | F3 | 85 | 86 | 55 | 31 | 39/85 (45.9%) |
-| F4 | 49 | 43 | 36 | 7 | 25/49 (51.0%) |
+| F4 | 50 | 43 | 36 | 7 | 25/50 (50.0%) |
 | G1 | 135 | 136 | 111 | 25 | 74/135 (54.8%) |
 | G2 | 132 | 131 | 88 | 43 | 60/132 (45.5%) |
 | G3 | 97 | 100 | 66 | 34 | 45/97 (46.4%) |
@@ -72,7 +71,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
 | H2 | 108 | 106 | 88 | 18 | 64/108 (59.3%) |
 | H3 | 118 | 133 | 94 | 39 | 65/118 (55.1%) |
-| H4 | 54 | 51 | 40 | 11 | 29/54 (53.7%) |
+| H4 | 55 | 52 | 41 | 11 | 30/55 (54.5%) |
 | J1 | 122 | 129 | 75 | 54 | 53/122 (43.4%) |
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
 | J3 | 115 | 121 | 76 | 45 | 53/115 (46.1%) |
@@ -80,10 +79,10 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | K1 | 115 | 128 | 87 | 41 | 58/115 (50.4%) |
 | K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
 | K3 | 105 | 105 | 75 | 30 | 55/105 (52.4%) |
-| K4 | 58 | 43 | 34 | 9 | 24/58 (41.4%) |
+| K4 | 59 | 44 | 34 | 10 | 24/59 (40.7%) |
 | M1 | 136 | 135 | 92 | 43 | 65/136 (47.8%) |
 | M2 | 127 | 129 | 103 | 26 | 69/127 (54.3%) |
-| M3 | 103 | 104 | 71 | 33 | 51/103 (49.5%) |
+| M3 | 105 | 106 | 71 | 35 | 51/105 (48.6%) |
 | M4 | 43 | 43 | 23 | 20 | 16/43 (37.2%) |
 | N1 | 132 | 134 | 108 | 26 | 74/132 (56.1%) |
 | N2 | 127 | 116 | 78 | 38 | 57/127 (44.9%) |
@@ -146,17 +145,16 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
 | Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionHigherImage | 11 | 1 | K3 |
 | Sheaf.AlgebraicGeometry.CartesianHigherImageGermDescent | 12 | 1 | E1 |
-| Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing | 12 | 1 | E1 |
-| WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula | 22 | 1 | K4 |
+| Sheaf.AlgebraicGeometry.CartesianHigherImageGermVanishing | 12 | 1 | R1 |
 | Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionsFactorization | 23 | 1 | N3 |
 | Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise | 23 | 1 | C2 |
 | Sheaf.AlgebraicGeometry.AbelianCounitCocycleCalculation | 24 | 1 | P1 |
-| Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex | 28 | 1 | H4 |
-| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap | 30 | 1 | W4 |
+| Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex | 28 | 1 | XR0d8c117f6f62b747 |
 | Sheaf.AlgebraicGeometry.ScalarCupResolutionClassCompatibility | 31 | 1 | W4 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealization | 33 | 1 | W4 |
 | Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchange | 34 | 1 | P1 |
 | Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison | 34 | 1 | B3 |
+| Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap | 41 | 1 | W4 |
 | Sheaf.AlgebraicGeometry.AffineCoordinateComparisonCoherence | 43 | 1 | T4 |
 | Sheaf.AlgebraicGeometry.QCohOrdinaryTensorResolutionCoordinates | 50 | 1 | U3 |
 
@@ -178,12 +176,14 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.Homology.DerivedTensorTransitivity`
 - `Sheaf.Algebra.Homology.FilteredColimitDerivedTensor`
 - `Sheaf.Algebra.Homology.FilteredComplexZBDescription`
+- `Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion`
 - `Sheaf.Algebra.Homology.FunctorialHomotopies`
 - `Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator`
 - `Sheaf.Algebra.Homology.KInjectiveProducts`
 - `Sheaf.Algebra.Homology.LowerTruncationStepSES`
 - `Sheaf.Algebra.Homology.MittagLefflerLimitHomology`
 - `Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap`
+- `Sheaf.Algebra.Homology.SingleComplexAffineBaseChange`
 - `Sheaf.Algebra.Homology.SubcategoryRightResolution`
 - `Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor`
 - `Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor`
@@ -371,6 +371,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.MatchingObjectCoskeleton`
 - `Sheaf.CategoryTheory.MittagLefflerExactSequence`
 - `Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets`
+- `Sheaf.CategoryTheory.OpcyclesTorSurjection`
 - `Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral`
 - `Sheaf.CategoryTheory.ProperFaceMatchingObject`
 - `Sheaf.CategoryTheory.PushoutShortExactSequence`
