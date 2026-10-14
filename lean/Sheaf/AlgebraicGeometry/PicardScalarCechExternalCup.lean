@@ -1,14 +1,15 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group S3
+Authors: SHEAF groups S3 and V2
 -/
 module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarCechComparison
 public import Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent
-import Sheaf.Paper.CechCupPullbackCompat
-import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.PicardExternalCechCupBidegree
+import Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing
+import Sheaf.AlgebraicGeometry.ScalarExternalCupModuleComparison
 
 /-! # Scalar Cech external cup and canonical comparison
 
@@ -17,21 +18,45 @@ Source: Stacks Project, Tags 01FD, 07MB, 0FKV, and 0BED.
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
+-- Keep the derived cohomology and coefficient constructions folded during equality glue.
+attribute [local irreducible] tensorPullback tensorPullbackObj
+  RingedSpace.moduleCohomology moduleCohomologyFMap moduleCohomologyPullback
 
-/-- Core scalar Cech compatibility, with cover hypotheses omitted.
-Source: Stacks, Tags 01FD, 07MB, 0FKV and 0BED.
+/-- Equality of either input preserves a bilinear pairing. -/
+private theorem moduleCup_congr {R : Type w} [CommRing R]
+    {M N L : ModuleCat.{w} R} (cup : M →ₗ[R] N →ₗ[R] L)
+    {x x' : M} {y y' : N} (hx : x = x') (hy : y = y') :
+    cup x y = cup x' y' := by
+  rw [hx, hy]
+
+/-- Canonical comparison of the external Cech cup on open covers.
+The cover equalities are essential: without them IsModuleCechComparison does not
+fix how classes extend outside the union of the opens.
+Source: Stacks Project, Tags 01FD, 07MB, 0FKV and 0BED.
 (blueprint: lem-sc-picard-scalar-cech-external-cup-core).
-The proof is the explicit refinement, Cech-cup, and scalar restriction
-comparison argument described in the enclosing theorem. -/
+
+Proof: Form the bidegree component by the tensor summand inclusion followed by c.
+Its front/back coordinates follow from hc. Apply cyclesMap c to z; cyclesMap_i
+and the inclusion hypothesis give the bidegree pairing of the factor cycles.
+Homology naturality identifies its class with H(c)([z]). Extract the three
+ordinary module comparison witnesses from heX, heY and heP. The ordinary module
+external-pairing comparison gives the cup of the module pullback classes.
+Their witness equations replace the factor and product comparisons by eX, eY
+and eP. The scalar Ext/module external-cup comparison identifies that ordinary
+cup with externalCup of the two factor classes. Compose the equalities and
+eliminate the degree equality p+q=n. No comparison isomorphism is assumed. -/
 theorem picardScalarCech_externalCup_core
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) [F.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent]
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens)
+    (hUc : iSup U = ⊤) (hVc : iSup V = ⊤)
     (c : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
         ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ) ⟶
@@ -68,7 +93,66 @@ theorem picardScalarCech_externalCup_core
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2
             (eX i.val.1 (A.homologyπ _ a)) (eY i.val.2 (B.homologyπ _ v))) := by
-  sorry
+  classical
+  dsimp only
+  intro n i a v z hz
+  rcases i with ⟨⟨p, q⟩, hpq⟩
+  dsimp only at hpq a v hz ⊢
+  subst n
+  let A := (picardCechFunctor f U).obj F
+  let B := (picardCechFunctor g V).obj G
+  let T := HomologicalComplex.mapBifunctor A B (curriedTensor (ModuleCat.{w} k))
+    (ComplexShape.up ℕ)
+  let W := fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
+    pullback.snd f g ⁻¹ᵁ V ij.2
+  let E := externalCupCoefficients f g F G
+  let P := (picardCechFunctor (pullback.fst f g ≫ f) W).obj E
+  let h := HomologicalComplex.ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k))
+    (ComplexShape.up ℕ) p q (p + q) rfl ≫ c.f (p + q)
+  have hh : IsPicardExternalCechCupBidegree f g U V F G p q h := by
+    intro x y t
+    exact hc p q x y t
+  let t := HomologicalComplex.cyclesMap c (p + q) z
+  have ht : P.iCycles (p + q) t =
+      h ((A.iCycles p a) ⊗ₜ[k] (B.iCycles q v)) := by
+    have hi := congrArg (fun m ↦ m z) (HomologicalComplex.cyclesMap_i c (p + q))
+    change P.iCycles (p + q) t = c.f (p + q) (T.iCycles (p + q) z) at hi
+    rw [hi, hz]
+    rfl
+  have hclass : HomologicalComplex.homologyMap c (p + q) (T.homologyπ (p + q) z) =
+      P.homologyπ (p + q) t := by
+    simpa only [ModuleCat.comp_apply] using
+      ConcreteCategory.congr_hom (HomologicalComplex.homologyπ_naturality c (p + q)) z
+  obtain ⟨cX, hcX, hx⟩ := heX p
+  obtain ⟨cY, hcY, hy⟩ := heY q
+  obtain ⟨cP, hcP, htP⟩ := heP (p + q)
+  obtain ⟨cup, hcup, _⟩ := exists_unique_moduleCupProduct
+    ((tensorPullback (pullback.fst f g)).obj F)
+    ((tensorPullback (pullback.snd f g)).obj G) p q
+  have hmodule := picardModuleCech_externalPairing f g F G U V hUc hVc p q
+    h hh cX hcX cY hcY cP hcP cup hcup a v t ht
+  have hx' := hx (A.homologyπ p a)
+  have hy' := hy (B.homologyπ q v)
+  have htP' := htP (P.homologyπ (p + q) t)
+  have hxPull := congrArg
+    (fun x ↦ moduleCohomologyPullback (pullback.fst f g) F p x) hx'
+  have hyPull := congrArg
+    (fun y ↦ moduleCohomologyPullback (pullback.snd f g) G q y) hy'
+  have hpaired := moduleCup_congr (R := Γ(Limits.pullback f g, ⊤))
+    (M := (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace p).obj
+      ((tensorPullback (pullback.fst f g)).obj F))
+    (N := (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace q).obj
+      ((tensorPullback (pullback.snd f g)).obj G))
+    (L := (RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace (p + q)).obj E)
+    cup hxPull hyPull
+  have hm := hmodule.trans hpaired
+  have hscalar := htP'.symm.trans hm
+  change eP (p + q) (HomologicalComplex.homologyMap c (p + q)
+    (T.homologyπ (p + q) z)) = externalCup f g F G p q
+      (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))
+  exact (congrArg (eP (p + q)) hclass).trans (hscalar.trans
+    (scalarExternalCup_moduleComparison f g F G p q cup hcup
+      (eX p (A.homologyπ p a)) (eY q (B.homologyπ q v))).symm)
 
 /-- Canonical scalar Cech comparisons identify the natural-degree external cup.
 No scalar resolution, extension by zero, or affine comparison existence occurs here.
@@ -136,11 +220,6 @@ theorem picardScalarCech_externalCup
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2
             (eX i.val.1 (A.homologyπ _ a)) (eY i.val.2 (B.homologyπ _ v))) := by
-  classical
-  have := hUc
-  have := hVc
-  dsimp
-  intro n i a v z hz
-  exact picardScalarCech_externalCup_core f g F G U V c hc eX heX eY heY eP heP n i a v z hz
+  exact picardScalarCech_externalCup_core f g F G U V hUc hVc c hc eX heX eY heY eP heP
 
 end AlgebraicGeometry.Scheme.Modules
