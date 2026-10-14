@@ -14028,3 +14028,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:31 L: batch 20261014T001711 dependency take-out
 - 00:32 L: returned deliver/U4/Sheaf.AlgebraicGeometry.MayerVietorisImageChainSquares (reviewer RETURN: (reviewer X-92179, head 92179f469) F (brief point 7, report accuracy): In coord/reports/U4/Sheaf.AlgebraicGeometry.Mayer)
 - 00:35 L: returned deliver/R4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsD (reviewer RETURN: (reviewer X-5c60f, head 5c60f9ba7) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
+- 00:36 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.StandardSingleUnionSESPresentation (reviewer RETURN: (reviewer X-24e09, head 24e09b809) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
