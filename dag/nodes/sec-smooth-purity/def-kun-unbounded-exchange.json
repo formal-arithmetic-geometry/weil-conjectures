@@ -3,26 +3,109 @@
  "blueprint": {
   "is": "def-kun-unbounded-exchange",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sbc-def-base-change-map"
+  ]
  },
  "kind": "definition",
  "title": "Unbounded derived exchange morphism",
- "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a\ncartesian square, let\n$\\Lambda$ be a commutative ring, and let\n$K\\in D(X_{\\Et},\\Lambda)$. The derived adjunction\n$f'^{-1}\\dashv Rf'_*$ extends to the unbounded derived categories by\n[prop-weil-pbc-kinjective-resolutions-exist], and the\n*exchange morphism* of $K$ is the mate\n\n$$\n\\Ex_{\\square,K}:g^{-1}Rf_*K\\longrightarrow Rf'_*g'^{-1}K\n$$\n\nof the composite\n\n$$\nf'^{-1}g^{-1}Rf_*K\\xrightarrow{\\theta_\\square}\ng'^{-1}f^{-1}Rf_*K\\xrightarrow{g'^{-1}\\varepsilon_f}g'^{-1}K,\n$$\n\nexactly as in [def-weil-pbc-derived-exchange].",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$ and $fg'=gf'$. Fix a commutative ring $\\Lambda$ and use the module derived categories $D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. For each edge $u:U\\to V$, the inverse image $u^{-1}$ of constant-coefficient module sheaves is exact and left adjoint to $u_*$ [prop-weil-pbc-inverse-image-modules-exact]. On the unbounded derived categories let $u^{-1}$ be its termwise derived functor [def-weil-pbc-derived-inverse-image], [lem-weil-pbc-exact-functor-derived-functor], and let $Ru_*K=Q(u_*I)$ for a K-injective resolution $K\\xrightarrow{\\sim}QI$ [def-weil-pbc-kinjective-resolutions], [prop-weil-pbc-kinjective-resolutions-exist], [lem-weil-pbc-kinjective-total-derived]. These give the canonical derived adjunction $u^{-1}\\dashv Ru_*$ [lem-pc-derived-adjoint-functors], with unit $\\eta_u$ and counit $\\varepsilon_u$.\n\nLet $\\theta^D_{\\square,\\Lambda}:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ be the square isomorphism on these module derived categories: apply the canonical sheaf inverse-image composition isomorphism $\\theta_\\square$ termwise, using the module structures of [prop-weil-pbc-inverse-image-modules-exact], and descend along localization $Q$ [lem-weil-pbc-localization-universal-property], clause (2), with the comparison isomorphisms of [lem-weil-pbc-exact-functor-derived-functor]. Naturality makes the termwise components commute with differentials; exactness makes the termwise composites preserve quasi-isomorphisms. For $\\Lambda=\\mathbf Z$ this is the unbounded square isomorphism of [def-weil-pbc-derived-square-iso].\n\nFor $K\\in D(X_{\\Et},\\Lambda)$ the *unbounded derived exchange morphism* is the mate [def-weil-pbc-adjunction-mate]\n$$\n\\Ex_{\\square,K}:g^{-1}Rf_*K\\longrightarrow Rf'_*g'^{-1}K\n$$\nof the composite\n$$\nf'^{-1}g^{-1}Rf_*K\\xrightarrow{\\theta^D_{\\square,\\Lambda,Rf_*K}}g'^{-1}f^{-1}Rf_*K\\xrightarrow{g'^{-1}\\varepsilon_{f,K}}g'^{-1}K.\n$$\nEquivalently it is the composite\n$$\ng^{-1}Rf_*K\\xrightarrow{\\eta_{f',g^{-1}Rf_*K}}Rf'_*f'^{-1}g^{-1}Rf_*K\\xrightarrow{Rf'_*\\theta^D_{\\square,\\Lambda,Rf_*K}}Rf'_*g'^{-1}f^{-1}Rf_*K\\xrightarrow{Rf'_*g'^{-1}\\varepsilon_{f,K}}Rf'_*g'^{-1}K.\n$$\nThis uses the same mate formula as [def-weil-pbc-derived-exchange], now on unbounded module derived categories. No isomorphism assertion is included.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-unbounded-exchange.md",
   "place": "node def-kun-unbounded-exchange, order 1664"
  },
  "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-pbc-kinjective-resolutions",
   "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-cartesian-square"
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-pbc-derived-square-iso",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-derived-exchange"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived exchange morphism mate of pullback counit composite",
+   "results": "8 hits including CategoryTheory.Adjunction.derivedε_fac_app and CategoryTheory.mateEquiv_counit_symm; no declaration of the scheme-theoretic exchange morphism.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv derivedBaseChangeMap",
+   "results": "0 hits; Unknown identifier derivedBaseChangeMap.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMap|unbounded.*exchange",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived exchange morphism for a cartesian square of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change natural transformation between derived direct image and exact inverse image of etale module sheaves",
+   "results": "8 hits concerning Kaehler differentials and module differential presheaves; no derived sheaf exchange.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv and its unit/counit/pasting identities; generic mate only.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derivedAdjunction",
+   "results": "5 hits in Mathlib/CategoryTheory/Adjunction/Mates.lean:53,84,123,124,128; generic mate only.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformation as mate of natural isomorphism between left adjoints",
+   "results": "8 hits: mateEquiv, mateEquiv_apply, mateEquiv_counit and abstract adjoint-composition identities; generic mate infrastructure, not the derived etale module exchange definition.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.TwoSquare",
+   "results": "12 hits headed by mateEquiv and its unit/counit identities; these require the input adjunctions and square, and do not construct the derived etale module functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|BeckChevalley",
+   "results": "25 displayed hits in CategoryTheory, including GuitartExact/KanExtension.lean:169 lanBaseChange and morphism-property stability results; no exact declaration of the derived etale module exchange.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -48,5 +131,22 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-kun-unbounded-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the definition to specify the unbounded module functors, total derived direct images, canonical adjunction, descended square comparison and explicit unit-square-counit mate. Existing nodes supply every ingredient; no new nodes. The imported attribution of the adjunction to resolution existence alone was incomplete. The generic source definition is a candidate, not an exact attachment without checking its coefficient instances and dependencies.",
+  "blueprint": [
+   "node statement: the exchange morphism is the mate of the displayed composite, using the three listed dependencies"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-d793084a7",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-d793084a7 (reviewer sub-agent of L); spot-checked: Read the complete definition, all 13 cited statements, sources and unit/chapter route. Verified unbounded module derivability, adjunction, square comparison and mate orientation; checked master coefficient distinctions and edge cases. No new nodes or repairs. review.md records two pre-existing downstream DAG cycles also reachable through the seeded dependencies; this delivery introduces neither."
+ }
 }
