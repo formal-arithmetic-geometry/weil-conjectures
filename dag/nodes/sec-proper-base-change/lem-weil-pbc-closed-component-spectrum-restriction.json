@@ -1,0 +1,218 @@
+{
+ "id": "lem-weil-pbc-closed-component-spectrum-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Profinite change of components of a w-local affine ring. Closed-component restriction used to realize the graph inside the locally constant function-ring spectrum.",
+   "via": [
+    "lem-weil-pbc-profinite-component-ring-pullback",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Realizing a closed union of affine connected components by a quotient ring",
+ "statement": "Let $A$ be a commutative ring and $E\\subseteq\\operatorname{Spec}A$ a Zariski-closed subset which is a union of connected components (maximal connected subsets) of the underlying space [def-weil-affine-spectrum]. There exist a commutative ring $B$ and a surjective ring homomorphism $v:A\\to B$ for which $\\operatorname{Spec}(v)$ is a homeomorphism from $\\operatorname{Spec}B$ onto $E$ with its subspace topology. For every prime $\\mathfrak q\\subset B$, writing $\\mathfrak p=v^{-1}(\\mathfrak q)$, the induced map $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ is an isomorphism [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097C, lemma-construct, applied to a closed union of components; Topology Tag 04PL, lemma-closed-union-connected-components, identifies it as an intersection of clopens; Tag 096T, lemma-ind-zariski-implies, gives the induced local-ring isomorphisms"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed union of connected components of a ring spectrum is the spectrum of a quotient obtained by inverting idempotents and preserving local rings",
+   "results": "8 hits: PrimeSpectrum.zeroLocus_eq_basicOpen_of_isIdempotentElem, PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem, PrimeSpectrum.isClopen_iff_mul_add, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.isClopen_iff_zeroLocus",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give individual clopen/idempotent or localization facts, not realization of an arbitrary closed union of components with the stated local-ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize a ring at all idempotents equal to one on a closed component subset to realize that subset as a spectrum",
+   "results": "8 hits: PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem, PrimeSpectrum.zeroLocus_eq_basicOpen_of_isIdempotentElem, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff, IsLocalization.away_of_isIdempotentElem",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give individual clopen/idempotent or localization facts, not realization of an arbitrary closed union of components with the stated local-ring maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, IsLocalization",
+   "results": "7 hits: IsLocalization.primeSpectrumOrderIso, IsLocalization.coe_primeSpectrumOrderIso_apply_coe_asIdeal, IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal, PrimeSpectrum.localization_comap_injective, PrimeSpectrum.localization_comap_isEmbedding, PrimeSpectrum.localization_comap_isInducing, PrimeSpectrum.localization_comap_range",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give individual clopen/idempotent or localization facts, not realization of an arbitrary closed union of components with the stated local-ring maps"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*(quotient|localization)|localization.*idempotent|IsClosedEmbedding.*comap",
+   "results": "13 hits: Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/LocalIso.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits give individual clopen/idempotent or localization facts, not realization of an arbitrary closed union of components with the stated local-ring maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed union of connected components of Spec A is realized by a surjective localization at idempotents",
+   "results": "0 hits:  | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a commutative ring realizing any Zariski closed union of connected components with isomorphic localizations at primes",
+   "results": "8 hits: Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, PrimeSpectrum.toPiLocalization_bijective, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, Algebra.QuasiFiniteAt, PrimeSpectrum.piLocalizationToMaximal_bijective, PrimeSpectrum.discreteTopology_iff_toPiLocalization_bijective, IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes, PrimeSpectrum.irreducibleSpace",
+   "date": "2026-10-14",
+   "verdict": "no full match; returned declarations concern discrete spectra or individual idempotent localizations, not arbitrary closed component unions"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsIdempotentElem",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no full match; returned declarations concern discrete spectra or individual idempotent localizations, not arbitrary closed component unions"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponents.*(quotient|[Rr]estrict)|[Rr]estrict.*connectedComponents|localization.*[Ii]dempotent",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/Topology/Separation/Regular.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean",
+   "date": "2026-10-14",
+   "verdict": "no full match; returned declarations concern discrete spectra or individual idempotent localizations, not arbitrary closed component unions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed saturated subset of the prime spectrum is the spectrum of a quotient ring and the quotient induces isomorphisms at every prime localization",
+   "results": "8 hits: Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, PrimeSpectrum.toPiLocalization_bijective, PrimeSpectrum.instSpectralSpace, Ideal.primeSpectrumQuotientOrderIsoZeroLocus, PrimeSpectrum.discreteTopology_iff_toPiLocalization_bijective, PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton, MaximalSpectrum.toPrimeSpectrum_range, IsLocalization.primeSpectrumOrderIso",
+   "date": "2026-10-14",
+   "verdict": "no match: individual quotient spectra, idempotent localizations and their spectrum ranges are ingredients, not a one-line specialization realizing an arbitrary closed component union with induced local-ring isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a commutative ring at idempotents realizes every closed union of connected components of its spectrum and preserves stalks",
+   "results": "8 hits: PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.zeroLocus_eq_basicOpen_of_isIdempotentElem, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen",
+   "date": "2026-10-14",
+   "verdict": "no match: individual quotient spectra, idempotent localizations and their spectrum ranges are ingredients, not a one-line specialization realizing an arbitrary closed component union with induced local-ring isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_and_iUnion_connectedComponent|algebraMap_surjective_of_isIdempotentElem|localization_comap_range",
+   "results": "6 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: individual quotient spectra, idempotent localizations and their spectrum ranges are ingredients, not a one-line specialization realizing an arbitrary closed component union with induced local-ring isomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed union of connected components of a prime spectrum is obtained by a quotient ring preserving all local rings",
+   "results": "0 hits:  | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_idempotent_basicOpen_eq_of_isClopen|isClopen_iff|primeSpectrumQuotientOrderIsoZeroLocus",
+   "results": "7 hits: Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/RingHom.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: individual quotient spectra, idempotent localizations and their spectrum ranges are ingredients, not a one-line specialization realizing an arbitrary closed component union with induced local-ring isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*connectedComponent|connectedComponent.*closed|IsLocalization.*surjective",
+   "results": "23 hits: Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/Jacobson/Ring.lean, Mathlib/RingTheory/Localization/Algebra.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no full match: surjectivity of one idempotent localization and general stalk criteria do not realize an arbitrary closed component union with all induced local-ring isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure surjective ring homomorphism realizing a closed saturated subset of the connected component quotient of a prime spectrum",
+   "results": "8 hits: IsLocalization.surjective_quotientMap_of_maximal_of_localization, PrimeSpectrum.piLocalizationToMaximal_surjective, PrimeSpectrum.toPiLocalization_surjective_of_discreteTopology, PrimeSpectrum.maximalSpectrumToPiLocalization_surjective_of_discreteTopology, RingHom.surjectiveOnStalks_iff_forall_ideal, RingHom.surjectiveOnStalks_iff_forall_maximal', RingHom.surjective_localRingHom_iff, PrimeSpectrum.isMaximal_of_toPiLocalization_surjective",
+   "date": "2026-10-14",
+   "verdict": "no full match: surjectivity of one idempotent localization and general stalk criteria do not realize an arbitrary closed component union with all induced local-ring isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIdempotentElem\", \"surjective\"",
+   "results": "1 hits: IsLocalization.Away.algebraMap_surjective_of_isIdempotentElem",
+   "date": "2026-10-14",
+   "verdict": "no full match: surjectivity of one idempotent localization and general stalk criteria do not realize an arbitrary closed component union with all induced local-ring isomorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-profinite-component-ring-pullback",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "WContractification.Restriction.algebraMap_surjective",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+     "lines": [
+      148,
+      164
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "WContractification.Restriction.range_algebraMap_specComap",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+     "lines": [
+      192,
+      242
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "WContractification.Restriction.isClosedEmbedding_algebraMap_specComap",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+     "lines": [
+      244,
+      248
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "WContractification.Restriction.indZariski",
+     "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+     "lines": [
+      143,
+      146
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Algebra.IndZariski.bijectiveOnStalks_algebraMap",
+     "module": "WeilConjectures.RingTheory.ProEtale.IndZariski",
+     "lines": [
+      581,
+      588
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "note": "Closed declaration candidates checked against pinned 7d675a26 sorry map (s=false, ts=false). Apply Restriction to the closed image of E in the component quotient; combine its surjectivity, spectrum range and embedding with indZariski and the induced-stalk theorem. This records the report attachments, leaving audit-state assignment to the maintainer."
+  }
+ }
+}

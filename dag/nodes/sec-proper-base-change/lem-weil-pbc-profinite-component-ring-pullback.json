@@ -26,26 +26,125 @@
  "stmt_deps": [
   "def-weil-pbc-w-local",
   "def-weil-pbc-ind-etale-algebra",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}C$ and $X^c$ equal to its closed point set. By [lem-weil-pbc-affine-scheme-qcqs], the affine scheme $X$ is quasi-compact and quasi-separated, so [lem-weil-pbc-qcqs-scheme-spectral] makes $X$ spectral. By [lem-weil-pbc-quasicompact-components-clopen-intersection], different components are separated by a clopen subset of $X$. A clopen subset is a union of components, since a connected component cannot meet both sides of a clopen separation; its image in the quotient $P$ is therefore clopen by the definition of the quotient topology. These images separate different points of $P$, proving Hausdorffness and total disconnectedness. Every cover of $P$ pulls back to a cover of the quasi-compact $X$, proving compactness. By the w-local hypothesis [def-weil-pbc-w-local], $X^c\\to P$ is bijective. Its domain is closed in the quasi-compact $X$, hence quasi-compact by restricting an open cover and adjoining $X\\setminus X^c$; quasi-compactness of $X$ is clause (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. It is continuous, so a closed subset of $X^c$ has compact, hence closed, image in the Hausdorff $P$. Thus this continuous bijection is a homeomorphism. Denote its inverse by $s:P\\to X^c$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "def-weil-pbc-w-local",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0968 (lemma-spectral-split), 096A (definition-w-local), paragraph following the definition; Topology Tags 005F and 0906"
+   }
+  },
+  {
+   "text": "Form the actual ring $A=\\operatorname{LC}(T,C)$ of locally constant functions with pointwise operations and coefficient map given by constant functions. Use [lem-weil-pbc-locally-constant-prime-spectrum] to identify $\\operatorname{Spec}A$ with $T\\times X$ by $(t,\\mathfrak p)\\mapsto\\{h:h(t)\\in\\mathfrak p\\}$. Under this identification the coefficient spectrum map is the second projection, because the inverse image of this prime under the constant-function map is exactly $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D, lemma-construct-profinite, product construction; equivalent locally constant-function realization in WeilConjectures/RingTheory/ProEtale/WContractible.lean, section PullbackProfinite"
+   }
+  },
+  {
+   "text": "Inside $T\\times X$ take $E=\\{(t,x):u(t)=\\pi(x)\\}$. It is closed: it is the inverse image of the closed diagonal of the Hausdorff $P$ under the continuous map $(t,x)\\mapsto(u(t),\\pi(x))$. It is a union of whole connected components. Indeed the first projection of any connected subset is a singleton in the totally disconnected $T$, and its second projection lies in a single component of $X$; therefore the defining equality is constant on each component of $T\\times X$. Apply [lem-weil-pbc-closed-component-spectrum-restriction] to this closed component union in $\\operatorname{Spec}A$. Obtain a surjection $A\\to D$ identifying $\\operatorname{Spec}D$ homeomorphically with $E$ and identifying all local rings. Give $D$ its $C$-algebra structure through constant functions $C\\to A\\to D$. The preceding computation of the coefficient spectrum map shows this homeomorphism is over $X$, so it realizes the required topological pullback.",
+   "uses": [
+    "lem-weil-pbc-closed-component-spectrum-restriction",
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct; Tag 097D, lemma-construct-profinite, restriction construction; Tag 096T, lemma-ind-zariski-implies"
+   }
+  },
+  {
+   "text": "The projection $E\\to T$ is surjective because every component of $X$ contains its closed point $s(u(t))$. Its fibre over $t$ is homeomorphic to the nonempty connected component $\\pi^{-1}(u(t))$ of $X$. Conversely every connected subset of $E$ maps to a singleton in $T$. Thus these fibres are exactly the connected components of $E$. The quotient topology gives a continuous bijection $\\pi_0(\\operatorname{Spec}D)\\to T$. Its domain is quasi-compact: an open cover pulls back along the surjective quotient map to an open cover of the affine spectrum; clause (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] gives a finite subcover, and surjectivity gives a finite subcover downstairs. For a closed subset $F$ of this quotient, an open cover of $F$ together with its open complement covers the quotient, so $F$ is quasi-compact. Its continuous image in the Hausdorff $T$ is therefore compact and closed. The bijection is consequently closed, hence its inverse is continuous and it is a homeomorphism. The equality $u(t)=\\pi(x)$ proves compatibility over $P$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096C, lemma-silly, component computation; Tag 097D, end of lemma-construct-profinite"
+   }
+  },
+  {
+   "text": "Because $E$ is closed in $T\\times X$, a singleton in $E$ is closed if and only if it is closed in $T\\times X$. Since $T$ is Hausdorff, the latter holds for $(t,x)$ exactly when $x$ is closed in $X$: one direction uses the product of the two closed singletons, the other restricts to the closed slice $\\{t\\}\\times X\\cong X$. Hence the closed point set of $E$ is exactly the inverse image of $X^c$. It is closed, and is the graph $\\{(t,s(u(t))):t\\in T\\}$, homeomorphic to $T$ with inverse $t\\mapsto(t,s(u(t)))$. Each connected component computed in step 4 contains exactly this one closed point. These are precisely the two conditions in [def-weil-pbc-w-local], so $\\operatorname{Spec}D$ is w-local.",
+   "uses": [
+    "def-weil-pbc-w-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096C, lemma-silly, second assertion; Tag 096A, definition-w-local"
+   }
+  },
+  {
+   "text": "For $q\\in\\operatorname{Spec}D$ corresponding to $(t,\\mathfrak p)\\in E$, its inverse image in $A$ is $Q=\\{h:h(t)\\in\\mathfrak p\\}$, and its inverse image in $C$ is $\\mathfrak p$. Evaluation at $t$ induces $A_Q\\to C_{\\mathfrak p}$, since a denominator outside $Q$ evaluates outside $\\mathfrak p$; constant functions induce the reverse map. For any $h\\in A$, the level set $N=\\{z:h(z)=h(t)\\}$ is clopen and contains $t$. Its characteristic function $e_N\\in A$ is idempotent, lies outside $Q$, and satisfies $e_Nh=e_N\\operatorname{const}(h(t))$. In $A_Q$ it is an invertible idempotent, hence equals $1$, giving $h=\\operatorname{const}(h(t))$. Applying this also to denominators proves the two maps are inverse on every fraction. Now compose $C_{\\mathfrak p}\\cong A_Q$ with $A_Q\\cong D_q$ from [lem-weil-pbc-closed-component-spectrum-restriction]. The composite sends $c/a$ to its image in $D$ divided by the image of $a$, so is exactly the induced local-ring map of $C\\to D$, rather than merely an abstract isomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-closed-component-spectrum-restriction",
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 096T, lemma-ind-zariski-implies; elementary evaluation calculation for the locally constant-function realization of Tag 097D"
+   }
+  },
+  {
+   "text": "The map $C\\to D$ identifies all local rings by step 6 and has w-local target by step 5. Apply [lem-weil-pbc-local-rings-ind-zariski] with $A=C$, $B=D$. It gives precisely a filtered colimit presentation by finite products of principal localizations of $C$, which is the stronger ind-Zariski meaning in [def-weil-pbc-ind-etale-algebra]. In that definition such a presentation is an ind-etale presentation as well, giving the ind-etale assertion. This also explains why merely citing the weaker Stacks definition of ind-Zariski would not have sufficed.",
+   "uses": [
+    "lem-weil-pbc-local-rings-ind-zariski",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-local-rings-ind-zariski.md",
+    "place": "Proof, all three paragraphs, the stronger w-local-target converse applied through its existing DAG statement; related Stacks Tag 0A0D, remark-slightly-stronger. Tag 097G introduces an auxiliary extension and is not the theorem applied in this step."
+   }
+  },
+  {
+   "text": "If $u$ is surjective and $x\\in X$, choose $t\\in T$ with $u(t)=\\pi(x)$. Then $(t,x)\\in E$, and its corresponding point of $\\operatorname{Spec}D$ maps to $x$. This proves surjectivity of the coefficient spectrum map, including the vacuous empty-spectrum case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D, lemma-construct-profinite, cartesian square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-w-local",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-component-spectrum-restriction",
+  "lem-weil-pbc-local-rings-ind-zariski",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 097D and 097C, replacing the finite-stage presentation by the equivalent locally constant-function graph realization read in slopmaster2 WContractible.lean; closed-point and local-ring details expanded"
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Given a w local ring C and a profinite space T mapping to connected components of Spec C there is an ind Zariski algebra D realizing the topological pullback and preserving local rings and closed points",
-   "results": "8 hits: AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.specZIsTerminal, AlgebraicGeometry.isField_of_universallyClosed",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Realize a profinite change of connected components of a prime spectrum by an ind Zariski ring map",
-   "results": "8 hits: PrimeSpectrum.exists_comap_evalRingHom_eq, PrimeSpectrum.toPiLocalization_bijective, AlgebraicGeometry.pointsPi_surjective, PrimeSpectrum.sigmaToPi, MaximalSpectrum.toPrimeSpectrum_continuous, PrimeSpectrum.toPiLocalization_surjective_of_discreteTopology, PrimeSpectrum.instSpectralSpace, AlgebraicGeometry.exists_map_eq_top",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
   {
    "tool": "loogle",
    "query": "\"IndZariski\"",
@@ -54,41 +153,64 @@
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "PullbackProfinite|IndZariski|w.local",
-   "results": "25 hits: Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Homotopy/LocallyContractible.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "tool": "leanfinder",
+   "query": "An ind Zariski algebra realizes a profinite pullback of connected components of a w local ring",
+   "results": "8 hits: AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.exists_map_eq_top, PrimeSpectrum.toPiLocalization_surjective_of_discreteTopology, PrimeSpectrum.toPiLocalization_bijective, PrimeSpectrum.discreteTopology_iff_toPiLocalization_surjective, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, PrimeSpectrum.discreteTopology_iff_toPiLocalization_bijective",
    "date": "2026-10-14",
-   "verdict": "no match"
+   "verdict": "no match for the complete profinite component pullback statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndZariski\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete profinite component pullback statement"
+  },
+  {
+   "tool": "grep",
+   "query": "IndZariski|PullbackProfinite|WLocal",
+   "results": "4 hits: Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/Subsingleton.lean, Mathlib/Lean/Meta/CongrTheorems.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete profinite component pullback statement"
   },
   {
    "tool": "leansearch",
-   "query": "Ind Zariski ring realizes profinite pullback of spectrum connected components",
+   "query": "Profinite pullback of components of a w local ring spectrum preserving local rings",
    "results": "0 hits:  | service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
   },
   {
-   "tool": "grep",
-   "query": "IndZariski|WLocal|WContractible|PullbackProfinite",
-   "results": "4 hits: Mathlib/Lean/Meta/CongrTheorems.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/Subsingleton.lean",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
    "tool": "leanfinder",
-   "query": "A Stone space over the connected component space of a ring spectrum is realized by an algebra with isomorphic stalks",
-   "results": "8 hits: AlgebraicGeometry.Spec.locallyRingedSpaceObj, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.LocallyRingedSpace.toΓSpecFun, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, AlgebraicGeometry.Scheme.toSpecΓ_apply, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.Scheme.toSpecΓ_base, AlgebraicGeometry.Spec_stalkClosedPointIso",
+   "query": "A continuous map of profinite spaces into connected components of a w local prime spectrum is realized by an ind Zariski algebra preserving local rings and closed points",
+   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.LocallyRingedSpace.toΓSpecFun, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec, AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply, AlgebraicGeometry.Scheme.toSpecΓ_apply",
    "date": "2026-10-14",
-   "verdict": "no match"
+   "verdict": "no match for the full profinite-component pullback statement; hits concern morphisms out of local spectra and families of local rings"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-wcontractible-ring-extension",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-profinite-component-ring-pullback",
+  "worker": "stage1",
+  "summary": "Preserved every clause. Constructed the actual locally constant-function algebra and restricted its spectrum to the graph, proved the component and closed-point identifications explicitly, computed evaluation localizations on fractions, and applied the existing w-local local-ring converse to obtain the stronger ind-Zariski convention. Reused existing component-intersection and locally constant-spectrum nodes; one new general closed-component restriction lemma remains statement-only. Return repair: independently read the required instructions, all cited statements, Stacks source passages and exact master target/exchange route; added the existing affine-qcqs citation for the spectrality hypothesis, corrected report evidence, and reconfirmed full creation metadata on the new sandbox node.",
+  "blueprint": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Profinite change of components of a w-local affine ring.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-9a2597605",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9a2597605 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all eight steps, cited statements, Stacks sources, edge cases, and exact master coefficients/exchange. Mathematics accepted. Corrected creation metadata, recorded five verified declaration candidates, and removed six unverified historical search entries. Statements and proofs unchanged; review.md and corrected JSON files written.; 2 file(s) fixed by the reviewer"
+ }
 }
