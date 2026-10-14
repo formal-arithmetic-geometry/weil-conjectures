@@ -3,35 +3,99 @@
  "blueprint": {
   "is": "lem-kun-tensor-unit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Tensor unit",
- "statement": "For a commutative ring $\\Lambda$ and\n$E\\in D(T_{\\Et},\\Lambda)$, both canonical unit constraints\n$E\\kunotimes{\\Lambda}\\underline{\\Lambda}\\to E$ and\n$\\underline{\\Lambda}\\kunotimes{\\Lambda}E\\to E$ are isomorphisms.",
+ "statement": "For a scheme $T$, a commutative ring $\\Lambda$, and $E\\in D(T_{\\Et},\\Lambda)$, both canonical unit constraints $E\\kunotimes{\\Lambda}\\underline{\\Lambda}\\to E$ and $\\underline{\\Lambda}\\kunotimes{\\Lambda}E\\to E$ are isomorphisms.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tensor-unit.md",
   "place": "node lem-kun-tensor-unit, order 1711"
  },
  "stmt_deps": [
   "def-kun-constant-sheaf",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-etale-sheaves",
+  "def-kun-derived-tensor"
  ],
  "proof": [
   {
-   "text": "The constant sheaf $\\underline{\\Lambda}$ is a flat\n$\\Lambda$-module sheaf, so the (underived) tensor product computes the\nderived one; $E\\otimes_\\Lambda\\underline{\\Lambda}=E$ by the unit\nconstraint of the sheaf category, which is the assertion.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $\\mathcal O=\\underline{\\Lambda}$ using [def-kun-constant-sheaf]. By [def-pur-sheaf-tensor-product], for any $\\mathcal O$-module sheaf $F$ the sectionwise maps $x\\otimes a\\mapsto ax$ and $a\\otimes x\\mapsto ax$ have inverses $x\\mapsto x\\otimes1$ and $x\\mapsto1\\otimes x$. They commute with restriction and hence induce inverse sheaf maps after sheafification. For any complex $C$, tensor with $\\mathcal O[0]$ has only the summand $C^n\\otimes\\mathcal O$ (respectively $\\mathcal O\\otimes C^n$) in degree $n$. These maps commute with the differential since $d(ax)=a d(x)$; the total-tensor sign is $1$ in the second order because the first factor has degree zero. Thus both total tensor complexes are canonically isomorphic to $C$.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, displayed sectionwise tensor and sheafification definitions; elementary unit-map and chain-map calculation expanding the item blueprint Proof paragraph."
+   }
+  },
+  {
+   "text": "Choose $C$ representing $E$ and a K-flat quasi-isomorphism $P\\to C$ as specified by [def-kun-derived-tensor]. The right derived tensor is represented by $P\\otimes\\mathcal O[0]$. Its right unit map is the degreewise isomorphism of step 1 followed by $P\\to C$. Localization inverts this quasi-isomorphism, so the right unit constraint is invertible.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-derived-tensor.md",
+    "place": "K-flat definition and displayed K-flat-model construction; elementary calculation expanding lem-kun-tensor-unit, Proof paragraph."
+   }
+  },
+  {
+   "text": "Step 1 applied to an acyclic complex $A$ gives $\\mathcal O[0]\\otimes A\\cong A$, so $\\mathcal O[0]$ is K-flat by [def-kun-derived-tensor]. For the left derived tensor choose its identity K-flat resolution; it is represented by $\\mathcal O[0]\\otimes C$. Its left unit map is precisely the degreewise isomorphism in step 1, hence is invertible after localization. This establishes the left constraint for arbitrary, including unbounded, $E$.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-derived-tensor.md",
+    "place": "K-flat definition and displayed K-flat-model construction; elementary calculation expanding lem-kun-tensor-unit, Proof paragraph."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-kun-derived-tensor"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-tensor-unit.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|derivedTensor|tensorDerived|leftUnitor|rightUnitor",
+   "results": "8 hits in Mathlib/Algebra/Homology: Monoidal.lean leftUnitor′ at 182 and leftUnitor′_inv at 189; LeftResolution/Transport.lean categorical unitors. Read Monoidal.lean 1-85 and 176-280: these are ordinary homological-complex unitors, not derived etale tensor constraints. No KFlat, derivedTensor or tensorDerived hit.",
+   "date": "2026-10-15",
+   "verdict": "no exact match; underived complex infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits; no query error",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of sheaves of modules with the constant coefficient ring sheaf is canonically isomorphic to the original complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of sheaves of modules with the constant coefficient ring sheaf is canonically isomorphic to the original complex",
+   "results": "8 hits: CategoryTheory.sheafToPresheaf_μ, CategoryTheory.sheafToPresheaf_δ, LightCondensed.instMonoidalLightCondSetLightCondModFree, SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.monoidalCategoryStruct, CategoryTheory.sheafToPresheaf_ε, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitToPushforwardObjUnit_val_app_apply. Cartesian sheaf coherence, ordinary module presheaves and light condensed modules; no derived etale tensor-unit statement.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -58,5 +122,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-tensor-unit",
+  "worker": "stage1",
+  "summary": "Removed the redundant and ill-typed comparison node. Expanded the proof into sectionwise module unit maps, their chain compatibility, and direct K-flat computations of both canonical constraints. Maintainer reader supplied actual three-kind search records (LeanSearch unavailable) and per-step source locations; mathematical statement and argument unchanged.",
+  "blueprint": "Steps 1-3 realize the sole proof paragraph: ordinary unit maps, right K-flat computation, and K-flatness of the degree-zero unit and left computation."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-67f999a25",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-67f999a25 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources; all three unit-constraint proof steps are valid, including unbounded complexes and zero-ring/empty-scheme cases. No new nodes, duplicates, or cycles remain. Repaired Mathlib search records and per-step source locations in the corrected item JSON. Exact master target morphisms and coefficient categories checked; no target weakened. Concrete checks recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
