@@ -26,9 +26,113 @@
  "stmt_deps": [
   "def-weil-pbc-strict-w-cover"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a set $K$ of cardinality $\\kappa$. By [lem-weil-pbc-finite-list-cardinality], finite lists in $K$, and any fixed finite iteration of the list construction, have cardinality at most $\\kappa$. We will encode finite data by such nested lists: elements of a set of size at most $\\kappa$ are injected into $K$, natural numbers are encoded by lengths of lists of a fixed element of $K$, and a tuple or a tagged expression is encoded as a list of its fields. Subsets and images of these code sets have size at most $\\kappa$ (choose one preimage for each element of an image). In particular, a family with at most $\\kappa$ indices and at most $\\kappa$ elements in each member has a disjoint union of size at most $\\kappa$: encode an index and an element by a two-field list.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0976 (remark-size-w), 097S (remark-size-T); their reference to Sets Tag 000D"
+   }
+  },
+  {
+   "text": "For any ring $R$ with $|R|\\leq\\kappa$, constructible subsets in [def-weil-pbc-w-local] are finite Boolean expressions in $D(f)$ and $V(f)$, $f\\in R$. Encode each expression by its finite syntax and coefficients in $R$, using step 1. There are at most $\\kappa$ such subsets, hence at most $\\kappa$ finite partitions with chosen denominators $(f_E)$ in [def-weil-pbc-w-localization]. No counting of all subsets of $\\operatorname{Spec}R$ is used. These indices form a set and are directed by the common-refinement rule in the definition.",
+   "uses": [
+    "def-weil-pbc-w-local",
+    "def-weil-pbc-w-localization",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0976, remark-size-w; adaptation to the finite-constructible-partition definition"
+   }
+  },
+  {
+   "text": "At an index $(\\mathcal P,(f_E))$, every element of $\\prod_{E\\in\\mathcal P}R_{f_E}$ is a finite tuple of fractions $a_E/f_E^{n_E}$, so its elements are images of finite codes in $R$ and $\\mathbf N$ and have size at most $\\kappa$ by step 1. Apply [lem-pc-filtered-colimit-commrings-elementwise](1) to the small directed ring diagram of [def-weil-pbc-w-localization]: every element of $R^w$ is represented in one stage. The index-element codes of steps 1 and 2 therefore surject onto $R^w$, giving $|R^w|\\leq\\kappa$. This argument is valid for every $R$ of the stated size, and in particular gives $|W|=|A^w|\\leq\\kappa$.",
+   "uses": [
+    "def-weil-pbc-w-localization",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0976, remark-size-w"
+   }
+  },
+  {
+   "text": "For a ring $R$ of size at most $\\kappa$, by [def-weil-pbc-finitely-presented-algebra], a finitely presented $R$-algebra means an algebra isomorphic to $R[x_1,\\ldots,x_n]/(g_1,\\ldots,g_m)$ for finite $n,m$ and polynomials $g_j$. A polynomial is a finite sum of monomials, each given by a coefficient in $R$ and a finite list of natural-number exponents. Thus the presentations and their polynomial elements admit finite nested-list codes as in step 1. There are at most $\\kappa$ isomorphism classes of finitely presented $R$-algebras, and each such algebra has at most $\\kappa$ elements. Restricting to the faithfully flat etale algebras selected in [def-weil-pbc-etale-contraction] only decreases the number of classes. One representative per isomorphism class is essential here; arbitrary isomorphic copies are not counted.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-etale-contraction",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097S, remark-size-T; section-construction-ind-etale, finite polynomial presentations"
+   }
+  },
+  {
+   "text": "Consider one successor stage of [def-weil-pbc-etale-contraction] over $R$ of size at most $\\kappa$. Its index set consists of finite subsets of the representative set from step 4, hence has size at most $\\kappa$ by step 1. A finite tensor product of the representatives has the polynomial presentation obtained by concatenating their finite variable lists and imposing their respective relation lists in that polynomial ring: maps from this quotient to a commutative $R$-algebra are exactly families of maps from the factors. It therefore has size at most $\\kappa$ by step 4, including the empty tensor product $R$. By [lem-pc-filtered-colimit-commrings-elementwise](1), every element of the filtered colimit of these finite tensor products is represented at one finite subset. The index-element encoding of step 1 bounds this successor stage by $\\kappa$.",
+   "uses": [
+    "def-weil-pbc-etale-contraction",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097S, remark-size-T, construction of T(R)"
+   }
+  },
+  {
+   "text": "For the sequence $R_0=W$, $R_{n+1}$ as in [def-weil-pbc-etale-contraction], induction gives $|R_n|\\leq\\kappa$: the base is step 3 and the successor is step 5. The category $\\mathbf N$ is small and directed. Apply [lem-pc-filtered-colimit-commrings-elementwise](1) to represent every element of $E=W^{\\mathrm e}=\\varinjlim_nR_n$ by a pair $(n,a)$, $a\\in R_n$. Encoding the natural-number index and the element by step 1 gives $|E|\\leq\\kappa$.",
+   "uses": [
+    "def-weil-pbc-etale-contraction",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097S, remark-size-T, final sentence on the countable iteration"
+   }
+  },
+  {
+   "text": "Put $T=V(IE)\\subset\\operatorname{Spec}E$, which is closed by the definition of an ideal zero locus. Apply the general bound of step 3 again with $R=E$ to obtain $|E^w|\\leq\\kappa$. The constructible neighbourhoods of $T$ are a subfamily of the constructible subsets counted in step 2, hence form a set of size at most $\\kappa$. They are nonempty as an indexing family (the whole spectrum is a neighbourhood) and directed in reverse inclusion by finite intersection, as stipulated in [def-weil-pbc-retained-localization]. Each $(E^w)_{e_U}$ has at most $\\kappa$ elements: its fractions $b/e_U^n$ are finite codes in $E^w$ and $\\mathbf N$. By [lem-pc-filtered-colimit-commrings-elementwise](1), each element of their colimit is represented at one neighbourhood. The index-element encoding of step 1 bounds that colimit by $\\kappa$. By [def-weil-pbc-strict-w-cover], it is exactly $E_{[V(IE)]}=C_A$, proving the assertion.",
+   "uses": [
+    "def-weil-pbc-retained-localization",
+    "def-weil-pbc-strict-w-cover",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0984, remark-size-w-contractible, first three stages; Tag 0976 applied to E; retained-localization definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-list-cardinality",
+  "def-weil-pbc-w-local",
+  "def-weil-pbc-w-localization",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-etale-contraction",
+  "def-weil-pbc-retained-localization",
+  "def-weil-pbc-strict-w-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0976, 097S, 0984; finite-data expansion of the size remarks for the precise imported partition and retained-localization definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +189,66 @@
    "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, instFinitePresentationTensorProduct, CommRingCat.preservesFilteredColimits_coyoneda, TensorProduct.Algebra.exists_of_fg, preservesFilteredColimits_coyoneda, HasCardinalLT.Set.isColimitCocone, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WStrictLocalization|w.local.*cardinal|cardinal.*w.local",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-cover bound; hits only concern generic cardinal arithmetic, localization or other constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict w localization of a ring preserves an infinite cardinality bound",
+   "results": "0 hits:  | service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The strict w local cover of a commutative ring of cardinality at most an infinite cardinal kappa has cardinality at most kappa",
+   "results": "8 hits: Dynamics.IsDynCoverOf.coverMincard_le_card, CategoryTheory.ObjectProperty.hasCardinalLT_subtype_ofObj, hasCardinalLT_subtype_iSup, CategoryTheory.MorphismProperty.hasCardinalLT_ofHoms, CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.hW, FirstOrder.Language.exists_elementarySubstructure_card_eq, Dynamics.IsDynNetIn.card_le_card_of_isDynCoverOf, CategoryTheory.ObjectProperty.HasCardinalLT",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-cover bound; hits only concern generic cardinal arithmetic, localization or other constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cardinalMk\"",
+   "results": "12 hits: Infinite.of_cardinalMk_le, Set.Subsingleton.cardinalMk_le_one, WellFounded.cardinalMk_subtype_lt_min_compl_le, Set.toENat_cardinalMk, Set.toENat_cardinalMk_subtype, Order.cof_le_cardinalMk, Order.cof_eq_cardinalMk, Cardinal.ord_cardinalMk",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-cover bound; hits only concern generic cardinal arithmetic, localization or other constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality bounds for w localization and successive adjoining of all finitely presented etale algebras",
+   "results": "8 hits: IsLocalization.cardinalMk_le, IsLocalization.lift_cardinalMk_le, IsLocalization.lift_cardinalMk, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.ofLocalizationSpan, IsLocalization.cardinalMk",
+   "date": "2026-10-14",
+   "verdict": "no match for the full strict w-cover bound; hits only concern generic cardinal arithmetic, localization or other constructions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-wcontractible-ring-extension",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-strict-w-cover-size",
+  "worker": "stage1",
+  "summary": "Proved the bound by finite-data encodings of constructible partitions, fractions, finite algebra presentations, finite tensor products, countable iteration and constructible neighbourhoods. Reused the existing Mathlib leaf for elementwise filtered ring colimits and created only the exact Mathlib finite-list bound. Applied the general w-localization bound twice, so the retained localization does not hide an extra w-localization stage.",
+  "blueprint": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Size of the strict w-local construction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-661fd498c",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-661fd498c (reviewer sub-agent of L); spot-checked: Read the mathematics in full. All seven steps pass against the cited definitions, Stacks 0976/097S/097X/0984, and exact Mathlib list-cardinality and filtered-colimit lemmas. Edge cases, duplicates, dependencies and target coefficient-category boundaries checked. Corrected only missing metadata on the new leaf; whole JSON under fixes/dag/nodes/sec-proper-base-change/. Detailed checks in review.md. No mathematical or target changes.; 1 file(s) fixed by the reviewer"
+ }
 }
