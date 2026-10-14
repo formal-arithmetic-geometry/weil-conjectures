@@ -18,6 +18,7 @@ Mathlib `Functor.mapBifunctorHomologicalComplex` and `Functor.uncurry.obj`.
 The names remain available to downstream modules; no separate construction is used.
 In particular, `tensorBicomplexMap` is the map supplied by the uncurried
 bifunctor, so its chain-map identities are inherited from Mathlib.
+The compatibility names therefore unfold directly to the library's canonical map.
 
 Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex)
