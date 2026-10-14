@@ -77,6 +77,17 @@ lemma Etale.ext_of_iSup_eq_top (hE : Presheaf.IsSheaf T.smallEtaleTopology E) {Z
   (Etale.isSheafFor_ofArrows hE _ (Etale.iUnion_range_restrictι O hO)).isSeparatedFor.ext
     (by rintro _ _ ⟨i⟩; exact h i)
 
+/-- The inclusion of the restrictions of an étale `T`-scheme to two nested opens. -/
+noncomputable abbrev Etale.inclE (Z : T.Etale) {O O' : Z.left.Opens} (h : O ≤ O') :
+    Etale.restrict Z O ⟶ Etale.restrict Z O' :=
+  Over.homMk (Z.left.homOfLE h) (by
+    change Z.left.homOfLE h ≫ O'.ι ≫ Z.hom = O.ι ≫ Z.hom
+    rw [Scheme.homOfLE_ι_assoc _ h])
+
+lemma Etale.inclE_restrictι (Z : T.Etale) {O O' : Z.left.Opens} (h : O ≤ O') :
+    Etale.inclE Z h ≫ Etale.restrictι Z O' = Etale.restrictι Z O :=
+  Over.Hom.ext (Scheme.homOfLE_ι _ h)
+
 end OpenRestriction
 
 section Good
@@ -340,7 +351,172 @@ lemma map_restrictι_comp {i : (cover H).I₀} (hki : k.1 ≤ i.1) (gi : Z ⟶ Y
   rw [this, op_comp, Functor.map_comp_apply, map_transE]
 
 end Factor
+lemma comp_ι_mem {Z : Scheme.{u}} {O : U.Opens} (f : Z ⟶ O) (z : Z) : (f ≫ O.ι) z ∈ O := by
+  rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply]
+  exact (f z).2
+
+include H in
+lemma iSup_O {Z : Scheme.{u}} (y : Z ⟶ U) : ⨆ k : (cover H).I₀, y ⁻¹ᵁ k.1 = ⊤ :=
+  eq_top_iff.2 fun z _ ↦ by
+    obtain ⟨W, hzW, hW⟩ := H (y z)
+    exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨W, hW⟩, hzW⟩
+
+lemma iUnion_range_ιE : ⋃ i, Set.range (ιE H i).left = Set.univ :=
+  Set.eq_univ_of_forall fun x ↦ Set.mem_iUnion.2 (by
+    obtain ⟨i, y, hy⟩ := exists_ι_eq H x
+    exact ⟨i, y, hy⟩)
+
+variable (hE : Presheaf.IsSheaf T.smallEtaleTopology E)
+
+include hE in
+/-- The universal sections over the good opens are compatible on overlaps. -/
+lemma compatible : Presieve.Arrows.Compatible E (ιE H) (fun i ↦ ξ i) := by
+  intro i j Z gi gj hij
+  let g := gi.left ≫ ι H i
+  have hg : gj.left ≫ ι H j = g := (congrArg (fun f ↦ f.left) hij).symm
+  let y := g ≫ π H
+  have hZ : y ≫ u = Z.hom := by
+    change (gi.left ≫ ι H i ≫ π H) ≫ u = Z.hom
+    rw [Category.assoc, ← Over.w gi]
+    change gi.left ≫ ι H i ≫ π H ≫ u = gi.left ≫ v i ≫ i.1.ι ≫ u
+    rw [ι_π_assoc]
+  have hyi : y = (gi.left ≫ v i) ≫ i.1.ι := by
+    simp only [y, g, Category.assoc, ι_π]
+  have hyj : y = (gj.left ≫ v j) ≫ j.1.ι := by
+    simp only [y, ← hg, Category.assoc, ι_π]
+  refine Etale.ext_of_iSup_eq_top hE
+    (fun k : {k : (cover H).I₀ // k.1 ≤ i.1 ⊓ j.1} ↦ O H y k.1) ?_ fun k ↦ ?_
+  · refine eq_top_iff.2 fun z _ ↦ ?_
+    have hz : y z ∈ i.1 ⊓ j.1 :=
+      ⟨hyi ▸ comp_ι_mem _ z, hyj ▸ comp_ι_mem _ z⟩
+    obtain ⟨_, ⟨k, rfl⟩, hzk, hk⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.1 (isBasis H)) hz
+    exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨k, hk⟩, hzk⟩
+  · rw [← Functor.map_comp_apply, ← op_comp,
+      map_restrictι_comp H g y rfl hZ k.1 (k.2.trans inf_le_left) gi rfl,
+      ← Functor.map_comp_apply, ← op_comp,
+      map_restrictι_comp H g y rfl hZ k.1 (k.2.trans inf_le_right) gj hg]
+
+/-- The section of `E` over the glued scheme obtained by gluing the universal sections. -/
+noncomputable def ξP : E.obj (op (PE H)) :=
+  ((Presieve.isSheafFor_arrows_iff _ _).1
+    (Etale.isSheafFor_ofArrows hE (ιE H) (iUnion_range_ιE H)) _ (compatible H hE)).exists.choose
+
+lemma map_ιE_ξP (i : (cover H).I₀) : E.map (ιE H i).op (ξP H hE) = ξ i :=
+  ((Presieve.isSheafFor_arrows_iff _ _).1
+    (Etale.isSheafFor_ofArrows hE (ιE H) (iUnion_range_ιE H)) _
+      (compatible H hE)).exists.choose_spec i
+
+lemma map_factor {W : T.Etale} (a : W ⟶ PE H) (y : W.left ⟶ U) (hy : a.left ≫ π H = y)
+    (hW : y ≫ u = W.hom) (k : (cover H).I₀) :
+    E.map (factor H a.left y hy hW k).op (ξ k) =
+      E.map (Etale.restrictι W (O H y k)).op (E.map a.op (ξP H hE)) := by
+  rw [← map_ιE_ξP H hE k, ← Functor.map_comp_apply, ← op_comp, ← Functor.map_comp_apply,
+    ← op_comp]
+  have : factor H a.left y hy hW k ≫ ιE H k = Etale.restrictι W (O H y k) ≫ a :=
+    Over.Hom.ext (factor_left_ι H a.left y hy hW k)
+  rw [this]
+
+/-- Morphisms into the glued scheme over `U` pulling back the glued section to the same section
+agree: this is checked over the good opens. -/
+lemma hom_ext_PE {W : T.Etale} (a b : W ⟶ PE H) (hab : a.left ≫ π H = b.left ≫ π H)
+    (hξ : E.map a.op (ξP H hE) = E.map b.op (ξP H hE)) : a = b := by
+  let y := a.left ≫ π H
+  have hW : y ≫ u = W.hom := by
+    change (a.left ≫ π H) ≫ u = W.hom
+    rw [Category.assoc]
+    exact Over.w a
+  have key (k : (cover H).I₀) :
+      factor H a.left y rfl hW k = factor H b.left y hab.symm hW k := by
+    refine (isUniversal k).hom_ext ?_ ?_ ?_
+    · rw [factor_left_v, factor_left_v]
+    · rw [factor_left_v, morphismRestrict_ι_assoc, hW]
+      rfl
+    · rw [map_factor H hE, map_factor H hE, hξ]
+  refine Over.Hom.ext (Scheme.Opens.hom_ext_of_iSup_eq_top (fun k : (cover H).I₀ ↦ O H y k)
+    (iSup_O H y) _ _ fun k ↦ ?_)
+  rw [← factor_left_ι H a.left y rfl hW k, key, factor_left_ι]
+
+section Surjective
+
+variable {W : T.Etale} (w : W.left ⟶ U) (hw : w ≫ u = W.hom) (e : E.obj (op W))
+  (c : ∀ k : (cover H).I₀, Etale.restrict W (O H w k) ⟶ Y k)
+  (hc : ∀ k, (c k).left ≫ v k = w ∣_ k.1)
+  (hcξ : ∀ k, E.map (c k).op (ξ k) = E.map (Etale.restrictι W (O H w k)).op e)
+
+include hc in
+lemma glue_π (k : (cover H).I₀) : (c k).left ≫ ι H k ≫ π H = (O H w k).ι ≫ w := by
+  rw [ι_π, reassoc_of% (hc k), morphismRestrict_ι]
+
+include hcξ in
+lemma glue_map (m : (cover H).I₀) {O' : W.left.Opens} (hm : O' ≤ O H w m) :
+    E.map (Etale.inclE W hm ≫ c m ≫ ιE H m).op (ξP H hE) =
+      E.map (Etale.restrictι W O').op e := by
+  rw [op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply, map_ιE_ξP, hcξ,
+    ← Functor.map_comp_apply, ← op_comp, Etale.inclE_restrictι]
+
+include hE hc hcξ in
+lemma glue_compat (k l : (cover H).I₀) :
+    W.left.homOfLE (inf_le_left : O H w k ⊓ O H w l ≤ _) ≫ (c k).left ≫ ι H k =
+      W.left.homOfLE (inf_le_right : O H w k ⊓ O H w l ≤ _) ≫ (c l).left ≫ ι H l := by
+  have hkl : O H w k ⊓ O H w l ≤ O H w k := inf_le_left
+  have hlk : O H w k ⊓ O H w l ≤ O H w l := inf_le_right
+  have e₁ : (Etale.inclE W hkl ≫ c k ≫ ιE H k).left ≫ π H = (O H w k ⊓ O H w l).ι ≫ w := by
+    change W.left.homOfLE hkl ≫ (c k).left ≫ ι H k ≫ π H = _
+    rw [glue_π H w c hc k, Scheme.homOfLE_ι_assoc]
+  have e₂ : (Etale.inclE W hlk ≫ c l ≫ ιE H l).left ≫ π H = (O H w k ⊓ O H w l).ι ≫ w := by
+    change W.left.homOfLE hlk ≫ (c l).left ≫ ι H l ≫ π H = _
+    rw [glue_π H w c hc l, Scheme.homOfLE_ι_assoc]
+  have := hom_ext_PE H hE _ _ (e₁.trans e₂.symm)
+    ((glue_map H hE w e c hcξ k hkl).trans (glue_map H hE w e c hcξ l hlk).symm)
+  exact congrArg (fun f ↦ f.left) this
+
+end Surjective
+
+/-- Every section of `E` over an étale `U`-scheme is the pullback of the glued section. -/
+lemma exists_PE {W : T.Etale} (w : W.left ⟶ U) (hw : w ≫ u = W.hom) (e : E.obj (op W)) :
+    ∃ a : W ⟶ PE H, a.left ≫ π H = w ∧ E.map a.op (ξP H hE) = e := by
+  have hk (k : (cover H).I₀) : (w ∣_ k.1) ≫ k.1.ι ≫ u = (Etale.restrict W (O H w k)).hom := by
+    rw [morphismRestrict_ι_assoc, hw]
+    rfl
+  choose c hc hcξ using fun k : (cover H).I₀ ↦
+    (isUniversal k).exists_hom (W := Etale.restrict W (O H w k)) (w ∣_ k.1) (hk k)
+      (E.map (Etale.restrictι W (O H w k)).op e)
+  let aL : W.left ⟶ P H :=
+    Scheme.Opens.glueMorphismsOfTop (fun k ↦ O H w k) (iSup_O H w)
+      (fun k ↦ (c k).left ≫ ι H k) (glue_compat H hE w e c hc hcξ)
+  have haL (k : (cover H).I₀) : (O H w k).ι ≫ aL = (c k).left ≫ ι H k :=
+    Scheme.Opens.ι_glueMorphismsOfTop _ _ _ _ k
+  have haLπ : aL ≫ π H = w :=
+    Scheme.Opens.hom_ext_of_iSup_eq_top _ (iSup_O H w) _ _ fun k ↦ by
+      rw [reassoc_of% (haL k), glue_π H w c hc k]
+  let a : W ⟶ PE H := Over.homMk aL (by
+    change aL ≫ π H ≫ u = W.hom
+    rw [reassoc_of% haLπ, hw])
+  refine ⟨a, haLπ, Etale.ext_of_iSup_eq_top hE (fun k ↦ O H w k) (iSup_O H w) fun k ↦ ?_⟩
+  have : Etale.restrictι W (O H w k) ≫ a = c k ≫ ιE H k := Over.Hom.ext (haL k)
+  rw [← Functor.map_comp_apply, ← op_comp, this, op_comp, Functor.map_comp_apply, map_ιE_ξP,
+    hcξ]
+
+lemma isUniversalSection_ξP : IsUniversalSection E u (PE H) (π H) (ξP H hE) := by
+  intro W w hw
+  refine ⟨fun a b hab ↦ Subtype.ext (hom_ext_PE H hE a.1 b.1 (a.2.trans b.2.symm) hab),
+    fun e ↦ ?_⟩
+  obtain ⟨a, ha, haξ⟩ := exists_PE H hE w hw e
+  exact ⟨⟨a, ha⟩, haξ⟩
 
 end GlueRepr
+
+/-- **Zariski gluing of representing finite étale schemes.** Let `E` be a sheaf of sets on the
+small étale site of `T` and `u : U ⟶ T` étale. If every point of `U` has an open neighbourhood
+`W` such that the restriction of `E` to étale `W`-schemes is represented by a finite étale
+`W`-scheme, then the restriction of `E` to étale `U`-schemes is represented by a finite étale
+`U`-scheme. (blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+theorem exists_isUniversalSection_of_forall_exists_opens {T : Scheme.{u}}
+    {E : T.Etaleᵒᵖ ⥤ Type w} (hE : Presheaf.IsSheaf T.smallEtaleTopology E) {U : Scheme.{u}}
+    (u : U ⟶ T) [AlgebraicGeometry.Etale u]
+    (H : ∀ x : U, ∃ W : U.Opens, x ∈ W ∧ IsRepresentableOver E u W) :
+    ∃ (P : Scheme.{u}) (π : P ⟶ U) (_ : AlgebraicGeometry.Etale π) (_ : IsFinite π)
+      (ξ : E.obj (op (Etale.mk (π ≫ u)))), IsUniversalSection E u (Etale.mk (π ≫ u)) π ξ :=
+  ⟨_, GlueRepr.π H, inferInstance, inferInstance, _, GlueRepr.isUniversalSection_ξP H hE⟩
 
 end AlgebraicGeometry.Scheme
