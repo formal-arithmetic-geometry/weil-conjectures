@@ -15,6 +15,14 @@ import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 # Flatness near a point from a flat test
 
 Source: Stacks Project, Tag 0EYJ, flatness descent and openness.
+(blueprint: lem-sbc-stalk-normalization-depth-two-section-flat-core)
+
+This module proves only the descent step, after flatness of the test pullback
+has been established. In the normalization application, the rational generic
+section point is essential to establish that flatness: it is the hypothesis
+`hZ` of `GaloisCover.stalk_normalization_depth_two_section_flat` and
+`GaloisCover.exists_stalk_normalization_split_formal_test`.
+Depth two alone does not establish the flat-pullback hypothesis here.
 -/
 
 @[expose] public section
@@ -24,7 +32,9 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite morphism is flat over a neighbourhood of x if a flat test through x
 makes its pullback flat. This isolates descent and openness from the formal
-splitting calculation.
+splitting calculation. The assumption `Flat (pullback.snd p t)` is an input,
+not a consequence of depth two. For the normalization application, the rational
+point over the generic section is used upstream to split this pullback.
 
 Source: Stacks Project, Tag 0EYJ, final flatness descent and neighbourhood argument.
 (blueprint: lem-sbc-stalk-normalization-depth-two-section-flat-core)
@@ -39,8 +49,8 @@ theorem stalk_normalization_depth_two_section_flat_core
     (p : E ⟶ L) [IsFinite p] (t : T ⟶ L)
     [Flat t] [Flat (pullback.snd p t)] (x : L) (b : T) (hb : t b = x) :
     ∃ W : L.Opens, x ∈ W ∧ Flat (p ∣_ W) := by
-  -- Point lifting follows from hb; no rational-section hypothesis is needed for descent.
-  -- The argument proceeds by stalkwise faithful-flat descent.
+  -- The rational generic section point is used upstream to prove pullback flatness.
+  -- Given that flatness, hb lifts every source point for stalkwise descent.
   classical
   let F : Set L := {y | ∀ z, p z = y → (p.stalkMap z).hom.Flat}
   let W : L.Opens := ⟨F, isOpen_setOf_finite_flat_stalks p⟩

@@ -14168,3 +14168,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:30 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T013036-L-3413550 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/G2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T013037-L-3413738 (proof); batch 20261014T013031; modules 1; new nodes 0)
 - 01:30 L: merged deliver/G2/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T013037-L-3413915 (proof); batch 20261014T013031; modules 1; new nodes 0)
+- 01:30 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T013037-L-3414090 (proof); batch 20261014T013031; modules 1; new nodes 0)
