@@ -14565,3 +14565,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:59 L: returned deliver/A4/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker (reviewer RETURN: (reviewer X-2d01f, head 2d01fb1eb) H10: The delivery removes pic_proper_ntorsion_coker without adapting its caller. Incl)
 
 - 13:00 L: batch 20261014T045603 dependency take-out
+- 05:00 L: returned deliver/F2/Sheaf.Algebra.Homology.TensorBicomplex (reviewer RETURN: (reviewer X-c0a4f, head c0a4f7c33) F1: In coord/changes/tensor-bicomplex-canonical-map.md, replace the prose under ## Ol)
