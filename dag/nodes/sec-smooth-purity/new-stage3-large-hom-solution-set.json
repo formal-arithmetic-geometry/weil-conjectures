@@ -10,12 +10,12 @@
  },
  "proof": [
   {
-   "text": "For a module M in Type max(w,vH), form P as the coproduct of M copies of G. By well-poweredness and the abelian subobject/quotient correspondence, choose a Type w list of quotient maps q_N:P -> Q_N covering all quotients up to isomorphism. Keep those for which m |-> i_m q_N is additive and End(G)^op-linear. This subtype remains w-small and provides module maps f_N:M -> ULift Hom(G,Q_N).",
+   "text": "For a module A, form P as the coproduct of copies of G indexed by the underlying set of A. Form the relation coproduct indexed by (A × A) ⊕ ((End G)^op × A), mapping its summands by i_(a+b) - i_a - i_b and i_(r•a) - r.unop ≫ i_a. Take the cokernel q:P → Q of this explicit relation map. Its defining relation makes a ↦ ULift.up (i_a ≫ q) a linear map f:A → ULift Hom(G,Q). Use the singleton PUnit in Type w as the solution-family index.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "For any module map h:M -> ULift Hom(G,X), unlift its values to get d:P -> X. Factor d through its image as q followed by the monomorphism j:Q -> X. Linearity of h and cancellation against j imply that m |-> i_m q is linear. Thus this quotient lies in the restricted family. Its representative Q_N maps to X by g and satisfies f_N followed by the lifted Hom map of g equals h, proving the solution-set condition. The zero-object and zero-module cases use zero maps.",
+   "text": "Given h:A → ULift Hom(G,X), the coproduct map k:P → X sends i_a to (h a).down. Additivity and scalar-linearity of h show that every relation is killed by k. The cokernel universal property therefore gives g:Q → X with q ≫ g = k. Coproduct and cokernel computation rules prove f followed by lifted Hom(g) equals h elementwise. This constructs all data using established coproduct and cokernel universal properties; no unproved theorem is used.",
    "uses": [],
    "elementary": false
   }
@@ -23,11 +23,11 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "Q2",
+  "group": "N1",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0F5S",
-  "place": "Lemma 19.14.1, first proof, images of sums; agent-written quotient parametrization using Mathlib CategoryTheory.Abelian.subobjectIsoSubobjectOp",
-  "note": "Second reading replaced the equivalence-only restatement with this separate argument component."
+  "place": "Lemma 19.14.1, second proof (presentations by generators and relations)",
+  "note": "Second reader replaced the pointwise restatement with a complete explicit cokernel construction. Both coproduct indexing sets live in Type max(w,vH); the solution-family index is PUnit in Type w. WellPowered is retained in the unchanged signature but is not needed by this proof."
  },
  "mathlib_searches": [
   {
@@ -104,10 +104,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261014T001730-L-2553779",
-  "kind": "interface",
+  "landing": "20261014T004109-L-2836801",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
