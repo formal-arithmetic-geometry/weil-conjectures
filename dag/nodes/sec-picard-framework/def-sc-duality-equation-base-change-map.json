@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "Use the fibre product projections and form the derived quasi-coherent categories and restricted pullbacks and direct images. Quasi-coherent preservation supplies the restricted functors appearing in the unchanged signature.",
+   "text": "Form the four restricted functors Rf, Rf', Lg, LgX on the full quasi-coherent derived subcategories. The two given direct-image/right-adjoint adjunctions supply adjf and adjf'; no pullback/direct-image adjunction is selected here.",
    "uses": [
     "def-pc-fibre-product",
     "def-pc-derived-category",
@@ -38,29 +38,44 @@
     "lem-pc-qcqs-derived-direct-image-right-adjoint",
     "lem-pc-derived-pullback-tensor-qcoh"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), equation-base-change-map and definition preceding case (1)"
+   }
   },
   {
-   "text": "Lift the components of schemeDerivedBaseChangeMap to the full quasi-coherent subcategory. Naturality follows from naturality of the pullback composition comparisons and the direct-image adjunction counit: move the test morphism through the two comparisons, the equality transport, and the counit, then transpose using homEquiv naturality.",
+   "text": "Lift schemeDerivedBaseChangeMap to a natural transformation beta: Rf ⋙ Lg -> LgX ⋙ Rf'. Prove naturality by transposing the counit composite: naturality of the composition comparisons, transport along the pullback equation, and counit naturality give the result. This uses the canonical ordinary base-change construction, not new choices of its data.",
    "uses": [
-    "def-pc-derived-base-change-map"
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), equation-base-change-map and definition preceding case (1)"
+   }
   },
   {
-   "text": "The hypothesis hβ makes every component invertible. Full faithfulness reflects invertibility; pointwise invertibility gives an invertible natural transformation β. Apply mateEquiv adjf adjf' to inv β and evaluate at K. This is an explicit construction from the supplied adjunctions and β.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true
+   "text": "The assumption hβ makes each underlying component invertible. The fully faithful inclusion of the quasi-coherent category reflects this invertibility; NatIso.isIso_of_isIso_app then gives IsIso beta, hence its unique inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), equation-base-change-map and definition preceding case (1)"
+   }
   },
   {
-   "text": "To identify this construction with the node's displayed formula, conjugate inv β under the composite adjunctions. conjugateEquiv_comm identifies it with the inverse conjugate of β. The Mathlib iterated_mateEquiv_conjugateEquiv identity followed by the inverse mate equivalence gives the displayed unit, inverse-conjugate, counit composite (the existing generic secondMate_formula in QCohInverseBaseChangeMate.lean proves exactly this identity). The auxiliary pullback adjunctions cancel, so no choice of fresh counits is needed.",
+   "text": "Apply Mathlib CategoryTheory.mateEquiv adjf adjf' to inverse beta and evaluate at K. This is the required map LgX(a(K)) -> a'(Lg(K)). The iterated_mateEquiv_conjugateEquiv identity, together with conjugateEquiv_comm and the inverse mate component formula, identifies it with the stated unit/inverse-conjugate/counit composite for any auxiliary pullback adjunctions. The direct formula needs only adjf, adjf' and beta and eliminates both auxiliary choices. The already proved private secondMate_formula in QCohInverseBaseChangeMate gives this generic calculation; that downstream module is not imported (which would create a cycle).",
    "uses": [
     "def-weil-pbc-adjunction-conjugate",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), equation-base-change-map and definition preceding case (1)"
+   }
   }
  ],
  "proof_deps": [
@@ -71,8 +86,9 @@
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-derived-pullback-tensor-qcoh",
   "def-pc-derived-base-change-map",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-adjunction-conjugate"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
@@ -161,11 +177,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-613a9",
-  "group": "S3",
+  "reviewer": "COMPILER",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261014T034912-L-815572",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the inverse-mate construction to the node’s composite via secondMate_formula; verified unchanged signatures, proof metadata, five clean delivered compiles, all 22 direct importers, four forced original failures, and permitted axioms with inherited sorryAx only."
+  "landing": "20261014T040542-L-1000982",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

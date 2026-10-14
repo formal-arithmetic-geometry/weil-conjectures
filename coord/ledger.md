@@ -14464,3 +14464,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:05 L: merged deliver/K4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T040541-L-1000380 (proof); batch 20261014T040537; modules 1; new nodes 0)
 - 04:05 L: merged deliver/P3/Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison (stage 3; reviewer PASS; first push; landing 20261014T040541-L-1000646 (interface); batch 20261014T040537; modules 2; new nodes 1)
 - 04:05 L: merged deliver/R3/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261014T040542-L-1000811 (proof); batch 20261014T040537; modules 1; new nodes 0)
+- 04:05 L: merged deliver/U1/Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261014T040542-L-1000982 (proof); batch 20261014T040537; modules 1; new nodes 0)
