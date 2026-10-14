@@ -19,17 +19,59 @@
  },
  "stmt_deps": [
   "sbc-thm-bounded-below-derived-smooth-base-change",
-  "sbc-thm-smooth-base-change"
+  "sbc-thm-smooth-base-change",
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "def-pc-scheme",
+  "def-weil-pbc-geometric-stalks",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-derived-exchange"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Let $\\mathcal P$ be the set of primes whose images are units in $\\Gamma(Y,\\top)$. Unfolding $hK$ and the geometric-stalk definitions, for every cohomology degree and geometric stalk element $x$, the integer $n=\\operatorname{addOrderOf}(x)$ maps to a unit in $\\Gamma(Y,\\top)$. If $n>0$, each prime divisor $p$ of $n$ also maps to a unit: writing $n=pr$ and choosing an inverse of $n$, the product $r n^{-1}$ is an inverse of $p$. Thus each stalk element is killed by an integer whose prime divisors lie in $\\mathcal P$. If $n=0$ and a geometric point existed, the ring map $\\Gamma(Y,\\top)\\to\\Omega$ induced by the composite $\\operatorname{Spec}\\Omega\\to X\\xrightarrow{f}Y$ would send the unit $0\\in\\Gamma(Y,\\top)$ to zero, impossible; hence this case has no stalks. Therefore $K\\in D^+_{\\mathcal P\\text{-tor}}(X_{\\Et})$ by [sbc-def-derived-categories-with-allowable-torsion].",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-pc-scheme",
+    "sbc-def-derived-categories-with-allowable-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; allowable-prime torsion specialization (agent reconstruction; upstream TorsionSheaf source is WANTED)"
+   }
+  },
+  {
+   "text": "Apply [sbc-thm-bounded-below-derived-smooth-base-change] after relabelling its $(S,T,X,Y;f,g,h,e)$ as $(Y,X,Y\\prime,X\\prime;g,f,f\\prime,g\\prime)$ in the given cartesian square. Its smooth morphism is therefore the present $g$, its quasi-compact and quasi-separated morphism is the present $f$, and its input is the present $K$; Step 1 supplies the required allowable-torsion hypothesis. The resulting isomorphism is the component of the derived base-change map with endpoints $Lg^*Rf_*K$ and $Rf\\prime_*Lg\\prime^*K$. The definition [sbc-def-base-change-map] identifies this morphism with [def-weil-pbc-derived-exchange] on the relabelled square. The latter gives the component explicitly as $\\eta_{f',Lg^*Rf_*K}$ followed by $Rf'_*(\\theta^D_{Rf_*K})$ followed by $Rf'_*Lg'^*(\\varepsilon_{f,K})$, where $\\theta^D:Lf'^*Lg^*\\cong Lg'^*Lf^*$ is induced by $gf'=fg'$. Unfolding upstream MorphismDefs.lean, baseChangeUnitStep.app is exactly this unit, baseChangeSquareStep.hom.app is exactly this direct image of the composition comparison, and baseChangeCounitStep.app is exactly this direct image of the pulled-back counit. Its pullbackSquareComparison is $(L(gf')^*\\cong Lf'^*Lg^*)^{-1}$ followed by the square equality and $L(fg')^*\\cong Lg'^*Lf^*$, so it has the same orientation as $\\theta^D$. Thus Etale.baseChange.app K is this very three-arrow composite, not merely a map with the same endpoints. The target component is consequently an isomorphism.",
+   "uses": [
+    "sbc-thm-bounded-below-derived-smooth-base-change",
+    "sbc-thm-smooth-base-change",
+    "sbc-def-base-change-map",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+    "place": "Proof; final application and relabelling of the bounded-below theorem"
+   }
+  }
+ ],
  "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-geometric-stalks",
+  "sbc-def-base-change-map",
+  "sbc-def-derived-categories-with-allowable-torsion",
   "sbc-thm-bounded-below-derived-smooth-base-change",
-  "sbc-thm-smooth-base-change"
+  "sbc-thm-smooth-base-change",
+  "def-weil-pbc-derived-exchange"
  ],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-bounded-below-derived-smooth-base-change.md",
+  "place": "Proof; specialize order-invertible-on-homology input to allowable-prime torsion and relabel the bounded-below theorem"
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "launcher",
@@ -50,5 +92,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "nt-target-etale-smooth",
+  "worker": "stage1",
+  "summary": "No exact sorry-free attachment exists. The target is split into the allowable-torsion specialization and one application of the existing bounded-below derived smooth base-change theorem after relabelling. Repair: verified the cited bounded-below theorem now states its isomorphism in D⁺_{P-tor}(X_et), matching the morphism target; declared the cross-unit smooth-base-change and derived-exchange citations as tool uses.",
+  "blueprint": "The two steps realize the bounded-below theorem route in sk-rem-rest: first its allowable-torsion input, then the final relabelled application and identification of the exchange map.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "Generic smooth base-change square convention and coefficient hypotheses used to relabel the bounded-below theorem; the target unit has no replacement for this cross-unit theorem."
+   },
+   {
+    "node": "def-weil-pbc-derived-exchange",
+    "why": "Generic derived exchange component formula used to identify the relabelled base-change morphism with the target transformation; the target unit has no replacement for this cross-unit definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-smooth-base-change",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-5e53fa764",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-5e53fa764 (reviewer sub-agent of L); spot-checked: Read the required DAG, unit/chapter route, item, report, all cited node statements and source passages, Stacks Tag 0EYU, and exact master Smooth.lean/TorsionSheaf.lean/MorphismDefs.lean. Verified hypotheses, coefficient category, torsion reduction including edge cases, relabelling, and the unit–square–counit morphism orientation. No new nodes, duplicates, circularity, or repairs required. Full review written to review.md."
  }
 }
