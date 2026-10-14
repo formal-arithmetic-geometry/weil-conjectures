@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-fin-projective-smooth-curve-finiteness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant-coefficient finiteness for projective smooth curves",
@@ -21,30 +21,116 @@
  ],
  "proof": [
   {
-   "text": "The morphism is proper by [lem-pc-projective-proper].\nProper base change [cor-weil-pbc-geometric-fiber-finite]\nidentifies its stalks with $H^r(X_{\\bar s},\\mathbf F_\\ell)$.\nThese stalks are finite and have constructible cardinalities by\n[lem-fin-projective-curve-betti-cardinalities].\nThe fully proved criterion\n[fin4-lem-stalk-constructibility-criterion] now applies to\nthe sheaf $R^rf_*\\mathbf F_\\ell$.\nProper base change was used only as an isomorphism; finiteness\nof the fibre groups came from the curve calculation.",
+   "text": "By [lem-pc-projective-proper], the projective morphism $f$ is proper. Set $F=\\mathbf F_\\ell$, the constant sheaf on $X$: it is a finite module sheaf over the finite coefficient ring $\\Lambda=\\mathbf F_\\ell$.",
    "uses": [
-    "lem-pc-projective-proper",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "Apply [cor-weil-pbc-geometric-fiber-finite] to $f$, $\\Lambda=\\mathbf F_\\ell$, and $F$. For every geometric point $\\bar s$ of $S$ and every $r\\geq0$ it identifies the geometric stalk $(R^rf_*F)_{\\bar s}$ with $H^r(X_{\\bar s},F|_{X_{\\bar s}})$. The restriction of a constant sheaf is constant, so the latter group is $H^r(X_{\\bar s},\\mathbf F_\\ell)$.",
+   "uses": [
+    "cor-weil-pbc-geometric-fiber-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
+    "place": "Proof, proper base change sentence"
+   }
+  },
+  {
+   "text": "By [lem-fin-projective-curve-betti-cardinalities], these fibre cohomology groups are finite and their cardinality functions have constructible level sets. The lemma applies because $S$ is Noetherian, $f$ is smooth and projective with geometric fibres of pure dimension one, and $\\ell$ is a prime invertible on $S$.",
+   "uses": [
+    "lem-fin-projective-curve-betti-cardinalities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
+    "place": "Proof, finite stalks sentence"
+   }
+  },
+  {
+   "text": "Fix $r\\geq0$. By definition, $R^rf_*F$ is an abelian etale sheaf on the Noetherian scheme $S$. Its geometric stalks are finite, and for every integer $n\\geq1$ the level set $C_n=\\{s\\in S:|(R^rf_*F)_{\\bar s}|=n\\}$ is constructible: the stalk isomorphisms of [cor-weil-pbc-geometric-fiber-finite] identify it with the corresponding cardinality locus of [lem-fin-projective-curve-betti-cardinalities]. Thus [fin4-lem-stalk-constructibility-criterion] gives a finite locally closed partition on which this sheaf is finite locally constant. This also gives constructibility as an $\\mathbf F_\\ell$-module sheaf: scalar multiplication by a class modulo $\\ell$ is repeated addition, so every additive trivialization is $\\mathbf F_\\ell$-linear. Since $r$ was arbitrary, every higher direct image is constructible.",
+   "uses": [
     "cor-weil-pbc-geometric-fiber-finite",
     "lem-fin-projective-curve-betti-cardinalities",
     "fin4-lem-stalk-constructibility-criterion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
+    "place": "Proof, final criterion sentence"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-projective-proper",
   "cor-weil-pbc-geometric-fiber-finite",
+  "fin4-lem-stalk-constructibility-criterion",
   "lem-fin-projective-curve-betti-cardinalities",
-  "fin4-lem-stalk-constructibility-criterion"
+  "lem-pc-projective-proper"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|higherDirectImage|higher_direct_image",
+   "results": "Search directory Mathlib/AlgebraicGeometry. 5 hits; logged top results: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; no result states constructibility of higher étale direct images for smooth projective curves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper smooth morphism of relative dimension one has constructible etale cohomology with finite coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Smooth",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of the constant finite field sheaf under a projective smooth curve over a Noetherian scheme are constructible",
+   "results": "8 hits; logged top results: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; no result states constructibility of higher étale direct images for smooth projective curves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology finiteness theorem: derived pushforward of a finite locally constant sheaf along a smooth proper family of curves is constructible",
+   "results": "8 hits; logged top results: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsEtale.of_comp, LightCondMod.ofSheafLightProfinite; no result states constructibility of higher étale direct images for smooth projective curves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|IsConstructibleSheaf|Constructible.*Sheaf|HigherDirectImage",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RΓ|etaleCohomology|ConstructibleSheaf|higherDirectImage",
+   "results": "2 hits; logged top results: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Noetherian.lean; no result states constructibility of higher étale direct images for smooth projective curves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -81,5 +167,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-fin-projective-smooth-curve-finiteness",
+  "worker": "stage1",
+  "summary": "Audited the imported statement and proof against the blueprint. No new child node was needed: all non-elementary inputs already exist as lem-pc-projective-proper, cor-weil-pbc-geometric-fiber-finite, lem-fin-projective-curve-betti-cardinalities, and fin4-lem-stalk-constructibility-criterion. Expanded the single imported paragraph into four explicit steps, including the finite coefficient specialization and the identification of cardinality loci before applying the criterion. The item remains exactly the source statement.",
+  "blueprint": "Realizes the proof paragraph: projective implies proper; proper base change identifies stalks; curve Betti cardinalities are finite and constructible; the stalk criterion yields constructibility.",
+  "tool_uses": [
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic proper base change supplies geometric-stalk identification; this unit has no substitute. This is a proposal for maintainer review, not accepted node-level tool_uses."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-implies-proper theorem supplies step 1; no node on this unit route supplies it. The item source explicitly calls for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-26badf5c3",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-26badf5c3 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and sources, and unit/chapter route. All four proof steps check out, including finite étale base change and SGA 4 IX 2.13(iii). Repaired missing Mathlib search records and the projective-implies-proper tool-use proposal. Accepted both generic tools; statement unchanged. Detailed checks and corrected JSON are in review.md and fixes/.; 1 file(s) fixed by the reviewer"
+ }
 }
