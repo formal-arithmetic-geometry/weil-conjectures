@@ -27,12 +27,94 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Let $a:A\\to B$ be an epimorphism of module sheaves. By the cokernel description, the presheaf $Q(V)=B(V)/a(A(V))$ has zero sheafification. Underlying-set sheafification and local equality therefore show that every $b\\in B(V)$ locally belongs to $a(A)$. The underlying map of sheaves of sets is an epimorphism: if two maps out of $B$ agree after $a$, local lifts make them agree on a cover for every section of $B$, and separatedness makes them agree globally. This verifies the set-sheaf epimorphism hypothesis needed to use weak contractibility, rather than assuming module epimorphisms are sectionwise surjective.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 00WK (lemma-sections-sheafification), 00WB (theorem-plus)"
+   }
+  },
+  {
+   "text": "Weak contractibility of $W$ now makes $A(W)\\to B(W)$ surjective for each module epimorphism. Evaluation is additive and preserves kernels by sectionwise limits. For any $a:A\\to B$, factor it as $A\\twoheadrightarrow I\\hookrightarrow B$, where $I=\\ker(B\\to\\operatorname{coker}a)$. Applying the just-proved surjectivity to $A\\twoheadrightarrow I$ and $B\\twoheadrightarrow\\operatorname{coker}a$, and sectionwise kernels to both inclusions, gives $\\operatorname{coker}(a(W))=(\\operatorname{coker}a)(W)$. The same argument applied to a short exact sequence gives exactness of evaluation in $R(W)$-modules.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0946 (lemma-w-contractible), (1), with Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "Let $(M_i)_{i\\in I}$ be any small family and put $P(V)=\\bigoplus_i M_i(V)$. Its sheafification is the sheaf coproduct, by the sectionwise-colimit description. For $s\\in P^\\#(W)$, underlying-set sheafification and local representation give a covering $V_a\\to W$ and representatives $p_a\\in P(V_a)$. By the covering definition on the pro-etale site, since $W$ itself is affine, choose finitely many affine opens $T_b\\subset V_{a(b)}$ whose maps form a covering of $W$. Restrict the representatives to these $T_b$. Their supports have finite union $E\\subset I$. This is the only use of affineness: a finite refinement exists even if the original covering is infinite.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+    "place": "Tag 0935 (lemma-sections-over-quasi-compact), (2), expanded using the fpqc covering definition"
+   }
+  },
+  {
+   "text": "For each $i\\in E$, the $i$-coordinates of these representatives agree on $T_b\\times_W T_c$: their images in $P^\\#$ agree there, so local equality after sheafification makes the coordinates locally equal, and separatedness of $M_i$ makes them equal on the overlap. Glue them to $m_i\\in M_i(W)$. The finitely supported tuple $(m_i)$ maps to $s$, since this holds over every $T_b$. Conversely, if a finitely supported tuple maps to zero in $P^\\#(W)$, local equality makes every coordinate locally zero, hence zero by separatedness. Thus the canonical $R(W)$-linear comparison $\\bigoplus_i M_i(W)\\to(\\bigoplus_i M_i)(W)$ is bijective. For $I=\\varnothing$ the source and target are zero, by the same argument.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+    "place": "Tag 0935 (lemma-sections-over-quasi-compact), (2); Tag 00WB (theorem-plus), local equality"
+   }
+  },
+  {
+   "text": "For any small diagram $D:J\\to\\operatorname{Mod}(R)$ form $B=\\bigoplus_{j\\in\\operatorname{Ob}J}D(j)$ and $A=\\bigoplus_{\\alpha:j\\to k}D(j)$. Define $d:A\\to B$ on the $\\alpha$-summand by the inclusion of $D(j)$ minus the inclusion of $D(k)$ composed with $D(\\alpha)$. Maps from $B$ annihilating $d$ are exactly families $u_j:D(j)\\to N$ satisfying $u_j=u_kD(\\alpha)$, so $\\operatorname{coker}d$ with its inclusions is the colimit, by its universal property. Both sums are small in the stipulated universes. Applying the direct-sum and cokernel comparisons proved above gives exactly the same presentation in $R(W)$-modules, hence the canonical colimit comparison is an isomorphism for every small $J$. This argument also covers the empty category.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/categories.tex",
+    "place": "Tag 03DB (lemma-limits-colimits); Tag 002F (definition-colimit), explicit cokernel presentation"
+   }
+  },
+  {
+   "text": "The comparisons just obtained commute with each diagram-object inclusion by construction. For a natural transformation $D\\to D\\prime$, both composites in the comparison square therefore have equal composites with every inclusion $D(j)(W)$; the colimit universal property makes them equal. This proves naturality in diagrams. Specializing the arbitrary small indexing category to a filtered one gives the stated filtered-colimit comparison without additional hypotheses.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), uniqueness clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
-  "place": "Tags 0946, 0935 and the cokernel presentation of colimits"
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 0946 (1), Tag 0935 (2): expanded finite-support descent proof and explicit cokernel presentation of arbitrary colimits"
  },
  "mathlib_searches": [
   {
@@ -55,10 +137,45 @@
    "results": "1 hits: Mathlib/AlgebraicGeometry/Limits.lean; ",
    "date": "2026-10-14",
    "verdict": "no match: presheaf evaluation, general sheaf colimit existence and condensed AB5 do not give exact colimit-preserving evaluation on this ringed pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of sheaves of modules at an affine weakly contractible object of the pro etale site is exact and preserves all small colimits",
+   "results": "Hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.hasExactColimitsOfShape, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, Condensed.instAB5CondensedMod, CategoryTheory.Sheaf.hasExactColimitsOfShape, AlgebraicGeometry.preservesColimit_Γ, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, instAbelianLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: presheaf evaluation and condensed exact-colimit instances do not state exact colimit-preserving evaluation on this ringed pro-etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"PreservesColimits\"",
+   "results": "Hits: CategoryTheory.Limits.evaluation_preservesColimits, CategoryTheory.Limits.evaluation_preservesColimitsOfShape, CategoryTheory.Limits.preservesColimits_of_evaluation, CategoryTheory.Limits.preservesColimitsOfShape_of_evaluation, PresheafOfModules.evaluation_preservesColimitsOfSize, PresheafOfModules.evaluation_preservesColimitsOfShape",
+   "date": "2026-10-14",
+   "verdict": "no match: presheaf evaluation and condensed exact-colimit instances do not state exact colimit-preserving evaluation on this ringed pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Pp]reserves|[Ww]eakly[Cc]ontractible",
+   "results": "Hits: Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: presheaf evaluation and condensed exact-colimit instances do not state exact colimit-preserving evaluation on this ringed pro-etale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation functor of module sheaves at a weakly contractible quasi compact site object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf over a quasi compact projective object commute with arbitrary colimits",
+   "results": "Hits: LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-14",
+   "verdict": "no match: presheaf evaluation and condensed exact-colimit instances do not state exact colimit-preserving evaluation on this ringed pro-etale site"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
   "by": "worker",
@@ -74,5 +191,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "worker": "stage1",
+  "summary": "Proved exactness by local cokernel lifting and weak contractibility; expanded direct-sum preservation via finite affine refinement and coordinate gluing; proved arbitrary colimit preservation and naturality from an explicit cokernel presentation. Reused existing generic sheafification nodes; created no new nodes. No statement correction.",
+  "blueprint": "Proof, first sentence: the descent formula preserves the finite-stage property through the common-stage colimit; derived Hom continuity needed for this descent, as made precise by master TwoColimit.lean, Sorried input (Hom). Evaluation of hypercover terms in the continuity proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic site/sheafification tool for local sections, underlying sets or sectionwise limits; it supplies infrastructure, not a replacement of a proper-base-change unit step."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic site/sheafification tool for local sections, underlying sets or sectionwise limits; it supplies infrastructure, not a replacement of a proper-base-change unit step."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Generic site/sheafification tool for local sections, underlying sets or sectionwise limits; it supplies infrastructure, not a replacement of a proper-base-change unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-proetale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-b9ab6b345",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b9ab6b345 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, cited statements and source passages; no new nodes. Exactness, finite-support descent, arbitrary-colimit presentation and naturality check out for arbitrary ring-sheaf coefficients. Master coefficient categories and base-change morphism checked without accepting seeded comparison theorems. No repairs needed. review.md records checks and inherited infrastructure cycles unrelated to this split."
  }
 }
