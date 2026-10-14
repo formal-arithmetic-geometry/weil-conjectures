@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-fin-projective-curve-constant",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant coefficients on projective families of dimension at most one",
@@ -15,59 +15,246 @@
  "stmt_deps": [
   "def-pc-projective-morphism",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [
   {
-   "text": "First suppose $S$ is integral. After restriction to a nonempty open,\n[lem-fin-generic-curve-model] gives a finite surjection $p:S'\\to S$\nand a finite comparison $Y\\to T=(X_{S'})_{\\mathrm{red}}$, an isomorphism\naway from a closed subset finite over $S'$.\nEach component of $Y$ is either a smooth projective curve family\nor finite etale. Its constant-coefficient higher direct images are\nconstructible by\n[thm-fin-projective-smooth-curve-finiteness], [lem-fin-finite-morphism].\nTheir finite direct sum has the same property.\nApply [lem-finrepair-constant-finite-comparison] to $Y\\to T$.\nThe equivalence for the nilpotent closed immersion\n$T\\hookrightarrow X_{S'}$ in\n[thm-weil-pbc-universal-homeomorphism-invariance]\nidentifies direct images and constant coefficients, proving\nconstructibility for $X_{S'}\\to S'$.",
+   "text": "Fix $q\\geq0$ and put $E_q=R^qf_*\\underline{\\mathbf F_\\ell}$. All schemes of finite type over the field in this proof are Noetherian: their finite affine covers have finitely generated coordinate algebras, which are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (a field has only the ideals $0$ and $1$). Thus the definition of locally Noetherian, together with quasi-compactness of the finite cover, gives Noetherianity. Projectivity implies properness by [lem-kun-projective-implies-proper], and every base change is projective by [lem-pc-projective-base-change]. The constant finite coefficient sheaf is finite locally constant directly from its definition (trivialized by the identity cover), hence constructible by [def-weil-pbc-constructible-complexes]. Throughout we use the small étale site and the fixed ring $\\mathbf F_\\ell$. Whenever proper base change is applied below, identify the underlying abelian derived direct image of the module complex with its abelian-sheaf derived direct image using the canonical, natural, unit-compatible isomorphism of [lem-weil-pbc-module-abelian-derived-direct-image-comparison]. Exact scalar forgetting commutes with cohomology, so this also identifies the underlying abelian sheaves of all module higher direct images. Naturality in multiplication endomorphisms preserves the given $\\mathbf F_\\ell$-actions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-kun-projective-implies-proper",
+    "lem-pc-projective-base-change",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, hypotheses used throughout; Stacks 00FN and 01WC"
+   }
+  },
+  {
+   "text": "Suppose first that $S$ is integral. By [lem-fin-generic-curve-model], after replacing $S$ by a nonempty open $U$, there is a finite surjection $p:S'\\to U$, with $S'$ integral, and a finite surjection $\\nu:Y\\to T=(X_U\\times_U S')_{\\mathrm{red}}$. The scheme $Y$ is a finite disjoint union of smooth projective families of pure relative dimension one and finite étale families. The map $\\nu$ is an isomorphism away from a closed $D\\subset T$ finite over $S'$. Give $D$ its reduced induced structure, which has the same complement and is still finite. The schemes $S'$, $T$, and $Y$ are of finite type over the original field: a finite algebra is finitely generated as an algebra by any finite set of module generators, and reduction is locally a quotient algebra. In particular their bases are Noetherian by Step 1. The prime remains invertible after all these restrictions and base changes.",
    "uses": [
     "lem-fin-generic-curve-model",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, first paragraph, generic model"
+   }
+  },
+  {
+   "text": "For a curve summand $Y_a\\to S'$, [thm-fin-projective-smooth-curve-finiteness] makes all $R^q(Y_a\\to S')_*\\underline{\\mathbf F_\\ell}$ constructible. For a finite étale summand the same assertion follows from [lem-fin-finite-morphism] applied to its constant constructible sheaf; its positive direct images are zero. The category of étale sheaves on the finite disjoint union $Y=\\coprod_aY_a$ is the product of the component categories: restriction and the sheaf $V\\mapsto\\prod_a F_a(V\\times_Y Y_a)$ are inverse, by the sheaf condition on the disjoint open cover. Kernels, cokernels, and injectivity in this product are componentwise. An injective resolution is therefore given by component injective resolutions, and the direct-image section formula is a finite product of their direct images. Finite products of modules are finite sums and exact, so the resolution gives $R^q(Y\\to S')_*\\underline{\\mathbf F_\\ell}=\\bigoplus_a R^q(Y_a\\to S')_*\\underline{\\mathbf F_\\ell}$. Intersect the finitely many stratifications of these constructible sheaves. On every resulting locally closed stratum their finite sum is finite locally constant by [lemma-constructible-flc-biproduct]. This proves constructibility of all direct images from $Y$. The empty disjoint union gives the zero sheaf and the same argument applies.",
+   "uses": [
     "thm-fin-projective-smooth-curve-finiteness",
     "lem-fin-finite-morphism",
-    "lem-finrepair-constant-finite-comparison",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
+    "def-weil-pbc-direct-image",
+    "lemma-constructible-flc-biproduct",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-constructible-subset"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, first paragraph, summands and their finite sum"
+   }
   },
   {
-   "text": "Put $E_q=R^qf_*\\mathbf F_\\ell$.\nProper base change [cor-weil-pbc-geometric-fiber-finite]\nidentifies $p^*E_q$ with the just computed sheaf.\nFinite direct image preserves constructibility by\n[lem-fin-finite-morphism], so $p_*p^*E_q$ is constructible.\nThe unit $E_q\\to p_*p^*E_q$ is injective: on stalks it is the\ndiagonal into a nonempty finite product, by\n[lemma-weil-pbc-finite-stalk-formula].\nConsequently [lem-weil-pbc-constructible-subobjects-noetherian]\nmakes $E_q$ constructible on this open of $S$.\nThis proves the required dense-open assertion over every integral base.",
+   "text": "Write $h:T\\to S'$ and $r:T\\hookrightarrow X_{S'}$. The map $h$ is projective: compose the closed immersion $r$ with the projective embedding for $X_{S'}$, so it is proper by [lem-kun-projective-implies-proper]. Apply [lem-finrepair-constant-finite-comparison] to $h$, $\\nu$, the reduced $D$, and the finite module $M=\\mathbf F_\\ell$. Its hypotheses were verified in Steps 2–3, and it gives constructibility of all $R^qh_*\\underline M$. Reduction $r$ is a universal homeomorphism: locally its quotient kernel consists of nilpotents, whose images under every base change are nilpotent, so quotienting does not change the prime spectrum. [thm-weil-pbc-universal-homeomorphism-invariance] makes $r_*$ and $r^{-1}$ inverse equivalences, exact and preserving the constant sheaf. Using derived composition [lem-weil-derived-direct-image-composition], the direct images from $X_{S'}$ of its constant sheaf are identified with those from $T$. Hence the former are constructible as well.",
    "uses": [
-    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-kun-projective-implies-proper",
+    "lem-finrepair-constant-finite-comparison",
+    "def-weil-pbc-scheme-reduction",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, first paragraph, comparison and reduction"
+   }
+  },
+  {
+   "text": "Using the module/abelian derived comparison established in Step 1, first apply [lemma-weil-pbc-prime-proper-base-change] to $U\\hookrightarrow S$ and $f$; exact inverse image and constant pullback give $E_q|_U\\cong R^q(f_U)_*\\underline{\\mathbf F_\\ell}$. For the cartesian square of $f_U$ over $p:S'\\to U$, use [lemma-weil-pbc-prime-proper-base-change] at the constant $\\mathbf F_\\ell$-sheaf and take cohomology. Inverse image is exact by [prop-weil-pbc-inverse-image-exact], and the inverse image of a constant sheaf is the same constant sheaf by [lemma-constructible-pullback-constant]. Thus $p^{-1}(E_q|_U)\\cong R^q(X_{S'}\\to S')_*\\underline{\\mathbf F_\\ell}$, which is constructible by Step 4. Finite direct image preserves constructibility by [lem-fin-finite-morphism], so $p_*p^{-1}(E_q|_U)$ is constructible. By [lemma-weil-pbc-finite-stalk-formula] the adjunction unit on a geometric stalk sends $e$ to the tuple $(e)_{\\bar s'}$: [lem-weil-pbc-inverse-image-stalk-germ] identifies $(p^{-1}(E_q|_U))_{\\bar s'}$ with $(E_q|_U)_{\\bar s}$ and sends the germ of the unit applied to a representative section to its original germ. Hence every component of the stalk unit is the identity under these identifications. All the displayed maps commute with multiplication by each element of $\\mathbf F_\\ell$, by naturality in coefficient endomorphisms, so the monomorphism is a submodule inclusion. The fibre is nonempty since $p$ is surjective, so this diagonal is injective, including when the stalk is zero. [lem-weil-pbc-geometric-stalks-detect-mono] makes the unit monic. Finally [lem-weil-pbc-constructible-subobjects-noetherian], applied on the Noetherian $U$ with the finite ring $\\mathbf F_\\ell$, proves that $E_q|_U$ is constructible. This gives the dense-open assertion for each integral base.",
+   "uses": [
+    "lemma-weil-pbc-prime-proper-base-change",
+    "prop-weil-pbc-inverse-image-exact",
+    "lemma-constructible-pullback-constant",
     "lem-fin-finite-morphism",
     "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-constructible-subobjects-noetherian"
+    "lem-weil-pbc-geometric-stalks-detect-mono",
+    "lem-weil-pbc-constructible-subobjects-noetherian",
+    "lem-weil-pbc-inverse-image-stalk-germ"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, second paragraph; Stacks 095T and 03PU"
+   }
   },
   {
-   "text": "For completeness, pass from it to all of $S$ as follows.\nFix $q$ and use Noetherian induction on reduced closed subsets $Z\\subset S$.\nProper base change identifies $E_q|_Z$ with the direct image for\nthe projective family $X_Z\\to Z$, whose fibres still have dimension\nat most one. If $Z$ is irreducible, it is integral; the preceding\nargument gives a nonempty open where $E_q|_Z$ is constructible.\nApply induction to its proper closed complement and combine the\ntwo finite locally closed partitions.\nIf $Z$ is reducible, it has finitely many components $Z_i$ by\n[lem-weil-pbc-noetherian-finite-components]; induction applies\nto each, since it is a proper closed subset.\nRestrict their partitions to\n$Z_i\\setminus\\bigcup_{j<i}Z_j$ to make them disjoint.\nThis gives constructibility on $Z$ in the precise sense of\n[def-weil-pbc-constructible-complexes].\nReduction of $S$ has the same etale topos by the same invariance\ntheorem. Thus the argument also covers a nonreduced $S$.",
+   "text": "We now prove that $E_q|_Z$ is constructible for every reduced closed subscheme $Z\\subset S$. Use [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to choose a minimal counterexample if any exist. The empty closed subset is not one, using its empty partition. For each $Z$, [lem-pc-projective-base-change] makes $X_Z\\to Z$ projective and thus proper. Its geometric fibres are the original fibres at the corresponding points (choose the same algebraic closure of the unchanged residue fields), so the dimension bound holds. For $i:Z\\hookrightarrow S$ and its Cartesian pullback $i_X:X_Z\\to X$, [lemma-weil-pbc-prime-proper-base-change] gives $i^{-1}Rf_*\\underline{\\mathbf F_\\ell}\\cong R(f_Z)_*i_X^{-1}\\underline{\\mathbf F_\\ell}$. By [prop-weil-pbc-inverse-image-exact], $\\mathcal H^q(i^{-1}K)=i^{-1}\\mathcal H^q(K)$, and [lemma-constructible-pullback-constant] identifies $i_X^{-1}\\underline{\\mathbf F_\\ell}$ with the constant sheaf on $X_Z$. Taking $q$th cohomology therefore gives $E_q|_Z\\cong R^q(f_Z)_*\\underline{\\mathbf F_\\ell}$. Every proper closed subset of this minimal $Z$, with reduced structure, already satisfies the claim.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-pc-projective-base-change",
+    "lem-kun-projective-implies-proper",
+    "lemma-weil-pbc-prime-proper-base-change",
+    "prop-weil-pbc-inverse-image-exact",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, third paragraph, induction setup"
+   }
+  },
+  {
+   "text": "If the minimal $Z$ is irreducible, its reduced structure makes it integral. Step 5 applied to $X_Z\\to Z$ gives a nonempty open $U_Z\\subset Z$ where $E_q|_Z$ is constructible. Its complement is proper closed and is constructible by minimality. Take the union of the two finite stratifications. A stratum locally closed in $U_Z$ is locally closed in $Z$ because $U_Z$ is open, and one locally closed in the complement is locally closed in $Z$ because the complement is closed. All these sets are constructible in the Noetherian $Z$. Their restrictions are finite locally constant; choose reduced structures on the strata, using reduction invariance if necessary. By [def-weil-pbc-constructible-complexes] this proves constructibility on $Z$, a contradiction.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, third paragraph, irreducible case"
+   }
+  },
+  {
+   "text": "If the minimal $Z$ is reducible, [lem-weil-pbc-noetherian-finite-components] gives finitely many distinct irreducible components $Z_1,\\ldots,Z_n$, each a proper closed subset. Their reduced schemes satisfy the induction claim. Set $A_i=Z_i\\setminus\\bigcup_{j<i}Z_j$. These sets are disjoint, cover $Z$, and are open in $Z_i$ and locally closed in $Z$. Restrict the finite stratification for $E_q|_{Z_i}$ to $A_i$. [prop-constructible-pullback] ensures constructibility after this restriction; alternatively each original finite locally constant stratum restricts to a finite locally constant sheaf. The resulting finite collection of disjoint locally closed constructible strata proves constructibility on $Z$ by [def-weil-pbc-constructible-complexes], again contradicting minimality.",
    "uses": [
     "lem-weil-pbc-noetherian-finite-components",
-    "def-weil-pbc-constructible-complexes"
+    "prop-constructible-pullback",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-constructible-subset"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, third paragraph, reducible case"
+   }
+  },
+  {
+   "text": "In particular $E_q|_{S_{\\mathrm{red}}}$ is constructible. Choose the reduced structure on each stratum of its finite stratification. Composing such a stratum with $S_{\\mathrm{red}}\\hookrightarrow S$ gives the very same locally closed subset of $S$, and its pullback of $E_q$ is the restriction just proved finite locally constant. Changing a stratum to its reduction does not change this property: [thm-weil-pbc-universal-homeomorphism-invariance] identifies the étale sites and their covers and preserves constant sheaves, so the covers trivializing the restriction transfer in both directions. Consequently these strata constitute a constructible stratification of $S$ itself by [def-weil-pbc-constructible-complexes]. This proves constructibility of $R^qf_*\\underline{\\mathbf F_\\ell}$ for every $q\\geq0$; negative direct images of a sheaf are zero.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
+    "place": "Proof, third paragraph, nonreduced base"
+   }
   }
  ],
  "proof_deps": [
-  "lem-fin-generic-curve-model",
-  "thm-fin-projective-smooth-curve-finiteness",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-reduction",
   "lem-fin-finite-morphism",
+  "lem-fin-generic-curve-model",
   "lem-finrepair-constant-finite-comparison",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "cor-weil-pbc-geometric-fiber-finite",
-  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-projective-base-change",
+  "lem-weil-derived-direct-image-composition",
   "lem-weil-pbc-constructible-subobjects-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
   "lem-weil-pbc-noetherian-finite-components",
-  "def-weil-pbc-constructible-complexes"
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lemma-constructible-flc-biproduct",
+  "lemma-constructible-pullback-constant",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-prime-proper-base-change",
+  "pqf-def-locnoeth",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-inverse-image-exact",
+  "thm-fin-projective-smooth-curve-finiteness",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-curve-constant.md",
-  "place": "## Proof"
+  "place": "Proof, paragraphs 1–3, expanded with the cited Stacks results and explicit finite-union and induction arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of constant finite field sheaves under projective morphisms with fibres of dimension at most one are constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image and unrelated finite-fibre declarations; no theorem for étale higher direct images",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(direct|push)|higher.*direct.*image [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of etale cohomology of projective families of curves with finite coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology finiteness theorem constructible higher pushforward of a constant torsion sheaf on a proper curve",
+   "results": "unrelated finite-fibre and algebraic-geometry declarations; no theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible.*(higherDirectImage|rightDerived)|((higherDirectImage|rightDerived).*(IsConstructible|isConstructible))",
+   "results": [],
+   "date": "2026-10-14",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructibility of higher direct images of torsion sheaves under a proper morphism of schemes",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+    "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+    "AlgebraicGeometry.Scheme.Hom.isConstructible_preimage",
+    "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+    "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+    "PrimeSpectrum.isConstructible_comap_image",
+    "Topology.IsConstructible.image_of_isClosedEmbedding",
+    "AlgebraicGeometry.Scheme.IdealSheafData.support_map"
+   ],
+   "date": "2026-10-14",
+   "verdict": "no match: returned only topological constructibility and scheme algebra results"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -106,5 +293,64 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-fin-projective-curve-constant",
+  "worker": "stage1",
+  "summary": "Retained the statement and generic-model/finite-comparison/finite-cover/Noetherian-induction route, expanded the argument into nine steps, and reused existing nodes for all needed tools. Replaced the geometric-point-only base-change citation by the full prime proper-base-change theorem, supplied monomorphism detection, and wrote out finite disjoint-union and finite-stratification arguments. No new nodes. Maintainer repair: cited the existing canonical module/abelian derived direct-image comparison explicitly in Step 1 and invoked it in Step 5.",
+  "blueprint": "Paragraph 1 is realized by steps 1–4; paragraph 2 by step 5; paragraph 3 by steps 6–9. The unit key node is not this item, so the unit realization fields are untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-to-proper implication for applying proper base change and finite comparison; no statement of this unit supplies this geometric property."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Generic stability of projectivity for the finite-cover and closed-base restrictions; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Small étale module-sheaf clause (5), for composition with the reduction equivalence; no composition theorem in this unit."
+   },
+   {
+    "node": "lemma-weil-pbc-prime-proper-base-change",
+    "why": "Proper base change for the constant prime coefficient sheaf along arbitrary finite and closed base changes; the old geometric-fibre corollary is not the arbitrary-square assertion."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness needed to take cohomology of the derived exchange; no statement of this unit supplies it."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Étale invariance under reduction, for constant coefficients and for reduced strata; no reduction-invariance theorem in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic stalk comparison including the unit on representative germs, needed for the finite-cover descent diagonal; the unit has no statement supplying this compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Canonical unit-compatible comparison of module derived direct image with abelian derived direct image, needed to apply the abelian-sheaf proper-base-change theorem without silently changing coefficient categories; the unit supplies no such comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-projective-base-change",
+  "lem-weil-derived-direct-image-composition",
+  "lemma-weil-pbc-prime-proper-base-change",
+  "prop-weil-pbc-inverse-image-exact",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-d77acc60c",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-d77acc60c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, report, and unit/chapter route. Repaired one C1/C4 citation gap by explicitly citing the existing canonical module/abelian derived direct-image comparison. Statement unchanged; descent, reduction, induction, edge cases, and dependency cycles checked. Corrected JSON is under fixes/dag/nodes; detailed findings are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
