@@ -319,10 +319,10 @@ theorem monoLinear_stalkAt_frobenius (F : WeilSheaf K l C) (hF : F.IsLisse)
     frobPowStalk, frobeniusLoopAt,
     M.mono_comp_upperStar_comp_apply]
 
+omit [IsCurve (C ↘ Spec (.of K))] in
 /-- The local Frobenius of the stalk at a closed point is that of the stalk at the attached
 geometric point. (Stated through `congrArg`: the kernel checks the direct definitional
 unfolding slowly.) -/
-omit [IsCurve (C ↘ Spec (.of K))] in
 lemma stalk_frobenius_apply (F : WeilSheaf K l C) (x : C.finitePoints)
     (v : (F.stalk x).carrier) :
     (F.stalk x).frobenius v = (F.stalkAt _ _
