@@ -14483,3 +14483,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:19 L: merged deliver/A3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T041914-L-1152947 (proof); batch 20261014T041913; modules 1; new nodes 0)
 - 04:19 L: merged deliver/A3/Sheaf.CategoryTheory.MapExtendHomology (stage 3; reviewer PASS; first push; landing 20261014T041915-L-1153095 (proof); batch 20261014T041913; modules 1; new nodes 0)
 - 04:19 L: merged deliver/A3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T041915-L-1153265 (proof); batch 20261014T041913; modules 1; new nodes 0)
+- 04:19 L: merged deliver/B3/Sheaf.AlgebraicGeometry.BoundaryPullbackTensorUnit (stage 3; reviewer PASS; first push; landing 20261014T041916-L-1153389 (proof); batch 20261014T041913; modules 1; new nodes 0)
