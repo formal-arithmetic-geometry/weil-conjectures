@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.MayerVietorisRestrictionLocalizationChain
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionNormalization
+import Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization
+import Sheaf.AlgebraicGeometry.MayerVietorisCompositionRightNormalization
 
 /-! # Complex localization of the open composition square
 
@@ -53,7 +54,9 @@ theorem schemeMV_image_composition_localization_core
       schemeMVOpenImageLocalization Y W (F.obj I) ≫
       R.map (schemeMVRestrictionLocalizationChain X Y h W I) ≫
       R.map ((schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I)) := by
-  sorry
+  have hleft := schemeMV_composition_left_normalization X Y h W I
+  have hright := schemeMV_composition_right_normalization X Y h W I
+  exact hleft.trans hright.symm
 
 /-- Complex localization of the open composition square.
 Source: Stacks Tags 0D5T and 08FE; the determining unit equations in

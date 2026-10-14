@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-mayer-vietoris-open-composition-complex-localization",
+ "kind": "statement",
+ "title": "Complex localization of the open-composition unit",
+ "statement": "For any complex J on the inverse-image open and the canonical derived composition comparison beta, the h-localization unit followed by Rh applied to the open-localization unit and beta equals Q of the complex open-composition comparison followed by the target-open localization unit and the target-open derived direct image of the restricted-morphism localization unit. This is the complex form of the homotopy normalization, without any exact-restriction comparison factors. Definitions: [def-pc-mayer-vietoris-image-chain-data], [def-pc-derived-mayer-vietoris-open-counit-model], [def-pc-derived-mayer-vietoris-canonical-data]. Exact Lean statement:\ntheorem schemeMVOpenComposition_complex_localization\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (β : schemeDerivedDirectImage (h ⁻¹ᵁ W).ι ⋙ schemeDerivedDirectImage h ≅\n      schemeDerivedDirectImage (h ∣_ W) ⋙ schemeDerivedDirectImage W.ι)\n    (hβ : β = (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫\n      eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫\n      schemeMVDirectImageComposition (h ∣_ W) W.ι)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ W).toScheme.toRingedSpace)) ℤ) :\n    let RX := RingedSpace.moduleDirectImage (h ⁻¹ᵁ W).ι.toLRSHom.toShHom\n    let G := RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom\n    let RY := RingedSpace.moduleDirectImage W.ι.toLRSHom.toShHom\n    let b₀ := (Functor.mapHomologicalComplexCompIso\n        (schemeMVUnderivedOpenComposition h W) (.up ℤ) ≪≫\n      (Functor.mapHomologicalComplexCompIso (Iso.refl (G ⋙ RY)) (.up ℤ)).symm).hom.app J\n    (schemeMVDirectImageLocalization h).app\n        ((RX.mapHomologicalComplex (.up ℤ)).obj J) ≫\n      (schemeDerivedDirectImage h).map\n        ((schemeMVDirectImageLocalization (h ⁻¹ᵁ W).ι).app J) ≫\n      β.hom.app (DerivedCategory.Q.obj J) =\n    DerivedCategory.Q.map b₀ ≫\n      (schemeMVDirectImageLocalization W.ι).app\n        ((G.mapHomologicalComplex (.up ℤ)).obj J) ≫\n      (schemeDerivedDirectImage W.ι).map\n        ((schemeMVDirectImageLocalization (h ∣_ W)).app J)",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing open-composition unit normalization to the homotopy quotient of J. Expand the named localization and homotopy-composition constructions. The quotient-factor comparison components are identities. Functoriality of Q and of the derived functors removes maps of identities and associates the composites, yielding the displayed equation on complexes.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-open-composition-normalization",
+    "def-pc-mayer-vietoris-image-chain-data",
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Cohomology of Sheaves",
+    "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "lem-pc-derived-mayer-vietoris-open-composition-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "F3",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 079V; official pages read 2026-10-14; explicit Lean transport and categorical cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of derived direct image composition with localization units",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image unit composition localization on cochain complexes",
+   "results": "mapDerivedCategoryFactorsh_hom_app; rightDerived_map_eq; rightDerivedFunctorComparison_fac; NatTrans.rightDerived_comp",
+   "date": "2026-10-14",
+   "verdict": "Generic localization identities; no exact scheme comparison equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality and generic cone isomorphism lemmas",
+   "date": "2026-10-14",
+   "verdict": "Naturality supplies the categorical glue, not the complex unit equation."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*fac|pushforwardCongr|schemeMVImageIso",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Sheaf/AlgebraicGeometry/MayerVietorisImageChainSquares.lean",
+   "date": "2026-10-14",
+   "verdict": "Existing normalization is required; ordinary image cancellation is an elementary associator calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-composition-localization-core",
+   "place": "Complex localization of the open-composition unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionComplexLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisOpenCompositionComplexLocalization.lean",
+  "declaration": "AlgebraicGeometry.schemeMVOpenComposition_complex_localization",
+  "statement": "theorem schemeMVOpenComposition_complex_localization\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (β : schemeDerivedDirectImage (h ⁻¹ᵁ W).ι ⋙ schemeDerivedDirectImage h ≅\n      schemeDerivedDirectImage (h ∣_ W) ⋙ schemeDerivedDirectImage W.ι)\n    (hβ : β = (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫\n      eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫\n      schemeMVDirectImageComposition (h ∣_ W) W.ι)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ W).toScheme.toRingedSpace)) ℤ) :\n    let RX := RingedSpace.moduleDirectImage (h ⁻¹ᵁ W).ι.toLRSHom.toShHom\n    let G := RingedSpace.moduleDirectImage (h ∣_ W).toLRSHom.toShHom\n    let RY := RingedSpace.moduleDirectImage W.ι.toLRSHom.toShHom\n    let b₀ := (Functor.mapHomologicalComplexCompIso\n        (schemeMVUnderivedOpenComposition h W) (.up ℤ) ≪≫\n      (Functor.mapHomologicalComplexCompIso (Iso.refl (G ⋙ RY)) (.up ℤ)).symm).hom.app J\n    (schemeMVDirectImageLocalization h).app\n        ((RX.mapHomologicalComplex (.up ℤ)).obj J) ≫\n      (schemeDerivedDirectImage h).map\n        ((schemeMVDirectImageLocalization (h ⁻¹ᵁ W).ι).app J) ≫\n      β.hom.app (DerivedCategory.Q.obj J) =\n    DerivedCategory.Q.map b₀ ≫\n      (schemeMVDirectImageLocalization W.ι).app\n        ((G.mapHomologicalComplex (.up ℤ)).obj J) ≫\n      (schemeDerivedDirectImage W.ι).map\n        ((schemeMVDirectImageLocalization (h ∣_ W)).app J)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261014T042430-L-1211875",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261014T042430-L-1211875",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
