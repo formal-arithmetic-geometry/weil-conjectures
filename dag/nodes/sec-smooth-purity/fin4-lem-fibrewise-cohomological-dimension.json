@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "fin4-lem-fibrewise-cohomological-dimension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomological dimension over an algebraically closed field",
@@ -16,32 +16,113 @@
   "sbc-def-coefficient-conventions",
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension"
  ],
  "proof": [
   {
-   "text": "The coefficient ring of [sbc-def-coefficient-conventions]\nis killed by a positive integer, so $F$ is torsion.\nThe absolute Galois group of $k'$ is trivial; the field\ndictionary of [lem-exc-field-discrete-modules] therefore\ngives torsion cohomological dimension zero for $k'$.\nApply [thm-sc-finite-type-torsion-cd] with $c=0$.\nIt proves the stronger assertion for all torsion etale sheaves.\nIts proof uses Zariski Leray and the affine ordinary\ncohomological-dimension theorem; no compact-support\nidentification or affine compact-support bound is involved.",
+   "text": "By [sbc-def-coefficient-conventions], a positive integer $N$ annihilates $\\Lambda$. For every section $s$ of the underlying abelian sheaf of $F$, $Ns=(N1_\\Lambda)s=0$. Thus $F$ is torsion in the local-section sense of [def-weil-pbc-etale-sheaves], using the identity covering and the same $N$ for every section. Constructibility is not needed for this implication.",
    "uses": [
     "sbc-def-coefficient-conventions",
-    "lem-exc-field-discrete-modules",
-    "thm-sc-finite-type-torsion-cd"
+    "def-weil-pbc-etale-sheaves"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fin4-lem-fibrewise-cohomological-dimension.md",
+    "place": "## Proof, first sentence: finite coefficients imply torsion"
+   }
+  },
+  {
+   "text": "An algebraically closed field has no nontrivial finite separable extension: the minimal polynomial of each algebraic element splits into linear factors, so an irreducible minimal polynomial has degree one. Hence $k'$ is separably closed. Apply [lem-kun-03qu-sep-closed] to every torsion abelian etale sheaf on $\\operatorname{Spec}k'$; it gives vanishing in every positive degree. By the definition [def-sc-etale-torsion-cd], this is precisely $\\operatorname{cd}_{\\rm tor}(k')\\leq0$. Unlike the finite-ring module dictionary, this cited vanishing statement covers all abelian sheaves.",
+   "uses": [
+    "lem-kun-03qu-sep-closed",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fin4-lem-fibrewise-cohomological-dimension.md",
+    "place": "## Proof, second sentence: cohomological dimension zero of the ground field; Stacks Tag 03QU, lemma-compare-cohomology-point"
+   }
+  },
+  {
+   "text": "If $X$ is empty, every scheme $U$ admitting a morphism to $X$ is empty, since its underlying map has empty target. By [def-weil-pbc-etale-site], the empty family is a jointly surjective etale covering of each such $U$. The equalizer condition of [def-weil-pbc-abelian-etale-sheaves] then identifies each abelian sheaf section group on $U$ with the zero group (both empty products are zero groups). In particular, termwise global sections of any resolution are zero, so [def-weil-pbc-etale-cohomology] gives the assertion. Otherwise put $e=\\dim X$. The dimension convention [def-kun-topological-krull-dimension] and the given finite bound imply $0\\leq e\\leq d$. Apply [thm-sc-finite-type-torsion-cd] with $K=k'$, $c=0$ and actual dimension $e$: the finite-type hypothesis is given, and the field bound is step 2. It yields $\\operatorname{cd}_{\\rm tor}(X)\\leq2e$. For $q>2d$ we have $q>2e$; by [def-sc-etale-torsion-cd] the torsion sheaf of step 1 has $H^q(X_{\\rm et},F)=0$, with the ordinary cohomology of [def-weil-pbc-etale-cohomology].",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd",
+    "def-sc-etale-torsion-cd",
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fin4-lem-fibrewise-cohomological-dimension.md",
+    "place": "## Proof, third and fourth sentences: specialize the finite-type bound to c=0, then unfold it"
+   }
   }
  ],
  "proof_deps": [
   "sbc-def-coefficient-conventions",
-  "lem-exc-field-discrete-modules",
-  "thm-sc-finite-type-torsion-cd"
+  "def-weil-pbc-etale-sheaves",
+  "lem-kun-03qu-sep-closed",
+  "def-sc-etale-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fin4-lem-fibrewise-cohomological-dimension.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|torsion.*cohomological|subsingleton_H_of_two_mul",
+   "results": "0 hits: . ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomological dimension of a finite type scheme over an algebraically closed field is at most twice its dimension",
+   "results": "0 hits: . service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomological\", \"dimension\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a constructible torsion sheaf on a finite type scheme of dimension d over an algebraically closed field vanishes above 2d",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Algebra.FormallyEtale.subsingleton_h1Cotangent, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE.  Read the returned signatures: cotangent/singular cohomology, generic derived bounds and injective-object vanishing do not assert a scheme-dimensional bound for all torsion etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher right derived global sections of torsion abelian sheaves on the small etale site vanish in degree greater than twice the Krull dimension over a separably closed field",
+   "results": "8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isZero_of_isGE, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.isZero_Tor_succ_of_projective, CategoryTheory.Sheaf.H.  Read the returned signatures: cotangent/singular cohomology, generic derived bounds and injective-object vanishing do not assert a scheme-dimensional bound for all torsion etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.H|cohomological.*dimension|etale.*cohomology",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean.  Read the returned signatures: cotangent/singular cohomology, generic derived bounds and injective-object vanishing do not assert a scheme-dimensional bound for all torsion etale sheaves.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +153,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "fin4-lem-fibrewise-cohomological-dimension",
+  "worker": "stage1",
+  "summary": "Replaced the finite-ring dictionary inference for all torsion sheaves by the existing closed vanishing theorem on a separably closed point. Wrote the coefficient annihilation, the actual-dimension specialization and the empty-scheme case explicitly. Retained the statement and constructibility hypothesis; no new nodes. Second reading supplied direct site/sheaf-axiom citations and the empty-product argument for the empty case.",
+  "blueprint": "Realizes the single proof paragraph: finite coefficients give torsion; the ground field has torsion cohomological dimension zero; specialize thm-sc-finite-type-torsion-cd to c=0. The field vanishing uses the existing same-unit lem-kun-03qu-sep-closed, whose statement covers all abelian sheaves.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-00e13e7a5",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-00e13e7a5 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and source locations, and unit/chapter route. All three proof steps are valid, including arbitrary abelian-sheaf field vanishing, actual-dimension specialization, and the empty scheme. No new nodes, circularity involving the item, coefficient-category substitution, or target weakening. No repairs or tool_uses needed; detailed checks are in review.md."
+ }
 }
