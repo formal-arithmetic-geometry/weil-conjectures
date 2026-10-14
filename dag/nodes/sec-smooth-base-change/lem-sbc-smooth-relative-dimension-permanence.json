@@ -21,9 +21,123 @@
   "def-weil-pbc-scheme-conventions",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unpack [def-sbc-smooth-morphisms]: the supplied smooth maps $f$ and, in clause (2), $a$ are locally of finite presentation and formally smooth. Their respective fibre dimensions at every source point are $n$ and $m$. To check local finite type with the affine-cover definition [def-weil-finite-type-morphism], fix any affine open $V$ of the target and cover its inverse image by affine opens $W$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], the algebra of each $W$ is a quotient of a polynomial algebra in finitely many variables over the algebra of $V$. The images of these variables generate that algebra, so this is the required cover by finitely generated algebras. No finite subcover or quasi-compactness is required.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ (lemma-locally-finite-presentation-characterize), (1) implies (2); Tags 01TP (definition-finite-presentation), 01T1 (definition-finite-type) and 02G2 (definition-smooth-relative-dimension)"
+   }
+  },
+  {
+   "text": "For clause (1), put $P=X\\times_S S\\prime$, with projections $p:P\\to X$ and $q:P\\to S\\prime$. To verify formal smoothness of $q$ [def-sbc-formally-smooth], take an affine first-order thickening $i:T\\to T\\prime$, a map $b:T\\prime\\to S\\prime$, and $t:T\\to P$ with $qt=bi$. Formal smoothness of $f$ supplies $v:T\\prime\\to X$ extending $pt$ and satisfying $fv=gb$. The universal property of [def-pc-fibre-product] gives $(v,b):T\\prime\\to P$; its restriction is $t$, since both projections agree, and its composite with $q$ is $b$. Thus the required lift exists.",
+   "uses": [
+    "def-sbc-formally-smooth",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H2 (lemma-base-change-formally-smooth), filling in the omitted lifting argument"
+   }
+  },
+  {
+   "text": "By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], $q$ is locally of finite presentation, since $f$ is and $g$ is arbitrary. Together with the lift just constructed this makes $q$ smooth by [def-sbc-smooth-morphisms]. Only the local finite presentation clause is used: none of the quasi-compactness hypotheses in the other clauses is imposed.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TS (lemma-base-change-finite-presentation), local clause; Tag 01VB (lemma-base-change-smooth)"
+   }
+  },
+  {
+   "text": "For any $z\\in P$, let $x=p(z)$ and $s\\prime=q(z)$. Apply [lem-sc-fibre-dimension-after-base-change] to the cartesian square defining $P$: its locally finite type hypothesis for $f$ was checked in Step 1, and it allows an arbitrary $g$. It gives $\\dim_z(P_{s\\prime})=\\dim_x(X_{f(x)})=n$. Hence the smooth map $q$ has relative dimension $n$ by [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1); Tag 02NK (lemma-base-change-relative-dimension-d)"
+   }
+  },
+  {
+   "text": "For clause (2), verify formal smoothness of $f\\circ a$ directly using [def-sbc-formally-smooth]. Given an affine first-order thickening $i:T\\to T\\prime$, $b:T\\prime\\to S$, and $t:T\\to U$ with $fat=bi$, first lift $at:T\\to X$ through $f$ to $v:T\\prime\\to X$ with $vi=at$ and $fv=b$. Now regard the same thickening as one over $X$ via $v$ and lift $t$ through $a$ to $w:T\\prime\\to U$ with $wi=t$ and $aw=v$. Then $faw=b$, which is exactly the requested lift.",
+   "uses": [
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H1 (lemma-composition-formally-smooth), filling in the omitted two-lift argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-locally-finite-presentation-composition] to $a$ and $f$, whose local finite presentation was extracted in Step 1. Thus $f\\circ a$ is locally of finite presentation; together with Step 5, [def-sbc-smooth-morphisms] says it is smooth.",
+   "uses": [
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TR (lemma-composition-finite-presentation), local clause; Tag 01VA (lemma-composition-smooth)"
+   }
+  },
+  {
+   "text": "By [lem-pc-smooth-flat], the smooth map $a$ is flat. For each $u\\in U$ put $x=a(u)$ and $s=f(x)$, and apply [lem-sbc-flat-composite-fibre-dimension-at-point]; both maps are locally finite type by Step 1, and $a$ is flat at $u$. The result is $\\dim_u(U_s)=\\dim_u(U_x)+\\dim_x(X_s)=m+n$. Since Step 6 proves smoothness, [def-sbc-smooth-morphisms] now gives relative dimension $m+n$ for $f\\circ a$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VF (lemma-smooth-flat), Tag 02JS (lemma-dimension-fibre-at-a-point-additive), Tag 02NL (lemma-composition-relative-dimension-d), flat case"
+   }
+  },
+  {
+   "text": "No step chooses a point without first quantifying over the source. If $P$ or $U$ is empty the fibre-dimension assertions are vacuous, and the lifting arguments remain valid: they start with a supplied map $T$ into that source. If $a$ is etale, [def-sbc-smooth-morphisms] defines it to be smooth of relative dimension zero, so Step 7 gives $0+n=n$.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G2 (definition-smooth-relative-dimension), including empty sources and dimension zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-sbc-formally-smooth",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-pc-smooth-flat",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01VA, 01VB, 02FY, 02JS, 02NK and 02NL; smoothness proved by the omitted lifting arguments in more-morphisms.tex Tags 02H1 and 02H2"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,10 +201,38 @@
    "results": "{\"t\": \"2026-10-14T03:14:18Z\", \"tool\": \"grep\", \"query\": \"SmoothOfRelativeDimension \\\\(n \\\\+ m\\\\)|IsStableUnderBaseChange \\\\(@SmoothOfRelativeDimension\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"167\", \"208\"], \"digest\": \"c3d5d1a47ebc97f4\"}",
    "date": "2026-10-14",
    "verdict": "match: independently verified Smooth.lean:166–170 and 206–228; semantic search uses deprecated IsSmooth aliases"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothOfRelativeDimension_comp|smoothOfRelativeDimension_isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-14T03:30:25Z\", \"tool\": \"grep\", \"query\": \"smoothOfRelativeDimension_comp|smoothOfRelativeDimension_isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"166\", \"170\", \"173\", \"174\", \"206\"], \"digest\": \"8aa5fb4c591c78a8\"}",
+   "date": "2026-10-14",
+   "verdict": "candidate only: chart-defined permanence exists at Smooth.lean:166-170,206-228; fibre-dimension definition is not definitionally the same"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms of pure relative dimension are stable under base change and composition adds relative dimensions",
+   "results": "{\"t\": \"2026-10-14T03:30:26Z\", \"tool\": \"leansearch\", \"query\": \"Smooth morphisms of pure relative dimension are stable under base change and composition adds relative dimensions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "{\"t\": \"2026-10-14T03:30:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.SmoothOfRelativeDimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.smoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.SmoothOfRelativeDimension\", \"AlgebraicGeometry.SmoothOfRelativeDimension.smooth\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instHasRingHomPropertySmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.smoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme\"], \"digest\": \"0c2dfb0722c0ce4d\"}",
+   "date": "2026-10-14",
+   "verdict": "candidate only: chart-defined permanence exists at Smooth.lean:166-170,206-228; fibre-dimension definition is not definitionally the same"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth scheme morphisms of fixed fibre dimension remain smooth of that dimension after arbitrary base change and dimensions add under composition",
+   "results": "{\"t\": \"2026-10-14T03:30:26Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth scheme morphisms of fixed fibre dimension remain smooth of that dimension after arbitrary base change and dimensions add under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"7af83ec74690cb77\"}",
+   "date": "2026-10-14",
+   "verdict": "candidate only: chart-defined permanence exists at Smooth.lean:166-170,206-228; fibre-dimension definition is not definitionally the same"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-thm-universal-test-vanishing",
   "by": "worker",
@@ -112,5 +254,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sbc-smooth-relative-dimension-permanence",
+  "worker": "stage1",
+  "summary": "Proved formal-smooth permanence by explicit lifts and combined it with local finite presentation and pointwise fibre-dimension formulas. Reused the existing base-change dimension lemma, smooth-flat lemma and local-finite-presentation base-change node. Created only local finite presentation composition (Mathlib) and the general flat pointwise dimension formula (unsplit). The chart-defined Mathlib smooth permanence remains a candidate rather than an attachment; no predicate comparison is assumed. Statement unchanged.",
+  "blueprint": "Realizes sbc-thm-universal-test-vanishing paragraph 2 (smooth affine curve after field base change) and paragraph 3 (etale charts keep relative dimension one).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic pointwise base-change dimension tool from Tag 02FY; no statement of sk-thm-vanishing supplies this dimension computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-b9141cbba",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-b9141cbba (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and checked every step against Stacks 01TQ/01TR/01TS, 02H0–02H2, 02FY, 02JS, and smoothness sources. Statements, hypotheses, small cases, reuse, route, and exact master coefficient/morphism boundaries pass. Completed missing metadata in both new-node JSON files under fixes; mathematical fields unchanged. Concrete checks recorded in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
