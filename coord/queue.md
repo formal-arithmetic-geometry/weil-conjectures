@@ -1,6 +1,6 @@
 # Work queue
 
-38 items; claim with `tools/claim.py next <group> [--stage N]`.
+37 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (38)
+## Stage 3: modules to prove (37)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,7 +33,6 @@
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionLocalizedCounit` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineSectionComparison` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageRows` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorUnitComponent` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
