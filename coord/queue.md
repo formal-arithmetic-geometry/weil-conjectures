@@ -1,6 +1,6 @@
 # Work queue
 
-76 items; claim with `tools/claim.py next <group> [--stage N]`.
+78 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (76)
+## Stage 3: modules to prove (78)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -47,7 +47,6 @@
 | `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopies` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
-| `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation` | 23 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
@@ -81,12 +80,15 @@
 | `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization` | 35 | 1 | proof |
+| `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeDescent` | 37 | 1 | proof |
+| `Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafReverseUnit` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels` | 39 | 1 | proof |
-| `Sheaf.RingTheory.DvrAbhyankarLocalResidue` | 41 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
-| `Sheaf.RingTheory.DvrAbhyankarNormalizedFactor` | 42 | 1 | proof |
+| `Sheaf.RingTheory.DvrEtaleUnitRootDiagram` | 42 | 1 | proof |
 | `Sheaf.RingTheory.DvrNormalizedTensorFactorLift` | 42 | 1 | proof |
+| `Sheaf.RingTheory.DvrUniformizerRootCompositumResidue` | 42 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorAmbientLocalizedComparisons` | 43 | 1 | proof |
+| `Sheaf.RingTheory.DvrAbhyankarLocalMaximalIdeal` | 43 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 46 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
