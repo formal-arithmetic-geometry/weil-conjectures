@@ -29,9 +29,103 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-constructible-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=h_*G$. By [lem-weil-pbc-constructible-qcqs-affine-local] it suffices to show that $F$ is constructible on every affine open $A\\subseteq U$. We will use inverse image and restriction interchangeably along etale maps: [lem-weil-pbc-etale-inverse-image-restriction] gives the identification on underlying abelian sheaves, and [lemma-weil-pbc-etale-pullback-forget-modules] identifies the underlying abelian inverse image of a module sheaf. This identification is $\\Lambda$-linear: for each $\\lambda\\in\\Lambda$, naturality with respect to the abelian sheaf endomorphism $m\\mapsto\\lambda m$ gives $\\rho(\\lambda m)=\\lambda\\rho(m)$. Local sections of the constant ring are etale locally constant scalars, so the same equality holds for all sections of $\\Lambda_T$. Thus these identifications are isomorphisms of module sheaves, not a change of coefficient category.",
+   "uses": [
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lemma-weil-pbc-etale-pullback-forget-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
+   }
+  },
+  {
+   "text": "For each point $a\\in A$, apply [lem-weil-pbc-finite-etale-etale-local-split] to $h$ at $a\\in U$. Pull the resulting etale neighbourhood back to $A$; [lem-weil-pbc-etale-scheme-base-change] makes it etale over $A$, and the specified point still lies above $a$. The decomposition into copies of the neighbourhood pulls back to the same finite number of copies, by the fibre-product universal property. These neighbourhoods cover $A$. The affine scheme $A$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Apply the covering-refinement clause of [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings] to obtain a finite etale covering $q_b:B_b\\to A$ with each $B_b$ affine and factoring through one such neighbourhood. Pull back the splitting once more. Thus $V\\times_U B_b$ is a finite disjoint union of copies of $B_b$, with sheet maps $s_{bj}:B_b\\to V\\times_U B_b$. Form $B=\\coprod_b B_b$ using [lem-weil-pbc-scheme-coproduct-family]. Its map $q:B\\to A$ is surjective. It is etale by [lem-weil-pbc-etale-local-on-source], since its restriction to each open component is the etale map $q_b$. It is quasi-compact because it is a finite union of quasi-compact affine components, and quasi-separated by [lem-weil-pbc-quasi-separated-affine-cover-criterion], clause (2): the component affine opens have intersections $B_b$ when the indices agree and the empty scheme otherwise, all quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Hence $B$ and $A$ meet the qcqs hypotheses of constructibility descent. The finite sheet number is allowed to depend on $b$; no constant rank on the whole base is assumed.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04HN, label lemma-finite-etale-etale-local; literature/stacks-project/topologies.tex Tag 0218, label lemma-etale-affine"
+   }
+  },
+  {
+   "text": "For fixed $b$, put $V_b=V\\times_U B_b$, $h_b:V_b\\to B_b$, and $G_b=G|_{V_b}$. The projection $V_b\\to V$ is etale by [lem-weil-pbc-etale-scheme-base-change], applied to the etale composite $B_b\\to A\\to U$; the open immersion $A\\to U$ and this composite are etale by clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation]. Each sheet map is an open immersion, so its composite $B_b\\to V_b\\to V$ is etale by the same clauses. Thus all restrictions used in this step are defined on the small etale sites and are identified with module inverse images by step 1. The restriction of $F$ to $B_b$ is canonically $h_{b*}G_b$. Indeed, on an etale object $W\\to B_b$, the two sides have sections $G(W\\times_U V)$ and $G(W\\times_{B_b}(B_b\\times_U V))$ by [def-weil-pbc-direct-image]. The isomorphism of fibre products is $(w,v)\\mapsto(w,(q_b(w),v))$, with inverse $(w,(b,v))\\mapsto(w,v)$. These maps commute with every $W\\to W_1$ over $B_b$, so they induce inverse sheaf morphisms. They preserve scalar multiplication because the scalar section on each fibre product is the pullback of the same section on $W$. This is the restriction identification of step 1, applied in the module category. By [lem-weil-pbc-direct-image-split-cover-product], $h_{b*}G_b\\cong\\prod_j G_b|_{s_{bj}}$. Each factor is the restriction of $G$ along the composite sheet map $B_b\\to V$. It is constructible by [prop-constructible-pullback], read in $\\mathrm{ModuleCat}(\\Lambda)$; [lem-weil-pbc-constructible-etale-module-sheaf-comparison] identifies its predicate with the finite-module-stratum predicate used here.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-direct-image-split-cover-product",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
+   }
+  },
+  {
+   "text": "A finite product of these constructible module sheaves is constructible by an explicit induction using [thm-constructible-serre], clause (2). The product with no factors is the zero sheaf, constant with finite value $0$ on the single stratum $B_b$. If $P$ is the product of the first $r$ factors and $H$ the next factor, the sectionwise sequence $0\\to P\\to P\\times H\\to H\\to0$, with maps $p\\mapsto(p,0)$ and $(p,t)\\mapsto t$, is split exact: its splitting is $t\\mapsto(0,t)$ and its kernel is exactly $P\\times\\{0\\}$. Clause (2) therefore makes $P\\times H$ constructible. This proves the induction for any finite number of factors. Transport the resulting stratum witnesses through the module isomorphisms in step 3; their pullbacks remain isomorphic to the same finite constant modules. Consequently $F|_{B_b}$ is constructible for every $b$.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-constructible-qcqs-affine-local], the open cover of $B$ by its finitely many components $B_b$ shows that $q^{-1}(F|_A)$ is constructible. Here its restriction to $B_b$ is $F|_{B_b}$ by step 1, so step 4 provides the local witnesses. Apply [lem-weil-pbc-etale-constructible-surjective-pullback] to the surjective morphism $q:B\\to A$: both schemes are qcqs by step 2 and the coefficient ring is the given finite commutative ring. It follows that $F|_A$ is constructible. Since this holds for every affine open $A\\subseteq U$, the affine-local criterion of step 1 makes $F=h_*G$ constructible on $U$ in precisely the stated global finite-stratification sense.",
+   "uses": [
+    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "lem-weil-pbc-etale-constructible-surjective-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-direct-image-split-cover-product",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "thm-constructible-serre",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-etale-constructible-surjective-pullback",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +168,80 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"CategoryTheory.presheafIsGeneratedBy_of_isFinite\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor Cᵒᵖ (Type w))\\n  [inst_1 : CategoryTheory.PresheafIsFinite F],\\n  CategoryTheory.PresheafIsGeneratedBy F CategoryTheory.Subfunctor.IsFinite.x\", \"doc\": \"If a presheaf $ F $ is finite, then it is generated by the finite set of sections that witness its finite generation.\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"}\n  {\"name\": \"CategoryTheory.Subfunctor.range_isFinite\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor Cᵒᵖ (Type w))\\n  [CategoryTheory.PresheafIsFinite F] {F' : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F ⟶ F'),\\n  (CategoryTheory.Subfunctor.range f).IsFinite\", \"doc\": \"If a presheaf $ F $ is finite, then for any natural transformation $ f : F \\to F' $ to another presheaf $ F' $, the image subfunctor of $ f $ satisfies the finiteness condition for subfunctors.\"}\n  {\"name\": \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_4} {U : ι → TopologicalSpace.Opens X}\\n  [PrespectralSpace X] [QuasiSeparatedSpace X],\\n  TopologicalSpace.IsOpenCover U →\\n    (∀ (i : ι), IsCompact ↑(U i)) →\\n      (Topology.IsLocallyConstructible s ↔ ∀ (i : ι), Topology.IsConstruct\", \"doc\": \"In a prespectral and quasi-separated topological space $X$, a set $s$ is locally constructible if and only if, for every open cover $\\\\{U_i\\\\}$ of $X$ consisting of compact open sets, the intersection $\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale direct image preserves constructible sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.BasicConstructibleSetData.map, PrimeSpectrum.BasicConstructibleSetData.map_n, Topology.IsConstructible.image_of_isOpenEmbedding; constructible subsets, not constructible sheaves",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves are preserved by pushforward along a finite covering of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.isConstructible_comap_image, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, PrimeSpectrum.isConstructible_range_comap, Topology.IsLocallyConstructible.iff_of_isOpenCover; constructible subsets, not constructible sheaves",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale pushforward of constructible module sheaves is constructible",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale direct image preserves constructible sheaves of modules",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.BasicConstructibleSetData.map, PrimeSpectrum.BasicConstructibleSetData.map_n, Topology.IsConstructible.image_of_isOpenEmbedding; constructible subsets, not constructible sheaves",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves are preserved by pushforward along a finite covering of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.isConstructible_comap_image, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, PrimeSpectrum.isConstructible_range_comap, Topology.IsLocallyConstructible.iff_of_isOpenCover; constructible subsets, not constructible sheaves",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale pushforward of constructible module sheaves is constructible",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-fp-pushforward-constructible",
   "by": "worker",
@@ -93,5 +257,104 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-etale-pushforward-constructible",
+  "worker": "stage1",
+  "summary": "Kept the module statement of Stacks 095H. Followed the source reduction to affine bases and etale split covers, with a finite affine refinement so that 095Q applies to qcqs schemes. Wrote the module-linear localization calculation and the finite-product induction explicitly. Reused all existing nodes; no new nodes. No exact finished declaration for the item was found.",
+  "blueprint": "Realizes the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper: 095R reduces its final finite-etale step to 095H, whose argument is etale splitting and finite products.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-qcqs-affine-local",
+    "why": "Generic Constructible sheaves of modules on a qcqs scheme: global partition iff affine-local (Stacks 095E) used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lemma-weil-pbc-etale-pullback-forget-modules",
+    "why": "Generic Étale pullback commutes with forgetting constant-ring module coefficients used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Generic A finite etale morphism is etale locally a finite disjoint union of copies of the base used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic Base change of an etale morphism of schemes is etale (Stacks 02GO) used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "why": "Generic Cofinal finite affine etale coverings of a quasi-compact quasi-separated etale object used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic Coproducts of schemes: open coprojections with disjoint images covering used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic Affine schemes are quasi-compact and quasi-separated used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic Quasi-separatedness from affine-open intersections used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic Direct image and its derived functor used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-split-cover-product",
+    "why": "Generic Direct image along a split cover is the product of the restrictions to the sheets used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic Pullback of constructible sheaves used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "why": "Generic Comparison of the two global constructible module sheaf predicates used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic Constructible sheaf of modules on the small etale site used in the 095H etale-local finite-product argument; the unit proper-base-change reduction supplies no replacement for this local sheaf/topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-on-source",
+    "why": "Generic etale permanence tool establishing the etale maps needed for the source 095H restriction argument; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic etale permanence tool establishing the etale maps needed for the source 095H restriction argument; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-qcqs-affine-local",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-direct-image-split-cover-product",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-961a25fef",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-961a25fef (reviewer sub-agent of L); spot-checked: Read the complete item, all cited dependency statements, sources and unit/chapter route. All five steps match Stacks 095H; checked module-linear localization, qcqs descent via 095Q, finite products and empty/disconnected cases. No usable duplicate, cycle, restated split or coefficient substitution found. Accepted generic tool uses are recorded in review.md. No fixes required."
  }
 }
