@@ -14520,3 +14520,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:32 L: merged deliver/F1/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T043250-L-1304933 (proof); batch 20261014T043246; modules 1; new nodes 0)
 - 04:32 L: merged deliver/F4/Sheaf.RingTheory.DvrAbhyankarLocalMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261014T043251-L-1305038 (interface); batch 20261014T043246; modules 3; new nodes 2)
 - 04:32 L: merged deliver/G2/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafReverseUnit (stage 3; reviewer PASS; first push; landing 20261014T043251-L-1305236 (proof); batch 20261014T043246; modules 1; new nodes 0)
+- 04:32 L: merged deliver/T4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (stage 3; reviewer PASS; first push; landing 20261014T043252-L-1305442 (proof); batch 20261014T043246; modules 1; new nodes 0)

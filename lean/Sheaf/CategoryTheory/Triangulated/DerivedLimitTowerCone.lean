@@ -30,7 +30,6 @@ theorem derivedCategory_towerLimit_cone
       ∃ c : Cone I.asFunctor, Nonempty (IsLimit c) := by
   intro I
   let c := limitConeOfEqualizerAndProduct I.asFunctor
-  refine ⟨c.cone, ?_⟩
-  exact ⟨c.isLimit⟩
+  exact ⟨c.cone, ⟨c.isLimit⟩⟩
 
 end CategoryTheory
