@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-cofiltered-affine-etale-model",
+ "kind": "statement",
+ "title": "Cofiltered affine etale model",
+ "statement": "Let I be a small nonempty cofiltered category, D:I→Scheme a diagram with compact quasi-separated stages and affine transition maps, c a cone whose underlying scheme cone is limiting, and U an affine etale object over c.pt. There exist i∈I, an affine etale V over D(i), and r:U→V such that the square (r,U.hom,V.hom,c.π_i) is a pullback.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYL",
+  "place": "Affine etale site descent, together with Tag 01ZM; reindex a cofiltered category by a directed poset."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply IsFiltered.exists_directed to I opposite, use the left-opposite initial functor to preserve the limiting cone, inherit compactness, quasi-separatedness and affine transition properties, then use affineEtale_common_models on the singleton family U.",
+   "uses": [
+    "lem-pbc-affine-etale-common-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-affine-etale-common-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EYL",
+  "place": "Proof and comparison calculations formalized by E1; complete argument in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a free abelian represented sheaf commutes with inverse image and derived adjunction identifies higher direct image classes with restricted etale cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale scheme over the limit of a cofiltered diagram of quasi compact quasi separated schemes with affine transition maps descends to some stage",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
+   "date": "2026-10-15",
+   "verdict": "Read the relevant generic APIs; no complete match for this statement. The proved library declarations cited in the proof supply the ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCofiltered\", \"Over\"",
+   "results": "5 hits: CategoryTheory.IsCofiltered.over, AlgebraicGeometry.Scheme.OpenCover.exists_of_isCofiltered_of_finite, CategoryTheory.FunctorToTypes.instIsCofilteredElementsOverFromOverFunctor, AlgebraicGeometry.Scheme.instIsCofilteredElementsEtaleCompOverForgetObjOppositeFunctorTypeCoyonedaOpMk, CategoryTheory.GrothendieckTopology.HOneHypercover.isCofiltered_of_hasPullbacks",
+   "date": "2026-10-15",
+   "verdict": "Read the relevant generic APIs; no complete match for this statement. The proved library declarations cited in the proof supply the ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_directed|affineEtale|overPost|mapCone.*pullback",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/GlueData.lean, Mathlib/CategoryTheory/GuitartExact/Over.lean, Mathlib/CategoryTheory/GuitartExact/Over.lean, Mathlib/CategoryTheory/GuitartExact/Over.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Presentable/Directed.lean",
+   "date": "2026-10-15",
+   "verdict": "Read the relevant generic APIs; no complete match for this statement. The proved library declarations cited in the proof supply the ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageGermDescent",
+  "date": "2026-10-15",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Proof by affine inverse limits: the geometric continuity step for cartesian higher direct images (Stacks 0EYM, second proof), isolated in the limit-exchange support lemmas.",
+   "via": [
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-limit-higher-direct-image-exchange",
+    "lem-sc-limit-derived-direct-image-exchange",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CofilteredAffineEtaleModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CofilteredAffineEtaleModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affineEtale_model_of_cofiltered",
+  "statement": "theorem exists_affineEtale_model_of_cofiltered\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u})\n    [∀ i : I, CompactSpace (D.obj i)]\n    [∀ i : I, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (U : c.pt.Etale) [IsAffine U.left] :\n    ∃ (i : I) (V : (D.obj i).Etale) (_ : IsAffine V.left)\n      (r : U.left ⟶ V.left), IsPullback r U.hom V.hom (c.π.app i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T200313-L-1824206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T200313-L-1824206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

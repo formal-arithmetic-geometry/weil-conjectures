@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-cartesian-higher-image-chart-comparison",
+ "kind": "statement",
+ "title": "Cartesian chart cohomology comparison",
+ "statement": "Let f:X→S be any scheme morphism, I a small category, D:I→Over S a diagram, c any cone, F an abelian etale sheaf on X and q a natural number. Fix i, an etale V over D(i), an etale U over c.pt, and a morphism r:U→V making the square with the i-th cone leg a pullback. Put h_i:X×S D(i)→D(i), F_i=pr_X inverse-image F, and E,d equal to the explicit chart diagram and cone over i. There exist an abelian-group isomorphism e from restrictedOverCohomology(h_i,F_i,q,d.pt,V) to Hom(Z[U][0],cartesianDerivedImage(f,c.pt.hom,F[0])[q]), and for each j∈Over i a function lift_j from the stage restricted cohomology to Hom(Z[U][0],D+(π_j inverse-image)(cartesianDerivedImage(f,D(j).hom,F[0]))[q]). For every class x, lift_j(x) followed by the shift of the prescribed cartesianDerivedImageMap equals e of restrictedOverCohomologyMap along d.π_j applied to x. No limiting, cofilteredness, affineness, qcqs, exchange-invertibility or continuity hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Stacks Project, Tag 0EYM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "def-sc-cartesian-higher-image-chart-system",
+  "lem-sbc-restricted-over-abelian-complex-data",
+  "def-sc-cartesian-derived-image-map"
+ ],
+ "proof": [
+  {
+   "text": "Write S_i for D(i), X_i for X times_S S_i and p_i:X_i -> S_i.\nThe source of chart stage j is S_j times_{S_i} X_i. Pullback pasting identifies\nit with X times_S S_j, preserving its maps to X and S_j. The analogous\nidentification at the cone point identifies S_limit times_{S_i} X_i with\nX times_S S_limit. The test object U is the pullback of V along the i-th cone\nleg, by hr. Pasting identifies V times_{S_i} the apex chart with U times_{S_limit}\n(X times_S S_limit). Inverse-image composition identifies their restricted\ncoefficient sheaves. Derived adjunction for p_limit, together with the shift\ncomparison of R p_limit,* and the single-complex comparison of exact inverse\nimage, identifies the displayed derived Hom with raw Hom out of\np_limit^* Z[U]. The free abelian sheaf and etale restriction adjunction identifies\nthis raw Hom with cohomology of the coefficient on the last fibre product\n(rawRestrictedCohomologyComparison). This gives e.\nFor j, the same construction identifies the chart cohomology with raw derived\nHom over S_j, evaluated on V times_{S_i} S_j. Pull the resulting class back along\nthe j-th cone leg. The canonical free-representable pullback comparison and hr\nidentify its source with Z[U][0]; the single-complex and shift comparisons give\nlift j. For the compatibility equation, take the p_limit derived adjoint of\nboth sides. The exchange map is the mate of the inverse-image composition\ncomparison, so its counit cancels with the adjunction unit. The remaining map\nis derived inverse image of the class followed by its coefficient comparison.\nNaturality of rawRestrictedCohomologyComparison identifies this with the\ncanonical rawAffineComplexPullback and coefficient map that define\nrestrictedOverCohomologyMap. Pullback uniqueness identifies all geometric arrows,\nand upperStarComp associativity identifies the coefficient comparisons.\nThus both sides give the same adjunct. This proves the equation independently\nof invertibility of exchange. The same identities hold for empty charts and\nq=0; no proper base change assertion is used.",
+   "uses": [
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "def-sc-cartesian-derived-image-map",
+    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-raw-restricted-cohomology-natural-iso",
+  "def-sc-cartesian-derived-image-map",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EYM",
+  "place": "Proof and comparison calculations formalized by E1; complete argument in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a free abelian represented sheaf commutes with inverse image and derived adjunction identifies higher direct image classes with restricted etale cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A class in the homology sheaf of a derived complex is locally represented by a derived morphism from the free abelian sheaf on an etale object",
+   "results": "8 hits: CategoryTheory.Sheaf.H, SheafOfModules.generatorsOfIsCokernelFree_I, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.relationsOfIsCokernelFree_I",
+   "date": "2026-10-15",
+   "verdict": "Read the relevant generic APIs; no complete match for this statement. The proved library declarations cited in the proof supply the ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"counit\"",
+   "results": "2 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-15",
+   "verdict": "Read the relevant generic APIs; no complete match for this statement. The proved library declarations cited in the proof supply the ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*[Hh]omology|[Hh]omology.*derived.*[Hh]om|[Cc]ohomology.*[Pp]resheaf|mateEquiv_counit",
+   "results": "24 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-15",
+   "verdict": "Read the relevant generic APIs; no complete match for this statement. The proved library declarations cited in the proof supply the ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianHigherImageGermDescent",
+  "date": "2026-10-15",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Proof by affine inverse limits: the geometric continuity step for cartesian higher direct images (Stacks 0EYM, second proof), isolated in the limit-exchange support lemmas.",
+   "via": [
+    "lem-sc-cartesian-higher-image-germ-descent",
+    "lem-sc-limit-higher-direct-image-exchange",
+    "lem-sc-limit-derived-direct-image-exchange",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianHigherImageChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianHigherImageChartComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cartesianChart_cohomology_comparison",
+  "statement": "theorem exists_cartesianChart_cohomology_comparison\n    {S X : Scheme.{u}} (f : X ⟶ S)\n    {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)\n    (i : I) (V : (D.obj i).left.Etale) (U : c.pt.left.Etale)\n    (r : U.left ⟶ V.left)\n    (hr : IsPullback r U.hom V.hom (c.π.app i).left) :\n    let h := pullback.snd f (D.obj i).hom\n    let Fᵢ := (upperStar AddCommGrpCat.{u + 1} (pullback.fst f (D.obj i).hom)).obj F\n    let E := cartesianChartDiagram f D i\n    let d := cartesianChartCone f D c i\n    ∃ (e : restrictedOverCohomology h Fᵢ (q : ℤ) d.pt V ≅ AddCommGrpCat.of\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj\n          ((abelianComparisonFree c.pt.left).obj U) ⟶\n            (cartesianDerivedImage f c.pt.hom\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj F))⟦(q : ℤ)⟧))\n      (lift : ∀ j : Over i, restrictedOverCohomology h Fᵢ (q : ℤ) (E.obj j) V →\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj\n          ((abelianComparisonFree c.pt.left).obj U) ⟶\n            ((D+(((c.π.app j.left).left)^*[AddCommGrpCat.{u + 1}])).obj\n              (cartesianDerivedImage f (D.obj j.left).hom\n                ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))⟦(q : ℤ)⟧)),\n      ∀ (j : Over i) (x : restrictedOverCohomology h Fᵢ (q : ℤ) (E.obj j) V),\n        lift j x ≫ (shiftFunctor _ (q : ℤ)).map\n          (cartesianDerivedImageMap f (D.obj j.left).hom c.pt.hom\n            (c.π.app j.left).left (Over.w (c.π.app j.left)).symm\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) =\n          e.hom (restrictedOverCohomologyMap h Fᵢ (q : ℤ) (d.π.app j) V x)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T200313-L-1824206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261014T200313-L-1824206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
