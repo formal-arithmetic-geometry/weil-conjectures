@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates
 
 /-! # AffineBaseChangeTildeMateIdentityFactorization
 
@@ -23,6 +24,18 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
+
+private theorem homology_factorization
+    {C D : Type*} [Category C] [Category D] (H : C ⥤ D)
+    {X Y U Z : C} {S S₁ S₂ : D} (κ : S ≅ H.obj X) (σ : X ≅ Y)
+    (β : Y ⟶ Z) (r : X ⟶ U) (v : U ⟶ Z)
+    (b₁ : S ⟶ S₁) (b₂ : S₁ ⟶ S₂) (b₃ : S₂ ⟶ H.obj U)
+    (hσ : σ.hom ≫ β = r ≫ v)
+    (hb : κ.hom ≫ H.map r = b₁ ≫ b₂ ≫ b₃) :
+    (κ ≪≫ H.mapIso σ).hom ≫ H.map β = b₁ ≫ b₂ ≫ b₃ ≫ H.map v := by
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  rw [← H.map_comp, hσ, H.map_comp, ← Category.assoc, hb]
+  simp only [Category.assoc]
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -112,7 +125,17 @@ theorem exists_affineBaseChangeTildeMateIdentityFactorization
       T.map s ≫ T.map ((ModuleCat.restrictScalars φf').map z₀) ≫
         affineTildePushforwardCohomologyMap A' R' φf' Cg i ≫
         H.map ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).map t.hom)
-    := by sorry
-
+    := by
+  set_option backward.isDefEq.respectTransparency true in
+    let m := ModuleCat.baseDerivedTensorCohomologyModel R A R' M A'
+    let H := DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i
+    obtain ⟨σ, hσ⟩ := exists_affineTildeDerivedTensorMate
+      R A R' A' M m φg' φf' hφg' hφf' hw hM hK hc
+    let κ := affineTildeDerivedTensorSourceIso R A R' A' M m i
+    refine ⟨κ ≪≫ H.mapIso σ, ?_⟩
+    exact homology_factorization H κ σ _ _ _ _ _ _ hσ
+      (affineTildeDerivedTensorToPushforward_homology
+        R A R' A' M m φg' φf' hφg' hφf' i)
 
 end AlgebraicGeometry
