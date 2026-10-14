@@ -1,0 +1,140 @@
+{
+ "id": "def-weil-pbc-etale-mayer-vietoris-canonical-boundary",
+ "kind": "definition",
+ "title": "Boundary from a fixed normalized section resolution",
+ "statement": "Let X be a scheme, U,V opens covering X, F an abelian etale sheaf, I an injective resolution of F [def-sp-injective-resolutions], and c a normalized section homology comparison [def-weil-pbc-etale-resolution-section-canonical-comparison]. Let S be its restriction-pair/difference section short complex [def-weil-pbc-etale-mayer-vietoris-section-complex]. Degreewise injectivity and the covering hypothesis make S short exact [lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact]. Define the additive boundary in degree q by c.globalEquiv(q+1) composed with the homology connecting map of S, composed with the inverse of c.openEquiv(U intersection V,q). It maps the actual restricted cohomology H^q(U intersection V,F|) to H^(q+1)(X,F). No existential boundary or unspecified comparison is chosen. With a supplied open W and equality W=U intersection V, construct etaleSectionShortComplexOn directly on the section terms X,U,V,W, taking its inclusion proofs from the equality. Its short exactness follows by substituting the equality into the standard section short complex. Define etaleMayerVietorisBoundaryOn from this directly constructed short complex and c.openEquiv(W,q). Its data contains no equality transport of a cohomology group; the equality occurs only in inclusion and exactness proofs. The irreducible fixed-boundary interface fixes the injective resolution and the normalized comparison, which is determined on cocycles, and exposes the boundary without expanding those data. The fixed resolution and its normalized comparison are exposed as separate irreducible typed constants, etaleMayerVietorisFixedResolution and etaleMayerVietorisFixedComparison; the boundary API uses these constants without repeating their instance/choice construction.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, injective-resolution section proof and coefficient functoriality, read at https://stacks.math.columbia.edu/tag/0A50; Tag 01F7, resolution functoriality, read at https://stacks.math.columbia.edu/tag/01F7. Fixed normalized-comparison specialization written by S3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-mayer-vietoris-section-complex",
+  "lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-etale-resolution-section-canonical-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A50",
+  "place": "Explicit section-complex homology boundary; the named-intersection and fixed normalized-comparison interfaces are constructions written by S3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology Mayer Vietoris boundary naturality of pullback coefficient morphisms",
+   "results": "UNAVAILABLE: Internal Server Error. No mathematical verdict obtained.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Mayer Vietoris connecting homomorphism natural in pullback and coefficient sheaf",
+   "results": "Eight MayerVietorisSquare short-complex and sheaf-condition declarations. None supplies the fixed normalized section-comparison boundary or its cross-scheme coefficient identities.",
+   "date": "2026-10-14",
+   "verdict": "No matching statement; use Mathlib homology connecting maps as tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomologySequence.δ_naturality",
+   "results": "Found Mathlib.Algebra.Homology.HomologySequenceLemmas, HomologicalComplex.HomologySequence.δ_naturality. Used to prove the boundary naturality theorem after the geometric comparison.",
+   "date": "2026-10-14",
+   "verdict": "Generic homology naturality tool, not the geometric comparison or transported exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "rg connecting|boundary|canonical_coefficient_transfer lean/WeilConjectures lean/Sheaf; rg δ|commut|coefficient Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; blueprint_refs.py search Mayer-Vietoris",
+   "results": "Mathlib has a fixed-site boundary. The library has paired existential pullback comparisons and a normalized global coefficient transfer, but its open transfer requires the target coefficient to be the source inverse image. None provides the prescribed source and target normalized short-complex comparison with arbitrary target coefficients. Blueprint search returned zero matches.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate fixed-resolution boundary API or arbitrary-coefficient short-complex comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries",
+  "date": "2026-10-14",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Proof step 3: apply the finite affine-cover bound to local acyclicity. Within its limit-cohomology and Mayer-Vietoris subargument: Parent steps 1 and 4: construct the same fixed section-resolution boundary before considering any arrow.",
+   "via": [
+    "lem-weil-pbc-etale-limit-open-compatible-boundaries",
+    "lem-weil-pbc-etale-limit-open-boundary-transform",
+    "lem-weil-pbc-etale-limit-open-mayer-vietoris-maps",
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisCanonicalBoundary.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleMayerVietorisCanonicalBoundary",
+  "statement": "def etaleMayerVietorisCanonicalBoundary {X : Scheme.{u}} (U V : X.Opens) (hcover : U ⊔ V = ⊤) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F) (c : ResolutionSectionCanonicalComparison F I) (q : ℕ) : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (U ⊓ V).ι).obj F) q →+ Sheaf.H F (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSectionShortComplex_resolution_shortExact",
+   "AlgebraicGeometry.Etale.etaleMayerVietorisBoundaryOn",
+   "AlgebraicGeometry.Etale.etaleSectionShortComplexOn",
+   "AlgebraicGeometry.Etale.etaleSectionShortComplexOn_shortExact",
+   "AlgebraicGeometry.Etale.etaleMayerVietorisFixedBoundary",
+   "AlgebraicGeometry.Etale.etaleMayerVietorisFixedResolution",
+   "AlgebraicGeometry.Etale.etaleMayerVietorisFixedComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-14dcf",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T025142-L-158134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-14dcf",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T025142-L-158134",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations and proofs with their DAG nodes, unchanged parent signature, cited sources, report and earlier repair; all five modules and the sole direct importer compile cleanly, and axioms match the reported decomposition."
+ }
+}

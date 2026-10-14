@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-exact",
+ "kind": "statement",
+ "title": "Exactness of the fixed normalized boundary",
+ "statement": "For every scheme X, covering opens U,V, abelian etale sheaf F, injective resolution I of F, normalized comparison c [def-weil-pbc-etale-resolution-section-canonical-comparison] and q>=0, the explicitly constructed boundary delta [def-weil-pbc-etale-mayer-vietoris-canonical-boundary] satisfies Exact(d,delta) and Exact(delta,r), where d(x,y)=openCohomologyRestriction(U intersection V<=U,F,q)(x)-openCohomologyRestriction(U intersection V<=V,F,q)(y), and r(z)=(cohomologyMap(U inclusion,F,q+1)(z),cohomologyMap(V inclusion,F,q+1)(z)). Restrictions are the actual inverse-image coefficient comparisons [lem-weil-pbc-open-cohomology-whole-restriction-naturality]. No arrow compatibility is asserted. The BoundaryOn variant also accepts a specified intersection open with its equality, and gives the identical assertion after transport of that equality. The BoundaryOn exactness API accepts the additive difference d with its pointwise restriction formula and identifies it by extensionality in the generic scheme context. The fixed-boundary specialization uses the canonical injective resolution and its normalized comparison, with no resolution input needed by callers. The supplied difference may be any function with the pointwise actual restriction-difference formula: additivity of that function is not separately needed to assert or prove exactness.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, injective-resolution section proof and coefficient functoriality, read at https://stacks.math.columbia.edu/tag/0A50; Tag 01F7, resolution functoriality, read at https://stacks.math.columbia.edu/tag/01F7. Fixed normalized-comparison specialization written by S3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-mayer-vietoris-canonical-boundary",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Use the short exact section complex of the fixed resolution. Identify its middle homology with the product of the two open homologies by the homology functor biproduct comparison. Construct this equivalence locally for the two section complexes; use Mathlib Functor.biprodComparison_fst and Functor.biprodComparison_snd directly to compute its coordinates. No duplicate SectionComparison helper declaration is introduced.",
+   "uses": [
+    "def-weil-pbc-etale-mayer-vietoris-canonical-boundary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized restriction identities identify the section-complex homology arrows with the actual restriction pair and difference. Compute the pair via HomologicalComplex.homologyMap_comp and biprod.lift_fst/lift_snd, and compute the difference via biprod.desc_eq and homology additivity before applying the normalized restriction identities.",
+   "uses": [
+    "lem-weil-pbc-etale-resolution-section-canonical-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport homology exactness at the intersection and at the successor whole term along the additive equivalences, canceling their inverses in the boundary definition.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a specified intersection open, substitute its given equality and apply the preceding assertion. This avoids definitionally reducing a scheme restriction merely to identify its intersection presentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Unfold only the fixed-boundary interface and specialize the preceding proved naturality or exactness to its chosen resolution and normalized comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-mayer-vietoris-canonical-boundary",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-etale-resolution-section-canonical-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Parent steps 1 and 4: the exactness half of the fixed resolution construction.; Stacks Tags 0A50 and 01F7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology Mayer Vietoris boundary naturality of pullback coefficient morphisms",
+   "results": "UNAVAILABLE: Internal Server Error. No mathematical verdict obtained.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Mayer Vietoris connecting homomorphism natural in pullback and coefficient sheaf",
+   "results": "Eight MayerVietorisSquare short-complex and sheaf-condition declarations. None supplies the fixed normalized section-comparison boundary or its cross-scheme coefficient identities.",
+   "date": "2026-10-14",
+   "verdict": "No matching statement; use Mathlib homology connecting maps as tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomologySequence.δ_naturality",
+   "results": "Found Mathlib.Algebra.Homology.HomologySequenceLemmas, HomologicalComplex.HomologySequence.δ_naturality. Used to prove the boundary naturality theorem after the geometric comparison.",
+   "date": "2026-10-14",
+   "verdict": "Generic homology naturality tool, not the geometric comparison or transported exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "rg connecting|boundary|canonical_coefficient_transfer lean/WeilConjectures lean/Sheaf; rg δ|commut|coefficient Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; blueprint_refs.py search Mayer-Vietoris",
+   "results": "Mathlib has a fixed-site boundary. The library has paired existential pullback comparisons and a normalized global coefficient transfer, but its open transfer requires the target coefficient to be the source inverse image. None provides the prescribed source and target normalized short-complex comparison with arbitrary target coefficients. Blueprint search returned zero matches.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate fixed-resolution boundary API or arbitrary-coefficient short-complex comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries",
+  "date": "2026-10-14",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Proof step 3: apply the finite affine-cover bound to local acyclicity. Within its limit-cohomology and Mayer-Vietoris subargument: Parent steps 1 and 4: the exactness half of the fixed resolution construction.",
+   "via": [
+    "lem-weil-pbc-etale-limit-open-compatible-boundaries",
+    "lem-weil-pbc-etale-limit-open-boundary-transform",
+    "lem-weil-pbc-etale-limit-open-mayer-vietoris-maps",
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisCanonicalBoundaryExact.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleMayerVietorisFixedBoundary_exact",
+  "statement": "theorem etaleMayerVietorisFixedBoundary_exact {X : Scheme.{u}} (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (hU : W ≤ U) (hV : W ≤ V) (d : (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q × Sheaf.H ((upperStar AddCommGrpCat.{u + 1} V.ι).obj F) q) → Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj F) q) (hd : ∀ x, d x = openCohomologyRestriction hU F q x.1 - openCohomologyRestriction hV F q x.2) : Function.Exact d (etaleMayerVietorisFixedBoundary U V W hW hcover F q) ∧ Function.Exact (etaleMayerVietorisFixedBoundary U V W hW hcover F q) (fun x ↦ (cohomologyMap U.ι F (q + 1) x, cohomologyMap V.ι F (q + 1) x))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-14dcf",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T025142-L-158134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-14dcf",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T025142-L-158134",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations and proofs with their DAG nodes, unchanged parent signature, cited sources, report and earlier repair; all five modules and the sole direct importer compile cleanly, and axioms match the reported decomposition."
+ }
+}

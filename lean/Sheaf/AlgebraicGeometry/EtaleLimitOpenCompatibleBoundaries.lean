@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryExact
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryNaturality
 
 /-! # Compatible boundaries on the actual stage and limit cohomology groups
 
@@ -22,9 +24,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] upperStar cohomologyMap
-  tailOpenCohomologyMapDegree tailOpenCohomologyLegDegree
+  openCohomologyRestriction openSquareCoefficient
+  Sheaf.H.map
 
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- Choose exact Mayer--Vietoris boundaries compatible with all stage maps and legs.
 
@@ -122,6 +126,65 @@ theorem tailOpenCompatibleBoundaries
           (tailStageOpen D (X := X) (i₀ := i₀) g₀ (U ⊓ V) j).ι).obj (F j.val)) q),
         δL ((tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ (U ⊓ V) F G eG L q j).hom x) =
         Sheaf.H.map ((eG j.val).inv ≫ L.ι.app j.val) (q + 1)
-          (cohomologyMap (c.π.app (op j.val)) (F j.val) (q + 1) (δ j x))) := by sorry
+          (cohomologyMap (c.π.app (op j.val)) (F j.val) (q + 1) (δ j x))) := by
+  have hI (j : Set.Ici i₀) : tailStageOpen D g₀ (U ⊓ V) j =
+      tailStageOpen D g₀ U j ⊓ tailStageOpen D g₀ V j :=
+    (D.map (homOfLE j.property).op ≫ g₀).preimage_inf
+  have hIL : (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V) =
+      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U) ⊓ ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V) :=
+    (c.π.app (op i₀) ≫ g₀).preimage_inf
+  let δ := fun (j : Set.Ici i₀) ↦ etaleMayerVietorisFixedBoundary
+    (tailStageOpen D g₀ U j) (tailStageOpen D g₀ V j) (tailStageOpen D g₀ (U ⊓ V) j)
+    (hI j) (hstageCover j) (F j.val) q
+  let δL := etaleMayerVietorisFixedBoundary
+    ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U) ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V)
+    ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V)) hIL hlimitCover L.pt q
+  have hs := fun (j : Set.Ici i₀) ↦
+    etaleMayerVietorisFixedBoundary_exact
+      (tailStageOpen D g₀ U j) (tailStageOpen D g₀ V j) (tailStageOpen D g₀ (U ⊓ V) j)
+      (hI j) (hstageCover j) (F j.val) q
+      ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono (inf_le_left : U ⊓ V ≤ U))
+      ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono (inf_le_right : U ⊓ V ≤ V))
+      (d j) (hd j)
+  have hl :=
+    (etaleMayerVietorisFixedBoundary_exact
+      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U) ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V)
+      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V)) hIL hlimitCover L.pt q
+      ((c.π.app (op i₀) ≫ g₀).preimage_mono (inf_le_left : U ⊓ V ≤ U))
+      ((c.π.app (op i₀) ≫ g₀).preimage_mono (inf_le_right : U ⊓ V ≤ V)) dL hdL).1
+  refine ⟨δ, δL, (fun j ↦ (hs j).1), (fun j ↦ (hs j).2), hl, ?_, ?_⟩
+  · intro j k f x
+    have hopen (W : X.Opens) : tailStageOpen D g₀ W k =
+        (D.map (homOfLE (show j.val ≤ k.val from f.le)).op) ⁻¹ᵁ
+          (tailStageOpen D g₀ W j) := by
+      dsimp only [tailStageOpen]
+      rw [← Scheme.Hom.comp_preimage, ← Category.assoc, ← D.map_comp]
+      rfl
+    have h := etaleMayerVietorisFixedBoundary_naturality
+      (D.map (homOfLE (show j.val ≤ k.val from f.le)).op)
+      (tailStageOpen D g₀ U j) (tailStageOpen D g₀ V j) (tailStageOpen D g₀ (U ⊓ V) j)
+      (tailStageOpen D g₀ U k) (tailStageOpen D g₀ V k) (tailStageOpen D g₀ (U ⊓ V) k)
+      (hI j) (hI k) (hstageCover j) (hstageCover k) (hopen U) (hopen V)
+      (tailStageOpenMap D g₀ (U ⊓ V) f)
+      (by exact (Scheme.Hom.resLE_comp_ι _ _).symm)
+      (F j.val) (F k.val) (φ (homOfLE (show j.val ≤ k.val from f.le)))
+      q x
+    exact h
+  · intro j x
+    have hopen (W : X.Opens) : ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W) =
+        (c.π.app (op j.val)) ⁻¹ᵁ (tailStageOpen D g₀ W j) := by
+      dsimp only [tailStageOpen]
+      rw [← Scheme.Hom.comp_preimage, ← Category.assoc, c.w]
+    have h := etaleMayerVietorisFixedBoundary_naturality
+      (c.π.app (op j.val))
+      (tailStageOpen D g₀ U j) (tailStageOpen D g₀ V j) (tailStageOpen D g₀ (U ⊓ V) j)
+      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U) ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V)
+      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V))
+      (hI j) hIL (hstageCover j) hlimitCover (hopen U) (hopen V)
+      (tailLimitOpenMap D c g₀ (U ⊓ V) j)
+      (by exact (Scheme.Hom.resLE_comp_ι _ _).symm)
+      (F j.val) L.pt ((eG j.val).inv ≫ L.ι.app j.val)
+      q x
+    exact h
 
 end AlgebraicGeometry.Etale
