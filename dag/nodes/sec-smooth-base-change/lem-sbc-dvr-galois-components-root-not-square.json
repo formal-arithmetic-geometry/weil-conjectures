@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-dvr-galois-components-root-not-square",
+ "kind": "statement",
+ "title": "Nonzero first-order tame root class for finite Galois components",
+ "statement": "Let B be a DVR domain with irreducible uniformizer pi and fraction field K. Let n>0 be a unit in B. Let E_i be finitely many finite Galois extensions of K with degrees dividing n [def-weil-field, def-weil-vector-space-dimension]. Let p:X->Spec K be isomorphic over Spec K to the coproduct of Spec E_i. Set A=B[t]/(t^n-pi), q:Spec A->Spec B, j:Spec K->Spec B and a=pullback.snd(p followed by j,q). Assume a is quasi-compact and quasi-separated so its concrete relative normalization [lem-weil-pbc-relative-normalization] exists. For every normalization point x over the prime (t), let C be its actual stalk, m its maximal ideal, and tau the structural image of the root germ. Then tau does not belong to m*m. This asserts only nonzero first-order root class, not principalness or cotangent spanning. Normalization finiteness is not assumed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-relative-normalization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EV, 09EB, 0BRM, 09E7 and 0307"
+ },
+ "proof": [
+  {
+   "text": "Proof: Tag 09EV makes A a DVR with root t as uniformizer and ramification\nindex n over B; for n = 1 use A = B. For each E_i, Tag 09EB gives the\nGalois degree formula, so each local ramification index e and residue\ndegree f divide n. In positive residue characteristic p, invertibility\nof n makes e prime to p and excludes a nontrivial inseparable residue\ndegree, which is a p-power dividing f. In characteristic zero the residue\nextension is separable automatically. The local extensions are thus tame.\nApply Tag 0BRM with the index-n root extension, and then Tag 09E7:\nevery normalized generic tensor-product field factor has ramification\nindex one over A. Consequently t has valuation one in its integral\nclosure localized above the closed point, whereas every element of the\nmaximal-ideal square has valuation at least two. The actual normalization\nstalk at x is this local ring: use the affine integral-closure description\nof relative normalization, its compatibility with finite disjoint unions,\nand Tag 0307 for localization. These are identifications over A, so the\nstructural germ tau corresponds to t and is outside the square. If the\ncoproduct is empty there is no x. Degree-one factors are unramified. This\nasserts only nonmembership in the square, not cotangent spanning.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "agent": "J3",
+  "document": "Stacks Project",
+  "place": "Tags 09EV, 09EB, 0BRM, 09E7 and 0307"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjoining a root of a uniformizer kills tame ramification and makes the root nonzero in the cotangent space",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error; the attempt is recorded in searches.jsonl."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After adjoining a uniformizer root whose degree kills tame ramification, the root is outside the square of the maximal ideal in the integral closure stalk",
+   "date": "2026-10-14",
+   "results": "Valuation.pow_Uniformizer_is_pow_generator; ramification-index API, no Abhyankar theorem.",
+   "verdict": "Useful component API only; no theorem with these hypotheses and conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ramificationIdx, 1",
+   "date": "2026-10-14",
+   "results": "Ideal.ramificationIdx_eq_one and Ideal.ramificationIdx_eq_one_of_isUnramifiedAt need unramified input.",
+   "verdict": "Useful component API only; no theorem with these hypotheses and conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx_eq_one_of_isUnramifiedAt|not_mem.*square",
+   "date": "2026-10-14",
+   "results": "RootNormalizationRootNotSquare depends on DvrRootNormalizationMaximalIdeal, which imports this item: using it creates a cycle. Its chart and normalization-finiteness hypotheses also differ.",
+   "verdict": "Useful component API only; no theorem with these hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootCotangent",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-dvr-galois-components-root-cotangent",
+   "place": "local principalness and nonzero first-order root reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootNotSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrGaloisComponentsRootNotSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.dvr_galois_components_root_not_mem_square",
+  "statement": "theorem dvr_galois_components_root_not_mem_square\n    (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)\n    (hn : IsUnit (n : B))\n    (r : ℕ) (E : Fin r → Type u) [∀ i, Field (E i)]\n    [∀ i, Algebra (FractionRing B) (E i)]\n    (hE : ∀ i, FiniteDimensional (FractionRing B) (E i) ∧\n      IsGalois (FractionRing B) (E i) ∧ Module.finrank (FractionRing B) (E i) ∣ n)\n    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of (FractionRing B)))\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap (FractionRing B) (E i)))) = p) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap B A))\n    let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a := pullback.snd (p ≫ j) q\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)} →\n      let C := a.normalization.presheaf.stalk x\n      let tau := (a.fromNormalization.stalkMap x).hom\n        (StructureSheaf.toStalk A (a.fromNormalization x)\n          (AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)))\n      let m := IsLocalRing.maximalIdeal C\n      tau ∉ m * m",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T010845-L-3164649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261014T010845-L-3164649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

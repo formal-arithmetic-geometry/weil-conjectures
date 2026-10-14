@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Limits
+import Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkPrincipal
+import Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootNotSquare
+import Sheaf.RingTheory.PrincipalCotangentSpan
 
 /-! # The first-order tame root calculation for Galois field components
 
@@ -74,6 +77,14 @@ theorem dvr_galois_components_root_cotangent
         (StructureSheaf.toStalk A (a.fromNormalization x)
           (AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)))
       let m := IsLocalRing.maximalIdeal C
-      m ≤ Ideal.span {tau} ⊔ m * m := by sorry
+      m ≤ Ideal.span {tau} ⊔ m * m := by
+  dsimp
+  intro hqc hqs x hx
+  have hprincipal := dvr_galois_components_normalization_maximalIdeal_isPrincipal
+    B pi hpi n hnpos r E (fun i ↦ ⟨(hE i).1, (hE i).2.1⟩) X p e he hqc hqs x hx
+  have hnot := dvr_galois_components_root_not_mem_square
+    B pi hpi n hnpos hn r E hE X p e he hqc hqs x hx
+  exact (IsLocalRing.maximalIdeal_le_span_of_isPrincipal_of_not_mem_square
+    _ hprincipal hnot).trans le_sup_left
 
 end AlgebraicGeometry.Scheme
