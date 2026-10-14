@@ -33,9 +33,111 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\bar s,\\bar t$ and use the schemes and maps $S',X',p,i,h$ of [lem-weil-pbc-local-acyclicity-closed-fibre-unit], with $G'=p^{-1}G$ and $K=G[0]$. The ring defining $S'$ is strictly henselian and the lift of $\\bar s$ lies over its closed point by [lem-weil-pbc-strict-henselization-functoriality](1). The base change $f':X'\\to S'$ is proper by [lem-weil-pbc-proper-fp-permanence](b). Both $f$ and $f'$ are qcqs: their finite-type condition gives quasi-compactness; their diagonal is a closed immersion, whose inverse image of an affine open is affine and hence quasi-compact, giving quasi-separatedness. These are exactly the definitions in [def-weil-pbc-scheme-conventions] and [def-weil-closed-immersion]. The morphism $\\bar t:\\operatorname{Spec}\\Omega'\\to S'$ is between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]; its base change $h$ is affine and therefore qcqs by [lem-weil-pbc-affine-morphism-permanence](1),(3).",
+   "uses": [
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJW, lemma-sp-isom-proper-torsion-loc-ac, setup of f prime and h; affine qcqs verification"
+   }
+  },
+  {
+   "text": "For any proper $v:Z\\to T$ and any bounded below abelian etale complex $E$ with torsion cohomology, apply [thm-weil-pbc-bounded-below] to the cartesian square over a geometric point $u:P\\to T$. It gives $u^{-1}Rv_*E\\cong Ra_{u,*}(E|_{Z_u})$. Apply $R\\Gamma(P,-)$ and [lem-weil-pbc-cohomology-pullback-derived-unit](1) to $a_u:Z_u\\to P$. By [lem-weil-pbc-geometric-point-pullback-stalk], global sections on $P$ are exact and naturally identify $\\Gamma(P,u^{-1}F)$ with $F_u$. Exact inverse image is computed termwise by [def-weil-pbc-derived-inverse-image]; thus applying these exact functors termwise gives the derived stalk on the left. We obtain the canonical fibre isomorphism $\\rho_u:(Rv_*E)_u\\xrightarrow{\\sim}R\\Gamma(Z_u,E|_{Z_u})$, and it is the exchange fibre map by construction. Apply this to $v=f$, $E=K$, at both $u=\\bar s$ and the composite point $u=\\bar t$ of $S$. The hypothesis holds because $K$ has only $G$ as its cohomology sheaf. Hence both $\\rho_{\\bar s}$ and $\\rho_{\\bar t}$ in [lem-weil-pbc-specialization-cospecialization-compatibility] are isomorphisms.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-specialization-cospecialization-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJW proof, first sentence; Tag 0DDF, lemma-proper-base-change-stalk (2)"
+   }
+  },
+  {
+   "text": "The hypothesis of local acyclicity applies directly to [lem-weil-pbc-local-acyclicity-closed-fibre-unit]: $i^{-1}\\beta:i^{-1}G'[0]\\to i^{-1}Rh_*(G_{\\bar t}[0])$ is invertible. Put $K'=Rh_*(G_{\\bar t}[0])$. It is bounded below because the derived direct image in [def-weil-pbc-direct-image] maps $D^+$ to $D^+$. The pullback $G_{\\bar t}$ is torsion: [lem-weil-pbc-inverse-image-stalk-germ] identifies each stalk with a stalk of $G$, so each element has a positive annihilator. Apply [lem-sbc-qcqs-higher-images-prime-torsion] to $h$ (qcqs by step 1) and $G_{\\bar t}$, with $\\mathcal P$ the set of all primes. It says every stalk element of every $R^nh_*G_{\\bar t}$ has a positive annihilator, which is the torsion sheaf condition. Explicitly, a stalk germ killed by $m$ has a representative killed by $m$ on some pointed etale neighbourhood, by the filtered-colimit definition of a stalk; these neighbourhoods, for all geometric points of a given section, supply the required local annihilators. The cohomology sheaves of $K'$ are these higher images, so all are torsion. No finite stalks or common annihilator have been used.",
+   "uses": [
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-sbc-qcqs-higher-images-prime-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJW proof, K prime; Tag 0DDD, lemma-torsion-direct-image (1), using the existing fixed-prime version"
+   }
+  },
+  {
+   "text": "Apply the fibre comparison of step 2 to $f'$ and $K'$ at the closed geometric point $\\bar s$ of $S'$. Properness is supplied by step 1, and boundedness below and torsion by step 3. Its source $(Rf'_*K')_{\\bar s}$ identifies canonically with $R\\Gamma(X',K')$: by [lem-weil-pbc-strictly-henselian-etale-acyclic], $\\Gamma(S',-)$ is exact, and by [lem-weil-pbc-strictly-henselian-sections-stalk] it is naturally the closed stalk functor; apply this natural isomorphism termwise to a representative of $Rf'_*K'$, then use the Leray identification [lem-weil-pbc-cohomology-pullback-derived-unit](1). Under this identification the fibre map is restriction along $i$. To check this on the actual morphism, choose a bounded below K-injective representative $I$ of $K'$ and a K-injective resolution $j:i^{-1}I\\to J$. By [lem-weil-pbc-derived-exchange-termwise], the fibre exchange is represented by the termwise underived exchange followed by the direct image of $j$. For each degree $r$, the closed stalk of $f'_*I^r$ is identified with $(f'_*I^r)(S')=I^r(X')$ by the germ map of [lem-weil-pbc-strictly-henselian-sections-stalk]. A global section $a\\in I^r(X')$ represents this germ at the pointed neighbourhood $S'$. The representative formula in [def-weil-pbc-underived-exchange], with this neighbourhood and $V=\\operatorname{Spec}\\Omega$, sends it to its restriction in $(i^{-1}I^r)(X_{\\bar s})$. Following by $j$ therefore gives the complex map $\\Gamma(X',I)\\to\\Gamma(X_{\\bar s},i^{-1}I)\\to\\Gamma(X_{\\bar s},J)$, which is the derived pullback along $i$ by [def-weil-pbc-cohomology-pullback] (equivalently the derived-unit formula of [lem-weil-pbc-cohomology-pullback-derived-unit](2)). Thus the exchange fibre map agrees with restriction, including the resolution comparison maps. Therefore the actual restriction morphism $R\\Gamma(X',K')\\to R\\Gamma(X_{\\bar s},i^{-1}K')$ is invertible. Following it by $R\\Gamma(X_{\\bar s},(i^{-1}\\beta)^{-1})$, and preceding it by the inverse Leray identification $R\\Gamma(X_{\\bar t},G_{\\bar t}[0])\\cong R\\Gamma(X',K')$, gives the specified $cosp$. All three factors are isomorphisms, so $cosp$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-specialization-cospecialization-compatibility",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJW proof, displayed restriction map and strict henselian source identification"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-specialization-cospecialization-compatibility], $cosp\\,\\rho_{\\bar t}\\,sp=\\rho_{\\bar s}$ for the pointed-neighbourhood specialization map. Steps 2 and 4 make the three other arrows invertible. Thus $sp=\\rho_{\\bar t}^{-1}cosp^{-1}\\rho_{\\bar s}$ is an isomorphism. Apply degree-$q$ cohomology. The exact geometric inverse image of [def-weil-pbc-derived-inverse-image], followed by exact global sections over the geometric point from [lem-weil-pbc-geometric-point-pullback-stalk], preserves kernels, images and their quotient, so $H^q((Rf_*G[0])_u)=(R^qf_*G)_u$. Termwise pointed-neighbourhood restriction induces exactly the homomorphism in the item, because specialization there is defined by those same germ restrictions. Hence the claimed homomorphism is an isomorphism for every $q\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-specialization-cospecialization-compatibility",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-geometric-point-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJW proof, final sentence, using Tag 0GJV, lemma-specialization-cospecialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-specialization-cospecialization-compatibility",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJW, lemma-sp-isom-proper-torsion-loc-ac, proof specialized to G[0]"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,15 +180,114 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.instQuasiIsoIntP\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ}, QuasiIso (CochainComplex.cm5b.p K L)\", \"doc\": \"The projection morphism $ p $ from the mapping cone of the identity morphism on an injective cochain complex $ I K $ (with zero differentials) and a cochain complex $ L $ to $ L $ is a quasi-isomorphi\"}\n  {\"name\": \"CochainComplex.ConnectData.homologyIsoPos\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Connect\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {K : ChainComplex C ℕ} →\\n        {L : CochainComplex C ℕ} →\\n          (h : CochainComplex.ConnectData K L) →\\n            (n : ℕ) →\\n              [NeZero n] →\\n                (\", \"doc\": \"For a connected cochain complex constructed from a chain complex $K$ and cochain complex $L$ indexed by natural numbers, and for any positive integer $n$, the homology of the restricted cochain comple\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"The hom component of the natural isomorphism between the composition of the sheaf pushforward cocontinuous functor and the sheaf-to-presheaf inclusion, and the composition of the presheaf inclusion wi\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the composition of the sheaf pushforward functor $ G_\\\\ast $ with the inclusion of sheaves into presheaves is naturally isomorphic to the\"}\n  {\"name\": \"SheafOfModules.bijective_pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given a continuous and final functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves \"}\n  {\"name\": \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) →\\n          (DerivedCategory.singleFunctor C n).comp (DerivedCategory.homologyFunctor C n) ≅ CategoryTheory.Functor.id C\", \"doc\": \"For each integer $ n $, the composition of the single-term complex functor $ \\\\text{singleFunctor}_n $ with the $ n $-th homology functor $ H_n $ is naturally isomorphic to the identity functor on cate\"}\n  {\"name\": \"CochainComplex.isIso_liftCycles_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℕ) {X : C} (φ : X ⟶ K.X 0) [inst_2 : HomologicalComplex.HasHomology K 0]\\n  (hφ : CategoryTheory.CategoryStruct.comp φ (K.d 0 1) = 0),\\n  CategoryTheory.IsIso (HomologicalComplex.\", \"doc\": \"For a cochain complex $ K $ in a category $ \\\\mathcal{C} $ with natural number indices, an object $ X $, and a morphism $ \\\\varphi: X \\\\to K^0 $ satisfying $ \\\\varphi \\\\circ d^{0,1} = 0 $, the lifted morph\"}\n",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme morphism locally acyclic relative to a torsion abelian etale sheaf all higher direct image specialization maps are isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specializingMap_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically @SpecializingMap).RespectsIso\", \"doc\": \"The property of a scheme morphism being a specializing map (defined via its underlying continuous map) holds for all isomorphisms of schemes. In other words, every isomorphism of schemes automatically\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯)\\n      (TopCat.Pre\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {Z : C} (h_1 : F.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSp\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x, y \\\\in X$ with $x$ specializing to $y$, the composition of the specialization-induced morphism $(\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {F_1 : C → C → Type uF} {carrier : C → Type w}\\n  {instFunLike : (X Y : C) → FunLike (F_1 X Y) (carrier X) (carrier Y)}\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the induced morphism on stalks $\\\\mathcal{F}_{f(y)} \\\\to \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x'),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializes ⋯) (AlgebraicGeometry.Scheme.Hom.stalkMap f x) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x') (X.presheaf.stalkSpecializes\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Let $x, x'$ be points in the underlying topological space of $X$ such that $x$ specializes to $x'$ (denoted $x \\\\rightsquigarrow x'$). This induces a canonica\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x'),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializes ⋯) (AlgebraicGeometry.Scheme.Hom.stalkMap f x) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x') (X.presheaf.stalkSpecializes\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $x, x'$ be points in $X$ such that $x$ specializes to $x'$ (i.e., $x'$ is in the closure of the singleton set $\\\\{x\\\\}$). This induces canonical ring h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the diagram involving the stalk maps at $ x $ and $ x' $ and the specialization-induced maps on $ Y $ and $ X $ \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing cycles imply proper pushforward cohomology stalks are invariant under generization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯)\\n      (TopCat.Pre\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {F_1 : C → C → Type uF} {carrier : C → Type w}\\n  {instFunLike : (X Y : C) → FunLike (F_1 X Y) (carrier X) (carrier Y)}\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the induced morphism on stalks $\\\\mathcal{F}_{f(y)} \\\\to \\\\ma\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {Z : C} (h_1 : F.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSp\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a continuous map $f : X \\\\to Y$, and points $x, y \\\\in X$ with $x$ specializing to $y$, the composition of the specialization-induced morphism $(\"}\n  {\"name\": \"germ_skyscraperPresheafStalkOfSpecializes_hom_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] (A : C) [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] {y : ↑X} (h : p₀ ⤳ y) (U : TopologicalSpace.Opens \", \"doc\": \"For a skyscraper presheaf at point $ p_0 $ with value $ A $ in a category $ \\\\mathcal{C} $, if $ p_0 $ specializes to $ y $, then the composition of the germ map $ \\\\mathcal{F}(U) \\\\to \\\\mathcal{F}_y $, t\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_apply\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {F G : TopCat.Presheaf C X} (f : F ⟶ G) {x y : ↑X} (h : x ⤳ y) {F_1 : C → C → Type uF} {carrier : C → Type w}\\n  {instFunLike : (X Y : C) → FunLike (F_1 X Y) (carrier X) (carrier Y)}\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, if $x$ specializes to $y$ (i.e., every neighborhood of $y$ is also a neighborhood of $x$), then there exists a canonical morphism $\\\\mathcal{F}_\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward_germ\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) (U : TopologicalSpace.Opens ↑Y) (x : ↑X)\\n  (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ U),\\n  CategoryTheory.CategoryStruct.comp\\n      (\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$, and $x$ be a point in $X$. Let $U$ be an open neighborhood \"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {F G : TopCat.Presheaf C X} (f : F ⟶ G) {x y : ↑X} (h : x ⤳ y) {Z : C}\\n  (h_1 : (TopCat.Presheaf.stalkFunctor C x).obj G ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (F.stalkSpecializ\", \"doc\": \"For presheaves $\\\\mathcal{F}$ and $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$, and points $x,y \\\\in X$ with $x$ specializing to $y$, the composition of the sta\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {F G : TopCat.Presheaf C X} (f : F ⟶ G) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (F.stalkSpecializes h) ((TopCat.Presheaf.stalkFunctor C x).map f) =\\n    Category\", \"doc\": \"For any presheaves $\\\\mathcal{F}$ and $\\\\mathcal{G}$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, any morphism $f: \\\\mathcal{F} \\\\to \\\\mathcal{G}$, and any points $x, y \\\\in X$ where \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"acyclic\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyAcyclic|cospecialization|specialization.*cohomology",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper locally acyclic morphisms have isomorphic specialization maps on torsion etale cohomology",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-locally-acyclic-specialization",
+  "worker": "stage1",
+  "summary": "Followed Tag 0GJW for G[0], isolating the closed-fibre unit and the specialization/cospecialization compatibility as two strictly smaller inputs. Reused the proper base-change theorem and fixed-prime torsion preservation with all primes; verified h is affine and qcqs. Statement unchanged. Independent second reading makes the exchange/restriction identification explicit termwise.",
+  "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Step 1 uses clause (1) to obtain the strictly henselian local base and the canonical closed geometric lift; this is a generic strict-henselization fact, not a replacement for the proper-base-change argument."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Steps 2 and 4 use the natural Leray identification and the derived-unit formula for cohomology pullback to identify the actual fibre restriction map; these are generic adjunction tools, not another proof route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Step 3 uses the inverse-image stalk isomorphism to preserve elementwise torsion under pullback; this is a generic stalk calculation."
+   },
+   {
+    "node": "lem-sbc-qcqs-higher-images-prime-torsion",
+    "why": "Step 3 applies the existing qcqs higher-image theorem with the set of all primes to the affine h; the unit has no torsion-preservation statement for arbitrary qcqs maps. It supplies precisely the input 0DDD used in the source proof and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Step 4 uses exact global sections on a strictly henselian local scheme to compute derived sections termwise; this is a generic strict-local cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Step 4 uses the natural germ isomorphism from global sections to the closed geometric stalk; this is a generic identification needed by the source proof."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Step 4 uses the generic exchange formula on a K-injective representative and its explicit action on sections to identify the proper fibre comparison with restriction. This is a map-identification tool, not an alternative route."
+   },
+   {
+    "node": "def-weil-pbc-underived-exchange",
+    "why": "Step 4 uses the generic exchange formula on a K-injective representative and its explicit action on sections to identify the proper fibre comparison with restriction. This is a map-identification tool, not an alternative route."
+   },
+   {
+    "node": "def-weil-pbc-cohomology-pullback",
+    "why": "Step 4 uses the definition of derived pullback via a section restriction and a resolution comparison to identify the exchange map. This only names the generic map being compared."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-5784be4d4",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-5784be4d4 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements. Stacks 0GJU–0GJW support both new nodes and all five steps; canonical exchange/restriction maps and torsion hypotheses check correctly. No duplicate, restated split, or target weakening found. Accepted generic tool uses are documented in review.md; no fixes required."
+ }
 }
