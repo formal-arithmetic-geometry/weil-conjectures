@@ -270,7 +270,7 @@ noncomputable def closedUpperShriekHomEquivRightDerivedUpperShriek [HasCompactif
     ((rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar _ i).app P).homFromEquiv.symm.trans
       (rightDerivedUpperShriekHomEquiv i hP hK)
 
-omit [Finite Λ] hN hΛ s in
+omit hN hΛ s in
 lemma closedUpperShriekHomEquivRightDerivedUpperShriek_naturality [HasCompactification i]
     [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
