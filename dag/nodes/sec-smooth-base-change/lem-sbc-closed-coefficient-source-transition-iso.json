@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-closed-coefficient-source-transition-iso",
+ "kind": "statement",
+ "title": "For a closed immersion i:Z→T and a sheaf G on Z, the canonical source transition with coefficient i_*G is an isomorphism in every degree q.",
+ "statement": "Let Λ be a commutative ring, p:X→S and g:T→S scheme morphisms, q an integer, i:Z→T a closed immersion, and G a sheaf of Λ-modules on the small etale site of Z. For the canonical source transition of [def-sbc-module-higher-image-transitions], the morphism from the degree-q source for g with coefficient i_*G to the degree-q source for i≫g with coefficient i^*i_*G is an isomorphism.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0F07, closed coefficient comparison, using 03QP and 0959"
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-map",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof": [
+  {
+   "text": "For a closed immersion i, finite direct image is exact [lemma-weil-pbc-finite-direct-image-exact] and closed pushforward is fully faithful [prop-openclosed-lowerstar-fully-faithful]. The Lean proof uses the already-proved cover-dense and locally full/faithful refinement of this latter statement, in Etale.UpperLowerStar.ClosedImmersion, with module coefficients.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "prop-openclosed-lowerstar-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary counit is invertible. On a complex, its componentwise image and its homotopy-category image are invertible. The derived counit factorization and the invertible exact-functor derived unit then imply the bounded-below derived counit is invertible. Consequently the derived right adjoint is fully faithful. The single complex of i_*G is isomorphic, by exactness and the single-functor comparison, to Ri_* applied to G[0]. The derived adjunction unit is therefore invertible there.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the direct-image triangle transition as Rh_* applied to the derived unit, followed by the direct-image composition isomorphism. Prove this identity using composition-of-derived-adjunctions unit coherence, naturality of the composition isomorphism and the adjunction triangle identity. Both factors are invertible on the preceding single complex. Apply exact inverse image along p and degree-q homology to obtain the canonical source transition isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-openclosed-lowerstar-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and existing Lean library",
+  "place": "Tag 0F07 closed coefficient argument; finite exactness, finite base change, derived adjunction unit and composition coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion pushforward etale sheaves base change unit higher direct image composition",
+   "results": "8 scheme-module pushforward hits, no exact comparison",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "12 generic derived-functor tools; no exact closed coefficient comparison",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*pushforward|lowerStar.*[Ee]xact",
+   "results": "No exact Mathlib hit; the source library supplies finite exactness and base change",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact fully faithful right adjoint on abelian categories induces a fully faithful bounded below derived functor and its adjunction unit is invertible on direct images",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange",
+  "date": "2026-10-14",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-closed-coefficient-range",
+   "place": "Closed coefficient geometric transition comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedCoefficientSourceTransitionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedCoefficientSourceTransitionIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeSourceTransition_isIso_closed_coefficients",
+  "statement": "theorem baseChangeSourceTransition_isIso_closed_coefficients\n    {X S T Z : Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (q : ℤ)\n    (i : Z ⟶ T) [IsClosedImmersion i]\n    (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsIso (baseChangeSourceTransition Λ p g q i\n      (((i)_*[ModuleCat.{u + 1} Λ]).obj G))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-5e0aa",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T170740-L-2556696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-5e0aa",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T170740-L-2556696",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declarations are unchanged; proofs, DAG nodes, imports, report, and local interface changes satisfy review requirements; direct importer Survival also compiles."
+ }
+}
