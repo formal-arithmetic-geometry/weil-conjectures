@@ -15,16 +15,22 @@
  ],
  "proof": [
   {
-   "text": "Restrict the factorization equality to V^q tensor P^r. Uncurrying components and Hom projection naturality move eta_O to the end. The augmentation is a monomorphism and evaluation preserves finite limits, so its degree component is monic. Cancel it to determine each component of e. Postcompose its degree-zero component with singleObjXSelf and use tensor-Hom coefficient naturality.",
+   "text": "Apply schemeOrdinaryEvaluationGraded_augmentation to the coefficient augmentation eta_O. Taking degree components of the assumed factorization gives E_j;eta_O^j=e^j;eta_O^j. The standard K-injective augmentation is monic and evaluation preserves monomorphisms, so cancellation gives e^j=E_j for every j.",
    "uses": [
-    "lem-pc-tensor-hom-uncurry-differential",
+    "lem-pc-scheme-ordinary-evaluation-graded-augmentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict E_0 to the coproduct summand V^q tensor P^r for r+q=0. The mapBifunctorDesc summand equation gives the specified uncurried Hom projection. Postcompose with singleObjXSelf and apply tensorHomEquiv_comp_homObjMap and the inverse equivalence laws. This is proved with an arbitrary coefficient complex and an abstract projection morphism before specializing to the fixed projections, avoiding reduction of their large existence specification.",
+   "uses": [
     "lem-sc-hom-complex-projections",
     "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The total tensor associator takes a triple inclusion to the component associator without a sign. Naturality of the total tensor map inserts the component of e. When r+q is nonzero the single-unit component is zero, so the action component vanishes. Otherwise the total right unitor gives singleObjXSelf followed by the ordinary right unitor and XIsoOfEq, and p=k by the two degree equations. Substitute the determined component of e and postcompose with eta_F to obtain exactly the stated formula, using the component-of-composition equation.",
+   "text": "Unfold the tensor-unit action. Mathlib ι_mapBifunctorAssociatorX_hom and the two triple-inclusion equations take the triple summand to the component associator followed by the V,P inclusion. The ι_mapBifunctorMap equation inserts e. For r+q=0 the degree equations give p=k. Derive the right-unitor summand formula by postcomposing with its inverse, applying rightUnitor'_inv, and cancelling the single coefficient isomorphism and ordinary right unitor. Substitute the coefficient calculation of the preceding step. For r+q nonzero, isZero_single_obj_X makes the component of e zero, and additivity of tensoring makes the whole component zero. Finally postcompose with eta_F^k and use comp_f and associativity.",
    "uses": [
     "def-pc-scheme-tensor-unit-action",
     "lem-pc-sheaf-modules-tensor-closed"
@@ -34,17 +40,17 @@
  ],
  "proof_deps": [
   "def-pc-scheme-tensor-unit-action",
+  "lem-pc-scheme-ordinary-evaluation-graded-augmentation",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-tensor-hom-uncurry-differential",
   "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "T3",
+  "group": "R3",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
-  "description": "Combine the coefficient cancellation and generic tensor-unit calculation as one component normalization lemma. This is a strict part of the parent: it has no ordinary map f or predicate hf and asserts only a triple-summand component formula."
+  "description": "Complete Lean proof, without split-offs: reuse the already-proved graded augmentation formula, cancel the augmentation, and calculate the total tensor action through the standard Mathlib associator, tensor-map and right-unitor summand equations. Private helpers are fully proved with abstract complexes or projection morphisms; all public statements and definitions are unchanged."
  },
  "mathlib_searches": [
   {
@@ -118,10 +124,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261014T034913-L-815915",
-  "kind": "interface",
+  "landing": "20261014T103113-L-1343640",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
