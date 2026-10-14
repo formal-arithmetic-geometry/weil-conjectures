@@ -45,8 +45,6 @@ private theorem commShift_of_localization
   simpa only [Functor.commShiftIso_comp_hom_app, Functor.whiskerLeft_app,
     Category.assoc, ← τ.naturality_assoc] using h
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 /-- An exact functor isomorphic to the identity acts on Ext by that comparison.
 Source: Stacks Project, derived.tex, Tag 015F, and Mathlib Ext.Map.
 
@@ -80,6 +78,7 @@ theorem exactFunctorIdentityComparison
     ext K i
     dsimp [η]
     erw [Category.id_comp, Category.comp_id]
+    rfl
   let δ := Functor.isoWhiskerRight (η ≪≫ ε) Q ≪≫ Q.leftUnitor ≪≫ Q.rightUnitor.symm
   have : NatTrans.CommShift Q.rightUnitor.inv ℤ :=
     NatTrans.CommShift.of_iso_inv Q.rightUnitor ℤ
