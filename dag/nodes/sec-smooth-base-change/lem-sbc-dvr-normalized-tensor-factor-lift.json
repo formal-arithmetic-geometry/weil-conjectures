@@ -17,37 +17,42 @@
  },
  "proof": [
   {
-   "text": "Invert the nonzero elements of B. This identifies F with a finite separable field factor of E tensor_Frac(B) Frac(A). Tensor F with Frac(A1) over Frac(A); the reduced tensor ring is a finite product of fields, each a factor of E tensor_Frac(B) Frac(A1). These factors are quotients by maximal ideals P1 of E tensor_B A1, and A1 embeds in each.",
+   "text": "Put F=(E tensor_B A)/P. The injective map A -> F and faithful A -> A1 make F tensor_A A1 nonzero (Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain). Choose a maximal ideal M and let G=(F tensor_A A1)/M. The map F -> G is injective since F is a field. The kernel of A1 -> G contracts to zero in A; integrality of A1/A and Ideal.eq_bot_of_comap_eq_bot show that A1 -> G is injective.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Normalize S in that product. Each field factor is finite separable over Frac(A1), so its normalization S1 is finite over A1. Integrality transitivity identifies these S1 with the factors of the product normalization of S.",
+   "text": "The maps E -> F -> G and A1 -> G agree on B and give phi:E tensor_B A1 -> G. Prove phi surjective by two tensor inductions: the class of (class of e tensor_B a) tensor_A a1 is the image of e tensor_B (a*a1), and addition and zero are preserved. Let P1=ker(phi); it is maximal because G is a field and phi is surjective. The quotient-kernel equivalence F1=(E tensor_B A1)/P1 -> G commutes with A1, so its inverse restricts the embedding F -> G to an A-algebra embedding f:F -> F1. It also proves injectivity of the right map A1 -> F1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The B-map into F is injective through Frac(B) and E, hence B -> A and B -> A1 are injective. Finiteness in the tower B -> A -> A1 gives Module.Finite B A1. Apply [lem-sbc-dvr-root-tensor-factor-integral-closure-finite] to P1 to prove finiteness of S1=integralClosure_A1(F1). Restrict f to i:S=integralClosure_A(F) -> S1: integrality maps along f and ascends from A to A1. This restriction is injective.",
    "uses": [
-    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+    "lem-sbc-dvr-root-tensor-factor-integral-closure-finite"
    ],
    "elementary": false
   },
   {
-   "text": "The resulting integral map from S to the product of S1 is injective. Lying over lifts Q to a prime Q1 in one factor. The induced map i is an A-algebra embedding. Its contraction in A1 lies over m_A and is maximal by the integral extension A1/A; since A1 is local it equals m_A1.",
+   "text": "S1 is finite over A by transitivity, hence integral over S via the compatible A-algebra map i. Apply Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain, using ker(i)=0, to lift Q to Q1. Its contraction to A is m_A, by the equality i^{-1}(Q1)=Q. The prime Q1 cap A1 is maximal since A1/A is integral and its contraction is maximal; locality of A1 therefore identifies it with m_A1.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "S is a finite normal one-dimensional domain and hence Dedekind. The embedding into the domain S1 makes S1 torsion free over S; torsion free modules over a Dedekind domain are flat. No tame hypothesis or numerical bound is used.",
+   "text": "Finiteness of S over the Noetherian DVR A gives IsNoetherianRing S. The integral closure S is integrally closed in F and embeds into F; IsIntegrallyClosed.of_isIntegrallyClosedIn gives intrinsic normality. Ring.DimensionLEOne.integralClosure supplies dimension at most one, so S is Dedekind. The injective map i into the domain S1 makes S1 torsion free over S (Module.isTorsionFree_iff_algebraMap_injective). Mathlib.RingTheory.Flat.TorsionFree gives Module.Flat S S1.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+  "lem-sbc-dvr-root-tensor-factor-integral-closure-finite"
  ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "H2",
-  "document": "Stacks Project",
-  "place": "Tags 09EM (Remark 15.116.1, normalized tensor factors and surjectivity on spectra), 032L (finite separable normalization), and lying over."
+  "agent": "R4",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 09EM and 032L; direct maximal quotient of F tensor_A A1, lying over, and torsion-free flatness over a Dedekind domain."
  },
  "mathlib_searches": [
   {
@@ -124,10 +129,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261014T035543-L-887257",
-  "kind": "interface",
+  "landing": "20261014T041919-L-1154662",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
