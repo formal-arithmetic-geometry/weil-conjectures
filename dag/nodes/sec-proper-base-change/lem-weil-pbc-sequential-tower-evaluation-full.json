@@ -18,12 +18,99 @@
  },
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
+  "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-small-module-diagrams-grothendieck",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose strict tower complexes $P,V$ and isomorphisms $QP\\simeq X$, $QV\\simeq Y$, using the complex localization description of the derived category. The index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ is small in the stated universe, so the small-module-diagram theorem makes $\\mathcal B$ Grothendieck abelian. Apply the injective-term K-injective resolution theorem in $\\mathcal B$ to obtain a quasi-isomorphism $v:V\\to J$, with $J$ K-injective and each $J^q$ injective as a TOWER object. Fix the resulting identification $QJ\\simeq Y$. Evaluation is exact by the levelwise-abelian theorem, so $v_n$ is a quasi-isomorphism. Transport the given $f_n$ to maps $\\bar f_n:QP_n\\to QJ_n$; naturality of $v$ and of the evaluated identifications gives $Q(t^J_n)\\bar f_{n+1}=\\bar f_n Q(t^P_n)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; application to the small tower category"
+   }
+  },
+  {
+   "text": "For an object $M$ and positive integer $n$, define $L_n(M)$ to have value $M$ at indices $m\\leq n$, zero at $m>n$, identity transitions within its support and zero transitions elsewhere. For an injective tower $T$, the componentwise identity/zero inclusion $L_n(T_n)\\hookrightarrow L_{n+1}(T_n)$ is monic by levelwise monomorphisms. Define $a:L_n(T_n)\\to T$ by the composite transition $T_n\\to T_m$ at $m\\leq n$ and zero otherwise. Injectivity extends $a$ to $b:L_{n+1}(T_n)\\to T$. Its components satisfy $b_n=\\mathrm{id}_{T_n}$ and $t^T_n b_{n+1}=b_n$, so $b_{n+1}$ is a section of $t^T_n$. Apply this to $T=J^q$ and choose sections $s_n^q:J_n^q\\to J_{n+1}^q$ in every degree. These sections are graded maps only; no commutation with differentials is needed.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P injective-term clause; elementary extension argument from injectivity"
+   }
+  },
+  {
+   "text": "Evaluation of the K-injective tower complex $J$ is K-injective by the evaluation theorem (reindex positive integers by $n\\mapsto n-1$ to use its natural-number indexing). Therefore the Hom-to-derived-Hom bijection supplies a chain map $a_n:P_n\\to J_n$ representing each $\\bar f_n$. That bijection is also injective: two chain maps into $J_n$ that represent the same derived morphism have the same homotopy class. Thus an adjacent commutation defect is null-homotopic, rather than merely zero after localization.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clause (3); existing evaluation-preserves-K-injectives theorem"
+   }
+  },
+  {
+   "text": "Construct $b_n:P_n\\to J_n$ inductively, with $b_n$ homotopic to $a_n$ and $t^J_i b_{i+1}=b_i t^P_i$ for $i<n$. Set $b_1=a_1$. Given $b_1,\\ldots,b_n$, compatibility and the Hom bijection show that $D_n=t^J_n a_{n+1}-b_n t^P_n$ is null-homotopic. Choose $H^q:P_{n+1}^q\\to J_n^{q-1}$ with $D_n^q=d_{J_n}^{q-1}H^q+H^{q+1}d_{P_{n+1}}^q$, and set $\\widetilde H^q=s_n^{q-1}H^q$. Define $b_{n+1}^q=a_{n+1}^q-d_{J_{n+1}}^{q-1}\\widetilde H^q-\\widetilde H^{q+1}d_{P_{n+1}}^q$. The correction $d\\widetilde H+\\widetilde H d$ is a chain map, since both products with a differential equal $d\\widetilde H d$ after $d^2=0$. It is null-homotopic, so $b_{n+1}$ still represents $\\bar f_{n+1}$. As $t^J_n$ is a chain map and $t^J_n\\widetilde H=H$, applying $t^J_n$ to the correction gives $dH+Hd=D_n$; hence $t^J_n b_{n+1}=b_n t^P_n$. Previous $b_i$ are unchanged. Recursion over the positive integers now gives all components.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; agent sequential homotopy correction written out here"
+   }
+  },
+  {
+   "text": "The adjacent equalities imply commutation with each longer transition by repeated composition. Thus the family $(b_n)$ is a strict tower chain map $b:P\\to J$: its degreewise components are natural transformations, and the chain equation is checked at each index. Localize $b$ and compose with the fixed identifications $QP\\simeq X$ and $QJ\\simeq Y$ to obtain $f:X\\to Y$. Its evaluation at $n$ is $f_n$ because $b_n$ is homotopic to $a_n$ and localization factors through the homotopy category. The homotopies between $b_n$ and $a_n$ need not form a tower homotopy; only their evaluation classes are asserted. The choices in this construction give existence only.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU derived-category localization; agent assembly of the corrected maps"
+   }
+  },
+  {
+   "text": "Finally let $g:X\\to Y$ be ANY lift with all $g_n$ invertible. The Hom bijection in $\\mathcal B$, with K-injective target $J$, represents the transported $g$ by a strict tower chain map $c:P\\to J$. For every $q,n$, the map $H^q(c_n)$ is invertible, since cohomology factors through localization and the evaluated derived map is $g_n$. Evaluation computes kernels and cokernels levelwise, so $H^q(c)$ is the natural transformation with components $H^q(c_n)$. Its component inverses form a natural transformation: invert the naturality equation on both sides. Hence $H^q(c)$ is invertible for every $q$, making $c$ a quasi-isomorphism by definition. Localization inverts $c$, so $g$ is an isomorphism. This proves the isomorphism clause for every lift, without asserting uniqueness or a functorial choice.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I Hom bijection; Tag 05RU localization at quasi-isomorphisms; homology.tex Tag 02MZ levelwise exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070I and injectives.tex Tag 079P are the prerequisites; sequential homotopy correction is an agent argument, not a Stacks morphism-lifting theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,15 +153,74 @@
    "date": "2026-10-14",
    "results": "8 hits: DerivedCategory.instFullSingleFunctor, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient, instFullLightDiagram'LightDiagramToLightFunctor, HomotopyCategory.instFullHomologicalComplexQuotient, CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj, CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor', CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.full_embedding",
    "verdict": "no match: inspected the returned signatures; they concern other sheaf sites, ordinary completeness, or other full functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation functor from the derived category of inverse sequences in a Grothendieck abelian category to inverse sequences in its derived category is full",
+   "results": "8 hits: DerivedCategory.instFullSingleFunctor, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient, CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.full_embedding, CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj, CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.full, CategoryTheory.Abelian.FreydMitchell.instFullModuleCatEmbeddingRingFunctor, HomotopyCategory.instFullHomologicalComplexQuotient",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern single objects, localization precomposition, embeddings or individual mapping cones, not simultaneous evaluation of strict derived towers."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*[Ff]ull|inverse.*sequence.*derived|derived.*diagram.*[Ff]ull",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern single objects, localization precomposition, embeddings or individual mapping cones, not simultaneous evaluation of strict derived towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy commuting maps of sequential cochain complexes can be corrected to strict maps when target transitions split degreewise and target evaluations are K injective",
+   "results": "8 hits: HomologicalComplex.homotopyCofiber.desc_f', CochainComplex.mappingCone.liftHomotopy, CochainComplex.mappingCone.descHomotopy, Homotopy.mkCoinductive, HomologicalComplex.homotopyCofiber.inrCompHomotopy, HomologicalComplex.homotopyCofiber.desc_f, HomologicalComplex.homotopyCofiber.desc, CochainComplex.mappingCone.mapOfHomotopy",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern single objects, localization precomposition, embeddings or individual mapping cones, not simultaneous evaluation of strict derived towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Full\"",
+   "results": "2 hits: DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, DerivedCategory.instFullSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures concern single objects, localization precomposition, embeddings or individual mapping cones, not simultaneous evaluation of strict derived towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible derived morphisms between evaluations of strict inverse sequences lift to a derived morphism of inverse sequences",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-reconstruction-uniform-tower",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-sequential-tower-evaluation-full",
+  "worker": "stage1",
+  "summary": "Wrote a six-step homotopy-correction proof using only existing nodes. Derived injective-tower transition sections directly from injectivity by extending across finite staircase inclusions. Reused generic injective-term resolutions and tower evaluation K-injectivity; proved that every levelwise-invertible lift is invertible, not just the constructed lift. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the first sentence of the reconstruction ancestor proof: promote the specified compatible reduction maps to one strict derived-tower isomorphism. The standalone prerequisite claims neither a unique nor a natural lift.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic unbounded K-injective resolution theorem with injective terms, applied to the Grothendieck category of module towers; the same-unit resolution node lacks its injective-term clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-degreewise-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-e071379eb",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-e071379eb (reviewer sub-agent of L); spot-checked: The proof and source checks pass, but the statement asserts levelwise exactness while omitting existing node lem-weil-tower-category-levelwise-abelian from stmt_deps. Corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-sequential-tower-evaluation-full.json; review.md records all step and edge-case checks.; 1 file(s) fixed by the reviewer"
+ }
 }
