@@ -30,6 +30,13 @@ of `φ_m : (Frᵐ)^* ℱ ≅ ℱ`; then `Ψ_m(β_m) = Φᵐ`.
 
 universe u
 
+-- The stalk functors of `WeilConjectures.WeilSheaf.Stalk` and
+-- `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` are elaborated without this instance;
+-- elaborating `Sheaf.Γ` through it here would produce terms which the kernel compares slowly.
+attribute [-instance] ModuleCat.instIsRightAdjointForgetLinearMapIdCarrier
+  ModuleCat.isGrothendieckAbelian_of_commRing
+  CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape
+
 open CategoryTheory
 
 namespace AlgebraicGeometry.WeilGroup
@@ -311,4 +318,41 @@ theorem monoLinear_stalkAt_frobenius (F : WeilSheaf K l C) (hF : F.IsLisse)
     M.reparam_comp_upperStar_comp_mono_apply _ _ hs π (F.toLisse hF) (F.lisseFrobPowStr hF m).hom v,
     frobPowStalk, frobeniusLoopAt,
     M.mono_comp_upperStar_comp_apply]
+
+/-- The local Frobenius of the stalk at a closed point is that of the stalk at the attached
+geometric point. (Stated through `congrArg`: the kernel checks the direct definitional
+unfolding slowly.) -/
+omit [IsCurve (C ↘ Spec (.of K))] in
+lemma stalk_frobenius_apply (F : WeilSheaf K l C) (x : C.finitePoints)
+    (v : (F.stalk x).carrier) :
+    (F.stalk x).frobenius v = (F.stalkAt _ _
+      ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+        x)).frobenius v :=
+  congrArg (fun f : (F.stalk x).carrier ≃ₗ[PadicAlgCl l] (F.stalk x).carrier ↦ f v) rfl
+
+/-- The local Frobenius loop at a closed point is `frobeniusLoopAt` at the attached geometric
+point. -/
+lemma frobeniusLoop_eq_frobeniusLoopAt (x : C.finitePoints)
+    (π : fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) ≅ fiber B.t) :
+    B.frobeniusLoop x π = frobeniusLoopAt _ _
+      ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow x)
+        π :=
+  rfl
+
+/-- **The local Frobenius at a closed point and the Weil fundamental representation.** For a
+closed point `x` of degree `m` and a path `π : F_xb ≅ F_t`, transport along `π` carries the
+local Frobenius `Fₓ` on `ℱ_xb` to `Φᵐ ρ_geom(h)`, where `h` is the local Frobenius loop
+followed by `β_m⁻¹` (`def-wf-fundamental-representation`). -/
+theorem monoLinear_stalk_frobenius (F : WeilSheaf K l C) (hF : F.IsLisse) (x : C.finitePoints)
+    (π : fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) ≅ fiber B.t)
+    (v : (F.stalk x).carrier) :
+    M.monoLinear π (F.toLisse hF) ((F.stalk x).frobenius v) =
+      (frobStalk M B F hF ^ (C ↘ Spec (.of K)).degreeOver x.1)
+        (M.monoLinear (B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm) (F.toLisse hF)
+          (M.monoLinear π (F.toLisse hF) v)) := by
+  rw [stalk_frobenius_apply, monoLinear_stalkAt_frobenius, frobeniusLoop_eq_frobeniusLoopAt,
+    frobPowStalk_eq_mono_comp M F hF _ _ (B.frobPathPow _), CategoryTheory.Functor.map_comp,
+    ModuleCat.hom_comp, LinearMap.comp_apply, frobPowStalk_frobPathPow]
+  rfl
+
 end AlgebraicGeometry.WeilGroup
