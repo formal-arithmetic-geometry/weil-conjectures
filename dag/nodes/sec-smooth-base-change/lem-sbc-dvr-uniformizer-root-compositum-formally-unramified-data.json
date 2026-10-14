@@ -10,18 +10,44 @@
  },
  "proof": [
   {
-   "text": "Construct the intermediate root normalization, prove the unit-root etale calculation over U, use multiplicativity of ramification indices and residue separability, then descend through the arbitrary DVR base change A and identify the selected local factor with T.",
+   "text": "The unit hypothesis makes e positive. Choose an irreducible q in U. Mapping the principal maximal ideal of B and using hindexU shows q^e is associated to pi in U; choose its unit factor w. The standard root algebra R=B[t]/(t^e-pi) is a DVR with maximal ideal (t). Map R to A by t -> theta and compose to rho:R->T.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compatibility on B and the root equation give rho(t)^e=(j(q))^e*j(w). Unique factorization in the DVR T cancels the positive exponent in associatedness, yielding a unit y with j(q)*y=rho(t). Since j is local, rho(t) belongs to m(T); the formula m(R)=(t) proves rho local, and locality descends to R->A.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the standard-root unramified model theorem with q,w,rho,y. Obtain an essentially finite type formally unramified DVR V over R and compatible maps V->T, Frac(V)->F and E->Frac(V). The image of E lies in the image of Frac(V), so hgen implies Algebra.adjoin A (range iV)=top.",
+   "uses": [
+    "lem-sbc-dvr-standard-root-unramified-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the arbitrary DVR unramified compositum base-change theorem to R,V,A,T and the compatible fraction-field map. It gives precisely essential finite type and formal unramifiedness of T over A.",
+   "uses": [
+    "lem-sbc-dvr-unramified-compositum-base-change"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sbc-dvr-standard-root-unramified-model",
+  "lem-sbc-dvr-unramified-compositum-base-change"
+ ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "H3",
-  "document": "Stacks Project",
-  "place": "Tags 0BRM, 09EV, 09EQ and 09E7"
+  "agent": "N3",
+  "document": "Stacks Project and existing Lean library",
+  "place": "Tags 0BRM, 09EV, 09EQ; Mathlib local unramified criterion (00UW).",
+  "note": "Uses the existing standard-root model and compositum base-change construction, with the same preparatory calculation as DvrUniformizerRootCompositumResidue. No new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -89,10 +115,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261014T051907-L-1850074",
-  "kind": "interface",
+  "landing": "20261014T053241-L-2010847",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
