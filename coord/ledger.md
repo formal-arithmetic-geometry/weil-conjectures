@@ -14559,3 +14559,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/F2/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T045608-L-1572413 (proof); batch 20261014T045603; modules 1; new nodes 0)
 - 04:56 L: merged deliver/G1/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T045609-L-1572722 (proof); batch 20261014T045603; modules 1; new nodes 0)
 - 04:56 L: merged deliver/G2/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeDescent (stage 3; reviewer PASS; first push; landing 20261014T045609-L-1572865 (interface); batch 20261014T045603; modules 2; new nodes 1)
+- 04:56 L: returned deliver/B4/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-82240, head 8224072c2) F (review brief point 2; roles/lead.md §4.4): Restore the deleted private helper in l)
