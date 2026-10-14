@@ -14,6 +14,7 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
@@ -678,6 +679,7 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fac
         (ObjectProperty.flat_of_isDualizable isDualizable_unit))
   obtain ⟨c⟩ := DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX
     ⟨hK', a, b, hKt'⟩ hU
+  have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
   exact DerivedCategory.boundedConstructible_derivedDual_of_iso Λ e c
     (Etale.boundedConstructible_derivedHom Λ aX a b 0 0 hK' hKt' hU hUt)
 
