@@ -6,6 +6,8 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
+import Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionCycleSquare
+import Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionHomologySquare
 
 /-! # Cycle projection and quotient comparisons for restricted Hom complexes
 
@@ -31,6 +33,8 @@ noncomputable local instance (priority := 2000) openOverHomComplexCycleProjectio
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 attribute [local irreducible] homComplexFunctor
 
+set_option maxHeartbeats 2000000 in
+-- Elaborating the restricted complexes and comparison maps needs this larger budget.
 /-- The projection square on Hom cycles and the cycle-to-homology quotient square.
 Source: Stacks Project, Tags 0A8X and 08DL; steps 1 and 2 of the parent plan.
 (blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison).
@@ -82,6 +86,19 @@ theorem openOver_homComplex_cycle_projection_comparison (X : Scheme.{u})
     ∃ c : F.obj (P.cycles n) ≅ Q.cycles n,
       F.map (P.iCycles n ≫ homologyEvaluationProjection X T J n) ≫
           (e (T.X (-n)) (J.X 0)).hom = c.hom ≫ Q.iCycles n ≫ π ∧
-      F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n := by sorry
+      F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n :=
+      by
+  intro F P A K Q π
+  obtain ⟨h, hp⟩ := openOver_homComplex_chain_projection_iso X V W e he T J n
+  obtain ⟨a, c, hc, ha⟩ := openOver_chain_cycle_homology_comparison X V W
+    P Q h n
+  refine ⟨a, c, ?_, ha⟩
+  change h.hom.f n ≫ π = F.map (homologyEvaluationProjection X T J n) ≫
+    (e (T.X (-n)) (J.X 0)).hom at hp
+  change F.map (P.iCycles n) ≫ h.hom.f n = c.hom ≫ Q.iCycles n at hc
+  calc
+    _ = F.map (P.iCycles n) ≫ (h.hom.f n ≫ π) := by
+      rw [Functor.map_comp, Category.assoc, hp]
+    _ = _ := by rw [← Category.assoc, hc, Category.assoc]
 
 end CategoryTheory

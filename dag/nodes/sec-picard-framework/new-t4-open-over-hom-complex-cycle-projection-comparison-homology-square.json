@@ -1,0 +1,112 @@
+{
+ "id": "new-t4-open-over-hom-complex-cycle-projection-comparison-homology-square",
+ "kind": "statement",
+ "title": "Cycle and homology comparisons induced by the same restricted chain isomorphism",
+ "statement": "For a scheme X and opens V of X and W of V, let F denote restriction to V followed by over-site restriction over W, acting termwise on cochain complexes [new-b2-homology-evaluation-definitions]. Let P be any cochain complex of X-modules, Q a cochain complex of modules on the over-site of V over W, h:F(P)≅Q a chain isomorphism, and n an integer. There exist a:F(H^n(P))≅H^n(Q) and c:F(Z^n(P))≅Z^n(Q) with F(iCycles(P));h_n=c;iCycles(Q) and F(homologyπ(P));a=c;homologyπ(Q). Both comparisons are induced by h.",
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3, restriction of internal Hom, expanded via its construction; Section 21.34, Tag 0A8X, product terms and signed differential. Parent plan new-v2-homology-evaluation-restriction-diagrams, steps 1 and 2."
+ },
+ "proof": [
+  {
+   "text": "Restriction to an open is exact, since it computes kernels sectionwise and\ncokernels after sheafification, which commutes with open restriction. The over-site\nfunctor has the same properties, transported through the open-site equivalence.\nLet z and d be the inverse mapCyclesIso and mapHomologyIso comparisons for P.\nCompose z with the cycle isomorphism induced by h, and d with the homology\nisomorphism induced by h, obtaining c and a. Naturality of cycle inclusions gives\nthe first identity. Naturality of the homology quotient under exact functors and\nchain maps gives the second identity. In particular both comparisons come from\nthe SAME chain isomorphism; an arbitrary cycle isomorphism is insufficient.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "H1",
+  "date": "2026-10-14",
+  "description": "Second reader proved this helper from the existing exact restriction and upstream short-complex comparison API; no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapCyclesIso_hom_iCycles|homologyπ_naturality|mapHomologyIso",
+   "results": "['Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean', 'Mathlib/Algebra/Homology/SingleHomology.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean']",
+   "verdict": "General exact-functor API, not this specialized comparison with the fixed Hom projection.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso",
+   "results": "[]",
+   "verdict": "General exact-functor API, not this specialized comparison with the fixed Hom projection.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserves cycles and homology of a complex compatibly with the cycle inclusion and quotient",
+   "results": "['CategoryTheory.Functor.preservesHomology_of_map_exact', 'CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf', 'CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf', 'CategoryTheory.ShortComplex.Exact.map', 'CategoryTheory.Functor.preservesHomologyOfExact', 'CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff', 'CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff', 'CategoryTheory.ShortComplex.exact_map_iff_of_faithful']",
+   "verdict": "General exact-functor API, not this specialized comparison with the fixed Hom projection.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of module sheaves carries a chain isomorphism to compatible isomorphisms on cycles and homology",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionComparison",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-t4-open-over-hom-complex-cycle-projection-comparison",
+   "place": "Chain comparison and exact-functor transport steps of the parent proof."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionHomologySquare",
+  "file": "lean/Sheaf/Algebra/Homology/OpenOverHomComplexCycleProjectionHomologySquare.lean",
+  "declaration": "CategoryTheory.openOver_chain_cycle_homology_comparison",
+  "statement": "theorem openOver_chain_cycle_homology_comparison (X : Scheme.{u})\n    (V : X.Opens) (W : V.toScheme.Opens)\n    (P : CochainComplex X.Modules ℤ)\n    (Q : CochainComplex (SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)) ℤ)\n    (h : (moduleOpenOverComplexFunctor X V W).obj P ≅ Q) (n : ℤ) :\n    let F := Scheme.Modules.restrictFunctor V.ι ⋙\n      SheafOfModules.overFunctor V.toScheme.ringCatSheaf W\n    ∃ a : F.obj (P.homology n) ≅ Q.homology n,\n    ∃ c : F.obj (P.cycles n) ≅ Q.cycles n,\n      F.map (P.iCycles n) ≫ h.hom.f n = c.hom ≫ Q.iCycles n ∧\n      F.map (P.homologyπ n) ≫ a.hom = c.hom ≫ Q.homologyπ n",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T020511-L-3811455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261014T020511-L-3811455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

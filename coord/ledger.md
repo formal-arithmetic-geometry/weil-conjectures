@@ -14236,3 +14236,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: merged deliver/F3/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T020510-L-3811007 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizations (stage 3; reviewer PASS; first push; landing 20261014T020510-L-3811175 (proof); batch 20261014T020501; modules 1; new nodes 0)
 - 02:05 L: merged deliver/G4/Sheaf.Paper.ModuleCupCochainComparisonSquares (stage 3; reviewer PASS; first push; landing 20261014T020511-L-3811334 (proof); batch 20261014T020501; modules 1; new nodes 0)
+- 02:05 L: merged deliver/H1/Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionComparison (stage 3; reviewer PASS; first push; landing 20261014T020511-L-3811455 (interface); batch 20261014T020501; modules 3; new nodes 2)
