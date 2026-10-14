@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-tensor-graded-kernel-square-zero",
+ "kind": "statement",
+ "title": "Square-zero kernel of the tensor graded algebra quotient",
+ "statement": "Given a closed immersion j:Z→X, an invertible module L, the graded algebra coproduct data A [lem-sc-tensor-graded-algebra-data], and j.ker²=0 [def-sbc-ideal-sheaf-powers], every product of two local sections of ker(A.p) is zero, on every open subset of X.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and its direct sum; canonical construction before cohomology"
+ },
+ "stmt_deps": [
+  "lem-sc-tensor-graded-algebra-data",
+  "def-sc-invertible-module",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local ideal-generation lemma at each point to put both kernel sections on a common affine neighborhood in the extension of j.ker. Evaluate hI on this affine open to obtain J(V)*J(V)=0. Mathlib Ideal.mul_mem_mul and Ideal.map_mul show that the product of the two sections is zero after restriction. The separation clause of the sheaf condition proves it is zero on the original open.",
+   "uses": [
+    "lem-sc-tensor-graded-kernel-local-ideal",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-tensor-graded-kernel-local-ideal",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, direct-sum ideal sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of tensor powers of an invertible sheaf is a commutative algebra sheaf with a square zero quotient kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact coproducts the coproduct of kernels is the kernel of a coproduct of morphisms",
+   "results": "Hits: CategoryTheory.kernelCokernelCompSequence.ι, CategoryTheory.Limits.instHasKernelToSubtype, CategoryTheory.NonPreadditiveAbelian.has_finite_coproducts, CategoryTheory.Limits.instHasKernelπ, CategoryTheory.kernelCokernelCompSequence.isLimit, CategoryTheory.Limits.kernelForkBiproductToSubtype_isLimit, CategoryTheory.NonPreadditiveAbelian.has_kernels, CategoryTheory.NonPreadditiveAbelian.monoIsKernelOfCokernel; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "b66c3d93b785742d"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cofan, CategoryTheory.Limits.kernel",
+   "results": "Hits: ; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*kernel|kernel.*coproduct|graded.*sheaf|sheaf.*graded",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "e62fbdb6195fefcd"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, algebraic graded presentation",
+   "via": [
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorGradedKernelSquareZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGradedKernelSquareZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedKernel_squareZero",
+  "statement": "theorem tensorGradedKernel_squareZero {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (A : TensorGradedAlgebraData j L) (hI : j.ker ^ 2 = ⊥) : ∀ (U : X.Opens) (a b : A.B.right.obj.obj (op U)), A.p.right.hom.app (op U) a = 0 → A.p.right.hom.app (op U) b = 0 → a * b = 0",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-88550",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T050528-L-1685784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-88550",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T050528-L-1685784",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG records matched against the review packet, baseline declarations, target statements, and compiled delivery overlay"
+ }
+}

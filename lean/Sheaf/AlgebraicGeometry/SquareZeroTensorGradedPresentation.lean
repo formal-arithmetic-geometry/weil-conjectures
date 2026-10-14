@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Sheaf.AlgebraicGeometry.TensorGradedAlgebraData
+import Sheaf.AlgebraicGeometry.TensorGradedDegreeData
+import Sheaf.AlgebraicGeometry.TensorGradedKernelSquareZero
 
 /-! # Algebraic graded presentation of the tensor ideal sequences
 
@@ -28,30 +31,6 @@ universe u
 attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
-
-/-- The underlying module map, with its source and target stated explicitly.
-Source: Stacks Project, Tag 09MS, the quotient in the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-presentation). -/
-def tensorGradedAlgebraMap {X : Scheme.{u}} {B C : X.CommAlgebraSheaf} (p : B ⟶ C) :
-    commAlgebraSheafModule X.sheaf B ⟶ commAlgebraSheafModule X.sheaf C :=
-  (commAlgebraSheafModuleFunctor X.sheaf).map p
-
-/-- Read a section of the underlying module as a section of the algebra sheaf.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-presentation). -/
-def tensorGradedAlgebraSection {X : Scheme.{u}} (B : X.CommAlgebraSheaf) (U : X.Opens)
-    (z : Γ(commAlgebraSheafModule X.sheaf B, U)) : B.right.obj.obj (op U) := z
-
-attribute [local irreducible] tensorGradedAlgebraMap commAlgebraSheafModule
-
-/-- The chosen tensor-pullback unit, with a compact explicit module-map type.
-Source: Stacks Project, Tag 0096, the tensor-pullback adjunction.
-(blueprint: lem-sc-square-zero-tensor-graded-presentation). -/
-def tensorGradedUnit {X Z : Scheme.{u}} (j : Z ⟶ X) (M : X.Modules) :
-    M ⟶ (pushforward j).obj ((tensorPullback j).obj M) :=
-  (Classical.choose (exists_tensorPullbackAdjunction j)).unit.app M
-
-attribute [local irreducible] tensorGradedUnit tensorPullback
 
 /-- A graded algebra presentation, before taking cohomology. All its data are supplied
 explicitly; this structure does not select an object from an existence theorem.
@@ -132,31 +111,73 @@ structure TensorGradedPresentationCore {X Z : Scheme.{u}} (j : Z ⟶ X)
   k_projection : ∀ d : ℕ, k d ≫ (degree d).τ₁ = 𝟙 _
   k_orthogonal : ∀ a d : ℕ, a ≠ d → k a ≫ (degree d).τ₁ = 0
 
+/-- Assemble the canonical kernel data of a graded algebra quotient. -/
+private def tensorGradedCore {X Z : Scheme.{u}} (j : Z ⟶ X)
+    [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L)
+    (D : TensorGradedDegreeData j L A)
+    (hsq : ∀ (U : X.Opens) (a b : A.B.right.obj.obj (op U)),
+      A.p.right.hom.app (op U) a = 0 → A.p.right.hom.app (op U) b = 0 → a * b = 0) :
+    TensorGradedPresentationCore j L where
+  B := A.B
+  C := A.C
+  p := A.p
+  I := kernel (tensorGradedAlgebraMap A.p)
+  i := kernel.ι (tensorGradedAlgebraMap A.p)
+  hw := kernel.condition (tensorGradedAlgebraMap A.p)
+  shortExact := D.shortExact
+  squareZero := hsq
+  b := A.b
+  c := A.c
+  k := D.k
+  degree := D.degree
+  q := D.q
+  degree_quotient := D.degree_quotient
+  k_colimit := D.k_colimit
+  b_quotient := A.b_quotient
+  k_inclusion := D.k_inclusion
+  c_projection := D.c_projection
+  k_projection := D.k_projection
+  k_orthogonal := D.k_orthogonal
+
 /-- Construction of the exact graded data.
 Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence.
 (blueprint: lem-sc-square-zero-tensor-graded-presentation-core). -/
 theorem tensorGradedPresentation_core_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) :
-    Nonempty (TensorGradedPresentationCore j L) := by sorry
+    Nonempty (TensorGradedPresentationCore j L) := by
+  obtain ⟨A⟩ := tensorGradedAlgebraData_exists j L
+  obtain ⟨D⟩ := tensorGradedDegreeData_exists j L A
+  exact ⟨tensorGradedCore j L A D (tensorGradedKernel_squareZero j L A hI)⟩
 
+-- The former arbitrary-core assertion was false: scaling degree-zero inclusions
+-- over Q gives 4 = 2. Multiplication below uses the full presentation field.
 /-- Multiplication of homogeneous sections in the exact graded data.
 Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence and Tag 0B8S.
 (blueprint: lem-sc-square-zero-tensor-graded-presentation-core-multiplication). -/
 theorem tensorGradedPresentation_core_multiply {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]
-    (T : TensorGradedPresentationCore j L) :
+    (T : TensorGradedPresentation j L) :
     ∀ (U : X.Opens) (a d : ℕ) (s : Γ(L.tensorPow a, U))
       (t : Γ(L.tensorPow d, U)),
       tensorGradedAlgebraSection T.B U ((T.b a).app U s) *
         tensorGradedAlgebraSection T.B U ((T.b d).app U t) =
         tensorGradedAlgebraSection T.B U
-          ((T.b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t))) := by sorry
+          ((T.b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t))) :=
+  T.b_multiply
 
 theorem tensorGradedPresentation_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) :
     Nonempty (TensorGradedPresentation j L) := by
-  obtain ⟨T⟩ := tensorGradedPresentation_core_exists j L hI
-  let m := tensorGradedPresentation_core_multiply j L T
+  obtain ⟨A⟩ := tensorGradedAlgebraData_exists j L
+  obtain ⟨D⟩ := tensorGradedDegreeData_exists j L A
+  let T := tensorGradedCore j L A D (tensorGradedKernel_squareZero j L A hI)
+  have m : ∀ (U : X.Opens) (a d : ℕ) (s : Γ(L.tensorPow a, U))
+      (t : Γ(L.tensorPow d, U)),
+      tensorGradedAlgebraSection T.B U ((T.b a).app U s) *
+        tensorGradedAlgebraSection T.B U ((T.b d).app U t) =
+        tensorGradedAlgebraSection T.B U
+          ((T.b (a + d)).app U ((L.tensorPowAddIso a d).inv.app U (tmulSection s t))) :=
+    A.b_multiply
   exact ⟨{
     B := T.B, C := T.C, p := T.p, I := T.I, i := T.i, hw := T.hw,
     shortExact := T.shortExact, squareZero := T.squareZero, b := T.b, c := T.c,

@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-tensor-graded-degree-data",
+ "kind": "statement",
+ "title": "Canonical kernel and degree projections of a coproduct quotient",
+ "statement": "Given j:Z→X a closed immersion and the graded algebra coproduct data A [lem-sc-tensor-graded-algebra-data], the canonical kernel sequence of its underlying quotient p is short exact. It admits degree projection morphisms to the kernel sequences of eta_d [lem-pc-module-pullback-adjunction] and inclusions k_d:ker eta_d→ker p exhibiting ker p as their sheaf coproduct. The inclusion squares commute, the diagonal kernel and quotient composites are identities, and the off-diagonal kernel composites vanish. No square-zero or invertibility assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and its direct sum; canonical construction before cohomology"
+ },
+ "stmt_deps": [
+  "lem-sc-tensor-graded-algebra-data",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The closed-immersion unit in each degree is epi; adjunction uniqueness transfers this to tensorGradedUnit. Using the target coproduct universal property, the quotient p is epi.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-epi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module category is Grothendieck abelian, so coproducts are exact. Apply Mathlib colim.map_mono' and colim.exact_mapShortComplex to the pointwise kernel sequences. Their colimit is a kernel fork for p, whose unique isomorphism with the canonical kernel transports the kernel coproduct.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the degree projections by coproduct descent with identity in their own degree and zero otherwise. Check the quotient squares on inclusions, induce maps of kernels, and cancel kernel inclusions to prove the diagonal and orthogonality equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-weil-pbc-closed-immersion-unit-epi"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, direct-sum ideal sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of tensor powers of an invertible sheaf is a commutative algebra sheaf with a square zero quotient kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact coproducts the coproduct of kernels is the kernel of a coproduct of morphisms",
+   "results": "Hits: CategoryTheory.kernelCokernelCompSequence.ι, CategoryTheory.Limits.instHasKernelToSubtype, CategoryTheory.NonPreadditiveAbelian.has_finite_coproducts, CategoryTheory.Limits.instHasKernelπ, CategoryTheory.kernelCokernelCompSequence.isLimit, CategoryTheory.Limits.kernelForkBiproductToSubtype_isLimit, CategoryTheory.NonPreadditiveAbelian.has_kernels, CategoryTheory.NonPreadditiveAbelian.monoIsKernelOfCokernel; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "b66c3d93b785742d"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cofan, CategoryTheory.Limits.kernel",
+   "results": "Hits: ; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*kernel|kernel.*coproduct|graded.*sheaf|sheaf.*graded",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "e62fbdb6195fefcd"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, algebraic graded presentation",
+   "via": [
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorGradedDegreeData",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGradedDegreeData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedDegreeData_exists",
+  "statement": "theorem tensorGradedDegreeData_exists {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L) : Nonempty (TensorGradedDegreeData j L A)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-88550",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T050528-L-1685784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-88550",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T050528-L-1685784",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG records matched against the review packet, baseline declarations, target statements, and compiled delivery overlay"
+ }
+}

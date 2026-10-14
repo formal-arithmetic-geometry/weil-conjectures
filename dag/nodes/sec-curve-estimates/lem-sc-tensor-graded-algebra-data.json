@@ -1,0 +1,161 @@
+{
+ "id": "lem-sc-tensor-graded-algebra-data",
+ "kind": "statement",
+ "title": "Algebra sheaves of tensor powers and their homogeneous quotient",
+ "statement": "For a closed immersion j:Z→X [def-weil-closed-immersion] and an invertible O_X-module L [def-sc-invertible-module], there exist commutative O_X-algebra sheaves B,C [def-weil-pbc-comm-algebra-sheaf], an algebra map p:B→C, homogeneous maps b_d:L^d→B and c_d:j_*j^*L^d→C, exhibiting their underlying module sheaves as coproducts. They satisfy b_d;p=eta_d;c_d for the chosen tensor-pullback unit [lem-pc-module-pullback-adjunction], and b_a(s)b_d(t)=b_(a+d)(tensorPowAddIso(a,d)^(-1)(s⊗t)) on every open. No kernel or degree projection data and no square-zero assumption are included.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and its direct sum; canonical construction before cohomology"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "On a frame open for L construct polynomial algebra sheaves O_X[T] and j_*O_Z[T]. Glue by transition maps T↦uT; degree-d maps transform by u^d. The gluing yields B,C,p and the homogeneous inclusions, with their coproduct universal properties.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-comm-algebra-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the chosen tensor-pullback adjunction with the usual one by uniqueness of left adjoints. The units differ by an invertible natural transformation on j_*j^*. Precompose the target homogeneous inclusions by its inverse; coproduct universality is preserved and the quotient squares now use the chosen unit. Polynomial multiplication in B on every frame proves the homogeneous multiplication equation, which glues by separation. No multiplication compatibility is required of c.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, direct-sum ideal sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of tensor powers of an invertible sheaf is a commutative algebra sheaf with a square zero quotient kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact coproducts the coproduct of kernels is the kernel of a coproduct of morphisms",
+   "results": "Hits: CategoryTheory.kernelCokernelCompSequence.ι, CategoryTheory.Limits.instHasKernelToSubtype, CategoryTheory.NonPreadditiveAbelian.has_finite_coproducts, CategoryTheory.Limits.instHasKernelπ, CategoryTheory.kernelCokernelCompSequence.isLimit, CategoryTheory.Limits.kernelForkBiproductToSubtype_isLimit, CategoryTheory.NonPreadditiveAbelian.has_kernels, CategoryTheory.NonPreadditiveAbelian.monoIsKernelOfCokernel; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "b66c3d93b785742d"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cofan, CategoryTheory.Limits.kernel",
+   "results": "Hits: ; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*kernel|kernel.*coproduct|graded.*sheaf|sheaf.*graded",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean; no exact statement for graded tensor algebra sheaves.",
+   "date": "2026-10-14",
+   "digest": "e62fbdb6195fefcd"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric algebra of a locally free rank one sheaf as direct sum of tensor powers",
+   "results": "Hits: SymmetricAlgebra.instModuleFree, SymmetricAlgebra, SymmetricPower, SheafOfModules.ιFree, SheafOfModules.freeSection, SymmetricAlgebra.ι, SymmetricAlgebra.isSymmetricAlgebra_ι, IsSymmetricAlgebra; no exact module-sheaf graded quotient construction or local kernel membership theorem.",
+   "date": "2026-10-14",
+   "digest": "d6298bdd3086709e",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of symmetric algebras of a line bundle with homogeneous tensor power inclusions",
+   "results": "Hits: SymmetricPower, SymmetricPower.mk, SymmetricAlgebra.ι, TensorProduct.termSym[_]^__, TensorAlgebra.GradedAlgebra.ι, SymmetricAlgebra, TensorProduct.termSym[_]__, TensorAlgebra.GradedAlgebra.ι_apply; no sheaf-level graded algebra quotient or local kernel ideal-membership statement.",
+   "date": "2026-10-14",
+   "digest": "a73fc4b5daafd240",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|graded.*sheaf|sheaf.*graded",
+   "results": "Hits: Mathlib/Algebra/Symmetrized.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean; no sheaf-level graded algebra quotient or local kernel ideal-membership statement.",
+   "date": "2026-10-14",
+   "digest": "07332db760ec8adf",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, algebraic graded presentation",
+   "via": [
+    "lem-sc-square-zero-tensor-graded-presentation",
+    "lem-sc-square-zero-tensor-boundary-graded-realization",
+    "lem-sc-square-zero-tensor-boundary-product",
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorGradedAlgebraData",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGradedAlgebraData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorGradedAlgebraData_exists",
+  "statement": "theorem tensorGradedAlgebraData_exists {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] : Nonempty (TensorGradedAlgebraData j L)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-88550",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T050528-L-1685784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-88550",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261014T050528-L-1685784",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG records matched against the review packet, baseline declarations, target statements, and compiled delivery overlay"
+ }
+}
