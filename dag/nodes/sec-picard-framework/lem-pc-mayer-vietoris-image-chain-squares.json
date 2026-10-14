@@ -13,30 +13,44 @@
  ],
  "proof": [
   {
-   "text": "On every test open A and in every degree, the sectionwise comparison identifies I(h⁻¹(A∩W)) with I(h⁻¹A∩h⁻¹W). Its scalar action is the restriction formula for h-sharp. It commutes with all restriction maps, hence with both restriction units.",
+   "text": "Identify schemeMVImageIso with the existing schemeOpenImageDirectImageComparison by expanding their formal constructions. Equality induction identifies Scheme.Modules.pushforwardCongr with eqToIso. Reuse schemeOpenImageDirectImageComparison_unit and schemeOpenImageDirectImageComparison_restriction (with symmetry) for the two ordinary compatibility equations; no new sectionwise calculation or adjunction-cancellation proof is needed.",
    "uses": [
-    "def-pc-mayer-vietoris-image-chain-data"
+    "def-pc-mayer-vietoris-image-chain-data",
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "lem-pc-open-image-direct-image-comparison-unit",
+    "lem-pc-open-image-direct-image-comparison-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply these two ordinary compatibilities degreewise. Naturality of the open unit and nested restriction transformation with respect to f gives the equations for schemeMVImageComponent on arbitrary complexes, without K-injectivity or a cover hypothesis.",
+   "uses": [
+    "def-pc-mayer-vietoris-image-chain-data",
+    "def-pc-kinjective-mayer-vietoris-data"
    ],
    "elementary": true
   },
   {
-   "text": "Naturality with respect to f gives the two unit-component equations. The biproduct universal property gives the first square. Apply the same restriction calculation to U∩V⊆U and U∩V⊆V; additivity carries their difference to the second square. This works also for empty and repeated opens.",
+   "text": "Postcompose with the biproduct projections and use the unit-component equations to obtain the first square. For the second, instantiate the private proved map_biprod_desc_square calculation, which expands the desc into projection composites and uses additivity and preservation of negation with the two restriction equations. This works for empty and equal opens as well.",
    "uses": [
-    "def-pc-kinjective-mayer-vietoris-data",
-    "def-pc-mayer-vietoris-image-chain-data"
+    "def-pc-kinjective-mayer-vietoris-data"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-derived-mayer-vietoris-open-counit-model",
   "def-pc-kinjective-mayer-vietoris-data",
-  "def-pc-mayer-vietoris-image-chain-data"
+  "def-pc-mayer-vietoris-image-chain-data",
+  "lem-pc-open-image-direct-image-comparison-restriction",
+  "lem-pc-open-image-direct-image-comparison-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "C4",
+  "agent": "U4",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08BV, 08FE, 079V and 0D5T"
+  "place": "Tags 08FE and 08BV, ordinary comparison square and restriction adjunction",
+  "note": "Second reading by U4 found existing ordinary unit and restriction comparison lemmas. Identify their fixed comparison with schemeMVImageIso by equality induction on pushforwardCongr, then reuse them degreewise. Retain the abstract additive final calculation and local transparency protection. No new holes or public statements."
  },
  "mathlib_searches": [
   {
@@ -108,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-2e969",
-  "group": "C4",
+  "reviewer": "X-3d310",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T222359-L-1221444",
+  "landing": "20261014T013048-L-3418784",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
+  "note": "independent Codex review: Delivered module, node metadata, change record, report, and direct importer matched the stated item; all delivered files and importer compile cleanly, with allowed axioms only."
  }
 }
