@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-perfect-overlap-object-realization-core-data-at",
+ "kind": "statement",
+ "title": "Single-stage overlap comparison data",
+ "statement": "For the fixed two-open overlap, supplied local identifications, and any one later index k≥j, comparison data of the prescribed type exists at that stage.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "place": "Tag 09RE, restriction of perfect complexes and derived pullback along the affine limit system."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-overlap-hom-continuity-data",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Construct the simultaneous restriction and pullback comparison diagram at the chosen stage, transport the supplied local identifications through the canonical composition comparisons, and retain the resulting theta equations.",
+   "uses": [
+    "def-pc-perfect-overlap-hom-continuity-data",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-overlap-hom-continuity-data",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "S4",
+  "date": "2026-10-15",
+  "document": "https://stacks.math.columbia.edu/tag/09RE",
+  "note": "The pointwise stage construction is isolated so the family can be assembled by dependent choice."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived pullback comparison for two open restrictions",
+   "results": "No exact theorem; only constituent categorical comparison APIs were found.",
+   "date": "2026-10-15",
+   "verdict": "constituent tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simultaneous derived pullback restriction data over directed affine stages",
+   "results": "No exact theorem; project comparison-data API supplies the constituent type.",
+   "date": "2026-10-15",
+   "verdict": "constituent tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.mapDerivedCategory",
+   "results": "Generic derived equivalence construction, not the full stagewise family.",
+   "date": "2026-10-15",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "grep",
+   "query": "perfectOverlapComparisonDataType",
+   "results": "The prescribed comparison-data type is defined in PerfectOverlapHomContinuityData.lean.",
+   "date": "2026-10-15",
+   "verdict": "use project API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData",
+  "date": "2026-10-15",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-overlap-object-realization-core-data",
+   "place": "The single-stage restriction and pullback comparison construction in the core-data proof.",
+   "via": [
+    "lem-pc-perfect-overlap-object-realization-core-data"
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapObjectRealizationCoreData.lean",
+  "declaration": "AlgebraicGeometry.perfect_overlap_object_realization_core_data_at",
+  "statement": "theorem perfect_overlap_object_realization_core_data_at {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} ((SheafOfModules.{u}) ((moduleRings Z.toRingedSpace).over U))] (j : I) (hij : i ≤ j) (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens), ∃ k : I, j ≤ k) (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens) (hcover : U ⊔ V = ⊤) (hU : IsCompact (U : Set (↥(pullback t (Spec.map (R.map (homOfLE hij))))))) (hV : IsCompact (V : Set (↥(pullback t (Spec.map (R.map (homOfLE hij))))))) (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme) (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B) (E : schemeDerivedCategory (pullback t (Spec.map (c.ι.app i)))) (φU : (derivedPullback (baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ U)).obj A ≅ (schemeOpenRestriction _ _).mapDerivedCategory.obj E) (φV : (derivedPullback (baseChangeMap t (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅ (schemeOpenRestriction _ _).mapDerivedCategory.obj E) (k : I) (hjk : j ≤ k) : Nonempty (perfectOverlapComparisonDataType R c hc i Z t j hij hstage U V hcover hU hV A B hA hB E φU φV k hjk)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-15"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261014T230905-L-382886",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261014T230905-L-382886",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

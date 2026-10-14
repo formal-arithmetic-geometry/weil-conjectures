@@ -8,9 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuityData
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
 
 /-! # Core object comparison data (without the final Hom pin).
 
@@ -223,9 +220,47 @@ Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
           (derivedPullback (Yj.homOfLE (inf_le_right : U ⊓ V ≤ V))).obj B
           else (derivedPullback (Yj.homOfLE (inf_le_left : U ⊓ V ≤ U))).obj A) stageEquiv apexEquiv)
 
-
-
-
+/-- Comparison data for one fixed later stage of the overlap construction.
+The construction is the single-stage restriction and pullback comparison from
+Tags 09RE and 08DW; the family theorem only packages these independent choices.
+(blueprint: lem-pc-perfect-overlap-object-realization-core-data-at).
+-/
+theorem perfect_overlap_object_realization_core_data_at
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))
+    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [∀ (Z : Scheme.{u}) (U : Z.Opens),
+      HasDerivedCategory.{w} ((SheafOfModules.{u})
+        ((moduleRings Z.toRingedSpace).over U))]
+    (j : I) (hij : i ≤ j)
+    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
+      ∃ k : I, j ≤ k)
+    (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens)
+    (hcover : U ⊔ V = ⊤)
+    (hU : IsCompact (U : Set (↥(pullback t (Spec.map (R.map (homOfLE hij)))))))
+    (hV : IsCompact (V : Set (↥(pullback t (Spec.map (R.map (homOfLE hij)))))))
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)
+    (E : schemeDerivedCategory (pullback t (Spec.map (c.ι.app i))))
+    (φU : (derivedPullback (baseChangeMap t
+      (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+      (T' := Over.mk (Spec.map (c.ι.app i)))
+      (Over.homMk (Spec.map (c.ι.app j))
+        (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ U)).obj A ≅
+      (schemeOpenRestriction _ _).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (baseChangeMap t
+      (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+      (T' := Over.mk (Spec.map (c.ι.app i)))
+      (Over.homMk (Spec.map (c.ι.app j))
+        (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅
+      (schemeOpenRestriction _ _).mapDerivedCategory.obj E)
+    (k : I) (hjk : j ≤ k) :
+    Nonempty (perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+      U V hcover hU hV A B hA hB E φU φV k hjk) := by
+  sorry
 
 /-- The prescribed overlap comparison data exists simultaneously at every stage.
 For each later index, identify the inverse-image intersection with the cartesian
@@ -269,7 +304,13 @@ theorem perfect_overlap_object_realization_core_data_family
     Nonempty (Σ data : (k : I) → (hjk : j ≤ k) →
       perfectOverlapComparisonDataType R c hc i Z t j hij hstage
         U V hcover hU hV A B hA hB E φU φV k hjk, Unit) := by
-  sorry
+  classical
+  let data : (k : I) → (hjk : j ≤ k) →
+      perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+        U V hcover hU hV A B hA hB E φU φV k hjk := fun k hjk ↦
+    Classical.choice (perfect_overlap_object_realization_core_data_at R c hc i Z t j hij
+      hstage U V hcover hU hV A B hA hB E φU φV k hjk)
+  exact ⟨data, ()⟩
 
 /-- Given the stagewise comparison data, the canonical transition and object pins
 are assembled into the core realization structure.  The transition is obtained by
