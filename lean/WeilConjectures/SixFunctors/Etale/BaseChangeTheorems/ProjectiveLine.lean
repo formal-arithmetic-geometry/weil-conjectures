@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
 
 /-!
@@ -118,8 +118,8 @@ docstring, and Stacks Project, Tag 095T, whose proof it is.
 (blueprint: `prop:weil-pbc-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
-  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _
-    (Etale.hasInjectiveAcyclicity_projectiveLine Λ S)
+  Etale.hasTorsionBaseChange_of_allPrimeInjectiveAcyclicity Λ _ fun _ _ ↦
+    Etale.hasInjectiveAcyclicity_projectiveLine _ S
 
 /-- **Reduction of proper base change to the projective line**: if the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
@@ -146,7 +146,7 @@ theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
     Etale.HasTorsionBaseChange Λ f :=
-  sorry
+  Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_reduction Λ h f
 
 /-- **Proper morphisms satisfy base change**: the two halves of the proof combined. -/
 theorem Etale.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
