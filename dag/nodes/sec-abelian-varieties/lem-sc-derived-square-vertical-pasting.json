@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Search returned 12 adjunction uniqueness ingredients: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact derived square or coefficient triangle theorem or previously named coefficient data construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of pullback functors in a commuting diagram of two squares",
+   "results": "Search returned 8 ingredients; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_fst_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.w_app_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.w_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.comp_fst_app, CategoryTheory.Limits.CategoricalPullback.Hom.w_assoc, CategoryTheory.Over.pullbackComp",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp.*assoc|pushforwardComp.*assoc|canonicalSinglePullback.*composition",
+   "results": "Search returned 4 ingredients; Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition comparisons satisfy pasting of commuting squares",
+   "results": "Service returned Internal Server Error; see searches.jsonl. Successful LeanFinder, Loogle and grep ingredient searches are also recorded.",
+   "date": "2026-10-14",
+   "verdict": "Service unavailable; no match claimed."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-coefficient-transpose-pasting",
+   "place": "proof steps 2 and 3"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "id": "lem-sc-derived-square-vertical-pasting",
+ "title": "Derived square vertical pasting",
+ "statement": "For schemes [def-pc-scheme] with their shared derived categories [def-pc-derived-category], write $F_r=Lr^*$ and $c(r,s):F_rF_s\\cong F_{r s}$ for the selected composition comparison [lem-pc-ringed-spaces-derived-pullback-composition]. Define the square comparison $D(p,p_1,t,a)=c(p_1,t)\\gg \\mathrm{transport}\\gg c(a,p)^{-1}$ as in [lem-pc-scheme-derived-mate-evaluation]. Let $p:A\\to W$, $p_1:B\\to T$, $p_2:C\\to T\\prime$, $t:T\\to W$, $i:T\\prime\\to T$, $t\\prime:T\\prime\\to W$, $a:B\\to A$, $b:C\\to B$, $a\\prime:C\\to A$ satisfy $ap=p_1t$, $bp_1=p_2i$, $a\\prime p=p_2t\\prime$, $it=t\\prime$ and $ba=a\\prime$. For every $E$ in the derived category of $W$, the following equality holds (composition written in Lean order): $D(p_1,p_2,i,b)_{F_tE}\\gg F_b(D(p,p_1,t,a)_E)\\gg c(b,a)_{F_pE}\\gg\\mathrm{transport}_{ba=a\\prime}=F_{p_2}((c(i,t)\\gg\\mathrm{transport}_{it=t\\prime})_E)\\gg D(p,p_2,t\\prime,a\\prime)_E$. No cartesianness, direct-image adjunction, coefficient module, or invertibility of a single-module comparison is assumed.",
+ "proof": [
+  {
+   "text": "Expand the square comparisons. Substitute tprime = i followed by t and aprime = b followed by a. Evaluate the selected composition associativity equations for b,p1,t, for p2,i,t, and for b,a,p. Naturality of equality transport for the composition comparison moves the equalities ha and hb between these equations. Postcompose by the invertible double-composition comparison and cancel hom/inv pairs. The equality transports compose and proof irrelevance identifies them with the outer square equality ha-prime. Use Iso.eq_comp_inv to remove the inverse final composition comparison and reassociate. This proves the displayed equality without any base-change mate or coefficient hypothesis.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedSquareVerticalPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSquareVerticalPasting.lean",
+  "declaration": "AlgebraicGeometry.canonicalDerivedSquareComparison_vertical",
+  "statement": "theorem canonicalDerivedSquareComparison_vertical {A B C W T T' : Scheme.{v}} (p : A ⟶ W) (p1 : B ⟶ T) (p2 : C ⟶ T') (t : T ⟶ W) (i : T' ⟶ T) (t' : T' ⟶ W) (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A) (ha : a ≫ p = p1 ≫ t) (hb : b ≫ p1 = p2 ≫ i) (ha' : a' ≫ p = p2 ≫ t') (h : i ≫ t = t') (hab : b ≫ a = a') (E : schemeDerivedCategory W) : canonicalDerivedSquareComparison p1 p2 i b hb ((derivedPullback t).obj E) ≫ (derivedPullback b).map (canonicalDerivedSquareComparison p p1 t a ha E) ≫ (canonicalDerivedPullbackComposition b a ≪≫ eqToIso (congrArg (fun q ↦ derivedPullback q) hab)).hom.app ((derivedPullback p).obj E) = (derivedPullback p2).map ((canonicalDerivedPullbackComposition i t ≪≫ eqToIso (congrArg (fun q ↦ derivedPullback q) h)).hom.app E) ≫ canonicalDerivedSquareComparison p p2 t' a' ha' E",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-scheme-derived-mate-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery matches its DAG statements and compiles; forced adaptation is necessary and minimal, direct importers pass, and axioms/sorry usage conform."
+ }
+}

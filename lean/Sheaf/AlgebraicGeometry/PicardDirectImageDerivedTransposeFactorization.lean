@@ -36,6 +36,21 @@ private theorem transpose_three_maps
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
+/- The coefficient mate evaluation is needed only because the definition is now
+written in its equal counit presentation. -/
+private theorem coefficientMate_evaluation
+    {A B W V : Scheme.{v}} (p : A ⟶ W) (p' : B ⟶ V)
+    (r : V ⟶ W) (a : B ⟶ A) (ha : a ≫ p = p' ≫ r)
+    (K : schemeDerivedCategory A) (N : schemeDerivedCategory B)
+    (e : (derivedPullback a).obj K ⟶ N) :
+    ((canonicalSchemeDerivedAdjunction p').homEquiv _ _).symm
+      (schemeDerivedBaseChangeMap p p' r a ha K ≫
+        (schemeDerivedDirectImage p').map e) =
+    canonicalDerivedSquareComparison p p' r a ha ((schemeDerivedDirectImage p).obj K) ≫
+      (derivedPullback a).map ((canonicalSchemeDerivedAdjunction p).counit.app K) ≫ e := by
+  rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_counit,
+    schemeDerivedMate_evaluation, Category.assoc]
+
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 500000 in
 -- Keep the explicitly constructed coefficient comparison folded.
@@ -86,7 +101,11 @@ theorem picardDirectImageDerivedTranspose_factorization
   unfold picardDirectImageDerivedTranspose
   dsimp only [τ, e]
   unfold picardCoefficientTranspose picardDerivedUnitNormalization
-  exact transpose_three_maps _ _ _ _
+  refine (transpose_three_maps _ _ _ _).trans ?_
+  congr 1
+  rw [coefficientCounitTranspose_eq, tensorSingleCoefficientMap_eq,
+    Modules.tensorCoefficientComparison_eq]
+  exact coefficientMate_evaluation _ _ _ _ _ _ _ _
 
 end
 end AlgebraicGeometry.Scheme

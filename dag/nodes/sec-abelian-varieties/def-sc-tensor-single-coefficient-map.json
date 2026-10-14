@@ -1,0 +1,102 @@
+{
+ "id": "def-sc-tensor-single-coefficient-map",
+ "kind": "definition",
+ "title": "Fixed single-complex tensor coefficient morphism",
+ "statement": "For schemes [def-pc-scheme] A, B and X, maps q:A→X, q1:B→X and a:B→A with aq=q1, an O_X-module L [def-weil-sheaf-of-modules-category], and the shared derived categories [def-pc-derived-category], set M=q tensor-pullback L and N=q1 tensor-pullback L. Let d:a ordinary-pullback M≅N be the fixed coefficient identification [def-sc-tensor-coefficient-comparison]. Define e:La*(M[0])→N[0] as the canonical single-pullback map [lem-pc-canonical-single-pullback-comparison] followed by single(d.hom). This is an explicit morphism, with no inversion of the single-pullback map. Its defining equation is proved by reflexivity, so identity arrows, zero modules and empty schemes are included without additional assumptions.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "def-sc-tensor-coefficient-comparison",
+  "lem-pc-canonical-single-pullback-comparison"
+ ],
+ "source": {
+  "document": "Stacks Project, Modules and Cohomology",
+  "place": "Tags 0096, 08HY and 0D5S; fixed coefficient composite of the parent construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Modules and Cohomology",
+  "place": "Tags 0096, 08HY and 0D5S; explicit composite, defining equation by reflexivity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived single pullback coefficient map of a commuting triangle built from fixed tensor pullback adjunctions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived single coefficient morphism built from canonical single pullback and tensor pullback adjunction comparison",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor_map, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; the fixed triangle composite is not already named."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; the fixed triangle composite is not already named."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSingleCoefficientMap|tensorCoefficientComparison|canonicalSinglePullbackMap",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; the fixed triangle composite is not already named."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-coefficient-transpose-pasting",
+   "place": "typed construction of the coefficient morphism used by the coefficient transpose"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorSinglePullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorSinglePullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.tensorSingleCoefficientMap",
+  "statement": "def tensorSingleCoefficientMap {A B X : Scheme.{v}}\n    (q : A ⟶ X) (q1 : B ⟶ X) (a : B ⟶ A) (h : a ≫ q = q1)\n    (L : X.Modules) :\n    (derivedPullback a).obj ((DerivedCategory.singleFunctor\n      (SheafOfModules.{v} (moduleRings A.toRingedSpace)) 0).obj\n        ((Scheme.Modules.tensorPullback q).obj L)) ⟶\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings B.toRingedSpace)) 0).obj\n          ((Scheme.Modules.tensorPullback q1).obj L)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery matches its DAG statements and compiles; forced adaptation is necessary and minimal, direct importers pass, and axioms/sorry usage conform."
+ }
+}

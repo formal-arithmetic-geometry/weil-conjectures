@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Search returned 12 adjunction uniqueness ingredients: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact derived square or coefficient triangle theorem or previously named coefficient data construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of pullback functors in a commuting diagram of two squares",
+   "results": "Search returned 8 ingredients; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_fst_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.w_app_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.w_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.comp_fst_app, CategoryTheory.Limits.CategoricalPullback.Hom.w_assoc, CategoryTheory.Over.pullbackComp",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp.*assoc|pushforwardComp.*assoc|canonicalSinglePullback.*composition",
+   "results": "Search returned 4 ingredients; Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition comparisons satisfy pasting of commuting squares",
+   "results": "Service returned Internal Server Error; see searches.jsonl. Successful LeanFinder, Loogle and grep ingredient searches are also recorded.",
+   "date": "2026-10-14",
+   "verdict": "Service unavailable; no match claimed."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-coefficient-transpose-pasting",
+   "place": "proof steps 2 and 3"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "id": "lem-sc-tensor-single-pullback-composition",
+ "title": "Tensor single pullback composition",
+ "statement": "For schemes [def-pc-scheme] with module sheaves [def-weil-sheaf-of-modules-category] and shared derived categories [def-pc-derived-category], let $q:A\\to X$, $q_1:B\\to X$, $q_2:C\\to X$, $a:B\\to A$, $b:C\\to B$, $a\\prime:C\\to A$ satisfy $aq=q_1$, $bq_1=q_2$, $a\\prime q=q_2$ and $ba=a\\prime$. Fix an $\\mathcal O_X$-module $L$, and put $M=q^\\otimes L$, $N=q_1^\\otimes L$. For a triangle $rq=q_1$, let $d_r:r^*M\\cong q_1^\\otimes L$ be the inverse unique left-adjoint comparison from tensor to ordinary pullback followed by the inverse conjugate of pushforward composition and transport along the triangle [lem-pc-module-pullback-adjunction]. Define $e_a=s_a(M)\\gg d_a[0]$, $e_b=s_b(N)\\gg d_b[0]$ and $e_{a\\prime}=s_{a\\prime}(M)\\gg d_{a\\prime}[0]$, where $s$ is the canonical single-module derived-pullback comparison [lem-pc-canonical-single-pullback-comparison]. With $K=M[0]$ and the selected comparison $c$ [lem-pc-ringed-spaces-derived-pullback-composition], composition in Lean order obeys $Lb^*(e_a)\\gg e_b=c(b,a)_K\\gg\\mathrm{transport}_{ba=a\\prime}\\gg e_{a\\prime}$. No flatness or invertibility of $s$ is assumed. Each d is the fixed identification [def-sc-tensor-coefficient-comparison], whose construction is the displayed conjugate and left-adjoint uniqueness formula.",
+ "proof": [
+  {
+   "text": "Evaluate canonicalSinglePullbackComposition at b,a,M. Naturality of the canonical single-pullback map moves d1[0] through the comparison for b. Transport the composite comparison along b followed by a equals aprime. It remains to prove that ordinary pullback composition followed by d3 equals pullback of d1 followed by d2.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the remaining underived identity with the composed ordinary pullback adjunctions and the chosen tensor adjunctions. The leftAdjointUniq counit equations identify their mates with identities. The definitions of the three coefficient isomorphisms as conjugates reduce the equation to associativity of pushforward composition, with transport along h1,h2,h3 and hab. The transports agree by proof irrelevance. Injectivity of the conjugate equivalence gives the underived identity. Map by the single functor and substitute into the preceding derived composition equality.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-canonical-single-pullback-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorSinglePullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorSinglePullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.tensorSinglePullback_composition",
+  "statement": "theorem tensorSinglePullback_composition {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X) (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A) (h1 : a ≫ q = q1) (h2 : b ≫ q1 = q2) (h3 : a' ≫ q = q2) (hab : b ≫ a = a') (L : X.Modules) : let d1 := Scheme.Modules.tensorCoefficientComparison q q1 a h1 L let d2 := Scheme.Modules.tensorCoefficientComparison q1 q2 b h2 L let d3 := Scheme.Modules.tensorCoefficientComparison q q2 a' h3 L let M := (Scheme.Modules.tensorPullback q).obj L let N := (Scheme.Modules.tensorPullback q1).obj L let K := (DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings A.toRingedSpace)) 0).obj M (derivedPullback b).map (Scheme.Modules.canonicalSinglePullbackMap a M ≫ (DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings B.toRingedSpace)) 0).map d1.hom) ≫ Scheme.Modules.canonicalSinglePullbackMap b N ≫ (DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings C.toRingedSpace)) 0).map d2.hom = (canonicalDerivedPullbackComposition b a ≪≫ eqToIso (congrArg (fun r ↦ derivedPullback r) hab)).hom.app K ≫ (Scheme.Modules.canonicalSinglePullbackMap a' M ≫ (DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings C.toRingedSpace)) 0).map d3.hom)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-scheme-derived-mate-evaluation",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison",
+  "def-sc-tensor-coefficient-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery matches its DAG statements and compiles; forced adaptation is necessary and minimal, direct importers pass, and axioms/sorry usage conform."
+ }
+}

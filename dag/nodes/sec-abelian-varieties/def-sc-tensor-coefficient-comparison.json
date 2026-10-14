@@ -1,0 +1,100 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "source": {
+  "document": "Stacks Project, Modules and Cohomology",
+  "place": "Tags 0096 and 0D5S"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Modules and Cohomology",
+  "place": "Tags 0096 and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Search returned 12 adjunction uniqueness ingredients: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact derived square or coefficient triangle theorem or previously named coefficient data construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of pullback functors in a commuting diagram of two squares",
+   "results": "Search returned 8 ingredients; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_fst_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.w_app_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.w_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.comp_fst_app, CategoryTheory.Limits.CategoricalPullback.Hom.w_assoc, CategoryTheory.Over.pullbackComp",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp.*assoc|pushforwardComp.*assoc|canonicalSinglePullback.*composition",
+   "results": "Search returned 4 ingredients; Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition comparisons satisfy pasting of commuting squares",
+   "results": "Service returned Internal Server Error; see searches.jsonl. Successful LeanFinder, Loogle and grep ingredient searches are also recorded.",
+   "date": "2026-10-14",
+   "verdict": "Service unavailable; no match claimed."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-coefficient-transpose-pasting",
+   "place": "coefficient identification in the definition and proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCoefficientTransposePasting",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "id": "def-sc-tensor-coefficient-comparison",
+ "title": "Fixed tensor coefficient comparison",
+ "statement": "For schemes [def-pc-scheme], let q:A→X, q1:B→X and a:B→A satisfy aq=q1, and let L be an O_X-module [def-weil-sheaf-of-modules-category]. Write P for tensor pullback and a* for ordinary module pullback. Using the fixed tensor adjunctions [lem-pc-module-pullback-adjunction], conjugate pushforwardComp(a,q) followed by pushforwardCongr(aq=q1) to obtain c:P_q1≅P_q followed by P_a. Define d:a*(P_q L)≅P_q1 L as the inverse ordinary-to-tensor left-adjoint-uniqueness comparison at P_q L, followed by c_L inverse. This is exactly the coefficient identification formerly constructed locally in the original coefficient-transpose definition; it is real isomorphism data, not data from an unproved existence claim.",
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorCoefficientComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorCoefficientComparison",
+  "statement": "def tensorCoefficientComparison {A B X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (a : B ⟶ A) (h : a ≫ q = q1) (L : X.Modules) : (pullback a).obj ((tensorPullback q).obj L) ≅ (tensorPullback q1).obj L",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-46027",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261014T013032-L-3411915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery matches its DAG statements and compiles; forced adaptation is necessary and minimal, direct importers pass, and axioms/sorry usage conform."
+ }
+}
