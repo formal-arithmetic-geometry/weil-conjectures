@@ -250,4 +250,66 @@ theorem weaklyEtale_of_isLimit [IsCofiltered I] [∀ i, IsAffineHom (p i)] [∀ 
     rw [Scheme.Hom.resLE_comp_resLE, ← Scheme.Hom.resLE_eq_morphismRestrict]
     exact resLE_congr (hq j.left) _ _ _ _
 
+
+include hc in
+/-- **A cofiltered limit of connected quasi-compact quasi-separated schemes with affine
+transition maps is connected** (compare Stacks Project Tag 0CUF): an open and closed subset of
+the limit and its complement are quasi-compact, hence preimages of quasi-compact opens of some
+stage; at a later stage these are disjoint and cover (Stacks Project Tag 01Z4), so they are
+open and closed in a connected scheme. -/
+theorem connectedSpace_of_isLimit [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+    [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
+    [∀ i, ConnectedSpace (D.obj i)] : ConnectedSpace c.pt := by
+  have : CompactSpace c.pt := Scheme.compactSpace_of_isLimit D c hc
+  have : Nonempty c.pt := Scheme.nonempty_of_isLimit D c hc
+  refine connectedSpace_iff_clopen.mpr ⟨inferInstance, fun s hs ↦ ?_⟩
+  let U : c.pt.Opens := ⟨s, hs.isOpen⟩
+  let U' : c.pt.Opens := ⟨sᶜ, hs.isClosed.isOpen_compl⟩
+  obtain ⟨i, V, hV, hVU⟩ := exists_preimage_eq D c hc U hs.isClosed.isCompact
+  obtain ⟨j, V', hV', hVU'⟩ := exists_preimage_eq D c hc U' hs.isOpen.isClosed_compl.isCompact
+  obtain ⟨k, fki, fkj, -⟩ := IsCofilteredOrEmpty.cone_objs i j
+  let A := D.map fki ⁻¹ᵁ V
+  let B := D.map fkj ⁻¹ᵁ V'
+  have hA : c.π.app k ⁻¹ᵁ A = U := by rw [← Scheme.Hom.comp_preimage, c.w, hVU]
+  have hB : c.π.app k ⁻¹ᵁ B = U' := by rw [← Scheme.Hom.comp_preimage, c.w, hVU']
+  have hAc : IsCompact (A : Set (D.obj k)) := QuasiCompact.isCompact_preimage _ V.2 hV
+  have hBc : IsCompact (B : Set (D.obj k)) := QuasiCompact.isCompact_preimage _ V'.2 hV'
+  obtain ⟨l, flk, hl⟩ := exists_map_preimage_eq_map_preimage D c hc (U := A ⊓ B) (V := ⊥)
+    (QuasiSeparatedSpace.inter_isCompact _ _ A.2 hAc B.2 hBc) isCompact_empty (by
+      rw [Scheme.Hom.preimage_inf, hA, hB, Scheme.Hom.preimage_bot]
+      ext x
+      simp [U, U'])
+  obtain ⟨l', fl'k, hl'⟩ := exists_map_preimage_eq_map_preimage D c hc (U := A ⊔ B) (V := ⊤)
+    (hAc.union hBc) isCompact_univ (by
+      rw [Scheme.Hom.preimage_sup, hA, hB, Scheme.Hom.preimage_top]
+      ext x
+      simp [U, U'])
+  obtain ⟨m, a, b, hab⟩ := IsCofiltered.cospan flk fl'k
+  let W := D.map (a ≫ flk) ⁻¹ᵁ A
+  let W' := D.map (a ≫ flk) ⁻¹ᵁ B
+  have hinf : W ⊓ W' = ⊥ := by
+    simp only [W, W', Functor.map_comp, Scheme.Hom.comp_preimage, ← Scheme.Hom.preimage_inf, hl,
+      Scheme.Hom.preimage_bot]
+  have hsup : W ⊔ W' = ⊤ := by
+    simp only [W, W', hab, Functor.map_comp, Scheme.Hom.comp_preimage, ← Scheme.Hom.preimage_sup,
+      hl', Scheme.Hom.preimage_top]
+  have hW : IsClopen (W : Set (D.obj m)) := by
+    refine ⟨⟨?_⟩, W.2⟩
+    convert W'.2 using 1
+    ext x
+    have h1 := congrArg (x ∈ ·) hinf
+    have h2 := congrArg (x ∈ ·) hsup
+    simp only [TopologicalSpace.Opens.mem_inf, TopologicalSpace.Opens.mem_sup, eq_iff_iff] at h1 h2
+    simp only [Set.mem_compl_iff, SetLike.mem_coe]
+    tauto
+  have hsW : s = c.π.app m ⁻¹' W := by
+    have : c.π.app m ⁻¹ᵁ W = U := by
+      simp only [W, ← Scheme.Hom.comp_preimage, c.w, hA]
+    change (U : Set c.pt) = _
+    rw [← this]
+    rfl
+  rcases isClopen_iff.mp hW with h | h
+  · left; rw [hsW, h, Set.preimage_empty]
+  · right; rw [hsW, h, Set.preimage_univ]
+
 end AlgebraicGeometry.Scheme
