@@ -22,6 +22,9 @@ image of a filtration of `A` along a morphism `A ⟶ B` is a filtration of `B`.
 - `CategoryTheory.DecreasingFiltration.gr`: the graded pieces.
 - `CategoryTheory.DecreasingFiltration.IsFiniteSeparated`: finite separated filtrations.
 - `CategoryTheory.DecreasingFiltration.image`: the image filtration.
+- `CategoryTheory.DecreasingFiltration.IsFinite`: finite filtrations.
+- `CategoryTheory.FilteredObject`: objects equipped with a decreasing filtration.
+- `CategoryTheory.FilteredObject.Hom`: morphisms of filtered objects.
 -/
 
 @[expose] public section
@@ -88,6 +91,38 @@ lemma image_F {B : C} (φ : A ⟶ B) (n : ℤ) :
     (F.image φ).F n = imageSubobject ((F.F n).arrow ≫ φ) :=
   rfl
 
+/-- A filtration is *finite* if `Fⁿ A = A` and `Fᵐ A = 0` for some `n` and `m`; this is weaker
+than (implied by) `DecreasingFiltration.IsFiniteSeparated`.
+
+(blueprint: `def-sp-filtration`) -/
+def IsFinite : Prop :=
+  ∃ n m : ℤ, F.F n = ⊤ ∧ F.F m = ⊥
+
 end DecreasingFiltration
+
+variable (C) in
+/-- A *filtered object*: an object of an abelian category with a decreasing `ℤ`-filtration.
+
+(blueprint: `def-sp-filtration`) -/
+structure FilteredObject where
+  /-- The underlying object. -/
+  obj : C
+  /-- The decreasing filtration of the underlying object. -/
+  filtration : DecreasingFiltration obj
+
+namespace FilteredObject
+
+/-- A morphism of filtered objects: a morphism compatible with the filtrations, i.e. mapping
+`Fⁱ A` into `Fⁱ B` for every `i`.
+
+(blueprint: `def-sp-filtration`) -/
+structure Hom (A B : FilteredObject C) where
+  /-- The underlying morphism. -/
+  hom : A.obj ⟶ B.obj
+  /-- The underlying morphism maps `Fⁱ A` into `Fⁱ B` for every `i`. -/
+  preserves : ∀ i : ℤ, ∃ lift : (A.filtration.F i : C) ⟶ (B.filtration.F i : C),
+    lift ≫ (B.filtration.F i).arrow = (A.filtration.F i).arrow ≫ hom
+
+end FilteredObject
 
 end CategoryTheory

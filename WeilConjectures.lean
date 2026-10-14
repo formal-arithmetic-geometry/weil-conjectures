@@ -25,6 +25,7 @@ public import WeilConjectures.Algebra.CharpolyLocallyFree
 public import WeilConjectures.Algebra.ExtOneDirectSum
 public import WeilConjectures.Algebra.FiniteReesModuleGeneration
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Algebra.Homology.DerivedCategory.KInjectiveTower
 public import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 public import WeilConjectures.Algebra.Homology.ExactCouple.Convergence
 public import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
@@ -737,6 +738,7 @@ public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
+public import WeilConjectures.CategoryTheory.Abelian.FiltrationInduction
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
@@ -870,8 +872,6 @@ public import WeilConjectures.CategoryTheory.ExtExactFunctorCocycle
 public import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
 public import WeilConjectures.CategoryTheory.FilteredColimitCategoryFiniteFunctorLift
 public import WeilConjectures.CategoryTheory.FilteredModuleSheafColimitLocalRepresentatives
-public import WeilConjectures.CategoryTheory.Filtration
-public import WeilConjectures.CategoryTheory.FiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import WeilConjectures.CategoryTheory.FinitePresieveFilteredColimit
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing
@@ -1014,7 +1014,6 @@ public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
 public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsProperties
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerCone
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
@@ -1414,6 +1413,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Double
 public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend
 public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.HomEquiv
 public import WeilConjectures.Mathlib.Algebra.Homology.ExactSequence
+public import WeilConjectures.Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 public import WeilConjectures.Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.Mathlib.Algebra.Homology.HomologySequence

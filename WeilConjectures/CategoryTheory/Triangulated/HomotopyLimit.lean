@@ -67,7 +67,9 @@ noncomputable def towerShift {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.ob
 ```
 
 is distinguished for some `δ`, where `t` is `towerShift`. The point of a homotopy limit cone is
-then the derived limit `R lim F`, determined up to non-unique isomorphism. -/
+then the derived limit `R lim F`, determined up to non-unique isomorphism.
+
+(blueprint: `def-weil-derived-limit`) -/
 def IsHomotopyLimit {F : ℕᵒᵖ ⥤ C} (c : Cone F) : Prop :=
   ∃ (P : Fan fun n : ℕ ↦ F.obj (op n)) (hP : IsLimit P) (δ : P.pt ⟶ c.pt⟦(1 : ℤ)⟧),
     Triangle.mk (Fan.IsLimit.lift hP fun n ↦ c.π.app (op n)) (𝟙 P.pt - towerShift hP) δ ∈
