@@ -25,9 +25,99 @@
   "def-weil-abstract-derived-category",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the one-object site with identity covering, where sheaves of A-modules are ordinary A-modules. Choose a representing complex G for C, and use [lem-pc-kflat-resolution] to obtain a quasi-isomorphism P → G with P K-flat and every P^r flat. By [lem-pur-derived-change-of-rings], Q=P⊗_A B, where B=A/I, represents the given reduced object. By [lem-pur-kflat-change-of-rings], Q is K-flat over B and has flat B-module terms. In particular H^i(Q)=0 for i>b, without assuming P bounded.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+   }
+  },
+  {
+   "text": "Form the good truncation T of Q: T^r=Q^r for r<b, T^b=ker(d_Q^b), and T^r=0 for r>b. The inclusion T→Q induces the identity on cohomology in degrees at most b; above b both cohomologies vanish. Thus it is a quasi-isomorphism by direct calculation of kernels and images. Apply [lem-pc-kflat-bounded-flat-replacement] over B with N=b to obtain F→T with F^r=0 for r>b, all terms flat, and F→T a quasi-isomorphism. By [lem-pc-module-bounded-flat-kflat], F is K-flat. The composite α:F→Q is a quasi-isomorphism between K-flat B-complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+   }
+  },
+  {
+   "text": "For every B-module M, the cone E=Cone(α) is acyclic by [lem-pur-quasi-iso-cone-acyclic] and K-flat by [lem-pc-kflat-cone-direct-sum]. Regard M as a complex concentrated in degree zero. By [lem-pur-acyclic-kflat-tensor-arbitrary], M⊗_B E is acyclic. The degreewise maps m⊗e ↦ e⊗m and e⊗m ↦ m⊗e are inverse balanced maps commuting with differentials: the differential on the degree-zero M factor is zero, so both tensor differentials act only on e and no sign is introduced. Hence E⊗_B M is acyclic as well. The degreewise distributivity isomorphism identifies this with Cone(α⊗1_M): the differentials are the same block matrix with entries d_Q⊗1, α⊗1, and −d_F⊗1. The cone criterion again proves F⊗_B M→Q⊗_B M is a quasi-isomorphism. Since F⊗_B M is zero in degrees greater than b, H^i(Q⊗_B M)=0 for i>b. This establishes the upper tensor bound needed below; no lower bound or finite Tor amplitude is inferred.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-kflat-cone-direct-sum",
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+   }
+  },
+  {
+   "text": "If M is an A-module with IM=0, give it its quotient B-module structure. There is an isomorphism of complexes P⊗_A M≅(P⊗_A B)⊗_B M=Q⊗_B M. Explicitly p⊗m maps to (p⊗1)⊗m, with inverse (p⊗ā)⊗m ↦ p⊗am; the inverse is independent of the lift a because I kills M. These formulas respect balanced tensor relations and commute with the differential d_P. The preceding step therefore proves H^i(P⊗_A M)=0 for i>b whenever IM=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+   }
+  },
+  {
+   "text": "Induct on t≥1 to show that every A-module M killed by I^t has H^i(P⊗_A M)=0 for i>b. The case t=1 is the preceding step. If I^{t+1}M=0, then I^t(IM)=0 and I(M/IM)=0. The sequence 0→IM→M→M/IM→0 is short exact. By flatness of every P^r, in precisely the exact-functor sense of [def-pc-flat-sheaf-modules], tensoring it with P gives a degreewise short exact sequence of complexes. The induction hypothesis and the base case give the bound for its first and third complexes. Here is the required middle exactness argument, rather than an uncited appeal to a long exact sequence: for a degree i>b cocycle z in P⊗M, its image in P⊗(M/IM) is dy since that cohomology vanishes. Lift y to degree i−1 of P⊗M; z−dy comes from an element x of degree i in P⊗IM. Injectivity in degree i+1 shows dx=0. Write x=dw using vanishing of H^i(P⊗IM). Then z=d(y+w) after including w in P⊗M. Every such cocycle is a boundary, completing the induction.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+   }
+  },
+  {
+   "text": "Apply the induction with t=N and M=A, since I^N A=0. The complex P⊗_A A is isomorphic to P via p⊗a ↦ ap, with inverse p ↦ p⊗1. Thus H^i(P)=0 for all i>b. Since P→G is a quasi-isomorphism and G represents C, the same vanishing holds for C.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR",
+  "note": "Upper-bound-only adaptation of the published nilpotent filtration argument; flat representatives and the tensor bound are supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,15 +160,116 @@
    "results": "{\"t\": \"2026-10-14T02:40:59Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change along a nilpotent quotient reflects the upper cohomological truncation bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"CochainComplex.quasiIso_πTruncGE_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"CochainComplex.quasiIso_ιTruncLE_iff\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"DerivedCategory.isZero_of_isGE\"], \"digest\": \"ea92925c5070477d\"}",
    "date": "2026-10-14",
    "verdict": "no match: inspected hits give one-ring projectivity, existing-complex K-projectivity, or truncation criteria, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a nilpotent quotient reflects vanishing of cohomology above a fixed degree",
+   "results": "{\"t\": \"2026-10-14T02:55:23Z\", \"tool\": \"leanfinder\", \"query\": \"Derived tensor with a nilpotent quotient reflects vanishing of cohomology above a fixed degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.ProjectiveResolution.extMk_zero\", \"groupCohomology.isIso_δ_of_isZero\", \"CategoryTheory.InjectiveResolution.extMk_eq_zero_iff\", \"CategoryTheory.InjectiveResolution.extMk_zero\"], \"digest\": \"65a6c8e229497602\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ordinary nilpotence, module filtrations, or Tor of projective objects, not detection of upper cohomological bounds after nilpotent derived reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nilpotent\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-14T02:55:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"nilpotent\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LieModule.instIsNilpotentTensor\", \"isNilpotent_tensor_residueField_iff\"], \"digest\": \"eea74c1eb3a68e95\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ordinary nilpotence, module filtrations, or Tor of projective objects, not detection of upper cohomological bounds after nilpotent derived reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*(derived|tensor|isLE)|(derived|tensor|isLE).*nilpotent",
+   "results": "{\"t\": \"2026-10-14T02:55:24Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*(derived|tensor|isLE)|(derived|tensor|isLE).*nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Nilpotent/Exp.lean\", \"Mathlib/RingTheory/Nilpotent/Exp.lean\"], \"digest\": \"bb7e9fa8d9feaac3\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ordinary nilpotence, module filtrations, or Tor of projective objects, not detection of upper cohomological bounds after nilpotent derived reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction modulo a nilpotent ideal detects upper cohomological bounds",
+   "results": "{\"t\": \"2026-10-14T02:55:25Z\", \"tool\": \"leansearch\", \"query\": \"Derived reduction modulo a nilpotent ideal detects upper cohomological bounds\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If derived reduction of an unbounded complex modulo a nilpotent ideal is bounded above then the complex has the same upper bound",
+   "results": "{\"t\": \"2026-10-14T02:55:46Z\", \"tool\": \"leanfinder\", \"query\": \"If derived reduction of an unbounded complex modulo a nilpotent ideal is bounded above then the complex has the same upper bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Filtration.Stable.bounded_difference\", \"ComplexShape.Embedding.not_boundaryGE_next'\", \"ComplexShape.Embedding.not_boundaryLE_prev'\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"Unitization.cobounded_eq_aux\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"Ordnode.Bounded.mono_left\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\"], \"digest\": \"693c1e9c2cd55749\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ordinary nilpotence, module filtrations, or Tor of projective objects, not detection of upper cohomological bounds after nilpotent derived reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Nakayama lemma nilpotent ideal cohomological t structure reflects bounded above objects",
+   "results": "{\"t\": \"2026-10-14T03:04:01Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Nakayama lemma nilpotent ideal cohomological t structure reflects bounded above objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.IsGE\"], \"digest\": \"eab411f961935a89\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: returned declarations only identify cohomological bounds before and after localization of one complex; none treats change of rings or nilpotent ideals"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-nilpotent-projective-complex-lift",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-nilpotent-derived-upper-bound",
+  "worker": "stage1",
+  "summary": "Proved the upper-bound-only nilpotent filtration assertion using existing flat-model and K-flat cone tools. Wrote truncation, quotient tensor identification, induction base and step, and the cocycle lifting argument explicitly; no new nodes and no hypothesis changes.",
+  "blueprint": "Amplification proof (c), TOW local models, through the recorded via chain: supplies the D-minus verification in 09AR by realizing the upper-bound-only nilpotent filtration argument of 0H75.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic homological-algebra tool on the one-object site: Bounded-above flat replacement on a ringed site. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pc-kflat-cone-direct-sum",
+    "why": "Generic homological-algebra tool on the one-object site: Cones and countable direct sums of K-flat complexes. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic homological-algebra tool on the one-object site: Existence of K-flat resolutions on a ringed site. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic homological-algebra tool on the one-object site: Bounded-above flat module complexes are K-flat. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "why": "Generic homological-algebra tool on the one-object site: An acyclic K-flat complex tensors acyclically with every complex. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic homological-algebra tool on the one-object site: Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic homological-algebra tool on the one-object site: Change of rings preserves K-flat complexes with flat terms. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic homological-algebra tool on the one-object site: A morphism is a quasi-isomorphism exactly when its mapping cone is acyclic. It supplies only this intermediate fact in the nilpotent-filtration argument; no result of the proper-base-change unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-9cfefdb1d",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-9cfefdb1d (reviewer sub-agent of L); spot-checked: Read the complete delivery and all ten cited statements; checked Stacks 0H75, 09AR, flat replacements and K-flat cone/tensor sources. All six steps prove the unchanged bound for arbitrary unbounded C. Edge cases, reuse candidates and dependency reach checked; no delivery-created cycle or new nodes. Verified proper-target coefficients and base-change mate against master, without accepting seeded comparison obligations. Eight generic tool uses accepted; no repairs. Details in review.md."
+ }
 }
