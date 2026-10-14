@@ -23,6 +23,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+/- The construction below keeps the equivariance argument at the type-presheaf level. -/
+
 private theorem restriction_action
     {V : Scheme.{u}} {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
