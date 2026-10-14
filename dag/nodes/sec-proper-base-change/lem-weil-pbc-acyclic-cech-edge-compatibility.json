@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-acyclic-cech-edge-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proof, final paragraph: proper coherent base change identifies E tensor k′ with H¹ of the base-changed structure sheaf and carries Frobenius to Frobenius; canonical Cech edge compatibility used to justify this sentence",
+   "via": [
+    "lem-weil-pbc-coherent-frobenius-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical acyclic Cech edges commute with additive maps, site change, and forgetting module structure",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites with final objects and abelian sheaf cohomology [def-weil-pbc-sites-and-cohomology]. Let $\\mathcal U=(U_i\\to1_{\\mathcal C})$ be a finite covering, $A$ an abelian sheaf, and assume $H^r(U_{i_0}\\times\\cdots\\times U_{i_t},A)=0$ for every $r>0$ and every nonempty tuple. The canonical edge map $e_{\\mathcal U,A}^q:\\check H^q(\\mathcal U,A)\\to H^q(\\mathcal C,A)$ [def-weil-pbc-site-cech-complex] is an isomorphism for $q\\ge0$. Its normalization is $H^q(\\alpha)^{-1}H^q(\\beta)$, where, for an injective resolution $A\\to I^\\bullet$ [def-sp-injective-resolutions], $\\alpha$ is restriction from $\\Gamma(I^\\bullet)$ to $\\operatorname{Tot}(\\check C^\\bullet(\\mathcal U,I^\\bullet))$, with total differential $d_C+(-1)^t d_I$ in Cech degree $t$ [def-sp-double-complex-total] and $\\beta$ is induced by the resolution augmentation. These maps are independent of the resolution and natural for every morphism of abelian sheaves between objects satisfying the stated acyclicity, without any linearity assumption.\nLet $f:\\mathcal D\\to\\mathcal C$ be a morphism of sites presented by a continuous functor $u:\\mathcal C\\to\\mathcal D$ preserving the final object and the tuple fibre products of $\\mathcal U$, and carrying $\\mathcal U$ to a covering $u\\mathcal U$. Let $B$ be an abelian sheaf on $\\mathcal D$, acyclic on every tuple intersection of $u\\mathcal U$, and let $h:A\\to f_*B$ be an additive sheaf map. Its section components define $h_C:\\check C(\\mathcal U,A)\\to\\check C(u\\mathcal U,B)$. If $h_H:H^q(\\mathcal C,A)\\to H^q(\\mathcal D,B)$ is the canonical cohomology map of $h$ (equivalently, inverse-image pullback followed by the adjoint $f^{-1}A\\to B$), then $h_H e_{\\mathcal U,A}^q=e_{u\\mathcal U,B}^q H^q(h_C)$.\nFinally, module cohomology means the right derived functors of evaluation in sheaves of modules, computed by injective resolutions [def-sp-left-exact-additive, def-sp-injective-resolutions]. Let $\\mathcal O$ be a sheaf of rings on $\\mathcal C$, and $M$ a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] acyclic on the tuple intersections in both module and underlying abelian cohomology. After identifying the underlying section Cech complexes, its canonical module Cech edge followed by the canonical module-to-abelian cohomology identification equals $e_{\\mathcal U,M_{ab}}^q$. Here $M_{ab}$ is $M$ with scalar multiplication forgotten; the canonical identification is the unique morphism of universal $\\delta$-functors inducing the identity on degree-zero sections [lem-weil-pbc-right-derived-universal-delta-functor].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AX, label lemma-cech-cohomology (restriction and coefficient augmentations); Tag 03AZ, label lemma-cech-spectral-sequence; Tag 03F7, label lemma-cech-spectral-sequence-application; Tag 03FD, label lemma-cohomology-modules-abelian-agree. The site-change and forgetting squares assert compatibility of these specified augmentations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*(natur|cohom)|cohom.*cech",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: section naturality and Cech complex definitions do not assert the acyclic derived edge, change-of-site square, or module-forgetting compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology computes sheaf cohomology for acyclic covers naturally in abelian sheaf maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyFunctor; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.PresheafOfGroups.OneCohomologyRelation; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-14",
+   "verdict": "no match: section naturality and Cech complex definitions do not assert the acyclic derived edge, change-of-site square, or module-forgetting compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Cech to sheaf cohomology edge isomorphism for an acyclic cover is natural for additive coefficient maps and pullback of covers",
+   "results": "CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm",
+   "date": "2026-10-14",
+   "verdict": "no match: section naturality and Cech complex definitions do not assert the acyclic derived edge, change-of-site square, or module-forgetting compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the acyclic Cech edge comparison between module and abelian sheaf cohomology under forgetful functors",
+   "results": "CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; LightCondMod.hom_naturality_apply; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; SheafOfModules.Presentation.map_π_eq; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓRes_naturality",
+   "date": "2026-10-14",
+   "verdict": "no match: section naturality and Cech complex definitions do not assert the acyclic derived edge, change-of-site square, or module-forgetting compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\"",
+   "results": "Lean.MessageData.maxTraceChildren; Lean.Widget.LazyTraceChildren; Lean.Widget.instTypeNameLazyTraceChildren; Lean.Widget.LazyTraceChildren.indent; Lean.Widget.LazyTraceChildren.children; Lean.Widget.LazyTraceChildren.mk; CategoryTheory.cechNerveTerminalFrom; CategoryTheory.CechNerveTerminalFrom.wideCospan",
+   "date": "2026-10-14",
+   "verdict": "no match: section naturality and Cech complex definitions do not assert the acyclic derived edge, change-of-site square, or module-forgetting compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology comparison isomorphism natural under a morphism of sites and forgetting the module structure",
+   "results": "CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; CategoryTheory.Functor.IsCoverDense.isoOver_hom_app; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁; CategoryTheory.Functor.IsCoverDense.presheafIso_hom_app; CategoryTheory.Functor.IsCoverDense.Types.presheafIso_hom_app; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; CategoryTheory.Functor.IsCoverDense.Types.appIso_hom; CategoryTheory.Functor.IsCoverDense.Types.appIso",
+   "date": "2026-10-14",
+   "verdict": "no match: plus-construction, dense-subsite evaluation, group cochains, and Cech complex definitions do not state the general derived edge squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"cohomology\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: plus-construction, dense-subsite evaluation, group cochains, and Cech complex definitions do not state the general derived edge squares"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|cech.*[Nn]aturality",
+   "results": "Mathlib/Combinatorics/Hindman.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/Geometry/Manifold/Instances/Real.lean; Mathlib/AlgebraicTopology/ExtraDegeneracy.lean; Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: plus-construction, dense-subsite evaluation, group cochains, and Cech complex definitions do not state the general derived edge squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-coherent-frobenius-comparison",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
