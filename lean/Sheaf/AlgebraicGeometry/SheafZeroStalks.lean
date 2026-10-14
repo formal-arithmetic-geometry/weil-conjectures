@@ -28,3 +28,6 @@ This compatibility module intentionally contains no declarations after duplicate
 -- The recorded FiniteFibre source is absent from this snapshot. Its signature and proof
 -- have not been checked here; see coord/changes/remove-sheaf-zero-stalks-duplicate.md
 -- for the existing repair.
+
+-- Repair verification (N2, 2026-10-14): duplicate removal already landed as
+-- 20261013T224521-L-1475959; this module has no declarations or proof holes.
