@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-standard-single-open-relative-arrow",
+ "kind": "statement",
+ "title": "Relative open comparison identifies with the literal single-module comparison",
+ "statement": "Let p:Y→B, g:A→B be arbitrary scheme morphisms, W,Z opens of Y with Z≤W, and N an O_W-module [def-pc-module-pullback]. Use standard derived module categories [def-pc-derived-category]. Put f=W.ι;p, X′=W×_B A, g′=pullback.fst f g, f′=pullback.snd f g, K=N[0], K′=(g′ tensor-pullback N)[0], and φ=picardTermwiseSingleMap(g′,N) [lem-sc-picard-termwise-single-map-composition]. The relative arrow relativeMVLocalArrow f f′ g g′ at the open W.ι inverse image Z [def-pc-relative-mv-maps] is isomorphic in the arrow category to standardSingleBaseChangeMap (Z.ι;p) ((Y.homOfLE hZ) tensor-pullback N) g [def-pc-standard-single-base-change-map]. Both vertex comparisons are invertible; neither comparison arrow is asserted invertible.",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-relative-mv-maps",
+  "lem-sc-picard-termwise-single-map-composition",
+  "def-pc-standard-single-base-change-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "cohomology.tex, remark-base-change (08HY) and derived pullback composition (0D5S); Schemes Tag 01JR; More on Morphisms Tag 0A1D. Coefficient and source-coordinate normalization, with no cover or chain-square assertion."
+ },
+ "proof": [
+  {
+   "text": "Identify the open scheme of W.ι inverse image Z with Z using Scheme.Opens.isoOfLE. Its map to W is homOfLE hZ. Use the projection-preserving isomorphism between the corresponding cartesian pullbacks and exact open restriction of single complexes. These produce the two vertex isomorphisms.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-derived-pullback",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the relative coefficient map and the standard comparison. Apply picardTermwiseSingleMap_composition to the two routes around the open square; the tensor composition comparisons identify their literal coefficient modules. Use exists_derivedBaseChange_source_iso for the source coordinates. Expand the adjunction units and counits and use the composite-adjunction counit formula to equate the coefficient mates; this calculation must be carried out here rather than importing the cyclic open-coefficient transport module. The resulting commuting square is an arrow isomorphism. Empty Z, Z=W, and zero N use the same exact-restriction isomorphisms.",
+   "uses": [
+    "lem-pc-derived-base-change-source-iso",
+    "lem-sc-picard-termwise-single-map-composition",
+    "def-pc-standard-single-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-base-change-source-iso",
+  "lem-sc-picard-termwise-single-map-composition",
+  "def-pc-standard-single-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "cohomology.tex, remark-base-change (08HY) and derived pullback composition (0D5S); Schemes Tag 01JR; More on Morphisms Tag 0A1D. Coefficient and source-coordinate normalization, with no cover or chain-square assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived base change map for a single module commutes with restriction to a source open and tensor pullback",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along an open immersion of a module in degree zero agrees with ordinary pullback",
+   "results": "Eight results; Scheme.Modules.restrictFunctorIsoPullback is the useful underived isomorphism.",
+   "date": "2026-10-14",
+   "verdict": "It identifies coefficients, not the derived comparison arrow."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Opens.isoOfLE",
+   "results": "Seven results including isoOfLE and its two inclusion equations.",
+   "date": "2026-10-14",
+   "verdict": "Supplies geometric source coordinates, not the mate compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "standardSingleBaseChangeMap|picardTermwiseSingleMap in Relative and Single modules; blueprint_refs search single coefficient",
+   "results": "Read RelativeMVOpenCoefficientTransport, PicardTermwiseSingleMapComposition, SingleComplexOpenNestedComparison, DerivedBaseChangeSourceIso and StandardSingleBaseChangeTopRestrictionAux. Blueprint search had zero matches.",
+   "date": "2026-10-14",
+   "verdict": "Existing nested comparison supplies only an IsIso equivalence; top restriction treats only the full open. Neither gives this arrow isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleUnionHomotopyChainData",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "cohomology.tex, remark-base-change (08HY) and derived pullback composition (0D5S); Schemes Tag 01JR; More on Morphisms Tag 0A1D. Coefficient and source-coordinate normalization, with no cover or chain-square assertion.",
+   "via": [
+    "lem-pc-standard-single-union-homotopy-chain-data",
+    "new-pc-standard-single-union-ses-chain-data",
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleOpenRelativeArrow",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleOpenRelativeArrow.lean",
+  "declaration": "AlgebraicGeometry.standardSingle_open_relative_arrow",
+  "statement": "theorem standardSingle_open_relative_arrow\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B)\n    (W Z : Y.Opens) (hZ : Z ≤ W) (N : W.toScheme.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let f := W.ι ≫ p\n    let K := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) 0).obj N\n    let K' := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).obj\n        (Scheme.Modules.tensorPullbackObj (pullback.fst f g) N)\n    Nonempty\n      (relativeMVLocalArrow f (pullback.snd f g) g (pullback.fst f g)\n          (IsPullback.of_hasPullback f g) K K'\n          (Scheme.picardTermwiseSingleMap (pullback.fst f g) N) (W.ι ⁻¹ᵁ Z) ≅\n        Arrow.mk (standardSingleBaseChangeMap (Z.ι ≫ p)\n          (Scheme.Modules.tensorPullbackObj (Y.homOfLE hZ) N) g))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261014T030644-L-342885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261014T030644-L-342885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
