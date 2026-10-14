@@ -1,5 +1,7 @@
 module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawTransportIso
+import Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounitEquation
 @[expose] public section
 set_option autoImplicit false
 universe u w w'
@@ -49,5 +51,9 @@ theorem raw_compatibility
           ε₀.app ((HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)).obj
             (((restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)).obj K)) ≫
             ((HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh).map
-              (t.hom.app K)) := by sorry
+              (t.hom.app K)) := by
+  intro E q t
+  obtain ⟨a⟩ := exists_raw_transport_iso L₀ L ε₀ ε h₀ h eR eB hRB E q t
+  refine ⟨a, ?_⟩
+  exact raw_transport_counit_equation L₀ L ε₀ ε h₀ h eR eB hRB E q t a
 end ModuleCat
