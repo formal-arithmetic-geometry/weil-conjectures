@@ -1,0 +1,188 @@
+{
+ "id": "new-pc-standard-single-union-ses-chain-data",
+ "kind": "statement",
+ "title": "Strict chain-square representatives of single-module union base change",
+ "statement": "For arbitrary p:Y→B, g:A→B, opens U,V of Y and a module N on their union, use the standard derived categories [def-pc-derived-category] and write a,aU,aV,aUV for the four canonical single-module comparison arrows [def-pc-standard-single-base-change-map], with their literal tensor-pullback coefficients [def-pc-module-pullback]. There are complexes C,D,C′,D′ of module sheaves on A, maps t:C→D, t′:C′→D′, α:C→C′, β:D→D′ and hc:t≫β=α≫t′. Six isomorphisms identify Q(C),Q(D),Q(Cone(t)) with a.left,aU.left⊕aV.left,aUV.left and the primed objects with their right sides. Under these isomorphisms Q(α),Q(β),Q(Cone.map(t,t′,α,β,hc)) identify with a.hom,biprod.map(aU.hom,aV.hom),aUV.hom. This asserts only chain-square and cone identifications, no short complex or short exactness on A.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-standard-single-base-change-map",
+  "def-pc-module-pullback",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08BV (Lemma 20.33.2), 08HZ (functorial relative Mayer–Vietoris, Lemma 20.33.5), 08FE (Lemma 20.32.4), 08HY (Remark 20.28.3), 0DJ9 (relative Mayer–Vietoris induction diagram); 013N (Lemma 13.9.6) and 013O (Remark 13.9.7, the cylinder contraction calculation). Official pages checked in the second reading, 2026-10-14."
+ },
+ "proof": [
+  {
+   "text": "Resolve the two single coefficients on W and W_A with injective-term K-injective complexes. The injective Mayer-Vietoris rows on the covers are short exact by gluing and flasqueness, so the cones of their first arrows represent the overlap terms.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived direct image and source derived pullback to the finite cover diagrams, using diagram resolutions. Transpose the ordinary pullback counit, restrict it, and use the underived open counit square to retain the homotopies of both restriction squares. Rectify the first square by functorial cylinders carrying those homotopies. The resulting strict square has its standard functorial cone map identified with the overlap comparison.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-mayer-vietoris-underived-open-counit-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport vertices by direct-image composition, exact open restriction and additive biproduct comparison. Pasting the derived adjunction counits identifies alpha with the union comparison, beta with the biproduct of the member comparisons, and the functorial cone map with the overlap comparison. Empty or repeated opens and zero coefficients are zero or split cases of this construction.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "def-pc-standard-single-base-change-map",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "def-pc-derived-pullback",
+  "lem-pc-mayer-vietoris-underived-open-counit-square",
+  "lem-pc-derived-direct-image-composition",
+  "def-pc-standard-single-base-change-map",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Geometric chain-square portion of new-pc-standard-single-union-ses-presentation, before the degreewise split cylinder SES construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|mappingCone.map",
+   "results": "5 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic Mayer-Vietoris sheaf rows and functorial cone maps; no geometric strict chain square for these unrestricted single-module comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "chain representatives of Mayer Vietoris base change morphism and functorial mapping cones",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue",
+   "date": "2026-10-14",
+   "verdict": "Generic Mayer-Vietoris sheaf rows and functorial cone maps; no geometric strict chain square for these unrestricted single-module comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.map",
+   "results": "12 hits: CochainComplex.mappingCone.map_id, CochainComplex.mappingCone.map, CochainComplex.mappingCone.triangleMap_hom₃, CochainComplex.mappingCone.map_eq_mapOfHomotopy, CochainComplex.mappingCone.map_comp, CochainComplex.mappingCone.map_comp_assoc, CochainComplex.mappingConeCompTriangle_mor₁, CochainComplex.mappingConeCompTriangle_mor₂",
+   "date": "2026-10-14",
+   "verdict": "Generic Mayer-Vietoris sheaf rows and functorial cone maps; no geometric strict chain square for these unrestricted single-module comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict cochain square representing a morphism of derived Mayer Vietoris triangles under base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "Unavailable; no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation derived pushforward pullback open cover exact triangle",
+   "results": "Eight underived sheaf pushforward/pullback composition and natural-isomorphism lemmas.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no strict derived cover-diagram comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.ShortComplex.ShortExact",
+   "results": "Four hits concerning quasiIso_descShortComplex and cone/SES boundary comparisons.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: generic cone identification tools, not the geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfHomotopy|homotopy.*[Ss]quare|[Cc]ylinder",
+   "results": "Generic model-category cylinders and localization results; local RelativeMVSESPresentation requires affine bases, qcqs and derived quasi-coherence; DerivedOpenUnionSESPresentation supplies a single row without the base-change square.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no duplicate or shorter complete route."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent morphism of restriction exact triangles represented by a commuting square of cochain complexes",
+   "results": "Eight generic mappingCone triangleMap and cone-composition-triangle hits. None identifies the canonical single-module cover comparison.",
+   "date": "2026-10-14",
+   "verdict": "Current second reading: generic algebra only; no geometric duplicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapOfHomotopy",
+   "results": "Eleven hits: mapOfHomotopy, map_eq_mapOfHomotopy and triangle-map projections/commutativity. These implement a specified homotopy square but do not produce the geometric square or identify its overlap comparison.",
+   "date": "2026-10-14",
+   "verdict": "Current second reading: useful strictification tools, no complete replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Cc]one|[Cc]one.*baseChange|union_ses",
+   "results": "msearch grep returned zero hits. Separately read local ConeDiagramSESPresentation, DerivedOpenUnionSESPresentation, KInjectiveMayerVietorisPresentation, SingleComplexOpenUnionSESPresentation and RelativeMVSESPresentation.",
+   "date": "2026-10-14",
+   "verdict": "Current second reading: no shorter complete geometric comparison under these hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleUnionSESPresentation",
+  "date": "2026-10-14",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 0DJ9 induction diagram: the geometric strict chain-square and cone identifications underlying the relative Mayer–Vietoris boundary square, before the cylinder short exactness construction.",
+   "via": [
+    "new-pc-standard-single-union-ses-presentation",
+    "new-pc-standard-single-flat-counit-union-triangles",
+    "new-pc-standard-single-flat-counit-union-equation",
+    "lem-pc-standard-single-flat-counit-union-presentation",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleUnionSESChainData",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleUnionSESChainData.lean",
+  "declaration": "AlgebraicGeometry.standardSingle_union_ses_chain_data",
+  "statement": "theorem standardSingle_union_ses_chain_data\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U V : Y.Opens)\n    (N : (U ⊔ V).toScheme.Modules) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let a := Arrow.mk (standardSingleBaseChangeMap ((U ⊔ V).ι ≫ p) N g)\n    let aU := Arrow.mk (standardSingleBaseChangeMap (U.ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE le_sup_left) N) g)\n    let aV := Arrow.mk (standardSingleBaseChangeMap (V.ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE le_sup_right) N) g)\n    let aUV := Arrow.mk (standardSingleBaseChangeMap ((U ⊓ V).ι ≫ p)\n      (Scheme.Modules.tensorPullbackObj (Y.homOfLE (inf_le_left.trans le_sup_left)) N) g)\n    ∃ (C D C' D' : CochainComplex\n        (SheafOfModules.{u} (moduleRings A.toRingedSpace)) ℤ)\n      (t : C ⟶ D) (t' : C' ⟶ D') (α : C ⟶ C') (β : D ⟶ D'),\n      ∃ (hc : t ≫ β = α ≫ t')\n        (e₁ : DerivedCategory.Q.obj C ≅ a.left)\n        (e₂ : DerivedCategory.Q.obj D ≅ aU.left ⊞ aV.left)\n        (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ aUV.left)\n        (e₁' : DerivedCategory.Q.obj C' ≅ a.right)\n        (e₂' : DerivedCategory.Q.obj D' ≅ aU.right ⊞ aV.right)\n        (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ aUV.right),\n        DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a.hom ∧\n        DerivedCategory.Q.map β ≫ e₂'.hom = e₂.hom ≫ biprod.map aU.hom aV.hom ∧\n        DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =\n          e₃.hom ≫ aUV.hom",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-52cd4",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T013044-L-3417182",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-52cd4",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261014T013044-L-3417182",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the node and repository signatures; all modules and the direct importer compiled cleanly, with only the documented chain-data sorryAx remaining."
+ }
+}

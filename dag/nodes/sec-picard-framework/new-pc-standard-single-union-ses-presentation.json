@@ -15,36 +15,27 @@
  },
  "proof": [
   {
-   "text": "Resolve N[0] on W=U union V and its ordinary pullback on W_A by K-injective complexes with injective terms. Apply the unrestricted injective Mayer–Vietoris presentation to the induced covers. The sheaf equalizer condition and flasqueness give the short exact restriction-difference rows. No open is required to be compact.",
+   "text": "Obtain the geometric strict chain square and the six localized comparisons from standardSingle_union_ses_chain_data.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-kinjective-mayer-vietoris-presentation"
+    "new-pc-standard-single-union-ses-chain-data"
    ],
    "elementary": false
   },
   {
-   "text": "Apply derived direct image to the cover rows and derived pullback on the source side. Represent the finite cover diagrams and their maps by diagram resolutions. Transpose the ordinary pullback map under the derived adjunction; restriction-unit naturality gives the first square, and the difference of the two nested restriction squares gives the second. The degreewise open counit identity identifies the cover comparison. With these specified homotopies rectify the first square and use the functorial cylinder short exact rows C→D⊕Cone(id C)→Cone(t). Their first and middle vertices localize to C and D, and the overlap comparison identifies the cone vertex. This gives the strict short exact rows P,P′ and m.",
-   "uses": [
-    "def-pc-derived-pullback",
-    "lem-pc-mayer-vietoris-underived-open-counit-square",
-    "lem-pc-cone-diagram-ses-presentation"
-   ],
-   "elementary": false
+   "text": "For t:C→D construct the actual cylinder row C→D⊕Cone(id C)→Cone(t). Show it is degreewise split exact with explicit retraction and section, then apply HomologicalComplex.shortExact_of_degreewise_shortExact. Construct the row morphism from alpha and beta; strict-square commutativity proves both squares.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Transport the six vertices by derived direct-image composition, exact open restriction, and the additive biproduct comparison. The coefficient restrictions identify with the displayed literal tensor pullbacks. Expanding the comparison as the mate of the pulled-back counit, the composite-counit and triangle identities identify the three maps with the union comparison, the biproduct of the member comparisons, and the overlap comparison. These are the displayed conjugacy identities. Empty, repeated or contained opens give zero or split restriction rows; zero modules are included. All witnesses are existential and define no library data.",
-   "uses": [
-    "lem-pc-derived-direct-image-composition",
-    "def-pc-standard-single-base-change-map",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false
+   "text": "The contractible identity-cone summand disappears under Q, giving the middle vertex isomorphism by projection and inclusion. Compose with the six geometric comparisons. The first and cone component equations follow directly. For the middle component use biprod.map_fst to prove cylMap≫fst=fst≫beta, apply Q, and postcompose with the geometric middle comparison.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Q4 isolates the short exact diagram construction in steps 2–3 of new-pc-standard-single-flat-counit-union-triangles, following Tags 08BV, 08FE, 08HY and 0DJ9, with the functorial cylinder construction of 013N–013O."
+  "place": "Q4 decomposition: geometric strict-square lemma followed by explicit degreewise split mapping-cylinder construction (Tags 013N–013O), with all three component transports proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -123,14 +114,7 @@
   "date": "2026-10-14"
  },
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "def-pc-derived-pullback",
-  "lem-pc-mayer-vietoris-underived-open-counit-square",
-  "lem-pc-cone-diagram-ses-presentation",
-  "lem-pc-derived-direct-image-composition",
-  "def-pc-standard-single-base-change-map",
-  "def-pc-module-pullback"
+  "new-pc-standard-single-union-ses-chain-data"
  ],
  "tool_uses": [
   "lem-pc-cone-diagram-ses-presentation"
@@ -146,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-52cd4",
   "group": "Q4",
   "result": "pass",
-  "landing": "20261013T234518-L-2165707",
+  "landing": "20261014T013044-L-3417182",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the node and repository signatures; all modules and the direct importer compiled cleanly, with only the documented chain-data sorryAx remaining."
  }
 }
