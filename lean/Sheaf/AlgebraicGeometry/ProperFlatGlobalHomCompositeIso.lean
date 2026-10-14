@@ -12,6 +12,8 @@ import Sheaf.AlgebraicGeometry.ProperFlatImageGlobalHomBaseChangeIso
 import Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeCounitTransport
 import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 
+import Mathlib.CategoryTheory.Adjunction.Mates
+
 /-! # The composite global Hom comparison through the right adjoint
 Source: Stacks Project, duality.tex, Tag 0AA8, equation duality-equation-iso.
 (blueprint: lem-sc-proper-flat-global-hom-composite-isIso).
@@ -173,9 +175,15 @@ theorem properFlatGlobalHomComposite_isIso
       (derivedPullback g).map (adjf.counit.app K).hom := by
     dsimp only [c, Lg]
     unfold dualityEquationBaseChangeMap
-    extract_lets PX PY PY' PX' LLg LLgX Rg RgX Rf Rf' adjg adjgX β
-    exact congrArg (fun z ↦ z.hom)
-      (composite_mate_counit adjf adjf' adjg adjgX β K)
+    extract_lets PX PY PY' PX' LLg LLgX Rf Rf' β
+    have h := mateEquiv_counit adjf adjf' (inv β) K
+    have hh : β.app (a.obj K) ≫ Rf'.map ((mateEquiv adjf adjf' (inv β)).app K) ≫
+        adjf'.counit.app (LLg.obj K) = LLg.map (adjf.counit.app K) := by
+      calc
+        _ = β.app (a.obj K) ≫ ((inv β).app (a.obj K) ≫
+            LLg.map (adjf.counit.app K)) := by rw [h]
+        _ = _ := by simp
+    exact congrArg (fun z ↦ z.hom) hh
   have ht := mixedGlobalHom_baseChange_counit_transport f g M.obj (a.obj K).obj
     (a'.obj (Lg.obj K)).obj K.obj c (adjf.counit.app K).hom
     (adjf'.counit.app (Lg.obj K)).hom hc

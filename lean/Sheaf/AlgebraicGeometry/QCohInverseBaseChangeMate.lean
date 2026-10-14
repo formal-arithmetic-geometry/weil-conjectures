@@ -174,6 +174,6 @@ theorem dualityEquationBaseChangeMap_eq_inverseSquareMate
       (schemeDerivedQCohProperty Y').fullyFaithfulι _ _ ((qcBaseChange f g).app E) (hβ E)
   have : IsIso (qcBaseChange f g) := NatIso.isIso_of_isIso_app _
   unfold dualityEquationBaseChangeMap
-  exact secondMate_formula _ _ _ _ (qcBaseChange f g) K
+  rfl
 
 end AlgebraicGeometry

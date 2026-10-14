@@ -29,70 +29,38 @@
  ],
  "proof": [
   {
-   "text": "The fibre product node supplies X'=X\\times_Y Y' and its projections g_X and f'; the displayed commutative square is therefore cartesian. The quasi-compact and quasi-separated hypotheses allow the derived categories and derived direct images in the statement to be formed.",
+   "text": "Use the fibre product projections and form the derived quasi-coherent categories and restricted pullbacks and direct images. Quasi-coherent preservation supplies the restricted functors appearing in the unchanged signature.",
    "uses": [
     "def-pc-fibre-product",
     "def-pc-derived-category",
-    "def-pc-derived-direct-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8, setup preceding Lemma 48.6.2"
-   }
-  },
-  {
-   "text": "By [lem-pc-qcqs-derived-direct-image-right-adjoint], Rf_* and Rf'_* preserve D_{\\mathrm{QCoh}} and the restricted functors have right adjoints a and a'; its hypothesis holds because f, f', g, g_X are morphisms between quasi-compact and quasi-separated schemes, hence quasi-compact and quasi-separated morphisms. By [lem-pc-ringed-spaces-derived-adjoint], Lg^*\\dashv Rg_* and Lg_X^*\\dashv Rg_{X,*} on D(\\mathcal O), with units and counits used below. These adjunctions restrict to the full subcategories D_{\\mathrm{QCoh}}: Rg_* and Rg_{X,*} preserve D_{\\mathrm{QCoh}} by [lem-pc-qcqs-derived-direct-image-right-adjoint], and Lg^*, Lg_X^* preserve D_{\\mathrm{QCoh}} by [lem-pc-derived-pullback-tensor-qcoh]. Composing adjunctions, Lg^*Rf_*\\dashv aRg_* and Rf'_*Lg_X^*\\dashv Rg_{X,*}a' as functors D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y').",
-   "uses": [
-    "lem-pc-qcqs-derived-direct-image-right-adjoint",
-    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-direct-image",
     "def-pc-derived-pullback",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
     "lem-pc-derived-pullback-tensor-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8, definition of the base-change map and adjunctions"
-   }
+   "elementary": true
   },
   {
-   "text": "The unit \\eta of Lg_X^*\\dashv Rg_{X,*} gives Rf_*(\\eta):Rf_*\\to Rf_*Rg_{X,*}Lg_X^*. Since f\\circ g_X=g\\circ f' (the square commutes), [lem-pc-derived-direct-image-composition] gives Rf_*Rg_{X,*}\\cong R(f\\circ g_X)_*=R(g\\circ f')_*\\cong Rg_*Rf'_*, so the adjunction Lg^*\\dashv Rg_* transposes this map to the canonical natural transformation \\beta:Lg^*Rf_*\\to Rf'_*Lg_X^*.",
+   "text": "Lift the components of schemeDerivedBaseChangeMap to the full quasi-coherent subcategory. Naturality follows from naturality of the pullback composition comparisons and the direct-image adjunction counit: move the test morphism through the two comparisons, the equality transport, and the counit, then transpose using homEquiv naturality.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "def-pc-fibre-product",
-    "lem-pc-derived-direct-image-composition"
+    "def-pc-derived-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8, equation-base-change-map preceding equation (1)"
-   }
+   "elementary": true
   },
   {
-   "text": "The conjugate [def-weil-pbc-adjunction-conjugate] of \\beta:Lg^*Rf_*\\to Rf'_*Lg_X^* with respect to the two composite adjunctions of Step 2 is a transformation \\theta:Rg_{X,*}a'\\to aRg_*. The conjugate bijection preserves isomorphisms, so the hypothesis that \\beta is an isomorphism implies that \\theta is an isomorphism and \\theta^{-1} is defined.",
+   "text": "The hypothesis hβ makes every component invertible. Full faithfulness reflects invertibility; pointwise invertibility gives an invertible natural transformation β. Apply mateEquiv adjf adjf' to inv β and evaluate at K. This is an explicit construction from the supplied adjunctions and β.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To identify this construction with the node's displayed formula, conjugate inv β under the composite adjunctions. conjugateEquiv_comm identifies it with the inverse conjugate of β. The Mathlib iterated_mateEquiv_conjugateEquiv identity followed by the inverse mate equivalence gives the displayed unit, inverse-conjugate, counit composite (the existing generic secondMate_formula in QCohInverseBaseChangeMate.lean proves exactly this identity). The auxiliary pullback adjunctions cancel, so no choice of fresh counits is needed.",
    "uses": [
     "def-weil-pbc-adjunction-conjugate",
-    "lem-pc-ringed-spaces-derived-adjoint"
+    "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8, equation-base-change-map and case (1)"
-   }
-  },
-  {
-   "text": "For K\\in D_{\\mathrm{QCoh}}(Y), the unit \\eta'_K:K\\to Rg_*Lg^*K, the component (\\theta_{Lg^*K})^{-1}:aRg_*Lg^*K\\to Rg_{X,*}a'(Lg^*K) and the counit \\epsilon:Lg_X^*Rg_{X,*}\\to\\mathrm{id} exist by Steps 2 and 4. Applying Lg_X^*a to the first and Lg_X^* to the second, then composing with \\epsilon at a'(Lg^*K), gives exactly the displayed composite Lg_X^*a(K)\\to a'(Lg^*K), which is therefore well defined.",
-   "uses": [
-    "def-pc-derived-pullback",
-    "def-weil-pbc-adjunction-conjugate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8, equation-base-change-map"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -101,15 +69,15 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "def-weil-pbc-adjunction-conjugate",
   "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-derived-direct-image-composition"
+  "def-pc-derived-base-change-map",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AA8, equation-base-change-map and Lemma 48.6.2 case (1)"
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "mateEquiv; conjugateEquiv_comm; iterated_mateEquiv_conjugateEquiv; Stacks duality equation-base-change-map; existing QCohInverseBaseChangeMate.secondMate_formula"
  },
  "mathlib_searches": [
   {
@@ -189,5 +157,15 @@
   "group": "C1",
   "result": "fix",
   "note": "qcqs X,Y,Y'; X'=pullback f g, g_X=fst, f'=snd; a,a' right adjoints of D_QCoh-restricted Rf_*, Rf'_*; beta=schemeDerivedBaseChangeMap on D_QCoh iso; unit/conjugate-inverse/counit composite with pinned adjunctions"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-613a9",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261014T034912-L-815572",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the inverse-mate construction to the node’s composite via secondMate_formula; verified unchanged signatures, proof metadata, five clean delivered compiles, all 22 direct importers, four forced original failures, and permitted axioms with inherited sorryAx only."
  }
 }

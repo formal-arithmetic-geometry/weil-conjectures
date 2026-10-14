@@ -43,11 +43,12 @@
    "elementary": false
   },
   {
-   "text": "Open module restriction preserves limits by the proved source-library instance, and preserves colimits as a left adjoint. Its right adjoint, module pushforward, preserves K-injectives and is fully faithful because the ordinary open counit is invertible. The proved source-library full_rightDerivedFunctor and faithful_rightDerivedFunctor instances make its derived functor fully faithful. The QCoh lift is fully faithful, so the supplied restricted open adjunction has invertible counit. Unfold dualityEquationBaseChangeMap: the first factor is invertible by the previous step, the second is the pullback of the inverse of an invertible conjugate (Mathlib conjugateEquiv_iso applied to hβ), and the last is the open counit. Their composite is invertible.",
+   "text": "Open module restriction preserves limits by the proved source-library instance, and preserves colimits as a left adjoint. Its right adjoint, module pushforward, preserves K-injectives and is fully faithful because the ordinary open counit is invertible. The proved source-library full_rightDerivedFunctor and faithful_rightDerivedFunctor instances make its derived functor fully faithful. The QCoh lift is fully faithful, so the restricted open adjunction has invertible counit. Construct auxiliary restricted pullback adjunctions locally in the proof, without reading them from the definition. Reuse the existing private secondMate_formula from QCohInverseBaseChangeMate via a proof-only import all. This identity, proved there from Mathlib conjugateEquiv_comm and iterated_mateEquiv_conjugateEquiv, identifies the public inverse mate with the unit, inverse-conjugate, counit composite for these adjunctions. The first factor is invertible by the previous step, the second is the pullback of the inverse of an invertible conjugate, and the last is the open counit. Their composite is invertible.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-limits",
     "def-sc-duality-equation-base-change-map",
-    "def-pc-derived-base-change-map"
+    "def-pc-derived-base-change-map",
+    "lem-sc-duality-base-change-inverse-square-mate"
    ],
    "elementary": false
   }
@@ -60,15 +61,16 @@
   "lem-pc-derived-pullback-tensor-qcoh",
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-duality-base-change-inverse-square-mate",
   "lem-sc-proper-flat-right-adjoint-restriction-open",
   "lem-weil-pbc-module-restriction-open-immersion-limits"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F2",
-  "date": "2026-10-13",
-  "document": "Stacks Project, Duality for Schemes; existing Lean library and Mathlib",
-  "place": "Tags 0E4J and 0A9L; Mathlib Adjunction.Restrict and Adjunction.Mates; WeilConjectures right-derived fully faithful instances"
+  "group": "S3",
+  "date": "2026-10-14",
+  "document": "Stacks Project, Duality for Schemes; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "place": "Tags 0E4J and 0A9L; iterated_mateEquiv_conjugateEquiv and conjugateEquiv_comm; existing open-restriction argument; X-503ae repair reuses existing secondMate_formula via import all"
  },
  "mathlib_searches": [
   {
@@ -141,12 +143,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
+  "reviewer": "X-613a9",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T113340-L-3182888",
-  "kind": "proof"
+  "landing": "20261014T034912-L-815572",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the inverse-mate construction to the node’s composite via secondMate_formula; verified unchanged signatures, proof metadata, five clean delivered compiles, all 22 direct importers, four forced original failures, and permitted axioms with inherited sorryAx only."
  }
 }

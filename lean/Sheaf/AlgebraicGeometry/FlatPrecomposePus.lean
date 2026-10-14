@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.AlgebraicGeometry.GlobalHomBaseChangeCounitTransport
 
 /-!
@@ -165,8 +166,15 @@ theorem flat_precompose_pus
               E.obj E.property)).obj K)).hom =
       (derivedPullback g).map (adjf.counit.app K).hom := by
     unfold dualityEquationBaseChangeMap
-    extract_lets PX PY PY' PX' Lg LgX Rg RgX Rf Rf' adjg adjgX β
-    exact congrArg (fun z ↦ z.hom) (mate_counit adjf adjf' adjg adjgX β K)
+    extract_lets PX PY PY' PX' Lg LgX Rf Rf' β
+    have h := mateEquiv_counit adjf adjf' (inv β) K
+    have hh : β.app (a.obj K) ≫ Rf'.map ((mateEquiv adjf adjf' (inv β)).app K) ≫
+        adjf'.counit.app (Lg.obj K) = Lg.map (adjf.counit.app K) := by
+      calc
+        _ = β.app (a.obj K) ≫ ((inv β).app (a.obj K) ≫
+            Lg.map (adjf.counit.app K)) := by rw [h]
+        _ = _ := by simp
+    exact congrArg (fun z ↦ z.hom) hh
   have := hβ M
   have ht := schemeGlobalHom_baseChange_counit_transport f g M.obj (a.obj K).obj
     (a'.obj (((schemeDerivedQCohProperty Y').lift

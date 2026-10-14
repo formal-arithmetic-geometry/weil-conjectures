@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
+import all Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
+import Mathlib.CategoryTheory.Adjunction.Restrict
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
@@ -158,7 +160,34 @@ theorem proper_flat_openSquare_mate_isIso
     set_option backward.isDefEq.respectTransparency.types false in by
   classical
   dsimp -zeta only [dualityEquationBaseChangeMap]
-  extract_lets PX PY PY' PX' Lg LgX Rg RgX Rf Rf' adjg adjgX β hβlift hβiso
+  extract_lets PX PY PY' PX' Lg LgX Rf Rf' β hβlift hβiso
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  let : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  let Rg := PY.lift (PY'.ι ⋙ schemeDerivedDirectImage W.ι)
+    (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint W.toScheme Y W.ι).fst E.obj E.property)
+  let RgX := PX.lift (PX'.ι ⋙ schemeDerivedDirectImage (pullback.fst f W.ι))
+    (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
+      (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f W.ι)) _ _ _ _
+      (pullback.fst f W.ι) _ _).fst E.obj E.property)
+  let adjg : Lg ⊣ Rg := Adjunction.restrictFullyFaithful
+    (Classical.choose (exists_schemeDerivedAdjunction W.ι
+      (hAdd := (Classical.choose exists_derivedPullbackComposition) W.ι)
+      ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition))
+        W.ι)
+      ((Classical.choose (Classical.choose_spec
+        (Classical.choose_spec exists_derivedPullbackComposition))) W.ι)))
+    PY.fullyFaithfulι PY'.fullyFaithfulι
+    (PY'.liftCompιIso _ _).symm (PY.liftCompιIso _ _).symm
+  let adjgX : LgX ⊣ RgX := Adjunction.restrictFullyFaithful
+    (Classical.choose (exists_schemeDerivedAdjunction (pullback.fst f W.ι)
+      (hAdd := (Classical.choose exists_derivedPullbackComposition) (pullback.fst f W.ι))
+      ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition))
+        (pullback.fst f W.ι))
+      ((Classical.choose (Classical.choose_spec
+        (Classical.choose_spec exists_derivedPullbackComposition))) (pullback.fst f W.ι))))
+    PX.fullyFaithfulι PX'.fullyFaithfulι
+    (PX'.liftCompιIso _ _).symm (PX.liftCompιIso _ _).symm
+  rw [← secondMate_formula adjf adjf' adjgX adjg β K]
   -- Recover the ambient adjunction used by the canonical restricted unit.
   let adjJ := Classical.choose (exists_schemeDerivedAdjunction W.ι
     (hAdd := (Classical.choose exists_derivedPullbackComposition) W.ι)

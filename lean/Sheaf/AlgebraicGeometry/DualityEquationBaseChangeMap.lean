@@ -8,10 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-public import Mathlib.CategoryTheory.Adjunction.Restrict
+import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
-REPAIR: Construct dualityEquationBaseChangeMap with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+The map is constructed as the mate of the inverse ordinary base-change transformation,
+so no auxiliary pullback adjunction or independently chosen counit enters its data.
 
 # Canonical base-change map for a right adjoint
 
@@ -44,6 +45,9 @@ to `D_QCoh` (`derivedPullback_tensor_preserve_QCoh` and
 `schemeDerivedDirectImage_qcqs_hasRightAdjoint` give the preservation). The conjugate
 `θ : Rg_{X,*} a' ⟶ a Rg_*` of `β` for the composite adjunctions is an isomorphism, and
 the map is `Lg_X^* a(η'_K) ≫ Lg_X^* (θ_{Lg^* K})⁻¹ ≫ ε_{a'(Lg^* K)}`.
+The implementation takes the mate of `β⁻¹` under `adjf` and `adjf'`. The iterated
+mates identity identifies it with the displayed composite and cancels both auxiliary
+pullback adjunctions. No extra counit is selected by this definition.
 Source: Stacks Project, duality.tex, Tag 0AA8, equation-base-change-map
 (blueprint: def-sc-duality-equation-base-change-map). -/
 noncomputable def dualityEquationBaseChangeMap
@@ -83,36 +87,12 @@ noncomputable def dualityEquationBaseChangeMap
     (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1 E.obj E.property)
   let LgX := PX'.lift (PX.ι ⋙ derivedPullback (pullback.fst f g))
     (fun E ↦ (derivedPullback_tensor_preserve_QCoh (pullback.fst f g)).1 E.obj E.property)
-  let Rg := PY.lift (PY'.ι ⋙ schemeDerivedDirectImage g)
-    (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint Y' Y g).fst E.obj E.property)
-  let RgX := PX.lift (PX'.ι ⋙ schemeDerivedDirectImage (pullback.fst f g))
-    (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
-      (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
-      (pullback.fst f g) _ _).fst E.obj E.property)
   let Rf := PY.lift (PX.ι ⋙ schemeDerivedDirectImage f)
     (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property)
   let Rf' := PY'.lift (PX'.ι ⋙ schemeDerivedDirectImage (pullback.snd f g))
     (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
       (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
       (pullback.snd f g) _ _).fst E.obj E.property)
-  let adjg : Lg ⊣ Rg := Adjunction.restrictFullyFaithful
-    (Classical.choose (exists_schemeDerivedAdjunction g
-      (hAdd := (Classical.choose exists_derivedPullbackComposition) g)
-      ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition))
-        g)
-      ((Classical.choose (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition))) g)))
-    PY.fullyFaithfulι PY'.fullyFaithfulι
-    (PY'.liftCompιIso _ _).symm (PY.liftCompιIso _ _).symm
-  let adjgX : LgX ⊣ RgX := Adjunction.restrictFullyFaithful
-    (Classical.choose (exists_schemeDerivedAdjunction (pullback.fst f g)
-      (hAdd := (Classical.choose exists_derivedPullbackComposition) (pullback.fst f g))
-      ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition))
-        (pullback.fst f g))
-      ((Classical.choose (Classical.choose_spec
-        (Classical.choose_spec exists_derivedPullbackComposition))) (pullback.fst f g))))
-    PX.fullyFaithfulι PX'.fullyFaithfulι
-    (PX'.liftCompιIso _ _).symm (PX.liftCompιIso _ _).symm
   let β : Rf ⋙ Lg ⟶ LgX ⋙ Rf' :=
     { app := fun E ↦ ObjectProperty.homMk
         (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
@@ -161,8 +141,6 @@ noncomputable def dualityEquationBaseChangeMap
   have : ∀ E, IsIso (β.app E) := fun E ↦
     @Functor.FullyFaithful.isIso_of_isIso_map _ _ _ _ _ PY'.fullyFaithfulι _ _ (β.app E) (hβ E)
   have : IsIso β := NatIso.isIso_of_isIso_app β
-  LgX.map (a.map (adjg.unit.app K)) ≫
-    LgX.map (inv ((conjugateEquiv (adjgX.comp adjf') (adjf.comp adjg) β).app (Lg.obj K))) ≫
-      adjgX.counit.app (a'.obj (Lg.obj K))
+  (mateEquiv adjf adjf' (inv β)).app K
 
 end AlgebraicGeometry
