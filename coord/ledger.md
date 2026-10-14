@@ -14805,3 +14805,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 18:03 L: batch 20261014T095137 dependency take-out
 - 10:04 L: merged deliver/A4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComponentIdentity (stage 3; reviewer PASS; first push; landing 20261014T100433-L-1021472 (interface); batch 20261014T100431; modules 3; new nodes 2)
+- 10:04 L: merged deliver/N1/Sheaf.RingTheory.ColimitFlatRelationDescent (stage 3; reviewer PASS; after a return; landing 20261014T100433-L-1021718 (interface); batch 20261014T100431; modules 8; new nodes 0; change records: coord/changes/ColimitEventuallyFlat-preservation.md, coord/changes/ColimitMaximalKernelDescent-preservation.md, coord/changes/FiniteIdealKernelDescent-preservation.md, coord/changes/colimit-flat-relation-preservation.md)
