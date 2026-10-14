@@ -14832,3 +14832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:11 L: returned deliver/N4/Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare (reviewer RETURN: (reviewer X-1c6c9, head 1c6c96a70) A3 — Unforced edit of an unheld module: original RawModuleScalarMapFormula compiled c)
 
 - 19:15 L: batch 20261014T111250 dependency take-out
+- 11:21 L: returned deliver/S1/Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit (reviewer RETURN: (reviewer X-cdad5, head cdad5c60f) C5 / brief point 5: comp_unit duplicates the existing private AlgebraicGeometry.compU)
