@@ -26,7 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The tensor product of sheaves of `𝒪_X`-modules, `SheafOfModules.monoidalCategory X.sheaf`
 (def-pc-tensor-complex-sheaves), made a local instance for the total tensor complex below. -/
-noncomputable local instance (X : Scheme.{uX}) :
+noncomputable local instance DerivedPullbackTensorQCoh_monoidalCategory (X : Scheme.{uX}) :
     MonoidalCategory (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 

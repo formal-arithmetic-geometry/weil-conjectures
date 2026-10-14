@@ -380,8 +380,8 @@ local instance : EnoughInjectives (SheafOfModules.{u} X.ringCatSheaf) :=
   (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
 local instance : HasExt.{u} (SheafOfModules.{u} X.ringCatSheaf) :=
   hasExt_of_enoughInjectives.{u, u, u + 1} (SheafOfModules.{u} X.ringCatSheaf)
-local instance : HasExt.{u + 1} (KSheaf X k) := HasExt.standard (KSheaf X k)
-local instance : MonoidalCategory (KSheaf X k) := Sheaf.monoidalCategory _ _
+local instance FieldLinearModuleCohomologyOperations_hasExt : HasExt.{u + 1} (KSheaf X k) := HasExt.standard (KSheaf X k)
+local instance FieldLinearModuleCohomologyOperations_monoidalCategory : MonoidalCategory (KSheaf X k) := Sheaf.monoidalCategory _ _
 
 /-- The carrier of the recorded O-module cohomology before restricting scalars.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -895,8 +895,8 @@ formula and filtered-colimit exactness for vector spaces, and from its left adju
   dsimp [scalarInverseImage, Functor.sheafPullback]
   infer_instance
 
-local instance : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
-local instance : HasExt.{u + 1} (KSheaf Y k) := HasExt.standard (KSheaf Y k)
+local instance FieldLinearModuleCohomologyOperations_monoidalCategory2 : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
+local instance FieldLinearModuleCohomologyOperations_hasExt2 : HasExt.{u + 1} (KSheaf Y k) := HasExt.standard (KSheaf Y k)
 
 /-- scalar Inverse Unit Iso.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -1002,7 +1002,7 @@ def scalarCohomologyPullback (g : Y ⟶ Spec (CommRingCat.of k))
 attribute [irreducible] scalarCohomologyPullback scalarPullbackCoefficient
   scalarInverseUnitIso scalarUnitMorphism
 
-local instance : MonoidalCategory (SheafOfModules.{u} X.ringCatSheaf) :=
+local instance FieldLinearModuleCohomologyOperations_monoidalCategory3 : MonoidalCategory (SheafOfModules.{u} X.ringCatSheaf) :=
   SheafOfModules.monoidalCategory X.sheaf
 local instance : SymmetricCategory (KSheaf X k) := Sheaf.symmetricCategory _ _
 local instance : MonoidalPreadditive (KSheaf X k) := Sheaf.monoidalPreadditive

@@ -50,7 +50,7 @@ variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
   [BraidedCategory C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance TorAmplitude_hasColimitsOfSize : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 

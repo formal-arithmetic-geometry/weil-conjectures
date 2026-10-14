@@ -25,7 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 attribute [local instance] Sheaf.monoidalCategory HasExt.standard
 
-local instance : MonoidalCategory (SheafOfModules.{u} X.ringCatSheaf) :=
+local instance ScalarTensorUnitCoefficient_monoidalCategory : MonoidalCategory (SheafOfModules.{u} X.ringCatSheaf) :=
   SheafOfModules.monoidalCategory X.sheaf
 
 -- The sheafification unit and the constant-presheaf adjunction recover the scalar map.

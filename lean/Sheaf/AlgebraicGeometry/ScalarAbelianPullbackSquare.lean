@@ -27,7 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] Sheaf.monoidalCategory
 attribute [local irreducible] scalarAbelianUnitClass scalarInverseImage
-local instance (k : Type u) [Field k] (X : Scheme.{u}) : HasExt.{u + 1} (KSheaf X k) :=
+local instance ScalarAbelianPullbackSquare_hasExt (k : Type u) [Field k] (X : Scheme.{u}) : HasExt.{u + 1} (KSheaf X k) :=
   HasExt.standard _
 
 /-- Abelian inverse image along a scheme morphism, as in structure-sheaf pullback.

@@ -23,7 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-noncomputable local instance (X : Scheme.{u}) :
+noncomputable local instance ExternalCupUnitCoefficientIdentities_monoidalCategory (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} X.ringCatSheaf) :=
   SheafOfModules.monoidalCategory X.sheaf
 

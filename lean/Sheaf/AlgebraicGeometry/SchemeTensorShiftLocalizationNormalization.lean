@@ -127,59 +127,59 @@ private theorem tensorator_isIso
 
 variable (X : Scheme.{u})
 
-noncomputable local instance :
+noncomputable local instance SchemeTensorShiftLocalizationNormalization_monoidalCategory :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
-noncomputable local instance :
+noncomputable local instance SchemeTensorShiftLocalizationNormalization_symmetricCategory :
     SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.sheaf
-local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance SchemeTensorShiftLocalizationNormalization_monoidalPreadditive : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
-noncomputable local instance :
+noncomputable local instance SchemeTensorShiftLocalizationNormalization_monoidalClosed :
     MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
-local instance : IsGrothendieckAbelian.{u}
+local instance SchemeTensorShiftLocalizationNormalization_isGrothendieckAbelian : IsGrothendieckAbelian.{u}
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-local instance : HasColimitsOfSize.{0, 0}
+local instance SchemeTensorShiftLocalizationNormalization_hasColimitsOfSize : HasColimitsOfSize.{0, 0}
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := hasColimitsOfSizeShrink.{0, 0, u, u} _
-local instance : Abelian.HasFunctorialFlatResolution
+local instance SchemeTensorShiftLocalizationNormalization_hasFunctorialFlatResolution : Abelian.HasFunctorialFlatResolution
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   schemeModule_hasFunctorialFlatResolution X
 variable [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-local instance : DerivedCategory.Qh.HasDerivedMonoidalCategory
+local instance SchemeTensorShiftLocalizationNormalization_hasDerivedMonoidalCategory : DerivedCategory.Qh.HasDerivedMonoidalCategory
     (HomotopyCategory.quasiIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :=
   DerivedCategory.hasDerivedMonoidalCategory _
 
-local instance (A B : GradedObject ℤ
+local instance SchemeTensorShiftLocalizationNormalization_hasTensor (A B : GradedObject ℤ
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))) : A.HasTensor B := inferInstance
 
-local instance (A B C D : GradedObject ℤ
+local instance SchemeTensorShiftLocalizationNormalization_hasTensor₄ObjExt (A B C D : GradedObject ℤ
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
     GradedObject.HasTensor₄ObjExt A B C D := inferInstance
 
-local instance (A B C : GradedObject ℤ
+local instance SchemeTensorShiftLocalizationNormalization_hasGoodTensor₁₂Tensor (A B C : GradedObject ℤ
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
     GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
 
-local instance (A B C : GradedObject ℤ
+local instance SchemeTensorShiftLocalizationNormalization_hasGoodTensorTensor₂₃ (A B C : GradedObject ℤ
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
     GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
 
-local instance (A B : CochainComplex
+local instance SchemeTensorShiftLocalizationNormalization_hasMapBifunctor (A B : CochainComplex
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
     CochainComplex.HasMapBifunctor A B
       (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) := inferInstance
 
-noncomputable local instance : MonoidalCategory
+noncomputable local instance SchemeTensorShiftLocalizationNormalization_monoidalCategory2 : MonoidalCategory
     (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := inferInstance
 
-noncomputable local instance : MonoidalCategory (schemeDerivedCategory X) :=
+noncomputable local instance SchemeTensorShiftLocalizationNormalization_monoidalCategory3 : MonoidalCategory (schemeDerivedCategory X) :=
   schemeDerivedTensorMonoidal X
 
-noncomputable local instance :
+noncomputable local instance SchemeTensorShiftLocalizationNormalization_laxMonoidal :
     (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal :=
   Functor.LaxMonoidal.ofIso (DerivedCategory.quotientCompQhIso _)
 

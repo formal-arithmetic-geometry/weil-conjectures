@@ -30,7 +30,7 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
-noncomputable local instance (X : Scheme.{uX}) :
+noncomputable local instance DerivedTensorPreservesQCoh_monoidalCategory (X : Scheme.{uX}) :
     MonoidalCategory (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 

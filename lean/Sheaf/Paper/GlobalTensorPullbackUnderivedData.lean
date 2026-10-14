@@ -24,17 +24,17 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable (X : Scheme.{u})
   [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-local instance : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+local instance GlobalTensorPullbackUnderivedData_commRing : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
   inferInstanceAs (CommRing Γ(X, ⊤))
-local instance : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackUnderivedData_monoidalCategory : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.toRingedSpace.sheaf
-local instance : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackUnderivedData_symmetricCategory : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
-local instance : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackUnderivedData_hasColimitsOfSize : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   hasColimitsOfSizeShrink.{0, 0, u} _
-local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackUnderivedData_monoidalPreadditive : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
-local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance GlobalTensorPullbackUnderivedData_monoidalClosed : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- Underived global pullback data and its tensor-counit normalization.
 Source: Stacks Tags 008A, 008Y, 0FKU (blueprint: lem-sc-global-tensor-pullback-underived-data).

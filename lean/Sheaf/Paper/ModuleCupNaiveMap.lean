@@ -34,20 +34,20 @@ noncomputable section
 
 variable (X : Scheme.{u})
 
-local instance : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
+local instance ModuleCupNaiveMap_commRing : CommRing ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) :=
   inferInstanceAs (CommRing Γ(X, ⊤))
 
-local instance : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance ModuleCupNaiveMap_monoidalCategory : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.toRingedSpace.sheaf
-local instance : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance ModuleCupNaiveMap_symmetricCategory : SymmetricCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.symmetricCategory X.toRingedSpace.sheaf
 
-local instance : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance ModuleCupNaiveMap_hasColimitsOfSize : HasColimitsOfSize.{0, 0} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   hasColimitsOfSizeShrink.{0, 0, u} _
 
-local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance ModuleCupNaiveMap_monoidalPreadditive : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
-local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+local instance ModuleCupNaiveMap_monoidalClosed : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- Tensor sections, as a morphism of global-section modules.
 Source: Stacks, Tag 0FKU (blueprint: lem-sc-module-cup-naive-map-chain). -/

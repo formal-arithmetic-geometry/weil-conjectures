@@ -27,7 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open Modules
 attribute [local instance] Sheaf.monoidalCategory
-local instance (k : Type u) [Field k] (X : Scheme.{u}) : HasExt.{u + 1} (KSheaf X k) :=
+local instance ScalarAbelianExtFactorization_hasExt (k : Type u) [Field k] (X : Scheme.{u}) : HasExt.{u + 1} (KSheaf X k) :=
   HasExt.standard _
 /-- The exact functor forgetting the k-action on scalar sheaves.
 Source: Stacks Project, Tag 03FD.

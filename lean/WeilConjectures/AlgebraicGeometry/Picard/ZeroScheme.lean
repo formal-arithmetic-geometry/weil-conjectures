@@ -106,7 +106,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- A morphism smooth of relative dimension `1` is smooth, hence flat and locally of finite
 presentation, as `AlgebraicGeometry.picardFunctorInvertibleDirectImage` requires. -/
-local instance {Y Z : Scheme.{u}} (f : Y ⟶ Z) [SmoothOfRelativeDimension 1 f] : Smooth f :=
+local instance ZeroScheme_smoothOfSmoothOfRelativeDimension {Y Z : Scheme.{u}} (f : Y ⟶ Z) [SmoothOfRelativeDimension 1 f] : Smooth f :=
   SmoothOfRelativeDimension.smooth 1 f
 
 /-- For a class `ℒ ∈ Pic(X_T)`, the adjunction morphism `f_T^* f_{T,*} ℒ ⟶ ℒ`, where

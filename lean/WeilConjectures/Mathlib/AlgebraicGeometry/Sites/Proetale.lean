@@ -174,13 +174,13 @@ variable (X : Scheme.{u})
 
 /-! ### The pro-étale precoverage -/
 
-instance : (precoverage X).HasIsos := by
+instance Proetale_hasIsos : (precoverage X).HasIsos := by
   dsimp [precoverage]; infer_instance
 
-instance : (precoverage X).IsStableUnderComposition := by
+instance Proetale_isStableUnderComposition : (precoverage X).IsStableUnderComposition := by
   dsimp [precoverage]; infer_instance
 
-instance : (precoverage X).IsStableUnderBaseChange := by
+instance Proetale_isStableUnderBaseChange : (precoverage X).IsStableUnderBaseChange := by
   dsimp [precoverage]; infer_instance
 
 /-- `X.ProEt` is locally `u + 1`-small. Stated directly so that instance search does not go
