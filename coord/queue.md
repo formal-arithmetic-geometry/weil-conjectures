@@ -1,6 +1,6 @@
 # Work queue
 
-71 items; claim with `tools/claim.py next <group> [--stage N]`.
+72 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (71)
+## Stage 3: modules to prove (72)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -74,8 +74,9 @@
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.MayerVietorisImageCompositionLocalization` | 35 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalization` | 35 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization` | 36 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.MayerVietorisCompositionRightNormalization` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels` | 39 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.RingTheory.DvrEtaleUnitRootDiagram` | 42 | 1 | proof |
