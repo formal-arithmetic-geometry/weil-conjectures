@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-cbc-proetale-stalk-conservative",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Detecting isomorphisms on the pro-etale site",
- "statement": "Let $\\Lambda$ be a finite discrete ring and let $T$ be a scheme.\n\n1. *locality for covering families.* A morphism\n$F\\to G$ of complexes of $\\Lambda$-module sheaves on\n$T_{\\Proet}$ is an isomorphism if and only if its inverse image\nalong every member of one\npro-etale covering family\nof $T$ is an isomorphism. Equivalently: a complex on\n$T_{\\Proet}$ is acyclic if and only if its cohomology sheaves\nvanish, and a sheaf on $T_{\\Proet}$ vanishes if and only if it\nvanishes after inverse image along the members of a covering family.\n1. *detection on the affine ind-etale basis.* For affine\n$T$, a sheaf on $T_{\\Proet}$ vanishes if and only if its sections\non every object of the affine ind-etale basis\n[def-weil-pbc-ind-etale-basis] vanish; consequently a morphism\nof complexes on $T_{\\Proet}$ is an isomorphism if and only if it\ninduces a quasi-isomorphism of sections on every object of that\nbasis. For general $T$ the same holds with the bases of the\nmembers of an affine open cover.\n1. *complexes of etale origin.* Let\n$\\nu_T:T_{\\Proet}\\to T_{\\Et}$ be the comparison morphism of\n[def-weil-pbc-site-comparison-morphism] and let\n$F'\\to G'$ be a morphism of bounded-below complexes of etale\n$\\Lambda$-sheaves. Then $\\nu_T^*F'\\to\\nu_T^*G'$ is an\nisomorphism if and only if it is an isomorphism at every geometric\npoint of $T$. In particular the geometric-point stalks are\njointly conservative on the bounded constructible objects\n$\\Dbc(T_{\\Proet},\\Lambda)$, which are of etale origin by\n[def-weil-pbc-proetale-modules].\n1. *warning.* None of this extends to arbitrary pro-etale\nsheaves: the collection of geometric-point stalks is *not*\nconservative on $\\Sh(T_{\\Proet})$. For\n$T=\\operatorname{Spec}k$ with $k$ algebraically closed and a\nnonzero abelian group $A$, the sheafified quotient of functions\nmodulo locally constant functions, $\\mathcal F(U)=\\{\\text{functions } U\\to A\\}/\\{\\text{locally constant functions}\\}$, has\n$\\mathcal F(T)=0$ while $\\mathcal F\\neq0$, the site\n$T_{\\Proet}$ containing affine objects with infinitely many points\n(Stacks Project, Pro-étale Cohomology, Section 61.18,\n[Tag 0991](https://stacks.math.columbia.edu/tag/0991)).",
+ "statement": "Let $\\Lambda$ be a finite discrete ring and $T$ a scheme. Use left module sheaves and the derived categories of [def-weil-pbc-proetale-modules]. An isomorphism of complexes below means an isomorphism in the derived category, not a degreewise isomorphism of the chosen complexes.\n\n1. **Locality for covering families.** A morphism $u:F\\to G$ in $D(T_{\\mathrm{proet}},\\Lambda)$ is an isomorphism if and only if its inverse image along every member of one pro-etale covering family $\\{U_i\\to T\\}$ [def-weil-pbc-proetale-site] is an isomorphism. A complex is acyclic if and only if every cohomology sheaf vanishes; a sheaf vanishes if and only if its restrictions along the members of such a covering family vanish.\n2. **Detection on the affine ind-etale basis.** If $T$ is affine, a sheaf $\\mathcal H$ vanishes if and only if $\\mathcal H(W)=0$ for every $W$ in the affine ind-etale basis [def-weil-pbc-ind-etale-basis]. Consequently $u$ is an isomorphism if and only if, for every integer $n$ and every such $W$, the map of sections of its cohomology sheaves $\\mathcal H^n(u)(W):\\mathcal H^n(F)(W)\\to\\mathcal H^n(G)(W)$ is an isomorphism. For general $T$ use these bases over an affine open cover. No assertion is made that ordinary evaluation of an arbitrary complex on these basis objects preserves quasi-isomorphisms.\n3. **Complexes of etale origin.** Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism], and let $v:F'\\to G'$ be a morphism in $D^+(T_{\\mathrm{et}},\\Lambda)$. Then $\\nu_T^*v$ is an isomorphism if and only if for every geometric point $\\bar t$ and every $n\\in\\mathbf Z$ its map on geometric stalks of cohomology sheaves is an isomorphism. Pro-etale geometric stalks are those of [def-weil-proetale-geometric-stalk]. In particular they are jointly conservative on all morphisms between the bounded constructible objects $\\Dbc(T_{\\mathrm{proet}},\\Lambda)$, defined as objects of etale origin in [def-weil-pbc-proetale-modules].\n4. **Warning about geometric points.** In general, geometric-point stalks are not conservative on all abelian sheaves on $T_{\\mathrm{proet}}$, although the covering-family and basis criteria above remain valid there. For $T=\\operatorname{Spec}k$ with $k$ algebraically closed and a nonzero abelian group $A$, let $\\mathcal Q_A$ be the sheafified quotient of the sheaf of all set maps $|U|\\to A$ by the constant abelian sheaf. On affine objects it has values $\\mathcal Q_A(U)=\\operatorname{Map}(|U|,A)/\\operatorname{LC}(|U|,A)$, where locally constant means constant on an open neighbourhood of each point. Then $\\mathcal Q_A(T)=0$ and all its geometric-point stalks are zero, but $\\mathcal Q_A\\ne0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comparison/lem-cbc-proetale-stalk-conservative.md",
   "place": "node lem-cbc-proetale-stalk-conservative, order 1650",
@@ -19,60 +19,181 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-site",
   "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-proetale-modules"
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
  ],
  "proof": [
   {
-   "text": "*Step 1 (clause (1)).* A morphism of complexes is an\nisomorphism if and only if its cone is acyclic, and a complex is\nacyclic if and only if all its cohomology sheaves vanish: this is the\ndefinition of the derived category of\n[def-weil-pbc-proetale-modules] as the localization at the\nquasi-isomorphisms. Vanishing of a sheaf is a local condition for the\ntopology. Indeed, if $\\mathcal H$ is a sheaf on $T_{\\Proet}$ whose\ninverse images along the members of a covering family vanish, then for\nevery object $V$ the sheaf axiom presents $\\mathcal H(V)$ as the\nequalizer of two maps between products of groups\n$\\mathcal H(V\\times_TU_i)$ that are zero, the family being a\ncovering; hence $\\mathcal H(V)=0$, and the converse is functoriality\nof inverse image. Applying this to the cohomology sheaves of the cone\ngives the equivalence of the first sentence.",
+   "text": "For a covering $\\{U_i\\to T\\}$ and any object $V\\to T$, the family $\\{V\\times_TU_i\\to V\\}$ is covering. The slice-site identification and restriction formula identify $\\mathcal H|_{U_i}(V\\times_TU_i\\to U_i)$ with $\\mathcal H(V\\times_TU_i)$. If each restriction is zero, these groups vanish, and the sheaf equalizer axiom makes $\\mathcal H(V)$ a subgroup of their zero product. Thus $\\mathcal H=0$. Conversely restriction of the zero sheaf is zero. This is valid also for an empty covering of the empty scheme.",
    "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0991, section-points, contrast with detection by geometric points; sheaf equalizer argument for covering families"
+   }
+  },
+  {
+   "text": "Restriction to $U_i$ is exact by the cited restriction theorem. For modules over a possibly noncommutative constant ring, apply its underlying abelian restriction: kernels inherit the scalar action and cokernels carry the induced action, so their underlying abelian sheaves are the abelian kernels and cokernels. Hence restriction preserves $\\mathcal H^n=\\ker d^n/\\operatorname{im}d^{n-1}$. Apply the unbounded derived isomorphism criterion to $u$ and to each restricted $u$. Each $\\mathcal H^n(u)$ is invertible precisely when its kernel and cokernel vanish; exact restriction preserves these two sheaves, and step 1 detects their vanishing. This proves clause (1). A complex is acyclic precisely when all its cohomology sheaves vanish, by the quasi-isomorphism definition.",
+   "uses": [
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-pbc-site-restriction-injectives",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "def-weil-pbc-proetale-modules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0991, section-points; blueprint Proof Step 1, corrected derived-category interpretation"
+   }
   },
   {
-   "text": "*Step 2 (clause (2)).* This is\n[lem-weil-pbc-ind-etale-basis]: restriction to the affine\nind-etale basis of [def-weil-pbc-ind-etale-basis] determines a\nsheaf and its morphisms uniquely and detects isomorphisms of sheaves.\nRestriction of a complex is exact and degreewise, so a morphism of\ncomplexes is a quasi-isomorphism if and only if its restriction is\none. A general $T$ is covered by its affine opens, and clause (1)\nreduces the statement to the affine case.",
+   "text": "For affine $T$, the cited basis theorem says restriction determines sheaves and detects their isomorphisms. Apply it to $0\\to\\mathcal H$ to obtain the asserted zero-sheaf criterion. A natural transformation between sheaves on the basis is invertible if and only if its component maps are invertible: the component inverses are natural by composing the original naturality equations with them. Apply this to each $\\mathcal H^n(u)$, then the unbounded derived isomorphism criterion. For a general $T$, first restrict to every member of an affine open cover and apply clause (1), then apply the affine test on each member. This uses sections of cohomology sheaves, not cohomology of ordinary section complexes.",
    "uses": [
     "lem-weil-pbc-ind-etale-basis",
-    "def-weil-pbc-ind-etale-basis"
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comparison/lem-cbc-proetale-stalk-conservative.md",
+    "place": "Proof Step 2, replacing the false ordinary-evaluation inference"
+   }
   },
   {
-   "text": "*Step 3 (clause (3)).* Let $\\mathcal G'$ be a bounded-below\ncomplex of etale $\\Lambda$-sheaves. The etale neighbourhoods of a\ngeometric point $\\bar t$ of $T$ are cofinal among its weakly etale\nneighbourhoods, by [def-weil-pbc-proetale-site] and\n[def-weil-pbc-site-comparison-morphism], the inverse image of the\ncomparison morphism being computed on the common objects; hence\n$(\\nu_T^*\\mathcal G')_{\\bar t}=\\mathcal G'_{\\bar t}$, naturally in\n$\\mathcal G'$. If $\\nu_T^*F'\\to\\nu_T^*G'$ is an isomorphism at\nevery geometric point, then $F'\\to G'$ is an isomorphism at every\ngeometric point, hence an isomorphism by\n[lemma-weil-pbc-geometric-stalk-conservative]; applying the functor\n$\\nu_T^*$ exhibits $\\nu_T^*F'\\to\\nu_T^*G'$ as an isomorphism. The\nconverse follows from functoriality. For bounded-below complexes one\napplies this degreewise to the cohomology sheaves, inverse image being\nexact and the identification of stalks being natural. The final\nassertion of the clause is the definition: the bounded constructible\nobjects of [def-weil-pbc-proetale-modules] are by definition the\npullbacks of the bounded constructible etale objects. Full\nfaithfulness of $\\nu_T^*$ on bounded-below complexes,\n[thm-weil-pbc-site-comparison], is not needed for this argument,\nbut it shows that the etale model of a morphism of etale origin is\nunique.",
+   "text": "The comparison morphism has finite-limit-preserving inverse image on sets and the specified adjunction on fixed-$\\Lambda$ module sheaves. Lift the finite limits sectionwise to abelian groups and scalar actions; they are limits of the underlying sheaves. Its left adjoint preserves finite colimits by the cited adjoint-colimit theorem. Thus $\\nu_T^*$ is exact on left module sheaves for finite rings, without a commutativity assumption. Preservation of kernels and cokernels gives naturally $\\mathcal H^n(\\nu_T^*K)\\cong\\nu_T^*\\mathcal H^n(K)$. The new comparison-stalk lemma then identifies the stalk map of $\\mathcal H^n(\\nu_T^*v)$ with that of $\\mathcal H^n(v)$. Exactness of the pro-etale stalk functor is given by the classical-stalk lemma, so this is also the derived stalk criterion, independent of representatives. The canonical comparisons commute with $v$ by the naturality stated in the comparison-stalk lemma. No cofinality of etale neighbourhoods inside weakly etale neighbourhoods is assumed.",
    "uses": [
-    "def-weil-pbc-proetale-site",
     "def-weil-pbc-site-comparison-morphism",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-proetale-modules",
-    "thm-weil-pbc-site-comparison"
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-cbc-proetale-classical-stalk",
+    "lem-cbc-proetale-comparison-stalk"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; Tag 0993, lemma-classical-point; corrected blueprint Proof Step 3"
+   }
   },
   {
-   "text": "*Step 4 (clause (4)).* The replacement for the false general\nstatement is the displayed reference. Concretely, on\n$T=\\operatorname{Spec}k$ the single geometric point of $T$ is the\nonly point of the small pro-etale site that comes from a strictly\nhenselian local ring, while the site contains the affine objects\n$U=\\operatorname{Spec}(\\operatorname{colim}\\operatorname{Map}(E_n,k))$\nfor $E=\\varprojlim E_n$ an inverse limit of finite sets with\nsurjective transition maps; such a $U$ is ind-Zariski, hence weakly\netale, over $k$ and has infinitely many points, so the sheaf\n$\\mathcal F$ of the statement has a nonzero value there while\n$\\mathcal F(T)=0$. No clause of this lemma asserts conservativity\nof geometric-point stalks beyond clause (3), and clause (3) confines\nthe failure to complexes that are not of etale origin.",
-   "uses": [],
-   "elementary": null
+   "text": "If all stalk maps of $\\nu_T^*v$ are invertible, step 4 says every geometric stalk of every $\\mathcal H^n(v)$ is invertible. The etale sheaf conservativity theorem, applied to underlying abelian sheaves, makes $\\mathcal H^n(v)$ invertible; its inverse is automatically $\\Lambda$-linear by the naturality of scalar actions. The unbounded derived criterion then makes $v$ invertible, and its inverse is sent to an inverse of $\\nu_T^*v$. The reverse implication follows by applying the exact stalk functors to an isomorphism. For arbitrary morphisms $a:K\\to L$ in $\\Dbc$, choose isomorphisms $K\\cong\\nu_T^*K'$ and $L\\cong\\nu_T^*L'$ from its definition. Fullness of the bounded-below comparison functor supplies a morphism $v:K'\\to L'$ whose image is the conjugate of $a$. The preceding argument applies to $v$; conjugating by the chosen isomorphisms proves the assertion for $a$. Here full faithfulness is needed for lifting arbitrary morphisms of the essential image, not just objects.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-proetale-modules",
+    "lem-cbc-proetale-classical-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0991, section-points; blueprint Proof Step 3, including arbitrary morphisms between constructible objects"
+   }
+  },
+  {
+   "text": "For $T=\\operatorname{Spec}k$ with $k$ algebraically closed, define $\\mathcal Q_A$ by the functions-quotient lemma. Its affine formula applies because the only point of $T$ is closed with separably closed residue field. At $U=T$ every function is constant, so $\\mathcal Q_A(T)=0$. The strict localization at any geometric point of $T$ is $T$ itself: for every affine pointed etale neighbourhood, the cited lift-factorization theorem factors the geometric lift through $\\operatorname{Spec}k$. The factorization is unique because affine scheme maps are ring maps and the fixed embedding $k\\to\\Omega$ is injective. Thus the identity pointed neighbourhood is initial in the affine pointed neighbourhood category. Its ring is terminal in the opposite ring diagram, so the colimit ring in the strict-localization definition is $k$. The classical-stalk lemma gives $\\mathcal Q_{A,\\bar t}=\\mathcal Q_A(T)=0$ for every geometric point, including extensions of $k$.",
+   "uses": [
+    "lem-cbc-proetale-functions-quotient-sections",
+    "lem-cbc-proetale-classical-stalk",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-exc-etale-lift-separably-closed-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0991, section-points, counterexample; Tag 0F6D, example-functions-mod-locally-constant-functions"
+   }
+  },
+  {
+   "text": "Take $E=\\mathbf N\\cup\\{\\infty\\}$, with each integer isolated and neighbourhoods of $\\infty$ containing all but finitely many integers. This space is compact: an open-cover member containing $\\infty$ leaves only finitely many integers to cover. Two distinct integers are separated by their singleton opens; an integer $r$ and $\\infty$ are separated by $\\{r\\}$ and $E\\setminus\\{r\\}$, so the space is Hausdorff. Each integer singleton is closed as well as open, and each cofinite tail containing $\\infty$ is open with a finite open complement. These singletons and tails form a clopen basis and separate every two points, so every connected subset has at most one point. Let $E_n=\\{0,\\ldots,n-1,\\infty\\}$, and truncate later integers to $\\infty$. The truncation maps identify $E$ with $\\varprojlim E_n$: a compatible tuple either stays $\\infty$ forever or eventually selects one fixed integer; the inverse-limit cylinder topology is precisely the topology just described. Put $B=\\varinjlim\\operatorname{Map}(E_n,k)$. Every stage is a finite product of copies of $k$, hence this is an ind-Zariski, in particular ind-etale, $k$-algebra. Ind-etale stability makes $U=\\operatorname{Spec}B\\to T$ weakly etale, so $U$ is an affine pro-etale object. Identify $B$ with $\\operatorname{LC}(E,k)$: every locally constant function factors through a finite stage by the cited factorization theorem; two stage functions become equal on a common longer stage whenever their pullbacks to $E$ agree, because projections $E\\to E_n$ are surjective. The cited prime-spectrum theorem identifies $|U|$ with $E\\times\\operatorname{Spec}k=E$. Choose $a\\in A$, $a\\ne0$, and the function equal to $a$ at $\\infty$ and zero at every integer. Every neighbourhood of $\\infty$ contains integers, so the function is not locally constant. Its class is nonzero in the quotient formula from step 6. Thus $\\mathcal Q_A(U)\\ne0$, proving clause (4): $0\\to\\mathcal Q_A$ is a non-isomorphism with isomorphic geometric stalks.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-profinite-limit-function-factorization",
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "lem-cbc-proetale-functions-quotient-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0991, section-points, counterexample with inverse limits of finite sets; Tag 0F6D, example-functions-mod-locally-constant-functions"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "def-weil-pbc-proetale-modules",
   "lem-weil-pbc-ind-etale-basis",
   "def-weil-pbc-ind-etale-basis",
-  "def-weil-pbc-proetale-site",
   "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-cbc-proetale-classical-stalk",
+  "lem-cbc-proetale-comparison-stalk",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-cbc-proetale-functions-quotient-sections",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-exc-etale-lift-separably-closed-factorization",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-locally-constant-prime-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-comparison/lem-cbc-proetale-stalk-conservative.md",
-  "place": "## Proof"
+  "place": "Proof Steps 1-4, repaired using Stacks proetale.tex Tags 0991, 0993, 0GLZ and 0F6D"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Detect isomorphisms in the derived category of pro-etale sheaves by covering families and by the cohomology sheaves on an affine ind-etale basis",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.FormallyEtale.iff_of_equiv, Algebra.FormallyEtale.of_equiv, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, Algebra.Etale.formallyEtale, RingHom.Etale.respectsIso, Algebra.formallyEtale_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state this pro-etale sheaf assertion; structural scheme stalks, etale points, or condensed locally constant constructions do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state this pro-etale sheaf assertion; structural scheme stalks, etale points, or condensed locally constant constructions do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*stalk|stalk.*proetale|isIso_iff.*homology",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state this pro-etale sheaf assertion; structural scheme stalks, etale points, or condensed locally constant constructions do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pro-etale sheaf isomorphism detection on covers and affine basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic complex of sheaves need not have acyclic ordinary sections on basis objects; derived isomorphisms are detected by cohomology sheaf restrictions",
+   "results": "8 hits: HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyCategory.mem_subcategoryAcyclic_iff, CochainComplex.isKInjective_iff_rightOrthogonal, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.IsKProjective",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state this pro-etale sheaf assertion; structural scheme stalks, etale points, or condensed locally constant constructions do not specialize to it in one line"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -100,5 +221,79 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proetale-stalk-conservative",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: clarified derived isomorphisms and replaced the false ordinary section-complex criterion on the ind-etale basis by the criterion on sections of cohomology sheaves. Preserved cover and basis detection and etale-origin conservativity. Corrected the warning to concern geometric points only. Supplied precise source-backed classical-stalk, comparison-stalk and affine quotient inputs; used existing generic tools and explicitly lifted morphisms of the constructible essential image by full faithfulness. Second reading also corrects the universal wording of clause (4) to an in-general warning: the empty scheme has only the zero abelian sheaf.",
+  "blueprint": "Proof Step 1 is steps 1-2; Step 2 is step 3 with the corrected cohomology-sheaf test; Step 3 is steps 4-5 with stalk comparison replacing the unsupported cofinality claim and full faithfulness for arbitrary Dbc morphisms; Step 4 is steps 6-7 with the nonzero function and geometric stalk computation written out.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Generic tool for Pro-etale localization preserves injectives; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-injectives",
+    "why": "Generic tool for Extension by zero and restriction on a localized site; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic tool for Isomorphisms in the unbounded derived category detected by cohomology; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Generic tool for The ind-etale subsite is a basis; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic tool for Left adjoints preserve colimits; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool for Conservativity of geometric stalks; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic tool for Bounded-below site comparison; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-exc-etale-lift-separably-closed-factorization",
+    "why": "Generic tool for Etale lifts descend along extensions of a separably closed field; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic tool for Stability and diagonal of an ind-etale algebra; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-limit-function-factorization",
+    "why": "Generic tool for Locally constant functions factor through a cofiltered profinite stage; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-prime-spectrum",
+    "why": "Generic tool for Prime spectrum of a locally constant function ring; used in the indicated detection or counterexample step, not to replace the comparison unit route. No node of this unit supplies this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-weil-pbc-site-comparison",
+  "lem-exc-etale-lift-separably-closed-factorization",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-locally-constant-prime-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-fdd348e78",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-fdd348e78 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all seven steps and three new nodes against Stacks 0991, 0993, 0GLZ and 0F6D. Verified edge cases, cited statements, nonredundancy and coefficient scope; no new circular dependency found. Repaired required metadata in all three new-node JSON files. Mathematical statements unchanged. Detailed checks and accepted tool uses are in review.md.; 3 file(s) fixed by the reviewer"
+ }
 }
