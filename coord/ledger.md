@@ -14670,3 +14670,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:06 L: returned deliver/V2/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (reviewer RETURN: (reviewer X-34130, head 341308594) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
 
 - 14:08 L: batch 20261014T054718 dependency take-out
+- 06:09 L: returned deliver/M2/Sheaf.Paper.CechFlasqueComparisonClasses (reviewer RETURN: (reviewer X-5ea9d, head 5ea9d76e7) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CechFlasqueCom)
