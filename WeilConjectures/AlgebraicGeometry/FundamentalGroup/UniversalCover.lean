@@ -69,6 +69,8 @@ structure UniversalCovers where
   pt_proj (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : pt y ≫ proj y = y
   connectedSpace (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : ConnectedSpace (cover y)
   surjective_proj (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Function.Surjective (proj y).base
+  /-- The projection `Ỹ_y ⟶ Y` is quasi-compact (it is affine). -/
+  quasiCompact_proj (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : QuasiCompact (proj y)
   /-- Every finite étale `Y`-scheme splits over `Ỹ_y`: its `Y`-morphisms from `Ỹ_y` are the
   points of the fibre at `y`, through `ỹ`. -/
   bijective_fiber (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (P : Y.FiniteEtale) :
