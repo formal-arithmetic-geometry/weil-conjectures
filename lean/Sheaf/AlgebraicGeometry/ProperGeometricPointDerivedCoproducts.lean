@@ -7,10 +7,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCopowers
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+import Sheaf.CategoryTheory.CoproductsOfCopowers
 
 /-! # Coproducts for proper direct image over a geometric point
 
@@ -51,6 +50,14 @@ theorem proper_geometricPoint_pushforward_preservesCoproducts
     (p : X ⟶ Spec (.of k)) [IsProper p] :
     ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)
       (R((p)_*[ModuleCat.{u + 1} Λ])) := by
-  sorry
+  intro I
+  let : HasCoproducts.{u + 1}
+      (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+    derived_hasCoproducts
+  let : HasCoproducts.{u + 1}
+      (DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+    derived_hasCoproducts
+  exact preservesCoproducts_of_preservesCopowers
+    (R((p)_*[ModuleCat.{u + 1} Λ])) I (proper_geometricPoint_preservesCopowers Λ p I)
 
 end AlgebraicGeometry.Etale

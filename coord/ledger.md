@@ -14946,3 +14946,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 04:58 L: batch 20261014T205621 dependency take-out
 - 21:06 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality (stage 3; reviewer PASS; first push; landing 20261014T210609-L-2851656 (interface); batch 20261014T210607; modules 4; new nodes 4; change records: coord/changes/PicardDerivedFibreNaturality.md)
+- 21:08 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCoproducts (stage 3; reviewer PASS; first push; landing 20261014T210832-L-2878482 (interface); batch 20261014T210831; modules 2; new nodes 1)
