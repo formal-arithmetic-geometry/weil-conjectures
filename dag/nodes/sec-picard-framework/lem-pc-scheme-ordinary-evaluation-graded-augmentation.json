@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-scheme-ordinary-evaluation-graded-augmentation",
+ "kind": "statement",
+ "title": "Degreewise ordinary evaluation and coefficient augmentation",
+ "statement": "For a scheme Y and module-sheaf cochain complexes P,N, let I be the fixed K-injective resolution of N. Define E_n:Tot(Hom(P,N) tensor P)^n to N^n by coproduct descent: on the (p,q) summand, p+q=n, it is symmetry followed by inverse tensor-Hom adjunction applied to the fixed Hom projection Hom(P,N)^p to Hom(P^q,N^n). For every morphism g:N to I and every integer n, the degree-n component of schemeTensorHomUncurry of Hom(P,g) equals E_n followed by g^n. This is an equality of explicitly defined graded maps; it asserts neither existence nor differential compatibility of an evaluation chain map.",
+ "stmt_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2"
+ },
+ "proof": [
+  {
+   "text": "Use coproduct extensionality and the summand formula for schemeTensorHomUncurry. For p+q=n, rewrite its summand as symmetry followed by inverse tensor-Hom adjunction of Hom(P,g)^p followed by the projection to Hom(P^q,I^n), where I is the fixed resolution of N.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient naturality formula for the fixed Hom projections, with identity on P, replaces the projected Hom(P,g) map by the projection to Hom(P^q,N^n) followed by homObjMap(id,g^n). The small homComplex_projections_exists API selects the same projection witness as homComplex_exists, so these component descriptions agree.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the tensor-Hom equivalence in the coefficient moves g^n outside inverse adjunction. Compose with symmetry and use associativity and the mapBifunctorDesc summand equation. This gives equality on every summand and hence in total degree n. No differential equation or monicity is needed.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM and 08DQ; ordinary evaluation localization proof step 2",
+  "description": "The coefficient compatibility part of the ordinary evaluation calculation, isolated from chain-map assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation from internal Hom complex tensor its argument to coefficient complex naturality",
+   "results": "Hits: CategoryTheory.ihom.ev_naturality, ModuleCat.ihom_ev_app, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.ihom.coev_naturality, CategoryTheory.ihom.coev_naturality_assoc, Rep.ihom_ev_app_hom, ModuleCat.monoidalClosed_uncurry, ModuleCat.ihom_coev_app.  No degreewise internal-Hom total-tensor evaluation equality found.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.uncurry_natural_right",
+   "results": "loogle: unknown identifier 'MonoidalClosed.uncurry_natural_right' No degreewise internal-Hom total-tensor evaluation equality found.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*evaluation|evaluation.*homComplex",
+   "results": " No degreewise internal-Hom total-tensor evaluation equality found.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degreewise evaluation from sheaf internal Hom complex tensor its argument commutes with coefficient morphisms",
+   "results": "service unavailable: Internal Server Error; no absence conclusion inferred. LeanFinder/Loogle and source grep were used independently.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationChainMapExists",
+  "date": "2026-10-14",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-scheme-ordinary-evaluation-chain-map-exists",
+   "place": "Coefficient compatibility in proof step 2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationGradedAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationGradedAugmentation.lean",
+  "declaration": "AlgebraicGeometry.schemeOrdinaryEvaluationGraded_augmentation",
+  "statement": "theorem schemeOrdinaryEvaluationGraded_augmentation (Y : Scheme.{u})\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (g : N ⟶ (schemeHomKInjectiveResolution Y).obj N) (n : ℤ) :\n    (schemeTensorHomUncurry Y (homComplex (R := Y.sheaf) P N) P N\n      (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map g)).f n =\n        schemeOrdinaryEvaluationGraded Y P N n ≫ g.f n",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261014T033114-L-607174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261014T033114-L-607174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
