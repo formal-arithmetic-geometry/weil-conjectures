@@ -32,9 +32,100 @@
   "def-pc-fibre-product",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The limit morphism $f$ is étale and a monomorphism, since it is an open immersion. These are properties of the entire morphism, with no affineness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EUU, lemma-descend-open-immersion; open-immersion étaleness and monicity"
+   }
+  },
+  {
+   "text": "Check the locally finite type hypothesis needed for monomorphism descent. For every affine open $V\\subseteq Y_{i_0}$, the affine basis supplies an affine cover $U_\\alpha$ of $f_{i_0}^{-1}(V)$. The affine-pair finite-presentation lemma gives $\\mathcal O_X(U_\\alpha)=\\mathcal O_Y(V)[t_1,\\ldots,t_n]/(g_1,\\ldots,g_m)$ as algebras. The images of the finitely many $t_r$ generate this algebra. Thus this cover satisfies exactly the definition of locally finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize; finite presentation implies finite generation"
+   }
+  },
+  {
+   "text": "Apply étale descent to the original $S_{i_0}$-morphism: $S_{i_0},X_{i_0},Y_{i_0}$ are qcqs, transition morphisms are affine, the limit map is étale by step 1, and the original map is locally of finite presentation by hypothesis. Obtain $a\\geq i_0$ with $f_a$ étale. Independently apply monomorphism descent to the same original morphism, using step 2 for locally finite type and step 1 for monicity at the limit. Obtain $b\\geq i_0$ with $f_b$ monic.",
+   "uses": [
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-descend-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 07RP (lemma-descend-etale) and 07RQ (lemma-descend-monomorphism), in Situation 081D"
+   }
+  },
+  {
+   "text": "Choose $i\\geq a,b$ by directedness. For $c=a$ or $c=b$, write $s_c:S_i\\to S_c$ for the transition. The fibre-product universal property identifies $X_i$ with $X_c\\times_{Y_c}Y_i$: on maps from any scheme $T$, send the compatible pair $(x_0,t)$, with $x_0:T\\to X_{i_0}$ and $t:T\\to S_i$, to $((x_0,s_ct),(f_{i_0}x_0,t))$. Conversely a pair $((x_0,t_c),(y_0,t))$ compatible over $Y_c$ satisfies $y_0=f_{i_0}x_0$ and $t_c=s_ct$; send it to $(x_0,t)$. These constructions are mutually inverse by uniqueness in the universal property and identify $f_i$ with the projection to $Y_i$. For $c=a$, étale base-change stability therefore makes $f_i$ étale. For $c=b$, if $u,v:T\\to X_b\\times_{Y_b}Y_i$ have the same projection to $Y_i$, their projections to $X_b$ become equal after composition with $f_b$. Monicity of $f_b$ makes those projections equal, and uniqueness in the fibre-product universal property gives $u=v$. Hence $f_i$ is also monic.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO, lemma-base-change-etale; elementary pullback cancellation and associativity"
+   }
+  },
+  {
+   "text": "For every field $K$ and maps $u,v:\\operatorname{Spec}K\\to X_i$, the equality $f_i u=f_i v$ implies $u=v$ by monicity. Thus $f_i$ is injective on $K$-points for every field. The four-way equivalence in the radicial definition node makes $f_i$ radicial. Since it is also étale, the radicial–étale open-immersion theorem makes $f_i$ an open immersion.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "lem-weil-pbc-radicial-etale-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G, theorem-etale-radicial-open; Morphisms Tag 01S4, lemma-universally-injective"
+   }
+  },
+  {
+   "text": "Fix $j\\geq i$ and write $s_i:S_j\\to S_i$ for the transition. The identification $X_j\\cong X_i\\times_{Y_i}Y_j$ sends a compatible pair $(x_0,t)$ of maps from $T$ to $X_{i_0}$ and $S_j$ to $((x_0,s_it),(f_{i_0}x_0,t))$. A compatible pair $((x_0,t_i),(y_0,t))$ in the latter product satisfies $y_0=f_{i_0}x_0$ and $t_i=s_it$, and its inverse image is $(x_0,t)$. The universal property makes these inverse morphisms of schemes, under which $f_j$ is the projection to $Y_j$. Stability of open immersions under base change, applied to the open immersion $f_i$ of step 5, makes $f_j$ an open immersion. Since $j$ was arbitrary, this proves the all-later clause.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EUU, lemma-descend-open-immersion; persistence under base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-monomorphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-pc-fibre-product",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-radicial-etale-open",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EUU, lemma-descend-open-immersion: alternative below-node proof using étale descent 07RP, monomorphism descent 07RQ and recognition 025G instead of image plus isomorphism descent."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,15 +168,58 @@
    "results": "{\"t\": \"2026-10-14T08:13:52Z\", \"tool\": \"leanfinder\", \"query\": \"An open embedding of schemes over an inverse limit of affine transitions is an open embedding at some stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding\", \"AlgebraicGeometry.Scheme.Cover.isOpenEmbedding_fromGlued\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom\", \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"AlgebraicGeometry.exists_map_eq_top\", \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\"], \"digest\": \"b434536c6d638f0d\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion descends to a finite stage of an inverse limit of qcqs schemes with affine transitions",
+   "results": "{\"t\": \"2026-10-14T08:35:06Z\", \"tool\": \"leanfinder\", \"query\": \"An open immersion descends to a finite stage of an inverse limit of qcqs schemes with affine transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.exists_map_eq_top\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\"], \"digest\": \"8b9fcd1f595db44e\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-14T08:35:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenImmersion\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit\"], \"digest\": \"b9537510d944205c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ii]sOpenImmersion|descend.*[Oo]penImmersion",
+   "results": "{\"t\": \"2026-10-14T08:35:27Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ii]sOpenImmersion|descend.*[Oo]penImmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"f8444ddb82a1e220\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion of schemes descends from an inverse limit to a finite stage",
+   "results": "{\"t\": \"2026-10-14T08:35:27Z\", \"tool\": \"leansearch\", \"query\": \"Open immersion of schemes descends from an inverse limit to a finite stage\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-good-curves-generic-diagram",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-descend-open-immersion-qcqs",
+  "worker": "stage1",
+  "summary": "Statement preserved. Reused existing descent nodes and recognition theorem; supplied finite-generation check, simultaneous-stage pullback cancellation, field-point radicial argument and all-later persistence. No new nodes.",
+  "blueprint": "Auxiliary open-immersion descent in the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper, expanded through 0GKX/0GK7; precise auxiliary source 0EUU. The unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-46afa08d2",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-46afa08d2 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full; no new nodes. Checked Stacks 0EUU/081D, 07RP/07RQ, affine-presentation and base-change sources, and 01S4/025G recognition. Hypotheses, pullback projections, edge cases, route, duplicates, cycles, and archived master coefficient categories were checked. No repairs needed; detailed findings are in review.md."
+ }
 }
