@@ -1,8 +1,7 @@
 module
 
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
-public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Order.Antisymmetrization
 
 @[expose] public section
@@ -13,11 +12,12 @@ namespace AlgebraicGeometry
 /-- The initial upper-tail chart projection is an isomorphism.
 Source: Stacks Project, Tag 01ZR. (blueprint: new-affine-chart-section-ring-presentations-iso).
 
-Proof: the representative of the initial antisymmetrized upper-tail index is the
-subtype `⟨j, le_rfl⟩`. Its transition morphism is therefore the identity of
-`Spec (R.obj j)`, by functoriality of `R.map` and `Scheme.Spec.map`. The
-pullback of an identity morphism is an isomorphism, and `pullback.snd` is the
-corresponding projection, so typeclass transport gives the asserted `IsIso`. -/
+Proof: the selected representative is equivalent in both preorder directions
+to the upper-tail index `⟨j, le_rfl⟩`, by the quotient representative law.
+Hence its preorder morphism is invertible because preorder hom sets are
+subsingleton. Functoriality transports this isomorphism through `R.map` and
+`Scheme.Spec.map`, and the pullback second projection along an isomorphism is
+an isomorphism by the standard pullback instance. -/
 theorem affine_chart_section_ring_presentations_iso
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}}
@@ -25,5 +25,15 @@ theorem affine_chart_section_ring_presentations_iso
     IsIso (pullback.snd (Spec.map (R.map (homOfLE
       ((OrderEmbedding.ofAntisymmetrization (α := {k : I // j ≤ k})).monotone.functor.obj
         (toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k}))).property))) g) := by
-  sorry
+  let k := (OrderEmbedding.ofAntisymmetrization (α := {k : I // j ≤ k})).monotone.functor.obj
+    (toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k}))
+  have hk : AntisymmRel (· ≤ ·) k (⟨j, le_rfl⟩ : {k : I // j ≤ k}) :=
+    Quotient.exact (toAntisymmetrization_ofAntisymmetrization (· ≤ ·)
+      (toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})))
+  have : IsIso (homOfLE k.property) :=
+    ⟨⟨homOfLE (show k.val ≤ j from hk.1), by
+      constructor <;> apply Subsingleton.elim⟩⟩
+  have : IsIso (R.map (homOfLE k.property)) := inferInstance
+  have : IsIso (Spec.map (R.map (homOfLE k.property))) := inferInstance
+  infer_instance
 end AlgebraicGeometry
