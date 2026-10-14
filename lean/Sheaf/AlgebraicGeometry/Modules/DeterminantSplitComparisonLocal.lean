@@ -6,10 +6,8 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.Algebra.Homology.ShortComplex.Basic
 
 /-!
 # Local split determinant comparisons
@@ -51,8 +49,17 @@ theorem determinant_split_comparison_restriction {X : Scheme.{v}}
           ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
             (homOfLE hZW).op y) := by
   intro W Z hW hZW y
-  rw [hd, hd]
-  exact hn W Z hW hZW y
+  calc
+    (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
+        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op
+          (dNatural W hW y) := by rw [hd W hW y]
+    _ = dNatural Z (hZW.trans hW)
+          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
+            (homOfLE hZW).op y) := hn W Z hW hZW y
+    _ = d Z (hZW.trans hW)
+          ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
+            (homOfLE hZW).op y) := by
+      rw [hd Z (hZW.trans hW)]
 
 end AlgebraicGeometry.Scheme.Modules
 
