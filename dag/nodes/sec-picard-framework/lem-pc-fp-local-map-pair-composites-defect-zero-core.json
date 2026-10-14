@@ -12,21 +12,47 @@
  },
  "proof": [
   {
-   "text": "Construct the overlap defect on the quasi-compact overlap and apply finite-presentation eventual test-map vanishing; transport the resulting equality through the canonical comparisons.",
+   "text": "Construct W as the pullback of the two affine open-cover maps and d as localMapPairOverlapDefect. Its source and target are successive native pullbacks of F and G. Register the given finite-presentation and quasi-coherence instances; pullback preserves them (Scheme.Modules.isFinitePresentation_pullback and isQuasicoherent_pullback). The stage scheme is quasi-separated because its map to the affine base is quasi-separated. The intersection of the two affine opens is compact, and its map to Spec R_k is quasi-compact.",
+   "uses": [
+    "lem-pc-local-map-pair-overlap-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the limit, hr identifies the transported family with the components of the canonical descent morphism obtained by applying toDescentData to delta. Its Hom.comm field gives PairCompatibility. Apply the forward implication of localMapPairOverlapDefect_baseChange_iff to conclude that the pulled defect is zero.",
+   "uses": [
+    "lem-pc-local-map-pair-overlap-base-change",
+    "def-pc-local-map-pair-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finitePresentation_test_map_zero_eventually to the explicit d on W. The finite-presentation, quasi-coherence and quasi-compactness hypotheses were checked above. Obtain l >= k where its pullback is zero.",
    "uses": [
     "lem-pc-fp-test-map-zero-eventually"
    ],
    "elementary": false
+  },
+  {
+   "text": "For m >= l construct the canonical lift from W times_X X_m to W times_X X_l. The overlapStageMap_comp equation shows its defining pullback square commutes. PullbackComp naturality transports zero along this lift, because native module pullback maps zero to zero. Apply the reverse implication of localMapPairOverlapDefect_baseChange_iff at m. Each square then has its left composite as a common value, proving PairDefectZero at every m >= l.",
+   "uses": [
+    "lem-pc-local-map-pair-overlap-base-change",
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-test-map-zero-eventually"
+  "def-pc-local-map-pair-compatibility",
+  "def-pc-local-overlap-transitions",
+  "lem-pc-fp-test-map-zero-eventually",
+  "lem-pc-local-map-pair-overlap-base-change"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3)",
-  "via": "explicit composite equality reduction"
+  "place": "Tag 01ZR (3), first proof by Zariski gluing",
+  "via": "explicit constructed universal overlap defect, existing test-map zero descent, and proved persistence along the canonical universal lift; F2"
  },
  "mathlib_searches": [
   {
@@ -95,10 +121,10 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261014T010834-L-3160340",
-  "kind": "proof",
+  "landing": "20261014T020509-L-3810660",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,166 @@
+{
+ "id": "lem-pc-local-map-pair-overlap-base-change",
+ "kind": "statement",
+ "title": "Base change detects a local-map pair by its universal overlap defect",
+ "statement": "Let X and Y be schemes [def-pc-scheme], U an open cover of X, F and G O_X-modules, r_x:F restricted to U_x -> G restricted to U_x a family of module morphisms, a,b chart indices, and q:Y -> X a scheme morphism [def-pc-module-pullback]. On W=U_a times_X U_b let g_a,g_b be the projections, t=g_a followed by U_a -> X, and D_F,D_G the canonical descent data of F,G. Define d:g_a^*(F|U_a) -> g_b^*(G|U_b) as g_a^*(r_a) followed by the transition of D_G minus the transition of D_F followed by g_b^*(r_b). Let pi:W times_X Y -> W be the first projection. On the base changed cover V let r^q_x=e_F inverse followed by (U.pullbackHom q x)^*(r_x) followed by e_G, where e is the canonical open-cover tensor-pullback comparison [def-pc-open-cover-tensor-pullback-comparison]. Then PairCompatibility r^q a b [def-pc-local-map-pair-compatibility] holds if and only if pi^*(d)=0. No finiteness, quasi-coherence, affineness or limit hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-local-map-pair-compatibility"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof by Zariski gluing; canonical pullback and pseudofunctor coherence"
+ },
+ "proof": [
+  {
+   "text": "Construct the actual overlap morphism d by subtracting the two canonical descent-square composites. The pullback W times_X Y is canonically the overlap of the pulled-back charts: use the universal lifts in both directions, and check their two projections.",
+   "uses": [
+    "def-pc-local-map-pair-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare native and tensor pullback by the unique left-adjoint comparison to pushforward. The canonical toDescentDataCompPullFunctorIso followed by the image of this comparison is an isomorphism from the pulled canonical descent datum to the canonical datum of the tensor pullback. Its chart components are precisely openCoverTensorPullbackComparison, by its defining pullbackComp, pullbackCongr and adjunction comparison. Compute the pullback of each composite defining d by overlap_base_change_formula. Naturality moves the chart maps through these comparisons; the descent isomorphisms commute with transition maps, so the resulting conjugated composites are exactly those of r^q.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "lem-pc-overlap-base-change-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Additivity says that the pulled difference is zero if and only if those composites agree. Cancel the invertible comparisons. A square on the universal pulled-back overlap implies every universal-test square by pulling along the unique universal lift of its two chart maps and using descent pullHom naturality. Conversely evaluate PairCompatibility on that universal overlap. This proves both implications, including empty overlaps, identity base change and zero modules.",
+   "uses": [
+    "def-pc-local-map-pair-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-map-pair-compatibility",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "lem-pc-overlap-base-change-formula"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR (3), first proof; explicit comparison argument written by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented quasicoherent module morphisms agreeing at an inverse limit agree at some finite stage on overlaps",
+   "results": "SheafOfModules.Presentation.map_π_eq, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PairCompatibility",
+   "results": "loogle: unknown identifier 'PairCompatibility'",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*map_sub|PairCompatibility",
+   "results": "Mathlib/Analysis/Calculus/VectorField.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pairwise compatibility of local sheaf module morphisms after base change is equivalent to vanishing of the pullback of their overlap defect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of descent data conjugated by component isomorphisms remains compatible after base change on a universal overlap",
+   "results": "CategoryTheory.Pseudofunctor.DescentData.iso, CategoryTheory.Pseudofunctor.DescentData.iso_hom, CategoryTheory.Pseudofunctor.DescentData.isoMk_hom_hom, CategoryTheory.Pseudofunctor.DescentData.isoMk, CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_hom, CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.Pseudofunctor.DescentData.Hom.comm, CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of local module maps preserves the descent overlap compatibility square via composition isomorphisms",
+   "results": "SheafOfModules.pullback_assoc, PresheafOfModules.pullback_assoc and scheme/gluing projection equations; no equivalence for the transported local map pair",
+   "date": "2026-10-14",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback_assoc",
+   "results": "SheafOfModules.pullback_assoc: associativity of native sheaf pullback, not the overlap compatibility equivalence",
+   "date": "2026-10-14",
+   "verdict": "second reading: useful general coherence only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullHom|toDescentDataCompPullFunctorIso",
+   "results": "Mathlib descent pullHom_hom and pullFunctorObjHom_eq; project OverlapBaseChangeFormula is a projection-wise transport formula, not compatibility detection. No duplicate of the split theorem in lean/",
+   "date": "2026-10-14",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventuallyCompositesCompatible",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: finite-presentation map descent and agreement of local lifts on overlaps before gluing",
+   "via": [
+    "lem-pc-fp-local-map-pair-composites-defect-zero-core",
+    "lem-pc-fp-local-map-pair-composites-compatible",
+    "lem-pc-fp-local-map-pair-defect-zero",
+    "lem-pc-fp-local-map-pair-eventually",
+    "lem-pc-fp-local-map-overlap-equations",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalMapPairOverlapBaseChange.lean",
+  "declaration": "AlgebraicGeometry.localMapPairOverlapDefect_baseChange_iff",
+  "statement": "theorem localMapPairOverlapDefect_baseChange_iff\n    {X Y : Scheme.{u}} (U : X.OpenCover.{u}) (F G : X.Modules)\n    (r₀ : ∀ x, (Scheme.Modules.pullback (U.f x)).obj F ⟶\n      (Scheme.Modules.pullback (U.f x)).obj G) (a b : U.I₀) (q : Y ⟶ X) :\n    let W := pullback (U.f a) (U.f b)\n    let t : W ⟶ X := pullback.fst (U.f a) (U.f b) ≫ U.f a\n    let V := U.pullback₁ q\n    let Q := modulesPseudofunctor.toDescentData V.f\n    let C := Scheme.Modules.tensorPullback q\n    let r : ∀ x, (Q.obj (C.obj F)).obj x ⟶ (Q.obj (C.obj G)).obj x := fun x ↦\n      let e := Scheme.Modules.openCoverTensorPullbackComparison q U x\n      e.inv.app F ≫ (Scheme.Modules.pullback (U.pullbackHom q x)).map (r₀ x) ≫\n        e.hom.app G\n    Pseudofunctor.DescentData.PairCompatibility r a b ↔\n      (Scheme.Modules.pullback (pullback.fst t q)).map\n        (localMapPairOverlapDefect U F G r₀ a b) = 0",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T020509-L-3810660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261014T020509-L-3810660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
