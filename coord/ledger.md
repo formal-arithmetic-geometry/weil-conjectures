@@ -14531,3 +14531,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:43 L: returned deliver/E4/Sheaf.Paper.CechRefinementPushforwardTotal (reviewer RETURN: (reviewer X-44597, head 445972bdf) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CechRefinement)
 
 - 12:44 L: batch 20261014T043529 dependency take-out
+- 04:45 L: merged deliver/XRb0cc22400e136910/Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf (stage 3; reviewer PASS; first push; landing 20261014T044553-L-1450952 (interface); batch 20261014T044551; modules 3; new nodes 0; change records: coord/changes/retire-equivariant-sheaf-compatibility.md)

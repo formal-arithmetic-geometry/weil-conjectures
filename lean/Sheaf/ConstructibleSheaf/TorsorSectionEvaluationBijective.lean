@@ -8,7 +8,7 @@ module
 public import Sheaf.ConstructibleSheaf.TorsorSectionRepresentation
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Sheaf.ConstructibleSheaf.TorsorSectionEvaluationLocal
-import Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf
+import Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf
 
 /-!
 # Bijectivity of normalized evaluation on a connected torsor
