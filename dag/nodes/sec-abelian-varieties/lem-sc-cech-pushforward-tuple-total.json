@@ -15,21 +15,21 @@
  },
  "proof": [
   {
-   "text": "Construct rho by the explicit tuple evaluation and restriction formula. Naturality of the presheaf restrictions under each coefficient differential makes rho commute with the resolution-direction differential. For each omitted vertex, the two composites of open inclusions have the same endpoints, hence are equal. Presheaf functoriality and additivity then identify the alternating Cech differential sums.",
+   "text": "Construct the explicit additive tuple maps. The private tupleCoeff_apply lemma identifies the coefficient Cech map under cechComplexFunctorXAddEquiv, and presheaf naturality proves tupleMap_naturality. Construct tupleRowMap by conjugating the tuple evaluation and restriction map on explicit CechCochain groups through cechComplexFunctorIso. Expand cechComplex_d_apply; additivity moves restriction through the finite alternating sum, and map_comp plus uniqueness of open inclusions equates each omitted-vertex term. Its degree components are definitionally cechPushforwardTupleMap.",
    "uses": [
     "def-sc-cech-refinement-cochain-map"
    ],
    "elementary": false
   },
   {
-   "text": "In total degree n, the bidegrees (r,q) with r+q=n form a finite set. Forgetting scalars preserves the finite coproduct of module summands. Assemble rho followed by the target summand inclusions using this coproduct universal property. The differential is the sum of the coefficient differential and (-1)^r times the Cech differential. The two identities of step 1 prove that these assembled maps commute with it.",
+   "text": "Apply tupleMap_naturality to each K differential to assemble tupleRowMap into a morphism rho between the double complexes after forgetting scalars. Use the proved HomologicalComplex₂.mapTotalIso of WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap for each scalar-forgetting functor; their required coproduct preservation instances exist on the finite nonnegative diagonals. Conjugate total.map rho by these isomorphisms. The lemmas map_ι_mapTotalXIso_inv, ιTotal_map and ι_mapTotalXIso_hom prove its prescribed summand formula.",
    "uses": [
     "def-sc-cech-complex-augmentations"
    ],
    "elementary": false
   },
   {
-   "text": "A map out of each finite coproduct is determined by its composites with the summand inclusions. The specified formula therefore determines every t^n and hence t uniquely. Empty tuple products are zero objects, so the formulas also apply to empty families; in degree zero there is just the (0,0) summand.",
+   "text": "For any second map satisfying the summand formula, apply HomologicalComplex.Hom.ext degreewise, precompose with the epimorphism given by the source mapTotalIso hom component, and apply HomologicalComplex₂.total.hom_ext. The mapTotalXIso summand identities and the prescribed formula identify every summand composite. This uses no nonemptiness or cover hypothesis, and applies in degree zero as well.",
    "uses": [
     "def-sc-cech-complex-augmentations"
    ],
@@ -41,9 +41,9 @@
   "def-sc-cech-complex-augmentations"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Tag 01FD, tuplewise map of double complexes B-double-prime to A; finite totalization and uniqueness written out by E4"
+  "place": "Tag 01FD, tuplewise map B-double-prime to A; full Lean implementation by G2 using the proved totalization comparison and summand extensionality."
  },
  "mathlib_searches": [
   {
@@ -122,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-f8000",
-  "group": "E4",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261014T061023-L-2464805",
-  "kind": "interface",
-  "note": "independent Codex review: Matched unchanged signatures, tuple-total obligation and augmentation proofs with their DAG records and Stacks 01FD; both delivered modules and sole direct importer compile cleanly; axioms checked."
+  "landing": "20261014T063817-L-2813688",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
