@@ -21,9 +21,93 @@
   "def-weil-pbc-proetale-operations",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restriction leaves the underlying abelian sheaf unchanged. The kernel and cokernel of a module-sheaf map have the same underlying abelian kernel and sheafified cokernel before and after restriction, so restriction is exact. The inverse of a bijective underlying sheaf map is linear for the larger ring: if $h$ is $S_T$-linear and bijective, then $h^{-1}(sx)=s h^{-1}(x)$ by applying $h$. Thus underived restriction reflects isomorphisms. On complexes $H^n(r_TK)=r_TH^n(K)$, because kernels and images are unchanged. This identification holds for derived morphisms by localization. If $r_T(f)$ is invertible, each $r_TH^n(f)$ is invertible; the preceding underived argument makes each $H^n(f)$ invertible, and the unbounded cohomology criterion makes $f$ invertible.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, label lemma-acyclic; exact restriction and cohomology calculation written explicitly"
+   }
+  },
+  {
+   "text": "Use the module inverse-image action construction in [def-weil-pbc-proetale-operations]. Both $r_Uu_S^*M$ and $u_R^*r_VM$ have underlying abelian sheaf $u^{-1}M$. For $r\\in R_U$ their actions agree: the first uses $c_S^{-1}a_U(r)$ in $u^{-1}S_V$, while the second uses $(u^{-1}a_V)c_R^{-1}(r)$; these are equal by $a_Uc_R=c_Su^{-1}a_V$. The identity of the underlying inverse-image sheaf is therefore a natural $R_U$-linear isomorphism. All four functors here are exact. Apply them termwise to complexes and descend this identity through localization, using clause (2) of the localization universal property. This gives the canonical $b:r_UL_S\\cong L_Rr_V$ and its inverse, without any flatness assumption on $a_T$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "label lemma-adjoint-push-pull-modules; identified-coefficient action calculation as in the definition of proetale operations"
+   }
+  },
+  {
+   "text": "Let $q_T:(T_{\\mathrm{proet}},S_T)\\to(T_{\\mathrm{proet}},R_T)$ have underlying identity topos morphism and structural map $a_T$. Its module direct image is restriction of scalars. Exactness proved in step 1, together with the exact-functor derived-functor theorem, identifies $Rq_{T,*}$ with $r_T$ and identifies the derived comparison from underived restriction with the identity on termwise complexes. Let $p_R$ and $p_S$ denote the ringed-topos morphisms over $u$ given by $c_R,c_S$. Both $p_Rq_U$ and $q_Vp_S$ have underlying morphism $u$ and structural map $u^{-1}R_V\\to S_U$; their two maps are $a_Uc_R$ and $c_Su^{-1}a_V$, equal by hypothesis. Hence they are the same morphism of ringed topoi.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; the two composites and exact vertical pushforwards"
+   }
+  },
+  {
+   "text": "Apply the general ringed-topos derived direct-image composition theorem to the two factorizations of the morphism in step 3. It identifies $r_VR_S$ and $R_Rr_U$ with the same total direct image, so their composite comparison gives the required canonical natural isomorphism $d$. More explicitly, represent $N$ by a complex, choose a K-injective resolution $q:N\\to I$ over $S_U$, and choose a K-injective resolution $j:r_UI\\to J$ over $R_U$. These exist on the small sites in the statement. The first route represents $r_VR_SN$ by $r_Vu_{*,S}I=u_{*,R}r_UI$, since $r_V$ is exact; the second represents $R_Rr_UN$ by $u_{*,R}J$, using the resolution $j r_Uq$. The normalization in the composition theorem says that $d_N$ is represented by $u_{*,R}j:u_{*,R}r_UI\\to u_{*,R}J$ and that this is a quasi-isomorphism. No claim that $r_UI$ is K-injective is made.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; comparison on K-injective representatives"
+   }
+  },
+  {
+   "text": "For the specified $M,N,t$, choose complexes representing $M,N$ and resolutions $q,j$ as in step 4. Because $L_S$ is the exact termwise inverse image, and maps into $I$ are computed in the homotopy category, $t$ is represented by $Q(q)^{-1}Q(h)$ for a chain map $h:u_S^*M\\to I$. The canonical derived adjunction formula of [lem-pc-pre-derived-adjoint-functors-general], with the identity left-resolution and the chosen right-resolution, represents $t^\\sharp$ by the underived adjunct $g:M\\to u_{*,S}I$ of $h$. Under $b^{-1}$ the restricted map is represented by $j\\,r_U(h):u_R^*r_VM\\to J$. The underived adjunction in the operations definition uses the same abelian unit after forgetting the ring action, so the adjunct of $r_U(h)$ is $r_V(g):r_VM\\to u_{*,R}r_UI$; the action calculation in step 2 supplies its $R_V$-linearity. Naturality of this adjunction makes the adjunct of $j\\,r_U(h)$ equal to $(u_{*,R}j)\\,r_V(g)$. Applying the same canonical derived-adjunction formula over $R$ shows that this chain map represents the adjunct of $r_U(t)b_M^{-1}$. By the explicit description of $d_N$ in step 4 it also represents $d_Nr_V(t^\\sharp)$. Thus the two derived morphisms are equal. Changing chain representatives by homotopy does not change their classes, and the canonical resolution identifications cover arbitrary derived $M,N,t$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, label lemma-adjoint; derived.tex label lemma-pre-derived-adjoint-functors (canonical resolution formula)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 07A6 specialized to the coefficient square; explicit adjunction computation supplied by worker"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,10 +164,38 @@
    "results": "0 hits: ",
    "date": "2026-10-14",
    "verdict": "no match: the candidate sheaf adjunctions and comparison functors are underived; they do not state the unbounded derived coefficient-change comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for ring sheaves commutes with unbounded derived direct image compatibly with inverse image adjunction",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_obj_val, PresheafOfModules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.pushforwardNatIso, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.pushforward, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-14",
+   "verdict": "no match: hits describe underived sheaf operations or abstract derived adjunctions; none states the arbitrary ring-sheaf unbounded comparison square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"Comp\"",
+   "results": "12 hits: PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf, PresheafOfModules.pushforwardComp, PresheafOfModules.pushforward_id_comp, PresheafOfModules.pushforward_comp_id, PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, PresheafOfModules.instMonoidalCompOppositeCommRingCatRingCatForget₂RingHomCarrierCarrierOpPushforward₀OfCommRingCat",
+   "date": "2026-10-14",
+   "verdict": "no match: hits describe underived sheaf operations or abstract derived adjunctions; none states the arbitrary ring-sheaf unbounded comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Dd]erived|[Dd]erived.*restrictScalars",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits describe underived sheaf operations or abstract derived adjunctions; none states the arbitrary ring-sheaf unbounded comparison square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image composition for morphisms of ringed topoi",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-weil-pbc-four-arrows",
   "by": "worker",
@@ -99,5 +211,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-ring-sheaf and unbounded statement. Constructed inverse-image comparison by its actual transported ring action, direct-image comparison by the two equal ringed-topos composites, and proved the adjunct equality on K-injective representatives, explicitly resolving the restricted complex instead of assuming restriction preserves K-injectivity. Added one general composition lemma and one Mathlib cohomology criterion leaf.",
+  "blueprint": "def-weil-pbc-four-arrows source paragraph on canonical ringed-topos exchange and its finite-coefficient form: establishes the coefficient comparisons needed on the quotient corners.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Its canonical fraction formula computes the unbounded adjunct with specified resolutions; no same-unit statement supplies this normalization."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Provides unbounded K-injective resolutions on arbitrary small ringed sites for S_U and R_U; the local operations definition already uses this general existence theorem, while the older same-unit resolution node is etale-specific."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-e747733e3",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-e747733e3 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and route in full. All five proof steps pass; Stacks 0D6E supports unbounded ringed-topos composition, and Mathlib DerivedCategory.isIso_iff exactly matches the cohomology criterion. Repaired missing creation/audit metadata in both new files. Accepted both declared tools. Master coefficient-category and base-change-map distinctions are preserved. Concrete checks and inherited DAG cycles are recorded in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
