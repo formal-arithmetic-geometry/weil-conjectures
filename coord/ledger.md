@@ -14628,3 +14628,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:24 L: merged deliver/J3/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T052439-L-1913950 (proof); batch 20261014T052436; modules 1; new nodes 0)
 - 05:24 L: merged deliver/P1/Sheaf.RingTheory.IdealKernelElementDescent (stage 3; reviewer PASS; after a return; landing 20261014T052440-L-1914123 (interface); batch 20261014T052436; modules 2; new nodes 0; change records: coord/changes/ideal-kernel-element-descent-universe.md)
 - 05:24 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.TensorGradedAlgebraData (stage 3; reviewer PASS; first push; landing 20261014T052440-L-1914364 (interface); batch 20261014T052436; modules 3; new nodes 2)
+- 05:24 L: merged deliver/Y3/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T052441-L-1914607 (proof); batch 20261014T052436; modules 1; new nodes 0)
