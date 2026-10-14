@@ -27,21 +27,101 @@
   "def-weil-derived-limit",
   "def-weil-inverse-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the small slice ringed site $\\mathcal S=\\mathcal C/U$, with ring $\\mathcal O_U$ and $L=K|_U$ [def-pur-localized-ringed-site]. Its objects are arrows of the small category $\\mathcal C$ with target $U$, and its morphisms are commuting triangles in $\\mathcal C$, so the slice is small. Choose a complex representing $L$ and a K-injective resolution $I^\\bullet$ with every $I^n$ injective, using [prop-pur-kinjective-resolutions-exist] on $\\mathcal S$. By [def-pur-derived-internal-hom], for any module sheaf $A$ placed in degree zero, $R\\mathcal Hom(A,L)$ is represented by $\\mathcal Hom^\\bullet(A[0],I^\\bullet)$. We choose the replacement on the slice itself, so no preservation of injectivity under restriction is presumed.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), proof of (1) equivalent to (3)"
+   }
+  },
+  {
+   "text": "Put $P=\\bigoplus_{n\\ge0}\\mathcal O_U$. The exact sequence $0\\to P\\xrightarrow{d}P\\to\\mathcal O_U[1/f]\\to0$ of [lem-weil-pbc-localization-free-resolution], viewed as a degree-zero short exact sequence of complexes, gives the distinguished triangle $P\\xrightarrow{d}P\\to\\mathcal O_U[1/f]\\to P[1]$ by [lem-weil-pbc-complex-ses-triangle]. Apply the contravariant triangulated functor $R\\mathcal Hom(-,L)$ of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and rotate to obtain $R\\mathcal Hom(\\mathcal O_U[1/f],L)\\to R\\mathcal Hom(P,L)\\xrightarrow{d^*}R\\mathcal Hom(P,L)\\to R\\mathcal Hom(\\mathcal O_U[1/f],L)[1]$. The middle arrow is precomposition by $d$. This uses derived internal-Hom exactness, without assuming that an arbitrary K-injective complex has injective terms or that products of sheaves are exact.",
+   "uses": [
+    "lem-weil-pbc-localization-free-resolution",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), proof of (1) equivalent to (3)"
+   }
+  },
+  {
+   "text": "Compute the two middle objects using the representative $I^\\bullet$ of Step 1. The definitions [def-pur-sheaf-hom, def-pur-hom-complex] identify $\\mathcal Hom^\\bullet(P[0],I^\\bullet)$ with $\\prod_{n\\ge0}I^\\bullet$: locally, a map out of the free sum is determined by the images $x_n$ of its basis generators, and any such family defines a map by $\\sum a_ne_n\\mapsto\\sum a_nx_n$ on finite-support representatives and then by gluing. The differential is coordinatewise $d_I$ because $P[0]$ has zero differential. Since $d(e_n)=e_n-fe_{n+1}$ in the resolution, precomposition sends $(x_n)_n$ to $(x_n-fx_{n+1})_n$. This also identifies the projection to each factor with restriction to its basis summand.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-localization-free-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), proof of (1) equivalent to (3)"
+   }
+  },
+  {
+   "text": "Products in module sheaves exist and are sectionwise [def-pur-hom-complex]. Apply [lem-pc-ringed-space-product-kinjective] with the abelian category $\\operatorname{Mod}(\\mathcal O_U)$ and the set $\\mathbf N$, taking every complex to be $I^\\bullet$. Thus $\\prod_n I^\\bullet$, with its coordinate projections, represents $\\prod_n L$ in the derived category, without an exact-countable-products hypothesis. Under these projections the middle morphism in Step 2 has coordinate $\\mathrm{pr}_n-f\\mathrm{pr}_{n+1}$ by Step 3, hence it is precisely $1-s$ for the multiplication tower [def-weil-derived-limit]. Reindex the factors by $m=n+1$ to use the $m\\geq1$ convention of that definition; the coordinate formula becomes $\\mathrm{pr}_m-f\\mathrm{pr}_{m+1}$ with the identical transition maps. The triangle in Step 2 therefore exhibits $R\\mathcal Hom(\\mathcal O_U[1/f],L)$ as a derived limit of that tower.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), proof of (1) equivalent to (3)"
+   }
+  },
+  {
+   "text": "The object $T(L,f)$ in the statement is any derived limit of the same tower. Clause (1) of [lem-weil-derived-limit-existence] gives an isomorphism between it and the derived limit exhibited in Step 4. An object is isomorphic to zero if and only if any isomorphic object is isomorphic to zero. Consequently $R\\mathcal Hom(\\mathcal O_U[1/f],L)=0$ if and only if $T(L,f)=0$. No canonical choice of derived limit is needed.",
+   "uses": [
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997 (lemma-hom-from-Af), proof of (1) equivalent to (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-derived-limit",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-localization-free-resolution",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997 (lemma-hom-from-Af), proof of equivalence (1) and (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "derived Hom from localization at a section equals vanishing of the derived multiplication tower",
-   "results": "Returned localization and Kähler-differential declarations (e.g. KaehlerDifferential.isLocalizedModule_map, RingHom.toKerIsLocalization_isLocalizedModule), but no sheaf-derived-Hom or derived-tower criterion.",
+   "results": "Localization and Kahler differential declarations; none states the derived sheaf criterion.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"RHom\", \"localization\", \"derived limit\"",
-   "results": "No hits.",
+   "query": "RHom localization derived limit multiplication tower",
+   "results": "No hits; unknown identifier RHom.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
@@ -55,18 +135,68 @@
   {
    "tool": "leansearch",
    "query": "derived Hom localization multiplication tower",
-   "results": "service unavailable: Internal Server Error",
+   "results": "Internal Server Error.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal derived Hom from an inverted ring sheaf is the homotopy limit of the repeated scalar multiplication tower",
+   "results": "Sheaf.H, cohomologyPresheafFunctor, sheaf differentials, unitHomEquiv_comp_apply, instAbelian and LightCondensed monoidal closed structure; none states this localization/tower comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsHomotopyLimit",
+   "results": "No hits; unknown identifier CategoryTheory.IsHomotopyLimit.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(tower|Hom)|homotopy.*localization",
+   "results": "Ordinary localization morphisms and finite presentation statements, not derived internal Hom of localization.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-restriction-local-completeness",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-local-hom-tower-criterion",
+  "worker": "stage1",
+  "summary": "Repair: explicitly choose a degreewise injective K-injective replacement on the slice; use the exact-sequence triangle and triangulated derived internal Hom to justify dualization; calculate the dual differential on basis generators; cite the general K-injective product-representation theorem and derived-limit uniqueness. Repaired literal newline escapes and complete auxiliary blueprint ancestry. Statement unchanged.",
+  "blueprint": "Realizes the detailed final Stacks-comparison clause of def-weil-pbc-completed-pullback: preservation and reflection of the local Stacks condition via the localization-Hom/multiplication-tower criterion.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Provides unbounded replacements on arbitrary small ringed sites, including injective terms; this is a generic resolution tool absent from this unit."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Despite its name, its statement is for arbitrary abelian categories and represents products by K-injective complexes; no exact-product assertion is available for arbitrary ringed sites in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-ff47361a7",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-ff47361a7 (reviewer sub-agent of L); spot-checked: Read the full item, auxiliary node, unit/chapter route, Tag 0997 source, cited node statements, and Mathlib searches. Verified slice coefficient category, all five proof steps, hypotheses, products, derived-limit identification, blueprint ancestry, duplicate search, and edge cases. Wrote review.md; no repairs needed."
+ }
 }
