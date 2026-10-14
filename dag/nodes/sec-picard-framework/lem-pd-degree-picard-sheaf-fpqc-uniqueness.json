@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0D28, 0D2B, 023T and 056U"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqc",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-degree-picard-sheaf-fpqc",
+   "place": "proof decomposition"
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "gluing and separatedness of the normalized Picard functor under faithfully flat quasi compact covers",
+   "date": "2026-10-15",
+   "results": "Service unavailable: Internal Server Error. No mathematical search result obtained.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "existence and uniqueness of amalgamations for fpqc sheafification of Picard functor",
+   "date": "2026-10-15",
+   "results": "Generic sheaf amalgamation and module sheafification lemmas; none proves fpqc descent of this degree subfunctor.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSheafFor",
+   "date": "2026-10-15",
+   "results": "Generic amalgamation criterion, separatedness and sheaf lemmas. Applying them requires precisely the currently open fpqc existence/separatedness obligations.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmalgamation|existsUnique_amalgamation",
+   "date": "2026-10-15",
+   "results": "Generic sheaf existence-and-uniqueness infrastructure in CategoryTheory/Sites/Sheaf.lean, no geometric Picard result.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "import_flags": [],
+ "id": "lem-pd-degree-picard-sheaf-fpqc-uniqueness",
+ "title": "Uniqueness of an fpqc amalgamation",
+ "statement": "Let k be a field, f:C to Spec k a smooth proper geometrically integral curve, d an integer, and S the fibrewise-degree-d subfunctor [lem-pd-degree-locally-constant]. For an fpqc sieve R on T and a compatible family x of sections of its fppf sheafification, any two amalgamations are equal.",
+ "proof": [
+  {
+   "text": "Pull the two amalgamations back to a finite separable residue-field extension giving a section. Identify the relative Picard sheaf with the normalized functor. Their isomorphisms over the fpqc covering uniquely normalize along the section and therefore descend by fully faithful invertible-module descent, giving equality of the pulled-back classes. Since the finite extension is an fppf cover and the sections lie in an fppf sheaf, equality is reflected back to the original test scheme.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-pc-rational-hyp",
+    "thm-pc-pic-split",
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fpqc-descent",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split",
+  "lem-pc-dense-separable-points"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0D28, 0D2B and 023T"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcUniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDegreeSheafFpqcUniqueness.lean",
+  "declaration": "AlgebraicGeometry.unique_amalgamation_fpqc_sheafify_picardDegree",
+  "statement": "theorem unique_amalgamation_fpqc_sheafify_picardDegree\n    {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f]\n    (d : ℤ) (S : Subfunctor (picardPresheaf f))\n    (hS : ∀ (T : Over (Spec (.of k))) (L : (picardPresheaf f).obj (op T)),\n      L ∈ S.obj (op T) ↔ ∀ t, picardPresheafDegree f L t = d)\n    {T : Over (Spec (.of k))} (R : Sieve T)\n    (hR : R ∈ (Scheme.fpqcTopology.over (Spec (.of k))) T)\n    (x : Presieve.FamilyOfElements\n      ((presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj\n        S.toFunctor).obj R.arrows)\n    (hx : x.Compatible) {t₁ t₂ : _}\n    (h₁ : x.IsAmalgamation t₁) (h₂ : x.IsAmalgamation t₂) :\n    t₁ = t₂",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "stmt_deps": [
+  "lem-pd-degree-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T161042-L-1859417",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261014T161042-L-1859417",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,10 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import WeilConjectures.AlgebraicGeometry.DensePoints
-import WeilConjectures.AlgebraicGeometry.Descent
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
-import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
+import Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcExistence
+import Sheaf.AlgebraicGeometry.PicardDegreeSheafFpqcUniqueness
 
 /-! # Fpqc descent for degree parts of the Picard functor
 
@@ -64,6 +62,13 @@ theorem isSheaf_fpqc_sheafify_picardDegree
       L ∈ S.obj (op T) ↔ ∀ t, picardPresheafDegree f L t = d) :
     Presheaf.IsSheaf (Scheme.fpqcTopology.over (Spec (.of k)))
       ((presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj
-        S.toFunctor).obj := by sorry
+        S.toFunctor).obj := by
+  rw [isSheaf_iff_isSheaf_of_type]
+  intro T R hR x hx
+  obtain ⟨t, ht⟩ := exists_amalgamation_fpqc_sheafify_picardDegree f d S hS R hR x hx
+  refine ⟨t, ht, ?_⟩
+  intro t' ht'
+  exact (unique_amalgamation_fpqc_sheafify_picardDegree f d S hS R hR x hx
+    (t₁ := t) (t₂ := t') ht ht').symm
 
 end AlgebraicGeometry
