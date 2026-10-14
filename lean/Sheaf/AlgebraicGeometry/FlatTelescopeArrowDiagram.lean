@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagramCore
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.FlatTruncationTower
 
@@ -51,7 +52,64 @@ Q(g) = Q(m₁);e₁ and Q(g);Q(f) = Q(m₂);e₂. These are homotopy-category eq
 not merely equalities after derived localization. The zero and identity arrows
 use the zero and identical diagram maps; on an empty scheme the construction is
 the zero diagram. No projectivity or finite-generation hypothesis is used.
-(blueprint: lem-sc-flat-telescope-arrow-diagram). -/
+(blueprint: lem-sc-flat-telescope-arrow-diagram-construction).
+Proof. Given the structural towers, perform the compatible-pair flat resolutions and
+mapping-cylinder strictification described in the construction plan; this supplies
+the cone augmentation, truncation quasi-isomorphisms, and homotopy-category
+compatibilities. -/
+theorem exists_flat_telescope_arrow_diagram_construction (Y : Scheme.{u})
+    (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P')
+    (hcore : ∃ (E₀ E₁ E₂ : ℕ →
+        CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1))
+      (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1))
+      (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1))
+      (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n),
+      (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧
+      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧
+      (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧
+      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧
+      (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧
+      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i))) :
+    let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+    let Q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+    ∃ (E₀ E₁ E₂ : ℕ → CochainComplex A ℤ)
+      (t₀ : ∀ n : ℕ, E₀ n ⟶ E₀ (n + 1))
+      (t₁ : ∀ n : ℕ, E₁ n ⟶ E₁ (n + 1))
+      (t₂ : ∀ n : ℕ, E₂ n ⟶ E₂ (n + 1))
+      (a : ∀ n : ℕ, E₀ n ⟶ E₁ n) (b : ∀ n : ℕ, E₀ n ⟶ E₂ n),
+      (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₀ n).X i)) ∧
+      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₀ n).X i)) ∧
+      (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₁ n).X i)) ∧
+      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₁ n).X i)) ∧
+      (∀ n : ℕ, ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((E₂ n).X i)) ∧
+      (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E₂ n).X i)) ∧
+      ∃ (c₁ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map a =
+          Limits.Sigma.map a ≫ flatTelescopeDifferential E₁ t₁)
+        (c₂ : flatTelescopeDifferential E₀ t₀ ≫ Limits.Sigma.map b =
+          Limits.Sigma.map b ≫ flatTelescopeDifferential E₂ t₂)
+        (e₁ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₁ t₁)) ≅
+          Q.obj P)
+        (e₂ : Q.obj (CochainComplex.mappingCone (flatTelescopeDifferential E₂ t₂)) ≅
+          Q.obj P')
+        (g : CochainComplex.mappingCone (flatTelescopeDifferential E₀ t₀) ⟶ P)
+        (q : ∀ n : ℕ, E₀ n ⟶ P.truncLE (n : ℤ)),
+        (∀ n : ℕ, QuasiIso (q n)) ∧
+        (∀ n : ℕ, t₀ n ≫ q (n + 1) ≫ P.ιTruncLE ((n + 1 : ℕ) : ℤ) =
+          q n ≫ P.ιTruncLE (n : ℤ)) ∧
+        (CochainComplex.mappingCone.inr _ ≫ g =
+          Sigma.desc (fun n : ℕ ↦ q n ≫ P.ιTruncLE (n : ℤ))) ∧
+        ((CochainComplex.mappingCone.inl _).comp
+          (CochainComplex.HomComplex.Cochain.ofHom g) (add_zero _) = 0) ∧
+        (Q.map g = Q.map (CochainComplex.mappingCone.map
+          (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₁ t₁)
+          (Limits.Sigma.map a) (Limits.Sigma.map a) c₁) ≫ e₁.hom) ∧
+        (Q.map g ≫ Q.map f = Q.map (CochainComplex.mappingCone.map
+          (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₂ t₂)
+          (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom) := by sorry
+
+
 theorem exists_flat_telescope_arrow_diagram (Y : Scheme.{u})
     (P P' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (hP : isFlatTelescope Y P) (hP' : isFlatTelescope Y P') (f : P ⟶ P') :
@@ -90,6 +148,8 @@ theorem exists_flat_telescope_arrow_diagram (Y : Scheme.{u})
           (Limits.Sigma.map a) (Limits.Sigma.map a) c₁) ≫ e₁.hom) ∧
         (Q.map g ≫ Q.map f = Q.map (CochainComplex.mappingCone.map
           (flatTelescopeDifferential E₀ t₀) (flatTelescopeDifferential E₂ t₂)
-          (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom) := by sorry
+          (Limits.Sigma.map b) (Limits.Sigma.map b) c₂) ≫ e₂.hom) := by
+  have hcore := exists_flat_telescope_arrow_core Y P P' hP hP' f
+  exact exists_flat_telescope_arrow_diagram_construction Y P P' hP hP' f hcore
 
 end AlgebraicGeometry
