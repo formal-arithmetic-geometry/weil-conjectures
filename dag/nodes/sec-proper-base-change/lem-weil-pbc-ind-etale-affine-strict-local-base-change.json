@@ -36,23 +36,84 @@
   "def-weil-pbc-strict-henselization-limit",
   "lem-weil-pbc-strict-henselization-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=B\\otimes_A C$. The affine fibre-product lemma identifies $Y$ with $\\operatorname{Spec}D$, with its projections induced by the tensor inclusions. Write $H_A,H_B,H_C,H_D$ for the strict-localization coordinate rings at the four geometric points, all pointed into the same algebraically closed field $\\Xi$. Functoriality gives local ring homomorphisms $h:H_A\\to H_B$, $k:H_A\\to H_C$, $l:H_B\\to H_D$, and $m:H_C\\to H_D$, compatible with the original structural maps. They satisfy $lh=mk$: both composites are local maps associated to the same morphism $Y\\to\\operatorname{Spec}A$, and induce the same inclusion of relative separable closures inside $\\Xi$; the uniqueness clause of functoriality makes them equal. Thus the canonical comparison $c:Y_{(\\bar y)}\\to (\\operatorname{Spec}B)_{(\\bar b)}\\times_{(\\operatorname{Spec}A)_{(\\bar a)}}(\\operatorname{Spec}C)_{(\\bar c)}$ is the pair $(\\operatorname{Spec}l,\\operatorname{Spec}m)$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP, lemma-base-change-strict-henselization-quasi-finite, opening commutative square; Schemes Tag 01I4 and Algebra Tag 04GU"
+   }
+  },
+  {
+   "text": "Apply the affine-chart ind-etaleness statement with the whole affine schemes as charts (identity open immersions and the defining spectrum identifications). It makes $A\\to H_A$, $B\\to H_B$, $C\\to H_C$, and $D\\to H_D$ ind-etale. Composition with the given ind-etale map $A\\to B$ makes $H_B$ ind-etale over $A$. Hence $h$, which is an $A$-algebra map between the ind-etale $A$-algebras $H_A,H_B$, is ind-etale by the relative-map clause of ind-etale stability. Base change makes $C\\to D$ ind-etale; composing with $D\\to H_D$ makes $H_D$ ind-etale over $C$. The same relative-map clause, now for $H_C,H_D$ over $C$, makes $m$ ind-etale. In particular both $h$ and $m$ are weakly etale. No assertion of ind-etaleness is needed for $A\\to C$, $k$, or $l$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, affine pointed-neighbourhood presentation; ind-etale stability and relative-map clause"
+   }
+  },
+  {
+   "text": "Functoriality states that all four $H$ rings are strictly henselian local and that $h,m$ are local ring homomorphisms. Apply the weakly etale strict-local theorem first to $h:H_A\\to H_B$ and then to $m:H_C\\to H_D$, using the weak etaleness proved in step 2. Each map is a ring isomorphism. Thus $u=\\operatorname{Spec}h:(\\operatorname{Spec}B)_{(\\bar b)}\\to(\\operatorname{Spec}A)_{(\\bar a)}$ and $z=\\operatorname{Spec}m:Y_{(\\bar y)}\\to(\\operatorname{Spec}C)_{(\\bar c)}$ are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "thm-weil-pbc-weak-etale-strict-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Z, theorem-olivier"
+   }
+  },
+  {
+   "text": "Let $T=(\\operatorname{Spec}B)_{(\\bar b)}\\times_{(\\operatorname{Spec}A)_{(\\bar a)}}(\\operatorname{Spec}C)_{(\\bar c)}$ and let $p_B,p_C$ be its projections. Since $u$ is an isomorphism, $p_C$ has inverse $s=(u^{-1}\\circ\\operatorname{Spec}k,\\mathrm{id})$ by the fibre-product universal property. Indeed $p_Cs=\\mathrm{id}$, and $sp_C=\\mathrm{id}$ because its second projection is $p_C$ and its first is $u^{-1}(\\operatorname{Spec}k)p_C=p_B$, using the pullback equation $up_B=(\\operatorname{Spec}k)p_C$. The canonical comparison from step 1 satisfies $p_Cc=z$. Therefore $c=sz$ and its inverse is $z^{-1}p_C$. Its first and second projections are exactly $\\operatorname{Spec}l$ and $\\operatorname{Spec}m$. Composing these with the structural maps to $\\operatorname{Spec}B$ and $\\operatorname{Spec}C$ gives the two projections of the strict-localization structural map to $Y$, by functoriality. The universal property of the original fibre product then gives compatibility with the structural map to $Y$. All uses of $\\Xi$ concerned pointings and inclusions of relative separable closures, so no algebraicity hypothesis on $\\Xi$ or finiteness hypothesis on $A\\to C$ has entered.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP, fibre-product universal property; concluding compatibility in the strict-local square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "thm-weil-pbc-weak-etale-strict-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0GIP, ind-etale specialization; alternative proof using the ind-etale presentation of Tag 04HX and Olivier Tag 092Z, as in More on Morphisms Tag 094Z"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization of an ind etale algebra at a geometric point is canonically isomorphic to the strict henselization of the base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern standard etale algebras or etale base change, not strict henselizations"
+  },
   {
    "tool": "leanfinder",
    "query": "For ring maps A to B and A to C with B ind etale over A, strict henselization of B tensor A C at a geometric point is B strict henselization tensor A strict henselization C strict henselization",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n",
    "date": "2026-10-14",
-   "verdict": "no match: hits concern etale base change, not the strict-localization comparison"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Strict henselian local rings and filtered colimits of etale algebras: tensor product base change formula for strict henselizations",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] (M : Submonoid S)\\n  [inst_7 : IsLocalization M T],\\n  ↑(Algebra.tensorH1CotangentOfIsLoc\", \"doc\": \"For a submonoid $M$ of a commutative ring $S$ and its localization $T$ at $M$, the linear map associated to the tensor product of the first cotangent cohomology modules $H^1_{\\text{Cotangent}}(R \\to T)$\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R T).SurjectiveOnStalks →\\n    ∀ (x : TensorProduct R S T) (J : Ideal T), J.IsPrime → ∃ t r a, r • t ∉ J ∧ 1 ⊗ₜ[R] (r • t) * x \", \"doc\": \"Let $R, S, T$ be commutative rings, and let $S$ and $T$ be $R$-algebras. Let $\\\\phi: R \\\\to T$ be the structure map. Suppose that $\\\\phi$ is surjective on stalks. Then for any element $x \\\\in S \\\\otimes_R \"}\n",
-   "date": "2026-10-14",
-   "verdict": "no match: hits concern etale base change, not the strict-localization comparison"
+   "verdict": "no match: hits concern standard etale algebras or etale base change, not strict henselizations"
   },
   {
    "tool": "loogle",
@@ -77,7 +138,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-strict-base-closed-point-localizations",
   "by": "worker",
@@ -93,5 +154,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+  "worker": "stage1",
+  "summary": "Four steps prove the comparison using existing ind-etale stability, strict-local functoriality, affine-chart ind-etaleness and Olivier nodes. No new nodes or statement corrections. The explicit inverse and uniqueness arguments supply both projection and structural compatibilities.",
+  "blueprint": "Realizes the existing from.place: the constructibility clause in the first proof paragraph of thm-weil-pbc-direct-image-finiteness-proper, via the 0GJU strict-local geometric input. This is a tool calculation below the unit; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Affine-chart ind-etaleness is a general strict-henselization tool from sk-thm-p1; it does not replace any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Strict-local functoriality is a general geometric tool from sk-thm-p1, needed to fix local maps and their compatibility; no alternative route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-5cc867177",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-5cc867177 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All four steps correctly prove the canonical strict-local comparison and both compatibilities without extra finiteness or algebraicity hypotheses. No new nodes, duplicate split, cycle, or repair required. Accepted the two declared strict-henselization tool uses; checked archived target arrows and coefficient categories. Detailed checks are in review.md."
  }
 }
