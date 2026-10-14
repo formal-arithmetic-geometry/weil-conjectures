@@ -1,6 +1,6 @@
 # Work queue
 
-73 items; claim with `tools/claim.py next <group> [--stage N]`.
+68 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (73)
+## Stage 3: modules to prove (68)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -29,12 +29,10 @@
 | `Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore` | 18 | 0 | repair |
 | `Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling` | 12 | 0 | repair |
 | `Sheaf.AlgebraicGeometry.SheafZeroStalks` | 14 | 0 | repair |
-| `Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker` | 9 | 0 | repair |
 | `Sheaf.RingTheory.ProjectiveResolutionExtDegree` | 16 | 0 | repair |
 | `Sheaf.Topology.RingedModuleSkyscraper` | 10 | 0 | repair |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed` | 8 | 0 | repair |
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf` | 10 | 0 | repair |
-| `Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf` | 11 | 0 | repair |
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
 | `Sheaf.RingTheory.ColimitFlatRelationDescent` | 26 | 1 | disputed |
@@ -46,10 +44,8 @@
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation` | 22 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation` | 23 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore` | 23 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
-| `Sheaf.Algebra.Homology.MappingCylinderSplitFactorization` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.LocalMapPairOverlapBaseChange` | 24 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts` | 24 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
@@ -74,12 +70,11 @@
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 34 | 1 | proof |
-| `Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisCompositionLeftNormalization` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisCompositionRightNormalization` | 36 | 1 | proof |
+| `Sheaf.CategoryTheory.Abelian.DerivedBottomUnitNormalizationFormula` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelComparisonOfBottomModels` | 39 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
-| `Sheaf.RingTheory.DvrEtaleUnitRootDiagram` | 42 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumResidue` | 42 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorOrdinaryResolutionSections` | 44 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal` | 44 | 1 | proof |
