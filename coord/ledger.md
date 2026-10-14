@@ -14311,3 +14311,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:39 L: merged deliver/P4/Sheaf.Algebra.Homology.OpenOverHomComplexCycleProjectionCycleSquare (stage 3; reviewer PASS; first push; landing 20261014T023937-L-16010 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261014T023938-L-16201 (proof); batch 20261014T023929; modules 1; new nodes 0)
 - 02:39 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T023938-L-16448 (proof); batch 20261014T023929; modules 1; new nodes 0)
+- 02:39 L: merged deliver/T4/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T023939-L-16612 (proof); batch 20261014T023929; modules 1; new nodes 0)
