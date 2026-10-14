@@ -11,7 +11,10 @@ noncomputable section
 namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-/-- Compatibility of the affine sheaf edge with the right-derived unit.
+/-- STATEMENT-DISPUTED: The quantified `ε` is completely arbitrary, so the claimed
+compatibility cannot hold for every natural transformation (e.g. replacing an edge
+by the zero transformation changes the left-hand side in a nontrivial case).
+Compatibility of the affine sheaf edge with the right-derived unit.
 Source: Stacks Project, Tags 0AVW and 08D4.
 (blueprint: lem-pc-affine-derived-pushforward-sheaf-edge-compatibility). -/
 theorem affineDerivedPushforwardSheafEdge_compatibility
