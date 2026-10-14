@@ -14630,3 +14630,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:24 L: merged deliver/Y3/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T052441-L-1914607 (proof); batch 20261014T052436; modules 1; new nodes 0)
 
 - 13:30 L: batch 20261014T052436 dependency take-out
+- 05:32 L: returned deliver/B2/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization (reviewer RETURN: (reviewer X-f1981, head f19813a84) E2 (review point 4): The remaining sorry is demonstrably false. With c.B = R, s.B = R)
