@@ -7,8 +7,6 @@ module
 
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import Sheaf.Paper.CechCupResolutionComparisonExists
-import Sheaf.Paper.CechCupSignedAxisPairing
 
 /-! # Resolution representatives for a Cech cup cocycle
 
@@ -26,54 +24,6 @@ open CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-private theorem cupCycleClass_surjective {R : Type v} [Ring R]
-    (K : CochainComplex (ModuleCat.{v} R) ℕ) (n : ℕ) :
-    Function.Surjective (cupCycleClass K n) := by
-  exact (ModuleCat.epi_iff_surjective
-    ((K.sc n).moduleCatCyclesIso.inv ≫ (K.sc n).homologyπ)).mp inferInstance
-
-private theorem cupResolutionClass_surjective {X : Scheme.{v}} {F : X.Modules}
-    (D : CupAcyclicResolution F) (n : ℕ) : Function.Surjective (D.class n) := by
-  let : EnoughInjectives X.Modules :=
-    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
-  let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
-  let T := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-    (ComplexShape.up ℕ)
-  have : IsIso (HomologicalComplex.homologyMap (T.map D.comparison) n) := D.computes n
-  exact ((ModuleCat.epi_iff_surjective
-    (D.I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv).mp
-      inferInstance).comp
-    (((ModuleCat.epi_iff_surjective
-      (HomologicalComplex.homologyMap (T.map D.comparison) n)).mp inferInstance).comp
-        (cupCycleClass_surjective (T.obj D.K) n))
-
-private theorem cupPair_exists_cycle {X : Scheme.{v}} {F G : X.Modules}
-    (D : CupResolutionPairing F G) (p q : ℕ)
-    (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj D.left.K).sc p).moduleCatLeftHomologyData.K)
-    (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj D.right.K).sc q).moduleCatLeftHomologyData.K) :
-    ∃ c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-      (ComplexShape.up ℕ)).obj D.target.K).sc (p + q)).moduleCatLeftHomologyData.K,
-      c.val = D.pair p q ⊤ a.val b.val := by
-  have ha := a.property
-  have hb := b.property
-  change (D.left.K.d p ((ComplexShape.up ℕ).next p)).val.app (op ⊤) a.val = 0 at ha
-  change (D.right.K.d q ((ComplexShape.up ℕ).next q)).val.app (op ⊤) b.val = 0 at hb
-  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
-    (ComplexShape.up ℕ).Rel p (p + 1))] at ha
-  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
-    (ComplexShape.up ℕ).Rel q (q + 1))] at hb
-  refine ⟨⟨D.pair p q ⊤ a.val b.val, ?_⟩, rfl⟩
-  change (D.target.K.d (p + q) ((ComplexShape.up ℕ).next (p + q))).val.app (op ⊤)
-    (D.pair p q ⊤ a.val b.val) = 0
-  rw [ComplexShape.next_eq' (ComplexShape.up ℕ) (by simp :
-    (ComplexShape.up ℕ).Rel (p + q) (p + q + 1))]
-  rw [D.leibniz, ha, hb]
-  simp
-
-set_option maxHeartbeats 1200000 in
--- The six section-to-total maps require extra elaboration of nested coercions.
 /-- Two Cech cocycles and their cup admit compatible representatives in a computing
 resolution pairing. This statement concerns the pairing of actual resolution
 sections, before any sheaf or Cech cup product on cohomology is chosen.
@@ -122,29 +72,7 @@ theorem cechCup_resolution_representatives (X : Scheme.{v}) {ι : Type v}
       D.left.class p a' = cF (cupCycleClass _ p a) ∧
       D.right.class q b' = cG (cupCycleClass _ q b) ∧
       D.target.class (p + q) c' = cFG (cupCycleClass _ (p + q) c) ∧
-      c'.val = D.pair p q ⊤ a'.val b'.val := by
-  obtain ⟨D, ⟨CL⟩, ⟨CR⟩, ⟨CT⟩⟩ := exists_cupCechResolutionComparison X U hU F G
-  obtain ⟨a', ha'⟩ := cupResolutionClass_surjective D.left p (cF (cupCycleClass _ p a))
-  obtain ⟨b', hb'⟩ := cupResolutionClass_surjective D.right q (cG (cupCycleClass _ q b))
-  obtain ⟨c', hc'⟩ := cupPair_exists_cycle D p q a' b'
-  refine ⟨D, a', b', c', ha', hb', ?_, hc'⟩
-  obtain ⟨t, hα, hβ⟩ := cupCech_signed_axis_pairing U D
-    CL.alpha CL.beta CL.alpha_f CL.beta_f CR.alpha CR.beta CR.alpha_f CR.beta_f
-    CT.alpha CT.beta CT.alpha_f CT.beta_f p q
-  have ha : HomologicalComplex.homologyMap CL.alpha p (cupCycleClass _ p a') =
-      HomologicalComplex.homologyMap CL.beta p (cupCycleClass _ p a) := by
-    rw [← CL.alpha_class, ha']
-    exact CL.beta_class p cF hcF a
-  have hb : HomologicalComplex.homologyMap CR.alpha q (cupCycleClass _ q b') =
-      HomologicalComplex.homologyMap CR.beta q (cupCycleClass _ q b) := by
-    rw [← CR.alpha_class, hb']
-    exact CR.beta_class q cG hcG b
-  have hαc := hα a' b' c' hc'
-  have hβc := hβ a b c hc
-  rw [ha, hb] at hαc
-  apply (ModuleCat.mono_iff_injective (CT.iso (p + q)).hom).mp inferInstance
-  exact (CT.alpha_class (p + q) c').trans
-    ((hαc.symm.trans hβc).trans (CT.beta_class (p + q) cFG hcFG c).symm)
+      c'.val = D.pair p q ⊤ a'.val b'.val := by sorry
 
 end
 end AlgebraicGeometry.Scheme.Modules

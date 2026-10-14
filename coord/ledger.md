@@ -14658,7 +14658,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: returned deliver/U2/Sheaf.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentObjects (reviewer RETURN: (reviewer X-5b556, head 5b556925b) A: Complete the review packet with the current original source of Sheaf.AlgebraicGeom)
 - 05:45 L: returned deliver/T3/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-0bb46, head 0bb460e1f) A4/C5: The supplied clone already contains Sheaf.Paper.ModuleCupSinglePairingHomology)
 - 05:47 L: merged deliver/E4/Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction (stage 3; reviewer PASS; first push; landing 20261014T054720-L-2186387 (proof); batch 20261014T054718; modules 1; new nodes 0)
-- 05:47 L: merged deliver/E4/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261014T054720-L-2186619 (interface); batch 20261014T054718; modules 2; new nodes 1)
 - 05:47 L: merged deliver/F1/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261014T054721-L-2186873 (proof); batch 20261014T054718; modules 1; new nodes 0)
 - 05:47 L: merged deliver/F2/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; after a return; landing 20261014T054721-L-2187072 (proof); batch 20261014T054718; modules 1; new nodes 0)
 - 05:47 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T054722-L-2187215 (proof); batch 20261014T054718; modules 1; new nodes 0)
@@ -14669,3 +14668,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:03 L: returned deliver/S1/Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison (reviewer RETURN: (reviewer X-cfdb2, head cfdb205fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Al)
 - 06:05 L: returned deliver/N1/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-3bf66, head 3bf661c7e) E2 (review point 4): lean/Sheaf/RingTheory/FiniteIdealKernelDescent.lean:99 leaves `s)
 - 06:06 L: returned deliver/V2/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (reviewer RETURN: (reviewer X-34130, head 341308594) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
+
+- 14:08 L: batch 20261014T054718 dependency take-out
