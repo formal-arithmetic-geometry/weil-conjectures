@@ -32,9 +32,146 @@
   "def-weil-sheaf-of-modules-category",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-continuous-coefficients-immersion-restriction], the rings in the statement are precisely the completed integral and continuous rational coefficient sheaves, $E_T=A_T[1/\\varpi]$, and restriction to any locally closed subscheme identifies the two coefficient rings with the corresponding rings there. Write $S(M)=E_T\\otimes_{A_T}M=M[1/\\varpi]$. As an underlying abelian sheaf this is the filtered colimit of $M\\xrightarrow{\\varpi}M\\xrightarrow{\\varpi}\\cdots$: the class of $m$ at stage $n$ is $m/\\varpi^n$, and the transition relation is precisely the fraction relation. The two colimit nodes identify module colimits with the underlying abelian colimits and make this functor exact. Restriction of scalars from $E_T$ to $A_T$ is exact because kernels and cokernels have their underlying abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; setup for the final paragraph of Lemma 6.8.13"
+   }
+  },
+  {
+   "text": "For two constructible integral sheaves $P,Q$ as described in the statement, the integral characterization places $P[0],Q[0]$ in the bounded constructible complete category. The scalar-extension/restriction adjunction is given on sheaves by $\\phi\\mapsto(m\\mapsto\\phi(1\\otimes m))$, with inverse $\\psi\\mapsto(e\\otimes m\\mapsto e\\psi(m))$. Step 1 shows that both functors are exact; the exact-functor and derived-adjunction nodes therefore give the same adjunction on derived categories. Apply bounded-below compactness to $P[0]$ and the copies of $Q[0]$, with common lower bound zero. Coproducts are exact: they are filtered colimits of their finite subsums, which are exact, so step 1 applies. Therefore termwise coproducts preserve quasi-isomorphisms and compute the derived coproducts used here. The telescope of $Q\\xrightarrow{\\varpi}Q\\to\\cdots$ is the cone of $1-s$ on $\\bigoplus_{n\\geq0}Q$, where $s$ sends summand $n$ to summand $n+1$ by $\\varpi$. The direct sum of sheaves is the sheafification of the sectionwise direct sum by the module-colimit node. Thus every section locally has a finitely supported representative. The map $1-s$ is injective: in such a kernel representative the first coordinate and then every successive coordinate is zero; sheafification preserves this conclusion by exactness from step 1; its cokernel is $Q[1/\\varpi]$ by the fraction relations. To justify the use of a cone here, choose K-injective resolutions of the two direct-sum terms by the resolution-existence node and represent $1-s$ by a chain map between them using K-injective Hom comparison. The cone of that map is K-injective: mapping an acyclic complex into it gives the cone of the two acyclic Hom complexes, hence is acyclic. The defining Hom-complex formula identifies $\\operatorname{Hom}^{\\bullet}(P,C(f))^q$ with $\\operatorname{Hom}^{\\bullet}(P,J)^q\\oplus\\operatorname{Hom}^{\\bullet}(P,I)^{q+1}$ for $f:I\\to J$. On a pair $(a,b)$ its differential is $(d(a)+f\\circ b,-d(b))$, exactly the cone differential. Global sections of the Hom complex therefore take this cone to the cone of the corresponding global Hom-complex map. For a K-injective representative $I_B$ of any target $B$, K-injective Hom comparison identifies $H^q\\operatorname{Hom}^{\\bullet}(P,I_B)$ with $\\operatorname{Hom}_{D(A_T)}(P,B[q])$: cocycles are chain maps and boundaries are null homotopies. Thus compactness identifies derived Hom from $P$ of the telescope with the same telescope on $R\\operatorname{Hom}_{A_T}(P,Q)$. Exactness of filtered colimits from step 1 identifies its cohomology with localization. Taking degree one and using the adjunction yields the natural bijection $\\operatorname{Ext}^1_{A_T}(P,Q)[1/\\varpi]\\cong\\operatorname{Ext}^1_{E_T}(S(P),S(Q))$. In particular every rational extension class is $S(\\alpha)/\\varpi^n$ for an integral class $\\alpha$ and an integer $n\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and the Ext formula in the last paragraph of Lemma 6.8.13"
+   }
+  },
+  {
+   "text": "Consequently the rationalizations of constructible integral sheaves are closed under extensions. Given $0\\to S(Q)\\to F\\to S(P)\\to0$, let its class be $S(\\alpha)/\\varpi^n$ as in step 2. Degree-one extension classification realizes $\\alpha$ by $0\\to Q\\to N\\to P\\to0$. The short-exact-complex triangle node identifies its middle term with the shifted cone of its connecting morphism. The integral characterization then makes $N$ constructible: its degree-zero complex is the shifted cone of $P[0]\\xrightarrow{\\alpha}Q[0][1]$, hence belongs to the integral category, and clause (iii) describes its cohomology $N$. Exact scalar extension sends this sequence to the class $S(\\alpha)$. Pushing its rational sequence out along the automorphism $\\varpi^{-n}$ of $S(Q)$ changes its class to $S(\\alpha)/\\varpi^n$; because this is an automorphism, its middle term is isomorphic to $S(N)$. The bijection in extension classification now identifies that sequence with the given sequence, so $S(N)\\cong F$. This is only an isomorphism of middle terms, as required; the chosen identification of the subobject has been scaled.",
+   "uses": [
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, last paragraph; Stacks Tag 06XV (lemma-ext-1) for extension classification"
+   }
+  },
+  {
+   "text": "We prove the assertion for every reduced closed subscheme $X$ of $T$, and every lisse $E_X$-sheaf, by noetherian induction on its closed support. Such $X$ is noetherian, finite-dimensional and $\\ell$-coprime: affine rings are quotients of noetherian rings, strict chains of closed irreducible subsets are chains in $T$, and an inverse of $\\ell$ maps to an inverse in every quotient local ring. The minimal-closed-subset node supplies the induction, with empty support having the zero model. On a nonempty reduced $X$, use [lem-weil-pbc-lisse-lattice-etale-local] to obtain an etale covering with lisse integral models. Choose a finite affine Zariski covering of $X$ and apply etale affine refinement on each affine; the resulting finite disjoint union $Y$ of affine schemes is a jointly surjective etale cover carrying a lisse integral model. Both $X$ and $Y$ are qcqs: $X$ is noetherian, and $Y$ is a finite union of affine components. Apply etale stratified finiteness to $Y\\to X$. On each stratum the pullback is finite etale and surjective and the integral model pulls back to a lisse integral model. The coefficient restriction of step 1 identifies these as the required coefficient sheaves. Thus [lem-weil-pbc-lisse-lattice-finite-etale-descent] gives a lisse integral model for the restriction of $L$ to each of these strata.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph; Stacks Tag 03S0 (lemma-etale-stratified-finite)"
+   }
+  },
+  {
+   "text": "Extract a nonempty open $U\\subseteq X$ on which such a model exists. There are finitely many irreducible components, each with a generic point. Choose a component $C$ and its generic point $\\eta$, and the stratum $Z\\hookrightarrow X$ containing $\\eta$. Write its image as $O\\cap F$ with $O$ open and $F$ closed. Since $F$ contains $\\eta$, it contains $C$. Remove all other components and intersect with $O$. The resulting nonempty open $U$ lies in $C\\cap O$, hence in the image of $Z$. It factors through $Z$ as a scheme: in the open part of the stratum immersion its ideal sections vanish at every point of the reduced open subscheme $U$, so lie in its nilradical and are zero. On affine charts this is exactly factorization of the ring map through the quotient defining the closed immersion. Pull back the stratum model along this open immersion $U\\to Z$ to get a lisse integral model $M_U$ of $L|_U$. The open is quasi-compact by the noetherian-open node.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-scheme-sober",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, passage from a finite stratification to a constructible filtration; explicit reduced-scheme dense-open argument"
+   }
+  },
+  {
+   "text": "Let $i:Z_0\\hookrightarrow X$ be the reduced induced closed subscheme of $X\\setminus U$ and $j:U\\hookrightarrow X$ the open immersion. Its support is strictly smaller. The induction hypothesis supplies a constructible integral model $M_Z$ for $i^{-1}L$. Put $Q=j_!M_U$ and $P=i_*M_Z$. The ringed open-closed node gives their restrictions $(M_U,0)$ and $(0,M_Z)$ on $U,Z_0$. Consequently adjoining the open stratum $U$ to the finitely many strata of $Z_0$ proves both $P$ and $Q$ are constructible integral sheaves. The local modules are finite free on $U$ and the given finitely presented modules on $Z_0$, with zero modules on the complementary pieces. Scalar localization commutes with $i_*$ because that node gives filtered-colimit preservation for qcqs $X$. It commutes with $j_!$ because $j_!$ is a left adjoint, hence preserves the sequential colimit expressing localization; the scalar multiplications and the coefficient identifications in step 1 identify these colimits as module sheaves. Therefore $S(Q)\\cong j_!j^{-1}L$ and $S(P)\\cong i_*i^{-1}L$. The same node gives $0\\to S(Q)\\to L\\to S(P)\\to0$. Step 3 now provides a constructible integral model for $L$ on $X$, completing the noetherian induction.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, last paragraph; Stacks Tags 09AA, 09AH, 09BN and 03DI for open-closed assembly"
+   }
+  },
+  {
+   "text": "Finally let $r:T_{\\mathrm{red}}\\hookrightarrow T$ be the reduced induced closed subscheme with full support. The open-closed node applied with empty complementary open gives $L\\cong r_*r^{-1}L$ and $r^{-1}r_*\\cong1$. By step 1 its coefficient inverse images are $A_{T_{\\mathrm{red}}}$ and $E_{T_{\\mathrm{red}}}$. The preceding induction supplies a constructible integral model $N_{\\mathrm{red}}$ on $T_{\\mathrm{red}}$. Set $N=r_*N_{\\mathrm{red}}$. Its supporting strata, composed with $r$, are immersions into $T$, partition the same underlying space, and restrict $N$ to the corresponding restrictions of $N_{\\mathrm{red}}$ by $r^{-1}r_*\\cong1$. Hence they witness precisely the finite stratification required in the statement. Filtered-colimit preservation by $r_*$ gives $S(N)\\cong r_*S(N_{\\mathrm{red}})\\cong r_*r^{-1}L\\cong L$. This also covers the empty scheme, rank zero, disconnected schemes and nonreduced schemes, and asserts no global lissity of $N$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13; reduction to the reduced scheme using Stacks Tag 09AH with empty complement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-ext",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, with the compactness telescope and extension gluing written out; reduction and noetherian induction clarify its finite-stratification devissage."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -129,12 +266,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-e-realization",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split Bhatt-Scholze 6.8.13 into etale-local integral structures, finite-etale descent on strata, and an explicit compactness/Ext/extension gluing argument using existing nodes. Added three statement-only inputs; tracked continuous completed coefficients and nonreduced strata, with no global lisse-lattice claim.",
+  "blueprint": "Realizes the first sentence of the finite-extension ancestor proof, \"Choose an integral lattice for K\", for its lisse degree-zero input. The parent condensed realization handles general stratified sheaves and bounded complexes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic derivation of the exact scalar-extension/restriction adjunction in step 2; the unit route has no replacement for this categorical tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site K-injective resolutions for the explicit global Hom cone calculation in step 2; not a replacement of any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-1ade26b98",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1ade26b98 (reviewer sub-agent of L); spot-checked: Read the full item and all three new nodes against Bhatt–Scholze 6.8.2, 6.8.4, 6.8.11–13 and cited Stacks sources; checked all seven steps, edge cases, DAG duplicates/cycles, and exact master coefficient category and exchange morphism. Corrected duplicate dependencies, missing Noetherian-definition citations, and creation metadata in fixes/dag/nodes. Statements unchanged; no nodes dropped. Full findings and accepted tool uses are in review.md.; 3 file(s) fixed by the reviewer"
+ }
 }
