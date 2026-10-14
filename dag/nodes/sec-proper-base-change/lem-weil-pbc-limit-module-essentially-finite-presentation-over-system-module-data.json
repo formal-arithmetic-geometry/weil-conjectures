@@ -15,31 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Express H using the standard bases as its finite t-by-s matrix. The ring colimit represents each entry at some stage of B. Directedness supplies a common stage i₁ ≥ i₀ for all entries. For an empty matrix take i₁ = i₀. Restrict B, β, κ and τ₀ to the tail above i₁. That tail is cofinal: every old index has a common upper bound with i₁. Hence its ring colimit is still T, and both ring-localization hypotheses restrict to it. They are hypotheses, not consequences of colimitness.",
-   "uses": [],
+   "text": "Apply Concrete.isColimit_exists_rep to each entry of LinearMap.toMatrix' H in the old tail ring colimit. Finset induction and directedness give one stage k carrying every entry (the empty matrix uses nonemptiness). Let i₁=k.val and ρ be the inclusion of I≥i₁ into I≥i₀. The tail is nonempty and directed. A common upper bound with k gives a morphism from every old-tail object; the thin-category condition gives ρ.Final by Functor.final_of_exists_of_isFiltered. Functor.Final.isColimitWhiskerEquiv transports the given ring colimit to B₁=ρ⋙B.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
    "elementary": false
   },
   {
-   "text": "Map the lifted matrix at i₁ into each later ring B₁(i), obtaining Hᵢ. Define D(i) as the additive group of the actual quotient B₁(i)^t / range Hᵢ (lifted to universe max u v). Ring transitions send matrix columns to matrix columns, so entrywise maps descend to semilinear quotient maps. Composition and identity follow on representatives. The presentation equivalence at T identifies the limit quotient with N and induces δ and ν. Their naturality and scalar formulas also follow on representatives. The t standard basis classes generate D(i).",
-   "uses": [],
+   "text": "Use the supplied presentation equivalence to define the surjective map f:T^t→N and prove Function.Exact H f. Transport the lifted matrix along B₁ from its least index. For each j form the actual quotient Q(j)=B₁(j)^t/range(A(j).toLin'). Define coordinates and prove coordinates_matrix by expanding the finite sums. Submodule.liftQ gives the semilinear maps on Q and the legs to N. Since the stage quotient lives in universe u, it is automatically Small in max u v; use the proved Shrink.linearEquiv to transport Q, its action, its quotient projection, and all maps to that universe. Equality on the surjective quotient projections proves identities, composition, cocone naturality and scalar compatibility. The standard finite-free and quotient Module.Finite instances give finiteness. The inverse Shrink equivalence explicitly supplies the prescribed s-by-t presentation at each stage.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private presentation_baseChange proof applies IsBaseChange.of_right_exact to the quotient exact sequence and its transported finite-free presentation. IsBaseChange.linearMap and finitePow give the two free-term base changes; coordinates_matrix and the quotient-projection formulas give the commuting squares. Apply this once to a transition quotient and once to the given presentation f,H over T. IsBaseChange.comp_equiv transports through the source Shrink equivalence, and equiv_tmul proves the exact pure-tensor formulas in both requested comparisons.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
    "elementary": false
   },
   {
-   "text": "Tensoring a cokernel is right exact. Base change carries the finite free modules and the lifted matrix to the later free modules and matrices. Thus it identifies B₁(j) ⊗[B₁(i)] D(i) with D(j) and T ⊗[B₁(i)] D(i) with N. On pure tensors the maps are precisely multiplication by the scalar followed by the quotient map.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "A vector representing an element of N has finitely many coordinates, so it lifts to a common stage. If a stage vector maps to zero in N, it is H applied to a finite vector over T. Lift that vector's coordinates to a later stage; the finitely many equalities with the original vector hold at a still later stage by the eventual-equality criterion for the ring colimit. Consequently the quotient class is zero there. For any additive cocone define its map from N by a representative. Two choices become equal at a common later stage by applying the zero criterion to their difference. This gives a well-defined additive map, factoring each leg, and representatives prove uniqueness. Therefore the displayed additive cocone has colimit N on the chosen later tail.",
-   "uses": [],
+   "text": "Apply Module.baseChange_diagram_elementwise to B₁, the restricted ring colimit, the constructed D and δ, and the scalar and tensor comparison formulas. It supplies representatives in N and eventual zero for each stage element. Subtract two representatives after moving to a common upper bound and apply eventual zero to obtain eventual equality. For any additive cocone, choose a representative of each element of N and send it along its leg; eventual equality proves independence of representatives. Move representatives to a common stage to prove addition; the representative formula proves zero, factorization, and uniqueness. This explicitly constructs the additive IsColimit. Finally set ν(i)=(δ.app i).hom and use ring-hom extensionality on hκ to rewrite the cocone ring maps as κ₁, including their induced Algebra structures. The original signature and all its local-ring and ring-localization assumptions are retained, although the module construction needs only the supplied ring colimit.",
+   "uses": [
+    "lem-weil-pbc-base-change-diagram-elementwise"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-weil-pbc-base-change-diagram-elementwise"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00QX, λ₂ and matrix-cokernel paragraphs; Tag 00R1"
+  "place": "Algebra, Tag 00QX, presentation-matrix paragraph; Tag 00R1. Lean construction adapted from the proved private quotient construction in Sheaf.RingTheory.FinitePresentationModuleBaseChangeDiagram, enlarged to universe max u v; additive colimit uses the proved tensor base-change representative criterion."
  },
  "mathlib_searches": [
   {
@@ -131,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-66eb4",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261014T020509-L-3810807",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled cleanly; adapted module fails against changed dependencies at the removed declaration and compiles after minimal forced edits; signatures, nodes, report, and direct importer checks match."
+  "landing": "20261014T022541-L-4044070",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
