@@ -14,25 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Use the affine-open extension-by-zero generators j_! O_U. They are flat;\ntheir Hom functor is sections on U. Quasi-compactness of U makes a section of a\nsheaf coproduct finitely supported, giving exactly the finite-subcoproduct\nfactorization in the conclusion. Arbitrary module sheaves are covered by sums\nof these generators. Resolve L_0 -> E_0 downward with that resolving class.\nGiven L_n -> E_n, resolve the bounded-above cone of L_n -> E_(n+1) by Q.\nCompose Q -> Cone -> L_n[1] and take its shifted cone to obtain L_(n+1).\nIts terms are sums of the old generators and the generators of Q; the map from\nL_n is degreewise split. The comparison triangle gives v_(n+1), initially\ncommuting up to homotopy. Extend the comparison homotopy along each degreewise\nsplit inclusion and subtract its boundary to get strict commutation. The\ncomparison of triangles makes v_(n+1) a quasi-isomorphism. Each stage has an\nupper bound, with no uniform bound required. Empty coproducts handle zero terms;\nzero complexes and arbitrary transitions need no exceptions. This construction\nuses no projectivity or lifting through a sheaf epimorphism.",
+   "text": "The explicit zero complex is bounded above and has an empty coproduct decomposition in every degree. The empty coproduct is zero by Sigma.hom_ext, and its generator flatness and finite-support conditions are vacuous. Apply the finite relative-extension theorem to its zero map into E_0 to obtain the initial bounded generator resolution.",
    "uses": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-quasi-iso-modules"
+    "lem-sc-compact-flat-generator-relative-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package a stage n as a complex L_n and a quasi-isomorphism v_n into E_n, together with its upper bound and generator property. For each packaged stage apply the relative-extension theorem to v_n followed by t_n. This supplies a packaged successor and a degreewise split transition commuting strictly with the comparison maps. Choose these successor functions and transitions within the existential proof.",
+   "uses": [
+    "lem-sc-compact-flat-generator-relative-extension"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use dependent Nat.rec from the initial packaged stage and the chosen successor. Define the requested L, l and v by projections of this recursion; the recursion equation makes the successor types agree definitionally. Project the bound, quasi-isomorphism, strict commutation, splitting, and generator witnesses to obtain each clause of the original conclusion. All choices occur inside this proof; no definition extracts arbitrary data from an unproved existence statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-quasi-iso-modules"
+  "lem-sc-compact-flat-generator-relative-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G1",
-  "document": "lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean",
-  "place": "Separation of the original agent-written relative generator resolution and finite-piece bar argument; preserves its constructions."
+  "group": "P1",
+  "document": "https://stacks.math.columbia.edu/tag/06XX",
+  "place": "Dependent recursion formalizing the original relative cone induction; its one finite extension is separated into lem-sc-compact-flat-generator-relative-extension."
  },
  "mathlib_searches": [
   {
@@ -117,9 +125,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261014T081308-L-3872922",
+  "landing": "20261014T083745-L-4168253",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

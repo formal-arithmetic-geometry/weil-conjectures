@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+import Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension
 
 /-! # Split towers resolved by compact flat generators
 
@@ -62,6 +63,59 @@ theorem exists_compact_flat_generator_tower_resolution (Y : Scheme.{u})
           (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))
           (f : G j ⟶ ∐ H),
           ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),
-            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f := by sorry
+            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f := by
+  classical
+  open ZeroObject in
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let Good (L : CochainComplex C ℤ) : Prop :=
+    ∀ i : ℤ, ∃ (I : Type u)
+        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),
+        Nonempty (L.X i ≅ ∐ G) ∧
+        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧
+        ∀ (j : I) (K : Type u)
+          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+          (f : G j ⟶ ∐ H),
+          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),
+            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f
+  have hzero : Good (HomologicalComplex.zero : CochainComplex C ℤ) := by
+    intro i
+    let G : PEmpty.{u + 1} → C := PEmpty.elim
+    have hG : IsZero (∐ G) := by
+      rw [IsZero.iff_id_eq_zero]
+      apply Sigma.hom_ext
+      intro j
+      exact PEmpty.elim j
+    refine ⟨PEmpty.{u + 1}, G, ?_, ?_, ?_⟩
+    · exact ⟨(isZero_zero C).iso hG⟩
+    · intro j
+      exact PEmpty.elim j
+    · intro j
+      exact PEmpty.elim j
+  have hbzero : ∃ z : ℤ, ∀ i : ℤ, z < i →
+      IsZero ((HomologicalComplex.zero : CochainComplex C ℤ).X i) :=
+    ⟨0, fun _ _ ↦ isZero_zero C⟩
+  let State (n : ℕ) := Σ L : CochainComplex C ℤ,
+    {v : L ⟶ E n //
+      (∃ z : ℤ, ∀ i : ℤ, z < i → IsZero (L.X i)) ∧ QuasiIso v ∧ Good L}
+  obtain ⟨L₀, _, v₀, hb₀, hv₀, _, _, hg₀⟩ :=
+    exists_compact_flat_generator_relative_extension Y HomologicalComplex.zero (E 0) 0
+      hbzero (hb 0) hzero
+  let s₀ : State 0 := ⟨L₀, v₀, hb₀, hv₀, hg₀⟩
+  have step (n : ℕ) (s : State n) :
+      ∃ s' : State (n + 1), ∃ l : s.1 ⟶ s'.1,
+        l ≫ s'.2.val = s.2.val ≫ t n ∧ ∀ i : ℤ, IsSplitMono (l.f i) := by
+    obtain ⟨L', l, v, hb', hv, hc, hs, hg⟩ :=
+      exists_compact_flat_generator_relative_extension Y s.1 (E (n + 1))
+        (s.2.val ≫ t n) s.2.property.1 (hb (n + 1)) s.2.property.2.2
+    exact ⟨⟨L', v, hb', hv, hg⟩, l, hc, hs⟩
+  choose next transition comm split using step
+  let s : ∀ n : ℕ, State n := Nat.rec s₀ (fun n sn ↦ next n sn)
+  refine ⟨(fun n ↦ (s n).1), (fun n ↦ transition n (s n)),
+    (fun n ↦ (s n).2.val), ?_, ?_, ?_, ?_, ?_⟩
+  · exact fun n ↦ (s n).2.property.1
+  · exact fun n ↦ (s n).2.property.2.1
+  · exact fun n ↦ comm n (s n)
+  · exact fun n ↦ split n (s n)
+  · exact fun n ↦ (s n).2.property.2.2
 
 end AlgebraicGeometry

@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-compact-flat-generator-relative-extension",
+ "kind": "statement",
+ "title": "One relative compact-flat-generator extension",
+ "statement": "Let $Y$ be any scheme and let $L,E$ be cochain complexes of module sheaves on $Y$ [def-pc-cochain-complex-modules]. Let $a:L\\to E$ be a chain map. Suppose $L$ and $E$ are each zero above an integer, with possibly different bounds. Suppose every term $L^i$ is isomorphic to a coproduct $\\bigoplus_{j\\in I_i}G_{i,j}$ indexed in the scheme universe, where the $G_{i,j}$ are flat [def-pc-flat-sheaf-modules] and have the following finite-support property: for any family $(H_k)_{k\\in K}$ indexed in that universe, every map $G_{i,j}\\to\\bigoplus_{k\\in K}H_k$ factors through the canonical inclusion of a finite subcoproduct. Then there exist a bounded-above complex $L\\prime$, maps $l:L\\to L\\prime$ and $v:L\\prime\\to E$, with $v$ a quasi-isomorphism [def-pc-quasi-iso-modules], $l\\gg v=a$, and every $l^i$ a split monomorphism. Every term of $L\\prime$ is likewise a universe-small coproduct of flat module sheaves with the same explicit finite-support property. No hypothesis of quasi-isomorphy, monicity, or epimorphy is imposed on $a$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XX",
+  "place": "Proof, relative cone induction before the final termwise-surjectivity addition; affine-open resolving class from 03EW and 077J, as expanded in lean/Sheaf/AlgebraicGeometry/FlatTelescopeTargetRefinement.lean, original first proof paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine-open sheaves j_! O_U. Their stalks are either zero or the\nlocal ring, so they are flat. Adjunction identifies maps from them with sections\non U. A section of a sheaf coproduct locally comes from a finite subsum; an affine\nopen is quasi-compact, so finitely many such neighborhoods suffice. The union of\ntheir finite supports gives the required factorization, with uniqueness and\ngluing supplied by the monic inclusion of a subsum. Every module sheaf is covered\nby a sum of these sheaves: for every local section choose an affine neighborhood\nand its corresponding adjunction map. Resolve the bounded-above mapping cone of\na by these generators, downward from its upper bound, choosing generator covers\nof the successive pullbacks of cycles as in the bounded resolution construction\nunderlying 077J. This gives a bounded-above complex Q and a quasi-isomorphism\nQ -> Cone(a). Compose with Cone(a) -> L[1]. Its shifted cone gives L', with the\ntermwise split inclusion L -> L' and terms the direct sums of terms of L and Q.\nThe triangle comparison gives L' -> E. Its composite with L -> L' equals a up to\nhomotopy. Extend the comparison homotopy degreewise along the split inclusion,\nand subtract its boundary; this makes the equality strict without changing the\nhomotopy class. The map is a quasi-isomorphism by comparison of the two triangles,\nsince the other vertical maps are the identity of L and Q -> Cone(a).\nFinite direct sums of generator coproducts are reindexed by disjoint union, so\nall terms of L' have the required generator description. The maximum of the\nbounds, with the shift accounted for, bounds L'. There is no assumption on a:\na zero map, a zero target, and an acyclic target are covered by the same argument.\nEmpty coproducts represent zero terms. No projective lifting is used.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P1",
+  "document": "https://stacks.math.columbia.edu/tag/06XX",
+  "place": "Finite cone-extension step before the final termwise-surjectivity addition; affine-open generator specialization from the original target-refinement proof, checked against 03EW and 077J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given a bounded above complex L of sums of compact flat generators and a map L to a bounded above complex E of sheaves of modules, extend L by a degreewise split inclusion to a generator complex quasi-isomorphic to E",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a map from a bounded above complex to a quasi-isomorphic resolution with a degreewise split inclusion",
+   "results": "8 hits, all injective-resolution declarations (including InjectiveResolution.ι′, extMk_hom, Hom.hom′, descFSucc, desc, descFOne, descHomotopyZeroZero, descHomotopyZeroOne). None is a relative compact-flat-generator extension.",
+   "date": "2026-10-14",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsSplitMono, QuasiIso",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*resolution|resolution.*split|relative.*resolution",
+   "results": "msearch Mathlib grep: 0 hits. Local source search found RelativeFlatExtension, BoundedFlatReplacement, and CyclePullbackResolution; their public statements do not provide both the generator decomposition and the split inclusion required here. Blueprint searches relative generator, compact flat and 06XX: no imported match.",
+   "date": "2026-10-14",
+   "verdict": "No matching public theorem for this resolving class."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorTowerResolution",
+  "date": "2026-10-14",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof of finite duality: finite relative cone-extension step of the compact affine-open generator tower, before finite-piece bar enlargement.",
+   "via": [
+    "lem-sc-compact-flat-generator-tower-resolution",
+    "lem-sc-flat-telescope-target-refinement",
+    "lem-sc-flat-telescope-arrow-bar-data",
+    "lem-sc-flat-telescope-arrow-cocycles",
+    "lem-sc-flat-telescope-arrow-diagram",
+    "lem-sc-flat-telescope-stage-map-refinement",
+    "lem-sc-normalized-flat-telescope-comparison",
+    "lem-sc-normalized-kflat-representative-comparison",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment-normalized",
+    "lem-sc-derived-pullback-kflat-counit-shift-adjustment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactFlatGeneratorRelativeExtension.lean",
+  "declaration": "AlgebraicGeometry.exists_compact_flat_generator_relative_extension",
+  "statement": "theorem exists_compact_flat_generator_relative_extension (Y : Scheme.{u})\n    (L E : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (a : L ⟶ E)\n    (hL : ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero (L.X i))\n    (hE : ∃ z : ℤ, ∀ i : ℤ, z < i → IsZero (E.X i))\n    (hgen : ∀ i : ℤ, ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty (L.X i ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f) :\n    ∃ (L' : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n      (l : L ⟶ L') (v : L' ⟶ E),\n      (∃ z : ℤ, ∀ i : ℤ, z < i → IsZero (L'.X i)) ∧\n      QuasiIso v ∧ (l ≫ v = a) ∧ (∀ i : ℤ, IsSplitMono (l.f i)) ∧\n    ∀ i : ℤ, ∃ (I : Type u)\n        (G : I → SheafOfModules.{u} (moduleRings Y.toRingedSpace)),\n        Nonempty (L'.X i ≅ ∐ G) ∧\n        (∀ j : I, SheafOfModules.IsFlat (G j)) ∧\n        ∀ (j : I) (K : Type u)\n          (H : K → SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n          (f : G j ⟶ ∐ H),\n          ∃ (S : Finset K) (g : G j ⟶ ∐ (fun k : {k // k ∈ S} ↦ H k.1)),\n            g ≫ Sigma.desc (fun k : {k // k ∈ S} ↦ Sigma.ι H k.1) = f",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T083745-L-4168253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261014T083745-L-4168253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
