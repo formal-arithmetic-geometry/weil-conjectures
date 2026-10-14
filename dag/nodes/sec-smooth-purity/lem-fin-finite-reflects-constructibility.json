@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-finite-reflects-constructibility",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite direct image reflects constructibility",
@@ -13,37 +13,147 @@
   "place": "node lem-fin-finite-reflects-constructibility, order 1626"
  },
  "stmt_deps": [
+  "def-weil-finite-integral-morphism",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof": [
   {
-   "text": "At a geometric point $\\bar z$, with induced point $\\bar s$ of $S$,\nthe counit has stalk\n\n$$\n(p^*p_*F)_{\\bar z}\n=\\prod_{\\bar z'\\in |Z_{\\bar s}|}F_{\\bar z'}\n\\longrightarrow F_{\\bar z},\n$$\n\nthe projection of [lemma-weil-pbc-finite-stalk-formula].\nIt is surjective for modules, hence the counit is surjective by\n[lemma-weil-pbc-geometric-stalk-conservative].\nPulling back a finite partition and its etale trivializations proves\nthat $p^*p_*F$ is constructible, by\n[def-weil-pbc-constructible-complexes].\nIts kernel is constructible by\n[lem-weil-pbc-constructible-subobjects-noetherian].\nNow take its cokernel using [thm-constructible-serre].\nNo surjectivity of $p$ onto $S$ is required.",
+   "text": "Put $G=p_*F$ and $H=p^{-1}G$, in the category of sheaves of modules over the same constant finite ring $\\Lambda$. By [prop-constructible-pullback], applied with module values (the category-of-values convention in [def-constructible-constant]), $H$ is constructible. More explicitly, pull back a finite stratification adapted to $G$; its restrictions are finite locally constant module sheaves. Each pulled-back stratum has constructible underlying subset by [lem-pur-scheme-constructible-preimage]. Thus this is precisely the module-sheaf constructibility of [def-weil-pbc-etale-constructible-sheaf], without changing coefficients or passing to the pro-etale site.",
    "uses": [
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-constructible-complexes",
+    "prop-constructible-pullback",
+    "def-constructible-constant",
+    "lem-pur-scheme-constructible-preimage",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095G, lemma-pullback-constructible; global finite-partition form Tag 095E, lemma-constructible-quasi-compact-quasi-separated"
+   }
+  },
+  {
+   "text": "Let $\\varepsilon:H=p^{-1}p_*F\\to F$ be the counit of [def-weil-pbc-inverse-image]. Fix a geometric point $\\bar z$ of $Z$ and write $\\bar s=p\\bar z$. Identify $H_{\\bar z}$ with $(p_*F)_{\\bar s}$ by [lem-weil-pbc-inverse-image-stalk-germ]. For a germ represented by $a\\in(p_*F)(V)=F(V\\times_SZ)$ at a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar s$, that identification sends the germ of $\\eta_{p,p_*F}(V)(a)$ at $(V\\times_SZ,(\\bar v,\\bar z))$ to the germ of $a$. The triangle identity $p_*\\varepsilon\\circ\\eta_{p,p_*F}=\\mathrm{id}_{p_*F}$ says that applying $\\varepsilon$ to this pulled-back section gives $a$ on $V\\times_SZ$. Therefore $\\varepsilon_{\\bar z}$, under the identification, is exactly the restriction-of-germs map $r_{p,\\bar z,F}$ of [lem-weil-pbc-finite-stalk-formula-restriction]. Every germ of $(p_*F)_{\\bar s}$ has such a representative, so this proves equality of the two maps. That cited finite-fibre formula makes this restriction a product projection and hence surjective. The formula applies to the underlying abelian sheaf; all maps preserve the $\\Lambda$-action because they are the module inverse-image adjunction maps. No assumption that $p$ is surjective is used: for each chosen $\\bar z$ its fibre contains the specified factor.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-finite-stalk-formula-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (3), germ computation from equation-pullback; Tag 03QP, proposition-finite-higher-direct-image-zero (1)"
+   }
+  },
+  {
+   "text": "Let $C=\\operatorname{Coker}(\\varepsilon)$ in the abelian module-sheaf category of [def-weil-pbc-etale-sheaves]. Cokernels of module sheaves have the underlying abelian-sheaf cokernel (sheafify the sectionwise quotient with its induced $\\Lambda$-action). Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] gives $C_{\\bar z}=\\operatorname{Coker}(\\varepsilon_{\\bar z})=0$ for every $\\bar z$, by step 2. Thus the underlying abelian-sheaf map $C\\to0$ is an isomorphism on every geometric stalk, hence an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. Consequently $C=0$ and $\\varepsilon$ is an epimorphism. This applies the conservative-stalk node only to an isomorphism, as its statement requires.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, lemma-stalk-exact (3); Tag 03PU, theorem-exactness-stalks"
+   }
+  },
+  {
+   "text": "Set $K=\\operatorname{Ker}(\\varepsilon)\\subseteq H$. The scheme $Z$ is Noetherian and $\\Lambda$ is finite, so [lem-weil-pbc-constructible-subobjects-noetherian] applies to the constructible $H$ of step 1 and makes $K$ constructible. The inclusion $K\\to H$ is now a morphism between constructible module sheaves. By the cokernel clause (1) of [thm-constructible-serre], $\\operatorname{Coker}(K\\to H)$ is constructible. Since $\\varepsilon$ is epic by step 3, the kernel-cokernel identity in the abelian category identifies this cokernel with $F$. The partition and its module trivializations for the cokernel become those for $F$ under this isomorphism, proving the assertion.",
+   "uses": [
     "lem-weil-pbc-constructible-subobjects-noetherian",
     "thm-constructible-serre"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09BH, proposition-constructible-over-noetherian (3); Tag 03RZ, lemma-constructible-abelian (3)"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-weil-pbc-constructible-complexes",
+  "def-constructible-constant",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-pur-scheme-constructible-preimage",
   "lem-weil-pbc-constructible-subobjects-noetherian",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-geometric-stalks-exact",
   "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-reflects-constructibility.md",
-  "place": "## Proof"
+  "place": "Proof, finite-stalk counit argument, with Stacks Tags 095G, 03Q1, 03QP, 03PT, 03PU, 09BH and 03RZ making its intermediate claims explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(pushforward|direct.image)|reflect.*constructib",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: retrieved scheme constructible-subset or general sheaf-functor facts do not reflect constructibility of an etale module sheaf under finite direct image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the pushforward of an etale module sheaf along a finite scheme morphism is constructible then the sheaf is constructible",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.IsFinite",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: retrieved scheme constructible-subset or general sheaf-functor facts do not reflect constructibility of an etale module sheaf under finite direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of noetherian schemes reflects constructibility of etale sheaves of finite ring modules under direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Topology.IsConstructible.image_of_isOpenEmbedding",
+   "date": "2026-10-14",
+   "verdict": "no match: retrieved scheme constructible-subset or general sheaf-functor facts do not reflect constructibility of an etale module sheaf under finite direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of a sheaf follows from constructibility of its finite pushforward using the surjective pullback pushforward counit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, TopCat.Sheaf.pushforward_sheaf_of_sheaf, Condensed.ofSheafForgetCompHaus",
+   "date": "2026-10-14",
+   "verdict": "no match: retrieved scheme constructible-subset or general sheaf-functor facts do not reflect constructibility of an etale module sheaf under finite direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: retrieved scheme constructible-subset or general sheaf-functor facts do not reflect constructibility of an etale module sheaf under finite direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphic counit from pullback of finite pushforward shows a sheaf is a quotient of a constructible sheaf",
+   "results": "8 hits: CategoryTheory.presheafIsFinite_of_epi, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, CategoryTheory.instEpiSheafTypeToImage, Condensed.epi_iff_locallySurjective_on_compHaus, CategoryTheory.PresheafIsGeneratedBy.of_epi, CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp, TopCat.toSheafCompHausLike",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presheaves, general sheaf epimorphisms and condensed objects do not state constructibility reflection for finite scheme direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible|Constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presheaves, general sheaf epimorphisms and condensed objects do not state constructibility reflection for finite scheme direct image"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -75,5 +185,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-fin-finite-reflects-constructibility",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded the finite-stalk counit calculation using existing germ-compatible nodes, repaired the use of conservativity for epimorphisms by taking a cokernel and using exact stalks, and retained the kernel/constructible-cokernel route. All intermediate facts reuse existing nodes; no new nodes.",
+  "blueprint": "Steps 1-4 realize respectively the original pullback paragraph, the counit projection paragraph, its stalkwise-surjectivity inference, and its kernel/cokernel paragraph. No unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic constructible sheaf of modules on the small etale site used exactly as stated in the cited proof step; no statement in this unit supplies this intermediate tool, and it preserves the finite-counit proof route."
+   },
+   {
+    "node": "def-weil-pbc-etale-sheaves",
+    "why": "Generic sheaves of abelian groups and of modules used exactly as stated in the cited proof step; no statement in this unit supplies this intermediate tool, and it preserves the finite-counit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic stalk of an inverse image, compatible with germs of pulled-back sections used exactly as stated in the cited proof step; no statement in this unit supplies this intermediate tool, and it preserves the finite-counit proof route."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic constructible sheaves form a weak serre subcategory used exactly as stated in the cited proof step; no statement in this unit supplies this intermediate tool, and it preserves the finite-counit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-4c6845607",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-4c6845607 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. The statement, finite counit stalk argument, exact-cokernel step, constructible kernel/cokernel route, hypotheses, coefficient category, sources, edge cases, DAG dependencies, searches, and duplicate checks all pass. Review written to review.md."
+ }
 }
