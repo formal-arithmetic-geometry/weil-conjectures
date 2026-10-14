@@ -37,16 +37,73 @@
  },
  "proof": [
   {
-   "text": "Evaluate on the affine etale basis. Strict henselizations of the integrally closed local domains are normal domains, and their generic fibres are connected, so the unit identifies sections of the constant sheaf with the same coefficient module. Hence it is an isomorphism on the basis and therefore of sheaves.",
+   "text": "Choose an affine open chart Spec R containing the image of a geometric point s. Its stalks are isomorphic to stalks of Y, so R is an integrally closed domain by the normal-stalk criterion. The chart description supplies a local strict-henselization ring C, a chart ring map, and an ind-etale R-algebra structure on C.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical restriction construction; Tag 09Z5"
+   }
+  },
+  {
+   "text": "Present C as a filtered colimit of etale R-algebras. The etale-colimit normal-local-domain theorem gives IsDomain C and injectivity R→C. Tensoring C with the fraction field of R is localization of C at the images of nonzero elements of R; injectivity ensures these images are nonzero, so this localization is a domain.",
+   "uses": [
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical restriction construction; Tag 09Z5"
+   }
+  },
+  {
+   "text": "The spectrum of that tensor-product domain is the pullback of the generic point of Spec R and Spec C. Remove the common open-immersion factor in the two pullback legs, then use the open-immersion stalk isomorphism at the generic point to identify this pullback with the strict fibre over the generic point of Y. Thus this fibre is integral and therefore connected.",
    "uses": [],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical restriction construction; Tag 09Z5"
+   }
+  },
+  {
+   "text": "The proved constant-strict-fibre comparison identifies the unit on each geometric stalk with the canonical coefficient map to sections on the strict fibre. The latter is invertible because that fibre is connected: transfer the abelian-group constant-section theorem through ModuleCat→AddCommGrpCat, using preserved sheafification and reflection of isomorphisms. The coefficient germ to the constant-sheaf stalk is invertible directly by the proved generic Point.toPresheafFiber_presheafFiberConstIso_hom and Point.isIso_presheafFiber_map_toSheafify_const API, combined with Point.toPresheafFiber_naturality. This uses the generic coefficient-category result, not the separate abelian-group-specific ConstantSheafGeometricStalk module. Cancel the coefficient germ and the strict-fibre comparison to prove the stalk unit invertible.",
+   "uses": [
+    "lem-weil-pbc-constant-strict-fibre-stalk-comparison",
+    "lem-weil-pbc-constant-sheaf-sections-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical restriction construction; Tag 09Z5"
+   }
+  },
+  {
+   "text": "Transport stalk invertibility through the canonical universe-lifting isomorphism of fibre functors. Apply the conservative family of geometric stalks to obtain IsIso for the original unit, with its statement unchanged.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical restriction construction; Tag 09Z5"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-constant-strict-fibre-stalk-comparison",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tag 09Z5, split from the generic-point conjunct"
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z5; affine-chart normality and generic-fibre localization, followed by the canonical degree-zero module stalk comparison"
  },
  "mathlib_searches": [
   {
@@ -95,9 +152,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261014T155257-L-1577185",
+  "landing": "20261014T170740-L-2556854",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
