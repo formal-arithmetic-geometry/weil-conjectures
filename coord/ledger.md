@@ -14833,3 +14833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 19:15 L: batch 20261014T111250 dependency take-out
 - 11:21 L: returned deliver/S1/Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit (reviewer RETURN: (reviewer X-cdad5, head cdad5c60f) C5 / brief point 5: comp_unit duplicates the existing private AlgebraicGeometry.compU)
+- 11:26 L: returned deliver/G4/Sheaf.AlgebraicGeometry.AbelianResolutionComparisonEvaluation (reviewer RETURN: (reviewer X-15ff5, head 15ff5cacc) A3: The delivery changes the unclaimed module Sheaf.AlgebraicGeometry.ModuleCohomolog)
