@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-affine-torsor-component-image-orbit",
+ "kind": "lemma",
+ "title": "Image of one stabilizer component is its label orbit",
+ "statement": "In the geometric setting of the parent representative-component-cover node, take a single label x and its exact stabilizer K. Put F=C^K as the intersection of equalizers, U=D(h in F), q:D(h)→U. Suppose an open immersion f:U→Y×Spec H is over H and q followed by f and projection to Y is fixedSplitSection x. For every label y and point a of D(h), the explicit split section over H s_y(a) belongs to opensRange f if and only if ∃ζ∈G, A(ζ)(x)=y. This is a single-component statement, with no family of representatives, no completeness, and no distinctness hypotheses.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, finite Galois covers and permutation sets; stabilizer quotient image argument"
+ },
+ "stmt_deps": [
+  "lem-sbc-affine-torsor-split-label-laws",
+  "lem-sbc-affine-torsor-split-point-lifting"
+ ],
+ "proof": [
+  {
+   "text": "Finite faithful flatness restricts to a finite étale surjection V=D(h)→B=D(ιg). The map from copies of V indexed by G to V×_B V given by deck graphs is finite étale. On every geometric fibre unique rotations make it bijective, so it is an isomorphism.",
+   "uses": [
+    "lem-sbc-affine-torsor-split-label-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K the finite orbit polynomial of c∈C is monic with K-invariant coefficients, so F→C is integral and injective. Lying over, preserved by base change, makes q:V→U universally surjective. The projection equations give q≫f=s_x over H. Thus the image of f after base change to V equals the image of the base-changed s_x.",
+   "uses": [
+    "lem-sbc-affine-torsor-split-point-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Via the deck-graph isomorphism that latter image is the union of translates of s_x. The section reconstruction and label laws identify each translate with the split section labelled A(ζ)x. The coproduct summands are disjoint. Hence a geometric point on section y lies in this image precisely when y=A(ζ)x for some ζ. Extend the residue field of any ordinary a to an algebraic closure and use that membership in an open subscheme is unchanged by a field extension. This proves the equivalence for a. For d=0 there is no x; for G trivial the image is the single labelled summand.",
+   "uses": [
+    "lem-sbc-affine-torsor-split-label-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-affine-torsor-split-label-laws",
+  "lem-sbc-affine-torsor-split-point-lifting"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF",
+  "note": "Expanded the corresponding step of the parent argument; point lifting is fully proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every point of a scheme split by a faithfully flat cover lies on the image of one of the split sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of the quotient by a stabilizer in a finite etale cover is exactly the union of labelled sections in its orbit",
+   "results": "PreGaloisCategory.fiberIsoQuotientStabilizer; FintypeCat.isoQuotientStabilizerOfIsConnected; IsFractionRing.stabilizerHom_surjective. None identifies the explicit scheme morphisms in this statement.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedSplitSectionOver|orbit.*image|image.*orbit; FaithfullyFlat|range_fst|sigmaOpenCover",
+   "results": "No duplicate explicit section over H or orbit image statement in Sheaf or WeilConjectures. Mathlib flat_and_surjective_SpecMap_iff, Pullback.range_fst, IsOpenImmersion.lift, sigmaOpenCover supply point lifting. RingTheory.Invariant.Basic supplies integrality but not the scheme-image criterion.",
+   "date": "2026-10-14",
+   "verdict": "Used Mathlib ingredients for the proved point-lifting statement; no exact image criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorRepresentativeComponentCover",
+  "date": "2026-10-14",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-representative-component-cover",
+   "place": "Image of one stabilizer component is its label orbit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorComponentImageOrbit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorComponentImageOrbit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_component_image_orbit",
+  "statement": "theorem affine_torsor_component_image_orbit (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C] [Module.Finite H C] [Module.FaithfullyFlat H C] (G : Type u) [Group G] [Finite G] (ρ : G → C →ₐ[H] C) (hρone : ρ 1 = AlgHom.id H C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (hne : algebraMap H C (ι g) ≠ 0) {Y : Scheme.{u}} (p : Y ⟶ Spec R) (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g)) (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p) [IsFinite j] [Etale j] (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)))) (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω), a.comp (algebraMap H C) = b.comp (algebraMap H C) → a (algebraMap H C (ι g)) ≠ 0 → ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) (d : ℕ) (T : Scheme.{u}) (t : T ⟶ Spec R) (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T) (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫ Spec.map (CommRingCat.ofHom ι)) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T) (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t) (x : Fin d) (K : Subgroup G) (hK : ∀ ζ, ζ ∈ K ↔ fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ ζ x = x) : let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C) let U : (Spec (CommRingCat.of F)).Opens := PrimeSpectrum.basicOpen (algebraMap H F (ι g)) let q := (Spec.map (CommRingCat.ofHom F.val.toRingHom)).resLE U (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) (by change PrimeSpectrum.basicOpen (algebraMap H C (ι g)) ≤ PrimeSpectrum.basicOpen (algebraMap H C (ι g)) rfl) ∀ (f : Scheme.Opens.toScheme (X := Spec (CommRingCat.of F)) U ⟶ pullback p (Spec.map (CommRingCat.ofHom ι))) [IsOpenImmersion f], f ≫ pullback.snd p (Spec.map (CommRingCat.ofHom ι)) = Scheme.Opens.ι (X := Spec (CommRingCat.of F)) U ≫ Spec.map (CommRingCat.ofHom (algebraMap H F)) → q ≫ f ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) = fixedSplitSection p t k d δ x → ∀ (y : Fin d) (a : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g)))), fixedSplitSectionOver p t k (Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C))) (Spec.map (CommRingCat.ofHom ι)) hk d δ hδ y a ∈ f.opensRange ↔ ∃ ζ : G, fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ ζ x = y",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T004056-L-2832088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261014T004056-L-2832088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

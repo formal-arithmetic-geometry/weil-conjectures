@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
 
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorComponentImageOrbit
+
 /-! # Stabilizer components of a split affine torsor cover -/
 
 @[expose] public section
@@ -93,6 +95,46 @@ theorem affine_torsor_representative_component_cover
       (∀ i, q i ≫ f i ≫ pullback.fst p (Spec.map (CommRingCat.ofHom ι)) =
         fixedSplitSection p t k d δ (r i)) →
       (⨆ i, (f i).opensRange) = ⊤ ∧
-        Pairwise (fun i j ↦ Disjoint (f i).opensRange (f j).opensRange) := by sorry
+        Pairwise (fun i j ↦ Disjoint (f i).opensRange (f j).opensRange) := by
+  classical
+  dsimp only
+  intro f hf hbase hsection
+  let A := fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne
+    p T t k hk d δ hδ
+  let v := Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+    (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫
+    Spec.map (CommRingCat.ofHom (algebraMap H C))
+  let s := fixedSplitSectionOver p t k v (Spec.map (CommRingCat.ofHom ι)) hk d δ hδ
+  have himage (i : Fin m) (y : Fin d)
+      (a : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))
+        (PrimeSpectrum.basicOpen (algebraMap H C (ι g)))) :
+      s y a ∈ (f i).opensRange ↔ ∃ ζ : G, A ζ (r i) = y :=
+    affine_torsor_component_image_orbit R H g ι C G ρ hρone hρmul hne
+      p j hj hEt hrot d T t k hk δ hδ (r i) (K i) (hstabilizer i)
+      (f i) (hbase i) (hsection i) y a
+  have hlift : ∀ z : (pullback p (Spec.map (CommRingCat.ofHom ι)) : Scheme.{u}),
+      ∃ y : Fin d, ∃ a, s y a = z :=
+    affine_torsor_split_point_lifting R H g ι C p j hj d T t k hk δ hδ
+  constructor
+  · apply top_unique
+    intro z _
+    obtain ⟨y, a, rfl⟩ := hlift z
+    obtain ⟨i, ζ, hζ⟩ := hcomplete y
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, (himage i y a).mpr ⟨ζ, hζ⟩⟩
+  · intro i j hij
+    apply TopologicalSpace.Opens.coe_disjoint.mp
+    rw [Set.disjoint_left]
+    intro z hi hj'
+    obtain ⟨y, a, rfl⟩ := hlift z
+    obtain ⟨α, hα⟩ := (himage i y a).mp hi
+    obtain ⟨β, hβ⟩ := (himage j y a).mp hj'
+    apply hij
+    apply hdistinct i j
+    refine ⟨β⁻¹ * α, ?_⟩
+    change A (β⁻¹ * α) (r i) = r j
+    rw [map_mul]
+    change A β⁻¹ (A α (r i)) = r j
+    rw [hα, ← hβ]
+    simp
 
 end AlgebraicGeometry.Scheme
