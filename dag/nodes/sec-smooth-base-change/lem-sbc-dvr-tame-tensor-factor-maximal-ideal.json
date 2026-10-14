@@ -17,37 +17,40 @@
  },
  "proof": [
   {
-   "text": "Finite faithfulness of A over B induces a finite fraction-field extension K1/K. Since A is normal and integral over B, it is the integral closure of B in K1. The assumed ideal identity says its ramification index over B is n. The kernel of A -> F contracts to zero in B and hence is zero by integrality. Thus F is a field factor of the generic tensor E tensor_K K1.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The integral closure C of B in E is finite by [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite], and is a Dedekind domain. Localize at each prime above m_B to get a DVR. The assumed e,f divisibilities and invertibility of n make e prime to the residue characteristic and f prime to it; the inseparable residue degree, a power of that characteristic dividing f, is therefore one. In residue characteristic zero, separability is automatic.",
+   "text": "Use Mathlib IsIntegralClosure.finite with the given finite-dimensional separable extension and the composite scalar tower to prove C finite over B.",
    "uses": [
     "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Abhyankar lemma 0BRM to each resulting tame DVR and K1/K, whose base ramification index n is divisible by e. Integrality over A and over B in F are equivalent by integrality of A/B; localization of integral closure identifies S_Q with the normalized tensor factor of 0BRM. It is adically formally smooth over A. Use the appropriate consequence of 09E7: The extension of the maximal ideal of A to S_Q equals the maximal ideal of S_Q.",
+   "text": "Let beta:E -> F be the left tensor inclusion followed by the quotient. Tensor balancing identifies alpha composed with B -> A with beta composed with B -> E. The latter is injective, since it is a composite of field maps and the fraction-ring inclusion. Thus ker(alpha) contracts to zero in B. Mathlib Ideal.eq_bot_of_comap_eq_bot, using finiteness of A/B, makes the kernel zero, proving alpha injective.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the quantitative tame ramification bound with r=n, the just-proved finiteness of C and injectivity of alpha, and the given finiteness of S. Since gcd(n,n)=n and n>0, the resulting index bound is Q.ramificationIdx A <= 1. Mathlib Ideal.ramificationIdx_pos gives positivity; hence the index is one.",
+   "uses": [
+    "lem-sbc-dvr-tame-tensor-factor-ramification-bound"
+   ],
    "elementary": false
   },
   {
-   "text": "The extension of the maximal ideal of A to S_Q equals the maximal ideal of S_Q.",
+   "text": "Unfold Mathlib Ideal.ramificationIdx_def. ENat.toNat_eq_iff_eq_natCast at one gives quotient length one. Module.length_eq_one_iff gives a simple quotient module; isSimpleModule_iff_isCoatom and Ideal.isMaximal_def give maximality of the image of Q.under A in S_Q. IsLocalRing.isMaximal_iff identifies that image with m_(S_Q). Finally rewrite Q.under A using its definition and the assumed contraction equality to obtain exactly the claimed image of m_A.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sbc-dvr-tame-tensor-factor-ramification-bound"
  ],
  "proof_origin": {
   "by": "worker",
   "kind": "written-by-agent",
-  "agent": "S1",
-  "document": "Stacks Project",
-  "place": "The argument of Tags 0BRM and 09E7, specialized to a tensor quotient and separated into its two local invariants."
+  "agent": "V1",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 032L and 0BRM; finite normalization and tensor-map injectivity proved directly in Lean, then quantitative bound and quotient-length criterion."
  },
  "mathlib_searches": [
   {
@@ -123,9 +126,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261014T030648-L-344555",
+  "landing": "20261014T033115-L-607564",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

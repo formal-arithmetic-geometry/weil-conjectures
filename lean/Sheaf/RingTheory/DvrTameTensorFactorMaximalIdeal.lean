@@ -14,6 +14,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.RamificationInertia.Ramification
 public import Mathlib.RingTheory.RamificationInertia.Inertia
 
+import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+import Mathlib.RingTheory.Ideal.GoingUp
+import Sheaf.RingTheory.DvrTameTensorFactorRamificationBound
 
 /-! # A local consequence of tame DVR base change
 
@@ -82,6 +85,49 @@ theorem dvr_tame_tensor_factor_map_maximalIdeal
     let := hQ
     Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A →
       (IsLocalRing.maximalIdeal A).map (algebraMap A (Localization.AtPrime Q)) =
-        IsLocalRing.maximalIdeal (Localization.AtPrime Q) := by sorry
+        IsLocalRing.maximalIdeal (Localization.AtPrime Q) := by
+  dsimp only
+  let : Algebra B E :=
+    ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra
+  have : IsScalarTower B (FractionRing B) E := .of_algebraMap_eq' rfl
+  have : FiniteDimensional (FractionRing B) E := hE.1
+  have : Algebra.IsSeparable (FractionRing B) E := hE.2
+  have hC : Module.Finite B (integralClosure B E) :=
+    IsIntegralClosure.finite B (FractionRing B) E (integralClosure B E)
+  intro hbounds P hP
+  let := hP
+  let F := (E ⊗[B] A) ⧸ P
+  let alpha : A →+* F := (Ideal.Quotient.mk P).comp
+    (Algebra.TensorProduct.includeRight : A →ₐ[B] E ⊗[B] A).toRingHom
+  let := alpha.toAlgebra
+  let beta : E →+* F := (Ideal.Quotient.mk P).comp
+    (Algebra.TensorProduct.includeLeft : E →ₐ[B] E ⊗[B] A).toRingHom
+  have hcomp : alpha.comp (algebraMap B A) = beta.comp (algebraMap B E) := by
+    ext b
+    exact congrArg (Ideal.Quotient.mk P)
+      (DFunLike.congr_fun (Algebra.TensorProduct.includeLeftRingHom_comp_algebraMap
+        (R := B) (A := E) (B := A)) b).symm
+  have hinj : Function.Injective alpha := by
+    apply (RingHom.injective_iff_ker_eq_bot alpha).mpr
+    apply Ideal.eq_bot_of_comap_eq_bot (R := B)
+    rw [RingHom.comap_ker, hcomp]
+    apply (RingHom.injective_iff_ker_eq_bot _).mp
+    exact beta.injective.comp ((algebraMap (FractionRing B) E).injective.comp
+      (IsFractionRing.injective B (FractionRing B)))
+  intro hfinite Q hQ
+  let := hQ
+  intro hclosed
+  have : Module.Finite A (integralClosure A F) := hfinite
+  have hle := dvr_tame_tensor_factor_ramificationIdx_le B n hnpos n hnpos hn A
+    hindex E hE hC hbounds P hP hinj hfinite Q hQ hclosed
+  have hone : Q.ramificationIdx A = 1 := by
+    have hpos := Ideal.ramificationIdx_pos Q A
+    simp only [Nat.gcd_self, Nat.div_self hnpos] at hle
+    omega
+  rw [Ideal.ramificationIdx_def, ENat.toNat_eq_iff_eq_natCast, Nat.cast_one,
+    Module.length_eq_one_iff, isSimpleModule_iff_isCoatom,
+    ← Ideal.isMaximal_def, IsLocalRing.isMaximal_iff] at hone
+  simpa only [Ideal.under_def, hclosed] using hone
+
 
 end RingTheory
