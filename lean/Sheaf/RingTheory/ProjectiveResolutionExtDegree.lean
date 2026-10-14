@@ -27,8 +27,7 @@ theorem projective_resolution_ext_degree
     intro i hi Y a
     obtain ⟨f, hf, rfl⟩ := P.extMk_surjective a (i + 1) rfl
     have hfzero : f = 0 := (hP i (by omega)).eq_of_src _ _
-    subst f
-    exact P.extMk_zero _ _
+    simpa only [hfzero] using P.extMk_zero (i + 1) rfl
   · intro h
     induction n generalizing X with
     | zero =>
