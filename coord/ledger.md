@@ -14131,3 +14131,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261014T010849-L-3166387 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/P2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T010850-L-3166581 (proof); batch 20261014T010832; modules 1; new nodes 0)
 - 01:08 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartTensorSections (stage 3; reviewer PASS; first push; landing 20261014T010850-L-3166741 (interface); batch 20261014T010832; modules 2; new nodes 1)
+- 01:08 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.SelfTorTargetRestrictionCoordinates (stage 3; reviewer PASS; first push; landing 20261014T010851-L-3166907 (interface); batch 20261014T010832; modules 3; new nodes 2)
