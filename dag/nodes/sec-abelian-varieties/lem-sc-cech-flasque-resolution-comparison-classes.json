@@ -2,7 +2,7 @@
  "id": "lem-sc-cech-flasque-resolution-comparison-classes",
  "kind": "statement",
  "title": "Homology classes for the flasque Cech comparison",
- "statement": "There exist canonical Cech comparison maps with the displayed component formulas.\n\ntheorem cechFlasqueComparisonClasses {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) {F : X.Modules} (D : CupAcyclicResolution F)\n    (alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ))\n    (beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n      (cupCechDouble U D.K).total (ComplexShape.up ℕ)) [QuasiIso alpha]\n    (halpha : ∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp))\n    (hbeta : ∀ n : ℕ, beta.f n =\n      ((cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          (D.augmentation.f 0).val)).f n ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) :\n    ∃ iso : ∀ n : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace n).obj F ≅\n      ((cupCechDouble U D.K).total (ComplexShape.up ℕ)).homology n,\n      (∀ (n : ℕ)\n        (z : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.K).sc n).moduleCatLeftHomologyData.K),\n        (iso n).hom (D.class n z) =\n          HomologicalComplex.homologyMap alpha n (cupCycleClass _ n z)) ∧\n      (∀ (n : ℕ)\n        (c : ((cechComplexFunctor U).obj F.presheafModuleCat).homology n ⟶\n          (RingedSpace.moduleCohomology X.toRingedSpace n).obj F),\n        IsModuleCechComparison U F n c →\n        ∀ z : (((cechComplexFunctor U).obj F.presheafModuleCat).sc n).moduleCatLeftHomologyData.K,\n          (iso n).hom (c (cupCycleClass _ n z)) =\n            HomologicalComplex.homologyMap beta n (cupCycleClass _ n z))",
+ "statement": "For an open cover U of X (iSup U = top), the homology identification for the given core maps is compatible with both computing-resolution global classes and the canonical Cech comparison.\n\ntheorem cechFlasqueComparisonClasses {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) {F : X.Modules} (D : CupAcyclicResolution F)\n    (alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ))\n    (beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n      (cupCechDouble U D.K).total (ComplexShape.up ℕ)) [QuasiIso alpha]\n    (halpha : ∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp))\n    (hbeta : ∀ n : ℕ, beta.f n =\n      ((cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          (D.augmentation.f 0).val)).f n ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) :\n    ∃ iso : ∀ n : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace n).obj F ≅\n      ((cupCechDouble U D.K).total (ComplexShape.up ℕ)).homology n,\n      (∀ (n : ℕ)\n        (z : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.K).sc n).moduleCatLeftHomologyData.K),\n        (iso n).hom (D.class n z) =\n          HomologicalComplex.homologyMap alpha n (cupCycleClass _ n z)) ∧\n      (∀ (n : ℕ)\n        (c : ((cechComplexFunctor U).obj F.presheafModuleCat).homology n ⟶\n          (RingedSpace.moduleCohomology X.toRingedSpace n).obj F),\n        IsModuleCechComparison U F n c →\n        ∀ z : (((cechComplexFunctor U).obj F.presheafModuleCat).sc n).moduleCatLeftHomologyData.K,\n          (iso n).hom (c (cupCycleClass _ n z)) =\n            HomologicalComplex.homologyMap beta n (cupCycleClass _ n z))",
  "stmt_deps": [
   "def-sc-module-cup-resolution-data",
   "def-sc-cech-cup-resolution-comparison-data",
@@ -14,17 +14,38 @@
  },
  "proof": [
   {
-   "text": "The construction and homological comparison are supplied as an intermediate theorem for subsequent workers.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply the Cech double-complex functor to D.comparison and totalize to obtain t. Its alpha square commutes by naturality of moduleCechZero and ιTotal_map. Its beta square commutes by ιTotal_map, functoriality and the degree-zero component of D.over. Both squares are proved componentwise in Lean.",
+   "uses": [
+    "def-sc-module-cech-comparison",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define iso as the injective-resolution identification, followed by the inverse homology map of the computing comparison, followed by H(alpha). All inverses are supplied by D.computes and QuasiIso alpha. Evaluating inverse identities at the supplied global cycle proves alpha_class.",
+   "uses": [
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The cover hypothesis hU makes H(moduleCechAlpha U D.I) invertible by moduleCechAlpha_isIso. Taking homology of the alpha square and using D.computes shows H(t) invertible. Expand iso, use the alpha square, and cancel the computing comparison. The equation hc D.I and the beta square then give c ≫ iso.hom ≫ H(t) = H(beta) ≫ H(t). Injectivity of H(t), evaluated at the supplied Cech cycle, proves beta_class. These identities apply in degree zero and to the empty cover of the empty scheme.",
+   "uses": [
+    "def-sc-module-cech-comparison",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sc-module-cech-comparison",
+  "def-sc-module-cup-resolution-data"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Canonical comparison construction",
-  "group": "H4",
+  "place": "Proof: alpha and beta into the injective Cech total complex; explicit naturality and cancellation",
+  "group": "M2",
   "date": "2026-10-14"
  },
  "mathlib_searches": [
@@ -81,7 +102,7 @@
   "module": "Sheaf.Paper.CechFlasqueComparisonClasses",
   "file": "lean/Sheaf/Paper/CechFlasqueComparisonClasses.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechFlasqueComparisonClasses",
-  "statement": "theorem cechFlasqueComparisonClasses {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) {F : X.Modules} (D : CupAcyclicResolution F)\n    (alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ))\n    (beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n      (cupCechDouble U D.K).total (ComplexShape.up ℕ)) [QuasiIso alpha]\n    (halpha : ∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp))\n    (hbeta : ∀ n : ℕ, beta.f n =\n      ((cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          (D.augmentation.f 0).val)).f n ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) :\n    ∃ iso : ∀ n : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace n).obj F ≅\n      ((cupCechDouble U D.K).total (ComplexShape.up ℕ)).homology n,\n      (∀ (n : ℕ)\n        (z : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.K).sc n).moduleCatLeftHomologyData.K),\n        (iso n).hom (D.class n z) =\n          HomologicalComplex.homologyMap alpha n (cupCycleClass _ n z)) ∧\n      (∀ (n : ℕ)\n        (c : ((cechComplexFunctor U).obj F.presheafModuleCat).homology n ⟶\n          (RingedSpace.moduleCohomology X.toRingedSpace n).obj F),\n        IsModuleCechComparison U F n c →\n        ∀ z : (((cechComplexFunctor U).obj F.presheafModuleCat).sc n).moduleCatLeftHomologyData.K,\n          (iso n).hom (c (cupCycleClass _ n z)) =\n            HomologicalComplex.homologyMap beta n (cupCycleClass _ n z))",
+  "statement": "theorem cechFlasqueComparisonClasses {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) {F : X.Modules} (D : CupAcyclicResolution F)\n    (alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ))\n    (beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n      (cupCechDouble U D.K).total (ComplexShape.up ℕ)) [QuasiIso alpha]\n    (halpha : ∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp))\n    (hbeta : ∀ n : ℕ, beta.f n =\n      ((cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          (D.augmentation.f 0).val)).f n ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) :\n    ∃ iso : ∀ n : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace n).obj F ≅\n      ((cupCechDouble U D.K).total (ComplexShape.up ℕ)).homology n,\n      (∀ (n : ℕ)\n        (z : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.K).sc n).moduleCatLeftHomologyData.K),\n        (iso n).hom (D.class n z) =\n          HomologicalComplex.homologyMap alpha n (cupCycleClass _ n z)) ∧\n      (∀ (n : ℕ)\n        (c : ((cechComplexFunctor U).obj F.presheafModuleCat).homology n ⟶\n          (RingedSpace.moduleCohomology X.toRingedSpace n).obj F),\n        IsModuleCechComparison U F n c →\n        ∀ z : (((cechComplexFunctor U).obj F.presheafModuleCat).sc n).moduleCatLeftHomologyData.K,\n          (iso n).hom (c (cupCycleClass _ n z)) =\n            HomologicalComplex.homologyMap beta n (cupCycleClass _ n z))",
   "branch": "sheaf-dag",
   "by": "H4",
   "date": "2026-10-14"
@@ -97,13 +118,32 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H4",
+  "reviewer": "X-e97e0",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T231535-L-1817473",
+  "landing": "20261014T063820-L-2814586",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered theorem and proof with the corrected node, recorded cover hypothesis with Stacks 01EQ, and sole importer CechFlasqueResolutionComparison with its minimal forced adaptation; both modules compile cleanly, original caller fails as reported, and axiom checks satisfy the brief."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "M2 stage 2",
+  "old_statement": "There exist canonical Cech comparison maps with the displayed component formulas.\n\ntheorem cechFlasqueComparisonClasses {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) {F : X.Modules} (D : CupAcyclicResolution F)\n    (alpha : ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D.K ⟶ (cupCechDouble U D.K).total (ComplexShape.up ℕ))\n    (beta : (cechComplexFunctor U).obj F.presheafModuleCat ⟶\n      (cupCechDouble U D.K).total (ComplexShape.up ℕ)) [QuasiIso alpha]\n    (halpha : ∀ n : ℕ, alpha.f n = moduleCechZero U (D.K.X n) ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp))\n    (hbeta : ∀ n : ℕ, beta.f n =\n      ((cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          (D.augmentation.f 0).val)).f n ≫\n      (cupCechDouble U D.K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) :\n    ∃ iso : ∀ n : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace n).obj F ≅\n      ((cupCechDouble U D.K).total (ComplexShape.up ℕ)).homology n,\n      (∀ (n : ℕ)\n        (z : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.K).sc n).moduleCatLeftHomologyData.K),\n        (iso n).hom (D.class n z) =\n          HomologicalComplex.homologyMap alpha n (cupCycleClass _ n z)) ∧\n      (∀ (n : ℕ)\n        (c : ((cechComplexFunctor U).obj F.presheafModuleCat).homology n ⟶\n          (RingedSpace.moduleCohomology X.toRingedSpace n).obj F),\n        IsModuleCechComparison U F n c →\n        ∀ z : (((cechComplexFunctor U).obj F.presheafModuleCat).sc n).moduleCatLeftHomologyData.K,\n          (iso n).hom (c (cupCycleClass _ n z)) =\n            HomologicalComplex.homologyMap beta n (cupCycleClass _ n z))",
+  "what": "The source assumes that U is an open cover of the space on which global sections are taken. This hypothesis was omitted from the split. Its planned cancellation needs moduleCechAlpha_isIso, whose hU premise was absent. Restore hU : iSup U = top. The sole Lean caller already assumes hU, so no target or caller statement changes. No counterexample to the unrestricted statement is claimed.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/01EQ",
+   "place": "Lemma 20.11.2: open covering; proof uses injective Cech acyclicity to invert alpha"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "The construction and homological comparison are supplied as an intermediate theorem for subsequent workers.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }

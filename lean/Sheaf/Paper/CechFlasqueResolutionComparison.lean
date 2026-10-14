@@ -51,7 +51,7 @@ theorem cupCechFlasqueResolutionComparison {X : Scheme.{v}} {ι : Type v}
     cechFlasqueComparisonCore U hU D hD
   let : QuasiIso alpha := hq
   obtain ⟨iso, halpha_class, hbeta_class⟩ :=
-    cechFlasqueComparisonClasses U D alpha beta halpha hbeta
+    cechFlasqueComparisonClasses U hU D alpha beta halpha hbeta
   exact ⟨{
     alpha := alpha
     beta := beta
