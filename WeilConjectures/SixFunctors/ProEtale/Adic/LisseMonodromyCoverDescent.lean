@@ -33,6 +33,8 @@ universe u
 
 open CategoryTheory Limits Opposite MonoidalCategory
 
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
@@ -235,5 +237,132 @@ theorem resOver_fst_apply_eq_resOver_snd_apply (t : Spec (.of (AlgebraicClosure 
       exact hc
   rw [← hβ, hβ0, globalSectionOfModHom_eq]
   simp
+
+/-- Invariant sections over the universal cover have equal restrictions along any two
+morphisms `a b : Z ⟶ Ỹ_t` over `Y`. -/
+theorem resOver_apply_eq_of_invariant (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (M : LisseSheaf l Y)
+    (s : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj ((U.proj t)^*[_].obj M.obj.X))
+    (hs : ∀ g : Aut (fiber t), ((U.transportRes l g).hom.app M.obj.X).hom s = s)
+    {Z : Scheme.{u}} {c : Z ⟶ Y} (a b : Z ⟶ U.cover t) (ea : a ≫ U.proj t = c)
+    (eb : b ≫ U.proj t = c) :
+    ((resOver (WeilCoefficients.{u} l) a ea).app M.obj.X).hom s =
+      ((resOver (WeilCoefficients.{u} l) b eb).app M.obj.X).hom s := by
+  let i : Z ⟶ pullback (U.proj t) (U.proj t) := pullback.lift a b (ea.trans eb.symm)
+  have ei : i ≫ pullback.fst (U.proj t) (U.proj t) ≫ U.proj t = c := by
+    rw [← Category.assoc, pullback.lift_fst, ea]
+  have h₁ := congrArg (fun φ ↦ φ.hom s) (resOver_comp (WeilCoefficients.{u} l) i
+    (pullback.fst (U.proj t) (U.proj t)) ei rfl (by rw [pullback.lift_fst, ea]) M.obj.X)
+  have h₂ := congrArg (fun φ ↦ φ.hom s) (resOver_comp (WeilCoefficients.{u} l) i
+    (pullback.snd (U.proj t) (U.proj t)) ei pullback.condition.symm
+    (by rw [pullback.lift_snd, eb]) M.obj.X)
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at h₁ h₂
+  rw [resOver_congr _ (pullback.lift_fst a b (ea.trans eb.symm)).symm ea
+    (by rw [pullback.lift_fst, ea]), ← h₁,
+    resOver_fst_apply_eq_resOver_snd_apply t M s hs, h₂,
+    resOver_congr _ (pullback.lift_snd a b (ea.trans eb.symm))]
+
+/-- The universal cover at `t`, as an object of the small pro-étale site of `Y`. -/
+noncomputable abbrev coverProEt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) : Y.ProEt :=
+  have := U.weaklyEtale_proj t
+  ProEt.mk (U.proj t)
+
+/-- The structure morphism of the universal cover, as a morphism to the terminal object of the
+small pro-étale site. -/
+noncomputable abbrev coverProEtHom (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    U.coverProEt t ⟶ ProEt.mk (𝟙 Y) :=
+  MorphismProperty.Over.homMk (U.proj t) (Category.comp_id _)
+
+/-- The universal cover is a pro-étale covering of `Y`: it is weakly étale, surjective and
+quasi-compact. -/
+lemma generate_singleton_coverProEtHom_mem (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    Sieve.generate (Presieve.singleton (U.coverProEtHom t)) ∈
+      ProEt.topology Y (ProEt.mk (𝟙 Y)) := by
+  have := U.weaklyEtale_proj t
+  have := U.quasiCompact_proj t
+  have : Surjective (U.proj t) := ⟨U.surjective_proj t⟩
+  rw [Scheme.ProEt.mem_topology_iff]
+  refine ⟨Presieve.singleton (U.coverProEtHom t), ?_, Sieve.le_generate _⟩
+  rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_singleton]
+  exact (show Presieve.singleton (U.proj t) ∈ proetalePrecoverage Y from
+    Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) (U.weaklyEtale_proj t))
+
+/-- The diagonal lift of the universal cover, followed by its structure morphism, is the lift of
+the terminal object. -/
+lemma diagLift_comp_pullback_map_coverProEtHom (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
+    diagLift (U.coverProEt t) ≫
+        (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (U.proj t)).map (U.coverProEtHom t) =
+      (overPullbackObjMkIdIso (U.proj t)).inv := by
+  refine MorphismProperty.Over.Hom.ext ?_
+  erw [MorphismProperty.Comma.comp_left]
+  apply pullback.hom_ext
+  · simp [diagLift, overPullbackObjMkIdIso]
+    erw [pullback.lift_fst_assoc, Category.id_comp]
+    exact pullback.condition.symm.trans (Category.comp_id _)
+  · simp [diagLift, overPullbackObjMkIdIso]
+    erw [pullback.lift_snd, Category.comp_id]
+    rfl
+
+variable (hU : ∀ (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y), ∃ n : ℕ,
+  Nonempty ((U.proj y)^*ᵃ[l].obj G.obj ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (U.cover y)))
+
+include hU in
+/-- **Invariant elements of stalks come from global sections.** On a scheme with universal
+covers on which lisse sheaves are free, an element of the stalk of a lisse sheaf `M` at `t`
+which is invariant under the monodromy of all loops at `t` is the restriction of a global
+section of `M`. -/
+theorem exists_globalSection_of_invariant (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
+    (M : LisseSheaf l Y) (m : (stalkFunctor l t).obj M.obj.X)
+    (hm : ∀ g : Aut (fiber t), ((monoIso hU g).hom.app M).hom m = m) :
+    ∃ σ : (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj M.obj.X,
+      ((globalSectionsToUpperStar _ t).app M.obj.X).hom σ = m := by
+  have := isIso_ptRes_app hU t M
+  let s := (inv ((U.ptRes l t).app M.obj.X)).hom m
+  have hsm : ((U.ptRes l t).app M.obj.X).hom s = m := by
+    rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]
+    rfl
+  have hs (g : Aut (fiber t)) : ((U.transportRes l g).hom.app M.obj.X).hom s = s := by
+    apply (asIso ((U.ptRes l t).app M.obj.X)).toLinearEquiv.injective
+    simp only [Iso.toLinearEquiv_apply, asIso_hom]
+    rw [← monoIso_hom_app_ptRes_apply hU g M s, hsm, hm g]
+  -- the section of `M` over the universal cover, as a section over `Ỹ_t ∈ Y_proét`
+  let F := M.obj.X
+  let V := U.coverProEt t
+  let σV := (inv (germ _ V.hom F (diagLift V))).hom s
+  have hσV : (germ _ V.hom F (diagLift V)).hom σV = s := by
+    rw [← ModuleCat.comp_apply, IsIso.inv_hom_id]
+    rfl
+  have hsheaf : Presieve.IsSheafFor (F.obj ⋙ CategoryTheory.forget _)
+      (Presieve.singleton (U.coverProEtHom t)) := by
+    have h := (Presheaf.isSheaf_iff_isSheaf_forget (ProEt.topology Y) F.obj
+      (CategoryTheory.forget (WeilCoefficients.{u} l))).1 F.property
+    rw [isSheaf_iff_isSheaf_of_type] at h
+    exact (Presieve.isSheafFor_iff_generate _).2 (h _ (U.generate_singleton_coverProEtHom_mem t))
+  obtain ⟨y, hy, -⟩ := Presieve.isSheafFor_singleton.1 hsheaf σV (fun {Z} p₁ p₂ _ ↦ by
+    change (F.obj.map p₁.op).hom σV = (F.obj.map p₂.op).hom σV
+    apply (asIso (germ _ Z.hom F (diagLift Z))).toLinearEquiv.injective
+    simp only [Iso.toLinearEquiv_apply, asIso_hom]
+    have k₁ := congrArg (fun φ ↦ φ.hom σV) (map_comp_germ_diagLift (WeilCoefficients.{u} l) F p₁)
+    have k₂ := congrArg (fun φ ↦ φ.hom σV) (map_comp_germ_diagLift (WeilCoefficients.{u} l) F p₂)
+    simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at k₁ k₂
+    rw [k₁, k₂, hσV]
+    exact resOver_apply_eq_of_invariant t M s hs p₁.left p₂.left
+      (MorphismProperty.Over.w p₁) (MorphismProperty.Over.w p₂))
+  refine ⟨((Sheaf.ΓNatIsoSheafSections _ _ (ProEt.isTerminalMkId Y)).inv.app F).hom y, ?_⟩
+  rw [← globalSectionsToUpperStar_app_comp_resOver_app _ (U.pt t) (U.pt_proj t),
+    ModuleCat.comp_apply, globalSectionsToUpperStar_app_eq_germ, ModuleCat.comp_apply,
+    ← ModuleCat.comp_apply ((Sheaf.ΓNatIsoSheafSections _ _ (ProEt.isTerminalMkId Y)).inv.app F),
+    Iso.inv_hom_id_app]
+  change ((resOver _ (U.pt t) (U.pt_proj t)).app F).hom
+    ((germ _ (U.proj t) F (overPullbackObjMkIdIso (U.proj t)).inv).hom y) = m
+  have hg := congrArg (fun φ ↦ φ.hom y) (map_germ (A := WeilCoefficients.{u} l) (g := U.proj t)
+    (P := F) (U.coverProEtHom t) (overPullbackObjMkIdIso (U.proj t)).inv (diagLift V)
+    (U.diagLift_comp_pullback_map_coverProEtHom t))
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at hg
+  rw [← hg]
+  change ((resOver _ (U.pt t) (U.pt_proj t)).app F).hom
+    ((germ _ V.hom F (diagLift V)).hom ((F.obj.map (U.coverProEtHom t).op).hom y)) = m
+  rw [show (F.obj.map (U.coverProEtHom t).op).hom y = σV from hy, hσV]
+  exact hsm
 
 end AlgebraicGeometry.Scheme.UniversalCovers
