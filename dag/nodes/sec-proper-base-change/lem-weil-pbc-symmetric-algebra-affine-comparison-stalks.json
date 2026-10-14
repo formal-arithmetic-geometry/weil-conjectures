@@ -17,75 +17,49 @@
  ],
  "proof": [
   {
-   "text": "Put R = O_X(W), M = F(W), A = Sym_R(M), and restrict S to the affine chart. Affine neighbourhoods of each point inside W are cofinal. On each such smaller affine V, quasi-coherence gives F(V) = O_X(V) tensor_R M. Symmetric algebra base change gives a bijective map lambda_V : O_X(V) tensor_R A -> Sym_O_X(V)(F(V)), with r tensor a mapping to r times restriction(a). The tilde adjunction and tilde section base change give a bijective map beta_V to the sections of tilde(A), with r tensor a mapping to r tau_V(a).",
+   "text": "Obtain the affine-basis transformation delta. Extend it to gamma:P→T on all opens via TopCat.Sheaf.restrictHomEquivHom. The extension has the prescribed components on the basis. Equality of its composite with alpha and the restricted unit follows from TopCat.Sheaf.hom_ext on the affine basis.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-    "lem-weil-pbc-symmetric-algebra-base-change",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-symmetric-algebra-affine-section-comparison",
+    "def-weil-pbc-symmetric-algebra-affine-comparison-map"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 0C6F; Constructions, Lemma 01LN; Schemes, Lemma 01I8"
-   }
-  },
-  {
-   "text": "The explicitly constructed alpha has alpha_V beta_V = theta_V lambda_V. First check this on 1 tensor a using affineComparison_toOpen and naturality of theta, and then extend by O_X(V)-linearity to all pure tensors and their sums. For Vprime contained in V, lambda and beta commute with restriction: on pure tensors both sides restrict r and a. Restriction to the affine chart does not change stalks at its points, since neighbourhoods inside W are cofinal.",
-   "uses": [
-    "def-weil-pbc-symmetric-algebra-affine-comparison-map",
-    "lem-weil-pbc-symmetric-algebra-sheaf-construction",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemmas 01I7 and 01I8; naturality on pure tensors"
+    "place": "Lemma 01I8; extension of morphisms from a basis"
    }
   },
   {
-   "text": "The ring sheafification unit theta induces a bijection on underlying abelian stalks, because forgetting rings to abelian groups commutes with sheafification and the sheafification unit is an isomorphism on stalks. Lift a target germ through theta_x, represent it on an affine V inside W, and write that representative as lambda_V(c). The germ of beta_V(c) maps through alpha_x to the given target germ, proving surjectivity.",
+   "text": "Basiswise injectivity of gamma gives injectivity of gamma_x by stalkFunctor_map_injective_of_isBasis. For surjectivity, exists_mem_germ_eq_of_isBasis represents any target stalk element by a section on an affine V. Lift this section using the surjective component delta_V and take its germ; stalkFunctor_map_germ_apply proves it maps to the desired element.",
    "uses": [
-    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
-    "lem-weil-pbc-stalk-sheafification-space",
-    "lem-weil-pbc-symmetric-algebra-sheaf-construction"
+    "lem-weil-pbc-symmetric-algebra-affine-section-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemmas 01CG and 01CH (lemma-local-tensor-algebra and lemma-stalk-tensor-algebra)"
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Stalks computed on a basis"
    }
   },
   {
-   "text": "For injectivity, represent a source germ on an affine V as beta_V(c). If its alpha-image is zero, injectivity of theta_x implies the germ of lambda_V(c) is zero. Restrict to a smaller affine Vprime where it is zero. Restriction compatibility gives lambda_Vprime(cprime)=0; injectivity of lambda_Vprime implies cprime=0. Hence beta_Vprime(cprime)=0, so the original germ was zero. Apply this to the difference of two germs with equal alpha-image.",
+   "text": "The restricted ring unit theta_x is bijective. Functor.map_comp turns gamma;alpha=theta into the corresponding stalk factorization. For injectivity of alpha_x, lift two source elements along gamma_x and apply injectivity of the composite. For surjectivity, lift any target element along the composite. This proves the original unchanged statement.",
    "uses": [
-    "lem-weil-pbc-stalk-sheafification-space",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-ring-sheafification-restricted-stalks"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01CH (lemma-stalk-tensor-algebra); equality of germs after shrinking"
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemmas 007Z and 0087; cancellation of bijections"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-  "lem-weil-pbc-symmetric-algebra-base-change",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-symmetric-algebra-affine-section-comparison",
   "def-weil-pbc-symmetric-algebra-affine-comparison-map",
-  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
-  "lem-weil-pbc-stalk-sheafification-space"
+  "lem-weil-pbc-ring-sheafification-restricted-stalks"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemmas 01CG and 01CH; Schemes, Lemmas 01I7 and 01I8. Explicit argument from the parent comparison plan, implemented using the tilde adjunction."
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01I8: affine-basis section reduction, extension by sheaf morphism uniqueness, and stalk bijection cancellation"
  },
  "mathlib_searches": [
   {
@@ -162,9 +136,9 @@
   "date": "2026-10-14",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261014T075952-L-3719202",
+  "landing": "20261014T083743-L-4167655",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
