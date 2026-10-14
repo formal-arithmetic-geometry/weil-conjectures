@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageChartSystem
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
-import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
+import Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality
 
 /-! # Chart cohomology and cartesian exchange
 
@@ -87,6 +87,10 @@ theorem exists_cartesianChart_cohomology_comparison
             (c.π.app j.left).left (Over.w (c.π.app j.left)).symm
               ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) =
           e.hom (restrictedOverCohomologyMap h Fᵢ (q : ℤ) (d.π.app j) V x) := by
-  sorry
+  refine ⟨cartesianChartCohomologyIso f (D.obj i).hom (c.π.app i).left c.pt.hom
+    (Over.w (c.π.app i)).symm F q V U r hr,
+    cartesianChartCohomologyLift f D c F q i V U r hr, ?_⟩
+  intro j x
+  exact cartesianChartCohomologyLift_exchange f D c F q i V U r hr j x
 
 end AlgebraicGeometry.Etale
