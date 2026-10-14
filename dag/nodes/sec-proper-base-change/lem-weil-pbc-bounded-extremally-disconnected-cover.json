@@ -26,9 +26,70 @@
  "stmt_deps": [
   "def-weil-pbc-condensed-e-module-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take $S$ to be the underlying set of $X$, and set $T=\\mathcal U(S)$ with the topology of [lem-weil-pbc-ultrafilter-compact-hausdorff-basis]. This is a compact Hausdorff space, with clopen basic subsets $[A]$ for $A\\subseteq S$. For $s\\in S$, the family $p(s)=\\{A\\subseteq S:s\\in A\\}$ is a proper filter and is maximal: any strictly larger filter would contain a set omitting $s$, whose intersection with $\\{s\\}$ is empty. Thus $p(s)\\in T$, and $p(s)\\in[A]$ exactly when $s\\in A$.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 090D, lemma-existence-projective-cover, first proof paragraph: take the underlying discrete set and its Stone-Cech compactification. Tag 0908, section-stone-cech supplies the abstract compactification; the concrete ultrafilter realization used here is supplied by Mathlib/Topology/Compactification/StoneCech.lean, lines 54-99."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ultrafilter-continuous-extension] to the set map $f:S\\to X$, $f(s)=s$. Its target $X$ is compact Hausdorff by hypothesis. We obtain a continuous $u:T\\to X$ with $u(p(s))=s$ for every $s\\in X$, which proves surjectivity (also when $X$ is empty).",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-continuous-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 090D, lemma-existence-projective-cover, first proof paragraph: factor the map from the underlying discrete set through its compactification"
+   }
+  },
+  {
+   "text": "We verify extremal disconnectedness directly from the basis of [lem-weil-pbc-ultrafilter-compact-hausdorff-basis]. For open $O\\subseteq T$ put $A=\\{s\\in S:p(s)\\in O\\}$. If $F\\in O$, choose $B\\in F$ with $F\\in[B]\\subseteq O$. Then $B\\subseteq A$ by the principal-ultrafilter membership formula, so $A\\in F$. Hence $O\\subseteq[A]$ and $\\overline O\\subseteq[A]$, since $[A]$ is closed. Conversely if $F\\in[A]$, every basic neighbourhood $[B]$ of $F$ has $A\\cap B\\in F$ and therefore $A\\cap B\\ne\\varnothing$. Choosing $s\\in A\\cap B$ gives $p(s)\\in O\\cap[B]$. Every neighbourhood of $F$ meets $O$, so $[A]\\subseteq\\overline O$. Thus $\\overline O=[A]$ is open. This includes $O=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 090C, example-stone-Cech-discrete: extremal disconnectedness of the discrete Stone-Cech compactification; direct basis calculation in place of the projectivity argument"
+   }
+  },
+  {
+   "text": "The same clopen basis implies total disconnectedness: if distinct ultrafilters $F,G\\in T$ lie in a subset $C$, some subset $A\\subseteq S$ belongs to exactly one of the two families. Then $C\\cap[A]$ and $C\\setminus[A]$ are disjoint nonempty relatively open subsets with union $C$. Therefore $C$ is disconnected. Every connected subset of $T$ consequently has at most one point. Together with compactness and Hausdorffness from step 1 this makes $T$ profinite.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 090C, example-stone-Cech-discrete, final sentence: discrete Stone-Cech compactification is profinite"
+   }
+  },
+  {
+   "text": "For the size estimate, each ultrafilter is literally a family of subsets of $S$, so $F\\mapsto F$ injects $T$ into $\\mathcal P(\\mathcal P(S))$. Choose a set $L$ with $|L|=\\lambda$ and an injection $j:S\\hookrightarrow L$, using $|X|\\leq\\lambda$. Direct image $A\\mapsto j(A)$ is injective on power sets, since $j^{-1}(j(A))=A$; taking direct images of families under this injection gives an injection $\\mathcal P(\\mathcal P(S))\\hookrightarrow\\mathcal P(\\mathcal P(L))$. Thus $|T|\\leq|\\mathcal P(\\mathcal P(L))|=2^{2^\\lambda}$, where the equality identifies subsets with their characteristic functions twice. This uses only the definitions of cardinal inequality and exponentiation, and not an additional dense-subspace cardinal estimate. The empty set gives no ultrafilters and satisfies the same inequality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 090E, remark-size-projective-cover: double-power-set bound; direct counting in the concrete ultrafilter model rather than the minimal-cover argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ultrafilter-compact-hausdorff-basis",
+  "lem-weil-pbc-ultrafilter-continuous-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 0908/090C/090D/090E: same discrete-compactification route, implemented by the Mathlib ultrafilter model; direct clopen-basis and family-of-subsets calculations are written here rather than attributed verbatim to Stacks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +146,72 @@
    "results": "8 hits: CompHaus.instEnoughProjectives, CompHaus.projectivePresentation, Profinite.projectivePresentation, Profinite.instEnoughProjectives, Stonean.instProjectiveProfiniteObjToProfinite, CompHaus.projective_ultrafilter, Stonean.instProjectiveCompHausCompHaus, Profinite.projective_ultrafilter",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every profinite space admits an extremally disconnected cover with cardinality at most double powerset of the underlying set",
+   "results": "8 hits: TopologicalSpace.IsOpenCover.exists_finite_clopen_cover, TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover, CompactT2.Projective.extremallyDisconnected, Profinite.projective_of_extrDisc, CompHaus.instExtremallyDisconnectedCarrierToTopTrueOfProjective, CompactT2.projective_iff_extremallyDisconnected, CompHaus.Gleason, Profinite.presentation",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration found covering all clauses including the explicit bound; ultrafilter construction and extension are separate Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ultrafilter\"",
+   "results": "12 hits: Ultrafilter, Ultrafilter.functor, Ultrafilter.instBind, Ultrafilter.instPure, Ultrafilter.monad, Ultrafilter.lawfulMonad, Ultrafilter.toFilter, Ultrafilter.instCoeTCFilter",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration found covering all clauses including the explicit bound; ultrafilter construction and extension are separate Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "mk.*Ultrafilter|cardinal.*[Uu]ltrafilter|[Ee]xtremallyDisconnected.*[Uu]ltrafilter",
+   "results": "2 hits: Mathlib/Topology/Maps/Proper/UniversallyClosed.lean, Mathlib/Topology/Compactification/StoneCech.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration found covering all clauses including the explicit bound; ultrafilter construction and extension are separate Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinal bounded extremally disconnected profinite cover",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cardinality of a Stone Cech compactification of a discrete set is at most the cardinality of its double powerset",
+   "results": "8 hits: Cardinal.mk_bounded_set_le, IsClosed.two_pow_mk_lt_continuum, Cardinal.mk_bounded_set_le_of_infinite, Cardinal.mk_bounded_subset_le, IsClosed.mk_lt_continuum, Set.encard_le_card, Cardinal.card_le_of, Cardinal.mk_embedding_le_arrow",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration found covering all clauses including the explicit bound; ultrafilter construction and extension are separate Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "cardinal|mk_le|lift_mk",
+   "results": "2 hits: Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean; searched Mathlib/Topology/Compactification",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration found covering all clauses including the explicit bound; ultrafilter construction and extension are separate Mathlib leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-wcontractible-ring-extension",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-bounded-extremally-disconnected-cover",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Realized the discrete Stone-Cech construction with the compact Hausdorff ultrafilter model and continuous extension, each a fully checked Mathlib leaf. Wrote out extremal disconnectedness by a clopen-basis closure calculation, total disconnectedness by separation, and the double-power-set bound by explicit injections. No project declaration attaches to the full bounded statement.",
+  "blueprint": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Bounded extremally disconnected cover of a profinite space. This is a subordinate topological construction, not a replacement of any unit step; the qbar ancestor does not itself discuss hypercovers."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-4f79bf95b",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-4f79bf95b (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all five proof steps, Stacks Tags 090C/090D/090E, Mathlib ultrafilter declarations, edge cases, route, and duplicate checks. Both new Mathlib leaf nodes omitted required created.by and created.date metadata. Corrected whole JSON files are in fixes/dag/nodes/sec-proper-base-change/. Review is in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }

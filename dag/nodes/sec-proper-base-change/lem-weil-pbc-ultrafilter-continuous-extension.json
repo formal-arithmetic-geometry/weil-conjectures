@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-ultrafilter-continuous-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers. Input: bounded ring witness from 0983/0984. Supporting input: Bounded extremally disconnected cover of a profinite space. Concrete ultrafilter model: extension and agreement on principal ultrafilters, lines 173-198",
+   "via": [
+    "lem-weil-pbc-bounded-extremally-disconnected-cover",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuous extension of a set map to the ultrafilter space",
+ "statement": "For any set $S$, use the ultrafilter space $\\mathcal U(S)$ with topology and notation as in [lem-weil-pbc-ultrafilter-compact-hausdorff-basis]. Let $K$ be a compact Hausdorff space and let $f:S\\to K$ be any function; no topology or continuity assumption is imposed on $S$ or $f$. For $s\\in S$ let $p(s)=\\{A\\subseteq S:s\\in A\\}$ be its principal ultrafilter. There is a continuous function $\\widehat f:\\mathcal U(S)\\to K$ such that $\\widehat f(p(s))=f(s)$ for every $s\\in S$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0908, section-stone-cech: discrete Stone-Cech compactification and its universal property. Concrete ultrafilter model is given by Mathlib/Topology/Compactification/StoneCech.lean; extension and agreement on principal ultrafilters, lines 173-198"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Any function from a set to a compact Hausdorff space extends continuously to the space of ultrafilters and agrees on principal ultrafilters",
+   "results": "8 hits: continuous_ultrafilter_extend, preStoneCechExtend, preStoneCechCompat, ultrafilter_extend_extends, stoneCechExtend, Ultrafilter.extend, stoneCechExtend_stoneCechUnit, stoneCechEquivalence",
+   "date": "2026-10-14",
+   "verdict": "match: pinned Mathlib source read, clauses and lines listed in mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ultrafilter_extend\"",
+   "results": "4 hits: continuous_ultrafilter_extend, ultrafilter_extend_pure, ultrafilter_extend_extends, ultrafilter_extend_eq_iff",
+   "date": "2026-10-14",
+   "verdict": "match: pinned Mathlib source read, clauses and lines listed in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_ultrafilter_extend|ultrafilter_extend_extends|ultrafilter_extend_pure",
+   "results": "5 hits: Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean; searched Mathlib/Topology/Compactification",
+   "date": "2026-10-14",
+   "verdict": "match: pinned Mathlib source read, clauses and lines listed in mathlib_match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous extension from principal ultrafilters to a compact Hausdorff space",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ultrafilter_extend_extends\"",
+   "results": "1 hits: ultrafilter_extend_extends",
+   "date": "2026-10-14",
+   "verdict": "second reader: confirms the recorded leaf; checked the pinned declaration types and file lines"
+  },
+  {
+   "tool": "grep",
+   "query": "ultrafilterBasis_is_basis|ultrafilter_compact|Ultrafilter.t2Space|ultrafilter_extend_extends",
+   "results": "9 hits: Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/Profinite/Projective.lean; searched Mathlib/Topology",
+   "date": "2026-10-14",
+   "verdict": "second reader: confirms the recorded leaf; checked the pinned declaration types and file lines"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "continuous_ultrafilter_extend, ultrafilter_extend_pure",
+  "file": "Mathlib/Topology/Compactification/StoneCech.lean",
+  "line": 191,
+  "how": "exact, one declaration per clause: take Ultrafilter.extend f (definition line 173); continuity is continuous_ultrafilter_extend line 191; the extension identity is ultrafilter_extend_pure line 186, equivalently ultrafilter_extend_extends line 180. Both require T2Space K, and continuity also CompactSpace K; neither requires S nonempty or f continuous."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-bounded-extremally-disconnected-cover",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
