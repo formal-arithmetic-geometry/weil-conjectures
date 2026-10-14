@@ -34,9 +34,77 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $G$ be the underlying abelian sheaf of $F$. A module trivializing cover for $F$ also trivializes $G$, by forgetting the scalar action in each trivialization. Every section and every germ of $G$ is killed by $\\ell$: it is an element of an $\\mathbf F_\\ell$-module and $\\ell\\cdot 1=0$ in $\\mathbf F_\\ell$. Thus $G$ is torsion and every nonzero stalk element has order $\\ell$ (zero has order $1$). For $x\\in X$ with image $s\\in S$, the local ring homomorphism $\\mathcal O_{S,s}\\to\\kappa(x)$ takes the assumed unit $\\ell$ to a unit; hence $\\kappa(x)$ has characteristic different from $\\ell$. Therefore each stalk element has order prime to its residue characteristic, including in characteristic zero. This verifies the coefficient hypotheses without assuming finite stalks.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-constructible-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKD hypotheses (2)-(3), prime-field specialization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-local-acyclicity] to the given smooth morphism $f$. Its conclusion gives universal local acyclicity, hence local acyclicity by taking the identity base change $S\\to S$. Only smoothness is used here.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKD proof, proposition-smooth-locally-acyclic (0GJQ)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-locally-constant-torsion-local-acyclicity] to $f$ and $G$. Step 2 supplies local acyclicity, and step 1 supplies local constancy and the prime-to-residue-characteristic torsion condition at every geometric point of $X$. Thus $f$ is locally acyclic relative to $G$, for every geometric point of each strict local base, including geometric points with nonalgebraic field extensions.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-torsion-local-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKD proof, lemma-locally-acyclic-locally-constant (0GJR)"
+   }
+  },
+  {
+   "text": "Fix $q\\ge0$, $\\bar s$, and $\\bar t$ as in the statement. Apply [lem-weil-pbc-proper-locally-acyclic-specialization] to $f$ and $G$. Properness is an original hypothesis; step 1 gives a torsion sheaf and step 3 gives local acyclicity relative to it. This yields an isomorphism $(R^qf_*G)_{\\bar s}\\to(R^qf_*G)_{\\bar t}$. The cited node specifies the pointed-neighbourhood restriction map, so it is exactly the specialization map claimed here, rather than merely an abstract isomorphism between the two groups.",
+   "uses": [
+    "lem-weil-pbc-proper-locally-acyclic-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKD proof, lemma-sp-isom-proper-torsion-loc-ac (0GJW) specialized to G[0]"
+   }
+  },
+  {
+   "text": "If higher direct images are formed in $\\mathbf F_\\ell$-module sheaves, the canonical comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison] identifies their underlying derived abelian sheaves with $Rf_*G$. The forgetting functor is exact, so it preserves kernels, images and cokernels and therefore the quotient $\\ker d^q/\\operatorname{im}d^{q-1}$ computing degree-$q$ cohomology. Apply degree-$q$ cohomology to the derived comparison: it gives an isomorphism from the underlying abelian sheaf of the module-valued $R^qf_*F$ to $R^qf_*G$. Now take ordinary geometric stalks of this sheaf isomorphism. The underlying group of a module stalk is the same pointed-neighbourhood colimit of groups: scalar multiplication is defined on germ representatives and the additive germ relations are unchanged. The resulting isomorphism of abelian sheaves on $S$ commutes with restriction on every pointed neighbourhood: its components are a sheaf morphism. Consequently it intertwines specialization on the two stalks, since specialization is induced by those restrictions. Step 4 therefore gives bijectivity of the underlying homomorphism of the module specialization map. That map is $\\mathbf F_\\ell$-linear by the module-valued restriction construction; its bijective inverse is linear, since if $y=\\operatorname{sp}(x)$ then $\\operatorname{sp}(a x)=a y$. It is therefore an isomorphism of $\\mathbf F_\\ell$-modules as well. Under the abelian interpretation of higher direct images, step 4 already proves the result.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKD degree-q consequence; coefficient comparison and exact geometric stalk cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-proper-locally-acyclic-specialization",
+  "lem-weil-pbc-smooth-local-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GKD, lemma-sp-isom-proper-loc-cst-torsion, proof via 0GJQ, 0GJR, 0GJW; coefficient bookkeeping spelled out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +147,65 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper scheme morphisms have invertible specialization maps on higher direct images of locally constant F l etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specializingMap_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically @SpecializingMap).RespectsIso\", \"doc\": \"The property of a scheme morphism being a specializing map (defined via its underlying continuous map) holds for all isomorphisms of schemes. In other words, every isomorphism of schemes automatically\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯)\\n      (TopCat.Pre\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $X$ with values in a category $\\\\mathcal{C}$. Let $x, y \\\\in X$ be points such that $x$ specialize\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x'),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializes ⋯) (AlgebraicGeometry.Scheme.Hom.stalkMap f x) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x') (X.presheaf.stalkSpecializes\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Let $x, x'$ be points in the underlying topological space of $X$ such that $x$ specializes to $x'$ (denoted $x \\\\rightsquigarrow x'$). This induces a canonica\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper base change gives specialization invariance for locally constant prime to characteristic torsion coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.HasGoingDown R S ↔ GeneralizingMap (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ satisfies the going-down property if and only if the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taking preimages under\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat → GeneralizingMap (PrimeSpectrum.comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"RingHom.locally_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n      RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [C\", \"doc\": \"If a property $P$ of ring homomorphisms respects isomorphisms and is stable under base change, then the property of being locally $P$ is also stable under base change. That is, for commutative rings $\"}\n  {\"name\": \"PrimeSpectrum.stableUnderSpecialization_image_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] (f : R →+* S)\\n  (Z : Set (PrimeSpectrum S)),\\n  IsClosed Z → (StableUnderSpecialization (PrimeSpectrum.comap f '' Z) ↔ IsClosed (PrimeSpectrum.comap f '' Z))\", \"doc\": \"For a closed set $ Z $ in the prime spectrum of a commutative semiring $ S $, the image of $ Z $ under the preimage map induced by a ring homomorphism $ f : R \\to S $ is stable under specialization in \"}\n  {\"name\": \"PrimeSpectrum.stableUnderSpecialization_range_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] {f : R →+* S},\\n  StableUnderSpecialization (Set.range (PrimeSpectrum.comap f)) ↔ IsClosed (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative semirings, the image of the prime spectrum map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by $ f $ is stable under specia\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.baseChange\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [Algebra.QuasiFiniteAt R p] {A : Type u_4} [inst_5 : CommRing A] [inst_6 : Algebra R A]\\n  (q : Ideal (TensorProduct R A S)) [inst_7 : q.IsPrime],\\n  p = Ideal.comap Al\", \"doc\": \"If a commutative ring $ S $ is quasi-finite over a base ring $ R $ at a prime ideal $ p $, then after base change to an $ R $-algebra $ A $, the tensor product $ A \\\\otimes_R S $ is quasi-finite over $\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed =\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally ⊓ @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"specialization\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth.*proper|proper.*smooth).*(specializ|[Ll]ocally[Cc]onstant)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth proper etale cohomology specialization isomorphism",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+  "worker": "stage1",
+  "summary": "Kept the statement and its eight statement dependencies. Read Stacks 0GKD and all three cited local-acyclicity inputs; supplied four statement-only nodes and five proof steps. Verified prime-to-residue-characteristic torsion from invertibility, arbitrary geometric points and infinite stalks, and both abelian and module interpretations of Rq. No matching completed project declaration or Mathlib result found; actual searches recorded, with LeanSearch unavailable.",
+  "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-67effd199",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-67effd199 (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full against Stacks 0GJP, 0GJQ, 0GJR, 0GJW and 0GKD. Verified every proof step, strict-local specialization direction, module/abelian comparison, hypotheses, edge cases, unit route, and DAG duplicate/cycle checks. No repairs or tool_uses needed; concrete findings are in review.md."
+ }
 }
