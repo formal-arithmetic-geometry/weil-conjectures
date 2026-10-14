@@ -24,9 +24,79 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any two module sheaves $F,G$, put $H(F,G)(U)=\\operatorname{Hom}_{\\underline\\Lambda|_U}(F|_U,G|_U)$, with restrictions by relocalization. This is a sheaf of abelian groups: for compatible maps on a covering $\\{U_i\\to U\\}$, and a section $s\\in F(V)$ over $V\\to U$, apply the local maps to $s$ on $V\\times_U U_i$. Their values agree on double overlaps and glue uniquely in $G(V)$. Uniqueness gives naturality in $V$, addition and linearity, since each required equality holds on that covering. The glued map is unique by the same argument. The localized-site definition identifies the covers and the relocalizations used here. The same construction glues inverses of compatible local isomorphisms; each composite equals the identity because its restrictions do. Hence the presheaf $\\mathcal I$ in the statement is a sheaf of sets, identified with the sheaf of pairs $(f,g)\\in H(\\underline M,\\underline N)\\times H(\\underline N,\\underline M)$ satisfying $gf=1_M$ and $fg=1_N$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093T, lemma-locally-constant, inverse-pair description in the last paragraph of the proof; gluing written out"
+   }
+  },
+  {
+   "text": "Finite free sources. On $\\mathcal C/U$, a morphism from the constant presheaf $\\Lambda^b$ to $\\underline N|_U$, linear over the constant ring presheaf, is exactly a tuple $(s_1,\\ldots,s_b)\\in\\underline N(U)^b$: take the images of the standard basis at the terminal object $U/U$, and at every $V/U$ use their restrictions. The module-sheafification universal property extends this uniquely to a morphism from $\\underline{\\Lambda^b}_{\\mathcal C/U}$ linear over the constant ring sheaf. The constant-restriction isomorphism identifies this source with $\\underline{\\Lambda^b}|_U$, compatibly with its generators and constant maps. Thus $H(\\underline{\\Lambda^b},\\underline N)(U)=\\underline N(U)^b$, naturally in $U$. Sheafification preserves finite products by [lem-weil-pbc-sheafification-exact], giving $\\underline{N^b}\\cong(\\underline N)^b$. Since $\\operatorname{Hom}_\\Lambda(\\Lambda^b,N)=N^b$ by evaluation on the basis, the canonical Hom comparison is an isomorphism for finite free sources. For $b=0$ the tuple is empty and the Hom sheaf is zero.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-site-constant-restriction",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093T, lemma-locally-constant, proof of (1), finite free case; module interface Tag 03CY"
+   }
+  },
+  {
+   "text": "Choose a finite presentation $\\Lambda^a\\xrightarrow{d}\\Lambda^b\\to M\\to0$. Sheafify the constant presheaf sequence: exactness of abelian sheafification and its preservation of cokernels give $\\underline{\\Lambda^a}\\xrightarrow{\\underline d}\\underline{\\Lambda^b}\\to\\underline M\\to0$. The module interface gives the constant ring actions and linearity of these maps; the module category's sectionwise kernels and sheafified cokernels show that this is also a cokernel diagram of $\\underline\\Lambda$-modules. Restricting to any slice preserves that diagram: apply the constant-restriction isomorphisms to the same presentation sheafified on the slice. Therefore a map $\\underline M|_U\\to\\underline N|_U$ is uniquely a map $\\underline{\\Lambda^b}|_U\\to\\underline N|_U$ whose composite with $\\underline d|_U$ is zero, by the cokernel universal property. Consequently $H(\\underline M,\\underline N)$ is the sectionwise kernel of the map between the two finite free Hom sheaves. In modules, $\\operatorname{Hom}_\\Lambda(M,N)$ is likewise the kernel of $N^b\\to N^a$: a tuple gives a map precisely when it kills the relations $d(e_j)$, and then factors uniquely through the quotient $M$. Sheafification preserves this kernel. Step 2 identifies both maps $\\underline{N^b}\\to\\underline{N^a}$ with the matrix $d$ acting by precomposition. Their kernels therefore identify canonically, proving $\\underline{\\operatorname{Hom}_\\Lambda(M,N)}\\cong H(\\underline M,\\underline N)$. These comparisons send constant maps to their induced sheaf maps, so preserve identities and composition: the two expressions for a composite agree on pairs of constant presheaf sections. The underlying-set interface identifies each constant Hom module with its set sheafification, and set sheafification preserves the product of the two constant presheaves. Its universal property then implies equality of the two maps on that product of constant sheaves. Identities have the same compatibility directly from their constant sections. The argument requires finite presentation only of the source. Apply it with sources $M$ and $N$ to get both Hom comparisons, and with equal sources to get both endomorphism comparisons.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093T, lemma-locally-constant, proof of (1), the two kernel sequences"
+   }
+  },
+  {
+   "text": "Let $E=\\operatorname{Hom}_\\Lambda(M,N)\\times\\operatorname{Hom}_\\Lambda(N,M)$ and $D=\\operatorname{End}_\\Lambda(M)\\times\\operatorname{End}_\\Lambda(N)$. The set $P$ of mutually inverse pairs is the equalizer of $E\\rightrightarrows D$, with maps $(f,g)\\mapsto(gf,fg)$ and the constant map $(f,g)\\mapsto(1_M,1_N)$. It is canonically $\\operatorname{Isom}_\\Lambda(M,N)$, since the inverse of an isomorphism is unique. Apply set-valued sheafification to this finite-limit diagram of constant presheaves. By [lem-weil-pbc-sheafification-sets-exact] its equalizer is $\\underline P$ and its products are the products of the constant set sheaves. By [lem-pc-sites-sheafification-underlying-sets], the constant sets underlying the Hom modules coincide with the underlying sets of their constant abelian sheaves. Step 3 identifies those sheaves with the Hom and endomorphism sheaves, with the two diagram maps becoming composition and the two identities. Thus the sheafified equalizer is precisely the inverse-pair sheaf of step 1, namely $\\mathcal I$. The resulting isomorphism sends a constant inverse pair to its sheafified pair, and hence is the canonical map in the statement. No assumption of full faithfulness of the global constant-sheaf functor is used.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093T, lemma-locally-constant, proof of (2), inverse-pair description; finite limits Tag 00WJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, lemma-locally-constant, proof of (1) and (2), with finite-free and gluing arguments expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -97,10 +167,52 @@
    "results": "12 hits: PresheafOfModules.Hom, PresheafOfModules.instAddCommGroupHom, PresheafOfModules.instAddHom, PresheafOfModules.instNegHom, PresheafOfModules.instSubHom, PresheafOfModules.instZeroHom, PresheafOfModules.unitHomEquiv, PresheafOfModules.Hom.app",
    "date": "2026-10-14",
    "verdict": "no match: condensed internal Hom structures and ordinary presheaf morphisms do not state the constant finitely presented module Isom comparison on arbitrary sites"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(sheafHom|internalHom|[Ii]som)|([Ii]som|sheafHom|internalHom).*constant",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/Topology/MetricSpace/IsometricSMul.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presentation predicates, ordinary/free module morphisms, or condensed-site results do not give the arbitrary-site canonical Isom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism sheaf of constant finitely presented modules on a site",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an arbitrary site the sheaf of isomorphisms of constant finitely presented modules is constant",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, CategoryTheory.Sheaf.isConstant_of_iso, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presentation predicates, ordinary/free module morphisms, or condensed-site results do not give the arbitrary-site canonical Isom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "12 hits: PresheafOfModules.Hom, PresheafOfModules.instAddCommGroupHom, PresheafOfModules.instAddHom, PresheafOfModules.instNegHom, PresheafOfModules.instSubHom, PresheafOfModules.instZeroHom, PresheafOfModules.unitHomEquiv, PresheafOfModules.Hom.app",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presentation predicates, ordinary/free module morphisms, or condensed-site results do not give the arbitrary-site canonical Isom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom between constant module sheaves with finitely presented source equals the constant sheaf of linear maps",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.ihom_map_val_app, SheafOfModules.unitHomEquiv, LightCondensed.ihomPoints_symm_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.freeHomEquiv, LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presentation predicates, ordinary/free module morphisms, or condensed-site results do not give the arbitrary-site canonical Isom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHom|internalHom|Isom",
+   "results": "22 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: finite presentation predicates, ordinary/free module morphisms, or condensed-site results do not give the arbitrary-site canonical Isom comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-proetale-locally-constant-origin",
   "by": "worker",
@@ -116,5 +228,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sf-site-constant-module-isom-sheaf",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 093T(2) through finite free Hom, a finite presentation kernel, and the finite-limit diagram of inverse pairs. Reused exact sheafification, algebraic/module interfaces and constant restriction; no new nodes. Statement unchanged.",
+  "blueprint": "Constructible-origin lisse comparison input in steps 1, 5(b), 6, via locally-constant-origin step 5 (the Isom trivialization sheaf).",
+  "tool_uses": [
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-constant-restriction",
+    "why": "Generic arbitrary-site sheafification/localization or module-category interface used in the 093T finite-presentation argument; the comparison unit supplies no version of this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-c092ecec0",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-c092ecec0 (reviewer sub-agent of L); spot-checked: Read the mathematics in full against Stacks 093T and the cited localization, module, and sheafification sources. All four steps correctly establish the canonical Isom comparison. Small cases pass; no new nodes, duplicate split, dependency cycle, unsupported use, or target weakening found. Accepted generic tool uses and source/category checks are documented in review.md. No repairs needed."
  }
 }
