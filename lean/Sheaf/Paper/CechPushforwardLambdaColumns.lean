@@ -6,6 +6,9 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.Paper.CechComplexAugmentations
+import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.Algebra.Homology.Functor
 
 /-! # Resolution columns of the Cech map induced by lambda
 
@@ -46,6 +49,50 @@ theorem cech_pushforward_lambda_columns {X X' : Scheme.{v}} (f : X' ⟶ X)
     QuasiIso (((HomologicalComplex₂.flipFunctor (ModuleCat.{v} Γ(X, ⊤))
       (ComplexShape.up ℕ) (ComplexShape.up ℕ)).map
         ((moduleCechDoubleFunctor U).map l)).f q) := by
-  sorry
+  classical
+  have : EnoughInjectives X.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  have : QuasiIso l := hl
+  let J := Fin (q + 1) → ι
+  let V (y : J) : X.Opens := ∏ᶜ fun i => U (y i)
+  let S (y : J) := SheafOfModules.forget X.ringCatSheaf ⋙
+    PresheafOfModules.evaluation X.ringCatSheaf.obj (op (V y))
+  let R (y : J) := ModuleCat.restrictScalars
+    (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op (V y)))).hom
+  have hs (y : J) : QuasiIso (((S y).mapHomologicalComplex (ComplexShape.up ℕ)).map l) := by
+    have : PreservesFiniteLimits (S y) := by
+      change PreservesFiniteLimits (SheafOfModules.evaluation X.ringCatSheaf (op (V y)))
+      infer_instance
+    apply (S y).quasiIso_map_of_rightAcyclic_nat l
+    · intro n
+      have : Injective (A.X n) := hA n
+      exact (module_pushforward_injective_acyclic f (A.X n)).2 (V y)
+    · intro n
+      have : Injective (K.X n) := hK n
+      exact Functor.rightAcyclic_of_injective (F := S y) (K.X n)
+  let T : X.Modules ⥤ Discrete J ⥤ ModuleCat.{v} Γ(X, ⊤) :=
+    { obj := fun M => Discrete.functor fun y => (S y ⋙ R y).obj M
+      map := fun a => Discrete.natTrans fun y => (S y.as ⋙ R y.as).map a }
+  have : T.Additive := by
+    constructor
+    intro M N a b
+    apply NatTrans.ext
+    funext y
+    exact (S y.as ⋙ R y.as).map_add
+  -- A map of discrete diagrams is a quasi-isomorphism if each evaluation is one.
+  have : QuasiIso ((T.mapHomologicalComplex (ComplexShape.up ℕ)).map l) := by
+    apply (HomologicalComplex.quasiIso_iff_evaluation _).2
+    intro y
+    have := hs y.as
+    change QuasiIso (((R y.as).mapHomologicalComplex (ComplexShape.up ℕ)).map
+      (((S y.as).mapHomologicalComplex (ComplexShape.up ℕ)).map l))
+    infer_instance
+  -- ModuleCat satisfies AB4*: arbitrary products preserve homology.
+  let L := lim (J := Discrete J) (C := ModuleCat.{v} Γ(X, ⊤))
+  have hh : QuasiIso ((L.mapHomologicalComplex (ComplexShape.up ℕ)).map
+      ((T.mapHomologicalComplex (ComplexShape.up ℕ)).map l)) := by
+    infer_instance
+  -- These termwise products are definitionally the fixed Cech column.
+  exact hh
 
 end AlgebraicGeometry.Scheme.Modules

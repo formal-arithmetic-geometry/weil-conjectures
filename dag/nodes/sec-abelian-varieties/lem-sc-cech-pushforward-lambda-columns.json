@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "On each tuple intersection V, pushforwards of injectives are acyclic for sections by 01EX and injectives are section-acyclic. The bounded-below acyclic comparison theorem 015E therefore makes evaluation of lambda on V a quasi-isomorphism.",
+   "text": "For each tuple y, use the categorical finite-product open V(y) appearing in the Cech functor. Its sections functor S(y) is additive and left exact. module_pushforward_injective_acyclic supplies S(y)-acyclicity of every source term; rightAcyclic_of_injective supplies that of every target term. Apply Functor.quasiIso_map_of_rightAcyclic_nat to lambda, obtaining a quasi-isomorphism of module-valued section complexes on V(y).",
    "uses": [
     "lem-weil-pbc-module-pushforward-injective-acyclic",
     "lem-weil-pbc-leray-acyclicity-quasi-iso"
@@ -24,7 +24,12 @@
    "elementary": false
   },
   {
-   "text": "A degree-q resolution column is the product of the section complexes over all (q+1)-tuples. A tuple is a cocycle exactly when each component is a cocycle. It is a boundary exactly when each component is a boundary: choose component preimages to obtain a product preimage. Hence product homology is the product of homology, and the product map is an isomorphism on homology. The finite-product open used by the Cech functor is the intersection V; its restriction and scalar action are the same. Empty tuple sets give zero complexes.",
+   "text": "Restrict the scalars of the sections at V(y) to the global section ring. Restriction of scalars is exact and preserves quasi-isomorphisms. Assemble these functors into an additive functor T to diagrams indexed by the discrete category of (q+1)-tuples. HomologicalComplex.quasiIso_iff_evaluation proves that T(lambda) is a quasi-isomorphism from the coordinatewise assertions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The global module category satisfies Mathlib AB4Star, so lim on discrete tuple diagrams is exact and preserves homology. Therefore applying lim termwise to T(lambda) gives a quasi-isomorphism. The resulting objects, differentials and map components are definitionally those of degree q in the flipped moduleCechDoubleFunctor map. This proves the claimed QuasiIso directly, including empty tuple sets and empty product opens.",
    "uses": [
     "def-sc-cech-complex-augmentations"
    ],
@@ -37,9 +42,12 @@
   "def-sc-cech-complex-augmentations"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Tag 01FD, arrow B-double-prime to B-prime; Tag 01EX and Derived Categories Tag 015E, acyclicity on tuple intersections"
+  "place": "Tag 01FD, arrow B-double-prime to B-prime; Tag 01EX and Derived Categories Tag 015E, acyclicity on tuple intersections",
+  "note": "Lean realization of the existing sectionwise acyclicity and exact-product plan; the Nat-indexed acyclic comparison and ModuleCat AB4Star avoid new intermediate obligations."
  },
  "mathlib_searches": [
   {
@@ -119,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-c0cad",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261014T034909-L-814412",
-  "kind": "interface",
-  "note": "independent Codex review: Matched unchanged theorem signature, delivered proofs and new obligations with their DAG records and Stacks 01FD/01EX/015E; checked axioms and compiled all four modules plus sole direct importer Sheaf.Paper.CechRefinementResolutionDiagram."
+  "landing": "20261014T040539-L-999522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
