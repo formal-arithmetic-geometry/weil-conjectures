@@ -21,11 +21,125 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-proetale-site",
   "def-weil-proetale-geometric-stalk",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=A^{\\mathrm{sh}}_{T,\\bar t}$, $L=\\operatorname{Spec}A$, and let $j:L\\to T$ be the structural map. Clause (1) of the strict-henselization functoriality theorem supplies the strictly henselian local structure on $A$ and the geometric lift $\\lambda:\\operatorname{Spec}\\Omega\\to L$ at its closed point, with $j\\lambda=\\bar t$. Choose an affine open $\\operatorname{Spec}R\\to T$ through $t$. Its pointed lift is one of the affine neighbourhoods in the limit construction, so its limit projection factors $j$ through this open. The affine-chart ind-etale theorem makes its ring map $R\\to A$ ind-etale, hence weakly etale by ind-etale stability. The explicit ring/scheme equivalence in the ind-etale-algebra definition makes $L\\to\\operatorname{Spec}R$ weakly etale. An open immersion is etale by the open-immersion theorem. The comparison-morphism node explicitly states that the inclusion sends every etale $T$-scheme to a weakly etale $T$-scheme, so the affine-open inclusion into $T$ is weakly etale. Composition is weakly etale. Thus $j$ is weakly etale and gives an object of the chosen pro-etale site, transported to its skeleton if necessary. Its size is the size of the small ring colimit in the strict-localization construction.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-proetale-site",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+   }
+  },
+  {
+   "text": "Let $(U,\\bar u)$ be a pointed weakly etale neighbourhood of $\\bar t$. Pull it back to $L$: $P=U\\times_TL\\to L$ is weakly etale by base change, and $(\\bar u,\\lambda)$ is its marked $\\Omega$-point. Choose an affine open $\\operatorname{Spec}B\\subset P$ containing its image $q$. Source-open locality makes $\\operatorname{Spec}B\\to L$ weakly etale, hence $a:A\\to B$ is weakly etale by the explicit ring/scheme equivalence in the ind-etale-algebra definition. The map $A\\to B_q$ is weakly etale by weakly etale localization and composition. It is a local map because $q$ lies over the maximal ideal of $A$. Olivier therefore says that $e:A\\to B_q$ is an isomorphism. The map $B\\to B_q\\xrightarrow{e^{-1}}A$ defines a section $L\\to P$, and projection gives a $T$-map $\\alpha_U:L\\to U$. This preserves the geometric point as a morphism, not just its image: writing $\\chi:B\\to\\Omega$ for the marked point and $\\theta:A\\to\\Omega$ for $\\lambda$, one has $\\chi a=\\theta$ and $\\ker\\chi=q$. Thus $\\chi$ extends uniquely to $\\chi_q:B_q\\to\\Omega$; since $\\chi_qe=\\theta$, we have $\\theta e^{-1}(B\\to B_q)=\\chi$, as required.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-localization-ring-weakly-etale",
+    "thm-weil-pbc-weak-etale-strict-local",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+   }
+  },
+  {
+   "text": "The pointed map $\\alpha_U$ is unique. Indeed a second such map gives a second section of $P\\to L$ through the same marked point $q$. Both sections factor through the affine open $\\operatorname{Spec}B$ chosen in step 2: the inverse image of that open contains the closed point of $L$, and an open of a local spectrum containing the closed point is the entire spectrum (if a basic open $D(a)$ contains the maximal ideal, $a$ is a unit). Their ring maps $r:B\\to A$ have $r^{-1}(\\mathfrak m_A)=q$, hence extend to $r_q:B_q\\to A$. Since they are sections, $r_qe=\\mathrm{id}_A$; the isomorphism $e$ forces $r_q=e^{-1}$ for both. Consequently the sections and their projections to $U$ agree. In particular the only pointed endomorphism of $(L,\\lambda)$ is the identity. For every pointed arrow $v:U\\to V$, uniqueness gives $v\\alpha_U=\\alpha_V$. Thus $(L,\\lambda)$ is initial in the category of all pointed weakly etale neighbourhoods.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+   }
+  },
+  {
+   "text": "Apply the definition of the stalk to the opposite neighbourhood category. Its object $(L,\\lambda)$ is terminal by step 3. The restriction maps $\\mathcal H(U)\\xrightarrow{\\mathcal H(\\alpha_U)}\\mathcal H(L)$ form a cocone by $v\\alpha_U=\\alpha_V$. For any cocone with vertex $M$, its leg at $L$ is the unique map $\\mathcal H(L)\\to M$ factoring all other legs, because the cocone equation for $\\alpha_U$ is precisely this factorization. Hence $\\mathcal H(L)$ is the colimit, in sets or abelian groups. The canonical coprojection $\\mathcal H(L)\\to\\mathcal H_{\\bar t}$ is the asserted isomorphism. For a sheaf morphism $\\eta:\\mathcal H\\to\\mathcal K$, naturality of restrictions gives $\\eta_L\\mathcal H(\\alpha_U)=\\mathcal K(\\alpha_U)\\eta_U$; the colimit universal property gives naturality of the isomorphism. No cofinality of etale neighbourhoods inside pro-etale neighbourhoods is used.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+   }
+  },
+  {
+   "text": "Every pro-etale covering $\\{W_i\\to L\\}$ has a section in some member. The covering condition supplies a point $w\\in W_i$ over the closed point of $L$. Choose an affine chart $\\operatorname{Spec}B\\subset W_i$ through $w$, with prime $q$. Each covering arrow is weakly etale by the site definition. Source-open locality and the affine ring criterion make $A\\to B$ weakly etale, and localization and composition make the local map $A\\to B_q$ weakly etale. Olivier applies because $A$ is strictly henselian and $q$ contracts to its maximal ideal, so this local ring map is an isomorphism (no choice of a geometric lift of $w$ is needed). Writing $e:A\\to B_q$ for this isomorphism, the ring map $B\\to B_q\\xrightarrow{e^{-1}}A$ defines $L\\to\\operatorname{Spec}B\\subset W_i$; its composite to $L$ is the identity because $e^{-1}e=\\mathrm{id}_A$. This is the required section $\\sigma:L\\to W_i$. Now let $\\varphi:\\mathcal G\\to\\mathcal H$ be an epimorphism of abelian sheaves and $h\\in\\mathcal H(L)$. The general-site local-surjectivity lemma supplies a covering and lifts $g_i\\in\\mathcal G(W_i)$ of $h|_{W_i}$. For the split member, $\\mathcal G(\\sigma)(g_i)$ maps to $h$, by naturality and $\\mathcal H(\\sigma)\\mathcal H(W_i\\to L)=\\mathrm{id}$. Thus evaluation at $L$ preserves epimorphisms. The sheafification-exactness theorem, clause (1), says that kernels and all limits of abelian sheaves are computed sectionwise, so evaluation preserves finite limits as well.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-localization-ring-weakly-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "thm-weil-pbc-weak-etale-strict-local",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+   }
+  },
+  {
+   "text": "Evaluation is additive, since addition of sheaf morphisms is sectionwise. It preserves finite biproducts and kernels, and step 5 shows it preserves epimorphisms. For an arbitrary $f:F\\to G$, factor it in the abelian sheaf category as $F\\twoheadrightarrow I\\hookrightarrow G$, and put $Q=\\operatorname{coker}f$. The exact sequence $0\\to I\\to G\\to Q\\to0$ stays exact: left exactness gives its kernel, and preservation of epimorphisms makes the last map surjective; likewise $F(L)\\to I(L)$ is surjective. Therefore $Q(L)=G(L)/f_L(F(L))$, which proves preservation of cokernels. A finite colimit in an additive category is the cokernel of the difference of the two maps between the finite sums of diagram objects and arrow-source objects; these sums and cokernels are preserved. Thus evaluation preserves finite colimits. The natural isomorphism in step 4 transfers finite-limit and finite-colimit preservation to the geometric stalk functor, proving exactness.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-proetale-site",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "lem-weil-pbc-localization-ring-weakly-etale",
+  "thm-weil-pbc-weak-etale-strict-local",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-sheafification-exact",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,10 +210,45 @@
    "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
    "date": "2026-10-14",
    "verdict": "no match: independently read hits; site constructions, structure-sheaf evaluation, morphisms between points on one fixed site, or unrelated module cokernels do not assert this pro-etale formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proetale geometric stalk equals evaluation on the strict henselization and preserves exact sequences",
+   "results": "8 hits: Algebra.mem_etaleLocus_iff, StandardEtalePair.instFormallyEtaleRing, Algebra.IsEtaleAt, Algebra.IsEtaleAt.comp, Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; etale-site objects, structural scheme stalks and proetale topology definitions do not state strict-local proetale evaluation or its exactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric point of the pro etale topos is represented by the spectrum of the strict local ring",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; etale-site objects, structural scheme stalks and proetale topology definitions do not state strict-local proetale evaluation or its exactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; etale-site objects, structural scheme stalks and proetale topology definitions do not state strict-local proetale evaluation or its exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*stalk|stalk.*strictHensel|proetale.*Point",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: read hits; etale-site objects, structural scheme stalks and proetale topology definitions do not state strict-local proetale evaluation or its exactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proetale stalk evaluation strict henselization exact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-proetale-stalk-conservative",
   "by": "worker",
@@ -115,5 +264,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-proetale-classical-stalk",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved site membership from the existing affine-chart ind-etale presentation, constructed and uniquely characterized pointed maps by Olivier, computed the stalk by the colimit universal property, and split covers at the closed point to prove exact evaluation. The existing ind-etale-algebra definition already states the affine weakly-etale ring/scheme equivalence, so no new node is needed; no redundant strict-localization or exact-stalk nodes.",
+  "blueprint": "Ancestor Proof Step 3 strict-local evaluation and exact stalks; Proof Step 4 geometric-point evaluation over Spec k.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic strict-local construction with its canonical marked closed point; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic ind-etale affine-chart presentation; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic weakly etale base change and ring composition; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-ring-weakly-etale",
+    "why": "Generic weakly etale ring localization; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "thm-weil-pbc-weak-etale-strict-local",
+    "why": "Generic Olivier local isomorphism; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic epimorphism/local lifting equivalence on arbitrary sites; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Generic sectionwise computation of sheaf kernels and limits; no step of the comparison unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic open-immersion geometry supplies site membership; no comparison-unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-source-locality",
+    "why": "Generic source-open restriction and local checking used in affine reductions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-localization-ring-weakly-etale",
+  "thm-weil-pbc-weak-etale-strict-local",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-weakly-etale-source-locality"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-f898fac9c",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-f898fac9c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and sources. All six steps correctly establish strict-local evaluation and exactness using Olivier’s theorem and split covers. No new nodes or repairs. Target coefficient categories and base-change orientation checked against archived master sources; no comparison theorem inferred from the seeded route. Detailed checks and accepted tool uses are in review.md."
  }
 }
