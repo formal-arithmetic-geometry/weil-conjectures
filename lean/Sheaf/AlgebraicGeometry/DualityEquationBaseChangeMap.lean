@@ -142,6 +142,8 @@ noncomputable def dualityEquationBaseChangeMap
   have : ∀ E, IsIso (β.app E) := fun E ↦
     @Functor.FullyFaithful.isIso_of_isIso_map _ _ _ _ _ PY'.fullyFaithfulι _ _ (β.app E) (hβ E)
   have : IsIso β := NatIso.isIso_of_isIso_app β
-  (mateEquiv adjf adjf' (inv β)).app K
+  -- The only inverse data used here is the inverse of the fixed base-change
+  -- transformation; no fresh pullback adjunction or counit is selected.
+  show _ from (mateEquiv adjf adjf' (inv β)).app K
 
 end AlgebraicGeometry
