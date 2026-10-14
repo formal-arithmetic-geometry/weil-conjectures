@@ -14403,3 +14403,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:31 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261014T033111-L-605889 (proof); batch 20261014T033101; modules 1; new nodes 0)
 - 03:31 L: merged deliver/Q2/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261014T033111-L-606093 (proof); batch 20261014T033101; modules 1; new nodes 0)
 - 03:31 L: merged deliver/Q2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261014T033112-L-606248 (proof); batch 20261014T033101; modules 1; new nodes 0)
+- 03:31 L: merged deliver/R4/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261014T033112-L-606406 (proof); batch 20261014T033101; modules 1; new nodes 0)

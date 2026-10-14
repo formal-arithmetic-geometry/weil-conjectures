@@ -134,8 +134,8 @@ theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
         invFun := fun t ↦
           let t₀ : C(c.sectionSpace W.unop, N.V) := t.val
           ⟨⟨t₀, (IsLocallyConstant.iff_continuous _).2 t₀.continuous⟩, t.property⟩
-        left_inv := fun s ↦ by apply Subtype.ext; rfl
-        right_inv := fun t ↦ by apply Subtype.ext; rfl }) (by
+        left_inv := fun _ ↦ Subtype.ext rfl
+        right_inv := fun _ ↦ Subtype.ext rfl }) (by
       intro W W' f
       rfl)
   let : HasLimitsOfSize.{u, u + 1}
