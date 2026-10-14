@@ -11,6 +11,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamental
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 
 /-!
@@ -143,6 +144,7 @@ theorem exists_equivalence_isLisse :
   have : Smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
     inferInstanceAs (Smooth (Limits.pullback.snd _ _))
   have := IsRegular.of_smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
+  have : CompactSpace (C ↘ Spec (.of K)).geometricFiber := inferInstance
   obtain ⟨M, hM⟩ := ProEtale.exists_lisseMonodromy (l := l)
     (Y := (C ↘ Spec (.of K)).geometricFiber) (Ω := K)
   obtain ⟨B⟩ := nonempty_basePointData W

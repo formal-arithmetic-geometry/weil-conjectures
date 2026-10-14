@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobeniusElement
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 
 /-!
