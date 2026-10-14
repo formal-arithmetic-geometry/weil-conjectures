@@ -38,7 +38,7 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
       rw [← hP0]
       exact L.property)
     refine ⟨⟨M, by change M ∈ (P0 : Set C.Pic); rw [hP0]; exact hM⟩, ?_⟩
-    exact Subtype.ext hpow
+    simpa using Subtype.ext hpow
   let φ : C.Pic →* Multiplicative (ZMod n) :=
     (Int.castAddHom (ZMod n)).toMultiplicative.comp
       ((MonoidHom.fst (Multiplicative ℤ) P0).comp e.toMonoidHom)
