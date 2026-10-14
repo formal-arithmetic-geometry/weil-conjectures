@@ -628,6 +628,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleLimitDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
@@ -686,6 +687,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimens
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.TypePointFunctions
+public import WeilConjectures.AlgebraicGeometry.Sites.UnitComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 public import WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
