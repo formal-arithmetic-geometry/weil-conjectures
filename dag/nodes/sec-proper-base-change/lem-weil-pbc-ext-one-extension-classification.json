@@ -13,9 +13,87 @@
   "def-pc-ext",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S(A)=A[0]$ and let $\\mathcal H$ be the standard heart in $D(\\mathcal A)$. By [def-sbc-standard-tstructure-derived-category], its objects have cohomology only in degree zero. The objects $S(A)$ belong to it by direct computation of single-complex cohomology. By [lem-sf-derived-concentrated-single] every object of $\\mathcal H$ is isomorphic to some $S(A)$. The Hom maps are bijective by [lem-weil-pbc-derived-single-fully-faithful]. Thus $S:\\mathcal A\\to\\mathcal H$ is an additive equivalence. It preserves and reflects short exact sequences: the kernel and cokernel universal properties transfer along these Hom bijections and the essential surjectivity. We may consequently use the heart short-exact-sequence criterion on sequences from $\\mathcal A$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Example 1.2.1; Example 1.3.2(i); standard heart identification; also Stacks 06XS(2)"
+   }
+  },
+  {
+   "text": "For a short exact sequence $E=(0\\to P\\xrightarrow uB\\xrightarrow vQ\\to0)$, apply [lem-weil-pbc-complex-ses-triangle] to the corresponding degreewise short exact sequence of single complexes. It gives a distinguished triangle $S(P)\\xrightarrow{S(u)}S(B)\\xrightarrow{S(v)}S(Q)\\xrightarrow{\\delta_E}S(P)[1]$. By [def-pc-ext] its last arrow is an element of $\\operatorname{Ext}^1_{\\mathcal A}(Q,P)$. For an endpoint-identity isomorphism of extensions the naturality equation of the same node is $\\mathrm{id}_{S(P)[1]}\\delta_E=\\delta_{E'}\\mathrm{id}_{S(Q)}$. Hence the assignment descends to the stated isomorphism classes.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; Tag 06XV"
+   }
+  },
+  {
+   "text": "Let $\\xi:S(Q)\\to S(P)[1]$. TR1 and inverse rotation (TR2) of [def-weil-triangulated-category] give a distinguished triangle $S(P)\\to M\\to S(Q)\\xrightarrow{\\xi}S(P)[1]$. More explicitly, complete $\\xi$ to $S(Q)\\xrightarrow{\\xi}S(P)[1]\\xrightarrow aC\\xrightarrow bS(Q)[1]$. Two inverse rotations give $S(P)\\xrightarrow{-a[-1]}C[-1]\\xrightarrow{-b[-1]}S(Q)\\xrightarrow{\\xi}S(P)[1]$, so take $M=C[-1]$; its last arrow is exactly $\\xi$. Both endpoints lie in the standard heart, so its extension closure, clause (2) of [lem-weil-heart-short-exact-triangles], puts $M$ in that heart. Step 1 identifies $M$ with $S(B)$, and fullness lifts the first two arrows to $u:P\\to B$ and $v:B\\to Q$. Clause (4) of the heart lemma makes this a short exact sequence in the heart, hence in $\\mathcal A$ by step 1. Its canonical boundary from step 2 equals $\\xi$ by the uniqueness assertion in clause (4). This proves surjectivity without assuming enough injectives or projectives.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Sections 1.2.3, 1.3.4 and 1.3.6; Stacks 0145 TR1-TR2; triangulated proof of the conclusion of 06XV"
+   }
+  },
+  {
+   "text": "Suppose $\\delta_E=\\delta_{E'}$. Rotate the two triangles of step 2 twice, so their first arrows are the common map $S(Q)\\xrightarrow{\\delta_E}S(P)[1]$. TR3 of [def-weil-triangulated-category], with identity maps on these two vertices, completes to a morphism of these rotated triangles. By [lem-sf-triangle-morphism-iso] its remaining component $S(B)[1]\\to S(B')[1]$ is an isomorphism. Writing this component as $t$, the rotated arrows are $-S(u)[1]$ and $-S(v)[1]$. The triangle squares are $t\\circ(-S(u)[1])=-S(u\\prime)[1]$ and $(-S(v\\prime)[1])\\circ t=-S(v)[1]$. Cancelling minus signs and applying $[-1]$ yields $b:S(B)\\xrightarrow{\\sim}S(B')$ with $bS(u)=S(u')$ and $S(v')b=S(v)$. Fullness in [lem-weil-pbc-derived-single-fully-faithful] lifts $b$ and $b^{-1}$ to $h$ and $k$ in $\\mathcal A$; faithfulness applied to their composites gives $kh=\\mathrm{id}$ and $hk=\\mathrm{id}$, and applied to the squares gives $hu=u'$ and $v'h=v$. This is exactly an endpoint-identity isomorphism of extensions, proving injectivity.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 TR2-TR3; Tag 014A, lemma-third-isomorphism-triangle; triangulated proof of the conclusion of 06XV"
+   }
+  },
+  {
+   "text": "The boundary in step 2 and the canonical cone boundary used by [lem-weil-pbc-exact-functor-ses-triangle-image] both complete the same two maps to distinguished triangles. All three terms belong to the standard heart, so clause (4) of [lem-weil-heart-short-exact-triangles] identifies these boundaries. For an exact additive $F:\\mathcal A\\to\\mathcal B$, use [lem-weil-pbc-exact-functor-ses-triangle-image] on $E$. With its single-complex comparisons $\\varphi_A:D(F)(A[0])\\xrightarrow{\\sim}F(A)[0]$ and shift comparison $c$, it states $\\varphi_P[1]\\circ c_{P[0]}\\circ D(F)(\\delta_E)=\\delta_{F(E)}\\circ\\varphi_Q$. Equivalently $\\delta_{F(E)}=\\varphi_P[1]\\circ c_{P[0]}\\circ D(F)(\\delta_E)\\circ\\varphi_Q^{-1}$, which is precisely the image of the derived Hom class under $D(F)$. Exactness supplies the image short exact sequence; the displayed equation proves the required compatibility, with both endpoint and shift comparisons explicit.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0151 and 0152; exact functors commute with the cone construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-pc-ext",
+  "def-weil-triangulated-category",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-exact-functor-ses-triangle-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Triangulated argument using 1.2.3 and 1.3.4--1.3.6; same classification as Stacks 06XV, with exact-functor cone compatibility 0152. The proof is not the roof argument of 06XU."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,18 +128,53 @@
    "query": "Yoneda Ext one is in bijection with equivalence classes of extensions with given kernel and quotient",
    "results": "8 hits: CategoryTheory.Abelian.Ext.homEquiv₀, CategoryTheory.Abelian.Ext.mk₀_bijective, CategoryTheory.Abelian.Ext.linearEquiv₀, CategoryTheory.Abelian.Ext.mk₀_linearEquiv₀_apply, CategoryTheory.Abelian.Ext.mk₀_homEquiv₀_apply, CategoryTheory.Abelian.Ext.homLinearEquiv_apply, CategoryTheory.Abelian.Ext.addEquiv₀, CategoryTheory.Abelian.Ext.ext_iff",
    "date": "2026-10-14",
-   "verdict": "no match: read hits; none states the complete pro-etale localization or section/Hom continuity assertion, or degree-one extension classification, respectively"
+   "verdict": "no match for the full classification: hits give extClass, Ext/Hom transport, or exact-functor compatibility only; signatures read locally"
   },
   {
    "tool": "leanfinder",
    "query": "Isomorphism classes of short exact sequences with fixed end objects correspond to degree one derived Ext",
    "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.ext, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.HasExt.standard, CategoryTheory.Abelian.Ext.homEquiv₀, CategoryTheory.Abelian.Ext.mk₀_bijective",
    "date": "2026-10-14",
-   "verdict": "no match: second reader inspected the relevant local signatures; definitions, presentation transport, Mayer-Vietoris, and Ext class construction do not establish this complete statement."
+   "verdict": "no match for the full classification: hits give extClass, Ext/Hom transport, or exact-functor compatibility only; signatures read locally"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree one Ext in an abelian category is in bijection with short exact sequences up to isomorphism",
+   "results": "8 hits: CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext.homEquiv₀, CategoryTheory.Abelian.Ext.mk₀_bijective, CategoryTheory.Abelian.Ext.mk₀_linearEquiv₀_apply, CategoryTheory.Abelian.Ext.linearEquiv₀, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.homLinearEquiv_apply, CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match for the full classification: hits give extClass, Ext/Hom transport, or exact-functor compatibility only; signatures read locally"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extClass\"",
+   "results": "10 hits: CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.ShortComplex.ShortExact.extClass_hom, CategoryTheory.ShortComplex.ShortExact.extClass_naturality, CategoryTheory.ShortComplex.ShortExact.comp_extClass_assoc, CategoryTheory.ShortComplex.ShortExact.extClass_comp_assoc, CategoryTheory.ShortComplex.ShortExact.comp_extClass, CategoryTheory.ShortComplex.ShortExact.extClass_comp, postcomp_extClass_surjective_of_projective_X₂",
+   "date": "2026-10-14",
+   "verdict": "no match for the full classification: hits give extClass, Ext/Hom transport, or exact-functor compatibility only; signatures read locally"
+  },
+  {
+   "tool": "grep",
+   "query": "extClass|extension.*[Bb]iject|[Bb]iject.*extension",
+   "results": "18 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the full classification: hits give extClass, Ext/Hom transport, or exact-functor compatibility only; signatures read locally"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Short exact extensions with fixed endpoints are classified by degree one derived Ext naturally under exact additive functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda equivalence classes of extensions coincide with Hom into shift one in the derived category",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.hom', CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Abelian.Ext.homAddEquiv, CategoryTheory.Abelian.Ext.homEquiv₀",
+   "date": "2026-10-14",
+   "verdict": "no match for the full classification: hits give extClass, Ext/Hom transport, or exact-functor compatibility only; signatures read locally"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-condensed-finite-presentation-descent",
   "by": "worker",
@@ -73,12 +186,8 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof, first sentence: common-stage descent formula; realize the finite-stage gluing class as a sheaf extension in source TwoColimit.lean (Obj).",
-   "via": [
-    "lem-weil-pbc-condensed-finite-presentation-descent",
-    "prop-weil-pbc-qbar-condensed-two-colimit",
-    "nt-target-proetale-qbar"
-   ]
+   "place": "Downstream categorical helper for the proper-base-change development: degree-one derived Hom classes are classified by endpoint-fixed short exact extensions (Stacks 06XU/06XV). This helper is used below the fixed proper-base-change route and does not replace its P1, reduction, or finite-torsion steps.",
+   "via": []
   },
   "same_as": []
  },
@@ -90,5 +199,45 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ext-one-extension-classification",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved the classification by completing and comparing triangles in the standard heart, with fixed endpoints and exact-functor comparison maps explicit. Reused existing concentration, heart and triangle lemmas; added only the Mathlib full-faithfulness leaf. No Lean attachment states the complete item.",
+  "blueprint": "Under the required nearest blueprint ancestor thm-weil-pbc-qbar, this is a downstream categorical helper: the fixed proper-base-change unit route remains its three steps (P1, reduction, finite torsion), while this lemma supplies extension classification used by condensed descent.",
+  "route_note": "This helper does not replace any step of sk-thm-properbasechange; it is a downstream tool used by lem-weil-pbc-condensed-finite-presentation-descent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart extension closure and uniqueness of short-exact-sequence boundaries; no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic natural triangle of a degreewise short exact sequence, applied to single complexes."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic two-isomorphisms criterion for a morphism of triangles."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "why": "Generic exact-functor compatibility with the canonical short-exact-sequence boundary."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-exact-functor-ses-triangle-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-d91e24b64",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-d91e24b64 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The item’s created.item was wrong, and the new Mathlib leaf lacked created.by/date plus merged_into and lean_audit metadata. Complete corrected JSON files are in fixes/dag/nodes/sec-proper-base-change/; detailed review is in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
