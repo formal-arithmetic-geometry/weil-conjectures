@@ -65,6 +65,7 @@ theorem ext_sections_factorization
       exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm
         (d.inv (((resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
           (fun M _ ↦ forgottenInjectiveAcyclic X M)).app F).hom x))) := by
+  -- Evaluate the generic comparison before exposing the specialized scheme instances.
   unfold moduleCohomologyExtResolutionEquiv moduleCohomologyExtResolutionNatIso
   delta RingedSpace.moduleCohomology at x ⊢
   dsimp only [id, AlgebraicGeometry.Scheme.Modules.H, Sheaf.functorH]
