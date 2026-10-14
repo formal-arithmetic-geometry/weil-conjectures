@@ -27,9 +27,73 @@
   "def-weil-presheaf-modules-sheafification",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T_U(\\mathcal A,\\mathcal B)=\\mathcal{H}om_{\\mathcal O_U}(\\mathcal A,\\mathcal B)$ and $T(\\mathcal A,\\mathcal B)=\\mathcal{H}om_{\\mathcal O}(\\mathcal A,\\mathcal B)$. For every $v:V\\to U$, the relocalization $(\\mathcal C/U)/(V/U)\\cong\\mathcal C/V$ identifies the restricted modules and their scalar actions sectionwise. Hence both $T(\\mathcal F,\\mathcal H)|_U(V/U)$ and $T_U(\\mathcal F|_U,\\mathcal H|_U)(V/U)$ are the same set of $\\mathcal O_V$-linear maps $\\mathcal F|_V\\to\\mathcal H|_V$. The identification keeps every component of each map. Restriction along $W\\to V$ is restriction of those components on both sides, and scalar multiplication is postcomposition with the same multiplication map. This gives an isomorphism $c_{\\mathcal F,\\mathcal H}:T_U(\\mathcal F|_U,\\mathcal H|_U)\\cong T(\\mathcal F,\\mathcal H)|_U$. Precomposition by $f$ and postcomposition by $h$ commute with $c$, since both give componentwise $h\\circ\\varphi\\circ f$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8H (lemma-internal-hom-restriction), definition proof; used in the third equality of 0E8I"
+   }
+  },
+  {
+   "text": "Put $A=j_{U!}(\\mathcal G\\otimes_{\\mathcal O_U}\\mathcal F|_U)$ and $B=(j_{U!}\\mathcal G)\\otimes_{\\mathcal O}\\mathcal F$. For an arbitrary test module $\\mathcal H$, the extension adjunction gives $\\operatorname{Hom}_{\\mathcal O}(A,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G\\otimes\\mathcal F|_U,\\mathcal H|_U)$. Apply the tensor-Hom bijection on the slice, using its symmetry to put $\\mathcal F|_U$ in the fixed tensor factor, to obtain $\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G,T_U(\\mathcal F|_U,\\mathcal H|_U))$. These bijections are natural in $\\mathcal G,\\mathcal F,\\mathcal H$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+   }
+  },
+  {
+   "text": "Postcompose with $c_{\\mathcal F,\\mathcal H}$ from step 1. This gives $\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G,T(\\mathcal F,\\mathcal H)|_U)$. Use the inverse extension-adjunction bijection to obtain $\\operatorname{Hom}_{\\mathcal O}(j_{U!}\\mathcal G,T(\\mathcal F,\\mathcal H))$, and the inverse tensor-Hom bijection (again with symmetry) to obtain $\\operatorname{Hom}_{\\mathcal O}(B,\\mathcal H)$. Denote the composite of steps 2 and 3 by $E_{\\mathcal G,\\mathcal F,\\mathcal H}:\\operatorname{Hom}(A,\\mathcal H)\\cong\\operatorname{Hom}(B,\\mathcal H)$. Each component is natural: the two adjunctions have the naturality stated in the cited nodes, and step 1 verifies it for $c$. Thus $E$ commutes with postcomposition in $\\mathcal H$ and precomposition by the induced maps of $A$ and $B$ in the parameters.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+   }
+  },
+  {
+   "text": "Here is the representability argument explicitly, without an additional lemma. Set $u=E_{\\mathcal G,\\mathcal F,A}(\\mathrm{id}_A):B\\to A$ and $v=E_{\\mathcal G,\\mathcal F,B}^{-1}(\\mathrm{id}_B):A\\to B$. Naturality in the test module implies $E_{\\mathcal G,\\mathcal F,\\mathcal H}(q)=q\\circ u$ for every $q:A\\to\\mathcal H$ and $E_{\\mathcal G,\\mathcal F,\\mathcal H}^{-1}(r)=r\\circ v$ for every $r:B\\to\\mathcal H$. Evaluating the two inverse identities at $\\mathrm{id}_A$ and $\\mathrm{id}_B$ gives $u\\circ v=\\mathrm{id}_A$ and $v\\circ u=\\mathrm{id}_B$. Consequently $v:A\\xrightarrow{\\sim}B$ is the required isomorphism of module sheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+   }
+  },
+  {
+   "text": "For maps $g:\\mathcal G\\to\\mathcal G^\\prime$ and $f:\\mathcal F\\to\\mathcal F^\\prime$, write $a:A\\to A^\\prime$ and $b:B\\to B^\\prime$ for the induced maps. Parameter naturality of $E$ gives $E_{\\mathcal G,\\mathcal F,A^\\prime}(a)=E_{\\mathcal G^\\prime,\\mathcal F^\\prime,A^\\prime}(\\mathrm{id}_{A^\\prime})\\circ b=u^\\prime\\circ b$. Test-module naturality gives the same left side as $a\\circ u$. Using $u\\circ v=\\mathrm{id}_A$ and $v^\\prime\\circ u^\\prime=\\mathrm{id}_{B^\\prime}$ gives explicitly $v^\\prime\\circ a=v^\\prime\\circ a\\circ u\\circ v=v^\\prime\\circ u^\\prime\\circ b\\circ v=b\\circ v$. This is naturality in both variables, including simultaneous morphisms, and completes the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I (lemma-j-shriek-and-tensor), with the definition calculation of 0E8H and the Yoneda inverse/naturality argument expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +129,52 @@
    "results": "Returned: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.monoidalCategory, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, CategoryTheory.Sheaf.tensorProd_isSheaf (8 hits). ",
    "date": "2026-10-14",
    "verdict": "no match: read returned signatures; no assertion about sheafified extension by zero for modules over a varying ring sheaf on an arbitrary slice site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for extension by zero of module sheaves on a slice ringed site",
+   "results": "Returned: ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.toOpen, SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.Proj.res_apply, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd (8 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the arbitrary ringed-site slice extension tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules tensorHomEquiv extensionByZero restriction",
+   "results": "Returned:  (0 hits). loogle: Unknown identifier `tensorHomEquiv`",
+   "date": "2026-10-14",
+   "verdict": "no match: unknown identifier in Loogle query; no applicable assertion returned"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|tensorHom|jShriek",
+   "results": "Returned:  (0 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the arbitrary ringed-site slice extension tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero projection formula for sheaves of modules on arbitrary ringed sites",
+   "results": "Returned:  (0 hits). service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring sheafified direct sum extension from an over category equals extension of tensor with restricted module",
+   "results": "Returned: LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Monoidal.tensorObj_obj, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.mapFree, PresheafOfModules.Monoidal.tensorObj_map_tmul (8 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned signatures do not state the arbitrary ringed-site slice extension tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|extensionByZero|jShriek|j_shriek",
+   "results": "Returned:  (0 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: no applicable tensor projection formula for the sheafified slice extension"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-slice-restriction-flat",
   "by": "worker",
@@ -88,5 +194,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-slice-extension-tensor",
+  "worker": "stage1",
+  "summary": "Split the five Hom bijections of Stacks 0E8I using the existing arbitrary-ringed-site extension adjunction and tensor-Hom adjunction. Proved the internal-Hom restriction identification directly from the two existing definitions and expanded representability and parameter naturality. No statement correction, attachment, or new nodes.",
+  "blueprint": "def-weil-pbc-completed-pullback, Detailed form final Stacks comparison; through the recorded completion-equivalence and slice-flatness chain, supplies the tensor comparison in the proof of Stacks 0E8J. Steps 1-3 realize the five Hom bijections of 0E8I and steps 4-5 its Yoneda conclusion and the naturality needed by slice-restriction-flat step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic module extension-by-zero adjunction on the same arbitrary localized ringed site; the own-unit exactness node does not state adjunction."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic underived tensor-Hom adjunction for modules over a varying commutative ring sheaf; own-unit A-valued tensor-closed nodes concern a fixed coefficient category and do not give this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-1b07419a0",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-1b07419a0 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All five steps correctly prove Stacks 0E8I, including inverse identities and naturality. Accepted both proposed generic adjunction tool uses; no new nodes, duplicates or repairs. Target coefficient categories and exchange directions remain distinct. Documented the pre-existing external DAG cycle in review.md."
  }
 }
