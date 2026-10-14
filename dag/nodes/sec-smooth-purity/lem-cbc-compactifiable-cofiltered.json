@@ -4,10 +4,12 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-torsion",
-   "place": "Proof refinement paragraph: comparing any two compactifications without imposing qcqs on the base",
+   "place": "Proof refinement paragraph of thm-cbc-finite-torsion: comparing any two compactifications without imposing qcqs on the base; realizes the compactification category, cofilteredness, and its base-change functor.",
    "via": []
   },
-  "same_as": []
+  "same_as": [
+   "prop-nagata-compactification-category"
+  ]
  },
  "kind": "statement",
  "title": "Common refinements for already compactifiable morphisms over arbitrary schemes",
@@ -20,78 +22,172 @@
   "def-pc-scheme",
   "def-weil-open-immersion",
   "def-weil-proper-morphism",
-  "lem-nagata-refinements-form-category",
   "def-weil-finite-type-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "lem-nagata-refinements-form-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The compactifications and proper refinements form a category: identities and composites satisfy the defining equations, and this is exactly the category supplied by the refinement-category lemma.",
+   "uses": [
+    "lem-nagata-refinements-form-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+    "place": "Proof: Category"
+   }
+  },
+  {
+   "text": "Given two compactifications c₁ and c₂, form the fibre product of their ambient schemes over Y and the graph a=(j₁,j₂):X→\bar X₁×_Y\bar X₂. The product is proper over Y by stability of proper morphisms under base change and composition; the graph is a quasi-compact immersion (closed graph followed by a base-changed quasi-compact open immersion). Apply the immersion-compactification construction to a. Its scheme-theoretic image gives a compactification, and its two restricted projections are proper refinements by the proper-to-separated-target lemma. Thus every pair has a common refinement.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "def-weil-proper-morphism",
+    "def-nagata-immersion-compactification",
+    "lemma-nagata-immersion-into-proper",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-proper-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+    "place": "Proof: (i), graph and image compactification"
+   }
+  },
+  {
+   "text": "For parallel refinements u,v:c₁→c₂, take the pullback of the diagonal of the separated proper target \\bar X₂→Y along (u,v). The resulting E→\\bar X₁ is a closed immersion by closed-immersion base change, hence proper; and E→Y is proper by composing it with the proper structure map \\bar X₁→Y. Since uj₁=vj₁, j₁ factors uniquely through E. The pullback square is cartesian because the closed immersion E→\\bar X₁ is a monomorphism: any map to E whose composite with E→\\bar X₁ equals j₁ is the unique factor j_E. Thus j_E is the base change of the quasi-compact open immersion j₁, hence is a quasi-compact open immersion. Therefore E→Y is a compactification and E→\\bar X₁ is a proper refinement equalizing u and v.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+    "place": "Proof: (ii), equalizer subscheme"
+   }
+  },
+  {
+   "text": "Nonemptiness is part of the hypothesis (a compactification is supplied). Together with the common-refinement and equalizer constructions, the defining criterion for a cofiltered category gives that the compactification category is cofiltered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+    "place": "Proof: cofilteredness after (ii)"
+   }
+  },
+  {
+   "text": "For any g:Y′→Y, base change every compactification and refinement. The base-change compactification lemma and stability of proper and open immersions show that objects remain compactifications; fibre-product uniqueness gives preservation of identities, compositions, common refinements, and equalizers. Hence base change is a functor between the two compactification categories.",
+   "uses": [
+    "def-nagata-compactification-base-change",
+    "lemma-nagata-compactification-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+    "place": "Proof: Base change, first part"
+   }
+  },
+  {
+   "text": "For the graph common refinement a and its base change a′, the ambient base change of the scheme-theoretic image is a closed subscheme of the ambient scheme of the image of a′: apply the universal property of scheme-theoretic image to the factorization of a′ through the pulled-back closed image. The induced closed immersion is proper and lies over both projections, so it is a refinement of common refinements.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lemma-nagata-scheme-image-universal",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+    "place": "Proof: Base change, second part, comparison immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-nagata-refinements-form-category",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "def-weil-proper-morphism",
+  "def-nagata-immersion-compactification",
+  "lemma-nagata-immersion-into-proper",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-nagata-compactification-base-change",
+  "lemma-nagata-compactification-base-change",
+  "lemma-nagata-scheme-image-universal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/prop-nagata-compactification-category.md",
+  "place": "Proof: Category; (i); (ii); Base change"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The category of compactifications of a compactifiable finite type separated scheme morphism is cofiltered without assuming the base is quasi compact",
-   "results": "AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_eq_map_preimage",
+   "query": "The category of compactifications of a compactifiable separated finite type morphism is cofiltered and base change is functorial",
+   "results": "General scheme cofiltered-limit declarations; no compactification result.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"Compactification\"",
-   "results": "No hits.",
+   "query": "Compactification, IsCofiltered, IsProper",
+   "results": "No hits; unknown identifier Compactification.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "compactification|compactifiable",
+   "query": "compactification|IsCofiltered|baseChangeFunctor in Mathlib",
    "results": "No hits.",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Common refinement of two scheme compactifications by closure in their product",
-   "results": "service unavailable: Internal Server Error; ",
+   "query": "Common refinement and equalizer for compactifications of a separated finite type morphism",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Proper scheme compactifications have common refinements and parallel maps are equalized by a closed subscheme",
-   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Cofiltered category of proper schemes containing a fixed scheme as an open subscheme, and extending morphisms by graph closure",
-   "results": "AlgebraicGeometry.exists_map_eq_top; AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.exists_preimage_eq",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "compactif|shriek|extensionByZero|extension_by_zero",
-   "results": "No hits.",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"compactification\", \"Scheme\"",
-   "results": "No hits.",
-   "date": "2026-10-14",
-   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-cbc-finite-torsion",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-cbc-compactifiable-cofiltered",
+  "worker": "stage1",
+  "summary": "Audited the arbitrary-base compactification statement against the imported blueprint and Lean source. No exact sorry-free project declaration covers the full item: the source only proves the narrower quasi-compact/quasi-separated-base instance and a base-change functor separately. I retained the supplied-compactification hypotheses and split the proof into category, common refinement, equalizer, cofilteredness, base-change functoriality, scheme-image comparison, and flat comparison steps, citing existing DAG lemmas for each geometric input. The item is a genuine arbitrary-base generalization, so the existing prop-nagata-compactification-category is recorded as a related blueprint node rather than used as an exact proof dependency.",
+  "blueprint": "Realizes the proof paragraphs of prop-nagata-compactification-category, generalized to a supplied compactification over an arbitrary base, and the comparison paragraph in thm-cbc-finite-torsion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-d4ffe1561",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-d4ffe1561 (reviewer sub-agent of L); spot-checked: Reviewed all six steps, cited nodes, unit route, blueprint proof, Stacks Tag 0ATU, edge cases, and exact upstream target declarations. Repaired step 2 with quasi-compact base-change dependency; repaired step 3 with closed-immersion properness, proper composition, and the missing cartesian equalizer argument. Corrected DAG JSON is under fixes/dag/nodes/sec-smooth-purity/lem-cbc-compactifiable-cofiltered.json.; 1 file(s) fixed by the reviewer"
+ }
 }
