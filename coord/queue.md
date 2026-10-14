@@ -1,6 +1,6 @@
 # Work queue
 
-68 items; claim with `tools/claim.py next <group> [--stage N]`.
+70 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (68)
+## Stage 3: modules to prove (70)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -35,7 +35,7 @@
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf` | 10 | 0 | repair |
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
-| `Sheaf.RingTheory.ColimitFlatRelationDescent` | 26 | 1 | disputed |
+| `Sheaf.RingTheory.ColimitFlatRelationDescent` | 25 | 1 | disputed |
 | `Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex` | 28 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
@@ -43,12 +43,13 @@
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation` | 23 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorGradedAlgebraData` | 23 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts` | 24 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.AlgebraTensorPullbackComparison` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitHomotopyFactorization` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorGradedKernelLocalIdeal` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorIdealSectionCoefficientComparison` | 24 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TensorPowerAlgebraCoproduct` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapConjugateRestriction` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility` | 25 | 1 | proof |
@@ -78,8 +79,9 @@
 | `Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionAuxFactorization` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 42 | 1 | proof |
 | `Sheaf.RingTheory.DvrUniformizerRootCompositumMaximalIdeal` | 44 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 46 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorNonpositiveFlatSections` | 46 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.NormalizedDirectImageSquareUnit` | 47 | 1 | proof |
+| `Sheaf.CategoryTheory.DerivedExactMateCompatibility` | 47 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
 
