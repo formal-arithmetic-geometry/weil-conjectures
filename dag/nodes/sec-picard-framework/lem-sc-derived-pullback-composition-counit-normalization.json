@@ -23,7 +23,8 @@
    "text": "Evaluate the pinned Hom normalization at the underived counit for f≫g. The underived adjunct is the identity by the triangle identity. Applying the inverse derived Hom equivalence yields L(fg)(beta(fg)) followed by its derived counit equal to epsilon(fg) followed by the localized underived counit.",
    "uses": [
     "def-pc-derived-base-change-map",
-    "lem-pc-global-hom-adjunction"
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
@@ -35,9 +36,9 @@
    "elementary": false
   },
   {
-   "text": "On a complex representative apply conjugateEquiv_counit_symm degreewise to the pinned underived adjunctions and pushforwardComp.inv. Its components are identities on sections, so this gives the pasted underived counits. Pass to the homotopy quotient and localization. Naturality of epsilon(f) at the g-counit gives the stated expression. This uses no cancellation or K-flat resolution.",
+   "text": "Use localized homotopy counit pasting at the concrete apex interface. Compose this equation with the pinned Hom normalization and the left-derived lift factorization, using congrArg, equality transitivity and associativity. The isolated equation omits the (fg)-derived adjunction, its unit and the derived comparison; the preceding two steps genuinely connect those data to it.",
    "uses": [
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-tensor-pullback-composition-homotopy-counit"
    ],
    "elementary": false
   }
@@ -45,14 +46,15 @@
  "proof_deps": [
   "def-pc-derived-base-change-map",
   "lem-pc-global-hom-adjunction",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-tensor-pullback-composition-homotopy-counit",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F4",
+  "group": "B3",
   "date": "2026-10-14",
-  "note": "Agent expansion of the corresponding counit subcalculation of the parent proof, following the cited Stacks adjunction and composition results."
+  "note": "The pinned Hom formula and left-derived universal-property factorization are proved directly. Only the localized underived mate/homotopy/naturality step is isolated."
  },
  "mathlib_searches": [
   {
@@ -127,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "X-8d3ab",
-  "group": "F4",
+  "reviewer": "X-a2c45",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261014T040539-L-999793",
+  "landing": "20261014T063813-L-2812622",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures and counit calculations with the nodes and pinned constructions; all four modules and direct importer DerivedDirectImageSquareMate compile cleanly; axiom checks match the single documented sorry."
+  "note": "independent Codex review: Matched unchanged signatures, the proof and remaining counit lemma with their DAG records and cited constructions; both delivered modules and direct importer DerivedPullbackCompositionMateUnit compile cleanly, and axiom checks satisfy the brief."
  }
 }
