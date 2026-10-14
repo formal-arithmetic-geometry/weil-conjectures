@@ -1,6 +1,6 @@
 # Work queue
 
-44 items; claim with `tools/claim.py next <group> [--stage N]`.
+45 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (44)
+## Stage 3: modules to prove (45)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -47,9 +47,10 @@
 | `Sheaf.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison` | 33 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatTelescopeArrowBarData` | 34 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatTelescopeBoundedNormalizationExtension` | 34 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization` | 35 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundedFlatModelNormalization` | 35 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationMorphisms` | 35 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatTelescopeNormalizationUnshiftedIsIso` | 36 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MayerVietorisOpenCompositionRestrictionFactors` | 37 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.DerivedBottomCycleTransport` | 37 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons` | 41 | 1 | proof |
