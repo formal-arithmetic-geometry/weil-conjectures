@@ -215,6 +215,17 @@ theorem root_normalization_dvr_comparison
     simp only [← Category.assoc, β.inv_hom_id, Category.id_comp]
     rw [IsOpenImmersion.lift_fac]
     simp only [r, Category.assoc]
+  have hchart : IsPullback (β.inv ≫ pullback.fst i φ)
+      (Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f)) i φ := by
+    apply (IsPullback.of_hasPullback i φ).of_iso β (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    · simp
+    · simpa using hβ.symm
+    · simp
+    · simp
+  have hbranch : IsPullback k (𝟙 _) i (j ≫ z ≫ Spec.map b ≫ φ) := by
+    simpa only [k, r, Category.assoc] using
+      (IsOpenImmersion.isPullback_lift_id r
+        (Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f)) hr).paste_horiz hchart
   obtain ⟨T, ρ, hT⟩ := GaloisCover.exists_baseChange G W k
   dsimp only
   intro hN hp hEtale hNorm x hx
@@ -225,7 +236,7 @@ theorem root_normalization_dvr_comparison
     ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C (b.hom f))
   have hcontract := root_span_comap (Nat.card G) (Nat.card_pos (α := G)) (b.hom f)
   have hcomp := root_normalization_localization_comparison i G W H B (b.hom f)
-    hpi (Spec.map b ≫ φ) k hk T ρ hT hrootloc hN hp hEtale hNorm x hx hcontract
+    hpi (Spec.map b ≫ φ) k hk hbranch T ρ hT hrootloc hN hp hEtale hNorm x hx hcontract
   exact hcomp
 
 end AlgebraicGeometry.Scheme

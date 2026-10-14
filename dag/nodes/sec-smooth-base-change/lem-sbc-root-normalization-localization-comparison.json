@@ -2,7 +2,7 @@
  "id": "lem-sbc-root-normalization-localization-comparison",
  "kind": "statement",
  "title": "Normalization stalk comparison for a supplied root localization",
- "statement": "Let L,U be schemes, i:U->L, G a finite group, and W a finite etale G-torsor over U [def-sbc-normal-dominant-galois]. Let H,B be commutative rings, g in H with (g) prime, B an H-algebra which is the localization at (g). Assume B is a domain and a DVR, and pi=algebraMap H B g is irreducible. Give psi:Spec H->L, k:Spec Frac(B)->U with k;i=j0;Spec(algebraMap H B);psi. Give a G-torsor T over Spec Frac(B) and rho:T.P->W.P forming a cartesian square with T.pi,W.pi,k. Write n=|G|, F=X^n-g and F0=F.map(algebraMap H B). Supply the certificate that AdjoinRoot F0, via AdjoinRoot.map, is the localization of AdjoinRoot F at the images of H minus (g). Set A=AdjoinRoot F, N=Spec A, q:N->Spec H, V=D(g), p=pullback.snd(W.pi;i,V.ι;q;psi), and a=p;V.ι. Assume N locally Noetherian, p finite etale and a.fromNormalization finite. Let x be a point of a.normalization over the root prime (t), and supply the contraction equality comap(algebraMap H A,(t))=(g). Set A0=B[s]/(s^n-pi), q0:Spec A0->Spec B, j0:Spec Frac(B)->Spec B, a0=pullback.snd(T.pi;j0,q0), using relative normalization [lem-weil-pbc-relative-normalization]. Then a0 is qcqs, its normalization is finite, and there is x0 over (s) with a ring equivalence from the model normalization stalk at x0 to the original normalization stalk at x. This equivalence carries the structural germ of s to the structural germ of t. The DVR, uniformizer, generic map, and cover are supplied data, not existential conclusions.",
+ "statement": "Let L,U be schemes, i:U->L, G a finite group, and W a finite etale G-torsor over U [def-sbc-normal-dominant-galois]. Let H,B be commutative rings, g in H with (g) prime, B an H-algebra which is the localization at (g). Assume B is a domain and a DVR, and pi=algebraMap H B g is irreducible. Give psi:Spec H->L, k:Spec Frac(B)->U with k;i=j0;Spec(algebraMap H B);psi. Assume the square with top map k, left map the identity of Spec Frac(B), right map i, and bottom map j0;Spec(algebraMap H B);psi is cartesian (hbranch), so this is the entire pullback of U. Give a G-torsor T over Spec Frac(B) and rho:T.P->W.P forming a cartesian square with T.pi,W.pi,k. Write n=|G|, F=X^n-g and F0=F.map(algebraMap H B). Supply the certificate that AdjoinRoot F0, via AdjoinRoot.map, is the localization of AdjoinRoot F at the images of H minus (g). Set A=AdjoinRoot F, N=Spec A, q:N->Spec H, V=D(g), p=pullback.snd(W.pi;i,V.ι;q;psi), and a=p;V.ι. Assume N locally Noetherian, p finite etale and a.fromNormalization finite. Let x be a point of a.normalization over the root prime (t), and supply the contraction equality comap(algebraMap H A,(t))=(g). Set A0=B[s]/(s^n-pi), q0:Spec A0->Spec B, j0:Spec Frac(B)->Spec B, a0=pullback.snd(T.pi;j0,q0), using relative normalization [lem-weil-pbc-relative-normalization]. Then a0 is qcqs, its normalization is finite, and there is x0 over (s) with a ring equivalence from the model normalization stalk at x0 to the original normalization stalk at x. This equivalence carries the structural germ of s to the structural germ of t. The DVR, uniformizer, generic map, and cover are supplied data, not existential conclusions.",
  "stmt_deps": [
   "def-sbc-normal-dominant-galois",
   "lem-weil-pbc-relative-normalization"
@@ -18,7 +18,7 @@
    "elementary": true
   },
   {
-   "text": "Identify Spec B -> Spec H with the stalk morphism at (g), using the affine spectrum stalk localization equivalence. Apply lem-sbc-normalization-stalk-base-change to q:N->Spec H and a. Pullback associativity, the supplied generic compatibility hk, and the supplied cartesian square hT identify the localized source with the model pullback of T. A DVR uniformizer has D(pi)=Spec Frac(B), so this is the same punctured cover. The model map is qcqs, and its normalization is finite by base change and transport of the original finite normalization.",
+   "text": "Identify Spec B -> Spec H with the stalk morphism at (g), using the affine spectrum stalk localization equivalence. Apply lem-sbc-normalization-stalk-base-change to q:N->Spec H and a. Pullback associativity and the pasted cartesian squares hT and hbranch identify the localized source with the model pullback of T. A DVR uniformizer has D(pi)=Spec Frac(B), so this is the same punctured cover. The model map is qcqs, and its normalization is finite by base change and transport of the original finite normalization.",
    "uses": [
     "lem-sbc-normalization-stalk-base-change"
    ],
@@ -36,7 +36,7 @@
  "proof_origin": {
   "by": "agent",
   "kind": "written-by-agent",
-  "agent": "K3",
+  "agent": "V3 second reader",
   "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
   "place": "Tag 0307 (lemma-integral-closure-localize); affine normalization and localization of the root chart"
  },
@@ -99,7 +99,7 @@
   "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationLocalizationComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationLocalizationComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_normalization_localization_comparison",
-  "statement": "theorem root_normalization_localization_comparison\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (H B : CommRingCat.{u}) [Algebra H B] (g : H)\n    [(Ideal.span {g}).IsPrime] [IsLocalization.AtPrime B (Ideal.span {g})]\n    [IsDomain B] [IsDiscreteValuationRing B]\n    (hpi : Irreducible (algebraMap H B g))\n    (ψ : Spec H ⟶ L)\n    (k : Spec (CommRingCat.of (FractionRing B)) ⟶ U)\n    (hk : k ≫ i = Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ)\n    (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))\n    (ρ : T.P ⟶ W.P) (hT : IsPullback ρ T.π W.π k)\n    (hrootloc :\n      let F := (Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g\n      let F0 := F.map (algebraMap H B)\n      let γ := AdjoinRoot.map (algebraMap H B) F F0 dvd_rfl\n      let := γ.toAlgebra\n      IsLocalization ((Ideal.span {g}).primeCompl.map (AdjoinRoot.of F)) (AdjoinRoot F0)) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∀ (hN : IsLocallyNoetherian N),\n    let := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ ψ)\n    ∀ (hp : IsFinite p),\n    let := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)} →\n      (Ideal.span {AdjoinRoot.root\n        ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)}).comap\n        (algebraMap H A) = Ideal.span {g} →\n      let C := a.normalization.presheaf.stalk x\n      let t := AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x)\n        (AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g))\n      let pi := algebraMap H B g\n      let A0 := AdjoinRoot\n        ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)\n      let N0 := Spec (CommRingCat.of A0)\n      let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))\n      let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n      let a0 := pullback.snd (T.π ≫ j0) q0\n      ∃ (hqc : QuasiCompact a0) (hqs : QuasiSeparated a0),\n        letI := hqc\n        letI := hqs\n        IsFinite a0.fromNormalization ∧\n        ∃ (x0 : a0.normalization),\n          (a0.fromNormalization x0).asIdeal = Ideal.span\n            {AdjoinRoot.root\n              ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)} ∧\n          ∃ (e : a0.normalization.presheaf.stalk x0 ≃+* C),\n            e ((a0.fromNormalization.stalkMap x0).hom\n              (AlgebraicGeometry.StructureSheaf.toStalk A0 (a0.fromNormalization x0)\n                (AdjoinRoot.root\n                  ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)))) =\n              (a.fromNormalization.stalkMap x).hom t",
+  "statement": "theorem root_normalization_localization_comparison\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (H B : CommRingCat.{u}) [Algebra H B] (g : H)\n    [(Ideal.span {g}).IsPrime] [IsLocalization.AtPrime B (Ideal.span {g})]\n    [IsDomain B] [IsDiscreteValuationRing B]\n    (hpi : Irreducible (algebraMap H B g))\n    (ψ : Spec H ⟶ L)\n    (k : Spec (CommRingCat.of (FractionRing B)) ⟶ U)\n    (hk : k ≫ i = Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ)\n    (hbranch : IsPullback k (𝟙 _) i\n      (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ))\n    (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))\n    (ρ : T.P ⟶ W.P) (hT : IsPullback ρ T.π W.π k)\n    (hrootloc :\n      let F := (Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g\n      let F0 := F.map (algebraMap H B)\n      let γ := AdjoinRoot.map (algebraMap H B) F F0 dvd_rfl\n      let := γ.toAlgebra\n      IsLocalization ((Ideal.span {g}).primeCompl.map (AdjoinRoot.of F)) (AdjoinRoot F0)) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∀ (hN : IsLocallyNoetherian N),\n    let := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ ψ)\n    ∀ (hp : IsFinite p),\n    let := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)} →\n      (Ideal.span {AdjoinRoot.root\n        ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)}).comap\n        (algebraMap H A) = Ideal.span {g} →\n      let C := a.normalization.presheaf.stalk x\n      let t := AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x)\n        (AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g))\n      let pi := algebraMap H B g\n      let A0 := AdjoinRoot\n        ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)\n      let N0 := Spec (CommRingCat.of A0)\n      let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))\n      let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n      let a0 := pullback.snd (T.π ≫ j0) q0\n      ∃ (hqc : QuasiCompact a0) (hqs : QuasiSeparated a0),\n        letI := hqc\n        letI := hqs\n        IsFinite a0.fromNormalization ∧\n        ∃ (x0 : a0.normalization),\n          (a0.fromNormalization x0).asIdeal = Ideal.span\n            {AdjoinRoot.root\n              ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)} ∧\n          ∃ (e : a0.normalization.presheaf.stalk x0 ≃+* C),\n            e ((a0.fromNormalization.stalkMap x0).hom\n              (AlgebraicGeometry.StructureSheaf.toStalk A0 (a0.fromNormalization x0)\n                (AdjoinRoot.root\n                  ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)))) =\n              (a.fromNormalization.stalkMap x).hom t",
   "branch": "sheaf-dag",
   "by": "K3",
   "date": "2026-10-14"
@@ -117,11 +117,47 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "X-bffd3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261014T010845-L-3164798",
+  "landing": "20261014T023940-L-17256",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean signatures match both nodes; hbranch repairs the branch defect; the original caller fails as reported, the minimal adaptation and downstream importer compile cleanly, and axiom checks show only standard axioms plus the reported retained sorryAx."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "V3 stage 2",
+  "old_statement": "Let L,U be schemes, i:U->L, G a finite group, and W a finite etale G-torsor over U [def-sbc-normal-dominant-galois]. Let H,B be commutative rings, g in H with (g) prime, B an H-algebra which is the localization at (g). Assume B is a domain and a DVR, and pi=algebraMap H B g is irreducible. Give psi:Spec H->L, k:Spec Frac(B)->U with k;i=j0;Spec(algebraMap H B);psi. Give a G-torsor T over Spec Frac(B) and rho:T.P->W.P forming a cartesian square with T.pi,W.pi,k. Write n=|G|, F=X^n-g and F0=F.map(algebraMap H B). Supply the certificate that AdjoinRoot F0, via AdjoinRoot.map, is the localization of AdjoinRoot F at the images of H minus (g). Set A=AdjoinRoot F, N=Spec A, q:N->Spec H, V=D(g), p=pullback.snd(W.pi;i,V.ι;q;psi), and a=p;V.ι. Assume N locally Noetherian, p finite etale and a.fromNormalization finite. Let x be a point of a.normalization over the root prime (t), and supply the contraction equality comap(algebraMap H A,(t))=(g). Set A0=B[s]/(s^n-pi), q0:Spec A0->Spec B, j0:Spec Frac(B)->Spec B, a0=pullback.snd(T.pi;j0,q0), using relative normalization [lem-weil-pbc-relative-normalization]. Then a0 is qcqs, its normalization is finite, and there is x0 over (s) with a ring equivalence from the model normalization stalk at x0 to the original normalization stalk at x. This equivalence carries the structural germ of s to the structural germ of t. The DVR, uniformizer, generic map, and cover are supplied data, not existential conclusions.",
+  "what": "Added hbranch, the cartesian generic-branch identification, as the formally sufficient alternative permitted by reviewer X-42d0f. No conclusion changes; unlike global Mono i, the original caller proves this from its supplied chart without changing its signature.",
+  "source": {
+   "document": "Reviewer X-42d0f, head 42d0f80e6",
+   "place": "E3 statement correction explicitly permits a formally sufficient branch-identification hypothesis; hbranch identifies the entire generic pullback."
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-root-normalization-dvr-comparison",
+    "holds": true,
+    "note": "Caller signature unchanged. Its proof pastes IsOpenImmersion.isPullback_lift_id with the supplied chart pullback to prove hbranch."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use the supplied root-algebra localization certificate. The coefficientwise image of X^n-g is X^n-pi, and AdjoinRoot.map sends the root to the root. The supplied contraction equality ensures that the root prime avoids all inverted coefficient elements.",
+    "uses": [],
+    "elementary": true
+   },
+   {
+    "text": "Identify Spec B -> Spec H with the stalk morphism at (g), using the affine spectrum stalk localization equivalence. Apply lem-sbc-normalization-stalk-base-change to q:N->Spec H and a. Pullback associativity, the supplied generic compatibility hk, and the supplied cartesian square hT identify the localized source with the model pullback of T. A DVR uniformizer has D(pi)=Spec Frac(B), so this is the same punctured cover. The model map is qcqs, and its normalization is finite by base change and transport of the original finite normalization.",
+    "uses": [
+     "lem-sbc-normalization-stalk-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Extend the root prime under the localization; it is the root ideal (s), since the coefficient map carries g to pi and the quotient localization carries t to s. Lift the given normalization point into the cartesian base change, and transport it across the normalization isomorphism to x0. Localization gives an isomorphism of stalks at these corresponding points because every denominator is already a unit. Compose with the normalization stalk isomorphism. Both maps commute with the structural algebra maps, and the root-algebra localization sends t to s. Naturality of stalk maps and structural germs gives the displayed root equality.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }

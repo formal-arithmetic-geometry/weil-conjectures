@@ -20,14 +20,14 @@
    "elementary": false
   },
   {
-   "text": "The image of g in Frac(B) is nonzero, since pi is irreducible and the fraction-ring map is injective. Thus the morphism r:Spec Frac(B)->Spec R has image in D(f). Lift through its open immersion, compose beta.inv and the first pullback projection to obtain k:Spec Frac(B)->U. The chart compatibility and the pullback condition prove k;i=r;phi. Apply GaloisCover.exists_baseChange to obtain T and its cartesian square with W.",
+   "text": "The image of g in Frac(B) is nonzero, since pi is irreducible and the fraction-ring map is injective. Thus the morphism r:Spec Frac(B)->Spec R has image in D(f). Lift through its open immersion, compose beta.inv and the first pullback projection to obtain k:Spec Frac(B)->U. The chart compatibility and the pullback condition prove k;i=r;phi. Transport the defining pullback square along beta, then paste it with IsOpenImmersion.isPullback_lift_id for r to obtain hbranch: the entire pullback of U along r;phi is Spec Frac(B). Apply GaloisCover.exists_baseChange to obtain T and its cartesian square with W.",
    "uses": [
     "lem-sbc-galois-cover-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Prove that the root ideal contracts to (g): evaluation at zero gives a map A->H/(g), killing t, which proves one inclusion; the relation t^n=g with n positive proves the other. Prove coefficient localization of the root quotient directly using Polynomial.isLocalization and IsLocalization.of_surjective; the quotient-kernel ideals are the corresponding principal polynomial ideals. Apply lem-sbc-root-normalization-localization-comparison with this localization certificate, the contraction equality, the actual B and pi, and the supplied T and cartesian square. Its qcqs witnesses, finite normalization and root-compatible stalk equivalence give the remaining existential conclusions.",
+   "text": "Prove that the root ideal contracts to (g): evaluation at zero gives a map A->H/(g), killing t, which proves one inclusion; the relation t^n=g with n positive proves the other. Prove coefficient localization of the root quotient directly using Polynomial.isLocalization and IsLocalization.of_surjective; the quotient-kernel ideals are the corresponding principal polynomial ideals. Apply lem-sbc-root-normalization-localization-comparison with this localization certificate, the contraction equality, the actual B and pi, the proved hbranch, and the supplied T and cartesian square. Its qcqs witnesses, finite normalization and root-compatible stalk equivalence give the remaining existential conclusions.",
    "uses": [
     "lem-sbc-root-normalization-localization-comparison"
    ],
@@ -42,7 +42,7 @@
  "proof_origin": {
   "by": "agent",
   "kind": "written-by-agent",
-  "agent": "K3",
+  "agent": "V3 second reader (forced branch-identification proof adaptation)",
   "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
   "place": "Tags 00IP, 00PD and 0307; proved principal-prime and chart reductions, then supplied-localization normalization comparison"
  },
@@ -114,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-14",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "X-bffd3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261014T010845-L-3164798",
+  "landing": "20261014T023940-L-17256",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean signatures match both nodes; hbranch repairs the branch defect; the original caller fails as reported, the minimal adaptation and downstream importer compile cleanly, and axiom checks show only standard axioms plus the reported retained sorryAx."
  }
 }

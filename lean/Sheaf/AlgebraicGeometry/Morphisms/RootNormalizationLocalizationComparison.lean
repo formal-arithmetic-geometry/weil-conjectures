@@ -32,7 +32,8 @@ map to U and its pulled-back cover are supplied separately.
 Source: Stacks Project, Tag 0307; Mathlib relative normalization affine description.
 (blueprint: lem-sbc-root-normalization-localization-comparison)
 
-Proof: The pullback square hT and the equation hk identify the supplied cover T
+Proof: The branch-identification square hbranch excludes extra generic branches.
+Pasting hT with hbranch identifies the supplied cover T
 over Spec H with the original generic cover. The supplied localization certificate
 hrootloc identifies the monic quotient A
 after localizing along H minus (g) with B[s]/(s^n-pi), with t mapping to s.
@@ -63,6 +64,9 @@ theorem root_normalization_localization_comparison
     (k : Spec (CommRingCat.of (FractionRing B)) ⟶ U)
     (hk : k ≫ i = Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫
       Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ)
+    (hbranch : IsPullback k (𝟙 _) i
+      (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ))
     (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))
     (ρ : T.P ⟶ W.P) (hT : IsPullback ρ T.π W.π k)
     (hrootloc :
