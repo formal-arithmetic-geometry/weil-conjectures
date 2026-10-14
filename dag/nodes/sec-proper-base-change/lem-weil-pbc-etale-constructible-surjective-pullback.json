@@ -17,7 +17,7 @@
  },
  "kind": "statement",
  "title": "Constructibility descends through surjective pullback",
- "statement": "Let $u:V\\to U$ be a surjective morphism of quasi-compact quasi-separated schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Let $\\Lambda$ be a finite commutative ring and $F$ a sheaf of $\\Lambda$-modules on $U_{\\Et}$ [def-weil-pbc-etale-sheaves]. Then $F$ is constructible if and only if $u^{-1}F$ is constructible [def-weil-pbc-etale-constructible-sheaf] [def-weil-pbc-inverse-image].",
+ "statement": "Let $u:V\\to U$ be a surjective morphism [def-weil-surjective-morphism] of quasi-compact quasi-separated schemes [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Let $\\Lambda$ be a finite commutative ring and $F$ a sheaf of $\\Lambda$-modules on $U_{\\Et}$ [def-weil-pbc-etale-sheaves]. Then $F$ is constructible if and only if $u^{-1}F$ is constructible [def-weil-pbc-etale-constructible-sheaf] [def-weil-pbc-inverse-image].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 095Q, label lemma-check-constructible, assertion (3), specialized to finite commutative rings"
@@ -27,11 +27,107 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $F$ constructible in the precise sense of [def-weil-pbc-etale-constructible-sheaf]. Choose its finite stratification $(i_k:Z_k\\to U)_{k<n}$ with constructible images $T_k$ and finite locally constant module restrictions. By [lemma-constructible-pullback-stratification], the base changes $i'_k:Z_k\\times_U V\\to V$ form a stratification with images $u^{-1}(T_k)$. Each image is constructible by [lem-pur-scheme-constructible-preimage], applied to $u$ and $T_k$. Put $v_k:Z_k\\times_U V\\to Z_k$. Clauses (1)--(2) of [prop-weil-pbc-inverse-image-modules-exact] identify constant-coefficient module inverse image with sheaf pullback. Since $u i'_k=i_k v_k$, clause (2) of [lem-weil-pbc-inverse-image-composition-module-linear] gives $(i'_k)^{-1}u^{-1}F\\cong v_k^{-1}i_k^{-1}F$ as module sheaves. By (1) iff (2) of [lem-weil-pbc-finite-locally-constant-module-values], $i_k^{-1}F$ is locally constant with finite stalks in the coefficient category $\\mathrm{Mod}_\\Lambda$. Applying [lemma-constructible-pullback-locally-constant] and [lemma-constructible-pullback-finite] to $v_k$ preserves these two properties. By [lemma-constructible-iso-invariance] and the reverse direction of [lem-weil-pbc-finite-locally-constant-module-values], $(i'_k)^{-1}u^{-1}F$ has finite constant module values on an etale covering. This verifies both conditions of [def-weil-pbc-etale-constructible-sheaf] on the pulled-back strata. Thus $u^{-1}F$ is constructible. This argument works for any scheme morphism, without surjectivity.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lemma-constructible-pullback-stratification",
+    "lem-pur-scheme-constructible-preimage",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095G, label lemma-pullback-constructible; Tag 095Q, label lemma-check-constructible, first sentence"
+   }
+  },
+  {
+   "text": "Assume $u^{-1}F$ constructible. The finite ring $\\Lambda$ is Noetherian, since an ascending chain of ideals is a chain of subsets of a finite set and therefore stabilizes. Fix the coefficient universe $u+1$ for $U,V:\\mathrm{Scheme}_u$ and all module values and small diagrams below. More generally let $H$ be any module sheaf on $U$ with $u^{-1}H$ constructible. By [lem-weil-pbc-module-sheaf-colimit-constructible] write $H$ as the colimit of a diagram $(H_a)$ of constructible module sheaves indexed by a small filtered category $A$, with legs $a_a:H_a\\to H$. Clause (3) of [prop-weil-pbc-inverse-image-modules-exact] makes module inverse image a left adjoint. By [lem-weil-pbc-left-adjoint-preserves-colimits], $(u^{-1}H,(u^{-1}a_a))$ is a colimit of the pulled-back diagram. Apply [lem-weil-pbc-constructible-large-colimit-factorization] on the qcqs scheme $V$ to the identity of the constructible sheaf $u^{-1}H$. It factors as $u^{-1}H\\xrightarrow{s}u^{-1}H_a\\xrightarrow{u^{-1}a_a}u^{-1}H$ for some $a$, with composite identity. Thus $u^{-1}a_a$ is a split epimorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-constructible-large-colimit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095Q, label lemma-check-constructible, filtered-colimit paragraph; Tag 03SA, label lemma-torsion-colimit-constructible (3); Tag 09Z4, label lemma-constructible-is-compact; Categories Tag 0038"
+   }
+  },
+  {
+   "text": "For the map $a_a:H_a\\to H$ selected in step 2, set $Q=\\operatorname{Coker}(a_a)$ in the abelian module-sheaf category [def-weil-pbc-etale-sheaves]. Exactness of module inverse image [prop-weil-pbc-inverse-image-modules-exact] gives $u^{-1}Q=\\operatorname{Coker}(u^{-1}a_a)=0$. For each point $y$ of $U$, surjectivity [def-weil-surjective-morphism] supplies $x$ of $V$ over $y$; choose an algebraic closure $\\Omega_x$ of $\\kappa(x)$ and the resulting geometric point $\\bar x$ of $V$. The composite $\\bar y=u\\bar x$ is a geometric point above $y$. Module inverse image is compatible with abelian inverse image, so [lem-weil-pbc-inverse-image-stalk-germ] applied to the underlying abelian sheaf of $Q$ identifies $Q_{\\bar y}$ with $(u^{-1}Q)_{\\bar x}=0$. The family of these $\\bar y$ covers $U$. Apply [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] to the underlying map $Q\\to0$: all its stalk maps are bijections of singleton sets, hence it is an isomorphism. For every etale object $W$, the bijection $Q(W)\\to0(W)$ says that $Q(W)$ has only its zero section. Its inverse sends zero to zero and therefore preserves addition and every $\\Lambda$-scalar action, compatibly with restrictions. Thus $Q\\cong0$ as a module sheaf. Consequently $a_a$ is an epimorphism. Steps 2--3 therefore give, for every such $H$, a constructible sheaf mapping epimorphically to $H$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095Q, label lemma-check-constructible, stalk argument; Tags 03Q1, label lemma-stalk-pullback (3), and 03PU, label theorem-exactness-stalks"
+   }
+  },
+  {
+   "text": "Apply steps 2--3 first to $H=F$, obtaining an epimorphism $p:G\\to F$ with $G$ constructible. Put $K=\\operatorname{Ker}(p)$. Exactness [prop-weil-pbc-inverse-image-modules-exact] identifies $u^{-1}K$ with $\\operatorname{Ker}(u^{-1}p)$. The source $u^{-1}G$ is constructible by the arbitrary-morphism argument of step 1, and the target $u^{-1}F$ is constructible by hypothesis. The kernel clause of [thm-constructible-serre], on $V$ with the same finite commutative coefficient ring, makes $u^{-1}K$ constructible. Apply the already proved general conclusion of steps 2--3 to $H=K$; this gives an epimorphism $r:C\\to K$ with $C$ constructible. This second application is not an invocation of the theorem being proved: steps 2--3 only establish a constructible quotient presentation, not constructibility of $H$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095Q, label lemma-check-constructible, final paragraph (kernel case); Tag 03RZ, label lemma-constructible-abelian (3)"
+   }
+  },
+  {
+   "text": "Let $i:K\\to G$ be the kernel inclusion. Since $r$ is an epimorphism, the image of $ir:C\\to G$ is exactly $K=\\operatorname{Ker}(p)$. Since $p$ is an epimorphism, it follows in the abelian category [def-weil-pbc-etale-sheaves] that $F\\cong\\operatorname{Coker}(ir)$. Explicitly, a map out of $G$ annihilates $ir$ exactly when it annihilates $i$, because $r$ is epi; the cokernel of the kernel inclusion of the epimorphism $p$ is $p$. Both $C$ and $G$ are constructible, so the cokernel clause of [thm-constructible-serre] makes $F$ constructible. Together with step 1 this proves the equivalence.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095Q, label lemma-check-constructible, last sentence; Tag 03RZ, label lemma-constructible-abelian (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lemma-constructible-pullback-stratification",
+  "lem-pur-scheme-constructible-preimage",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-finite",
+  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-constructible-large-colimit-factorization",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "def-weil-surjective-morphism",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095Q, label lemma-check-constructible (3), quotient-and-kernel proof; the epimorphism selection is made explicit via compactness Tag 09Z4 instead of eventual constancy Tag 03SB."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +170,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible",
+   "results": "0 hits: ; no etale constructible-sheaf descent theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible etale module sheaf descent under surjective scheme morphism",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"sheaf\"",
+   "results": "0 hits: ; no etale constructible-sheaf descent theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image reflects constructibility for surjective maps of schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.isConstructible_comap_image, Topology.IsConstructible.preimage, Topology.IsConstructible.preimage_of_isOpenEmbedding, PrimeSpectrum.exists_range_eq_of_isConstructible, Topology.isConstructible_preimage_iff_of_isOpenEmbedding; no etale constructible-sheaf descent theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible etale sheaf of finite ring modules descends along surjective morphism of qcqs schemes",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.IsEtale.of_comp, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation; no etale constructible-sheaf descent theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
   "by": "worker",
@@ -93,5 +224,54 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-etale-constructible-surjective-pullback",
+  "worker": "stage1",
+  "summary": "Read 095Q(3), verified finite coefficients and qcqs hypotheses, and expanded constructible quotient and kernel presentations with existing filtered-colimit, compactness, exact inverse-image and geometric-stalk nodes. No new nodes and no statement change. Stalk detection uses a covering family of geometric points, not an unjustified lift of a fixed geometric point. Second reading makes constructible-stratum preservation and finite-value/stalk comparison explicit in the forward direction. Repair of the landing-cycle return: retained the independent quotient/kernel proof, explicitly isolated its quotient-presentation subargument, fixed the coefficient universe, and cited the definition of surjectivity. The existing converse specialization depends on this item and is excluded from its entire dependency closure.",
+  "blueprint": "Realizes the constructibility descent from V to U (095Q) after the good-curves diagram in Tag 0GKX, the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact tool used exactly as stated in the quotient/kernel descent argument of 095Q; the unit contains no alternative theorem giving this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Generic A sheaf of $\\Lambda$-modules on a qcqs scheme is a filtered colimit of constructible ones tool used exactly as stated in the quotient/kernel descent argument of 095Q; the unit contains no alternative theorem giving this input."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-large-colimit-factorization",
+    "why": "Generic Constructible-source factorization into filtered colimits at the coefficient universe tool used exactly as stated in the quotient/kernel descent argument of 095Q; the unit contains no alternative theorem giving this input."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections tool used exactly as stated in the quotient/kernel descent argument of 095Q; the unit contains no alternative theorem giving this input."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic module-linear composition comparison identifies the two restrictions on each pulled-back stratum; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "Generic comparison of finite module values and finite stalks bridges the explicit item definition with the category-valued pullback lemmas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-constructible-large-colimit-factorization",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-c5ee8ce33",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-c5ee8ce33 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, sources, and unit/chapter route. All five steps correctly establish finite-coefficient étale constructibility descent via quotient/kernel presentations. No new nodes or repairs. The former item cycle is removed; deeper pre-existing DAG cycles are documented in review.md. No condensed-coefficient comparison or target weakening is accepted."
  }
 }
