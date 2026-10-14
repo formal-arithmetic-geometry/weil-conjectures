@@ -500,7 +500,8 @@ lemma isInvertible_prod_vanishingIdeal_pow (s : Finset (closedPoints C))
   | empty => exact IdealSheafData.isInvertible_top
   | insert P s hP ih =>
     rw [Finset.prod_insert hP]
-    exact ((isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow _).mul ih
+    exact ((isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow _)
+      |>.mul_effectiveCartier ih
 
 variable [IsIntegral C] [IsLocallyNoetherian C]
 
