@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-direct-image",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Integral-coefficient paragraph of def-weil-derived-direct-image: the displayed definition $Rf_*K=R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}(K\\otimes^L_{\\mathcal O_E}A_{E,n})$; countable-product exactness is an auxiliary existence input for this derived inverse limit, not a separate blueprint assertion.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Countable products of pro-etale modules are exact",
@@ -17,29 +17,149 @@
   "place": "Proposition 3.1.9 (countable products are exact in a replete topos), Proposition 3.2.3(1) (a locally weakly contractible topos is replete), Proposition 4.2.8 ($\\Shv(X_{\\mathrm{proet}})$ is locally weakly contractible); for modules over $\\mathcal R$, products and surjectivity are those of the underlying abelian sheaves"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-completed-integral-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-module-sheaves-limits-sectionwise] to the discrete category on $\\mathbf Z_{\\geq1}$, which is small in the fixed universes of the site. It gives a product sheaf $P=\\prod_nF_n$ with $P(U)=\\prod_nF_n(U)$, coordinatewise $\\mathcal R(U)$-action and restrictions, and the product universal property. Apply the same result to $G_n$ to obtain $Q=\\prod_nG_n$. The induced morphism $p:P\\to Q$ has components $p_U((x_n)_n)=(p_{n,U}(x_n))_n$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, limit construction; Tag 03CO, lemma-limits-colimits-abelian-sheaves (2)"
+   }
+  },
+  {
+   "text": "Kernels in the module-sheaf category are sectionwise by [def-weil-sheaf-of-modules-category]. Hence for any family $a_n:F_n\\to G_n$, the kernel of $\\prod_na_n$ has sections $\\{(x_n)_n:a_{n,U}(x_n)=0\\text{ for every }n\\}=\\prod_n\\ker(a_n)(U)$. These identifications respect restrictions and scalar actions. The product functor is additive: for families of morphisms $a_n,b_n$, its map on sections sends $(x_n)_n$ to $(a_{n,U}(x_n)+b_{n,U}(x_n))_n$, the sum of the two induced product maps. Products also preserve the zero object, so the product functor preserves kernels and is left exact; it remains to prove that it preserves epimorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, sectionwise kernels preceding the lemma; Tag 03DB, lemma-limits-colimits"
+   }
+  },
+  {
+   "text": "Assume that every $p_n:F_n\\to G_n$ is surjective as a module-sheaf morphism. Fix any site object $U$. By [lem-weil-pbc-proetale-affine-wcontractible-covering-family] choose a covering $\\{W_i\\to U\\}_{i\\in I}$ with $W_i$ affine and weakly contractible in the full site $Y_{\\mathrm{proet}}$. Apply the exact evaluation functor of [lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits] with $X=Y$, $R=\\mathcal R$, and $W=W_i$. Thus each $F_n(W_i)\\to G_n(W_i)$ is a surjective map of $\\mathcal R(W_i)$-modules. No constant-coefficient, finiteness, or quasi-compactness hypothesis on $Y$ or $\\mathcal R$ is used.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0990, lemma-proetale-enough-w-contractible; sites-cohomology.tex Tag 0946, lemma-w-contractible (1), module version as in Tag 0947, proposition-enough-weakly-contractibles (4)"
+   }
+  },
+  {
+   "text": "For a target section $g=(g_n)_n\\in Q(U)$, fix $i$. For each $n$ the fibre of $p_{n,W_i}$ over $g_n|_{W_i}$ is nonempty by step 3. Choose an element $x_{i,n}$ of each fibre (ordinary set-theoretic choice in the fixed universe). Then $x_i=(x_{i,n})_n\\in P(W_i)$ by the sectionwise product formula and $p_{W_i}(x_i)=g|_{W_i}$. All coordinates lift on the same covering object $W_i$, rather than on separately chosen covers. Thus every target section locally lifts through $p$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, proof of (4), expanded coordinatewise lifting"
+   }
+  },
+  {
+   "text": "To verify surjectivity categorically without assuming a module-versus-set epimorphism comparison, let $a,b:Q\\to H$ be module-sheaf morphisms with $a\\circ p=b\\circ p$. For each $g\\in Q(U)$ use the local lifts $x_i$ from step 4. Naturality gives $a_U(g)|_{W_i}=a_{W_i}(p_{W_i}(x_i))=b_{W_i}(p_{W_i}(x_i))=b_U(g)|_{W_i}$. The equalizer sheaf axiom of [def-weil-pbc-sites-and-cohomology] makes $H(U)\\to\\prod_iH(W_i)$ injective, so $a_U(g)=b_U(g)$. Hence $a=b$ and $p$ is an epimorphism. In the abelian category [def-weil-sheaf-of-modules-category] this is the claimed surjectivity. Together with step 2 this proves exactness of countable products.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, proof of (1) and (4); sites.tex Tags 00VM/00VR, sheaf equalizer axiom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0947, proposition-enough-weakly-contractibles (4), its coordinatewise proof using (1), with proetale.tex Tag 0990 and sites-modules.tex Tags 03DA/03DB; expands the local cancellation argument"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln 'Replete\\|replete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "only AlgebraicTopology/SimplicialSet/NerveAdjunction.lean (unrelated word)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+   "tool": "leanfinder",
+   "query": "Countable products of sheaves of modules on the pro-etale site of a scheme preserve epimorphisms",
+   "results": "8 hits: LightCondensed.instEpiLightCondModMapNat, LightCondensed.epi_π_app_zero_of_epi, LightCondMod.instPreservesEpimorphismsLightCondSetForget, LightCondMod.epi_iff_locallySurjective_on_lightProfinite, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim, SheafOfModules.GeneratingSections.opEpi_comp, LightCondMod.instReflectsEpimorphismsLightCondSetForget",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: hits concerning light condensed modules or general limits do not assert pro-etale module product exactness; presheaf epimorphism results do not apply to sheaf epimorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, HasProducts",
+   "results": "0 hits: ; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: hits concerning light condensed modules or general limits do not assert pro-etale module product exactness; presheaf epimorphism results do not apply to sheaf epimorphisms"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'HasProducts\\|HasCountableProducts\\|PreservesProducts\\|AB4Star\\|AB4\\*' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
-   "results": "Sheaf categories have limits (`Sheaf.instHasLimits...`), so products exist; exactness of countable products (AB4*) for pro-etale sheaves is nowhere stated",
-   "date": "2026-10-09",
-   "verdict": "no match: existence of products is in Mathlib, exactness is not"
+   "query": "AB4|replete|countable.*product",
+   "results": "15 hits: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Limits/Shapes/SequentialProduct.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; source subdirectory CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: hits concerning light condensed modules or general limits do not assert pro-etale module product exactness; presheaf epimorphism results do not apply to sheaf epimorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact countable products of module sheaves on pro etale sites",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a locally weakly contractible site products of epimorphisms of sheaves of modules are epimorphisms",
+   "results": "8 hits: LightCondensed.instEpiLightCondModMapNat, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, LightCondensed.epi_π_app_zero_of_epi, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, SheafOfModules.GeneratingSections.opEpi_comp, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, SheafOfModules.GeneratingSections.ofEpi, LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: hits concerning light condensed modules or general limits do not assert pro-etale module product exactness; presheaf epimorphism results do not apply to sheaf epimorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"epi\"",
+   "results": "12 hits: PresheafOfModules.instIsNormalEpiCategory, PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp, PresheafOfModules.epi_of_surjective, PresheafOfModules.surjective_of_epi, PresheafOfModules.epi_iff_surjective, PresheafOfModules.instEpiFromFreeYonedaCoproduct, SheafOfModules.GeneratingSections.opEpi_id, SheafOfModules.GeneratingSections.ofEpi",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: hits concerning light condensed modules or general limits do not assert pro-etale module product exactness; presheaf epimorphism results do not apply to sheaf epimorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_iff|LocallySurjective|PreservesEpimorphisms|ReflectsEpimorphisms",
+   "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; source subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-14",
+   "verdict": "no match for the full item: hits concerning light condensed modules or general limits do not assert pro-etale module product exactness; presheaf epimorphism results do not apply to sheaf epimorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "HasExactLimitsOfShape|AB4Star|AB4OfSize|PreservesEpimorphisms",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed AB4Star instances concern fixed rings on the condensed site; general module-sheaf limits do not prove exact products on the pro-etale site with a varying ring sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of sheaves of modules over a ring sheaf on a site with enough projective objects has exact products",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, SheafOfModules.Finite.hasFiniteLimits, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, SheafOfModules.hasLimit, SheafOfModules.hasLimitsOfSize",
+   "date": "2026-10-14",
+   "verdict": "no match: condensed AB4Star instances concern fixed rings on the condensed site; general module-sheaf limits do not prove exact products on the pro-etale site with a varying ring sheaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +179,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-proetale-countable-products-exact",
+  "worker": "stage1",
+  "summary": "Kept the statement, added its general module-sheaf definition and the definition of the completed coefficient example, and proved products exact by sectionwise limits, weakly contractible covering objects, exact evaluation, coordinatewise choice, and the sheaf equalizer axiom. Reused existing DAG results; no new nodes. Read Bhatt-Scholze Propositions 3.1.9, 3.2.3 and 4.2.8 and the direct module proof of Stacks 0947(4).",
+  "blueprint": "The integral-coefficient derived-limit formula in the ancestor def-weil-derived-direct-image is supplied with its auxiliary exact-countable-products input. The unit sk-def-sf-operations has no proof steps and no step is replaced. Whole-blueprint searches for replete, weakly contractible, countable products, and module sheaves found no equivalent complete statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "why": "Generic geometric covering tool for the same small pro-etale site; sk-def-sf-operations has no covering construction or proof steps."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "why": "Generic exact-evaluation tool for modules over an arbitrary commutative ring sheaf, used only on the covering objects; the six-operations unit provides no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-187644b1d",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-187644b1d (reviewer sub-agent of L); spot-checked: Read the complete item, cited nodes, unit/chapter route, and source passages (Bhatt–Scholze 3.1.9, 3.2.3, 4.2.8; Stacks 03DA, 03DB, 0946, 0947(1),(4), 0990). All hypotheses, arbitrary ring-sheaf coefficient category, sectionwise products, common weakly contractible covers, epimorphism argument, route/tool uses, searches, duplicate checks, and edge cases pass. No new nodes or repairs. Review written to review.md."
+ }
 }
