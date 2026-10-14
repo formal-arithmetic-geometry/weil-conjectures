@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-pullback-tensor-total-composition-localized",
+ "kind": "statement",
+ "title": "Ordinary tensor-pullback composition on total complexes after localization",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let X,Y,Z be schemes [def-pc-scheme], f:X→Y and g:Y→Z. Work with the recorded derived localizations [def-pc-derived-category], tensor pullbacks [def-pc-module-pullback] and their pinned adjunctions [lem-pc-module-pullback-adjunction]. For arbitrary complexes P,N of O_Z-modules, let psi:g*Tot(P,N)≅Tot(g*P,g*N), theta:f*Tot(g*P,g*N)≅Tot(f*g*P,f*g*N), and phi:(fg)*Tot(P,N)≅Tot((fg)*P,(fg)*N) have the canonical ordinary tensorator [lem-weil-pbc-module-pullback-tensor] on each summand. Let beta be the homotopy-category composition mate of pushforwardComp. Write mu for the canonical localization tensor comparison [def-pc-derived-pullback-tensor-comparison]. Then (Qh(beta_P) tensor Qh(beta_N));mu_direct = mu_successive;Q(theta inverse);Q(f*(psi inverse));Qh(beta_Tot);Q(phi). No K-flatness, derived pullback tensorator or derived counit occurs.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079U and 0D5S: ordinary total-complex tensorator and composition identification; parent normalization proof step 2, with localization tensor naturality."
+ },
+ "proof": [
+  {
+   "text": "Let beta be the canonical ordinary composition mate under the pinned tensor-pullback adjunctions. On each (p,q) summand, transpose the ordinary tensor composition square under those adjunctions. The unit of a composite adjunction is the first unit followed by the pushforward of the second. The section formula of the canonical module tensorator sends the pullback of s tensor t to the tensor of the two unit images. Both transposed maps therefore send s tensor t to the same tensor of successive unit images. Tensor universality gives equality of module maps; joint epimorphy of the total-complex summand inclusions and the supplied summand equations for psi, theta and phi give equality of the two ordinary chain maps.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the canonical localization tensor comparison to beta at P and N, and localize the preceding ordinary chain-map equality. Solve the ordinary chain equality for Tot(beta_P,beta_N) by precomposing with theta inverse followed by f*(psi inverse), then substitute its localization into the naturality equation. Functoriality and the two inverse laws give the displayed equation. This uses neither K-flatness nor derived pullback tensorators or counits. Identity arrows, zero complexes and empty schemes obey the same formulas.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079U and 0D5S; ordinary tensor/composition square expanded by H3 via the adjunction-unit formulas. Stacks tag pages read online because this clone contains only the literature index."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The localization tensor comparison commutes with successive pullback composition on complexes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization tensor comparison naturality and ordinary tensor pullback composition on total complexes",
+   "results": "Eight hits: HomologicalComplex.HasGoodTensor₁₂, HasGoodTensor₂₃ and related tensor existence lemmas; HomologicalComplex.mapBifunctorFlipIso_hom_naturality; no ordinary pullback composition identity.",
+   "date": "2026-10-14",
+   "verdict": "No exact match returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac_app",
+   "results": "CategoryTheory.Functor.leftDerived_fac_app in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-14",
+   "verdict": "Supplies the parent derived counit factorization, not this ordinary compatibility square."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryCompIso|module_pullback_tensor",
+   "results": "Mathlib.Algebra.Homology.HomotopyCategory:290 defines Functor.mapHomotopyCategoryCompIso; HomotopyCategory/Plus.lean:307 uses it. Repository search found PullbackTensorComposition.pullbackComp_tensor for the different ordinary pullback interface.",
+   "date": "2026-10-14",
+   "verdict": "No matching canonical tensor-formula pullback total-complex equation found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-pullback-composition-tensor-kflat",
+   "place": "Ordinary tensor composition in the successive normalization route; parent node proof step 2.",
+   "via": [
+    "lem-sc-derived-pullback-tensor-successive-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackTensorTotalCompositionLocalized.lean",
+  "declaration": "AlgebraicGeometry.pullback_tensor_total_composition_localized",
+  "statement": "theorem pullback_tensor_total_composition_localized\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)\n    (ψ : ((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal Z P N) ≅\n      pullbackTensorTotal Y\n        (((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj P)\n        (((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj N))\n    (hψ :\n      letI := pullbackDescentModuleTensor Z\n      letI := pullbackDescentModuleTensor Y\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor Z.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Z.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf\n      ∀ (p q n : ℤ) (h : p + q = n),\n        (Scheme.Modules.tensorPullback (g)).map\n            (HomologicalComplex.ιMapBifunctor P N (curriedTensor (SheafOfModules.{u}\n      (moduleRings Z.toRingedSpace))) (.up ℤ) p q n h) ≫\n          ψ.hom.f n =\n        ((Classical.choose (Scheme.Modules.module_pullback_tensor (g)))\n          (P.X p) (N.X q)).hom ≫\n          HomologicalComplex.ιMapBifunctor\n            (((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj P)\n            (((Scheme.Modules.tensorPullback (g)).mapHomologicalComplex (.up ℤ)).obj N)\n            (curriedTensor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n            (.up ℤ) p q n h)\n    (θ : ((Scheme.Modules.tensorPullback (f)).mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal Y (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up\n      ℤ)).obj P) (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N)) ≅\n      pullbackTensorTotal X\n        (((Scheme.Modules.tensorPullback (f)).mapHomologicalComplex (.up ℤ)).obj\n      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P))\n        (((Scheme.Modules.tensorPullback (f)).mapHomologicalComplex (.up ℤ)).obj\n      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N)))\n    (hθ :\n      letI := pullbackDescentModuleTensor Y\n      letI := pullbackDescentModuleTensor X\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor Y.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf\n      ∀ (p q n : ℤ) (h : p + q = n),\n        (Scheme.Modules.tensorPullback (f)).map\n            (HomologicalComplex.ιMapBifunctor (((Scheme.Modules.tensorPullback\n      g).mapHomologicalComplex (.up ℤ)).obj P) (((Scheme.Modules.tensorPullback\n      g).mapHomologicalComplex (.up ℤ)).obj N) (curriedTensor (SheafOfModules.{u} (moduleRings\n      Y.toRingedSpace))) (.up ℤ) p q n h) ≫\n          θ.hom.f n =\n        ((Classical.choose (Scheme.Modules.module_pullback_tensor (f)))\n          ((((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P).X p)\n      ((((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N).X q)).hom ≫\n          HomologicalComplex.ιMapBifunctor\n            (((Scheme.Modules.tensorPullback (f)).mapHomologicalComplex (.up ℤ)).obj\n      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P))\n            (((Scheme.Modules.tensorPullback (f)).mapHomologicalComplex (.up ℤ)).obj\n      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N))\n            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n            (.up ℤ) p q n h)\n    (φ : ((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal Z P N) ≅\n      pullbackTensorTotal X\n        (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)\n        (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N))\n    (hφ :\n      letI := pullbackDescentModuleTensor Z\n      letI := pullbackDescentModuleTensor X\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor Z.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Z.sheaf\n      letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf\n      ∀ (p q n : ℤ) (h : p + q = n),\n        (Scheme.Modules.tensorPullback (f ≫ g)).map\n            (HomologicalComplex.ιMapBifunctor P N (curriedTensor _) (.up ℤ) p q n h) ≫\n          φ.hom.f n =\n        ((Classical.choose (Scheme.Modules.module_pullback_tensor (f ≫ g)))\n          (P.X p) (N.X q)).hom ≫\n          HomologicalComplex.ιMapBifunctor\n            (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P)\n            (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj N)\n            (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n            (.up ℤ) p q n h) :\n    let β := Functor.mapHomotopyCategoryCompIso\n      ((conjugateIsoEquiv\n        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))\n        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp\n          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm\n        (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)\n    (((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app\n        ((HomotopyCategory.quotient\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj P))) ⊗ₘ\n      ((DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app\n        ((HomotopyCategory.quotient\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj N)))) ≫\n      pullbackTensorModelMap X (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex\n      (.up ℤ)).obj P) (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up\n      ℤ)).obj N) =\n    pullbackTensorModelMap X (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up\n      ℤ)).obj (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P))\n      (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj\n      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N)) ≫\n      DerivedCategory.Q.map θ.inv ≫\n      DerivedCategory.Q.map\n        (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).map ψ.inv) ≫\n      (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map (β.hom.app\n        ((HomotopyCategory.quotient\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj\n          (pullbackTensorTotal Z P N))) ≫\n      DerivedCategory.Q.map φ.hom",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261014T034909-L-814624",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
