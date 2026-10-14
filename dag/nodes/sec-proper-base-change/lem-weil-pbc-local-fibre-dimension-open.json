@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-local-fibre-dimension-open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0D4I, label lemma-dimension-fibres-proper; proof of Tag 0D4I: the sentence that Z_d is closed by Morphisms, lemma-openness-bounded-dimension-fibres (Tag 02FZ).",
+   "via": [
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Openness of bounded local fibre dimension on the source",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally of finite type [def-weil-finite-type-morphism]. For $s\\in S$ let $X_s$ be its scheme-theoretic fibre [def-pc-scheme-fibre]. For $x\\in X$, let $\\widetilde x$ be the unique point of $X_{f(x)}$ mapping to $x$ under its projection to $X$, and let $\\dim_{\\widetilde x}X_{f(x)}$ be the topological dimension at that point [def-kun-topological-dimension-at-point], namely the minimum of the Krull dimensions of its open neighbourhoods in the fibre. For every integer $n\\geq0$, the subset $$U_n=\\{x\\in X\\mid\\dim_{\\widetilde x}X_{f(x)}\\leq n\\}$$ is open in $X$. No properness, quasi-compactness, Noetherian, finite-presentation, or flatness hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FZ, label lemma-openness-bounded-dimension-fibres"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes the points x where the dimension of the fiber at x is at most n form an open subset of the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of being an open map for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes is an open map (i.e., its underlying continuous map s\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If a morphism of schemes $f: X \\\\to Y$ is locally of finite type, then its restriction to any open subschemes $V \\\\subseteq X$ and $U \\\\subseteq Y$ (where the image of $V$ under $f$ is contained in $U$) \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ is locally of finite type and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also locally of finite type.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local Krull dimension of scheme theoretic fibers of a locally finite type morphism is upper semicontinuous on the domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] (y : ↥Y),\\n  (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y}).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [JacobsonSpace ↥Y] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  closedPoints ↥X ⊆ ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' closedPoints ↥Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"topologicalKrullDimAt\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|asFiber).*topologicalKrullDimAt|topologicalKrullDimAt.*(fiber|asFiber)|02FZ|openness.bounded.dimension.fibres",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus of bounded local dimension of fibers of a locally finite type scheme morphism is open",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "UpperSemicontinuous dimension function of a morphism on its domain, Krull dimension of fibers at points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsClosedEmbedding.topologicalKrullDim_le\", \"module\": \"Mathlib/Topology/KrullDimension\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : Y → X},\\n  Topology.IsInducing f → topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ Y $ is a topological space equipped with the topology induced by a map $ f : Y \\\\to X $, then the topological Krull dimension of $ Y $ is less than or equal to the topological Krull dimension of $\"}\n  {\"name\": \"IsInducing.topologicalKrullDim_le\", \"module\": \"Mathlib/Topology/KrullDimension\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : Y → X},\\n  Topology.IsInducing f → topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ f : Y \\\\to X $ is an inducing map (i.e., the topology on $ Y $ is the coarsest making $ f $ continuous), then the topological Krull dimension of $ Y $ is less than or equal to the topological Krul\"}\n  {\"name\": \"topologicalKrullDim_subspace_le\", \"module\": \"Mathlib/Topology/KrullDimension\", \"type\": \"∀ (X : Type u_3) [inst : TopologicalSpace X] (Y : Set X), topologicalKrullDim ↑Y ≤ topologicalKrullDim X\", \"doc\": \"For any topological space $ X $ and any subset $ Y $ of $ X $ equipped with the subspace topology, the Krull dimension of $ Y $ is less than or equal to the Krull dimension of $ X $. The Krull dimensi\"}\n  {\"name\": \"topologicalKrullDim\", \"module\": \"Mathlib/Topology/KrullDimension\", \"type\": \"(T : Type u_1) → [TopologicalSpace T] → WithBot ℕ∞\", \"doc\": \"The Krull dimension of a topological space $ T $ is defined as the Krull dimension of the preorder of irreducible closed subsets of $ T $. This is the supremum of the lengths of all strictly increasin\"}\n  {\"name\": \"Order.krullDim_le_of_krullDim_preimage_le\", \"module\": \"Mathlib/Order/KrullDimension\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : Preorder α] [inst_1 : PartialOrder β] {m : ℕ} (f : α →o β),\\n  (∀ (x : β), Order.krullDim ↑(⇑f ⁻¹' {x}) ≤ ↑m) → Order.krullDim α ≤ (↑m + 1) * Order.krullDim β + ↑m\", \"doc\": \"For preorders $\\\\alpha$ and $\\\\beta$, the Krull dimension of $\\\\alpha$ satisfies $\\\\dim(\\\\alpha) \\\\leq (m + 1)\\\\dim(\\\\beta) + m$, where $\\\\dim$ denotes the Krull dimension defined as the supremum of lengths of\"}\n  {\"name\": \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R], topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R\", \"doc\": \"For any commutative semiring $ R $, the Krull dimension of the prime spectrum $ \\\\operatorname{Spec}(R) $ as a topological space (with the Zariski topology) is equal to the Krull dimension of $ R $ as \"}\n  {\"name\": \"Order.krullDim_le_of_krullDim_preimage_le'\", \"module\": \"Mathlib/Order/KrullDimension\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : Preorder α] [inst_1 : PartialOrder β] {m : ℕ} (f : α → β),\\n  Monotone f → (∀ (x : β), Order.krullDim ↑(f ⁻¹' {x}) ≤ ↑m) → Order.krullDim α ≤ (↑m + 1) * Order.krullDim β + ↑m\", \"doc\": \"Let $\\\\alpha$ and $\\\\beta$ be preorders, and let $f : \\\\alpha \\\\to \\\\beta$ be a monotone function. If for every $x \\\\in \\\\beta$, the Krull dimension of the preimage $f^{-1}(\\\\{x\\\\})$ is at most $m$, then the K\"}\n  {\"name\": \"Order.height_le_of_krullDim_preimage_le\", \"module\": \"Mathlib/Order/KrullDimension\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : Preorder α] [inst_1 : PartialOrder β] {m : ℕ} (f : α →o β),\\n  (∀ (x : β), Order.krullDim ↑(⇑f ⁻¹' {x}) ≤ ↑m) → ∀ (x : α), Order.height x ≤ (↑m + 1) * Order.height (f x) + ↑m\", \"doc\": \"If the Krull dimension of the preimage under a function $ f : \\\\alpha \\\\to \\\\beta $ is at most $ m $, then for every element $ x \\\\in \\\\alpha $, the height of $ x $ satisfies $ \\\\text{height}(x) \\\\leq (m + 1\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: results supply general dimension bounds or smooth morphisms, not openness of the local fibre-dimension locus for locally finite type morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDimAt\", \"IsOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: results supply general dimension bounds or smooth morphisms, not openness of the local fibre-dimension locus for locally finite type morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "((semicontinuous|isOpen).*(krullDim|fiberDim|relativeDimension)|(krullDim|fiberDim|relativeDimension).*(semicontinuous|isOpen))",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"177\", \"text\": \"instance (priority := 900) [IsOpenImmersion f] : SmoothOfRelativeDimension 0 f :=\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: results supply general dimension bounds or smooth morphisms, not openness of the local fibre-dimension locus for locally finite type morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

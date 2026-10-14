@@ -29,9 +29,65 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an integer $d\\geq0$. Properness includes finite type by [def-weil-proper-morphism], and finite type includes locally of finite type by [def-weil-finite-type-morphism]. For each $x\\in X$ write $\\widetilde x$ for its corresponding point in $X_{f(x)}$. Apply [lem-weil-pbc-local-fibre-dimension-open] with $n=d$: $U_d=\\{x:\\dim_{\\widetilde x}X_{f(x)}\\leq d\\}$ is open. Thus its complement $Z_d=\\{x:\\dim_{\\widetilde x}X_{f(x)}>d\\}$ is closed in $X$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-local-fibre-dimension-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4I, label lemma-dimension-fibres-proper, proof"
+   }
+  },
+  {
+   "text": "By [def-weil-proper-morphism], $f$ is universally closed. Apply the defining condition to the identity base change $S\\to S$, whose pullback is $f$ itself. Hence the underlying map $f:|X|\\to|S|$ takes closed subsets to closed subsets, and $C_d=f(Z_d)$ is closed in $S$.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4I, label lemma-dimension-fibres-proper, proof"
+   }
+  },
+  {
+   "text": "For $s\\in S$, the fibre projection identifies the points of $X_s$ with $f^{-1}(s)$ by [def-pc-scheme-fibre]. Apply [lem-weil-pbc-dimension-supremum-local-dimensions] to the topological space $|X_s|$: $\\dim X_s=\\sup_{z\\in X_s}\\dim_zX_s$. If $s\\in C_d$, choose $x\\in Z_d$ with $f(x)=s$; its corresponding $z\\in X_s$ has $\\dim_zX_s>d$, so the supremum is greater than $d$. Conversely, if $s\\notin C_d$, every $x\\in f^{-1}(s)$ lies outside $Z_d$, so every $z\\in X_s$ has $\\dim_zX_s\\leq d$; their supremum is at most $d$. Therefore $s\\in C_d$ if and only if $\\dim X_s>d$. If the fibre is empty, the supremum is $-\\infty\\leq d$ and there is no point mapping to $s$, so the same equivalence holds.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4I, label lemma-dimension-fibres-proper, proof"
+   }
+  },
+  {
+   "text": "The previous equivalence gives $\\{s\\in S:\\dim X_s\\leq d\\}=S\\setminus C_d$. This is open because $C_d$ is closed. The construction works for every $d\\geq0$, and uses neither Noetherianity nor flatness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D4I, label lemma-dimension-fibres-proper, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D4I, label lemma-dimension-fibres-proper, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,15 +130,74 @@
    "results": "{\"t\": \"2026-10-14T08:13:53Z\", \"tool\": \"leanfinder\", \"query\": \"The locus of points where a proper scheme fiber has Krull dimension at most n is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\"], \"digest\": \"0ae4bd6916d0b282\"}",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes the dimension of its scheme theoretic fibres is upper semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The points of the base where a proper morphism has fibers of Krull dimension at most n form an open set",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of being an open map for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes is an open map (i.e., its underlying continuous map s\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is an open map is Zariski-local at the source. That is, for any scheme morphism, if there exists a Zariski-open cover of its \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyOpen f],\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any schemes $X$ and $Y$, if a morphism $f : X \\to Y$ is universally open, then $f$ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ becomes universally open after restricting to an open cover \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is universally open, then the underlying continuous map of $ f $ satisfies the universal property of being an open map. That is, for every base chan\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is universally open, every base change $ Y' \\\\to Y $ induces an open map $ X \\\\times_Y Y' \\\\to Y' $ on the underlying topological spaces.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"topologicalKrullDim\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(upperSemicontinuous|semicontinuous)|isProper.*topologicalKrullDim|dimension.*fibres.*proper",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern open maps, finite or Jacobson fibres, or properness; none states this dimension locus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper semicontinuity of fibre dimension for proper scheme morphisms",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-good-curves-generic-diagram",
   "by": "worker",
   "date": "2026-10-14"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded the proof of Stacks 0D4I into the closed local-dimension locus, its closed proper image, the supremum-of-local-dimensions equivalence and the open complement. Added only the general source-openness input 02FZ; reused the existing 0B7I theorem, fibre definition and properness definition. Searched project Lean, the DAG, blueprint and Mathlib; no exact attachment or Mathlib match found. Empty fibres are handled explicitly.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0D4I, label lemma-dimension-fibres-proper; realizes the auxiliary 0D4I input to the 0GK7 good-curves shrinking step, within the classical constructibility paragraph of the ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "General topological 0B7I tool turning a bound at every fibre point into a bound on the whole fibre; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-bfb09e577",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-bfb09e577 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full. All four proof steps agree with Stacks 0D4I, 02FZ, 0B7I and the cited definitions; edge cases and duplicate candidates checked. Accepted the 0B7I tool use. Added missing created.by/date in the corrected whole new-node JSON. No mathematical changes. Full findings in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
