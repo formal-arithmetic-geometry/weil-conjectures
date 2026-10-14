@@ -4,6 +4,8 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
+import Sheaf.AlgebraicGeometry.PicardResidueSourceModelHomology
+import Sheaf.AlgebraicGeometry.PicardResidueQuotientModelHomology
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
@@ -68,6 +70,9 @@ theorem picard_residue_homology_source_residue_comparison
       (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅
         DerivedCategory.Q.obj K)) :
     Nonempty (affineResidueCycleHomology W U p K ≃+
-      derivedFiberCohomology W E 1 w) := by sorry
+      derivedFiberCohomology W E 1 w) := by
+  obtain ⟨eQ⟩ := picard_residue_quotient_model_homology W E w U hwU hU p hp K
+  obtain ⟨eS⟩ := picard_residue_source_model_homology W E w U hwU hU K hK hE
+  exact ⟨eQ.trans eS.symm.toAddEquiv⟩
 
 end AlgebraicGeometry.Scheme
