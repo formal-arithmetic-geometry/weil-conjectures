@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-cartier-stalk-punctured-complement",
+ "kind": "statement",
+ "title": "The Cartier complement over its generic DVR stalk",
+ "statement": "Let N be a locally Noetherian scheme [def-weil-pbc-scheme-conventions], V an open of N, D an integral scheme [def-pc-integral-scheme], and j:D -> N an effective Cartier centre [def-nagata-effective-cartier-ideal]. Assume z belongs to V exactly when z is not in the range of j. Let eta be a generic point of D. Assume R = O_(N,j(eta)) is a domain discrete valuation ring [def-sc-discrete-valuation-ring], and put K = FractionRing R. There is t:Spec K -> V making the square with Spec(algebraMap R K):Spec K -> Spec R, V -> N, and the canonical Spec R -> N a pullback [def-pc-fibre-product]. No torsor, group, finite cover, or normalization occurs.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01WQ, Lemmas 31.14.2-4; step 1 of lem-sbc-cartier-stalk-normalization-product"
+ },
+ "proof": [
+  {
+   "text": "Choose a Cartier chart at j(eta). The stalk ideal is principal on a nonzerodivisor. The closed-immersion quotient is the field stalk of the integral generic point eta, so this ideal is the maximal ideal of the DVR R. Thus the inverse image of V is the complement of the closed point of Spec R.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A uniformizer generates the maximal ideal. Every nonzero DVR element is a unit times a power of this uniformizer, hence localization at it is the fraction field. The open complement is Spec K over Spec R. Factor its composite to N through V and use the equality of open images to obtain the asserted cartesian square.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "agent",
+  "group": "P4",
+  "document": "Stacks Project",
+  "place": "Tag 01WQ, Lemmas 31.14.2-4; step 1 of lem-sbc-cartier-stalk-normalization-product",
+  "note": "Argument written by P4 from the cited source and the parent node steps; source pages checked online because literature texts are absent in this clone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "effective Cartier divisor complement at generic discrete valuation stalk is spectrum of fraction field",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error; no results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the pullback of an effective Cartier open complement to the DVR stalk at the generic point of the divisor is Spec of the fraction field",
+   "date": "2026-10-14",
+   "results": "FunctionField generic-point and rational-map APIs; no Cartier-complement pullback theorem.",
+   "verdict": "No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier.*stalk|punctured.*torsor|IsLocalization.*Fraction in library, Mathlib and DAG",
+   "date": "2026-10-14",
+   "results": "EffectiveCartier and Invertible APIs, DVR uniformizers; no complement identification. Nearby torsor statements assume a punctured presentation.",
+   "verdict": "No duplicate of the proposed statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The trait case: localizing the Cartier divisor at its generic point gives a DVR and its open generic fibre; first clause of the field-factor model construction.",
+   "via": [
+    "lem-sbc-cartier-stalk-normalization-product",
+    "lem-sbc-cartier-generic-stalk-galois-model-core",
+    "lem-sbc-root-normalization-generic-stalk-galois-model",
+    "lem-sbc-cartier-generic-stalk-galois-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartierStalkPuncturedComplement",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartierStalkPuncturedComplement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cartier_stalk_punctured_complement",
+  "statement": "theorem cartier_stalk_punctured_complement\n    {N : Scheme.{u}} [IsLocallyNoetherian N] (V : N.Opens)\n    (D : Scheme.{u}) (j : D ⟶ N) (hD : IsIntegral D)\n    (hj : IsEffectiveCartierCenter j) (hV : ∀ z : N, z ∈ V ↔ z ∉ Set.range j)\n    (η : D) (hη : IsGenericPoint η Set.univ)\n    [IsDomain (N.presheaf.stalk (j η))]\n    [IsDiscreteValuationRing (N.presheaf.stalk (j η))] :\n    let R := N.presheaf.stalk (j η)\n    ∃ t : Spec (CommRingCat.of (FractionRing R)) ⟶ V.toScheme,\n      IsPullback t (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))\n        V.ι (N.fromSpecStalk (j η))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T022551-L-4047434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T022551-L-4047434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

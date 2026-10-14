@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-normalization-stalk-field-coproduct",
+ "kind": "statement",
+ "title": "Integral-closure coproduct comparison for normalization at a stalk",
+ "statement": "Let a:P -> N be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], s a point of N, and R = O_(N,s) [def-weil-residue-field]. Let n be a natural number and E_i (i in Fin n) fields [def-weil-field] equipped with R-algebra structures. Suppose e identifies P times_N Spec R with the coproduct of Spec E_i [def-pc-fibre-product] over Spec R: e.hom followed by the coproduct of Spec(algebraMap R E_i) is the second pullback projection. Then there is an isomorphism from the pullback of the relative normalization of a [lem-weil-pbc-relative-normalization] to the coproduct of Spec(integralClosure R E_i) [def-weil-pbc-integral-closure], whose composition with the coproduct of their canonical R-structure maps is the second normalization pullback projection. No Cartier, DVR, group, finite extension, or module-finiteness hypothesis is required. The empty finite coproduct is included.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-normalization",
+  "def-weil-pbc-integral-closure"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0307 and 035I; step 2 of lem-sbc-cartier-stalk-normalization-product"
+ },
+ "proof": [
+  {
+   "text": "Apply normalization stalk base change to identify the original normalization pulled back to Spec R with the relative normalization of the pulled-back source. The existing theorem is phrased using pullback of an arbitrary base morphism; use the identity base morphism and the canonical identity-pullback isomorphisms.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied source isomorphism makes the pulled-back source affine, with R-algebra of sections the finite product of E_i. On the affine base Spec R, use normalizationObjIso to identify the normalization sections with the integral closure in these source sections. Integral closure in a finite product is coordinatewise: projection preserves integrality; conversely the product of the finitely many monic annihilating polynomials annihilates the tuple. This gives an R-algebra equivalence with the product of integralClosure R E_i.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Spec to the algebra equivalence and the finite product/coproduct isomorphism sigmaSpec, reindexing via ULift if needed. All comparison maps commute with R-algebra maps. The given source structure equation and fromNormalization_app therefore prove the displayed structural-map equation. When n=0 the product is the zero ring and both spectra are empty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "agent",
+  "group": "P4",
+  "document": "Stacks Project",
+  "place": "Tags 0307 and 035I; step 2 of lem-sbc-cartier-stalk-normalization-product",
+  "note": "Argument written by P4 from the cited source and the parent node steps; source pages checked online because literature texts are absent in this clone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative normalization of finite coproduct of fields over local scheme stalk equals coproduct of integral closure spectra",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error; no results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization at a scheme stalk of a finite disjoint union of field spectra is a disjoint union of the integral closures",
+   "date": "2026-10-14",
+   "results": "Hom.normalizationDesc, Hom.normalizationCoprodIso (binary), Hom.normalization; no complete stalk field-coproduct comparison.",
+   "verdict": "No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*(pi|Pi|prod)|normalization.*(coproduct|product) in library, Mathlib and DAG",
+   "date": "2026-10-14",
+   "results": "normalizationObjIso and binary normalizationCoprodIso exist. IntegralClosureFiniteNormalProduct only proves normality of localizations, and DvrGaloisComponentsStalkFactor identifies a chosen factor stalk, not the entire product scheme.",
+   "verdict": "No duplicate of the proposed statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The trait case: the normalization in the finite Galois field factors; the geometric integral-closure product comparison in step 2 of the stalk model.",
+   "via": [
+    "lem-sbc-cartier-stalk-normalization-product",
+    "lem-sbc-cartier-generic-stalk-galois-model-core",
+    "lem-sbc-root-normalization-generic-stalk-galois-model",
+    "lem-sbc-cartier-generic-stalk-galois-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkFieldCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationStalkFieldCoproduct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normalization_stalk_field_coproduct",
+  "statement": "theorem normalization_stalk_field_coproduct\n    {N P : Scheme.{u}} (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a]\n    (s : N) (n : ℕ) (E : Fin n → Type u) [∀ i, Field (E i)]\n    [∀ i, Algebra (N.presheaf.stalk s) (E i)]\n    (e : pullback a (N.fromSpecStalk s) ≅\n      ∐ fun i : Fin n ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin n ↦ Spec.map\n      (CommRingCat.ofHom (algebraMap (N.presheaf.stalk s) (E i)))) =\n        pullback.snd a (N.fromSpecStalk s)) :\n    ∃ e' : pullback a.fromNormalization (N.fromSpecStalk s) ≅\n        ∐ fun i : Fin n ↦\n          Spec (CommRingCat.of (integralClosure (N.presheaf.stalk s) (E i))),\n      e'.hom ≫ Sigma.desc (fun i : Fin n ↦ Spec.map (CommRingCat.ofHom\n        (algebraMap (N.presheaf.stalk s) (integralClosure (N.presheaf.stalk s) (E i))))) =\n          pullback.snd a.fromNormalization (N.fromSpecStalk s)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T022551-L-4047434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261014T022551-L-4047434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
